@@ -1,0 +1,12 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 8 112" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Grid Line&#39;" clip-path="url(#clip0_4010_299)">
+<path id="Vector 43" d="M4 4.46094V0.460938H0H8" stroke="var(--stroke-0, white)"/>
+<line id="Line 87" x1="3.99609" y1="4" x2="3.99608" y2="263" stroke="var(--stroke-0, white)" stroke-opacity="0.12"/>
+<path id="Vector 44" d="M4 107.5V111.5H0H8" stroke="var(--stroke-0, white)"/>
+</g>
+<defs>
+<clipPath id="clip0_4010_299">
+<rect width="8" height="112" fill="white"/>
+</clipPath>
+</defs>
+</svg>

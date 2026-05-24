@@ -1,0 +1,220 @@
+import Image from "next/image";
+import { interRegular, interSemiBold } from "../hero/fonts";
+import type { PartnerRowConfig } from "./ecosystem-data";
+import { EcosystemGridLine } from "./EcosystemGridLine";
+
+function PartnerLogoStat({
+  nodeId,
+  src,
+  width,
+  height,
+}: {
+  nodeId: string;
+  src: string;
+  width: number;
+  height: number;
+}) {
+  return (
+    <div
+      className="relative flex w-[150px] shrink-0 flex-col items-center justify-center gap-[12px] py-[20px]"
+      data-node-id={nodeId}
+      data-name="Stat"
+    >
+      <div
+        className="relative shrink-0 overflow-clip"
+        style={{ width, height }}
+        data-name="Icon"
+      >
+        <Image
+          src={src}
+          alt=""
+          width={width}
+          height={height}
+          className="block size-full max-w-none object-contain"
+        />
+      </div>
+    </div>
+  );
+}
+
+const LOGO_STAT_NODES = ["2379:1057", "2379:1067", "2379:1086"] as const;
+const DEV_LOGO_STAT_NODES = ["2379:1134", "2379:1144", "2379:1163"] as const;
+
+type EcosystemPartnerRowProps = {
+  config: PartnerRowConfig;
+  logoStatNodeIds?: readonly [string, string, string];
+};
+
+export function EcosystemPartnerRow({
+  config,
+  logoStatNodeIds = LOGO_STAT_NODES,
+}: EcosystemPartnerRowProps) {
+  const [logo1, logo2, logo3] = config.logos;
+  const [stat1, stat2, stat3] = logoStatNodeIds;
+
+  return (
+    <div
+      className="relative flex h-[225px] w-[1204px] shrink-0 items-center justify-between bg-[rgba(255,255,255,0.04)] px-[40px]"
+      data-node-id={config.rowNodeId}
+    >
+      <div className="pointer-events-none absolute inset-0 z-[2]" aria-hidden>
+        <Image
+          src="/ecosystem/partner-frame-border.svg"
+          alt=""
+          fill
+          className="object-fill"
+          sizes="1204px"
+        />
+      </div>
+
+      <PartnerLogoStat nodeId={stat1} {...logo1} />
+      <EcosystemGridLine {...config.gridLines[0]} />
+
+      <PartnerLogoStat nodeId={stat2} {...logo2} />
+      <EcosystemGridLine {...config.gridLines[1]} />
+
+      <PartnerLogoStat nodeId={stat3} {...logo3} />
+      <EcosystemGridLine {...config.gridLines[2]} />
+
+      <div
+        className="relative flex w-[150px] shrink-0 flex-col items-center justify-center gap-[12px] py-[20px]"
+        data-node-id={config.tezos.statNodeId}
+        data-name="Stat"
+      >
+        <div
+          className="relative h-[35px] w-[88.63px] shrink-0"
+          data-name="Div [framer-pakwz]"
+        >
+          <div
+            className="absolute top-[7.3px] left-[41px] h-[20.41px] w-[47.63px]"
+            data-name="Div [framer-y1thm5]"
+          >
+            <p
+              className={`${interRegular.className} absolute top-[10.3px] left-0 -translate-y-1/2 text-[17.1px] leading-[20.4px] font-normal whitespace-nowrap text-white not-italic`}
+              data-node-id={config.tezos.textNodeId}
+            >
+              Tezos
+            </p>
+          </div>
+          <div
+            className="absolute top-0 left-0 size-[35px] overflow-clip"
+            data-name="Icon"
+          >
+            <Image
+              src="/ecosystem/logo-partner-4.svg"
+              alt=""
+              width={35}
+              height={35}
+              className="block size-full max-w-none"
+            />
+          </div>
+        </div>
+      </div>
+
+      <EcosystemGridLine {...config.gridLines[3]} />
+
+      <div
+        className="relative flex w-[150px] shrink-0 flex-col items-center justify-center gap-[12px] py-[20px]"
+        data-node-id={config.octane.statNodeId}
+        data-name="Stat"
+      >
+        <div
+          className="flex h-[35px] w-full shrink-0 items-center justify-center gap-[10px]"
+          data-node-id={config.octane.colNodeId}
+          data-name="col"
+        >
+          <p
+            className={`${interSemiBold.className} shrink-0 text-[17.1px] leading-[20.4px] font-semibold whitespace-nowrap text-white not-italic`}
+            data-node-id={config.octane.textNodeId}
+          >
+            Octane
+          </p>
+          <div className="relative size-[35px] shrink-0" data-name="logo">
+            <Image
+              src="/ecosystem/logo-octane.svg"
+              alt=""
+              width={35}
+              height={35}
+              className="block size-full max-w-none"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="absolute top-[0.49px] right-[0.52px] z-[3] flex size-[4px] items-center justify-center">
+        <div className="rotate-180 flex-none">
+          <div
+            className="relative size-[4px]"
+            data-node-id={config.corners.topRight}
+          >
+            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+              <Image
+                src="/ecosystem/corner-tr.svg"
+                alt=""
+                width={4}
+                height={4}
+                className="block size-full max-w-none"
+                aria-hidden
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute right-[0.52px] bottom-[0.53px] z-[3] flex size-[4px] items-center justify-center">
+        <div className="-scale-y-100 rotate-180 flex-none">
+          <div
+            className="relative size-[4px]"
+            data-node-id={config.corners.bottomRight}
+          >
+            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+              <Image
+                src="/ecosystem/corner-tr.svg"
+                alt=""
+                width={4}
+                height={4}
+                className="block size-full max-w-none"
+                aria-hidden
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute top-[0.51px] left-[0.51px] z-[3] flex size-[4px] items-center justify-center">
+        <div className="-scale-y-100 flex-none">
+          <div
+            className="relative size-[4px]"
+            data-node-id={config.corners.topLeft}
+          >
+            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+              <Image
+                src="/ecosystem/corner-tl.svg"
+                alt=""
+                width={4}
+                height={4}
+                className="block size-full max-w-none"
+                aria-hidden
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="absolute bottom-[0.5px] left-[0.51px] z-[3] size-[4px]"
+        data-node-id={config.corners.bottomLeft}
+      >
+        <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+          <Image
+            src="/ecosystem/corner-tl.svg"
+            alt=""
+            width={4}
+            height={4}
+            className="block size-full max-w-none"
+            aria-hidden
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export { DEV_LOGO_STAT_NODES };

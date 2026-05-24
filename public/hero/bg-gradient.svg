@@ -1,0 +1,14 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 3586 2453" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Gradient" filter="url(#filter0_f_4014_369)">
+<path id="White" fill-rule="evenodd" clip-rule="evenodd" d="M2992.29 1148.37C2775.72 1457.62 2320.07 1670.67 1793 1670.67C1265.93 1670.67 810.28 1457.62 593.713 1148.37C591.253 1170.26 590 1192.39 590 1214.72C590 1677.69 1128.6 2053 1793 2053C2457.4 2053 2996 1677.69 2996 1214.72C2996 1192.39 2994.75 1170.26 2992.29 1148.37Z" fill="var(--fill-0, black)"/>
+<path id="Green" fill-rule="evenodd" clip-rule="evenodd" d="M3086.99 774.682C2853.32 1083.87 2361.69 1296.88 1793 1296.88C1224.31 1296.88 732.676 1083.87 499.006 774.682C496.352 796.567 495 818.689 495 841.015C495 1303.9 1076.13 1679.14 1793 1679.14C2509.87 1679.14 3091 1303.9 3091 841.015C3091 818.689 3089.65 796.568 3086.99 774.682Z" fill="var(--fill-0, #1E540B)"/>
+<path id="Black" fill-rule="evenodd" clip-rule="evenodd" d="M3181.7 400C2930.93 709.252 2403.31 922.3 1793 922.3C1182.69 922.3 655.071 709.252 404.299 400C401.45 421.89 400 444.016 400 466.346C400 929.318 1023.67 1304.63 1793 1304.63C2562.33 1304.63 3186 929.318 3186 466.346C3186 444.016 3184.55 421.89 3181.7 400Z" fill="var(--fill-0, black)"/>
+</g>
+<defs>
+<filter id="filter0_f_4014_369" x="0" y="0" width="3586" height="2453" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="200" result="effect1_foregroundBlur_4014_369"/>
+</filter>
+</defs>
+</svg>

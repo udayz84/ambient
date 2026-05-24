@@ -1,0 +1,100 @@
+import Image from "next/image";
+import type { DeveloperPlatformCardConfig } from "./developer-platform-cards";
+import { interMedium, interRegular } from "../hero/fonts";
+
+export function DeveloperPlatformCard({
+  nodeId,
+  left,
+  top,
+  width,
+  height,
+  title,
+  titleLeft,
+  titleWidth,
+  body,
+  bodyLeft,
+  bodyWidth,
+  bodyBottomOffset,
+  lineLeft,
+  lineTop,
+  lineWidth,
+  patternGradient,
+  overlayGradient,
+  imageSrc,
+  imageClassName,
+}: DeveloperPlatformCardConfig) {
+  return (
+    <div
+      className="absolute overflow-clip"
+      style={{ left: `${left}px`, top: `${top}px`, width: `${width}px`, height: `${height}px` }}
+      data-node-id={nodeId}
+    >
+      <div
+        className="absolute top-0 left-0 border-[1.5px] border-solid border-[rgba(255,255,255,0)] bg-[#dbe8c8]"
+        style={{ width: `${width}px`, height: `${height}px` }}
+      />
+
+      {overlayGradient ? (
+        <div
+          className={`absolute ${height === 600 ? "-translate-x-1/2 left-1/2 top-[-0.15px] h-[600.147px] w-[388px]" : "-translate-x-1/2 left-1/2 top-[-0.15px] h-[290.295px] w-[796px]"}`}
+          style={{ backgroundImage: overlayGradient }}
+          aria-hidden
+        />
+      ) : null}
+
+      <div
+        className={`absolute -translate-y-1/2 top-1/2 opacity-[0.24] ${height === 600 ? "right-0 h-[600px] w-[388px]" : height === 290 && width === 796 ? "right-0 h-[290.295px] w-[796px]" : "right-0 h-[290.295px] w-[388px]"}`}
+        style={{ backgroundImage: patternGradient }}
+        data-name="Pattern"
+        aria-hidden
+      />
+
+      {imageSrc && imageClassName ? (
+        <div className={imageClassName} data-name="image 76">
+          <Image
+            src={imageSrc}
+            alt=""
+            fill
+            className="pointer-events-none object-bottom object-cover"
+            sizes={`${width}px`}
+          />
+        </div>
+      ) : null}
+
+      <p
+        className={`${interMedium.className} absolute translate-y-full font-medium text-[#0a3315] opacity-90 not-italic [word-break:break-word]`}
+        style={{
+          left: `${bodyLeft}px`,
+          bottom: `${bodyBottomOffset}px`,
+          width: `${bodyWidth}px`,
+          fontSize: "22px",
+          lineHeight: "28px",
+        }}
+      >
+        {body}
+      </p>
+
+      <p
+        className={`${interRegular.className} absolute top-[30px] font-normal text-[18px] leading-[27px] text-[#0a3315] not-italic [word-break:break-word] ${titleWidth ? "" : "whitespace-nowrap"}`}
+        style={{ left: `${titleLeft}px`, width: titleWidth ? `${titleWidth}px` : undefined }}
+      >
+        {title}
+      </p>
+
+      <div
+        className="absolute h-0"
+        style={{ left: `${lineLeft}px`, top: `${lineTop}px`, width: `${lineWidth}px` }}
+      >
+        <div className="absolute inset-[-1px_0_0_0]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt=""
+            src="/developer-platform/line-88.svg"
+            className="block size-full max-w-none"
+            aria-hidden
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
