@@ -1,0 +1,12 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 292 365" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Border Element">
+<path d="M291.5 360.5V364.5H287.5" stroke="white" stroke-opacity="0.15"/>
+<path d="M4.5 360.5V364.5H0.5" stroke="white" stroke-opacity="0.15"/>
+<path d="M4.5 0.5H0.5V4.5" stroke="white" stroke-opacity="0.15"/>
+<path d="M287.5 0.5H291.5V4.5" stroke="white" stroke-opacity="0.15"/>
+<line x1="4.5" y1="0.5" x2="287.5" y2="0.5" stroke="white" stroke-opacity="0.15"/>
+<line x1="4.5" y1="364.5" x2="287.5" y2="364.5" stroke="white" stroke-opacity="0.15"/>
+<line x1="0.5" y1="4.5" x2="0.5" y2="360.5" stroke="white" stroke-opacity="0.15"/>
+<line x1="291.5" y1="4.5" x2="291.5" y2="360.5" stroke="white" stroke-opacity="0.15"/>
+</g>
+</svg>

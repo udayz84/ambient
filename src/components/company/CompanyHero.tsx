@@ -41,30 +41,37 @@ export function CompanyHero() {
         data-name="Frame 1618875863"
       >
         <div
-          className="relative flex w-[442px] shrink-0 flex-col items-start"
+          className="relative w-max max-w-[606px] shrink-0 overflow-visible"
           data-node-id="2379:2265"
           data-name="Section Title"
         >
           <div
-            className="relative flex w-[442px] shrink-0 flex-col items-start px-[10px]"
+            className="relative h-[98px] w-max min-w-[442px] shrink-0 overflow-visible px-[10px]"
             data-node-id="2379:2266"
             data-name="Title"
           >
-            <GradientTitle nodeId="2379:2267" className="w-[422px]">
-              <p className="mb-0 leading-[49px]">A new paradigm for</p>
-              <p className="leading-[49px]">efficient AI compute</p>
+            <GradientTitle
+              nodeId="2379:2267"
+              className="h-[98px] w-max overflow-visible [word-break:normal]"
+            >
+              <span className="block h-[49px] shrink-0 leading-[49px] whitespace-nowrap">
+                A new paradigm for
+              </span>
+              <span className="block h-[49px] shrink-0 leading-[49px] whitespace-nowrap">
+                efficient AI compute
+              </span>
             </GradientTitle>
             <CornerDecor />
           </div>
         </div>
 
         <div
-          className="relative mt-[12px] flex w-[544px] shrink-0 flex-col items-start pl-[12px]"
+          className="relative mt-[12px] flex w-[544px] max-w-full shrink-0 flex-col items-start overflow-visible pl-[12px]"
           data-node-id="2379:2272"
           data-name="Frame 1984079417"
         >
           <p
-            className={`${interRegular.className} w-[532px] shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[532px] max-w-full shrink-0 overflow-visible text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:normal]`}
             data-node-id="2379:2273"
           >
             We build energy-aware, programmable, mixed-signal AI processors that
