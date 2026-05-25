@@ -19,7 +19,7 @@ export default function Home() {
       <DeveloperPlatform />
       <Ecosystem />
       <LatestNews />
-      <SiteFooter />
+      <SiteFooter showNewsletter />
     </main>
   );
 }

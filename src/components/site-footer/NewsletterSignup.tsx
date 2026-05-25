@@ -13,7 +13,7 @@ export function NewsletterSignup() {
     >
       <div className="relative inline-grid w-full grid-cols-[max-content] grid-rows-[max-content] place-items-start leading-[0]">
         <h2
-          className={`${interMedium.className} relative col-start-1 row-start-1 w-full bg-clip-text text-center text-[46px] leading-[49px] font-medium text-[transparent] not-italic [word-break:break-word]`}
+          className={`${interMedium.className} relative z-[1] col-start-1 row-start-1 mt-[14px] w-full bg-clip-text text-center text-[46px] leading-[49px] font-medium text-[transparent] not-italic [word-break:break-word]`}
           style={{
             backgroundImage:
               "linear-gradient(104.93deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -25,17 +25,17 @@ export function NewsletterSignup() {
         </h2>
 
         <Corner
-          className="col-start-1 row-start-1 mt-0 ml-[549px]"
+          className="z-[2] col-start-1 row-start-1 mt-0 ml-[549px]"
           src={cornerRight}
           rotate
         />
         <Corner
-          className="col-start-1 row-start-1 mt-[126px] ml-[549px]"
+          className="z-[2] col-start-1 row-start-1 mt-[126px] ml-[549px]"
           src={cornerRight}
           rotate
           flipY
         />
-        <div className="relative col-start-1 row-start-1 mt-[126px] ml-[51px] size-[4px]">
+        <div className="relative z-[2] col-start-1 row-start-1 mt-[126px] ml-[51px] size-[4px]">
           <Image
             src={cornerLeft}
             alt=""
@@ -46,7 +46,7 @@ export function NewsletterSignup() {
           />
         </div>
         <Corner
-          className="col-start-1 row-start-1 mt-0 ml-[51px]"
+          className="z-[2] col-start-1 row-start-1 mt-0 ml-[51px]"
           src={cornerLeft}
           flipY
         />
@@ -66,18 +66,28 @@ export function NewsletterSignup() {
         <label className="sr-only" htmlFor="newsletter-email">
           Email address
         </label>
-        <input
-          id="newsletter-email"
-          type="email"
-          placeholder="Your Email ID"
-          className={`${interRegular.className} h-[48px] w-[300px] shrink-0 border border-solid border-white bg-transparent px-[20px] text-[14px] leading-[1.4] text-white outline-none placeholder:text-white`}
-        />
+        <div
+          className="flex h-[48px] w-[300px] shrink-0 items-center border border-solid border-white bg-transparent px-[20px]"
+          data-node-id="2379:1401"
+        >
+          <input
+            id="newsletter-email"
+            type="email"
+            placeholder="Your Email ID"
+            className={`${interRegular.className} w-full border-0 bg-transparent text-[14px] leading-[1.4] text-white outline-none placeholder:text-white`}
+          />
+        </div>
         <button
           type="submit"
           className={`${interSemiBold.className} relative flex h-[48px] w-[158px] shrink-0 items-center justify-center text-[14px] leading-[normal] font-semibold text-[#121212] uppercase shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
           data-node-id="2379:1404"
         >
           <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-[length:307.2px_307.2px] bg-top-left opacity-40 mix-blend-plus-lighter"
+            style={{ backgroundImage: "url(/contact/cta-texture.png)" }}
+          />
           <span className="relative">SUBSCRIBE</span>
           <span
             aria-hidden
@@ -101,7 +111,7 @@ function Corner({
   flipY?: boolean;
 }) {
   return (
-    <div className={`relative flex size-[4px] items-center justify-center ${className}`}>
+    <div className={`flex size-[4px] items-center justify-center ${className}`}>
       <div
         className={`flex-none ${rotate ? "rotate-180" : ""} ${flipY ? "-scale-y-100" : ""}`}
       >
