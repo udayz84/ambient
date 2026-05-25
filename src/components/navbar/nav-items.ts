@@ -11,5 +11,5 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "Company", hasChevron: true, href: "#" },
   { label: "News & Media", hasChevron: true, href: "/resources" },
   { label: "Blog", hasChevron: true, href: "#" },
-  { label: "Career", hasChevron: false, href: "#" },
+  { label: "Career", hasChevron: false, href: "/careers" },
 ];
