@@ -78,12 +78,12 @@ export function Navbar() {
         >
           {NAV_ITEMS.map((item) => (
             <span key={item.label} className="contents">
-              <a
+              <Link
                 href={item.href}
                 className="shrink-0 text-center text-[14px] leading-[normal] font-medium tracking-[-0.42px] whitespace-nowrap text-white"
               >
                 {item.label}
-              </a>
+              </Link>
               {item.hasChevron ? <NavChevron /> : null}
             </span>
           ))}
