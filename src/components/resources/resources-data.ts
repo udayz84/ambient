@@ -128,4 +128,67 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
       "The recording of our webinar Boot Blink and Believe Edge AI from Prototy... ",
     imageOverlaySrc: "/resources/article-6-overlay.png",
   },
+  {
+    nodeId: "2379:1949",
+    category: "CASE STUDY",
+    categoryOffsetX: 0.5,
+    centerCategory: true,
+    title: "Deploying Always-On Voice at Microwatt Power Budgets",
+    titleFontSize: 21,
+    excerpt:
+      "How teams are shipping voice-first edge products with GPX silicon and Ambient tooling... ",
+    imageOverlaySrc: "/resources/article-1-overlay.png",
+  },
+  {
+    nodeId: "2379:1950",
+    category: "BLOG",
+    categoryOffsetX: 0.5,
+    centerCategory: true,
+    title: "Designing Sensor Fusion Pipelines for Battery-Powered Devices",
+    titleFontSize: 21,
+    excerpt:
+      "A practical walkthrough of fusing vision, audio, and IMU signals on constrained edge hardware... ",
+    imageOverlaySrc: "/resources/article-2-overlay.png",
+  },
+  {
+    nodeId: "2379:1951",
+    category: "VIDEO",
+    categoryOffsetX: 0.5,
+    centerCategory: true,
+    title: "Inside Ambient ModelForge: From Training to On-Device Inference",
+    excerpt:
+      "See how ModelForge compresses and deploys models tuned for Ambient GPX processors... ",
+    imageOverlaySrc: "/resources/article-3-overlay.png",
+  },
+  {
+    nodeId: "2379:1952",
+    category: "PRESS RELEASE",
+    categoryOffsetX: 0.5,
+    centerCategory: true,
+    title: "Ambient Scientific Expands Developer Ecosystem Partnerships",
+    excerpt:
+      "New collaborations bring reference designs, dev kits, and production support to edge AI builders... ",
+    imageOverlaySrc: "/resources/article-4-overlay.png",
+  },
+  {
+    nodeId: "2379:1953",
+    category: "WEBINAR",
+    categoryOffsetX: 0.5,
+    centerCategory: true,
+    title: "Scaling Edge AI from Prototype to Millions of Units",
+    titleFontSize: 21,
+    excerpt:
+      "Engineering leaders share lessons on power, cost, and software continuity across product lines... ",
+    imageOverlaySrc: "/resources/article-5-overlay.png",
+  },
+  {
+    nodeId: "2379:1954",
+    category: "PODCAST",
+    categoryOffsetX: 0.5,
+    centerCategory: true,
+    title: "The Future of Programmable AI Silicon at the Edge",
+    excerpt:
+      "Ambient executives discuss programmable compute density and the roadmap for GPX platforms... ",
+    imageOverlaySrc: "/resources/article-6-overlay.png",
+  },
 ];

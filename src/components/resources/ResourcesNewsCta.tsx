@@ -10,10 +10,11 @@ const titleLineStyle = {
   backgroundClip: "text",
 } as const;
 
-export function ResourcesNewsCta() {
+export function ResourcesNewsCta({ top }: { top: number }) {
   return (
     <section
-      className="absolute top-[3393px] left-[350.89px] z-10 flex w-[728px] flex-col items-center"
+      className="absolute left-[350.89px] z-10 flex w-[728px] flex-col items-center"
+      style={{ top }}
       aria-label="Latest news"
       data-node-id="2379:1762"
     >

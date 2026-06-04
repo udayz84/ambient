@@ -1,13 +1,28 @@
+"use client";
+
 import Image from "next/image";
 import { interRegular } from "./fonts";
 
+const NEXT_SECTION_ID = "measured-proof";
+
 export function HeroScrollIndicator() {
+  const handleScroll = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    document.getElementById(NEXT_SECTION_ID)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   return (
-    <div
-      className={`${interRegular.className} absolute top-[696px] left-[1335.5px] flex h-[75px] w-[18px] flex-col content-stretch items-center gap-[10px]`}
+    <button
+      type="button"
+      onClick={handleScroll}
+      className={`${interRegular.className} absolute top-[696px] left-[1335.5px] flex h-[75px] w-[18px] flex-col content-stretch items-center gap-[10px] cursor-pointer border-0 bg-transparent p-0`}
       data-node-id="2379:777"
       data-name="Frame 1000003871"
-      aria-hidden
+      aria-label="Scroll to next section"
     >
       <div
         className="relative size-[18px] shrink-0 overflow-clip"
@@ -42,6 +57,6 @@ export function HeroScrollIndicator() {
           </p>
         </div>
       </div>
-    </div>
+    </button>
   );
 }

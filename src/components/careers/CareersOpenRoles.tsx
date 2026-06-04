@@ -1,7 +1,14 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { interMedium, interRegular } from "../hero/fonts";
 import { dmMono } from "../hero/fonts";
-import { CAREERS_JOBS } from "./careers-data";
+import {
+  CAREERS_JOBS,
+  CAREERS_JOB_TYPE_FILTER_OPTIONS,
+  CAREERS_LOCATION_FILTER_OPTIONS,
+} from "./careers-data";
 import { CareersRolesProfileCta } from "./careers-shared";
 
 const cornerTitleTl = "/careers/corner-menu-tl.svg";
@@ -15,7 +22,35 @@ const OPEN_ROLES_GRADIENT =
 const CTA_TITLE_GRADIENT =
   "linear-gradient(125.631deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
+const JOB_ROW_NODE_IDS = [
+  "2379:8921",
+  "2379:8922",
+  "2379:8923",
+  "2379:8924",
+  "2379:8925",
+  "2379:8926",
+  "2379:8927",
+  "2379:8928",
+] as const;
+
 export function CareersOpenRoles() {
+  const [jobTypeFilter, setJobTypeFilter] = useState<string>("all");
+  const [locationFilter, setLocationFilter] = useState<string>("all");
+
+  const filteredJobs = useMemo(
+    () =>
+      CAREERS_JOBS.filter((job) => {
+        if (jobTypeFilter !== "all" && job.category !== jobTypeFilter) {
+          return false;
+        }
+        if (locationFilter !== "all" && job.location !== locationFilter) {
+          return false;
+        }
+        return true;
+      }),
+    [jobTypeFilter, locationFilter],
+  );
+
   return (
     <section
       id="open-roles"
@@ -30,8 +65,22 @@ export function CareersOpenRoles() {
       >
         <OpenRolesTitle />
         <div className="flex shrink-0 items-center gap-[20px]" data-node-id="2379:8909">
-          <FilterField label="Job Type" nodeId="2379:8910" innerNodeId="2379:8911" />
-          <FilterField label="Location" nodeId="2379:8915" innerNodeId="2379:8916" />
+          <FilterDropdown
+            label="Job Type"
+            options={CAREERS_JOB_TYPE_FILTER_OPTIONS}
+            value={jobTypeFilter}
+            onChange={setJobTypeFilter}
+            nodeId="2379:8910"
+            innerNodeId="2379:8911"
+          />
+          <FilterDropdown
+            label="Location"
+            options={CAREERS_LOCATION_FILTER_OPTIONS}
+            value={locationFilter}
+            onChange={setLocationFilter}
+            nodeId="2379:8915"
+            innerNodeId="2379:8916"
+          />
         </div>
       </div>
 
@@ -40,29 +89,13 @@ export function CareersOpenRoles() {
         className="flex h-[1294px] w-[1204px] shrink-0 flex-col gap-[10px]"
         data-node-id="2379:8920"
       >
-        {CAREERS_JOBS.map((job, index) => (
+        {filteredJobs.map((job, index) => (
           <JobRow
             key={job.title}
             title={job.title}
             category={job.category}
             location={job.location}
-            nodeId={
-              index === 0
-                ? "2379:8921"
-                : index === 1
-                  ? "2379:8922"
-                  : index === 2
-                    ? "2379:8923"
-                    : index === 3
-                      ? "2379:8924"
-                      : index === 4
-                        ? "2379:8925"
-                        : index === 5
-                          ? "2379:8926"
-                          : index === 6
-                            ? "2379:8927"
-                            : "2379:8928"
-            }
+            nodeId={JOB_ROW_NODE_IDS[index] ?? JOB_ROW_NODE_IDS[0]}
           />
         ))}
       </div>
@@ -222,35 +255,112 @@ function TitleCorner({
   );
 }
 
-function FilterField({
+function FilterDropdown({
   label,
+  options,
+  value,
+  onChange,
   nodeId,
   innerNodeId,
 }: {
   label: string;
+  options: readonly { value: string; label: string }[];
+  value: string;
+  onChange: (value: string) => void;
   nodeId: string;
   innerNodeId: string;
 }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  const selectedOption = options.find((option) => option.value === value);
+  const triggerLabel =
+    value === "all" ? label : (selectedOption?.label ?? label);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handlePointerDown = (event: MouseEvent) => {
+      if (!rootRef.current?.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen]);
+
   return (
-    <div className="flex w-[200px] shrink-0 items-center" data-node-id={nodeId}>
-      <div
-        className="flex h-[48px] min-w-px flex-[1_0_0] items-center gap-[10px] bg-transparent px-[20px]"
+    <div
+      ref={rootRef}
+      className="relative flex w-[200px] shrink-0 items-center"
+      data-node-id={nodeId}
+    >
+      <button
+        type="button"
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        aria-label={`${label} filter`}
+        onClick={() => setIsOpen((open) => !open)}
+        className="flex h-[48px] min-w-px w-full cursor-pointer items-center gap-[10px] bg-transparent px-[20px] text-left"
         data-node-id={innerNodeId}
       >
-        <p
+        <span
           className={`${interRegular.className} min-w-px flex-[1_0_0] text-[14px] leading-[1.4] font-normal text-white not-italic [word-break:break-word]`}
         >
-          {label}
-        </p>
+          {triggerLabel}
+        </span>
         <Image
           src="/careers/chevron-down.svg"
           alt=""
           width={24}
           height={24}
-          className="size-[24px] shrink-0"
+          className={`size-[24px] shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
           aria-hidden
         />
-      </div>
+      </button>
+
+      {isOpen ? (
+        <ul
+          role="listbox"
+          aria-label={label}
+          className="absolute top-[calc(100%+4px)] left-0 z-30 w-[200px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black py-[4px] shadow-[0px_8px_24px_0px_rgba(0,0,0,0.6)]"
+        >
+          {options.map((option) => {
+            const isSelected = option.value === value;
+            return (
+              <li key={option.value} role="presentation">
+                <button
+                  type="button"
+                  role="option"
+                  aria-selected={isSelected}
+                  onClick={() => {
+                    onChange(option.value);
+                    setIsOpen(false);
+                  }}
+                  className={`${interRegular.className} flex h-[40px] w-full cursor-pointer items-center px-[20px] text-left text-[14px] leading-[1.4] font-normal not-italic transition-colors duration-150 ${
+                    isSelected
+                      ? "bg-[rgba(83,216,36,0.15)] text-[#ecfae5]"
+                      : "bg-transparent text-white hover:bg-[rgba(255,255,255,0.06)]"
+                  }`}
+                >
+                  {option.value === "all" ? `All ${label}s` : option.label}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      ) : null}
     </div>
   );
 }
@@ -268,7 +378,7 @@ function JobRow({
 }) {
   return (
     <article
-      className="relative h-[153px] w-[1204px] shrink-0 border border-solid border-[rgba(240,240,240,0.2)] bg-black"
+      className="group relative h-[153px] w-[1204px] shrink-0 border border-solid border-[rgba(240,240,240,0.2)] bg-black"
       data-node-id={nodeId}
       data-name="Job Details"
     >
@@ -345,17 +455,27 @@ function ApplyButton() {
   return (
     <a
       href="#"
-      className={`${interMedium.className} absolute top-[51px] right-[49px] flex items-center gap-[20px] overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic`}
+      className={`${interMedium.className} absolute top-[51px] right-[49px] flex h-[48px] items-center gap-[20px] overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic transition-[box-shadow,background-color] duration-200 group-hover:bg-transparent group-hover:shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
     >
-      APPLY NOW
-      <Image
-        src="/careers/chevron-apply.svg"
-        alt=""
-        width={12}
-        height={6}
-        className="h-[6px] w-[12px] shrink-0"
+      <span
         aria-hidden
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612] opacity-0 transition-opacity duration-200 group-hover:opacity-100"
       />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] transition-opacity duration-200 group-hover:opacity-100"
+      />
+      <span className="relative z-10 flex items-center gap-[20px]">
+        APPLY NOW
+        <Image
+          src="/careers/chevron-apply.svg"
+          alt=""
+          width={12}
+          height={6}
+          className="h-[6px] w-[12px] shrink-0"
+          aria-hidden
+        />
+      </span>
       <div className="pointer-events-none absolute top-0 left-0 flex size-[4px] items-center justify-center">
         <div className="-scale-y-100 flex-none">
           <div className="relative size-[4px]">

@@ -1,4 +1,5 @@
-import { CornerDecor, GradientTitle } from "../contact/contact-shared";
+import { GradientTitle } from "../contact/contact-shared";
+import { CornerDecor } from "./company-corners";
 import { interRegular } from "../hero/fonts";
 import { CompanyDnaBackground } from "./CompanyDnaBackground";
 import { CompanyDnaValueCard } from "./CompanyDnaValueCard";
@@ -74,20 +75,16 @@ export function CompanyDna() {
       </div>
 
       <div
-        className="absolute top-[548px] left-[115px] z-10 h-[448px] w-[1210px]"
+        className="absolute top-[548px] left-[115px] z-10 flex w-[1210px] items-start gap-[430px]"
         data-node-id="2379:2091"
         data-name="Group 1410085774"
       >
-        <div className="absolute top-0 left-0">
+        <div className="flex w-[390px] flex-col gap-[44px]">
           <CompanyDnaValueCard {...VALUE_CARDS[0]} />
-        </div>
-        <div className="absolute top-0 left-[820px]">
-          <CompanyDnaValueCard {...VALUE_CARDS[1]} />
-        </div>
-        <div className="absolute top-[246px] left-0">
           <CompanyDnaValueCard {...VALUE_CARDS[2]} />
         </div>
-        <div className="absolute top-[246px] left-[820px]">
+        <div className="flex w-[390px] flex-col gap-[44px]">
+          <CompanyDnaValueCard {...VALUE_CARDS[1]} />
           <CompanyDnaValueCard {...VALUE_CARDS[3]} />
         </div>
       </div>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { TechnologyVisualFadeIn } from "./TechnologyVisualFadeIn";
 
 const chipMaskStyle = {
   maskImage: "url(/technology/mask-shape.svg)",
@@ -15,18 +16,18 @@ const radialOverlayStyle = {
   backgroundImage: `url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 642" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><rect x="0" y="0" height="100%" width="100%" fill="url(%23grad)" opacity="1"/><defs><radialGradient id="grad" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="10" gradientTransform="matrix(4.4087e-15 32.1 -72 1.9656e-15 720 321)"><stop stop-color="rgba(0,0,0,0)" offset="0"/><stop stop-color="rgba(0,0,0,1)" offset="1"/></radialGradient></defs></svg>')`,
 } as const;
 
-export function TechnologyVisual() {
+export function TechnologyVisualBackground() {
   return (
     <div
-      className="pointer-events-none absolute top-[60px] left-0 z-0 h-[642px] w-[1441px]"
+      className="pointer-events-none absolute top-[60px] right-0 left-0 z-0 h-[642px] overflow-hidden"
       data-node-id="2388:318"
       data-name="Image"
     >
       <div
-        className="absolute top-0 left-1/2 contents -translate-x-1/2"
-        style={{ left: "calc(50% - 13.61px)" }}
-        data-node-id="2379:1407"
-        data-name="No Rewrite. No Friction."
+        className="absolute top-0 left-1/2 h-[642px] w-[1440px] origin-center"
+        style={{
+          transform: "translateX(-50%) scaleX(max(1, calc(100vw / 1440px)))",
+        }}
       >
         <div
           className="absolute top-0 left-1/2 h-[642px] w-[1440px] -translate-x-1/2"
@@ -50,36 +51,53 @@ export function TechnologyVisual() {
         </div>
 
         <div
-          className="absolute top-[64.26px] left-[31.89px] h-[567.484px] w-[1310px]"
-          data-node-id="2379:1409"
+          className="absolute top-0 left-1/2 contents -translate-x-1/2"
+          style={{ left: "calc(50% - 13.61px)" }}
+          data-node-id="2379:1407"
+          data-name="No Rewrite. No Friction."
         >
-          <div className="absolute inset-[-35.24%_-15.27%]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/technology/ellipse-177.svg"
-              alt=""
-              className="block size-full max-w-none"
-              aria-hidden
-            />
+          <div
+            className="absolute top-[64.26px] left-[31.89px] h-[567.484px] w-[1310px]"
+            data-node-id="2379:1409"
+          >
+            <div className="absolute inset-[-35.24%_-15.27%]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/technology/ellipse-177.svg"
+                alt=""
+                className="block size-full max-w-none"
+                aria-hidden
+              />
+            </div>
           </div>
-        </div>
 
-        <div
-          className="absolute top-[54px] left-[-73.11px] h-[588px] w-[1560px]"
-          data-node-id="2379:1410"
-        >
-          <div className="absolute inset-[-17.01%_-6.41%]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/technology/group-47.svg"
-              alt=""
-              className="block size-full max-w-none"
-              aria-hidden
-            />
+          <div
+            className="absolute top-[54px] left-[-73.11px] h-[588px] w-[1560px]"
+            data-node-id="2379:1410"
+          >
+            <div className="absolute inset-[-17.01%_-6.41%]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/technology/group-47.svg"
+                alt=""
+                className="block size-full max-w-none"
+                aria-hidden
+              />
+            </div>
           </div>
         </div>
       </div>
+    </div>
+  );
+}
 
+export function TechnologyVisual() {
+  return (
+    <TechnologyVisualFadeIn
+      className="pointer-events-none absolute top-[60px] left-0 z-[1] h-[642px] w-full"
+      data-node-id="2388:318"
+      data-name="Image"
+    >
       <div
         className="absolute top-[46.8px] left-1/2 contents -translate-x-1/2"
         style={{ left: "calc(50% - 11.61px)" }}
@@ -101,6 +119,6 @@ export function TechnologyVisual() {
           />
         </div>
       </div>
-    </div>
+    </TechnologyVisualFadeIn>
   );
 }

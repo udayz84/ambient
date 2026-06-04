@@ -1,18 +1,222 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
+"use client";
 
-const interSemiBold = Inter({
-  subsets: ["latin"],
-  weight: "600",
-  display: "swap",
-});
+import Image from "next/image";
+import { useCallback, useEffect, useMemo, useRef } from "react";
+import { interSemiBold } from "../hero/fonts";
+
+const GREEN_CTA_SHADOW =
+  "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
+
+const cornerLeft = "/hero/corner-tag-1.svg";
+const cornerRight = "/hero/corner-tag-2.svg";
+
+/** Figma 2379:8600 / 2379:1589 — Cta 147×36 */
+const BUTTON_WIDTH = 147;
+const BUTTON_HEIGHT = 36;
+const GRID_PADDING_X = 8;
+const GRID_PADDING_Y = 8;
+const GRID_STEP_X = 12;
+const GRID_STEP_Y = 10;
+const GRID_COLS =
+  Math.floor((BUTTON_WIDTH - GRID_PADDING_X * 2) / GRID_STEP_X) + 1;
+const GRID_ROWS =
+  Math.floor((BUTTON_HEIGHT - GRID_PADDING_Y * 2) / GRID_STEP_Y) + 1;
+
+const REPEL_RADIUS = 36;
+const REPEL_STRENGTH = 14;
+const LERP = 0.14;
+
+type Particle = { id: number; x: number; y: number };
+
+function NavbarCtaCorners() {
+  return (
+    <>
+      <div
+        className="pointer-events-none absolute top-0 right-0 z-20 flex size-[4px] items-center justify-center"
+        data-node-id="2379:1596"
+      >
+        <div className="rotate-180 flex-none">
+          <div className="relative size-[4px]">
+            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                alt=""
+                className="block size-full max-w-none"
+                src={cornerRight}
+                aria-hidden
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="pointer-events-none absolute top-0 left-0 z-20 flex size-[4px] items-center justify-center"
+        data-node-id="2379:1597"
+      >
+        <div className="-scale-y-100 flex-none">
+          <div className="relative size-[4px]">
+            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                alt=""
+                className="block size-full max-w-none"
+                src={cornerLeft}
+                aria-hidden
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="pointer-events-none absolute right-0 bottom-0 z-20 flex size-[4px] items-center justify-center"
+        data-node-id="2379:1599"
+      >
+        <div className="-scale-y-100 rotate-180 flex-none">
+          <div className="relative size-[4px]">
+            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                alt=""
+                className="block size-full max-w-none"
+                src={cornerRight}
+                aria-hidden
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="pointer-events-none absolute bottom-0 left-0 z-20 size-[4px]"
+        data-node-id="2379:1600"
+      >
+        <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt=""
+            className="block size-full max-w-none"
+            src={cornerLeft}
+            aria-hidden
+          />
+        </div>
+      </div>
+    </>
+  );
+}
+
+function buildParticles(): Particle[] {
+  const items: Particle[] = [];
+  let id = 0;
+
+  for (let row = 0; row < GRID_ROWS; row += 1) {
+    for (let col = 0; col < GRID_COLS; col += 1) {
+      items.push({
+        id: id++,
+        x: GRID_PADDING_X + col * GRID_STEP_X,
+        y: GRID_PADDING_Y + row * GRID_STEP_Y,
+      });
+    }
+  }
+
+  return items;
+}
+
+function getRepelOffset(
+  particleX: number,
+  particleY: number,
+  mouseX: number,
+  mouseY: number,
+): { x: number; y: number } {
+  const dx = particleX - mouseX;
+  const dy = particleY - mouseY;
+  const distance = Math.hypot(dx, dy);
+
+  if (distance <= 0 || distance >= REPEL_RADIUS) {
+    return { x: 0, y: 0 };
+  }
+
+  const force = (REPEL_RADIUS - distance) / REPEL_RADIUS;
+  return {
+    x: (dx / distance) * force * REPEL_STRENGTH,
+    y: (dy / distance) * force * REPEL_STRENGTH,
+  };
+}
 
 export function NavbarCta() {
+  const buttonRef = useRef<HTMLAnchorElement>(null);
+  const particleRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const offsetRefs = useRef<{ x: number; y: number }[]>([]);
+  const mouseRef = useRef({ x: -999, y: -999 });
+  const isHoveringRef = useRef(false);
+
+  const particles = useMemo(() => buildParticles(), []);
+
+  useEffect(() => {
+    offsetRefs.current = particles.map(() => ({ x: 0, y: 0 }));
+
+    let frameId = 0;
+
+    const tick = () => {
+      const hovering = isHoveringRef.current;
+      const { x: mouseX, y: mouseY } = mouseRef.current;
+
+      particles.forEach((particle, index) => {
+        const target = hovering
+          ? getRepelOffset(particle.x, particle.y, mouseX, mouseY)
+          : { x: 0, y: 0 };
+
+        const current = offsetRefs.current[index];
+        current.x += (target.x - current.x) * LERP;
+        current.y += (target.y - current.y) * LERP;
+
+        const el = particleRefs.current[index];
+        if (!el) return;
+
+        el.style.transform = `translate(-50%, -50%) translate(${current.x}px, ${current.y}px)`;
+      });
+
+      frameId = window.requestAnimationFrame(tick);
+    };
+
+    frameId = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(frameId);
+  }, [particles]);
+
+  const updateMouse = useCallback((clientX: number, clientY: number) => {
+    const rect = buttonRef.current?.getBoundingClientRect();
+    if (!rect) return;
+
+    mouseRef.current = {
+      x: clientX - rect.left,
+      y: clientY - rect.top,
+    };
+  }, []);
+
+  const handlePointerEnter = useCallback(() => {
+    isHoveringRef.current = true;
+  }, []);
+
+  const handlePointerLeave = useCallback(() => {
+    isHoveringRef.current = false;
+    mouseRef.current = { x: -999, y: -999 };
+  }, []);
+
+  const handlePointerMove = useCallback(
+    (event: React.PointerEvent<HTMLAnchorElement>) => {
+      updateMouse(event.clientX, event.clientY);
+    },
+    [updateMouse],
+  );
+
   return (
     <a
+      ref={buttonRef}
       href="#"
-      className={`${interSemiBold.className} relative block h-[36px] w-[147px] shrink-0 shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+      className={`${interSemiBold.className} relative block h-[36px] w-[147px] shrink-0 overflow-hidden ${GREEN_CTA_SHADOW}`}
       data-node-id="2379:1589"
+      data-name="Cta"
+      onPointerEnter={handlePointerEnter}
+      onPointerLeave={handlePointerLeave}
+      onPointerMove={handlePointerMove}
     >
       <span
         aria-hidden
@@ -20,51 +224,46 @@ export function NavbarCta() {
       />
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
+        className="pointer-events-none absolute inset-0 z-[1] overflow-hidden"
+      >
+        {particles.map((particle, index) => (
+          <span
+            key={particle.id}
+            ref={(node) => {
+              particleRefs.current[index] = node;
+            }}
+            className="absolute size-[1px] bg-white/[0.36] will-change-transform"
+            style={{
+              left: particle.x,
+              top: particle.y,
+            }}
+          />
+        ))}
+      </span>
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
       />
-      <span className="absolute left-[20px] top-[calc(50%-8px)] text-[14px] leading-[normal] whitespace-nowrap text-white uppercase">
+      <span
+        className="pointer-events-none absolute top-[calc(50%-8px)] left-[20px] z-10 text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic"
+        data-node-id="2379:1590"
+      >
         GET IN TOUCH
       </span>
-      <Image
-        src="/navbar/cta-dot.svg"
-        alt=""
-        width={6}
-        height={6}
-        className="pointer-events-none absolute top-1/2 left-[121px] size-[6px] -translate-y-1/2"
-        aria-hidden
-      />
-      <Image
-        src="/navbar/corner-br-tr.svg"
-        alt=""
-        width={4}
-        height={4}
-        className="pointer-events-none absolute top-0 right-0 size-[4px]"
-        aria-hidden
-      />
-      <Image
-        src="/navbar/corner-br-tl.svg"
-        alt=""
-        width={4}
-        height={4}
-        className="pointer-events-none absolute top-0 left-0 size-[4px] -scale-y-100"
-        aria-hidden
-      />
-      <Image
-        src="/navbar/corner-br-tr.svg"
-        alt=""
-        width={4}
-        height={4}
-        className="pointer-events-none absolute right-0 bottom-0 size-[4px] -scale-y-100 rotate-180"
-        aria-hidden
-      />
-      <Image
-        src="/navbar/corner-br-tl.svg"
-        alt=""
-        width={4}
-        height={4}
-        className="pointer-events-none absolute bottom-0 left-0 size-[4px]"
-        aria-hidden
-      />
+      <span
+        className="pointer-events-none absolute top-1/2 left-[121px] z-10 size-[6px] -translate-y-1/2"
+        data-node-id="2379:1591"
+      >
+        <Image
+          src="/navbar/cta-dot.svg"
+          alt=""
+          width={6}
+          height={6}
+          className="block size-full max-w-none"
+          aria-hidden
+        />
+      </span>
+      <NavbarCtaCorners />
     </a>
   );
 }

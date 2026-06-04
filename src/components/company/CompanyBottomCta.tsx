@@ -1,4 +1,4 @@
-import { CornerDecor } from "../contact/contact-shared";
+import { CornerDecor } from "./company-corners";
 import { interMedium } from "../hero/fonts";
 import { CareersGreenCta, CareersWhiteCta } from "../careers/careers-shared";
 

@@ -77,6 +77,19 @@ export const CAREERS_BENEFITS_CARDS: CareersValueCard[] = [
   },
 ];
 
+export const CAREERS_JOB_TYPE_FILTER_OPTIONS = [
+  { value: "all", label: "All" },
+  { value: "HARDWARE", label: "Hardware" },
+  { value: "SOFTWARE", label: "Software" },
+  { value: "RESEARCH", label: "Research" },
+] as const;
+
+export const CAREERS_LOCATION_FILTER_OPTIONS = [
+  { value: "all", label: "All" },
+  { value: "San Francisco", label: "San Francisco" },
+  { value: "Remote", label: "Remote" },
+] as const;
+
 export const CAREERS_JOBS: CareersJob[] = [
   {
     title: "Analog Circuit Design Engineer",

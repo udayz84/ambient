@@ -1,7 +1,7 @@
 import { TagBadge } from "../hero/TagBadge";
 import { TechnologyFeatures } from "./TechnologyFeatures";
 import { TechnologyHeadline } from "./TechnologyHeadline";
-import { TechnologyVisual } from "./TechnologyVisual";
+import { TechnologyVisual, TechnologyVisualBackground } from "./TechnologyVisual";
 
 const cornerLeft = "/hero/corner-tag-1.svg";
 const cornerRight = "/hero/corner-tag-2.svg";
@@ -61,29 +61,33 @@ function ChipVisualCorners() {
 export function Technology() {
   return (
     <section
-      className="relative mx-auto h-[903px] w-full max-w-[1441px] overflow-hidden bg-black"
+      className="relative left-1/2 h-[903px] w-screen max-w-none -translate-x-1/2 overflow-hidden bg-black"
       data-node-id="2388:317"
       aria-label="Technology"
     >
-      <TechnologyVisual />
+      <TechnologyVisualBackground />
 
-      <div
-        className="absolute top-0 left-1/2 z-20 w-[180px] -translate-x-1/2"
-        style={{ left: "calc(50% - 0.61px)" }}
-        data-node-id="2379:1414"
-      >
-        <TagBadge
-          label="Real-time AI at edge"
-          width={180}
-          labelOffsetX={74.5}
-          rightBarLeft={170.48046875}
-        />
+      <div className="relative mx-auto h-full w-full max-w-[1441px]">
+        <TechnologyVisual />
+
+        <div
+          className="absolute top-0 left-1/2 z-20 w-[180px] -translate-x-1/2"
+          style={{ left: "calc(50% - 0.61px)" }}
+          data-node-id="2379:1414"
+        >
+          <TagBadge
+            label="Real-time AI at edge"
+            width={180}
+            labelOffsetX={74.5}
+            rightBarLeft={170.48046875}
+          />
+        </div>
+
+        <TechnologyHeadline />
+
+        <ChipVisualCorners />
+        <TechnologyFeatures />
       </div>
-
-      <TechnologyHeadline />
-
-      <ChipVisualCorners />
-      <TechnologyFeatures />
     </section>
   );
 }

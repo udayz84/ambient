@@ -1,12 +1,15 @@
 export type LeadershipMember = {
   name: string;
   role: string;
+  /** Expanded card — one or two body paragraphs (Figma open state) */
+  bioParagraphs: string[];
   imageSrc: string;
   imageClassName?: string;
   linkedInHref: string;
   nodeId: string;
   imageNodeId: string;
   nameNodeId: string;
+  readMoreNodeId?: string;
 };
 
 const PORTRAIT_CLASS =
@@ -18,6 +21,10 @@ export const LEADERSHIP_TEAM: LeadershipMember[] = [
   {
     name: "GP Singh",
     role: "Founder, CEO",
+    bioParagraphs: [
+      "An engineer and semiconductor innovator with 50+ chip tape-outs and 50+ patents, with deep experience across hardware and software from executive leadership to hands-on engineering.",
+      "He founded Ambient Scientific in 2017 to pioneer DigAn™ technology for ultra-low-power, programmable AI processors that scale from edge devices to high-performance systems.",
+    ],
     imageSrc: "/company/leadership/gp-singh.png",
     imageClassName: PORTRAIT_CLASS,
     linkedInHref: "https://www.linkedin.com/in/gp-singh-340732/",
@@ -28,6 +35,10 @@ export const LEADERSHIP_TEAM: LeadershipMember[] = [
   {
     name: "Madanjit Singh",
     role: "VP Software",
+    bioParagraphs: [
+      "Co-founder and VP of Software leading Ambient Scientific’s software stack, tools, and India R&D operations with a focus on production-ready edge-AI firmware.",
+      "He drives development of programmable software that brings DigAn™ processors to customer products, from bring-up through deployment at scale.",
+    ],
     imageSrc: "/company/leadership/madanjit-singh.jpg",
     imageClassName: PORTRAIT_CLASS,
     linkedInHref: "https://www.linkedin.com/in/madanjit-singh-ambient/",
@@ -38,6 +49,10 @@ export const LEADERSHIP_TEAM: LeadershipMember[] = [
   {
     name: "Swapnil Sapre",
     role: "AVP Hardware",
+    bioParagraphs: [
+      "AVP of Hardware Engineering overseeing silicon design, validation, board engineering, mixed-signal integration, and systems bring-up for Ambient’s AI processors.",
+      "His career spans Intel, AMD, NXP, and Western Digital—covering the full lifecycle from first power-on through high-volume manufacturing and deployed edge systems.",
+    ],
     imageSrc: "/company/leadership/swapnil-sapre.jpg",
     imageClassName: PORTRAIT_CLASS,
     linkedInHref: "https://www.linkedin.com/in/swapnil-sapre/",
@@ -47,43 +62,36 @@ export const LEADERSHIP_TEAM: LeadershipMember[] = [
   },
 ];
 
+const GP_SINGH_ADVISORY = {
+  name: "GP Singh",
+  role: "",
+  bioParagraphs: [] as string[],
+  imageSrc: "/company/leadership/gp-singh.png",
+  imageClassName: ADVISORY_PORTRAIT_CLASS,
+  linkedInHref: "https://www.linkedin.com/in/gp-singh-340732/",
+} as const;
+
 export const ADVISORY_BOARD: LeadershipMember[] = [
   {
-    name: "Greg Maturi",
-    role: "",
-    imageSrc: "/company/leadership/greg-maturi.png",
-    imageClassName: ADVISORY_PORTRAIT_CLASS,
-    linkedInHref: "https://www.linkedin.com/in/greg-maturi-966b84/",
+    ...GP_SINGH_ADVISORY,
     nodeId: "2379:2300",
     imageNodeId: "2379:2304",
     nameNodeId: "2379:2311",
   },
   {
-    name: "Yuqing Niu",
-    role: "",
-    imageSrc: "/company/leadership/yuqing-niu.png",
-    imageClassName: ADVISORY_PORTRAIT_CLASS,
-    linkedInHref: "https://www.linkedin.com/in/yuqing-niu-55200b1a/",
+    ...GP_SINGH_ADVISORY,
     nodeId: "2379:2314",
     imageNodeId: "2379:2318",
     nameNodeId: "2379:2325",
   },
   {
-    name: "Ron Melanson",
-    role: "",
-    imageSrc: "/company/leadership/ron-melanson.png",
-    imageClassName: ADVISORY_PORTRAIT_CLASS,
-    linkedInHref: "https://www.linkedin.com/in/ronmelanson/",
+    ...GP_SINGH_ADVISORY,
     nodeId: "2379:2328",
     imageNodeId: "2379:2332",
     nameNodeId: "2379:2339",
   },
   {
-    name: "Pete Foley",
-    role: "",
-    imageSrc: "/company/leadership/pete-foley.png",
-    imageClassName: ADVISORY_PORTRAIT_CLASS,
-    linkedInHref: "https://www.linkedin.com/in/foleypete/",
+    ...GP_SINGH_ADVISORY,
     nodeId: "2379:2342",
     imageNodeId: "2379:2346",
     nameNodeId: "2379:2353",

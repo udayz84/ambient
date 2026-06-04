@@ -1,81 +1,12 @@
 import Image from "next/image";
-import { CornerDecor, GradientTitle } from "../contact/contact-shared";
+import { GradientTitle } from "../contact/contact-shared";
 import { interRegular } from "../hero/fonts";
 import { CompanyAdvisoryBoard } from "./CompanyAdvisoryBoard";
+import { CornerDecor } from "./company-corners";
 import { CompanyLeadershipRow } from "./CompanyLeadershipRow";
-
-const cornerLeft = "/hero/corner-tag-1.svg";
-const cornerRight = "/hero/corner-tag-2.svg";
 
 const IMAGE_107_OVERLAY =
   "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 810 1440' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%25' width='100%25' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-46.009 0.0000020111 -0.000003897 -89.152 363.86 720)'><stop stop-color='rgba(0,0,0,0.6)' offset='0'/><stop stop-color='rgba(0,0,0,1)' offset='1'/></radialGradient></defs></svg>\")";
-
-function LeadershipSectionTitleCorners() {
-  return (
-    <>
-      <div className="pointer-events-none absolute top-[4px] left-0 flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <Image
-                src={cornerLeft}
-                alt=""
-                width={4}
-                height={4}
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute top-[4px] right-0 flex size-[4px] items-center justify-center">
-        <div className="rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <Image
-                src={cornerRight}
-                alt=""
-                width={4}
-                height={4}
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute bottom-[4px] left-0 size-[4px]">
-        <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-          <Image
-            src={cornerLeft}
-            alt=""
-            width={4}
-            height={4}
-            className="block size-full max-w-none"
-            aria-hidden
-          />
-        </div>
-      </div>
-      <div className="pointer-events-none absolute right-0 bottom-[4px] flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <Image
-                src={cornerRight}
-                alt=""
-                width={4}
-                height={4}
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
 
 function LeadershipBackground() {
   return (
@@ -148,7 +79,7 @@ export function CompanyLeadership() {
                   </span>
                 </GradientTitle>
               </div>
-              <LeadershipSectionTitleCorners />
+              <CornerDecor />
             </div>
             <p
               className={`${interRegular.className} mt-[24px] w-[591px] text-[18px] leading-[27px] font-normal text-[#a1a1a1] not-italic [word-break:break-word]`}

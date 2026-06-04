@@ -2,22 +2,32 @@ import Image from "next/image";
 import { interMedium, interRegular } from "../hero/fonts";
 import type { LeadershipMember } from "./company-leadership-data";
 
-const cornerLeft = "/hero/corner-tag-1.svg";
-const cornerRight = "/hero/corner-tag-2.svg";
-
-/** Figma User Image — leadership instance (2379:2288), scaled from 292×365 advisory */
+/** Figma User Image — leadership instance (2379:2288) */
 const LEADERSHIP_SPEC = {
   cardWidth: 377,
   cardHeight: 471.25,
   borderSrc: "/company/user-image-border-leadership.svg",
-  footerLeft: 34.85034375,
-  footerTop: 406.2197265625,
-  footerWidth: 311.071075,
-  footerHeight: 36.1411,
-  linkedInMarginTop: 2.5815217391304346,
-  nameSize: "text-[22px] leading-[28px]",
+  contentBoxLeft: 38.5,
+  contentBoxTop: 342,
+  contentBoxWidth: 300,
+  contentPaddingX: 38.5,
+  contentPaddingTop: 24,
+  contentPaddingBottom: 24,
+  contentGap: 17,
+  nameRoleGap: 6,
+  roleBioGap: 24,
+  bioParagraphGap: 16,
+  linkedInMarginTop: 0,
+  nameSize: "text-[26px] leading-[29px]",
+  nameColor: "text-[#ffffff]",
+  roleColor: "text-[#39ff14]",
+  bioColor: "text-[#d1d5db]",
+  bioTypography: "text-[16px] leading-[24px]",
   showRole: true,
+  showReadMore: true,
 } as const;
+
+const LEADERSHIP_EXPAND_TRANSITION_CLASS = "duration-500 ease-in-out";
 
 /** Figma User Image — advisory (2379:2300) */
 const ADVISORY_SPEC = {
@@ -29,116 +39,210 @@ const ADVISORY_SPEC = {
   footerWidth: 241,
   footerHeight: 28,
   linkedInMarginTop: 2,
-  nameSize: "text-[18px] leading-[28px]",
+  nameSize: "text-[22px] leading-[28px]",
   showRole: false,
+  showReadMore: false,
 } as const;
 
-function UserImageCorners({
-  width,
-  cornerTop,
-  cornerBottom,
-}: {
-  width: number;
-  cornerTop: number;
-  cornerBottom: number;
-}) {
-  return (
-    <>
-      <div
-        className="pointer-events-none absolute left-0 flex size-[4px] items-center justify-center"
-        style={{ top: cornerTop }}
-      >
-        <div className="-scale-y-100 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <Image
-                src={cornerLeft}
-                alt=""
-                width={4}
-                height={4}
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="pointer-events-none absolute flex size-[4px] items-center justify-center"
-        style={{ top: cornerTop, left: width - 4 }}
-      >
-        <div className="rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <Image
-                src={cornerRight}
-                alt=""
-                width={4}
-                height={4}
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="pointer-events-none absolute left-0 flex size-[4px] items-center justify-center"
-        style={{ top: cornerBottom }}
-      >
-        <div className="-scale-y-100 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <Image
-                src={cornerLeft}
-                alt=""
-                width={4}
-                height={4}
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="pointer-events-none absolute flex size-[4px] items-center justify-center"
-        style={{ top: cornerBottom, left: width - 4 }}
-      >
-        <div className="-scale-y-100 rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <Image
-                src={cornerRight}
-                alt=""
-                width={4}
-                height={4}
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
-
-function PersonFooter({
+function LeadershipNameRow({
   name,
   role,
   linkedInHref,
   nameNodeId,
   spec,
   linkedInIconSrc,
+  showRole,
 }: {
   name: string;
   role: string;
   linkedInHref: string;
   nameNodeId: string;
+  spec: typeof LEADERSHIP_SPEC;
+  linkedInIconSrc: string;
+  showRole: boolean;
+}) {
+  return (
+    <div
+      className="flex w-full flex-col items-start"
+      style={{ gap: spec.nameRoleGap }}
+      data-name="Name & Position"
+    >
+      <div className="flex w-full items-start justify-between">
+        <p
+          className={`${interMedium.className} min-w-0 font-medium not-italic [word-break:break-word] ${spec.nameSize} ${spec.nameColor}`}
+          data-node-id={nameNodeId}
+        >
+          {name}
+        </p>
+        <a
+          href={linkedInHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative z-40 size-[24px] shrink-0 cursor-pointer"
+          style={{ marginTop: spec.linkedInMarginTop }}
+          aria-label={`${name} on LinkedIn`}
+          data-name="Frame"
+          onClick={(event) => event.stopPropagation()}
+        >
+          <Image
+            src={linkedInIconSrc}
+            alt=""
+            width={24}
+            height={24}
+            className="block size-full max-w-none"
+            aria-hidden
+          />
+        </a>
+      </div>
+      {showRole && role ? (
+        <p
+          className={`${interRegular.className} text-[18px] leading-[27px] font-normal not-italic [word-break:break-word] ${spec.roleColor}`}
+          data-node-id="2280:12313"
+        >
+          {role}
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
+function LeadershipInteractivePanel({
+  name,
+  role,
+  bioParagraphs,
+  linkedInHref,
+  nameNodeId,
+  readMoreNodeId,
+  spec,
+  linkedInIconSrc,
+  isExpanded,
+  onReadMoreToggle,
+}: {
+  name: string;
+  role: string;
+  bioParagraphs: string[];
+  linkedInHref: string;
+  nameNodeId: string;
+  readMoreNodeId?: string;
+  spec: typeof LEADERSHIP_SPEC;
+  linkedInIconSrc: string;
+  isExpanded: boolean;
+  onReadMoreToggle?: () => void;
+}) {
+  const transition = LEADERSHIP_EXPAND_TRANSITION_CLASS;
+
+  return (
+    <div
+      className={`absolute z-40 flex flex-col items-start transition-[top,bottom,height] ${transition}`}
+      style={{
+        left: spec.contentBoxLeft,
+        width: spec.contentBoxWidth,
+        top: isExpanded ? spec.contentPaddingTop : spec.contentBoxTop,
+        bottom: isExpanded ? spec.contentPaddingBottom : undefined,
+        gap: isExpanded ? undefined : spec.contentGap,
+      }}
+      data-name={isExpanded ? "box-expanded" : "box"}
+      data-node-id="2282:12494"
+    >
+      <div
+        className={`flex w-full flex-col items-start ${isExpanded ? "min-h-0 flex-1" : ""}`}
+      >
+        <LeadershipNameRow
+          name={name}
+          role={role}
+          linkedInHref={linkedInHref}
+          nameNodeId={nameNodeId}
+          spec={spec}
+          linkedInIconSrc={linkedInIconSrc}
+          showRole
+        />
+
+        <div
+          className={`grid w-full transition-[grid-template-rows,margin-top,opacity] ${transition}`}
+          style={{
+            gridTemplateRows: isExpanded ? "1fr" : "0fr",
+            marginTop: isExpanded ? spec.roleBioGap : 0,
+            opacity: isExpanded ? 1 : 0,
+          }}
+          aria-hidden={!isExpanded}
+        >
+          <div className="overflow-hidden">
+            <div
+              className={`flex w-full flex-col items-start text-left transition-[transform,opacity] ${transition} ${
+                isExpanded
+                  ? "translate-y-0 opacity-100"
+                  : "pointer-events-none -translate-y-[8px] opacity-0"
+              }`}
+              style={{ gap: spec.bioParagraphGap }}
+            >
+              {bioParagraphs.map((paragraph, index) => (
+                <p
+                  key={index}
+                  className={`${interRegular.className} w-full text-left font-normal not-italic [word-break:break-word] ${spec.bioTypography} ${spec.bioColor}`}
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          aria-expanded={isExpanded}
+          onClick={onReadMoreToggle}
+          className={`${interRegular.className} w-full cursor-pointer text-left text-[14px] leading-[21px] font-normal text-[#ffffff] not-italic [word-break:break-word] transition-[margin-top,padding-top] hover:opacity-80 ${transition} ${
+            isExpanded ? "mt-auto pt-[17px]" : ""
+          }`}
+          data-node-id={readMoreNodeId ?? "2280:12314"}
+        >
+          {isExpanded ? "Read less -" : "Read more +"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function PersonFooter({
+  name,
+  role,
+  bioParagraphs,
+  linkedInHref,
+  nameNodeId,
+  readMoreNodeId,
+  spec,
+  linkedInIconSrc,
+  isExpanded,
+  onReadMoreToggle,
+}: {
+  name: string;
+  role: string;
+  bioParagraphs: string[];
+  linkedInHref: string;
+  nameNodeId: string;
+  readMoreNodeId?: string;
   spec: typeof LEADERSHIP_SPEC | typeof ADVISORY_SPEC;
   linkedInIconSrc: string;
+  isExpanded?: boolean;
+  onReadMoreToggle?: () => void;
 }) {
+  if (spec.showReadMore) {
+    return (
+      <LeadershipInteractivePanel
+        name={name}
+        role={role}
+        bioParagraphs={bioParagraphs}
+        linkedInHref={linkedInHref}
+        nameNodeId={nameNodeId}
+        readMoreNodeId={readMoreNodeId}
+        spec={spec as typeof LEADERSHIP_SPEC}
+        linkedInIconSrc={linkedInIconSrc}
+        isExpanded={Boolean(isExpanded)}
+        onReadMoreToggle={onReadMoreToggle}
+      />
+    );
+  }
+
   return (
     <div
       className="absolute z-40 flex items-start justify-between"
@@ -171,7 +275,7 @@ function PersonFooter({
         href={linkedInHref}
         target="_blank"
         rel="noopener noreferrer"
-        className="relative z-40 size-[24px] shrink-0"
+        className="relative z-40 size-[24px] shrink-0 cursor-pointer"
         style={{ marginTop: spec.linkedInMarginTop }}
         aria-label={`${name} on LinkedIn`}
       >
@@ -192,14 +296,16 @@ export function CompanyLeadershipCard({
   member,
   variant,
   left,
+  isExpanded = false,
+  onReadMoreToggle,
 }: {
   member: LeadershipMember;
   variant: "leadership" | "advisory";
   left?: number;
+  isExpanded?: boolean;
+  onReadMoreToggle?: () => void;
 }) {
   const spec = variant === "leadership" ? LEADERSHIP_SPEC : ADVISORY_SPEC;
-  const cornerBottom =
-    variant === "leadership" ? 465.307291875 : 360.5;
   const isAdvisory = variant === "advisory";
   const positionClass =
     left !== undefined
@@ -208,7 +314,7 @@ export function CompanyLeadershipCard({
 
   return (
     <article
-      className={`${positionClass} isolate z-[1] overflow-clip border-[0.5px] border-solid border-[rgba(255,255,255,0.15)] ${isAdvisory ? "bg-black" : "bg-[#191919]"}`}
+      className={`${positionClass} isolate overflow-clip border-[0.5px] border-solid border-[rgba(255,255,255,0.15)] transition-[z-index] ${LEADERSHIP_EXPAND_TRANSITION_CLASS} ${isAdvisory ? "z-[1] bg-black" : isExpanded ? "z-[15] bg-[#191919]" : "z-[1] bg-[#191919]"}`}
       style={{
         left: left !== undefined ? left : undefined,
         width: spec.cardWidth,
@@ -227,14 +333,31 @@ export function CompanyLeadershipCard({
         <img
           alt=""
           src={member.imageSrc}
-          className={
+          className={`${
             member.imageClassName ??
             "absolute inset-0 size-full max-w-none object-cover object-top"
-          }
+          } ${!isAdvisory ? `transition-[filter] ${LEADERSHIP_EXPAND_TRANSITION_CLASS} ${isExpanded ? "brightness-[0.35]" : "brightness-100"}` : ""}`}
         />
-        <div
-          className={`absolute inset-0 bg-gradient-to-b from-[rgba(25,25,25,0)] from-[55%] via-[rgba(0,0,0,0.45)] via-[75%] ${isAdvisory ? "to-black" : "to-[#191919]"}`}
-        />
+        {!isAdvisory ? (
+          <>
+            <div
+              className={`absolute inset-0 bg-gradient-to-b transition-opacity ${LEADERSHIP_EXPAND_TRANSITION_CLASS} ${
+                isExpanded ? "opacity-0" : "opacity-100"
+              } from-[rgba(25,25,25,0)] from-[55%] via-[rgba(0,0,0,0.45)] via-[75%] to-[#191919]`}
+              aria-hidden
+            />
+            <div
+              className={`absolute inset-0 bg-[rgba(0,0,0,0.72)] transition-opacity ${LEADERSHIP_EXPAND_TRANSITION_CLASS} ${
+                isExpanded ? "opacity-100" : "opacity-0"
+              }`}
+              aria-hidden
+            />
+          </>
+        ) : (
+          <div
+            className="absolute inset-0 bg-gradient-to-b from-[rgba(25,25,25,0)] from-[55%] via-[rgba(0,0,0,0.45)] via-[75%] to-black"
+          />
+        )}
       </div>
 
       <div className="pointer-events-none absolute inset-0 z-20" aria-hidden>
@@ -247,26 +370,17 @@ export function CompanyLeadershipCard({
         />
       </div>
 
-      <div
-        className="pointer-events-none absolute top-0 left-0 z-[25] w-full"
-        style={{ height: spec.cardHeight }}
-        data-name="Border Element"
-        aria-hidden
-      >
-        <UserImageCorners
-          width={spec.cardWidth}
-          cornerTop={4}
-          cornerBottom={cornerBottom}
-        />
-      </div>
-
       <PersonFooter
         name={member.name}
         role={member.role}
+        bioParagraphs={member.bioParagraphs}
         linkedInHref={member.linkedInHref}
         nameNodeId={member.nameNodeId}
+        readMoreNodeId={member.readMoreNodeId}
         spec={spec}
         linkedInIconSrc="/footer/social-linkedin.svg"
+        isExpanded={isExpanded}
+        onReadMoreToggle={onReadMoreToggle}
       />
     </article>
   );

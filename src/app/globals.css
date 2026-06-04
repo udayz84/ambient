@@ -10,6 +10,61 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --animate-hero-text-fade-in: hero-text-fade-in 700ms ease-out forwards;
+  --animate-technology-visual-fade-in: technology-visual-fade-in 700ms ease-out
+    forwards;
+  --animate-ecosystem-slide-from-right: ecosystem-slide-from-right 12s linear
+    forwards;
+  --animate-platform-scale-stat-fade: platform-scale-stat-fade 700ms ease-in-out
+    forwards;
+  @keyframes hero-text-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(25px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes technology-visual-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(25px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes ecosystem-slide-from-right {
+    from {
+      opacity: 1;
+      transform: translateX(100%);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes platform-scale-stat-fade {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,6 +72,10 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 html,

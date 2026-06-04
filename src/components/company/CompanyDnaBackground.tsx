@@ -1,8 +1,4 @@
-const DNA_TOP_FADE =
-  "linear-gradient(180deg, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.85) 42%, rgba(0, 0, 0, 0) 100%)";
-
-const DNA_BOTTOM_FADE =
-  "linear-gradient(0deg, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.75) 55%, rgba(0, 0, 0, 0) 100%)";
+import { TechnologyVisualFadeIn } from "../technology/TechnologyVisualFadeIn";
 
 export function CompanyDnaBackground() {
   return (
@@ -13,29 +9,32 @@ export function CompanyDnaBackground() {
       aria-hidden
     >
       <div
-        className="absolute top-[38px] left-[-60px] h-[932px] w-[1545px] overflow-hidden"
+        className="absolute top-[38px] left-[-60px] z-[1] h-[932px] w-[1545px] overflow-hidden"
         data-node-id="2379:2088"
         data-name="image 137"
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt=""
-          src="/company/image%20137.png"
-          className="absolute inset-0 size-full max-w-none object-cover object-center"
-        />
+        <TechnologyVisualFadeIn className="absolute inset-0">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt=""
+            src="/company/image%20137.png"
+            className="absolute inset-0 size-full max-w-none object-cover object-center"
+          />
+        </TechnologyVisualFadeIn>
       </div>
+
       <div
-        className="absolute top-0 left-[2px] h-[516px] w-[1441px]"
-        style={{ backgroundImage: DNA_TOP_FADE }}
+        className="absolute top-0 left-[2px] z-[2] h-[516px] w-[1441px] bg-gradient-to-b from-[#080808] from-[46.899%] to-[rgba(8,8,8,0)] to-[117.25%]"
         data-node-id="2379:2089"
         aria-hidden
       />
       <div
-        className="absolute top-[907px] left-[1px] h-[208px] w-[1442px]"
-        style={{ backgroundImage: DNA_BOTTOM_FADE }}
+        className="absolute top-[699px] left-px z-[2] flex h-[208px] w-[1442px] items-center justify-center"
         data-node-id="2379:2134"
         aria-hidden
-      />
+      >
+        <div className="-scale-y-100 h-[208px] w-[1442px] bg-gradient-to-b from-[#080808] to-[rgba(8,8,8,0)]" />
+      </div>
     </div>
   );
 }

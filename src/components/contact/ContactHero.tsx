@@ -1,12 +1,16 @@
+"use client";
+
 import Image from "next/image";
 import { interRegular } from "../hero/fonts";
 import { CornerDecor, GradientTitle } from "./contact-shared";
+
+const HERO_FADE_IN_CLASS = "animate-hero-text-fade-in opacity-0";
 
 export function ContactHero() {
   return (
     <>
       <div
-        className="pointer-events-none absolute top-0 left-0 z-0 h-[733px] w-[1440px] overflow-hidden"
+        className={`pointer-events-none absolute top-0 left-0 z-0 h-[733px] w-[1440px] overflow-hidden ${HERO_FADE_IN_CLASS}`}
         data-node-id="2379:4951"
         data-name="hand"
       >

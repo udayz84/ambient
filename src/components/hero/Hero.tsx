@@ -1,6 +1,7 @@
 import { interMedium, interRegular } from "./fonts";
 import { HeroMetrics } from "./HeroMetrics";
 import { HeroScrollIndicator } from "./HeroScrollIndicator";
+import { HeroVisual } from "./HeroVisual";
 
 export function Hero() {
   return (
@@ -10,6 +11,8 @@ export function Hero() {
       data-name="Hero Section"
       aria-label="Hero"
     >
+      <HeroVisual />
+
       <div className="pointer-events-none absolute top-[79px] left-[95px] flex h-[821px] w-0 items-center justify-center">
         <div className="flex-none rotate-90">
           <div className="relative h-0 w-[821px]" data-node-id="2379:738" data-name="Line 82">
@@ -69,7 +72,7 @@ export function Hero() {
       </div>
 
       <div
-        className={`${interMedium.className} absolute top-[130px] left-[936px] flex w-[442px] flex-col items-start gap-[15px] [word-break:break-word] not-italic`}
+        className={`${interMedium.className} absolute top-[130px] left-[936px] flex w-[442px] flex-col items-start gap-[15px] [word-break:break-word] not-italic animate-hero-text-fade-in opacity-0`}
         data-node-id="2379:780"
       >
         <h1

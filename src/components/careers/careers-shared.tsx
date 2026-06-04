@@ -18,6 +18,10 @@ const cornerMenuRight = "/hero/vector-55.svg";
 export const BOX_BORDER_CLASS =
   "border-[0.5px] border-solid border-[rgba(240,240,240,0.2)]";
 
+/** Matches bottom-edge brightness on all four sides (Careers DNA glass panels). */
+export const GLASS_PANEL_VISIBLE_BORDER_CLASS =
+  "border-0 shadow-[inset_0_0.5px_0_0_rgba(240,240,240,0.45),inset_0_-0.5px_0_0_rgba(240,240,240,0.45),inset_0.5px_0_0_rgba(240,240,240,0.45),inset_-0.5px_0_0_rgba(240,240,240,0.45)]";
+
 export const CARD_GRADIENT_BG =
   "linear-gradient(rgba(83, 216, 36, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%), linear-gradient(90deg, rgba(21, 21, 21, 0.3) 0%, rgba(21, 21, 21, 0.3) 100%)";
 
@@ -78,6 +82,20 @@ function GradientCardBottomCorners() {
 function GlassPanelCorners() {
   return (
     <>
+      <div className="pointer-events-none absolute top-0 left-0 flex size-[4px] items-center justify-center">
+        <div className="-scale-y-100 flex-none">
+          <div className="relative size-[4px]">
+            <CornerImg src={cornerTlGlass} />
+          </div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute top-0 right-0 flex size-[4px] items-center justify-center">
+        <div className="rotate-180 flex-none">
+          <div className="relative size-[4px]">
+            <CornerImg src={cornerTrGlass} />
+          </div>
+        </div>
+      </div>
       <div className="pointer-events-none absolute bottom-0 left-0 flex size-[4px] items-center justify-center">
         <div className="-rotate-90 -scale-y-100 flex-none">
           <div className="relative size-[4px]">
@@ -85,21 +103,7 @@ function GlassPanelCorners() {
           </div>
         </div>
       </div>
-      <div className="pointer-events-none absolute top-[-0.49px] right-[0.19px] flex h-[4px] w-[3.81px] items-center justify-center">
-        <div className="-scale-y-100 rotate-90 flex-none">
-          <div className="relative h-[3.81px] w-[4px]">
-            <CornerImg src={cornerTrGlass} />
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute top-0 left-0 flex h-[4px] w-[3.81px] items-center justify-center">
-        <div className="-scale-y-100 flex-none">
-          <div className="relative h-[4px] w-[3.81px]">
-            <CornerImg src={cornerTlGlass} />
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute right-0 bottom-[0.49px] flex size-[4px] items-center justify-center">
+      <div className="pointer-events-none absolute right-0 bottom-0 flex size-[4px] items-center justify-center">
         <div className="-scale-y-100 rotate-180 flex-none">
           <div className="relative size-[4px]">
             <CornerImg src={cornerBrGlass} />
@@ -162,14 +166,15 @@ export function CareersFramedTitle({
 }) {
   return (
     <div className={`relative ${className}`} data-node-id={nodeId}>
-      <div className={`pointer-events-none absolute ${frameClassName}`}>
-        <div className="absolute inset-[-0.85%_0]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="" className="block size-full max-w-none" src={frameSrc} aria-hidden />
-        </div>
-      </div>
       <div
-        className={`${interMedium.className} absolute left-1/2 ${textTop} -translate-x-1/2 bg-clip-text text-center font-medium text-transparent not-italic whitespace-nowrap [word-break:break-word] ${textClassName}`}
+        className={`pointer-events-none absolute z-0 ${frameClassName}`}
+        aria-hidden
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img alt="" className="block size-full max-w-none" src={frameSrc} />
+      </div>
+      <p
+        className={`${interMedium.className} absolute left-1/2 ${textTop} z-10 -translate-x-1/2 bg-clip-text text-center font-medium text-transparent not-italic whitespace-nowrap [word-break:break-word] ${textClassName}`}
         style={{
           backgroundImage: `linear-gradient(${gradientDeg}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
           WebkitBackgroundClip: "text",
@@ -177,7 +182,7 @@ export function CareersFramedTitle({
         }}
       >
         {children}
-      </div>
+      </p>
     </div>
   );
 }
@@ -234,6 +239,7 @@ export function CareersGlassPanel({
   className = "",
   height = "h-[222px]",
   bodySize = "text-[16px] leading-[24px]",
+  borderClassName = BOX_BORDER_CLASS,
   nodeId,
 }: {
   title: string;
@@ -241,12 +247,13 @@ export function CareersGlassPanel({
   className?: string;
   height?: string;
   bodySize?: string;
+  borderClassName?: string;
   nodeId?: string;
 }) {
   return (
     <div className={`relative w-full ${className}`} data-node-id={nodeId}>
       <div
-        className={`relative flex ${height} w-full items-start bg-[rgba(21,21,21,0.3)] ${BOX_BORDER_CLASS}`}
+        className={`relative box-border flex ${height} w-full items-start overflow-visible bg-[rgba(21,21,21,0.3)] ${borderClassName}`}
       >
         <div className="flex min-w-px flex-[1_0_0] flex-col gap-[10px] p-[32px]">
           <p
@@ -395,7 +402,7 @@ export function CareersGreenCta({
   return (
     <a
       href={href}
-      className={`${interSemiBold.className} relative block h-[48px] shrink-0 ${GREEN_CTA_SHADOW} ${width} ${className}`}
+      className={`${interSemiBold.className} relative block h-[48px] shrink-0 cursor-pointer ${GREEN_CTA_SHADOW} ${width} ${className}`}
     >
       <span
         aria-hidden
@@ -438,7 +445,7 @@ export function CareersWhiteCta({
   return (
     <a
       href={href}
-      className={`${interSemiBold.className} relative block h-[48px] shrink-0 shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] ${width} ${className}`}
+      className={`${interSemiBold.className} relative block h-[48px] shrink-0 cursor-pointer shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] ${width} ${className}`}
     >
       <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
       <span

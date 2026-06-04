@@ -101,35 +101,70 @@ export function GradientTitle({
   );
 }
 
+function CtaSpinner() {
+  return (
+    <span
+      className="relative size-[18px] shrink-0 animate-spin rounded-full border-2 border-white/30 border-t-white"
+      aria-hidden
+    />
+  );
+}
+
 export function GreenCtaButton({
   children,
   className = "",
   width,
   href = "#",
+  onClick,
+  disabled = false,
+  loading = false,
 }: {
   children: React.ReactNode;
   className?: string;
   width?: string;
   href?: string;
+  onClick?: () => void;
+  disabled?: boolean;
+  loading?: boolean;
 }) {
-  return (
-    <a
-      href={href}
-      className={`${interSemiBold.className} relative block h-[48px] shrink-0 shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] ${className}`}
-      style={width ? { width } : undefined}
-    >
+  const sharedClassName = `${interSemiBold.className} relative block h-[48px] shrink-0 shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] disabled:cursor-not-allowed disabled:opacity-70 ${className}`;
+  const sharedStyle = width ? { width } : undefined;
+  const content = (
+    <>
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
-      <span className="relative flex h-full items-center justify-center text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic">
-        {children}
+      <span className="relative flex h-full items-center justify-center gap-[10px] text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic">
+        {loading ? <CtaSpinner /> : null}
+        {loading ? "Loading..." : children}
       </span>
       <CtaCorners />
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
       />
+    </>
+  );
+
+  if (onClick) {
+    return (
+      <button
+        type="button"
+        onClick={onClick}
+        disabled={disabled || loading}
+        aria-busy={loading}
+        className={sharedClassName}
+        style={sharedStyle}
+      >
+        {content}
+      </button>
+    );
+  }
+
+  return (
+    <a href={href} className={sharedClassName} style={sharedStyle}>
+      {content}
     </a>
   );
 }

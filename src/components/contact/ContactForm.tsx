@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import {
   interLight,
   interMedium,
@@ -12,42 +15,44 @@ import {
 const cornerLeft = "/hero/corner-tag-1.svg";
 const cornerRight = "/hero/corner-tag-2.svg";
 
+type TrackId = "sales" | "developer" | "media";
+
 const tracks = [
   {
+    id: "sales" as const,
     title: "Sales & Enterprise",
     description:
       "Request a quote, discuss volume licensing, or inquire about custom ASIC development.",
     icon: "/contact/track-sales.svg",
-    selected: true,
     top: 66,
     height: 134,
     checkboxTop: 57,
+    connectorTop: 247,
     nodeId: "2379:8506",
-    borderInset: "1.5px",
   },
   {
+    id: "developer" as const,
     title: "Developer Support",
     description:
       "Report a bug, request documentation, or get help compiling your model via the Nebula SDK.",
     icon: "/contact/track-developer.svg",
-    selected: false,
     top: 212,
     height: 158,
     checkboxTop: 69,
+    connectorTop: 415,
     nodeId: "2379:8521",
-    borderInset: "0.5px",
   },
   {
+    id: "media" as const,
     title: "Media & Press",
     description:
       "Request an interview with our leadership team, access press materials, or coordinate coverage.",
     icon: "/contact/track-media.svg",
-    selected: false,
     top: 382,
     height: 158,
     checkboxTop: 69,
+    connectorTop: 574,
     nodeId: "2379:8537",
-    borderInset: "0.5px",
   },
 ] as const;
 
@@ -60,13 +65,12 @@ const formFields = [
   { label: "Phone Number", placeholder: "Enter Your Phone Number", left: 301, top: 261, nodeId: "2379:8560" },
 ] as const;
 
-const connectors = [
-  { top: 247, nodeId: "2379:8552", variant: "primary" as const },
-  { top: 415, nodeId: "2388:296", variant: "secondary" as const },
-  { top: 574, nodeId: "2388:297", variant: "secondary" as const },
-] as const;
-
 export function ContactForm() {
+  const [activeTrackId, setActiveTrackId] = useState<TrackId>("sales");
+  const activeConnectorTop =
+    tracks.find((track) => track.id === activeTrackId)?.connectorTop ??
+    tracks[0].connectorTop;
+
   return (
     <div
       className="absolute top-[2376px] left-1/2 z-20 h-[744px] w-[1204px] -translate-x-1/2"
@@ -115,13 +119,16 @@ export function ContactForm() {
         </p>
 
         {tracks.map((track) => (
-          <TrackCard key={track.nodeId} {...track} />
+          <TrackCard
+            key={track.nodeId}
+            {...track}
+            selected={activeTrackId === track.id}
+            onSelect={() => setActiveTrackId(track.id)}
+          />
         ))}
       </div>
 
-      {connectors.map((line) => (
-        <ConnectorLine key={line.nodeId} {...line} />
-      ))}
+      <ConnectorLine top={activeConnectorTop} nodeId="2379:8552" />
 
       <div
         className="absolute top-[114px] left-[604px] h-[630px] w-[590px] overflow-clip border-[1.5px] border-solid border-[rgba(83,216,36,0.2)] bg-[rgba(46,119,20,0.2)] shadow-[0px_0px_20px_0px_rgba(83,216,36,0.25)]"
@@ -157,7 +164,7 @@ export function ContactForm() {
           data-name="Check Box"
         >
           <span
-            className="relative size-[20px] shrink-0"
+            className="relative size-[20px] shrink-0 border-[0.5px] border-solid border-[#4a4a4a]"
             data-node-id="2379:8563"
           />
           <span
@@ -189,11 +196,19 @@ function TrackCard({
   height,
   checkboxTop,
   nodeId,
-  borderInset,
-}: (typeof tracks)[number]) {
+  onSelect,
+}: (typeof tracks)[number] & {
+  selected: boolean;
+  onSelect: () => void;
+}) {
+  const borderInset = selected ? "1.5px" : "0.5px";
+
   return (
-    <div
-      className={`absolute left-0 flex w-[550px] items-center gap-[36px] overflow-clip py-[24px] pr-[48px] pl-[36px] ${
+    <button
+      type="button"
+      onClick={onSelect}
+      aria-pressed={selected}
+      className={`absolute left-0 flex w-[550px] cursor-pointer items-center gap-[36px] overflow-clip py-[24px] pr-[48px] pl-[36px] text-left transition-[border-color,background-color,box-shadow] duration-200 ${
         selected
           ? "border-[1.5px] border-solid border-[rgba(83,216,36,0.2)] bg-[rgba(46,119,20,0.2)] shadow-[0px_0px_20px_0px_rgba(83,216,36,0.25)]"
           : "border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)]"
@@ -205,11 +220,23 @@ function TrackCard({
 
       <div className="relative size-[32px] shrink-0" data-name="Frame">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img alt="" className="absolute inset-0 block size-full max-w-none" src={icon} aria-hidden />
+        <img
+          alt=""
+          className={`absolute inset-0 block size-full max-w-none transition-[filter,opacity] duration-200 ${
+            selected ? "opacity-100" : "opacity-70 brightness-0 invert"
+          }`}
+          src={icon}
+          aria-hidden
+        />
       </div>
 
-      <div className="flex min-w-0 flex-1 flex-col gap-[10px] not-italic [word-break:break-word]" data-name="NewsSection">
-        <p className={`${interMedium.className} w-full text-[22px] leading-[28px] font-medium text-white`}>
+      <div
+        className="flex min-w-0 flex-1 flex-col gap-[10px] not-italic [word-break:break-word]"
+        data-name="NewsSection"
+      >
+        <p
+          className={`${interMedium.className} w-full text-[22px] leading-[28px] font-medium text-white`}
+        >
           {title}
         </p>
         <p
@@ -226,7 +253,7 @@ function TrackCard({
       >
         <TrackRadio selected={selected} />
       </div>
-    </div>
+    </button>
   );
 }
 
@@ -246,35 +273,22 @@ function TrackRadio({ selected }: { selected: boolean }) {
   );
 }
 
-function ConnectorLine({
-  top,
-  nodeId,
-  variant,
-}: {
-  top: number;
-  nodeId: string;
-  variant: "primary" | "secondary";
-}) {
+function ConnectorLine({ top, nodeId }: { top: number; nodeId: string }) {
   return (
     <div
-      className="pointer-events-none absolute left-[550px] h-0 w-[54px]"
+      className="pointer-events-none absolute left-[550px] h-0 w-[54px] transition-[top] duration-300 ease-out"
       style={{ top }}
       data-node-id={nodeId}
     >
-      {variant === "primary" ? (
-        <div className="absolute inset-[-1px_0_0_0]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="" className="block size-full max-w-none" src="/contact/line-connector.svg" aria-hidden />
-        </div>
-      ) : (
-        /* eslint-disable-next-line @next/next/no-img-element */
+      <div className="absolute inset-[-1px_0_0_0]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt=""
-          className="absolute inset-0 block size-full max-w-none"
-          src="/contact/line-connector-short.svg"
+          className="block size-full max-w-none"
+          src="/contact/line-connector.svg"
           aria-hidden
         />
-      )}
+      </div>
     </div>
   );
 }
@@ -319,9 +333,8 @@ function FormField({
   );
 }
 
-function TrackCorners({ inset }: { inset: "1.5px" | "0.5px" }) {
-  const o = inset === "1.5px" ? "1.5px" : "0.5px";
-  return <InsetCorners inset={o} />;
+function TrackCorners({ inset }: { inset: string }) {
+  return <InsetCorners inset={inset} />;
 }
 
 function FormPanelCorners() {
@@ -367,7 +380,7 @@ function InsetCorners({ inset }: { inset: string }) {
         </div>
       </div>
       <div
-        className={`pointer-events-none absolute flex size-[4px] items-center justify-center`}
+        className="pointer-events-none absolute flex size-[4px] items-center justify-center"
         style={{ right: `-${inset}`, bottom: `-${inset}` }}
       >
         <div className="-scale-y-100 rotate-180 flex-none">

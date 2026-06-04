@@ -1,5 +1,6 @@
+import { CornerDecor, GradientTitle } from "../contact/contact-shared";
 import { CAREERS_WORK_CARDS } from "./careers-data";
-import { CareersFramedTitle, CareersGradientCard } from "./careers-shared";
+import { CareersGradientCard } from "./careers-shared";
 
 export function CareersBestWork() {
   return (
@@ -8,15 +9,19 @@ export function CareersBestWork() {
       data-node-id="2379:8710"
       aria-label="Do the best work of your life"
     >
-      <CareersFramedTitle
-        nodeId="2379:8711"
-        frameSrc="/careers/title-frame-616.svg"
-        frameClassName="top-[1.03px] left-[0.84px] h-[59px] w-[614.32px]"
-        gradientDeg="127.769deg"
-        className="h-[61px] w-[616px] shrink-0"
+      <div
+        className="relative flex flex-col items-center px-[10px]"
+        data-node-id="2379:8711"
       >
-        Do the best work of your life
-      </CareersFramedTitle>
+        <GradientTitle
+          nodeId="2379:8712"
+          gradientDeg="127.769deg"
+          className="text-center whitespace-nowrap"
+        >
+          Do the best work of your life
+        </GradientTitle>
+        <CornerDecor />
+      </div>
 
       <div
         className="flex w-[1318px] shrink-0 items-center gap-[20px]"

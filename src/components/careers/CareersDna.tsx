@@ -1,6 +1,15 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import { CornerDecor, GradientTitle } from "../contact/contact-shared";
-import { interMedium, interRegular } from "../hero/fonts";
-import { CareersGlassPanel, DNA_BG_GRADIENT } from "./careers-shared";
+import { interRegular } from "../hero/fonts";
+import {
+  CareersGlassPanel,
+  DNA_BG_GRADIENT,
+  GLASS_PANEL_VISIBLE_BORDER_CLASS,
+} from "./careers-shared";
+
+const CHIP_FADE_IN_CLASS = "animate-hero-text-fade-in opacity-0";
 
 export function CareersDna() {
   return (
@@ -62,55 +71,30 @@ export function CareersDna() {
               nodeId="2379:8856"
               title="Grounded in Science"
               description="You work from first principles. Every decision you make is expected to be backed by data, validation, and a clear understanding of the underlying system."
+              borderClassName={GLASS_PANEL_VISIBLE_BORDER_CLASS}
             />
             <CareersGlassPanel
               nodeId="2379:8864"
               title="Stay Curious. Stay Skeptical."
               description="You are encouraged to question, challenge, and refine. Strong thinking, clear reasoning, and continuous learning are expected at every stage of the work."
+              borderClassName={GLASS_PANEL_VISIBLE_BORDER_CLASS}
             />
           </div>
 
-          <div
-            className="relative h-[400px] w-[386px] shrink-0"
-            data-node-id="2379:8873"
-            data-name="Chip Image"
-          >
-            <div
-              className="absolute top-1/2 left-1/2 h-[449px] w-[433px] -translate-x-1/2 -translate-y-1/2 overflow-hidden"
-              data-node-id="2379:8874"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/careers/chip-bg.png"
-                alt=""
-                className="absolute top-[-4.24%] left-[-10.68%] h-[108.47%] w-[121.37%] max-w-none object-cover"
-              />
-            </div>
-            <div
-              className="absolute top-[calc(50%-131.56px)] left-[34.56%] right-[34.24%] flex aspect-[120.41/60.86] items-center justify-center"
-              data-node-id="2379:8875"
-            >
-              <div className="relative h-full w-full rotate-[1.22deg] overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/careers/chip-object.png"
-                  alt=""
-                  className="absolute top-[-28.9%] left-[-44.69%] h-[127.84%] w-[144.32%] max-w-none object-cover"
-                />
-              </div>
-            </div>
-          </div>
+          <CareersDnaChipImage />
 
           <div className="flex w-[389.999px] flex-col gap-[40px]" data-node-id="2379:8876">
             <CareersGlassPanel
               nodeId="2379:8877"
               title="Chase the Impossible"
               description="You take on problems that don't have predefined solutions. The expectation is not iteration, but pushing beyond accepted limits and building what doesn't yet exist."
+              borderClassName={GLASS_PANEL_VISIBLE_BORDER_CLASS}
             />
             <CareersGlassPanel
               nodeId="2379:8885"
               title="Build for Everyone"
               description="Your work is not isolated. You build systems that must scale across real-world environments, constraints, and users, making advanced technology practical and usable."
+              borderClassName={GLASS_PANEL_VISIBLE_BORDER_CLASS}
             />
           </div>
         </div>
@@ -121,8 +105,68 @@ export function CareersDna() {
           description="You design with power as a constraint from day one. Efficiency is not an afterthought, it is a core part of how you think, build, and optimize systems."
           height="min-h-[126px]"
           className="w-[1204px]"
+          borderClassName={GLASS_PANEL_VISIBLE_BORDER_CLASS}
         />
       </div>
     </section>
+  );
+}
+
+function CareersDnaChipImage() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`relative h-[400px] w-[386px] shrink-0 ${
+        isVisible ? CHIP_FADE_IN_CLASS : "translate-y-[25px] opacity-0"
+      }`}
+      data-node-id="2379:8873"
+      data-name="Chip Image"
+    >
+      <div
+        className="absolute top-1/2 left-1/2 h-[449px] w-[433px] -translate-x-1/2 -translate-y-1/2 overflow-hidden"
+        data-node-id="2379:8874"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/careers/chip-bg.png"
+          alt=""
+          className="absolute top-[-4.24%] left-[-10.68%] h-[108.47%] w-[121.37%] max-w-none object-cover"
+        />
+      </div>
+      <div
+        className="absolute top-[calc(50%-131.56px)] left-[34.56%] right-[34.24%] flex aspect-[120.41/60.86] items-center justify-center"
+        data-node-id="2379:8875"
+      >
+        <div className="relative h-full w-full rotate-[1.22deg] overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/careers/chip-object.png"
+            alt=""
+            className="absolute top-[-28.9%] left-[-44.69%] h-[127.84%] w-[144.32%] max-w-none object-cover"
+          />
+        </div>
+      </div>
+    </div>
   );
 }

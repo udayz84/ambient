@@ -6,32 +6,35 @@ import { NewsletterSignup } from "./NewsletterSignup";
 export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolean }) {
   return (
     <footer
-      className="relative mx-auto mt-[21px] h-[1252px] w-full max-w-[1440px] overflow-hidden bg-black"
+      className="relative left-1/2 mt-[21px] h-[1252px] w-screen max-w-none -translate-x-1/2 overflow-hidden bg-black"
       data-node-id="2379:784"
       data-name="footer"
     >
-      <div aria-hidden className="pointer-events-none absolute inset-0">
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 bg-black" />
         <div
-          className="absolute overflow-hidden"
+          className="absolute left-1/2 w-[1440px] origin-center overflow-hidden"
           style={{
             height: "97.04%",
-            left: "-0.02%",
             top: "-5.03%",
-            width: "100%",
+            transform:
+              "translateX(-50%) scaleX(max(1, calc(100vw / 1440px)))",
           }}
         >
-          <Image
-            src="/footer/footer-bg.png"
-            alt=""
-            fill
-            className="object-cover object-top"
-            sizes="1440px"
-          />
+          <div className="relative h-full w-full">
+            <Image
+              src="/footer/footer-bg.png"
+              alt=""
+              fill
+              className="object-cover object-top"
+              sizes="100vw"
+            />
+          </div>
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.2)] to-[rgba(0,0,0,0)]" />
       </div>
 
+      <div className="relative mx-auto h-full w-full max-w-[1440px]">
       {showNewsletter ? (
         <div className="relative z-[1] flex flex-col items-center pt-[120px]">
           <NewsletterSignup />
@@ -198,6 +201,7 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
       >
         ambient
       </p>
+      </div>
     </footer>
   );
 }

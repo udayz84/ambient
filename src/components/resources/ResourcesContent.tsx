@@ -1,19 +1,52 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { interRegular } from "../hero/fonts";
 import { GreenCtaButton } from "../contact/contact-shared";
 import {
   RESOURCE_ARTICLES,
   RESOURCE_CATEGORIES,
 } from "./resources-data";
+import { getResourcesExtraHeight } from "./resources-layout";
 import { ResourcesArticleCard } from "./ResourcesArticleCard";
-
 const scrollArrowLeft = "/applications/nav-arrow-right.svg";
+const INITIAL_VISIBLE_COUNT = 6;
+const LOAD_MORE_COUNT = 3;
+const LOAD_MORE_DELAY_MS = 800;
 
-export function ResourcesContent() {
+export function ResourcesContent({
+  onExtraHeightChange,
+}: {
+  onExtraHeightChange?: (height: number) => void;
+}) {
   const [activeCategory, setActiveCategory] = useState("webinar");
+  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+
+  const visibleArticles = RESOURCE_ARTICLES.slice(0, visibleCount);
+  const canLoadMore = visibleCount < RESOURCE_ARTICLES.length;
+
+  useEffect(() => {
+    onExtraHeightChange?.(getResourcesExtraHeight(visibleCount, canLoadMore));
+  }, [visibleCount, canLoadMore, onExtraHeightChange]);
+
+  const articleRows = Array.from(
+    { length: Math.ceil(visibleArticles.length / 3) },
+    (_, rowIndex) => visibleArticles.slice(rowIndex * 3, rowIndex * 3 + 3)
+  );
+
+  const handleLoadMore = () => {
+    if (isLoadingMore || !canLoadMore) return;
+
+    setIsLoadingMore(true);
+    window.setTimeout(() => {
+      setVisibleCount((current) =>
+        Math.min(current + LOAD_MORE_COUNT, RESOURCE_ARTICLES.length)
+      );
+      setIsLoadingMore(false);
+    }, LOAD_MORE_DELAY_MS);
+  };
 
   return (
     <section
@@ -109,21 +142,29 @@ export function ResourcesContent() {
       </nav>
 
       <div className="flex w-[1236px] flex-col gap-[36px]" data-node-id="2379:1832">
-        <div className="flex w-full gap-[36px]" data-node-id="2379:1833">
-          {RESOURCE_ARTICLES.slice(0, 3).map((article) => (
-            <ResourcesArticleCard key={article.nodeId} {...article} />
-          ))}
-        </div>
-        <div className="flex w-full gap-[36px]" data-node-id="2379:1891">
-          {RESOURCE_ARTICLES.slice(3, 6).map((article) => (
-            <ResourcesArticleCard key={article.nodeId} {...article} />
-          ))}
-        </div>
+        {articleRows.map((row, rowIndex) => (
+          <div
+            key={`resource-row-${rowIndex}`}
+            className="flex w-full gap-[36px]"
+            data-node-id={rowIndex === 0 ? "2379:1833" : "2379:1891"}
+          >
+            {row.map((article) => (
+              <ResourcesArticleCard key={article.nodeId} {...article} />
+            ))}
+          </div>
+        ))}
       </div>
 
-      <GreenCtaButton className="w-[225px]" href="#">
-        Load More Resources
-      </GreenCtaButton>
+      {canLoadMore ? (
+        <GreenCtaButton
+          className="w-[225px]"
+          onClick={handleLoadMore}
+          loading={isLoadingMore}
+          disabled={isLoadingMore}
+        >
+          Load More Resources
+        </GreenCtaButton>
+      ) : null}
     </section>
   );
 }

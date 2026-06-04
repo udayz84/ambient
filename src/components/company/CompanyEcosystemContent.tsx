@@ -1,60 +1,7 @@
 import Image from "next/image";
-import { CornerDecor, GradientTitle } from "../contact/contact-shared";
+import { GradientTitle } from "../contact/contact-shared";
 import { interMedium, interRegular } from "../hero/fonts";
-
-const cornerLeft = "/hero/corner-tag-1.svg";
-const cornerRight = "/hero/corner-tag-2.svg";
-
-function EcosystemFrameCorners() {
-  return (
-    <>
-      <div
-        className="pointer-events-none absolute top-[4.602px] left-0 flex size-[4px] items-center justify-center"
-        data-node-id="2379:4667"
-      >
-        <div className="-scale-y-100 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <Image src={cornerLeft} alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="pointer-events-none absolute top-[4.602px] right-0 flex size-[4px] items-center justify-center"
-        data-node-id="2379:4666"
-      >
-        <div className="rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <Image src={cornerRight} alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="pointer-events-none absolute bottom-[4.602px] left-0 size-[4px]"
-        data-node-id="2379:4668"
-      >
-        <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-          <Image src={cornerLeft} alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
-        </div>
-      </div>
-      <div
-        className="pointer-events-none absolute right-0 bottom-[4.602px] flex size-[4px] items-center justify-center"
-        data-node-id="2379:4665"
-      >
-        <div className="-scale-y-100 rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <Image src={cornerRight} alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
+import { CompanyStandardCorners, CornerDecor } from "./company-corners";
 
 function EcosystemColumnIcon({
   src,
@@ -83,7 +30,7 @@ export function CompanyEcosystemContent() {
       data-node-id="2379:4637"
       data-name="Content Section"
     >
-      <EcosystemFrameCorners />
+      <CompanyStandardCorners />
 
       <div
         className="absolute top-[40px] left-[40px] h-[310px] w-[1124px]"

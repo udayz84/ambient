@@ -50,18 +50,27 @@ export function DeveloperPlatformBackground() {
     >
       <div className="absolute inset-0 bg-[#214c32]" />
 
-      <div
-        className="absolute top-0 left-0 flex h-[883px] w-[1440px] items-start overflow-clip border-t-[1.805px] border-solid border-[rgba(255,255,255,0.5)] bg-gradient-to-b from-black from-[11.538%] to-[rgba(0,0,0,0)] to-[30.879%]"
-        data-node-id="2379:966"
-        data-name="Fractal Glass"
-      >
-        {GLASS_COLUMN_IDS.map((id, index) => (
-          <FractalGlassColumn
-            key={id}
-            nodeId={id}
-            isLast={index === GLASS_COLUMN_IDS.length - 1}
-          />
-        ))}
+      <div className="absolute top-0 right-0 left-0 h-[883px] overflow-hidden">
+        <div
+          className="absolute top-0 left-1/2 h-[883px] w-[1440px] origin-center"
+          style={{
+            transform: "translateX(-50%) scaleX(max(1, calc(100vw / 1440px)))",
+          }}
+        >
+          <div
+            className="flex h-[883px] w-[1440px] items-start overflow-clip border-t-[1.805px] border-solid border-[rgba(255,255,255,0.5)] bg-gradient-to-b from-black from-[11.538%] to-[rgba(0,0,0,0)] to-[30.879%]"
+            data-node-id="2379:966"
+            data-name="Fractal Glass"
+          >
+            {GLASS_COLUMN_IDS.map((id, index) => (
+              <FractalGlassColumn
+                key={id}
+                nodeId={id}
+                isLast={index === GLASS_COLUMN_IDS.length - 1}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import { interRegular } from "../hero/fonts";
-import { CornerDecor, GradientTitle } from "../contact/contact-shared";
+import { GradientTitle } from "../contact/contact-shared";
+import { CornerDecor } from "./company-corners";
 
 const HERO_BG_GRADIENT =
   "linear-gradient(132.873deg, rgb(0, 0, 0) 31.15%, rgba(0, 0, 0, 0) 76.987%), linear-gradient(187.824deg, rgba(0, 0, 0, 0) 49.061%, rgb(0, 0, 0) 90.541%)";

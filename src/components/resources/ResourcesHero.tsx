@@ -6,6 +6,8 @@ import { GradientTitle, WhiteCtaButton } from "../contact/contact-shared";
 const IMAGE_102_GRADIENT =
   "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 825 1650' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%25' width='100%25' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-36.45 -0.0000015933 0.0000032605 -74.591 412.5 825)'><stop stop-color='rgba(0,0,0,0)' offset='0.3089'/><stop stop-color='rgba(0,0,0,1)' offset='1'/></radialGradient></defs></svg>\")";
 
+const TEXT_FADE_IN_CLASS = "animate-hero-text-fade-in opacity-0";
+
 export function ResourcesHero() {
   return (
     <>
@@ -41,70 +43,74 @@ export function ResourcesHero() {
         </div>
       </div>
 
-      {/* 2379:1627 — headline (centered) */}
+      {/* Hero text block — headline, search, contact */}
       <div
-        className="absolute top-[294px] left-1/2 z-10 flex w-[810px] -translate-x-1/2 flex-col items-start gap-[15px]"
-        data-node-id="2379:1627"
-      >
-        <div className="relative w-[810px] px-[10px]">
-          <GradientTitle
-            nodeId="2379:1628"
-            gradientDeg="118.129deg"
-            className="w-[810px] text-center"
-          >
-            Explore whitepapers, architectural deep-dives, and performance data
-          </GradientTitle>
-          <div
-            className="pointer-events-none absolute top-[-4px] left-0 h-[106px] w-[810px]"
-            data-node-id="2379:1629"
-            aria-hidden
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/resources/hero-title-frame.svg"
-              alt=""
-              className="block size-full max-w-none"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* 2379:1621 — search row */}
-      <div
-        className="absolute top-[439.64px] left-[calc(16.67%+119px)] z-10 flex h-[48px] w-[722px] items-center"
-        data-node-id="2379:1621"
+        className={`absolute top-[294px] left-0 z-10 h-[233.17px] w-full ${TEXT_FADE_IN_CLASS}`}
+        data-name="Hero text"
       >
         <div
-          className="flex h-[48px] min-w-px flex-[1_0_0] items-center bg-[rgba(0,0,0,0.3)] px-[20px]"
-          data-node-id="2379:1622"
+          className="absolute top-0 left-1/2 flex w-[810px] -translate-x-1/2 flex-col items-start gap-[15px]"
+          data-node-id="2379:1627"
         >
-          <p
-            className={`${interRegular.className} shrink-0 text-[14px] leading-[21px] font-normal whitespace-nowrap text-white not-italic`}
-            data-node-id="2379:1623"
-          >
-            Search architecture, case studies, or GPX metrics...
-          </p>
+          <div className="relative w-[810px] px-[10px]">
+            <GradientTitle
+              nodeId="2379:1628"
+              gradientDeg="118.129deg"
+              className="w-[810px] text-center"
+            >
+              Explore whitepapers, architectural deep-dives, and performance
+              data
+            </GradientTitle>
+            <div
+              className="pointer-events-none absolute top-[-4px] left-0 h-[106px] w-[810px]"
+              data-node-id="2379:1629"
+              aria-hidden
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/resources/hero-title-frame.svg"
+                alt=""
+                className="block size-full max-w-none"
+              />
+            </div>
+          </div>
         </div>
-        <WhiteCtaButton className="w-[158px] shrink-0" href="#">
-          Search
-        </WhiteCtaButton>
-      </div>
 
-      {/* 2379:1634 — help copy left-aligned with search (Figma x=357) */}
-      <div
-        className={`${interRegular.className} absolute top-[506.17px] left-[357px] z-10 flex items-center gap-[6px] text-[14px] leading-[21px] font-normal whitespace-nowrap not-italic`}
-        data-node-id="2379:1634"
-      >
-        <span className="text-white opacity-75" data-node-id="2379:1635">
-          Can&apos;t find what you&apos;re looking for?
-        </span>
-        <Link
-          href="/contact"
-          className="text-[#53d824]"
-          data-node-id="2379:1636"
+        <div
+          className="absolute top-[145.64px] left-[calc(16.67%+119px)] flex h-[48px] w-[722px] items-center"
+          data-node-id="2379:1621"
         >
-          Contact Us
-        </Link>
+          <div
+            className="flex h-[48px] min-w-px flex-[1_0_0] items-center bg-[rgba(0,0,0,0.3)] px-[20px]"
+            data-node-id="2379:1622"
+          >
+            <p
+              className={`${interRegular.className} shrink-0 text-[14px] leading-[21px] font-normal whitespace-nowrap text-white not-italic`}
+              data-node-id="2379:1623"
+            >
+              Search architecture, case studies, or GPX metrics...
+            </p>
+          </div>
+          <WhiteCtaButton className="w-[158px] shrink-0" href="#">
+            Search
+          </WhiteCtaButton>
+        </div>
+
+        <div
+          className={`${interRegular.className} absolute top-[212.17px] left-[357px] flex items-center gap-[6px] text-[14px] leading-[21px] font-normal whitespace-nowrap not-italic`}
+          data-node-id="2379:1634"
+        >
+          <span className="text-white opacity-75" data-node-id="2379:1635">
+            Can&apos;t find what you&apos;re looking for?
+          </span>
+          <Link
+            href="/contact"
+            className="text-[#53d824]"
+            data-node-id="2379:1636"
+          >
+            Contact Us
+          </Link>
+        </div>
       </div>
     </>
   );
