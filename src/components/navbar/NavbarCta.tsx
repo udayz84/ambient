@@ -10,21 +10,12 @@ const GREEN_CTA_SHADOW =
 const cornerLeft = "/hero/corner-tag-1.svg";
 const cornerRight = "/hero/corner-tag-2.svg";
 
-/** Figma 2379:8600 / 2379:1589 — Cta 147×36 */
 const BUTTON_WIDTH = 147;
 const BUTTON_HEIGHT = 36;
-const GRID_PADDING_X = 8;
-const GRID_PADDING_Y = 8;
-const GRID_STEP_X = 12;
-const GRID_STEP_Y = 10;
-const GRID_COLS =
-  Math.floor((BUTTON_WIDTH - GRID_PADDING_X * 2) / GRID_STEP_X) + 1;
-const GRID_ROWS =
-  Math.floor((BUTTON_HEIGHT - GRID_PADDING_Y * 2) / GRID_STEP_Y) + 1;
-
-const REPEL_RADIUS = 36;
-const REPEL_STRENGTH = 14;
-const LERP = 0.14;
+const DOT_SPACING = 8;
+const REPEL_RADIUS = 40;
+const REPEL_STRENGTH = 12;
+const LERP = 0.18;
 
 type Particle = { id: number; x: number; y: number };
 
@@ -107,12 +98,15 @@ function buildParticles(): Particle[] {
   const items: Particle[] = [];
   let id = 0;
 
-  for (let row = 0; row < GRID_ROWS; row += 1) {
-    for (let col = 0; col < GRID_COLS; col += 1) {
+  const cols = Math.ceil(BUTTON_WIDTH / DOT_SPACING);
+  const rows = Math.ceil(BUTTON_HEIGHT / DOT_SPACING);
+
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
       items.push({
         id: id++,
-        x: GRID_PADDING_X + col * GRID_STEP_X,
-        y: GRID_PADDING_Y + row * GRID_STEP_Y,
+        x: col * DOT_SPACING + DOT_SPACING / 2,
+        y: row * DOT_SPACING + DOT_SPACING / 2,
       });
     }
   }
@@ -135,9 +129,10 @@ function getRepelOffset(
   }
 
   const force = (REPEL_RADIUS - distance) / REPEL_RADIUS;
+  const strength = force * REPEL_STRENGTH;
   return {
-    x: (dx / distance) * force * REPEL_STRENGTH,
-    y: (dy / distance) * force * REPEL_STRENGTH,
+    x: (dx / distance) * strength,
+    y: (dy / distance) * strength,
   };
 }
 
@@ -171,7 +166,7 @@ export function NavbarCta() {
         const el = particleRefs.current[index];
         if (!el) return;
 
-        el.style.transform = `translate(-50%, -50%) translate(${current.x}px, ${current.y}px)`;
+        el.style.transform = `translate(-50%, -50%) translate(${current.x.toFixed(2)}px, ${current.y.toFixed(2)}px)`;
       });
 
       frameId = window.requestAnimationFrame(tick);
@@ -232,7 +227,7 @@ export function NavbarCta() {
             ref={(node) => {
               particleRefs.current[index] = node;
             }}
-            className="absolute size-[1px] bg-white/[0.36] will-change-transform"
+            className="absolute size-[1px] bg-white/[0.4] will-change-transform"
             style={{
               left: particle.x,
               top: particle.y,

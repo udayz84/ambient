@@ -13,7 +13,7 @@ export function Contact() {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       <div
-        className="relative -mt-[78px] mx-auto w-full max-w-[1440px] min-w-[1440px] overflow-x-clip bg-black"
+        className="relative -mt-[78px] mx-auto w-full max-w-[1440px] min-w-[1440px] bg-black"
         style={{ height: CONTACT_PAGE_HEIGHT_PX }}
         data-node-id="2379:4950"
         data-name="Contact - 3"

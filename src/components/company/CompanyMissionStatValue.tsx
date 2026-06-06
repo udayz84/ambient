@@ -7,28 +7,13 @@ const STAT_VALUE_GRADIENT =
   "linear-gradient(98.8336deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
 const SMOOTH_EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
-const SUFFIX_REVEAL_DELAY_MS = 200;
 const SUFFIX_TRANSITION_MS = 750;
+const MS_PER_COUNT_UNIT = 50;
+const MIN_COUNT_DURATION_MS = 3000;
+const MAX_COUNT_DURATION_MS = 5000;
 
-const MS_PER_COUNT_UNIT = 26;
-const MIN_COUNT_DURATION_MS = 2000;
-const MAX_COUNT_DURATION_MS = 3200;
-
-function easeOutQuart(t: number) {
-  return 1 - (1 - t) ** 4;
-}
-
-function easeOutQuint(t: number) {
-  return 1 - (1 - t) ** 5;
-}
-
-/** Bulk of the count in the first ~62% of time; last digits ease in slowly */
-function countProgress(t: number) {
-  if (t < 0.62) {
-    return easeOutQuart(t / 0.62) * 0.8;
-  }
-  const tail = (t - 0.62) / 0.38;
-  return 0.8 + easeOutQuint(tail) * 0.2;
+function easeOutCubic(t: number) {
+  return 1 - (1 - t) ** 3;
 }
 
 function countDurationMs(target: number) {
@@ -57,47 +42,34 @@ export function CompanyMissionStatValue({
   digitSlots,
   suffixAtTarget = false,
 }: CompanyMissionStatValueProps) {
-  const ref = useRef<HTMLParagraphElement>(null);
-  const [display, setDisplay] = useState(0);
-  const [revealSuffix, setRevealSuffix] = useState(!suffixAtTarget);
+  const containerRef = useRef<HTMLParagraphElement>(null);
+  const displayRef = useRef<HTMLSpanElement>(null);
   const { target, suffix } = parseStatValue(value);
+  const shouldLazySuffix = !!(suffix && suffixAtTarget);
+  const [revealSuffix, setRevealSuffix] = useState(!shouldLazySuffix);
+  const [countingDone, setCountingDone] = useState(false);
 
   const durationMs = countDurationMs(target);
-  const showSuffix = !suffixAtTarget || revealSuffix;
+  const showSuffix = !shouldLazySuffix || revealSuffix;
 
   useEffect(() => {
-    if (!suffix || !suffixAtTarget) {
-      setRevealSuffix(!suffixAtTarget);
-      return;
-    }
-
-    if (display < target) {
-      setRevealSuffix(false);
-      return;
-    }
-
-    const delayId = window.setTimeout(() => {
-      setRevealSuffix(true);
-    }, SUFFIX_REVEAL_DELAY_MS);
-
-    return () => window.clearTimeout(delayId);
-  }, [display, target, suffix, suffixAtTarget]);
+    if (!shouldLazySuffix || !countingDone) return;
+    const id = window.setTimeout(() => setRevealSuffix(true), 0);
+    return () => window.clearTimeout(id);
+  }, [countingDone, shouldLazySuffix]);
 
   useEffect(() => {
-    const node = ref.current;
+    const node = containerRef.current;
     if (!node) return;
 
     let delayId = 0;
     let rafId = 0;
     let hasStarted = false;
 
-    const finish = (value: number) => {
-      setDisplay(value);
-    };
-
     const runCount = () => {
       if (target <= 0) {
-        finish(0);
+        if (displayRef.current) displayRef.current.textContent = "0";
+        setCountingDone(true);
         return;
       }
 
@@ -106,31 +78,34 @@ export function CompanyMissionStatValue({
       ).matches;
 
       if (prefersReduced) {
-        finish(target);
-        if (suffixAtTarget) setRevealSuffix(true);
+        if (displayRef.current) displayRef.current.textContent = String(target);
+        setCountingDone(true);
+        if (shouldLazySuffix) setRevealSuffix(true);
         return;
       }
 
-      setDisplay(0);
-      setRevealSuffix(false);
+      if (displayRef.current) displayRef.current.textContent = "0";
+
       const startTime = performance.now();
-      let lastDisplayed = -1;
+      let lastValue = -1;
 
       const tick = (now: number) => {
-        const progress = Math.min((now - startTime) / durationMs, 1);
-        const mapped = countProgress(progress);
-        const next =
-          progress >= 1 ? target : Math.min(Math.floor(mapped * target), target);
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / durationMs, 1);
+        const eased = easeOutCubic(progress);
+        const current = progress >= 1 ? target : Math.round(eased * target);
 
-        if (next !== lastDisplayed) {
-          lastDisplayed = next;
-          setDisplay(next);
+        if (current !== lastValue) {
+          lastValue = current;
+          if (displayRef.current) {
+            displayRef.current.textContent = String(current);
+          }
         }
 
         if (progress < 1) {
           rafId = requestAnimationFrame(tick);
         } else {
-          finish(target);
+          setCountingDone(true);
         }
       };
 
@@ -154,7 +129,7 @@ export function CompanyMissionStatValue({
       window.clearTimeout(delayId);
       cancelAnimationFrame(rafId);
     };
-  }, [target, animationDelay, durationMs, suffixAtTarget]);
+  }, [target, animationDelay, durationMs, shouldLazySuffix]);
 
   const digitSizer =
     digitSlots != null ? String(target).padStart(digitSlots, "0") : null;
@@ -169,7 +144,7 @@ export function CompanyMissionStatValue({
 
   return (
     <p
-      ref={ref}
+      ref={containerRef}
       className={`${interMedium.className} inline-flex shrink-0 items-baseline whitespace-nowrap not-italic`}
       data-node-id={valueNodeId}
       aria-label={`${target}${suffix}`}
@@ -181,10 +156,11 @@ export function CompanyMissionStatValue({
           </span>
         ) : null}
         <span
+          ref={displayRef}
           className={`${valueTextClass} ${digitSizer != null ? "absolute top-0 left-0" : "inline-block"}`}
           style={gradientStyle}
         >
-          {display}
+          0
         </span>
       </span>
       {suffix ? (

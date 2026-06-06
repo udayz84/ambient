@@ -32,7 +32,7 @@ export function Careers() {
 
       <div
 
-        className="relative -mt-[78px] mx-auto w-full max-w-[1440px] min-w-[1440px] overflow-hidden bg-black"
+        className="relative -mt-[78px] mx-auto w-full max-w-[1440px] min-w-[1440px] overflow-x-visible overflow-y-[clip] bg-black"
 
         style={{ height: CAREERS_PAGE_HEIGHT_PX }}
 
