@@ -205,7 +205,7 @@ export function NavbarCta() {
   return (
     <a
       ref={buttonRef}
-      href="#"
+      href="/contact"
       className={`${interSemiBold.className} relative block h-[36px] w-[147px] shrink-0 overflow-hidden ${GREEN_CTA_SHADOW}`}
       data-node-id="2379:1589"
       data-name="Cta"
@@ -246,7 +246,7 @@ export function NavbarCta() {
         GET IN TOUCH
       </span>
       <span
-        className="pointer-events-none absolute top-1/2 left-[121px] z-10 size-[6px] -translate-y-1/2"
+        className="pointer-events-none absolute top-1/2 left-[126px] z-10 size-[6px] -translate-y-1/2"
         data-node-id="2379:1591"
       >
         <Image
