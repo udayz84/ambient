@@ -1,5 +1,5 @@
 import { CornerDecor } from "../contact/contact-shared";
-import { interMedium } from "../hero/fonts";
+import { gilroyMedium } from "../hero/fonts";
 import { CareersGreenCta, CareersWhiteCta } from "./careers-shared";
 
 export function CareersBottomCta() {
@@ -11,7 +11,7 @@ export function CareersBottomCta() {
     >
       <div className="relative h-auto w-full max-w-[708px] shrink-0">
         <h2
-          className={`${interMedium.className} w-full bg-clip-text text-center text-[32px] leading-[40px] font-medium tracking-[-0.64px] text-transparent not-italic [word-break:break-word] md:text-[42px] md:leading-[52px] md:tracking-[-0.84px] lg:text-[49px] lg:leading-[60px] lg:tracking-[-0.98px]`}
+          className={`${gilroyMedium.className} w-full bg-clip-text text-center text-[32px] leading-[40px] font-medium tracking-[-0.64px] text-transparent not-italic [word-break:break-word] md:text-[42px] md:leading-[52px] md:tracking-[-0.84px] lg:text-[49px] lg:leading-[60px] lg:tracking-[-0.98px]`}
           style={{
             backgroundImage:
               "linear-gradient(110.887deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",

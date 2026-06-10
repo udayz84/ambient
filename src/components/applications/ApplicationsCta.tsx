@@ -1,4 +1,4 @@
-import { interSemiBold } from "../hero/fonts";
+import { gilroySemiBold } from "../hero/fonts";
 
 const cornerLeft = "/hero/corner-tag-1.svg";
 const cornerRight = "/hero/corner-tag-2.svg";
@@ -7,7 +7,7 @@ export function ApplicationsCta() {
   return (
     <a
       href="#"
-      className={`${interSemiBold.className} absolute top-[819.2216796875px] left-1/2 h-[48px] w-[205px] -translate-x-1/2 shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+      className={`${gilroySemiBold.className} absolute top-[819.2216796875px] left-1/2 h-[48px] w-[205px] -translate-x-1/2 shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
       data-node-id="2379:952"
       data-name="Cta"
     >

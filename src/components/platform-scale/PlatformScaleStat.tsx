@@ -1,4 +1,4 @@
-import { interMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interRegular } from "../hero/fonts";
 
 const cornerTr = "/platform-scale/stat-corner-tr.svg";
 const cornerTl = "/platform-scale/stat-corner-tl.svg";
@@ -15,7 +15,7 @@ export function PlatformScaleStat() {
         data-name="Stat"
       >
         <p
-          className={`${interMedium.className} relative w-full min-w-full shrink-0 text-center text-[32px] leading-[36px] font-medium tracking-[-0.32px] whitespace-nowrap text-white not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} relative w-full min-w-full shrink-0 text-center text-[32px] leading-[36px] font-medium tracking-[-0.32px] whitespace-nowrap text-white not-italic [word-break:break-word]`}
           data-node-id="2379:643"
         >
           GPX 10

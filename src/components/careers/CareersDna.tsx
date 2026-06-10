@@ -137,6 +137,7 @@ function CareersDnaChipImage() {
   return (
     <div
       ref={ref}
+      style={{ animationDelay: '1s' }}
       className={`relative h-[300px] w-full max-w-[386px] shrink-0 md:h-[400px] ${
         isVisible ? CHIP_FADE_IN_CLASS : "translate-y-[25px] opacity-0"
       }`}

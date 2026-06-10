@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { interMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interRegular } from "../hero/fonts";
 
 type MeasuredProofCardProps = {
   metric: string;
@@ -88,7 +88,7 @@ export function MeasuredProofCard({
         style={{ width: statWidth }}
       >
         <p
-          className={`${interMedium.className} shrink-0 text-[68px] leading-[72px] font-medium whitespace-nowrap text-white [word-break:break-word] not-italic`}
+          className={`${gilroyMedium.className} shrink-0 text-[68px] leading-[72px] font-medium whitespace-nowrap text-white [word-break:break-word] not-italic`}
         >
           {metric}
         </p>

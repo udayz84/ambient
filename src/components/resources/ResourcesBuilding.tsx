@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { interMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interRegular } from "../hero/fonts";
 import { WhiteCtaButton } from "../contact/contact-shared";
 
 const BUILDING_TITLE_GRADIENT =
@@ -47,7 +47,7 @@ export function ResourcesBuilding() {
           data-name="Frame 1618875832"
         >
           <p
-            className={`${interMedium.className} absolute top-[28.46px] left-[269px] -translate-x-1/2 bg-clip-text text-center text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} absolute top-[28.46px] left-[269px] -translate-x-1/2 bg-clip-text text-center text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic [word-break:break-word]`}
             style={{
               backgroundImage: BUILDING_TITLE_GRADIENT,
               WebkitBackgroundClip: "text",

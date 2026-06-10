@@ -1,5 +1,5 @@
 import { CornerDecor } from "./company-corners";
-import { interMedium } from "../hero/fonts";
+import { gilroyMedium } from "../hero/fonts";
 import { CareersGreenCta, CareersWhiteCta } from "../careers/careers-shared";
 
 export function CompanyBottomCta() {
@@ -10,7 +10,7 @@ export function CompanyBottomCta() {
     >
       <div className="relative h-[126px] w-[708px] shrink-0">
         <h2
-          className={`${interMedium.className} absolute top-[7.47px] left-1/2 w-[708px] -translate-x-1/2 bg-clip-text text-center text-[49px] leading-[60px] font-medium tracking-[-0.98px] text-transparent not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} absolute top-[7.47px] left-1/2 w-[708px] -translate-x-1/2 bg-clip-text text-center text-[49px] leading-[60px] font-medium tracking-[-0.98px] text-transparent not-italic [word-break:break-word]`}
           style={{
             backgroundImage:
               "linear-gradient(110.887deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",

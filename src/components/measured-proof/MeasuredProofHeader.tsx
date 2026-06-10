@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { TagBadge } from "../hero/TagBadge";
-import { interMedium } from "../hero/fonts";
+import { gilroyMedium } from "../hero/fonts";
 
 export function MeasuredProofHeader() {
   return (
@@ -21,7 +21,7 @@ export function MeasuredProofHeader() {
         data-name="Group 78"
       >
         <h2
-          className={`${interMedium.className} relative col-start-1 row-start-1 mt-[7px] ml-[39.5px] bg-clip-text text-center text-[46px] leading-[49px] font-medium whitespace-nowrap text-[transparent] [word-break:break-word] not-italic`}
+          className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[7px] ml-[39.5px] bg-clip-text text-center text-[46px] leading-[49px] font-medium whitespace-nowrap text-[transparent] [word-break:break-word] not-italic`}
           style={{
             backgroundImage:
               "linear-gradient(124.568deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",

@@ -1,14 +1,8 @@
+import { gilroyMedium } from "../hero/fonts";
 import Image from "next/image";
 import Link from "next/link";
-import { Inter } from "next/font/google";
 import { NAV_ITEMS } from "./nav-items";
 import { NavbarCta } from "./NavbarCta";
-
-const interMedium = Inter({
-  subsets: ["latin"],
-  weight: "500",
-  display: "swap",
-});
 
 function NavChevron() {
   return (
@@ -26,7 +20,7 @@ function NavChevron() {
 export function Navbar() {
   return (
     <header
-      className={`${interMedium.className} relative z-50 h-[78px] w-full overflow-hidden drop-shadow-[0px_6px_12px_rgba(83,216,36,0.12)]`}
+      className={`${gilroyMedium.className} relative z-50 h-[78px] w-full overflow-hidden drop-shadow-[0px_6px_12px_rgba(83,216,36,0.12)]`}
       data-node-id="2379:1569"
     >
       <div

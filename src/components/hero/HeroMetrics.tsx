@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { interSemiBold } from "./fonts";
+import { gilroySemiBold } from "./fonts";
 import { HeroStat } from "./HeroStat";
 
 const statValueGradient = (deg: number) =>
@@ -24,7 +24,7 @@ export function HeroMetrics() {
         descriptionWidth="195.145px"
         value={
           <p
-            className={`${interSemiBold.className} min-w-full w-[min-content] shrink-0 bg-clip-text text-[40px] leading-[1.2] text-transparent`}
+            className={`${gilroySemiBold.className} min-w-full w-[min-content] shrink-0 bg-clip-text text-[40px] leading-[1.2] text-transparent`}
             style={{
               backgroundImage: statValueGradient(152.329),
               WebkitBackgroundClip: "text",
@@ -62,7 +62,7 @@ export function HeroMetrics() {
         pl={5}
         value={
           <p
-            className={`${interSemiBold.className} min-w-full w-[min-content] shrink-0 leading-[0] text-transparent`}
+            className={`${gilroySemiBold.className} min-w-full w-[min-content] shrink-0 leading-[0] text-transparent`}
             style={{
               backgroundImage: statValueGradient(154.251),
               WebkitBackgroundClip: "text",

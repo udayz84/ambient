@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { interMedium } from "../hero/fonts";
+import { gilroyMedium } from "../hero/fonts";
 
 const STAT_VALUE_GRADIENT =
   "linear-gradient(98.8336deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -134,7 +134,7 @@ export function CompanyMissionStatValue({
   const digitSizer =
     digitSlots != null ? String(target).padStart(digitSlots, "0") : null;
 
-  const valueTextClass = `${interMedium.className} bg-clip-text text-[80px] leading-[72px] font-medium text-transparent not-italic tabular-nums`;
+  const valueTextClass = `${gilroyMedium.className} bg-clip-text text-[80px] leading-[72px] font-medium text-transparent not-italic tabular-nums`;
 
   const gradientStyle = {
     backgroundImage: STAT_VALUE_GRADIENT,
@@ -145,7 +145,7 @@ export function CompanyMissionStatValue({
   return (
     <p
       ref={containerRef}
-      className={`${interMedium.className} inline-flex shrink-0 items-baseline whitespace-nowrap not-italic`}
+      className={`${gilroyMedium.className} inline-flex shrink-0 items-baseline whitespace-nowrap not-italic`}
       data-node-id={valueNodeId}
       aria-label={`${target}${suffix}`}
     >

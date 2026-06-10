@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
-import { interSemiBold } from "../hero/fonts";
+import { gilroySemiBold } from "../hero/fonts";
 import {
   DEVELOPMENT_PARTNER_ROW,
   SILICON_PARTNER_ROW,
@@ -19,16 +19,16 @@ const SECTION_GAP_PX = 20;
 const SLIDE_MS = 12000;
 
 const PAN_TO_DEV_PX = -(CONTENT_WIDTH_PX + SECTION_GAP_PX);
-const PAN_EXIT_PX = -(CONTENT_WIDTH_PX * 2 + SECTION_GAP_PX * 2);
+const PAN_TO_SILICON_AGAIN_PX = -(CONTENT_WIDTH_PX * 2 + SECTION_GAP_PX * 2);
+const PAN_TO_DEV_AGAIN_PX = -(CONTENT_WIDTH_PX * 3 + SECTION_GAP_PX * 3);
 
-const SLIDE_TRANSITION = `transform ${SLIDE_MS}ms linear`;
 const TRACK_TRANSITION = `transform ${SLIDE_MS}ms linear`;
 
 type SequencePhase =
   | "idle"
-  | "silicon-slide"
   | "track-pan-dev"
-  | "track-exit"
+  | "track-pan-silicon-again"
+  | "track-pan-dev-again"
   | "reset";
 
 function PartnerCategoryTitle({
@@ -42,7 +42,7 @@ function PartnerCategoryTitle({
 }) {
   return (
     <p
-      className={`${interSemiBold.className} relative shrink-0 bg-clip-text text-[56px] leading-[60px] font-semibold tracking-[-1.12px] whitespace-nowrap text-[transparent] opacity-90 not-italic [word-break:break-word]`}
+      className={`${gilroySemiBold.className} relative shrink-0 bg-clip-text text-[56px] leading-[60px] font-semibold tracking-[-1.12px] whitespace-nowrap text-[transparent] opacity-90 not-italic [word-break:break-word]`}
       style={{ backgroundImage: gradient }}
       data-node-id={nodeId}
     >
@@ -56,18 +56,12 @@ function PartnerSection({
   titleNodeId,
   gradient,
   cardsNodeId,
-  slideIn,
-  animateSlide,
-  slideTransition,
   children,
 }: {
   title: string;
   titleNodeId: string;
   gradient: string;
   cardsNodeId: string;
-  slideIn: boolean;
-  animateSlide: boolean;
-  slideTransition: string;
   children: ReactNode;
 }) {
   return (
@@ -79,20 +73,12 @@ function PartnerSection({
         className="relative flex h-full w-full flex-col items-start"
         data-node-id={cardsNodeId}
       >
-        <div
-          className="flex w-full flex-col items-start will-change-transform"
-          style={{
-            transform: slideIn ? "translateX(0)" : "translateX(100%)",
-            transition: animateSlide ? slideTransition : "none",
-          }}
-        >
-          <PartnerCategoryTitle nodeId={titleNodeId} gradient={gradient}>
-            {title}
-          </PartnerCategoryTitle>
+        <PartnerCategoryTitle nodeId={titleNodeId} gradient={gradient}>
+          {title}
+        </PartnerCategoryTitle>
 
-          <div className="relative h-[225px] w-full shrink-0 overflow-hidden">
-            {children}
-          </div>
+        <div className="relative h-[225px] w-full shrink-0 overflow-hidden">
+          {children}
         </div>
       </div>
     </div>
@@ -105,27 +91,25 @@ export function EcosystemPartners() {
   const loopActiveRef = useRef(false);
   const [phase, setPhase] = useState<SequencePhase>("idle");
   const [trackOffset, setTrackOffset] = useState(0);
-  const [siliconSlideIn, setSiliconSlideIn] = useState(false);
   const [transitionsEnabled, setTransitionsEnabled] = useState(true);
 
   const beginLoopCycle = useCallback(() => {
     loopActiveRef.current = true;
-    setTransitionsEnabled(true);
+    setTransitionsEnabled(false);
     setTrackOffset(0);
-    setSiliconSlideIn(false);
-    setPhase("silicon-slide");
+    setPhase("track-pan-dev");
 
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        setSiliconSlideIn(true);
+        setTransitionsEnabled(true);
+        setTrackOffset(PAN_TO_DEV_PX);
       });
     });
   }, []);
 
   const resetAndContinueLoop = useCallback(() => {
     setTransitionsEnabled(false);
-    setTrackOffset(0);
-    setSiliconSlideIn(false);
+    setTrackOffset(PAN_TO_DEV_AGAIN_PX);
     setPhase("reset");
 
     requestAnimationFrame(() => {
@@ -165,25 +149,27 @@ export function EcosystemPartners() {
   }, [beginLoopCycle]);
 
   useEffect(() => {
-    if (phase === "silicon-slide") {
-      const timer = window.setTimeout(() => setPhase("track-pan-dev"), SLIDE_MS);
+    if (phase === "track-pan-dev") {
+      const timer = window.setTimeout(() => setPhase("track-pan-silicon-again"), SLIDE_MS);
       return () => window.clearTimeout(timer);
     }
 
-    if (phase === "track-pan-dev") {
+    if (phase === "track-pan-silicon-again") {
+      setTransitionsEnabled(true);
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          setTrackOffset(PAN_TO_DEV_PX);
+          setTrackOffset(PAN_TO_SILICON_AGAIN_PX);
         });
       });
-      const timer = window.setTimeout(() => setPhase("track-exit"), SLIDE_MS);
+      const timer = window.setTimeout(() => setPhase("track-pan-dev-again"), SLIDE_MS);
       return () => window.clearTimeout(timer);
     }
 
-    if (phase === "track-exit") {
+    if (phase === "track-pan-dev-again") {
+      setTransitionsEnabled(true);
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          setTrackOffset(PAN_EXIT_PX);
+          setTrackOffset(PAN_TO_DEV_AGAIN_PX);
         });
       });
       const timer = window.setTimeout(() => resetAndContinueLoop(), SLIDE_MS);
@@ -191,19 +177,18 @@ export function EcosystemPartners() {
     }
   }, [phase, resetAndContinueLoop]);
 
-  const slideTransition = transitionsEnabled ? SLIDE_TRANSITION : "none";
   const trackTransition = transitionsEnabled ? TRACK_TRANSITION : "none";
 
   return (
     <div
       ref={ref}
-      className="relative mx-auto h-[285px] w-full max-w-[1204px] overflow-hidden"
+      className="relative mx-auto h-[285px] w-full max-w-[1440px] overflow-hidden"
       data-node-id="2379:1047"
     >
       <div
         className="flex h-full shrink-0 will-change-transform"
         style={{
-          width: CONTENT_WIDTH_PX * 2 + SECTION_GAP_PX,
+          width: CONTENT_WIDTH_PX * 4 + SECTION_GAP_PX * 3,
           gap: SECTION_GAP_PX,
           transform: `translateX(${trackOffset}px)`,
           transition: trackTransition,
@@ -215,9 +200,6 @@ export function EcosystemPartners() {
           titleNodeId="2379:1048"
           gradient={TITLE_GRADIENT_SILICON}
           cardsNodeId="2379:1051-silicon"
-          slideIn={siliconSlideIn}
-          animateSlide
-          slideTransition={slideTransition}
         >
           <EcosystemPartnerRow config={SILICON_PARTNER_ROW} />
         </PartnerSection>
@@ -227,9 +209,27 @@ export function EcosystemPartners() {
           titleNodeId="2379:1049"
           gradient={TITLE_GRADIENT_DEVELOPMENT}
           cardsNodeId="2379:1051-dev"
-          slideIn
-          animateSlide={false}
-          slideTransition={slideTransition}
+        >
+          <EcosystemPartnerRow
+            config={DEVELOPMENT_PARTNER_ROW}
+            logoStatNodeIds={DEV_LOGO_STAT_NODES}
+          />
+        </PartnerSection>
+
+        <PartnerSection
+          title="SILICON PARTNERS"
+          titleNodeId="2379:1048"
+          gradient={TITLE_GRADIENT_SILICON}
+          cardsNodeId="2379:1051-silicon-2"
+        >
+          <EcosystemPartnerRow config={SILICON_PARTNER_ROW} />
+        </PartnerSection>
+
+        <PartnerSection
+          title="DEVELOPMENT PARTNERS"
+          titleNodeId="2379:1049"
+          gradient={TITLE_GRADIENT_DEVELOPMENT}
+          cardsNodeId="2379:1051-dev-2"
         >
           <EcosystemPartnerRow
             config={DEVELOPMENT_PARTNER_ROW}

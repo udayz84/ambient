@@ -1,4 +1,4 @@
-import { interMedium, interRegular } from "./fonts";
+import { gilroyMedium, interRegular } from "./fonts";
 import { HeroMetrics } from "./HeroMetrics";
 import { HeroScrollIndicator } from "./HeroScrollIndicator";
 import { HeroVisual } from "./HeroVisual";
@@ -6,7 +6,7 @@ import { HeroVisual } from "./HeroVisual";
 export function Hero() {
   return (
     <section
-      className="relative -mt-[78px] mx-auto h-[798px] w-full max-w-[1442px] min-w-[1442px] overflow-hidden bg-black"
+      className="relative -mt-[78px] mx-auto h-[798px] w-full max-w-[1442px] overflow-hidden bg-black"
       data-node-id="2379:734"
       data-name="Hero Section"
       aria-label="Hero"
@@ -72,7 +72,8 @@ export function Hero() {
       </div>
 
       <div
-        className={`${interMedium.className} absolute top-[130px] left-[936px] flex w-[442px] flex-col items-start gap-[15px] [word-break:break-word] not-italic animate-hero-text-fade-in opacity-0`}
+        className={`${gilroyMedium.className} absolute top-[130px] left-[936px] flex w-[442px] flex-col items-start gap-[15px] [word-break:break-word] not-italic animate-hero-text-fade-in opacity-0`}
+        style={{ animationDelay: '1s', animationDuration: '1000ms' }}
         data-node-id="2379:780"
       >
         <h1

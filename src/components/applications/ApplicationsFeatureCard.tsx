@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { interMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interRegular } from "../hero/fonts";
 
 type ApplicationsFeatureCardProps = {
   wrapperNodeId: string;
@@ -52,7 +52,7 @@ export function ApplicationsFeatureCard({
         </div>
 
         <p
-          className={`${interMedium.className} relative z-[1] w-full min-w-full shrink-0 text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} relative z-[1] w-full min-w-full shrink-0 text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
         >
           {title}
         </p>

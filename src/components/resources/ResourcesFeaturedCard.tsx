@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { dmMono, interMedium, interRegular } from "../hero/fonts";
+import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { GreenCtaButton } from "../contact/contact-shared";
 import type { ResourceFeaturedCard } from "./resources-data";
 
@@ -46,7 +46,7 @@ export function ResourcesFeaturedCard({
       <div className="flex w-full flex-col gap-[24px] p-[16px]">
         <div className="flex flex-col gap-[12px]">
           <h3
-            className={`${interMedium.className} w-[290px] text-[22px] leading-[28px] font-medium text-white opacity-90 not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} w-[290px] text-[22px] leading-[28px] font-medium text-white opacity-90 not-italic [word-break:break-word]`}
           >
             Re-architecting the Physics of AI Compute.
           </h3>

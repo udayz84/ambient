@@ -1,5 +1,5 @@
 import { CornerDecor } from "../contact/contact-shared";
-import { interMedium } from "../hero/fonts";
+import { gilroyMedium } from "../hero/fonts";
 
 const NEWS_CTA_TITLE_GRADIENT =
   "linear-gradient(115.045deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -24,13 +24,13 @@ export function ResourcesNewsCta({ top }: { top: number }) {
           data-node-id="2379:1763"
         >
           <span
-            className={`${interMedium.className} block bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic`}
+            className={`${gilroyMedium.className} block bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic`}
             style={titleLineStyle}
           >
             Looking for latest developments,
           </span>
           <span
-            className={`${interMedium.className} block bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic`}
+            className={`${gilroyMedium.className} block bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic`}
             style={titleLineStyle}
           >
             events, and announcements?
@@ -42,7 +42,7 @@ export function ResourcesNewsCta({ top }: { top: number }) {
       <div className="mt-[49.47px]" data-node-id="2379:1769">
         <a
           href="#"
-          className={`${interMedium.className} relative flex h-[48px] w-[158px] items-center justify-center shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+          className={`${gilroyMedium.className} relative flex h-[48px] w-[158px] items-center justify-center shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
         >
           <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
           <span

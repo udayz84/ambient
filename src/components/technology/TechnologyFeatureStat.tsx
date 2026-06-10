@@ -1,4 +1,4 @@
-import { interMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interRegular } from "../hero/fonts";
 
 type TechnologyFeatureStatProps = {
   iconSrc: string;
@@ -37,7 +37,7 @@ export function TechnologyFeatureStat({
         />
       </div>
       <div
-        className={`${interMedium.className} w-[279px] shrink-0 text-[32px] leading-[38px] font-medium text-white [word-break:break-word] not-italic`}
+        className={`${gilroyMedium.className} w-[279px] shrink-0 text-[32px] leading-[38px] font-medium text-white [word-break:break-word] not-italic`}
       >
         {title}
       </div>

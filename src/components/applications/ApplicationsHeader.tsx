@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { interMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interRegular } from "../hero/fonts";
 
 const cornerLeft = "/hero/corner-tag-1.svg";
 const cornerRight = "/hero/corner-tag-2.svg";
@@ -16,7 +16,7 @@ export function ApplicationsHeader() {
         data-name="Headline frame"
       >
         <h2
-          className={`${interMedium.className} relative col-start-1 row-start-1 mt-[16px] ml-[22.87109375px] bg-clip-text text-center text-[46px] leading-[49px] font-medium whitespace-nowrap text-[transparent] not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[16px] ml-[22.87109375px] bg-clip-text text-center text-[46px] leading-[49px] font-medium whitespace-nowrap text-[transparent] not-italic [word-break:break-word]`}
           style={{
             backgroundImage:
               "linear-gradient(126.324deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",

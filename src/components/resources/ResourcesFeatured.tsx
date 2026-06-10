@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { interMedium } from "../hero/fonts";
+import { gilroyMedium } from "../hero/fonts";
 import { FEATURED_RESOURCES } from "./resources-data";
 import { ResourcesFeaturedCard } from "./ResourcesFeaturedCard";
 
@@ -32,6 +32,7 @@ export function ResourcesFeatured() {
   return (
     <section
       ref={ref}
+      style={{ animationDelay: '1s' }}
       className={`absolute top-[716px] left-[4px] flex w-[1432px] flex-col gap-[20px] bg-[#010101] px-[56px] py-[80px] ${
         isVisible ? FADE_IN_CLASS : "translate-y-[25px] opacity-0"
       }`}
@@ -39,7 +40,7 @@ export function ResourcesFeatured() {
       data-node-id="2379:1960"
     >
       <h2
-        className={`${interMedium.className} shrink-0 text-[46px] leading-[49px] font-medium whitespace-nowrap text-white not-italic`}
+        className={`${gilroyMedium.className} shrink-0 text-[46px] leading-[49px] font-medium whitespace-nowrap text-white not-italic`}
         data-node-id="2379:1967"
       >
         Featured Resources

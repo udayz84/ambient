@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { interMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interRegular } from "../hero/fonts";
 import { CornerDecor, FramedBox, GradientTitle, LocationIcon } from "./contact-shared";
 
 const locations = [
@@ -212,7 +212,7 @@ function LocationBlock({
         </div>
         <div className="flex w-[295px] shrink-0 flex-col items-start gap-[10px] not-italic [word-break:break-word]">
           <p
-            className={`${interMedium.className} w-full text-[22px] leading-[28px] font-medium text-white`}
+            className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white`}
           >
             {title}
           </p>

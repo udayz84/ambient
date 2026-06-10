@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { interMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interRegular } from "../hero/fonts";
 import { dmMono } from "../hero/fonts";
 import {
   CAREERS_JOBS,
@@ -115,7 +115,7 @@ export function CareersOpenRoles() {
             data-node-id="2379:8932"
           >
             <p
-              className={`${interMedium.className} bg-clip-text text-center text-[32px] leading-[38px] font-medium text-transparent not-italic [word-break:break-word]] md:text-[46px] md:leading-[49px]`}
+              className={`${gilroyMedium.className} bg-clip-text text-center text-[32px] leading-[38px] font-medium text-transparent not-italic [word-break:break-word]] md:text-[46px] md:leading-[49px]`}
               style={{
                 backgroundImage: CTA_TITLE_GRADIENT,
                 WebkitBackgroundClip: "text",
@@ -210,7 +210,7 @@ function OpenRolesTitle() {
       data-node-id="2379:8903"
     >
       <p
-        className={`${interMedium.className} absolute top-0 left-[20px] bg-clip-text text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic [word-break:break-word]`}
+        className={`${gilroyMedium.className} absolute top-0 left-[20px] bg-clip-text text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic [word-break:break-word]`}
         style={{
           backgroundImage: OPEN_ROLES_GRADIENT,
           WebkitBackgroundClip: "text",
@@ -384,7 +384,7 @@ function JobRow({
     >
       <CategoryBadge label={category} />
       <p
-        className={`${interMedium.className} mt-[12px] max-w-[500px] text-[18px] leading-[28px] font-medium text-white not-italic [word-break:break-word] md:text-[22px]`}
+        className={`${gilroyMedium.className} mt-[12px] max-w-[500px] text-[18px] leading-[28px] font-medium text-white not-italic [word-break:break-word] md:text-[22px]`}
       >
         {title}
       </p>
@@ -455,7 +455,7 @@ function ApplyButton() {
   return (
     <a
       href="#"
-      className={`${interMedium.className} absolute top-[51px] right-[19px] flex h-[48px] items-center gap-[20px] overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] text-[14px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic transition-[box-shadow,background-color] duration-200 group-hover:bg-transparent group-hover:shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] md:text-[16px]`}
+      className={`${gilroyMedium.className} absolute top-[51px] right-[19px] flex h-[48px] items-center gap-[20px] overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] text-[14px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic transition-[box-shadow,background-color] duration-200 group-hover:bg-transparent group-hover:shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] md:text-[16px]`}
     >
       <span
         aria-hidden

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { GradientTitle } from "../contact/contact-shared";
-import { interMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interRegular } from "../hero/fonts";
 import { CompanyStandardCorners, CornerDecor } from "./company-corners";
 
 function EcosystemColumnIcon({
@@ -93,7 +93,7 @@ export function CompanyEcosystemContent() {
                 nodeId="2379:4652"
               />
               <p
-                className={`${interMedium.className} absolute top-[1.5px] left-[42px] h-[29px] w-[197px] text-[22px] leading-[28px] font-medium whitespace-nowrap text-white not-italic`}
+                className={`${gilroyMedium.className} absolute top-[1.5px] left-[42px] h-[29px] w-[197px] text-[22px] leading-[28px] font-medium whitespace-nowrap text-white not-italic`}
                 data-node-id="2379:4654"
               >
                 Global Footprint
@@ -121,7 +121,7 @@ export function CompanyEcosystemContent() {
                 nodeId="2379:4658"
               />
               <p
-                className={`${interMedium.className} absolute top-0 left-[42px] h-[29px] w-[326px] text-[22px] leading-[28px] font-medium whitespace-nowrap text-white not-italic`}
+                className={`${gilroyMedium.className} absolute top-0 left-[42px] h-[29px] w-[326px] text-[22px] leading-[28px] font-medium whitespace-nowrap text-white not-italic`}
                 data-node-id="2379:4662"
               >
                 Distribution &amp; Supply Chain

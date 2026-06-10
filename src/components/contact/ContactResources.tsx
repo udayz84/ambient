@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
-import { interMedium } from "../hero/fonts";
+import { gilroyMedium } from "../hero/fonts";
 import { CornerDecor, GreenCtaButton, WhiteCtaButton } from "./contact-shared";
 
 const HERO_FADE_MS = 700;
@@ -26,7 +26,7 @@ export function ContactResources() {
     >
       <CornerDecor />
       <p
-        className={`${interMedium.className} w-full shrink-0 text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+        className={`${gilroyMedium.className} w-full shrink-0 text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
         data-node-id="2379:8416"
       >
         Looking for immediate resources?

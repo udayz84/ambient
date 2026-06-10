@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useRef } from "react";
-import { interSemiBold } from "../hero/fonts";
+import { gilroySemiBold } from "../hero/fonts";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
@@ -206,7 +206,7 @@ export function NavbarCta() {
     <a
       ref={buttonRef}
       href="/contact"
-      className={`${interSemiBold.className} relative block h-[36px] w-[147px] shrink-0 overflow-hidden ${GREEN_CTA_SHADOW}`}
+      className={`${gilroySemiBold.className} relative block h-[36px] w-[147px] shrink-0 overflow-hidden ${GREEN_CTA_SHADOW}`}
       data-node-id="2379:1589"
       data-name="Cta"
       onPointerEnter={handlePointerEnter}

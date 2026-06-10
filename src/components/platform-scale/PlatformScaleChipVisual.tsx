@@ -1,4 +1,4 @@
-import { interMedium } from "../hero/fonts";
+import { gilroyMedium } from "../hero/fonts";
 
 const chipGlassCropClass =
   "absolute top-[-79.23%] left-[-39.91%] h-[258.46%] w-[179.82%] max-w-none";
@@ -49,7 +49,7 @@ function GpxLabel({
       data-node-id={nodeId}
     >
       <p
-        className={`${interMedium.className} text-center leading-[36px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
+        className={`${gilroyMedium.className} text-center leading-[36px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
         style={{
           fontSize: `${fontSize}px`,
           letterSpacing: tracking,

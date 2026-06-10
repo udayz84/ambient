@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { interMedium, interSemiBold } from "../hero/fonts";
+import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 
 const cornerLeft = "/hero/corner-tag-1.svg";
 const cornerRight = "/hero/corner-tag-2.svg";
@@ -88,7 +88,7 @@ export function GradientTitle({
 }) {
   return (
     <div
-      className={`${interMedium.className} relative shrink-0 bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] ${className}`}
+      className={`${gilroyMedium.className} relative shrink-0 bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] ${className}`}
       style={{
         backgroundImage: `linear-gradient(${gradientDeg}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
         WebkitBackgroundClip: "text",
@@ -127,7 +127,7 @@ export function GreenCtaButton({
   disabled?: boolean;
   loading?: boolean;
 }) {
-  const sharedClassName = `${interSemiBold.className} relative block h-[48px] shrink-0 shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] disabled:cursor-not-allowed disabled:opacity-70 ${className}`;
+  const sharedClassName = `${gilroySemiBold.className} relative block h-[48px] shrink-0 shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] disabled:cursor-not-allowed disabled:opacity-70 ${className}`;
   const sharedStyle = width ? { width } : undefined;
   const content = (
     <>
@@ -181,7 +181,7 @@ export function WhiteCtaButton({
   return (
     <a
       href={href}
-      className={`${interSemiBold.className} relative block h-[48px] shrink-0 shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15),0px_10.268px_6.699px_rgba(255,255,255,0.15),0px_3.714px_2.423px_rgba(255,255,255,0.1)] ${className}`}
+      className={`${gilroySemiBold.className} relative block h-[48px] shrink-0 shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15),0px_10.268px_6.699px_rgba(255,255,255,0.15),0px_3.714px_2.423px_rgba(255,255,255,0.1)] ${className}`}
     >
       <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
       <span

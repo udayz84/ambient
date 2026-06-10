@@ -1,4 +1,4 @@
-import { interSemiBold } from "../hero/fonts";
+import { gilroySemiBold } from "../hero/fonts";
 import { CompanyStandardCorners } from "./company-corners";
 
 const GREEN_CTA_SHADOW =
@@ -18,7 +18,7 @@ export function CompanyEngagementCta({
   return (
     <a
       href={href}
-      className={`${interSemiBold.className} relative block h-[48px] shrink-0 ${GREEN_CTA_SHADOW} ${className}`}
+      className={`${gilroySemiBold.className} relative block h-[48px] shrink-0 ${GREEN_CTA_SHADOW} ${className}`}
     >
       <span
         aria-hidden

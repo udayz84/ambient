@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { DeveloperPlatformCardConfig } from "./developer-platform-cards";
-import { interMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interRegular } from "../hero/fonts";
 
 export function DeveloperPlatformCard({
   nodeId,
@@ -62,7 +62,7 @@ export function DeveloperPlatformCard({
       ) : null}
 
       <p
-        className={`${interMedium.className} absolute translate-y-full font-medium text-[#0a3315] opacity-90 not-italic [word-break:break-word]`}
+        className={`${gilroyMedium.className} absolute translate-y-full font-medium text-[#0a3315] opacity-90 not-italic [word-break:break-word]`}
         style={{
           left: `${bodyLeft}px`,
           bottom: `${bodyBottomOffset}px`,

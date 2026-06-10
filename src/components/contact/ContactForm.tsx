@@ -3,7 +3,7 @@
 import { useState } from "react";
 import {
   interLight,
-  interMedium,
+  gilroyMedium,
   interRegular,
 } from "../hero/fonts";
 import {
@@ -131,14 +131,14 @@ export function ContactForm() {
       <ConnectorLine top={activeConnectorTop} nodeId="2379:8552" />
 
       <div
-        className="absolute top-[114px] left-[604px] h-[630px] w-[590px] overflow-clip border-[1.5px] border-solid border-[rgba(83,216,36,0.2)] bg-[rgba(46,119,20,0.2)] shadow-[0px_0px_20px_0px_rgba(83,216,36,0.25)]"
+        className="absolute top-[114px] left-[604px] h-[630px] w-[590px] overflow-clip border-[1.5px] border-solid border-[rgba(83,216,36,0.2)] bg-[rgba(46,119,20,0.2)]"
         data-node-id="2379:8553"
         data-name="Right Section"
       >
         <FormPanelCorners />
 
         <p
-          className={`${interMedium.className} absolute top-[31px] left-[16px] w-[558px] text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} absolute top-[31px] left-[16px] w-[558px] text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
           data-node-id="2379:8554"
         >
           Drop Us a Message
@@ -208,9 +208,9 @@ function TrackCard({
       type="button"
       onClick={onSelect}
       aria-pressed={selected}
-      className={`absolute left-0 flex w-[550px] cursor-pointer items-center gap-[36px] overflow-clip py-[24px] pr-[48px] pl-[36px] text-left transition-[border-color,background-color,box-shadow] duration-200 ${
+      className={`absolute left-0 flex w-[550px] cursor-pointer items-center gap-[36px] py-[24px] pr-[48px] pl-[36px] text-left transition-[border-color,background-color] duration-200 ${
         selected
-          ? "border-[1.5px] border-solid border-[rgba(83,216,36,0.2)] bg-[rgba(46,119,20,0.2)] shadow-[0px_0px_20px_0px_rgba(83,216,36,0.25)]"
+          ? "border-[1.5px] border-solid border-[rgba(83,216,36,0.2)] bg-[rgba(46,119,20,0.2)]"
           : "border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)]"
       }`}
       style={{ top, height }}
@@ -235,7 +235,7 @@ function TrackCard({
         data-name="NewsSection"
       >
         <p
-          className={`${interMedium.className} w-full text-[22px] leading-[28px] font-medium text-white`}
+          className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white`}
         >
           {title}
         </p>
@@ -342,11 +342,12 @@ function FormPanelCorners() {
 }
 
 function InsetCorners({ inset }: { inset: string }) {
+  const cornerOffset = inset === "1.5px" ? "0px" : "0px";
   return (
     <>
       <div
         className="pointer-events-none absolute flex size-[4px] items-center justify-center"
-        style={{ left: `-${inset}`, top: `-${inset}` }}
+        style={{ left: cornerOffset, top: cornerOffset }}
       >
         <div className="-scale-y-100 flex-none">
           <div className="relative size-[4px]">
@@ -359,7 +360,7 @@ function InsetCorners({ inset }: { inset: string }) {
       </div>
       <div
         className="pointer-events-none absolute flex size-[4px] items-center justify-center"
-        style={{ right: `-${inset}`, top: `-${inset}` }}
+        style={{ right: cornerOffset, top: cornerOffset }}
       >
         <div className="rotate-180 flex-none">
           <div className="relative size-[4px]">
@@ -372,7 +373,7 @@ function InsetCorners({ inset }: { inset: string }) {
       </div>
       <div
         className="pointer-events-none absolute size-[4px]"
-        style={{ left: `-${inset}`, bottom: `-${inset}` }}
+        style={{ left: cornerOffset, bottom: cornerOffset }}
       >
         <div className="absolute inset-[0_0_-12.5%_-12.5%]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -381,7 +382,7 @@ function InsetCorners({ inset }: { inset: string }) {
       </div>
       <div
         className="pointer-events-none absolute flex size-[4px] items-center justify-center"
-        style={{ right: `-${inset}`, bottom: `-${inset}` }}
+        style={{ right: cornerOffset, bottom: cornerOffset }}
       >
         <div className="-scale-y-100 rotate-180 flex-none">
           <div className="relative size-[4px]">

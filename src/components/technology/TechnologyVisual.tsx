@@ -95,6 +95,7 @@ export function TechnologyVisual() {
   return (
     <TechnologyVisualFadeIn
       className="pointer-events-none absolute top-[60px] left-0 z-[1] h-[642px] w-full"
+      style={{ animationDelay: '1s' }}
       data-node-id="2388:318"
       data-name="Image"
     >

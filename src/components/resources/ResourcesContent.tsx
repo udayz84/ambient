@@ -77,9 +77,7 @@ export function ResourcesContent({
 
         <div className="flex flex-1 items-center justify-center gap-0">
           {RESOURCE_CATEGORIES.map((category, index) => {
-            const isActive =
-              ("active" in category && category.active) ||
-              activeCategory === category.id;
+            const isActive = activeCategory === category.id;
 
             if (isActive) {
               return (

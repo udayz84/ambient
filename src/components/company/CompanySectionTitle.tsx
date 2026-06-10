@@ -1,4 +1,4 @@
-import { interMedium } from "../hero/fonts";
+import { gilroyMedium } from "../hero/fonts";
 import { CornerDecor } from "./company-corners";
 
 const TITLE_GRADIENT =
@@ -32,7 +32,7 @@ export function CompanySectionTitle({
       data-name="Title"
     >
       <h3
-        className={`${interMedium.className} relative m-0 bg-clip-text p-0 font-medium text-transparent not-italic`}
+        className={`${gilroyMedium.className} relative m-0 bg-clip-text p-0 font-medium text-transparent not-italic`}
         style={{
           fontSize,
           lineHeight: `${lineHeight}px`,

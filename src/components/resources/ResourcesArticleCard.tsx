@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { TagBadge } from "../hero/TagBadge";
-import { interMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interRegular } from "../hero/fonts";
 import {
   ARTICLE_IMAGE_BASE,
   type ResourceArticle,
@@ -61,7 +61,7 @@ export function ResourcesArticleCard({
 
         <div className="flex flex-col gap-[10px]">
           <h3
-            className={`${interMedium.className} w-[353.684px] font-medium text-white not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} w-[353.684px] font-medium text-white not-italic [word-break:break-word]`}
             style={{
               fontSize: titleFontSize,
               lineHeight: "28px",

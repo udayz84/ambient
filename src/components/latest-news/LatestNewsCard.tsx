@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { TagBadge } from "../hero/TagBadge";
-import { interMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interRegular } from "../hero/fonts";
 import type { LatestNewsArticle } from "./latest-news-data";
 
 const cornerTopLeft = "/hero/corner-tag-1.svg";
@@ -63,7 +63,7 @@ export function LatestNewsCard({
         />
 
         <h3
-          className={`${interMedium.className} w-[353.684px] shrink-0 text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} w-[353.684px] shrink-0 text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
         >
           {title}
         </h3>

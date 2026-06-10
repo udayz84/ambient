@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { interMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interRegular } from "../hero/fonts";
 
 const ctaTextClass = `${interRegular.className} text-[14px] leading-[normal] font-normal`;
 
@@ -16,7 +16,7 @@ export function EcosystemHeader() {
     >
       <div className="relative grid w-full grid-cols-1 grid-rows-[max-content] place-items-start leading-[0]">
         <h2
-          className={`${interMedium.className} relative col-start-1 row-start-1 mt-[14px] ml-[28.23px] bg-clip-text text-center text-[46px] leading-[49px] font-medium whitespace-nowrap text-[transparent] not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[14px] ml-[28.23px] bg-clip-text text-center text-[46px] leading-[49px] font-medium whitespace-nowrap text-[transparent] not-italic [word-break:break-word]`}
           style={{
             backgroundImage:
               "linear-gradient(134.597deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",

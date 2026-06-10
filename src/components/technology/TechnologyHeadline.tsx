@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { interMedium } from "../hero/fonts";
+import { gilroyMedium } from "../hero/fonts";
 
 export function TechnologyHeadline() {
   return (
@@ -13,7 +13,7 @@ export function TechnologyHeadline() {
       >
         <div className="relative col-start-1 row-start-1 mt-[14.5px] ml-[20.5px]">
           <h1
-            className={`${interMedium.className} bg-clip-text text-center text-[42px] leading-[0] font-medium text-[transparent] whitespace-nowrap [word-break:break-word] not-italic`}
+            className={`${gilroyMedium.className} bg-clip-text text-center text-[42px] leading-[0] font-medium text-[transparent] whitespace-nowrap [word-break:break-word] not-italic`}
             style={{
               backgroundImage:
                 "linear-gradient(106.923deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { interMedium, interRegular, interSemiBold } from "../hero/fonts";
+import { gilroyMedium, interRegular, gilroySemiBold } from "../hero/fonts";
 
 const cornerLeft = "/hero/corner-tag-1.svg";
 const cornerRight = "/hero/corner-tag-2.svg";
@@ -13,7 +13,7 @@ export function NewsletterSignup() {
     >
       <div className="relative inline-grid w-full grid-cols-[max-content] grid-rows-[max-content] place-items-start leading-[0]">
         <h2
-          className={`${interMedium.className} relative z-[1] col-start-1 row-start-1 mt-[14px] w-full bg-clip-text text-center text-[46px] leading-[49px] font-medium text-[transparent] not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} relative z-[1] col-start-1 row-start-1 mt-[14px] w-full bg-clip-text text-center text-[46px] leading-[49px] font-medium text-[transparent] not-italic [word-break:break-word]`}
           style={{
             backgroundImage:
               "linear-gradient(104.93deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -79,7 +79,7 @@ export function NewsletterSignup() {
         </div>
         <button
           type="submit"
-          className={`${interSemiBold.className} relative flex h-[48px] w-[158px] shrink-0 items-center justify-center text-[14px] leading-[normal] font-semibold text-[#121212] uppercase shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+          className={`${gilroySemiBold.className} relative flex h-[48px] w-[158px] shrink-0 items-center justify-center text-[14px] leading-[normal] font-semibold text-[#121212] uppercase shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
           data-node-id="2379:1404"
         >
           <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />

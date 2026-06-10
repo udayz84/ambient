@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { interMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interRegular } from "../hero/fonts";
 import type { LeadershipMember } from "./company-leadership-data";
 
 /** Figma User Image — leadership instance (2379:2288) */
@@ -69,7 +69,7 @@ function LeadershipNameRow({
     >
       <div className="flex w-full items-start justify-between">
         <p
-          className={`${interMedium.className} min-w-0 font-medium not-italic [word-break:break-word] ${spec.nameSize} ${spec.nameColor}`}
+          className={`${gilroyMedium.className} min-w-0 font-medium not-italic [word-break:break-word] ${spec.nameSize} ${spec.nameColor}`}
           data-node-id={nameNodeId}
         >
           {name}
@@ -258,7 +258,7 @@ function PersonFooter({
         className={`min-w-0 flex-1 ${spec.showRole && role ? "flex flex-col gap-[2px]" : ""}`}
       >
         <p
-          className={`${interMedium.className} font-medium text-white not-italic [word-break:break-word] ${spec.nameSize}`}
+          className={`${gilroyMedium.className} font-medium text-white not-italic [word-break:break-word] ${spec.nameSize}`}
           data-node-id={nameNodeId}
         >
           {name}

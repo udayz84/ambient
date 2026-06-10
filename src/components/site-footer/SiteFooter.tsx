@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { interMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, gilroyBold, interRegular } from "../hero/fonts";
 import { FOOTER_NAV_SECTIONS } from "./footer-data";
 import { NewsletterSignup } from "./NewsletterSignup";
 
@@ -52,7 +52,7 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
             className="flex w-[158px] shrink-0 flex-col items-center gap-[24px]"
           >
             <p
-              className={`${interMedium.className} w-full text-[10px] leading-[1.4] font-medium tracking-[0.4px] whitespace-nowrap text-white uppercase opacity-60 not-italic`}
+              className={`${gilroyMedium.className} w-full text-[10px] leading-[1.4] font-medium tracking-[0.4px] whitespace-nowrap text-white uppercase opacity-60 not-italic`}
             >
               {section.title}
             </p>
@@ -78,14 +78,14 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
       </nav>
 
       <p
-        className={`${interMedium.className} absolute top-[903px] left-[calc(12.5%-60px)] z-[1] text-[10px] leading-[1.4] font-medium tracking-[0.4px] whitespace-nowrap text-white uppercase opacity-60 not-italic`}
+        className={`${gilroyMedium.className} absolute top-[903px] left-[calc(12.5%-60px)] z-[1] text-[10px] leading-[1.4] font-medium tracking-[0.4px] whitespace-nowrap text-white uppercase opacity-60 not-italic`}
         data-node-id="2379:815"
       >
         CONNECT WITH US
       </p>
 
       <p
-        className={`${interMedium.className} absolute top-[903px] left-[calc(20.83%+2px)] z-[1] text-[10px] leading-[1.4] font-medium tracking-[0.4px] whitespace-nowrap text-white uppercase opacity-60 not-italic`}
+        className={`${gilroyMedium.className} absolute top-[903px] left-[calc(20.83%+2px)] z-[1] text-[10px] leading-[1.4] font-medium tracking-[0.4px] whitespace-nowrap text-white uppercase opacity-60 not-italic`}
         data-node-id="2379:816"
       >
         Legal pages
@@ -192,7 +192,7 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
 
       <p
         aria-hidden
-        className={`${interMedium.className} pointer-events-none absolute top-[1000px] left-[calc(50%-568px)] bg-clip-text text-[300px] leading-none font-bold tracking-[-6px] whitespace-nowrap text-[transparent] opacity-30 not-italic`}
+        className={`${gilroyBold.className} pointer-events-none absolute top-[1000px] left-[calc(50%-568px)] bg-clip-text text-[300px] leading-none font-bold tracking-[-6px] whitespace-nowrap text-[transparent] opacity-30 not-italic`}
         style={{
           backgroundImage:
             "linear-gradient(to right, rgba(46,76,38,0.4), #ddf5d3 50%, rgba(46,76,38,0.4))",

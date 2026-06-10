@@ -1,4 +1,4 @@
-import { interMedium, interRegular } from "./fonts";
+import { gilroyMedium, interRegular } from "./fonts";
 import { TagBadge } from "./TagBadge";
 
 type HeroStatProps = {
@@ -53,7 +53,7 @@ export function HeroStat({
           data-name="Content"
         >
           <p
-            className={`${interMedium.className} min-w-full w-[min-content] shrink-0 text-[22px] leading-[28px] font-medium text-white`}
+            className={`${gilroyMedium.className} min-w-full w-[min-content] shrink-0 text-[22px] leading-[28px] font-medium text-white`}
           >
             {title}
           </p>

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { TagBadge } from "../hero/TagBadge";
-import { interMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interRegular } from "../hero/fonts";
 import { CompanyArticleCorners } from "./CompanyArticleCorners";
 import type { CompanyCompactArticle } from "./company-articles-data";
 
@@ -62,7 +62,7 @@ export function CompanyArticleCardCompact({
 
         <div className="mt-[20px] flex flex-col">
           <h3
-            className={`${interMedium.className} w-[353.684px] text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} w-[353.684px] text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
           >
             {title}
           </h3>

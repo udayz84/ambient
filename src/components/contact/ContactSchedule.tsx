@@ -1,4 +1,4 @@
-import { dmMono, interMedium, interRegular, interSemiBold } from "../hero/fonts";
+import { dmMono, gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { CornerDecor, GradientTitle } from "./contact-shared";
 
 const cornerMenuLeft = "/hero/corner-tag-1.svg";
@@ -124,7 +124,7 @@ function ScheduleCard({
         <TagBadge label={tag} nodeId={tagNodeId} />
         <div className="mt-[20px] flex flex-col gap-[10px] items-start not-italic [word-break:break-word]">
           <p
-            className={`${interMedium.className} w-full text-[22px] leading-[28px] font-medium text-white`}
+            className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white`}
             data-node-id={titleNodeId}
           >
             {title}
@@ -163,7 +163,7 @@ function ScheduleCta({
   return (
     <a
       href="#"
-      className={`${interSemiBold.className} absolute top-[248px] left-[16px] z-20 block h-[48px] ${widthClass} shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15),0px_10.268px_6.699px_rgba(255,255,255,0.15),0px_3.714px_2.423px_rgba(255,255,255,0.1)]`}
+      className={`${gilroySemiBold.className} absolute top-[248px] left-[16px] z-20 block h-[48px] ${widthClass} shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15),0px_10.268px_6.699px_rgba(255,255,255,0.15),0px_3.714px_2.423px_rgba(255,255,255,0.1)]`}
       data-node-id={nodeId}
       data-name="Cta"
     >

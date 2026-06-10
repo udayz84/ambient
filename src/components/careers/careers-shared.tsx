@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { interMedium, interRegular, interSemiBold } from "../hero/fonts";
+import { gilroyMedium, interRegular, gilroySemiBold } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import type { CareersValueCard } from "./careers-data";
 
@@ -174,7 +174,7 @@ export function CareersFramedTitle({
         <img alt="" className="block size-full max-w-none" src={frameSrc} />
       </div>
       <p
-        className={`${interMedium.className} absolute left-1/2 ${textTop} z-10 -translate-x-1/2 bg-clip-text text-center font-medium text-transparent not-italic whitespace-nowrap [word-break:break-word] ${textClassName}`}
+        className={`${gilroyMedium.className} absolute left-1/2 ${textTop} z-10 -translate-x-1/2 bg-clip-text text-center font-medium text-transparent not-italic whitespace-nowrap [word-break:break-word] ${textClassName}`}
         style={{
           backgroundImage: `linear-gradient(${gradientDeg}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
           WebkitBackgroundClip: "text",
@@ -216,7 +216,7 @@ export function CareersGradientCard({
         </div>
         <div className="flex w-full flex-col items-start gap-[10px]">
           <p
-            className={`${interMedium.className} w-full font-medium text-white not-italic [word-break:break-word] ${titleClass}`}
+            className={`${gilroyMedium.className} w-full font-medium text-white not-italic [word-break:break-word] ${titleClass}`}
           >
             {card.title}
           </p>
@@ -257,7 +257,7 @@ export function CareersGlassPanel({
       >
         <div className="flex min-w-px flex-[1_0_0] flex-col gap-[10px] p-[32px]">
           <p
-            className={`${interMedium.className} w-full text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
           >
             {title}
           </p>
@@ -294,7 +294,7 @@ export function CareersJobCard({
         <TagBadge label={category} width={180} labelOffsetX={0} rightBarLeft={170.48} centerLabel />
       </div>
       <p
-        className={`${interMedium.className} absolute top-[75px] left-[19px] text-[22px] leading-[28px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
+        className={`${gilroyMedium.className} absolute top-[75px] left-[19px] text-[22px] leading-[28px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
       >
         {title}
       </p>
@@ -305,7 +305,7 @@ export function CareersJobCard({
       </p>
       <a
         href="#"
-        className={`${interMedium.className} absolute top-[51px] right-[49px] flex h-[48px] items-center gap-[20px] bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic ${BOX_BORDER_CLASS}`}
+        className={`${gilroyMedium.className} absolute top-[51px] right-[49px] flex h-[48px] items-center gap-[20px] bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic ${BOX_BORDER_CLASS}`}
       >
         APPLY NOW
         <Image
@@ -357,7 +357,7 @@ export function CareersRolesProfileCta({ href = "#" }: { href?: string }) {
       href={href}
       data-node-id="2379:8941"
       data-name="Cta"
-      className={`${interSemiBold.className} relative block h-[48px] w-[231px] ${GREEN_CTA_SHADOW}`}
+      className={`${gilroySemiBold.className} relative block h-[48px] w-[231px] ${GREEN_CTA_SHADOW}`}
     >
       <span
         aria-hidden
@@ -402,7 +402,7 @@ export function CareersGreenCta({
   return (
     <a
       href={href}
-      className={`${interSemiBold.className} relative block h-[48px] shrink-0 cursor-pointer ${GREEN_CTA_SHADOW} ${width} ${className}`}
+      className={`${gilroySemiBold.className} relative block h-[48px] shrink-0 cursor-pointer ${GREEN_CTA_SHADOW} ${width} ${className}`}
     >
       <span
         aria-hidden
@@ -445,7 +445,7 @@ export function CareersWhiteCta({
   return (
     <a
       href={href}
-      className={`${interSemiBold.className} relative block h-[48px] shrink-0 cursor-pointer shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] ${width} ${className}`}
+      className={`${gilroySemiBold.className} relative block h-[48px] shrink-0 cursor-pointer shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] ${width} ${className}`}
     >
       <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
       <span

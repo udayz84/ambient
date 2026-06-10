@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { dmMono, interMedium, interRegular } from "../hero/fonts";
+import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { CompanyArticleCorners } from "./CompanyArticleCorners";
 import type { CompanyFeaturedArticle } from "./company-articles-data";
 
@@ -50,7 +50,7 @@ export function CompanyArticleCardFeatured({
         <CompanyArticleGreenBadge label={category} />
 
         <h3
-          className={`${interMedium.className} mt-[20px] w-[542px] text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} mt-[20px] w-[542px] text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
         >
           {title}
         </h3>

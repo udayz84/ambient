@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { interRegular, interSemiBold } from "../hero/fonts";
+import { interRegular, gilroySemiBold } from "../hero/fonts";
 import type { PartnerRowConfig } from "./ecosystem-data";
 import { EcosystemGridLine } from "./EcosystemGridLine";
 
@@ -124,7 +124,7 @@ export function EcosystemPartnerRow({
           data-name="col"
         >
           <p
-            className={`${interSemiBold.className} shrink-0 text-[17.1px] leading-[20.4px] font-semibold whitespace-nowrap text-white not-italic`}
+            className={`${gilroySemiBold.className} shrink-0 text-[17.1px] leading-[20.4px] font-semibold whitespace-nowrap text-white not-italic`}
             data-node-id={config.octane.textNodeId}
           >
             Octane

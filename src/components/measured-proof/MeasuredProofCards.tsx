@@ -68,10 +68,10 @@ const CARDS = [
 
 const SLIDE_DISTANCE = 60;
 const STAGGER = 0.12;
-const SMOOTH_FACTOR = 0.14;
-const WHEEL_FACTOR = 0.85;
-const FRICTION = 0.88;
-const MOMENTUM_SCALE = 0.92;
+const SMOOTH_FACTOR = 0.08;
+const WHEEL_FACTOR = 0.7;
+const FRICTION = 0.92;
+const MOMENTUM_SCALE = 0.95;
 
 type ScrollState = {
   current: number;
@@ -256,12 +256,26 @@ export function MeasuredProofCards() {
     }
 
     const onWheel = (event: WheelEvent) => {
+      const HORIZONTAL_THRESHOLD = 30;
+      const HORIZONTAL_RATIO = 1.5;
+      
+      const absDeltaX = Math.abs(event.deltaX);
+      const absDeltaY = Math.abs(event.deltaY);
+      
+      if (absDeltaY > 0 && absDeltaX / absDeltaY < HORIZONTAL_RATIO) {
+        return;
+      }
+      
+      if (absDeltaX < HORIZONTAL_THRESHOLD) {
+        return;
+      }
+      
       event.preventDefault();
-      const delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX)
-        ? event.deltaY
-        : event.deltaX;
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+      const delta = event.deltaX * WHEEL_FACTOR;
       const state = scrollStateRef.current;
-      state.target += delta * WHEEL_FACTOR;
+      state.target += delta;
       state.target = clamp(state.target, 0, state.maxScroll);
       startAnimationLoop();
     };
@@ -342,7 +356,6 @@ export function MeasuredProofCards() {
       className={`absolute top-1/2 right-0 left-0 -translate-y-1/2 overflow-hidden ${
         isDragging ? "cursor-grabbing select-none" : "cursor-grab"
       }`}
-      data-lenis-prevent
       data-node-id="2379:1503"
       data-name="Measured proof in silicon"
       aria-label="Measured proof cards"
@@ -364,7 +377,7 @@ export function MeasuredProofCards() {
               style={{
                 transform: `translateY(${translateY}px)`,
                 opacity,
-                transition: "transform 700ms ease-out, opacity 700ms ease-out",
+                transition: "transform 1000ms ease-out, opacity 1000ms ease-out",
               }}
             >
               <MeasuredProofCard {...card} />

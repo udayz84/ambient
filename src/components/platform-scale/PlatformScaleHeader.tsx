@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { interMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interRegular } from "../hero/fonts";
 
 const cornerLeft = "/hero/corner-tag-1.svg";
 const cornerRight = "/hero/corner-tag-2.svg";
@@ -17,7 +17,7 @@ export function PlatformScaleHeader() {
           data-node-id="2379:620"
         >
           <h2
-            className={`${interMedium.className} relative col-start-1 row-start-1 mt-[10.6806640625px] ml-[12.87109375px] bg-clip-text text-[46px] leading-[0] font-medium whitespace-nowrap text-[transparent] [word-break:break-word] not-italic`}
+            className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[10.6806640625px] ml-[12.87109375px] bg-clip-text text-[46px] leading-[0] font-medium whitespace-nowrap text-[transparent] [word-break:break-word] not-italic`}
             style={{
               backgroundImage:
                 "linear-gradient(100.945deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",

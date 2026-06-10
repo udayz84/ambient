@@ -1,4 +1,4 @@
-import { interSemiBold } from "../hero/fonts";
+import { gilroySemiBold } from "../hero/fonts";
 
 const watermarkGradient =
   "linear-gradient(259.734deg, rgba(255, 255, 255, 0.12) 0.12143%, rgba(255, 255, 255, 0.6) 44.084%, rgba(255, 255, 255, 0) 113.37%)";
@@ -7,7 +7,7 @@ export function ApplicationsHeroVisual() {
   return (
     <>
       <p
-        className={`${interSemiBold.className} absolute top-[291.2783203125px] left-1/2 -translate-x-1/2 bg-clip-text text-center text-[200px] leading-[210px] font-semibold tracking-[0.5px] whitespace-nowrap text-[transparent] uppercase not-italic [word-break:break-word]`}
+        className={`${gilroySemiBold.className} absolute top-[291.2783203125px] left-1/2 -translate-x-1/2 bg-clip-text text-center text-[200px] leading-[210px] font-semibold tracking-[0.5px] whitespace-nowrap text-[transparent] uppercase not-italic [word-break:break-word]`}
         style={{ backgroundImage: watermarkGradient }}
         data-node-id="2379:848"
       >
