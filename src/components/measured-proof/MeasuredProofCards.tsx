@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import LocomotiveScroll from "locomotive-scroll";
 import { MeasuredProofCard } from "./MeasuredProofCard";
 
 const CARDS = [
@@ -218,9 +219,31 @@ export function MeasuredProofCards() {
     window.addEventListener("scroll", updateProgress, { passive: true });
     window.addEventListener("resize", updateProgress);
 
+    let locoScroll: LocomotiveScroll | null = null;
+
+    const initLocoListener = () => {
+      if (typeof window === "undefined") return;
+      const ls = (window as unknown as Record<string, unknown>).locomotiveScroll;
+      if (ls && ls instanceof LocomotiveScroll && ls.lenisInstance) {
+        locoScroll = ls;
+        ls.lenisInstance.on("scroll", updateProgress);
+      }
+    };
+
+    initLocoListener();
+    const interval = setInterval(() => {
+      if (!locoScroll) initLocoListener();
+      else clearInterval(interval);
+    }, 500);
+    if (locoScroll) clearInterval(interval);
+
     return () => {
       window.removeEventListener("scroll", updateProgress);
       window.removeEventListener("resize", updateProgress);
+      clearInterval(interval);
+      if (locoScroll?.lenisInstance) {
+        locoScroll.lenisInstance.off("scroll", updateProgress);
+      }
     };
   }, []);
 
@@ -233,11 +256,12 @@ export function MeasuredProofCards() {
     }
 
     const onWheel = (event: WheelEvent) => {
-      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
-
       event.preventDefault();
+      const delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX)
+        ? event.deltaY
+        : event.deltaX;
       const state = scrollStateRef.current;
-      state.target += event.deltaY * WHEEL_FACTOR;
+      state.target += delta * WHEEL_FACTOR;
       state.target = clamp(state.target, 0, state.maxScroll);
       startAnimationLoop();
     };
@@ -315,16 +339,17 @@ export function MeasuredProofCards() {
   return (
     <div
       ref={viewportRef}
-      className={`absolute top-1/2 right-0 left-[120px] -translate-y-1/2 overflow-hidden ${
+      className={`absolute top-1/2 right-0 left-0 -translate-y-1/2 overflow-hidden ${
         isDragging ? "cursor-grabbing select-none" : "cursor-grab"
       }`}
+      data-lenis-prevent
       data-node-id="2379:1503"
       data-name="Measured proof in silicon"
       aria-label="Measured proof cards"
     >
       <div
         ref={trackRef}
-        className="flex w-max content-stretch items-center gap-[24px] pr-[120px] will-change-transform [backface-visibility:hidden]"
+        className="flex w-max content-stretch items-center gap-[24px] px-[40px] min-[1440px]:px-[120px] will-change-transform [backface-visibility:hidden]"
         style={{
           transform: `translate3d(${translateX}px, 0, 0)`,
         }}

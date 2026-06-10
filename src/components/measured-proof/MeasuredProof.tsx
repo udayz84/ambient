@@ -53,7 +53,7 @@ export function MeasuredProof() {
         </div>
       </div>
 
-      <div className="relative mx-auto h-full w-full max-w-[1440px]">
+      <div className="relative mx-auto h-full w-full">
         <MeasuredProofHeader />
 
         <MeasuredProofCards />

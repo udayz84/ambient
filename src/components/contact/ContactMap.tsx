@@ -49,14 +49,21 @@ const locations = [
   },
 ] as const;
 
+const CONTACT_VIEWPORT_SCALE =
+  "translateX(-50%) scaleX(max(1, calc(100vw / 1440px)))";
+
 export function ContactMap() {
   return (
     <section
-      className="absolute top-[1215px] left-1/2 z-10 h-[1001px] w-[1440px] -translate-x-1/2"
+      className="absolute top-[1215px] left-1/2 z-10 h-[1001px] w-[100vw] max-w-none -translate-x-1/2"
       data-node-id="2379:5086"
       aria-label="Global offices"
     >
-      <div className="absolute top-0 left-1/2 flex h-[730px] w-[1440px] -translate-x-1/2 items-center justify-center">
+      <div className="relative mx-auto h-full w-full max-w-[1440px]">
+      <div
+        className="absolute top-0 left-1/2 flex h-[730px] w-[1440px] origin-center items-center justify-center"
+        style={{ transform: CONTACT_VIEWPORT_SCALE }}
+      >
         <div className="-rotate-90 flex-none">
           <div className="relative h-[1440px] w-[730px]" data-node-id="2379:5087">
             <div aria-hidden className="pointer-events-none absolute inset-0">
@@ -105,24 +112,26 @@ export function ContactMap() {
       </div>
 
       <div
+        className="pointer-events-none absolute top-[609px] left-1/2 h-[392px] w-[1204px] origin-center overflow-clip opacity-20"
+        style={{ transform: CONTACT_VIEWPORT_SCALE }}
+        data-node-id="2379:5089"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          alt=""
+          className="absolute inset-0 block size-full max-w-none object-cover object-center"
+          src="/contact/map-base.svg"
+        />
+      </div>
+
+      <div
         className="absolute top-[609px] left-[38px] h-[393px] w-[1204px]"
         data-node-id="2379:5088"
       >
-        <div
-          className="absolute top-0 left-1/2 h-[392px] w-[1204px] -translate-x-1/2 overflow-clip opacity-20"
-          data-node-id="2379:5089"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt=""
-            className="absolute inset-0 block size-full max-w-none"
-            src="/contact/map-base.svg"
-          />
-        </div>
-
         {locations.map((loc) => (
           <LocationBlock key={loc.nodeId} {...loc} />
         ))}
+      </div>
       </div>
     </section>
   );

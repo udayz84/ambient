@@ -13,7 +13,7 @@ export function Contact() {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       <div
-        className="relative -mt-[78px] mx-auto w-full max-w-[1440px] min-w-[1440px] overflow-x-clip bg-black"
+        className="relative -mt-[78px] mx-auto w-full max-w-[1440px] min-w-[1440px] overflow-x-visible overflow-y-visible bg-black"
         style={{ height: CONTACT_PAGE_HEIGHT_PX }}
         data-node-id="2379:4950"
         data-name="Contact - 3"
@@ -25,7 +25,7 @@ export function Contact() {
         <ContactForm />
 
         <div
-          className="absolute left-0 z-0 w-full [&_footer]:!mt-0"
+          className="absolute left-1/2 z-0 w-[100vw] max-w-none -translate-x-1/2 [&_footer]:!mt-0 [&_nav]:!left-0 [&_nav]:!w-full [&_nav]:!max-w-[1440px] [&_nav]:!translate-x-0 [&_nav]:!justify-between [&_nav]:!px-[271.5px]"
           style={{ top: CONTACT_FOOTER_TOP_PX }}
         >
           <SiteFooter />

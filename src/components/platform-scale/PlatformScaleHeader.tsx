@@ -8,7 +8,7 @@ export function PlatformScaleHeader() {
   return (
     <>
       <div
-        className="absolute top-[225px] left-[100px] h-[120px] w-[321.87109375px]"
+        className="absolute top-[19%] left-[7%] h-[120px] w-[321.87109375px]"
         data-node-id="2379:619"
         data-name="Group 87"
       >
@@ -91,7 +91,7 @@ export function PlatformScaleHeader() {
       </div>
 
       <p
-        className={`${interRegular.className} absolute top-[245px] left-[805.11279296875px] w-[517px] text-right text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+        className={`${interRegular.className} absolute top-[20.5%] right-[7%] w-[min(517px,35vw)] text-right text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
         data-node-id="2379:625"
       >
         A modular compute fabric for your entire product roadmap, from a

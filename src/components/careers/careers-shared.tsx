@@ -40,7 +40,7 @@ function CornerImg({ src, className = "" }: { src: string; className?: string })
 function GradientCardTopCorners() {
   return (
     <>
-      <div className="pointer-events-none absolute top-0 left-[421.94px] flex h-[4.301px] w-[4.057px] items-center justify-center">
+      <div className="pointer-events-none absolute top-0 right-0 flex h-[4.301px] w-[4.057px] items-center justify-center">
         <div className="-scale-y-100 rotate-90 flex-none">
           <div className="relative h-[4.301px] w-[4.057px]">
             <CornerImg src={cornerTrGradient} />
@@ -203,7 +203,7 @@ export function CareersGradientCard({
 
   return (
     <div
-      className={`relative h-[260px] w-[425.999px] shrink-0 overflow-visible ${className}`}
+      className={`relative h-[260px] w-full shrink-0 overflow-visible ${className}`}
       data-node-id={nodeId}
     >
       <div
@@ -253,7 +253,7 @@ export function CareersGlassPanel({
   return (
     <div className={`relative w-full ${className}`} data-node-id={nodeId}>
       <div
-        className={`relative box-border flex ${height} w-full items-start overflow-visible bg-[rgba(21,21,21,0.3)] ${borderClassName}`}
+        className={`relative box-border flex min-h-[180px] w-full items-start overflow-visible bg-[rgba(21,21,21,0.3)] ${height} ${borderClassName}`}
       >
         <div className="flex min-w-px flex-[1_0_0] flex-col gap-[10px] p-[32px]">
           <p
@@ -357,7 +357,7 @@ export function CareersRolesProfileCta({ href = "#" }: { href?: string }) {
       href={href}
       data-node-id="2379:8941"
       data-name="Cta"
-      className={`${interSemiBold.className} absolute top-[68px] left-[59.93px] block h-[48px] w-[231px] ${GREEN_CTA_SHADOW}`}
+      className={`${interSemiBold.className} relative block h-[48px] w-[231px] ${GREEN_CTA_SHADOW}`}
     >
       <span
         aria-hidden

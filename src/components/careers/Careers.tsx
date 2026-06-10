@@ -18,12 +18,6 @@ import { CareersOpenRoles } from "./CareersOpenRoles";
 
 /** Figma 2379:8612 — benefits end ~4893px; footer/CTA backdrop from 4977px; CTA at 5097px; height 6229px */
 
-const CAREERS_PAGE_HEIGHT_PX = 6229;
-
-const CAREERS_FOOTER_TOP_PX = 4977;
-
-
-
 export function Careers() {
 
   return (
@@ -32,9 +26,7 @@ export function Careers() {
 
       <div
 
-        className="relative -mt-[78px] mx-auto w-full max-w-[1440px] min-w-[1440px] overflow-hidden bg-black"
-
-        style={{ height: CAREERS_PAGE_HEIGHT_PX }}
+        className="relative -mt-[78px] mx-auto w-full max-w-[1440px] overflow-hidden bg-black"
 
         data-node-id="2379:8612"
 
@@ -52,21 +44,21 @@ export function Careers() {
 
         <CareersBenefits />
 
-        <CareersFooterBackdrop />
+        <div className="relative mt-[40px] lg:mt-[84px]">
 
-        <CareersBottomCta />
+          <CareersFooterBackdrop />
 
+          <div className="relative z-20">
 
+            <CareersBottomCta />
 
-        <div
+          </div>
 
-          className="absolute left-0 z-10 w-full [&_footer]:!mt-0"
+          <div className="relative z-10 [&_footer]:!mt-0">
 
-          style={{ top: CAREERS_FOOTER_TOP_PX }}
+            <SiteFooter />
 
-        >
-
-          <SiteFooter />
+          </div>
 
         </div>
 
@@ -77,4 +69,3 @@ export function Careers() {
   );
 
 }
-

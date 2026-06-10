@@ -14,7 +14,6 @@ const cornerTl = "/platform-scale/stat-corner-tl.svg";
 const chipGlassCropClass =
   "absolute top-[-79.23%] left-[-39.91%] h-[258.46%] w-[179.82%] max-w-none";
 
-const SECTION_CENTER_X = 720;
 const HERO_CHIP_WIDTH = 321.7456359863281;
 const HERO_CHIP_HEIGHT = 321.382080078125;
 const HERO_CHIP_TOP = 65.513671875;
@@ -24,11 +23,20 @@ const LABEL_GAP = 10;
 const TRANSITION_MS = 700;
 const TRANSITION_EASING = "cubic-bezier(0.4, 0, 0.2, 1)";
 
+const TOTAL = GPX_PRODUCTS.length;
+
+function wrapOffset(raw: number): number {
+  const modulo = ((raw % TOTAL) + TOTAL) % TOTAL;
+  if (modulo > TOTAL / 2) return modulo - TOTAL;
+  return modulo;
+}
+
 type SlotKey = "-2" | "-1" | "0" | "1" | "2";
 
 type SlotConfig = {
-  centerX: number;
-  top: number;
+  offsetPx: number;
+  offsetVw: number;
+  topPx: number;
   scale: number;
   opacity: number;
   labelFontSize: 18 | 32;
@@ -39,8 +47,9 @@ type SlotConfig = {
 
 const SLOT_CONFIG: Record<SlotKey, SlotConfig> = {
   "-2": {
-    centerX: SECTION_CENTER_X - 648.69,
-    top: 491.20703125,
+    offsetPx: -648.69,
+    offsetVw: -45.14,
+    topPx: 491.2,
     scale: 212.14378356933594 / HERO_CHIP_WIDTH,
     opacity: 0.25,
     labelFontSize: 18,
@@ -49,8 +58,9 @@ const SLOT_CONFIG: Record<SlotKey, SlotConfig> = {
     labelPaddingY: 4,
   },
   "-1": {
-    centerX: 237.955078125 + 260.3582763671875 / 2,
-    top: 466.20703125,
+    offsetPx: -351.87,
+    offsetVw: -21.88,
+    topPx: 466.2,
     scale: 260.3582763671875 / HERO_CHIP_WIDTH,
     opacity: 0.5,
     labelFontSize: 32,
@@ -59,8 +69,9 @@ const SLOT_CONFIG: Record<SlotKey, SlotConfig> = {
     labelPaddingY: 10,
   },
   "0": {
-    centerX: SECTION_CENTER_X - 3.80859375,
-    top: 375.001953125,
+    offsetPx: -3.81,
+    offsetVw: -0.26,
+    topPx: 375.0,
     scale: 1,
     opacity: 1,
     labelFontSize: 32,
@@ -69,8 +80,9 @@ const SLOT_CONFIG: Record<SlotKey, SlotConfig> = {
     labelPaddingY: 10,
   },
   "1": {
-    centerX: 937.16796875 + 260.3582763671875 / 2,
-    top: 466.20703125,
+    offsetPx: 347.35,
+    offsetVw: 21.36,
+    topPx: 466.2,
     scale: 260.3582763671875 / HERO_CHIP_WIDTH,
     opacity: 0.5,
     labelFontSize: 32,
@@ -79,8 +91,9 @@ const SLOT_CONFIG: Record<SlotKey, SlotConfig> = {
     labelPaddingY: 10,
   },
   "2": {
-    centerX: SECTION_CENTER_X + 644.330078125,
-    top: 491.20703125,
+    offsetPx: 644.33,
+    offsetVw: 44.86,
+    topPx: 491.2,
     scale: 212.14378356933594 / HERO_CHIP_WIDTH,
     opacity: 0.25,
     labelFontSize: 18,
@@ -95,9 +108,20 @@ function getSlotKey(offset: number): SlotKey | null {
   return String(offset) as SlotKey;
 }
 
+function getTranslateX(slot: SlotConfig): string {
+  const px = slot.offsetPx;
+  const vw = slot.offsetVw;
+  if (px < 0) {
+    return `calc(min(${px}px, ${vw}vw))`;
+  }
+  if (px > 0) {
+    return `calc(max(${px}px, ${vw}vw))`;
+  }
+  return `${px}px`;
+}
+
 function ChipGlassImage() {
   return (
-    // eslint-disable-next-line @next/next/no-img-element
     <img
       alt=""
       src="/platform-scale/chip-glass.png"
@@ -122,9 +146,7 @@ function CarouselChipItem({
 
   const slot = SLOT_CONFIG[slotKey];
   const isHero = offset === 0;
-  const translateX = slot.centerX - SECTION_CENTER_X;
-  const tracking =
-    slot.labelFontSize === 32 ? "-0.32px" : "-0.18px";
+  const tracking = slot.labelFontSize === 32 ? "-0.32px" : "-0.18px";
 
   return (
     <div
@@ -132,7 +154,7 @@ function CarouselChipItem({
       style={{
         width: HERO_CHIP_WIDTH,
         height: HERO_TOTAL_HEIGHT + 60,
-        transform: `translateX(calc(-50% + ${translateX}px)) translateY(${slot.top}px) scale(${slot.scale})`,
+        transform: `translateX(calc(-50% + ${getTranslateX(slot)})) translateY(${slot.topPx}px) scale(${slot.scale})`,
         transformOrigin: "top center",
         opacity: slot.opacity,
         zIndex: 30 - Math.abs(offset),
@@ -158,7 +180,6 @@ function CarouselChipItem({
           }}
         >
           <div className="absolute bottom-full left-[23.06201171875px] mb-[8.486328125px] h-[136.73727416992188px] w-[297.23162841796875px]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt=""
               src="/platform-scale/chip-shade.svg"
@@ -168,7 +189,6 @@ function CarouselChipItem({
           </div>
 
           <div className="relative size-full shadow-[0px_21px_20px_0px_#0d2006]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt=""
               src="/platform-scale/chip-hero.png"
@@ -179,7 +199,6 @@ function CarouselChipItem({
 
           <div className="absolute top-[-7.69921875px] right-[-6.900390625px] bottom-[-11.013671875px] left-[-6.900390625px]">
             <div className="absolute inset-[-0.15%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 alt=""
                 src="/platform-scale/chip-frame.svg"
@@ -241,7 +260,7 @@ function CarouselChipItem({
 function PlatformScaleStatPanel({ product }: { product: GpxProduct }) {
   return (
     <div
-      className="relative absolute top-[813px] left-1/2 flex w-[500px] -translate-x-1/2 items-center gap-[32px] bg-[rgba(0,0,0,0.1)] px-[10px]"
+      className="absolute top-[68%] left-1/2 flex w-[min(500px,90vw)] -translate-x-1/2 items-center gap-[32px] bg-[rgba(0,0,0,0.1)] px-[10px]"
       data-node-id="2379:641"
     >
       <div
@@ -273,7 +292,6 @@ function PlatformScaleStatPanel({ product }: { product: GpxProduct }) {
         <div className="rotate-180 flex-none">
           <div className="relative size-[4px]" data-node-id="2379:647">
             <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={cornerTr}
                 alt=""
@@ -288,7 +306,6 @@ function PlatformScaleStatPanel({ product }: { product: GpxProduct }) {
         <div className="-scale-y-100 rotate-180 flex-none">
           <div className="relative size-[4px]" data-node-id="2379:648">
             <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={cornerTr}
                 alt=""
@@ -303,7 +320,6 @@ function PlatformScaleStatPanel({ product }: { product: GpxProduct }) {
         <div className="-scale-y-100 flex-none">
           <div className="relative size-[4px]" data-node-id="2379:649">
             <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={cornerTl}
                 alt=""
@@ -316,7 +332,6 @@ function PlatformScaleStatPanel({ product }: { product: GpxProduct }) {
       </div>
       <div className="absolute bottom-[0.5px] left-[0.51px] size-[4px]">
         <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={cornerTl}
             alt=""
@@ -335,25 +350,29 @@ export function PlatformScaleCarousel() {
   const activeProduct = GPX_PRODUCTS[activeIndex];
 
   const goPrevious = useCallback(() => {
-    setActiveIndex((current) => Math.max(0, current - 1));
+    setActiveIndex((current) =>
+      (current - 1 + GPX_PRODUCTS.length) % GPX_PRODUCTS.length
+    );
   }, []);
 
   const goNext = useCallback(() => {
-    setActiveIndex((current) =>
-      Math.min(GPX_PRODUCTS.length - 1, current + 1)
-    );
+    setActiveIndex((current) => (current + 1) % GPX_PRODUCTS.length);
   }, []);
 
   return (
     <>
-      <div className="absolute inset-0 max-w-[1440px] [isolation:isolate]">
-        {GPX_PRODUCTS.map((product, index) => (
-          <CarouselChipItem
-            key={product.id}
-            product={product}
-            offset={index - activeIndex}
-          />
-        ))}
+      <div className="absolute inset-0 [isolation:isolate]">
+        {GPX_PRODUCTS.map((product, index) => {
+          const offset = wrapOffset(index - activeIndex);
+
+          return (
+            <CarouselChipItem
+              key={product.id}
+              product={product}
+              offset={offset}
+            />
+          );
+        })}
       </div>
 
       <PlatformScaleStatPanel product={activeProduct} />
@@ -361,13 +380,11 @@ export function PlatformScaleCarousel() {
       <button
         type="button"
         onClick={goPrevious}
-        disabled={activeIndex === 0}
-        className="absolute top-[865px] left-[384.11279296875px] z-40 size-[44px] disabled:cursor-not-allowed disabled:opacity-40"
+        className="absolute top-[72%] left-[26.6%] z-40 size-[44px]"
         data-node-id="2388:326"
         data-name="Menu"
         aria-label="Previous GPX product"
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt=""
           src="/platform-scale/nav-left.svg"
@@ -378,13 +395,11 @@ export function PlatformScaleCarousel() {
       <button
         type="button"
         onClick={goNext}
-        disabled={activeIndex === GPX_PRODUCTS.length - 1}
-        className="absolute top-[865px] left-[1011.11279296875px] z-40 size-[44px] disabled:cursor-not-allowed disabled:opacity-40"
+        className="absolute top-[72%] left-[calc(73.5%-44px)] z-40 size-[44px]"
         data-node-id="2388:319"
         data-name="Menu"
         aria-label="Next GPX product"
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt=""
           src="/platform-scale/nav-right.svg"
