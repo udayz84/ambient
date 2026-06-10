@@ -128,11 +128,10 @@ export function CompanyMission() {
           className="absolute top-1/2 left-[756px] flex -translate-y-1/2 flex-col gap-[58px]"
           data-node-id="2379:4765"
         >
-          {STATS.map((stat, index) => (
+          {STATS.map((stat) => (
             <CompanyMissionStat
               key={stat.labelNodeId}
               {...stat}
-              animationDelay={index * 120}
             />
           ))}
         </div>

@@ -71,7 +71,7 @@ export function Company() {
 
 
         <div
-          className={`absolute left-1/2 z-[8] w-[100vw] max-w-none -translate-x-1/2 [&_footer]:!mt-0`}
+          className="absolute left-0 z-[8] w-full [&_footer]:!mt-0"
           style={{ top: COMPANY_FOOTER_TOP_PX }}
         >
           <SiteFooter />
