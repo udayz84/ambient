@@ -1,5 +1,3 @@
-import { SiteFooter } from "../site-footer/SiteFooter";
-
 import { CompanyDna } from "./CompanyDna";
 
 import { CompanyEcosystem } from "./CompanyEcosystem";
@@ -34,11 +32,11 @@ export function Company() {
 
   return (
 
-    <main className="flex w-full flex-col overflow-x-visible bg-black">
+    <main className="flex w-full flex-col overflow-x-clip bg-black">
 
       <div
 
-        className="relative -mt-[78px] mx-auto w-full max-w-[1440px] min-w-[1440px] overflow-x-visible overflow-y-visible bg-black"
+        className="relative -mt-[78px] mx-auto w-full max-w-[1440px] min-w-[1440px] overflow-x-clip overflow-y-visible bg-black"
 
         style={{ height: COMPANY_PAGE_HEIGHT_PX }}
 
@@ -67,15 +65,6 @@ export function Company() {
         <CompanyEngagement />
 
         <CompanyEndSection />
-
-
-
-        <div
-          className="absolute left-0 z-[8] w-full [&_footer]:!mt-0"
-          style={{ top: COMPANY_FOOTER_TOP_PX }}
-        >
-          <SiteFooter />
-        </div>
 
       </div>
 

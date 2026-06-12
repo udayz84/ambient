@@ -14,13 +14,12 @@ const CHIP_FADE_IN_CLASS = "animate-hero-text-fade-in opacity-0";
 export function CareersDna() {
   return (
     <section
-      className="relative mt-[60px] flex w-full flex-col items-center overflow-hidden lg:mt-[197px]"
+      className="absolute top-[1379px] left-0 z-10 h-[841px] w-[1445px] overflow-hidden"
       data-node-id="2379:8843"
       aria-label="Driven by physics. Defined by our DNA."
     >
-      {/* 2379:8844 — background */}
       <div
-        className="pointer-events-none absolute top-[80px] left-1/2 h-[689.269px] w-[1444.395px] -translate-x-1/2 overflow-hidden lg:top-[80px]"
+        className="pointer-events-none absolute top-[80px] left-0 h-[689.269px] w-[1444.395px] overflow-hidden"
         data-node-id="2379:8844"
         data-name="image 108"
       >
@@ -36,7 +35,7 @@ export function CareersDna() {
       </div>
 
       <div
-        className="relative flex w-full max-w-[1204px] flex-col items-center gap-[40px] px-[24px] md:px-[40px] lg:px-0"
+        className="absolute top-px left-1/2 flex w-[1204px] -translate-x-1/2 flex-col items-center gap-[40px]"
         data-node-id="2379:8845"
       >
         <div
@@ -48,7 +47,7 @@ export function CareersDna() {
             <GradientTitle
               nodeId="2379:8848"
               gradientDeg="105.739deg"
-              className="whitespace-normal text-center lg:whitespace-nowrap"
+              className="text-center whitespace-nowrap"
             >
               <p className="mb-0 leading-[49px]">Driven by physics.</p>
               <p className="leading-[49px]">Defined by our DNA.</p>
@@ -56,7 +55,7 @@ export function CareersDna() {
             <CornerDecor />
           </div>
           <p
-            className={`${interRegular.className} shrink-0 text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] md:text-[18px] md:leading-[27px] md:whitespace-nowrap`}
+            className={`${interRegular.className} shrink-0 text-center text-[18px] leading-[27px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic [word-break:break-word]`}
             data-node-id="2379:8853"
           >
             This is how we work, build, and solve at Ambient.
@@ -64,10 +63,10 @@ export function CareersDna() {
         </div>
 
         <div
-          className="flex w-full flex-col items-center gap-[20px] lg:flex-row lg:items-end lg:justify-center lg:gap-[20px]"
+          className="flex w-[1204px] items-end justify-center gap-[20px]"
           data-node-id="2379:8854"
         >
-          <div className="flex w-full flex-col gap-[40px] lg:w-[389.999px]" data-node-id="2379:8855">
+          <div className="flex w-[389.999px] flex-col gap-[40px]" data-node-id="2379:8855">
             <CareersGlassPanel
               nodeId="2379:8856"
               title="Grounded in Science"
@@ -84,7 +83,7 @@ export function CareersDna() {
 
           <CareersDnaChipImage />
 
-          <div className="flex w-full flex-col gap-[40px] lg:w-[389.999px]" data-node-id="2379:8876">
+          <div className="flex w-[389.999px] flex-col gap-[40px]" data-node-id="2379:8876">
             <CareersGlassPanel
               nodeId="2379:8877"
               title="Chase the Impossible"
@@ -105,6 +104,7 @@ export function CareersDna() {
           title="Protect What Powers Us"
           description="You design with power as a constraint from day one. Efficiency is not an afterthought, it is a core part of how you think, build, and optimize systems."
           height="min-h-[126px]"
+          className="w-[1204px]"
           borderClassName={GLASS_PANEL_VISIBLE_BORDER_CLASS}
         />
       </div>
@@ -137,8 +137,7 @@ function CareersDnaChipImage() {
   return (
     <div
       ref={ref}
-      style={{ animationDelay: '1s' }}
-      className={`relative h-[300px] w-full max-w-[386px] shrink-0 md:h-[400px] ${
+      className={`relative h-[400px] w-[386px] shrink-0 ${
         isVisible ? CHIP_FADE_IN_CLASS : "translate-y-[25px] opacity-0"
       }`}
       data-node-id="2379:8873"

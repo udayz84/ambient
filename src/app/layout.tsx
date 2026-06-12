@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { gilroyRegular, gilroyMedium, gilroySemiBold, gilroyBold } from "@/components/hero/fonts";
 import { Navbar } from "@/components/navbar/Navbar";
+import { SiteFooter } from "@/components/site-footer/SiteFooter";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import "./globals.css";
 
@@ -34,6 +35,7 @@ export default function RootLayout({
         <SmoothScroll>
           <Navbar />
           {children}
+          <SiteFooter />
         </SmoothScroll>
       </body>
     </html>

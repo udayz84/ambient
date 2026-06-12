@@ -5,7 +5,6 @@ import { DeveloperPlatform } from "@/components/developer-platform/DeveloperPlat
 import { Ecosystem } from "@/components/ecosystem/Ecosystem";
 import { LatestNews } from "@/components/latest-news/LatestNews";
 import { PlatformScale } from "@/components/platform-scale/PlatformScale";
-import { SiteFooter } from "@/components/site-footer/SiteFooter";
 import { Technology } from "@/components/technology/Technology";
 
 export default function Home() {
@@ -19,7 +18,6 @@ export default function Home() {
       <DeveloperPlatform />
       <Ecosystem />
       <LatestNews />
-      <SiteFooter showNewsletter />
     </main>
   );
 }

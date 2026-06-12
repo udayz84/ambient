@@ -18,5 +18,5 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  return <div ref={scrollRef}>{children}</div>;
+  return <div className="min-w-0 overflow-x-clip" ref={scrollRef}>{children}</div>;
 }

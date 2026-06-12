@@ -373,14 +373,19 @@ export function MeasuredProofCards() {
           return (
             <div
               key={card.nodeId}
-              className="shrink-0 will-change-transform"
-              style={{
-                transform: `translateY(${translateY}px)`,
-                opacity,
-                transition: "transform 1000ms ease-out, opacity 1000ms ease-out",
-              }}
+              className="animate-hero-text-fade-in opacity-0"
+              style={{ animationDelay: '1s', animationDuration: '1000ms' }}
             >
-              <MeasuredProofCard {...card} />
+              <div
+                className="shrink-0 will-change-transform"
+                style={{
+                  transform: `translateY(${translateY}px)`,
+                  opacity,
+                  transition: "transform 1000ms ease-out, opacity 1000ms ease-out",
+                }}
+              >
+                <MeasuredProofCard {...card} />
+              </div>
             </div>
           );
         })}

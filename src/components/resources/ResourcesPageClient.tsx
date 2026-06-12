@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { SiteFooter } from "../site-footer/SiteFooter";
 import { ResourcesBuilding } from "./ResourcesBuilding";
 import { ResourcesContent } from "./ResourcesContent";
 import { ResourcesFeatured } from "./ResourcesFeatured";
@@ -25,10 +24,6 @@ export function ResourcesPageClient() {
         <ResourcesBuilding />
         <ResourcesContent onExtraHeightChange={setExtraHeight} />
         <ResourcesNewsCta top={RESOURCES_NEWS_TOP + extraHeight} />
-      </div>
-
-      <div className="w-full shrink-0 [&_footer]:!mt-0">
-        <SiteFooter />
       </div>
     </>
   );

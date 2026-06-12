@@ -13,7 +13,7 @@ export function PlatformScale() {
     >
       <PlatformScaleBackground />
 
-      <div className="relative mx-auto h-full w-full">
+      <div className="relative mx-auto h-full w-[1440px]">
         <PlatformScaleHeader />
         <PlatformScaleCarousel />
         <PlatformScaleCta />

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { gilroyMedium, interRegular } from "../hero/fonts";
+import { interMedium, interRegular } from "../hero/fonts";
 import { dmMono } from "../hero/fonts";
 import {
   CAREERS_JOBS,
@@ -54,13 +54,13 @@ export function CareersOpenRoles() {
   return (
     <section
       id="open-roles"
-      className="relative mt-[60px] flex w-full max-w-[1204px] flex-col gap-[40px] px-[24px] md:px-[40px] lg:mx-auto lg:mt-[206px] lg:px-0"
+      className="absolute top-[2426px] left-[118px] z-10 flex h-[1696px] w-[1204px] flex-col gap-[40px]"
       data-node-id="2379:8901"
       aria-label="Open Roles"
     >
       {/* 2379:8902 — header row */}
       <div
-        className="flex w-full flex-col gap-[20px] md:h-[60px] md:flex-row md:items-end md:justify-between"
+        className="flex h-[60px] w-[1204px] shrink-0 items-end justify-between"
         data-node-id="2379:8902"
       >
         <OpenRolesTitle />
@@ -86,7 +86,7 @@ export function CareersOpenRoles() {
 
       {/* 2379:8920 — job list */}
       <div
-        className="flex w-full flex-col gap-[10px]"
+        className="flex h-[1294px] w-[1204px] shrink-0 flex-col gap-[10px]"
         data-node-id="2379:8920"
       >
         {filteredJobs.map((job, index) => (
@@ -102,20 +102,20 @@ export function CareersOpenRoles() {
 
       {/* 2379:8929 — bottom CTA */}
       <div
-        className="relative h-auto w-full shrink-0"
+        className="relative h-[262px] w-[1203px] shrink-0"
         data-node-id="2379:8929"
       >
         <RolesCtaBackground />
         <div
-          className="relative flex w-full flex-col items-center gap-[24px] py-[40px] md:flex-row md:items-center md:justify-between md:py-[50px] md:px-[79.5px]"
+          className="absolute top-[calc(50%+0.5px)] left-[79.5px] flex w-[1042.932px] -translate-y-1/2 items-center justify-between overflow-visible"
           data-node-id="2379:8931"
         >
           <div
-            className="relative h-auto w-full max-w-[400px] shrink-0 md:max-w-[587px]"
+            className="relative h-[108px] w-[587px] shrink-0"
             data-node-id="2379:8932"
           >
             <p
-              className={`${gilroyMedium.className} bg-clip-text text-center text-[32px] leading-[38px] font-medium text-transparent not-italic [word-break:break-word]] md:text-[46px] md:leading-[49px]`}
+              className={`${interMedium.className} absolute top-[26.03px] left-[292.35px] -translate-x-1/2 bg-clip-text text-center text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: CTA_TITLE_GRADIENT,
                 WebkitBackgroundClip: "text",
@@ -126,7 +126,7 @@ export function CareersOpenRoles() {
               Don&apos;t See The Right Role?
             </p>
             <div
-              className="pointer-events-none absolute top-[1.03px] left-1/2 hidden h-[106px] w-[584.848px] -translate-x-1/2 md:block"
+              className="pointer-events-none absolute top-[1.03px] left-px h-[106px] w-[584.848px]"
               data-node-id="2379:8934"
             >
               <div className="absolute inset-[-0.47%_0]">
@@ -142,11 +142,11 @@ export function CareersOpenRoles() {
           </div>
 
           <div
-            className="relative flex flex-col items-center gap-[16px] md:h-[116px] md:w-[260px] lg:md:w-[290.931px] md:items-start md:gap-0"
+            className="relative h-[116px] w-[290.931px] shrink-0 overflow-visible"
             data-node-id="2379:8939"
           >
             <p
-              className={`${interRegular.className} h-auto w-full text-center text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word] md:text-right`}
+              className={`${interRegular.className} absolute top-0 left-0 h-[48px] w-[290.931px] text-right text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
               data-node-id="2379:8940"
             >
               Submit a general application and we&apos;ll reach out when a matching
@@ -172,7 +172,7 @@ const ROLES_CTA_MASK_STYLE = {
 function RolesCtaBackground() {
   return (
     <div
-      className="pointer-events-none absolute top-0 left-0 h-full w-full"
+      className="pointer-events-none absolute top-0 left-0 h-[261.215px] w-[1203px]"
       data-node-id="2379:8930"
       aria-hidden
     >
@@ -180,7 +180,7 @@ function RolesCtaBackground() {
       <img
         src="/careers/roles-cta-bg.svg"
         alt=""
-        className="absolute inset-0 block size-full max-w-none object-cover"
+        className="absolute inset-0 block size-full max-w-none"
       />
       <div className="absolute inset-0" style={ROLES_CTA_MASK_STYLE}>
         <div
@@ -210,7 +210,7 @@ function OpenRolesTitle() {
       data-node-id="2379:8903"
     >
       <p
-        className={`${gilroyMedium.className} absolute top-0 left-[20px] bg-clip-text text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic [word-break:break-word]`}
+        className={`${interMedium.className} absolute top-0 left-[20px] bg-clip-text text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic [word-break:break-word]`}
         style={{
           backgroundImage: OPEN_ROLES_GRADIENT,
           WebkitBackgroundClip: "text",
@@ -303,7 +303,7 @@ function FilterDropdown({
   return (
     <div
       ref={rootRef}
-      className="relative flex w-[140px] shrink-0 items-center sm:w-[200px]"
+      className="relative flex w-[200px] shrink-0 items-center"
       data-node-id={nodeId}
     >
       <button
@@ -312,7 +312,7 @@ function FilterDropdown({
         aria-expanded={isOpen}
         aria-label={`${label} filter`}
         onClick={() => setIsOpen((open) => !open)}
-        className="flex h-[48px] min-w-px w-full items-center gap-[10px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-transparent px-[16px] text-left sm:px-[20px]"
+        className="flex h-[48px] min-w-px w-full cursor-pointer items-center gap-[10px] bg-transparent px-[20px] text-left"
         data-node-id={innerNodeId}
       >
         <span
@@ -334,7 +334,7 @@ function FilterDropdown({
         <ul
           role="listbox"
           aria-label={label}
-          className="absolute top-[calc(100%+4px)] left-0 z-30 w-[140px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black py-[4px] shadow-[0px_8px_24px_0px_rgba(0,0,0,0.6)] sm:w-[200px]"
+          className="absolute top-[calc(100%+4px)] left-0 z-30 w-[200px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black py-[4px] shadow-[0px_8px_24px_0px_rgba(0,0,0,0.6)]"
         >
           {options.map((option) => {
             const isSelected = option.value === value;
@@ -378,18 +378,18 @@ function JobRow({
 }) {
   return (
     <article
-      className="group relative flex h-auto min-h-[153px] w-full shrink-0 flex-col justify-center border border-solid border-[rgba(240,240,240,0.2)] bg-black py-[20px] pl-[19px] md:pr-[180px] lg:pr-[220px]"
+      className="group relative h-[153px] w-[1204px] shrink-0 border border-solid border-[rgba(240,240,240,0.2)] bg-black"
       data-node-id={nodeId}
       data-name="Job Details"
     >
       <CategoryBadge label={category} />
       <p
-        className={`${gilroyMedium.className} mt-[12px] max-w-[500px] text-[18px] leading-[28px] font-medium text-white not-italic [word-break:break-word] md:text-[22px]`}
+        className={`${interMedium.className} absolute top-[75px] left-[19px] text-[22px] leading-[28px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
       >
         {title}
       </p>
       <p
-        className={`${interRegular.className} mt-[2px] w-full max-w-[350px] text-[16px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] md:text-[18px]`}
+        className={`${interRegular.className} absolute top-[105px] left-[19px] w-[350px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
       >
         {location}
       </p>
@@ -401,7 +401,7 @@ function JobRow({
 function CategoryBadge({ label }: { label: string }) {
   return (
     <div
-      className={`${dmMono.className} relative h-[26px] w-[140px] overflow-clip bg-[rgba(255,255,255,0.06)] sm:w-[180px]`}
+      className={`${dmMono.className} absolute top-[19.34px] left-[calc(50%-492px)] h-[26px] w-[180px] -translate-x-1/2 overflow-clip bg-[rgba(255,255,255,0.06)]`}
       data-name="Menu"
     >
       <div className="absolute top-0 left-0 flex size-[4px] items-center justify-center">
@@ -446,7 +446,7 @@ function CategoryBadge({ label }: { label: string }) {
         {label}
       </p>
       <div className="absolute top-1/2 left-[6.48px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
-      <div className="absolute top-1/2 right-[6px] hidden h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60 sm:block" />
+      <div className="absolute top-1/2 left-[170.48px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
     </div>
   );
 }
@@ -455,7 +455,7 @@ function ApplyButton() {
   return (
     <a
       href="#"
-      className={`${gilroyMedium.className} absolute top-[51px] right-[19px] flex h-[48px] items-center gap-[20px] overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] text-[14px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic transition-[box-shadow,background-color] duration-200 group-hover:bg-transparent group-hover:shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] md:text-[16px]`}
+      className={`${interMedium.className} absolute top-[51px] right-[49px] flex h-[48px] items-center gap-[20px] overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic transition-[box-shadow,background-color] duration-200 group-hover:bg-transparent group-hover:shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
     >
       <span
         aria-hidden

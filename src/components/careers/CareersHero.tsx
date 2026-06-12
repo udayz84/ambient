@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { gilroySemiBold, interRegular } from "../hero/fonts";
+import { interRegular, interSemiBold } from "../hero/fonts";
 import { GradientTitle } from "../contact/contact-shared";
 
 const cornerCtaLeft = "/hero/corner-tag-1.svg";
@@ -8,14 +8,14 @@ const cornerCtaRight = "/hero/corner-tag-2.svg";
 export function CareersHero() {
   return (
     <section
-      className="relative h-[600px] w-full overflow-hidden bg-black md:h-[700px] lg:h-[798px]"
+      className="relative h-[798px] w-full max-w-[1442px] min-w-[1442px] overflow-hidden bg-black"
       data-node-id="2379:8679"
       data-name="Hero Section"
       aria-label="Careers hero"
     >
-      {/* 2379:8615 — hero background */}
+      {/* 2379:8615 — hero background (page sibling in Figma) */}
       <div
-        className="pointer-events-none absolute top-0 left-0 z-0 h-full w-full overflow-hidden md:h-[764px] md:w-[1440px] md:left-1/2 md:-translate-x-1/2 lg:left-0 lg:translate-x-0"
+        className="pointer-events-none absolute top-0 left-0 z-0 h-[764px] w-[1440px] overflow-hidden"
         data-node-id="2379:8615"
         data-name="image 105"
       >
@@ -24,14 +24,14 @@ export function CareersHero() {
           <img
             src="/careers/hero-bg.png"
             alt=""
-            className="absolute top-0 left-0 h-full w-full object-cover object-center md:left-[0.05%] md:w-[99.91%]"
+            className="absolute top-0 left-[0.05%] h-full w-[99.91%] max-w-none object-cover"
           />
         </div>
       </div>
 
       {/* 2379:8680 — ellipse glow */}
       <div
-        className="pointer-events-none absolute top-[40px] left-[-120px] z-[1] size-[500px] md:left-[-169.89px] md:size-[657px] lg:top-[60.97px]"
+        className="pointer-events-none absolute top-[60.97px] left-[-169.89px] z-[1] size-[657px]"
         data-node-id="2379:8680"
         data-name="Ellipse 16188"
       >
@@ -47,7 +47,7 @@ export function CareersHero() {
       </div>
 
       {/* 2379:8681 — left vertical line */}
-      <div className="pointer-events-none absolute top-[79px] left-[95px] z-[2] hidden h-[821px] w-0 items-center justify-center lg:flex">
+      <div className="pointer-events-none absolute top-[79px] left-[95px] z-[2] flex h-[821px] w-0 items-center justify-center">
         <div className="flex-none rotate-90">
           <div className="relative h-0 w-[821px]" data-node-id="2379:8681" data-name="Line 82">
             <div className="absolute inset-[-1px_0_0_0]">
@@ -63,7 +63,7 @@ export function CareersHero() {
         </div>
       </div>
       <div
-        className="pointer-events-none absolute top-[77px] left-[93px] z-[2] hidden h-[4px] w-[5px] lg:block"
+        className="pointer-events-none absolute top-[77px] left-[93px] z-[2] h-[4px] w-[5px]"
         data-node-id="2379:8682"
         data-name="Vector"
       >
@@ -77,7 +77,7 @@ export function CareersHero() {
       </div>
 
       {/* 2379:8683 — right vertical line */}
-      <div className="pointer-events-none absolute top-[79px] right-[95px] z-[2] hidden h-[597px] w-0 items-center justify-center lg:flex">
+      <div className="pointer-events-none absolute top-[79px] right-[95px] z-[2] flex h-[597px] w-0 items-center justify-center">
         <div className="flex-none rotate-90">
           <div className="relative h-0 w-[597px]" data-node-id="2379:8683" data-name="Line 83">
             <div className="absolute inset-[-0.5px_0]">
@@ -93,7 +93,7 @@ export function CareersHero() {
         </div>
       </div>
       <div
-        className="pointer-events-none absolute top-[77.634765625px] right-[93.5px] z-[2] hidden h-[4px] w-[5px] lg:block"
+        className="pointer-events-none absolute top-[77.634765625px] left-[1344.5px] z-[2] h-[4px] w-[5px]"
         data-node-id="2379:8684"
         data-name="Vector"
       >
@@ -108,17 +108,17 @@ export function CareersHero() {
 
       {/* 2379:8685 — content */}
       <div
-        className="absolute top-[160px] left-0 z-10 flex w-full flex-col items-start gap-[20px] px-[24px] md:top-[200px] md:px-[60px] lg:top-[245.97px] lg:left-[150px] lg:w-[576px] lg:px-0"
+        className="absolute top-[245.97px] left-[150px] z-10 flex w-[576px] flex-col items-start gap-[20px]"
         data-node-id="2379:8685"
         data-name="Content"
       >
         <div
-          className="relative h-auto w-full max-w-[382px] shrink-0"
+          className="relative h-[118px] w-[382px] shrink-0"
           data-node-id="2379:8686"
           data-name="Title"
         >
           <div
-            className="pointer-events-none relative hidden h-[116px] w-[380px] lg:block"
+            className="pointer-events-none absolute top-[0.81px] left-[0.93px] h-[116px] w-[380px]"
             data-node-id="2379:8687"
             data-name="Frame"
           >
@@ -135,20 +135,20 @@ export function CareersHero() {
           <GradientTitle
             nodeId="2379:8692"
             gradientDeg="102.971deg"
-            className="whitespace-normal text-[36px] leading-[42px] md:text-[42px] md:leading-[49px] lg:absolute lg:top-[10px] lg:left-[20.16px] lg:w-[349px] lg:whitespace-nowrap lg:text-[46px] lg:leading-[49px]"
+            className="absolute top-[10px] left-[20.16px] w-[349px] whitespace-nowrap"
           >
-            <p className="mb-0 leading-inherit">Re-architect the</p>
-            <p className="leading-inherit">physics of AI</p>
+            <p className="mb-0 leading-[49px]">Re-architect the</p>
+            <p className="leading-[49px]">physics of AI</p>
           </GradientTitle>
         </div>
 
         <div
-          className="relative flex w-full max-w-[576px] shrink-0 flex-col items-start gap-[24px] pl-0 md:pl-[22px]"
+          className="relative flex w-[576px] shrink-0 flex-col items-start gap-[24px] pl-[22px]"
           data-node-id="2379:8693"
           data-name="Sub"
         >
           <p
-            className={`${interRegular.className} w-full shrink-0 text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] md:w-[554px] md:text-[18px] md:leading-[27px]`}
+            className={`${interRegular.className} w-[554px] shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
             data-node-id="2379:8694"
           >
             Don&apos;t iterate on legacy silicon. Build the fundamental compute
@@ -157,7 +157,7 @@ export function CareersHero() {
 
           <a
             href="#open-roles"
-            className={`${gilroySemiBold.className} relative block h-[48px] w-[220px] shrink-0 shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] lg:w-[231px]`}
+            className={`${interSemiBold.className} relative block h-[48px] w-[231px] shrink-0 shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
             data-node-id="2379:8695"
             data-name="Cta"
           >
@@ -166,7 +166,7 @@ export function CareersHero() {
               className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
             />
             <span
-              className="absolute top-[calc(50%-8px)] left-[30px] text-[13px] leading-[normal] whitespace-nowrap text-white uppercase not-italic lg:left-[47.11px] lg:text-[14px]"
+              className="absolute top-[calc(50%-8px)] left-[47.11px] text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic"
               data-node-id="2379:8696"
             >
               VIEW OPEN ROLES
@@ -176,7 +176,7 @@ export function CareersHero() {
               alt=""
               width={6}
               height={6}
-              className="pointer-events-none absolute top-1/2 left-[160px] size-[6px] -translate-y-1/2 lg:left-[177.5px]"
+              className="pointer-events-none absolute top-1/2 left-[177.5px] size-[6px] -translate-y-1/2"
               aria-hidden
             />
             <CtaCorners />
@@ -190,7 +190,7 @@ export function CareersHero() {
 
       {/* 2379:8707 — scroll indicator */}
       <div
-        className={`${interRegular.className} pointer-events-none absolute bottom-[30px] right-[40px] z-10 hidden flex-col content-stretch items-center gap-[10px] lg:flex`}
+        className={`${interRegular.className} pointer-events-none absolute top-[616px] left-[1335.5px] z-10 flex h-[75px] w-[18px] flex-col content-stretch items-center gap-[10px]`}
         data-node-id="2379:8707"
         aria-hidden
       >
