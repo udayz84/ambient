@@ -183,16 +183,6 @@ function CarouselChipItem({
             height: HERO_CHIP_HEIGHT,
           }}
         >
-          <div className="absolute bottom-full left-[23.06201171875px] mb-[8.486328125px] h-[136.73727416992188px] w-[297.23162841796875px]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt=""
-              src="/platform-scale/chip-shade.svg"
-              className="absolute inset-0 block size-full max-w-none"
-              aria-hidden
-            />
-          </div>
-
           <div className="relative size-full shadow-[0px_21px_20px_0px_#0d2006]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img

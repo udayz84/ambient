@@ -182,7 +182,7 @@ export function EcosystemPartners() {
   return (
     <div
       ref={ref}
-      className="relative mx-auto h-[285px] w-full max-w-[1440px] overflow-hidden"
+      className="relative h-[285px] w-full overflow-hidden"
       data-node-id="2379:1047"
     >
       <div

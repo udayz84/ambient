@@ -58,7 +58,7 @@ export function DeveloperPlatformBackground() {
           }}
         >
           <div
-            className="flex h-[883px] w-[1440px] items-start overflow-clip border-t-[1.805px] border-solid border-[rgba(255,255,255,0.5)] bg-gradient-to-b from-black from-[11.538%] to-[rgba(0,0,0,0)] to-[30.879%]"
+            className="flex h-[883px] w-[1440px] items-start overflow-clip bg-gradient-to-b from-black from-[11.538%] to-[rgba(0,0,0,0)] to-[30.879%]"
             data-node-id="2379:966"
             data-name="Fractal Glass"
           >
