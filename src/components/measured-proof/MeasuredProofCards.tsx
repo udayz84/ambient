@@ -282,12 +282,19 @@ export function MeasuredProofCards() {
 
     const onMouseDown = (event: MouseEvent) => {
       if (event.button !== 0) return;
+      handleDragStart(event.clientX);
+    };
 
+    const onTouchStart = (event: TouchEvent) => {
+      handleDragStart(event.touches[0].clientX);
+    };
+
+    const handleDragStart = (clientX: number) => {
       const state = scrollStateRef.current;
       state.isDragging = true;
-      state.dragStartX = event.clientX;
+      state.dragStartX = clientX;
       state.dragStartScroll = state.current;
-      state.lastDragX = event.clientX;
+      state.lastDragX = clientX;
       state.lastDragTime = performance.now();
       state.dragVelocity = 0;
       state.velocity = 0;
@@ -296,13 +303,21 @@ export function MeasuredProofCards() {
     };
 
     const onMouseMove = (event: MouseEvent) => {
-      const state = scrollStateRef.current;
-      if (!state.isDragging) return;
-
+      if (!scrollStateRef.current.isDragging) return;
       event.preventDefault();
+      handleDragMove(event.clientX);
+    };
+
+    const onTouchMove = (event: TouchEvent) => {
+      if (!scrollStateRef.current.isDragging) return;
+      handleDragMove(event.touches[0].clientX);
+    };
+
+    const handleDragMove = (clientX: number) => {
+      const state = scrollStateRef.current;
       const now = performance.now();
-      const deltaX = event.clientX - state.dragStartX;
-      const frameDelta = event.clientX - state.lastDragX;
+      const deltaX = clientX - state.dragStartX;
+      const frameDelta = clientX - state.lastDragX;
       const frameTime = Math.max(now - state.lastDragTime, 1);
 
       state.current = clamp(
@@ -312,7 +327,7 @@ export function MeasuredProofCards() {
       );
       state.target = state.current;
       state.dragVelocity = (frameDelta / frameTime) * 16;
-      state.lastDragX = event.clientX;
+      state.lastDragX = clientX;
       state.lastDragTime = now;
       startAnimationLoop();
     };
@@ -334,17 +349,27 @@ export function MeasuredProofCards() {
 
     const onResize = () => updateMaxScroll();
 
+    const preventNativeDrag = (e: Event) => e.preventDefault();
+
     viewport.addEventListener("wheel", onWheel, { passive: false });
     viewport.addEventListener("mousedown", onMouseDown);
+    viewport.addEventListener("touchstart", onTouchStart, { passive: true });
+    viewport.addEventListener("dragstart", preventNativeDrag);
     window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
     window.addEventListener("mouseup", stopDragging);
+    window.addEventListener("touchend", stopDragging);
     window.addEventListener("resize", onResize);
 
     return () => {
       viewport.removeEventListener("wheel", onWheel);
       viewport.removeEventListener("mousedown", onMouseDown);
+      viewport.removeEventListener("touchstart", onTouchStart);
+      viewport.removeEventListener("dragstart", preventNativeDrag);
       window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("mouseup", stopDragging);
+      window.removeEventListener("touchend", stopDragging);
       window.removeEventListener("resize", onResize);
       stopAnimationLoop();
     };
@@ -353,8 +378,8 @@ export function MeasuredProofCards() {
   return (
     <div
       ref={viewportRef}
-      className={`absolute top-1/2 right-0 left-0 -translate-y-1/2 overflow-hidden ${
-        isDragging ? "cursor-grabbing select-none" : "cursor-grab"
+      className={`absolute top-1/2 right-0 left-0 -translate-y-1/2 overflow-hidden touch-pan-y select-none ${
+        isDragging ? "cursor-grabbing" : "cursor-grab"
       }`}
       data-node-id="2379:1503"
       data-name="Measured proof in silicon"

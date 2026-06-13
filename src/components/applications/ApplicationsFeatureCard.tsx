@@ -109,9 +109,8 @@ export function ApplicationsFeatureCard({
               <Image
                 src={topTrSrc}
                 alt=""
-                width={4}
-                height={5}
-                className="block size-full max-w-none"
+                fill
+                className="block object-fill max-w-none"
                 aria-hidden
               />
             </div>
@@ -132,9 +131,8 @@ export function ApplicationsFeatureCard({
               <Image
                 src={topTlSrc}
                 alt=""
-                width={5}
-                height={4}
-                className="block size-full max-w-none"
+                fill
+                className="block object-fill max-w-none"
                 aria-hidden
               />
             </div>

@@ -42,8 +42,7 @@ export function LatestNewsCard({
           <Image
             src={imageSrc}
             alt=""
-            width={386}
-            height={229}
+            fill
             className={imageClassName}
           />
         </div>

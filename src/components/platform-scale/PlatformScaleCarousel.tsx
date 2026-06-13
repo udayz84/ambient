@@ -75,7 +75,7 @@ const SLOT_CONFIG: Record<SlotKey, SlotConfig> = {
     labelPaddingY: 10,
   },
   "0": {
-    centerX: SECTION_CENTER_X - 3.80859375,
+    centerX: SECTION_CENTER_X,
     top: 375.001953125,
     scale: 1,
     opacity: 1,
@@ -257,11 +257,11 @@ function CarouselChipItem({
 function PlatformScaleStatPanel({ product }: { product: GpxProduct }) {
   return (
     <div
-      className="relative absolute top-[813px] left-1/2 flex w-[500px] -translate-x-1/2 items-center gap-[32px] bg-[rgba(0,0,0,0.1)] px-[10px]"
+      className="absolute top-[813px] left-1/2 flex w-[500px] max-md:w-[calc(100%-32px)] -translate-x-1/2 items-center gap-[32px] bg-[rgba(0,0,0,0.1)] px-[10px]"
       data-node-id="2379:641"
     >
       <div
-        className="relative flex min-w-px flex-[1_0_0] flex-col items-center justify-center gap-[12px] py-[20px] pl-[20px]"
+        className="relative flex min-w-px flex-[1_0_0] flex-col items-center justify-center gap-[12px] max-md:gap-[4px] py-[20px] pl-[20px]"
         data-node-id="2379:642"
         data-name="Stat"
       >

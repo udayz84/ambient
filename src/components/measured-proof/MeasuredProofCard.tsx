@@ -65,8 +65,7 @@ export function MeasuredProofCard({
           <Image
             src={imageSrc}
             alt=""
-            width={imageWidth}
-            height={imageHeight}
+            fill
             className={imageClassName}
           />
         </div>
