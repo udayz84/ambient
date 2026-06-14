@@ -10,7 +10,7 @@ export function ContactHero() {
   return (
     <>
       <div
-        className={`pointer-events-none absolute top-0 left-0 z-0 h-[733px] w-[1440px] overflow-hidden ${HERO_FADE_IN_CLASS}`}
+        className={`pointer-events-none absolute top-0 left-1/2 z-0 h-[733px] w-[1440px] -translate-x-1/2 overflow-hidden ${HERO_FADE_IN_CLASS}`}
         data-node-id="2379:4951"
         data-name="hand"
       >

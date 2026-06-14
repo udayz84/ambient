@@ -25,7 +25,7 @@ export function Navbar() {
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute top-[0.158203125px] left-1/2 h-[77.5px] w-[1511px] -translate-x-1/2"
+        className="pointer-events-none absolute top-[0.158203125px] left-1/2 h-[77.5px] w-full min-w-[1511px] -translate-x-1/2"
         data-node-id="2379:1570"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -37,7 +37,7 @@ export function Navbar() {
       </div>
       <div
         aria-hidden
-        className="pointer-events-none absolute top-[35.158203125px] left-1/2 h-[43px] w-[1511px] -translate-x-1/2"
+        className="pointer-events-none absolute top-[35.158203125px] left-1/2 h-[43px] w-full min-w-[1511px] -translate-x-1/2"
         data-node-id="2379:1573"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}

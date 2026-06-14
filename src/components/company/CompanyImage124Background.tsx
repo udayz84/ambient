@@ -7,7 +7,7 @@ const IMAGE_124_OVERLAY =
 export function CompanyImage124Background() {
   return (
     <div
-      className={`pointer-events-none absolute top-[5800px] z-[8] h-[1102px] overflow-hidden ${COMPANY_FULL_BLEED_BG_CLASS}`}
+      className={`pointer-events-none absolute top-[5800px] z-[8] h-[1102px] overflow-hidden ${COMPANY_FULL_BLEED_BG_CLASS} mix-blend-screen`}
       data-node-id="2379:2136"
       data-name="image 124"
       aria-hidden

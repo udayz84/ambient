@@ -17,6 +17,7 @@ const CARDS = [
     imageTop: 161,
     imageClassName:
       "absolute top-[-16.05%] left-0 h-[135.04%] w-full max-w-none",
+    imageSizes: "271px",
     statWidth: 299,
     descriptionWidth: 290,
   },
@@ -30,6 +31,7 @@ const CARDS = [
     imageWidth: 331.144,
     imageHeight: 260,
     imageTop: 169,
+    imageSizes: "332px",
     statWidth: 187,
     descriptionWidth: 319,
     statJustifyEnd: true,
@@ -44,6 +46,7 @@ const CARDS = [
     imageWidth: 305.672,
     imageHeight: 240,
     imageTop: 174.67,
+    imageSizes: "306px",
     statWidth: 225,
     descriptionWidth: 317,
   },
@@ -59,6 +62,7 @@ const CARDS = [
     imageTop: 151,
     imageClassName:
       "absolute top-[-11.4%] left-[-30.32%] h-[122.8%] w-[146.43%] max-w-none",
+    imageSizes: "320px",
     statWidth: 271,
     descriptionWidth: 320,
     descriptionBottom: 137.5,

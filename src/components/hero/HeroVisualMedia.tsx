@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 const HERO_VISUAL_MP4 = "/hero/Ambient Hero Dummy Video.mp4";
-const HERO_VISUAL_POSTER = "/hero/hero-visual-poster.png";
+const HERO_VISUAL_POSTER = "/hero/test-2379-737.png";
 
 export function HeroVisualMedia() {
   const videoRef = useRef<HTMLVideoElement>(null);

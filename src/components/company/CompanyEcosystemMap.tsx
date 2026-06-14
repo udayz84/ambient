@@ -12,7 +12,7 @@ export function CompanyEcosystemMap() {
         alt=""
         width={1340}
         height={766}
-        className="block h-[765.427px] w-[1340px] max-w-none object-fill"
+        className="block h-[765.427px] w-[1340px] max-w-none object-fill mix-blend-screen"
         data-node-id="2379:2373"
         priority={false}
         aria-hidden

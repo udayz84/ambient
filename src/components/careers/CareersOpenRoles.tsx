@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { interMedium, interRegular } from "../hero/fonts";
+import { CompanyCardCorners } from "../company/company-corners";
 import { dmMono } from "../hero/fonts";
 import {
   CAREERS_JOBS,
@@ -54,7 +55,7 @@ export function CareersOpenRoles() {
   return (
     <section
       id="open-roles"
-      className="absolute top-[2426px] left-[118px] z-10 flex h-[1696px] w-[1204px] flex-col gap-[40px]"
+      className="absolute top-[2426px] left-1/2 z-10 flex h-[1696px] w-[1204px] -translate-x-1/2 flex-col gap-[40px]"
       data-node-id="2379:8901"
       aria-label="Open Roles"
     >
@@ -303,9 +304,10 @@ function FilterDropdown({
   return (
     <div
       ref={rootRef}
-      className="relative flex w-[200px] shrink-0 items-center"
+      className="relative flex w-[200px] shrink-0 items-center border-[0.5px] border-[rgba(240,240,240,0.2)]"
       data-node-id={nodeId}
     >
+      <CompanyCardCorners cornerBottom={44} />
       <button
         type="button"
         aria-haspopup="listbox"

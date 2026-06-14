@@ -17,6 +17,7 @@ export function LatestNewsCard({
   date,
   imageSrc,
   imageClassName = "absolute inset-0 size-full max-w-none object-cover",
+  imageSizes = "386px",
 }: LatestNewsCardProps) {
   return (
     <article
@@ -44,6 +45,7 @@ export function LatestNewsCard({
             alt=""
             fill
             className={imageClassName}
+            sizes={imageSizes}
           />
         </div>
         <div

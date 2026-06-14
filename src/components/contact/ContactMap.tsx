@@ -112,8 +112,7 @@ export function ContactMap() {
       </div>
 
       <div
-        className="pointer-events-none absolute top-[609px] left-1/2 h-[392px] w-[1204px] origin-center overflow-clip opacity-20"
-        style={{ transform: CONTACT_VIEWPORT_SCALE }}
+        className="pointer-events-none absolute top-[609px] left-1/2 h-[392px] w-[1204px] origin-center -translate-x-1/2 overflow-clip opacity-20"
         data-node-id="2379:5089"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -125,7 +124,7 @@ export function ContactMap() {
       </div>
 
       <div
-        className="absolute top-[609px] left-[38px] h-[393px] w-[1204px]"
+        className="absolute top-[609px] left-1/2 h-[393px] w-[1204px] -translate-x-1/2"
         data-node-id="2379:5088"
       >
         {locations.map((loc) => (

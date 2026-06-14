@@ -10,6 +10,7 @@ type MeasuredProofCardProps = {
   imageHeight: number;
   imageTop: number;
   imageClassName?: string;
+  imageSizes?: string;
   statWidth: number;
   descriptionWidth: number;
   descriptionBottom?: number;
@@ -26,6 +27,7 @@ export function MeasuredProofCard({
   imageHeight,
   imageTop,
   imageClassName = "absolute inset-0 max-w-none object-cover",
+  imageSizes = "332px",
   statWidth,
   descriptionWidth,
   descriptionBottom = 110.5,
@@ -67,6 +69,7 @@ export function MeasuredProofCard({
             alt=""
             fill
             className={imageClassName}
+            sizes={imageSizes}
           />
         </div>
       </div>

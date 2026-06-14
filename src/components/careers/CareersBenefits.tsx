@@ -4,7 +4,7 @@ import { CareersFramedTitle, CareersGradientCard } from "./careers-shared";
 export function CareersBenefits() {
   return (
     <section
-      className="absolute top-[4252px] left-[60.5px] z-10 flex w-[1318px] flex-col items-center gap-[40px]"
+      className="absolute top-[4252px] left-1/2 z-10 flex w-[1318px] -translate-x-1/2 flex-col items-center gap-[40px]"
       data-node-id="2379:8953"
       aria-label="Benefits and Perks"
     >

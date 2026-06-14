@@ -5,7 +5,7 @@ import { CareersGradientCard } from "./careers-shared";
 export function CareersBestWork() {
   return (
     <section
-      className="absolute top-[827px] left-[60.01px] z-10 flex w-[1319.98px] flex-col items-center gap-[40px]"
+      className="absolute top-[827px] left-1/2 z-10 flex w-[1319.98px] -translate-x-1/2 flex-col items-center gap-[40px]"
       data-node-id="2379:8710"
       aria-label="Do the best work of your life"
     >

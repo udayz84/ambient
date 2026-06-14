@@ -14,12 +14,12 @@ const CHIP_FADE_IN_CLASS = "animate-hero-text-fade-in opacity-0";
 export function CareersDna() {
   return (
     <section
-      className="absolute top-[1379px] left-0 z-10 h-[841px] w-[1445px] overflow-hidden"
+      className="absolute top-[1379px] left-1/2 z-10 h-[841px] w-full -translate-x-1/2 overflow-hidden"
       data-node-id="2379:8843"
       aria-label="Driven by physics. Defined by our DNA."
     >
       <div
-        className="pointer-events-none absolute top-[80px] left-0 h-[689.269px] w-[1444.395px] overflow-hidden"
+        className="pointer-events-none absolute top-[80px] left-0 h-[689.269px] w-full overflow-hidden"
         data-node-id="2379:8844"
         data-name="image 108"
       >
@@ -28,7 +28,7 @@ export function CareersDna() {
           <img
             src="/careers/dna-section-bg.png"
             alt=""
-            className="absolute size-full max-w-none object-cover object-bottom"
+            className="absolute size-full max-w-none"
           />
           <div className="absolute inset-0" style={{ backgroundImage: DNA_BG_GRADIENT }} aria-hidden />
         </div>

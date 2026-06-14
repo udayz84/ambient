@@ -5,7 +5,7 @@ import { CareersGreenCta, CareersWhiteCta } from "../careers/careers-shared";
 export function CompanyBottomCta() {
   return (
     <section
-      className="absolute top-[120px] left-[350.89px] z-20 flex w-[728px] flex-col items-center"
+      className="absolute top-[240px] left-[350.89px] z-20 flex w-[728px] flex-col items-center"
       aria-label="Ready to build the future of compute"
     >
       <div className="relative h-[126px] w-[708px] shrink-0">

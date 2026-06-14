@@ -102,6 +102,22 @@ export function CompanyLeadership() {
 
         <CompanyAdvisoryBoard />
       </div>
+
+      <button
+        type="button"
+        className="absolute top-[593px] left-[39px] z-20 flex size-[44px] cursor-pointer items-center justify-center transition-opacity hover:opacity-80"
+        aria-label="Previous"
+      >
+        <Image src="/applications/nav-arrow-left.svg" alt="" width={44} height={44} className="block size-full max-w-none" />
+      </button>
+
+      <button
+        type="button"
+        className="absolute top-[593px] left-[1347px] z-20 flex size-[44px] cursor-pointer items-center justify-center transition-opacity hover:opacity-80"
+        aria-label="Next"
+      >
+        <Image src="/applications/nav-arrow-right.svg" alt="" width={44} height={44} className="block size-full max-w-none" />
+      </button>
     </section>
   );
 }

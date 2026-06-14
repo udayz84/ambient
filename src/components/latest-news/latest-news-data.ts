@@ -7,6 +7,7 @@ export type LatestNewsArticle = {
   date: string;
   imageSrc: string;
   imageClassName?: string;
+  imageSizes?: string;
 };
 
 export const LATEST_NEWS_ARTICLES: LatestNewsArticle[] = [

@@ -48,9 +48,21 @@ export function ResourcesContent({
     }, LOAD_MORE_DELAY_MS);
   };
 
+  const currentIndex = RESOURCE_CATEGORIES.findIndex((c) => c.id === activeCategory);
+
+  const handlePrevCategory = () => {
+    const prevIndex = currentIndex > 0 ? currentIndex - 1 : RESOURCE_CATEGORIES.length - 1;
+    setActiveCategory(RESOURCE_CATEGORIES[prevIndex].id);
+  };
+
+  const handleNextCategory = () => {
+    const nextIndex = currentIndex < RESOURCE_CATEGORIES.length - 1 ? currentIndex + 1 : 0;
+    setActiveCategory(RESOURCE_CATEGORIES[nextIndex].id);
+  };
+
   return (
     <section
-      className="absolute top-[2026px] left-[98px] flex w-[1244px] flex-col items-center gap-[60px]"
+      className="absolute top-[2026px] left-1/2 flex w-[1244px] -translate-x-1/2 flex-col items-center gap-[60px]"
       aria-label="Resource library"
       data-node-id="2379:1772"
     >
@@ -61,8 +73,9 @@ export function ResourcesContent({
       >
         <button
           type="button"
-          className="relative size-[44px] shrink-0"
-          aria-label="Scroll categories left"
+          className="relative size-[44px] shrink-0 hover:opacity-80 transition-opacity"
+          aria-label="Previous category"
+          onClick={handlePrevCategory}
           data-node-id="2379:1774"
         >
           <Image
@@ -124,8 +137,9 @@ export function ResourcesContent({
 
         <button
           type="button"
-          className="relative size-[44px] shrink-0"
-          aria-label="Scroll categories right"
+          className="relative size-[44px] shrink-0 hover:opacity-80 transition-opacity"
+          aria-label="Next category"
+          onClick={handleNextCategory}
           data-node-id="2379:1825"
         >
           <Image

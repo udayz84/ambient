@@ -13,7 +13,7 @@ export function ResourcesHero() {
     <>
       {/* 2388:421 — rotated image 102 underlay */}
       <div
-        className="pointer-events-none absolute top-0 left-0 z-0 h-[825px] w-[1442px] overflow-hidden"
+        className="pointer-events-none absolute top-0 left-1/2 z-0 h-[825px] w-[1442px] -translate-x-1/2 overflow-hidden"
         data-node-id="2388:421"
         data-name="Hero Image"
       >

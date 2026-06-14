@@ -6,21 +6,13 @@ import { NewsletterSignup } from "./NewsletterSignup";
 export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolean }) {
   return (
     <footer
-      className="relative left-1/2 mt-[21px] h-[1252px] w-screen max-w-none -translate-x-1/2 overflow-hidden bg-black"
+      className="relative mt-[21px] flex h-[1252px] w-full justify-center overflow-hidden bg-black"
       data-node-id="2379:784"
       data-name="footer"
     >
       <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 bg-black" />
-        <div
-          className="absolute left-1/2 w-[1440px] origin-center overflow-hidden"
-          style={{
-            height: "97.04%",
-            top: "-5.03%",
-            transform:
-              "translateX(-50%) scaleX(max(1, calc(100vw / 1440px)))",
-          }}
-        >
+        <div className="absolute inset-0 overflow-hidden">
           <div className="relative h-full w-full">
             <Image
               src="/footer/footer-bg.png"
@@ -42,7 +34,7 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
       ) : null}
 
       <nav
-        className="absolute top-[626px] left-1/2 z-[1] flex w-[897px] -translate-x-1/2 items-center justify-between text-center text-white"
+        className="absolute top-[690px] left-1/2 z-[1] flex w-[897px] -translate-x-1/2 items-start justify-between text-center text-white"
         aria-label="Footer"
         data-node-id="2379:786"
       >
@@ -66,7 +58,7 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
                 <li key={link} className="w-full">
                   <a
                     href="#"
-                    className={`${interRegular.className} font-normal text-white not-italic hover:opacity-80`}
+                    className={`${interRegular.className} font-normal whitespace-nowrap text-white not-italic hover:opacity-80`}
                   >
                     {link}
                   </a>
@@ -77,115 +69,56 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
         ))}
       </nav>
 
-      <p
-        className={`${gilroyMedium.className} absolute top-[903px] left-[calc(12.5%-60px)] z-[1] text-[10px] leading-[1.4] font-medium tracking-[0.4px] whitespace-nowrap text-white uppercase opacity-60 not-italic`}
-        data-node-id="2379:815"
-      >
-        CONNECT WITH US
-      </p>
+      {/* Bottom Section */}
+      <div className="absolute top-[967px] left-0 z-[1] flex w-full items-end justify-between px-[12.5%]">
+        
+        {/* Left Side */}
+        <div className="flex items-end gap-[32px]">
+          {/* Socials Block */}
+          <div className="flex flex-col gap-[16px]">
+            <p className={`${gilroyMedium.className} text-[10px] leading-[1.4] font-medium tracking-[0.4px] uppercase text-white opacity-60 not-italic`}>
+              CONNECT WITH US
+            </p>
+            <div className="flex items-center gap-[32px]">
+              <a href="#" aria-label="LinkedIn" className="relative size-[24px]">
+                <Image src="/footer/social-linkedin.svg" alt="" fill className="block object-contain" />
+              </a>
+              <a href="#" aria-label="X" className="relative size-[24px]">
+                <Image src="/footer/social-x.svg" alt="" fill className="block object-contain" />
+              </a>
+              <a href="#" aria-label="YouTube" className="relative size-[24px]">
+                <Image src="/footer/social-youtube.svg" alt="" fill className="block object-contain" />
+              </a>
+            </div>
+          </div>
 
-      <p
-        className={`${gilroyMedium.className} absolute top-[903px] left-[calc(20.83%+2px)] z-[1] text-[10px] leading-[1.4] font-medium tracking-[0.4px] whitespace-nowrap text-white uppercase opacity-60 not-italic`}
-        data-node-id="2379:816"
-      >
-        Legal pages
-      </p>
+          {/* Separator */}
+          <div className="mb-[4px] h-[25px] w-px bg-white/20" />
 
-      <div
-        className="absolute top-[935px] left-[calc(12.5%+8px)] z-[1] flex -translate-x-1/2 items-center gap-[32px] pt-px"
-        data-node-id="2379:837"
-        data-name="Social Media Icons"
-      >
-        <a href="#" aria-label="LinkedIn" className="relative size-[24px]">
-          <Image
-            src="/footer/social-linkedin.svg"
-            alt=""
-            width={24}
-            height={24}
-            className="block size-full max-w-none"
-          />
-        </a>
-        <a href="#" aria-label="X" className="relative size-[24px]">
-          <Image
-            src="/footer/social-x.svg"
-            alt=""
-            width={24}
-            height={24}
-            className="block size-full max-w-none"
-          />
-        </a>
-        <a href="#" aria-label="YouTube" className="relative size-[24px]">
-          <Image
-            src="/footer/social-youtube.svg"
-            alt=""
-            width={24}
-            height={24}
-            className="block size-full max-w-none"
-          />
-        </a>
-      </div>
-
-      <div className="absolute top-[935px] left-[calc(16.67%+40px)] z-[1] flex h-[25px] w-0 -translate-x-1/2 items-center justify-center">
-        <div className="-rotate-90 flex-none">
-          <div className="relative h-0 w-[25px]">
-            <div className="absolute inset-[-1px_0_0_0]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/footer/legal-separator.svg"
-                alt=""
-                className="block size-full max-w-none"
-                aria-hidden
-              />
+          {/* Legal Links Block */}
+          <div className="flex flex-col gap-[16px]">
+            <p className={`${gilroyMedium.className} text-[10px] leading-[1.4] font-medium tracking-[0.4px] uppercase text-white opacity-60 not-italic`}>
+              Legal pages
+            </p>
+            <div className="flex items-center gap-[8px] pb-[4px]">
+              <a href="#" className={`${interRegular.className} text-[12px] leading-[1.4] text-white hover:opacity-80`}>Privacy Policy</a>
+              <div className="relative h-[4px] w-[5px]">
+                <Image src="/footer/dot-separator.svg" alt="" fill />
+              </div>
+              <a href="#" className={`${interRegular.className} text-[12px] leading-[1.4] text-white hover:opacity-80`}>Terms of Service</a>
+              <div className="relative h-[4px] w-[5px]">
+                <Image src="/footer/dot-separator.svg" alt="" fill />
+              </div>
+              <a href="#" className={`${interRegular.className} text-[12px] leading-[1.4] text-white hover:opacity-80`}>Cookie Policy</a>
             </div>
           </div>
         </div>
-      </div>
 
-      <div
-        className="absolute top-[939px] left-[calc(29.17%+29px)] z-[1] flex -translate-x-1/2 items-center gap-[8px]"
-        data-node-id="2379:830"
-      >
-        {["Privacy Policy", "Terms of Service", "Cookie Policy"].map(
-          (label, index) => (
-            <span key={label} className="contents">
-              {index > 0 && (
-                <span className="flex items-center justify-center">
-                  <span className="-scale-y-100 flex-none">
-                    <span className="relative block h-[4px] w-[5px]">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src="/footer/dot-separator.svg"
-                        alt=""
-                        className="block size-full max-w-none"
-                        aria-hidden
-                      />
-                    </span>
-                  </span>
-                </span>
-              )}
-              <a
-                href="#"
-                className={`${interRegular.className} text-[12px] leading-[1.4] font-normal whitespace-nowrap text-white not-italic hover:opacity-80`}
-              >
-                {label}
-              </a>
-            </span>
-          ),
-        )}
-      </div>
-
-      <div
-        className="absolute top-[942px] left-0 z-[1] h-[12px] w-full"
-        data-name="Footer bottom bar"
-      >
-        <p
-          className={`${interRegular.className} absolute top-0 left-[calc(70.83%-138.11px)] text-[12px] leading-[1.3] font-normal whitespace-nowrap text-white/80 not-italic`}
-          data-node-id="2379:1463"
-        >
-          © 2026 Ambient AI. All rights reserved.
-        </p>
-
-        <div className="absolute top-0 left-[calc(75%+69.81px)]">
+        {/* Right Side */}
+        <div className="flex items-center gap-[48px] pb-[4px]">
+          <p className={`${interRegular.className} text-[12px] leading-[1.3] text-white/80`}>
+            © 2026 Ambient AI. All rights reserved.
+          </p>
           <CraftedByAttribution />
         </div>
       </div>

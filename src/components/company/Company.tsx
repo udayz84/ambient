@@ -22,56 +22,35 @@ import { CompanyMission } from "./CompanyMission";
 
 /** Figma 2379:2087 — engagement ends ~6737px; footer from 6572px; canvas 7824px */
 
-const COMPANY_PAGE_HEIGHT_PX = 7824;
+const COMPANY_PAGE_HEIGHT_PX = 6572;
 
 const COMPANY_FOOTER_TOP_PX = 6572;
 
 
 
 export function Company() {
-
   return (
-
     <main className="flex w-full flex-col overflow-x-clip bg-black">
-
       <div
-
-        className="relative -mt-[78px] mx-auto w-full max-w-[1440px] min-w-[1440px] overflow-x-clip overflow-y-visible bg-black"
-
+        className="relative mx-auto -mt-[78px] w-full overflow-x-clip overflow-y-visible bg-black"
         style={{ height: COMPANY_PAGE_HEIGHT_PX }}
-
         data-node-id="2379:2087"
-
         data-name="Company - 02"
-
       >
-
-        <CompanyHero />
-
-        <CompanyMission />
-
-        <CompanyLeadership />
-
-        <CompanyDna />
-
-        <CompanyEcosystem />
-
-        <CompanyTechnologyPartners />
-
-        <CompanyArticles />
-
-        <CompanyImage124Background />
-
-        <CompanyEngagement />
-
-        <CompanyEndSection />
-
+        <div className="relative mx-auto h-full w-[1440px]">
+          <CompanyHero />
+          <CompanyMission />
+          <CompanyLeadership />
+          <CompanyDna />
+          <CompanyEcosystem />
+          <CompanyTechnologyPartners />
+          <CompanyArticles />
+          <CompanyImage124Background />
+          <CompanyEngagement />
+        </div>
       </div>
-
     </main>
-
   );
-
 }
 
 

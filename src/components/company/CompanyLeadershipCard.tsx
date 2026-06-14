@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { gilroyMedium, interRegular } from "../hero/fonts";
+import { CompanyCardCorners } from "./company-corners";
 import type { LeadershipMember } from "./company-leadership-data";
 
 /** Figma User Image — leadership instance (2379:2288) */
@@ -360,13 +361,12 @@ export function CompanyLeadershipCard({
         )}
       </div>
 
-      <div className="pointer-events-none absolute inset-0 z-20" aria-hidden>
-        <Image
+      <div className="pointer-events-none absolute inset-[-1px] z-20" aria-hidden>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src={spec.borderSrc}
           alt=""
-          fill
-          className="object-fill"
-          sizes={`${spec.cardWidth}px`}
+          className="block size-full max-w-none"
         />
       </div>
 
@@ -382,6 +382,8 @@ export function CompanyLeadershipCard({
         isExpanded={isExpanded}
         onReadMoreToggle={onReadMoreToggle}
       />
+
+      <CompanyCardCorners cornerBottom={spec.cardHeight - 4} />
     </article>
   );
 }

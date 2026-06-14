@@ -9,15 +9,15 @@ const STAT_VALUE_GRADIENT =
 const SMOOTH_EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
 const SUFFIX_TRANSITION_MS = 750;
 const MS_PER_COUNT_UNIT = 50;
-const MIN_COUNT_DURATION_MS = 3000;
-const MAX_COUNT_DURATION_MS = 5000;
+const MIN_COUNT_DURATION_MS = 1500;
+const MAX_COUNT_DURATION_MS = 2500;
 
-function easeOutCubic(t: number) {
-  return 1 - (1 - t) ** 3;
+function easeOutExpo(t: number) {
+  return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
 }
 
 function countDurationMs(target: number) {
-  const scaled = target * MS_PER_COUNT_UNIT;
+  const scaled = target * 25;
   return Math.min(MAX_COUNT_DURATION_MS, Math.max(MIN_COUNT_DURATION_MS, scaled));
 }
 
@@ -92,7 +92,7 @@ export function CompanyMissionStatValue({
       const tick = (now: number) => {
         const elapsed = now - startTime;
         const progress = Math.min(elapsed / durationMs, 1);
-        const eased = easeOutCubic(progress);
+        const eased = easeOutExpo(progress);
         const current = progress >= 1 ? target : Math.round(eased * target);
 
         if (current !== lastValue) {

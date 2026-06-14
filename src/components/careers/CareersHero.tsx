@@ -8,220 +8,222 @@ const cornerCtaRight = "/hero/corner-tag-2.svg";
 export function CareersHero() {
   return (
     <section
-      className="relative h-[798px] w-full max-w-[1442px] min-w-[1442px] overflow-hidden bg-black"
+      className="relative flex h-[798px] w-full justify-center overflow-hidden bg-black"
       data-node-id="2379:8679"
       data-name="Hero Section"
       aria-label="Careers hero"
     >
-      {/* 2379:8615 — hero background (page sibling in Figma) */}
-      <div
-        className="pointer-events-none absolute top-0 left-0 z-0 h-[764px] w-[1440px] overflow-hidden"
-        data-node-id="2379:8615"
-        data-name="image 105"
-      >
-        <div className="absolute inset-0 overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/careers/hero-bg.png"
-            alt=""
-            className="absolute top-0 left-[0.05%] h-full w-[99.91%] max-w-none object-cover"
-          />
+      <div className="relative h-full w-full max-w-[1442px]">
+        {/* 2379:8615 — hero background (page sibling in Figma) */}
+        <div
+          className="pointer-events-none absolute top-0 left-0 z-0 h-[764px] w-[1440px] overflow-hidden"
+          data-node-id="2379:8615"
+          data-name="image 105"
+        >
+          <div className="absolute inset-0 overflow-hidden">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/careers/hero-bg.png"
+              alt=""
+              className="absolute top-0 left-[0.05%] h-full w-[99.91%] max-w-none object-cover"
+            />
+          </div>
         </div>
-      </div>
 
-      {/* 2379:8680 — ellipse glow */}
-      <div
-        className="pointer-events-none absolute top-[60.97px] left-[-169.89px] z-[1] size-[657px]"
-        data-node-id="2379:8680"
-        data-name="Ellipse 16188"
-      >
-        <div className="absolute inset-[-60.88%]">
+        {/* 2379:8680 — ellipse glow */}
+        <div
+          className="pointer-events-none absolute top-[60.97px] left-[-169.89px] z-[1] size-[657px]"
+          data-node-id="2379:8680"
+          data-name="Ellipse 16188"
+        >
+          <div className="absolute inset-[-60.88%]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/careers/hero-ellipse-glow.svg"
+              alt=""
+              className="block size-full max-w-none"
+              aria-hidden
+            />
+          </div>
+        </div>
+
+        {/* 2379:8681 — left vertical line */}
+        <div className="pointer-events-none absolute top-[79px] left-[95px] z-[2] flex h-[821px] w-0 items-center justify-center">
+          <div className="flex-none rotate-90">
+            <div className="relative h-0 w-[821px]" data-node-id="2379:8681" data-name="Line 82">
+              <div className="absolute inset-[-1px_0_0_0]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/hero/line-82.svg"
+                  alt=""
+                  className="block size-full max-w-none"
+                  aria-hidden
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="pointer-events-none absolute top-[77px] left-[93px] z-[2] h-[4px] w-[5px]"
+          data-node-id="2379:8682"
+          data-name="Vector"
+        >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/careers/hero-ellipse-glow.svg"
+            src="/hero/line-cap-left.svg"
             alt=""
-            className="block size-full max-w-none"
+            className="absolute inset-0 block size-full max-w-none"
             aria-hidden
           />
         </div>
-      </div>
 
-      {/* 2379:8681 — left vertical line */}
-      <div className="pointer-events-none absolute top-[79px] left-[95px] z-[2] flex h-[821px] w-0 items-center justify-center">
-        <div className="flex-none rotate-90">
-          <div className="relative h-0 w-[821px]" data-node-id="2379:8681" data-name="Line 82">
-            <div className="absolute inset-[-1px_0_0_0]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/hero/line-82.svg"
-                alt=""
-                className="block size-full max-w-none"
-                aria-hidden
-              />
+        {/* 2379:8683 — right vertical line */}
+        <div className="pointer-events-none absolute top-[79px] right-[95px] z-[2] flex h-[597px] w-0 items-center justify-center">
+          <div className="flex-none rotate-90">
+            <div className="relative h-0 w-[597px]" data-node-id="2379:8683" data-name="Line 83">
+              <div className="absolute inset-[-0.5px_0]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/hero/line-83.svg"
+                  alt=""
+                  className="block size-full max-w-none"
+                  aria-hidden
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div
-        className="pointer-events-none absolute top-[77px] left-[93px] z-[2] h-[4px] w-[5px]"
-        data-node-id="2379:8682"
-        data-name="Vector"
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/hero/line-cap-left.svg"
-          alt=""
-          className="absolute inset-0 block size-full max-w-none"
-          aria-hidden
-        />
-      </div>
-
-      {/* 2379:8683 — right vertical line */}
-      <div className="pointer-events-none absolute top-[79px] right-[95px] z-[2] flex h-[597px] w-0 items-center justify-center">
-        <div className="flex-none rotate-90">
-          <div className="relative h-0 w-[597px]" data-node-id="2379:8683" data-name="Line 83">
-            <div className="absolute inset-[-0.5px_0]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/hero/line-83.svg"
-                alt=""
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="pointer-events-none absolute top-[77.634765625px] left-[1344.5px] z-[2] h-[4px] w-[5px]"
-        data-node-id="2379:8684"
-        data-name="Vector"
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/hero/line-cap-right.svg"
-          alt=""
-          className="absolute inset-0 block size-full max-w-none"
-          aria-hidden
-        />
-      </div>
-
-      {/* 2379:8685 — content */}
-      <div
-        className="absolute top-[245.97px] left-[150px] z-10 flex w-[576px] flex-col items-start gap-[20px]"
-        data-node-id="2379:8685"
-        data-name="Content"
-      >
         <div
-          className="relative h-[118px] w-[382px] shrink-0"
-          data-node-id="2379:8686"
-          data-name="Title"
+          className="pointer-events-none absolute top-[77.634765625px] left-[1344.5px] z-[2] h-[4px] w-[5px]"
+          data-node-id="2379:8684"
+          data-name="Vector"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/hero/line-cap-right.svg"
+            alt=""
+            className="absolute inset-0 block size-full max-w-none"
+            aria-hidden
+          />
+        </div>
+
+        {/* 2379:8685 — content */}
+        <div
+          className="absolute top-[245.97px] left-[150px] z-10 flex w-[576px] flex-col items-start gap-[20px]"
+          data-node-id="2379:8685"
+          data-name="Content"
         >
           <div
-            className="pointer-events-none absolute top-[0.81px] left-[0.93px] h-[116px] w-[380px]"
-            data-node-id="2379:8687"
-            data-name="Frame"
+            className="relative h-[118px] w-[382px] shrink-0"
+            data-node-id="2379:8686"
+            data-name="Title"
           >
-            <div className="absolute inset-[-0.43%_-0.13%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/careers/hero-title-frame.svg"
+            <div
+              className="pointer-events-none absolute top-[0.81px] left-[0.93px] h-[116px] w-[380px]"
+              data-node-id="2379:8687"
+              data-name="Frame"
+            >
+              <div className="absolute inset-[-0.43%_-0.13%]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/careers/hero-title-frame.svg"
+                  alt=""
+                  className="block size-full max-w-none"
+                  aria-hidden
+                />
+              </div>
+            </div>
+            <GradientTitle
+              nodeId="2379:8692"
+              gradientDeg="102.971deg"
+              className="absolute top-[10px] left-[20.16px] w-[349px] whitespace-nowrap"
+            >
+              <p className="mb-0 leading-[49px]">Re-architect the</p>
+              <p className="leading-[49px]">physics of AI</p>
+            </GradientTitle>
+          </div>
+
+          <div
+            className="relative flex w-[576px] shrink-0 flex-col items-start gap-[24px] pl-[22px]"
+            data-node-id="2379:8693"
+            data-name="Sub"
+          >
+            <p
+              className={`${interRegular.className} w-[554px] shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+              data-node-id="2379:8694"
+            >
+              Don&apos;t iterate on legacy silicon. Build the fundamental compute
+              substrate for the next generation of intelligence.
+            </p>
+
+            <a
+              href="#open-roles"
+              className={`${interSemiBold.className} relative block h-[48px] w-[231px] shrink-0 shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+              data-node-id="2379:8695"
+              data-name="Cta"
+            >
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+              />
+              <span
+                className="absolute top-[calc(50%-8px)] left-[47.11px] text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic"
+                data-node-id="2379:8696"
+              >
+                VIEW OPEN ROLES
+              </span>
+              <Image
+                src="/careers/cta-dot.svg"
                 alt=""
-                className="block size-full max-w-none"
+                width={6}
+                height={6}
+                className="pointer-events-none absolute top-1/2 left-[177.5px] size-[6px] -translate-y-1/2"
                 aria-hidden
               />
-            </div>
-          </div>
-          <GradientTitle
-            nodeId="2379:8692"
-            gradientDeg="102.971deg"
-            className="absolute top-[10px] left-[20.16px] w-[349px] whitespace-nowrap"
-          >
-            <p className="mb-0 leading-[49px]">Re-architect the</p>
-            <p className="leading-[49px]">physics of AI</p>
-          </GradientTitle>
-        </div>
-
-        <div
-          className="relative flex w-[576px] shrink-0 flex-col items-start gap-[24px] pl-[22px]"
-          data-node-id="2379:8693"
-          data-name="Sub"
-        >
-          <p
-            className={`${interRegular.className} w-[554px] shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
-            data-node-id="2379:8694"
-          >
-            Don&apos;t iterate on legacy silicon. Build the fundamental compute
-            substrate for the next generation of intelligence.
-          </p>
-
-          <a
-            href="#open-roles"
-            className={`${interSemiBold.className} relative block h-[48px] w-[231px] shrink-0 shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
-            data-node-id="2379:8695"
-            data-name="Cta"
-          >
-            <span
-              aria-hidden
-              className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-            />
-            <span
-              className="absolute top-[calc(50%-8px)] left-[47.11px] text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic"
-              data-node-id="2379:8696"
-            >
-              VIEW OPEN ROLES
-            </span>
-            <Image
-              src="/careers/cta-dot.svg"
-              alt=""
-              width={6}
-              height={6}
-              className="pointer-events-none absolute top-1/2 left-[177.5px] size-[6px] -translate-y-1/2"
-              aria-hidden
-            />
-            <CtaCorners />
-            <span
-              aria-hidden
-              className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
-            />
-          </a>
-        </div>
-      </div>
-
-      {/* 2379:8707 — scroll indicator */}
-      <div
-        className={`${interRegular.className} pointer-events-none absolute top-[616px] left-[1335.5px] z-10 flex h-[75px] w-[18px] flex-col content-stretch items-center gap-[10px]`}
-        data-node-id="2379:8707"
-        aria-hidden
-      >
-        <div
-          className="relative size-[18px] shrink-0 overflow-clip"
-          data-node-id="2379:8708"
-          data-name="mouse-01"
-        >
-          <div className="absolute inset-[8.33%_18.75%]" data-name="elements">
-            <div className="absolute inset-[-5%_-6.67%]">
-              <Image
-                src="/hero/mouse-scroll.svg"
-                alt=""
-                width={18}
-                height={18}
-                className="block size-full max-w-none"
+              <CtaCorners />
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
               />
-            </div>
+            </a>
           </div>
         </div>
+
+        {/* 2379:8707 — scroll indicator */}
         <div
-          className="relative flex h-[47px] min-w-full w-[min-content] shrink-0 items-center justify-center"
-          style={{ containerType: "size" }}
+          className={`${interRegular.className} pointer-events-none absolute top-[616px] left-[1335.5px] z-10 flex h-[75px] w-[18px] flex-col content-stretch items-center gap-[10px]`}
+          data-node-id="2379:8707"
+          aria-hidden
         >
-          <div className="h-[100cqw] flex-none rotate-90">
-            <p
-              className="relative h-full w-[47px] text-[12px] leading-[1.4] font-normal text-[#505f4b] [word-break:break-word] not-italic"
-              data-node-id="2379:8709"
-            >
-              SCROLL
-            </p>
+          <div
+            className="relative size-[18px] shrink-0 overflow-clip"
+            data-node-id="2379:8708"
+            data-name="mouse-01"
+          >
+            <div className="absolute inset-[8.33%_18.75%]" data-name="elements">
+              <div className="absolute inset-[-5%_-6.67%]">
+                <Image
+                  src="/hero/mouse-scroll.svg"
+                  alt=""
+                  width={18}
+                  height={18}
+                  className="block size-full max-w-none"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="relative flex h-[47px] min-w-full w-[min-content] shrink-0 items-center justify-center"
+            style={{ containerType: "size" }}
+          >
+            <div className="h-[100cqw] flex-none rotate-90">
+              <p
+                className="relative h-full w-[47px] text-[12px] leading-[1.4] font-normal text-[#505f4b] [word-break:break-word] not-italic"
+                data-node-id="2379:8709"
+              >
+                SCROLL
+              </p>
+            </div>
           </div>
         </div>
       </div>

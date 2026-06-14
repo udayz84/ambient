@@ -53,11 +53,12 @@ const STATS = [
 export function CompanyMission() {
   return (
     <section
-      className="relative mx-auto w-full max-w-[1440px] min-w-[1440px] shrink-0 bg-black"
+      className="relative flex w-full justify-center shrink-0 bg-black"
       data-node-id="2379:4750"
       data-name="Frame 1984079419"
       aria-label="A mission dictated by physics"
     >
+      <div className="relative mx-auto flex w-full max-w-[1440px] justify-center">
       <div
         className="relative mx-auto h-[608px] w-[1204px] overflow-hidden border-[0.5px] border-solid border-[rgba(255,255,255,0.15)]"
         data-node-id="2379:4752"
@@ -135,6 +136,7 @@ export function CompanyMission() {
             />
           ))}
         </div>
+      </div>
       </div>
     </section>
   );

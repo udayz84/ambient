@@ -41,18 +41,18 @@ export function CompanyEcosystemContent() {
           data-node-id="2379:4639"
         >
           <div
-            className="absolute top-0 left-0 h-[98px] w-[405px]"
+            className="absolute top-0 left-0 h-[98px] w-[485px]"
             data-node-id="2379:4640"
           >
             <div
-              className="absolute top-0 left-[1px] h-[98px] w-[403px]"
+              className="absolute top-0 left-[1px] h-[98px] w-[483px]"
               data-node-id="2379:4641"
             >
-              <div className="relative h-[98px] w-[403px] px-[10px]">
+              <div className="relative h-[98px] w-[483px] px-[10px]">
                 <GradientTitle
                   nodeId="2379:4642"
                   gradientDeg="105.739deg"
-                  className="w-[383px]"
+                  className="w-[463px]"
                 >
                   <p className="mb-0 leading-[49px]">A globally resilient</p>
                   <p className="leading-[49px]">ecosystem</p>

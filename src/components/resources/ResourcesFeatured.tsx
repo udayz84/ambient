@@ -33,7 +33,7 @@ export function ResourcesFeatured() {
     <section
       ref={ref}
       style={{ animationDelay: '1s' }}
-      className={`absolute top-[716px] left-[4px] flex w-[1432px] flex-col gap-[20px] bg-[#010101] px-[56px] py-[80px] ${
+      className={`absolute top-[716px] left-1/2 flex w-[1432px] -translate-x-1/2 flex-col gap-[20px] bg-[#010101] px-[56px] py-[80px] ${
         isVisible ? FADE_IN_CLASS : "translate-y-[25px] opacity-0"
       }`}
       aria-label="Featured Resources"

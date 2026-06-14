@@ -8,7 +8,7 @@ const BUILDING_TITLE_GRADIENT =
 export function ResourcesBuilding() {
   return (
     <section
-      className="absolute top-[1499px] left-0 h-[513px] w-[1440px] overflow-hidden"
+      className="absolute top-[1499px] left-1/2 h-[513px] w-[1440px] -translate-x-1/2 overflow-hidden"
       aria-label="Building with Ambient"
       data-node-id="2379:1606"
     >
@@ -29,7 +29,7 @@ export function ResourcesBuilding() {
             className="absolute inset-0"
             style={{
               backgroundImage:
-                "linear-gradient(90deg, rgba(0, 0, 0, 0.7) 47.014%, rgba(0, 0, 0, 0) 100%)",
+                "linear-gradient(90deg, rgba(0, 0, 0, 0.7) 47.014%, rgba(0, 0, 0, 0) 100%), url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 1440 489' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-7.9627e-16 19.307 -44.268 -8.7713e-16 720 244.5)'><stop stop-color='rgba(0,0,0,0)' offset='0'/><stop stop-color='rgba(0,0,0,1)' offset='1'/></radialGradient></defs></svg>\")"
             }}
             aria-hidden
           />

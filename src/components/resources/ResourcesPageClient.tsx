@@ -14,16 +14,18 @@ export function ResourcesPageClient() {
   return (
     <>
       <div
-        className="relative -mt-[78px] mx-auto w-full max-w-[1440px] min-w-[1440px] overflow-hidden bg-black"
+        className="relative mx-auto -mt-[78px] w-full overflow-x-clip overflow-y-visible bg-black"
         style={{ minHeight: RESOURCES_FOOTER_TOP + extraHeight }}
         data-node-id="2379:1601"
         data-name="Resources - Option 8"
       >
-        <ResourcesHero />
-        <ResourcesFeatured />
-        <ResourcesBuilding />
-        <ResourcesContent onExtraHeightChange={setExtraHeight} />
-        <ResourcesNewsCta top={RESOURCES_NEWS_TOP + extraHeight} />
+        <div className="relative mx-auto h-full w-full max-w-[1440px]">
+          <ResourcesHero />
+          <ResourcesFeatured />
+          <ResourcesBuilding />
+          <ResourcesContent onExtraHeightChange={setExtraHeight} />
+          <ResourcesNewsCta top={RESOURCES_NEWS_TOP + extraHeight} />
+        </div>
       </div>
     </>
   );

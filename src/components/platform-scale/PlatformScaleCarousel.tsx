@@ -220,18 +220,42 @@ function CarouselChipItem({
         }}
       >
         <div
-          className="relative overflow-hidden"
+          className="relative"
           style={{
             top: HERO_CHIP_TOP,
             width: HERO_CHIP_WIDTH,
             height: HERO_CHIP_HEIGHT,
           }}
         >
-          <ChipGlassImage />
+          <div className="relative size-full">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              alt=""
+              src="/platform-scale/chip-hero.png"
+              className="pointer-events-none absolute inset-0 size-full max-w-none object-bottom"
+              aria-hidden
+            />
+          </div>
+
+          <div className="absolute top-[-7.69921875px] right-[-6.900390625px] bottom-[-11.013671875px] left-[-6.900390625px]">
+            <div className="absolute inset-[-0.15%]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                alt=""
+                src="/platform-scale/chip-frame.svg"
+                className="block size-full max-w-none"
+                aria-hidden
+              />
+            </div>
+          </div>
+
+          <div className="pointer-events-none absolute inset-0 overflow-hidden">
+            <ChipGlassImage />
+          </div>
         </div>
 
         <div
-          className="flex items-center justify-center bg-[rgba(0,0,0,0.25)]"
+          className="flex items-center justify-center bg-[rgba(0,0,0,0.4)] backdrop-blur-[12px] border-[0.5px] border-solid border-[rgba(255,255,255,0.15)]"
           style={{
             marginTop: LABEL_GAP,
             padding: `${slot.labelPaddingY}px ${slot.labelPaddingX}px`,
@@ -257,7 +281,7 @@ function CarouselChipItem({
 function PlatformScaleStatPanel({ product }: { product: GpxProduct }) {
   return (
     <div
-      className="absolute top-[813px] left-1/2 flex w-[500px] max-md:w-[calc(100%-32px)] -translate-x-1/2 items-center gap-[32px] bg-[rgba(0,0,0,0.1)] px-[10px]"
+      className="absolute top-[813px] left-1/2 flex w-[500px] max-md:w-[calc(100%-32px)] -translate-x-1/2 items-center gap-[32px] bg-[rgba(255,255,255,0.05)] backdrop-blur-[12px] border-[0.5px] border-solid border-[rgba(255,255,255,0.15)] px-[10px]"
       data-node-id="2379:641"
     >
       <div
@@ -272,12 +296,12 @@ function PlatformScaleStatPanel({ product }: { product: GpxProduct }) {
           {product.label}
         </p>
         <div
-          className="relative flex w-full shrink-0 flex-col items-start"
+          className="relative flex w-full shrink-0 flex-col items-center"
           data-node-id="2379:645"
           data-name="Content"
         >
           <p
-            className={`${interRegular.className} relative w-full text-[14px] leading-[1.4] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} relative w-full text-center text-[14px] leading-[1.4] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
             data-node-id="2379:646"
           >
             {product.description}

@@ -5,7 +5,7 @@ import { CareersGreenCta, CareersWhiteCta } from "./careers-shared";
 export function CareersBottomCta() {
   return (
     <section
-      className="absolute top-[5097px] left-[350.89px] z-20 flex w-[728px] flex-col items-center"
+      className="absolute top-[5097px] left-1/2 z-20 flex w-[728px] -translate-x-1/2 flex-col items-center"
       data-node-id="2379:8821"
       aria-label="Ready to build the future of compute"
     >
