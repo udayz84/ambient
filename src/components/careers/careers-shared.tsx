@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { interMedium, interRegular, interSemiBold } from "../hero/fonts";
+import { gilroyMedium, interMedium, interRegular, interSemiBold } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
+import { RepelDots } from "../shared/RepelDots";
 import type { CareersValueCard } from "./careers-data";
 
 const cornerBr = "/careers/corner-card-br.svg";
@@ -20,7 +21,7 @@ export const BOX_BORDER_CLASS =
 
 /** Matches bottom-edge brightness on all four sides (Careers DNA glass panels). */
 export const GLASS_PANEL_VISIBLE_BORDER_CLASS =
-  "border-0 shadow-[inset_0_0.5px_0_0_rgba(240,240,240,0.45),inset_0_-0.5px_0_0_rgba(240,240,240,0.45),inset_0.5px_0_0_rgba(240,240,240,0.45),inset_-0.5px_0_0_rgba(240,240,240,0.45)]";
+  "border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] shadow-[inset_0_0.5px_0_0_rgba(240,240,240,0.45),inset_0_-0.5px_0_0_rgba(240,240,240,0.45),inset_0.5px_0_0_rgba(240,240,240,0.45),inset_-0.5px_0_0_rgba(240,240,240,0.45)]";
 
 export const CARD_GRADIENT_BG =
   "linear-gradient(rgba(83, 216, 36, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%), linear-gradient(90deg, rgba(21, 21, 21, 0.3) 0%, rgba(21, 21, 21, 0.3) 100%)";
@@ -174,7 +175,7 @@ export function CareersFramedTitle({
         <img alt="" className="block size-full max-w-none" src={frameSrc} />
       </div>
       <p
-        className={`${interMedium.className} absolute left-1/2 ${textTop} z-10 -translate-x-1/2 bg-clip-text text-center font-medium text-transparent not-italic whitespace-nowrap [word-break:break-word] ${textClassName}`}
+        className={`${gilroyMedium.className} absolute left-1/2 ${textTop} z-10 -translate-x-1/2 bg-clip-text text-center font-medium text-transparent not-italic whitespace-nowrap [word-break:break-word] ${textClassName}`}
         style={{
           backgroundImage: `linear-gradient(${gradientDeg}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
           WebkitBackgroundClip: "text",
@@ -216,7 +217,7 @@ export function CareersGradientCard({
         </div>
         <div className="flex w-full flex-col items-start gap-[10px]">
           <p
-            className={`${interMedium.className} w-full font-medium text-white not-italic [word-break:break-word] ${titleClass}`}
+            className={`${gilroyMedium.className} w-full font-medium text-white not-italic [word-break:break-word] ${titleClass}`}
           >
             {card.title}
           </p>
@@ -257,7 +258,7 @@ export function CareersGlassPanel({
       >
         <div className="flex min-w-px flex-[1_0_0] flex-col gap-[10px] p-[32px]">
           <p
-            className={`${interMedium.className} w-full text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
           >
             {title}
           </p>
@@ -294,7 +295,7 @@ export function CareersJobCard({
         <TagBadge label={category} width={180} labelOffsetX={0} rightBarLeft={170.48} centerLabel />
       </div>
       <p
-        className={`${interMedium.className} absolute top-[75px] left-[19px] text-[22px] leading-[28px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
+        className={`${gilroyMedium.className} absolute top-[75px] left-[19px] text-[22px] leading-[28px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
       >
         {title}
       </p>
@@ -357,12 +358,13 @@ export function CareersRolesProfileCta({ href = "#" }: { href?: string }) {
       href={href}
       data-node-id="2379:8941"
       data-name="Cta"
-      className={`${interSemiBold.className} absolute top-[68px] left-[59.93px] block h-[48px] w-[231px] ${GREEN_CTA_SHADOW}`}
+      className={`${interSemiBold.className} absolute top-[68px] left-[59.93px] block h-[48px] w-[231px] overflow-hidden ${GREEN_CTA_SHADOW}`}
     >
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
+      <RepelDots />
       <span className="absolute top-[calc(50%-8px)] left-[37.07px] text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic">
         SHARE YOUR PROFILE
       </span>
@@ -402,12 +404,13 @@ export function CareersGreenCta({
   return (
     <a
       href={href}
-      className={`${interSemiBold.className} relative block h-[48px] shrink-0 cursor-pointer ${GREEN_CTA_SHADOW} ${width} ${className}`}
+      className={`${interSemiBold.className} relative block h-[48px] shrink-0 cursor-pointer overflow-hidden ${GREEN_CTA_SHADOW} ${width} ${className}`}
     >
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
+      <RepelDots />
       <span
         className={`absolute top-[calc(50%-8px)] ${textLeft} text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic`}
       >

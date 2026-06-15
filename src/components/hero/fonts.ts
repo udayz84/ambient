@@ -1,4 +1,5 @@
 import { DM_Mono, Inter } from "next/font/google";
+import localFont from "next/font/local";
 
 export const interRegular = Inter({
   subsets: ["latin"],
@@ -28,29 +29,29 @@ export const interSemiBold = Inter({
   variable: "--font-inter",
 });
 
-export const gilroyRegular = Inter({
-  subsets: ["latin"],
+export const gilroyRegular = localFont({
+  src: "../../../public/fonts/gilroy/Gilroy-Regular.ttf",
   weight: "400",
   display: "swap",
   variable: "--font-gilroy",
 });
 
-export const gilroyMedium = Inter({
-  subsets: ["latin"],
+export const gilroyMedium = localFont({
+  src: "../../../public/fonts/gilroy/Gilroy-Medium.ttf",
   weight: "500",
   display: "swap",
   variable: "--font-gilroy",
 });
 
-export const gilroySemiBold = Inter({
-  subsets: ["latin"],
+export const gilroySemiBold = localFont({
+  src: "../../../public/fonts/gilroy/Gilroy-SemiBold.ttf",
   weight: "600",
   display: "swap",
   variable: "--font-gilroy",
 });
 
-export const gilroyBold = Inter({
-  subsets: ["latin"],
+export const gilroyBold = localFont({
+  src: "../../../public/fonts/gilroy/Gilroy-Bold.ttf",
   weight: "700",
   display: "swap",
   variable: "--font-gilroy",

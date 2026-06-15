@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const HERO_VISUAL_MP4 = "/hero/Ambient Hero Dummy Video.mp4";
+const HERO_VISUAL_WEBM = "/hero/Ambient Hero Dummy Video.webm";
 const HERO_VISUAL_POSTER = "/hero/test-2379-737.png";
 
 export function HeroVisualMedia() {
@@ -62,7 +62,7 @@ export function HeroVisualMedia() {
         poster={HERO_VISUAL_POSTER}
         aria-hidden
       >
-        <source src={HERO_VISUAL_MP4} type="video/mp4" />
+        <source src={HERO_VISUAL_WEBM} type="video/webm" />
       </video>
     </>
   );

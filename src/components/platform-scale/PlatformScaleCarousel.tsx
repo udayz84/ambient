@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import { interMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interRegular } from "../hero/fonts";
 import {
   DEFAULT_GPX_INDEX,
   GPX_PRODUCTS,
@@ -264,7 +264,7 @@ function CarouselChipItem({
           }}
         >
           <p
-            className={`${interMedium.className} text-center leading-[36px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} text-center leading-[36px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
             style={{
               fontSize: `${slot.labelFontSize}px`,
               letterSpacing: tracking,
@@ -290,7 +290,7 @@ function PlatformScaleStatPanel({ product }: { product: GpxProduct }) {
         data-name="Stat"
       >
         <p
-          className={`${interMedium.className} relative w-full min-w-full shrink-0 text-center text-[32px] leading-[36px] font-medium tracking-[-0.32px] whitespace-nowrap text-white not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} relative w-full min-w-full shrink-0 text-center text-[32px] leading-[36px] font-medium tracking-[-0.32px] whitespace-nowrap text-white not-italic [word-break:break-word]`}
           data-node-id="2379:643"
         >
           {product.label}

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { interRegular, interSemiBold } from "../hero/fonts";
 import { GradientTitle } from "../contact/contact-shared";
+import { RepelDots } from "../shared/RepelDots";
 
 const cornerCtaLeft = "/hero/corner-tag-1.svg";
 const cornerCtaRight = "/hero/corner-tag-2.svg";
@@ -28,6 +29,9 @@ export function CareersHero() {
               className="absolute top-0 left-[0.05%] h-full w-[99.91%] max-w-none object-cover"
             />
           </div>
+          {/* Edge fade gradients for large screens */}
+          <div className="absolute inset-y-0 left-0 w-[200px] bg-gradient-to-r from-black to-transparent max-[1442px]:hidden" />
+          <div className="absolute inset-y-0 right-[2px] w-[200px] bg-gradient-to-l from-black to-transparent max-[1442px]:hidden" />
         </div>
 
         {/* 2379:8680 — ellipse glow */}
@@ -158,7 +162,7 @@ export function CareersHero() {
 
             <a
               href="#open-roles"
-              className={`${interSemiBold.className} relative block h-[48px] w-[231px] shrink-0 shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+              className={`${interSemiBold.className} relative block h-[48px] w-[231px] shrink-0 overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
               data-node-id="2379:8695"
               data-name="Cta"
             >
@@ -166,6 +170,7 @@ export function CareersHero() {
                 aria-hidden
                 className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
               />
+              <RepelDots />
               <span
                 className="absolute top-[calc(50%-8px)] left-[47.11px] text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic"
                 data-node-id="2379:8696"

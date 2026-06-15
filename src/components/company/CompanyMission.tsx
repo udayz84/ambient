@@ -10,6 +10,9 @@ import { CompanyMissionStat } from "./CompanyMissionStat";
 const MISSION_BG =
   "linear-gradient(rgba(83, 216, 36, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%), linear-gradient(90deg, rgba(21, 21, 21, 0.3) 0%, rgba(21, 21, 21, 0.3) 100%)";
 
+const IMAGE_107_GRADIENT =
+  "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 810 1440' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%25' width='100%25' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-46.009 0.0000020111 -0.000003897 -89.152 363.86 720)'><stop stop-color='rgba(0,0,0,0.6)' offset='0'/><stop stop-color='rgba(0,0,0,1)' offset='1'/></radialGradient></defs></svg>\")";
+
 const MISSION_GRID_PATTERN =
   "radial-gradient(circle, rgba(255, 255, 255, 0.035) 1px, transparent 1px)";
 
@@ -38,7 +41,11 @@ const STATS = [
   },
   {
     value: "50+",
-    label: "Active Cutsomer Projects",
+    label: (
+      <>
+        Active Cutsomer<br />Projects
+      </>
+    ),
     description:
       "Partnering with industry leaders to build intelligent solutions at the edge.",
     descriptionWidth: "w-[356px]",
@@ -65,7 +72,31 @@ export function CompanyMission() {
         data-name="Content"
         style={{ backgroundImage: MISSION_BG }}
       >
-        <div className="pointer-events-none absolute inset-0" aria-hidden>
+        {/* image 107 background glow - moved inside to clip to the container and make the footprint smaller */}
+        <div 
+          className="pointer-events-none absolute top-1/2 left-1/2 z-[1] h-[810px] w-[1440px] -translate-x-1/2 -translate-y-1/2 flex items-center justify-center overflow-hidden mix-blend-screen"
+          data-name="image 107"
+        >
+          <div className="rotate-90 flex-none">
+            <div className="relative h-[1440px] w-[810px]">
+              <Image
+                src="/resources/image-107.png"
+                alt=""
+                fill
+                className="max-w-none object-cover opacity-15"
+                sizes="810px"
+                unoptimized
+              />
+              <div
+                className="absolute inset-0"
+                style={{ backgroundImage: IMAGE_107_GRADIENT }}
+                aria-hidden
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="pointer-events-none absolute inset-0 z-[1]" aria-hidden>
           <div
             className="absolute inset-0"
             style={{
@@ -81,11 +112,11 @@ export function CompanyMission() {
             sizes="1204px"
           />
         </div>
-        <div className="pointer-events-none absolute inset-0 z-[2]" aria-hidden>
+        <div className="pointer-events-none absolute inset-0 z-[3]" aria-hidden>
           <CompanyMissionFrameCorners />
         </div>
 
-        <div className="relative z-[1] flex h-full flex-col gap-[36px] px-[56px] py-[76px]">
+        <div className="relative z-[2] flex h-full flex-col gap-[36px] px-[56px] py-[76px]">
           <div
             className="relative w-fit px-[10px]"
             data-node-id="2379:4754"
@@ -103,10 +134,10 @@ export function CompanyMission() {
           </div>
 
           <div
-            className={`${interRegular.className} w-[555px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[555px] flex flex-col gap-[24px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
             data-node-id="2379:4760"
           >
-            <p className="mb-0 leading-[27px]">
+            <p className="leading-[27px]">
               The era of patching legacy compute is over. Forcing
               next-generation AI through decades-old digital bottlenecks only
               guarantees massive power drain and wrecked economics. Ambient

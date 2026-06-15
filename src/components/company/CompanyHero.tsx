@@ -33,6 +33,8 @@ export function CompanyHero() {
               className="absolute inset-0"
               style={{ backgroundImage: HERO_BG_GRADIENT }}
             />
+            {/* Fade out the right edge into the black background on ultrawide screens */}
+            <div className="absolute inset-y-0 right-0 w-[300px] bg-gradient-to-l from-black to-transparent hidden min-[1441px]:block" />
           </div>
         </div>
 

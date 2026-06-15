@@ -73,7 +73,7 @@ export function Hero() {
         </div>
 
         <div
-          className={`${gilroyMedium.className} absolute top-[130px] left-[936px] flex w-[442px] flex-col items-start gap-[15px] [word-break:break-word] not-italic animate-hero-text-fade-in opacity-0`}
+          className={`${gilroyMedium.className} absolute top-[130px] left-[936px] flex w-[442px] flex-col items-start gap-[15px] [word-break:break-word] not-italic animate-hero-text-fade-in transform-gpu`}
           style={{ animationDelay: '1s', animationDuration: '1000ms' }}
           data-node-id="2379:780"
         >

@@ -44,7 +44,7 @@ export function ResourcesArticleCard({
             alt=""
             width={356}
             height={259}
-            className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+            className="pointer-events-none absolute inset-0 size-full max-w-none object-contain"
             unoptimized
           />
         </div>
@@ -61,7 +61,7 @@ export function ResourcesArticleCard({
 
         <div className="flex flex-col gap-[10px]">
           <h3
-            className={`${gilroyMedium.className} w-[353.684px] font-medium text-white not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} w-full font-medium text-white not-italic [word-break:break-word]`}
             style={{
               fontSize: titleFontSize,
               lineHeight: "28px",

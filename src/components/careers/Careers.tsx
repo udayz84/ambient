@@ -14,9 +14,7 @@ import { CareersOpenRoles } from "./CareersOpenRoles";
 
 
 
-/** Figma 2379:8612 — benefits end ~4893px; footer/CTA backdrop from 4977px; CTA at 5097px */
-
-const CAREERS_PAGE_HEIGHT_PX = 5306;
+const CAREERS_PAGE_HEIGHT_PX = 5310;
 
 
 

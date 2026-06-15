@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
+import { RepelDots } from "../shared/RepelDots";
 
 const cornerLeft = "/hero/corner-tag-1.svg";
 const cornerRight = "/hero/corner-tag-2.svg";
@@ -127,7 +128,7 @@ export function GreenCtaButton({
   disabled?: boolean;
   loading?: boolean;
 }) {
-  const sharedClassName = `${gilroySemiBold.className} relative block h-[48px] shrink-0 shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] disabled:cursor-not-allowed disabled:opacity-70 ${className}`;
+  const sharedClassName = `${gilroySemiBold.className} relative block h-[48px] shrink-0 overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] disabled:cursor-not-allowed disabled:opacity-70 ${className}`;
   const sharedStyle = width ? { width } : undefined;
   const content = (
     <>
@@ -135,6 +136,7 @@ export function GreenCtaButton({
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
+      <RepelDots />
       <span className="relative flex h-full items-center justify-center gap-[10px] text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic">
         {loading ? <CtaSpinner /> : null}
         {loading ? "Loading..." : children}

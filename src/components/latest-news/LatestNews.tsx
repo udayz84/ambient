@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { gilroyMedium, interRegular } from "../hero/fonts";
+import { RepelDots } from "../shared/RepelDots";
 import { LatestNewsCard } from "./LatestNewsCard";
 import { LATEST_NEWS_ARTICLES } from "./latest-news-data";
 
@@ -83,7 +84,7 @@ export function LatestNews() {
 
           <a
             href="#"
-            className="relative flex h-[44px] w-[186px] shrink-0 items-center justify-center gap-[10px] shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]"
+            className="relative flex h-[44px] w-[186px] shrink-0 items-center justify-center gap-[10px] overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]"
             data-node-id="2379:1381"
             data-name="Cta"
           >
@@ -91,6 +92,7 @@ export function LatestNews() {
               aria-hidden
               className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
             />
+            <RepelDots />
             <p
               className={`${ctaTextClass} relative shrink-0 whitespace-nowrap text-white uppercase not-italic [word-break:break-word]`}
             >

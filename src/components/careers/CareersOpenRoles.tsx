@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { interMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interMedium, interRegular } from "../hero/fonts";
 import { CompanyCardCorners } from "../company/company-corners";
 import { dmMono } from "../hero/fonts";
 import {
@@ -22,6 +22,9 @@ const OPEN_ROLES_GRADIENT =
 
 const CTA_TITLE_GRADIENT =
   "linear-gradient(125.631deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
+
+const IMAGE_107_GRADIENT =
+  "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 810 1440' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%25' width='100%25' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-46.009 0.0000020111 -0.000003897 -89.152 363.86 720)'><stop stop-color='rgba(0,0,0,0.6)' offset='0'/><stop stop-color='rgba(0,0,0,1)' offset='1'/></radialGradient></defs></svg>\")";
 
 const JOB_ROW_NODE_IDS = [
   "2379:8921",
@@ -59,6 +62,30 @@ export function CareersOpenRoles() {
       data-node-id="2379:8901"
       aria-label="Open Roles"
     >
+      {/* 2379:8614 — image 107 background behind the bottom CTA */}
+      <div 
+        className="pointer-events-none absolute bottom-0 left-1/2 -z-10 h-[810px] w-[1440px] -translate-x-1/2 flex items-center justify-center overflow-hidden mix-blend-screen"
+        data-name="image 107"
+      >
+        <div className="rotate-90 flex-none">
+          <div className="relative h-[1440px] w-[810px]">
+            <Image
+              src="/resources/image-107.png"
+              alt=""
+              fill
+              className="max-w-none object-cover opacity-15"
+              sizes="810px"
+              unoptimized
+            />
+            <div
+              className="absolute inset-0"
+              style={{ backgroundImage: IMAGE_107_GRADIENT }}
+              aria-hidden
+            />
+          </div>
+        </div>
+      </div>
+
       {/* 2379:8902 — header row */}
       <div
         className="flex h-[60px] w-[1204px] shrink-0 items-end justify-between"
@@ -116,7 +143,7 @@ export function CareersOpenRoles() {
             data-node-id="2379:8932"
           >
             <p
-              className={`${interMedium.className} absolute top-[26.03px] left-[292.35px] -translate-x-1/2 bg-clip-text text-center text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} absolute top-[26.03px] left-[292.35px] -translate-x-1/2 bg-clip-text text-center text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: CTA_TITLE_GRADIENT,
                 WebkitBackgroundClip: "text",
@@ -211,7 +238,7 @@ function OpenRolesTitle() {
       data-node-id="2379:8903"
     >
       <p
-        className={`${interMedium.className} absolute top-0 left-[20px] bg-clip-text text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic [word-break:break-word]`}
+        className={`${gilroyMedium.className} absolute top-0 left-[20px] bg-clip-text text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic [word-break:break-word]`}
         style={{
           backgroundImage: OPEN_ROLES_GRADIENT,
           WebkitBackgroundClip: "text",
@@ -386,7 +413,7 @@ function JobRow({
     >
       <CategoryBadge label={category} />
       <p
-        className={`${interMedium.className} absolute top-[75px] left-[19px] text-[22px] leading-[28px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
+        className={`${gilroyMedium.className} absolute top-[75px] left-[19px] text-[22px] leading-[28px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
       >
         {title}
       </p>

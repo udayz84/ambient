@@ -54,6 +54,21 @@ function ChipVisualCorners() {
           </div>
         </div>
       </div>
+      <div className="absolute top-[429.5px] right-[968.11px] flex size-[4px] items-center justify-center">
+        <div className="flex-none">
+          <div className="relative size-[4px]" data-node-id="2379:1428">
+            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={cornerLeft}
+                alt=""
+                className="block size-full max-w-none"
+                aria-hidden
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

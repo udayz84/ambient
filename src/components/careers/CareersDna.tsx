@@ -14,7 +14,7 @@ const CHIP_FADE_IN_CLASS = "animate-hero-text-fade-in opacity-0";
 export function CareersDna() {
   return (
     <section
-      className="absolute top-[1379px] left-1/2 z-10 h-[841px] w-full -translate-x-1/2 overflow-hidden"
+      className="absolute top-[1379px] left-1/2 z-10 h-[950px] w-full -translate-x-1/2 overflow-hidden"
       data-node-id="2379:8843"
       aria-label="Driven by physics. Defined by our DNA."
     >

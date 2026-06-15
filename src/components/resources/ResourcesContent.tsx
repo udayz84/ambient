@@ -15,6 +15,9 @@ const INITIAL_VISIBLE_COUNT = 6;
 const LOAD_MORE_COUNT = 3;
 const LOAD_MORE_DELAY_MS = 800;
 
+const IMAGE_107_GRADIENT =
+  "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 810 1440' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%25' width='100%25' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-46.009 0.0000020111 -0.000003897 -89.152 363.86 720)'><stop stop-color='rgba(0,0,0,0.6)' offset='0'/><stop stop-color='rgba(0,0,0,1)' offset='1'/></radialGradient></defs></svg>\")";
+
 export function ResourcesContent({
   onExtraHeightChange,
 }: {
@@ -66,6 +69,29 @@ export function ResourcesContent({
       aria-label="Resource library"
       data-node-id="2379:1772"
     >
+      <div 
+        className="pointer-events-none absolute top-[477px] left-1/2 -z-10 h-[810px] w-[1440px] -translate-x-1/2 flex items-center justify-center overflow-hidden mix-blend-screen"
+        data-node-id="2379:1602"
+        data-name="image 107 wrapper"
+      >
+        <div className="-rotate-90 flex-none">
+          <div className="relative h-[1440px] w-[810px]">
+            <Image
+              src="/resources/image-107.png"
+              alt=""
+              fill
+              className="max-w-none object-cover"
+              sizes="810px"
+              unoptimized
+            />
+            <div
+              className="absolute inset-0"
+              style={{ backgroundImage: IMAGE_107_GRADIENT }}
+              aria-hidden
+            />
+          </div>
+        </div>
+      </div>
       <nav
         className="flex h-[52px] w-full items-center justify-between"
         aria-label="Resource categories"

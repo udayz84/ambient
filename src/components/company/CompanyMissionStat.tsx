@@ -3,7 +3,7 @@ import { CompanyMissionStatValue } from "./CompanyMissionStatValue";
 
 type CompanyMissionStatProps = {
   value: string;
-  label: string;
+  label: React.ReactNode;
   description: string;
   descriptionWidth?: string;
   valueNodeId: string;

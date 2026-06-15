@@ -1,4 +1,5 @@
 import { gilroySemiBold } from "../hero/fonts";
+import { RepelDots } from "../shared/RepelDots";
 import { CompanyStandardCorners } from "./company-corners";
 
 const GREEN_CTA_SHADOW =
@@ -18,12 +19,13 @@ export function CompanyEngagementCta({
   return (
     <a
       href={href}
-      className={`${gilroySemiBold.className} relative block h-[48px] shrink-0 ${GREEN_CTA_SHADOW} ${className}`}
+      className={`${gilroySemiBold.className} relative block h-[48px] shrink-0 overflow-hidden ${GREEN_CTA_SHADOW} ${className}`}
     >
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
+      <RepelDots />
       <span className="relative flex h-full items-center justify-center gap-[8px] px-[12px] text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic">
         {children}
         {/* eslint-disable-next-line @next/next/no-img-element */}

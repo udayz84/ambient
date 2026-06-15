@@ -92,7 +92,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
     categoryOffsetX: 0.5,
     centerCategory: true,
     title: "PyTorch vs TensorFlow for Production and Edge AI Deployment",
-    titleFontSize: 21,
+    titleFontSize: 20,
     excerpt:
       "This article compares PyTorch and TensorFlow from a real-world de... ",
     imageOverlaySrc: "/resources/article-3-overlay.png",

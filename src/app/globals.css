@@ -11,13 +11,10 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --animate-hero-text-fade-in: hero-text-fade-in 1000ms ease-out forwards;
-  --animate-technology-visual-fade-in: technology-visual-fade-in 1000ms ease-out
-    forwards;
-  --animate-ecosystem-slide-from-right: ecosystem-slide-from-right 12s linear
-    forwards;
-  --animate-platform-scale-stat-fade: platform-scale-stat-fade 1000ms ease-in-out
-    forwards;
+  --animate-hero-text-fade-in: hero-text-fade-in 1000ms ease-out both;
+  --animate-technology-visual-fade-in: technology-visual-fade-in 1000ms ease-out both;
+  --animate-ecosystem-slide-from-right: ecosystem-slide-from-right 12s linear both;
+  --animate-platform-scale-stat-fade: platform-scale-stat-fade 1000ms ease-in-out both;
   @keyframes hero-text-fade-in {
     from {
       opacity: 0;

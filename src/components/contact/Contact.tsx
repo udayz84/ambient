@@ -4,9 +4,8 @@ import { ContactMap } from "./ContactMap";
 import { ContactResources } from "./ContactResources";
 import { ContactSchedule } from "./ContactSchedule";
 
-/** Figma canvas 2379:4950 — form ends ~3120px; footer from 2779px; page height 4031px */
-const CONTACT_PAGE_HEIGHT_PX = 2779;
-const CONTACT_FOOTER_TOP_PX = 2779;
+const CONTACT_PAGE_HEIGHT_PX = 3120;
+const CONTACT_FOOTER_TOP_PX = 3120;
 
 export function Contact() {
   return (

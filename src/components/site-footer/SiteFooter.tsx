@@ -6,7 +6,7 @@ import { NewsletterSignup } from "./NewsletterSignup";
 export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolean }) {
   return (
     <footer
-      className="relative mt-[21px] flex h-[1252px] w-full justify-center overflow-hidden bg-black"
+      className="relative flex h-[1252px] w-full justify-center overflow-hidden bg-black"
       data-node-id="2379:784"
       data-name="footer"
     >
@@ -18,7 +18,7 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
               src="/footer/footer-bg.png"
               alt=""
               fill
-              className="object-cover object-top"
+              className="object-cover object-center"
               sizes="100vw"
             />
           </div>
