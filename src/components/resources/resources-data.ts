@@ -15,7 +15,7 @@ export type ResourceArticle = {
   categoryOffsetX: number;
   centerCategory?: boolean;
   title: string;
-  titleFontSize?: 21 | 22;
+  titleFontSize?: 20 | 21 | 22;
   excerpt: string;
   imageOverlaySrc: string;
 };
