@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { interRegular, gilroySemiBold } from "../hero/fonts";
+import { gilroySemiBold } from "../hero/fonts";
 import type { PartnerRowConfig } from "./ecosystem-data";
 import { EcosystemGridLine } from "./EcosystemGridLine";
 
@@ -90,7 +90,7 @@ export function EcosystemPartnerRow({
             data-name="Div [framer-y1thm5]"
           >
             <p
-              className={`${interRegular.className} absolute top-[10.3px] left-0 -translate-y-1/2 text-[17.1px] leading-[20.4px] font-normal whitespace-nowrap text-white not-italic`}
+              className={`${gilroySemiBold.className} absolute top-[10.3px] left-0 -translate-y-1/2 text-[17.1px] leading-[20.4px] font-semibold whitespace-nowrap text-white not-italic`}
               data-node-id={config.tezos.textNodeId}
             >
               Tezos
