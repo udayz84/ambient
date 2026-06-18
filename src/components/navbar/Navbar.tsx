@@ -53,7 +53,7 @@ export function Navbar() {
         {/* Desktop (>=1024px): absolute positions from Figma, adapted for smaller viewports */}
         <Link
           href="/"
-          className="absolute top-[19.158203125px] left-[40px] h-[38px] w-[135.443px] min-[1440px]:left-[110px]"
+          className="absolute top-[19.158203125px] left-[40px] hidden h-[38px] w-[135.443px] min-[1440px]:left-[110px] min-[1024px]:block"
           data-node-id="2379:1574"
         >
           <Image
@@ -88,8 +88,8 @@ export function Navbar() {
           <NavbarCta />
         </div>
 
-        {/* Mobile (<1024px): flex row — logo + hamburger */}
-        <div className="flex h-[78px] items-center justify-between px-[24px] max-[1023px]:flex min-[1024px]:hidden">
+        {/* Mobile (<1024px): flex row — logo (left) + CTA + hamburger (right) */}
+        <div className="flex h-[78px] items-center justify-between px-[12px] max-[1023px]:flex min-[1024px]:hidden">
           <Link href="/" className="block h-[38px] w-[135.443px] shrink-0">
             <Image
               src="/navbar/logo.png"
@@ -100,7 +100,10 @@ export function Navbar() {
               priority
             />
           </Link>
-          <MobileMenu />
+          <div className="flex items-center gap-[8px]">
+            <NavbarCta />
+            <MobileMenu />
+          </div>
         </div>
       </div>
     </header>

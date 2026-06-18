@@ -5,8 +5,8 @@ import { SiteFooter } from "./SiteFooter";
 
 export function SiteFooterWrapper() {
   const pathname = usePathname();
-  // We only show the newsletter on the exact homepage route
-  const showNewsletter = pathname === "/";
+  // Show the newsletter signup on the homepage and company page
+  const showNewsletter = pathname === "/" || pathname === "/company";
 
   return <SiteFooter showNewsletter={showNewsletter} />;
 }

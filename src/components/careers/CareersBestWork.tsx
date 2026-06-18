@@ -1,8 +1,34 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import { CornerDecor, GradientTitle } from "../contact/contact-shared";
 import { CAREERS_WORK_CARDS } from "./careers-data";
 import { CareersGradientCard } from "./careers-shared";
 
+const FADE_IN_CLASS = "animate-hero-text-fade-in opacity-0";
+
 export function CareersBestWork() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
       className="absolute top-[827px] left-1/2 z-10 flex w-[1319.98px] -translate-x-1/2 flex-col items-center gap-[40px]"
@@ -24,7 +50,10 @@ export function CareersBestWork() {
       </div>
 
       <div
-        className="flex w-[1318px] shrink-0 items-center gap-[20px]"
+        ref={ref}
+        className={`flex w-[1318px] shrink-0 items-center gap-[20px] ${
+          isVisible ? FADE_IN_CLASS : "translate-y-[25px] opacity-0"
+        }`}
         data-node-id="2379:8718"
       >
         {CAREERS_WORK_CARDS.map((card, index) => (

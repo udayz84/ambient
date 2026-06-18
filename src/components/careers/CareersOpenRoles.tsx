@@ -57,32 +57,30 @@ export function CareersOpenRoles() {
   return (
     <section
       id="open-roles"
-      className="absolute top-[2426px] left-1/2 z-10 flex h-[1696px] w-[1204px] -translate-x-1/2 flex-col gap-[40px]"
+      className="absolute top-[2426px] left-1/2 z-10 flex w-[1204px] -translate-x-1/2 flex-col gap-[40px]"
       data-node-id="2379:8901"
       aria-label="Open Roles"
     >
-      {/* 2379:8614 — image 107 background behind the bottom CTA */}
+      {/* image 107 background — extends above into previous section */}
       <div 
-        className="pointer-events-none absolute bottom-0 left-1/2 -z-10 h-[810px] w-[1440px] -translate-x-1/2 flex items-center justify-center overflow-hidden mix-blend-screen"
+        className="pointer-events-none absolute left-1/2 top-[-200px] z-0 h-[1000px] w-[1204px] -translate-x-1/2"
         data-name="image 107"
       >
-        <div className="rotate-90 flex-none">
-          <div className="relative h-[1440px] w-[810px]">
-            <Image
-              src="/resources/image-107.png"
-              alt=""
-              fill
-              className="max-w-none object-cover opacity-15"
-              sizes="810px"
-              unoptimized
-            />
-            <div
-              className="absolute inset-0"
-              style={{ backgroundImage: IMAGE_107_GRADIENT }}
-              aria-hidden
-            />
-          </div>
-        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          alt=""
+          src="/careers/image%20107.png"
+          className="absolute inset-0 size-full object-cover opacity-25"
+          aria-hidden
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,1) 100%)",
+          }}
+          aria-hidden
+        />
       </div>
 
       {/* 2379:8902 — header row */}
@@ -113,18 +111,28 @@ export function CareersOpenRoles() {
 
       {/* 2379:8920 — job list */}
       <div
-        className="flex h-[1294px] w-[1204px] shrink-0 flex-col gap-[10px]"
+        className="flex w-[1204px] shrink-0 flex-col gap-[10px]"
         data-node-id="2379:8920"
       >
-        {filteredJobs.map((job, index) => (
-          <JobRow
-            key={job.title}
-            title={job.title}
-            category={job.category}
-            location={job.location}
-            nodeId={JOB_ROW_NODE_IDS[index] ?? JOB_ROW_NODE_IDS[0]}
-          />
-        ))}
+        {filteredJobs.length === 0 ? (
+          <div className="flex h-[153px] w-full items-center justify-center">
+            <p
+              className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-white opacity-60 not-italic`}
+            >
+              No jobs found
+            </p>
+          </div>
+        ) : (
+          filteredJobs.map((job, index) => (
+            <JobRow
+              key={job.title}
+              title={job.title}
+              category={job.category}
+              location={job.location}
+              nodeId={JOB_ROW_NODE_IDS[index] ?? JOB_ROW_NODE_IDS[0]}
+            />
+          ))
+        )}
       </div>
 
       {/* 2379:8929 — bottom CTA */}
@@ -210,14 +218,6 @@ function RolesCtaBackground() {
         className="absolute inset-0 block size-full max-w-none"
       />
       <div className="absolute inset-0" style={ROLES_CTA_MASK_STYLE}>
-        <div
-          className="absolute inset-0 opacity-[0.14]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle, rgba(255, 255, 255, 0.5) 0.4px, transparent 0.4px)",
-            backgroundSize: "8px 8px",
-          }}
-        />
         <div
           className="absolute inset-0"
           style={{
@@ -333,7 +333,6 @@ function FilterDropdown({
       className="relative flex w-[200px] shrink-0 items-center border-[0.5px] border-[rgba(240,240,240,0.2)]"
       data-node-id={nodeId}
     >
-      <CompanyCardCorners cornerBottom={44} />
       <button
         type="button"
         aria-haspopup="listbox"
@@ -429,7 +428,7 @@ function JobRow({
 function CategoryBadge({ label }: { label: string }) {
   return (
     <div
-      className={`${dmMono.className} absolute top-[19.34px] left-[calc(50%-492px)] h-[26px] w-[180px] -translate-x-1/2 overflow-clip bg-[rgba(255,255,255,0.06)]`}
+      className={`${dmMono.className} absolute top-[19.34px] left-[calc(50%-492px)] h-[26px] w-[180px] -translate-x-1/2 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.06)]`}
       data-name="Menu"
     >
       <Corners leftSrc={cornerTitleTl} rightSrc={cornerTitleTr} />
@@ -448,7 +447,7 @@ function ApplyButton() {
   return (
     <a
       href="#"
-      className={`${interMedium.className} absolute top-[51px] right-[49px] flex h-[48px] items-center gap-[20px] overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic transition-[box-shadow,background-color] duration-200 group-hover:bg-transparent group-hover:shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+      className={`${interMedium.className} absolute top-[51px] right-[49px] flex h-[48px] items-center gap-[20px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic transition-[box-shadow,background-color] duration-200 group-hover:bg-transparent group-hover:shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
     >
       <span
         aria-hidden

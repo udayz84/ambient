@@ -11,6 +11,8 @@ export type CompanyEngagementCardData = {
   imageSrc: string;
   imageWidth: number;
   imageHeight: number;
+  imageLeft: number;
+  imageTop: number;
 };
 
 export const COMPANY_JOIN_TEAM = {
@@ -39,10 +41,12 @@ export const COMPANY_ENGAGEMENT_CARDS: CompanyEngagementCardData[] = [
     descriptionWidth: 300,
     ctaLabel: "CONTACT BUSINESS DEV",
     ctaHref: "/contact",
-    ctaWidth: "w-[271px]",
+    ctaWidth: "w-[231px]",
     imageSrc: "/company/98410%201.png",
-    imageWidth: 300,
-    imageHeight: 300,
+    imageWidth: 417,
+    imageHeight: 410,
+    imageLeft: 251,
+    imageTop: -5,
   },
   {
     nodeId: "2379:4890",
@@ -54,9 +58,11 @@ export const COMPANY_ENGAGEMENT_CARDS: CompanyEngagementCardData[] = [
     descriptionWidth: 280,
     ctaLabel: "SCHEDULE CONSULTATION",
     ctaHref: "/contact",
-    ctaWidth: "w-[291px]",
+    ctaWidth: "w-[231px]",
     imageSrc: "/company/98410%202.png",
-    imageWidth: 290,
-    imageHeight: 290,
+    imageWidth: 374,
+    imageHeight: 368,
+    imageLeft: 259,
+    imageTop: 15,
   },
 ];

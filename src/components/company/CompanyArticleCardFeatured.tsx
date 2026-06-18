@@ -21,7 +21,7 @@ export function CompanyArticleCardFeatured({
 }: CompanyArticleCardFeaturedProps) {
   return (
     <article
-      className="relative h-[692px] w-[590px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.04)]"
+      className="relative h-[692px] w-[590px] shrink-0 overflow-visible border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)]"
       data-node-id={nodeId}
       data-name="Article"
     >
@@ -45,7 +45,7 @@ export function CompanyArticleCardFeatured({
       </div>
 
       <div
-        className="absolute top-[440px] left-[24px] flex w-[542px] flex-col"
+        className="absolute top-[432px] left-[24px] flex w-[542px] flex-col"
         data-name="NewsSection"
       >
         <CompanyArticleGreenBadge label={category} />
@@ -57,19 +57,19 @@ export function CompanyArticleCardFeatured({
         </h3>
 
         <p
-          className={`${interRegular.className} mt-[10px] w-[542px] text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.8)] not-italic [word-break:break-word]`}
+          className={`${interRegular.className} mt-[10px] w-[542px] text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
         >
           {excerpt}
         </p>
 
-        <div className="mt-[20px] flex flex-wrap items-center gap-x-[10px] gap-y-[4px]">
+        <div className="mt-[20px] flex w-full items-center justify-between">
           <MetadataItem>{metadata.date}</MetadataItem>
           <MetadataItem>{metadata.totalFunding}</MetadataItem>
           <MetadataItem>{metadata.fundingRounds}</MetadataItem>
         </div>
       </div>
 
-      <CompanyArticleCorners cornerBottom={688} />
+      <CompanyArticleCorners />
     </article>
   );
 }
@@ -77,11 +77,11 @@ export function CompanyArticleCardFeatured({
 function CompanyArticleGreenBadge({ label }: { label: string }) {
   return (
     <div
-      className={`${dmMono.className} relative h-[26px] w-[180px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)]`}
+      className={`${dmMono.className} relative h-[26px] w-[180px] shrink-0 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.06)]`}
       data-name="Menu"
     >
       <Corners leftSrc={cornerLeft} rightSrc={cornerRight} />
-      <p className="absolute top-[calc(50%-4.5px)] left-1/2 -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#53d824] uppercase not-italic">
+      <p className="absolute top-[calc(50%-4.5px)] left-1/2 -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#53d824] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
         {label}
       </p>
       <div className="absolute top-1/2 left-[6.48px] h-[12px] w-[2px] -translate-y-1/2 bg-[#53d824]" />
@@ -92,13 +92,16 @@ function CompanyArticleGreenBadge({ label }: { label: string }) {
 
 function MetadataItem({ children }: { children: string }) {
   return (
-    <span
-      className={`${interRegular.className} inline-flex items-center gap-[10px] text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#99a1af] not-italic`}
-    >
-      <span className="text-[#53d824]" aria-hidden>
-        |
+    <div className="flex shrink-0 items-center gap-[6px]">
+      <span
+        className="h-[12px] w-[2px] shrink-0 bg-[#53d824] opacity-60"
+        aria-hidden
+      />
+      <span
+        className={`${interRegular.className} text-[16px] leading-[24px] font-normal whitespace-nowrap text-[rgba(255,255,255,0.5)] not-italic`}
+      >
+        {children}
       </span>
-      {children}
-    </span>
+    </div>
   );
 }

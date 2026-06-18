@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { interRegular, interSemiBold } from "../hero/fonts";
+import { gilroySemiBold, interRegular } from "../hero/fonts";
 import { GradientTitle } from "../contact/contact-shared";
 import { RepelDots } from "../shared/RepelDots";
 import { Corners } from "../shared/Corners";
@@ -160,7 +160,7 @@ export function CareersHero() {
 
             <a
               href="#open-roles"
-              className={`${interSemiBold.className} relative block h-[48px] w-[231px] shrink-0 overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+              className={`${gilroySemiBold.className} relative block h-[48px] w-[231px] shrink-0 overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
               data-node-id="2379:8695"
               data-name="Cta"
             >

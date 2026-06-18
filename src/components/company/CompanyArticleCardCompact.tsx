@@ -11,7 +11,6 @@ export function CompanyArticleCardCompact({
   height,
   imageHeight,
   newsSectionTop,
-  cornerBottom,
   category,
   categoryOffsetX,
   centerCategory,
@@ -23,7 +22,7 @@ export function CompanyArticleCardCompact({
 }: CompanyArticleCardCompactProps) {
   return (
     <article
-      className="relative w-[590px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.04)]"
+      className="relative w-[590px] shrink-0 overflow-visible border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)]"
       style={{ height }}
       data-node-id={nodeId}
       data-name="Article"
@@ -67,7 +66,7 @@ export function CompanyArticleCardCompact({
             {title}
           </h3>
           <p
-            className={`${interRegular.className} mt-[10px] text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.8)] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} mt-[10px] text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
             style={{ width: excerptWidth }}
           >
             {excerpt}
@@ -75,7 +74,7 @@ export function CompanyArticleCardCompact({
         </div>
       </div>
 
-      <CompanyArticleCorners cornerBottom={cornerBottom} />
+      <CompanyArticleCorners />
     </article>
   );
 }

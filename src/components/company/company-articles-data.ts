@@ -45,7 +45,7 @@ export const COMPANY_FEATURED_ARTICLE: CompanyFeaturedArticle = {
     fundingRounds: "4 funding rounds",
   },
   imageSrc: "/company/Image%202.png",
-  imageHeight: 408,
+  imageHeight: 400,
   imageClassName: "absolute inset-0 size-full max-w-none object-cover",
 };
 

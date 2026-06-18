@@ -1,6 +1,7 @@
 import { ContactForm } from "./ContactForm";
 import { ContactHero } from "./ContactHero";
 import { ContactMap } from "./ContactMap";
+import { ContactMobile } from "./ContactMobile";
 import { ContactResources } from "./ContactResources";
 import { ContactSchedule } from "./ContactSchedule";
 
@@ -10,8 +11,9 @@ const CONTACT_FOOTER_TOP_PX = 2779;
 export function Contact() {
   return (
     <main className="relative z-10 flex w-full flex-col overflow-x-clip bg-black">
+      {/* DESKTOP (>=1024px) — absolute canvas, untouched */}
       <div
-        className="relative mx-auto -mt-[78px] w-full overflow-x-clip overflow-y-visible bg-black"
+        className="relative mx-auto -mt-[78px] hidden w-full overflow-x-clip overflow-y-visible bg-black min-[1024px]:block"
         style={{ height: CONTACT_PAGE_HEIGHT_PX }}
         data-node-id="2379:4950"
         data-name="Contact - 3"
@@ -42,6 +44,11 @@ export function Contact() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* MOBILE (<1024px) — dedicated stacked layout */}
+      <div className="relative -mt-[78px] w-full bg-black min-[1024px]:hidden">
+        <ContactMobile />
       </div>
     </main>
   );

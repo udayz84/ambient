@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { gilroyMedium, interMedium, interRegular, interSemiBold } from "../hero/fonts";
+import { gilroyMedium, gilroySemiBold, interMedium, interRegular, interSemiBold } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { RepelDots } from "../shared/RepelDots";
 import { Corners } from "../shared/Corners";
@@ -210,7 +210,11 @@ export function CareersGradientCard({
     >
       <div
         className="absolute inset-0 flex flex-col items-start justify-between p-[32px]"
-        style={{ backgroundImage: CARD_GRADIENT_BG }}
+        style={{
+          backgroundImage: "url(/careers/Content.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
       >
         <div className="relative size-[36px] shrink-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -359,17 +363,17 @@ export function CareersRolesProfileCta({ href = "#" }: { href?: string }) {
       href={href}
       data-node-id="2379:8941"
       data-name="Cta"
-      className={`${interSemiBold.className} absolute top-[68px] left-[59.93px] block h-[48px] w-[231px] overflow-hidden ${GREEN_CTA_SHADOW}`}
+      className={`${gilroySemiBold.className} absolute top-[68px] left-[59.93px] block h-[48px] w-[248px] overflow-hidden ${GREEN_CTA_SHADOW}`}
     >
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
       <RepelDots />
-      <span className="absolute top-[calc(50%-8px)] left-[37.07px] text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic">
+      <span className="absolute top-[calc(50%-8px)] left-[47px] text-[14px] font-semibold leading-[normal] whitespace-nowrap text-[#FFF] uppercase not-italic">
         SHARE YOUR PROFILE
       </span>
-      <span className="pointer-events-none absolute top-1/2 left-[187.5px] size-[6px] -translate-y-1/2">
+      <span className="pointer-events-none absolute top-1/2 left-[210px] size-[6px] -translate-y-1/2">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/careers/cta-dot.svg"

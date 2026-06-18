@@ -26,7 +26,10 @@ function EcosystemColumnIcon({
 export function CompanyEcosystemContent() {
   return (
     <div
-      className="absolute top-[0.708px] left-[118px] z-10 h-[390px] w-[1204px] border-[0.5px] border-solid border-[rgba(255,255,255,0.15)] bg-black"
+      className="absolute top-[0.708px] left-[118px] z-10 h-[390px] w-[1204px] border-[0.5px] border-b-0 border-solid border-[rgba(255,255,255,0.15)]"
+      style={{
+        background: "linear-gradient(to bottom, #000000 0%, #000000 60%, rgba(0,0,0,0.7) 78%, rgba(0,0,0,0.1) 93%, rgba(0,0,0,0) 100%)",
+      }}
       data-node-id="2379:4637"
       data-name="Content Section"
     >
@@ -93,14 +96,14 @@ export function CompanyEcosystemContent() {
                 nodeId="2379:4652"
               />
               <p
-                className={`${gilroyMedium.className} absolute top-[1.5px] left-[42px] h-[29px] w-[197px] text-[22px] leading-[28px] font-medium whitespace-nowrap text-white not-italic`}
+                className={`${gilroyMedium.className} absolute top-[1.5px] left-[42px] h-[29px] w-[197px] text-[26px] leading-[28px] font-medium whitespace-nowrap text-white not-italic`}
                 data-node-id="2379:4654"
               >
                 Global Footprint
               </p>
             </div>
             <p
-              className={`${interRegular.className} absolute top-[44px] left-0 h-[72px] w-[361.999px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+              className={`${interRegular.className} absolute top-[44px] left-0 h-[72px] w-[361.999px] text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
               data-node-id="2379:4655"
             >
               Headquartered in Santa Clara, CA with dedicated R&amp;D and hardware
@@ -121,14 +124,14 @@ export function CompanyEcosystemContent() {
                 nodeId="2379:4658"
               />
               <p
-                className={`${gilroyMedium.className} absolute top-0 left-[42px] h-[29px] w-[326px] text-[22px] leading-[28px] font-medium whitespace-nowrap text-white not-italic`}
+                className={`${gilroyMedium.className} absolute top-0 left-[42px] h-[29px] w-[326px] text-[26px] leading-[28px] font-medium whitespace-nowrap text-white not-italic`}
                 data-node-id="2379:4662"
               >
                 Distribution &amp; Supply Chain
               </p>
             </div>
             <p
-              className={`${interRegular.className} absolute top-[44px] left-0 h-[72px] w-[389px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+              className={`${interRegular.className} absolute top-[44px] left-0 h-[72px] w-[389px] text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
               data-node-id="2379:4663"
             >
               Authorized global distribution through trusted enterprise partners

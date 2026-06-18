@@ -11,7 +11,7 @@ const CARD_BORDER =
 export function CompanyJoinTeam() {
   return (
     <div
-      className={`relative isolate z-[1] h-[340px] w-[1200px] shrink-0 overflow-clip bg-black ${CARD_BORDER}`}
+      className={`relative isolate z-[1] h-[340px] w-[1200px] shrink-0 overflow-visible bg-black ${CARD_BORDER}`}
       data-node-id={COMPANY_JOIN_TEAM.nodeId}
       data-name="Frame 1618875876"
     >
@@ -42,9 +42,9 @@ export function CompanyJoinTeam() {
       >
         <CompanySectionTitle
           width={233}
-          height={38}
-          fontSize={28}
-          lineHeight={34}
+          height={44}
+          fontSize={32}
+          lineHeight={39}
           nodeId={COMPANY_JOIN_TEAM.titleNodeId}
         >
           {COMPANY_JOIN_TEAM.title}
@@ -70,7 +70,7 @@ export function CompanyJoinTeam() {
         </CompanyEngagementCta>
       </div>
 
-      <CompanyArticleCorners cornerBottom={336} />
+      <CompanyArticleCorners />
     </div>
   );
 }

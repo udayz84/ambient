@@ -10,6 +10,8 @@ import { CompanyEngagement } from "./CompanyEngagement";
 
 import { CompanyImage124Background } from "./CompanyImage124Background";
 
+import { CompanyMobile } from "./CompanyMobile";
+
 import { CompanyTechnologyPartners } from "./CompanyTechnologyPartners";
 
 import { CompanyHero } from "./CompanyHero";
@@ -31,8 +33,9 @@ const COMPANY_FOOTER_TOP_PX = 6737;
 export function Company() {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
+      {/* DESKTOP (>=1024px) — absolute canvas, untouched */}
       <div
-        className="relative mx-auto -mt-[78px] w-full overflow-x-clip overflow-y-visible bg-black"
+        className="relative mx-auto -mt-[78px] hidden w-full overflow-x-clip overflow-y-visible bg-black min-[1024px]:block"
         style={{ height: COMPANY_PAGE_HEIGHT_PX }}
         data-node-id="2379:2087"
         data-name="Company - 02"
@@ -48,6 +51,11 @@ export function Company() {
           <CompanyImage124Background />
           <CompanyEngagement />
         </div>
+      </div>
+
+      {/* MOBILE (<1024px) — dedicated stacked layout */}
+      <div className="relative -mt-[78px] w-full bg-black min-[1024px]:hidden">
+        <CompanyMobile />
       </div>
     </main>
   );

@@ -23,6 +23,8 @@ export function CompanyEngagementCard({
   imageSrc,
   imageWidth,
   imageHeight,
+  imageLeft,
+  imageTop,
 }: CompanyEngagementCardProps) {
   return (
     <article
@@ -31,16 +33,16 @@ export function CompanyEngagementCard({
       data-name="Article"
     >
       <div
-        className="pointer-events-none absolute right-0 bottom-0 z-0 flex items-end justify-end"
-        style={{ width: imageWidth, height: imageHeight }}
+        className="pointer-events-none absolute z-0 overflow-hidden"
+        style={{ left: imageLeft, top: imageTop, width: imageWidth, height: imageHeight }}
         aria-hidden
       >
         <Image
           src={imageSrc}
           alt=""
-          width={imageWidth}
-          height={imageHeight}
-          className="max-h-full max-w-full object-contain object-right object-bottom"
+          fill
+          className="pointer-events-none object-cover"
+          sizes={`${imageWidth}px`}
           unoptimized
         />
       </div>
@@ -72,7 +74,7 @@ export function CompanyEngagementCard({
         </CompanyEngagementCta>
       </div>
 
-      <CompanyArticleCorners cornerBottom={382} />
+      <CompanyArticleCorners />
     </article>
   );
 }

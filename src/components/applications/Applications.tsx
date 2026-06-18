@@ -6,6 +6,7 @@ import { ApplicationsCta } from "./ApplicationsCta";
 import { ApplicationsFeatureCard } from "./ApplicationsFeatureCard";
 import { ApplicationsHeader } from "./ApplicationsHeader";
 import { ApplicationsHeroVisual } from "./ApplicationsHeroVisual";
+import { ApplicationsMobile } from "./ApplicationsMobile";
 import { APPLICATION_TABS, FEATURE_CARDS } from "./applications-data";
 
 const INITIAL_ACTIVE_INDEX = 3;
@@ -27,7 +28,7 @@ export function Applications() {
       className="relative flex w-full justify-center overflow-hidden bg-black"
       aria-label="Build the impossible today"
     >
-      <div className="relative mx-auto flex h-[868px] w-full max-w-[1440px] justify-center">
+      <div className="relative mx-auto hidden h-[868px] w-full max-w-[1440px] justify-center min-[1024px]:flex">
         <div
           className="relative h-[868px] w-[1321px] shrink-0"
           data-node-id="2379:844"
@@ -44,6 +45,11 @@ export function Applications() {
           <ApplicationsFeatureCard {...FEATURE_CARDS.right} />
           <ApplicationsCta />
         </div>
+      </div>
+
+      {/* MOBILE (<1024px) — dedicated layout, desktop is untouched above */}
+      <div className="relative w-full min-[1024px]:hidden">
+        <ApplicationsMobile />
       </div>
     </section>
   );

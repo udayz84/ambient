@@ -24,20 +24,20 @@ function MenuIcon() {
     >
       <path
         d="M3 6h18"
-        stroke="currentColor"
-        strokeWidth="1.5"
+        stroke="#ffffff"
+        strokeWidth="1.8"
         strokeLinecap="round"
       />
       <path
         d="M3 12h18"
-        stroke="currentColor"
-        strokeWidth="1.5"
+        stroke="#ffffff"
+        strokeWidth="1.8"
         strokeLinecap="round"
       />
       <path
         d="M3 18h18"
-        stroke="currentColor"
-        strokeWidth="1.5"
+        stroke="#ffffff"
+        strokeWidth="1.8"
         strokeLinecap="round"
       />
     </svg>
@@ -56,8 +56,8 @@ function CloseIcon() {
     >
       <path
         d="M6 6l12 12M18 6L6 18"
-        stroke="currentColor"
-        strokeWidth="1.5"
+        stroke="#ffffff"
+        strokeWidth="1.8"
         strokeLinecap="round"
       />
     </svg>

@@ -1,17 +1,21 @@
-import { gilroyMedium, interRegular } from "./fonts";
+import { dmMono, gilroyMedium, gilroySemiBold, interRegular } from "./fonts";
 import { HeroMetrics } from "./HeroMetrics";
 import { HeroScrollIndicator } from "./HeroScrollIndicator";
 import { HeroVisual } from "./HeroVisual";
+import { HeroVisualMedia } from "./HeroVisualMedia";
+
+const statValueGradient = (deg: number) =>
+  `linear-gradient(${deg}deg, rgb(255, 255, 255) 29.352%, rgba(115, 115, 115, 0.5) 98.158%)`;
 
 export function Hero() {
   return (
     <section
-      className="relative -mt-[78px] flex h-[798px] w-full justify-center overflow-hidden bg-black"
+      className="relative -mt-[78px] flex h-[798px] w-full justify-center overflow-hidden bg-black max-[1023px]:h-auto"
       data-node-id="2379:734"
       data-name="Hero Section"
       aria-label="Hero"
     >
-      <div className="relative h-full w-full max-w-[1442px]">
+      <div className="relative hidden h-full w-full max-w-[1442px] min-[1024px]:block">
         <HeroVisual />
 
         <div className="pointer-events-none absolute top-[79px] left-[95px] flex h-[821px] w-0 items-center justify-center">
@@ -101,6 +105,104 @@ export function Hero() {
 
         <HeroMetrics />
         <HeroScrollIndicator />
+      </div>
+
+      {/* MOBILE (<1024px) — dedicated layout, desktop is untouched above */}
+      <div className="relative w-full min-[1024px]:hidden">
+        <div className="absolute inset-0 overflow-hidden" aria-hidden>
+          <HeroVisualMedia />
+        </div>
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/60 to-black"
+          aria-hidden
+        />
+
+        <div className="relative flex min-h-[100svh] flex-col px-[24px] pb-[56px] pt-[124px]">
+          <h1
+            className={`${gilroyMedium.className} w-full bg-clip-text text-[30px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+            style={{
+              backgroundImage:
+                "linear-gradient(101.005deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+            }}
+          >
+            Limitless AI, reimagined with Ambient efficiency
+          </h1>
+          <p
+            className={`${interRegular.className} mt-[16px] w-full text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-80`}
+          >
+            A new class of AI chips that unlocks richer intelligence from
+            microwatt to hyperscaler cloud, once constrained by power, space and
+            legacy design tradeoffs
+          </p>
+
+          <div className="mt-[44px] grid grid-cols-[minmax(0,1fr)_1px_minmax(0,1fr)] gap-[16px]">
+            <div className="flex flex-col items-start gap-[14px]">
+              <p
+                className={`${dmMono.className} text-[10px] tracking-[0.16em] uppercase text-[#9be37f]`}
+              >
+                Real-time AI at edge
+              </p>
+              <p
+                className={`${gilroySemiBold.className} bg-clip-text text-[34px] leading-[1.1] font-semibold text-transparent`}
+                style={{
+                  backgroundImage: statValueGradient(152.329),
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                }}
+              >
+                100%
+              </p>
+              <div className="flex flex-col gap-[8px]">
+                <p
+                  className={`${gilroyMedium.className} text-[16px] leading-[22px] font-medium text-white`}
+                >
+                  Programmability
+                </p>
+                <p
+                  className={`${interRegular.className} text-[11px] leading-[16px] font-normal text-[#f0f0f0] opacity-65`}
+                >
+                  AI cores with 4 to 32 bit resolution for control in
+                  applications.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white/10" />
+
+            <div className="flex flex-col items-start gap-[14px]">
+              <p
+                className={`${dmMono.className} text-[10px] tracking-[0.16em] uppercase text-[#9be37f]`}
+              >
+                Scalable arch.
+              </p>
+              <p
+                className={`${gilroySemiBold.className} bg-clip-text font-semibold leading-[1.1] text-transparent`}
+                style={{
+                  backgroundImage: statValueGradient(154.251),
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                }}
+              >
+                <span className="text-[34px]">512</span>
+                <span className="text-[11px]">{` GOPs`}</span>
+              </p>
+              <div className="flex flex-col gap-[8px]">
+                <p
+                  className={`${gilroyMedium.className} text-[16px] leading-[22px] font-medium text-white`}
+                >
+                  Peak Performance
+                </p>
+                <p
+                  className={`${interRegular.className} text-[11px] leading-[16px] font-normal text-[#f0f0f0] opacity-65`}
+                >
+                  Unmatched AI throughput far exceeds typical low-power MCUs.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

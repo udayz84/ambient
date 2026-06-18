@@ -11,26 +11,23 @@ const IMAGE_107_OVERLAY =
 function LeadershipBackground() {
   return (
     <div
-      className="pointer-events-none absolute top-[399px] right-0 flex h-[810px] w-[1440px] items-center justify-center"
+      className="pointer-events-none absolute top-[350px] right-0 h-[810px] w-[1440px] overflow-hidden"
       data-node-id="2379:2275"
       data-name="image 107"
       aria-hidden
     >
-      <div className="flex-none rotate-90">
-        <div className="relative h-[1440px] w-[810px] overflow-hidden">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage:
-                "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(83, 216, 36, 0.18) 0%, rgba(46, 76, 38, 0.08) 35%, rgba(0, 0, 0, 0) 70%)",
-            }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{ backgroundImage: IMAGE_107_OVERLAY }}
-          />
-        </div>
-      </div>
+      <Image
+        src="/careers/image%20107.png"
+        alt=""
+        fill
+        className="max-w-none object-cover brightness-110"
+        sizes="1440px"
+        unoptimized
+      />
+      <div
+        className="absolute inset-0 opacity-60"
+        style={{ backgroundImage: IMAGE_107_OVERLAY }}
+      />
     </div>
   );
 }

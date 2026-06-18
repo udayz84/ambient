@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { RefCallback } from "react";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { CompanyCardCorners } from "./company-corners";
 import type { LeadershipMember } from "./company-leadership-data";
@@ -193,7 +194,7 @@ function LeadershipInteractivePanel({
           aria-expanded={isExpanded}
           onClick={onReadMoreToggle}
           className={`${interRegular.className} w-full cursor-pointer text-left text-[14px] leading-[21px] font-normal text-[#ffffff] not-italic [word-break:break-word] transition-[margin-top,padding-top] hover:opacity-80 ${transition} ${
-            isExpanded ? "mt-auto pt-[17px]" : ""
+            isExpanded ? "mt-auto pt-[17px]" : "mt-[16px]"
           }`}
           data-node-id={readMoreNodeId ?? "2280:12314"}
         >
@@ -299,12 +300,14 @@ export function CompanyLeadershipCard({
   left,
   isExpanded = false,
   onReadMoreToggle,
+  cardRef,
 }: {
   member: LeadershipMember;
   variant: "leadership" | "advisory";
   left?: number;
   isExpanded?: boolean;
   onReadMoreToggle?: () => void;
+  cardRef?: RefCallback<HTMLElement>;
 }) {
   const spec = variant === "leadership" ? LEADERSHIP_SPEC : ADVISORY_SPEC;
   const isAdvisory = variant === "advisory";
@@ -315,6 +318,7 @@ export function CompanyLeadershipCard({
 
   return (
     <article
+      ref={cardRef}
       className={`${positionClass} isolate overflow-clip border-[0.5px] border-solid border-[rgba(255,255,255,0.15)] transition-[z-index] ${LEADERSHIP_EXPAND_TRANSITION_CLASS} ${isAdvisory ? "z-[1] bg-black" : isExpanded ? "z-[15] bg-[#191919]" : "z-[1] bg-[#191919]"}`}
       style={{
         left: left !== undefined ? left : undefined,

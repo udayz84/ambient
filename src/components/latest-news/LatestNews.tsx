@@ -4,6 +4,7 @@ import { RepelDots } from "../shared/RepelDots";
 import { Corners } from "../shared/Corners";
 import { LatestNewsCard } from "./LatestNewsCard";
 import { LATEST_NEWS_ARTICLES } from "./latest-news-data";
+import { LatestNewsMobile } from "./LatestNewsMobile";
 
 const cornerLeft = "/hero/corner-tag-1.svg";
 const cornerRight = "/hero/corner-tag-2.svg";
@@ -13,11 +14,11 @@ const ctaTextClass = `${interRegular.className} text-[16px] leading-[normal] fon
 export function LatestNews() {
   return (
     <section
-      className="relative mt-[150px] flex w-full justify-center overflow-x-clip bg-black"
+      className="relative mt-[150px] flex w-full justify-center overflow-x-clip bg-black max-[1023px]:mt-[60px]"
       aria-label="Latest from Ambient"
       data-node-id="2379:1283"
     >
-      <div className="relative mx-auto flex w-full max-w-[1440px] justify-center">
+      <div className="relative mx-auto hidden w-full max-w-[1440px] justify-center min-[1024px]:flex">
         <div className="mx-auto flex w-[1204px] flex-col items-center gap-[48px]">
           <div
             className="relative w-[600px] shrink-0"
@@ -115,6 +116,11 @@ export function LatestNews() {
             />
           </a>
         </div>
+      </div>
+
+      {/* MOBILE (<1024px) — dedicated layout, desktop is untouched above */}
+      <div className="relative w-full min-[1024px]:hidden">
+        <LatestNewsMobile />
       </div>
     </section>
   );

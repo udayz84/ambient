@@ -2,12 +2,13 @@ import Image from "next/image";
 import { MeasuredProofCards } from "./MeasuredProofCards";
 import { MeasuredProofCtas } from "./MeasuredProofCtas";
 import { MeasuredProofHeader } from "./MeasuredProofHeader";
+import { MeasuredProofMobile } from "./MeasuredProofMobile";
 
 export function MeasuredProof() {
   return (
     <section
       id="measured-proof"
-      className="relative left-1/2 h-[945px] w-screen max-w-none -translate-x-1/2 overflow-hidden bg-black"
+      className="relative left-1/2 h-[945px] w-screen max-w-none -translate-x-1/2 overflow-hidden bg-black max-[1023px]:h-auto"
       data-node-id="2379:1464"
       data-name="Section 6"
       aria-label="Measured proof in silicon"
@@ -53,12 +54,17 @@ export function MeasuredProof() {
         </div>
       </div>
 
-      <div className="relative mx-auto h-full w-full">
+      <div className="relative mx-auto hidden h-full w-full min-[1024px]:block">
         <MeasuredProofHeader />
 
         <MeasuredProofCards />
 
         <MeasuredProofCtas />
+      </div>
+
+      {/* MOBILE (<1024px) — dedicated layout, desktop is untouched above */}
+      <div className="relative w-full min-[1024px]:hidden">
+        <MeasuredProofMobile />
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 import { TagBadge } from "../hero/TagBadge";
 import { TechnologyFeatures } from "./TechnologyFeatures";
 import { TechnologyHeadline } from "./TechnologyHeadline";
+import { TechnologyMobile } from "./TechnologyMobile";
 import { TechnologyVisual, TechnologyVisualBackground } from "./TechnologyVisual";
 
 const cornerLeft = "/hero/corner-tag-1.svg";
@@ -76,13 +77,15 @@ function ChipVisualCorners() {
 export function Technology() {
   return (
     <section
-      className="relative left-1/2 h-[903px] w-screen max-w-none -translate-x-1/2 overflow-hidden bg-black"
+      className="relative left-1/2 h-[903px] w-screen max-w-none -translate-x-1/2 overflow-hidden bg-black max-[1023px]:h-auto"
       data-node-id="2388:317"
       aria-label="Technology"
     >
-      <TechnologyVisualBackground />
+      <div className="hidden min-[1024px]:block">
+        <TechnologyVisualBackground />
+      </div>
 
-      <div className="relative mx-auto h-full w-full max-w-[1441px]">
+      <div className="relative mx-auto hidden h-full w-full max-w-[1441px] min-[1024px]:block">
         <TechnologyVisual />
 
         <div
@@ -102,6 +105,11 @@ export function Technology() {
 
         <ChipVisualCorners />
         <TechnologyFeatures />
+      </div>
+
+      {/* MOBILE (<1024px) — dedicated layout, desktop is untouched above */}
+      <div className="relative w-full min-[1024px]:hidden">
+        <TechnologyMobile />
       </div>
     </section>
   );
