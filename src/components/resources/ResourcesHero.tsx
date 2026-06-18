@@ -85,20 +85,31 @@ export function ResourcesHero() {
             className="flex h-[48px] min-w-px flex-[1_0_0] items-center bg-[rgba(0,0,0,0.3)] px-[20px]"
             data-node-id="2379:1622"
           >
-            <p
-              className={`${interRegular.className} shrink-0 text-[14px] leading-[21px] font-normal whitespace-nowrap text-white not-italic`}
-              data-node-id="2379:1623"
-            >
-              Search architecture, case studies, or GPX metrics...
-            </p>
+            <label htmlFor="resources-hero-search" className="sr-only">
+              Search resources
+            </label>
+            <input
+              id="resources-hero-search"
+              type="search"
+              name="resources-hero-search"
+              autoComplete="off"
+              placeholder="Search architecture, case studies, or GPX metrics..."
+              aria-label="Search resources"
+              className={`${interRegular.className} h-full w-full border-0 bg-transparent p-0 text-[14px] leading-[21px] font-normal text-white not-italic outline-none placeholder:text-white placeholder:opacity-100 focus:outline-none`}
+            />
           </div>
-          <WhiteCtaButton className="w-[158px] shrink-0" href="#">
+          <WhiteCtaButton
+            className="w-[158px] shrink-0"
+            href="#"
+            lowercase
+            centered
+          >
             Search
           </WhiteCtaButton>
         </div>
 
         <div
-          className={`${interRegular.className} absolute top-[212.17px] left-[357px] flex items-center gap-[6px] text-[14px] leading-[21px] font-normal whitespace-nowrap not-italic`}
+          className={`${interRegular.className} absolute top-[212.17px] left-[calc(16.67%+119px)] flex items-center gap-[6px] text-[14px] leading-[21px] font-normal whitespace-nowrap not-italic`}
           data-node-id="2379:1634"
         >
           <span className="text-white opacity-75" data-node-id="2379:1635">

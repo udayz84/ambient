@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { gilroyMedium, gilroyBold, interRegular } from "../hero/fonts";
+import { gilroyMedium, gilroyBold, interRegular, interMedium } from "../hero/fonts";
 import { FOOTER_NAV_SECTIONS } from "./footer-data";
 import { NewsletterSignup } from "./NewsletterSignup";
 
@@ -13,15 +13,12 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
       <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 bg-black" />
         <div className="absolute inset-0 overflow-hidden">
-          <div className="relative h-full w-full">
-            <Image
-              src="/footer/footer-bg.png"
-              alt=""
-              fill
-              className="object-cover object-center"
-              sizes="100vw"
-            />
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt=""
+            src="/footer/footer-bg.png"
+            className="absolute left-[-0.02%] top-[-5.03%] h-[97.04%] w-full max-w-none"
+          />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.2)] to-[rgba(0,0,0,0)]" />
       </div>
@@ -34,17 +31,17 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
       ) : null}
 
       <nav
-        className="absolute top-[690px] left-1/2 z-[1] flex w-[897px] -translate-x-1/2 items-start justify-between text-center text-white"
+        className="absolute top-[626px] left-1/2 z-[1] flex w-[897px] -translate-x-1/2 items-center justify-between text-center text-white"
         aria-label="Footer"
         data-node-id="2379:786"
       >
         {FOOTER_NAV_SECTIONS.map((section) => (
           <div
             key={section.title}
-            className="flex w-[158px] shrink-0 flex-col items-center gap-[24px]"
+            className="flex w-[158px] shrink-0 flex-col items-center justify-center gap-[24px]"
           >
             <p
-              className={`${gilroyMedium.className} w-full text-[10px] leading-[1.4] font-medium tracking-[0.4px] whitespace-nowrap text-white uppercase opacity-60 not-italic`}
+              className={`${interMedium.className} w-full text-[10px] leading-[1.4] font-medium tracking-[0.4px] whitespace-nowrap text-white uppercase opacity-60 not-italic`}
             >
               {section.title}
             </p>
@@ -70,12 +67,12 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
       </nav>
 
       {/* Bottom Section */}
-      <div className="absolute top-[967px] left-0 z-[1] flex w-full items-end justify-between px-[12.5%]">
+      <div className="absolute top-[940px] left-0 z-[1] flex w-full items-end justify-between px-[120px]">
         
         {/* Left Side */}
-        <div className="flex items-end gap-[32px]">
+        <div className="flex items-end gap-[22px]">
           {/* Socials Block */}
-          <div className="flex flex-col gap-[16px]">
+          <div className="flex flex-col gap-[18px]">
             <p className={`${gilroyMedium.className} text-[10px] leading-[1.4] font-medium tracking-[0.4px] uppercase text-white opacity-60 not-italic`}>
               CONNECT WITH US
             </p>
@@ -96,18 +93,20 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
           <div className="mb-[4px] h-[25px] w-px bg-white/20" />
 
           {/* Legal Links Block */}
-          <div className="flex flex-col gap-[16px]">
+          <div className="flex flex-col gap-[22px]">
             <p className={`${gilroyMedium.className} text-[10px] leading-[1.4] font-medium tracking-[0.4px] uppercase text-white opacity-60 not-italic`}>
               Legal pages
             </p>
             <div className="flex items-center gap-[8px] pb-[4px]">
               <a href="#" className={`${interRegular.className} text-[12px] leading-[1.4] text-white hover:opacity-80`}>Privacy Policy</a>
               <div className="relative h-[4px] w-[5px]">
-                <Image src="/footer/dot-separator.svg" alt="" fill />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/footer/dot-separator.svg" alt="" className="block size-full max-w-none" aria-hidden />
               </div>
               <a href="#" className={`${interRegular.className} text-[12px] leading-[1.4] text-white hover:opacity-80`}>Terms of Service</a>
               <div className="relative h-[4px] w-[5px]">
-                <Image src="/footer/dot-separator.svg" alt="" fill />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/footer/dot-separator.svg" alt="" className="block size-full max-w-none" aria-hidden />
               </div>
               <a href="#" className={`${interRegular.className} text-[12px] leading-[1.4] text-white hover:opacity-80`}>Cookie Policy</a>
             </div>

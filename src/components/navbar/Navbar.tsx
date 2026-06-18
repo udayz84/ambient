@@ -1,7 +1,8 @@
-import { gilroyMedium } from "../hero/fonts";
+import { interMedium } from "../hero/fonts";
 import Image from "next/image";
 import Link from "next/link";
 import { NAV_ITEMS } from "./nav-items";
+import { MobileMenu } from "./MobileMenu";
 import { NavbarCta } from "./NavbarCta";
 
 function NavChevron() {
@@ -20,7 +21,7 @@ function NavChevron() {
 export function Navbar() {
   return (
     <header
-      className={`${gilroyMedium.className} relative z-50 h-[78px] w-full overflow-hidden drop-shadow-[0px_6px_12px_rgba(83,216,36,0.12)]`}
+      className={`${interMedium.className} sticky top-0 z-50 h-[78px] w-full overflow-hidden drop-shadow-[0px_6px_12px_rgba(83,216,36,0.12)]`}
       data-node-id="2379:1569"
     >
       <div
@@ -87,7 +88,7 @@ export function Navbar() {
           <NavbarCta />
         </div>
 
-        {/* Mobile (<1024px): flex row — logo + CTA only */}
+        {/* Mobile (<1024px): flex row — logo + hamburger */}
         <div className="flex h-[78px] items-center justify-between px-[24px] max-[1023px]:flex min-[1024px]:hidden">
           <Link href="/" className="block h-[38px] w-[135.443px] shrink-0">
             <Image
@@ -99,7 +100,7 @@ export function Navbar() {
               priority
             />
           </Link>
-          <NavbarCta />
+          <MobileMenu />
         </div>
       </div>
     </header>

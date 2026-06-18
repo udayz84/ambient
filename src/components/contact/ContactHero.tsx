@@ -18,7 +18,7 @@ export function ContactHero() {
           src="/contact/hand.png"
           alt=""
           fill
-          className="object-cover object-bottom"
+          className="object-cover object-bottom scale-[1.05] origin-bottom"
           sizes="(max-width: 1440px) 100vw, 2880px"
           quality={100}
           priority

@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { GreenCtaButton } from "../contact/contact-shared";
 import type { ResourceFeaturedCard } from "./resources-data";
+import { Corners } from "../shared/Corners";
 
 const badgeCornerTl = "/resources/badge-corner-tl.svg";
 const badgeCornerTr = "/resources/badge-corner-tr.svg";
@@ -57,20 +57,16 @@ export function ResourcesFeaturedCard({
             processes matrix math natively for high-density performance.
           </p>
         </div>
-        <GreenCtaButton className="w-[231px]" href="#">
+        <GreenCtaButton
+          className="w-[231px]"
+          href="#"
+          textClassName={`${gilroyMedium.className} text-[16px] leading-[28px] font-medium`}
+        >
           Download PDF
         </GreenCtaButton>
       </div>
 
-      <CardCorner className="absolute top-0 left-0" src={cardCornerLeft} flipY />
-      <CardCorner className="absolute top-0 right-0" src={cardCornerRight} rotate />
-      <CardCorner className="absolute bottom-0 left-0" src={cardCornerLeft} />
-      <CardCorner
-        className="absolute right-0 bottom-0"
-        src={cardCornerRight}
-        rotate
-        flipY
-      />
+      <Corners leftSrc={cardCornerLeft} rightSrc={cardCornerRight} />
     </article>
   );
 }
@@ -91,13 +87,13 @@ function WhitepaperBadge({
         data-node-id="2379:2025"
         data-name="Menu"
       >
-        <BadgeCorners />
+        <Corners leftSrc={badgeCornerTl} rightSrc={badgeCornerTr} />
         <div
           className={`${dmMono.className} absolute top-1/2 left-1/2 h-[26px] w-[140px] -translate-x-1/2 -translate-y-1/2 overflow-clip bg-white`}
           data-node-id={nodeId}
           data-name="Menu"
         >
-          <BadgeCorners />
+          <Corners leftSrc={badgeCornerTl} rightSrc={badgeCornerTr} />
           <p
             className="absolute top-[calc(50%-4.5px)] left-1/2 -translate-x-1/2 text-center text-[13px] leading-[19.5px] font-normal whitespace-nowrap text-black uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]"
             data-node-id="2379:2035"
@@ -115,82 +111,13 @@ function WhitepaperBadge({
       data-node-id={nodeId}
       data-name="Menu"
     >
-      <BadgeCorners />
+      <Corners leftSrc={badgeCornerTl} rightSrc={badgeCornerTr} />
       <p
         className="absolute top-[calc(50%-4.5px)] left-1/2 -translate-x-1/2 text-center text-[13px] leading-[19.5px] font-normal whitespace-nowrap text-black uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]"
         data-node-id="2379:1976"
       >
         {label}
       </p>
-    </div>
-  );
-}
-
-function BadgeCorners() {
-  return (
-    <>
-      <div className="absolute top-0 left-0 flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src={badgeCornerTl} aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="absolute top-0 right-0 flex size-[4px] items-center justify-center">
-        <div className="flex-none rotate-180">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src={badgeCornerTr} aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="absolute bottom-0 left-0 size-[4px]">
-        <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="" className="block size-full max-w-none" src={badgeCornerTl} aria-hidden />
-        </div>
-      </div>
-      <div className="absolute right-0 bottom-0 flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 flex-none rotate-180">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src={badgeCornerTr} aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
-
-function CardCorner({
-  className,
-  src,
-  flipY,
-  rotate,
-}: {
-  className: string;
-  src: string;
-  flipY?: boolean;
-  rotate?: boolean;
-}) {
-  return (
-    <div className={`flex size-[4px] items-center justify-center ${className}`}>
-      <div
-        className={`flex-none ${flipY ? "-scale-y-100" : ""} ${rotate ? "rotate-180" : ""}`}
-      >
-        <div className="relative size-[4px]">
-          <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-            <Image src={src} alt="" width={4} height={4} aria-hidden />
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

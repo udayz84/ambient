@@ -1,76 +1,7 @@
 import Image from "next/image";
 import { TechnologyFeatureStat } from "./TechnologyFeatureStat";
 import { TechnologyGridLine } from "./TechnologyGridLine";
-
-const cornerLeft = "/hero/corner-tag-1.svg";
-const cornerRight = "/hero/corner-tag-2.svg";
-
-function FeatureFrameCorners() {
-  return (
-    <>
-      <div className="absolute top-[0.49px] right-[0.52px] flex size-[4px] items-center justify-center">
-        <div className="rotate-180 flex-none">
-          <div className="relative size-[4px]" data-node-id="2379:1459">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <Image
-                src={cornerRight}
-                alt=""
-                width={4}
-                height={4}
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="absolute right-[0.52px] bottom-[0.53px] flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 rotate-180 flex-none">
-          <div className="relative size-[4px]" data-node-id="2379:1460">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <Image
-                src={cornerRight}
-                alt=""
-                width={4}
-                height={4}
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="absolute top-[0.51px] left-[0.51px] flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 flex-none">
-          <div className="relative size-[4px]" data-node-id="2379:1461">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <Image
-                src={cornerLeft}
-                alt=""
-                width={4}
-                height={4}
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="absolute bottom-[0.5px] left-[0.51px] size-[4px]" data-node-id="2379:1462">
-        <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-          <Image
-            src={cornerLeft}
-            alt=""
-            width={4}
-            height={4}
-            className="block size-full max-w-none"
-            aria-hidden
-          />
-        </div>
-      </div>
-    </>
-  );
-}
+import { Corners } from "../shared/Corners";
 
 export function TechnologyFeatures() {
   return (
@@ -89,7 +20,7 @@ export function TechnologyFeatures() {
           sizes="1204px"
         />
       </div>
-      <FeatureFrameCorners />
+      <Corners />
 
       <TechnologyFeatureStat
         nodeId="2379:1433"

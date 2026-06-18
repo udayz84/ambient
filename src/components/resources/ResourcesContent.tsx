@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { interRegular } from "../hero/fonts";
 import { GreenCtaButton } from "../contact/contact-shared";
 import {
@@ -10,6 +10,7 @@ import {
 } from "./resources-data";
 import { getResourcesExtraHeight } from "./resources-layout";
 import { ResourcesArticleCard } from "./ResourcesArticleCard";
+import { Corners } from "../shared/Corners";
 const scrollArrowLeft = "/applications/nav-arrow-right.svg";
 const INITIAL_VISIBLE_COUNT = 6;
 const LOAD_MORE_COUNT = 3;
@@ -93,13 +94,13 @@ export function ResourcesContent({
         </div>
       </div>
       <nav
-        className="flex h-[52px] w-full items-center justify-between"
+        className="flex h-[52px] w-full items-center justify-between gap-[9.61px]"
         aria-label="Resource categories"
         data-node-id="2379:1773"
       >
         <button
           type="button"
-          className="relative size-[44px] shrink-0 hover:opacity-80 transition-opacity"
+          className="relative size-[44px] shrink-0 transition-opacity hover:opacity-80"
           aria-label="Previous category"
           onClick={handlePrevCategory}
           data-node-id="2379:1774"
@@ -114,56 +115,47 @@ export function ResourcesContent({
           />
         </button>
 
-        <div className="flex flex-1 items-center justify-center gap-0">
-          {RESOURCE_CATEGORIES.map((category, index) => {
-            const isActive = activeCategory === category.id;
+        {RESOURCE_CATEGORIES.map((category, index) => {
+          const isActive = activeCategory === category.id;
+          const dividerVariant =
+            index === currentIndex
+              ? "before-active"
+              : index === currentIndex + 1
+              ? "after-active"
+              : "normal";
 
-            if (isActive) {
-              return (
-                <button
-                  key={category.id}
-                  type="button"
-                  onClick={() => setActiveCategory(category.id)}
-                  className={`${interRegular.className} relative h-[44px] shrink-0 overflow-clip bg-[#f0f0f0] px-[7px] text-[16px] leading-[24px] font-normal whitespace-nowrap text-[#0e1a0e] not-italic`}
-                  data-node-id={category.nodeId}
-                >
-                  <CategoryCorner className="absolute top-0 left-0" flipY />
-                  <CategoryCorner className="absolute top-0 right-0" rotate />
-                  <CategoryCorner className="absolute bottom-0 left-0" />
-                  <CategoryCorner
-                    className="absolute right-0 bottom-0"
-                    rotate
-                    flipY
-                  />
-                  <span className="relative px-[10px] py-[10px]">{category.label}</span>
-                </button>
-              );
-            }
-
-            return (
-              <div key={category.id} className="flex items-center">
-                {index > 0 ? (
-                  <span
-                    className="mx-[10px] h-[8px] w-px bg-[rgba(255,255,255,0.2)]"
-                    aria-hidden
-                  />
+          return (
+            <Fragment key={category.id}>
+              <CategoryDivider variant={dividerVariant} />
+              <button
+                type="button"
+                onClick={() => setActiveCategory(category.id)}
+                className={`${interRegular.className} relative flex h-[52px] shrink-0 items-center justify-center px-[20px] text-[16px] leading-[24px] font-normal whitespace-nowrap not-italic ${
+                  isActive ? "text-[#0e1a0e]" : "text-[#666]"
+                }`}
+                data-node-id={category.nodeId}
+              >
+                {isActive ? (
+                  <span className="pointer-events-none absolute inset-y-[4px] inset-x-[13px] overflow-clip bg-[#f0f0f0]">
+                    <Corners />
+                  </span>
                 ) : null}
-                <button
-                  type="button"
-                  onClick={() => setActiveCategory(category.id)}
-                  className={`${interRegular.className} px-[20px] py-[14px] text-[16px] leading-[24px] font-normal whitespace-nowrap text-[#666] not-italic`}
-                  data-node-id={category.nodeId}
-                >
-                  {category.label}
-                </button>
-              </div>
-            );
-          })}
-        </div>
+                <span className="relative">{category.label}</span>
+              </button>
+            </Fragment>
+          );
+        })}
+        <CategoryDivider
+          variant={
+            currentIndex === RESOURCE_CATEGORIES.length - 1
+              ? "after-active"
+              : "normal"
+          }
+        />
 
         <button
           type="button"
-          className="relative size-[44px] shrink-0 hover:opacity-80 transition-opacity"
+          className="relative size-[44px] shrink-0 transition-opacity hover:opacity-80"
           aria-label="Next category"
           onClick={handleNextCategory}
           data-node-id="2379:1825"
@@ -179,7 +171,7 @@ export function ResourcesContent({
         </button>
       </nav>
 
-      <div className="flex w-[1236px] flex-col gap-[36px]" data-node-id="2379:1832">
+      <div className="flex w-[1236px] flex-col items-center gap-[36px]" data-node-id="2379:1832">
         {articleRows.map((row, rowIndex) => (
           <div
             key={`resource-row-${rowIndex}`}
@@ -191,52 +183,60 @@ export function ResourcesContent({
             ))}
           </div>
         ))}
+        {canLoadMore ? (
+          <GreenCtaButton
+            className="w-[225px]"
+            onClick={handleLoadMore}
+            loading={isLoadingMore}
+            disabled={isLoadingMore}
+          >
+            Load More Resources
+          </GreenCtaButton>
+        ) : null}
       </div>
-
-      {canLoadMore ? (
-        <GreenCtaButton
-          className="w-[225px]"
-          onClick={handleLoadMore}
-          loading={isLoadingMore}
-          disabled={isLoadingMore}
-        >
-          Load More Resources
-        </GreenCtaButton>
-      ) : null}
     </section>
   );
 }
 
-function CategoryCorner({
-  className,
-  flipY,
-  rotate,
+function CategoryDivider({
+  variant = "normal",
 }: {
-  className: string;
-  flipY?: boolean;
-  rotate?: boolean;
+  variant?: "normal" | "before-active" | "after-active";
 }) {
-  const src = "/hero/corner-tag-1.svg";
-  const srcRight = "/hero/corner-tag-2.svg";
-  const imageSrc = rotate ? srcRight : src;
+  const segments =
+    variant === "before-active"
+      ? [
+          { height: 4, color: "bg-[#333333]" },
+          { height: 5, color: "bg-[#333333]" },
+          { height: 6, color: "bg-[#333333]" },
+          { height: 7, color: "bg-white/70" },
+          { height: 8, color: "bg-white" },
+        ]
+      : variant === "after-active"
+      ? [
+          { height: 8, color: "bg-white" },
+          { height: 7, color: "bg-white/70" },
+          { height: 6, color: "bg-[#333333]" },
+          { height: 5, color: "bg-[#333333]" },
+          { height: 4, color: "bg-[#333333]" },
+        ]
+      : [
+          { height: 8, color: "bg-[#333333]" },
+          { height: 8, color: "bg-[#333333]" },
+          { height: 8, color: "bg-[#333333]" },
+          { height: 8, color: "bg-[#333333]" },
+          { height: 8, color: "bg-[#333333]" },
+        ];
 
   return (
-    <div className={`flex size-[4px] items-center justify-center ${className}`}>
-      <div
-        className={`flex-none ${flipY ? "-scale-y-100" : ""} ${rotate ? "rotate-180" : ""}`}
-      >
-        <div className="relative size-[4px]">
-          <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt=""
-              className="block size-full max-w-none"
-              src={imageSrc}
-              aria-hidden
-            />
-          </div>
-        </div>
-      </div>
+    <div className="flex shrink-0 items-center gap-[8.36px]" aria-hidden>
+      {segments.map((seg, i) => (
+        <span
+          key={i}
+          className={`w-px ${seg.color}`}
+          style={{ height: `${seg.height}px` }}
+        />
+      ))}
     </div>
   );
 }

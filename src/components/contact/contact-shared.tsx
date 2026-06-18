@@ -1,79 +1,14 @@
 import Image from "next/image";
 import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { RepelDots } from "../shared/RepelDots";
-
-const cornerLeft = "/hero/corner-tag-1.svg";
-const cornerRight = "/hero/corner-tag-2.svg";
-const cornerCtaLeft = "/hero/corner-tag-1.svg";
-const cornerCtaRight = "/hero/corner-tag-2.svg";
+import { Corners } from "../shared/Corners";
 
 export function CornerDecor({
   className = "",
 }: {
   className?: string;
 }) {
-  return (
-    <>
-      <div
-        className={`pointer-events-none absolute top-0 left-0 flex size-[4px] items-center justify-center ${className}`}
-      >
-        <div className="-scale-y-100 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                alt=""
-                className="block size-full max-w-none"
-                src={cornerLeft}
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute top-0 right-0 flex size-[4px] items-center justify-center">
-        <div className="rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                alt=""
-                className="block size-full max-w-none"
-                src={cornerRight}
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute bottom-0 left-0 size-[4px]">
-        <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt=""
-            className="block size-full max-w-none"
-            src={cornerLeft}
-            aria-hidden
-          />
-        </div>
-      </div>
-      <div className="pointer-events-none absolute right-0 bottom-0 flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                alt=""
-                className="block size-full max-w-none"
-                src={cornerRight}
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+  return <Corners className={className} />;
 }
 
 export function GradientTitle({
@@ -119,6 +54,7 @@ export function GreenCtaButton({
   onClick,
   disabled = false,
   loading = false,
+  textClassName = "text-[14px] leading-[normal]",
 }: {
   children: React.ReactNode;
   className?: string;
@@ -127,8 +63,9 @@ export function GreenCtaButton({
   onClick?: () => void;
   disabled?: boolean;
   loading?: boolean;
+  textClassName?: string;
 }) {
-  const sharedClassName = `${gilroySemiBold.className} relative block h-[48px] shrink-0 overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] disabled:cursor-not-allowed disabled:opacity-70 ${className}`;
+  const sharedClassName = `${gilroySemiBold.className} relative block h-[48px] shrink-0 cursor-pointer overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] disabled:cursor-not-allowed disabled:opacity-70 ${className}`;
   const sharedStyle = width ? { width } : undefined;
   const content = (
     <>
@@ -137,11 +74,11 @@ export function GreenCtaButton({
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
       <RepelDots />
-      <span className="relative flex h-full items-center justify-center gap-[10px] text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic">
+      <span className={`relative flex h-full items-center justify-center gap-[10px] ${textClassName} whitespace-nowrap text-white uppercase not-italic`}>
         {loading ? <CtaSpinner /> : null}
         {loading ? "Loading..." : children}
       </span>
-      <CtaCorners />
+      <Corners />
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
@@ -175,10 +112,14 @@ export function WhiteCtaButton({
   children,
   className = "",
   href = "#",
+  lowercase = false,
+  centered = false,
 }: {
   children: React.ReactNode;
   className?: string;
   href?: string;
+  lowercase?: boolean;
+  centered?: boolean;
 }) {
   return (
     <a
@@ -188,60 +129,25 @@ export function WhiteCtaButton({
       <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[length:307.2px_307.2px] bg-top-left opacity-[0.35]"
+        className="pointer-events-none absolute inset-0 bg-[length:307.2px_307.2px] bg-top-left opacity-40 mix-blend-plus-lighter"
         style={{ backgroundImage: "url(/contact/cta-texture.png)" }}
       />
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(255,255,255,0.6)]"
+        className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(45,45,45,0.6)]"
       />
-      <span className="absolute top-1/2 left-[31px] flex -translate-y-1/2 items-center gap-[8px] text-[14px] leading-[normal] whitespace-nowrap text-[#151515] uppercase not-italic">
+      <span
+        className={`flex items-center gap-[8px] text-[14px] leading-[normal] whitespace-nowrap text-[#151515] ${
+          lowercase ? "normal-case" : "uppercase"
+        } not-italic ${
+          centered
+            ? "absolute inset-0 justify-center"
+            : "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        }`}
+      >
         {children}
       </span>
     </a>
-  );
-}
-
-function CtaCorners() {
-  return (
-    <>
-      <div className="pointer-events-none absolute top-0 right-0 flex size-[4px] items-center justify-center">
-        <div className="rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src={cornerCtaRight} aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute top-0 left-0 flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src={cornerCtaLeft} aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute right-0 bottom-0 flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src={cornerCtaRight} aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute bottom-0 left-0 size-[4px]">
-        <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="" className="block size-full max-w-none" src={cornerCtaLeft} aria-hidden />
-        </div>
-      </div>
-    </>
   );
 }
 

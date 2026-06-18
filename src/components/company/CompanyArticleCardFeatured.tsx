@@ -2,6 +2,7 @@ import Image from "next/image";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { CompanyArticleCorners } from "./CompanyArticleCorners";
 import type { CompanyFeaturedArticle } from "./company-articles-data";
+import { Corners } from "../shared/Corners";
 
 const cornerLeft = "/hero/vector-57.svg";
 const cornerRight = "/hero/vector-55.svg";
@@ -79,15 +80,7 @@ function CompanyArticleGreenBadge({ label }: { label: string }) {
       className={`${dmMono.className} relative h-[26px] w-[180px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)]`}
       data-name="Menu"
     >
-      <Corner className="absolute top-0 left-0" src={cornerLeft} flipY />
-      <Corner className="absolute top-0 right-0" src={cornerRight} rotate />
-      <Corner className="absolute bottom-0 left-0" src={cornerLeft} />
-      <Corner
-        className="absolute right-0 bottom-0"
-        src={cornerRight}
-        rotate
-        flipY
-      />
+      <Corners leftSrc={cornerLeft} rightSrc={cornerRight} />
       <p className="absolute top-[calc(50%-4.5px)] left-1/2 -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#53d824] uppercase not-italic">
         {label}
       </p>
@@ -107,31 +100,5 @@ function MetadataItem({ children }: { children: string }) {
       </span>
       {children}
     </span>
-  );
-}
-
-function Corner({
-  className,
-  src,
-  flipY,
-  rotate,
-}: {
-  className: string;
-  src: string;
-  flipY?: boolean;
-  rotate?: boolean;
-}) {
-  return (
-    <div className={`flex size-[4px] items-center justify-center ${className}`}>
-      <div
-        className={`flex-none ${flipY ? "-scale-y-100" : ""} ${rotate ? "rotate-180" : ""}`}
-      >
-        <div className="relative size-[4px]">
-          <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-            <Image src={src} alt="" width={4} height={4} aria-hidden />
-          </div>
-        </div>
-      </div>
-    </div>
   );
 }

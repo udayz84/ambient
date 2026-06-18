@@ -4,7 +4,7 @@ import { EcosystemPartners } from "./EcosystemPartners";
 export function Ecosystem() {
   return (
     <section
-      className="relative mx-auto mt-[150px] w-full overflow-hidden bg-black"
+      className="relative mx-auto mt-[100px] w-full overflow-hidden bg-black"
       aria-label="Supported by a growing ecosystem"
       data-node-id="2379:1026"
     >

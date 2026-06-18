@@ -3,12 +3,10 @@
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import { gilroySemiBold } from "../hero/fonts";
+import { Corners } from "../shared/Corners";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
-
-const cornerLeft = "/hero/corner-tag-1.svg";
-const cornerRight = "/hero/corner-tag-2.svg";
 
 const BUTTON_WIDTH = 147;
 const BUTTON_HEIGHT = 36;
@@ -18,81 +16,6 @@ const REPEL_STRENGTH = 12;
 const LERP = 0.18;
 
 type Particle = { id: number; x: number; y: number };
-
-function NavbarCtaCorners() {
-  return (
-    <>
-      <div
-        className="pointer-events-none absolute top-0 right-0 z-20 flex size-[4px] items-center justify-center"
-        data-node-id="2379:1596"
-      >
-        <div className="rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                alt=""
-                className="block size-full max-w-none"
-                src={cornerRight}
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="pointer-events-none absolute top-0 left-0 z-20 flex size-[4px] items-center justify-center"
-        data-node-id="2379:1597"
-      >
-        <div className="-scale-y-100 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                alt=""
-                className="block size-full max-w-none"
-                src={cornerLeft}
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="pointer-events-none absolute right-0 bottom-0 z-20 flex size-[4px] items-center justify-center"
-        data-node-id="2379:1599"
-      >
-        <div className="-scale-y-100 rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                alt=""
-                className="block size-full max-w-none"
-                src={cornerRight}
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="pointer-events-none absolute bottom-0 left-0 z-20 size-[4px]"
-        data-node-id="2379:1600"
-      >
-        <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt=""
-            className="block size-full max-w-none"
-            src={cornerLeft}
-            aria-hidden
-          />
-        </div>
-      </div>
-    </>
-  );
-}
 
 function buildParticles(): Particle[] {
   const items: Particle[] = [];
@@ -258,7 +181,7 @@ export function NavbarCta() {
           aria-hidden
         />
       </span>
-      <NavbarCtaCorners />
+      <Corners className="z-20" />
     </a>
   );
 }

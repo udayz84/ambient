@@ -2,6 +2,7 @@ import Image from "next/image";
 import { gilroySemiBold } from "../hero/fonts";
 import type { PartnerRowConfig } from "./ecosystem-data";
 import { EcosystemGridLine } from "./EcosystemGridLine";
+import { Corners } from "../shared/Corners";
 
 function PartnerLogoStat({
   nodeId,
@@ -141,78 +142,11 @@ export function EcosystemPartnerRow({
         </div>
       </div>
 
-      <div className="absolute top-[0.49px] right-[0.52px] z-[3] flex size-[4px] items-center justify-center">
-        <div className="rotate-180 flex-none">
-          <div
-            className="relative size-[4px]"
-            data-node-id={config.corners.topRight}
-          >
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <Image
-                src="/ecosystem/corner-tr.svg"
-                alt=""
-                width={4}
-                height={4}
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="absolute right-[0.52px] bottom-[0.53px] z-[3] flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 rotate-180 flex-none">
-          <div
-            className="relative size-[4px]"
-            data-node-id={config.corners.bottomRight}
-          >
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <Image
-                src="/ecosystem/corner-tr.svg"
-                alt=""
-                width={4}
-                height={4}
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="absolute top-[0.51px] left-[0.51px] z-[3] flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 flex-none">
-          <div
-            className="relative size-[4px]"
-            data-node-id={config.corners.topLeft}
-          >
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <Image
-                src="/ecosystem/corner-tl.svg"
-                alt=""
-                width={4}
-                height={4}
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="absolute bottom-[0.5px] left-[0.51px] z-[3] size-[4px]"
-        data-node-id={config.corners.bottomLeft}
-      >
-        <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-          <Image
-            src="/ecosystem/corner-tl.svg"
-            alt=""
-            width={4}
-            height={4}
-            className="block size-full max-w-none"
-            aria-hidden
-          />
-        </div>
-      </div>
+      <Corners
+        leftSrc="/ecosystem/corner-tl.svg"
+        rightSrc="/ecosystem/corner-tr.svg"
+        className="z-[3]"
+      />
     </div>
   );
 }

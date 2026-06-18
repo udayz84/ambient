@@ -11,11 +11,10 @@ import {
   CAREERS_LOCATION_FILTER_OPTIONS,
 } from "./careers-data";
 import { CareersRolesProfileCta } from "./careers-shared";
+import { Corners } from "../shared/Corners";
 
 const cornerTitleTl = "/careers/corner-menu-tl.svg";
 const cornerTitleTr = "/careers/corner-menu-tr.svg";
-const cornerApplyTl = "/careers/corner-apply-tl.svg";
-const cornerApplyTr = "/careers/corner-apply-tr.svg";
 
 const OPEN_ROLES_GRADIENT =
   "linear-gradient(107.715deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -433,42 +432,7 @@ function CategoryBadge({ label }: { label: string }) {
       className={`${dmMono.className} absolute top-[19.34px] left-[calc(50%-492px)] h-[26px] w-[180px] -translate-x-1/2 overflow-clip bg-[rgba(255,255,255,0.06)]`}
       data-name="Menu"
     >
-      <div className="absolute top-0 left-0 flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src={cornerTitleTl} aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="absolute top-0 right-0 flex size-[4px] items-center justify-center">
-        <div className="rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src={cornerTitleTr} aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="absolute bottom-0 left-0 size-[4px]">
-        <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="" className="block size-full max-w-none" src={cornerTitleTl} aria-hidden />
-        </div>
-      </div>
-      <div className="absolute right-0 bottom-0 flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src={cornerTitleTr} aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
+      <Corners leftSrc={cornerTitleTl} rightSrc={cornerTitleTr} />
       <p
         className={`absolute top-[calc(50%-4.5px)] left-1/2 -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word]`}
       >
@@ -505,42 +469,10 @@ function ApplyButton() {
           aria-hidden
         />
       </span>
-      <div className="pointer-events-none absolute top-0 left-0 flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src={cornerApplyTl} aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute top-0 right-0 flex size-[4px] items-center justify-center">
-        <div className="rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src={cornerApplyTr} aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute bottom-0 left-0 size-[4px]">
-        <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="" className="block size-full max-w-none" src={cornerApplyTl} aria-hidden />
-        </div>
-      </div>
-      <div className="pointer-events-none absolute right-0 bottom-0 flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src={cornerApplyTr} aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
+      <Corners
+        leftSrc="/careers/corner-apply-tl.svg"
+        rightSrc="/careers/corner-apply-tr.svg"
+      />
     </a>
   );
 }

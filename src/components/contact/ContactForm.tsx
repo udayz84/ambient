@@ -11,9 +11,7 @@ import {
   GradientTitle,
   GreenCtaButton,
 } from "./contact-shared";
-
-const cornerLeft = "/hero/corner-tag-1.svg";
-const cornerRight = "/hero/corner-tag-2.svg";
+import { Corners } from "../shared/Corners";
 
 type TrackId = "sales" | "developer" | "media";
 
@@ -67,6 +65,7 @@ const formFields = [
 
 export function ContactForm() {
   const [activeTrackId, setActiveTrackId] = useState<TrackId>("sales");
+  const [subscribed, setSubscribed] = useState(false);
   const activeConnectorTop =
     tracks.find((track) => track.id === activeTrackId)?.connectorTop ??
     tracks[0].connectorTop;
@@ -135,7 +134,7 @@ export function ContactForm() {
         data-node-id="2379:8553"
         data-name="Right Section"
       >
-        <FormPanelCorners />
+        <Corners />
 
         <p
           className={`${gilroyMedium.className} absolute top-[31px] left-[16px] w-[558px] text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
@@ -155,6 +154,7 @@ export function ContactForm() {
           top={350}
           width={560}
           height={132}
+          multiline
           nodeId="2379:8561"
         />
 
@@ -163,10 +163,35 @@ export function ContactForm() {
           data-node-id="2379:8562"
           data-name="Check Box"
         >
-          <span
-            className="relative size-[20px] shrink-0 border-[0.5px] border-solid border-[#4a4a4a]"
-            data-node-id="2379:8563"
+          <input
+            type="checkbox"
+            checked={subscribed}
+            onChange={(event) => setSubscribed(event.target.checked)}
+            className="sr-only"
           />
+          <span
+            className={`relative size-[20px] shrink-0 border-[0.5px] border-solid ${
+              subscribed ? "border-[#53d824] bg-[#53d824]" : "border-[#4a4a4a]"
+            }`}
+            data-node-id="2379:8563"
+          >
+            {subscribed ? (
+              <svg
+                className="absolute inset-0 size-full p-[2px] text-[#091804]"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden
+              >
+                <path
+                  d="M5 13l4 4L19 7"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            ) : null}
+          </span>
           <span
             className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-white not-italic`}
             data-node-id="2379:8564"
@@ -201,8 +226,6 @@ function TrackCard({
   selected: boolean;
   onSelect: () => void;
 }) {
-  const borderInset = selected ? "1.5px" : "0.5px";
-
   return (
     <button
       type="button"
@@ -216,7 +239,7 @@ function TrackCard({
       style={{ top, height }}
       data-node-id={nodeId}
     >
-      <TrackCorners inset={borderInset} />
+      <Corners />
 
       <div className="relative size-[32px] shrink-0" data-name="Frame">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -231,7 +254,7 @@ function TrackCard({
       </div>
 
       <div
-        className="flex min-w-0 flex-1 flex-col gap-[10px] not-italic [word-break:break-word]"
+        className="flex min-w-0 flex-1 flex-col gap-[10px] pr-[28px] not-italic [word-break:break-word]"
         data-name="NewsSection"
       >
         <p
@@ -300,6 +323,7 @@ function FormField({
   top,
   width = 273,
   height = 65,
+  multiline = false,
   nodeId,
 }: {
   label: string;
@@ -308,8 +332,11 @@ function FormField({
   top: number;
   width?: number;
   height?: number;
+  multiline?: boolean;
   nodeId: string;
 }) {
+  const fieldId = `field-${nodeId.replace(/:/g, "-")}`;
+  const inputClassName = `${interRegular.className} w-full border-0 bg-transparent p-0 text-[14px] leading-[21px] font-normal text-white not-italic placeholder:text-[#4a4a4a] outline-none`;
   return (
     <div
       className="absolute flex flex-col gap-[5px]"
@@ -318,81 +345,29 @@ function FormField({
       data-name="Input Field"
     >
       <label
+        htmlFor={fieldId}
         className={`${interLight.className} w-full shrink-0 text-[10px] leading-[15px] font-light text-white not-italic`}
       >
         {label}
       </label>
       <div className="flex min-h-0 flex-1 items-start border-[0.5px] border-solid border-[#4a4a4a] p-[12px]">
-        <span
-          className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[#4a4a4a] not-italic`}
-        >
-          {placeholder}
-        </span>
+        {multiline ? (
+          <textarea
+            id={fieldId}
+            name={fieldId}
+            placeholder={placeholder}
+            className={`${inputClassName} h-full resize-none`}
+          />
+        ) : (
+          <input
+            id={fieldId}
+            name={fieldId}
+            type="text"
+            placeholder={placeholder}
+            className={inputClassName}
+          />
+        )}
       </div>
     </div>
-  );
-}
-
-function TrackCorners({ inset }: { inset: string }) {
-  return <InsetCorners inset={inset} />;
-}
-
-function FormPanelCorners() {
-  return <InsetCorners inset="1.5px" />;
-}
-
-function InsetCorners({ inset }: { inset: string }) {
-  const cornerOffset = inset === "1.5px" ? "0px" : "0px";
-  return (
-    <>
-      <div
-        className="pointer-events-none absolute flex size-[4px] items-center justify-center"
-        style={{ left: cornerOffset, top: cornerOffset }}
-      >
-        <div className="-scale-y-100 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src={cornerLeft} aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="pointer-events-none absolute flex size-[4px] items-center justify-center"
-        style={{ right: cornerOffset, top: cornerOffset }}
-      >
-        <div className="rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src={cornerRight} aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="pointer-events-none absolute size-[4px]"
-        style={{ left: cornerOffset, bottom: cornerOffset }}
-      >
-        <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="" className="block size-full max-w-none" src={cornerLeft} aria-hidden />
-        </div>
-      </div>
-      <div
-        className="pointer-events-none absolute flex size-[4px] items-center justify-center"
-        style={{ right: cornerOffset, bottom: cornerOffset }}
-      >
-        <div className="-scale-y-100 rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src={cornerRight} aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
   );
 }

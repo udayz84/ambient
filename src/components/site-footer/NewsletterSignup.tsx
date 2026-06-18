@@ -30,12 +30,12 @@ export function NewsletterSignup() {
           rotate
         />
         <Corner
-          className="z-[2] col-start-1 row-start-1 mt-[126px] ml-[549px]"
+          className="z-[2] col-start-1 row-start-1 mt-[130px] ml-[549px]"
           src={cornerRight}
           rotate
           flipY
         />
-        <div className="relative z-[2] col-start-1 row-start-1 mt-[126px] ml-[51px] size-[4px]">
+        <div className="relative z-[2] col-start-1 row-start-1 mt-[130px] ml-[51px] size-[4px]">
           <Image
             src={cornerLeft}
             alt=""
@@ -52,7 +52,7 @@ export function NewsletterSignup() {
         />
 
         <p
-          className={`${interRegular.className} relative col-start-1 row-start-1 mt-[150px] w-[600px] text-center text-[18px] leading-[27px] font-normal text-white not-italic [word-break:break-word]`}
+          className={`${interRegular.className} relative col-start-1 row-start-1 mt-[154px] w-[600px] text-center text-[18px] leading-[27px] font-normal text-white not-italic [word-break:break-word]`}
           data-node-id="2379:1399"
         >
           Sign up to receive regular updates.
@@ -60,7 +60,7 @@ export function NewsletterSignup() {
       </div>
 
       <form
-        className="mt-[48px] flex items-center"
+        className="mt-[34px] flex items-center"
         data-node-id="2379:1400"
       >
         <label className="sr-only" htmlFor="newsletter-email">

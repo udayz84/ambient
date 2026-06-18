@@ -87,7 +87,7 @@ export function ContactMap() {
       </div>
 
       <div
-        className="absolute top-[350px] left-1/2 flex -translate-x-1/2 flex-col items-center gap-[24px]"
+        className="absolute top-[250px] left-1/2 flex -translate-x-1/2 flex-col items-center gap-[24px]"
         data-node-id="2379:8404"
       >
         <div className="relative flex flex-col items-center px-[10px]" data-node-id="2379:8406">
@@ -112,7 +112,7 @@ export function ContactMap() {
       </div>
 
       <div
-        className="pointer-events-none absolute top-[609px] left-1/2 h-[392px] w-[1204px] origin-center -translate-x-1/2 overflow-clip opacity-20"
+        className="pointer-events-none absolute top-[609px] left-[38px] h-[392px] w-[1204px] origin-center overflow-clip opacity-20"
         data-node-id="2379:5089"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -124,7 +124,7 @@ export function ContactMap() {
       </div>
 
       <div
-        className="absolute top-[609px] left-1/2 h-[393px] w-[1204px] -translate-x-1/2"
+        className="absolute top-[609px] left-[38px] h-[393px] w-[1204px]"
         data-node-id="2379:5088"
       >
         {locations.map((loc) => (

@@ -2,6 +2,7 @@ import Image from "next/image";
 import { gilroyMedium, interMedium, interRegular, interSemiBold } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { RepelDots } from "../shared/RepelDots";
+import { Corners } from "../shared/Corners";
 import type { CareersValueCard } from "./careers-data";
 
 const cornerBr = "/careers/corner-card-br.svg";
@@ -377,7 +378,7 @@ export function CareersRolesProfileCta({ href = "#" }: { href?: string }) {
           aria-hidden
         />
       </span>
-      <RolesProfileCtaCorners />
+      <Corners leftSrc={cornerCtaLeft} rightSrc={cornerCtaRight} />
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
@@ -425,7 +426,7 @@ export function CareersGreenCta({
           aria-hidden
         />
       </span>
-      <CtaCorners />
+      <Corners leftSrc={cornerCtaLeft} rightSrc={cornerCtaRight} />
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
@@ -459,48 +460,13 @@ export function CareersWhiteCta({
       <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[14px] leading-[normal] whitespace-nowrap text-[#121212] uppercase not-italic">
         {children}
       </span>
-      <CtaCorners />
+      <Corners leftSrc={cornerCtaLeft} rightSrc={cornerCtaRight} />
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
       />
     </a>
   );
-}
-
-function RolesProfileCtaCorners() {
-  return (
-    <>
-      <div className="pointer-events-none absolute top-0 right-0 flex size-[4px] items-center justify-center">
-        <div className="rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <CornerImg src={cornerCtaRight} />
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute top-0 left-0 flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 flex-none">
-          <div className="relative size-[4px]">
-            <CornerImg src={cornerCtaLeft} />
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute right-0 bottom-0 flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <CornerImg src={cornerCtaRight} />
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute bottom-0 left-0 size-[4px]">
-        <CornerImg src={cornerCtaLeft} />
-      </div>
-    </>
-  );
-}
-
-function CtaCorners() {
-  return <RolesProfileCtaCorners />;
 }
 
 export { DNA_BG_GRADIENT, BOX_BORDER_CLASS as BOX_BORDER };

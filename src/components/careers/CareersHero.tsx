@@ -2,9 +2,7 @@ import Image from "next/image";
 import { interRegular, interSemiBold } from "../hero/fonts";
 import { GradientTitle } from "../contact/contact-shared";
 import { RepelDots } from "../shared/RepelDots";
-
-const cornerCtaLeft = "/hero/corner-tag-1.svg";
-const cornerCtaRight = "/hero/corner-tag-2.svg";
+import { Corners } from "../shared/Corners";
 
 export function CareersHero() {
   return (
@@ -185,7 +183,7 @@ export function CareersHero() {
                 className="pointer-events-none absolute top-1/2 left-[177.5px] size-[6px] -translate-y-1/2"
                 aria-hidden
               />
-              <CtaCorners />
+              <Corners />
               <span
                 aria-hidden
                 className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
@@ -236,45 +234,3 @@ export function CareersHero() {
   );
 }
 
-function CtaCorners() {
-  return (
-    <>
-      <div className="pointer-events-none absolute top-0 right-0 flex size-[4px] items-center justify-center">
-        <div className="rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src={cornerCtaRight} aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute top-0 left-0 flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src={cornerCtaLeft} aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute right-0 bottom-0 flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src={cornerCtaRight} aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute bottom-0 left-0 size-[4px]">
-        <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="" className="block size-full max-w-none" src={cornerCtaLeft} aria-hidden />
-        </div>
-      </div>
-    </>
-  );
-}

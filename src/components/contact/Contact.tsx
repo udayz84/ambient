@@ -4,12 +4,12 @@ import { ContactMap } from "./ContactMap";
 import { ContactResources } from "./ContactResources";
 import { ContactSchedule } from "./ContactSchedule";
 
-const CONTACT_PAGE_HEIGHT_PX = 3120;
-const CONTACT_FOOTER_TOP_PX = 3120;
+const CONTACT_PAGE_HEIGHT_PX = 2779;
+const CONTACT_FOOTER_TOP_PX = 2779;
 
 export function Contact() {
   return (
-    <main className="flex w-full flex-col overflow-x-clip bg-black">
+    <main className="relative z-10 flex w-full flex-col overflow-x-clip bg-black">
       <div
         className="relative mx-auto -mt-[78px] w-full overflow-x-clip overflow-y-visible bg-black"
         style={{ height: CONTACT_PAGE_HEIGHT_PX }}

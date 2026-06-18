@@ -1,8 +1,6 @@
 import { dmMono, gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
+import { Corners } from "../shared/Corners";
 import { CornerDecor, GradientTitle } from "./contact-shared";
-
-const cornerMenuLeft = "/hero/corner-tag-1.svg";
-const cornerMenuRight = "/hero/corner-tag-2.svg";
 
 const cards = [
   {
@@ -110,12 +108,10 @@ function ScheduleCard({
 }: (typeof cards)[number] & { className: string }) {
   return (
     <div
-      className={`absolute top-0 ${className} h-[320px] w-[590px] overflow-visible border-[0.5px] border-solid border-[rgba(240,240,240,0.45)] bg-[rgba(0,0,0,0.2)] shadow-[inset_0_0_0_0.5px_rgba(240,240,240,0.25)]`}
+      className={`absolute top-0 ${className} h-[320px] w-[590px] overflow-visible bg-[rgba(0,0,0,0.2)]`}
       data-node-id={nodeId}
       data-name="Schedule"
     >
-      <CornerDecor />
-
       <div
         className="absolute top-[16px] left-[16px] z-10 w-[558px]"
         data-node-id={newsNodeId}
@@ -146,6 +142,10 @@ function ScheduleCard({
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img alt="" className={imageClassName} src={imageSrc} />
+      </div>
+
+      <div className="pointer-events-none absolute inset-0 z-[30] border-[0.5px] border-solid border-[rgba(240,240,240,0.45)]">
+        <CornerDecor />
       </div>
     </div>
   );
@@ -203,7 +203,7 @@ function TagBadge({ label, nodeId }: { label: string; nodeId: string }) {
       data-name="Menu"
     >
       <p
-        className={`${dmMono.className} absolute top-[calc(50%-4.5px)] left-1/2 -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase`}
+        className={`${dmMono.className} absolute top-[calc(50%-4.5px)] left-1/2 -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]`}
       >
         {label}
       </p>
@@ -215,42 +215,7 @@ function TagBadge({ label, nodeId }: { label: string; nodeId: string }) {
         aria-hidden
         className="absolute top-1/2 left-[170.48px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60"
       />
-      <div className="absolute top-0 left-0 flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src={cornerMenuLeft} aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="absolute top-0 right-0 flex size-[4px] items-center justify-center">
-        <div className="rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src={cornerMenuRight} aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="absolute bottom-0 left-0 size-[4px]">
-        <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="" className="block size-full max-w-none" src={cornerMenuLeft} aria-hidden />
-        </div>
-      </div>
-      <div className="absolute right-0 bottom-0 flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src={cornerMenuRight} aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
+      <Corners />
     </div>
   );
 }

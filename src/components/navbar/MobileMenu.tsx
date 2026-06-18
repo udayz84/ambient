@@ -1,0 +1,183 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState, useSyncExternalStore } from "react";
+import { createPortal } from "react-dom";
+import { interMedium } from "../hero/fonts";
+import { NAV_ITEMS } from "./nav-items";
+import { NavbarCta } from "./NavbarCta";
+
+const emptySubscribe = () => () => {};
+const getClientSnapshot = () => true;
+const getServerSnapshot = () => false;
+
+function MenuIcon() {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden
+      className="text-white"
+    >
+      <path
+        d="M3 6h18"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M3 12h18"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M3 18h18"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden
+      className="text-white"
+    >
+      <path
+        d="M6 6l12 12M18 6L6 18"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function ChevronDown() {
+  return (
+    <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden>
+      <path
+        d="M1 1l4 4 4-4"
+        stroke="rgba(255,255,255,0.5)"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function MobileMenu() {
+  const [open, setOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const isClient = useSyncExternalStore(
+    emptySubscribe,
+    getClientSnapshot,
+    getServerSnapshot,
+  );
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1023px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  const close = () => setOpen(false);
+
+  return (
+    <>
+      <button
+        type="button"
+        aria-label={open ? "Close menu" : "Open menu"}
+        aria-expanded={open}
+        aria-controls="mobile-nav"
+        onClick={() => setOpen((v) => !v)}
+        className="flex h-[36px] w-[36px] shrink-0 items-center justify-center"
+      >
+        {open ? <CloseIcon /> : <MenuIcon />}
+      </button>
+
+      {isClient && isMobile && createPortal(
+          <div
+            id="mobile-nav"
+            className={`${interMedium.className} pointer-events-none fixed inset-x-0 bottom-0 top-[78px] z-[55]`}
+            aria-hidden={!open}
+          >
+            <div
+              onClick={close}
+              className={`absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-300 ${
+                open ? "pointer-events-auto opacity-100" : "opacity-0"
+              }`}
+            />
+            <nav
+              aria-label="Mobile"
+              className={`absolute inset-x-0 top-0 origin-top border-t border-white/10 bg-black transition-transform duration-300 ease-out ${
+                open
+                  ? "pointer-events-auto translate-y-0"
+                  : "-translate-y-full"
+              }`}
+            >
+              <ul className="px-[24px] pt-[8px]">
+                {NAV_ITEMS.map((item) => {
+                  const active = item.href !== "#" && pathname === item.href;
+                  return (
+                    <li
+                      key={item.label}
+                      className="border-b border-white/[0.06]"
+                    >
+                      <Link
+                        href={item.href}
+                        onClick={close}
+                        className="flex items-center justify-between py-[16px] text-[16px] leading-[normal] tracking-[-0.42px]"
+                      >
+                        <span className={active ? "text-[#6ced3f]" : "text-white"}>
+                          {item.label}
+                        </span>
+                        {item.hasChevron ? <ChevronDown /> : null}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+              <div className="px-[24px] pb-[28px] pt-[24px]">
+                <NavbarCta />
+              </div>
+            </nav>
+          </div>,
+          document.body,
+        )}
+    </>
+  );
+}

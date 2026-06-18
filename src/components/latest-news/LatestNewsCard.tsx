@@ -1,10 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 import { TagBadge } from "../hero/TagBadge";
 import { gilroyMedium, interRegular } from "../hero/fonts";
+import { Corners } from "../shared/Corners";
 import type { LatestNewsArticle } from "./latest-news-data";
-
-const cornerTopLeft = "/hero/corner-tag-1.svg";
-const cornerTopRight = "/hero/corner-tag-2.svg";
 
 type LatestNewsCardProps = LatestNewsArticle;
 
@@ -18,6 +17,7 @@ export function LatestNewsCard({
   imageSrc,
   imageClassName = "absolute inset-0 size-full max-w-none object-cover",
   imageSizes = "386px",
+  href,
 }: LatestNewsCardProps) {
   return (
     <article
@@ -72,8 +72,10 @@ export function LatestNewsCard({
         <p
           className={`${interRegular.className} w-[346.611px] shrink-0 text-[16px] leading-[24px] font-normal not-italic [word-break:break-word]`}
         >
-          <span className="text-[rgba(240,240,240,0.8)]">{excerpt}</span>
-          <span className="text-[#53d824]">read more</span>
+          <span className="text-[rgba(240,240,240,0.8)]">{excerpt}</span>{" "}
+          <Link href={href} className="text-[#53d824] transition-colors hover:text-[#6ced3f]">
+            read more
+          </Link>
         </p>
 
         <div className="flex h-[20.211px] w-[359.076px] shrink-0 items-center gap-[8.084px]">
@@ -95,69 +97,8 @@ export function LatestNewsCard({
         </div>
       </div>
 
-      <ArticleCorner
-        className="absolute top-0 left-0 z-[3] flex size-[4px] items-center justify-center"
-        src={cornerTopLeft}
-        flipY
-      />
-      <ArticleCorner
-        className="absolute top-0 right-0 z-[3] flex size-[4px] items-center justify-center"
-        src={cornerTopRight}
-        rotate
-      />
-      <ArticleCorner
-        className="absolute right-0 bottom-0 z-[3] flex size-[4px] items-center justify-center"
-        src={cornerTopRight}
-        rotate
-        flipY
-      />
-      <div className="absolute bottom-0 left-0 z-[3] size-[4px]">
-        <Image
-          src={cornerTopLeft}
-          alt=""
-          width={4}
-          height={4}
-          className="block size-full max-w-none"
-          aria-hidden
-        />
-      </div>
+      <Corners className="z-[3]" />
     </article>
   );
 }
 
-function ArticleCorner({
-  className,
-  src,
-  flipY,
-  rotate,
-}: {
-  className: string;
-  src: string;
-  flipY?: boolean;
-  rotate?: boolean;
-}) {
-  const inner = (
-    <div className="relative size-[4px]">
-      <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-        <Image
-          src={src}
-          alt=""
-          width={4}
-          height={4}
-          className="block size-full max-w-none"
-          aria-hidden
-        />
-      </div>
-    </div>
-  );
-
-  return (
-    <div className={className}>
-      <div
-        className={`flex-none ${flipY ? "-scale-y-100" : ""} ${rotate ? "rotate-180" : ""}`}
-      >
-        {inner}
-      </div>
-    </div>
-  );
-}

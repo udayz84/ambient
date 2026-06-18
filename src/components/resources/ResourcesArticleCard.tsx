@@ -23,7 +23,7 @@ export function ResourcesArticleCard({
 }: ResourcesArticleCardProps) {
   return (
     <article
-      className="relative flex h-[475.161px] w-[388px] shrink-0 flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.04)] px-[12px] pt-[12px] pb-[24px]"
+      className="relative flex h-[469.161px] w-[388px] shrink-0 flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[#191919] bg-[linear-gradient(rgba(0,0,0,0.04),rgba(0,0,0,0.04))] px-[12px] pt-[12px] pb-[18px]"
       data-node-id={nodeId}
     >
       <div
@@ -73,7 +73,7 @@ export function ResourcesArticleCard({
             className={`${interRegular.className} w-[346.611px] text-[16px] leading-[24px] font-normal not-italic [word-break:break-word]`}
           >
             <span className="text-[rgba(240,240,240,0.6)]">{excerpt}</span>
-            <span className="text-[#53d824]">read more</span>
+            <a href="#" className="text-[#53d824] transition-opacity hover:opacity-80">read more</a>
           </p>
         </div>
       </div>
@@ -118,3 +118,4 @@ function ArticleCorner({
     </div>
   );
 }
+

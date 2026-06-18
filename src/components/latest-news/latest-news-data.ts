@@ -8,6 +8,7 @@ export type LatestNewsArticle = {
   imageSrc: string;
   imageClassName?: string;
   imageSizes?: string;
+  href: string;
 };
 
 export const LATEST_NEWS_ARTICLES: LatestNewsArticle[] = [
@@ -21,6 +22,7 @@ export const LATEST_NEWS_ARTICLES: LatestNewsArticle[] = [
     date: "April 02, 2026",
     imageSrc: "/latest-news/article-partnership.png",
     imageClassName: "absolute top-0 left-0 h-[105.35%] w-full max-w-none",
+    href: "/resources",
   },
   {
     nodeId: "2379:1321",
@@ -32,6 +34,7 @@ export const LATEST_NEWS_ARTICLES: LatestNewsArticle[] = [
     date: "April 02, 2026",
     imageSrc: "/latest-news/article-physics.png",
     imageClassName: "absolute inset-0 size-full max-w-none object-cover",
+    href: "/resources",
   },
   {
     nodeId: "2379:1351",
@@ -43,5 +46,6 @@ export const LATEST_NEWS_ARTICLES: LatestNewsArticle[] = [
     date: "April 02, 2026",
     imageSrc: "/latest-news/article-gpx10.png",
     imageClassName: "absolute inset-0 size-full max-w-none object-cover",
+    href: "/resources",
   },
 ];

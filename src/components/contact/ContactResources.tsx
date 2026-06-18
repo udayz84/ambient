@@ -18,7 +18,7 @@ export function ContactResources() {
 
   return (
     <div
-      className={`absolute top-[547px] left-1/2 z-10 flex w-[898px] -translate-x-1/2 flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.5)] bg-[rgba(0,0,0,0.2)] p-[24px] ${
+      className={`absolute top-[589px] left-1/2 z-10 flex w-[898px] -translate-x-1/2 flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.5)] bg-gradient-to-b from-[rgba(255,255,255,0.1)] to-[rgba(255,255,255,0.03)] p-[24px] backdrop-blur-[16px] ${
         isVisible ? HERO_FADE_IN_CLASS : "translate-y-[25px] opacity-0"
       }`}
       data-node-id="2379:8413"

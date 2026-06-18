@@ -1,8 +1,6 @@
 import { interMedium } from "../hero/fonts";
 import { RepelDots } from "../shared/RepelDots";
-
-const cornerLeft = "/hero/corner-tag-1.svg";
-const cornerRight = "/hero/corner-tag-2.svg";
+import { Corners } from "../shared/Corners";
 
 export function PlatformScaleCta() {
   return (
@@ -23,62 +21,7 @@ export function PlatformScaleCta() {
       >
         EXPLORE AMBIENT SILICON
       </p>
-      <div className="absolute top-0 right-0 flex size-[4px] items-center justify-center">
-        <div className="rotate-180 flex-none">
-          <div className="relative size-[4px]" data-node-id="2379:666">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={cornerRight}
-                alt=""
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="absolute top-0 left-0 flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 flex-none">
-          <div className="relative size-[4px]" data-node-id="2379:667">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={cornerLeft}
-                alt=""
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="absolute right-0 bottom-0 flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 rotate-180 flex-none">
-          <div className="relative size-[4px]" data-node-id="2379:669">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={cornerRight}
-                alt=""
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="absolute bottom-0 left-0 size-[4px]" data-node-id="2379:670">
-        <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={cornerLeft}
-            alt=""
-            className="block size-full max-w-none"
-            aria-hidden
-          />
-        </div>
-      </div>
+      <Corners />
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"

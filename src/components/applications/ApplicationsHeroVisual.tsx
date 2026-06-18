@@ -3,7 +3,7 @@ import { gilroySemiBold } from "../hero/fonts";
 const watermarkGradient =
   "linear-gradient(259.734deg, rgba(255, 255, 255, 0.12) 0.12143%, rgba(255, 255, 255, 0.6) 44.084%, rgba(255, 255, 255, 0) 113.37%)";
 
-export function ApplicationsHeroVisual() {
+export function ApplicationsHeroVisual({ activeTab }: { activeTab: string }) {
   return (
     <>
       <p
@@ -11,7 +11,7 @@ export function ApplicationsHeroVisual() {
         style={{ backgroundImage: watermarkGradient }}
         data-node-id="2379:848"
       >
-        AUTOMOTIVE
+        {activeTab}
       </p>
 
       <div

@@ -1,12 +1,12 @@
-export const RESOURCES_BASE_HEIGHT = 4525;
+export const RESOURCES_BASE_HEIGHT = 4507;
 export const RESOURCES_NEWS_TOP = 3393;
 export const RESOURCES_FOOTER_TOP = 3273;
-export const RESOURCES_CARD_ROW_HEIGHT = 475.161;
+export const RESOURCES_CARD_ROW_HEIGHT = 469.161;
 export const RESOURCES_ROW_GAP = 36;
 export const RESOURCES_ROW_BLOCK_HEIGHT =
   RESOURCES_CARD_ROW_HEIGHT + RESOURCES_ROW_GAP;
 export const RESOURCES_INITIAL_ROWS = 2;
-export const RESOURCES_LOAD_MORE_BUTTON_BLOCK = 108;
+export const RESOURCES_LOAD_MORE_BUTTON_BLOCK = 84;
 
 export function getResourcesExtraHeight(
   visibleCount: number,

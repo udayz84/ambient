@@ -36,14 +36,10 @@ export function MeasuredProofCard({
 }: MeasuredProofCardProps) {
   return (
     <div
-      className="relative h-[600px] w-[388px] shrink-0 overflow-clip"
+      className="relative h-[600px] w-[388px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.75)]"
       data-node-id={nodeId}
       data-name="Lower power consumption"
     >
-      <div
-        className="absolute top-0 left-0 h-[600px] w-[388px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.75)]"
-        aria-hidden
-      />
       <div
         className="pointer-events-none absolute top-[0.51px] left-[0.4px] h-[598.994px] w-[387.605px]"
         data-name="Cornor Elements"

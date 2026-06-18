@@ -7,9 +7,7 @@ import {
   GPX_PRODUCTS,
   type GpxProduct,
 } from "./platform-scale-data";
-
-const cornerTr = "/platform-scale/stat-corner-tr.svg";
-const cornerTl = "/platform-scale/stat-corner-tl.svg";
+import { Corners } from "../shared/Corners";
 
 const chipGlassCropClass =
   "absolute top-[-79.23%] left-[-39.91%] h-[258.46%] w-[179.82%] max-w-none";
@@ -309,62 +307,10 @@ function PlatformScaleStatPanel({ product }: { product: GpxProduct }) {
         </div>
       </div>
 
-      <div className="absolute top-[0.49px] right-[0.52px] flex size-[4px] items-center justify-center">
-        <div className="rotate-180 flex-none">
-          <div className="relative size-[4px]" data-node-id="2379:647">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={cornerTr}
-                alt=""
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="absolute right-[0.52px] bottom-[0.53px] flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 rotate-180 flex-none">
-          <div className="relative size-[4px]" data-node-id="2379:648">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={cornerTr}
-                alt=""
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="absolute top-[0.51px] left-[0.51px] flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 flex-none">
-          <div className="relative size-[4px]" data-node-id="2379:649">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={cornerTl}
-                alt=""
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="absolute bottom-[0.5px] left-[0.51px] size-[4px]">
-        <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={cornerTl}
-            alt=""
-            className="block size-full max-w-none"
-            aria-hidden
-          />
-        </div>
-      </div>
+      <Corners
+        leftSrc="/platform-scale/stat-corner-tl.svg"
+        rightSrc="/platform-scale/stat-corner-tr.svg"
+      />
     </div>
   );
 }
