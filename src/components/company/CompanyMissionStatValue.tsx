@@ -8,17 +8,9 @@ const STAT_VALUE_GRADIENT =
 
 const SMOOTH_EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
 const SUFFIX_TRANSITION_MS = 750;
-const MS_PER_COUNT_UNIT = 50;
-const MIN_COUNT_DURATION_MS = 1500;
-const MAX_COUNT_DURATION_MS = 2500;
 
 function easeOutExpo(t: number) {
   return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-}
-
-function countDurationMs(target: number) {
-  const scaled = target * 25;
-  return Math.min(MAX_COUNT_DURATION_MS, Math.max(MIN_COUNT_DURATION_MS, scaled));
 }
 
 function parseStatValue(value: string) {
@@ -31,32 +23,18 @@ type CompanyMissionStatValueProps = {
   value: string;
   valueNodeId: string;
   animationDelay?: number;
-  digitSlots?: number;
-  suffixAtTarget?: boolean;
 };
 
 export function CompanyMissionStatValue({
   value,
   valueNodeId,
   animationDelay = 0,
-  digitSlots,
-  suffixAtTarget = false,
 }: CompanyMissionStatValueProps) {
   const containerRef = useRef<HTMLParagraphElement>(null);
   const displayRef = useRef<HTMLSpanElement>(null);
   const { target, suffix } = parseStatValue(value);
-  const shouldLazySuffix = !!(suffix && suffixAtTarget);
-  const [revealSuffix, setRevealSuffix] = useState(!shouldLazySuffix);
+  const [hasStarted, setHasStarted] = useState(false);
   const [countingDone, setCountingDone] = useState(false);
-
-  const durationMs = countDurationMs(target);
-  const showSuffix = !shouldLazySuffix || revealSuffix;
-
-  useEffect(() => {
-    if (!shouldLazySuffix || !countingDone) return;
-    const id = window.setTimeout(() => setRevealSuffix(true), 0);
-    return () => window.clearTimeout(id);
-  }, [countingDone, shouldLazySuffix]);
 
   useEffect(() => {
     const node = containerRef.current;
@@ -64,34 +42,28 @@ export function CompanyMissionStatValue({
 
     let delayId = 0;
     let rafId = 0;
-    let hasStarted = false;
 
     const runCount = () => {
+      setHasStarted(true);
       if (target <= 0) {
         if (displayRef.current) displayRef.current.textContent = "0";
         setCountingDone(true);
         return;
       }
 
-      const prefersReduced = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches;
-
-      if (prefersReduced) {
-        if (displayRef.current) displayRef.current.textContent = String(target);
-        setCountingDone(true);
-        if (shouldLazySuffix) setRevealSuffix(true);
-        return;
-      }
-
       if (displayRef.current) displayRef.current.textContent = "0";
 
+      // To guarantee smoothness (no stuttering), we need it to count fast enough 
+      // so it updates almost every frame. We scale duration with target.
+      const durationMs = Math.min(1500, Math.max(800, target * 12));
       const startTime = performance.now();
       let lastValue = -1;
 
       const tick = (now: number) => {
         const elapsed = now - startTime;
         const progress = Math.min(elapsed / durationMs, 1);
+        
+        // We use easeOutExpo for a snappy start and elegant slowdown
         const eased = easeOutExpo(progress);
         const current = progress >= 1 ? target : Math.round(eased * target);
 
@@ -114,8 +86,7 @@ export function CompanyMissionStatValue({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting || hasStarted) return;
-        hasStarted = true;
+        if (!entry.isIntersecting) return;
         observer.disconnect();
         delayId = window.setTimeout(runCount, animationDelay);
       },
@@ -129,10 +100,7 @@ export function CompanyMissionStatValue({
       window.clearTimeout(delayId);
       cancelAnimationFrame(rafId);
     };
-  }, [target, animationDelay, durationMs, shouldLazySuffix]);
-
-  const digitSizer =
-    digitSlots != null ? String(target).padStart(digitSlots, "0") : null;
+  }, [target, animationDelay]);
 
   const valueTextClass = `${gilroyMedium.className} bg-clip-text text-[80px] leading-[72px] font-medium text-transparent not-italic tabular-nums`;
 
@@ -150,14 +118,13 @@ export function CompanyMissionStatValue({
       aria-label={`${target}${suffix}`}
     >
       <span className="relative inline-block shrink-0 text-left">
-        {digitSizer != null ? (
-          <span className={`${valueTextClass} invisible block`} aria-hidden>
-            {digitSizer}
-          </span>
-        ) : null}
+        {/* Invisible spacer to reserve width and avoid layout shift */}
+        <span className={`${valueTextClass} invisible block`} aria-hidden>
+          {target}
+        </span>
         <span
           ref={displayRef}
-          className={`${valueTextClass} ${digitSizer != null ? "absolute top-0 left-0" : "inline-block"}`}
+          className={`${valueTextClass} absolute top-0 left-0 inline-block`}
           style={gradientStyle}
         >
           0
@@ -166,16 +133,16 @@ export function CompanyMissionStatValue({
       {suffix ? (
         <span
           className={`${valueTextClass} inline-block transition-[opacity,transform] ${
-            showSuffix
+            countingDone
               ? "translate-x-0 opacity-100"
-              : "pointer-events-none translate-x-[-5px] opacity-0"
+              : "pointer-events-none translate-x-[-10px] opacity-0"
           }`}
           style={{
             ...gradientStyle,
             transitionDuration: `${SUFFIX_TRANSITION_MS}ms`,
             transitionTimingFunction: SMOOTH_EASE,
           }}
-          aria-hidden={!showSuffix}
+          aria-hidden={!countingDone}
         >
           {suffix}
         </span>

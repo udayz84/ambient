@@ -27,16 +27,14 @@ function CornerMark({
     >
       <div className={`flex-none ${innerClassName}`}>
         <div className="relative size-[4px]">
-          <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-            <Image
-              src={src}
-              alt=""
-              width={4}
-              height={4}
-              className="block size-full max-w-none"
-              aria-hidden
-            />
-          </div>
+          <Image
+            src={src}
+            alt=""
+            width={4}
+            height={4}
+            className="block size-full max-w-none"
+            aria-hidden
+          />
         </div>
       </div>
     </div>
@@ -110,30 +108,28 @@ export function CompanyMissionFrameCorners() {
 export function CompanyCardCorners({
   cornerBottom,
 }: {
-  cornerBottom: number;
+  cornerBottom?: number; // Make it optional since we no longer strictly need it
 }) {
   return (
     <>
       <CornerMark
         src={cornerLeft}
-        wrapperClassName="absolute top-0 left-0 z-[3] flex size-[4px] items-center justify-center"
+        wrapperClassName="absolute top-0 left-0 z-30 flex size-[4px] items-center justify-center"
         innerClassName="-scale-y-100"
       />
       <CornerMark
         src={cornerRight}
-        wrapperClassName="absolute top-0 right-0 z-[3] flex size-[4px] items-center justify-center"
+        wrapperClassName="absolute top-0 right-0 z-30 flex size-[4px] items-center justify-center"
         innerClassName="rotate-180"
       />
       <CornerMark
         src={cornerLeft}
-        wrapperClassName="absolute left-0 z-[3] size-[4px]"
-        style={{ top: cornerBottom }}
+        wrapperClassName="absolute bottom-0 left-0 z-30 flex size-[4px] items-center justify-center"
       />
       <CornerMark
         src={cornerRight}
-        wrapperClassName="absolute right-0 z-[3] flex size-[4px] items-center justify-center"
+        wrapperClassName="absolute right-0 bottom-0 z-30 flex size-[4px] items-center justify-center"
         innerClassName="-scale-y-100 rotate-180"
-        style={{ top: cornerBottom }}
       />
     </>
   );

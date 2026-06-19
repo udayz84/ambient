@@ -94,31 +94,54 @@ export function ApplicationsMobile() {
         ))}
       </div>
 
-      <a
-        href="#"
-        className={`${gilroySemiBold.className} relative mt-[28px] flex h-[48px] w-full items-center justify-center gap-[8px] overflow-hidden ${GREEN_CTA_SHADOW}`}
-      >
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-        />
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
-        />
-        <span className="relative text-[14px] leading-[normal] font-semibold whitespace-nowrap text-white uppercase not-italic">
-          Explore application
-        </span>
-        <Image
-          src="/applications/cta-dot.svg"
-          alt=""
-          width={6}
-          height={6}
-          className="relative size-[6px]"
-          aria-hidden
-        />
-        <Corners />
-      </a>
+        <a
+          href="#"
+          className={`${gilroySemiBold.className} relative mt-[28px] flex h-[48px] w-full items-center justify-center ${GREEN_CTA_SHADOW}`}
+        >
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 rounded-[inherit] bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+          />
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 overflow-hidden z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
+          />
+          <p className="relative z-10 flex items-center gap-[10px] text-[13px] leading-[normal] font-semibold whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
+            EXPLORE APPLICATION
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/applications/cta-dot.svg" alt="" className="size-[6px]" aria-hidden />
+          </p>
+          
+          {/* Custom Corners that pop out slightly to avoid the inset shadow */}
+          <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">
+            <div className="rotate-180 flex-none">
+              <div className="relative size-[4px]">
+                <img src="/hero/corner-tag-2.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+              </div>
+            </div>
+          </div>
+          <div className="pointer-events-none absolute -top-[0.5px] left-0 z-20 flex size-[4px] items-center justify-center">
+            <div className="-scale-y-100 flex-none">
+              <div className="relative size-[4px]">
+                <img src="/hero/corner-tag-1.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+              </div>
+            </div>
+          </div>
+          <div className="pointer-events-none absolute right-0 bottom-0 z-20 flex size-[4px] items-center justify-center">
+            <div className="-scale-x-100 flex-none">
+              <div className="relative size-[4px]">
+                <img src="/hero/corner-tag-2.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+              </div>
+            </div>
+          </div>
+          <div className="pointer-events-none absolute bottom-0 left-0 z-20 flex size-[4px] items-center justify-center">
+            <div className="flex-none">
+              <div className="relative size-[4px]">
+                <img src="/hero/corner-tag-1.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+              </div>
+            </div>
+          </div>
+        </a>
     </div>
   );
 }

@@ -87,7 +87,7 @@ export function ResourcesBuilding() {
         className="absolute top-[197.54px] left-[1111px] z-10"
         data-node-id="2379:1618"
       >
-        <WhiteCtaButton className="w-[231px]" href="#">
+        <WhiteCtaButton className="w-[231px]" href="#" textClassName="text-[16px] leading-[normal]">
           Go to Developer Hub
         </WhiteCtaButton>
       </div>

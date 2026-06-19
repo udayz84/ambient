@@ -28,7 +28,7 @@ export function CompanyEcosystemContent() {
     <div
       className="absolute top-[0.708px] left-[118px] z-10 h-[390px] w-[1204px] border-[0.5px] border-b-0 border-solid border-[rgba(255,255,255,0.15)]"
       style={{
-        background: "linear-gradient(to bottom, #000000 0%, #000000 60%, rgba(0,0,0,0.7) 78%, rgba(0,0,0,0.1) 93%, rgba(0,0,0,0) 100%)",
+        background: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0.85) 80%, rgba(0,0,0,0.5) 100%)",
       }}
       data-node-id="2379:4637"
       data-name="Content Section"
@@ -74,7 +74,7 @@ export function CompanyEcosystemContent() {
         </div>
 
         <div
-          className="absolute top-[146px] left-0 h-px w-[1124px] bg-[rgba(255,255,255,0.15)]"
+          className="absolute top-[146px] left-0 h-px w-[1124px] bg-[#224A10]"
           data-node-id="2379:4648"
           aria-hidden
         />

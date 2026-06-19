@@ -319,7 +319,7 @@ export function CompanyLeadershipCard({
   return (
     <article
       ref={cardRef}
-      className={`${positionClass} isolate overflow-clip border-[0.5px] border-solid border-[rgba(255,255,255,0.15)] transition-[z-index] ${LEADERSHIP_EXPAND_TRANSITION_CLASS} ${isAdvisory ? "z-[1] bg-black" : isExpanded ? "z-[15] bg-[#191919]" : "z-[1] bg-[#191919]"}`}
+      className={`${positionClass} isolate overflow-clip border-[0.5px] border-solid border-[rgba(255,255,255,0.3)] transition-[z-index] ${LEADERSHIP_EXPAND_TRANSITION_CLASS} ${isAdvisory ? "z-[1] bg-black" : isExpanded ? "z-[15] bg-[#191919]" : "z-[1] bg-[#191919]"}`}
       style={{
         left: left !== undefined ? left : undefined,
         width: spec.cardWidth,
@@ -341,7 +341,7 @@ export function CompanyLeadershipCard({
           className={`${
             member.imageClassName ??
             "absolute inset-0 size-full max-w-none object-cover object-top"
-          } ${!isAdvisory ? `transition-[filter] ${LEADERSHIP_EXPAND_TRANSITION_CLASS} ${isExpanded ? "brightness-[0.35]" : "brightness-100"}` : ""}`}
+          } ${!isAdvisory ? `transition-[filter] ${LEADERSHIP_EXPAND_TRANSITION_CLASS} ${isExpanded ? "brightness-[0.35]" : "brightness-90"}` : "brightness-90"}`}
         />
         {!isAdvisory ? (
           <>

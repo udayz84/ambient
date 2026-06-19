@@ -61,25 +61,19 @@ export function ContactMap() {
     >
       <div className="relative mx-auto h-full w-full max-w-[1440px]">
       <div
-        className="absolute top-0 left-1/2 flex h-[730px] w-[1440px] origin-center items-center justify-center"
+        className="absolute top-0 left-1/2 flex h-[1002px] w-[1440px] origin-center items-center justify-center"
         style={{ transform: CONTACT_VIEWPORT_SCALE }}
       >
-        <div className="-rotate-90 flex-none">
-          <div className="relative h-[1440px] w-[730px]" data-node-id="2379:5087">
+        <div className="flex-none">
+          <div className="relative h-[1002px] w-[1440px]" data-node-id="2379:5087">
             <div aria-hidden className="pointer-events-none absolute inset-0">
               <Image
-                src="/contact/map-globe-bg.png"
+                src="/contact/Globe image.png"
                 alt=""
                 fill
-                className="object-bottom opacity-50"
+                className="object-cover object-center"
                 sizes="1440px"
-              />
-              <div
-                className="absolute inset-0"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(-90deg, rgba(0, 0, 0, 0) 88.118%, rgb(0, 0, 0) 100%), linear-gradient(-90deg, rgb(0, 0, 0) 14.11%, rgba(0, 0, 0, 0) 25.685%)",
-                }}
+                priority
               />
             </div>
           </div>

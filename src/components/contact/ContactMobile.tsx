@@ -265,7 +265,7 @@ function ContactScheduleMobile() {
                 sizes="279px"
               />
             </div>
-            <span className={`${dmMono.className} w-fit border-[0.5px] border-solid border-white/20 bg-[rgba(255,255,255,0.06)] px-[10px] py-[3px] text-[11px] uppercase tracking-[0.06em] text-[#ecfae5] not-italic`}>
+            <span className={`${dmMono.className} w-fit border-[0.5px] border-solid border-[rgba(240,240,240,0.5)] bg-[rgba(255,255,255,0.06)] px-[10px] py-[3px] text-[11px] uppercase tracking-[0.06em] text-[#ecfae5] not-italic`}>
               {card.tag}
             </span>
             <h3 className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium text-white not-italic`}>

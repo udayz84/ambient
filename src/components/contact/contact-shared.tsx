@@ -78,11 +78,11 @@ export function GreenCtaButton({
         {loading ? <CtaSpinner /> : null}
         {loading ? "Loading..." : children}
       </span>
-      <Corners />
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
       />
+      <Corners />
     </>
   );
 
@@ -114,12 +114,14 @@ export function WhiteCtaButton({
   href = "#",
   lowercase = false,
   centered = false,
+  textClassName = "text-[14px] leading-[normal]",
 }: {
   children: React.ReactNode;
   className?: string;
   href?: string;
   lowercase?: boolean;
   centered?: boolean;
+  textClassName?: string;
 }) {
   return (
     <a
@@ -137,7 +139,7 @@ export function WhiteCtaButton({
         className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(45,45,45,0.6)]"
       />
       <span
-        className={`flex items-center gap-[8px] text-[14px] leading-[normal] whitespace-nowrap text-[#151515] ${
+        className={`flex items-center gap-[8px] whitespace-nowrap text-[#151515] ${textClassName} ${
           lowercase ? "normal-case" : "uppercase"
         } not-italic ${
           centered
@@ -160,8 +162,8 @@ export function FramedBox({
 }) {
   return (
     <div className={`relative border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] ${className}`}>
-      <CornerDecor />
       {children}
+      <CornerDecor className="z-10" />
     </div>
   );
 }

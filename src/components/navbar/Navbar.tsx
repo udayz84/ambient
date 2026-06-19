@@ -49,11 +49,11 @@ export function Navbar() {
         />
       </div>
 
-      <div className="relative mx-auto h-[78px] w-full max-w-[1442px]">
+      <div className="relative z-10 mx-auto h-[78px] w-full max-w-[1442px]">
         {/* Desktop (>=1024px): absolute positions from Figma, adapted for smaller viewports */}
         <Link
           href="/"
-          className="absolute top-[19.158203125px] left-[40px] hidden h-[38px] w-[135.443px] min-[1440px]:left-[110px] min-[1024px]:block"
+          className="absolute top-[19.158203125px] left-[40px] hidden h-[38px] w-[135.443px] min-[1440px]:left-[110px] lg:block"
           data-node-id="2379:1574"
         >
           <Image
@@ -67,7 +67,7 @@ export function Navbar() {
         </Link>
 
         <nav
-          className="absolute top-[19.158203125px] left-[200px] right-[200px] hidden h-[37px] items-center justify-center gap-[12px] p-[10px] min-[1024px]:flex min-[1440px]:left-[415px] min-[1440px]:right-auto min-[1440px]:w-[632px]"
+          className="absolute top-[19.158203125px] left-[200px] right-[200px] hidden h-[37px] items-center justify-center gap-[12px] p-[10px] lg:flex min-[1440px]:left-[415px] min-[1440px]:right-auto min-[1440px]:w-[632px]"
           aria-label="Main"
           data-node-id="2379:1575"
         >
@@ -84,24 +84,32 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="absolute top-[21.158203125px] right-[40px] hidden min-[1024px]:block min-[1440px]:right-auto min-[1440px]:left-[1191.5px]">
+        <div className="absolute top-[21.158203125px] right-[40px] hidden lg:block min-[1440px]:right-auto min-[1440px]:left-[1191.5px]">
           <NavbarCta />
         </div>
 
-        {/* Mobile (<1024px): flex row — logo (left) + CTA + hamburger (right) */}
-        <div className="flex h-[78px] items-center justify-between px-[12px] max-[1023px]:flex min-[1024px]:hidden">
-          <Link href="/" className="block h-[38px] w-[135.443px] shrink-0">
+        {/* Mobile (<1024px): Absolute positioning to guarantee placement */}
+        <div className="absolute inset-0 block lg:hidden">
+          <Link
+            href="/"
+            className="absolute top-[20px] left-[16px] flex h-[38px] w-[135px] items-center overflow-hidden"
+          >
             <Image
               src="/navbar/logo.png"
               alt="Ambient Scientific"
               width={135}
               height={38}
-              className="h-[38px] w-[135.443px] object-cover object-left"
+              className="h-[38px] w-auto object-contain object-left"
               priority
+              unoptimized
             />
           </Link>
-          <div className="flex items-center gap-[8px]">
+
+          <div className="absolute top-[21px] right-[64px] flex items-center justify-center">
             <NavbarCta />
+          </div>
+
+          <div className="absolute top-[21px] right-[16px] flex h-[36px] w-[36px] items-center justify-center">
             <MobileMenu />
           </div>
         </div>

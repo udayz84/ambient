@@ -108,16 +108,9 @@ export function Hero() {
       </div>
 
       {/* MOBILE (<1024px) — dedicated layout, desktop is untouched above */}
-      <div className="relative w-full min-[1024px]:hidden">
-        <div className="absolute inset-0 overflow-hidden" aria-hidden>
-          <HeroVisualMedia />
-        </div>
-        <div
-          className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/60 to-black"
-          aria-hidden
-        />
-
-        <div className="relative flex min-h-[100svh] flex-col px-[24px] pb-[56px] pt-[124px]">
+      <div className="relative flex w-full flex-col min-[1024px]:hidden pt-[100px] pb-[56px]">
+        {/* Text Area */}
+        <div className="flex flex-col px-[24px]">
           <h1
             className={`${gilroyMedium.className} w-full bg-clip-text text-[30px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
             style={{
@@ -136,8 +129,24 @@ export function Hero() {
             microwatt to hyperscaler cloud, once constrained by power, space and
             legacy design tradeoffs
           </p>
+        </div>
 
-          <div className="mt-[44px] grid grid-cols-[minmax(0,1fr)_1px_minmax(0,1fr)] gap-[16px]">
+        {/* Video Area - Sized down to be fully visible on mobile */}
+        <div className="relative mt-[32px] w-full h-[300px] overflow-hidden">
+          <HeroVisualMedia />
+          <div
+            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black via-transparent to-transparent"
+            aria-hidden
+          />
+        </div>
+
+        {/* Stats Area */}
+        <div className="px-[24px] mt-[32px]">
+          <div className="grid grid-cols-[minmax(0,1fr)_1px_minmax(0,1fr)] gap-[16px]">
             <div className="flex flex-col items-start gap-[14px]">
               <p
                 className={`${dmMono.className} text-[10px] tracking-[0.16em] uppercase text-[#9be37f]`}

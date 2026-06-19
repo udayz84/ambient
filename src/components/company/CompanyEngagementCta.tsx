@@ -19,14 +19,16 @@ export function CompanyEngagementCta({
   return (
     <a
       href={href}
-      className={`${gilroySemiBold.className} relative block h-[48px] shrink-0 overflow-hidden ${GREEN_CTA_SHADOW} ${className}`}
+      className={`${gilroySemiBold.className} relative block h-[48px] shrink-0 ${GREEN_CTA_SHADOW} ${className}`}
     >
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+        className="pointer-events-none absolute inset-0 rounded-[inherit] bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
-      <RepelDots />
-      <span className="relative flex h-full items-center justify-center gap-[8px] px-[12px] text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic">
+      <span className="pointer-events-none absolute inset-0 z-[1] overflow-hidden rounded-[inherit]">
+        <RepelDots />
+      </span>
+      <span className="relative z-10 flex h-full items-center justify-center gap-[8px] px-[12px] text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic">
         {children}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -36,11 +38,40 @@ export function CompanyEngagementCta({
           aria-hidden
         />
       </span>
-      <CompanyStandardCorners />
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
+        className="pointer-events-none absolute inset-0 z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
       />
+      
+      {/* Custom Corners that pop out slightly to avoid the inset shadow */}
+      <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="rotate-180 flex-none">
+          <div className="relative size-[4px]">
+            <img src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+          </div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute -top-[0.5px] left-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="-scale-y-100 flex-none">
+          <div className="relative size-[4px]">
+            <img src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+          </div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute right-0 bottom-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="-scale-x-100 flex-none">
+          <div className="relative size-[4px]">
+            <img src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+          </div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute bottom-0 left-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="flex-none">
+          <div className="relative size-[4px]">
+            <img src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+          </div>
+        </div>
+      </div>
     </a>
   );
 }

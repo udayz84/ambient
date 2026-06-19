@@ -80,15 +80,8 @@ export function ResourcesArticleCard({
 
       <ArticleCorner className="absolute top-0 left-0" src={frameCornerLeft} flipY />
       <ArticleCorner className="absolute top-0 right-0" src={frameCornerRight} rotate />
-      <ArticleCorner
-        className="absolute right-0 bottom-0"
-        src={frameCornerRight}
-        rotate
-        flipY
-      />
-      <div className="absolute bottom-0 left-0 size-[4px]">
-        <Image src={frameCornerLeft} alt="" width={4} height={4} aria-hidden />
-      </div>
+      <ArticleCorner className="absolute right-0 bottom-0" src={frameCornerRight} rotate flipY />
+      <ArticleCorner className="absolute bottom-0 left-0" src={frameCornerLeft} />
     </article>
   );
 }
@@ -107,13 +100,9 @@ function ArticleCorner({
   return (
     <div className={`flex size-[4px] items-center justify-center ${className}`}>
       <div
-        className={`flex-none ${flipY ? "-scale-y-100" : ""} ${rotate ? "rotate-180" : ""}`}
+        className={`relative size-[4px] flex-none ${flipY ? "-scale-y-100" : ""} ${rotate ? "rotate-180" : ""}`}
       >
-        <div className="relative size-[4px]">
-          <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-            <Image src={src} alt="" width={4} height={4} aria-hidden />
-          </div>
-        </div>
+        <Image src={src} alt="" fill className="object-contain" aria-hidden />
       </div>
     </div>
   );

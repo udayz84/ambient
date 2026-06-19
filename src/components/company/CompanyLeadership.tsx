@@ -20,12 +20,12 @@ function LeadershipBackground() {
         src="/careers/image%20107.png"
         alt=""
         fill
-        className="max-w-none object-cover brightness-110"
+        className="max-w-none object-cover brightness-150"
         sizes="1440px"
         unoptimized
       />
       <div
-        className="absolute inset-0 opacity-60"
+        className="absolute inset-0 opacity-10"
         style={{ backgroundImage: IMAGE_107_OVERLAY }}
       />
     </div>

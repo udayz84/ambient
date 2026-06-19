@@ -36,7 +36,11 @@ const JOB_ROW_NODE_IDS = [
   "2379:8928",
 ] as const;
 
-export function CareersOpenRoles() {
+export function CareersOpenRoles({
+  onHeightDiffChange,
+}: {
+  onHeightDiffChange?: (diff: number) => void;
+} = {}) {
   const [jobTypeFilter, setJobTypeFilter] = useState<string>("all");
   const [locationFilter, setLocationFilter] = useState<string>("all");
 
@@ -54,6 +58,20 @@ export function CareersOpenRoles() {
     [jobTypeFilter, locationFilter],
   );
 
+  useEffect(() => {
+    // 8 jobs total initially. 8 * 153 + 7 * 10 = 1294
+    const MAX_HEIGHT = 1294;
+    const currentJobsCount = filteredJobs.length;
+    let currentHeight = 0;
+    if (currentJobsCount === 0) {
+      currentHeight = 153; // "No jobs found" block height
+    } else {
+      currentHeight = currentJobsCount * 153 + (currentJobsCount - 1) * 10;
+    }
+    const diff = Math.max(0, MAX_HEIGHT - currentHeight);
+    onHeightDiffChange?.(diff);
+  }, [filteredJobs.length, onHeightDiffChange]);
+
   return (
     <section
       id="open-roles"
@@ -63,21 +81,22 @@ export function CareersOpenRoles() {
     >
       {/* image 107 background — extends above into previous section */}
       <div 
-        className="pointer-events-none absolute left-1/2 top-[-200px] z-0 h-[1000px] w-[1204px] -translate-x-1/2"
+        className="pointer-events-none absolute left-1/2 top-[-200px] z-0 w-[1440px] -translate-x-1/2"
+        style={{ height: 'calc(100% + 400px)' }}
         data-name="image 107"
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
+          src="/careers/image 107.png"
           alt=""
-          src="/careers/image%20107.png"
-          className="absolute inset-0 size-full object-cover opacity-25"
-          aria-hidden
+          fill
+          className="object-cover opacity-25"
+          sizes="1440px"
         />
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,1) 100%)",
+              "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 60%, rgba(0,0,0,1) 100%)",
           }}
           aria-hidden
         />
@@ -207,25 +226,17 @@ const ROLES_CTA_MASK_STYLE = {
 function RolesCtaBackground() {
   return (
     <div
-      className="pointer-events-none absolute top-0 left-0 h-[261.215px] w-[1203px]"
+      className="pointer-events-none absolute top-0 left-0 h-[262px] w-[1203px]"
       data-node-id="2379:8930"
       aria-hidden
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/careers/roles-cta-bg.svg"
+      <Image
+        src="/careers/Rectangle 1618873545.png"
         alt=""
-        className="absolute inset-0 block size-full max-w-none"
+        fill
+        className="object-cover"
+        sizes="1203px"
       />
-      <div className="absolute inset-0" style={ROLES_CTA_MASK_STYLE}>
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 55% 90% at 78% 50%, rgba(83, 216, 36, 0.14) 0%, rgba(83, 216, 36, 0.04) 40%, transparent 68%)",
-          }}
-        />
-      </div>
     </div>
   );
 }
@@ -428,7 +439,7 @@ function JobRow({
 function CategoryBadge({ label }: { label: string }) {
   return (
     <div
-      className={`${dmMono.className} absolute top-[19.34px] left-[calc(50%-492px)] h-[26px] w-[180px] -translate-x-1/2 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.06)]`}
+      className={`${dmMono.className} absolute top-[19.34px] left-[calc(50%-492px)] h-[26px] w-[180px] -translate-x-1/2 border-[0.5px] border-solid border-[rgba(240,240,240,0.5)] bg-[rgba(0,0,0,0.3)]`}
       data-name="Menu"
     >
       <Corners leftSrc={cornerTitleTl} rightSrc={cornerTitleTr} />

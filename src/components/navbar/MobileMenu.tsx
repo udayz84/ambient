@@ -132,7 +132,7 @@ export function MobileMenu() {
       {isClient && isMobile && createPortal(
           <div
             id="mobile-nav"
-            className={`${interMedium.className} pointer-events-none fixed inset-x-0 bottom-0 top-[78px] z-[55]`}
+            className={`${interMedium.className} pointer-events-none fixed inset-x-0 bottom-0 top-[78px] z-[55] overflow-hidden`}
             aria-hidden={!open}
           >
             <div

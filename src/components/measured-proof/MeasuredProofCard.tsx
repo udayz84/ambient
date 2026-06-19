@@ -36,23 +36,21 @@ export function MeasuredProofCard({
 }: MeasuredProofCardProps) {
   return (
     <div
-      className="relative h-[600px] w-[388px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.75)]"
+      className="relative h-[600px] w-[388px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(255,255,255,0.1)]"
       data-node-id={nodeId}
       data-name="Lower power consumption"
     >
       <div
-        className="pointer-events-none absolute top-[0.51px] left-[0.4px] h-[598.994px] w-[387.605px]"
+        className="pointer-events-none absolute inset-0"
         data-name="Cornor Elements"
       >
-        <div className="absolute inset-[0_-0.13%]">
-          <Image
-            src="/measured-proof/corner-elements.svg"
-            alt=""
-            fill
-            className="object-fill"
-            aria-hidden
-          />
-        </div>
+        <Image
+          src="/measured-proof/corner-elements.svg"
+          alt=""
+          fill
+          className="object-contain p-[1px]"
+          aria-hidden
+        />
       </div>
 
       <div

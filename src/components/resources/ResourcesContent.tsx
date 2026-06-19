@@ -100,11 +100,12 @@ export function ResourcesContent({
       >
         <button
           type="button"
-          className="relative size-[44px] shrink-0 transition-opacity hover:opacity-80"
+          className="relative size-[44px] shrink-0 transition-opacity hover:opacity-80 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.03)]"
           aria-label="Previous category"
           onClick={handlePrevCategory}
           data-node-id="2379:1774"
         >
+          <Corners />
           <Image
             src={scrollArrowLeft}
             alt=""
@@ -155,11 +156,12 @@ export function ResourcesContent({
 
         <button
           type="button"
-          className="relative size-[44px] shrink-0 transition-opacity hover:opacity-80"
+          className="relative size-[44px] shrink-0 transition-opacity hover:opacity-80 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.03)]"
           aria-label="Next category"
           onClick={handleNextCategory}
           data-node-id="2379:1825"
         >
+          <Corners />
           <Image
             src={scrollArrowLeft}
             alt=""

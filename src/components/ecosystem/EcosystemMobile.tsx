@@ -107,19 +107,15 @@ export function EcosystemMobile() {
 
       <a
         href="#"
-        className={`${interRegular.className} relative mt-[28px] flex h-[44px] w-[186px] items-center justify-center gap-[10px] overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+        className="relative flex h-[48px] w-full items-center justify-center gap-[10px] shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]"
       >
         <span
           aria-hidden
-          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+          className="pointer-events-none absolute inset-0 rounded-[inherit] bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
         />
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
-        />
-        <span className="relative text-[14px] leading-[normal] font-normal whitespace-nowrap text-white uppercase not-italic">
+        <p className={`${interRegular.className} relative z-10 shrink-0 whitespace-nowrap text-[14px] font-normal text-white uppercase not-italic`}>
           Work with us
-        </span>
+        </p>
         <Image
           src="/navbar/cta-dot.svg"
           alt=""

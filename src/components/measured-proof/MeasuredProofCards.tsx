@@ -78,16 +78,7 @@ const FRICTION = 0.92;
 const MOMENTUM_SCALE = 0.95;
 
 type ScrollState = {
-  current: number;
-  target: number;
-  velocity: number;
   maxScroll: number;
-  isDragging: boolean;
-  dragStartX: number;
-  dragStartScroll: number;
-  lastDragX: number;
-  lastDragTime: number;
-  dragVelocity: number;
 };
 
 function clamp(value: number, min: number, max: number) {
@@ -121,22 +112,12 @@ export function MeasuredProofCards() {
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const scrollStateRef = useRef<ScrollState>({
-    current: 0,
-    target: 0,
-    velocity: 0,
     maxScroll: 0,
-    isDragging: false,
-    dragStartX: 0,
-    dragStartScroll: 0,
-    lastDragX: 0,
-    lastDragTime: 0,
-    dragVelocity: 0,
   });
-  const rafRef = useRef<number | null>(null);
 
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [translateX, setTranslateX] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
+
+
 
   const updateMaxScroll = () => {
     const viewport = viewportRef.current;
@@ -147,67 +128,6 @@ export function MeasuredProofCards() {
       0,
       track.scrollWidth - viewport.clientWidth
     );
-    scrollStateRef.current.target = clamp(
-      scrollStateRef.current.target,
-      0,
-      scrollStateRef.current.maxScroll
-    );
-    scrollStateRef.current.current = clamp(
-      scrollStateRef.current.current,
-      0,
-      scrollStateRef.current.maxScroll
-    );
-  };
-
-  const startAnimationLoop = () => {
-    if (rafRef.current !== null) return;
-
-    const tick = () => {
-      const state = scrollStateRef.current;
-
-      if (!state.isDragging) {
-        const distance = state.target - state.current;
-        state.velocity += distance * SMOOTH_FACTOR;
-        state.velocity *= FRICTION;
-        state.current += state.velocity;
-
-        if (state.maxScroll > 0) {
-          state.current = clamp(state.current, 0, state.maxScroll);
-          state.target = clamp(state.target, 0, state.maxScroll);
-        }
-
-        if (
-          Math.abs(distance) < 0.25 &&
-          Math.abs(state.velocity) < 0.25
-        ) {
-          state.current = state.target;
-          state.velocity = 0;
-        }
-      }
-
-      setTranslateX(-state.current);
-
-      const isIdle =
-        !state.isDragging &&
-        Math.abs(state.target - state.current) < 0.25 &&
-        Math.abs(state.velocity) < 0.25;
-
-      if (isIdle) {
-        rafRef.current = null;
-        return;
-      }
-
-      rafRef.current = requestAnimationFrame(tick);
-    };
-
-    rafRef.current = requestAnimationFrame(tick);
-  };
-
-  const stopAnimationLoop = () => {
-    if (rafRef.current !== null) {
-      cancelAnimationFrame(rafRef.current);
-      rafRef.current = null;
-    }
   };
 
   useEffect(() => {
@@ -216,7 +136,28 @@ export function MeasuredProofCards() {
 
     const updateProgress = () => {
       const rect = section.getBoundingClientRect();
-      setScrollProgress(getScrollProgress(rect.top, window.innerHeight));
+      const viewportHeight = window.innerHeight;
+      
+      // Entrance animation progress (triggers when section enters viewport)
+      setScrollProgress(getScrollProgress(rect.top, viewportHeight));
+
+      // Horizontal scroll progress (triggers while section is sticky)
+      // The sticky container is 100vh, the section is 400vh.
+      // So there is 300vh of scrolling to do.
+      const maxScrollY = section.offsetHeight - viewportHeight;
+      const currentScrollY = -rect.top;
+      
+      if (maxScrollY > 0) {
+        let hProgress = currentScrollY / maxScrollY;
+        hProgress = clamp(hProgress, 0, 1);
+        
+        // Directly update the horizontal transform for 60fps smooth tracking
+        // We round the value to prevent subpixel rendering artifacts (blurring)
+        const targetX = scrollStateRef.current.maxScroll * hProgress;
+        if (trackRef.current) {
+          trackRef.current.style.transform = `translate3d(${Math.round(-targetX)}px, 0, 0)`;
+        }
+      }
     };
 
     updateProgress();
@@ -253,138 +194,15 @@ export function MeasuredProofCards() {
 
   useEffect(() => {
     updateMaxScroll();
-
-    const viewport = viewportRef.current;
-    if (!viewport) {
-      return () => stopAnimationLoop();
-    }
-
-    const onWheel = (event: WheelEvent) => {
-      const HORIZONTAL_THRESHOLD = 30;
-      const HORIZONTAL_RATIO = 1.5;
-      
-      const absDeltaX = Math.abs(event.deltaX);
-      const absDeltaY = Math.abs(event.deltaY);
-      
-      if (absDeltaY > 0 && absDeltaX / absDeltaY < HORIZONTAL_RATIO) {
-        return;
-      }
-      
-      if (absDeltaX < HORIZONTAL_THRESHOLD) {
-        return;
-      }
-      
-      event.preventDefault();
-      event.stopPropagation();
-      event.stopImmediatePropagation();
-      const delta = event.deltaX * WHEEL_FACTOR;
-      const state = scrollStateRef.current;
-      state.target += delta;
-      state.target = clamp(state.target, 0, state.maxScroll);
-      startAnimationLoop();
-    };
-
-    const onMouseDown = (event: MouseEvent) => {
-      if (event.button !== 0) return;
-      handleDragStart(event.clientX);
-    };
-
-    const onTouchStart = (event: TouchEvent) => {
-      handleDragStart(event.touches[0].clientX);
-    };
-
-    const handleDragStart = (clientX: number) => {
-      const state = scrollStateRef.current;
-      state.isDragging = true;
-      state.dragStartX = clientX;
-      state.dragStartScroll = state.current;
-      state.lastDragX = clientX;
-      state.lastDragTime = performance.now();
-      state.dragVelocity = 0;
-      state.velocity = 0;
-      setIsDragging(true);
-      startAnimationLoop();
-    };
-
-    const onMouseMove = (event: MouseEvent) => {
-      if (!scrollStateRef.current.isDragging) return;
-      event.preventDefault();
-      handleDragMove(event.clientX);
-    };
-
-    const onTouchMove = (event: TouchEvent) => {
-      if (!scrollStateRef.current.isDragging) return;
-      handleDragMove(event.touches[0].clientX);
-    };
-
-    const handleDragMove = (clientX: number) => {
-      const state = scrollStateRef.current;
-      const now = performance.now();
-      const deltaX = clientX - state.dragStartX;
-      const frameDelta = clientX - state.lastDragX;
-      const frameTime = Math.max(now - state.lastDragTime, 1);
-
-      state.current = clamp(
-        state.dragStartScroll - deltaX,
-        0,
-        state.maxScroll
-      );
-      state.target = state.current;
-      state.dragVelocity = (frameDelta / frameTime) * 16;
-      state.lastDragX = clientX;
-      state.lastDragTime = now;
-      startAnimationLoop();
-    };
-
-    const stopDragging = () => {
-      const state = scrollStateRef.current;
-      if (!state.isDragging) return;
-
-      state.isDragging = false;
-      state.velocity = -state.dragVelocity * MOMENTUM_SCALE;
-      state.target = clamp(
-        state.current + state.velocity * 8,
-        0,
-        state.maxScroll
-      );
-      setIsDragging(false);
-      startAnimationLoop();
-    };
-
     const onResize = () => updateMaxScroll();
-
-    const preventNativeDrag = (e: Event) => e.preventDefault();
-
-    viewport.addEventListener("wheel", onWheel, { passive: false });
-    viewport.addEventListener("mousedown", onMouseDown);
-    viewport.addEventListener("touchstart", onTouchStart, { passive: true });
-    viewport.addEventListener("dragstart", preventNativeDrag);
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("touchmove", onTouchMove, { passive: true });
-    window.addEventListener("mouseup", stopDragging);
-    window.addEventListener("touchend", stopDragging);
     window.addEventListener("resize", onResize);
-
-    return () => {
-      viewport.removeEventListener("wheel", onWheel);
-      viewport.removeEventListener("mousedown", onMouseDown);
-      viewport.removeEventListener("touchstart", onTouchStart);
-      viewport.removeEventListener("dragstart", preventNativeDrag);
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("touchmove", onTouchMove);
-      window.removeEventListener("mouseup", stopDragging);
-      window.removeEventListener("touchend", stopDragging);
-      window.removeEventListener("resize", onResize);
-      stopAnimationLoop();
-    };
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   return (
     <div
       ref={viewportRef}
-      className={`absolute top-1/2 right-0 left-0 -translate-y-1/2 overflow-hidden touch-pan-y select-none ${
-        isDragging ? "cursor-grabbing" : "cursor-grab"
-      }`}
+      className="absolute top-1/2 right-0 left-0 -translate-y-1/2 overflow-hidden touch-none select-none"
       data-node-id="2379:1503"
       data-name="Measured proof in silicon"
       aria-label="Measured proof cards"
@@ -392,9 +210,6 @@ export function MeasuredProofCards() {
       <div
         ref={trackRef}
         className="flex w-max content-stretch items-center gap-[24px] px-[40px] min-[1440px]:px-[120px] will-change-transform [backface-visibility:hidden]"
-        style={{
-          transform: `translate3d(${translateX}px, 0, 0)`,
-        }}
       >
         {CARDS.map((card, index) => {
           const { translateY, opacity } = getCardMotion(scrollProgress, index);

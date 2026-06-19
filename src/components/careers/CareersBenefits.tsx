@@ -1,10 +1,11 @@
 import { CAREERS_BENEFITS_CARDS } from "./careers-data";
 import { CareersFramedTitle, CareersGradientCard } from "./careers-shared";
 
-export function CareersBenefits() {
+export function CareersBenefits({ offsetY = 0 }: { offsetY?: number }) {
   return (
     <section
-      className="absolute top-[4252px] left-1/2 z-10 flex w-[1318px] -translate-x-1/2 flex-col items-center gap-[40px]"
+      className="absolute top-[4252px] left-1/2 z-10 flex w-[1318px] flex-col items-center gap-[40px] transition-transform duration-300 ease-out"
+      style={{ transform: `translate(-50%, -${offsetY}px)` }}
       data-node-id="2379:8953"
       aria-label="Benefits and Perks"
     >

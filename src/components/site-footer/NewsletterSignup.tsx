@@ -7,13 +7,13 @@ const cornerRight = "/hero/corner-tag-2.svg";
 export function NewsletterSignup() {
   return (
     <div
-      className="relative flex w-[600px] flex-col items-center"
+      className="relative flex w-full max-w-[600px] flex-col items-center px-[24px] sm:px-0"
       data-node-id="2379:1393"
       data-name="Group 90"
     >
-      <div className="relative inline-grid w-full grid-cols-[max-content] grid-rows-[max-content] place-items-start leading-[0]">
+      <div className="relative inline-grid w-full grid-cols-[max-content] grid-rows-[max-content] place-items-start leading-[0] max-md:flex max-md:flex-col max-md:items-center">
         <h2
-          className={`${gilroyMedium.className} relative z-[1] col-start-1 row-start-1 mt-[14px] w-full bg-clip-text text-center text-[46px] leading-[49px] font-medium text-[transparent] not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} relative z-[1] col-start-1 row-start-1 mt-[14px] max-md:mt-0 w-full bg-clip-text text-center text-[32px] sm:text-[46px] leading-[1.1] font-medium text-[transparent] not-italic [word-break:break-word]`}
           style={{
             backgroundImage:
               "linear-gradient(104.93deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -25,17 +25,17 @@ export function NewsletterSignup() {
         </h2>
 
         <Corner
-          className="z-[2] col-start-1 row-start-1 mt-0 ml-[549px]"
+          className="z-[2] col-start-1 row-start-1 mt-0 ml-[549px] max-md:hidden"
           src={cornerRight}
           rotate
         />
         <Corner
-          className="z-[2] col-start-1 row-start-1 mt-[130px] ml-[549px]"
+          className="z-[2] col-start-1 row-start-1 mt-[130px] ml-[549px] max-md:hidden"
           src={cornerRight}
           rotate
           flipY
         />
-        <div className="relative z-[2] col-start-1 row-start-1 mt-[130px] ml-[51px] size-[4px]">
+        <div className="relative z-[2] col-start-1 row-start-1 mt-[130px] ml-[51px] size-[4px] max-md:hidden">
           <Image
             src={cornerLeft}
             alt=""
@@ -46,13 +46,13 @@ export function NewsletterSignup() {
           />
         </div>
         <Corner
-          className="z-[2] col-start-1 row-start-1 mt-0 ml-[51px]"
+          className="z-[2] col-start-1 row-start-1 mt-0 ml-[51px] max-md:hidden"
           src={cornerLeft}
           flipY
         />
 
         <p
-          className={`${interRegular.className} relative col-start-1 row-start-1 mt-[154px] w-[600px] text-center text-[18px] leading-[27px] font-normal text-white not-italic [word-break:break-word]`}
+          className={`${interRegular.className} relative col-start-1 row-start-1 mt-[154px] max-md:mt-[16px] w-full text-center text-[16px] sm:text-[18px] leading-[1.5] font-normal text-white not-italic [word-break:break-word]`}
           data-node-id="2379:1399"
         >
           Sign up to receive regular updates.
@@ -60,14 +60,14 @@ export function NewsletterSignup() {
       </div>
 
       <form
-        className="mt-[34px] flex items-center"
+        className="mt-[34px] flex w-full flex-col items-center gap-[16px] md:flex-row md:justify-center md:gap-0"
         data-node-id="2379:1400"
       >
         <label className="sr-only" htmlFor="newsletter-email">
           Email address
         </label>
         <div
-          className="flex h-[48px] w-[300px] shrink-0 items-center border border-solid border-white bg-transparent px-[20px]"
+          className="flex h-[48px] w-full max-w-[300px] shrink-0 items-center border border-solid border-white bg-transparent px-[20px]"
           data-node-id="2379:1401"
         >
           <input
@@ -79,7 +79,7 @@ export function NewsletterSignup() {
         </div>
         <button
           type="submit"
-          className={`${gilroySemiBold.className} relative flex h-[48px] w-[158px] shrink-0 items-center justify-center text-[14px] leading-[normal] font-semibold text-[#121212] uppercase shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+          className={`${gilroySemiBold.className} relative flex h-[48px] w-full max-w-[300px] md:w-[158px] shrink-0 items-center justify-center text-[14px] leading-[normal] font-semibold text-[#121212] uppercase shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
           data-node-id="2379:1404"
         >
           <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />

@@ -129,7 +129,7 @@ export function NavbarCta() {
     <a
       ref={buttonRef}
       href="/contact"
-      className={`${gilroySemiBold.className} relative block h-[36px] w-[147px] shrink-0 overflow-hidden ${GREEN_CTA_SHADOW}`}
+      className={`${gilroySemiBold.className} relative block h-[36px] w-[147px] shrink-0 ${GREEN_CTA_SHADOW}`}
       data-node-id="2379:1589"
       data-name="Cta"
       onPointerEnter={handlePointerEnter}
@@ -138,11 +138,11 @@ export function NavbarCta() {
     >
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+        className="pointer-events-none absolute inset-0 rounded-[inherit] bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-[1] overflow-hidden"
+        className="pointer-events-none absolute inset-0 z-[1] overflow-hidden rounded-[inherit]"
       >
         {particles.map((particle, index) => (
           <span
@@ -160,7 +160,7 @@ export function NavbarCta() {
       </span>
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
+        className="pointer-events-none absolute inset-0 z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
       />
       <span
         className="pointer-events-none absolute top-[calc(50%-8px)] left-[20px] z-10 text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic"
@@ -181,7 +181,36 @@ export function NavbarCta() {
           aria-hidden
         />
       </span>
-      <Corners className="z-20" />
+      
+      {/* Custom Corners that pop out slightly to avoid the inset shadow */}
+      <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="rotate-180 flex-none">
+          <div className="relative size-[4px]">
+            <Image src="/hero/corner-tag-2.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+          </div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute -top-[0.5px] left-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="-scale-y-100 flex-none">
+          <div className="relative size-[4px]">
+            <Image src="/hero/corner-tag-1.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+          </div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute right-0 bottom-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="-scale-x-100 flex-none">
+          <div className="relative size-[4px]">
+            <Image src="/hero/corner-tag-2.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+          </div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute bottom-0 left-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="flex-none">
+          <div className="relative size-[4px]">
+            <Image src="/hero/corner-tag-1.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+          </div>
+        </div>
+      </div>
     </a>
   );
 }

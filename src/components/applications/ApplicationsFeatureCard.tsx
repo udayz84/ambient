@@ -37,7 +37,7 @@ export function ApplicationsFeatureCard({
   return (
     <div className="contents" data-node-id={wrapperNodeId} data-name="Content">
       <div
-        className="absolute top-[601.22119140625px] flex w-[449.9994201660156px] flex-col items-start gap-[10px] p-[32px]"
+        className="absolute top-[601.22119140625px] flex w-[449.9994201660156px] flex-col items-start gap-[10px] p-[32px] backdrop-blur-[8px]"
         style={{
           left: isLeft ? "40.88720703125px" : undefined,
           right: isLeft ? undefined : "40.11279296875px",
@@ -62,6 +62,41 @@ export function ApplicationsFeatureCard({
           {description}
         </p>
 
+        {/* Top Right Corner */}
+        <div className="absolute right-0 top-0 z-[2] flex h-[4px] items-center justify-center" style={{ width: "4.285708427429199px" }}>
+          <div className="-scale-y-100 flex-none rotate-90">
+            <div className="relative h-[4.285708427429199px] w-[4px]">
+              <div className="absolute inset-[0_0_-11.67%_-12.5%]">
+                <Image
+                  src={topTrSrc}
+                  alt=""
+                  fill
+                  className="block object-fill max-w-none"
+                  aria-hidden
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Top Left Corner */}
+        <div className="absolute left-0 top-[4px] z-[2] flex h-[4px] items-center justify-center" style={{ width: "4.285708427429199px" }}>
+          <div className="-scale-y-100 flex-none">
+            <div className="relative h-[4px] w-[4.285708427429199px]">
+              <div className="absolute inset-[0_0_-12.5%_-11.67%]">
+                <Image
+                  src={topTlSrc}
+                  alt=""
+                  fill
+                  className="block object-fill max-w-none"
+                  aria-hidden
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Right Corner */}
         <div className="absolute right-0 bottom-0 z-[2] flex size-[4px] items-center justify-center">
           <div className="-scale-y-100 rotate-180 flex-none">
             <div className="relative size-[4px]">
@@ -78,6 +113,8 @@ export function ApplicationsFeatureCard({
             </div>
           </div>
         </div>
+
+        {/* Bottom Left Corner */}
         <div className="absolute bottom-0 left-0 z-[2] flex size-[4px] items-center justify-center">
           <div className="-rotate-90 -scale-y-100 flex-none">
             <div className="relative size-[4px]">
@@ -91,50 +128,6 @@ export function ApplicationsFeatureCard({
                   aria-hidden
                 />
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        className="absolute top-[601.22119140625px] flex h-[4px] items-center justify-center"
-        style={{
-          right: isLeft ? "830.11279296875px" : "40.11279296875px",
-          width: "4.285708427429199px",
-        }}
-      >
-        <div className="-scale-y-100 flex-none rotate-90">
-          <div className="relative h-[4.285708427429199px] w-[4px]">
-            <div className="absolute inset-[0_0_-11.67%_-12.5%]">
-              <Image
-                src={topTrSrc}
-                alt=""
-                fill
-                className="block object-fill max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        className="absolute top-[605.22119140625px] flex h-[4px] items-center justify-center"
-        style={{
-          left: isLeft ? "40.88720703125px" : "830.88720703125px",
-          width: "4.285708427429199px",
-        }}
-      >
-        <div className="-scale-y-100 flex-none">
-          <div className="relative h-[4px] w-[4.285708427429199px]">
-            <div className="absolute inset-[0_0_-12.5%_-11.67%]">
-              <Image
-                src={topTlSrc}
-                alt=""
-                fill
-                className="block object-fill max-w-none"
-                aria-hidden
-              />
             </div>
           </div>
         </div>

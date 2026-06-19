@@ -82,7 +82,7 @@ export function ResourcesHero() {
           data-node-id="2379:1621"
         >
           <div
-            className="flex h-[48px] min-w-px flex-[1_0_0] items-center bg-[rgba(0,0,0,0.3)] px-[20px]"
+            className="flex h-[48px] min-w-px flex-[1_0_0] items-center border-[0.5px] border-solid border-[rgba(255,255,255,0.2)] bg-[rgba(0,0,0,0.3)] px-[20px]"
             data-node-id="2379:1622"
           >
             <label htmlFor="resources-hero-search" className="sr-only">

@@ -259,7 +259,7 @@ export function CareersGlassPanel({
   return (
     <div className={`relative w-full ${className}`} data-node-id={nodeId}>
       <div
-        className={`relative box-border flex ${height} w-full items-start overflow-visible bg-[rgba(21,21,21,0.3)] ${borderClassName}`}
+        className={`relative box-border flex ${height} w-full items-start overflow-visible bg-[rgba(21,21,21,0.3)] backdrop-blur-[8px] ${borderClassName}`}
       >
         <div className="flex min-w-px flex-[1_0_0] flex-col gap-[10px] p-[32px]">
           <p
@@ -363,30 +363,63 @@ export function CareersRolesProfileCta({ href = "#" }: { href?: string }) {
       href={href}
       data-node-id="2379:8941"
       data-name="Cta"
-      className={`${gilroySemiBold.className} absolute top-[68px] left-[59.93px] block h-[48px] w-[248px] overflow-hidden ${GREEN_CTA_SHADOW}`}
+      className={`${gilroySemiBold.className} absolute top-[68px] left-[59.93px] block h-[48px] w-[248px] ${GREEN_CTA_SHADOW}`}
     >
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+        className="pointer-events-none absolute inset-0 rounded-[inherit] bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
-      <RepelDots />
-      <span className="absolute top-[calc(50%-8px)] left-[47px] text-[14px] font-semibold leading-[normal] whitespace-nowrap text-[#FFF] uppercase not-italic">
-        SHARE YOUR PROFILE
+      <span className="pointer-events-none absolute inset-0 z-[1] overflow-hidden rounded-[inherit]">
+        <RepelDots />
       </span>
-      <span className="pointer-events-none absolute top-1/2 left-[210px] size-[6px] -translate-y-1/2">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/careers/cta-dot.svg"
-          alt=""
-          className="absolute inset-0 block size-full max-w-none"
-          aria-hidden
-        />
+      <span className="relative z-10 flex h-full w-full items-center justify-center gap-[10px]">
+        <span className="text-[14px] font-semibold leading-[normal] whitespace-nowrap text-[#FFF] uppercase not-italic">
+          SHARE YOUR PROFILE
+        </span>
+        <span className="pointer-events-none size-[6px]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/careers/cta-dot.svg"
+            alt=""
+            className="block size-full max-w-none"
+            aria-hidden
+          />
+        </span>
       </span>
-      <Corners leftSrc={cornerCtaLeft} rightSrc={cornerCtaRight} />
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
+        className="pointer-events-none absolute inset-0 z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
       />
+      
+      {/* Custom Corners that pop out slightly to avoid the inset shadow */}
+      <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="rotate-180 flex-none">
+          <div className="relative size-[4px]">
+            <img src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+          </div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute -top-[0.5px] left-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="-scale-y-100 flex-none">
+          <div className="relative size-[4px]">
+            <img src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+          </div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute right-0 bottom-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="-scale-x-100 flex-none">
+          <div className="relative size-[4px]">
+            <img src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+          </div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute bottom-0 left-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="flex-none">
+          <div className="relative size-[4px]">
+            <img src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+          </div>
+        </div>
+      </div>
     </a>
   );
 }
@@ -409,19 +442,21 @@ export function CareersGreenCta({
   return (
     <a
       href={href}
-      className={`${interSemiBold.className} relative block h-[48px] shrink-0 cursor-pointer overflow-hidden ${GREEN_CTA_SHADOW} ${width} ${className}`}
+      className={`${interSemiBold.className} relative block h-[48px] shrink-0 cursor-pointer ${GREEN_CTA_SHADOW} ${width} ${className}`}
     >
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+        className="pointer-events-none absolute inset-0 rounded-[inherit] bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
-      <RepelDots />
+      <span className="pointer-events-none absolute inset-0 z-[1] overflow-hidden rounded-[inherit]">
+        <RepelDots />
+      </span>
       <span
-        className={`absolute top-[calc(50%-8px)] ${textLeft} text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic`}
+        className={`absolute z-10 top-[calc(50%-8px)] ${textLeft} text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic`}
       >
         {children}
       </span>
-      <span className={`pointer-events-none absolute top-1/2 ${dotLeft} size-[6px] -translate-y-1/2`}>
+      <span className={`pointer-events-none z-10 absolute top-1/2 ${dotLeft} size-[6px] -translate-y-1/2`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/careers/cta-dot.svg"
@@ -430,11 +465,40 @@ export function CareersGreenCta({
           aria-hidden
         />
       </span>
-      <Corners leftSrc={cornerCtaLeft} rightSrc={cornerCtaRight} />
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
+        className="pointer-events-none absolute inset-0 z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
       />
+      
+      {/* Custom Corners that pop out slightly to avoid the inset shadow */}
+      <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="rotate-180 flex-none">
+          <div className="relative size-[4px]">
+            <img src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+          </div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute -top-[0.5px] left-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="-scale-y-100 flex-none">
+          <div className="relative size-[4px]">
+            <img src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+          </div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute right-0 bottom-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="-scale-x-100 flex-none">
+          <div className="relative size-[4px]">
+            <img src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+          </div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute bottom-0 left-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="flex-none">
+          <div className="relative size-[4px]">
+            <img src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+          </div>
+        </div>
+      </div>
     </a>
   );
 }
@@ -461,13 +525,43 @@ export function CareersWhiteCta({
         className="pointer-events-none absolute inset-0 bg-[length:307.2px_307.2px] bg-top-left opacity-40 mix-blend-plus-lighter"
         style={{ backgroundImage: "url(/careers/white-cta-texture.png)" }}
       />
-      <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[14px] leading-[normal] whitespace-nowrap text-[#121212] uppercase not-italic">
+      <span className="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[14px] leading-[normal] whitespace-nowrap text-[#121212] uppercase not-italic">
         {children}
       </span>
-      <Corners leftSrc={cornerCtaLeft} rightSrc={cornerCtaRight} />
+      
+      {/* Custom Corners that pop out slightly to avoid the inset shadow */}
+      <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="rotate-180 flex-none">
+          <div className="relative size-[4px]">
+            <img src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+          </div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute -top-[0.5px] left-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="-scale-y-100 flex-none">
+          <div className="relative size-[4px]">
+            <img src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+          </div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute right-0 bottom-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="-scale-x-100 flex-none">
+          <div className="relative size-[4px]">
+            <img src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+          </div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute bottom-0 left-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="flex-none">
+          <div className="relative size-[4px]">
+            <img src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+          </div>
+        </div>
+      </div>
+      
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
+        className="pointer-events-none absolute inset-0 z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
       />
     </a>
   );

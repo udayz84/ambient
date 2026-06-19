@@ -1,7 +1,8 @@
-export function CareersFooterBackdrop() {
+export function CareersFooterBackdrop({ offsetY = 0 }: { offsetY?: number }) {
   return (
     <div
-      className="pointer-events-none absolute top-[4977px] left-1/2 z-0 h-[720px] w-[1440px] -translate-x-1/2 overflow-hidden opacity-60"
+      className="pointer-events-none absolute top-[4977px] left-1/2 z-0 h-[720px] w-[1440px] overflow-hidden opacity-60 transition-transform duration-300 ease-out"
+      style={{ transform: `translate(-50%, -${offsetY}px)` }}
       data-node-id="2379:8613"
       data-name="image 120"
       aria-hidden

@@ -32,19 +32,21 @@ export function CompanyEngagementCard({
       data-node-id={nodeId}
       data-name="Article"
     >
-      <div
-        className="pointer-events-none absolute z-0 overflow-hidden"
-        style={{ left: imageLeft, top: imageTop, width: imageWidth, height: imageHeight }}
-        aria-hidden
-      >
-        <Image
-          src={imageSrc}
-          alt=""
-          fill
-          className="pointer-events-none object-cover"
-          sizes={`${imageWidth}px`}
-          unoptimized
-        />
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none rounded-[inherit]">
+        <div
+          className="pointer-events-none absolute overflow-hidden"
+          style={{ left: imageLeft, top: imageTop, width: imageWidth, height: imageHeight }}
+          aria-hidden
+        >
+          <Image
+            src={imageSrc}
+            alt=""
+            fill
+            className="pointer-events-none object-cover"
+            sizes={`${imageWidth}px`}
+            unoptimized
+          />
+        </div>
       </div>
 
       <div

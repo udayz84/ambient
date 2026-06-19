@@ -198,7 +198,7 @@ function ScheduleCta({
 function TagBadge({ label, nodeId }: { label: string; nodeId: string }) {
   return (
     <div
-      className="relative h-[26px] w-[180px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)]"
+      className="relative h-[26px] w-[180px] shrink-0 border-[0.5px] border-solid border-[rgba(240,240,240,0.5)] bg-[rgba(255,255,255,0.06)]"
       data-node-id={nodeId}
       data-name="Menu"
     >
