@@ -23,22 +23,11 @@ export function ContactResources() {
 
   return (
     <>
-      <svg style={{ width: 0, height: 0, position: "absolute" }} aria-hidden>
-        <filter id="architectural-glass" x="-20%" y="-20%" width="140%" height="140%">
-          {/* Layer 1: Live optical background distortion (gentle, broad curves) */}
-          <feTurbulence type="fractalNoise" baseFrequency="0.0015" numOctaves="2" result="warpNoise" />
-          <feDisplacementMap in="SourceGraphic" in2="warpNoise" scale="12" xChannelSelector="R" yChannelSelector="G" result="warped" />
-          {/* Layer 2: Backdrop blur (5-8px) */}
-          <feGaussianBlur in="warped" stdDeviation="6" result="blurred" />
-        </filter>
-      </svg>
       <div
         className={`absolute top-[589px] left-1/2 z-10 flex w-[898px] -translate-x-1/2 flex-col items-center gap-[20px] overflow-clip border border-solid border-[rgba(255,255,255,0.15)] shadow-[0_32px_80px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.4)] p-[24px] ${
           isVisible ? HERO_FADE_IN_CLASS : "translate-y-[25px] opacity-0"
         }`}
         style={{
-          backdropFilter: "url(#architectural-glass)",
-          WebkitBackdropFilter: "url(#architectural-glass)",
           background: GLASS_BACKGROUND,
         }}
         data-node-id="2379:8413"

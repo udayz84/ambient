@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
@@ -132,7 +133,7 @@ export function MobileMenu() {
       {isClient && isMobile && createPortal(
           <div
             id="mobile-nav"
-            className={`${interMedium.className} pointer-events-none fixed inset-x-0 bottom-0 top-[78px] z-[55] overflow-hidden`}
+            className={`${interMedium.className} pointer-events-none fixed inset-x-0 bottom-0 top-0 z-[55] overflow-hidden`}
             aria-hidden={!open}
           >
             <div
@@ -141,14 +142,53 @@ export function MobileMenu() {
                 open ? "pointer-events-auto opacity-100" : "opacity-0"
               }`}
             />
-            <nav
-              aria-label="Mobile"
-              className={`absolute inset-x-0 top-0 origin-top border-t border-white/10 bg-black transition-transform duration-300 ease-out ${
-                open
-                  ? "pointer-events-auto translate-y-0"
-                  : "-translate-y-full"
+            
+            {/* Header overlay for the menu */}
+            <div 
+              className={`absolute top-0 inset-x-0 h-[78px] bg-black transition-opacity duration-300 flex items-center ${
+                open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
               }`}
             >
+              <Link
+                href="/"
+                onClick={close}
+                className="absolute top-[20px] left-[16px] flex h-[38px] w-[135px] items-center overflow-hidden"
+              >
+                <Image
+                  src="/navbar/logo.png"
+                  alt="Ambient Scientific"
+                  width={135}
+                  height={38}
+                  className="h-[38px] w-auto object-contain object-left"
+                  unoptimized
+                />
+              </Link>
+
+              <div className="absolute top-[21px] right-[64px] flex items-center justify-center">
+                <NavbarCta />
+              </div>
+
+              <div className="absolute top-[21px] right-[16px] flex h-[36px] w-[36px] items-center justify-center">
+                <button
+                  type="button"
+                  aria-label="Close menu"
+                  onClick={close}
+                  className="flex h-[36px] w-[36px] shrink-0 items-center justify-center"
+                >
+                  <CloseIcon />
+                </button>
+              </div>
+            </div>
+
+            <div className="absolute inset-x-0 bottom-0 top-[78px] overflow-hidden pointer-events-none">
+              <nav
+                aria-label="Mobile"
+                className={`absolute inset-x-0 top-0 origin-top border-t border-white/10 bg-black transition-transform duration-300 ease-out ${
+                  open
+                    ? "pointer-events-auto translate-y-0"
+                    : "-translate-y-full"
+                }`}
+              >
               <ul className="px-[24px] pt-[8px]">
                 {NAV_ITEMS.map((item) => {
                   const active = item.href !== "#" && pathname === item.href;
@@ -165,7 +205,6 @@ export function MobileMenu() {
                         <span className={active ? "text-[#6ced3f]" : "text-white"}>
                           {item.label}
                         </span>
-                        {item.hasChevron ? <ChevronDown /> : null}
                       </Link>
                     </li>
                   );
@@ -175,6 +214,7 @@ export function MobileMenu() {
                 <NavbarCta />
               </div>
             </nav>
+            </div>
           </div>,
           document.body,
         )}

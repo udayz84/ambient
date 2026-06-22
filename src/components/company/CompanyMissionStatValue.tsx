@@ -23,12 +23,16 @@ type CompanyMissionStatValueProps = {
   value: string;
   valueNodeId: string;
   animationDelay?: number;
+  digitSlots?: number;
+  suffixAtTarget?: boolean;
 };
 
 export function CompanyMissionStatValue({
   value,
   valueNodeId,
   animationDelay = 0,
+  digitSlots,
+  suffixAtTarget,
 }: CompanyMissionStatValueProps) {
   const containerRef = useRef<HTMLParagraphElement>(null);
   const displayRef = useRef<HTMLSpanElement>(null);
