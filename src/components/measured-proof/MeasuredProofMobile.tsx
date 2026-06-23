@@ -1,115 +1,166 @@
 import Image from "next/image";
 import { TagBadge } from "../hero/TagBadge";
-import { gilroyMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { MeasuredProofCard } from "./MeasuredProofCard";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
 
-const MOBILE_CARDS = [
+const DESKTOP_CARDS = [
   {
+    nodeId: "mobile:1504",
     metric: "100x",
     label: "LOWER POWER CONSUMPTION",
     description:
       "Extend battery life at the edge and lower energy Opex in more compute-intensive environments",
     imageSrc: "/measured-proof/card-power.png",
+    imageWidth: 270.353,
+    imageHeight: 250,
+    imageTop: 161,
+    imageClassName:
+      "absolute top-[-16.05%] left-0 h-[135.04%] w-full max-w-none",
+    imageSizes: "271px",
+    statWidth: 299,
+    descriptionWidth: 290,
   },
   {
+    nodeId: "mobile:1524",
     metric: "25x",
     label: "AI PERFORMANCE",
     description:
       "Unlock richer models, faster local inference, and more capable intelligence in constrained systems",
     imageSrc: "/measured-proof/card-ai.png",
+    imageWidth: 331.144,
+    imageHeight: 260,
+    imageTop: 169,
+    imageSizes: "332px",
+    statWidth: 187,
+    descriptionWidth: 319,
+    statJustifyEnd: true,
   },
   {
+    nodeId: "mobile:1539",
     metric: "10x",
     label: "COMPUTE DENSITY",
     description:
       "Pack more intelligence into the same footprint without scaling power and system complexity the old way",
     imageSrc: "/measured-proof/card-density.png",
+    imageWidth: 305.672,
+    imageHeight: 240,
+    imageTop: 174.67,
+    imageSizes: "306px",
+    statWidth: 225,
+    descriptionWidth: 317,
   },
   {
+    nodeId: "mobile:1554",
     metric: "100%",
     label: "PROGRAMMABLE DESIGN",
     description:
       "Preserve the freedom to build differentiated AI systems without locking into rigid fixed-function tradeoffs",
     imageSrc: "/measured-proof/card-programmable.png",
+    imageWidth: 218.055,
+    imageHeight: 260,
+    imageTop: 151,
+    imageClassName:
+      "absolute top-[-11.4%] left-[-30.32%] h-[122.8%] w-[146.43%] max-w-none",
+    imageSizes: "320px",
+    statWidth: 271,
+    descriptionWidth: 320,
+    descriptionBottom: 137.5,
+    statJustifyEnd: true,
   },
 ] as const;
 
 export function MeasuredProofMobile() {
+  const scale = 0.68;
+  const scaledWidth = 388 * scale;
+  const scaledHeight = 600 * scale;
+
   return (
     <div className="relative flex flex-col items-center px-[24px] py-[40px]">
       <div className="flex flex-col items-center gap-[16px]">
         <TagBadge
           label="Real-time AI at edge"
-          width={180}
-          labelOffsetX={74.5}
-          rightBarLeft={170.48046875}
+          width={210}
+          labelOffsetX={89.5}
+          rightBarLeft={200.48}
+          centerLabel={true}
         />
-        <h2
-          className={`${gilroyMedium.className} max-w-[327px] bg-clip-text text-center text-[26px] leading-[32px] font-medium text-transparent [word-break:break-word] not-italic`}
-          style={{
-            backgroundImage:
-              "linear-gradient(124.568deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
-          }}
-        >
-          Measured proof in silicon
-        </h2>
+
+        <div className="relative inline-flex flex-col items-center justify-center px-[45px] py-[20px]">
+          <h2
+            className={`${gilroyMedium.className} relative z-10 bg-clip-text text-center text-[26px] leading-[32px] font-medium text-transparent [word-break:break-word] not-italic`}
+            style={{
+              backgroundImage:
+                "linear-gradient(124.568deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
+            }}
+          >
+            Measured<br />proof in silicon
+          </h2>
+
+          <div className="absolute top-0 right-0 flex size-[6px] items-center justify-center">
+            <div className="rotate-180 flex-none">
+              <div className="relative size-[6px]">
+                <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+              </div>
+            </div>
+          </div>
+          <div className="absolute bottom-0 right-0 flex size-[6px] items-center justify-center">
+            <div className="-scale-x-100 flex-none">
+              <div className="relative size-[6px]">
+                <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+              </div>
+            </div>
+          </div>
+          <div className="absolute bottom-0 left-0 flex size-[6px] items-center justify-center">
+            <div className="flex-none">
+              <div className="relative size-[6px]">
+                <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+              </div>
+            </div>
+          </div>
+          <div className="absolute top-0 left-0 flex size-[6px] items-center justify-center">
+            <div className="-scale-y-100 flex-none">
+              <div className="relative size-[6px]">
+                <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="mt-[28px] flex w-full snap-x snap-mandatory gap-[14px] overflow-x-auto pb-[8px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {MOBILE_CARDS.map((card, index) => (
-          <article
-            key={card.metric}
-            className="animate-hero-text-fade-in relative flex h-[460px] w-[268px] shrink-0 snap-start flex-col overflow-clip border-[0.5px] border-solid border-white/10 bg-[rgba(15,14,14,0.85)]"
-            style={{ animationDelay: `${index * 100}ms`, animationDuration: "800ms" }}
+        {DESKTOP_CARDS.map((card, index) => (
+          <div
+            key={card.nodeId}
+            className="animate-hero-text-fade-in shrink-0 snap-start"
+            style={{ 
+              animationDelay: `${index * 100}ms`, 
+              animationDuration: "800ms",
+              width: scaledWidth,
+              height: scaledHeight,
+            }}
           >
-            <div className="relative h-[150px] w-full shrink-0 overflow-hidden">
-              <Image
-                src={card.imageSrc}
-                alt=""
-                fill
-                className="object-contain object-center"
-                sizes="268px"
-              />
+            <div
+              style={{
+                transform: `scale(${scale})`,
+                transformOrigin: "top left",
+                width: 388,
+                height: 600,
+              }}
+            >
+              <MeasuredProofCard {...card} />
             </div>
-            <div className="flex flex-1 flex-col gap-[10px] p-[22px]">
-              <p
-                className={`${gilroyMedium.className} text-[44px] leading-[48px] font-medium whitespace-nowrap text-white not-italic`}
-              >
-                {card.metric}
-              </p>
-              <p
-                className={`${interRegular.className} text-[13px] leading-[18px] font-normal tracking-[0.04em] text-[#f0f0f0] opacity-90 not-italic`}
-              >
-                {card.label}
-              </p>
-              <div className="relative h-0 w-[80px] shrink-0">
-                <div className="absolute inset-[-1px_0_0_0]">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/measured-proof/line-88.svg"
-                    alt=""
-                    className="block size-full max-w-none"
-                    aria-hidden
-                  />
-                </div>
-              </div>
-              <p
-                className={`${interRegular.className} mt-auto text-[12px] leading-[18px] font-normal text-[#f0f0f0] opacity-80 not-italic`}
-              >
-                {card.description}
-              </p>
-            </div>
-          </article>
+          </div>
         ))}
       </div>
 
-      <div className="mt-[28px] flex w-full flex-col gap-[12px]">
+      <div className="mt-[28px] flex w-full flex-row justify-center gap-[9px]">
         <a
           href="#"
-          className={`${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-center ${GREEN_CTA_SHADOW}`}
+          className={`${gilroyMedium.className} relative flex h-[48px] w-[171px] items-center justify-center ${GREEN_CTA_SHADOW}`}
         >
           <span
             aria-hidden
@@ -155,7 +206,7 @@ export function MeasuredProofMobile() {
         </a>
         <a
           href="#"
-          className={`${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)]`}
+          className={`${gilroyMedium.className} relative flex h-[48px] w-[171px] items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)]`}
         >
           <p className="relative text-[13px] leading-[24px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
             Explore ambient store

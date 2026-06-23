@@ -10,37 +10,69 @@ const GREEN_CTA_SHADOW =
 
 export function LatestNewsMobile() {
   return (
-    <div className="relative flex flex-col items-center px-[24px] py-[48px]">
-      <h2
-        className={`${gilroyMedium.className} max-w-[327px] bg-clip-text text-center text-[28px] leading-[34px] font-medium text-transparent [word-break:break-word] not-italic`}
-        style={{
-          backgroundImage:
-            "linear-gradient(119.407deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
-        }}
-      >
-        Latest from Ambient
-      </h2>
+    <div className="relative flex flex-col items-center py-[48px]">
+      <div className="relative flex flex-col items-center justify-center w-[356px] h-[58px] max-w-full px-[24px]">
+        <div className="absolute top-0 right-0 flex size-[6px] items-center justify-center">
+          <div className="rotate-180 flex-none">
+            <div className="relative size-[6px]">
+              <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+            </div>
+          </div>
+        </div>
+        <div className="absolute bottom-0 right-0 flex size-[6px] items-center justify-center">
+          <div className="-scale-x-100 flex-none">
+            <div className="relative size-[6px]">
+              <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+            </div>
+          </div>
+        </div>
+        <div className="absolute bottom-0 left-0 flex size-[6px] items-center justify-center">
+          <div className="flex-none">
+            <div className="relative size-[6px]">
+              <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+            </div>
+          </div>
+        </div>
+        <div className="absolute top-0 left-0 flex size-[6px] items-center justify-center">
+          <div className="-scale-y-100 flex-none">
+            <div className="relative size-[6px]">
+              <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+            </div>
+          </div>
+        </div>
+
+        <h2
+          className={`${gilroyMedium.className} relative w-full bg-clip-text text-center text-[40px] leading-[44px] font-medium text-transparent [word-break:break-word] not-italic`}
+          style={{
+            backgroundImage:
+              "linear-gradient(119.407deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
+          }}
+        >
+          Latest from Ambient
+        </h2>
+      </div>
+
       <p
-        className={`${interRegular.className} mt-[16px] max-w-[327px] text-center text-[14px] leading-[22px] font-normal text-white opacity-80 not-italic`}
+        className={`${interRegular.className} mt-[16px] w-[356px] max-w-full text-center text-[16px] leading-[24px] font-normal text-white not-italic px-[24px]`}
       >
         Ambient works with partners across silicon, development, distribution,
         and system integration, helping teams move from evaluation to
         deployment with confidence
       </p>
 
-      <div className="mt-[28px] flex w-full snap-x snap-mandatory gap-[14px] overflow-x-auto pb-[8px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="mt-[28px] flex w-full snap-x snap-mandatory gap-[14px] overflow-x-auto pb-[8px] px-[24px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {LATEST_NEWS_ARTICLES.map((article) => (
           <article
             key={article.nodeId}
-            className="relative flex w-[280px] shrink-0 snap-start flex-col overflow-clip bg-[rgba(255,255,255,0.04)]"
+            className="relative flex w-[327px] shrink-0 snap-start flex-col overflow-clip bg-[rgba(255,255,255,0.04)]"
           >
-            <div className="relative h-[150px] w-full shrink-0 overflow-hidden">
+            <div className="relative h-[184px] w-full shrink-0 overflow-hidden">
               <Image
                 src={article.imageSrc}
                 alt=""
                 fill
                 className="object-cover"
-                sizes="280px"
+                sizes="327px"
               />
               <div
                 className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"
@@ -105,7 +137,7 @@ export function LatestNewsMobile() {
           aria-hidden
           className="pointer-events-none absolute inset-0 rounded-[inherit] bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
         />
-        <p className={`${interRegular.className} relative z-10 shrink-0 whitespace-nowrap text-[14px] text-white uppercase not-italic`}>
+        <p className={`${interRegular.className} relative z-10 shrink-0 whitespace-nowrap text-[14px] font-semibold text-white uppercase not-italic tracking-[0.05em]`}>
           Explore more
         </p>
         <Image
@@ -121,31 +153,31 @@ export function LatestNewsMobile() {
           className="pointer-events-none absolute inset-0 overflow-hidden z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
         />
         
-        <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[6px] items-center justify-center">
           <div className="rotate-180 flex-none">
-            <div className="relative size-[4px]">
-              <img src="/hero/corner-tag-2.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <div className="relative size-[6px]">
+              <img src="/hero/corner-tag-2.svg" alt="" width={6} height={6} className="block size-full max-w-none" aria-hidden />
             </div>
           </div>
         </div>
-        <div className="pointer-events-none absolute -top-[0.5px] left-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="pointer-events-none absolute -top-[0.5px] left-0 z-20 flex size-[6px] items-center justify-center">
           <div className="-scale-y-100 flex-none">
-            <div className="relative size-[4px]">
-              <img src="/hero/corner-tag-1.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <div className="relative size-[6px]">
+              <img src="/hero/corner-tag-1.svg" alt="" width={6} height={6} className="block size-full max-w-none" aria-hidden />
             </div>
           </div>
         </div>
-        <div className="pointer-events-none absolute right-0 bottom-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="pointer-events-none absolute right-0 bottom-0 z-20 flex size-[6px] items-center justify-center">
           <div className="-scale-x-100 flex-none">
-            <div className="relative size-[4px]">
-              <img src="/hero/corner-tag-2.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <div className="relative size-[6px]">
+              <img src="/hero/corner-tag-2.svg" alt="" width={6} height={6} className="block size-full max-w-none" aria-hidden />
             </div>
           </div>
         </div>
-        <div className="pointer-events-none absolute bottom-0 left-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="pointer-events-none absolute bottom-0 left-0 z-20 flex size-[6px] items-center justify-center">
           <div className="flex-none">
-            <div className="relative size-[4px]">
-              <img src="/hero/corner-tag-1.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <div className="relative size-[6px]">
+              <img src="/hero/corner-tag-1.svg" alt="" width={6} height={6} className="block size-full max-w-none" aria-hidden />
             </div>
           </div>
         </div>

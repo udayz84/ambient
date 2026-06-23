@@ -13,11 +13,17 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
       <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 bg-black" />
         <div className="absolute inset-0 overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
+          {/* Mobile Background */}
+          <img
+            alt=""
+            src="/mobile/footer.png"
+            className="absolute inset-0 h-full w-full object-cover opacity-100 lg:hidden"
+          />
+          {/* Desktop Background */}
           <img
             alt=""
             src="/footer/footer-bg.png"
-            className="absolute left-[50%] top-[0%] h-full w-auto min-w-[150%] -translate-x-1/2 object-cover opacity-60 lg:left-[-0.02%] lg:top-[-5.03%] lg:h-[97.04%] lg:w-full lg:min-w-0 lg:translate-x-0 lg:opacity-100 lg:max-w-none"
+            className="hidden lg:block absolute left-[-0.02%] top-[-5.03%] h-[97.04%] w-full min-w-0 translate-x-0 opacity-100 max-w-none object-cover"
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.6)] via-[rgba(0,0,0,0.2)] to-[rgba(0,0,0,0.8)] lg:from-[rgba(0,0,0,0.2)] lg:to-[rgba(0,0,0,0)]" />
@@ -31,28 +37,43 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
       ) : null}
 
       <nav
-        className="relative z-[1] grid w-full max-w-[897px] grid-cols-2 gap-x-[16px] gap-y-[48px] px-[20px] text-center text-white lg:absolute lg:top-[626px] lg:left-1/2 lg:-translate-x-1/2 lg:flex lg:flex-row lg:items-center lg:justify-between lg:px-0 lg:gap-0"
+        className="relative z-[1] flex w-full max-w-[897px] flex-col px-[24px] text-white lg:absolute lg:top-[626px] lg:left-1/2 lg:-translate-x-1/2 lg:flex-row lg:items-start lg:justify-between lg:px-0 lg:gap-0"
         aria-label="Footer"
         data-node-id="2379:786"
       >
         {FOOTER_NAV_SECTIONS.map((section) => (
           <div
             key={section.title}
-            className="flex w-full flex-col items-center justify-start gap-[24px] lg:w-[158px] lg:shrink-0 lg:justify-center"
+            className="group flex w-full flex-col border-b border-white/20 lg:w-[158px] lg:shrink-0 lg:border-none"
           >
-            <p
-              className={`${interMedium.className} w-full text-[10px] leading-[1.4] font-medium tracking-[0.4px] whitespace-nowrap text-white uppercase opacity-60 not-italic`}
+            <input
+              type="checkbox"
+              id={`footer-nav-${section.title}`}
+              className="peer hidden"
+              defaultChecked={section.title === "PRODUCTS"}
+            />
+            <label
+              htmlFor={`footer-nav-${section.title}`}
+              className="flex cursor-pointer items-center justify-between py-[20px] lg:cursor-default lg:py-0 lg:justify-center"
             >
-              {section.title}
-            </p>
+              <p
+                className={`${interMedium.className} w-full text-[14px] leading-[1.4] font-medium tracking-[0.4px] whitespace-nowrap text-white/60 uppercase not-italic lg:text-[10px] lg:text-center`}
+              >
+                {section.title}
+              </p>
+              <span className="text-[20px] font-light text-white/60 lg:hidden">
+                <span className="block peer-checked:hidden">+</span>
+                <span className="hidden peer-checked:block">—</span>
+              </span>
+            </label>
             <ul
-              className={`flex flex-col gap-[12px] text-[16px] leading-[1.4] items-center lg:${section.listAlign === "center" ? "items-center" : "items-start"}`}
+              className={`mb-[20px] hidden flex-col gap-[12px] text-[16px] leading-[1.4] items-start peer-checked:flex lg:!flex lg:mb-0 lg:mt-[24px] lg:${section.listAlign === "center" ? "items-center" : "items-start"}`}
             >
               {section.links.map((link) => (
-                <li key={link} className="w-full">
+                <li key={link} className="w-full text-left lg:text-center">
                   <a
                     href="#"
-                    className={`${interRegular.className} font-normal whitespace-nowrap text-white not-italic hover:opacity-80`}
+                    className={`${interRegular.className} font-normal whitespace-nowrap text-[#E4E4E4] not-italic hover:opacity-80 lg:text-white`}
                   >
                     {link}
                   </a>
@@ -64,13 +85,13 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
       </nav>
 
       {/* Bottom Section */}
-      <div className="relative z-[1] mt-[80px] flex w-full flex-col items-center justify-center gap-[48px] px-[20px] lg:absolute lg:top-[940px] lg:left-0 lg:mt-0 lg:flex-row lg:items-end lg:justify-between lg:gap-0 lg:px-[120px]">
+      <div className="relative z-[1] mt-[48px] flex w-full flex-col items-center justify-center gap-[48px] px-[24px] lg:absolute lg:top-[940px] lg:left-0 lg:mt-0 lg:flex-row lg:items-end lg:justify-between lg:gap-0 lg:px-[120px]">
         
         {/* Left Side */}
-        <div className="flex flex-col items-center gap-[32px] lg:flex-row lg:items-end lg:gap-[22px]">
+        <div className="flex w-full flex-col items-center gap-[32px] lg:w-auto lg:flex-row lg:items-end lg:gap-[22px]">
           {/* Socials Block */}
-          <div className="flex flex-col items-center gap-[18px] lg:items-start">
-            <p className={`${gilroyMedium.className} text-[10px] leading-[1.4] font-medium tracking-[0.4px] uppercase text-white opacity-60 not-italic`}>
+          <div className="flex w-full flex-row items-center justify-between border-t border-b border-white/20 py-[24px] lg:w-auto lg:flex-col lg:items-start lg:border-none lg:py-0">
+            <p className={`${gilroyMedium.className} text-[14px] leading-[1.4] font-medium tracking-[0.4px] uppercase text-white/60 not-italic lg:text-[10px]`}>
               CONNECT WITH US
             </p>
             <div className="flex items-center justify-center gap-[32px] lg:justify-start">
@@ -90,38 +111,41 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
           <div className="hidden h-[25px] w-px bg-white/20 lg:mb-[4px] lg:block" />
 
           {/* Legal Links Block */}
-          <div className="flex flex-col items-center gap-[22px] lg:items-start">
-            <p className={`${gilroyMedium.className} text-[10px] leading-[1.4] font-medium tracking-[0.4px] uppercase text-white opacity-60 not-italic`}>
-              Legal pages
+          <div className="flex w-full flex-col items-start gap-[12px] lg:w-auto lg:gap-[22px]">
+            <p className={`${gilroyMedium.className} text-[14px] leading-[1.4] font-medium tracking-[0.4px] uppercase text-white/60 not-italic lg:text-[10px]`}>
+              LEGAL PAGES
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-[12px] pb-[4px] lg:gap-[8px] lg:justify-start">
-              <a href="#" className={`${interRegular.className} text-[12px] leading-[1.4] text-white hover:opacity-80`}>Privacy Policy</a>
-              <div className="relative hidden h-[4px] w-[5px] lg:block">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/footer/dot-separator.svg" alt="" className="block size-full max-w-none" aria-hidden />
+            <div className="flex flex-row flex-wrap items-center justify-start gap-[8px] pb-[4px]">
+              <a href="#" className={`${interRegular.className} text-[12px] leading-[1.4] text-[#E4E4E4] hover:text-white`}>Privacy Policy</a>
+              <div className="relative flex h-[4px] w-[5px] items-center justify-center">
+                <div className="size-[3px] rounded-full bg-white/40" />
               </div>
-              <a href="#" className={`${interRegular.className} text-[12px] leading-[1.4] text-white hover:opacity-80`}>Terms of Service</a>
-              <div className="relative hidden h-[4px] w-[5px] lg:block">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/footer/dot-separator.svg" alt="" className="block size-full max-w-none" aria-hidden />
+              <a href="#" className={`${interRegular.className} text-[12px] leading-[1.4] text-[#E4E4E4] hover:text-white`}>Terms of Service</a>
+              <div className="relative flex h-[4px] w-[5px] items-center justify-center">
+                <div className="size-[3px] rounded-full bg-white/40" />
               </div>
-              <a href="#" className={`${interRegular.className} text-[12px] leading-[1.4] text-white hover:opacity-80`}>Cookie Policy</a>
+              <a href="#" className={`${interRegular.className} text-[12px] leading-[1.4] text-[#E4E4E4] hover:text-white`}>Cookie Policy</a>
             </div>
           </div>
         </div>
 
         {/* Right Side */}
-        <div className="flex flex-col-reverse items-center gap-[24px] pb-[4px] lg:flex-row lg:gap-[48px]">
-          <p className={`${interRegular.className} text-[12px] leading-[1.3] text-white/80`}>
+        <div className="flex w-full flex-col items-start gap-[12px] pb-[4px] lg:w-auto lg:flex-row lg:items-center lg:gap-[48px]">
+          <p className={`${interRegular.className} text-[12px] leading-[1.3] text-[#E4E4E4]`}>
             © 2026 Ambient AI. All rights reserved.
           </p>
           <CraftedByAttribution />
         </div>
       </div>
 
+      <div className="relative z-[1] mt-[64px] flex w-full justify-center px-[24px] lg:hidden mb-[20px]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/mobile/ambient.png" alt="ambient" className="w-[120%] max-w-none object-contain" aria-hidden />
+      </div>
+
       <p
         aria-hidden
-        className={`${gilroyBold.className} pointer-events-none absolute bottom-[-15px] left-1/2 -translate-x-1/2 bg-clip-text text-[110px] leading-none font-bold tracking-[-2px] whitespace-nowrap text-[transparent] opacity-[0.15] lg:top-[1000px] lg:bottom-auto lg:left-[calc(50%-568px)] lg:translate-x-0 lg:text-[300px] lg:tracking-[-6px] lg:opacity-30 not-italic`}
+        className={`${gilroyBold.className} pointer-events-none absolute bottom-[-15px] left-1/2 -translate-x-1/2 bg-clip-text text-[110px] leading-none font-bold tracking-[-2px] whitespace-nowrap text-[transparent] opacity-[0.15] hidden lg:block lg:top-[1000px] lg:bottom-auto lg:left-[calc(50%-568px)] lg:translate-x-0 lg:text-[300px] lg:tracking-[-6px] lg:opacity-30 not-italic`}
         style={{
           backgroundImage:
             "linear-gradient(to right, rgba(46,76,38,0.4), #ddf5d3 50%, rgba(46,76,38,0.4))",

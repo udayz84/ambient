@@ -1,147 +1,148 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
-import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
-import { APPLICATION_TABS, FEATURE_CARDS } from "./applications-data";
-import { Corners } from "../shared/Corners";
+import { gilroyMedium, interRegular, interMedium } from "../hero/fonts";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
 
-const watermarkGradient =
-  "linear-gradient(259.734deg, rgba(255, 255, 255, 0.12) 0.12143%, rgba(255, 255, 255, 0.6) 44.084%, rgba(255, 255, 255, 0) 113.37%)";
-
-const INITIAL_ACTIVE_INDEX = 3;
-
 export function ApplicationsMobile() {
-  const [activeIndex, setActiveIndex] = useState(INITIAL_ACTIVE_INDEX);
-  const activeTab = APPLICATION_TABS[activeIndex];
-
   return (
-    <div className="relative flex flex-col items-center px-[24px] py-[48px]">
-      <h2
-        className={`${gilroyMedium.className} max-w-[327px] bg-clip-text text-center text-[28px] leading-[34px] font-medium text-transparent [word-break:break-word] not-italic`}
-        style={{
-          backgroundImage:
-            "linear-gradient(126.324deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
-        }}
-      >
-        Build the impossible today
-      </h2>
-      <p
-        className={`${interRegular.className} mt-[16px] max-w-[327px] text-center text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
-      >
-        Don&apos;t let legacy design limit your roadmap. Discover the
-        market-differentiating features of the GPX10 and what&apos;s coming next.
-      </p>
+    <div className="relative flex flex-col items-center py-[48px] bg-black overflow-hidden">
+      {/* Header Block with Brackets */}
+      <div className="relative flex flex-col items-center px-[20px] py-[24px] w-full max-w-[340px]">
+        <div className="absolute top-0 right-0 flex size-[6px] items-center justify-center">
+          <div className="rotate-180 flex-none">
+            <div className="relative size-[6px]">
+              <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+            </div>
+          </div>
+        </div>
+        <div className="absolute bottom-0 right-0 flex size-[6px] items-center justify-center">
+          <div className="-scale-x-100 flex-none">
+            <div className="relative size-[6px]">
+              <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+            </div>
+          </div>
+        </div>
+        <div className="absolute bottom-0 left-0 flex size-[6px] items-center justify-center">
+          <div className="flex-none">
+            <div className="relative size-[6px]">
+              <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+            </div>
+          </div>
+        </div>
+        <div className="absolute top-0 left-0 flex size-[6px] items-center justify-center">
+          <div className="-scale-y-100 flex-none">
+            <div className="relative size-[6px]">
+              <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+            </div>
+          </div>
+        </div>
 
-      <div className="mt-[28px] flex w-full gap-[8px] overflow-x-auto pb-[8px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {APPLICATION_TABS.map((label, index) => {
-          const isActive = index === activeIndex;
-          return (
-            <button
-              key={label}
-              type="button"
-              onClick={() => setActiveIndex(index)}
-              className={`${interRegular.className} shrink-0 cursor-pointer px-[14px] py-[8px] text-[12px] leading-[16px] font-normal tracking-[0.04em] whitespace-nowrap uppercase not-italic transition-colors ${
-                isActive
-                  ? "bg-[#f0f0f0] text-[#0e1a0e]"
-                  : "border-[0.5px] border-solid border-white/15 text-white/60"
-              }`}
-            >
-              {label}
-            </button>
-          );
-        })}
+        <h2
+          className={`${gilroyMedium.className} bg-clip-text text-center text-[28px] leading-[34px] font-medium text-transparent [word-break:break-word] not-italic`}
+          style={{
+            backgroundImage:
+              "linear-gradient(126.324deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
+          }}
+        >
+          Build the<br />impossible today
+        </h2>
+        <p
+          className={`${interRegular.className} mt-[16px] text-center text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
+        >
+          Don&apos;t let legacy design limit your roadmap. Discover the
+          market-differentiating features of the GPX10 and what&apos;s coming next.
+        </p>
       </div>
 
-      <div className="relative mt-[16px] flex h-[180px] w-full items-center justify-center overflow-hidden">
-        <p
-          className={`${gilroySemiBold.className} pointer-events-none absolute bg-clip-text text-center text-[56px] leading-[60px] font-semibold tracking-[0.5px] whitespace-nowrap text-transparent uppercase not-italic`}
-          style={{ backgroundImage: watermarkGradient }}
-          aria-hidden
-        >
-          {activeTab}
-        </p>
+      {/* Embedded Feature Image Block edge-to-edge */}
+      <div className="relative mt-[32px] w-full">
         <Image
-          src="/applications/car-hero.png"
+          src="/mobile/Group-97.png"
           alt=""
-          width={984}
-          height={435}
-          className="relative h-full w-full max-w-none object-contain object-center"
-          sizes="327px"
+          width={391}
+          height={372}
+          className="w-full h-auto object-cover"
+          sizes="100vw"
         />
       </div>
 
-      <div className="mt-[24px] flex w-full flex-col gap-[12px]">
-        {[FEATURE_CARDS.left, FEATURE_CARDS.right].map((card) => (
-          <div
-            key={card.title}
-            className="flex flex-col gap-[8px] border-[0.5px] border-solid border-white/10 bg-[rgba(0,0,0,0.4)] p-[20px]"
-          >
-            <p
-              className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium text-white not-italic`}
-            >
-              {card.title}
-            </p>
-            <p
-              className={`${interRegular.className} text-[13px] leading-[20px] font-normal text-[#f0f0f0] opacity-70 not-italic`}
-            >
-              {card.description}
-            </p>
-          </div>
-        ))}
+      {/* Navigation Arrows */}
+      <div className="mt-[24px] flex items-center justify-center gap-[16px]">
+        <button
+          type="button"
+          className="size-[44px] relative"
+          aria-label="Previous Feature"
+        >
+          <img
+            alt=""
+            src="/platform-scale/nav-left.svg"
+            className="absolute inset-0 block size-full max-w-none"
+          />
+        </button>
+        <button
+          type="button"
+          className="size-[44px] relative"
+          aria-label="Next Feature"
+        >
+          <img
+            alt=""
+            src="/platform-scale/nav-right.svg"
+            className="absolute inset-0 block size-full max-w-none"
+          />
+        </button>
       </div>
 
-        <a
-          href="#"
-          className={`${gilroySemiBold.className} relative mt-[28px] flex h-[48px] w-full items-center justify-center ${GREEN_CTA_SHADOW}`}
-        >
-          <span
-            aria-hidden
-            className="pointer-events-none absolute inset-0 rounded-[inherit] bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-          />
-          <span
-            aria-hidden
-            className="pointer-events-none absolute inset-0 overflow-hidden z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
-          />
-          <p className="relative z-10 flex items-center gap-[10px] text-[13px] leading-[normal] font-semibold whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
-            EXPLORE APPLICATION
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/applications/cta-dot.svg" alt="" className="size-[6px]" aria-hidden />
-          </p>
-          
-          {/* Custom Corners that pop out slightly to avoid the inset shadow */}
-          <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">
-            <div className="rotate-180 flex-none">
-              <div className="relative size-[4px]">
-                <img src="/hero/corner-tag-2.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
-              </div>
+      <a
+        href="#"
+        className={`${interMedium.className} relative mt-[40px] flex h-[48px] w-[237px] items-center justify-center ${GREEN_CTA_SHADOW}`}
+      >
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-0 rounded-[inherit] bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+        />
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-0 overflow-hidden z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
+        />
+        <p className="relative z-10 flex items-center gap-[10px] text-[12px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
+          EXPLORE APPLICATION
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/applications/cta-dot.svg" alt="" className="size-[6px]" aria-hidden />
+        </p>
+        
+        {/* Custom Corners that pop out slightly to avoid the inset shadow */}
+        <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">
+          <div className="rotate-180 flex-none">
+            <div className="relative size-[4px]">
+              <img src="/hero/corner-tag-2.svg" alt="" className="block size-full max-w-none" aria-hidden />
             </div>
           </div>
-          <div className="pointer-events-none absolute -top-[0.5px] left-0 z-20 flex size-[4px] items-center justify-center">
-            <div className="-scale-y-100 flex-none">
-              <div className="relative size-[4px]">
-                <img src="/hero/corner-tag-1.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
-              </div>
+        </div>
+        <div className="pointer-events-none absolute -top-[0.5px] left-0 z-20 flex size-[4px] items-center justify-center">
+          <div className="-scale-y-100 flex-none">
+            <div className="relative size-[4px]">
+              <img src="/hero/corner-tag-1.svg" alt="" className="block size-full max-w-none" aria-hidden />
             </div>
           </div>
-          <div className="pointer-events-none absolute right-0 bottom-0 z-20 flex size-[4px] items-center justify-center">
-            <div className="-scale-x-100 flex-none">
-              <div className="relative size-[4px]">
-                <img src="/hero/corner-tag-2.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
-              </div>
+        </div>
+        <div className="pointer-events-none absolute right-0 bottom-0 z-20 flex size-[4px] items-center justify-center">
+          <div className="-scale-x-100 flex-none">
+            <div className="relative size-[4px]">
+              <img src="/hero/corner-tag-2.svg" alt="" className="block size-full max-w-none" aria-hidden />
             </div>
           </div>
-          <div className="pointer-events-none absolute bottom-0 left-0 z-20 flex size-[4px] items-center justify-center">
-            <div className="flex-none">
-              <div className="relative size-[4px]">
-                <img src="/hero/corner-tag-1.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
-              </div>
+        </div>
+        <div className="pointer-events-none absolute bottom-0 left-0 z-20 flex size-[4px] items-center justify-center">
+          <div className="flex-none">
+            <div className="relative size-[4px]">
+              <img src="/hero/corner-tag-1.svg" alt="" className="block size-full max-w-none" aria-hidden />
             </div>
           </div>
-        </a>
+        </div>
+      </a>
     </div>
   );
 }

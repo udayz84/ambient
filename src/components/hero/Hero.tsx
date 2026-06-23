@@ -3,6 +3,7 @@ import { HeroMetrics } from "./HeroMetrics";
 import { HeroScrollIndicator } from "./HeroScrollIndicator";
 import { HeroVisual } from "./HeroVisual";
 import { HeroVisualMedia } from "./HeroVisualMedia";
+import { HeroStat } from "./HeroStat";
 
 const statValueGradient = (deg: number) =>
   `linear-gradient(${deg}deg, rgb(255, 255, 255) 29.352%, rgba(115, 115, 115, 0.5) 98.158%)`;
@@ -109,13 +110,40 @@ export function Hero() {
 
       {/* MOBILE (<1024px) — dedicated layout, desktop is untouched above */}
       <div className="relative flex w-full flex-col min-[1024px]:hidden pt-[100px] pb-[56px]">
+        {/* Background Vertical Lines connecting to Navbar */}
+        <div className="pointer-events-none absolute top-[79px] left-[24px] flex h-full w-0 items-center justify-center">
+          <div className="flex-none rotate-90">
+            <div className="relative h-0 w-[821px]">
+              <div className="absolute inset-[-1px_0_0_0]">
+                <img src="/hero/line-82.svg" alt="" className="block size-full max-w-none" aria-hidden />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="pointer-events-none absolute top-[77px] left-[22px] h-[4px] w-[5px]">
+          <img src="/hero/line-cap-left.svg" alt="" className="absolute inset-0 block size-full max-w-none" aria-hidden />
+        </div>
+
+        <div className="pointer-events-none absolute top-[79px] right-[24px] flex h-full w-0 items-center justify-center">
+          <div className="flex-none rotate-90">
+            <div className="relative h-0 w-[821px]">
+              <div className="absolute inset-[-0.5px_0]">
+                <img src="/hero/line-83.svg" alt="" className="block size-full max-w-none" aria-hidden />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="pointer-events-none absolute top-[77.6px] right-[26.5px] h-[4px] w-[5px]">
+          <img src="/hero/line-cap-right.svg" alt="" className="absolute inset-0 block size-full max-w-none" aria-hidden />
+        </div>
+
         {/* Text Area */}
-        <div className="flex flex-col px-[24px]">
+        <div className="relative z-10 flex flex-col px-[24px] gap-[15px]">
           <h1
-            className={`${gilroyMedium.className} w-full bg-clip-text text-[30px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+            className={`${gilroyMedium.className} w-[320px] max-w-full bg-clip-text text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
             style={{
               backgroundImage:
-                "linear-gradient(101.005deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
+                "linear-gradient(100.849deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
               WebkitBackgroundClip: "text",
               backgroundClip: "text",
             }}
@@ -123,7 +151,7 @@ export function Hero() {
             Limitless AI, reimagined with Ambient efficiency
           </h1>
           <p
-            className={`${interRegular.className} mt-[16px] w-full text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-80`}
+            className={`${interRegular.className} w-[332px] max-w-full text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80`}
           >
             A new class of AI chips that unlocks richer intelligence from
             microwatt to hyperscaler cloud, once constrained by power, space and
@@ -131,85 +159,86 @@ export function Hero() {
           </p>
         </div>
 
-        {/* Video Area - Sized down to be fully visible on mobile */}
-        <div className="relative mt-[32px] w-full h-[300px] overflow-hidden">
+        {/* Video Area - Absolute to overlap stats as per Figma */}
+        <div 
+          className="pointer-events-none absolute top-[180px] left-[50%] h-[398px] w-[716px] -translate-x-1/2 overflow-hidden"
+          style={{
+            maskImage: "url(/hero/mask-shape.svg)",
+            WebkitMaskImage: "url(/hero/mask-shape.svg)",
+            maskPosition: "center",
+            WebkitMaskPosition: "center",
+            maskSize: "100% 100%",
+            WebkitMaskSize: "100% 100%",
+            maskRepeat: "no-repeat",
+            WebkitMaskRepeat: "no-repeat",
+          }}
+        >
           <HeroVisualMedia />
-          <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black via-transparent to-transparent"
-            aria-hidden
-          />
         </div>
 
+        {/* Spacer to push stats down */}
+        <div className="h-[280px] w-full shrink-0" />
+
         {/* Stats Area */}
-        <div className="px-[24px] mt-[32px]">
-          <div className="grid grid-cols-[minmax(0,1fr)_1px_minmax(0,1fr)] gap-[16px]">
-            <div className="flex flex-col items-start gap-[14px]">
-              <p
-                className={`${dmMono.className} text-[10px] tracking-[0.16em] uppercase text-[#9be37f]`}
-              >
-                Real-time AI at edge
-              </p>
-              <p
-                className={`${gilroySemiBold.className} bg-clip-text text-[34px] leading-[1.1] font-semibold text-transparent`}
-                style={{
-                  backgroundImage: statValueGradient(152.329),
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                }}
-              >
-                100%
-              </p>
-              <div className="flex flex-col gap-[8px]">
+        <div className="relative z-10 px-[24px]">
+          <div className="flex flex-col gap-[24px] overflow-hidden">
+            <HeroStat
+              tag="Real-time AI at edge"
+              tagWidth={180}
+              labelOffsetX={74.5}
+              rightBarLeft={170.48}
+              tagNodeId="mobile:744"
+              statNodeId="mobile:743"
+              width="100%"
+              contentClassName="w-full"
+              layout="row"
+              value={
                 <p
-                  className={`${gilroyMedium.className} text-[16px] leading-[22px] font-medium text-white`}
+                  className={`${gilroySemiBold.className} min-w-[min-content] w-[min-content] shrink-0 bg-clip-text text-[40px] leading-[1.2] text-transparent`}
+                  style={{
+                    backgroundImage: statValueGradient(152.329),
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                  }}
                 >
-                  Programmability
+                  100%
                 </p>
-                <p
-                  className={`${interRegular.className} text-[11px] leading-[16px] font-normal text-[#f0f0f0] opacity-65`}
-                >
-                  AI cores with 4 to 32 bit resolution for control in
-                  applications.
-                </p>
-              </div>
+              }
+              title="Programmability"
+              description="AI cores with 4 to 32 bit resolution for control in applications."
+            />
+
+            <div className="relative h-[1px] w-[calc(100%-8px)] ml-[4px] bg-white/10">
+               <div className="absolute top-[-4px] left-0 h-[9px] w-[1px] bg-white opacity-60" />
+               <div className="absolute top-[-4px] right-0 h-[9px] w-[1px] bg-white opacity-60" />
             </div>
 
-            <div className="bg-white/10" />
-
-            <div className="flex flex-col items-start gap-[14px]">
-              <p
-                className={`${dmMono.className} text-[10px] tracking-[0.16em] uppercase text-[#9be37f]`}
-              >
-                Scalable arch.
-              </p>
-              <p
-                className={`${gilroySemiBold.className} bg-clip-text font-semibold leading-[1.1] text-transparent`}
-                style={{
-                  backgroundImage: statValueGradient(154.251),
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                }}
-              >
-                <span className="text-[34px]">512</span>
-                <span className="text-[11px]">{` GOPs`}</span>
-              </p>
-              <div className="flex flex-col gap-[8px]">
+            <HeroStat
+              tag="Scalable arch."
+              tagWidth={129}
+              labelOffsetX={49}
+              rightBarLeft={121.48}
+              tagNodeId="mobile:763"
+              statNodeId="mobile:762"
+              width="100%"
+              contentClassName="w-full"
+              layout="row"
+              value={
                 <p
-                  className={`${gilroyMedium.className} text-[16px] leading-[22px] font-medium text-white`}
+                  className={`${gilroySemiBold.className} min-w-[min-content] w-[min-content] shrink-0 leading-[1.2] text-transparent`}
+                  style={{
+                    backgroundImage: statValueGradient(154.251),
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                  }}
                 >
-                  Peak Performance
+                  <span className="text-[40px] leading-[1.2]">512</span>
+                  <span className="text-[12px] leading-[1.2]">{` GOPs`}</span>
                 </p>
-                <p
-                  className={`${interRegular.className} text-[11px] leading-[16px] font-normal text-[#f0f0f0] opacity-65`}
-                >
-                  Unmatched AI throughput far exceeds typical low-power MCUs.
-                </p>
-              </div>
-            </div>
+              }
+              title="Peak Performance"
+              description="Unmatched AI throughput far exceeds typical low-power MCUs."
+            />
           </div>
         </div>
       </div>

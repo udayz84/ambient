@@ -25,78 +25,145 @@ const FEATURES = [
 
 export function TechnologyMobile() {
   return (
-    <div className="relative w-full">
+    <div className="relative w-full overflow-hidden">
       <div
-        className="pointer-events-none absolute inset-0 overflow-hidden"
+        className="pointer-events-none absolute inset-0 bg-black"
         aria-hidden
-      >
-        <Image
-          src="/technology/bg-image-29.png"
-          alt=""
-          fill
-          className="object-cover object-center opacity-30"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/70 to-black" />
-      </div>
+      />
 
-      <div className="relative flex flex-col items-center px-[24px] py-[48px]">
-        <TagBadge
-          label="Real-time AI at edge"
-          width={180}
-          labelOffsetX={74.5}
-          rightBarLeft={170.48046875}
-        />
+      <div className="relative flex flex-col items-center pt-[48px] pb-[48px] z-10 w-full">
+        
+        {/* Top Content with Padding */}
+        <div className="flex flex-col items-center px-[24px] w-full">
+          <TagBadge
+            label="Real-time AI at edge"
+            width={180}
+            labelOffsetX={74.5}
+            rightBarLeft={170.48046875}
+          />
 
-        <h2
-          className={`${gilroyMedium.className} mt-[16px] max-w-[327px] bg-clip-text text-center text-[28px] leading-[34px] font-medium text-transparent [word-break:break-word] not-italic`}
-          style={{
-            backgroundImage:
-              "linear-gradient(106.923deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
-          }}
-        >
-          Re-architecting the physics of AI compute
-        </h2>
+          <div className="relative inline-flex flex-col items-center justify-center px-[20px] py-[10px] mt-[16px]">
+            <h2
+              className={`${gilroyMedium.className} relative z-10 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+              style={{
+                backgroundImage:
+                  "linear-gradient(106.923deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
+              }}
+            >
+              Re-architecting<br />the physics of<br />AI compute
+            </h2>
 
-        <div className="relative mt-[24px] h-[170px] w-full max-w-[327px]">
+            <div className="absolute top-0 right-0 flex size-[6px] items-center justify-center">
+              <div className="rotate-180 flex-none">
+                <div className="relative size-[6px]">
+                  <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+                </div>
+              </div>
+            </div>
+            <div className="absolute bottom-0 right-0 flex size-[6px] items-center justify-center">
+              <div className="-scale-x-100 flex-none">
+                <div className="relative size-[6px]">
+                  <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+                </div>
+              </div>
+            </div>
+            <div className="absolute bottom-0 left-0 flex size-[6px] items-center justify-center">
+              <div className="flex-none">
+                <div className="relative size-[6px]">
+                  <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+                </div>
+              </div>
+            </div>
+            <div className="absolute top-0 left-0 flex size-[6px] items-center justify-center">
+              <div className="-scale-y-100 flex-none">
+                <div className="relative size-[6px]">
+                  <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Edge-to-Edge Image */}
+        <div className="relative mt-[32px] w-full">
           <Image
-            src="/technology/chip-visual.png"
+            src="/mobile/Image-re-arch.png"
             alt=""
-            fill
-            className="object-contain object-center"
-            sizes="327px"
+            width={389}
+            height={184}
+            className="w-full h-auto object-cover"
+            sizes="100vw"
           />
         </div>
 
-        <div className="mt-[32px] flex w-full flex-col">
-          {FEATURES.map((feature, index) => (
-            <div key={feature.title}>
-              {index > 0 && (
-                <div className="my-[20px] h-px w-full bg-white/10" />
-              )}
-              <div className="flex flex-col items-start gap-[12px]">
-                <div className="relative h-[42px] w-[42px] shrink-0">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={feature.iconSrc}
-                    alt=""
-                    className="absolute inset-0 size-full object-contain"
-                    aria-hidden
-                  />
+        {/* Features Content with Padding */}
+        <div className="flex flex-col items-center px-[24px] w-full">
+          <div className="relative mt-[32px] flex w-full flex-col max-w-[350px]">
+            {FEATURES.map((feature, index) => (
+              <div key={feature.title} className="relative flex flex-col items-center pl-[40px] pr-[20px] border-[0.5px] border-solid border-white/20 bg-[rgba(0,0,0,0.1)] backdrop-blur-[12px] mb-[-0.5px]">
+                {/* Top Right Bracket */}
+                <div className="absolute -top-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center">
+                  <div className="rotate-180 flex-none">
+                    <div className="relative size-[6px]">
+                      <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+                    </div>
+                  </div>
                 </div>
-                <p
-                  className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic`}
-                >
-                  {feature.title}
-                </p>
-                <p
-                  className={`${interRegular.className} text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
-                >
-                  {feature.description}
-                </p>
+                {/* Top Left Bracket */}
+                <div className="absolute -top-[0.5px] -left-[0.5px] z-10 flex size-[6px] items-center justify-center">
+                  <div className="-scale-y-100 flex-none">
+                    <div className="relative size-[6px]">
+                      <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom Right Bracket for the last item to complete the box */}
+                {index === FEATURES.length - 1 && (
+                  <div className="absolute -bottom-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center">
+                    <div className="-scale-x-100 flex-none">
+                      <div className="relative size-[6px]">
+                        <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {/* Bottom Left Bracket for the last item to complete the box */}
+                {index === FEATURES.length - 1 && (
+                  <div className="absolute -bottom-[0.5px] -left-[0.5px] z-10 flex size-[6px] items-center justify-center">
+                    <div className="flex-none">
+                      <div className="relative size-[6px]">
+                        <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex flex-col gap-[3px] items-start py-[20px] relative w-full max-w-[340px]">
+                  <div className="relative size-[33px] shrink-0">
+                    <img
+                      src={feature.iconSrc}
+                      alt=""
+                      className="absolute inset-0 size-full object-contain"
+                      aria-hidden
+                    />
+                  </div>
+                  <p
+                    className={`${gilroyMedium.className} text-[22px] leading-[38px] whitespace-nowrap font-medium text-white not-italic`}
+                  >
+                    {feature.title}
+                  </p>
+                  <div className="flex flex-col items-start w-full relative shrink-0">
+                    <p
+                      className={`${interRegular.className} text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-65 not-italic w-[310px] max-w-full`}
+                    >
+                      {feature.description}
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>

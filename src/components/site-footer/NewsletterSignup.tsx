@@ -11,64 +11,62 @@ export function NewsletterSignup() {
       data-node-id="2379:1393"
       data-name="Group 90"
     >
-      <div className="relative inline-grid w-full grid-cols-[max-content] grid-rows-[max-content] place-items-start leading-[0] max-md:flex max-md:flex-col max-md:items-center">
+      <div className="relative flex flex-col items-center justify-center w-[356px] max-w-full md:w-[498px] py-[12px] md:py-0 md:h-[130px]">
+        <div className="absolute top-0 right-0 flex size-[6px] items-center justify-center">
+          <div className="rotate-180 flex-none">
+            <div className="relative size-[6px]">
+              <Image src={cornerRight} alt="" fill className="object-contain" aria-hidden />
+            </div>
+          </div>
+        </div>
+        <div className="absolute bottom-0 right-0 flex size-[6px] items-center justify-center">
+          <div className="-scale-x-100 flex-none">
+            <div className="relative size-[6px]">
+              <Image src={cornerRight} alt="" fill className="object-contain" aria-hidden />
+            </div>
+          </div>
+        </div>
+        <div className="absolute bottom-0 left-0 flex size-[6px] items-center justify-center">
+          <div className="flex-none">
+            <div className="relative size-[6px]">
+              <Image src={cornerLeft} alt="" fill className="object-contain" aria-hidden />
+            </div>
+          </div>
+        </div>
+        <div className="absolute top-0 left-0 flex size-[6px] items-center justify-center">
+          <div className="-scale-y-100 flex-none">
+            <div className="relative size-[6px]">
+              <Image src={cornerLeft} alt="" fill className="object-contain" aria-hidden />
+            </div>
+          </div>
+        </div>
+
         <h2
-          className={`${gilroyMedium.className} relative z-[1] col-start-1 row-start-1 mt-[14px] max-md:mt-0 w-full bg-clip-text text-center text-[32px] sm:text-[46px] leading-[1.1] font-medium text-[transparent] not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} relative w-full bg-clip-text text-center text-[40px] sm:text-[46px] leading-[44px] sm:leading-[1.1] font-medium text-[transparent] not-italic [word-break:break-word]`}
           style={{
             backgroundImage:
               "linear-gradient(104.93deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
           }}
-          data-node-id="2379:1394"
         >
           <span className="block bg-clip-text">Want to stay in the</span>
           <span className="block bg-clip-text">forefront of AI tech.</span>
         </h2>
-
-        <Corner
-          className="z-[2] col-start-1 row-start-1 mt-0 ml-[549px] max-md:hidden"
-          src={cornerRight}
-          rotate
-        />
-        <Corner
-          className="z-[2] col-start-1 row-start-1 mt-[130px] ml-[549px] max-md:hidden"
-          src={cornerRight}
-          rotate
-          flipY
-        />
-        <div className="relative z-[2] col-start-1 row-start-1 mt-[130px] ml-[51px] size-[4px] max-md:hidden">
-          <Image
-            src={cornerLeft}
-            alt=""
-            width={4}
-            height={4}
-            className="block size-full max-w-none"
-            aria-hidden
-          />
-        </div>
-        <Corner
-          className="z-[2] col-start-1 row-start-1 mt-0 ml-[51px] max-md:hidden"
-          src={cornerLeft}
-          flipY
-        />
-
-        <p
-          className={`${interRegular.className} relative col-start-1 row-start-1 mt-[154px] max-md:mt-[16px] w-full text-center text-[16px] sm:text-[18px] leading-[1.5] font-normal text-white not-italic [word-break:break-word]`}
-          data-node-id="2379:1399"
-        >
-          Sign up to receive regular updates.
-        </p>
       </div>
 
+      <p
+        className={`${interRegular.className} relative mt-[16px] md:mt-[24px] w-full text-center text-[16px] sm:text-[18px] leading-[1.5] font-normal text-white not-italic [word-break:break-word]`}
+      >
+        Sign up to receive regular updates.
+      </p>
+
       <form
-        className="mt-[34px] flex w-full flex-col items-center gap-[16px] md:flex-row md:justify-center md:gap-0"
-        data-node-id="2379:1400"
+        className="mt-[34px] flex w-full max-w-[327px] md:max-w-[458px] flex-row items-center justify-center gap-0"
       >
         <label className="sr-only" htmlFor="newsletter-email">
           Email address
         </label>
         <div
-          className="flex h-[48px] w-full max-w-[300px] shrink-0 items-center border border-solid border-white bg-transparent px-[20px]"
-          data-node-id="2379:1401"
+          className="flex h-[48px] flex-1 shrink-0 items-center border-[0.5px] border-solid border-white/50 bg-[#6ced3f]/10 px-[20px]"
         >
           <input
             id="newsletter-email"
@@ -79,8 +77,7 @@ export function NewsletterSignup() {
         </div>
         <button
           type="submit"
-          className={`${gilroySemiBold.className} relative flex h-[48px] w-full max-w-[300px] md:w-[158px] shrink-0 items-center justify-center text-[14px] leading-[normal] font-semibold text-[#121212] uppercase shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
-          data-node-id="2379:1404"
+          className={`${gilroySemiBold.className} relative flex h-[48px] w-[127px] md:w-[158px] shrink-0 items-center justify-center text-[14px] leading-[normal] font-semibold text-[#121212] uppercase shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
         >
           <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
           <span

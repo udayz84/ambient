@@ -11,10 +11,11 @@ type HeroStatProps = {
   value: React.ReactNode;
   title: string;
   description: string;
-  width: number;
+  width: number | string;
   contentClassName?: string;
   descriptionWidth?: string;
   pl?: number;
+  layout?: "col" | "row";
 };
 
 export function HeroStat({
@@ -31,11 +32,12 @@ export function HeroStat({
   contentClassName = "w-full",
   descriptionWidth,
   pl = 0,
+  layout = "col",
 }: HeroStatProps) {
   return (
     <div
       className="relative flex shrink-0 flex-col content-stretch items-start gap-[12px]"
-      style={{ width, paddingLeft: pl }}
+      style={{ width: typeof width === 'number' ? `${width}px` : width, paddingLeft: pl }}
       data-node-id={statNodeId}
       data-name="Stat"
     >
@@ -46,7 +48,7 @@ export function HeroStat({
         rightBarLeft={rightBarLeft}
         nodeId={tagNodeId}
       />
-      <div className="flex w-full flex-col content-stretch items-start gap-[24px] not-italic">
+      <div className={`flex w-full content-stretch items-start gap-[24px] not-italic ${layout === "row" ? "flex-row" : "flex-col"}`}>
         {value}
         <div
           className={`flex flex-col content-stretch items-start gap-[10px] ${contentClassName}`}

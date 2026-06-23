@@ -64,7 +64,42 @@ export function MeasuredProof() {
       </div>
 
       {/* MOBILE (<1024px) — dedicated layout, desktop is untouched above */}
-      <div className="relative w-full min-[1024px]:hidden">
+      <div className="relative w-full min-[1024px]:hidden overflow-hidden">
+        {/* Background elements for mobile (matching desktop) */}
+        <div className="pointer-events-none absolute top-[30%] right-0 left-0 h-[600px] -translate-y-1/2">
+          <Image
+            src="/measured-proof/bg-image-90.png"
+            alt=""
+            fill
+            className="object-cover object-bottom opacity-75"
+            sizes="100vw"
+          />
+        </div>
+
+        <div className="pointer-events-none absolute top-0 right-0 left-0 h-[260px]">
+          <Image
+            src="/measured-proof/gradient-top.png"
+            alt=""
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+        </div>
+
+        <div className="pointer-events-none absolute right-0 bottom-[-200px] left-0 flex h-[341px] items-center justify-center">
+          <div className="-scale-y-100 h-full w-full flex-none">
+            <div className="relative h-full w-full">
+              <Image
+                src="/measured-proof/gradient-bottom.png"
+                alt=""
+                fill
+                className="object-cover"
+                sizes="100vw"
+              />
+            </div>
+          </div>
+        </div>
+
         <MeasuredProofMobile />
       </div>
     </section>
