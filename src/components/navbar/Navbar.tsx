@@ -21,12 +21,12 @@ function NavChevron() {
 export function Navbar() {
   return (
     <header
-      className={`${interMedium.className} sticky top-0 z-50 h-[78px] w-full overflow-hidden drop-shadow-[0px_6px_12px_rgba(83,216,36,0.12)]`}
+      className={`${interMedium.className} sticky top-0 z-50 h-[78px] w-full overflow-x-clip drop-shadow-[0px_6px_12px_rgba(83,216,36,0.12)]`}
       data-node-id="2379:1569"
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute top-[0.158203125px] left-1/2 h-[77.5px] w-[110%] lg:w-full lg:min-w-[1511px] -translate-x-1/2"
+        className="pointer-events-none absolute top-[0.158203125px] left-1/2 h-[77.5px] w-[105%] lg:w-full lg:min-w-[1511px] -translate-x-1/2"
         data-node-id="2379:1570"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -38,15 +38,34 @@ export function Navbar() {
       </div>
       <div
         aria-hidden
-        className="pointer-events-none absolute top-[35.158203125px] left-1/2 h-[43px] w-[110%] lg:w-full lg:min-w-[1511px] -translate-x-1/2"
+        className="pointer-events-none absolute top-[35.158203125px] left-1/2 h-[43px] w-[105%] lg:w-full lg:min-w-[1511px] -translate-x-1/2"
         data-node-id="2379:1573"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/navbar/vector-36.svg"
           alt=""
-          className="block size-full max-w-none"
+          className="hidden lg:block size-full max-w-none"
         />
+        <img
+          src="/mobile/Vector 36.png"
+          alt=""
+          className="block lg:hidden size-full max-w-none"
+        />
+        {/* Left Connecting Vector */}
+        <div 
+          className="absolute z-20 flex size-[5px] items-center justify-center lg:hidden"
+          style={{ left: "26px", bottom: "-2.5px", transform: "translateX(-50%)" }}
+        >
+          <img src="/hero/line-cap-left.svg" alt="" className="block size-full" />
+        </div>
+        {/* Right Connecting Vector */}
+        <div 
+          className="absolute z-20 flex size-[5px] items-center justify-center lg:hidden"
+          style={{ right: "26px", bottom: "-2.5px", transform: "translateX(50%)" }}
+        >
+          <img src="/hero/line-cap-right.svg" alt="" className="block size-full" />
+        </div>
       </div>
 
       <div className="relative z-10 mx-auto h-[78px] w-full max-w-[1442px]">

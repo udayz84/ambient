@@ -6,7 +6,7 @@ import { NewsletterSignup } from "./NewsletterSignup";
 export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolean }) {
   return (
     <footer
-      className="relative flex min-h-[1252px] h-auto w-full flex-col justify-start overflow-hidden bg-black lg:block lg:h-[1252px] lg:min-h-0 lg:justify-center"
+      className="relative flex h-auto w-full flex-col justify-start overflow-hidden bg-black lg:block lg:h-[1252px] lg:min-h-0 lg:justify-center"
       data-node-id="2379:784"
       data-name="footer"
     >
@@ -29,7 +29,7 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.6)] via-[rgba(0,0,0,0.2)] to-[rgba(0,0,0,0.8)] lg:from-[rgba(0,0,0,0.2)] lg:to-[rgba(0,0,0,0)]" />
       </div>
 
-      <div className="relative mx-auto flex h-full w-full max-w-[1440px] flex-col items-center pt-[100px] pb-[160px] lg:block lg:pt-0 lg:pb-0">
+      <div className="relative mx-auto flex h-full w-full max-w-[1440px] flex-col items-center pt-[100px] pb-0 lg:block lg:pt-0 lg:pb-0">
       {showNewsletter ? (
         <div className="relative z-[1] mb-[80px] flex flex-col items-center lg:mb-0 lg:pt-[120px]">
           <NewsletterSignup />
@@ -54,10 +54,10 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
             />
             <label
               htmlFor={`footer-nav-${section.title}`}
-              className="flex cursor-pointer items-center justify-between py-[20px] lg:cursor-default lg:py-0 lg:justify-center"
+              className="flex cursor-pointer items-center justify-between py-[12px] lg:cursor-default lg:py-0 lg:justify-center"
             >
               <p
-                className={`${interMedium.className} w-full text-[14px] leading-[1.4] font-medium tracking-[0.4px] whitespace-nowrap text-white/60 uppercase not-italic lg:text-[10px] lg:text-center`}
+                className={`${interMedium.className} w-full text-[12px] leading-[1.4] font-medium tracking-[0.4px] whitespace-nowrap text-white/60 uppercase not-italic lg:text-[10px] lg:text-center`}
               >
                 {section.title}
               </p>
@@ -67,7 +67,7 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
               </span>
             </label>
             <ul
-              className={`mb-[20px] hidden flex-col gap-[12px] text-[16px] leading-[1.4] items-start peer-checked:flex lg:!flex lg:mb-0 lg:mt-[24px] lg:${section.listAlign === "center" ? "items-center" : "items-start"}`}
+              className={`mb-[12px] hidden flex-col gap-[12px] text-[14px] leading-[1.4] items-start peer-checked:flex lg:!flex lg:mb-0 lg:mt-[24px] lg:${section.listAlign === "center" ? "items-center" : "items-start"}`}
             >
               {section.links.map((link) => (
                 <li key={link} className="w-full text-left lg:text-center">
@@ -85,23 +85,23 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
       </nav>
 
       {/* Bottom Section */}
-      <div className="relative z-[1] mt-[48px] flex w-full flex-col items-center justify-center gap-[48px] px-[24px] lg:absolute lg:top-[940px] lg:left-0 lg:mt-0 lg:flex-row lg:items-end lg:justify-between lg:gap-0 lg:px-[120px]">
+      <div className="relative z-[1] mt-[48px] flex w-full flex-col items-start justify-center gap-[20px] px-[24px] lg:absolute lg:top-[940px] lg:left-0 lg:mt-0 lg:flex-row lg:items-end lg:justify-between lg:gap-0 lg:px-[120px]">
         
         {/* Left Side */}
-        <div className="flex w-full flex-col items-center gap-[32px] lg:w-auto lg:flex-row lg:items-end lg:gap-[22px]">
+        <div className="flex w-full flex-col items-start gap-[20px] lg:w-auto lg:flex-row lg:items-end lg:gap-[22px]">
           {/* Socials Block */}
-          <div className="flex w-full flex-row items-center justify-between border-t border-b border-white/20 py-[24px] lg:w-auto lg:flex-col lg:items-start lg:border-none lg:py-0">
-            <p className={`${gilroyMedium.className} text-[14px] leading-[1.4] font-medium tracking-[0.4px] uppercase text-white/60 not-italic lg:text-[10px]`}>
+          <div className="flex w-full flex-row items-center justify-start gap-[16px] border-t border-b border-white/20 py-[16px] lg:w-auto lg:flex-col lg:items-start lg:border-none lg:py-0">
+            <p className={`${gilroyMedium.className} text-[10px] leading-[1.4] font-medium tracking-[0.4px] uppercase text-white/60 not-italic lg:text-[10px]`}>
               CONNECT WITH US
             </p>
-            <div className="flex items-center justify-center gap-[32px] lg:justify-start">
-              <a href="#" aria-label="LinkedIn" className="relative size-[24px]">
+            <div className="flex items-center justify-start gap-[16px] lg:justify-start">
+              <a href="#" aria-label="LinkedIn" className="relative size-[20px] lg:size-[24px]">
                 <Image src="/footer/social-linkedin.svg" alt="" fill className="block object-contain" />
               </a>
-              <a href="#" aria-label="X" className="relative size-[24px]">
+              <a href="#" aria-label="X" className="relative size-[20px] lg:size-[24px]">
                 <Image src="/footer/social-x.svg" alt="" fill className="block object-contain" />
               </a>
-              <a href="#" aria-label="YouTube" className="relative size-[24px]">
+              <a href="#" aria-label="YouTube" className="relative size-[20px] lg:size-[24px]">
                 <Image src="/footer/social-youtube.svg" alt="" fill className="block object-contain" />
               </a>
             </div>
@@ -112,35 +112,35 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
 
           {/* Legal Links Block */}
           <div className="flex w-full flex-col items-start gap-[12px] lg:w-auto lg:gap-[22px]">
-            <p className={`${gilroyMedium.className} text-[14px] leading-[1.4] font-medium tracking-[0.4px] uppercase text-white/60 not-italic lg:text-[10px]`}>
+            <p className={`${gilroyMedium.className} text-[12px] leading-[1.4] font-medium tracking-[0.4px] uppercase text-white/60 not-italic lg:text-[10px]`}>
               LEGAL PAGES
             </p>
             <div className="flex flex-row flex-wrap items-center justify-start gap-[8px] pb-[4px]">
-              <a href="#" className={`${interRegular.className} text-[12px] leading-[1.4] text-[#E4E4E4] hover:text-white`}>Privacy Policy</a>
+              <a href="#" className={`${interRegular.className} text-[14px] leading-[1.4] text-[#E4E4E4] hover:text-white`}>Privacy Policy</a>
               <div className="relative flex h-[4px] w-[5px] items-center justify-center">
                 <div className="size-[3px] rounded-full bg-white/40" />
               </div>
-              <a href="#" className={`${interRegular.className} text-[12px] leading-[1.4] text-[#E4E4E4] hover:text-white`}>Terms of Service</a>
+              <a href="#" className={`${interRegular.className} text-[14px] leading-[1.4] text-[#E4E4E4] hover:text-white`}>Terms of Service</a>
               <div className="relative flex h-[4px] w-[5px] items-center justify-center">
                 <div className="size-[3px] rounded-full bg-white/40" />
               </div>
-              <a href="#" className={`${interRegular.className} text-[12px] leading-[1.4] text-[#E4E4E4] hover:text-white`}>Cookie Policy</a>
+              <a href="#" className={`${interRegular.className} text-[14px] leading-[1.4] text-[#E4E4E4] hover:text-white`}>Cookie Policy</a>
             </div>
           </div>
         </div>
 
         {/* Right Side */}
         <div className="flex w-full flex-col items-start gap-[12px] pb-[4px] lg:w-auto lg:flex-row lg:items-center lg:gap-[48px]">
-          <p className={`${interRegular.className} text-[12px] leading-[1.3] text-[#E4E4E4]`}>
+          <p className={`${interRegular.className} text-[10px] leading-[1.3] text-[rgba(255,255,255,0.8)]`}>
             © 2026 Ambient AI. All rights reserved.
           </p>
           <CraftedByAttribution />
         </div>
       </div>
 
-      <div className="relative z-[1] mt-[64px] flex w-full justify-center px-[24px] lg:hidden mb-[20px]">
+      <div className="relative z-[1] mt-[64px] flex w-full justify-center px-[24px] lg:hidden mb-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/mobile/ambient.png" alt="ambient" className="w-[120%] max-w-none object-contain" aria-hidden />
+        <img src="/mobile/ambient.png" alt="ambient" className="w-[120%] max-w-none object-contain block" aria-hidden />
       </div>
 
       <p

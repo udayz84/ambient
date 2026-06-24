@@ -3,8 +3,9 @@
 import { useEffect, useRef } from "react";
 
 const HERO_VISUAL_WEBM = "/hero/Ambient Hero Dummy Video.webm";
+const HERO_VISUAL_MOBILE_MP4 = "/mobile/Keep_camera_angle_202604021718.mp4";
 
-export function HeroVisualMedia() {
+export function HeroVisualMedia({ mobile = false }: { mobile?: boolean }) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -25,7 +26,11 @@ export function HeroVisualMedia() {
   return (
     <video
       ref={videoRef}
-      className="absolute inset-0 size-full max-w-none object-cover object-center"
+      className={
+        mobile
+          ? "absolute inset-0 size-full max-w-none object-cover object-center"
+          : "absolute inset-0 size-full max-w-none object-cover object-center pl-[70px] pt-[102px]"
+      }
       autoPlay
       loop
       muted
@@ -33,7 +38,10 @@ export function HeroVisualMedia() {
       preload="auto"
       aria-hidden
     >
-      <source src={HERO_VISUAL_WEBM} type="video/webm" />
+      <source
+        src={mobile ? HERO_VISUAL_MOBILE_MP4 : HERO_VISUAL_WEBM}
+        type={mobile ? "video/mp4" : "video/webm"}
+      />
     </video>
   );
 }

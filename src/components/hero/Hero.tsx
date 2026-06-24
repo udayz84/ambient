@@ -111,30 +111,23 @@ export function Hero() {
       {/* MOBILE (<1024px) — dedicated layout, desktop is untouched above */}
       <div className="relative flex w-full flex-col min-[1024px]:hidden pt-[100px] pb-[56px]">
         {/* Background Vertical Lines connecting to Navbar */}
-        <div className="pointer-events-none absolute top-[79px] left-[24px] flex h-full w-0 items-center justify-center">
-          <div className="flex-none rotate-90">
-            <div className="relative h-0 w-[821px]">
-              <div className="absolute inset-[-1px_0_0_0]">
-                <img src="/hero/line-82.svg" alt="" className="block size-full max-w-none" aria-hidden />
-              </div>
+        {/* Background Vertical Lines connecting to Navbar */}
+        {/* Left Line */}
+        <div className="pointer-events-none absolute top-[78px] bottom-0 left-[26px] z-0">
+          <div className="absolute top-0 left-1/2 h-full w-[1px] -translate-x-1/2 overflow-hidden">
+            <div className="absolute top-0 left-0 h-full w-[821px] origin-top-left rotate-90 opacity-60">
+              <img src="/hero/line-82.svg" alt="" className="block size-full max-w-none" aria-hidden />
             </div>
           </div>
-        </div>
-        <div className="pointer-events-none absolute top-[77px] left-[22px] h-[4px] w-[5px]">
-          <img src="/hero/line-cap-left.svg" alt="" className="absolute inset-0 block size-full max-w-none" aria-hidden />
         </div>
 
-        <div className="pointer-events-none absolute top-[79px] right-[24px] flex h-full w-0 items-center justify-center">
-          <div className="flex-none rotate-90">
-            <div className="relative h-0 w-[821px]">
-              <div className="absolute inset-[-0.5px_0]">
-                <img src="/hero/line-83.svg" alt="" className="block size-full max-w-none" aria-hidden />
-              </div>
+        {/* Right Line */}
+        <div className="pointer-events-none absolute top-[78px] bottom-0 right-[26px] z-0">
+          <div className="absolute top-0 left-1/2 h-full w-[1px] -translate-x-1/2 overflow-hidden">
+            <div className="absolute top-0 left-0 h-full w-[821px] origin-top-left rotate-90 opacity-60">
+              <img src="/hero/line-83.svg" alt="" className="block size-full max-w-none" aria-hidden />
             </div>
           </div>
-        </div>
-        <div className="pointer-events-none absolute top-[77.6px] right-[26.5px] h-[4px] w-[5px]">
-          <img src="/hero/line-cap-right.svg" alt="" className="absolute inset-0 block size-full max-w-none" aria-hidden />
         </div>
 
         {/* Text Area */}

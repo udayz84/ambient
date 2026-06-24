@@ -89,12 +89,12 @@ export function MeasuredProofMobile() {
           centerLabel={true}
         />
 
-        <div className="relative inline-flex flex-col items-center justify-center px-[45px] py-[20px]">
+        <div className="relative flex w-[354px] max-w-full flex-col items-center justify-center py-[7px]">
           <h2
-            className={`${gilroyMedium.className} relative z-10 bg-clip-text text-center text-[26px] leading-[32px] font-medium text-transparent [word-break:break-word] not-italic`}
+            className={`${gilroyMedium.className} relative z-10 w-[244px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
             style={{
               backgroundImage:
-                "linear-gradient(124.568deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
+                "linear-gradient(102.363deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
             }}
           >
             Measured<br />proof in silicon
@@ -131,7 +131,7 @@ export function MeasuredProofMobile() {
         </div>
       </div>
 
-      <div className="mt-[28px] flex w-full snap-x snap-mandatory gap-[14px] overflow-x-auto pb-[8px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="mt-[28px] flex w-[calc(100%+48px)] -mx-[24px] px-[24px] snap-x snap-mandatory gap-[14px] overflow-x-auto pb-[8px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden after:w-[10px] after:shrink-0 after:content-['']">
         {DESKTOP_CARDS.map((card, index) => (
           <div
             key={card.nodeId}

@@ -46,17 +46,54 @@ export function DeveloperPlatformMobile() {
       </div>
 
       <div className="relative flex flex-col items-center py-[48px]">
-        <h2
-          className={`${gilroyMedium.className} max-w-[327px] bg-clip-text text-center text-[28px] leading-[34px] font-medium text-transparent [word-break:break-word] not-italic px-[24px]`}
-          style={{
-            backgroundImage:
-              "linear-gradient(126.324deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
-          }}
-        >
-          Build the impossible today
-        </h2>
+        <div className="relative inline-grid grid-cols-[max-content] grid-rows-[max-content] place-items-start leading-[0]">
+          <h2
+            className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[7px] ml-[3px] w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic whitespace-pre-wrap`}
+            style={{
+              backgroundImage:
+                "linear-gradient(107.454deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
+            }}
+          >
+            Build the <br />
+            impossible today
+          </h2>
+          
+          <div className="relative col-start-1 row-start-1 mt-0 ml-[353.65px] flex size-[4px] items-center justify-center">
+            <div className="rotate-180 flex-none">
+              <div className="relative size-[4px]">
+                <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+                  <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="relative col-start-1 row-start-1 mt-[70px] ml-[353.65px] flex size-[4px] items-center justify-center">
+            <div className="-scale-y-100 rotate-180 flex-none">
+              <div className="relative size-[4px]">
+                <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+                  <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="relative col-start-1 row-start-1 mt-[70px] ml-0 size-[4px]">
+            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+              <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+            </div>
+          </div>
+          <div className="relative col-start-1 row-start-1 mt-0 ml-0 flex size-[4px] items-center justify-center">
+            <div className="-scale-y-100 flex-none">
+              <div className="relative size-[4px]">
+                <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+                  <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <p
-          className={`${interRegular.className} mt-[16px] max-w-[327px] text-center text-[14px] leading-[22px] font-normal text-white opacity-80 not-italic px-[24px]`}
+          className={`${interRegular.className} mt-[10px] w-[350px] text-center text-[14px] leading-[16px] font-normal text-white not-italic [word-break:break-word] px-[12px]`}
         >
           Don&apos;t let legacy design limit your roadmap. Discover the
           market-differentiating features of the GPX10 and what&apos;s coming

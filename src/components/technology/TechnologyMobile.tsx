@@ -100,7 +100,7 @@ export function TechnologyMobile() {
         <div className="flex flex-col items-center px-[24px] w-full">
           <div className="relative mt-[32px] flex w-full flex-col max-w-[350px]">
             {FEATURES.map((feature, index) => (
-              <div key={feature.title} className="relative flex flex-col items-center pl-[40px] pr-[20px] border-[0.5px] border-solid border-white/20 bg-[rgba(0,0,0,0.1)] backdrop-blur-[12px] mb-[-0.5px]">
+              <div key={feature.title} className="relative w-full flex flex-col items-start px-[20px] border-[0.5px] border-solid border-white/20 bg-[rgba(0,0,0,0.1)] backdrop-blur-[12px] mb-[-0.5px]">
                 {/* Top Right Bracket */}
                 <div className="absolute -top-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center">
                   <div className="rotate-180 flex-none">
@@ -139,7 +139,7 @@ export function TechnologyMobile() {
                   </div>
                 )}
 
-                <div className="flex flex-col gap-[3px] items-start py-[20px] relative w-full max-w-[340px]">
+                <div className="flex flex-col gap-[3px] items-start py-[20px] relative w-full">
                   <div className="relative size-[33px] shrink-0">
                     <img
                       src={feature.iconSrc}
@@ -149,13 +149,13 @@ export function TechnologyMobile() {
                     />
                   </div>
                   <p
-                    className={`${gilroyMedium.className} text-[22px] leading-[38px] whitespace-nowrap font-medium text-white not-italic`}
+                    className={`${gilroyMedium.className} [word-break:break-word] text-[22px] leading-[38px] whitespace-nowrap text-white not-italic shrink-0 relative`}
                   >
                     {feature.title}
                   </p>
                   <div className="flex flex-col items-start w-full relative shrink-0">
                     <p
-                      className={`${interRegular.className} text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-65 not-italic w-[310px] max-w-full`}
+                      className={`${interRegular.className} [word-break:break-word] text-[14px] leading-[22px] text-[#f0f0f0] opacity-65 not-italic w-[310px] max-w-full shrink-0 relative`}
                     >
                       {feature.description}
                     </p>

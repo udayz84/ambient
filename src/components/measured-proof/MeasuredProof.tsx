@@ -68,7 +68,7 @@ export function MeasuredProof() {
         {/* Background elements for mobile (matching desktop) */}
         <div className="pointer-events-none absolute top-[30%] right-0 left-0 h-[600px] -translate-y-1/2">
           <Image
-            src="/measured-proof/bg-image-90.png"
+            src="/mobile/image 90.png"
             alt=""
             fill
             className="object-cover object-bottom opacity-75"

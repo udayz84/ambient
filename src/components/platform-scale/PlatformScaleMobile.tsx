@@ -11,6 +11,109 @@ function getVirtualProduct(virtualIndex: number) {
   return GPX_PRODUCTS[((virtualIndex % TOTAL) + TOTAL) % TOTAL];
 }
 
+const MOBILE_TRANSITION =
+  "transform 500ms cubic-bezier(0.4,0,0.2,1), opacity 500ms cubic-bezier(0.4,0,0.2,1), width 500ms cubic-bezier(0.4,0,0.2,1), height 500ms cubic-bezier(0.4,0,0.2,1)";
+
+type MobileSlot = {
+  translateX: number;
+  chipTop: number;
+  width: number;
+  height: number;
+  opacity: number;
+  zIndex: number;
+  isHero: boolean;
+  hasLabel: boolean;
+  labelTop: number;
+  labelFontSize: number;
+  labelOpacity: number;
+  labelPaddingX: number;
+  labelPaddingY: number;
+  labelTracking: string;
+};
+
+const MOBILE_SLOT: Record<-2 | -1 | 0 | 1 | 2, MobileSlot> = {
+  [-2]: {
+    translateX: -377.5,
+    chipTop: 29.6,
+    width: 123.89,
+    height: 128.48,
+    opacity: 0.25,
+    zIndex: 28,
+    isHero: false,
+    hasLabel: true,
+    labelTop: 137.02,
+    labelFontSize: 10.512,
+    labelOpacity: 0.5,
+    labelPaddingX: 8.176,
+    labelPaddingY: 2.336,
+    labelTracking: "-0.1051px",
+  },
+  [-1]: {
+    translateX: -204,
+    chipTop: 15,
+    width: 152.04,
+    height: 157.68,
+    opacity: 0.5,
+    zIndex: 29,
+    isHero: false,
+    hasLabel: true,
+    labelTop: 149.87,
+    labelFontSize: 18.687,
+    labelOpacity: 0.75,
+    labelPaddingX: 11.68,
+    labelPaddingY: 5.84,
+    labelTracking: "-0.1869px",
+  },
+  [0]: {
+    translateX: 0,
+    chipTop: 0,
+    width: 187.89,
+    height: 187.68,
+    opacity: 1,
+    zIndex: 30,
+    isHero: true,
+    hasLabel: false,
+    labelTop: 0,
+    labelFontSize: 0,
+    labelOpacity: 0,
+    labelPaddingX: 0,
+    labelPaddingY: 0,
+    labelTracking: "0px",
+  },
+  [1]: {
+    translateX: 204,
+    chipTop: 15,
+    width: 152.04,
+    height: 157.68,
+    opacity: 0.5,
+    zIndex: 29,
+    isHero: false,
+    hasLabel: true,
+    labelTop: 149.87,
+    labelFontSize: 18.687,
+    labelOpacity: 0.75,
+    labelPaddingX: 11.68,
+    labelPaddingY: 5.84,
+    labelTracking: "-0.1869px",
+  },
+  [2]: {
+    translateX: 377.5,
+    chipTop: 29.6,
+    width: 123.89,
+    height: 128.48,
+    opacity: 0.25,
+    zIndex: 28,
+    isHero: false,
+    hasLabel: true,
+    labelTop: 137.02,
+    labelFontSize: 10.512,
+    labelOpacity: 0.5,
+    labelPaddingX: 8.176,
+    labelPaddingY: 2.336,
+    labelTracking: "-0.1051px",
+  },
+};
+
 export function PlatformScaleMobile() {
   const [virtualIndex, setVirtualIndex] = useState(TOTAL * 10);
 
@@ -19,7 +122,7 @@ export function PlatformScaleMobile() {
   const goPrevious = useCallback(() => setVirtualIndex((c) => c - 1), []);
   const goNext = useCallback(() => setVirtualIndex((c) => c + 1), []);
 
-  const items = [-1, 0, 1].map((offset) => ({
+  const items = ([-2, -1, 0, 1, 2] as const).map((offset) => ({
     offset,
     product: getVirtualProduct(virtualIndex + offset),
     key: `v-${virtualIndex + offset}`,
@@ -31,20 +134,22 @@ export function PlatformScaleMobile() {
         className="pointer-events-none absolute inset-0 overflow-hidden"
         aria-hidden
       >
-        <Image
-          src="/platform-scale/bg-image-69.png"
-          alt=""
-          fill
-          className="object-cover object-bottom opacity-80"
-          sizes="100vw"
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(0, 0, 0, 0) 60%, rgb(0, 0, 0) 100%), linear-gradient(180deg, rgb(0, 0, 0) 10%, rgba(0, 0, 0, 0) 40%)",
-          }}
-        />
+        <div className="absolute inset-x-0 top-0 w-full" style={{ aspectRatio: "393 / 628" }}>
+          <Image
+            src="/mobile/image 69.png"
+            alt=""
+            fill
+            className="object-cover object-bottom !h-[125%]"
+            sizes="100vw"
+          />
+          <div
+            className="absolute inset-x-0 top-0 w-full !h-[125%]"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(0, 0, 0, 0) 70%, rgb(0, 0, 0) 95%), linear-gradient(180deg, rgb(0, 0, 0) 17.653%, rgba(0, 0, 0, 0) 55.299%)",
+            }}
+          />
+        </div>
       </div>
 
       <div className="relative flex flex-col items-center px-[24px] pt-[48px] z-10 w-full">
@@ -100,67 +205,111 @@ export function PlatformScaleMobile() {
         </div>
 
         {/* Carousel Container */}
-        <div className="relative w-full h-[280px] mt-[20px] flex items-center justify-center">
+        <div className="relative mt-[40px] h-[200px] w-full">
           {items.map(({ key, product, offset }) => {
-            const isCenter = offset === 0;
-            const translateX = offset * 130;
-            const scale = isCenter ? 1 : 0.65;
-            const opacity = isCenter ? 1 : 0.4;
-            const zIndex = isCenter ? 10 : 0;
+            const slot = MOBILE_SLOT[offset];
 
             return (
               <div
                 key={key}
-                className="absolute top-1/2 left-1/2 flex flex-col items-center transition-all duration-500 ease-in-out"
+                className="absolute left-1/2 top-0"
                 style={{
-                  transform: `translate(calc(-50% + ${translateX}px), -50%) scale(${scale})`,
-                  opacity,
-                  zIndex,
+                  transform: `translateX(${slot.translateX}px)`,
+                  opacity: slot.opacity,
+                  zIndex: slot.zIndex,
+                  transition: MOBILE_TRANSITION,
                 }}
+                aria-hidden={!slot.isHero}
               >
-                <div className="relative h-[170px] w-[180px] shrink-0">
-                  <Image
-                    src="/platform-scale/chip-hero.png"
-                    alt=""
-                    fill
-                    className="object-contain object-bottom"
-                    sizes="180px"
-                  />
-                  {/* Glowing frame for center chip */}
+                {/* Chip */}
+                <div
+                  className="absolute left-0 top-0"
+                  style={{
+                    width: slot.width,
+                    height: slot.height,
+                    transform: `translate(-50%, ${slot.chipTop}px)`,
+                    transition: MOBILE_TRANSITION,
+                  }}
+                >
+                  {/* Hero layer (image 77 + frame) */}
                   <div
-                    className="absolute inset-0 transition-opacity duration-500"
-                    style={{ opacity: isCenter ? 1 : 0 }}
+                    className="absolute inset-0"
+                    style={{
+                      opacity: slot.isHero ? 1 : 0,
+                      transition: "opacity 500ms cubic-bezier(0.4,0,0.2,1)",
+                    }}
                   >
-                    <div className="absolute top-[-7.7px] right-[-6.9px] bottom-[-11px] left-[-6.9px]">
-                      <div className="absolute inset-[-0.15%]">
-                        <img
-                          alt=""
-                          src="/platform-scale/chip-frame.svg"
-                          className="block w-full h-full object-fill"
-                          aria-hidden
-                        />
+                    <div className="relative size-full shadow-[0px_12.264px_11.68px_0px_#0d2006]">
+                      <Image
+                        src="/mobile/image 77.png"
+                        alt=""
+                        fill
+                        className="object-bottom"
+                        sizes="188px"
+                      />
+                      <div className="absolute top-[-7.7px] right-[-6.9px] bottom-[-11px] left-[-6.9px]">
+                        <div className="absolute inset-[-0.15%]">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            alt=""
+                            src="/platform-scale/chip-frame.svg"
+                            className="block size-full object-fill"
+                            aria-hidden
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                
-                <div
-                  className="mt-[16px] flex shrink-0 items-center justify-center border-[0.5px] border-solid border-white/15 bg-[rgba(0,0,0,0.4)] px-[16px] py-[6px] transition-opacity duration-500"
-                  style={{ opacity: isCenter ? 0 : 1 }}
-                >
-                  <p
-                    className={`${gilroyMedium.className} text-center text-[20px] leading-[28px] font-medium tracking-[-0.2px] whitespace-nowrap text-white not-italic`}
+                  {/* Side layer (image 81) */}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      opacity: slot.isHero ? 0 : 1,
+                      transition: "opacity 500ms cubic-bezier(0.4,0,0.2,1)",
+                    }}
                   >
-                    {product.label}
-                  </p>
+                    <div className="relative size-full">
+                      <Image
+                        src="/mobile/image 81.png"
+                        alt=""
+                        fill
+                        className="object-contain object-bottom"
+                        sizes={`${slot.width}px`}
+                      />
+                    </div>
+                  </div>
                 </div>
+
+                {/* Label */}
+                {slot.hasLabel && (
+                  <div
+                    className="absolute left-0 top-0 flex items-center justify-center bg-[rgba(0,0,0,0.25)]"
+                    style={{
+                      transform: `translate(-50%, ${slot.labelTop}px)`,
+                      padding: `${slot.labelPaddingY}px ${slot.labelPaddingX}px`,
+                      opacity: slot.labelOpacity,
+                      transition: MOBILE_TRANSITION,
+                    }}
+                  >
+                    <p
+                      className={`${gilroyMedium.className} text-center whitespace-nowrap text-white not-italic [word-break:break-word]`}
+                      style={{
+                        fontSize: `${slot.labelFontSize}px`,
+                        lineHeight: "21.023px",
+                        letterSpacing: slot.labelTracking,
+                      }}
+                    >
+                      {product.label}
+                    </p>
+                  </div>
+                )}
               </div>
             );
           })}
         </div>
 
         {/* Stat Panel */}
-        <div className="relative mt-[24px] flex w-full max-w-[340px] flex-col items-center gap-[12px] bg-[rgba(0,0,0,0.1)] backdrop-blur-[12px] border-[0.5px] border-solid border-white/15 px-[20px] py-[24px]">
+        <div className="relative mt-[58px] flex w-full max-w-[340px] flex-col items-center gap-[12px] bg-[rgba(0,0,0,0.1)] backdrop-blur-[12px] border-[0.5px] border-solid border-white/15 px-[20px] py-[24px]">
           {/* Top Right Bracket */}
           <div className="absolute -top-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center">
             <div className="rotate-180 flex-none">
@@ -207,7 +356,7 @@ export function PlatformScaleMobile() {
         </div>
 
         {/* Arrows */}
-        <div className="mt-[24px] flex items-center gap-[20px]">
+        <div className="mt-[34px] flex items-center gap-[20px]">
           <button
             type="button"
             onClick={goPrevious}
@@ -237,7 +386,7 @@ export function PlatformScaleMobile() {
         {/* CTA */}
         <a
           href="#"
-          className={`${interMedium.className} relative mt-[40px] flex h-[48px] w-[237px] items-center justify-center shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+          className={`${interMedium.className} relative mt-[31px] flex h-[48px] w-[237px] items-center justify-center shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
         >
           <span
             aria-hidden

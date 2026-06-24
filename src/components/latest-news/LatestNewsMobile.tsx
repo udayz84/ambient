@@ -11,53 +11,56 @@ const GREEN_CTA_SHADOW =
 export function LatestNewsMobile() {
   return (
     <div className="relative flex flex-col items-center py-[48px]">
-      <div className="relative flex flex-col items-center justify-center w-[356px] h-[58px] max-w-full px-[24px]">
-        <div className="absolute top-0 right-0 flex size-[6px] items-center justify-center">
-          <div className="rotate-180 flex-none">
-            <div className="relative size-[6px]">
-              <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+      <div className="relative flex flex-col items-center">
+        <div className="relative px-[16px] py-[4px]">
+          <div className="absolute top-0 right-0 flex size-[4px] items-center justify-center">
+            <div className="rotate-180 flex-none">
+              <div className="relative size-[4px]">
+                <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+              </div>
             </div>
           </div>
-        </div>
-        <div className="absolute bottom-0 right-0 flex size-[6px] items-center justify-center">
-          <div className="-scale-x-100 flex-none">
-            <div className="relative size-[6px]">
-              <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+          <div className="absolute bottom-0 right-0 flex size-[4px] items-center justify-center">
+            <div className="-scale-x-100 flex-none">
+              <div className="relative size-[4px]">
+                <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+              </div>
             </div>
           </div>
-        </div>
-        <div className="absolute bottom-0 left-0 flex size-[6px] items-center justify-center">
-          <div className="flex-none">
-            <div className="relative size-[6px]">
-              <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+          <div className="absolute bottom-0 left-0 flex size-[4px] items-center justify-center">
+            <div className="flex-none">
+              <div className="relative size-[4px]">
+                <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+              </div>
             </div>
           </div>
-        </div>
-        <div className="absolute top-0 left-0 flex size-[6px] items-center justify-center">
-          <div className="-scale-y-100 flex-none">
-            <div className="relative size-[6px]">
-              <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+          <div className="absolute top-0 left-0 flex size-[4px] items-center justify-center">
+            <div className="-scale-y-100 flex-none">
+              <div className="relative size-[4px]">
+                <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+              </div>
             </div>
           </div>
-        </div>
 
-        <h2
-          className={`${gilroyMedium.className} relative w-full bg-clip-text text-center text-[40px] leading-[44px] font-medium text-transparent [word-break:break-word] not-italic`}
-          style={{
-            backgroundImage:
-              "linear-gradient(119.407deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
-          }}
-        >
-          Latest from Ambient
-        </h2>
+          <h2
+            className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[44px] font-medium text-transparent not-italic whitespace-nowrap`}
+            style={{
+              backgroundImage:
+                "linear-gradient(119.407deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
+            }}
+          >
+            Latest from Ambient
+          </h2>
+        </div>
       </div>
 
       <p
-        className={`${interRegular.className} mt-[16px] w-[356px] max-w-full text-center text-[16px] leading-[24px] font-normal text-white not-italic px-[24px]`}
+        className={`${interRegular.className} mt-[16px] w-full max-w-[375px] text-center text-[14px] leading-[20px] font-normal text-white not-italic px-[8px]`}
       >
-        Ambient works with partners across silicon, development, distribution,
-        and system integration, helping teams move from evaluation to
-        deployment with confidence
+        Ambient works with partners across silicon,<br />
+        development, distribution, and system integration,<br />
+        helping teams move from evaluation to deployment<br />
+        with confidence
       </p>
 
       <div className="mt-[28px] flex w-full snap-x snap-mandatory gap-[14px] overflow-x-auto pb-[8px] px-[24px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">

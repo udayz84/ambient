@@ -11,38 +11,14 @@ export function NewsletterSignup() {
       data-node-id="2379:1393"
       data-name="Group 90"
     >
-      <div className="relative flex flex-col items-center justify-center w-[356px] max-w-full md:w-[498px] py-[12px] md:py-0 md:h-[130px]">
-        <div className="absolute top-0 right-0 flex size-[6px] items-center justify-center">
-          <div className="rotate-180 flex-none">
-            <div className="relative size-[6px]">
-              <Image src={cornerRight} alt="" fill className="object-contain" aria-hidden />
-            </div>
-          </div>
-        </div>
-        <div className="absolute bottom-0 right-0 flex size-[6px] items-center justify-center">
-          <div className="-scale-x-100 flex-none">
-            <div className="relative size-[6px]">
-              <Image src={cornerRight} alt="" fill className="object-contain" aria-hidden />
-            </div>
-          </div>
-        </div>
-        <div className="absolute bottom-0 left-0 flex size-[6px] items-center justify-center">
-          <div className="flex-none">
-            <div className="relative size-[6px]">
-              <Image src={cornerLeft} alt="" fill className="object-contain" aria-hidden />
-            </div>
-          </div>
-        </div>
-        <div className="absolute top-0 left-0 flex size-[6px] items-center justify-center">
-          <div className="-scale-y-100 flex-none">
-            <div className="relative size-[6px]">
-              <Image src={cornerLeft} alt="" fill className="object-contain" aria-hidden />
-            </div>
-          </div>
-        </div>
+      <div className="relative inline-grid grid-cols-[max-content] grid-rows-[max-content] place-items-center leading-[0]">
+        <Corner className="absolute top-0 right-0" src={cornerRight} rotate={true} />
+        <Corner className="absolute bottom-0 right-0" src={cornerRight} rotate={true} flipY={true} />
+        <Corner className="absolute bottom-0 left-0" src={cornerLeft} />
+        <Corner className="absolute top-0 left-0" src={cornerLeft} flipY={true} />
 
         <h2
-          className={`${gilroyMedium.className} relative w-full bg-clip-text text-center text-[40px] sm:text-[46px] leading-[44px] sm:leading-[1.1] font-medium text-[transparent] not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} relative bg-clip-text text-center text-[32px] sm:text-[46px] leading-[36px] sm:leading-[1.1] font-medium text-[transparent] not-italic px-[16px] py-[8px]`}
           style={{
             backgroundImage:
               "linear-gradient(104.93deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -60,7 +36,7 @@ export function NewsletterSignup() {
       </p>
 
       <form
-        className="mt-[34px] flex w-full max-w-[327px] md:max-w-[458px] flex-row items-center justify-center gap-0"
+        className="mt-[34px] flex w-full max-w-[353px] md:max-w-[458px] flex-row items-center justify-center gap-0"
       >
         <label className="sr-only" htmlFor="newsletter-email">
           Email address
@@ -77,7 +53,7 @@ export function NewsletterSignup() {
         </div>
         <button
           type="submit"
-          className={`${gilroySemiBold.className} relative flex h-[48px] w-[127px] md:w-[158px] shrink-0 items-center justify-center text-[14px] leading-[normal] font-semibold text-[#121212] uppercase shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+          className={`${gilroySemiBold.className} relative flex h-[48px] w-[99px] md:w-[158px] shrink-0 items-center justify-center text-[14px] leading-[normal] font-semibold text-[#121212] uppercase shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
         >
           <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
           <span
