@@ -1,11 +1,12 @@
 import Image from "next/image";
-import { gilroyMedium, gilroySemiBold, interRegular, interSemiBold } from "../hero/fonts";
+import { dmMono, gilroyMedium, gilroySemiBold, interRegular, interSemiBold } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { SILICON_PARTNERS } from "../ecosystem/ecosystem-data";
 import {
   ADVISORY_BOARD,
   LEADERSHIP_TEAM,
 } from "./company-leadership-data";
+import { LeadershipCarousel } from "./CompanyLeadershipCarousel";
 import {
   COMPANY_COMPACT_ARTICLES,
   COMPANY_FEATURED_ARTICLE,
@@ -93,7 +94,7 @@ const HERO_IMG_GRADIENT =
 function CompanyHeroMobile() {
   return (
     <section
-      className="relative w-full overflow-hidden bg-black pt-[120px]"
+      className="relative w-full overflow-hidden bg-black pt-[78px]"
       aria-label="Company hero"
       data-node-id="3244:5532"
       data-name="Banner"
@@ -101,7 +102,7 @@ function CompanyHeroMobile() {
       <div className="relative mx-auto h-[557px] w-full">
         {/* 3244:6106 — hero background image */}
         <div
-          className="pointer-events-none absolute right-[-60px] top-[189px] z-0 h-[450px] w-[765px] overflow-hidden"
+          className="pointer-events-none absolute inset-x-0 top-[189px] overflow-hidden"
           data-node-id="3244:6106"
           data-name="image 125"
           aria-hidden
@@ -110,7 +111,7 @@ function CompanyHeroMobile() {
           <img
             src="/mobile/company/hero.png"
             alt=""
-            className="absolute top-0 left-0 h-full w-[99.97%] max-w-none object-cover"
+            className="block w-full"
           />
           <div
             className="absolute inset-0"
@@ -118,35 +119,34 @@ function CompanyHeroMobile() {
           />
         </div>
 
-        {/* 3244:5534 — headline + body */}
+        {/* 3244:5535 — title corner brackets (Group 78 bounds: x20 y4 w352 h66) */}
         <div
-          className="absolute top-0 left-0 z-10 flex w-full flex-col items-center gap-[15px] px-[20px]"
-          data-node-id="3244:5534"
-          data-name="Frame 1000003879"
+          className="pointer-events-none absolute left-[20px] top-[4px] h-[66px] w-[352px]"
+          data-node-id="3244:5535"
+          data-name="Group 78"
+          aria-hidden
         >
-          <div
-            className="relative w-fit"
-            data-node-id="3244:5535"
-            data-name="Group 78"
-          >
-            <h1
-              className={`${gilroyMedium.className} w-[321px] max-w-full bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
-              style={{ backgroundImage: gradient("100.882deg") }}
-              data-node-id="3244:5536"
-            >
-              A new paradigm for efficient AI compute
-            </h1>
-            <Corners />
-          </div>
-          <p
-            className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
-            data-node-id="3244:5541"
-          >
-            We build energy-aware, programmable, mixed-signal AI processors that
-            unlock orders-of-magnitude improvements in performance-per-watt,
-            enabling scalable intelligence across edge, enterprise, and cloud.
-          </p>
+          <Corners />
         </div>
+
+        {/* 3244:5536 — headline (x29 y7 w321) */}
+        <h1
+          className={`${gilroyMedium.className} absolute left-[29px] top-[7px] w-[321px] max-w-full bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+          style={{ backgroundImage: gradient("100.882deg") }}
+          data-node-id="3244:5536"
+        >
+          A new paradigm for efficient AI compute
+        </h1>
+
+        {/* 3244:5541 — body (x28 y130 w336) */}
+        <p
+          className={`${interRegular.className} absolute left-[28px] top-[130px] w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+          data-node-id="3244:5541"
+        >
+          We build energy-aware, programmable, mixed-signal AI processors that
+          unlock orders-of-magnitude improvements in performance-per-watt,
+          enabling scalable intelligence across edge, enterprise, and cloud.
+        </p>
       </div>
     </section>
   );
@@ -225,95 +225,64 @@ function CompanyMissionMobile() {
 }
 
 /* ------------------------------- LEADERSHIP ------------------------------- */
-function PortraitCard({
-  imageSrc,
-  name,
-  role,
-  href,
-}: {
-  imageSrc: string;
-  name: string;
-  role: string;
-  href: string;
-}) {
-  return (
-    <article className="relative flex w-[220px] shrink-0 snap-start flex-col gap-[12px]">
-      <div className="relative h-[260px] w-full overflow-hidden border-[0.5px] border-solid border-white/15">
-        <Image
-          src={imageSrc}
-          alt={name}
-          fill
-          className="object-cover object-top"
-          sizes="220px"
-        />
-      </div>
-      <div className="flex items-center justify-between gap-[8px]">
-        <div className="flex flex-col">
-          <p className={`${gilroyMedium.className} text-[16px] leading-[20px] font-medium text-white not-italic`}>
-            {name}
-          </p>
-          {role ? (
-            <p className={`${interRegular.className} text-[12px] leading-[16px] font-normal text-white opacity-60 not-italic`}>
-              {role}
-            </p>
-          ) : null}
-        </div>
-        <Image
-          src="/company/linkedin-icon.svg"
-          alt=""
-          width={18}
-          height={18}
-          className="size-[18px] shrink-0"
-          aria-hidden
-        />
-        <a href={href} className="sr-only">
-          {name} LinkedIn
-        </a>
-      </div>
-    </article>
-  );
-}
-
 function CompanyLeadershipMobile() {
   return (
-    <SectionWrap aria-label="Our minds powering the revolution">
-      <SectionTitle deg="105.739deg">Our minds powering the revolution</SectionTitle>
-      <p
-        className={`${interRegular.className} mt-[16px] max-w-[327px] text-center text-[14px] leading-[22px] font-normal text-[#a1a1a1] not-italic`}
-      >
-        We&apos;re building programmable AI processors that deliver breakthrough
-        performance and power efficiency from edge to cloud.
-      </p>
-
-      <div className="mt-[28px] flex w-full snap-x snap-mandatory gap-[14px] overflow-x-auto pb-[8px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {LEADERSHIP_TEAM.map((member) => (
-          <PortraitCard
-            key={member.nodeId}
-            imageSrc={member.imageSrc}
-            name={member.name}
-            role={member.role}
-            href={member.linkedInHref}
-          />
-        ))}
+    <section
+      className="relative w-full overflow-hidden bg-black"
+      aria-label="Our minds powering the revolution"
+      data-node-id="3244:6233"
+      data-name="3rd Fold"
+    >
+      {/* ===== Leadership team ===== */}
+      <div className="px-[21px] pt-[29px]">
+        <div className="relative mx-auto h-[79px] w-[350px]">
+          <div
+            className="pointer-events-none absolute left-1/2 top-[4px] h-[66px] w-[353px] -translate-x-1/2"
+            aria-hidden
+          >
+            <Corners />
+          </div>
+          <h2
+            className={`${gilroyMedium.className} absolute inset-x-0 top-[7px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+            style={{ backgroundImage: gradient("107.454deg") }}
+          >
+            Our minds powering the revolution
+          </h2>
+        </div>
+        <p
+          className={`${interRegular.className} mx-auto mt-[10px] w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+        >
+          We&apos;re building programmable AI processors that deliver
+          breakthrough performance and power efficiency from edge to cloud.
+        </p>
       </div>
 
-      <p
-        className={`${gilroyMedium.className} mt-[32px] self-start text-[20px] leading-[26px] font-medium text-white not-italic`}
-      >
-        Advisory Board
-      </p>
-      <div className="mt-[16px] flex w-full snap-x snap-mandatory gap-[14px] overflow-x-auto pb-[8px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {ADVISORY_BOARD.map((member) => (
-          <PortraitCard
-            key={member.nodeId}
-            imageSrc={member.imageSrc}
-            name={member.name}
-            role={member.role}
-            href={member.linkedInHref}
-          />
-        ))}
+      <div className="mt-[34px]">
+        <LeadershipCarousel members={LEADERSHIP_TEAM} variant="leadership" />
       </div>
-    </SectionWrap>
+
+      {/* ===== Advisory board ===== */}
+      <div className="mt-[47px] px-[21px] pt-[30px]">
+        <div className="relative mx-auto h-[62px] w-[350px]">
+          <div
+            className="pointer-events-none absolute left-1/2 top-[4px] h-[54px] w-[353px] -translate-x-1/2"
+            aria-hidden
+          >
+            <Corners />
+          </div>
+          <h2
+            className={`${gilroyMedium.className} absolute inset-x-0 top-[13px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+            style={{ backgroundImage: gradient("114.188deg") }}
+          >
+            Advisory Board
+          </h2>
+        </div>
+      </div>
+
+      <div className="mt-[34px]">
+        <LeadershipCarousel members={ADVISORY_BOARD} variant="advisory" />
+      </div>
+    </section>
   );
 }
 
@@ -341,44 +310,89 @@ const DNA_CARDS = [
   },
 ];
 
+function DnaCard({
+  card,
+  className = "",
+}: {
+  card: { title: string; description: string };
+  className?: string;
+}) {
+  return (
+    <article className={`relative w-full ${className}`}>
+      <div className="flex flex-col gap-[10px] px-[20px] pt-[18px] pb-[18px]">
+        <p
+          className={`${gilroyMedium.className} text-[20px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+        >
+          {card.title}
+        </p>
+        <p
+          className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-white opacity-65 not-italic [word-break:break-word]`}
+        >
+          {card.description}
+        </p>
+      </div>
+      <Corners />
+    </article>
+  );
+}
+
 function CompanyDnaMobile() {
   return (
-    <SectionWrap aria-label="Driven by physics. Defined by our DNA.">
-      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/company/dna-section-bg.png"
-          alt=""
-          className="absolute inset-0 size-full object-cover opacity-25"
-        />
-        <div className="absolute inset-0 bg-black/70" />
-      </div>
-
-      <div className="relative flex flex-col items-center gap-[10px]">
-        <SectionTitle deg="105.739deg">
-          Driven by physics. Defined by our DNA.
-        </SectionTitle>
-        <p className={`${interRegular.className} max-w-[327px] text-center text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-70 not-italic`}>
+    <section
+      className="relative w-full overflow-hidden bg-black"
+      aria-label="Driven by physics. Defined by our DNA."
+      data-node-id="3244:7009"
+      data-name="4th Fold"
+    >
+      {/* Title block */}
+      <div className="px-[19px] pt-[30px]">
+        <div className="relative mx-auto h-[79px] w-[350px]">
+          <div
+            className="pointer-events-none absolute left-1/2 top-[4px] h-[66px] w-[356px] -translate-x-1/2"
+            aria-hidden
+          >
+            <Corners />
+          </div>
+          <h2
+            className={`${gilroyMedium.className} absolute inset-x-0 top-[7px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+            style={{ backgroundImage: gradient("107.454deg") }}
+          >
+            Driven by physics. Defined by our DNA.
+          </h2>
+        </div>
+        <p
+          className={`${interRegular.className} mx-auto mt-[10px] w-[334px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+        >
           We build from first principles and validate everything in silicon.
         </p>
       </div>
 
-      <div className="relative mt-[28px] flex w-full flex-col gap-[14px]">
-        {DNA_CARDS.map((card) => (
-          <article
-            key={card.title}
-            className="relative flex flex-col gap-[10px] border-[0.5px] border-solid border-white/12 bg-[rgba(21,21,21,0.45)] p-[22px]"
+      {/* Cards + background image between pairs */}
+      <div className="relative mt-[31px] px-[19px]">
+        <DnaCard card={DNA_CARDS[0]} />
+        <DnaCard card={DNA_CARDS[1]} className="mt-[29px]" />
+
+        <div className="relative">
+          {/* Background image 137 — bleeds, sits between the two card pairs */}
+          <div
+            className="pointer-events-none absolute top-[1px] left-1/2 z-0 h-[425px] w-[803px] max-w-none -translate-x-1/2 overflow-hidden"
+            aria-hidden
           >
-            <p className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium text-white not-italic`}>
-              {card.title}
-            </p>
-            <p className={`${interRegular.className} text-[13px] leading-[20px] font-normal text-white opacity-65 not-italic`}>
-              {card.description}
-            </p>
-          </article>
-        ))}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/company/image 137.png"
+              alt=""
+              className="size-full object-cover object-bottom"
+            />
+          </div>
+          <div className="relative z-10">
+            <div className="h-[392px]" aria-hidden />
+            <DnaCard card={DNA_CARDS[2]} />
+            <DnaCard card={DNA_CARDS[3]} className="mt-[29px]" />
+          </div>
+        </div>
       </div>
-    </SectionWrap>
+    </section>
   );
 }
 
@@ -400,155 +414,315 @@ const ECOSYSTEM_COLUMNS = [
 
 function CompanyEcosystemMobile() {
   return (
-    <SectionWrap aria-label="A globally resilient ecosystem">
-      <SectionTitle deg="105.739deg">A globally resilient ecosystem</SectionTitle>
-      <p className={`${interRegular.className} mt-[16px] max-w-[327px] text-center text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-70 not-italic`}>
-        Backed by Tier-1 foundries and integrated with the world&apos;s leading
-        technology distributors and platforms.
-      </p>
-
-      <div className="mt-[28px] flex w-full flex-col gap-[14px]">
-        {ECOSYSTEM_COLUMNS.map((col) => (
+    <section
+      className="relative w-full bg-black"
+      aria-label="A globally resilient ecosystem"
+    >
+      <div className="px-[30px] pt-[32px] pb-[32px]">
+        {/* Title — 2 lines, corner brackets at (-4,4)/(316,4)/(-4,68)/(316,68) */}
+        <div className="relative mx-auto h-[72px] w-[320px]">
           <div
-            key={col.title}
-            className="flex flex-col gap-[10px] border-[0.5px] border-solid border-white/12 bg-[rgba(21,21,21,0.45)] p-[22px]"
+            className="pointer-events-none absolute left-[-4px] right-[4px] top-[4px] bottom-[4px]"
+            aria-hidden
           >
-            <div className="flex items-center gap-[12px]">
-              <Image src={col.icon} alt="" width={28} height={28} className="size-[28px] shrink-0" aria-hidden />
-              <p className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium text-white not-italic`}>
-                {col.title}
+            <Corners />
+          </div>
+          <h2
+            className={`${gilroyMedium.className} absolute inset-x-0 top-0 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+            style={{ backgroundImage: gradient("105.083deg") }}
+          >
+            A globally resilient<br />ecosystem
+          </h2>
+        </div>
+
+        {/* Subtitle */}
+        <p
+          className={`${interRegular.className} mt-[25px] text-[14px] leading-[20px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+        >
+          Backed by Tier-1 foundries and integrated with the world&apos;s leading
+          technology distributors and platforms.
+        </p>
+
+        {/* Divider (Line 91) */}
+        <div className="mt-[24px] h-px w-full bg-white/15" aria-hidden />
+
+        {/* Columns */}
+        <div className="mt-[24px] flex flex-col gap-[34px]">
+          {ECOSYSTEM_COLUMNS.map((col) => (
+            <div key={col.title} className="flex flex-col gap-[12px]">
+              <div className="flex items-center gap-[10px]">
+                <Image
+                  src={col.icon}
+                  alt=""
+                  width={32}
+                  height={32}
+                  className="size-[32px] shrink-0"
+                  aria-hidden
+                />
+                <p
+                  className={`${gilroyMedium.className} text-[22px] leading-[29px] font-medium text-white not-italic whitespace-nowrap`}
+                >
+                  {col.title}
+                </p>
+              </div>
+              <p
+                className={`${interRegular.className} max-w-[309px] text-[14px] leading-[20px] font-normal text-white opacity-65 not-italic [word-break:break-word]`}
+              >
+                {col.description}
               </p>
             </div>
-            <p className={`${interRegular.className} text-[13px] leading-[20px] font-normal text-white opacity-65 not-italic`}>
-              {col.description}
-            </p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </SectionWrap>
+    </section>
   );
 }
 
 /* --------------------------- TECHNOLOGY PARTNERS -------------------------- */
 function CompanyTechnologyPartnersMobile() {
   return (
-    <SectionWrap aria-label="Technology partners">
-      <p
-        className={`${gilroySemiBold.className} max-w-[327px] bg-clip-text text-center text-[24px] leading-[30px] font-semibold tracking-[-0.48px] text-transparent opacity-80 not-italic`}
-        style={{
-          backgroundImage:
-            "linear-gradient(119.414deg, rgba(255,255,255,0.8) 9.0248%, rgba(255,255,255,0.5) 37.884%, rgba(255,255,255,0.7) 111.41%)",
-        }}
-      >
-        TECHNOLOGY PARTNERS
-      </p>
+    <section
+      className="relative w-full bg-black"
+      aria-label="Technology partners"
+      data-node-id="3245:312"
+      data-name="6th fold"
+    >
+      <div className="px-[20px] pt-[10px] pb-[14px]">
+        {/* Title — 48px, ghosted dark gradient, opacity 90%, left aligned */}
+        <p
+          className={`${gilroySemiBold.className} bg-clip-text text-left text-[48px] leading-[42px] font-semibold tracking-[-0.96px] text-transparent opacity-90 not-italic [word-break:break-word]`}
+          style={{
+            backgroundImage:
+              "linear-gradient(107.119deg, rgb(22, 22, 22) 9.0248%, rgb(39, 39, 39) 37.884%, rgb(18, 18, 18) 111.41%)",
+          }}
+          data-node-id="3244:19801"
+        >
+          TECHNOLOGY PARTNERS
+        </p>
 
-      <div className="relative mt-[24px] w-full overflow-hidden border-[0.5px] border-solid border-white/12 bg-[rgba(255,255,255,0.04)]">
-        <Corners leftSrc="/ecosystem/corner-tl.svg" rightSrc="/ecosystem/corner-tr.svg" />
-        <div className="flex items-center gap-[4px] overflow-x-auto px-[16px] py-[10px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {SILICON_PARTNERS.map((logo) => (
-            <div
-              key={logo.src}
-              className="relative flex h-[56px] w-[110px] shrink-0 items-center justify-center"
-            >
+        {/* Partner grid — 2x2 logos + Octane centered below, grid lines */}
+        <div className="relative mt-[5px] bg-[rgba(255,255,255,0.04)]">
+          <Corners
+            leftSrc="/ecosystem/corner-tl.svg"
+            rightSrc="/ecosystem/corner-tr.svg"
+          />
+          <div className="relative grid grid-cols-2">
+            {/* Row 1 */}
+            <div className="flex h-[106px] items-center justify-center">
               <Image
-                src={logo.src}
+                src={SILICON_PARTNERS[0].src}
                 alt=""
-                width={logo.width}
-                height={logo.height}
-                className="block max-w-none object-contain"
+                width={SILICON_PARTNERS[0].width}
+                height={SILICON_PARTNERS[0].height}
+                className="max-w-none object-contain"
               />
             </div>
-          ))}
-          <div className="relative flex h-[56px] w-[120px] shrink-0 items-center justify-center gap-[10px]">
-            <Image src="/ecosystem/logo-partner-4.svg" alt="" width={32} height={32} className="block max-w-none" />
-            <p className={`${gilroySemiBold.className} text-[16px] leading-[20px] font-semibold whitespace-nowrap text-white not-italic`}>
-              Tezos
-            </p>
-          </div>
-          <div className="relative flex h-[56px] w-[120px] shrink-0 items-center justify-center gap-[10px]">
-            <p className={`${gilroySemiBold.className} text-[16px] leading-[20px] font-semibold whitespace-nowrap text-white not-italic`}>
-              Octane
-            </p>
-            <Image src="/ecosystem/logo-octane.svg" alt="" width={32} height={32} className="block max-w-none" />
+            <div className="flex h-[106px] items-center justify-center border-l border-white/10">
+              <Image
+                src={SILICON_PARTNERS[1].src}
+                alt=""
+                width={SILICON_PARTNERS[1].width}
+                height={SILICON_PARTNERS[1].height}
+                className="max-w-none object-contain"
+              />
+            </div>
+            {/* Row 2 */}
+            <div className="flex h-[107px] items-center justify-center border-t border-white/10">
+              <Image
+                src={SILICON_PARTNERS[2].src}
+                alt=""
+                width={SILICON_PARTNERS[2].width}
+                height={SILICON_PARTNERS[2].height}
+                className="max-w-none object-contain"
+              />
+            </div>
+            <div className="flex h-[107px] items-center justify-center gap-[5px] border-l border-t border-white/10">
+              <Image
+                src="/ecosystem/logo-partner-4.svg"
+                alt=""
+                width={26}
+                height={26}
+                className="max-w-none"
+              />
+              <p
+                className={`${gilroySemiBold.className} text-[13px] leading-[15px] font-semibold whitespace-nowrap text-white not-italic`}
+              >
+                Tezos
+              </p>
+            </div>
+            {/* Row 3 — Octane centered, spans both columns */}
+            <div className="col-span-2 flex h-[105px] items-center justify-center gap-[10px] border-t border-white/10">
+              <p
+                className={`${gilroySemiBold.className} text-[17px] leading-[20px] font-semibold whitespace-nowrap text-white not-italic`}
+              >
+                Octane
+              </p>
+              <Image
+                src="/ecosystem/logo-octane.svg"
+                alt=""
+                width={35}
+                height={35}
+                className="max-w-none"
+              />
+            </div>
           </div>
         </div>
       </div>
-    </SectionWrap>
+    </section>
   );
 }
 
 /* -------------------------------- ARTICLES -------------------------------- */
+const COMPACT_IMAGE_CROPS = [
+  "absolute h-[197.35%] left-[-11.88%] max-w-none top-[-55.43%] w-[123.76%]",
+  "absolute h-[233.41%] left-0 max-w-none top-[-105.26%] w-full",
+];
+
+function ArticleChip({
+  label,
+  tone = "green",
+}: {
+  label: string;
+  tone?: "green" | "white";
+}) {
+  const textColor = tone === "green" ? "#53d824" : "#ecfae5";
+  const barColor = tone === "green" ? "#53d824" : "#ffffff";
+  return (
+    <div
+      className={`${dmMono.className} relative h-[26px] w-[180px] shrink-0 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.06)]`}
+      data-name="Chip"
+    >
+      <Corners />
+      <p
+        className="absolute left-1/2 top-[calc(50%-4.5px)] -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] uppercase whitespace-nowrap not-italic"
+        style={{ color: textColor }}
+      >
+        {label}
+      </p>
+      <div
+        className="absolute left-[6.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 opacity-60"
+        style={{ backgroundColor: barColor }}
+        aria-hidden
+      />
+      <div
+        className="absolute right-[9.52px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 opacity-60"
+        style={{ backgroundColor: barColor }}
+        aria-hidden
+      />
+    </div>
+  );
+}
+
+function ArticleMetaItem({ children }: { children: string }) {
+  return (
+    <div className="flex items-center gap-[6px]">
+      <span
+        className="h-[12px] w-[2px] shrink-0 bg-[#53d824] opacity-60"
+        aria-hidden
+      />
+      <span
+        className={`${interRegular.className} text-[14px] leading-[24px] font-normal whitespace-nowrap text-[rgba(255,255,255,0.5)] not-italic`}
+      >
+        {children}
+      </span>
+    </div>
+  );
+}
+
 function CompanyArticlesMobile() {
   return (
-    <SectionWrap aria-label="Company news articles">
-      {/* Featured */}
-      <article className="relative flex w-full flex-col overflow-clip border-[0.5px] border-solid border-white/12 bg-[rgba(21,21,21,0.45)]">
-        <div className="relative h-[180px] w-full shrink-0 overflow-hidden">
-          <Image
-            src={COMPANY_FEATURED_ARTICLE.imageSrc}
-            alt=""
-            fill
-            className="object-cover"
-            sizes="327px"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" aria-hidden />
-        </div>
-        <div className="flex flex-col gap-[12px] p-[20px]">
-          <span className={`${interRegular.className} w-fit border-[0.5px] border-solid border-white/20 bg-[rgba(255,255,255,0.06)] px-[10px] py-[3px] text-[11px] uppercase tracking-[0.06em] text-[#ecfae5] not-italic`}>
-            {COMPANY_FEATURED_ARTICLE.category}
-          </span>
-          <h3 className={`${gilroyMedium.className} text-[20px] leading-[26px] font-medium text-white not-italic`}>
-            {COMPANY_FEATURED_ARTICLE.title}
-          </h3>
-          <p className={`${interRegular.className} text-[13px] leading-[20px] font-normal text-white opacity-70 not-italic`}>
-            {COMPANY_FEATURED_ARTICLE.excerpt}
-          </p>
-          <div className="mt-[4px] flex flex-wrap gap-x-[16px] gap-y-[4px]">
-            <span className={`${interRegular.className} text-[12px] leading-[16px] font-normal text-[#99a1af] not-italic`}>
-              {COMPANY_FEATURED_ARTICLE.metadata.date}
-            </span>
-            <span className={`${interRegular.className} text-[12px] leading-[16px] font-normal text-[#99a1af] not-italic`}>
-              {COMPANY_FEATURED_ARTICLE.metadata.totalFunding}
-            </span>
-            <span className={`${interRegular.className} text-[12px] leading-[16px] font-normal text-[#99a1af] not-italic`}>
-              {COMPANY_FEATURED_ARTICLE.metadata.fundingRounds}
-            </span>
+    <section
+      className="relative w-full bg-black"
+      aria-label="Company news articles"
+      data-node-id="3244:19803"
+      data-name="7th Fold"
+    >
+      <div className="px-[20px] pt-[16px] pb-[16px]">
+        {/* Featured article */}
+        <article className="relative flex w-full flex-col gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[9px] pt-[12px] pb-[12px]">
+          <Corners />
+          <div className="relative h-[197px] w-full shrink-0 overflow-hidden">
+            <Image
+              src={COMPANY_FEATURED_ARTICLE.imageSrc}
+              alt=""
+              fill
+              className="object-cover"
+              sizes="335px"
+            />
+            <div
+              className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.8)] to-transparent"
+              aria-hidden
+            />
           </div>
-        </div>
-      </article>
-
-      {/* Compact */}
-      <div className="mt-[16px] flex w-full flex-col gap-[14px]">
-        {COMPANY_COMPACT_ARTICLES.map((article) => (
-          <article
-            key={article.nodeId}
-            className="relative flex w-full overflow-clip border-[0.5px] border-solid border-white/12 bg-[rgba(21,21,21,0.45)]"
-          >
-            <div className="relative h-[110px] w-[110px] shrink-0 overflow-hidden">
-              <Image
-                src={article.imageSrc}
-                alt=""
-                fill
-                className="object-cover"
-                sizes="110px"
-              />
-            </div>
-            <div className="flex flex-1 flex-col gap-[8px] p-[16px]">
-              <span className={`${interRegular.className} w-fit border-[0.5px] border-solid border-white/20 bg-[rgba(255,255,255,0.06)] px-[8px] py-[2px] text-[10px] uppercase tracking-[0.06em] text-[#ecfae5] not-italic`}>
-                {article.category}
-              </span>
-              <h3 className={`${gilroyMedium.className} text-[15px] leading-[20px] font-medium text-white not-italic`}>
-                {article.title}
+          <div className="flex w-full flex-col gap-[14px]">
+            <ArticleChip
+              label={COMPANY_FEATURED_ARTICLE.category}
+              tone="green"
+            />
+            <div className="flex flex-col gap-[10px]">
+              <h3
+                className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+              >
+                {COMPANY_FEATURED_ARTICLE.title}
               </h3>
-              <p className={`${interRegular.className} text-[12px] leading-[17px] font-normal text-white opacity-65 not-italic`}>
-                {article.excerpt}
+              <p
+                className={`${interRegular.className} text-[14px] leading-[18px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
+              >
+                {COMPANY_FEATURED_ARTICLE.excerpt}
               </p>
             </div>
-          </article>
-        ))}
+            <div className="flex flex-col gap-[4px]">
+              <ArticleMetaItem>
+                {COMPANY_FEATURED_ARTICLE.metadata.date}
+              </ArticleMetaItem>
+              <ArticleMetaItem>
+                {COMPANY_FEATURED_ARTICLE.metadata.totalFunding}
+              </ArticleMetaItem>
+              <ArticleMetaItem>
+                {COMPANY_FEATURED_ARTICLE.metadata.fundingRounds}
+              </ArticleMetaItem>
+            </div>
+          </div>
+        </article>
+
+        {/* Compact articles */}
+        <div className="mt-[24px] flex flex-col gap-[29px]">
+          {COMPANY_COMPACT_ARTICLES.map((article, index) => (
+            <article
+              key={article.nodeId}
+              className="relative flex w-full flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[24px] pt-[12px] pb-[12px]"
+            >
+              <Corners />
+              {/* Image — 570px wide, centered, bleeds beyond card (clipped). Per-article Figma crop. */}
+              <div className="relative h-[152px] w-[570px] max-w-none shrink-0 overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={article.imageSrc}
+                  alt=""
+                  className={COMPACT_IMAGE_CROPS[index]}
+                />
+              </div>
+              {/* News — 335px wide, centered */}
+              <div className="flex w-[335px] flex-col items-start gap-[20px]">
+                <ArticleChip label={article.category} tone="white" />
+                <div className="flex w-full flex-col gap-[10px]">
+                  <h3
+                    className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+                  >
+                    {article.title}
+                  </h3>
+                  <p
+                    className={`${interRegular.className} text-[14px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
+                  >
+                    {article.excerpt}
+                  </p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
-    </SectionWrap>
+    </section>
   );
 }
 
@@ -586,25 +760,42 @@ function CompanyEngagementMobile() {
         {COMPANY_ENGAGEMENT_CARDS.map((card) => (
           <article
             key={card.nodeId}
-            className="relative flex w-full flex-col gap-[12px] overflow-hidden border-[0.5px] border-solid border-white/15 p-[22px]"
+            className="relative w-full overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)]"
           >
-            <div className="pointer-events-none absolute -right-[40px] -bottom-[40px] h-[180px] w-[180px] opacity-30" aria-hidden>
+            <Corners />
+            {/* Image — 335x363, content overlaid on its lower portion */}
+            <div className="relative h-[363px] w-full overflow-hidden">
               <Image
                 src={card.imageSrc}
                 alt=""
-                width={180}
-                height={180}
-                className="size-full object-contain"
+                fill
+                className="object-cover"
+                sizes="345px"
+              />
+              <div
+                className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"
+                aria-hidden
               />
             </div>
-            <h3 className={`${gilroyMedium.className} relative text-[20px] leading-[26px] font-medium text-white not-italic`}>
-              {card.titleLines.join(" ")}
-            </h3>
-            <p className={`${interRegular.className} relative max-w-[260px] text-[13px] leading-[20px] font-normal text-white opacity-70 not-italic`}>
-              {card.description}
-            </p>
-            <div className="relative mt-[4px]">
-              <GreenCta href={card.ctaHref}>{card.ctaLabel}</GreenCta>
+            {/* Content — pulled up over the image bottom (Figma content top y=209) */}
+            <div className="relative -mt-[155px] flex flex-col px-[21px] pb-[21px]">
+              <div className="relative mb-[15px] w-fit px-[10px]">
+                <Corners />
+                <h3
+                  className={`${gilroyMedium.className} bg-clip-text text-[24px] leading-[38px] font-medium text-transparent [word-break:break-word] not-italic`}
+                  style={{ backgroundImage: gradient("112.136deg") }}
+                >
+                  {card.titleLines.join(" ")}
+                </h3>
+              </div>
+              <p
+                className={`${interRegular.className} text-[14px] leading-[22px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
+              >
+                {card.description}
+              </p>
+              <div className="relative mt-[28px] w-[231px]">
+                <GreenCta href={card.ctaHref}>{card.ctaLabel}</GreenCta>
+              </div>
             </div>
           </article>
         ))}

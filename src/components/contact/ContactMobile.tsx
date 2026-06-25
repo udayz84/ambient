@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { dmMono, gilroyMedium, interLight, interRegular, interSemiBold } from "../hero/fonts";
+import { dmMono, gilroyMedium, gilroySemiBold, interLight, interRegular, interSemiBold } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 
 const GREEN_CTA_SHADOW =
@@ -149,73 +149,112 @@ function ContactResourcesMobile() {
   );
 }
 
-/* ---------------------------------- MAP ----------------------------------- */
-const LOCATIONS = [
-  {
-    title: "USA Headquarters",
-    address:
-      "Ambient Scientific Inc. 4633 Old Ironsides Drive Santa Clara California 95054. USA",
-  },
-  {
-    title: "Singapore Headquarters",
-    address: "137 Telok Ayer Street, #05-02, Singapore 068602",
-  },
-  {
-    title: "India Headquarters",
-    address:
-      "Ramky House, 1st Cross, Raghavendra Nagar, Kalyan Nagar, Bengaluru Karnataka, 560043, India",
-  },
-];
+function LocationCard({ title, address, align }: { title: string, address: string, align: "left" | "right" }) {
+  return (
+    <div className={`relative flex items-center p-[10px] pr-[16px] gap-[16px] bg-[#0a1105] border-[0.5px] border-[rgba(255,255,255,0.15)] overflow-hidden w-[343px] h-[107px] ${align === "right" ? "flex-row-reverse text-right" : ""}`}>
+      <Corners />
+      <div className="relative flex w-[68px] h-[70px] shrink-0 items-center justify-center bg-gradient-to-b from-[#53d824] to-[#2c7213]">
+        <Image
+          src="/contact/location-icon.svg"
+          alt=""
+          width={24}
+          height={24}
+          className="size-[24px]"
+          aria-hidden
+        />
+      </div>
+      <div className={`flex flex-col gap-[4px] flex-1 ${align === "right" ? "items-end" : "items-start"}`}>
+        <p className={`${gilroyMedium.className} text-[18px] leading-[22px] font-medium text-white not-italic`}>
+          {title}
+        </p>
+        <p className={`${interRegular.className} text-[13px] leading-[18px] font-normal text-[#a4a4a4] not-italic`}>
+          {address}
+        </p>
+      </div>
+    </div>
+  );
+}
 
 function ContactMapMobile() {
   return (
-    <SectionWrap aria-label="Global offices">
-      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+    <SectionWrap aria-label="Global offices" className="!px-0 !py-0 h-[939px] w-full max-w-[393px] mx-auto overflow-hidden bg-black relative">
+      {/* Background Globe Image */}
+      <div className="pointer-events-none absolute bottom-0 left-1/2 w-[1440px] h-[1002px] -translate-x-1/2" aria-hidden>
         <Image
-          src="/contact/map-globe-bg.png"
+          src="/contact/Globe image.png"
           alt=""
           fill
-          className="object-cover object-center opacity-25"
+          className="object-cover object-top"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-black/70" />
       </div>
 
-      <div className="relative flex flex-col items-center gap-[12px]">
-        <SectionTitle deg="101.272deg">Global scale. Local support.</SectionTitle>
-        <p className={`${interRegular.className} max-w-[327px] text-center text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-70 not-italic`}>
-          From our research labs to your production line, we maintain direct
-          engineering presence across three continents to ensure rapid
-          deployment and ongoing support.
-        </p>
-      </div>
-
-      <div className="relative mt-[28px] flex w-full flex-col gap-[14px]">
-        {LOCATIONS.map((loc) => (
-          <div
-            key={loc.title}
-            className="relative flex items-start gap-[14px] border-[0.5px] border-solid border-white/15 bg-[rgba(0,0,0,0.5)] p-[18px]"
-          >
-            <div className="relative flex size-[40px] shrink-0 items-center justify-center bg-gradient-to-b from-[#53d824] to-[#2c7213]">
-              <Image
-                src="/contact/location-icon.svg"
-                alt=""
-                width={22}
-                height={22}
-                className="size-[22px]"
-                aria-hidden
-              />
-            </div>
-            <div className="flex flex-col gap-[6px]">
-              <p className={`${gilroyMedium.className} text-[17px] leading-[22px] font-medium text-white not-italic`}>
-                {loc.title}
-              </p>
-              <p className={`${interRegular.className} text-[13px] leading-[19px] font-normal text-[#a4a4a4] not-italic`}>
-                {loc.address}
-              </p>
-            </div>
+      <div className="relative z-10 flex flex-col items-center w-full pt-[30px] h-full">
+        <div className="relative flex flex-col items-center gap-[10px] w-full">
+          <div className="relative flex w-[350px] items-center justify-center py-[7px]">
+            <Corners />
+            <h2
+              className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+              style={{
+                backgroundImage: "linear-gradient(107.454deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
+            >
+              Global scale.<br />Local support.
+            </h2>
           </div>
-        ))}
+          <p className={`${interRegular.className} w-[316px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] opacity-65 not-italic`}>
+            From our research labs to your production line, we maintain direct
+            engineering presence across three continents to ensure rapid
+            deployment and ongoing support.
+          </p>
+        </div>
+
+        {/* Lines and Cards Container */}
+        <div className="absolute top-[0px] left-0 w-full h-full pointer-events-none">
+          {/* USA Line */}
+          <div className="absolute top-[259px] left-[21px] w-[1.5px] h-[381px] bg-gradient-to-b from-[rgba(83,216,36,0.6)] to-transparent">
+            <div className="absolute bottom-0 left-1/2 size-[8px] -translate-x-1/2 rotate-45 bg-[#53d824] shadow-[0_0_12px_#53d824]" />
+          </div>
+
+          {/* Singapore Line */}
+          <div className="absolute top-[479px] left-[354px] w-[1.5px] h-[202px] bg-gradient-to-b from-[rgba(83,216,36,0.6)] to-transparent">
+            <div className="absolute bottom-0 left-1/2 size-[8px] -translate-x-1/2 rotate-45 bg-[#53d824] shadow-[0_0_12px_#53d824]" />
+          </div>
+
+          {/* India Line */}
+          <div className="absolute top-[760px] left-[312px] w-[1.5px] h-[119px] bg-gradient-to-b from-[rgba(83,216,36,0.6)] to-transparent">
+            <div className="absolute bottom-0 left-1/2 size-[8px] -translate-x-1/2 rotate-45 bg-[#53d824] shadow-[0_0_12px_#53d824]" />
+          </div>
+
+          {/* USA Card */}
+          <div className="absolute top-[240px] left-[20px] pointer-events-auto">
+            <LocationCard
+              title="USA Headquarters"
+              address="Ambient Scientific Inc. 4633 Old Ironsides Drive Santa Clara California 95054. USA"
+              align="left"
+            />
+          </div>
+
+          {/* Singapore Card */}
+          <div className="absolute top-[380px] left-[29px] pointer-events-auto">
+            <LocationCard
+              title="Singapore Headquarters"
+              address="137 Telok Ayer Street, #05-02, Singapore 068602"
+              align="right"
+            />
+          </div>
+
+          {/* India Card */}
+          <div className="absolute top-[740px] left-[20px] pointer-events-auto">
+            <LocationCard
+              title="India Headquarters"
+              address="Ramky House, 1st Cross, Raghavendra Nagar, Kalyan Nagar, Bengaluru Karnataka, 560043, India"
+              align="left"
+            />
+          </div>
+        </div>
       </div>
     </SectionWrap>
   );
@@ -244,57 +283,83 @@ const SCHEDULE_CARDS = [
 function ContactScheduleMobile() {
   return (
     <SectionWrap aria-label="Schedule a Consultation">
-      <div className="flex flex-col items-center gap-[12px]">
-        <div className="relative flex w-[352px] items-center justify-center py-[7px]">
+      <div className="flex flex-col items-center gap-[10px] w-[350px]">
+        <div className="relative flex w-full items-center justify-center py-[7px]">
           <Corners />
           <h2
-            className={`${gilroyMedium.className} w-[241px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
-            style={{ backgroundImage: "linear-gradient(100.882deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)" }}
+            className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+            style={{ backgroundImage: "linear-gradient(107.454deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)" }}
           >
-            Schedule a<br />Consultation
+            Schedule a Consultation
           </h2>
         </div>
-        <p className={`${interRegular.className} w-[308px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 not-italic`}>
+        <p className={`${interRegular.className} w-[min-content] min-w-full text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] opacity-65 not-italic`}>
           Book a direct meeting with our engineering or commercial teams.
         </p>
       </div>
 
-      <div className="mt-[28px] flex w-full flex-col gap-[14px]">
-        {SCHEDULE_CARDS.map((card) => (
-          <article
-            key={card.title}
-            className="relative flex flex-col gap-[14px] overflow-clip border-[0.5px] border-solid border-white/20 bg-[rgba(0,0,0,0.3)] p-[20px]"
-          >
-            <Corners />
-            <div className="relative h-[130px] w-full overflow-hidden">
-              <Image
-                src={card.imageSrc}
-                alt=""
-                fill
-                className="object-contain object-center"
-                sizes="279px"
-              />
-            </div>
-            <span className={`${dmMono.className} w-fit border-[0.5px] border-solid border-[rgba(240,240,240,0.5)] bg-[rgba(255,255,255,0.06)] px-[10px] py-[3px] text-[11px] uppercase tracking-[0.06em] text-[#ecfae5] not-italic`}>
-              {card.tag}
-            </span>
-            <h3 className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium text-white not-italic`}>
-              {card.title}
-            </h3>
-            <p className={`${interRegular.className} text-[13px] leading-[20px] font-normal text-white opacity-65 not-italic`}>
-              {card.description}
-            </p>
-            <div className="relative flex items-center gap-[8px]">
-              <Image src="/contact/calendar-icon.svg" alt="" width={18} height={18} className="size-[18px]" aria-hidden />
+      <div className="mt-[24px] flex w-[353px] flex-col gap-[24px]">
+        {SCHEDULE_CARDS.map((card) => {
+          const isCommercial = card.tag === "Commercial";
+          return (
+            <article
+              key={card.title}
+              className="relative flex flex-col h-[361px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] pt-[16px] px-[16px] pb-[24px]"
+            >
+              <Corners />
+
+              <div className={isCommercial ? "absolute bottom-0 right-[-10px] h-[260px] w-[240px] z-0 pointer-events-none" : "absolute bottom-[-10px] right-[-10px] h-[290px] w-[270px] z-0 pointer-events-none"}>
+                <Image
+                  src={card.imageSrc}
+                  alt=""
+                  fill
+                  className="object-contain object-right-bottom"
+                  unoptimized
+                />
+              </div>
+
+              <div className="flex flex-col items-start gap-[20px] w-full relative z-10 pointer-events-none">
+                <div className="relative flex h-[26px] w-[180px] items-center justify-center overflow-clip bg-[rgba(255,255,255,0.06)] pointer-events-auto">
+                  <Corners />
+                  <span className={`${dmMono.className} text-[13px] leading-[19.5px] uppercase tracking-[-0.03em] text-[#ecfae5] not-italic`}>
+                    {card.tag}
+                  </span>
+                  <div className="absolute left-[6.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+                  <div className="absolute left-[170.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+                </div>
+                
+                <div className="flex flex-col items-start gap-[10px] w-full pointer-events-auto">
+                  <h3 className={`${gilroyMedium.className} text-[16px] leading-[18px] font-medium text-white not-italic`}>
+                    {card.title}
+                  </h3>
+                  <p className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic`}>
+                    {card.description}
+                  </p>
+                </div>
+              </div>
+
               <a
                 href="#"
-                className={`${interSemiBold.className} text-[13px] leading-[normal] font-semibold uppercase whitespace-nowrap text-[#53d824] not-italic`}
+                className={`mt-[24px] relative flex items-center justify-center gap-[8px] px-[31px] py-[14px] drop-shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15),0px_10.268px_6.699px_rgba(255,255,255,0.15),0px_3.714px_2.423px_rgba(255,255,255,0.1)] z-10 ${isCommercial ? "w-[218px]" : "w-[178px]"}`}
               >
-                {card.ctaLabel}
+                <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 bg-[length:307.2px_307.2px] bg-top-left opacity-40 mix-blend-plus-lighter"
+                  style={{ backgroundImage: "url(/contact/cta-texture.png)" }}
+                />
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(255,255,255,0.6)]"
+                />
+                <Image src="/contact/calendar-icon.svg" alt="" width={20} height={20} className="relative z-10 size-[20px] shrink-0" aria-hidden />
+                <span className={`${gilroySemiBold.className} relative z-10 text-[12px] leading-[normal] font-semibold uppercase whitespace-nowrap text-[#151515] not-italic`}>
+                  {card.ctaLabel}
+                </span>
               </a>
-            </div>
-          </article>
-        ))}
+            </article>
+          );
+        })}
       </div>
     </SectionWrap>
   );
@@ -462,9 +527,8 @@ export function ContactMobile() {
   return (
     <div className="flex w-full flex-col">
       <ContactHeroMobile />
-      <ContactResourcesMobile />
-      <ContactMapMobile />
       <ContactScheduleMobile />
+      <ContactMapMobile />
       <ContactFormMobile />
     </div>
   );
