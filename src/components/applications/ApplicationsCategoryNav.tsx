@@ -14,7 +14,7 @@ type ApplicationsCategoryNavProps = {
   onShift: (dir: -1 | 1) => void;
 };
 
-function CategoryDivider({
+export function CategoryDivider({
   variant = "normal",
 }: {
   variant?: "normal" | "before-active" | "after-active";

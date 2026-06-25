@@ -49,7 +49,10 @@ export function Applications() {
 
       {/* MOBILE (<1024px) — dedicated layout, desktop is untouched above */}
       <div className="relative w-full min-[1024px]:hidden">
-        <ApplicationsMobile />
+        <ApplicationsMobile
+          categoryActiveIndex={activeIndex}
+          setCategoryActiveIndex={setActiveIndex}
+        />
       </div>
     </section>
   );

@@ -1,20 +1,53 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect, Fragment } from "react";
 import Image from "next/image";
 import { gilroyMedium, interRegular, interMedium } from "../hero/fonts";
-import { FEATURE_CARDS } from "./applications-data";
+import { FEATURE_CARDS, APPLICATION_TABS } from "./applications-data";
+import { CategoryDivider } from "./ApplicationsCategoryNav";
+import { Corners } from "../shared/Corners";
+
+const tabCornerTl = "/applications/corners/tab-corner-tl.svg";
+const tabCornerTr = "/applications/corners/tab-corner-tr.svg";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
 
-export function ApplicationsMobile() {
+type ApplicationsMobileProps = {
+  categoryActiveIndex: number;
+  setCategoryActiveIndex: (index: number) => void;
+};
+
+export function ApplicationsMobile({
+  categoryActiveIndex,
+  setCategoryActiveIndex,
+}: ApplicationsMobileProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const features = [FEATURE_CARDS.left, FEATURE_CARDS.right];
   const activeFeature = features[activeIndex];
 
   const goNext = useCallback(() => setActiveIndex((i) => (i + 1) % features.length), [features.length]);
   const goPrev = useCallback(() => setActiveIndex((i) => (i - 1 + features.length) % features.length), [features.length]);
+
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const activeTabRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (activeTabRef.current && scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      const activeTab = activeTabRef.current;
+
+      const containerWidth = container.offsetWidth;
+      const activeTabLeft = activeTab.offsetLeft;
+      const activeTabWidth = activeTab.offsetWidth;
+
+      const scrollPosition = activeTabLeft - containerWidth / 2 + activeTabWidth / 2;
+      container.scrollTo({
+        left: scrollPosition,
+        behavior: "smooth",
+      });
+    }
+  }, [categoryActiveIndex]);
 
   return (
     <div className="relative flex flex-col items-center py-[48px] bg-black overflow-hidden">
@@ -73,6 +106,58 @@ export function ApplicationsMobile() {
           market-differentiating features of the GPX10 and what&apos;s coming next.
         </p>
       </div>
+
+      {/* Category Navigation Selector (Mobile) */}
+      <div className="w-full mt-[24px] overflow-hidden flex justify-center">
+        <div
+          ref={scrollContainerRef}
+          className="flex items-center overflow-x-auto scrollbar-none px-[24px] h-[52px] w-full max-w-full"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {APPLICATION_TABS.map((label, index) => {
+            const isActive = index === categoryActiveIndex;
+            const dividerVariant =
+              index === categoryActiveIndex
+                ? "before-active"
+                : index === categoryActiveIndex + 1
+                ? "after-active"
+                : "normal";
+
+            return (
+              <Fragment key={label}>
+                <CategoryDivider variant={dividerVariant} />
+                <button
+                  type="button"
+                  ref={index === categoryActiveIndex ? activeTabRef : null}
+                  onClick={() => setCategoryActiveIndex(index)}
+                  className={`${interRegular.className} relative flex h-[52px] shrink-0 cursor-pointer items-center justify-center px-[20px] text-[16px] leading-[24px] font-normal whitespace-nowrap not-italic transition-colors ${
+                    isActive ? "text-[#0e1a0e]" : "text-[#666] hover:text-[#aaa]"
+                  }`}
+                >
+                  {isActive ? (
+                    <span className="pointer-events-none absolute inset-y-[4px] inset-x-[13px] overflow-clip bg-[#f0f0f0]">
+                      <Corners leftSrc={tabCornerTl} rightSrc={tabCornerTr} />
+                    </span>
+                  ) : null}
+                  <span className="relative">{label}</span>
+                </button>
+              </Fragment>
+            );
+          })}
+          <CategoryDivider
+            variant={
+              categoryActiveIndex === APPLICATION_TABS.length - 1
+                ? "after-active"
+                : "normal"
+            }
+          />
+        </div>
+      </div>
+      <style>{`
+        .scrollbar-none::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
 
       {/* Embedded Feature Image Block edge-to-edge */}
       <div className="relative mt-[32px] w-full flex justify-center">
