@@ -100,28 +100,28 @@ export function MeasuredProofMobile() {
             Measured<br />proof in silicon
           </h2>
 
-          <div className="absolute top-0 right-0 flex size-[6px] items-center justify-center">
+          <div className="absolute top-0 right-0 flex size-[6px] items-center justify-center scale-[0.6] origin-top-right">
             <div className="rotate-180 flex-none">
               <div className="relative size-[6px]">
                 <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
               </div>
             </div>
           </div>
-          <div className="absolute bottom-0 right-0 flex size-[6px] items-center justify-center">
+          <div className="absolute bottom-0 right-0 flex size-[6px] items-center justify-center scale-[0.6] origin-bottom-right">
             <div className="-scale-x-100 flex-none">
               <div className="relative size-[6px]">
                 <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
               </div>
             </div>
           </div>
-          <div className="absolute bottom-0 left-0 flex size-[6px] items-center justify-center">
+          <div className="absolute bottom-0 left-0 flex size-[6px] items-center justify-center scale-[0.6] origin-bottom-left">
             <div className="flex-none">
               <div className="relative size-[6px]">
                 <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
               </div>
             </div>
           </div>
-          <div className="absolute top-0 left-0 flex size-[6px] items-center justify-center">
+          <div className="absolute top-0 left-0 flex size-[6px] items-center justify-center scale-[0.6] origin-top-left">
             <div className="-scale-y-100 flex-none">
               <div className="relative size-[6px]">
                 <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
@@ -131,11 +131,11 @@ export function MeasuredProofMobile() {
         </div>
       </div>
 
-      <div className="mt-[28px] flex w-[calc(100%+48px)] -mx-[24px] px-[24px] snap-x snap-mandatory gap-[14px] overflow-x-auto pb-[8px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden after:w-[10px] after:shrink-0 after:content-['']">
+      <div className="mt-[28px] flex w-[calc(100%+48px)] -mx-[24px] px-[calc(50vw-132px)] snap-x snap-mandatory gap-[14px] overflow-x-auto pb-[8px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {DESKTOP_CARDS.map((card, index) => (
           <div
             key={card.nodeId}
-            className="animate-hero-text-fade-in shrink-0 snap-start"
+            className="animate-hero-text-fade-in shrink-0 snap-center"
             style={{ 
               animationDelay: `${index * 100}ms`, 
               animationDuration: "800ms",

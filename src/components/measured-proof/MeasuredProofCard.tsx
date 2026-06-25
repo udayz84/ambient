@@ -36,7 +36,7 @@ export function MeasuredProofCard({
 }: MeasuredProofCardProps) {
   return (
     <div
-      className="relative h-[600px] w-[388px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(255,255,255,0.1)]"
+      className="relative h-[600px] w-[388px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] max-[1023px]:backdrop-blur-[12px] max-[1023px]:bg-white/[0.03]"
       style={{ filter: "brightness(1.15)" }}
       data-node-id={nodeId}
       data-name="Lower power consumption"
@@ -55,7 +55,7 @@ export function MeasuredProofCard({
       </div>
 
       <div
-        className="absolute left-1/2 -translate-x-1/2 shadow-[0px_20px_20px_0px_rgba(9,38,6,0.25)]"
+        className="absolute left-1/2 -translate-x-1/2 shadow-[0px_20px_20px_0px_rgba(9,38,6,0.25)] max-[1023px]:shadow-none"
         style={{ top: imageTop, width: imageWidth, height: imageHeight }}
       >
         <div className="pointer-events-none absolute inset-0 overflow-hidden">

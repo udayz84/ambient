@@ -1,12 +1,21 @@
 "use client";
 
+import { useState, useCallback } from "react";
 import Image from "next/image";
 import { gilroyMedium, interRegular, interMedium } from "../hero/fonts";
+import { FEATURE_CARDS } from "./applications-data";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
 
 export function ApplicationsMobile() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const features = [FEATURE_CARDS.left, FEATURE_CARDS.right];
+  const activeFeature = features[activeIndex];
+
+  const goNext = useCallback(() => setActiveIndex((i) => (i + 1) % features.length), [features.length]);
+  const goPrev = useCallback(() => setActiveIndex((i) => (i - 1 + features.length) % features.length), [features.length]);
+
   return (
     <div className="relative flex flex-col items-center py-[48px] bg-black overflow-hidden">
       {/* Header Block with Brackets */}
@@ -66,7 +75,8 @@ export function ApplicationsMobile() {
       </div>
 
       {/* Embedded Feature Image Block edge-to-edge */}
-      <div className="relative mt-[32px] w-full">
+      <div className="relative mt-[32px] w-full flex justify-center">
+        {/* Original image containing the car and baked-in text box */}
         <Image
           src="/mobile/Group-97.png"
           alt=""
@@ -75,12 +85,58 @@ export function ApplicationsMobile() {
           className="w-full h-auto object-cover"
           sizes="100vw"
         />
+
+        {/* Blackout overlay to hide the baked-in text box */}
+        <div className="absolute bottom-0 w-full h-[48%] bg-black" />
+
+        {/* Dynamic Feature Slider overlay */}
+        <div className="absolute bottom-0 w-full max-w-[340px] border-[0.5px] border-white/20 bg-[#000000] p-[24px] flex flex-col justify-center">
+          
+
+          {/* Top Left Bracket */}
+          <div className="absolute -top-[0.5px] -left-[0.5px] z-10 flex size-[6px] items-center justify-center">
+            <div className="-scale-y-100 flex-none">
+              <div className="relative size-[6px]">
+                <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Right Bracket */}
+          <div className="absolute -bottom-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center">
+            <div className="-scale-x-100 flex-none">
+              <div className="relative size-[6px]">
+                <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+              </div>
+            </div>
+          </div>
+
+          <style>{`
+            @keyframes slideFadeIn {
+              0% { opacity: 0; transform: translateY(10px); }
+              100% { opacity: 1; transform: translateY(0); }
+            }
+            .animate-slide-fade {
+              animation: slideFadeIn 0.3s ease-out forwards;
+            }
+          `}</style>
+
+          <div key={activeIndex} className="flex flex-col animate-slide-fade">
+            <h3 className={`${gilroyMedium.className} text-[20px] text-white leading-[28px] not-italic`}>
+              {activeFeature.title}
+            </h3>
+            <p className={`${interRegular.className} text-[14px] text-[#f0f0f0] opacity-65 leading-[22px] mt-[16px] not-italic`}>
+              {activeFeature.description}
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Navigation Arrows */}
-      <div className="mt-[24px] flex items-center justify-center gap-[16px]">
+      <div className="mt-[32px] flex items-center justify-center gap-[16px]">
         <button
           type="button"
+          onClick={goPrev}
           className="size-[44px] relative"
           aria-label="Previous Feature"
         >
@@ -92,6 +148,7 @@ export function ApplicationsMobile() {
         </button>
         <button
           type="button"
+          onClick={goNext}
           className="size-[44px] relative"
           aria-label="Next Feature"
         >

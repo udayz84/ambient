@@ -52,20 +52,21 @@ export function Navbar() {
           alt=""
           className="block lg:hidden size-full max-w-none"
         />
-        {/* Left Connecting Vector */}
-        <div 
-          className="absolute z-20 flex size-[5px] items-center justify-center lg:hidden"
-          style={{ left: "26px", bottom: "-2.5px", transform: "translateX(-50%)" }}
-        >
-          <img src="/hero/line-cap-left.svg" alt="" className="block size-full" />
-        </div>
-        {/* Right Connecting Vector */}
-        <div 
-          className="absolute z-20 flex size-[5px] items-center justify-center lg:hidden"
-          style={{ right: "26px", bottom: "-2.5px", transform: "translateX(50%)" }}
-        >
-          <img src="/hero/line-cap-right.svg" alt="" className="block size-full" />
-        </div>
+      </div>
+
+      {/* Left Connecting Vector */}
+      <div 
+        className="absolute z-20 flex size-[5px] items-center justify-center lg:hidden"
+        style={{ left: "26px", bottom: "-2.5px", transform: "translateX(-50%)" }}
+      >
+        <img src="/hero/line-cap-left.svg" alt="" className="block size-full" />
+      </div>
+      {/* Right Connecting Vector */}
+      <div 
+        className="absolute z-20 flex size-[5px] items-center justify-center lg:hidden"
+        style={{ right: "26px", bottom: "-2.5px", transform: "translateX(50%)" }}
+      >
+        <img src="/hero/line-cap-right.svg" alt="" className="block size-full" />
       </div>
 
       <div className="relative z-10 mx-auto h-[78px] w-full max-w-[1442px]">

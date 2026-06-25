@@ -218,7 +218,7 @@ export function Hero() {
               layout="row"
               value={
                 <p
-                  className={`${gilroySemiBold.className} min-w-[min-content] w-[min-content] shrink-0 leading-[1.2] text-transparent`}
+                  className={`${gilroySemiBold.className} w-max whitespace-nowrap shrink-0 leading-[1.2] text-transparent`}
                   style={{
                     backgroundImage: statValueGradient(154.251),
                     WebkitBackgroundClip: "text",

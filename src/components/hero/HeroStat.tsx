@@ -48,7 +48,7 @@ export function HeroStat({
         rightBarLeft={rightBarLeft}
         nodeId={tagNodeId}
       />
-      <div className={`flex w-full content-stretch items-start gap-[24px] not-italic ${layout === "row" ? "flex-row" : "flex-col"}`}>
+      <div className={`flex w-full content-stretch gap-[24px] not-italic ${layout === "row" ? "flex-row items-center" : "flex-col items-start"}`}>
         {value}
         <div
           className={`flex flex-col content-stretch items-start gap-[10px] ${contentClassName}`}

@@ -139,7 +139,7 @@ export function PlatformScaleMobile() {
             src="/mobile/image 69.png"
             alt=""
             fill
-            className="object-cover object-bottom !h-[125%]"
+            className="object-cover object-center !h-[125%] -translate-x-[13px] scale-[1.05]"
             sizes="100vw"
           />
           <div
@@ -154,30 +154,30 @@ export function PlatformScaleMobile() {
 
       <div className="relative flex flex-col items-center px-[24px] pt-[48px] z-10 w-full">
         {/* Header Block */}
-        <div className="relative flex flex-col items-center px-[20px] py-[24px] w-full max-w-[340px]">
-          <div className="relative px-[16px] py-[8px]">
-            <div className="absolute top-0 right-0 flex size-[6px] items-center justify-center">
+        <div className="relative flex flex-col items-center py-[24px] w-full">
+          <div className="relative flex w-[354px] max-w-full flex-col items-center justify-center py-[10px]">
+            <div className="absolute top-0 right-0 flex size-[6px] items-center justify-center scale-[0.6] origin-top-right">
               <div className="rotate-180 flex-none">
                 <div className="relative size-[6px]">
                   <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
                 </div>
               </div>
             </div>
-            <div className="absolute bottom-0 right-0 flex size-[6px] items-center justify-center">
+            <div className="absolute bottom-0 right-0 flex size-[6px] items-center justify-center scale-[0.6] origin-bottom-right">
               <div className="-scale-x-100 flex-none">
                 <div className="relative size-[6px]">
                   <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
                 </div>
               </div>
             </div>
-            <div className="absolute bottom-0 left-0 flex size-[6px] items-center justify-center">
+            <div className="absolute bottom-0 left-0 flex size-[6px] items-center justify-center scale-[0.6] origin-bottom-left">
               <div className="flex-none">
                 <div className="relative size-[6px]">
                   <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
                 </div>
               </div>
             </div>
-            <div className="absolute top-0 left-0 flex size-[6px] items-center justify-center">
+            <div className="absolute top-0 left-0 flex size-[6px] items-center justify-center scale-[0.6] origin-top-left">
               <div className="-scale-y-100 flex-none">
                 <div className="relative size-[6px]">
                   <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
@@ -186,7 +186,7 @@ export function PlatformScaleMobile() {
             </div>
 
             <h2
-              className={`${gilroyMedium.className} bg-clip-text text-center text-[30px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+              className={`${gilroyMedium.className} relative z-10 bg-clip-text text-center text-[30px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
               style={{
                 backgroundImage:
                   "linear-gradient(100.945deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -196,7 +196,7 @@ export function PlatformScaleMobile() {
             </h2>
           </div>
           <p
-            className={`${interRegular.className} mt-[16px] text-center text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
+            className={`${interRegular.className} mt-[16px] max-w-[340px] px-[20px] text-center text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
           >
             A modular compute fabric for your entire product roadmap, from a
             microwatt edge array to a hyperscaler server grid, without ever
@@ -311,7 +311,7 @@ export function PlatformScaleMobile() {
         {/* Stat Panel */}
         <div className="relative mt-[58px] flex w-full max-w-[340px] flex-col items-center gap-[12px] bg-[rgba(0,0,0,0.1)] backdrop-blur-[12px] border-[0.5px] border-solid border-white/15 px-[20px] py-[24px]">
           {/* Top Right Bracket */}
-          <div className="absolute -top-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center">
+          <div className="absolute -top-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center scale-[0.6] origin-top-right">
             <div className="rotate-180 flex-none">
               <div className="relative size-[6px]">
                 <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
@@ -319,7 +319,7 @@ export function PlatformScaleMobile() {
             </div>
           </div>
           {/* Top Left Bracket */}
-          <div className="absolute -top-[0.5px] -left-[0.5px] z-10 flex size-[6px] items-center justify-center">
+          <div className="absolute -top-[0.5px] -left-[0.5px] z-10 flex size-[6px] items-center justify-center scale-[0.6] origin-top-left">
             <div className="-scale-y-100 flex-none">
               <div className="relative size-[6px]">
                 <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
@@ -327,7 +327,7 @@ export function PlatformScaleMobile() {
             </div>
           </div>
           {/* Bottom Right Bracket */}
-          <div className="absolute -bottom-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center">
+          <div className="absolute -bottom-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center scale-[0.6] origin-bottom-right">
             <div className="-scale-x-100 flex-none">
               <div className="relative size-[6px]">
                 <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
@@ -335,7 +335,7 @@ export function PlatformScaleMobile() {
             </div>
           </div>
           {/* Bottom Left Bracket */}
-          <div className="absolute -bottom-[0.5px] -left-[0.5px] z-10 flex size-[6px] items-center justify-center">
+          <div className="absolute -bottom-[0.5px] -left-[0.5px] z-10 flex size-[6px] items-center justify-center scale-[0.6] origin-bottom-left">
             <div className="flex-none">
               <div className="relative size-[6px]">
                 <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { gilroyMedium, gilroyBold, interRegular, interMedium } from "../hero/fonts";
 import { FOOTER_NAV_SECTIONS } from "./footer-data";
 import { NewsletterSignup } from "./NewsletterSignup";
@@ -95,14 +94,17 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
               CONNECT WITH US
             </p>
             <div className="flex items-center justify-start gap-[16px] lg:justify-start">
-              <a href="#" aria-label="LinkedIn" className="relative size-[20px] lg:size-[24px]">
-                <Image src="/footer/social-linkedin.svg" alt="" fill className="block object-contain" />
+              <a href="#" aria-label="LinkedIn" className="block size-[20px] lg:size-[24px]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/footer/social-linkedin.svg" alt="" className="block size-full object-contain" />
               </a>
-              <a href="#" aria-label="X" className="relative size-[20px] lg:size-[24px]">
-                <Image src="/footer/social-x.svg" alt="" fill className="block object-contain" />
+              <a href="#" aria-label="X" className="block size-[20px] lg:size-[24px]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/footer/social-x.svg" alt="" className="block size-full object-contain" />
               </a>
-              <a href="#" aria-label="YouTube" className="relative size-[20px] lg:size-[24px]">
-                <Image src="/footer/social-youtube.svg" alt="" fill className="block object-contain" />
+              <a href="#" aria-label="YouTube" className="block size-[20px] lg:size-[24px]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/footer/social-youtube.svg" alt="" className="block size-full object-contain" />
               </a>
             </div>
           </div>
@@ -130,7 +132,7 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
         </div>
 
         {/* Right Side */}
-        <div className="flex w-full flex-col items-start gap-[12px] pb-[4px] lg:w-auto lg:flex-row lg:items-center lg:gap-[48px]">
+        <div className="flex w-full flex-row items-center justify-between gap-[12px] pb-[4px] lg:w-auto lg:justify-start lg:gap-[48px]">
           <p className={`${interRegular.className} text-[10px] leading-[1.3] text-[rgba(255,255,255,0.8)]`}>
             © 2026 Ambient AI. All rights reserved.
           </p>

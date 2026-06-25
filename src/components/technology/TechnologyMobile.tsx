@@ -42,7 +42,7 @@ export function TechnologyMobile() {
             rightBarLeft={170.48046875}
           />
 
-          <div className="relative inline-flex flex-col items-center justify-center px-[20px] py-[10px] mt-[16px]">
+          <div className="relative flex w-[354px] max-w-full flex-col items-center justify-center py-[10px] mt-[16px]">
             <h2
               className={`${gilroyMedium.className} relative z-10 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
               style={{
@@ -53,28 +53,28 @@ export function TechnologyMobile() {
               Re-architecting<br />the physics of<br />AI compute
             </h2>
 
-            <div className="absolute top-0 right-0 flex size-[6px] items-center justify-center">
+            <div className="absolute top-0 right-0 flex size-[6px] items-center justify-center scale-[0.6] origin-top-right">
               <div className="rotate-180 flex-none">
                 <div className="relative size-[6px]">
                   <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
                 </div>
               </div>
             </div>
-            <div className="absolute bottom-0 right-0 flex size-[6px] items-center justify-center">
+            <div className="absolute bottom-0 right-0 flex size-[6px] items-center justify-center scale-[0.6] origin-bottom-right">
               <div className="-scale-x-100 flex-none">
                 <div className="relative size-[6px]">
                   <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
                 </div>
               </div>
             </div>
-            <div className="absolute bottom-0 left-0 flex size-[6px] items-center justify-center">
+            <div className="absolute bottom-0 left-0 flex size-[6px] items-center justify-center scale-[0.6] origin-bottom-left">
               <div className="flex-none">
                 <div className="relative size-[6px]">
                   <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
                 </div>
               </div>
             </div>
-            <div className="absolute top-0 left-0 flex size-[6px] items-center justify-center">
+            <div className="absolute top-0 left-0 flex size-[6px] items-center justify-center scale-[0.6] origin-top-left">
               <div className="-scale-y-100 flex-none">
                 <div className="relative size-[6px]">
                   <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />

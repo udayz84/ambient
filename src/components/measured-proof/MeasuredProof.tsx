@@ -66,7 +66,7 @@ export function MeasuredProof() {
       {/* MOBILE (<1024px) — dedicated layout, desktop is untouched above */}
       <div className="relative w-full min-[1024px]:hidden overflow-hidden">
         {/* Background elements for mobile (matching desktop) */}
-        <div className="pointer-events-none absolute top-[30%] right-0 left-0 h-[600px] -translate-y-1/2">
+        <div className="pointer-events-none absolute top-[45%] right-0 left-0 h-[600px] -translate-y-1/2">
           <Image
             src="/mobile/image 90.png"
             alt=""
