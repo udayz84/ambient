@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 import {
   dmMono,
   gilroyMedium,
+  gilroySemiBold,
   interMedium,
   interRegular,
   interSemiBold,
@@ -158,34 +159,39 @@ function WhiteCta({ children, href = "#" }: { children: React.ReactNode; href?: 
 function CareersHeroMobile() {
   return (
     <section
-      className="relative flex min-h-[100svh] w-full flex-col justify-center overflow-hidden px-[24px] py-[120px]"
+      className="relative flex min-h-[100svh] w-full flex-col justify-center overflow-hidden px-[20px] py-[120px]"
       aria-label="Careers hero"
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/careers/hero-bg.png"
+          src="/mobile/career/image%20105.png"
           alt=""
-          className="absolute inset-0 size-full object-cover opacity-40"
+          className="absolute left-[calc(50%+40px)] top-[260px] h-[342px] w-[645px] max-w-none -translate-x-1/2 object-contain opacity-90 mix-blend-screen"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/60 to-black" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black" />
       </div>
 
-      <div className="relative flex flex-col items-start gap-[20px]">
+      <div className="relative flex flex-col items-center gap-[15px]">
         <h1
-          className={`${gilroyMedium.className} max-w-[327px] bg-clip-text text-left text-[34px] leading-[40px] font-medium text-transparent [word-break:break-word] not-italic`}
-          style={{ backgroundImage: gradient("102.971deg") }}
+          className={`${gilroyMedium.className} max-w-[273px] w-full bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+          style={{ backgroundImage: gradient("103.779deg") }}
         >
           Re-architect the physics of AI
         </h1>
         <p
-          className={`${interRegular.className} max-w-[327px] text-left text-[15px] leading-[23px] font-normal text-[#f0f0f0] opacity-85 not-italic`}
+          className={`${interRegular.className} max-w-[308px] w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
         >
           Don&apos;t iterate on legacy silicon. Build the fundamental compute
           substrate for the next generation of intelligence.
         </p>
-        <div className="mt-[8px] w-full max-w-[260px]">
-          <GreenCta href="#open-roles">View open roles</GreenCta>
+        <div className="mt-[400px] w-full max-w-[231px]">
+          <GreenCta href="#open-roles">
+            <span className="flex items-center gap-[8px]">
+              <span className="text-[12px]">VIEW OPEN ROLES</span>
+              <span className="block size-[6px] rounded-full bg-white" />
+            </span>
+          </GreenCta>
         </div>
       </div>
     </section>
@@ -196,18 +202,31 @@ function CareersHeroMobile() {
 function CareersBestWorkMobile() {
   return (
     <section
-      className="relative flex w-full flex-col items-center gap-[28px] px-[24px] py-[56px]"
+      className="relative flex w-full flex-col items-center px-[20px] py-[56px]"
       aria-label="Do the best work of your life"
     >
-      <SectionTitle deg="127.769deg">Do the best work of your life</SectionTitle>
+      <div className="relative inline-flex flex-col items-center justify-center mb-[24px]">
+        <h2
+          className={`${gilroyMedium.className} w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent whitespace-pre-wrap not-italic`}
+          style={{ backgroundImage: gradient("107.454deg") }}
+        >
+          {`Do the best work\nof your life`}
+        </h2>
+        <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
+      </div>
 
       <div className="flex w-full flex-col gap-[14px]">
         {CAREERS_WORK_CARDS.map((card) => (
           <article
             key={card.title}
-            className="relative flex flex-col gap-[14px] overflow-clip p-[24px]"
-            style={{ backgroundImage: CARD_GRADIENT_BG }}
+            className={`relative flex flex-col justify-between h-[236px] p-[32px] ${GLASS_PANEL_VISIBLE_BORDER_CLASS}`}
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(83, 216, 36, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%), linear-gradient(90deg, rgba(21, 21, 21, 0.3) 0%, rgba(21, 21, 21, 0.3) 100%)",
+            }}
           >
+            <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
+            
             <div className="relative size-[36px] shrink-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -216,9 +235,10 @@ function CareersBestWorkMobile() {
                 className="absolute inset-0 size-full object-contain"
               />
             </div>
-            <div className="flex flex-col gap-[8px]">
+            
+            <div className="flex flex-col gap-[10px]">
               <p
-                className={`${gilroyMedium.className} text-[20px] leading-[26px] font-medium text-white not-italic`}
+                className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic`}
               >
                 {card.title}
               </p>
@@ -262,51 +282,59 @@ function CareersDnaMobile() {
 
   return (
     <section
-      className="relative flex w-full flex-col items-center gap-[28px] px-[24px] py-[56px]"
+      className="relative flex w-full flex-col items-center px-[19px] py-[56px] bg-black"
       aria-label="Driven by physics. Defined by our DNA."
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/careers/dna-section-bg.png"
+          src="/mobile/career/image 108.png"
           alt=""
-          className="absolute inset-0 size-full object-cover opacity-25"
+          className="absolute inset-0 size-full object-cover object-bottom"
         />
-        <div className="absolute inset-0 bg-black/70" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,black_100%)]" />
       </div>
-
-      <div className="relative flex flex-col items-center gap-[12px]">
-        <SectionTitle deg="105.739deg">
-          Driven by physics. Defined by our DNA.
-        </SectionTitle>
+      <div className="relative flex flex-col items-center justify-center mb-[47px] gap-[10px]">
+        <div className="relative inline-flex flex-col items-center justify-center">
+          <h2
+            className={`${gilroyMedium.className} w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent whitespace-pre-wrap not-italic`}
+            style={{ backgroundImage: gradient("107.454deg") }}
+          >
+            {`Driven by physics.\nDefined by our DNA.`}
+          </h2>
+          <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
+        </div>
         <p
-          className={`${interRegular.className} max-w-[327px] text-center text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-70 not-italic`}
+          className={`${interRegular.className} w-[334px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic`}
         >
           This is how we work, build, and solve at Ambient.
         </p>
       </div>
 
-      <div className="relative flex w-full flex-col gap-[14px]">
-        <GlassPanelMobile title={panels[0].title} description={panels[0].description} />
-        <GlassPanelMobile title={panels[1].title} description={panels[1].description} />
+      <div className="relative flex w-full flex-col gap-[47px] items-center">
+        <div className="flex w-full flex-col gap-[14px]">
+          <GlassPanelMobile title={panels[0].title} description={panels[0].description} />
+          <GlassPanelMobile title={panels[1].title} description={panels[1].description} />
+        </div>
 
-        <div className="relative my-[8px] flex h-[180px] w-full items-center justify-center">
+        <div className="relative flex h-[349px] w-[336px] shrink-0 items-center justify-center">
           <Image
-            src="/careers/chip-object.png"
+            src="/mobile/career/Chip Image.png"
             alt=""
             fill
-            className="object-contain object-center"
-            sizes="327px"
+            className="object-contain object-center relative z-10"
+            sizes="336px"
           />
         </div>
 
-        <GlassPanelMobile title={panels[2].title} description={panels[2].description} />
-        <GlassPanelMobile title={panels[3].title} description={panels[3].description} />
-
-        <GlassPanelMobile
-          title="Protect What Powers Us"
-          description="You design with power as a constraint from day one. Efficiency is not an afterthought, it is a core part of how you think, build, and optimize systems."
-        />
+        <div className="flex w-full flex-col gap-[14px]">
+          <GlassPanelMobile title={panels[2].title} description={panels[2].description} />
+          <GlassPanelMobile title={panels[3].title} description={panels[3].description} />
+          <GlassPanelMobile
+            title="Protect What Powers Us"
+            description="You design with power as a constraint from day one. Efficiency is not an afterthought, it is a core part of how you think, build, and optimize systems."
+          />
+        </div>
       </div>
     </section>
   );
@@ -315,15 +343,16 @@ function CareersDnaMobile() {
 function GlassPanelMobile({ title, description }: { title: string; description: string }) {
   return (
     <div
-      className={`relative flex flex-col gap-[10px] p-[24px] bg-[rgba(21,21,21,0.5)] ${GLASS_PANEL_VISIBLE_BORDER_CLASS}`}
+      className={`relative flex w-full flex-col gap-[10px] min-h-[156px] pt-[18px] pb-[28px] px-[20px] bg-[rgba(21,21,21,0.3)] ${GLASS_PANEL_VISIBLE_BORDER_CLASS}`}
     >
+      <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
       <p
-        className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium text-white not-italic`}
+        className={`${gilroyMedium.className} text-[20px] leading-[28px] font-medium text-white not-italic`}
       >
         {title}
       </p>
       <p
-        className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-white opacity-65 not-italic`}
+        className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-white opacity-65 not-italic`}
       >
         {description}
       </p>
@@ -349,29 +378,36 @@ function CareersOpenRolesMobile() {
   return (
     <section
       id="open-roles"
-      className="relative flex w-full scroll-mt-[90px] flex-col gap-[24px] px-[24px] py-[56px]"
+      className="relative flex w-full scroll-mt-[90px] flex-col items-center px-[20px] py-[56px]"
       aria-label="Open Roles"
     >
-      <SectionTitle deg="107.715deg" className="self-center">
-        Open Roles
-      </SectionTitle>
-
-      <div className="flex gap-[12px]">
-        <FilterSelect
-          label="Job Type"
-          value={jobTypeFilter}
-          onChange={setJobTypeFilter}
-          options={CAREERS_JOB_TYPE_FILTER_OPTIONS}
-        />
-        <FilterSelect
-          label="Location"
-          value={locationFilter}
-          onChange={setLocationFilter}
-          options={CAREERS_LOCATION_FILTER_OPTIONS}
-        />
+      <div className="relative flex flex-col items-center gap-[15px] mb-[37px]">
+        <div className="relative inline-flex items-center justify-center">
+          <h2
+            className={`${gilroyMedium.className} w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent whitespace-pre-wrap not-italic`}
+            style={{ backgroundImage: gradient("129.227deg") }}
+          >
+            Open Roles
+          </h2>
+          <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
+        </div>
+        <div className="flex w-full gap-[6px] justify-center">
+          <FilterSelect
+            label="Job Type"
+            value={jobTypeFilter}
+            onChange={setJobTypeFilter}
+            options={CAREERS_JOB_TYPE_FILTER_OPTIONS}
+          />
+          <FilterSelect
+            label="Location"
+            value={locationFilter}
+            onChange={setLocationFilter}
+            options={CAREERS_LOCATION_FILTER_OPTIONS}
+          />
+        </div>
       </div>
 
-      <div className="flex flex-col gap-[12px]">
+      <div className="flex w-full flex-col gap-[12px]">
         {filteredJobs.length === 0 ? (
           <div className="flex h-[120px] items-center justify-center">
             <p
@@ -381,32 +417,62 @@ function CareersOpenRolesMobile() {
             </p>
           </div>
         ) : (
-          filteredJobs.map((job) => (
+          filteredJobs.map((job, index) => (
             <JobRowMobile
               key={job.title}
               title={job.title}
               category={job.category}
               location={job.location}
+              isActive={index === 0}
             />
           ))
         )}
       </div>
 
-      <div className="relative mt-[12px] flex flex-col items-center gap-[16px] border-[0.5px] border-solid border-white/10 bg-[rgba(83,216,36,0.06)] p-[24px]">
-        <p
-          className={`${gilroyMedium.className} max-w-[280px] bg-clip-text text-center text-[22px] leading-[28px] font-medium text-transparent not-italic`}
-          style={{ backgroundImage: gradient("125.631deg") }}
+      <div className="relative mt-[24px] w-full max-w-[353px] p-[1px]">
+        {/* Outer container with clip-path and border gradient */}
+        <div 
+          className="absolute inset-0 bg-gradient-to-b from-[rgba(255,255,255,0.3)] to-[rgba(255,255,255,0.05)] shadow-[0px_0px_20px_0px_rgba(83,216,36,0.15)]"
+          style={{ clipPath: "polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(50% - 20px), calc(100% - 10px) calc(50% - 10px), calc(100% - 10px) calc(50% + 10px), 100% calc(50% + 20px), 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 calc(50% + 20px), 10px calc(50% + 10px), 10px calc(50% - 10px), 0 calc(50% - 20px), 0 14px)" }}
+        />
+        
+        {/* Inner container */}
+        <div 
+          className="relative flex w-full flex-col items-center bg-black/60 backdrop-blur-xl px-[20px] py-[40px]"
+          style={{ clipPath: "polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(50% - 20px), calc(100% - 10px) calc(50% - 10px), calc(100% - 10px) calc(50% + 10px), 100% calc(50% + 20px), 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 calc(50% + 20px), 10px calc(50% + 10px), 10px calc(50% - 10px), 0 calc(50% - 20px), 0 14px)" }}
         >
-          Don&apos;t see the right role?
-        </p>
-        <p
-          className={`${interRegular.className} max-w-[300px] text-center text-[13px] leading-[20px] font-normal text-white opacity-65 not-italic`}
-        >
-          Submit a general application and we&apos;ll reach out when a matching
-          position opens.
-        </p>
-        <div className="w-full">
-          <GreenCta href="#">Share your profile</GreenCta>
+          {/* Subtle green glow wash */}
+          <div className="pointer-events-none absolute inset-0 bg-[rgba(83,216,36,0.06)]" aria-hidden />
+
+          {/* Text content wrapped with Corners */}
+          <div className="relative inline-flex flex-col items-center justify-center px-[8px] py-[8px]">
+            <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
+            <p
+              className={`${gilroyMedium.className} w-[280px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic`}
+              style={{ backgroundImage: "linear-gradient(103.604deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)" }}
+            >
+              Don&apos;t See The Right Role?
+            </p>
+          </div>
+
+          <p
+            className={`${interRegular.className} relative z-10 mt-[16px] w-full max-w-[300px] text-center text-[14px] leading-[22px] font-normal text-white opacity-65 not-italic`}
+          >
+            Submit a general application and we&apos;ll reach out when a matching
+            position opens.
+          </p>
+
+          <a
+            href="#"
+            className="relative z-10 mt-[32px] flex h-[37px] w-[241px] shrink-0 items-center justify-center gap-[10px] overflow-clip bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+            style={{ boxShadow: "0px 32.385px 82.505px 0px rgba(69,196,24,0.2), 0px 19.062px 24.872px 0px rgba(83,216,36,0.15), 0px 7.918px 10.331px 0px rgba(83,216,36,0.15), 0px 2.864px 3.737px 0px rgba(83,216,36,0.1)" }}
+          >
+            <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_2px_rgba(217,255,240,0.6)]" />
+            <span className={`${gilroyMedium.className} relative z-10 text-[12px] leading-[24px] uppercase text-white not-italic`}>
+              SHARE YOUR PROFILE
+            </span>
+            <div className="relative z-10 size-[4px] shrink-0 rounded-full bg-white" />
+          </a>
         </div>
       </div>
     </section>
@@ -426,26 +492,26 @@ function FilterSelect({
 }) {
   return (
     <div
-      className={`relative flex flex-1 items-center bg-[rgba(21,21,21,0.5)] ${GLASS_PANEL_VISIBLE_BORDER_CLASS}`}
+      className={`relative flex h-[48px] w-[174px] shrink-0 items-center bg-[rgba(0,0,0,0)] ${GLASS_PANEL_VISIBLE_BORDER_CLASS}`}
     >
       <select
         aria-label={label}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className={`${interRegular.className} h-[44px] w-full cursor-pointer appearance-none bg-transparent px-[14px] pr-[36px] text-[13px] font-normal text-white not-italic`}
+        className={`${interRegular.className} h-full w-full cursor-pointer appearance-none bg-transparent px-[20px] pr-[36px] text-[14px] leading-[1.4] font-normal text-white not-italic`}
       >
         {options.map((option) => (
           <option key={option.value} value={option.value} className="bg-black text-white">
-            {option.value === "all" ? `All ${label}s` : option.label}
+            {option.value === "all" ? `${label}` : option.label}
           </option>
         ))}
       </select>
       <Image
         src="/careers/chevron-down.svg"
         alt=""
-        width={20}
-        height={20}
-        className="pointer-events-none absolute right-[10px] size-[20px]"
+        width={24}
+        height={24}
+        className="pointer-events-none absolute right-[20px] size-[24px]"
         aria-hidden
       />
     </div>
@@ -456,48 +522,69 @@ function JobRowMobile({
   title,
   category,
   location,
+  isActive = false,
 }: {
   title: string;
   category: string;
   location: string;
+  isActive?: boolean;
 }) {
   return (
-    <article className="relative flex flex-col gap-[10px] border-[0.5px] border-solid border-white/15 bg-black p-[20px]">
-      <span
-        className={`${dmMono.className} inline-flex w-fit border-[0.5px] border-solid border-white/20 bg-[rgba(255,255,255,0.06)] px-[10px] py-[3px] text-[11px] tracking-[-0.22px] uppercase text-[#ecfae5] not-italic`}
-      >
-        {category}
-      </span>
-      <p
-        className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium text-white not-italic`}
-      >
-        {title}
-      </p>
-      <p
-        className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
-      >
-        {location}
-      </p>
-      <a
-        href="#"
-        className={`${interMedium.className} group relative mt-[6px] flex h-[42px] items-center justify-center gap-[12px] overflow-hidden border-[0.5px] border-solid border-white/20 bg-[rgba(226,241,202,0.12)] px-[18px] text-[13px] leading-[normal] font-medium uppercase whitespace-nowrap text-white not-italic`}
-      >
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612] opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-        />
-        <span className="relative z-10 flex items-center gap-[12px]">
-          Apply now
+    <article className="relative flex h-[191px] w-full flex-col justify-center gap-[15px] border border-[rgba(240,240,240,0.2)] bg-black px-[17px]">
+      <div className="flex flex-col gap-[11px] w-full">
+        <div className="relative inline-flex h-[26px] w-fit items-center justify-center overflow-clip bg-[rgba(255,255,255,0.06)] px-[12px]">
+          <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
+          <div className="absolute left-[6px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+          <div className="absolute right-[6px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+          <span
+            className={`${dmMono.className} text-[13px] leading-[19.5px] uppercase text-[#ecfae5] not-italic`}
+          >
+            {category}
+          </span>
+        </div>
+        <div className="flex flex-col w-full">
+          <p
+            className={`${gilroyMedium.className} text-[16px] leading-[28px] text-white not-italic mb-[-4px]`}
+          >
+            {title}
+          </p>
+          <p
+            className={`${interRegular.className} text-[14px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
+          >
+            {location}
+          </p>
+        </div>
+      </div>
+      
+      <div className="relative flex h-[48px] w-[161px] shrink-0 items-center gap-[8px] overflow-clip px-[20px] py-[10px]">
+        <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
+        
+        {isActive ? (
+          <>
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+              style={{ boxShadow: "0px 42px 107px 0px rgba(69,196,24,0.2), 0px 24.721px 32.257px 0px rgba(83,216,36,0.15), 0px 10.268px 13.398px 0px rgba(83,216,36,0.15), 0px 3.714px 4.846px 0px rgba(83,216,36,0.1)" }}
+            />
+            <div className="absolute inset-0 pointer-events-none shadow-[inset_0px_1px_18px_2px_rgba(217,255,240,0.6)]" />
+          </>
+        ) : (
+          <div className="absolute inset-0 bg-[rgba(226,241,202,0.12)]" />
+        )}
+
+        <span className={`${gilroyMedium.className} relative z-10 text-[14px] leading-[28px] uppercase text-white not-italic`}>
+          APPLY NOW
+        </span>
+        <div className="relative z-10 flex h-[6px] w-[12px] items-center justify-center shrink-0">
           <Image
             src="/careers/chevron-apply.svg"
             alt=""
-            width={12}
-            height={6}
-            className="h-[6px] w-[12px]"
+            fill
+            className="object-contain"
             aria-hidden
           />
-        </span>
-      </a>
+        </div>
+      </div>
     </article>
   );
 }
@@ -506,18 +593,31 @@ function JobRowMobile({
 function CareersBenefitsMobile() {
   return (
     <section
-      className="relative flex w-full flex-col items-center gap-[28px] px-[24px] py-[56px]"
+      className="relative flex w-full flex-col items-center gap-[24px] px-[20px] py-[56px]"
       aria-label="Benefits and Perks"
     >
-      <SectionTitle deg="112.176deg">Benefits &amp; Perks</SectionTitle>
+      <div className="relative inline-flex items-center justify-center p-[8px]">
+        <h2
+          className={`${gilroyMedium.className} w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic`}
+          style={{ backgroundImage: gradient("122.163deg") }}
+        >
+          Benefits &amp; Perks
+        </h2>
+        <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
+      </div>
 
       <div className="flex w-full flex-col gap-[14px]">
         {CAREERS_BENEFITS_CARDS.map((card) => (
           <article
             key={card.title}
-            className="relative flex flex-col gap-[14px] overflow-clip p-[24px]"
-            style={{ backgroundImage: CARD_GRADIENT_BG }}
+            className="relative flex h-[222px] w-full max-w-[353px] flex-col justify-between items-start p-[32px] mx-auto overflow-clip"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(83, 216, 36, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%), linear-gradient(90deg, rgba(21, 21, 21, 0.3) 0%, rgba(21, 21, 21, 0.3) 100%)",
+            }}
           >
+            <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
+            
             <div className="relative size-[36px] shrink-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -526,14 +626,15 @@ function CareersBenefitsMobile() {
                 className="absolute inset-0 size-full object-contain"
               />
             </div>
-            <div className="flex flex-col gap-[8px]">
+            
+            <div className="flex flex-col gap-[10px] w-full mt-auto">
               <p
-                className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium text-white not-italic`}
+                className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic`}
               >
                 {card.title}
               </p>
               <p
-                className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-white opacity-65 not-italic`}
+                className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-white opacity-65 not-italic`}
               >
                 {card.description}
               </p>
@@ -549,29 +650,48 @@ function CareersBenefitsMobile() {
 function CareersBottomCtaMobile() {
   return (
     <section
-      className="relative flex w-full flex-col items-center gap-[28px] overflow-hidden px-[24px] py-[72px]"
+      className="relative flex w-full flex-col items-center gap-[42px] overflow-hidden px-[17.5px] pt-[72px] pb-[100px]"
       aria-label="Ready to build the future of compute"
     >
-      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/careers/footer-bg.png"
-          alt=""
-          className="absolute inset-0 size-full object-cover opacity-30"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/70 to-black" />
+      {/* Background image removed per request */}
+
+      <div className="relative inline-flex items-center justify-center p-[8px]">
+        <h2
+          className={`${gilroyMedium.className} w-[319px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+          style={{ backgroundImage: "linear-gradient(105.99deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)" }}
+        >
+          Ready to build the future of compute?
+        </h2>
+        <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
       </div>
 
-      <h2
-        className={`${gilroyMedium.className} relative max-w-[327px] bg-clip-text text-center text-[26px] leading-[34px] font-medium tracking-[-0.26px] text-transparent [word-break:break-word] not-italic`}
-        style={{ backgroundImage: gradient("110.887deg") }}
-      >
-        Ready to build the future of compute?
-      </h2>
+      <div className="relative flex w-full max-w-[354px] flex-row justify-center gap-[14px]">
+        {/* APPLY NOW BUTTON */}
+        <a
+          href="#"
+          className={`${gilroySemiBold.className} relative flex h-[48px] w-[170px] shrink-0 items-center justify-center gap-[10px] overflow-clip bg-gradient-to-b from-[#6ced3f] to-[#38a612]`}
+          style={{ boxShadow: "0px 42px 107px 0px rgba(69,196,24,0.2), 0px 24.721px 32.257px 0px rgba(83,216,36,0.15), 0px 10.268px 13.398px 0px rgba(83,216,36,0.15), 0px 3.714px 4.846px 0px rgba(83,216,36,0.1)" }}
+        >
+          <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
+          <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
+          <span className="relative z-10 text-[14px] uppercase text-white not-italic font-semibold">
+            APPLY NOW
+          </span>
+          <div className="relative z-10 size-[6px] shrink-0 rounded-full bg-white" />
+        </a>
 
-      <div className="relative flex w-full flex-col gap-[12px]">
-        <GreenCta href="#">Apply now</GreenCta>
-        <WhiteCta href="#">Refer a candidate</WhiteCta>
+        {/* REFER A CANDIDATE BUTTON */}
+        <a
+          href="#"
+          className={`${gilroySemiBold.className} relative flex h-[48px] w-[170px] shrink-0 items-center justify-center overflow-clip bg-white`}
+          style={{ boxShadow: "0px 42px 107px 0px rgba(69,196,24,0.2), 0px 24.721px 32.257px 0px rgba(83,216,36,0.15), 0px 10.268px 13.398px 0px rgba(83,216,36,0.15), 0px 3.714px 4.846px 0px rgba(83,216,36,0.1)" }}
+        >
+          <div className="absolute inset-0 pointer-events-none opacity-40 mix-blend-plus-lighter" style={{ backgroundImage: "url(/careers/white-cta-texture.png)", backgroundSize: "307.2px 307.2px" }} />
+          <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
+          <span className="relative z-10 text-[14px] uppercase text-[#121212] not-italic whitespace-nowrap font-semibold">
+            REFER A CANDIDATE
+          </span>
+        </a>
       </div>
     </section>
   );
