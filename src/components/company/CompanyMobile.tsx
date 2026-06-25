@@ -86,37 +86,67 @@ function SectionWrap({
   );
 }
 
+const HERO_IMG_GRADIENT =
+  "linear-gradient(132.908deg, rgb(0, 0, 0) 31.15%, rgba(0, 0, 0, 0) 76.987%), linear-gradient(187.815deg, rgba(0, 0, 0, 0) 49.061%, rgb(0, 0, 0) 90.541%)";
+
 /* ---------------------------------- HERO ---------------------------------- */
 function CompanyHeroMobile() {
   return (
     <section
-      className="relative flex min-h-[90svh] w-full flex-col justify-end overflow-hidden px-[24px] pb-[56px] pt-[120px]"
+      className="relative w-full overflow-hidden bg-black pt-[120px]"
       aria-label="Company hero"
+      data-node-id="3244:5532"
+      data-name="Banner"
     >
-      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/company/hero-bg.png"
-          alt=""
-          className="absolute inset-0 size-full object-cover opacity-50"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/55 to-black" />
-      </div>
+      <div className="relative mx-auto h-[557px] w-full">
+        {/* 3244:6106 — hero background image */}
+        <div
+          className="pointer-events-none absolute right-[-60px] top-[189px] z-0 h-[450px] w-[765px] overflow-hidden"
+          data-node-id="3244:6106"
+          data-name="image 125"
+          aria-hidden
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/mobile/company/hero.png"
+            alt=""
+            className="absolute top-0 left-0 h-full w-[99.97%] max-w-none object-cover"
+          />
+          <div
+            className="absolute inset-0"
+            style={{ backgroundImage: HERO_IMG_GRADIENT }}
+          />
+        </div>
 
-      <div className="relative flex flex-col items-start gap-[16px]">
-        <h1
-          className={`${gilroyMedium.className} max-w-[327px] bg-clip-text text-left text-[32px] leading-[38px] font-medium text-transparent [word-break:break-word] not-italic`}
-          style={{ backgroundImage: gradient("100.689deg") }}
+        {/* 3244:5534 — headline + body */}
+        <div
+          className="absolute top-0 left-0 z-10 flex w-full flex-col items-center gap-[15px] px-[20px]"
+          data-node-id="3244:5534"
+          data-name="Frame 1000003879"
         >
-          A new paradigm for efficient AI compute
-        </h1>
-        <p
-          className={`${interRegular.className} max-w-[327px] text-left text-[15px] leading-[23px] font-normal text-[#f0f0f0] opacity-85 not-italic`}
-        >
-          We build energy-aware, programmable, mixed-signal AI processors that
-          unlock orders-of-magnitude improvements in performance-per-watt,
-          enabling scalable intelligence across edge, enterprise, and cloud.
-        </p>
+          <div
+            className="relative w-fit"
+            data-node-id="3244:5535"
+            data-name="Group 78"
+          >
+            <h1
+              className={`${gilroyMedium.className} w-[321px] max-w-full bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+              style={{ backgroundImage: gradient("100.882deg") }}
+              data-node-id="3244:5536"
+            >
+              A new paradigm for efficient AI compute
+            </h1>
+            <Corners />
+          </div>
+          <p
+            className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+            data-node-id="3244:5541"
+          >
+            We build energy-aware, programmable, mixed-signal AI processors that
+            unlock orders-of-magnitude improvements in performance-per-watt,
+            enabling scalable intelligence across edge, enterprise, and cloud.
+          </p>
+        </div>
       </div>
     </section>
   );

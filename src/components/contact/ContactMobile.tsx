@@ -97,31 +97,33 @@ function SectionWrap({
 function ContactHeroMobile() {
   return (
     <section
-      className="relative flex min-h-[80svh] w-full flex-col justify-center overflow-hidden px-[24px] py-[120px]"
+      className="relative flex w-full flex-col justify-start overflow-hidden px-[20px] pt-[100px] pb-[135px]"
       aria-label="Contact hero"
     >
-      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
         <Image
-          src="/contact/hand.png"
+          src="/mobile/contact/hand.png"
           alt=""
           fill
-          className="object-cover object-bottom opacity-45"
+          className="object-cover object-top"
           sizes="100vw"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/55 to-black" />
+        <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(132.908deg, rgb(0, 0, 0) 31.15%, rgba(0, 0, 0, 0) 76.987%), linear-gradient(187.815deg, rgba(0, 0, 0, 0) 49.061%, rgb(0, 0, 0) 90.541%)" }} />
       </div>
 
-      <div className="relative flex flex-col items-center gap-[18px]">
-        <h1
-          className={`${gilroyMedium.className} max-w-[327px] bg-clip-text text-center text-[34px] leading-[40px] font-medium text-transparent [word-break:break-word] not-italic`}
-          style={{ backgroundImage: gradient("100.689deg") }}
-        >
-          Start building with Ambient
-        </h1>
-        <p className={`${interRegular.className} max-w-[327px] text-center text-[15px] leading-[23px] font-normal text-[#f0f0f0] opacity-80 not-italic`}>
-          Skip the generic sales inbox. Get direct access to our engineering
-          team, technical documentation, and commercial partners.
+      <div className="relative flex flex-col items-center gap-[15px]">
+        <div className="relative flex w-[352px] items-center justify-center py-[7px]">
+          <Corners />
+          <h1
+            className={`${gilroyMedium.className} w-[321px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+            style={{ backgroundImage: "linear-gradient(100.882deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)" }}
+          >
+            A new paradigm for efficient AI compute
+          </h1>
+        </div>
+        <p className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic`}>
+          We build energy-aware, programmable, mixed-signal AI processors that unlock orders-of-magnitude improvements in performance-per-watt, enabling scalable intelligence across edge, enterprise, and cloud.
         </p>
       </div>
     </section>
@@ -132,12 +134,12 @@ function ContactHeroMobile() {
 function ContactResourcesMobile() {
   return (
     <SectionWrap aria-label="Immediate resources" className="!py-[32px]">
-      <div className="relative flex w-full flex-col gap-[18px] overflow-clip border-[0.5px] border-solid border-white/25 bg-gradient-to-b from-[rgba(255,255,255,0.1)] to-[rgba(255,255,255,0.03)] p-[24px] backdrop-blur-[16px]">
+      <div className="relative flex w-full flex-col gap-[20px] overflow-clip border-[0.5px] border-solid border-white/25 bg-gradient-to-b from-[rgba(255,255,255,0.1)] to-[rgba(255,255,255,0.03)] p-[24px] backdrop-blur-[16px]">
         <Corners />
-        <p className={`${gilroyMedium.className} text-[20px] leading-[26px] font-medium text-white not-italic`}>
+        <p className={`${gilroyMedium.className} w-full text-center text-[22px] leading-[28px] font-medium text-white not-italic`}>
           Looking for immediate resources?
         </p>
-        <div className="flex flex-col gap-[12px]">
+        <div className="flex w-full flex-col gap-[20px]">
           <GreenCta href="#">Download Datasheets &amp; SDK</GreenCta>
           <WhiteCta href="#">Download Press Kit</WhiteCta>
           <WhiteCta href="#">Case Studies &amp; Whitepapers</WhiteCta>
@@ -243,8 +245,16 @@ function ContactScheduleMobile() {
   return (
     <SectionWrap aria-label="Schedule a Consultation">
       <div className="flex flex-col items-center gap-[12px]">
-        <SectionTitle deg="124.465deg">Schedule a Consultation</SectionTitle>
-        <p className={`${interRegular.className} max-w-[327px] text-center text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-70 not-italic`}>
+        <div className="relative flex w-[352px] items-center justify-center py-[7px]">
+          <Corners />
+          <h2
+            className={`${gilroyMedium.className} w-[241px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+            style={{ backgroundImage: "linear-gradient(100.882deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)" }}
+          >
+            Schedule a<br />Consultation
+          </h2>
+        </div>
+        <p className={`${interRegular.className} w-[308px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 not-italic`}>
           Book a direct meeting with our engineering or commercial teams.
         </p>
       </div>
