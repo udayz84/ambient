@@ -29,6 +29,13 @@ export const interSemiBold = Inter({
   variable: "--font-inter",
 });
 
+export const interBold = Inter({
+  subsets: ["latin"],
+  weight: "700",
+  display: "swap",
+  variable: "--font-inter",
+});
+
 export const gilroyRegular = localFont({
   src: "../../../public/fonts/gilroy/Gilroy-Regular.ttf",
   weight: "400",

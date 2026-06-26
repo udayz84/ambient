@@ -24,19 +24,13 @@ function MenuIcon() {
       className="text-white"
     >
       <path
-        d="M3 6h18"
+        d="M3 8h18"
         stroke="#ffffff"
         strokeWidth="1.8"
         strokeLinecap="round"
       />
       <path
-        d="M3 12h18"
-        stroke="#ffffff"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-      <path
-        d="M3 18h18"
+        d="M3 16h18"
         stroke="#ffffff"
         strokeWidth="1.8"
         strokeLinecap="round"
@@ -163,10 +157,6 @@ export function MobileMenu() {
                   unoptimized
                 />
               </Link>
-
-              <div className="absolute top-[21px] right-[64px] flex items-center justify-center">
-                <NavbarCta />
-              </div>
 
               <div className="absolute top-[21px] right-[16px] flex h-[36px] w-[36px] items-center justify-center">
                 <button

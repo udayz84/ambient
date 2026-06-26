@@ -1,0 +1,10 @@
+<svg viewBox="0 0 66.14 65" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+  <defs>
+    <radialGradient id="somIconGrad" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="10" gradientTransform="matrix(3.7614e-14 2.3564 -4.8562 -3.0791e-15 33.07 -3.9048)">
+      <stop stop-color="rgba(57,74,54,1)" offset="0"/>
+      <stop stop-color="rgba(43,54,41,1)" offset="0.5"/>
+      <stop stop-color="rgba(29,34,28,1)" offset="1"/>
+    </radialGradient>
+  </defs>
+  <rect x="0" y="0" height="100%" width="100%" fill="url(#somIconGrad)"/>
+</svg>

@@ -3,7 +3,16 @@ import { gilroySemiBold } from "../hero/fonts";
 const watermarkGradient =
   "linear-gradient(259.734deg, rgba(255, 255, 255, 0.12) 0.12143%, rgba(255, 255, 255, 0.6) 44.084%, rgba(255, 255, 255, 0) 113.37%)";
 
+const HERO_IMAGES: Record<string, string> = {
+  AUTOMOTIVE: "/applications/car-hero.png",
+  MEDICAL: "/applications/app-medical.png",
+  INDUSTRIAL: "/applications/app-robotics.png",
+  "SMART HOMES": "/applications/app-robotics.png",
+};
+
 export function ApplicationsHeroVisual({ activeTab }: { activeTab: string }) {
+  const imgSrc = HERO_IMAGES[activeTab] || "/applications/car-hero.png";
+
   return (
     <>
       <p
@@ -19,54 +28,62 @@ export function ApplicationsHeroVisual({ activeTab }: { activeTab: string }) {
         data-node-id="2379:850"
         data-name="unnamed-(1) 1"
       >
-        <div className="-scale-y-100 rotate-180 flex-none">
+        <div className={activeTab === "AUTOMOTIVE" ? "-scale-y-100 rotate-180 flex-none" : "flex-none w-full h-full flex items-center justify-center"}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt=""
-            src="/applications/car-hero.png"
-            className="pointer-events-none h-[435.28900146484375px] w-[984.82421875px] max-w-none object-bottom"
+            src={imgSrc}
+            className={`pointer-events-none max-w-none ${
+              activeTab === "AUTOMOTIVE" 
+                ? "h-[435.28900146484375px] w-[984.82421875px] object-bottom" 
+                : "max-h-[435px] max-w-[984px] w-auto h-auto object-contain"
+            }`}
             aria-hidden
           />
         </div>
       </div>
 
-      <div
-        className="absolute top-[516.041015625px] left-[372.0654296875px] z-[10] h-[88.18115234375px] w-[14.142134666442871px]"
-        data-node-id="2379:940"
-        data-name="Group 57"
-      >
-        <div className="absolute inset-[-4.54%_-28.28%_0_-28.28%]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt=""
-            src="/applications/indicator-vertical.svg"
-            className="block size-full max-w-none"
-            aria-hidden
-          />
-        </div>
-      </div>
+      {activeTab === "AUTOMOTIVE" && (
+        <>
+          <div
+            className="absolute top-[516.041015625px] left-[372.0654296875px] z-[10] h-[88.18115234375px] w-[14.142134666442871px]"
+            data-node-id="2379:940"
+            data-name="Group 57"
+          >
+            <div className="absolute inset-[-4.54%_-28.28%_0_-28.28%]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                alt=""
+                src="/applications/indicator-vertical.svg"
+                className="block size-full max-w-none"
+                aria-hidden
+              />
+            </div>
+          </div>
 
-      <div className="contents" data-node-id="2379:946" data-name="Group 58">
-        <div className="absolute top-[618.8037109375px] left-[743.226318359375px] z-[10] flex h-[76.62291822064526px] w-[87.66146941957857px] items-center justify-center">
-          <div className="-rotate-90 flex-none">
-            <div
-              className="relative h-[87.66146941957857px] w-[76.62291822064526px]"
-              data-node-id="2379:947"
-              data-name="Indicator"
-            >
-              <div className="absolute inset-[-4.56%_-5.22%_0_-0.33%]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  alt=""
-                  src="/applications/indicator-angled.svg"
-                  className="block size-full max-w-none"
-                  aria-hidden
-                />
+          <div className="contents" data-node-id="2379:946" data-name="Group 58">
+            <div className="absolute top-[618.8037109375px] left-[743.226318359375px] z-[10] flex h-[76.62291822064526px] w-[87.66146941957857px] items-center justify-center">
+              <div className="-rotate-90 flex-none">
+                <div
+                  className="relative h-[87.66146941957857px] w-[76.62291822064526px]"
+                  data-node-id="2379:947"
+                  data-name="Indicator"
+                >
+                  <div className="absolute inset-[-4.56%_-5.22%_0_-0.33%]">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      alt=""
+                      src="/applications/indicator-angled.svg"
+                      className="block size-full max-w-none"
+                      aria-hidden
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </>
   );
 }
