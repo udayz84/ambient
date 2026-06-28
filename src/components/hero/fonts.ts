@@ -64,6 +64,13 @@ export const gilroyBold = localFont({
   variable: "--font-gilroy",
 });
 
+export const gilroyExtraBold = localFont({
+  src: "../../../public/fonts/gilroy/Gilroy-ExtraBold.ttf",
+  weight: "800",
+  display: "swap",
+  variable: "--font-gilroy",
+});
+
 export const dmMono = DM_Mono({
   subsets: ["latin"],
   weight: "400",
