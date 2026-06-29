@@ -80,6 +80,15 @@ export function TechnologyPageHero() {
             aria-hidden
             className="absolute inset-0 bg-gradient-to-b from-[43.649%] from-[rgba(0,0,0,0)] to-black"
           />
+          {/* Fade left/right edges into the black background on ultrawide screens */}
+          <div
+            aria-hidden
+            className="absolute inset-y-0 left-0 hidden w-[300px] bg-gradient-to-r from-black to-transparent min-[1441px]:block"
+          />
+          <div
+            aria-hidden
+            className="absolute inset-y-0 right-0 hidden w-[300px] bg-gradient-to-l from-black to-transparent min-[1441px]:block"
+          />
         </div>
 
         {/* 2971:1206 — hero chip object */}

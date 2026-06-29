@@ -1,23 +1,120 @@
-import { gilroyMedium } from "../hero/fonts";
+import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+
+const IMAGE_GRADIENT_DESKTOP =
+  "radial-gradient(683.75px 163.5px at 50% 50%, rgba(26,26,26,1) 0%, rgba(13,13,13,1) 25%, rgba(7,7,7,1) 37.5%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%)";
+const IMAGE_GRADIENT_MOBILE =
+  "radial-gradient(ellipse at center, rgba(26,26,26,1) 0%, rgba(13,13,13,1) 25%, rgba(7,7,7,1) 37.5%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%)";
+
+const PROTOTYPE_CARDS = [
+  {
+    title: "The Lab",
+    description:
+      "Use the integrated breakout board for rapid prototyping. It includes a USB-C port for charging, a 10-pin JTAG connector, programmable LEDs, and headers for easy signal probing and power analysis.",
+  },
+  {
+    title: "Production-Ready SOMs",
+    description:
+      "Once your software is validated, simply snap off the breakout half. The remaining 21×21mm core module embeds directly into your space-constrained product with zero hardware redesign required.",
+  },
+] as const;
+
+function PrototypeCard({
+  title,
+  description,
+  widthClass,
+  imageHeightClass,
+  imageGradient,
+}: {
+  title: string;
+  description: string;
+  widthClass: string;
+  imageHeightClass: string;
+  imageGradient: string;
+}) {
+  return (
+    <div
+      className={`relative flex flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[20px] pt-[20px] pb-[32px] ${widthClass}`}
+      data-name="Article"
+    >
+      <div
+        className={`relative flex w-full items-center justify-center rounded-[6px] border border-solid border-[rgba(0,255,0,0.3)] ${imageHeightClass}`}
+        style={{ background: imageGradient }}
+        data-name="Container"
+      />
+      <div
+        className="flex w-full flex-col items-start gap-[10px]"
+        data-name="NewsSection"
+      >
+        <h3
+          className={`${gilroyMedium.className} text-[20px] leading-[26px] font-medium text-white not-italic [word-break:break-word] min-[1024px]:text-[22px] min-[1024px]:leading-[28px]`}
+        >
+          {title}
+        </h3>
+        <p
+          className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+        >
+          {description}
+        </p>
+      </div>
+      <Corners />
+    </div>
+  );
+}
 
 export function SomPrototypeTitle() {
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
-      data-node-id="2438:5083"
+      data-node-id="2438:5082"
       aria-label="Prototype to Product in a Snap"
     >
-      <div
-        className="relative w-fit max-w-full px-[10px] pt-[72px] pb-[48px] min-[1024px]:pt-[100px] min-[1024px]:pb-[60px]"
-        data-name="Title"
-      >
-        <h2
-          className={`${gilroyMedium.className} text-center text-[34px] leading-[38px] font-medium text-white not-italic [word-break:break-word] min-[1024px]:whitespace-nowrap min-[1024px]:text-[46px] min-[1024px]:leading-[49px]`}
-        >
-          Prototype to Product in a Snap
-        </h2>
-        <Corners />
+      {/* DESKTOP (>=1024px) */}
+      <div className="relative hidden w-[1204px] flex-col items-center gap-[36px] pt-[100px] pb-[60px] min-[1024px]:flex">
+        <div className="relative px-[10px]" data-name="Title">
+          <h2
+            className={`${gilroyMedium.className} text-center text-[46px] leading-[49px] font-medium text-white whitespace-nowrap not-italic [word-break:break-word]`}
+          >
+            Prototype to Product in a Snap
+          </h2>
+          <Corners />
+        </div>
+        <div className="flex w-full items-center gap-[24px]">
+          {PROTOTYPE_CARDS.map((card) => (
+            <PrototypeCard
+              key={card.title}
+              title={card.title}
+              description={card.description}
+              widthClass="w-[590px]"
+              imageHeightClass="h-[327px]"
+              imageGradient={IMAGE_GRADIENT_DESKTOP}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* MOBILE (<1024px) */}
+      <div className="relative flex w-full flex-col items-center gap-[40px] px-[24px] pt-[72px] pb-[48px] min-[1024px]:hidden">
+        <div className="relative px-[10px]" data-name="Title">
+          <h2
+            className={`${gilroyMedium.className} text-center text-[34px] leading-[38px] font-medium text-white not-italic [word-break:break-word]`}
+          >
+            Prototype to Product in a Snap
+          </h2>
+          <Corners />
+        </div>
+        <div className="flex w-full flex-col gap-[24px]">
+          {PROTOTYPE_CARDS.map((card) => (
+            <PrototypeCard
+              key={card.title}
+              title={card.title}
+              description={card.description}
+              widthClass="w-full"
+              imageHeightClass="h-[200px]"
+              imageGradient={IMAGE_GRADIENT_MOBILE}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

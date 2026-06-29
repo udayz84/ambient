@@ -21,7 +21,7 @@ type FeatureCardProps = {
 function CardTag({ label }: { label: string }) {
   return (
     <div
-      className="relative h-[26px] w-[255px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)]"
+      className="relative h-[26px] w-full min-[1024px]:w-[255px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)]"
       data-name="Menu"
     >
       <Corners />
@@ -173,8 +173,8 @@ export function SomFeatures() {
                 backgroundClip: "text",
               }}
             >
-              <span className="block whitespace-nowrap">Stop Routing.</span>
-              <span className="block whitespace-nowrap">Start Shipping.</span>
+              <span className="block">Stop Routing.</span>
+              <span className="block">Start Shipping.</span>
             </div>
             <Corners />
           </div>

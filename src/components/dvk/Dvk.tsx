@@ -28,6 +28,8 @@ import {
  */
 const DVK_DESKTOP_HEIGHT = 658;
 
+import { DvkIntegratedModules } from "./DvkIntegratedModules";
+
 export function Dvk() {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
@@ -69,6 +71,9 @@ export function Dvk() {
       <DvkHardwareStackMobile />
       <DvkDemosMobile />
       <DvkModelForgeMobile />
+
+      {/* Shared Section (Desktop & Mobile) */}
+      <DvkIntegratedModules />
     </main>
   );
 }

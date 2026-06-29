@@ -186,7 +186,7 @@ export function PlatformScaleMobile() {
             </div>
 
             <h2
-              className={`${gilroyMedium.className} relative z-10 bg-clip-text text-center text-[30px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+              className={`${gilroyMedium.className} relative z-10 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
               style={{
                 backgroundImage:
                   "linear-gradient(100.945deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",

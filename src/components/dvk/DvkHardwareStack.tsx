@@ -153,9 +153,9 @@ export function DvkHardwareStack() {
           </div>
         </div>
 
-        {/* Spec cards row — 2761:2925 (1232×174, gap-8) */}
+        {/* Spec cards row — 2761:2925 (1232×auto, gap-8) */}
         <div
-          className="flex h-[174px] w-full items-start gap-[8px]"
+          className="flex w-full items-stretch gap-[8px]"
           data-node-id="2761:2925"
         >
           {SPEC_CARDS.map((card) => (
@@ -178,6 +178,15 @@ function SpecCard({ card }: { card: SpecCard }) {
       }}
       data-name="Article"
     >
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          alt=""
+          className="absolute max-w-none"
+          style={{ width: "196.33%", height: "195.4%", left: "-49.07%", top: "-46.07%" }}
+          src="/dvk/card-glow.png"
+        />
+      </div>
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
       <div
         className="flex w-full flex-col items-start"

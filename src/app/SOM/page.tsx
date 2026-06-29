@@ -4,6 +4,9 @@ import { SomFeatures } from "@/components/som-page/SomFeatures";
 import { SomInsideModule } from "@/components/som-page/SomInsideModule";
 import { SomEcosystem } from "@/components/som-page/SomEcosystem";
 import { SomPrototypeTitle } from "@/components/som-page/SomPrototypeTitle";
+import { SomIntelligence } from "@/components/som-page/SomIntelligence";
+import { SomReadyToDeploy } from "@/components/som-page/SomReadyToDeploy";
+import { SomFooterMerge } from "@/components/som-page/SomFooterMerge";
 
 export const metadata: Metadata = {
   title: "SOM | Ambient Scientific",
@@ -19,6 +22,9 @@ export default function SomPage() {
       <SomInsideModule />
       <SomEcosystem />
       <SomPrototypeTitle />
+      <SomIntelligence />
+      <SomReadyToDeploy />
+      <SomFooterMerge />
     </main>
   );
 }

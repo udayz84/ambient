@@ -90,11 +90,24 @@ function SomLabel() {
   );
 }
 
-function SomCard({ visual }: { visual: React.ReactNode }) {
+function SomCard({ visual, isUpcoming }: { visual: React.ReactNode; isUpcoming?: boolean }) {
   return (
     <div className="flex w-full flex-col items-center gap-[32px]">
-      <div className="relative h-[320px] w-full overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)]">
-        {visual}
+      <div className="flex h-[320px] w-full items-center justify-center">
+        <div 
+          className={`relative flex w-full items-center justify-center overflow-clip transition-transform ${isUpcoming ? 'h-[260px] scale-95' : 'h-[320px]'}`}
+        >
+          {visual}
+          {isUpcoming && (
+            <div className="absolute z-10 flex items-center justify-center border-[0.5px] border-[#cca839] bg-[rgba(0,0,0,0.8)] px-[16px] py-[6px]">
+              <span className="text-[#cca839] opacity-70">|</span>
+              <span className="mx-[12px] font-mono text-[10px] uppercase tracking-[1px] text-[#cca839]">
+                LAUNCHING SOON
+              </span>
+              <span className="text-[#cca839] opacity-70">|</span>
+            </div>
+          )}
+        </div>
       </div>
       <SomLabel />
     </div>
@@ -144,15 +157,15 @@ function DiscussCta() {
 }
 
 const CARDS = [
-  { key: "som-1", visual: <Visual1 /> },
-  { key: "som-2", visual: <Visual2 /> },
-  { key: "som-3", visual: <Visual3 /> },
+  { key: "som-1", visual: <Visual1 />, isUpcoming: false },
+  { key: "som-2", visual: <Visual2 />, isUpcoming: true },
+  { key: "som-3", visual: <Visual3 />, isUpcoming: true },
 ];
 
 export function ApplicationsPageSom() {
   return (
     <section
-      className="relative flex w-full justify-center overflow-hidden bg-black"
+      className="relative z-20 mb-[-409px] flex w-full justify-center overflow-hidden bg-transparent"
       aria-label="Don't start from scratch"
     >
       {/* DESKTOP (>=1024px) */}
@@ -184,7 +197,7 @@ export function ApplicationsPageSom() {
         {/* 3 SOM cards */}
         <div className="flex w-full items-start justify-center gap-[40px]">
           {CARDS.map((card) => (
-            <SomCard key={card.key} visual={card.visual} />
+            <SomCard key={card.key} visual={card.visual} isUpcoming={card.isUpcoming} />
           ))}
         </div>
 
@@ -219,7 +232,7 @@ export function ApplicationsPageSom() {
         </div>
         <div className="flex w-full flex-col items-center gap-[48px]">
           {CARDS.map((card) => (
-            <SomCard key={card.key} visual={card.visual} />
+            <SomCard key={card.key} visual={card.visual} isUpcoming={card.isUpcoming} />
           ))}
         </div>
         <div className="flex flex-col items-center gap-[16px]">

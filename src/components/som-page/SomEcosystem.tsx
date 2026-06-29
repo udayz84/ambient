@@ -22,8 +22,8 @@ const SECTION_TITLE_STYLE = {
 
 function MotionImage() {
   return (
-    <div className="pointer-events-none absolute left-[148.63px] top-[-55px] h-[263.699px] w-[261.827px]">
-      <div className="absolute inset-0 overflow-hidden">
+    <>
+      <div className="pointer-events-none absolute left-[148.63px] top-[-55px] h-[263.699px] w-[261.827px] overflow-hidden">
         <img
           src={CHIP_IMG}
           alt=""
@@ -35,16 +35,16 @@ function MotionImage() {
         src="/som/motion-icon.svg"
         alt=""
         aria-hidden
-        className="absolute left-[233.08px] top-[23.79px] h-[47.764px] w-[38.109px] max-w-none"
+        className="pointer-events-none absolute left-[233.08px] top-[23.79px] h-[47.764px] w-[38.109px] max-w-none"
       />
-    </div>
+    </>
   );
 }
 
 function VisionImage() {
   return (
-    <div className="pointer-events-none absolute left-[144px] top-[-47.08px] h-[237.193px] w-[262.016px]">
-      <div className="absolute inset-0 overflow-hidden">
+    <>
+      <div className="pointer-events-none absolute left-[144px] top-[-47.08px] h-[237.193px] w-[262.016px] overflow-hidden">
         <img
           src={CHIP_IMG}
           alt=""
@@ -56,16 +56,16 @@ function VisionImage() {
         src="/som/vision-icon.svg"
         alt=""
         aria-hidden
-        className="absolute left-[229.29px] top-[40.13px] size-[57.768px] max-w-none"
+        className="pointer-events-none absolute left-[229.29px] top-[40.13px] size-[57.768px] max-w-none"
       />
-    </div>
+    </>
   );
 }
 
 function SoundImage() {
   return (
-    <div className="pointer-events-none absolute left-[156.09px] top-[-35.61px] h-[238.119px] w-[252.171px]">
-      <div className="absolute inset-0 overflow-hidden">
+    <>
+      <div className="pointer-events-none absolute left-[156.09px] top-[-35.61px] h-[238.119px] w-[252.171px] overflow-hidden">
         <img
           src={CHIP_IMG}
           alt=""
@@ -73,15 +73,15 @@ function SoundImage() {
           className="absolute left-[-16.41%] top-[-131.38%] h-[254.27%] w-[240.1%] max-w-none"
         />
       </div>
-      <div className="absolute left-[258.62px] top-[7.38px] h-[45.468px] w-[42.073px] rounded-tl-[762.93px] rounded-tr-[762.93px] bg-[#f0f0f0]" />
-    </div>
+      <div className="pointer-events-none absolute left-[258.62px] top-[7.38px] h-[45.468px] w-[42.073px] rounded-tl-[762.93px] rounded-tr-[762.93px] bg-[#f0f0f0]" />
+    </>
   );
 }
 
 function PredictiveImage() {
   return (
-    <div className="pointer-events-none absolute left-[152.9px] top-[-39.61px] h-[240px] w-[259.31px]">
-      <div className="absolute inset-0 overflow-hidden">
+    <>
+      <div className="pointer-events-none absolute left-[152.9px] top-[-39.61px] h-[240px] w-[259.31px] overflow-hidden">
         <img
           src={CHIP_IMG}
           alt=""
@@ -89,9 +89,9 @@ function PredictiveImage() {
           className="absolute left-[-125.17%] top-[-135.5%] h-[259.87%] w-[240.52%] max-w-none"
         />
       </div>
-      <div className="absolute left-[291.15px] top-[128.77px] h-[24.067px] w-[10.309px] rounded-[1.714px] bg-[#d9d9d9]" />
-      <div className="absolute left-[323.94px] top-[103.14px] h-[49.693px] w-[10.309px] rounded-[1.714px] bg-[#d9d9d9]" />
-    </div>
+      <div className="pointer-events-none absolute left-[291.15px] top-[128.77px] h-[24.067px] w-[10.309px] rounded-[1.714px] bg-[#d9d9d9]" />
+      <div className="pointer-events-none absolute left-[323.94px] top-[103.14px] h-[49.693px] w-[10.309px] rounded-[1.714px] bg-[#d9d9d9]" />
+    </>
   );
 }
 
@@ -192,7 +192,7 @@ function EcoCard({
 }: EcoCardProps) {
   return (
     <div
-      className={`relative flex flex-col overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] ${cardBg} ${padClass} ${frameClass}`}
+      className={`flex flex-col overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] ${cardBg} ${padClass} ${frameClass}`}
       data-name={dataName}
     >
       <div className="relative flex w-full flex-1 flex-col items-start justify-between">
@@ -446,7 +446,7 @@ export function SomEcosystem() {
           {CARDS.map((card) => (
             <EcoCard
               key={card.dataName}
-              frameClass="w-full"
+              frameClass="w-full relative"
               cardBg={card.cardBg}
               padClass={card.padClass}
               overlay={null}

@@ -152,21 +152,21 @@ export function Hero() {
           </p>
         </div>
 
-        {/* Video Area - Absolute to overlap stats as per Figma */}
-        <div 
-          className="pointer-events-none absolute top-[180px] left-[50%] h-[398px] w-[716px] -translate-x-1/2 overflow-hidden"
+        {/* Video Area - Absolute to overlap stats as per Figma (3174:48788) */}
+        <div
+          className="pointer-events-none absolute top-[242px] left-[50%] h-[398.341px] w-[716.22px] -translate-x-1/2 overflow-hidden"
           style={{
             maskImage: "url(/hero/mask-shape.svg)",
             WebkitMaskImage: "url(/hero/mask-shape.svg)",
-            maskPosition: "center",
-            WebkitMaskPosition: "center",
-            maskSize: "100% 100%",
-            WebkitMaskSize: "100% 100%",
+            maskPosition: "-4.2px -1.661px",
+            WebkitMaskPosition: "-4.2px -1.661px",
+            maskSize: "711.098px 411.453px",
+            WebkitMaskSize: "711.098px 411.453px",
             maskRepeat: "no-repeat",
             WebkitMaskRepeat: "no-repeat",
           }}
         >
-          <HeroVisualMedia />
+          <HeroVisualMedia mobile />
         </div>
 
         {/* Spacer to push stats down */}
@@ -174,7 +174,7 @@ export function Hero() {
 
         {/* Stats Area */}
         <div className="relative z-10 px-[24px]">
-          <div className="flex flex-col gap-[24px] overflow-hidden">
+          <div className="flex flex-col gap-[24px]">
             <HeroStat
               tag="Real-time AI at edge"
               tagWidth={180}
@@ -201,9 +201,14 @@ export function Hero() {
               description="AI cores with 4 to 32 bit resolution for control in applications."
             />
 
-            <div className="relative h-[1px] w-[calc(100%-8px)] ml-[4px] bg-white/10">
-               <div className="absolute top-[-4px] left-0 h-[9px] w-[1px] bg-white opacity-60" />
-               <div className="absolute top-[-4px] right-0 h-[9px] w-[1px] bg-white opacity-60" />
+            <div className="relative h-[1px] w-[calc(100%-8px)] ml-[4px] bg-white/20">
+               {/* Left Bracket */}
+               <div className="absolute top-[-4px] left-0 h-[9px] w-[1px] bg-white" />
+               <div className="absolute top-0 left-0 h-[1px] w-[5px] bg-white" />
+               
+               {/* Right Bracket */}
+               <div className="absolute top-[-4px] right-0 h-[9px] w-[1px] bg-white" />
+               <div className="absolute top-0 right-0 h-[1px] w-[5px] bg-white" />
             </div>
 
             <HeroStat

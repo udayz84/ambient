@@ -97,55 +97,81 @@ function SectionWrap({
 function ContactHeroMobile() {
   return (
     <section
-      className="relative flex w-full flex-col justify-start overflow-hidden px-[20px] pt-[100px] pb-[135px]"
+      className="relative w-full overflow-hidden bg-black pt-[100px]"
       aria-label="Contact hero"
+      data-node-id="3229:7781"
+      data-name="Banner"
     >
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <Image
-          src="/mobile/contact/hand.png"
-          alt=""
-          fill
-          className="object-cover object-top"
-          sizes="100vw"
-          priority
-        />
-        <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(132.908deg, rgb(0, 0, 0) 31.15%, rgba(0, 0, 0, 0) 76.987%), linear-gradient(187.815deg, rgba(0, 0, 0, 0) 49.061%, rgb(0, 0, 0) 90.541%)" }} />
-      </div>
-
-      <div className="relative flex flex-col items-center gap-[15px]">
-        <div className="relative flex w-[352px] items-center justify-center py-[7px]">
-          <Corners />
-          <h1
-            className={`${gilroyMedium.className} w-[321px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
-            style={{ backgroundImage: "linear-gradient(100.882deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)" }}
-          >
-            A new paradigm for efficient AI compute
-          </h1>
+      <div className="relative mx-auto w-full" style={{ height: 761 }}>
+        {/* hand image background — full width, height 518, top 60 */}
+        <div
+          className="pointer-events-none absolute left-0 right-0 overflow-hidden"
+          style={{ top: 60, height: 518 }}
+          aria-hidden
+        >
+          <Image
+            src="/mobile/contact/hand.png"
+            alt=""
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+          <div
+            className="absolute inset-0"
+            style={{ backgroundImage: "linear-gradient(177.572deg, rgba(0, 0, 0, 0) 74.733%, rgb(0, 0, 0) 100.97%)" }}
+          />
         </div>
-        <p className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic`}>
-          We build energy-aware, programmable, mixed-signal AI processors that unlock orders-of-magnitude improvements in performance-per-watt, enabling scalable intelligence across edge, enterprise, and cloud.
-        </p>
+
+        {/* section title — top 0, left/right 20, title + subtitle */}
+        <div
+          className="absolute left-[20px] right-[20px] top-0 flex flex-col items-center justify-center gap-[15px]"
+          data-node-id="3229:7785"
+        >
+          <div
+            className="relative flex w-full items-center justify-center py-[7px]"
+            data-node-id="3229:8704"
+          >
+            <Corners />
+            <h1
+              className={`${gilroyMedium.className} w-[241.258px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+              style={{ backgroundImage: "linear-gradient(102.228deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)" }}
+              data-node-id="3229:8705"
+            >
+              <span className="block leading-[36px]">Start building</span>
+              <span className="block leading-[36px]">with Ambient</span>
+            </h1>
+          </div>
+          <p
+            className={`${interRegular.className} w-[308px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 not-italic`}
+            data-node-id="3229:7787"
+          >
+            Skip the generic sales inbox. Get direct access to our engineering team, technical documentation, and commercial partners.
+          </p>
+        </div>
+
+        {/* resources article — top 449, overlaps lower part of hand image */}
+        <div
+          className="absolute left-[20px] right-[20px] flex flex-col gap-[20px] overflow-clip border-[0.5px] border-solid border-white/25 bg-gradient-to-b from-[rgba(255,255,255,0.1)] to-[rgba(255,255,255,0.03)] p-[24px] backdrop-blur-[16px]"
+          style={{ top: 449 }}
+          data-node-id="3229:8713"
+          data-name="Article"
+        >
+          <Corners />
+          <p
+            className={`${gilroyMedium.className} w-full text-center text-[22px] leading-[28px] font-medium text-white not-italic`}
+            data-node-id="3229:8716"
+          >
+            Looking for immediate resources?
+          </p>
+          <div className="flex w-full flex-col gap-[20px]">
+            <GreenCta href="#">Download Datasheets &amp; SDK</GreenCta>
+            <WhiteCta href="#">Download Press Kit</WhiteCta>
+            <WhiteCta href="#">Case Studies &amp; Whitepapers</WhiteCta>
+          </div>
+        </div>
       </div>
     </section>
-  );
-}
-
-/* ------------------------------- RESOURCES -------------------------------- */
-function ContactResourcesMobile() {
-  return (
-    <SectionWrap aria-label="Immediate resources" className="!py-[32px]">
-      <div className="relative flex w-full flex-col gap-[20px] overflow-clip border-[0.5px] border-solid border-white/25 bg-gradient-to-b from-[rgba(255,255,255,0.1)] to-[rgba(255,255,255,0.03)] p-[24px] backdrop-blur-[16px]">
-        <Corners />
-        <p className={`${gilroyMedium.className} w-full text-center text-[22px] leading-[28px] font-medium text-white not-italic`}>
-          Looking for immediate resources?
-        </p>
-        <div className="flex w-full flex-col gap-[20px]">
-          <GreenCta href="#">Download Datasheets &amp; SDK</GreenCta>
-          <WhiteCta href="#">Download Press Kit</WhiteCta>
-          <WhiteCta href="#">Case Studies &amp; Whitepapers</WhiteCta>
-        </div>
-      </div>
-    </SectionWrap>
   );
 }
 
@@ -308,15 +334,38 @@ function ContactScheduleMobile() {
             >
               <Corners />
 
-              <div className={isCommercial ? "absolute bottom-0 right-[-10px] h-[260px] w-[240px] z-0 pointer-events-none" : "absolute bottom-[-10px] right-[-10px] h-[290px] w-[270px] z-0 pointer-events-none"}>
-                <Image
+              {isCommercial ? (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
                   src={card.imageSrc}
                   alt=""
-                  fill
-                  className="object-contain object-right-bottom"
-                  unoptimized
+                  style={{
+                    position: "absolute",
+                    height: "100%",
+                    width: "101%",
+                    left: "33px",
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    color: "transparent",
+                  }}
+                  className="z-0 pointer-events-none object-contain object-right-bottom"
                 />
-              </div>
+              ) : (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  src={card.imageSrc}
+                  alt=""
+                  style={{
+                    position: "absolute",
+                    height: "69%",
+                    width: "98%",
+                    left: 0,
+                    top: "113px",
+                  }}
+                  className="z-0 pointer-events-none object-contain object-right-bottom"
+                />
+              )}
 
               <div className="flex flex-col items-start gap-[20px] w-full relative z-10 pointer-events-none">
                 <div className="relative flex h-[26px] w-[180px] items-center justify-center overflow-clip bg-[rgba(255,255,255,0.06)] pointer-events-auto">

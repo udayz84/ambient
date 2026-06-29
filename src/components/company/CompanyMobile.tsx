@@ -87,14 +87,11 @@ function SectionWrap({
   );
 }
 
-const HERO_IMG_GRADIENT =
-  "linear-gradient(132.908deg, rgb(0, 0, 0) 31.15%, rgba(0, 0, 0, 0) 76.987%), linear-gradient(187.815deg, rgba(0, 0, 0, 0) 49.061%, rgb(0, 0, 0) 90.541%)";
-
 /* ---------------------------------- HERO ---------------------------------- */
 function CompanyHeroMobile() {
   return (
     <section
-      className="relative w-full overflow-hidden bg-black pt-[78px]"
+      className="relative w-full overflow-hidden bg-black pt-[108px]"
       aria-label="Company hero"
       data-node-id="3244:5532"
       data-name="Banner"
@@ -112,10 +109,6 @@ function CompanyHeroMobile() {
             src="/mobile/company/hero.png"
             alt=""
             className="block w-full"
-          />
-          <div
-            className="absolute inset-0"
-            style={{ backgroundImage: HERO_IMG_GRADIENT }}
           />
         </div>
 
@@ -339,7 +332,7 @@ function DnaCard({
 function CompanyDnaMobile() {
   return (
     <section
-      className="relative w-full overflow-hidden bg-black"
+      className="relative w-full overflow-hidden bg-black pb-[64px]"
       aria-label="Driven by physics. Defined by our DNA."
       data-node-id="3244:7009"
       data-name="4th Fold"
@@ -487,7 +480,7 @@ function CompanyTechnologyPartnersMobile() {
       data-node-id="3245:312"
       data-name="6th fold"
     >
-      <div className="px-[20px] pt-[10px] pb-[14px]">
+      <div className="px-[20px] pt-[10px] pb-[64px]">
         {/* Title — 48px, ghosted dark gradient, opacity 90%, left aligned */}
         <p
           className={`${gilroySemiBold.className} bg-clip-text text-left text-[48px] leading-[42px] font-semibold tracking-[-0.96px] text-transparent opacity-90 not-italic [word-break:break-word]`}

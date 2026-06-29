@@ -76,6 +76,15 @@ export function SomHero() {
                 "linear-gradient(179.893deg, rgba(0, 0, 0, 0) 50%, rgb(0, 0, 0) 103.83%)",
             }}
           />
+          {/* Fade left/right edges into the black background on ultrawide screens */}
+          <div
+            aria-hidden
+            className="absolute inset-y-0 left-0 hidden w-[300px] bg-gradient-to-r from-black to-transparent min-[1443px]:block"
+          />
+          <div
+            aria-hidden
+            className="absolute inset-y-0 right-0 hidden w-[300px] bg-gradient-to-l from-black to-transparent min-[1443px]:block"
+          />
         </div>
 
         {/* Content */}
@@ -203,8 +212,8 @@ export function SomHero() {
               backgroundClip: "text",
             }}
           >
-            <span className="block whitespace-nowrap">The shortest path to</span>
-            <span className="block whitespace-nowrap">volume production.</span>
+            <span className="block">The shortest path to</span>
+            <span className="block">volume production.</span>
           </div>
 
           <p

@@ -118,26 +118,23 @@ export function TechnologyMobile() {
                   </div>
                 </div>
 
-                {/* Bottom Right Bracket for the last item to complete the box */}
-                {index === FEATURES.length - 1 && (
-                  <div className="absolute -bottom-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center">
-                    <div className="-scale-x-100 flex-none">
-                      <div className="relative size-[6px]">
-                        <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
-                      </div>
+                {/* Bottom Right Bracket to complete the box intersections */}
+                <div className="absolute -bottom-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center">
+                  <div className="-scale-x-100 flex-none">
+                    <div className="relative size-[6px]">
+                      <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
                     </div>
                   </div>
-                )}
-                {/* Bottom Left Bracket for the last item to complete the box */}
-                {index === FEATURES.length - 1 && (
-                  <div className="absolute -bottom-[0.5px] -left-[0.5px] z-10 flex size-[6px] items-center justify-center">
-                    <div className="flex-none">
-                      <div className="relative size-[6px]">
-                        <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
-                      </div>
+                </div>
+
+                {/* Bottom Left Bracket to complete the box intersections */}
+                <div className="absolute -bottom-[0.5px] -left-[0.5px] z-10 flex size-[6px] items-center justify-center">
+                  <div className="flex-none">
+                    <div className="relative size-[6px]">
+                      <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
                     </div>
                   </div>
-                )}
+                </div>
 
                 <div className="flex flex-col gap-[3px] items-start py-[20px] relative w-full">
                   <div className="relative size-[33px] shrink-0">

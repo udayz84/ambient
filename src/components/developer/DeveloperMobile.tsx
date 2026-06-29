@@ -1,4 +1,5 @@
-import { gilroyMedium, interRegular } from "../hero/fonts";
+import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
+import { TagBadge } from "../hero/TagBadge";
 import { Corners } from "../shared/Corners";
 import {
   ARTICLE_ICON_BG,
@@ -11,17 +12,23 @@ import {
 } from "./developer-data";
 
 /**
- * Mobile (<1024px) stacked adaptation of the Developer hero + code section.
+ * Mobile (<1024px) stacked adaptation of the Developer page.
  * Built responsive from the same Figma content (no dedicated mobile frame supplied).
+ * Order: hero → code → pipeline → coming-soon.
  */
 export function DeveloperMobile() {
   return (
-    <div className="flex w-full flex-col">
+    <div className="relative flex w-full flex-col overflow-hidden">
       <DeveloperHeroMobile />
       <DeveloperCodeSectionMobile />
+      <DeveloperPipelineMobile />
+      <DeveloperComingSoonMobile />
     </div>
   );
 }
+
+/** Pipeline steps — derived from desktop labels 2900:677. */
+const PIPELINE_STEPS = ["Train", "Optimize", "Integrate", "Deploy"] as const;
 
 function DeveloperHeroMobile() {
   return (
@@ -182,6 +189,130 @@ int main(void) {
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           </div>
         ))}
+      </div>
+    </section>
+  );
+}
+
+function DeveloperPipelineMobile() {
+  return (
+    <section className="relative flex w-full flex-col items-center px-[24px] py-[48px]">
+      <TagBadge
+        label="Real-time AI at edge"
+        width={180}
+        labelOffsetX={74.5}
+        rightBarLeft={170.48046875}
+      />
+
+      <div className="relative mt-[24px] w-full px-[10px]">
+        <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+        <h2
+          className={`${gilroyMedium.className} bg-clip-text text-center text-[28px] leading-[34px] font-medium text-transparent not-italic [word-break:break-word]`}
+          style={{ backgroundImage: SECTION_TITLE_GRADIENT }}
+        >
+          The ModelForge Pipeline
+        </h2>
+      </div>
+
+      {/* Step list — vertical adaptation of the horizontal diagram 2900:787 */}
+      <div className="relative mt-[24px] flex w-full flex-col overflow-hidden border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)]">
+        {PIPELINE_STEPS.map((step, index) => (
+          <div
+            key={step}
+            className={`relative flex items-center gap-[16px] px-[16px] py-[16px] ${
+              index !== 0 ? "border-t-[0.5px] border-solid border-[rgba(240,240,240,0.2)]" : ""
+            }`}
+          >
+            <span
+              className={`${dmMono.className} text-[14px] leading-[20px] font-normal tracking-[-0.3px] text-[#6ced3f] not-italic`}
+            >
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <span
+              className={`${interRegular.className} text-[18px] leading-[24px] font-normal uppercase text-[#f0f0f0] not-italic [word-break:break-word]`}
+            >
+              {step}
+            </span>
+          </div>
+        ))}
+        <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+      </div>
+    </section>
+  );
+}
+
+function DeveloperComingSoonMobile() {
+  return (
+    <section className="relative flex w-full flex-col items-center px-[24px] py-[48px]">
+      <div className="relative w-full px-[10px]">
+        <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+        <h2
+          className={`${gilroyMedium.className} text-center text-[28px] leading-[34px] font-medium text-white not-italic [word-break:break-word]`}
+        >
+          <span className="block">Test on the metal,</span>
+          <span className="block">without the metal.</span>
+        </h2>
+      </div>
+      <p
+        className={`${interRegular.className} mt-[16px] max-w-[327px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic opacity-85`}
+      >
+        Validate your build in a virtual sandbox, no need to wait for hardware.
+      </p>
+
+      {/* Article card — 2438:4646 */}
+      <div className="relative mt-[24px] flex w-full flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0)] px-[16px] pt-[24px] pb-[24px]">
+        <div className="relative h-[173px] w-[175px] max-w-full shrink-0 overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt=""
+            src="/developer/sandbox-image.png"
+            className="absolute inset-0 size-full object-contain"
+          />
+        </div>
+        <div className="flex w-full flex-col items-center gap-[10px] text-center">
+          <p
+            className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+          >
+            Virtual Sandbox Coming Soon
+          </p>
+          <p
+            className={`${interRegular.className} max-w-[327px] text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
+          >
+            Complete virtual validation environment for testing your builds
+            before hardware arrives.
+          </p>
+        </div>
+
+        {/* CTA — 2438:4651 */}
+        <a
+          href="#"
+          className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-center gap-[10px] overflow-hidden px-[20px] py-[10px]`}
+        >
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+          />
+          <span className="relative flex items-center gap-[10px]">
+            <span className="text-[13px] leading-[20px] font-medium uppercase whitespace-nowrap text-white not-italic">
+              Join the Virtual Sandbox Waitlist
+            </span>
+            <span className="relative size-[18px] shrink-0">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                alt=""
+                src="/developer/waitlist-icon.svg"
+                className="absolute inset-0 size-full max-w-none object-contain"
+              />
+            </span>
+          </span>
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
+          />
+          <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+        </a>
+
+        <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
       </div>
     </section>
   );

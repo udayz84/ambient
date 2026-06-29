@@ -2,62 +2,30 @@ import Image from "next/image";
 import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 
-function MobileGridLine() {
-  return (
-    <div className="relative flex flex-col justify-between h-[160px] w-[6px] shrink-0 opacity-50">
-      <Image src="/ecosystem/grid-cap.svg" alt="" width={6} height={3} className="block w-[6px]" />
-      <div className="w-[1px] h-full mx-auto bg-white/20" />
-      <Image src="/ecosystem/grid-cap.svg" alt="" width={6} height={3} className="block w-[6px]" />
-    </div>
-  );
-}
+import { EcosystemPartnerRow, DEV_LOGO_STAT_NODES } from "./EcosystemPartnerRow";
+import { SILICON_PARTNER_ROW, DEVELOPMENT_PARTNER_ROW } from "./ecosystem-data";
 
-function LogoCell({ src, width, height }: { src: string; width: number; height: number }) {
-  return (
-    <div className="relative flex shrink-0 items-center justify-center">
-      <Image src={src} alt="" width={width} height={height} className="block max-w-none object-contain" />
-    </div>
-  );
-}
+function PartnerSectionMobile({ title, isSilicon }: { title: string; isSilicon: boolean }) {
+  const gradient = isSilicon
+    ? "linear-gradient(119.414deg, rgb(22, 22, 22) 9.0248%, rgb(39, 39, 39) 37.884%, rgb(18, 18, 18) 111.41%)"
+    : "linear-gradient(126.723deg, rgb(22, 22, 22) 9.0248%, rgb(39, 39, 39) 37.884%, rgb(18, 18, 18) 111.41%)";
 
-function PartnerRowMobile() {
   return (
-    <div className="relative flex h-[160px] w-[1200px] shrink-0 items-center justify-between border-[0.5px] border-solid border-white/10 bg-[rgba(255,255,255,0.04)] px-[40px]">
-      <Corners leftSrc="/ecosystem/corner-tl.svg" rightSrc="/ecosystem/corner-tr.svg" />
-      
-      <LogoCell src="/ecosystem/logo-partner-1.svg" width={172} height={46} />
-      <MobileGridLine />
-      <LogoCell src="/ecosystem/logo-partner-2.svg" width={240} height={44} />
-      <MobileGridLine />
-      <LogoCell src="/ecosystem/logo-partner-3.svg" width={162} height={38} />
-      
-      <MobileGridLine />
-      <div className="relative flex shrink-0 items-center justify-center gap-[12px]">
-        <Image src="/ecosystem/logo-partner-4.svg" alt="" width={60} height={60} className="block max-w-none" />
-        <p className={`${gilroySemiBold.className} text-[28px] leading-[34px] font-semibold text-white`}>Tezos</p>
-      </div>
-      <MobileGridLine />
-      <div className="relative flex shrink-0 items-center justify-center gap-[12px]">
-        <p className={`${gilroySemiBold.className} text-[28px] leading-[34px] font-semibold text-white`}>Octane</p>
-        <Image src="/ecosystem/logo-octane.svg" alt="" width={60} height={60} className="block max-w-none" />
-      </div>
-    </div>
-  );
-}
-
-function PartnerSectionMobile({ title }: { title: string }) {
-  return (
-    <div className="flex flex-col gap-[16px] shrink-0 w-[1200px]">
+    <div className="flex flex-col shrink-0 w-[1204px]">
       <p
-        className={`${gilroySemiBold.className} bg-clip-text text-[28px] leading-[34px] font-semibold tracking-[-0.56px] text-transparent opacity-70 not-italic px-[24px]`}
-        style={{
-          backgroundImage:
-            "linear-gradient(119.414deg, rgba(255,255,255,0.75) 9.0248%, rgba(255,255,255,0.45) 37.884%, rgba(255,255,255,0.65) 111.41%)",
-        }}
+        className={`${gilroySemiBold.className} bg-clip-text text-[40.281px] leading-[43.158px] tracking-[-0.8056px] font-semibold text-transparent opacity-90 not-italic px-[40px] whitespace-nowrap`}
+        style={{ backgroundImage: gradient }}
       >
         {title}
       </p>
-      <PartnerRowMobile />
+      {isSilicon ? (
+        <EcosystemPartnerRow config={SILICON_PARTNER_ROW} />
+      ) : (
+        <EcosystemPartnerRow
+          config={DEVELOPMENT_PARTNER_ROW}
+          logoStatNodeIds={DEV_LOGO_STAT_NODES}
+        />
+      )}
     </div>
   );
 }
@@ -138,10 +106,10 @@ export function EcosystemMobile() {
 
       <div className="mt-[48px] flex w-full overflow-hidden">
         <div className="flex w-max gap-[32px] animate-[ecosystem-scroll-mobile_25s_linear_infinite]">
-          <PartnerSectionMobile title="SILICON PARTNERS" />
-          <PartnerSectionMobile title="DEVELOPMENT PARTNERS" />
-          <PartnerSectionMobile title="SILICON PARTNERS" />
-          <PartnerSectionMobile title="DEVELOPMENT PARTNERS" />
+          <PartnerSectionMobile title="SILICON PARTNERS" isSilicon={true} />
+          <PartnerSectionMobile title="DEVELOPMENT PARTNERS" isSilicon={false} />
+          <PartnerSectionMobile title="SILICON PARTNERS" isSilicon={true} />
+          <PartnerSectionMobile title="DEVELOPMENT PARTNERS" isSilicon={false} />
         </div>
       </div>
     </div>

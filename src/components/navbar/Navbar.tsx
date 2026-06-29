@@ -26,7 +26,7 @@ export function Navbar() {
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute top-[0.158203125px] left-1/2 h-[77.5px] w-[calc((50%_-_26px)*2.42787)] lg:w-full lg:min-w-[1511px] -translate-x-1/2"
+        className="pointer-events-none absolute top-[0.158px] left-1/2 h-[77.5px] w-[calc((50%_-_16px)*2.42787)] lg:w-full lg:min-w-[1511px] -translate-x-1/2"
         data-node-id="2379:1570"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -38,7 +38,7 @@ export function Navbar() {
       </div>
       <div
         aria-hidden
-        className="pointer-events-none absolute top-[35.158203125px] left-1/2 h-[43px] w-[calc((50%_-_26px)*2.42787)] lg:w-full lg:min-w-[1511px] -translate-x-1/2"
+        className="pointer-events-none absolute top-[35.158px] left-1/2 h-[43px] w-[calc((50%_-_16px)*2.42787)] lg:w-full lg:min-w-[1511px] -translate-x-1/2"
         data-node-id="2379:1573"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -57,14 +57,14 @@ export function Navbar() {
       {/* Left Connecting Vector */}
       <div 
         className="absolute z-20 flex size-[5px] items-center justify-center lg:hidden"
-        style={{ left: "26px", bottom: "-2.5px", transform: "translateX(-50%)" }}
+        style={{ left: "16px", bottom: "-2.5px", transform: "translateX(-50%)" }}
       >
         <img src="/hero/line-cap-left.svg" alt="" className="block size-full" />
       </div>
       {/* Right Connecting Vector */}
       <div 
         className="absolute z-20 flex size-[5px] items-center justify-center lg:hidden"
-        style={{ right: "26px", bottom: "-2.5px", transform: "translateX(50%)" }}
+        style={{ right: "16px", bottom: "-2.5px", transform: "translateX(50%)" }}
       >
         <img src="/hero/line-cap-right.svg" alt="" className="block size-full" />
       </div>
@@ -73,7 +73,7 @@ export function Navbar() {
         {/* Desktop (>=1024px): absolute positions from Figma, adapted for smaller viewports */}
         <Link
           href="/"
-          className="absolute top-[19.158203125px] left-[40px] hidden h-[38px] w-[135.443px] min-[1440px]:left-[110px] lg:block"
+          className="absolute top-[19.158px] left-[40px] hidden h-[38px] w-[135.443px] min-[1440px]:left-[110px] lg:block"
           data-node-id="2379:1574"
         >
           <Image
@@ -87,7 +87,7 @@ export function Navbar() {
         </Link>
 
         <nav
-          className="absolute top-[19.158203125px] left-[200px] right-[200px] hidden h-[37px] items-center justify-center gap-[12px] p-[10px] lg:flex min-[1440px]:left-[415px] min-[1440px]:right-auto min-[1440px]:w-[632px]"
+          className="absolute top-[19.158px] left-[200px] right-[200px] hidden h-[37px] items-center justify-center gap-[12px] p-[10px] lg:flex min-[1440px]:left-[415px] min-[1440px]:right-auto min-[1440px]:w-[632px]"
           aria-label="Main"
           data-node-id="2379:1575"
         >
@@ -104,7 +104,7 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="absolute top-[21.158203125px] right-[40px] hidden lg:block min-[1440px]:right-auto min-[1440px]:left-[1191.5px]">
+        <div className="absolute top-[21.158px] right-[40px] hidden lg:block min-[1440px]:right-auto min-[1440px]:left-[1191.5px]">
           <NavbarCta />
         </div>
 

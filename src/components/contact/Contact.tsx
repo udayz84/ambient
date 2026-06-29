@@ -10,7 +10,7 @@ const CONTACT_FOOTER_TOP_PX = 2779;
 
 export function Contact() {
   return (
-    <main className="relative z-10 flex w-full flex-col overflow-x-clip bg-black">
+    <main className="relative z-10 flex w-full flex-col overflow-x-clip min-[1024px]:bg-black">
       {/* DESKTOP (>=1024px) — absolute canvas, untouched */}
       <div
         className="relative mx-auto -mt-[78px] hidden w-full overflow-x-clip overflow-y-visible bg-black min-[1024px]:block"
@@ -47,7 +47,7 @@ export function Contact() {
       </div>
 
       {/* MOBILE (<1024px) — dedicated stacked layout */}
-      <div className="relative -mt-[78px] w-full bg-black min-[1024px]:hidden">
+      <div className="relative -mt-[78px] w-full bg-black min-[1024px]:hidden -mb-[150px] z-10 pb-[150px] [mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)]">
         <ContactMobile />
       </div>
     </main>

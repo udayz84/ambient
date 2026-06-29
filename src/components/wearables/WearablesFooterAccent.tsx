@@ -137,7 +137,7 @@ function CtaPanel({ data }: { data: PanelData }) {
 export function WearablesFooterAccent() {
   return (
     <section
-      className="relative flex w-full justify-center overflow-x-clip bg-black"
+      className="relative z-20 mb-[-409px] flex w-full justify-center overflow-x-clip bg-transparent"
       data-name="Footer CTA"
       aria-label="Contact options"
     >

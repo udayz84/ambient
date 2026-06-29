@@ -17,18 +17,20 @@ import {
  */
 export function ProductsStartBuilding() {
   return (
-    <>
+    <section className="relative z-20 mb-[-409px] w-full bg-transparent">
       {/* DESKTOP (>=1024px) */}
-      <section
-        className="relative mx-auto hidden w-full bg-black min-[1024px]:block"
+      <div
+        className="relative mx-auto hidden w-full min-[1024px]:block"
         aria-label="Start building with GPX10 Pro"
       >
         <ProductsStartBuildingDesktop />
-      </section>
+      </div>
 
       {/* MOBILE (<1024px) */}
-      <ProductsStartBuildingMobile />
-    </>
+      <div className="relative w-full min-[1024px]:hidden">
+        <ProductsStartBuildingMobile />
+      </div>
+    </section>
   );
 }
 
@@ -165,8 +167,8 @@ function StartCta({ children }: { children: React.ReactNode }) {
 
 function ProductsStartBuildingMobile() {
   return (
-    <section
-      className="relative w-full bg-black px-[24px] pt-[64px] pb-[80px] min-[1024px]:hidden"
+    <div
+      className="relative w-full px-[24px] pt-[64px] pb-[80px]"
       aria-label="Start building with GPX10 Pro"
     >
       {/* Title */}
@@ -220,6 +222,6 @@ function ProductsStartBuildingMobile() {
           </div>
         ))}
       </div>
-    </section>
+    </div>
   );
 }

@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { gilroyBold, gilroyMedium, interRegular } from "../hero/fonts";
+import { Corners } from "../shared/Corners";
 
 const TILE_BG =
   "radial-gradient(circle at 50% 50%, #394a36, #2b3629 50%, #1d221c)";
@@ -241,33 +242,34 @@ export function ApplicationsPageWins({ heading, description }: { heading?: strin
       </div>
 
       {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden w-full max-w-[1440px] flex-col items-center min-[1024px]:flex">
-        {heading || description ? (
-          <div className="flex w-full flex-col items-center gap-[20px] px-[24px] pt-[120px] text-center">
-            {heading ? (
-              <h2
-                className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic`}
-                style={{
-                  backgroundImage:
-                    "linear-gradient(132deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                }}
-              >
-                {heading}
-              </h2>
-            ) : null}
-            {description ? (
-              <p
-                className={`${interRegular.className} max-w-[718px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65`}
-              >
-                {description}
-              </p>
-            ) : null}
+      <div className="relative hidden w-full max-w-[1440px] flex-col items-center min-[1024px]:flex pt-[120px] pb-[120px]">
+        <div className="flex flex-col items-center gap-[20px]">
+          <div className="relative flex items-center justify-center bg-[rgba(255,255,255,0.06)] px-[20px] py-[8px]">
+            <div className="absolute left-[6px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+            <span className="font-mono text-[13px] uppercase tracking-[-0.39px] text-[#ecfae5]">
+              Real-time AI at edge
+            </span>
+            <div className="absolute right-[6px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+            <Corners />
           </div>
-        ) : null}
 
-        <div className="flex gap-[14px] pt-[351px] pb-[43px]">
+          <div className="relative inline-block px-[14px]">
+            <h2
+              className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic`}
+              style={{
+                backgroundImage:
+                  "linear-gradient(125.581deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
+            >
+              The empirical advantage.
+            </h2>
+            <Corners />
+          </div>
+        </div>
+
+        <div className="flex gap-[14px] mt-[80px]">
           {CARDS.map((card) => (
             <WinCard
               key={card.label}
@@ -282,26 +284,31 @@ export function ApplicationsPageWins({ heading, description }: { heading?: strin
 
       {/* MOBILE (<1024px) */}
       <div className="relative flex w-full flex-col items-center gap-[40px] px-[24px] pt-[72px] pb-[72px] min-[1024px]:hidden">
-        {heading ? (
-          <h2
-            className={`${gilroyMedium.className} bg-clip-text text-center text-[32px] leading-[38px] font-medium text-transparent not-italic`}
-            style={{
-              backgroundImage:
-                "linear-gradient(132deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-            }}
-          >
-            {heading}
-          </h2>
-        ) : null}
-        {description ? (
-          <p
-            className={`${interRegular.className} max-w-[332px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65`}
-          >
-            {description}
-          </p>
-        ) : null}
+        <div className="flex flex-col items-center gap-[16px]">
+          <div className="relative flex items-center justify-center bg-[rgba(255,255,255,0.06)] px-[20px] py-[8px]">
+            <div className="absolute left-[6px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+            <span className="font-mono text-[11px] uppercase tracking-[-0.33px] text-[#ecfae5]">
+              Real-time AI at edge
+            </span>
+            <div className="absolute right-[6px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+            <Corners />
+          </div>
+
+          <div className="relative inline-block px-[10px]">
+            <h2
+              className={`${gilroyMedium.className} bg-clip-text text-center text-[32px] leading-[38px] font-medium text-transparent not-italic`}
+              style={{
+                backgroundImage:
+                  "linear-gradient(125.581deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
+            >
+              The empirical advantage.
+            </h2>
+            <Corners />
+          </div>
+        </div>
         <div className="flex w-full flex-col items-center gap-[24px]">
           {CARDS.map((card) => (
             <div key={card.label} className="w-full max-w-[426px]">

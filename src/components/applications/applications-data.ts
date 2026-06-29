@@ -5,6 +5,8 @@ export const APPLICATION_TABS = [
   "AUTOMOTIVE",
   "MEDICAL",
   "AGRICULTURE",
+  "DRONES",
+  "HEARABLES",
 ] as const;
 
 export const ACTIVE_TAB = "AUTOMOTIVE";

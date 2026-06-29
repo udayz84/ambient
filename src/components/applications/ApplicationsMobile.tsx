@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect, Fragment } from "react";
 import Image from "next/image";
-import { gilroyMedium, interRegular, interMedium } from "../hero/fonts";
+import { gilroyExtraBold, gilroyMedium, interRegular, interMedium } from "../hero/fonts";
 import { FEATURE_CARDS, APPLICATION_TABS } from "./applications-data";
 import { CategoryDivider } from "./ApplicationsCategoryNav";
 import { Corners } from "../shared/Corners";
@@ -12,6 +12,31 @@ const tabCornerTr = "/applications/corners/tab-corner-tr.svg";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
+
+const MOBILE_HERO_IMAGES: Record<string, string> = {
+  WEARABLES: "/applications/app-wearables.png",
+  "SMART HOMES": "/applications/app-smart-home.png",
+  INDUSTRIAL: "/applications/app-industrial.png",
+  AUTOMOTIVE: "/applications/car-hero.png",
+  MEDICAL: "/applications/app-medical.png",
+  AGRICULTURE: "/applications/app-agriculture.png",
+  DRONES: "/applications/app-drones.png",
+  HEARABLES: "/applications/app-hearables.png",
+};
+
+const MOBILE_WATERMARK_TEXTS: Record<string, string> = {
+  WEARABLES: "Wearables",
+  "SMART HOMES": "Smart Home",
+  INDUSTRIAL: "Industry 4.0",
+  AUTOMOTIVE: "Automotive",
+  MEDICAL: "Medical",
+  AGRICULTURE: "Agriculture",
+  DRONES: "Drones",
+  HEARABLES: "Hearables",
+};
+
+const mobileWatermarkGradient =
+  "linear-gradient(259.734deg, rgba(255, 255, 255, 0.12) 0.12143%, rgba(255, 255, 255, 0.6) 44.084%, rgba(255, 255, 255, 0) 113.37%)";
 
 type ApplicationsMobileProps = {
   categoryActiveIndex: number;
@@ -25,6 +50,10 @@ export function ApplicationsMobile({
   const [activeIndex, setActiveIndex] = useState(0);
   const features = [FEATURE_CARDS.left, FEATURE_CARDS.right];
   const activeFeature = features[activeIndex];
+
+  const activeTab = APPLICATION_TABS[categoryActiveIndex];
+  const imgSrc = MOBILE_HERO_IMAGES[activeTab] || "/applications/car-hero.png";
+  const watermarkText = MOBILE_WATERMARK_TEXTS[activeTab] || activeTab;
 
   const goNext = useCallback(() => setActiveIndex((i) => (i + 1) % features.length), [features.length]);
   const goPrev = useCallback(() => setActiveIndex((i) => (i - 1 + features.length) % features.length), [features.length]);
@@ -50,12 +79,21 @@ export function ApplicationsMobile({
   }, [categoryActiveIndex]);
 
   return (
-    <div className="relative flex flex-col items-center py-[48px] bg-black overflow-hidden">
+    <div className="relative flex w-full max-w-full flex-col items-center overflow-hidden bg-black py-[48px]">
+      <style>{`
+        .scrollbar-none::-webkit-scrollbar { display: none; }
+        @keyframes slideFadeIn {
+          0% { opacity: 0; transform: translateY(10px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-slide-fade { animation: slideFadeIn 0.3s ease-out forwards; }
+      `}</style>
+
       {/* Header Block with Brackets */}
-      <div className="relative flex flex-col items-center w-full">
+      <div className="relative flex w-full flex-col items-center px-[16px]">
         <div className="relative inline-grid grid-cols-[max-content] grid-rows-[max-content] place-items-start leading-[0]">
           <h2
-            className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[7px] ml-[3px] w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic whitespace-pre-wrap`}
+            className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[7px] ml-[3px] w-[300px] bg-clip-text text-center text-[32px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic whitespace-pre-wrap sm:w-[350px] sm:text-[36px]`}
             style={{
               backgroundImage:
                 "linear-gradient(107.454deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -64,8 +102,8 @@ export function ApplicationsMobile({
             Build the <br />
             impossible today
           </h2>
-          
-          <div className="relative col-start-1 row-start-1 mt-0 ml-[353.65px] flex size-[4px] items-center justify-center">
+
+          <div className="relative col-start-1 row-start-1 mt-0 ml-[303.65px] flex size-[4px] items-center justify-center sm:ml-[353.65px]">
             <div className="rotate-180 flex-none">
               <div className="relative size-[4px]">
                 <div className="absolute inset-[0_0_-12.5%_-12.5%]">
@@ -74,7 +112,7 @@ export function ApplicationsMobile({
               </div>
             </div>
           </div>
-          <div className="relative col-start-1 row-start-1 mt-[70px] ml-[353.65px] flex size-[4px] items-center justify-center">
+          <div className="relative col-start-1 row-start-1 mt-[64px] ml-[303.65px] flex size-[4px] items-center justify-center sm:mt-[70px] sm:ml-[353.65px]">
             <div className="-scale-y-100 rotate-180 flex-none">
               <div className="relative size-[4px]">
                 <div className="absolute inset-[0_0_-12.5%_-12.5%]">
@@ -83,7 +121,7 @@ export function ApplicationsMobile({
               </div>
             </div>
           </div>
-          <div className="relative col-start-1 row-start-1 mt-[70px] ml-0 size-[4px]">
+          <div className="relative col-start-1 row-start-1 mt-[64px] ml-0 size-[4px] sm:mt-[70px]">
             <div className="absolute inset-[0_0_-12.5%_-12.5%]">
               <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
             </div>
@@ -100,7 +138,7 @@ export function ApplicationsMobile({
         </div>
 
         <p
-          className={`${interRegular.className} mt-[10px] w-[350px] text-center text-[14px] leading-[16px] font-normal text-white not-italic [word-break:break-word] px-[12px]`}
+          className={`${interRegular.className} mt-[10px] w-full max-w-[343px] text-center text-[14px] leading-[16px] font-normal text-white not-italic [word-break:break-word]`}
         >
           Don&apos;t let legacy design limit your roadmap. Discover the
           market-differentiating features of the GPX10 and what&apos;s coming next.
@@ -108,10 +146,10 @@ export function ApplicationsMobile({
       </div>
 
       {/* Category Navigation Selector (Mobile) */}
-      <div className="w-full mt-[24px] overflow-hidden flex justify-center">
+      <div className="mt-[24px] w-full overflow-hidden flex justify-center">
         <div
           ref={scrollContainerRef}
-          className="flex items-center overflow-x-auto scrollbar-none px-[24px] h-[52px] w-full max-w-full"
+          className="flex h-[52px] w-full max-w-full items-center overflow-x-auto px-[24px] scrollbar-none"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {APPLICATION_TABS.map((label, index) => {
@@ -153,82 +191,68 @@ export function ApplicationsMobile({
           />
         </div>
       </div>
-      <style>{`
-        .scrollbar-none::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
 
-      {/* Embedded Feature Image Block edge-to-edge */}
-      <div className="relative mt-[32px] w-full flex justify-center">
-        {/* Original image containing the car and baked-in text box */}
-        <Image
-          src="/mobile/Group-97.png"
+      {/* Watermark Text */}
+      <p
+        className={`${gilroyExtraBold.className} mt-[32px] w-full max-w-[343px] overflow-hidden text-center text-[36px] leading-[42px] font-extrabold tracking-[0.5px] whitespace-nowrap text-transparent uppercase not-italic [word-break:break-word] bg-clip-text`}
+        style={{ backgroundImage: mobileWatermarkGradient }}
+      >
+        {watermarkText}
+      </p>
+
+      {/* Hero Image */}
+      <div className="mt-[20px] flex w-full justify-center overflow-hidden px-[16px]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           alt=""
-          width={391}
-          height={372}
-          className="w-full h-auto object-cover"
-          sizes="100vw"
+          src={imgSrc}
+          className="h-auto max-h-[340px] w-auto max-w-full"
+          aria-hidden
         />
+      </div>
 
-        {/* Blackout overlay to hide the baked-in text box */}
-        <div className="absolute bottom-0 w-full h-[48%] bg-black" />
-
-        {/* Dynamic Feature Slider overlay */}
-        <div className="absolute bottom-0 w-full max-w-[340px] border-[0.5px] border-white/20 bg-[#000000] p-[24px] flex flex-col justify-center">
-          
-
-          {/* Top Left Bracket */}
-          <div className="absolute -top-[0.5px] -left-[0.5px] z-10 flex size-[6px] items-center justify-center">
-            <div className="-scale-y-100 flex-none">
-              <div className="relative size-[6px]">
-                <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
-              </div>
+      {/* Feature Card */}
+      <div className="relative mt-[20px] w-full max-w-[343px] border-[0.5px] border-white/20 bg-[#000000] p-[24px]">
+        <div className="absolute -top-[0.5px] -left-[0.5px] z-10 flex size-[6px] items-center justify-center">
+          <div className="-scale-y-100 flex-none">
+            <div className="relative size-[6px]">
+              <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
             </div>
           </div>
+        </div>
 
-          {/* Bottom Right Bracket */}
-          <div className="absolute -bottom-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center">
-            <div className="-scale-x-100 flex-none">
-              <div className="relative size-[6px]">
-                <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
-              </div>
+        <div className="absolute -bottom-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center">
+          <div className="-scale-x-100 flex-none">
+            <div className="relative size-[6px]">
+              <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
             </div>
           </div>
+        </div>
 
-          <style>{`
-            @keyframes slideFadeIn {
-              0% { opacity: 0; transform: translateY(10px); }
-              100% { opacity: 1; transform: translateY(0); }
-            }
-            .animate-slide-fade {
-              animation: slideFadeIn 0.3s ease-out forwards;
-            }
-          `}</style>
-
-          <div key={activeIndex} className="flex flex-col animate-slide-fade">
-            <h3 className={`${gilroyMedium.className} text-[20px] text-white leading-[28px] not-italic`}>
-              {activeFeature.title}
-            </h3>
-            <p className={`${interRegular.className} text-[14px] text-[#f0f0f0] opacity-65 leading-[22px] mt-[16px] not-italic`}>
-              {activeFeature.description}
-            </p>
-          </div>
+        <div key={activeIndex} className="flex flex-col animate-slide-fade">
+          <h3 className={`${gilroyMedium.className} text-[20px] text-white leading-[28px] not-italic`}>
+            {activeFeature.title}
+          </h3>
+          <p className={`${interRegular.className} mt-[16px] text-[14px] text-[#f0f0f0] opacity-65 leading-[22px] not-italic`}>
+            {activeFeature.description}
+          </p>
         </div>
       </div>
 
       {/* Navigation Arrows */}
-      <div className="mt-[32px] flex items-center justify-center gap-[16px]">
+      <div className="mt-[24px] flex items-center justify-center gap-[16px]">
         <button
           type="button"
           onClick={goPrev}
           className="size-[44px] relative"
           aria-label="Previous Feature"
         >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt=""
             src="/platform-scale/nav-left.svg"
             className="absolute inset-0 block size-full max-w-none"
+            aria-hidden
           />
         </button>
         <button
@@ -237,17 +261,19 @@ export function ApplicationsMobile({
           className="size-[44px] relative"
           aria-label="Next Feature"
         >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt=""
             src="/platform-scale/nav-right.svg"
             className="absolute inset-0 block size-full max-w-none"
+            aria-hidden
           />
         </button>
       </div>
 
       <a
         href="#"
-        className={`${interMedium.className} relative mt-[40px] flex h-[48px] w-[237px] items-center justify-center ${GREEN_CTA_SHADOW}`}
+        className={`${interMedium.className} relative mt-[32px] flex h-[48px] w-[237px] items-center justify-center ${GREEN_CTA_SHADOW}`}
       >
         <span
           aria-hidden
@@ -262,11 +288,11 @@ export function ApplicationsMobile({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/applications/cta-dot.svg" alt="" className="size-[6px]" aria-hidden />
         </p>
-        
-        {/* Custom Corners that pop out slightly to avoid the inset shadow */}
+
         <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">
           <div className="rotate-180 flex-none">
             <div className="relative size-[4px]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/hero/corner-tag-2.svg" alt="" className="block size-full max-w-none" aria-hidden />
             </div>
           </div>
@@ -274,6 +300,7 @@ export function ApplicationsMobile({
         <div className="pointer-events-none absolute -top-[0.5px] left-0 z-20 flex size-[4px] items-center justify-center">
           <div className="-scale-y-100 flex-none">
             <div className="relative size-[4px]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/hero/corner-tag-1.svg" alt="" className="block size-full max-w-none" aria-hidden />
             </div>
           </div>
@@ -281,6 +308,7 @@ export function ApplicationsMobile({
         <div className="pointer-events-none absolute right-0 bottom-0 z-20 flex size-[4px] items-center justify-center">
           <div className="-scale-x-100 flex-none">
             <div className="relative size-[4px]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/hero/corner-tag-2.svg" alt="" className="block size-full max-w-none" aria-hidden />
             </div>
           </div>
@@ -288,6 +316,7 @@ export function ApplicationsMobile({
         <div className="pointer-events-none absolute bottom-0 left-0 z-20 flex size-[4px] items-center justify-center">
           <div className="flex-none">
             <div className="relative size-[4px]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/hero/corner-tag-1.svg" alt="" className="block size-full max-w-none" aria-hidden />
             </div>
           </div>

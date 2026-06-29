@@ -159,39 +159,50 @@ function WhiteCta({ children, href = "#" }: { children: React.ReactNode; href?: 
 function CareersHeroMobile() {
   return (
     <section
-      className="relative flex min-h-[100svh] w-full flex-col justify-center overflow-hidden px-[20px] py-[120px]"
+      className="relative w-full overflow-hidden bg-black"
       aria-label="Careers hero"
     >
-      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/mobile/career/image%20105.png"
-          alt=""
-          className="absolute left-[calc(50%+40px)] top-[260px] h-[342px] w-[645px] max-w-none -translate-x-1/2 object-contain opacity-90 mix-blend-screen"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black" />
-      </div>
+      {/* Banner (Figma 3243:333 — 393×557 source of truth). pt-[78px] clears the sticky navbar. */}
+      <div className="relative mx-auto w-full pt-[78px]">
+        <div className="relative mx-auto h-[557px] w-full">
+          {/* image 105 (3243:3928) — full brightness, bleeds off both edges */}
+          <div className="pointer-events-none absolute left-[calc(50%-76px)] top-[188px] h-[290px] w-[545px] max-w-none -translate-x-1/2 overflow-hidden">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/careers/hero-bg.png"
+              alt=""
+              className="absolute inset-0 size-full max-w-none object-cover"
+            />
+          </div>
 
-      <div className="relative flex flex-col items-center gap-[15px]">
-        <h1
-          className={`${gilroyMedium.className} max-w-[273px] w-full bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
-          style={{ backgroundImage: gradient("103.779deg") }}
-        >
-          Re-architect the physics of AI
-        </h1>
-        <p
-          className={`${interRegular.className} max-w-[308px] w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
-        >
-          Don&apos;t iterate on legacy silicon. Build the fundamental compute
-          substrate for the next generation of intelligence.
-        </p>
-        <div className="mt-[400px] w-full max-w-[231px]">
-          <GreenCta href="#open-roles">
-            <span className="flex items-center gap-[8px]">
-              <span className="text-[12px]">VIEW OPEN ROLES</span>
-              <span className="block size-[6px] rounded-full bg-white" />
-            </span>
-          </GreenCta>
+          {/* Content (3243:335) — title + subtitle */}
+          <div className="absolute left-[20px] top-[32px] flex w-[calc(100%-40px)] flex-col items-center gap-[15px]">
+            <div className="relative inline-flex flex-col items-center justify-center">
+              <h1
+                className={`${gilroyMedium.className} max-w-[273px] w-full bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+                style={{ backgroundImage: gradient("103.779deg") }}
+              >
+                Re-architect the physics of AI
+              </h1>
+              <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
+            </div>
+            <p
+              className={`${interRegular.className} max-w-[308px] w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
+            >
+              Don&apos;t iterate on legacy silicon. Build the fundamental compute
+              substrate for the next generation of intelligence.
+            </p>
+          </div>
+
+          {/* Cta (3243:3942) */}
+          <div className="absolute left-1/2 top-[489px] w-[231px] -translate-x-1/2">
+            <GreenCta href="#open-roles">
+              <span className="flex items-center gap-[8px]">
+                <span className="text-[12px]">VIEW OPEN ROLES</span>
+                <span className="block size-[6px] rounded-full bg-white" />
+              </span>
+            </GreenCta>
+          </div>
         </div>
       </div>
     </section>

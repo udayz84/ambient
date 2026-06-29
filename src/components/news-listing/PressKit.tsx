@@ -20,9 +20,12 @@ const MENUS = ["Logos & Marks", "Executive Photos", "Product Renders"] as const;
 
 function PressTitle() {
   return (
-    <div className="relative h-[63px] w-[539px]" data-node-id="2500:1663">
+    <div
+      className="relative w-full min-[1024px]:h-[63px] min-[1024px]:w-[539px] min-[1024px]:shrink-0"
+      data-node-id="2500:1663"
+    >
       <h2
-        className={`${gilroyMedium.className} absolute left-1/2 top-[7px] -translate-x-1/2 bg-clip-text text-center text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic [word-break:break-word]`}
+        className={`${gilroyMedium.className} relative w-full bg-clip-text text-center text-[32px] leading-[38px] font-medium text-transparent not-italic [word-break:break-word] min-[1024px]:absolute min-[1024px]:left-1/2 min-[1024px]:top-[7px] min-[1024px]:-translate-x-1/2 min-[1024px]:text-[46px] min-[1024px]:leading-[49px] min-[1024px]:whitespace-nowrap`}
         style={{
           backgroundImage: TITLE_GRADIENT,
           WebkitBackgroundClip: "text",
@@ -33,7 +36,7 @@ function PressTitle() {
         Writing about Ambient?
       </h2>
       <div
-        className="pointer-events-none absolute left-[1px] top-[0.73px] h-[61.475px] w-[537px]"
+        className="pointer-events-none absolute inset-0 min-[1024px]:left-[1px] min-[1024px]:top-[0.73px] min-[1024px]:h-[61.475px] min-[1024px]:w-[537px]"
         data-node-id="2500:1665"
         data-name="Frame"
         aria-hidden
