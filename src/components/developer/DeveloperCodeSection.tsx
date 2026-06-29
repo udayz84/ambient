@@ -54,34 +54,60 @@ export function DeveloperCodeSection() {
         <CodeEditorCard />
         <ArticleColumn />
 
-        {/* Connectors (absolute, decorative) */}
+        {/* Connectors (absolute, decorative) — exact Figma nested structure */}
         {/* line102 — 2684:1098 */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt=""
+        <div
+          className="absolute flex h-0 w-[24.008px] -translate-x-1/2 -translate-y-1/2 items-center justify-center"
+          style={{ left: "calc(50% + 12px)", top: "calc(50% - 235.72px)" }}
           aria-hidden
-          src="/developer/connector-line.svg"
-          className="pointer-events-none absolute h-auto w-[24px] max-w-none"
-          style={{ left: 626.001, top: 57.78 }}
-        />
-        {/* arrow — 2684:1109 */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt=""
-          aria-hidden
-          src="/developer/connector-arrow-1.svg"
-          className="pointer-events-none absolute h-[87.869px] w-[167.404px] max-w-none"
+        >
+          <div className="flex-none rotate-180">
+            <div className="relative h-0 w-[24.008px]">
+              <div className="absolute inset-[-2.89px_0_-2.89px_-12.02%]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  alt=""
+                  src="/developer/connector-line.svg"
+                  className="block size-full max-w-none"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* arrow — 2684:1109 (left 458, top 223.78) */}
+        <div
+          className="absolute h-[87.869px] w-[167.404px]"
           style={{ left: 458, top: 223.78 }}
-        />
-        {/* arrow — 2684:1111 */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt=""
           aria-hidden
-          src="/developer/connector-arrow-2.svg"
-          className="pointer-events-none absolute h-[87.869px] w-[167.404px] max-w-none"
-          style={{ left: 458, top: 402.65 }}
-        />
+        >
+          <div className="absolute inset-[-3.27%_-1.72%_-0.38%_-0.22%]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              alt=""
+              src="/developer/connector-arrow-1.svg"
+              className="block size-full max-w-none"
+            />
+          </div>
+        </div>
+        {/* arrow — 2684:1111 (left 458, top 314.78, vertically flipped) */}
+        <div
+          className="absolute flex h-[87.869px] w-[167.404px] items-center justify-center"
+          style={{ left: 458, top: 314.78 }}
+          aria-hidden
+        >
+          <div className="-scale-y-100 flex-none">
+            <div className="relative h-[87.869px] w-[167.404px]">
+              <div className="absolute inset-[-3.27%_-1.72%_-0.38%_-0.22%]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  alt=""
+                  src="/developer/connector-arrow-2.svg"
+                  className="block size-full max-w-none"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

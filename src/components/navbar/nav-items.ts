@@ -5,11 +5,11 @@ export type NavItem = {
 };
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: "Products", hasChevron: true, href: "#" },
+  { label: "Products", hasChevron: true, href: "/products" },
   { label: "Technology", hasChevron: true, href: "/technology" },
-  { label: "Applications", hasChevron: true, href: "#" },
+  { label: "Applications", hasChevron: true, href: "/applications" },
   { label: "Company", hasChevron: true, href: "/company" },
-  { label: "News & Media", hasChevron: true, href: "/resources" },
-  { label: "Blog", hasChevron: true, href: "#" },
+  { label: "News & Resources", hasChevron: true, href: "/news-listing" },
+  { label: "Blog", hasChevron: true, href: "/resources" },
   { label: "Career", hasChevron: false, href: "/careers" },
 ];

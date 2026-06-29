@@ -60,7 +60,7 @@ function ProductsFeaturesDesktop() {
 
       {/* Section title — 2901:795 (centered, top=0) */}
       <div
-        className="absolute flex flex-col items-center gap-[24px]"
+        className="absolute flex flex-col items-center gap-[24px] z-20"
         style={{ left: 279, top: 0, width: 674 }}
         data-node-id="2901:795"
         data-name="Section Title"

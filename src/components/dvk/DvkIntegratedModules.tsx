@@ -168,11 +168,11 @@ function GreenCta({ children, width }: { children: React.ReactNode; width: numbe
   return (
     <a
       href="#"
-      className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] shrink-0 items-center justify-center overflow-hidden`}
+      className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[52px] shrink-0 items-center justify-center overflow-hidden`}
       style={{ width }}
     >
       <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
-      <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+      <span className="relative text-[16px] leading-normal font-medium uppercase whitespace-nowrap text-white not-italic py-[4px] mt-[2px]">
         {children}
       </span>
       <span aria-hidden className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
@@ -185,10 +185,10 @@ function SecondaryCta({ children, width }: { children: React.ReactNode; width: n
   return (
     <a
       href="#"
-      className={`${gilroyMedium.className} relative flex h-[48px] items-center justify-center bg-[rgba(226,241,202,0.12)] shrink-0 overflow-clip px-[20px] py-[10px]`}
+      className={`${gilroyMedium.className} relative flex h-[52px] items-center justify-center bg-[rgba(226,241,202,0.12)] shrink-0 px-[20px]`}
       style={{ width }}
     >
-      <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+      <span className="relative text-[16px] leading-normal font-medium uppercase whitespace-nowrap text-white not-italic py-[4px] mt-[2px]">
         {children}
       </span>
       <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />

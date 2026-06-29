@@ -178,15 +178,6 @@ function SpecCard({ card }: { card: SpecCard }) {
       }}
       data-name="Article"
     >
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt=""
-          className="absolute max-w-none"
-          style={{ width: "196.33%", height: "195.4%", left: "-49.07%", top: "-46.07%" }}
-          src="/dvk/card-glow.png"
-        />
-      </div>
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
       <div
         className="flex w-full flex-col items-start"

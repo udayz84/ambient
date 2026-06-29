@@ -1,3 +1,5 @@
+"use client";
+import { useState } from "react";
 import { gilroyExtraBold, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import {
@@ -19,7 +21,22 @@ import {
  * Figma 2901:2033 — "Built for always-on. Proven across markets."
  * Tabbed use-case showcase. Desktop canvas is 1448 wide / 941 tall.
  */
+const USE_CASE_IMAGES: Record<string, string> = {
+  "HEARABLES": "/applications/app-hearables.png",
+  "SMART HOMES": "/applications/app-smart-home.png",
+  "INDUSTRIAL": "/applications/app-industrial.png",
+  "AUTOMOTIVE": "/applications/app-automotive.png",
+  "MEDICAL": "/applications/app-medical.png",
+  "AGRICULTURE": "/applications/app-agriculture.png",
+};
+
 export function ProductsUseCases() {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const activeTab = USECASE_TABS[activeIdx];
+  const activeImage = USE_CASE_IMAGES[activeTab.label] || "/products/use-case-image.png";
+
+  const nextTab = () => setActiveIdx((i) => (i + 1) % USECASE_TABS.length);
+  const prevTab = () => setActiveIdx((i) => (i - 1 + USECASE_TABS.length) % USECASE_TABS.length);
   return (
     <>
       {/* DESKTOP (>=1024px) */}
@@ -36,17 +53,17 @@ export function ProductsUseCases() {
           data-node-id="2901:2033"
           data-name="Desktop - 14"
         >
-          <ProductsUseCasesDesktop />
+          <ProductsUseCasesDesktop activeTab={activeTab} activeImage={activeImage} onNext={nextTab} onPrev={prevTab} onSelect={setActiveIdx} activeIdx={activeIdx} />
         </div>
       </section>
 
       {/* MOBILE (<1024px) */}
-      <ProductsUseCasesMobile />
+      <ProductsUseCasesMobile activeTab={activeTab} activeImage={activeImage} onSelect={setActiveIdx} activeIdx={activeIdx} />
     </>
   );
 }
 
-function ProductsUseCasesDesktop() {
+function ProductsUseCasesDesktop({ activeTab, activeImage, onNext, onPrev, onSelect, activeIdx }: any) {
   return (
     <>
       {/* Section title — 2901:2134 */}
@@ -87,7 +104,7 @@ function ProductsUseCasesDesktop() {
       </div>
 
       {/* Options / tab ruler — 2901:2034 */}
-      <TabRuler />
+      <TabRuler onNext={onNext} onPrev={onPrev} onSelect={onSelect} activeIdx={activeIdx} />
 
       {/* Giant watermark — 2901:2103 */}
       <h3
@@ -104,7 +121,7 @@ function ProductsUseCasesDesktop() {
         data-node-id="2901:2103"
         aria-hidden
       >
-        Hearables
+        {activeTab.label}
       </h3>
 
       {/* Central image — 2901:2104 */}
@@ -117,7 +134,7 @@ function ProductsUseCasesDesktop() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt=""
-          src="/products/use-case-image.png"
+          src={activeImage}
           className="absolute inset-0 size-full max-w-none object-cover"
         />
       </div>
@@ -157,7 +174,7 @@ function ProductsUseCasesDesktop() {
   );
 }
 
-function TabRuler() {
+function TabRuler({ onNext, onPrev, onSelect, activeIdx }: any) {
   return (
     <div
       className="absolute flex items-center justify-between"
@@ -166,24 +183,28 @@ function TabRuler() {
       data-name="Options"
     >
       {/* Left arrow */}
-      <ArrowButton src="/products/tab-arrow-left.svg" nodeId="2901:2035" />
+      <ArrowButton src="/products/tab-arrow-left.svg" nodeId="2901:2035" onClick={onPrev} />
 
       {/* Interleave tick segments and tabs */}
       {USECASE_TABS.map((tab, i) => (
-        <div key={tab.label} className="contents">
+        <div key={tab.label}
+            onClick={() => onSelect(idx)}
+            role="button"
+            tabIndex={0} className="contents">
           <TickSegment heights={TICK_SEGMENTS[i]} />
-          <TabButton tab={tab} />
+          <TabButton tab={tab} active={activeIdx === i} onClick={() => onSelect(i)} />
         </div>
       ))}
       <TickSegment heights={TICK_SEGMENTS[TICK_SEGMENTS.length - 1]} />
 
       {/* Right arrow */}
-      <ArrowButton src="/products/tab-arrow-right.svg" nodeId="2901:2089" flip />
+      <ArrowButton src="/products/tab-arrow-right.svg" nodeId="2901:2089" onClick={onNext} />
     </div>
   );
 }
 
 function ArrowButton({
+  onClick,
   src,
   nodeId,
   flip = false,
@@ -191,6 +212,7 @@ function ArrowButton({
   src: string;
   nodeId: string;
   flip?: boolean;
+  onClick?: () => void;
 }) {
   return (
     <button
@@ -198,6 +220,7 @@ function ArrowButton({
       className={`relative size-[44px] shrink-0 cursor-pointer border-0 bg-transparent p-0 ${flip ? "-scale-x-100" : ""}`}
       data-node-id={nodeId}
       data-name="Menu"
+      onClick={onClick}
       aria-label="Scroll tabs"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -223,8 +246,8 @@ function TickSegment({ heights }: { heights: number[] }) {
   );
 }
 
-function TabButton({ tab }: { tab: (typeof USECASE_TABS)[number] }) {
-  const active = !!tab.active;
+function TabButton({ tab, active, onClick }: any) {
+  
   return (
     <button
       type="button"
@@ -234,6 +257,7 @@ function TabButton({ tab }: { tab: (typeof USECASE_TABS)[number] }) {
           : "bg-transparent px-[20px] py-[14px] text-[16px] text-[#666]"
       }`}
       data-node-id={active ? "2901:2047" : undefined}
+      onClick={onClick}
     >
       {tab.label}
     </button>
@@ -342,7 +366,7 @@ function SecondaryCta({ children }: { children: React.ReactNode }) {
   );
 }
 
-function ProductsUseCasesMobile() {
+function ProductsUseCasesMobile({ activeTab, activeImage, onSelect, activeIdx }: any) {
   return (
     <section
       className="relative w-full overflow-hidden bg-black px-[24px] pt-[64px] pb-[80px] min-[1024px]:hidden"
@@ -369,11 +393,11 @@ function ProductsUseCasesMobile() {
 
       {/* Tabs (scrollable row) */}
       <div className="mt-[32px] -mx-[24px] flex items-center gap-[16px] overflow-x-auto px-[24px] pb-[8px]">
-        {USECASE_TABS.map((tab) => (
+        {USECASE_TABS.map((tab, idx) => (
           <span
             key={tab.label}
             className={`${interRegular.className} shrink-0 whitespace-nowrap text-[13px] tracking-[0.02em] not-italic ${
-              tab.active
+              idx === activeIdx
                 ? "bg-[#f0f0f0] px-[12px] py-[8px] text-black"
                 : "px-[8px] py-[8px] text-[#666]"
             }`}
@@ -394,12 +418,12 @@ function ProductsUseCasesMobile() {
           }}
           aria-hidden
         >
-          Hearables
+          {activeTab.label}
         </h3>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt=""
-          src="/products/use-case-image.png"
+          src={activeImage}
           className="relative z-10 h-auto w-full max-w-[360px] object-cover"
         />
       </div>
