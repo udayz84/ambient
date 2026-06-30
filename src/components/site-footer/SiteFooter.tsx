@@ -25,7 +25,7 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
             className="hidden lg:block absolute left-[-0.02%] top-[-5.03%] h-[97.04%] w-full min-w-0 translate-x-0 opacity-100 max-w-none object-cover"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.6)] via-[rgba(0,0,0,0.2)] to-[rgba(0,0,0,0.8)] lg:from-black lg:via-black/30 lg:to-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.4)] via-[rgba(0,0,0,0.1)] to-[rgba(0,0,0,0.6)] lg:from-black/80 lg:via-black/10 lg:to-black/10" />
       </div>
 
       <div className="relative mx-auto flex h-full w-full max-w-[1440px] flex-col items-center pt-[100px] pb-0 lg:block lg:pt-0 lg:pb-0">

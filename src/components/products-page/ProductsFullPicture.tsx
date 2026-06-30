@@ -9,7 +9,7 @@ import { Corners } from "../shared/Corners";
 
 /* ---- Canvas (Figma frame width = 1440) ---- */
 const CANVAS_WIDTH = 1440;
-const SECTION_HEIGHT = 904;
+const SECTION_HEIGHT = 1000;
 
 /* ---- Tokens ---- */
 const TITLE_GRADIENT =
@@ -189,7 +189,7 @@ function FullPictureDesktop() {
 function CalloutCard({ callout }: { callout: Callout }) {
   return (
     <div
-      className="absolute flex flex-col items-start gap-[8px] px-[12px] pb-[16px] pt-[8px]"
+      className="absolute flex flex-col items-start gap-[8px] px-[12px] pb-[16px] pt-[8px] border border-white/10 rounded-[4px]"
       style={{
         left: callout.left,
         top: callout.top,
@@ -231,25 +231,25 @@ function CalloutCard({ callout }: { callout: Callout }) {
       {callout.items.map((item, i) => (
         <div key={i} className="contents">
           {i > 0 && (
-            <div className="flex w-full items-center justify-center">
+            <div className="flex h-[1px] w-full shrink-0 items-center justify-center overflow-visible">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 alt=""
                 src="/products/spec-line.svg"
-                className="block w-full max-w-none"
+                className="block h-[1px] w-full max-w-none"
                 aria-hidden
               />
             </div>
           )}
-          <div className="flex w-full items-center gap-[5.078px]">
+          <div className="relative h-[17px] w-full shrink-0">
             <span
-              className={`${interRegular.className} text-[14px] font-normal leading-[normal] tracking-[-0.1504px] not-italic`}
+              className={`${interRegular.className} absolute left-0 top-[1.5px] text-[14px] font-normal leading-[normal] tracking-[-0.1504px] not-italic`}
               style={{ color: PLUS_COLOR }}
             >
               +
             </span>
             <span
-              className={`${interRegular.className} text-[13px] font-normal leading-[normal] whitespace-nowrap not-italic`}
+              className={`${interRegular.className} absolute left-[15px] top-0 text-[13px] font-normal leading-[normal] whitespace-nowrap not-italic`}
               style={{ color: ITEM_TEXT_COLOR }}
             >
               {item}
@@ -299,11 +299,11 @@ function FullPictureMobile() {
       </div>
 
       {/* Callouts as stacked grid */}
-      <div className="mt-[32px] grid grid-cols-1 gap-[16px] sm:grid-cols-2">
+      <div className="mt-[32px] grid grid-cols-1 gap-[24px] sm:grid-cols-2">
         {CALLOUTS.map((callout) => (
           <div
             key={callout.nodeId}
-            className="relative flex flex-col gap-[8px] px-[12px] pb-[12px] pt-[8px]"
+            className="relative flex flex-col gap-[8px] px-[12px] pb-[12px] pt-[8px] border border-white/10 rounded-[4px]"
             style={{ backgroundColor: CARD_BG }}
           >
             <div
@@ -330,19 +330,32 @@ function FullPictureMobile() {
               </div>
             </div>
             {callout.items.map((item, i) => (
-              <div key={i} className="flex items-center gap-[6px]">
-                <span
-                  className={`${interRegular.className} text-[13px] not-italic`}
-                  style={{ color: PLUS_COLOR }}
-                >
-                  +
-                </span>
-                <span
-                  className={`${interRegular.className} text-[13px] not-italic`}
-                  style={{ color: ITEM_TEXT_COLOR }}
-                >
-                  {item}
-                </span>
+              <div key={i} className="contents">
+                {i > 0 && (
+                  <div className="flex h-[1px] w-full shrink-0 items-center justify-center overflow-visible">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      alt=""
+                      src="/products/spec-line.svg"
+                      className="block h-[1px] w-full max-w-none"
+                      aria-hidden
+                    />
+                  </div>
+                )}
+                <div className="relative h-[17px] w-full shrink-0">
+                  <span
+                    className={`${interRegular.className} absolute left-0 top-[1.5px] text-[14px] font-normal leading-[normal] tracking-[-0.1504px] not-italic`}
+                    style={{ color: PLUS_COLOR }}
+                  >
+                    +
+                  </span>
+                  <span
+                    className={`${interRegular.className} absolute left-[15px] top-0 text-[13px] font-normal leading-[normal] whitespace-nowrap not-italic`}
+                    style={{ color: ITEM_TEXT_COLOR }}
+                  >
+                    {item}
+                  </span>
+                </div>
               </div>
             ))}
             <Corners />
