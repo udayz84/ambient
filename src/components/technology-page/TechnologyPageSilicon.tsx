@@ -116,6 +116,15 @@ export function TechnologyPageSilicon() {
               className="absolute inset-0"
               style={{ backgroundImage: VIGNETTE }}
             />
+            {/* Fade left/right edges into the black background on ultrawide screens */}
+            <div
+              aria-hidden
+              className="absolute inset-y-0 left-0 hidden w-[300px] bg-gradient-to-r from-black to-transparent min-[1441px]:block"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-y-0 right-0 hidden w-[300px] bg-gradient-to-l from-black to-transparent min-[1441px]:block"
+            />
           </div>
         </div>
 

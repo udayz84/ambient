@@ -42,7 +42,7 @@ function RequestCta() {
 
 function ChipImage({ className }: { className?: string }) {
   return (
-    <div className={`relative overflow-hidden ${className}`} data-name="Chip Image">
+    <div className={`relative ${className}`} data-name="Chip Image">
       <img
         src="/Frame 1984079439.png"
         alt="Sparsh AI Module"
@@ -78,23 +78,41 @@ export function SomReadyToDeploy() {
           </p>
         </div>
 
-        {/* Body: two columns */}
-        <div className="flex w-full items-center gap-[60px]">
+        {/* Body: two columns matching Figma (Photo 1) */}
+        <div className="flex w-full items-center justify-center gap-[120px]">
           {/* Left: heading + description + CTA */}
-          <div className="flex flex-1 flex-col items-start gap-[20px]">
+          <div className="relative flex flex-col items-start shrink-0 w-[320px]">
             <h3
-              className={`${gilroyMedium.className} text-[32px] leading-[38px] font-medium text-white not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} relative text-[32px] leading-[38px] font-medium text-white not-italic whitespace-nowrap`}
             >
               {HEADING_LINE_1}
               <br />
               {HEADING_LINE_2}
+
+              {/* Connecting line SVG */}
+              <svg 
+                className="absolute left-[100%] top-[55px] w-[120px] h-[50px] pointer-events-none" 
+                viewBox="0 0 120 50" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path 
+                  d="M0,0 L40,0 L80,30 L120,30" 
+                  stroke="rgba(255,255,255,0.4)" 
+                  strokeWidth="1" 
+                />
+              </svg>
             </h3>
+
             <p
-              className={`${interRegular.className} max-w-[290px] text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} mt-[60px] max-w-[290px] text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic`}
             >
               {DESCRIPTION}
             </p>
-            <RequestCta />
+            
+            <div className="mt-[20px]">
+              <RequestCta />
+            </div>
           </div>
 
           {/* Right: chip image */}
@@ -125,7 +143,7 @@ export function SomReadyToDeploy() {
           </p>
         </div>
 
-        <ChipImage className="h-[300px] w-[290px]" />
+        <ChipImage className="h-[300px] w-full max-w-[290px]" />
 
         <div className="flex w-full flex-col items-center gap-[20px]">
           <h3

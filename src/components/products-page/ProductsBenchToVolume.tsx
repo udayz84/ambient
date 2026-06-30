@@ -36,7 +36,7 @@ export function ProductsBenchToVolume() {
 
 function ProductsBenchToVolumeDesktop() {
   return (
-    <div className="mx-auto flex w-full max-w-[1204px] flex-col items-center pb-[120px]">
+    <div className="mx-auto flex w-full max-w-[1204px] flex-col items-center pb-0">
       {/* Section title — 2918:1467 (centered, w=800) */}
       <div
         className="flex flex-col items-center gap-[24px]"

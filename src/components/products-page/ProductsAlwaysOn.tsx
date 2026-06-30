@@ -1,4 +1,5 @@
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
+import { TabSwitcher } from "./TabSwitcher";
 import { Corners } from "../shared/Corners";
 import {
   ALWAYSON_SECTION_HEIGHT,
@@ -23,7 +24,7 @@ export function ProductsAlwaysOn() {
     <>
       {/* DESKTOP (>=1024px) */}
       <section
-        className="relative mx-auto hidden w-full bg-black min-[1024px]:block"
+        className="relative mx-auto hidden w-full bg-black min-[1024px]:block pb-[120px]"
         aria-label="Always on"
       >
         <div
@@ -108,11 +109,12 @@ function ProductsAlwaysOnDesktop() {
           something matters, it surges to full power. No reset. No waking up. It
           was never off.
         </p>
+        <TabSwitcher className="mt-[8px]" />
       </div>
 
       {/* Stats frame — 2915:1234 */}
       <div
-        className="absolute flex items-start gap-[32px] px-[20px]"
+        className="absolute flex items-start gap-[32px] px-[20px] border border-white/10 rounded-sm"
         style={{
           left: ALWAYSON_STATS.left,
           top: ALWAYSON_STATS.top,
@@ -192,7 +194,7 @@ function StatBadge({
 }) {
   return (
     <div
-      className={`${dmMono.className} relative h-[26px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)]`}
+      className={`${dmMono.className} relative h-[26px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)] border-[0.5px] border-white/20 rounded-[4px]`}
       style={{ width }}
       data-name="Menu"
     >
@@ -305,6 +307,7 @@ function ProductsAlwaysOnMobile() {
           something matters, it surges to full power. No reset. No waking up. It
           was never off.
         </p>
+        <TabSwitcher className="mt-[8px]" />
       </div>
 
       {/* Stats */}

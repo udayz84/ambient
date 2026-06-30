@@ -88,7 +88,7 @@ function ProductsArchitectureDesktop() {
 
       {/* Stats frame — 2903:2204 */}
       <div
-        className="relative mt-[2.67px] flex items-start justify-center gap-[32px] px-[20px]"
+        className="relative mt-[2.67px] flex items-start justify-center gap-[32px] px-[20px] border border-white/10 rounded-sm"
         style={{
           width: ARCH_STATS_FRAME.width,
           height: ARCH_STATS_FRAME.height,
@@ -139,8 +139,8 @@ function ArchStatView({ stat }: { stat: (typeof ARCH_STATS)[number] }) {
 
       {/* Title */}
       <h3
-        className={`${gilroyMedium.className} absolute m-0 text-[32px] leading-[38px] font-medium text-white not-italic [word-break:break-word]`}
-        style={{ left: 0.40625, top: 84, width: 279 }}
+        className={`${gilroyMedium.className} absolute m-0 text-[32px] leading-[38px] font-medium text-white not-italic whitespace-nowrap`}
+        style={{ left: 0.40625, top: 84, width: "100%" }}
       >
         {stat.title}
       </h3>

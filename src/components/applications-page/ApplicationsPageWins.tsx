@@ -87,7 +87,7 @@ type WinCardProps = {
 function WinCard({ label, stat, statLabel, visual }: WinCardProps) {
   return (
     <div
-      className="relative h-[640px] w-[426px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)]"
+      className="relative h-[640px] w-[426px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black"
       data-name="Container"
     >
       {visual}
@@ -128,6 +128,35 @@ function WinCard({ label, stat, statLabel, visual }: WinCardProps) {
         </p>
         <FeatureRow />
       </div>
+    </div>
+  );
+}
+
+function WinCardMobile({ label, stat, statLabel, mobileImg }: { label: string; stat: string; statLabel: string; mobileImg: string }) {
+  return (
+    <div className="relative w-full max-w-[426px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black">
+      <div className="relative h-[240px] w-full overflow-hidden">
+        <img alt="" aria-hidden src={mobileImg} className="absolute inset-0 size-full object-cover" />
+        <div className="absolute inset-0" style={{ backgroundImage: OVERLAY_2 }} />
+      </div>
+      <div className="flex flex-col gap-[16px] p-[20px]">
+        <div className="flex items-center gap-[12px]">
+          <LabelTile />
+          <p className={`${interRegular.className} text-[16px] leading-[24px] font-normal text-[#f0f0f0]`}>{label}</p>
+        </div>
+        <div className="flex flex-col">
+          <p
+            className={`${gilroyBold.className} bg-clip-text text-[48px] leading-[54px] tracking-[-0.96px] text-transparent`}
+            style={{ backgroundImage: STAT_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
+          >
+            {stat}
+          </p>
+          <p className={`${gilroyMedium.className} text-[18px] leading-[22px] uppercase text-[#c5f3b5]`}>{statLabel}</p>
+        </div>
+        <p className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)]`}>{BODY}</p>
+        <FeatureRow />
+      </div>
+      <Corners />
     </div>
   );
 }
@@ -206,18 +235,21 @@ const CARDS = [
     stat: "99%",
     statLabel: "Accurate",
     visual: <VisualWearable />,
+    mobileImg: "/applications/wins-img-1.png",
   },
   {
     label: "The Medical/Safety Wins",
     stat: "6months",
     statLabel: "Battery",
     visual: <VisualMedical />,
+    mobileImg: "/applications/wins-img-2.png",
   },
   {
     label: "The AR/Vision Wins",
     stat: "Zero",
     statLabel: "Latency",
     visual: <VisualAr />,
+    mobileImg: "/applications/wins-img-3.png",
   },
 ];
 
@@ -311,14 +343,13 @@ export function ApplicationsPageWins({ heading, description }: { heading?: strin
         </div>
         <div className="flex w-full flex-col items-center gap-[24px]">
           {CARDS.map((card) => (
-            <div key={card.label} className="w-full max-w-[426px]">
-              <WinCard
-                label={card.label}
-                stat={card.stat}
-                statLabel={card.statLabel}
-                visual={card.visual}
-              />
-            </div>
+            <WinCardMobile
+              key={card.label}
+              label={card.label}
+              stat={card.stat}
+              statLabel={card.statLabel}
+              mobileImg={card.mobileImg}
+            />
           ))}
         </div>
       </div>

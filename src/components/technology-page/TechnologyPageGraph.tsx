@@ -217,8 +217,8 @@ export function TechnologyPageGraph() {
           {SUBTITLE_TEXT}
         </p>
 
-        {/* scaled chart */}
-        <div className="relative mx-auto h-[300px] w-full max-w-[380px]">
+        {/* scaled chart — bars positioned by % so they always fit the container */}
+        <div className="relative mx-auto h-[300px] w-full max-w-[380px] overflow-hidden">
           {BARS.map((b, i) => {
             const scale = 380 / 1440;
             return (
@@ -226,7 +226,7 @@ export function TechnologyPageGraph() {
                 key={`m-bar-${i}`}
                 className="absolute origin-bottom-left"
                 style={{
-                  left: b.left * scale,
+                  left: `${(b.left / 1440) * 100}%`,
                   bottom: 0,
                   width: b.w * scale,
                   height: b.h * scale,

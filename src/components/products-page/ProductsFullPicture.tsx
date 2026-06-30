@@ -101,11 +101,13 @@ export function ProductsFullPicture() {
       >
         <div
           className="relative mx-auto"
-          style={{ width: CANVAS_WIDTH, height: SECTION_HEIGHT }}
+          style={{ width: CANVAS_WIDTH, height: SECTION_HEIGHT - 120 }}
           data-node-id="2940:1244"
           data-name="The full picture"
         >
-          <FullPictureDesktop />
+          <div className="relative size-full">
+            <FullPictureDesktop />
+          </div>
         </div>
       </section>
 

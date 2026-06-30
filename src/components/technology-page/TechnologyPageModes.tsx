@@ -59,7 +59,7 @@ function ModeCard({
 }: ModeCardProps) {
   return (
     <div
-      className={`absolute ${left} ${top} ${width} ${height} bg-[rgba(21,21,21,0.08)]`}
+      className={`absolute ${left} ${top} ${width} ${height} z-20 bg-[rgba(21,21,21,0.08)] backdrop-blur-sm border border-white/10`}
       data-node-id={nodeId}
       data-name="Content"
     >
@@ -80,7 +80,8 @@ function ModeCard({
 
       {/* bullet */}
       <div
-        className={`absolute left-[${bulletLeft}] top-[${bulletTop}]`}
+        className="absolute"
+        style={{ left: bulletLeft, top: bulletTop }}
         data-name="Frame 1984079529"
       >
         <p className="absolute top-[3.5px] left-0 text-[14px] tracking-[-0.1504px] whitespace-nowrap text-[#3a9719] not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
@@ -308,7 +309,7 @@ export function TechnologyPageModes() {
           aria-hidden
         />
 
-        <div className="flex w-full max-w-[327px] flex-col gap-[14px] rounded-[4px] bg-[rgba(21,21,21,0.08)] p-[16px]">
+        <div className="flex w-full max-w-[327px] flex-col gap-[14px] rounded-[4px] bg-[rgba(21,21,21,0.08)] backdrop-blur-sm border border-white/10 p-[16px]">
           <div className="flex items-center justify-between border-b border-solid border-[rgba(255,255,255,0.1)] pb-[8px]">
             <span className={`${gilroySemiBold.className} text-[14px] font-semibold tracking-[0.6px] text-[#6fe047] uppercase not-italic`}>
               Subconscious AI
@@ -332,7 +333,7 @@ export function TechnologyPageModes() {
           aria-hidden
         />
 
-        <div className="flex w-full max-w-[327px] flex-col gap-[14px] rounded-[4px] bg-[rgba(21,21,21,0.08)] p-[16px]">
+        <div className="flex w-full max-w-[327px] flex-col gap-[14px] rounded-[4px] bg-[rgba(21,21,21,0.08)] backdrop-blur-sm border border-white/10 p-[16px]">
           <div className="flex items-center justify-between border-b border-solid border-[rgba(255,255,255,0.1)] pb-[8px]">
             <span className={`${gilroySemiBold.className} text-[14px] font-semibold tracking-[0.6px] text-[#6fe047] uppercase not-italic`}>
               Turboboost mode

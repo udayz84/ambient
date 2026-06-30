@@ -192,7 +192,7 @@ function EcoCard({
 }: EcoCardProps) {
   return (
     <div
-      className={`flex flex-col overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] ${cardBg} ${padClass} ${frameClass}`}
+      className={`flex flex-col overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] transition-colors duration-300 cursor-default ${cardBg} ${padClass} ${frameClass}`}
       data-name={dataName}
     >
       <div className="relative flex w-full flex-1 flex-col items-start justify-between">

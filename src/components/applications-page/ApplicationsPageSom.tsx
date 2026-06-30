@@ -225,7 +225,7 @@ export function ApplicationsPageSom() {
             <Corners />
           </div>
           <p
-            className={`${interRegular.className} max-w-[332px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
+            className={`${interRegular.className} w-full max-w-[332px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
           >
             {SUBTITLE}
           </p>

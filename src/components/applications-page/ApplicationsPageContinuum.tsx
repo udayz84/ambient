@@ -57,43 +57,7 @@ const CARDS: ContinuumCard[] = [
   },
 ];
 
-function Line108() {
-  return (
-    <div className="absolute top-[784px] left-[0.3px] flex h-0 w-[1418.317px] items-center justify-center">
-      <div className="flex-none skew-x-[0.75deg]">
-        <div className="relative h-0 w-[1418.318px]" data-node-id="2660:1184">
-          <div className="absolute inset-[-2.67px_-0.19%_-2.67px_0]">
-            <img
-              alt=""
-              aria-hidden
-              src="/applications/line-108.svg"
-              className="block size-full max-w-none"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
-function Line109() {
-  return (
-    <div className="absolute top-[783.99px] left-[1071.52px] flex h-0 w-[347.107px] items-center justify-center">
-      <div className="flex-none skew-x-[-0.76deg]">
-        <div className="relative h-0 w-[347.107px]" data-node-id="2660:1185">
-          <div className="absolute inset-[-4.67px_-1.34%_-4.67px_-0.58%]">
-            <img
-              alt=""
-              aria-hidden
-              src="/applications/line-109.svg"
-              className="block size-full max-w-none"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export function ApplicationsPageContinuum() {
   return (
@@ -171,9 +135,6 @@ export function ApplicationsPageContinuum() {
           </div>
         ))}
 
-        {/* Continuum lines */}
-        <Line108 />
-        <Line109 />
       </div>
 
       {/* MOBILE (<1024px) */}
@@ -194,7 +155,7 @@ export function ApplicationsPageContinuum() {
             <CornerDecor />
           </div>
           <p
-            className={`${interRegular.className} max-w-[332px] text-center text-[14px] leading-[1.4] font-normal text-[#f0f0f0] opacity-65 not-italic`}
+            className={`${interRegular.className} w-full max-w-[332px] text-center text-[14px] leading-[1.4] font-normal text-[#f0f0f0] opacity-65 not-italic`}
           >
             {SUBTITLE}
           </p>

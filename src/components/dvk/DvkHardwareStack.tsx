@@ -168,14 +168,9 @@ export function DvkHardwareStack() {
 }
 
 function SpecCard({ card }: { card: SpecCard }) {
-  const isAccent = card.accent === true;
   return (
     <div
-      className="relative flex min-w-px flex-1 flex-col items-center gap-[20px] self-stretch overflow-clip border-[0.5px] border-solid px-[16px] pt-[16px] pb-[24px]"
-      style={{
-        backgroundColor: isAccent ? ACCENT_CARD_BG : CARD_BG,
-        borderColor: isAccent ? ACCENT_CARD_BORDER : CARD_BORDER,
-      }}
+      className="relative flex min-w-px flex-1 flex-col items-center gap-[20px] self-stretch overflow-clip border-[0.5px] border-solid px-[16px] pt-[16px] pb-[24px] bg-[rgba(0,0,0,0.2)] hover:bg-[rgba(68,120,7,0.2)] border-[rgba(240,240,240,0.2)] hover:border-[#a8ed90] transition-colors duration-300 cursor-default"
       data-name="Article"
     >
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />

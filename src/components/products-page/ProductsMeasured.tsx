@@ -1,4 +1,5 @@
 import { interMedium, interRegular, interSemiBold, gilroyMedium } from "../hero/fonts";
+import { TabSwitcher } from "./TabSwitcher";
 import { Corners } from "../shared/Corners";
 import {
   COMPARISON_COLUMNS,
@@ -39,10 +40,12 @@ export function ProductsMeasured() {
 function ProductsMeasuredDesktop() {
   return (
     <div className="flex flex-col pb-[120px]">
-      {/* Section title — 2906:3290 (left-aligned, w=430) */}
-      <div
-        className="flex flex-col items-start gap-[24px]"
-        style={{ width: 430 }}
+      {/* Header row: Title + Tabs */}
+      <div className="flex w-full items-end justify-between">
+        {/* Section title — 2906:3290 (left-aligned, w=430) */}
+        <div
+          className="flex flex-col items-start gap-[24px]"
+          style={{ width: 430 }}
         data-node-id="2906:3290"
         data-name="Section Title"
       >
@@ -76,7 +79,10 @@ function ProductsMeasuredDesktop() {
         </p>
       </div>
 
-      {/* Comparison table — 2906:3186 */}
+      <TabSwitcher />
+    </div>
+
+    {/* Comparison table — 2906:3186 */}
       <div className="mt-[52px]">
         <ComparisonTable />
       </div>
@@ -189,6 +195,7 @@ function ProductsMeasuredMobile() {
         >
           The same chip, tuned to the job — from a wrist to a factory floor.
         </p>
+        <TabSwitcher />
       </div>
 
       {/* Comparison table — horizontally scrollable to preserve structure */}

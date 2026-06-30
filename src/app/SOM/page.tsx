@@ -19,8 +19,8 @@ export default function SomPage() {
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       <SomHero />
       <SomFeatures />
-      <SomInsideModule />
       <SomEcosystem />
+      <SomInsideModule />
       <SomPrototypeTitle />
       <SomIntelligence />
       <SomReadyToDeploy />
