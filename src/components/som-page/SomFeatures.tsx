@@ -7,8 +7,7 @@ const TITLE_GRADIENT_DEG = "101.672deg";
 const SUBTITLE =
   "Spinning a custom PCB with extreme space and power constraints takes months of trial and error. We solved the hardware physics so you can focus entirely on your application logic.";
 
-const CARD3_SHADOW =
-  "shadow-[0px_94px_94px_-80px_#6fe047]";
+
 
 type FeatureCardProps = {
   iconSrc: string;
@@ -39,7 +38,7 @@ function CardTag({ label }: { label: string }) {
 function FeatureCard({ iconSrc, iconSize, tag, title, body }: FeatureCardProps) {
   return (
     <div
-      className="relative flex w-full flex-col items-start gap-[24px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[16px] pt-[16px] pb-[24px] min-[1024px]:h-[400px] min-[1024px]:w-[377px] min-[1024px]:gap-[36px]"
+      className="relative flex w-full flex-col items-start gap-[24px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[16px] pt-[16px] pb-[24px] min-[1024px]:h-[400px] min-[1024px]:w-[377px] min-[1024px]:gap-[36px] transition-all duration-300 hover:-translate-y-[10px] hover:shadow-[0px_94px_94px_-80px_#6fe047] min-[1024px]:hover:-translate-y-[30px]"
       data-name="Article"
     >
       {/* Icon */}
@@ -146,17 +145,12 @@ export function SomFeatures() {
 
         {/* Cards row */}
         <div
-          className="flex w-full items-center gap-[36px]"
+          className="flex w-full items-center gap-[36px] pt-[30px]"
           data-node-id="2438:4887"
         >
-          <FeatureCard {...CARDS[0]} />
-          <FeatureCard {...CARDS[1]} />
-          {/* Elevated featured card */}
-          <div className="relative h-[424px] w-[377px] shrink-0">
-            <div className={`absolute left-0 top-[-30px] ${CARD3_SHADOW}`}>
-              <FeatureCard {...CARDS[2]} />
-            </div>
-          </div>
+          {CARDS.map((card, i) => (
+            <FeatureCard key={i} {...card} />
+          ))}
         </div>
       </div>
 

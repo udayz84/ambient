@@ -33,6 +33,12 @@ export function ApplicationsPageHero() {
           />
         </div>
 
+        {/* Fade the hero photo's left/right edges into the black background on
+            ultrawide screens, where the 1440px image is centered with black
+            side gaps (prevents a hard seam). */}
+        <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 hidden w-[300px] bg-gradient-to-r from-black to-transparent min-[1441px]:block" />
+        <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 hidden w-[300px] bg-gradient-to-l from-black to-transparent min-[1441px]:block" />
+
         {/* Menu badge */}
         <div className="absolute top-[145.3125px] left-1/2 -translate-x-1/2">
           <TagBadge

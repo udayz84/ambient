@@ -211,13 +211,7 @@ function GridDivider() {
         />
       </div>
       {/* vertical line */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={GRID_LINE}
-        alt=""
-        className="absolute left-1/2 top-1/2 h-[1px] w-[520px] max-w-none -translate-x-1/2 -translate-y-1/2 rotate-90"
-        aria-hidden
-      />
+      <div className="absolute left-1/2 top-0 h-full w-[1px] -translate-x-1/2 bg-white/10" aria-hidden />
       {/* bottom cap */}
       <div className="absolute bottom-[0.89px] left-0 h-[4px] w-[8px]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -241,7 +235,7 @@ export function TechnologyPagePillars() {
       aria-label="Three breakthroughs: CubicCore, SenseMesh, ModelForge"
     >
       {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden h-[520px] w-[1204px] items-start justify-center gap-[32px] bg-[rgba(0,0,0,0.1)] px-[20px] min-[1024px]:flex">
+      <div className="relative hidden h-[520px] w-[1204px] items-start justify-center gap-[32px] bg-[rgba(0,0,0,0.1)] border border-white/10 px-[20px] min-[1024px]:flex">
         <PillarStat pillar={PILLARS[0]} />
         <GridDivider />
         <PillarStat pillar={PILLARS[1]} />
@@ -254,7 +248,7 @@ export function TechnologyPagePillars() {
       <div className="flex w-full flex-col items-stretch gap-[24px] px-[24px] py-[56px] min-[1024px]:hidden">
         {PILLARS.map((pillar, idx) => (
           <div key={pillar.nodeId}>
-            <div className="flex flex-col gap-[20px] rounded-[2px] bg-[rgba(0,0,0,0.1)] px-[20px] py-[24px]">
+            <div className="flex flex-col gap-[20px] rounded-[2px] bg-[rgba(0,0,0,0.1)] border border-white/10 px-[20px] py-[24px]">
               <div className="flex items-center gap-[16px]">
                 <IconBox pillar={pillar} />
                 <TagBadge

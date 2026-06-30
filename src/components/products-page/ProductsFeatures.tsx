@@ -22,7 +22,7 @@ export function ProductsFeatures() {
       {/* DESKTOP (>=1024px) */}
       <section
         id="products-features"
-        className="relative mx-auto hidden w-[1232px] bg-black min-[1024px]:block"
+        className="relative mx-auto hidden w-[1232px] bg-black min-[1024px]:block pb-[120px]"
         aria-label="Product capabilities"
       >
         <ProductsFeaturesDesktop />

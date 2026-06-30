@@ -57,20 +57,27 @@ function PressTitle() {
 function PressMenu({ label }: { label: string }) {
   return (
     <div
-      className="relative h-[26px] w-[180px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)]"
+      className="relative h-[26px] w-[180px] shrink-0 bg-[rgba(255,255,255,0.06)]"
       data-name="Menu"
     >
-      <Corners leftSrc="/hero/corner-tag-1.svg" rightSrc="/hero/corner-tag-2.svg" />
+      {/* Corner borders */}
+      <div className="absolute left-0 top-[4px] h-[4px] w-[4px] border-l border-t border-white opacity-60" />
+      <div className="absolute right-0 top-[4px] h-[4px] w-[4px] border-r border-t border-white opacity-60" />
+      <div className="absolute bottom-[4px] left-0 h-[4px] w-[4px] border-b border-l border-white opacity-60" />
+      <div className="absolute bottom-[4px] right-0 h-[4px] w-[4px] border-b border-r border-white opacity-60" />
+      
+      {/* Vertical bars */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-[6.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60"
+        className="pointer-events-none absolute left-[6.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60 rounded-full"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute left-[170.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60"
+        className="pointer-events-none absolute right-[7.52px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60 rounded-full"
       />
+      
       <p
-        className={`${dmMono.className} absolute left-1/2 top-[calc(50%-4.5px)] -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word]`}
+        className={`${dmMono.className} absolute left-1/2 top-[calc(50%-4.5px)] -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic`}
       >
         {label}
       </p>
@@ -111,32 +118,29 @@ function PressCluster() {
       data-name="Container"
       aria-hidden
     >
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.15)_1.5px,_transparent_1.5px)] bg-[length:16px_16px]" />
       {/* White logo card */}
       <div
-        className="absolute left-[31.625px] top-[34.91px] flex size-[192px] items-center justify-center overflow-clip rounded-[16px] border border-solid border-[#e5e7eb] bg-white p-px shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1),0px_8px_10px_-6px_rgba(0,0,0,0.1)]"
+        className="absolute left-[31.625px] top-[34.91px] flex h-[192px] w-[192px] items-center justify-center overflow-clip rounded-[16px] border border-solid border-[#e5e7eb] bg-white p-px shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1),0px_8px_10px_-6px_rgba(0,0,0,0.1)]"
         data-node-id="2526:2469"
         data-name="Container"
       >
         <div
-          className="flex h-[116px] w-[190px] flex-col items-start gap-[8px] px-[24px] pt-[24px]"
+          className="flex flex-col items-center justify-center gap-[8px]"
           data-node-id="2526:2470"
         >
-          <div className="h-[40px] w-full" data-node-id="2526:2471">
-            <p
-              className={`${interBold.className} w-full text-center text-[36px] leading-[40px] tracking-[0.3691px] text-[#0a0a0a] not-italic [word-break:break-word]`}
-              data-node-id="2526:2472"
-            >
-              Ambient
-            </p>
-          </div>
-          <div className="h-[20px] w-full" data-node-id="2526:2473">
-            <p
-              className={`${interRegular.className} w-full text-center text-[14px] leading-[20px] tracking-[-0.1504px] text-[#99a1af] not-italic [word-break:break-word]`}
-              data-node-id="2526:2474"
-            >
-              SCIENTIFIC
-            </p>
-          </div>
+          <p
+            className={`${interBold.className} text-center text-[36px] leading-[40px] tracking-[0.3691px] text-[#0a0a0a] not-italic whitespace-nowrap`}
+            data-node-id="2526:2472"
+          >
+            Ambient
+          </p>
+          <p
+            className={`${interRegular.className} text-center text-[14px] leading-[20px] tracking-[-0.1504px] text-[#99a1af] not-italic whitespace-nowrap`}
+            data-node-id="2526:2474"
+          >
+            SCIENTIFIC
+          </p>
         </div>
       </div>
 
@@ -147,7 +151,7 @@ function PressCluster() {
         data-name="Container"
       >
         <div
-          className="absolute left-[80px] top-[48px] flex size-[64px] flex-col items-start rounded-[4px] bg-[#0f0] px-[12px] pt-[12px] drop-shadow-[0px_0px_10.051px_rgba(0,255,0,0.5)]"
+          className="absolute left-[80px] top-[48px] flex h-[64px] w-[64px] flex-col items-start rounded-[4px] bg-[#0f0] p-[12px] drop-shadow-[0px_0px_10.051px_rgba(0,255,0,0.5)]"
           data-node-id="2526:2480"
           data-name="Container"
         >
@@ -156,28 +160,28 @@ function PressCluster() {
             data-node-id="2526:2481"
             data-name="Container"
           >
-            <div className="absolute left-0 top-0 size-[18px] rounded-[4px] bg-[rgba(0,0,0,0.4)]" />
-            <div className="absolute left-[22px] top-0 size-[18px] rounded-[4px] bg-[rgba(0,0,0,0.4)]" />
-            <div className="absolute left-0 top-[22px] size-[18px] rounded-[4px] bg-[rgba(0,0,0,0.4)]" />
-            <div className="absolute left-[22px] top-[22px] size-[18px] rounded-[4px] bg-[rgba(0,0,0,0.4)]" />
+            <div className="absolute left-0 top-0 h-[18px] w-[18px] rounded-[4px] bg-[rgba(0,0,0,0.4)]" />
+            <div className="absolute left-[22px] top-0 h-[18px] w-[18px] rounded-[4px] bg-[rgba(0,0,0,0.4)]" />
+            <div className="absolute left-0 top-[22px] h-[18px] w-[18px] rounded-[4px] bg-[rgba(0,0,0,0.4)]" />
+            <div className="absolute left-[22px] top-[22px] h-[18px] w-[18px] rounded-[4px] bg-[rgba(0,0,0,0.4)]" />
           </div>
         </div>
       </div>
 
       {/* Circular gradient badge with icon */}
       <div
-        className="absolute left-[409.25px] top-[169.97px] flex size-[160px] items-center justify-center overflow-clip rounded-full border-4 border-solid border-white shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1),0px_8px_10px_-6px_rgba(0,0,0,0.1)]"
+        className="absolute left-[409.25px] top-[169.97px] flex h-[160px] w-[160px] items-center justify-center overflow-clip rounded-full border-4 border-solid border-white shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1),0px_8px_10px_-6px_rgba(0,0,0,0.1)]"
         style={{ backgroundImage: BADGE_GRADIENT }}
         data-node-id="2526:2475"
         data-name="Container"
       >
-        <div className="relative size-[64px]" data-node-id="2526:2476" data-name="Icon">
+        <div className="relative h-[64px] w-[64px]" data-node-id="2526:2476" data-name="Icon">
           <Image
             src="/news-listing/press-icon.svg"
             alt=""
             width={64}
             height={64}
-            className="block size-full max-w-none"
+            className="block h-full w-full max-w-none"
           />
         </div>
       </div>

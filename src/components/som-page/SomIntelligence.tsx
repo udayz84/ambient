@@ -69,7 +69,7 @@ function DownloadCta() {
   return (
     <a
       href="#"
-      className={`relative flex h-[48px] w-[281px] shrink-0 items-center justify-center overflow-clip ${GREEN_CTA_SHADOW}`}
+      className={`relative flex h-[48px] w-[281px] max-w-full shrink-0 items-center justify-center overflow-clip ${GREEN_CTA_SHADOW}`}
       data-name="Cta"
     >
       <span

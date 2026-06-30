@@ -35,10 +35,10 @@ function DvkIntegratedModulesDesktop() {
   return (
     <div className="mx-auto flex w-full max-w-[1204px] flex-col items-center pb-[120px]">
       <div className="flex flex-col items-center gap-[24px]" style={{ width: 800 }}>
-        <div className="relative px-[20px] py-[4px]" style={{ maxWidth: 800 }}>
+        <div className="relative px-[20px] py-[4px] w-fit">
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
-            className={`${gilroyMedium.className} relative m-0 bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} relative m-0 bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic whitespace-nowrap`}
             style={{
               backgroundImage: TITLE_GRADIENT,
               WebkitBackgroundClip: "text",
@@ -140,9 +140,9 @@ function DvkIntegratedModulesMobile() {
         Validate your logic on the Cranium kit today. When you are ready for extreme space constraints, drop our high-density SOM directly into your product without rewriting your application software.
       </p>
 
-      <div className="mt-[32px] flex flex-col items-center gap-[16px]">
-        <GreenCta width={157}>Explore SOMs</GreenCta>
-        <SecondaryCta width={276}>Schedule Technical Consultation</SecondaryCta>
+      <div className="mt-[32px] flex flex-col items-stretch gap-[16px]">
+        <GreenCta fullWidth width={157}>Explore SOMs</GreenCta>
+        <SecondaryCta fullWidth width={276}>Schedule Technical Consultation</SecondaryCta>
       </div>
     </section>
   );
@@ -164,15 +164,15 @@ function DevChip() {
   );
 }
 
-function GreenCta({ children, width }: { children: React.ReactNode; width: number }) {
+function GreenCta({ children, width, fullWidth = false }: { children: React.ReactNode; width: number; fullWidth?: boolean }) {
   return (
     <a
       href="#"
-      className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[52px] shrink-0 items-center justify-center overflow-hidden`}
-      style={{ width }}
+      className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[52px] ${fullWidth ? "w-full" : "shrink-0"} items-center justify-center overflow-hidden`}
+      style={fullWidth ? undefined : { width }}
     >
       <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
-      <span className="relative text-[16px] leading-normal font-medium uppercase whitespace-nowrap text-white not-italic py-[4px] mt-[2px]">
+      <span className={`relative text-[16px] leading-normal font-medium uppercase ${fullWidth ? "text-center" : "whitespace-nowrap"} text-white not-italic py-[4px] mt-[2px]`}>
         {children}
       </span>
       <span aria-hidden className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
@@ -181,14 +181,14 @@ function GreenCta({ children, width }: { children: React.ReactNode; width: numbe
   );
 }
 
-function SecondaryCta({ children, width }: { children: React.ReactNode; width: number }) {
+function SecondaryCta({ children, width, fullWidth = false }: { children: React.ReactNode; width: number; fullWidth?: boolean }) {
   return (
     <a
       href="#"
-      className={`${gilroyMedium.className} relative flex h-[52px] items-center justify-center bg-[rgba(226,241,202,0.12)] shrink-0 px-[20px]`}
-      style={{ width }}
+      className={`${gilroyMedium.className} relative flex h-[52px] ${fullWidth ? "w-full" : "shrink-0"} items-center justify-center bg-[rgba(226,241,202,0.12)] px-[20px]`}
+      style={fullWidth ? undefined : { width }}
     >
-      <span className="relative text-[16px] leading-normal font-medium uppercase whitespace-nowrap text-white not-italic py-[4px] mt-[2px]">
+      <span className={`relative text-[16px] leading-normal font-medium uppercase ${fullWidth ? "text-center" : "whitespace-nowrap"} text-white not-italic py-[4px] mt-[2px]`}>
         {children}
       </span>
       <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />

@@ -10,6 +10,8 @@ import {
   MODELFORGE_STEPS,
   MODELFORGE_TITLE_GRADIENT,
   STEP_NUMBER_GRADIENT,
+  PRIMARY_CTA_SHADOW,
+  PRIMARY_CTA_INSET,
 } from "./products-data";
 
 /**
@@ -80,6 +82,27 @@ function ProductsModelForgeDesktop() {
         {MODELFORGE_STEPS.map((step) => (
           <ModelForgeCard key={step.nodeId} step={step} />
         ))}
+      </div>
+
+      {/* CTAs row — 2917:1396 */}
+      <div className="mt-[64px] flex items-center justify-center gap-[24px]">
+        {/* Primary CTA */}
+        <button
+          className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[251px] shrink-0 items-center justify-center overflow-hidden uppercase bg-transparent border-0 cursor-pointer text-white text-[16px] leading-[28px]`}
+        >
+          <div aria-hidden className="absolute bg-gradient-to-b from-[#6ced3f] inset-0 pointer-events-none to-[#38a612]" />
+          <span className="relative z-10">Explore the Developer Hub</span>
+          <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+          <div className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
+        </button>
+
+        {/* Secondary CTA */}
+        <button
+          className={`${gilroyMedium.className} relative flex h-[48px] w-[174px] shrink-0 items-center justify-center overflow-hidden uppercase bg-[rgba(226,241,202,0.12)] border-0 cursor-pointer text-white text-[16px] leading-[28px]`}
+        >
+          <span className="relative z-10">Request the SDK</span>
+          <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+        </button>
       </div>
     </div>
   );

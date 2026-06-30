@@ -28,7 +28,7 @@ export function HeroVisualMedia({ mobile = false }: { mobile?: boolean }) {
       ref={videoRef}
       className={
         mobile
-          ? "absolute inset-0 size-full max-w-none object-cover object-center"
+          ? "absolute inset-0 size-full max-w-none object-cover object-center pl-[164px]"
           : "absolute inset-0 size-full max-w-none object-cover object-center pl-[70px] pt-[102px]"
       }
       autoPlay

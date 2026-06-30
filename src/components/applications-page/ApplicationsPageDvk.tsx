@@ -406,7 +406,7 @@ export function ApplicationsPageDvk() {
               <CornerDecor />
             </div>
             <p
-              className={`${interRegular.className} max-w-[332px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
+              className={`${interRegular.className} w-full max-w-[332px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
             >
               {SUBTITLE}
             </p>
@@ -435,7 +435,7 @@ export function ApplicationsPageDvk() {
           </div>
 
           {/* Caption */}
-          <div className="flex max-w-[345px] flex-col items-center gap-[10px] text-center">
+          <div className="flex w-full max-w-[345px] flex-col items-center gap-[10px] text-center">
             <p
               className={`${gilroyMedium.className} text-[20.211px] leading-[28.295px] tracking-[-0.4539px] whitespace-nowrap text-white`}
             >

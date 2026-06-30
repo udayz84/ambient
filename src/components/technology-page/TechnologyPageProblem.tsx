@@ -159,7 +159,7 @@ function LegacyDiagram() {
 function LegacyStatCard() {
   return (
     <div
-      className="absolute left-[100px] top-[255px] z-20 h-[657px] w-[380px] bg-[rgba(0,0,0,0.1)]"
+      className="absolute left-[100px] top-[255px] z-20 h-[657px] w-[380px] bg-[rgba(0,0,0,0.1)] border border-white/10"
       data-node-id="3064:1443"
       data-name="Frame 1984079438"
     >
@@ -215,7 +215,7 @@ function LegacyStatCard() {
 function ACubeStatCard() {
   return (
     <div
-      className="absolute left-[960px] top-[310px] z-20 h-[547px] w-[380px] bg-[rgba(0,0,0,0.1)]"
+      className="absolute left-[960px] top-[310px] z-20 h-[547px] w-[380px] bg-[rgba(0,0,0,0.1)] border border-white/10"
       data-node-id="3064:1511"
       data-name="Frame 1984079539"
     >
@@ -361,7 +361,7 @@ export function TechnologyPageProblem() {
         </p>
 
         {/* Legacy block */}
-        <div className="flex w-full max-w-[380px] flex-col items-center gap-[16px] rounded-[2px] bg-[rgba(0,0,0,0.1)] px-[20px] py-[24px]">
+        <div className="flex w-full max-w-[380px] flex-col items-center gap-[16px] rounded-[2px] bg-[rgba(0,0,0,0.1)] border border-white/10 px-[20px] py-[24px]">
           <div className="flex w-full flex-col items-start gap-[6px] border-b border-solid border-[rgba(255,255,255,0.1)] pb-[11px]">
             <p className={`${gilroyMedium.className} text-[26px] leading-[32px] font-medium text-white not-italic`}>
               Legacy
@@ -385,7 +385,7 @@ export function TechnologyPageProblem() {
         </div>
 
         {/* A-Cube block */}
-        <div className="flex w-full max-w-[380px] flex-col items-center gap-[16px] rounded-[2px] bg-[rgba(0,0,0,0.1)] px-[20px] py-[24px]">
+        <div className="flex w-full max-w-[380px] flex-col items-center gap-[16px] rounded-[2px] bg-[rgba(0,0,0,0.1)] border border-white/10 px-[20px] py-[24px]">
           <div className="flex w-full flex-col items-end gap-[6px] border-b border-solid border-[rgba(255,255,255,0.1)] pb-[11px] text-right">
             <p className={`${gilroyMedium.className} text-[26px] leading-[32px] font-medium text-white not-italic`}>
               A-Cube
