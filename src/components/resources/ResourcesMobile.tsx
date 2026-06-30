@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import { gilroyMedium, interRegular, interSemiBold } from "../hero/fonts";
+import { gilroyMedium, interRegular, interSemiBold, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import {
   ARTICLE_IMAGE_BASE,
@@ -20,6 +20,30 @@ const LOAD_MORE_COUNT = 3;
 
 function gradient(deg: string) {
   return `linear-gradient(${deg}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`;
+}
+
+function ResourceTagBadge({
+  label,
+  width,
+}: {
+  label: string;
+  width: number;
+}) {
+  return (
+    <div
+      className={`${dmMono.className} relative h-[26px] shrink-0 border-[0.5px] border-solid border-white/20 bg-white/[0.04]`}
+      style={{ width }}
+    >
+      <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
+      <span
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[10.5px] leading-none font-normal tracking-[0.05em] whitespace-nowrap text-white/80 uppercase not-italic"
+      >
+        {label}
+      </span>
+      <div className="absolute top-1/2 left-[6.48px] h-[10px] w-px -translate-y-1/2 bg-white/30" />
+      <div className="absolute top-1/2 right-[6.48px] h-[10px] w-px -translate-y-1/2 bg-white/30" />
+    </div>
+  );
 }
 
 function GreenCta({
@@ -155,12 +179,10 @@ function ResourcesHeroMobile() {
         {/* Stat Card 1 */}
         <div className="relative flex w-full flex-col gap-[20px] pb-[32px]">
           <div className="flex items-center">
-            <div className="relative inline-flex items-center px-[8px] py-[4px]">
-              <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
-              <span className={`${interRegular.className} text-[10px] uppercase tracking-[0.08em] text-white/80 not-italic`}>
-                REAL-TIME AI AT EDGE
-              </span>
-            </div>
+            <ResourceTagBadge
+              label="Real-time AI at edge"
+              width={180}
+            />
           </div>
           <div className="flex w-full flex-row items-center gap-[24px]">
             <div className={`${gilroyMedium.className} flex w-[110px] shrink-0 flex-row items-baseline text-[56px] leading-[1] font-medium text-white not-italic`}>
@@ -177,26 +199,24 @@ function ResourcesHeroMobile() {
           </div>
         </div>
 
-        {/* Divider with diamonds */}
+        {/* Divider with vertical ticks */}
         <div className="relative flex h-[1px] w-full items-center justify-center bg-white/10">
-          <div className="absolute left-[-2px] top-[-2px] size-[5px] rotate-45 bg-white/40" />
-          <div className="absolute right-[-2px] top-[-2px] size-[5px] rotate-45 bg-white/40" />
+          <div className="absolute left-0 top-1/2 h-[6px] w-px -translate-y-1/2 bg-white/40" />
+          <div className="absolute right-0 top-1/2 h-[6px] w-px -translate-y-1/2 bg-white/40" />
         </div>
 
         {/* Stat Card 2 */}
         <div className="relative flex w-full flex-col gap-[20px] pt-[32px]">
           <div className="flex items-center">
-            <div className="relative inline-flex items-center px-[8px] py-[4px]">
-              <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
-              <span className={`${interRegular.className} text-[10px] uppercase tracking-[0.08em] text-white/80 not-italic`}>
-                SCALABLE ARCH.
-              </span>
-            </div>
+            <ResourceTagBadge
+              label="Scalable arch."
+              width={129}
+            />
           </div>
           <div className="flex w-full flex-row items-center gap-[24px]">
-            <div className={`${gilroyMedium.className} flex w-[110px] shrink-0 flex-col text-[56px] leading-[1] font-medium text-white not-italic`}>
+            <div className={`${gilroyMedium.className} flex w-[120px] shrink-0 flex-row items-baseline gap-[4px] text-[56px] leading-[1] font-medium text-white not-italic`}>
               <span>512</span>
-              <span className="text-[16px] text-white/50 tracking-wide mt-[-2px]">GOPs</span>
+              <span className="text-[16px] text-white/50 tracking-wide">GOPs</span>
             </div>
             <div className="flex flex-col gap-[6px]">
               <h3 className={`${gilroyMedium.className} text-[20px] leading-[24px] font-medium text-white not-italic`}>
@@ -423,11 +443,11 @@ function ResourcesContentMobile() {
             </div>
             
             <div className="flex flex-col items-start gap-[20px]">
-              <div className="relative flex h-[26px] shrink-0 items-center justify-center overflow-clip bg-[rgba(255,255,255,0.06)] px-[12px]">
-                <Corners />
-                <div className="absolute left-[6.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
-                <div className="absolute right-[6.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
-                <span className="font-mono text-[12px] uppercase tracking-[-0.36px] text-[#ecfae5]">
+              <div className="relative flex h-[26px] shrink-0 items-center justify-center border-[0.5px] border-solid border-white/20 bg-[rgba(255,255,255,0.06)] px-[12px]">
+                <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
+                <div className="absolute left-[6.48px] top-1/2 h-[10px] w-px -translate-y-1/2 bg-white/30" />
+                <div className="absolute right-[6.48px] top-1/2 h-[10px] w-px -translate-y-1/2 bg-white/30" />
+                <span className="font-mono text-[10.5px] uppercase tracking-[0.05em] text-[#ecfae5]">
                   {article.category}
                 </span>
               </div>
@@ -478,10 +498,12 @@ function ResourcesContentMobile() {
 function ResourcesNewsCtaMobile() {
   return (
     <section
-      className="relative flex w-full flex-col items-center gap-[21px] px-[24px] py-[64px]"
+      className="relative flex w-full flex-col items-center gap-[21px] px-[24px] pt-[64px] pb-[32px] overflow-hidden bg-transparent"
       aria-label="Latest news"
     >
-      <div className="relative inline-flex items-center justify-center p-[8px]">
+      {/* Background image and gradient removed to make it fully transparent */}
+
+      <div className="relative inline-flex items-center justify-center p-[8px] z-10">
         <Corners />
         <h2
           className={`${gilroyMedium.className} w-[313px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
@@ -491,7 +513,7 @@ function ResourcesNewsCtaMobile() {
         </h2>
       </div>
 
-      <div className="relative w-[158px]">
+      <div className="relative w-[158px] z-10">
         <button
           type="button"
           className={`relative flex h-[48px] w-full items-center justify-center overflow-hidden ${GREEN_CTA_SHADOW}`}

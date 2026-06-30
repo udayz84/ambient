@@ -2,7 +2,13 @@ import { gilroyMedium, gilroyBold, interRegular, interMedium } from "../hero/fon
 import { FOOTER_NAV_SECTIONS } from "./footer-data";
 import { NewsletterSignup } from "./NewsletterSignup";
 
-export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolean }) {
+export function SiteFooter({
+  showNewsletter = false,
+  isResourcesPage = false,
+}: {
+  showNewsletter?: boolean;
+  isResourcesPage?: boolean;
+}) {
   return (
     <footer
       className="relative flex h-auto w-full flex-col justify-start overflow-hidden bg-black lg:block lg:h-[1252px] lg:min-h-0 lg:justify-center"
@@ -13,11 +19,22 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
         <div className="absolute inset-0 bg-black" />
         <div className="absolute inset-0 overflow-hidden">
           {/* Mobile Background */}
-          <img
-            alt=""
-            src="/mobile/footer.png"
-            className="absolute inset-0 h-full w-full object-cover opacity-100 lg:hidden"
-          />
+          {isResourcesPage ? null : showNewsletter ? (
+            <img
+              alt=""
+              src="/mobile/footer.png"
+              className="absolute inset-0 h-full w-full object-cover object-top opacity-100 lg:hidden"
+            />
+          ) : (
+            <div
+              className="absolute inset-0 h-full w-full lg:hidden bg-no-repeat"
+              style={{
+                backgroundImage: "url(/mobile/footer.png)",
+                backgroundPosition: "center top -250px",
+                backgroundSize: "cover",
+              }}
+            />
+          )}
           {/* Desktop Background */}
           <img
             alt=""
@@ -28,7 +45,7 @@ export function SiteFooter({ showNewsletter = false }: { showNewsletter?: boolea
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.6)] via-[rgba(0,0,0,0.2)] to-[rgba(0,0,0,0.8)] lg:from-black lg:via-black/30 lg:to-black/30" />
       </div>
 
-      <div className="relative mx-auto flex h-full w-full max-w-[1440px] flex-col items-center pt-[100px] pb-0 lg:block lg:pt-0 lg:pb-0">
+      <div className={`relative mx-auto flex h-full w-full max-w-[1440px] flex-col items-center pb-0 lg:block lg:pt-0 lg:pb-0 ${showNewsletter ? "pt-[100px]" : "pt-[24px]"}`}>
       {showNewsletter ? (
         <div className="relative z-[1] mb-[80px] flex flex-col items-center lg:mb-0 lg:pt-[120px]">
           <NewsletterSignup />

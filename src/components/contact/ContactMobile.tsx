@@ -152,7 +152,7 @@ function ContactHeroMobile() {
 
         {/* resources article — top 449, overlaps lower part of hand image */}
         <div
-          className="absolute left-[20px] right-[20px] flex flex-col gap-[20px] overflow-clip border-[0.5px] border-solid border-white/25 bg-gradient-to-b from-[rgba(255,255,255,0.1)] to-[rgba(255,255,255,0.03)] p-[24px] backdrop-blur-[16px]"
+          className="absolute left-[20px] right-[20px] flex flex-col gap-[20px] overflow-clip border-[0.5px] border-solid border-white/20 bg-transparent p-[24px]"
           style={{ top: 449 }}
           data-node-id="3229:8713"
           data-name="Article"
@@ -330,51 +330,37 @@ function ContactScheduleMobile() {
           return (
             <article
               key={card.title}
-              className="relative flex flex-col h-[361px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] pt-[16px] px-[16px] pb-[24px]"
+              className="relative flex flex-col h-[361px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-transparent pt-[16px] px-[16px] pb-[24px]"
             >
               <Corners />
 
-              {isCommercial ? (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img
-                  src={card.imageSrc}
-                  alt=""
-                  style={{
-                    position: "absolute",
-                    height: "100%",
-                    width: "101%",
-                    left: "33px",
-                    top: 0,
-                    right: 0,
-                    bottom: 0,
-                    color: "transparent",
-                  }}
-                  className="z-0 pointer-events-none object-contain object-right-bottom"
-                />
-              ) : (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img
-                  src={card.imageSrc}
-                  alt=""
-                  style={{
-                    position: "absolute",
-                    height: "69%",
-                    width: "98%",
-                    left: 0,
-                    top: "113px",
-                  }}
-                  className="z-0 pointer-events-none object-contain object-right-bottom"
-                />
-              )}
+              {/* Image Container Wrapper to match desktop scaling exactly */}
+              <div className="pointer-events-none absolute bottom-0 right-0 z-0 h-[242px] w-[227px] overflow-hidden">
+                {isCommercial ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={card.imageSrc}
+                    alt=""
+                    className="absolute h-[80%] left-[5%] top-[20%] w-[125%] max-w-none"
+                  />
+                ) : (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={card.imageSrc}
+                    alt=""
+                    className="absolute h-[151%] left-[-15.13%] top-[-10%] w-[110.37%] max-w-none"
+                  />
+                )}
+              </div>
 
               <div className="flex flex-col items-start gap-[20px] w-full relative z-10 pointer-events-none">
-                <div className="relative flex h-[26px] w-[180px] items-center justify-center overflow-clip bg-[rgba(255,255,255,0.06)] pointer-events-auto">
+                <div className="relative flex h-[26px] w-[180px] items-center justify-center border-[0.5px] border-solid border-white/20 bg-[rgba(255,255,255,0.06)] pointer-events-auto">
                   <Corners />
                   <span className={`${dmMono.className} text-[13px] leading-[19.5px] uppercase tracking-[-0.03em] text-[#ecfae5] not-italic`}>
                     {card.tag}
                   </span>
-                  <div className="absolute left-[6.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
-                  <div className="absolute left-[170.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+                  <div className="absolute left-[6.48px] top-1/2 h-[12px] w-px -translate-y-1/2 bg-white opacity-30" />
+                  <div className="absolute left-[170.48px] top-1/2 h-[12px] w-px -translate-y-1/2 bg-white opacity-30" />
                 </div>
                 
                 <div className="flex flex-col items-start gap-[10px] w-full pointer-events-auto">
@@ -455,8 +441,8 @@ function ContactFormMobile() {
   const [subscribed, setSubscribed] = useState(false);
 
   return (
-    <SectionWrap aria-label="Contact form" className="!pb-[80px]">
-      <div className="flex flex-col items-center gap-[12px]">
+    <SectionWrap aria-label="Contact form" className="!pb-[20px] relative">
+      <div className="flex flex-col items-center gap-[12px] relative z-10">
         <SectionTitle deg="119.522deg">Prefer to write to us?</SectionTitle>
         <p className={`${interRegular.className} max-w-[327px] text-center text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-70 not-italic`}>
           Select your track below to ensure your message reaches the right desk
@@ -465,7 +451,7 @@ function ContactFormMobile() {
       </div>
 
       {/* Track selector */}
-      <div className="mt-[24px] flex w-full flex-col gap-[10px]">
+      <div className="mt-[24px] flex w-full flex-col gap-[10px] relative z-10">
         {TRACKS.map((track) => {
           const selected = activeTrackId === track.id;
           return (
@@ -476,8 +462,8 @@ function ContactFormMobile() {
               aria-pressed={selected}
               className={`relative flex items-start gap-[14px] p-[16px] text-left transition-colors ${
                 selected
-                  ? "border-[1.5px] border-solid border-[rgba(83,216,36,0.4)] bg-[rgba(46,119,20,0.2)]"
-                  : "border-[0.5px] border-solid border-white/15 bg-[rgba(0,0,0,0.25)]"
+                  ? "border-[1.5px] border-solid border-[rgba(83,216,36,0.4)] bg-transparent"
+                  : "border-[0.5px] border-solid border-white/15 bg-transparent"
               }`}
             >
               <div className="relative size-[28px] shrink-0">
@@ -511,7 +497,7 @@ function ContactFormMobile() {
       </div>
 
       {/* Form */}
-      <div className="relative mt-[20px] w-full overflow-clip border-[1.5px] border-solid border-[rgba(83,216,36,0.25)] bg-[rgba(46,119,20,0.15)] p-[20px]">
+      <div className="relative mt-[20px] w-full overflow-clip border-[1.5px] border-solid border-[rgba(83,216,36,0.25)] bg-transparent p-[20px] z-10">
         <Corners />
         <p className={`${gilroyMedium.className} mb-[16px] text-[20px] leading-[26px] font-medium text-white not-italic`}>
           Drop Us a Message

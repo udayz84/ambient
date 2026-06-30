@@ -543,7 +543,7 @@ function JobRowMobile({
   return (
     <article className="relative flex h-[191px] w-full flex-col justify-center gap-[15px] border border-[rgba(240,240,240,0.2)] bg-black px-[17px]">
       <div className="flex flex-col gap-[11px] w-full">
-        <div className="relative inline-flex h-[26px] w-fit items-center justify-center overflow-clip bg-[rgba(255,255,255,0.06)] px-[12px]">
+        <div className="relative inline-flex h-[26px] w-fit items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.5)] bg-[rgba(255,255,255,0.06)] px-[12px]">
           <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
           <div className="absolute left-[6px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
           <div className="absolute right-[6px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
@@ -567,7 +567,7 @@ function JobRowMobile({
         </div>
       </div>
       
-      <div className="relative flex h-[48px] w-[161px] shrink-0 items-center gap-[8px] overflow-clip px-[20px] py-[10px]">
+      <div className="relative flex h-[48px] w-[161px] shrink-0 items-center gap-[8px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] px-[20px] py-[10px]">
         <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
         
         {isActive ? (

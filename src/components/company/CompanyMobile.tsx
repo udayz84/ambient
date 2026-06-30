@@ -65,8 +65,15 @@ function GreenCta({
         aria-hidden
         className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
       />
-      <span className="relative text-[13px] leading-[normal] font-semibold uppercase whitespace-nowrap text-white not-italic">
+      <span className="relative z-10 flex items-center justify-center gap-[8px] text-[13px] leading-[normal] font-semibold uppercase whitespace-nowrap text-white not-italic">
         {children}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/careers/cta-dot.svg"
+          alt=""
+          className="size-[6px] shrink-0"
+          aria-hidden
+        />
       </span>
       <Corners />
     </a>
@@ -408,20 +415,18 @@ const ECOSYSTEM_COLUMNS = [
 function CompanyEcosystemMobile() {
   return (
     <section
-      className="relative w-full bg-black"
+      className="relative w-full bg-black px-[16px] py-[32px]"
       aria-label="A globally resilient ecosystem"
     >
-      <div className="px-[30px] pt-[32px] pb-[32px]">
-        {/* Title — 2 lines, corner brackets at (-4,4)/(316,4)/(-4,68)/(316,68) */}
-        <div className="relative mx-auto h-[72px] w-[320px]">
-          <div
-            className="pointer-events-none absolute left-[-4px] right-[4px] top-[4px] bottom-[4px]"
-            aria-hidden
-          >
-            <Corners />
-          </div>
+      <div className="relative border-[0.5px] border-solid border-[rgba(255,255,255,0.15)] px-[14px] py-[32px]">
+        <div className="pointer-events-none absolute inset-0" aria-hidden>
+          <Corners />
+        </div>
+
+        {/* Title */}
+        <div className="relative mx-auto w-[320px] mb-[25px]">
           <h2
-            className={`${gilroyMedium.className} absolute inset-x-0 top-0 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+            className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
             style={{ backgroundImage: gradient("105.083deg") }}
           >
             A globally resilient<br />ecosystem
@@ -430,7 +435,7 @@ function CompanyEcosystemMobile() {
 
         {/* Subtitle */}
         <p
-          className={`${interRegular.className} mt-[25px] text-[14px] leading-[20px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+          className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
         >
           Backed by Tier-1 foundries and integrated with the world&apos;s leading
           technology distributors and platforms.
@@ -582,23 +587,23 @@ function ArticleChip({
   const barColor = tone === "green" ? "#53d824" : "#ffffff";
   return (
     <div
-      className={`${dmMono.className} relative h-[26px] w-[180px] shrink-0 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.06)]`}
+      className={`${dmMono.className} relative flex h-[26px] w-[180px] shrink-0 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.06)]`}
       data-name="Chip"
     >
       <Corners />
       <p
-        className="absolute left-1/2 top-[calc(50%-4.5px)] -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] uppercase whitespace-nowrap not-italic"
+        className="text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] uppercase whitespace-nowrap not-italic"
         style={{ color: textColor }}
       >
         {label}
       </p>
       <div
-        className="absolute left-[6.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 opacity-60"
+        className="absolute left-[6px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 opacity-60"
         style={{ backgroundColor: barColor }}
         aria-hidden
       />
       <div
-        className="absolute right-[9.52px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 opacity-60"
+        className="absolute right-[6px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 opacity-60"
         style={{ backgroundColor: barColor }}
         aria-hidden
       />
@@ -758,13 +763,15 @@ function CompanyEngagementMobile() {
             <Corners />
             {/* Image — 335x363, content overlaid on its lower portion */}
             <div className="relative h-[363px] w-full overflow-hidden">
-              <Image
-                src={card.imageSrc}
-                alt=""
-                fill
-                className="object-cover"
-                sizes="345px"
-              />
+              <div className="absolute top-[15px] left-1/2 h-[240px] w-[240px] -translate-x-1/2">
+                <Image
+                  src={card.imageSrc}
+                  alt=""
+                  fill
+                  className="pointer-events-none object-contain"
+                  sizes="240px"
+                />
+              </div>
               <div
                 className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"
                 aria-hidden
