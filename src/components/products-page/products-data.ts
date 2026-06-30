@@ -500,63 +500,6 @@ export const BENCH_CARDS: BenchCard[] = [
 ];
 
 /* ------------------------------------------------------------------ */
-/* "The full picture" section — Figma 2940:1244                       */
-/* ------------------------------------------------------------------ */
-
-/** Figma 2940:1334 — section title text gradient. */
-export const FULLPICTURE_TITLE_GRADIENT =
-  "linear-gradient(112.319deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
-
-/** Figma 2940:1245 — central image radial vignette (transparent→black). */
-export const FULLPICTURE_IMAGE_VIGNETTE =
-  "radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%)";
-
-export const FULLPICTURE_CANVAS_WIDTH = 1440;
-export const FULLPICTURE_SECTION_HEIGHT = 904;
-
-export const FULLPICTURE_IMAGE = {
-  left: 247,
-  top: 191,
-  width: 946.5,
-  height: 631,
-};
-
-export const FULLPICTURE_CALLOUT_WIDTH = 284.6950378417969;
-
-/** Spec-callout header / "+" colors. */
-export const CALLOUT_HEADER_COLOR = "#6fe047";
-export const CALLOUT_PLUS_COLOR = "#3a9719";
-
-export type SpecCallout = {
-  nodeId: string;
-  left: number;
-  top: number;
-  header: string;
-  items: string[];
-};
-
-const MEMORY_ITEMS = [
-  "120 KB L0 cache",
-  "2048 KB unified L1 SRAM",
-  "Video + multi-bank sensor buffers",
-  "Boot ROM",
-  "External SRAM/Flash via QSPI/SPI",
-];
-
-// NOTE: source frame is a template — every card uses the "Memory" header/items.
-// Real per-card spec data is still pending.
-export const SPEC_CALLOUTS: SpecCallout[] = [
-  { nodeId: "2940:1340", left: 78, top: 238, header: "Memory", items: MEMORY_ITEMS },
-  { nodeId: "2940:1467", left: 578, top: 232, header: "Memory", items: [MEMORY_ITEMS[0]] },
-  { nodeId: "2940:1372", left: 1058, top: 243, header: "Memory", items: MEMORY_ITEMS },
-  { nodeId: "2940:1435", left: 106, top: 489, header: "Memory", items: [MEMORY_ITEMS[0]] },
-  { nodeId: "2940:1483", left: 1060, top: 491, header: "Memory", items: [MEMORY_ITEMS[0]] },
-  { nodeId: "2940:1404", left: 109, top: 610, header: "Memory", items: MEMORY_ITEMS },
-  { nodeId: "2940:1499", left: 974.017578125, top: 592.53173828125, header: "Memory", items: MEMORY_ITEMS },
-  { nodeId: "2940:1451", left: 569, top: 725, header: "Memory", items: [MEMORY_ITEMS[0]] },
-];
-
-/* ------------------------------------------------------------------ */
 /* "Start building with GPX10 Pro" footer CTA — Figma 2903:2609 /     */
 /* 2903:2555 / 2903:2578                                              */
 /* ------------------------------------------------------------------ */

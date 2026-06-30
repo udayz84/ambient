@@ -7,6 +7,7 @@ import { ProductsMeasured } from "@/components/products-page/ProductsMeasured";
 import { ProductsArchitecture } from "@/components/products-page/ProductsArchitecture";
 import { ProductsModelForge } from "@/components/products-page/ProductsModelForge";
 import { ProductsBenchToVolume } from "@/components/products-page/ProductsBenchToVolume";
+import { ProductsFullPicture } from "@/components/products-page/ProductsFullPicture";
 import { ProductsStartBuilding } from "@/components/products-page/ProductsStartBuilding";
 
 export const metadata: Metadata = {
@@ -26,6 +27,7 @@ export default function ProductsPage() {
       <ProductsArchitecture />
       <ProductsModelForge />
       <ProductsBenchToVolume />
+      <ProductsFullPicture />
       <ProductsStartBuilding />
     </main>
   );
