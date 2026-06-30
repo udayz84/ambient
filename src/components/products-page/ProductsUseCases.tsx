@@ -188,7 +188,7 @@ function TabRuler({ onNext, onPrev, onSelect, activeIdx }: any) {
       {/* Interleave tick segments and tabs */}
       {USECASE_TABS.map((tab, i) => (
         <div key={tab.label}
-            onClick={() => onSelect(idx)}
+            onClick={() => onSelect(i)}
             role="button"
             tabIndex={0} className="contents">
           <TickSegment heights={TICK_SEGMENTS[i]} />
