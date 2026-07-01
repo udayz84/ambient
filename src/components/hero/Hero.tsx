@@ -35,7 +35,7 @@ export function Hero() {
           </div>
         </div>
         <div
-          className="pointer-events-none absolute top-[77px] left-[93px] h-[4px] w-[5px]"
+          className="pointer-events-none absolute top-[77.634765625px] left-[93px] h-[4px] w-[5px]"
           data-node-id="2379:739"
           data-name="Vector"
         >

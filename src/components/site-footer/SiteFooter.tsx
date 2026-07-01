@@ -163,7 +163,7 @@ export function SiteFooter({
         </div>
       </div>
 
-      <div className="relative z-[1] mt-[64px] flex w-full justify-center lg:hidden">
+      <div className="relative z-[1] mt-[64px] flex w-full justify-center lg:hidden pb-[50px]">
         <p
           aria-hidden
           data-node-id="3174:49700"
