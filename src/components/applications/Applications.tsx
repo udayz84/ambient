@@ -28,9 +28,9 @@ export function Applications() {
       className="relative flex w-full justify-center overflow-hidden bg-black"
       aria-label="Build the impossible today"
     >
-      <div className="relative mx-auto hidden h-[868px] w-full max-w-[1440px] justify-center min-[1024px]:flex">
+      <div className="relative mx-auto hidden h-[868px] w-full max-w-[1440px] min-[1024px]:block">
         <div
-          className="relative h-[868px] w-[1321px] shrink-0"
+          className="absolute top-0 left-1/2 h-[868px] w-[1321px] -translate-x-1/2"
           data-node-id="2379:844"
           data-name="Build the impoosible"
         >

@@ -61,8 +61,7 @@ export function ContactMap() {
     >
       <div className="relative mx-auto h-full w-full max-w-[1440px]">
       <div
-        className="absolute top-0 left-1/2 flex h-[1002px] w-[1440px] origin-center items-center justify-center"
-        style={{ transform: CONTACT_VIEWPORT_SCALE }}
+        className="absolute top-0 left-1/2 flex h-[1002px] w-[1440px] origin-center items-center justify-center -translate-x-1/2"
       >
         <div className="flex-none">
           <div className="relative h-[1002px] w-[1440px]" data-node-id="2379:5087">
@@ -76,6 +75,8 @@ export function ContactMap() {
                 priority
               />
             </div>
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-[250px] bg-gradient-to-r from-black to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-[250px] bg-gradient-to-l from-black to-transparent" />
           </div>
         </div>
       </div>

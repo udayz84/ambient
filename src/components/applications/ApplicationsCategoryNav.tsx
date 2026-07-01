@@ -64,7 +64,7 @@ export function ApplicationsCategoryNav({
 }: ApplicationsCategoryNavProps) {
   return (
     <div
-      className="absolute top-[199.7783203125px] left-1/2 flex h-[52px] w-[1320px] -translate-x-1/2 items-center justify-between"
+      className="absolute top-[199.7783203125px] left-1/2 flex h-[52px] w-max -translate-x-1/2 items-center gap-[12px]"
       data-node-id="2379:851"
       data-name="Options"
     >
@@ -99,12 +99,12 @@ export function ApplicationsCategoryNav({
             <button
               type="button"
               onClick={() => onTabClick(index)}
-              className={`${interRegular.className} relative flex h-[52px] shrink-0 cursor-pointer items-center justify-center px-[20px] text-[16px] leading-[24px] font-normal whitespace-nowrap not-italic transition-colors ${
+              className={`${interRegular.className} relative flex h-[52px] shrink-0 cursor-pointer items-center justify-center px-[12px] text-[16px] leading-[24px] font-normal whitespace-nowrap not-italic transition-colors ${
                 isActive ? "text-[#0e1a0e]" : "text-[#666] hover:text-[#aaa]"
               }`}
             >
               {isActive ? (
-                <span className="pointer-events-none absolute inset-y-[4px] inset-x-[13px] overflow-clip bg-[#f0f0f0]">
+                <span className="pointer-events-none absolute inset-y-[4px] inset-x-[6px] bg-[#f0f0f0]">
                   <Corners leftSrc={tabCornerTl} rightSrc={tabCornerTr} />
                 </span>
               ) : null}

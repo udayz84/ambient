@@ -46,7 +46,7 @@ function ChipImage({ className }: { className?: string }) {
       <img
         src="/Frame 1984079439.png"
         alt="Sparsh AI Module"
-        className="absolute left-1/2 top-1/2 h-[500.691px] w-[482.876px] -translate-x-1/2 -translate-y-1/2 max-w-none object-cover"
+        className="absolute left-1/2 top-1/2 h-[500.691px] w-[482.876px] -translate-x-1/2 -translate-y-1/2 max-w-none object-contain scale-[0.85]"
       />
     </div>
   );

@@ -20,7 +20,7 @@ export function TechnologyFeatures() {
           sizes="1204px"
         />
       </div>
-      <Corners />
+      <Corners className="-m-[0.5px]" />
 
       <TechnologyFeatureStat
         nodeId="2379:1433"
