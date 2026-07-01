@@ -135,9 +135,8 @@ function ResourcesHeroMobile() {
         performance data
       </h1>
 
-      <div className="relative mt-[32px] flex h-[48px] w-full flex-row items-center bg-[rgba(10,10,10,0.5)] p-[6px] backdrop-blur-md">
-        <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
-        <div className="flex h-full flex-[1_0_0] items-center px-[10px]">
+      <div className="relative mt-[32px] flex h-[48px] w-full items-center">
+        <div className="flex h-[48px] min-w-px flex-[1_0_0] items-center border-[0.5px] border-solid border-[rgba(255,255,255,0.2)] bg-[rgba(0,0,0,0.3)] px-[16px]">
           <input
             type="search"
             aria-label="Search resources"
@@ -147,9 +146,8 @@ function ResourcesHeroMobile() {
         </div>
         <button
           type="button"
-          className="relative flex h-[36px] w-[88px] shrink-0 items-center justify-center overflow-hidden shadow-[0px_10px_20px_rgba(255,255,255,0.15)]"
+          className="relative flex h-[48px] w-[88px] shrink-0 items-center justify-center overflow-hidden bg-white shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15)]"
         >
-          <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
           <span
             aria-hidden
             className="pointer-events-none absolute inset-0 opacity-40 mix-blend-plus-lighter"
@@ -158,7 +156,7 @@ function ResourcesHeroMobile() {
               backgroundSize: "307.2px 307.2px",
             }}
           />
-          <span className={`${interSemiBold.className} relative text-[13px] leading-[normal] font-semibold uppercase whitespace-nowrap text-[#121212] not-italic`}>
+          <span className={`${interRegular.className} relative text-[13px] leading-[normal] font-normal text-[#121212] not-italic`}>
             Search
           </span>
         </button>
