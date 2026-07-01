@@ -387,15 +387,13 @@ function ResourcesContentMobile() {
               <button
                 type="button"
                 onClick={() => setActiveCategory(category.id)}
-                className={`relative flex h-[36px] shrink-0 items-center justify-center px-[20px] transition-colors ${
-                  isActive ? "bg-[#f0f0f0]" : ""
-                }`}
+                className={`relative flex h-[36px] shrink-0 items-center justify-center px-[20px] transition-colors ${isActive ? "bg-[#f0f0f0]" : ""
+                  }`}
               >
                 {isActive && <Corners />}
                 <span
-                  className={`${interRegular.className} whitespace-nowrap text-[14px] not-italic ${
-                    isActive ? "text-[#0e1a0e]" : "text-[#666]"
-                  }`}
+                  className={`${interRegular.className} whitespace-nowrap text-[14px] not-italic ${isActive ? "text-[#0e1a0e]" : "text-[#666]"
+                    }`}
                 >
                   {category.label}
                 </span>
@@ -431,7 +429,7 @@ function ResourcesContentMobile() {
                 />
               </div>
             </div>
-            
+
             <div className="flex flex-col items-start gap-[20px]">
               <div className="relative flex h-[26px] shrink-0 items-center justify-center border-[0.5px] border-solid border-white/20 bg-[rgba(255,255,255,0.06)] px-[12px]">
                 <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
@@ -441,7 +439,7 @@ function ResourcesContentMobile() {
                   {article.category}
                 </span>
               </div>
-              
+
               <div className="flex flex-col items-start gap-[10px]">
                 <h3 className={`${gilroyMedium.className} text-[16px] leading-[18px] text-white not-italic`}>
                   {article.title}
