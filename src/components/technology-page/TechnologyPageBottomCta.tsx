@@ -101,7 +101,7 @@ function CtaCard({ card }: { card: CardData }) {
 export function TechnologyPageBottomCta() {
   return (
     <section
-      className="relative z-20 mb-[-409px] w-full bg-transparent"
+      className="relative z-20 mb-0 min-[1024px]:mb-[-409px] w-full bg-transparent"
       aria-label="Put A-Cube to work"
     >
       {/* DESKTOP (>=1024px) */}

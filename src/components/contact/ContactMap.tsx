@@ -192,7 +192,7 @@ function LocationBlock({
       </div>
       <div className={`${cardClass} z-10`} data-node-id={nodeId}>
       <FramedBox
-        className="relative flex h-[130px] w-fit max-w-none items-center gap-[20px] overflow-clip bg-[rgba(0,0,0,0.5)] pr-[20px]"
+        className="relative flex h-[130px] w-fit max-w-none items-center gap-[20px] overflow-clip bg-black pr-[20px]"
       >
         <div className="relative size-[130px] shrink-0">
           <span

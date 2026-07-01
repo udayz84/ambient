@@ -4,7 +4,7 @@ import { CORNER_LEFT, CORNER_RIGHT, PRIMARY_CTA_INSET, PRIMARY_CTA_SHADOW } from
 
 export function DvkIntegratedModules() {
   return (
-    <div className="relative z-20 mb-[-409px] w-full bg-transparent">
+    <div className="relative z-20 mb-0 min-[1024px]:mb-[-409px] w-full bg-transparent">
       <section className="relative mx-auto hidden w-full bg-transparent min-[1024px]:block" aria-label="From Cranium to Integrated Modules">
         <DvkIntegratedModulesDesktop />
       </section>

@@ -176,9 +176,10 @@ function CompanyMissionMobile() {
   return (
     <SectionWrap aria-label="A mission dictated by physics" className="!py-[40px]">
       <div
-        className="relative flex w-full flex-col gap-[28px] overflow-hidden border-[0.5px] border-solid border-white/15 p-[28px]"
+        className="relative flex w-full flex-col gap-[28px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] p-[28px]"
         style={{ backgroundImage: MISSION_BG }}
       >
+        <Corners />
         <SectionTitle deg="104.363deg" className="self-start text-left">
           A mission dictated by physics
         </SectionTitle>
@@ -228,7 +229,7 @@ function CompanyMissionMobile() {
 function CompanyLeadershipMobile() {
   return (
     <section
-      className="relative w-full overflow-hidden bg-black"
+      className="relative w-full overflow-hidden bg-black pb-[56px]"
       aria-label="Our minds powering the revolution"
       data-node-id="3244:6233"
       data-name="3rd Fold"
@@ -418,13 +419,14 @@ function CompanyEcosystemMobile() {
       className="relative w-full bg-black px-[16px] py-[32px]"
       aria-label="A globally resilient ecosystem"
     >
-      <div className="relative border-[0.5px] border-solid border-[rgba(255,255,255,0.15)] px-[14px] py-[32px]">
+      <div className="relative border-[0.5px] border-solid border-[rgba(255,255,255,0.15)] px-[14px] py-[32px] overflow-clip">
         <div className="pointer-events-none absolute inset-0" aria-hidden>
           <Corners />
         </div>
 
         {/* Title */}
-        <div className="relative mx-auto w-[320px] mb-[25px]">
+        <div className="relative mx-auto w-fit px-[16px] py-[4px] mb-[25px]">
+          <Corners />
           <h2
             className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
             style={{ backgroundImage: gradient("105.083deg") }}
@@ -472,6 +474,17 @@ function CompanyEcosystemMobile() {
           ))}
         </div>
       </div>
+
+      {/* Map Image */}
+      <div className="relative mt-[30px] -mx-[16px] h-[250px] w-[calc(100%+32px)]">
+        <Image
+          src="/Map.png"
+          alt="Global footprint map"
+          fill
+          className="object-cover object-top"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+      </div>
     </section>
   );
 }
@@ -499,7 +512,7 @@ function CompanyTechnologyPartnersMobile() {
         </p>
 
         {/* Partner grid — 2x2 logos + Octane centered below, grid lines */}
-        <div className="relative mt-[5px] bg-[rgba(255,255,255,0.04)]">
+        <div className="relative mt-[5px] bg-[rgba(255,255,255,0.04)] border-[0.5px] border-solid border-white/10">
           <Corners
             leftSrc="/ecosystem/corner-tl.svg"
             rightSrc="/ecosystem/corner-tr.svg"
@@ -729,7 +742,8 @@ function CompanyEngagementMobile() {
   return (
     <SectionWrap aria-label="Join our team and partnerships" className="!pb-[80px]">
       {/* Join team */}
-      <div className="relative flex w-full flex-col gap-[16px] overflow-hidden border-[0.5px] border-solid border-white/15">
+      <div className="relative flex w-full flex-col gap-[16px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)]">
+        <Corners />
         <div className="relative h-[160px] w-full overflow-hidden">
           <Image
             src={COMPANY_JOIN_TEAM.imageSrc}
@@ -753,46 +767,47 @@ function CompanyEngagementMobile() {
         </div>
       </div>
 
-      {/* Engagement cards */}
-      <div className="mt-[16px] flex w-full flex-col gap-[14px]">
+      {/* Engagement cards — 353 wide (break out of px-24 to 20px page margins per Figma) */}
+      <div className="relative -mx-[4px] mt-[16px] flex w-[calc(100%+8px)] flex-col gap-[14px]">
         {COMPANY_ENGAGEMENT_CARDS.map((card) => (
           <article
             key={card.nodeId}
-            className="relative w-full overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)]"
+            className="relative w-full border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)]"
           >
             <Corners />
-            {/* Image — 335x363, content overlaid on its lower portion */}
-            <div className="relative h-[363px] w-full overflow-hidden">
-              <div className="absolute top-[15px] left-1/2 h-[240px] w-[240px] -translate-x-1/2">
-                <Image
-                  src={card.imageSrc}
-                  alt=""
-                  fill
-                  className="pointer-events-none object-contain"
-                  sizes="240px"
-                />
-              </div>
-              <div
-                className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"
-                aria-hidden
+            {/* Image — 335x289 at (9,1), Figma zoom crop */}
+            <div
+              className="pointer-events-none absolute left-[9px] top-[1px] h-[289px] w-[335px] overflow-hidden"
+              aria-hidden
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={card.imageSrc}
+                alt=""
+                className="absolute h-[121.8%] left-[-2.54%] max-w-none top-[-21.8%] w-[105.07%]"
               />
             </div>
-            {/* Content — pulled up over the image bottom (Figma content top y=209) */}
-            <div className="relative -mt-[155px] flex flex-col px-[21px] pb-[21px]">
-              <div className="relative mb-[15px] w-fit px-[10px]">
-                <Corners />
-                <h3
-                  className={`${gilroyMedium.className} bg-clip-text text-[24px] leading-[38px] font-medium text-transparent [word-break:break-word] not-italic`}
-                  style={{ backgroundImage: gradient("112.136deg") }}
+            {/* Content — title overlaps image bottom; card auto-sizes per Figma contentTop */}
+            <div
+              className="relative flex flex-col px-[21.25px]"
+              style={{ paddingTop: card.contentTop, paddingBottom: 28 }}
+            >
+              <div className="flex flex-col gap-[15px]">
+                <div className="relative w-fit px-[10px]">
+                  <Corners />
+                  <h3
+                    className={`${gilroyMedium.className} bg-clip-text text-[24px] leading-[38px] font-medium text-transparent [word-break:break-word] not-italic`}
+                    style={{ backgroundImage: gradient("116.349deg") }}
+                  >
+                    {card.titleLines.join(" ")}
+                  </h3>
+                </div>
+                <p
+                  className={`${interRegular.className} text-[14px] leading-[22px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
                 >
-                  {card.titleLines.join(" ")}
-                </h3>
+                  {card.description}
+                </p>
               </div>
-              <p
-                className={`${interRegular.className} text-[14px] leading-[22px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
-              >
-                {card.description}
-              </p>
               <div className="relative mt-[28px] w-[231px]">
                 <GreenCta href={card.ctaHref}>{card.ctaLabel}</GreenCta>
               </div>

@@ -17,7 +17,7 @@ import {
  */
 export function ProductsStartBuilding() {
   return (
-    <section className="relative z-20 mb-[-520px] w-full bg-transparent">
+    <section className="relative z-20 mb-0 min-[1024px]:mb-[-520px] w-full bg-transparent">
       {/* DESKTOP (>=1024px) */}
       <div
         className="relative mx-auto hidden w-full min-[1024px]:block"

@@ -458,7 +458,7 @@ function ApplyButton() {
   return (
     <a
       href="#"
-      className={`${interMedium.className} absolute top-[51px] right-[49px] flex h-[48px] items-center gap-[20px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic transition-[box-shadow,background-color] duration-200 group-hover:bg-transparent group-hover:shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+      className={`${interMedium.className} absolute top-[51px] right-[49px] flex h-[48px] items-center justify-center gap-[20px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic transition-[box-shadow,background-color] duration-200 group-hover:bg-transparent group-hover:shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
     >
       <span
         aria-hidden

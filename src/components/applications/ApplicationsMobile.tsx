@@ -17,7 +17,7 @@ const MOBILE_HERO_IMAGES: Record<string, string> = {
   WEARABLES: "/applications/app-wearables.png",
   "SMART HOMES": "/applications/app-smart-home.png",
   INDUSTRIAL: "/applications/app-industrial.png",
-  AUTOMOTIVE: "/applications/car-hero.png",
+  AUTOMOTIVE: "/applications/car-hero-new.png",
   MEDICAL: "/applications/app-medical.png",
   AGRICULTURE: "/applications/app-agriculture.png",
   DRONES: "/applications/app-drones.png",
@@ -36,7 +36,7 @@ const MOBILE_WATERMARK_TEXTS: Record<string, string> = {
 };
 
 const mobileWatermarkGradient =
-  "linear-gradient(259.734deg, rgba(255, 255, 255, 0.12) 0.12143%, rgba(255, 255, 255, 0.6) 44.084%, rgba(255, 255, 255, 0) 113.37%)";
+  "linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%)";
 
 type ApplicationsMobileProps = {
   categoryActiveIndex: number;
@@ -192,27 +192,41 @@ export function ApplicationsMobile({
         </div>
       </div>
 
-      {/* Watermark Text */}
-      <p
-        className={`${gilroyExtraBold.className} mt-[32px] w-full max-w-[343px] overflow-hidden text-center text-[36px] leading-[42px] font-extrabold tracking-[0.5px] whitespace-nowrap text-transparent uppercase not-italic [word-break:break-word] bg-clip-text`}
-        style={{ backgroundImage: mobileWatermarkGradient }}
-      >
-        {watermarkText}
-      </p>
+      {/* Hero Section (Watermark + Image) */}
+      <div className="relative mt-[32px] flex w-full flex-col items-center justify-start min-h-[240px] overflow-visible">
+        {/* Watermark Text */}
+        <p
+          className={`${gilroyExtraBold.className} absolute top-0 z-0 w-full text-center text-[14.5vw] sm:text-[60px] leading-[1.1] font-extrabold tracking-[1px] whitespace-nowrap text-transparent uppercase not-italic`}
+          style={{ backgroundImage: "linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0) 100%)", WebkitBackgroundClip: "text", backgroundClip: "text" }}
+        >
+          {watermarkText}
+        </p>
 
-      {/* Hero Image */}
-      <div className="mt-[20px] flex w-full justify-center overflow-hidden px-[16px]">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt=""
-          src={imgSrc}
-          className="h-auto max-h-[340px] w-auto max-w-full"
-          aria-hidden
-        />
+        {/* Hero Image */}
+        <div className="relative z-10 mt-[24px] flex w-full justify-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt=""
+            src={imgSrc}
+            className={`h-auto max-h-[360px] w-[130%] max-w-none object-contain drop-shadow-2xl ${
+              activeTab === "AUTOMOTIVE" ? "translate-x-[4%] scale-110" : "scale-105"
+            }`}
+            aria-hidden
+          />
+        </div>
       </div>
 
       {/* Feature Card */}
-      <div className="relative mt-[20px] w-full max-w-[343px] border-[0.5px] border-white/20 bg-[#000000] p-[24px]">
+      <div className="relative mt-[-36px] w-full max-w-[343px] border-[0.5px] border-white/20 bg-[#000000] p-[24px]">
+        {activeTab === "AUTOMOTIVE" && activeIndex === 0 && (
+          <img
+            src="/applications/indicator-vertical.svg"
+            alt=""
+            className="absolute -top-[92px] left-[18px] h-[92px] w-[22px] pointer-events-none z-20"
+            aria-hidden
+          />
+        )}
+
         <div className="absolute -top-[0.5px] -left-[0.5px] z-10 flex size-[6px] items-center justify-center">
           <div className="-scale-y-100 flex-none">
             <div className="relative size-[6px]">

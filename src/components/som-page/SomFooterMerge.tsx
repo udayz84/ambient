@@ -11,7 +11,7 @@ const PRIMARY_CTA_INSET = "shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]
 export function SomFooterMerge() {
   return (
     <div
-      className="relative z-20 -mb-[400px] flex w-full justify-center px-[24px]"
+      className="relative z-20 mb-0 min-[1024px]:-mb-[400px] flex w-full justify-center px-[24px]"
       data-node-id="2438:5337"
     >
       <div className="relative flex h-[211px] w-full max-w-[1203px] items-center justify-center">

@@ -8,5 +8,5 @@ export function SiteFooterWrapper() {
   // Show the newsletter signup on the homepage and company page
   const showNewsletter = pathname === "/" || pathname === "/company";
 
-  return <SiteFooter showNewsletter={showNewsletter} isResourcesPage={pathname === "/resources"} />;
+  return <SiteFooter showNewsletter={showNewsletter} isContactPage={pathname === "/contact"} isCareersPage={pathname === "/careers"} isResourcesPage={pathname === "/resources"} />;
 }

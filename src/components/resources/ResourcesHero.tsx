@@ -78,11 +78,11 @@ export function ResourcesHero() {
         </div>
 
         <div
-          className="absolute top-[145.64px] left-[calc(16.67%+119px)] flex h-[48px] w-[722px] items-center"
+          className="absolute top-[145.64px] left-[calc(16.67%+119px)] flex h-[48px] w-[722px] items-stretch border-[0.5px] border-solid border-[rgba(255,255,255,0.4)] bg-[rgba(0,0,0,0.3)]"
           data-node-id="2379:1621"
         >
           <div
-            className="flex h-[48px] min-w-px flex-[1_0_0] items-center border-[0.5px] border-solid border-[rgba(255,255,255,0.2)] bg-[rgba(0,0,0,0.3)] px-[20px]"
+            className="flex min-w-px flex-[1_0_0] items-center px-[20px]"
             data-node-id="2379:1622"
           >
             <label htmlFor="resources-hero-search" className="sr-only">
@@ -95,17 +95,19 @@ export function ResourcesHero() {
               autoComplete="off"
               placeholder="Search architecture, case studies, or GPX metrics..."
               aria-label="Search resources"
-              className={`${interRegular.className} h-full w-full border-0 bg-transparent p-0 text-[14px] leading-[21px] font-normal text-white not-italic outline-none placeholder:text-white placeholder:opacity-100 focus:outline-none`}
+              className={`${interRegular.className} h-full w-full border-0 bg-transparent p-0 text-[14px] leading-[21px] font-normal text-white not-italic outline-none placeholder:text-white/70 focus:outline-none`}
             />
           </div>
-          <WhiteCtaButton
-            className="w-[158px] shrink-0"
+          <a
             href="#"
-            lowercase
-            centered
+            className="relative flex w-[158px] shrink-0 items-center justify-center bg-white bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.15)_100%)] transition-opacity hover:opacity-90"
           >
-            Search
-          </WhiteCtaButton>
+            <span
+              className={`${interRegular.className} text-[16px] leading-[normal] font-normal text-[#121212] not-italic`}
+            >
+              Search
+            </span>
+          </a>
         </div>
 
         <div

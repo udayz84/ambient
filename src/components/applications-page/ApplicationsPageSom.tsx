@@ -165,7 +165,7 @@ const CARDS = [
 export function ApplicationsPageSom() {
   return (
     <section
-      className="relative z-20 mb-[-409px] flex w-full justify-center overflow-hidden bg-transparent"
+      className="relative z-20 mb-0 min-[1024px]:mb-[-409px] flex w-full justify-center overflow-hidden bg-transparent"
       aria-label="Don't start from scratch"
     >
       {/* DESKTOP (>=1024px) */}

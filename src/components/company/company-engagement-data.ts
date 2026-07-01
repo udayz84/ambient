@@ -13,6 +13,8 @@ export type CompanyEngagementCardData = {
   imageHeight: number;
   imageLeft: number;
   imageTop: number;
+  /** Mobile: top offset (px) of the content block within the card. */
+  contentTop: number;
 };
 
 export const COMPANY_JOIN_TEAM = {
@@ -47,6 +49,7 @@ export const COMPANY_ENGAGEMENT_CARDS: CompanyEngagementCardData[] = [
     imageHeight: 369,
     imageLeft: 220,
     imageTop: 15,
+    contentTop: 209,
   },
   {
     nodeId: "2379:4890",
@@ -64,5 +67,6 @@ export const COMPANY_ENGAGEMENT_CARDS: CompanyEngagementCardData[] = [
     imageHeight: 331,
     imageLeft: 230,
     imageTop: 33,
+    contentTop: 224,
   },
 ];

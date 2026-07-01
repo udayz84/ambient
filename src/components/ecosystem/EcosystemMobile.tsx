@@ -84,7 +84,7 @@ export function EcosystemMobile() {
 
       <a
         href="#"
-        className="relative mt-[24px] flex h-[48px] w-[186px] max-w-[calc(100vw-48px)] items-center justify-center gap-[10px] shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]"
+        className="relative mt-[16px] flex h-[48px] w-[186px] max-w-[calc(100vw-48px)] items-center justify-center gap-[10px] shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]"
       >
         <span
           aria-hidden
@@ -104,7 +104,7 @@ export function EcosystemMobile() {
         <Corners />
       </a>
 
-      <div className="mt-[48px] flex w-full overflow-hidden">
+      <div className="mt-[24px] flex w-full overflow-hidden">
         <div className="flex w-max gap-[32px] animate-[ecosystem-scroll-mobile_25s_linear_infinite]">
           <PartnerSectionMobile title="SILICON PARTNERS" isSilicon={true} />
           <PartnerSectionMobile title="DEVELOPMENT PARTNERS" isSilicon={false} />

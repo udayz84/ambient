@@ -4,11 +4,17 @@ import { NewsletterSignup } from "./NewsletterSignup";
 
 export function SiteFooter({
   showNewsletter = false,
+  isContactPage = false,
+  isCareersPage = false,
   isResourcesPage = false,
 }: {
   showNewsletter?: boolean;
+  isContactPage?: boolean;
+  isCareersPage?: boolean;
   isResourcesPage?: boolean;
 }) {
+  const showFullBackground = showNewsletter || isCareersPage || isResourcesPage || isContactPage;
+
   return (
     <footer
       className="relative flex h-auto w-full flex-col justify-start overflow-hidden bg-black lg:block lg:h-[1252px] lg:min-h-0 lg:justify-center"
@@ -19,7 +25,7 @@ export function SiteFooter({
         <div className="absolute inset-0 bg-black" />
         <div className="absolute inset-0 overflow-hidden">
           {/* Mobile Background */}
-          {isResourcesPage ? null : showNewsletter ? (
+          {showFullBackground ? (
             <img
               alt=""
               src="/mobile/footer.png"
@@ -45,12 +51,12 @@ export function SiteFooter({
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.4)] via-[rgba(0,0,0,0.1)] to-[rgba(0,0,0,0.6)] lg:from-black/80 lg:via-black/10 lg:to-black/10" />
       </div>
 
-      <div className={`relative mx-auto flex h-full w-full max-w-[1440px] flex-col items-center pb-0 lg:block lg:pt-0 lg:pb-0 ${showNewsletter ? "pt-[100px]" : "pt-[24px]"}`}>
-      {showNewsletter ? (
-        <div className="relative z-[1] mb-[80px] flex flex-col items-center lg:mb-0 lg:pt-[120px]">
-          <NewsletterSignup />
-        </div>
-      ) : null}
+      <div className={`relative mx-auto flex h-full w-full max-w-[1440px] flex-col items-center pb-0 lg:block lg:pt-0 lg:pb-0 ${(isResourcesPage || isCareersPage || isContactPage) ? "pt-[376px]" : showNewsletter ? "pt-[100px]" : "pt-[24px]"}`}>
+        {showNewsletter && (
+          <div className="relative z-[1] mb-[80px] flex flex-col items-center lg:mb-0 lg:pt-[120px]">
+            <NewsletterSignup />
+          </div>
+        )}
 
       <nav
         className="relative z-[1] flex w-full max-w-[897px] flex-col px-[24px] text-white lg:absolute lg:top-[626px] lg:left-1/2 lg:-translate-x-1/2 lg:flex-row lg:items-start lg:justify-between lg:px-0 lg:gap-0"
@@ -157,9 +163,18 @@ export function SiteFooter({
         </div>
       </div>
 
-      <div className="relative z-[1] mt-[64px] flex w-full justify-center px-[24px] lg:hidden mb-0">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/mobile/ambient.png" alt="ambient" className="w-[120%] max-w-none object-contain block" aria-hidden />
+      <div className="relative z-[1] mt-[64px] flex w-full justify-center lg:hidden -mb-[50px]">
+        <p
+          aria-hidden
+          data-node-id="3174:49700"
+          className={`${gilroyBold.className} bg-clip-text text-[100px] leading-none font-bold tracking-[-2px] whitespace-nowrap text-transparent opacity-30 not-italic`}
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, rgba(46,76,38,0.4), #ddf5d3 50%, rgba(46,76,38,0.4))",
+          }}
+        >
+          ambient
+        </p>
       </div>
 
       <p

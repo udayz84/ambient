@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import type { LeadershipMember } from "./company-leadership-data";
+import { Corners } from "../shared/Corners";
 
 function LeadershipCardMobile({
   member,
@@ -29,6 +30,7 @@ function LeadershipCardMobile({
       style={{ height: cardHeight }}
       data-name="User Image"
     >
+      <Corners />
       {/* Portrait */}
       <div
         className="absolute left-[3px] w-[330px] overflow-hidden"

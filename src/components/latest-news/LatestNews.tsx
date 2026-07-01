@@ -14,7 +14,7 @@ const ctaTextClass = `${interRegular.className} text-[16px] leading-[normal] fon
 export function LatestNews() {
   return (
     <section
-      className="relative mt-[150px] flex w-full justify-center overflow-x-clip bg-black max-[1023px]:mt-[60px]"
+      className="relative mt-[150px] flex w-full justify-center overflow-x-clip bg-black max-[1023px]:mt-[24px]"
       aria-label="Latest from Ambient"
       data-node-id="2379:1283"
     >

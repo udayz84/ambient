@@ -100,7 +100,7 @@ function LoadMoreCta() {
 export function NewsGrid() {
   return (
     <section
-      className="relative z-20 mb-[-409px] flex w-full justify-center overflow-hidden bg-transparent"
+      className="relative z-20 mb-0 min-[1024px]:mb-[-409px] flex w-full justify-center overflow-hidden bg-transparent"
       aria-label="News articles"
       data-node-id="2500:1825"
     >

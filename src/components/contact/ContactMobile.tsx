@@ -175,27 +175,86 @@ function ContactHeroMobile() {
   );
 }
 
-function LocationCard({ title, address, align }: { title: string, address: string, align: "left" | "right" }) {
+function LocationCard({ title, address, iconPosition }: { title: string; address: React.ReactNode; iconPosition: "left" | "right" }) {
+  const isRight = iconPosition === "right";
   return (
-    <div className={`relative flex items-center p-[10px] pr-[16px] gap-[16px] bg-[#0a1105] border-[0.5px] border-[rgba(255,255,255,0.15)] overflow-hidden w-[343px] h-[107px] ${align === "right" ? "flex-row-reverse text-right" : ""}`}>
-      <Corners />
-      <div className="relative flex w-[68px] h-[70px] shrink-0 items-center justify-center bg-gradient-to-b from-[#53d824] to-[#2c7213]">
-        <Image
-          src="/contact/location-icon.svg"
-          alt=""
-          width={24}
-          height={24}
-          className="size-[24px]"
-          aria-hidden
+    <div
+      className={`relative flex h-[107px] w-[343px] items-center bg-black border-[0.474px] border-solid border-[rgba(240,240,240,0.2)] ${isRight ? "justify-center gap-[9px]" : "gap-[4px] pl-[4.019px] pr-[9.981px]"}`}
+    >
+      {/* Location icon tile (83x85) — gradient square 67.587x69.5 + 24.806 pin */}
+      <div className={`relative h-[85px] w-[83px] shrink-0 ${isRight ? "order-2" : "order-1"}`}>
+        <div
+          className="absolute bg-gradient-to-b from-[#53d824] to-[#2c7213]"
+          style={{ left: 7.98, top: 7.5, width: 67.587, height: 69.5 }}
         />
+        <div className="absolute left-1/2 top-1/2 h-[24.806px] w-[24.806px] -translate-x-1/2 -translate-y-1/2">
+          <Image
+            src="/contact/location-icon.svg"
+            alt=""
+            width={25}
+            height={25}
+            className="h-[24.806px] w-[24.806px]"
+            aria-hidden
+          />
+        </div>
       </div>
-      <div className={`flex flex-col gap-[4px] flex-1 ${align === "right" ? "items-end" : "items-start"}`}>
-        <p className={`${gilroyMedium.className} text-[18px] leading-[22px] font-medium text-white not-italic`}>
+      {/* Title + address */}
+      <div className={`flex flex-col items-start ${isRight ? "order-1 w-[214px]" : "order-2 w-[242px]"}`}>
+        <p className={`${gilroyMedium.className} text-[18px] leading-[26.545px] font-medium text-white not-italic`}>
           {title}
         </p>
-        <p className={`${interRegular.className} text-[13px] leading-[18px] font-normal text-[#a4a4a4] not-italic`}>
+        <div className={`${interRegular.className} text-[14px] leading-[18px] font-normal text-[#a4a4a4] not-italic`}>
           {address}
-        </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ----------------------- MAP CONNECTOR INDICATOR -------------------------- */
+// Recreates the Figma connector (Group 93/94/95): a 1.5px solid #6FE047 line
+// ending in a layered diamond marker (20px #53D824 @40% blur glow + 6px #DEF5C0
+// core). The diamond bbox (28.284) sits with a 4px glow margin from the edge,
+// so its center is 18.142px from the indicator edge.
+function MapIndicator({
+  centerX,
+  top,
+  height,
+  diamondAt,
+}: {
+  centerX: number;
+  top: number;
+  height: number;
+  diamondAt: "top" | "bottom";
+}) {
+  const centerFromEdge = 18.142;
+  return (
+    <div
+      className="pointer-events-none absolute"
+      style={{ left: centerX, top, width: 28.284, height, transform: "translateX(-50%)" }}
+      aria-hidden
+    >
+      <div
+        className="absolute left-1/2 w-[1.5px] -translate-x-1/2 bg-[#6FE047]"
+        style={
+          diamondAt === "top"
+            ? { top: centerFromEdge, bottom: 0 }
+            : { top: 0, bottom: centerFromEdge }
+        }
+      />
+      <div
+        className="absolute left-1/2 -translate-x-1/2"
+        style={{
+          width: 28.284,
+          height: 28.284,
+          ...(diamondAt === "top" ? { top: 4 } : { bottom: 4 }),
+        }}
+      >
+        <div
+          className="absolute left-1/2 top-1/2 size-[20px] -translate-x-1/2 -translate-y-1/2 rotate-45 bg-[#53D824]/40"
+          style={{ filter: "blur(2px)" }}
+        />
+        <div className="absolute left-1/2 top-1/2 size-[6px] -translate-x-1/2 -translate-y-1/2 rotate-45 bg-[#DEF5C0]" />
       </div>
     </div>
   );
@@ -204,15 +263,27 @@ function LocationCard({ title, address, align }: { title: string, address: strin
 function ContactMapMobile() {
   return (
     <SectionWrap aria-label="Global offices" className="!px-0 !py-0 h-[939px] w-full max-w-[393px] mx-auto overflow-hidden bg-black relative">
-      {/* Background Globe Image */}
-      <div className="pointer-events-none absolute bottom-0 left-1/2 w-[1440px] h-[1002px] -translate-x-1/2" aria-hidden>
+      {/* Background Globe Image — mobile crop per Figma (1365.19x692.08 placed at left -485.6, top 692) */}
+      <div
+        className="pointer-events-none absolute left-[-485.6px] top-[692px] h-[692.08px] w-[1365.19px] overflow-hidden"
+        aria-hidden
+      >
         <Image
           src="/contact/Globe image.png"
           alt=""
           fill
           className="object-cover object-top"
-          sizes="100vw"
+          sizes="393px"
         />
+      </div>
+
+      {/* Dotted map-base grid (background mapping) per Figma — at section (-38, 587), 497.39x162.35 */}
+      <div
+        className="pointer-events-none absolute left-[-38px] top-[587px] h-[162.353px] w-[497.388px] opacity-20"
+        aria-hidden
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/contact/map-base.svg" alt="" className="block size-full max-w-none object-cover" />
       </div>
 
       <div className="relative z-10 flex flex-col items-center w-full pt-[30px] h-full">
@@ -239,36 +310,30 @@ function ContactMapMobile() {
 
         {/* Lines and Cards Container */}
         <div className="absolute top-[0px] left-0 w-full h-full pointer-events-none">
-          {/* USA Line */}
-          <div className="absolute top-[259px] left-[21px] w-[1.5px] h-[381px] bg-gradient-to-b from-[rgba(83,216,36,0.6)] to-transparent">
-            <div className="absolute bottom-0 left-1/2 size-[8px] -translate-x-1/2 rotate-45 bg-[#53d824] shadow-[0_0_12px_#53d824]" />
-          </div>
+          {/* USA connector — diamond at bottom (points down to globe) */}
+          <MapIndicator centerX={24.14} top={260} height={381.28} diamondAt="bottom" />
 
-          {/* Singapore Line */}
-          <div className="absolute top-[479px] left-[354px] w-[1.5px] h-[202px] bg-gradient-to-b from-[rgba(83,216,36,0.6)] to-transparent">
-            <div className="absolute bottom-0 left-1/2 size-[8px] -translate-x-1/2 rotate-45 bg-[#53d824] shadow-[0_0_12px_#53d824]" />
-          </div>
+          {/* Singapore connector — diamond at bottom */}
+          <MapIndicator centerX={357.14} top={480} height={202.28} diamondAt="bottom" />
 
-          {/* India Line */}
-          <div className="absolute top-[760px] left-[312px] w-[1.5px] h-[119px] bg-gradient-to-b from-[rgba(83,216,36,0.6)] to-transparent">
-            <div className="absolute bottom-0 left-1/2 size-[8px] -translate-x-1/2 rotate-45 bg-[#53d824] shadow-[0_0_12px_#53d824]" />
-          </div>
+          {/* India connector — diamond at top (points up) */}
+          <MapIndicator centerX={282.43} top={638} height={155} diamondAt="top" />
 
           {/* USA Card */}
           <div className="absolute top-[240px] left-[20px] pointer-events-auto">
             <LocationCard
               title="USA Headquarters"
               address="Ambient Scientific Inc. 4633 Old Ironsides Drive Santa Clara California 95054. USA"
-              align="left"
+              iconPosition="left"
             />
           </div>
 
-          {/* Singapore Card */}
+          {/* Singapore Card (text left, icon right) */}
           <div className="absolute top-[380px] left-[29px] pointer-events-auto">
             <LocationCard
               title="Singapore Headquarters"
               address="137 Telok Ayer Street, #05-02, Singapore 068602"
-              align="right"
+              iconPosition="right"
             />
           </div>
 
@@ -277,7 +342,7 @@ function ContactMapMobile() {
             <LocationCard
               title="India Headquarters"
               address="Ramky House, 1st Cross, Raghavendra Nagar, Kalyan Nagar, Bengaluru Karnataka, 560043, India"
-              align="left"
+              iconPosition="left"
             />
           </div>
         </div>
@@ -441,7 +506,7 @@ function ContactFormMobile() {
   const [subscribed, setSubscribed] = useState(false);
 
   return (
-    <SectionWrap aria-label="Contact form" className="!pb-[20px] relative">
+    <SectionWrap aria-label="Contact form" className="!pb-[20px] relative z-10 -mb-[266px]">
       <div className="flex flex-col items-center gap-[12px] relative z-10">
         <SectionTitle deg="119.522deg">Prefer to write to us?</SectionTitle>
         <p className={`${interRegular.className} max-w-[327px] text-center text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-70 not-italic`}>
@@ -466,6 +531,7 @@ function ContactFormMobile() {
                   : "border-[0.5px] border-solid border-white/15 bg-transparent"
               }`}
             >
+              <Corners />
               <div className="relative size-[28px] shrink-0">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -497,7 +563,7 @@ function ContactFormMobile() {
       </div>
 
       {/* Form */}
-      <div className="relative mt-[20px] w-full overflow-clip border-[1.5px] border-solid border-[rgba(83,216,36,0.25)] bg-transparent p-[20px] z-10">
+      <div className="relative mt-[48px] w-full overflow-clip border-[1.5px] border-solid border-[rgba(83,216,36,0.25)] bg-transparent p-[20px] z-10">
         <Corners />
         <p className={`${gilroyMedium.className} mb-[16px] text-[20px] leading-[26px] font-medium text-white not-italic`}>
           Drop Us a Message

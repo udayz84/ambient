@@ -189,28 +189,28 @@ export function CareersHero() {
               />
               
               {/* Custom Corners that pop out slightly to avoid the inset shadow */}
-              <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">
+              <div className="pointer-events-none absolute -top-[2px] -right-[2px] z-20 flex size-[4px] items-center justify-center">
                 <div className="rotate-180 flex-none">
                   <div className="relative size-[4px]">
                     <img src="/hero/corner-tag-2.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
                   </div>
                 </div>
               </div>
-              <div className="pointer-events-none absolute -top-[0.5px] left-0 z-20 flex size-[4px] items-center justify-center">
+              <div className="pointer-events-none absolute -top-[2px] -left-[2px] z-20 flex size-[4px] items-center justify-center">
                 <div className="-scale-y-100 flex-none">
                   <div className="relative size-[4px]">
                     <img src="/hero/corner-tag-1.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
                   </div>
                 </div>
               </div>
-              <div className="pointer-events-none absolute right-0 bottom-0 z-20 flex size-[4px] items-center justify-center">
+              <div className="pointer-events-none absolute -bottom-[2px] -right-[2px] z-20 flex size-[4px] items-center justify-center">
                 <div className="-scale-x-100 flex-none">
                   <div className="relative size-[4px]">
                     <img src="/hero/corner-tag-2.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
                   </div>
                 </div>
               </div>
-              <div className="pointer-events-none absolute bottom-0 left-0 z-20 flex size-[4px] items-center justify-center">
+              <div className="pointer-events-none absolute -bottom-[2px] -left-[2px] z-20 flex size-[4px] items-center justify-center">
                 <div className="flex-none">
                   <div className="relative size-[4px]">
                     <img src="/hero/corner-tag-1.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />

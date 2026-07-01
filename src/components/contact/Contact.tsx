@@ -47,8 +47,10 @@ export function Contact() {
       </div>
 
       {/* MOBILE (<1024px) — dedicated stacked layout */}
-      <div className="relative -mt-[78px] w-full bg-black min-[1024px]:hidden -mb-[150px] z-10 pb-[150px] [mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)]">
-        <ContactMobile />
+      <div className="relative -mt-[78px] w-full bg-transparent min-[1024px]:hidden z-10 pointer-events-none">
+        <div className="pointer-events-auto">
+          <ContactMobile />
+        </div>
       </div>
     </main>
   );

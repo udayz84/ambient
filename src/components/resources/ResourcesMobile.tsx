@@ -115,15 +115,15 @@ function ResourcesHeroMobile() {
           src="/mobile/resources/image 102.png"
           alt=""
           fill
-          className="object-cover object-top opacity-100 mix-blend-screen"
+          className="object-cover object-top opacity-100 mix-blend-screen scale-[0.8]"
           sizes="100vw"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/60" />
       </div>
 
       <h1
-        className={`${gilroyMedium.className} relative w-full bg-clip-text text-left text-[36px] leading-[40px] font-medium text-transparent [word-break:break-word] not-italic`}
+        className={`${gilroyMedium.className} relative w-full bg-clip-text text-left text-[36px] leading-[40px] font-medium text-transparent [word-break:break-word] not-italic pt-[45px]`}
         style={{ backgroundImage: gradient("118.129deg") }}
       >
         Explore whitepapers,
@@ -135,30 +135,20 @@ function ResourcesHeroMobile() {
         performance data
       </h1>
 
-      <div className="relative mt-[32px] flex h-[48px] w-full flex-row items-center bg-[rgba(10,10,10,0.5)] p-[6px] backdrop-blur-md">
-        <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
-        <div className="flex h-full flex-[1_0_0] items-center px-[10px]">
+      <div className="relative mt-[32px] flex h-[48px] w-full flex-row items-stretch border-[0.5px] border-solid border-[rgba(255,255,255,0.4)] bg-[rgba(0,0,0,0.3)]">
+        <div className="flex min-w-px flex-[1_0_0] items-center px-[16px]">
           <input
             type="search"
             aria-label="Search resources"
             placeholder="Search architecture, case studies, or GPX..."
-            className={`${interRegular.className} h-full w-full border-0 bg-transparent p-0 text-[12px] font-normal text-white outline-none placeholder:text-white/60 not-italic`}
+            className={`${interRegular.className} h-full w-full border-0 bg-transparent p-0 text-[12px] font-normal text-white outline-none placeholder:text-white/70 not-italic`}
           />
         </div>
         <button
           type="button"
-          className="relative flex h-[36px] w-[88px] shrink-0 items-center justify-center overflow-hidden shadow-[0px_10px_20px_rgba(255,255,255,0.15)]"
+          className="relative flex w-[90px] shrink-0 items-center justify-center bg-white bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.15)_100%)] transition-opacity hover:opacity-90"
         >
-          <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
-          <span
-            aria-hidden
-            className="pointer-events-none absolute inset-0 opacity-40 mix-blend-plus-lighter"
-            style={{
-              backgroundImage: "url(/resources/news-cta-texture.png)",
-              backgroundSize: "307.2px 307.2px",
-            }}
-          />
-          <span className={`${interSemiBold.className} relative text-[13px] leading-[normal] font-semibold uppercase whitespace-nowrap text-[#121212] not-italic`}>
+          <span className={`${interSemiBold.className} text-[14px] leading-[normal] font-semibold text-[#121212] not-italic`}>
             Search
           </span>
         </button>
@@ -166,7 +156,7 @@ function ResourcesHeroMobile() {
 
       <div className="mt-[20px] flex w-full justify-start">
         <p
-          className={`${interRegular.className} text-[13px] leading-[20px] font-normal text-white/75 not-italic`}
+          className={`${interRegular.className} text-[13px] leading-[20px] font-normal text-white/90 not-italic`}
         >
           Can&apos;t find what you&apos;re looking for?{" "}
           <Link href="/contact" className="text-[#53d824]">
@@ -314,10 +304,10 @@ function ResourcesBuildingMobile() {
           src="/mobile/resources/09b798d5-3755-454c-9ebe-8db35323ff84 1.png"
           alt=""
           fill
-          className="object-cover object-bottom"
+          className="object-cover object-bottom brightness-[1.75]"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.2)_100%)]" />
       </div>
 
       <div className="relative inline-flex items-center justify-center p-[10px]">
@@ -498,7 +488,7 @@ function ResourcesContentMobile() {
 function ResourcesNewsCtaMobile() {
   return (
     <section
-      className="relative flex w-full flex-col items-center gap-[21px] px-[24px] pt-[64px] pb-[32px] overflow-hidden bg-transparent"
+      className="relative z-10 flex w-full flex-col items-center gap-[21px] px-[24px] pt-[110px] overflow-visible bg-transparent -mb-[226px]"
       aria-label="Latest news"
     >
       {/* Background image and gradient removed to make it fully transparent */}

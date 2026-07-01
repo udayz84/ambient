@@ -567,7 +567,7 @@ function JobRowMobile({
         </div>
       </div>
       
-      <div className="relative flex h-[48px] w-[161px] shrink-0 items-center gap-[8px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] px-[20px] py-[10px]">
+      <div className="relative flex h-[48px] w-[161px] shrink-0 items-center justify-center gap-[8px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] px-[20px] py-[10px]">
         <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
         
         {isActive ? (
@@ -621,7 +621,7 @@ function CareersBenefitsMobile() {
         {CAREERS_BENEFITS_CARDS.map((card) => (
           <article
             key={card.title}
-            className="relative flex h-[222px] w-full max-w-[353px] flex-col justify-between items-start p-[32px] mx-auto overflow-clip"
+            className={`relative flex h-[222px] w-full max-w-[353px] flex-col justify-between items-start p-[32px] mx-auto overflow-clip ${GLASS_PANEL_VISIBLE_BORDER_CLASS}`}
             style={{
               backgroundImage:
                 "linear-gradient(rgba(83, 216, 36, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%), linear-gradient(90deg, rgba(21, 21, 21, 0.3) 0%, rgba(21, 21, 21, 0.3) 100%)",
@@ -661,12 +661,10 @@ function CareersBenefitsMobile() {
 function CareersBottomCtaMobile() {
   return (
     <section
-      className="relative flex w-full flex-col items-center gap-[42px] overflow-hidden px-[17.5px] pt-[72px] pb-[100px]"
+      className="relative z-10 flex w-full flex-col items-center gap-[42px] overflow-visible bg-transparent px-[17.5px] pt-[110px] -mb-[226px]"
       aria-label="Ready to build the future of compute"
     >
-      {/* Background image removed per request */}
-
-      <div className="relative inline-flex items-center justify-center p-[8px]">
+      <div className="relative z-10 inline-flex items-center justify-center p-[8px]">
         <h2
           className={`${gilroyMedium.className} w-[319px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
           style={{ backgroundImage: "linear-gradient(105.99deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)" }}
@@ -676,7 +674,7 @@ function CareersBottomCtaMobile() {
         <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
       </div>
 
-      <div className="relative flex w-full max-w-[354px] flex-row justify-center gap-[14px]">
+      <div className="relative z-10 flex w-full max-w-[354px] flex-row justify-center gap-[14px]">
         {/* APPLY NOW BUTTON */}
         <a
           href="#"
