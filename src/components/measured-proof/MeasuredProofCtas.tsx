@@ -9,7 +9,7 @@ export function MeasuredProofCtas() {
       data-node-id="2379:1485"
     >
       <a
-        href="#"
+        href="/technology"
         className={`${gilroyMedium.className} relative h-[48px] w-[204px] shrink-0 shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
         data-node-id="2379:1486"
         data-name="Cta"
@@ -64,7 +64,7 @@ export function MeasuredProofCtas() {
       </a>
 
       <a
-        href="#"
+        href="/products"
         className={`${gilroyMedium.className} relative h-[48px] w-[204px] shrink-0 overflow-clip bg-[rgba(226,241,202,0.12)]`}
         data-node-id="2379:1497"
         data-name="Menu"

@@ -159,7 +159,7 @@ export function MeasuredProofMobile() {
 
       <div className="mt-[28px] flex w-full flex-row justify-center gap-[9px]">
         <a
-          href="#"
+          href="/technology"
           className={`${gilroyMedium.className} relative flex h-[48px] w-[171px] items-center justify-center ${GREEN_CTA_SHADOW}`}
         >
           <span
@@ -205,7 +205,7 @@ export function MeasuredProofMobile() {
           </div>
         </a>
         <a
-          href="#"
+          href="/products"
           className={`${gilroyMedium.className} relative flex h-[48px] w-[171px] items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)]`}
         >
           <p className="relative text-[13px] leading-[24px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">

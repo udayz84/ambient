@@ -13,8 +13,15 @@ const INITIAL_ACTIVE_INDEX = 3;
 
 export function Applications() {
   const [activeIndex, setActiveIndex] = useState(INITIAL_ACTIVE_INDEX);
+  const [direction, setDirection] = useState(1);
+
+  const handleTabClick = (newIndex: number) => {
+    setDirection(newIndex > activeIndex ? 1 : -1);
+    setActiveIndex(newIndex);
+  };
 
   const handleShift = (dir: -1 | 1) => {
+    setDirection(dir);
     setActiveIndex((prev) => {
       const next = prev + dir;
       if (next < 0) return APPLICATION_TABS.length - 1;
@@ -37,10 +44,15 @@ export function Applications() {
           <ApplicationsHeader />
           <ApplicationsCategoryNav
             activeIndex={activeIndex}
-            onTabClick={setActiveIndex}
+            onTabClick={handleTabClick}
             onShift={handleShift}
           />
-          <ApplicationsHeroVisual activeTab={APPLICATION_TABS[activeIndex]} />
+          <div className="absolute inset-0 pointer-events-none">
+            <ApplicationsHeroVisual 
+              activeTab={APPLICATION_TABS[activeIndex]} 
+              direction={direction} 
+            />
+          </div>
           <ApplicationsFeatureCard {...FEATURE_CARDS.left} />
           <ApplicationsFeatureCard {...FEATURE_CARDS.right} />
           <ApplicationsCta />

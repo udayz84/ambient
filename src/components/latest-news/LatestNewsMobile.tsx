@@ -133,7 +133,7 @@ export function LatestNewsMobile() {
       </div>
 
       <a
-        href="#"
+        href="/news-listing"
         className="relative mt-[28px] flex h-[48px] w-[186px] items-center justify-center gap-[10px] shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]"
       >
         <span

@@ -309,7 +309,7 @@ export function PlatformScaleMobile() {
         </div>
 
         {/* Stat Panel */}
-        <div className="relative mt-[58px] flex w-full max-w-[340px] flex-col items-center gap-[12px] bg-[rgba(0,0,0,0.1)] backdrop-blur-[12px] border-[0.5px] border-solid border-white/15 px-[20px] py-[24px]">
+        <div className="relative mt-[58px] flex w-full max-w-[340px] flex-col items-center gap-[12px] backdrop-blur-[6px] bg-white/[0.02] border-[0.5px] border-solid border-white/15 px-[20px] py-[24px]">
           {/* Top Right Bracket */}
           <div className="absolute -top-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center scale-[0.6] origin-top-right">
             <div className="rotate-180 flex-none">
@@ -385,7 +385,7 @@ export function PlatformScaleMobile() {
 
         {/* CTA */}
         <a
-          href="#"
+          href="/technology"
           className={`${interMedium.className} relative mt-[31px] flex h-[48px] w-[237px] items-center justify-center shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
         >
           <span

@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import {
@@ -9,133 +13,80 @@ import {
   CORNER_RIGHT,
   FEATURE_CARD_BG,
   SECTION_TITLE_GRADIENT,
+  SPEC_CARDS,
+  type SpecCardType,
 } from "./dvk-data";
 
-type SpecCard = {
-  title: string;
-  items: string[];
-  accent?: boolean;
-};
-
-/** Figma 2761:2925 — five spec cards (Memory, Wireless, Sensors, Debug, Interfaces). */
-export const SPEC_CARDS: SpecCard[] = [
-  {
-    title: "Memory",
-    items: ["512KB SRAM", "8MB Flash", "External SPI Support"],
-  },
-  {
-    title: "Wireless",
-    items: ["Bluetooth 5.0 LE", "802.15.4 Ready", "Onboard Antenna"],
-  },
-  {
-    title: "Sensors",
-    accent: true,
-    items: [
-      "I2S Digital Mic",
-      "Analog Mic",
-      "3-Axis Accelerometer",
-      "Ambient Light Sensor",
-    ],
-  },
-  {
-    title: "Debug Ports",
-    items: ["USB-C Programming", "10-Pin JTAG", "UART Console", "GPIO Breakout"],
-  },
-  {
-    title: "Interfaces",
-    items: [
-      "SPI, I2C, UART",
-      "Camera Connector",
-      "Programmable LEDs",
-      "Button Inputs",
-    ],
-  },
+// Refined coordinates (in percentages) for the highlight box on the board image
+const HIGHLIGHT_REGIONS = [
+  { left: "16%", top: "25%", width: "16%", height: "55%" }, // Memory (left chip clusters)
+  { left: "68%", top: "12%", width: "10%", height: "15%" }, // Wireless (top right antenna area)
+  { left: "34%", top: "15%", width: "12%", height: "15%" }, // Sensors (small components top middle-left)
+  { left: "82%", top: "75%", width: "8%", height: "15%" }, // Debug Ports (bottom right headers/ports)
+  { left: "91%", top: "15%", width: "6%", height: "70%" }, // Interfaces (far right edge pin rows)
 ];
 
-/**
- * Figma 2761:2905 — "The complete Edge AI hardware stack" section.
- * Root frame is 1232 wide; rendered as a flex column, items centered.
- */
 export function DvkHardwareStack() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   return (
     <div
       className="relative flex w-full flex-col items-center gap-[48px]"
       data-node-id="2761:2905"
-      data-name="Frame 1984079436"
     >
-      {/* Header — 2761:2906 (800 wide) */}
-      <div
-        className="flex w-[800px] flex-col items-center gap-[24px]"
-        data-node-id="2761:2906"
-      >
-        {/* Section Title — 2761:2907 (729.664×98, px-10 corners frame) */}
+      {/* Header */}
+      <div className="flex w-[800px] flex-col items-center gap-[24px]">
         <div
           className="relative px-[10px]"
           style={{ width: 729.6640625 }}
-          data-node-id="2761:2908"
-          data-name="Title"
         >
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
-            className={`${gilroyMedium.className} m-0 bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} m-0 bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic`}
             style={{
               width: 709.6640625,
               backgroundImage: SECTION_TITLE_GRADIENT,
               WebkitBackgroundClip: "text",
               backgroundClip: "text",
             }}
-            data-node-id="2761:2909"
           >
             The complete Edge AI hardware stack in a single footprint
           </h2>
         </div>
 
-        {/* Description — 2761:2914 */}
         <p
-          className={`${interRegular.className} text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+          className={`${interRegular.className} text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic`}
           style={{ width: 618.2734375, opacity: 0.65 }}
-          data-node-id="2761:2914"
         >
           An exhaustive suite of sensors, interfaces, and debug tools
           pre-integrated with the GPX-10 Pro AI Processor.
         </p>
       </div>
 
-      {/* Content — 2761:2915 (1232 wide) */}
-      <div
-        className="flex w-full flex-col items-center justify-center gap-[24px]"
-        data-node-id="2761:2915"
-      >
-        {/* Feature card — 2761:2916 (1232×380) */}
+      {/* Content */}
+      <div className="flex w-full flex-col items-center justify-center gap-[24px]">
+        {/* Feature card (Board Image) */}
         <div
           className="relative flex w-full flex-col items-center justify-center gap-[20px] overflow-clip border-[0.5px] border-solid p-[16px]"
           style={{
             backgroundColor: FEATURE_CARD_BG,
             borderColor: CARD_BORDER,
           }}
-          data-node-id="2761:2916"
-          data-name="Article"
         >
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <p
             className={`${gilroyMedium.className} min-w-full w-[min-content] shrink-0 text-center text-[22px] leading-[28px] text-white not-italic`}
-            data-node-id="2761:2917"
           >
             The Hardware Blueprint
           </p>
 
-          {/* Circuit board — 2761:2918 (739.724×300) */}
-          <div
-            className="relative h-[300px] w-[739.724px] shrink-0"
-            data-node-id="2761:2918"
-            data-name="Circuit board"
-          >
+          {/* Circuit board container */}
+          <div className="relative h-[300px] w-[739.724px] shrink-0 overflow-hidden rounded-[7.572px]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt=""
               src="/dvk/board-main.png"
               className="pointer-events-none absolute inset-0 size-full max-w-none rounded-[7.572px] object-bottom"
-              data-node-id="2761:2919"
             />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -148,18 +99,43 @@ export function DvkHardwareStack() {
                 width: 221.3364715576172,
                 height: 197.49679565429688,
               }}
-              data-node-id="2761:2920"
             />
+
+            {/* Dynamic Highlight Box */}
+            <AnimatePresence>
+              {hoveredIndex !== null && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: 1,
+                    left: HIGHLIGHT_REGIONS[hoveredIndex].left,
+                    top: HIGHLIGHT_REGIONS[hoveredIndex].top,
+                    width: HIGHLIGHT_REGIONS[hoveredIndex].width,
+                    height: HIGHLIGHT_REGIONS[hoveredIndex].height,
+                  }}
+                  exit={{ opacity: 0 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  className="pointer-events-none absolute z-10 border border-[#a8ed90]/50 rounded-md"
+                  style={{
+                    boxShadow:
+                      "0 0 0 9999px rgba(0, 0, 0, 0.75), 0 0 20px 2px rgba(168, 237, 144, 0.3), inset 0 0 12px 0 rgba(168, 237, 144, 0.2)",
+                  }}
+                />
+              )}
+            </AnimatePresence>
           </div>
         </div>
 
-        {/* Spec cards row — 2761:2925 (1232×auto, gap-8) */}
-        <div
-          className="flex w-full items-stretch gap-[8px]"
-          data-node-id="2761:2925"
-        >
-          {SPEC_CARDS.map((card) => (
-            <SpecCard key={card.title} card={card} />
+        {/* Spec cards row */}
+        <div className="flex w-full items-stretch gap-[8px]">
+          {SPEC_CARDS.map((card, idx) => (
+            <SpecCard
+              key={card.title}
+              card={card}
+              isHovered={hoveredIndex === idx}
+              onMouseEnter={() => setHoveredIndex(idx)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            />
           ))}
         </div>
       </div>
@@ -167,17 +143,29 @@ export function DvkHardwareStack() {
   );
 }
 
-function SpecCard({ card }: { card: SpecCard }) {
+function SpecCard({
+  card,
+  isHovered,
+  onMouseEnter,
+  onMouseLeave,
+}: {
+  card: SpecCardType;
+  isHovered: boolean;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
+}) {
   return (
     <div
-      className="relative flex min-w-px flex-1 flex-col items-center gap-[20px] self-stretch overflow-clip border-[0.5px] border-solid px-[16px] pt-[16px] pb-[24px] bg-[rgba(0,0,0,0.2)] hover:bg-[rgba(68,120,7,0.2)] border-[rgba(240,240,240,0.2)] hover:border-[#a8ed90] transition-colors duration-300 cursor-default"
-      data-name="Article"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      className={`relative flex min-w-px flex-1 flex-col items-center gap-[20px] self-stretch overflow-clip border-[0.5px] border-solid px-[16px] pt-[16px] pb-[24px] cursor-default transition-colors duration-300 ${
+        isHovered
+          ? "bg-[rgba(68,120,7,0.2)] border-[#a8ed90]"
+          : "bg-[rgba(0,0,0,0.2)] border-[rgba(240,240,240,0.2)]"
+      }`}
     >
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-      <div
-        className="flex w-full flex-col items-start"
-        data-name="NewsSection"
-      >
+      <div className="flex w-full flex-col items-start">
         <div className="flex w-full flex-col gap-[10px]">
           <p
             className={`${gilroyMedium.className} w-full shrink-0 text-[22px] leading-[28px] text-white not-italic`}

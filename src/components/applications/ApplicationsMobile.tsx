@@ -286,7 +286,7 @@ export function ApplicationsMobile({
       </div>
 
       <a
-        href="#"
+        href="/applications"
         className={`${interMedium.className} relative mt-[32px] flex h-[48px] w-[237px] items-center justify-center ${GREEN_CTA_SHADOW}`}
       >
         <span

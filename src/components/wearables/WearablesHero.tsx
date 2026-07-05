@@ -1,5 +1,6 @@
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { WearablesCarousel } from "./WearablesCarousel";
 
 const WEARABLES_BG_GRADIENT =
   "linear-gradient(260.505deg, rgba(255, 255, 255, 0.12) 0.12143%, rgba(255, 255, 255, 0.6) 44.084%, rgba(255, 255, 255, 0) 113.37%)";
@@ -100,6 +101,8 @@ export function WearablesHero() {
           </p>
         </div>
 
+        <WearablesCarousel />
+
         {/* Foreground image 163 with gradient overlay */}
         <div
           className="pointer-events-none absolute top-[-37px] left-0 h-[876px] w-[1440px]"
@@ -194,6 +197,8 @@ export function WearablesHero() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black" />
         </div>
+
+        <WearablesCarousel />
 
         <div className="relative z-10 flex w-full flex-col items-start gap-[20px] px-[24px] pt-[104px] pb-[64px]">
           {/* Title */}

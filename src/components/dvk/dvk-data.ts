@@ -39,3 +39,43 @@ export const PRIMARY_CTA_INSET =
 
 export const CORNER_LEFT = "/hero/corner-tag-1.svg";
 export const CORNER_RIGHT = "/hero/corner-tag-2.svg";
+
+export type SpecCardType = {
+  title: string;
+  items: string[];
+  accent?: boolean;
+};
+
+export const SPEC_CARDS: SpecCardType[] = [
+  {
+    title: "Memory",
+    items: ["512KB SRAM", "8MB Flash", "External SPI Support"],
+  },
+  {
+    title: "Wireless",
+    items: ["Bluetooth 5.0 LE", "802.15.4 Ready", "Onboard Antenna"],
+  },
+  {
+    title: "Sensors",
+    accent: true,
+    items: [
+      "I2S Digital Mic",
+      "Analog Mic",
+      "3-Axis Accelerometer",
+      "Ambient Light Sensor",
+    ],
+  },
+  {
+    title: "Debug Ports",
+    items: ["USB-C Programming", "10-Pin JTAG", "UART Console", "GPIO Breakout"],
+  },
+  {
+    title: "Interfaces",
+    items: [
+      "SPI, I2C, UART",
+      "Camera Connector",
+      "Programmable LEDs",
+      "Button Inputs",
+    ],
+  },
+];

@@ -1,7 +1,8 @@
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { DvkHero } from "./DvkHero";
-import { DvkHardwareStack, SPEC_CARDS } from "./DvkHardwareStack";
+import { DvkHardwareStack } from "./DvkHardwareStack";
+import { SPEC_CARDS } from "./dvk-data";
 import { DvkDemos } from "./DvkDemos";
 import { DEMO_CARDS } from "./DvkDemosCards";
 import { DvkModelForge } from "./DvkModelForge";

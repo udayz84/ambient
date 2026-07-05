@@ -28,7 +28,7 @@ function MotionImage() {
           src={CHIP_IMG}
           alt=""
           aria-hidden
-          className="absolute left-[-21.85%] top-[-21.61%] h-[254.77%] w-[256.59%] max-w-none"
+          className="absolute left-[-21.85%] top-[-21.61%] h-[254.77%] w-[256.59%] max-w-none mix-blend-screen"
         />
       </div>
       <img
@@ -49,7 +49,7 @@ function VisionImage() {
           src={CHIP_IMG}
           alt=""
           aria-hidden
-          className="absolute left-[-124.32%] top-[-26.4%] h-[264.72%] w-[239.65%] max-w-none"
+          className="absolute left-[-124.32%] top-[-26.4%] h-[264.72%] w-[239.65%] max-w-none mix-blend-screen"
         />
       </div>
       <img
@@ -70,7 +70,7 @@ function SoundImage() {
           src={CHIP_IMG}
           alt=""
           aria-hidden
-          className="absolute left-[-16.41%] top-[-131.38%] h-[254.27%] w-[240.1%] max-w-none"
+          className="absolute left-[-16.41%] top-[-131.38%] h-[254.27%] w-[240.1%] max-w-none mix-blend-screen"
         />
       </div>
       <div className="pointer-events-none absolute left-[258.62px] top-[7.38px] h-[45.468px] w-[42.073px] rounded-tl-[762.93px] rounded-tr-[762.93px] bg-[#f0f0f0]" />
@@ -86,7 +86,7 @@ function PredictiveImage() {
           src={CHIP_IMG}
           alt=""
           aria-hidden
-          className="absolute left-[-125.17%] top-[-135.5%] h-[259.87%] w-[240.52%] max-w-none"
+          className="absolute left-[-125.17%] top-[-135.5%] h-[259.87%] w-[240.52%] max-w-none mix-blend-screen"
         />
       </div>
       <div className="pointer-events-none absolute left-[291.15px] top-[128.77px] h-[24.067px] w-[10.309px] rounded-[1.714px] bg-[#d9d9d9]" />

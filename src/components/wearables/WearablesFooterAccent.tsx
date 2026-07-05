@@ -85,7 +85,7 @@ function CtaPanel({ data }: { data: PanelData }) {
           {/* Title with frame */}
           <div className="relative h-[108px] w-full">
             <p
-              className={`${gilroyMedium.className} absolute top-[7.03px] left-1/2 w-[473.877px] -translate-x-1/2 bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent whitespace-nowrap not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} absolute top-[7.03px] left-1/2 w-[473.877px] -translate-x-1/2 bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: TITLE_GRADIENT,
                 WebkitBackgroundClip: "text",

@@ -279,7 +279,7 @@ function CarouselChipItem({
 function PlatformScaleStatPanel({ product }: { product: GpxProduct }) {
   return (
     <div
-      className="absolute top-[813px] left-1/2 flex w-[500px] max-md:w-[calc(100%-32px)] -translate-x-1/2 items-center gap-[32px] bg-[rgba(255,255,255,0.05)] border-[0.5px] border-solid border-[rgba(255,255,255,0.15)] px-[10px]"
+      className="absolute top-[813px] left-1/2 flex w-[500px] max-md:w-[calc(100%-32px)] -translate-x-1/2 items-center gap-[32px] backdrop-blur-[6px] bg-white/[0.02] border-[0.5px] border-solid border-[rgba(255,255,255,0.15)] px-[10px]"
       data-node-id="2379:641"
     >
       <div
