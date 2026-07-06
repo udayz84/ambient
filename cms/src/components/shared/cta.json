@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_shared_ctas",
+  "info": {
+    "displayName": "CTA",
+    "description": "Call-to-action with optional icon"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "href": {
+      "type": "string",
+      "required": true
+    },
+    "dot_icon": {
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

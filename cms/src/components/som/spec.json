@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_som_specs", "info": { "displayName": "Spec", "description": "SOM module spec" }, "options": {}, "attributes": { "label": { "type": "string", "required": true }, "value": { "type": "string" } } }

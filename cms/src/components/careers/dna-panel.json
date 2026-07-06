@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_careers_dna_panels", "info": { "displayName": "DNA Panel", "description": "Careers DNA panel" }, "options": {}, "attributes": { "title": { "type": "string", "required": true }, "description": { "type": "text" } } }

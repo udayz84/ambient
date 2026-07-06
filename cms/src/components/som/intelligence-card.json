@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_som_intelligence_cards", "info": { "displayName": "Intelligence Card", "description": "SOM intelligence card" }, "options": {}, "attributes": { "title": { "type": "string", "required": true }, "description": { "type": "text" } } }

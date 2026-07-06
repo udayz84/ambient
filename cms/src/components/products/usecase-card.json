@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_products_usecase_cards", "info": { "displayName": "Use Case Card", "description": "Products use case card" }, "options": {}, "attributes": { "title": { "type": "string", "required": true }, "description": { "type": "text" } } }

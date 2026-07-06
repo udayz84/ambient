@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_careers_best_works", "info": { "displayName": "Best Work", "description": "Careers best work section" }, "options": {}, "attributes": { "heading": { "type": "string", "required": true }, "cards": { "type": "component", "repeatable": true, "component": "careers.work-card" } } }

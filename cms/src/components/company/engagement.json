@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_company_engagements", "info": { "displayName": "Engagement", "description": "Company engagement section" }, "options": {}, "attributes": { "background_image": { "type": "media", "multiple": false }, "cards": { "type": "component", "repeatable": true, "component": "company.engagement-card" } } }

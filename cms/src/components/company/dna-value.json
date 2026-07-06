@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_company_dna_values", "info": { "displayName": "DNA Value", "description": "Company DNA value card" }, "options": {}, "attributes": { "title": { "type": "string", "required": true }, "description": { "type": "text" } } }

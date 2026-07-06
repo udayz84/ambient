@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_tech_mode_cards", "info": { "displayName": "Mode Card", "description": "AI mode description card" }, "options": {}, "attributes": { "title": { "type": "string", "required": true }, "bullets": { "type": "text" } } }

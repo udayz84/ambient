@@ -1,0 +1,55 @@
+﻿{
+  "kind": "collectionType",
+  "collectionName": "jobs",
+  "info": {
+    "singularName": "job",
+    "pluralName": "jobs",
+    "displayName": "Job",
+    "description": "Career open role listing"
+  },
+  "options": { "draftAndPublish": true },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "department": {
+      "type": "enumeration",
+      "enum": ["hardware", "software", "research"],
+      "required": true
+    },
+    "location": {
+      "type": "enumeration",
+      "enum": ["san_francisco", "remote"],
+      "required": true
+    },
+    "employment_type": {
+      "type": "enumeration",
+      "enum": ["full_time", "part_time", "contract"],
+      "default": "full_time"
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
+    },
+    "apply_url": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": false
+    },
+    "posted_date": {
+      "type": "date",
+      "required": true
+    }
+  }
+}

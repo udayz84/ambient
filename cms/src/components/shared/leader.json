@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_shared_leaders",
+  "info": {
+    "displayName": "Leader",
+    "description": "Team member or advisor"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "bio_paragraphs": {
+      "type": "text"
+    },
+    "photo": {
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "linkedin_url": {
+      "type": "string"
+    }
+  }
+}

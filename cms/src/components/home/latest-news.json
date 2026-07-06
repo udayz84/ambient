@@ -1,0 +1,11 @@
+﻿{
+  "collectionName": "components_home_latest_news",
+  "info": { "displayName": "Latest News", "description": "Homepage latest news section" },
+  "options": {},
+  "attributes": {
+    "heading": { "type": "string", "required": true },
+    "subtitle": { "type": "text" },
+    "cta_label": { "type": "string" },
+    "cta_href": { "type": "string" }
+  }
+}

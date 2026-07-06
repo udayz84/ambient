@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_contact_form_tracks", "info": { "displayName": "Form Track", "description": "Contact form track option" }, "options": {}, "attributes": { "label": { "type": "string", "required": true }, "description": { "type": "text" }, "icon": { "type": "media", "multiple": false } } }

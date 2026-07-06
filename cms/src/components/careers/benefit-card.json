@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_careers_benefit_cards", "info": { "displayName": "Benefit Card", "description": "Careers benefit card" }, "options": {}, "attributes": { "icon": { "type": "media", "multiple": false }, "title": { "type": "string", "required": true }, "description": { "type": "text" } } }

@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_products_feature_cards", "info": { "displayName": "Feature Card", "description": "Products feature card" }, "options": {}, "attributes": { "title": { "type": "string", "required": true }, "description": { "type": "text" }, "icon": { "type": "media", "multiple": false } } }

@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_products_alwayson_stats", "info": { "displayName": "Always On Stat", "description": "Always-on mode statistic" }, "options": {}, "attributes": { "title_lines": { "type": "text", "required": true }, "badge": { "type": "string" } } }

@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_developer_copilots_groups", "info": { "displayName": "Copilots", "description": "Developer copilots section" }, "options": {}, "attributes": { "heading": { "type": "string", "required": true }, "subtitle": { "type": "text" }, "copilots": { "type": "component", "repeatable": true, "component": "developer.copilot" } } }

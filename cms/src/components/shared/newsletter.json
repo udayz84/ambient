@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_shared_newsletters",
+  "info": {
+    "displayName": "Newsletter",
+    "description": "Newsletter signup block"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true,
+      "default": "Want to stay in the forefront of AI tech."
+    },
+    "subtitle": {
+      "type": "text",
+      "required": true
+    },
+    "input_placeholder": {
+      "type": "string",
+      "required": true,
+      "default": "Your Email ID"
+    },
+    "button_label": {
+      "type": "string",
+      "required": true,
+      "default": "SUBSCRIBE"
+    },
+    "show_on_paths": {
+      "type": "json"
+    },
+    "texture_image": {
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

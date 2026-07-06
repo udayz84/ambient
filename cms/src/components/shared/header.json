@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_shared_headers",
+  "info": {
+    "displayName": "Header",
+    "description": "Main navigation bar"
+  },
+  "options": {},
+  "attributes": {
+    "nav_items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.nav-item",
+      "required": true,
+      "min": 1
+    },
+    "cta_label": {
+      "type": "string",
+      "required": true,
+      "default": "GET IN TOUCH"
+    },
+    "cta_href": {
+      "type": "string",
+      "required": true,
+      "default": "/contact"
+    },
+    "cta_dot_icon": {
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_products_modelforge_steps", "info": { "displayName": "ModelForge Step", "description": "ModelForge pipeline step" }, "options": {}, "attributes": { "step": { "type": "string", "required": true }, "description": { "type": "text" } } }

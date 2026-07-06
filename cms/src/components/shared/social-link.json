@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_shared_social_links",
+  "info": {
+    "displayName": "Social Link",
+    "description": "Social media platform link"
+  },
+  "options": {},
+  "attributes": {
+    "platform": {
+      "type": "string",
+      "required": true
+    },
+    "href": {
+      "type": "string",
+      "required": true
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}

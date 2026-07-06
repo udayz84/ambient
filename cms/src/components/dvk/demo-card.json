@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_dvk_demo_cards", "info": { "displayName": "Demo Card", "description": "DVK demo card" }, "options": {}, "attributes": { "title_line_1": { "type": "string" }, "title_line_2": { "type": "string" }, "description": { "type": "text" }, "image": { "type": "media", "multiple": false }, "image_overlay": { "type": "media", "multiple": false } } }

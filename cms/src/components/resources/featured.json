@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_resources_featureds", "info": { "displayName": "Featured", "description": "Resources featured section" }, "options": {}, "attributes": { "heading": { "type": "string", "default": "Featured Resources" }, "cards": { "type": "component", "repeatable": true, "component": "resources.featured-card" } } }

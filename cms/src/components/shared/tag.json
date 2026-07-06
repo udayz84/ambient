@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_tags",
+  "info": {
+    "displayName": "Tag",
+    "description": "Eyebrow label above headings"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    }
+  }
+}

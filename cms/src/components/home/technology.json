@@ -1,0 +1,11 @@
+﻿{
+  "collectionName": "components_home_technologies",
+  "info": { "displayName": "Technology", "description": "Homepage technology section" },
+  "options": {},
+  "attributes": {
+    "heading": { "type": "string", "required": true },
+    "tag": { "type": "component", "repeatable": false, "component": "shared.tag" },
+    "features": { "type": "component", "repeatable": true, "component": "home.tech-feature" },
+    "background_visual": { "type": "media", "multiple": false }
+  }
+}

@@ -48,6 +48,7 @@ function ChipImage({ className }: { className?: string }) {
         alt="Sparsh AI Module"
         className="absolute left-1/2 top-1/2 h-[500.691px] w-[482.876px] -translate-x-1/2 -translate-y-1/2 max-w-none object-contain scale-[0.85]"
       />
+      <div className="pointer-events-none absolute bottom-0 left-[-20%] right-[-20%] h-[150px] bg-gradient-to-t from-black via-black/80 to-transparent z-10" />
     </div>
   );
 }

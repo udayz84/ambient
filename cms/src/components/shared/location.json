@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_shared_locations",
+  "info": {
+    "displayName": "Location",
+    "description": "Office location"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "address": {
+      "type": "text",
+      "required": true
+    },
+    "indicator_icon": {
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

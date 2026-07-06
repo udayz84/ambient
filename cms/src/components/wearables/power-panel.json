@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_wearables_power_panels", "info": { "displayName": "Power Panel", "description": "Power consumption panel" }, "options": {}, "attributes": { "label": { "type": "string", "required": true }, "value": { "type": "string" }, "description": { "type": "text" } } }

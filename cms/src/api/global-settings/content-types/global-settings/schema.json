@@ -1,0 +1,20 @@
+﻿{
+  "kind": "singleType",
+  "collectionName": "global_settings",
+  "info": {
+    "singularName": "global-settings",
+    "pluralName": "global-settings",
+    "displayName": "Global Settings",
+    "description": "Site-wide brand, header, footer, newsletter, contact details, and default SEO"
+  },
+  "options": { "draftAndPublish": false },
+  "pluginOptions": {},
+  "attributes": {
+    "brand": { "type": "component", "repeatable": false, "component": "shared.brand", "required": true },
+    "header": { "type": "component", "repeatable": false, "component": "shared.header", "required": true },
+    "footer": { "type": "component", "repeatable": false, "component": "shared.footer", "required": true },
+    "newsletter": { "type": "component", "repeatable": false, "component": "shared.newsletter" },
+    "contact_details": { "type": "component", "repeatable": false, "component": "shared.contact-details" },
+    "default_seo": { "type": "component", "repeatable": false, "component": "shared.seo", "required": true }
+  }
+}

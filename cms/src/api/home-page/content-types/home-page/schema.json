@@ -1,0 +1,23 @@
+﻿{
+  "kind": "singleType",
+  "collectionName": "home_pages",
+  "info": {
+    "singularName": "home-page",
+    "pluralName": "home-pages",
+    "displayName": "Home Page",
+    "description": "Homepage with hero, measured proof, technology, platform scale, applications, developer platform, ecosystem, and latest news"
+  },
+  "options": { "draftAndPublish": true },
+  "pluginOptions": {},
+  "attributes": {
+    "hero": { "type": "component", "repeatable": false, "component": "home.hero" },
+    "measured_proof": { "type": "component", "repeatable": false, "component": "home.measured-proof" },
+    "technology": { "type": "component", "repeatable": false, "component": "home.technology" },
+    "platform_scale": { "type": "component", "repeatable": false, "component": "home.platform-scale" },
+    "applications": { "type": "component", "repeatable": false, "component": "home.applications" },
+    "developer_platform": { "type": "component", "repeatable": false, "component": "home.developer-platform" },
+    "ecosystem": { "type": "component", "repeatable": false, "component": "home.ecosystem" },
+    "latest_news": { "type": "component", "repeatable": false, "component": "home.latest-news" },
+    "seo": { "type": "component", "repeatable": false, "component": "shared.seo" }
+  }
+}

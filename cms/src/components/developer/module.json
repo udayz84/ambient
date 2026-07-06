@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_developer_modules", "info": { "displayName": "Module", "description": "Developer module item" }, "options": {}, "attributes": { "image": { "type": "media", "multiple": false }, "title": { "type": "string", "required": true }, "cta_label": { "type": "string" }, "cta_href": { "type": "string" } } }

@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_som_ecosystem_cards", "info": { "displayName": "Ecosystem Card", "description": "SOM ecosystem product card" }, "options": {}, "attributes": { "title": { "type": "string", "required": true }, "subtitle": { "type": "string" }, "status": { "type": "string" }, "icon": { "type": "media", "multiple": false }, "cta_label": { "type": "string" } } }

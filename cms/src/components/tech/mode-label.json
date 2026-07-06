@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_tech_mode_labels", "info": { "displayName": "Mode Label", "description": "AI mode toggle label" }, "options": {}, "attributes": { "label": { "type": "string", "required": true }, "sublabel": { "type": "string" } } }

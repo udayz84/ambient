@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_products_start_cards", "info": { "displayName": "Start Card", "description": "Start building CTA card" }, "options": {}, "attributes": { "title_lines": { "type": "text", "required": true }, "description": { "type": "text" }, "cta_label": { "type": "string" }, "cta_href": { "type": "string" } } }

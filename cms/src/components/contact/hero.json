@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_contact_heroes", "info": { "displayName": "Hero", "description": "Contact hero section" }, "options": {}, "attributes": { "title": { "type": "string", "required": true }, "subtitle": { "type": "text" }, "background_image": { "type": "media", "multiple": false } } }

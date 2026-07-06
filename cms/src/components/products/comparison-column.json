@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_products_comparison_columns", "info": { "displayName": "Comparison Column", "description": "Comparison table column" }, "options": {}, "attributes": { "label": { "type": "string", "required": true }, "values": { "type": "text", "required": true }, "is_highlighted": { "type": "boolean", "default": false } } }

@@ -1,0 +1,10 @@
+﻿{
+  "collectionName": "components_home_gpx_products",
+  "info": { "displayName": "GPX Product", "description": "Platform scale product" },
+  "options": {},
+  "attributes": {
+    "product_id": { "type": "string" },
+    "label": { "type": "string", "required": true },
+    "description": { "type": "text" }
+  }
+}

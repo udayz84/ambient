@@ -1,0 +1,12 @@
+﻿{
+  "collectionName": "components_home_ecosystems",
+  "info": { "displayName": "Ecosystem", "description": "Homepage ecosystem section" },
+  "options": {},
+  "attributes": {
+    "heading": { "type": "string", "required": true },
+    "subtitle": { "type": "text" },
+    "silicon_partners": { "type": "component", "repeatable": true, "component": "home.partner" },
+    "development_partners": { "type": "component", "repeatable": true, "component": "home.partner" },
+    "cta": { "type": "component", "repeatable": false, "component": "shared.cta" }
+  }
+}

@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_products_usecase_tabs", "info": { "displayName": "Use Case Tab", "description": "Products use case tab" }, "options": {}, "attributes": { "label": { "type": "string", "required": true }, "image": { "type": "media", "multiple": false } } }

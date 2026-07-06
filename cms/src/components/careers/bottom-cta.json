@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_careers_bottom_ctas", "info": { "displayName": "Bottom CTA", "description": "Careers bottom CTA section" }, "options": {}, "attributes": { "heading": { "type": "string", "required": true }, "buttons": { "type": "component", "repeatable": true, "component": "shared.button" }, "background_texture": { "type": "media", "multiple": false } } }

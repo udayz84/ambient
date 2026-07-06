@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_company_heroes", "info": { "displayName": "Hero", "description": "Company hero section" }, "options": {}, "attributes": { "title": { "type": "string", "required": true }, "body": { "type": "text" }, "background_image": { "type": "media", "multiple": false } } }

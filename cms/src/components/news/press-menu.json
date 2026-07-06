@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_news_press_menus", "info": { "displayName": "Press Menu", "description": "Press kit menu item" }, "options": {}, "attributes": { "label": { "type": "string", "required": true } } }

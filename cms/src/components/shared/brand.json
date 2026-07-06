@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_shared_brands",
+  "info": {
+    "displayName": "Brand",
+    "description": "Site brand identity"
+  },
+  "options": {},
+  "attributes": {
+    "site_name": {
+      "type": "string",
+      "required": true,
+      "default": "Ambient Scientific",
+      "maxLength": 100
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "logo_mobile": {
+      "type": "media",
+      "multiple": false
+    },
+    "favicon": {
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}

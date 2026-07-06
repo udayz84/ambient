@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_apps_articles", "info": { "displayName": "Articles", "description": "Applications articles section" }, "options": {}, "attributes": { "heading": { "type": "string", "required": true }, "articles": { "type": "component", "repeatable": true, "component": "apps.article-card" } } }

@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_developer_codes", "info": { "displayName": "Code Section", "description": "Developer code section" }, "options": {}, "attributes": { "heading": { "type": "string", "required": true }, "subtitle": { "type": "text" }, "code_snippet": { "type": "richtext" } } }

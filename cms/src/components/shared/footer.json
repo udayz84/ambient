@@ -1,0 +1,42 @@
+{
+  "collectionName": "components_shared_footers",
+  "info": {
+    "displayName": "Footer",
+    "description": "Site-wide footer"
+  },
+  "options": {},
+  "attributes": {
+    "nav_sections": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.footer-section"
+    },
+    "social_links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.social-link"
+    },
+    "legal_links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.link"
+    },
+    "copyright_text": {
+      "type": "string",
+      "required": true,
+      "default": "© 2026 Ambient AI. All rights reserved."
+    },
+    "crafted_by_text": {
+      "type": "string",
+      "default": "Carefully crafted by"
+    },
+    "crafted_by_logo": {
+      "type": "media",
+      "multiple": false
+    },
+    "background_image": {
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

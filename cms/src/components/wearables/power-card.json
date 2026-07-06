@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_wearables_power_cards", "info": { "displayName": "Power Card", "description": "Power consumption card" }, "options": {}, "attributes": { "badge": { "type": "string" }, "panels": { "type": "component", "repeatable": true, "component": "wearables.power-panel" } } }

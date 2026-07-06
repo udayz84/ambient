@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_contact_schedule_cards", "info": { "displayName": "Schedule Card", "description": "Schedule consultation card" }, "options": {}, "attributes": { "tag": { "type": "string" }, "title": { "type": "string", "required": true }, "description": { "type": "text" }, "cta_label": { "type": "string" }, "image": { "type": "media", "multiple": false } } }

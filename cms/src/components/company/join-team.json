@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_company_join_teams", "info": { "displayName": "Join Team", "description": "Company join team section" }, "options": {}, "attributes": { "title": { "type": "string", "required": true }, "description": { "type": "text" }, "cta_label": { "type": "string" }, "cta_href": { "type": "string" }, "image": { "type": "media", "multiple": false } } }

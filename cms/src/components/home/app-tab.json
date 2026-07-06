@@ -1,0 +1,10 @@
+﻿{
+  "collectionName": "components_home_app_tabs",
+  "info": { "displayName": "App Tab", "description": "Application tab" },
+  "options": {},
+  "attributes": {
+    "label": { "type": "string", "required": true },
+    "hero_image": { "type": "media", "multiple": false },
+    "watermark_text": { "type": "string" }
+  }
+}

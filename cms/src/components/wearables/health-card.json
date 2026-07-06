@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_wearables_health_cards", "info": { "displayName": "Health Card", "description": "Health monitoring card" }, "options": {}, "attributes": { "badge": { "type": "string" }, "title": { "type": "string", "required": true }, "body": { "type": "text" }, "cta_label": { "type": "string" }, "footer": { "type": "text" } } }

@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_company_partners", "info": { "displayName": "Partner", "description": "Technology partner" }, "options": {}, "attributes": { "name": { "type": "string" }, "logo": { "type": "media", "multiple": false } } }

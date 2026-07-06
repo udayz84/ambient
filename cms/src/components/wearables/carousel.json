@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_wearables_carousels", "info": { "displayName": "Carousel", "description": "Wearables marquee carousel" }, "options": {}, "attributes": { "images": { "type": "media", "multiple": true } } }

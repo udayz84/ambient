@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_products_spec_callouts", "info": { "displayName": "Spec Callout", "description": "Full picture spec callout" }, "options": {}, "attributes": { "label": { "type": "string", "required": true }, "icon": { "type": "media", "multiple": false } } }
