@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { mediaUrl } from "@/lib/strapi";
 import { dmMono, gilroyMedium, gilroySemiBold, interRegular, interSemiBold } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { SILICON_PARTNERS } from "../ecosystem/ecosystem-data";
@@ -95,7 +96,15 @@ function SectionWrap({
 }
 
 /* ---------------------------------- HERO ---------------------------------- */
-function CompanyHeroMobile() {
+const FALLBACK_HERO_TITLE = "A new paradigm for efficient AI compute";
+const FALLBACK_HERO_BODY =
+  "We build energy-aware, programmable, mixed-signal AI processors that unlock orders-of-magnitude improvements in performance-per-watt, enabling scalable intelligence across edge, enterprise, and cloud.";
+const FALLBACK_HERO_BG = "/mobile/company/hero.png";
+
+function CompanyHeroMobile({ data }: { data?: any }) {
+  const title = (data?.title as string) || FALLBACK_HERO_TITLE;
+  const body = (data?.body as string) || FALLBACK_HERO_BODY;
+  const bgSrc = mediaUrl(data?.background_image) || FALLBACK_HERO_BG;
   return (
     <section
       className="relative w-full overflow-hidden bg-black pt-[108px]"
@@ -113,7 +122,7 @@ function CompanyHeroMobile() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/mobile/company/hero.png"
+            src={bgSrc}
             alt=""
             className="block w-full"
           />
@@ -135,7 +144,7 @@ function CompanyHeroMobile() {
           style={{ backgroundImage: gradient("100.882deg") }}
           data-node-id="3244:5536"
         >
-          A new paradigm for efficient AI compute
+          {title}
         </h1>
 
         {/* 3244:5541 — body (x28 y130 w336) */}
@@ -143,9 +152,7 @@ function CompanyHeroMobile() {
           className={`${interRegular.className} absolute left-[28px] top-[130px] w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
           data-node-id="3244:5541"
         >
-          We build energy-aware, programmable, mixed-signal AI processors that
-          unlock orders-of-magnitude improvements in performance-per-watt,
-          enabling scalable intelligence across edge, enterprise, and cloud.
+          {body}
         </p>
       </div>
     </section>
@@ -153,7 +160,13 @@ function CompanyHeroMobile() {
 }
 
 /* -------------------------------- MISSION --------------------------------- */
-const MISSION_STATS = [
+const FALLBACK_MISSION_HEADING = "A mission dictated by physics";
+const FALLBACK_MISSION_BODY_1 =
+  "The era of patching legacy compute is over. Forcing next-generation AI through decades-old digital bottlenecks only guarantees massive power drain and wrecked economics. Ambient Scientific is confronting this physical wall by re-architecting compute from the metal up, reinventing analog circuits, native instruction sets, and developer frameworks.";
+const FALLBACK_MISSION_BODY_2 =
+  "The result is an architecture that unlocks breakthrough AI performance while requiring a fraction of the power consumption and silicon area. We exist to make intelligence truly ambient: an invisible, ubiquitous foundation built to endure for as long as the era of AI lasts, from the smallest edge sensor to the largest hyperscale cloud server.";
+
+const MISSION_STATS_FALLBACK = [
   {
     value: "100+",
     label: "Employees",
@@ -172,7 +185,24 @@ const MISSION_STATS = [
   },
 ];
 
-function CompanyMissionMobile() {
+function CompanyMissionMobile({ data }: { data?: any }) {
+  const heading = (data?.heading as string) || FALLBACK_MISSION_HEADING;
+  const body1 = (data?.body_paragraph_1 as string) || FALLBACK_MISSION_BODY_1;
+  const body2 = (data?.body_paragraph_2 as string) || FALLBACK_MISSION_BODY_2;
+
+  const strapiStats = Array.isArray(data?.stats) ? data.stats : null;
+  const stats =
+    strapiStats && strapiStats.length > 0
+      ? strapiStats.map((s: any, i: number) => {
+          const fallback = MISSION_STATS_FALLBACK[i] ?? MISSION_STATS_FALLBACK[MISSION_STATS_FALLBACK.length - 1];
+          return {
+            value: (s?.value as string) || fallback.value,
+            label: (s?.label as string) || fallback.label,
+            description: (s?.description as string) || fallback.description,
+          };
+        })
+      : MISSION_STATS_FALLBACK;
+
   return (
     <SectionWrap aria-label="A mission dictated by physics" className="!py-[40px]">
       <div
@@ -181,30 +211,18 @@ function CompanyMissionMobile() {
       >
         <Corners />
         <SectionTitle deg="104.363deg" className="self-start text-left">
-          A mission dictated by physics
+          {heading}
         </SectionTitle>
 
         <div
           className={`${interRegular.className} flex flex-col gap-[16px] text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-70 not-italic`}
         >
-          <p>
-            The era of patching legacy compute is over. Forcing next-generation AI
-            through decades-old digital bottlenecks only guarantees massive power
-            drain and wrecked economics. Ambient Scientific is confronting this
-            physical wall by re-architecting compute from the metal up, reinventing
-            analog circuits, native instruction sets, and developer frameworks.
-          </p>
-          <p>
-            The result is an architecture that unlocks breakthrough AI performance
-            while requiring a fraction of the power consumption and silicon area.
-            We exist to make intelligence truly ambient: an invisible, ubiquitous
-            foundation built to endure for as long as the era of AI lasts, from the
-            smallest edge sensor to the largest hyperscale cloud server.
-          </p>
+          <p>{body1}</p>
+          <p>{body2}</p>
         </div>
 
         <div className="flex flex-col gap-[20px]">
-          {MISSION_STATS.map((stat) => (
+          {stats.map((stat: any) => (
             <div key={stat.label} className="flex flex-col gap-[6px] border-l border-white/15 pl-[16px]">
               <div className="flex items-baseline gap-[12px]">
                 <span className={`${gilroySemiBold.className} text-[30px] leading-[34px] font-semibold text-white not-italic`}>
@@ -226,7 +244,17 @@ function CompanyMissionMobile() {
 }
 
 /* ------------------------------- LEADERSHIP ------------------------------- */
-function CompanyLeadershipMobile() {
+const FALLBACK_LEADERSHIP_HEADING = "Our minds powering the revolution";
+const FALLBACK_LEADERSHIP_SUBTITLE =
+  "We're building programmable AI processors that deliver breakthrough performance and power efficiency from edge to cloud.";
+
+function CompanyLeadershipMobile({ data }: { data?: any }) {
+  const heading = (data?.heading as string) || FALLBACK_LEADERSHIP_HEADING;
+  const subtitle = (data?.subtitle as string) || FALLBACK_LEADERSHIP_SUBTITLE;
+  const team = Array.isArray(data?.team) ? data.team : null;
+
+  const teamMembers = team && team.length > 0 ? team : null;
+
   return (
     <section
       className="relative w-full overflow-hidden bg-black pb-[56px]"
@@ -247,19 +275,21 @@ function CompanyLeadershipMobile() {
             className={`${gilroyMedium.className} absolute inset-x-0 top-[7px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
             style={{ backgroundImage: gradient("107.454deg") }}
           >
-            Our minds powering the revolution
+            {heading}
           </h2>
         </div>
         <p
           className={`${interRegular.className} mx-auto mt-[10px] w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
         >
-          We&apos;re building programmable AI processors that deliver
-          breakthrough performance and power efficiency from edge to cloud.
+          {subtitle}
         </p>
       </div>
 
       <div className="mt-[34px]">
-        <LeadershipCarousel members={LEADERSHIP_TEAM} variant="leadership" />
+        <LeadershipCarousel
+          members={teamMembers ?? LEADERSHIP_TEAM}
+          variant="leadership"
+        />
       </div>
 
       {/* ===== Advisory board ===== */}
@@ -288,6 +318,10 @@ function CompanyLeadershipMobile() {
 }
 
 /* ---------------------------------- DNA ----------------------------------- */
+const FALLBACK_DNA_HEADING = "Driven by physics. Defined by our DNA.";
+const FALLBACK_DNA_SUBTITLE =
+  "We build from first principles and validate everything in silicon.";
+
 const DNA_CARDS = [
   {
     title: "Grounded in Science",
@@ -337,7 +371,22 @@ function DnaCard({
   );
 }
 
-function CompanyDnaMobile() {
+function CompanyDnaMobile({ data }: { data?: any }) {
+  const heading = (data?.heading as string) || FALLBACK_DNA_HEADING;
+  const subtitle = (data?.subtitle as string) || FALLBACK_DNA_SUBTITLE;
+
+  const strapiCards = Array.isArray(data?.value_cards) ? data.value_cards : null;
+  const cards =
+    strapiCards && strapiCards.length > 0
+      ? strapiCards.map((c: any, i: number) => {
+          const fallback = DNA_CARDS[i] ?? DNA_CARDS[DNA_CARDS.length - 1];
+          return {
+            title: (c?.title as string) || fallback.title,
+            description: (c?.description as string) || fallback.description,
+          };
+        })
+      : DNA_CARDS;
+
   return (
     <section
       className="relative w-full overflow-hidden bg-black pb-[64px]"
@@ -358,20 +407,20 @@ function CompanyDnaMobile() {
             className={`${gilroyMedium.className} absolute inset-x-0 top-[7px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
             style={{ backgroundImage: gradient("107.454deg") }}
           >
-            Driven by physics. Defined by our DNA.
+            {heading}
           </h2>
         </div>
         <p
           className={`${interRegular.className} mx-auto mt-[10px] w-[334px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
         >
-          We build from first principles and validate everything in silicon.
+          {subtitle}
         </p>
       </div>
 
       {/* Cards + background image between pairs */}
       <div className="relative mt-[31px] px-[19px]">
-        <DnaCard card={DNA_CARDS[0]} />
-        <DnaCard card={DNA_CARDS[1]} className="mt-[29px]" />
+        <DnaCard card={cards[0]} />
+        <DnaCard card={cards[1]} className="mt-[29px]" />
 
         <div className="relative">
           {/* Background image 137 — bleeds, sits between the two card pairs */}
@@ -388,8 +437,8 @@ function CompanyDnaMobile() {
           </div>
           <div className="relative z-10">
             <div className="h-[392px]" aria-hidden />
-            <DnaCard card={DNA_CARDS[2]} />
-            <DnaCard card={DNA_CARDS[3]} className="mt-[29px]" />
+            <DnaCard card={cards[2]} />
+            <DnaCard card={cards[3]} className="mt-[29px]" />
           </div>
         </div>
       </div>
@@ -398,7 +447,12 @@ function CompanyDnaMobile() {
 }
 
 /* ------------------------------- ECOSYSTEM -------------------------------- */
-const ECOSYSTEM_COLUMNS = [
+const FALLBACK_ECOSYSTEM_HEADING_LINE_1 = "A globally resilient";
+const FALLBACK_ECOSYSTEM_HEADING_LINE_2 = "ecosystem";
+const FALLBACK_ECOSYSTEM_SUBTITLE =
+  "Backed by Tier-1 foundries and integrated with the world's leading technology distributors and platforms.";
+
+const ECOSYSTEM_COLUMNS_FALLBACK = [
   {
     icon: "/company/ecosystem-icon-footprint.svg",
     title: "Global Footprint",
@@ -413,7 +467,25 @@ const ECOSYSTEM_COLUMNS = [
   },
 ];
 
-function CompanyEcosystemMobile() {
+function CompanyEcosystemMobile({ data }: { data?: any }) {
+  const heading = (data?.heading as string) || "";
+  const subtitle = (data?.subtitle as string) || FALLBACK_ECOSYSTEM_SUBTITLE;
+  const headingLines = heading ? heading.split("\n") : [FALLBACK_ECOSYSTEM_HEADING_LINE_1, FALLBACK_ECOSYSTEM_HEADING_LINE_2];
+
+  const strapiColumns = Array.isArray(data?.columns) ? data.columns : null;
+  const columns =
+    strapiColumns && strapiColumns.length > 0
+      ? strapiColumns.map((c: any, i: number) => {
+          const fallback = ECOSYSTEM_COLUMNS_FALLBACK[i] ?? ECOSYSTEM_COLUMNS_FALLBACK[ECOSYSTEM_COLUMNS_FALLBACK.length - 1];
+          return {
+            icon: mediaUrl(c?.icon) || fallback.icon,
+            title: (c?.title as string) || fallback.title,
+            description: (c?.description as string) || fallback.description,
+          };
+        })
+      : ECOSYSTEM_COLUMNS_FALLBACK;
+  const mapSrc = mediaUrl(data?.map_image) || "/Map.png";
+
   return (
     <section
       className="relative w-full bg-black px-[16px] py-[32px]"
@@ -431,7 +503,12 @@ function CompanyEcosystemMobile() {
             className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
             style={{ backgroundImage: gradient("105.083deg") }}
           >
-            A globally resilient<br />ecosystem
+            {headingLines.map((line, i) => (
+              <span key={i}>
+                {line}
+                {i < headingLines.length - 1 ? <br /> : null}
+              </span>
+            ))}
           </h2>
         </div>
 
@@ -439,8 +516,7 @@ function CompanyEcosystemMobile() {
         <p
           className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
         >
-          Backed by Tier-1 foundries and integrated with the world&apos;s leading
-          technology distributors and platforms.
+          {subtitle}
         </p>
 
         {/* Divider (Line 91) */}
@@ -448,7 +524,7 @@ function CompanyEcosystemMobile() {
 
         {/* Columns */}
         <div className="mt-[24px] flex flex-col gap-[34px]">
-          {ECOSYSTEM_COLUMNS.map((col) => (
+          {columns.map((col: any) => (
             <div key={col.title} className="flex flex-col gap-[12px]">
               <div className="flex items-center gap-[10px]">
                 <Image
@@ -478,7 +554,7 @@ function CompanyEcosystemMobile() {
       {/* Map Image */}
       <div className="relative mt-[30px] -mx-[16px] h-[250px] w-[calc(100%+32px)]">
         <Image
-          src="/Map.png"
+          src={mapSrc}
           alt="Global footprint map"
           fill
           className="object-cover object-top"
@@ -490,7 +566,10 @@ function CompanyEcosystemMobile() {
 }
 
 /* --------------------------- TECHNOLOGY PARTNERS -------------------------- */
-function CompanyTechnologyPartnersMobile() {
+const FALLBACK_TECH_PARTNERS_TITLE = "TECHNOLOGY PARTNERS";
+
+function CompanyTechnologyPartnersMobile({ data }: { data?: any }) {
+  const title = (data?.title as string) || FALLBACK_TECH_PARTNERS_TITLE;
   return (
     <section
       className="relative w-full bg-black"
@@ -508,7 +587,7 @@ function CompanyTechnologyPartnersMobile() {
           }}
           data-node-id="3244:19801"
         >
-          TECHNOLOGY PARTNERS
+          {title}
         </p>
 
         {/* Partner grid — 2x2 logos + Octane centered below, grid lines */}
@@ -640,7 +719,57 @@ function ArticleMetaItem({ children }: { children: string }) {
   );
 }
 
-function CompanyArticlesMobile() {
+function CompanyArticlesMobile({ data }: { data?: any }) {
+  const rawFeatured = data?.featured_article;
+  const featured = rawFeatured
+    ? {
+        category: (rawFeatured.category as string) || COMPANY_FEATURED_ARTICLE.category,
+        title: (rawFeatured.title as string) || COMPANY_FEATURED_ARTICLE.title,
+        excerpt: (rawFeatured.excerpt as string) || COMPANY_FEATURED_ARTICLE.excerpt,
+        date:
+          (rawFeatured.metadata?.date as string) ||
+          (rawFeatured.date as string) ||
+          COMPANY_FEATURED_ARTICLE.metadata.date,
+        totalFunding:
+          (rawFeatured.metadata?.totalFunding as string) ||
+          COMPANY_FEATURED_ARTICLE.metadata.totalFunding,
+        fundingRounds:
+          (rawFeatured.metadata?.fundingRounds as string) ||
+          COMPANY_FEATURED_ARTICLE.metadata.fundingRounds,
+        imageSrc:
+          mediaUrl(rawFeatured.image) || COMPANY_FEATURED_ARTICLE.imageSrc,
+      }
+    : {
+        category: COMPANY_FEATURED_ARTICLE.category,
+        title: COMPANY_FEATURED_ARTICLE.title,
+        excerpt: COMPANY_FEATURED_ARTICLE.excerpt,
+        date: COMPANY_FEATURED_ARTICLE.metadata.date,
+        totalFunding: COMPANY_FEATURED_ARTICLE.metadata.totalFunding,
+        fundingRounds: COMPANY_FEATURED_ARTICLE.metadata.fundingRounds,
+        imageSrc: COMPANY_FEATURED_ARTICLE.imageSrc,
+      };
+
+  const strapiCompact = Array.isArray(data?.compact_articles) ? data.compact_articles : null;
+  const compact =
+    strapiCompact && strapiCompact.length > 0
+      ? strapiCompact.map((c: any, i: number) => {
+          const fallback = COMPANY_COMPACT_ARTICLES[i] ?? COMPANY_COMPACT_ARTICLES[COMPANY_COMPACT_ARTICLES.length - 1];
+          return {
+            nodeId: fallback.nodeId,
+            category: fallback.category,
+            title: (c?.title as string) || fallback.title,
+            excerpt: fallback.excerpt,
+            imageSrc: mediaUrl(c?.image) || fallback.imageSrc,
+          };
+        })
+      : COMPANY_COMPACT_ARTICLES.map((a) => ({
+          nodeId: a.nodeId,
+          category: a.category,
+          title: a.title,
+          excerpt: a.excerpt,
+          imageSrc: a.imageSrc,
+        }));
+
   return (
     <section
       className="relative w-full bg-black"
@@ -654,7 +783,7 @@ function CompanyArticlesMobile() {
           <Corners />
           <div className="relative h-[197px] w-full shrink-0 overflow-hidden">
             <Image
-              src={COMPANY_FEATURED_ARTICLE.imageSrc}
+              src={featured.imageSrc}
               alt=""
               fill
               className="object-cover"
@@ -667,38 +796,32 @@ function CompanyArticlesMobile() {
           </div>
           <div className="flex w-full flex-col gap-[14px]">
             <ArticleChip
-              label={COMPANY_FEATURED_ARTICLE.category}
+              label={featured.category}
               tone="green"
             />
             <div className="flex flex-col gap-[10px]">
               <h3
                 className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
               >
-                {COMPANY_FEATURED_ARTICLE.title}
+                {featured.title}
               </h3>
               <p
                 className={`${interRegular.className} text-[14px] leading-[18px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
               >
-                {COMPANY_FEATURED_ARTICLE.excerpt}
+                {featured.excerpt}
               </p>
             </div>
             <div className="flex flex-col gap-[4px]">
-              <ArticleMetaItem>
-                {COMPANY_FEATURED_ARTICLE.metadata.date}
-              </ArticleMetaItem>
-              <ArticleMetaItem>
-                {COMPANY_FEATURED_ARTICLE.metadata.totalFunding}
-              </ArticleMetaItem>
-              <ArticleMetaItem>
-                {COMPANY_FEATURED_ARTICLE.metadata.fundingRounds}
-              </ArticleMetaItem>
+              <ArticleMetaItem>{featured.date}</ArticleMetaItem>
+              <ArticleMetaItem>{featured.totalFunding}</ArticleMetaItem>
+              <ArticleMetaItem>{featured.fundingRounds}</ArticleMetaItem>
             </div>
           </div>
         </article>
 
         {/* Compact articles */}
         <div className="mt-[24px] flex flex-col gap-[29px]">
-          {COMPANY_COMPACT_ARTICLES.map((article, index) => (
+          {compact.map((article: any, index: number) => (
             <article
               key={article.nodeId}
               className="relative flex w-full flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[24px] pt-[12px] pb-[12px]"
@@ -710,7 +833,7 @@ function CompanyArticlesMobile() {
                 <img
                   src={article.imageSrc}
                   alt=""
-                  className={COMPACT_IMAGE_CROPS[index]}
+                  className={COMPACT_IMAGE_CROPS[index] ?? COMPACT_IMAGE_CROPS[COMPACT_IMAGE_CROPS.length - 1]}
                 />
               </div>
               {/* News — 335px wide, centered */}
@@ -738,7 +861,44 @@ function CompanyArticlesMobile() {
 }
 
 /* ------------------------------- ENGAGEMENT ------------------------------- */
-function CompanyEngagementMobile() {
+function CompanyEngagementMobile({
+  engagement,
+  joinTeam,
+}: {
+  engagement?: any;
+  joinTeam?: any;
+}) {
+  const joinTitle = (joinTeam?.title as string) || COMPANY_JOIN_TEAM.title;
+  const joinDescription = (joinTeam?.description as string) || COMPANY_JOIN_TEAM.description;
+  const joinCtaLabel = (joinTeam?.cta_label as string) || COMPANY_JOIN_TEAM.ctaLabel;
+  const joinCtaHref = (joinTeam?.cta_href as string) || COMPANY_JOIN_TEAM.ctaHref;
+  const joinImageSrc = mediaUrl(joinTeam?.image) || COMPANY_JOIN_TEAM.imageSrc;
+
+  const strapiCards = Array.isArray(engagement?.cards) ? engagement.cards : null;
+  const cards =
+    strapiCards && strapiCards.length > 0
+      ? strapiCards.map((c: any, i: number) => {
+          const fallback = COMPANY_ENGAGEMENT_CARDS[i] ?? COMPANY_ENGAGEMENT_CARDS[COMPANY_ENGAGEMENT_CARDS.length - 1];
+          return {
+            nodeId: fallback.nodeId,
+            titleLines: ((c?.title as string) || fallback.titleLines.join(" ")).split("\n"),
+            description: (c?.description as string) || fallback.description,
+            ctaLabel: (c?.cta_label as string) || fallback.ctaLabel,
+            ctaHref: (c?.cta_href as string) || fallback.ctaHref,
+            imageSrc: mediaUrl(c?.image) || fallback.imageSrc,
+            contentTop: fallback.contentTop,
+          };
+        })
+      : COMPANY_ENGAGEMENT_CARDS.map((c) => ({
+          nodeId: c.nodeId,
+          titleLines: [...c.titleLines],
+          description: c.description,
+          ctaLabel: c.ctaLabel,
+          ctaHref: c.ctaHref,
+          imageSrc: c.imageSrc,
+          contentTop: c.contentTop,
+        }));
+
   return (
     <SectionWrap aria-label="Join our team and partnerships" className="!pb-[80px]">
       {/* Join team */}
@@ -746,7 +906,7 @@ function CompanyEngagementMobile() {
         <Corners />
         <div className="relative h-[160px] w-full overflow-hidden">
           <Image
-            src={COMPANY_JOIN_TEAM.imageSrc}
+            src={joinImageSrc}
             alt=""
             fill
             className="object-cover"
@@ -756,20 +916,20 @@ function CompanyEngagementMobile() {
         </div>
         <div className="flex flex-col gap-[12px] p-[22px] pt-0">
           <h3 className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic`}>
-            {COMPANY_JOIN_TEAM.title}
+            {joinTitle}
           </h3>
           <p className={`${interRegular.className} text-[13px] leading-[20px] font-normal text-white opacity-70 not-italic`}>
-            {COMPANY_JOIN_TEAM.description}
+            {joinDescription}
           </p>
           <div className="mt-[4px]">
-            <GreenCta href={COMPANY_JOIN_TEAM.ctaHref}>{COMPANY_JOIN_TEAM.ctaLabel}</GreenCta>
+            <GreenCta href={joinCtaHref}>{joinCtaLabel}</GreenCta>
           </div>
         </div>
       </div>
 
       {/* Engagement cards — 353 wide (break out of px-24 to 20px page margins per Figma) */}
       <div className="relative -mx-[4px] mt-[16px] flex w-[calc(100%+8px)] flex-col gap-[14px]">
-        {COMPANY_ENGAGEMENT_CARDS.map((card) => (
+        {cards.map((card: any) => (
           <article
             key={card.nodeId}
             className="relative w-full border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)]"
@@ -820,17 +980,28 @@ function CompanyEngagementMobile() {
 }
 
 /* --------------------------------- PAGE ----------------------------------- */
-export function CompanyMobile() {
+type CompanyMobileProps = {
+  data?: any;
+};
+
+export function CompanyMobile({ data }: CompanyMobileProps = {}) {
   return (
     <div className="flex w-full flex-col">
-      <CompanyHeroMobile />
-      <CompanyMissionMobile />
-      <CompanyLeadershipMobile />
-      <CompanyDnaMobile />
-      <CompanyEcosystemMobile />
-      <CompanyTechnologyPartnersMobile />
-      <CompanyArticlesMobile />
-      <CompanyEngagementMobile />
+      {data?.hero ? <CompanyHeroMobile data={data.hero} /> : null}
+      {data?.mission ? <CompanyMissionMobile data={data.mission} /> : null}
+      {data?.leadership ? <CompanyLeadershipMobile data={data.leadership} /> : null}
+      {data?.dna ? <CompanyDnaMobile data={data.dna} /> : null}
+      {data?.ecosystem ? <CompanyEcosystemMobile data={data.ecosystem} /> : null}
+      {data?.tech_partners ? (
+        <CompanyTechnologyPartnersMobile data={data.tech_partners} />
+      ) : null}
+      {data?.articles ? <CompanyArticlesMobile data={data.articles} /> : null}
+      {data?.engagement || data?.join_team ? (
+        <CompanyEngagementMobile
+          engagement={data?.engagement}
+          joinTeam={data?.join_team}
+        />
+      ) : null}
     </div>
   );
 }

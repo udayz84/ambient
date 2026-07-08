@@ -1,11 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GradientTitle } from "../contact/contact-shared";
 
 const TITLE_GRADIENT_DEG = "127.627deg";
-const SUBTITLE =
+const FALLBACK_SUBTITLE =
   "Bridge the lab and real world. The Sparsh module offers continuous, microwatt intelligence in a 21×21mm size, with a breakout board that snaps off for production.";
+const FALLBACK_HEADING = "Inside the Sparsh AI Module";
+const FALLBACK_LABEL = "The Hardware Blueprint";
+const FALLBACK_IMAGE = "/som/module-photo.png";
 
 const IMAGE_OVERLAY_GRADIENT =
   "linear-gradient(136.703deg, rgb(76, 147, 218) 2.1612%, rgb(175, 121, 45) 100%)";
@@ -40,7 +44,20 @@ function SpecCard({ title, body }: { title: string; body: string }) {
   );
 }
 
-export function SomInsideModule() {
+export function SomInsideModule({ data }: { data?: any }) {
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const heading = data?.heading || FALLBACK_HEADING;
+  const label = data?.label || FALLBACK_LABEL;
+  const image = mediaUrl(data?.image) || FALLBACK_IMAGE;
+  const specs: { title: string; body: string }[] = Array.isArray(data?.specs) && data.specs.length > 0
+    ? data.specs.map((s: any, i: number) => {
+        const fb = SPECS[i] || SPECS[0];
+        return {
+          title: s?.label || fb.title,
+          body: s?.value || fb.body,
+        };
+      })
+    : SPECS;
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -57,7 +74,7 @@ export function SomInsideModule() {
         >
           <div className="relative px-[10px]" data-node-id="2438:4967" data-name="Title">
             <GradientTitle gradientDeg={TITLE_GRADIENT_DEG} className="text-center">
-              Inside the Sparsh AI Module
+              {heading}
             </GradientTitle>
             <Corners />
           </div>
@@ -65,7 +82,7 @@ export function SomInsideModule() {
             className={`${interRegular.className} w-[679.389px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
             data-node-id="2438:4973"
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
         </div>
 
@@ -83,7 +100,7 @@ export function SomInsideModule() {
               data-name="image 156"
             >
               <img
-                src="/som/module-photo.png"
+                src={image}
                 alt="Sparsh AI Module"
                 className="absolute inset-0 size-full object-cover"
               />
@@ -102,7 +119,7 @@ export function SomInsideModule() {
               className={`${gilroyMedium.className} min-w-full w-full text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
               data-node-id="2438:4981"
             >
-              The Hardware Blueprint
+              {label}
             </p>
             <Corners />
           </div>
@@ -112,7 +129,7 @@ export function SomInsideModule() {
             className="flex w-[578px] shrink-0 flex-col justify-between self-stretch"
             data-node-id="2438:4984"
           >
-            {SPECS.map((spec) => (
+            {specs.map((spec) => (
               <SpecCard key={spec.title} {...spec} />
             ))}
           </div>
@@ -132,14 +149,14 @@ export function SomInsideModule() {
                 backgroundClip: "text",
               }}
             >
-              Inside the Sparsh AI Module
+              {heading}
             </div>
             <Corners />
           </div>
           <p
             className={`${interRegular.className} max-w-[332px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/80 not-italic`}
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
         </div>
 
@@ -149,7 +166,7 @@ export function SomInsideModule() {
           <div className="relative flex w-full flex-col items-center gap-[16px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] pt-[10px] px-[16px] pb-[20px]">
             <div className="relative h-[200px] w-full shrink-0 overflow-hidden">
               <img
-                src="/som/module-photo.png"
+                src={image}
                 alt="Sparsh AI Module"
                 className="absolute inset-0 size-full object-cover"
               />
@@ -157,14 +174,14 @@ export function SomInsideModule() {
             <p
               className={`${gilroyMedium.className} min-w-full w-full text-[20px] leading-[26px] font-medium text-white not-italic`}
             >
-              The Hardware Blueprint
+              {label}
             </p>
             <Corners />
           </div>
 
           {/* Spec cards */}
           <div className="flex w-full flex-col gap-[16px]">
-            {SPECS.map((spec) => (
+            {specs.map((spec) => (
               <SpecCard key={spec.title} {...spec} />
             ))}
           </div>

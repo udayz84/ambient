@@ -16,6 +16,12 @@ const IMAGE_107_GRADIENT =
 const MISSION_GRID_PATTERN =
   "radial-gradient(circle, rgba(255, 255, 255, 0.035) 1px, transparent 1px)";
 
+const FALLBACK_HEADING = "A mission dictated\nby physics";
+const FALLBACK_BODY_1 =
+  "The era of patching legacy compute is over. Forcing next-generation AI through decades-old digital bottlenecks only guarantees massive power drain and wrecked economics. Ambient Scientific is confronting this physical wall by re-architecting compute from the metal up, reinventing analog circuits, native instruction sets, and developer frameworks.";
+const FALLBACK_BODY_2 =
+  "The result is an architecture that unlocks breakthrough AI performance while requiring a fraction of the power consumption and silicon area. We exist to make intelligence truly ambient: an invisible, ubiquitous foundation built to endure for as long as the era of AI lasts, from the smallest edge sensor to the largest hyperscale cloud server.";
+
 const STATS = [
   {
     value: "100+",
@@ -55,9 +61,36 @@ const STATS = [
     digitSlots: 2,
     suffixAtTarget: true,
   },
-] as const;
+] as readonly any[];
 
-export function CompanyMission() {
+type CompanyMissionProps = {
+  data?: any;
+};
+
+export function CompanyMission({ data }: CompanyMissionProps = {}) {
+  const heading = (data?.heading as string) || FALLBACK_HEADING;
+  const body1 = (data?.body_paragraph_1 as string) || FALLBACK_BODY_1;
+  const body2 = (data?.body_paragraph_2 as string) || FALLBACK_BODY_2;
+  const headingLines = heading.split("\n");
+
+  const strapiStats = Array.isArray(data?.stats) ? data.stats : null;
+  const stats: any[] = strapiStats && strapiStats.length > 0
+    ? strapiStats.map((s: any, i: number) => {
+        const fallback = STATS[i] ?? STATS[STATS.length - 1];
+        return {
+          value: (s?.value as string) || fallback.value,
+          label: (s?.label as string) || fallback.label,
+          description: (s?.description as string) || fallback.description,
+          descriptionWidth: fallback.descriptionWidth,
+          valueNodeId: fallback.valueNodeId,
+          labelNodeId: fallback.labelNodeId,
+          descriptionNodeId: fallback.descriptionNodeId,
+          digitSlots: fallback.digitSlots,
+          suffixAtTarget: fallback.suffixAtTarget,
+        };
+      })
+    : (STATS as any[]);
+
   return (
     <section
       className="relative flex w-full justify-center shrink-0 bg-black"
@@ -127,8 +160,14 @@ export function CompanyMission() {
               gradientDeg="104.363deg"
               className="whitespace-nowrap"
             >
-              <p className="mb-0 leading-[49px]">A mission dictated</p>
-              <p className="leading-[49px]">by physics</p>
+              {headingLines.map((line, i) => (
+                <p
+                  key={i}
+                  className={i === headingLines.length - 1 ? "leading-[49px]" : "mb-0 leading-[49px]"}
+                >
+                  {line}
+                </p>
+              ))}
             </GradientTitle>
             <CornerDecor />
           </div>
@@ -137,22 +176,8 @@ export function CompanyMission() {
             className={`${interRegular.className} w-[555px] flex flex-col gap-[24px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
             data-node-id="2379:4760"
           >
-            <p className="leading-[27px]">
-              The era of patching legacy compute is over. Forcing
-              next-generation AI through decades-old digital bottlenecks only
-              guarantees massive power drain and wrecked economics. Ambient
-              Scientific is confronting this physical wall by re-architecting
-              compute from the metal up, reinventing analog circuits, native
-              instruction sets, and developer frameworks.
-            </p>
-            <p className="leading-[27px]">
-              The result is an architecture that unlocks breakthrough AI
-              performance while requiring a fraction of the power consumption
-              and silicon area. We exist to make intelligence truly ambient: an
-              invisible, ubiquitous foundation built to endure for as long as the
-              era of AI lasts, from the smallest edge sensor to the largest
-              hyperscale cloud server.
-            </p>
+            <p className="leading-[27px]">{body1}</p>
+            <p className="leading-[27px]">{body2}</p>
           </div>
         </div>
 
@@ -160,7 +185,7 @@ export function CompanyMission() {
           className="absolute top-1/2 left-[756px] flex -translate-y-1/2 flex-col gap-[58px]"
           data-node-id="2379:4765"
         >
-          {STATS.map((stat) => (
+          {stats.map((stat) => (
             <CompanyMissionStat
               key={stat.labelNodeId}
               {...stat}

@@ -74,7 +74,8 @@ function ChipVisualCorners() {
   );
 }
 
-export function Technology() {
+export function Technology({ data }: { data?: any }) {
+  const tagText = data?.tag?.text || "Real-time AI at edge";
   return (
     <section
       className="relative left-1/2 h-[930px] w-screen max-w-none -translate-x-1/2 overflow-hidden bg-black max-[1023px]:h-auto"
@@ -82,11 +83,11 @@ export function Technology() {
       aria-label="Technology"
     >
       <div className="hidden min-[1024px]:block">
-        <TechnologyVisualBackground />
+        <TechnologyVisualBackground data={data} />
       </div>
 
       <div className="relative mx-auto hidden h-full w-full max-w-[1441px] min-[1024px]:block">
-        <TechnologyVisual />
+        <TechnologyVisual data={data} />
 
         <div
           className="absolute top-0 left-1/2 z-20 w-[180px] -translate-x-1/2"
@@ -94,22 +95,22 @@ export function Technology() {
           data-node-id="2379:1414"
         >
           <TagBadge
-            label="Real-time AI at edge"
+            label={tagText}
             width={180}
             labelOffsetX={74.5}
             rightBarLeft={170.48046875}
           />
         </div>
 
-        <TechnologyHeadline />
+        <TechnologyHeadline data={data} />
 
         <ChipVisualCorners />
-        <TechnologyFeatures />
+        <TechnologyFeatures data={data} />
       </div>
 
       {/* MOBILE (<1024px) — dedicated layout, desktop is untouched above */}
       <div className="relative w-full min-[1024px]:hidden">
-        <TechnologyMobile />
+        <TechnologyMobile data={data} />
       </div>
     </section>
   );

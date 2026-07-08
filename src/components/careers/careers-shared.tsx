@@ -357,7 +357,13 @@ export function CareersFilterField({ label, nodeId }: { label: string; nodeId?: 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
 
-export function CareersRolesProfileCta({ href = "#" }: { href?: string }) {
+export function CareersRolesProfileCta({
+  href = "#",
+  label = "SHARE YOUR PROFILE",
+}: {
+  href?: string;
+  label?: string;
+} = {}) {
   return (
     <a
       href={href}
@@ -374,7 +380,7 @@ export function CareersRolesProfileCta({ href = "#" }: { href?: string }) {
       </span>
       <span className="relative z-10 flex h-full w-full items-center justify-center gap-[10px]">
         <span className="text-[14px] font-semibold leading-[normal] whitespace-nowrap text-[#FFF] uppercase not-italic">
-          SHARE YOUR PROFILE
+          {label}
         </span>
         <span className="pointer-events-none size-[6px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}

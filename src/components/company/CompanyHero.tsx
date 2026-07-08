@@ -1,3 +1,4 @@
+import { mediaUrl } from "@/lib/strapi";
 import { interRegular } from "../hero/fonts";
 import { GradientTitle } from "../contact/contact-shared";
 import { CornerDecor } from "./company-corners";
@@ -5,7 +6,21 @@ import { CornerDecor } from "./company-corners";
 const HERO_BG_GRADIENT =
   "linear-gradient(132.873deg, rgb(0, 0, 0) 31.15%, rgba(0, 0, 0, 0) 76.987%), linear-gradient(187.824deg, rgba(0, 0, 0, 0) 49.061%, rgb(0, 0, 0) 90.541%)";
 
-export function CompanyHero() {
+const FALLBACK_TITLE = "A new paradigm for\nefficient AI compute";
+const FALLBACK_BODY =
+  "We build energy-aware, programmable, mixed-signal AI processors that unlock orders-of-magnitude improvements in performance-per-watt, enabling scalable intelligence across edge, enterprise, and cloud.";
+const FALLBACK_BG = "/company/hero-bg.png";
+
+type CompanyHeroProps = {
+  data?: any;
+};
+
+export function CompanyHero({ data }: CompanyHeroProps = {}) {
+  const title = (data?.title as string) || FALLBACK_TITLE;
+  const body = (data?.body as string) || FALLBACK_BODY;
+  const bgSrc = mediaUrl(data?.background_image) || FALLBACK_BG;
+  const titleLines = title.split("\n");
+
   return (
     <section
       className="relative flex h-[787px] w-full justify-center overflow-hidden bg-black"
@@ -24,7 +39,7 @@ export function CompanyHero() {
             <div className="absolute inset-0 overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/company/hero-bg.png"
+                src={bgSrc}
                 alt=""
                 className="absolute top-0 left-0 h-full w-[99.97%] max-w-none object-cover"
               />
@@ -58,12 +73,14 @@ export function CompanyHero() {
                 nodeId="2379:2267"
                 className="h-[98px] w-max overflow-visible [word-break:normal]"
               >
-                <span className="block h-[49px] shrink-0 leading-[49px] whitespace-nowrap">
-                  A new paradigm for
-                </span>
-                <span className="block h-[49px] shrink-0 leading-[49px] whitespace-nowrap">
-                  efficient AI compute
-                </span>
+                {titleLines.map((line, i) => (
+                  <span
+                    key={i}
+                    className="block h-[49px] shrink-0 leading-[49px] whitespace-nowrap"
+                  >
+                    {line}
+                  </span>
+                ))}
               </GradientTitle>
               <CornerDecor />
             </div>
@@ -78,9 +95,7 @@ export function CompanyHero() {
               className={`${interRegular.className} w-[532px] max-w-full shrink-0 overflow-visible text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:normal]`}
               data-node-id="2379:2273"
             >
-              We build energy-aware, programmable, mixed-signal AI processors that
-              unlock orders-of-magnitude improvements in performance-per-watt,
-              enabling scalable intelligence across edge, enterprise, and cloud.
+              {body}
             </p>
           </div>
         </div>

@@ -1,3 +1,4 @@
+import { mediaUrl } from "@/lib/strapi";
 import { gilroySemiBold, interRegular, interSemiBold } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
@@ -8,11 +9,77 @@ const MODE_ICON = "/technology/mode-icon.svg";
 
 const TITLE_GRADIENT_DEG = "106.506deg";
 const SUBTITLE_OPACITY = 0.65;
-const SUBTITLE_TEXT =
-  "Bridge the lab and real world. The Sparsh module offers continuous, microwatt intelligence in a 21×21mm size,";
+const FALLBACK_TAG = "Inside Sensemesh";
+const FALLBACK_HEADING = "Two named modes.\nOne continuous loop.";
+const FALLBACK_SUBTITLE =
+  "Bridge the lab and real world. The Sparsh module offers continuous, microwatt intelligence in a 21\u00d721mm size,";
 
 const ICON_BG =
   "radial-gradient(80% 100% at 50% 0%, #394a36 0%, #2b3629 50%, #1d221c 100%)";
+
+type ModeCardConfig = {
+  nodeId: string;
+  left: string;
+  top: string;
+  width: string;
+  height: string;
+  title: string;
+  bullet: string;
+  caption?: string;
+  bulletLeft?: string;
+  bulletTop?: string;
+};
+
+const MODE_CARD_CONFIG: ModeCardConfig[] = [
+  {
+    nodeId: "3004:1232",
+    left: "left-[78px]",
+    top: "top-[333px]",
+    width: "w-[254px]",
+    height: "h-[235px]",
+    title: "Subconscious AI",
+    bullet:
+      "Legacy chips switch off. A-Cube sleeps like you: the brain stays aware. Our island runs AI at microwatts while the ARM core is powered down. Always processing, never draining.",
+    caption: "Always processing, never draining.",
+  },
+  {
+    nodeId: "3008:483",
+    left: "left-[1127px]",
+    top: "top-[333px]",
+    width: "w-[254px]",
+    height: "h-[235px]",
+    title: "Turboboost mode",
+    bullet:
+      "When something matters, the brain wakes instantly. The moment SenseMesh flags a real event, runtime DVFS ramps the chip from subconscious idle to full performance",
+    caption: "live, no reset \u2014 settles back down.",
+  },
+  {
+    nodeId: "3004:1898",
+    left: "left-[614px]",
+    top: "top-[623px]",
+    width: "w-[236px]",
+    height: "h-[116px]",
+    title: "SETTLES",
+    bullet:
+      "Once the task is completed, the chip settles back into subconscious mode.",
+    bulletLeft: "10px",
+    bulletTop: "49.48px",
+  },
+];
+
+type ModeLabelConfig = {
+  left: string;
+  top: string;
+  variant: "title" | "descriptor";
+  label: string;
+};
+
+const MODE_LABEL_CONFIG: ModeLabelConfig[] = [
+  { left: "left-[434.57px]", top: "top-[519.48px]", variant: "title", label: "SUBCONSCIOUS MODE" },
+  { left: "left-[419.57px]", top: "top-[542.48px]", variant: "descriptor", label: "Always on. Ultra low power" },
+  { left: "left-[876.5px]", top: "top-[515.33px]", variant: "title", label: "Turboboost mode" },
+  { left: "left-[848px]", top: "top-[538.33px]", variant: "descriptor", label: "on-demand. high performance" },
+];
 
 function ModeIcon() {
   return (
@@ -143,7 +210,38 @@ function ModeLabel({
   );
 }
 
-export function TechnologyPageModes() {
+export function TechnologyPageModes({ data }: { data?: any } = {}) {
+  const tagText = data?.tag?.text || FALLBACK_TAG;
+  const heading = data?.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const topImg = mediaUrl(data?.top_image) || MODES_TOP;
+  const bottomImg = mediaUrl(data?.bottom_image) || MODES_BOTTOM;
+
+  const strapiCards = Array.isArray(data?.mode_cards) ? data.mode_cards : [];
+  const renderCards: ModeCardConfig[] = MODE_CARD_CONFIG.map((cfg, i) => {
+    const mc = strapiCards[i];
+    return {
+      ...cfg,
+      title: (mc?.title as string) || cfg.title,
+      bullet: (mc?.bullets as string) || cfg.bullet,
+    };
+  });
+
+  const strapiLabels = Array.isArray(data?.mode_labels) ? data.mode_labels : [];
+  const renderLabels: ModeLabelConfig[] = MODE_LABEL_CONFIG.map((cfg, i) => {
+    const pairIndex = Math.floor(i / 2);
+    const isTitle = i % 2 === 0;
+    const ml = strapiLabels[pairIndex];
+    const text = isTitle
+      ? (ml?.label as string) || cfg.label
+      : (ml?.sublabel as string) || cfg.label;
+    return { ...cfg, label: text };
+  });
+
+  const sideCard0 = renderCards[0];
+  const sideCard1 = renderCards[1];
+
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -161,7 +259,7 @@ export function TechnologyPageModes() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={MODES_TOP}
+            src={topImg}
             alt=""
             className="absolute top-[-38.49%] left-[-8.37%] h-[217.12%] w-[116.37%] max-w-none"
             aria-hidden
@@ -176,7 +274,7 @@ export function TechnologyPageModes() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={MODES_BOTTOM}
+            src={bottomImg}
             alt=""
             className="absolute top-[-184.09%] left-0 h-[284.09%] w-full max-w-none"
             aria-hidden
@@ -190,7 +288,7 @@ export function TechnologyPageModes() {
           data-name="Frame 1984079432"
         >
           <TagBadge
-            label="Inside Sensemesh"
+            label={tagText}
             width={168}
             labelOffsetX={0}
             rightBarLeft={158.15}
@@ -205,10 +303,10 @@ export function TechnologyPageModes() {
           >
             <GradientTitle gradientDeg={TITLE_GRADIENT_DEG} className="text-center">
               <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-                Two named modes.
+                {headingLines[0] ?? ""}
               </span>
               <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-                One continuous loop.
+                {headingLines[1] ?? ""}
               </span>
             </GradientTitle>
             <CornerDecor />
@@ -219,62 +317,44 @@ export function TechnologyPageModes() {
             style={{ opacity: SUBTITLE_OPACITY }}
             data-node-id="3003:557"
           >
-            {SUBTITLE_TEXT}
+            {subtitle}
           </p>
         </div>
 
         {/* content cards */}
-        <ModeCard
-          nodeId="3004:1232"
-          left="left-[78px]"
-          top="top-[333px]"
-          width="w-[254px]"
-          height="h-[235px]"
-          title="Subconscious AI"
-          bullet="Legacy chips switch off. A-Cube sleeps like you: the brain stays aware. Our island runs AI at microwatts while the ARM core is powered down. Always processing, never draining."
-          caption="Always processing, never draining."
-        />
-        <ModeCard
-          nodeId="3008:483"
-          left="left-[1127px]"
-          top="top-[333px]"
-          width="w-[254px]"
-          height="h-[235px]"
-          title="Turboboost mode"
-          bullet="When something matters, the brain wakes instantly. The moment SenseMesh flags a real event, runtime DVFS ramps the chip from subconscious idle to full performance"
-          caption="live, no reset — settles back down."
-        />
-        <ModeCard
-          nodeId="3004:1898"
-          left="left-[614px]"
-          top="top-[623px]"
-          width="w-[236px]"
-          height="h-[116px]"
-          title="SETTLES"
-          bullet="Once the task is completed, the chip settles back into subconscious mode."
-          bulletLeft="10px"
-          bulletTop="49.48px"
-        />
+        {renderCards.map((c) => (
+          <ModeCard
+            key={c.nodeId}
+            nodeId={c.nodeId}
+            left={c.left}
+            top={c.top}
+            width={c.width}
+            height={c.height}
+            title={c.title}
+            bullet={c.bullet}
+            caption={c.caption}
+            bulletLeft={c.bulletLeft}
+            bulletTop={c.bulletTop}
+          />
+        ))}
 
         {/* mode labels */}
-        <ModeLabel left="left-[434.57px]" top="top-[519.48px]" variant="title">
-          SUBCONSCIOUS MODE
-        </ModeLabel>
-        <ModeLabel left="left-[419.57px]" top="top-[542.48px]" variant="descriptor">
-          Always on. Ultra low power
-        </ModeLabel>
-        <ModeLabel left="left-[876.5px]" top="top-[515.33px]" variant="title">
-          Turboboost mode
-        </ModeLabel>
-        <ModeLabel left="left-[848px]" top="top-[538.33px]" variant="descriptor">
-          on-demand. high performance
-        </ModeLabel>
+        {renderLabels.map((l, i) => (
+          <ModeLabel
+            key={i}
+            left={l.left}
+            top={l.top}
+            variant={l.variant}
+          >
+            {l.label}
+          </ModeLabel>
+        ))}
       </div>
 
       {/* MOBILE (<1024px) — basic responsive version */}
       <div className="flex w-full flex-col items-center gap-[28px] px-[24px] py-[56px] min-[1024px]:hidden">
         <TagBadge
-          label="Inside Sensemesh"
+          label={tagText}
           width={168}
           labelOffsetX={0}
           rightBarLeft={158.15}
@@ -290,20 +370,20 @@ export function TechnologyPageModes() {
             backgroundClip: "text",
           }}
         >
-          <span className="block">Two named modes.</span>
-          <span className="block">One continuous loop.</span>
+          <span className="block">{headingLines[0] ?? ""}</span>
+          <span className="block">{headingLines[1] ?? ""}</span>
         </div>
 
         <p
           className={`${interRegular.className} max-w-[327px] text-center text-[15px] leading-[22px] font-normal text-[#f0f0f0] not-italic`}
           style={{ opacity: SUBTITLE_OPACITY }}
         >
-          {SUBTITLE_TEXT}
+          {subtitle}
         </p>
 
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={MODES_TOP}
+          src={topImg}
           alt=""
           className="h-auto w-full max-w-[327px] rounded-[4px] object-cover"
           aria-hidden
@@ -312,22 +392,23 @@ export function TechnologyPageModes() {
         <div className="flex w-full max-w-[327px] flex-col gap-[14px] rounded-[4px] bg-[rgba(21,21,21,0.08)] backdrop-blur-sm border border-white/10 p-[16px]">
           <div className="flex items-center justify-between border-b border-solid border-[rgba(255,255,255,0.1)] pb-[8px]">
             <span className={`${gilroySemiBold.className} text-[14px] font-semibold tracking-[0.6px] text-[#6fe047] uppercase not-italic`}>
-              Subconscious AI
+              {sideCard0?.title ?? "Subconscious AI"}
             </span>
             <ModeIcon />
           </div>
           <p className={`${interRegular.className} text-[13px] leading-[normal] font-normal text-[rgba(255,255,255,0.9)] not-italic`}>
             <span className="text-[#3a9719]">+ </span>
-            Legacy chips switch off. A-Cube sleeps like you: the brain stays aware. Our island runs AI at microwatts while the ARM core is powered down.
+            {sideCard0?.bullet ??
+              "Legacy chips switch off. A-Cube sleeps like you: the brain stays aware. Our island runs AI at microwatts while the ARM core is powered down."}
           </p>
           <p className={`${interSemiBold.className} border-t border-solid border-[rgba(255,255,255,0.1)] pt-[8px] text-center text-[10px] font-semibold tracking-[0.6px] text-[#e2f9da] uppercase not-italic`}>
-            Always processing, never draining.
+            {sideCard0?.caption ?? "Always processing, never draining."}
           </p>
         </div>
 
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={MODES_BOTTOM}
+          src={bottomImg}
           alt=""
           className="h-auto w-full max-w-[327px] rounded-[4px] object-cover"
           aria-hidden
@@ -336,16 +417,17 @@ export function TechnologyPageModes() {
         <div className="flex w-full max-w-[327px] flex-col gap-[14px] rounded-[4px] bg-[rgba(21,21,21,0.08)] backdrop-blur-sm border border-white/10 p-[16px]">
           <div className="flex items-center justify-between border-b border-solid border-[rgba(255,255,255,0.1)] pb-[8px]">
             <span className={`${gilroySemiBold.className} text-[14px] font-semibold tracking-[0.6px] text-[#6fe047] uppercase not-italic`}>
-              Turboboost mode
+              {sideCard1?.title ?? "Turboboost mode"}
             </span>
             <ModeIcon />
           </div>
           <p className={`${interRegular.className} text-[13px] leading-[normal] font-normal text-[rgba(255,255,255,0.9)] not-italic`}>
             <span className="text-[#3a9719]">+ </span>
-            When something matters, the brain wakes instantly. SenseMesh flags real events and ramps the chip to full performance, then settles back down.
+            {sideCard1?.bullet ??
+              "When something matters, the brain wakes instantly. SenseMesh flags real events and ramps the chip to full performance, then settles back down."}
           </p>
           <p className={`${interSemiBold.className} border-t border-solid border-[rgba(255,255,255,0.1)] pt-[8px] text-center text-[10px] font-semibold tracking-[0.6px] text-[#e2f9da] uppercase not-italic`}>
-            live, no reset — settles back down.
+            {sideCard1?.caption ?? "live, no reset \u2014 settles back down."}
           </p>
         </div>
       </div>

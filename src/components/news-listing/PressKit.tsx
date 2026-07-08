@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { mediaUrl } from "@/lib/strapi";
 import {
   dmMono,
   gilroyMedium,
@@ -16,9 +17,20 @@ const BADGE_GRADIENT =
 const GREEN_GLOW_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
 
-const MENUS = ["Logos & Marks", "Executive Photos", "Product Renders"] as const;
+const FALLBACK_MENUS = ["Logos & Marks", "Executive Photos", "Product Renders"];
+const FALLBACK_HEADING = "Writing about Ambient?";
+const FALLBACK_SUBTITLE =
+  "Download official brand assets, executive bios, and high-resolution hardware photography.";
+const FALLBACK_CTA = "Download Press Kit (.ZIP)";
+const FALLBACK_FILE_INFO = "2.3 MB • Last updated May 2026";
+const FALLBACK_ICON = "/news-listing/press-icon.svg";
+const PRESS_TITLE_FRAME = "/news-listing/press-title-frame.svg";
 
-function PressTitle() {
+type PressKitProps = {
+  data?: any;
+};
+
+function PressTitle({ heading }: { heading: string }) {
   return (
     <div
       className="relative w-full min-[1024px]:h-[63px] min-[1024px]:w-[539px] min-[1024px]:shrink-0"
@@ -33,7 +45,7 @@ function PressTitle() {
         }}
         data-node-id="2500:1664"
       >
-        Writing about Ambient?
+        {heading}
       </h2>
       <div
         className="pointer-events-none absolute inset-0 min-[1024px]:left-[1px] min-[1024px]:top-[0.73px] min-[1024px]:h-[61.475px] min-[1024px]:w-[537px]"
@@ -44,7 +56,7 @@ function PressTitle() {
         <div className="absolute inset-[-0.81%_0]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/news-listing/press-title-frame.svg"
+            src={PRESS_TITLE_FRAME}
             alt=""
             className="block size-full max-w-none"
           />
@@ -85,7 +97,7 @@ function PressMenu({ label }: { label: string }) {
   );
 }
 
-function PressCta() {
+function PressCta({ label }: { label: string }) {
   return (
     <a
       href="#"
@@ -100,7 +112,7 @@ function PressCta() {
         style={{ backgroundImage: "url(/resources/news-cta-texture.png)" }}
       />
       <span className="relative z-10 text-[16px] leading-[28px] font-medium whitespace-nowrap text-[#151515] uppercase not-italic [word-break:break-word]">
-        Download Press Kit (.ZIP)
+        {label}
       </span>
       <span
         aria-hidden
@@ -110,7 +122,7 @@ function PressCta() {
   );
 }
 
-function PressCluster() {
+function PressCluster({ iconSrc }: { iconSrc: string }) {
   return (
     <div
       className="pointer-events-none absolute left-[744.25px] top-[44.79px] h-[400px] w-[632.5px] drop-shadow-[0px_4px_12px_rgba(0,0,0,0.25)]"
@@ -151,7 +163,7 @@ function PressCluster() {
         data-name="Container"
       >
         <div
-          className="absolute left-[80px] top-[48px] flex h-[64px] w-[64px] flex-col items-start rounded-[4px] bg-[#0f0] p-[12px] drop-shadow-[0px_0px_10.051px_rgba(0,255,0,0.5)]"
+          className="absolute left-[80px] top-[48px] flex h-[64px] w-[64px] flex-col items-start rounded-[4px] bg-[#0f0f] p-[12px] drop-shadow-[0px_0px_10.051px_rgba(0,255,0,0.5)]"
           data-node-id="2526:2480"
           data-name="Container"
         >
@@ -177,7 +189,7 @@ function PressCluster() {
       >
         <div className="relative h-[64px] w-[64px]" data-node-id="2526:2476" data-name="Icon">
           <Image
-            src="/news-listing/press-icon.svg"
+            src={iconSrc}
             alt=""
             width={64}
             height={64}
@@ -189,7 +201,19 @@ function PressCluster() {
   );
 }
 
-export function PressKit() {
+export function PressKit({ data }: PressKitProps = {}) {
+  const heading = (data?.heading as string) || FALLBACK_HEADING;
+  const subtitle = (data?.subtitle as string) || FALLBACK_SUBTITLE;
+  const ctaLabel = (data?.cta_label as string) || FALLBACK_CTA;
+  const fileInfo = (data?.file_info as string) || FALLBACK_FILE_INFO;
+  const iconSrc = mediaUrl(data?.icon) || FALLBACK_ICON;
+  const menus: string[] =
+    Array.isArray(data?.menus) && data.menus.length > 0
+      ? data.menus
+          .map((m: any) => m?.label)
+          .filter((label: unknown): label is string => typeof label === "string")
+      : FALLBACK_MENUS;
+
   return (
     <section
       className="relative z-10 flex w-full justify-center overflow-hidden"
@@ -199,7 +223,7 @@ export function PressKit() {
     >
       {/* DESKTOP (>=1024px) — exact Figma layout */}
       <div className="relative hidden h-[489px] w-[1440px] min-[1024px]:block">
-        <PressCluster />
+        <PressCluster iconSrc={iconSrc} />
 
         <div
           className="absolute left-[97px] top-[101.5px] z-10 flex w-[576px] flex-col gap-[64px]"
@@ -214,13 +238,12 @@ export function PressKit() {
               data-node-id="2500:1662"
               data-name="Content"
             >
-              <PressTitle />
+              <PressTitle heading={heading} />
               <p
                 className={`${interRegular.className} absolute left-[21px] top-[75px] h-[48px] w-[484px] text-[18px] leading-[27px] font-normal text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
                 data-node-id="2500:1670"
               >
-                Download official brand assets, executive bios, and
-                high-resolution hardware photography.
+                {subtitle}
               </p>
             </div>
 
@@ -228,7 +251,7 @@ export function PressKit() {
               className="flex w-full gap-[18px]"
               data-node-id="2590:1885"
             >
-              {MENUS.map((label) => (
+              {menus.map((label) => (
                 <PressMenu key={label} label={label} />
               ))}
             </div>
@@ -238,12 +261,12 @@ export function PressKit() {
             className="flex items-center gap-[19px]"
             data-node-id="2590:1887"
           >
-            <PressCta />
+            <PressCta label={ctaLabel} />
             <p
               className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#e8e8e8] not-italic [word-break:break-word]`}
               data-node-id="2517:1675"
             >
-              2.3 MB • Last updated May 2026
+              {fileInfo}
             </p>
           </div>
         </div>
@@ -253,25 +276,24 @@ export function PressKit() {
       <div className="relative w-full min-[1024px]:hidden">
         <div className="flex w-full flex-col gap-[40px] px-[24px] py-[56px]">
           <div className="flex w-full flex-col gap-[14px]">
-            <PressTitle />
+            <PressTitle heading={heading} />
             <p
               className={`${interRegular.className} w-full text-[18px] leading-[27px] font-normal text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
             >
-              Download official brand assets, executive bios, and
-              high-resolution hardware photography.
+              {subtitle}
             </p>
             <div className="mt-[8px] flex w-full flex-wrap gap-[18px]">
-              {MENUS.map((label) => (
+              {menus.map((label) => (
                 <PressMenu key={label} label={label} />
               ))}
             </div>
           </div>
           <div className="flex flex-wrap items-center gap-[19px]">
-            <PressCta />
+            <PressCta label={ctaLabel} />
             <p
               className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#e8e8e8] not-italic [word-break:break-word]`}
             >
-              2.3 MB • Last updated May 2026
+              {fileInfo}
             </p>
           </div>
         </div>

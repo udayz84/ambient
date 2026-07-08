@@ -1,12 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
+import { mediaUrl } from "@/lib/strapi";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 
 const TITLE_GRADIENT_DEG = "128.886deg";
-const SUBTITLE =
+const FALLBACK_SUBTITLE =
   "Purpose-built edge modules. Validate your software on our evaluation kits today, and drop our SOMs directly into your final product tomorrow.";
-
-const CHIP_IMG = "/som/som-chip.png";
+const FALLBACK_HEADING = "The Ambient SOM Ecosystem";
+const FALLBACK_CHIP_IMG = "/som/som-chip.png";
+const FALLBACK_BG = "/som/ecosystem-bg.png";
 
 const BG_IMAGE_OVERLAY =
   "linear-gradient(180deg, rgba(0, 0, 0, 0.4) 48.412%, rgb(0, 0, 0) 88.067%), linear-gradient(180deg, rgba(0, 0, 0, 0.4) 37.886%, rgb(0, 0, 0) 88.067%), linear-gradient(180deg, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 69.056%)";
@@ -20,12 +22,12 @@ const SECTION_TITLE_STYLE = {
 /* ----------------------------- Decorative image overlays ----------------------------- */
 /* Rendered only inside the desktop tree. Positioned within the card's NewsSection. */
 
-function MotionImage() {
+function MotionImage({ chipImg }: { chipImg: string }) {
   return (
     <>
       <div className="pointer-events-none absolute left-[148.63px] top-[-55px] h-[263.699px] w-[261.827px] overflow-hidden">
         <img
-          src={CHIP_IMG}
+          src={chipImg}
           alt=""
           aria-hidden
           className="absolute left-[-21.85%] top-[-21.61%] h-[254.77%] w-[256.59%] max-w-none mix-blend-screen"
@@ -41,12 +43,12 @@ function MotionImage() {
   );
 }
 
-function VisionImage() {
+function VisionImage({ chipImg }: { chipImg: string }) {
   return (
     <>
       <div className="pointer-events-none absolute left-[144px] top-[-47.08px] h-[237.193px] w-[262.016px] overflow-hidden">
         <img
-          src={CHIP_IMG}
+          src={chipImg}
           alt=""
           aria-hidden
           className="absolute left-[-124.32%] top-[-26.4%] h-[264.72%] w-[239.65%] max-w-none mix-blend-screen"
@@ -62,12 +64,12 @@ function VisionImage() {
   );
 }
 
-function SoundImage() {
+function SoundImage({ chipImg }: { chipImg: string }) {
   return (
     <>
       <div className="pointer-events-none absolute left-[156.09px] top-[-35.61px] h-[238.119px] w-[252.171px] overflow-hidden">
         <img
-          src={CHIP_IMG}
+          src={chipImg}
           alt=""
           aria-hidden
           className="absolute left-[-16.41%] top-[-131.38%] h-[254.27%] w-[240.1%] max-w-none mix-blend-screen"
@@ -78,12 +80,12 @@ function SoundImage() {
   );
 }
 
-function PredictiveImage() {
+function PredictiveImage({ chipImg }: { chipImg: string }) {
   return (
     <>
       <div className="pointer-events-none absolute left-[152.9px] top-[-39.61px] h-[240px] w-[259.31px] overflow-hidden">
         <img
-          src={CHIP_IMG}
+          src={chipImg}
           alt=""
           aria-hidden
           className="absolute left-[-125.17%] top-[-135.5%] h-[259.87%] w-[240.52%] max-w-none mix-blend-screen"
@@ -227,7 +229,7 @@ function EcoCard({
 type CardData = {
   desktopPos: string;
   desktopSize: string;
-  overlay: React.ReactNode;
+  overlay: (chipImg: string) => React.ReactNode;
   cardBg: string;
   padClass: string;
   tagLabel: string;
@@ -248,7 +250,7 @@ const CARDS: CardData[] = [
   {
     desktopPos: "absolute left-[92px] top-[212.5px]",
     desktopSize: "w-[400px] h-[349px]",
-    overlay: <MotionImage />,
+    overlay: (chipImg) => <MotionImage chipImg={chipImg} />,
     cardBg: "bg-black",
     padClass: "pl-[24px] pr-[16px] py-[32px]",
     tagLabel: "Available",
@@ -267,7 +269,7 @@ const CARDS: CardData[] = [
   {
     desktopPos: "absolute left-[527px] top-[212.5px]",
     desktopSize: "w-[400px] h-[349px]",
-    overlay: <VisionImage />,
+    overlay: (chipImg) => <VisionImage chipImg={chipImg} />,
     cardBg: "bg-black",
     padClass: "pl-[24px] pr-[16px] py-[32px]",
     tagLabel: "Under-development",
@@ -286,7 +288,7 @@ const CARDS: CardData[] = [
   {
     desktopPos: "absolute left-[962px] top-[212.5px]",
     desktopSize: "w-[400px] h-[349px]",
-    overlay: <SoundImage />,
+    overlay: (chipImg) => <SoundImage chipImg={chipImg} />,
     cardBg: "bg-black",
     padClass: "pl-[24px] pr-[16px] py-[32px]",
     tagLabel: "Under-development",
@@ -305,7 +307,7 @@ const CARDS: CardData[] = [
   {
     desktopPos: "absolute left-[303px] top-[606px]",
     desktopSize: "w-[400px] h-[370px]",
-    overlay: <PredictiveImage />,
+    overlay: (chipImg) => <PredictiveImage chipImg={chipImg} />,
     cardBg: "bg-black",
     padClass: "pl-[24px] pr-[16px] py-[32px]",
     tagLabel: "Under-development",
@@ -324,7 +326,7 @@ const CARDS: CardData[] = [
   {
     desktopPos: "absolute left-[734px] top-[606px]",
     desktopSize: "w-[400px] h-[349px]",
-    overlay: null,
+    overlay: () => null,
     cardBg: "bg-[rgba(0,0,0,0.2)]",
     padClass: "px-[32px] pt-[16px] pb-[24px]",
     tagLabel: "Under-development",
@@ -343,7 +345,28 @@ const CARDS: CardData[] = [
   },
 ];
 
-export function SomEcosystem() {
+export function SomEcosystem({ data }: { data?: any }) {
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const heading = data?.heading || FALLBACK_HEADING;
+  const chipImg = mediaUrl(data?.chip_image) || FALLBACK_CHIP_IMG;
+  const bgImage = mediaUrl(data?.background_image) || FALLBACK_BG;
+  const dataCards: any[] = Array.isArray(data?.cards) ? data.cards : [];
+  const cards: CardData[] = CARDS.map((fb, i) => {
+    const c = dataCards[i];
+    if (!c) return fb;
+    const status = c.status || fb.tagLabel;
+    const available = status.toLowerCase() === "available";
+    return {
+      ...fb,
+      tagLabel: status,
+      tagAvailable: available,
+      title: c.title || fb.title,
+      subtitle: c.subtitle || fb.subtitle,
+      description: fb.description,
+      ctaLabel: c.cta_label || fb.ctaLabel,
+      ctaSoon: c.cta_label ? false : fb.ctaSoon,
+    };
+  });
   return (
     <section
       className="relative w-full overflow-hidden bg-black"
@@ -367,7 +390,7 @@ export function SomEcosystem() {
         <div className="absolute left-0 top-[163px] h-[922.344px] w-[1440px] opacity-40">
           <div className="absolute inset-0 overflow-hidden">
             <img
-              src="/som/ecosystem-bg.png"
+              src={bgImage}
               alt=""
               aria-hidden
               className="absolute left-0 top-[0.03%] h-[119.42%] w-[99.99%] max-w-none"
@@ -386,25 +409,25 @@ export function SomEcosystem() {
               className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={SECTION_TITLE_STYLE}
             >
-              The Ambient SOM Ecosystem
+              {heading}
             </div>
             <Corners />
           </div>
           <p
             className={`${interRegular.className} text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
         </div>
 
         {/* Cards */}
-        {CARDS.map((card) => (
+        {cards.map((card) => (
           <EcoCard
             key={card.dataName}
             frameClass={`${card.desktopSize} ${card.desktopPos} z-10`}
             cardBg={card.cardBg}
             padClass={card.padClass}
-            overlay={card.overlay}
+            overlay={card.overlay(chipImg)}
             tagLabel={card.tagLabel}
             tagAvailable={card.tagAvailable}
             tagWidthClass={card.tagWidthClass}
@@ -430,20 +453,20 @@ export function SomEcosystem() {
               className={`${gilroyMedium.className} bg-clip-text text-center text-[34px] leading-[37px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={SECTION_TITLE_STYLE}
             >
-              The Ambient SOM Ecosystem
+              {heading}
             </div>
             <Corners />
           </div>
           <p
             className={`${interRegular.className} max-w-[332px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/80 not-italic`}
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
         </div>
 
         {/* Stacked cards */}
         <div className="flex w-full flex-col gap-[24px]">
-          {CARDS.map((card) => (
+          {cards.map((card) => (
             <EcoCard
               key={card.dataName}
               frameClass="w-full relative"

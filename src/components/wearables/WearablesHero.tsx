@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { WearablesCarousel } from "./WearablesCarousel";
@@ -8,13 +10,19 @@ const WEARABLES_BG_GRADIENT =
 const TITLE_GRADIENT =
   "linear-gradient(104.008deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
-const SUBTITLE =
+const FALLBACK_SUBTITLE =
   "Hospital-grade biometric tracking and voice processing directly to the ring, wrist, or lens. No cloud latency or battery compromise.";
+const FALLBACK_WATERMARK = "Wearables";
+const FALLBACK_TITLE = "Clinical precision.\nCoin-cell power.";
+const FALLBACK_BG_1 = "/applications/wearables/hero-bg-162.png";
+const FALLBACK_BG_2 = "/applications/wearables/hero-bg-163.png";
+const FALLBACK_PRIMARY_LABEL = "Talk About Your Roadmap";
+const FALLBACK_SECONDARY_LABEL = "Talk a Hardware Engineer.";
 
-function PrimaryCta() {
+function PrimaryCta({ label, href }: { label: string; href: string }) {
   return (
     <a
-      href="#"
+      href={href}
       className={`${gilroyMedium.className} relative block h-[48px] w-[251px] shrink-0 cursor-pointer overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
       data-node-id="2509:389"
       data-name="Cta"
@@ -28,7 +36,7 @@ function PrimaryCta() {
         rightSrc="/applications/wearables/vector-46.svg"
       />
       <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic">
-        Talk About Your Roadmap
+        {label}
       </span>
       <span
         aria-hidden
@@ -38,16 +46,16 @@ function PrimaryCta() {
   );
 }
 
-function SecondaryCta() {
+function SecondaryCta({ label, href }: { label: string; href: string }) {
   return (
     <a
-      href="#"
+      href={href}
       className={`${gilroyMedium.className} relative flex shrink-0 cursor-pointer items-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
       data-node-id="2509:400"
       data-name="CTA - Secondary"
     >
       <span className="whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic">
-        Talk a Hardware Engineer.
+        {label}
       </span>
       <Corners
         leftSrc="/applications/wearables/vector-42.svg"
@@ -57,7 +65,22 @@ function SecondaryCta() {
   );
 }
 
-export function WearablesHero() {
+export function WearablesHero({
+  data,
+  carouselImages,
+}: {
+  data?: any;
+  carouselImages?: string[];
+}) {
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const watermark = data?.watermark || FALLBACK_WATERMARK;
+  const titleLines = (data?.title || FALLBACK_TITLE).split("\n");
+  const bg1 = mediaUrl(data?.background_image_1) || FALLBACK_BG_1;
+  const bg2 = mediaUrl(data?.background_image_2) || FALLBACK_BG_2;
+  const primaryLabel = data?.primary_button?.label || FALLBACK_PRIMARY_LABEL;
+  const primaryHref = data?.primary_button?.href || "#";
+  const secondaryLabel = data?.secondary_button?.label || FALLBACK_SECONDARY_LABEL;
+  const secondaryHref = data?.secondary_button?.href || "#";
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -73,9 +96,8 @@ export function WearablesHero() {
           data-node-id="2509:373"
           data-name="image 162"
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/applications/wearables/hero-bg-162.png"
+            src={bg1}
             alt=""
             className="absolute inset-0 size-full max-w-none object-cover"
             aria-hidden
@@ -97,11 +119,11 @@ export function WearablesHero() {
             }}
             data-node-id="2509:376"
           >
-            Wearables
+            {watermark}
           </p>
         </div>
 
-        <WearablesCarousel />
+        <WearablesCarousel images={carouselImages} />
 
         {/* Foreground image 163 with gradient overlay */}
         <div
@@ -111,9 +133,8 @@ export function WearablesHero() {
           aria-hidden
         >
           <div className="absolute inset-0 overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/applications/wearables/hero-bg-163.png"
+              src={bg2}
               alt=""
               className="absolute top-[-11.78%] left-0 size-full max-w-none object-cover"
             />
@@ -137,7 +158,6 @@ export function WearablesHero() {
               data-node-id="2509:380"
               data-name="Frame"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/applications/wearables/title-frame.svg"
                 alt=""
@@ -154,12 +174,14 @@ export function WearablesHero() {
               }}
               data-node-id="2509:385"
             >
-              <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-                Clinical precision.
-              </span>
-              <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-                Coin-cell power.
-              </span>
+              {titleLines.map((line: string, i: number) => (
+                <span
+                  key={i}
+                  className="block h-[49px] leading-[49px] whitespace-nowrap"
+                >
+                  {line}
+                </span>
+              ))}
             </div>
           </div>
         </div>
@@ -174,14 +196,14 @@ export function WearablesHero() {
             className={`${interRegular.className} w-[591.92px] shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
             data-node-id="2509:387"
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
           <div
             className="flex shrink-0 items-start gap-[24px]"
             data-node-id="2509:388"
           >
-            <PrimaryCta />
-            <SecondaryCta />
+            <PrimaryCta label={primaryLabel} href={primaryHref} />
+            <SecondaryCta label={secondaryLabel} href={secondaryHref} />
           </div>
         </div>
       </div>
@@ -189,21 +211,19 @@ export function WearablesHero() {
       {/* MOBILE (<1024px) */}
       <div className="relative flex w-full flex-col overflow-hidden min-[1024px]:hidden">
         <div className="pointer-events-none absolute inset-0" aria-hidden>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/applications/wearables/hero-bg-163.png"
+            src={bg2}
             alt=""
             className="size-full max-w-none object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black" />
         </div>
 
-        <WearablesCarousel />
+        <WearablesCarousel images={carouselImages} />
 
         <div className="relative z-10 flex w-full flex-col items-start gap-[20px] px-[24px] pt-[104px] pb-[64px]">
           {/* Title */}
           <div className="relative h-[82px] w-full max-w-[300px] shrink-0">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/applications/wearables/title-frame.svg"
               alt=""
@@ -218,8 +238,11 @@ export function WearablesHero() {
                 backgroundClip: "text",
               }}
             >
-              <span className="block">Clinical precision.</span>
-              <span className="block">Coin-cell power.</span>
+              {titleLines.map((line: string, i: number) => (
+                <span key={i} className="block">
+                  {line}
+                </span>
+              ))}
             </div>
           </div>
 
@@ -227,13 +250,13 @@ export function WearablesHero() {
           <p
             className={`${interRegular.className} w-full max-w-[327px] text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
 
           {/* CTAs */}
           <div className="flex w-full flex-col items-stretch gap-[14px]">
             <a
-              href="#"
+              href={primaryHref}
               className={`${gilroyMedium.className} relative flex h-[48px] w-full cursor-pointer items-center justify-center overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
             >
               <span
@@ -245,7 +268,7 @@ export function WearablesHero() {
                 rightSrc="/applications/wearables/vector-46.svg"
               />
               <span className="relative whitespace-nowrap text-[14px] leading-[28px] font-medium text-white uppercase not-italic">
-                Talk About Your Roadmap
+                {primaryLabel}
               </span>
               <span
                 aria-hidden
@@ -253,11 +276,11 @@ export function WearablesHero() {
               />
             </a>
             <a
-              href="#"
+              href={secondaryHref}
               className={`${gilroyMedium.className} relative flex h-[48px] w-full cursor-pointer items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)]`}
             >
               <span className="relative whitespace-nowrap text-[14px] leading-[28px] font-medium text-white uppercase not-italic">
-                Talk a Hardware Engineer.
+                {secondaryLabel}
               </span>
               <Corners
                 leftSrc="/applications/wearables/vector-42.svg"

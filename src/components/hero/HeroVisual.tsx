@@ -1,7 +1,7 @@
 import { heroVisualMaskStyle } from "./hero-visual-mask";
 import { HeroVisualMedia } from "./HeroVisualMedia";
 
-export function HeroVisual() {
+export function HeroVisual({ videoSrc }: { videoSrc?: string }) {
   return (
     <div
       className="pointer-events-none absolute top-[130px] left-[126px] contents"
@@ -14,7 +14,7 @@ export function HeroVisual() {
         data-node-id="2379:737"
         data-name="Rectangle 1618873457"
       >
-        <HeroVisualMedia />
+        <HeroVisualMedia videoSrc={videoSrc} />
       </div>
     </div>
   );

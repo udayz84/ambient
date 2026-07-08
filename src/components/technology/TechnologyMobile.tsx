@@ -1,8 +1,9 @@
 import Image from "next/image";
+import { mediaUrl } from "@/lib/strapi";
 import { TagBadge } from "../hero/TagBadge";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 
-const FEATURES = [
+const FALLBACK_FEATURES = [
   {
     iconSrc: "/technology/icon-speak-ai.svg",
     title: "Speak AI natively",
@@ -23,7 +24,26 @@ const FEATURES = [
   },
 ] as const;
 
-export function TechnologyMobile() {
+export function TechnologyMobile({ data }: { data?: any }) {
+  const tagText = data?.tag?.text || "Real-time AI at edge";
+  const heading = data?.heading || "Re-architecting\nthe physics of\nAI compute";
+  const headingLines = heading.split("\n");
+  while (headingLines.length < 3) headingLines.push("");
+
+  const features = (Array.isArray(data?.features) && data.features.length
+    ? data.features
+    : FALLBACK_FEATURES
+  ).map((feature: any, index: number) => {
+    const fallback = FALLBACK_FEATURES[index] || {};
+    const iconSrc =
+      mediaUrl(feature?.icon) || fallback.iconSrc || "/technology/icon-tools.svg";
+    return {
+      iconSrc,
+      title: feature?.title || fallback.title || "",
+      description: feature?.description || fallback.description || "",
+    };
+  });
+
   return (
     <div className="relative w-full overflow-hidden">
       <div
@@ -32,11 +52,11 @@ export function TechnologyMobile() {
       />
 
       <div className="relative flex flex-col items-center pt-[48px] pb-[48px] z-10 w-full">
-        
+
         {/* Top Content with Padding */}
         <div className="flex flex-col items-center px-[24px] w-full">
           <TagBadge
-            label="Real-time AI at edge"
+            label={tagText}
             width={180}
             labelOffsetX={74.5}
             rightBarLeft={170.48046875}
@@ -50,7 +70,9 @@ export function TechnologyMobile() {
                   "linear-gradient(106.923deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
               }}
             >
-              Re-architecting<br />the physics of<br />AI compute
+              {headingLines[0] && <>{headingLines[0]}<br /></>}
+              {headingLines[1] && <>{headingLines[1]}<br /></>}
+              {headingLines[2]}
             </h2>
 
             <div className="absolute top-0 right-0 flex size-[6px] items-center justify-center scale-[0.6] origin-top-right">
@@ -99,8 +121,8 @@ export function TechnologyMobile() {
         {/* Features Content with Padding */}
         <div className="flex flex-col items-center px-[24px] w-full">
           <div className="relative mt-[32px] flex w-full flex-col max-w-[350px]">
-            {FEATURES.map((feature, index) => (
-              <div key={feature.title} className="relative w-full flex flex-col items-start px-[20px] border-[0.5px] border-solid border-white/20 bg-[rgba(0,0,0,0.1)] backdrop-blur-[12px] mb-[-0.5px]">
+            {features.map((feature: any, index: number) => (
+              <div key={index} className="relative w-full flex flex-col items-start px-[20px] border-[0.5px] border-solid border-white/20 bg-[rgba(0,0,0,0.1)] backdrop-blur-[12px] mb-[-0.5px]">
                 {/* Top Right Bracket */}
                 <div className="absolute -top-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center">
                   <div className="rotate-180 flex-none">

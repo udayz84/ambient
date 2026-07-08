@@ -37,12 +37,32 @@ const JOB_ROW_NODE_IDS = [
 ] as const;
 
 export function CareersOpenRoles({
+  data,
   onHeightDiffChange,
 }: {
+  data?: any;
   onHeightDiffChange?: (diff: number) => void;
 } = {}) {
   const [jobTypeFilter, setJobTypeFilter] = useState<string>("all");
   const [locationFilter, setLocationFilter] = useState<string>("all");
+
+  const heading = data?.heading || "Open Roles";
+  const generalAppTitle =
+    data?.general_app_title || "Don't See The Right Role?";
+  const generalAppSubtitle =
+    data?.general_app_subtitle ||
+    "Submit a general application and we'll reach out when a matching position opens.";
+  const generalAppCtaLabel =
+    data?.general_app_cta_label || "SHARE YOUR PROFILE";
+  const applyButtonLabel = data?.apply_button_label || "APPLY NOW";
+  const jobTypeOptions = parseFilterCsv(
+    data?.job_type_filters,
+    CAREERS_JOB_TYPE_FILTER_OPTIONS,
+  );
+  const locationOptions = parseFilterCsv(
+    data?.location_filters,
+    CAREERS_LOCATION_FILTER_OPTIONS,
+  );
 
   const filteredJobs = useMemo(
     () =>
@@ -107,11 +127,11 @@ export function CareersOpenRoles({
         className="flex h-[60px] w-[1204px] shrink-0 items-end justify-between"
         data-node-id="2379:8902"
       >
-        <OpenRolesTitle />
+        <OpenRolesTitle title={heading} />
         <div className="flex shrink-0 items-center gap-[20px]" data-node-id="2379:8909">
           <FilterDropdown
             label="Job Type"
-            options={CAREERS_JOB_TYPE_FILTER_OPTIONS}
+            options={jobTypeOptions}
             value={jobTypeFilter}
             onChange={setJobTypeFilter}
             nodeId="2379:8910"
@@ -119,7 +139,7 @@ export function CareersOpenRoles({
           />
           <FilterDropdown
             label="Location"
-            options={CAREERS_LOCATION_FILTER_OPTIONS}
+            options={locationOptions}
             value={locationFilter}
             onChange={setLocationFilter}
             nodeId="2379:8915"
@@ -148,6 +168,7 @@ export function CareersOpenRoles({
               title={job.title}
               category={job.category}
               location={job.location}
+              applyLabel={applyButtonLabel}
               nodeId={JOB_ROW_NODE_IDS[index] ?? JOB_ROW_NODE_IDS[0]}
             />
           ))
@@ -177,7 +198,7 @@ export function CareersOpenRoles({
               }}
               data-node-id="2379:8933"
             >
-              Don&apos;t See The Right Role?
+              {generalAppTitle}
             </p>
             <div
               className="pointer-events-none absolute top-[1.03px] left-px h-[106px] w-[584.848px]"
@@ -203,10 +224,9 @@ export function CareersOpenRoles({
               className={`${interRegular.className} absolute top-0 left-0 h-[48px] w-[290.931px] text-right text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
               data-node-id="2379:8940"
             >
-              Submit a general application and we&apos;ll reach out when a matching
-              position opens.
+              {generalAppSubtitle}
             </p>
-            <CareersRolesProfileCta href="#" />
+            <CareersRolesProfileCta href="#" label={generalAppCtaLabel} />
           </div>
         </div>
       </div>
@@ -241,7 +261,7 @@ function RolesCtaBackground() {
   );
 }
 
-function OpenRolesTitle() {
+function OpenRolesTitle({ title }: { title: string }) {
   return (
     <div
       className="relative h-[60px] w-[289px] shrink-0"
@@ -256,7 +276,7 @@ function OpenRolesTitle() {
         }}
         data-node-id="2379:8904"
       >
-        Open Roles
+        {title}
       </p>
       <TitleCorner className="top-0 left-0" src={cornerTitleTl} flipY />
       <TitleCorner className="top-0 left-[285px]" src={cornerTitleTr} rotate180 />
@@ -407,11 +427,13 @@ function JobRow({
   title,
   category,
   location,
+  applyLabel,
   nodeId,
 }: {
   title: string;
   category: string;
   location: string;
+  applyLabel: string;
   nodeId: string;
 }) {
   return (
@@ -431,7 +453,7 @@ function JobRow({
       >
         {location}
       </p>
-      <ApplyButton />
+      <ApplyButton label={applyLabel} />
     </article>
   );
 }
@@ -454,7 +476,7 @@ function CategoryBadge({ label }: { label: string }) {
   );
 }
 
-function ApplyButton() {
+function ApplyButton({ label }: { label: string }) {
   return (
     <a
       href="#"
@@ -469,7 +491,7 @@ function ApplyButton() {
         className="pointer-events-none absolute inset-0 opacity-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] transition-opacity duration-200 group-hover:opacity-100"
       />
       <span className="relative z-10 flex items-center gap-[20px]">
-        APPLY NOW
+        {label}
         <Image
           src="/careers/chevron-apply.svg"
           alt=""
@@ -485,4 +507,20 @@ function ApplyButton() {
       />
     </a>
   );
+}
+
+function parseFilterCsv(
+  csv: string | null | undefined,
+  fallback: readonly { value: string; label: string }[],
+): readonly { value: string; label: string }[] {
+  if (!csv || typeof csv !== "string") return fallback;
+  const items = csv
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  if (items.length === 0) return fallback;
+  return [
+    { value: "all", label: "All" },
+    ...items.map((s) => ({ value: s, label: s })),
+  ];
 }

@@ -3,8 +3,23 @@ import { gilroySemiBold, interRegular } from "../hero/fonts";
 import { GradientTitle } from "../contact/contact-shared";
 import { RepelDots } from "../shared/RepelDots";
 import { Corners } from "../shared/Corners";
+import { mediaUrl } from "@/lib/strapi";
 
-export function CareersHero() {
+const HERO_TITLE_FALLBACK = "Re-architect the\nphysics of AI";
+
+export function CareersHero({ data }: { data?: any }) {
+  const bgImg = mediaUrl(data?.background_image) || "/careers/hero-bg.png";
+  const titleFrame =
+    mediaUrl(data?.title_frame) || "/careers/hero-title-frame.svg";
+  const titleText = data?.title || HERO_TITLE_FALLBACK;
+  const titleLines = titleText.split("\n");
+  const subtitle =
+    data?.subtitle ||
+    "Don't iterate on legacy silicon. Build the fundamental compute substrate for the next generation of intelligence.";
+  const ctaLabel = data?.cta_label || "VIEW OPEN ROLES";
+  const ctaHref = data?.cta_href || "#open-roles";
+  const scrollText = data?.scroll_text || "SCROLL";
+
   return (
     <section
       className="relative flex h-[798px] w-full justify-center overflow-hidden bg-black"
@@ -22,7 +37,7 @@ export function CareersHero() {
           <div className="absolute inset-0 overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/careers/hero-bg.png"
+              src={bgImg}
               alt=""
               className="absolute top-0 left-[0.05%] h-full w-[99.91%] max-w-none object-cover"
             />
@@ -128,7 +143,7 @@ export function CareersHero() {
               <div className="absolute inset-[-0.43%_-0.13%]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/careers/hero-title-frame.svg"
+                  src={titleFrame}
                   alt=""
                   className="block size-full max-w-none"
                   aria-hidden
@@ -140,8 +155,14 @@ export function CareersHero() {
               gradientDeg="102.971deg"
               className="absolute top-[10px] left-[20.16px] w-[349px] whitespace-nowrap"
             >
-              <p className="mb-0 leading-[49px]">Re-architect the</p>
-              <p className="leading-[49px]">physics of AI</p>
+              {titleLines.map((line: string, i: number) => (
+                <p
+                  key={i}
+                  className={i === 0 ? "mb-0 leading-[49px]" : "leading-[49px]"}
+                >
+                  {line}
+                </p>
+              ))}
             </GradientTitle>
           </div>
 
@@ -154,12 +175,11 @@ export function CareersHero() {
               className={`${interRegular.className} w-[554px] shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
               data-node-id="2379:8694"
             >
-              Don&apos;t iterate on legacy silicon. Build the fundamental compute
-              substrate for the next generation of intelligence.
+              {subtitle}
             </p>
 
             <a
-              href="#open-roles"
+              href={ctaHref}
               className={`${gilroySemiBold.className} relative block h-[48px] w-[231px] shrink-0 shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
               data-node-id="2379:8695"
               data-name="Cta"
@@ -175,7 +195,7 @@ export function CareersHero() {
                 className="absolute z-10 top-[calc(50%-8px)] left-[47.11px] text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic"
                 data-node-id="2379:8696"
               >
-                VIEW OPEN ROLES
+                {ctaLabel}
               </span>
               <img
                 src="/careers/cta-dot.svg"
@@ -253,7 +273,7 @@ export function CareersHero() {
                 className="relative h-full w-[47px] text-[12px] leading-[1.4] font-normal text-[#505f4b] [word-break:break-word] not-italic"
                 data-node-id="2379:8709"
               >
-                SCROLL
+                {scrollText}
               </p>
             </div>
           </div>

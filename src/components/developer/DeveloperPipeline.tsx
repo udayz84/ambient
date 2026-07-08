@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { mediaUrl } from "@/lib/strapi";
 
 const PIPELINE_TITLE_GRADIENT =
   "linear-gradient(124.414deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -10,8 +11,41 @@ const PIPELINE_TITLE_GRADIENT =
 const BADGE_LEFT = "/developer/pipeline-corner-42.svg";
 const BADGE_RIGHT = "/developer/pipeline-corner-43.svg";
 
-export function DeveloperPipeline() {
+const DEFAULT_HEADING = "The ModelForge Pipeline";
+const DEFAULT_TAG = "Real-time AI at edge";
+const DEFAULT_TABS = ["Train", "Optimize", "Integrate", "Deploy"];
+const DEFAULT_FLOW_IMAGES = [
+  "/developer/train-flow-1.png",
+  "/developer/train-flow-2.png",
+  "/developer/train-flow-3.png",
+  "/developer/train-flow-4.png",
+];
+const DEFAULT_LOGOS = [
+  "/developer/pipeline-logo-1.png",
+  "/developer/pipeline-logo-2.png",
+  "/developer/pipeline-logo-3.png",
+];
+
+export function DeveloperPipeline({ data }: { data?: any }) {
   const [activeTab, setActiveTab] = useState(1); // 1 = Optimize
+
+  const heading = data?.heading || DEFAULT_HEADING;
+  const tagText = data?.tag?.text || DEFAULT_TAG;
+  const tabs = data?.tabs ? data.tabs.split("\n").filter(Boolean) : DEFAULT_TABS;
+  const flowImages =
+    data?.flow_images && Array.isArray(data.flow_images) && data.flow_images.length > 0
+      ? data.flow_images.map((m: any) => mediaUrl(m) || "").map(
+          (u: string, i: number) => u || DEFAULT_FLOW_IMAGES[i] || ""
+        )
+      : DEFAULT_FLOW_IMAGES;
+  const logos =
+    data?.logos && Array.isArray(data.logos) && data.logos.length > 0
+      ? data.logos.map((m: any) => mediaUrl(m) || "").map(
+          (u: string, i: number) => u || DEFAULT_LOGOS[i] || ""
+        )
+      : DEFAULT_LOGOS;
+  const tabLabel = (i: number) => tabs[i] || DEFAULT_TABS[i] || "";
+  const flowSrc = (i: number) => flowImages[i] || DEFAULT_FLOW_IMAGES[i];
 
   return (
     <div
@@ -43,7 +77,7 @@ export function DeveloperPipeline() {
         <p
           className={`${dmMono.className} absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[13px] leading-[19.5px] uppercase tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] not-italic`}
         >
-          Real-time AI at edge
+          {tagText}
         </p>
         <div className="absolute left-[6.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
         <div className="absolute left-[170.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
@@ -72,7 +106,7 @@ export function DeveloperPipeline() {
           className={`${gilroyMedium.className} absolute left-1/2 top-[calc(50%-24.5px)] -translate-x-1/2 bg-clip-text text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic`}
           style={{ backgroundImage: PIPELINE_TITLE_GRADIENT }}
         >
-          The ModelForge Pipeline
+          {heading}
         </h2>
       </div>
 
@@ -94,21 +128,21 @@ export function DeveloperPipeline() {
 
       {/* Logos — mix-blend-lighten, top 178.32 */}
       <PipelineLogo
-        src="/developer/pipeline-logo-1.png"
+        src={logos[0] || DEFAULT_LOGOS[0]}
         left="calc(50% - 195.66px)"
         width={152.288}
         fit="object-bottom"
         style={{ filter: activeTab === 0 ? "brightness(1.2)" : "brightness(0.7) grayscale(0.3)" }}
       />
       <PipelineLogo
-        src="/developer/pipeline-logo-3.png"
+        src={logos[2] || DEFAULT_LOGOS[2]}
         left="calc(50% + 126.66px)"
         width={290.304}
         fit="object-bottom"
         style={{ filter: activeTab === 2 || activeTab === 3 ? "none" : "brightness(0.7) grayscale(0.3)" }}
       />
       <PipelineLogo
-        src="/developer/pipeline-logo-2.png"
+        src={logos[1] || DEFAULT_LOGOS[1]}
         left="calc(50% - 69.01px)"
         width={101.024}
         fit="object-cover"
@@ -116,19 +150,19 @@ export function DeveloperPipeline() {
       />
 
       {/* Clickable hotspots to change active tab diagram */}
-      <button onClick={() => setActiveTab(0)} className="absolute w-[80px] h-[80px] rounded-full cursor-pointer z-50 transition-transform hover:scale-110" style={{ left: 524, top: 226.5, transform: "translate(-50%, -50%)", background: "transparent", border: "none" }} aria-label="Train" />
-      <button onClick={() => setActiveTab(1)} className="absolute w-[80px] h-[80px] rounded-full cursor-pointer z-50 transition-transform hover:scale-110" style={{ left: 651, top: 226.5, transform: "translate(-50%, -50%)", background: "transparent", border: "none" }} aria-label="Optimize" />
-      <button onClick={() => setActiveTab(2)} className="absolute w-[80px] h-[80px] rounded-full cursor-pointer z-50 transition-transform hover:scale-110" style={{ left: 773, top: 226.5, transform: "translate(-50%, -50%)", background: "transparent", border: "none" }} aria-label="Integrate" />
-      <button onClick={() => setActiveTab(3)} className="absolute w-[80px] h-[80px] rounded-full cursor-pointer z-50 transition-transform hover:scale-110" style={{ left: 920, top: 226.5, transform: "translate(-50%, -50%)", background: "transparent", border: "none" }} aria-label="Deploy" />
+      <button onClick={() => setActiveTab(0)} className="absolute w-[80px] h-[80px] rounded-full cursor-pointer z-50 transition-transform hover:scale-110" style={{ left: 524, top: 226.5, transform: "translate(-50%, -50%)", background: "transparent", border: "none" }} aria-label={tabLabel(0)} />
+      <button onClick={() => setActiveTab(1)} className="absolute w-[80px] h-[80px] rounded-full cursor-pointer z-50 transition-transform hover:scale-110" style={{ left: 651, top: 226.5, transform: "translate(-50%, -50%)", background: "transparent", border: "none" }} aria-label={tabLabel(1)} />
+      <button onClick={() => setActiveTab(2)} className="absolute w-[80px] h-[80px] rounded-full cursor-pointer z-50 transition-transform hover:scale-110" style={{ left: 773, top: 226.5, transform: "translate(-50%, -50%)", background: "transparent", border: "none" }} aria-label={tabLabel(2)} />
+      <button onClick={() => setActiveTab(3)} className="absolute w-[80px] h-[80px] rounded-full cursor-pointer z-50 transition-transform hover:scale-110" style={{ left: 920, top: 226.5, transform: "translate(-50%, -50%)", background: "transparent", border: "none" }} aria-label={tabLabel(3)} />
 
       {/* Step labels */}
-      <StepLabel left={477.83} top={281.8} active={activeTab === 0} onClick={() => setActiveTab(0)}>Train</StepLabel>
-      <StepLabel left={606.8} top={281.8} active={activeTab === 1} onClick={() => setActiveTab(1)}>Optimize</StepLabel>
-      <StepLabel left={748.8} top={282.8} active={activeTab === 2} onClick={() => setActiveTab(2)}>Integrate</StepLabel>
-      <StepLabel left={904.8} top={281.8} active={activeTab === 3} onClick={() => setActiveTab(3)}>Deploy</StepLabel>
+      <StepLabel left={477.83} top={281.8} active={activeTab === 0} onClick={() => setActiveTab(0)}>{tabLabel(0)}</StepLabel>
+      <StepLabel left={606.8} top={281.8} active={activeTab === 1} onClick={() => setActiveTab(1)}>{tabLabel(1)}</StepLabel>
+      <StepLabel left={748.8} top={282.8} active={activeTab === 2} onClick={() => setActiveTab(2)}>{tabLabel(2)}</StepLabel>
+      <StepLabel left={904.8} top={281.8} active={activeTab === 3} onClick={() => setActiveTab(3)}>{tabLabel(3)}</StepLabel>
 
       {/* Dynamic Flow Diagrams */}
-      <FlowDiagram activeTab={activeTab} />
+      <FlowDiagram activeTab={activeTab} flowSrc={flowSrc} />
     </div>
   );
 }
@@ -186,7 +220,13 @@ function StepLabel({
   );
 }
 
-function FlowDiagram({ activeTab }: { activeTab: number }) {
+function FlowDiagram({
+  activeTab,
+  flowSrc,
+}: {
+  activeTab: number;
+  flowSrc: (i: number) => string;
+}) {
   return (
     <div className="pointer-events-none">
       {/* State 0: Train */}
@@ -195,7 +235,7 @@ function FlowDiagram({ activeTab }: { activeTab: number }) {
         style={{ left: "50%", top: 347.8, width: 1135, height: 270 }}
       >
         <div className="absolute inset-0 overflow-hidden">
-          <img alt="" src="/developer/train-flow-1.png" className="absolute left-[-36.45%] top-[-42.84%] h-[194.25%] w-[138.68%] max-w-none" />
+          <img alt="" src={flowSrc(0)} className="absolute left-[-36.45%] top-[-42.84%] h-[194.25%] w-[138.68%] max-w-none" />
         </div>
       </div>
 
@@ -205,7 +245,7 @@ function FlowDiagram({ activeTab }: { activeTab: number }) {
         style={{ left: "50%", top: 310.58, width: 1292.934, height: 306.901 }}
       >
         <div className="absolute inset-0 overflow-hidden">
-          <img alt="" src="/developer/train-flow-2.png" className="absolute left-[-28.88%] top-[-36.36%] h-[181.28%] w-[128.88%] max-w-none" />
+          <img alt="" src={flowSrc(1)} className="absolute left-[-28.88%] top-[-36.36%] h-[181.28%] w-[128.88%] max-w-none" />
         </div>
       </div>
 
@@ -214,7 +254,7 @@ function FlowDiagram({ activeTab }: { activeTab: number }) {
         className={`absolute -translate-x-1/2 transition-opacity duration-300 ${activeTab === 2 ? "opacity-100" : "opacity-0"}`}
         style={{ left: "50%", top: 342.58, width: 1271.162, height: 284.896 }}
       >
-        <img alt="" src="/developer/train-flow-3.png" className="absolute inset-0 size-full max-w-none object-cover" />
+        <img alt="" src={flowSrc(2)} className="absolute inset-0 size-full max-w-none object-cover" />
       </div>
 
       {/* State 3: Deploy */}
@@ -222,7 +262,7 @@ function FlowDiagram({ activeTab }: { activeTab: number }) {
         className={`absolute -translate-x-1/2 transition-opacity duration-300 ${activeTab === 3 ? "opacity-100" : "opacity-0"}`}
         style={{ left: "50%", top: 361.08, width: 1280.186, height: 216.001 }}
       >
-        <img alt="" src="/developer/train-flow-4.png" className="absolute inset-0 size-full max-w-none object-cover" />
+        <img alt="" src={flowSrc(3)} className="absolute inset-0 size-full max-w-none object-cover" />
       </div>
     </div>
   );

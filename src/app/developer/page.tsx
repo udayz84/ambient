@@ -6,6 +6,7 @@ import { DeveloperComingSoon } from "@/components/developer/DeveloperComingSoon"
 import { DeveloperModulesSection } from "@/components/developer/DeveloperModulesSection";
 import { DeveloperCopilotsSection } from "@/components/developer/DeveloperCopilotsSection";
 import { ScaledCanvas } from "@/components/developer/ScaledCanvas";
+import { getSingleType } from "@/lib/strapi";
 
 export const metadata: Metadata = {
   title: "Developer | Ambient Scientific",
@@ -13,25 +14,40 @@ export const metadata: Metadata = {
     "ModelForge bridges training and deployment. Quantize, compile, and merge neural networks with your firmware — model to deployment in 15 minutes.",
 };
 
-/**
- * Desktop canvas ends at 4421 (where the global SiteFooter begins); the
- * co-pilots section overflows to 4785, merging into the footer. The
- * ScaledCanvas shrinks the whole 1440 design to fit narrower viewports.
- * Figma 2438:4365.
- */
 const CANVAS_HEIGHT = 4421;
 
-export default function DeveloperPage() {
+export default async function DeveloperPage() {
+  let data: any = null;
+  try {
+    data = await getSingleType<any>("developer-page", [
+      "hero",
+      "code",
+      "pipeline",
+      "coming_soon",
+      { section: "modules", nested: ["modules"] },
+      { section: "copilots", nested: ["copilots"] },
+      "seo",
+    ]);
+  } catch {
+    data = null;
+  }
+
   return (
     <main className="relative z-10 w-full overflow-x-clip bg-black">
       <div className="-mt-[78px]">
         <ScaledCanvas width={1440} height={CANVAS_HEIGHT}>
-          <DeveloperHero />
-          <DeveloperCodeSection />
-          <DeveloperPipeline />
-          <DeveloperComingSoon />
-          <DeveloperModulesSection />
-          <DeveloperCopilotsSection />
+          {data?.hero ? <DeveloperHero data={data.hero} /> : null}
+          {data?.code ? <DeveloperCodeSection data={data.code} /> : null}
+          {data?.pipeline ? <DeveloperPipeline data={data.pipeline} /> : null}
+          {data?.coming_soon ? (
+            <DeveloperComingSoon data={data.coming_soon} />
+          ) : null}
+          {data?.modules ? (
+            <DeveloperModulesSection data={data.modules} />
+          ) : null}
+          {data?.copilots ? (
+            <DeveloperCopilotsSection data={data.copilots} />
+          ) : null}
         </ScaledCanvas>
       </div>
     </main>

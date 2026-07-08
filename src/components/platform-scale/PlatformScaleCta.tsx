@@ -2,10 +2,13 @@ import { interMedium } from "../hero/fonts";
 import { RepelDots } from "../shared/RepelDots";
 import { Corners } from "../shared/Corners";
 
-export function PlatformScaleCta() {
+export function PlatformScaleCta({ data }: { data?: any }) {
+  const cta = data?.cta || {};
+  const label = cta.label || "EXPLORE AMBIENT SILICON";
+  const href = cta.href || "/technology";
   return (
     <a
-      href="/technology"
+      href={href}
       className={`${interMedium.className} absolute top-[1000.912109375px] left-[604.5px] h-[48px] w-[231px] shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
       data-node-id="2379:660"
       data-name="Cta"
@@ -21,13 +24,13 @@ export function PlatformScaleCta() {
         className="absolute z-10 top-[calc(50%-13.91px)] left-1/2 -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]"
         data-node-id="2379:661"
       >
-        EXPLORE AMBIENT SILICON
+        {label}
       </p>
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
       />
-      
+
       {/* Custom Corners that pop out slightly to avoid the inset shadow */}
       <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">
         <div className="rotate-180 flex-none">

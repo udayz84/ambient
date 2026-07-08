@@ -13,16 +13,18 @@ const CAROUSEL_IMAGES = [
   "/wearables-marquee/w7.png",
 ];
 
-export function WearablesCarousel() {
+export function WearablesCarousel({ images }: { images?: string[] }) {
+  const slides =
+    Array.isArray(images) && images.length > 0 ? images : CAROUSEL_IMAGES;
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % CAROUSEL_IMAGES.length);
+      setCurrentIndex((prev) => (prev + 1) % slides.length);
     }, 3000); // stay for around 2s
 
     return () => clearInterval(timer);
-  }, []);
+  }, [slides.length]);
 
   return (
     <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden z-[5]">
@@ -37,7 +39,7 @@ export function WearablesCarousel() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={CAROUSEL_IMAGES[currentIndex]}
+            src={slides[currentIndex]}
             alt=""
             className="w-full h-full object-contain"
           />

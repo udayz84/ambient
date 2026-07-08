@@ -31,7 +31,36 @@ const VALUE_CARDS = [
   },
 ] as const;
 
-export function CompanyDna() {
+const FALLBACK_HEADING = "Driven by physics.\nDefined by our DNA.";
+const FALLBACK_SUBTITLE =
+  "We build from first principles and validate everything in silicon.";
+
+type CompanyDnaProps = {
+  data?: any;
+};
+
+export function CompanyDna({ data }: CompanyDnaProps = {}) {
+  const heading = (data?.heading as string) || FALLBACK_HEADING;
+  const subtitle = (data?.subtitle as string) || FALLBACK_SUBTITLE;
+  const headingLines = heading.split("\n");
+
+  const strapiCards = Array.isArray(data?.value_cards) ? data.value_cards : null;
+  const cards: { title: string; description: string; nodeId: string }[] =
+    strapiCards && strapiCards.length > 0
+      ? strapiCards.map((c: any, i: number) => {
+          const fallback = VALUE_CARDS[i] ?? VALUE_CARDS[VALUE_CARDS.length - 1];
+          return {
+            title: (c?.title as string) || fallback.title,
+            description: (c?.description as string) || fallback.description,
+            nodeId: fallback.nodeId,
+          };
+        })
+      : (VALUE_CARDS as readonly {
+          title: string;
+          description: string;
+          nodeId: string;
+        }[]);
+
   return (
     <section
       className="absolute top-[2511px] left-0 z-[6] h-[1729px] w-[1440px] overflow-hidden bg-black"
@@ -61,8 +90,18 @@ export function CompanyDna() {
             gradientDeg="105.739deg"
             className="w-fit text-center whitespace-nowrap"
           >
-            <p className="mb-0 leading-[49px]">Driven by physics.</p>
-            <p className="leading-[49px]">Defined by our DNA.</p>
+            {headingLines.map((line, i) => (
+              <p
+                key={i}
+                className={
+                  i === headingLines.length - 1
+                    ? "leading-[49px]"
+                    : "mb-0 leading-[49px]"
+                }
+              >
+                {line}
+              </p>
+            ))}
           </GradientTitle>
           <CornerDecor />
         </div>
@@ -70,7 +109,7 @@ export function CompanyDna() {
           className={`${interRegular.className} w-full shrink-0 text-center text-[18px] leading-[27px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic`}
           data-node-id="2379:2099"
         >
-          We build from first principles and validate everything in silicon.
+          {subtitle}
         </p>
       </div>
 
@@ -80,12 +119,12 @@ export function CompanyDna() {
         data-name="Group 1410085774"
       >
         <div className="flex w-[390px] flex-col gap-[44px]">
-          <CompanyDnaValueCard {...VALUE_CARDS[0]} />
-          <CompanyDnaValueCard {...VALUE_CARDS[2]} />
+          <CompanyDnaValueCard {...cards[0]} />
+          <CompanyDnaValueCard {...cards[2]} />
         </div>
         <div className="flex w-[390px] flex-col gap-[44px]">
-          <CompanyDnaValueCard {...VALUE_CARDS[1]} />
-          <CompanyDnaValueCard {...VALUE_CARDS[3]} />
+          <CompanyDnaValueCard {...cards[1]} />
+          <CompanyDnaValueCard {...cards[3]} />
         </div>
       </div>
     </section>

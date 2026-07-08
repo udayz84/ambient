@@ -1,0 +1,106 @@
+{
+  "hero": {
+    "title": "The physical launchpad for microwatt Edge AI.",
+    "subtitle": "Validate real-time AI at microwatt power levels out of the box. The Cranium Development Kit comes fully loaded with onboard sensors, rich I/O, and pre-integrated drivers so you can stop breadboarding and start testing inferences in minutes.",
+    "cta_label": "Request Evaluation Kit",
+    "background_image_1": 131,
+    "background_image_2": 132
+  },
+  "hardware_stack": {
+    "heading": "The complete Edge AI hardware stack in a single footprint",
+    "subtitle": "An exhaustive suite of sensors, interfaces, and debug tools pre-integrated with the GPX-10 Pro AI Processor.",
+    "label": "The Hardware Blueprint",
+    "board_image": 133,
+    "chip_image": 134,
+    "spec_cards": [
+      {
+        "title": "Memory",
+        "items": "512KB SRAM\n8MB Flash\nExternal SPI Support",
+        "is_accent": false
+      },
+      {
+        "title": "Wireless",
+        "items": "Bluetooth 5.0 LE\n802.15.4 Ready\nOnboard Antenna",
+        "is_accent": false
+      },
+      {
+        "title": "Sensors",
+        "items": "I2S Digital Mic\nAnalog Mic\n3-Axis Accelerometer\nAmbient Light Sensor",
+        "is_accent": true
+      },
+      {
+        "title": "Debug Ports",
+        "items": "USB-C Programming\n10-Pin JTAG\nUART Console\nGPIO Breakout",
+        "is_accent": false
+      },
+      {
+        "title": "Interfaces",
+        "items": "SPI, I2C, UART\nCamera Connector\nProgrammable LEDs\nButton Inputs",
+        "is_accent": false
+      }
+    ]
+  },
+  "demos": {
+    "heading": "Pre-loaded demos. Instant AI validation.",
+    "subtitle": "Don't spend your first day writing sensor configuration code. The Cranium board comes ready to run out of the box, allowing you to instantly test physical AI models and validate performance on the metal with zero setup required.",
+    "demo_cards": [
+      {
+        "title_line_1": "Voice-Based",
+        "title_line_2": "Keyword Spotting",
+        "description": "Utilize the onboard I2S and analog microphones to instantly test offline wake-word detection and voice commands in physically noisy environments.",
+        "image": 65
+      },
+      {
+        "title_line_1": "IMU-Based",
+        "title_line_2": "Fall Detection",
+        "description": "Leverage the integrated 3-axis digital accelerometer to run continuous, microwatt-level motion analysis and instant fall detection natively on the device.",
+        "image": 135
+      },
+      {
+        "title_line_1": "Vision-Based",
+        "title_line_2": "Gesture Recognition",
+        "description": "Route a camera feed through the dedicated connector to validate real-time spatial awareness and gesture recognition without relying on a cloud round-trip.",
+        "image": 135,
+        "image_overlay": 136
+      }
+    ]
+  },
+  "modelforge": {
+    "heading": "Powered by ModelForge.",
+    "subtitle": "Don't let software be the bottleneck. The Cranium DVK is fully supported by our unified software toolchain, designed to take you from a standard TensorFlow model to on-silicon inference in under 15 minutes.",
+    "card_glow_image": null,
+    "toolchain_labels": "RTOS\nDRIVERS\nCOMPILER",
+    "descriptions": "Your Model\nAutomated TFLite conversion &\nquantization\n\nModelForge SDK\nPre-integrated RTOS & Eclipse-based Unified Build\n\nCranium DVK\n15 minutes to on-silicon execution"
+  },
+  "integrated_modules": {
+    "heading": "From Cranium to Integrated Modules.",
+    "subtitle": "The exact C-code, hardware configurations, and unified build you validate on the Cranium DVK ports directly to our production-ready System-on-Modules (SOMs).",
+    "cards": [
+      {
+        "title": "Cranium DVK",
+        "description": "Validate your logic on the Cranium kit today with full debug capabilities and rich I/O."
+      },
+      {
+        "title": "SOM Module",
+        "description": "Drop our high-density SOM directly into your product without rewriting your application software."
+      }
+    ],
+    "primary_button": {
+      "label": "Explore SOMs",
+      "href": "/SOM",
+      "variant": "primary"
+    },
+    "secondary_button": {
+      "label": "Schedule Technical Consultation",
+      "href": "/contact",
+      "variant": "secondary"
+    }
+  },
+  "seo": {
+    "meta_title": "Cranium Development Kit | Ambient Scientific",
+    "meta_description": "Validate real-time AI at microwatt power out of the box. The Cranium Development Kit comes fully loaded with sensors, rich I/O, and pre-integrated drivers.",
+    "keywords": "Cranium DVK, development kit, edge AI evaluation, GPX-10 Pro, sensors, JTAG",
+    "noindex": false,
+    "canonical_url": "/dvk"
+  }
+}

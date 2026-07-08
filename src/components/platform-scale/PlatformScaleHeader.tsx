@@ -4,7 +4,14 @@ import { gilroyMedium, interRegular } from "../hero/fonts";
 const cornerLeft = "/hero/corner-tag-1.svg";
 const cornerRight = "/hero/corner-tag-2.svg";
 
-export function PlatformScaleHeader() {
+export function PlatformScaleHeader({ data }: { data?: any }) {
+  const heading = data?.heading || "One platform,\ninfinite scale";
+  const lines = heading.split("\n");
+  const line1 = lines[0] || "One platform,";
+  const line2 = lines.slice(1).join("\n") || "infinite scale";
+  const subtitle =
+    data?.subtitle ||
+    "A modular compute fabric for your entire product roadmap, from a microwatt edge array to a hyperscaler server grid, without ever changing your software";
   return (
     <>
       <div
@@ -23,8 +30,8 @@ export function PlatformScaleHeader() {
                 "linear-gradient(100.945deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
             }}
           >
-            <p className="mb-0 leading-[49px]">One platform,</p>
-            <p className="leading-[49px]">infinite scale</p>
+            <p className="mb-0 leading-[49px]">{line1}</p>
+            <p className="leading-[49px]">{line2}</p>
           </h2>
 
           <div className="relative col-start-1 row-start-1 mt-[4px] ml-[321.87109375px] flex size-[4px] items-center justify-center">
@@ -94,9 +101,7 @@ export function PlatformScaleHeader() {
         className={`${interRegular.className} absolute top-[245px] left-[805.11279296875px] w-[517px] text-right text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
         data-node-id="2379:625"
       >
-        A modular compute fabric for your entire product roadmap, from a
-        microwatt edge array to a hyperscaler server grid, without every
-        changing your software
+        {subtitle}
       </p>
     </>
   );

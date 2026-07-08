@@ -3,13 +3,19 @@ import { Corners } from "../shared/Corners";
 import { DvkDemosCards } from "./DvkDemosCards";
 import { CORNER_LEFT, CORNER_RIGHT, DEMOS_TITLE_GRADIENT } from "./dvk-data";
 
+const DEFAULT_HEADING = "Pre-loaded demos. Instant AI validation.";
+const DEFAULT_SUBTITLE =
+  "Don't spend your first day writing sensor configuration code. The Cranium board comes ready to run out of the box, allowing you to instantly test physical AI models and validate performance on the metal with zero setup required.";
+
 /**
  * Figma 2761:2791 (+ 2799/2809/2819) — demos section.
  * Title frame (872 wide) sits above the three-card row (1256 wide); both are
  * centered. The 53px gap mirrors the Figma canvas spacing between the title
  * frame bottom (y=1705) and the cards top (y=1758.5).
  */
-export function DvkDemos() {
+export function DvkDemos({ data }: { data?: any }) {
+  const heading = data?.heading || DEFAULT_HEADING;
+  const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
   return (
     <div className="relative flex w-full flex-col items-center gap-[53px]">
       {/* Section title — 2761:2791 (872×136) */}
@@ -36,7 +42,7 @@ export function DvkDemos() {
             }}
             data-node-id="2761:2793"
           >
-            Pre-loaded demos. Instant AI validation.
+            {heading}
           </h2>
         </div>
 
@@ -46,15 +52,12 @@ export function DvkDemos() {
           style={{ width: 650 }}
           data-node-id="2761:2798"
         >
-          Don&apos;t spend your first day writing sensor configuration code. The
-          Cranium board comes ready to run out of the box, allowing you to
-          instantly test physical AI models and validate performance on the metal
-          with zero setup required.
+          {subtitle}
         </p>
       </div>
 
       {/* Demo cards row — 1256 wide */}
-      <DvkDemosCards />
+      <DvkDemosCards data={data} />
     </div>
   );
 }

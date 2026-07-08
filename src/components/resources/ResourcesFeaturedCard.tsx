@@ -8,7 +8,17 @@ const badgeCornerTr = "/resources/badge-corner-tr.svg";
 const cardCornerLeft = "/hero/vector-57.svg";
 const cardCornerRight = "/hero/vector-55.svg";
 
-type ResourcesFeaturedCardProps = ResourceFeaturedCard;
+const FALLBACK_TITLE = "Re-architecting the Physics of AI Compute.";
+const FALLBACK_DESCRIPTION =
+  "Standard chips waste time translating AI workloads. Our architecture processes matrix math natively for high-density performance.";
+const FALLBACK_CTA_LABEL = "Download PDF";
+
+type ResourcesFeaturedCardProps = ResourceFeaturedCard & {
+  title?: string;
+  description?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+};
 
 export function ResourcesFeaturedCard({
   nodeId,
@@ -19,6 +29,10 @@ export function ResourcesFeaturedCard({
   badgeNodeId,
   badgeLabel,
   badgeVariant,
+  title = FALLBACK_TITLE,
+  description = FALLBACK_DESCRIPTION,
+  ctaLabel = FALLBACK_CTA_LABEL,
+  ctaHref = "#",
 }: ResourcesFeaturedCardProps) {
   return (
     <article
@@ -48,21 +62,20 @@ export function ResourcesFeaturedCard({
           <h3
             className={`${gilroyMedium.className} w-[290px] text-[22px] leading-[28px] font-medium text-white opacity-90 not-italic [word-break:break-word]`}
           >
-            Re-architecting the Physics of AI Compute.
+            {title}
           </h3>
           <p
             className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[#a4a4a4] opacity-90 not-italic [word-break:break-word]`}
           >
-            Standard chips waste time translating AI workloads. Our architecture
-            processes matrix math natively for high-density performance.
+            {description}
           </p>
         </div>
         <GreenCtaButton
           className="w-[231px]"
-          href="#"
+          href={ctaHref}
           textClassName={`${gilroyMedium.className} text-[16px] leading-[28px] font-medium`}
         >
-          Download PDF
+          {ctaLabel}
         </GreenCtaButton>
       </div>
 

@@ -1,3 +1,4 @@
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
@@ -12,17 +13,51 @@ const LABEL_LINE = "/technology/graph-label-line.svg";
 
 const TITLE_GRADIENT_DEG = "102.791deg";
 const SUBTITLE_OPACITY = 0.65;
-const SUBTITLE_TEXT =
-  "Bridge the lab and real world. The Sparsh module offers continuous, microwatt intelligence in a 21×21mm size,";
+const FALLBACK_TAG = "Inside Sensemesh";
+const FALLBACK_HEADING = "Proven in silicon,\nshipping today.";
+const FALLBACK_SUBTITLE =
+  "Bridge the lab and real world. The Sparsh module offers continuous, microwatt intelligence in a 21\u00d721mm size,";
+const FALLBACK_DESC =
+  "A new architecture for AI, energy-aware at every layer, scaling from coin cell to cloud.";
+const FALLBACK_CTA_LABEL = "Explore GPX10";
+
+const FALLBACK_STATS = [
+  {
+    value: "512",
+    unit: "GOPS",
+    unitClass: "text-[32px] leading-[38px]",
+    label: "LOWER POWER CONSUMPTION",
+    description:
+      "Extend battery life and reduce energy costs in compute-intensive settings.",
+  },
+  {
+    value: "~80",
+    unit: "uW",
+    unitClass: "text-[38px] leading-[47px]",
+    label: "LOWER POWER CONSUMPTION",
+    description:
+      "Extend battery life and reduce energy costs in compute-intensive settings.",
+  },
+];
+
+const STAT_CARD_CONFIG = [
+  { left: 106, top: 372.85, unitClass: "text-[32px] leading-[38px]", mobileUnitClass: "text-[22px] leading-[26px]", nodeId: "3015:538" },
+  { left: 978.47, top: 474.85, unitClass: "text-[38px] leading-[47px]", mobileUnitClass: "text-[24px] leading-[28px]", nodeId: "3015:578" },
+];
 
 const VIGNETTE =
   "radial-gradient(85.4% 50% at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%)";
 
-const CARD_DESC =
-  "Extend battery life and reduce energy costs in compute-intensive settings.";
-
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
+
+type StatCardData = {
+  value: string;
+  unit: string;
+  unitClass: string;
+  label: string;
+  description: string;
+};
 
 function StatCard({
   left,
@@ -30,6 +65,8 @@ function StatCard({
   value,
   unit,
   unitClass,
+  label,
+  description,
   nodeId,
 }: {
   left: number;
@@ -37,6 +74,8 @@ function StatCard({
   value: string;
   unit: string;
   unitClass: string;
+  label: string;
+  description: string;
   nodeId: string;
 }) {
   return (
@@ -67,7 +106,7 @@ function StatCard({
         <p
           className={`${interRegular.className} text-[18px] leading-[27px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic`}
         >
-          LOWER POWER CONSUMPTION
+          {label}
         </p>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -83,13 +122,36 @@ function StatCard({
         className={`${interRegular.className} absolute top-[175.34px] left-[30px] w-[327.508px] text-[18px] leading-[27px] font-normal text-white not-italic [word-break:break-word]`}
         style={{ opacity: 0.9 }}
       >
-        {CARD_DESC}
+        {description}
       </p>
     </div>
   );
 }
 
-export function TechnologyPageSilicon() {
+export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
+  const tagText = data?.tag?.text || FALLBACK_TAG;
+  const heading = data?.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const bgSrc = mediaUrl(data?.background_image) || SILICON_BG;
+  const chipBgSrc = mediaUrl(data?.chip_background) || CHIP_BG;
+  const chipObjectSrc = mediaUrl(data?.chip_object) || CHIP_OBJECT;
+  const ctaLabel = data?.cta?.label || FALLBACK_CTA_LABEL;
+  const ctaHref = data?.cta?.href || "#";
+
+  const strapiStats = Array.isArray(data?.stat_cards) ? data.stat_cards : [];
+  const statCards: StatCardData[] = STAT_CARD_CONFIG.map((cfg, i) => {
+    const s = strapiStats[i];
+    const fb = FALLBACK_STATS[i] ?? FALLBACK_STATS[FALLBACK_STATS.length - 1];
+    return {
+      value: (s?.value as string) || fb.value,
+      unit: (s?.unit as string) || fb.unit,
+      unitClass: cfg.unitClass,
+      label: (s?.label as string) || fb.label,
+      description: (s?.description as string) || fb.description,
+    };
+  });
+
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -108,7 +170,7 @@ export function TechnologyPageSilicon() {
           <div aria-hidden className="absolute inset-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={SILICON_BG}
+              src={bgSrc}
               alt=""
               className="absolute inset-0 size-full max-w-none object-bottom"
             />
@@ -138,7 +200,7 @@ export function TechnologyPageSilicon() {
           <div className="absolute left-1/2 top-1/2 h-[536.9px] w-[417.67px] -translate-x-1/2 -translate-y-1/2 overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={CHIP_BG}
+              src={chipBgSrc}
               alt=""
               className="absolute left-0 top-[5.31%] h-[89.37%] w-full max-w-none"
             />
@@ -147,7 +209,7 @@ export function TechnologyPageSilicon() {
           <div className="absolute top-[110.4px] left-[150px] h-[59.93px] w-[116.72px] rotate-[1.84deg] overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={CHIP_OBJECT}
+              src={chipObjectSrc}
               alt=""
               className="absolute left-[-44.69%] top-[-28.9%] h-[127.84%] w-[144.32%] max-w-none"
             />
@@ -174,22 +236,19 @@ export function TechnologyPageSilicon() {
         />
 
         {/* stat cards */}
-        <StatCard
-          left={106}
-          top={372.85}
-          value="512"
-          unit="GOPS"
-          unitClass="text-[32px] leading-[38px]"
-          nodeId="3015:538"
-        />
-        <StatCard
-          left={978.47}
-          top={474.85}
-          value="~80"
-          unit="uW"
-          unitClass="text-[38px] leading-[47px]"
-          nodeId="3015:578"
-        />
+        {statCards.map((s, i) => (
+          <StatCard
+            key={i}
+            left={STAT_CARD_CONFIG[i].left}
+            top={STAT_CARD_CONFIG[i].top}
+            value={s.value}
+            unit={s.unit}
+            unitClass={s.unitClass}
+            label={s.label}
+            description={s.description}
+            nodeId={STAT_CARD_CONFIG[i].nodeId}
+          />
+        ))}
 
         {/* 3015:519 — header */}
         <div
@@ -198,7 +257,7 @@ export function TechnologyPageSilicon() {
           data-name="Frame 1984079466"
         >
           <TagBadge
-            label="Inside Sensemesh"
+            label={tagText}
             width={168}
             labelOffsetX={0}
             rightBarLeft={158.15}
@@ -213,10 +272,10 @@ export function TechnologyPageSilicon() {
           >
             <GradientTitle gradientDeg={TITLE_GRADIENT_DEG} className="text-center">
               <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-                Proven in silicon,
+                {headingLines[0] ?? ""}
               </span>
               <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-                shipping today.
+                {headingLines[1] ?? ""}
               </span>
             </GradientTitle>
             <CornerDecor />
@@ -227,7 +286,7 @@ export function TechnologyPageSilicon() {
             style={{ opacity: SUBTITLE_OPACITY }}
             data-node-id="3015:536"
           >
-            {SUBTITLE_TEXT}
+            {subtitle}
           </p>
         </div>
 
@@ -237,8 +296,7 @@ export function TechnologyPageSilicon() {
           style={{ opacity: 0.8 }}
           data-node-id="3015:604"
         >
-          A new architecture for AI, energy-aware at every layer, scaling from
-          coin cell to cloud.
+          {FALLBACK_DESC}
         </p>
 
         {/* CTA */}
@@ -247,7 +305,7 @@ export function TechnologyPageSilicon() {
           data-node-id="3015:605"
         >
           <a
-            href="#"
+            href={ctaHref}
             className={`${gilroyMedium.className} ${GREEN_CTA_SHADOW} relative block h-[48px] w-[223px] shrink-0`}
             data-node-id="3015:606"
             data-name="Cta"
@@ -261,7 +319,7 @@ export function TechnologyPageSilicon() {
               className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
             />
             <span className="absolute top-[calc(50%-14px)] left-1/2 -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
-              Explore GPX10
+              {ctaLabel}
             </span>
             <CornerDecor />
           </a>
@@ -271,7 +329,7 @@ export function TechnologyPageSilicon() {
       {/* MOBILE (<1024px) — basic responsive version */}
       <div className="flex w-full flex-col items-center gap-[28px] px-[24px] py-[56px] min-[1024px]:hidden">
         <TagBadge
-          label="Inside Sensemesh"
+          label={tagText}
           width={168}
           labelOffsetX={0}
           rightBarLeft={158.15}
@@ -287,68 +345,59 @@ export function TechnologyPageSilicon() {
             backgroundClip: "text",
           }}
         >
-          <span className="block">Proven in silicon,</span>
-          <span className="block">shipping today.</span>
+          <span className="block">{headingLines[0] ?? ""}</span>
+          <span className="block">{headingLines[1] ?? ""}</span>
         </div>
 
         <p
           className={`${interRegular.className} max-w-[327px] text-center text-[15px] leading-[22px] font-normal text-[#f0f0f0] not-italic`}
           style={{ opacity: SUBTITLE_OPACITY }}
         >
-          {SUBTITLE_TEXT}
+          {subtitle}
         </p>
 
         {/* chip image */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={CHIP_BG}
+          src={chipBgSrc}
           alt=""
           className="h-auto w-full max-w-[327px] rounded-[8px] object-contain"
           aria-hidden
         />
 
         {/* stat cards */}
-        <div className="flex w-full max-w-[327px] flex-col gap-[16px] rounded-[4px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.15)] p-[20px]">
-          <p className={`${gilroyMedium.className} text-white not-italic`}>
-            <span className="text-[44px] leading-[48px]">512 </span>
-            <span className="text-[22px] leading-[26px]">GOPS</span>
-          </p>
-          <p className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-[#f0f0f0] not-italic`}>
-            LOWER POWER CONSUMPTION
-          </p>
-          <p className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-white not-italic`} style={{ opacity: 0.9 }}>
-            {CARD_DESC}
-          </p>
-        </div>
-
-        <div className="flex w-full max-w-[327px] flex-col gap-[16px] rounded-[4px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.15)] p-[20px]">
-          <p className={`${gilroyMedium.className} text-white not-italic`}>
-            <span className="text-[44px] leading-[48px]">~80 </span>
-            <span className="text-[24px] leading-[28px]">uW</span>
-          </p>
-          <p className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-[#f0f0f0] not-italic`}>
-            LOWER POWER CONSUMPTION
-          </p>
-          <p className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-white not-italic`} style={{ opacity: 0.9 }}>
-            {CARD_DESC}
-          </p>
-        </div>
+        {statCards.map((s, i) => (
+          <div
+            key={`m-stat-${i}`}
+            className="flex w-full max-w-[327px] flex-col gap-[16px] rounded-[4px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.15)] p-[20px]"
+          >
+            <p className={`${gilroyMedium.className} text-white not-italic`}>
+              <span className="text-[44px] leading-[48px]">{s.value} </span>
+              <span className={STAT_CARD_CONFIG[i].mobileUnitClass}>{s.unit}</span>
+            </p>
+            <p className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-[#f0f0f0] not-italic`}>
+              {s.label}
+            </p>
+            <p className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-white not-italic`} style={{ opacity: 0.9 }}>
+              {s.description}
+            </p>
+          </div>
+        ))}
 
         <p
           className={`${interRegular.className} max-w-[327px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
           style={{ opacity: 0.8 }}
         >
-          A new architecture for AI, energy-aware at every layer, scaling from
-          coin cell to cloud.
+          {FALLBACK_DESC}
         </p>
 
         <a
-          href="#"
+          href={ctaHref}
           className={`${gilroyMedium.className} ${GREEN_CTA_SHADOW} relative block h-[48px] w-full max-w-[327px]`}
         >
           <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
           <span className="absolute top-[calc(50%-14px)] left-1/2 -translate-x-1/2 text-[15px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
-            Explore GPX10
+            {ctaLabel}
           </span>
           <CornerDecor />
         </a>

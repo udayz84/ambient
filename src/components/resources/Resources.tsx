@@ -1,9 +1,13 @@
 import { ResourcesPageClient } from "./ResourcesPageClient";
 
-export function Resources() {
+type ResourcesProps = {
+  data?: any;
+};
+
+export function Resources({ data }: ResourcesProps = {}) {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
-      <ResourcesPageClient />
+      <ResourcesPageClient data={data} />
     </main>
   );
 }

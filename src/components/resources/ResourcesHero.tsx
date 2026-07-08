@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { mediaUrl } from "@/lib/strapi";
 import { interRegular } from "../hero/fonts";
 import { GradientTitle, WhiteCtaButton } from "../contact/contact-shared";
 
@@ -8,7 +9,33 @@ const IMAGE_102_GRADIENT =
 
 const TEXT_FADE_IN_CLASS = "animate-hero-text-fade-in opacity-0";
 
-export function ResourcesHero() {
+const FALLBACK_TITLE =
+  "Explore whitepapers, architectural deep-dives, and performance data";
+const FALLBACK_PLACEHOLDER =
+  "Search architecture, case studies, or GPX metrics...";
+const FALLBACK_SEARCH_LABEL = "Search";
+const FALLBACK_CONTACT_TEXT = "Contact Us";
+const FALLBACK_CONTACT_HREF = "/contact";
+const FALLBACK_BG = "/resources/image-102.png";
+const HERO_TITLE_FRAME = "/resources/hero-title-frame.svg";
+
+type ResourcesHeroProps = {
+  data?: any;
+};
+
+export function ResourcesHero({ data }: ResourcesHeroProps = {}) {
+  const title = (data?.title as string) || FALLBACK_TITLE;
+  const placeholder =
+    (data?.search_placeholder as string) || FALLBACK_PLACEHOLDER;
+  const searchLabel =
+    (data?.search_button_label as string) || FALLBACK_SEARCH_LABEL;
+  const contactText =
+    (data?.contact_link_text as string) || FALLBACK_CONTACT_TEXT;
+  const contactHref =
+    (data?.contact_link_href as string) || FALLBACK_CONTACT_HREF;
+  const bgSrc = mediaUrl(data?.background_image) || FALLBACK_BG;
+  const titleLines = title.split("\n");
+
   return (
     <>
       {/* 2388:421 — rotated image 102 underlay */}
@@ -25,7 +52,7 @@ export function ResourcesHero() {
               data-name="image 102"
             >
               <Image
-                src="/resources/image-102.png"
+                src={bgSrc}
                 alt=""
                 fill
                 className="max-w-none object-cover"
@@ -59,8 +86,11 @@ export function ResourcesHero() {
               gradientDeg="118.129deg"
               className="w-[810px] text-center"
             >
-              Explore whitepapers, architectural deep-dives, and performance
-              data
+              {titleLines.map((line, i) => (
+                <span key={i} className="block">
+                  {line}
+                </span>
+              ))}
             </GradientTitle>
             <div
               className="pointer-events-none absolute top-[-4px] left-0 h-[106px] w-[810px]"
@@ -69,7 +99,7 @@ export function ResourcesHero() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/resources/hero-title-frame.svg"
+                src={HERO_TITLE_FRAME}
                 alt=""
                 className="block size-full max-w-none"
               />
@@ -93,7 +123,7 @@ export function ResourcesHero() {
               type="search"
               name="resources-hero-search"
               autoComplete="off"
-              placeholder="Search architecture, case studies, or GPX metrics..."
+              placeholder={placeholder}
               aria-label="Search resources"
               className={`${interRegular.className} h-full w-full border-0 bg-transparent p-0 text-[14px] leading-[21px] font-normal text-white not-italic outline-none placeholder:text-white/70 focus:outline-none`}
             />
@@ -105,7 +135,7 @@ export function ResourcesHero() {
             <span
               className={`${interRegular.className} text-[16px] leading-[normal] font-normal text-[#121212] not-italic`}
             >
-              Search
+              {searchLabel}
             </span>
           </a>
         </div>
@@ -118,11 +148,11 @@ export function ResourcesHero() {
             Can&apos;t find what you&apos;re looking for?
           </span>
           <Link
-            href="/contact"
+            href={contactHref}
             className="text-[#53d824]"
             data-node-id="2379:1636"
           >
-            Contact Us
+            {contactText}
           </Link>
         </div>
       </div>

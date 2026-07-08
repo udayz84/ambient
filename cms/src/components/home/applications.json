@@ -1,13 +1,11 @@
-﻿{
+{
   "collectionName": "components_home_applications",
   "info": { "displayName": "Applications", "description": "Homepage applications section" },
   "options": {},
   "attributes": {
     "heading": { "type": "string", "required": true },
     "subtitle": { "type": "text" },
-    "active_tab": { "type": "string" },
     "tabs": { "type": "component", "repeatable": true, "component": "home.app-tab" },
-    "feature_cards": { "type": "component", "repeatable": true, "component": "home.app-feature-card" },
     "cta": { "type": "component", "repeatable": false, "component": "shared.cta" }
   }
 }

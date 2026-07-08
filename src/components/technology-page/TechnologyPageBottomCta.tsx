@@ -1,3 +1,4 @@
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 
@@ -5,7 +6,8 @@ const CARD_OUTLINE = "/technology/cta-card-outline.svg";
 
 const SECTION_TITLE_DEG = "119.349deg";
 const CARD_TITLE_DEG = "107.367deg";
-const SECTION_SUBTITLE =
+const FALLBACK_SECTION_TITLE = "Put A-Cube to Work";
+const FALLBACK_SECTION_SUBTITLE =
   "A complete edge-AI SoC — AI engine, control, sensing, memory, and security — integrated so your board doesn't have to be.";
 
 const GREEN_CTA_SHADOW =
@@ -16,24 +18,33 @@ type CardData = {
   titleLines: [string, string];
   body: string;
   cta: string;
+  ctaHref: string;
 };
 
-const CARDS: CardData[] = [
+const FALLBACK_CARDS: CardData[] = [
   {
     nodeId: "2995:1298",
     titleLines: ["Get an", "Evaluation Kit."],
     body: "Explore how Ambient AI can unlock new capabilities in your wearable product. Strategic planning session with our applications team.",
     cta: "Request Eval Kit",
+    ctaHref: "/contact",
   },
   {
     nodeId: "2995:1275",
     titleLines: ["Scale to increase", "the volume."],
     body: "Be the first to access our upcoming Vision, Sound, and Industrial modules.",
     cta: "Talk to Sales",
+    ctaHref: "/contact",
   },
 ];
 
-function CtaCard({ card }: { card: CardData }) {
+function CtaCard({
+  card,
+  outlineSrc,
+}: {
+  card: CardData;
+  outlineSrc: string;
+}) {
   return (
     <div
       className="relative h-[320px] w-[558px] shrink-0"
@@ -42,7 +53,7 @@ function CtaCard({ card }: { card: CardData }) {
       {/* card outline */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={CARD_OUTLINE}
+        src={outlineSrc}
         alt=""
         aria-hidden
         className="absolute top-[0.12px] left-[0.5px] block h-[319.572px] w-[557.336px] max-w-none"
@@ -75,7 +86,7 @@ function CtaCard({ card }: { card: CardData }) {
               {card.body}
             </p>
             <a
-              href="/contact"
+              href={card.ctaHref}
               className={`${gilroyMedium.className} ${GREEN_CTA_SHADOW} relative block h-[48px] w-full shrink-0`}
             >
               <span
@@ -98,7 +109,32 @@ function CtaCard({ card }: { card: CardData }) {
   );
 }
 
-export function TechnologyPageBottomCta() {
+export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
+  const sectionTitle = data?.heading || FALLBACK_SECTION_TITLE;
+  const sectionSubtitle = data?.subtitle || FALLBACK_SECTION_SUBTITLE;
+  const outlineSrc = mediaUrl(data?.card_outline) || CARD_OUTLINE;
+
+  const strapiCards = Array.isArray(data?.cards) ? data.cards : null;
+  const cards: CardData[] =
+    strapiCards && strapiCards.length > 0
+      ? strapiCards.map((c: any, i: number) => {
+          const fb = FALLBACK_CARDS[i] ?? FALLBACK_CARDS[FALLBACK_CARDS.length - 1];
+          const titleLinesRaw =
+            (c?.title_lines as string) || fb.titleLines.join("\n");
+          const titleSplit = titleLinesRaw.split("\n");
+          return {
+            nodeId: fb.nodeId,
+            titleLines: [titleSplit[0] ?? "", titleSplit[1] ?? ""] as [
+              string,
+              string,
+            ],
+            body: (c?.description as string) || fb.body,
+            cta: (c?.cta_label as string) || fb.cta,
+            ctaHref: (c?.cta_href as string) || fb.ctaHref,
+          };
+        })
+      : FALLBACK_CARDS;
+
   return (
     <section
       className="relative z-20 mb-0 min-[1024px]:mb-[-409px] w-full bg-transparent"
@@ -114,21 +150,21 @@ export function TechnologyPageBottomCta() {
         >
           <div className="relative flex flex-col items-center px-[10px]">
             <GradientTitle gradientDeg={SECTION_TITLE_DEG} className="text-center">
-              Put A-Cube to Work
+              {sectionTitle}
             </GradientTitle>
             <CornerDecor />
           </div>
           <p
             className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           >
-            {SECTION_SUBTITLE}
+            {sectionSubtitle}
           </p>
         </div>
 
         {/* cards */}
         <div className="mt-[86px] flex items-start justify-center gap-[84px]">
-          {CARDS.map((card) => (
-            <CtaCard key={card.nodeId} card={card} />
+          {cards.map((card) => (
+            <CtaCard key={card.nodeId} card={card} outlineSrc={outlineSrc} />
           ))}
         </div>
       </div>
@@ -143,17 +179,17 @@ export function TechnologyPageBottomCta() {
             backgroundClip: "text",
           }}
         >
-          Put A-Cube to Work
+          {sectionTitle}
         </div>
         <p
           className={`${interRegular.className} max-w-[327px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
         >
-          {SECTION_SUBTITLE}
+          {sectionSubtitle}
         </p>
 
-        {CARDS.map((card) => (
+        {cards.map((card) => (
           <div
-            key={card.nodeId}
+            key={`m-${card.nodeId}`}
             className="flex w-full max-w-[327px] flex-col gap-[20px] rounded-[8px] border-[0.5px] border-solid border-[rgba(255,255,255,0.15)] p-[20px]"
           >
             <div
@@ -173,7 +209,7 @@ export function TechnologyPageBottomCta() {
               {card.body}
             </p>
             <a
-              href="/contact"
+              href={card.ctaHref}
               className={`${gilroyMedium.className} relative block h-[48px] w-full ${GREEN_CTA_SHADOW}`}
             >
               <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />

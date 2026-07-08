@@ -1,7 +1,11 @@
 import Image from "next/image";
 import { gilroyMedium } from "../hero/fonts";
 
-export function TechnologyHeadline() {
+export function TechnologyHeadline({ data }: { data?: any }) {
+  const heading = data?.heading || "Re-architecting the\nphysics of AI compute";
+  const lines = heading.split("\n");
+  const line1 = lines[0] || "Re-architecting the";
+  const line2 = lines.slice(1).join("\n") || "physics of AI compute";
   return (
     <div
       className="absolute top-[48.5px] left-[468.88720703125px] z-20 h-[126px] w-[497px]"
@@ -20,9 +24,9 @@ export function TechnologyHeadline() {
             }}
           >
             <p className="mb-0 leading-[49px] whitespace-pre">
-              {`Re-architecting the `}
+              {`${line1} `}
             </p>
-            <p className="leading-[49px] whitespace-pre">physics of AI compute</p>
+            <p className="leading-[49px] whitespace-pre">{line2}</p>
           </h1>
         </div>
 

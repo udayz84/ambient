@@ -13,11 +13,38 @@ import {
   PRIMARY_CTA_SHADOW,
 } from "./products-data";
 
+const FALLBACK_HEADING = "From bench to volume\n without rewriting a thing.";
+const FALLBACK_SUBTITLE =
+  "The C code, the build, the AI you validate on the kit ports straight to production silicon. This is the part competitors can't offer.";
+const FALLBACK_CHIP_LABEL = "Development";
+
+function splitLines(value: string): string[] {
+  return value.split("\n");
+}
+
 /**
  * Figma 2918:1467 (title) + 2918:1476 (3 product cards).
  * "From bench to volume without rewriting a thing."
  */
-export function ProductsBenchToVolume() {
+export function ProductsBenchToVolume({ data }: { data?: any }) {
+  const heading = data?.heading || FALLBACK_HEADING;
+  const headingLines = splitLines(heading);
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const chipLabel = data?.chip_label || FALLBACK_CHIP_LABEL;
+  const cards =
+    Array.isArray(data?.cards) && data.cards.length > 0
+      ? data.cards.map((c: any, i: number) => {
+          const fallback = BENCH_CARDS[i] || BENCH_CARDS[0];
+          return {
+            nodeId: `bench-card-${i}`,
+            title: c?.title ?? fallback.title,
+            description: c?.description ?? fallback.description,
+            cta: c?.cta_label ?? fallback.cta,
+            ctaHref: c?.cta_href ?? "#",
+            ctaWidth: fallback.ctaWidth,
+          };
+        })
+      : BENCH_CARDS;
   return (
     <>
       {/* DESKTOP (>=1024px) */}
@@ -25,16 +52,36 @@ export function ProductsBenchToVolume() {
         className="relative mx-auto hidden w-full bg-black min-[1024px]:block"
         aria-label="From bench to volume"
       >
-        <ProductsBenchToVolumeDesktop />
+        <ProductsBenchToVolumeDesktop
+          headingLines={headingLines}
+          subtitle={subtitle}
+          chipLabel={chipLabel}
+          cards={cards}
+        />
       </section>
 
       {/* MOBILE (<1024px) */}
-      <ProductsBenchToVolumeMobile />
+      <ProductsBenchToVolumeMobile
+        headingLines={headingLines}
+        subtitle={subtitle}
+        chipLabel={chipLabel}
+        cards={cards}
+      />
     </>
   );
 }
 
-function ProductsBenchToVolumeDesktop() {
+function ProductsBenchToVolumeDesktop({
+  headingLines,
+  subtitle,
+  chipLabel,
+  cards,
+}: {
+  headingLines: string[];
+  subtitle: string;
+  chipLabel: string;
+  cards: any[];
+}) {
   return (
     <div className="mx-auto flex w-full max-w-[1204px] flex-col items-center pb-0">
       {/* Section title — 2918:1467 (centered, w=800) */}
@@ -62,15 +109,16 @@ function ProductsBenchToVolumeDesktop() {
             }}
             data-node-id="2918:1470"
           >
-            <span className="block leading-[49px]">From bench to volume</span>
-            <span className="block leading-[49px]">{` without rewriting a thing.`}</span>
+            {headingLines.map((line, i) => (
+              <span key={i} className="block leading-[49px]">{line}</span>
+            ))}
           </h2>
         </div>
         <p
           className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
           data-node-id="2918:1475"
         >
-          {`The C code, the build, the AI you validate on the kit ports straight to production silicon. This is the part competitors can't offer.`}
+          {subtitle}
         </p>
       </div>
 
@@ -81,15 +129,15 @@ function ProductsBenchToVolumeDesktop() {
         data-node-id="2918:1476"
         data-name="Frame 1984079440"
       >
-        {BENCH_CARDS.map((card) => (
-          <BenchCardView key={card.nodeId} card={card} />
+        {cards.map((card) => (
+          <BenchCardView key={card.nodeId} card={card} chipLabel={chipLabel} />
         ))}
       </div>
     </div>
   );
 }
 
-function BenchCardView({ card }: { card: (typeof BENCH_CARDS)[number] }) {
+function BenchCardView({ card, chipLabel }: { card: any; chipLabel: string }) {
   return (
     <article
       className="relative flex flex-1 flex-col overflow-clip border-[0.5px] border-solid px-[20px] pt-[20px] pb-[32px]"
@@ -123,7 +171,7 @@ function BenchCardView({ card }: { card: (typeof BENCH_CARDS)[number] }) {
 
       {/* Content — chip + title + description */}
       <div className="relative mt-[20px] flex flex-col items-start gap-[10px] not-italic">
-        <DevChip />
+        <DevChip chipLabel={chipLabel} />
         <h3
           className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium whitespace-nowrap text-white`}
         >
@@ -138,7 +186,9 @@ function BenchCardView({ card }: { card: (typeof BENCH_CARDS)[number] }) {
 
       {/* CTA pinned to bottom */}
       <div className="mt-auto pt-[20px]">
-        <GreenCta width={card.ctaWidth}>{card.cta}</GreenCta>
+        <GreenCta width={card.ctaWidth} href={card.ctaHref}>
+          {card.cta}
+        </GreenCta>
       </div>
 
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
@@ -146,7 +196,7 @@ function BenchCardView({ card }: { card: (typeof BENCH_CARDS)[number] }) {
   );
 }
 
-function DevChip() {
+function DevChip({ chipLabel }: { chipLabel: string }) {
   return (
     <div
       className={`${dmMono.className} relative h-[26px] shrink-0 overflow-clip`}
@@ -155,7 +205,7 @@ function DevChip() {
     >
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
       <p className="absolute left-1/2 top-[calc(50%-4.5px)] -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
-        Development
+        {chipLabel}
       </p>
       <div className="absolute top-1/2 left-[7px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
       <div className="absolute top-1/2 right-[7px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
@@ -166,13 +216,15 @@ function DevChip() {
 function GreenCta({
   children,
   width,
+  href,
 }: {
   children: React.ReactNode;
   width: number;
+  href: string;
 }) {
   return (
     <a
-      href="#"
+      href={href}
       className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] shrink-0 items-center justify-center overflow-hidden`}
       style={{ width }}
       data-name="Cta"
@@ -193,7 +245,17 @@ function GreenCta({
   );
 }
 
-function ProductsBenchToVolumeMobile() {
+function ProductsBenchToVolumeMobile({
+  headingLines,
+  subtitle,
+  chipLabel,
+  cards,
+}: {
+  headingLines: string[];
+  subtitle: string;
+  chipLabel: string;
+  cards: any[];
+}) {
   return (
     <section
       className="relative w-full bg-black px-[24px] pt-[64px] pb-[80px] min-[1024px]:hidden"
@@ -209,18 +271,18 @@ function ProductsBenchToVolumeMobile() {
             backgroundClip: "text",
           }}
         >
-          {`From bench to volume without rewriting a thing.`}
+          {headingLines.join(" ").trim()}
         </h2>
         <p
           className={`${interRegular.className} max-w-full text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65`}
         >
-          {`The C code, the build, the AI you validate on the kit ports straight to production silicon. This is the part competitors can't offer.`}
+          {subtitle}
         </p>
       </div>
 
       {/* Cards */}
       <div className="mt-[32px] flex flex-col gap-[20px]">
-        {BENCH_CARDS.map((card) => (
+        {cards.map((card) => (
           <article
             key={card.nodeId}
             className="relative flex flex-col border-[0.5px] border-solid p-[20px]"
@@ -238,7 +300,7 @@ function ProductsBenchToVolumeMobile() {
               }}
               aria-hidden
             />
-            <DevChip />
+            <DevChip chipLabel={chipLabel} />
             <h3
               className={`${gilroyMedium.className} mt-[10px] text-[22px] leading-[28px] font-medium text-white not-italic`}
             >
@@ -250,7 +312,9 @@ function ProductsBenchToVolumeMobile() {
               {card.description}
             </p>
             <div className="mt-[20px]">
-              <GreenCta width={card.ctaWidth}>{card.cta}</GreenCta>
+              <GreenCta width={card.ctaWidth} href={card.ctaHref}>
+                {card.cta}
+              </GreenCta>
             </div>
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           </article>

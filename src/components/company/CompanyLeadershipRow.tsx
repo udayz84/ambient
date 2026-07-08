@@ -1,14 +1,49 @@
 "use client";
 
+import { mediaUrl } from "@/lib/strapi";
 import { useEffect, useRef, useState } from "react";
 import { CompanyLeadershipCard } from "./CompanyLeadershipCard";
 import { LEADERSHIP_TEAM } from "./company-leadership-data";
+import type { LeadershipMember } from "./company-leadership-data";
 
 const CARD_LEFT = [0, 413, 826] as const;
 
-export function CompanyLeadershipRow() {
+const PORTRAIT_CLASS =
+  "absolute inset-0 size-full max-w-none object-cover object-top";
+
+function toMember(raw: any, fallback: LeadershipMember): LeadershipMember {
+  const bioText = (raw?.bio_paragraphs as string) || "";
+  const bioParagraphs = bioText
+    ? bioText.split(/\n\n+/).map((p) => p.trim()).filter(Boolean)
+    : fallback.bioParagraphs;
+  return {
+    name: (raw?.name as string) || fallback.name,
+    role: (raw?.title as string) || fallback.role,
+    bioParagraphs,
+    imageSrc: mediaUrl(raw?.photo) || fallback.imageSrc,
+    imageClassName: fallback.imageClassName ?? PORTRAIT_CLASS,
+    linkedInHref: (raw?.linkedin_url as string) || fallback.linkedInHref,
+    nodeId: fallback.nodeId,
+    imageNodeId: fallback.imageNodeId,
+    nameNodeId: fallback.nameNodeId,
+    readMoreNodeId: fallback.readMoreNodeId,
+  };
+}
+
+type CompanyLeadershipRowProps = {
+  team?: any[] | null;
+};
+
+export function CompanyLeadershipRow({ team }: CompanyLeadershipRowProps = {}) {
   const [expandedNodeId, setExpandedNodeId] = useState<string | null>(null);
   const cardRefs = useRef<Map<string, HTMLElement>>(new Map());
+
+  const members: LeadershipMember[] =
+    team && team.length > 0
+      ? team.map((raw, i) =>
+          toMember(raw, LEADERSHIP_TEAM[i] ?? LEADERSHIP_TEAM[LEADERSHIP_TEAM.length - 1]),
+        )
+      : LEADERSHIP_TEAM;
 
   useEffect(() => {
     if (expandedNodeId === null) return;
@@ -30,12 +65,12 @@ export function CompanyLeadershipRow() {
       data-node-id="2379:2287"
       data-name="Frame 1984079466"
     >
-      {LEADERSHIP_TEAM.map((member, index) => (
+      {members.map((member, index) => (
         <CompanyLeadershipCard
           key={member.nodeId}
           member={member}
           variant="leadership"
-          left={CARD_LEFT[index]}
+          left={CARD_LEFT[index] ?? 0}
           isExpanded={expandedNodeId === member.nodeId}
           onReadMoreToggle={() =>
             setExpandedNodeId((current) =>

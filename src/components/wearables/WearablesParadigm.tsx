@@ -1,17 +1,13 @@
-/* eslint-disable @next/next/no-img-element */
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 
 const TITLE_GRADIENT =
   "linear-gradient(117.952deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
-const SUBTITLE =
-  "Bridge the lab and real world. The Sparsh module offers continuous, microwatt intelligence in a 21×21mm size, with a breakout board that snaps off for production.";
-
 const IMAGE_RADIAL =
   "radial-gradient(ellipse at center, rgba(26,26,26,1) 0%, rgba(13,13,13,1) 25%, rgba(7,7,7,1) 37.5%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%)";
 
-function DevChip() {
+function DevChip({ label }: { label: string }) {
   return (
     <div
       className="relative h-[26px] w-[153px] shrink-0 overflow-clip bg-[rgba(115,190,91,0.12)]"
@@ -24,7 +20,7 @@ function DevChip() {
       <p
         className={`${dmMono.className} absolute top-[calc(50%-4.5px)] left-1/2 -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] text-[#ecfae5] uppercase whitespace-nowrap not-italic`}
       >
-        Development
+        {label}
       </p>
       <div className="absolute top-1/2 left-[7px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
       <div className="absolute top-1/2 right-[7px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
@@ -35,9 +31,10 @@ function DevChip() {
 type ParadigmCardProps = {
   title: string;
   body: string;
+  chipLabel: string;
 };
 
-function ParadigmCard({ title, body }: ParadigmCardProps) {
+function ParadigmCard({ title, body, chipLabel }: ParadigmCardProps) {
   return (
     <div
       className="relative flex w-[590px] shrink-0 flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] pt-[20px] px-[20px] pb-[32px]"
@@ -65,7 +62,7 @@ function ParadigmCard({ title, body }: ParadigmCardProps) {
             >
               {title}
             </p>
-            <DevChip />
+            <DevChip label={chipLabel} />
           </div>
           <p
             className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
@@ -89,7 +86,24 @@ const CARDS = [
   },
 ];
 
-export function WearablesParadigm() {
+const FALLBACK_HEADING = "The Paradigm Shift";
+const FALLBACK_SUBTITLE =
+  "Bridge the lab and real world. The Sparsh module offers continuous, microwatt intelligence in a 21×21mm size, with a breakout board that snaps off for production.";
+const FALLBACK_CHIP_LABEL = "Development";
+
+export function WearablesParadigm({ data }: { data?: any }) {
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const heading = data?.heading || FALLBACK_HEADING;
+  const chipLabel = data?.chip_label || FALLBACK_CHIP_LABEL;
+  const dataCards: any[] = Array.isArray(data?.cards) ? data.cards : [];
+  const cards = CARDS.map((fb, i) => {
+    const c = dataCards[i];
+    if (!c) return fb;
+    return {
+      title: c.title || fb.title,
+      body: c.body || fb.body,
+    };
+  });
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -111,7 +125,7 @@ export function WearablesParadigm() {
               }}
               data-node-id="2509:472"
             >
-              The Paradigm Shift
+              {heading}
             </h2>
             <Corners
               leftSrc="/applications/wearables/vector-42.svg"
@@ -122,14 +136,19 @@ export function WearablesParadigm() {
             className={`${interRegular.className} w-[679.389px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
             data-node-id="2509:477"
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
         </div>
 
         {/* Cards */}
         <div className="flex items-center gap-[24px]">
-          {CARDS.map((card) => (
-            <ParadigmCard key={card.title} title={card.title} body={card.body} />
+          {cards.map((card) => (
+            <ParadigmCard
+              key={card.title}
+              title={card.title}
+              body={card.body}
+              chipLabel={chipLabel}
+            />
           ))}
         </div>
       </div>
@@ -147,7 +166,7 @@ export function WearablesParadigm() {
                 backgroundClip: "text",
               }}
             >
-              The Paradigm Shift
+              {heading}
             </h2>
             <Corners
               leftSrc="/applications/wearables/vector-42.svg"
@@ -157,13 +176,13 @@ export function WearablesParadigm() {
           <p
             className={`${interRegular.className} max-w-[327px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
         </div>
 
         {/* Cards */}
         <div className="flex w-full flex-col items-stretch gap-[20px]">
-          {CARDS.map((card) => (
+          {cards.map((card) => (
             <div
               key={card.title}
               className="relative flex w-full flex-col gap-[16px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] pt-[16px] px-[16px] pb-[24px]"
@@ -185,7 +204,7 @@ export function WearablesParadigm() {
                   >
                     {card.title}
                   </p>
-                  <DevChip />
+                  <DevChip label={chipLabel} />
                 </div>
                 <p
                   className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic`}

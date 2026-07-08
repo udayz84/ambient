@@ -4,6 +4,7 @@ import { Corners } from "../shared/Corners";
 import {
   COMPARISON_COLUMNS,
   type ComparisonColumn,
+  COMPARISON_METRICS,
   CORNER_LEFT,
   CORNER_RIGHT,
   GPX_TAG_BG,
@@ -16,11 +17,40 @@ import {
   TABLE_BG,
 } from "./products-data";
 
+const FALLBACK_HEADING = "Not projected. \nMeasured in silicon.";
+const FALLBACK_SUBTITLE =
+  "The same chip, tuned to the job — from a wrist to a factory floor.";
+
+function splitLines(value: string): string[] {
+  return value.split("\n");
+}
+
 /**
  * Figma 2906:3290 (title) + 2906:3186 (comparison table).
  * "Not projected. Measured in silicon."
  */
-export function ProductsMeasured() {
+export function ProductsMeasured({ data }: { data?: any }) {
+  const heading = data?.heading || FALLBACK_HEADING;
+  const headingLines = splitLines(heading);
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+
+  const metricLabels =
+    Array.isArray(data?.comparison_metrics) && data.comparison_metrics.length > 0
+      ? data.comparison_metrics.map((m: any) => m?.label || "")
+      : COMPARISON_METRICS;
+
+  const columns: ComparisonColumn[] =
+    Array.isArray(data?.comparison_columns) && data.comparison_columns.length > 0
+      ? data.comparison_columns.map((c: any) => ({
+          header: c?.label ?? "",
+          values: (c?.values || "").split("\n"),
+          highlight: !!c?.is_highlighted,
+        }))
+      : COMPARISON_COLUMNS.map((col) =>
+          col.header === "METRICS"
+            ? { ...col, values: metricLabels }
+            : col
+        );
   return (
     <>
       {/* DESKTOP (>=1024px) */}
@@ -28,16 +58,32 @@ export function ProductsMeasured() {
         className="relative mx-auto hidden w-[1253px] bg-black min-[1024px]:block"
         aria-label="Measured in silicon"
       >
-        <ProductsMeasuredDesktop />
+        <ProductsMeasuredDesktop
+          headingLines={headingLines}
+          subtitle={subtitle}
+          columns={columns}
+        />
       </section>
 
       {/* MOBILE (<1024px) */}
-      <ProductsMeasuredMobile />
+      <ProductsMeasuredMobile
+        headingLines={headingLines}
+        subtitle={subtitle}
+        columns={columns}
+      />
     </>
   );
 }
 
-function ProductsMeasuredDesktop() {
+function ProductsMeasuredDesktop({
+  headingLines,
+  subtitle,
+  columns,
+}: {
+  headingLines: string[];
+  subtitle: string;
+  columns: ComparisonColumn[];
+}) {
   return (
     <div className="flex flex-col pb-[120px]">
       {/* Header row: Title + Tabs */}
@@ -67,15 +113,16 @@ function ProductsMeasuredDesktop() {
             }}
             data-node-id="2906:3292"
           >
-            <span className="block leading-[49px]">{`Not projected. `}</span>
-            <span className="block leading-[49px]">Measured in silicon.</span>
+            {headingLines.map((line, i) => (
+              <span key={i} className="block leading-[49px]">{line}</span>
+            ))}
           </h2>
         </div>
         <p
           className={`${interRegular.className} w-[428px] text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           data-node-id="2906:3297"
         >
-          The same chip, tuned to the job — from a wrist to a factory floor.
+          {subtitle}
         </p>
       </div>
 
@@ -84,13 +131,13 @@ function ProductsMeasuredDesktop() {
 
     {/* Comparison table — 2906:3186 */}
       <div className="mt-[52px]">
-        <ComparisonTable />
+        <ComparisonTable columns={columns} />
       </div>
     </div>
   );
 }
 
-function ComparisonTable() {
+function ComparisonTable({ columns }: { columns: ComparisonColumn[] }) {
   return (
     <div
       className="flex w-full overflow-clip rounded-[8px]"
@@ -98,7 +145,7 @@ function ComparisonTable() {
       data-node-id="2906:3186"
       data-name="Category"
     >
-      {COMPARISON_COLUMNS.map((col) => (
+      {columns.map((col) => (
         <ComparisonColumnView key={col.header} col={col} />
       ))}
     </div>
@@ -131,7 +178,7 @@ function ComparisonColumnView({ col }: { col: ComparisonColumn }) {
               className={`${interSemiBold.className} text-[12px] leading-[16px] font-semibold whitespace-nowrap not-italic`}
               style={{ color: GPX_TAG_TEXT }}
             >
-              GPX10 Pro
+              {col.header || "GPX10 Pro"}
             </span>
           </div>
         ) : (
@@ -172,7 +219,15 @@ function ComparisonColumnView({ col }: { col: ComparisonColumn }) {
   );
 }
 
-function ProductsMeasuredMobile() {
+function ProductsMeasuredMobile({
+  headingLines,
+  subtitle,
+  columns,
+}: {
+  headingLines: string[];
+  subtitle: string;
+  columns: ComparisonColumn[];
+}) {
   return (
     <section
       className="relative w-full bg-black px-[24px] pt-[64px] pb-[80px] min-[1024px]:hidden"
@@ -188,12 +243,12 @@ function ProductsMeasuredMobile() {
             backgroundClip: "text",
           }}
         >
-          {`Not projected. Measured in silicon.`}
+          {headingLines.join(" ")}
         </h2>
         <p
           className={`${interRegular.className} max-w-full text-[14px] leading-[21px] font-normal text-[#f0f0f0]`}
         >
-          The same chip, tuned to the job — from a wrist to a factory floor.
+          {subtitle}
         </p>
         <TabSwitcher />
       </div>
@@ -204,7 +259,7 @@ function ProductsMeasuredMobile() {
           className="flex w-[720px] shrink-0 overflow-clip rounded-[8px]"
           style={{ backgroundColor: TABLE_BG }}
         >
-          {COMPARISON_COLUMNS.map((col) => (
+          {columns.map((col) => (
             <ComparisonColumnView key={col.header} col={col} />
           ))}
         </div>

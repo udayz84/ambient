@@ -4,12 +4,29 @@ import { useEffect, useRef, useState } from "react";
 import { CornerDecor, GradientTitle } from "../contact/contact-shared";
 import { CAREERS_WORK_CARDS } from "./careers-data";
 import { CareersGradientCard } from "./careers-shared";
+import { mediaUrl } from "@/lib/strapi";
+import type { CareersValueCard } from "./careers-data";
 
 const FADE_IN_CLASS = "animate-hero-text-fade-in opacity-0";
 
-export function CareersBestWork() {
+export function CareersBestWork({ data }: { data?: any }) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+
+  const heading = data?.heading || "Do the best work of your life";
+  const cards: CareersValueCard[] = (
+    data?.cards && Array.isArray(data.cards) && data.cards.length > 0
+      ? data.cards
+      : CAREERS_WORK_CARDS
+  ).map((c: any, i: number) => ({
+    icon:
+      mediaUrl(c?.icon) ||
+      CAREERS_WORK_CARDS[i]?.icon ||
+      "",
+    title: c?.title || CAREERS_WORK_CARDS[i]?.title || "",
+    description:
+      c?.description || CAREERS_WORK_CARDS[i]?.description || "",
+  }));
 
   useEffect(() => {
     const node = ref.current;
@@ -44,7 +61,7 @@ export function CareersBestWork() {
           gradientDeg="127.769deg"
           className="text-center whitespace-nowrap"
         >
-          Do the best work of your life
+          {heading}
         </GradientTitle>
         <CornerDecor />
       </div>
@@ -56,7 +73,7 @@ export function CareersBestWork() {
         }`}
         data-node-id="2379:8718"
       >
-        {CAREERS_WORK_CARDS.map((card, index) => (
+        {cards.map((card, index) => (
           <CareersGradientCard
             key={card.title}
             card={card}

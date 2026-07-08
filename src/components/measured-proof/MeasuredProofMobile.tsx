@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { mediaUrl } from "@/lib/strapi";
 import { TagBadge } from "../hero/TagBadge";
 import { gilroyMedium } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
@@ -7,7 +8,24 @@ import { MeasuredProofCard } from "./MeasuredProofCard";
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
 
-const DESKTOP_CARDS = [
+type FallbackCard = {
+  nodeId: string;
+  metric: string;
+  label: string;
+  description: string;
+  imageSrc: string;
+  imageWidth: number;
+  imageHeight: number;
+  imageTop: number;
+  imageClassName?: string;
+  imageSizes: string;
+  statWidth: number;
+  descriptionWidth: number;
+  descriptionBottom?: number;
+  statJustifyEnd?: boolean;
+};
+
+const DESKTOP_CARDS: FallbackCard[] = [
   {
     nodeId: "mobile:1504",
     metric: "100x",
@@ -71,9 +89,49 @@ const DESKTOP_CARDS = [
     descriptionBottom: 137.5,
     statJustifyEnd: true,
   },
-] as const;
+];
 
-export function MeasuredProofMobile() {
+export function MeasuredProofMobile({ data }: { data?: any }) {
+  const tagText = data?.tag?.text || "Real-time AI at edge";
+  const headingLines = (data?.heading || "Measured\nproof in silicon").split("\n");
+  const headingLine1 = headingLines[0] || "Measured";
+  const headingLine2Rest = headingLines.slice(1).join("\n") || "proof in silicon";
+
+  const ctas: any[] = Array.isArray(data?.ctas) ? data.ctas : [];
+  const find = (variant: string) =>
+    ctas.find((c) => (c?.variant || "").toLowerCase() === variant);
+  const primary =
+    find("primary") ||
+    { label: "See what we can do", href: "/technology", variant: "primary" };
+  const secondary =
+    find("secondary") ||
+    { label: "Explore ambient store", href: "/products", variant: "secondary" };
+
+  const cards = (Array.isArray(data?.stat_cards) && data.stat_cards.length
+    ? data.stat_cards
+    : DESKTOP_CARDS
+  ).map((card: any, index: number) => {
+    const fallback: FallbackCard = DESKTOP_CARDS[index] || ({} as FallbackCard);
+    const imageSrc =
+      mediaUrl(card?.image) || fallback.imageSrc || "/measured-proof/card-power.png";
+    return {
+      nodeId: `mobile:1504-${index}`,
+      metric: card?.metric ?? fallback.metric ?? "",
+      label: card?.label ?? fallback.label ?? "",
+      description: card?.description ?? fallback.description ?? "",
+      imageSrc,
+      imageWidth: fallback.imageWidth ?? 331,
+      imageHeight: fallback.imageHeight ?? 260,
+      imageTop: fallback.imageTop ?? 169,
+      imageClassName: fallback.imageClassName,
+      imageSizes: fallback.imageSizes ?? "332px",
+      statWidth: fallback.statWidth ?? 200,
+      descriptionWidth: fallback.descriptionWidth ?? 300,
+      descriptionBottom: fallback.descriptionBottom,
+      statJustifyEnd: fallback.statJustifyEnd,
+    };
+  });
+
   const scale = 0.68;
   const scaledWidth = 388 * scale;
   const scaledHeight = 600 * scale;
@@ -82,7 +140,7 @@ export function MeasuredProofMobile() {
     <div className="relative flex flex-col items-center px-[24px] py-[40px]">
       <div className="flex flex-col items-center gap-[16px]">
         <TagBadge
-          label="Real-time AI at edge"
+          label={tagText}
           width={210}
           labelOffsetX={89.5}
           rightBarLeft={200.48}
@@ -97,7 +155,7 @@ export function MeasuredProofMobile() {
                 "linear-gradient(102.363deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
             }}
           >
-            Measured<br />proof in silicon
+            {headingLine1}<br />{headingLine2Rest}
           </h2>
 
           <div className="absolute top-0 right-0 flex size-[6px] items-center justify-center scale-[0.6] origin-top-right">
@@ -136,8 +194,8 @@ export function MeasuredProofMobile() {
           <div
             key={card.nodeId}
             className="animate-hero-text-fade-in shrink-0 snap-center"
-            style={{ 
-              animationDelay: `${index * 100}ms`, 
+            style={{
+              animationDelay: `${index * 100}ms`,
               animationDuration: "800ms",
               width: scaledWidth,
               height: scaledHeight,
@@ -151,7 +209,7 @@ export function MeasuredProofMobile() {
                 height: 600,
               }}
             >
-              <MeasuredProofCard {...card} />
+              <MeasuredProofCard {...(cards[index] || card)} />
             </div>
           </div>
         ))}
@@ -159,7 +217,7 @@ export function MeasuredProofMobile() {
 
       <div className="mt-[28px] flex w-full flex-row justify-center gap-[9px]">
         <a
-          href="/technology"
+          href={primary.href || "/technology"}
           className={`${gilroyMedium.className} relative flex h-[48px] w-[171px] items-center justify-center ${GREEN_CTA_SHADOW}`}
         >
           <span
@@ -171,7 +229,7 @@ export function MeasuredProofMobile() {
             className="pointer-events-none absolute inset-0 overflow-hidden z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
           />
           <p className="relative z-10 text-[13px] leading-[24px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
-            See what we can do
+            {primary.label || "See what we can do"}
           </p>
           
           {/* Custom Corners that pop out slightly to avoid the inset shadow */}
@@ -205,11 +263,11 @@ export function MeasuredProofMobile() {
           </div>
         </a>
         <a
-          href="/products"
+          href={secondary.href || "/products"}
           className={`${gilroyMedium.className} relative flex h-[48px] w-[171px] items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)]`}
         >
           <p className="relative text-[13px] leading-[24px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
-            Explore ambient store
+            {secondary.label || "Explore ambient store"}
           </p>
           <Corners />
         </a>

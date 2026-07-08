@@ -1,0 +1,97 @@
+{
+  "hero": {
+    "heading": "Model to deployment in 15 Minutes",
+    "subtitle": "ModelForge bridges training and deployment. Quantize, compile, and merge neural networks with your firmware.",
+    "primary_button": {
+      "label": "Download ModelForge SDK",
+      "href": "#",
+      "variant": "primary"
+    },
+    "secondary_button": {
+      "label": "Read the Documentation",
+      "href": "#",
+      "variant": "secondary"
+    },
+    "background_image": 116
+  },
+  "code": {
+    "heading": "Hello world in three lines",
+    "subtitle": "We invisibly map AI cores to your host drop your model straight into your existing application.",
+    "code_snippet": "#include <ambient.h>\n#include <sensor_drivers.h>\n\nint main(void) {\n    // Initialize system\n    ambient_init();\n    sensor_config_t sensor;\n    model_t model_obj;\n\n    // Load AI model\n    ambient_load_model(&model_obj, \"fall_detect.bin\");\n\n    while(1) {\n        ambient_read_i2s_mic(&sensor);\n\n        ambient_run_fft(&sensor);\n\n        run_ai_inference(&model_obj);\n\n        if(model_obj.result > THRESHOLD) {\n            trigger_alert();\n        }\n    }\n}"
+  },
+  "pipeline": {
+    "heading": "The ModelForge Pipeline",
+    "tag": {
+      "text": "Real-time AI at edge"
+    },
+    "tabs": "Train\nOptimize\nIntegrate\nDeploy",
+    "flow_images": [
+      117,
+      118,
+      119,
+      120
+    ],
+    "logos": [
+      121,
+      122,
+      123
+    ]
+  },
+  "coming_soon": {
+    "heading": "Test on the metal, without the metal.",
+    "subtitle": "Validate your build in a virtual sandbox,\nno need to wait for hardware.",
+    "card_title": "Virtual Sandbox Coming Soon",
+    "cta_label": "Join the Virtual Sandbox Waitlist",
+    "image": 124,
+    "background": null
+  },
+  "modules": {
+    "heading": "From bench validation to volume production.",
+    "subtitle": "A seamless toolchain is useless if hardware can't integrate. Move from software validation to deployment instantly with our modular edge ecosystem.",
+    "modules": [
+      {
+        "image": 126,
+        "title": "GPX Evaluation Kits (DVKs)",
+        "cta_label": "View Evaluation Kits",
+        "cta_href": "#"
+      },
+      {
+        "image": 127,
+        "title": "Production-Ready SOMs",
+        "cta_label": "View System-on-Modules",
+        "cta_href": "#"
+      }
+    ]
+  },
+  "copilots": {
+    "heading": "Your deployment co-pilots.",
+    "subtitle": "A seamless toolchain is useless if hardware can't integrate. Move from software validation to deployment instantly with our modular edge ecosystem.",
+    "copilots": [
+      {
+        "icon": 128,
+        "title": "Exhaustive Documentation",
+        "cta_label": "Browse Developer Docs",
+        "cta_href": "#"
+      },
+      {
+        "icon": 129,
+        "title": "10 Minutes to Mastery",
+        "cta_label": "View Training Playlist",
+        "cta_href": "#"
+      },
+      {
+        "icon": 130,
+        "title": "Your Technical Copilots",
+        "cta_label": "Schedule Technical Consultation",
+        "cta_href": "#"
+      }
+    ]
+  },
+  "seo": {
+    "meta_title": "Developer Platform | Ambient Scientific",
+    "meta_description": "ModelForge bridges training and deployment. Quantize, compile, and merge neural networks with your firmware.",
+    "keywords": "ModelForge SDK, edge AI SDK, Eclipse, TensorFlow, ONNX, developer hub, edge AI compiler",
+    "noindex": false,
+    "canonical_url": "/developer"
+  }
+}

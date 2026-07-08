@@ -1,11 +1,30 @@
 import Image from "next/image";
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { WhiteCtaButton } from "../contact/contact-shared";
 
 const BUILDING_TITLE_GRADIENT =
   "linear-gradient(122.573deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
-export function ResourcesBuilding() {
+const FALLBACK_HEADING = "Building with Ambient?";
+const FALLBACK_SUBTITLE =
+  "Access the ModelForge SDK, API references, model compilation guides, and hardware documentation.";
+const FALLBACK_CTA_LABEL = "Go to Developer Hub";
+const FALLBACK_CTA_HREF = "#";
+const FALLBACK_BG = "/resources/building-bg.png";
+const BUILDING_TITLE_FRAME = "/resources/building-title-frame.svg";
+
+type ResourcesBuildingProps = {
+  data?: any;
+};
+
+export function ResourcesBuilding({ data }: ResourcesBuildingProps = {}) {
+  const heading = (data?.heading as string) || FALLBACK_HEADING;
+  const subtitle = (data?.subtitle as string) || FALLBACK_SUBTITLE;
+  const ctaLabel = (data?.cta_label as string) || FALLBACK_CTA_LABEL;
+  const ctaHref = (data?.cta_href as string) || FALLBACK_CTA_HREF;
+  const bgSrc = mediaUrl(data?.background) || FALLBACK_BG;
+
   return (
     <section
       className="absolute top-[1499px] left-1/2 h-[513px] w-[1440px] -translate-x-1/2 overflow-hidden"
@@ -18,7 +37,7 @@ export function ResourcesBuilding() {
       >
         <div className="absolute top-[55px] left-0 h-[489px] w-[1440px] overflow-hidden">
           <Image
-            src="/resources/building-bg.png"
+            src={bgSrc}
             alt=""
             fill
             className="object-cover object-bottom"
@@ -55,7 +74,7 @@ export function ResourcesBuilding() {
             }}
             data-node-id="2379:1611"
           >
-            Building with Ambient?
+            {heading}
           </p>
           <div
             className="pointer-events-none absolute top-0 left-0 h-[106px] w-[537px]"
@@ -66,7 +85,7 @@ export function ResourcesBuilding() {
             <div className="absolute inset-[-0.47%_0]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/resources/building-title-frame.svg"
+                src={BUILDING_TITLE_FRAME}
                 alt=""
                 className="block size-full max-w-none"
               />
@@ -78,8 +97,7 @@ export function ResourcesBuilding() {
           className={`${interRegular.className} absolute top-[106.46px] left-[27px] h-[48px] w-[484px] text-[18px] leading-[27px] font-normal text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
           data-node-id="2379:1617"
         >
-          Access the ModelForge SDK, API references, model compilation guides,
-          and hardware documentation.
+          {subtitle}
         </p>
       </div>
 
@@ -87,8 +105,8 @@ export function ResourcesBuilding() {
         className="absolute top-[197.54px] left-[1111px] z-10"
         data-node-id="2379:1618"
       >
-        <WhiteCtaButton className="w-[231px]" href="#" textClassName="text-[16px] leading-[normal]">
-          Go to Developer Hub
+        <WhiteCtaButton className="w-[231px]" href={ctaHref} textClassName="text-[16px] leading-[normal]">
+          {ctaLabel}
         </WhiteCtaButton>
       </div>
     </section>

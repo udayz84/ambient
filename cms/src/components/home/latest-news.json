@@ -1,4 +1,4 @@
-﻿{
+{
   "collectionName": "components_home_latest_news",
   "info": { "displayName": "Latest News", "description": "Homepage latest news section" },
   "options": {},
@@ -6,6 +6,7 @@
     "heading": { "type": "string", "required": true },
     "subtitle": { "type": "text" },
     "cta_label": { "type": "string" },
-    "cta_href": { "type": "string" }
+    "cta_href": { "type": "string" },
+    "cards": { "type": "component", "repeatable": true, "component": "apps.article-card" }
   }
 }

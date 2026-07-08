@@ -2,12 +2,12 @@ import { gilroyMedium, interBold, interMedium, interRegular } from "../hero/font
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 
 const TITLE_GRADIENT_DEG = "114.359deg";
-const SUBTITLE_TEXT =
+const FALLBACK_SUBTITLE =
   "The same chip, tuned to the job — from a wrist to a factory floor.";
-const FOOTNOTE =
+const FALLBACK_FOOTNOTE =
   "* Architectural efficiency, edge SKUs. Silicon-measured figures on the GPX10 page.";
 
-const HEADERS = ["APPROACH", "Peak compute", "POWER", "EFFICIENCY", "TRADEOFF"];
+const FALLBACK_HEADERS = ["APPROACH", "Peak compute", "POWER", "EFFICIENCY", "TRADEOFF"];
 
 type Row = {
   label: string;
@@ -15,7 +15,7 @@ type Row = {
   bg: "none" | "marker" | "green";
 };
 
-const ROWS: Row[] = [
+const FALLBACK_ROWS: Row[] = [
   {
     label: "Conventional MCU",
     values: ["0.002 GOPS", "600 mW", "0.03 TOPS/W", "No real AI"],
@@ -23,20 +23,23 @@ const ROWS: Row[] = [
   },
   {
     label: "MCU + NPU",
-    values: ["100 GOPS", "200 µW idle / 80 mW active", "1.2 TOPS/W", "Fixed models, host polling"],
+    values: ["100 GOPS", "200 \u00b5W idle / 80 mW active", "1.2 TOPS/W", "Fixed models, host polling"],
     bg: "marker",
   },
   {
     label: "GPU / EDGE Accelerator",
-    values: ["1-10 TOPS", "1-5 W", "2–5 TOPS/W", "Needs cloud or wall power"],
+    values: ["1-10 TOPS", "1-5 W", "2\u20135 TOPS/W", "Needs cloud or wall power"],
     bg: "none",
   },
   {
     label: "A-Cube",
-    values: ["512 GOPS", "~80 µW always-on", "~30 TOPS/W*", "None — full AI at coin-cell power"],
+    values: ["512 GOPS", "~80 \u00b5W always-on", "~30 TOPS/W*", "None \u2014 full AI at coin-cell power"],
     bg: "green",
   },
 ];
+
+const FALLBACK_HEADING =
+  "The efficiency gap isn't a few\npercent. It's a different category.";
 
 const ROW_BG: Record<Row["bg"], string> = {
   none: "",
@@ -46,7 +49,13 @@ const ROW_BG: Record<Row["bg"], string> = {
 
 const COL_W = "w-[250.6px]";
 
-function EfficiencyTable() {
+function EfficiencyTable({
+  headers,
+  rows,
+}: {
+  headers: string[];
+  rows: Row[];
+}) {
   return (
     <div
       className="absolute top-[268px] left-[91.5px] flex w-[1253px] flex-col"
@@ -55,9 +64,9 @@ function EfficiencyTable() {
     >
       {/* header row */}
       <div className="flex">
-        {HEADERS.map((h) => (
+        {headers.map((h, i) => (
           <div
-            key={h}
+            key={`hdr-${i}`}
             className={`${COL_W} flex h-[56px] shrink-0 items-center bg-[#191c1b] py-[4px] pr-[4px] pl-[20px]`}
           >
             <p
@@ -70,11 +79,11 @@ function EfficiencyTable() {
       </div>
 
       {/* data rows */}
-      {ROWS.map((row) => {
+      {rows.map((row, ri) => {
         const isAcube = row.bg === "green";
         const valueColor = isAcube ? "text-[#e2f9da]" : "text-white";
         return (
-          <div key={row.label} className="flex">
+          <div key={`row-${ri}`} className="flex">
             {/* label cell (left-aligned) */}
             <div
               className={`${COL_W} flex h-[48px] shrink-0 items-center py-[4px] pr-[4px] pl-[20px] ${ROW_BG[row.bg]}`}
@@ -92,7 +101,7 @@ function EfficiencyTable() {
             {/* value cells (centered) */}
             {row.values.map((v, i) => (
               <div
-                key={i}
+                key={`cell-${ri}-${i}`}
                 className={`${COL_W} flex h-[48px] shrink-0 items-center justify-center py-[4px] px-[4px] ${ROW_BG[row.bg]}`}
               >
                 <p
@@ -109,7 +118,32 @@ function EfficiencyTable() {
   );
 }
 
-export function TechnologyPageEfficiency() {
+export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
+  const heading = data?.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const footnote = data?.footnote || FALLBACK_FOOTNOTE;
+
+  const headersText = typeof data?.headers === "string" ? data.headers : null;
+  const headers: string[] = headersText
+    ? headersText.split("\t")
+    : FALLBACK_HEADERS;
+
+  const strapiRows = Array.isArray(data?.rows) ? data.rows : null;
+  const rows: Row[] =
+    strapiRows && strapiRows.length > 0
+      ? strapiRows.map((r: any) => ({
+          label: (r?.approach as string) || "",
+          values: [
+            (r?.peak_compute as string) || "",
+            (r?.power as string) || "",
+            (r?.efficiency as string) || "",
+            (r?.tradeoff as string) || "",
+          ],
+          bg: r?.is_highlighted ? "green" : "none",
+        }))
+      : FALLBACK_ROWS;
+
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -132,10 +166,10 @@ export function TechnologyPageEfficiency() {
           >
             <GradientTitle gradientDeg={TITLE_GRADIENT_DEG} nodeId="2995:1338">
               <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-                The efficiency gap isn&apos;t a few
+                {headingLines[0] ?? ""}
               </span>
               <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-                percent. It&apos;s a different category.
+                {headingLines[1] ?? ""}
               </span>
             </GradientTitle>
             <CornerDecor />
@@ -144,18 +178,18 @@ export function TechnologyPageEfficiency() {
             className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic`}
             data-node-id="2995:1343"
           >
-            {SUBTITLE_TEXT}
+            {subtitle}
           </p>
         </div>
 
-        <EfficiencyTable />
+        <EfficiencyTable headers={headers} rows={rows} />
 
         {/* footnote */}
         <p
           className={`${interRegular.className} absolute top-[540px] left-[93.5px] text-[14px] leading-[22.75px] font-normal tracking-[-0.1504px] whitespace-nowrap text-[rgba(255,255,255,0.4)] not-italic`}
           data-node-id="2999:1616"
         >
-          {FOOTNOTE}
+          {footnote}
         </p>
       </div>
 
@@ -169,20 +203,20 @@ export function TechnologyPageEfficiency() {
             backgroundClip: "text",
           }}
         >
-          <span className="block">The efficiency gap isn&apos;t a few</span>
-          <span className="block">percent. It&apos;s a different category.</span>
+          <span className="block">{headingLines[0] ?? ""}</span>
+          <span className="block">{headingLines[1] ?? ""}</span>
         </div>
         <p
           className={`${interRegular.className} max-w-[327px] text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
         >
-          {SUBTITLE_TEXT}
+          {subtitle}
         </p>
 
-        {ROWS.map((row) => {
+        {rows.map((row, ri) => {
           const isAcube = row.bg === "green";
           return (
             <div
-              key={row.label}
+              key={`m-row-${ri}`}
               className={`flex flex-col gap-[10px] rounded-[6px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] p-[16px] ${
                 isAcube ? "bg-[rgba(83,216,36,0.3)]" : row.bg === "marker" ? "bg-[rgba(255,255,255,0.05)]" : "bg-[rgba(15,14,14,0.4)]"
               }`}
@@ -196,8 +230,8 @@ export function TechnologyPageEfficiency() {
               >
                 {row.label}
               </p>
-              {HEADERS.slice(1).map((h, i) => (
-                <div key={h} className="flex items-baseline justify-between gap-[12px]">
+              {headers.slice(1).map((h: string, i: number) => (
+                <div key={`m-cell-${ri}-${i}`} className="flex items-baseline justify-between gap-[12px]">
                   <span className={`${interRegular.className} text-[11px] leading-[14px] font-normal tracking-[0.2px] whitespace-nowrap text-[rgba(255,255,255,0.5)] uppercase not-italic`}>
                     {h}
                   </span>
@@ -215,7 +249,7 @@ export function TechnologyPageEfficiency() {
         <p
           className={`${interRegular.className} text-[12px] leading-[18px] font-normal text-[rgba(255,255,255,0.4)] not-italic`}
         >
-          {FOOTNOTE}
+          {footnote}
         </p>
       </div>
     </section>

@@ -1,3 +1,4 @@
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import {
@@ -11,11 +12,37 @@ import {
   START_TITLE_GRADIENT,
 } from "./products-data";
 
+const FALLBACK_HEADING = "Start building with GPX10 Pro.";
+const FALLBACK_SUBTITLE =
+  "A complete edge-AI SoC — AI engine, control, sensing, memory, and security — integrated so your board doesn't have to be.";
+
+function splitLines(value: string): string[] {
+  return value.split("\n");
+}
+
 /**
  * Figma 2903:2609 (title) + 2903:2578/2555 (two CTA cards).
  * "Start building with GPX10 Pro." — footer CTA section.
  */
-export function ProductsStartBuilding() {
+export function ProductsStartBuilding({ data }: { data?: any }) {
+  const heading = data?.heading || FALLBACK_HEADING;
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const cardBackground =
+    mediaUrl(data?.card_background) || "/products/cta-card-bg.svg";
+  const cards =
+    Array.isArray(data?.cards) && data.cards.length > 0
+      ? data.cards.map((c: any, i: number) => {
+          const fallback = START_CARDS[i] || START_CARDS[0];
+          const titleLines = splitLines(c?.title_lines || fallback.titleLines.join("\n"));
+          return {
+            nodeId: `start-card-${i}`,
+            titleLines: [titleLines[0] || "", titleLines[1] || ""],
+            description: c?.description ?? fallback.description,
+            cta: c?.cta_label ?? fallback.cta,
+            ctaHref: c?.cta_href ?? "#",
+          };
+        })
+      : START_CARDS;
   return (
     <section className="relative z-20 mb-0 min-[1024px]:mb-[-520px] w-full bg-transparent">
       {/* DESKTOP (>=1024px) */}
@@ -23,18 +50,38 @@ export function ProductsStartBuilding() {
         className="relative mx-auto hidden w-full min-[1024px]:block"
         aria-label="Start building with GPX10 Pro"
       >
-        <ProductsStartBuildingDesktop />
+        <ProductsStartBuildingDesktop
+          heading={heading}
+          subtitle={subtitle}
+          cardBackground={cardBackground}
+          cards={cards}
+        />
       </div>
 
       {/* MOBILE (<1024px) */}
       <div className="relative w-full min-[1024px]:hidden">
-        <ProductsStartBuildingMobile />
+        <ProductsStartBuildingMobile
+          heading={heading}
+          subtitle={subtitle}
+          cardBackground={cardBackground}
+          cards={cards}
+        />
       </div>
     </section>
   );
 }
 
-function ProductsStartBuildingDesktop() {
+function ProductsStartBuildingDesktop({
+  heading,
+  subtitle,
+  cardBackground,
+  cards,
+}: {
+  heading: string;
+  subtitle: string;
+  cardBackground: string;
+  cards: any[];
+}) {
   return (
     <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center pb-[120px] pt-[80px]">
       {/* Section title — 2903:2609 (centered, w=650) */}
@@ -62,14 +109,14 @@ function ProductsStartBuildingDesktop() {
             }}
             data-node-id="2903:2611"
           >
-            Start building with GPX10 Pro.
+            {heading}
           </h2>
         </div>
         <p
           className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           data-node-id="2903:2616"
         >
-          {`A complete edge-AI SoC — AI engine, control, sensing, memory, and security — integrated so your board doesn't have to be.`}
+          {subtitle}
         </p>
       </div>
 
@@ -78,15 +125,25 @@ function ProductsStartBuildingDesktop() {
         className="mt-[80px] flex items-start"
         style={{ gap: START_CARD.gap }}
       >
-        {START_CARDS.map((card) => (
-          <StartCardView key={card.nodeId} card={card} />
+        {cards.map((card) => (
+          <StartCardView
+            key={card.nodeId}
+            card={card}
+            cardBackground={cardBackground}
+          />
         ))}
       </div>
     </div>
   );
 }
 
-function StartCardView({ card }: { card: (typeof START_CARDS)[number] }) {
+function StartCardView({
+  card,
+  cardBackground,
+}: {
+  card: any;
+  cardBackground: string;
+}) {
   return (
     <div
       className="relative shrink-0"
@@ -98,7 +155,7 @@ function StartCardView({ card }: { card: (typeof START_CARDS)[number] }) {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         alt=""
-        src="/products/cta-card-bg.svg"
+        src={cardBackground}
         className="pointer-events-none absolute inset-0 block size-full max-w-none"
         aria-hidden
       />
@@ -134,7 +191,7 @@ function StartCardView({ card }: { card: (typeof START_CARDS)[number] }) {
             >
               {card.description}
             </p>
-            <StartCta>{card.cta}</StartCta>
+            <StartCta href={card.ctaHref}>{card.cta}</StartCta>
           </div>
         </div>
       </div>
@@ -142,10 +199,16 @@ function StartCardView({ card }: { card: (typeof START_CARDS)[number] }) {
   );
 }
 
-function StartCta({ children }: { children: React.ReactNode }) {
+function StartCta({
+  children,
+  href,
+}: {
+  children: React.ReactNode;
+  href: string;
+}) {
   return (
     <a
-      href="#"
+      href={href}
       className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-center overflow-hidden`}
       data-name="Cta"
     >
@@ -165,7 +228,17 @@ function StartCta({ children }: { children: React.ReactNode }) {
   );
 }
 
-function ProductsStartBuildingMobile() {
+function ProductsStartBuildingMobile({
+  heading,
+  subtitle,
+  cardBackground,
+  cards,
+}: {
+  heading: string;
+  subtitle: string;
+  cardBackground: string;
+  cards: any[];
+}) {
   return (
     <div
       className="relative w-full px-[24px] pt-[64px] pb-[80px]"
@@ -181,23 +254,23 @@ function ProductsStartBuildingMobile() {
             backgroundClip: "text",
           }}
         >
-          Start building with GPX10 Pro.
+          {heading}
         </h2>
         <p
           className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]`}
         >
-          {`A complete edge-AI SoC — AI engine, control, sensing, memory, and security — integrated so your board doesn't have to be.`}
+          {subtitle}
         </p>
       </div>
 
       {/* Cards */}
       <div className="mt-[40px] flex flex-col gap-[24px]">
-        {START_CARDS.map((card) => (
+        {cards.map((card) => (
           <div key={card.nodeId} className="relative">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt=""
-              src="/products/cta-card-bg.svg"
+              src={cardBackground}
               className="pointer-events-none absolute inset-0 block size-full max-w-none"
               aria-hidden
             />
@@ -217,7 +290,7 @@ function ProductsStartBuildingMobile() {
               >
                 {card.description}
               </p>
-              <StartCta>{card.cta}</StartCta>
+              <StartCta href={card.ctaHref}>{card.cta}</StartCta>
             </div>
           </div>
         ))}

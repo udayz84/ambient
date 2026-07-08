@@ -59,7 +59,9 @@ function getRepelOffset(
   };
 }
 
-export function NavbarCta() {
+export function NavbarCta({ data }: { data?: any } = {}) {
+  const ctaLabel = data?.cta_label || "GET IN TOUCH";
+  const ctaHref = data?.cta_href || "/contact";
   const buttonRef = useRef<HTMLAnchorElement>(null);
   const particleRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const offsetRefs = useRef<{ x: number; y: number }[]>([]);
@@ -128,7 +130,7 @@ export function NavbarCta() {
   return (
     <a
       ref={buttonRef}
-      href="/contact"
+      href={ctaHref}
       className={`${gilroySemiBold.className} relative block h-[36px] w-[147px] shrink-0 ${GREEN_CTA_SHADOW}`}
       data-node-id="2379:1589"
       data-name="Cta"
@@ -166,7 +168,7 @@ export function NavbarCta() {
         className="pointer-events-none absolute top-[calc(50%-8px)] left-[20px] z-10 text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic"
         data-node-id="2379:1590"
       >
-        GET IN TOUCH
+        {ctaLabel}
       </span>
       <span
         className="pointer-events-none absolute top-1/2 left-[126px] z-10 size-[6px] -translate-y-1/2"

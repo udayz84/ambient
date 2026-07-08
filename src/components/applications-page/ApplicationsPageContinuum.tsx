@@ -1,12 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { CornerDecor } from "../contact/contact-shared";
+import { mediaUrl } from "@/lib/strapi";
 
 const TITLE_GRADIENT =
   "linear-gradient(119.973deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
 const SUBTITLE =
   "A unified analog architecture, scaled for your exact power and performance needs.";
+
+const FALLBACK_HEADING = "The Ambient Continuum.";
 
 type ContinuumCard = {
   nodeId: string;
@@ -57,9 +60,36 @@ const CARDS: ContinuumCard[] = [
   },
 ];
 
+function renderBody(body: React.ReactNode): React.ReactNode {
+  if (typeof body === "string") {
+    const lines = body.split("\n");
+    if (lines.length <= 1) return body;
+    return lines.map((line, i) => (
+      <span key={i} className="block">
+        {line}
+      </span>
+    ));
+  }
+  return body;
+}
 
+export function ApplicationsPageContinuum({ data }: { data?: any }) {
+  const heading = data?.heading || FALLBACK_HEADING;
+  const subtitle = data?.subtitle || SUBTITLE;
+  const image = mediaUrl(data?.image) || "/applications/continuum.png";
 
-export function ApplicationsPageContinuum() {
+  const rawCards = Array.isArray(data?.cards) ? data.cards : [];
+  const cards: ContinuumCard[] =
+    rawCards.length > 0
+      ? rawCards.map((c: any, i: number) => ({
+          nodeId: CARDS[i]?.nodeId || `continuum-card-${i}`,
+          left: CARDS[i]?.left ?? 0,
+          top: CARDS[i]?.top ?? 0,
+          title: c?.title || "",
+          body: c?.body || "",
+        }))
+      : CARDS;
+
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-[#040404]"
@@ -78,7 +108,7 @@ export function ApplicationsPageContinuum() {
           <img
             alt=""
             aria-hidden
-            src="/applications/continuum.png"
+            src={image}
             className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
           />
         </div>
@@ -99,7 +129,7 @@ export function ApplicationsPageContinuum() {
               }}
               data-node-id="2660:1150"
             >
-              The Ambient Continuum.
+              {heading}
             </h2>
             <CornerDecor />
           </div>
@@ -107,12 +137,12 @@ export function ApplicationsPageContinuum() {
             className={`${interRegular.className} mt-[20px] w-[600px] text-center text-[14px] leading-[1.4] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
             data-node-id="2660:1155"
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
         </div>
 
         {/* Content cards */}
-        {CARDS.map((card) => (
+        {cards.map((card) => (
           <div
             key={card.nodeId}
             className="absolute flex w-[276px] flex-col items-center justify-center gap-[10px] p-[12px] text-center not-italic text-white"
@@ -130,7 +160,7 @@ export function ApplicationsPageContinuum() {
               className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal opacity-65`}
               data-node-id={`${card.nodeId}-body`}
             >
-              {card.body}
+              {renderBody(card.body)}
             </p>
           </div>
         ))}
@@ -150,14 +180,14 @@ export function ApplicationsPageContinuum() {
                 backgroundClip: "text",
               }}
             >
-              The Ambient Continuum.
+              {heading}
             </h2>
             <CornerDecor />
           </div>
           <p
             className={`${interRegular.className} w-full max-w-[332px] text-center text-[14px] leading-[1.4] font-normal text-[#f0f0f0] opacity-65 not-italic`}
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
         </div>
 
@@ -167,7 +197,7 @@ export function ApplicationsPageContinuum() {
             <img
               alt=""
               aria-hidden
-              src="/applications/continuum.png"
+              src={image}
               className="pointer-events-none size-full max-w-none object-cover"
             />
           </div>
@@ -175,7 +205,7 @@ export function ApplicationsPageContinuum() {
 
         {/* Cards */}
         <div className="flex w-full flex-col items-center gap-[32px] px-[24px] pt-[40px] pb-[64px]">
-          {CARDS.map((card) => (
+          {cards.map((card) => (
             <div
               key={card.nodeId}
               className="flex w-full max-w-[300px] flex-col items-center justify-center gap-[10px] p-[12px] text-center not-italic text-white"
@@ -188,7 +218,7 @@ export function ApplicationsPageContinuum() {
               <p
                 className={`${interRegular.className} text-[14px] leading-[21px] font-normal opacity-65`}
               >
-                {card.body}
+                {renderBody(card.body)}
               </p>
             </div>
           ))}

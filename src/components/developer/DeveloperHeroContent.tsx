@@ -7,11 +7,26 @@ import {
   PRIMARY_CTA_SHADOW,
 } from "./developer-data";
 
+const DEFAULT_HEADING = "Model to deployment\nin 15 Minutes ";
+const DEFAULT_SUBTITLE =
+  "ModelForge bridges training and deployment. Quantize, compile, and merge neural networks with your firmware.";
+const DEFAULT_PRIMARY_LABEL = "Download ModelForge SDK";
+const DEFAULT_SECONDARY_LABEL = "Read the Documentation";
+
 /**
  * Figma 2438:4563 — Developer hero text content.
  * Vertical stack (gap 24px): Section Title · Description · CTA row.
  */
-export function DeveloperHeroContent() {
+export function DeveloperHeroContent({ data }: { data?: any }) {
+  const heading = data?.heading || DEFAULT_HEADING;
+  const headingLines = heading.split("\n");
+  const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
+  const primaryLabel =
+    data?.primary_button?.label || DEFAULT_PRIMARY_LABEL;
+  const primaryHref = data?.primary_button?.href || "#";
+  const secondaryLabel =
+    data?.secondary_button?.label || DEFAULT_SECONDARY_LABEL;
+  const secondaryHref = data?.secondary_button?.href || "#";
   return (
     <div
       className="relative flex shrink-0 flex-col items-start gap-[24px]"
@@ -32,8 +47,11 @@ export function DeveloperHeroContent() {
             className={`${gilroyMedium.className} not-italic [word-break:break-word] relative bg-clip-text text-[46px] font-medium leading-[49px] text-transparent`}
             style={{ backgroundImage: HERO_TITLE_GRADIENT }}
           >
-            <span className="block leading-[49px]">Model to deployment</span>
-            <span className="block leading-[49px]">{`in 15 Minutes `}</span>
+            {headingLines.map((line: string, i: number) => (
+              <span key={i} className="block leading-[49px]">
+                {line}
+              </span>
+            ))}
           </h2>
         </div>
       </div>
@@ -43,8 +61,7 @@ export function DeveloperHeroContent() {
         className={`${interRegular.className} not-italic [word-break:break-word] relative w-[529px] shrink-0 text-[18px] font-normal leading-[27px] text-[#f0f0f0]`}
         data-node-id="2438:4571"
       >
-        ModelForge bridges training and deployment. Quantize, compile, and merge
-        neural networks with your firmware.
+        {subtitle}
       </p>
 
       {/* CTAs — 2438:4572 */}
@@ -52,18 +69,24 @@ export function DeveloperHeroContent() {
         className="relative flex shrink-0 items-start justify-center gap-[24px]"
         data-node-id="2438:4572"
       >
-        <PrimaryCta>Download ModelForge SDK</PrimaryCta>
-        <SecondaryCta>Read the Documentation</SecondaryCta>
+        <PrimaryCta href={primaryHref}>{primaryLabel}</PrimaryCta>
+        <SecondaryCta href={secondaryHref}>{secondaryLabel}</SecondaryCta>
       </div>
     </div>
   );
 }
 
 /** CTA - Primary — 2438:4573 (276×48) */
-function PrimaryCta({ children }: { children: React.ReactNode }) {
+function PrimaryCta({
+  children,
+  href,
+}: {
+  children: React.ReactNode;
+  href: string;
+}) {
   return (
     <a
-      href="#"
+      href={href}
       className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[276px] shrink-0 items-center justify-center overflow-hidden px-[20px] py-[10px]`}
       data-node-id="2438:4573"
     >
@@ -84,10 +107,16 @@ function PrimaryCta({ children }: { children: React.ReactNode }) {
 }
 
 /** CTA - Secondary — 2438:4580 (249×48) */
-function SecondaryCta({ children }: { children: React.ReactNode }) {
+function SecondaryCta({
+  children,
+  href,
+}: {
+  children: React.ReactNode;
+  href: string;
+}) {
   return (
     <a
-      href="#"
+      href={href}
       className={`${gilroyMedium.className} relative flex h-[48px] w-[249px] shrink-0 items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
       data-node-id="2438:4580"
     >

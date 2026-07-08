@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GradientTitle } from "../contact/contact-shared";
@@ -15,7 +16,7 @@ const CTA_LABEL = "Request Sparsh Module";
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
 
-function RequestCta() {
+function RequestCta({ label }: { label: string }) {
   return (
     <a
       href="#"
@@ -29,7 +30,7 @@ function RequestCta() {
       <span
         className={`relative ${gilroyMedium.className} text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic`}
       >
-        {CTA_LABEL}
+        {label}
       </span>
       <span
         aria-hidden
@@ -40,11 +41,11 @@ function RequestCta() {
   );
 }
 
-function ChipImage({ className }: { className?: string }) {
+function ChipImage({ className, src }: { className?: string; src: string }) {
   return (
     <div className={`relative ${className}`} data-name="Chip Image">
       <img
-        src="/Frame 1984079439.png"
+        src={src}
         alt="Sparsh AI Module"
         className="absolute left-1/2 top-1/2 h-[500.691px] w-[482.876px] -translate-x-1/2 -translate-y-1/2 max-w-none object-contain scale-[0.85]"
       />
@@ -53,7 +54,18 @@ function ChipImage({ className }: { className?: string }) {
   );
 }
 
-export function SomReadyToDeploy() {
+export function SomReadyToDeploy({ data }: { data?: any }) {
+  const subtitle = data?.subtitle || SUBTITLE;
+  const heading = data?.heading || "Ready to deploy?";
+  const ctaLabel = data?.primary_cta_label || CTA_LABEL;
+  const description = data?.secondary_text || DESCRIPTION;
+  const chipSrc = mediaUrl(data?.image) || "/Frame 1984079439.png";
+  const primaryTitleLines = (
+    data?.primary_title ||
+    `${HEADING_LINE_1}\n${HEADING_LINE_2}`
+  ).split("\n");
+  const primaryLine1 = primaryTitleLines[0] || HEADING_LINE_1;
+  const primaryLine2 = primaryTitleLines[1] ?? HEADING_LINE_2;
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -68,14 +80,14 @@ export function SomReadyToDeploy() {
               gradientDeg={TITLE_GRADIENT_DEG}
               className="text-center whitespace-nowrap"
             >
-              Ready to deploy?
+              {heading}
             </GradientTitle>
             <Corners />
           </div>
           <p
             className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
         </div>
 
@@ -86,9 +98,9 @@ export function SomReadyToDeploy() {
             <h3
               className={`${gilroyMedium.className} relative text-[32px] leading-[38px] font-medium text-white not-italic whitespace-nowrap`}
             >
-              {HEADING_LINE_1}
+              {primaryLine1}
               <br />
-              {HEADING_LINE_2}
+              {primaryLine2}
 
               {/* Connecting line SVG */}
               <svg 
@@ -108,16 +120,16 @@ export function SomReadyToDeploy() {
             <p
               className={`${interRegular.className} mt-[60px] max-w-[290px] text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic`}
             >
-              {DESCRIPTION}
+              {description}
             </p>
             
             <div className="mt-[20px]">
-              <RequestCta />
+              <RequestCta label={ctaLabel} />
             </div>
           </div>
 
           {/* Right: chip image */}
-          <ChipImage className="h-[446.196px] w-[430.321px] shrink-0" />
+          <ChipImage className="h-[446.196px] w-[430.321px] shrink-0" src={chipSrc} />
         </div>
       </div>
 
@@ -133,31 +145,31 @@ export function SomReadyToDeploy() {
                 backgroundClip: "text",
               }}
             >
-              Ready to deploy?
+              {heading}
             </div>
             <Corners />
           </div>
           <p
             className={`${interRegular.className} max-w-[332px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/80 not-italic`}
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
         </div>
 
-        <ChipImage className="h-[300px] w-full max-w-[290px]" />
+        <ChipImage className="h-[300px] w-full max-w-[290px]" src={chipSrc} />
 
         <div className="flex w-full flex-col items-center gap-[20px]">
           <h3
             className={`${gilroyMedium.className} text-center text-[26px] leading-[32px] font-medium text-white not-italic [word-break:break-word]`}
           >
-            {HEADING_LINE_1} {HEADING_LINE_2}
+            {primaryLine1} {primaryLine2}
           </h3>
           <p
             className={`${interRegular.className} max-w-[290px] text-center text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
           >
-            {DESCRIPTION}
+            {description}
           </p>
-          <RequestCta />
+          <RequestCta label={ctaLabel} />
         </div>
       </div>
     </section>

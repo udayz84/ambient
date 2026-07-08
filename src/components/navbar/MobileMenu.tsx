@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { interMedium } from "../hero/fonts";
-import { NAV_ITEMS } from "./nav-items";
+import { FALLBACK_NAV_ITEMS, mapStrapiNavItems } from "./nav-items";
 import { NavbarCta } from "./NavbarCta";
 
 const emptySubscribe = () => () => {};
@@ -73,7 +73,10 @@ function ChevronDown() {
   );
 }
 
-export function MobileMenu() {
+export function MobileMenu({ data }: { data?: any }) {
+  const navItems = data?.nav_items
+    ? mapStrapiNavItems(data.nav_items)
+    : FALLBACK_NAV_ITEMS;
   const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const isClient = useSyncExternalStore(
@@ -180,7 +183,7 @@ export function MobileMenu() {
                 }`}
               >
               <ul className="px-[24px] pt-[8px]">
-                {NAV_ITEMS.map((item) => {
+                {navItems.map((item) => {
                   const active = item.href !== "#" && pathname === item.href;
                   return (
                     <li
@@ -201,7 +204,7 @@ export function MobileMenu() {
                 })}
               </ul>
               <div className="px-[24px] pb-[28px] pt-[24px]">
-                <NavbarCta />
+                <NavbarCta data={data} />
               </div>
             </nav>
             </div>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { mediaUrl } from "@/lib/strapi";
 import { GradientTitle } from "../contact/contact-shared";
 import { interRegular } from "../hero/fonts";
 import { CompanyAdvisoryBoard } from "./CompanyAdvisoryBoard";
@@ -7,6 +8,12 @@ import { CompanyLeadershipRow } from "./CompanyLeadershipRow";
 
 const IMAGE_107_OVERLAY =
   "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 810 1440' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%25' width='100%25' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-46.009 0.0000020111 -0.000003897 -89.152 363.86 720)'><stop stop-color='rgba(0,0,0,0.6)' offset='0'/><stop stop-color='rgba(0,0,0,1)' offset='1'/></radialGradient></defs></svg>\")";
+
+const FALLBACK_HEADING = "Our minds powering\nthe revolution";
+const FALLBACK_SUBTITLE =
+  "We're building programmable AI processors that deliver\nbreakthrough performance and power efficiency from edge to cloud.";
+const FALLBACK_PREV_ARROW = "/applications/nav-arrow-left.svg";
+const FALLBACK_NEXT_ARROW = "/applications/nav-arrow-right.svg";
 
 function LeadershipBackground() {
   return (
@@ -32,7 +39,18 @@ function LeadershipBackground() {
   );
 }
 
-export function CompanyLeadership() {
+type CompanyLeadershipProps = {
+  data?: any;
+};
+
+export function CompanyLeadership({ data }: CompanyLeadershipProps = {}) {
+  const heading = (data?.heading as string) || FALLBACK_HEADING;
+  const subtitle = (data?.subtitle as string) || FALLBACK_SUBTITLE;
+  const headingLines = heading.split("\n");
+  const prevArrowSrc = mediaUrl(data?.prev_arrow_icon) || FALLBACK_PREV_ARROW;
+  const nextArrowSrc = mediaUrl(data?.next_arrow_icon) || FALLBACK_NEXT_ARROW;
+  const team = Array.isArray(data?.team) ? data.team : null;
+
   return (
     <section
       className="relative z-[8] mx-auto mt-[118px] h-[1208px] w-[1430px] shrink-0 overflow-visible bg-black"
@@ -68,12 +86,18 @@ export function CompanyLeadership() {
                   gradientDeg="105.739deg"
                   className="w-max max-w-none break-normal"
                 >
-                  <span className="block h-[49px] shrink-0 pr-[2px] leading-[49px] whitespace-nowrap">
-                    Our minds powering
-                  </span>
-                  <span className="block h-[49px] shrink-0 leading-[49px]">
-                    the revolution
-                  </span>
+                  {headingLines.map((line, i) => (
+                    <span
+                      key={i}
+                      className={
+                        i === headingLines.length - 1
+                          ? "block h-[49px] shrink-0 leading-[49px]"
+                          : "block h-[49px] shrink-0 pr-[2px] leading-[49px] whitespace-nowrap"
+                      }
+                    >
+                      {line}
+                    </span>
+                  ))}
                 </GradientTitle>
               </div>
               <CornerDecor />
@@ -82,9 +106,12 @@ export function CompanyLeadership() {
               className={`${interRegular.className} mt-[24px] w-[591px] text-[18px] leading-[27px] font-normal text-[#a1a1a1] not-italic [word-break:break-word]`}
               data-node-id="2379:2285"
             >
-              We&apos;re building programmable AI processors that deliver
-              <br />
-              breakthrough performance and power efficiency from edge to cloud.
+              {subtitle.split("\n").map((line, i, arr) => (
+                <span key={i}>
+                  {line}
+                  {i < arr.length - 1 ? <br /> : null}
+                </span>
+              ))}
             </p>
           </div>
 
@@ -93,7 +120,7 @@ export function CompanyLeadership() {
             data-node-id="2379:2286"
             data-name="Leadership"
           >
-            <CompanyLeadershipRow />
+            <CompanyLeadershipRow team={team} />
           </div>
         </div>
 
@@ -105,7 +132,7 @@ export function CompanyLeadership() {
         className="absolute top-[593px] left-[39px] z-20 flex size-[44px] cursor-pointer items-center justify-center transition-opacity hover:opacity-80"
         aria-label="Previous"
       >
-        <Image src="/applications/nav-arrow-left.svg" alt="" width={44} height={44} className="block size-full max-w-none" />
+        <Image src={prevArrowSrc} alt="" width={44} height={44} className="block size-full max-w-none" />
       </button>
 
       <button
@@ -113,7 +140,7 @@ export function CompanyLeadership() {
         className="absolute top-[593px] left-[1347px] z-20 flex size-[44px] cursor-pointer items-center justify-center transition-opacity hover:opacity-80"
         aria-label="Next"
       >
-        <Image src="/applications/nav-arrow-right.svg" alt="" width={44} height={44} className="block size-full max-w-none" />
+        <Image src={nextArrowSrc} alt="" width={44} height={44} className="block size-full max-w-none" />
       </button>
     </section>
   );

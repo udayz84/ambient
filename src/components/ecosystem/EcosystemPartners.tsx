@@ -85,7 +85,8 @@ function PartnerSection({
   );
 }
 
-export function EcosystemPartners() {
+export function EcosystemPartners({ data }: { data?: any }) {
+  void data;
   const ref = useRef<HTMLDivElement>(null);
   const isInViewRef = useRef(false);
   const loopActiveRef = useRef(false);

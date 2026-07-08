@@ -1,0 +1,251 @@
+{
+  "hero": {
+    "tag": {
+      "text": "Architecture · A-Cube"
+    },
+    "title": "Meet A-Cube. AI-native, from the metal up.",
+    "subtitle": "A new architecture for AI, energy-aware at every layer, scaling from coin cell to cloud.",
+    "primary_button": {
+      "label": "Read the Whitepaper",
+      "href": "#",
+      "variant": "primary"
+    },
+    "secondary_button": {
+      "label": "Watch the 3-min Explainer",
+      "href": "#",
+      "variant": "secondary"
+    },
+    "background_image": 76,
+    "hero_object": 77
+  },
+  "problem": {
+    "tag": {
+      "text": "The PROBLEM"
+    },
+    "heading": "AI isn't a math problem. It's a memory problem.",
+    "subtitle": "The multiply was never the expensive part. Moving the data was.",
+    "stat_value": "95%",
+    "stat_description": "of a neural net is matrix math. ~75% of the effort is moving it around.",
+    "background_image": null,
+    "comparison_cards": [
+      {
+        "label": "Legacy",
+        "description": "Compute and memory sit apart. The chip spends its life shuttling numbers, not crunching them. ~75% of operations are just memory traffic.",
+        "image": 79
+      },
+      {
+        "label": "A-Cube",
+        "description": "We put the compute inside the memory. The commute disappears. Compute where the data lives.",
+        "image": 80
+      }
+    ]
+  },
+  "architecture": {
+    "tag": {
+      "text": "A-Cube"
+    },
+    "heading": "One architecture that thinks senses, & speaks you language",
+    "subtitle": "Three breakthroughs working as one system - a brain that runs on physics, a nervous system that knows when (and how hard) to think, and a language you already speak. Server-class AI in a coin-cell power budget.",
+    "image": 10
+  },
+  "pillars": {
+    "pillars": [
+      {
+        "icon": 81,
+        "tag": "The Brain",
+        "title": "CubicCore™",
+        "subtitle": "Server-class math. Microwatt power.",
+        "description": "It runs the math on physics itself. Ohm's law multiplies, Kirchhoff's law sums - right inside the memory, almost for free. Digital keeps every result exact.",
+        "bullets": "In-memory analog compute - no data commute\n~1/100th the energy per operation vs. digital\nScales by replication - tile in more cores, from a smart ring to a server\nFully programmable · 4–32-bit precision, tuned at runtime\nBuilt in standard CMOS - no exotic process"
+      },
+      {
+        "icon": 82,
+        "tag": "The Nervous System",
+        "title": "SenseMesh™",
+        "subtitle": "Knows when to think - and how hard.",
+        "description": "Reflexes in hardware. It fuses every sensor into one clean stream, filters out the noise, and decides - in hardware - when to wake the brain and how much power it needs.",
+        "bullets": "Hardware sensor fusion - no host polling, no firmware overhead\nEvent-driven wake - compute fires only on real signals\nMultimodal by design - motion, audio, vision into one stream\n>80% less idle host power vs. legacy MCUs"
+      },
+      {
+        "icon": 83,
+        "tag": "The Language",
+        "title": "ModelForge™",
+        "subtitle": "No new language to learn.",
+        "description": "Bring your own models in TensorFlow, Keras, or ONNX. A push-button compiler does the translation - no rewrites, no proprietary toolchain.",
+        "bullets": "Drop-in support for TensorFlow, Keras, ONNX\nPush-button compile - concept to silicon, no rewrites\nSpeaks matrix math natively — none of the translation tax Arm/RISC-V pay\nOne workflow that ports across every A-Cube product",
+        "cta": {
+          "label": "Explore the Developer Hub",
+          "href": "/developer",
+          "variant": "primary"
+        }
+      }
+    ]
+  },
+  "modes": {
+    "tag": {
+      "text": "Inside Sensemesh"
+    },
+    "heading": "Two named modes. One continuous loop.",
+    "subtitle": "Bridge the lab and real world. The Sparsh module offers continuous, microwatt intelligence in a 21×21mm size,",
+    "top_image": 84,
+    "bottom_image": 85,
+    "mode_cards": [
+      {
+        "title": "Subconscious AI",
+        "bullets": "Legacy chips switch off. A-Cube sleeps like you: the brain stays aware. Our island runs AI at microwatts while the ARM core is powered down. Always processing, never draining."
+      },
+      {
+        "title": "Turboboost mode",
+        "bullets": "When something matters, the brain wakes instantly. The moment SenseMesh flags a real event, runtime DVFS ramps the chip from subconscious idle to full performance"
+      },
+      {
+        "title": "SETTLES",
+        "bullets": "Once the task is completed, the chip settles back into subconscious mode."
+      }
+    ],
+    "mode_labels": [
+      {
+        "label": "SUBCONSCIOUS MODE",
+        "sublabel": "Always on. Ultra low power"
+      },
+      {
+        "label": "Turboboost mode",
+        "sublabel": "on-demand. high performance"
+      }
+    ]
+  },
+  "graph": {
+    "heading": "A unified architecture for seamless adoption and scalability.",
+    "subtitle": "The same chip, tuned to the job — from a wrist to a factory floor.",
+    "labels": [
+      {
+        "label": "GPX10",
+        "sub_label": "EDGE SENSOR"
+      },
+      {
+        "label": "GPX10 Pro",
+        "sub_label": "EDGE AI SOC"
+      },
+      {
+        "label": "GPX Vision",
+        "sub_label": "ON - DEVICE VISION"
+      },
+      {
+        "label": "GPX Compute",
+        "sub_label": "ON - DEVICE VISION"
+      },
+      {
+        "label": "GPX Compute",
+        "sub_label": "ON - DEVICE VISION"
+      }
+    ],
+    "axis_label_left": "MICROWATT EDGE",
+    "axis_label_right": "HYPERSCALE CLOUD",
+    "center_text": "ONE CORE. ONE SOFTWARE STACK. From the smallest sensor to largest serve",
+    "primary_button": {
+      "label": "Read the Whitepaper",
+      "href": "#",
+      "variant": "primary"
+    },
+    "secondary_button": {
+      "label": "Watch the 3-min Explainer",
+      "href": "#",
+      "variant": "secondary"
+    }
+  },
+  "silicon": {
+    "tag": {
+      "text": "Inside Sensemesh"
+    },
+    "heading": "Proven in silicon, shipping today.",
+    "subtitle": "Bridge the lab and real world. The Sparsh module offers continuous, microwatt intelligence in a 21×21mm size,",
+    "background_image": null,
+    "chip_background": null,
+    "chip_object": 88,
+    "stat_cards": [
+      {
+        "value": "512",
+        "unit": "GOPS",
+        "label": "LOWER POWER CONSUMPTION",
+        "description": "Extend battery life and reduce energy costs in compute-intensive settings."
+      },
+      {
+        "value": "~80",
+        "unit": "uW",
+        "label": "LOWER POWER CONSUMPTION",
+        "description": "Extend battery life and reduce energy costs in compute-intensive settings."
+      }
+    ],
+    "cta": {
+      "label": "Explore GPX10",
+      "href": "#",
+      "variant": "primary"
+    }
+  },
+  "efficiency": {
+    "heading": "The efficiency gap isn't a few percent. It's a different category.",
+    "subtitle": "The same chip, tuned to the job — from a wrist to a factory floor.",
+    "headers": "APPROACH\tPeak compute\tPOWER\tEFFICIENCY\tTRADEOFF",
+    "rows": [
+      {
+        "approach": "Conventional MCU",
+        "peak_compute": "0.002 GOPS",
+        "power": "600 mW",
+        "efficiency": "0.03 TOPS/W",
+        "tradeoff": "No real AI",
+        "is_highlighted": false
+      },
+      {
+        "approach": "MCU + NPU",
+        "peak_compute": "100 GOPS",
+        "power": "200 µW idle / 80 mW active",
+        "efficiency": "1.2 TOPS/W",
+        "tradeoff": "Fixed models, host polling",
+        "is_highlighted": false
+      },
+      {
+        "approach": "GPU / EDGE Accelerator",
+        "peak_compute": "1-10 TOPS",
+        "power": "1-5 W",
+        "efficiency": "2–5 TOPS/W",
+        "tradeoff": "Needs cloud or wall power",
+        "is_highlighted": false
+      },
+      {
+        "approach": "A-Cube",
+        "peak_compute": "512 GOPS",
+        "power": "~80 µW always-on",
+        "efficiency": "~30 TOPS/W*",
+        "tradeoff": "None — full AI at coin-cell power",
+        "is_highlighted": true
+      }
+    ],
+    "footnote": "* Architectural efficiency, edge SKUs. Silicon-measured figures on the GPX10 page."
+  },
+  "bottom_cta": {
+    "heading": "Put A-Cube to Work",
+    "subtitle": "A complete edge-AI SoC — AI engine, control, sensing, memory, and security — integrated so your board doesn't have to be.",
+    "card_outline": null,
+    "cards": [
+      {
+        "title_lines": "Get an\nEvaluation Kit.",
+        "description": "Explore how Ambient AI can unlock new capabilities in your wearable product. Strategic planning session with our applications team.",
+        "cta_label": "Request Eval Kit",
+        "cta_href": "/contact"
+      },
+      {
+        "title_lines": "Scale to increase\nthe volume.",
+        "description": "Be the first to access our upcoming Vision, Sound, and Industrial modules.",
+        "cta_label": "Talk to Sales",
+        "cta_href": "/contact"
+      }
+    ]
+  },
+  "seo": {
+    "meta_title": "Technology | Ambient Scientific",
+    "meta_description": "Meet A-Cube. AI-native, from the metal up. A new architecture for AI, energy-aware at every layer, scaling from coin cell to cloud.",
+    "keywords": "A-Cube, CubicCore, SenseMesh, ModelForge, in-memory compute, analog AI",
+    "noindex": false,
+    "canonical_url": "/technology"
+  }
+}

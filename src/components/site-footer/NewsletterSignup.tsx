@@ -1,10 +1,32 @@
 import Image from "next/image";
 import { gilroyMedium, interRegular, gilroySemiBold } from "../hero/fonts";
+import {
+  FALLBACK_NEWSLETTER_HEADING_TOP,
+  FALLBACK_NEWSLETTER_HEADING_BOTTOM,
+  FALLBACK_NEWSLETTER_SUBTITLE,
+  FALLBACK_NEWSLETTER_PLACEHOLDER,
+  FALLBACK_NEWSLETTER_BUTTON_LABEL,
+} from "./footer-data";
 
 const cornerLeft = "/hero/corner-tag-1.svg";
 const cornerRight = "/hero/corner-tag-2.svg";
 
-export function NewsletterSignup({ isCompact = false }: { isCompact?: boolean }) {
+export function NewsletterSignup({
+  isCompact = false,
+  data,
+}: {
+  isCompact?: boolean;
+  data?: any;
+}) {
+  const headingTop = data?.heading_top || FALLBACK_NEWSLETTER_HEADING_TOP;
+  const headingBottom = data?.heading_bottom || FALLBACK_NEWSLETTER_HEADING_BOTTOM;
+  const headingStr = typeof data?.heading === "string" ? data.heading : null;
+  const subtitle = data?.subtitle || FALLBACK_NEWSLETTER_SUBTITLE;
+  const placeholder = data?.input_placeholder || FALLBACK_NEWSLETTER_PLACEHOLDER;
+  const buttonLabel = data?.button_label || FALLBACK_NEWSLETTER_BUTTON_LABEL;
+  const [topLine, bottomLine] = headingStr
+    ? splitHeading(headingStr)
+    : [headingTop, headingBottom];
   return (
     <div
       className="relative flex w-full max-w-[600px] flex-col items-center px-[24px] sm:px-0"
@@ -24,15 +46,15 @@ export function NewsletterSignup({ isCompact = false }: { isCompact?: boolean })
               "linear-gradient(104.93deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
           }}
         >
-          <span className="block bg-clip-text">Want to stay in the</span>
-          <span className="block bg-clip-text">forefront of AI tech.</span>
+          <span className="block bg-clip-text">{topLine}</span>
+          <span className="block bg-clip-text">{bottomLine}</span>
         </h2>
       </div>
 
       <p
         className={`${interRegular.className} relative ${isCompact ? "mt-[8px]" : "mt-[16px] md:mt-[24px]"} w-full text-center ${isCompact ? "text-[14px] sm:text-[16px]" : "text-[16px] sm:text-[18px]"} leading-[1.5] font-normal text-white not-italic [word-break:break-word]`}
       >
-        Sign up to receive regular updates.
+        {subtitle}
       </p>
 
       <form
@@ -47,7 +69,7 @@ export function NewsletterSignup({ isCompact = false }: { isCompact?: boolean })
           <input
             id="newsletter-email"
             type="email"
-            placeholder="Your Email ID"
+            placeholder={placeholder}
             className={`${interRegular.className} w-full border-0 bg-transparent text-[14px] leading-[1.4] text-white outline-none placeholder:text-white`}
           />
         </div>
@@ -61,7 +83,7 @@ export function NewsletterSignup({ isCompact = false }: { isCompact?: boolean })
             className="pointer-events-none absolute inset-0 bg-[length:307.2px_307.2px] bg-top-left opacity-40 mix-blend-plus-lighter"
             style={{ backgroundImage: "url(/contact/cta-texture.png)" }}
           />
-          <span className="relative">SUBSCRIBE</span>
+          <span className="relative">{buttonLabel}</span>
           <span
             aria-hidden
             className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
@@ -70,6 +92,13 @@ export function NewsletterSignup({ isCompact = false }: { isCompact?: boolean })
       </form>
     </div>
   );
+}
+
+function splitHeading(heading: string): [string, string] {
+  const words = heading.trim().split(/\s+/);
+  if (words.length < 2) return [heading, ""];
+  const mid = Math.ceil(words.length / 2);
+  return [words.slice(0, mid).join(" "), words.slice(mid).join(" ")];
 }
 
 function Corner({

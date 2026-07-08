@@ -2,9 +2,27 @@
 
 import { useEffect, useRef, useState } from "react";
 import LocomotiveScroll from "locomotive-scroll";
+import { mediaUrl } from "@/lib/strapi";
 import { MeasuredProofCard } from "./MeasuredProofCard";
 
-const CARDS = [
+type FallbackCard = {
+  nodeId: string;
+  metric: string;
+  label: string;
+  description: string;
+  imageSrc: string;
+  imageWidth: number;
+  imageHeight: number;
+  imageTop: number;
+  imageClassName?: string;
+  imageSizes: string;
+  statWidth: number;
+  descriptionWidth: number;
+  descriptionBottom?: number;
+  statJustifyEnd?: boolean;
+};
+
+const FALLBACK_CARDS: FallbackCard[] = [
   {
     nodeId: "2379:1504",
     metric: "100x",
@@ -68,7 +86,7 @@ const CARDS = [
     descriptionBottom: 137.5,
     statJustifyEnd: true,
   },
-] as const;
+];
 
 const SLIDE_DISTANCE = 60;
 const STAGGER = 0.12;
@@ -108,7 +126,32 @@ function getCardMotion(progress: number, index: number) {
   };
 }
 
-export function MeasuredProofCards() {
+export function MeasuredProofCards({ data }: { data?: any }) {
+  const cards = (Array.isArray(data?.stat_cards) && data.stat_cards.length
+    ? data.stat_cards
+    : FALLBACK_CARDS
+  ).map((card: any, index: number) => {
+    const fallback: FallbackCard = FALLBACK_CARDS[index] || ({} as FallbackCard);
+    const imageSrc =
+      mediaUrl(card?.image) || fallback.imageSrc || "/measured-proof/card-power.png";
+    return {
+      nodeId: `2379:1504-${index}`,
+      metric: card?.metric ?? fallback.metric ?? "",
+      label: card?.label ?? fallback.label ?? "",
+      description: card?.description ?? fallback.description ?? "",
+      imageSrc,
+      imageWidth: fallback.imageWidth ?? 331,
+      imageHeight: fallback.imageHeight ?? 260,
+      imageTop: fallback.imageTop ?? 169,
+      imageClassName: fallback.imageClassName,
+      imageSizes: fallback.imageSizes ?? "332px",
+      statWidth: fallback.statWidth ?? 200,
+      descriptionWidth: fallback.descriptionWidth ?? 300,
+      descriptionBottom: fallback.descriptionBottom,
+      statJustifyEnd: fallback.statJustifyEnd,
+    };
+  });
+
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const scrollStateRef = useRef<ScrollState>({
@@ -211,7 +254,7 @@ export function MeasuredProofCards() {
         ref={trackRef}
         className="flex w-max content-stretch items-center gap-[24px] px-[40px] min-[1440px]:px-[120px] will-change-transform [backface-visibility:hidden]"
       >
-        {CARDS.map((card, index) => {
+        {cards.map((card: any, index: number) => {
           const { translateY, opacity } = getCardMotion(scrollProgress, index);
 
           return (

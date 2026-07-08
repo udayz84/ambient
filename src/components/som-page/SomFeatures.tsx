@@ -1,11 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
+import { mediaUrl } from "@/lib/strapi";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GradientTitle } from "../contact/contact-shared";
 
 const TITLE_GRADIENT_DEG = "101.672deg";
-const SUBTITLE =
+const FALLBACK_SUBTITLE =
   "Spinning a custom PCB with extreme space and power constraints takes months of trial and error. We solved the hardware physics so you can focus entirely on your application logic.";
+const FALLBACK_HEADING = "Stop Routing.\nStart Shipping.";
+const ICON_BACKGROUND = "/som/icon-bg.svg";
 
 
 
@@ -35,7 +38,13 @@ function CardTag({ label }: { label: string }) {
   );
 }
 
-function FeatureCard({ iconSrc, iconSize, tag, title, body }: FeatureCardProps) {
+function FeatureCard({
+  iconSrc,
+  iconSize,
+  tag,
+  title,
+  body,
+}: FeatureCardProps) {
   return (
     <div
       className="relative flex w-full flex-col items-start gap-[24px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[16px] pt-[16px] pb-[24px] min-[1024px]:h-[400px] min-[1024px]:w-[377px] min-[1024px]:gap-[36px] transition-all duration-300 hover:-translate-y-[10px] hover:shadow-[0px_94px_94px_-80px_#6fe047] min-[1024px]:hover:-translate-y-[30px]"
@@ -44,7 +53,7 @@ function FeatureCard({ iconSrc, iconSize, tag, title, body }: FeatureCardProps) 
       {/* Icon */}
       <div
         className="relative h-[65px] w-[66.14px] shrink-0 overflow-clip rounded-[13.684px]"
-        style={{ backgroundImage: "url(/som/icon-bg.svg)" }}
+        style={{ backgroundImage: `url(${ICON_BACKGROUND})` }}
         data-name="Icon"
       >
         <div className="absolute inset-0 flex items-center justify-center">
@@ -104,7 +113,21 @@ const CARDS: FeatureCardProps[] = [
   },
 ];
 
-export function SomFeatures() {
+export function SomFeatures({ data }: { data?: any }) {
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const headingLines = (data?.heading || FALLBACK_HEADING).split("\n");
+  const cards: FeatureCardProps[] = Array.isArray(data?.cards) && data.cards.length > 0
+    ? data.cards.map((c: any, i: number) => {
+        const fb = CARDS[i] || CARDS[0];
+        return {
+          iconSrc: mediaUrl(c?.icon) || fb.iconSrc,
+          iconSize: fb.iconSize,
+          tag: c?.tag || fb.tag,
+          title: c?.title || fb.title,
+          body: c?.description || fb.body,
+        };
+      })
+    : CARDS;
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -126,12 +149,14 @@ export function SomFeatures() {
             data-name="Title"
           >
             <GradientTitle gradientDeg={TITLE_GRADIENT_DEG} className="text-center">
-              <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-                Stop Routing.
-              </span>
-              <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-                Start Shipping.
-              </span>
+              {headingLines.map((line: string, i: number) => (
+                <span
+                  key={i}
+                  className="block h-[49px] leading-[49px] whitespace-nowrap"
+                >
+                  {line}
+                </span>
+              ))}
             </GradientTitle>
             <Corners />
           </div>
@@ -139,7 +164,7 @@ export function SomFeatures() {
             className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
             data-node-id="2438:4886"
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
         </div>
 
@@ -167,15 +192,18 @@ export function SomFeatures() {
                 backgroundClip: "text",
               }}
             >
-              <span className="block">Stop Routing.</span>
-              <span className="block">Start Shipping.</span>
+              {headingLines.map((line: string, i: number) => (
+                <span key={i} className="block">
+                  {line}
+                </span>
+              ))}
             </div>
             <Corners />
           </div>
           <p
             className={`${interRegular.className} max-w-[332px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/80 not-italic`}
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
         </div>
 

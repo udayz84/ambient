@@ -6,6 +6,7 @@ import {
   gilroyMedium,
   interRegular,
 } from "../hero/fonts";
+import { mediaUrl } from "@/lib/strapi";
 import {
   CornerDecor,
   GradientTitle,
@@ -14,6 +15,15 @@ import {
 import { Corners } from "../shared/Corners";
 
 type TrackId = "sales" | "developer" | "media";
+
+const DEFAULT_HEADING = "Prefer to write to us?";
+const DEFAULT_SUBTITLE =
+  "Select your track below to ensure your message reaches the right desk immediately.";
+const DEFAULT_LEFT_BLURB =
+  "Choose the right team to ensure your message reaches the right experts.";
+const DEFAULT_MESSAGE_HEADING = "Drop Us a Message";
+const DEFAULT_CHECKBOX_LABEL = "Sign up for news & updates";
+const DEFAULT_SUBMIT_LABEL = "Send Message";
 
 const tracks = [
   {
@@ -63,12 +73,46 @@ const formFields = [
   { label: "Phone Number", placeholder: "Enter Your Phone Number", left: 301, top: 261, nodeId: "2379:8560" },
 ] as const;
 
-export function ContactForm() {
+export function ContactForm({ data }: { data?: any }) {
   const [activeTrackId, setActiveTrackId] = useState<TrackId>("sales");
   const [subscribed, setSubscribed] = useState(false);
+
+  const heading = data?.heading || DEFAULT_HEADING;
+  const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
+  const messageHeading = data?.message_heading || DEFAULT_MESSAGE_HEADING;
+  const checkboxLabel = data?.checkbox_label || DEFAULT_CHECKBOX_LABEL;
+  const submitLabel = data?.submit_label || DEFAULT_SUBMIT_LABEL;
+
+  const strapiTracks: ReadonlyArray<any> = Array.isArray(data?.tracks)
+    ? data.tracks
+    : [];
+  const mergedTracks = tracks.map((track, index) => {
+    const remote = strapiTracks[index];
+    if (!remote) return { ...track, remoteIcon: null };
+    return {
+      ...track,
+      title: remote.label || track.title,
+      description: remote.description || track.description,
+      remoteIcon: mediaUrl(remote.icon),
+    };
+  });
+
+  const strapiFields: ReadonlyArray<any> = Array.isArray(data?.fields)
+    ? data.fields
+    : [];
+  const mergedFields = formFields.map((field, index) => {
+    const remote = strapiFields[index];
+    if (!remote) return field;
+    return {
+      ...field,
+      label: remote.label || field.label,
+      placeholder: remote.placeholder || field.placeholder,
+    };
+  });
+
   const activeConnectorTop =
-    tracks.find((track) => track.id === activeTrackId)?.connectorTop ??
-    tracks[0].connectorTop;
+    mergedTracks.find((track) => track.id === activeTrackId)?.connectorTop ??
+    mergedTracks[0].connectorTop;
 
   return (
     <div
@@ -91,7 +135,7 @@ export function ContactForm() {
               gradientDeg="119.522deg"
               className="whitespace-nowrap leading-[49px]"
             >
-              Prefer to write to us?
+              {heading}
             </GradientTitle>
             <CornerDecor />
           </div>
@@ -100,8 +144,7 @@ export function ContactForm() {
           className={`${interRegular.className} w-[458px] shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           data-node-id="2379:8503"
         >
-          Select your track below to ensure your message reaches the right desk
-          immediately.
+          {subtitle}
         </p>
       </div>
 
@@ -114,10 +157,10 @@ export function ContactForm() {
           className={`${interRegular.className} absolute top-0 left-0 w-[550px] text-[18px] leading-[27px] font-normal text-white opacity-65 not-italic [word-break:break-word]`}
           data-node-id="2379:8505"
         >
-          Choose the right team to ensure your message reaches the right experts.
+          {DEFAULT_LEFT_BLURB}
         </p>
 
-        {tracks.map((track) => (
+        {mergedTracks.map((track) => (
           <TrackCard
             key={track.nodeId}
             {...track}
@@ -140,10 +183,10 @@ export function ContactForm() {
           className={`${gilroyMedium.className} absolute top-[31px] left-[16px] w-[558px] text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
           data-node-id="2379:8554"
         >
-          Drop Us a Message
+          {messageHeading}
         </p>
 
-        {formFields.map((field) => (
+        {mergedFields.map((field) => (
           <FormField key={field.nodeId} {...field} />
         ))}
 
@@ -196,7 +239,7 @@ export function ContactForm() {
             className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-white not-italic`}
             data-node-id="2379:8564"
           >
-            Sign up for news & updates
+            {checkboxLabel}
           </span>
         </label>
 
@@ -205,7 +248,7 @@ export function ContactForm() {
           width="558px"
           href="#"
         >
-          Send Message
+          {submitLabel}
         </GreenCtaButton>
       </div>
     </div>
@@ -216,6 +259,7 @@ function TrackCard({
   title,
   description,
   icon,
+  remoteIcon,
   selected,
   top,
   height,
@@ -223,9 +267,11 @@ function TrackCard({
   nodeId,
   onSelect,
 }: (typeof tracks)[number] & {
+  remoteIcon: string | null;
   selected: boolean;
   onSelect: () => void;
 }) {
+  const iconSrc = remoteIcon || icon;
   return (
     <button
       type="button"
@@ -248,7 +294,7 @@ function TrackCard({
           className={`absolute inset-0 block size-full max-w-none transition-[filter,opacity] duration-200 ${
             selected ? "opacity-100" : "opacity-70 brightness-0 invert"
           }`}
-          src={icon}
+          src={iconSrc}
           aria-hidden
         />
       </div>

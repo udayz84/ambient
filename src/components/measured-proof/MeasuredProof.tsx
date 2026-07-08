@@ -1,10 +1,20 @@
+import { mediaUrl } from "@/lib/strapi";
 import Image from "next/image";
 import { MeasuredProofCards } from "./MeasuredProofCards";
 import { MeasuredProofCtas } from "./MeasuredProofCtas";
 import { MeasuredProofHeader } from "./MeasuredProofHeader";
 import { MeasuredProofMobile } from "./MeasuredProofMobile";
 
-export function MeasuredProof() {
+export function MeasuredProof({ data }: { data?: any }) {
+  const backgroundImage =
+    mediaUrl(data?.background_image) || "/measured-proof/bg-image-90.png";
+  const gradientTop =
+    mediaUrl(data?.gradient_top) || "/measured-proof/gradient-top.png";
+  const gradientBottom =
+    mediaUrl(data?.gradient_bottom) || "/measured-proof/gradient-bottom.png";
+  const mobileBackgroundImage =
+    mediaUrl(data?.background_image) || "/mobile/image 90.png";
+
   return (
     <section
       id="measured-proof"
@@ -21,7 +31,7 @@ export function MeasuredProof() {
           data-name="image 90"
         >
           <Image
-            src="/measured-proof/bg-image-90.png"
+            src={backgroundImage}
             alt=""
             fill
             className="object-cover object-bottom opacity-75"
@@ -34,7 +44,7 @@ export function MeasuredProof() {
           data-node-id="2379:1467"
         >
           <Image
-            src="/measured-proof/gradient-top.png"
+            src={gradientTop}
             alt=""
             fill
             className="object-cover"
@@ -46,7 +56,7 @@ export function MeasuredProof() {
           <div className="-scale-y-100 h-full w-full flex-none">
             <div className="relative h-full w-full" data-node-id="2379:1468">
               <Image
-                src="/measured-proof/gradient-bottom.png"
+                src={gradientBottom}
                 alt=""
                 fill
                 className="object-cover"
@@ -57,9 +67,9 @@ export function MeasuredProof() {
         </div>
 
         <div className="relative mx-auto h-full w-full">
-          <MeasuredProofHeader />
-          <MeasuredProofCards />
-          <MeasuredProofCtas />
+          <MeasuredProofHeader data={data} />
+          <MeasuredProofCards data={data} />
+          <MeasuredProofCtas data={data} />
         </div>
       </div>
 
@@ -68,7 +78,7 @@ export function MeasuredProof() {
         {/* Background elements for mobile (matching desktop) */}
         <div className="pointer-events-none absolute top-[45%] right-0 left-0 h-[600px] -translate-y-1/2">
           <Image
-            src="/mobile/image 90.png"
+            src={mobileBackgroundImage}
             alt=""
             fill
             className="object-cover object-bottom opacity-75"
@@ -78,7 +88,7 @@ export function MeasuredProof() {
 
         <div className="pointer-events-none absolute top-0 right-0 left-0 h-[260px]">
           <Image
-            src="/measured-proof/gradient-top.png"
+            src={gradientTop}
             alt=""
             fill
             className="object-cover"
@@ -90,7 +100,7 @@ export function MeasuredProof() {
           <div className="-scale-y-100 h-full w-full flex-none">
             <div className="relative h-full w-full">
               <Image
-                src="/measured-proof/gradient-bottom.png"
+                src={gradientBottom}
                 alt=""
                 fill
                 className="object-cover"
@@ -100,7 +110,7 @@ export function MeasuredProof() {
           </div>
         </div>
 
-        <MeasuredProofMobile />
+        <MeasuredProofMobile data={data} />
       </div>
     </section>
   );

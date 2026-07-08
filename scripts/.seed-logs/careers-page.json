@@ -1,0 +1,128 @@
+{
+  "hero": {
+    "title": "Re-architect the physics of AI",
+    "subtitle": "Don't iterate on legacy silicon. Build the fundamental compute substrate for the next generation of intelligence.",
+    "cta_label": "VIEW OPEN ROLES",
+    "cta_href": "#open-roles",
+    "scroll_text": "SCROLL",
+    "background_image": 89,
+    "title_frame": null
+  },
+  "best_work": {
+    "heading": "Do the best work of your life",
+    "cards": [
+      {
+        "icon": 91,
+        "title": "Unprecedented Impact",
+        "description": "Ship silicon that rewrites the power-performance frontier. Your work enables AI capabilities that were physically impossible yesterday."
+      },
+      {
+        "icon": 92,
+        "title": "Pure Technology Depth",
+        "description": "Operate at the intersection of analog circuit design, machine learning architectures, and condensed matter physics. No abstraction layers."
+      },
+      {
+        "icon": 93,
+        "title": "Unconstrained Co-Creation",
+        "description": "Build alongside the researchers who invented AIMC. Direct access to founders, zero bureaucracy, full technical autonomy."
+      }
+    ]
+  },
+  "dna": {
+    "heading": "Driven by physics. Defined by our DNA.",
+    "subtitle": "This is how we work, build, and solve at Ambient.",
+    "background_image": null,
+    "chip_background": null,
+    "chip_object": 88,
+    "panels": [
+      {
+        "title": "Grounded in Science",
+        "description": "You work from first principles. Every decision you make is expected to be backed by data, validation, and a clear understanding of the underlying system."
+      },
+      {
+        "title": "Stay Curious. Stay Skeptical.",
+        "description": "You are encouraged to question, challenge, and refine. Strong thinking, clear reasoning, and continuous learning are expected at every stage of the work."
+      },
+      {
+        "title": "Chase the Impossible",
+        "description": "You take on problems that don't have predefined solutions. The expectation is not iteration, but pushing beyond accepted limits and building what doesn't yet exist."
+      },
+      {
+        "title": "Build for Everyone",
+        "description": "Your work is not isolated. You build systems that must scale across real-world environments, constraints, and users, making advanced technology practical and usable."
+      },
+      {
+        "title": "Protect What Powers Us",
+        "description": "You design with power as a constraint from day one. Efficiency is not an afterthought, it is a core part of how you think, build, and optimize systems."
+      }
+    ]
+  },
+  "open_roles": {
+    "heading": "Open Roles",
+    "general_app_title": "Don't See The Right Role?",
+    "general_app_subtitle": "Submit a general application and we'll reach out when a matching position opens.",
+    "general_app_cta_label": "SHARE YOUR PROFILE",
+    "apply_button_label": "APPLY NOW",
+    "job_type_filters": "Hardware, Software, Research",
+    "location_filters": "San Francisco, Remote"
+  },
+  "benefits": {
+    "heading": "Benefits & Perks",
+    "title_frame": null,
+    "cards": [
+      {
+        "icon": 96,
+        "title": "Comprehensive Health Coverage",
+        "description": "Medical, dental, and vision insurance for you and your family. Mental health support included."
+      },
+      {
+        "icon": 97,
+        "title": "Competitive Compensation",
+        "description": "Top-of-market salary and significant equity grants. Annual performance reviews with real upside."
+      },
+      {
+        "icon": 98,
+        "title": "Equipment And Tools",
+        "description": "Latest MacBook Pro, external displays, and any specialized hardware or software you need."
+      },
+      {
+        "icon": 99,
+        "title": "Office Perks",
+        "description": "Daily catered lunch, premium coffee setup, and fully stocked kitchen. Relocation assistance available."
+      },
+      {
+        "icon": 100,
+        "title": "Learning Budget",
+        "description": "$5,000 annual budget for conferences, courses, books, and professional development."
+      },
+      {
+        "icon": 101,
+        "title": "Unlimited PTO",
+        "description": "Take the time you need. We trust you to manage your work and recharge when necessary."
+      }
+    ]
+  },
+  "bottom_cta": {
+    "heading": "Ready to build the future of compute?",
+    "buttons": [
+      {
+        "label": "APPLY NOW",
+        "href": "#",
+        "variant": "primary"
+      },
+      {
+        "label": "REFER A CANDIDATE",
+        "href": "#",
+        "variant": "secondary"
+      }
+    ],
+    "background_texture": null
+  },
+  "seo": {
+    "meta_title": "Careers | Ambient Scientific",
+    "meta_description": "Join Ambient Scientific to re-architect the physics of AI and build the fundamental compute substrate for the next generation of intelligence.",
+    "keywords": "careers, jobs, analog circuit design, ML engineer, silicon characterization, embedded systems, Ambient Scientific",
+    "noindex": false,
+    "canonical_url": "/careers"
+  }
+}

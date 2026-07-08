@@ -1,12 +1,30 @@
 import Image from "next/image";
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { WhiteTag } from "./WhiteTag";
 import { GreenCta } from "./GreenCta";
 
-const HERO_IMAGE = "/news-listing/hero-bg.png";
+const FALLBACK_HERO_IMAGE = "/news-listing/hero-bg.png";
+const FALLBACK_TAG = "Product Launch";
+const FALLBACK_TITLE = "Re-architecting the Physics of AI Compute.";
+const FALLBACK_SUBTITLE =
+  "Standard chips waste time. Our architecture processes matrix math for high performance.";
+const FALLBACK_PAGINATION = "NEXT 01/03";
+const FALLBACK_CTA = "Read documentation";
 
-export function NewsListingHero() {
+type NewsListingHeroProps = {
+  data?: any;
+};
+
+export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
+  const heroImage = mediaUrl(data?.background_image) || FALLBACK_HERO_IMAGE;
+  const tagText = (data?.tag?.text as string) || FALLBACK_TAG;
+  const title = (data?.title as string) || FALLBACK_TITLE;
+  const subtitle = (data?.subtitle as string) || FALLBACK_SUBTITLE;
+  const paginationText = (data?.pagination_text as string) || FALLBACK_PAGINATION;
+  const ctaLabel = (data?.cta_label as string) || FALLBACK_CTA;
+
   return (
     <section
       className="relative -mt-[78px] flex w-full justify-center overflow-hidden bg-[#040404]"
@@ -23,7 +41,7 @@ export function NewsListingHero() {
           data-name="Image"
         >
           <Image
-            src={HERO_IMAGE}
+            src={heroImage}
             alt=""
             fill
             sizes="1440px"
@@ -54,23 +72,22 @@ export function NewsListingHero() {
             className="absolute left-[80px] top-[389px] flex w-[407px] flex-col gap-[12px] px-[16px]"
             data-node-id="2653:693"
           >
-            <WhiteTag label="Product Launch" nodeId="2653:687" />
+            <WhiteTag label={tagText} nodeId="2653:687" />
             <div className="flex w-full flex-col gap-[12px]">
               <h2
                 className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white opacity-90 not-italic [word-break:break-word]`}
                 data-node-id="2653:695"
               >
-                Re-architecting the Physics of AI Compute.
+                {title}
               </h2>
               <p
                 className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#d2d2d2] opacity-90 not-italic [word-break:break-word]`}
                 data-node-id="2653:696"
               >
-                Standard chips waste time. Our architecture processes matrix
-                math for high performance.
+                {subtitle}
               </p>
             </div>
-            <GreenCta label="Read documentation" nodeId="2653:697" />
+            <GreenCta label={ctaLabel} nodeId="2653:697" />
           </div>
 
           {/* Pagination indicator */}
@@ -78,7 +95,7 @@ export function NewsListingHero() {
             className={`${interRegular.className} absolute left-[1292px] top-[420px] text-[12px] leading-[18px] font-normal whitespace-nowrap text-white not-italic`}
             data-node-id="2653:708"
           >
-            NEXT 01/03
+            {paginationText}
           </p>
 
           {/* Right featured card */}
@@ -93,7 +110,7 @@ export function NewsListingHero() {
               data-name="Image"
             >
               <Image
-                src={HERO_IMAGE}
+                src={heroImage}
                 alt=""
                 fill
                 sizes="164px"
@@ -107,7 +124,7 @@ export function NewsListingHero() {
                     "linear-gradient(88.8266deg, rgba(25, 25, 25, 0) 60.881%, rgb(25, 25, 25) 99.17%)",
                 }}
               />
-              <WhiteTag label="Product Launch" nodeId="2653:711" />
+              <WhiteTag label={tagText} nodeId="2653:711" />
             </div>
             <div
               className="flex flex-col gap-[24px] px-[16px]"
@@ -117,9 +134,9 @@ export function NewsListingHero() {
                 className={`${gilroyMedium.className} w-[242px] text-[22px] leading-[28px] font-medium text-white opacity-90 not-italic [word-break:break-word]`}
                 data-node-id="2653:719"
               >
-                Re-architecting the Physics of AI Compute.
+                {title}
               </h3>
-              <GreenCta label="Read documentation" nodeId="2653:720" />
+              <GreenCta label={ctaLabel} nodeId="2653:720" />
             </div>
             <Corners className="z-[3]" />
           </div>
@@ -130,7 +147,7 @@ export function NewsListingHero() {
       <div className="relative w-full min-[1024px]:hidden">
         <div className="relative h-[440px] w-full overflow-hidden">
           <Image
-            src={HERO_IMAGE}
+            src={heroImage}
             alt=""
             fill
             sizes="100vw"
@@ -149,23 +166,22 @@ export function NewsListingHero() {
           <p
             className={`${interRegular.className} absolute right-[16px] top-[96px] text-[11px] leading-[18px] font-normal whitespace-nowrap text-white not-italic`}
           >
-            NEXT 01/03
+            {paginationText}
           </p>
 
           <div className="absolute bottom-[24px] left-0 flex w-full flex-col gap-[12px] px-[24px]">
-            <WhiteTag label="Product Launch" />
+            <WhiteTag label={tagText} />
             <h2
               className={`${gilroyMedium.className} w-full text-[20px] leading-[26px] font-medium text-white opacity-90 not-italic [word-break:break-word]`}
             >
-              Re-architecting the Physics of AI Compute.
+              {title}
             </h2>
             <p
               className={`${interRegular.className} w-full text-[13px] leading-[20px] font-normal text-[#d2d2d2] opacity-90 not-italic [word-break:break-word]`}
             >
-              Standard chips waste time. Our architecture processes matrix
-              math for high performance.
+              {subtitle}
             </p>
-            <GreenCta label="Read documentation" />
+            <GreenCta label={ctaLabel} />
           </div>
         </div>
       </div>

@@ -1,9 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { mediaUrl } from "@/lib/strapi";
 
 const TITLE_GRADIENT =
   "linear-gradient(131.785deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
+
+const FALLBACK_HEADING = "Intelligence without boundaries.";
+const FALLBACK_CTA = "Learn More";
 
 type Article = {
   title: string;
@@ -12,6 +16,7 @@ type Article = {
   imageW: number;
   imageH: number;
   objectBottom?: boolean;
+  ctaLabel: string;
 };
 
 const ARTICLES: Article[] = [
@@ -21,6 +26,7 @@ const ARTICLES: Article[] = [
     image: "/applications/card-center.png",
     imageW: 205,
     imageH: 162,
+    ctaLabel: FALLBACK_CTA,
   },
   {
     title: "Hearables",
@@ -28,6 +34,7 @@ const ARTICLES: Article[] = [
     image: "/applications/card-right-mid.png",
     imageW: 205,
     imageH: 162,
+    ctaLabel: FALLBACK_CTA,
   },
   {
     title: "Smart Home",
@@ -35,6 +42,7 @@ const ARTICLES: Article[] = [
     image: "/applications/card-left-far.png",
     imageW: 179,
     imageH: 162,
+    ctaLabel: FALLBACK_CTA,
   },
   {
     title: "Industry 4.0",
@@ -42,6 +50,7 @@ const ARTICLES: Article[] = [
     image: "/applications/card-left-mid.png",
     imageW: 205,
     imageH: 162,
+    ctaLabel: FALLBACK_CTA,
   },
   {
     title: "Medical Devices",
@@ -49,6 +58,7 @@ const ARTICLES: Article[] = [
     image: "/applications/app-medical.png",
     imageW: 205,
     imageH: 162,
+    ctaLabel: FALLBACK_CTA,
   },
   {
     title: "Agriculture & Livestock",
@@ -56,6 +66,7 @@ const ARTICLES: Article[] = [
     image: "/applications/card-right-far.png",
     imageW: 179,
     imageH: 162,
+    ctaLabel: FALLBACK_CTA,
   },
   {
     title: "Drones",
@@ -63,6 +74,7 @@ const ARTICLES: Article[] = [
     image: "/applications/app-drones.png",
     imageW: 205,
     imageH: 162,
+    ctaLabel: FALLBACK_CTA,
   },
   {
     title: "Robotics",
@@ -70,6 +82,7 @@ const ARTICLES: Article[] = [
     image: "/applications/app-robotics.png",
     imageW: 205,
     imageH: 162,
+    ctaLabel: FALLBACK_CTA,
   },
   {
     title: "Automotive",
@@ -78,10 +91,11 @@ const ARTICLES: Article[] = [
     imageW: 285,
     imageH: 258,
     objectBottom: true,
+    ctaLabel: FALLBACK_CTA,
   },
 ];
 
-function SectionTitle() {
+function SectionTitle({ heading }: { heading: string }) {
   return (
     <div className="relative inline-block px-[14px]">
       <h2
@@ -93,7 +107,7 @@ function SectionTitle() {
         }}
         data-node-id="2438:3982"
       >
-        Intelligence without boundaries.
+        {heading}
       </h2>
       <Corners />
     </div>
@@ -142,7 +156,7 @@ function ArticleCard({ article }: { article: Article }) {
         <p
           className={`${gilroyMedium.className} text-[16px] leading-[28px] uppercase whitespace-nowrap text-white`}
         >
-          Learn More
+          {article.ctaLabel}
         </p>
         <Corners />
       </div>
@@ -153,7 +167,23 @@ function ArticleCard({ article }: { article: Article }) {
   );
 }
 
-export function ApplicationsPageArticles() {
+export function ApplicationsPageArticles({ data }: { data?: any }) {
+  const heading = data?.heading || FALLBACK_HEADING;
+
+  const rawArticles = Array.isArray(data?.articles) ? data.articles : [];
+  const articles: Article[] =
+    rawArticles.length > 0
+      ? rawArticles.map((a: any, i: number) => ({
+          title: a?.title || ARTICLES[i]?.title || "",
+          body: a?.body || ARTICLES[i]?.body || "",
+          image: mediaUrl(a?.image) || ARTICLES[i]?.image || "",
+          imageW: ARTICLES[i]?.imageW ?? 205,
+          imageH: ARTICLES[i]?.imageH ?? 162,
+          objectBottom: ARTICLES[i]?.objectBottom,
+          ctaLabel: a?.cta_label || ARTICLES[i]?.ctaLabel || FALLBACK_CTA,
+        }))
+      : ARTICLES;
+
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -163,9 +193,9 @@ export function ApplicationsPageArticles() {
     >
       {/* DESKTOP (>=1024px) */}
       <div className="hidden w-full max-w-[1440px] flex-col items-center gap-[40px] pt-[96px] pb-[120px] min-[1024px]:flex">
-        <SectionTitle />
+        <SectionTitle heading={heading} />
         <div className="grid grid-cols-[repeat(3,377px)] gap-[36px]">
-          {ARTICLES.map((article) => (
+          {articles.map((article) => (
             <ArticleCard key={article.title} article={article} />
           ))}
         </div>
@@ -182,12 +212,12 @@ export function ApplicationsPageArticles() {
               backgroundClip: "text",
             }}
           >
-            Intelligence without boundaries.
+            {heading}
           </h2>
           <Corners />
         </div>
         <div className="flex w-full flex-col items-center gap-[24px]">
-          {ARTICLES.map((article) => (
+          {articles.map((article) => (
             <div key={article.title} className="w-full max-w-[377px]">
               <ArticleCard article={article} />
             </div>

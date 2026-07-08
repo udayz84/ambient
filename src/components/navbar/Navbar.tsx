@@ -1,9 +1,10 @@
 import { interMedium } from "../hero/fonts";
 import Image from "next/image";
 import Link from "next/link";
-import { NAV_ITEMS } from "./nav-items";
+import { FALLBACK_NAV_ITEMS, mapStrapiNavItems } from "./nav-items";
 import { MobileMenu } from "./MobileMenu";
 import { NavbarCta } from "./NavbarCta";
+import { mediaUrl } from "@/lib/strapi";
 
 function NavChevron() {
   return (
@@ -18,7 +19,11 @@ function NavChevron() {
   );
 }
 
-export function Navbar() {
+export function Navbar({ data, brandData }: { data?: any; brandData?: any }) {
+  const navItems = data?.nav_items
+    ? mapStrapiNavItems(data.nav_items)
+    : FALLBACK_NAV_ITEMS;
+  const logoSrc = mediaUrl(brandData?.logo) || "/navbar/logo.png";
   return (
     <header
       className={`${interMedium.className} sticky top-0 z-50 h-[78px] w-full overflow-x-clip drop-shadow-[0px_6px_12px_rgba(83,216,36,0.12)]`}
@@ -77,12 +82,13 @@ export function Navbar() {
           data-node-id="2379:1574"
         >
           <Image
-            src="/navbar/logo.png"
+            src={logoSrc}
             alt="Ambient Scientific"
             width={135}
             height={38}
             className="h-[38px] w-[135.443px] object-cover object-left"
             priority
+            unoptimized
           />
         </Link>
 
@@ -91,7 +97,7 @@ export function Navbar() {
           aria-label="Main"
           data-node-id="2379:1575"
         >
-          {NAV_ITEMS.map((item) => (
+          {navItems.map((item) => (
             <span key={item.label} className="contents">
               <Link
                 href={item.href}
@@ -105,7 +111,7 @@ export function Navbar() {
         </nav>
 
         <div className="absolute top-[21.158px] right-[40px] hidden lg:block min-[1440px]:right-auto min-[1440px]:left-[1191.5px]">
-          <NavbarCta />
+          <NavbarCta data={data} />
         </div>
 
         {/* Mobile (<1024px): Absolute positioning to guarantee placement */}
@@ -115,7 +121,7 @@ export function Navbar() {
             className="absolute top-[20px] left-[16px] flex h-[38px] w-[135px] items-center overflow-hidden"
           >
             <Image
-              src="/navbar/logo.png"
+              src={logoSrc}
               alt="Ambient Scientific"
               width={135}
               height={38}
@@ -126,7 +132,7 @@ export function Navbar() {
           </Link>
 
           <div className="absolute top-[21px] right-[16px] flex h-[36px] w-[36px] items-center justify-center">
-            <MobileMenu />
+            <MobileMenu data={data} />
           </div>
         </div>
       </div>

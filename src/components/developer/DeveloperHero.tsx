@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { mediaUrl } from "@/lib/strapi";
 import { DeveloperHeroContent } from "./DeveloperHeroContent";
 
 /**
@@ -12,7 +13,8 @@ import { DeveloperHeroContent } from "./DeveloperHeroContent";
  *    · 247.952° gradient overlay
  *  - Content 2438:4563 @ (100, 240 / 549×248)
  */
-export function DeveloperHero() {
+export function DeveloperHero({ data }: { data?: any }) {
+  const bgImg = mediaUrl(data?.background_image) || "/developer/hero-bg-1.png";
   return (
     <>
       {/* Hero background — 2438:4562 (724.277, 78.033 / 687.038×577.687) */}
@@ -28,7 +30,7 @@ export function DeveloperHero() {
           <div className="absolute inset-0 overflow-hidden">
             <img
               alt=""
-              src="/developer/hero-bg-1.png"
+              src={bgImg}
               className="absolute left-0 top-[0.03%] h-[99.97%] w-full max-w-none"
             />
           </div>
@@ -63,7 +65,7 @@ export function DeveloperHero() {
         style={{ left: 100, top: 240, width: 549, height: 248 }}
         data-node-id="2438:4563"
       >
-        <DeveloperHeroContent />
+        <DeveloperHeroContent data={data} />
       </div>
     </>
   );

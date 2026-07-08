@@ -1,7 +1,39 @@
 import Image from "next/image";
+import { mediaUrl } from "@/lib/strapi";
 import { GradientTitle } from "../contact/contact-shared";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { CompanyStandardCorners, CornerDecor } from "./company-corners";
+
+const FALLBACK_HEADING = "A globally resilient\necosystem";
+const FALLBACK_SUBTITLE =
+  "Backed by Tier-1 foundries and integrated with the world's leading technology distributors and platforms.";
+
+const FALLBACK_COLUMNS = [
+  {
+    icon: "/company/ecosystem-icon-footprint.svg",
+    title: "Global Footprint",
+    description:
+      "Headquartered in Santa Clara, CA with dedicated R&D and hardware labs in Bangalore and Singapore.",
+    iconNodeId: "2379:4652",
+    titleNodeId: "2379:4654",
+    descNodeId: "2379:4655",
+    titleWidth: "w-[197px]",
+    descWidth: "w-[361.999px]",
+    left: "left-[42px]",
+  },
+  {
+    icon: "/company/ecosystem-icon-distribution.svg",
+    title: "Distribution & Supply Chain",
+    description:
+      "Authorized global distribution through trusted enterprise partners ensuring secure, high-volume silicon delivery.",
+    iconNodeId: "2379:4658",
+    titleNodeId: "2379:4662",
+    descNodeId: "2379:4663",
+    titleWidth: "w-[326px]",
+    descWidth: "w-[389px]",
+    left: "left-[42px]",
+  },
+] as const;
 
 function EcosystemColumnIcon({
   src,
@@ -23,7 +55,49 @@ function EcosystemColumnIcon({
   );
 }
 
-export function CompanyEcosystemContent() {
+type CompanyEcosystemContentProps = {
+  data?: any;
+};
+
+export function CompanyEcosystemContent({ data }: CompanyEcosystemContentProps = {}) {
+  const heading = (data?.heading as string) || FALLBACK_HEADING;
+  const subtitle = (data?.subtitle as string) || FALLBACK_SUBTITLE;
+  const headingLines = heading.split("\n");
+
+  const strapiColumns = Array.isArray(data?.columns) ? data.columns : null;
+  const columns: readonly {
+    icon: string;
+    title: string;
+    description: string;
+    iconNodeId: string;
+    titleNodeId: string;
+    descNodeId: string;
+    titleWidth: string;
+    descWidth: string;
+    left: string;
+  }[] =
+    strapiColumns && strapiColumns.length > 0
+      ? strapiColumns.map((c: any, i: number) => {
+          const fallback = FALLBACK_COLUMNS[i] ?? FALLBACK_COLUMNS[FALLBACK_COLUMNS.length - 1];
+          return {
+            icon: mediaUrl(c?.icon) || fallback.icon,
+            title: (c?.title as string) || fallback.title,
+            description: (c?.description as string) || fallback.description,
+            iconNodeId: fallback.iconNodeId,
+            titleNodeId: fallback.titleNodeId,
+            descNodeId: fallback.descNodeId,
+            titleWidth: fallback.titleWidth,
+            descWidth: fallback.descWidth,
+            left: fallback.left,
+          };
+        })
+      : FALLBACK_COLUMNS;
+
+  const [col1, col2] = [
+    columns[0] ?? FALLBACK_COLUMNS[0],
+    columns[1] ?? FALLBACK_COLUMNS[1],
+  ];
+
   return (
     <div
       className="absolute top-[0.708px] left-[118px] z-10 h-[390px] w-[1204px] border-[0.5px] border-b-0 border-solid border-[rgba(255,255,255,0.15)]"
@@ -57,8 +131,18 @@ export function CompanyEcosystemContent() {
                   gradientDeg="105.739deg"
                   className="w-[463px]"
                 >
-                  <p className="mb-0 leading-[49px]">A globally resilient</p>
-                  <p className="leading-[49px]">ecosystem</p>
+                  {headingLines.map((line, i) => (
+                    <p
+                      key={i}
+                      className={
+                        i === headingLines.length - 1
+                          ? "leading-[49px]"
+                          : "mb-0 leading-[49px]"
+                      }
+                    >
+                      {line}
+                    </p>
+                  ))}
                 </GradientTitle>
                 <CornerDecor />
               </div>
@@ -68,8 +152,7 @@ export function CompanyEcosystemContent() {
             className={`${interRegular.className} absolute top-[8.5px] left-[680px] h-[81px] w-[444px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
             data-node-id="2379:4647"
           >
-            Backed by Tier-1 foundries and integrated with the world&apos;s
-            leading technology distributors and platforms.
+            {subtitle}
           </p>
         </div>
 
@@ -92,22 +175,21 @@ export function CompanyEcosystemContent() {
               data-node-id="2379:4651"
             >
               <EcosystemColumnIcon
-                src="/company/ecosystem-icon-footprint.svg"
-                nodeId="2379:4652"
+                src={col1.icon}
+                nodeId={col1.iconNodeId}
               />
               <p
-                className={`${gilroyMedium.className} absolute top-[1.5px] left-[42px] h-[29px] w-[197px] text-[26px] leading-[28px] font-medium whitespace-nowrap text-white not-italic`}
-                data-node-id="2379:4654"
+                className={`${gilroyMedium.className} absolute top-[1.5px] ${col1.left} h-[29px] ${col1.titleWidth} text-[26px] leading-[28px] font-medium whitespace-nowrap text-white not-italic`}
+                data-node-id={col1.titleNodeId}
               >
-                Global Footprint
+                {col1.title}
               </p>
             </div>
             <p
-              className={`${interRegular.className} absolute top-[44px] left-0 h-[72px] w-[361.999px] text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
-              data-node-id="2379:4655"
+              className={`${interRegular.className} absolute top-[44px] left-0 h-[72px] ${col1.descWidth} text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+              data-node-id={col1.descNodeId}
             >
-              Headquartered in Santa Clara, CA with dedicated R&amp;D and hardware
-              labs in Bangalore and Singapore.
+              {col1.description}
             </p>
           </div>
 
@@ -120,22 +202,21 @@ export function CompanyEcosystemContent() {
               data-node-id="2379:4657"
             >
               <EcosystemColumnIcon
-                src="/company/ecosystem-icon-distribution.svg"
-                nodeId="2379:4658"
+                src={col2.icon}
+                nodeId={col2.iconNodeId}
               />
               <p
-                className={`${gilroyMedium.className} absolute top-0 left-[42px] h-[29px] w-[326px] text-[26px] leading-[28px] font-medium whitespace-nowrap text-white not-italic`}
-                data-node-id="2379:4662"
+                className={`${gilroyMedium.className} absolute top-0 ${col2.left} h-[29px] ${col2.titleWidth} text-[26px] leading-[28px] font-medium whitespace-nowrap text-white not-italic`}
+                data-node-id={col2.titleNodeId}
               >
-                Distribution &amp; Supply Chain
+                {col2.title}
               </p>
             </div>
             <p
-              className={`${interRegular.className} absolute top-[44px] left-0 h-[72px] w-[389px] text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
-              data-node-id="2379:4663"
+              className={`${interRegular.className} absolute top-[44px] left-0 h-[72px] ${col2.descWidth} text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+              data-node-id={col2.descNodeId}
             >
-              Authorized global distribution through trusted enterprise partners
-              ensuring secure, high-volume silicon delivery.
+              {col2.description}
             </p>
           </div>
         </div>

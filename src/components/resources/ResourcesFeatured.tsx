@@ -7,7 +7,54 @@ import { ResourcesFeaturedCard } from "./ResourcesFeaturedCard";
 
 const FADE_IN_CLASS = "animate-hero-text-fade-in opacity-0";
 
-export function ResourcesFeatured() {
+const FALLBACK_HEADING = "Featured Resources";
+
+type ResourcesFeaturedProps = {
+  data?: any;
+};
+
+type MergedCard = {
+  nodeId: string;
+  imageNodeId: string;
+  imageWidth: number;
+  imageSrc: string;
+  imageClassName: string;
+  badgeNodeId: string;
+  badgeLabel: string;
+  badgeVariant: "white" | "stacked";
+  title?: string;
+  description?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+};
+
+function buildCards(data: any): MergedCard[] {
+  const strapiCards = Array.isArray(data?.cards) ? data.cards : [];
+  const layoutCount = FEATURED_RESOURCES.length;
+  const totalCount = Math.max(layoutCount, strapiCards.length);
+
+  return Array.from({ length: totalCount }, (_, i): MergedCard => {
+    const layout = FEATURED_RESOURCES[i] ?? FEATURED_RESOURCES[0];
+    const card = strapiCards[i] ?? {};
+    return {
+      nodeId: layout.nodeId,
+      imageNodeId: layout.imageNodeId,
+      imageWidth: layout.imageWidth,
+      imageSrc: layout.imageSrc,
+      imageClassName: layout.imageClassName,
+      badgeNodeId: layout.badgeNodeId,
+      badgeLabel: (card.badge_label as string) || layout.badgeLabel,
+      badgeVariant:
+        (card.badge_variant as "white" | "stacked") || layout.badgeVariant,
+      title: (card.title as string) || undefined,
+      description: (card.description as string) || undefined,
+      ctaLabel: (card.cta_label as string) || undefined,
+      ctaHref: (card.cta_href as string) || undefined,
+    };
+  });
+}
+
+export function ResourcesFeatured({ data }: ResourcesFeaturedProps = {}) {
   const ref = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -29,6 +76,9 @@ export function ResourcesFeatured() {
     return () => observer.disconnect();
   }, []);
 
+  const heading = (data?.heading as string) || FALLBACK_HEADING;
+  const cards = buildCards(data);
+
   return (
     <section
       ref={ref}
@@ -43,14 +93,14 @@ export function ResourcesFeatured() {
         className={`${gilroyMedium.className} shrink-0 text-[46px] leading-[49px] font-medium whitespace-nowrap text-white not-italic`}
         data-node-id="2379:1967"
       >
-        Featured Resources
+        {heading}
       </h2>
 
       <div
         className="flex w-full shrink-0 items-center gap-[20px]"
         data-node-id="2379:1968"
       >
-        {FEATURED_RESOURCES.map((card) => (
+        {cards.map((card) => (
           <ResourcesFeaturedCard key={card.nodeId} {...card} />
         ))}
       </div>

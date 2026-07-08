@@ -1,3 +1,4 @@
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import {
@@ -12,11 +13,35 @@ import {
   SECTION_TITLE_GRADIENT,
 } from "./products-data";
 
+const FALLBACK_HEADING = "The chip that ends the \npower-vs-intelligence tradeoff.";
+const FALLBACK_SUBTITLE =
+  "For a decade, product makers chose: a dumb MCU that lasts months, or a smart NPU that dies by lunch. GPX10 Pro is the first that refuses to choose.";
+
+function splitLines(value: string): string[] {
+  return value.split("\n");
+}
+
 /**
  * Figma 2901:794 — "The chip that ends the power-vs-intelligence tradeoff".
  * Desktop section canvas is 1232 wide / 968 tall, centered below the hero.
  */
-export function ProductsFeatures() {
+export function ProductsFeatures({ data }: { data?: any }) {
+  const heading = data?.heading || FALLBACK_HEADING;
+  const headingLines = splitLines(heading);
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const cardImage = mediaUrl(data?.card_image) || "/products/card-image.png";
+  const abstractDesign =
+    mediaUrl(data?.abstract_design) || "/products/abstract-design.svg";
+  const cards =
+    Array.isArray(data?.feature_cards) && data.feature_cards.length > 0
+      ? data.feature_cards.map((c: any, i: number) => ({
+          nodeId: `feature-${i}`,
+          title: c?.title ?? "",
+          description: c?.description ?? "",
+          icon: mediaUrl(c?.icon) || `/products/icon-frame-${(i % 2) + 1}.svg`,
+          paddingTop: i === 0 ? 24 : 16,
+        }))
+      : FEATURE_CARDS;
   return (
     <>
       {/* DESKTOP (>=1024px) */}
@@ -25,16 +50,38 @@ export function ProductsFeatures() {
         className="relative mx-auto hidden w-[1232px] bg-black min-[1024px]:block pb-[120px]"
         aria-label="Product capabilities"
       >
-        <ProductsFeaturesDesktop />
+        <ProductsFeaturesDesktop
+          headingLines={headingLines}
+          subtitle={subtitle}
+          cardImage={cardImage}
+          abstractDesign={abstractDesign}
+          cards={cards}
+        />
       </section>
 
       {/* MOBILE (<1024px) */}
-      <ProductsFeaturesMobile />
+      <ProductsFeaturesMobile
+        headingLines={headingLines}
+        subtitle={subtitle}
+        cards={cards}
+      />
     </>
   );
 }
 
-function ProductsFeaturesDesktop() {
+function ProductsFeaturesDesktop({
+  headingLines,
+  subtitle,
+  cardImage,
+  abstractDesign,
+  cards,
+}: {
+  headingLines: string[];
+  subtitle: string;
+  cardImage: string;
+  abstractDesign: string;
+  cards: any[];
+}) {
   return (
     <div className="relative" style={{ height: 968 }} data-node-id="2901:794">
       {/* Abstract decorative header — 2901:987 (overflows above into hero) */}
@@ -53,7 +100,7 @@ function ProductsFeaturesDesktop() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt=""
-          src="/products/abstract-design.svg"
+          src={abstractDesign}
           className="absolute inset-0 block size-full max-w-none"
         />
       </div>
@@ -83,17 +130,16 @@ function ProductsFeaturesDesktop() {
             }}
             data-node-id="2901:797"
           >
-            <span className="block">{`The chip that ends the `}</span>
-            <span className="block">power-vs-intelligence tradeoff.</span>
+            {headingLines.map((line, i) => (
+              <span key={i} className="block">{line}</span>
+            ))}
           </h2>
         </div>
         <p
           className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           data-node-id="2901:802"
         >
-          For a decade, product makers chose: a dumb MCU that lasts months, or a
-          smart NPU that dies by lunch. GPX10 Pro is the first that refuses to
-          choose.
+          {subtitle}
         </p>
       </div>
 
@@ -103,8 +149,8 @@ function ProductsFeaturesDesktop() {
         style={{ left: 0, top: 212, width: 1232 }}
         data-node-id="2901:803"
       >
-        <FeatureCard card={FEATURE_CARDS[0]} />
-        <FeatureCard card={FEATURE_CARDS[1]} />
+        <FeatureCard card={cards[0]} cardImage={cardImage} />
+        <FeatureCard card={cards[1]} cardImage={cardImage} />
       </div>
 
       {/* Row 2 — 2901:926 (top=614) */}
@@ -113,14 +159,20 @@ function ProductsFeaturesDesktop() {
         style={{ left: 0, top: 614, width: 1232 }}
         data-node-id="2901:926"
       >
-        <FeatureCard card={FEATURE_CARDS[2]} />
-        <FeatureCard card={FEATURE_CARDS[3]} />
+        <FeatureCard card={cards[2]} cardImage={cardImage} />
+        <FeatureCard card={cards[3]} cardImage={cardImage} />
       </div>
     </div>
   );
 }
 
-function FeatureCard({ card }: { card: (typeof FEATURE_CARDS)[number] }) {
+function FeatureCard({
+  card,
+  cardImage,
+}: {
+  card: any;
+  cardImage: string;
+}) {
   return (
     <article
       className="relative flex h-[354px] w-[598px] shrink-0 flex-col justify-end overflow-clip border-[0.5px] border-solid"
@@ -145,7 +197,7 @@ function FeatureCard({ card }: { card: (typeof FEATURE_CARDS)[number] }) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt=""
-          src="/products/card-image.png"
+          src={cardImage}
           className="absolute left-0 max-w-none"
           style={{ top: "-23.63%", width: "116.47%", height: "132.14%" }}
         />
@@ -200,7 +252,15 @@ function FeatureCard({ card }: { card: (typeof FEATURE_CARDS)[number] }) {
   );
 }
 
-function ProductsFeaturesMobile() {
+function ProductsFeaturesMobile({
+  headingLines,
+  subtitle,
+  cards,
+}: {
+  headingLines: string[];
+  subtitle: string;
+  cards: any[];
+}) {
   return (
     <section
       className="relative w-full bg-black px-[24px] pt-[64px] pb-[80px] min-[1024px]:hidden"
@@ -216,20 +276,18 @@ function ProductsFeaturesMobile() {
             backgroundClip: "text",
           }}
         >
-          {`The chip that ends the power-vs-intelligence tradeoff.`}
+          {headingLines.join(" ")}
         </h2>
         <p
           className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]`}
         >
-          For a decade, product makers chose: a dumb MCU that lasts months, or a
-          smart NPU that dies by lunch. GPX10 Pro is the first that refuses to
-          choose.
+          {subtitle}
         </p>
       </div>
 
       {/* Cards */}
       <div className="mt-[40px] flex flex-col gap-[20px]">
-        {FEATURE_CARDS.map((card) => (
+        {cards.map((card) => (
           <article
             key={card.nodeId}
             className="relative flex flex-col gap-[16px] overflow-clip border-[0.5px] border-solid p-[20px]"

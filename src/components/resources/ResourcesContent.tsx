@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Fragment, useEffect, useState } from "react";
+import { mediaUrl } from "@/lib/strapi";
 import { interRegular } from "../hero/fonts";
 import { GreenCtaButton } from "../contact/contact-shared";
 import {
@@ -12,20 +13,70 @@ import { getResourcesExtraHeight } from "./resources-layout";
 import { ResourcesArticleCard } from "./ResourcesArticleCard";
 import { Corners } from "../shared/Corners";
 const scrollArrowLeft = "/applications/nav-arrow-right.svg";
-const INITIAL_VISIBLE_COUNT = 6;
-const LOAD_MORE_COUNT = 3;
+const DEFAULT_INITIAL_VISIBLE = 6;
+const DEFAULT_LOAD_MORE_COUNT = 3;
 const LOAD_MORE_DELAY_MS = 800;
+const FALLBACK_LOAD_MORE_LABEL = "Load More Resources";
 
 const IMAGE_107_GRADIENT =
   "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 810 1440' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%25' width='100%25' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-46.009 0.0000020111 -0.000003897 -89.152 363.86 720)'><stop stop-color='rgba(0,0,0,0.6)' offset='0'/><stop stop-color='rgba(0,0,0,1)' offset='1'/></radialGradient></defs></svg>\")";
 
-export function ResourcesContent({
-  onExtraHeightChange,
-}: {
+type Category = {
+  id: string;
+  label: string;
+  nodeId: string;
+  active?: boolean;
+};
+
+function buildCategories(data: any): Category[] {
+  const strapiCats = Array.isArray(data?.categories) ? data.categories : [];
+  if (strapiCats.length === 0) {
+    return RESOURCE_CATEGORIES.map((c) => ({
+      id: c.id,
+      label: c.label,
+      nodeId: c.nodeId,
+      active: "active" in c ? c.active : undefined,
+    }));
+  }
+  const result: Category[] = strapiCats.map((c: any, i: number) => {
+    const fallback = RESOURCE_CATEGORIES[i] || RESOURCE_CATEGORIES[0];
+    return {
+      id: (c?.category_id as string) || fallback.id,
+      label: (c?.label as string) || fallback.label,
+      nodeId: fallback.nodeId,
+      active: Boolean(c?.is_active),
+    };
+  });
+  return result;
+}
+
+type ResourcesContentProps = {
+  data?: any;
   onExtraHeightChange?: (height: number) => void;
-}) {
-  const [activeCategory, setActiveCategory] = useState("webinar");
-  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT);
+};
+
+export function ResourcesContent({
+  data,
+  onExtraHeightChange,
+}: ResourcesContentProps = {}) {
+  const categories = buildCategories(data);
+  const initialVisible =
+    typeof data?.initial_visible === "number"
+      ? data.initial_visible
+      : DEFAULT_INITIAL_VISIBLE;
+  const loadMoreCount =
+    typeof data?.load_more_count === "number"
+      ? data.load_more_count
+      : DEFAULT_LOAD_MORE_COUNT;
+  const loadMoreLabel =
+    (data?.load_more_label as string) || FALLBACK_LOAD_MORE_LABEL;
+  const bgSrc = mediaUrl(data?.background_image) || "/resources/image-107.png";
+
+  const initialActiveId =
+    categories.find((c) => c.active)?.id || categories[0]?.id || "webinar";
+
+  const [activeCategory, setActiveCategory] = useState(initialActiveId);
+  const [visibleCount, setVisibleCount] = useState(initialVisible);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   const visibleArticles = RESOURCE_ARTICLES.slice(0, visibleCount);
@@ -45,23 +96,23 @@ export function ResourcesContent({
 
     setIsLoadingMore(true);
     window.setTimeout(() => {
-      setVisibleCount((current) =>
-        Math.min(current + LOAD_MORE_COUNT, RESOURCE_ARTICLES.length)
+      setVisibleCount((current: number) =>
+        Math.min(current + loadMoreCount, RESOURCE_ARTICLES.length)
       );
       setIsLoadingMore(false);
     }, LOAD_MORE_DELAY_MS);
   };
 
-  const currentIndex = RESOURCE_CATEGORIES.findIndex((c) => c.id === activeCategory);
+  const currentIndex = categories.findIndex((c) => c.id === activeCategory);
 
   const handlePrevCategory = () => {
-    const prevIndex = currentIndex > 0 ? currentIndex - 1 : RESOURCE_CATEGORIES.length - 1;
-    setActiveCategory(RESOURCE_CATEGORIES[prevIndex].id);
+    const prevIndex = currentIndex > 0 ? currentIndex - 1 : categories.length - 1;
+    setActiveCategory(categories[prevIndex].id);
   };
 
   const handleNextCategory = () => {
-    const nextIndex = currentIndex < RESOURCE_CATEGORIES.length - 1 ? currentIndex + 1 : 0;
-    setActiveCategory(RESOURCE_CATEGORIES[nextIndex].id);
+    const nextIndex = currentIndex < categories.length - 1 ? currentIndex + 1 : 0;
+    setActiveCategory(categories[nextIndex].id);
   };
 
   return (
@@ -78,7 +129,7 @@ export function ResourcesContent({
         <div className="-rotate-90 flex-none">
           <div className="relative h-[1440px] w-[810px]">
             <Image
-              src="/resources/image-107.png"
+              src={bgSrc}
               alt=""
               fill
               className="max-w-none object-cover"
@@ -116,7 +167,7 @@ export function ResourcesContent({
           />
         </button>
 
-        {RESOURCE_CATEGORIES.map((category, index) => {
+        {categories.map((category, index) => {
           const isActive = activeCategory === category.id;
           const dividerVariant =
             index === currentIndex
@@ -126,7 +177,7 @@ export function ResourcesContent({
               : "normal";
 
           return (
-            <Fragment key={category.id}>
+            <Fragment key={`${category.id}-${index}`}>
               <CategoryDivider variant={dividerVariant} />
               <button
                 type="button"
@@ -148,7 +199,7 @@ export function ResourcesContent({
         })}
         <CategoryDivider
           variant={
-            currentIndex === RESOURCE_CATEGORIES.length - 1
+            currentIndex === categories.length - 1
               ? "after-active"
               : "normal"
           }
@@ -192,7 +243,7 @@ export function ResourcesContent({
             loading={isLoadingMore}
             disabled={isLoadingMore}
           >
-            Load More Resources
+            {loadMoreLabel}
           </GreenCtaButton>
         ) : null}
       </div>

@@ -8,12 +8,43 @@ import {
   SECTION_TITLE_GRADIENT,
 } from "./developer-data";
 
+const DEFAULT_HEADING = "Hello world in three lines";
+const DEFAULT_SUBTITLE =
+  "We invisibly map AI cores to your host drop your model straight into your existing application.";
+const DEFAULT_CODE_SNIPPET = `#include <ambient.h>
+#include <sensor_drivers.h>
+
+int main(void) {
+    // Initialize system
+    ambient_init();
+    sensor_config_t sensor;
+    model_t model_obj;
+
+    // Load AI model
+    ambient_load_model(&model_obj, "fall_detect.bin");
+
+    while(1) {
+        ambient_read_i2s_mic(&sensor);
+
+        ambient_run_fft(&sensor);
+
+        run_ai_inference(&model_obj);
+
+        if(model_obj.result > THRESHOLD) {
+            trigger_alert();
+        }
+    }
+}`;
+
 /**
  * Figma 2640:1215 — "Hello world in three lines" section.
  * Positioned at 119,674 / 1204×762 within the Developer canvas.
  * Code editor card (left, 602) + three article cards (right, 578) + connectors.
  */
-export function DeveloperCodeSection() {
+export function DeveloperCodeSection({ data }: { data?: any }) {
+  const heading = data?.heading || DEFAULT_HEADING;
+  const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
+  const codeSnippet = data?.code_snippet || DEFAULT_CODE_SNIPPET;
   return (
     <div
       className="absolute flex flex-col items-center gap-[48px]"
@@ -35,14 +66,13 @@ export function DeveloperCodeSection() {
             className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
             style={{ backgroundImage: SECTION_TITLE_GRADIENT }}
           >
-            Hello world in three lines
+            {heading}
           </h2>
         </div>
         <p
           className={`${interRegular.className} w-[500px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65 [word-break:break-word]`}
         >
-          We invisibly map AI cores to your host drop your model straight into
-          your existing application.
+          {subtitle}
         </p>
       </div>
 
@@ -51,7 +81,7 @@ export function DeveloperCodeSection() {
         className="relative flex w-full items-end gap-[24px]"
         data-node-id="2640:1225"
       >
-        <CodeEditorCard />
+        <CodeEditorCard codeSnippet={codeSnippet} />
         <ArticleColumn />
 
         {/* Connectors (absolute, decorative) — exact Figma nested structure */}
@@ -114,7 +144,7 @@ export function DeveloperCodeSection() {
 }
 
 /** Code editor card — 2640:1227 (602×587). */
-function CodeEditorCard() {
+function CodeEditorCard({ codeSnippet }: { codeSnippet: string }) {
   return (
     <div
       className="relative h-[587px] w-[602px] shrink-0 overflow-clip rounded-[16px] border border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.05)] backdrop-blur-[9.5px]"
@@ -140,36 +170,7 @@ function CodeEditorCard() {
           className="whitespace-pre text-[14px] leading-[20px] text-[rgba(255,255,255,0.4)]"
           style={{ fontFamily: 'Menlo, Monaco, "Courier New", monospace' }}
         >
-{`#include <ambient.h>
-#include <sensor_drivers.h>
-
-int main(void) {
-    // Initialize system
-    ambient_init();
-    sensor_config_t sensor;
-    model_t model_obj;
-
-    // Load AI model
-    ambient_load_model(&model_obj, "fall_detect.bin");
-
-    while(1) {
-        `}
-          <Hl>ambient_read_i2s_mic</Hl>
-          {`(&sensor);
-
-        `}
-          <Hl>ambient_run_fft</Hl>
-          {`(&sensor);
-
-        `}
-          <Hl>run_ai_inference</Hl>
-          {`(&model_obj);
-
-        if(model_obj.result > THRESHOLD) {
-            trigger_alert();
-        }
-    }
-}`}
+{codeSnippet}
         </pre>
       </div>
 
@@ -183,14 +184,6 @@ int main(void) {
         }}
       />
     </div>
-  );
-}
-
-function Hl({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="rounded-[2px] bg-[rgba(1,255,0,0.2)] px-[4px] text-[#0f0]">
-      {children}
-    </span>
   );
 }
 

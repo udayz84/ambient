@@ -1,12 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { RepelDots } from "../shared/RepelDots";
 import { Corners } from "../shared/Corners";
 import { GradientTitle } from "../contact/contact-shared";
 
 const TITLE_GRADIENT_DEG = "106.158deg";
-const SUBTITLE =
+const FALLBACK_SUBTITLE =
   "Avoid custom RF and power management. Use our pre-engineered System-on-Modules (SOMs) for your edge AI deployments.";
+const FALLBACK_TITLE = "The shortest path to\nvolume production.";
+const FALLBACK_BG = "/som/hero-bg.png";
+const FALLBACK_PRIMARY_LABEL = "Pre-Order / Register Interest";
+const FALLBACK_SECONDARY_LABEL = "Talk to the Sales Team";
+const TITLE_FRAME = "/som/title-frame.svg";
 
 const PRIMARY_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
@@ -47,7 +53,16 @@ function PrimaryCtaCorners() {
   );
 }
 
-export function SomHero() {
+export function SomHero({ data }: { data?: any }) {
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const backgroundImage = mediaUrl(data?.background_image) || FALLBACK_BG;
+  const titleLines = (data?.title || FALLBACK_TITLE).split("\n");
+  const primaryLabel =
+    data?.primary_button?.label || FALLBACK_PRIMARY_LABEL;
+  const primaryHref = data?.primary_button?.href || "#";
+  const secondaryLabel =
+    data?.secondary_button?.label || FALLBACK_SECONDARY_LABEL;
+  const secondaryHref = data?.secondary_button?.href || "#";
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -65,7 +80,7 @@ export function SomHero() {
           aria-hidden
         >
           <img
-            src="/som/hero-bg.png"
+            src={backgroundImage}
             alt=""
             className="absolute inset-0 size-full max-w-none object-cover"
           />
@@ -105,7 +120,7 @@ export function SomHero() {
               data-name="Frame"
             >
               <img
-                src="/som/title-frame.svg"
+                src={TITLE_FRAME}
                 alt=""
                 className="block size-full max-w-none"
                 aria-hidden
@@ -116,12 +131,14 @@ export function SomHero() {
               data-node-id="3210:1554"
             >
               <GradientTitle gradientDeg={TITLE_GRADIENT_DEG}>
-                <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-                  The shortest path to{" "}
-                </span>
-                <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-                  volume production.
-                </span>
+                {titleLines.map((line: string, i: number) => (
+                  <span
+                    key={i}
+                    className="block h-[49px] leading-[49px] whitespace-nowrap"
+                  >
+                    {line}
+                  </span>
+                ))}
               </GradientTitle>
             </div>
           </div>
@@ -136,7 +153,7 @@ export function SomHero() {
               className={`${interRegular.className} w-[554px] shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
               data-node-id="3210:1556"
             >
-              {SUBTITLE}
+              {subtitle}
             </p>
 
             <div
@@ -145,7 +162,7 @@ export function SomHero() {
             >
               {/* Primary CTA */}
               <a
-                href="#"
+                href={primaryHref}
                 className={`${gilroyMedium.className} relative h-[48px] w-[281px] shrink-0 ${PRIMARY_CTA_SHADOW}`}
                 data-node-id="3210:1558"
                 data-name="Cta"
@@ -161,7 +178,7 @@ export function SomHero() {
                   className="absolute left-1/2 top-[calc(50%-14px)] z-10 -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]"
                   data-node-id="3210:1559"
                 >
-                  Pre-Order / Register Interest
+                  {primaryLabel}
                 </p>
                 <span
                   aria-hidden
@@ -172,7 +189,7 @@ export function SomHero() {
 
               {/* Secondary CTA */}
               <a
-                href="#"
+                href={secondaryHref}
                 className={`${gilroyMedium.className} relative h-[48px] w-[226px] shrink-0 overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
                 data-node-id="3210:1569"
                 data-name="CTA - Secondary"
@@ -181,7 +198,7 @@ export function SomHero() {
                   className="absolute left-1/2 top-[calc(50%-14px)] -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]"
                   data-node-id="3210:1571"
                 >
-                  Talk to the Sales Team
+                  {secondaryLabel}
                 </p>
                 <Corners />
               </a>
@@ -195,7 +212,7 @@ export function SomHero() {
         {/* Background */}
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <img
-            src="/som/hero-bg.png"
+            src={backgroundImage}
             alt=""
             className="size-full max-w-none object-cover"
           />
@@ -212,20 +229,23 @@ export function SomHero() {
               backgroundClip: "text",
             }}
           >
-            <span className="block">The shortest path to</span>
-            <span className="block">volume production.</span>
+            {titleLines.map((line: string, i: number) => (
+              <span key={i} className="block">
+                {line}
+              </span>
+            ))}
           </div>
 
           <p
             className={`${interRegular.className} max-w-[332px] text-[14px] leading-[21px] font-normal text-[#f0f0f0]/80 not-italic`}
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
 
           <div className="mt-[8px] flex w-full flex-col gap-[16px]">
             {/* Primary CTA */}
             <a
-              href="#"
+              href={primaryHref}
               className={`${gilroyMedium.className} relative block h-[48px] w-full ${PRIMARY_CTA_SHADOW}`}
             >
               <span
@@ -236,7 +256,7 @@ export function SomHero() {
                 <RepelDots />
               </span>
               <p className="absolute left-1/2 top-[calc(50%-14px)] z-10 -translate-x-1/2 text-[14px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
-                Pre-Order / Register Interest
+                {primaryLabel}
               </p>
               <span
                 aria-hidden
@@ -247,11 +267,11 @@ export function SomHero() {
 
             {/* Secondary CTA */}
             <a
-              href="#"
+              href={secondaryHref}
               className={`${gilroyMedium.className} relative block h-[48px] w-full overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
             >
               <p className="absolute left-1/2 top-[calc(50%-14px)] -translate-x-1/2 text-[14px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
-                Talk to the Sales Team
+                {secondaryLabel}
               </p>
               <Corners />
             </a>

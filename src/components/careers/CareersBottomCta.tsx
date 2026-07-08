@@ -2,7 +2,29 @@ import { CornerDecor } from "../contact/contact-shared";
 import { gilroyMedium } from "../hero/fonts";
 import { CareersGreenCta, CareersWhiteCta } from "./careers-shared";
 
-export function CareersBottomCta({ offsetY = 0 }: { offsetY?: number }) {
+const BOTTOM_CTA_HEADING_FALLBACK = "Ready to build the future of compute?";
+const BOTTOM_CTA_BUTTONS_FALLBACK = [
+  { label: "APPLY NOW", href: "#", variant: "green" },
+  { label: "REFER A CANDIDATE", href: "#", variant: "white" },
+];
+
+export function CareersBottomCta({
+  data,
+  offsetY = 0,
+}: {
+  data?: any;
+  offsetY?: number;
+}) {
+  const heading = data?.heading || BOTTOM_CTA_HEADING_FALLBACK;
+  const buttons: Array<{ label: string; href: string; variant: string }> =
+    data?.buttons && Array.isArray(data.buttons) && data.buttons.length > 0
+      ? data.buttons.map((b: any) => ({
+          label: b?.label || "",
+          href: b?.href || "#",
+          variant: b?.variant || "green",
+        }))
+      : BOTTOM_CTA_BUTTONS_FALLBACK;
+
   return (
     <section
       className="absolute top-[5097px] left-1/2 z-20 flex w-[728px] flex-col items-center transition-transform duration-300 ease-out"
@@ -21,18 +43,29 @@ export function CareersBottomCta({ offsetY = 0 }: { offsetY?: number }) {
           }}
           data-node-id="2379:8822"
         >
-          Ready to build the future of compute?
+          {heading}
         </h2>
         <CornerDecor />
       </div>
 
       <div className="mt-[39px] flex items-center gap-[30px]">
-        <CareersGreenCta href="#" width="w-[170px]" textLeft="left-[38px]" dotLeft="left-[126px]">
-          APPLY NOW
-        </CareersGreenCta>
-        <CareersWhiteCta href="#" width="w-[170px]">
-          REFER A CANDIDATE
-        </CareersWhiteCta>
+        {buttons.map((btn, i) =>
+          btn.variant === "white" ? (
+            <CareersWhiteCta key={i} href={btn.href} width="w-[170px]">
+              {btn.label}
+            </CareersWhiteCta>
+          ) : (
+            <CareersGreenCta
+              key={i}
+              href={btn.href}
+              width="w-[170px]"
+              textLeft="left-[38px]"
+              dotLeft="left-[126px]"
+            >
+              {btn.label}
+            </CareersGreenCta>
+          ),
+        )}
       </div>
     </section>
   );

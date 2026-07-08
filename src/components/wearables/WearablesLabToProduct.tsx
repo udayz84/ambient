@@ -1,12 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 
 const TITLE_GRADIENT =
   "linear-gradient(138.787deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
-const SUBTITLE =
+const FALLBACK_SUBTITLE =
   "Don't spend your first day writing sensor configuration code. The Cranium board comes ready to run out of the box, allowing you to instantly test physical AI models and validate performance on the metal with zero setup required.";
+const FALLBACK_HEADING = "From lab to product in months, not years.";
+const FALLBACK_IMAGE = "/applications/wearables/img-168.png";
 
 const IMG_OVERLAY =
   "linear-gradient(to bottom, rgba(0,0,0,0) 88.146%, rgb(0,0,0) 100%)";
@@ -16,6 +19,7 @@ type CardData = {
   title: string;
   body: string;
   cta: string;
+  ctaHref: string;
   imgLeft: string;
   imgTop: string;
 };
@@ -26,6 +30,7 @@ const CARDS: CardData[] = [
     title: "VALIDATE",
     body: "Test your TensorFlow/PyTorch models on our GPX Evaluation Kits using standard I2S, I2C, SPI sensor inputs.",
     cta: "View Evaluation Kits",
+    ctaHref: "#",
     imgLeft: "-9.04%",
     imgTop: "-49.04%",
   },
@@ -34,6 +39,7 @@ const CARDS: CardData[] = [
     title: "COMPILE",
     body: "Use the ModelForge SDK to seamlessly quantize and compile your models for ultra-low-power analog execution.",
     cta: "Visit Developer Hub",
+    ctaHref: "#",
     imgLeft: "-114.69%",
     imgTop: "-45.83%",
   },
@@ -42,12 +48,13 @@ const CARDS: CardData[] = [
     title: "INTEGRATE",
     body: "Drop our integrated System-on-Modules (SOMs) directly into your most constrained custom carrier boards.",
     cta: "View SoMs",
+    ctaHref: "#",
     imgLeft: "-116.48%",
     imgTop: "-162.44%",
   },
 ];
 
-function LabCard({ data }: { data: CardData }) {
+function LabCard({ data, image }: { data: CardData; image: string }) {
   return (
     <div
       className="relative flex h-[549px] flex-1 flex-col border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] pt-[16px] pb-[24px] px-[32px]"
@@ -70,7 +77,7 @@ function LabCard({ data }: { data: CardData }) {
             <div className="absolute inset-0 overflow-hidden">
               <img
                 alt=""
-                src="/applications/wearables/img-168.png"
+                src={image}
                 className="absolute max-w-none"
                 style={{
                   height: "312.6%",
@@ -110,7 +117,7 @@ function LabCard({ data }: { data: CardData }) {
 
         {/* CTA */}
         <a
-          href="#"
+          href={data.ctaHref}
           className={`${gilroyMedium.className} absolute left-0 top-[461px] flex cursor-pointer items-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
           data-name="CTA - Secondary"
         >
@@ -127,7 +134,22 @@ function LabCard({ data }: { data: CardData }) {
   );
 }
 
-export function WearablesLabToProduct() {
+export function WearablesLabToProduct({ data }: { data?: any }) {
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const heading = data?.heading || FALLBACK_HEADING;
+  const image = mediaUrl(data?.image) || FALLBACK_IMAGE;
+  const dataCards: any[] = Array.isArray(data?.cards) ? data.cards : [];
+  const cards = CARDS.map((fb, i) => {
+    const c = dataCards[i];
+    if (!c) return fb;
+    return {
+      ...fb,
+      title: c.step || fb.title,
+      body: c.description || fb.body,
+      cta: c.cta_label || fb.cta,
+      ctaHref: c.cta_href || fb.ctaHref,
+    };
+  });
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -148,7 +170,7 @@ export function WearablesLabToProduct() {
                 backgroundClip: "text",
               }}
             >
-              From lab to product in months, not years.
+              {heading}
             </h2>
             <Corners
               leftSrc="/applications/wearables/vector-42.svg"
@@ -158,14 +180,14 @@ export function WearablesLabToProduct() {
           <p
             className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] text-[#f0f0f0] not-italic [word-break:break-word]`}
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
         </div>
 
         {/* Cards */}
         <div className="flex w-full items-stretch gap-[24px]">
-          {CARDS.map((card) => (
-            <LabCard key={card.number} data={card} />
+          {cards.map((card) => (
+            <LabCard key={card.number} data={card} image={image} />
           ))}
         </div>
       </div>
@@ -183,7 +205,7 @@ export function WearablesLabToProduct() {
                 backgroundClip: "text",
               }}
             >
-              From lab to product in months, not years.
+              {heading}
             </h2>
             <Corners
               leftSrc="/applications/wearables/vector-42.svg"
@@ -193,13 +215,13 @@ export function WearablesLabToProduct() {
           <p
             className={`${interRegular.className} max-w-[327px] text-center text-[13px] leading-[20px] text-[#f0f0f0] not-italic`}
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
         </div>
 
         {/* Cards */}
         <div className="flex w-full flex-col gap-[20px]">
-          {CARDS.map((card) => (
+          {cards.map((card) => (
             <div
               key={card.number}
               className="relative flex w-full flex-col border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] pt-[16px] pb-[24px] px-[24px]"
@@ -215,7 +237,7 @@ export function WearablesLabToProduct() {
               >
                 <img
                   alt=""
-                  src="/applications/wearables/img-168.png"
+                  src={image}
                   className="absolute max-w-none object-cover"
                   style={{
                     height: "312.6%",
@@ -250,7 +272,7 @@ export function WearablesLabToProduct() {
               </div>
               {/* CTA */}
               <a
-                href="#"
+                href={card.ctaHref}
                 className={`${gilroyMedium.className} mt-[16px] flex h-[44px] w-full cursor-pointer items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)]`}
               >
                 <span className="relative whitespace-nowrap text-[13px] leading-[28px] font-medium text-white uppercase not-italic">

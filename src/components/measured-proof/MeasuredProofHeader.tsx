@@ -2,14 +2,16 @@ import Image from "next/image";
 import { TagBadge } from "../hero/TagBadge";
 import { gilroyMedium } from "../hero/fonts";
 
-export function MeasuredProofHeader() {
+export function MeasuredProofHeader({ data }: { data?: any }) {
+  const tagText = data?.tag?.text || "Real-time AI at edge";
+  const heading = data?.heading || "Measured proof in silicon";
   return (
     <div
       className="absolute top-[30px] left-1/2 flex w-[748px] -translate-x-1/2 flex-col content-stretch items-center gap-[16px]"
       data-node-id="2379:1470"
     >
       <TagBadge
-        label="Real-time AI at edge"
+        label={tagText}
         width={180}
         labelOffsetX={74.5}
         rightBarLeft={170.48046875}
@@ -28,7 +30,7 @@ export function MeasuredProofHeader() {
           }}
           data-node-id="2379:1480"
         >
-          Measured proof in silicon
+          {heading}
         </h2>
 
         <div className="relative col-start-1 row-start-1 mt-0 ml-[603px] flex size-[4px] items-center justify-center">

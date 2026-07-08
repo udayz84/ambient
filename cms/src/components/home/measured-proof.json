@@ -1,13 +1,10 @@
-﻿{
+{
   "collectionName": "components_home_measured_proofs",
   "info": { "displayName": "Measured Proof", "description": "Measured proof in silicon section" },
   "options": {},
   "attributes": {
     "tag": { "type": "component", "repeatable": false, "component": "shared.tag" },
     "heading": { "type": "string", "required": true },
-    "background_image": { "type": "media", "multiple": false },
-    "gradient_top": { "type": "media", "multiple": false },
-    "gradient_bottom": { "type": "media", "multiple": false },
     "stat_cards": { "type": "component", "repeatable": true, "component": "shared.stat-card" },
     "ctas": { "type": "component", "repeatable": true, "component": "shared.button" }
   }

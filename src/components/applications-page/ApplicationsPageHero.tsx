@@ -1,6 +1,7 @@
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle } from "../contact/contact-shared";
+import { mediaUrl } from "@/lib/strapi";
 
 const TITLE_GRADIENT =
   "linear-gradient(105.388deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -8,7 +9,18 @@ const TITLE_GRADIENT =
 const SUBTITLE =
   "From microwatt edge sensors running on coin cells to air-cooled high-performance compute arrays, the GPX architecture scales seamlessly across the physical world.";
 
-export function ApplicationsPageHero() {
+const FALLBACK_TITLE = "Intelligence in Every\nEnvironment";
+const FALLBACK_TAG = "The Full Spectrum";
+
+export function ApplicationsPageHero({ data }: { data?: any }) {
+  const bgImg = mediaUrl(data?.background_image) || "/applications/hero-bg.png";
+  const titleFrame =
+    mediaUrl(data?.title_frame) || "/applications/title-frame.svg";
+  const titleText = data?.title || FALLBACK_TITLE;
+  const titleLines = titleText.split("\n");
+  const subtitle = data?.subtitle || SUBTITLE;
+  const tagText = data?.tag?.text || FALLBACK_TAG;
+
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -26,7 +38,7 @@ export function ApplicationsPageHero() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/applications/hero-bg.png"
+            src={bgImg}
             alt=""
             className="absolute inset-0 size-full max-w-none object-cover"
             aria-hidden
@@ -42,7 +54,7 @@ export function ApplicationsPageHero() {
         {/* Menu badge */}
         <div className="absolute top-[145.3125px] left-1/2 -translate-x-1/2">
           <TagBadge
-            label="The Full Spectrum"
+            label={tagText}
             width={160}
             labelOffsetX={0}
             rightBarLeft={151.37}
@@ -64,7 +76,7 @@ export function ApplicationsPageHero() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/applications/title-frame.svg"
+              src={titleFrame}
               alt=""
               className="block size-full max-w-none"
               aria-hidden
@@ -75,12 +87,14 @@ export function ApplicationsPageHero() {
             data-node-id="2438:3918"
           >
             <GradientTitle gradientDeg="105.388deg" className="text-center">
-              <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-                Intelligence in Every
-              </span>
-              <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-                Environment
-              </span>
+              {titleLines.map((line: string, i: number) => (
+                <span
+                  key={i}
+                  className="block h-[49px] leading-[49px] whitespace-nowrap"
+                >
+                  {line}
+                </span>
+              ))}
             </GradientTitle>
           </div>
         </div>
@@ -90,7 +104,7 @@ export function ApplicationsPageHero() {
           className={`${interRegular.className} absolute top-[643px] left-1/2 w-[554px] -translate-x-1/2 text-center text-[18px] leading-[27px] font-normal text-[#bbb] not-italic [word-break:break-word]`}
           data-node-id="2438:3903"
         >
-          {SUBTITLE}
+          {subtitle}
         </p>
       </div>
 
@@ -100,7 +114,7 @@ export function ApplicationsPageHero() {
         <div className="pointer-events-none absolute inset-0" aria-hidden>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/applications/hero-bg.png"
+            src={bgImg}
             alt=""
             className="size-full max-w-none object-cover"
           />
@@ -109,7 +123,7 @@ export function ApplicationsPageHero() {
 
         <div className="relative z-10 flex w-full flex-col items-center gap-[24px] px-[24px] pt-[72px] pb-[72px]">
           <TagBadge
-            label="The Full Spectrum"
+            label={tagText}
             width={160}
             labelOffsetX={0}
             rightBarLeft={151.37}
@@ -125,14 +139,17 @@ export function ApplicationsPageHero() {
               backgroundClip: "text",
             }}
           >
-            <span className="block whitespace-nowrap">Intelligence in Every</span>
-            <span className="block whitespace-nowrap">Environment</span>
+            {titleLines.map((line: string, i: number) => (
+              <span key={i} className="block whitespace-nowrap">
+                {line}
+              </span>
+            ))}
           </div>
 
           <p
             className={`${interRegular.className} w-full max-w-[332px] text-center text-[14px] leading-[21px] font-normal text-[#bbb] not-italic`}
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
         </div>
       </div>

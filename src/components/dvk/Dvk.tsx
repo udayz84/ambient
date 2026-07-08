@@ -6,6 +6,7 @@ import { SPEC_CARDS } from "./dvk-data";
 import { DvkDemos } from "./DvkDemos";
 import { DEMO_CARDS } from "./DvkDemosCards";
 import { DvkModelForge } from "./DvkModelForge";
+import { mediaUrl } from "@/lib/strapi";
 import {
   ACCENT_CARD_BG,
   ACCENT_CARD_BORDER,
@@ -31,7 +32,7 @@ const DVK_DESKTOP_HEIGHT = 658;
 
 import { DvkIntegratedModules } from "./DvkIntegratedModules";
 
-export function Dvk() {
+export function Dvk({ data }: { data?: any }) {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       {/* DESKTOP (>=1024px) — hero canvas, source of truth */}
@@ -42,44 +43,55 @@ export function Dvk() {
         data-name="Hero Section"
       >
         <div className="relative mx-auto h-full w-[1442px]">
-          <DvkHero />
+          {data?.hero ? <DvkHero data={data.hero} /> : null}
         </div>
       </div>
 
       {/* DESKTOP (>=1024px) — hardware stack section (2761:2905) */}
       <div className="relative mx-auto hidden w-full bg-black min-[1024px]:block">
         <div className="mx-auto w-[1232px] pb-[120px]">
-          <DvkHardwareStack />
+          {data?.hardware_stack ? (
+            <DvkHardwareStack data={data.hardware_stack} />
+          ) : null}
         </div>
       </div>
 
       {/* DESKTOP (>=1024px) — demos section (2761:2791 + cards row) */}
       <div className="relative mx-auto hidden w-full bg-black min-[1024px]:block">
         <div className="mx-auto w-[1256px] pb-[200px]">
-          <DvkDemos />
+          {data?.demos ? <DvkDemos data={data.demos} /> : null}
         </div>
       </div>
 
       {/* DESKTOP (>=1024px) — ModelForge section title (2761:3009) */}
       <div className="relative mx-auto hidden w-full bg-black min-[1024px]:block">
         <div className="mx-auto w-[650px] pb-[80px]">
-          <DvkModelForge />
+          {data?.modelforge ? <DvkModelForge data={data.modelforge} /> : null}
         </div>
       </div>
 
       {/* MOBILE (<1024px) — stacked layout */}
-      <DvkHeroMobile />
-      <DvkHardwareStackMobile />
-      <DvkDemosMobile />
-      <DvkModelForgeMobile />
+      <DvkHeroMobile data={data?.hero} />
+      <DvkHardwareStackMobile data={data?.hardware_stack} />
+      <DvkDemosMobile data={data?.demos} />
+      <DvkModelForgeMobile data={data?.modelforge} />
 
       {/* Shared Section (Desktop & Mobile) */}
-      <DvkIntegratedModules />
+      {data?.integrated_modules ? (
+        <DvkIntegratedModules data={data.integrated_modules} />
+      ) : null}
     </main>
   );
 }
 
-function DvkHeroMobile() {
+function DvkHeroMobile({ data }: { data?: any }) {
+  const bgImg = mediaUrl(data?.background_image_1) || "/dvk/hero-bg-1.png";
+  const title =
+    data?.title || "The physical launchpad for microwatt Edge AI.";
+  const subtitle =
+    data?.subtitle ||
+    "Validate real-time AI at microwatt power levels out of the box. The Cranium Development Kit comes fully loaded with onboard sensors, rich I/O, and pre-integrated drivers so you can stop breadboarding and start testing inferences in minutes.";
+  const ctaLabel = data?.cta_label || "Request Evaluation Kit";
   return (
     <section
       className="relative -mt-[78px] w-full bg-black min-[1024px]:hidden"
@@ -91,7 +103,7 @@ function DvkHeroMobile() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt=""
-            src="/dvk/hero-bg-1.png"
+            src={bgImg}
             className="absolute inset-0 size-full object-cover object-center"
           />
           <div
@@ -138,15 +150,12 @@ function DvkHeroMobile() {
               backgroundClip: "text",
             }}
           >
-            The physical launchpad for microwatt Edge AI.
+            {title}
           </h1>
           <p
             className={`${interRegular.className} w-[332px] max-w-full text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80`}
           >
-            Validate real-time AI at microwatt power levels out of the box. The
-            Cranium Development Kit comes fully loaded with onboard sensors,
-            rich I/O, and pre-integrated drivers so you can stop breadboarding
-            and start testing inferences in minutes.
+            {subtitle}
           </p>
 
           <a
@@ -158,7 +167,7 @@ function DvkHeroMobile() {
               className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
             />
             <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
-              Request Evaluation Kit
+              {ctaLabel}
             </span>
             <span
               aria-hidden
@@ -172,7 +181,25 @@ function DvkHeroMobile() {
   );
 }
 
-function DvkHardwareStackMobile() {
+function DvkHardwareStackMobile({ data }: { data?: any }) {
+  const heading =
+    data?.heading ||
+    "The complete Edge AI hardware stack in a single footprint";
+  const subtitle =
+    data?.subtitle ||
+    "An exhaustive suite of sensors, interfaces, and debug tools pre-integrated with the GPX-10 Pro AI Processor.";
+  const label = data?.label || "The Hardware Blueprint";
+  const boardImage = mediaUrl(data?.board_image) || "/dvk/board-main.png";
+  const cards =
+    data?.spec_cards && Array.isArray(data?.spec_cards) && data.spec_cards.length > 0
+      ? data.spec_cards.map((c: any, i: number) => ({
+          title: c?.title || SPEC_CARDS[i]?.title || "",
+          items: c?.items
+            ? c.items.split("\n").filter(Boolean)
+            : SPEC_CARDS[i]?.items || [],
+          accent: c?.is_accent === true,
+        }))
+      : SPEC_CARDS;
   return (
     <section
       className="relative w-full bg-black min-[1024px]:hidden"
@@ -189,14 +216,13 @@ function DvkHardwareStackMobile() {
               backgroundClip: "text",
             }}
           >
-            The complete Edge AI hardware stack in a single footprint
+            {heading}
           </h2>
           <p
             className={`${interRegular.className} max-w-full text-center text-[15px] leading-[23px] font-normal text-[#f0f0f0] not-italic`}
             style={{ opacity: 0.65 }}
           >
-            An exhaustive suite of sensors, interfaces, and debug tools
-            pre-integrated with the GPX-10 Pro AI Processor.
+            {subtitle}
           </p>
         </div>
 
@@ -209,23 +235,23 @@ function DvkHardwareStackMobile() {
           <p
             className={`${gilroyMedium.className} text-center text-[20px] leading-[28px] text-white not-italic`}
           >
-            The Hardware Blueprint
+            {label}
           </p>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt=""
-            src="/dvk/board-main.png"
+            src={boardImage}
             className="pointer-events-none h-auto w-full rounded-[7.572px] object-bottom"
           />
         </div>
 
         {/* Spec cards — stacked */}
         <div className="flex w-full flex-col gap-[8px]">
-          {SPEC_CARDS.map((card) => {
+          {cards.map((card: any, idx: number) => {
             const isAccent = card.accent === true;
             return (
               <div
-                key={card.title}
+                key={card.title || idx}
                 className="relative flex w-full flex-col gap-[10px] overflow-clip border-[0.5px] border-solid px-[16px] pt-[14px] pb-[18px]"
                 style={{
                   backgroundColor: isAccent ? ACCENT_CARD_BG : CARD_BG,
@@ -241,7 +267,7 @@ function DvkHardwareStackMobile() {
                 <ul
                   className={`${interRegular.className} list-disc text-[15px] leading-[0] font-normal text-[rgba(240,240,240,0.6)]`}
                 >
-                  {card.items.map((item) => (
+                  {card.items.map((item: string) => (
                     <li key={item} className="ms-[20px]">
                       <span className="leading-[22px]">{item}</span>
                     </li>
@@ -256,7 +282,25 @@ function DvkHardwareStackMobile() {
   );
 }
 
-function DvkDemosMobile() {
+function DvkDemosMobile({ data }: { data?: any }) {
+  const heading = data?.heading || "Pre-loaded demos. Instant AI validation.";
+  const subtitle =
+    data?.subtitle ||
+    "Don't spend your first day writing sensor configuration code. The Cranium board comes ready to run out of the box, allowing you to instantly test physical AI models and validate performance on the metal with zero setup required.";
+  const cards =
+    data?.demo_cards && Array.isArray(data?.demo_cards) && data.demo_cards.length > 0
+      ? data.demo_cards.map((c: any, i: number) => ({
+          nodeId: String(i),
+          titleLine1: c?.title_line_1 || DEMO_CARDS[i]?.titleLine1 || "",
+          titleLine2: c?.title_line_2 || DEMO_CARDS[i]?.titleLine2 || "",
+          desc:
+            c?.description ||
+            DEMO_CARDS[i]?.desc ||
+            "",
+          img: mediaUrl(c?.image) || DEMO_CARDS[i]?.img || "/dvk/demo-fall.png",
+          imgOverlay: mediaUrl(c?.image_overlay) || DEMO_CARDS[i]?.imgOverlay,
+        }))
+      : DEMO_CARDS;
   return (
     <section
       className="relative w-full bg-black min-[1024px]:hidden"
@@ -273,21 +317,18 @@ function DvkDemosMobile() {
               backgroundClip: "text",
             }}
           >
-            Pre-loaded demos. Instant AI validation.
+            {heading}
           </h2>
           <p
             className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
           >
-            Don&apos;t spend your first day writing sensor configuration code.
-            The Cranium board comes ready to run out of the box, allowing you to
-            instantly test physical AI models and validate performance on the
-            metal with zero setup required.
+            {subtitle}
           </p>
         </div>
 
         {/* Stacked demo cards */}
         <div className="flex w-full flex-col gap-[16px]">
-          {DEMO_CARDS.map((card) => (
+          {cards.map((card: any) => (
             <div
               key={card.nodeId}
               className="relative flex flex-col gap-[16px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black px-[24px] pt-[16px] pb-[24px]"
@@ -328,7 +369,11 @@ function DvkDemosMobile() {
   );
 }
 
-function DvkModelForgeMobile() {
+function DvkModelForgeMobile({ data }: { data?: any }) {
+  const heading = data?.heading || "Powered by ModelForge.";
+  const subtitle =
+    data?.subtitle ||
+    "Don't let software be the bottleneck. The Cranium DVK is fully supported by our unified software toolchain, designed to take you from a standard TensorFlow model to on-silicon inference in under 15 minutes.";
   return (
     <section
       className="relative w-full bg-black min-[1024px]:hidden"
@@ -343,15 +388,12 @@ function DvkModelForgeMobile() {
             backgroundClip: "text",
           }}
         >
-          Powered by ModelForge.
+          {heading}
         </h2>
         <p
           className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
         >
-          Don&apos;t let software be the bottleneck. The Cranium DVK is fully
-          supported by our unified software toolchain, designed to take you from
-          a standard TensorFlow model to on-silicon inference in under 15
-          minutes.
+          {subtitle}
         </p>
       </div>
     </section>

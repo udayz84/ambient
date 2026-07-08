@@ -1,9 +1,9 @@
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { CornerDecor } from "../contact/contact-shared";
 
 const GRID_CAP = "/technology/grid-cap.svg";
-const GRID_LINE = "/technology/line-87-tall.svg";
 
 const ICON_BG =
   "radial-gradient(80% 100% at 50% 0%, #394a36 0%, #2b3629 50%, #1d221c 100%)";
@@ -21,6 +21,7 @@ type Pillar = {
   desc: string;
   bullets: string[];
   cta?: string;
+  ctaHref?: string;
 };
 
 const PILLARS: Pillar[] = [
@@ -32,14 +33,14 @@ const PILLARS: Pillar[] = [
     tag: "The Brain",
     tagWidth: 107,
     tagRightBarLeft: 98.48,
-    title: "CubicCore™",
+    title: "CubicCore\u2122",
     subtitle: "Server-class math. Microwatt power.",
     desc: "It runs the math on physics itself. Ohm's law multiplies, Kirchhoff's law sums - right inside the memory, almost for free. Digital keeps every result exact.",
     bullets: [
       "In-memory analog compute - no data commute",
       "~1/100th the energy per operation vs. digital",
       "Scales by replication - tile in more cores, from a smart ring to a server",
-      "Fully programmable · 4–32-bit precision, tuned at runtime",
+      "Fully programmable \u00b7 4\u201332-bit precision, tuned at runtime",
       "Built in standard CMOS - no exotic process",
     ],
   },
@@ -49,7 +50,7 @@ const PILLARS: Pillar[] = [
     tag: "The Nervous System",
     tagWidth: 180,
     tagRightBarLeft: 171.48,
-    title: "SenseMesh™",
+    title: "SenseMesh\u2122",
     subtitle: "Knows when to think - and how hard.",
     desc: "Reflexes in hardware. It fuses every sensor into one clean stream, filters out the noise, and decides - in hardware - when to wake the brain and how much power it needs.",
     bullets: [
@@ -67,18 +68,49 @@ const PILLARS: Pillar[] = [
     tag: "The Language",
     tagWidth: 160,
     tagRightBarLeft: 151.48,
-    title: "ModelForge™",
+    title: "ModelForge\u2122",
     subtitle: "No new language to learn.",
     desc: "Bring your own models in TensorFlow, Keras, or ONNX. A push-button compiler does the translation - no rewrites, no proprietary toolchain.",
     bullets: [
       "Drop-in support for TensorFlow, Keras, ONNX",
       "Push-button compile - concept to silicon, no rewrites",
-      "Speaks matrix math natively — none of the translation tax Arm/RISC-V pay",
+      "Speaks matrix math natively \u2014 none of the translation tax Arm/RISC-V pay",
       "One workflow that ports across every A-Cube product",
     ],
     cta: "Explore the Developer Hub",
+    ctaHref: "/developer",
   },
 ];
+
+function buildPillars(data: any): Pillar[] {
+  const strapiPillars = Array.isArray(data?.pillars) ? data.pillars : null;
+  if (!strapiPillars || strapiPillars.length === 0) return PILLARS;
+  return strapiPillars.map((p: any, i: number) => {
+    const fb = PILLARS[i] ?? PILLARS[PILLARS.length - 1];
+    const bulletsText =
+      (p?.bullets as string) || fb.bullets.join("\n");
+    const bullets = bulletsText
+      .split("\n")
+      .map((b) => b.trim())
+      .filter((b) => b.length > 0);
+    const ctaLabel = p?.cta?.label || fb.cta;
+    return {
+      nodeId: fb.nodeId,
+      icon: mediaUrl(p?.icon) || fb.icon,
+      iconInnerInset: fb.iconInnerInset,
+      iconImgInset: fb.iconImgInset,
+      tag: (p?.tag as string) || fb.tag,
+      tagWidth: fb.tagWidth,
+      tagRightBarLeft: fb.tagRightBarLeft,
+      title: (p?.title as string) || fb.title,
+      subtitle: (p?.subtitle as string) || fb.subtitle,
+      desc: (p?.description as string) || fb.desc,
+      bullets: bullets.length > 0 ? bullets : fb.bullets,
+      cta: ctaLabel,
+      ctaHref: (p?.cta?.href as string) || fb.ctaHref || "/developer",
+    };
+  });
+}
 
 function IconBox({ pillar }: { pillar: Pillar }) {
   return (
@@ -170,7 +202,7 @@ function PillarStat({ pillar }: { pillar: Pillar }) {
             <p className="text-[14px] tracking-[-0.1504px] whitespace-nowrap text-[#3a9719] not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
               +
             </p>
-            <p className="min-w-px flex-1 text-[13px] text-[rgba(255,255,255,0.9)] not-italic [word-break:break-word]">
+            <p className="min-w-px flex-1 whitespace-pre-line text-[13px] text-[rgba(255,255,255,0.9)] not-italic [word-break:break-word]">
               {b}
             </p>
           </div>
@@ -179,7 +211,7 @@ function PillarStat({ pillar }: { pillar: Pillar }) {
 
       {pillar.cta ? (
         <a
-          href="/developer"
+          href={pillar.ctaHref || "/developer"}
           className={`${gilroyMedium.className} relative block overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
           data-node-id="3037:696"
           data-name="CTA - Secondary"
@@ -226,7 +258,10 @@ function GridDivider() {
   );
 }
 
-export function TechnologyPagePillars() {
+export function TechnologyPagePillars({ data }: { data?: any } = {}) {
+  const pillars = buildPillars(data);
+  const hasThree = pillars.length >= 3;
+
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -236,17 +271,28 @@ export function TechnologyPagePillars() {
     >
       {/* DESKTOP (>=1024px) */}
       <div className="relative hidden h-[520px] w-[1204px] items-start justify-center gap-[32px] bg-[rgba(0,0,0,0.1)] border border-white/10 px-[20px] min-[1024px]:flex">
-        <PillarStat pillar={PILLARS[0]} />
-        <GridDivider />
-        <PillarStat pillar={PILLARS[1]} />
-        <GridDivider />
-        <PillarStat pillar={PILLARS[2]} />
+        {hasThree ? (
+          <>
+            <PillarStat pillar={pillars[0]} />
+            <GridDivider />
+            <PillarStat pillar={pillars[1]} />
+            <GridDivider />
+            <PillarStat pillar={pillars[2]} />
+          </>
+        ) : (
+          pillars.map((p, i) => (
+            <div key={i} className="flex items-start gap-[32px]">
+              {i > 0 ? <GridDivider /> : null}
+              <PillarStat pillar={p} />
+            </div>
+          ))
+        )}
         <CornerDecor />
       </div>
 
       {/* MOBILE (<1024px) — basic responsive version */}
       <div className="flex w-full flex-col items-stretch gap-[24px] px-[24px] py-[56px] min-[1024px]:hidden">
-        {PILLARS.map((pillar, idx) => (
+        {pillars.map((pillar, idx) => (
           <div key={pillar.nodeId}>
             <div className="flex flex-col gap-[20px] rounded-[2px] bg-[rgba(0,0,0,0.1)] border border-white/10 px-[20px] py-[24px]">
               <div className="flex items-center gap-[16px]">
@@ -280,7 +326,7 @@ export function TechnologyPagePillars() {
                 {pillar.bullets.map((b, i) => (
                   <div key={i} className="flex items-start gap-[5px]">
                     <span className="text-[14px] text-[#3a9719] not-italic">+</span>
-                    <span className="flex-1 text-[13px] text-[rgba(255,255,255,0.9)] not-italic">
+                    <span className="flex-1 whitespace-pre-line text-[13px] text-[rgba(255,255,255,0.9)] not-italic">
                       {b}
                     </span>
                   </div>
@@ -288,14 +334,14 @@ export function TechnologyPagePillars() {
               </div>
               {pillar.cta ? (
                 <a
-                  href="/developer"
+                  href={pillar.ctaHref || "/developer"}
                   className={`${gilroyMedium.className} mt-[4px] block w-full rounded-[2px] bg-[rgba(226,241,202,0.12)] px-[20px] py-[12px] text-center text-[14px] leading-[20px] font-medium text-white uppercase not-italic`}
                 >
                   {pillar.cta}
                 </a>
               ) : null}
             </div>
-            {idx < PILLARS.length - 1 ? (
+            {idx < pillars.length - 1 ? (
               <div className="mx-auto my-[12px] h-px w-[60%] bg-white/10" />
             ) : null}
           </div>

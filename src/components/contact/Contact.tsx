@@ -8,7 +8,7 @@ import { ContactSchedule } from "./ContactSchedule";
 const CONTACT_PAGE_HEIGHT_PX = 2779;
 const CONTACT_FOOTER_TOP_PX = 2779;
 
-export function Contact() {
+export function Contact({ data }: { data?: any }) {
   return (
     <main className="relative z-10 flex w-full flex-col overflow-x-clip min-[1024px]:bg-black">
       {/* DESKTOP (>=1024px) — absolute canvas, untouched */}
@@ -19,11 +19,11 @@ export function Contact() {
         data-name="Contact - 3"
       >
         <div className="relative mx-auto h-full w-full max-w-[1440px]">
-          <ContactHero />
-          <ContactResources />
-          <ContactMap />
-          <ContactSchedule />
-          <ContactForm />
+          {data?.hero && <ContactHero data={data.hero} />}
+          {data?.resources && <ContactResources data={data.resources} />}
+          {data?.map && <ContactMap data={data.map} />}
+          {data?.schedule && <ContactSchedule data={data.schedule} />}
+          {data?.form && <ContactForm data={data.form} />}
 
           <div
             className="pointer-events-none absolute right-[269.72px] size-[4px]"
@@ -49,7 +49,7 @@ export function Contact() {
       {/* MOBILE (<1024px) — dedicated stacked layout */}
       <div className="relative -mt-[78px] w-full bg-transparent min-[1024px]:hidden z-10 pointer-events-none">
         <div className="pointer-events-auto">
-          <ContactMobile />
+          <ContactMobile data={data} />
         </div>
       </div>
     </main>

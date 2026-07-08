@@ -1,0 +1,139 @@
+{
+  "hero": {
+    "title": "Start building with Ambient",
+    "subtitle": "Skip the generic sales inbox. Get direct access to our engineering team, technical documentation, and commercial partners.",
+    "background_image": 51
+  },
+  "resources": {
+    "heading": "Looking for immediate resources?",
+    "ctas": [
+      {
+        "label": "Download Datasheets & SDK",
+        "href": "#",
+        "variant": "primary"
+      },
+      {
+        "label": "Download Press Kit",
+        "href": "#",
+        "variant": "secondary"
+      },
+      {
+        "label": "Case Studies & Whitepapers",
+        "href": "#",
+        "variant": "secondary"
+      }
+    ]
+  },
+  "map": {
+    "heading": "Global scale. Local support.",
+    "subtitle": "From our research labs to your production line, we maintain direct engineering presence across three continents to ensure rapid deployment and ongoing support.",
+    "globe_image": 52,
+    "map_base": 53,
+    "locations": [
+      {
+        "title": "USA Headquarters",
+        "address": "Ambient Scientific Inc. 4633 Old Ironsides Drive Santa Clara California 95054. USA",
+        "indicator_icon": 54
+      },
+      {
+        "title": "Singapore Headquarters",
+        "address": "137 Telok Ayer Street, #05-02, Singapore 068602",
+        "indicator_icon": 55
+      },
+      {
+        "title": "India Headquarters",
+        "address": "Ramky House, 1st Cross, Raghavendra Nagar, Kalyan Nagar, Bengaluru Karnataka, 560043, India",
+        "indicator_icon": 56
+      }
+    ]
+  },
+  "schedule": {
+    "heading": "Schedule a Consultation",
+    "subtitle": "Book a direct meeting with our engineering or commercial teams.",
+    "icon": 57,
+    "cards": [
+      {
+        "tag": "Technical",
+        "title": "Talk to an FAE (Field Application Engineer)",
+        "description": "Book a 30-minute session with our engineers. Discuss power profiling, model quantization, or deployment architecture for your use case.",
+        "cta_label": "View FAE Calendar",
+        "image": 58
+      },
+      {
+        "tag": "Commercial",
+        "title": "Commercial Scaling & Enterprise",
+        "description": "Connect with Business Development to discuss pricing, ASIC development, timelines, licensing, or supply partnerships.",
+        "cta_label": "View Commercial Calendar",
+        "image": 59
+      }
+    ]
+  },
+  "form": {
+    "heading": "Prefer to write to us?",
+    "subtitle": "Select your track below to ensure your message reaches the right desk immediately.",
+    "message_heading": "Drop Us a Message",
+    "checkbox_label": "Sign up for news & updates",
+    "submit_label": "Send Message",
+    "tracks": [
+      {
+        "label": "Sales & Enterprise",
+        "description": "Request a quote, discuss volume licensing, or inquire about custom ASIC development.",
+        "icon": 60
+      },
+      {
+        "label": "Developer Support",
+        "description": "Report a bug, request documentation, or get help compiling your model via the Nebula SDK.",
+        "icon": 61
+      },
+      {
+        "label": "Media & Press",
+        "description": "Request an interview with our leadership team, access press materials, or coordinate coverage.",
+        "icon": 62
+      }
+    ],
+    "fields": [
+      {
+        "label": "First Name",
+        "placeholder": "Enter Your First Name",
+        "field_type": "text"
+      },
+      {
+        "label": "Last Name",
+        "placeholder": "Enter Your Last Name",
+        "field_type": "text"
+      },
+      {
+        "label": "Company Name",
+        "placeholder": "Enter Your Company Name",
+        "field_type": "text"
+      },
+      {
+        "label": "Job Title",
+        "placeholder": "Enter Your Job Title",
+        "field_type": "text"
+      },
+      {
+        "label": "Corporate Email",
+        "placeholder": "Enter Your Corporate Email",
+        "field_type": "email"
+      },
+      {
+        "label": "Phone Number",
+        "placeholder": "Enter Your Phone Number",
+        "field_type": "phone"
+      },
+      {
+        "label": "How can we help?",
+        "placeholder": "Describe your use case, technical requirements, or business needs...",
+        "field_type": "textarea"
+      }
+    ]
+  },
+  "seo": {
+    "meta_title": "Contact | Ambient Scientific",
+    "meta_description": "Get in touch with Ambient Scientific engineering, commercial, and support teams.",
+    "keywords": "contact Ambient Scientific, FAE, business development, press, support",
+    "noindex": false,
+    "canonical_url": "/contact"
+  }
+}

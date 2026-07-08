@@ -28,7 +28,14 @@ const MOBILE_CARDS: MobileCard[] = [
   },
 ];
 
-export function DeveloperPlatformMobile() {
+export function DeveloperPlatformMobile({ data }: { data?: any }) {
+  const heading = data?.heading || "Build the\nimpossible today";
+  const headingLines = heading.split("\n");
+  const headingLine1 = headingLines[0] || "Build the";
+  const headingLine2 = headingLines.slice(1).join("\n") || "impossible today";
+  const subtitle =
+    data?.subtitle ||
+    "Don't let legacy design limit your roadmap. Discover the market-differentiating features of the GPX10 and what's coming next.";
   return (
     <div className="relative w-full">
       <div
@@ -54,8 +61,8 @@ export function DeveloperPlatformMobile() {
                 "linear-gradient(107.454deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
             }}
           >
-            Build the <br />
-            impossible today
+            {headingLine1} <br />
+            {headingLine2}
           </h2>
           
           <div className="relative col-start-1 row-start-1 mt-0 ml-[353.65px] flex size-[4px] items-center justify-center">
@@ -95,9 +102,7 @@ export function DeveloperPlatformMobile() {
         <p
           className={`${interRegular.className} mt-[10px] w-[350px] text-center text-[14px] leading-[16px] font-normal text-white not-italic [word-break:break-word] px-[12px]`}
         >
-          Don&apos;t let legacy design limit your roadmap. Discover the
-          market-differentiating features of the GPX10 and what&apos;s coming
-          next.
+          {subtitle}
         </p>
 
         <div className="mt-[28px] w-full px-[24px]">

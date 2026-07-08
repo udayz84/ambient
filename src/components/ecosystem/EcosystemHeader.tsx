@@ -7,7 +7,14 @@ const ctaTextClass = `${interRegular.className} text-[16px] leading-[normal] fon
 
 const ctaDot = "/navbar/cta-dot.svg";
 
-export function EcosystemHeader() {
+export function EcosystemHeader({ data }: { data?: any }) {
+  const heading = data?.heading || "Supported by a growing ecosystem";
+  const subtitle =
+    data?.subtitle ||
+    "Ambient works with partners across silicon, development, distribution, and system integration, helping teams move from evaluation to deployment with confidence";
+  const cta = data?.cta || {};
+  const ctaLabel = cta.label || "WORK WITH US";
+  const ctaHref = cta.href || "/contact";
   return (
     <div
       className="relative mx-auto flex flex-col items-center w-full max-w-[804.22px] px-4 shrink-0"
@@ -23,7 +30,7 @@ export function EcosystemHeader() {
           }}
           data-node-id="2379:1029"
         >
-          Supported by a growing ecosystem
+          {heading}
         </h2>
 
         <Corners />
@@ -33,13 +40,11 @@ export function EcosystemHeader() {
         className={`${interRegular.className} mt-[20px] max-md:mt-[16px] w-full max-w-[803px] text-center text-[18px] max-md:text-[16px] leading-[27px] font-normal text-white not-italic [word-break:break-word]`}
         data-node-id="2379:1034"
       >
-        Ambient works with partners across silicon, development, distribution,
-        and system integration, helping teams move from evaluation to
-        deployment with confidence
+        {subtitle}
       </p>
 
       <a
-        href="/contact"
+        href={ctaHref}
         className="relative mt-[32px] z-[1] flex h-[44px] w-[186px] items-center justify-center gap-[10px] shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]"
         data-node-id="2379:1035"
         data-name="Cta"
@@ -55,7 +60,7 @@ export function EcosystemHeader() {
           className={`${ctaTextClass} relative z-10 shrink-0 whitespace-nowrap text-white uppercase not-italic [word-break:break-word]`}
           data-node-id="2379:1036"
         >
-          WORK WITH US
+          {ctaLabel}
         </p>
         <Image
           src={ctaDot}

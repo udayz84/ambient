@@ -1,16 +1,34 @@
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { CORNER_LEFT, CORNER_RIGHT, PRIMARY_CTA_SHADOW } from "./developer-data";
+import { mediaUrl } from "@/lib/strapi";
 
 /** Radial fade overlay for the duplicated background images (Figma 2438:4635). */
 const BG_FADE =
   "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 1212.6 683' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%25' width='100%25' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-0.000002985 38.877 -54.283 -0.000004168 606.29 326.94)'><stop stop-color='rgba(0,0,0,0)' offset='0'/><stop stop-color='rgba(0,0,0,1)' offset='1'/></radialGradient></defs></svg>\")";
 
+const DEFAULT_HEADING = "Test on the metal,\nwithout the metal.";
+const DEFAULT_SUBTITLE =
+  "Validate your build in a virtual sandbox,\nno need to wait for hardware.";
+const DEFAULT_CARD_TITLE = "Virtual Sandbox Coming Soon";
+const DEFAULT_CARD_DESCRIPTION =
+  "Complete virtual validation environment for testing your builds before hardware arrives.";
+const DEFAULT_CTA_LABEL = "Join the Virtual Sandbox Waitlist";
+const DEFAULT_IMAGE = "/developer/sandbox-image.png";
+
 /**
  * Figma 2438:4634 — "Coming soon" section.
  * Positioned at -6.7,2394 / 1453×683 within the Developer canvas.
  */
-export function DeveloperComingSoon() {
+export function DeveloperComingSoon({ data }: { data?: any }) {
+  const heading = data?.heading || DEFAULT_HEADING;
+  const headingLines = heading.split("\n");
+  const subtitle = data?.subtitle
+    ? data.subtitle.split("\n")
+    : DEFAULT_SUBTITLE.split("\n");
+  const cardTitle = data?.card_title || DEFAULT_CARD_TITLE;
+  const ctaLabel = data?.cta_label || DEFAULT_CTA_LABEL;
+  const imgSrc = mediaUrl(data?.image) || DEFAULT_IMAGE;
   return (
     <div
       className="absolute"
@@ -34,8 +52,11 @@ export function DeveloperComingSoon() {
           <h2
             className={`${gilroyMedium.className} text-center text-[46px] leading-[49px] font-medium text-white not-italic`}
           >
-            <span className="block whitespace-nowrap">Test on the metal,</span>
-            <span className="block whitespace-nowrap">without the metal.</span>
+            {headingLines.map((line: string, i: number) => (
+              <span key={i} className="block whitespace-nowrap">
+                {line}
+              </span>
+            ))}
           </h2>
         </div>
 
@@ -43,9 +64,12 @@ export function DeveloperComingSoon() {
         <p
           className={`${interRegular.className} w-[406px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-85`}
         >
-          Validate your build in a virtual sandbox,
-          <br aria-hidden />
-          no need to wait for hardware.
+          {subtitle.map((line: string, i: number) => (
+            <span key={i}>
+              {i > 0 ? <br aria-hidden /> : null}
+              {line}
+            </span>
+          ))}
         </p>
 
         {/* Article card — 2438:4646 */}
@@ -56,7 +80,7 @@ export function DeveloperComingSoon() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 alt=""
-                src="/developer/sandbox-image.png"
+                src={imgSrc}
                 className="absolute left-[-3.1%] top-[-0.02%] h-[106.13%] w-[103.1%] max-w-none"
               />
             </div>
@@ -66,13 +90,12 @@ export function DeveloperComingSoon() {
             <p
               className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic`}
             >
-              Virtual Sandbox Coming Soon
+              {cardTitle}
             </p>
             <p
               className={`${interRegular.className} w-[406px] text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic`}
             >
-              Complete virtual validation environment for testing your builds
-              before hardware arrives.
+              {DEFAULT_CARD_DESCRIPTION}
             </p>
           </div>
           {/* CTA — 2438:4651 */}
@@ -87,7 +110,7 @@ export function DeveloperComingSoon() {
             />
             <span className="relative flex items-center gap-[10px]">
               <span className="text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
-                Join the Virtual Sandbox Waitlist
+                {ctaLabel}
               </span>
               <span className="relative size-[20px] shrink-0">
                 {/* eslint-disable-next-line @next/next/no-img-element */}

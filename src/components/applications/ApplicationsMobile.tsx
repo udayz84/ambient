@@ -2,8 +2,9 @@
 
 import { useState, useCallback, useRef, useEffect, Fragment } from "react";
 import Image from "next/image";
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyExtraBold, gilroyMedium, interRegular, interMedium } from "../hero/fonts";
-import { FEATURE_CARDS, APPLICATION_TABS } from "./applications-data";
+import { APPLICATION_TABS, FEATURE_CARDS } from "./applications-data";
 import { CategoryDivider } from "./ApplicationsCategoryNav";
 import { Corners } from "../shared/Corners";
 
@@ -39,21 +40,50 @@ const mobileWatermarkGradient =
   "linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%)";
 
 type ApplicationsMobileProps = {
+  tabs?: any[];
+  featureCards?: any[];
+  data?: any;
   categoryActiveIndex: number;
   setCategoryActiveIndex: (index: number) => void;
 };
 
 export function ApplicationsMobile({
+  tabs = APPLICATION_TABS.map((label) => ({ label })),
+  featureCards = [FEATURE_CARDS.left, FEATURE_CARDS.right],
+  data,
   categoryActiveIndex,
   setCategoryActiveIndex,
 }: ApplicationsMobileProps) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const features = [FEATURE_CARDS.left, FEATURE_CARDS.right];
-  const activeFeature = features[activeIndex];
+  const features = featureCards.length
+    ? featureCards
+    : [FEATURE_CARDS.left, FEATURE_CARDS.right];
+  const activeFeature = features[activeIndex] || FEATURE_CARDS.left;
 
-  const activeTab = APPLICATION_TABS[categoryActiveIndex];
-  const imgSrc = MOBILE_HERO_IMAGES[activeTab] || "/applications/car-hero.png";
-  const watermarkText = MOBILE_WATERMARK_TEXTS[activeTab] || activeTab;
+  const activeTab = tabs[categoryActiveIndex]?.label || APPLICATION_TABS[0];
+  const activeTabData = tabs.find(
+    (t) => (t?.label || "").toUpperCase() === activeTab.toUpperCase()
+  );
+  const imgSrc =
+    mediaUrl(activeTabData?.hero_image) ||
+    MOBILE_HERO_IMAGES[activeTab] ||
+    "/applications/car-hero.png";
+  const watermarkText =
+    activeTabData?.watermark_text ||
+    MOBILE_WATERMARK_TEXTS[activeTab] ||
+    activeTab;
+
+  const heading = data?.heading || "Build the\nimpossible today";
+  const headingLines = heading.split("\n");
+  const headingLine1 = headingLines[0] || "Build the";
+  const headingLine2 = headingLines.slice(1).join("\n") || "impossible today";
+  const subtitle =
+    data?.subtitle ||
+    "Don't let legacy design limit your roadmap. Discover the market-differentiating features of the GPX10 and what's coming next.";
+  const cta = data?.cta || {};
+  const ctaLabel = cta.label || "EXPLORE APPLICATION";
+  const ctaHref = cta.href || "/applications";
+  const dotIcon = mediaUrl(cta.dot_icon) || "/applications/cta-dot.svg";
 
   const goNext = useCallback(() => setActiveIndex((i) => (i + 1) % features.length), [features.length]);
   const goPrev = useCallback(() => setActiveIndex((i) => (i - 1 + features.length) % features.length), [features.length]);
@@ -99,8 +129,8 @@ export function ApplicationsMobile({
                 "linear-gradient(107.454deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
             }}
           >
-            Build the <br />
-            impossible today
+            {headingLine1} <br />
+            {headingLine2}
           </h2>
 
           <div className="relative col-start-1 row-start-1 mt-0 ml-[303.65px] flex size-[4px] items-center justify-center sm:ml-[353.65px]">
@@ -140,8 +170,7 @@ export function ApplicationsMobile({
         <p
           className={`${interRegular.className} mt-[10px] w-full max-w-[343px] text-center text-[14px] leading-[16px] font-normal text-white not-italic [word-break:break-word]`}
         >
-          Don&apos;t let legacy design limit your roadmap. Discover the
-          market-differentiating features of the GPX10 and what&apos;s coming next.
+          {subtitle}
         </p>
       </div>
 
@@ -152,7 +181,8 @@ export function ApplicationsMobile({
           className="flex h-[52px] w-full max-w-full items-center overflow-x-auto px-[24px] scrollbar-none"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          {APPLICATION_TABS.map((label, index) => {
+          {tabs.map((tab, index) => {
+            const label = tab?.label ?? APPLICATION_TABS[index] ?? `Tab ${index}`;
             const isActive = index === categoryActiveIndex;
             const dividerVariant =
               index === categoryActiveIndex
@@ -184,7 +214,7 @@ export function ApplicationsMobile({
           })}
           <CategoryDivider
             variant={
-              categoryActiveIndex === APPLICATION_TABS.length - 1
+              categoryActiveIndex === tabs.length - 1
                 ? "after-active"
                 : "normal"
             }
@@ -245,10 +275,11 @@ export function ApplicationsMobile({
 
         <div key={activeIndex} className="flex flex-col animate-slide-fade">
           <h3 className={`${gilroyMedium.className} text-[20px] text-white leading-[28px] not-italic`}>
-            {activeFeature.title}
+            {activeFeature?.title ?? "Tire Pressure Monitoring"}
           </h3>
           <p className={`${interRegular.className} mt-[16px] text-[14px] text-[#f0f0f0] opacity-65 leading-[22px] not-italic`}>
-            {activeFeature.description}
+            {activeFeature?.description ??
+              "On-device air pressure and temperature sensors provide real-time alerts for tire health to prevent accidents and optimize maintenance and fuel expenses"}
           </p>
         </div>
       </div>
@@ -286,7 +317,7 @@ export function ApplicationsMobile({
       </div>
 
       <a
-        href="/applications"
+        href={ctaHref}
         className={`${interMedium.className} relative mt-[32px] flex h-[48px] w-[237px] items-center justify-center ${GREEN_CTA_SHADOW}`}
       >
         <span
@@ -298,9 +329,9 @@ export function ApplicationsMobile({
           className="pointer-events-none absolute inset-0 overflow-hidden z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
         />
         <p className="relative z-10 flex items-center gap-[10px] text-[12px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
-          EXPLORE APPLICATION
+          {ctaLabel}
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/applications/cta-dot.svg" alt="" className="size-[6px]" aria-hidden />
+          <img src={dotIcon} alt="" className="size-[6px]" aria-hidden />
         </p>
 
         <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">

@@ -1,19 +1,88 @@
 import { gilroyMedium, gilroyBold, interRegular, interMedium } from "../hero/fonts";
-import { FOOTER_NAV_SECTIONS } from "./footer-data";
+import {
+  FALLBACK_FOOTER_NAV_SECTIONS,
+  FALLBACK_FOOTER_SOCIAL_LINKS,
+  FALLBACK_FOOTER_LEGAL_LINKS,
+  FALLBACK_FOOTER_COPYRIGHT,
+  FALLBACK_FOOTER_CRAFTED_BY_TEXT,
+  type FooterNavSection,
+  type FooterSocialLink,
+  type FooterLegalLink,
+} from "./footer-data";
 import { NewsletterSignup } from "./NewsletterSignup";
+import { mediaUrl } from "@/lib/strapi";
 
 export function SiteFooter({
   showNewsletter = false,
   isContactPage = false,
   isCareersPage = false,
   isResourcesPage = false,
+  data,
+  brandData,
+  newsletterData,
 }: {
   showNewsletter?: boolean;
   isContactPage?: boolean;
   isCareersPage?: boolean;
   isResourcesPage?: boolean;
+  data?: any;
+  brandData?: any;
+  newsletterData?: any;
 }) {
   const showFullBackground = showNewsletter || isCareersPage || isResourcesPage || isContactPage;
+
+  const navSections: FooterNavSection[] =
+    Array.isArray(data?.nav_sections) && data.nav_sections.length > 0
+      ? data.nav_sections.map((section: any, index: number) => {
+          const fallback = FALLBACK_FOOTER_NAV_SECTIONS[index];
+          return {
+            title: section?.title || fallback?.title || "",
+            width: fallback?.width ?? 158,
+            listWidth: fallback?.listWidth ?? 158,
+            listAlign: fallback?.listAlign ?? "start",
+            links: Array.isArray(section?.links)
+              ? section.links
+                  .map((link: any) => ({
+                    label: typeof link?.label === "string" ? link.label : "",
+                    href: typeof link?.href === "string" && link.href ? link.href : "#",
+                  }))
+                  .filter((link: any) => link.label)
+              : fallback?.links ?? [],
+          };
+        })
+      : FALLBACK_FOOTER_NAV_SECTIONS;
+
+  const socialLinks: FooterSocialLink[] =
+    Array.isArray(data?.social_links) && data.social_links.length > 0
+      ? data.social_links
+          .map((raw: any, index: number) => {
+            const fallback = FALLBACK_FOOTER_SOCIAL_LINKS[index];
+            const platform = String(raw?.platform || fallback?.platform || "social").toLowerCase();
+            const match = FALLBACK_FOOTER_SOCIAL_LINKS.find((s) => s.platform === platform);
+            return {
+              platform,
+              href: typeof raw?.href === "string" && raw.href ? raw.href : fallback?.href || "#",
+              icon: mediaUrl(raw?.icon) || match?.icon || fallback?.icon || "/footer/social-linkedin.svg",
+              label: match?.label || fallback?.label || platform,
+            };
+          })
+          .filter((s: any) => s)
+      : FALLBACK_FOOTER_SOCIAL_LINKS;
+
+  const legalLinks: FooterLegalLink[] =
+    Array.isArray(data?.legal_links) && data.legal_links.length > 0
+      ? data.legal_links
+          .map((raw: any) => ({
+            label: typeof raw?.label === "string" ? raw.label : "",
+            href: typeof raw?.href === "string" && raw.href ? raw.href : "#",
+          }))
+          .filter((link: any) => link.label)
+      : FALLBACK_FOOTER_LEGAL_LINKS;
+
+  const copyrightText = data?.copyright_text || FALLBACK_FOOTER_COPYRIGHT;
+  const craftedByText = data?.crafted_by_text || FALLBACK_FOOTER_CRAFTED_BY_TEXT;
+  const craftedByLogoSrc = mediaUrl(data?.crafted_by_logo) || null;
+  const siteName = brandData?.site_name || "ambient";
 
   return (
     <footer
@@ -54,7 +123,7 @@ export function SiteFooter({
       <div className={`relative mx-auto flex h-full w-full max-w-[1440px] flex-col items-center pb-0 lg:block lg:pt-0 lg:pb-0 ${(isResourcesPage || isCareersPage || isContactPage) ? "pt-[376px]" : showNewsletter ? "pt-[100px]" : "pt-[24px]"}`}>
         {showNewsletter && (
           <div className="relative z-[1] mb-[80px] flex flex-col items-center lg:mb-0 lg:pt-[120px]">
-            <NewsletterSignup />
+            <NewsletterSignup data={newsletterData} />
           </div>
         )}
 
@@ -63,7 +132,7 @@ export function SiteFooter({
         aria-label="Footer"
         data-node-id="2379:786"
       >
-        {FOOTER_NAV_SECTIONS.map((section) => (
+        {navSections.map((section) => (
           <div
             key={section.title}
             className="group flex w-full flex-col border-b border-white/20 lg:w-[158px] lg:shrink-0 lg:border-none"
@@ -92,12 +161,12 @@ export function SiteFooter({
               className={`mb-[12px] hidden flex-col gap-[12px] text-[14px] leading-[1.4] items-start peer-checked:flex lg:!flex lg:mb-0 lg:mt-[24px] lg:${section.listAlign === "center" ? "items-center" : "items-start"}`}
             >
               {section.links.map((link) => (
-                <li key={link} className="w-full text-left lg:text-center">
+                <li key={link.label} className="w-full text-left lg:text-center">
                   <a
-                    href="#"
+                    href={link.href}
                     className={`${interRegular.className} font-normal whitespace-nowrap text-[#E4E4E4] not-italic hover:opacity-80 lg:text-white`}
                   >
-                    {link}
+                    {link.label}
                   </a>
                 </li>
               ))}
@@ -117,18 +186,12 @@ export function SiteFooter({
               CONNECT WITH US
             </p>
             <div className="flex items-center justify-start gap-[16px] lg:justify-start">
-              <a href="#" aria-label="LinkedIn" className="block size-[20px] lg:size-[24px]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/footer/social-linkedin.svg" alt="" className="block size-full object-contain" />
-              </a>
-              <a href="#" aria-label="X" className="block size-[20px] lg:size-[24px]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/footer/social-x.svg" alt="" className="block size-full object-contain" />
-              </a>
-              <a href="#" aria-label="YouTube" className="block size-[20px] lg:size-[24px]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/footer/social-youtube.svg" alt="" className="block size-full object-contain" />
-              </a>
+              {socialLinks.map((social) => (
+                <a key={social.platform} href={social.href} aria-label={social.label} className="block size-[20px] lg:size-[24px]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={social.icon} alt="" className="block size-full object-contain" />
+                </a>
+              ))}
             </div>
           </div>
 
@@ -141,15 +204,16 @@ export function SiteFooter({
               LEGAL PAGES
             </p>
             <div className="flex flex-row flex-wrap items-center justify-start gap-[8px] pb-[4px]">
-              <a href="#" className={`${interRegular.className} text-[14px] leading-[1.4] text-[#E4E4E4] hover:text-white`}>Privacy Policy</a>
-              <div className="relative flex h-[4px] w-[5px] items-center justify-center">
-                <div className="size-[3px] rounded-full bg-white/40" />
-              </div>
-              <a href="#" className={`${interRegular.className} text-[14px] leading-[1.4] text-[#E4E4E4] hover:text-white`}>Terms of Service</a>
-              <div className="relative flex h-[4px] w-[5px] items-center justify-center">
-                <div className="size-[3px] rounded-full bg-white/40" />
-              </div>
-              <a href="#" className={`${interRegular.className} text-[14px] leading-[1.4] text-[#E4E4E4] hover:text-white`}>Cookie Policy</a>
+              {legalLinks.map((link, idx) => (
+                <span key={link.label} className="flex items-center gap-[8px]">
+                  {idx > 0 && (
+                    <div className="relative flex h-[4px] w-[5px] items-center justify-center">
+                      <div className="size-[3px] rounded-full bg-white/40" />
+                    </div>
+                  )}
+                  <a href={link.href} className={`${interRegular.className} text-[14px] leading-[1.4] text-[#E4E4E4] hover:text-white`}>{link.label}</a>
+                </span>
+              ))}
             </div>
           </div>
         </div>
@@ -157,9 +221,9 @@ export function SiteFooter({
         {/* Right Side */}
         <div className="flex w-full flex-row items-center justify-between gap-[12px] pb-[4px] lg:w-auto lg:justify-start lg:gap-[48px]">
           <p className={`${interRegular.className} text-[10px] leading-[1.3] text-[rgba(255,255,255,0.8)]`}>
-            © 2026 Ambient AI. All rights reserved.
+            {copyrightText}
           </p>
-          <CraftedByAttribution />
+          <CraftedByAttribution text={craftedByText} logoSrc={craftedByLogoSrc} />
         </div>
       </div>
 
@@ -173,7 +237,7 @@ export function SiteFooter({
               "linear-gradient(to right, rgba(46,76,38,0.4), #ddf5d3 50%, rgba(46,76,38,0.4))",
           }}
         >
-          ambient
+          {siteName}
         </p>
       </div>
 
@@ -186,23 +250,34 @@ export function SiteFooter({
         }}
         data-node-id="2379:785"
       >
-        ambient
+        {siteName}
       </p>
       </div>
     </footer>
   );
 }
 
-function CraftedByAttribution() {
+function CraftedByAttribution({
+  text,
+  logoSrc,
+}: {
+  text: string;
+  logoSrc: string | null;
+}) {
   return (
     <div className="flex items-center gap-[4px]">
       <p
         className={`${interRegular.className} text-[12px] leading-[1.3] font-normal whitespace-nowrap text-white not-italic`}
         data-node-id="2379:817"
       >
-        Carefully crafted by
+        {text}
       </p>
-      <ThreeMindsLogo />
+      {logoSrc ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={logoSrc} alt="3minds" className="h-[12px] w-auto max-w-[54px] object-contain" />
+      ) : (
+        <ThreeMindsLogo />
+      )}
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { TagBadge } from "../hero/TagBadge";
@@ -17,7 +18,30 @@ import {
 
 const HERO_DESKTOP_HEIGHT = 798;
 
-export function ProductsHero() {
+const FALLBACK_TITLE = "Full AI inference. \nOn a coin cell.";
+const FALLBACK_SUBTITLE =
+  "The world's first energy-aware AI processor — running real neural networks, not rule-based shortcuts, at microwatt power. Built on the A-Cube architecture.";
+const FALLBACK_PRIMARY = { label: "Request Evaluation Kit", href: "#" };
+const FALLBACK_SECONDARY = { label: "Download Product Brief", href: "#" };
+
+function splitLines(value: string): string[] {
+  return value.split("\n");
+}
+
+export function ProductsHero({ data }: { data?: any }) {
+  const title = data?.title || FALLBACK_TITLE;
+  const titleLines = splitLines(title);
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const primary = {
+    label: data?.primary_button?.label ?? FALLBACK_PRIMARY.label,
+    href: data?.primary_button?.href ?? FALLBACK_PRIMARY.href,
+  };
+  const secondary = {
+    label: data?.secondary_button?.label ?? FALLBACK_SECONDARY.label,
+    href: data?.secondary_button?.href ?? FALLBACK_SECONDARY.href,
+  };
+  const chipset1 = mediaUrl(data?.chipset_image_2) || "/products/coin-chipset-1.png";
+  const chipset2 = mediaUrl(data?.chipset_image_1) || "/products/coin-chipset-2.png";
   return (
     <>
       {/* DESKTOP (>=1024px) — hero canvas, source of truth (Figma 2900:418) */}
@@ -28,10 +52,17 @@ export function ProductsHero() {
         data-name="Hero Section"
         aria-label="Products"
       >
-        <div className="relative mx-auto h-full w-[1442px]">
-          <ProductsHeroDesktop />
+      <div
+        className="relative mx-auto h-full w-[1442px]">
+          <ProductsHeroDesktop
+            titleLines={titleLines}
+            subtitle={subtitle}
+            primary={primary}
+            secondary={secondary}
+            chipset1={chipset1}
+            chipset2={chipset2}
+          />
         </div>
-
         {/* Blend the coin image's bright right edge into black on screens
             wider than the 1442 canvas. */}
         <div
@@ -45,12 +76,32 @@ export function ProductsHero() {
       </div>
 
       {/* MOBILE (<1024px) — basic stacked layout */}
-      <ProductsHeroMobile />
+      <ProductsHeroMobile
+        titleLines={titleLines}
+        subtitle={subtitle}
+        primary={primary}
+        secondary={secondary}
+        chipset2={chipset2}
+      />
     </>
   );
 }
 
-function ProductsHeroDesktop() {
+function ProductsHeroDesktop({
+  titleLines,
+  subtitle,
+  primary,
+  secondary,
+  chipset1,
+  chipset2,
+}: {
+  titleLines: string[];
+  subtitle: string;
+  primary: { label: string; href: string };
+  secondary: { label: string; href: string };
+  chipset1: string;
+  chipset2: string;
+}) {
   return (
     <>
       {/* Coin & chipset image group — 2900:507 */}
@@ -81,7 +132,7 @@ function ProductsHeroDesktop() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt=""
-            src="/products/coin-chipset-2.png"
+            src={chipset2}
             className="absolute inset-0 size-full max-w-none object-bottom"
           />
           <div
@@ -104,7 +155,7 @@ function ProductsHeroDesktop() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt=""
-            src="/products/coin-chipset-1.png"
+            src={chipset1}
             className="absolute inset-0 size-full max-w-none object-bottom"
           />
         </div>
@@ -220,15 +271,16 @@ function ProductsHeroDesktop() {
           data-node-id="2900:464"
           data-name="Title"
         >
-          <span className="block leading-[49px]">{`Full AI inference. `}</span>
-          <span className="block leading-[49px]">On a coin cell.</span>
+          {titleLines.map((line, i) => (
+            <span key={i} className="block leading-[49px]">{line}</span>
+          ))}
         </h1>
         <p
           className={`${interRegular.className} w-[419px] shrink-0 text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-80`}
           data-node-id="2900:465"
           data-name="Description"
         >
-          {`The world's first energy-aware AI processor — running real neural networks, not rule-based shortcuts, at microwatt power. Built on the A-Cube architecture.`}
+          {subtitle}
         </p>
       </div>
 
@@ -239,8 +291,8 @@ function ProductsHeroDesktop() {
         data-node-id="2900:572"
         data-name="Frame 1984079464"
       >
-        <PrimaryCta>Request Evaluation Kit</PrimaryCta>
-        <SecondaryCta>Download Product Brief</SecondaryCta>
+        <PrimaryCta href={primary.href}>{primary.label}</PrimaryCta>
+        <SecondaryCta href={secondary.href}>{secondary.label}</SecondaryCta>
       </div>
 
       {/* Scroll indicator — 2900:460 (left=1335.5, top=696) */}
@@ -249,10 +301,16 @@ function ProductsHeroDesktop() {
   );
 }
 
-function PrimaryCta({ children }: { children: React.ReactNode }) {
+function PrimaryCta({
+  children,
+  href,
+}: {
+  children: React.ReactNode;
+  href: string;
+}) {
   return (
     <a
-      href="#"
+      href={href}
       className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[223px] shrink-0 items-center justify-center overflow-hidden`}
       data-node-id="2900:573"
       data-name="Cta"
@@ -273,10 +331,16 @@ function PrimaryCta({ children }: { children: React.ReactNode }) {
   );
 }
 
-function SecondaryCta({ children }: { children: React.ReactNode }) {
+function SecondaryCta({
+  children,
+  href,
+}: {
+  children: React.ReactNode;
+  href: string;
+}) {
   return (
     <a
-      href="#"
+      href={href}
       className={`${gilroyMedium.className} relative flex h-[48px] w-[255px] shrink-0 items-center justify-center overflow-clip`}
       style={{ backgroundColor: SECONDARY_CTA_BG }}
       data-node-id="2900:584"
@@ -290,7 +354,19 @@ function SecondaryCta({ children }: { children: React.ReactNode }) {
   );
 }
 
-function ProductsHeroMobile() {
+function ProductsHeroMobile({
+  titleLines,
+  subtitle,
+  primary,
+  secondary,
+  chipset2,
+}: {
+  titleLines: string[];
+  subtitle: string;
+  primary: { label: string; href: string };
+  secondary: { label: string; href: string };
+  chipset2: string;
+}) {
   return (
     <section
       className="relative -mt-[78px] w-full bg-black min-[1024px]:hidden"
@@ -302,7 +378,7 @@ function ProductsHeroMobile() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt=""
-            src="/products/coin-chipset-2.png"
+            src={chipset2}
             className="absolute inset-0 size-full object-cover object-[center_bottom] opacity-60"
           />
           <div
@@ -352,17 +428,17 @@ function ProductsHeroMobile() {
               backgroundClip: "text",
             }}
           >
-            {`Full AI inference. On a coin cell.`}
+            {titleLines.join(" ")}
           </h1>
           <p
             className={`${interRegular.className} w-[332px] max-w-full text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80`}
           >
-            {`The world's first energy-aware AI processor — running real neural networks, not rule-based shortcuts, at microwatt power. Built on the A-Cube architecture.`}
+            {subtitle}
           </p>
 
           <div className="mt-[9px] flex w-full flex-col gap-[16px]">
             <a
-              href="#"
+              href={primary.href}
               className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-hidden`}
             >
               <span
@@ -370,7 +446,7 @@ function ProductsHeroMobile() {
                 className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
               />
               <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
-                Request Evaluation Kit
+                {primary.label}
               </span>
               <span
                 aria-hidden
@@ -379,12 +455,12 @@ function ProductsHeroMobile() {
               <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             </a>
             <a
-              href="#"
+              href={secondary.href}
               className={`${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-clip`}
               style={{ backgroundColor: SECONDARY_CTA_BG }}
             >
               <span className="relative px-[20px] py-[10px] text-[14px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
-                Download Product Brief
+                {secondary.label}
               </span>
               <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             </a>

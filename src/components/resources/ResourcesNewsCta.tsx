@@ -10,7 +10,26 @@ const titleLineStyle = {
   backgroundClip: "text",
 } as const;
 
-export function ResourcesNewsCta({ top }: { top: number }) {
+const FALLBACK_HEADING_LINES = [
+  "Looking for latest developments,",
+  "events, and announcements?",
+];
+const FALLBACK_CTA_LABEL = "Visit News Page";
+const FALLBACK_CTA_HREF = "/news-listing";
+
+type ResourcesNewsCtaProps = {
+  top: number;
+  data?: any;
+};
+
+export function ResourcesNewsCta({ top, data }: ResourcesNewsCtaProps) {
+  const headingRaw = (data?.heading as string) || null;
+  const headingLines = headingRaw
+    ? headingRaw.split("\n")
+    : FALLBACK_HEADING_LINES;
+  const ctaLabel = (data?.cta_label as string) || FALLBACK_CTA_LABEL;
+  const ctaHref = (data?.cta_href as string) || FALLBACK_CTA_HREF;
+
   return (
     <section
       className="absolute left-1/2 z-10 flex w-[728px] -translate-x-1/2 flex-col items-center"
@@ -23,25 +42,22 @@ export function ResourcesNewsCta({ top }: { top: number }) {
           className="absolute inset-0 flex flex-col items-center justify-center"
           data-node-id="2379:1763"
         >
-          <span
-            className={`${gilroyMedium.className} block bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic`}
-            style={titleLineStyle}
-          >
-            Looking for latest developments,
-          </span>
-          <span
-            className={`${gilroyMedium.className} block bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic`}
-            style={titleLineStyle}
-          >
-            events, and announcements?
-          </span>
+          {headingLines.map((line, i) => (
+            <span
+              key={i}
+              className={`${gilroyMedium.className} block bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic`}
+              style={titleLineStyle}
+            >
+              {line}
+            </span>
+          ))}
         </div>
         <CornerDecor />
       </div>
 
       <div className="mt-[49.47px]" data-node-id="2379:1769">
         <a
-          href="#"
+          href={ctaHref}
           className={`${gilroyMedium.className} relative flex h-[48px] w-[158px] items-center justify-center shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
         >
           <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
@@ -54,7 +70,7 @@ export function ResourcesNewsCta({ top }: { top: number }) {
             className="relative z-10 text-[16px] leading-[28px] font-medium whitespace-nowrap text-[#121212] uppercase not-italic [word-break:break-word]"
             data-node-id="2379:1770"
           >
-            Visit News Page
+            {ctaLabel}
           </span>
           <span
             aria-hidden

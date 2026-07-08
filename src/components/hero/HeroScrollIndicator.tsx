@@ -5,7 +5,7 @@ import { interRegular } from "./fonts";
 
 const NEXT_SECTION_ID = "measured-proof";
 
-export function HeroScrollIndicator() {
+export function HeroScrollIndicator({ scrollText = "SCROLL" }: { scrollText?: string }) {
   const handleScroll = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
@@ -53,7 +53,7 @@ export function HeroScrollIndicator() {
             className="relative h-full w-[47px] text-[12px] leading-[1.4] font-normal text-[#505f4b] [word-break:break-word] not-italic"
             data-node-id="2379:779"
           >
-            SCROLL
+            {scrollText}
           </p>
         </div>
       </div>

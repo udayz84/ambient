@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Contact } from "@/components/contact/Contact";
+import { getSingleType } from "@/lib/strapi";
 
 export const metadata: Metadata = {
   title: "Contact | Ambient Scientific",
@@ -7,6 +8,18 @@ export const metadata: Metadata = {
     "Get in touch with Ambient Scientific engineering, commercial, and support teams.",
 };
 
-export default function ContactPage() {
-  return <Contact />;
+export default async function ContactPage() {
+  let data: any = null;
+  try {
+    data = await getSingleType<any>("contact-page", [
+      "hero",
+      "resources",
+      { section: "map", fields: ["globe_image", "map_base"], nested: ["locations"] },
+      { section: "schedule", fields: ["icon"], nested: ["cards"] },
+      { section: "form", nested: ["tracks"] },
+    ]);
+  } catch {
+    data = null;
+  }
+  return <Contact data={data} />;
 }

@@ -1,7 +1,30 @@
 import { CAREERS_BENEFITS_CARDS } from "./careers-data";
 import { CareersFramedTitle, CareersGradientCard } from "./careers-shared";
+import { mediaUrl } from "@/lib/strapi";
+import type { CareersValueCard } from "./careers-data";
 
-export function CareersBenefits({ offsetY = 0 }: { offsetY?: number }) {
+export function CareersBenefits({
+  data,
+  offsetY = 0,
+}: {
+  data?: any;
+  offsetY?: number;
+}) {
+  const heading = data?.heading || "Benefits & Perks";
+  const titleFrame =
+    mediaUrl(data?.title_frame) || "/careers/title-frame-benefits.svg";
+  const cards: CareersValueCard[] = (
+    data?.cards && Array.isArray(data.cards) && data.cards.length > 0
+      ? data.cards
+      : CAREERS_BENEFITS_CARDS
+  ).map((c: any, i: number) => ({
+    icon: mediaUrl(c?.icon) || CAREERS_BENEFITS_CARDS[i]?.icon || "",
+    title: c?.title || CAREERS_BENEFITS_CARDS[i]?.title || "",
+    description:
+      c?.description || CAREERS_BENEFITS_CARDS[i]?.description || "",
+    titleSize: "lg" as const,
+  }));
+
   return (
     <section
       className="absolute top-[4252px] left-1/2 z-10 flex w-[1318px] flex-col items-center gap-[40px] transition-transform duration-300 ease-out"
@@ -11,21 +34,21 @@ export function CareersBenefits({ offsetY = 0 }: { offsetY?: number }) {
     >
       <CareersFramedTitle
         nodeId="2379:8954"
-        frameSrc="/careers/title-frame-benefits.svg"
+        frameSrc={titleFrame}
         frameClassName="top-[1.1px] left-[0.84px] h-[59px] w-[374.32px]"
         gradientDeg="112.176deg"
         textClassName="text-[48px] leading-[1.1] tracking-[-0.96px]"
         textTop="top-[3.1px]"
         className="h-[61px] w-[376px] shrink-0"
       >
-        Benefits &amp; Perks
+        {heading}
       </CareersFramedTitle>
 
       <div
         className="grid shrink-0 grid-cols-3 gap-x-[20px] gap-y-[20px]"
         data-node-id="2379:8961"
       >
-        {CAREERS_BENEFITS_CARDS.map((card, index) => (
+        {cards.map((card, index) => (
           <CareersGradientCard
             key={card.title}
             card={card}

@@ -9,6 +9,14 @@ import {
   PRIMARY_CTA_INSET,
   PRIMARY_CTA_SHADOW,
 } from "./dvk-data";
+import { mediaUrl } from "@/lib/strapi";
+
+const DEFAULT_TITLE = "The physical launchpad for microwatt Edge AI.";
+const DEFAULT_SUBTITLE =
+  "Validate real-time AI at microwatt power levels out of the box. The Cranium Development Kit comes fully loaded with onboard sensors, rich I/O, and pre-integrated drivers so you can stop breadboarding and start testing inferences in minutes.";
+const DEFAULT_CTA_LABEL = "Request Evaluation Kit";
+const DEFAULT_BG_1 = "/dvk/hero-bg-1.png";
+const DEFAULT_BG_2 = "/dvk/hero-bg-2.png";
 
 /**
  * Figma 2761:2971 — Cranium Development Kit (DVK) hero.
@@ -19,7 +27,12 @@ import {
  * Content frame 2761:2977 (100, 192 / 576×318)
  * Scroll indicator 2761:3005 (1335.387, 616.033 / 18×75)
  */
-export function DvkHero() {
+export function DvkHero({ data }: { data?: any }) {
+  const title = data?.title || DEFAULT_TITLE;
+  const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
+  const ctaLabel = data?.cta_label || DEFAULT_CTA_LABEL;
+  const bg1 = mediaUrl(data?.background_image_1) || DEFAULT_BG_1;
+  const bg2 = mediaUrl(data?.background_image_2) || DEFAULT_BG_2;
   return (
     <>
       {/* Hero background — image group 2761:2972 */}
@@ -38,13 +51,13 @@ export function DvkHero() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt=""
-          src="/dvk/hero-bg-1.png"
+          src={bg1}
           className="absolute inset-0 size-full max-w-none object-bottom"
         />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt=""
-          src="/dvk/hero-bg-2.png"
+          src={bg2}
           className="absolute inset-0 size-full max-w-none object-bottom"
         />
         <div
@@ -163,7 +176,7 @@ export function DvkHero() {
             }}
             data-node-id="2761:2984"
           >
-            The physical launchpad for microwatt Edge AI.
+            {title}
           </h1>
         </div>
 
@@ -177,10 +190,7 @@ export function DvkHero() {
             className={`${interRegular.className} w-[554px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
             data-node-id="2761:2986"
           >
-            Validate real-time AI at microwatt power levels out of the box. The
-            Cranium Development Kit comes fully loaded with onboard sensors,
-            rich I/O, and pre-integrated drivers so you can stop breadboarding
-            and start testing inferences in minutes.
+            {subtitle}
           </p>
 
           <div
@@ -188,7 +198,7 @@ export function DvkHero() {
             data-node-id="2761:2987"
             data-name="Frame 1984079464"
           >
-            <PrimaryCta>Request Evaluation Kit</PrimaryCta>
+            <PrimaryCta>{ctaLabel}</PrimaryCta>
           </div>
         </div>
       </div>

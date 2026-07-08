@@ -1,0 +1,56 @@
+- Cleaning dist dir C:/Users/speed/Documents/scraft/ambient/cms/dist
+✔ Cleaning dist dir (18ms)
+- Loading Strapi
+Config file not loaded, extension must be one of .js,.json): admin.js.map
+Config file not loaded, extension must be one of .js,.json): cron.js.map
+Config file not loaded, extension must be one of .js,.json): database.js.map
+Config file not loaded, extension must be one of .js,.json): middlewares.js.map
+Config file not loaded, extension must be one of .js,.json): plugins.js.map
+Config file not loaded, extension must be one of .js,.json): server.js.map
+[31mKnex: run
+$ npm install better-sqlite3 --save
+Cannot find module 'better-sqlite3'
+Require stack:
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\knex\lib\dialects\better-sqlite3\index.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\knex\lib\dialects\index.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\knex\lib\knex-builder\internal\config-resolver.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\knex\lib\knex-builder\Knex.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\knex\lib\index.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\knex\knex.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\database\dist\connection.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\database\dist\index.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\Strapi.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\index.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\strapi\dist\src\cli\commands\admin\create-user.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\strapi\dist\src\cli\commands\index.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\strapi\dist\cli.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\strapi\bin\strapi.js
+Error: Cannot find module 'better-sqlite3'
+Require stack:
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\knex\lib\dialects\better-sqlite3\index.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\knex\lib\dialects\index.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\knex\lib\knex-builder\internal\config-resolver.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\knex\lib\knex-builder\Knex.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\knex\lib\index.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\knex\knex.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\database\dist\connection.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\database\dist\index.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\Strapi.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\index.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\strapi\dist\src\cli\commands\admin\create-user.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\strapi\dist\src\cli\commands\index.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\strapi\dist\cli.js
+- C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\strapi\bin\strapi.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1500:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1071:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1095:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1116:12)
+    at Module._load (node:internal/modules/cjs/loader:1285:25)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1600:12)
+    at require (node:internal/modules/helpers:153:16)
+    at Client_BetterSQLite3._driver (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\knex\lib\dialects\better-sqlite3\index.js:7:12)
+    at Client_BetterSQLite3.initializeDriver (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\knex\lib\client.js:198:26)[39m
+[ERROR]  There seems to be an unexpected error, try again with --debug for more information 
+
+┌──────────────────────────────────────────────────────────────────────────────┐│                                                                              ││   Error: Knex: run                                                           ││   $ npm install better-sqlite3 --save                                        ││   Cannot find module 'better-sqlite3'                                        ││   Require stack:                                                             ││   - C:\Users\speed\Documents\scraft\ambient\cms\node_modules\knex\lib\dial   ││   ects\better-sqlite3\index.js                                               ││   - C:\Users\speed\Documents\scraft\ambient\cms\node_modules\knex\lib\dial   ││   ects\index.js                                                              ││   - C:\Users\speed\Documents\scraft\ambient\cms\node_modules\knex\lib\knex   ││   -builder\internal\config-resolver.js                                       ││   - C:\Users\speed\Documents\scraft\ambient\cms\node_modules\knex\lib\knex   ││   -builder\Knex.js                                                           ││   - C:\Users\speed\Documents\scraft\ambient\cms\node_modules\knex\lib\inde   ││   x.js                                                                       ││   - C:\Users\speed\Documents\scraft\ambient\cms\node_modules\knex\knex.js    ││   - C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\datab   ││   ase\dist\connection.js                                                     ││   - C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\datab   ││   ase\dist\index.js                                                          ││   - C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\   ││   dist\Strapi.js                                                             ││   - C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\   ││   dist\index.js                                                              ││   - C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\strap   ││   i\dist\src\cli\commands\admin\create-user.js                               ││   - C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\strap   ││   i\dist\src\cli\commands\index.js                                           ││   - C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\strap   ││   i\dist\cli.js                                                              ││   - C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\strap   ││   i\bin\strapi.js                                                            ││   at Client_BetterSQLite3.initializeDriver (C:\Users\speed\Documents\scraf   ││   t\ambient\cms\node_modules\knex\lib\client.js:202:13)                      ││   at new Client (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\   ││   knex\lib\client.js:83:12)                                                  ││   at new Client_SQLite3 (C:\Users\speed\Documents\scraft\ambient\cms\node_   ││   modules\knex\lib\dialects\sqlite3\index.js:22:5)                           ││   at new Client_BetterSQLite3 (C:\Users\speed\Documents\scraft\ambient\cms   ││   \node_modules\knex\lib\dialects\better-sqlite3\index.js:5:1)               ││   at Object.knex [as default] (C:\Users\speed\Documents\scraft\ambient\cms   ││   \node_modules\knex\lib\knex-builder\Knex.js:16:28)                         ││   at Object.createConnection (C:\Users\speed\Documents\scraft\ambient\cms\   ││   node_modules\@strapi\database\dist\connection.js:43:33)                    ││   at new Database (C:\Users\speed\Documents\scraft\ambient\cms\node_module   ││   s\@strapi\database\dist\index.js:167:38)                                   ││   at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core   ││   \dist\Strapi.js:229:20                                                     ││   at Strapi.get (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\   ││   @strapi\core\dist\container.js:19:43)                                      ││   at get db (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@str   ││   api\core\dist\Strapi.js:82:21)                                             ││                                                                              │└──────────────────────────────────────────────────────────────────────────────┘

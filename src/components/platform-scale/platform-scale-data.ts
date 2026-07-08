@@ -2,6 +2,7 @@ export type GpxProduct = {
   id: string;
   label: string;
   description: string;
+  chip_image?: any;
 };
 
 export const GPX_PRODUCTS: GpxProduct[] = [

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { RepelDots } from "../shared/RepelDots";
 import { Corners } from "../shared/Corners";
@@ -11,7 +12,13 @@ const cornerRight = "/hero/corner-tag-2.svg";
 const ctaDot = "/navbar/cta-dot.svg";
 const ctaTextClass = `${interRegular.className} text-[16px] leading-[normal] font-normal`;
 
-export function LatestNews() {
+export function LatestNews({ data }: { data?: any }) {
+  const heading = data?.heading || "Latest from Ambient";
+  const subtitle =
+    data?.subtitle ||
+    "Ambient works with partners across silicon, development, distribution, and system integration, helping teams move from evaluation to deployment with confidence";
+  const ctaLabel = data?.cta_label || "Explore more";
+  const ctaHref = data?.cta_href || "/news-listing";
   return (
     <section
       className="relative mt-[150px] flex w-full justify-center overflow-x-clip bg-black max-[1023px]:mt-[24px]"
@@ -34,7 +41,7 @@ export function LatestNews() {
                 }}
                 data-node-id="2379:1285"
               >
-                Latest from Ambient
+                {heading}
               </h2>
 
               <Corner
@@ -68,9 +75,7 @@ export function LatestNews() {
                 className={`${interRegular.className} relative col-start-1 row-start-1 mt-[94px] ml-0 w-[600px] text-center text-[18px] leading-[27px] font-normal text-white not-italic [word-break:break-word]`}
                 data-node-id="2379:1290"
               >
-                Ambient works with partners across silicon, development,
-                distribution, and system integration, helping teams move from
-                evaluation to deployment with confidence
+                {subtitle}
               </p>
             </div>
           </div>
@@ -79,13 +84,28 @@ export function LatestNews() {
             className="flex w-full shrink-0 items-center gap-[20px]"
             data-node-id="2379:1291"
           >
-            {LATEST_NEWS_ARTICLES.map((article) => (
+            {(data?.cards && data.cards.length > 0
+              ? data.cards.map((c: any, index: number) => {
+                  const fallback = LATEST_NEWS_ARTICLES[index % LATEST_NEWS_ARTICLES.length];
+                  return {
+                    nodeId: `cms-news-card-${index}`,
+                    title: c.title || fallback.title,
+                    excerpt: c.body || fallback.excerpt,
+                    category: fallback.category,
+                    categoryOffsetX: fallback.categoryOffsetX,
+                    date: fallback.date,
+                    href: fallback.href,
+                    imageSrc: mediaUrl(c.image) || fallback.imageSrc,
+                  };
+                })
+              : LATEST_NEWS_ARTICLES
+            ).map((article: any) => (
               <LatestNewsCard key={article.nodeId} {...article} />
             ))}
           </div>
 
           <a
-            href="/news-listing"
+            href={ctaHref}
             className="relative flex h-[44px] w-[186px] shrink-0 items-center justify-center gap-[10px] shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]"
             data-node-id="2379:1381"
             data-name="Cta"
@@ -100,7 +120,7 @@ export function LatestNews() {
             <p
               className={`${ctaTextClass} relative z-10 shrink-0 whitespace-nowrap text-white uppercase not-italic [word-break:break-word]`}
             >
-              Explore more
+              {ctaLabel}
             </p>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -151,7 +171,7 @@ export function LatestNews() {
 
       {/* MOBILE (<1024px) — dedicated layout, desktop is untouched above */}
       <div className="relative w-full min-[1024px]:hidden">
-        <LatestNewsMobile />
+        <LatestNewsMobile data={data} />
       </div>
     </section>
   );

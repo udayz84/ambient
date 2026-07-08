@@ -8,10 +8,57 @@ import {
   DNA_BG_GRADIENT,
   GLASS_PANEL_VISIBLE_BORDER_CLASS,
 } from "./careers-shared";
+import { mediaUrl } from "@/lib/strapi";
 
 const CHIP_FADE_IN_CLASS = "animate-hero-text-fade-in opacity-0";
 
-export function CareersDna() {
+const DNA_HEADING_FALLBACK = "Driven by physics.\nDefined by our DNA.";
+const DNA_SUBTITLE_FALLBACK = "This is how we work, build, and solve at Ambient.";
+
+const DNA_PANEL_FALLBACKS = [
+  {
+    title: "Grounded in Science",
+    description:
+      "You work from first principles. Every decision you make is expected to be backed by data, validation, and a clear understanding of the underlying system.",
+  },
+  {
+    title: "Stay Curious. Stay Skeptical.",
+    description:
+      "You are encouraged to question, challenge, and refine. Strong thinking, clear reasoning, and continuous learning are expected at every stage of the work.",
+  },
+  {
+    title: "Chase the Impossible",
+    description:
+      "You take on problems that don't have predefined solutions. The expectation is not iteration, but pushing beyond accepted limits and building what doesn't yet exist.",
+  },
+  {
+    title: "Build for Everyone",
+    description:
+      "Your work is not isolated. You build systems that must scale across real-world environments, constraints, and users, making advanced technology practical and usable.",
+  },
+  {
+    title: "Protect What Powers Us",
+    description:
+      "You design with power as a constraint from day one. Efficiency is not an afterthought, it is a core part of how you think, build, and optimize systems.",
+  },
+];
+
+export function CareersDna({ data }: { data?: any }) {
+  const headingText = data?.heading || DNA_HEADING_FALLBACK;
+  const headingLines = headingText.split("\n");
+  const subtitle = data?.subtitle || DNA_SUBTITLE_FALLBACK;
+  const bgImg =
+    mediaUrl(data?.background_image) || "/careers/dna-section-bg.png";
+  const chipBg = mediaUrl(data?.chip_background) || "/careers/chip-bg.png";
+  const chipObject =
+    mediaUrl(data?.chip_object) || "/careers/chip-object.png";
+  const strapiPanels: any[] =
+    data?.panels && Array.isArray(data.panels) ? data.panels : [];
+  const panels = DNA_PANEL_FALLBACKS.map((fallback, i) => ({
+    title: strapiPanels[i]?.title || fallback.title,
+    description: strapiPanels[i]?.description || fallback.description,
+  }));
+
   return (
     <section
       className="absolute top-[1379px] left-1/2 z-10 h-[950px] w-full -translate-x-1/2 overflow-hidden"
@@ -26,7 +73,7 @@ export function CareersDna() {
         <div className="absolute inset-0 overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/careers/dna-section-bg.png"
+            src={bgImg}
             alt=""
             className="absolute size-full max-w-none"
           />
@@ -49,8 +96,14 @@ export function CareersDna() {
               gradientDeg="105.739deg"
               className="text-center whitespace-nowrap"
             >
-              <p className="mb-0 leading-[49px]">Driven by physics.</p>
-              <p className="leading-[49px]">Defined by our DNA.</p>
+              {headingLines.map((line: string, i: number) => (
+                <p
+                  key={i}
+                  className={i === 0 ? "mb-0 leading-[49px]" : "leading-[49px]"}
+                >
+                  {line}
+                </p>
+              ))}
             </GradientTitle>
             <CornerDecor />
           </div>
@@ -58,7 +111,7 @@ export function CareersDna() {
             className={`${interRegular.className} shrink-0 text-center text-[18px] leading-[27px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic [word-break:break-word]`}
             data-node-id="2379:8853"
           >
-            This is how we work, build, and solve at Ambient.
+            {subtitle}
           </p>
         </div>
 
@@ -69,31 +122,31 @@ export function CareersDna() {
           <div className="flex w-[389.999px] flex-col gap-[40px]" data-node-id="2379:8855">
             <CareersGlassPanel
               nodeId="2379:8856"
-              title="Grounded in Science"
-              description="You work from first principles. Every decision you make is expected to be backed by data, validation, and a clear understanding of the underlying system."
+              title={panels[0].title}
+              description={panels[0].description}
               borderClassName={GLASS_PANEL_VISIBLE_BORDER_CLASS}
             />
             <CareersGlassPanel
               nodeId="2379:8864"
-              title="Stay Curious. Stay Skeptical."
-              description="You are encouraged to question, challenge, and refine. Strong thinking, clear reasoning, and continuous learning are expected at every stage of the work."
+              title={panels[1].title}
+              description={panels[1].description}
               borderClassName={GLASS_PANEL_VISIBLE_BORDER_CLASS}
             />
           </div>
 
-          <CareersDnaChipImage />
+          <CareersDnaChipImage chipBg={chipBg} chipObject={chipObject} />
 
           <div className="flex w-[389.999px] flex-col gap-[40px]" data-node-id="2379:8876">
             <CareersGlassPanel
               nodeId="2379:8877"
-              title="Chase the Impossible"
-              description="You take on problems that don't have predefined solutions. The expectation is not iteration, but pushing beyond accepted limits and building what doesn't yet exist."
+              title={panels[2].title}
+              description={panels[2].description}
               borderClassName={GLASS_PANEL_VISIBLE_BORDER_CLASS}
             />
             <CareersGlassPanel
               nodeId="2379:8885"
-              title="Build for Everyone"
-              description="Your work is not isolated. You build systems that must scale across real-world environments, constraints, and users, making advanced technology practical and usable."
+              title={panels[3].title}
+              description={panels[3].description}
               borderClassName={GLASS_PANEL_VISIBLE_BORDER_CLASS}
             />
           </div>
@@ -101,8 +154,8 @@ export function CareersDna() {
 
         <CareersGlassPanel
           nodeId="2379:8894"
-          title="Protect What Powers Us"
-          description="You design with power as a constraint from day one. Efficiency is not an afterthought, it is a core part of how you think, build, and optimize systems."
+          title={panels[4].title}
+          description={panels[4].description}
           height="min-h-[126px]"
           className="w-[1204px]"
           borderClassName={GLASS_PANEL_VISIBLE_BORDER_CLASS}
@@ -112,7 +165,13 @@ export function CareersDna() {
   );
 }
 
-function CareersDnaChipImage() {
+function CareersDnaChipImage({
+  chipBg,
+  chipObject,
+}: {
+  chipBg: string;
+  chipObject: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -149,7 +208,7 @@ function CareersDnaChipImage() {
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/careers/chip-bg.png"
+          src={chipBg}
           alt=""
           className="absolute top-[-4.24%] left-[-10.68%] h-[108.47%] w-[121.37%] max-w-none object-cover"
         />
@@ -161,7 +220,7 @@ function CareersDnaChipImage() {
         <div className="relative h-full w-full rotate-[1.22deg] overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/careers/chip-object.png"
+            src={chipObject}
             alt=""
             className="absolute top-[-28.9%] left-[-44.69%] h-[127.84%] w-[144.32%] max-w-none object-cover"
           />

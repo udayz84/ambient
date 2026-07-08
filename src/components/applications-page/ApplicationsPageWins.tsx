@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { gilroyBold, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { mediaUrl } from "@/lib/strapi";
 
 const TILE_BG =
   "radial-gradient(circle at 50% 50%, #394a36, #2b3629 50%, #1d221c)";
@@ -19,6 +20,8 @@ const BG_OVERLAY =
 
 const STAT_GRADIENT =
   "linear-gradient(to bottom, rgb(255, 255, 255) 37.312%, rgba(255, 255, 255, 0))";
+
+const FALLBACK_HEADING = "The empirical advantage.";
 
 function FeatureRow() {
   const tile = (
@@ -82,9 +85,10 @@ type WinCardProps = {
   stat: string;
   statLabel: string;
   visual: React.ReactNode;
+  body: string;
 };
 
-function WinCard({ label, stat, statLabel, visual }: WinCardProps) {
+function WinCard({ label, stat, statLabel, visual, body }: WinCardProps) {
   return (
     <div
       className="relative h-[640px] w-[426px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black"
@@ -124,7 +128,7 @@ function WinCard({ label, stat, statLabel, visual }: WinCardProps) {
         <p
           className={`${interRegular.className} text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)]`}
         >
-          {BODY}
+          {body}
         </p>
         <FeatureRow />
       </div>
@@ -132,7 +136,7 @@ function WinCard({ label, stat, statLabel, visual }: WinCardProps) {
   );
 }
 
-function WinCardMobile({ label, stat, statLabel, mobileImg }: { label: string; stat: string; statLabel: string; mobileImg: string }) {
+function WinCardMobile({ label, stat, statLabel, mobileImg, body }: { label: string; stat: string; statLabel: string; mobileImg: string; body: string }) {
   return (
     <div className="relative w-full max-w-[426px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black">
       <div className="relative h-[240px] w-full overflow-hidden">
@@ -153,7 +157,7 @@ function WinCardMobile({ label, stat, statLabel, mobileImg }: { label: string; s
           </p>
           <p className={`${gilroyMedium.className} text-[18px] leading-[22px] uppercase text-[#c5f3b5]`}>{statLabel}</p>
         </div>
-        <p className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)]`}>{BODY}</p>
+        <p className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)]`}>{body}</p>
         <FeatureRow />
       </div>
       <Corners />
@@ -229,31 +233,54 @@ function VisualAr() {
   );
 }
 
+const WIN_VISUALS = [
+  <VisualWearable key="wearable" />,
+  <VisualMedical key="medical" />,
+  <VisualAr key="ar" />,
+];
+
 const CARDS = [
   {
     label: "The Wearable Wins",
     stat: "99%",
     statLabel: "Accurate",
-    visual: <VisualWearable />,
+    visual: WIN_VISUALS[0],
     mobileImg: "/applications/wins-img-1.png",
   },
   {
     label: "The Medical/Safety Wins",
     stat: "6months",
     statLabel: "Battery",
-    visual: <VisualMedical />,
+    visual: WIN_VISUALS[1],
     mobileImg: "/applications/wins-img-2.png",
   },
   {
     label: "The AR/Vision Wins",
     stat: "Zero",
     statLabel: "Latency",
-    visual: <VisualAr />,
+    visual: WIN_VISUALS[2],
     mobileImg: "/applications/wins-img-3.png",
   },
 ];
 
-export function ApplicationsPageWins({ heading, description }: { heading?: string; description?: string }) {
+export function ApplicationsPageWins({ data }: { data?: any }) {
+  const heading = data?.heading || FALLBACK_HEADING;
+  const body = data?.body || BODY;
+  const bgImg = mediaUrl(data?.background_image) || "/applications/wins-bg.png";
+
+  const rawCards = Array.isArray(data?.cards) ? data.cards : [];
+  const cards =
+    rawCards.length > 0
+      ? rawCards.map((c: any, i: number) => ({
+          label: c?.label || CARDS[i]?.label || "",
+          stat: c?.stat || CARDS[i]?.stat || "",
+          statLabel: c?.stat_label || CARDS[i]?.statLabel || "",
+          visual: WIN_VISUALS[i] || WIN_VISUALS[0],
+          mobileImg:
+            mediaUrl(c?.image) || CARDS[i]?.mobileImg || "/applications/wins-img-1.png",
+        }))
+      : CARDS;
+
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -264,7 +291,7 @@ export function ApplicationsPageWins({ heading, description }: { heading?: strin
         <img
           alt=""
           aria-hidden
-          src="/applications/wins-bg.png"
+          src={bgImg}
           className="absolute inset-0 size-full object-cover"
         />
         <div
@@ -295,20 +322,21 @@ export function ApplicationsPageWins({ heading, description }: { heading?: strin
                 backgroundClip: "text",
               }}
             >
-              The empirical advantage.
+              {heading}
             </h2>
             <Corners />
           </div>
         </div>
 
         <div className="flex gap-[14px] mt-[80px]">
-          {CARDS.map((card) => (
+          {cards.map((card: any) => (
             <WinCard
               key={card.label}
               label={card.label}
               stat={card.stat}
               statLabel={card.statLabel}
               visual={card.visual}
+              body={body}
             />
           ))}
         </div>
@@ -336,19 +364,20 @@ export function ApplicationsPageWins({ heading, description }: { heading?: strin
                 backgroundClip: "text",
               }}
             >
-              The empirical advantage.
+              {heading}
             </h2>
             <Corners />
           </div>
         </div>
         <div className="flex w-full flex-col items-center gap-[24px]">
-          {CARDS.map((card) => (
+          {cards.map((card: any) => (
             <WinCardMobile
               key={card.label}
               label={card.label}
               stat={card.stat}
               statLabel={card.statLabel}
               mobileImg={card.mobileImg}
+              body={body}
             />
           ))}
         </div>

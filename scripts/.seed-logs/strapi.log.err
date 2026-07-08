@@ -1,0 +1,21 @@
+- Cleaning dist dir C:/Users/speed/Documents/scraft/ambient/cms/dist
+✔ Cleaning dist dir (34ms)
+- Loading Strapi
+Config file not loaded, extension must be one of .js,.json): admin.js.map
+Config file not loaded, extension must be one of .js,.json): cron.js.map
+Config file not loaded, extension must be one of .js,.json): database.js.map
+Config file not loaded, extension must be one of .js,.json): middlewares.js.map
+Config file not loaded, extension must be one of .js,.json): plugins.js.map
+Config file not loaded, extension must be one of .js,.json): server.js.map
+- Building build context
+✔ Building build context (2029ms)
+- Creating admin
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+✔ Creating admin (686ms)
+✔ Loading Strapi (6750ms)
+- Generating types
+✔ Generating types (1037ms)
+- Compiling TS
+- Cleaning dist dir C:/Users/speed/Documents/scraft/ambient/cms/dist
+✔ Cleaning dist dir (97ms)
+✔ Compiling TS (2604ms)

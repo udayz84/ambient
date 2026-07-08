@@ -9,7 +9,11 @@ import { ResourcesMobile } from "./ResourcesMobile";
 import { ResourcesNewsCta } from "./ResourcesNewsCta";
 import { RESOURCES_FOOTER_TOP, RESOURCES_NEWS_TOP } from "./resources-layout";
 
-export function ResourcesPageClient() {
+type ResourcesPageClientProps = {
+  data?: any;
+};
+
+export function ResourcesPageClient({ data }: ResourcesPageClientProps = {}) {
   const [extraHeight, setExtraHeight] = useState(0);
 
   return (
@@ -22,17 +26,17 @@ export function ResourcesPageClient() {
         data-name="Resources - Option 8"
       >
         <div className="relative mx-auto h-full w-full max-w-[1440px]">
-          <ResourcesHero />
-          <ResourcesFeatured />
-          <ResourcesBuilding />
-          <ResourcesContent onExtraHeightChange={setExtraHeight} />
-          <ResourcesNewsCta top={RESOURCES_NEWS_TOP + extraHeight} />
+          <ResourcesHero data={data?.hero} />
+          <ResourcesFeatured data={data?.featured} />
+          <ResourcesBuilding data={data?.building} />
+          <ResourcesContent data={data?.content} onExtraHeightChange={setExtraHeight} />
+          <ResourcesNewsCta top={RESOURCES_NEWS_TOP + extraHeight} data={data?.news_cta} />
         </div>
       </div>
 
       {/* MOBILE (<1024px) — dedicated stacked layout */}
       <div className="relative -mt-[78px] w-full bg-black min-[1024px]:hidden">
-        <ResourcesMobile />
+        <ResourcesMobile data={data} />
       </div>
     </>
   );

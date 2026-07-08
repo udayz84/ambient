@@ -1,3 +1,6 @@
+"use client";
+
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyExtraBold, gilroySemiBold } from "../hero/fonts";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -50,9 +53,33 @@ const variants = {
   }),
 };
 
-export function ApplicationsHeroVisual({ activeTab, direction = 1 }: { activeTab: string, direction?: number }) {
+export function ApplicationsHeroVisual({
+  tabs = [],
+  activeTab,
+  direction = 1,
+}: {
+  tabs?: any[];
+  activeTab: string;
+  direction?: number;
+}) {
+  const strapiHeroImage = (label: string) => {
+    const tab = tabs.find(
+      (t) => (t?.label || "").toUpperCase() === label.toUpperCase()
+    );
+    return tab ? mediaUrl(tab?.hero_image) : null;
+  };
+  const strapiWatermark = (label: string) => {
+    const tab = tabs.find(
+      (t) => (t?.label || "").toUpperCase() === label.toUpperCase()
+    );
+    return tab?.watermark_text;
+  };
+
   const renderContent = () => {
-    const imgSrc = HERO_IMAGES[activeTab] || "/applications/car-hero.png";
+    const imgSrc =
+      strapiHeroImage(activeTab) ||
+      HERO_IMAGES[activeTab] ||
+      "/applications/car-hero.png";
 
     if (activeTab === "INDUSTRIAL") {
       return (
@@ -62,7 +89,7 @@ export function ApplicationsHeroVisual({ activeTab, direction = 1 }: { activeTab
             style={{ backgroundImage: industrialWatermarkGradient }}
             data-node-id="2901:1272"
           >
-            Industry 4.0
+            {strapiWatermark("INDUSTRIAL") || "Industry 4.0"}
           </p>
 
           <div
@@ -142,7 +169,7 @@ export function ApplicationsHeroVisual({ activeTab, direction = 1 }: { activeTab
             style={{ backgroundImage: smartHomeWatermarkGradient }}
             data-node-id="2901:1480"
           >
-            Smart Home
+            {strapiWatermark("SMART HOMES") || "Smart Home"}
           </p>
 
           <div
@@ -222,7 +249,7 @@ export function ApplicationsHeroVisual({ activeTab, direction = 1 }: { activeTab
             style={{ backgroundImage: wearablesWatermarkGradient }}
             data-node-id="2901:1580"
           >
-            Wearables
+            {strapiWatermark("WEARABLES") || "Wearables"}
           </p>
 
           <div
@@ -302,7 +329,7 @@ export function ApplicationsHeroVisual({ activeTab, direction = 1 }: { activeTab
             style={{ backgroundImage: dronesWatermarkGradient }}
             data-node-id="2901:1895"
           >
-            {"Drones "}
+            {strapiWatermark("DRONES") || "Drones "}
           </p>
 
           <div
@@ -382,7 +409,7 @@ export function ApplicationsHeroVisual({ activeTab, direction = 1 }: { activeTab
             style={{ backgroundImage: agricultureWatermarkGradient }}
             data-node-id="2901:1999"
           >
-            Agriculture
+            {strapiWatermark("AGRICULTURE") || "Agriculture"}
           </p>
 
           <div

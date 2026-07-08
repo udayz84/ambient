@@ -18,6 +18,24 @@ const GREEN_CTA_SHADOW =
 const INITIAL_VISIBLE_COUNT = 6;
 const LOAD_MORE_COUNT = 3;
 
+const FALLBACK_HERO_TITLE = "Explore whitepapers,\narchitectural deep-\ndives, and\nperformance data";
+const FALLBACK_SEARCH_PLACEHOLDER = "Search architecture, case studies, or GPX...";
+const FALLBACK_CONTACT_TEXT = "Contact Us";
+const FALLBACK_CONTACT_HREF = "/contact";
+const FALLBACK_FEATURED_HEADING = "Featured Resources";
+const FALLBACK_FEATURED_TITLE = "Re-architecting the Physics of AI Compute.";
+const FALLBACK_FEATURED_DESC =
+  "Standard chips waste time translating AI workloads. Our architecture processes matrix math natively for high-density performance.";
+const FALLBACK_FEATURED_CTA = "DOWNLOAD PDF";
+const FALLBACK_BUILDING_HEADING = "Building with\nAmbient?";
+const FALLBACK_BUILDING_SUBTITLE =
+  "Access the ModelForge SDK, API references, model compilation guides, and hardware documentation.";
+const FALLBACK_BUILDING_CTA = "GO TO DEVELOPER HUB";
+const FALLBACK_LOAD_MORE_LABEL = "Load More Resources";
+const FALLBACK_NEWS_HEADING =
+  "Looking for latest developments, events, and announcements?";
+const FALLBACK_NEWS_CTA = "VISIT NEWS PAGE";
+
 function gradient(deg: string) {
   return `linear-gradient(${deg}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`;
 }
@@ -104,7 +122,16 @@ function WhiteCta({
 }
 
 /* ---------------------------------- HERO ---------------------------------- */
-function ResourcesHeroMobile() {
+function ResourcesHeroMobile({ data }: { data?: any } = {}) {
+  const titleRaw = (data?.title as string) || FALLBACK_HERO_TITLE;
+  const titleLines = titleRaw.split("\n");
+  const placeholder =
+    (data?.search_placeholder as string) || FALLBACK_SEARCH_PLACEHOLDER;
+  const contactText =
+    (data?.contact_link_text as string) || FALLBACK_CONTACT_TEXT;
+  const contactHref =
+    (data?.contact_link_href as string) || FALLBACK_CONTACT_HREF;
+
   return (
     <section
       className="relative flex w-full flex-col items-center px-[24px] pb-[60px] pt-[130px]"
@@ -126,13 +153,12 @@ function ResourcesHeroMobile() {
         className={`${gilroyMedium.className} relative w-full bg-clip-text text-left text-[36px] leading-[40px] font-medium text-transparent [word-break:break-word] not-italic pt-[45px]`}
         style={{ backgroundImage: gradient("118.129deg") }}
       >
-        Explore whitepapers,
-        <br />
-        architectural deep-
-        <br />
-        dives, and
-        <br />
-        performance data
+        {titleLines.map((line, i) => (
+          <span key={i}>
+            {i > 0 && <br />}
+            {line}
+          </span>
+        ))}
       </h1>
 
       <div className="relative mt-[32px] flex h-[48px] w-full flex-row items-stretch border-[0.5px] border-solid border-[rgba(255,255,255,0.4)] bg-[rgba(0,0,0,0.3)]">
@@ -140,7 +166,7 @@ function ResourcesHeroMobile() {
           <input
             type="search"
             aria-label="Search resources"
-            placeholder="Search architecture, case studies, or GPX..."
+            placeholder={placeholder}
             className={`${interRegular.className} h-full w-full border-0 bg-transparent p-0 text-[12px] font-normal text-white outline-none placeholder:text-white/70 not-italic`}
           />
         </div>
@@ -159,8 +185,8 @@ function ResourcesHeroMobile() {
           className={`${interRegular.className} text-[13px] leading-[20px] font-normal text-white/90 not-italic`}
         >
           Can&apos;t find what you&apos;re looking for?{" "}
-          <Link href="/contact" className="text-[#53d824]">
-            Contact Us
+          <Link href={contactHref} className="text-[#53d824]">
+            {contactText}
           </Link>
         </p>
       </div>
@@ -224,7 +250,20 @@ function ResourcesHeroMobile() {
 }
 
 /* ------------------------------- FEATURED --------------------------------- */
-function ResourcesFeaturedMobile() {
+function ResourcesFeaturedMobile({ data }: { data?: any } = {}) {
+  const heading = (data?.heading as string) || FALLBACK_FEATURED_HEADING;
+  const strapiCards = Array.isArray(data?.cards) ? data.cards : [];
+  const cards = FEATURED_RESOURCES.map((layout, i) => {
+    const card = strapiCards[i] || {};
+    return {
+      ...layout,
+      badgeLabel: (card.badge_label as string) || layout.badgeLabel,
+      title: (card.title as string) || FALLBACK_FEATURED_TITLE,
+      description: (card.description as string) || FALLBACK_FEATURED_DESC,
+      ctaLabel: (card.cta_label as string) || FALLBACK_FEATURED_CTA,
+    };
+  });
+
   return (
     <section
       className="relative flex w-full flex-col py-[48px]"
@@ -233,11 +272,11 @@ function ResourcesFeaturedMobile() {
       <h2
         className={`${gilroyMedium.className} px-[24px] mb-[28px] text-[36px] leading-[36px] font-medium text-white not-italic text-center`}
       >
-        Featured Resources
+        {heading}
       </h2>
 
       <div className="flex w-full snap-x snap-mandatory gap-[10px] overflow-x-auto px-[calc(50%-124px)] pb-[32px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {FEATURED_RESOURCES.map((card) => (
+        {cards.map((card) => (
           <article
             key={card.nodeId}
             className="relative flex w-[248px] shrink-0 snap-center flex-col bg-[#191919] border-[0.5px] border-solid border-[rgba(255,255,255,0.3)] p-[10px]"
@@ -266,12 +305,10 @@ function ResourcesFeaturedMobile() {
             <div className="flex w-full flex-col items-start gap-[24px] p-[16px]">
               <div className="flex w-full flex-col items-start gap-[12px]">
                 <h3 className={`${gilroyMedium.className} w-[195px] text-[16px] leading-[21px] text-white opacity-90`}>
-                  Re-architecting the Physics of AI Compute.
+                  {card.title}
                 </h3>
                 <p className={`${interRegular.className} w-[195px] text-[12px] font-normal leading-[15px] text-[#a4a4a4] opacity-90`}>
-                  Standard chips waste time translating AI workloads. Our
-                  architecture processes matrix math natively for high-density
-                  performance.
+                  {card.description}
                 </p>
               </div>
 
@@ -280,7 +317,7 @@ function ResourcesFeaturedMobile() {
                 <div className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
                 <Corners />
                 <span className={`${gilroyMedium.className} relative text-[12px] uppercase leading-[28px] text-white`}>
-                  DOWNLOAD PDF
+                  {card.ctaLabel}
                 </span>
               </div>
             </div>
@@ -293,7 +330,12 @@ function ResourcesFeaturedMobile() {
 
 
 /* ------------------------------- BUILDING --------------------------------- */
-function ResourcesBuildingMobile() {
+function ResourcesBuildingMobile({ data }: { data?: any } = {}) {
+  const headingRaw = (data?.heading as string) || FALLBACK_BUILDING_HEADING;
+  const headingLines = headingRaw.split("\n");
+  const subtitle = (data?.subtitle as string) || FALLBACK_BUILDING_SUBTITLE;
+  const ctaLabel = (data?.cta_label as string) || FALLBACK_BUILDING_CTA;
+
   return (
     <section
       className="relative flex w-full flex-col items-center justify-center overflow-hidden px-[24px] py-[64px]"
@@ -316,13 +358,17 @@ function ResourcesBuildingMobile() {
           className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[40px] font-medium text-transparent [word-break:break-word] not-italic`}
           style={{ backgroundImage: gradient("107.454deg") }}
         >
-          Building with<br />Ambient?
+          {headingLines.map((line, i) => (
+            <span key={i}>
+              {i > 0 && <br />}
+              {line}
+            </span>
+          ))}
         </h2>
       </div>
 
       <p className={`${interRegular.className} relative mt-[16px] max-w-[320px] text-center text-[14px] leading-[22px] font-normal text-white/60 not-italic`}>
-        Access the ModelForge SDK, API references, model compilation guides, and
-        hardware documentation.
+        {subtitle}
       </p>
 
       <div className="relative mt-[32px] w-[231px]">
@@ -340,7 +386,7 @@ function ResourcesBuildingMobile() {
             }}
           />
           <span className={`${gilroyMedium.className} relative text-[14px] leading-[28px] font-medium uppercase whitespace-nowrap text-[#151515] not-italic`}>
-            GO TO DEVELOPER HUB
+            {ctaLabel}
           </span>
         </button>
       </div>
@@ -363,8 +409,39 @@ const CategoryConnector = ({ isBeforeActive, isAfterActive }: { isBeforeActive: 
 };
 
 /* -------------------------------- CONTENT --------------------------------- */
-function ResourcesContentMobile() {
-  const [activeCategory, setActiveCategory] = useState("webinar");
+type MobileCategory = {
+  id: string;
+  label: string;
+  active: boolean;
+};
+
+function ResourcesContentMobile({ data }: { data?: any } = {}) {
+  const strapiCats = Array.isArray(data?.categories) ? data.categories : [];
+  const categories: MobileCategory[] =
+    strapiCats.length > 0
+      ? strapiCats.map((c: any, i: number) => {
+          const fallback = RESOURCE_CATEGORIES[i] || RESOURCE_CATEGORIES[0];
+          return {
+            id: (c?.category_id as string) || fallback.id,
+            label: (c?.label as string) || fallback.label,
+            active: Boolean(c?.is_active),
+          };
+        })
+      : RESOURCE_CATEGORIES.map((c) => ({
+          id: c.id,
+          label: c.label,
+          active: "active" in c ? Boolean(c.active) : false,
+        }));
+  const initialActiveId =
+    categories.find((c) => c.active)?.id || categories[0]?.id || "webinar";
+  const loadMoreCount =
+    typeof data?.load_more_count === "number"
+      ? data.load_more_count
+      : LOAD_MORE_COUNT;
+  const loadMoreLabel =
+    (data?.load_more_label as string) || FALLBACK_LOAD_MORE_LABEL;
+
+  const [activeCategory, setActiveCategory] = useState(initialActiveId);
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT);
 
   const visibleArticles = RESOURCE_ARTICLES.slice(0, visibleCount);
@@ -376,14 +453,14 @@ function ResourcesContentMobile() {
       aria-label="Resource library"
     >
       <div className="flex w-full items-center overflow-x-auto pb-[16px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        <CategoryConnector isBeforeActive={activeCategory === RESOURCE_CATEGORIES[0].id} isAfterActive={false} />
-        {RESOURCE_CATEGORIES.map((category, index) => {
+        <CategoryConnector isBeforeActive={activeCategory === categories[0]?.id} isAfterActive={false} />
+        {categories.map((category, index) => {
           const isActive = activeCategory === category.id;
           const isAfterActive = isActive;
-          const isBeforeNextActive = index < RESOURCE_CATEGORIES.length - 1 && activeCategory === RESOURCE_CATEGORIES[index + 1].id;
+          const isBeforeNextActive = index < categories.length - 1 && activeCategory === categories[index + 1].id;
 
           return (
-            <React.Fragment key={category.id}>
+            <React.Fragment key={`${category.id}-${index}`}>
               <button
                 type="button"
                 onClick={() => setActiveCategory(category.id)}
@@ -459,7 +536,7 @@ function ResourcesContentMobile() {
           <button
             type="button"
             onClick={() =>
-              setVisibleCount((c) => Math.min(c + LOAD_MORE_COUNT, RESOURCE_ARTICLES.length))
+              setVisibleCount((c) => Math.min(c + loadMoreCount, RESOURCE_ARTICLES.length))
             }
             className={`${interSemiBold.className} relative flex h-[48px] w-full items-center justify-center overflow-hidden ${GREEN_CTA_SHADOW}`}
           >
@@ -472,7 +549,7 @@ function ResourcesContentMobile() {
               className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
             />
             <span className="relative text-[13px] leading-[normal] font-semibold uppercase whitespace-nowrap text-white not-italic">
-              Load More Resources
+              {loadMoreLabel}
             </span>
             <Corners />
           </button>
@@ -483,7 +560,11 @@ function ResourcesContentMobile() {
 }
 
 /* ------------------------------- NEWS CTA --------------------------------- */
-function ResourcesNewsCtaMobile() {
+function ResourcesNewsCtaMobile({ data }: { data?: any } = {}) {
+  const heading = (data?.heading as string) || FALLBACK_NEWS_HEADING;
+  const ctaLabel = (data?.cta_label as string) || FALLBACK_NEWS_CTA;
+  const ctaHref = (data?.cta_href as string) || "/news-listing";
+
   return (
     <section
       className="relative z-10 flex w-full flex-col items-center gap-[21px] px-[24px] pt-[110px] overflow-visible bg-transparent -mb-[226px]"
@@ -497,13 +578,13 @@ function ResourcesNewsCtaMobile() {
           className={`${gilroyMedium.className} w-[313px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
           style={{ backgroundImage: gradient("98.0026deg") }}
         >
-          Looking for latest developments, events, and announcements?
+          {heading}
         </h2>
       </div>
 
       <div className="relative w-[158px] z-10">
-        <button
-          type="button"
+        <a
+          href={ctaHref}
           className={`relative flex h-[48px] w-full items-center justify-center overflow-hidden ${GREEN_CTA_SHADOW}`}
         >
           <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
@@ -517,23 +598,23 @@ function ResourcesNewsCtaMobile() {
           />
           <span className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
           <span className={`${gilroyMedium.className} relative text-[14px] leading-[28px] font-medium uppercase whitespace-nowrap text-[#121212] not-italic`}>
-            VISIT NEWS PAGE
+            {ctaLabel}
           </span>
-        </button>
+        </a>
       </div>
     </section>
   );
 }
 
 /* --------------------------------- PAGE ----------------------------------- */
-export function ResourcesMobile() {
+export function ResourcesMobile({ data }: { data?: any } = {}) {
   return (
     <div className="flex w-full flex-col">
-      <ResourcesHeroMobile />
-      <ResourcesFeaturedMobile />
-      <ResourcesBuildingMobile />
-      <ResourcesContentMobile />
-      <ResourcesNewsCtaMobile />
+      <ResourcesHeroMobile data={data?.hero} />
+      <ResourcesFeaturedMobile data={data?.featured} />
+      <ResourcesBuildingMobile data={data?.building} />
+      <ResourcesContentMobile data={data?.content} />
+      <ResourcesNewsCtaMobile data={data?.news_cta} />
     </div>
   );
 }

@@ -3,7 +3,7 @@
   "collectionName": "global_settings",
   "info": {
     "singularName": "global-settings",
-    "pluralName": "global-settings",
+    "pluralName": "global-settings-list",
     "displayName": "Global Settings",
     "description": "Site-wide brand, header, footer, newsletter, contact details, and default SEO"
   },

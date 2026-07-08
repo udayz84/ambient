@@ -13,8 +13,19 @@ const GLASS_BACKGROUND = `
   linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(10, 15, 20, 0.3) 25%, rgba(10, 15, 20, 0.4) 100%)
 `;
 
-export function ContactResources() {
+const DEFAULT_HEADING = "Looking for immediate resources?";
+
+const DEFAULT_CTAS = [
+  { label: "Download Datasheets & SDK", href: "#", variant: "green" },
+  { label: "Download Press Kit", href: "#", variant: "white" },
+  { label: "Case Studies & Whitepapers", href: "#", variant: "white" },
+] as const;
+
+export function ContactResources({ data }: { data?: any }) {
   const [isVisible, setIsVisible] = useState(false);
+  const heading = data?.heading || DEFAULT_HEADING;
+  const ctas: ReadonlyArray<{ label: string; href: string; variant: string }> =
+    Array.isArray(data?.ctas) && data.ctas.length > 0 ? data.ctas : DEFAULT_CTAS;
 
   useEffect(() => {
     const timer = window.setTimeout(() => setIsVisible(true), RESOURCES_DELAY_MS);
@@ -38,23 +49,35 @@ export function ContactResources() {
         className={`${gilroyMedium.className} w-full shrink-0 text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
         data-node-id="2379:8416"
       >
-        Looking for immediate resources?
+        {heading}
       </p>
       <div className="flex shrink-0 items-start gap-[20px]" data-node-id="2379:8421">
-        <GreenCtaButton width="270px" href="#">
-          Download Datasheets & SDK
-        </GreenCtaButton>
-        <WhiteResourceCta>Download Press Kit</WhiteResourceCta>
-        <WhiteResourceCta>Case Studies & Whitepapers</WhiteResourceCta>
+        {ctas.map((cta, index) =>
+          cta.variant === "green" ? (
+            <GreenCtaButton key={index} width="270px" href={cta.href || "#"}>
+              {cta.label}
+            </GreenCtaButton>
+          ) : (
+            <WhiteResourceCta key={index} href={cta.href || "#"}>
+              {cta.label}
+            </WhiteResourceCta>
+          )
+        )}
       </div>
     </div>
     </>
   );
 }
 
-function WhiteResourceCta({ children }: { children: ReactNode }) {
+function WhiteResourceCta({
+  children,
+  href = "#",
+}: {
+  children: ReactNode;
+  href?: string;
+}) {
   return (
-    <WhiteCtaButton href="#" className="w-[270px]">
+    <WhiteCtaButton href={href} className="w-[270px]">
       {children}
     </WhiteCtaButton>
   );

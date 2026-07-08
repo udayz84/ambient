@@ -1,6 +1,13 @@
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { CORNER_LEFT, CORNER_RIGHT, MODELFORGE_TITLE_GRADIENT, CARD_BG, CARD_BORDER } from "./dvk-data";
+import { mediaUrl } from "@/lib/strapi";
+
+const DEFAULT_HEADING = "Powered by ModelForge.";
+const DEFAULT_SUBTITLE =
+  "Don't let software be the bottleneck. The Cranium DVK is fully supported by our unified software toolchain, designed to take you from a standard TensorFlow model to on-silicon inference in under 15 minutes.";
+const DEFAULT_TOOLCHAIN_LABELS = "RTOS\nDRIVERS\nCOMPILER";
+const DEFAULT_CARD_GLOW = "/dvk/card-glow.png";
 
 /**
  * Figma 2761:3009 — "Powered by ModelForge." section title.
@@ -9,7 +16,13 @@ import { CORNER_LEFT, CORNER_RIGHT, MODELFORGE_TITLE_GRADIENT, CARD_BG, CARD_BOR
  *
  * Header for the ModelForge section — additional content can be appended below.
  */
-export function DvkModelForge() {
+export function DvkModelForge({ data }: { data?: any }) {
+  const heading = data?.heading || DEFAULT_HEADING;
+  const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
+  const toolchainLabels = (data?.toolchain_labels || DEFAULT_TOOLCHAIN_LABELS)
+    .split("\n")
+    .filter(Boolean);
+  const cardGlow = mediaUrl(data?.card_glow_image) || DEFAULT_CARD_GLOW;
   return (
     <div
       className="relative flex w-full flex-col items-center justify-center gap-[24px]"
@@ -44,7 +57,7 @@ export function DvkModelForge() {
           }}
           data-node-id="2761:3011"
         >
-          Powered by ModelForge.
+          {heading}
         </h2>
       </div>
 
@@ -54,9 +67,7 @@ export function DvkModelForge() {
         style={{ width: 650 }}
         data-node-id="2761:3016"
       >
-        Don&apos;t let software be the bottleneck. The Cranium DVK is fully
-        supported by our unified software toolchain, designed to take you from a
-        standard TensorFlow model to on-silicon inference in under 15 minutes.
+        {subtitle}
       </p>
 
       {/* Toolchain Diagram */}
@@ -107,7 +118,7 @@ export function DvkModelForge() {
           <div className="relative flex h-[390px] w-[389px] items-center justify-center mt-[-40px]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/dvk/card-glow.png"
+              src={cardGlow}
               alt=""
               className="pointer-events-none absolute h-[600px] w-[600px] max-w-none object-contain opacity-70"
             />
@@ -120,7 +131,7 @@ export function DvkModelForge() {
               Pre-integrated RTOS & Eclipse-based Unified Build
             </p>
             <div className="mt-[24px] flex gap-[12px]">
-              {["RTOS", "DRIVERS", "COMPILER"].map((tag) => (
+              {toolchainLabels.map((tag: string) => (
                 <div
                   key={tag}
                   className="flex items-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[16px] py-[8px] font-mono text-[12px]"

@@ -2,14 +2,37 @@ import { gilroyMedium } from "../hero/fonts";
 import { RepelDots } from "../shared/RepelDots";
 import { Corners } from "../shared/Corners";
 
-export function MeasuredProofCtas() {
+type CtaItem = {
+  label?: string;
+  href?: string;
+  variant?: string;
+};
+
+export function MeasuredProofCtas({ data }: { data?: any }) {
+  const ctas: CtaItem[] = Array.isArray(data?.ctas) ? data.ctas : [];
+
+  const find = (variant: string) =>
+    ctas.find((c) => (c?.variant || "").toLowerCase() === variant);
+
+  const primary =
+    find("primary") ||
+    { label: "SEE WHAT WE CAN DO", href: "/technology", variant: "primary" };
+  const secondary =
+    find("secondary") ||
+    { label: "Explore ambient store", href: "/products", variant: "secondary" };
+
+  const primaryLabel = primary.label || "SEE WHAT WE CAN DO";
+  const primaryHref = primary.href || "/technology";
+  const secondaryLabel = secondary.label || "Explore ambient store";
+  const secondaryHref = secondary.href || "/products";
+
   return (
     <div
       className="absolute top-[812.5px] left-1/2 flex -translate-x-1/2 gap-[20px] items-center"
       data-node-id="2379:1485"
     >
       <a
-        href="/technology"
+        href={primaryHref}
         className={`${gilroyMedium.className} relative h-[48px] w-[204px] shrink-0 shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
         data-node-id="2379:1486"
         data-name="Cta"
@@ -25,13 +48,13 @@ export function MeasuredProofCtas() {
           className="absolute z-10 top-[calc(50%-12px)] left-1/2 -translate-x-1/2 text-[14px] leading-[24px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]"
           data-node-id="2379:1487"
         >
-          SEE WHAT WE CAN DO
+          {primaryLabel}
         </p>
         <span
           aria-hidden
           className="pointer-events-none absolute inset-0 z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
         />
-        
+
         {/* Custom Corners that pop out slightly to avoid the inset shadow */}
         <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">
           <div className="rotate-180 flex-none">
@@ -64,7 +87,7 @@ export function MeasuredProofCtas() {
       </a>
 
       <a
-        href="/products"
+        href={secondaryHref}
         className={`${gilroyMedium.className} relative h-[48px] w-[204px] shrink-0 overflow-clip bg-[rgba(226,241,202,0.12)]`}
         data-node-id="2379:1497"
         data-name="Menu"
@@ -73,7 +96,7 @@ export function MeasuredProofCtas() {
           className="absolute top-[calc(50%-12px)] left-1/2 -translate-x-1/2 text-[14px] leading-[24px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]"
           data-node-id="2379:1498"
         >
-          Explore ambient store
+          {secondaryLabel}
         </p>
         <Corners />
       </a>

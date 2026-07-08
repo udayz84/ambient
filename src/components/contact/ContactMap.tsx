@@ -1,6 +1,11 @@
 import Image from "next/image";
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { CornerDecor, FramedBox, GradientTitle, LocationIcon } from "./contact-shared";
+
+const DEFAULT_HEADING = "Global scale.\nLocal support.";
+const DEFAULT_SUBTITLE =
+  "From our research labs to your production line, we maintain direct engineering presence across three continents to ensure rapid deployment and ongoing support.";
 
 const locations = [
   {
@@ -52,7 +57,25 @@ const locations = [
 const CONTACT_VIEWPORT_SCALE =
   "translateX(-50%) scaleX(max(1, calc(100vw / 1440px)))";
 
-export function ContactMap() {
+export function ContactMap({ data }: { data?: any }) {
+  const globeImage = mediaUrl(data?.globe_image) || "/contact/Globe image.png";
+  const mapBase = mediaUrl(data?.map_base) || "/contact/map-base.svg";
+  const headingLines = (data?.heading || DEFAULT_HEADING).split("\n");
+  const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
+  const strapiLocations: ReadonlyArray<any> = Array.isArray(data?.locations)
+    ? data.locations
+    : [];
+  const mergedLocations = locations.map((loc, index) => {
+    const remote = strapiLocations[index];
+    if (!remote) return { ...loc, remoteIcon: null };
+    return {
+      ...loc,
+      title: remote.title || loc.title,
+      address: remote.address || loc.address,
+      remoteIcon: mediaUrl(remote.indicator_icon),
+    };
+  });
+
   return (
     <section
       className="absolute top-[1215px] left-1/2 z-10 h-[1001px] w-[100vw] max-w-none -translate-x-1/2"
@@ -67,7 +90,7 @@ export function ContactMap() {
           <div className="relative h-[1002px] w-[1440px]" data-node-id="2379:5087">
             <div aria-hidden className="pointer-events-none absolute inset-0">
               <Image
-                src="/contact/Globe image.png"
+                src={globeImage}
                 alt=""
                 fill
                 className="object-cover object-center"
@@ -91,8 +114,8 @@ export function ContactMap() {
             gradientDeg="101.272deg"
             className="text-center whitespace-nowrap"
           >
-            <p className="mb-0 leading-[49px]">Global scale.</p>
-            <p className="leading-[49px]">Local support.</p>
+            {headingLines[0] && <p className="mb-0 leading-[49px]">{headingLines[0]}</p>}
+            {headingLines[1] && <p className="leading-[49px]">{headingLines[1]}</p>}
           </GradientTitle>
           <CornerDecor />
         </div>
@@ -100,9 +123,7 @@ export function ContactMap() {
           className={`${interRegular.className} w-[720px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
           data-node-id="2379:8412"
         >
-          From our research labs to your production line, we maintain direct
-          engineering presence across three continents to ensure rapid deployment
-          and ongoing support.
+          {subtitle}
         </p>
       </div>
 
@@ -114,7 +135,7 @@ export function ContactMap() {
         <img
           alt=""
           className="absolute inset-0 block size-full max-w-none object-cover object-center"
-          src="/contact/map-base.svg"
+          src={mapBase}
         />
       </div>
 
@@ -122,7 +143,7 @@ export function ContactMap() {
         className="absolute top-[609px] left-[38px] h-[393px] w-[1204px]"
         data-node-id="2379:5088"
       >
-        {locations.map((loc) => (
+        {mergedLocations.map((loc) => (
           <LocationBlock key={loc.nodeId} {...loc} />
         ))}
       </div>
@@ -135,6 +156,7 @@ function LocationBlock({
   title,
   address,
   indicator,
+  remoteIcon,
   indicatorClass,
   indicatorLayout,
   indicatorInset,
@@ -146,6 +168,7 @@ function LocationBlock({
   title: string;
   address: React.ReactNode;
   indicator: string;
+  remoteIcon: string | null;
   indicatorClass: string;
   indicatorLayout?: "rotated";
   indicatorInset?: string;
@@ -154,6 +177,7 @@ function LocationBlock({
   cardClass: string;
   nodeId: string;
 }) {
+  const indicatorSrc = remoteIcon || indicator;
   return (
     <>
       <div
@@ -176,7 +200,7 @@ function LocationBlock({
             >
               <div className="absolute inset-[-14.14%_0_-14.14%_-2.44%]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img alt="" className="block size-full max-w-none" src={indicator} />
+                <img alt="" className="block size-full max-w-none" src={indicatorSrc} />
               </div>
             </div>
           </div>
@@ -187,7 +211,7 @@ function LocationBlock({
             data-name="Indicator"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt="" className="block size-full max-w-none" src={indicator} />
+            <img alt="" className="block size-full max-w-none" src={indicatorSrc} />
           </div>
         )}
       </div>

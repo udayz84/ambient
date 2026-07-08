@@ -1,6 +1,7 @@
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { CORNER_LEFT, CORNER_RIGHT } from "./dvk-data";
+import { mediaUrl } from "@/lib/strapi";
 
 type DemoCard = {
   nodeId: string;
@@ -106,10 +107,26 @@ export const DEMO_CARDS: DemoCard[] = [
  * Figma row — three demo cards laid out with gap-[28px].
  * Each card is 400 wide; the decorative header image is clipped to the card.
  */
-export function DvkDemosCards() {
+export function DvkDemosCards({ data }: { data?: any }) {
+  const cards =
+    data?.demo_cards &&
+    Array.isArray(data.demo_cards) &&
+    data.demo_cards.length > 0
+      ? data.demo_cards.map((c: any, i: number) => {
+          const fallback = DEMO_CARDS[i] || DEMO_CARDS[0];
+          return {
+            ...fallback,
+            titleLine1: c?.title_line_1 || fallback.titleLine1,
+            titleLine2: c?.title_line_2 || fallback.titleLine2,
+            desc: c?.description || fallback.desc,
+            img: mediaUrl(c?.image) || fallback.img,
+            imgOverlay: mediaUrl(c?.image_overlay) || fallback.imgOverlay,
+          };
+        })
+      : DEMO_CARDS;
   return (
     <div className="flex items-stretch gap-[28px]">
-      {DEMO_CARDS.map((card) => (
+      {cards.map((card: DemoCard) => (
         <DemoCardItem key={card.nodeId} card={card} />
       ))}
     </div>

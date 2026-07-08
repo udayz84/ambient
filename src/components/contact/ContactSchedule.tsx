@@ -1,6 +1,10 @@
 import { dmMono, gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
+import { mediaUrl } from "@/lib/strapi";
 import { Corners } from "../shared/Corners";
 import { CornerDecor, GradientTitle } from "./contact-shared";
+
+const DEFAULT_HEADING = "Schedule a Consultation";
+const DEFAULT_SUBTITLE = "Book a direct meeting with our engineering or commercial teams.";
 
 const cards = [
   {
@@ -43,7 +47,25 @@ const cards = [
   },
 ] as const;
 
-export function ContactSchedule() {
+export function ContactSchedule({ data }: { data?: any }) {
+  const heading = data?.heading || DEFAULT_HEADING;
+  const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
+  const strapiCards: ReadonlyArray<any> = Array.isArray(data?.cards)
+    ? data.cards
+    : [];
+  const mergedCards = cards.map((card, index) => {
+    const remote = strapiCards[index];
+    if (!remote) return { ...card, remoteImage: null };
+    return {
+      ...card,
+      tag: remote.tag || card.tag,
+      title: remote.title || card.title,
+      description: remote.description || card.description,
+      ctaLabel: remote.cta_label || card.ctaLabel,
+      remoteImage: mediaUrl(remote.image),
+    };
+  });
+
   return (
     <div
       className="absolute top-[807px] left-1/2 z-20 flex h-[468px] w-[1204px] -translate-x-1/2 flex-col items-center"
@@ -60,7 +82,7 @@ export function ContactSchedule() {
             gradientDeg="124.465deg"
             className="whitespace-nowrap leading-[49px]"
           >
-            Schedule a Consultation
+            {heading}
           </GradientTitle>
           <CornerDecor />
         </div>
@@ -68,7 +90,7 @@ export function ContactSchedule() {
           className={`${interRegular.className} w-[568px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
           data-node-id="2379:8446"
         >
-          Book a direct meeting with our engineering or commercial teams.
+          {subtitle}
         </p>
       </div>
 
@@ -76,7 +98,7 @@ export function ContactSchedule() {
         className="relative mt-[48px] h-[320px] w-[1204px] shrink-0"
         data-node-id="2379:8447"
       >
-        {cards.map((card, index) => (
+        {mergedCards.map((card, index) => (
           <ScheduleCard
             key={card.nodeId}
             {...card}
@@ -103,9 +125,14 @@ function ScheduleCard({
   ctaLabel,
   ctaWidth,
   imageSrc,
+  remoteImage,
   imageClassName,
   className,
-}: (typeof cards)[number] & { className: string }) {
+}: (typeof cards)[number] & {
+  remoteImage: string | null;
+  className: string;
+}) {
+  const imageFinal = remoteImage || imageSrc;
   return (
     <div
       className={`absolute top-0 ${className} h-[320px] w-[590px] overflow-visible bg-[rgba(0,0,0,0.2)]`}
@@ -141,7 +168,7 @@ function ScheduleCard({
         data-node-id={imageNodeId}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img alt="" className={imageClassName} src={imageSrc} />
+        <img alt="" className={imageClassName} src={imageFinal} />
       </div>
 
       <div className="pointer-events-none absolute inset-0 z-[30] border-[0.5px] border-solid border-[rgba(240,240,240,0.45)]">

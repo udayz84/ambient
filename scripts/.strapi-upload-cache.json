@@ -1,0 +1,1192 @@
+{
+  "b400f76c3628c7e8a4326eaa3c50410e34ae68d5": {
+    "id": 1,
+    "documentId": "mzy1kslbkqwj39fz7a0rsk50",
+    "url": "/uploads/Ambient_Hero_Dummy_Video_1804920f79.mp4",
+    "name": "Ambient Hero Dummy Video.mp4",
+    "sourcePath": "hero/Ambient Hero Dummy Video.mp4"
+  },
+  "8e012b4003b21efb89575b292982dc3e6ff30e98": {
+    "id": 2,
+    "documentId": "etf4gk90d8x7mh5gy64nwho3",
+    "url": "/uploads/Ambient_Hero_Dummy_Video_9a554d165c.webm",
+    "name": "Ambient Hero Dummy Video.webm",
+    "sourcePath": "hero/Ambient Hero Dummy Video.webm"
+  },
+  "b4da56bb1381b37ea95c7d5f892081baffc6b7c0": {
+    "id": 3,
+    "documentId": "p3epztbql955m91l51bazakc",
+    "url": "/uploads/bg_image_90_4e161f83c5.png",
+    "name": "bg-image-90.png",
+    "sourcePath": "measured-proof/bg-image-90.png"
+  },
+  "c58f1ac2741b61d2c09eb509fb192e15263909d7": {
+    "id": 4,
+    "documentId": "gb4x1qb6jnzgdf4hl3nc4ayt",
+    "url": "/uploads/gradient_top_26fa7546e4.png",
+    "name": "gradient-top.png",
+    "sourcePath": "measured-proof/gradient-top.png"
+  },
+  "a6495d051cd85bd303271a699f0998520d673eb1": {
+    "id": 5,
+    "documentId": "vqhcgwymga7munpgtrb74jch",
+    "url": "/uploads/gradient_bottom_f92147f316.png",
+    "name": "gradient-bottom.png",
+    "sourcePath": "measured-proof/gradient-bottom.png"
+  },
+  "edaa26f2c83616bbc787683adef53968e48a82bc": {
+    "id": 6,
+    "documentId": "df2509b9ethxlo3dw4dsltt8",
+    "url": "/uploads/card_power_3e00190f16.png",
+    "name": "card-power.png",
+    "sourcePath": "measured-proof/card-power.png"
+  },
+  "bc901518f39d76b5043232d402126c284a1bbaee": {
+    "id": 7,
+    "documentId": "qbbdvykrnx1djm9c2bpsiopf",
+    "url": "/uploads/card_ai_214d08233f.png",
+    "name": "card-ai.png",
+    "sourcePath": "measured-proof/card-ai.png"
+  },
+  "76f38f8c05cde99f21c6d57d4472d3864144dca8": {
+    "id": 8,
+    "documentId": "qminwt1p0rz8td5juh5ff4qv",
+    "url": "/uploads/card_density_3a17e902b1.png",
+    "name": "card-density.png",
+    "sourcePath": "measured-proof/card-density.png"
+  },
+  "d51659ff3e119e0888bc888f132882a607cc2760": {
+    "id": 9,
+    "documentId": "s3pog9aar51z5r0u2g15x8jv",
+    "url": "/uploads/card_programmable_b65a3f424b.png",
+    "name": "card-programmable.png",
+    "sourcePath": "measured-proof/card-programmable.png"
+  },
+  "3aa275dcec2afe7d3bbab55cab0650b25a7afc9e": {
+    "id": 10,
+    "documentId": "xp72oz99e3jfozqvs73tx81a",
+    "url": "/uploads/bg_image_29_047b65ceda.png",
+    "name": "bg-image-29.png",
+    "sourcePath": "technology/bg-image-29.png"
+  },
+  "8c43fd5506704c69c28032b8de00e4b6942333a0": {
+    "id": 11,
+    "documentId": "b8jshkpz0kthr2ub8u2hrfjq",
+    "url": "/uploads/icon_speak_ai_efef7670a9.svg",
+    "name": "icon-speak-ai.svg",
+    "sourcePath": "technology/icon-speak-ai.svg"
+  },
+  "3445bde6557defbb6330dd918803790e71dcd6e5": {
+    "id": 12,
+    "documentId": "khmyh89vy8fvo870e8j7lerl",
+    "url": "/uploads/icon_compute_406035f24c.svg",
+    "name": "icon-compute.svg",
+    "sourcePath": "technology/icon-compute.svg"
+  },
+  "569ea52ec7690e60ec7a43d66c9bf384bb4e131f": {
+    "id": 13,
+    "documentId": "c9ott8b8usl79jroyoj2c790",
+    "url": "/uploads/icon_tools_3bcae3c455.svg",
+    "name": "icon-tools.svg",
+    "sourcePath": "technology/icon-tools.svg"
+  },
+  "0a4cb0b0b9fa1529ca02c30f06920e026ea615d3": {
+    "id": 14,
+    "documentId": "em9ngx738lch6y9sfwndctdr",
+    "url": "/uploads/chip_hero_c83ec1222a.png",
+    "name": "chip-hero.png",
+    "sourcePath": "platform-scale/chip-hero.png"
+  },
+  "c17223aef34afe597630f1992959db502d0863bf": {
+    "id": 15,
+    "documentId": "l5rxv26ybivr6r1am9ric0cs",
+    "url": "/uploads/bg_image_69_378b745d36.png",
+    "name": "bg-image-69.png",
+    "sourcePath": "platform-scale/bg-image-69.png"
+  },
+  "d1574467fbb6343f62934c45b03e0f01ff6e83de": {
+    "id": 16,
+    "documentId": "chdtez60bs7bvezv8pjax8bi",
+    "url": "/uploads/app_wearables_51be1eab6e.png",
+    "name": "app-wearables.png",
+    "sourcePath": "applications/app-wearables.png"
+  },
+  "ffb5d1342daf2ea32397eec1b20324e6411bc8a0": {
+    "id": 17,
+    "documentId": "rwrn7yyjsmj7cecu2xzkmjee",
+    "url": "/uploads/app_smart_home_83faf58ce2.png",
+    "name": "app-smart-home.png",
+    "sourcePath": "applications/app-smart-home.png"
+  },
+  "d29a1a49c1ba06816505bdb26f6e35e4204153d9": {
+    "id": 18,
+    "documentId": "hadwsrvoqqrq3nxab2kdbz4a",
+    "url": "/uploads/app_industrial_ee83802d1d.png",
+    "name": "app-industrial.png",
+    "sourcePath": "applications/app-industrial.png"
+  },
+  "4defb2f00f0a6f05a2a68809e7eabb40ae91a1eb": {
+    "id": 19,
+    "documentId": "u49s5076n6t3a8j8jl7x0l1s",
+    "url": "/uploads/car_hero_c60a84a527.png",
+    "name": "car-hero.png",
+    "sourcePath": "applications/car-hero.png"
+  },
+  "212841d62702d54b8036a2c1c112a12e30192def": {
+    "id": 20,
+    "documentId": "scj3cdg04fnc5zsgl5p2rlqr",
+    "url": "/uploads/app_medical_b81a9fc9e4.png",
+    "name": "app-medical.png",
+    "sourcePath": "applications/app-medical.png"
+  },
+  "dbe9cb7c1eeaaad376ad11d80bb51b870d0defbd": {
+    "id": 21,
+    "documentId": "ij1oh3t4c1mi6k7a6s4g3rel",
+    "url": "/uploads/app_agriculture_f40693fb35.png",
+    "name": "app-agriculture.png",
+    "sourcePath": "applications/app-agriculture.png"
+  },
+  "3792614aa78d6c965a0d140e37814784943dc8ce": {
+    "id": 22,
+    "documentId": "k196y0lcgkvsdd450d1mo2sw",
+    "url": "/uploads/app_drones_5a0544e92e.png",
+    "name": "app-drones.png",
+    "sourcePath": "applications/app-drones.png"
+  },
+  "5a9be5c86bdf606e2462422320fef80eb3400eb5": {
+    "id": 23,
+    "documentId": "yebb48aioamjekbrcm5dcvkr",
+    "url": "/uploads/app_hearables_0ef700ef6e.png",
+    "name": "app-hearables.png",
+    "sourcePath": "applications/app-hearables.png"
+  },
+  "05ae4412b583f8c7e5612ba53a583212086aa356": {
+    "id": 24,
+    "documentId": "itwc7m37gb5mo175dblwx7zc",
+    "url": "/uploads/cta_dot_5e7124af83.svg",
+    "name": "cta-dot.svg",
+    "sourcePath": "applications/cta-dot.svg"
+  },
+  "6e3b809df50ca37dc02c470ec3ef52c203751da0": {
+    "id": 25,
+    "documentId": "c0da6g68m8o1bysauwd48za3",
+    "url": "/uploads/Fractal_Glass_b4618705e5.png",
+    "name": "Fractal Glass.png",
+    "sourcePath": "contact/Fractal Glass.png"
+  },
+  "182272a1e70ecead2595a2e7b4be5209ab3e206b": {
+    "id": 26,
+    "documentId": "h7tfy7rqwiigsdi7k3rfqi1r",
+    "url": "/uploads/card_image_model_forge_affbb1918c.png",
+    "name": "card-image-model-forge.png",
+    "sourcePath": "developer-platform/card-image-model-forge.png"
+  },
+  "fb8006efd999ca202828e48c9bfb6dab6ac533a8": {
+    "id": 27,
+    "documentId": "oge7x4p02eh3u9y9yp7747fa",
+    "url": "/uploads/card_image_modules_e9cdc504dd.png",
+    "name": "card-image-modules.png",
+    "sourcePath": "developer-platform/card-image-modules.png"
+  },
+  "7ed362ddb101424c605e79ffe33775665e638977": {
+    "id": 28,
+    "documentId": "her95v4sdffw3cx8b2of2o4n",
+    "url": "/uploads/logo_partner_1_e64de3512e.svg",
+    "name": "logo-partner-1.svg",
+    "sourcePath": "ecosystem/logo-partner-1.svg"
+  },
+  "0007a2558e412c42197ae931d3c23176a774925a": {
+    "id": 29,
+    "documentId": "e6uvda8d0hr6rd7q6xngqu5w",
+    "url": "/uploads/logo_partner_2_54b17428e8.svg",
+    "name": "logo-partner-2.svg",
+    "sourcePath": "ecosystem/logo-partner-2.svg"
+  },
+  "32c13fbceb1605147055e1dabec5b91474d73ad5": {
+    "id": 30,
+    "documentId": "hcizsuzge7uboo1605iumsd7",
+    "url": "/uploads/logo_partner_3_ad3f448d8a.svg",
+    "name": "logo-partner-3.svg",
+    "sourcePath": "ecosystem/logo-partner-3.svg"
+  },
+  "0904bef7cde9d7d7dddf51dda93e337cd63e53b1": {
+    "id": 31,
+    "documentId": "atucdwttwnjrl51y08pbzu9j",
+    "url": "/uploads/logo_partner_4_dbddb58513.svg",
+    "name": "logo-partner-4.svg",
+    "sourcePath": "ecosystem/logo-partner-4.svg"
+  },
+  "aa440a291bf3574d6f0dcae38cdf673202101731": {
+    "id": 32,
+    "documentId": "ucb27wintz6racx9dxx1af7u",
+    "url": "/uploads/logo_octane_59661e6327.svg",
+    "name": "logo-octane.svg",
+    "sourcePath": "ecosystem/logo-octane.svg"
+  },
+  "25c584ed7abd79c8a67bcddd86b4998d55bccd80": {
+    "id": 33,
+    "documentId": "pp3ouym4218nha4ax5zxzjrr",
+    "url": "/uploads/hero_bg_cf6a44f284.png",
+    "name": "hero-bg.png",
+    "sourcePath": "company/hero-bg.png"
+  },
+  "d057810986da680a5331d944a5fe414a383bf765": {
+    "id": 34,
+    "documentId": "v14desrce60y8ytvnzowmmv2",
+    "url": "/uploads/image_107_0d888bf434.png",
+    "name": "image-107.png",
+    "sourcePath": "resources/image-107.png"
+  },
+  "763cfdf4e778b78b9b5a573f08a80c61a3a0a88c": {
+    "id": 35,
+    "documentId": "rpveiadyvirghlxlampnm7k6",
+    "url": "/uploads/nav_arrow_left_f7a5d4cf4f.svg",
+    "name": "nav-arrow-left.svg",
+    "sourcePath": "applications/nav-arrow-left.svg"
+  },
+  "acdef85fdc6a2e419edf3018d77a6dfb043125bf": {
+    "id": 36,
+    "documentId": "kc119391ygbar48go8o5ho0s",
+    "url": "/uploads/nav_arrow_right_fb9d3a168f.svg",
+    "name": "nav-arrow-right.svg",
+    "sourcePath": "applications/nav-arrow-right.svg"
+  },
+  "467db7591868308be16de9a34131e80274e806c6": {
+    "id": 37,
+    "documentId": "vn6v3at1kqxuw1x4pe7x88lz",
+    "url": "/uploads/gp_singh_cf03d12d35.png",
+    "name": "gp-singh.png",
+    "sourcePath": "company/leadership/gp-singh.png"
+  },
+  "e267b9c058400041faeec857b64e7a2475d89464": {
+    "id": 38,
+    "documentId": "mjo7e7nspyh23xqo10dng1ai",
+    "url": "/uploads/madanjit_singh_d0add62f3d.jpg",
+    "name": "madanjit-singh.jpg",
+    "sourcePath": "company/leadership/madanjit-singh.jpg"
+  },
+  "78a20bba0349dac9d4c2755e249fc08ef53a48ce": {
+    "id": 39,
+    "documentId": "eql3sa68dn1fjrolxjnuetea",
+    "url": "/uploads/swapnil_sapre_cc642dfa50.jpg",
+    "name": "swapnil-sapre.jpg",
+    "sourcePath": "company/leadership/swapnil-sapre.jpg"
+  },
+  "718b0108fdda26a27b0fd87e64f252941d35984f": {
+    "id": 40,
+    "documentId": "ywq0sw7cyuj3sf0gfl6awkyv",
+    "url": "/uploads/image_137_fd97ad4865.png",
+    "name": "image 137.png",
+    "sourcePath": "company/image 137.png"
+  },
+  "acb6a8e2693319b12d78e9eaecb5dd74450c08cf": {
+    "id": 41,
+    "documentId": "pccfesflblnmq92n69wkf13f",
+    "url": "/uploads/Map_15749a6c11.png",
+    "name": "Map.png",
+    "sourcePath": "company/Map.png"
+  },
+  "b44992d57fb2e3898ee9f332f4e0d92c9d5bf3bc": {
+    "id": 42,
+    "documentId": "jwao3ozz6lj6skpizpnk2mdv",
+    "url": "/uploads/ecosystem_icon_footprint_cba507ed00.svg",
+    "name": "ecosystem-icon-footprint.svg",
+    "sourcePath": "company/ecosystem-icon-footprint.svg"
+  },
+  "6c41e83404b317d88d520af859b526a266b17474": {
+    "id": 43,
+    "documentId": "ctxnehrr3ng2t1omua5grz0v",
+    "url": "/uploads/ecosystem_icon_distribution_e4d630c670.svg",
+    "name": "ecosystem-icon-distribution.svg",
+    "sourcePath": "company/ecosystem-icon-distribution.svg"
+  },
+  "cec20470b02ed5b948886cf0f7ffdeedf86de3f9": {
+    "id": 44,
+    "documentId": "w4jlxegk2ythtvpqmipvrbv2",
+    "url": "/uploads/Image_2_bbaf125f31.png",
+    "name": "Image 2.png",
+    "sourcePath": "company/Image 2.png"
+  },
+  "51542b20e1200d537e8a59e6ed538f488c194007": {
+    "id": 45,
+    "documentId": "zalkzlmnj3t3jreotp2uhqrb",
+    "url": "/uploads/image_3_141e567108.png",
+    "name": "image 3.png",
+    "sourcePath": "company/image 3.png"
+  },
+  "c8ec7c0a1b8b990d973e2563ec8e2a1243b98d7d": {
+    "id": 46,
+    "documentId": "c5e8s6a8slfq4xpsrtrgivt8",
+    "url": "/uploads/Image_4_9b2d69dcc9.png",
+    "name": "Image 4.png",
+    "sourcePath": "company/Image 4.png"
+  },
+  "b7a767e441f429aae9467a2eed06aa5ce67560e3": {
+    "id": 47,
+    "documentId": "n780kdu0ytpavagfr5seemlj",
+    "url": "/uploads/98410_1_b36bc502c0.png",
+    "name": "98410 1.png",
+    "sourcePath": "company/98410 1.png"
+  },
+  "fe6f9584d9dbc92d2ee3489d5265855e6471bb80": {
+    "id": 48,
+    "documentId": "k14wfimnjp7d1ptiowelosbx",
+    "url": "/uploads/image_105_a5cb991843.png",
+    "name": "image 105.png",
+    "sourcePath": "company/image 105.png"
+  },
+  "f9d48fbd8f673f1ad7adba276c785c6851fc0eb7": {
+    "id": 49,
+    "documentId": "h17n94w64ljgzui5910cpdmm",
+    "url": "/uploads/98410_2_32c751ffcb.png",
+    "name": "98410 2.png",
+    "sourcePath": "company/98410 2.png"
+  },
+  "5640f7b56af21a40275e06634cb1cde22c454d08": {
+    "id": 50,
+    "documentId": "e82mnv2jck93qgop6e8ryi1t",
+    "url": "/uploads/image_124_0bb380f80c.png",
+    "name": "image-124.png",
+    "sourcePath": "company/image-124.png"
+  },
+  "78197a279f35db3c70ae93fa0cef239ae5a7a6ec": {
+    "id": 51,
+    "documentId": "rrtnkhdag6xygce0k1xj2k5m",
+    "url": "/uploads/hand_f8a3734ba2.png",
+    "name": "hand.png",
+    "sourcePath": "contact/hand.png"
+  },
+  "45d02d5b3ff8da02ef61bbf759ca5b771f9c8129": {
+    "id": 52,
+    "documentId": "we3lbqe8uti1pw7ip20fbftt",
+    "url": "/uploads/Globe_image_f7da514b31.png",
+    "name": "Globe image.png",
+    "sourcePath": "contact/Globe image.png"
+  },
+  "327adac157efaa4fc8a26c81537f7e6b1cfaf097": {
+    "id": 53,
+    "documentId": "wbe80er95r54d6v91v7p7q35",
+    "url": "/uploads/map_base_c95078c2c4.svg",
+    "name": "map-base.svg",
+    "sourcePath": "contact/map-base.svg"
+  },
+  "bed404730396cdeb4ec77600962d75b2e59a72b3": {
+    "id": 54,
+    "documentId": "nph3qlywttj0p29gqzb7iaqo",
+    "url": "/uploads/map_indicator_us_0271301af2.svg",
+    "name": "map-indicator-us.svg",
+    "sourcePath": "contact/map-indicator-us.svg"
+  },
+  "93908c92add16f1c235ab195b1d110125d85e198": {
+    "id": 55,
+    "documentId": "y027m9eandyc6mm5vqojtvcs",
+    "url": "/uploads/map_indicator_sg_c5f3b93290.svg",
+    "name": "map-indicator-sg.svg",
+    "sourcePath": "contact/map-indicator-sg.svg"
+  },
+  "1640d59dc07de85c681a0c7d69606f8bbcd7fb51": {
+    "id": 56,
+    "documentId": "y4d7kb0mi1vmdbtzudpsed8x",
+    "url": "/uploads/map_indicator_in_4f3d57863d.svg",
+    "name": "map-indicator-in.svg",
+    "sourcePath": "contact/map-indicator-in.svg"
+  },
+  "e35408ecc431a33ea45e7d8ca59846dd2830c6ee": {
+    "id": 57,
+    "documentId": "kg4s3yeofvylj3srs60pelr4",
+    "url": "/uploads/calendar_icon_d30f7de73d.svg",
+    "name": "calendar-icon.svg",
+    "sourcePath": "contact/calendar-icon.svg"
+  },
+  "ba7cb6f9367b564649015424838756fd9836705b": {
+    "id": 58,
+    "documentId": "ip0baqzpnqywg2nwcaje4z9u",
+    "url": "/uploads/schedule_fae_59432389d0.png",
+    "name": "schedule-fae.png",
+    "sourcePath": "contact/schedule-fae.png"
+  },
+  "ee8dd18435378cc333379342f708bbe90e0dc3a0": {
+    "id": 59,
+    "documentId": "teb09nnvheyuh9h7umr55skn",
+    "url": "/uploads/schedule_commercial_c6e9a70208.png",
+    "name": "schedule-commercial.png",
+    "sourcePath": "contact/schedule-commercial.png"
+  },
+  "bb442dd69b2e894b23d7739da481c4eedb301b62": {
+    "id": 60,
+    "documentId": "mxq7l8bq9llub9b85rq7mg61",
+    "url": "/uploads/track_sales_8ba5b57fb6.svg",
+    "name": "track-sales.svg",
+    "sourcePath": "contact/track-sales.svg"
+  },
+  "ca717a16c78387ff381182680827ee1321b246c7": {
+    "id": 61,
+    "documentId": "o511pnmkhwrbmi5aoi9q1vwi",
+    "url": "/uploads/track_developer_e5fadbc1da.svg",
+    "name": "track-developer.svg",
+    "sourcePath": "contact/track-developer.svg"
+  },
+  "7174bcc3f04fd40113447778ac91be69ada2289d": {
+    "id": 62,
+    "documentId": "nv6c3vwst6knca2tuyw3crke",
+    "url": "/uploads/track_media_d3b3cce8fb.svg",
+    "name": "track-media.svg",
+    "sourcePath": "contact/track-media.svg"
+  },
+  "1460a8284ae51288851f672422e173c1e62f061a": {
+    "id": 63,
+    "documentId": "dkl44tneypivbu89w9o4roun",
+    "url": "/uploads/coin_chipset_2_0c049cb80c.png",
+    "name": "coin-chipset-2.png",
+    "sourcePath": "products/coin-chipset-2.png"
+  },
+  "e0e35c86c8364d1df703f03819655553bf07b747": {
+    "id": 64,
+    "documentId": "vgoeps3dzly2ws8chxyviluf",
+    "url": "/uploads/coin_chipset_1_6a12b8a694.png",
+    "name": "coin-chipset-1.png",
+    "sourcePath": "products/coin-chipset-1.png"
+  },
+  "ee3e1aa0892c209cf03ebaf8bf814a030f135791": {
+    "id": 65,
+    "documentId": "igm9qyhej9e2p0bhap7fehb0",
+    "url": "/uploads/card_image_4f88951cce.png",
+    "name": "card-image.png",
+    "sourcePath": "products/card-image.png"
+  },
+  "e5a3e562590671d52513a8525170028264ee6555": {
+    "id": 66,
+    "documentId": "psaflgzy4fkhvea9qnop9kma",
+    "url": "/uploads/abstract_design_c273cf4b44.svg",
+    "name": "abstract-design.svg",
+    "sourcePath": "products/abstract-design.svg"
+  },
+  "2e4246ec1fcbe99796af6f1f6f0cfc8c1747ee4c": {
+    "id": 67,
+    "documentId": "h3c0no5m0xs3zcce23nvwnmm",
+    "url": "/uploads/icon_frame_1_aed13eeb13.svg",
+    "name": "icon-frame-1.svg",
+    "sourcePath": "products/icon-frame-1.svg"
+  },
+  "2b03950f2cf8fb2f86e31999930c95ae07f74d95": {
+    "id": 68,
+    "documentId": "smrmmpq58taic8tj7oalm52d",
+    "url": "/uploads/hand_5c87bec101.png",
+    "name": "hand.png",
+    "sourcePath": "products/hand.png"
+  },
+  "af7188b7535b0c16d57ddebe70990898d72c4f7f": {
+    "id": 69,
+    "documentId": "h0d2utjfqy4d77vctill68c0",
+    "url": "/uploads/stat_icon_53fedfe911.svg",
+    "name": "stat-icon.svg",
+    "sourcePath": "products/stat-icon.svg"
+  },
+  "4975e611050b42d84f3260b9ebed79e2052873fe": {
+    "id": 70,
+    "documentId": "bzvt4z58c1xlglc978k9i1hq",
+    "url": "/uploads/app_automotive_dba3023f2e.png",
+    "name": "app-automotive.png",
+    "sourcePath": "applications/app-automotive.png"
+  },
+  "794bc1009bfb7ee9f2851c9bc73f5f69eb4269e2": {
+    "id": 71,
+    "documentId": "yakig3ghqe5bnj3jnzvvxr4l",
+    "url": "/uploads/architecture_a323a11314.png",
+    "name": "architecture.png",
+    "sourcePath": "products/architecture.png"
+  },
+  "8c05acbf1c1fade9ff8203ac47825f9813875412": {
+    "id": 72,
+    "documentId": "w6kzlw0gnasr4jii20wjqa73",
+    "url": "/uploads/modelforge_image_04ca5ff34c.png",
+    "name": "modelforge-image.png",
+    "sourcePath": "products/modelforge-image.png"
+  },
+  "bef5773f16ae142af2de95fc2cc284661f29916f": {
+    "id": 73,
+    "documentId": "puy27p0h03yc3oqdunc9yezg",
+    "url": "/uploads/full_picture_a6881329fb.png",
+    "name": "full-picture.png",
+    "sourcePath": "products/full-picture.png"
+  },
+  "d0993734fd38a30a3e7ad33a2409f32ea363bf21": {
+    "id": 74,
+    "documentId": "wo0ocsl6ta6ki3tqy2xgdxc4",
+    "url": "/uploads/spec_icon_b1818cf576.svg",
+    "name": "spec-icon.svg",
+    "sourcePath": "products/spec-icon.svg"
+  },
+  "e2bfbb9b1ff3751a69f9e2f964291724d424dbc9": {
+    "id": 75,
+    "documentId": "x6qj65xdoucr3xdh6plwz3mu",
+    "url": "/uploads/cta_card_bg_c255fd0898.svg",
+    "name": "cta-card-bg.svg",
+    "sourcePath": "products/cta-card-bg.svg"
+  },
+  "f60d5600b5bed1b0f3e5f8c9373478c915de4fc7": {
+    "id": 76,
+    "documentId": "ebetgqfrfx8sronyk6n36r3x",
+    "url": "/uploads/hero_bg_1e1c3ac773.png",
+    "name": "hero-bg.png",
+    "sourcePath": "technology/hero-bg.png"
+  },
+  "7586a412987f60c9297f827be4403b0dedbc9ff0": {
+    "id": 77,
+    "documentId": "hn2yqd9lwyt5ydijtrsll3t1",
+    "url": "/uploads/hero_object_7f407478fc.png",
+    "name": "hero-object.png",
+    "sourcePath": "technology/hero-object.png"
+  },
+  "a1df277e00b96b0692e307e6828c654da707c7da": {
+    "id": 78,
+    "documentId": "s0j9li31uashvt6ny7ywuu9l",
+    "url": "/uploads/problem_bg_2e0482b122.png",
+    "name": "problem-bg.png",
+    "sourcePath": "technology/problem-bg.png"
+  },
+  "83b316bd4f1b8ae6cf6daf3df3e72d77dc90ff0a": {
+    "id": 79,
+    "documentId": "bubjoh7eg4rt9cf50yod4r2l",
+    "url": "/uploads/legacy_compute_b16c3516fc.png",
+    "name": "legacy-compute.png",
+    "sourcePath": "technology/legacy-compute.png"
+  },
+  "bf40694524c5adf019600a7d75c06593dbf8e213": {
+    "id": 80,
+    "documentId": "e65gt7ptntzlx7ikypqp6qyp",
+    "url": "/uploads/acube_diagram_d26d39d2cf.png",
+    "name": "acube-diagram.png",
+    "sourcePath": "technology/acube-diagram.png"
+  },
+  "ddb356570a9b77238b04767de45087e9a76f91e9": {
+    "id": 81,
+    "documentId": "cf97fftj95v394jgftzwh8cd",
+    "url": "/uploads/icon_cubiccore_fbd5abffb2.svg",
+    "name": "icon-cubiccore.svg",
+    "sourcePath": "technology/icon-cubiccore.svg"
+  },
+  "63dae2148a33de4ff35d5de1c17382be19fd42a1": {
+    "id": 82,
+    "documentId": "i0aezjevlq721hflmxj6xgtm",
+    "url": "/uploads/icon_sensemesh_657b2b5337.svg",
+    "name": "icon-sensemesh.svg",
+    "sourcePath": "technology/icon-sensemesh.svg"
+  },
+  "db32b911bd84ce0690acd7beaef66ee15d3af554": {
+    "id": 83,
+    "documentId": "t18mogez9cl1kcr73gv9rgy3",
+    "url": "/uploads/icon_modelforge_e76cfdd938.svg",
+    "name": "icon-modelforge.svg",
+    "sourcePath": "technology/icon-modelforge.svg"
+  },
+  "eb7f03d215c4001edcf5483eb8260813e5cb14a0": {
+    "id": 84,
+    "documentId": "u8dedpwhzqci5uc3hi8ejfw5",
+    "url": "/uploads/modes_top_e25928a2e2.png",
+    "name": "modes-top.png",
+    "sourcePath": "technology/modes-top.png"
+  },
+  "1b6144f387f70c927e844b8995635e79b98c6b67": {
+    "id": 85,
+    "documentId": "k46hl65ja7x4idqm2ujqsj3u",
+    "url": "/uploads/modes_bottom_2c99412f78.png",
+    "name": "modes-bottom.png",
+    "sourcePath": "technology/modes-bottom.png"
+  },
+  "96bba5166d9ebc0c7ab2bf2a3574e5f555f0842a": {
+    "id": 86,
+    "documentId": "t9pu2rjpqrlkwtabt0brlgw1",
+    "url": "/uploads/silicon_bg_19de1e185e.png",
+    "name": "silicon-bg.png",
+    "sourcePath": "technology/silicon-bg.png"
+  },
+  "5d2938860349bcfbe8934916bc3643113cc1a22d": {
+    "id": 87,
+    "documentId": "tff14xsn9oa50epjm4k82vze",
+    "url": "/uploads/chip_bg_137c37a549.png",
+    "name": "chip-bg.png",
+    "sourcePath": "technology/chip-bg.png"
+  },
+  "892dc0655dd5fd8e3fe63e699abfe0f4f756248d": {
+    "id": 88,
+    "documentId": "jqlqpj277obhh7dosb5x65gf",
+    "url": "/uploads/chip_object_464519e007.png",
+    "name": "chip-object.png",
+    "sourcePath": "technology/chip-object.png"
+  },
+  "54dc8d2c18bb1c5835e0a4fcfb8f0172a335b6d9": {
+    "id": 89,
+    "documentId": "envzc4ls5d308umcy00ddnfc",
+    "url": "/uploads/hero_bg_e228fd70d9.png",
+    "name": "hero-bg.png",
+    "sourcePath": "careers/hero-bg.png"
+  },
+  "90714e2028f9f411d1164896b9e30f126b37f733": {
+    "id": 90,
+    "documentId": "zcriooys3q7a4z805hau0uxr",
+    "url": "/uploads/hero_title_frame_6cecc77565.svg",
+    "name": "hero-title-frame.svg",
+    "sourcePath": "careers/hero-title-frame.svg"
+  },
+  "58dfa101a25a60c41e201789a5a6916e020f020b": {
+    "id": 91,
+    "documentId": "kpb6l0hhm613umiedatopgfl",
+    "url": "/uploads/icon_impact_29cac5a631.svg",
+    "name": "icon-impact.svg",
+    "sourcePath": "careers/icon-impact.svg"
+  },
+  "1c9281bb03e647bd0b2df75b637e57cfda7653bb": {
+    "id": 92,
+    "documentId": "uq4q6n7rn38eaohp5g7h41vl",
+    "url": "/uploads/icon_depth_649bb97b05.svg",
+    "name": "icon-depth.svg",
+    "sourcePath": "careers/icon-depth.svg"
+  },
+  "3b902ae8029820500f9c7832d3be053179269f88": {
+    "id": 93,
+    "documentId": "zzqyr0c4b2z072fxrpcc83nz",
+    "url": "/uploads/icon_cocreation_bfd58cdd65.svg",
+    "name": "icon-cocreation.svg",
+    "sourcePath": "careers/icon-cocreation.svg"
+  },
+  "518574e01c64df5ab545e070c7611bd790984f8f": {
+    "id": 94,
+    "documentId": "pq0nal34umwulsz74u952j6y",
+    "url": "/uploads/chip_bg_5dd22d7a52.png",
+    "name": "chip-bg.png",
+    "sourcePath": "careers/chip-bg.png"
+  },
+  "7f2ad49ca4af7e41f3037039a6ee002af6610e25": {
+    "id": 95,
+    "documentId": "pqwltx3umesiqv8zwictembb",
+    "url": "/uploads/title_frame_benefits_c4908ed69c.svg",
+    "name": "title-frame-benefits.svg",
+    "sourcePath": "careers/title-frame-benefits.svg"
+  },
+  "ccbc24992ca65d84cbb11d15eb44c162b36d58f7": {
+    "id": 96,
+    "documentId": "p199lguljnkb9715k8a1adx3",
+    "url": "/uploads/icon_health_8134517ec4.svg",
+    "name": "icon-health.svg",
+    "sourcePath": "careers/icon-health.svg"
+  },
+  "d42b93eb6558dad093273a6667c473504961b470": {
+    "id": 97,
+    "documentId": "ziiefhpdzvx50h1qk73af5z0",
+    "url": "/uploads/icon_compensation_7865f7c509.svg",
+    "name": "icon-compensation.svg",
+    "sourcePath": "careers/icon-compensation.svg"
+  },
+  "ffd77fac2f0f58dcd0957d469be8271190476991": {
+    "id": 98,
+    "documentId": "qyf96gny77kwntxcy860d1zm",
+    "url": "/uploads/icon_equipment_c60dbeb2e6.svg",
+    "name": "icon-equipment.svg",
+    "sourcePath": "careers/icon-equipment.svg"
+  },
+  "bad016eaab0624b75e2107bcc901353faa2afa75": {
+    "id": 99,
+    "documentId": "jakey6coknccivnvjj3veyhr",
+    "url": "/uploads/icon_office_26a617726f.svg",
+    "name": "icon-office.svg",
+    "sourcePath": "careers/icon-office.svg"
+  },
+  "06950d9ba700dacec7f233d3915c5e17363148ad": {
+    "id": 100,
+    "documentId": "xnhm2x7o5cbhmxoodp64qul9",
+    "url": "/uploads/icon_learning_d4a2902b83.svg",
+    "name": "icon-learning.svg",
+    "sourcePath": "careers/icon-learning.svg"
+  },
+  "5eed8efa667456301b78b88dbbc53b881826f718": {
+    "id": 101,
+    "documentId": "mojs3uate3v27ppkfikbcdmo",
+    "url": "/uploads/icon_pto_56f33ef609.svg",
+    "name": "icon-pto.svg",
+    "sourcePath": "careers/icon-pto.svg"
+  },
+  "21f79f7ed44b07ec5e9a4a429a6c44d9c30f8b30": {
+    "id": 102,
+    "documentId": "sgfc4t7es7prqmm4aqm7xuzu",
+    "url": "/uploads/footer_bg_f920b030f3.png",
+    "name": "footer-bg.png",
+    "sourcePath": "careers/footer-bg.png"
+  },
+  "d1c0e0066c8364af1fd7ceed7e4afbff92d3cf43": {
+    "id": 103,
+    "documentId": "zmhwvr5fyr3gp2p9hyk8k494",
+    "url": "/uploads/hero_bg_55b8c31c1a.png",
+    "name": "hero-bg.png",
+    "sourcePath": "applications/hero-bg.png"
+  },
+  "44235ad2238c3f5c97e557d685bc4893df343e36": {
+    "id": 104,
+    "documentId": "sgx6skdfh3nz2t0gqgtb39s8",
+    "url": "/uploads/title_frame_5646e1528d.svg",
+    "name": "title-frame.svg",
+    "sourcePath": "applications/title-frame.svg"
+  },
+  "f7988623ac56b3fc3bc3afac9e45bf029891f7a2": {
+    "id": 105,
+    "documentId": "hxvg56l821wlrkf0p2qqozw4",
+    "url": "/uploads/dvk_bg_e8dc5c7999.png",
+    "name": "dvk-bg.png",
+    "sourcePath": "applications/dvk-bg.png"
+  },
+  "8add2e0c0cc2db2f1ee245c67f817594bc264aed": {
+    "id": 106,
+    "documentId": "x3f5gjpojg3c9appowaw8g1q",
+    "url": "/uploads/dvk_bottom_ea66c9fb40.png",
+    "name": "dvk-bottom.png",
+    "sourcePath": "applications/dvk-bottom.png"
+  },
+  "d44e1161dbf64617be2bdfbf38460a8e7f18de51": {
+    "id": 107,
+    "documentId": "ieiakd83ruginllmac8o07gd",
+    "url": "/uploads/orbit_5665b6e798.svg",
+    "name": "orbit.svg",
+    "sourcePath": "applications/orbit.svg"
+  },
+  "1c7af3630488b56e70592130106fb7edf27e26ad": {
+    "id": 108,
+    "documentId": "pnmafpjl8ayvmffu85ar9k3g",
+    "url": "/uploads/card_left_far_2b53b1e791.png",
+    "name": "card-left-far.png",
+    "sourcePath": "applications/card-left-far.png"
+  },
+  "e130d98489b3cc659507f4ab8387d8924fabc152": {
+    "id": 109,
+    "documentId": "r72jvb78lgakdq053ytfn70w",
+    "url": "/uploads/continuum_98f29030db.png",
+    "name": "continuum.png",
+    "sourcePath": "applications/continuum.png"
+  },
+  "c7baec8cd13fe98d937e0d2ee927c85bb7de3772": {
+    "id": 110,
+    "documentId": "mze9rvjoh0ht08s88uz9lwvw",
+    "url": "/uploads/wins_bg_008309aaa4.png",
+    "name": "wins-bg.png",
+    "sourcePath": "applications/wins-bg.png"
+  },
+  "54271365d6cc2db9d056398244dabfed75a31f86": {
+    "id": 111,
+    "documentId": "r39nx0889nqruv0r6uznfrs2",
+    "url": "/uploads/wins_img_1_6785e3cd58.png",
+    "name": "wins-img-1.png",
+    "sourcePath": "applications/wins-img-1.png"
+  },
+  "fb25181add09f7b792860f184aa8ecbaa3aa8351": {
+    "id": 112,
+    "documentId": "c24y9shl2delpfomsevg3h2n",
+    "url": "/uploads/wins_img_2_7ff5b7461d.png",
+    "name": "wins-img-2.png",
+    "sourcePath": "applications/wins-img-2.png"
+  },
+  "6f142d705e902f70acca85289f0939d76e9f6588": {
+    "id": 113,
+    "documentId": "vpfm3hktazw8x5tv03x1okzb",
+    "url": "/uploads/wins_img_3_5bef71ddaa.png",
+    "name": "wins-img-3.png",
+    "sourcePath": "applications/wins-img-3.png"
+  },
+  "170d3cd270614216591412564d1241aae6629923": {
+    "id": 114,
+    "documentId": "s9sobqgj92t1xfvq4z8jrck2",
+    "url": "/uploads/som_img_a_dc20a0da86.png",
+    "name": "som-img-a.png",
+    "sourcePath": "applications/som-img-a.png"
+  },
+  "f7a1a5c5519302f43f8cfc8bc97fa42d9cb0c8ba": {
+    "id": 115,
+    "documentId": "kc5su8frj2sm3d647xp1qsh2",
+    "url": "/uploads/som_img_b_5fd1bad4ab.png",
+    "name": "som-img-b.png",
+    "sourcePath": "applications/som-img-b.png"
+  },
+  "446d06911a6687ff977a05a23674eec96b4255a3": {
+    "id": 116,
+    "documentId": "hqiadtqnd2fvzhgia8fbqxfs",
+    "url": "/uploads/hero_bg_1_f2953dc368.png",
+    "name": "hero-bg-1.png",
+    "sourcePath": "developer/hero-bg-1.png"
+  },
+  "78d641e711729ceccf734dfdd6eb493d0524f001": {
+    "id": 117,
+    "documentId": "vc3l5wxe2aa2t9rngmigsz6d",
+    "url": "/uploads/train_flow_1_1f144f91d4.png",
+    "name": "train-flow-1.png",
+    "sourcePath": "developer/train-flow-1.png"
+  },
+  "1c20a41290fb1a7d7fa70e8a9cec6065d1015580": {
+    "id": 118,
+    "documentId": "somr8hpnomco3s5m0l0150wx",
+    "url": "/uploads/train_flow_2_7995078b60.png",
+    "name": "train-flow-2.png",
+    "sourcePath": "developer/train-flow-2.png"
+  },
+  "f421a84b2c9fab2e550fec9a75153959c739a8b8": {
+    "id": 119,
+    "documentId": "z27oorgnhjw58fck52dg86jg",
+    "url": "/uploads/train_flow_3_c10a41df07.png",
+    "name": "train-flow-3.png",
+    "sourcePath": "developer/train-flow-3.png"
+  },
+  "893af2ed35efb99e5ef0d5ebfc5b650414329a5f": {
+    "id": 120,
+    "documentId": "rmwu82i5zte9cmygwgibwcb9",
+    "url": "/uploads/train_flow_4_fbcf417468.png",
+    "name": "train-flow-4.png",
+    "sourcePath": "developer/train-flow-4.png"
+  },
+  "07ab74b8fb766c66aa5ed2fe1b44659d781d9c64": {
+    "id": 121,
+    "documentId": "cxmvtfx2zdj5n9o2xvr0dsos",
+    "url": "/uploads/pipeline_logo_1_c871aed3c9.png",
+    "name": "pipeline-logo-1.png",
+    "sourcePath": "developer/pipeline-logo-1.png"
+  },
+  "0dc7258eb9a5c81c66d6524c25a0272ded27595a": {
+    "id": 122,
+    "documentId": "qy7n82vwthkp4pt4n82kukz4",
+    "url": "/uploads/pipeline_logo_2_6312787a9f.png",
+    "name": "pipeline-logo-2.png",
+    "sourcePath": "developer/pipeline-logo-2.png"
+  },
+  "d3693860740dbf7a614a76951d4193b3e1a9bd72": {
+    "id": 123,
+    "documentId": "scm5fo9v7dhfjgm3p9lwkhjw",
+    "url": "/uploads/pipeline_logo_3_7a98cf60cf.png",
+    "name": "pipeline-logo-3.png",
+    "sourcePath": "developer/pipeline-logo-3.png"
+  },
+  "9afa78bd649996c3d5faef2dfbb7934b0a259f00": {
+    "id": 124,
+    "documentId": "y323kvmb1nyk6apyvzcgg56k",
+    "url": "/uploads/sandbox_image_c0c37dc4d4.png",
+    "name": "sandbox-image.png",
+    "sourcePath": "developer/sandbox-image.png"
+  },
+  "01467e7e5bc031e64056d150ee55af614102dc86": {
+    "id": 125,
+    "documentId": "l9pj4ur34tp6omb2nermoopp",
+    "url": "/uploads/coming_bg_c2c6d56e5c.png",
+    "name": "coming-bg.png",
+    "sourcePath": "developer/coming-bg.png"
+  },
+  "4856e1ca65f6fd2e570e5070e5ddfcadda8dd44b": {
+    "id": 126,
+    "documentId": "gp7crnk8k6gj7v58peo6anyr",
+    "url": "/uploads/module_dvk_8f0a61b696.png",
+    "name": "module-dvk.png",
+    "sourcePath": "developer/module-dvk.png"
+  },
+  "c49c717b8fe8111644194db69d3e0492288e3c4e": {
+    "id": 127,
+    "documentId": "qgp73xcm845a5ppj48giblpe",
+    "url": "/uploads/module_som_94452685bf.png",
+    "name": "module-som.png",
+    "sourcePath": "developer/module-som.png"
+  },
+  "91d1be914158a4a7bda21709658bd14bd929f80f": {
+    "id": 128,
+    "documentId": "ffkd618cz71eoute8oxdlo04",
+    "url": "/uploads/copilot_icon_1_a9071a04ca.svg",
+    "name": "copilot-icon-1.svg",
+    "sourcePath": "developer/copilot-icon-1.svg"
+  },
+  "2d9f16fbe9e7c36da41f0ea31f89b8afc6605991": {
+    "id": 129,
+    "documentId": "r5bwgkf4q2lk5gvu20bci7cq",
+    "url": "/uploads/copilot_icon_2_27e509c8f9.svg",
+    "name": "copilot-icon-2.svg",
+    "sourcePath": "developer/copilot-icon-2.svg"
+  },
+  "0465c727524937dbc759594c5468c7b5d34ab5ee": {
+    "id": 130,
+    "documentId": "b7zk406lag96ljonhw21re23",
+    "url": "/uploads/copilot_icon_3_05efadb85d.svg",
+    "name": "copilot-icon-3.svg",
+    "sourcePath": "developer/copilot-icon-3.svg"
+  },
+  "1433117f83a1de7114fa904aa48f7702f6197038": {
+    "id": 131,
+    "documentId": "pnlz24lv5ev6ppvk2kid97pk",
+    "url": "/uploads/hero_bg_1_5ace78ca15.png",
+    "name": "hero-bg-1.png",
+    "sourcePath": "dvk/hero-bg-1.png"
+  },
+  "a8543db2879dfa6c71cf41498b29bca906ae2d9c": {
+    "id": 132,
+    "documentId": "f4nr6irfxdla97e6cdsjs5b7",
+    "url": "/uploads/hero_bg_2_df58d9394f.png",
+    "name": "hero-bg-2.png",
+    "sourcePath": "dvk/hero-bg-2.png"
+  },
+  "aa4a35e1dcffdd2a71beeab45d7bca6122e46c6d": {
+    "id": 133,
+    "documentId": "kh92s1gvcv3lye9gsbldg1sd",
+    "url": "/uploads/board_main_475873048b.png",
+    "name": "board-main.png",
+    "sourcePath": "dvk/board-main.png"
+  },
+  "78c187f522d2f1031618d3346a345f4f8afac1dc": {
+    "id": 134,
+    "documentId": "pbay6z7fw0b5m67vpnc6d2ns",
+    "url": "/uploads/board_chip_6c0817d885.png",
+    "name": "board-chip.png",
+    "sourcePath": "dvk/board-chip.png"
+  },
+  "b39a936ba68c617f5a86f74af58f3fcde1aef842": {
+    "id": 135,
+    "documentId": "csxkhach77q94akbpmw6if85",
+    "url": "/uploads/demo_fall_58d2830776.png",
+    "name": "demo-fall.png",
+    "sourcePath": "dvk/demo-fall.png"
+  },
+  "3bf4464bff82bfa2c49211f321148fe2e596a505": {
+    "id": 136,
+    "documentId": "ttb7s33pzdn4j2mbfz0aqpxi",
+    "url": "/uploads/demo_vision_8aec725677.png",
+    "name": "demo-vision.png",
+    "sourcePath": "dvk/demo-vision.png"
+  },
+  "9f803573057c17c1a16fafe10c2838854306acc5": {
+    "id": 137,
+    "documentId": "u0vt9vobc35rz529bsu7cjqs",
+    "url": "/uploads/card_glow_ba2d1f10ae.png",
+    "name": "card-glow.png",
+    "sourcePath": "dvk/card-glow.png"
+  },
+  "7e0e5e00607b4be77f2ac3222894bf70d518f121": {
+    "id": 138,
+    "documentId": "nci6uj3b6bx2n9w6s50rupql",
+    "url": "/uploads/hero_bg_2549a8dc2f.png",
+    "name": "hero-bg.png",
+    "sourcePath": "news-listing/hero-bg.png"
+  },
+  "31d0b95c587aa70490199cde9f03265bc94f1dc6": {
+    "id": 139,
+    "documentId": "k1dts1bo81gfub1164eg68e6",
+    "url": "/uploads/press_icon_4a1514b604.svg",
+    "name": "press-icon.svg",
+    "sourcePath": "news-listing/press-icon.svg"
+  },
+  "b524ad8f96e6271e0f14c75eda48703801561c2a": {
+    "id": 140,
+    "documentId": "inve71hftxhd33kzsn19x5x9",
+    "url": "/uploads/press_title_frame_9cfbb45392.svg",
+    "name": "press-title-frame.svg",
+    "sourcePath": "news-listing/press-title-frame.svg"
+  },
+  "a6ae9a8f4e8662bd27904fb35c3e24ad94b9cfde": {
+    "id": 141,
+    "documentId": "r7nd1kjxm8wmnymihxukuqll",
+    "url": "/uploads/image_107_eb08ad9696.png",
+    "name": "image 107.png",
+    "sourcePath": "careers/image 107.png"
+  },
+  "4a95cdde3c67818cb4bf66aa35ae5eaff935d73d": {
+    "id": 142,
+    "documentId": "ygujtlos6ecdrjw1hy6jagwf",
+    "url": "/uploads/hero_title_frame_d217c74814.svg",
+    "name": "hero-title-frame.svg",
+    "sourcePath": "resources/hero-title-frame.svg"
+  },
+  "73456267a687e39091ed4fc0e7a5fff780487181": {
+    "id": 143,
+    "documentId": "a7brb63hpzdblavn3g7fgo07",
+    "url": "/uploads/image_102_6aa90d8e37.png",
+    "name": "image-102.png",
+    "sourcePath": "resources/image-102.png"
+  },
+  "9af0d87bee062107acf93ad3cb9d840cde9ba4e2": {
+    "id": 144,
+    "documentId": "mhrf8op5gb1xt1u0tlqtxzxi",
+    "url": "/uploads/featured_2_a2bdf862b6.png",
+    "name": "featured-2.png",
+    "sourcePath": "resources/featured-2.png"
+  },
+  "abff1540679628b76fac9278a549bcfdf20e21c5": {
+    "id": 145,
+    "documentId": "vtgwxxip0ee96lckzvqtnp4e",
+    "url": "/uploads/featured_3_402b3f3cef.png",
+    "name": "featured-3.png",
+    "sourcePath": "resources/featured-3.png"
+  },
+  "21ce5159b4d5494d2d0ad7dfe573482654792c16": {
+    "id": 146,
+    "documentId": "q26fenzy3c1u5cgvtygm6dvc",
+    "url": "/uploads/building_bg_27d0155e23.png",
+    "name": "building-bg.png",
+    "sourcePath": "resources/building-bg.png"
+  },
+  "06580ab99ea042cf93b66ee994fc1ccb70419379": {
+    "id": 147,
+    "documentId": "qbqzz3j7e2ogxj51im79ie87",
+    "url": "/uploads/building_title_frame_a861b4eed2.svg",
+    "name": "building-title-frame.svg",
+    "sourcePath": "resources/building-title-frame.svg"
+  },
+  "226049655f3871f3dac264b316138eae1882ff2f": {
+    "id": 148,
+    "documentId": "pn5ejyo644uttnib2xjikf4t",
+    "url": "/uploads/news_cta_texture_462878b008.png",
+    "name": "news-cta-texture.png",
+    "sourcePath": "resources/news-cta-texture.png"
+  },
+  "0a63594202e4c7e1ae80c61e90f57c2b5e61c9a2": {
+    "id": 149,
+    "documentId": "xm04jcvfn3drgzh769zs1y3p",
+    "url": "/uploads/hero_bg_35a5d28cb3.png",
+    "name": "hero-bg.png",
+    "sourcePath": "som/hero-bg.png"
+  },
+  "793f9507cfe173f7bb1ca48209fee038f0e4664f": {
+    "id": 150,
+    "documentId": "zg5q9rq2n2qtle5f40czx32k",
+    "url": "/uploads/title_frame_2237cdfbb1.svg",
+    "name": "title-frame.svg",
+    "sourcePath": "som/title-frame.svg"
+  },
+  "bbcec8501a20c7fe82de9e698adfd3bee77e881b": {
+    "id": 151,
+    "documentId": "ciszbn4aelwpdnv59c4w44vq",
+    "url": "/uploads/icon_bg_cc204fd845.svg",
+    "name": "icon-bg.svg",
+    "sourcePath": "som/icon-bg.svg"
+  },
+  "f6fb1f64ab3e969619204710f928385c728a1b3b": {
+    "id": 152,
+    "documentId": "benrjbllg3ib2o7brksay9ps",
+    "url": "/uploads/icon_card_1_6466361aab.svg",
+    "name": "icon-card-1.svg",
+    "sourcePath": "som/icon-card-1.svg"
+  },
+  "1426e37beb8de149e2d26cfd8e7c82e5a7649ab9": {
+    "id": 153,
+    "documentId": "c5hhy8cwhjpi60kb71nxl74s",
+    "url": "/uploads/icon_card_2_157c54df93.svg",
+    "name": "icon-card-2.svg",
+    "sourcePath": "som/icon-card-2.svg"
+  },
+  "4aacd2dbc43667cbc64328526cf3588ed162dfbb": {
+    "id": 154,
+    "documentId": "bu529chg4mpdruumcy1elrpj",
+    "url": "/uploads/icon_card_3_afa299fa76.svg",
+    "name": "icon-card-3.svg",
+    "sourcePath": "som/icon-card-3.svg"
+  },
+  "3f3058831ebd00221b7d01d51a985c686321c582": {
+    "id": 155,
+    "documentId": "eh1v26fy7k55pv0wd5656exp",
+    "url": "/uploads/som_chip_14d2138165.png",
+    "name": "som-chip.png",
+    "sourcePath": "som/som-chip.png"
+  },
+  "0a706f8eae46b487a3dcf48f45252eb38d73e436": {
+    "id": 156,
+    "documentId": "y07gd9bctycd436sme70q4s3",
+    "url": "/uploads/motion_icon_5d6222cb08.svg",
+    "name": "motion-icon.svg",
+    "sourcePath": "som/motion-icon.svg"
+  },
+  "221b79a20a2c0bed86ada9489e9d8e777690eb60": {
+    "id": 157,
+    "documentId": "lfd6pioh53kqljx2aaj11cls",
+    "url": "/uploads/vision_icon_14657e3cc9.svg",
+    "name": "vision-icon.svg",
+    "sourcePath": "som/vision-icon.svg"
+  },
+  "b6d37cfb89ed5aed22b737caf7f7481c8542f21e": {
+    "id": 158,
+    "documentId": "h6r3r58qj8h79fopo13oix5c",
+    "url": "/uploads/module_photo_fd64e4a53e.png",
+    "name": "module-photo.png",
+    "sourcePath": "som/module-photo.png"
+  },
+  "b2c93d205bc524e7d3b326f02230bd0dcc49adaf": {
+    "id": 159,
+    "documentId": "m13dstgsieo7s5r004xr7nc1",
+    "url": "/uploads/Frame_1984079439_8dc5ab7d2b.png",
+    "name": "Frame 1984079439.png",
+    "sourcePath": "Frame 1984079439.png"
+  },
+  "234a50791f82a2767a0922d8c919b93bf7830910": {
+    "id": 160,
+    "documentId": "mdr43k8qx9yuethasokvc28p",
+    "url": "/uploads/footer_merge_68a4fca821.svg",
+    "name": "footer-merge.svg",
+    "sourcePath": "som/footer-merge.svg"
+  },
+  "ca2a64a9b08ecf14b1625f9f153ede1a55314993": {
+    "id": 161,
+    "documentId": "zzh0luk0oeuqnn19rbw59zi5",
+    "url": "/uploads/hero_bg_162_68b973f04b.png",
+    "name": "hero-bg-162.png",
+    "sourcePath": "applications/wearables/hero-bg-162.png"
+  },
+  "aeea53f5a9ef889e22fdd12f936aaeb7b750b60f": {
+    "id": 162,
+    "documentId": "mklf0q38hr27ieezo4hydghn",
+    "url": "/uploads/hero_bg_163_8796d07f45.png",
+    "name": "hero-bg-163.png",
+    "sourcePath": "applications/wearables/hero-bg-163.png"
+  },
+  "2c8bf42886eea4f61d10858b02dc208c8218a94f": {
+    "id": 163,
+    "documentId": "g3n0ifz8weo3wwv07naz53zs",
+    "url": "/uploads/title_frame_bc00fcfa85.svg",
+    "name": "title-frame.svg",
+    "sourcePath": "applications/wearables/title-frame.svg"
+  },
+  "b292b7925d8505d7782a65328cb64f038d042a4b": {
+    "id": 164,
+    "documentId": "rde8rjxath5da6ecp3lu5cyq",
+    "url": "/uploads/hardware_blueprint_e6e1828505.png",
+    "name": "hardware-blueprint.png",
+    "sourcePath": "applications/wearables/hardware-blueprint.png"
+  },
+  "294e626a7526ba956512aaffb9203ffb8c1d625f": {
+    "id": 165,
+    "documentId": "tx1j7btuxmr1lkqefjrlg3nk",
+    "url": "/uploads/logo_c9d2012993.png",
+    "name": "logo.png",
+    "sourcePath": "navbar/logo.png"
+  },
+  "b995b45d4d23bb32273a19166013073f729ad990": {
+    "id": 166,
+    "documentId": "qc1wcpk9dvzjbci94idsn4em",
+    "url": "/uploads/social_linkedin_487dc939c4.svg",
+    "name": "social-linkedin.svg",
+    "sourcePath": "footer/social-linkedin.svg"
+  },
+  "1300a0f87851cfd36568d2d7ea0950b94ae7fdfd": {
+    "id": 167,
+    "documentId": "pugtorhhzlnp9n99paci7gpg",
+    "url": "/uploads/social_youtube_2e9a3934ec.svg",
+    "name": "social-youtube.svg",
+    "sourcePath": "footer/social-youtube.svg"
+  },
+  "0531f844c2986e4123fc2ae76794d732975f2c08": {
+    "id": 168,
+    "documentId": "m50y9s8ws857ook5v843tw7p",
+    "url": "/uploads/social_x_4d589915d6.svg",
+    "name": "social-x.svg",
+    "sourcePath": "footer/social-x.svg"
+  },
+  "a559e40b4983c14b11855a688fbe9aec4d4e0690": {
+    "id": 169,
+    "documentId": "vtotbrg3c1e53w4dy17c4krm",
+    "url": "/uploads/crafted_by_b861877820.svg",
+    "name": "crafted-by.svg",
+    "sourcePath": "footer/crafted-by.svg"
+  },
+  "be224ddcb1eb8061bd5e9b9695314b720b17943c": {
+    "id": 170,
+    "documentId": "smj3dz0j2usgahvnxq1prjz6",
+    "url": "/uploads/footer_bg_b109dba628.png",
+    "name": "footer-bg.png",
+    "sourcePath": "footer/footer-bg.png"
+  }
+}

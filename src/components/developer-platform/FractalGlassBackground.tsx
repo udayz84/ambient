@@ -1,4 +1,8 @@
-export function DeveloperPlatformBackground() {
+import { mediaUrl } from "@/lib/strapi";
+
+export function DeveloperPlatformBackground({ data }: { data?: any }) {
+  const bgSrc =
+    mediaUrl(data?.background) || "/contact/Fractal%20Glass.png";
   return (
     <div
       className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
@@ -7,7 +11,7 @@ export function DeveloperPlatformBackground() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         alt=""
-        src="/contact/Fractal%20Glass.png"
+        src={bgSrc}
         className="absolute inset-0 size-full object-cover"
         aria-hidden
       />

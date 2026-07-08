@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { mediaUrl } from "@/lib/strapi";
 import { interRegular } from "../hero/fonts";
 import { CompanyArticleCorners } from "./CompanyArticleCorners";
 import { CompanyEngagementCta } from "./CompanyEngagementCta";
@@ -8,7 +9,18 @@ import { COMPANY_JOIN_TEAM } from "./company-engagement-data";
 const CARD_BORDER =
   "border-[0.5px] border-solid border-[rgba(240,240,240,0.2)]";
 
-export function CompanyJoinTeam() {
+type CompanyJoinTeamProps = {
+  data?: any;
+};
+
+export function CompanyJoinTeam({ data }: CompanyJoinTeamProps = {}) {
+  const title = (data?.title as string) || COMPANY_JOIN_TEAM.title;
+  const description = (data?.description as string) || COMPANY_JOIN_TEAM.description;
+  const ctaLabel = (data?.cta_label as string) || COMPANY_JOIN_TEAM.ctaLabel;
+  const ctaHref = (data?.cta_href as string) || COMPANY_JOIN_TEAM.ctaHref;
+  const imageSrc = mediaUrl(data?.image) || COMPANY_JOIN_TEAM.imageSrc;
+  const titleLines = title.split("\n");
+
   return (
     <div
       className={`relative isolate z-[1] h-[340px] w-[1200px] shrink-0 overflow-visible bg-black ${CARD_BORDER}`}
@@ -21,7 +33,7 @@ export function CompanyJoinTeam() {
         data-name="image 105"
       >
         <Image
-          src={COMPANY_JOIN_TEAM.imageSrc}
+          src={imageSrc}
           alt=""
           width={780}
           height={340}
@@ -46,16 +58,15 @@ export function CompanyJoinTeam() {
           fontSize={32}
           lineHeight={39}
           nodeId={COMPANY_JOIN_TEAM.titleNodeId}
-        >
-          {COMPANY_JOIN_TEAM.title}
-        </CompanySectionTitle>
+          lines={titleLines}
+        />
       </div>
 
       <p
         className={`${interRegular.className} absolute top-[100px] left-[810px] z-[3] w-[358px] text-[18px] leading-[27px] font-normal text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
         data-node-id={COMPANY_JOIN_TEAM.bodyNodeId}
       >
-        {COMPANY_JOIN_TEAM.description}
+        {description}
       </p>
 
       <div
@@ -63,10 +74,10 @@ export function CompanyJoinTeam() {
         data-node-id={COMPANY_JOIN_TEAM.ctaNodeId}
       >
         <CompanyEngagementCta
-          href={COMPANY_JOIN_TEAM.ctaHref}
+          href={ctaHref}
           className={COMPANY_JOIN_TEAM.ctaWidth}
         >
-          {COMPANY_JOIN_TEAM.ctaLabel}
+          {ctaLabel}
         </CompanyEngagementCta>
       </div>
 

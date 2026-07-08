@@ -1,3 +1,4 @@
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import {
@@ -14,11 +15,43 @@ import {
   PRIMARY_CTA_INSET,
 } from "./products-data";
 
+const FALLBACK_HEADING = "Your models. Your IDE. No rewrites.";
+const FALLBACK_SUBTITLE =
+  "A new architecture shouldn't mean a new way of working. With ModelForge, it doesn't.";
+const FALLBACK_PRIMARY = { label: "Explore the Developer Hub", href: "#" };
+const FALLBACK_SECONDARY = { label: "Request the SDK", href: "#" };
+
 /**
  * Figma 2917:1333 (title) + 2917:1341/1359/1377 (Train/Compile/Deploy cards).
  * "Your models. Your IDE. No rewrites."
  */
-export function ProductsModelForge() {
+export function ProductsModelForge({ data }: { data?: any }) {
+  const heading = data?.heading || FALLBACK_HEADING;
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const image = mediaUrl(data?.image) || "/products/modelforge-image.png";
+  const primary = {
+    label: data?.primary_button?.label ?? FALLBACK_PRIMARY.label,
+    href: data?.primary_button?.href ?? FALLBACK_PRIMARY.href,
+  };
+  const secondary = {
+    label: data?.secondary_button?.label ?? FALLBACK_SECONDARY.label,
+    href: data?.secondary_button?.href ?? FALLBACK_SECONDARY.href,
+  };
+  const steps =
+    Array.isArray(data?.steps) && data.steps.length > 0
+      ? data.steps.map((s: any, i: number) => {
+          const fallback = MODELFORGE_STEPS[i] || MODELFORGE_STEPS[0];
+          const stepNum = s?.step || fallback.number;
+          return {
+            nodeId: `modelforge-step-${i}`,
+            number: stepNum,
+            title: fallback.title,
+            description: s?.description ?? fallback.description,
+            imgLeft: fallback.imgLeft,
+            imgTop: fallback.imgTop,
+          };
+        })
+      : MODELFORGE_STEPS;
   return (
     <>
       {/* DESKTOP (>=1024px) */}
@@ -26,16 +59,42 @@ export function ProductsModelForge() {
         className="relative mx-auto hidden w-full bg-black min-[1024px]:block"
         aria-label="ModelForge workflow"
       >
-        <ProductsModelForgeDesktop />
+        <ProductsModelForgeDesktop
+          heading={heading}
+          subtitle={subtitle}
+          image={image}
+          steps={steps}
+          primary={primary}
+          secondary={secondary}
+        />
       </section>
 
       {/* MOBILE (<1024px) */}
-      <ProductsModelForgeMobile />
+      <ProductsModelForgeMobile
+        heading={heading}
+        subtitle={subtitle}
+        image={image}
+        steps={steps}
+      />
     </>
   );
 }
 
-function ProductsModelForgeDesktop() {
+function ProductsModelForgeDesktop({
+  heading,
+  subtitle,
+  image,
+  steps,
+  primary,
+  secondary,
+}: {
+  heading: string;
+  subtitle: string;
+  image: string;
+  steps: any[];
+  primary: { label: string; href: string };
+  secondary: { label: string; href: string };
+}) {
   return (
     <div className="mx-auto flex w-full max-w-[1256px] flex-col items-center pb-[120px]">
       {/* Section title — 2917:1333 (centered, w=739) */}
@@ -63,14 +122,14 @@ function ProductsModelForgeDesktop() {
             }}
             data-node-id="2917:1335"
           >
-            Your models. Your IDE. No rewrites.
+            {heading}
           </h2>
         </div>
         <p
           className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           data-node-id="2917:1340"
         >
-          {`A new architecture shouldn't mean a new way of working. With ModelForge, it doesn't.`}
+          {subtitle}
         </p>
       </div>
 
@@ -79,36 +138,38 @@ function ProductsModelForgeDesktop() {
         className="mt-[46px] flex items-start"
         style={{ gap: MODELFORGE_CARD.gap }}
       >
-        {MODELFORGE_STEPS.map((step) => (
-          <ModelForgeCard key={step.nodeId} step={step} />
+        {steps.map((step) => (
+          <ModelForgeCard key={step.nodeId} step={step} image={image} />
         ))}
       </div>
 
       {/* CTAs row — 2917:1396 */}
       <div className="mt-[64px] flex items-center justify-center gap-[24px]">
         {/* Primary CTA */}
-        <button
+        <a
+          href={primary.href}
           className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[251px] shrink-0 items-center justify-center overflow-hidden uppercase bg-transparent border-0 cursor-pointer text-white text-[16px] leading-[28px]`}
         >
           <div aria-hidden className="absolute bg-gradient-to-b from-[#6ced3f] inset-0 pointer-events-none to-[#38a612]" />
-          <span className="relative z-10">Explore the Developer Hub</span>
+          <span className="relative z-10">{primary.label}</span>
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <div className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
-        </button>
+        </a>
 
         {/* Secondary CTA */}
-        <button
+        <a
+          href={secondary.href}
           className={`${gilroyMedium.className} relative flex h-[48px] w-[174px] shrink-0 items-center justify-center overflow-hidden uppercase bg-[rgba(226,241,202,0.12)] border-0 cursor-pointer text-white text-[16px] leading-[28px]`}
         >
-          <span className="relative z-10">Request the SDK</span>
+          <span className="relative z-10">{secondary.label}</span>
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-        </button>
+        </a>
       </div>
     </div>
   );
 }
 
-function ModelForgeCard({ step }: { step: (typeof MODELFORGE_STEPS)[number] }) {
+function ModelForgeCard({ step, image }: { step: any; image: string }) {
   return (
     <article
       className="relative flex flex-col border-[0.5px] border-solid px-[32px] pt-[16px] pb-[24px]"
@@ -138,7 +199,7 @@ function ModelForgeCard({ step }: { step: (typeof MODELFORGE_STEPS)[number] }) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt=""
-            src="/products/modelforge-image.png"
+            src={image}
             className="absolute max-w-none"
             style={{
               width: "225.52%",
@@ -196,7 +257,17 @@ function ModelForgeCard({ step }: { step: (typeof MODELFORGE_STEPS)[number] }) {
   );
 }
 
-function ProductsModelForgeMobile() {
+function ProductsModelForgeMobile({
+  heading,
+  subtitle,
+  image,
+  steps,
+}: {
+  heading: string;
+  subtitle: string;
+  image: string;
+  steps: any[];
+}) {
   return (
     <section
       className="relative w-full bg-black px-[24px] pt-[64px] pb-[80px] min-[1024px]:hidden"
@@ -212,18 +283,18 @@ function ProductsModelForgeMobile() {
             backgroundClip: "text",
           }}
         >
-          Your models. Your IDE. No rewrites.
+          {heading}
         </h2>
         <p
           className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]`}
         >
-          {`A new architecture shouldn't mean a new way of working. With ModelForge, it doesn't.`}
+          {subtitle}
         </p>
       </div>
 
       {/* Cards */}
       <div className="mt-[32px] flex flex-col gap-[20px]">
-        {MODELFORGE_STEPS.map((step) => (
+        {steps.map((step) => (
           <article
             key={step.nodeId}
             className="relative flex flex-col border-[0.5px] border-solid p-[20px]"
@@ -240,7 +311,7 @@ function ProductsModelForgeMobile() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 alt=""
-                src="/products/modelforge-image.png"
+                src={image}
                 className="absolute max-w-none"
                 style={{
                   width: "225.52%",

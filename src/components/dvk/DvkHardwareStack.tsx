@@ -16,6 +16,7 @@ import {
   SPEC_CARDS,
   type SpecCardType,
 } from "./dvk-data";
+import { mediaUrl } from "@/lib/strapi";
 
 // Refined coordinates (in percentages) for the highlight box on the board image
 const HIGHLIGHT_REGIONS = [
@@ -26,8 +27,33 @@ const HIGHLIGHT_REGIONS = [
   { left: "91%", top: "15%", width: "6%", height: "70%" }, // Interfaces (far right edge pin rows)
 ];
 
-export function DvkHardwareStack() {
+const DEFAULT_HEADING =
+  "The complete Edge AI hardware stack in a single footprint";
+const DEFAULT_SUBTITLE =
+  "An exhaustive suite of sensors, interfaces, and debug tools pre-integrated with the GPX-10 Pro AI Processor.";
+const DEFAULT_LABEL = "The Hardware Blueprint";
+const DEFAULT_BOARD_IMAGE = "/dvk/board-main.png";
+const DEFAULT_CHIP_IMAGE = "/dvk/board-chip.png";
+
+export function DvkHardwareStack({ data }: { data?: any }) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const heading = data?.heading || DEFAULT_HEADING;
+  const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
+  const label = data?.label || DEFAULT_LABEL;
+  const boardImage = mediaUrl(data?.board_image) || DEFAULT_BOARD_IMAGE;
+  const chipImage = mediaUrl(data?.chip_image) || DEFAULT_CHIP_IMAGE;
+  const cards: SpecCardType[] =
+    data?.spec_cards && Array.isArray(data.spec_cards) && data.spec_cards.length > 0
+      ? data.spec_cards.map((c: any, i: number) => ({
+          title: c?.title || SPEC_CARDS[i]?.title || "",
+          items:
+            c?.items && c.items.length > 0
+              ? c.items.split("\n").filter(Boolean)
+              : SPEC_CARDS[i]?.items || [],
+          accent: c?.is_accent === true,
+        }))
+      : SPEC_CARDS;
 
   return (
     <div
@@ -50,7 +76,7 @@ export function DvkHardwareStack() {
               backgroundClip: "text",
             }}
           >
-            The complete Edge AI hardware stack in a single footprint
+            {heading}
           </h2>
         </div>
 
@@ -58,8 +84,7 @@ export function DvkHardwareStack() {
           className={`${interRegular.className} text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic`}
           style={{ width: 618.2734375, opacity: 0.65 }}
         >
-          An exhaustive suite of sensors, interfaces, and debug tools
-          pre-integrated with the GPX-10 Pro AI Processor.
+          {subtitle}
         </p>
       </div>
 
@@ -77,7 +102,7 @@ export function DvkHardwareStack() {
           <p
             className={`${gilroyMedium.className} min-w-full w-[min-content] shrink-0 text-center text-[22px] leading-[28px] text-white not-italic`}
           >
-            The Hardware Blueprint
+            {label}
           </p>
 
           {/* Circuit board container */}
@@ -85,13 +110,13 @@ export function DvkHardwareStack() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt=""
-              src="/dvk/board-main.png"
+              src={boardImage}
               className="pointer-events-none absolute inset-0 size-full max-w-none rounded-[7.572px] object-bottom"
             />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt=""
-              src="/dvk/board-chip.png"
+              src={chipImage}
               className="pointer-events-none absolute max-w-none rounded-[7.572px] object-bottom"
               style={{
                 left: 263.37890625,
@@ -128,9 +153,9 @@ export function DvkHardwareStack() {
 
         {/* Spec cards row */}
         <div className="flex w-full items-stretch gap-[8px]">
-          {SPEC_CARDS.map((card, idx) => (
+          {cards.map((card, idx) => (
             <SpecCard
-              key={card.title}
+              key={card.title || idx}
               card={card}
               isHovered={hoveredIndex === idx}
               onMouseEnter={() => setHoveredIndex(idx)}

@@ -1,0 +1,53 @@
+{
+  "hero": {
+    "tag": {
+      "text": "Product Launch"
+    },
+    "title": "Re-architecting the Physics of AI Compute.",
+    "subtitle": "Standard chips waste time. Our architecture processes matrix math for high performance.",
+    "pagination_text": "NEXT 01/03",
+    "cta_label": "Read documentation",
+    "background_image": 138
+  },
+  "press_kit": {
+    "heading": "Writing about Ambient?",
+    "subtitle": "Download official brand assets, executive bios, and high-resolution hardware photography.",
+    "menus": [
+      {
+        "label": "Logos & Marks"
+      },
+      {
+        "label": "Executive Photos"
+      },
+      {
+        "label": "Product Renders"
+      }
+    ],
+    "cta_label": "Download Press Kit (.ZIP)",
+    "file_info": "2.3 MB • Last updated May 2026",
+    "icon": 139,
+    "title_frame": null
+  },
+  "grid": {
+    "filter_pills": [
+      {
+        "label": "NEWS"
+      },
+      {
+        "label": "PRESS RELEASES"
+      },
+      {
+        "label": "BLOGS & ARTICLES"
+      }
+    ],
+    "load_more_label": "Load More Resources",
+    "backdrop_image": 141
+  },
+  "seo": {
+    "meta_title": "News & Press | Ambient Scientific",
+    "meta_description": "The latest news, press releases, and articles from Ambient Scientific. Download the official press kit for brand assets and product renders.",
+    "keywords": "Ambient Scientific news, press releases, AI chips news, media, press kit",
+    "noindex": false,
+    "canonical_url": "/news-listing"
+  }
+}

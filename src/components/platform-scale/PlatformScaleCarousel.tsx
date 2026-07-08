@@ -8,6 +8,7 @@ import {
   type GpxProduct,
 } from "./platform-scale-data";
 import { Corners } from "../shared/Corners";
+import { mediaUrl } from "@/lib/strapi";
 
 const chipGlassCropClass =
   "absolute top-[-79.23%] left-[-39.91%] h-[258.46%] w-[179.82%] max-w-none";
@@ -22,10 +23,12 @@ const LABEL_GAP = 10;
 const TRANSITION_MS = 700;
 const TRANSITION_EASING = "cubic-bezier(0.4, 0, 0.2, 1)";
 
-const TOTAL = GPX_PRODUCTS.length;
-
-function getVirtualProduct(virtualIndex: number): GpxProduct {
-  return GPX_PRODUCTS[((virtualIndex % TOTAL) + TOTAL) % TOTAL];
+function getVirtualProduct(
+  virtualIndex: number,
+  products: GpxProduct[]
+): GpxProduct {
+  const total = products.length || 1;
+  return products[((virtualIndex % total) + total) % total];
 }
 
 type SlotKey = "-3" | "-2" | "-1" | "0" | "1" | "2" | "3";
@@ -182,10 +185,9 @@ function CarouselChipItem({
           }}
         >
           <div className="relative size-full shadow-[0px_21px_20px_0px_#0d2006]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt=""
-              src="/platform-scale/chip-hero.png"
+              src={mediaUrl(product.chip_image) || "/platform-scale/chip-hero.png"}
               className="pointer-events-none absolute inset-0 size-full max-w-none object-bottom"
               aria-hidden
             />
@@ -226,10 +228,9 @@ function CarouselChipItem({
           }}
         >
           <div className="relative size-full">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt=""
-              src="/platform-scale/chip-hero.png"
+              src={mediaUrl(product.chip_image) || "/platform-scale/chip-hero.png"}
               className="pointer-events-none absolute inset-0 size-full max-w-none object-bottom"
               aria-hidden
             />
@@ -315,19 +316,34 @@ function PlatformScaleStatPanel({ product }: { product: GpxProduct }) {
   );
 }
 
-export function PlatformScaleCarousel() {
-  const [virtualIndex, setVirtualIndex] = useState(
-    DEFAULT_GPX_INDEX + TOTAL
-  );
+export function PlatformScaleCarousel({ data }: { data?: any }) {
+  const products: GpxProduct[] =
+    Array.isArray(data?.products) && data.products.length
+      ? data.products.map((p: any, index: number) => {
+          const fallback = GPX_PRODUCTS[index] || ({} as GpxProduct);
+          return {
+            id: p?.product_id || fallback.id || `gpx-${index}`,
+            label: p?.label || fallback.label || "",
+            description: p?.description || fallback.description || "",
+            chip_image: p?.chip_image || fallback.chip_image || null,
+          };
+        })
+      : GPX_PRODUCTS;
 
-  const activeProduct = getVirtualProduct(virtualIndex);
+  const TOTAL = products.length || 1;
+  const defaultIndex =
+    typeof data?.default_index === "number" ? data.default_index : DEFAULT_GPX_INDEX;
+
+  const [virtualIndex, setVirtualIndex] = useState(defaultIndex + TOTAL);
+
+  const activeProduct = getVirtualProduct(virtualIndex, products);
 
   const goPrevious = useCallback(() => {
-    setVirtualIndex((current) => current - 1);
+    setVirtualIndex((current: number) => current - 1);
   }, []);
 
   const goNext = useCallback(() => {
-    setVirtualIndex((current) => current + 1);
+    setVirtualIndex((current: number) => current + 1);
   }, []);
 
   const items: { key: string; product: GpxProduct; offset: number }[] = [];
@@ -335,7 +351,7 @@ export function PlatformScaleCarousel() {
     const vi = virtualIndex + offset;
     items.push({
       key: `v-${vi}`,
-      product: getVirtualProduct(vi),
+      product: getVirtualProduct(vi, products),
       offset,
     });
   }

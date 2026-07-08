@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyExtraBold, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import {
@@ -17,10 +18,12 @@ import {
   WATERMARK_GRADIENT,
 } from "./products-data";
 
-/**
- * Figma 2901:2033 — "Built for always-on. Proven across markets."
- * Tabbed use-case showcase. Desktop canvas is 1448 wide / 941 tall.
- */
+const FALLBACK_HEADING = "Built for always-on. \n Proven across markets.";
+const FALLBACK_SUBTITLE =
+  "The same chip, tuned to the job — from a wrist to a factory floor.";
+const FALLBACK_PRIMARY = { label: "Explore Applications", href: "#" };
+const FALLBACK_SECONDARY = { label: "Discuss Your Use Case", href: "#" };
+
 const USE_CASE_IMAGES: Record<string, string> = {
   "HEARABLES": "/applications/app-hearables.png",
   "SMART HOMES": "/applications/app-smart-home.png",
@@ -30,13 +33,63 @@ const USE_CASE_IMAGES: Record<string, string> = {
   "AGRICULTURE": "/applications/app-agriculture.png",
 };
 
-export function ProductsUseCases() {
-  const [activeIdx, setActiveIdx] = useState(0);
-  const activeTab = USECASE_TABS[activeIdx];
-  const activeImage = USE_CASE_IMAGES[activeTab.label] || "/products/use-case-image.png";
+function splitLines(value: string): string[] {
+  return value.split("\n");
+}
 
-  const nextTab = () => setActiveIdx((i) => (i + 1) % USECASE_TABS.length);
-  const prevTab = () => setActiveIdx((i) => (i - 1 + USECASE_TABS.length) % USECASE_TABS.length);
+/**
+ * Figma 2901:2033 — "Built for always-on. Proven across markets."
+ * Tabbed use-case showcase. Desktop canvas is 1448 wide / 941 tall.
+ */
+export function ProductsUseCases({ data }: { data?: any }) {
+  const heading = data?.heading || FALLBACK_HEADING;
+  const headingLines = splitLines(heading);
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const primary = {
+    label: data?.primary_button?.label ?? FALLBACK_PRIMARY.label,
+    href: data?.primary_button?.href ?? FALLBACK_PRIMARY.href,
+  };
+  const secondary = {
+    label: data?.secondary_button?.label ?? FALLBACK_SECONDARY.label,
+    href: data?.secondary_button?.href ?? FALLBACK_SECONDARY.href,
+  };
+  const tabs =
+    Array.isArray(data?.tabs) && data.tabs.length > 0
+      ? data.tabs.map((t: any, i: number) => ({
+          label: t?.label ?? USECASE_TABS[i]?.label ?? `Tab ${i + 1}`,
+          image:
+            mediaUrl(t?.image) ||
+            USE_CASE_IMAGES[t?.label] ||
+            "/products/use-case-image.png",
+        }))
+      : USECASE_TABS.map((t) => ({
+          label: t.label,
+          image:
+            USE_CASE_IMAGES[t.label] || "/products/use-case-image.png",
+        }));
+  const cards =
+    Array.isArray(data?.cards) && data.cards.length > 0
+      ? data.cards.map((c: any, i: number) => {
+          const fallback = USECASE_CARDS[i] || USECASE_CARDS[0];
+          return {
+            nodeId: `card-${i}`,
+            title: c?.title ?? fallback.title,
+            description: c?.description ?? fallback.description,
+            bg: fallback.bg,
+            left: fallback.left,
+            top: fallback.top,
+            width: fallback.width,
+            height: fallback.height,
+          };
+        })
+      : USECASE_CARDS;
+
+  const [activeIdx, setActiveIdx] = useState(0);
+  const activeTab = tabs[activeIdx] || tabs[0];
+  const activeImage = activeTab?.image || "/products/use-case-image.png";
+
+  const nextTab = () => setActiveIdx((i) => (i + 1) % tabs.length);
+  const prevTab = () => setActiveIdx((i) => (i - 1 + tabs.length) % tabs.length);
   return (
     <>
       {/* DESKTOP (>=1024px) */}
@@ -53,17 +106,54 @@ export function ProductsUseCases() {
           data-node-id="2901:2033"
           data-name="Desktop - 14"
         >
-          <ProductsUseCasesDesktop activeTab={activeTab} activeImage={activeImage} onNext={nextTab} onPrev={prevTab} onSelect={setActiveIdx} activeIdx={activeIdx} />
+          <ProductsUseCasesDesktop
+            headingLines={headingLines}
+            subtitle={subtitle}
+            activeTab={activeTab}
+            activeImage={activeImage}
+            onNext={nextTab}
+            onPrev={prevTab}
+            onSelect={setActiveIdx}
+            activeIdx={activeIdx}
+            tabs={tabs}
+            cards={cards}
+            primary={primary}
+            secondary={secondary}
+          />
         </div>
       </section>
 
       {/* MOBILE (<1024px) */}
-      <ProductsUseCasesMobile activeTab={activeTab} activeImage={activeImage} onSelect={setActiveIdx} activeIdx={activeIdx} />
+      <ProductsUseCasesMobile
+        headingLines={headingLines}
+        subtitle={subtitle}
+        activeTab={activeTab}
+        activeImage={activeImage}
+        onSelect={setActiveIdx}
+        activeIdx={activeIdx}
+        tabs={tabs}
+        cards={cards}
+        primary={primary}
+        secondary={secondary}
+      />
     </>
   );
 }
 
-function ProductsUseCasesDesktop({ activeTab, activeImage, onNext, onPrev, onSelect, activeIdx }: any) {
+function ProductsUseCasesDesktop({
+  headingLines,
+  subtitle,
+  activeTab,
+  activeImage,
+  onNext,
+  onPrev,
+  onSelect,
+  activeIdx,
+  tabs,
+  cards,
+  primary,
+  secondary,
+}: any) {
   return (
     <>
       {/* Section title — 2901:2134 */}
@@ -91,20 +181,21 @@ function ProductsUseCasesDesktop({ activeTab, activeImage, onNext, onPrev, onSel
             }}
             data-node-id="2901:2136"
           >
-            <span className="block leading-[49px]">Built for always-on.</span>
-            <span className="block leading-[49px]">{` Proven across markets.`}</span>
+            {headingLines.map((line: string, i: number) => (
+              <span key={i} className="block leading-[49px]">{line}</span>
+            ))}
           </h2>
         </div>
         <p
           className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           data-node-id="2901:2141"
         >
-          The same chip, tuned to the job — from a wrist to a factory floor.
+          {subtitle}
         </p>
       </div>
 
       {/* Options / tab ruler — 2901:2034 */}
-      <TabRuler onNext={onNext} onPrev={onPrev} onSelect={onSelect} activeIdx={activeIdx} />
+      <TabRuler onNext={onNext} onPrev={onPrev} onSelect={onSelect} activeIdx={activeIdx} tabs={tabs} />
 
       {/* Giant watermark — 2901:2103 */}
       <h3
@@ -157,8 +248,9 @@ function ProductsUseCasesDesktop({ activeTab, activeImage, onNext, onPrev, onSel
       />
 
       {/* Content cards */}
-      <UseCaseCardView card={USECASE_CARDS[0]} />
-      <UseCaseCardView card={USECASE_CARDS[1]} />
+      {cards.map((card: any, i: number) => (
+        <UseCaseCardView key={card.nodeId || i} card={card} />
+      ))}
 
       {/* CTA row — 2901:2143 */}
       <div
@@ -167,14 +259,14 @@ function ProductsUseCasesDesktop({ activeTab, activeImage, onNext, onPrev, onSel
         data-node-id="2901:2143"
         data-name="Frame 1984079464"
       >
-        <PrimaryCta>Explore Applications</PrimaryCta>
-        <SecondaryCta>Discuss Your Use Case</SecondaryCta>
+        <PrimaryCta href={primary.href}>{primary.label}</PrimaryCta>
+        <SecondaryCta href={secondary.href}>{secondary.label}</SecondaryCta>
       </div>
     </>
   );
 }
 
-function TabRuler({ onNext, onPrev, onSelect, activeIdx }: any) {
+function TabRuler({ onNext, onPrev, onSelect, activeIdx, tabs }: any) {
   return (
     <div
       className="absolute flex items-center justify-between"
@@ -186,12 +278,12 @@ function TabRuler({ onNext, onPrev, onSelect, activeIdx }: any) {
       <ArrowButton src="/products/tab-arrow-left.svg" nodeId="2901:2035" onClick={onPrev} />
 
       {/* Interleave tick segments and tabs */}
-      {USECASE_TABS.map((tab, i) => (
+      {tabs.map((tab: any, i: number) => (
         <div key={tab.label}
             onClick={() => onSelect(i)}
             role="button"
             tabIndex={0} className="contents">
-          <TickSegment heights={TICK_SEGMENTS[i]} />
+          <TickSegment heights={TICK_SEGMENTS[i] || TICK_SEGMENTS[0]} />
           <TabButton tab={tab} active={activeIdx === i} onClick={() => onSelect(i)} />
         </div>
       ))}
@@ -296,7 +388,7 @@ function Indicator({
   );
 }
 
-function UseCaseCardView({ card }: { card: (typeof USECASE_CARDS)[number] }) {
+function UseCaseCardView({ card }: { card: any }) {
   return (
     <div
       className="absolute flex flex-col items-start gap-[10px] p-[32px]"
@@ -325,10 +417,16 @@ function UseCaseCardView({ card }: { card: (typeof USECASE_CARDS)[number] }) {
   );
 }
 
-function PrimaryCta({ children }: { children: React.ReactNode }) {
+function PrimaryCta({
+  children,
+  href,
+}: {
+  children: React.ReactNode;
+  href: string;
+}) {
   return (
     <a
-      href="#"
+      href={href}
       className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[223px] shrink-0 items-center justify-center overflow-hidden`}
       data-node-id="2901:2144"
       data-name="Cta"
@@ -349,10 +447,16 @@ function PrimaryCta({ children }: { children: React.ReactNode }) {
   );
 }
 
-function SecondaryCta({ children }: { children: React.ReactNode }) {
+function SecondaryCta({
+  children,
+  href,
+}: {
+  children: React.ReactNode;
+  href: string;
+}) {
   return (
     <a
-      href="#"
+      href={href}
       className={`${gilroyMedium.className} relative flex h-[48px] shrink-0 items-center justify-center overflow-clip`}
       style={{ backgroundColor: SECONDARY_CTA_BG, width: 227 }}
       data-node-id="2901:2155"
@@ -366,7 +470,18 @@ function SecondaryCta({ children }: { children: React.ReactNode }) {
   );
 }
 
-function ProductsUseCasesMobile({ activeTab, activeImage, onSelect, activeIdx }: any) {
+function ProductsUseCasesMobile({
+  activeTab,
+  activeImage,
+  onSelect,
+  activeIdx,
+  headingLines,
+  subtitle,
+  tabs,
+  cards,
+  primary,
+  secondary,
+}: any) {
   return (
     <section
       className="relative w-full overflow-hidden bg-black px-[24px] pt-[64px] pb-[80px] min-[1024px]:hidden"
@@ -382,18 +497,18 @@ function ProductsUseCasesMobile({ activeTab, activeImage, onSelect, activeIdx }:
             backgroundClip: "text",
           }}
         >
-          {`Built for always-on. Proven across markets.`}
+          {headingLines.join(" ").trim()}
         </h2>
         <p
           className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]`}
         >
-          The same chip, tuned to the job — from a wrist to a factory floor.
+          {subtitle}
         </p>
       </div>
 
       {/* Tabs (scrollable row) */}
       <div className="mt-[32px] -mx-[24px] flex items-center gap-[16px] overflow-x-auto px-[24px] pb-[8px]">
-        {USECASE_TABS.map((tab, idx) => (
+        {tabs.map((tab: any, idx: number) => (
           <span
             key={tab.label}
             className={`${interRegular.className} shrink-0 whitespace-nowrap text-[13px] tracking-[0.02em] not-italic ${
@@ -430,7 +545,7 @@ function ProductsUseCasesMobile({ activeTab, activeImage, onSelect, activeIdx }:
 
       {/* Cards */}
       <div className="mt-[32px] flex flex-col gap-[16px]">
-        {USECASE_CARDS.map((card) => (
+        {cards.map((card: any) => (
           <div
             key={card.nodeId}
             className="relative flex flex-col gap-[8px] p-[20px]"
@@ -454,7 +569,7 @@ function ProductsUseCasesMobile({ activeTab, activeImage, onSelect, activeIdx }:
       {/* CTAs */}
       <div className="mt-[32px] flex flex-col gap-[16px]">
         <a
-          href="#"
+          href={primary.href}
           className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-center overflow-hidden`}
         >
           <span
@@ -462,7 +577,7 @@ function ProductsUseCasesMobile({ activeTab, activeImage, onSelect, activeIdx }:
             className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
           />
           <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
-            Explore Applications
+            {primary.label}
           </span>
           <span
             aria-hidden
@@ -471,12 +586,12 @@ function ProductsUseCasesMobile({ activeTab, activeImage, onSelect, activeIdx }:
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
         </a>
         <a
-          href="#"
+          href={secondary.href}
           className={`${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-center overflow-clip`}
           style={{ backgroundColor: SECONDARY_CTA_BG }}
         >
           <span className="relative px-[20px] py-[10px] text-[14px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
-            Discuss Your Use Case
+            {secondary.label}
           </span>
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
         </a>

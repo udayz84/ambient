@@ -1,3 +1,4 @@
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
@@ -8,13 +9,22 @@ const BG_IMG = "/technology/architecture-bg.png";
 const TITLE_GRADIENT_DEG = "113.506deg";
 const SUBTITLE_OPACITY = 0.65;
 
+const FALLBACK_TAG = "A-Cube";
+const FALLBACK_HEADING =
+  "One architecture that thinks\nsenses, & speaks you language";
+const FALLBACK_SUBTITLE =
+  "Three breakthroughs working as one system - a brain that runs on physics, a nervous system that knows when (and how hard) to think, and a language you already speak. Server-class AI in a coin-cell power budget.";
+
 const VIGNETTE =
   "radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%)";
 
-const SUBTITLE_TEXT =
-  "Three breakthroughs working as one system - a brain that runs on physics, a nervous system that knows when (and how hard) to think, and a language you already speak. Server-class AI in a coin-cell power budget.";
+export function TechnologyPageArchitecture({ data }: { data?: any } = {}) {
+  const tagText = data?.tag?.text || FALLBACK_TAG;
+  const heading = data?.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const objectSrc = mediaUrl(data?.image) || OBJECT_IMG;
 
-export function TechnologyPageArchitecture() {
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -51,7 +61,7 @@ export function TechnologyPageArchitecture() {
           data-name="Frame 1984079465"
         >
           <TagBadge
-            label="A-Cube"
+            label={tagText}
             width={110}
             labelOffsetX={0}
             rightBarLeft={102.66}
@@ -66,10 +76,10 @@ export function TechnologyPageArchitecture() {
           >
             <GradientTitle gradientDeg={TITLE_GRADIENT_DEG} className="text-center">
               <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-                One architecture that thinks
+                {headingLines[0] ?? ""}
               </span>
               <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-                {"senses, & speaks you language"}
+                {headingLines[1] ?? ""}
               </span>
             </GradientTitle>
             <CornerDecor />
@@ -80,7 +90,7 @@ export function TechnologyPageArchitecture() {
             style={{ opacity: SUBTITLE_OPACITY }}
             data-node-id="2992:1218"
           >
-            {SUBTITLE_TEXT}
+            {subtitle}
           </p>
         </div>
 
@@ -92,7 +102,7 @@ export function TechnologyPageArchitecture() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={OBJECT_IMG}
+            src={objectSrc}
             alt=""
             className="absolute inset-0 size-full max-w-none object-bottom"
             aria-hidden
@@ -103,7 +113,7 @@ export function TechnologyPageArchitecture() {
       {/* MOBILE (<1024px) — basic responsive version */}
       <div className="relative flex w-full flex-col items-center gap-[24px] px-[24px] py-[56px] min-[1024px]:hidden">
         <TagBadge
-          label="A-Cube"
+          label={tagText}
           width={110}
           labelOffsetX={0}
           rightBarLeft={102.66}
@@ -119,20 +129,20 @@ export function TechnologyPageArchitecture() {
             backgroundClip: "text",
           }}
         >
-          <span className="block">One architecture that thinks</span>
-          <span className="block">{"senses, & speaks you language"}</span>
+          <span className="block">{headingLines[0] ?? ""}</span>
+          <span className="block">{headingLines[1] ?? ""}</span>
         </div>
 
         <p
           className={`${interRegular.className} max-w-[327px] text-center text-[15px] leading-[22px] font-normal text-[#f0f0f0] not-italic`}
           style={{ opacity: SUBTITLE_OPACITY }}
         >
-          {SUBTITLE_TEXT}
+          {subtitle}
         </p>
 
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={OBJECT_IMG}
+          src={objectSrc}
           alt=""
           className="mt-[8px] h-auto w-full max-w-[327px] object-contain"
           aria-hidden

@@ -6,7 +6,14 @@ import {
   TECHNOLOGY_PARTNERS_TITLE_GRADIENT,
 } from "./company-technology-partners-data";
 
-export function CompanyTechnologyPartners() {
+const FALLBACK_TITLE = "TECHNOLOGY PARTNERS";
+
+type CompanyTechnologyPartnersProps = {
+  data?: any;
+};
+
+export function CompanyTechnologyPartners({ data }: CompanyTechnologyPartnersProps = {}) {
+  const title = (data?.title as string) || FALLBACK_TITLE;
   return (
     <section
       className="absolute top-[4584px] left-[118px] z-[8] h-[285px] w-[1204px] bg-black"
@@ -19,7 +26,7 @@ export function CompanyTechnologyPartners() {
         style={{ backgroundImage: TECHNOLOGY_PARTNERS_TITLE_GRADIENT }}
         data-node-id="2379:4670"
       >
-        TECHNOLOGY PARTNERS
+        {title}
       </p>
 
       <div

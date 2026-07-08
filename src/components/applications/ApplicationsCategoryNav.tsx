@@ -9,6 +9,7 @@ const tabCornerTl = "/applications/corners/tab-corner-tl.svg";
 const tabCornerTr = "/applications/corners/tab-corner-tr.svg";
 
 type ApplicationsCategoryNavProps = {
+  tabs?: any[];
   activeIndex: number;
   onTabClick: (index: number) => void;
   onShift: (dir: -1 | 1) => void;
@@ -58,6 +59,7 @@ export function CategoryDivider({
 }
 
 export function ApplicationsCategoryNav({
+  tabs = APPLICATION_TABS.map((label) => ({ label })),
   activeIndex,
   onTabClick,
   onShift,
@@ -84,7 +86,8 @@ export function ApplicationsCategoryNav({
         />
       </button>
 
-      {APPLICATION_TABS.map((label, index) => {
+      {tabs.map((tab, index) => {
+        const label = tab?.label ?? APPLICATION_TABS[index] ?? `Tab ${index}`;
         const isActive = index === activeIndex;
         const dividerVariant =
           index === activeIndex
@@ -115,7 +118,7 @@ export function ApplicationsCategoryNav({
       })}
       <CategoryDivider
         variant={
-          activeIndex === APPLICATION_TABS.length - 1
+          activeIndex === tabs.length - 1
             ? "after-active"
             : "normal"
         }

@@ -134,7 +134,18 @@ function CtaPanel({ data }: { data: PanelData }) {
   );
 }
 
-export function WearablesFooterAccent() {
+export function WearablesFooterAccent({ data }: { data?: any }) {
+  const dataPanels: any[] = Array.isArray(data?.panels) ? data.panels : [];
+  const panels = PANELS.map((fb, i) => {
+    const p = dataPanels[i];
+    if (!p) return fb;
+    return {
+      ...fb,
+      title: p.title || fb.title,
+      body: p.body || fb.body,
+      cta: p.cta_label || fb.cta,
+    };
+  });
   return (
     <section
       className="relative z-20 mb-0 min-[1024px]:mb-[-409px] flex w-full justify-center overflow-x-clip bg-transparent"
@@ -144,7 +155,7 @@ export function WearablesFooterAccent() {
       {/* DESKTOP (>=1024px) */}
       <div className="relative hidden w-full max-w-[1440px] min-[1024px]:block">
         <div className="flex w-full justify-center gap-[84px] pt-[89.5px]">
-          {PANELS.map((panel) => (
+          {panels.map((panel) => (
             <CtaPanel key={panel.title} data={panel} />
           ))}
         </div>
@@ -152,7 +163,7 @@ export function WearablesFooterAccent() {
 
       {/* MOBILE (<1024px) */}
       <div className="relative flex w-full flex-col items-center gap-[20px] px-[24px] pt-[60px] pb-[40px] min-[1024px]:hidden">
-        {PANELS.map((panel) => (
+        {panels.map((panel) => (
           <div key={panel.title} className="relative w-full">
             {/* Shape background */}
             <div className="pointer-events-none absolute inset-0">

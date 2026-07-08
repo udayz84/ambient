@@ -8,7 +8,13 @@ import { LATEST_NEWS_ARTICLES } from "./latest-news-data";
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
 
-export function LatestNewsMobile() {
+export function LatestNewsMobile({ data }: { data?: any }) {
+  const heading = data?.heading || "Latest from Ambient";
+  const subtitle =
+    data?.subtitle ||
+    "Ambient works with partners across silicon, development, distribution, and system integration, helping teams move from evaluation to deployment with confidence";
+  const ctaLabel = data?.cta_label || "Explore more";
+  const ctaHref = data?.cta_href || "/news-listing";
   return (
     <div className="relative flex flex-col items-center py-[48px]">
       <div className="relative flex flex-col items-center">
@@ -49,7 +55,7 @@ export function LatestNewsMobile() {
                 "linear-gradient(119.407deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
             }}
           >
-            Latest from Ambient
+            {heading}
           </h2>
         </div>
       </div>
@@ -57,10 +63,7 @@ export function LatestNewsMobile() {
       <p
         className={`${interRegular.className} mt-[16px] w-full max-w-[375px] text-center text-[14px] leading-[20px] font-normal text-white not-italic px-[8px]`}
       >
-        Ambient works with partners across silicon,<br />
-        development, distribution, and system integration,<br />
-        helping teams move from evaluation to deployment<br />
-        with confidence
+        {subtitle}
       </p>
 
       <div className="mt-[28px] flex w-full snap-x snap-mandatory gap-[14px] overflow-x-auto pb-[8px] px-[24px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -133,7 +136,7 @@ export function LatestNewsMobile() {
       </div>
 
       <a
-        href="/news-listing"
+        href={ctaHref}
         className="relative mt-[28px] flex h-[48px] w-[186px] items-center justify-center gap-[10px] shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]"
       >
         <span
@@ -141,7 +144,7 @@ export function LatestNewsMobile() {
           className="pointer-events-none absolute inset-0 rounded-[inherit] bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
         />
         <p className={`${interRegular.className} relative z-10 shrink-0 whitespace-nowrap text-[14px] font-semibold text-white uppercase not-italic tracking-[0.05em]`}>
-          Explore more
+          {ctaLabel}
         </p>
         <Image
           src="/navbar/cta-dot.svg"

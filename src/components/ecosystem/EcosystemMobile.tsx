@@ -30,7 +30,14 @@ function PartnerSectionMobile({ title, isSilicon }: { title: string; isSilicon: 
   );
 }
 
-export function EcosystemMobile() {
+export function EcosystemMobile({ data }: { data?: any }) {
+  const heading = data?.heading || "Supported by a growing ecosystem";
+  const subtitle =
+    data?.subtitle ||
+    "Ambient works with partners across silicon, development, distribution, and system integration, helping teams move from evaluation to deployment with confidence";
+  const cta = data?.cta || {};
+  const ctaLabel = cta.label || "WORK WITH US";
+  const ctaHref = cta.href || "/contact";
   return (
     <div className="relative flex flex-col items-center py-[48px]">
       <div className="relative inline-flex flex-col items-center justify-center w-fit max-w-[350px] px-[16px] py-[12px]">
@@ -70,20 +77,18 @@ export function EcosystemMobile() {
               "linear-gradient(107.454deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
           }}
         >
-          Supported by a growing ecosystem
+          {heading}
         </h2>
       </div>
       
       <p
         className={`${interRegular.className} mt-[24px] w-[356px] max-w-[calc(100vw-48px)] text-center text-[14px] leading-[22px] font-normal text-white opacity-80 not-italic`}
       >
-        Ambient works with partners across silicon, development, distribution,
-        and system integration, helping teams move from evaluation to
-        deployment with confidence
+        {subtitle}
       </p>
 
       <a
-        href="/contact"
+        href={ctaHref}
         className="relative mt-[16px] flex h-[48px] w-[186px] max-w-[calc(100vw-48px)] items-center justify-center gap-[10px] shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]"
       >
         <span
@@ -91,7 +96,7 @@ export function EcosystemMobile() {
           className="pointer-events-none absolute inset-0 rounded-[inherit] bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
         />
         <p className={`${interRegular.className} relative z-10 shrink-0 whitespace-nowrap text-[14px] font-medium text-white uppercase not-italic tracking-wider`}>
-          WORK WITH US
+          {ctaLabel}
         </p>
         <Image
           src="/navbar/cta-dot.svg"

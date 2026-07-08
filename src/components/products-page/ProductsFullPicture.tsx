@@ -1,3 +1,4 @@
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 
@@ -19,8 +20,8 @@ const IMAGE_VIGNETTE =
 const ICON_TILE_BG =
   "radial-gradient(60% 75% at 50% 0%, rgba(57,74,54,1) 0%, rgba(43,54,41,1) 50%, rgba(29,34,28,1) 100%)";
 
-const HEADER_COLOR = "#6fe047"; // colors/primary/500
-const PLUS_COLOR = "#3a9719"; // colors/primary/800
+const HEADER_COLOR = "#6fe047";
+const PLUS_COLOR = "#3a9719";
 const ITEM_TEXT_COLOR = "rgba(255,255,255,0.9)";
 
 /* ---- Central image — 2940:1245 ---- */
@@ -31,10 +32,11 @@ const CALLOUT_WIDTH = 284.6950378417969;
 const CARD_BG = "rgba(21,21,21,0.1)";
 const CARD_DIVIDER = "rgba(255,255,255,0.1)";
 
-const SUBTITLE =
+const FALLBACK_HEADING = "The full picture";
+const FALLBACK_SUBTITLE =
   "Bridge the lab and real world. The Sparsh module offers continuous, microwatt intelligence in a 21×21mm size, with a breakout board that snaps off for production.";
 
-const MEMORY_ITEMS = [
+const FALLBACK_MEMORY_ITEMS = [
   "120 KB L0 cache",
   "2048 KB unified L1 SRAM",
   "Video + multi-bank sensor buffers",
@@ -42,7 +44,7 @@ const MEMORY_ITEMS = [
   "External SRAM/Flash via QSPI/SPI",
 ];
 
-const SECURITY_ITEMS = [
+const FALLBACK_SECURITY_ITEMS = [
   "Secure boot with signed firmware",
   "AES-256 hardware acceleration",
   "True random number generator",
@@ -50,7 +52,7 @@ const SECURITY_ITEMS = [
   "Active tamper detection",
 ];
 
-const CONNECTIVITY_ITEMS = [
+const FALLBACK_CONNECTIVITY_ITEMS = [
   "Quad-SPI / SPI",
   "I2C x 4",
   "UART x 4",
@@ -64,34 +66,68 @@ type Callout = {
   top: number;
   header: string;
   items: string[];
+  icon?: string | null;
 };
 
-/**
- * 8 spec callouts. Positions are the Figma `left` values resolved against
- * the 1440-wide frame (e.g. card 1: 1440 - 1077.3 - 284.695 = 78.0).
- * Cards 2940:1340 & 2940:1372 are concrete "Memory" text nodes in Figma;
- * the other six are component instances, so each is given a distinct spec
- * (Compute / Power / Sensing / Security / Connectivity / Package). Item
- * counts match each card's fixed height (1- or 5-item variants).
- */
-const CALLOUTS: Callout[] = [
-  { nodeId: "2940:1340", left: 78, top: 238, header: "Memory", items: MEMORY_ITEMS },
+const FALLBACK_CALLOUTS: Callout[] = [
+  { nodeId: "2940:1340", left: 78, top: 238, header: "Memory", items: FALLBACK_MEMORY_ITEMS },
   { nodeId: "2940:1467", left: 578, top: 232, header: "Compute", items: ["512 GOPS neural compute"] },
-  { nodeId: "2940:1372", left: 1058, top: 243, header: "Memory", items: MEMORY_ITEMS },
+  { nodeId: "2940:1372", left: 1058, top: 243, header: "Memory", items: FALLBACK_MEMORY_ITEMS },
   { nodeId: "2940:1435", left: 106, top: 489, header: "Power", items: ["Under 100 µW always-on"] },
   { nodeId: "2940:1483", left: 1060, top: 491, header: "Sensing", items: ["10 fused sensor streams"] },
-  { nodeId: "2940:1404", left: 109, top: 610, header: "Security", items: SECURITY_ITEMS },
+  { nodeId: "2940:1404", left: 109, top: 610, header: "Security", items: FALLBACK_SECURITY_ITEMS },
   {
     nodeId: "2940:1499",
     left: 974.017578125,
     top: 592.53173828125,
     header: "Connectivity",
-    items: CONNECTIVITY_ITEMS,
+    items: FALLBACK_CONNECTIVITY_ITEMS,
   },
   { nodeId: "2940:1451", left: 569, top: 725, header: "Package", items: ["21 × 21 mm module"] },
 ];
 
-export function ProductsFullPicture() {
+function splitLinesFilter(value: string | undefined | null): string[] {
+  if (!value) return [];
+  return value
+    .split("\n")
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+export function ProductsFullPicture({ data }: { data?: any }) {
+  const heading = data?.heading || FALLBACK_HEADING;
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const image = mediaUrl(data?.image) || "/products/full-picture.png";
+
+  const memoryItems =
+    splitLinesFilter(data?.memory_items) || FALLBACK_MEMORY_ITEMS;
+  const securityItems =
+    splitLinesFilter(data?.security_items) || FALLBACK_SECURITY_ITEMS;
+  const connectivityItems =
+    splitLinesFilter(data?.connectivity_items) || FALLBACK_CONNECTIVITY_ITEMS;
+
+  const itemsByHeader: Record<string, string[]> = {
+    Memory: memoryItems,
+    Security: securityItems,
+    Connectivity: connectivityItems,
+  };
+
+  const strapiCallouts: Record<string, string | null> = {};
+  if (Array.isArray(data?.callouts)) {
+    for (const c of data.callouts) {
+      if (c?.label) strapiCallouts[c.label] = mediaUrl(c?.icon) || null;
+    }
+  }
+
+  const callouts = FALLBACK_CALLOUTS.map((c) => {
+    const dynamicItems = itemsByHeader[c.header];
+    return {
+      ...c,
+      items: dynamicItems && dynamicItems.length > 0 ? dynamicItems : c.items,
+      icon: strapiCallouts[c.header] ?? null,
+    };
+  });
+
   return (
     <>
       {/* DESKTOP (>=1024px) */}
@@ -106,18 +142,38 @@ export function ProductsFullPicture() {
           data-name="The full picture"
         >
           <div className="relative size-full">
-            <FullPictureDesktop />
+            <FullPictureDesktop
+              heading={heading}
+              subtitle={subtitle}
+              image={image}
+              callouts={callouts}
+            />
           </div>
         </div>
       </section>
 
       {/* MOBILE (<1024px) */}
-      <FullPictureMobile />
+      <FullPictureMobile
+        heading={heading}
+        subtitle={subtitle}
+        image={image}
+        callouts={callouts}
+      />
     </>
   );
 }
 
-function FullPictureDesktop() {
+function FullPictureDesktop({
+  heading,
+  subtitle,
+  image,
+  callouts,
+}: {
+  heading: string;
+  subtitle: string;
+  image: string;
+  callouts: Callout[];
+}) {
   return (
     <>
       {/* Section title — 2940:1331 (centered, w=800) */}
@@ -145,14 +201,14 @@ function FullPictureDesktop() {
             }}
             data-node-id="2940:1334"
           >
-            The full picture
+            {heading}
           </h2>
         </div>
         <p
           className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
           data-node-id="2940:1339"
         >
-          {SUBTITLE}
+          {subtitle}
         </p>
       </div>
 
@@ -171,7 +227,7 @@ function FullPictureDesktop() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt="Sparsh module"
-          src="/products/full-picture.png"
+          src={image}
           className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
         />
         <div
@@ -181,7 +237,7 @@ function FullPictureDesktop() {
       </div>
 
       {/* Spec callout cards */}
-      {CALLOUTS.map((callout) => (
+      {callouts.map((callout) => (
         <CalloutCard key={callout.nodeId} callout={callout} />
       ))}
     </>
@@ -223,7 +279,7 @@ function CalloutCard({ callout }: { callout: Callout }) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt=""
-            src="/products/spec-icon.svg"
+            src={callout.icon || "/products/spec-icon.svg"}
             className="block size-[19.649px] max-w-none"
           />
         </div>
@@ -265,7 +321,17 @@ function CalloutCard({ callout }: { callout: Callout }) {
   );
 }
 
-function FullPictureMobile() {
+function FullPictureMobile({
+  heading,
+  subtitle,
+  image,
+  callouts,
+}: {
+  heading: string;
+  subtitle: string;
+  image: string;
+  callouts: Callout[];
+}) {
   return (
     <section
       className="relative w-full overflow-hidden bg-black px-[24px] pt-[64px] pb-[80px] min-[1024px]:hidden"
@@ -281,12 +347,12 @@ function FullPictureMobile() {
             backgroundClip: "text",
           }}
         >
-          The full picture
+          {heading}
         </h2>
         <p
           className={`${interRegular.className} max-w-full text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65`}
         >
-          {SUBTITLE}
+          {subtitle}
         </p>
       </div>
 
@@ -295,14 +361,14 @@ function FullPictureMobile() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt="Sparsh module"
-          src="/products/full-picture.png"
+          src={image}
           className="h-auto w-full rounded-[8px]"
         />
       </div>
 
       {/* Callouts as stacked grid */}
       <div className="mt-[32px] grid grid-cols-1 gap-[24px] sm:grid-cols-2">
-        {CALLOUTS.map((callout) => (
+        {callouts.map((callout) => (
           <div
             key={callout.nodeId}
             className="relative flex flex-col gap-[8px] px-[12px] pb-[12px] pt-[8px] border border-white/10 rounded-[4px]"
@@ -326,7 +392,7 @@ function FullPictureMobile() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   alt=""
-                  src="/products/spec-icon.svg"
+                  src={callout.icon || "/products/spec-icon.svg"}
                   className="block size-[16px]"
                 />
               </div>

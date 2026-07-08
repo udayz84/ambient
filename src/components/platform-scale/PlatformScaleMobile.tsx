@@ -2,13 +2,19 @@
 
 import Image from "next/image";
 import { gilroyMedium, interMedium, interRegular } from "../hero/fonts";
-import { GPX_PRODUCTS } from "./platform-scale-data";
+import {
+  DEFAULT_GPX_INDEX,
+  GPX_PRODUCTS,
+  type GpxProduct,
+} from "./platform-scale-data";
 import { useState, useCallback } from "react";
 
-const TOTAL = GPX_PRODUCTS.length;
-
-function getVirtualProduct(virtualIndex: number) {
-  return GPX_PRODUCTS[((virtualIndex % TOTAL) + TOTAL) % TOTAL];
+function getVirtualProduct(
+  virtualIndex: number,
+  products: GpxProduct[]
+) {
+  const total = products.length || 1;
+  return products[((virtualIndex % total) + total) % total];
 }
 
 const MOBILE_TRANSITION =
@@ -114,17 +120,44 @@ const MOBILE_SLOT: Record<-2 | -1 | 0 | 1 | 2, MobileSlot> = {
   },
 };
 
-export function PlatformScaleMobile() {
-  const [virtualIndex, setVirtualIndex] = useState(TOTAL * 10);
+export function PlatformScaleMobile({ data }: { data?: any }) {
+  const products: GpxProduct[] =
+    Array.isArray(data?.products) && data.products.length
+      ? data.products.map((p: any, index: number) => {
+          const fallback = GPX_PRODUCTS[index] || ({} as GpxProduct);
+          return {
+            id: p?.product_id || fallback.id || `gpx-${index}`,
+            label: p?.label || fallback.label || "",
+            description: p?.description || fallback.description || "",
+          };
+        })
+      : GPX_PRODUCTS;
 
-  const activeProduct = getVirtualProduct(virtualIndex);
+  const TOTAL = products.length || 1;
+  const defaultIndex =
+    typeof data?.default_index === "number" ? data.default_index : DEFAULT_GPX_INDEX;
 
-  const goPrevious = useCallback(() => setVirtualIndex((c) => c - 1), []);
-  const goNext = useCallback(() => setVirtualIndex((c) => c + 1), []);
+  const heading = data?.heading || "One platform,\ninfinite scale";
+  const headingLines = heading.split("\n");
+  const headingLine1 = headingLines[0] || "One platform,";
+  const headingLine2 = headingLines.slice(1).join("\n") || "infinite scale";
+  const subtitle =
+    data?.subtitle ||
+    "A modular compute fabric for your entire product roadmap, from a microwatt edge array to a hyperscaler server grid, without ever changing your software";
+  const cta = data?.cta || {};
+  const ctaLabel = cta.label || "EXPLORE AMBIENT SILICON";
+  const ctaHref = cta.href || "/technology";
+
+  const [virtualIndex, setVirtualIndex] = useState(TOTAL * 10 + defaultIndex);
+
+  const activeProduct = getVirtualProduct(virtualIndex, products);
+
+  const goPrevious = useCallback(() => setVirtualIndex((c: number) => c - 1), []);
+  const goNext = useCallback(() => setVirtualIndex((c: number) => c + 1), []);
 
   const items = ([-2, -1, 0, 1, 2] as const).map((offset) => ({
     offset,
-    product: getVirtualProduct(virtualIndex + offset),
+    product: getVirtualProduct(virtualIndex + offset, products),
     key: `v-${virtualIndex + offset}`,
   }));
 
@@ -192,15 +225,13 @@ export function PlatformScaleMobile() {
                   "linear-gradient(100.945deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
               }}
             >
-              One platform,<br />infinite scale
+              {headingLine1}<br />{headingLine2}
             </h2>
           </div>
           <p
             className={`${interRegular.className} mt-[16px] max-w-[340px] px-[20px] text-center text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
           >
-            A modular compute fabric for your entire product roadmap, from a
-            microwatt edge array to a hyperscaler server grid, without ever
-            changing your software
+            {subtitle}
           </p>
         </div>
 
@@ -385,7 +416,7 @@ export function PlatformScaleMobile() {
 
         {/* CTA */}
         <a
-          href="/technology"
+          href={ctaHref}
           className={`${interMedium.className} relative mt-[31px] flex h-[48px] w-[237px] items-center justify-center shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
         >
           <span
@@ -397,7 +428,7 @@ export function PlatformScaleMobile() {
             className="pointer-events-none absolute inset-0 overflow-hidden z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
           />
           <p className="relative z-10 text-[12px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
-            EXPLORE AMBIENT SILICON
+            {ctaLabel}
           </p>
           
           <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">

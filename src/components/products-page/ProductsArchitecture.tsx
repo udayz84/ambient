@@ -1,3 +1,4 @@
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import {
@@ -10,11 +11,32 @@ import {
   CORNER_RIGHT,
 } from "./products-data";
 
+const FALLBACK_HEADING = "Everything in one chip. \nNothing wasted.";
+const FALLBACK_SUBTITLE =
+  "A complete edge-AI SoC — AI engine, control, sensing, memory, and security — integrated so your board doesn't have to be.";
+
+function splitLines(value: string): string[] {
+  return value.split("\n");
+}
+
 /**
  * Figma 2903:2164 (title) + 2903:2163 (architecture image) + 2903:2204 (stats).
  * "Everything in one chip. Nothing wasted."
  */
-export function ProductsArchitecture() {
+export function ProductsArchitecture({ data }: { data?: any }) {
+  const heading = data?.heading || FALLBACK_HEADING;
+  const headingLines = splitLines(heading);
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const image = mediaUrl(data?.image) || "/products/architecture.png";
+  const statIcon = mediaUrl(data?.stat_icon) || "/products/arch-stat-icon.svg";
+  const stats =
+    Array.isArray(data?.stats) && data.stats.length > 0
+      ? data.stats.map((s: any, i: number) => ({
+          nodeId: `arch-stat-${i}`,
+          title: s?.value || s?.label || ARCH_STATS[i]?.title || "",
+          description: s?.description ?? ARCH_STATS[i]?.description ?? "",
+        }))
+      : ARCH_STATS;
   return (
     <>
       {/* DESKTOP (>=1024px) */}
@@ -22,16 +44,40 @@ export function ProductsArchitecture() {
         className="relative mx-auto hidden w-full bg-black min-[1024px]:block"
         aria-label="Architecture"
       >
-        <ProductsArchitectureDesktop />
+        <ProductsArchitectureDesktop
+          headingLines={headingLines}
+          subtitle={subtitle}
+          image={image}
+          statIcon={statIcon}
+          stats={stats}
+        />
       </section>
 
       {/* MOBILE (<1024px) */}
-      <ProductsArchitectureMobile />
+      <ProductsArchitectureMobile
+        headingLines={headingLines}
+        subtitle={subtitle}
+        image={image}
+        statIcon={statIcon}
+        stats={stats}
+      />
     </>
   );
 }
 
-function ProductsArchitectureDesktop() {
+function ProductsArchitectureDesktop({
+  headingLines,
+  subtitle,
+  image,
+  statIcon,
+  stats,
+}: {
+  headingLines: string[];
+  subtitle: string;
+  image: string;
+  statIcon: string;
+  stats: any[];
+}) {
   return (
     <div className="mx-auto flex w-full max-w-[1205.594px] flex-col items-center pb-[120px]">
       {/* Section title — 2903:2164 (centered, w=650) */}
@@ -59,15 +105,16 @@ function ProductsArchitectureDesktop() {
             }}
             data-node-id="2903:2166"
           >
-            <span className="block leading-[49px]">{`Everything in one chip. `}</span>
-            <span className="block leading-[49px]">Nothing wasted.</span>
+            {headingLines.map((line, i) => (
+              <span key={i} className="block leading-[49px]">{line}</span>
+            ))}
           </h2>
         </div>
         <p
           className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           data-node-id="2903:2171"
         >
-          {`A complete edge-AI SoC — AI engine, control, sensing, memory, and security — integrated so your board doesn't have to be.`}
+          {subtitle}
         </p>
       </div>
 
@@ -81,7 +128,7 @@ function ProductsArchitectureDesktop() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt="GPX10 Pro architecture"
-          src="/products/architecture.png"
+          src={image}
           className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
         />
       </div>
@@ -97,11 +144,11 @@ function ProductsArchitectureDesktop() {
         data-node-id="2903:2204"
         data-name="Frame 1000003873"
       >
-        <ArchStatView stat={ARCH_STATS[0]} />
+        <ArchStatView stat={stats[0]} statIcon={statIcon} />
         <ArchGridDivider />
-        <ArchStatView stat={ARCH_STATS[1]} />
+        <ArchStatView stat={stats[1]} statIcon={statIcon} />
         <ArchGridDivider />
-        <ArchStatView stat={ARCH_STATS[2]} />
+        <ArchStatView stat={stats[2]} statIcon={statIcon} />
 
         <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
       </div>
@@ -109,7 +156,7 @@ function ProductsArchitectureDesktop() {
   );
 }
 
-function ArchStatView({ stat }: { stat: (typeof ARCH_STATS)[number] }) {
+function ArchStatView({ stat, statIcon }: { stat: any; statIcon: string }) {
   return (
     <div
       className="relative shrink-0"
@@ -131,7 +178,7 @@ function ArchStatView({ stat }: { stat: (typeof ARCH_STATS)[number] }) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt=""
-          src="/products/arch-stat-icon.svg"
+          src={statIcon}
           className="block size-full max-w-none"
           aria-hidden
         />
@@ -209,7 +256,19 @@ function ArchGridDivider() {
   );
 }
 
-function ProductsArchitectureMobile() {
+function ProductsArchitectureMobile({
+  headingLines,
+  subtitle,
+  image,
+  statIcon,
+  stats,
+}: {
+  headingLines: string[];
+  subtitle: string;
+  image: string;
+  statIcon: string;
+  stats: any[];
+}) {
   return (
     <section
       className="relative w-full bg-black px-[24px] pt-[64px] pb-[80px] min-[1024px]:hidden"
@@ -225,12 +284,12 @@ function ProductsArchitectureMobile() {
             backgroundClip: "text",
           }}
         >
-          {`Everything in one chip. Nothing wasted.`}
+          {headingLines.join(" ")}
         </h2>
         <p
           className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]`}
         >
-          {`A complete edge-AI SoC — AI engine, control, sensing, memory, and security — integrated so your board doesn't have to be.`}
+          {subtitle}
         </p>
       </div>
 
@@ -239,21 +298,21 @@ function ProductsArchitectureMobile() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt="GPX10 Pro architecture"
-          src="/products/architecture.png"
+          src={image}
           className="h-auto w-full"
         />
       </div>
 
       {/* Stats */}
       <div className="mt-[32px] flex flex-col">
-        {ARCH_STATS.map((stat, index) => (
+        {stats.map((stat, index) => (
           <div key={stat.nodeId}>
             <div className="flex flex-col gap-[12px] py-[20px]">
               <div className="flex items-center gap-[16px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   alt=""
-                  src="/products/arch-stat-icon.svg"
+                  src={statIcon}
                   className="h-[36px] w-[36px] shrink-0"
                   aria-hidden
                 />
@@ -269,7 +328,7 @@ function ProductsArchitectureMobile() {
                 {stat.description}
               </p>
             </div>
-            {index < ARCH_STATS.length - 1 && (
+            {index < stats.length - 1 && (
               <div className="h-px w-full border-t border-dashed border-white/15" />
             )}
           </div>

@@ -3,8 +3,10 @@ import { Corners } from "../shared/Corners";
 import { GradientTitle } from "../contact/contact-shared";
 
 const TITLE_GRADIENT_DEG = "128.192deg";
-const SUBTITLE =
+const FALLBACK_SUBTITLE =
   "A seamless toolchain is useless if hardware can’t integrate. Move from software validation to deployment instantly with our modular edge ecosystem.";
+const FALLBACK_HEADING = "Out-of-the-Box Intelligence";
+const FALLBACK_CTA_LABEL = "Download Motion SOM Brief";
 
 const CARD_BG =
   "linear-gradient(rgba(83, 216, 36, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%), linear-gradient(90deg, rgba(21, 21, 21, 0.3) 0%, rgba(21, 21, 21, 0.3) 100%)";
@@ -65,7 +67,7 @@ function IntelligenceCard({
   );
 }
 
-function DownloadCta() {
+function DownloadCta({ label }: { label: string }) {
   return (
     <a
       href="#"
@@ -79,7 +81,7 @@ function DownloadCta() {
       <span
         className={`relative ${gilroyMedium.className} text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic`}
       >
-        Download Motion SOM Brief
+        {label}
       </span>
       <span
         aria-hidden
@@ -90,7 +92,19 @@ function DownloadCta() {
   );
 }
 
-export function SomIntelligence() {
+export function SomIntelligence({ data }: { data?: any }) {
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const heading = data?.heading || FALLBACK_HEADING;
+  const ctaLabel = data?.cta_label || FALLBACK_CTA_LABEL;
+  const dataCards: any[] = Array.isArray(data?.cards) ? data.cards : [];
+  const cards = CARDS.map((fb, i) => {
+    const c = dataCards[i];
+    if (!c) return fb;
+    return {
+      title: c.title || fb.title,
+      description: c.description || fb.description,
+    };
+  });
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -108,21 +122,21 @@ export function SomIntelligence() {
               gradientDeg={TITLE_GRADIENT_DEG}
               className="text-center whitespace-nowrap"
             >
-              Out-of-the-Box Intelligence
+              {heading}
             </GradientTitle>
             <Corners />
           </div>
           <p
             className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
         </div>
         <div
           className="flex items-center gap-[24px]"
           data-name="Do the best work of your life"
         >
-          {CARDS.map((card) => (
+          {cards.map((card) => (
             <IntelligenceCard
               key={card.title}
               title={card.title}
@@ -130,7 +144,7 @@ export function SomIntelligence() {
             />
           ))}
         </div>
-        <DownloadCta />
+        <DownloadCta label={ctaLabel} />
       </div>
 
       {/* MOBILE (<1024px) */}
@@ -145,18 +159,18 @@ export function SomIntelligence() {
                 backgroundClip: "text",
               }}
             >
-              Out-of-the-Box Intelligence
+              {heading}
             </div>
             <Corners />
           </div>
           <p
             className={`${interRegular.className} max-w-[332px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/80 not-italic`}
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
         </div>
         <div className="flex w-full flex-col gap-[24px]">
-          {CARDS.map((card) => (
+          {cards.map((card) => (
             <IntelligenceCard
               key={card.title}
               title={card.title}
@@ -164,7 +178,7 @@ export function SomIntelligence() {
             />
           ))}
         </div>
-        <DownloadCta />
+        <DownloadCta label={ctaLabel} />
       </div>
     </section>
   );

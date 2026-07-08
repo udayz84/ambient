@@ -1,0 +1,206 @@
+{
+  "brand": {
+    "site_name": "Ambient Scientific",
+    "logo": 165,
+    "favicon": null
+  },
+  "header": {
+    "nav_items": [
+      {
+        "label": "Products",
+        "href": "/products",
+        "has_dropdown": true
+      },
+      {
+        "label": "Technology",
+        "href": "/technology",
+        "has_dropdown": true
+      },
+      {
+        "label": "Applications",
+        "href": "/applications",
+        "has_dropdown": true
+      },
+      {
+        "label": "Company",
+        "href": "/company",
+        "has_dropdown": true
+      },
+      {
+        "label": "News & Resources",
+        "href": "/news-listing",
+        "has_dropdown": true
+      },
+      {
+        "label": "Blog",
+        "href": "/resources",
+        "has_dropdown": true
+      },
+      {
+        "label": "Career",
+        "href": "/careers",
+        "has_dropdown": false
+      }
+    ],
+    "cta_label": "GET IN TOUCH",
+    "cta_href": "/contact",
+    "cta_dot_icon": null
+  },
+  "footer": {
+    "nav_sections": [
+      {
+        "title": "PRODUCTS",
+        "links": [
+          {
+            "label": "GPX10",
+            "href": "/products"
+          },
+          {
+            "label": "GPX64",
+            "href": "/products"
+          },
+          {
+            "label": "Development Kits",
+            "href": "/dvk"
+          },
+          {
+            "label": "ModelForge",
+            "href": "/developer"
+          }
+        ]
+      },
+      {
+        "title": "SOLUTIONS",
+        "links": [
+          {
+            "label": "Medical & Wearables",
+            "href": "/applications/wearables"
+          },
+          {
+            "label": "Smart Home",
+            "href": "/applications"
+          },
+          {
+            "label": "Industrial IoT",
+            "href": "/applications"
+          },
+          {
+            "label": "Robotics",
+            "href": "/applications"
+          }
+        ]
+      },
+      {
+        "title": "Resources",
+        "links": [
+          {
+            "label": "Documentation",
+            "href": "/resources"
+          },
+          {
+            "label": "Case Studies",
+            "href": "/resources"
+          },
+          {
+            "label": "Technical Papers",
+            "href": "/resources"
+          },
+          {
+            "label": "Blog",
+            "href": "/resources"
+          }
+        ]
+      },
+      {
+        "title": "Company",
+        "links": [
+          {
+            "label": "About",
+            "href": "/company"
+          },
+          {
+            "label": "Careers",
+            "href": "/careers"
+          },
+          {
+            "label": "Industrial IoT",
+            "href": "/applications"
+          },
+          {
+            "label": "Contact",
+            "href": "/contact"
+          }
+        ]
+      }
+    ],
+    "social_links": [
+      {
+        "platform": "LinkedIn",
+        "href": "#",
+        "icon": 166
+      },
+      {
+        "platform": "YouTube",
+        "href": "#",
+        "icon": 167
+      },
+      {
+        "platform": "X",
+        "href": "#",
+        "icon": 168
+      }
+    ],
+    "legal_links": [
+      {
+        "label": "Privacy Policy",
+        "href": "#"
+      },
+      {
+        "label": "Terms of Service",
+        "href": "#"
+      }
+    ],
+    "copyright_text": "© 2026 Ambient AI. All rights reserved.",
+    "crafted_by_text": "Carefully crafted by",
+    "crafted_by_logo": 169,
+    "background_image": null
+  },
+  "newsletter": {
+    "heading": "Want to stay in the forefront of AI tech.",
+    "subtitle": "Get the latest on Ambient's energy-aware AI processors, developer drops, and partner ecosystem news.",
+    "input_placeholder": "Your Email ID",
+    "button_label": "SUBSCRIBE",
+    "show_on_paths": [
+      "/",
+      "/company",
+      "/technology",
+      "/products"
+    ],
+    "texture_image": 148
+  },
+  "contact_details": {
+    "email": "contact@ambientscientific.com",
+    "phone": "",
+    "locations": [
+      {
+        "title": "USA Headquarters",
+        "address": "Ambient Scientific Inc. 4633 Old Ironsides Drive Santa Clara California 95054. USA"
+      },
+      {
+        "title": "Singapore Headquarters",
+        "address": "137 Telok Ayer Street, #05-02, Singapore 068602"
+      },
+      {
+        "title": "India Headquarters",
+        "address": "Ramky House, 1st Cross, Raghavendra Nagar, Kalyan Nagar, Bengaluru Karnataka, 560043, India"
+      }
+    ]
+  },
+  "default_seo": {
+    "meta_title": "Ambient Scientific",
+    "meta_description": "Energy-aware, programmable AI processors that unlock orders-of-magnitude improvements in performance-per-watt.",
+    "keywords": "AI processor, edge AI, analog compute, in-memory compute, GPX10, low-power AI, Ambient Scientific",
+    "noindex": false,
+    "canonical_url": "/"
+  }
+}

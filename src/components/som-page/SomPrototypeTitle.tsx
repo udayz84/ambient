@@ -19,6 +19,8 @@ const PROTOTYPE_CARDS = [
   },
 ] as const;
 
+const FALLBACK_HEADING = "Prototype to Product in a Snap";
+
 function PrototypeCard({
   title,
   description,
@@ -62,7 +64,17 @@ function PrototypeCard({
   );
 }
 
-export function SomPrototypeTitle() {
+export function SomPrototypeTitle({ data }: { data?: any }) {
+  const heading = data?.heading || FALLBACK_HEADING;
+  const dataCards: any[] = Array.isArray(data?.cards) ? data.cards : [];
+  const cards = PROTOTYPE_CARDS.map((fb, i) => {
+    const c = dataCards[i];
+    if (!c) return fb;
+    return {
+      title: c.title || fb.title,
+      description: c.description || fb.description,
+    };
+  });
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -75,12 +87,12 @@ export function SomPrototypeTitle() {
           <h2
             className={`${gilroyMedium.className} text-center text-[46px] leading-[49px] font-medium text-white whitespace-nowrap not-italic [word-break:break-word]`}
           >
-            Prototype to Product in a Snap
+            {heading}
           </h2>
           <Corners />
         </div>
         <div className="flex w-full items-center gap-[24px]">
-          {PROTOTYPE_CARDS.map((card) => (
+          {cards.map((card) => (
             <PrototypeCard
               key={card.title}
               title={card.title}
@@ -99,12 +111,12 @@ export function SomPrototypeTitle() {
           <h2
             className={`${gilroyMedium.className} text-center text-[34px] leading-[38px] font-medium text-white not-italic [word-break:break-word]`}
           >
-            Prototype to Product in a Snap
+            {heading}
           </h2>
           <Corners />
         </div>
         <div className="flex w-full flex-col gap-[24px]">
-          {PROTOTYPE_CARDS.map((card) => (
+          {cards.map((card) => (
             <PrototypeCard
               key={card.title}
               title={card.title}

@@ -1,3 +1,4 @@
+import { mediaUrl } from "@/lib/strapi";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { TabSwitcher } from "./TabSwitcher";
 import { Corners } from "../shared/Corners";
@@ -14,12 +15,41 @@ import {
   ICON_TILE_BG,
 } from "./products-data";
 
+const FALLBACK_HEADING = "Always on. Never asleep.";
+const FALLBACK_SUBTITLE =
+  "GPX10 Pro runs AI around the clock at microwatts — and the instant something matters, it surges to full power. No reset. No waking up. It was never off.";
+
+function splitLines(value: string): string[] {
+  return value.split("\n");
+}
+
 /**
  * "Always On. Never asleep." section.
  * Combines Figma 2915:1219 (title), 2908:487 (hand background) and
  * 2915:1234 (stats row) on a 1442-wide desktop canvas.
  */
-export function ProductsAlwaysOn() {
+export function ProductsAlwaysOn({ data }: { data?: any }) {
+  const heading = data?.heading || FALLBACK_HEADING;
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const image = mediaUrl(data?.image) || "/products/hand.png";
+  const statIcon = mediaUrl(data?.stat_icon) || "/products/stat-icon.svg";
+  const stats =
+    Array.isArray(data?.stats) && data.stats.length > 0
+      ? data.stats.map((s: any, i: number) => {
+          const fallback = ALWAYSON_STATS_DATA[i] || ALWAYSON_STATS_DATA[0];
+          const titleLines = splitLines(s?.title_lines || fallback.titleLines.join("\n"));
+          const badge = s?.badge || fallback.badge.label;
+          return {
+            nodeId: `stat-${i}`,
+            titleLines: [titleLines[0] || "", titleLines[1] || ""],
+            badge: {
+              label: badge,
+              width: fallback.badge.width,
+              rightBarLeft: fallback.badge.rightBarLeft,
+            },
+          };
+        })
+      : ALWAYSON_STATS_DATA;
   return (
     <>
       {/* DESKTOP (>=1024px) */}
@@ -31,17 +61,41 @@ export function ProductsAlwaysOn() {
           className="relative mx-auto w-[1442px]"
           style={{ height: ALWAYSON_SECTION_HEIGHT }}
         >
-          <ProductsAlwaysOnDesktop />
+          <ProductsAlwaysOnDesktop
+            heading={heading}
+            subtitle={subtitle}
+            image={image}
+            statIcon={statIcon}
+            stats={stats}
+          />
         </div>
       </section>
 
       {/* MOBILE (<1024px) */}
-      <ProductsAlwaysOnMobile />
+      <ProductsAlwaysOnMobile
+        heading={heading}
+        subtitle={subtitle}
+        image={image}
+        statIcon={statIcon}
+        stats={stats}
+      />
     </>
   );
 }
 
-function ProductsAlwaysOnDesktop() {
+function ProductsAlwaysOnDesktop({
+  heading,
+  subtitle,
+  image,
+  statIcon,
+  stats,
+}: {
+  heading: string;
+  subtitle: string;
+  image: string;
+  statIcon: string;
+  stats: any[];
+}) {
   return (
     <>
       {/* Hand background — 2908:487 */}
@@ -60,7 +114,7 @@ function ProductsAlwaysOnDesktop() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt=""
-          src="/products/hand.png"
+          src={image}
           className="absolute inset-0 size-full max-w-none object-bottom"
         />
         <div
@@ -98,16 +152,14 @@ function ProductsAlwaysOnDesktop() {
             }}
             data-node-id="2915:1221"
           >
-            Always on. Never asleep.
+            {heading}
           </h2>
         </div>
         <p
           className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           data-node-id="2915:1226"
         >
-          GPX10 Pro runs AI around the clock at microwatts — and the instant
-          something matters, it surges to full power. No reset. No waking up. It
-          was never off.
+          {subtitle}
         </p>
         <TabSwitcher className="mt-[8px]" />
       </div>
@@ -125,11 +177,11 @@ function ProductsAlwaysOnDesktop() {
         data-node-id="2915:1234"
         data-name="Frame 1984079438"
       >
-        <Stat stat={ALWAYSON_STATS_DATA[0]} />
+        <Stat stat={stats[0]} statIcon={statIcon} />
         <GridDivider />
-        <Stat stat={ALWAYSON_STATS_DATA[1]} />
+        <Stat stat={stats[1]} statIcon={statIcon} />
         <GridDivider />
-        <Stat stat={ALWAYSON_STATS_DATA[2]} />
+        <Stat stat={stats[2]} statIcon={statIcon} />
 
         {/* Frame corner marks */}
         <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
@@ -138,7 +190,7 @@ function ProductsAlwaysOnDesktop() {
   );
 }
 
-function Stat({ stat }: { stat: (typeof ALWAYSON_STATS_DATA)[number] }) {
+function Stat({ stat, statIcon }: { stat: any; statIcon: string }) {
   const { badge } = stat;
   return (
     <div
@@ -157,7 +209,7 @@ function Stat({ stat }: { stat: (typeof ALWAYSON_STATS_DATA)[number] }) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt=""
-            src="/products/stat-icon.svg"
+            src={statIcon}
             className="block size-full max-w-none"
           />
         </div>
@@ -266,7 +318,19 @@ function GridDivider() {
   );
 }
 
-function ProductsAlwaysOnMobile() {
+function ProductsAlwaysOnMobile({
+  heading,
+  subtitle,
+  image,
+  statIcon,
+  stats,
+}: {
+  heading: string;
+  subtitle: string;
+  image: string;
+  statIcon: string;
+  stats: any[];
+}) {
   return (
     <section
       className="relative w-full overflow-hidden bg-black min-[1024px]:hidden"
@@ -277,7 +341,7 @@ function ProductsAlwaysOnMobile() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt=""
-          src="/products/hand.png"
+          src={image}
           className="absolute inset-0 size-full object-cover object-center opacity-50"
         />
         <div
@@ -298,21 +362,19 @@ function ProductsAlwaysOnMobile() {
             backgroundClip: "text",
           }}
         >
-          Always on. Never asleep.
+          {heading}
         </h2>
         <p
           className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]`}
         >
-          GPX10 Pro runs AI around the clock at microwatts — and the instant
-          something matters, it surges to full power. No reset. No waking up. It
-          was never off.
+          {subtitle}
         </p>
         <TabSwitcher className="mt-[8px]" />
       </div>
 
       {/* Stats */}
       <div className="relative z-10 flex flex-col px-[24px] pb-[80px]">
-        {ALWAYSON_STATS_DATA.map((stat, index) => (
+        {stats.map((stat, index) => (
           <div key={stat.nodeId}>
             <div className="flex flex-col gap-[16px] py-[20px]">
               <div className="flex items-center gap-[16px]">
@@ -324,7 +386,7 @@ function ProductsAlwaysOnMobile() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     alt=""
-                    src="/products/stat-icon.svg"
+                    src={statIcon}
                     className="block h-[26.667px] w-[28.148px]"
                   />
                 </div>
@@ -340,7 +402,7 @@ function ProductsAlwaysOnMobile() {
                 {stat.titleLines[0]} {stat.titleLines[1]}
               </h3>
             </div>
-            {index < ALWAYSON_STATS_DATA.length - 1 && (
+            {index < stats.length - 1 && (
               <div className="h-px w-full border-t border-dashed border-white/15" />
             )}
           </div>

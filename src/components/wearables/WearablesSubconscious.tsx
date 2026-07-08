@@ -1,12 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 
 const TITLE_GRADIENT =
   "linear-gradient(147.032deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
-const SUBTITLE =
+const FALLBACK_SUBTITLE =
   "We eliminate the Von Neumann bottleneck by computing AI within the analog memory array. The GPX architecture allows continuous inference without waking the host processor.";
+const FALLBACK_HEADING = "Continuous AI-native operations in subconscious mode";
+const FALLBACK_CARD_TITLE = "The Hardware Blueprint";
+const FALLBACK_CARD_IMAGE = "/applications/wearables/hardware-blueprint.png";
+const FALLBACK_OVERLAY_TEXT = "Zzzz..";
 
 const CARD_BORDER =
   "border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] overflow-clip";
@@ -60,7 +65,21 @@ function InfoCard({
   );
 }
 
-export function WearablesSubconscious() {
+export function WearablesSubconscious({ data }: { data?: any }) {
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const heading = data?.heading || FALLBACK_HEADING;
+  const cardTitle = data?.card_title || FALLBACK_CARD_TITLE;
+  const cardImage = mediaUrl(data?.card_image) || FALLBACK_CARD_IMAGE;
+  const overlayText = data?.overlay_text || FALLBACK_OVERLAY_TEXT;
+  const dataCards: any[] = Array.isArray(data?.right_cards) ? data.right_cards : [];
+  const rightCards = RIGHT_CARDS.map((fb, i) => {
+    const c = dataCards[i];
+    if (!c) return fb;
+    return {
+      title: c.title || fb.title,
+      body: c.description || fb.body,
+    };
+  });
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -81,7 +100,7 @@ export function WearablesSubconscious() {
                 backgroundClip: "text",
               }}
             >
-              Continuous AI-native operations in subconscious mode
+              {heading}
             </h2>
             <Corners
               leftSrc="/applications/wearables/vector-42.svg"
@@ -91,7 +110,7 @@ export function WearablesSubconscious() {
           <p
             className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] text-[#f0f0f0] not-italic [word-break:break-word]`}
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
         </div>
 
@@ -106,7 +125,7 @@ export function WearablesSubconscious() {
             <div className="relative h-[428.617px] w-[535.58px] shrink-0" data-name="image">
               <img
                 alt=""
-                src="/applications/wearables/hardware-blueprint.png"
+                src={cardImage}
                 className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
                 aria-hidden
               />
@@ -115,13 +134,13 @@ export function WearablesSubconscious() {
             <p
               className={`${interRegular.className} absolute left-[143.79px] top-[161.5px] -translate-x-1/2 whitespace-nowrap text-center text-[14px] leading-[20px] tracking-[-0.1504px] text-white not-italic`}
             >
-              Zzzz..
+              {overlayText}
             </p>
             {/* Title */}
             <p
               className={`${gilroyMedium.className} min-w-full w-[min-content] shrink-0 text-[22px] leading-[28px] text-white not-italic`}
             >
-              The Hardware Blueprint
+              {cardTitle}
             </p>
             <Corners
               leftSrc="/applications/wearables/vector-42.svg"
@@ -131,7 +150,7 @@ export function WearablesSubconscious() {
 
           {/* Right: 3 stacked text cards */}
           <div className="flex w-[578px] shrink-0 flex-col justify-between self-stretch">
-            {RIGHT_CARDS.map((card) => (
+            {rightCards.map((card) => (
               <InfoCard key={card.title} title={card.title} body={card.body} />
             ))}
           </div>
@@ -151,7 +170,7 @@ export function WearablesSubconscious() {
                 backgroundClip: "text",
               }}
             >
-              Continuous AI-native operations in subconscious mode
+              {heading}
             </h2>
             <Corners
               leftSrc="/applications/wearables/vector-42.svg"
@@ -161,7 +180,7 @@ export function WearablesSubconscious() {
           <p
             className={`${interRegular.className} max-w-[327px] text-center text-[13px] leading-[20px] text-[#f0f0f0] not-italic`}
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
         </div>
 
@@ -172,7 +191,7 @@ export function WearablesSubconscious() {
           <div className="relative h-[240px] w-full shrink-0 overflow-hidden">
             <img
               alt=""
-              src="/applications/wearables/hardware-blueprint.png"
+              src={cardImage}
               className="pointer-events-none absolute inset-0 size-full object-cover"
               aria-hidden
             />
@@ -180,7 +199,7 @@ export function WearablesSubconscious() {
           <p
             className={`${gilroyMedium.className} w-full shrink-0 text-[20px] leading-[26px] text-white not-italic`}
           >
-            The Hardware Blueprint
+            {cardTitle}
           </p>
           <Corners
             leftSrc="/applications/wearables/vector-42.svg"
@@ -190,7 +209,7 @@ export function WearablesSubconscious() {
 
         {/* Text cards */}
         <div className="flex w-full flex-col gap-[16px]">
-          {RIGHT_CARDS.map((card) => (
+          {rightCards.map((card) => (
             <InfoCard key={card.title} title={card.title} body={card.body} />
           ))}
         </div>

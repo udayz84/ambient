@@ -9,12 +9,23 @@ import {
   CTA_HOVER_GLOW,
   DEVELOPER_COPILOTS,
 } from "./developer-data";
+import { mediaUrl } from "@/lib/strapi";
+
+const DEFAULT_HEADING = "Your deployment co-pilots.";
+const DEFAULT_SUBTITLE =
+  "A seamless toolchain is useless if hardware can&rsquo;t integrate. Move from software validation to deployment instantly with our modular edge ecosystem.";
 
 /**
  * Figma 2438:4666 — "Your deployment co-pilots." section.
  * Positioned at 118.305,4197 / 1204×588 within the Developer canvas.
  */
-export function DeveloperCopilotsSection() {
+export function DeveloperCopilotsSection({ data }: { data?: any }) {
+  const heading = data?.heading || DEFAULT_HEADING;
+  const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
+  const copilots =
+    data?.copilots && Array.isArray(data.copilots) && data.copilots.length > 0
+      ? data.copilots
+      : DEVELOPER_COPILOTS;
   return (
     <div
       className="absolute flex flex-col items-center gap-[40px]"
@@ -49,7 +60,7 @@ export function DeveloperCopilotsSection() {
             className={`${gilroyMedium.className} absolute left-1/2 top-[3.03px] -translate-x-1/2 bg-clip-text text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic`}
             style={{ backgroundImage: COPILOT_TITLE_GRADIENT }}
           >
-            Your deployment co-pilots.
+            {heading}
           </h2>
         </div>
 
@@ -57,9 +68,7 @@ export function DeveloperCopilotsSection() {
         <p
           className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65`}
         >
-          A seamless toolchain is useless if hardware can&rsquo;t integrate. Move
-          from software validation to deployment instantly with our modular edge
-          ecosystem.
+          {subtitle}
         </p>
       </div>
 
@@ -68,15 +77,31 @@ export function DeveloperCopilotsSection() {
         className="relative flex h-[409px] w-full items-center gap-[24px]"
         data-node-id="2438:4676"
       >
-        {DEVELOPER_COPILOTS.map((copilot) => (
-          <CopilotCard key={copilot.title} copilot={copilot} />
+        {copilots.map((copilot: any, i: number) => (
+          <CopilotCard
+            key={copilot.title || i}
+            copilot={copilot}
+            fallback={DEVELOPER_COPILOTS[i] || DEVELOPER_COPILOTS[0]}
+          />
         ))}
       </div>
     </div>
   );
 }
 
-function CopilotCard({ copilot }: { copilot: (typeof DEVELOPER_COPILOTS)[number] }) {
+function CopilotCard({
+  copilot,
+  fallback,
+}: {
+  copilot: any;
+  fallback: (typeof DEVELOPER_COPILOTS)[number];
+}) {
+  const icon = mediaUrl(copilot?.icon) || fallback.icon;
+  const title = copilot?.title || fallback.title;
+  const description = fallback.description;
+  const ctaLabel = copilot?.cta_label || fallback.ctaLabel;
+  const ctaHref = copilot?.cta_href || "#";
+  const ctaFullWidth = fallback.ctaFullWidth;
   return (
     <div
       className="group relative flex h-[409px] w-[385px] shrink-0 flex-col justify-between p-[32px]"
@@ -91,7 +116,7 @@ function CopilotCard({ copilot }: { copilot: (typeof DEVELOPER_COPILOTS)[number]
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt=""
-          src={copilot.icon}
+          src={icon}
           aria-hidden
           className="absolute left-1/2 top-1/2 size-[48px] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain"
         />
@@ -102,15 +127,15 @@ function CopilotCard({ copilot }: { copilot: (typeof DEVELOPER_COPILOTS)[number]
         <p
           className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white not-italic`}
         >
-          {copilot.title}
+          {title}
         </p>
         <p
           className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-white not-italic opacity-65`}
         >
-          {copilot.description}
+          {description}
         </p>
-        <CopilotCta fullWidth={copilot.ctaFullWidth}>
-          {copilot.ctaLabel}
+        <CopilotCta fullWidth={ctaFullWidth} href={ctaHref}>
+          {ctaLabel}
         </CopilotCta>
       </div>
 
@@ -123,13 +148,15 @@ function CopilotCard({ copilot }: { copilot: (typeof DEVELOPER_COPILOTS)[number]
 function CopilotCta({
   children,
   fullWidth = false,
+  href,
 }: {
   children: React.ReactNode;
   fullWidth?: boolean;
+  href: string;
 }) {
   return (
     <a
-      href="#"
+      href={href}
       className={`${gilroyMedium.className} ${CTA_HOVER_GLOW} relative flex h-[48px] ${fullWidth ? "w-full" : "shrink-0"} items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] not-italic opacity-100 transition-[box-shadow,background-color] duration-200 group-hover:bg-transparent`}
       data-node-id="2438:4688"
     >

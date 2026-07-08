@@ -1,11 +1,16 @@
+import { mediaUrl } from "@/lib/strapi";
 import { gilroySemiBold } from "../hero/fonts";
 import { RepelDots } from "../shared/RepelDots";
 import { Corners } from "../shared/Corners";
 
-export function ApplicationsCta() {
+export function ApplicationsCta({ data }: { data?: any }) {
+  const cta = data?.cta || {};
+  const label = cta.label || "EXPLORE APPLICATION";
+  const href = cta.href || "/applications";
+  const dotIcon = mediaUrl(cta.dot_icon) || "/applications/cta-dot.svg";
   return (
     <a
-      href="/applications"
+      href={href}
       className={`${gilroySemiBold.className} absolute top-[819.2216796875px] left-1/2 h-[48px] w-[205px] -translate-x-1/2 shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
       data-node-id="2379:952"
       data-name="Cta"
@@ -21,12 +26,12 @@ export function ApplicationsCta() {
         className="absolute z-10 top-[calc(50%-8px)] left-[20px] text-[14px] leading-[normal] font-semibold whitespace-nowrap text-white uppercase not-italic [word-break:break-word]"
         data-node-id="2379:953"
       >
-        EXPLORE APPLICATION
+        {label}
       </p>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         alt=""
-        src="/applications/cta-dot.svg"
+        src={dotIcon}
         className="absolute z-10 top-1/2 left-[178px] size-[6px] -translate-y-1/2"
         aria-hidden
       />
@@ -34,7 +39,7 @@ export function ApplicationsCta() {
         aria-hidden
         className="pointer-events-none absolute inset-0 z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
       />
-      
+
       {/* Custom Corners that pop out slightly to avoid the inset shadow */}
       <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">
         <div className="rotate-180 flex-none">

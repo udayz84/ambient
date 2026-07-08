@@ -5,7 +5,8 @@ import { Corners } from "../shared/Corners";
 const TITLE_GRADIENT =
   "linear-gradient(118.011deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
-const SUBTITLE =
+const FALLBACK_HEADING = "The Empirical Proof";
+const FALLBACK_SUBTITLE =
   "Don't spend your first day writing sensor configuration code. The Cranium board comes ready to run out of the box, allowing you to instantly test physical AI models and validate performance on the metal with zero setup required.";
 
 const IMG_OVERLAY_1 =
@@ -70,7 +71,15 @@ function Badge({
 }
 
 /* ── Top Card 1: Health Monitoring ───────────────────────────── */
-function HealthCard() {
+function HealthCard({ data }: { data?: any }) {
+  const badge = data?.badge || "The Workload";
+  const title = data?.title || "Health Monitoring Solutions";
+  const body =
+    data?.body ||
+    "Continuous, on-device assault detection and biomarker analysis for early onset predictions for PCOD/PCOS to enable 24/7 women health and safety";
+  const ctaLabel = data?.cta_label || "Download Case Study";
+  const footer =
+    data?.footer || "Up to 2 weeks of continuous tracking with on-device AI.";
   return (
     <div
       className={`relative h-[364px] w-[575px] shrink-0 ${CARD_BG}`}
@@ -84,7 +93,7 @@ function HealthCard() {
       />
       {/* Badge */}
       <div className="absolute left-[35px] top-[33.74px] flex items-center gap-[27.778px]">
-        <Badge label="The Workload" width={137} />
+        <Badge label={badge} width={137} />
       </div>
       {/* Title + body */}
       <div
@@ -92,14 +101,12 @@ function HealthCard() {
         data-name="NewsSection"
       >
         <p className="text-[24px] leading-[28.295px] text-white whitespace-nowrap">
-          Health Monitoring Solutions
+          {title}
         </p>
         <p
           className={`${interRegular.className} min-w-full w-[min-content] text-[16px] leading-[24px] text-[rgba(255,255,255,0.6)] [word-break:break-word]`}
         >
-          Continuous, on-device assault detection and biomarker analysis for
-          early onset predictions for PCOD/PCOS to enable 24/7 women health and
-          safety
+          {body}
         </p>
       </div>
       {/* CTA */}
@@ -117,7 +124,7 @@ function HealthCard() {
           rightSrc="/applications/wearables/vector-46.svg"
         />
         <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic">
-          Download Case Study
+          {ctaLabel}
         </span>
         <img
           alt=""
@@ -134,7 +141,7 @@ function HealthCard() {
       <p
         className={`${interRegular.className} absolute left-[35px] top-[315.12px] w-[458.152px] text-[14px] leading-[21px] text-[#a4a4a4] not-italic [word-break:break-word]`}
       >
-        Up to 2 weeks of continuous tracking with on-device AI.
+        {footer}
       </p>
     </div>
   );
@@ -201,7 +208,13 @@ function SidePanel({
 }
 
 /* ── Top Card 2: Power Consumption ───────────────────────────── */
-function PowerCard() {
+function PowerCard({ data }: { data?: any }) {
+  const badge = data?.badge || "Power Consumption";
+  const dataPanels: any[] = Array.isArray(data?.panels) ? data.panels : [];
+  const ambient =
+    dataPanels[0] || { label: "Ambient", value: "<1mW", description: "Lower energy usage" };
+  const legacy =
+    dataPanels[1] || { label: "Legacy", value: "10mW", description: "Higher energy usage" };
   return (
     <div
       className={`relative h-[364px] w-[341px] shrink-0 ${CARD_BG}`}
@@ -215,12 +228,12 @@ function PowerCard() {
       />
       {/* Badge centered */}
       <div className="absolute left-1/2 top-[26.75px] -translate-x-1/2">
-        <Badge label="Power Consumption" width={176} />
+        <Badge label={badge} width={176} />
       </div>
       {/* Ambient side panel */}
       <div className="absolute left-[27.36px] top-[82.62px]">
         <SidePanel
-          title="Ambient"
+          title={ambient.label}
           segments={[
             { h: 15, variant: "green" },
             { h: 15, variant: "green" },
@@ -229,14 +242,14 @@ function PowerCard() {
             { h: 15, variant: "green" },
             { h: 30, variant: "green" },
           ]}
-          statValue="<1mW"
-          statLabel="Lower energy usage"
+          statValue={ambient.value}
+          statLabel={ambient.description}
         />
       </div>
       {/* Legacy side panel */}
       <div className="absolute left-[204.36px] top-[82.62px]">
         <SidePanel
-          title="Legacy"
+          title={legacy.label}
           segments={[
             { h: 15, variant: "green" },
             { h: 15, variant: "red" },
@@ -245,8 +258,8 @@ function PowerCard() {
             { h: 15, variant: "redDual" },
             { h: 30, variant: "red" },
           ]}
-          statValue="10mW"
-          statLabel="Higher energy usage"
+          statValue={legacy.value}
+          statLabel={legacy.description}
         />
       </div>
     </div>
@@ -309,7 +322,11 @@ function WorkloadDiagram() {
   );
 }
 
-function WorkloadCard() {
+function WorkloadCard({ data }: { data?: any }) {
+  const badge = data?.badge || "The Workload";
+  const stat = data?.stat || "100%";
+  const label = data?.label || "On-device";
+  const description = data?.description || "No cloud dependency";
   return (
     <div
       className={`relative h-[364px] w-[311px] shrink-0 ${CARD_BG}`}
@@ -323,7 +340,7 @@ function WorkloadCard() {
       />
       {/* Badge centered */}
       <div className="absolute left-1/2 top-[26.75px] -translate-x-1/2">
-        <Badge label="The Workload" width={137} />
+        <Badge label={badge} width={137} />
       </div>
       {/* Diagram */}
       <WorkloadDiagram />
@@ -331,24 +348,32 @@ function WorkloadCard() {
       <p
         className={`${gilroySemiBold.className} absolute left-1/2 top-[240.34px] -translate-x-1/2 text-[40px] leading-[normal] text-white whitespace-nowrap not-italic`}
       >
-        100%
+        {stat}
       </p>
       <p
         className={`${interRegular.className} absolute left-1/2 top-[295.69px] -translate-x-1/2 text-[14px] leading-[21px] text-[#f0f0f0] whitespace-nowrap not-italic`}
       >
-        On-device
+        {label}
       </p>
       <p
         className={`${interRegular.className} absolute left-1/2 top-[317.69px] -translate-x-1/2 text-[12px] leading-[18px] text-white whitespace-nowrap not-italic`}
       >
-        No cloud dependency
+        {description}
       </p>
     </div>
   );
 }
 
 /* ── Bottom Row: ECG Cards ───────────────────────────────────── */
-function EcgCard({ imageSrc }: { imageSrc: string }) {
+function EcgCard({
+  imageSrc,
+  stat,
+  label,
+}: {
+  imageSrc: string;
+  stat: string;
+  label: string;
+}) {
   return (
     <div
       className={`relative h-[292px] w-[301px] shrink-0 ${CARD_BG}`}
@@ -395,12 +420,12 @@ function EcgCard({ imageSrc }: { imageSrc: string }) {
         className={`${gilroySemiBold.className} absolute top-[200.31px] text-[40px] leading-[normal] text-white whitespace-nowrap not-italic`}
         style={{ left: "calc(50% - 124.5px)" }}
       >
-        99.7%
+        {stat}
       </p>
       <p
         className={`${interRegular.className} absolute left-[17.89px] top-[252.59px] text-[14px] leading-[21px] text-[#f0f0f0] whitespace-nowrap not-italic`}
       >
-        clinical graded
+        {label}
       </p>
     </div>
   );
@@ -408,9 +433,20 @@ function EcgCard({ imageSrc }: { imageSrc: string }) {
 
 const IMG_187 = "/applications/wearables/img-187.png";
 const IMG_188 = "/applications/wearables/img-188.png";
+const ECG_FALLBACK_STAT = "99.7%";
+const ECG_FALLBACK_LABEL = "clinical graded";
+const ECG_IMAGES = [IMG_187, IMG_188, IMG_187, IMG_188];
 
 /* ── Mobile variants ─────────────────────────────────────────── */
-function EcgCardMobile({ imageSrc }: { imageSrc: string }) {
+function EcgCardMobile({
+  imageSrc,
+  stat,
+  label,
+}: {
+  imageSrc: string;
+  stat: string;
+  label: string;
+}) {
   return (
     <div className={`relative h-[240px] w-full shrink-0 ${CARD_BG}`}>
       <CardAbstractBg />
@@ -449,18 +485,54 @@ function EcgCardMobile({ imageSrc }: { imageSrc: string }) {
       <p
         className={`${gilroySemiBold.className} absolute left-1/2 top-[168px] -translate-x-1/2 text-[32px] leading-[normal] text-white whitespace-nowrap not-italic`}
       >
-        99.7%
+        {stat}
       </p>
       <p
         className={`${interRegular.className} absolute left-[14px] bottom-[12px] text-[12px] leading-[18px] text-[#f0f0f0] whitespace-nowrap not-italic`}
       >
-        clinical graded
+        {label}
       </p>
     </div>
   );
 }
 
-export function WearablesEmpiricalProof() {
+export function WearablesEmpiricalProof({ data }: { data?: any }) {
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const heading = data?.heading || FALLBACK_HEADING;
+  const healthData = data?.health_card;
+  const powerData = data?.power_card;
+  const workloadData = data?.workload_card;
+  const dataEcgCards: any[] = Array.isArray(data?.ecg_cards) ? data.ecg_cards : [];
+  const ecgCards = Array.from({ length: 4 }).map((_, i) => {
+    const c = dataEcgCards[i];
+    return {
+      imageSrc: ECG_IMAGES[i] ?? IMG_187,
+      stat: c?.stat || ECG_FALLBACK_STAT,
+      label: c?.label || ECG_FALLBACK_LABEL,
+    };
+  });
+
+  const healthBadge = healthData?.badge || "The Workload";
+  const healthTitle = healthData?.title || "Health Monitoring Solutions";
+  const healthBody =
+    healthData?.body ||
+    "Continuous, on-device assault detection and biomarker analysis for early onset predictions for PCOD/PCOS to enable 24/7 women health and safety";
+  const healthCta = healthData?.cta_label || "Download Case Study";
+  const healthFooter =
+    healthData?.footer || "Up to 2 weeks of continuous tracking with on-device AI.";
+
+  const powerBadge = powerData?.badge || "Power Consumption";
+  const powerPanels: any[] = Array.isArray(powerData?.panels) ? powerData.panels : [];
+  const ambientPanel =
+    powerPanels[0] || { label: "Ambient", value: "<1mW", description: "Lower energy usage" };
+  const legacyPanel =
+    powerPanels[1] || { label: "Legacy", value: "10mW", description: "Higher energy usage" };
+
+  const workloadBadge = workloadData?.badge || "The Workload";
+  const workloadStat = workloadData?.stat || "100%";
+  const workloadLabel = workloadData?.label || "On-device";
+  const workloadDescription = workloadData?.description || "No cloud dependency";
+
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -494,7 +566,7 @@ export function WearablesEmpiricalProof() {
                 backgroundClip: "text",
               }}
             >
-              The Empirical Proof
+              {heading}
             </h2>
             <Corners
               leftSrc="/applications/wearables/vector-42.svg"
@@ -504,23 +576,27 @@ export function WearablesEmpiricalProof() {
           <p
             className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] text-[#f0f0f0] not-italic [word-break:break-word]`}
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
         </div>
 
         {/* Top row — 3 cards */}
         <div className="absolute left-1/2 top-[288.75px] flex -translate-x-1/2 items-center gap-[20px]">
-          <HealthCard />
-          <PowerCard />
-          <WorkloadCard />
+          <HealthCard data={healthData} />
+          <PowerCard data={powerData} />
+          <WorkloadCard data={workloadData} />
         </div>
 
         {/* Bottom row — 4 ECG cards */}
         <div className="absolute left-1/2 top-[676.1px] flex -translate-x-1/2 gap-[20px]">
-          <EcgCard imageSrc={IMG_187} />
-          <EcgCard imageSrc={IMG_188} />
-          <EcgCard imageSrc={IMG_187} />
-          <EcgCard imageSrc={IMG_188} />
+          {ecgCards.map((card, i) => (
+            <EcgCard
+              key={i}
+              imageSrc={card.imageSrc}
+              stat={card.stat}
+              label={card.label}
+            />
+          ))}
         </div>
       </div>
 
@@ -537,7 +613,7 @@ export function WearablesEmpiricalProof() {
                 backgroundClip: "text",
               }}
             >
-              The Empirical Proof
+              {heading}
             </h2>
             <Corners
               leftSrc="/applications/wearables/vector-42.svg"
@@ -547,7 +623,7 @@ export function WearablesEmpiricalProof() {
           <p
             className={`${interRegular.className} max-w-[327px] text-center text-[13px] leading-[20px] text-[#f0f0f0] not-italic`}
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
         </div>
 
@@ -559,17 +635,15 @@ export function WearablesEmpiricalProof() {
             rightSrc="/applications/wearables/vector-46.svg"
           />
           <div className="relative flex flex-col gap-[12px]">
-            <Badge label="The Workload" width={137} />
+            <Badge label={healthBadge} width={137} />
             <p className={`${gilroyMedium.className} text-[20px] leading-[26px] text-white not-italic`}>
-              Health Monitoring Solutions
+              {healthTitle}
             </p>
             <p className={`${interRegular.className} text-[14px] leading-[21px] text-[rgba(255,255,255,0.6)] not-italic`}>
-              Continuous, on-device assault detection and biomarker analysis for
-              early onset predictions for PCOD/PCOS to enable 24/7 women health
-              and safety
+              {healthBody}
             </p>
             <p className={`${interRegular.className} text-[13px] leading-[20px] text-[#a4a4a4] not-italic`}>
-              Up to 2 weeks of continuous tracking with on-device AI.
+              {healthFooter}
             </p>
             <a
               href="#"
@@ -581,7 +655,7 @@ export function WearablesEmpiricalProof() {
                 rightSrc="/applications/wearables/vector-46.svg"
               />
               <span className="relative whitespace-nowrap text-[14px] leading-[28px] font-medium text-white uppercase not-italic">
-                Download Case Study
+                {healthCta}
               </span>
               <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
             </a>
@@ -596,21 +670,21 @@ export function WearablesEmpiricalProof() {
             rightSrc="/applications/wearables/vector-46.svg"
           />
           <div className="relative flex flex-col items-center gap-[16px]">
-            <Badge label="Power Consumption" width={176} />
+            <Badge label={powerBadge} width={176} />
             <div className="flex w-full justify-around">
               <div className="flex flex-col items-center gap-[10px]">
-                <p className={`${gilroyMedium.className} text-[16px] leading-[20px] text-white not-italic`}>Ambient</p>
+                <p className={`${gilroyMedium.className} text-[16px] leading-[20px] text-white not-italic`}>{ambientPanel.label}</p>
                 <div className="flex w-[40px] flex-col gap-[4px]">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <div key={i} className="h-[12px] w-[40px] rounded-[1px] bg-gradient-to-b from-[rgba(140,230,108,0.5)] to-[rgba(27,47,20,0.5)] mix-blend-luminosity" />
                   ))}
                   <div className="h-[24px] w-[40px] rounded-[1px] bg-gradient-to-b from-[#a8ed90] to-[#357120]" />
                 </div>
-                <p className={`${gilroySemiBold.className} text-[24px] text-white`}>{"<1mW"}</p>
-                <p className={`${interRegular.className} text-[11px] leading-[16px] text-[#f0f0f0]`}>Lower energy usage</p>
+                <p className={`${gilroySemiBold.className} text-[24px] text-white`}>{ambientPanel.value}</p>
+                <p className={`${interRegular.className} text-[11px] leading-[16px] text-[#f0f0f0]`}>{ambientPanel.description}</p>
               </div>
               <div className="flex flex-col items-center gap-[10px]">
-                <p className={`${gilroyMedium.className} text-[16px] leading-[20px] text-white not-italic`}>Legacy</p>
+                <p className={`${gilroyMedium.className} text-[16px] leading-[20px] text-white not-italic`}>{legacyPanel.label}</p>
                 <div className="flex w-[40px] flex-col gap-[4px]">
                   <div className="h-[12px] w-[40px] rounded-[1px] bg-gradient-to-b from-[rgba(140,230,108,0.5)] to-[rgba(27,47,20,0.5)] mix-blend-luminosity" />
                   <div className="h-[12px] w-[40px] rounded-[1px] bg-gradient-to-b from-[#e66c6c] from-[42.377%] to-[#3a131e] to-[150.73%]" />
@@ -619,8 +693,8 @@ export function WearablesEmpiricalProof() {
                   ))}
                   <div className="h-[24px] w-[40px] rounded-[1px] bg-gradient-to-b from-[#e66c6c] from-[42.377%] to-[#3a131e] to-[150.73%]" />
                 </div>
-                <p className={`${gilroySemiBold.className} text-[24px] text-white`}>10mW</p>
-                <p className={`${interRegular.className} text-[11px] leading-[16px] text-[#f0f0f0]`}>Higher energy usage</p>
+                <p className={`${gilroySemiBold.className} text-[24px] text-white`}>{legacyPanel.value}</p>
+                <p className={`${interRegular.className} text-[11px] leading-[16px] text-[#f0f0f0]`}>{legacyPanel.description}</p>
               </div>
             </div>
           </div>
@@ -634,26 +708,30 @@ export function WearablesEmpiricalProof() {
             rightSrc="/applications/wearables/vector-46.svg"
           />
           <div className="absolute left-1/2 top-[18px] -translate-x-1/2">
-            <Badge label="The Workload" width={137} />
+            <Badge label={workloadBadge} width={137} />
           </div>
           <WorkloadDiagram />
           <p className={`${gilroySemiBold.className} absolute left-1/2 top-[170px] -translate-x-1/2 text-[36px] leading-[normal] text-white whitespace-nowrap not-italic`}>
-            100%
+            {workloadStat}
           </p>
           <p className={`${interRegular.className} absolute left-1/2 top-[216px] -translate-x-1/2 text-[13px] leading-[20px] text-[#f0f0f0] whitespace-nowrap not-italic`}>
-            On-device
+            {workloadLabel}
           </p>
           <p className={`${interRegular.className} absolute left-1/2 top-[238px] -translate-x-1/2 text-[11px] leading-[16px] text-white whitespace-nowrap not-italic`}>
-            No cloud dependency
+            {workloadDescription}
           </p>
         </div>
 
         {/* ECG cards (mobile) — 2x2 grid */}
         <div className="grid w-full grid-cols-2 gap-[12px]">
-          <EcgCardMobile imageSrc={IMG_187} />
-          <EcgCardMobile imageSrc={IMG_188} />
-          <EcgCardMobile imageSrc={IMG_187} />
-          <EcgCardMobile imageSrc={IMG_188} />
+          {ecgCards.map((card, i) => (
+            <EcgCardMobile
+              key={i}
+              imageSrc={card.imageSrc}
+              stat={card.stat}
+              label={card.label}
+            />
+          ))}
         </div>
       </div>
     </section>

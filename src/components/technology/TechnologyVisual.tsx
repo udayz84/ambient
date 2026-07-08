@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { mediaUrl } from "@/lib/strapi";
 import { TechnologyVisualFadeIn } from "./TechnologyVisualFadeIn";
 
 const chipMaskStyle = {
@@ -16,7 +17,9 @@ const radialOverlayStyle = {
   backgroundImage: `url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 642" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><rect x="0" y="0" height="100%" width="100%" fill="url(%23grad)" opacity="1"/><defs><radialGradient id="grad" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="10" gradientTransform="matrix(4.4087e-15 32.1 -72 1.9656e-15 720 321)"><stop stop-color="rgba(0,0,0,0)" offset="0"/><stop stop-color="rgba(0,0,0,1)" offset="1"/></radialGradient></defs></svg>')`,
 } as const;
 
-export function TechnologyVisualBackground() {
+export function TechnologyVisualBackground({ data }: { data?: any }) {
+  const bgSrc =
+    mediaUrl(data?.background_visual) || "/technology/bg-image-29.png";
   return (
     <div
       className="pointer-events-none absolute top-[60px] right-0 left-0 z-0 h-[642px] overflow-hidden"
@@ -36,7 +39,7 @@ export function TechnologyVisualBackground() {
         >
           <div className="absolute inset-0">
             <Image
-              src="/technology/bg-image-29.png"
+              src={bgSrc}
               alt=""
               fill
               className="object-bottom"
@@ -91,7 +94,8 @@ export function TechnologyVisualBackground() {
   );
 }
 
-export function TechnologyVisual() {
+export function TechnologyVisual({ data }: { data?: any } = {}) {
+  void data;
   return (
     <TechnologyVisualFadeIn
       className="pointer-events-none absolute top-[60px] left-0 z-[1] h-[642px] w-full"

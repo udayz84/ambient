@@ -4,7 +4,11 @@ import { gilroyMedium, interRegular } from "../hero/fonts";
 const cornerLeft = "/hero/corner-tag-1.svg";
 const cornerRight = "/hero/corner-tag-2.svg";
 
-export function ApplicationsHeader() {
+export function ApplicationsHeader({ data }: { data?: any }) {
+  const heading = data?.heading || "Build the impossible today";
+  const subtitle =
+    data?.subtitle ||
+    "Don't let legacy design limit your roadmap. Discover the market-differentiating features of the GPX10 and what's coming next.";
   return (
     <div
       className="absolute top-[1px] left-1/2 h-[148px] w-[607px] -translate-x-1/2"
@@ -23,7 +27,7 @@ export function ApplicationsHeader() {
           }}
           data-node-id="2379:934"
         >
-          Build the impossible today
+          {heading}
         </h2>
 
         <div className="relative col-start-1 row-start-1 mt-[4px] ml-[607px] flex size-[4px] items-center justify-center">
@@ -92,9 +96,7 @@ export function ApplicationsHeader() {
         className={`${interRegular.className} absolute top-[94px] left-1/2 w-[600px] -translate-x-1/2 text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
         data-node-id="2379:939"
       >
-        Don&apos;t let legacy design limit your roadmap. Discover the
-        market-differentiating features of the GPX10 and what&apos;s coming
-        next.
+        {subtitle}
       </p>
     </div>
   );

@@ -7,19 +7,39 @@ import { TechnologyPageGraph } from "@/components/technology-page/TechnologyPage
 import { TechnologyPageSilicon } from "@/components/technology-page/TechnologyPageSilicon";
 import { TechnologyPageEfficiency } from "@/components/technology-page/TechnologyPageEfficiency";
 import { TechnologyPageBottomCta } from "@/components/technology-page/TechnologyPageBottomCta";
+import { getSingleType } from "@/lib/strapi";
 
-export default function TechnologyPage() {
+export default async function TechnologyPage() {
+  let data: any = null;
+  try {
+    data = await getSingleType<any>("technology-page", [
+      "hero",
+      { section: "problem", fields: ["background_image"], nested: ["comparison_cards"] },
+      "architecture",
+      { section: "pillars", nested: ["pillars"] },
+      "modes",
+      "graph",
+      "silicon",
+      "efficiency",
+      "bottom_cta",
+      "seo",
+    ]);
+  } catch {
+    data = null;
+  }
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
-      <TechnologyPageHero />
-      <TechnologyPageProblem />
-      <TechnologyPageArchitecture />
-      <TechnologyPagePillars />
-      <TechnologyPageModes />
-      <TechnologyPageGraph />
-      <TechnologyPageSilicon />
-      <TechnologyPageEfficiency />
-      <TechnologyPageBottomCta />
+      {data?.hero && <TechnologyPageHero data={data.hero} />}
+      {data?.problem && <TechnologyPageProblem data={data.problem} />}
+      {data?.architecture && (
+        <TechnologyPageArchitecture data={data.architecture} />
+      )}
+      {data?.pillars && <TechnologyPagePillars data={data.pillars} />}
+      {data?.modes && <TechnologyPageModes data={data.modes} />}
+      {data?.graph && <TechnologyPageGraph data={data.graph} />}
+      {data?.silicon && <TechnologyPageSilicon data={data.silicon} />}
+      {data?.efficiency && <TechnologyPageEfficiency data={data.efficiency} />}
+      {data?.bottom_cta && <TechnologyPageBottomCta data={data.bottom_cta} />}
     </main>
   );
 }

@@ -2,13 +2,55 @@ import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { CORNER_LEFT, CORNER_RIGHT, PRIMARY_CTA_INSET, PRIMARY_CTA_SHADOW } from "./dvk-data";
 
-export function DvkIntegratedModules() {
+const DEFAULT_HEADING = "From Cranium to Integrated Modules.";
+const DEFAULT_SUBTITLE =
+  "The exact C-code, hardware configurations, and unified build you validate on the Cranium DVK ports directly to our production-ready System-on-Modules (SOMs).";
+const DEFAULT_FOOTER =
+  "Validate your logic on the Cranium kit today. When you are ready for extreme space constraints, drop our high-density SOM directly into your product without rewriting your application software.";
+const DEFAULT_PRIMARY_LABEL = "Explore SOMs";
+const DEFAULT_SECONDARY_LABEL = "Schedule Technical Consultation";
+
+export function DvkIntegratedModules({ data }: { data?: any }) {
+  const heading = data?.heading || DEFAULT_HEADING;
+  const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
+  const footer = DEFAULT_FOOTER;
+  const primaryLabel =
+    data?.primary_button?.label || DEFAULT_PRIMARY_LABEL;
+  const primaryHref = data?.primary_button?.href || "#";
+  const secondaryLabel =
+    data?.secondary_button?.label || DEFAULT_SECONDARY_LABEL;
+  const secondaryHref = data?.secondary_button?.href || "#";
+  const cards =
+    data?.cards && Array.isArray(data.cards) && data.cards.length > 0
+      ? data.cards.map((c: any, i: number) => ({
+          title: c?.title || CARDS[i]?.title || "",
+          description: c?.description || CARDS[i]?.description || "",
+        }))
+      : CARDS;
   return (
     <div className="relative z-20 mb-0 min-[1024px]:mb-[-409px] w-full bg-transparent">
       <section className="relative mx-auto hidden w-full bg-transparent min-[1024px]:block" aria-label="From Cranium to Integrated Modules">
-        <DvkIntegratedModulesDesktop />
+        <DvkIntegratedModulesDesktop
+          heading={heading}
+          subtitle={subtitle}
+          footer={footer}
+          cards={cards}
+          primaryLabel={primaryLabel}
+          primaryHref={primaryHref}
+          secondaryLabel={secondaryLabel}
+          secondaryHref={secondaryHref}
+        />
       </section>
-      <DvkIntegratedModulesMobile />
+      <DvkIntegratedModulesMobile
+        heading={heading}
+        subtitle={subtitle}
+        footer={footer}
+        cards={cards}
+        primaryLabel={primaryLabel}
+        primaryHref={primaryHref}
+        secondaryLabel={secondaryLabel}
+        secondaryHref={secondaryHref}
+      />
     </div>
   );
 }
@@ -31,7 +73,25 @@ const IMAGE_VIGNETTE = "radial-gradient(ellipse 65% 100% at 50% 50%, rgba(26,26,
 const DEV_CHIP_BG = "rgba(115,190,91,0.12)";
 const TITLE_GRADIENT = "linear-gradient(107.367deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
-function DvkIntegratedModulesDesktop() {
+function DvkIntegratedModulesDesktop({
+  heading,
+  subtitle,
+  footer,
+  cards,
+  primaryLabel,
+  primaryHref,
+  secondaryLabel,
+  secondaryHref,
+}: {
+  heading: string;
+  subtitle: string;
+  footer: string;
+  cards: { title: string; description: string }[];
+  primaryLabel: string;
+  primaryHref: string;
+  secondaryLabel: string;
+  secondaryHref: string;
+}) {
   return (
     <div className="mx-auto flex w-full max-w-[1204px] flex-col items-center pb-[120px]">
       <div className="flex flex-col items-center gap-[24px]" style={{ width: 800 }}>
@@ -45,16 +105,16 @@ function DvkIntegratedModulesDesktop() {
               backgroundClip: "text",
             }}
           >
-            From Cranium to Integrated Modules.
+            {heading}
           </h2>
         </div>
         <p className={`${interRegular.className} w-[800px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}>
-          The exact C-code, hardware configurations, and unified build you validate on the Cranium DVK ports directly to our production-ready System-on-Modules (SOMs).
+          {subtitle}
         </p>
       </div>
 
       <div className="mt-[45px] flex items-stretch gap-[24px]" style={{ width: 1204 }}>
-        {CARDS.map((card, i) => (
+        {cards.map((card, i) => (
           <article
             key={i}
             className="relative flex flex-1 flex-col overflow-clip border-[0.5px] border-solid px-[20px] pt-[20px] pb-[32px]"
@@ -80,18 +140,36 @@ function DvkIntegratedModulesDesktop() {
       </div>
 
       <p className={`${interRegular.className} mt-[45px] w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}>
-        Validate your logic on the Cranium kit today. When you are ready for extreme space constraints, drop our high-density SOM directly into your product without rewriting your application software.
+        {footer}
       </p>
 
       <div className="mt-[32px] flex items-center gap-[24px]">
-        <GreenCta width={157}>Explore SOMs</GreenCta>
-        <SecondaryCta width={276}>Schedule Technical Consultation</SecondaryCta>
+        <GreenCta width={157} href={primaryHref}>{primaryLabel}</GreenCta>
+        <SecondaryCta width={276} href={secondaryHref}>{secondaryLabel}</SecondaryCta>
       </div>
     </div>
   );
 }
 
-function DvkIntegratedModulesMobile() {
+function DvkIntegratedModulesMobile({
+  heading,
+  subtitle,
+  footer,
+  cards,
+  primaryLabel,
+  primaryHref,
+  secondaryLabel,
+  secondaryHref,
+}: {
+  heading: string;
+  subtitle: string;
+  footer: string;
+  cards: { title: string; description: string }[];
+  primaryLabel: string;
+  primaryHref: string;
+  secondaryLabel: string;
+  secondaryHref: string;
+}) {
   return (
     <section className="relative w-full bg-black px-[24px] pt-[64px] pb-[80px] min-[1024px]:hidden" aria-label="From Cranium to Integrated Modules">
       <div className="flex flex-col items-center gap-[16px]">
@@ -103,15 +181,15 @@ function DvkIntegratedModulesMobile() {
             backgroundClip: "text",
           }}
         >
-          From Cranium to Integrated Modules.
+          {heading}
         </h2>
         <p className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]`}>
-          The exact C-code, hardware configurations, and unified build you validate on the Cranium DVK ports directly to our production-ready System-on-Modules (SOMs).
+          {subtitle}
         </p>
       </div>
 
       <div className="mt-[32px] flex flex-col gap-[20px]">
-        {CARDS.map((card, i) => (
+        {cards.map((card, i) => (
           <article
             key={i}
             className="relative flex flex-col border-[0.5px] border-solid p-[20px]"
@@ -137,12 +215,12 @@ function DvkIntegratedModulesMobile() {
       </div>
 
       <p className={`${interRegular.className} mt-[32px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]`}>
-        Validate your logic on the Cranium kit today. When you are ready for extreme space constraints, drop our high-density SOM directly into your product without rewriting your application software.
+        {footer}
       </p>
 
       <div className="mt-[32px] flex flex-col items-stretch gap-[16px]">
-        <GreenCta fullWidth width={157}>Explore SOMs</GreenCta>
-        <SecondaryCta fullWidth width={276}>Schedule Technical Consultation</SecondaryCta>
+        <GreenCta fullWidth width={157} href={primaryHref}>{primaryLabel}</GreenCta>
+        <SecondaryCta fullWidth width={276} href={secondaryHref}>{secondaryLabel}</SecondaryCta>
       </div>
     </section>
   );
@@ -164,10 +242,10 @@ function DevChip() {
   );
 }
 
-function GreenCta({ children, width, fullWidth = false }: { children: React.ReactNode; width: number; fullWidth?: boolean }) {
+function GreenCta({ children, width, fullWidth = false, href = "#" }: { children: React.ReactNode; width: number; fullWidth?: boolean; href?: string }) {
   return (
     <a
-      href="#"
+      href={href}
       className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[52px] ${fullWidth ? "w-full" : "shrink-0"} items-center justify-center overflow-hidden`}
       style={fullWidth ? undefined : { width }}
     >
@@ -181,10 +259,10 @@ function GreenCta({ children, width, fullWidth = false }: { children: React.Reac
   );
 }
 
-function SecondaryCta({ children, width, fullWidth = false }: { children: React.ReactNode; width: number; fullWidth?: boolean }) {
+function SecondaryCta({ children, width, fullWidth = false, href = "#" }: { children: React.ReactNode; width: number; fullWidth?: boolean; href?: string }) {
   return (
     <a
-      href="#"
+      href={href}
       className={`${gilroyMedium.className} relative flex h-[52px] ${fullWidth ? "w-full" : "shrink-0"} items-center justify-center bg-[rgba(226,241,202,0.12)] px-[20px]`}
       style={fullWidth ? undefined : { width }}
     >

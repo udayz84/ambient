@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
+import { mediaUrl } from "@/lib/strapi";
 
 const DVK_BG_OVERLAY =
   "linear-gradient(180deg, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 25.145%), linear-gradient(180deg, rgba(0, 0, 0, 0) 27.95%, rgb(4, 4, 4) 64.806%)";
@@ -13,6 +14,9 @@ const SUBTITLE =
 
 const CENTER_CAPTION_BODY =
   "Always-on biometric tracking and complex activity recognition running continuously on standard wearable batteries.";
+
+const CENTER_CAPTION = "Wearables";
+const FALLBACK_HEADING = "The death of hardware tradeoffs.";
 
 const SMALL_CORNER = "/applications/corner-vector-59.svg";
 const CENTER_CORNER = "/applications/corner-vector-56.svg";
@@ -224,7 +228,25 @@ const SATELLITE_CARDS: Array<{
   },
 ];
 
-export function ApplicationsPageDvk() {
+export function ApplicationsPageDvk({ data }: { data?: any }) {
+  const heading = data?.heading || FALLBACK_HEADING;
+  const subtitle = data?.subtitle || SUBTITLE;
+  const bgImg = mediaUrl(data?.background_image) || "/applications/dvk-bg.png";
+  const bottomImg =
+    mediaUrl(data?.bottom_background) || "/applications/dvk-bottom.png";
+  const orbitVisual =
+    mediaUrl(data?.orbit_visual) || "/applications/orbit.svg";
+
+  const centerCard = data?.center_card;
+  const centerImage =
+    mediaUrl(centerCard?.image) || "/applications/card-center.png";
+  const centerCaption = centerCard?.caption || CENTER_CAPTION;
+  const centerCaptionBody = centerCard?.caption_body || CENTER_CAPTION_BODY;
+
+  const satelliteCards: any[] = Array.isArray(data?.satellite_cards)
+    ? data.satellite_cards
+    : [];
+
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -240,7 +262,7 @@ export function ApplicationsPageDvk() {
           <img
             alt=""
             aria-hidden
-            src="/applications/dvk-bg.png"
+            src={bgImg}
             className="absolute inset-0 size-full max-w-none object-bottom"
           />
           <div
@@ -260,7 +282,7 @@ export function ApplicationsPageDvk() {
               nodeId="2761:3747"
               className="text-center whitespace-nowrap"
             >
-              The death of hardware tradeoffs.
+              {heading}
             </GradientTitle>
             <CornerDecor />
           </div>
@@ -268,7 +290,7 @@ export function ApplicationsPageDvk() {
             className={`${interRegular.className} w-[718px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
             data-node-id="2761:3752"
           >
-            {SUBTITLE}
+            {subtitle}
           </p>
         </div>
 
@@ -280,7 +302,7 @@ export function ApplicationsPageDvk() {
           <img
             alt=""
             aria-hidden
-            src="/applications/orbit.svg"
+            src={orbitVisual}
             className="absolute inset-0 block size-full max-w-none"
           />
         </div>
@@ -296,7 +318,7 @@ export function ApplicationsPageDvk() {
             gap={12.759}
             backdropBlur={12.759}
             background={CENTER_CARD_BG}
-            imageSrc="/applications/card-center.png"
+            imageSrc={centerImage}
             imageW={248.65}
             imageH={196.444}
             imageBlur={0}
@@ -308,7 +330,7 @@ export function ApplicationsPageDvk() {
         </div>
 
         {/* Satellite cards */}
-        {SATELLITE_CARDS.map((card) => (
+        {SATELLITE_CARDS.map((card, idx) => (
           <div
             key={card.nodeId}
             className="absolute -translate-x-1/2"
@@ -323,7 +345,9 @@ export function ApplicationsPageDvk() {
               gap={10}
               backdropBlur={10}
               background="rgba(0,0,0,0.2)"
-              imageSrc={card.imageSrc}
+              imageSrc={
+                mediaUrl(satelliteCards[idx]?.image) || card.imageSrc
+              }
               imageW={card.imageW}
               imageH={card.imageH}
               imageBlur={card.imageBlur}
@@ -346,13 +370,13 @@ export function ApplicationsPageDvk() {
               className={`${gilroyMedium.className} text-[20.211px] leading-[28.295px] tracking-[-0.4539px] whitespace-nowrap text-white`}
               data-node-id="2761:3786"
             >
-              Wearables
+              {centerCaption}
             </p>
             <p
               className={`${interRegular.className} min-w-full w-[min-content] text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)]`}
               data-node-id="2761:3787"
             >
-              {CENTER_CAPTION_BODY}
+              {centerCaptionBody}
             </p>
           </div>
         </div>
@@ -365,7 +389,7 @@ export function ApplicationsPageDvk() {
           <img
             alt=""
             aria-hidden
-            src="/applications/dvk-bottom.png"
+            src={bottomImg}
             className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
           />
         </div>
@@ -379,7 +403,7 @@ export function ApplicationsPageDvk() {
           <img
             alt=""
             aria-hidden
-            src="/applications/dvk-bg.png"
+            src={bgImg}
             className="absolute inset-0 size-full max-w-none object-bottom opacity-50"
           />
           <div
@@ -401,14 +425,14 @@ export function ApplicationsPageDvk() {
                   backgroundClip: "text",
                 }}
               >
-                The death of hardware tradeoffs.
+                {heading}
               </div>
               <CornerDecor />
             </div>
             <p
               className={`${interRegular.className} w-full max-w-[332px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
             >
-              {SUBTITLE}
+              {subtitle}
             </p>
           </div>
 
@@ -427,7 +451,7 @@ export function ApplicationsPageDvk() {
               <img
                 alt=""
                 aria-hidden
-                src="/applications/card-center.png"
+                src={centerImage}
                 className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
               />
             </div>
@@ -439,12 +463,12 @@ export function ApplicationsPageDvk() {
             <p
               className={`${gilroyMedium.className} text-[20.211px] leading-[28.295px] tracking-[-0.4539px] whitespace-nowrap text-white`}
             >
-              Wearables
+              {centerCaption}
             </p>
             <p
               className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)]`}
             >
-              {CENTER_CAPTION_BODY}
+              {centerCaptionBody}
             </p>
           </div>
 
@@ -453,7 +477,7 @@ export function ApplicationsPageDvk() {
             <img
               alt=""
               aria-hidden
-              src="/applications/dvk-bottom.png"
+              src={bottomImg}
               className="pointer-events-none size-full max-w-none object-cover"
             />
           </div>

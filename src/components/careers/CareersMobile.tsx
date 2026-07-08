@@ -22,6 +22,8 @@ import {
   CAREERS_LOCATION_FILTER_OPTIONS,
   CAREERS_WORK_CARDS,
 } from "./careers-data";
+import { mediaUrl } from "@/lib/strapi";
+import type { CareersValueCard } from "./careers-data";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
@@ -156,7 +158,15 @@ function WhiteCta({ children, href = "#" }: { children: React.ReactNode; href?: 
 }
 
 /* ---------------------------------- HERO ---------------------------------- */
-function CareersHeroMobile() {
+function CareersHeroMobile({ data }: { data?: any }) {
+  const bgImg = mediaUrl(data?.background_image) || "/careers/hero-bg.png";
+  const title = (data?.title || "Re-architect the physics of AI").replace(/\n/g, " ");
+  const subtitle =
+    data?.subtitle ||
+    "Don't iterate on legacy silicon. Build the fundamental compute substrate for the next generation of intelligence.";
+  const ctaLabel = data?.cta_label || "VIEW OPEN ROLES";
+  const ctaHref = data?.cta_href || "#open-roles";
+
   return (
     <section
       className="relative w-full overflow-hidden bg-black"
@@ -169,7 +179,7 @@ function CareersHeroMobile() {
           <div className="pointer-events-none absolute left-[calc(50%-76px)] top-[188px] h-[290px] w-[545px] max-w-none -translate-x-1/2 overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/careers/hero-bg.png"
+              src={bgImg}
               alt=""
               className="absolute inset-0 size-full max-w-none object-cover"
             />
@@ -182,23 +192,22 @@ function CareersHeroMobile() {
                 className={`${gilroyMedium.className} max-w-[273px] w-full bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
                 style={{ backgroundImage: gradient("103.779deg") }}
               >
-                Re-architect the physics of AI
+                {title}
               </h1>
               <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
             </div>
             <p
               className={`${interRegular.className} max-w-[308px] w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
             >
-              Don&apos;t iterate on legacy silicon. Build the fundamental compute
-              substrate for the next generation of intelligence.
+              {subtitle}
             </p>
           </div>
 
           {/* Cta (3243:3942) */}
           <div className="absolute left-1/2 top-[489px] w-[231px] -translate-x-1/2">
-            <GreenCta href="#open-roles">
+            <GreenCta href={ctaHref}>
               <span className="flex items-center gap-[8px]">
-                <span className="text-[12px]">VIEW OPEN ROLES</span>
+                <span className="text-[12px]">{ctaLabel}</span>
                 <span className="block size-[6px] rounded-full bg-white" />
               </span>
             </GreenCta>
@@ -210,7 +219,20 @@ function CareersHeroMobile() {
 }
 
 /* -------------------------------- BEST WORK ------------------------------- */
-function CareersBestWorkMobile() {
+function CareersBestWorkMobile({ data }: { data?: any }) {
+  const headingRaw = data?.heading || "Do the best work\nof your life";
+  const heading = headingRaw.split("\n").length > 1 ? headingRaw : headingRaw;
+  const cards: CareersValueCard[] = (
+    data?.cards && Array.isArray(data.cards) && data.cards.length > 0
+      ? data.cards
+      : CAREERS_WORK_CARDS
+  ).map((c: any, i: number) => ({
+    icon: mediaUrl(c?.icon) || CAREERS_WORK_CARDS[i]?.icon || "",
+    title: c?.title || CAREERS_WORK_CARDS[i]?.title || "",
+    description:
+      c?.description || CAREERS_WORK_CARDS[i]?.description || "",
+  }));
+
   return (
     <section
       className="relative flex w-full flex-col items-center px-[20px] py-[56px]"
@@ -221,13 +243,13 @@ function CareersBestWorkMobile() {
           className={`${gilroyMedium.className} w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent whitespace-pre-wrap not-italic`}
           style={{ backgroundImage: gradient("107.454deg") }}
         >
-          {`Do the best work\nof your life`}
+          {heading}
         </h2>
         <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
       </div>
 
       <div className="flex w-full flex-col gap-[14px]">
-        {CAREERS_WORK_CARDS.map((card) => (
+        {cards.map((card) => (
           <article
             key={card.title}
             className={`relative flex flex-col justify-between h-[236px] p-[32px] ${GLASS_PANEL_VISIBLE_BORDER_CLASS}`}
@@ -267,29 +289,49 @@ function CareersBestWorkMobile() {
 }
 
 /* ----------------------------------- DNA ---------------------------------- */
-function CareersDnaMobile() {
-  const panels = [
-    {
-      title: "Grounded in Science",
-      description:
-        "You work from first principles. Every decision you make is expected to be backed by data, validation, and a clear understanding of the underlying system.",
-    },
-    {
-      title: "Stay Curious. Stay Skeptical.",
-      description:
-        "You are encouraged to question, challenge, and refine. Strong thinking, clear reasoning, and continuous learning are expected at every stage of the work.",
-    },
-    {
-      title: "Chase the Impossible",
-      description:
-        "You take on problems that don't have predefined solutions. The expectation is not iteration, but pushing beyond accepted limits and building what doesn't yet exist.",
-    },
-    {
-      title: "Build for Everyone",
-      description:
-        "Your work is not isolated. You build systems that must scale across real-world environments, constraints, and users, making advanced technology practical and usable.",
-    },
-  ];
+const DNA_PANEL_FALLBACKS_MOBILE = [
+  {
+    title: "Grounded in Science",
+    description:
+      "You work from first principles. Every decision you make is expected to be backed by data, validation, and a clear understanding of the underlying system.",
+  },
+  {
+    title: "Stay Curious. Stay Skeptical.",
+    description:
+      "You are encouraged to question, challenge, and refine. Strong thinking, clear reasoning, and continuous learning are expected at every stage of the work.",
+  },
+  {
+    title: "Chase the Impossible",
+    description:
+      "You take on problems that don't have predefined solutions. The expectation is not iteration, but pushing beyond accepted limits and building what doesn't yet exist.",
+  },
+  {
+    title: "Build for Everyone",
+    description:
+      "Your work is not isolated. You build systems that must scale across real-world environments, constraints, and users, making advanced technology practical and usable.",
+  },
+  {
+    title: "Protect What Powers Us",
+    description:
+      "You design with power as a constraint from day one. Efficiency is not an afterthought, it is a core part of how you think, build, and optimize systems.",
+  },
+];
+
+function CareersDnaMobile({ data }: { data?: any }) {
+  const heading =
+    data?.heading || "Driven by physics.\nDefined by our DNA.";
+  const subtitle =
+    data?.subtitle || "This is how we work, build, and solve at Ambient.";
+  const bgImg =
+    mediaUrl(data?.background_image) || "/mobile/career/image 108.png";
+  const chipImg =
+    mediaUrl(data?.chip_object) || "/mobile/career/Chip Image.png";
+  const strapiPanels: any[] =
+    data?.panels && Array.isArray(data.panels) ? data.panels : [];
+  const panels = DNA_PANEL_FALLBACKS_MOBILE.map((fallback, i) => ({
+    title: strapiPanels[i]?.title || fallback.title,
+    description: strapiPanels[i]?.description || fallback.description,
+  }));
 
   return (
     <section
@@ -299,7 +341,7 @@ function CareersDnaMobile() {
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/mobile/career/image 108.png"
+          src={bgImg}
           alt=""
           className="absolute inset-0 size-full object-cover object-bottom"
         />
@@ -311,14 +353,14 @@ function CareersDnaMobile() {
             className={`${gilroyMedium.className} w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent whitespace-pre-wrap not-italic`}
             style={{ backgroundImage: gradient("107.454deg") }}
           >
-            {`Driven by physics.\nDefined by our DNA.`}
+            {heading}
           </h2>
           <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
         </div>
         <p
           className={`${interRegular.className} w-[334px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic`}
         >
-          This is how we work, build, and solve at Ambient.
+          {subtitle}
         </p>
       </div>
 
@@ -330,7 +372,7 @@ function CareersDnaMobile() {
 
         <div className="relative flex h-[349px] w-[336px] shrink-0 items-center justify-center">
           <Image
-            src="/mobile/career/Chip Image.png"
+            src={chipImg}
             alt=""
             fill
             className="object-contain object-center relative z-10"
@@ -341,10 +383,7 @@ function CareersDnaMobile() {
         <div className="flex w-full flex-col gap-[14px]">
           <GlassPanelMobile title={panels[2].title} description={panels[2].description} />
           <GlassPanelMobile title={panels[3].title} description={panels[3].description} />
-          <GlassPanelMobile
-            title="Protect What Powers Us"
-            description="You design with power as a constraint from day one. Efficiency is not an afterthought, it is a core part of how you think, build, and optimize systems."
-          />
+          <GlassPanelMobile title={panels[4].title} description={panels[4].description} />
         </div>
       </div>
     </section>
@@ -372,9 +411,42 @@ function GlassPanelMobile({ title, description }: { title: string; description: 
 }
 
 /* -------------------------------- OPEN ROLES ------------------------------ */
-function CareersOpenRolesMobile() {
+function parseFilterCsvMobile(
+  csv: string | null | undefined,
+  fallback: readonly { value: string; label: string }[],
+): readonly { value: string; label: string }[] {
+  if (!csv || typeof csv !== "string") return fallback;
+  const items = csv
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  if (items.length === 0) return fallback;
+  return [
+    { value: "all", label: "All" },
+    ...items.map((s) => ({ value: s, label: s })),
+  ];
+}
+
+function CareersOpenRolesMobile({ data }: { data?: any }) {
   const [jobTypeFilter, setJobTypeFilter] = useState("all");
   const [locationFilter, setLocationFilter] = useState("all");
+
+  const heading = data?.heading || "Open Roles";
+  const generalAppTitle =
+    data?.general_app_title || "Don't See The Right Role?";
+  const generalAppSubtitle =
+    data?.general_app_subtitle ||
+    "Submit a general application and we'll reach out when a matching position opens.";
+  const generalAppCtaLabel =
+    data?.general_app_cta_label || "SHARE YOUR PROFILE";
+  const jobTypeOptions = parseFilterCsvMobile(
+    data?.job_type_filters,
+    CAREERS_JOB_TYPE_FILTER_OPTIONS,
+  );
+  const locationOptions = parseFilterCsvMobile(
+    data?.location_filters,
+    CAREERS_LOCATION_FILTER_OPTIONS,
+  );
 
   const filteredJobs = useMemo(
     () =>
@@ -398,7 +470,7 @@ function CareersOpenRolesMobile() {
             className={`${gilroyMedium.className} w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent whitespace-pre-wrap not-italic`}
             style={{ backgroundImage: gradient("129.227deg") }}
           >
-            Open Roles
+            {heading}
           </h2>
           <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
         </div>
@@ -407,13 +479,13 @@ function CareersOpenRolesMobile() {
             label="Job Type"
             value={jobTypeFilter}
             onChange={setJobTypeFilter}
-            options={CAREERS_JOB_TYPE_FILTER_OPTIONS}
+            options={jobTypeOptions}
           />
           <FilterSelect
             label="Location"
             value={locationFilter}
             onChange={setLocationFilter}
-            options={CAREERS_LOCATION_FILTER_OPTIONS}
+            options={locationOptions}
           />
         </div>
       </div>
@@ -462,15 +534,14 @@ function CareersOpenRolesMobile() {
               className={`${gilroyMedium.className} w-[280px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic`}
               style={{ backgroundImage: "linear-gradient(103.604deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)" }}
             >
-              Don&apos;t See The Right Role?
+              {generalAppTitle}
             </p>
           </div>
 
           <p
             className={`${interRegular.className} relative z-10 mt-[16px] w-full max-w-[300px] text-center text-[14px] leading-[22px] font-normal text-white opacity-65 not-italic`}
           >
-            Submit a general application and we&apos;ll reach out when a matching
-            position opens.
+            {generalAppSubtitle}
           </p>
 
           <a
@@ -480,7 +551,7 @@ function CareersOpenRolesMobile() {
           >
             <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_2px_rgba(217,255,240,0.6)]" />
             <span className={`${gilroyMedium.className} relative z-10 text-[12px] leading-[24px] uppercase text-white not-italic`}>
-              SHARE YOUR PROFILE
+              {generalAppCtaLabel}
             </span>
             <div className="relative z-10 size-[4px] shrink-0 rounded-full bg-white" />
           </a>
@@ -601,7 +672,19 @@ function JobRowMobile({
 }
 
 /* -------------------------------- BENEFITS -------------------------------- */
-function CareersBenefitsMobile() {
+function CareersBenefitsMobile({ data }: { data?: any }) {
+  const heading = data?.heading || "Benefits & Perks";
+  const cards: CareersValueCard[] = (
+    data?.cards && Array.isArray(data.cards) && data.cards.length > 0
+      ? data.cards
+      : CAREERS_BENEFITS_CARDS
+  ).map((c: any, i: number) => ({
+    icon: mediaUrl(c?.icon) || CAREERS_BENEFITS_CARDS[i]?.icon || "",
+    title: c?.title || CAREERS_BENEFITS_CARDS[i]?.title || "",
+    description:
+      c?.description || CAREERS_BENEFITS_CARDS[i]?.description || "",
+  }));
+
   return (
     <section
       className="relative flex w-full flex-col items-center gap-[24px] px-[20px] py-[56px]"
@@ -612,13 +695,13 @@ function CareersBenefitsMobile() {
           className={`${gilroyMedium.className} w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic`}
           style={{ backgroundImage: gradient("122.163deg") }}
         >
-          Benefits &amp; Perks
+          {heading}
         </h2>
         <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
       </div>
 
       <div className="flex w-full flex-col gap-[14px]">
-        {CAREERS_BENEFITS_CARDS.map((card) => (
+        {cards.map((card) => (
           <article
             key={card.title}
             className={`relative flex h-[222px] w-full max-w-[353px] flex-col justify-between items-start p-[32px] mx-auto overflow-clip ${GLASS_PANEL_VISIBLE_BORDER_CLASS}`}
@@ -658,7 +741,21 @@ function CareersBenefitsMobile() {
 }
 
 /* ------------------------------- BOTTOM CTA ------------------------------- */
-function CareersBottomCtaMobile() {
+function CareersBottomCtaMobile({ data }: { data?: any }) {
+  const heading =
+    data?.heading || "Ready to build the future of compute?";
+  const buttons: Array<{ label: string; href: string; variant: string }> =
+    data?.buttons && Array.isArray(data.buttons) && data.buttons.length > 0
+      ? data.buttons.map((b: any) => ({
+          label: b?.label || "",
+          href: b?.href || "#",
+          variant: b?.variant || "green",
+        }))
+      : [
+          { label: "APPLY NOW", href: "#", variant: "green" },
+          { label: "REFER A CANDIDATE", href: "#", variant: "white" },
+        ];
+
   return (
     <section
       className="relative z-10 flex w-full flex-col items-center gap-[42px] overflow-visible bg-transparent px-[17.5px] pt-[110px] -mb-[226px]"
@@ -669,53 +766,57 @@ function CareersBottomCtaMobile() {
           className={`${gilroyMedium.className} w-[319px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
           style={{ backgroundImage: "linear-gradient(105.99deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)" }}
         >
-          Ready to build the future of compute?
+          {heading}
         </h2>
         <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
       </div>
 
       <div className="relative z-10 flex w-full max-w-[354px] flex-row justify-center gap-[14px]">
-        {/* APPLY NOW BUTTON */}
-        <a
-          href="#"
-          className={`${gilroySemiBold.className} relative flex h-[48px] w-[170px] shrink-0 items-center justify-center gap-[10px] overflow-clip bg-gradient-to-b from-[#6ced3f] to-[#38a612]`}
-          style={{ boxShadow: "0px 42px 107px 0px rgba(69,196,24,0.2), 0px 24.721px 32.257px 0px rgba(83,216,36,0.15), 0px 10.268px 13.398px 0px rgba(83,216,36,0.15), 0px 3.714px 4.846px 0px rgba(83,216,36,0.1)" }}
-        >
-          <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
-          <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
-          <span className="relative z-10 text-[14px] uppercase text-white not-italic font-semibold">
-            APPLY NOW
-          </span>
-          <div className="relative z-10 size-[6px] shrink-0 rounded-full bg-white" />
-        </a>
-
-        {/* REFER A CANDIDATE BUTTON */}
-        <a
-          href="#"
-          className={`${gilroySemiBold.className} relative flex h-[48px] w-[170px] shrink-0 items-center justify-center overflow-clip bg-white`}
-          style={{ boxShadow: "0px 42px 107px 0px rgba(69,196,24,0.2), 0px 24.721px 32.257px 0px rgba(83,216,36,0.15), 0px 10.268px 13.398px 0px rgba(83,216,36,0.15), 0px 3.714px 4.846px 0px rgba(83,216,36,0.1)" }}
-        >
-          <div className="absolute inset-0 pointer-events-none opacity-40 mix-blend-plus-lighter" style={{ backgroundImage: "url(/careers/white-cta-texture.png)", backgroundSize: "307.2px 307.2px" }} />
-          <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
-          <span className="relative z-10 text-[14px] uppercase text-[#121212] not-italic whitespace-nowrap font-semibold">
-            REFER A CANDIDATE
-          </span>
-        </a>
+        {buttons.map((btn, i) =>
+          btn.variant === "white" ? (
+            <a
+              key={i}
+              href={btn.href}
+              className={`${gilroySemiBold.className} relative flex h-[48px] w-[170px] shrink-0 items-center justify-center overflow-clip bg-white`}
+              style={{ boxShadow: "0px 42px 107px 0px rgba(69,196,24,0.2), 0px 24.721px 32.257px 0px rgba(83,216,36,0.15), 0px 10.268px 13.398px 0px rgba(83,216,36,0.15), 0px 3.714px 4.846px 0px rgba(83,216,36,0.1)" }}
+            >
+              <div className="absolute inset-0 pointer-events-none opacity-40 mix-blend-plus-lighter" style={{ backgroundImage: "url(/careers/white-cta-texture.png)", backgroundSize: "307.2px 307.2px" }} />
+              <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
+              <span className="relative z-10 text-[14px] uppercase text-[#121212] not-italic whitespace-nowrap font-semibold">
+                {btn.label}
+              </span>
+            </a>
+          ) : (
+            <a
+              key={i}
+              href={btn.href}
+              className={`${gilroySemiBold.className} relative flex h-[48px] w-[170px] shrink-0 items-center justify-center gap-[10px] overflow-clip bg-gradient-to-b from-[#6ced3f] to-[#38a612]`}
+              style={{ boxShadow: "0px 42px 107px 0px rgba(69,196,24,0.2), 0px 24.721px 32.257px 0px rgba(83,216,36,0.15), 0px 10.268px 13.398px 0px rgba(83,216,36,0.15), 0px 3.714px 4.846px 0px rgba(83,216,36,0.1)" }}
+            >
+              <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
+              <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
+              <span className="relative z-10 text-[14px] uppercase text-white not-italic font-semibold">
+                {btn.label}
+              </span>
+              <div className="relative z-10 size-[6px] shrink-0 rounded-full bg-white" />
+            </a>
+          ),
+        )}
       </div>
     </section>
   );
 }
 
 /* --------------------------------- PAGE ----------------------------------- */
-export function CareersMobile() {
+export function CareersMobile({ data }: { data?: any }) {
   return (
     <div className="flex w-full flex-col">
-      <CareersHeroMobile />
-      <CareersBestWorkMobile />
-      <CareersDnaMobile />
-      <CareersOpenRolesMobile />
-      <CareersBenefitsMobile />
-      <CareersBottomCtaMobile />
+      {data?.hero ? <CareersHeroMobile data={data.hero} /> : null}
+      {data?.best_work ? <CareersBestWorkMobile data={data.best_work} /> : null}
+      {data?.dna ? <CareersDnaMobile data={data.dna} /> : null}
+      {data?.open_roles ? <CareersOpenRolesMobile data={data.open_roles} /> : null}
+      {data?.benefits ? <CareersBenefitsMobile data={data.benefits} /> : null}
+      {data?.bottom_cta ? <CareersBottomCtaMobile data={data.bottom_cta} /> : null}
     </div>
   );
 }

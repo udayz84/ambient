@@ -5,7 +5,29 @@ import { HeroStat } from "./HeroStat";
 const statValueGradient = (deg: number) =>
   `linear-gradient(${deg}deg, rgb(255, 255, 255) 29.352%, rgba(115, 115, 115, 0.5) 98.158%)`;
 
-export function HeroMetrics() {
+type HeroMetric = {
+  tag?: string;
+  value?: string;
+  title?: string;
+  description?: string;
+};
+
+function splitValue(value: string) {
+  const match = value.match(/^(\S+)(\s+.+)$/);
+  if (!match) return null;
+  return { num: match[1], unit: match[2] };
+}
+
+export function HeroMetrics({ metrics = [] }: { metrics?: HeroMetric[] }) {
+  const m0 = metrics[0] || {};
+  const m1 = metrics[1] || {};
+
+  const v0 = m0.value || "100%";
+  const v1 = m1.value || "512 GOPs";
+
+  const v0Split = splitValue(v0);
+  const v1Split = splitValue(v1);
+
   return (
     <div
       className="absolute top-[554px] left-[120px] flex h-[244px] w-[468px] content-stretch items-center justify-center gap-[24px] py-[30px]"
@@ -13,7 +35,7 @@ export function HeroMetrics() {
       data-name="Mesarable Proof Metrics"
     >
       <HeroStat
-        tag="Real-time AI at edge"
+        tag={m0.tag || "Real-time AI at edge"}
         tagWidth={180}
         labelOffsetX={74.5}
         rightBarLeft={170.48}
@@ -32,11 +54,21 @@ export function HeroMetrics() {
             }}
             data-node-id="2379:754"
           >
-            100%
+            {v0Split ? (
+              <>
+                <span className="text-[40px] leading-[1.2]">{v0Split.num}</span>
+                <span className="text-[12px] leading-[1.2]">{v0Split.unit}</span>
+              </>
+            ) : (
+              v0
+            )}
           </p>
         }
-        title="Programmability"
-        description="AI cores with 4 to 32 bit resolution for control in applications."
+        title={m0.title || "Programmability"}
+        description={
+          m0.description ||
+          "AI cores with 4 to 32 bit resolution for control in applications."
+        }
       />
       <div
         className="relative h-[112px] w-[8px] shrink-0"
@@ -52,7 +84,7 @@ export function HeroMetrics() {
         />
       </div>
       <HeroStat
-        tag="Scalable arch."
+        tag={m1.tag || "Scalable arch."}
         tagWidth={129}
         labelOffsetX={49}
         rightBarLeft={121.48}
@@ -70,12 +102,21 @@ export function HeroMetrics() {
             }}
             data-node-id="2379:773"
           >
-            <span className="text-[40px] leading-[1.2]">512</span>
-            <span className="text-[12px] leading-[1.2]">{` GOPs`}</span>
+            {v1Split ? (
+              <>
+                <span className="text-[40px] leading-[1.2]">{v1Split.num}</span>
+                <span className="text-[12px] leading-[1.2]">{v1Split.unit}</span>
+              </>
+            ) : (
+              <span className="text-[40px] leading-[1.2]">{v1}</span>
+            )}
           </p>
         }
-        title="Peak Performance"
-        description="Unmatched AI throughput far exceeds typical low-power MCUs."
+        title={m1.title || "Peak Performance"}
+        description={
+          m1.description ||
+          "Unmatched AI throughput far exceeds typical low-power MCUs."
+        }
       />
     </div>
   );

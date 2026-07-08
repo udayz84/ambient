@@ -1,3 +1,4 @@
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
@@ -7,17 +8,28 @@ const HERO_OBJECT = "/technology/hero-object.png";
 
 const TITLE_GRADIENT_DEG = "109.122deg";
 
-const TITLE_TEXT = "Meet A-Cube. AI-native, from the metal up.";
-const DESCRIPTION_TEXT =
+const FALLBACK_TAG = "Architecture · A-Cube";
+const FALLBACK_TITLE = "Meet A-Cube. AI-native, from the metal up.";
+const FALLBACK_DESCRIPTION =
   "A new architecture for AI, energy-aware at every layer, scaling from coin cell to cloud.";
+const FALLBACK_PRIMARY_LABEL = "Read the Whitepaper";
+const FALLBACK_SECONDARY_LABEL = "Watch the 3-min Explainer";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
 
-function ReadWhitepaperCta({ fullWidth = false }: { fullWidth?: boolean }) {
+function ReadWhitepaperCta({
+  fullWidth = false,
+  label,
+  href = "#",
+}: {
+  fullWidth?: boolean;
+  label: string;
+  href?: string;
+}) {
   return (
     <a
-      href="#"
+      href={href}
       className={`${gilroyMedium.className} ${GREEN_CTA_SHADOW} relative block h-[48px] ${fullWidth ? "w-full" : "w-[223px]"} shrink-0`}
       data-node-id="2931:1448"
       data-name="Cta"
@@ -31,30 +43,49 @@ function ReadWhitepaperCta({ fullWidth = false }: { fullWidth?: boolean }) {
         className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
       />
       <span className="absolute top-[calc(50%-14px)] left-1/2 flex -translate-x-1/2 items-center text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
-        Read the Whitepaper
+        {label}
       </span>
       <CornerDecor />
     </a>
   );
 }
 
-function WatchExplainerCta({ fullWidth = false }: { fullWidth?: boolean }) {
+function WatchExplainerCta({
+  fullWidth = false,
+  label,
+  href = "#",
+}: {
+  fullWidth?: boolean;
+  label: string;
+  href?: string;
+}) {
   return (
     <a
-      href="#"
+      href={href}
       className={`${gilroyMedium.className} relative block h-[48px] ${fullWidth ? "w-full" : "w-[263px]"} shrink-0 overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
       data-node-id="2931:1459"
       data-name="CTA - Secondary"
     >
       <span className="relative flex h-full items-center text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
-        Watch the 3-min Explainer
+        {label}
       </span>
       <CornerDecor />
     </a>
   );
 }
 
-export function TechnologyPageHero() {
+export function TechnologyPageHero({ data }: { data?: any } = {}) {
+  const tagText = data?.tag?.text || FALLBACK_TAG;
+  const titleText = data?.title || FALLBACK_TITLE;
+  const descText = data?.subtitle || FALLBACK_DESCRIPTION;
+  const primaryLabel = data?.primary_button?.label || FALLBACK_PRIMARY_LABEL;
+  const primaryHref = data?.primary_button?.href || "#";
+  const secondaryLabel =
+    data?.secondary_button?.label || FALLBACK_SECONDARY_LABEL;
+  const secondaryHref = data?.secondary_button?.href || "#";
+  const bgSrc = mediaUrl(data?.background_image) || HERO_BG;
+  const objectSrc = mediaUrl(data?.hero_object) || HERO_OBJECT;
+
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -71,7 +102,7 @@ export function TechnologyPageHero() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={HERO_BG}
+            src={bgSrc}
             alt=""
             className="absolute top-0 left-0 h-[119.16%] w-full max-w-none"
             aria-hidden
@@ -99,7 +130,7 @@ export function TechnologyPageHero() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={HERO_OBJECT}
+            src={objectSrc}
             alt=""
             className="absolute inset-0 size-full max-w-none object-contain object-bottom"
             aria-hidden
@@ -113,7 +144,7 @@ export function TechnologyPageHero() {
           data-name="Menu Container"
         >
           <TagBadge
-            label="Architecture · A-Cube"
+            label={tagText}
             width={192}
             labelOffsetX={0}
             rightBarLeft={182.15}
@@ -133,7 +164,7 @@ export function TechnologyPageHero() {
             nodeId="2931:1428"
             className="h-[98px] w-[525.32px]"
           >
-            {TITLE_TEXT}
+            {titleText}
           </GradientTitle>
         </div>
 
@@ -143,7 +174,7 @@ export function TechnologyPageHero() {
           data-node-id="2931:1429"
           data-name="Description"
         >
-          {DESCRIPTION_TEXT}
+          {descText}
         </p>
 
         {/* 2931:1447 — CTAs */}
@@ -152,8 +183,8 @@ export function TechnologyPageHero() {
           data-node-id="2931:1447"
           data-name="Frame 1984079464"
         >
-          <ReadWhitepaperCta />
-          <WatchExplainerCta />
+          <ReadWhitepaperCta label={primaryLabel} href={primaryHref} />
+          <WatchExplainerCta label={secondaryLabel} href={secondaryHref} />
         </div>
       </div>
 
@@ -163,7 +194,7 @@ export function TechnologyPageHero() {
         <div className="pointer-events-none absolute inset-0" aria-hidden>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={HERO_BG}
+            src={bgSrc}
             alt=""
             className="size-full max-w-none object-cover"
           />
@@ -172,7 +203,7 @@ export function TechnologyPageHero() {
 
         <div className="relative z-10 flex w-full flex-col items-center gap-[20px] px-[24px] pt-[72px] pb-[64px]">
           <TagBadge
-            label="Architecture · A-Cube"
+            label={tagText}
             width={192}
             labelOffsetX={0}
             rightBarLeft={182.15}
@@ -189,18 +220,26 @@ export function TechnologyPageHero() {
             }}
             data-node-id="2931:1428"
           >
-            {TITLE_TEXT}
+            {titleText}
           </div>
 
           <p
             className={`${interRegular.className} w-full max-w-[327px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 not-italic`}
           >
-            {DESCRIPTION_TEXT}
+            {descText}
           </p>
 
           <div className="mt-[8px] flex w-full max-w-[327px] flex-col items-stretch gap-[12px]">
-            <ReadWhitepaperCta fullWidth />
-            <WatchExplainerCta fullWidth />
+            <ReadWhitepaperCta
+              fullWidth
+              label={primaryLabel}
+              href={primaryHref}
+            />
+            <WatchExplainerCta
+              fullWidth
+              label={secondaryLabel}
+              href={secondaryHref}
+            />
           </div>
         </div>
       </div>

@@ -1,14 +1,47 @@
-import { dmMono, gilroyMedium, gilroySemiBold, interRegular } from "./fonts";
+import { mediaUrl } from "@/lib/strapi";
+import { gilroyMedium, gilroySemiBold, interRegular } from "./fonts";
 import { HeroMetrics } from "./HeroMetrics";
 import { HeroScrollIndicator } from "./HeroScrollIndicator";
+import { HeroStat } from "./HeroStat";
 import { HeroVisual } from "./HeroVisual";
 import { HeroVisualMedia } from "./HeroVisualMedia";
-import { HeroStat } from "./HeroStat";
 
 const statValueGradient = (deg: number) =>
   `linear-gradient(${deg}deg, rgb(255, 255, 255) 29.352%, rgba(115, 115, 115, 0.5) 98.158%)`;
 
-export function Hero() {
+type HeroMetric = {
+  tag?: string;
+  value?: string;
+  title?: string;
+  description?: string;
+};
+
+function splitValue(value: string) {
+  const match = value.match(/^(\S+)(\s+.+)$/);
+  if (!match) return null;
+  return { num: match[1], unit: match[2] };
+}
+
+export function Hero({ data }: { data?: any }) {
+  const title =
+    data?.title || "Limitless AI, reimagined with Ambient efficiency";
+  const subtitle =
+    data?.subtitle ||
+    "A new class of AI chips that unlocks richer intelligence from microwatt to hyperscaler cloud, once constrained by power, space and legacy design tradeoffs";
+  const scrollText = data?.scroll_text || "SCROLL";
+  const videoSrc = mediaUrl(data?.video) || undefined;
+  const mobileVideoSrc = mediaUrl(data?.mobile_video) || undefined;
+  const metrics: HeroMetric[] = Array.isArray(data?.metrics)
+    ? data.metrics
+    : [];
+
+  const m0 = metrics[0] || {};
+  const m1 = metrics[1] || {};
+  const v0 = m0.value || "100%";
+  const v1 = m1.value || "512 GOPs";
+  const v0Split = splitValue(v0);
+  const v1Split = splitValue(v1);
+
   return (
     <section
       className="relative -mt-[78px] flex h-[798px] w-full justify-center overflow-hidden bg-black max-[1023px]:h-auto"
@@ -17,7 +50,7 @@ export function Hero() {
       aria-label="Hero"
     >
       <div className="relative hidden h-full w-full max-w-[1442px] min-[1024px]:block">
-        <HeroVisual />
+        <HeroVisual videoSrc={videoSrc} />
 
         <div className="pointer-events-none absolute top-[79px] left-[95px] flex h-[821px] w-0 items-center justify-center">
           <div className="flex-none rotate-90">
@@ -92,20 +125,18 @@ export function Hero() {
             }}
             data-node-id="2379:781"
           >
-            Limitless AI, reimagined with Ambient efficiency
+            {title}
           </h1>
           <p
             className={`${interRegular.className} shrink-0 text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-80 w-[419px]`}
             data-node-id="2379:782"
           >
-            A new class of AI chips that unlocks richer intelligence from microwatt
-            to hyperscaler cloud, once constrained by power, space and legacy design
-            tradeoffs
+            {subtitle}
           </p>
         </div>
 
-        <HeroMetrics />
-        <HeroScrollIndicator />
+        <HeroMetrics metrics={metrics} />
+        <HeroScrollIndicator scrollText={scrollText} />
       </div>
 
       {/* MOBILE (<1024px) — dedicated layout, desktop is untouched above */}
@@ -141,14 +172,12 @@ export function Hero() {
               backgroundClip: "text",
             }}
           >
-            Limitless AI, reimagined with Ambient efficiency
+            {title}
           </h1>
           <p
             className={`${interRegular.className} w-[332px] max-w-full text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80`}
           >
-            A new class of AI chips that unlocks richer intelligence from
-            microwatt to hyperscaler cloud, once constrained by power, space and
-            legacy design tradeoffs
+            {subtitle}
           </p>
         </div>
 
@@ -166,7 +195,7 @@ export function Hero() {
             WebkitMaskRepeat: "no-repeat",
           }}
         >
-          <HeroVisualMedia mobile />
+          <HeroVisualMedia mobile videoSrc={mobileVideoSrc} />
         </div>
 
         {/* Spacer to push stats down */}
@@ -176,7 +205,7 @@ export function Hero() {
         <div className="relative z-10 px-[24px]">
           <div className="flex flex-col gap-[24px]">
             <HeroStat
-              tag="Real-time AI at edge"
+              tag={m0.tag || "Real-time AI at edge"}
               tagWidth={180}
               labelOffsetX={74.5}
               rightBarLeft={170.48}
@@ -194,11 +223,21 @@ export function Hero() {
                     backgroundClip: "text",
                   }}
                 >
-                  100%
+                  {v0Split ? (
+                    <>
+                      <span className="text-[40px] leading-[1.2]">{v0Split.num}</span>
+                      <span className="text-[12px] leading-[1.2]">{v0Split.unit}</span>
+                    </>
+                  ) : (
+                    v0
+                  )}
                 </p>
               }
-              title="Programmability"
-              description="AI cores with 4 to 32 bit resolution for control in applications."
+              title={m0.title || "Programmability"}
+              description={
+                m0.description ||
+                "AI cores with 4 to 32 bit resolution for control in applications."
+              }
             />
 
             <div className="relative h-[1px] w-[calc(100%-8px)] ml-[4px] bg-white/20">
@@ -212,7 +251,7 @@ export function Hero() {
             </div>
 
             <HeroStat
-              tag="Scalable arch."
+              tag={m1.tag || "Scalable arch."}
               tagWidth={129}
               labelOffsetX={49}
               rightBarLeft={121.48}
@@ -230,12 +269,21 @@ export function Hero() {
                     backgroundClip: "text",
                   }}
                 >
-                  <span className="text-[40px] leading-[1.2]">512</span>
-                  <span className="text-[12px] leading-[1.2]">{` GOPs`}</span>
+                  {v1Split ? (
+                    <>
+                      <span className="text-[40px] leading-[1.2]">{v1Split.num}</span>
+                      <span className="text-[12px] leading-[1.2]">{v1Split.unit}</span>
+                    </>
+                  ) : (
+                    <span className="text-[40px] leading-[1.2]">{v1}</span>
+                  )}
                 </p>
               }
-              title="Peak Performance"
-              description="Unmatched AI throughput far exceeds typical low-power MCUs."
+              title={m1.title || "Peak Performance"}
+              description={
+                m1.description ||
+                "Unmatched AI throughput far exceeds typical low-power MCUs."
+              }
             />
           </div>
         </div>

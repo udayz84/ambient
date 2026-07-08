@@ -3,10 +3,19 @@ import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 
 const BASELINE = "/technology/graph-baseline.svg";
 const LABEL_LINE = "/technology/graph-label-line.svg";
-const SUBTITLE_TEXT =
+const FALLBACK_SUBTITLE =
   "The same chip, tuned to the job — from a wrist to a factory floor.";
 
 const TITLE_GRADIENT_DEG = "115.765deg";
+
+const FALLBACK_HEADING =
+  "A unified architecture for seamless adoption and scalability.";
+const FALLBACK_AXIS_LEFT = "MICROWATT EDGE";
+const FALLBACK_AXIS_RIGHT = "HYPERSCALE CLOUD";
+const FALLBACK_CENTER_TEXT =
+  "ONE CORE. ONE SOFTWARE STACK. \nFrom the smallest sensor to largest serve";
+const FALLBACK_PRIMARY_LABEL = "Read the Whitepaper";
+const FALLBACK_SECONDARY_LABEL = "Watch the 3-min Explainer";
 
 const BARS = [
   { left: 182.51, top: 497.32, w: 101.436, h: 155.592, src: "/technology/graph-bar-1.svg" },
@@ -24,7 +33,14 @@ const VLINES = [
   { left: 1131.14, top: 267.0, h: 386.559, src: "/technology/graph-vline-5.svg" },
 ];
 
-const LABELS = [
+type LabelConfig = {
+  left: number;
+  top: number;
+  name: string;
+  cat: string;
+};
+
+const LABEL_CONFIG: LabelConfig[] = [
   { left: 182.15, top: 366, name: "GPX10", cat: "EDGE SENSOR" },
   { left: 415.18, top: 330, name: "GPX10 Pro", cat: "EDGE AI SOC" },
   { left: 648.2, top: 298, name: "GPX Vision", cat: "ON - DEVICE VISION" },
@@ -35,11 +51,21 @@ const LABELS = [
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
 
-function GraphCtas() {
+function GraphCtas({
+  primaryLabel,
+  primaryHref,
+  secondaryLabel,
+  secondaryHref,
+}: {
+  primaryLabel: string;
+  primaryHref: string;
+  secondaryLabel: string;
+  secondaryHref: string;
+}) {
   return (
     <div className="absolute top-[735.55px] left-1/2 flex -translate-x-1/2 items-start gap-[24px]" data-node-id="3035:713">
       <a
-        href="#"
+        href={primaryHref}
         className={`${gilroyMedium.className} ${GREEN_CTA_SHADOW} relative block h-[48px] w-[223px] shrink-0`}
         data-node-id="3035:714"
         data-name="Cta"
@@ -47,18 +73,18 @@ function GraphCtas() {
         <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
         <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
         <span className="absolute top-[calc(50%-14px)] left-1/2 -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
-          Read the Whitepaper
+          {primaryLabel}
         </span>
         <CornerDecor />
       </a>
       <a
-        href="#"
+        href={secondaryHref}
         className={`${gilroyMedium.className} relative block h-[48px] w-[263px] shrink-0 overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
         data-node-id="3035:725"
         data-name="CTA - Secondary"
       >
         <span className="relative flex h-full items-center text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
-          Watch the 3-min Explainer
+          {secondaryLabel}
         </span>
         <CornerDecor />
       </a>
@@ -66,7 +92,29 @@ function GraphCtas() {
   );
 }
 
-export function TechnologyPageGraph() {
+export function TechnologyPageGraph({ data }: { data?: any } = {}) {
+  const heading = data?.heading || FALLBACK_HEADING;
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const axisLeft = data?.axis_label_left || FALLBACK_AXIS_LEFT;
+  const axisRight = data?.axis_label_right || FALLBACK_AXIS_RIGHT;
+  const centerText = data?.center_text || FALLBACK_CENTER_TEXT;
+  const centerLines = centerText.split("\n");
+  const primaryLabel = data?.primary_button?.label || FALLBACK_PRIMARY_LABEL;
+  const primaryHref = data?.primary_button?.href || "#";
+  const secondaryLabel =
+    data?.secondary_button?.label || FALLBACK_SECONDARY_LABEL;
+  const secondaryHref = data?.secondary_button?.href || "#";
+
+  const strapiLabels = Array.isArray(data?.labels) ? data.labels : [];
+  const labels: LabelConfig[] = LABEL_CONFIG.map((cfg, i) => {
+    const l = strapiLabels[i];
+    return {
+      ...cfg,
+      name: (l?.label as string) || cfg.name,
+      cat: (l?.sub_label as string) || cfg.cat,
+    };
+  });
+
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -92,7 +140,7 @@ export function TechnologyPageGraph() {
               nodeId="3031:514"
               className="w-[731.336px]"
             >
-              A unified architecture for seamless adoption and scalability.
+              {heading}
             </GradientTitle>
             <CornerDecor />
           </div>
@@ -100,7 +148,7 @@ export function TechnologyPageGraph() {
             className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic`}
             data-node-id="3031:519"
           >
-            {SUBTITLE_TEXT}
+            {subtitle}
           </p>
         </div>
 
@@ -142,7 +190,7 @@ export function TechnologyPageGraph() {
         />
 
         {/* bar labels */}
-        {LABELS.map((l, i) => (
+        {labels.map((l, i) => (
           <div
             key={`label-${i}`}
             className="absolute flex flex-col items-start gap-[12px]"
@@ -175,13 +223,13 @@ export function TechnologyPageGraph() {
           className={`${interRegular.className} absolute top-[667.55px] left-[90px] text-[14px] leading-[22.75px] font-normal tracking-[-0.1504px] whitespace-nowrap text-[rgba(255,255,255,0.4)] not-italic`}
           data-node-id="3031:522"
         >
-          MICROWATT EDGE
+          {axisLeft}
         </p>
         <p
           className={`${interRegular.className} absolute top-[667.55px] left-[1350px] -translate-x-full text-right text-[14px] leading-[22.75px] font-normal tracking-[-0.1504px] whitespace-nowrap text-[rgba(255,255,255,0.4)] not-italic`}
           data-node-id="3031:524"
         >
-          HYPERSCALE CLOUD
+          {axisRight}
         </p>
 
         {/* center footnote */}
@@ -190,13 +238,24 @@ export function TechnologyPageGraph() {
           style={{ left: "calc(50% - 270px)" }}
           data-node-id="3035:711"
         >
-          <span className="font-semibold leading-[22.75px] text-white">{`ONE CORE. ONE SOFTWARE STACK. `}</span>
-          <span className={`${interRegular.className} font-normal leading-[22.75px] text-[rgba(255,255,255,0.7)]`}>
-            From the smallest sensor to largest serve
-          </span>
+          {centerLines[0] ? (
+            <span className="font-semibold leading-[22.75px] text-white">
+              {centerLines[0]}
+            </span>
+          ) : null}
+          {centerLines[1] ? (
+            <span className={`${interRegular.className} font-normal leading-[22.75px] text-[rgba(255,255,255,0.7)]`}>
+              {centerLines[1]}
+            </span>
+          ) : null}
         </p>
 
-        <GraphCtas />
+        <GraphCtas
+          primaryLabel={primaryLabel}
+          primaryHref={primaryHref}
+          secondaryLabel={secondaryLabel}
+          secondaryHref={secondaryHref}
+        />
       </div>
 
       {/* MOBILE (<1024px) — basic responsive version */}
@@ -209,12 +268,12 @@ export function TechnologyPageGraph() {
             backgroundClip: "text",
           }}
         >
-          A unified architecture for seamless adoption and scalability.
+          {heading}
         </div>
         <p
           className={`${interRegular.className} max-w-[327px] text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
         >
-          {SUBTITLE_TEXT}
+          {subtitle}
         </p>
 
         {/* scaled chart — bars positioned by % so they always fit the container */}
@@ -241,7 +300,7 @@ export function TechnologyPageGraph() {
         </div>
 
         <div className="grid w-full grid-cols-2 gap-x-[16px] gap-y-[16px]">
-          {LABELS.map((l, i) => (
+          {labels.map((l, i) => (
             <div key={`m-label-${i}`} className="flex flex-col gap-[4px]">
               <p className={`${gilroyMedium.className} text-[18px] leading-[22px] font-medium text-white not-italic`}>
                 {l.name}
@@ -255,21 +314,21 @@ export function TechnologyPageGraph() {
 
         <div className="mt-[8px] flex w-full flex-col items-stretch gap-[12px]">
           <a
-            href="#"
+            href={primaryHref}
             className={`${gilroyMedium.className} ${GREEN_CTA_SHADOW} relative block h-[48px] w-full`}
           >
             <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
             <span className="absolute top-[calc(50%-14px)] left-1/2 -translate-x-1/2 text-[15px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
-              Read the Whitepaper
+              {primaryLabel}
             </span>
             <CornerDecor />
           </a>
           <a
-            href="#"
+            href={secondaryHref}
             className={`${gilroyMedium.className} relative block h-[48px] w-full overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
           >
             <span className="relative flex h-full items-center justify-center text-[15px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
-              Watch the 3-min Explainer
+              {secondaryLabel}
             </span>
             <CornerDecor />
           </a>

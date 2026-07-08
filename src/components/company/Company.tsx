@@ -30,7 +30,11 @@ const COMPANY_FOOTER_TOP_PX = 6737;
 
 
 
-export function Company() {
+type CompanyProps = {
+  data?: any;
+};
+
+export function Company({ data }: CompanyProps = {}) {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       {/* DESKTOP (>=1024px) — absolute canvas, untouched */}
@@ -41,24 +45,33 @@ export function Company() {
         data-name="Company - 02"
       >
         <div className="relative mx-auto h-full w-[1440px]">
-          <CompanyHero />
-          <CompanyMission />
-          <CompanyLeadership />
-          <CompanyDna />
-          <CompanyEcosystem />
-          <CompanyTechnologyPartners />
-          <CompanyArticles />
-          <CompanyImage124Background />
-          <CompanyEngagement />
+          {data?.hero ? <CompanyHero data={data.hero} /> : null}
+          {data?.mission ? <CompanyMission data={data.mission} /> : null}
+          {data?.leadership ? (
+            <CompanyLeadership data={data.leadership} />
+          ) : null}
+          {data?.dna ? <CompanyDna data={data.dna} /> : null}
+          {data?.ecosystem ? <CompanyEcosystem data={data.ecosystem} /> : null}
+          {data?.tech_partners ? (
+            <CompanyTechnologyPartners data={data.tech_partners} />
+          ) : null}
+          {data?.articles ? <CompanyArticles data={data.articles} /> : null}
+          {data?.engagement ? (
+            <CompanyImage124Background data={data.engagement} />
+          ) : null}
+          {data?.engagement || data?.join_team ? (
+            <CompanyEngagement
+              data={data?.engagement}
+              joinTeam={data?.join_team}
+            />
+          ) : null}
         </div>
       </div>
 
       {/* MOBILE (<1024px) — dedicated stacked layout */}
       <div className="relative -mt-[78px] w-full bg-black min-[1024px]:hidden">
-        <CompanyMobile />
+        <CompanyMobile data={data} />
       </div>
     </main>
   );
 }
-
-

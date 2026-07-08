@@ -1,3 +1,4 @@
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
@@ -13,13 +14,33 @@ const CONNECTOR_ICON = "/technology/connector-icon.svg";
 const TITLE_GRADIENT_DEG = "108.194deg";
 const SUBTITLE_OPACITY = 0.65;
 
-const SUBTITLE_TEXT =
+const FALLBACK_TAG = "The PROBLEM";
+const FALLBACK_HEADING = "AI isn't a math problem.\nIt's a memory problem.";
+const FALLBACK_SUBTITLE =
   "The multiply was never the expensive part. Moving the data was.";
+const FALLBACK_STAT_VALUE = "95%";
+const FALLBACK_STAT_DESC =
+  "of a neural net is matrix math. \n~75% of the effort is moving it around.";
+
+const FALLBACK_CARDS = [
+  {
+    label: "Legacy",
+    description:
+      "Compute and memory sit apart. The chip spends its life shuttling numbers, not crunching them. ~75% of operations are just memory traffic.",
+    image: LEGACY_COMPUTE,
+  },
+  {
+    label: "A-Cube",
+    description:
+      "We put the compute inside the memory. The commute disappears. Compute where the data lives.",
+    image: ACUBE_DIAGRAM,
+  },
+];
 
 const VIGNETTE =
   "radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%)";
 
-function CenterVisual() {
+function CenterVisual({ bgSrc }: { bgSrc: string }) {
   return (
     <div
       className="pointer-events-none absolute left-[283px] top-[295px] z-0 h-[577px] w-[829px] overflow-hidden"
@@ -30,7 +51,7 @@ function CenterVisual() {
         <div className="absolute inset-0 overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={CENTER_BG}
+            src={bgSrc}
             alt=""
             className="absolute left-[-19.5%] top-[-11.27%] h-[111.27%] w-[137.68%] max-w-none"
           />
@@ -47,7 +68,15 @@ function CenterVisual() {
   );
 }
 
-function SectionHeader() {
+function SectionHeader({
+  tagText,
+  headingLines,
+  subtitle,
+}: {
+  tagText: string;
+  headingLines: string[];
+  subtitle: string;
+}) {
   return (
     <div
       className="absolute left-[320px] top-[28px] z-10 flex h-[200px] w-[800px] flex-col items-center justify-start gap-[24px]"
@@ -55,7 +84,7 @@ function SectionHeader() {
       data-name="Frame 1984079432"
     >
       <TagBadge
-        label="The PROBLEM"
+        label={tagText}
         width={131}
         labelOffsetX={0}
         rightBarLeft={121.16}
@@ -70,10 +99,10 @@ function SectionHeader() {
       >
         <GradientTitle gradientDeg={TITLE_GRADIENT_DEG} className="text-center">
           <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-            AI isn&apos;t a math problem.
+            {headingLines[0] ?? ""}
           </span>
           <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-            It&apos;s a memory problem.
+            {headingLines[1] ?? ""}
           </span>
         </GradientTitle>
         <CornerDecor />
@@ -84,13 +113,13 @@ function SectionHeader() {
         style={{ opacity: SUBTITLE_OPACITY }}
         data-node-id="2976:1216"
       >
-        {SUBTITLE_TEXT}
+        {subtitle}
       </p>
     </div>
   );
 }
 
-function LegacyDiagram() {
+function LegacyDiagram({ computeSrc }: { computeSrc: string }) {
   return (
     <div
       className="relative h-[392px] w-[275px] shrink-0"
@@ -105,7 +134,7 @@ function LegacyDiagram() {
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={LEGACY_COMPUTE}
+          src={computeSrc}
           alt=""
           className="absolute left-0 top-[-40.34%] h-[187.21%] w-full max-w-none"
         />
@@ -156,7 +185,15 @@ function LegacyDiagram() {
   );
 }
 
-function LegacyStatCard() {
+function LegacyStatCard({
+  label,
+  description,
+  computeSrc,
+}: {
+  label: string;
+  description: string;
+  computeSrc: string;
+}) {
   return (
     <div
       className="absolute left-[100px] top-[255px] z-20 h-[657px] w-[380px] bg-[rgba(0,0,0,0.1)] border border-white/10"
@@ -177,15 +214,13 @@ function LegacyStatCard() {
             className={`${gilroyMedium.className} w-[279px] text-[32px] leading-[38px] font-medium text-white not-italic`}
             data-node-id="3064:1447"
           >
-            Legacy
+            {label}
           </p>
           <p
             className={`${interRegular.className} w-full text-[13px] leading-[normal] font-normal text-[#8e8e8e] not-italic [word-break:break-word]`}
             data-node-id="3064:1448"
           >
-            Compute and memory sit apart. The chip spends its life shuttling
-            numbers, not crunching them. ~75% of operations are just memory
-            traffic.
+            {description}
           </p>
         </div>
 
@@ -199,7 +234,7 @@ function LegacyStatCard() {
           >
             Compute
           </p>
-          <LegacyDiagram />
+          <LegacyDiagram computeSrc={computeSrc} />
           <p
             className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium whitespace-nowrap text-[#6fe047] not-italic`}
             data-node-id="3064:1455"
@@ -212,7 +247,15 @@ function LegacyStatCard() {
   );
 }
 
-function ACubeStatCard() {
+function ACubeStatCard({
+  label,
+  description,
+  diagramSrc,
+}: {
+  label: string;
+  description: string;
+  diagramSrc: string;
+}) {
   return (
     <div
       className="absolute left-[960px] top-[310px] z-20 h-[547px] w-[380px] bg-[rgba(0,0,0,0.1)] border border-white/10"
@@ -233,14 +276,13 @@ function ACubeStatCard() {
             className={`${gilroyMedium.className} w-[279px] text-[32px] leading-[38px] font-medium text-white not-italic`}
             data-node-id="3064:1515"
           >
-            A-Cube
+            {label}
           </p>
           <p
             className={`${interRegular.className} w-full text-[13px] leading-[normal] font-normal text-[#8e8e8e] not-italic [word-break:break-word]`}
             data-node-id="3064:1516"
           >
-            We put the compute inside the memory. The commute disappears. Compute
-            where the data lives.
+            {description}
           </p>
         </div>
 
@@ -263,7 +305,7 @@ function ACubeStatCard() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={ACUBE_DIAGRAM}
+              src={diagramSrc}
               alt=""
               className="size-full max-w-none object-cover"
             />
@@ -274,7 +316,13 @@ function ACubeStatCard() {
   );
 }
 
-function Stat95Overlay() {
+function Stat95Overlay({
+  statValue,
+  statDescLines,
+}: {
+  statValue: string;
+  statDescLines: string[];
+}) {
   return (
     <div
       className="absolute left-[593px] top-[380px] z-30 flex h-[91px] w-[254px] flex-col items-center text-center"
@@ -285,24 +333,48 @@ function Stat95Overlay() {
         className={`${gilroySemiBold.className} w-full text-[40px] leading-[normal] font-semibold text-[#6fe047] not-italic`}
         data-node-id="3056:1151"
       >
-        95%
+        {statValue}
       </p>
       <div
         className={`${interRegular.className} w-full whitespace-pre-wrap text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
         data-node-id="3056:1150"
       >
-        <span className="block leading-[21px]">
-          {`of a neural net is matrix math. `}
-        </span>
-        <span className="block leading-[21px]">
-          ~75% of the effort is moving it around.
-        </span>
+        <span className="block leading-[21px]">{statDescLines[0] ?? ""}</span>
+        <span className="block leading-[21px]">{statDescLines[1] ?? ""}</span>
       </div>
     </div>
   );
 }
 
-export function TechnologyPageProblem() {
+export function TechnologyPageProblem({ data }: { data?: any } = {}) {
+  const tagText = data?.tag?.text || FALLBACK_TAG;
+  const heading = data?.heading || FALLBACK_HEADING;
+  const headingLines = heading.split("\n");
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const statValue = data?.stat_value || FALLBACK_STAT_VALUE;
+  const statDesc = data?.stat_description || FALLBACK_STAT_DESC;
+  const statDescLines = statDesc.split("\n");
+  const bgSrc = mediaUrl(data?.background_image) || CENTER_BG;
+
+  const strapiCards = Array.isArray(data?.comparison_cards)
+    ? data.comparison_cards
+    : null;
+  const cards =
+    strapiCards && strapiCards.length > 0
+      ? strapiCards.map((c: any, i: number) => {
+          const fb =
+            FALLBACK_CARDS[i] ?? FALLBACK_CARDS[FALLBACK_CARDS.length - 1];
+          return {
+            label: (c?.label as string) || fb.label,
+            description: (c?.description as string) || fb.description,
+            image: mediaUrl(c?.image) || fb.image,
+          };
+        })
+      : FALLBACK_CARDS;
+
+  const legacy = cards[0] ?? FALLBACK_CARDS[0];
+  const acube = cards[1] ?? FALLBACK_CARDS[1];
+
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -312,17 +384,29 @@ export function TechnologyPageProblem() {
     >
       {/* DESKTOP (>=1024px) */}
       <div className="relative hidden h-[950px] w-full max-w-[1440px] min-[1024px]:block">
-        <CenterVisual />
-        <SectionHeader />
-        <LegacyStatCard />
-        <ACubeStatCard />
-        <Stat95Overlay />
+        <CenterVisual bgSrc={bgSrc} />
+        <SectionHeader
+          tagText={tagText}
+          headingLines={headingLines}
+          subtitle={subtitle}
+        />
+        <LegacyStatCard
+          label={legacy.label}
+          description={legacy.description}
+          computeSrc={legacy.image}
+        />
+        <ACubeStatCard
+          label={acube.label}
+          description={acube.description}
+          diagramSrc={acube.image}
+        />
+        <Stat95Overlay statValue={statValue} statDescLines={statDescLines} />
       </div>
 
       {/* MOBILE (<1024px) — basic responsive version */}
       <div className="relative flex w-full flex-col items-center gap-[32px] px-[24px] py-[64px] min-[1024px]:hidden">
         <TagBadge
-          label="The PROBLEM"
+          label={tagText}
           width={131}
           labelOffsetX={0}
           rightBarLeft={121.16}
@@ -338,38 +422,36 @@ export function TechnologyPageProblem() {
             backgroundClip: "text",
           }}
         >
-          <span className="block">AI isn&apos;t a math problem.</span>
-          <span className="block">It&apos;s a memory problem.</span>
+          <span className="block">{headingLines[0] ?? ""}</span>
+          <span className="block">{headingLines[1] ?? ""}</span>
         </div>
 
         <p
           className={`${interRegular.className} max-w-[327px] text-center text-[15px] leading-[22px] font-normal text-[#f0f0f0] not-italic`}
           style={{ opacity: SUBTITLE_OPACITY }}
         >
-          {SUBTITLE_TEXT}
+          {subtitle}
         </p>
 
         <div
           className={`${gilroySemiBold.className} text-center text-[36px] leading-[normal] font-semibold text-[#6fe047] not-italic`}
         >
-          95%
+          {statValue}
         </div>
         <p
-          className={`${interRegular.className} -mt-[16px] max-w-[300px] text-center text-[13px] leading-[20px] font-normal text-[#f0f0f0] not-italic`}
+          className={`${interRegular.className} -mt-[16px] max-w-[300px] whitespace-pre-line text-center text-[13px] leading-[20px] font-normal text-[#f0f0f0] not-italic`}
         >
-          of a neural net is matrix math. ~75% of the effort is moving it around.
+          {statDesc}
         </p>
 
         {/* Legacy block */}
         <div className="flex w-full max-w-[380px] flex-col items-center gap-[16px] rounded-[2px] bg-[rgba(0,0,0,0.1)] border border-white/10 px-[20px] py-[24px]">
           <div className="flex w-full flex-col items-start gap-[6px] border-b border-solid border-[rgba(255,255,255,0.1)] pb-[11px]">
             <p className={`${gilroyMedium.className} text-[26px] leading-[32px] font-medium text-white not-italic`}>
-              Legacy
+              {legacy.label}
             </p>
             <p className={`${interRegular.className} text-[13px] leading-[normal] font-normal text-[#8e8e8e] not-italic`}>
-              Compute and memory sit apart. The chip spends its life shuttling
-              numbers, not crunching them. ~75% of operations are just memory
-              traffic.
+              {legacy.description}
             </p>
           </div>
           <p className={`${gilroyMedium.className} text-[20px] leading-[26px] font-medium text-[#6fe047] not-italic`}>
@@ -377,7 +459,7 @@ export function TechnologyPageProblem() {
           </p>
           <div className="h-[160px] w-[200px] overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={LEGACY_COMPUTE} alt="" className="size-full object-cover" />
+            <img src={legacy.image} alt="" className="size-full object-cover" />
           </div>
           <p className={`${gilroyMedium.className} text-[20px] leading-[26px] font-medium text-[#6fe047] not-italic`}>
             Memory
@@ -388,11 +470,10 @@ export function TechnologyPageProblem() {
         <div className="flex w-full max-w-[380px] flex-col items-center gap-[16px] rounded-[2px] bg-[rgba(0,0,0,0.1)] border border-white/10 px-[20px] py-[24px]">
           <div className="flex w-full flex-col items-end gap-[6px] border-b border-solid border-[rgba(255,255,255,0.1)] pb-[11px] text-right">
             <p className={`${gilroyMedium.className} text-[26px] leading-[32px] font-medium text-white not-italic`}>
-              A-Cube
+              {acube.label}
             </p>
             <p className={`${interRegular.className} text-[13px] leading-[normal] font-normal text-[#8e8e8e] not-italic`}>
-              We put the compute inside the memory. The commute disappears.
-              Compute where the data lives.
+              {acube.description}
             </p>
           </div>
           <p className={`${gilroyMedium.className} text-center text-[20px] leading-[26px] font-medium text-[#6fe047] not-italic`}>
@@ -400,7 +481,7 @@ export function TechnologyPageProblem() {
           </p>
           <div className="h-[180px] w-[220px] overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={ACUBE_DIAGRAM} alt="" className="size-full object-cover" />
+            <img src={acube.image} alt="" className="size-full object-cover" />
           </div>
         </div>
       </div>
