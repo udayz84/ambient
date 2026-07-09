@@ -1,0 +1,48 @@
+{
+  "collectionName": "components_apps_som_cards",
+  "info": {
+    "displayName": "SOM Card",
+    "description": "A single card for the SOM Section"
+  },
+  "options": {},
+  "attributes": {
+    "value": {
+      "type": "string",
+      "required": true
+    },
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "sublabel": {
+      "type": "string",
+      "required": true
+    },
+    "is_upcoming": {
+      "type": "boolean",
+      "default": false
+    },
+    "visual_style": {
+      "type": "enumeration",
+      "enum": [
+        "sharp",
+        "blurry",
+        "layered"
+      ],
+      "default": "sharp",
+      "required": true
+    },
+    "image_a": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images", "files", "videos", "audios"]
+    },
+    "image_b": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images", "files", "videos", "audios"]
+    }
+  }
+}

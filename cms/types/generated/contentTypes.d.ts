@@ -602,7 +602,6 @@ export interface ApiCompanyPageCompanyPage extends Struct.SingleTypeSchema {
     ecosystem: Schema.Attribute.Component<'company.ecosystem', false>;
     engagement: Schema.Attribute.Component<'company.engagement', false>;
     hero: Schema.Attribute.Component<'company.hero', false>;
-    join_team: Schema.Attribute.Component<'company.join-team', false>;
     leadership: Schema.Attribute.Component<'company.leadership', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -802,6 +801,38 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     seo: Schema.Attribute.Component<'shared.seo', false>;
     technology: Schema.Attribute.Component<'home.technology', false>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiJobCategoryJobCategory extends Struct.CollectionTypeSchema {
+  collectionName: 'job_categories';
+  info: {
+    description: 'Category for filtering jobs';
+    displayName: 'Job Category';
+    pluralName: 'job-categories';
+    singularName: 'job-category';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    jobs: Schema.Attribute.Relation<'oneToMany', 'api::job.job'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::job-category.job-category'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1606,6 +1637,7 @@ declare module '@strapi/strapi' {
       'api::dvk-page.dvk-page': ApiDvkPageDvkPage;
       'api::global-settings.global-settings': ApiGlobalSettingsGlobalSettings;
       'api::home-page.home-page': ApiHomePageHomePage;
+      'api::job-category.job-category': ApiJobCategoryJobCategory;
       'api::job.job': ApiJobJob;
       'api::news-listing-page.news-listing-page': ApiNewsListingPageNewsListingPage;
       'api::products-page.products-page': ApiProductsPageProductsPage;

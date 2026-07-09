@@ -3,6 +3,7 @@ import { CornerDecor } from "./company-corners";
 import { interRegular } from "../hero/fonts";
 import { CompanyDnaBackground } from "./CompanyDnaBackground";
 import { CompanyDnaValueCard } from "./CompanyDnaValueCard";
+import { mediaUrl } from "@/lib/strapi";
 
 const VALUE_CARDS = [
   {
@@ -68,7 +69,7 @@ export function CompanyDna({ data }: CompanyDnaProps = {}) {
       data-name="Frame 1984079462"
       aria-label="Driven by physics. Defined by our DNA."
     >
-      <CompanyDnaBackground />
+      <CompanyDnaBackground bgImage={mediaUrl(data?.background_image)} />
 
       <div
         className="pointer-events-none absolute top-0 left-0 z-[5] h-[468px] w-full bg-black"

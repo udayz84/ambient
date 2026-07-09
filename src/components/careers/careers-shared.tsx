@@ -457,19 +457,19 @@ export function CareersGreenCta({
       <span className="pointer-events-none absolute inset-0 z-[1] overflow-hidden rounded-[inherit]">
         <RepelDots />
       </span>
-      <span
-        className={`absolute z-10 top-[calc(50%-8px)] ${textLeft} text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic`}
-      >
-        {children}
-      </span>
-      <span className={`pointer-events-none z-10 absolute top-1/2 ${dotLeft} size-[6px] -translate-y-1/2`}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/careers/cta-dot.svg"
-          alt=""
-          className="absolute inset-0 block size-full max-w-none"
-          aria-hidden
-        />
+      <span className="relative z-10 flex h-full w-full items-center justify-center gap-[10px] px-6">
+        <span className="text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic">
+          {children}
+        </span>
+        <span className="pointer-events-none size-[6px]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/careers/cta-dot.svg"
+            alt=""
+            className="block size-full max-w-none"
+            aria-hidden
+          />
+        </span>
       </span>
       <span
         aria-hidden

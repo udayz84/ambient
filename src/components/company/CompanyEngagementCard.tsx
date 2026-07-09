@@ -41,50 +41,56 @@ export function CompanyEngagementCard({
 
   return (
     <article
-      className={`relative isolate z-[1] box-border h-[386px] w-[590px] shrink-0 bg-black ${CARD_BORDER}`}
+      className={`relative isolate z-[1] box-border h-[386px] flex-1 shrink-0 bg-black overflow-hidden ${CARD_BORDER}`}
       data-node-id={nodeId}
       data-name="Article"
     >
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none rounded-[inherit]">
         <div
-          className="pointer-events-none absolute overflow-hidden"
-          style={{ left: imageLeft, top: imageTop, width: imageWidth, height: imageHeight }}
+          className="pointer-events-none absolute right-0 top-0 h-full w-[60%]"
           aria-hidden
         >
           <Image
             src={finalImageSrc}
             alt=""
             fill
-            className="pointer-events-none object-cover"
-            sizes={`${imageWidth}px`}
+            className="pointer-events-none object-cover opacity-60"
             unoptimized
           />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent" />
         </div>
       </div>
 
       <div
-        className="absolute top-[32px] left-[32px] z-[1] w-[526px]"
+        className="absolute top-[32px] left-[32px] z-[1] w-[calc(100%-64px)]"
         data-name="NewsSection"
       >
-        <CompanySectionTitle
-          width={titleWidth}
-          height={titleHeight}
-          lines={finalTitleLines}
-        />
+        <h3
+          className={`relative m-0 bg-clip-text p-0 font-medium text-transparent not-italic text-balance`}
+          style={{
+            fontFamily: "Gilroy, sans-serif",
+            fontSize: "32px",
+            lineHeight: "38px",
+            backgroundImage: "linear-gradient(122.573deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+          }}
+        >
+          {strapiTitle || titleLines.join(" ")}
+        </h3>
 
         <p
-          className={`${interRegular.className} mt-[12px] text-[18px] leading-[27px] font-normal text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
-          style={{ width: descriptionWidth }}
+          className={`${interRegular.className} mt-[12px] text-[18px] leading-[27px] font-normal text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word] w-full max-w-[90%] line-clamp-4`}
         >
           {finalDescription}
         </p>
       </div>
 
       <div
-        className="absolute top-[306px] left-[32px] z-[1]"
+        className="absolute bottom-[32px] left-[32px] z-[1]"
         data-name="Cta"
       >
-        <CompanyEngagementCta href={finalCtaHref} className={ctaWidth}>
+        <CompanyEngagementCta href={finalCtaHref} className="w-auto px-6">
           {finalCtaLabel}
         </CompanyEngagementCta>
       </div>

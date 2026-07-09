@@ -1,1 +1,35 @@
-﻿{ "collectionName": "components_apps_soms", "info": { "displayName": "SOM Section", "description": "Applications SOM section" }, "options": {}, "attributes": { "heading": { "type": "string", "required": true }, "subtitle": { "type": "text" }, "primary_button": { "type": "component", "repeatable": false, "component": "shared.button" }, "secondary_button": { "type": "component", "repeatable": false, "component": "shared.button" }, "status_pill": { "type": "string" }, "data_labels": { "type": "component", "repeatable": true, "component": "apps.som-data-label" }, "images": { "type": "media", "multiple": true } } }
+{
+  "collectionName": "components_apps_soms",
+  "info": {
+    "displayName": "SOM Section",
+    "description": "Applications SOM section"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "primary_button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.button"
+    },
+    "secondary_button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.button"
+    },
+    "status_pill": {
+      "type": "string"
+    },
+    "cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "apps.som-card"
+    }
+  }
+}

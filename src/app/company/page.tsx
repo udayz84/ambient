@@ -14,13 +14,12 @@ export default async function CompanyPage() {
     data = await getSingleType<any>("company-page", [
       "hero",
       "mission",
-      { section: "leadership", fields: ["prev_arrow_icon", "next_arrow_icon"], nested: ["team"] },
+      { section: "leadership", nested: ["team"] },
       "dna",
       { section: "ecosystem", fields: ["map_image"], nested: ["columns"] },
       { section: "tech_partners", nested: ["partners"] },
       { section: "articles", nested: ["featured_article", "compact_articles"] },
-      { section: "engagement", fields: ["background_image"], nested: ["cards"] },
-      "join_team",
+      { section: "engagement", fields: ["background_image"], nested: ["cards", "join_team"] },
       "seo",
     ]);
   } catch {

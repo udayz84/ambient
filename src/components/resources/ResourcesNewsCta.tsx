@@ -45,7 +45,7 @@ export function ResourcesNewsCta({ top, data }: ResourcesNewsCtaProps) {
           {headingLines.map((line, i) => (
             <span
               key={i}
-              className={`${gilroyMedium.className} block bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic`}
+              className={`${gilroyMedium.className} block text-center bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic`}
               style={titleLineStyle}
             >
               {line}

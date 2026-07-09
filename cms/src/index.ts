@@ -69,6 +69,100 @@ export default {
           }
         }
       }
+      // Seeding Open Roles in Careers Page
+      try {
+        const careersPage = await strapi.documents('api::careers-page.careers-page').findFirst({
+          populate: { open_roles: { populate: ['job_categories.jobs'] } }
+        });
+
+        if (careersPage && careersPage.open_roles) {
+          const existingCategories = careersPage.open_roles.job_categories || [];
+          if (existingCategories.length === 0) {
+            console.log('Seeding job categories for Careers page...');
+            const seedJobs = [
+              { title: "Analog Circuit Design Engineer", category: "Hardware", location: "San Francisco" },
+              { title: "Machine Learning Engineer", category: "Software", location: "San Francisco" },
+              { title: "Mixed-Signal Verification Engineer", category: "Hardware", location: "Remote" },
+              { title: "Physics-Aware ML Researcher", category: "Research", location: "San Francisco" },
+              { title: "Silicon Characterization Engineer", category: "Hardware", location: "San Francisco" },
+              { title: "Embedded Systems Engineer", category: "Software", location: "San Francisco" },
+              { title: "Quantization Algorithm Researcher", category: "Research", location: "San Francisco" },
+              { title: "ASIC Physical Design Engineer", category: "Hardware", location: "San Francisco" }
+            ];
+
+            const categoriesMap: any = {};
+            for (const job of seedJobs) {
+              if (!categoriesMap[job.category]) categoriesMap[job.category] = [];
+              categoriesMap[job.category].push({
+                title: job.title,
+                location: job.location,
+                apply_url: "#"
+              });
+            }
+
+            const jobCategories = Object.keys(categoriesMap).map(categoryName => ({
+              category_name: categoryName,
+              jobs: categoriesMap[categoryName]
+            }));
+
+            await strapi.documents('api::careers-page.careers-page').update({
+              documentId: careersPage.documentId,
+              data: {
+                open_roles: {
+                  ...careersPage.open_roles,
+                  job_categories: jobCategories
+                }
+              }
+            });
+            console.log('Successfully seeded job categories!');
+          }
+        }
+      } catch (err) {
+        console.error('Error seeding open roles:', err);
+      }
+
+      // Seeding Contact Form Fields
+      try {
+        const contactPage = await strapi.documents('api::contact-page.contact-page').findFirst({
+          populate: { form: { populate: ['tracks.form'] } }
+        });
+
+        if (contactPage && contactPage.form && contactPage.form.tracks) {
+          let updated = false;
+          const defaultFields = [
+            { label: "First Name", placeholder: "Enter Your First Name", type: "text" },
+            { label: "Last Name", placeholder: "Enter Your Last Name", type: "text" },
+            { label: "Company Name", placeholder: "Enter Your Company Name", type: "text" },
+            { label: "Job Title", placeholder: "Enter Your Job Title", type: "text" },
+            { label: "Corporate Email", placeholder: "Enter Your Corporate Email", type: "email" },
+            { label: "Phone Number", placeholder: "Enter Your Phone Number", type: "tel" },
+          ];
+
+          const tracks = contactPage.form.tracks.map((track: any) => {
+            if (!track.form || track.form.length === 0) {
+              updated = true;
+              return { ...track, form: defaultFields };
+            }
+            return track;
+          });
+
+          if (updated) {
+            console.log('Seeding form fields for Contact page tracks...');
+            await strapi.documents('api::contact-page.contact-page').update({
+              documentId: contactPage.documentId,
+              data: {
+                form: {
+                  ...contactPage.form,
+                  tracks
+                }
+              }
+            });
+            console.log('Successfully seeded form fields!');
+          }
+        }
+      } catch (err) {
+        console.error('Error seeding contact form fields:', err);
+      }
     } catch (e) {
       console.error('Seed error:', e);
     }

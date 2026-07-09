@@ -104,13 +104,31 @@ export interface AppsSom extends Struct.ComponentSchema {
     displayName: 'SOM Section';
   };
   attributes: {
-    data_labels: Schema.Attribute.Component<'apps.som-data-label', true>;
+    cards: Schema.Attribute.Component<'apps.som-card', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
-    images: Schema.Attribute.Media<undefined, true>;
     primary_button: Schema.Attribute.Component<'shared.button', false>;
     secondary_button: Schema.Attribute.Component<'shared.button', false>;
     status_pill: Schema.Attribute.String;
     subtitle: Schema.Attribute.Text;
+  };
+}
+
+export interface AppsSomCard extends Struct.ComponentSchema {
+  collectionName: 'components_apps_som_cards';
+  info: {
+    description: 'A single card for the SOM Section';
+    displayName: 'SOM Card';
+  };
+  attributes: {
+    image_a: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    image_b: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    is_upcoming: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    sublabel: Schema.Attribute.String & Schema.Attribute.Required;
+    value: Schema.Attribute.String & Schema.Attribute.Required;
+    visual_style: Schema.Attribute.Enumeration<['sharp', 'blurry', 'layered']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'sharp'>;
   };
 }
 
@@ -178,7 +196,6 @@ export interface CareersBenefits extends Struct.ComponentSchema {
     cards: Schema.Attribute.Component<'careers.benefit-card', true>;
     heading: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Benefits & Perks'>;
-    title_frame: Schema.Attribute.Media;
   };
 }
 
@@ -201,7 +218,6 @@ export interface CareersBottomCta extends Struct.ComponentSchema {
     displayName: 'Bottom CTA';
   };
   attributes: {
-    background_texture: Schema.Attribute.Media;
     buttons: Schema.Attribute.Component<'shared.button', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -214,7 +230,6 @@ export interface CareersDna extends Struct.ComponentSchema {
     displayName: 'DNA';
   };
   attributes: {
-    background_image: Schema.Attribute.Media;
     chip_background: Schema.Attribute.Media;
     chip_object: Schema.Attribute.Media;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
@@ -249,7 +264,31 @@ export interface CareersHero extends Struct.ComponentSchema {
     scroll_text: Schema.Attribute.String & Schema.Attribute.DefaultTo<'SCROLL'>;
     subtitle: Schema.Attribute.Text;
     title: Schema.Attribute.String & Schema.Attribute.Required;
-    title_frame: Schema.Attribute.Media;
+  };
+}
+
+export interface CareersJob extends Struct.ComponentSchema {
+  collectionName: 'components_careers_jobs';
+  info: {
+    description: 'A specific job role';
+    displayName: 'Job';
+  };
+  attributes: {
+    apply_url: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#'>;
+    location: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface CareersJobCategory extends Struct.ComponentSchema {
+  collectionName: 'components_careers_job_categories';
+  info: {
+    description: 'Category containing multiple jobs';
+    displayName: 'Job Category';
+  };
+  attributes: {
+    category_name: Schema.Attribute.String & Schema.Attribute.Required;
+    jobs: Schema.Attribute.Component<'careers.job', true>;
   };
 }
 
@@ -267,8 +306,7 @@ export interface CareersOpenRoles extends Struct.ComponentSchema {
     general_app_subtitle: Schema.Attribute.Text;
     general_app_title: Schema.Attribute.String;
     heading: Schema.Attribute.String & Schema.Attribute.DefaultTo<'Open Roles'>;
-    job_type_filters: Schema.Attribute.Text;
-    location_filters: Schema.Attribute.Text;
+    job_categories: Schema.Attribute.Component<'careers.job-category', true>;
   };
 }
 
@@ -377,6 +415,7 @@ export interface CompanyEngagement extends Struct.ComponentSchema {
   attributes: {
     background_image: Schema.Attribute.Media;
     cards: Schema.Attribute.Component<'company.engagement-card', true>;
+    join_team: Schema.Attribute.Component<'company.join-team', false>;
   };
 }
 
@@ -418,9 +457,8 @@ export interface CompanyHero extends Struct.ComponentSchema {
     displayName: 'Hero';
   };
   attributes: {
-    background_image: Schema.Attribute.Media;
     body: Schema.Attribute.Text;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.Text & Schema.Attribute.Required;
   };
 }
 
@@ -447,8 +485,6 @@ export interface CompanyLeadership extends Struct.ComponentSchema {
   };
   attributes: {
     heading: Schema.Attribute.String & Schema.Attribute.Required;
-    next_arrow_icon: Schema.Attribute.Media;
-    prev_arrow_icon: Schema.Attribute.Media;
     subtitle: Schema.Attribute.Text;
     team: Schema.Attribute.Component<'shared.leader', true>;
   };
@@ -461,10 +497,8 @@ export interface CompanyMission extends Struct.ComponentSchema {
     displayName: 'Mission';
   };
   attributes: {
-    background_image: Schema.Attribute.Media;
     body_paragraph_1: Schema.Attribute.Text;
     body_paragraph_2: Schema.Attribute.Text;
-    frame_border: Schema.Attribute.Media;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     stats: Schema.Attribute.Component<'shared.stat', true>;
   };
@@ -503,7 +537,6 @@ export interface ContactForm extends Struct.ComponentSchema {
   };
   attributes: {
     checkbox_label: Schema.Attribute.String;
-    fields: Schema.Attribute.Component<'contact.form-field', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     message_heading: Schema.Attribute.String;
     submit_label: Schema.Attribute.String &
@@ -537,6 +570,7 @@ export interface ContactFormTrack extends Struct.ComponentSchema {
   };
   attributes: {
     description: Schema.Attribute.Text;
+    form: Schema.Attribute.Component<'contact.form-field', true>;
     icon: Schema.Attribute.Media;
     label: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -550,6 +584,7 @@ export interface ContactHero extends Struct.ComponentSchema {
   };
   attributes: {
     background_image: Schema.Attribute.Media;
+    mobile_background_image: Schema.Attribute.Media;
     subtitle: Schema.Attribute.Text;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -1410,13 +1445,11 @@ export interface ResourcesBuilding extends Struct.ComponentSchema {
     displayName: 'Building';
   };
   attributes: {
-    background: Schema.Attribute.Media;
     cta_href: Schema.Attribute.String;
     cta_label: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Go to Developer Hub'>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     subtitle: Schema.Attribute.Text;
-    title_frame: Schema.Attribute.Media;
   };
 }
 
@@ -1440,7 +1473,6 @@ export interface ResourcesContent extends Struct.ComponentSchema {
     displayName: 'Content';
   };
   attributes: {
-    background_image: Schema.Attribute.Media;
     categories: Schema.Attribute.Component<'resources.category', true>;
     initial_visible: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<6>;
     load_more_count: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<3>;
@@ -1492,11 +1524,11 @@ export interface ResourcesHero extends Struct.ComponentSchema {
     background_image: Schema.Attribute.Media;
     contact_link_href: Schema.Attribute.String;
     contact_link_text: Schema.Attribute.String;
+    mobile_background_image: Schema.Attribute.Media;
     search_button_label: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Search'>;
     search_placeholder: Schema.Attribute.String;
     title: Schema.Attribute.String & Schema.Attribute.Required;
-    title_frame: Schema.Attribute.Media;
   };
 }
 
@@ -1512,7 +1544,6 @@ export interface ResourcesNewsCta extends Struct.ComponentSchema {
     cta_label: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Visit News Page'>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
-    texture: Schema.Attribute.Media;
   };
 }
 
@@ -2435,6 +2466,7 @@ declare module '@strapi/strapi' {
       'apps.hero': AppsHero;
       'apps.satellite-card': AppsSatelliteCard;
       'apps.som': AppsSom;
+      'apps.som-card': AppsSomCard;
       'apps.som-data-label': AppsSomDataLabel;
       'apps.win-card': AppsWinCard;
       'apps.wins': AppsWins;
@@ -2445,6 +2477,8 @@ declare module '@strapi/strapi' {
       'careers.dna': CareersDna;
       'careers.dna-panel': CareersDnaPanel;
       'careers.hero': CareersHero;
+      'careers.job': CareersJob;
+      'careers.job-category': CareersJobCategory;
       'careers.open-roles': CareersOpenRoles;
       'careers.work-card': CareersWorkCard;
       'company.articles': CompanyArticles;

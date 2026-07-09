@@ -9,8 +9,6 @@ const HERO_TITLE_FALLBACK = "Re-architect the\nphysics of AI";
 
 export function CareersHero({ data }: { data?: any }) {
   const bgImg = mediaUrl(data?.background_image) || "/careers/hero-bg.png";
-  const titleFrame =
-    mediaUrl(data?.title_frame) || "/careers/hero-title-frame.svg";
   const titleText = data?.title || HERO_TITLE_FALLBACK;
   const titleLines = titleText.split("\n");
   const subtitle =
@@ -143,7 +141,7 @@ export function CareersHero({ data }: { data?: any }) {
               <div className="absolute inset-[-0.43%_-0.13%]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={titleFrame}
+                  src="/careers/hero-title-frame.svg"
                   alt=""
                   className="block size-full max-w-none"
                   aria-hidden
@@ -153,15 +151,15 @@ export function CareersHero({ data }: { data?: any }) {
             <GradientTitle
               nodeId="2379:8692"
               gradientDeg="102.971deg"
-              className="absolute top-[10px] left-[20.16px] w-[349px] whitespace-nowrap"
+              className="absolute top-[10px] left-[20.16px] w-[349px]"
             >
               {titleLines.map((line: string, i: number) => (
-                <p
+                <span
                   key={i}
-                  className={i === 0 ? "mb-0 leading-[49px]" : "leading-[49px]"}
+                  className={i === 0 ? "block mb-0 leading-[49px]" : "block leading-[49px]"}
                 >
                   {line}
-                </p>
+                </span>
               ))}
             </GradientTitle>
           </div>

@@ -1,6 +1,6 @@
 import { TechnologyVisualFadeIn } from "../technology/TechnologyVisualFadeIn";
 
-export function CompanyDnaBackground() {
+export function CompanyDnaBackground({ bgImage }: { bgImage?: string | null }) {
   return (
     <div
       className="pointer-events-none absolute top-[230px] left-0 h-[970px] w-[1440px] overflow-hidden"
@@ -17,7 +17,7 @@ export function CompanyDnaBackground() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt=""
-            src="/company/image%20137.png"
+            src={bgImage || "/company/image%20137.png"}
             className="absolute inset-0 size-full max-w-none object-cover object-center"
           />
         </TechnologyVisualFadeIn>

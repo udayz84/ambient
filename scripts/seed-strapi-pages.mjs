@@ -635,7 +635,7 @@ const HOME_PAYLOAD = {
 
 const COMPANY_PAYLOAD = {
   hero: {
-    title: "A new paradigm for efficient AI compute",
+    title: "A new paradigm for\nefficient AI compute",
     body:
       "We build energy-aware, programmable, mixed-signal AI processors that unlock orders-of-magnitude improvements in performance-per-watt, enabling scalable intelligence across edge, enterprise, and cloud.",
     background_image: media(ASSETS.company_hero_bg),

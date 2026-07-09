@@ -13,10 +13,10 @@ export default async function ContactPage() {
   try {
     data = await getSingleType<any>("contact-page", [
       "hero",
-      "resources",
+      { section: "resources", nested: ["ctas"] },
       { section: "map", fields: ["globe_image", "map_base"], nested: ["locations"] },
       { section: "schedule", fields: ["icon"], nested: ["cards"] },
-      { section: "form", nested: ["tracks"] },
+      { section: "form", fields: ["tracks.icon", "tracks.form"] },
     ]);
   } catch {
     data = null;

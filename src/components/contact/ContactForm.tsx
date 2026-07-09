@@ -88,27 +88,30 @@ export function ContactForm({ data }: { data?: any }) {
     : [];
   const mergedTracks = tracks.map((track, index) => {
     const remote = strapiTracks[index];
-    if (!remote) return { ...track, remoteIcon: null };
+    if (!remote) return { ...track, remoteIcon: null, strapiFields: [] };
     return {
       ...track,
       title: remote.label || track.title,
       description: remote.description || track.description,
       remoteIcon: mediaUrl(remote.icon),
+      strapiFields: Array.isArray(remote.form) ? remote.form : [],
     };
   });
 
-  const strapiFields: ReadonlyArray<any> = Array.isArray(data?.fields)
-    ? data.fields
-    : [];
-  const mergedFields = formFields.map((field, index) => {
-    const remote = strapiFields[index];
-    if (!remote) return field;
-    return {
-      ...field,
-      label: remote.label || field.label,
-      placeholder: remote.placeholder || field.placeholder,
-    };
-  });
+  const activeMergedTrack = mergedTracks.find((t) => t.id === activeTrackId);
+  const currentStrapiFields = activeMergedTrack?.strapiFields || [];
+
+  const mergedFields = currentStrapiFields.length > 0
+    ? currentStrapiFields.map((remote: any, index: number) => {
+        const fallback = formFields[index % formFields.length];
+        return {
+          ...fallback,
+          label: remote.label || fallback.label,
+          placeholder: remote.placeholder || fallback.placeholder,
+          nodeId: `${fallback.nodeId}-${index}`,
+        };
+      })
+    : formFields.map((field) => ({ ...field }));
 
   const activeConnectorTop =
     mergedTracks.find((track) => track.id === activeTrackId)?.connectorTop ??

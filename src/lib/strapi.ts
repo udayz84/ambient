@@ -82,10 +82,30 @@ export function buildPopulate(sections: PopulateSection[]): string {
       parts.push(`populate[${section}][populate]=*`);
     } else {
       for (const field of fields) {
-        parts.push(`populate[${section}][populate][${field}]=true`);
+        if (field.includes('.')) {
+          const split = field.split('.');
+          let queryStr = `populate[${section}]`;
+          for (const s of split) {
+            queryStr += `[populate][${s}]`;
+          }
+          queryStr += `=true`;
+          parts.push(queryStr);
+        } else {
+          parts.push(`populate[${section}][populate][${field}]=true`);
+        }
       }
       for (const n of nested) {
-        parts.push(`populate[${section}][populate][${n}][populate]=*`);
+        if (n.includes('.')) {
+          const split = n.split('.');
+          let queryStr = `populate[${section}]`;
+          for (const s of split) {
+            queryStr += `[populate][${s}]`;
+          }
+          queryStr += `[populate]=*`;
+          parts.push(queryStr);
+        } else {
+          parts.push(`populate[${section}][populate][${n}][populate]=*`);
+        }
       }
     }
   }
@@ -131,6 +151,17 @@ export async function getSingleType<T = unknown>(
   const query = sections.length ? `?${buildPopulate(sections)}` : "";
   const res = await fetchStrapi<StrapiResponse<T>>(`/api/${apiId}${query}`);
   return res.data;
+}
+
+/**
+ * Fetch a collection type (e.g. "jobs") with deep population if specified.
+ */
+export async function getCollection<T = unknown>(
+  apiId: string,
+  queryParamString = ""
+): Promise<T[]> {
+  const res = await fetchStrapi<StrapiResponse<T[]>>(`/api/${apiId}?${queryParamString}`);
+  return res.data || [];
 }
 
 /** Fetch the global settings (no status param — draftAndPublish is off). */

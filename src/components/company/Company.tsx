@@ -59,10 +59,10 @@ export function Company({ data }: CompanyProps = {}) {
           {data?.engagement ? (
             <CompanyImage124Background data={data.engagement} />
           ) : null}
-          {data?.engagement || data?.join_team ? (
+          {data?.engagement ? (
             <CompanyEngagement
               data={data?.engagement}
-              joinTeam={data?.join_team}
+              joinTeam={data?.engagement?.join_team}
             />
           ) : null}
         </div>

@@ -47,8 +47,8 @@ export function CompanyLeadership({ data }: CompanyLeadershipProps = {}) {
   const heading = (data?.heading as string) || FALLBACK_HEADING;
   const subtitle = (data?.subtitle as string) || FALLBACK_SUBTITLE;
   const headingLines = heading.split("\n");
-  const prevArrowSrc = mediaUrl(data?.prev_arrow_icon) || FALLBACK_PREV_ARROW;
-  const nextArrowSrc = mediaUrl(data?.next_arrow_icon) || FALLBACK_NEXT_ARROW;
+  const prevArrowSrc = FALLBACK_PREV_ARROW;
+  const nextArrowSrc = FALLBACK_NEXT_ARROW;
   const team = Array.isArray(data?.team) ? data.team : null;
 
   return (

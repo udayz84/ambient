@@ -47,8 +47,7 @@ export function CareersDna({ data }: { data?: any }) {
   const headingText = data?.heading || DNA_HEADING_FALLBACK;
   const headingLines = headingText.split("\n");
   const subtitle = data?.subtitle || DNA_SUBTITLE_FALLBACK;
-  const bgImg =
-    mediaUrl(data?.background_image) || "/careers/dna-section-bg.png";
+  const bgImg = "/careers/dna-section-bg.png";
   const chipBg = mediaUrl(data?.chip_background) || "/careers/chip-bg.png";
   const chipObject =
     mediaUrl(data?.chip_object) || "/careers/chip-object.png";

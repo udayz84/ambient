@@ -51,16 +51,14 @@ export function CareersBottomCta({
       <div className="mt-[39px] flex items-center gap-[30px]">
         {buttons.map((btn, i) =>
           btn.variant === "white" ? (
-            <CareersWhiteCta key={i} href={btn.href} width="w-[170px]">
+            <CareersWhiteCta key={i} href={btn.href} width="w-auto px-6">
               {btn.label}
             </CareersWhiteCta>
           ) : (
             <CareersGreenCta
               key={i}
               href={btn.href}
-              width="w-[170px]"
-              textLeft="left-[38px]"
-              dotLeft="left-[126px]"
+              width="w-auto"
             >
               {btn.label}
             </CareersGreenCta>

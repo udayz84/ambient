@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_careers_job_categories",
+  "info": {
+    "displayName": "Job Category",
+    "description": "Category containing multiple jobs"
+  },
+  "options": {},
+  "attributes": {
+    "category_name": {
+      "type": "string",
+      "required": true
+    },
+    "jobs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "careers.job"
+    }
+  }
+}

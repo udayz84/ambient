@@ -108,7 +108,7 @@ const RESOURCES_DEFAULT_CTAS = [
 function ContactHeroMobile({ data }: { data?: any }) {
   const heroData = data?.hero;
   const resourcesData = data?.resources;
-  const bg = mediaUrl(heroData?.background_image) || "/mobile/contact/hand.png";
+  const bg = mediaUrl(heroData?.mobile_background_image) || mediaUrl(heroData?.background_image) || "/mobile/contact/hand.png";
   const titleLines = (heroData?.title || HERO_DEFAULT_TITLE).split("\n");
   const subtitle = heroData?.subtitle || HERO_DEFAULT_SUBTITLE;
   const heading = resourcesData?.heading || RESOURCES_DEFAULT_HEADING;
@@ -604,27 +604,29 @@ function ContactFormMobile({ data }: { data?: any }) {
     : [];
   const mergedTracks = TRACKS.map((track, index) => {
     const remote = strapiTracks[index];
-    if (!remote) return { ...track, remoteIcon: null };
+    if (!remote) return { ...track, remoteIcon: null, strapiFields: [] };
     return {
       ...track,
       title: remote.label || track.title,
       description: remote.description || track.description,
       remoteIcon: mediaUrl(remote.icon),
+      strapiFields: Array.isArray(remote.form) ? remote.form : [],
     };
   });
 
-  const strapiFields: ReadonlyArray<any> = Array.isArray(data?.fields)
-    ? data.fields
-    : [];
-  const mergedFields = FORM_FIELDS.map((field, index) => {
-    const remote = strapiFields[index];
-    if (!remote) return { ...field };
-    return {
-      label: remote.label || field.label,
-      placeholder: remote.placeholder || field.placeholder,
-      type: field.type,
-    };
-  });
+  const activeMergedTrack = mergedTracks.find((t) => t.id === activeTrackId);
+  const currentStrapiFields = activeMergedTrack?.strapiFields || [];
+
+  const mergedFields = currentStrapiFields.length > 0
+    ? currentStrapiFields.map((remote: any, index: number) => {
+        const fallback = FORM_FIELDS[index % FORM_FIELDS.length];
+        return {
+          ...fallback,
+          label: remote.label || fallback.label,
+          placeholder: remote.placeholder || fallback.placeholder,
+        };
+      })
+    : FORM_FIELDS.map((field) => ({ ...field }));
 
   return (
     <SectionWrap aria-label="Contact form" className="!pb-[20px] relative z-10 -mb-[266px]">

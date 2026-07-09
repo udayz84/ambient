@@ -55,27 +55,52 @@ export function CareersOpenRoles({
   const generalAppCtaLabel =
     data?.general_app_cta_label || "SHARE YOUR PROFILE";
   const applyButtonLabel = data?.apply_button_label || "APPLY NOW";
-  const jobTypeOptions = parseFilterCsv(
-    data?.job_type_filters,
-    CAREERS_JOB_TYPE_FILTER_OPTIONS,
-  );
-  const locationOptions = parseFilterCsv(
-    data?.location_filters,
-    CAREERS_LOCATION_FILTER_OPTIONS,
-  );
+  
+  // Use dynamically fetched jobs if available, otherwise fallback to static data
+  const jobs = data?.fetchedJobs?.length ? data.fetchedJobs : CAREERS_JOBS;
+
+  // Build Job Type options from dynamic categories if available
+  const dynamicJobTypeOptions = data?.fetchedCategories?.length
+    ? [
+        { value: "all", label: "All" },
+        ...data.fetchedCategories.map((c: any) => ({
+          value: c.name?.toLowerCase().replace(/\s+/g, '_') || "unknown",
+          label: c.name || "Unknown",
+        })),
+      ]
+    : parseFilterCsv(data?.job_type_filters, CAREERS_JOB_TYPE_FILTER_OPTIONS);
+    
+  // Build location options from the jobs list dynamically
+  const uniqueLocations = Array.from(new Set(jobs.map((j: any) => j.location).filter(Boolean)));
+  const locationOptions = uniqueLocations.length
+    ? [
+        { value: "all", label: "All" },
+        ...uniqueLocations.map(loc => ({
+          value: String(loc).toLowerCase().replace(/\s+/g, '_'),
+          label: String(loc).replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+        })),
+      ]
+    : parseFilterCsv(data?.location_filters, CAREERS_LOCATION_FILTER_OPTIONS);
 
   const filteredJobs = useMemo(
     () =>
-      CAREERS_JOBS.filter((job) => {
-        if (jobTypeFilter !== "all" && job.category !== jobTypeFilter) {
+      jobs.filter((job: any) => {
+        const jobCategory = typeof job.category === 'object' && job.category !== null 
+          ? job.category.name 
+          : job.category;
+          
+        const categoryValue = jobCategory?.toLowerCase().replace(/\s+/g, '_') || "unknown";
+        if (jobTypeFilter !== "all" && categoryValue !== jobTypeFilter) {
           return false;
         }
-        if (locationFilter !== "all" && job.location !== locationFilter) {
+        
+        const locValue = job.location?.toLowerCase().replace(/\s+/g, '_') || "unknown";
+        if (locationFilter !== "all" && locValue !== locationFilter) {
           return false;
         }
         return true;
       }),
-    [jobTypeFilter, locationFilter],
+    [jobTypeFilter, locationFilter, jobs],
   );
 
   useEffect(() => {
@@ -131,7 +156,7 @@ export function CareersOpenRoles({
         <div className="flex shrink-0 items-center gap-[20px]" data-node-id="2379:8909">
           <FilterDropdown
             label="Job Type"
-            options={jobTypeOptions}
+            options={dynamicJobTypeOptions}
             value={jobTypeFilter}
             onChange={setJobTypeFilter}
             nodeId="2379:8910"

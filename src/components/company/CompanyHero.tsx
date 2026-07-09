@@ -18,7 +18,7 @@ type CompanyHeroProps = {
 export function CompanyHero({ data }: CompanyHeroProps = {}) {
   const title = (data?.title as string) || FALLBACK_TITLE;
   const body = (data?.body as string) || FALLBACK_BODY;
-  const bgSrc = mediaUrl(data?.background_image) || FALLBACK_BG;
+  const bgSrc = FALLBACK_BG;
   const titleLines = title.split("\n");
 
   return (
@@ -76,7 +76,7 @@ export function CompanyHero({ data }: CompanyHeroProps = {}) {
                 {titleLines.map((line, i) => (
                   <span
                     key={i}
-                    className="block h-[49px] shrink-0 leading-[49px] whitespace-nowrap"
+                    className="block h-[49px] shrink-0 leading-[49px]"
                   >
                     {line}
                   </span>

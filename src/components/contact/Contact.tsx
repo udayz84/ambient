@@ -5,8 +5,8 @@ import { ContactMobile } from "./ContactMobile";
 import { ContactResources } from "./ContactResources";
 import { ContactSchedule } from "./ContactSchedule";
 
-const CONTACT_PAGE_HEIGHT_PX = 2779;
-const CONTACT_FOOTER_TOP_PX = 2779;
+const CONTACT_PAGE_HEIGHT_PX = 4250;
+const CONTACT_FOOTER_TOP_PX = 4250;
 
 export function Contact({ data }: { data?: any }) {
   return (
