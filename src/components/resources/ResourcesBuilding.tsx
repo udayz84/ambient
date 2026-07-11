@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { WhiteCtaButton } from "../contact/contact-shared";
 
@@ -23,7 +22,7 @@ export function ResourcesBuilding({ data }: ResourcesBuildingProps = {}) {
   const subtitle = (data?.subtitle as string) || FALLBACK_SUBTITLE;
   const ctaLabel = (data?.cta_label as string) || FALLBACK_CTA_LABEL;
   const ctaHref = (data?.cta_href as string) || FALLBACK_CTA_HREF;
-  const bgSrc = mediaUrl(data?.background) || FALLBACK_BG;
+  const bgSrc = FALLBACK_BG;
 
   return (
     <section

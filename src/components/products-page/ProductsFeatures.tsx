@@ -29,9 +29,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
   const heading = data?.heading || FALLBACK_HEADING;
   const headingLines = splitLines(heading);
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
-  const cardImage = mediaUrl(data?.card_image) || "/products/card-image.png";
-  const abstractDesign =
-    mediaUrl(data?.abstract_design) || "/products/abstract-design.svg";
+  const abstractDesign = "/products/abstract-design.svg";
   const cards =
     Array.isArray(data?.feature_cards) && data.feature_cards.length > 0
       ? data.feature_cards.map((c: any, i: number) => ({
@@ -39,6 +37,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
           title: c?.title ?? "",
           description: c?.description ?? "",
           icon: mediaUrl(c?.icon) || `/products/icon-frame-${(i % 2) + 1}.svg`,
+          cardImage: mediaUrl(c?.card_image) || "/products/card-image.png",
           paddingTop: i === 0 ? 24 : 16,
         }))
       : FEATURE_CARDS;
@@ -53,7 +52,6 @@ export function ProductsFeatures({ data }: { data?: any }) {
         <ProductsFeaturesDesktop
           headingLines={headingLines}
           subtitle={subtitle}
-          cardImage={cardImage}
           abstractDesign={abstractDesign}
           cards={cards}
         />
@@ -72,13 +70,11 @@ export function ProductsFeatures({ data }: { data?: any }) {
 function ProductsFeaturesDesktop({
   headingLines,
   subtitle,
-  cardImage,
   abstractDesign,
   cards,
 }: {
   headingLines: string[];
   subtitle: string;
-  cardImage: string;
   abstractDesign: string;
   cards: any[];
 }) {
@@ -149,8 +145,8 @@ function ProductsFeaturesDesktop({
         style={{ left: 0, top: 212, width: 1232 }}
         data-node-id="2901:803"
       >
-        <FeatureCard card={cards[0]} cardImage={cardImage} />
-        <FeatureCard card={cards[1]} cardImage={cardImage} />
+        <FeatureCard card={cards[0]} />
+        <FeatureCard card={cards[1]} />
       </div>
 
       {/* Row 2 — 2901:926 (top=614) */}
@@ -159,8 +155,8 @@ function ProductsFeaturesDesktop({
         style={{ left: 0, top: 614, width: 1232 }}
         data-node-id="2901:926"
       >
-        <FeatureCard card={cards[2]} cardImage={cardImage} />
-        <FeatureCard card={cards[3]} cardImage={cardImage} />
+        <FeatureCard card={cards[2]} />
+        <FeatureCard card={cards[3]} />
       </div>
     </div>
   );
@@ -168,10 +164,8 @@ function ProductsFeaturesDesktop({
 
 function FeatureCard({
   card,
-  cardImage,
 }: {
   card: any;
-  cardImage: string;
 }) {
   return (
     <article
@@ -197,7 +191,7 @@ function FeatureCard({
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt=""
-          src={cardImage}
+          src={card.cardImage}
           className="absolute left-0 max-w-none"
           style={{ top: "-23.63%", width: "116.47%", height: "132.14%" }}
         />

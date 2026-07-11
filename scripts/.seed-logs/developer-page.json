@@ -12,29 +12,56 @@
       "href": "#",
       "variant": "secondary"
     },
-    "background_image": 116
+    "background_image": 183
   },
   "code": {
     "heading": "Hello world in three lines",
     "subtitle": "We invisibly map AI cores to your host drop your model straight into your existing application.",
-    "code_snippet": "#include <ambient.h>\n#include <sensor_drivers.h>\n\nint main(void) {\n    // Initialize system\n    ambient_init();\n    sensor_config_t sensor;\n    model_t model_obj;\n\n    // Load AI model\n    ambient_load_model(&model_obj, \"fall_detect.bin\");\n\n    while(1) {\n        ambient_read_i2s_mic(&sensor);\n\n        ambient_run_fft(&sensor);\n\n        run_ai_inference(&model_obj);\n\n        if(model_obj.result > THRESHOLD) {\n            trigger_alert();\n        }\n    }\n}"
+    "code_snippet": "#include <ambient.h>\n#include <sensor_drivers.h>\n\nint main(void) {\n    // Initialize system\n    ambient_init();\n    sensor_config_t sensor;\n    model_t model_obj;\n\n    // Load AI model\n    ambient_load_model(&model_obj, \"fall_detect.bin\");\n\n    while(1) {\n        ambient_read_i2s_mic(&sensor);\n\n        ambient_run_fft(&sensor);\n\n        run_ai_inference(&model_obj);\n\n        if(model_obj.result > THRESHOLD) {\n            trigger_alert();\n        }\n    }\n}",
+    "articles": [
+      {
+        "icon": 180,
+        "title": "No Proprietary IDEs",
+        "description": "Everything happens within the standard Eclipse IDE you already know with easy-to-use APIs."
+      },
+      {
+        "icon": 181,
+        "title": "A Single Line of Inference",
+        "description": "Your heavy, quantized neural network is distilled into a highly optimized object file. You call it just like any other standard C function."
+      },
+      {
+        "icon": 182,
+        "title": "The End of Glue Code",
+        "description": "ModelForge's dual-compiler architecture natively links your embedded DSP/sensor code with the AI execution in one seamless build."
+      }
+    ]
   },
   "pipeline": {
     "heading": "The ModelForge Pipeline",
     "tag": {
       "text": "Real-time AI at edge"
     },
-    "tabs": "Train\nOptimize\nIntegrate\nDeploy",
-    "flow_images": [
-      117,
-      118,
-      119,
-      120
-    ],
-    "logos": [
-      121,
-      122,
-      123
+    "tabs": [
+      {
+        "label": "Train",
+        "flow_image": 117,
+        "logo": 121
+      },
+      {
+        "label": "Optimize",
+        "flow_image": 118,
+        "logo": 122
+      },
+      {
+        "label": "Integrate",
+        "flow_image": 119,
+        "logo": 123
+      },
+      {
+        "label": "Deploy",
+        "flow_image": 120,
+        "logo": 121
+      }
     ]
   },
   "coming_soon": {

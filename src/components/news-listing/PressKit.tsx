@@ -97,10 +97,14 @@ function PressMenu({ label }: { label: string }) {
   );
 }
 
-function PressCta({ label }: { label: string }) {
+function PressCta({ label, href }: { label: string; href: string }) {
   return (
     <a
-      href="#"
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      download
+      aria-disabled={href === "#"}
       className={`${gilroyMedium.className} ${GREEN_GLOW_SHADOW} relative flex h-[48px] w-[267px] shrink-0 items-center justify-center`}
       data-node-id="2500:1671"
       data-name="Cta"
@@ -205,6 +209,7 @@ export function PressKit({ data }: PressKitProps = {}) {
   const heading = (data?.heading as string) || FALLBACK_HEADING;
   const subtitle = (data?.subtitle as string) || FALLBACK_SUBTITLE;
   const ctaLabel = (data?.cta_label as string) || FALLBACK_CTA;
+  const ctaHref = mediaUrl(data?.cta_file) || "#";
   const fileInfo = (data?.file_info as string) || FALLBACK_FILE_INFO;
   const iconSrc = mediaUrl(data?.icon) || FALLBACK_ICON;
   const menus: string[] =
@@ -261,7 +266,7 @@ export function PressKit({ data }: PressKitProps = {}) {
             className="flex items-center gap-[19px]"
             data-node-id="2590:1887"
           >
-            <PressCta label={ctaLabel} />
+            <PressCta label={ctaLabel} href={ctaHref} />
             <p
               className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#e8e8e8] not-italic [word-break:break-word]`}
               data-node-id="2517:1675"
@@ -289,7 +294,7 @@ export function PressKit({ data }: PressKitProps = {}) {
             </div>
           </div>
           <div className="flex flex-wrap items-center gap-[19px]">
-            <PressCta label={ctaLabel} />
+            <PressCta label={ctaLabel} href={ctaHref} />
             <p
               className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#e8e8e8] not-italic [word-break:break-word]`}
             >

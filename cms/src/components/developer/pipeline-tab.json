@@ -1,0 +1,1 @@
+{ "collectionName": "components_developer_pipeline_tabs", "info": { "displayName": "Pipeline Tab", "description": "Developer pipeline tab item" }, "options": {}, "attributes": { "label": { "type": "string", "required": true }, "flow_image": { "type": "media", "multiple": false }, "logo": { "type": "media", "multiple": false } } }

@@ -21,15 +21,10 @@ export function CompanyArticles({ data }: CompanyArticlesProps = {}) {
         excerpt: (rawFeatured.excerpt as string) || COMPANY_FEATURED_ARTICLE.excerpt,
         metadata: {
           date:
-            (rawFeatured.metadata?.date as string) ||
             (rawFeatured.date as string) ||
             COMPANY_FEATURED_ARTICLE.metadata.date,
-          totalFunding:
-            (rawFeatured.metadata?.totalFunding as string) ||
-            COMPANY_FEATURED_ARTICLE.metadata.totalFunding,
-          fundingRounds:
-            (rawFeatured.metadata?.fundingRounds as string) ||
-            COMPANY_FEATURED_ARTICLE.metadata.fundingRounds,
+          totalFunding: COMPANY_FEATURED_ARTICLE.metadata.totalFunding,
+          fundingRounds: COMPANY_FEATURED_ARTICLE.metadata.fundingRounds,
         },
         imageSrc:
           mediaUrl(rawFeatured.image) || COMPANY_FEATURED_ARTICLE.imageSrc,

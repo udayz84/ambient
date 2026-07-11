@@ -6,6 +6,7 @@ import { SILICON_PARTNERS } from "../ecosystem/ecosystem-data";
 import {
   ADVISORY_BOARD,
   LEADERSHIP_TEAM,
+  type LeadershipMember,
 } from "./company-leadership-data";
 import { LeadershipCarousel } from "./CompanyLeadershipCarousel";
 import {
@@ -104,7 +105,7 @@ const FALLBACK_HERO_BG = "/mobile/company/hero.png";
 function CompanyHeroMobile({ data }: { data?: any }) {
   const title = (data?.title as string) || FALLBACK_HERO_TITLE;
   const body = (data?.body as string) || FALLBACK_HERO_BODY;
-  const bgSrc = mediaUrl(data?.background_image) || FALLBACK_HERO_BG;
+  const bgSrc = FALLBACK_HERO_BG;
   return (
     <section
       className="relative w-full overflow-hidden bg-black pt-[108px]"
@@ -248,12 +249,55 @@ const FALLBACK_LEADERSHIP_HEADING = "Our minds powering the revolution";
 const FALLBACK_LEADERSHIP_SUBTITLE =
   "We're building programmable AI processors that deliver breakthrough performance and power efficiency from edge to cloud.";
 
+const MOBILE_PORTRAIT_CLASS =
+  "absolute inset-0 size-full max-w-none object-cover object-top";
+
+function toMemberMobile(raw: any, fallback: LeadershipMember, index: number): LeadershipMember {
+  const bioText = (raw?.bio_paragraphs as string) || "";
+  const bioParagraphs = bioText
+    ? bioText.split(/\n\n+/).map((p) => p.trim()).filter(Boolean)
+    : fallback.bioParagraphs;
+  return {
+    name: (raw?.name as string) || fallback.name,
+    role: (raw?.title as string) || fallback.role,
+    bioParagraphs,
+    imageSrc: mediaUrl(raw?.photo) || fallback.imageSrc,
+    imageClassName: fallback.imageClassName ?? MOBILE_PORTRAIT_CLASS,
+    linkedInHref: (raw?.linkedin_url as string) || fallback.linkedInHref,
+    nodeId: raw?.id ? `leader-${raw.id}` : `leader-strapi-${index}`,
+    imageNodeId: fallback.imageNodeId,
+    nameNodeId: fallback.nameNodeId,
+    readMoreNodeId: fallback.readMoreNodeId,
+  };
+}
+
 function CompanyLeadershipMobile({ data }: { data?: any }) {
   const heading = (data?.heading as string) || FALLBACK_LEADERSHIP_HEADING;
   const subtitle = (data?.subtitle as string) || FALLBACK_LEADERSHIP_SUBTITLE;
   const team = Array.isArray(data?.team) ? data.team : null;
 
-  const teamMembers = team && team.length > 0 ? team : null;
+  const teamMembers =
+    team && team.length > 0
+      ? team.map((raw: any, i: number) =>
+          toMemberMobile(
+            raw,
+            LEADERSHIP_TEAM[i] ?? LEADERSHIP_TEAM[LEADERSHIP_TEAM.length - 1],
+            i,
+          ),
+        )
+      : null;
+
+  const advisoryData = Array.isArray(data?.advisory_board) ? data.advisory_board : null;
+  const advisoryMembers =
+    advisoryData && advisoryData.length > 0
+      ? advisoryData.map((raw: any, i: number) =>
+          toMemberMobile(
+            raw,
+            ADVISORY_BOARD[i] ?? ADVISORY_BOARD[ADVISORY_BOARD.length - 1],
+            i,
+          ),
+        )
+      : null;
 
   return (
     <section
@@ -311,7 +355,7 @@ function CompanyLeadershipMobile({ data }: { data?: any }) {
       </div>
 
       <div className="mt-[34px]">
-        <LeadershipCarousel members={ADVISORY_BOARD} variant="advisory" />
+        <LeadershipCarousel members={advisoryMembers ?? ADVISORY_BOARD} variant="advisory" />
       </div>
     </section>
   );
@@ -371,9 +415,12 @@ function DnaCard({
   );
 }
 
+const FALLBACK_DNA_BG = "/company/image 137.png";
+
 function CompanyDnaMobile({ data }: { data?: any }) {
   const heading = (data?.heading as string) || FALLBACK_DNA_HEADING;
   const subtitle = (data?.subtitle as string) || FALLBACK_DNA_SUBTITLE;
+  const bgSrc = mediaUrl(data?.background_image) || FALLBACK_DNA_BG;
 
   const strapiCards = Array.isArray(data?.value_cards) ? data.value_cards : null;
   const cards =
@@ -430,7 +477,7 @@ function CompanyDnaMobile({ data }: { data?: any }) {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/company/image 137.png"
+              src={bgSrc}
               alt=""
               className="size-full object-cover object-bottom"
             />
@@ -484,7 +531,7 @@ function CompanyEcosystemMobile({ data }: { data?: any }) {
           };
         })
       : ECOSYSTEM_COLUMNS_FALLBACK;
-  const mapSrc = mediaUrl(data?.map_image) || "/Map.png";
+  const mapSrc = mediaUrl(data?.map_image) || "/company/Map.png";
 
   return (
     <section
@@ -568,8 +615,32 @@ function CompanyEcosystemMobile({ data }: { data?: any }) {
 /* --------------------------- TECHNOLOGY PARTNERS -------------------------- */
 const FALLBACK_TECH_PARTNERS_TITLE = "TECHNOLOGY PARTNERS";
 
+function buildMobilePartnerLogo(p: any) {
+  const logoUrl = mediaUrl(p?.logo);
+  if (!logoUrl) return null;
+  const naturalW = p?.logo?.width ?? 80;
+  const naturalH = p?.logo?.height ?? 24;
+  const maxW = 80;
+  const maxH = 24;
+  const scale = Math.min(maxW / naturalW, maxH / naturalH, 1);
+  return {
+    src: logoUrl,
+    width: Math.max(1, Math.round(naturalW * scale)),
+    height: Math.max(1, Math.round(naturalH * scale)),
+  };
+}
+
 function CompanyTechnologyPartnersMobile({ data }: { data?: any }) {
   const title = (data?.title as string) || FALLBACK_TECH_PARTNERS_TITLE;
+
+  const strapiPartners = Array.isArray(data?.partners) ? data.partners : null;
+  const partnerLogos = strapiPartners
+    ? (strapiPartners
+        .map(buildMobilePartnerLogo)
+        .filter(Boolean) as { src: string; width: number; height: number }[])
+    : null;
+  const hasStrapiLogos = partnerLogos !== null && partnerLogos.length > 0;
+
   return (
     <section
       className="relative w-full bg-black"
@@ -590,72 +661,99 @@ function CompanyTechnologyPartnersMobile({ data }: { data?: any }) {
           {title}
         </p>
 
-        {/* Partner grid — 2x2 logos + Octane centered below, grid lines */}
+        {/* Partner grid */}
         <div className="relative mt-[5px] bg-[rgba(255,255,255,0.04)] border-[0.5px] border-solid border-white/10">
           <Corners
             leftSrc="/ecosystem/corner-tl.svg"
             rightSrc="/ecosystem/corner-tr.svg"
           />
-          <div className="relative grid grid-cols-2">
-            {/* Row 1 */}
-            <div className="flex h-[106px] items-center justify-center">
-              <Image
-                src={SILICON_PARTNERS[0].src}
-                alt=""
-                width={SILICON_PARTNERS[0].width}
-                height={SILICON_PARTNERS[0].height}
-                className="max-w-none object-contain"
-              />
+          {hasStrapiLogos ? (
+            <div className="relative grid grid-cols-2">
+              {partnerLogos.map((logo, i) => {
+                const isLastOdd =
+                  i === partnerLogos.length - 1 && i % 2 === 0;
+                const colSpan = isLastOdd ? "col-span-2" : "";
+                const borderL = i % 2 === 1 ? "border-l" : "";
+                const borderT = i >= 2 ? "border-t" : "";
+                return (
+                  <div
+                    key={i}
+                    className={`flex h-[106px] items-center justify-center ${colSpan} ${borderL} ${borderT} border-white/10`}
+                  >
+                    <Image
+                      src={logo.src}
+                      alt=""
+                      width={logo.width}
+                      height={logo.height}
+                      className="max-w-none object-contain"
+                      unoptimized
+                    />
+                  </div>
+                );
+              })}
             </div>
-            <div className="flex h-[106px] items-center justify-center border-l border-white/10">
-              <Image
-                src={SILICON_PARTNERS[1].src}
-                alt=""
-                width={SILICON_PARTNERS[1].width}
-                height={SILICON_PARTNERS[1].height}
-                className="max-w-none object-contain"
-              />
+          ) : (
+            <div className="relative grid grid-cols-2">
+              {/* Row 1 */}
+              <div className="flex h-[106px] items-center justify-center">
+                <Image
+                  src={SILICON_PARTNERS[0].src}
+                  alt=""
+                  width={SILICON_PARTNERS[0].width}
+                  height={SILICON_PARTNERS[0].height}
+                  className="max-w-none object-contain"
+                />
+              </div>
+              <div className="flex h-[106px] items-center justify-center border-l border-white/10">
+                <Image
+                  src={SILICON_PARTNERS[1].src}
+                  alt=""
+                  width={SILICON_PARTNERS[1].width}
+                  height={SILICON_PARTNERS[1].height}
+                  className="max-w-none object-contain"
+                />
+              </div>
+              {/* Row 2 */}
+              <div className="flex h-[107px] items-center justify-center border-t border-white/10">
+                <Image
+                  src={SILICON_PARTNERS[2].src}
+                  alt=""
+                  width={SILICON_PARTNERS[2].width}
+                  height={SILICON_PARTNERS[2].height}
+                  className="max-w-none object-contain"
+                />
+              </div>
+              <div className="flex h-[107px] items-center justify-center gap-[5px] border-l border-t border-white/10">
+                <Image
+                  src="/ecosystem/logo-partner-4.svg"
+                  alt=""
+                  width={26}
+                  height={26}
+                  className="max-w-none"
+                />
+                <p
+                  className={`${gilroySemiBold.className} text-[13px] leading-[15px] font-semibold whitespace-nowrap text-white not-italic`}
+                >
+                  Tezos
+                </p>
+              </div>
+              {/* Row 3 — Octane centered, spans both columns */}
+              <div className="col-span-2 flex h-[105px] items-center justify-center gap-[10px] border-t border-white/10">
+                <p
+                  className={`${gilroySemiBold.className} text-[17px] leading-[20px] font-semibold whitespace-nowrap text-white not-italic`}
+                >
+                  Octane
+                </p>
+                <Image
+                  src="/ecosystem/logo-octane.svg"
+                  alt=""
+                  width={35}
+                  height={35}
+                  className="max-w-none"
+                />
+              </div>
             </div>
-            {/* Row 2 */}
-            <div className="flex h-[107px] items-center justify-center border-t border-white/10">
-              <Image
-                src={SILICON_PARTNERS[2].src}
-                alt=""
-                width={SILICON_PARTNERS[2].width}
-                height={SILICON_PARTNERS[2].height}
-                className="max-w-none object-contain"
-              />
-            </div>
-            <div className="flex h-[107px] items-center justify-center gap-[5px] border-l border-t border-white/10">
-              <Image
-                src="/ecosystem/logo-partner-4.svg"
-                alt=""
-                width={26}
-                height={26}
-                className="max-w-none"
-              />
-              <p
-                className={`${gilroySemiBold.className} text-[13px] leading-[15px] font-semibold whitespace-nowrap text-white not-italic`}
-              >
-                Tezos
-              </p>
-            </div>
-            {/* Row 3 — Octane centered, spans both columns */}
-            <div className="col-span-2 flex h-[105px] items-center justify-center gap-[10px] border-t border-white/10">
-              <p
-                className={`${gilroySemiBold.className} text-[17px] leading-[20px] font-semibold whitespace-nowrap text-white not-italic`}
-              >
-                Octane
-              </p>
-              <Image
-                src="/ecosystem/logo-octane.svg"
-                alt=""
-                width={35}
-                height={35}
-                className="max-w-none"
-              />
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </section>
@@ -727,15 +825,10 @@ function CompanyArticlesMobile({ data }: { data?: any }) {
         title: (rawFeatured.title as string) || COMPANY_FEATURED_ARTICLE.title,
         excerpt: (rawFeatured.excerpt as string) || COMPANY_FEATURED_ARTICLE.excerpt,
         date:
-          (rawFeatured.metadata?.date as string) ||
           (rawFeatured.date as string) ||
           COMPANY_FEATURED_ARTICLE.metadata.date,
-        totalFunding:
-          (rawFeatured.metadata?.totalFunding as string) ||
-          COMPANY_FEATURED_ARTICLE.metadata.totalFunding,
-        fundingRounds:
-          (rawFeatured.metadata?.fundingRounds as string) ||
-          COMPANY_FEATURED_ARTICLE.metadata.fundingRounds,
+        totalFunding: COMPANY_FEATURED_ARTICLE.metadata.totalFunding,
+        fundingRounds: COMPANY_FEATURED_ARTICLE.metadata.fundingRounds,
         imageSrc:
           mediaUrl(rawFeatured.image) || COMPANY_FEATURED_ARTICLE.imageSrc,
       }
@@ -996,10 +1089,10 @@ export function CompanyMobile({ data }: CompanyMobileProps = {}) {
         <CompanyTechnologyPartnersMobile data={data.tech_partners} />
       ) : null}
       {data?.articles ? <CompanyArticlesMobile data={data.articles} /> : null}
-      {data?.engagement || data?.join_team ? (
+      {data?.engagement ? (
         <CompanyEngagementMobile
           engagement={data?.engagement}
-          joinTeam={data?.join_team}
+          joinTeam={data?.engagement?.join_team}
         />
       ) : null}
     </div>

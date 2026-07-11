@@ -1,5 +1,6 @@
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { mediaUrl } from "@/lib/strapi";
 import {
   ARTICLE_ICON_BG,
   CORNER_LEFT,
@@ -45,6 +46,16 @@ export function DeveloperCodeSection({ data }: { data?: any }) {
   const heading = data?.heading || DEFAULT_HEADING;
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
   const codeSnippet = data?.code_snippet || DEFAULT_CODE_SNIPPET;
+  const rawArticles = Array.isArray(data?.articles) ? data.articles : [];
+  const articles =
+    rawArticles.length > 0
+      ? rawArticles.map((a: any, i: number) => ({
+          icon: mediaUrl(a?.icon) || DEVELOPER_ARTICLES[i]?.icon || "",
+          title: a?.title || DEVELOPER_ARTICLES[i]?.title || "",
+          description:
+            a?.description || DEVELOPER_ARTICLES[i]?.description || "",
+        }))
+      : DEVELOPER_ARTICLES;
   return (
     <div
       className="absolute flex flex-col items-center gap-[48px]"
@@ -82,7 +93,7 @@ export function DeveloperCodeSection({ data }: { data?: any }) {
         data-node-id="2640:1225"
       >
         <CodeEditorCard codeSnippet={codeSnippet} />
-        <ArticleColumn />
+        <ArticleColumn articles={articles} />
 
         {/* Connectors (absolute, decorative) — exact Figma nested structure */}
         {/* line102 — 2684:1098 */}
@@ -188,13 +199,13 @@ function CodeEditorCard({ codeSnippet }: { codeSnippet: string }) {
 }
 
 /** Article column — 2640:1248 (578×587, three flex-1 cards). */
-function ArticleColumn() {
+function ArticleColumn({ articles }: { articles: typeof DEVELOPER_ARTICLES }) {
   return (
     <div
       className="flex h-[587px] w-[578px] shrink-0 flex-col gap-[24px]"
       data-node-id="2640:1248"
     >
-      {DEVELOPER_ARTICLES.map((article) => (
+      {articles.map((article) => (
         <ArticleCard key={article.title} article={article} />
       ))}
     </div>

@@ -76,6 +76,7 @@ export type FeatureCard = {
   title: string;
   description: string;
   icon: string;
+  cardImage: string;
   /** Top padding: card 1 uses 24, the rest use 16 (per Figma). */
   paddingTop: number;
 };
@@ -89,6 +90,7 @@ export const FEATURE_CARDS: FeatureCard[] = [
     title: "AI features in a new form.",
     description: FEATURE_DESCRIPTION,
     icon: "/products/icon-frame-1.svg",
+    cardImage: "/products/card-image.png",
     paddingTop: 24,
   },
   {
@@ -96,6 +98,7 @@ export const FEATURE_CARDS: FeatureCard[] = [
     title: "Months on a coin cell.",
     description: FEATURE_DESCRIPTION,
     icon: "/products/icon-frame-2.svg",
+    cardImage: "/products/card-image.png",
     paddingTop: 16,
   },
   {
@@ -103,6 +106,7 @@ export const FEATURE_CARDS: FeatureCard[] = [
     title: "Private by default.",
     description: FEATURE_DESCRIPTION,
     icon: "/products/icon-frame-2.svg",
+    cardImage: "/products/card-image.png",
     paddingTop: 16,
   },
   {
@@ -110,6 +114,7 @@ export const FEATURE_CARDS: FeatureCard[] = [
     title: "One chip replaces the stack.",
     description: FEATURE_DESCRIPTION,
     icon: "/products/icon-frame-2.svg",
+    cardImage: "/products/card-image.png",
     paddingTop: 16,
   },
 ];

@@ -11,8 +11,7 @@ export function CareersBenefits({
   offsetY?: number;
 }) {
   const heading = data?.heading || "Benefits & Perks";
-  const titleFrame =
-    mediaUrl(data?.title_frame) || "/careers/title-frame-benefits.svg";
+  const titleFrame = "/careers/title-frame-benefits.svg";
   const cards: CareersValueCard[] = (
     data?.cards && Array.isArray(data.cards) && data.cards.length > 0
       ? data.cards

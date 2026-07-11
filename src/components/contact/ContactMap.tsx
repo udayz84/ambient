@@ -65,13 +65,18 @@ export function ContactMap({ data }: { data?: any }) {
   const strapiLocations: ReadonlyArray<any> = Array.isArray(data?.locations)
     ? data.locations
     : [];
-  const mergedLocations = locations.map((loc, index) => {
-    const remote = strapiLocations[index];
-    if (!remote) return { ...loc, remoteIcon: null };
+  // Render every CMS location. Layout metadata (indicator + card positions)
+  // cycles through the designed 3-slot templates so any count is supported
+  // while the designed layout is preserved.
+  const mergedLocations = (
+    strapiLocations.length > 0 ? strapiLocations : locations
+  ).map((remote: any, index: number) => {
+    const layout = locations[index] || locations[index % locations.length];
+    const fallback = locations[index] || {};
     return {
-      ...loc,
-      title: remote.title || loc.title,
-      address: remote.address || loc.address,
+      ...layout,
+      title: remote.title || fallback.title,
+      address: remote.address || fallback.address,
       remoteIcon: mediaUrl(remote.indicator_icon),
     };
   });

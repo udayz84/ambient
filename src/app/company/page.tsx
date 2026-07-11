@@ -14,7 +14,7 @@ export default async function CompanyPage() {
     data = await getSingleType<any>("company-page", [
       "hero",
       "mission",
-      { section: "leadership", nested: ["team"] },
+      { section: "leadership", nested: ["team", "advisory_board"] },
       "dna",
       { section: "ecosystem", fields: ["map_image"], nested: ["columns"] },
       { section: "tech_partners", nested: ["partners"] },

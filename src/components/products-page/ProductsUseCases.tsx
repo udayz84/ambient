@@ -55,38 +55,48 @@ export function ProductsUseCases({ data }: { data?: any }) {
   };
   const tabs =
     Array.isArray(data?.tabs) && data.tabs.length > 0
-      ? data.tabs.map((t: any, i: number) => ({
-          label: t?.label ?? USECASE_TABS[i]?.label ?? `Tab ${i + 1}`,
-          image:
-            mediaUrl(t?.image) ||
-            USE_CASE_IMAGES[t?.label] ||
-            "/products/use-case-image.png",
-        }))
-      : USECASE_TABS.map((t) => ({
-          label: t.label,
-          image:
-            USE_CASE_IMAGES[t.label] || "/products/use-case-image.png",
-        }));
-  const cards =
-    Array.isArray(data?.cards) && data.cards.length > 0
-      ? data.cards.map((c: any, i: number) => {
-          const fallback = USECASE_CARDS[i] || USECASE_CARDS[0];
+      ? data.tabs.map((t: any, i: number) => {
+          const fallbackTab = USECASE_TABS[i] || USECASE_TABS[0];
+          const rawCards = Array.isArray(t?.feature_cards) ? t.feature_cards : [];
+          const featureCards =
+            rawCards.length > 0
+              ? rawCards.map((c: any, ci: number) => {
+                  const fb = USECASE_CARDS[ci] || USECASE_CARDS[0];
+                  return {
+                    nodeId: `card-${ci}`,
+                    title: c?.title ?? fb.title,
+                    description: c?.description ?? fb.description,
+                    bg: fb.bg,
+                    left: fb.left,
+                    top: fb.top,
+                    width: fb.width,
+                    height: fb.height,
+                  };
+                })
+              : USECASE_CARDS;
           return {
-            nodeId: `card-${i}`,
-            title: c?.title ?? fallback.title,
-            description: c?.description ?? fallback.description,
-            bg: fallback.bg,
-            left: fallback.left,
-            top: fallback.top,
-            width: fallback.width,
-            height: fallback.height,
+            label: t?.label ?? fallbackTab?.label ?? `Tab ${i + 1}`,
+            watermark:
+              t?.watermark_text || t?.label || fallbackTab?.label || `Tab ${i + 1}`,
+            image:
+              mediaUrl(t?.image) ||
+              USE_CASE_IMAGES[t?.label] ||
+              "/products/use-case-image.png",
+            featureCards,
           };
         })
-      : USECASE_CARDS;
+      : USECASE_TABS.map((t) => ({
+          label: t.label,
+          watermark: t.label,
+          image:
+            USE_CASE_IMAGES[t.label] || "/products/use-case-image.png",
+          featureCards: USECASE_CARDS,
+        }));
 
   const [activeIdx, setActiveIdx] = useState(0);
   const activeTab = tabs[activeIdx] || tabs[0];
   const activeImage = activeTab?.image || "/products/use-case-image.png";
+  const cards = activeTab?.featureCards || USECASE_CARDS;
 
   const nextTab = () => setActiveIdx((i) => (i + 1) % tabs.length);
   const prevTab = () => setActiveIdx((i) => (i - 1 + tabs.length) % tabs.length);
@@ -212,7 +222,7 @@ function ProductsUseCasesDesktop({
         data-node-id="2901:2103"
         aria-hidden
       >
-        {activeTab.label}
+        {activeTab.watermark}
       </h3>
 
       {/* Central image — 2901:2104 */}
@@ -533,7 +543,7 @@ function ProductsUseCasesMobile({
           }}
           aria-hidden
         >
-          {activeTab.label}
+          {activeTab.watermark}
         </h3>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img

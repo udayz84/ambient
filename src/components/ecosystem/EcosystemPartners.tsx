@@ -86,7 +86,8 @@ function PartnerSection({
 }
 
 export function EcosystemPartners({ data }: { data?: any }) {
-  void data;
+  const siliconPartners = data?.silicon_partners;
+  const developmentPartners = data?.development_partners;
   const ref = useRef<HTMLDivElement>(null);
   const isInViewRef = useRef(false);
   const loopActiveRef = useRef(false);
@@ -202,7 +203,10 @@ export function EcosystemPartners({ data }: { data?: any }) {
           gradient={TITLE_GRADIENT_SILICON}
           cardsNodeId="2379:1051-silicon"
         >
-          <EcosystemPartnerRow config={SILICON_PARTNER_ROW} />
+          <EcosystemPartnerRow
+            config={SILICON_PARTNER_ROW}
+            siliconPartners={siliconPartners}
+          />
         </PartnerSection>
 
         <PartnerSection
@@ -214,6 +218,7 @@ export function EcosystemPartners({ data }: { data?: any }) {
           <EcosystemPartnerRow
             config={DEVELOPMENT_PARTNER_ROW}
             logoStatNodeIds={DEV_LOGO_STAT_NODES}
+            developmentPartners={developmentPartners}
           />
         </PartnerSection>
 
@@ -223,7 +228,10 @@ export function EcosystemPartners({ data }: { data?: any }) {
           gradient={TITLE_GRADIENT_SILICON}
           cardsNodeId="2379:1051-silicon-2"
         >
-          <EcosystemPartnerRow config={SILICON_PARTNER_ROW} />
+          <EcosystemPartnerRow
+            config={SILICON_PARTNER_ROW}
+            siliconPartners={siliconPartners}
+          />
         </PartnerSection>
 
         <PartnerSection
@@ -235,6 +243,7 @@ export function EcosystemPartners({ data }: { data?: any }) {
           <EcosystemPartnerRow
             config={DEVELOPMENT_PARTNER_ROW}
             logoStatNodeIds={DEV_LOGO_STAT_NODES}
+            developmentPartners={developmentPartners}
           />
         </PartnerSection>
       </div>

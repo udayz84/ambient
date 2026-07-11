@@ -80,7 +80,6 @@ export interface AppsHero extends Struct.ComponentSchema {
     subtitle: Schema.Attribute.Text;
     tag: Schema.Attribute.Component<'shared.tag', false>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
-    title_frame: Schema.Attribute.Media;
   };
 }
 
@@ -166,7 +165,6 @@ export interface AppsWins extends Struct.ComponentSchema {
     displayName: 'Wins';
   };
   attributes: {
-    background_image: Schema.Attribute.Media;
     body: Schema.Attribute.Text;
     cards: Schema.Attribute.Component<'apps.win-card', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
@@ -484,6 +482,7 @@ export interface CompanyLeadership extends Struct.ComponentSchema {
     displayName: 'Leadership';
   };
   attributes: {
+    advisory_board: Schema.Attribute.Component<'shared.leader', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     subtitle: Schema.Attribute.Text;
     team: Schema.Attribute.Component<'shared.leader', true>;
@@ -539,6 +538,7 @@ export interface ContactForm extends Struct.ComponentSchema {
     checkbox_label: Schema.Attribute.String;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     message_heading: Schema.Attribute.String;
+    submit_href: Schema.Attribute.String;
     submit_label: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Send Message'>;
     subtitle: Schema.Attribute.Text;
@@ -638,6 +638,7 @@ export interface ContactScheduleCard extends Struct.ComponentSchema {
     displayName: 'Schedule Card';
   };
   attributes: {
+    cta_href: Schema.Attribute.String;
     cta_label: Schema.Attribute.String;
     description: Schema.Attribute.Text;
     image: Schema.Attribute.Media;
@@ -653,9 +654,23 @@ export interface DeveloperCode extends Struct.ComponentSchema {
     displayName: 'Code Section';
   };
   attributes: {
+    articles: Schema.Attribute.Component<'developer.code-article', true>;
     code_snippet: Schema.Attribute.RichText;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     subtitle: Schema.Attribute.Text;
+  };
+}
+
+export interface DeveloperCodeArticle extends Struct.ComponentSchema {
+  collectionName: 'components_developer_code_articles';
+  info: {
+    description: 'Developer code section article card';
+    displayName: 'Code Article';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    icon: Schema.Attribute.Media;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -751,11 +766,22 @@ export interface DeveloperPipeline extends Struct.ComponentSchema {
     displayName: 'Pipeline';
   };
   attributes: {
-    flow_images: Schema.Attribute.Media<undefined, true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
-    logos: Schema.Attribute.Media<undefined, true>;
-    tabs: Schema.Attribute.Text;
+    tabs: Schema.Attribute.Component<'developer.pipeline-tab', true>;
     tag: Schema.Attribute.Component<'shared.tag', false>;
+  };
+}
+
+export interface DeveloperPipelineTab extends Struct.ComponentSchema {
+  collectionName: 'components_developer_pipeline_tabs';
+  info: {
+    description: 'Developer pipeline tab item';
+    displayName: 'Pipeline Tab';
+  };
+  attributes: {
+    flow_image: Schema.Attribute.Media;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    logo: Schema.Attribute.Media;
   };
 }
 
@@ -768,7 +794,6 @@ export interface DvkDemoCard extends Struct.ComponentSchema {
   attributes: {
     description: Schema.Attribute.Text;
     image: Schema.Attribute.Media;
-    image_overlay: Schema.Attribute.Media;
     title_line_1: Schema.Attribute.String;
     title_line_2: Schema.Attribute.String;
   };
@@ -810,8 +835,7 @@ export interface DvkHero extends Struct.ComponentSchema {
     displayName: 'Hero';
   };
   attributes: {
-    background_image_1: Schema.Attribute.Media;
-    background_image_2: Schema.Attribute.Media;
+    background_image: Schema.Attribute.Media;
     cta_label: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Request Evaluation Kit'>;
     subtitle: Schema.Attribute.Text;
@@ -1082,6 +1106,21 @@ export interface HomeTechnology extends Struct.ComponentSchema {
   };
 }
 
+export interface NewsCard extends Struct.ComponentSchema {
+  collectionName: 'components_news_cards';
+  info: {
+    description: 'News article card';
+    displayName: 'News Card';
+  };
+  attributes: {
+    category: Schema.Attribute.String & Schema.Attribute.Required;
+    excerpt: Schema.Attribute.Text;
+    image_overlay: Schema.Attribute.Media;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    title_font_size: Schema.Attribute.Integer;
+  };
+}
+
 export interface NewsFilterPill extends Struct.ComponentSchema {
   collectionName: 'components_news_filter_pills';
   info: {
@@ -1089,6 +1128,9 @@ export interface NewsFilterPill extends Struct.ComponentSchema {
     displayName: 'Filter Pill';
   };
   attributes: {
+    cards: Schema.Attribute.Component<'news.card', true>;
+    category_id: Schema.Attribute.String;
+    is_active: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     label: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -1130,6 +1172,7 @@ export interface NewsPressKit extends Struct.ComponentSchema {
     displayName: 'Press Kit';
   };
   attributes: {
+    cta_file: Schema.Attribute.Media<'files'>;
     cta_label: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Download Press Kit (.ZIP)'>;
     file_info: Schema.Attribute.String;
@@ -1137,7 +1180,6 @@ export interface NewsPressKit extends Struct.ComponentSchema {
     icon: Schema.Attribute.Media;
     menus: Schema.Attribute.Component<'news.press-menu', true>;
     subtitle: Schema.Attribute.Text;
-    title_frame: Schema.Attribute.Media;
   };
 }
 
@@ -1161,7 +1203,6 @@ export interface ProductsAlwaysOn extends Struct.ComponentSchema {
   attributes: {
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     image: Schema.Attribute.Media;
-    stat_icon: Schema.Attribute.Media;
     stats: Schema.Attribute.Component<'products.alwayson-stat', true>;
     subtitle: Schema.Attribute.Text;
   };
@@ -1175,6 +1216,7 @@ export interface ProductsAlwaysonStat extends Struct.ComponentSchema {
   };
   attributes: {
     badge: Schema.Attribute.String;
+    stat_icon: Schema.Attribute.Media;
     title_lines: Schema.Attribute.Text & Schema.Attribute.Required;
   };
 }
@@ -1188,7 +1230,6 @@ export interface ProductsArchitecture extends Struct.ComponentSchema {
   attributes: {
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     image: Schema.Attribute.Media;
-    stat_icon: Schema.Attribute.Media;
     stats: Schema.Attribute.Component<'shared.stat', true>;
     subtitle: Schema.Attribute.Text;
   };
@@ -1254,6 +1295,7 @@ export interface ProductsFeatureCard extends Struct.ComponentSchema {
     displayName: 'Feature Card';
   };
   attributes: {
+    card_image: Schema.Attribute.Media;
     description: Schema.Attribute.Text;
     icon: Schema.Attribute.Media;
     title: Schema.Attribute.String & Schema.Attribute.Required;
@@ -1267,8 +1309,6 @@ export interface ProductsFeatures extends Struct.ComponentSchema {
     displayName: 'Features';
   };
   attributes: {
-    abstract_design: Schema.Attribute.Media;
-    card_image: Schema.Attribute.Media;
     feature_cards: Schema.Attribute.Component<'products.feature-card', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     subtitle: Schema.Attribute.Text;
@@ -1405,7 +1445,6 @@ export interface ProductsUseCases extends Struct.ComponentSchema {
     displayName: 'Use Cases';
   };
   attributes: {
-    cards: Schema.Attribute.Component<'products.usecase-card', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     primary_button: Schema.Attribute.Component<'shared.button', false>;
     secondary_button: Schema.Attribute.Component<'shared.button', false>;
@@ -1433,8 +1472,10 @@ export interface ProductsUsecaseTab extends Struct.ComponentSchema {
     displayName: 'Use Case Tab';
   };
   attributes: {
+    feature_cards: Schema.Attribute.Component<'products.usecase-card', true>;
     image: Schema.Attribute.Media;
     label: Schema.Attribute.String & Schema.Attribute.Required;
+    watermark_text: Schema.Attribute.String;
   };
 }
 
@@ -1783,6 +1824,7 @@ export interface SharedStat extends Struct.ComponentSchema {
   attributes: {
     description: Schema.Attribute.Text;
     label: Schema.Attribute.String & Schema.Attribute.Required;
+    stat_icon: Schema.Attribute.Media;
     value: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -2505,6 +2547,7 @@ declare module '@strapi/strapi' {
       'contact.schedule': ContactSchedule;
       'contact.schedule-card': ContactScheduleCard;
       'developer.code': DeveloperCode;
+      'developer.code-article': DeveloperCodeArticle;
       'developer.coming-soon': DeveloperComingSoon;
       'developer.copilot': DeveloperCopilot;
       'developer.copilots': DeveloperCopilots;
@@ -2512,6 +2555,7 @@ declare module '@strapi/strapi' {
       'developer.module': DeveloperModule;
       'developer.modules': DeveloperModules;
       'developer.pipeline': DeveloperPipeline;
+      'developer.pipeline-tab': DeveloperPipelineTab;
       'dvk.demo-card': DvkDemoCard;
       'dvk.demos': DvkDemos;
       'dvk.hardware-stack': DvkHardwareStack;
@@ -2535,6 +2579,7 @@ declare module '@strapi/strapi' {
       'home.platform-scale': HomePlatformScale;
       'home.tech-feature': HomeTechFeature;
       'home.technology': HomeTechnology;
+      'news.card': NewsCard;
       'news.filter-pill': NewsFilterPill;
       'news.grid': NewsGrid;
       'news.hero': NewsHero;

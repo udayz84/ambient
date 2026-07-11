@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium } from "../hero/fonts";
 import { FEATURED_RESOURCES } from "./resources-data";
 import { ResourcesFeaturedCard } from "./ResourcesFeaturedCard";
@@ -40,7 +41,7 @@ function buildCards(data: any): MergedCard[] {
       nodeId: layout.nodeId,
       imageNodeId: layout.imageNodeId,
       imageWidth: layout.imageWidth,
-      imageSrc: layout.imageSrc,
+      imageSrc: mediaUrl(card.image) || layout.imageSrc,
       imageClassName: layout.imageClassName,
       badgeNodeId: layout.badgeNodeId,
       badgeLabel: (card.badge_label as string) || layout.badgeLabel,

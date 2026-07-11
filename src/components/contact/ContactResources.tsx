@@ -16,10 +16,16 @@ const GLASS_BACKGROUND = `
 const DEFAULT_HEADING = "Looking for immediate resources?";
 
 const DEFAULT_CTAS = [
-  { label: "Download Datasheets & SDK", href: "#", variant: "green" },
-  { label: "Download Press Kit", href: "#", variant: "white" },
-  { label: "Case Studies & Whitepapers", href: "#", variant: "white" },
+  { label: "Download Datasheets & SDK", href: "#", variant: "primary" },
+  { label: "Download Press Kit", href: "#", variant: "secondary" },
+  { label: "Case Studies & Whitepapers", href: "#", variant: "secondary" },
 ] as const;
+
+// Strapi shared.button variants are `primary | secondary | ghost`.
+// `primary` renders the green CTA; everything else renders the white CTA.
+function isPrimaryCta(variant: string | undefined): boolean {
+  return variant === "primary" || variant === "green";
+}
 
 export function ContactResources({ data }: { data?: any }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -53,7 +59,7 @@ export function ContactResources({ data }: { data?: any }) {
       </p>
       <div className="flex shrink-0 items-start gap-[20px]" data-node-id="2379:8421">
         {ctas.map((cta, index) =>
-          cta.variant === "green" ? (
+          isPrimaryCta(cta.variant) ? (
             <GreenCtaButton key={index} width="270px" href={cta.href || "#"}>
               {cta.label}
             </GreenCtaButton>

@@ -1188,5 +1188,54 @@
     "url": "/uploads/footer_bg_b109dba628.png",
     "name": "footer-bg.png",
     "sourcePath": "footer/footer-bg.png"
+  },
+  "ab62e31900dc91837addb28f4ddefd41e1d7ea22": {
+    "id": 180,
+    "documentId": "g3bq0e1qhta94ujetv68sphw",
+    "url": "/uploads/article_icon_1_6f33c7a6f8.svg",
+    "name": "article-icon-1.svg",
+    "sourcePath": "developer/article-icon-1.svg"
+  },
+  "fca60bd23373314f2b0dde456a1bf80a7eac3c76": {
+    "id": 181,
+    "documentId": "sqqhe9fsmqlljd5b1j2abl5k",
+    "url": "/uploads/article_icon_2_8796aebacb.svg",
+    "name": "article-icon-2.svg",
+    "sourcePath": "developer/article-icon-2.svg"
+  },
+  "12d577d378d2f78c61b171ec67cc5a7f6cfe1df4": {
+    "id": 182,
+    "documentId": "d3i20y5x7m2unreckzta7vuh",
+    "url": "/uploads/article_icon_3_8f694d156a.svg",
+    "name": "article-icon-3.svg",
+    "sourcePath": "developer/article-icon-3.svg"
+  },
+  "a739acb661a58b806fd1b77b4084609c45ca47ea": {
+    "id": 183,
+    "documentId": "vrkhub6gosvx61h1bpm0jgih",
+    "url": "/uploads/hero_bg_3_7e883df462.png",
+    "name": "hero-bg-3.png",
+    "sourcePath": "developer/hero-bg-3.png"
+  },
+  "f066a06d917a104b06ec989fe2897121a69db0cd": {
+    "id": 184,
+    "documentId": "emxwpfwzuw9etdmav804tjwz",
+    "url": "/uploads/article_partnership_5e25226c33.png",
+    "name": "article-partnership.png",
+    "sourcePath": "latest-news/article-partnership.png"
+  },
+  "7832b2636c0496d94354708a125a6a1fd2b0c959": {
+    "id": 185,
+    "documentId": "ugv0qf01m2uy7r6lupfvjxq9",
+    "url": "/uploads/article_physics_2c978ee3a2.png",
+    "name": "article-physics.png",
+    "sourcePath": "latest-news/article-physics.png"
+  },
+  "6840d60085c9aec48d4680c1bdfc1fe6352a56be": {
+    "id": 186,
+    "documentId": "pq60lb09wnux62ll0qxw7ktd",
+    "url": "/uploads/article_gpx10_4921aecc58.png",
+    "name": "article-gpx10.png",
+    "sourcePath": "latest-news/article-gpx10.png"
   }
 }

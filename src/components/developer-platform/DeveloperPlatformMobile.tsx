@@ -1,41 +1,30 @@
 import Image from "next/image";
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
-
-type MobileCard = {
-  title: string;
-  body: string;
-  imageSrc?: string;
-};
-
-const MOBILE_CARDS: MobileCard[] = [
-  {
-    title: "Explore silicon",
-    body: "Start with Ambient's AI-native compute products and see how platform advantages translate into real hardware",
-  },
-  {
-    title: "Evaluate with development kits",
-    body: "Get hands-on with the platform through development kits designed to accelerate validation and shorten time to first insight",
-  },
-  {
-    title: "Develop with ModelForge",
-    body: "Train, deploy, and optimize through a development workflow designed to help teams build with Ambient without starting from scratch",
-    imageSrc: "/developer-platform/card-image-model-forge.png",
-  },
-  {
-    title: "Prototype with application-focused modules",
-    body: "Move faster with modules designed around real-world verticals and product categories",
-    imageSrc: "/developer-platform/card-image-modules.png",
-  },
-];
+import { DEVELOPER_PLATFORM_CARDS } from "./developer-platform-cards";
 
 export function DeveloperPlatformMobile({ data }: { data?: any }) {
-  const heading = data?.heading || "Build the\nimpossible today";
+  const heading = data?.heading || "Build the impossible today";
   const headingLines = heading.split("\n");
   const headingLine1 = headingLines[0] || "Build the";
   const headingLine2 = headingLines.slice(1).join("\n") || "impossible today";
   const subtitle =
     data?.subtitle ||
     "Don't let legacy design limit your roadmap. Discover the market-differentiating features of the GPX10 and what's coming next.";
+
+  // Render the same Strapi cards as desktop, falling back to the hardcoded
+  // config defaults when CMS data is unavailable. Images come from Strapi via
+  // mediaUrl() when present.
+  const strapiCards: any[] = Array.isArray(data?.cards) ? data.cards : [];
+  const cards = DEVELOPER_PLATFORM_CARDS.map((config, index) => {
+    const strapiCard = strapiCards[index] || {};
+    return {
+      key: config.nodeId,
+      title: strapiCard.title ?? config.title,
+      body: strapiCard.body ?? config.body,
+      imageSrc: mediaUrl(strapiCard.image) || config.imageSrc,
+    };
+  });
   return (
     <div className="relative w-full">
       <div
@@ -105,15 +94,60 @@ export function DeveloperPlatformMobile({ data }: { data?: any }) {
           {subtitle}
         </p>
 
-        <div className="mt-[28px] w-full px-[24px]">
-          <Image
-            src="/mobile/Frame-1984079478.png"
-            alt=""
-            width={353}
-            height={493}
-            className="w-full h-auto object-contain"
-            sizes="100vw"
-          />
+        <div className="mt-[28px] w-full flex flex-col gap-[16px] px-[24px]">
+          {cards.map((card) => (
+            <div
+              key={card.key}
+              className="relative flex flex-col border-[0.5px] border-solid border-white/20 bg-[rgba(0,0,0,0.4)] p-[20px] backdrop-blur-[12px]"
+            >
+              <div className="absolute -top-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center">
+                <div className="rotate-180 flex-none">
+                  <div className="relative size-[6px]">
+                    <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+                  </div>
+                </div>
+              </div>
+              <div className="absolute -top-[0.5px] -left-[0.5px] z-10 flex size-[6px] items-center justify-center">
+                <div className="-scale-y-100 flex-none">
+                  <div className="relative size-[6px]">
+                    <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+                  </div>
+                </div>
+              </div>
+              <div className="absolute -bottom-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center">
+                <div className="-scale-x-100 flex-none">
+                  <div className="relative size-[6px]">
+                    <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+                  </div>
+                </div>
+              </div>
+              <div className="absolute -bottom-[0.5px] -left-[0.5px] z-10 flex size-[6px] items-center justify-center">
+                <div className="flex-none">
+                  <div className="relative size-[6px]">
+                    <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+                  </div>
+                </div>
+              </div>
+
+              <p className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium text-white not-italic [word-break:break-word]`}>
+                {card.title}
+              </p>
+              <p className={`${interRegular.className} mt-[8px] text-[14px] leading-[20px] font-normal text-[#f0f0f0] opacity-80 not-italic [word-break:break-word]`}>
+                {card.body}
+              </p>
+              {card.imageSrc ? (
+                <div className="relative mt-[16px] h-[180px] w-full overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    alt=""
+                    src={card.imageSrc}
+                    className="absolute inset-0 size-full object-contain"
+                    aria-hidden
+                  />
+                </div>
+              ) : null}
+            </div>
+          ))}
         </div>
       </div>
     </div>

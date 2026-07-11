@@ -25,9 +25,6 @@
       "text": "Real-time AI at edge"
     },
     "heading": "Measured proof in silicon",
-    "background_image": null,
-    "gradient_top": null,
-    "gradient_bottom": null,
     "stat_cards": [
       {
         "metric": "100x",
@@ -94,33 +91,37 @@
   "platform_scale": {
     "heading": "One platform, infinite scale",
     "subtitle": "A modular compute fabric for your entire product roadmap, from a microwatt edge array to a hyperscaler server grid, without ever changing your software",
-    "chip_image": 14,
     "default_index": 2,
     "products": [
       {
         "product_id": "gpx-1",
         "label": "GPX 1",
-        "description": "GPX1 delivers ultra-efficient AI inference for the smallest edge devices, enabling always-on sensing and microwatt-class intelligence in space-constrained products."
+        "description": "GPX1 delivers ultra-efficient AI inference for the smallest edge devices, enabling always-on sensing and microwatt-class intelligence in space-constrained products.",
+        "chip_image": 14
       },
       {
         "product_id": "gpx-5",
         "label": "GPX 5",
-        "description": "GPX5 scales embedded AI performance for mid-tier edge systems, balancing power efficiency with richer on-device models for voice, vision, and sensor fusion."
+        "description": "GPX5 scales embedded AI performance for mid-tier edge systems, balancing power efficiency with richer on-device models for voice, vision, and sensor fusion.",
+        "chip_image": 14
       },
       {
         "product_id": "gpx-10",
         "label": "GPX 10",
-        "description": "GPX10 is the best-in-class processor for always-on embedded AI applications on power constrained edge devices for sensor-fusion, always-on voice detection and low frequency vision applications."
+        "description": "GPX10 is the best-in-class processor for always-on embedded AI applications on power constrained edge devices for sensor-fusion, always-on voice detection and low frequency vision applications.",
+        "chip_image": 14
       },
       {
         "product_id": "gpx-32",
         "label": "GPX 32",
-        "description": "GPX32 extends Ambient compute density for high-throughput edge and near-cloud workloads, packing more intelligence into the same footprint without legacy power tradeoffs."
+        "description": "GPX32 extends Ambient compute density for high-throughput edge and near-cloud workloads, packing more intelligence into the same footprint without legacy power tradeoffs.",
+        "chip_image": 14
       },
       {
         "product_id": "gpx-64",
         "label": "GPX 64",
-        "description": "GPX64 is built for hyperscaler-scale AI fabric, delivering programmable high-density compute for datacenter and server-grid deployments across your product roadmap."
+        "description": "GPX64 is built for hyperscaler-scale AI fabric, delivering programmable high-density compute for datacenter and server-grid deployments across your product roadmap.",
+        "chip_image": 14
       }
     ],
     "cta": {
@@ -131,7 +132,6 @@
   "applications": {
     "heading": "Build the impossible today",
     "subtitle": "Don't let legacy design limit your roadmap. Discover the market-differentiating features of the GPX10 and what's coming next.",
-    "active_tab": "AUTOMOTIVE",
     "tabs": [
       {
         "label": "WEARABLES",
@@ -151,7 +151,17 @@
       {
         "label": "AUTOMOTIVE",
         "hero_image": 19,
-        "watermark_text": "AUTOMOTIVE"
+        "watermark_text": "AUTOMOTIVE",
+        "feature_cards": [
+          {
+            "title": "Tire Pressure Monitoring",
+            "description": "On-device air pressure and temperature sensors provide real-time alerts for tire health to prevent accidents and optimize maintenance and fuel expenses"
+          },
+          {
+            "title": "Battery Management",
+            "description": "Monitoring of cell utilization, charging patterns, heat generation, etc. in electric vehicle batteries to prevent mishaps and optimize battery life"
+          }
+        ]
       },
       {
         "label": "MEDICAL",
@@ -174,16 +184,6 @@
         "watermark_text": "Hearables"
       }
     ],
-    "feature_cards": [
-      {
-        "title": "Tire Pressure Monitoring",
-        "description": "On-device air pressure and temperature sensors provide real-time alerts for tire health to prevent accidents and optimize maintenance and fuel expenses"
-      },
-      {
-        "title": "Battery Management",
-        "description": "Monitoring of cell utilization, charging patterns, heat generation, etc. in electric vehicle batteries to prevent mishaps and optimize battery life"
-      }
-    ],
     "cta": {
       "label": "EXPLORE APPLICATION",
       "href": "/applications",
@@ -193,7 +193,6 @@
   "developer_platform": {
     "heading": "Build the impossible today",
     "subtitle": "Don't let legacy design limit your roadmap. Discover the market-differentiating features of the GPX10 and what's coming next.",
-    "background": 25,
     "cards": [
       {
         "title": "Explore silicon",
@@ -251,7 +250,27 @@
     "heading": "Latest from Ambient",
     "subtitle": "Ambient works with partners across silicon, development, distribution, and system integration, helping teams move from evaluation to deployment with confidence",
     "cta_label": "Explore more",
-    "cta_href": "/news-listing"
+    "cta_href": "/news-listing",
+    "cards": [
+      {
+        "title": "Ambient Partners with Leading Medical Device Manufacturers",
+        "body": "Strategic partnerships accelerate the deployment of always-on AI monitoring in next-generation wearable health devices.",
+        "image": 184,
+        "cta_label": "read more"
+      },
+      {
+        "title": "The Physics of Compute-in-Memory Architecture",
+        "body": "Deep dive into how Ambient's analog processing eliminates the memory bottleneck that has plagued digital AI accelerators for years.",
+        "image": 185,
+        "cta_label": "read more"
+      },
+      {
+        "title": "Introducing GPX10: Ultra-Low Power AI at the Edge",
+        "body": "Our first-generation AI chip brings unprecedented efficiency to edge computing, enabling advanced ML models to run on a fraction of the power.",
+        "image": 186,
+        "cta_label": "read more"
+      }
+    ]
   },
   "seo": {
     "meta_title": "Ambient Scientific — Limitless AI",

@@ -19,7 +19,7 @@ export default async function Home() {
       { section: "applications", nested: ["tabs", "cta"] },
       { section: "developer_platform", nested: ["cards"] },
       { section: "ecosystem", nested: ["silicon_partners", "development_partners", "cta"] },
-      "latest_news",
+      { section: "latest_news", nested: ["cards"] },
       "seo",
     ]);
   } catch {

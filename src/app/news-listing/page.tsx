@@ -10,7 +10,11 @@ export default async function NewsListingPage() {
     data = await getSingleType<any>("news-listing-page", [
       "hero",
       "press_kit",
-      "grid",
+      {
+        section: "grid",
+        fields: ["backdrop_image"],
+        nested: ["filter_pills.cards"],
+      },
       "seo",
     ]);
   } catch {

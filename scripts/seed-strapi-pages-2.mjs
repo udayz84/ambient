@@ -371,32 +371,34 @@ const PRODUCTS_PAYLOAD = {
     heading: "The chip that ends the power-vs-intelligence tradeoff.",
     subtitle:
       "For a decade, product makers chose: a dumb MCU that lasts months, or a smart NPU that dies by lunch. GPX10 Pro is the first that refuses to choose.",
-    card_image: media(ASSETS.products_features_card_image),
-    abstract_design: media(ASSETS.products_features_abstract),
     feature_cards: [
       {
         title: "AI features in a new form.",
         description:
           "Utilize the onboard I2S and analog microphones to instantly test offline wake-word detection and continuous voice commands in physically noisy environments.",
         icon: media(ASSETS.products_features_icon_1),
+        card_image: media(ASSETS.products_features_card_image),
       },
       {
         title: "Months on a coin cell.",
         description:
           "Utilize the onboard I2S and analog microphones to instantly test offline wake-word detection and continuous voice commands in physically noisy environments.",
         icon: media(ASSETS.products_features_icon_2),
+        card_image: media(ASSETS.products_features_card_image),
       },
       {
         title: "Private by default.",
         description:
           "Utilize the onboard I2S and analog microphones to instantly test offline wake-word detection and continuous voice commands in physically noisy environments.",
         icon: media(ASSETS.products_features_icon_2),
+        card_image: media(ASSETS.products_features_card_image),
       },
       {
         title: "One chip replaces the stack.",
         description:
           "Utilize the onboard I2S and analog microphones to instantly test offline wake-word detection and continuous voice commands in physically noisy environments.",
         icon: media(ASSETS.products_features_icon_2),
+        card_image: media(ASSETS.products_features_card_image),
       },
     ],
   },
@@ -406,11 +408,10 @@ const PRODUCTS_PAYLOAD = {
     subtitle:
       "GPX10 Pro runs AI around the clock at microwatts — and the instant something matters, it surges to full power. No reset. No waking up. It was never off.",
     image: media(ASSETS.products_alwayson_image),
-    stat_icon: null,
     stats: [
-      { title_lines: "ReflexSurge\nMode", badge: "Mode" },
-      { title_lines: "512 GOPS ·\ninstant", badge: "Performance" },
-      { title_lines: "Full power.\nNo reset.", badge: "Status" },
+      { title_lines: "ReflexSurge\nMode", badge: "Mode", stat_icon: media(ASSETS.products_alwayson_stat_icon) },
+      { title_lines: "512 GOPS ·\ninstant", badge: "Performance", stat_icon: media(ASSETS.products_alwayson_stat_icon) },
+      { title_lines: "Full power.\nNo reset.", badge: "Status", stat_icon: media(ASSETS.products_alwayson_stat_icon) },
     ],
   },
 
@@ -418,23 +419,59 @@ const PRODUCTS_PAYLOAD = {
     heading: "Built for always-on. Proven across markets.",
     subtitle: "The same chip, tuned to the job — from a wrist to a factory floor.",
     tabs: [
-      { label: "HEARABLES", image: media(ASSETS.products_use_app_hearables) },
-      { label: "SMART HOMES", image: media(ASSETS.products_use_app_smart_home) },
-      { label: "INDUSTRIAL", image: media(ASSETS.products_use_app_industrial) },
-      { label: "AUTOMOTIVE", image: media(ASSETS.products_use_app_automotive) },
-      { label: "MEDICAL", image: media(ASSETS.products_use_app_medical) },
-      { label: "AGRICULTURE", image: media(ASSETS.products_use_app_agriculture) },
-    ],
-    cards: [
       {
-        title: "Tire Pressure Monitoring",
-        description:
-          "On-device air pressure and temperature sensors provide real-time alerts for tire health to prevent accidents and optimize maintenance and fuel expenses",
+        label: "HEARABLES",
+        image: media(ASSETS.products_use_app_hearables),
+        watermark_text: "Hearables",
+        feature_cards: [
+          { title: "Tire Pressure Monitoring", description: "On-device air pressure and temperature sensors provide real-time alerts for tire health to prevent accidents and optimize maintenance and fuel expenses" },
+          { title: "Battery Management", description: "Monitoring of cell utiization, charging patterns, heat generation, etc. in electric vehicle batteries to prevent mishaps and optimize battery life" },
+        ],
       },
       {
-        title: "Battery Management",
-        description:
-          "Monitoring of cell utiization, charging patterns, heat generation, etc. in electric vehicle batteries to prevent mishaps and optimize battery life",
+        label: "SMART HOMES",
+        image: media(ASSETS.products_use_app_smart_home),
+        watermark_text: "Smart Home",
+        feature_cards: [
+          { title: "Tire Pressure Monitoring", description: "On-device air pressure and temperature sensors provide real-time alerts for tire health to prevent accidents and optimize maintenance and fuel expenses" },
+          { title: "Battery Management", description: "Monitoring of cell utiization, charging patterns, heat generation, etc. in electric vehicle batteries to prevent mishaps and optimize battery life" },
+        ],
+      },
+      {
+        label: "INDUSTRIAL",
+        image: media(ASSETS.products_use_app_industrial),
+        watermark_text: "Industry 4.0",
+        feature_cards: [
+          { title: "Tire Pressure Monitoring", description: "On-device air pressure and temperature sensors provide real-time alerts for tire health to prevent accidents and optimize maintenance and fuel expenses" },
+          { title: "Battery Management", description: "Monitoring of cell utiization, charging patterns, heat generation, etc. in electric vehicle batteries to prevent mishaps and optimize battery life" },
+        ],
+      },
+      {
+        label: "AUTOMOTIVE",
+        image: media(ASSETS.products_use_app_automotive),
+        watermark_text: "Automotive",
+        feature_cards: [
+          { title: "Tire Pressure Monitoring", description: "On-device air pressure and temperature sensors provide real-time alerts for tire health to prevent accidents and optimize maintenance and fuel expenses" },
+          { title: "Battery Management", description: "Monitoring of cell utiization, charging patterns, heat generation, etc. in electric vehicle batteries to prevent mishaps and optimize battery life" },
+        ],
+      },
+      {
+        label: "MEDICAL",
+        image: media(ASSETS.products_use_app_medical),
+        watermark_text: "Medical",
+        feature_cards: [
+          { title: "Tire Pressure Monitoring", description: "On-device air pressure and temperature sensors provide real-time alerts for tire health to prevent accidents and optimize maintenance and fuel expenses" },
+          { title: "Battery Management", description: "Monitoring of cell utiization, charging patterns, heat generation, etc. in electric vehicle batteries to prevent mishaps and optimize battery life" },
+        ],
+      },
+      {
+        label: "AGRICULTURE",
+        image: media(ASSETS.products_use_app_agriculture),
+        watermark_text: "Agriculture",
+        feature_cards: [
+          { title: "Tire Pressure Monitoring", description: "On-device air pressure and temperature sensors provide real-time alerts for tire health to prevent accidents and optimize maintenance and fuel expenses" },
+          { title: "Battery Management", description: "Monitoring of cell utiization, charging patterns, heat generation, etc. in electric vehicle batteries to prevent mishaps and optimize battery life" },
+        ],
       },
     ],
     primary_button: { label: "Explore Applications", href: "/applications", variant: "primary" },
@@ -479,22 +516,24 @@ const PRODUCTS_PAYLOAD = {
     subtitle:
       "A complete edge-AI SoC — AI engine, control, sensing, memory, and security — integrated so your board doesn't have to be.",
     image: media(ASSETS.products_arch_image),
-    stat_icon: null,
     stats: [
       {
         value: "10",
         label: "A-Cube compute",
         description: "10 MX8 cores, 2,560 MACs/cycle, replaces a separate AI accelerator.",
+        stat_icon: media(ASSETS.products_arch_stat_icon),
       },
       {
         value: "2",
         label: "Two power domains",
         description: "A 5-core island sips microwatts; the rest powers down.",
+        stat_icon: media(ASSETS.products_arch_stat_icon),
       },
       {
         value: "10",
         label: "Integrated sensing",
         description: "Up to 10 sensor streams fused on-chip; no external sensor hub.",
+        stat_icon: media(ASSETS.products_arch_stat_icon),
       },
     ],
   },

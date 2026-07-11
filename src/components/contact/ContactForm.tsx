@@ -73,6 +73,17 @@ const formFields = [
   { label: "Phone Number", placeholder: "Enter Your Phone Number", left: 301, top: 261, nodeId: "2379:8560" },
 ] as const;
 
+function mapInputType(fieldType: string | undefined | null): string {
+  switch (fieldType) {
+    case "email":
+      return "email";
+    case "phone":
+      return "tel";
+    default:
+      return "text";
+  }
+}
+
 export function ContactForm({ data }: { data?: any }) {
   const [activeTrackId, setActiveTrackId] = useState<TrackId>("sales");
   const [subscribed, setSubscribed] = useState(false);
@@ -82,6 +93,7 @@ export function ContactForm({ data }: { data?: any }) {
   const messageHeading = data?.message_heading || DEFAULT_MESSAGE_HEADING;
   const checkboxLabel = data?.checkbox_label || DEFAULT_CHECKBOX_LABEL;
   const submitLabel = data?.submit_label || DEFAULT_SUBMIT_LABEL;
+  const submitHref = data?.submit_href || "#";
 
   const strapiTracks: ReadonlyArray<any> = Array.isArray(data?.tracks)
     ? data.tracks
@@ -99,19 +111,35 @@ export function ContactForm({ data }: { data?: any }) {
   });
 
   const activeMergedTrack = mergedTracks.find((t) => t.id === activeTrackId);
-  const currentStrapiFields = activeMergedTrack?.strapiFields || [];
+  const currentStrapiFields: ReadonlyArray<any> =
+    activeMergedTrack?.strapiFields || [];
 
-  const mergedFields = currentStrapiFields.length > 0
-    ? currentStrapiFields.map((remote: any, index: number) => {
-        const fallback = formFields[index % formFields.length];
-        return {
-          ...fallback,
-          label: remote.label || fallback.label,
-          placeholder: remote.placeholder || fallback.placeholder,
-          nodeId: `${fallback.nodeId}-${index}`,
-        };
-      })
-    : formFields.map((field) => ({ ...field }));
+  // Separate Strapi fields: textarea fields go to the bottom section, others to the grid
+  const strapiInputFields = currentStrapiFields.filter(
+    (f: any) => f.field_type !== "textarea",
+  );
+  const strapiTextareaField = currentStrapiFields.find(
+    (f: any) => f.field_type === "textarea",
+  );
+
+  // Build 6 grid-position fields — Strapi data where available, fallback for the rest
+  const mergedFields = formFields.map((fallback, index) => {
+    const remote = strapiInputFields[index];
+    if (!remote) return { ...fallback, inputType: "text" };
+    return {
+      ...fallback,
+      label: remote.label || fallback.label,
+      placeholder: remote.placeholder || fallback.placeholder,
+      inputType: mapInputType(remote.field_type),
+      nodeId: `${fallback.nodeId}-${index}`,
+    };
+  });
+
+  // Bottom textarea: use Strapi data if available, otherwise fallback
+  const textareaLabel = strapiTextareaField?.label || "How can we help?";
+  const textareaPlaceholder =
+    strapiTextareaField?.placeholder ||
+    "Describe your use case, technical requirements, or business needs...";
 
   const activeConnectorTop =
     mergedTracks.find((track) => track.id === activeTrackId)?.connectorTop ??
@@ -194,8 +222,8 @@ export function ContactForm({ data }: { data?: any }) {
         ))}
 
         <FormField
-          label="How can we help?"
-          placeholder="Describe your use case, technical requirements, or business needs..."
+          label={textareaLabel}
+          placeholder={textareaPlaceholder}
           left={16}
           top={350}
           width={560}
@@ -249,7 +277,7 @@ export function ContactForm({ data }: { data?: any }) {
         <GreenCtaButton
           className="absolute top-[551px] left-[16px]"
           width="558px"
-          href="#"
+          href={submitHref}
         >
           {submitLabel}
         </GreenCtaButton>
@@ -373,6 +401,7 @@ function FormField({
   width = 273,
   height = 65,
   multiline = false,
+  inputType = "text",
   nodeId,
 }: {
   label: string;
@@ -382,6 +411,7 @@ function FormField({
   width?: number;
   height?: number;
   multiline?: boolean;
+  inputType?: string;
   nodeId: string;
 }) {
   const fieldId = `field-${nodeId.replace(/:/g, "-")}`;
@@ -411,7 +441,7 @@ function FormField({
           <input
             id={fieldId}
             name={fieldId}
-            type="text"
+            type={inputType}
             placeholder={placeholder}
             className={inputClassName}
           />

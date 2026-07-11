@@ -2,12 +2,13 @@
 
 import Image from "next/image";
 import { Fragment, useEffect, useState } from "react";
-import { mediaUrl } from "@/lib/strapi";
 import { interRegular } from "../hero/fonts";
 import { GreenCtaButton } from "../contact/contact-shared";
 import {
   RESOURCE_ARTICLES,
   RESOURCE_CATEGORIES,
+  filterCategoryId,
+  type ResourceArticle,
 } from "./resources-data";
 import { getResourcesExtraHeight } from "./resources-layout";
 import { ResourcesArticleCard } from "./ResourcesArticleCard";
@@ -17,6 +18,7 @@ const DEFAULT_INITIAL_VISIBLE = 6;
 const DEFAULT_LOAD_MORE_COUNT = 3;
 const LOAD_MORE_DELAY_MS = 800;
 const FALLBACK_LOAD_MORE_LABEL = "Load More Resources";
+const FALLBACK_BG = "/resources/image-107.png";
 
 const IMAGE_107_GRADIENT =
   "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 810 1440' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%25' width='100%25' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-46.009 0.0000020111 -0.000003897 -89.152 363.86 720)'><stop stop-color='rgba(0,0,0,0.6)' offset='0'/><stop stop-color='rgba(0,0,0,1)' offset='1'/></radialGradient></defs></svg>\")";
@@ -52,11 +54,13 @@ function buildCategories(data: any): Category[] {
 
 type ResourcesContentProps = {
   data?: any;
+  articles?: ResourceArticle[];
   onExtraHeightChange?: (height: number) => void;
 };
 
 export function ResourcesContent({
   data,
+  articles,
   onExtraHeightChange,
 }: ResourcesContentProps = {}) {
   const categories = buildCategories(data);
@@ -70,7 +74,10 @@ export function ResourcesContent({
       : DEFAULT_LOAD_MORE_COUNT;
   const loadMoreLabel =
     (data?.load_more_label as string) || FALLBACK_LOAD_MORE_LABEL;
-  const bgSrc = mediaUrl(data?.background_image) || "/resources/image-107.png";
+  const bgSrc = FALLBACK_BG;
+
+  const allArticles =
+    articles && articles.length > 0 ? articles : RESOURCE_ARTICLES;
 
   const initialActiveId =
     categories.find((c) => c.active)?.id || categories[0]?.id || "webinar";
@@ -79,8 +86,12 @@ export function ResourcesContent({
   const [visibleCount, setVisibleCount] = useState(initialVisible);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
-  const visibleArticles = RESOURCE_ARTICLES.slice(0, visibleCount);
-  const canLoadMore = visibleCount < RESOURCE_ARTICLES.length;
+  const activeCanon = filterCategoryId(activeCategory);
+  const filteredArticles = allArticles.filter(
+    (a) => Boolean(a.categoryId) && a.categoryId === activeCanon
+  );
+  const visibleArticles = filteredArticles.slice(0, visibleCount);
+  const canLoadMore = visibleCount < filteredArticles.length;
 
   useEffect(() => {
     onExtraHeightChange?.(getResourcesExtraHeight(visibleCount, canLoadMore));
@@ -97,22 +108,27 @@ export function ResourcesContent({
     setIsLoadingMore(true);
     window.setTimeout(() => {
       setVisibleCount((current: number) =>
-        Math.min(current + loadMoreCount, RESOURCE_ARTICLES.length)
+        Math.min(current + loadMoreCount, filteredArticles.length)
       );
       setIsLoadingMore(false);
     }, LOAD_MORE_DELAY_MS);
+  };
+
+  const selectCategory = (id: string) => {
+    setActiveCategory(id);
+    setVisibleCount(initialVisible);
   };
 
   const currentIndex = categories.findIndex((c) => c.id === activeCategory);
 
   const handlePrevCategory = () => {
     const prevIndex = currentIndex > 0 ? currentIndex - 1 : categories.length - 1;
-    setActiveCategory(categories[prevIndex].id);
+    selectCategory(categories[prevIndex].id);
   };
 
   const handleNextCategory = () => {
     const nextIndex = currentIndex < categories.length - 1 ? currentIndex + 1 : 0;
-    setActiveCategory(categories[nextIndex].id);
+    selectCategory(categories[nextIndex].id);
   };
 
   return (
@@ -181,7 +197,7 @@ export function ResourcesContent({
               <CategoryDivider variant={dividerVariant} />
               <button
                 type="button"
-                onClick={() => setActiveCategory(category.id)}
+                onClick={() => selectCategory(category.id)}
                 className={`${interRegular.className} relative flex h-[52px] shrink-0 items-center justify-center px-[20px] text-[16px] leading-[24px] font-normal whitespace-nowrap not-italic ${
                   isActive ? "text-[#0e1a0e]" : "text-[#666]"
                 }`}

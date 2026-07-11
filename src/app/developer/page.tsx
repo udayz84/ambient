@@ -21,8 +21,8 @@ export default async function DeveloperPage() {
   try {
     data = await getSingleType<any>("developer-page", [
       "hero",
-      "code",
-      "pipeline",
+      { section: "code", nested: ["articles"] },
+      { section: "pipeline", fields: ["tag"], nested: ["tabs"] },
       "coming_soon",
       { section: "modules", nested: ["modules"] },
       { section: "copilots", nested: ["copilots"] },

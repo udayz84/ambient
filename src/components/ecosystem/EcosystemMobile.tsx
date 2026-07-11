@@ -5,7 +5,17 @@ import { Corners } from "../shared/Corners";
 import { EcosystemPartnerRow, DEV_LOGO_STAT_NODES } from "./EcosystemPartnerRow";
 import { SILICON_PARTNER_ROW, DEVELOPMENT_PARTNER_ROW } from "./ecosystem-data";
 
-function PartnerSectionMobile({ title, isSilicon }: { title: string; isSilicon: boolean }) {
+function PartnerSectionMobile({
+  title,
+  isSilicon,
+  siliconPartners,
+  developmentPartners,
+}: {
+  title: string;
+  isSilicon: boolean;
+  siliconPartners?: readonly any[];
+  developmentPartners?: readonly any[];
+}) {
   const gradient = isSilicon
     ? "linear-gradient(119.414deg, rgb(22, 22, 22) 9.0248%, rgb(39, 39, 39) 37.884%, rgb(18, 18, 18) 111.41%)"
     : "linear-gradient(126.723deg, rgb(22, 22, 22) 9.0248%, rgb(39, 39, 39) 37.884%, rgb(18, 18, 18) 111.41%)";
@@ -19,11 +29,15 @@ function PartnerSectionMobile({ title, isSilicon }: { title: string; isSilicon: 
         {title}
       </p>
       {isSilicon ? (
-        <EcosystemPartnerRow config={SILICON_PARTNER_ROW} />
+        <EcosystemPartnerRow
+          config={SILICON_PARTNER_ROW}
+          siliconPartners={siliconPartners}
+        />
       ) : (
         <EcosystemPartnerRow
           config={DEVELOPMENT_PARTNER_ROW}
           logoStatNodeIds={DEV_LOGO_STAT_NODES}
+          developmentPartners={developmentPartners}
         />
       )}
     </div>
@@ -111,10 +125,10 @@ export function EcosystemMobile({ data }: { data?: any }) {
 
       <div className="mt-[24px] flex w-full overflow-hidden">
         <div className="flex w-max gap-[32px] animate-[ecosystem-scroll-mobile_25s_linear_infinite]">
-          <PartnerSectionMobile title="SILICON PARTNERS" isSilicon={true} />
-          <PartnerSectionMobile title="DEVELOPMENT PARTNERS" isSilicon={false} />
-          <PartnerSectionMobile title="SILICON PARTNERS" isSilicon={true} />
-          <PartnerSectionMobile title="DEVELOPMENT PARTNERS" isSilicon={false} />
+          <PartnerSectionMobile title="SILICON PARTNERS" isSilicon={true} siliconPartners={data?.silicon_partners} />
+          <PartnerSectionMobile title="DEVELOPMENT PARTNERS" isSilicon={false} developmentPartners={data?.development_partners} />
+          <PartnerSectionMobile title="SILICON PARTNERS" isSilicon={true} siliconPartners={data?.silicon_partners} />
+          <PartnerSectionMobile title="DEVELOPMENT PARTNERS" isSilicon={false} developmentPartners={data?.development_partners} />
         </div>
       </div>
     </div>

@@ -4,17 +4,16 @@ import { DeveloperHeroContent } from "./DeveloperHeroContent";
 
 /**
  * Figma 2438:4365 (hero region) — Developer page hero section.
- * Background layers + content frame, all at exact Figma coordinates
+ * Background image + content frame, all at exact Figma coordinates
  * (coords are page-absolute, so the canvas is pulled up under the navbar
  * with -mt-[78px] in the page).
  *
- *  - Image group 2438:4562 @ (724.277, 78.033 / 687.038×577.687)
- *    · hero-bg-1 (base), hero-bg-2 (object-cover), hero-bg-3 (oversized overlay)
+ *  - Image 2438:4562 @ (724.277, 78.033 / 687.038×577.687) — hero-bg-3 (live from Strapi)
  *    · 247.952° gradient overlay
  *  - Content 2438:4563 @ (100, 240 / 549×248)
  */
 export function DeveloperHero({ data }: { data?: any }) {
-  const bgImg = mediaUrl(data?.background_image) || "/developer/hero-bg-1.png";
+  const bgImg = mediaUrl(data?.background_image) || "/developer/hero-bg-3.png";
   return (
     <>
       {/* Hero background — 2438:4562 (724.277, 78.033 / 687.038×577.687) */}
@@ -26,28 +25,12 @@ export function DeveloperHero({ data }: { data?: any }) {
         aria-hidden
       >
         <div aria-hidden className="absolute inset-0">
-          {/* Layer 1 (base) */}
-          <div className="absolute inset-0 overflow-hidden">
-            <img
-              alt=""
-              src={bgImg}
-              className="absolute left-0 top-[0.03%] h-[99.97%] w-full max-w-none"
-            />
-          </div>
-          {/* Layer 2 (mid, object-cover) */}
+          {/* Background image (live from Strapi) */}
           <img
             alt=""
-            src="/developer/hero-bg-2.png"
-            className="absolute size-full max-w-none object-cover"
+            src={bgImg}
+            className="absolute inset-0 size-full max-w-none object-cover"
           />
-          {/* Layer 3 (overlay, oversized) */}
-          <div className="absolute inset-0 overflow-hidden">
-            <img
-              alt=""
-              src="/developer/hero-bg-3.png"
-              className="absolute left-[-5.54%] top-[-7%] h-[107.81%] w-[105.54%] max-w-none"
-            />
-          </div>
           {/* Bottom-darker gradient overlay (247.952°) */}
           <div
             className="absolute inset-0"

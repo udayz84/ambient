@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Careers } from "@/components/careers/Careers";
-import { getSingleType, getCollection } from "@/lib/strapi";
+import { getSingleType } from "@/lib/strapi";
 
 export const metadata: Metadata = {
   title: "Careers | Ambient Scientific",
@@ -10,8 +10,6 @@ export const metadata: Metadata = {
 
 export default async function CareersPage() {
   let data: any = null;
-  let jobs: any[] = [];
-  let jobCategories: any[] = [];
   try {
     data = await getSingleType<any>("careers-page", [
       "hero",

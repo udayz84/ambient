@@ -68,8 +68,8 @@ export function CareersOpenRoles({
           label: c.name || "Unknown",
         })),
       ]
-    : parseFilterCsv(data?.job_type_filters, CAREERS_JOB_TYPE_FILTER_OPTIONS);
-    
+    : CAREERS_JOB_TYPE_FILTER_OPTIONS;
+
   // Build location options from the jobs list dynamically
   const uniqueLocations = Array.from(new Set(jobs.map((j: any) => j.location).filter(Boolean)));
   const locationOptions = uniqueLocations.length
@@ -80,7 +80,7 @@ export function CareersOpenRoles({
           label: String(loc).replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
         })),
       ]
-    : parseFilterCsv(data?.location_filters, CAREERS_LOCATION_FILTER_OPTIONS);
+    : CAREERS_LOCATION_FILTER_OPTIONS;
 
   const filteredJobs = useMemo(
     () =>
@@ -90,12 +90,12 @@ export function CareersOpenRoles({
           : job.category;
           
         const categoryValue = jobCategory?.toLowerCase().replace(/\s+/g, '_') || "unknown";
-        if (jobTypeFilter !== "all" && categoryValue !== jobTypeFilter) {
+        if (jobTypeFilter !== "all" && categoryValue !== jobTypeFilter.toLowerCase().replace(/\s+/g, '_')) {
           return false;
         }
         
         const locValue = job.location?.toLowerCase().replace(/\s+/g, '_') || "unknown";
-        if (locationFilter !== "all" && locValue !== locationFilter) {
+        if (locationFilter !== "all" && locValue !== locationFilter.toLowerCase().replace(/\s+/g, '_')) {
           return false;
         }
         return true;
@@ -187,13 +187,14 @@ export function CareersOpenRoles({
             </p>
           </div>
         ) : (
-          filteredJobs.map((job, index) => (
+          filteredJobs.map((job: any, index: number) => (
             <JobRow
               key={job.title}
               title={job.title}
               category={job.category}
               location={job.location}
               applyLabel={applyButtonLabel}
+              applyUrl={job.apply_url}
               nodeId={JOB_ROW_NODE_IDS[index] ?? JOB_ROW_NODE_IDS[0]}
             />
           ))
@@ -453,12 +454,14 @@ function JobRow({
   category,
   location,
   applyLabel,
+  applyUrl,
   nodeId,
 }: {
   title: string;
   category: string;
   location: string;
   applyLabel: string;
+  applyUrl?: string;
   nodeId: string;
 }) {
   return (
@@ -478,7 +481,7 @@ function JobRow({
       >
         {location}
       </p>
-      <ApplyButton label={applyLabel} />
+      <ApplyButton label={applyLabel} href={applyUrl || "#"} />
     </article>
   );
 }
@@ -501,10 +504,10 @@ function CategoryBadge({ label }: { label: string }) {
   );
 }
 
-function ApplyButton({ label }: { label: string }) {
+function ApplyButton({ label, href }: { label: string; href?: string }) {
   return (
     <a
-      href="#"
+      href={href || "#"}
       className={`${interMedium.className} absolute top-[51px] right-[49px] flex h-[48px] items-center justify-center gap-[20px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic transition-[box-shadow,background-color] duration-200 group-hover:bg-transparent group-hover:shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
     >
       <span
@@ -532,20 +535,4 @@ function ApplyButton({ label }: { label: string }) {
       />
     </a>
   );
-}
-
-function parseFilterCsv(
-  csv: string | null | undefined,
-  fallback: readonly { value: string; label: string }[],
-): readonly { value: string; label: string }[] {
-  if (!csv || typeof csv !== "string") return fallback;
-  const items = csv
-    .split(",")
-    .map((s) => s.trim())
-    .filter(Boolean);
-  if (items.length === 0) return fallback;
-  return [
-    { value: "all", label: "All" },
-    ...items.map((s) => ({ value: s, label: s })),
-  ];
 }

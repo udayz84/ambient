@@ -22,11 +22,11 @@ export default async function ProductsPage() {
   try {
     data = await getSingleType<any>("products-page", [
       "hero",
-      { section: "features", fields: ["card_image", "abstract_design"], nested: ["feature_cards"] },
-      "always_on",
+      { section: "features", nested: ["feature_cards"] },
+      { section: "always_on", fields: ["image"], nested: ["stats"] },
       { section: "use_cases", nested: ["tabs"] },
       "measured",
-      "architecture",
+      { section: "architecture", fields: ["image"], nested: ["stats"] },
       "modelforge",
       "bench_to_volume",
       { section: "full_picture", fields: ["image"], nested: ["callouts"] },

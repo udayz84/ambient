@@ -1,6 +1,11 @@
 import Image from "next/image";
 import { gilroySemiBold } from "../hero/fonts";
-import type { PartnerRowConfig } from "./ecosystem-data";
+import {
+  type PartnerRowConfig,
+  type EcosystemPartner,
+  resolveSiliconPartnerLogos,
+  resolveDevelopmentPartners,
+} from "./ecosystem-data";
 import { EcosystemGridLine } from "./EcosystemGridLine";
 import { Corners } from "../shared/Corners";
 
@@ -44,14 +49,27 @@ const DEV_LOGO_STAT_NODES = ["2379:1134", "2379:1144", "2379:1163"] as const;
 type EcosystemPartnerRowProps = {
   config: PartnerRowConfig;
   logoStatNodeIds?: readonly [string, string, string];
+  siliconPartners?: readonly EcosystemPartner[];
+  developmentPartners?: readonly EcosystemPartner[];
 };
 
 export function EcosystemPartnerRow({
   config,
   logoStatNodeIds = LOGO_STAT_NODES,
+  siliconPartners,
+  developmentPartners,
 }: EcosystemPartnerRowProps) {
-  const [logo1, logo2, logo3] = config.logos;
+  const logos = resolveSiliconPartnerLogos(siliconPartners);
+  const [logo1, logo2, logo3] = [
+    logos[0],
+    logos[1],
+    logos[2],
+  ];
   const [stat1, stat2, stat3] = logoStatNodeIds;
+
+  const devPartners = resolveDevelopmentPartners(developmentPartners);
+  const tezos = devPartners[0];
+  const octane = devPartners[1];
 
   return (
     <div
@@ -94,7 +112,7 @@ export function EcosystemPartnerRow({
               className={`${gilroySemiBold.className} absolute top-[10.3px] left-0 -translate-y-1/2 text-[17.1px] leading-[20.4px] font-semibold whitespace-nowrap text-white not-italic`}
               data-node-id={config.tezos.textNodeId}
             >
-              Tezos
+              {tezos?.name ?? "Tezos"}
             </p>
           </div>
           <div
@@ -102,7 +120,7 @@ export function EcosystemPartnerRow({
             data-name="Icon"
           >
             <Image
-              src="/ecosystem/logo-partner-4.svg"
+              src={tezos?.src ?? "/ecosystem/logo-partner-4.svg"}
               alt=""
               width={35}
               height={35}
@@ -128,11 +146,11 @@ export function EcosystemPartnerRow({
             className={`${gilroySemiBold.className} shrink-0 text-[17.1px] leading-[20.4px] font-semibold whitespace-nowrap text-white not-italic`}
             data-node-id={config.octane.textNodeId}
           >
-            Octane
+            {octane?.name ?? "Octane"}
           </p>
           <div className="relative size-[35px] shrink-0" data-name="logo">
             <Image
-              src="/ecosystem/logo-octane.svg"
+              src={octane?.src ?? "/ecosystem/logo-octane.svg"}
               alt=""
               width={35}
               height={35}

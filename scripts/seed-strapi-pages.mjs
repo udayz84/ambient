@@ -424,9 +424,6 @@ const HOME_PAYLOAD = {
   measured_proof: {
     tag: { text: "Real-time AI at edge" },
     heading: "Measured proof in silicon",
-    background_image: null,
-    gradient_top: null,
-    gradient_bottom: null,
     stat_cards: [
       {
         metric: "100x",
@@ -493,7 +490,6 @@ const HOME_PAYLOAD = {
     heading: "One platform, infinite scale",
     subtitle:
       "A modular compute fabric for your entire product roadmap, from a microwatt edge array to a hyperscaler server grid, without ever changing your software",
-    chip_image: media(ASSETS.home_platform_chip_hero),
     default_index: 2,
     products: [
       {
@@ -501,30 +497,35 @@ const HOME_PAYLOAD = {
         label: "GPX 1",
         description:
           "GPX1 delivers ultra-efficient AI inference for the smallest edge devices, enabling always-on sensing and microwatt-class intelligence in space-constrained products.",
+        chip_image: media(ASSETS.home_platform_chip_hero),
       },
       {
         product_id: "gpx-5",
         label: "GPX 5",
         description:
           "GPX5 scales embedded AI performance for mid-tier edge systems, balancing power efficiency with richer on-device models for voice, vision, and sensor fusion.",
+        chip_image: media(ASSETS.home_platform_chip_hero),
       },
       {
         product_id: "gpx-10",
         label: "GPX 10",
         description:
           "GPX10 is the best-in-class processor for always-on embedded AI applications on power constrained edge devices for sensor-fusion, always-on voice detection and low frequency vision applications.",
+        chip_image: media(ASSETS.home_platform_chip_hero),
       },
       {
         product_id: "gpx-32",
         label: "GPX 32",
         description:
           "GPX32 extends Ambient compute density for high-throughput edge and near-cloud workloads, packing more intelligence into the same footprint without legacy power tradeoffs.",
+        chip_image: media(ASSETS.home_platform_chip_hero),
       },
       {
         product_id: "gpx-64",
         label: "GPX 64",
         description:
           "GPX64 is built for hyperscaler-scale AI fabric, delivering programmable high-density compute for datacenter and server-grid deployments across your product roadmap.",
+        chip_image: media(ASSETS.home_platform_chip_hero),
       },
     ],
     cta: { label: "EXPLORE AMBIENT SILICON", href: "/technology" },
@@ -534,28 +535,31 @@ const HOME_PAYLOAD = {
     heading: "Build the impossible today",
     subtitle:
       "Don't let legacy design limit your roadmap. Discover the market-differentiating features of the GPX10 and what's coming next.",
-    active_tab: "AUTOMOTIVE",
     tabs: [
       { label: "WEARABLES", hero_image: media(ASSETS.home_app_wearables), watermark_text: "Wearables" },
       { label: "SMART HOMES", hero_image: media(ASSETS.home_app_smart_home), watermark_text: "Smart Home" },
       { label: "INDUSTRIAL", hero_image: media(ASSETS.home_app_industrial), watermark_text: "Industry 4.0" },
-      { label: "AUTOMOTIVE", hero_image: media(ASSETS.home_app_car), watermark_text: "AUTOMOTIVE" },
+      {
+        label: "AUTOMOTIVE",
+        hero_image: media(ASSETS.home_app_car),
+        watermark_text: "AUTOMOTIVE",
+        feature_cards: [
+          {
+            title: "Tire Pressure Monitoring",
+            description:
+              "On-device air pressure and temperature sensors provide real-time alerts for tire health to prevent accidents and optimize maintenance and fuel expenses",
+          },
+          {
+            title: "Battery Management",
+            description:
+              "Monitoring of cell utilization, charging patterns, heat generation, etc. in electric vehicle batteries to prevent mishaps and optimize battery life",
+          },
+        ],
+      },
       { label: "MEDICAL", hero_image: media(ASSETS.home_app_medical), watermark_text: "MEDICAL" },
       { label: "AGRICULTURE", hero_image: media(ASSETS.home_app_agriculture), watermark_text: "Agriculture" },
       { label: "DRONES", hero_image: media(ASSETS.home_app_drones), watermark_text: "Drones" },
       { label: "HEARABLES", hero_image: media(ASSETS.home_app_hearables), watermark_text: "Hearables" },
-    ],
-    feature_cards: [
-      {
-        title: "Tire Pressure Monitoring",
-        description:
-          "On-device air pressure and temperature sensors provide real-time alerts for tire health to prevent accidents and optimize maintenance and fuel expenses",
-      },
-      {
-        title: "Battery Management",
-        description:
-          "Monitoring of cell utilization, charging patterns, heat generation, etc. in electric vehicle batteries to prevent mishaps and optimize battery life",
-      },
     ],
     cta: {
       label: "EXPLORE APPLICATION",
@@ -568,7 +572,6 @@ const HOME_PAYLOAD = {
     heading: "Build the impossible today",
     subtitle:
       "Don't let legacy design limit your roadmap. Discover the market-differentiating features of the GPX10 and what's coming next.",
-    background: media(ASSETS.home_dev_bg),
     cards: [
       {
         title: "Explore silicon",
@@ -617,9 +620,29 @@ const HOME_PAYLOAD = {
       "Ambient works with partners across silicon, development, distribution, and system integration, helping teams move from evaluation to deployment with confidence",
     cta_label: "Explore more",
     cta_href: "/news-listing",
-    // NOTE: article cards themselves are pulled from the related `article`
-    // collection at render time per the home schema — only heading/subtitle/
-    // CTA are stored on the single type.
+    cards: [
+      {
+        title: "Ambient Partners with Leading Medical Device Manufacturers",
+        body:
+          "Strategic partnerships accelerate the deployment of always-on AI monitoring in next-generation wearable health devices.",
+        image: media(ASSETS.home_news_article_partnership),
+        cta_label: "read more",
+      },
+      {
+        title: "The Physics of Compute-in-Memory Architecture",
+        body:
+          "Deep dive into how Ambient's analog processing eliminates the memory bottleneck that has plagued digital AI accelerators for years.",
+        image: media(ASSETS.home_news_article_physics),
+        cta_label: "read more",
+      },
+      {
+        title: "Introducing GPX10: Ultra-Low Power AI at the Edge",
+        body:
+          "Our first-generation AI chip brings unprecedented efficiency to edge computing, enabling advanced ML models to run on a fraction of the power.",
+        image: media(ASSETS.home_news_article_gpx10),
+        cta_label: "read more",
+      },
+    ],
   },
 
   seo: {
@@ -837,6 +860,22 @@ const COMPANY_PAYLOAD = {
   },
 };
 
+// Shared contact-form field set attached to every track (the form fields are
+// identical across tracks; the track only routes the message).
+const CONTACT_FORM_FIELDS = [
+  { label: "First Name", placeholder: "Enter Your First Name", field_type: "text" },
+  { label: "Last Name", placeholder: "Enter Your Last Name", field_type: "text" },
+  { label: "Company Name", placeholder: "Enter Your Company Name", field_type: "text" },
+  { label: "Job Title", placeholder: "Enter Your Job Title", field_type: "text" },
+  { label: "Corporate Email", placeholder: "Enter Your Corporate Email", field_type: "email" },
+  { label: "Phone Number", placeholder: "Enter Your Phone Number", field_type: "phone" },
+  {
+    label: "How can we help?",
+    placeholder: "Describe your use case, technical requirements, or business needs...",
+    field_type: "textarea",
+  },
+];
+
 const CONTACT_PAYLOAD = {
   hero: {
     title: "Start building with Ambient",
@@ -893,6 +932,7 @@ const CONTACT_PAYLOAD = {
         description:
           "Book a 30-minute session with our engineers. Discuss power profiling, model quantization, or deployment architecture for your use case.",
         cta_label: "View FAE Calendar",
+        cta_href: "https://calendly.com/ambientscientific/fae",
         image: media(ASSETS.contact_schedule_fae),
       },
       {
@@ -901,6 +941,7 @@ const CONTACT_PAYLOAD = {
         description:
           "Connect with Business Development to discuss pricing, ASIC development, timelines, licensing, or supply partnerships.",
         cta_label: "View Commercial Calendar",
+        cta_href: "https://calendly.com/ambientscientific/commercial",
         image: media(ASSETS.contact_schedule_commercial),
       },
     ],
@@ -913,37 +954,28 @@ const CONTACT_PAYLOAD = {
     message_heading: "Drop Us a Message",
     checkbox_label: "Sign up for news & updates",
     submit_label: "Send Message",
+    submit_href: "#",
     tracks: [
       {
         label: "Sales & Enterprise",
         description:
           "Request a quote, discuss volume licensing, or inquire about custom ASIC development.",
         icon: media(ASSETS.contact_track_sales),
+        form: CONTACT_FORM_FIELDS,
       },
       {
         label: "Developer Support",
         description:
           "Report a bug, request documentation, or get help compiling your model via the Nebula SDK.",
         icon: media(ASSETS.contact_track_developer),
+        form: CONTACT_FORM_FIELDS,
       },
       {
         label: "Media & Press",
         description:
           "Request an interview with our leadership team, access press materials, or coordinate coverage.",
         icon: media(ASSETS.contact_track_media),
-      },
-    ],
-    fields: [
-      { label: "First Name", placeholder: "Enter Your First Name", field_type: "text" },
-      { label: "Last Name", placeholder: "Enter Your Last Name", field_type: "text" },
-      { label: "Company Name", placeholder: "Enter Your Company Name", field_type: "text" },
-      { label: "Job Title", placeholder: "Enter Your Job Title", field_type: "text" },
-      { label: "Corporate Email", placeholder: "Enter Your Corporate Email", field_type: "email" },
-      { label: "Phone Number", placeholder: "Enter Your Phone Number", field_type: "phone" },
-      {
-        label: "How can we help?",
-        placeholder: "Describe your use case, technical requirements, or business needs...",
-        field_type: "textarea",
+        form: CONTACT_FORM_FIELDS,
       },
     ],
   },

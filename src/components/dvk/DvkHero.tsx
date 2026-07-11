@@ -15,8 +15,7 @@ const DEFAULT_TITLE = "The physical launchpad for microwatt Edge AI.";
 const DEFAULT_SUBTITLE =
   "Validate real-time AI at microwatt power levels out of the box. The Cranium Development Kit comes fully loaded with onboard sensors, rich I/O, and pre-integrated drivers so you can stop breadboarding and start testing inferences in minutes.";
 const DEFAULT_CTA_LABEL = "Request Evaluation Kit";
-const DEFAULT_BG_1 = "/dvk/hero-bg-1.png";
-const DEFAULT_BG_2 = "/dvk/hero-bg-2.png";
+const DEFAULT_BG = "/dvk/hero-bg-2.png";
 
 /**
  * Figma 2761:2971 — Cranium Development Kit (DVK) hero.
@@ -31,8 +30,7 @@ export function DvkHero({ data }: { data?: any }) {
   const title = data?.title || DEFAULT_TITLE;
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
   const ctaLabel = data?.cta_label || DEFAULT_CTA_LABEL;
-  const bg1 = mediaUrl(data?.background_image_1) || DEFAULT_BG_1;
-  const bg2 = mediaUrl(data?.background_image_2) || DEFAULT_BG_2;
+  const bg = mediaUrl(data?.background_image) || DEFAULT_BG;
   return (
     <>
       {/* Hero background — image group 2761:2972 */}
@@ -51,13 +49,7 @@ export function DvkHero({ data }: { data?: any }) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt=""
-          src={bg1}
-          className="absolute inset-0 size-full max-w-none object-bottom"
-        />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt=""
-          src={bg2}
+          src={bg}
           className="absolute inset-0 size-full max-w-none object-bottom"
         />
         <div

@@ -4,8 +4,8 @@ import { CareersGreenCta, CareersWhiteCta } from "./careers-shared";
 
 const BOTTOM_CTA_HEADING_FALLBACK = "Ready to build the future of compute?";
 const BOTTOM_CTA_BUTTONS_FALLBACK = [
-  { label: "APPLY NOW", href: "#", variant: "green" },
-  { label: "REFER A CANDIDATE", href: "#", variant: "white" },
+  { label: "APPLY NOW", href: "#", variant: "primary" },
+  { label: "REFER A CANDIDATE", href: "#", variant: "secondary" },
 ];
 
 export function CareersBottomCta({
@@ -21,7 +21,7 @@ export function CareersBottomCta({
       ? data.buttons.map((b: any) => ({
           label: b?.label || "",
           href: b?.href || "#",
-          variant: b?.variant || "green",
+          variant: b?.variant || "primary",
         }))
       : BOTTOM_CTA_BUTTONS_FALLBACK;
 
@@ -50,7 +50,7 @@ export function CareersBottomCta({
 
       <div className="mt-[39px] flex items-center gap-[30px]">
         {buttons.map((btn, i) =>
-          btn.variant === "white" ? (
+          btn.variant === "secondary" || btn.variant === "ghost" ? (
             <CareersWhiteCta key={i} href={btn.href} width="w-auto px-6">
               {btn.label}
             </CareersWhiteCta>

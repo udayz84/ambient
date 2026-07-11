@@ -322,8 +322,7 @@ function CareersDnaMobile({ data }: { data?: any }) {
     data?.heading || "Driven by physics.\nDefined by our DNA.";
   const subtitle =
     data?.subtitle || "This is how we work, build, and solve at Ambient.";
-  const bgImg =
-    mediaUrl(data?.background_image) || "/mobile/career/image 108.png";
+  const bgImg = "/mobile/career/image 108.png";
   const chipImg =
     mediaUrl(data?.chip_object) || "/mobile/career/Chip Image.png";
   const strapiPanels: any[] =
@@ -411,22 +410,6 @@ function GlassPanelMobile({ title, description }: { title: string; description: 
 }
 
 /* -------------------------------- OPEN ROLES ------------------------------ */
-function parseFilterCsvMobile(
-  csv: string | null | undefined,
-  fallback: readonly { value: string; label: string }[],
-): readonly { value: string; label: string }[] {
-  if (!csv || typeof csv !== "string") return fallback;
-  const items = csv
-    .split(",")
-    .map((s) => s.trim())
-    .filter(Boolean);
-  if (items.length === 0) return fallback;
-  return [
-    { value: "all", label: "All" },
-    ...items.map((s) => ({ value: s, label: s })),
-  ];
-}
-
 function CareersOpenRolesMobile({ data }: { data?: any }) {
   const [jobTypeFilter, setJobTypeFilter] = useState("all");
   const [locationFilter, setLocationFilter] = useState("all");
@@ -439,23 +422,56 @@ function CareersOpenRolesMobile({ data }: { data?: any }) {
     "Submit a general application and we'll reach out when a matching position opens.";
   const generalAppCtaLabel =
     data?.general_app_cta_label || "SHARE YOUR PROFILE";
-  const jobTypeOptions = parseFilterCsvMobile(
-    data?.job_type_filters,
-    CAREERS_JOB_TYPE_FILTER_OPTIONS,
+  const applyButtonLabel = data?.apply_button_label || "APPLY NOW";
+
+  // Use dynamically fetched jobs if available, otherwise fallback to static data
+  const jobs = data?.fetchedJobs?.length ? data.fetchedJobs : CAREERS_JOBS;
+
+  // Build Job Type options from dynamic categories if available
+  const jobTypeOptions = data?.fetchedCategories?.length
+    ? [
+        { value: "all", label: "All" },
+        ...data.fetchedCategories.map((c: any) => ({
+          value: c.name?.toLowerCase().replace(/\s+/g, "_") || "unknown",
+          label: c.name || "Unknown",
+        })),
+      ]
+    : CAREERS_JOB_TYPE_FILTER_OPTIONS;
+
+  // Build location options from the jobs list dynamically
+  const uniqueLocations = Array.from(
+    new Set(jobs.map((j: any) => j.location).filter(Boolean)),
   );
-  const locationOptions = parseFilterCsvMobile(
-    data?.location_filters,
-    CAREERS_LOCATION_FILTER_OPTIONS,
-  );
+  const locationOptions = uniqueLocations.length
+    ? [
+        { value: "all", label: "All" },
+        ...uniqueLocations.map((loc) => ({
+          value: String(loc).toLowerCase().replace(/\s+/g, "_"),
+          label: String(loc)
+            .replace(/_/g, " ")
+            .replace(/\b\w/g, (l) => l.toUpperCase()),
+        })),
+      ]
+    : CAREERS_LOCATION_FILTER_OPTIONS;
 
   const filteredJobs = useMemo(
     () =>
-      CAREERS_JOBS.filter((job) => {
-        if (jobTypeFilter !== "all" && job.category !== jobTypeFilter) return false;
-        if (locationFilter !== "all" && job.location !== locationFilter) return false;
+      jobs.filter((job: any) => {
+        const norm = (s: string) =>
+          String(s || "").toLowerCase().replace(/\s+/g, "_");
+        const jobCategory =
+          typeof job.category === "object" && job.category !== null
+            ? job.category.name
+            : job.category;
+        const categoryValue = norm(jobCategory);
+        if (jobTypeFilter !== "all" && categoryValue !== norm(jobTypeFilter))
+          return false;
+        const locValue = norm(job.location);
+        if (locationFilter !== "all" && locValue !== norm(locationFilter))
+          return false;
         return true;
       }),
-    [jobTypeFilter, locationFilter],
+    [jobTypeFilter, locationFilter, jobs],
   );
 
   return (
@@ -500,12 +516,14 @@ function CareersOpenRolesMobile({ data }: { data?: any }) {
             </p>
           </div>
         ) : (
-          filteredJobs.map((job, index) => (
+          filteredJobs.map((job: any, index: number) => (
             <JobRowMobile
               key={job.title}
               title={job.title}
               category={job.category}
               location={job.location}
+              applyUrl={job.apply_url}
+              applyLabel={applyButtonLabel}
               isActive={index === 0}
             />
           ))
@@ -604,11 +622,15 @@ function JobRowMobile({
   title,
   category,
   location,
+  applyUrl,
+  applyLabel,
   isActive = false,
 }: {
   title: string;
   category: string;
   location: string;
+  applyUrl?: string;
+  applyLabel: string;
   isActive?: boolean;
 }) {
   return (
@@ -638,7 +660,10 @@ function JobRowMobile({
         </div>
       </div>
       
-      <div className="relative flex h-[48px] w-[161px] shrink-0 items-center justify-center gap-[8px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] px-[20px] py-[10px]">
+      <a
+        href={applyUrl || "#"}
+        className="relative flex h-[48px] w-[161px] shrink-0 items-center justify-center gap-[8px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] px-[20px] py-[10px]"
+      >
         <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
         
         {isActive ? (
@@ -655,7 +680,7 @@ function JobRowMobile({
         )}
 
         <span className={`${gilroyMedium.className} relative z-10 text-[14px] leading-[28px] uppercase text-white not-italic`}>
-          APPLY NOW
+          {applyLabel}
         </span>
         <div className="relative z-10 flex h-[6px] w-[12px] items-center justify-center shrink-0">
           <Image
@@ -666,7 +691,7 @@ function JobRowMobile({
             aria-hidden
           />
         </div>
-      </div>
+      </a>
     </article>
   );
 }
@@ -749,11 +774,11 @@ function CareersBottomCtaMobile({ data }: { data?: any }) {
       ? data.buttons.map((b: any) => ({
           label: b?.label || "",
           href: b?.href || "#",
-          variant: b?.variant || "green",
+          variant: b?.variant || "primary",
         }))
       : [
-          { label: "APPLY NOW", href: "#", variant: "green" },
-          { label: "REFER A CANDIDATE", href: "#", variant: "white" },
+          { label: "APPLY NOW", href: "#", variant: "primary" },
+          { label: "REFER A CANDIDATE", href: "#", variant: "secondary" },
         ];
 
   return (
@@ -773,7 +798,7 @@ function CareersBottomCtaMobile({ data }: { data?: any }) {
 
       <div className="relative z-10 flex w-full max-w-[354px] flex-row justify-center gap-[14px]">
         {buttons.map((btn, i) =>
-          btn.variant === "white" ? (
+          btn.variant === "secondary" || btn.variant === "ghost" ? (
             <a
               key={i}
               href={btn.href}

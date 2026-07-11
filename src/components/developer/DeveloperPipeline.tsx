@@ -31,21 +31,21 @@ export function DeveloperPipeline({ data }: { data?: any }) {
 
   const heading = data?.heading || DEFAULT_HEADING;
   const tagText = data?.tag?.text || DEFAULT_TAG;
-  const tabs = data?.tabs ? data.tabs.split("\n").filter(Boolean) : DEFAULT_TABS;
-  const flowImages =
-    data?.flow_images && Array.isArray(data.flow_images) && data.flow_images.length > 0
-      ? data.flow_images.map((m: any) => mediaUrl(m) || "").map(
-          (u: string, i: number) => u || DEFAULT_FLOW_IMAGES[i] || ""
-        )
-      : DEFAULT_FLOW_IMAGES;
-  const logos =
-    data?.logos && Array.isArray(data.logos) && data.logos.length > 0
-      ? data.logos.map((m: any) => mediaUrl(m) || "").map(
-          (u: string, i: number) => u || DEFAULT_LOGOS[i] || ""
-        )
-      : DEFAULT_LOGOS;
-  const tabLabel = (i: number) => tabs[i] || DEFAULT_TABS[i] || "";
-  const flowSrc = (i: number) => flowImages[i] || DEFAULT_FLOW_IMAGES[i];
+  const rawTabs = Array.isArray(data?.tabs) ? data.tabs : [];
+  const tabs = rawTabs.length
+    ? rawTabs.map((t: any, i: number) => ({
+        label: t?.label || DEFAULT_TABS[i] || "",
+        flowImage: mediaUrl(t?.flow_image) || DEFAULT_FLOW_IMAGES[i] || "",
+        logo: mediaUrl(t?.logo) || DEFAULT_LOGOS[i] || DEFAULT_LOGOS[0] || "",
+      }))
+    : DEFAULT_TABS.map((label, i) => ({
+        label,
+        flowImage: DEFAULT_FLOW_IMAGES[i] || "",
+        logo: DEFAULT_LOGOS[i] || DEFAULT_LOGOS[0] || "",
+      }));
+  const logos = tabs.map((t: { logo: string }) => t.logo);
+  const tabLabel = (i: number) => tabs[i]?.label || DEFAULT_TABS[i] || "";
+  const flowSrc = (i: number) => tabs[i]?.flowImage || DEFAULT_FLOW_IMAGES[i];
 
   return (
     <div

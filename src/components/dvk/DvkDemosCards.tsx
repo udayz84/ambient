@@ -120,7 +120,6 @@ export function DvkDemosCards({ data }: { data?: any }) {
             titleLine2: c?.title_line_2 || fallback.titleLine2,
             desc: c?.description || fallback.desc,
             img: mediaUrl(c?.image) || fallback.img,
-            imgOverlay: mediaUrl(c?.image_overlay) || fallback.imgOverlay,
           };
         })
       : DEMO_CARDS;

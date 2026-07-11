@@ -93,11 +93,6 @@ export function CompanyEcosystemContent({ data }: CompanyEcosystemContentProps =
         })
       : FALLBACK_COLUMNS;
 
-  const [col1, col2] = [
-    columns[0] ?? FALLBACK_COLUMNS[0],
-    columns[1] ?? FALLBACK_COLUMNS[1],
-  ];
-
   return (
     <div
       className="absolute top-[0.708px] left-[118px] z-10 h-[390px] w-[1204px] border-[0.5px] border-b-0 border-solid border-[rgba(255,255,255,0.15)]"
@@ -163,62 +158,38 @@ export function CompanyEcosystemContent({ data }: CompanyEcosystemContentProps =
         />
 
         <div
-          className="absolute top-[194px] left-0 h-[116px] w-[1068.999px]"
+          className="absolute top-[194px] left-0 flex h-[116px] w-[1068.999px] items-start justify-between"
           data-node-id="2379:4649"
         >
-          <div
-            className="absolute top-0 left-0 h-[116px] w-[361.999px]"
-            data-node-id="2379:4650"
-          >
+          {columns.map((col, i) => (
             <div
-              className="absolute top-0 left-0 h-[32px] w-[361.999px]"
-              data-node-id="2379:4651"
+              key={i}
+              className={`relative h-[116px] ${col.descWidth}`}
+              data-node-id={i === 0 ? "2379:4650" : `2379:eco-col-${i}`}
             >
-              <EcosystemColumnIcon
-                src={col1.icon}
-                nodeId={col1.iconNodeId}
-              />
-              <p
-                className={`${gilroyMedium.className} absolute top-[1.5px] ${col1.left} h-[29px] ${col1.titleWidth} text-[26px] leading-[28px] font-medium whitespace-nowrap text-white not-italic`}
-                data-node-id={col1.titleNodeId}
+              <div
+                className={`relative h-[32px] ${col.descWidth}`}
+                data-node-id={i === 0 ? "2379:4651" : `2379:eco-col-hdr-${i}`}
               >
-                {col1.title}
+                <EcosystemColumnIcon
+                  src={col.icon}
+                  nodeId={col.iconNodeId}
+                />
+                <p
+                  className={`${gilroyMedium.className} absolute top-[1.5px] ${col.left} h-[29px] ${col.titleWidth} text-[26px] leading-[28px] font-medium whitespace-nowrap text-white not-italic`}
+                  data-node-id={col.titleNodeId}
+                >
+                  {col.title}
+                </p>
+              </div>
+              <p
+                className={`${interRegular.className} absolute top-[44px] left-0 h-[72px] ${col.descWidth} text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+                data-node-id={col.descNodeId}
+              >
+                {col.description}
               </p>
             </div>
-            <p
-              className={`${interRegular.className} absolute top-[44px] left-0 h-[72px] ${col1.descWidth} text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
-              data-node-id={col1.descNodeId}
-            >
-              {col1.description}
-            </p>
-          </div>
-
-          <div
-            className="absolute top-0 left-[679.999px] h-[116px] w-[389px]"
-            data-node-id="2379:4656"
-          >
-            <div
-              className="absolute top-0 left-0 h-[32px] w-[389px]"
-              data-node-id="2379:4657"
-            >
-              <EcosystemColumnIcon
-                src={col2.icon}
-                nodeId={col2.iconNodeId}
-              />
-              <p
-                className={`${gilroyMedium.className} absolute top-0 ${col2.left} h-[29px] ${col2.titleWidth} text-[26px] leading-[28px] font-medium whitespace-nowrap text-white not-italic`}
-                data-node-id={col2.titleNodeId}
-              >
-                {col2.title}
-              </p>
-            </div>
-            <p
-              className={`${interRegular.className} absolute top-[44px] left-0 h-[72px] ${col2.descWidth} text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
-              data-node-id={col2.descNodeId}
-            >
-              {col2.description}
-            </p>
-          </div>
+          ))}
         </div>
       </div>
     </div>

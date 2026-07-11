@@ -323,6 +323,12 @@ const ASSETS = {
   news_press_title_frame: "news-listing/press-title-frame.svg",
   news_press_icon: "news-listing/press-icon.svg",
   news_backdrop: "careers/image 107.png",
+  news_card_overlay_1: "resources/article-1-overlay.png",
+  news_card_overlay_2: "resources/article-2-overlay.png",
+  news_card_overlay_3: "resources/article-3-overlay.png",
+  news_card_overlay_4: "resources/article-4-overlay.png",
+  news_card_overlay_5: "resources/article-5-overlay.png",
+  news_card_overlay_6: "resources/article-6-overlay.png",
   res_news_cta_texture: "resources/news-cta-texture.png",
 
   // RESOURCES -------------------------------------------------------
@@ -529,7 +535,7 @@ const DEVELOPER_PAYLOAD = {
       "ModelForge bridges training and deployment. Quantize, compile, and merge neural networks with your firmware.",
     primary_button: { label: "Download ModelForge SDK", href: "#", variant: "primary" },
     secondary_button: { label: "Read the Documentation", href: "#", variant: "secondary" },
-    background_image: media(ASSETS.dev_hero_bg_1),
+    background_image: media(ASSETS.dev_hero_bg_3),
   },
 
   code: {
@@ -560,23 +566,53 @@ int main(void) {
         }
     }
 }`,
+    articles: [
+      {
+        icon: media(ASSETS.dev_article_icon_1),
+        title: "No Proprietary IDEs",
+        description:
+          "Everything happens within the standard Eclipse IDE you already know with easy-to-use APIs.",
+      },
+      {
+        icon: media(ASSETS.dev_article_icon_2),
+        title: "A Single Line of Inference",
+        description:
+          "Your heavy, quantized neural network is distilled into a highly optimized object file. You call it just like any other standard C function.",
+      },
+      {
+        icon: media(ASSETS.dev_article_icon_3),
+        title: "The End of Glue Code",
+        description:
+          "ModelForge's dual-compiler architecture natively links your embedded DSP/sensor code with the AI execution in one seamless build.",
+      },
+    ],
   },
 
   pipeline: {
     heading: "The ModelForge Pipeline",
     tag: { text: "Real-time AI at edge" },
-    tabs: "Train\nOptimize\nIntegrate\nDeploy",
-    flow_images: mediaArr(
-      ASSETS.dev_train_flow_1,
-      ASSETS.dev_train_flow_2,
-      ASSETS.dev_train_flow_3,
-      ASSETS.dev_train_flow_4
-    ),
-    logos: mediaArr(
-      ASSETS.dev_pipeline_logo_1,
-      ASSETS.dev_pipeline_logo_2,
-      ASSETS.dev_pipeline_logo_3
-    ),
+    tabs: [
+      {
+        label: "Train",
+        flow_image: media(ASSETS.dev_train_flow_1),
+        logo: media(ASSETS.dev_pipeline_logo_1),
+      },
+      {
+        label: "Optimize",
+        flow_image: media(ASSETS.dev_train_flow_2),
+        logo: media(ASSETS.dev_pipeline_logo_2),
+      },
+      {
+        label: "Integrate",
+        flow_image: media(ASSETS.dev_train_flow_3),
+        logo: media(ASSETS.dev_pipeline_logo_3),
+      },
+      {
+        label: "Deploy",
+        flow_image: media(ASSETS.dev_train_flow_4),
+        logo: media(ASSETS.dev_pipeline_logo_1),
+      },
+    ],
   },
 
   coming_soon: {
@@ -651,8 +687,7 @@ const DVK_PAYLOAD = {
     subtitle:
       "Validate real-time AI at microwatt power levels out of the box. The Cranium Development Kit comes fully loaded with onboard sensors, rich I/O, and pre-integrated drivers so you can stop breadboarding and start testing inferences in minutes.",
     cta_label: "Request Evaluation Kit",
-    background_image_1: media(ASSETS.dvk_hero_bg_1),
-    background_image_2: media(ASSETS.dvk_hero_bg_2),
+    background_image: media(ASSETS.dvk_hero_bg_2),
   },
 
   hardware_stack: {
@@ -716,7 +751,6 @@ const DVK_PAYLOAD = {
         description:
           "Route a camera feed through the dedicated connector to validate real-time spatial awareness and gesture recognition without relying on a cloud round-trip.",
         image: media(ASSETS.dvk_demo_fall),
-        image_overlay: media(ASSETS.dvk_demo_vision),
       },
     ],
   },
@@ -765,6 +799,53 @@ const DVK_PAYLOAD = {
   },
 };
 
+// Shared card set for every news filter pill. Each section will eventually
+// hold its own cards; for now all three reuse the same existing articles.
+const NEWS_CARDS = [
+  {
+    category: "Blog",
+    title: "GP Singh interviewed by SemiWiki founder Daniel Nenni",
+    title_font_size: 22,
+    excerpt: "Our CEO discusses Ambient Scientific’s ultra low power edge AI, DigAn archi.... ",
+    image_overlay: media(ASSETS.news_card_overlay_1),
+  },
+  {
+    category: "PRODUCT UPDATE",
+    title: "Beyond the Bit Episode 02 The Truth About India’s Chip Industry",
+    title_font_size: 22,
+    excerpt: "Episode 02 of Beyond the Bit is now live, featuring Saharsh Singhania an... ",
+    image_overlay: media(ASSETS.news_card_overlay_2),
+  },
+  {
+    category: "Press Release",
+    title: "PyTorch vs TensorFlow for Production and Edge AI Deployment",
+    title_font_size: 21,
+    excerpt: "This article compares PyTorch and TensorFlow from a real-world de... ",
+    image_overlay: media(ASSETS.news_card_overlay_3),
+  },
+  {
+    category: "EVENT",
+    title: "Breaking the Von Neumann Bottleneck Coin Cell AI at the Edge",
+    title_font_size: 21,
+    excerpt: "In this session, Ambient Scientific explores a new approach to edge AI by a... ",
+    image_overlay: media(ASSETS.news_card_overlay_4),
+  },
+  {
+    category: "Blog",
+    title: "Ambient Scientific and Dimension NXG Introduce MAI",
+    title_font_size: 22,
+    excerpt: "Ambient Scientific, in collaboration with Dimension NXG, introduces MA... ",
+    image_overlay: media(ASSETS.news_card_overlay_5),
+  },
+  {
+    category: "WEBINAR",
+    title: "Boot Blink and Believe Edge AI from Prototype to Production",
+    title_font_size: 22,
+    excerpt: "The recording of our webinar Boot Blink and Believe Edge AI from Prototy... ",
+    image_overlay: media(ASSETS.news_card_overlay_6),
+  },
+];
+
 const NEWS_LISTING_PAYLOAD = {
   hero: {
     tag: { text: "Product Launch" },
@@ -786,16 +867,31 @@ const NEWS_LISTING_PAYLOAD = {
       { label: "Product Renders" },
     ],
     cta_label: "Download Press Kit (.ZIP)",
+    cta_file: null,
     file_info: "2.3 MB • Last updated May 2026",
     icon: media(ASSETS.news_press_icon),
-    title_frame: null,
   },
 
   grid: {
     filter_pills: [
-      { label: "NEWS" },
-      { label: "PRESS RELEASES" },
-      { label: "BLOGS & ARTICLES" },
+      {
+        label: "NEWS",
+        category_id: "news",
+        is_active: true,
+        cards: NEWS_CARDS,
+      },
+      {
+        label: "PRESS RELEASES",
+        category_id: "press-releases",
+        is_active: false,
+        cards: NEWS_CARDS,
+      },
+      {
+        label: "BLOGS & ARTICLES",
+        category_id: "blogs",
+        is_active: false,
+        cards: NEWS_CARDS,
+      },
     ],
     load_more_label: "Load More Resources",
     backdrop_image: media(ASSETS.news_backdrop),
@@ -1270,7 +1366,13 @@ async function main() {
   }
 
   for (const page of PAGES) {
-    if (ONLY_FILTER && page.name.toLowerCase() !== ONLY_FILTER) {
+    const pageSlug = page.name.toLowerCase().replace(/\s+/g, "-");
+    if (
+      ONLY_FILTER &&
+      pageSlug !== ONLY_FILTER &&
+      page.apiId !== ONLY_FILTER &&
+      page.apiId !== `${ONLY_FILTER}-page`
+    ) {
       console.log(`\n[skip] ${page.name} (filtered out by --only=${ONLY_FILTER})`);
       continue;
     }

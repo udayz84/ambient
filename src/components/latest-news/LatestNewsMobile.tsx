@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { mediaUrl } from "@/lib/strapi";
 import { TagBadge } from "../hero/TagBadge";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
@@ -15,6 +16,26 @@ export function LatestNewsMobile({ data }: { data?: any }) {
     "Ambient works with partners across silicon, development, distribution, and system integration, helping teams move from evaluation to deployment with confidence";
   const ctaLabel = data?.cta_label || "Explore more";
   const ctaHref = data?.cta_href || "/news-listing";
+
+  // Consume the same Strapi data as desktop. Fall back to the hardcoded
+  // articles when CMS cards are unavailable.
+  const articles =
+    data?.cards && data.cards.length > 0
+      ? data.cards.map((c: any, index: number) => {
+          const fallback =
+            LATEST_NEWS_ARTICLES[index % LATEST_NEWS_ARTICLES.length];
+          return {
+            nodeId: `cms-news-card-mobile-${index}`,
+            title: c.title || fallback.title,
+            excerpt: c.body || fallback.excerpt,
+            category: fallback.category,
+            categoryOffsetX: fallback.categoryOffsetX,
+            date: fallback.date,
+            href: fallback.href,
+            imageSrc: mediaUrl(c.image) || fallback.imageSrc,
+          };
+        })
+      : LATEST_NEWS_ARTICLES;
   return (
     <div className="relative flex flex-col items-center py-[48px]">
       <div className="relative flex flex-col items-center">
@@ -67,7 +88,7 @@ export function LatestNewsMobile({ data }: { data?: any }) {
       </p>
 
       <div className="mt-[28px] flex w-full snap-x snap-mandatory gap-[14px] overflow-x-auto pb-[8px] px-[24px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {LATEST_NEWS_ARTICLES.map((article) => (
+        {articles.map((article: any) => (
           <article
             key={article.nodeId}
             className="relative flex w-[327px] shrink-0 snap-start flex-col overflow-clip bg-[rgba(255,255,255,0.04)]"

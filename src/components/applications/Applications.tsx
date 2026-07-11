@@ -16,16 +16,13 @@ export function Applications({ data }: { data?: any }) {
     ? data.tabs
     : APPLICATION_TABS.map((label) => ({ label }));
 
-  const activeTabValue = data?.active_tab || "AUTOMOTIVE";
-  const initialIndex = Math.max(
-    0,
-    tabs.findIndex((t) => (t?.label || "").toUpperCase() === activeTabValue.toUpperCase())
-  );
+  // NOTE: `active_tab` is NOT a field in the Strapi `home.applications` schema,
+  // so it is intentionally ignored here. The initial tab falls back to the
+  // hardcoded default (AUTOMOTIVE / index 3).
   const fallbackInitial =
     INITIAL_ACTIVE_INDEX < tabs.length ? INITIAL_ACTIVE_INDEX : 0;
-  const startIndex = initialIndex >= 0 ? initialIndex : fallbackInitial;
 
-  const [activeIndex, setActiveIndex] = useState(startIndex);
+  const [activeIndex, setActiveIndex] = useState(fallbackInitial);
   const [direction, setDirection] = useState(1);
 
   const handleTabClick = (newIndex: number) => {
@@ -45,9 +42,16 @@ export function Applications({ data }: { data?: any }) {
 
   const activeTab = tabs[activeIndex]?.label || APPLICATION_TABS[0];
 
-  const featureCards: any[] = Array.isArray(data?.feature_cards)
-    ? data.feature_cards
-    : [FEATURE_CARDS.left, FEATURE_CARDS.right];
+  // feature_cards are nested INSIDE each tab in the schema (home.app-tab).
+  // Fall back to hardcoded pair when the active tab has no Strapi cards.
+  const activeTabData = tabs[activeIndex];
+  const strapiFeatureCards: any[] = Array.isArray(activeTabData?.feature_cards)
+    ? activeTabData.feature_cards
+    : [];
+  const featureCards: any[] =
+    strapiFeatureCards.length > 0
+      ? strapiFeatureCards
+      : [FEATURE_CARDS.left, FEATURE_CARDS.right];
   const leftCard = featureCards[0] || FEATURE_CARDS.left;
   const rightCard = featureCards[1] || FEATURE_CARDS.right;
 
@@ -112,8 +116,7 @@ export function Applications({ data }: { data?: any }) {
           data={data}
           categoryActiveIndex={activeIndex}
           setCategoryActiveIndex={setActiveIndex}
-        />
-      </div>
+        />      </div>
     </section>
   );
 }

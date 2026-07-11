@@ -50,18 +50,26 @@ const cards = [
 export function ContactSchedule({ data }: { data?: any }) {
   const heading = data?.heading || DEFAULT_HEADING;
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
+  const sectionIcon = mediaUrl(data?.icon);
   const strapiCards: ReadonlyArray<any> = Array.isArray(data?.cards)
     ? data.cards
     : [];
-  const mergedCards = cards.map((card, index) => {
-    const remote = strapiCards[index];
-    if (!remote) return { ...card, remoteImage: null };
+  // Render every CMS card. Layout metadata (widths, image scaling, node ids)
+  // cycles through the designed 2-card templates so any count is supported.
+  const mergedCards = (
+    strapiCards.length > 0 ? strapiCards : cards
+  ).map((remote: any, index: number) => {
+    const layout = cards[index] || cards[index % cards.length];
+    const fallback = cards[index] || {};
     return {
-      ...card,
-      tag: remote.tag || card.tag,
-      title: remote.title || card.title,
-      description: remote.description || card.description,
-      ctaLabel: remote.cta_label || card.ctaLabel,
+      ...layout,
+      tag: remote.tag || fallback.tag,
+      title: remote.title || fallback.title,
+      description: remote.description || fallback.description,
+      ctaLabel: remote.cta_label || fallback.ctaLabel,
+      // schedule-card schema has no url field; read cta_href forward-compat,
+      // fall back to "#" when absent.
+      ctaHref: remote.cta_href || "#",
       remoteImage: mediaUrl(remote.image),
     };
   });
@@ -71,6 +79,12 @@ export function ContactSchedule({ data }: { data?: any }) {
       className="absolute top-[807px] left-1/2 z-20 flex h-[468px] w-[1204px] -translate-x-1/2 flex-col items-center"
       data-node-id="2379:8437"
     >
+      {sectionIcon ? (
+        <div className="pointer-events-none absolute -top-[40px] left-1/2 -translate-x-1/2" aria-hidden>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={sectionIcon} alt="" className="size-[32px] object-contain" />
+        </div>
+      ) : null}
       <div
         className="flex h-[100px] shrink-0 flex-col items-center gap-[24px]"
         data-node-id="2379:8438"
@@ -98,13 +112,20 @@ export function ContactSchedule({ data }: { data?: any }) {
         className="relative mt-[48px] h-[320px] w-[1204px] shrink-0"
         data-node-id="2379:8447"
       >
-        {mergedCards.map((card, index) => (
-          <ScheduleCard
-            key={card.nodeId}
-            {...card}
-            className={index === 0 ? "left-0" : "left-[614px]"}
-          />
-        ))}
+        {mergedCards.map((card, index) => {
+          const col = index % 2;
+          const row = Math.floor(index / 2);
+          const leftClass = col === 0 ? "left-0" : "left-[614px]";
+          const topStyle = row > 0 ? { top: `${row * 344}px` } : undefined;
+          return (
+            <ScheduleCard
+              key={card.nodeId}
+              {...card}
+              className={leftClass}
+              style={topStyle}
+            />
+          );
+        })}
       </div>
     </div>
   );
@@ -123,19 +144,24 @@ function ScheduleCard({
   description,
   descriptionWidth,
   ctaLabel,
+  ctaHref,
   ctaWidth,
   imageSrc,
   remoteImage,
   imageClassName,
   className,
+  style,
 }: (typeof cards)[number] & {
   remoteImage: string | null;
+  ctaHref: string;
   className: string;
+  style?: React.CSSProperties;
 }) {
   const imageFinal = remoteImage || imageSrc;
   return (
     <div
       className={`absolute top-0 ${className} h-[320px] w-[590px] overflow-visible bg-[rgba(0,0,0,0.2)]`}
+      style={style}
       data-node-id={nodeId}
       data-name="Schedule"
     >
@@ -161,7 +187,7 @@ function ScheduleCard({
         </div>
       </div>
 
-      <ScheduleCta label={ctaLabel} nodeId={ctaNodeId} widthClass={ctaWidth} />
+      <ScheduleCta label={ctaLabel} href={ctaHref || "#"} nodeId={ctaNodeId} widthClass={ctaWidth} />
 
       <div
         className="pointer-events-none absolute top-[90px] left-[380px] z-[1] h-[230px] w-[210px] overflow-hidden"
@@ -180,16 +206,18 @@ function ScheduleCard({
 
 function ScheduleCta({
   label,
+  href,
   nodeId,
   widthClass,
 }: {
   label: string;
+  href: string;
   nodeId: string;
   widthClass: string;
 }) {
   return (
     <a
-      href="#"
+      href={href}
       className={`${gilroySemiBold.className} absolute top-[248px] left-[16px] z-20 block h-[48px] ${widthClass} shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15),0px_10.268px_6.699px_rgba(255,255,255,0.15),0px_3.714px_2.423px_rgba(255,255,255,0.1)]`}
       data-node-id={nodeId}
       data-name="Cta"

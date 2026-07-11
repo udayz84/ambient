@@ -1,4 +1,3 @@
-import { mediaUrl } from "@/lib/strapi";
 import { interRegular } from "../hero/fonts";
 import { GradientTitle } from "../contact/contact-shared";
 import { CornerDecor } from "./company-corners";

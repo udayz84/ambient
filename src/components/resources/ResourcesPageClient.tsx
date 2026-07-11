@@ -7,13 +7,18 @@ import { ResourcesFeatured } from "./ResourcesFeatured";
 import { ResourcesHero } from "./ResourcesHero";
 import { ResourcesMobile } from "./ResourcesMobile";
 import { ResourcesNewsCta } from "./ResourcesNewsCta";
+import type { ResourceArticle } from "./resources-data";
 import { RESOURCES_FOOTER_TOP, RESOURCES_NEWS_TOP } from "./resources-layout";
 
 type ResourcesPageClientProps = {
   data?: any;
+  articles?: ResourceArticle[];
 };
 
-export function ResourcesPageClient({ data }: ResourcesPageClientProps = {}) {
+export function ResourcesPageClient({
+  data,
+  articles,
+}: ResourcesPageClientProps = {}) {
   const [extraHeight, setExtraHeight] = useState(0);
 
   return (
@@ -29,14 +34,18 @@ export function ResourcesPageClient({ data }: ResourcesPageClientProps = {}) {
           <ResourcesHero data={data?.hero} />
           <ResourcesFeatured data={data?.featured} />
           <ResourcesBuilding data={data?.building} />
-          <ResourcesContent data={data?.content} onExtraHeightChange={setExtraHeight} />
+          <ResourcesContent
+            data={data?.content}
+            articles={articles}
+            onExtraHeightChange={setExtraHeight}
+          />
           <ResourcesNewsCta top={RESOURCES_NEWS_TOP + extraHeight} data={data?.news_cta} />
         </div>
       </div>
 
       {/* MOBILE (<1024px) — dedicated stacked layout */}
       <div className="relative -mt-[78px] w-full bg-black min-[1024px]:hidden">
-        <ResourcesMobile data={data} />
+        <ResourcesMobile data={data} articles={articles} />
       </div>
     </>
   );

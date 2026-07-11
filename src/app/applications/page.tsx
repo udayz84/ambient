@@ -21,7 +21,7 @@ export default async function ApplicationsPage() {
       { section: "dvk", fields: ["background_image", "bottom_background", "orbit_visual"], nested: ["center_card", "satellite_cards"] },
       "continuum",
       { section: "articles", nested: ["articles"] },
-      { section: "wins", fields: ["background_image"], nested: ["cards"] },
+      { section: "wins", nested: ["cards"] },
       "som",
       "seo",
     ]);

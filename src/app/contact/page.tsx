@@ -16,7 +16,7 @@ export default async function ContactPage() {
       { section: "resources", nested: ["ctas"] },
       { section: "map", fields: ["globe_image", "map_base"], nested: ["locations"] },
       { section: "schedule", fields: ["icon"], nested: ["cards"] },
-      { section: "form", fields: ["tracks.icon", "tracks.form"] },
+      { section: "form", fields: ["tracks.icon"], nested: ["tracks.form"] },
     ]);
   } catch {
     data = null;

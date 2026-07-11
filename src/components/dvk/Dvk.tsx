@@ -85,7 +85,7 @@ export function Dvk({ data }: { data?: any }) {
 }
 
 function DvkHeroMobile({ data }: { data?: any }) {
-  const bgImg = mediaUrl(data?.background_image_1) || "/dvk/hero-bg-1.png";
+  const bgImg = mediaUrl(data?.background_image) || "/dvk/hero-bg-2.png";
   const title =
     data?.title || "The physical launchpad for microwatt Edge AI.";
   const subtitle =
@@ -298,7 +298,7 @@ function DvkDemosMobile({ data }: { data?: any }) {
             DEMO_CARDS[i]?.desc ||
             "",
           img: mediaUrl(c?.image) || DEMO_CARDS[i]?.img || "/dvk/demo-fall.png",
-          imgOverlay: mediaUrl(c?.image_overlay) || DEMO_CARDS[i]?.imgOverlay,
+          imgOverlay: DEMO_CARDS[i]?.imgOverlay,
         }))
       : DEMO_CARDS;
   return (

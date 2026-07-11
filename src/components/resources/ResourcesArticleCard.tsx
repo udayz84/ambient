@@ -20,6 +20,8 @@ export function ResourcesArticleCard({
   titleFontSize = 22,
   excerpt,
   imageOverlaySrc,
+  imageSrc,
+  href = "#",
 }: ResourcesArticleCardProps) {
   return (
     <article
@@ -31,23 +33,25 @@ export function ResourcesArticleCard({
         data-name="Image"
       >
         <Image
-          src={ARTICLE_IMAGE_BASE}
+          src={imageSrc || ARTICLE_IMAGE_BASE}
           alt=""
           width={356}
           height={259}
           className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
           unoptimized
         />
-        <div className="absolute top-[0.41px] left-0 h-[258.753px] w-[356.446px]">
-          <Image
-            src={imageOverlaySrc}
-            alt=""
-            width={356}
-            height={259}
-            className="pointer-events-none absolute inset-0 size-full max-w-none object-contain"
-            unoptimized
-          />
-        </div>
+        {imageOverlaySrc ? (
+          <div className="absolute top-[0.41px] left-0 h-[258.753px] w-[356.446px]">
+            <Image
+              src={imageOverlaySrc}
+              alt=""
+              width={356}
+              height={259}
+              className="pointer-events-none absolute inset-0 size-full max-w-none object-contain"
+              unoptimized
+            />
+          </div>
+        ) : null}
       </div>
 
       <div className="flex w-full flex-col gap-[20px] px-0">
@@ -73,7 +77,7 @@ export function ResourcesArticleCard({
             className={`${interRegular.className} w-[346.611px] text-[16px] leading-[24px] font-normal not-italic [word-break:break-word]`}
           >
             <span className="text-[rgba(240,240,240,0.6)]">{excerpt}</span>
-            <a href="#" className="text-[#53d824] transition-opacity hover:opacity-80">read more</a>
+            <a href={href} className="text-[#53d824] transition-opacity hover:opacity-80">read more</a>
           </p>
         </div>
       </div>

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular, interSemiBold, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import {
@@ -10,6 +11,8 @@ import {
   FEATURED_RESOURCES,
   RESOURCE_ARTICLES,
   RESOURCE_CATEGORIES,
+  filterCategoryId,
+  type ResourceArticle,
 } from "./resources-data";
 
 const GREEN_CTA_SHADOW =
@@ -20,8 +23,10 @@ const LOAD_MORE_COUNT = 3;
 
 const FALLBACK_HERO_TITLE = "Explore whitepapers,\narchitectural deep-\ndives, and\nperformance data";
 const FALLBACK_SEARCH_PLACEHOLDER = "Search architecture, case studies, or GPX...";
+const FALLBACK_SEARCH_LABEL = "Search";
 const FALLBACK_CONTACT_TEXT = "Contact Us";
 const FALLBACK_CONTACT_HREF = "/contact";
+const FALLBACK_HERO_BG = "/mobile/resources/image 102.png";
 const FALLBACK_FEATURED_HEADING = "Featured Resources";
 const FALLBACK_FEATURED_TITLE = "Re-architecting the Physics of AI Compute.";
 const FALLBACK_FEATURED_DESC =
@@ -31,6 +36,7 @@ const FALLBACK_BUILDING_HEADING = "Building with\nAmbient?";
 const FALLBACK_BUILDING_SUBTITLE =
   "Access the ModelForge SDK, API references, model compilation guides, and hardware documentation.";
 const FALLBACK_BUILDING_CTA = "GO TO DEVELOPER HUB";
+const FALLBACK_BUILDING_CTA_HREF = "#";
 const FALLBACK_LOAD_MORE_LABEL = "Load More Resources";
 const FALLBACK_NEWS_HEADING =
   "Looking for latest developments, events, and announcements?";
@@ -127,10 +133,16 @@ function ResourcesHeroMobile({ data }: { data?: any } = {}) {
   const titleLines = titleRaw.split("\n");
   const placeholder =
     (data?.search_placeholder as string) || FALLBACK_SEARCH_PLACEHOLDER;
+  const searchLabel =
+    (data?.search_button_label as string) || FALLBACK_SEARCH_LABEL;
   const contactText =
     (data?.contact_link_text as string) || FALLBACK_CONTACT_TEXT;
   const contactHref =
     (data?.contact_link_href as string) || FALLBACK_CONTACT_HREF;
+  const heroBgSrc =
+    mediaUrl(data?.mobile_background_image) ||
+    mediaUrl(data?.background_image) ||
+    FALLBACK_HERO_BG;
 
   return (
     <section
@@ -139,7 +151,7 @@ function ResourcesHeroMobile({ data }: { data?: any } = {}) {
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
         <Image
-          src="/mobile/resources/image 102.png"
+          src={heroBgSrc}
           alt=""
           fill
           className="object-cover object-top opacity-100 mix-blend-screen scale-[0.8]"
@@ -175,7 +187,7 @@ function ResourcesHeroMobile({ data }: { data?: any } = {}) {
           className="relative flex w-[90px] shrink-0 items-center justify-center bg-white bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.15)_100%)] transition-opacity hover:opacity-90"
         >
           <span className={`${interSemiBold.className} text-[14px] leading-[normal] font-semibold text-[#121212] not-italic`}>
-            Search
+            {searchLabel}
           </span>
         </button>
       </div>
@@ -257,6 +269,7 @@ function ResourcesFeaturedMobile({ data }: { data?: any } = {}) {
     const card = strapiCards[i] || {};
     return {
       ...layout,
+      imageSrc: mediaUrl(card.image) || layout.imageSrc,
       badgeLabel: (card.badge_label as string) || layout.badgeLabel,
       title: (card.title as string) || FALLBACK_FEATURED_TITLE,
       description: (card.description as string) || FALLBACK_FEATURED_DESC,
@@ -335,6 +348,7 @@ function ResourcesBuildingMobile({ data }: { data?: any } = {}) {
   const headingLines = headingRaw.split("\n");
   const subtitle = (data?.subtitle as string) || FALLBACK_BUILDING_SUBTITLE;
   const ctaLabel = (data?.cta_label as string) || FALLBACK_BUILDING_CTA;
+  const ctaHref = (data?.cta_href as string) || FALLBACK_BUILDING_CTA_HREF;
 
   return (
     <section
@@ -372,8 +386,8 @@ function ResourcesBuildingMobile({ data }: { data?: any } = {}) {
       </p>
 
       <div className="relative mt-[32px] w-[231px]">
-        <button
-          type="button"
+        <a
+          href={ctaHref}
           className="relative flex h-[48px] w-full items-center justify-center overflow-hidden shadow-[0px_10px_20px_rgba(255,255,255,0.15)]"
         >
           <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
@@ -388,7 +402,7 @@ function ResourcesBuildingMobile({ data }: { data?: any } = {}) {
           <span className={`${gilroyMedium.className} relative text-[14px] leading-[28px] font-medium uppercase whitespace-nowrap text-[#151515] not-italic`}>
             {ctaLabel}
           </span>
-        </button>
+        </a>
       </div>
     </section>
   );
@@ -415,7 +429,13 @@ type MobileCategory = {
   active: boolean;
 };
 
-function ResourcesContentMobile({ data }: { data?: any } = {}) {
+function ResourcesContentMobile({
+  data,
+  articles,
+}: {
+  data?: any;
+  articles?: ResourceArticle[];
+} = {}) {
   const strapiCats = Array.isArray(data?.categories) ? data.categories : [];
   const categories: MobileCategory[] =
     strapiCats.length > 0
@@ -434,6 +454,10 @@ function ResourcesContentMobile({ data }: { data?: any } = {}) {
         }));
   const initialActiveId =
     categories.find((c) => c.active)?.id || categories[0]?.id || "webinar";
+  const initialVisible: number =
+    typeof data?.initial_visible === "number"
+      ? data.initial_visible
+      : INITIAL_VISIBLE_COUNT;
   const loadMoreCount =
     typeof data?.load_more_count === "number"
       ? data.load_more_count
@@ -441,11 +465,23 @@ function ResourcesContentMobile({ data }: { data?: any } = {}) {
   const loadMoreLabel =
     (data?.load_more_label as string) || FALLBACK_LOAD_MORE_LABEL;
 
-  const [activeCategory, setActiveCategory] = useState(initialActiveId);
-  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT);
+  const allArticles =
+    articles && articles.length > 0 ? articles : RESOURCE_ARTICLES;
 
-  const visibleArticles = RESOURCE_ARTICLES.slice(0, visibleCount);
-  const canLoadMore = visibleCount < RESOURCE_ARTICLES.length;
+  const [activeCategory, setActiveCategory] = useState(initialActiveId);
+  const [visibleCount, setVisibleCount] = useState(initialVisible);
+
+  const activeCanon = filterCategoryId(activeCategory);
+  const filteredArticles = allArticles.filter(
+    (a) => Boolean(a.categoryId) && a.categoryId === activeCanon
+  );
+  const visibleArticles = filteredArticles.slice(0, visibleCount);
+  const canLoadMore = visibleCount < filteredArticles.length;
+
+  const selectCategory = (id: string) => {
+    setActiveCategory(id);
+    setVisibleCount(initialVisible);
+  };
 
   return (
     <section
@@ -463,7 +499,7 @@ function ResourcesContentMobile({ data }: { data?: any } = {}) {
             <React.Fragment key={`${category.id}-${index}`}>
               <button
                 type="button"
-                onClick={() => setActiveCategory(category.id)}
+                onClick={() => selectCategory(category.id)}
                 className={`relative flex h-[36px] shrink-0 items-center justify-center px-[20px] transition-colors ${isActive ? "bg-[#f0f0f0]" : ""
                   }`}
               >
@@ -490,21 +526,23 @@ function ResourcesContentMobile({ data }: { data?: any } = {}) {
             <Corners />
             <div className="relative h-[244px] w-full shrink-0 overflow-hidden bg-[#151515]">
               <Image
-                src={ARTICLE_IMAGE_BASE}
+                src={article.imageSrc || ARTICLE_IMAGE_BASE}
                 alt=""
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 335px"
               />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Image
-                  src={article.imageOverlaySrc}
-                  alt=""
-                  width={335}
-                  height={244}
-                  className="max-h-full max-w-full object-contain"
-                />
-              </div>
+              {article.imageOverlaySrc ? (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <Image
+                    src={article.imageOverlaySrc}
+                    alt=""
+                    width={335}
+                    height={244}
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </div>
+              ) : null}
             </div>
 
             <div className="flex flex-col items-start gap-[20px]">
@@ -523,7 +561,7 @@ function ResourcesContentMobile({ data }: { data?: any } = {}) {
                 </h3>
                 <p className={`${interRegular.className} text-[14px] leading-[21px] font-normal not-italic`}>
                   <span className="text-[rgba(240,240,240,0.6)]">{article.excerpt}</span>{" "}
-                  <a href="#" className="text-[#53d824]">read more</a>
+                  <a href={article.href || "#"} className="text-[#53d824]">read more</a>
                 </p>
               </div>
             </div>
@@ -536,7 +574,7 @@ function ResourcesContentMobile({ data }: { data?: any } = {}) {
           <button
             type="button"
             onClick={() =>
-              setVisibleCount((c) => Math.min(c + loadMoreCount, RESOURCE_ARTICLES.length))
+              setVisibleCount((c) => Math.min(c + loadMoreCount, filteredArticles.length))
             }
             className={`${interSemiBold.className} relative flex h-[48px] w-full items-center justify-center overflow-hidden ${GREEN_CTA_SHADOW}`}
           >
@@ -607,13 +645,19 @@ function ResourcesNewsCtaMobile({ data }: { data?: any } = {}) {
 }
 
 /* --------------------------------- PAGE ----------------------------------- */
-export function ResourcesMobile({ data }: { data?: any } = {}) {
+export function ResourcesMobile({
+  data,
+  articles,
+}: {
+  data?: any;
+  articles?: ResourceArticle[];
+} = {}) {
   return (
     <div className="flex w-full flex-col">
       <ResourcesHeroMobile data={data?.hero} />
       <ResourcesFeaturedMobile data={data?.featured} />
       <ResourcesBuildingMobile data={data?.building} />
-      <ResourcesContentMobile data={data?.content} />
+      <ResourcesContentMobile data={data?.content} articles={articles} />
       <ResourcesNewsCtaMobile data={data?.news_cta} />
     </div>
   );

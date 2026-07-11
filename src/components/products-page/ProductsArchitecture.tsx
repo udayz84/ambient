@@ -28,13 +28,13 @@ export function ProductsArchitecture({ data }: { data?: any }) {
   const headingLines = splitLines(heading);
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const image = mediaUrl(data?.image) || "/products/architecture.png";
-  const statIcon = mediaUrl(data?.stat_icon) || "/products/arch-stat-icon.svg";
   const stats =
     Array.isArray(data?.stats) && data.stats.length > 0
       ? data.stats.map((s: any, i: number) => ({
           nodeId: `arch-stat-${i}`,
           title: s?.value || s?.label || ARCH_STATS[i]?.title || "",
           description: s?.description ?? ARCH_STATS[i]?.description ?? "",
+          statIcon: mediaUrl(s?.stat_icon) || "/products/arch-stat-icon.svg",
         }))
       : ARCH_STATS;
   return (
@@ -48,7 +48,6 @@ export function ProductsArchitecture({ data }: { data?: any }) {
           headingLines={headingLines}
           subtitle={subtitle}
           image={image}
-          statIcon={statIcon}
           stats={stats}
         />
       </section>
@@ -58,7 +57,6 @@ export function ProductsArchitecture({ data }: { data?: any }) {
         headingLines={headingLines}
         subtitle={subtitle}
         image={image}
-        statIcon={statIcon}
         stats={stats}
       />
     </>
@@ -69,13 +67,11 @@ function ProductsArchitectureDesktop({
   headingLines,
   subtitle,
   image,
-  statIcon,
   stats,
 }: {
   headingLines: string[];
   subtitle: string;
   image: string;
-  statIcon: string;
   stats: any[];
 }) {
   return (
@@ -144,11 +140,11 @@ function ProductsArchitectureDesktop({
         data-node-id="2903:2204"
         data-name="Frame 1000003873"
       >
-        <ArchStatView stat={stats[0]} statIcon={statIcon} />
+        <ArchStatView stat={stats[0]} />
         <ArchGridDivider />
-        <ArchStatView stat={stats[1]} statIcon={statIcon} />
+        <ArchStatView stat={stats[1]} />
         <ArchGridDivider />
-        <ArchStatView stat={stats[2]} statIcon={statIcon} />
+        <ArchStatView stat={stats[2]} />
 
         <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
       </div>
@@ -156,7 +152,8 @@ function ProductsArchitectureDesktop({
   );
 }
 
-function ArchStatView({ stat, statIcon }: { stat: any; statIcon: string }) {
+function ArchStatView({ stat }: { stat: any }) {
+  const statIcon = stat.statIcon || "/products/arch-stat-icon.svg";
   return (
     <div
       className="relative shrink-0"
@@ -260,13 +257,11 @@ function ProductsArchitectureMobile({
   headingLines,
   subtitle,
   image,
-  statIcon,
   stats,
 }: {
   headingLines: string[];
   subtitle: string;
   image: string;
-  statIcon: string;
   stats: any[];
 }) {
   return (
@@ -312,7 +307,7 @@ function ProductsArchitectureMobile({
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   alt=""
-                  src={statIcon}
+                  src={stat.statIcon || "/products/arch-stat-icon.svg"}
                   className="h-[36px] w-[36px] shrink-0"
                   aria-hidden
                 />

@@ -100,9 +100,9 @@ const HERO_DEFAULT_SUBTITLE =
   "Skip the generic sales inbox. Get direct access to our engineering team, technical documentation, and commercial partners.";
 const RESOURCES_DEFAULT_HEADING = "Looking for immediate resources?";
 const RESOURCES_DEFAULT_CTAS = [
-  { label: "Download Datasheets & SDK", href: "#", variant: "green" },
-  { label: "Download Press Kit", href: "#", variant: "white" },
-  { label: "Case Studies & Whitepapers", href: "#", variant: "white" },
+  { label: "Download Datasheets & SDK", href: "#", variant: "primary" },
+  { label: "Download Press Kit", href: "#", variant: "secondary" },
+  { label: "Case Studies & Whitepapers", href: "#", variant: "secondary" },
 ] as const;
 
 function ContactHeroMobile({ data }: { data?: any }) {
@@ -188,7 +188,7 @@ function ContactHeroMobile({ data }: { data?: any }) {
           </p>
           <div className="flex w-full flex-col gap-[20px]">
             {ctas.map((cta, index) =>
-              cta.variant === "green" ? (
+              cta.variant === "primary" || cta.variant === "green" ? (
                 <GreenCta key={index} href={cta.href || "#"}>{cta.label}</GreenCta>
               ) : (
                 <WhiteCta key={index} href={cta.href || "#"}>{cta.label}</WhiteCta>
@@ -323,13 +323,17 @@ function ContactMapMobile({ data }: { data?: any }) {
   const strapiLocations: ReadonlyArray<any> = Array.isArray(data?.locations)
     ? data.locations
     : [];
-  const mergedLocations = MAP_LOCATIONS.map((loc, index) => {
-    const remote = strapiLocations[index];
-    if (!remote) return loc;
+  // Render every CMS location. Layout metadata cycles through the designed
+  // 3-slot templates so any count is supported while preserving the layout.
+  const mergedLocations = (
+    strapiLocations.length > 0 ? strapiLocations : MAP_LOCATIONS
+  ).map((remote: any, index: number) => {
+    const layout = MAP_LOCATIONS[index] || MAP_LOCATIONS[index % MAP_LOCATIONS.length];
+    const fallback = MAP_LOCATIONS[index] || {};
     return {
-      ...loc,
-      title: remote.title || loc.title,
-      address: remote.address || loc.address,
+      ...layout,
+      title: remote.title || fallback.title,
+      address: remote.address || fallback.address,
     };
   });
 
@@ -439,15 +443,20 @@ function ContactScheduleMobile({ data }: { data?: any }) {
   const strapiCards: ReadonlyArray<any> = Array.isArray(data?.cards)
     ? data.cards
     : [];
-  const mergedCards = SCHEDULE_CARDS.map((card, index) => {
-    const remote = strapiCards[index];
-    if (!remote) return { ...card, remoteImage: null };
+  // Render every CMS card. Layout metadata (image scaling, widths) cycles
+  // through the designed 2-card templates so any count is supported.
+  const mergedCards = (
+    strapiCards.length > 0 ? strapiCards : SCHEDULE_CARDS
+  ).map((remote: any, index: number) => {
+    const layout = SCHEDULE_CARDS[index] || SCHEDULE_CARDS[index % SCHEDULE_CARDS.length];
+    const fallback = SCHEDULE_CARDS[index] || {};
     return {
-      ...card,
-      tag: remote.tag || card.tag,
-      title: remote.title || card.title,
-      description: remote.description || card.description,
-      ctaLabel: remote.cta_label || card.ctaLabel,
+      ...layout,
+      tag: remote.tag || fallback.tag,
+      title: remote.title || fallback.title,
+      description: remote.description || fallback.description,
+      ctaLabel: remote.cta_label || fallback.ctaLabel,
+      ctaHref: remote.cta_href || "#",
       remoteImage: mediaUrl(remote.image),
     };
   });
@@ -520,7 +529,7 @@ function ContactScheduleMobile({ data }: { data?: any }) {
               </div>
 
               <a
-                href="#"
+                href={card.ctaHref}
                 className={`mt-[24px] relative flex items-center justify-center gap-[8px] px-[31px] py-[14px] drop-shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15),0px_10.268px_6.699px_rgba(255,255,255,0.15),0px_3.714px_2.423px_rgba(255,255,255,0.1)] z-10 ${card.widthClass}`}
               >
                 <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
@@ -589,6 +598,17 @@ const FORM_FIELDS = [
   { label: "Phone Number", placeholder: "Enter Your Phone Number", type: "tel" },
 ];
 
+function mapInputTypeMobile(fieldType: string | undefined | null): string {
+  switch (fieldType) {
+    case "email":
+      return "email";
+    case "phone":
+      return "tel";
+    default:
+      return "text";
+  }
+}
+
 function ContactFormMobile({ data }: { data?: any }) {
   const [activeTrackId, setActiveTrackId] = useState<TrackId>("sales");
   const [subscribed, setSubscribed] = useState(false);
@@ -598,6 +618,7 @@ function ContactFormMobile({ data }: { data?: any }) {
   const messageHeading = data?.message_heading || FORM_DEFAULT_MESSAGE_HEADING;
   const checkboxLabel = data?.checkbox_label || FORM_DEFAULT_CHECKBOX_LABEL;
   const submitLabel = data?.submit_label || FORM_DEFAULT_SUBMIT_LABEL;
+  const submitHref = data?.submit_href || "#";
 
   const strapiTracks: ReadonlyArray<any> = Array.isArray(data?.tracks)
     ? data.tracks
@@ -615,18 +636,33 @@ function ContactFormMobile({ data }: { data?: any }) {
   });
 
   const activeMergedTrack = mergedTracks.find((t) => t.id === activeTrackId);
-  const currentStrapiFields = activeMergedTrack?.strapiFields || [];
+  const currentStrapiFields: ReadonlyArray<any> =
+    activeMergedTrack?.strapiFields || [];
 
-  const mergedFields = currentStrapiFields.length > 0
-    ? currentStrapiFields.map((remote: any, index: number) => {
-        const fallback = FORM_FIELDS[index % FORM_FIELDS.length];
-        return {
-          ...fallback,
-          label: remote.label || fallback.label,
-          placeholder: remote.placeholder || fallback.placeholder,
-        };
-      })
-    : FORM_FIELDS.map((field) => ({ ...field }));
+  // Separate Strapi fields: textarea fields go to the bottom section, others to the inputs
+  const strapiInputFields = currentStrapiFields.filter(
+    (f: any) => f.field_type !== "textarea",
+  );
+  const strapiTextareaField = currentStrapiFields.find(
+    (f: any) => f.field_type === "textarea",
+  );
+
+  // Build input fields — Strapi data where available, fallback for the rest
+  const mergedFields = FORM_FIELDS.map((fallback, index) => {
+    const remote = strapiInputFields[index];
+    if (!remote) return { ...fallback };
+    return {
+      label: remote.label || fallback.label,
+      placeholder: remote.placeholder || fallback.placeholder,
+      type: mapInputTypeMobile(remote.field_type),
+    };
+  });
+
+  // Bottom textarea: use Strapi data if available, otherwise fallback
+  const textareaLabel = strapiTextareaField?.label || "How can we help?";
+  const textareaPlaceholder =
+    strapiTextareaField?.placeholder ||
+    "Describe your use case, technical requirements, or business needs...";
 
   return (
     <SectionWrap aria-label="Contact form" className="!pb-[20px] relative z-10 -mb-[266px]">
@@ -708,10 +744,10 @@ function ContactFormMobile({ data }: { data?: any }) {
 
           <div className="flex flex-col gap-[6px]">
             <label className={`${interLight.className} text-[11px] leading-[15px] font-light text-white not-italic`}>
-              How can we help?
+              {textareaLabel}
             </label>
             <textarea
-              placeholder="Describe your use case, technical requirements, or business needs..."
+              placeholder={textareaPlaceholder}
               className={`${interRegular.className} h-[110px] w-full resize-none border-[0.5px] border-solid border-[#4a4a4a] bg-transparent p-[12px] text-[14px] font-normal text-white outline-none placeholder:text-[#4a4a4a] not-italic`}
             />
           </div>
@@ -739,7 +775,7 @@ function ContactFormMobile({ data }: { data?: any }) {
             </span>
           </label>
 
-          <GreenCta href="#">{submitLabel}</GreenCta>
+          <GreenCta href={submitHref}>{submitLabel}</GreenCta>
         </div>
       </div>
     </SectionWrap>

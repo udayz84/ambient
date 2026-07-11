@@ -1,3 +1,5 @@
+import { mediaUrl, type StrapiMedia } from "@/lib/strapi";
+
 export type ResourceFeaturedCard = {
   nodeId: string;
   imageNodeId: string;
@@ -12,12 +14,15 @@ export type ResourceFeaturedCard = {
 export type ResourceArticle = {
   nodeId: string;
   category: string;
+  categoryId?: string;
   categoryOffsetX: number;
   centerCategory?: boolean;
   title: string;
   titleFontSize?: 20 | 21 | 22;
   excerpt: string;
-  imageOverlaySrc: string;
+  imageOverlaySrc?: string;
+  imageSrc?: string;
+  href?: string;
 };
 
 export const ARTICLE_IMAGE_BASE = "/resources/article-image-base.png";
@@ -69,6 +74,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
   {
     nodeId: "2379:1834",
     category: "Podcast",
+    categoryId: "webinar",
     categoryOffsetX: 0.5,
     centerCategory: true,
     title: "GP Singh interviewed by SemiWiki founder Daniel Nenni",
@@ -79,6 +85,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
   {
     nodeId: "2379:1853",
     category: "PRODUCT UPDATE",
+    categoryId: "product_update",
     categoryOffsetX: 0.5,
     centerCategory: true,
     title: "Beyond the Bit Episode 02 The Truth About India’s Chip Industry",
@@ -89,6 +96,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
   {
     nodeId: "2379:1872",
     category: "PRODUCT UPDATE",
+    categoryId: "product_update",
     categoryOffsetX: 0.5,
     centerCategory: true,
     title: "PyTorch vs TensorFlow for Production and Edge AI Deployment",
@@ -100,6 +108,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
   {
     nodeId: "2379:1892",
     category: "EVENT",
+    categoryId: "event",
     categoryOffsetX: 0.5,
     centerCategory: true,
     title: "Breaking the Von Neumann Bottleneck Coin Cell AI at the Edge",
@@ -111,6 +120,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
   {
     nodeId: "2379:1911",
     category: "PRESS RELEASE",
+    categoryId: "press",
     categoryOffsetX: 0.5,
     centerCategory: true,
     title: "Ambient Scientific and Dimension NXG Introduce MAI",
@@ -121,6 +131,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
   {
     nodeId: "2379:1930",
     category: "WEBINAR",
+    categoryId: "webinar",
     categoryOffsetX: 0.5,
     centerCategory: true,
     title: "Boot Blink and Believe Edge AI from Prototype to Production",
@@ -131,6 +142,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
   {
     nodeId: "2379:1949",
     category: "CASE STUDY",
+    categoryId: "case-studies",
     categoryOffsetX: 0.5,
     centerCategory: true,
     title: "Deploying Always-On Voice at Microwatt Power Budgets",
@@ -142,6 +154,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
   {
     nodeId: "2379:1950",
     category: "BLOG",
+    categoryId: "blogs",
     categoryOffsetX: 0.5,
     centerCategory: true,
     title: "Designing Sensor Fusion Pipelines for Battery-Powered Devices",
@@ -153,6 +166,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
   {
     nodeId: "2379:1951",
     category: "VIDEO",
+    categoryId: "videos",
     categoryOffsetX: 0.5,
     centerCategory: true,
     title: "Inside Ambient ModelForge: From Training to On-Device Inference",
@@ -163,6 +177,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
   {
     nodeId: "2379:1952",
     category: "PRESS RELEASE",
+    categoryId: "press",
     categoryOffsetX: 0.5,
     centerCategory: true,
     title: "Ambient Scientific Expands Developer Ecosystem Partnerships",
@@ -173,6 +188,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
   {
     nodeId: "2379:1953",
     category: "WEBINAR",
+    categoryId: "webinar",
     categoryOffsetX: 0.5,
     centerCategory: true,
     title: "Scaling Edge AI from Prototype to Millions of Units",
@@ -184,6 +200,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
   {
     nodeId: "2379:1954",
     category: "PODCAST",
+    categoryId: "webinar",
     categoryOffsetX: 0.5,
     centerCategory: true,
     title: "The Future of Programmable AI Silicon at the Edge",
@@ -192,3 +209,122 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
     imageOverlaySrc: "/resources/article-6-overlay.png",
   },
 ];
+
+/**
+ * Canonical id for an article given its Strapi `category` enum value.
+ * Maps the article collection's category enum onto the resources-page
+ * content filter `category_id` values. Unknown enum values fall through
+ * unchanged so editors can wire custom filters by matching the enum.
+ */
+export function articleCategoryId(enumCategory: string): string {
+  const c = String(enumCategory || "").toLowerCase();
+  switch (c) {
+    case "case_study":
+      return "case-studies";
+    case "video":
+      return "videos";
+    case "webinar":
+    case "podcast":
+      return "webinar";
+    case "press_release":
+      return "press";
+    case "blog":
+    case "technical_insight":
+      return "blogs";
+    default:
+      return c;
+  }
+}
+
+/** Human-readable label for an article `category` enum value (badge text). */
+export function humanizeArticleCategory(enumCategory: string): string {
+  const c = String(enumCategory || "").toLowerCase();
+  const map: Record<string, string> = {
+    blog: "Blog",
+    press_release: "Press Release",
+    product_update: "Product Update",
+    event: "Event",
+    webinar: "Webinar",
+    whitepaper: "Whitepaper",
+    case_study: "Case Study",
+    video: "Video",
+    podcast: "Podcast",
+    technical_insight: "Technical Insight",
+    partnership: "Partnership",
+  };
+  return (
+    map[c] ||
+    c
+      .replace(/_/g, " ")
+      .replace(/\b\w/g, (m) => m.toUpperCase())
+  );
+}
+
+/**
+ * Canonical id for a content filter `category_id` value. Produces the same
+ * canonical space as `articleCategoryId` so an article matches its filter.
+ */
+export function filterCategoryId(filterId: string): string {
+  const c = String(filterId || "").toLowerCase();
+  switch (c) {
+    case "case-studies":
+    case "case_studies":
+    case "casestudies":
+      return "case-studies";
+    case "videos":
+    case "video":
+      return "videos";
+    case "webinar":
+    case "webinars":
+      return "webinar";
+    case "press":
+    case "press_release":
+    case "press_releases":
+      return "press";
+    case "blogs":
+    case "blog":
+      return "blogs";
+    default:
+      return c;
+  }
+}
+
+/**
+ * Map Strapi `article` collection rows into the shape the article cards
+ * render. Returns the hardcoded fallback list when the collection is empty
+ * or unavailable so the page always renders.
+ */
+type StrapiArticleRow = {
+  id?: number;
+  documentId?: string;
+  title?: string;
+  category?: string;
+  excerpt?: string;
+  external_url?: string;
+  featured_image?: StrapiMedia;
+};
+
+export function buildArticles(strapiArticles: unknown): ResourceArticle[] {
+  if (!Array.isArray(strapiArticles) || strapiArticles.length === 0) {
+    return RESOURCE_ARTICLES;
+  }
+  return (strapiArticles as StrapiArticleRow[]).map(
+    (a, i): ResourceArticle => {
+      const cat = String(a?.category || "");
+      return {
+        nodeId:
+          (a?.documentId as string) ||
+          (a?.id != null ? String(a.id) : `article-${i}`),
+        category: humanizeArticleCategory(cat).toUpperCase(),
+        categoryId: articleCategoryId(cat),
+        categoryOffsetX: 0.5,
+        centerCategory: true,
+        title: (a?.title as string) || "",
+        excerpt: (a?.excerpt as string) || "",
+        imageSrc: mediaUrl(a?.featured_image) || undefined,
+        imageOverlaySrc: undefined,
+        href: (a?.external_url as string) || "#",
+      };
+    }
+  );
+}

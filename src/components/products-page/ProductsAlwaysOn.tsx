@@ -32,7 +32,6 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
   const heading = data?.heading || FALLBACK_HEADING;
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const image = mediaUrl(data?.image) || "/products/hand.png";
-  const statIcon = mediaUrl(data?.stat_icon) || "/products/stat-icon.svg";
   const stats =
     Array.isArray(data?.stats) && data.stats.length > 0
       ? data.stats.map((s: any, i: number) => {
@@ -47,6 +46,7 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
               width: fallback.badge.width,
               rightBarLeft: fallback.badge.rightBarLeft,
             },
+            statIcon: mediaUrl(s?.stat_icon) || "/products/stat-icon.svg",
           };
         })
       : ALWAYSON_STATS_DATA;
@@ -65,7 +65,6 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
             heading={heading}
             subtitle={subtitle}
             image={image}
-            statIcon={statIcon}
             stats={stats}
           />
         </div>
@@ -76,7 +75,6 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
         heading={heading}
         subtitle={subtitle}
         image={image}
-        statIcon={statIcon}
         stats={stats}
       />
     </>
@@ -87,13 +85,11 @@ function ProductsAlwaysOnDesktop({
   heading,
   subtitle,
   image,
-  statIcon,
   stats,
 }: {
   heading: string;
   subtitle: string;
   image: string;
-  statIcon: string;
   stats: any[];
 }) {
   return (
@@ -177,11 +173,11 @@ function ProductsAlwaysOnDesktop({
         data-node-id="2915:1234"
         data-name="Frame 1984079438"
       >
-        <Stat stat={stats[0]} statIcon={statIcon} />
+        <Stat stat={stats[0]} />
         <GridDivider />
-        <Stat stat={stats[1]} statIcon={statIcon} />
+        <Stat stat={stats[1]} />
         <GridDivider />
-        <Stat stat={stats[2]} statIcon={statIcon} />
+        <Stat stat={stats[2]} />
 
         {/* Frame corner marks */}
         <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
@@ -190,8 +186,9 @@ function ProductsAlwaysOnDesktop({
   );
 }
 
-function Stat({ stat, statIcon }: { stat: any; statIcon: string }) {
+function Stat({ stat }: { stat: any }) {
   const { badge } = stat;
+  const statIcon = stat.statIcon || "/products/stat-icon.svg";
   return (
     <div
       className="relative flex h-[181px] w-[340px] shrink-0 flex-col justify-between py-[12px]"
@@ -322,13 +319,11 @@ function ProductsAlwaysOnMobile({
   heading,
   subtitle,
   image,
-  statIcon,
   stats,
 }: {
   heading: string;
   subtitle: string;
   image: string;
-  statIcon: string;
   stats: any[];
 }) {
   return (
@@ -386,7 +381,7 @@ function ProductsAlwaysOnMobile({
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     alt=""
-                    src={statIcon}
+                    src={stat.statIcon || "/products/stat-icon.svg"}
                     className="block h-[26.667px] w-[28.148px]"
                   />
                 </div>

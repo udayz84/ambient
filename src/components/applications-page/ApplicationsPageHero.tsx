@@ -14,8 +14,7 @@ const FALLBACK_TAG = "The Full Spectrum";
 
 export function ApplicationsPageHero({ data }: { data?: any }) {
   const bgImg = mediaUrl(data?.background_image) || "/applications/hero-bg.png";
-  const titleFrame =
-    mediaUrl(data?.title_frame) || "/applications/title-frame.svg";
+  const titleFrame = "/applications/title-frame.svg";
   const titleText = data?.title || FALLBACK_TITLE;
   const titleLines = titleText.split("\n");
   const subtitle = data?.subtitle || SUBTITLE;

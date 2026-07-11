@@ -1,0 +1,576 @@
+[2026-07-11 05:03:50.229] [33mwarn[39m: The strapi::cors middleware no longer supports the `enabled` option. Using it to conditionally enable CORS might cause an insecure default. To disable strapi::cors, remove it from the exported array in config/middleware.js
+[2026-07-11 05:03:51.012] [33mwarn[39m: [email]: The "sendmail" email provider is still supported, but for most production setups that use a dedicated SMTP relay, consider switching to @strapi/provider-email-nodemailer (set `provider` to `"nodemailer"` in your email plugin config). This message is only shown in non-production environments.
+Adding missing images to existing latest_news cards...
+Seeded missing images in latest_news successfully!
+
+ Project information
+
+[90m╭────────────────────[39m[90m┬──────────────────────────────────────────────────╮[39m
+[90m│[39m Time               [90m│[39m Sat Jul 11 2026 05:03:56 GMT-0700 (Pacific Dayl… [90m│[39m
+[90m│[39m Launched in        [90m│[39m 8468 ms                                          [90m│[39m
+[90m│[39m Environment        [90m│[39m development                                      [90m│[39m
+[90m│[39m Process PID        [90m│[39m 2824                                             [90m│[39m
+[90m│[39m Version            [90m│[39m 5.50.0 (node v24.16.0)                           [90m│[39m
+[90m│[39m Edition            [90m│[39m Community                                        [90m│[39m
+[90m│[39m Database           [90m│[39m postgres                                         [90m│[39m
+[90m│[39m Database name      [90m│[39m ambient_cms                                      [90m│[39m
+[90m╰────────────────────[39m[90m┴──────────────────────────────────────────────────╯[39m
+
+ Actions available
+
+Welcome back!
+To access the server ⚡️, go to:
+http://localhost:1338
+
+[2026-07-11 05:03:56.734] [32minfo[39m: Strapi started successfully
+[2026-07-11 05:23:20.010] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (4066 ms) 200
+[2026-07-11 05:23:20.147] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (4267 ms) 200
+[2026-07-11 05:23:20.159] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (4341 ms) 200
+[2026-07-11 05:23:20.195] [32mhttp[39m: GET /api/contact-page?populate[hero][populate]=*&populate[resources][populate][ctas][populate]=*&populate[map][populate][globe_image]=true&populate[map][populate][map_base]=true&populate[map][populate][locations][populate]=*&populate[schedule][populate][icon]=true&populate[schedule][populate][cards][populate]=*&populate[form][populate]=* (4421 ms) 200
+[2026-07-11 05:23:20.201] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (4360 ms) 200
+[2026-07-11 05:23:20.239] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (4333 ms) 200
+[2026-07-11 05:23:20.250] [32mhttp[39m: GET /api/careers-page?populate[hero][populate]=*&populate[best_work][populate][cards][populate]=*&populate[dna][populate]=*&populate[open_roles][populate][job_categories][populate][jobs][populate]=*&populate[benefits][populate][cards][populate]=*&populate[bottom_cta][populate]=*&populate[seo][populate]=* (4682 ms) 200
+[2026-07-11 05:23:20.274] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (4250 ms) 200
+[2026-07-11 05:23:20.289] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (4269 ms) 200
+[2026-07-11 05:23:20.313] [32mhttp[39m: GET /api/company-page?populate[hero][populate]=*&populate[mission][populate]=*&populate[leadership][populate][team][populate]=*&populate[dna][populate]=*&populate[ecosystem][populate][map_image]=true&populate[ecosystem][populate][columns][populate]=*&populate[tech_partners][populate][partners][populate]=*&populate[articles][populate][featured_article][populate]=*&populate[articles][populate][compact_articles][populate]=*&populate[engagement][populate][background_image]=true&populate[engagement][populate][cards][populate]=*&populate[engagement][populate][join_team][populate]=*&populate[seo][populate]=* (4721 ms) 200
+[2026-07-11 05:23:20.331] [32mhttp[39m: GET /api/developer-page?populate[hero][populate]=*&populate[code][populate][articles][populate]=*&populate[pipeline][populate][tag]=true&populate[pipeline][populate][tabs][populate]=*&populate[coming_soon][populate]=*&populate[modules][populate][modules][populate]=*&populate[copilots][populate][copilots][populate]=*&populate[seo][populate]=* (4607 ms) 200
+[2026-07-11 05:23:20.373] [32mhttp[39m: GET /api/applications-page?populate[hero][populate]=*&populate[dvk][populate][background_image]=true&populate[dvk][populate][bottom_background]=true&populate[dvk][populate][orbit_visual]=true&populate[dvk][populate][center_card][populate]=*&populate[dvk][populate][satellite_cards][populate]=*&populate[continuum][populate]=*&populate[articles][populate][articles][populate]=*&populate[wins][populate][cards][populate]=*&populate[som][populate]=*&populate[seo][populate]=* (6420 ms) 200
+[2026-07-11 05:23:20.888] [32mhttp[39m: GET /api/wearables-page?populate[hero][populate]=*&populate[carousel][populate]=*&populate[paradigm][populate]=*&populate[subconscious][populate]=*&populate[empirical_proof][populate]=*&populate[lab_to_product][populate]=*&populate[footer_accent][populate]=*&populate[seo][populate]=* (4863 ms) 200
+[2026-07-11 05:23:21.372] [32mhttp[39m: GET /api/resources-page?populate[hero][populate]=*&populate[featured][populate][cards][populate]=*&populate[building][populate]=*&populate[content][populate]=*&populate[news_cta][populate]=*&populate[seo][populate]=* (220 ms) 200
+[2026-07-11 05:23:21.410] [32mhttp[39m: GET /api/dvk-page?populate[hero][populate]=*&populate[hardware_stack][populate]=*&populate[demos][populate][demo_cards][populate]=*&populate[modelforge][populate]=*&populate[integrated_modules][populate]=*&populate[seo][populate]=* (259 ms) 200
+[2026-07-11 05:23:21.447] [32mhttp[39m: GET /api/articles?populate=*&sort[0]=display_order:asc&sort[1]=date:desc&pagination[pageSize]=100 (65 ms) 200
+[2026-07-11 05:23:21.472] [32mhttp[39m: GET /api/news-listing-page?populate[hero][populate]=*&populate[press_kit][populate]=*&populate[grid][populate][backdrop_image]=true&populate[grid][populate][filter_pills][populate][cards][populate]=*&populate[seo][populate]=* (324 ms) 200
+[2026-07-11 05:23:21.556] [32mhttp[39m: GET /api/som-page?populate[hero][populate]=*&populate[features][populate][icon_background]=true&populate[features][populate][cards][populate]=*&populate[ecosystem][populate][background_image]=true&populate[ecosystem][populate][chip_image]=true&populate[ecosystem][populate][cards][populate]=*&populate[inside_module][populate]=*&populate[prototype][populate]=*&populate[intelligence][populate]=*&populate[ready_to_deploy][populate]=*&populate[footer_merge][populate]=*&populate[seo][populate]=* (388 ms) 200
+[2026-07-11 05:23:21.589] [32mhttp[39m: GET /api/technology-page?populate[hero][populate]=*&populate[problem][populate][background_image]=true&populate[problem][populate][comparison_cards][populate]=*&populate[architecture][populate]=*&populate[pillars][populate][pillars][populate]=*&populate[modes][populate]=*&populate[graph][populate]=*&populate[silicon][populate]=*&populate[efficiency][populate]=*&populate[bottom_cta][populate]=*&populate[seo][populate]=* (436 ms) 200
+[2026-07-11 05:23:21.669] [32mhttp[39m: GET /api/home-page?populate[hero][populate]=*&populate[measured_proof][populate][stat_cards][populate]=*&populate[technology][populate][background_visual]=true&populate[technology][populate][features][populate]=*&populate[platform_scale][populate]=*&populate[applications][populate][tabs][populate]=*&populate[applications][populate][cta][populate]=*&populate[developer_platform][populate][cards][populate]=*&populate[ecosystem][populate][silicon_partners][populate]=*&populate[ecosystem][populate][development_partners][populate]=*&populate[ecosystem][populate][cta][populate]=*&populate[latest_news][populate][cards][populate]=*&populate[seo][populate]=* (520 ms) 200
+[2026-07-11 05:23:22.386] [32mhttp[39m: GET /api/products-page?populate[hero][populate]=*&populate[features][populate][feature_cards][populate]=*&populate[always_on][populate][image]=true&populate[always_on][populate][stats][populate]=*&populate[use_cases][populate][tabs][populate]=*&populate[measured][populate]=*&populate[architecture][populate][image]=true&populate[architecture][populate][stats][populate]=*&populate[modelforge][populate]=*&populate[bench_to_volume][populate]=*&populate[full_picture][populate][image]=true&populate[full_picture][populate][callouts][populate]=*&populate[start_building][populate]=*&populate[seo][populate]=* (1236 ms) 200
+[2026-07-11 05:27:02.420] [32minfo[39m: File changed: C:\Users\speed\Documents\scraft\ambient\cms\src\components\contact\schedule-card.json
+[2026-07-11 05:27:09.649] [32minfo[39m: Shutting down Strapi
+[2026-07-11 05:27:09.710] [32minfo[39m: Strapi has been shut down
+[2026-07-11 05:27:30.638] [33mwarn[39m: The strapi::cors middleware no longer supports the `enabled` option. Using it to conditionally enable CORS might cause an insecure default. To disable strapi::cors, remove it from the exported array in config/middleware.js
+[2026-07-11 05:27:31.502] [33mwarn[39m: [email]: The "sendmail" email provider is still supported, but for most production setups that use a dedicated SMTP relay, consider switching to @strapi/provider-email-nodemailer (set `provider` to `"nodemailer"` in your email plugin config). This message is only shown in non-production environments.
+Adding missing images to existing latest_news cards...
+Seeded missing images in latest_news successfully!
+
+ Project information
+
+[90m╭────────────────────[39m[90m┬──────────────────────────────────────────────────╮[39m
+[90m│[39m Time               [90m│[39m Sat Jul 11 2026 05:27:42 GMT-0700 (Pacific Dayl… [90m│[39m
+[90m│[39m Launched in        [90m│[39m 18192 ms                                         [90m│[39m
+[90m│[39m Environment        [90m│[39m development                                      [90m│[39m
+[90m│[39m Process PID        [90m│[39m 23024                                            [90m│[39m
+[90m│[39m Version            [90m│[39m 5.50.0 (node v24.16.0)                           [90m│[39m
+[90m│[39m Edition            [90m│[39m Community                                        [90m│[39m
+[90m│[39m Database           [90m│[39m postgres                                         [90m│[39m
+[90m│[39m Database name      [90m│[39m ambient_cms                                      [90m│[39m
+[90m╰────────────────────[39m[90m┴──────────────────────────────────────────────────╯[39m
+
+ Actions available
+
+Welcome back!
+To access the server ⚡️, go to:
+http://localhost:1338
+
+[2026-07-11 05:27:42.141] [32minfo[39m: Strapi started successfully
+[2026-07-11 05:30:16.049] [32mhttp[39m: GET /api/applications-page?populate[hero][populate]=*&populate[dvk][populate][background_image]=true&populate[dvk][populate][bottom_background]=true&populate[dvk][populate][orbit_visual]=true&populate[dvk][populate][center_card][populate]=*&populate[dvk][populate][satellite_cards][populate]=*&populate[continuum][populate]=*&populate[articles][populate][articles][populate]=*&populate[wins][populate][cards][populate]=*&populate[som][populate]=*&populate[seo][populate]=* (309 ms) 200
+[2026-07-11 05:30:16.093] [32mhttp[39m: GET /api/careers-page?populate[hero][populate]=*&populate[best_work][populate][cards][populate]=*&populate[dna][populate]=*&populate[open_roles][populate][job_categories][populate][jobs][populate]=*&populate[benefits][populate][cards][populate]=*&populate[bottom_cta][populate]=*&populate[seo][populate]=* (323 ms) 200
+[2026-07-11 05:30:16.134] [32mhttp[39m: GET /api/wearables-page?populate[hero][populate]=*&populate[carousel][populate]=*&populate[paradigm][populate]=*&populate[subconscious][populate]=*&populate[empirical_proof][populate]=*&populate[lab_to_product][populate]=*&populate[footer_accent][populate]=*&populate[seo][populate]=* (368 ms) 200
+[2026-07-11 05:30:16.151] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (297 ms) 200
+[2026-07-11 05:30:16.158] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (300 ms) 200
+[2026-07-11 05:30:16.163] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (300 ms) 200
+[2026-07-11 05:30:16.171] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (319 ms) 200
+[2026-07-11 05:30:16.181] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (326 ms) 200
+[2026-07-11 05:30:16.189] [32mhttp[39m: GET /api/contact-page?populate[hero][populate]=*&populate[resources][populate][ctas][populate]=*&populate[map][populate][globe_image]=true&populate[map][populate][map_base]=true&populate[map][populate][locations][populate]=*&populate[schedule][populate][icon]=true&populate[schedule][populate][cards][populate]=*&populate[form][populate]=* (325 ms) 200
+[2026-07-11 05:30:16.204] [32mhttp[39m: GET /api/company-page?populate[hero][populate]=*&populate[mission][populate]=*&populate[leadership][populate][team][populate]=*&populate[dna][populate]=*&populate[ecosystem][populate][map_image]=true&populate[ecosystem][populate][columns][populate]=*&populate[tech_partners][populate][partners][populate]=*&populate[articles][populate][featured_article][populate]=*&populate[articles][populate][compact_articles][populate]=*&populate[engagement][populate][background_image]=true&populate[engagement][populate][cards][populate]=*&populate[engagement][populate][join_team][populate]=*&populate[seo][populate]=* (383 ms) 200
+[2026-07-11 05:30:16.233] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (386 ms) 200
+[2026-07-11 05:30:16.238] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (398 ms) 200
+[2026-07-11 05:30:16.258] [32mhttp[39m: GET /api/developer-page?populate[hero][populate]=*&populate[code][populate][articles][populate]=*&populate[pipeline][populate][tag]=true&populate[pipeline][populate][tabs][populate]=*&populate[coming_soon][populate]=*&populate[modules][populate][modules][populate]=*&populate[copilots][populate][copilots][populate]=*&populate[seo][populate]=* (391 ms) 200
+[2026-07-11 05:30:16.725] [32mhttp[39m: GET /api/dvk-page?populate[hero][populate]=*&populate[hardware_stack][populate]=*&populate[demos][populate][demo_cards][populate]=*&populate[modelforge][populate]=*&populate[integrated_modules][populate]=*&populate[seo][populate]=* (129 ms) 200
+[2026-07-11 05:30:16.735] [32mhttp[39m: GET /api/news-listing-page?populate[hero][populate]=*&populate[press_kit][populate]=*&populate[grid][populate][backdrop_image]=true&populate[grid][populate][filter_pills][populate][cards][populate]=*&populate[seo][populate]=* (138 ms) 200
+[2026-07-11 05:30:16.743] [32mhttp[39m: GET /api/resources-page?populate[hero][populate]=*&populate[featured][populate][cards][populate]=*&populate[building][populate]=*&populate[content][populate]=*&populate[news_cta][populate]=*&populate[seo][populate]=* (144 ms) 200
+[2026-07-11 05:30:16.787] [32mhttp[39m: GET /api/home-page?populate[hero][populate]=*&populate[measured_proof][populate][stat_cards][populate]=*&populate[technology][populate][background_visual]=true&populate[technology][populate][features][populate]=*&populate[platform_scale][populate]=*&populate[applications][populate][tabs][populate]=*&populate[applications][populate][cta][populate]=*&populate[developer_platform][populate][cards][populate]=*&populate[ecosystem][populate][silicon_partners][populate]=*&populate[ecosystem][populate][development_partners][populate]=*&populate[ecosystem][populate][cta][populate]=*&populate[latest_news][populate][cards][populate]=*&populate[seo][populate]=* (189 ms) 200
+[2026-07-11 05:30:16.816] [32mhttp[39m: GET /api/som-page?populate[hero][populate]=*&populate[features][populate][icon_background]=true&populate[features][populate][cards][populate]=*&populate[ecosystem][populate][background_image]=true&populate[ecosystem][populate][chip_image]=true&populate[ecosystem][populate][cards][populate]=*&populate[inside_module][populate]=*&populate[prototype][populate]=*&populate[intelligence][populate]=*&populate[ready_to_deploy][populate]=*&populate[footer_merge][populate]=*&populate[seo][populate]=* (216 ms) 200
+[2026-07-11 05:30:16.827] [32mhttp[39m: GET /api/articles?populate=*&sort[0]=display_order:asc&sort[1]=date:desc&pagination[pageSize]=100 (28 ms) 200
+[2026-07-11 05:30:16.850] [32mhttp[39m: GET /api/technology-page?populate[hero][populate]=*&populate[problem][populate][background_image]=true&populate[problem][populate][comparison_cards][populate]=*&populate[architecture][populate]=*&populate[pillars][populate][pillars][populate]=*&populate[modes][populate]=*&populate[graph][populate]=*&populate[silicon][populate]=*&populate[efficiency][populate]=*&populate[bottom_cta][populate]=*&populate[seo][populate]=* (245 ms) 200
+[2026-07-11 05:30:16.872] [32mhttp[39m: GET /api/products-page?populate[hero][populate]=*&populate[features][populate][feature_cards][populate]=*&populate[always_on][populate][image]=true&populate[always_on][populate][stats][populate]=*&populate[use_cases][populate][tabs][populate]=*&populate[measured][populate]=*&populate[architecture][populate][image]=true&populate[architecture][populate][stats][populate]=*&populate[modelforge][populate]=*&populate[bench_to_volume][populate]=*&populate[full_picture][populate][image]=true&populate[full_picture][populate][callouts][populate]=*&populate[start_building][populate]=*&populate[seo][populate]=* (268 ms) 200
+[2026-07-11 05:34:08.510] [32mhttp[39m: GET /api/home-page (10 ms) 200
+[2026-07-11 05:34:30.867] [32mhttp[39m: GET /api/global-settings (7 ms) 401
+[2026-07-11 05:34:40.474] [32mhttp[39m: POST /api/upload (11 ms) 401
+[2m5:35:58 AM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2m.strapi/client/index.html[22m
+[2026-07-11 05:36:31.830] [32mhttp[39m: GET / (3 ms) 302
+[2026-07-11 05:36:32.087] [32mhttp[39m: GET /admin (254 ms) 200
+[2026-07-11 05:36:33.019] [32mhttp[39m: GET /admin/project-type (3 ms) 200
+[2026-07-11 05:36:33.040] [31merror[39m: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+Error: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+    at Object.openSync (node:fs:561:18)
+    at Object.readFileSync (node:fs:445:35)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-favicon\index.js:50:28
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at dummyMiddleware (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\services\server\middleware.js:30:36)
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\body.js:50:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\powered-by.js:12:9
+    at async cors (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@koa\cors\index.js:106:16)
+[2026-07-11 05:36:33.057] [32mhttp[39m: GET /favicon.ico (18 ms) 500
+[2026-07-11 05:36:33.171] [32mhttp[39m: GET /admin/init (7 ms) 200
+[2026-07-11 05:36:33.259] [31merror[39m: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+Error: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+    at Object.openSync (node:fs:561:18)
+    at Object.readFileSync (node:fs:445:35)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-favicon\index.js:50:28
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at dummyMiddleware (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\services\server\middleware.js:30:36)
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\body.js:50:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\powered-by.js:12:9
+    at async cors (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@koa\cors\index.js:106:16)
+[2026-07-11 05:36:33.261] [32mhttp[39m: GET /favicon.ico (2 ms) 500
+[2026-07-11 05:36:39.294] [32mhttp[39m: POST /admin/login (134 ms) 200
+[2026-07-11 05:36:39.332] [32mhttp[39m: GET /admin/users/me (27 ms) 200
+[2026-07-11 05:36:39.352] [32mhttp[39m: GET /admin/users/me/permissions (18 ms) 200
+[2026-07-11 05:36:39.374] [32mhttp[39m: GET /admin/telemetry-properties (20 ms) 200
+[2026-07-11 05:36:39.389] [32mhttp[39m: GET /admin/information (14 ms) 200
+[2026-07-11 05:36:39.391] [31merror[39m: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+Error: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+    at Object.openSync (node:fs:561:18)
+    at Object.readFileSync (node:fs:445:35)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-favicon\index.js:50:28
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at dummyMiddleware (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\services\server\middleware.js:30:36)
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\body.js:50:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\powered-by.js:12:9
+    at async cors (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@koa\cors\index.js:106:16)
+[2026-07-11 05:36:39.392] [32mhttp[39m: GET /favicon.ico (1 ms) 500
+[2026-07-11 05:36:39.476] [32mhttp[39m: GET /admin/guided-tour-meta (17 ms) 200
+[2026-07-11 05:36:39.483] [32mhttp[39m: GET /admin/license-limit-information (5 ms) 200
+[2026-07-11 05:36:39.499] [32mhttp[39m: GET /admin/homepage/layout (15 ms) 200
+[2026-07-11 05:36:39.550] [32mhttp[39m: GET /content-manager/homepage/count-documents (50 ms) 200
+[2026-07-11 05:36:39.587] [32mhttp[39m: GET /admin/homepage/key-statistics (34 ms) 200
+[2026-07-11 05:36:39.765] [32mhttp[39m: GET /content-manager/homepage/recent-documents?action=update (49 ms) 200
+[2026-07-11 05:36:39.801] [32mhttp[39m: GET /content-manager/homepage/recent-documents?action=publish (83 ms) 200
+[2026-07-11 05:36:42.975] [31merror[39m: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+Error: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+    at Object.openSync (node:fs:561:18)
+    at Object.readFileSync (node:fs:445:35)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-favicon\index.js:50:28
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at dummyMiddleware (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\services\server\middleware.js:30:36)
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\body.js:50:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\powered-by.js:12:9
+    at async cors (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@koa\cors\index.js:106:16)
+[2026-07-11 05:36:42.977] [32mhttp[39m: GET /favicon.ico (3 ms) 500
+[2026-07-11 05:36:43.025] [31merror[39m: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+Error: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+    at Object.openSync (node:fs:561:18)
+    at Object.readFileSync (node:fs:445:35)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-favicon\index.js:50:28
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at dummyMiddleware (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\services\server\middleware.js:30:36)
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\body.js:50:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\powered-by.js:12:9
+    at async cors (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@koa\cors\index.js:106:16)
+[2026-07-11 05:36:43.026] [32mhttp[39m: GET /favicon.ico (1 ms) 500
+[2026-07-11 05:36:43.893] [31merror[39m: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+Error: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+    at Object.openSync (node:fs:561:18)
+    at Object.readFileSync (node:fs:445:35)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-favicon\index.js:50:28
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at dummyMiddleware (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\services\server\middleware.js:30:36)
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\body.js:50:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\powered-by.js:12:9
+    at async cors (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@koa\cors\index.js:106:16)
+[2026-07-11 05:36:43.894] [32mhttp[39m: GET /favicon.ico (2 ms) 500
+[2026-07-11 05:36:43.905] [32mhttp[39m: GET /admin/api-tokens (39 ms) 200
+[2026-07-11 05:36:46.157] [32mhttp[39m: GET /admin/content-api/permissions (15 ms) 200
+[2026-07-11 05:36:46.161] [31merror[39m: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+Error: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+    at Object.openSync (node:fs:561:18)
+    at Object.readFileSync (node:fs:445:35)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-favicon\index.js:50:28
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at dummyMiddleware (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\services\server\middleware.js:30:36)
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\body.js:50:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\powered-by.js:12:9
+    at async cors (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@koa\cors\index.js:106:16)
+[2026-07-11 05:36:46.162] [32mhttp[39m: GET /favicon.ico (2 ms) 500
+[2026-07-11 05:36:46.173] [32mhttp[39m: GET /admin/content-api/routes (29 ms) 200
+[2026-07-11 05:36:46.187] [32mhttp[39m: GET /admin/api-tokens/3 (42 ms) 200
+[2026-07-11 05:36:50.415] [33mwarn[39m: Encryption key is missing from admin.secrets.encryptionKey configuration
+[2026-07-11 05:36:50.419] [32mhttp[39m: POST /admin/api-tokens/3/regenerate (22 ms) 201
+[2026-07-11 05:36:52.795] [32mhttp[39m: PUT /admin/api-tokens/3 (28 ms) 200
+[2026-07-11 05:37:28.571] [32mhttp[39m: PUT /admin/api-tokens/3 (28 ms) 200
+[2026-07-11 05:37:37.313] [32mhttp[39m: GET /api/global-settings (13 ms) 200
+[2026-07-11 05:37:37.363] [33mwarn[39m: No upload security configuration found. Consider configuring plugin.upload.security for enhanced file validation.
+[2026-07-11 05:37:37.971] [32mhttp[39m: POST /api/upload (613 ms) 201
+[2026-07-11 05:37:38.022] [33mwarn[39m: No upload security configuration found. Consider configuring plugin.upload.security for enhanced file validation.
+[2026-07-11 05:37:38.415] [32mhttp[39m: POST /api/upload (401 ms) 201
+[2026-07-11 05:37:38.459] [33mwarn[39m: No upload security configuration found. Consider configuring plugin.upload.security for enhanced file validation.
+[2026-07-11 05:37:38.966] [32mhttp[39m: POST /api/upload (511 ms) 201
+[2026-07-11 05:37:39.008] [32mhttp[39m: PUT /api/home-page (5 ms) 400
+[2026-07-11 05:38:25.466] [32mhttp[39m: GET /api/global-settings (4 ms) 200
+[2026-07-11 05:38:26.012] [32mhttp[39m: PUT /api/home-page (508 ms) 200
+[2026-07-11 05:38:26.299] [32mhttp[39m: PUT /api/home-page?status=published (279 ms) 200
+[2026-07-11 05:38:47.636] [32mhttp[39m: GET /api/home-page?populate%5Bapplications%5D%5Bpopulate%5D%5Btabs%5D%5Bpopulate%5D=*&populate%5Bplatform_scale%5D%5Bpopulate%5D%5Bproducts%5D%5Bpopulate%5D=*&populate%5Blatest_news%5D%5Bpopulate%5D%5Bcards%5D%5Bpopulate%5D=* (32 ms) 200
+[2026-07-11 05:39:13.709] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (163 ms) 200
+[2026-07-11 05:39:13.720] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (177 ms) 200
+[2026-07-11 05:39:13.728] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (183 ms) 200
+[2026-07-11 05:39:13.732] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (187 ms) 200
+[2026-07-11 05:39:13.746] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (202 ms) 200
+[2026-07-11 05:39:13.755] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (212 ms) 200
+[2026-07-11 05:39:13.761] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (215 ms) 200
+[2026-07-11 05:39:13.789] [32mhttp[39m: GET /api/company-page?populate[hero][populate]=*&populate[mission][populate]=*&populate[leadership][populate][team][populate]=*&populate[dna][populate]=*&populate[ecosystem][populate][map_image]=true&populate[ecosystem][populate][columns][populate]=*&populate[tech_partners][populate][partners][populate]=*&populate[articles][populate][featured_article][populate]=*&populate[articles][populate][compact_articles][populate]=*&populate[engagement][populate][background_image]=true&populate[engagement][populate][cards][populate]=*&populate[engagement][populate][join_team][populate]=*&populate[seo][populate]=* (248 ms) 200
+[2026-07-11 05:39:13.798] [32mhttp[39m: GET /api/contact-page?populate[hero][populate]=*&populate[resources][populate][ctas][populate]=*&populate[map][populate][globe_image]=true&populate[map][populate][map_base]=true&populate[map][populate][locations][populate]=*&populate[schedule][populate][icon]=true&populate[schedule][populate][cards][populate]=*&populate[form][populate]=* (251 ms) 200
+[2026-07-11 05:39:13.826] [32mhttp[39m: GET /api/careers-page?populate[hero][populate]=*&populate[best_work][populate][cards][populate]=*&populate[dna][populate]=*&populate[open_roles][populate][job_categories][populate][jobs][populate]=*&populate[benefits][populate][cards][populate]=*&populate[bottom_cta][populate]=*&populate[seo][populate]=* (278 ms) 200
+[2026-07-11 05:39:13.837] [32mhttp[39m: GET /api/developer-page?populate[hero][populate]=*&populate[code][populate][articles][populate]=*&populate[pipeline][populate][tag]=true&populate[pipeline][populate][tabs][populate]=*&populate[coming_soon][populate]=*&populate[modules][populate][modules][populate]=*&populate[copilots][populate][copilots][populate]=*&populate[seo][populate]=* (288 ms) 200
+[2026-07-11 05:39:13.844] [32mhttp[39m: GET /api/wearables-page?populate[hero][populate]=*&populate[carousel][populate]=*&populate[paradigm][populate]=*&populate[subconscious][populate]=*&populate[empirical_proof][populate]=*&populate[lab_to_product][populate]=*&populate[footer_accent][populate]=*&populate[seo][populate]=* (296 ms) 200
+[2026-07-11 05:39:13.854] [32mhttp[39m: GET /api/applications-page?populate[hero][populate]=*&populate[dvk][populate][background_image]=true&populate[dvk][populate][bottom_background]=true&populate[dvk][populate][orbit_visual]=true&populate[dvk][populate][center_card][populate]=*&populate[dvk][populate][satellite_cards][populate]=*&populate[continuum][populate]=*&populate[articles][populate][articles][populate]=*&populate[wins][populate][cards][populate]=*&populate[som][populate]=*&populate[seo][populate]=* (306 ms) 200
+[2026-07-11 05:39:14.301] [32mhttp[39m: GET /api/news-listing-page?populate[hero][populate]=*&populate[press_kit][populate]=*&populate[grid][populate][backdrop_image]=true&populate[grid][populate][filter_pills][populate][cards][populate]=*&populate[seo][populate]=* (132 ms) 200
+[2026-07-11 05:39:14.332] [32mhttp[39m: GET /api/home-page?populate[hero][populate]=*&populate[measured_proof][populate][stat_cards][populate]=*&populate[technology][populate][background_visual]=true&populate[technology][populate][features][populate]=*&populate[platform_scale][populate]=*&populate[applications][populate][tabs][populate]=*&populate[applications][populate][cta][populate]=*&populate[developer_platform][populate][cards][populate]=*&populate[ecosystem][populate][silicon_partners][populate]=*&populate[ecosystem][populate][development_partners][populate]=*&populate[ecosystem][populate][cta][populate]=*&populate[latest_news][populate][cards][populate]=*&populate[seo][populate]=* (167 ms) 200
+[2026-07-11 05:39:14.341] [32mhttp[39m: GET /api/resources-page?populate[hero][populate]=*&populate[featured][populate][cards][populate]=*&populate[building][populate]=*&populate[content][populate]=*&populate[news_cta][populate]=*&populate[seo][populate]=* (172 ms) 200
+[2026-07-11 05:39:14.354] [32mhttp[39m: GET /api/dvk-page?populate[hero][populate]=*&populate[hardware_stack][populate]=*&populate[demos][populate][demo_cards][populate]=*&populate[modelforge][populate]=*&populate[integrated_modules][populate]=*&populate[seo][populate]=* (184 ms) 200
+[2026-07-11 05:39:14.416] [32mhttp[39m: GET /api/som-page?populate[hero][populate]=*&populate[features][populate][icon_background]=true&populate[features][populate][cards][populate]=*&populate[ecosystem][populate][background_image]=true&populate[ecosystem][populate][chip_image]=true&populate[ecosystem][populate][cards][populate]=*&populate[inside_module][populate]=*&populate[prototype][populate]=*&populate[intelligence][populate]=*&populate[ready_to_deploy][populate]=*&populate[footer_merge][populate]=*&populate[seo][populate]=* (246 ms) 200
+[2026-07-11 05:39:14.425] [32mhttp[39m: GET /api/articles?populate=*&sort[0]=display_order:asc&sort[1]=date:desc&pagination[pageSize]=100 (8 ms) 200
+[2026-07-11 05:39:14.451] [32mhttp[39m: GET /api/technology-page?populate[hero][populate]=*&populate[problem][populate][background_image]=true&populate[problem][populate][comparison_cards][populate]=*&populate[architecture][populate]=*&populate[pillars][populate][pillars][populate]=*&populate[modes][populate]=*&populate[graph][populate]=*&populate[silicon][populate]=*&populate[efficiency][populate]=*&populate[bottom_cta][populate]=*&populate[seo][populate]=* (280 ms) 200
+[2026-07-11 05:39:14.461] [32mhttp[39m: GET /api/products-page?populate[hero][populate]=*&populate[features][populate][feature_cards][populate]=*&populate[always_on][populate][image]=true&populate[always_on][populate][stats][populate]=*&populate[use_cases][populate][tabs][populate]=*&populate[measured][populate]=*&populate[architecture][populate][image]=true&populate[architecture][populate][stats][populate]=*&populate[modelforge][populate]=*&populate[bench_to_volume][populate]=*&populate[full_picture][populate][image]=true&populate[full_picture][populate][callouts][populate]=*&populate[start_building][populate]=*&populate[seo][populate]=* (290 ms) 200
+[2026-07-11 05:50:06.556] [32mhttp[39m: GET /admin/settings/api-tokens/3 (140 ms) 200
+[2026-07-11 05:50:07.228] [32mhttp[39m: GET /admin/project-type (11 ms) 200
+[2026-07-11 05:50:07.243] [31merror[39m: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+Error: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+    at Object.openSync (node:fs:561:18)
+    at Object.readFileSync (node:fs:445:35)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-favicon\index.js:50:28
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at dummyMiddleware (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\services\server\middleware.js:30:36)
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\body.js:50:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\powered-by.js:12:9
+    at async cors (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@koa\cors\index.js:106:16)
+[2026-07-11 05:50:07.247] [32mhttp[39m: GET /favicon.ico (7 ms) 500
+[2026-07-11 05:50:07.695] [32mhttp[39m: GET /admin/init (233 ms) 200
+[2026-07-11 05:50:07.854] [32mhttp[39m: GET /admin/users/me (361 ms) 200
+[2026-07-11 05:50:07.867] [32mhttp[39m: GET /admin/users/me/permissions (372 ms) 200
+[2026-07-11 05:50:07.870] [32mhttp[39m: GET /admin/information (151 ms) 200
+[2026-07-11 05:50:07.917] [32mhttp[39m: GET /admin/telemetry-properties (45 ms) 200
+[2026-07-11 05:50:07.994] [32mhttp[39m: GET /admin/license-limit-information (12 ms) 200
+[2026-07-11 05:50:08.031] [32mhttp[39m: GET /admin/guided-tour-meta (52 ms) 200
+[2026-07-11 05:50:08.108] [32mhttp[39m: GET /admin/content-api/permissions (57 ms) 200
+[2026-07-11 05:50:08.178] [32mhttp[39m: GET /admin/content-api/routes (122 ms) 200
+[2026-07-11 05:50:08.248] [32mhttp[39m: GET /admin/api-tokens/3 (190 ms) 200
+[2026-07-11 05:54:19.711] [32mhttp[39m: GET /admin/settings/api-tokens/3 (10 ms) 200
+[2026-07-11 05:54:20.777] [32mhttp[39m: GET /admin/project-type (19 ms) 200
+[2026-07-11 05:54:20.934] [31merror[39m: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+Error: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+    at Object.openSync (node:fs:561:18)
+    at Object.readFileSync (node:fs:445:35)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-favicon\index.js:50:28
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at dummyMiddleware (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\services\server\middleware.js:30:36)
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\body.js:50:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\powered-by.js:12:9
+    at async cors (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@koa\cors\index.js:106:16)
+[2026-07-11 05:54:20.937] [32mhttp[39m: GET /favicon.ico (4 ms) 500
+[2026-07-11 05:54:21.318] [32mhttp[39m: GET /admin/init (16 ms) 200
+[2026-07-11 05:54:21.351] [32mhttp[39m: GET /admin/users/me (43 ms) 200
+[2026-07-11 05:54:21.383] [32mhttp[39m: GET /admin/users/me/permissions (69 ms) 200
+[2026-07-11 05:54:21.431] [32mhttp[39m: GET /admin/information (39 ms) 200
+[2026-07-11 05:54:21.442] [32mhttp[39m: GET /admin/telemetry-properties (47 ms) 200
+[2026-07-11 05:54:21.755] [32mhttp[39m: GET /admin/license-limit-information (9 ms) 200
+[2026-07-11 05:54:21.797] [32mhttp[39m: GET /admin/guided-tour-meta (63 ms) 200
+[2026-07-11 05:54:21.890] [32mhttp[39m: GET /admin/content-api/permissions (36 ms) 200
+[2026-07-11 05:54:21.910] [32mhttp[39m: GET /admin/content-api/routes (51 ms) 200
+[2026-07-11 05:54:21.945] [32mhttp[39m: GET /admin/api-tokens/3 (82 ms) 200
+[2026-07-11 05:55:43.686] [32mhttp[39m: GET /admin/settings/api-tokens/3 (10 ms) 200
+[2026-07-11 05:55:44.523] [32mhttp[39m: GET /admin/project-type (3 ms) 200
+[2026-07-11 05:55:44.558] [31merror[39m: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+Error: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+    at Object.openSync (node:fs:561:18)
+    at Object.readFileSync (node:fs:445:35)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-favicon\index.js:50:28
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at dummyMiddleware (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\services\server\middleware.js:30:36)
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\body.js:50:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\powered-by.js:12:9
+    at async cors (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@koa\cors\index.js:106:16)
+[2026-07-11 05:55:44.573] [32mhttp[39m: GET /favicon.ico (16 ms) 500
+[2026-07-11 05:55:44.827] [32mhttp[39m: GET /admin/init (25 ms) 200
+[2026-07-11 05:55:44.862] [32mhttp[39m: GET /admin/users/me (46 ms) 200
+[2026-07-11 05:55:44.914] [32mhttp[39m: GET /admin/users/me/permissions (95 ms) 200
+[2026-07-11 05:55:45.097] [32mhttp[39m: GET /admin/information (216 ms) 200
+[2026-07-11 05:55:45.227] [32mhttp[39m: GET /admin/telemetry-properties (345 ms) 200
+[2026-07-11 05:55:45.496] [32mhttp[39m: GET /admin/license-limit-information (233 ms) 200
+[2026-07-11 05:55:45.645] [32mhttp[39m: GET /admin/content-api/permissions (342 ms) 200
+[2026-07-11 05:55:45.672] [32mhttp[39m: GET /admin/guided-tour-meta (441 ms) 200
+[2026-07-11 05:55:45.695] [32mhttp[39m: GET /admin/content-api/routes (31 ms) 200
+[2026-07-11 05:55:45.728] [32mhttp[39m: GET /admin/api-tokens/3 (61 ms) 200
+[2026-07-11 06:03:52.924] [32mhttp[39m: GET /admin/settings/api-tokens/3 (143 ms) 200
+[2026-07-11 06:03:59.961] [32mhttp[39m: GET /admin/settings/api-tokens/3 (30 ms) 200
+[2026-07-11 06:04:16.504] [32mhttp[39m: GET /admin/settings/api-tokens/3 (26 ms) 200
+[2026-07-11 06:04:17.824] [32mhttp[39m: GET /admin/project-type (370 ms) 200
+[2026-07-11 06:04:17.872] [31merror[39m: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+Error: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+    at Object.openSync (node:fs:561:18)
+    at Object.readFileSync (node:fs:445:35)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-favicon\index.js:50:28
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at dummyMiddleware (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\services\server\middleware.js:30:36)
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\body.js:50:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\powered-by.js:12:9
+    at async cors (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@koa\cors\index.js:106:16)
+[2026-07-11 06:04:17.883] [32mhttp[39m: GET /favicon.ico (49 ms) 500
+[2026-07-11 06:04:18.783] [32mhttp[39m: GET /admin/init (150 ms) 200
+[2026-07-11 06:04:19.102] [32mhttp[39m: GET /admin/users/me (408 ms) 200
+[2026-07-11 06:04:19.119] [32mhttp[39m: GET /admin/users/me/permissions (422 ms) 200
+[2026-07-11 06:04:19.196] [32mhttp[39m: GET /admin/information (93 ms) 200
+[2026-07-11 06:04:19.217] [32mhttp[39m: GET /admin/telemetry-properties (112 ms) 200
+[2026-07-11 06:04:19.257] [32mhttp[39m: GET /admin/license-limit-information (4 ms) 200
+[2026-07-11 06:04:19.368] [32mhttp[39m: GET /admin/guided-tour-meta (119 ms) 200
+[2026-07-11 06:04:19.912] [32mhttp[39m: GET /admin/content-api/routes (579 ms) 200
+[2026-07-11 06:04:19.988] [32mhttp[39m: GET /admin/content-api/permissions (657 ms) 200
+[2026-07-11 06:04:20.048] [32mhttp[39m: GET /admin/api-tokens/3 (713 ms) 200
+[2026-07-11 06:06:40.885] [32mhttp[39m: GET /admin/init (7 ms) 200
+[2026-07-11 06:06:40.887] [31merror[39m: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+Error: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+    at Object.openSync (node:fs:561:18)
+    at Object.readFileSync (node:fs:445:35)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-favicon\index.js:50:28
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at dummyMiddleware (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\services\server\middleware.js:30:36)
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\body.js:50:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\powered-by.js:12:9
+    at async cors (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@koa\cors\index.js:106:16)
+[2026-07-11 06:06:40.888] [32mhttp[39m: GET /favicon.ico (1 ms) 500
+[2026-07-11 06:10:31.762] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (1107 ms) 200
+[2026-07-11 06:10:31.787] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (1125 ms) 200
+[2026-07-11 06:10:31.794] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (1141 ms) 200
+[2026-07-11 06:10:31.807] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (1153 ms) 200
+[2026-07-11 06:10:31.819] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (1168 ms) 200
+[2026-07-11 06:10:31.826] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (1170 ms) 200
+[2026-07-11 06:10:31.842] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (1188 ms) 200
+[2026-07-11 06:10:31.855] [32mhttp[39m: GET /api/developer-page?populate[hero][populate]=*&populate[code][populate][articles][populate]=*&populate[pipeline][populate][tag]=true&populate[pipeline][populate][tabs][populate]=*&populate[coming_soon][populate]=*&populate[modules][populate][modules][populate]=*&populate[copilots][populate][copilots][populate]=*&populate[seo][populate]=* (1204 ms) 200
+[2026-07-11 06:10:31.875] [32mhttp[39m: GET /api/company-page?populate[hero][populate]=*&populate[mission][populate]=*&populate[leadership][populate][team][populate]=*&populate[dna][populate]=*&populate[ecosystem][populate][map_image]=true&populate[ecosystem][populate][columns][populate]=*&populate[tech_partners][populate][partners][populate]=*&populate[articles][populate][featured_article][populate]=*&populate[articles][populate][compact_articles][populate]=*&populate[engagement][populate][background_image]=true&populate[engagement][populate][cards][populate]=*&populate[engagement][populate][join_team][populate]=*&populate[seo][populate]=* (1232 ms) 200
+[2026-07-11 06:10:31.891] [32mhttp[39m: GET /api/applications-page?populate[hero][populate]=*&populate[dvk][populate][background_image]=true&populate[dvk][populate][bottom_background]=true&populate[dvk][populate][orbit_visual]=true&populate[dvk][populate][center_card][populate]=*&populate[dvk][populate][satellite_cards][populate]=*&populate[continuum][populate]=*&populate[articles][populate][articles][populate]=*&populate[wins][populate][cards][populate]=*&populate[som][populate]=*&populate[seo][populate]=* (1219 ms) 200
+[2026-07-11 06:10:31.922] [32mhttp[39m: GET /api/contact-page?populate[hero][populate]=*&populate[resources][populate][ctas][populate]=*&populate[map][populate][globe_image]=true&populate[map][populate][map_base]=true&populate[map][populate][locations][populate]=*&populate[schedule][populate][icon]=true&populate[schedule][populate][cards][populate]=*&populate[form][populate]=* (1242 ms) 200
+[2026-07-11 06:10:31.944] [32mhttp[39m: GET /api/wearables-page?populate[hero][populate]=*&populate[carousel][populate]=*&populate[paradigm][populate]=*&populate[subconscious][populate]=*&populate[empirical_proof][populate]=*&populate[lab_to_product][populate]=*&populate[footer_accent][populate]=*&populate[seo][populate]=* (1270 ms) 200
+[2026-07-11 06:10:31.950] [32mhttp[39m: GET /api/careers-page?populate[hero][populate]=*&populate[best_work][populate][cards][populate]=*&populate[dna][populate]=*&populate[open_roles][populate][job_categories][populate][jobs][populate]=*&populate[benefits][populate][cards][populate]=*&populate[bottom_cta][populate]=*&populate[seo][populate]=* (1275 ms) 200
+[2026-07-11 06:10:32.451] [32mhttp[39m: GET /api/resources-page?populate[hero][populate]=*&populate[featured][populate][cards][populate]=*&populate[building][populate]=*&populate[content][populate]=*&populate[news_cta][populate]=*&populate[seo][populate]=* (150 ms) 200
+[2026-07-11 06:10:32.509] [32mhttp[39m: GET /api/news-listing-page?populate[hero][populate]=*&populate[press_kit][populate]=*&populate[grid][populate][backdrop_image]=true&populate[grid][populate][filter_pills][populate][cards][populate]=*&populate[seo][populate]=* (211 ms) 200
+[2026-07-11 06:10:32.535] [32mhttp[39m: GET /api/articles?populate=*&sort[0]=display_order:asc&sort[1]=date:desc&pagination[pageSize]=100 (75 ms) 200
+[2026-07-11 06:10:32.541] [32mhttp[39m: GET /api/dvk-page?populate[hero][populate]=*&populate[hardware_stack][populate]=*&populate[demos][populate][demo_cards][populate]=*&populate[modelforge][populate]=*&populate[integrated_modules][populate]=*&populate[seo][populate]=* (245 ms) 200
+[2026-07-11 06:10:32.570] [32mhttp[39m: GET /api/som-page?populate[hero][populate]=*&populate[features][populate][icon_background]=true&populate[features][populate][cards][populate]=*&populate[ecosystem][populate][background_image]=true&populate[ecosystem][populate][chip_image]=true&populate[ecosystem][populate][cards][populate]=*&populate[inside_module][populate]=*&populate[prototype][populate]=*&populate[intelligence][populate]=*&populate[ready_to_deploy][populate]=*&populate[footer_merge][populate]=*&populate[seo][populate]=* (270 ms) 200
+[2026-07-11 06:10:32.597] [32mhttp[39m: GET /api/home-page?populate[hero][populate]=*&populate[measured_proof][populate][stat_cards][populate]=*&populate[technology][populate][background_visual]=true&populate[technology][populate][features][populate]=*&populate[platform_scale][populate]=*&populate[applications][populate][tabs][populate]=*&populate[applications][populate][cta][populate]=*&populate[developer_platform][populate][cards][populate]=*&populate[ecosystem][populate][silicon_partners][populate]=*&populate[ecosystem][populate][development_partners][populate]=*&populate[ecosystem][populate][cta][populate]=*&populate[latest_news][populate][cards][populate]=*&populate[seo][populate]=* (299 ms) 200
+[2026-07-11 06:10:32.619] [32mhttp[39m: GET /api/products-page?populate[hero][populate]=*&populate[features][populate][feature_cards][populate]=*&populate[always_on][populate][image]=true&populate[always_on][populate][stats][populate]=*&populate[use_cases][populate][tabs][populate]=*&populate[measured][populate]=*&populate[architecture][populate][image]=true&populate[architecture][populate][stats][populate]=*&populate[modelforge][populate]=*&populate[bench_to_volume][populate]=*&populate[full_picture][populate][image]=true&populate[full_picture][populate][callouts][populate]=*&populate[start_building][populate]=*&populate[seo][populate]=* (320 ms) 200
+[2026-07-11 06:10:32.627] [32mhttp[39m: GET /api/technology-page?populate[hero][populate]=*&populate[problem][populate][background_image]=true&populate[problem][populate][comparison_cards][populate]=*&populate[architecture][populate]=*&populate[pillars][populate][pillars][populate]=*&populate[modes][populate]=*&populate[graph][populate]=*&populate[silicon][populate]=*&populate[efficiency][populate]=*&populate[bottom_cta][populate]=*&populate[seo][populate]=* (327 ms) 200
+[2026-07-11 06:10:41.135] [32mhttp[39m: GET /api/contact-page?populate=hero,resources.ctas,map.globe_image,map.map_base,map.locations.indicator_icon,schedule.icon,schedule.cards.image,form.tracks.icon,form.tracks.form (50 ms) 200
+[2026-07-11 06:12:08.501] [32mhttp[39m: GET /admin/auth/login (19 ms) 200
+[2026-07-11 06:12:09.319] [32mhttp[39m: GET /admin/project-type (3 ms) 200
+[2026-07-11 06:12:09.326] [31merror[39m: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+Error: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+    at Object.openSync (node:fs:561:18)
+    at Object.readFileSync (node:fs:445:35)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-favicon\index.js:50:28
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at dummyMiddleware (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\services\server\middleware.js:30:36)
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\body.js:50:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\powered-by.js:12:9
+    at async cors (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@koa\cors\index.js:106:16)
+[2026-07-11 06:12:09.327] [32mhttp[39m: GET /favicon.ico (3 ms) 500
+[2026-07-11 06:12:09.486] [32mhttp[39m: GET /admin/init (14 ms) 200
+[2026-07-11 06:12:09.549] [32mhttp[39m: GET /admin/users/me (23 ms) 401
+[2026-07-11 06:12:09.551] [32mhttp[39m: GET /admin/users/me/permissions (17 ms) 401
+[2026-07-11 06:12:09.646] [32mhttp[39m: GET /admin/init (14 ms) 200
+[2026-07-11 06:12:09.784] [32mhttp[39m: POST /admin/access-token (101 ms) 200
+[2026-07-11 06:12:09.953] [32mhttp[39m: GET /admin/users/me (59 ms) 200
+[2026-07-11 06:12:09.991] [32mhttp[39m: GET /admin/users/me/permissions (94 ms) 200
+[2026-07-11 06:12:10.006] [32mhttp[39m: GET /api/contact-page?populate[hero][populate]=* (106 ms) 200
+[2026-07-11 06:12:10.056] [32mhttp[39m: GET /admin/telemetry-properties (138 ms) 200
+[2026-07-11 06:12:10.090] [32mhttp[39m: GET /admin/users/me (94 ms) 200
+[2026-07-11 06:12:10.132] [32mhttp[39m: GET /admin/users/me/permissions (116 ms) 200
+[2026-07-11 06:12:10.176] [32mhttp[39m: GET /admin/information (38 ms) 200
+[2026-07-11 06:12:10.217] [31merror[39m: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+Error: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+    at Object.openSync (node:fs:561:18)
+    at Object.readFileSync (node:fs:445:35)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-favicon\index.js:50:28
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at dummyMiddleware (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\services\server\middleware.js:30:36)
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\body.js:50:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\powered-by.js:12:9
+    at async cors (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@koa\cors\index.js:106:16)
+[2026-07-11 06:12:10.219] [32mhttp[39m: GET /favicon.ico (2 ms) 500
+[2026-07-11 06:12:10.564] [32mhttp[39m: GET /admin/license-limit-information (15 ms) 200
+[2026-07-11 06:12:10.620] [32mhttp[39m: GET /admin/guided-tour-meta (80 ms) 200
+[2026-07-11 06:12:10.673] [32mhttp[39m: GET /admin/homepage/layout (58 ms) 200
+[2026-07-11 06:12:11.326] [32mhttp[39m: GET /content-manager/homepage/count-documents (655 ms) 200
+[2026-07-11 06:12:11.335] [32mhttp[39m: GET /admin/homepage/key-statistics (667 ms) 200
+[2026-07-11 06:12:12.347] [32mhttp[39m: GET /content-manager/homepage/recent-documents?action=update (252 ms) 200
+[2026-07-11 06:12:12.485] [32mhttp[39m: GET /content-manager/homepage/recent-documents?action=publish (372 ms) 200
+[2026-07-11 06:13:25.659] [32mhttp[39m: GET /api/contact-page?populate[hero][populate]=*&populate[resources][populate][ctas][populate]=*&populate[map][populate][globe_image]=true&populate[map][populate][map_base]=true&populate[map][populate][locations][populate]=*&populate[schedule][populate][icon]=true&populate[schedule][populate][cards][populate]=*&populate[form][populate]=* (73 ms) 200
+[2026-07-11 06:14:27.637] [32mhttp[39m: GET /admin (10 ms) 200
+[2026-07-11 06:14:27.738] [32mhttp[39m: GET /api/contact-page?populate[form][populate][tracks][populate][icon]=true&populate[form][populate][tracks][populate][form]=true (25 ms) 200
+[2026-07-11 06:14:27.868] [32mhttp[39m: GET /api/contact-page?populate[form][populate][tracks][populate]=* (17 ms) 200
+[2026-07-11 06:14:27.893] [31merror[39m: Invalid populate parameter. Expected a string, an array of strings, a populate object
+Error: Invalid populate parameter. Expected a string, an array of strings, a populate object
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\utils\dist\convert-query-params.js:201:27
+    at Array.flatMap (<anonymous>)
+    at convertPopulateQueryParams (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\utils\dist\convert-query-params.js:199:53)
+    at convertNestedPopulate (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\utils\dist\convert-query-params.js:354:30)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\utils\dist\convert-query-params.js:320:36
+    at Array.reduce (<anonymous>)
+    at convertPopulateObject (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\utils\dist\convert-query-params.js:222:41)
+    at convertPopulateQueryParams (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\utils\dist\convert-query-params.js:207:20)
+    at convertNestedPopulate (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\utils\dist\convert-query-params.js:354:30)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\utils\dist\convert-query-params.js:320:36
+[2026-07-11 06:14:27.911] [32mhttp[39m: GET /api/contact-page?populate[form][populate][tracks][populate]=*&populate[form][populate][tracks][populate][icon]=true (38 ms) 500
+[2026-07-11 06:14:28.884] [32mhttp[39m: GET /admin/project-type (4 ms) 200
+[2026-07-11 06:14:28.895] [31merror[39m: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+Error: ENOENT: no such file or directory, open 'C:\Users\speed\Documents\scraft\ambient\cms\favicon.png'
+    at Object.openSync (node:fs:561:18)
+    at Object.readFileSync (node:fs:445:35)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-favicon\index.js:50:28
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at dummyMiddleware (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\services\server\middleware.js:30:36)
+    at dispatch (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\body.js:50:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@strapi\core\dist\middlewares\powered-by.js:12:9
+    at async cors (C:\Users\speed\Documents\scraft\ambient\cms\node_modules\@koa\cors\index.js:106:16)
+[2026-07-11 06:14:28.900] [32mhttp[39m: GET /favicon.ico (7 ms) 500
+[2026-07-11 06:14:29.326] [32mhttp[39m: GET /admin/init (11 ms) 200
+[2026-07-11 06:14:29.376] [32mhttp[39m: GET /admin/users/me/permissions (41 ms) 200
+[2026-07-11 06:14:29.413] [32mhttp[39m: GET /admin/users/me (80 ms) 200
+[2026-07-11 06:14:29.467] [32mhttp[39m: GET /admin/information (40 ms) 200
+[2026-07-11 06:14:29.482] [32mhttp[39m: GET /admin/telemetry-properties (52 ms) 200
+[2026-07-11 06:14:29.704] [32mhttp[39m: GET /admin/license-limit-information (10 ms) 200
+[2026-07-11 06:14:29.712] [32mhttp[39m: GET /admin/guided-tour-meta (45 ms) 200
+[2026-07-11 06:14:29.780] [32mhttp[39m: GET /admin/homepage/layout (51 ms) 200
+[2026-07-11 06:14:29.817] [32mhttp[39m: GET /admin/homepage/key-statistics (82 ms) 200
+[2026-07-11 06:14:29.918] [32mhttp[39m: GET /content-manager/homepage/count-documents (185 ms) 200
+[2026-07-11 06:14:31.268] [32mhttp[39m: GET /content-manager/homepage/recent-documents?action=update (397 ms) 200
+[2026-07-11 06:14:31.286] [32mhttp[39m: GET /content-manager/homepage/recent-documents?action=publish (411 ms) 200
+[2026-07-11 06:15:07.193] [32mhttp[39m: GET /api/contact-page?populate[form][populate]=* (18 ms) 200
+[2026-07-11 06:15:42.191] [32mhttp[39m: GET /api/contact-page?populate[form][populate][tracks][populate]=* (190 ms) 200
+[2026-07-11 06:15:47.729] [32mhttp[39m: GET /api/contact-page?populate[hero][populate]=*&populate[resources][populate][ctas][populate]=*&populate[map][populate][globe_image]=true&populate[map][populate][map_base]=true&populate[map][populate][locations][populate]=*&populate[schedule][populate][icon]=true&populate[schedule][populate][cards][populate]=*&populate[form][populate][tracks][populate][icon]=true&populate[form][populate][tracks][populate][form][populate]=* (339 ms) 200
+[2026-07-11 06:15:47.778] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (379 ms) 200
+[2026-07-11 06:15:47.788] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (374 ms) 200
+[2026-07-11 06:15:47.798] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (393 ms) 200
+[2026-07-11 06:15:47.803] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (369 ms) 200
+[2026-07-11 06:15:47.809] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (406 ms) 200
+[2026-07-11 06:15:47.818] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (386 ms) 200
+[2026-07-11 06:15:47.838] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (409 ms) 200
+[2026-07-11 06:15:47.861] [32mhttp[39m: GET /api/careers-page?populate[hero][populate]=*&populate[best_work][populate][cards][populate]=*&populate[dna][populate]=*&populate[open_roles][populate][job_categories][populate][jobs][populate]=*&populate[benefits][populate][cards][populate]=*&populate[bottom_cta][populate]=*&populate[seo][populate]=* (424 ms) 200
+[2026-07-11 06:15:47.880] [32mhttp[39m: GET /api/applications-page?populate[hero][populate]=*&populate[dvk][populate][background_image]=true&populate[dvk][populate][bottom_background]=true&populate[dvk][populate][orbit_visual]=true&populate[dvk][populate][center_card][populate]=*&populate[dvk][populate][satellite_cards][populate]=*&populate[continuum][populate]=*&populate[articles][populate][articles][populate]=*&populate[wins][populate][cards][populate]=*&populate[som][populate]=*&populate[seo][populate]=* (445 ms) 200
+[2026-07-11 06:15:47.886] [32mhttp[39m: GET /api/wearables-page?populate[hero][populate]=*&populate[carousel][populate]=*&populate[paradigm][populate]=*&populate[subconscious][populate]=*&populate[empirical_proof][populate]=*&populate[lab_to_product][populate]=*&populate[footer_accent][populate]=*&populate[seo][populate]=* (444 ms) 200
+[2026-07-11 06:15:47.907] [32mhttp[39m: GET /api/company-page?populate[hero][populate]=*&populate[mission][populate]=*&populate[leadership][populate][team][populate]=*&populate[dna][populate]=*&populate[ecosystem][populate][map_image]=true&populate[ecosystem][populate][columns][populate]=*&populate[tech_partners][populate][partners][populate]=*&populate[articles][populate][featured_article][populate]=*&populate[articles][populate][compact_articles][populate]=*&populate[engagement][populate][background_image]=true&populate[engagement][populate][cards][populate]=*&populate[engagement][populate][join_team][populate]=*&populate[seo][populate]=* (461 ms) 200
+[2026-07-11 06:15:47.928] [32mhttp[39m: GET /api/developer-page?populate[hero][populate]=*&populate[code][populate][articles][populate]=*&populate[pipeline][populate][tag]=true&populate[pipeline][populate][tabs][populate]=*&populate[coming_soon][populate]=*&populate[modules][populate][modules][populate]=*&populate[copilots][populate][copilots][populate]=*&populate[seo][populate]=* (490 ms) 200
+[2026-07-11 06:15:48.375] [32mhttp[39m: GET /api/resources-page?populate[hero][populate]=*&populate[featured][populate][cards][populate]=*&populate[building][populate]=*&populate[content][populate]=*&populate[news_cta][populate]=*&populate[seo][populate]=* (128 ms) 200
+[2026-07-11 06:15:48.386] [32mhttp[39m: GET /api/news-listing-page?populate[hero][populate]=*&populate[press_kit][populate]=*&populate[grid][populate][backdrop_image]=true&populate[grid][populate][filter_pills][populate][cards][populate]=*&populate[seo][populate]=* (142 ms) 200
+[2026-07-11 06:15:48.399] [32mhttp[39m: GET /api/dvk-page?populate[hero][populate]=*&populate[hardware_stack][populate]=*&populate[demos][populate][demo_cards][populate]=*&populate[modelforge][populate]=*&populate[integrated_modules][populate]=*&populate[seo][populate]=* (154 ms) 200
+[2026-07-11 06:15:48.423] [32mhttp[39m: GET /api/som-page?populate[hero][populate]=*&populate[features][populate][icon_background]=true&populate[features][populate][cards][populate]=*&populate[ecosystem][populate][background_image]=true&populate[ecosystem][populate][chip_image]=true&populate[ecosystem][populate][cards][populate]=*&populate[inside_module][populate]=*&populate[prototype][populate]=*&populate[intelligence][populate]=*&populate[ready_to_deploy][populate]=*&populate[footer_merge][populate]=*&populate[seo][populate]=* (177 ms) 200
+[2026-07-11 06:15:48.433] [32mhttp[39m: GET /api/articles?populate=*&sort[0]=display_order:asc&sort[1]=date:desc&pagination[pageSize]=100 (45 ms) 200
+[2026-07-11 06:15:48.527] [32mhttp[39m: GET /api/technology-page?populate[hero][populate]=*&populate[problem][populate][background_image]=true&populate[problem][populate][comparison_cards][populate]=*&populate[architecture][populate]=*&populate[pillars][populate][pillars][populate]=*&populate[modes][populate]=*&populate[graph][populate]=*&populate[silicon][populate]=*&populate[efficiency][populate]=*&populate[bottom_cta][populate]=*&populate[seo][populate]=* (280 ms) 200
+[2026-07-11 06:15:48.540] [32mhttp[39m: GET /api/home-page?populate[hero][populate]=*&populate[measured_proof][populate][stat_cards][populate]=*&populate[technology][populate][background_visual]=true&populate[technology][populate][features][populate]=*&populate[platform_scale][populate]=*&populate[applications][populate][tabs][populate]=*&populate[applications][populate][cta][populate]=*&populate[developer_platform][populate][cards][populate]=*&populate[ecosystem][populate][silicon_partners][populate]=*&populate[ecosystem][populate][development_partners][populate]=*&populate[ecosystem][populate][cta][populate]=*&populate[latest_news][populate][cards][populate]=*&populate[seo][populate]=* (295 ms) 200
+[2026-07-11 06:15:48.575] [32mhttp[39m: GET /api/products-page?populate[hero][populate]=*&populate[features][populate][feature_cards][populate]=*&populate[always_on][populate][image]=true&populate[always_on][populate][stats][populate]=*&populate[use_cases][populate][tabs][populate]=*&populate[measured][populate]=*&populate[architecture][populate][image]=true&populate[architecture][populate][stats][populate]=*&populate[modelforge][populate]=*&populate[bench_to_volume][populate]=*&populate[full_picture][populate][image]=true&populate[full_picture][populate][callouts][populate]=*&populate[start_building][populate]=*&populate[seo][populate]=* (329 ms) 200
+[2026-07-11 06:16:44.675] [32mhttp[39m: GET /api/contact-page?populate[form][populate][tracks][populate][icon]=true&populate[form][populate][tracks][populate][form][populate]=* (17 ms) 200
+[2026-07-11 06:16:44.698] [32mhttp[39m: GET /api/contact-page?populate[form][populate][tracks][populate]=* (9 ms) 200
+[2026-07-11 06:17:24.321] [32mhttp[39m: GET /api/contact-page?populate[hero][populate]=*&populate[resources][populate][ctas][populate]=*&populate[map][populate][globe_image]=true&populate[map][populate][map_base]=true&populate[map][populate][locations][populate]=*&populate[schedule][populate][icon]=true&populate[schedule][populate][cards][populate]=*&populate[form][populate][tracks][populate][icon]=true&populate[form][populate][tracks][populate][form][populate]=* (29 ms) 200
+[2026-07-11 06:18:44.038] [32mhttp[39m: GET /api/wearables-page?populate[hero][populate]=*&populate[carousel][populate]=*&populate[paradigm][populate]=*&populate[subconscious][populate]=*&populate[empirical_proof][populate]=*&populate[lab_to_product][populate]=*&populate[footer_accent][populate]=*&populate[seo][populate]=* (144 ms) 200
+[2026-07-11 06:18:44.133] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (234 ms) 200
+[2026-07-11 06:18:44.151] [32mhttp[39m: GET /api/careers-page?populate[hero][populate]=*&populate[best_work][populate][cards][populate]=*&populate[dna][populate]=*&populate[open_roles][populate][job_categories][populate][jobs][populate]=*&populate[benefits][populate][cards][populate]=*&populate[bottom_cta][populate]=*&populate[seo][populate]=* (256 ms) 200
+[2026-07-11 06:18:44.156] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (258 ms) 200
+[2026-07-11 06:18:44.169] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (269 ms) 200
+[2026-07-11 06:18:44.174] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (277 ms) 200
+[2026-07-11 06:18:44.179] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (283 ms) 200
+[2026-07-11 06:18:44.189] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (289 ms) 200
+[2026-07-11 06:18:44.198] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (296 ms) 200
+[2026-07-11 06:18:44.210] [32mhttp[39m: GET /api/contact-page?populate[hero][populate]=*&populate[resources][populate][ctas][populate]=*&populate[map][populate][globe_image]=true&populate[map][populate][map_base]=true&populate[map][populate][locations][populate]=*&populate[schedule][populate][icon]=true&populate[schedule][populate][cards][populate]=*&populate[form][populate][tracks][populate][icon]=true&populate[form][populate][tracks][populate][form][populate]=* (306 ms) 200
+[2026-07-11 06:18:44.224] [32mhttp[39m: GET /api/developer-page?populate[hero][populate]=*&populate[code][populate][articles][populate]=*&populate[pipeline][populate][tag]=true&populate[pipeline][populate][tabs][populate]=*&populate[coming_soon][populate]=*&populate[modules][populate][modules][populate]=*&populate[copilots][populate][copilots][populate]=*&populate[seo][populate]=* (319 ms) 200
+[2026-07-11 06:18:44.255] [32mhttp[39m: GET /api/applications-page?populate[hero][populate]=*&populate[dvk][populate][background_image]=true&populate[dvk][populate][bottom_background]=true&populate[dvk][populate][orbit_visual]=true&populate[dvk][populate][center_card][populate]=*&populate[dvk][populate][satellite_cards][populate]=*&populate[continuum][populate]=*&populate[articles][populate][articles][populate]=*&populate[wins][populate][cards][populate]=*&populate[som][populate]=*&populate[seo][populate]=* (349 ms) 200
+[2026-07-11 06:18:44.296] [32mhttp[39m: GET /api/company-page?populate[hero][populate]=*&populate[mission][populate]=*&populate[leadership][populate][team][populate]=*&populate[dna][populate]=*&populate[ecosystem][populate][map_image]=true&populate[ecosystem][populate][columns][populate]=*&populate[tech_partners][populate][partners][populate]=*&populate[articles][populate][featured_article][populate]=*&populate[articles][populate][compact_articles][populate]=*&populate[engagement][populate][background_image]=true&populate[engagement][populate][cards][populate]=*&populate[engagement][populate][join_team][populate]=*&populate[seo][populate]=* (388 ms) 200
+[2026-07-11 06:18:44.696] [32mhttp[39m: GET /api/resources-page?populate[hero][populate]=*&populate[featured][populate][cards][populate]=*&populate[building][populate]=*&populate[content][populate]=*&populate[news_cta][populate]=*&populate[seo][populate]=* (113 ms) 200
+[2026-07-11 06:18:44.711] [32mhttp[39m: GET /api/news-listing-page?populate[hero][populate]=*&populate[press_kit][populate]=*&populate[grid][populate][backdrop_image]=true&populate[grid][populate][filter_pills][populate][cards][populate]=*&populate[seo][populate]=* (126 ms) 200
+[2026-07-11 06:18:44.721] [32mhttp[39m: GET /api/dvk-page?populate[hero][populate]=*&populate[hardware_stack][populate]=*&populate[demos][populate][demo_cards][populate]=*&populate[modelforge][populate]=*&populate[integrated_modules][populate]=*&populate[seo][populate]=* (139 ms) 200
+[2026-07-11 06:18:44.740] [32mhttp[39m: GET /api/articles?populate=*&sort[0]=display_order:asc&sort[1]=date:desc&pagination[pageSize]=100 (38 ms) 200
+[2026-07-11 06:18:44.756] [32mhttp[39m: GET /api/home-page?populate[hero][populate]=*&populate[measured_proof][populate][stat_cards][populate]=*&populate[technology][populate][background_visual]=true&populate[technology][populate][features][populate]=*&populate[platform_scale][populate]=*&populate[applications][populate][tabs][populate]=*&populate[applications][populate][cta][populate]=*&populate[developer_platform][populate][cards][populate]=*&populate[ecosystem][populate][silicon_partners][populate]=*&populate[ecosystem][populate][development_partners][populate]=*&populate[ecosystem][populate][cta][populate]=*&populate[latest_news][populate][cards][populate]=*&populate[seo][populate]=* (175 ms) 200
+[2026-07-11 06:18:44.777] [32mhttp[39m: GET /api/som-page?populate[hero][populate]=*&populate[features][populate][icon_background]=true&populate[features][populate][cards][populate]=*&populate[ecosystem][populate][background_image]=true&populate[ecosystem][populate][chip_image]=true&populate[ecosystem][populate][cards][populate]=*&populate[inside_module][populate]=*&populate[prototype][populate]=*&populate[intelligence][populate]=*&populate[ready_to_deploy][populate]=*&populate[footer_merge][populate]=*&populate[seo][populate]=* (192 ms) 200
+[2026-07-11 06:18:44.791] [32mhttp[39m: GET /api/products-page?populate[hero][populate]=*&populate[features][populate][feature_cards][populate]=*&populate[always_on][populate][image]=true&populate[always_on][populate][stats][populate]=*&populate[use_cases][populate][tabs][populate]=*&populate[measured][populate]=*&populate[architecture][populate][image]=true&populate[architecture][populate][stats][populate]=*&populate[modelforge][populate]=*&populate[bench_to_volume][populate]=*&populate[full_picture][populate][image]=true&populate[full_picture][populate][callouts][populate]=*&populate[start_building][populate]=*&populate[seo][populate]=* (207 ms) 200
+[2026-07-11 06:18:44.803] [32mhttp[39m: GET /api/technology-page?populate[hero][populate]=*&populate[problem][populate][background_image]=true&populate[problem][populate][comparison_cards][populate]=*&populate[architecture][populate]=*&populate[pillars][populate][pillars][populate]=*&populate[modes][populate]=*&populate[graph][populate]=*&populate[silicon][populate]=*&populate[efficiency][populate]=*&populate[bottom_cta][populate]=*&populate[seo][populate]=* (219 ms) 200
+[2026-07-11 06:19:03.866] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (36 ms) 200
+[2026-07-11 06:19:03.913] [32mhttp[39m: GET /api/company-page?populate[hero][populate]=*&populate[mission][populate]=*&populate[leadership][populate][team][populate]=*&populate[dna][populate]=*&populate[ecosystem][populate][map_image]=true&populate[ecosystem][populate][columns][populate]=*&populate[tech_partners][populate][partners][populate]=*&populate[articles][populate][featured_article][populate]=*&populate[articles][populate][compact_articles][populate]=*&populate[engagement][populate][background_image]=true&populate[engagement][populate][cards][populate]=*&populate[engagement][populate][join_team][populate]=*&populate[seo][populate]=* (82 ms) 200
+[2026-07-11 06:19:52.278] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (181 ms) 200
+[2026-07-11 06:19:52.300] [32mhttp[39m: GET /api/careers-page?populate[hero][populate]=*&populate[best_work][populate][cards][populate]=*&populate[dna][populate]=*&populate[open_roles][populate][job_categories][populate][jobs][populate]=*&populate[benefits][populate][cards][populate]=*&populate[bottom_cta][populate]=*&populate[seo][populate]=* (206 ms) 200
+[2026-07-11 06:19:52.311] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (214 ms) 200
+[2026-07-11 06:19:52.341] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (245 ms) 200
+[2026-07-11 06:19:52.355] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (259 ms) 200
+[2026-07-11 06:19:52.361] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (263 ms) 200
+[2026-07-11 06:19:52.369] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (270 ms) 200
+[2026-07-11 06:19:52.385] [32mhttp[39m: GET /api/wearables-page?populate[hero][populate]=*&populate[carousel][populate]=*&populate[paradigm][populate]=*&populate[subconscious][populate]=*&populate[empirical_proof][populate]=*&populate[lab_to_product][populate]=*&populate[footer_accent][populate]=*&populate[seo][populate]=* (290 ms) 200
+[2026-07-11 06:19:52.393] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (294 ms) 200
+[2026-07-11 06:19:52.416] [32mhttp[39m: GET /api/applications-page?populate[hero][populate]=*&populate[dvk][populate][background_image]=true&populate[dvk][populate][bottom_background]=true&populate[dvk][populate][orbit_visual]=true&populate[dvk][populate][center_card][populate]=*&populate[dvk][populate][satellite_cards][populate]=*&populate[continuum][populate]=*&populate[articles][populate][articles][populate]=*&populate[wins][populate][cards][populate]=*&populate[som][populate]=*&populate[seo][populate]=* (315 ms) 200
+[2026-07-11 06:19:52.420] [32mhttp[39m: GET /api/developer-page?populate[hero][populate]=*&populate[code][populate][articles][populate]=*&populate[pipeline][populate][tag]=true&populate[pipeline][populate][tabs][populate]=*&populate[coming_soon][populate]=*&populate[modules][populate][modules][populate]=*&populate[copilots][populate][copilots][populate]=*&populate[seo][populate]=* (319 ms) 200
+[2026-07-11 06:19:52.436] [32mhttp[39m: GET /api/contact-page?populate[hero][populate]=*&populate[resources][populate][ctas][populate]=*&populate[map][populate][globe_image]=true&populate[map][populate][map_base]=true&populate[map][populate][locations][populate]=*&populate[schedule][populate][icon]=true&populate[schedule][populate][cards][populate]=*&populate[form][populate][tracks][populate][icon]=true&populate[form][populate][tracks][populate][form][populate]=* (325 ms) 200
+[2026-07-11 06:19:52.459] [32mhttp[39m: GET /api/company-page?populate[hero][populate]=*&populate[mission][populate]=*&populate[leadership][populate][team][populate]=*&populate[dna][populate]=*&populate[ecosystem][populate][map_image]=true&populate[ecosystem][populate][columns][populate]=*&populate[tech_partners][populate][partners][populate]=*&populate[articles][populate][featured_article][populate]=*&populate[articles][populate][compact_articles][populate]=*&populate[engagement][populate][background_image]=true&populate[engagement][populate][cards][populate]=*&populate[engagement][populate][join_team][populate]=*&populate[seo][populate]=* (349 ms) 200
+[2026-07-11 06:19:52.874] [32mhttp[39m: GET /api/resources-page?populate[hero][populate]=*&populate[featured][populate][cards][populate]=*&populate[building][populate]=*&populate[content][populate]=*&populate[news_cta][populate]=*&populate[seo][populate]=* (119 ms) 200
+[2026-07-11 06:19:52.887] [32mhttp[39m: GET /api/news-listing-page?populate[hero][populate]=*&populate[press_kit][populate]=*&populate[grid][populate][backdrop_image]=true&populate[grid][populate][filter_pills][populate][cards][populate]=*&populate[seo][populate]=* (136 ms) 200
+[2026-07-11 06:19:52.893] [32mhttp[39m: GET /api/dvk-page?populate[hero][populate]=*&populate[hardware_stack][populate]=*&populate[demos][populate][demo_cards][populate]=*&populate[modelforge][populate]=*&populate[integrated_modules][populate]=*&populate[seo][populate]=* (143 ms) 200
+[2026-07-11 06:19:52.903] [32mhttp[39m: GET /api/articles?populate=*&sort[0]=display_order:asc&sort[1]=date:desc&pagination[pageSize]=100 (23 ms) 200
+[2026-07-11 06:19:52.926] [32mhttp[39m: GET /api/som-page?populate[hero][populate]=*&populate[features][populate][icon_background]=true&populate[features][populate][cards][populate]=*&populate[ecosystem][populate][background_image]=true&populate[ecosystem][populate][chip_image]=true&populate[ecosystem][populate][cards][populate]=*&populate[inside_module][populate]=*&populate[prototype][populate]=*&populate[intelligence][populate]=*&populate[ready_to_deploy][populate]=*&populate[footer_merge][populate]=*&populate[seo][populate]=* (170 ms) 200
+[2026-07-11 06:19:52.938] [32mhttp[39m: GET /api/home-page?populate[hero][populate]=*&populate[measured_proof][populate][stat_cards][populate]=*&populate[technology][populate][background_visual]=true&populate[technology][populate][features][populate]=*&populate[platform_scale][populate]=*&populate[applications][populate][tabs][populate]=*&populate[applications][populate][cta][populate]=*&populate[developer_platform][populate][cards][populate]=*&populate[ecosystem][populate][silicon_partners][populate]=*&populate[ecosystem][populate][development_partners][populate]=*&populate[ecosystem][populate][cta][populate]=*&populate[latest_news][populate][cards][populate]=*&populate[seo][populate]=* (181 ms) 200
+[2026-07-11 06:19:52.955] [32mhttp[39m: GET /api/products-page?populate[hero][populate]=*&populate[features][populate][feature_cards][populate]=*&populate[always_on][populate][image]=true&populate[always_on][populate][stats][populate]=*&populate[use_cases][populate][tabs][populate]=*&populate[measured][populate]=*&populate[architecture][populate][image]=true&populate[architecture][populate][stats][populate]=*&populate[modelforge][populate]=*&populate[bench_to_volume][populate]=*&populate[full_picture][populate][image]=true&populate[full_picture][populate][callouts][populate]=*&populate[start_building][populate]=*&populate[seo][populate]=* (203 ms) 200
+[2026-07-11 06:19:52.967] [32mhttp[39m: GET /api/technology-page?populate[hero][populate]=*&populate[problem][populate][background_image]=true&populate[problem][populate][comparison_cards][populate]=*&populate[architecture][populate]=*&populate[pillars][populate][pillars][populate]=*&populate[modes][populate]=*&populate[graph][populate]=*&populate[silicon][populate]=*&populate[efficiency][populate]=*&populate[bottom_cta][populate]=*&populate[seo][populate]=* (210 ms) 200
+[2026-07-11 06:20:54.045] [32mhttp[39m: GET /api/global-settings?populate[brand][populate]=*&populate[header][populate]=*&populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (28 ms) 200
+[2026-07-11 06:20:54.109] [32mhttp[39m: GET /api/contact-page?populate[hero][populate]=*&populate[resources][populate][ctas][populate]=*&populate[map][populate][globe_image]=true&populate[map][populate][map_base]=true&populate[map][populate][locations][populate]=*&populate[schedule][populate][icon]=true&populate[schedule][populate][cards][populate]=*&populate[form][populate][tracks][populate][icon]=true&populate[form][populate][tracks][populate][form][populate]=* (90 ms) 200
+[2026-07-11 06:21:02.877] [32mhttp[39m: GET /api/home-page?populate[hero][populate]=*&populate[measured_proof][populate][stat_cards][populate]=*&populate[technology][populate][background_visual]=true&populate[technology][populate][features][populate]=*&populate[platform_scale][populate]=*&populate[applications][populate][tabs][populate]=*&populate[applications][populate][cta][populate]=*&populate[developer_platform][populate][cards][populate]=*&populate[ecosystem][populate][silicon_partners][populate]=*&populate[ecosystem][populate][development_partners][populate]=*&populate[ecosystem][populate][cta][populate]=*&populate[latest_news][populate][cards][populate]=*&populate[seo][populate]=* (133 ms) 200
+[2026-07-11 06:24:33.433] [32minfo[39m: File changed: C:\Users\speed\Documents\scraft\ambient\cms\src\components\company\leadership.json
+[2026-07-11 06:24:51.469] [32minfo[39m: Shutting down Strapi
+[2026-07-11 06:24:51.590] [32minfo[39m: Strapi has been shut down
+[2026-07-11 06:25:13.298] [33mwarn[39m: The strapi::cors middleware no longer supports the `enabled` option. Using it to conditionally enable CORS might cause an insecure default. To disable strapi::cors, remove it from the exported array in config/middleware.js
+[2026-07-11 06:25:14.071] [33mwarn[39m: [email]: The "sendmail" email provider is still supported, but for most production setups that use a dedicated SMTP relay, consider switching to @strapi/provider-email-nodemailer (set `provider` to `"nodemailer"` in your email plugin config). This message is only shown in non-production environments.
+Adding missing images to existing latest_news cards...
+Seeded missing images in latest_news successfully!
+
+ Project information
+
+[90m╭────────────────────[39m[90m┬──────────────────────────────────────────────────╮[39m
+[90m│[39m Time               [90m│[39m Sat Jul 11 2026 06:25:45 GMT-0700 (Pacific Dayl… [90m│[39m
+[90m│[39m Launched in        [90m│[39m 39797 ms                                         [90m│[39m
+[90m│[39m Environment        [90m│[39m development                                      [90m│[39m
+[90m│[39m Process PID        [90m│[39m 7816                                             [90m│[39m
+[90m│[39m Version            [90m│[39m 5.50.0 (node v24.16.0)                           [90m│[39m
+[90m│[39m Edition            [90m│[39m Community                                        [90m│[39m
+[90m│[39m Database           [90m│[39m postgres                                         [90m│[39m
+[90m│[39m Database name      [90m│[39m ambient_cms                                      [90m│[39m
+[90m╰────────────────────[39m[90m┴──────────────────────────────────────────────────╯[39m
+
+ Actions available
+
+Welcome back!
+To access the server ⚡️, go to:
+http://localhost:1338
+
+[2026-07-11 06:25:45.236] [32minfo[39m: Strapi started successfully

@@ -266,7 +266,7 @@ const CARDS = [
 export function ApplicationsPageWins({ data }: { data?: any }) {
   const heading = data?.heading || FALLBACK_HEADING;
   const body = data?.body || BODY;
-  const bgImg = mediaUrl(data?.background_image) || "/applications/wins-bg.png";
+  const bgImg = "/applications/wins-bg.png";
 
   const rawCards = Array.isArray(data?.cards) ? data.cards : [];
   const cards =

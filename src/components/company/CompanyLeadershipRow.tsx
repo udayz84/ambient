@@ -70,7 +70,7 @@ export function CompanyLeadershipRow({ team }: CompanyLeadershipRowProps = {}) {
           key={member.nodeId}
           member={member}
           variant="leadership"
-          left={CARD_LEFT[index] ?? 0}
+          left={CARD_LEFT[index] ?? index * 413}
           isExpanded={expandedNodeId === member.nodeId}
           onReadMoreToggle={() =>
             setExpandedNodeId((current) =>

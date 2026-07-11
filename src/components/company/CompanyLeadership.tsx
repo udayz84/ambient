@@ -124,7 +124,7 @@ export function CompanyLeadership({ data }: CompanyLeadershipProps = {}) {
           </div>
         </div>
 
-        <CompanyAdvisoryBoard />
+        <CompanyAdvisoryBoard data={data?.advisory_board} />
       </div>
 
       <button

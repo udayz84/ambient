@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interMedium, interRegular } from "../hero/fonts";
 import {
   DEFAULT_GPX_INDEX,
@@ -129,6 +130,7 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
             id: p?.product_id || fallback.id || `gpx-${index}`,
             label: p?.label || fallback.label || "",
             description: p?.description || fallback.description || "",
+            chip_image: p?.chip_image || fallback.chip_image || null,
           };
         })
       : GPX_PRODUCTS;
@@ -272,7 +274,7 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
                   >
                     <div className="relative size-full shadow-[0px_12.264px_11.68px_0px_#0d2006]">
                       <Image
-                        src="/mobile/image 77.png"
+                        src={mediaUrl(product.chip_image) || "/mobile/image 77.png"}
                         alt=""
                         fill
                         className="object-bottom"
@@ -301,7 +303,7 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
                   >
                     <div className="relative size-full">
                       <Image
-                        src="/mobile/image 81.png"
+                        src={mediaUrl(product.chip_image) || "/mobile/image 81.png"}
                         alt=""
                         fill
                         className="object-contain object-bottom"

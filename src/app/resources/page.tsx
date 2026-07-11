@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Resources } from "@/components/resources/Resources";
-import { getSingleType } from "@/lib/strapi";
+import { buildArticles } from "@/components/resources/resources-data";
+import { getCollection, getSingleType } from "@/lib/strapi";
 
 export const metadata: Metadata = {
   title: "Resources | Ambient Scientific",
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 
 export default async function ResourcesPage() {
   let data: any = null;
+  let articles: any[] = [];
   try {
     data = await getSingleType<any>("resources-page", [
       "hero",
@@ -22,5 +24,13 @@ export default async function ResourcesPage() {
   } catch {
     data = null;
   }
-  return <Resources data={data} />;
+  try {
+    articles = await getCollection<any>(
+      "articles",
+      "populate=*&sort[0]=display_order:asc&sort[1]=date:desc&pagination[pageSize]=100"
+    );
+  } catch {
+    articles = [];
+  }
+  return <Resources data={data} articles={buildArticles(articles)} />;
 }
