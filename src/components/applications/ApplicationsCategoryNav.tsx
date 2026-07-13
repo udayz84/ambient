@@ -65,15 +65,16 @@ export function ApplicationsCategoryNav({
   onShift,
 }: ApplicationsCategoryNavProps) {
   return (
-    <div
-      className="absolute top-[199.7783203125px] left-1/2 flex h-[52px] w-max -translate-x-1/2 scale-[0.84] items-center gap-[12px] min-[1440px]:scale-[0.9] min-[1600px]:scale-100"
-      data-node-id="2379:851"
-      data-name="Options"
-    >
+    <div className="absolute top-[199.7783203125px] left-1/2 flex h-[52px] w-full max-w-[1321px] -translate-x-1/2 overflow-x-auto no-scrollbar">
+      <div
+        className="mx-auto flex h-full w-max items-center gap-[12px] px-4"
+        data-node-id="2379:851"
+        data-name="Options"
+      >
       <button
         type="button"
         onClick={() => onShift(-1)}
-        className="relative size-[44px] shrink-0 cursor-pointer transition-opacity hover:opacity-80"
+        className="sticky left-0 z-20 size-[44px] shrink-0 cursor-pointer transition-opacity hover:opacity-80 bg-black"
         data-node-id="2379:852"
         data-name="Menu"
         aria-label="Scroll categories left"
@@ -127,7 +128,7 @@ export function ApplicationsCategoryNav({
       <button
         type="button"
         onClick={() => onShift(1)}
-        className="relative size-[44px] shrink-0 cursor-pointer transition-opacity hover:opacity-80"
+        className="sticky right-0 z-20 size-[44px] shrink-0 cursor-pointer transition-opacity hover:opacity-80 bg-black"
         data-node-id="2379:910"
         data-name="Menu"
         aria-label="Scroll categories right"
@@ -139,6 +140,7 @@ export function ApplicationsCategoryNav({
           className="absolute inset-0 block size-full max-w-none"
         />
       </button>
+    </div>
     </div>
   );
 }

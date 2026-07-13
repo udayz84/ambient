@@ -122,7 +122,6 @@ function getCardMotion(progress: number, index: number) {
 
   return {
     translateY: (1 - cardProgress) * SLIDE_DISTANCE,
-    opacity: cardProgress,
   };
 }
 
@@ -255,20 +254,15 @@ export function MeasuredProofCards({ data }: { data?: any }) {
         className="flex w-max content-stretch items-center gap-[24px] px-[40px] min-[1440px]:px-[120px] will-change-transform [backface-visibility:hidden]"
       >
         {cards.map((card: any, index: number) => {
-          const { translateY, opacity } = getCardMotion(scrollProgress, index);
+          const { translateY } = getCardMotion(scrollProgress, index);
 
           return (
-            <div
-              key={card.nodeId}
-              className="animate-hero-text-fade-in opacity-0"
-              style={{ animationDelay: '1s', animationDuration: '1000ms' }}
-            >
+            <div key={card.nodeId}>
               <div
                 className="shrink-0 will-change-transform"
                 style={{
                   transform: `translateY(${translateY}px)`,
-                  opacity,
-                  transition: "transform 1000ms ease-out, opacity 1000ms ease-out",
+                  transition: "transform 1000ms ease-out",
                 }}
               >
                 <MeasuredProofCard {...card} />

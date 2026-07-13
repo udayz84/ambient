@@ -38,11 +38,9 @@ export function TechnologyFeatures({ data }: { data?: any }) {
       mediaUrl(feature?.icon) || fallback.iconSrc || "/technology/icon-tools.svg";
     let titleParts: string[];
     if (index === 0) {
-      const split = (feature?.title || "").split("\n");
-      titleParts =
-        split.length > 1
-          ? split
-          : [split[0] || "Speak AI", "natively"];
+      let rawTitle = feature?.title || fallback.titleParts.join("\n");
+      rawTitle = rawTitle.replace(/\\n/g, "\n");
+      titleParts = rawTitle.split("\n");
     } else {
       const rawTitle = feature?.title || fallback.titleParts?.[0] || "";
       titleParts = [rawTitle];
@@ -57,8 +55,7 @@ export function TechnologyFeatures({ data }: { data?: any }) {
 
   return (
     <div
-      className="absolute top-[612.5px] z-10 flex min-h-[290px] w-[1204px] content-stretch items-start justify-center gap-[32px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(0,0,0,0.1)] px-[20px]"
-      style={{ left: "calc(50% - 13.61px)", transform: "translateX(-50%)" }}
+      className="absolute top-[612.5px] left-1/2 z-10 flex min-h-[290px] w-[1204px] -translate-x-1/2 content-stretch items-start justify-center gap-[32px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(0,0,0,0.1)] px-[20px]"
       data-node-id="2379:1432"
       data-name="Frame 1000003873"
     >

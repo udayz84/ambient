@@ -5,10 +5,14 @@ const cornerLeft = "/hero/corner-tag-1.svg";
 const cornerRight = "/hero/corner-tag-2.svg";
 
 export function PlatformScaleHeader({ data }: { data?: any }) {
-  const heading = data?.heading || "One platform,\ninfinite scale";
+  let heading = data?.heading || "One platform,\ninfinite scale";
+  heading = heading.replace(/\\n/g, "\n");
+  if (!heading.includes("\n") && heading.includes(",")) {
+    heading = heading.replace(",", ",\n");
+  }
   const lines = heading.split("\n");
-  const line1 = lines[0] || "One platform,";
-  const line2 = lines.slice(1).join("\n") || "infinite scale";
+  const line1 = lines[0];
+  const line2 = lines.slice(1).join("\n");
   const subtitle =
     data?.subtitle ||
     "A modular compute fabric for your entire product roadmap, from a microwatt edge array to a hyperscaler server grid, without ever changing your software";
@@ -31,7 +35,7 @@ export function PlatformScaleHeader({ data }: { data?: any }) {
             }}
           >
             <p className="mb-0 leading-[49px]">{line1}</p>
-            <p className="leading-[49px]">{line2}</p>
+            {line2 && <p className="leading-[49px]">{line2}</p>}
           </h2>
 
           <div className="relative col-start-1 row-start-1 mt-[4px] ml-[321.87109375px] flex size-[4px] items-center justify-center">
