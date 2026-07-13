@@ -1,11 +1,11 @@
 {
   "kind": "collectionType",
-  "collectionName": "job_categories",
+  "collectionName": "job_locations",
   "info": {
-    "singularName": "job-category",
-    "pluralName": "job-categories",
-    "displayName": "Job Category",
-    "description": "Category for filtering jobs"
+    "singularName": "job-location",
+    "pluralName": "job-locations",
+    "displayName": "Job Location",
+    "description": "Location for jobs"
   },
   "options": {
     "draftAndPublish": false

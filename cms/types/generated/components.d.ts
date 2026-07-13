@@ -265,31 +265,6 @@ export interface CareersHero extends Struct.ComponentSchema {
   };
 }
 
-export interface CareersJob extends Struct.ComponentSchema {
-  collectionName: 'components_careers_jobs';
-  info: {
-    description: 'A specific job role';
-    displayName: 'Job';
-  };
-  attributes: {
-    apply_url: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#'>;
-    location: Schema.Attribute.String & Schema.Attribute.Required;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
-  };
-}
-
-export interface CareersJobCategory extends Struct.ComponentSchema {
-  collectionName: 'components_careers_job_categories';
-  info: {
-    description: 'Category containing multiple jobs';
-    displayName: 'Job Category';
-  };
-  attributes: {
-    category_name: Schema.Attribute.String & Schema.Attribute.Required;
-    jobs: Schema.Attribute.Component<'careers.job', true>;
-  };
-}
-
 export interface CareersOpenRoles extends Struct.ComponentSchema {
   collectionName: 'components_careers_open_roles';
   info: {
@@ -304,7 +279,6 @@ export interface CareersOpenRoles extends Struct.ComponentSchema {
     general_app_subtitle: Schema.Attribute.Text;
     general_app_title: Schema.Attribute.String;
     heading: Schema.Attribute.String & Schema.Attribute.DefaultTo<'Open Roles'>;
-    job_categories: Schema.Attribute.Component<'careers.job-category', true>;
   };
 }
 
@@ -1551,6 +1525,7 @@ export interface ResourcesFeaturedCard extends Struct.ComponentSchema {
       Schema.Attribute.DefaultTo<'Download PDF'>;
     description: Schema.Attribute.Text;
     image: Schema.Attribute.Media;
+    pdf_file: Schema.Attribute.Media<'files'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -1798,7 +1773,6 @@ export interface SharedSeo extends Struct.ComponentSchema {
         maxLength: 60;
       }>;
     noindex: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    og_image: Schema.Attribute.Media;
   };
 }
 
@@ -2519,8 +2493,6 @@ declare module '@strapi/strapi' {
       'careers.dna': CareersDna;
       'careers.dna-panel': CareersDnaPanel;
       'careers.hero': CareersHero;
-      'careers.job': CareersJob;
-      'careers.job-category': CareersJobCategory;
       'careers.open-roles': CareersOpenRoles;
       'careers.work-card': CareersWorkCard;
       'company.articles': CompanyArticles;

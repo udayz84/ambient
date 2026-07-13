@@ -1,4 +1,4 @@
-﻿{
+{
   "kind": "collectionType",
   "collectionName": "jobs",
   "info": {
@@ -12,23 +12,21 @@
   "attributes": {
     "title": {
       "type": "string",
-      "required": true,
       "maxLength": 200
     },
     "slug": {
       "type": "uid",
-      "targetField": "title",
-      "required": true
+      "targetField": "title"
     },
-    "department": {
-      "type": "enumeration",
-      "enum": ["hardware", "software", "research"],
-      "required": true
+    "category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::job-category.job-category"
     },
     "location": {
-      "type": "enumeration",
-      "enum": ["san_francisco", "remote"],
-      "required": true
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::job-location.job-location"
     },
     "employment_type": {
       "type": "enumeration",
@@ -36,8 +34,7 @@
       "default": "full_time"
     },
     "description": {
-      "type": "richtext",
-      "required": true
+      "type": "richtext"
     },
     "apply_url": {
       "type": "string",
@@ -46,10 +43,6 @@
     "is_active": {
       "type": "boolean",
       "default": false
-    },
-    "posted_date": {
-      "type": "date",
-      "required": true
     }
   }
 }

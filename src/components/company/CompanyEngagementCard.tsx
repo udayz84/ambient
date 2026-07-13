@@ -45,42 +45,41 @@ export function CompanyEngagementCard({
       data-node-id={nodeId}
       data-name="Article"
     >
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none rounded-[inherit]">
-        <div
-          className="pointer-events-none absolute right-0 top-0 h-full w-[60%]"
-          aria-hidden
-        >
-          <Image
-            src={finalImageSrc}
-            alt=""
-            fill
-            className="pointer-events-none object-cover opacity-60"
-            unoptimized
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent" />
-        </div>
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          width: imageWidth,
+          height: imageHeight,
+          left: imageLeft,
+          top: imageTop,
+        }}
+        aria-hidden
+      >
+        <Image
+          src={finalImageSrc}
+          alt=""
+          fill
+          className="pointer-events-none object-contain"
+          unoptimized
+        />
       </div>
 
       <div
-        className="absolute top-[32px] left-[32px] z-[1] w-[calc(100%-64px)]"
+        className="absolute top-[32px] left-[32px] z-[1]"
         data-name="NewsSection"
       >
-        <h3
-          className={`relative m-0 bg-clip-text p-0 font-medium text-transparent not-italic text-balance`}
-          style={{
-            fontFamily: "Gilroy, sans-serif",
-            fontSize: "32px",
-            lineHeight: "38px",
-            backgroundImage: "linear-gradient(122.573deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-          }}
-        >
-          {strapiTitle || titleLines.join(" ")}
-        </h3>
+        <CompanySectionTitle
+          width={titleWidth}
+          height={titleHeight}
+          fontSize={32}
+          lineHeight={39}
+          nodeId={`${nodeId}-title`}
+          lines={finalTitleLines}
+        />
 
         <p
-          className={`${interRegular.className} mt-[12px] text-[18px] leading-[27px] font-normal text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word] w-full max-w-[90%] line-clamp-4`}
+          className={`${interRegular.className} mt-[20px] text-[18px] leading-[27px] font-normal text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
+          style={{ width: descriptionWidth }}
         >
           {finalDescription}
         </p>
@@ -90,7 +89,7 @@ export function CompanyEngagementCard({
         className="absolute bottom-[32px] left-[32px] z-[1]"
         data-name="Cta"
       >
-        <CompanyEngagementCta href={finalCtaHref} className="w-auto px-6">
+        <CompanyEngagementCta href={finalCtaHref} className={ctaWidth}>
           {finalCtaLabel}
         </CompanyEngagementCta>
       </div>

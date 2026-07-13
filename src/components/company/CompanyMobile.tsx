@@ -961,16 +961,24 @@ function CompanyEngagementMobile({
   engagement?: any;
   joinTeam?: any;
 }) {
-  const joinTitle = (joinTeam?.title as string) || COMPANY_JOIN_TEAM.title;
-  const joinDescription = (joinTeam?.description as string) || COMPANY_JOIN_TEAM.description;
-  const joinCtaLabel = (joinTeam?.cta_label as string) || COMPANY_JOIN_TEAM.ctaLabel;
-  const joinCtaHref = (joinTeam?.cta_href as string) || COMPANY_JOIN_TEAM.ctaHref;
-  const joinImageSrc = mediaUrl(joinTeam?.image) || COMPANY_JOIN_TEAM.imageSrc;
-
   const strapiCards = Array.isArray(engagement?.cards) ? engagement.cards : null;
+
+  let joinTeamData = joinTeam;
+  let cardEntries: any[] = strapiCards ? [...strapiCards] : [];
+  if (!joinTeamData && cardEntries.length > 0) {
+    joinTeamData = cardEntries[0];
+    cardEntries = cardEntries.slice(1);
+  }
+
+  const joinTitleFinal = (joinTeamData?.title as string) || COMPANY_JOIN_TEAM.title;
+  const joinDescriptionFinal = (joinTeamData?.description as string) || COMPANY_JOIN_TEAM.description;
+  const joinCtaLabelFinal = (joinTeamData?.cta_label as string) || COMPANY_JOIN_TEAM.ctaLabel;
+  const joinCtaHrefFinal = (joinTeamData?.cta_href as string) || COMPANY_JOIN_TEAM.ctaHref;
+  const joinImageSrcFinal = mediaUrl(joinTeamData?.image) || COMPANY_JOIN_TEAM.imageSrc;
+
   const cards =
-    strapiCards && strapiCards.length > 0
-      ? strapiCards.map((c: any, i: number) => {
+    cardEntries.length > 0
+      ? cardEntries.map((c: any, i: number) => {
           const fallback = COMPANY_ENGAGEMENT_CARDS[i] ?? COMPANY_ENGAGEMENT_CARDS[COMPANY_ENGAGEMENT_CARDS.length - 1];
           return {
             nodeId: fallback.nodeId,
@@ -999,7 +1007,7 @@ function CompanyEngagementMobile({
         <Corners />
         <div className="relative h-[160px] w-full overflow-hidden">
           <Image
-            src={joinImageSrc}
+            src={joinImageSrcFinal}
             alt=""
             fill
             className="object-cover"
@@ -1009,13 +1017,13 @@ function CompanyEngagementMobile({
         </div>
         <div className="flex flex-col gap-[12px] p-[22px] pt-0">
           <h3 className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic`}>
-            {joinTitle}
+            {joinTitleFinal}
           </h3>
           <p className={`${interRegular.className} text-[13px] leading-[20px] font-normal text-white opacity-70 not-italic`}>
-            {joinDescription}
+            {joinDescriptionFinal}
           </p>
           <div className="mt-[4px]">
-            <GreenCta href={joinCtaHref}>{joinCtaLabel}</GreenCta>
+            <GreenCta href={joinCtaHrefFinal}>{joinCtaLabelFinal}</GreenCta>
           </div>
         </div>
       </div>

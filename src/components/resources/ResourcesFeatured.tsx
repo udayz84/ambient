@@ -27,6 +27,7 @@ type MergedCard = {
   description?: string;
   ctaLabel?: string;
   ctaHref?: string;
+  pdfUrl?: string;
 };
 
 function buildCards(data: any): MergedCard[] {
@@ -51,6 +52,7 @@ function buildCards(data: any): MergedCard[] {
       description: (card.description as string) || undefined,
       ctaLabel: (card.cta_label as string) || undefined,
       ctaHref: (card.cta_href as string) || undefined,
+      pdfUrl: mediaUrl(card.pdf_file) || undefined,
     };
   });
 }

@@ -18,6 +18,7 @@ type ResourcesFeaturedCardProps = ResourceFeaturedCard & {
   description?: string;
   ctaLabel?: string;
   ctaHref?: string;
+  pdfUrl?: string;
 };
 
 export function ResourcesFeaturedCard({
@@ -33,6 +34,7 @@ export function ResourcesFeaturedCard({
   description = FALLBACK_DESCRIPTION,
   ctaLabel = FALLBACK_CTA_LABEL,
   ctaHref = "#",
+  pdfUrl,
 }: ResourcesFeaturedCardProps) {
   return (
     <article
@@ -72,7 +74,8 @@ export function ResourcesFeaturedCard({
         </div>
         <GreenCtaButton
           className="w-[231px]"
-          href={ctaHref}
+          href={pdfUrl || ctaHref}
+          download={!!pdfUrl}
           textClassName={`${gilroyMedium.className} text-[16px] leading-[28px] font-medium`}
         >
           {ctaLabel}

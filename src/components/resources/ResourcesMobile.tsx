@@ -274,6 +274,8 @@ function ResourcesFeaturedMobile({ data }: { data?: any } = {}) {
       title: (card.title as string) || FALLBACK_FEATURED_TITLE,
       description: (card.description as string) || FALLBACK_FEATURED_DESC,
       ctaLabel: (card.cta_label as string) || FALLBACK_FEATURED_CTA,
+      ctaHref: (card.cta_href as string) || "#",
+      pdfUrl: mediaUrl(card.pdf_file) || undefined,
     };
   });
 

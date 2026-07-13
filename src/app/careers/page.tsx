@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Careers } from "@/components/careers/Careers";
-import { getSingleType } from "@/lib/strapi";
+import { getSingleType, getCollection } from "@/lib/strapi";
 
 export const metadata: Metadata = {
   title: "Careers | Ambient Scientific",
@@ -15,29 +15,24 @@ export default async function CareersPage() {
       "hero",
       { section: "best_work", nested: ["cards"] },
       "dna",
-      { section: "open_roles", nested: ["job_categories.jobs"] },
+      { section: "open_roles" },
       { section: "benefits", nested: ["cards"] },
       "bottom_cta",
       "seo",
     ]);
 
-    if (data?.open_roles && data.open_roles.job_categories) {
-      const categories = data.open_roles.job_categories;
-      const allJobs: any[] = [];
-      categories.forEach((cat: any) => {
-        if (cat.jobs) {
-          cat.jobs.forEach((job: any) => {
-            allJobs.push({
-              title: job.title,
-              location: job.location,
-              apply_url: job.apply_url,
-              category: cat.category_name
-            });
-          });
-        }
-      });
-      data.open_roles.fetchedJobs = allJobs;
-      data.open_roles.fetchedCategories = categories.map((c: any) => ({ name: c.category_name }));
+    const jobs = await getCollection<any>("jobs", "populate=*");
+
+    if (data?.open_roles) {
+      data.open_roles.fetchedJobs = jobs.map((job: any) => ({
+        title: job.title,
+        location: job.location?.name || "Unknown",
+        apply_url: job.apply_url,
+        category: job.category?.name || "Unknown",
+      }));
+
+      const categories = Array.from(new Set(data.open_roles.fetchedJobs.map((j: any) => j.category)));
+      data.open_roles.fetchedCategories = categories.map(c => ({ name: c as string }));
     }
   } catch (err) {
     console.error("Error fetching careers data:", err);

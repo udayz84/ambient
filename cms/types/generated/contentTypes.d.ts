@@ -822,11 +822,41 @@ export interface ApiJobCategoryJobCategory extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    jobs: Schema.Attribute.Relation<'oneToMany', 'api::job.job'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::job-category.job-category'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiJobLocationJobLocation extends Struct.CollectionTypeSchema {
+  collectionName: 'job_locations';
+  info: {
+    description: 'Location for jobs';
+    displayName: 'Job Location';
+    pluralName: 'job-locations';
+    singularName: 'job-location';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::job-location.job-location'
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String &
@@ -855,14 +885,14 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 500;
       }>;
+    category: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::job-category.job-category'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    department: Schema.Attribute.Enumeration<
-      ['hardware', 'software', 'research']
-    > &
-      Schema.Attribute.Required;
-    description: Schema.Attribute.RichText & Schema.Attribute.Required;
+    description: Schema.Attribute.RichText;
     employment_type: Schema.Attribute.Enumeration<
       ['full_time', 'part_time', 'contract']
     > &
@@ -871,13 +901,13 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::job.job'> &
       Schema.Attribute.Private;
-    location: Schema.Attribute.Enumeration<['san_francisco', 'remote']> &
-      Schema.Attribute.Required;
-    posted_date: Schema.Attribute.Date & Schema.Attribute.Required;
+    location: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::job-location.job-location'
+    >;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    slug: Schema.Attribute.UID<'title'>;
     title: Schema.Attribute.String &
-      Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 200;
       }>;
@@ -1638,6 +1668,7 @@ declare module '@strapi/strapi' {
       'api::global-settings.global-settings': ApiGlobalSettingsGlobalSettings;
       'api::home-page.home-page': ApiHomePageHomePage;
       'api::job-category.job-category': ApiJobCategoryJobCategory;
+      'api::job-location.job-location': ApiJobLocationJobLocation;
       'api::job.job': ApiJobJob;
       'api::news-listing-page.news-listing-page': ApiNewsListingPageNewsListingPage;
       'api::products-page.products-page': ApiProductsPageProductsPage;

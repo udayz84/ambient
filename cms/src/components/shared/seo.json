@@ -14,10 +14,6 @@
       "type": "text",
       "maxLength": 160
     },
-    "og_image": {
-      "type": "media",
-      "multiple": false
-    },
     "keywords": {
       "type": "text"
     },

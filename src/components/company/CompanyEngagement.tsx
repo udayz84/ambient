@@ -9,9 +9,17 @@ type CompanyEngagementProps = {
 
 export function CompanyEngagement({ data, joinTeam }: CompanyEngagementProps) {
   const strapiCards = Array.isArray(data?.cards) ? data.cards : null;
+
+  let joinTeamData = joinTeam;
+  let cardEntries: any[] = strapiCards ? [...strapiCards] : [];
+  if (!joinTeamData && cardEntries.length > 0) {
+    joinTeamData = cardEntries[0];
+    cardEntries = cardEntries.slice(1);
+  }
+
   const cards =
-    strapiCards && strapiCards.length > 0
-      ? strapiCards.map((c: any, i: number) => {
+    cardEntries.length > 0
+      ? cardEntries.map((c: any, i: number) => {
           const fallback =
             COMPANY_ENGAGEMENT_CARDS[i] ??
             COMPANY_ENGAGEMENT_CARDS[COMPANY_ENGAGEMENT_CARDS.length - 1];
@@ -27,7 +35,7 @@ export function CompanyEngagement({ data, joinTeam }: CompanyEngagementProps) {
       role="region"
       aria-label="Join our team and partnerships"
     >
-      <CompanyJoinTeam data={joinTeam} />
+      <CompanyJoinTeam data={joinTeamData} />
 
       <div
         className="flex h-[386px] w-full shrink-0 gap-[20px]"

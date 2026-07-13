@@ -13,7 +13,11 @@ const DEFAULT_SUBTITLE =
 
 export function ContactHero({ data }: { data?: any }) {
   const bg = mediaUrl(data?.background_image) || "/contact/hand.png";
-  const titleLines = (data?.title || DEFAULT_TITLE).split("\n");
+  let title = data?.title || DEFAULT_TITLE;
+  if (title === "Start building with Ambient") {
+    title = "Start building\nwith Ambient";
+  }
+  const titleLines = title.split("\n");
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
 
   return (
@@ -54,7 +58,7 @@ export function ContactHero({ data }: { data?: any }) {
       </div>
 
       <p
-        className={`${interRegular.className} absolute top-[199px] left-[901px] z-10 w-[440px] text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+        className={`${interRegular.className} absolute top-[199px] left-[981px] z-10 w-[360px] text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
         data-node-id="2379:4959"
       >
         {subtitle}

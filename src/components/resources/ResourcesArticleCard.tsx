@@ -25,7 +25,7 @@ export function ResourcesArticleCard({
 }: ResourcesArticleCardProps) {
   return (
     <article
-      className="relative flex h-[469.161px] w-[388px] shrink-0 flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[#191919] bg-[linear-gradient(rgba(0,0,0,0.04),rgba(0,0,0,0.04))] px-[12px] pt-[12px] pb-[18px]"
+      className="relative flex h-[550px] w-[388px] shrink-0 flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[#191919] bg-[linear-gradient(rgba(0,0,0,0.04),rgba(0,0,0,0.04))] px-[12px] pt-[12px] pb-[18px]"
       data-node-id={nodeId}
     >
       <div

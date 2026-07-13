@@ -2,10 +2,13 @@ import Image from "next/image";
 import { gilroyMedium } from "../hero/fonts";
 
 export function TechnologyHeadline({ data }: { data?: any }) {
-  const heading = data?.heading || "Re-architecting the\nphysics of AI compute";
+  let heading = data?.heading || "Re-architecting the\nphysics of AI compute";
+  if (heading === "Re-architecting the physics of AI compute") {
+    heading = "Re-architecting the\nphysics of AI compute";
+  }
   const lines = heading.split("\n");
-  const line1 = lines[0] || "Re-architecting the";
-  const line2 = lines.slice(1).join("\n") || "physics of AI compute";
+  const line1 = lines[0];
+  const line2 = lines.slice(1).join("\n");
   return (
     <div
       className="absolute top-[48.5px] left-[468.88720703125px] z-20 h-[126px] w-[497px]"
@@ -24,9 +27,9 @@ export function TechnologyHeadline({ data }: { data?: any }) {
             }}
           >
             <p className="mb-0 leading-[49px] whitespace-pre">
-              {`${line1} `}
+              {line1}
             </p>
-            <p className="leading-[49px] whitespace-pre">{line2}</p>
+            {line2 && <p className="leading-[49px] whitespace-pre">{line2}</p>}
           </h1>
         </div>
 

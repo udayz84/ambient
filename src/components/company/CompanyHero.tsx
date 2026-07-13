@@ -15,7 +15,10 @@ type CompanyHeroProps = {
 };
 
 export function CompanyHero({ data }: CompanyHeroProps = {}) {
-  const title = (data?.title as string) || FALLBACK_TITLE;
+  let title = (data?.title as string) || FALLBACK_TITLE;
+  if (title === "A new paradigm for efficient AI compute" || title === "A new paradigm for efficient AI compute.") {
+    title = "A new paradigm for\nefficient AI compute";
+  }
   const body = (data?.body as string) || FALLBACK_BODY;
   const bgSrc = FALLBACK_BG;
   const titleLines = title.split("\n");

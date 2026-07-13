@@ -310,7 +310,14 @@ export function buildArticles(strapiArticles: unknown): ResourceArticle[] {
   }
   return (strapiArticles as StrapiArticleRow[]).map(
     (a, i): ResourceArticle => {
+      const fallback = RESOURCE_ARTICLES[i % RESOURCE_ARTICLES.length];
       const cat = String(a?.category || "");
+      
+      let imageUrl = mediaUrl(a?.featured_image) || undefined;
+      if (imageUrl && imageUrl.match(/\.(mp4|webm)$/i)) {
+        imageUrl = undefined;
+      }
+
       return {
         nodeId:
           (a?.documentId as string) ||
@@ -319,11 +326,11 @@ export function buildArticles(strapiArticles: unknown): ResourceArticle[] {
         categoryId: articleCategoryId(cat),
         categoryOffsetX: 0.5,
         centerCategory: true,
-        title: (a?.title as string) || "",
-        excerpt: (a?.excerpt as string) || "",
-        imageSrc: mediaUrl(a?.featured_image) || undefined,
-        imageOverlaySrc: undefined,
-        href: (a?.external_url as string) || "#",
+        title: (a?.title as string) || fallback.title,
+        excerpt: (a?.excerpt as string) || fallback.excerpt,
+        imageSrc: imageUrl || fallback.imageSrc,
+        imageOverlaySrc: imageUrl ? undefined : fallback.imageOverlaySrc,
+        href: (a?.external_url as string) || fallback.href,
       };
     }
   );

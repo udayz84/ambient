@@ -95,7 +95,7 @@ export function LatestNews({ data }: { data?: any }) {
                     categoryOffsetX: fallback.categoryOffsetX,
                     date: fallback.date,
                     href: fallback.href,
-                    imageSrc: mediaUrl(c.image) || fallback.imageSrc,
+                    imageSrc: (mediaUrl(c.image) && !mediaUrl(c.image)?.match(/\.(mp4|webm)$/i)) ? mediaUrl(c.image) : fallback.imageSrc,
                   };
                 })
               : LATEST_NEWS_ARTICLES

@@ -26,7 +26,10 @@ const FALLBACK_FEATURES = [
 
 export function TechnologyMobile({ data }: { data?: any }) {
   const tagText = data?.tag?.text || "Real-time AI at edge";
-  const heading = data?.heading || "Re-architecting\nthe physics of\nAI compute";
+  let heading = data?.heading || "Re-architecting\nthe physics of\nAI compute";
+  if (heading === "Re-architecting the physics of AI compute") {
+    heading = "Re-architecting\nthe physics of\nAI compute";
+  }
   const headingLines = heading.split("\n");
   while (headingLines.length < 3) headingLines.push("");
 
