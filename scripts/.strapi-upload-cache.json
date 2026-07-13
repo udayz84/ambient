@@ -1237,5 +1237,47 @@
     "url": "/uploads/article_gpx10_4921aecc58.png",
     "name": "article-gpx10.png",
     "sourcePath": "latest-news/article-gpx10.png"
+  },
+  "c00cc61eff9de3ff2725159ed956cb1e8739ba1a": {
+    "id": 191,
+    "documentId": "famogvrgim6zkvr6reas8lm2",
+    "url": "/uploads/article_1_overlay_34423a359d.png",
+    "name": "article-1-overlay.png",
+    "sourcePath": "resources/article-1-overlay.png"
+  },
+  "26cb6392a131d90158d1463522113258e830d084": {
+    "id": 192,
+    "documentId": "vfj9bbryynzoa0qfhdh91vn8",
+    "url": "/uploads/article_2_overlay_361517345e.png",
+    "name": "article-2-overlay.png",
+    "sourcePath": "resources/article-2-overlay.png"
+  },
+  "f521cb3c529f47e7135cb7aeba586b1332a47595": {
+    "id": 193,
+    "documentId": "z44ggrx1knakchc9n5nzqm8j",
+    "url": "/uploads/article_3_overlay_192dac43c9.png",
+    "name": "article-3-overlay.png",
+    "sourcePath": "resources/article-3-overlay.png"
+  },
+  "5f4dd3537b55aa1072aa0224b56ff63ad0817293": {
+    "id": 194,
+    "documentId": "kgvjvx5fqx5su3r3fwsbpy7i",
+    "url": "/uploads/article_4_overlay_60b26c908c.png",
+    "name": "article-4-overlay.png",
+    "sourcePath": "resources/article-4-overlay.png"
+  },
+  "3b7cd38a3e3a3a36b6c8ad6e1067a63c34dd709a": {
+    "id": 195,
+    "documentId": "tqrx72ky1yzntyko3y08i069",
+    "url": "/uploads/article_5_overlay_9d558333ef.png",
+    "name": "article-5-overlay.png",
+    "sourcePath": "resources/article-5-overlay.png"
+  },
+  "74adc15982c59f3bb19fcf446f085e2c68003c2f": {
+    "id": 196,
+    "documentId": "ovm71htxxo3h2n85238k36kv",
+    "url": "/uploads/article_6_overlay_d854df79d4.png",
+    "name": "article-6-overlay.png",
+    "sourcePath": "resources/article-6-overlay.png"
   }
 }

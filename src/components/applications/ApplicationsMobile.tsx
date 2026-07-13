@@ -247,7 +247,7 @@ export function ApplicationsMobile({
       </div>
 
       {/* Feature Card */}
-      <div className="relative mt-[-36px] w-full max-w-[343px] border-[0.5px] border-white/20 bg-[#000000] p-[24px]">
+      <div className="relative z-20 mt-[-36px] w-full max-w-[343px] border-[0.5px] border-white/20 bg-[#000000] p-[24px]">
         {activeTab === "AUTOMOTIVE" && activeIndex === 0 && (
           <img
             src="/applications/indicator-vertical.svg"

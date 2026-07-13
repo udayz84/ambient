@@ -37,7 +37,7 @@ export function ApplicationsFeatureCard({
   return (
     <div className="contents" data-node-id={wrapperNodeId} data-name="Content">
       <div
-        className="absolute top-[601.22119140625px] flex w-[449.9994201660156px] flex-col items-start gap-[10px] p-[32px] backdrop-blur-[8px]"
+        className="absolute z-10 top-[601.22119140625px] flex w-[449.9994201660156px] flex-col items-start gap-[10px] p-[32px] backdrop-blur-[8px]"
         style={{
           left: isLeft ? "40.88720703125px" : undefined,
           right: isLeft ? undefined : "40.11279296875px",
