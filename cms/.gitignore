@@ -4,5 +4,4 @@ dist
 .tmp
 .tmp/data.db*
 .env
-uploads
-public/uploads
+

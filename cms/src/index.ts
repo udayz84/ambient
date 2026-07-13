@@ -5,7 +5,8 @@ export default {
       const homePage = await strapi.documents('api::home-page.home-page').findFirst({
         populate: {
           latest_news: { populate: ['cards'] },
-          platform_scale: { populate: { products: { populate: ['chip_image'] } } }
+          platform_scale: { populate: { products: { populate: ['chip_image'] } } },
+          ecosystem: { populate: ['silicon_partners', 'development_partners'] }
         }
       });
 
@@ -69,57 +70,42 @@ export default {
           }
         }
       }
-      // Seeding Open Roles in Careers Page
-      try {
-        const careersPage = await strapi.documents('api::careers-page.careers-page').findFirst({
-          populate: { open_roles: { populate: ['job_categories.jobs'] } }
-        });
 
-        if (careersPage && careersPage.open_roles) {
-          const existingCategories = careersPage.open_roles.job_categories || [];
-          if (existingCategories.length === 0) {
-            console.log('Seeding job categories for Careers page...');
-            const seedJobs = [
-              { title: "Analog Circuit Design Engineer", category: "Hardware", location: "San Francisco" },
-              { title: "Machine Learning Engineer", category: "Software", location: "San Francisco" },
-              { title: "Mixed-Signal Verification Engineer", category: "Hardware", location: "Remote" },
-              { title: "Physics-Aware ML Researcher", category: "Research", location: "San Francisco" },
-              { title: "Silicon Characterization Engineer", category: "Hardware", location: "San Francisco" },
-              { title: "Embedded Systems Engineer", category: "Software", location: "San Francisco" },
-              { title: "Quantization Algorithm Researcher", category: "Research", location: "San Francisco" },
-              { title: "ASIC Physical Design Engineer", category: "Hardware", location: "San Francisco" }
-            ];
+      if (homePage && homePage.ecosystem) {
+        let updated = false;
+        let siliconPartners = homePage.ecosystem.silicon_partners || [];
+        let devPartners = homePage.ecosystem.development_partners || [];
 
-            const categoriesMap: any = {};
-            for (const job of seedJobs) {
-              if (!categoriesMap[job.category]) categoriesMap[job.category] = [];
-              categoriesMap[job.category].push({
-                title: job.title,
-                location: job.location,
-                apply_url: "#"
-              });
-            }
-
-            const jobCategories = Object.keys(categoriesMap).map(categoryName => ({
-              category_name: categoryName,
-              jobs: categoriesMap[categoryName]
-            }));
-
-            await strapi.documents('api::careers-page.careers-page').update({
-              documentId: careersPage.documentId,
-              data: {
-                open_roles: {
-                  ...careersPage.open_roles,
-                  job_categories: jobCategories
-                }
-              }
-            });
-            console.log('Successfully seeded job categories!');
+        if (siliconPartners.length < 5) {
+          while (siliconPartners.length < 5) {
+            siliconPartners.push({ name: `Partner ${siliconPartners.length + 1}` });
           }
+          updated = true;
         }
-      } catch (err) {
-        console.error('Error seeding open roles:', err);
+
+        if (devPartners.length < 5) {
+          while (devPartners.length < 5) {
+            devPartners.push({ name: `Dev Partner ${devPartners.length + 1}` });
+          }
+          updated = true;
+        }
+
+        if (updated) {
+          console.log('Seeding missing ecosystem partners...');
+          await strapi.documents('api::home-page.home-page').update({
+            documentId: homePage.documentId,
+            data: {
+              ecosystem: {
+                ...homePage.ecosystem,
+                silicon_partners: siliconPartners,
+                development_partners: devPartners
+              }
+            }
+          });
+          console.log('Successfully seeded ecosystem partners!');
+        }
       }
+      // Seeding Open Roles in Careers Page is no longer needed since Jobs are a Collection Type.
 
       // Seeding Contact Form Fields
       try {
