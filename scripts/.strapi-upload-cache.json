@@ -1279,5 +1279,68 @@
     "url": "/uploads/article_6_overlay_d854df79d4.png",
     "name": "article-6-overlay.png",
     "sourcePath": "resources/article-6-overlay.png"
+  },
+  "cd2a70ff18cdc0719cc7666fadc284ad921f8972": {
+    "id": 11,
+    "documentId": "b8jshkpz0kthr2ub8u2hrfjq",
+    "url": "/uploads/icon_speak_ai_efef7670a9.svg",
+    "name": "icon-speak-ai.svg",
+    "sourcePath": "technology/icon-speak-ai.svg"
+  },
+  "e0f85fda79d64a63322446b31675dbc61de38628": {
+    "id": 12,
+    "documentId": "khmyh89vy8fvo870e8j7lerl",
+    "url": "/uploads/icon_compute_406035f24c.svg",
+    "name": "icon-compute.svg",
+    "sourcePath": "technology/icon-compute.svg"
+  },
+  "a1d4c352bea9fd2ce90232075610578a96710c3e": {
+    "id": 13,
+    "documentId": "c9ott8b8usl79jroyoj2c790",
+    "url": "/uploads/icon_tools_3bcae3c455.svg",
+    "name": "icon-tools.svg",
+    "sourcePath": "technology/icon-tools.svg"
+  },
+  "10fd5a45f61672358b6abf1973722d8b36f75e27": {
+    "id": 194,
+    "documentId": "eyd9er8p53skjr10k14nxanp",
+    "url": "/uploads/cta_dot_651bcecaa3.svg",
+    "name": "cta-dot.svg",
+    "sourcePath": "applications/cta-dot.svg"
+  },
+  "55919f4db1e1ebad4c7c956c17cd4919eef9b902": {
+    "id": 28,
+    "documentId": "her95v4sdffw3cx8b2of2o4n",
+    "url": "/uploads/logo_partner_1_e64de3512e.svg",
+    "name": "logo-partner-1.svg",
+    "sourcePath": "ecosystem/logo-partner-1.svg"
+  },
+  "32cc1bd6f9f45ef65e7542b37151834aa51aa9c3": {
+    "id": 29,
+    "documentId": "e6uvda8d0hr6rd7q6xngqu5w",
+    "url": "/uploads/logo_partner_2_54b17428e8.svg",
+    "name": "logo-partner-2.svg",
+    "sourcePath": "ecosystem/logo-partner-2.svg"
+  },
+  "cab21f0ce36a23566a42cc7c9ee06e1a5b459667": {
+    "id": 30,
+    "documentId": "hcizsuzge7uboo1605iumsd7",
+    "url": "/uploads/logo_partner_3_ad3f448d8a.svg",
+    "name": "logo-partner-3.svg",
+    "sourcePath": "ecosystem/logo-partner-3.svg"
+  },
+  "061509b6422d804b1db5685ba75d71c8ef799940": {
+    "id": 31,
+    "documentId": "atucdwttwnjrl51y08pbzu9j",
+    "url": "/uploads/logo_partner_4_dbddb58513.svg",
+    "name": "logo-partner-4.svg",
+    "sourcePath": "ecosystem/logo-partner-4.svg"
+  },
+  "1d968edf9c90e6f6782611329cee3df29d8d88e2": {
+    "id": 32,
+    "documentId": "ucb27wintz6racx9dxx1af7u",
+    "url": "/uploads/logo_octane_59661e6327.svg",
+    "name": "logo-octane.svg",
+    "sourcePath": "ecosystem/logo-octane.svg"
   }
 }

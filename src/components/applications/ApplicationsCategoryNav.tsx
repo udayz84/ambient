@@ -66,7 +66,7 @@ export function ApplicationsCategoryNav({
 }: ApplicationsCategoryNavProps) {
   return (
     <div
-      className="absolute top-[199.7783203125px] left-1/2 flex h-[52px] w-max -translate-x-1/2 items-center gap-[12px]"
+      className="absolute top-[199.7783203125px] left-1/2 flex h-[52px] w-max -translate-x-1/2 scale-[0.84] items-center gap-[12px] min-[1440px]:scale-[0.9] min-[1600px]:scale-100"
       data-node-id="2379:851"
       data-name="Options"
     >
