@@ -4,7 +4,7 @@
   "private": true,
   "description": "Strapi CMS for Ambient Scientific website",
   "scripts": {
-    "build": "strapi build",
+    "build": "strapi build && node scripts/copy-schemas.js",
     "develop": "strapi develop",
     "start": "strapi start",
     "strapi": "strapi"
