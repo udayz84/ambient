@@ -164,18 +164,25 @@ export async function getCollection<T = unknown>(
   return res.data || [];
 }
 
-/** Fetch the global settings (no status param — draftAndPublish is off). */
-export async function getGlobalSettings<T = unknown>(): Promise<T | null> {
+/** Fetch the navbar single type (brand + header). */
+export async function getNavbar<T = unknown>(): Promise<T | null> {
+  const sections: PopulateSection[] = ["brand", "header"];
+  const res = await fetchStrapi<StrapiResponse<T>>(
+    `/api/navbar?${buildPopulate(sections)}`
+  );
+  return res.data;
+}
+
+/** Fetch the footer single type (footer + newsletter + contact_details + default_seo). */
+export async function getFooter<T = unknown>(): Promise<T | null> {
   const sections: PopulateSection[] = [
-    "brand",
-    "header",
     { section: "footer", fields: ["crafted_by_logo", "background_image"], nested: ["social_links"] },
     "newsletter",
     "contact_details",
     "default_seo",
   ];
   const res = await fetchStrapi<StrapiResponse<T>>(
-    `/api/global-settings?${buildPopulate(sections)}`
+    `/api/footer?${buildPopulate(sections)}`
   );
   return res.data;
 }

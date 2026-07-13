@@ -515,9 +515,13 @@ const ECOSYSTEM_COLUMNS_FALLBACK = [
 ];
 
 function CompanyEcosystemMobile({ data }: { data?: any }) {
-  const heading = (data?.heading as string) || "";
+  const rawHeading = (data?.heading as string) || "A globally resilient\necosystem";
   const subtitle = (data?.subtitle as string) || FALLBACK_ECOSYSTEM_SUBTITLE;
-  const headingLines = heading ? heading.split("\n") : [FALLBACK_ECOSYSTEM_HEADING_LINE_1, FALLBACK_ECOSYSTEM_HEADING_LINE_2];
+  const headingLines = rawHeading.includes("\n") 
+    ? rawHeading.split("\n") 
+    : rawHeading === "A globally resilient ecosystem"
+      ? ["A globally resilient", "ecosystem"]
+      : [rawHeading];
 
   const strapiColumns = Array.isArray(data?.columns) ? data.columns : null;
   const columns =
@@ -535,25 +539,26 @@ function CompanyEcosystemMobile({ data }: { data?: any }) {
 
   return (
     <section
-      className="relative w-full bg-black px-[16px] py-[32px]"
+      className="relative w-full bg-black px-[16px] py-[32px] overflow-hidden"
       aria-label="A globally resilient ecosystem"
     >
-      <div className="relative border-[0.5px] border-solid border-[rgba(255,255,255,0.15)] px-[14px] py-[32px] overflow-clip">
+
+
+      <div className="relative z-10 border-[0.5px] border-solid border-[rgba(255,255,255,0.15)] px-[10px] py-[32px] overflow-clip">
         <div className="pointer-events-none absolute inset-0" aria-hidden>
           <Corners />
         </div>
 
         {/* Title */}
-        <div className="relative mx-auto w-fit px-[16px] py-[4px] mb-[25px]">
+        <div className="relative mx-auto w-fit px-[12px] py-[4px] mb-[25px]">
           <Corners />
           <h2
-            className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+            className={`${gilroyMedium.className} bg-clip-text text-center text-[32px] min-[390px]:text-[36px] leading-[36px] font-medium text-transparent not-italic`}
             style={{ backgroundImage: gradient("105.083deg") }}
           >
             {headingLines.map((line, i) => (
-              <span key={i}>
+              <span key={i} className="whitespace-nowrap block">
                 {line}
-                {i < headingLines.length - 1 ? <br /> : null}
               </span>
             ))}
           </h2>
@@ -598,15 +603,16 @@ function CompanyEcosystemMobile({ data }: { data?: any }) {
         </div>
       </div>
 
-      {/* Map Image */}
-      <div className="relative mt-[30px] -mx-[16px] h-[250px] w-[calc(100%+32px)]">
+      {/* Map Image (below boxes) */}
+      <div className="relative mt-[-10px] -mx-[16px] h-[300px] w-[calc(100%+32px)] overflow-hidden">
         <Image
           src={mapSrc}
           alt="Global footprint map"
           fill
-          className="object-cover object-top"
+          className="object-cover object-top mix-blend-screen"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+        {/* Very slight top gradient to smooth the transition */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-transparent h-4" />
       </div>
     </section>
   );

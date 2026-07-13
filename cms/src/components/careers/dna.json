@@ -1,1 +1,31 @@
-{ "collectionName": "components_careers_dnas", "info": { "displayName": "DNA", "description": "Careers DNA section" }, "options": {}, "attributes": { "heading": { "type": "string", "required": true }, "subtitle": { "type": "text" }, "chip_background": { "type": "media", "multiple": false }, "chip_object": { "type": "media", "multiple": false }, "panels": { "type": "component", "repeatable": true, "component": "careers.dna-panel" } } }
+{
+  "collectionName": "components_careers_dnas",
+  "info": {
+    "displayName": "DNA",
+    "description": "Careers DNA section"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+
+    "chip_object": {
+      "type": "media",
+      "multiple": false
+    },
+    "mobile_chip_object": {
+      "type": "media",
+      "multiple": false
+    },
+    "panels": {
+      "type": "component",
+      "repeatable": true,
+      "component": "careers.dna-panel"
+    }
+  }
+}

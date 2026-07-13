@@ -5,9 +5,6 @@ import { DEVELOPER_PLATFORM_CARDS } from "./developer-platform-cards";
 
 export function DeveloperPlatformMobile({ data }: { data?: any }) {
   const heading = data?.heading || "Build the impossible today";
-  const headingLines = heading.split("\n");
-  const headingLine1 = headingLines[0] || "Build the";
-  const headingLine2 = headingLines.slice(1).join("\n") || "impossible today";
   const subtitle =
     data?.subtitle ||
     "Don't let legacy design limit your roadmap. Discover the market-differentiating features of the GPX10 and what's coming next.";
@@ -50,8 +47,7 @@ export function DeveloperPlatformMobile({ data }: { data?: any }) {
                 "linear-gradient(107.454deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
             }}
           >
-            {headingLine1} <br />
-            {headingLine2}
+            {heading}
           </h2>
           
           <div className="relative col-start-1 row-start-1 mt-0 ml-[353.65px] flex size-[4px] items-center justify-center">
@@ -94,60 +90,15 @@ export function DeveloperPlatformMobile({ data }: { data?: any }) {
           {subtitle}
         </p>
 
-        <div className="mt-[28px] w-full flex flex-col gap-[16px] px-[24px]">
-          {cards.map((card) => (
-            <div
-              key={card.key}
-              className="relative flex flex-col border-[0.5px] border-solid border-white/20 bg-[rgba(0,0,0,0.4)] p-[20px] backdrop-blur-[12px]"
-            >
-              <div className="absolute -top-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center">
-                <div className="rotate-180 flex-none">
-                  <div className="relative size-[6px]">
-                    <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
-                  </div>
-                </div>
-              </div>
-              <div className="absolute -top-[0.5px] -left-[0.5px] z-10 flex size-[6px] items-center justify-center">
-                <div className="-scale-y-100 flex-none">
-                  <div className="relative size-[6px]">
-                    <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
-                  </div>
-                </div>
-              </div>
-              <div className="absolute -bottom-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center">
-                <div className="-scale-x-100 flex-none">
-                  <div className="relative size-[6px]">
-                    <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
-                  </div>
-                </div>
-              </div>
-              <div className="absolute -bottom-[0.5px] -left-[0.5px] z-10 flex size-[6px] items-center justify-center">
-                <div className="flex-none">
-                  <div className="relative size-[6px]">
-                    <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
-                  </div>
-                </div>
-              </div>
-
-              <p className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium text-white not-italic [word-break:break-word]`}>
-                {card.title}
-              </p>
-              <p className={`${interRegular.className} mt-[8px] text-[14px] leading-[20px] font-normal text-[#f0f0f0] opacity-80 not-italic [word-break:break-word]`}>
-                {card.body}
-              </p>
-              {card.imageSrc ? (
-                <div className="relative mt-[16px] h-[180px] w-full overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    alt=""
-                    src={card.imageSrc}
-                    className="absolute inset-0 size-full object-contain"
-                    aria-hidden
-                  />
-                </div>
-              ) : null}
-            </div>
-          ))}
+        <div className="mt-[28px] w-full px-[24px]">
+          <Image
+            src="/mobile/Frame-1984079478.png"
+            alt="Developer Platform Mobile"
+            width={353}
+            height={493}
+            className="w-full h-auto object-contain"
+            sizes="100vw"
+          />
         </div>
       </div>
     </div>

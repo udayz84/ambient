@@ -5,8 +5,8 @@ import { ContactMobile } from "./ContactMobile";
 import { ContactResources } from "./ContactResources";
 import { ContactSchedule } from "./ContactSchedule";
 
-const CONTACT_PAGE_HEIGHT_PX = 4250;
-const CONTACT_FOOTER_TOP_PX = 4250;
+const CONTACT_PAGE_HEIGHT_PX = 2674;
+const CONTACT_FOOTER_TOP_PX = 2674;
 
 export function Contact({ data }: { data?: any }) {
   return (
@@ -27,7 +27,7 @@ export function Contact({ data }: { data?: any }) {
 
           <div
             className="pointer-events-none absolute right-[269.72px] size-[4px]"
-            style={{ top: 4026.57 }}
+            style={{ top: 3116 }}
           >
             <div className="-scale-y-100 rotate-180 flex-none">
               <div className="relative size-[4px]" data-node-id="2379:5085">

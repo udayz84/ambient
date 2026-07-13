@@ -13,10 +13,6 @@
     "href": {
       "type": "string",
       "required": true
-    },
-    "dot_icon": {
-      "type": "media",
-      "multiple": false
     }
   }
 }

@@ -65,6 +65,7 @@ export function ApplicationsMobile({
     (t) => (t?.label || "").toUpperCase() === activeTab.toUpperCase()
   );
   const imgSrc =
+    mediaUrl(activeTabData?.mobile_hero_image) ||
     mediaUrl(activeTabData?.hero_image) ||
     MOBILE_HERO_IMAGES[activeTab] ||
     "/applications/car-hero.png";

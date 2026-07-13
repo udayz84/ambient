@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "footer",
+  "info": {
+    "singularName": "footer",
+    "pluralName": "footers",
+    "displayName": "Footer",
+    "description": "Site footer, newsletter, contact details, and default SEO"
+  },
+  "options": { "draftAndPublish": false },
+  "pluginOptions": {},
+  "attributes": {
+    "footer": { "type": "component", "repeatable": false, "component": "shared.footer" },
+    "newsletter": { "type": "component", "repeatable": false, "component": "shared.newsletter" },
+    "contact_details": { "type": "component", "repeatable": false, "component": "shared.contact-details" },
+    "default_seo": { "type": "component", "repeatable": false, "component": "shared.seo", "required": true }
+  }
+}

@@ -205,7 +205,8 @@ export function EcosystemPartners({ data }: { data?: any }) {
         >
           <EcosystemPartnerRow
             config={SILICON_PARTNER_ROW}
-            siliconPartners={siliconPartners}
+            partners={siliconPartners}
+            isDevelopment={false}
           />
         </PartnerSection>
 
@@ -218,7 +219,8 @@ export function EcosystemPartners({ data }: { data?: any }) {
           <EcosystemPartnerRow
             config={DEVELOPMENT_PARTNER_ROW}
             logoStatNodeIds={DEV_LOGO_STAT_NODES}
-            developmentPartners={developmentPartners}
+            partners={developmentPartners}
+            isDevelopment={true}
           />
         </PartnerSection>
 
@@ -230,7 +232,8 @@ export function EcosystemPartners({ data }: { data?: any }) {
         >
           <EcosystemPartnerRow
             config={SILICON_PARTNER_ROW}
-            siliconPartners={siliconPartners}
+            partners={siliconPartners}
+            isDevelopment={false}
           />
         </PartnerSection>
 
@@ -243,7 +246,8 @@ export function EcosystemPartners({ data }: { data?: any }) {
           <EcosystemPartnerRow
             config={DEVELOPMENT_PARTNER_ROW}
             logoStatNodeIds={DEV_LOGO_STAT_NODES}
-            developmentPartners={developmentPartners}
+            partners={developmentPartners}
+            isDevelopment={true}
           />
         </PartnerSection>
       </div>

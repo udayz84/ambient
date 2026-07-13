@@ -5,7 +5,6 @@
   "attributes": {
     "heading": { "type": "string", "required": true },
     "tag": { "type": "component", "repeatable": false, "component": "shared.tag" },
-    "features": { "type": "component", "repeatable": true, "component": "home.tech-feature" },
-    "background_visual": { "type": "media", "multiple": false }
+    "features": { "type": "component", "repeatable": true, "component": "home.tech-feature" }
   }
 }

@@ -187,7 +187,7 @@ function CareersHeroMobile({ data }: { data?: any }) {
 
           {/* Content (3243:335) — title + subtitle */}
           <div className="absolute left-[20px] top-[32px] flex w-[calc(100%-40px)] flex-col items-center gap-[15px]">
-            <div className="relative inline-flex flex-col items-center justify-center">
+            <div className="relative inline-flex flex-col items-center justify-center px-[16px] py-[8px]">
               <h1
                 className={`${gilroyMedium.className} max-w-[273px] w-full bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
                 style={{ backgroundImage: gradient("103.779deg") }}
@@ -324,7 +324,7 @@ function CareersDnaMobile({ data }: { data?: any }) {
     data?.subtitle || "This is how we work, build, and solve at Ambient.";
   const bgImg = "/mobile/career/image 108.png";
   const chipImg =
-    mediaUrl(data?.chip_object) || "/mobile/career/Chip Image.png";
+    mediaUrl(data?.mobile_chip_object) || mediaUrl(data?.chip_object) || "/mobile/career/Chip Image.png";
   const strapiPanels: any[] =
     data?.panels && Array.isArray(data.panels) ? data.panels : [];
   const panels = DNA_PANEL_FALLBACKS_MOBILE.map((fallback, i) => ({

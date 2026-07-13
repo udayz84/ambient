@@ -32,11 +32,13 @@ function PartnerSectionMobile({
         <EcosystemPartnerRow
           config={SILICON_PARTNER_ROW}
           siliconPartners={siliconPartners}
+          developmentPartners={developmentPartners}
         />
       ) : (
         <EcosystemPartnerRow
           config={DEVELOPMENT_PARTNER_ROW}
           logoStatNodeIds={DEV_LOGO_STAT_NODES}
+          siliconPartners={siliconPartners}
           developmentPartners={developmentPartners}
         />
       )}
@@ -125,10 +127,10 @@ export function EcosystemMobile({ data }: { data?: any }) {
 
       <div className="mt-[24px] flex w-full overflow-hidden">
         <div className="flex w-max gap-[32px] animate-[ecosystem-scroll-mobile_25s_linear_infinite]">
-          <PartnerSectionMobile title="SILICON PARTNERS" isSilicon={true} siliconPartners={data?.silicon_partners} />
-          <PartnerSectionMobile title="DEVELOPMENT PARTNERS" isSilicon={false} developmentPartners={data?.development_partners} />
-          <PartnerSectionMobile title="SILICON PARTNERS" isSilicon={true} siliconPartners={data?.silicon_partners} />
-          <PartnerSectionMobile title="DEVELOPMENT PARTNERS" isSilicon={false} developmentPartners={data?.development_partners} />
+          <PartnerSectionMobile title="SILICON PARTNERS" isSilicon={true} siliconPartners={data?.silicon_partners} developmentPartners={data?.development_partners} />
+          <PartnerSectionMobile title="DEVELOPMENT PARTNERS" isSilicon={false} siliconPartners={data?.silicon_partners} developmentPartners={data?.development_partners} />
+          <PartnerSectionMobile title="SILICON PARTNERS" isSilicon={true} siliconPartners={data?.silicon_partners} developmentPartners={data?.development_partners} />
+          <PartnerSectionMobile title="DEVELOPMENT PARTNERS" isSilicon={false} siliconPartners={data?.silicon_partners} developmentPartners={data?.development_partners} />
         </div>
       </div>
     </div>

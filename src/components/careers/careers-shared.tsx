@@ -531,8 +531,10 @@ export function CareersWhiteCta({
         className="pointer-events-none absolute inset-0 bg-[length:307.2px_307.2px] bg-top-left opacity-40 mix-blend-plus-lighter"
         style={{ backgroundImage: "url(/careers/white-cta-texture.png)" }}
       />
-      <span className="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[14px] leading-[normal] whitespace-nowrap text-[#121212] uppercase not-italic">
-        {children}
+      <span className="relative z-10 flex h-full w-full items-center justify-center px-6">
+        <span className="text-[14px] leading-[normal] whitespace-nowrap text-[#121212] uppercase not-italic">
+          {children}
+        </span>
       </span>
       
       {/* Custom Corners that pop out slightly to avoid the inset shadow */}

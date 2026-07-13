@@ -48,7 +48,6 @@ export function CareersDna({ data }: { data?: any }) {
   const headingLines = headingText.split("\n");
   const subtitle = data?.subtitle || DNA_SUBTITLE_FALLBACK;
   const bgImg = "/careers/dna-section-bg.png";
-  const chipBg = mediaUrl(data?.chip_background) || "/careers/chip-bg.png";
   const chipObject =
     mediaUrl(data?.chip_object) || "/careers/chip-object.png";
   const strapiPanels: any[] =
@@ -133,7 +132,7 @@ export function CareersDna({ data }: { data?: any }) {
             />
           </div>
 
-          <CareersDnaChipImage chipBg={chipBg} chipObject={chipObject} />
+          <CareersDnaChipImage chipObject={chipObject} />
 
           <div className="flex w-[389.999px] flex-col gap-[40px]" data-node-id="2379:8876">
             <CareersGlassPanel
@@ -165,10 +164,8 @@ export function CareersDna({ data }: { data?: any }) {
 }
 
 function CareersDnaChipImage({
-  chipBg,
   chipObject,
 }: {
-  chipBg: string;
   chipObject: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -195,36 +192,17 @@ function CareersDnaChipImage({
   return (
     <div
       ref={ref}
-      className={`relative h-[400px] w-[386px] shrink-0 ${
+      className={`relative h-[400px] w-[386px] flex shrink-0 items-center justify-center ${
         isVisible ? CHIP_FADE_IN_CLASS : "translate-y-[25px] opacity-0"
       }`}
       data-node-id="2379:8873"
       data-name="Chip Image"
     >
-      <div
-        className="absolute top-1/2 left-1/2 h-[449px] w-[433px] -translate-x-1/2 -translate-y-1/2 overflow-hidden"
-        data-node-id="2379:8874"
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={chipBg}
-          alt=""
-          className="absolute top-[-4.24%] left-[-10.68%] h-[108.47%] w-[121.37%] max-w-none object-cover"
-        />
-      </div>
-      <div
-        className="absolute top-[calc(50%-131.56px)] left-[34.56%] right-[34.24%] flex aspect-[120.41/60.86] items-center justify-center"
-        data-node-id="2379:8875"
-      >
-        <div className="relative h-full w-full rotate-[1.22deg] overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={chipObject}
-            alt=""
-            className="absolute top-[-28.9%] left-[-44.69%] h-[127.84%] w-[144.32%] max-w-none object-cover"
-          />
-        </div>
-      </div>
+      <img
+        src={chipObject}
+        alt=""
+        className="w-full max-h-[449px] object-contain scale-[1.2]"
+      />
     </div>
   );
 }

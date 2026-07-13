@@ -3,8 +3,9 @@ import { gilroySemiBold } from "../hero/fonts";
 import {
   type PartnerRowConfig,
   type EcosystemPartner,
-  resolveSiliconPartnerLogos,
-  resolveDevelopmentPartners,
+  resolvePartners,
+  SILICON_PARTNERS_FALLBACK,
+  DEVELOPMENT_PARTNERS_FALLBACK,
 } from "./ecosystem-data";
 import { EcosystemGridLine } from "./EcosystemGridLine";
 import { Corners } from "../shared/Corners";
@@ -14,11 +15,15 @@ function PartnerLogoStat({
   src,
   width,
   height,
+  name,
+  textNodeId,
 }: {
   nodeId: string;
   src: string;
   width: number;
   height: number;
+  name?: string | null;
+  textNodeId?: string;
 }) {
   return (
     <div
@@ -27,8 +32,7 @@ function PartnerLogoStat({
       data-name="Stat"
     >
       <div
-        className="relative shrink-0 overflow-clip"
-        style={{ width, height }}
+        className="relative shrink-0 overflow-clip flex flex-row items-center gap-[10px]"
         data-name="Icon"
       >
         <Image
@@ -36,7 +40,8 @@ function PartnerLogoStat({
           alt=""
           width={width}
           height={height}
-          className="block size-full max-w-none object-contain"
+          className="block max-w-none object-contain"
+          style={{ width: `${width}px`, height: `${height}px` }}
         />
       </div>
     </div>
@@ -49,27 +54,23 @@ const DEV_LOGO_STAT_NODES = ["2379:1134", "2379:1144", "2379:1163"] as const;
 type EcosystemPartnerRowProps = {
   config: PartnerRowConfig;
   logoStatNodeIds?: readonly [string, string, string];
-  siliconPartners?: readonly EcosystemPartner[];
-  developmentPartners?: readonly EcosystemPartner[];
+  partners?: readonly EcosystemPartner[];
+  isDevelopment?: boolean;
 };
 
 export function EcosystemPartnerRow({
   config,
   logoStatNodeIds = LOGO_STAT_NODES,
-  siliconPartners,
-  developmentPartners,
+  partners,
+  isDevelopment,
 }: EcosystemPartnerRowProps) {
-  const logos = resolveSiliconPartnerLogos(siliconPartners);
-  const [logo1, logo2, logo3] = [
-    logos[0],
-    logos[1],
-    logos[2],
-  ];
+  const resolved = resolvePartners(
+    partners,
+    isDevelopment ? DEVELOPMENT_PARTNERS_FALLBACK : SILICON_PARTNERS_FALLBACK
+  );
+  
+  const [logo1, logo2, logo3, logo4, logo5] = resolved;
   const [stat1, stat2, stat3] = logoStatNodeIds;
-
-  const devPartners = resolveDevelopmentPartners(developmentPartners);
-  const tezos = devPartners[0];
-  const octane = devPartners[1];
 
   return (
     <div
@@ -95,70 +96,18 @@ export function EcosystemPartnerRow({
       <PartnerLogoStat nodeId={stat3} {...logo3} />
       <EcosystemGridLine {...config.gridLines[2]} />
 
-      <div
-        className="relative flex w-[150px] shrink-0 flex-col items-center justify-center gap-[12px] py-[20px]"
-        data-node-id={config.tezos.statNodeId}
-        data-name="Stat"
-      >
-        <div
-          className="relative h-[35px] w-[88.63px] shrink-0"
-          data-name="Div [framer-pakwz]"
-        >
-          <div
-            className="absolute top-[7.3px] left-[41px] h-[20.41px] w-[47.63px]"
-            data-name="Div [framer-y1thm5]"
-          >
-            <p
-              className={`${gilroySemiBold.className} absolute top-[10.3px] left-0 -translate-y-1/2 text-[17.1px] leading-[20.4px] font-semibold whitespace-nowrap text-white not-italic`}
-              data-node-id={config.tezos.textNodeId}
-            >
-              {tezos?.name ?? "Tezos"}
-            </p>
-          </div>
-          <div
-            className="absolute top-0 left-0 size-[35px] overflow-clip"
-            data-name="Icon"
-          >
-            <Image
-              src={tezos?.src ?? "/ecosystem/logo-partner-4.svg"}
-              alt=""
-              width={35}
-              height={35}
-              className="block size-full max-w-none"
-            />
-          </div>
-        </div>
-      </div>
-
+      <PartnerLogoStat 
+        nodeId={config.tezos.statNodeId} 
+        textNodeId={config.tezos.textNodeId}
+        {...logo4} 
+      />
       <EcosystemGridLine {...config.gridLines[3]} />
 
-      <div
-        className="relative flex w-[150px] shrink-0 flex-col items-center justify-center gap-[12px] py-[20px]"
-        data-node-id={config.octane.statNodeId}
-        data-name="Stat"
-      >
-        <div
-          className="flex h-[35px] w-full shrink-0 items-center justify-center gap-[10px]"
-          data-node-id={config.octane.colNodeId}
-          data-name="col"
-        >
-          <p
-            className={`${gilroySemiBold.className} shrink-0 text-[17.1px] leading-[20.4px] font-semibold whitespace-nowrap text-white not-italic`}
-            data-node-id={config.octane.textNodeId}
-          >
-            {octane?.name ?? "Octane"}
-          </p>
-          <div className="relative size-[35px] shrink-0" data-name="logo">
-            <Image
-              src={octane?.src ?? "/ecosystem/logo-octane.svg"}
-              alt=""
-              width={35}
-              height={35}
-              className="block size-full max-w-none"
-            />
-          </div>
-        </div>
-      </div>
+      <PartnerLogoStat 
+        nodeId={config.octane.statNodeId} 
+        textNodeId={config.octane.textNodeId}
+        {...logo5} 
+      />
 
       <Corners
         leftSrc="/ecosystem/corner-tl.svg"

@@ -5,6 +5,7 @@
   "attributes": {
     "label": { "type": "string", "required": true },
     "hero_image": { "type": "media", "multiple": false },
+    "mobile_hero_image": { "type": "media", "multiple": false },
     "watermark_text": { "type": "string" },
     "feature_cards": { "type": "component", "repeatable": true, "component": "home.app-feature-card" }
   }

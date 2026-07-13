@@ -4,7 +4,7 @@ import { gilroyRegular, gilroyMedium, gilroySemiBold, gilroyBold } from "@/compo
 import { Navbar } from "@/components/navbar/Navbar";
 import { SiteFooterWrapper } from "@/components/site-footer/SiteFooterWrapper";
 import { SmoothScroll } from "@/components/SmoothScroll";
-import { getGlobalSettings } from "@/lib/strapi";
+import { getNavbar, getFooter } from "@/lib/strapi";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -27,11 +27,16 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  let settings: any = null;
+  let navbar: any = null;
+  let footer: any = null;
   try {
-    settings = await getGlobalSettings<any>();
+    [navbar, footer] = await Promise.all([
+      getNavbar<any>(),
+      getFooter<any>(),
+    ]);
   } catch {
-    settings = null;
+    navbar = null;
+    footer = null;
   }
   return (
     <html
@@ -41,9 +46,9 @@ export default async function RootLayout({
     >
       <body className="flex min-h-full flex-col overflow-x-clip bg-black">
         <SmoothScroll>
-          <Navbar data={settings?.header} brandData={settings?.brand} />
+          <Navbar data={navbar?.header} brandData={navbar?.brand} />
           {children}
-          <SiteFooterWrapper data={settings?.footer} brandData={settings?.brand} newsletterData={settings?.newsletter} />
+          <SiteFooterWrapper data={footer?.footer} brandData={navbar?.brand} newsletterData={footer?.newsletter} />
         </SmoothScroll>
       </body>
     </html>

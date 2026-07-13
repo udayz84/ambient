@@ -149,6 +149,124 @@ export default {
       } catch (err) {
         console.error('Error seeding contact form fields:', err);
       }
+
+      // Seeding Navbar
+      try {
+        const navbarCount = await strapi.documents('api::navbar.navbar').count();
+        if (navbarCount === 0) {
+          console.log('Seeding initial Navbar settings...');
+          const logoFile = await strapi.db.query('plugin::upload.file').findOne({ where: { name: 'logo.png' } });
+          await strapi.documents('api::navbar.navbar').create({
+            data: {
+              brand: {
+                site_name: 'Ambient Scientific',
+                logo: logoFile?.id ?? null,
+                logo_mobile: logoFile?.id ?? null,
+                favicon: logoFile?.id ?? null,
+              },
+              header: {
+                nav_items: [
+                  { label: 'Products', href: '/products', has_dropdown: true },
+                  { label: 'Technology', href: '/technology', has_dropdown: true },
+                  { label: 'Applications', href: '/applications', has_dropdown: true },
+                  { label: 'Company', href: '/company', has_dropdown: true },
+                  { label: 'News & Resources', href: '/news-listing', has_dropdown: true },
+                  { label: 'Blog', href: '/resources', has_dropdown: true },
+                  { label: 'Career', href: '/careers', has_dropdown: false },
+                ],
+                cta_label: 'GET IN TOUCH',
+                cta_href: '/contact',
+              },
+            },
+          });
+          console.log('Successfully seeded Navbar!');
+        }
+      } catch (err) {
+        console.error('Error seeding Navbar:', err);
+      }
+
+      // Seeding Footer
+      try {
+        const footerCount = await strapi.documents('api::footer.footer').count();
+        if (footerCount === 0) {
+          console.log('Seeding initial Footer settings...');
+          const findMedia = async (name: string) =>
+            (await strapi.db.query('plugin::upload.file').findOne({ where: { name } }))?.id ?? null;
+          const socialLinks = [
+            { platform: 'linkedin', href: '#', icon: await findMedia('social-linkedin.svg') },
+            { platform: 'x', href: '#', icon: await findMedia('social-x.svg') },
+            { platform: 'youtube', href: '#', icon: await findMedia('social-youtube.svg') },
+          ].filter((s) => s.icon);
+
+          await strapi.documents('api::footer.footer').create({
+            data: {
+              footer: {
+                nav_sections: [
+                  {
+                    title: 'PRODUCTS',
+                    links: [
+                      { label: 'GPX10', href: '#' },
+                      { label: 'GPX64', href: '#' },
+                      { label: 'Development Kits', href: '#' },
+                      { label: 'ModelForge', href: '#' },
+                    ],
+                  },
+                  {
+                    title: 'SOLUTIONS',
+                    links: [
+                      { label: 'Medical & Wearables', href: '#' },
+                      { label: 'Smart Home', href: '#' },
+                      { label: 'Industrial IoT', href: '#' },
+                      { label: 'Robotics', href: '#' },
+                    ],
+                  },
+                  {
+                    title: 'Resources',
+                    links: [
+                      { label: 'Documentation', href: '#' },
+                      { label: 'Case Studies', href: '#' },
+                      { label: 'Technical Papers', href: '#' },
+                      { label: 'Blog', href: '#' },
+                    ],
+                  },
+                  {
+                    title: 'Company',
+                    links: [
+                      { label: 'About', href: '#' },
+                      { label: 'Careers', href: '#' },
+                      { label: 'Industrial IoT', href: '#' },
+                      { label: 'Contact', href: '#' },
+                    ],
+                  },
+                ],
+                social_links: socialLinks,
+                legal_links: [
+                  { label: 'Privacy Policy', href: '#' },
+                  { label: 'Terms of Service', href: '#' },
+                  { label: 'Cookie Policy', href: '#' },
+                ],
+                copyright_text: '© 2026 Ambient AI. All rights reserved.',
+              },
+              newsletter: {
+                heading: 'Want to stay in the forefront of AI tech.',
+                subtitle: 'Sign up to receive regular updates.',
+                input_placeholder: 'Your Email ID',
+                button_label: 'SUBSCRIBE',
+              },
+              contact_details: {
+                email: 'contact@ambientscientific.com',
+              },
+              default_seo: {
+                meta_title: 'Ambient Scientific',
+                meta_description: 'Ambient Scientific default SEO configuration',
+              },
+            },
+          });
+          console.log('Successfully seeded Footer!');
+        }
+      } catch (err) {
+        console.error('Error seeding Footer:', err);
+      }
     } catch (e) {
       console.error('Seed error:', e);
     }

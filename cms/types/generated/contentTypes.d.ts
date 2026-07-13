@@ -725,21 +725,18 @@ export interface ApiDvkPageDvkPage extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiGlobalSettingsGlobalSettings
-  extends Struct.SingleTypeSchema {
-  collectionName: 'global_settings';
+export interface ApiFooterFooter extends Struct.SingleTypeSchema {
+  collectionName: 'footer';
   info: {
-    description: 'Site-wide brand, header, footer, newsletter, contact details, and default SEO';
-    displayName: 'Global Settings';
-    pluralName: 'global-settings-list';
-    singularName: 'global-settings';
+    description: 'Site footer, newsletter, contact details, and default SEO';
+    displayName: 'Footer';
+    pluralName: 'footers';
+    singularName: 'footer';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
-    brand: Schema.Attribute.Component<'shared.brand', false> &
-      Schema.Attribute.Required;
     contact_details: Schema.Attribute.Component<
       'shared.contact-details',
       false
@@ -749,14 +746,11 @@ export interface ApiGlobalSettingsGlobalSettings
       Schema.Attribute.Private;
     default_seo: Schema.Attribute.Component<'shared.seo', false> &
       Schema.Attribute.Required;
-    footer: Schema.Attribute.Component<'shared.footer', false> &
-      Schema.Attribute.Required;
-    header: Schema.Attribute.Component<'shared.header', false> &
-      Schema.Attribute.Required;
+    footer: Schema.Attribute.Component<'shared.footer', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::global-settings.global-settings'
+      'api::footer.footer'
     > &
       Schema.Attribute.Private;
     newsletter: Schema.Attribute.Component<'shared.newsletter', false>;
@@ -911,6 +905,38 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 200;
       }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiNavbarNavbar extends Struct.SingleTypeSchema {
+  collectionName: 'navbar';
+  info: {
+    description: 'Site brand identity and main navigation header';
+    displayName: 'Navbar';
+    pluralName: 'navbars';
+    singularName: 'navbar';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    brand: Schema.Attribute.Component<'shared.brand', false> &
+      Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    header: Schema.Attribute.Component<'shared.header', false> &
+      Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::navbar.navbar'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1665,11 +1691,12 @@ declare module '@strapi/strapi' {
       'api::contact-page.contact-page': ApiContactPageContactPage;
       'api::developer-page.developer-page': ApiDeveloperPageDeveloperPage;
       'api::dvk-page.dvk-page': ApiDvkPageDvkPage;
-      'api::global-settings.global-settings': ApiGlobalSettingsGlobalSettings;
+      'api::footer.footer': ApiFooterFooter;
       'api::home-page.home-page': ApiHomePageHomePage;
       'api::job-category.job-category': ApiJobCategoryJobCategory;
       'api::job-location.job-location': ApiJobLocationJobLocation;
       'api::job.job': ApiJobJob;
+      'api::navbar.navbar': ApiNavbarNavbar;
       'api::news-listing-page.news-listing-page': ApiNewsListingPageNewsListingPage;
       'api::products-page.products-page': ApiProductsPageProductsPage;
       'api::resources-page.resources-page': ApiResourcesPageResourcesPage;

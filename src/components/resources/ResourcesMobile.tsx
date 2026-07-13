@@ -146,7 +146,7 @@ function ResourcesHeroMobile({ data }: { data?: any } = {}) {
 
   return (
     <section
-      className="relative flex w-full flex-col items-center px-[24px] pb-[60px] pt-[130px]"
+      className="relative flex w-full flex-col items-center px-[24px] pb-[60px] pt-[240px]"
       aria-label="Resources hero"
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
@@ -154,11 +154,10 @@ function ResourcesHeroMobile({ data }: { data?: any } = {}) {
           src={heroBgSrc}
           alt=""
           fill
-          className="object-cover object-top opacity-100 mix-blend-screen scale-[0.8]"
+          className="object-cover object-top opacity-100 brightness-125"
           sizes="100vw"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/60" />
       </div>
 
       <h1
@@ -203,8 +202,12 @@ function ResourcesHeroMobile({ data }: { data?: any } = {}) {
         </p>
       </div>
 
-      <div className="relative mt-[60px] flex w-full flex-col">
-        {/* Stat Card 1 */}
+      <div className="relative mt-[120px] flex w-full flex-col">
+        {/* Background gradient behind the stat cards */}
+        <div className="pointer-events-none absolute inset-0 -mx-[24px] -top-[60px] bg-gradient-to-b from-transparent via-black/90 to-black" />
+        
+        <div className="relative z-10 flex w-full flex-col">
+          {/* Stat Card 1 */}
         <div className="relative flex w-full flex-col gap-[20px] pb-[32px]">
           <div className="flex items-center">
             <ResourceTagBadge
@@ -255,6 +258,7 @@ function ResourcesHeroMobile({ data }: { data?: any } = {}) {
               </p>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </section>
@@ -490,7 +494,7 @@ function ResourcesContentMobile({
       className="relative flex w-full flex-col px-[24px] py-[48px]"
       aria-label="Resource library"
     >
-      <div className="flex w-full items-center overflow-x-auto pb-[16px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="mt-[5px] flex w-full items-center overflow-x-auto pb-[16px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         <CategoryConnector isBeforeActive={activeCategory === categories[0]?.id} isAfterActive={false} />
         {categories.map((category, index) => {
           const isActive = activeCategory === category.id;

@@ -1,0 +1,16 @@
+{
+  "kind": "singleType",
+  "collectionName": "navbar",
+  "info": {
+    "singularName": "navbar",
+    "pluralName": "navbars",
+    "displayName": "Navbar",
+    "description": "Site brand identity and main navigation header"
+  },
+  "options": { "draftAndPublish": false },
+  "pluginOptions": {},
+  "attributes": {
+    "brand": { "type": "component", "repeatable": false, "component": "shared.brand", "required": true },
+    "header": { "type": "component", "repeatable": false, "component": "shared.header", "required": true }
+  }
+}

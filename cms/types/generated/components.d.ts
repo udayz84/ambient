@@ -228,9 +228,9 @@ export interface CareersDna extends Struct.ComponentSchema {
     displayName: 'DNA';
   };
   attributes: {
-    chip_background: Schema.Attribute.Media;
     chip_object: Schema.Attribute.Media;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
+    mobile_chip_object: Schema.Attribute.Media;
     panels: Schema.Attribute.Component<'careers.dna-panel', true>;
     subtitle: Schema.Attribute.Text;
   };
@@ -894,6 +894,7 @@ export interface HomeAppTab extends Struct.ComponentSchema {
     feature_cards: Schema.Attribute.Component<'home.app-feature-card', true>;
     hero_image: Schema.Attribute.Media;
     label: Schema.Attribute.String & Schema.Attribute.Required;
+    mobile_hero_image: Schema.Attribute.Media;
     watermark_text: Schema.Attribute.String;
   };
 }
@@ -1073,7 +1074,6 @@ export interface HomeTechnology extends Struct.ComponentSchema {
     displayName: 'Technology';
   };
   attributes: {
-    background_visual: Schema.Attribute.Media;
     features: Schema.Attribute.Component<'home.tech-feature', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     tag: Schema.Attribute.Component<'shared.tag', false>;
@@ -1617,7 +1617,6 @@ export interface SharedCta extends Struct.ComponentSchema {
     displayName: 'CTA';
   };
   attributes: {
-    dot_icon: Schema.Attribute.Media;
     href: Schema.Attribute.String & Schema.Attribute.Required;
     label: Schema.Attribute.String & Schema.Attribute.Required;
   };

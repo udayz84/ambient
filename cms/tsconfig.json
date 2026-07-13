@@ -12,5 +12,5 @@
     "skipLibCheck": true
   },
   "include": ["src", "database", "config"],
-  "exclude": ["node_modules", "dist", ".cache", ".tmp", "**/*.test.ts"]
+  "exclude": ["node_modules", "dist", ".cache", ".tmp", "**/*.test.ts", "src/admin"]
 }
