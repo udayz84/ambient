@@ -113,7 +113,7 @@ export function CareersOpenRoles({
     } else {
       currentHeight = currentJobsCount * 153 + (currentJobsCount - 1) * 10;
     }
-    const diff = Math.max(0, MAX_HEIGHT - currentHeight);
+    const diff = MAX_HEIGHT - currentHeight;
     onHeightDiffChange?.(diff);
   }, [filteredJobs.length, onHeightDiffChange]);
 

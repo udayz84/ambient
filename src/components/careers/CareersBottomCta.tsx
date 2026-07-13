@@ -28,7 +28,7 @@ export function CareersBottomCta({
   return (
     <section
       className="absolute top-[5097px] left-1/2 z-20 flex w-[728px] flex-col items-center transition-transform duration-300 ease-out"
-      style={{ transform: `translate(-50%, -${offsetY}px)` }}
+      style={{ transform: `translate(-50%, ${-offsetY}px)` }}
       data-node-id="2379:8821"
       aria-label="Ready to build the future of compute"
     >

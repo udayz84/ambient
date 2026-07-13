@@ -14,7 +14,7 @@ export default async function Home() {
     data = await getSingleType<any>("home-page", [
       "hero",
       { section: "measured_proof", nested: ["stat_cards"] },
-      { section: "technology", fields: ["background_visual"], nested: ["features"] },
+      { section: "technology", nested: ["features"] },
       "platform_scale",
       { section: "applications", nested: ["tabs", "cta"] },
       { section: "developer_platform", nested: ["cards"] },

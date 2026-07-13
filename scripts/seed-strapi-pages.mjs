@@ -463,7 +463,6 @@ const HOME_PAYLOAD = {
   technology: {
     heading: "Re-architecting the physics of AI compute",
     tag: { text: "Real-time AI at edge" },
-    background_visual: null,
     features: [
       {
         icon: media(ASSETS.home_tech_icon_speak_ai),
@@ -564,7 +563,6 @@ const HOME_PAYLOAD = {
     cta: {
       label: "EXPLORE APPLICATION",
       href: "/applications",
-      dot_icon: media(ASSETS.home_app_cta_dot),
     },
   },
 
