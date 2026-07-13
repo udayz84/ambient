@@ -31,15 +31,15 @@ function PartnerSectionMobile({
       {isSilicon ? (
         <EcosystemPartnerRow
           config={SILICON_PARTNER_ROW}
-          siliconPartners={siliconPartners}
-          developmentPartners={developmentPartners}
+          partners={siliconPartners}
+          isDevelopment={false}
         />
       ) : (
         <EcosystemPartnerRow
           config={DEVELOPMENT_PARTNER_ROW}
           logoStatNodeIds={DEV_LOGO_STAT_NODES}
-          siliconPartners={siliconPartners}
-          developmentPartners={developmentPartners}
+          partners={developmentPartners}
+          isDevelopment={true}
         />
       )}
     </div>
