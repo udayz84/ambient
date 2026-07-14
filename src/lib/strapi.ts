@@ -33,7 +33,7 @@ export async function fetchStrapi<T = unknown>(path: string): Promise<T> {
 
   const res = await fetch(url, {
     headers,
-    next: { revalidate: 5 },
+    cache: "no-store",
   });
 
   if (!res.ok) {
