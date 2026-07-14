@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import { interRegular } from "../hero/fonts";
 import { APPLICATION_TABS } from "./applications-data";
 import { Corners } from "../shared/Corners";
@@ -64,8 +64,27 @@ export function ApplicationsCategoryNav({
   onTabClick,
   onShift,
 }: ApplicationsCategoryNavProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const activeBtn = containerRef.current.querySelector(
+      `button[data-index="${activeIndex}"]`
+    );
+    if (activeBtn) {
+      activeBtn.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest",
+      });
+    }
+  }, [activeIndex]);
+
   return (
-    <div className="absolute top-[199.7783203125px] left-1/2 flex h-[52px] w-full max-w-[1321px] -translate-x-1/2 overflow-x-auto no-scrollbar">
+    <div
+      ref={containerRef}
+      className="absolute top-[199.7783203125px] left-1/2 flex h-[52px] w-full max-w-[1321px] -translate-x-1/2 overflow-x-auto no-scrollbar"
+    >
       <div
         className="mx-auto flex h-full w-max items-center gap-[12px] px-4"
         data-node-id="2379:851"
@@ -102,6 +121,7 @@ export function ApplicationsCategoryNav({
             <CategoryDivider variant={dividerVariant} />
             <button
               type="button"
+              data-index={index}
               onClick={() => onTabClick(index)}
               className={`${interRegular.className} relative flex h-[52px] shrink-0 cursor-pointer items-center justify-center px-[12px] text-[16px] leading-[24px] font-normal whitespace-nowrap not-italic transition-colors ${
                 isActive ? "text-[#0e1a0e]" : "text-[#666] hover:text-[#aaa]"
