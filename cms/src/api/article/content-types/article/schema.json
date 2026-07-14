@@ -1,4 +1,4 @@
-﻿{
+{
   "kind": "collectionType",
   "collectionName": "articles",
   "info": {
@@ -42,6 +42,9 @@
     "featured_image": {
       "type": "media",
       "multiple": false
+    },
+    "alt": {
+      "type": "string"
     },
     "date": {
       "type": "date",

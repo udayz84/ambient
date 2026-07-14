@@ -18,9 +18,15 @@
       "type": "media",
       "multiple": false
     },
+    "chip_object_alt": {
+      "type": "string"
+    },
     "mobile_chip_object": {
       "type": "media",
       "multiple": false
+    },
+    "mobile_chip_object_alt": {
+      "type": "string"
     },
     "panels": {
       "type": "component",

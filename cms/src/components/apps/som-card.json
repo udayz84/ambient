@@ -38,11 +38,17 @@
       "required": false,
       "allowedTypes": ["images", "files", "videos", "audios"]
     },
+    "image_a_alt": {
+      "type": "string"
+    },
     "image_b": {
       "type": "media",
       "multiple": false,
       "required": false,
       "allowedTypes": ["images", "files", "videos", "audios"]
+    },
+    "image_b_alt": {
+      "type": "string"
     }
   }
 }

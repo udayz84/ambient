@@ -1,10 +1,16 @@
-﻿{
+{
   "collectionName": "components_home_heroes",
   "info": { "displayName": "Hero", "description": "Homepage hero section" },
   "options": {},
   "attributes": {
     "video": { "type": "media", "multiple": false },
+    "video_alt": {
+      "type": "string"
+    },
     "mobile_video": { "type": "media", "multiple": false },
+    "mobile_video_alt": {
+      "type": "string"
+    },
     "title": { "type": "string", "required": true },
     "subtitle": { "type": "text", "required": true },
     "scroll_text": { "type": "string", "default": "SCROLL" },

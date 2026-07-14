@@ -20,6 +20,9 @@
     "image": {
       "type": "media",
       "multiple": false
+    },
+    "alt": {
+      "type": "string"
     }
   }
 }

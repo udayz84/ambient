@@ -1,10 +1,13 @@
-﻿{
+{
   "collectionName": "components_home_dev_cards",
   "info": { "displayName": "Dev Card", "description": "Developer platform bento card" },
   "options": {},
   "attributes": {
     "title": { "type": "string", "required": true },
     "body": { "type": "text" },
-    "image": { "type": "media", "multiple": false }
+    "image": { "type": "media", "multiple": false },
+    "alt": {
+      "type": "string"
+    }
   }
 }

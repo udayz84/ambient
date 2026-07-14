@@ -1,9 +1,12 @@
-﻿{
+{
   "collectionName": "components_home_partners",
   "info": { "displayName": "Partner", "description": "Ecosystem partner" },
   "options": {},
   "attributes": {
     "name": { "type": "string" },
-    "logo": { "type": "media", "multiple": false }
+    "logo": { "type": "media", "multiple": false },
+    "alt": {
+      "type": "string"
+    }
   }
 }

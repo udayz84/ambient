@@ -34,9 +34,15 @@
       "type": "media",
       "multiple": false
     },
+    "crafted_by_logo_alt": {
+      "type": "string"
+    },
     "background_image": {
       "type": "media",
       "multiple": false
+    },
+    "background_image_alt": {
+      "type": "string"
     }
   }
 }

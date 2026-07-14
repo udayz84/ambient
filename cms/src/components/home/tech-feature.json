@@ -1,9 +1,12 @@
-﻿{
+{
   "collectionName": "components_home_tech_features",
   "info": { "displayName": "Tech Feature", "description": "Technology feature item" },
   "options": {},
   "attributes": {
     "icon": { "type": "media", "multiple": false },
+    "alt": {
+      "type": "string"
+    },
     "title": { "type": "string", "required": true },
     "description": { "type": "text" }
   }

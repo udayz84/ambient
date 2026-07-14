@@ -489,6 +489,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    alt: Schema.Attribute.String;
     body: Schema.Attribute.RichText;
     category: Schema.Attribute.Enumeration<
       [

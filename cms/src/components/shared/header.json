@@ -26,6 +26,9 @@
     "cta_dot_icon": {
       "type": "media",
       "multiple": false
+    },
+    "alt": {
+      "type": "string"
     }
   }
 }

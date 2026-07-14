@@ -17,6 +17,9 @@
     "indicator_icon": {
       "type": "media",
       "multiple": false
+    },
+    "alt": {
+      "type": "string"
     }
   }
 }

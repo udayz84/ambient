@@ -22,6 +22,9 @@
       "multiple": false,
       "required": true
     },
+    "alt": {
+      "type": "string"
+    },
     "linkedin_url": {
       "type": "string"
     }

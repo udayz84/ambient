@@ -17,14 +17,23 @@
       "multiple": false,
       "required": true
     },
+    "logo_alt": {
+      "type": "string"
+    },
     "logo_mobile": {
       "type": "media",
       "multiple": false
+    },
+    "logo_mobile_alt": {
+      "type": "string"
     },
     "favicon": {
       "type": "media",
       "multiple": false,
       "required": true
+    },
+    "favicon_alt": {
+      "type": "string"
     }
   }
 }

@@ -6,6 +6,9 @@
     "product_id": { "type": "string" },
     "label": { "type": "string", "required": true },
     "description": { "type": "text" },
-    "chip_image": { "type": "media", "multiple": false }
+    "chip_image": { "type": "media", "multiple": false },
+    "alt": {
+      "type": "string"
+    }
   }
 }
