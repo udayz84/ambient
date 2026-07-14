@@ -451,7 +451,11 @@ export interface CompanyHero extends Struct.ComponentSchema {
     displayName: 'Hero';
   };
   attributes: {
+    background_image: Schema.Attribute.Media;
+    background_image_alt: Schema.Attribute.String;
     body: Schema.Attribute.Text;
+    mobile_background_image: Schema.Attribute.Media;
+    mobile_background_image_alt: Schema.Attribute.String;
     title: Schema.Attribute.Text & Schema.Attribute.Required;
   };
 }
