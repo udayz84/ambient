@@ -7,7 +7,7 @@
     "displayName": "Navbar",
     "description": "Site brand identity and main navigation header"
   },
-  "options": { "draftAndPublish": false },
+  "options": { "draftAndPublish": true },
   "pluginOptions": {},
   "attributes": {
     "brand": { "type": "component", "repeatable": false, "component": "shared.brand", "required": true },

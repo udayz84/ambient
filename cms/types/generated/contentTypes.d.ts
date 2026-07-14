@@ -920,7 +920,7 @@ export interface ApiNavbarNavbar extends Struct.SingleTypeSchema {
     singularName: 'navbar';
   };
   options: {
-    draftAndPublish: false;
+    draftAndPublish: true;
   };
   attributes: {
     brand: Schema.Attribute.Component<'shared.brand', false> &
