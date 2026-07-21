@@ -1022,6 +1022,49 @@ export interface ApiProductsPageProductsPage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiRedirectRedirect extends Struct.CollectionTypeSchema {
+  collectionName: 'redirects';
+  info: {
+    description: 'URL redirect management \u2014 maps old URLs to new URLs with configurable HTTP status codes';
+    displayName: 'Redirect';
+    pluralName: 'redirects';
+    singularName: 'redirect';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    enabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::redirect.redirect'
+    > &
+      Schema.Attribute.Private;
+    new_url: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 2048;
+      }>;
+    old_url: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 2048;
+      }>;
+    publishedAt: Schema.Attribute.DateTime;
+    status_code: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'301'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiResourcesPageResourcesPage extends Struct.SingleTypeSchema {
   collectionName: 'resources_pages';
   info: {
@@ -1050,6 +1093,41 @@ export interface ApiResourcesPageResourcesPage extends Struct.SingleTypeSchema {
     news_cta: Schema.Attribute.Component<'resources.news-cta', false>;
     publishedAt: Schema.Attribute.DateTime;
     seo: Schema.Attribute.Component<'shared.seo', false>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSeoSettingSeoSetting extends Struct.SingleTypeSchema {
+  collectionName: 'seo_settings';
+  info: {
+    description: 'Global SEO Settings including robots.txt';
+    displayName: 'SEO Settings';
+    pluralName: 'seo-settings';
+    singularName: 'seo-setting';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::seo-setting.seo-setting'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    robotsContent: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'User-agent: *\nAllow: /'>;
+    robotsEnabled: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+    sitemapUrl: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1700,7 +1778,9 @@ declare module '@strapi/strapi' {
       'api::navbar.navbar': ApiNavbarNavbar;
       'api::news-listing-page.news-listing-page': ApiNewsListingPageNewsListingPage;
       'api::products-page.products-page': ApiProductsPageProductsPage;
+      'api::redirect.redirect': ApiRedirectRedirect;
       'api::resources-page.resources-page': ApiResourcesPageResourcesPage;
+      'api::seo-setting.seo-setting': ApiSeoSettingSeoSetting;
       'api::som-page.som-page': ApiSomPageSomPage;
       'api::technology-page.technology-page': ApiTechnologyPageTechnologyPage;
       'api::wearables-page.wearables-page': ApiWearablesPageWearablesPage;

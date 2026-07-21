@@ -150,6 +150,54 @@ export default {
         console.error('Error seeding contact form fields:', err);
       }
 
+      // -------------------------------------------------------------------------
+      // Next.js revalidation webhook (auto-registers on every Strapi startup).
+      // Triggered when an editor publishes/unpublishes any entry. Receiver is
+      // the Next.js route handler at /api/revalidate.
+      //
+      // Requires in cms/.env:
+      //   NEXT_SITE_URL       — origin of the Next.js app (http://localhost:3000
+      //                         in dev, https://your-domain.com in prod)
+      //   REVALIDATE_SECRET   — shared secret, MUST match Next.js's .env
+      //
+      // Skipped silently if either env var is missing. Safe to leave unset
+      // while the site is in early dev.
+      // -------------------------------------------------------------------------
+      try {
+        const siteUrl = process.env.NEXT_SITE_URL;
+        const secret = process.env.REVALIDATE_SECRET;
+        if (siteUrl && secret) {
+          const webhookUrl = `${siteUrl.replace(/\/$/, "")}/api/revalidate`;
+          const events = ['entry.publish', 'entry.unpublish'];
+          const headers: Record<string, string> = { 'x-revalidate-secret': secret };
+
+          // Strapi v5 internal API. Cast because `webhookStore` is not in the
+          // public TypeScript types but is stable across v5 releases.
+          const store = (strapi as any).get('webhookStore');
+          const existing: Array<{ id: string | number; url: string }> = await store.findWebhooks();
+          const match = existing.find((w) => w.url === webhookUrl);
+
+          if (!match) {
+            const created = await store.createWebhook({
+              name: 'Next.js revalidation',
+              url: webhookUrl,
+              events,
+              headers,
+              isEnabled: true,
+            });
+            console.log(`[webhook] registered ${webhookUrl} for events: ${events.join(', ')} (id=${created.id})`);
+          } else {
+            // Re-sync events + secret in case the env var changed.
+            await store.updateWebhook(match.id, { ...match, events, headers, isEnabled: true });
+            console.log(`[webhook] already registered (id=${match.id}) — events + headers re-synced.`);
+          }
+        } else {
+          console.log('[webhook] NEXT_SITE_URL or REVALIDATE_SECRET not set in cms/.env — skipping auto-registration.');
+        }
+      } catch (err) {
+        console.error('[webhook] registration failed:', err);
+      }
+
       // Seeding Navbar
       try {
         const navbarCount = await strapi.documents('api::navbar.navbar').count();
