@@ -9,24 +9,8 @@ try {
 }
 
 const nextConfig: NextConfig = {
-  async redirects() {
-    try {
-      // Fetch all redirects from Strapi
-      const res = await fetch(`${strapiUrlStr}/api/redirects?pagination[pageSize]=1000`);
-      if (!res.ok) return [];
-      
-      const json = await res.json();
-      return (json.data || []).map((item: any) => ({
-        source: item.old_url,
-        destination: item.new_url,
-        // Parse the status_code (handles "301", "Code_301", etc.)
-        permanent: String(item.status_code).includes("301"),
-      }));
-    } catch (e) {
-      console.error("Failed to fetch Strapi redirects during build:", e);
-      return [];
-    }
-  },
+  // Strapi redirects are now handled dynamically by src/middleware.ts
+  // so they take effect immediately without needing a rebuild/restart.
   images: {
     // Next.js 16 blocks image optimization for local/private IPs by default.
     // Strapi runs on localhost:1338, so this is required for `next/image`
