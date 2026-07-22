@@ -441,6 +441,50 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiApplicationPageApplicationPage
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'application_pages';
+  info: {
+    description: 'Application page';
+    displayName: 'Application Page';
+    pluralName: 'application-pages';
+    singularName: 'application-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    carousel: Schema.Attribute.Component<'wearables.carousel', false>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    empirical_proof: Schema.Attribute.Component<
+      'wearables.empirical-proof',
+      false
+    >;
+    footer_accent: Schema.Attribute.Component<'wearables.footer-accent', false>;
+    hero: Schema.Attribute.Component<'wearables.hero', false>;
+    lab_to_product: Schema.Attribute.Component<
+      'wearables.lab-to-product',
+      false
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::application-page.application-page'
+    > &
+      Schema.Attribute.Private;
+    paradigm: Schema.Attribute.Component<'wearables.paradigm', false>;
+    publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'shared.seo', false>;
+    slug: Schema.Attribute.UID;
+    subconscious: Schema.Attribute.Component<'wearables.subconscious', false>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiApplicationsPageApplicationsPage
   extends Struct.SingleTypeSchema {
   collectionName: 'applications_pages';
@@ -1037,7 +1081,6 @@ export interface ApiRedirectRedirect extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    enabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1204,48 +1247,6 @@ export interface ApiTechnologyPageTechnologyPage
     publishedAt: Schema.Attribute.DateTime;
     seo: Schema.Attribute.Component<'shared.seo', false>;
     silicon: Schema.Attribute.Component<'tech.silicon', false>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiWearablesPageWearablesPage extends Struct.SingleTypeSchema {
-  collectionName: 'wearables_pages';
-  info: {
-    description: 'Wearables page';
-    displayName: 'Wearables Page';
-    pluralName: 'wearables-pages';
-    singularName: 'wearables-page';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    carousel: Schema.Attribute.Component<'wearables.carousel', false>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    empirical_proof: Schema.Attribute.Component<
-      'wearables.empirical-proof',
-      false
-    >;
-    footer_accent: Schema.Attribute.Component<'wearables.footer-accent', false>;
-    hero: Schema.Attribute.Component<'wearables.hero', false>;
-    lab_to_product: Schema.Attribute.Component<
-      'wearables.lab-to-product',
-      false
-    >;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::wearables-page.wearables-page'
-    > &
-      Schema.Attribute.Private;
-    paradigm: Schema.Attribute.Component<'wearables.paradigm', false>;
-    publishedAt: Schema.Attribute.DateTime;
-    seo: Schema.Attribute.Component<'shared.seo', false>;
-    subconscious: Schema.Attribute.Component<'wearables.subconscious', false>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1763,6 +1764,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::application-page.application-page': ApiApplicationPageApplicationPage;
       'api::applications-page.applications-page': ApiApplicationsPageApplicationsPage;
       'api::article.article': ApiArticleArticle;
       'api::careers-page.careers-page': ApiCareersPageCareersPage;
@@ -1783,7 +1785,6 @@ declare module '@strapi/strapi' {
       'api::seo-setting.seo-setting': ApiSeoSettingSeoSetting;
       'api::som-page.som-page': ApiSomPageSomPage;
       'api::technology-page.technology-page': ApiTechnologyPageTechnologyPage;
-      'api::wearables-page.wearables-page': ApiWearablesPageWearablesPage;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

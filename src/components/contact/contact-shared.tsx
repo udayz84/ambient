@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { RepelDots } from "../shared/RepelDots";

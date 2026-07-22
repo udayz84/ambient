@@ -1,22 +1,26 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { WearablesHero } from "@/components/wearables/WearablesHero";
 import { WearablesParadigm } from "@/components/wearables/WearablesParadigm";
 import { WearablesEmpiricalProof } from "@/components/wearables/WearablesEmpiricalProof";
 import { WearablesLabToProduct } from "@/components/wearables/WearablesLabToProduct";
 import { WearablesSubconscious } from "@/components/wearables/WearablesSubconscious";
 import { WearablesFooterAccent } from "@/components/wearables/WearablesFooterAccent";
-import { getSingleType, mediaUrl } from "@/lib/strapi";
+import { getCollection, mediaUrl, buildPopulate } from "@/lib/strapi";
 
-export const metadata: Metadata = {
-  title: "Wearables | Ambient Scientific",
-  description:
-    "Hospital-grade biometric tracking and voice processing directly to the ring, wrist, or lens. No cloud latency or battery compromise.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  return {
+    title: "Applications | Ambient Scientific",
+    description: "Ambient Scientific Applications",
+  };
+}
 
-export default async function WearablesPage() {
+export default async function ApplicationPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
   let data: any = null;
   try {
-    data = await getSingleType<any>("wearables-page", [
+    const query = `filters[slug][$eq]=${resolvedParams.slug}&${buildPopulate([
       "hero",
       "carousel",
       "paradigm",
@@ -25,9 +29,17 @@ export default async function WearablesPage() {
       "lab_to_product",
       "footer_accent",
       "seo",
-    ]);
-  } catch {
+    ])}`;
+    
+    const results = await getCollection<any>("application-pages", query);
+    data = results.length > 0 ? results[0] : null;
+  } catch (error) {
+    console.error("Failed to fetch application page:", error);
     data = null;
+  }
+
+  if (!data) {
+    notFound();
   }
 
   const carouselImages = Array.isArray(data?.carousel?.images)
