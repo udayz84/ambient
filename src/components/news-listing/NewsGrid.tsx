@@ -6,6 +6,7 @@ import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
 import { NewsArticleCard } from "./NewsArticleCard";
 import { NEWS_ARTICLES, type NewsArticle } from "./news-data";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const ROW_ONE_BG = "bg-[rgba(255,255,255,0.04)]";
 const ROW_TWO_BG = "bg-[rgba(0,0,0,0.04)]";
@@ -188,7 +189,7 @@ function LoadMoreCta({ label }: { label: string }) {
       <span className="relative z-10 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
         {label}
       </span>
-      <Corners />
+      <GreenCtaCorners />
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"

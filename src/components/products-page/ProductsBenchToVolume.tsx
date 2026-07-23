@@ -1,3 +1,4 @@
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import {
@@ -240,7 +241,7 @@ function GreenCta({
         aria-hidden
         className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`}
       />
-      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+      <GreenCtaCorners />
     </a>
   );
 }

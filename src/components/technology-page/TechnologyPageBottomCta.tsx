@@ -1,6 +1,7 @@
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const CARD_OUTLINE = "/technology/cta-card-outline.svg";
 
@@ -100,7 +101,7 @@ function CtaCard({
               <span className="absolute top-[calc(50%-14px)] left-1/2 -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
                 {card.cta}
               </span>
-              <CornerDecor />
+              <GreenCtaCorners />
             </a>
           </div>
         </div>
@@ -152,7 +153,7 @@ export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
             <GradientTitle gradientDeg={SECTION_TITLE_DEG} className="text-center">
               {sectionTitle}
             </GradientTitle>
-            <CornerDecor />
+            <GreenCtaCorners />
           </div>
           <p
             className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
@@ -216,7 +217,7 @@ export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
               <span className="absolute top-[calc(50%-14px)] left-1/2 -translate-x-1/2 text-[14px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
                 {card.cta}
               </span>
-              <CornerDecor />
+              <GreenCtaCorners />
             </a>
           </div>
         ))}

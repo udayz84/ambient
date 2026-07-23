@@ -5,6 +5,7 @@ import { useState } from "react";
 import { mediaUrl } from "@/lib/strapi";
 import { dmMono, gilroyMedium, gilroySemiBold, interLight, interRegular, interSemiBold } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
@@ -49,7 +50,7 @@ function GreenCta({
       <span className="relative text-[13px] leading-[normal] font-semibold uppercase whitespace-nowrap text-white not-italic">
         {children}
       </span>
-      <Corners />
+      <GreenCtaCorners />
     </a>
   );
 }
@@ -75,7 +76,7 @@ function WhiteCta({
       <span className="relative text-[13px] leading-[normal] font-semibold uppercase whitespace-nowrap text-[#121212] not-italic">
         {children}
       </span>
-      <Corners />
+      <GreenCtaCorners />
     </a>
   );
 }

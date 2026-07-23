@@ -920,6 +920,26 @@ export interface DvkSpecCard extends Struct.ComponentSchema {
   };
 }
 
+export interface FormField extends Struct.ComponentSchema {
+  collectionName: 'components_form_fields';
+  info: {
+    description: '';
+    displayName: 'Field';
+    icon: 'align-justify';
+  };
+  attributes: {
+    label: Schema.Attribute.String;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    placeholder: Schema.Attribute.String;
+    required: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    type: Schema.Attribute.Enumeration<
+      ['text', 'email', 'number', 'password', 'tel']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'text'>;
+  };
+}
+
 export interface HomeAppFeatureCard extends Struct.ComponentSchema {
   collectionName: 'components_home_app_feature_cards';
   info: {
@@ -1132,6 +1152,8 @@ export interface HomeTechnology extends Struct.ComponentSchema {
   attributes: {
     features: Schema.Attribute.Component<'home.tech-feature', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
+    image: Schema.Attribute.Media;
+    image_alt: Schema.Attribute.String;
     tag: Schema.Attribute.Component<'shared.tag', false>;
   };
 }
@@ -1597,6 +1619,8 @@ export interface ResourcesFeaturedCard extends Struct.ComponentSchema {
     cta_label: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Download PDF'>;
     description: Schema.Attribute.Text;
+    enable_download_popup: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
     image: Schema.Attribute.Media;
     image_alt: Schema.Attribute.String;
     pdf_file: Schema.Attribute.Media<'files'>;
@@ -2653,6 +2677,7 @@ declare module '@strapi/strapi' {
       'dvk.modelforge': DvkModelforge;
       'dvk.module-card': DvkModuleCard;
       'dvk.spec-card': DvkSpecCard;
+      'form.field': FormField;
       'home.app-feature-card': HomeAppFeatureCard;
       'home.app-tab': HomeAppTab;
       'home.applications': HomeApplications;

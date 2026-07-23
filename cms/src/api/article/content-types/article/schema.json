@@ -37,7 +37,11 @@
       "maxLength": 500
     },
     "body": {
-      "type": "richtext"
+      "type": "customField",
+      "options": {
+        "preset": "defaultHtml"
+      },
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "featured_image": {
       "type": "media",

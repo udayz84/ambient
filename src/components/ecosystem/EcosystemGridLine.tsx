@@ -26,20 +26,8 @@ export function EcosystemGridLine({
           aria-hidden
         />
       </div>
-      <div className="absolute top-[4px] left-[3.5px] flex h-[217px] w-0 items-center justify-center overflow-hidden">
-        <div className="rotate-90 flex-none">
-          <div className="relative h-0 w-[217px]" data-node-id={lineNodeId}>
-            <div className="absolute inset-[-1px_0_0_0]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/ecosystem/line-87.svg"
-                alt=""
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
+      <div className="absolute top-[4px] left-[3.5px] flex h-[217px] w-[1px] items-center justify-center overflow-visible bg-white/10">
+        {/* Simple fallback in case SVG doesn't load/render well */}
       </div>
       <div className="absolute bottom-[0.5px] left-0 h-[4px] w-[8px]" data-node-id={capBottomNodeId}>
         <div className="absolute inset-[0_0_-12.5%_0]">

@@ -4,6 +4,7 @@ import { gilroyMedium, interRegular } from "../hero/fonts";
 import { RepelDots } from "../shared/RepelDots";
 import { Corners } from "../shared/Corners";
 import { GradientTitle } from "../contact/contact-shared";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const TITLE_GRADIENT_DEG = "106.158deg";
 const FALLBACK_SUBTITLE =
@@ -200,7 +201,7 @@ export function SomHero({ data }: { data?: any }) {
                 >
                   {secondaryLabel}
                 </p>
-                <Corners />
+                <GreenCtaCorners />
               </a>
             </div>
           </div>
@@ -273,7 +274,7 @@ export function SomHero({ data }: { data?: any }) {
               <p className="absolute left-1/2 top-[calc(50%-14px)] -translate-x-1/2 text-[14px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
                 {secondaryLabel}
               </p>
-              <Corners />
+              <GreenCtaCorners />
             </a>
           </div>
         </div>

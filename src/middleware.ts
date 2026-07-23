@@ -29,14 +29,15 @@ export async function middleware(request: NextRequest) {
   }
 
   try {
-    // Build the Strapi query: look for an entry whose old_url matches
-    // the current pathname exactly (with or without trailing slash).
+    // Look up any entry where either oldPath or newPath matches the current pathname
     const queryUrl = new URL(`${strapiUrlStr}/api/redirects`);
-    queryUrl.searchParams.set('filters[old_url][$eq]', pathname);
+    queryUrl.searchParams.set('filters[$or][0][oldPath][$eq]', pathname);
+    queryUrl.searchParams.set('filters[$or][1][newPath][$eq]', pathname);
+    queryUrl.searchParams.set('filters[enabled][$eq]', 'true');
     queryUrl.searchParams.set('populate', '*');
 
     const res = await fetch(queryUrl.toString(), {
-      next: { revalidate: 60 }, // cache for 60s so we don't slam Strapi
+      next: { revalidate: 60 },
     });
 
     if (!res.ok) return NextResponse.next();
@@ -46,33 +47,37 @@ export async function middleware(request: NextRequest) {
 
     if (!entries || entries.length === 0) return NextResponse.next();
 
-    // Use the first matching entry (Strapi v4 nests under .attributes; v5 is flat)
-    const item = entries[0];
-    const redirectData = item.attributes || item;
-
-    const newUrl: string | undefined =
-      redirectData.new_url || redirectData.newUrl || redirectData.destination;
-
-    if (!newUrl) return NextResponse.next();
-
-    // ── Loop protection ────────────────────────────────────────────────
-    // Only redirect when the current pathname is EXACTLY the old_url.
-    // If the current pathname already matches the new_url, do nothing.
+    // Find the exact entry that matches our condition
     const currentNorm = extractPathname(pathname);
-    const targetNorm = extractPathname(newUrl);
-
-    if (currentNorm === targetNorm) {
-      // We are already on the target URL — do NOT redirect again.
-      return NextResponse.next();
+    
+    // Case 1: User visited the old URL (e.g. /products). We need to REDIRECT them to the new URL (e.g. /new).
+    const redirectMatch = entries.find(item => extractPathname(item.oldPath) === currentNorm);
+    if (redirectMatch) {
+      const newUrl = redirectMatch.newPath;
+      if (!newUrl) return NextResponse.next();
+      
+      const destination = new URL(newUrl, request.url);
+      
+      // If it's explicitly marked as a pure rewrite, rewrite it. Otherwise, redirect it.
+      if (String(redirectMatch.redirectType).includes('200') || String(redirectMatch.redirectType).includes('rewrite')) {
+        return NextResponse.rewrite(destination);
+      }
+      
+      const isPermanent = String(redirectMatch.redirectType).includes('301');
+      return NextResponse.redirect(destination, isPermanent ? 301 : 302);
     }
 
-    // Determine status code (301 permanent vs 307 temporary)
-    const isPermanent = String(redirectData.status_code).includes('301');
-    const status = isPermanent ? 301 : 307;
+    // Case 2: User is already AT the new URL (e.g. /new). We need to REWRITE them internally to the old URL (e.g. /products) so the content loads.
+    const rewriteMatch = entries.find(item => extractPathname(item.newPath) === currentNorm);
+    if (rewriteMatch) {
+      const oldUrl = rewriteMatch.oldPath;
+      if (!oldUrl) return NextResponse.next();
+      
+      const destination = new URL(oldUrl, request.url);
+      return NextResponse.rewrite(destination);
+    }
 
-    // Build the destination URL (handles both relative and absolute new_url values)
-    const destination = new URL(newUrl, request.url);
-    return NextResponse.redirect(destination, status);
+    return NextResponse.next();
 
   } catch (err) {
     // On any network/parse error, let the request through normally

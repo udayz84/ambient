@@ -1,4 +1,5 @@
 "use client";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useState } from "react";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyExtraBold, gilroyMedium, interRegular } from "../hero/fonts";
@@ -452,7 +453,7 @@ function PrimaryCta({
         aria-hidden
         className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`}
       />
-      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+      <GreenCtaCorners />
     </a>
   );
 }
@@ -593,7 +594,7 @@ function ProductsUseCasesMobile({
             aria-hidden
             className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`}
           />
-          <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+          <GreenCtaCorners />
         </a>
         <a
           href={secondary.href}

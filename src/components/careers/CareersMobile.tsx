@@ -24,6 +24,7 @@ import {
 } from "./careers-data";
 import { mediaUrl } from "@/lib/strapi";
 import type { CareersValueCard } from "./careers-data";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
@@ -194,7 +195,7 @@ function CareersHeroMobile({ data }: { data?: any }) {
               >
                 {title}
               </h1>
-              <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
+              <GreenCtaCorners />
             </div>
             <p
               className={`${interRegular.className} max-w-[308px] w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
@@ -637,7 +638,7 @@ function JobRowMobile({
     <article className="relative flex h-[191px] w-full flex-col justify-center gap-[15px] border border-[rgba(240,240,240,0.2)] bg-black px-[17px]">
       <div className="flex flex-col gap-[11px] w-full">
         <div className="relative inline-flex h-[26px] w-fit items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.5)] bg-[rgba(255,255,255,0.06)] px-[12px]">
-          <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
+          <GreenCtaCorners />
           <div className="absolute left-[6px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
           <div className="absolute right-[6px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
           <span
@@ -722,7 +723,7 @@ function CareersBenefitsMobile({ data }: { data?: any }) {
         >
           {heading}
         </h2>
-        <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
+        <GreenCtaCorners />
       </div>
 
       <div className="flex w-full flex-col gap-[14px]">
@@ -818,7 +819,7 @@ function CareersBottomCtaMobile({ data }: { data?: any }) {
               className={`${gilroySemiBold.className} relative flex h-[48px] w-[170px] shrink-0 items-center justify-center gap-[10px] overflow-clip bg-gradient-to-b from-[#6ced3f] to-[#38a612]`}
               style={{ boxShadow: "0px 42px 107px 0px rgba(69,196,24,0.2), 0px 24.721px 32.257px 0px rgba(83,216,36,0.15), 0px 10.268px 13.398px 0px rgba(83,216,36,0.15), 0px 3.714px 4.846px 0px rgba(83,216,36,0.1)" }}
             >
-              <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
+              <GreenCtaCorners />
               <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
               <span className="relative z-10 text-[14px] uppercase text-white not-italic font-semibold">
                 {btn.label}

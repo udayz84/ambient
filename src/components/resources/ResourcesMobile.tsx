@@ -1,4 +1,5 @@
 "use client";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -93,7 +94,7 @@ function GreenCta({
       <span className="relative text-[13px] leading-[normal] font-semibold uppercase whitespace-nowrap text-white not-italic">
         {children}
       </span>
-      <Corners />
+      <GreenCtaCorners />
     </a>
   );
 }
@@ -122,7 +123,7 @@ function WhiteCta({
       <span className="relative text-[13px] leading-[normal] font-semibold uppercase whitespace-nowrap text-[#121212] not-italic">
         {children}
       </span>
-      <Corners />
+      <GreenCtaCorners />
     </a>
   );
 }
@@ -334,7 +335,7 @@ function ResourcesFeaturedMobile({ data }: { data?: any } = {}) {
               <div className="relative flex h-[48px] w-full shrink-0 items-center justify-center shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]">
                 <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
                 <div className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
-                <Corners />
+                <GreenCtaCorners />
                 <span className={`${gilroyMedium.className} relative text-[12px] uppercase leading-[28px] text-white`}>
                   {card.ctaLabel}
                 </span>
@@ -373,7 +374,7 @@ function ResourcesBuildingMobile({ data }: { data?: any } = {}) {
       </div>
 
       <div className="relative inline-flex items-center justify-center p-[10px]">
-        <Corners />
+        <GreenCtaCorners />
         <h2
           className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[40px] font-medium text-transparent [word-break:break-word] not-italic`}
           style={{ backgroundImage: gradient("107.454deg") }}
@@ -595,7 +596,7 @@ function ResourcesContentMobile({
             <span className="relative text-[13px] leading-[normal] font-semibold uppercase whitespace-nowrap text-white not-italic">
               {loadMoreLabel}
             </span>
-            <Corners />
+            <GreenCtaCorners />
           </button>
         </div>
       ) : null}
@@ -617,7 +618,7 @@ function ResourcesNewsCtaMobile({ data }: { data?: any } = {}) {
       {/* Background image and gradient removed to make it fully transparent */}
 
       <div className="relative inline-flex items-center justify-center p-[8px] z-10">
-        <Corners />
+        <GreenCtaCorners />
         <h2
           className={`${gilroyMedium.className} w-[313px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
           style={{ backgroundImage: gradient("98.0026deg") }}

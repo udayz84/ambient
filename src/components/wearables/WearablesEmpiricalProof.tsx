@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { dmMono, gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const TITLE_GRADIENT =
   "linear-gradient(118.011deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -119,10 +120,7 @@ function HealthCard({ data }: { data?: any }) {
           aria-hidden
           className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
         />
-        <Corners
-          leftSrc="/applications/wearables/vector-47.svg"
-          rightSrc="/applications/wearables/vector-46.svg"
-        />
+        <GreenCtaCorners />
         <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic">
           {ctaLabel}
         </span>
@@ -650,10 +648,7 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
               className={`${gilroyMedium.className} relative mt-[4px] flex h-[48px] w-full items-center justify-center overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
             >
               <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
-              <Corners
-                leftSrc="/applications/wearables/vector-47.svg"
-                rightSrc="/applications/wearables/vector-46.svg"
-              />
+              <GreenCtaCorners />
               <span className="relative whitespace-nowrap text-[14px] leading-[28px] font-medium text-white uppercase not-italic">
                 {healthCta}
               </span>

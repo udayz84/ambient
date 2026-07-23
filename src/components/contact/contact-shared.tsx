@@ -4,6 +4,7 @@ import Image from "next/image";
 import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { RepelDots } from "../shared/RepelDots";
 import { Corners } from "../shared/Corners";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 export function CornerDecor({
   className = "",
@@ -86,7 +87,7 @@ export function GreenCtaButton({
         aria-hidden
         className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
       />
-      <Corners />
+      <GreenCtaCorners />
     </>
   );
 
@@ -167,7 +168,7 @@ export function FramedBox({
   return (
     <div className={`relative border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] ${className}`}>
       {children}
-      <CornerDecor className="z-10" />
+      <GreenCtaCorners />
     </div>
   );
 }

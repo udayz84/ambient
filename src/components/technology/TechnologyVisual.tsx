@@ -2,15 +2,9 @@ import Image from "next/image";
 import { mediaUrl } from "@/lib/strapi";
 import { TechnologyVisualFadeIn } from "./TechnologyVisualFadeIn";
 
-const chipMaskStyle = {
-  maskImage: "url(/technology/mask-shape.svg)",
-  WebkitMaskImage: "url(/technology/mask-shape.svg)",
-  maskPosition: "-86.921px -193.91px",
-  WebkitMaskPosition: "-86.921px -193.91px",
-  maskSize: "908.764px 687.6px",
-  WebkitMaskSize: "908.764px 687.6px",
-  maskRepeat: "no-repeat",
-  WebkitMaskRepeat: "no-repeat",
+const edgeFadeMaskStyle = {
+  maskImage: "radial-gradient(ellipse at center, black 60%, transparent 100%)",
+  WebkitMaskImage: "radial-gradient(ellipse at center, black 60%, transparent 100%)",
 } as const;
 
 const radialOverlayStyle = {
@@ -111,13 +105,13 @@ export function TechnologyVisual({ data }: { data?: any } = {}) {
       >
         <div
           className="absolute top-[161.1px] left-1/2 h-[340.581px] w-[731.602px] -translate-x-1/2 overflow-hidden"
-          style={chipMaskStyle}
+          style={edgeFadeMaskStyle}
           data-node-id="2379:1424"
           data-name="image 37"
         >
           <Image
-            src="/technology/chip-visual.png"
-            alt=""
+            src={mediaUrl(data?.image) || "/technology/chip-visual.png"}
+            alt={data?.image_alt || ""}
             fill
             className="object-bottom"
             sizes="732px"

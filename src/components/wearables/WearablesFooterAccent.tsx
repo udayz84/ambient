@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const SHAPE = "/applications/wearables/rectangle-divider.svg";
 
@@ -118,10 +119,7 @@ function CtaPanel({ data }: { data: PanelData }) {
               >
                 {data.cta}
               </p>
-              <Corners
-                leftSrc="/applications/wearables/vector-47.svg"
-                rightSrc="/applications/wearables/vector-46.svg"
-              />
+              <GreenCtaCorners />
               <span
                 aria-hidden
                 className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
@@ -208,10 +206,7 @@ export function WearablesFooterAccent({ data }: { data?: any }) {
                 <p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-[14px] leading-[28px] font-medium text-white uppercase not-italic">
                   {panel.cta}
                 </p>
-                <Corners
-                  leftSrc="/applications/wearables/vector-47.svg"
-                  rightSrc="/applications/wearables/vector-46.svg"
-                />
+                <GreenCtaCorners />
                 <span
                   aria-hidden
                   className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"

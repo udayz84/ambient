@@ -1,5 +1,6 @@
 import { gilroyMedium, interRegular, interSemiBold } from "../hero/fonts";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const BASELINE = "/technology/graph-baseline.svg";
 const LABEL_LINE = "/technology/graph-label-line.svg";
@@ -75,7 +76,7 @@ function GraphCtas({
         <span className="absolute top-[calc(50%-14px)] left-1/2 -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
           {primaryLabel}
         </span>
-        <CornerDecor />
+        <GreenCtaCorners />
       </a>
       <a
         href={secondaryHref}
@@ -86,7 +87,7 @@ function GraphCtas({
         <span className="relative flex h-full items-center text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
           {secondaryLabel}
         </span>
-        <CornerDecor />
+        <GreenCtaCorners />
       </a>
     </div>
   );
@@ -321,7 +322,7 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
             <span className="absolute top-[calc(50%-14px)] left-1/2 -translate-x-1/2 text-[15px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
               {primaryLabel}
             </span>
-            <CornerDecor />
+            <GreenCtaCorners />
           </a>
           <a
             href={secondaryHref}
@@ -330,7 +331,7 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
             <span className="relative flex h-full items-center justify-center text-[15px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
               {secondaryLabel}
             </span>
-            <CornerDecor />
+            <GreenCtaCorners />
           </a>
         </div>
       </div>

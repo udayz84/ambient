@@ -315,6 +315,34 @@ export default {
       } catch (err) {
         console.error('Error seeding Footer:', err);
       }
+
+      // Grant Public read permissions to popup
+      try {
+        const publicRole = await strapi.db.query('plugin::users-permissions.role').findOne({
+          where: { type: 'public' },
+        });
+
+        if (publicRole) {
+          const permissionExists = await strapi.db.query('plugin::users-permissions.permission').findOne({
+            where: {
+              role: publicRole.id,
+              action: 'api::popup.popup.find',
+            }
+          });
+
+          if (!permissionExists) {
+            console.log('Granting Public access to api::popup.popup.find');
+            await strapi.db.query('plugin::users-permissions.permission').create({
+              data: {
+                action: 'api::popup.popup.find',
+                role: publicRole.id,
+              }
+            });
+          }
+        }
+      } catch (err) {
+        console.error('Error setting popup permissions:', err);
+      }
     } catch (e) {
       console.error('Seed error:', e);
     }

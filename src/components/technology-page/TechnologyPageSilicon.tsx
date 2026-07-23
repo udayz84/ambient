@@ -2,6 +2,7 @@ import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const SILICON_BG = "/technology/silicon-bg.png";
 const CHIP_BG = "/technology/chip-bg.png";
@@ -321,7 +322,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
             <span className="absolute top-[calc(50%-14px)] left-1/2 -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
               {ctaLabel}
             </span>
-            <CornerDecor />
+            <GreenCtaCorners />
           </a>
         </div>
       </div>
@@ -399,7 +400,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
           <span className="absolute top-[calc(50%-14px)] left-1/2 -translate-x-1/2 text-[15px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
             {ctaLabel}
           </span>
-          <CornerDecor />
+          <GreenCtaCorners />
         </a>
       </div>
     </section>

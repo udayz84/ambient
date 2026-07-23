@@ -2,6 +2,7 @@ import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { CORNER_LEFT, CORNER_RIGHT, PRIMARY_CTA_SHADOW } from "./developer-data";
 import { mediaUrl } from "@/lib/strapi";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 /** Radial fade overlay for the duplicated background images (Figma 2438:4635). */
 const BG_FADE =
@@ -125,7 +126,7 @@ export function DeveloperComingSoon({ data }: { data?: any }) {
               aria-hidden
               className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
             />
-            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+            <GreenCtaCorners />
           </a>
 
           {/* Card corners */}

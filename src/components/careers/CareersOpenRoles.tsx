@@ -12,6 +12,7 @@ import {
 } from "./careers-data";
 import { CareersRolesProfileCta } from "./careers-shared";
 import { Corners } from "../shared/Corners";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const cornerTitleTl = "/careers/corner-menu-tl.svg";
 const cornerTitleTr = "/careers/corner-menu-tr.svg";
@@ -529,10 +530,7 @@ function ApplyButton({ label, href }: { label: string; href?: string }) {
           aria-hidden
         />
       </span>
-      <Corners
-        leftSrc="/careers/corner-apply-tl.svg"
-        rightSrc="/careers/corner-apply-tr.svg"
-      />
+      <GreenCtaCorners />
     </a>
   );
 }

@@ -3,6 +3,7 @@ import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { WearablesCarousel } from "./WearablesCarousel";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const WEARABLES_BG_GRADIENT =
   "linear-gradient(260.505deg, rgba(255, 255, 255, 0.12) 0.12143%, rgba(255, 255, 255, 0.6) 44.084%, rgba(255, 255, 255, 0) 113.37%)";
@@ -31,10 +32,7 @@ function PrimaryCta({ label, href }: { label: string; href: string }) {
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
-      <Corners
-        leftSrc="/applications/wearables/vector-47.svg"
-        rightSrc="/applications/wearables/vector-46.svg"
-      />
+      <GreenCtaCorners />
       <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic">
         {label}
       </span>
@@ -263,10 +261,7 @@ export function WearablesHero({
                 aria-hidden
                 className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
               />
-              <Corners
-                leftSrc="/applications/wearables/vector-47.svg"
-                rightSrc="/applications/wearables/vector-46.svg"
-              />
+              <GreenCtaCorners />
               <span className="relative whitespace-nowrap text-[14px] leading-[28px] font-medium text-white uppercase not-italic">
                 {primaryLabel}
               </span>

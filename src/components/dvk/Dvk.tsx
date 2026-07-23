@@ -31,6 +31,7 @@ import {
 const DVK_DESKTOP_HEIGHT = 658;
 
 import { DvkIntegratedModules } from "./DvkIntegratedModules";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 export function Dvk({ data }: { data?: any }) {
   return (
@@ -173,7 +174,7 @@ function DvkHeroMobile({ data }: { data?: any }) {
               aria-hidden
               className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`}
             />
-            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+            <GreenCtaCorners />
           </a>
         </div>
       </div>

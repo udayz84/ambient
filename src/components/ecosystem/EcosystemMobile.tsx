@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 import { EcosystemPartnerRow, DEV_LOGO_STAT_NODES } from "./EcosystemPartnerRow";
 import { SILICON_PARTNER_ROW, DEVELOPMENT_PARTNER_ROW } from "./ecosystem-data";
@@ -122,7 +123,7 @@ export function EcosystemMobile({ data }: { data?: any }) {
           className="relative z-10 size-[6px]"
           aria-hidden
         />
-        <Corners />
+        <GreenCtaCorners />
       </a>
 
       <div className="mt-[24px] flex w-full overflow-hidden">

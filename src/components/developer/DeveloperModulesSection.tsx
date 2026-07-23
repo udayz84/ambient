@@ -8,6 +8,7 @@ import {
   MODULE_IMAGE_OVERLAY,
 } from "./developer-data";
 import { mediaUrl } from "@/lib/strapi";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const DEFAULT_HEADING = "From bench validation\nto volume production.";
 const DEFAULT_SUBTITLE =
@@ -166,7 +167,7 @@ function ModuleCta({
           />
         </span>
       ) : null}
-      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+      <GreenCtaCorners />
     </a>
   );
 }

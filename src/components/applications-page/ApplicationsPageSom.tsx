@@ -2,6 +2,7 @@
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const TITLE_GRADIENT =
   "linear-gradient(123.792deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -159,7 +160,7 @@ function ViewSomsCta({ label, href }: { label: string; href: string }) {
           className="size-[18px]"
         />
       </span>
-      <Corners />
+      <GreenCtaCorners />
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
@@ -179,7 +180,7 @@ function DiscussCta({ label, href }: { label: string; href: string }) {
       >
         {label}
       </p>
-      <Corners />
+      <GreenCtaCorners />
     </a>
   );
 }

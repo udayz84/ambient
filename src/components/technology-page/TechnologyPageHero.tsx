@@ -2,6 +2,7 @@ import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const HERO_BG = "/technology/hero-bg.png";
 const HERO_OBJECT = "/technology/hero-object.png";
@@ -45,7 +46,7 @@ function ReadWhitepaperCta({
       <span className="absolute top-[calc(50%-14px)] left-1/2 flex -translate-x-1/2 items-center text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
         {label}
       </span>
-      <CornerDecor />
+      <GreenCtaCorners />
     </a>
   );
 }
@@ -69,7 +70,7 @@ function WatchExplainerCta({
       <span className="relative flex h-full items-center text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
         {label}
       </span>
-      <CornerDecor />
+      <GreenCtaCorners />
     </a>
   );
 }

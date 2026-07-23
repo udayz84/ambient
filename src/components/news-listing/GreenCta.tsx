@@ -1,5 +1,6 @@
 import { gilroyMedium } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 type GreenCtaProps = {
   label: string;
@@ -22,7 +23,7 @@ export function GreenCta({ label, href = "#", nodeId }: GreenCtaProps) {
       <span className="relative z-10 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
         {label}
       </span>
-      <Corners />
+      <GreenCtaCorners />
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"

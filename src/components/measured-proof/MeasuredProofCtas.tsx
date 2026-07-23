@@ -1,6 +1,7 @@
 import { gilroyMedium } from "../hero/fonts";
 import { RepelDots } from "../shared/RepelDots";
 import { Corners } from "../shared/Corners";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 type CtaItem = {
   label?: string;
@@ -55,35 +56,7 @@ export function MeasuredProofCtas({ data }: { data?: any }) {
           className="pointer-events-none absolute inset-0 z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
         />
 
-        {/* Custom Corners that pop out slightly to avoid the inset shadow */}
-        <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">
-          <div className="rotate-180 flex-none">
-            <div className="relative size-[4px]">
-              <img src="/hero/corner-tag-2.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
-            </div>
-          </div>
-        </div>
-        <div className="pointer-events-none absolute -top-[0.5px] left-0 z-20 flex size-[4px] items-center justify-center">
-          <div className="-scale-y-100 flex-none">
-            <div className="relative size-[4px]">
-              <img src="/hero/corner-tag-1.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
-            </div>
-          </div>
-        </div>
-        <div className="pointer-events-none absolute right-0 bottom-0 z-20 flex size-[4px] items-center justify-center">
-          <div className="-scale-x-100 flex-none">
-            <div className="relative size-[4px]">
-              <img src="/hero/corner-tag-2.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
-            </div>
-          </div>
-        </div>
-        <div className="pointer-events-none absolute bottom-0 left-0 z-20 flex size-[4px] items-center justify-center">
-          <div className="flex-none">
-            <div className="relative size-[4px]">
-              <img src="/hero/corner-tag-1.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
-            </div>
-          </div>
-        </div>
+        <GreenCtaCorners />
       </a>
 
       <a
@@ -98,7 +71,7 @@ export function MeasuredProofCtas({ data }: { data?: any }) {
         >
           {secondaryLabel}
         </p>
-        <Corners />
+        <GreenCtaCorners />
       </a>
     </div>
   );

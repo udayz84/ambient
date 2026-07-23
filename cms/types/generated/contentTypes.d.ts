@@ -534,7 +534,13 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
-    body: Schema.Attribute.RichText;
+    body: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
     category: Schema.Attribute.Enumeration<
       [
         'blog',
@@ -1021,6 +1027,36 @@ export interface ApiNewsListingPageNewsListingPage
   };
 }
 
+export interface ApiPopupPopup extends Struct.CollectionTypeSchema {
+  collectionName: 'popups';
+  info: {
+    description: 'Popup configuration';
+    displayName: 'Popup';
+    pluralName: 'popups';
+    singularName: 'popup';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    cta_label: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Submit & Download'>;
+    description: Schema.Attribute.Text;
+    fields: Schema.Attribute.Component<'form.field', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::popup.popup'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProductsPageProductsPage extends Struct.SingleTypeSchema {
   collectionName: 'products_pages';
   info: {
@@ -1069,39 +1105,37 @@ export interface ApiProductsPageProductsPage extends Struct.SingleTypeSchema {
 export interface ApiRedirectRedirect extends Struct.CollectionTypeSchema {
   collectionName: 'redirects';
   info: {
-    description: 'URL redirect management \u2014 maps old URLs to new URLs with configurable HTTP status codes';
+    description: 'Manage dynamic URL redirects';
     displayName: 'Redirect';
     pluralName: 'redirects';
     singularName: 'redirect';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    enabled: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::redirect.redirect'
     > &
       Schema.Attribute.Private;
-    new_url: Schema.Attribute.String &
+    newPath: Schema.Attribute.String & Schema.Attribute.Required;
+    oldPath: Schema.Attribute.String &
       Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 2048;
-      }>;
-    old_url: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 2048;
-      }>;
+      Schema.Attribute.Unique;
     publishedAt: Schema.Attribute.DateTime;
-    status_code: Schema.Attribute.String &
+    redirectType: Schema.Attribute.Enumeration<
+      ['permanent_301', 'temporary_302']
+    > &
       Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'301'>;
+      Schema.Attribute.DefaultTo<'permanent_301'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1779,6 +1813,7 @@ declare module '@strapi/strapi' {
       'api::job.job': ApiJobJob;
       'api::navbar.navbar': ApiNavbarNavbar;
       'api::news-listing-page.news-listing-page': ApiNewsListingPageNewsListingPage;
+      'api::popup.popup': ApiPopupPopup;
       'api::products-page.products-page': ApiProductsPageProductsPage;
       'api::redirect.redirect': ApiRedirectRedirect;
       'api::resources-page.resources-page': ApiResourcesPageResourcesPage;

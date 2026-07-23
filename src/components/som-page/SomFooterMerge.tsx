@@ -3,6 +3,7 @@
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const CORNER_LEFT = "/hero/corner-tag-1.svg";
 const CORNER_RIGHT = "/hero/corner-tag-2.svg";
@@ -63,7 +64,7 @@ export function SomFooterMerge({ data }: { data?: any }) {
                 {ctaLabel}
               </span>
               <span aria-hidden className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
-              <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+              <GreenCtaCorners />
             </a>
           </div>
         </div>

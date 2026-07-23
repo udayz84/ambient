@@ -10,6 +10,7 @@ import {
   DEVELOPER_COPILOTS,
 } from "./developer-data";
 import { mediaUrl } from "@/lib/strapi";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const DEFAULT_HEADING = "Your deployment co-pilots.";
 const DEFAULT_SUBTITLE =
@@ -173,7 +174,7 @@ function CopilotCta({
       >
         {children}
       </span>
-      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+      <GreenCtaCorners />
     </a>
   );
 }

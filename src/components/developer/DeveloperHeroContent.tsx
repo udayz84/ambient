@@ -1,3 +1,4 @@
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import {
@@ -101,7 +102,7 @@ function PrimaryCta({
         aria-hidden
         className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
       />
-      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+      <GreenCtaCorners />
     </a>
   );
 }

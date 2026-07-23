@@ -1,3 +1,4 @@
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import Image from "next/image";
 import { mediaUrl } from "@/lib/strapi";
 import { dmMono, gilroyMedium, gilroySemiBold, interRegular, interSemiBold } from "../hero/fonts";
@@ -77,7 +78,7 @@ function GreenCta({
           aria-hidden
         />
       </span>
-      <Corners />
+      <GreenCtaCorners />
     </a>
   );
 }
@@ -136,7 +137,7 @@ function CompanyHeroMobile({ data }: { data?: any }) {
           data-name="Group 78"
           aria-hidden
         >
-          <Corners />
+          <GreenCtaCorners />
         </div>
 
         {/* 3244:5536 — headline (x29 y7 w321) */}

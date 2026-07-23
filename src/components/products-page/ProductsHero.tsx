@@ -1,3 +1,4 @@
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
@@ -326,7 +327,7 @@ function PrimaryCta({
         aria-hidden
         className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`}
       />
-      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+      <GreenCtaCorners />
     </a>
   );
 }
@@ -452,7 +453,7 @@ function ProductsHeroMobile({
                 aria-hidden
                 className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`}
               />
-              <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+              <GreenCtaCorners />
             </a>
             <a
               href={secondary.href}

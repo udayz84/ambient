@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "popups",
+  "info": {
+    "singularName": "popup",
+    "pluralName": "popups",
+    "displayName": "Popup",
+    "description": "Popup configuration"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "fields": {
+      "type": "component",
+      "repeatable": true,
+      "component": "form.field"
+    },
+    "cta_label": {
+      "type": "string",
+      "default": "Submit & Download"
+    }
+  }
+}

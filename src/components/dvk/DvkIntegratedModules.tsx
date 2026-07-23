@@ -1,6 +1,7 @@
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { CORNER_LEFT, CORNER_RIGHT, PRIMARY_CTA_INSET, PRIMARY_CTA_SHADOW } from "./dvk-data";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const DEFAULT_HEADING = "From Cranium to Integrated Modules.";
 const DEFAULT_SUBTITLE =
@@ -254,7 +255,7 @@ function GreenCta({ children, width, fullWidth = false, href = "#" }: { children
         {children}
       </span>
       <span aria-hidden className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
-      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+      <GreenCtaCorners />
     </a>
   );
 }

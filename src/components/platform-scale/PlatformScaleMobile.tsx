@@ -9,6 +9,7 @@ import {
   type GpxProduct,
 } from "./platform-scale-data";
 import { useState, useCallback } from "react";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 function getVirtualProduct(
   virtualIndex: number,
@@ -432,35 +433,7 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
           <p className="relative z-10 text-[12px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
             {ctaLabel}
           </p>
-          
-          <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">
-            <div className="rotate-180 flex-none">
-              <div className="relative size-[4px]">
-                <img src="/hero/corner-tag-2.svg" alt="" className="block size-full max-w-none" aria-hidden />
-              </div>
-            </div>
-          </div>
-          <div className="pointer-events-none absolute -top-[0.5px] left-0 z-20 flex size-[4px] items-center justify-center">
-            <div className="-scale-y-100 flex-none">
-              <div className="relative size-[4px]">
-                <img src="/hero/corner-tag-1.svg" alt="" className="block size-full max-w-none" aria-hidden />
-              </div>
-            </div>
-          </div>
-          <div className="pointer-events-none absolute right-0 bottom-0 z-20 flex size-[4px] items-center justify-center">
-            <div className="-scale-x-100 flex-none">
-              <div className="relative size-[4px]">
-                <img src="/hero/corner-tag-2.svg" alt="" className="block size-full max-w-none" aria-hidden />
-              </div>
-            </div>
-          </div>
-          <div className="pointer-events-none absolute bottom-0 left-0 z-20 flex size-[4px] items-center justify-center">
-            <div className="flex-none">
-              <div className="relative size-[4px]">
-                <img src="/hero/corner-tag-1.svg" alt="" className="block size-full max-w-none" aria-hidden />
-              </div>
-            </div>
-          </div>
+        <GreenCtaCorners />
         </a>
       </div>
     </div>

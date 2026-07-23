@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "redirects",
+  "info": {
+    "singularName": "redirect",
+    "pluralName": "redirects",
+    "displayName": "Redirect",
+    "description": "Manage dynamic URL redirects"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "oldPath": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "newPath": {
+      "type": "string",
+      "required": true
+    },
+    "redirectType": {
+      "type": "enumeration",
+      "enum": [
+        "permanent_301",
+        "temporary_302"
+      ],
+      "default": "permanent_301",
+      "required": true
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { Corners } from "../shared/Corners";
@@ -64,7 +65,7 @@ function DeveloperHeroMobile() {
             aria-hidden
             className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
           />
-          <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+          <GreenCtaCorners />
         </a>
         <a
           href="#"
@@ -309,7 +310,7 @@ function DeveloperComingSoonMobile() {
             aria-hidden
             className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
           />
-          <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+          <GreenCtaCorners />
         </a>
 
         <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />

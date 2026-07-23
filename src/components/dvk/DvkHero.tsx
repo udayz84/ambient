@@ -10,6 +10,7 @@ import {
   PRIMARY_CTA_SHADOW,
 } from "./dvk-data";
 import { mediaUrl } from "@/lib/strapi";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const DEFAULT_TITLE = "The physical launchpad for microwatt Edge AI.";
 const DEFAULT_SUBTITLE =
@@ -219,7 +220,7 @@ function PrimaryCta({ children }: { children: React.ReactNode }) {
         aria-hidden
         className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`}
       />
-      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+      <GreenCtaCorners />
     </a>
   );
 }

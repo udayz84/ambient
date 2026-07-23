@@ -1,6 +1,7 @@
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GradientTitle } from "../contact/contact-shared";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const TITLE_GRADIENT_DEG = "128.192deg";
 const FALLBACK_SUBTITLE =
@@ -87,7 +88,7 @@ function DownloadCta({ label }: { label: string }) {
         aria-hidden
         className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
       />
-      <Corners />
+      <GreenCtaCorners />
     </a>
   );
 }
@@ -124,7 +125,7 @@ export function SomIntelligence({ data }: { data?: any }) {
             >
               {heading}
             </GradientTitle>
-            <Corners />
+            <GreenCtaCorners />
           </div>
           <p
             className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}

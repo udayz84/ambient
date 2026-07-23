@@ -110,10 +110,16 @@ export function TechnologyMobile({ data }: { data?: any }) {
         </div>
 
         {/* Edge-to-Edge Image */}
-        <div className="relative mt-[32px] w-full">
+        <div 
+          className="relative mt-[32px] w-full"
+          style={{
+            maskImage: "radial-gradient(ellipse at center, black 70%, transparent 100%)",
+            WebkitMaskImage: "radial-gradient(ellipse at center, black 70%, transparent 100%)",
+          }}
+        >
           <Image
-            src="/mobile/Image-re-arch.png"
-            alt=""
+            src={mediaUrl(data?.image) || "/mobile/Image-re-arch.png"}
+            alt={data?.image_alt || ""}
             width={389}
             height={184}
             className="w-full h-auto object-cover"

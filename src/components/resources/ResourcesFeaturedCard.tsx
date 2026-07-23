@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { GreenCtaButton } from "../contact/contact-shared";
 import type { ResourceFeaturedCard } from "./resources-data";
 import { Corners } from "../shared/Corners";
+import { ResourceDownloadModal } from "./ResourceDownloadModal";
 
 const badgeCornerTl = "/resources/badge-corner-tl.svg";
 const badgeCornerTr = "/resources/badge-corner-tr.svg";
@@ -19,6 +21,7 @@ type ResourcesFeaturedCardProps = ResourceFeaturedCard & {
   ctaLabel?: string;
   ctaHref?: string;
   pdfUrl?: string;
+  enableDownloadPopup?: boolean;
 };
 
 export function ResourcesFeaturedCard({
@@ -35,55 +38,78 @@ export function ResourcesFeaturedCard({
   ctaLabel = FALLBACK_CTA_LABEL,
   ctaHref = "#",
   pdfUrl,
+  enableDownloadPopup = false,
 }: ResourcesFeaturedCardProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const targetUrl = pdfUrl || ctaHref;
+
+  const handleCtaClick = (e: React.MouseEvent) => {
+    if (enableDownloadPopup && targetUrl) {
+      e.preventDefault();
+      setIsModalOpen(true);
+    }
+  };
+
   return (
-    <article
-      className="relative flex min-w-px flex-[1_0_0] flex-col gap-[8px] overflow-clip border-[0.5px] border-solid border-[rgba(255,255,255,0.3)] bg-[#191919] p-[10px]"
-      data-node-id={nodeId}
-    >
-      <div
-        className="relative flex h-[281px] shrink-0 flex-col items-end overflow-clip p-[12px]"
-        style={{ width: imageWidth }}
-        data-node-id={imageNodeId}
-        data-name="Image"
+    <>
+      <article
+        className="relative flex min-w-px flex-[1_0_0] flex-col gap-[8px] overflow-clip border-[0.5px] border-solid border-[rgba(255,255,255,0.3)] bg-[#191919] p-[10px]"
+        data-node-id={nodeId}
       >
-        <div aria-hidden className="pointer-events-none absolute inset-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="" className={imageClassName} src={imageSrc} />
-          <div className="absolute inset-0 bg-gradient-to-b from-[rgba(25,25,25,0)] from-[79.181%] to-[#191919]" />
-        </div>
-        <WhitepaperBadge
-          nodeId={badgeNodeId}
-          label={badgeLabel}
-          variant={badgeVariant}
-        />
-      </div>
-
-      <div className="flex w-full flex-col gap-[24px] p-[16px]">
-        <div className="flex flex-col gap-[12px]">
-          <h3
-            className={`${gilroyMedium.className} w-[290px] text-[22px] leading-[28px] font-medium text-white opacity-90 not-italic [word-break:break-word]`}
-          >
-            {title}
-          </h3>
-          <p
-            className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[#a4a4a4] opacity-90 not-italic [word-break:break-word]`}
-          >
-            {description}
-          </p>
-        </div>
-        <GreenCtaButton
-          className="w-[231px]"
-          href={pdfUrl || ctaHref}
-          download={!!pdfUrl}
-          textClassName={`${gilroyMedium.className} text-[16px] leading-[28px] font-medium`}
+        <div
+          className="relative flex h-[281px] shrink-0 flex-col items-end overflow-clip p-[12px]"
+          style={{ width: imageWidth }}
+          data-node-id={imageNodeId}
+          data-name="Image"
         >
-          {ctaLabel}
-        </GreenCtaButton>
-      </div>
+          <div aria-hidden className="pointer-events-none absolute inset-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img alt="" className={imageClassName} src={imageSrc} />
+            <div className="absolute inset-0 bg-gradient-to-b from-[rgba(25,25,25,0)] from-[79.181%] to-[#191919]" />
+          </div>
+          <WhitepaperBadge
+            nodeId={badgeNodeId}
+            label={badgeLabel}
+            variant={badgeVariant}
+          />
+        </div>
 
-      <Corners leftSrc={cardCornerLeft} rightSrc={cardCornerRight} />
-    </article>
+        <div className="flex w-full flex-col gap-[24px] p-[16px]">
+          <div className="flex flex-col gap-[12px]">
+            <h3
+              className={`${gilroyMedium.className} w-[290px] text-[22px] leading-[28px] font-medium text-white opacity-90 not-italic [word-break:break-word]`}
+            >
+              {title}
+            </h3>
+            <p
+              className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[#a4a4a4] opacity-90 not-italic [word-break:break-word]`}
+            >
+              {description}
+            </p>
+          </div>
+          <div onClick={handleCtaClick}>
+            <GreenCtaButton
+              className="w-[231px]"
+              href={targetUrl}
+              download={!!pdfUrl && !enableDownloadPopup}
+              textClassName={`${gilroyMedium.className} text-[16px] leading-[28px] font-medium`}
+            >
+              {ctaLabel}
+            </GreenCtaButton>
+          </div>
+        </div>
+
+        <Corners leftSrc={cardCornerLeft} rightSrc={cardCornerRight} />
+      </article>
+
+      {enableDownloadPopup && targetUrl && (
+        <ResourceDownloadModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          pdfUrl={targetUrl}
+        />
+      )}
+    </>
   );
 }
 
