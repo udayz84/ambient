@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
-import { CompanyArticleCorners } from "../company/CompanyArticleCorners";
+import { Corners } from "../shared/Corners";
 import { NEWS_ARTICLE_IMAGE_BASE, type NewsArticle } from "./news-data";
 
 export function NewsArticleCard({
@@ -71,7 +71,7 @@ export function NewsArticleCard({
         </div>
       </div>
 
-      <CompanyArticleCorners />
+      <Corners />
     </article>
   );
 }

@@ -36,7 +36,7 @@ export const COMPANY_ENGAGEMENT_CARDS: CompanyEngagementCardData[] = [
   {
     nodeId: "2379:4862",
     titleLines: ["Partner with", "Ambient."],
-    titleWidth: 220,
+    titleWidth: 200,
     titleHeight: 76,
     description:
       "Co-engineer the next generation of intelligent edge devices. Integrate GPX processors into your hardware with full design support, reference implementations, and production backing.",
@@ -54,7 +54,7 @@ export const COMPANY_ENGAGEMENT_CARDS: CompanyEngagementCardData[] = [
   {
     nodeId: "2379:4890",
     titleLines: ["Validate your", "architecture."],
-    titleWidth: 250,
+    titleWidth: 230,
     titleHeight: 76,
     description:
       "Book a technical deep-dive with our Field Application Engineers. Get evaluation boards, characterization data, and measure real power on your workload — not simulations.",

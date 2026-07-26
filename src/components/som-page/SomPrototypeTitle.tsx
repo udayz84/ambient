@@ -1,3 +1,4 @@
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 
@@ -11,11 +12,13 @@ const PROTOTYPE_CARDS = [
     title: "The Lab",
     description:
       "Use the integrated breakout board for rapid prototyping. It includes a USB-C port for charging, a 10-pin JTAG connector, programmable LEDs, and headers for easy signal probing and power analysis.",
+    image: null,
   },
   {
     title: "Production-Ready SOMs",
     description:
       "Once your software is validated, simply snap off the breakout half. The remaining 21×21mm core module embeds directly into your space-constrained product with zero hardware redesign required.",
+    image: null,
   },
 ] as const;
 
@@ -27,12 +30,14 @@ function PrototypeCard({
   widthClass,
   imageHeightClass,
   imageGradient,
+  imageUrl,
 }: {
   title: string;
   description: string;
   widthClass: string;
   imageHeightClass: string;
   imageGradient: string;
+  imageUrl?: string | null;
 }) {
   return (
     <div
@@ -40,10 +45,18 @@ function PrototypeCard({
       data-name="Article"
     >
       <div
-        className={`relative flex w-full items-center justify-center rounded-[6px] border border-solid border-[rgba(0,255,0,0.3)] ${imageHeightClass}`}
-        style={{ background: imageGradient }}
+        className={`relative flex w-full items-center justify-center rounded-[6px] border border-solid border-[rgba(0,255,0,0.3)] overflow-hidden ${imageHeightClass}`}
+        style={!imageUrl ? { background: imageGradient } : undefined}
         data-name="Container"
-      />
+      >
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            alt={title}
+            className="absolute inset-0 size-full object-cover"
+          />
+        )}
+      </div>
       <div
         className="flex w-full flex-col items-start gap-[10px]"
         data-name="NewsSection"
@@ -73,6 +86,7 @@ export function SomPrototypeTitle({ data }: { data?: any }) {
     return {
       title: c.title || fb.title,
       description: c.description || fb.description,
+      imageUrl: mediaUrl(c.image) || null,
     };
   });
   return (
@@ -100,6 +114,7 @@ export function SomPrototypeTitle({ data }: { data?: any }) {
               widthClass="w-[590px]"
               imageHeightClass="h-[327px]"
               imageGradient={IMAGE_GRADIENT_DESKTOP}
+              imageUrl={card.imageUrl}
             />
           ))}
         </div>
@@ -124,6 +139,7 @@ export function SomPrototypeTitle({ data }: { data?: any }) {
               widthClass="w-full"
               imageHeightClass="h-[200px]"
               imageGradient={IMAGE_GRADIENT_MOBILE}
+              imageUrl={card.imageUrl}
             />
           ))}
         </div>

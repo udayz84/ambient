@@ -6,6 +6,18 @@ import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 const MODES_TOP = "/technology/modes-top.png";
 const MODES_BOTTOM = "/technology/modes-bottom.png";
 const MODE_ICON = "/technology/mode-icon.svg";
+const MODES_BADGE_LEFT = "/technology/modes-badge-left.png";
+const MODES_BADGE_RIGHT = "/technology/modes-badge-right.png";
+const MODES_CHEV_LEFT = [
+  "/technology/modes-chev-left1.png",
+  "/technology/modes-chev-left2.png",
+  "/technology/modes-chev-left3.png",
+];
+const MODES_CHEV_RIGHT = [
+  "/technology/modes-chev-right1.png",
+  "/technology/modes-chev-right2.png",
+  "/technology/modes-chev-right3.png",
+];
 
 const TITLE_GRADIENT_DEG = "106.506deg";
 const SUBTITLE_OPACITY = 0.65;
@@ -81,8 +93,78 @@ const MODE_LABEL_CONFIG: ModeLabelConfig[] = [
   { left: "left-[848px]", top: "top-[538.33px]", variant: "descriptor", label: "on-demand. high performance" },
 ];
 
-function ModeIcon() {
+/**
+ * Animated chevron flow overlays for the bottom loop visual.
+ * The chevron badges are baked into modes-bottom.png; these overlays sit on
+ * top of them (badge base with the chevrons stripped + transparent chevron
+ * layers) and pulse in the direction each badge points:
+ * left badge ">>>" flows left-to-right, right badge "<<<" right-to-left.
+ * Positions are mapped 1:1 from the source image pixels to page coordinates
+ * (container at left 150.2 / top 568, scale x 0.757, y 0.8436, offsetY 419.79).
+ */
+function ChevronBadge({
+  badgeSrc,
+  badgeLeft,
+  chevrons,
+  delays,
+}: {
+  badgeSrc: string;
+  badgeLeft: number;
+  chevrons: { src: string; left: number; width: number }[];
+  delays: number[];
+}) {
   return (
+    <>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={badgeSrc}
+        alt=""
+        className="absolute top-[646.76px] h-[47.24px] w-[85.54px] max-w-none"
+        style={{ left: badgeLeft }}
+        aria-hidden
+      />
+      {chevrons.map((c, i) => (
+        <div
+          key={c.src}
+          className="animate-technology-chevron-flow absolute top-[651.82px] h-[37.12px]"
+          style={{ left: c.left, width: c.width, animationDelay: `${delays[i]}s` }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={c.src} alt="" className="block size-full max-w-none" aria-hidden />
+        </div>
+      ))}
+    </>
+  );
+}
+
+function ModesChevronFlow() {
+  return (
+    <div className="pointer-events-none absolute inset-0 z-[1]" aria-hidden>
+      <ChevronBadge
+        badgeSrc={MODES_BADGE_LEFT}
+        badgeLeft={490.85}
+        chevrons={[
+          { src: MODES_CHEV_LEFT[0], left: 506.75, width: 21.95 },
+          { src: MODES_CHEV_LEFT[1], left: 523.4, width: 21.95 },
+          { src: MODES_CHEV_LEFT[2], left: 539.3, width: 22.71 },
+        ]}
+        delays={[0, 0.25, 0.5]}
+      />
+      <ChevronBadge
+        badgeSrc={MODES_BADGE_RIGHT}
+        badgeLeft={886.77}
+        chevrons={[
+          { src: MODES_CHEV_RIGHT[0], left: 900.39, width: 21.95 },
+          { src: MODES_CHEV_RIGHT[1], left: 916.29, width: 21.95 },
+          { src: MODES_CHEV_RIGHT[2], left: 932.94, width: 21.95 },
+        ]}
+        delays={[0.5, 0.25, 0]}
+      />
+    </div>
+  );
+}
+
+function ModeIcon() {  return (
     <div
       className="flex size-[27.65px] shrink-0 items-center justify-center rounded-[5.895px] p-[4px]"
       style={{ background: ICON_BG }}
@@ -280,6 +362,9 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
             aria-hidden
           />
         </div>
+
+        {/* flowing chevron overlays for the loop badges */}
+        <ModesChevronFlow />
 
         {/* 3003:540 — header */}
         <div

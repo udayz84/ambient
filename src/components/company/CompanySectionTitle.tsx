@@ -45,7 +45,7 @@ export function CompanySectionTitle({
         {titleLines.map((line) => (
           <span
             key={line}
-            className="block whitespace-nowrap"
+            className="block text-wrap [word-break:break-word]"
             style={{ lineHeight: `${lineHeight}px` }}
           >
             {line}

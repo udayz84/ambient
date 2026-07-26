@@ -69,27 +69,23 @@ function PressTitle({ heading }: { heading: string }) {
 function PressMenu({ label }: { label: string }) {
   return (
     <div
-      className="relative h-[26px] w-[180px] shrink-0 bg-[rgba(255,255,255,0.06)]"
+      className="relative flex h-[26px] w-[180px] shrink-0 items-center justify-center overflow-clip border border-solid border-[rgba(255,255,255,0.3)] bg-[rgba(255,255,255,0.06)]"
       data-name="Menu"
     >
-      {/* Corner borders */}
-      <div className="absolute left-0 top-[4px] h-[4px] w-[4px] border-l border-t border-white opacity-60" />
-      <div className="absolute right-0 top-[4px] h-[4px] w-[4px] border-r border-t border-white opacity-60" />
-      <div className="absolute bottom-[4px] left-0 h-[4px] w-[4px] border-b border-l border-white opacity-60" />
-      <div className="absolute bottom-[4px] right-0 h-[4px] w-[4px] border-b border-r border-white opacity-60" />
-      
+      <Corners />
+
       {/* Vertical bars */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-[6.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60 rounded-full"
+        className="pointer-events-none absolute left-[6.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute right-[7.52px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60 rounded-full"
+        className="pointer-events-none absolute left-[170.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60"
       />
-      
+
       <p
-        className={`${dmMono.className} absolute left-1/2 top-[calc(50%-4.5px)] -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic`}
+        className={`${dmMono.className} text-[13px] leading-[13px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic pt-px`}
       >
         {label}
       </p>
@@ -134,7 +130,6 @@ function PressCluster({ iconSrc }: { iconSrc: string }) {
       data-name="Container"
       aria-hidden
     >
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.15)_1.5px,_transparent_1.5px)] bg-[length:16px_16px]" />
       {/* White logo card */}
       <div
         className="absolute left-[31.625px] top-[34.91px] flex h-[192px] w-[192px] items-center justify-center overflow-clip rounded-[16px] border border-solid border-[#e5e7eb] bg-white p-px shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1),0px_8px_10px_-6px_rgba(0,0,0,0.1)]"
@@ -221,7 +216,7 @@ export function PressKit({ data }: PressKitProps = {}) {
 
   return (
     <section
-      className="relative z-10 flex w-full justify-center overflow-hidden"
+      className="relative z-10 flex w-full justify-center overflow-hidden bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.15)_1.5px,_transparent_1.5px)] bg-[length:16px_16px]"
       aria-label="Writing about Ambient"
       data-node-id="2500:1659"
       data-name="Building with Ambient"
@@ -253,7 +248,7 @@ export function PressKit({ data }: PressKitProps = {}) {
             </div>
 
             <div
-              className="flex w-full gap-[18px]"
+              className="flex w-full items-center gap-[18px]"
               data-node-id="2590:1885"
             >
               {menus.map((label) => (

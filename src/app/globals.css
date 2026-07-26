@@ -16,6 +16,55 @@
   --animate-ecosystem-slide-from-right: ecosystem-slide-from-right 12s linear both;
   --animate-platform-scale-stat-fade: platform-scale-stat-fade 1000ms ease-in-out both;
   --animate-ecosystem-scroll-mobile: ecosystem-scroll-mobile 15s linear infinite;
+  --animate-dvk-marquee-up: dvk-marquee-up 36s linear infinite;
+  --animate-dvk-marquee-down: dvk-marquee-down 26s linear infinite;
+  --animate-technology-chevron-flow: technology-chevron-flow 2s ease-in-out infinite;
+  --animate-technology-connector-flow: technology-connector-flow 1.8s linear infinite;
+
+  @keyframes technology-connector-flow {
+    from {
+      -webkit-mask-position: -35% 0;
+      mask-position: -35% 0;
+    }
+
+    to {
+      -webkit-mask-position: 135% 0;
+      mask-position: 135% 0;
+    }
+  }
+
+  @keyframes technology-chevron-flow {
+    0%,
+    100% {
+      opacity: 0.2;
+    }
+
+    15% {
+      opacity: 1;
+    }
+
+    35% {
+      opacity: 0.2;
+    }
+  }
+
+  @keyframes dvk-marquee-up {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-50%);
+    }
+  }
+
+  @keyframes dvk-marquee-down {
+    from {
+      transform: translateY(-50%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
 
   @keyframes ecosystem-scroll-mobile {
     from {
@@ -105,6 +154,15 @@ body {
 html, body {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-dvk-marquee-up,
+  .animate-dvk-marquee-down,
+  .animate-technology-chevron-flow,
+  .animate-technology-connector-flow {
+    animation: none;
+  }
 }
 
 /* Utility to hide scrollbars on specific elements */

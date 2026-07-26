@@ -1,4 +1,4 @@
-import Image from "next/image";
+/* eslint-disable @next/next/no-img-element */
 import { mediaUrl } from "@/lib/strapi";
 
 const FALLBACK_BACKDROP = "/careers/image 107.png";
@@ -20,17 +20,15 @@ export function NewsBackdrop({ data }: NewsBackdropProps = {}) {
       data-node-id="2500:1654"
       data-name="image 107"
     >
-      <div className="absolute inset-0 overflow-hidden">
-        <Image
+      <div className="absolute inset-0 w-full h-full">
+        <img
           src={backdropSrc}
           alt=""
-          fill
-          sizes="1440px"
-          className="object-cover"
-          unoptimized
+          aria-hidden
+          className="absolute inset-0 size-full object-cover"
         />
+        <div className="absolute inset-0" style={{ backgroundImage: VIGNETTE }} />
       </div>
-      <div className="absolute inset-0" style={{ backgroundImage: VIGNETTE }} />
     </div>
   );
 }

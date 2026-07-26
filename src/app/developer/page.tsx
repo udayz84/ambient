@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     "ModelForge bridges training and deployment. Quantize, compile, and merge neural networks with your firmware — model to deployment in 15 minutes.",
 };
 
-const CANVAS_HEIGHT = 4421;
+const CANVAS_HEIGHT = 4521;
 
 export default async function DeveloperPage() {
   let data: any = null;
@@ -37,17 +37,19 @@ export default async function DeveloperPage() {
       <div className="-mt-[78px]">
         <ScaledCanvas width={1440} height={CANVAS_HEIGHT}>
           {data?.hero ? <DeveloperHero data={data.hero} /> : null}
-          {data?.code ? <DeveloperCodeSection data={data.code} /> : null}
-          {data?.pipeline ? <DeveloperPipeline data={data.pipeline} /> : null}
-          {data?.coming_soon ? (
-            <DeveloperComingSoon data={data.coming_soon} />
-          ) : null}
-          {data?.modules ? (
-            <DeveloperModulesSection data={data.modules} />
-          ) : null}
-          {data?.copilots ? (
-            <DeveloperCopilotsSection data={data.copilots} />
-          ) : null}
+          <div style={{ transform: "translateY(100px)" }}>
+            {data?.code ? <DeveloperCodeSection data={data.code} /> : null}
+            {data?.pipeline ? <DeveloperPipeline data={data.pipeline} /> : null}
+            {data?.coming_soon ? (
+              <DeveloperComingSoon data={data.coming_soon} />
+            ) : null}
+            {data?.modules ? (
+              <DeveloperModulesSection data={data.modules} />
+            ) : null}
+            {data?.copilots ? (
+              <DeveloperCopilotsSection data={data.copilots} />
+            ) : null}
+          </div>
         </ScaledCanvas>
       </div>
     </main>

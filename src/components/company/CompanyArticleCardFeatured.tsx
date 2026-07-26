@@ -21,7 +21,7 @@ export function CompanyArticleCardFeatured({
 }: CompanyArticleCardFeaturedProps) {
   return (
     <article
-      className="relative h-[692px] w-[590px] shrink-0 overflow-visible border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)]"
+      className="relative h-[692px] w-[590px] shrink-0 overflow-visible border-[0.5px] border-solid border-[rgba(240,240,240,0.3)] bg-[rgba(0,0,0,0.5)]"
       data-node-id={nodeId}
       data-name="Article"
     >
@@ -77,7 +77,7 @@ export function CompanyArticleCardFeatured({
 function CompanyArticleGreenBadge({ label }: { label: string }) {
   return (
     <div
-      className={`${dmMono.className} relative h-[26px] w-[180px] shrink-0 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.06)]`}
+      className={`${dmMono.className} relative h-[26px] w-[180px] shrink-0 border-[0.5px] border-solid border-[rgba(240,240,240,0.3)] bg-[rgba(255,255,255,0.06)]`}
       data-name="Menu"
     >
       <Corners leftSrc={cornerLeft} rightSrc={cornerRight} />

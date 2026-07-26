@@ -1,3 +1,4 @@
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GradientTitle } from "../contact/contact-shared";
@@ -20,30 +21,36 @@ const CARDS = [
     title: "Motion & Fall Detection",
     description:
       "Leverage the 6-axis IMU for microwatt-level continuous activity recognition and instant fall detection.",
+    image: null,
   },
   {
     title: "Voice Identity & Commands",
     description:
       "Run continuous wake-word and secure voice authentication locally via the Knowles digital mic.",
+    image: null,
   },
   {
     title: "Acoustic Anomalies",
     description:
       "Deploy models for health monitoring (like asthma/cough detection) or security (assault detection) entirely on-device, preserving user privacy.",
+    image: null,
   },
   {
     title: "Safety & Geofencing",
     description:
       "Utilize the onboard BLE and processing technology to trigger instant localized alerts when boundaries are breached.",
+    image: null,
   },
 ] as const;
 
 function IntelligenceCard({
   title,
   description,
+  imageUrl,
 }: {
   title: string;
   description: string;
+  imageUrl?: string | null;
 }) {
   return (
     <div
@@ -51,7 +58,16 @@ function IntelligenceCard({
       style={{ backgroundImage: CARD_BG }}
       data-name="Content"
     >
-      <div className="flex w-full flex-col gap-[12px]">
+      {imageUrl && (
+        <div className="absolute right-[16px] top-[16px] h-[160px] w-[160px] mix-blend-screen pointer-events-none z-0">
+          <img
+            src={imageUrl}
+            alt={title}
+            className="absolute inset-0 size-full object-cover"
+          />
+        </div>
+      )}
+      <div className="relative z-10 flex w-full flex-col gap-[12px]">
         <h3
           className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
         >
@@ -104,6 +120,7 @@ export function SomIntelligence({ data }: { data?: any }) {
     return {
       title: c.title || fb.title,
       description: c.description || fb.description,
+      imageUrl: mediaUrl(c.image) || null,
     };
   });
   return (
@@ -142,6 +159,7 @@ export function SomIntelligence({ data }: { data?: any }) {
               key={card.title}
               title={card.title}
               description={card.description}
+              imageUrl={card.imageUrl}
             />
           ))}
         </div>
@@ -176,6 +194,7 @@ export function SomIntelligence({ data }: { data?: any }) {
               key={card.title}
               title={card.title}
               description={card.description}
+              imageUrl={card.imageUrl}
             />
           ))}
         </div>

@@ -53,10 +53,6 @@ export function DvkHero({ data }: { data?: any }) {
           src={bg}
           className="absolute inset-0 size-full max-w-none object-bottom"
         />
-        <div
-          className="absolute inset-0"
-          style={{ backgroundImage: HERO_IMAGE_OVERLAY }}
-        />
       </div>
 
       {/* Right-side blend into black for screens wider than the 1442 canvas.

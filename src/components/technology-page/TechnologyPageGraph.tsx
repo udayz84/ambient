@@ -2,6 +2,13 @@ import { gilroyMedium, interRegular, interSemiBold } from "../hero/fonts";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
+/**
+ * Figma 3031:508 ("Graph") — "A unified architecture for seamless adoption
+ * and scalability." 1440×849 canvas: left-aligned header, five products
+ * (chip/device render above the label, glowing cube below) standing on a
+ * shared baseline with dashed guide lines, axis footnotes, and two CTAs.
+ */
+
 const BASELINE = "/technology/graph-baseline.svg";
 const LABEL_LINE = "/technology/graph-label-line.svg";
 const FALLBACK_SUBTITLE =
@@ -18,20 +25,31 @@ const FALLBACK_CENTER_TEXT =
 const FALLBACK_PRIMARY_LABEL = "Read the Whitepaper";
 const FALLBACK_SECONDARY_LABEL = "Watch the 3-min Explainer";
 
-const BARS = [
-  { left: 182.51, top: 497.32, w: 101.436, h: 155.592, src: "/technology/graph-bar-1.svg" },
-  { left: 415.36, top: 454.59, w: 101.535, h: 198.315, src: "/technology/graph-bar-2.svg" },
-  { left: 648.38, top: 413.78, w: 101.439, h: 239.127, src: "/technology/graph-bar-3.svg" },
-  { left: 881.4, top: 359.0, w: 101.483, h: 293.907, src: "/technology/graph-bar-4.svg" },
-  { left: 1131.4, top: 292.0, w: 101.488, h: 360.907, src: "/technology/graph-bar-5.svg" },
+/** Glowing cube renders standing above the baseline (3491:629/631/632/634/633). */
+const CUBES = [
+  { nodeId: "3491:629", left: 126, top: 510, w: 129, h: 123, src: "/technology/graph-cube-1.png" },
+  { nodeId: "3491:631", left: 334, top: 472, w: 168, h: 161, src: "/technology/graph-cube-2.png" },
+  { nodeId: "3491:632", left: 572, top: 439, w: 191, h: 183, src: "/technology/graph-cube-3.png" },
+  { nodeId: "3491:634", left: 813, top: 424, w: 207, h: 198, src: "/technology/graph-cube-4.png", innerH: "104.37%", innerTop: "-3.78%" },
+  { nodeId: "3491:633", left: 1057, top: 393, w: 240, h: 229, src: "/technology/graph-cube-5.png", innerH: "104.8%", innerTop: "-3.71%" },
 ];
 
+/** Chip/device renders above each product label (3510:539 / 3515:539 / 3515:541 / 3522:530 / 3522:533). */
+const TOP_IMAGES = [
+  { nodeId: "3510:539", left: 126, top: 260, w: 129, h: 123, src: "/technology/graph-chip-1.png", fit: "object-contain" },
+  { nodeId: "3515:539", left: 353, top: 223, w: 129, h: 123, src: "/technology/graph-chip-2.png", fit: "object-contain" },
+  { nodeId: "3515:541", left: 602, top: 193, w: 129, h: 123, src: "/technology/graph-chip-3.png", fit: "object-contain" },
+  { nodeId: "3522:530", left: 847.17, top: 185, w: 158.119, h: 90.354, src: "/technology/graph-device-1.png", fit: "object-cover" },
+  { nodeId: "3522:533", left: 1106.6, top: 171.82, w: 141.252, h: 70.626, src: "/technology/graph-device-2.png", fit: "object-cover" },
+];
+
+/** Dashed vertical guide lines — horizontal svgs rotated 90° (3031:525/571/581/591/610). */
 const VLINES = [
-  { left: 182.15, top: 464.16, h: 189.395, src: "/technology/graph-vline-1.svg" },
-  { left: 415.0, top: 425.5, h: 228.064, src: "/technology/graph-vline-2.svg" },
-  { left: 648.02, top: 389.0, h: 264.559, src: "/technology/graph-vline-3.svg" },
-  { left: 881.14, top: 333.5, h: 320.059, src: "/technology/graph-vline-4.svg" },
-  { left: 1131.14, top: 267.0, h: 386.559, src: "/technology/graph-vline-5.svg" },
+  { left: 190.14, top: 476, h: 196, w: 0.37, deg: "rotate-[90.11deg]", src: "/technology/graph-vline-new-1.svg", inset: "-1.73px -0.17% -1.73px -0.88%" },
+  { left: 418, top: 440, h: 232.06, w: 0, deg: "rotate-90", src: "/technology/graph-vline-new-2.svg", inset: "-1.73px -0.14% -1.73px -0.75%" },
+  { left: 668.02, top: 408, h: 264.559, w: 0, deg: "rotate-90", src: "/technology/graph-vline-new-3.svg", inset: "-1.73px -0.12% -1.73px -0.66%" },
+  { left: 916, top: 378, h: 294, w: 0, deg: "rotate-90", src: "/technology/graph-vline-new-4.svg", inset: "-1.73px -0.11% -1.73px -0.59%" },
+  { left: 1177.15, top: 348, h: 324, w: 0, deg: "rotate-90", src: "/technology/graph-vline-new-5.svg", inset: "-1.73px -0.1% -1.73px -0.53%" },
 ];
 
 type LabelConfig = {
@@ -42,11 +60,11 @@ type LabelConfig = {
 };
 
 const LABEL_CONFIG: LabelConfig[] = [
-  { left: 182.15, top: 366, name: "GPX10", cat: "EDGE SENSOR" },
-  { left: 415.18, top: 330, name: "GPX10 Pro", cat: "EDGE AI SOC" },
-  { left: 648.2, top: 298, name: "GPX Vision", cat: "ON - DEVICE VISION" },
-  { left: 881.22, top: 238, name: "GPX Compute", cat: "ON - DEVICE VISION" },
-  { left: 1131.22, top: 158, name: "GPX Compute", cat: "ON - DEVICE VISION" },
+  { left: 142.15, top: 385, name: "GPX10", cat: "EDGE SENSOR" },
+  { left: 357.18, top: 349, name: "GPX10 Pro", cat: "EDGE AI SOC" },
+  { left: 608.2, top: 317, name: "GPX Vision", cat: "ON - DEVICE VISION" },
+  { left: 841.22, top: 287, name: "GPX Compute", cat: "ON - DEVICE VISION" },
+  { left: 1101.22, top: 257, name: "GPX Compute", cat: "ON - DEVICE VISION" },
 ];
 
 const GREEN_CTA_SHADOW =
@@ -64,7 +82,7 @@ function GraphCtas({
   secondaryHref: string;
 }) {
   return (
-    <div className="absolute top-[735.55px] left-1/2 flex -translate-x-1/2 items-start gap-[24px]" data-node-id="3035:713">
+    <div className="absolute top-[754.55px] left-1/2 flex -translate-x-1/2 items-start gap-[24px]" data-node-id="3035:713">
       <a
         href={primaryHref}
         className={`${gilroyMedium.className} ${GREEN_CTA_SHADOW} relative block h-[48px] w-[223px] shrink-0`}
@@ -123,11 +141,11 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
       data-name="Graph"
       aria-label="A unified architecture for seamless adoption and scalability"
     >
-      {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden h-[799px] w-full max-w-[1440px] min-[1024px]:block">
+      {/* DESKTOP (>=1024px) — 1440×849 canvas */}
+      <div className="relative hidden h-[849px] w-full max-w-[1440px] min-[1024px]:block">
         {/* 3031:512 — header (left-aligned) */}
         <div
-          className="absolute top-[32px] left-[80px] z-10 flex flex-col items-start gap-[24px]"
+          className="absolute top-[42px] left-[80px] z-10 flex flex-col items-start gap-[24px]"
           data-node-id="3031:512"
           data-name="Section Title"
         >
@@ -153,49 +171,32 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
           </p>
         </div>
 
-        {/* bars */}
-        {BARS.map((b, i) => (
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img
-            key={`bar-${i}`}
-            src={b.src}
-            alt=""
-            aria-hidden
-            className="absolute block max-w-none"
-            style={{ left: b.left, top: b.top, width: b.w, height: b.h }}
-          />
+        {/* chip/device renders above the labels */}
+        {TOP_IMAGES.map((img) => (
+          <div
+            key={img.nodeId}
+            className="absolute"
+            style={{ left: img.left, top: img.top, width: img.w, height: img.h }}
+            data-node-id={img.nodeId}
+            data-name="Product Image"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={img.src}
+              alt=""
+              aria-hidden
+              className={`pointer-events-none absolute inset-0 size-full max-w-none ${img.fit}`}
+            />
+          </div>
         ))}
 
-        {/* vertical guide lines (horizontal svg rotated 90°) */}
-        {VLINES.map((v, i) => (
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img
-            key={`vline-${i}`}
-            src={v.src}
-            alt=""
-            aria-hidden
-            className="absolute block max-w-none rotate-90 origin-top-left"
-            style={{ left: v.left, top: v.top, width: v.h, height: 3.467 }}
-          />
-        ))}
-
-        {/* baseline (line 118) */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={BASELINE}
-          alt=""
-          aria-hidden
-          className="absolute top-[654.05px] left-1/2 block max-w-none -translate-x-1/2"
-          style={{ width: 1260, height: 1 }}
-          data-node-id="3031:521"
-        />
-
-        {/* bar labels */}
+        {/* product labels (Product Details) */}
         {labels.map((l, i) => (
           <div
             key={`label-${i}`}
             className="absolute flex flex-col items-start gap-[12px]"
             style={{ left: l.left, top: l.top }}
+            data-name="Product Details"
           >
             <p
               className={`${gilroyMedium.className} text-[26px] leading-[29px] font-medium whitespace-nowrap text-white not-italic`}
@@ -219,15 +220,84 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
           </div>
         ))}
 
+        {/* dashed vertical guide lines (horizontal svg rotated 90°) */}
+        {VLINES.map((v, i) => (
+          <div
+            key={`vline-${i}`}
+            className="absolute flex items-center justify-center"
+            style={{ left: v.left, top: v.top, height: v.h, width: v.w }}
+            aria-hidden
+          >
+            <div className={`flex-none ${v.deg}`}>
+              <div className="relative h-0" style={{ width: v.h }}>
+                <div className="absolute" style={{ inset: v.inset }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={v.src}
+                    alt=""
+                    className="block size-full max-w-none"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+
+        {/* glowing cubes above the baseline */}
+        {CUBES.map((img) => (
+          <div
+            key={img.nodeId}
+            className="absolute"
+            style={{ left: img.left, top: img.top, width: img.w, height: img.h }}
+            data-node-id={img.nodeId}
+            data-name="Product Image"
+          >
+            {img.innerH ? (
+              <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={img.src}
+                  alt=""
+                  aria-hidden
+                  className="absolute left-0 w-full max-w-none"
+                  style={{ height: img.innerH, top: img.innerTop }}
+                />
+              </div>
+            ) : (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                src={img.src}
+                alt=""
+                aria-hidden
+                className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+              />
+            )}
+          </div>
+        ))}
+
+        {/* baseline (line 118) */}
+        <div
+          className="absolute top-[673.05px] left-1/2 h-0 w-[1260px] -translate-x-1/2"
+          data-node-id="3031:521"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={BASELINE}
+            alt=""
+            aria-hidden
+            className="block size-full max-w-none"
+          />
+        </div>
+
         {/* axis footnotes */}
         <p
-          className={`${interRegular.className} absolute top-[667.55px] left-[90px] text-[14px] leading-[22.75px] font-normal tracking-[-0.1504px] whitespace-nowrap text-[rgba(255,255,255,0.4)] not-italic`}
+          className={`${interRegular.className} absolute top-[686.55px] left-[90px] text-[14px] leading-[22.75px] font-normal tracking-[-0.1504px] whitespace-nowrap text-[rgba(255,255,255,0.4)] not-italic`}
           data-node-id="3031:522"
         >
           {axisLeft}
         </p>
         <p
-          className={`${interRegular.className} absolute top-[667.55px] left-[1350px] -translate-x-full text-right text-[14px] leading-[22.75px] font-normal tracking-[-0.1504px] whitespace-nowrap text-[rgba(255,255,255,0.4)] not-italic`}
+          className={`${interRegular.className} absolute top-[686.55px] left-[1350px] -translate-x-full text-right text-[14px] leading-[22.75px] font-normal tracking-[-0.1504px] whitespace-nowrap text-[rgba(255,255,255,0.4)] not-italic`}
           data-node-id="3031:524"
         >
           {axisRight}
@@ -235,7 +305,7 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
 
         {/* center footnote */}
         <p
-          className={`${interSemiBold.className} absolute top-[667.55px] text-[14px] tracking-[-0.1504px] whitespace-nowrap not-italic`}
+          className={`${interSemiBold.className} absolute top-[686.55px] text-[14px] tracking-[-0.1504px] whitespace-nowrap not-italic`}
           style={{ left: "calc(50% - 270px)" }}
           data-node-id="3035:711"
         >
@@ -277,23 +347,23 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
           {subtitle}
         </p>
 
-        {/* scaled chart — bars positioned by % so they always fit the container */}
-        <div className="relative mx-auto h-[300px] w-full max-w-[380px] overflow-hidden">
-          {BARS.map((b, i) => {
+        {/* scaled cube row — positioned by % so they always fit the container */}
+        <div className="relative mx-auto h-[220px] w-full max-w-[380px] overflow-hidden">
+          {CUBES.map((img, i) => {
             const scale = 380 / 1440;
             return (
               <div
-                key={`m-bar-${i}`}
+                key={`m-cube-${i}`}
                 className="absolute origin-bottom-left"
                 style={{
-                  left: `${(b.left / 1440) * 100}%`,
+                  left: `${(img.left / 1440) * 100}%`,
                   bottom: 0,
-                  width: b.w * scale,
-                  height: b.h * scale,
+                  width: img.w * scale,
+                  height: img.h * scale,
                 }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={b.src} alt="" aria-hidden className="block size-full max-w-none" />
+                <img src={img.src} alt="" aria-hidden className="block size-full max-w-none object-cover" />
               </div>
             );
           })}

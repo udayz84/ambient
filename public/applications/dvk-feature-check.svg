@@ -1,0 +1,17 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Menu" clip-path="url(#clip0_5043_533)">
+<rect width="35" height="35" fill="#73BE5B"/>
+<path id="Vector 42" d="M0 4L0 0H4" stroke="var(--stroke-0, white)"/>
+<path id="Vector 43" d="M35 4L35 0H31" stroke="var(--stroke-0, white)"/>
+<path id="Vector 44" d="M0 31L0 35H4" stroke="var(--stroke-0, white)"/>
+<path id="Vector 45" d="M35 31L35 35H31" stroke="var(--stroke-0, white)"/>
+<g id="Figr_Icon_check">
+<path id="Vector" d="M13.8925 21.8609L9.19968 17.1681L7.60166 18.7549L13.8925 25.0457L27.3969 11.5413L25.8101 9.95455L13.8925 21.8609Z" fill="var(--fill-0, white)"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_5043_533">
+<rect width="35" height="35" fill="white"/>
+</clipPath>
+</defs>
+</svg>

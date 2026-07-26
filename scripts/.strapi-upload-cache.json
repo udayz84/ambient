@@ -1342,5 +1342,12 @@
     "url": "/uploads/logo_octane_59661e6327.svg",
     "name": "logo-octane.svg",
     "sourcePath": "ecosystem/logo-octane.svg"
+  },
+  "cf94fc5bc2b614e600c9b078495159153e7ba295": {
+    "id": 256,
+    "documentId": "ly5fonmdfoxiv6zwyk8bfd66",
+    "url": "/uploads/board_blueprint_406122db4c.webp",
+    "name": "board-blueprint.webp",
+    "sourcePath": "dvk/board-blueprint.webp"
   }
 }

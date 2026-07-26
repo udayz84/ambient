@@ -229,40 +229,54 @@ function FlowDiagram({
 }) {
   return (
     <div className="pointer-events-none">
+      <style>{`
+        @keyframes sweep {
+          0% { transform: translateX(-200%); }
+          100% { transform: translateX(300%); }
+        }
+        .animate-sweep {
+          animation: sweep 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+      `}</style>
+      
       {/* State 0: Train */}
       <div
-        className={`absolute -translate-x-1/2 transition-opacity duration-300 ${activeTab === 0 ? "opacity-100" : "opacity-0"}`}
+        className={`absolute -translate-x-1/2 overflow-hidden transition-opacity duration-300 ${activeTab === 0 ? "opacity-100" : "opacity-0"}`}
         style={{ left: "50%", top: 347.8, width: 1135, height: 270 }}
       >
         <div className="absolute inset-0 overflow-hidden">
           <img alt="" src={flowSrc(0)} className="absolute left-[-36.45%] top-[-42.84%] h-[194.25%] w-[138.68%] max-w-none" />
         </div>
+        <div className="absolute top-0 bottom-0 w-[30%] bg-gradient-to-r from-transparent via-white/50 to-transparent mix-blend-color-dodge animate-sweep pointer-events-none blur-lg" />
       </div>
 
       {/* State 1: Optimize */}
       <div
-        className={`absolute -translate-x-1/2 transition-opacity duration-300 ${activeTab === 1 ? "opacity-100" : "opacity-0"}`}
+        className={`absolute -translate-x-1/2 overflow-hidden transition-opacity duration-300 ${activeTab === 1 ? "opacity-100" : "opacity-0"}`}
         style={{ left: "50%", top: 310.58, width: 1292.934, height: 306.901 }}
       >
         <div className="absolute inset-0 overflow-hidden">
           <img alt="" src={flowSrc(1)} className="absolute left-[-28.88%] top-[-36.36%] h-[181.28%] w-[128.88%] max-w-none" />
         </div>
+        <div className="absolute top-0 bottom-0 w-[30%] bg-gradient-to-r from-transparent via-white/50 to-transparent mix-blend-color-dodge animate-sweep pointer-events-none blur-lg" />
       </div>
 
       {/* State 2: Integrate */}
       <div
-        className={`absolute -translate-x-1/2 transition-opacity duration-300 ${activeTab === 2 ? "opacity-100" : "opacity-0"}`}
+        className={`absolute -translate-x-1/2 overflow-hidden transition-opacity duration-300 ${activeTab === 2 ? "opacity-100" : "opacity-0"}`}
         style={{ left: "50%", top: 342.58, width: 1271.162, height: 284.896 }}
       >
         <img alt="" src={flowSrc(2)} className="absolute inset-0 size-full max-w-none object-cover" />
+        <div className="absolute top-0 bottom-0 w-[30%] bg-gradient-to-r from-transparent via-white/50 to-transparent mix-blend-color-dodge animate-sweep pointer-events-none blur-lg" />
       </div>
 
       {/* State 3: Deploy */}
       <div
-        className={`absolute -translate-x-1/2 transition-opacity duration-300 ${activeTab === 3 ? "opacity-100" : "opacity-0"}`}
+        className={`absolute -translate-x-1/2 overflow-hidden transition-opacity duration-300 ${activeTab === 3 ? "opacity-100" : "opacity-0"}`}
         style={{ left: "50%", top: 361.08, width: 1280.186, height: 216.001 }}
       >
         <img alt="" src={flowSrc(3)} className="absolute inset-0 size-full max-w-none object-cover" />
+        <div className="absolute top-0 bottom-0 w-[30%] bg-gradient-to-r from-transparent via-white/50 to-transparent mix-blend-color-dodge animate-sweep pointer-events-none blur-lg" />
       </div>
     </div>
   );

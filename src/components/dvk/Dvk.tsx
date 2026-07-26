@@ -59,14 +59,14 @@ export function Dvk({ data }: { data?: any }) {
 
       {/* DESKTOP (>=1024px) — demos section (2761:2791 + cards row) */}
       <div className="relative mx-auto hidden w-full bg-black min-[1024px]:block">
-        <div className="mx-auto w-[1256px] pb-[200px]">
+        <div className="mx-auto w-[1256px] pb-[129.5px]">
           {data?.demos ? <DvkDemos data={data.demos} /> : null}
         </div>
       </div>
 
-      {/* DESKTOP (>=1024px) — ModelForge section title (2761:3009) */}
+      {/* DESKTOP (>=1024px) — ModelForge section (3773:685, 1440×873 canvas) */}
       <div className="relative mx-auto hidden w-full bg-black min-[1024px]:block">
-        <div className="mx-auto w-[650px] pb-[80px]">
+        <div className="mx-auto w-[1440px] pb-[80px]">
           {data?.modelforge ? <DvkModelForge data={data.modelforge} /> : null}
         </div>
       </div>

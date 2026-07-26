@@ -92,7 +92,7 @@ function Tick({ height, tone }: { height: number; tone: "white" | "dark" }) {
 function NewsPill({ label }: { label: string }) {
   return (
     <div
-      className="relative flex h-[44px] w-[100px] shrink-0 items-center justify-center overflow-clip bg-[#f0f0f0]"
+      className="relative flex h-[44px] w-fit shrink-0 items-center justify-center overflow-clip bg-[#f0f0f0] px-[10px]"
       data-node-id="2500:1853"
       data-name="Cta"
     >
@@ -219,7 +219,7 @@ export function NewsGrid({ data }: NewsGridProps = {}) {
       <div className="flex w-full min-[1024px]:w-[1236px] flex-col items-center gap-[60px] px-[24px] py-[64px] min-[1024px]:px-0">
         <NewsFilterBar pills={pills} activeId={activeId} onSelect={setActiveId} />
 
-        <div className="flex w-full flex-col items-center gap-[36px]">
+        <div className="relative z-10 flex w-full flex-col items-center bg-transparent">
           <div className="grid w-full grid-cols-1 gap-[36px] min-[1024px]:grid-cols-3">
             {activeCards.slice(0, 3).map((article, i) => (
               <NewsArticleCard

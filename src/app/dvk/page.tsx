@@ -16,7 +16,7 @@ export default async function DvkPage() {
       "hardware_stack",
       { section: "demos", nested: ["demo_cards"] },
       "modelforge",
-      "integrated_modules",
+      { section: "integrated_modules", nested: ["cards"] },
       "seo",
     ]);
   } catch {

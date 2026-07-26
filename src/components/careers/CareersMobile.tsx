@@ -593,7 +593,7 @@ function FilterSelect({
 }) {
   return (
     <div
-      className={`relative flex h-[48px] w-[174px] shrink-0 items-center bg-[rgba(0,0,0,0)] ${GLASS_PANEL_VISIBLE_BORDER_CLASS}`}
+      className="relative flex h-[48px] w-[174px] shrink-0 items-center bg-[rgba(0,0,0,0)] border border-solid border-[rgba(240,240,240,0.2)]"
     >
       <select
         aria-label={label}

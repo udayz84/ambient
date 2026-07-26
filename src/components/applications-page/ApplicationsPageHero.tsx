@@ -29,18 +29,26 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
     >
       {/* DESKTOP (>=1024px) */}
       <div className="relative hidden h-[804px] w-full max-w-[1440px] min-[1024px]:block">
-        {/* Background image 157 */}
+        {/* Background image 158 */}
         <div
-          className="pointer-events-none absolute top-[124.3125px] left-0 h-[720px] w-[1440px]"
-          data-node-id="2438:3902"
-          data-name="image 157"
+          className="pointer-events-none absolute top-[86.27px] left-[-214.08px] h-[717.73px] w-[1828.16px]"
+          data-node-id="3624:1253"
+          data-name="image 158"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={bgImg}
             alt=""
-            className="absolute inset-0 size-full max-w-none object-cover"
+            className="absolute inset-0 size-full max-w-none object-contain"
             aria-hidden
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                "linear-gradient(180deg, rgba(0, 0, 0, 0) 73.028%, rgb(0, 0, 0) 83.379%), linear-gradient(180deg, rgb(0, 0, 0) 23.033%, rgba(0, 0, 0, 0) 34.001%)",
+            }}
           />
         </div>
 
@@ -51,7 +59,7 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
         <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 hidden w-[300px] bg-gradient-to-l from-black to-transparent min-[1441px]:block" />
 
         {/* Menu badge */}
-        <div className="absolute top-[145.3125px] left-1/2 -translate-x-1/2">
+        <div className="absolute top-[125.3125px] left-1/2 -translate-x-1/2">
           <TagBadge
             label={tagText}
             width={160}
@@ -64,7 +72,7 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
 
         {/* Title */}
         <div
-          className="absolute top-[191.3125px] left-1/2 h-[118px] w-[448px] -translate-x-1/2"
+          className="absolute top-[161.3125px] left-1/2 h-[118px] w-[448px] -translate-x-1/2"
           data-node-id="2438:3912"
           data-name="Title"
         >
@@ -87,10 +95,7 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
           >
             <GradientTitle gradientDeg="105.388deg" className="text-center">
               {titleLines.map((line: string, i: number) => (
-                <span
-                  key={i}
-                  className="block h-[49px] leading-[49px] whitespace-nowrap"
-                >
+                <span key={i} className="block leading-[49px]">
                   {line}
                 </span>
               ))}
@@ -100,7 +105,7 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
 
         {/* Subtitle */}
         <p
-          className={`${interRegular.className} absolute top-[643px] left-1/2 w-[554px] -translate-x-1/2 text-center text-[18px] leading-[27px] font-normal text-[#bbb] not-italic [word-break:break-word]`}
+          className={`${interRegular.className} absolute top-[683px] left-1/2 w-[554px] -translate-x-1/2 text-center text-[18px] leading-[27px] font-normal text-[#bbb] not-italic [word-break:break-word]`}
           data-node-id="2438:3903"
         >
           {subtitle}

@@ -22,7 +22,7 @@ export const BOX_BORDER_CLASS =
 
 /** Matches bottom-edge brightness on all four sides (Careers DNA glass panels). */
 export const GLASS_PANEL_VISIBLE_BORDER_CLASS =
-  "border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] shadow-[inset_0_0.5px_0_0_rgba(240,240,240,0.45),inset_0_-0.5px_0_0_rgba(240,240,240,0.45),inset_0.5px_0_0_rgba(240,240,240,0.45),inset_-0.5px_0_0_rgba(240,240,240,0.45)]";
+  "border-[0.5px] border-solid border-[rgba(240,240,240,0.15)] shadow-[inset_0_0.5px_0_0_rgba(240,240,240,0.35),inset_0_-0.5px_0_0_rgba(240,240,240,0.35),inset_0.5px_0_0_rgba(240,240,240,0.35),inset_-0.5px_0_0_rgba(240,240,240,0.35)]";
 
 export const CARD_GRADIENT_BG =
   "linear-gradient(rgba(83, 216, 36, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%), linear-gradient(90deg, rgba(21, 21, 21, 0.3) 0%, rgba(21, 21, 21, 0.3) 100%)";

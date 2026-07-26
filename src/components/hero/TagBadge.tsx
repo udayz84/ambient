@@ -8,6 +8,8 @@ type TagBadgeProps = {
   rightBarLeft: number;
   nodeId?: string;
   centerLabel?: boolean;
+  height?: number;
+  leftBarLeft?: number;
 };
 
 export function TagBadge({
@@ -17,11 +19,13 @@ export function TagBadge({
   rightBarLeft,
   nodeId,
   centerLabel = false,
+  height = 26,
+  leftBarLeft = 6.48,
 }: TagBadgeProps) {
   return (
     <div
-      className={`${dmMono.className} relative h-[26px] shrink-0 border-[0.5px] border-solid border-[rgba(240,240,240,0.5)] bg-[rgba(255,255,255,0.06)]`}
-      style={{ width }}
+      className={`${dmMono.className} relative shrink-0 border-[0.5px] border-solid border-[rgba(240,240,240,0.5)] bg-[rgba(255,255,255,0.06)]`}
+      style={{ width, height }}
       data-node-id={nodeId}
       data-name="Menu"
     >
@@ -32,7 +36,10 @@ export function TagBadge({
       >
         {label}
       </p>
-      <div className="absolute top-1/2 left-[6.48px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+      <div
+        className="absolute top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60"
+        style={{ left: leftBarLeft }}
+      />
       <div
         className="absolute top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60"
         style={{ left: rightBarLeft }}

@@ -114,14 +114,14 @@ export function CareersOpenRoles({
     } else {
       currentHeight = currentJobsCount * 153 + (currentJobsCount - 1) * 10;
     }
-    const diff = MAX_HEIGHT - currentHeight;
+    const diff = (MAX_HEIGHT - currentHeight) + 140; // Add 140px to pull up subsequent sections by the same amount we pulled up this section
     onHeightDiffChange?.(diff);
   }, [filteredJobs.length, onHeightDiffChange]);
 
   return (
     <section
       id="open-roles"
-      className="absolute top-[2426px] left-1/2 z-10 flex w-[1204px] -translate-x-1/2 flex-col gap-[40px]"
+      className="absolute top-[2286px] left-1/2 z-10 flex w-[1204px] -translate-x-1/2 flex-col gap-[40px]"
       data-node-id="2379:8901"
       aria-label="Open Roles"
     >
@@ -388,7 +388,7 @@ function FilterDropdown({
   return (
     <div
       ref={rootRef}
-      className="relative flex w-[200px] shrink-0 items-center border-[0.5px] border-[rgba(240,240,240,0.2)]"
+      className="relative flex w-[200px] shrink-0 items-center border border-[rgba(240,240,240,0.2)]"
       data-node-id={nodeId}
     >
       <button
@@ -419,7 +419,7 @@ function FilterDropdown({
         <ul
           role="listbox"
           aria-label={label}
-          className="absolute top-[calc(100%+4px)] left-0 z-30 w-[200px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black py-[4px] shadow-[0px_8px_24px_0px_rgba(0,0,0,0.6)]"
+          className="absolute top-[calc(100%+4px)] left-0 z-30 w-[200px] border border-solid border-[rgba(240,240,240,0.2)] bg-black py-[4px] shadow-[0px_8px_24px_0px_rgba(0,0,0,0.6)]"
         >
           {options.map((option) => {
             const isSelected = option.value === value;

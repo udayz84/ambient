@@ -1,5 +1,5 @@
 export const RESOURCES_BASE_HEIGHT = 4507;
-export const RESOURCES_NEWS_TOP = 3393;
+export const RESOURCES_NEWS_TOP = 3510;
 export const RESOURCES_FOOTER_TOP = 3273;
 export const RESOURCES_CARD_ROW_HEIGHT = 469.161;
 export const RESOURCES_ROW_GAP = 36;

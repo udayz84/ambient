@@ -98,11 +98,7 @@ function ModuleCard({
           <img
             alt=""
             src={image}
-            className="absolute inset-0 size-full max-w-none object-cover"
-          />
-          <div
-            className="absolute inset-0"
-            style={{ backgroundImage: MODULE_IMAGE_OVERLAY }}
+            className="absolute inset-0 size-full max-w-none object-contain"
           />
         </div>
       </div>

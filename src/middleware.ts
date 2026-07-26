@@ -35,9 +35,10 @@ export async function middleware(request: NextRequest) {
     queryUrl.searchParams.set('filters[$or][1][newPath][$eq]', pathname);
     queryUrl.searchParams.set('filters[enabled][$eq]', 'true');
     queryUrl.searchParams.set('populate', '*');
+    queryUrl.searchParams.set('t', Date.now().toString());
 
     const res = await fetch(queryUrl.toString(), {
-      next: { revalidate: 60 },
+      cache: 'no-store',
     });
 
     if (!res.ok) return NextResponse.next();

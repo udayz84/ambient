@@ -184,7 +184,7 @@ function ResourcesHeroMobile({ data }: { data?: any } = {}) {
         </div>
         <button
           type="button"
-          className="relative flex w-[90px] shrink-0 items-center justify-center bg-white bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.15)_100%)] transition-opacity hover:opacity-90"
+          className="relative flex w-[90px] shrink-0 items-center justify-center bg-white bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.15)_100%)] shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15),0px_10.268px_6.699px_rgba(255,255,255,0.15),0px_3.714px_2.423px_rgba(255,255,255,0.1)] transition-opacity hover:opacity-90"
         >
           <span className={`${interSemiBold.className} text-[14px] leading-[normal] font-semibold text-[#121212] not-italic`}>
             {searchLabel}
@@ -528,7 +528,7 @@ function ResourcesContentMobile({
         {visibleArticles.map((article) => (
           <article
             key={article.nodeId}
-            className="relative flex flex-col gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.1)] bg-[rgba(255,255,255,0.04)] px-[12px] pb-[24px] pt-[9px]"
+            className="relative flex flex-col gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.1)] bg-black px-[12px] pb-[24px] pt-[9px]"
           >
             <Corners />
             <div className="relative h-[244px] w-full shrink-0 overflow-hidden bg-[#151515]">
@@ -576,30 +576,7 @@ function ResourcesContentMobile({
         ))}
       </div>
 
-      {canLoadMore ? (
-        <div className="mt-[24px]">
-          <button
-            type="button"
-            onClick={() =>
-              setVisibleCount((c) => Math.min(c + loadMoreCount, filteredArticles.length))
-            }
-            className={`${interSemiBold.className} relative flex h-[48px] w-full items-center justify-center overflow-hidden ${GREEN_CTA_SHADOW}`}
-          >
-            <span
-              aria-hidden
-              className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-            />
-            <span
-              aria-hidden
-              className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
-            />
-            <span className="relative text-[13px] leading-[normal] font-semibold uppercase whitespace-nowrap text-white not-italic">
-              {loadMoreLabel}
-            </span>
-            <GreenCtaCorners />
-          </button>
-        </div>
-      ) : null}
+      {/* Load more button removed per user request */}
     </section>
   );
 }

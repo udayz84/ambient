@@ -244,8 +244,8 @@ export function ContactForm({ data }: { data?: any }) {
             className="sr-only"
           />
           <span
-            className={`relative size-[20px] shrink-0 border-[0.5px] border-solid ${
-              subscribed ? "border-[#53d824] bg-[#53d824]" : "border-[#4a4a4a]"
+            className={`relative size-[20px] shrink-0 border border-solid ${
+              subscribed ? "border-[#53d824] bg-[#53d824]" : "border-[rgba(240,240,240,0.3)]"
             }`}
             data-node-id="2379:8563"
           >

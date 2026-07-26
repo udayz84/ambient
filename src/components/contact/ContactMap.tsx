@@ -60,7 +60,10 @@ const CONTACT_VIEWPORT_SCALE =
 export function ContactMap({ data }: { data?: any }) {
   const globeImage = mediaUrl(data?.globe_image) || "/contact/Globe image.png";
   const mapBase = mediaUrl(data?.map_base) || "/contact/map-base.svg";
-  const headingLines = (data?.heading || DEFAULT_HEADING).split("\n");
+  const headingText = data?.heading || DEFAULT_HEADING;
+  const headingLines = headingText.includes("\n") 
+    ? headingText.split("\n") 
+    : headingText.replace(/\.\s+/, ".\n").split("\n");
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
   const strapiLocations: ReadonlyArray<any> = Array.isArray(data?.locations)
     ? data.locations
@@ -87,7 +90,10 @@ export function ContactMap({ data }: { data?: any }) {
       data-node-id="2379:5086"
       aria-label="Global offices"
     >
-      <div className="relative mx-auto h-full w-full max-w-[1440px]">
+      <div 
+        className="absolute top-0 left-1/2 h-[1002px] w-[1440px] origin-top"
+        style={{ transform: "translateX(-50%) scale(min(1, calc((100vw - 40px) / 1440px)))" }}
+      >
       <div
         className="absolute top-0 left-1/2 flex h-[1002px] w-[1440px] origin-center items-center justify-center -translate-x-1/2"
       >
@@ -224,7 +230,7 @@ function LocationBlock({
       </div>
       <div className={`${cardClass} z-10`} data-node-id={nodeId}>
       <FramedBox
-        className="relative flex h-[130px] w-fit max-w-none items-center gap-[20px] overflow-clip bg-black pr-[20px]"
+        className="relative flex h-[130px] w-fit max-w-none items-center gap-[20px] overflow-clip bg-[rgba(0,0,0,0.5)] pr-[20px]"
       >
         <div className="relative size-[130px] shrink-0">
           <span

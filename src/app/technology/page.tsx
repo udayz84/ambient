@@ -1,7 +1,6 @@
 import { TechnologyPageHero } from "@/components/technology-page/TechnologyPageHero";
 import { TechnologyPageProblem } from "@/components/technology-page/TechnologyPageProblem";
 import { TechnologyPageArchitecture } from "@/components/technology-page/TechnologyPageArchitecture";
-import { TechnologyPagePillars } from "@/components/technology-page/TechnologyPagePillars";
 import { TechnologyPageModes } from "@/components/technology-page/TechnologyPageModes";
 import { TechnologyPageGraph } from "@/components/technology-page/TechnologyPageGraph";
 import { TechnologyPageSilicon } from "@/components/technology-page/TechnologyPageSilicon";
@@ -32,9 +31,11 @@ export default async function TechnologyPage() {
       {data?.hero && <TechnologyPageHero data={data.hero} />}
       {data?.problem && <TechnologyPageProblem data={data.problem} />}
       {data?.architecture && (
-        <TechnologyPageArchitecture data={data.architecture} />
+        <TechnologyPageArchitecture
+          data={data.architecture}
+          pillarsData={data.pillars}
+        />
       )}
-      {data?.pillars && <TechnologyPagePillars data={data.pillars} />}
       {data?.modes && <TechnologyPageModes data={data.modes} />}
       {data?.graph && <TechnologyPageGraph data={data.graph} />}
       {data?.silicon && <TechnologyPageSilicon data={data.silicon} />}

@@ -130,7 +130,7 @@ export function ResourcesHero({ data }: ResourcesHeroProps = {}) {
           </div>
           <a
             href="#"
-            className="relative flex w-[158px] shrink-0 items-center justify-center bg-white bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.15)_100%)] transition-opacity hover:opacity-90"
+            className="relative flex w-[158px] shrink-0 items-center justify-center bg-white bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.15)_100%)] shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15),0px_10.268px_6.699px_rgba(255,255,255,0.15),0px_3.714px_2.423px_rgba(255,255,255,0.1)] transition-opacity hover:opacity-90"
           >
             <span
               className={`${interRegular.className} text-[16px] leading-[normal] font-normal text-[#121212] not-italic`}
@@ -141,7 +141,7 @@ export function ResourcesHero({ data }: ResourcesHeroProps = {}) {
         </div>
 
         <div
-          className={`${interRegular.className} absolute top-[212.17px] left-[calc(16.67%+119px)] flex items-center gap-[6px] text-[14px] leading-[21px] font-normal whitespace-nowrap not-italic`}
+          className={`${interRegular.className} absolute top-[212.17px] left-[calc(16.67%+119px)] flex w-[722px] justify-center items-center gap-[6px] text-[14px] leading-[21px] font-normal whitespace-nowrap not-italic`}
           data-node-id="2379:1634"
         >
           <span className="text-white opacity-75" data-node-id="2379:1635">

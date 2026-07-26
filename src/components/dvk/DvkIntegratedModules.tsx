@@ -1,3 +1,4 @@
+import { mediaUrl } from "@/lib/strapi";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { CORNER_LEFT, CORNER_RIGHT, PRIMARY_CTA_INSET, PRIMARY_CTA_SHADOW } from "./dvk-data";
@@ -26,6 +27,7 @@ export function DvkIntegratedModules({ data }: { data?: any }) {
       ? data.cards.map((c: any, i: number) => ({
           title: c?.title || CARDS[i]?.title || "",
           description: c?.description || CARDS[i]?.description || "",
+          imageUrl: mediaUrl(c?.image) || null,
         }))
       : CARDS;
   return (
@@ -70,7 +72,8 @@ const CARDS = [
 const CARD_BG = "rgba(0,0,0,0.5)";
 const CARD_BORDER = "rgba(240,240,240,0.2)";
 const IMAGE_BORDER = "rgba(0,255,0,0.3)";
-const IMAGE_VIGNETTE = "radial-gradient(ellipse 65% 100% at 50% 50%, rgba(26,26,26,1) 0%, rgba(13,13,13,1) 25%, rgba(7,7,7,1) 37.5%, rgba(0,0,0,1) 50%)";
+/** Figma 2761:2847 — media container radial fade (683.75×163.5 ellipse). */
+const IMAGE_VIGNETTE = "radial-gradient(ellipse 683.75px 163.5px at 50% 50%, rgba(26,26,26,1) 0%, rgba(13,13,13,1) 25%, rgba(7,7,7,1) 37.5%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%)";
 const DEV_CHIP_BG = "rgba(115,190,91,0.12)";
 const TITLE_GRADIENT = "linear-gradient(107.367deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
@@ -87,14 +90,14 @@ function DvkIntegratedModulesDesktop({
   heading: string;
   subtitle: string;
   footer: string;
-  cards: { title: string; description: string }[];
+  cards: { title: string; description: string; imageUrl?: string | null }[];
   primaryLabel: string;
   primaryHref: string;
   secondaryLabel: string;
   secondaryHref: string;
 }) {
   return (
-    <div className="mx-auto flex w-full max-w-[1204px] flex-col items-center pb-[120px]">
+    <div className="mx-auto flex w-full max-w-[1204px] flex-col items-center pb-[40px]">
       <div className="flex flex-col items-center gap-[24px]" style={{ width: 800 }}>
         <div className="relative px-[20px] py-[4px] w-fit">
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
@@ -122,10 +125,15 @@ function DvkIntegratedModulesDesktop({
             style={{ backgroundColor: CARD_BG, borderColor: CARD_BORDER }}
           >
             <div
-              className="flex shrink-0 items-center justify-center rounded-[6px] border border-solid"
-              style={{ height: 270, borderColor: IMAGE_BORDER, backgroundImage: IMAGE_VIGNETTE }}
+              className="relative flex h-[327px] shrink-0 items-center justify-center rounded-[6px] border border-solid overflow-hidden"
+              style={{ borderColor: IMAGE_BORDER, backgroundImage: IMAGE_VIGNETTE }}
               aria-hidden
-            />
+            >
+              {card.imageUrl && (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img src={card.imageUrl} alt="" className="absolute inset-0 size-full max-w-none" />
+              )}
+            </div>
             <div className="relative mt-[20px] flex items-center justify-between gap-[10px] not-italic">
               <h3 className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium whitespace-nowrap text-white`}>
                 {card.title}
@@ -146,7 +154,7 @@ function DvkIntegratedModulesDesktop({
 
       <div className="mt-[32px] flex items-center gap-[24px]">
         <GreenCta width={157} href={primaryHref}>{primaryLabel}</GreenCta>
-        <SecondaryCta width={276} href={secondaryHref}>{secondaryLabel}</SecondaryCta>
+        <SecondaryCta width="auto" href={secondaryHref}>{secondaryLabel}</SecondaryCta>
       </div>
     </div>
   );
@@ -165,7 +173,7 @@ function DvkIntegratedModulesMobile({
   heading: string;
   subtitle: string;
   footer: string;
-  cards: { title: string; description: string }[];
+  cards: { title: string; description: string; imageUrl?: string | null }[];
   primaryLabel: string;
   primaryHref: string;
   secondaryLabel: string;
@@ -197,10 +205,12 @@ function DvkIntegratedModulesMobile({
             style={{ backgroundColor: CARD_BG, borderColor: CARD_BORDER }}
           >
             <div
-              className="mb-[16px] flex h-[200px] w-full items-center justify-center rounded-[6px] border border-solid"
+              className="relative mb-[16px] flex h-[200px] w-full items-center justify-center rounded-[6px] border border-solid overflow-hidden"
               style={{ borderColor: IMAGE_BORDER, backgroundImage: IMAGE_VIGNETTE }}
               aria-hidden
-            />
+            >
+              {card.imageUrl && <img src={card.imageUrl} alt="" className="absolute inset-0 size-full object-contain" />}
+            </div>
             <div className="flex items-center justify-between gap-[10px] w-full">
               <h3 className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic`}>
                 {card.title}
@@ -221,7 +231,7 @@ function DvkIntegratedModulesMobile({
 
       <div className="mt-[32px] flex flex-col items-stretch gap-[16px]">
         <GreenCta fullWidth width={157} href={primaryHref}>{primaryLabel}</GreenCta>
-        <SecondaryCta fullWidth width={276} href={secondaryHref}>{secondaryLabel}</SecondaryCta>
+        <SecondaryCta fullWidth width="auto" href={secondaryHref}>{secondaryLabel}</SecondaryCta>
       </div>
     </section>
   );
@@ -230,11 +240,11 @@ function DvkIntegratedModulesMobile({
 function DevChip() {
   return (
     <div
-      className={`${dmMono.className} relative h-[26px] shrink-0 overflow-clip`}
-      style={{ width: 104, backgroundColor: DEV_CHIP_BG }}
+      className={`${dmMono.className} relative h-[26px] w-[153px] shrink-0 overflow-clip`}
+      style={{ backgroundColor: DEV_CHIP_BG }}
     >
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-      <p className="absolute left-1/2 top-[calc(50%-4.5px)] -translate-x-1/2 text-[10px] leading-[19.5px] font-normal tracking-[-0.3px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
+      <p className="absolute left-[calc(50%+0.5px)] top-[calc(50%-4.5px)] -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
         Development
       </p>
       <div className="absolute top-1/2 left-[7px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
@@ -260,12 +270,12 @@ function GreenCta({ children, width, fullWidth = false, href = "#" }: { children
   );
 }
 
-function SecondaryCta({ children, width, fullWidth = false, href = "#" }: { children: React.ReactNode; width: number; fullWidth?: boolean; href?: string }) {
+function SecondaryCta({ children, width, fullWidth = false, href = "#" }: { children: React.ReactNode; width?: number | string; fullWidth?: boolean; href?: string }) {
   return (
     <a
       href={href}
-      className={`${gilroyMedium.className} relative flex h-[52px] ${fullWidth ? "w-full" : "shrink-0"} items-center justify-center bg-[rgba(226,241,202,0.12)] px-[20px]`}
-      style={fullWidth ? undefined : { width }}
+      className={`${gilroyMedium.className} relative flex h-[52px] ${fullWidth ? "w-full" : "shrink-0"} items-center justify-center bg-[rgba(226,241,202,0.12)] px-[24px]`}
+      style={fullWidth ? undefined : { width: width || "max-content" }}
     >
       <span className={`relative text-[16px] leading-normal font-medium uppercase ${fullWidth ? "text-center" : "whitespace-nowrap"} text-white not-italic py-[4px] mt-[2px]`}>
         {children}

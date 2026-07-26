@@ -295,11 +295,11 @@ const ASSETS = {
 
   tech_problem_bg: "technology/problem-bg.png",
   tech_problem_overlay: "technology/problem-overlay.png",
-  tech_problem_legacy_compute: "technology/legacy-compute.png",
-  tech_problem_legacy_memory: "technology/legacy-memory.png",
-  tech_problem_connector_line: "technology/connector-line.svg",
+  tech_problem_legacy_compute: "technology/legacy-compute-new.png",
+  tech_problem_legacy_memory: "technology/legacy-memory-new.png",
+  tech_problem_connector_line: "technology/stat-connector-line.svg",
   tech_problem_connector_icon: "technology/connector-icon.svg",
-  tech_problem_acube: "technology/acube-diagram.png",
+  tech_problem_acube: "technology/acube-cube.png",
 
   tech_arch_image: "technology/architecture-bg.png",
 
@@ -662,7 +662,7 @@ const TECHNOLOGY_PAYLOAD = {
 
   problem: {
     tag: { text: "The PROBLEM" },
-    heading: "AI isn't a math problem. It's a memory problem.",
+    heading: "AI isn't a math problem.\nIt's a memory problem.",
     subtitle: "The multiply was never the expensive part. Moving the data was.",
     stat_value: "95%",
     stat_description:
@@ -686,9 +686,9 @@ const TECHNOLOGY_PAYLOAD = {
 
   architecture: {
     tag: { text: "A-Cube" },
-    heading: "One architecture that thinks senses, & speaks you language",
+    heading: "One architecture that thinks\nsenses, & speaks you language",
     subtitle:
-      "Three breakthroughs working as one system - a brain that runs on physics, a nervous system that knows when (and how hard) to think, and a language you already speak. Server-class AI in a coin-cell power budget.",
+      "Three breakthroughs as one: a physics-based brain, a responsive nervous system, and familiar language. Server-class AI with low power.",
     image: media(ASSETS.tech_arch_image),
   },
 
@@ -696,7 +696,7 @@ const TECHNOLOGY_PAYLOAD = {
     pillars: [
       {
         icon: media(ASSETS.tech_pillar_cubiccore),
-        tag: "The Brain",
+        tag: "The Brain That think",
         title: "CubicCore™",
         subtitle: "Server-class math. Microwatt power.",
         description:

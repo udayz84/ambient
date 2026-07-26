@@ -879,7 +879,7 @@ function CompanyArticlesMobile({ data }: { data?: any }) {
     >
       <div className="px-[20px] pt-[16px] pb-[16px]">
         {/* Featured article */}
-        <article className="relative flex w-full flex-col gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[9px] pt-[12px] pb-[12px]">
+        <article className="relative flex w-full flex-col gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.3)] bg-[rgba(0,0,0,0.5)] px-[9px] pt-[12px] pb-[12px]">
           <Corners />
           <div className="relative h-[197px] w-full shrink-0 overflow-hidden">
             <Image
@@ -924,7 +924,7 @@ function CompanyArticlesMobile({ data }: { data?: any }) {
           {compact.map((article: any, index: number) => (
             <article
               key={article.nodeId}
-              className="relative flex w-full flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[24px] pt-[12px] pb-[12px]"
+              className="relative flex w-full flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.3)] bg-[rgba(0,0,0,0.5)] px-[24px] pt-[12px] pb-[12px]"
             >
               <Corners />
               {/* Image — 570px wide, centered, bleeds beyond card (clipped). Per-article Figma crop. */}

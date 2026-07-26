@@ -1,25 +1,29 @@
 /* eslint-disable @next/next/no-img-element */
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
+import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
 
-const DVK_BG_OVERLAY =
-  "linear-gradient(180deg, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 25.145%), linear-gradient(180deg, rgba(0, 0, 0, 0) 27.95%, rgb(4, 4, 4) 64.806%)";
-
-const CENTER_CARD_BG =
+const MARQUEE_CARD_BG =
   "radial-gradient(120% 120% at 50% 50%, rgba(0,0,0,0.30) 0%, rgba(5,14,2,0.30) 8%, rgba(10,27,5,0.30) 14%, rgba(21,54,9,0.30) 28%, rgba(31,81,14,0.30) 40%, rgba(42,108,18,0.30) 52%, rgba(62,162,27,0.30) 76%, rgba(83,216,36,0.30) 100%), linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2))";
+
+const ICON_BG =
+  "radial-gradient(29.884px 14.501px at 20.351px -2.403px, rgb(57, 74, 54) 0%, rgb(43, 54, 41) 50%, rgb(29, 34, 28) 100%)";
+
+const TOP_OVERLAY_BG =
+  "linear-gradient(180deg, rgb(4, 4, 4) 63.365%, rgba(4, 4, 4, 0) 100%)";
+
+const BOTTOM_OVERLAY_BG =
+  "linear-gradient(0deg, rgb(4, 4, 4) 17.573%, rgba(4, 4, 4, 0) 100%)";
 
 const SUBTITLE =
   "Legacy silicon forces you to choose. High performance or low power. Complex models or small footprint. We re-architected the physics so you can finally unleash your creativity and build with freedom.";
 
-const CENTER_CAPTION_BODY =
-  "Always-on biometric tracking and complex activity recognition running continuously on standard wearable batteries.";
-
-const CENTER_CAPTION = "Wearables";
 const FALLBACK_HEADING = "The death of hardware tradeoffs.";
 
 const SMALL_CORNER = "/applications/corner-vector-59.svg";
-const CENTER_CORNER = "/applications/corner-vector-56.svg";
+const FEATURE_ICON = "/applications/dvk-feature-icon.svg";
+const FEATURE_CHECK = "/applications/dvk-feature-check.svg";
 
 function CardCorners({
   w,
@@ -98,61 +102,22 @@ function CardCorners({
   );
 }
 
-type DvkCardProps = {
-  size: number;
-  padding: number;
-  gap: number;
-  backdropBlur: number;
-  background: string;
-  imageSrc: string;
-  imageW: number;
-  imageH: number;
-  imageBlur: number;
-  cornerW: number;
-  cornerH: number;
-  cornerSrc: string;
-  flipped?: boolean;
-  nodeId?: string;
-};
-
-function DvkCard({
-  size,
-  padding,
-  gap,
-  backdropBlur,
-  background,
+function MarqueeCard({
   imageSrc,
-  imageW,
-  imageH,
-  imageBlur,
-  cornerW,
-  cornerH,
-  cornerSrc,
-  flipped = false,
+  height,
   nodeId,
-}: DvkCardProps) {
-  const card = (
+}: {
+  imageSrc: string;
+  height: number;
+  nodeId?: string;
+}) {
+  return (
     <div
-      className="relative flex flex-col items-center justify-center"
-      style={{
-        width: size,
-        height: size,
-        padding,
-        gap,
-        backdropFilter: `blur(${backdropBlur}px)`,
-        WebkitBackdropFilter: `blur(${backdropBlur}px)`,
-        background,
-      }}
+      className="relative flex w-[238px] flex-col items-center justify-center gap-[10px] p-[10px] backdrop-blur-[10px]"
+      style={{ height, background: MARQUEE_CARD_BG }}
       data-node-id={nodeId}
     >
-      <div
-        className="relative shrink-0"
-        style={{
-          width: imageW,
-          height: imageH,
-          filter: imageBlur ? `blur(${imageBlur}px)` : undefined,
-        }}
-      >
+      <div className="relative h-[153.968px] w-[194.886px] shrink-0">
         <img
           alt=""
           aria-hidden
@@ -160,126 +125,273 @@ function DvkCard({
           className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
         />
       </div>
-      <CardCorners w={cornerW} h={cornerH} src={cornerSrc} />
+      <CardCorners w={2.122} h={1.995} src={SMALL_CORNER} />
     </div>
-  );
-
-  return flipped ? (
-    <div className="-scale-y-100 rotate-180">{card}</div>
-  ) : (
-    card
   );
 }
 
-const SATELLITE_CARDS: Array<{
-  top: number;
-  offset: number;
-  size: number;
+function FeatureCard({
+  title,
+  nodeId,
+}: {
+  title: string;
+  nodeId?: string;
+}) {
+  return (
+    <div
+      className="relative flex flex-col items-start gap-[20px] self-stretch justify-self-stretch overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] px-[24px] pt-[16px] pb-[24px]"
+      data-node-id={nodeId}
+    >
+      <div
+        className="relative h-[40px] w-[40.702px] shrink-0 overflow-clip rounded-[8.421px]"
+        style={{ backgroundImage: ICON_BG }}
+        data-name="Icon"
+      >
+        <div className="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center">
+          <div className="relative size-[28.07px] shrink-0">
+            <img
+              alt=""
+              aria-hidden
+              src={FEATURE_ICON}
+              className="absolute inset-0 block size-full max-w-none"
+            />
+          </div>
+        </div>
+      </div>
+      <div className="relative flex w-full flex-col items-start">
+        <div className="relative flex flex-col items-start gap-[12px]">
+          <p
+            className={`${gilroyMedium.className} text-[26px] leading-[29px] font-medium not-italic text-white [word-break:break-word]`}
+          >
+            {title}
+          </p>
+        </div>
+      </div>
+      <Corners />
+      <div className="absolute top-[15.21px] right-[19.5px] size-[35px]">
+        <img
+          alt=""
+          aria-hidden
+          src={FEATURE_CHECK}
+          className="absolute inset-0 block size-full max-w-none"
+        />
+      </div>
+    </div>
+  );
+}
+
+type MarqueeCardDef = {
+  height: number;
   imageSrc: string;
-  imageW: number;
-  imageH: number;
-  imageBlur: number;
-  flipped: boolean;
   nodeId: string;
+};
+
+function MarqueeColumn({
+  offset,
+  top,
+  gap,
+  direction,
+  setsPerHalf,
+  cards,
+}: {
+  offset: number;
+  top: number;
+  gap: number;
+  direction: "up" | "down";
+  setsPerHalf: number;
+  cards: MarqueeCardDef[];
+}) {
+  const half = (hidden: boolean) => (
+    <div
+      aria-hidden={hidden || undefined}
+      className="flex flex-col"
+      style={{ gap, paddingBottom: gap }}
+    >
+      {Array.from({ length: setsPerHalf }).flatMap((_, setIdx) =>
+        cards.map((card) => (
+          <MarqueeCard
+            key={`${setIdx}-${card.nodeId}`}
+            height={card.height}
+            imageSrc={card.imageSrc}
+            nodeId={!hidden && setIdx === 0 ? card.nodeId : undefined}
+          />
+        )),
+      )}
+    </div>
+  );
+
+  return (
+    <div
+      className="absolute -translate-x-1/2"
+      style={{ top, left: `calc(50% + ${offset}px)` }}
+    >
+      <div
+        className={
+          direction === "up"
+            ? "animate-dvk-marquee-up"
+            : "animate-dvk-marquee-down"
+        }
+      >
+        {half(false)}
+        {half(true)}
+      </div>
+    </div>
+  );
+}
+
+const MARQUEE_COLUMNS: Array<{
+  offset: number;
+  top: number;
+  gap: number;
+  direction: "up" | "down";
+  setsPerHalf: number;
+  cards: MarqueeCardDef[];
 }> = [
   {
-    top: 391.64,
-    offset: -338.75,
-    size: 180,
-    imageSrc: "/applications/card-left-mid.png",
-    imageW: 144,
-    imageH: 113.766,
-    imageBlur: 0.8,
-    flipped: false,
-    nodeId: "2761:3760",
+    offset: -499.14,
+    top: 231.57,
+    gap: 30,
+    direction: "up",
+    setsPerHalf: 2,
+    cards: [
+      {
+        height: 219,
+        imageSrc: "/applications/dvk-m-watch.png",
+        nodeId: "3591:1711",
+      },
+      {
+        height: 219,
+        imageSrc: "/applications/dvk-m-robot-arm.png",
+        nodeId: "3591:1729",
+      },
+      {
+        height: 219,
+        imageSrc: "/applications/dvk-m-humanoid.png",
+        nodeId: "3591:1741",
+      },
+    ],
   },
   {
-    top: 393.14,
-    offset: 334.13,
-    size: 180,
-    imageSrc: "/applications/card-right-mid.png",
-    imageW: 144,
-    imageH: 113.766,
-    imageBlur: 0.8,
-    flipped: true,
-    nodeId: "2761:3766",
+    offset: -243.14,
+    top: 63.57,
+    gap: 29,
+    direction: "down",
+    setsPerHalf: 1,
+    cards: [
+      {
+        height: 220,
+        imageSrc: "/applications/dvk-m-watch.png",
+        nodeId: "3591:1723",
+      },
+      {
+        height: 220,
+        imageSrc: "/applications/dvk-m-headphones.png",
+        nodeId: "3591:1717",
+      },
+      {
+        height: 221,
+        imageSrc: "/applications/dvk-m-rover.png",
+        nodeId: "3591:1735",
+      },
+      {
+        height: 220,
+        imageSrc: "/applications/dvk-m-surgical.png",
+        nodeId: "3591:1747",
+      },
+    ],
   },
-  {
-    top: 549.14,
-    offset: -626.5,
-    size: 170,
-    imageSrc: "/applications/card-left-far.png",
-    imageW: 126,
-    imageH: 99.545,
-    imageBlur: 1.4,
-    flipped: false,
-    nodeId: "2761:3772",
-  },
-  {
-    top: 547.14,
-    offset: 635,
-    size: 170,
-    imageSrc: "/applications/card-right-far.png",
-    imageW: 126,
-    imageH: 99.545,
-    imageBlur: 1.4,
-    flipped: true,
-    nodeId: "2761:3778",
-  },
+];
+
+const FEATURE_NODE_IDS = [
+  "3591:1765",
+  "3591:1786",
+  "3591:1807",
+  "3591:1828",
+  "3591:1849",
+  "3591:1870",
+];
+
+const FALLBACK_FEATURES = [
+  "Complex AI Model",
+  "Realtime & low latency",
+  "Ondevice, cloud-free",
+  "Compact footprint",
+  "Programmable & future proof",
+  "Ultra -low power consumption",
 ];
 
 export function ApplicationsPageDvk({ data }: { data?: any }) {
   const heading = data?.heading || FALLBACK_HEADING;
   const subtitle = data?.subtitle || SUBTITLE;
-  const bgImg = mediaUrl(data?.background_image) || "/applications/dvk-bg.png";
-  const bottomImg =
-    mediaUrl(data?.bottom_background) || "/applications/dvk-bottom.png";
-  const orbitVisual =
-    mediaUrl(data?.orbit_visual) || "/applications/orbit.svg";
-
-  const centerCard = data?.center_card;
-  const centerImage =
-    mediaUrl(centerCard?.image) || "/applications/card-center.png";
-  const centerCaption = centerCard?.caption || CENTER_CAPTION;
-  const centerCaptionBody = centerCard?.caption_body || CENTER_CAPTION_BODY;
 
   const satelliteCards: any[] = Array.isArray(data?.satellite_cards)
     ? data.satellite_cards
     : [];
 
+  // Flat card index across both columns (col A first) for CMS overrides
+  const cardAt = (colIdx: number, cardIdx: number) => {
+    const base = colIdx === 0 ? 0 : MARQUEE_COLUMNS[0].cards.length;
+    const card = MARQUEE_COLUMNS[colIdx].cards[cardIdx];
+    return {
+      ...card,
+      imageSrc: mediaUrl(satelliteCards[base + cardIdx]?.image) || card.imageSrc,
+    };
+  };
+
+  const features: string[] = Array.isArray(data?.features)
+    ? data.features.map(
+        (f: { title?: string } | null, i: number) =>
+          f?.title || FALLBACK_FEATURES[i],
+      )
+    : FALLBACK_FEATURES;
+
   return (
     <section
-      className="relative flex w-full justify-center overflow-hidden bg-black"
-      data-node-id="2761:3743"
-      data-name="DVK"
+      className="relative flex w-full justify-center overflow-hidden bg-[#040404]"
+      data-node-id="3591:1710"
+      data-name="Desktop - 9"
       aria-label="The death of hardware tradeoffs"
     >
       {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden h-[845px] w-full max-w-[1440px] min-[1024px]:block">
-        {/* Background */}
-        <div aria-hidden className="pointer-events-none absolute inset-0">
-          <div className="absolute inset-0 bg-black" />
-          <img
-            alt=""
-            aria-hidden
-            src={bgImg}
-            className="absolute inset-0 size-full max-w-none object-bottom"
+      <div className="relative hidden h-[825px] w-full max-w-[1440px] min-[1024px]:block">
+        {/* Marquee columns (opposite directions) */}
+        {MARQUEE_COLUMNS.map((col, colIdx) => (
+          <MarqueeColumn
+            key={col.offset}
+            offset={col.offset}
+            top={col.top}
+            gap={col.gap}
+            direction={col.direction}
+            setsPerHalf={col.setsPerHalf}
+            cards={col.cards.map((_, cardIdx) => cardAt(colIdx, cardIdx))}
           />
-          <div
-            className="absolute inset-0"
-            style={{ backgroundImage: DVK_BG_OVERLAY }}
-          />
-        </div>
+        ))}
+
+        {/* Top overlay */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute top-0 left-0 h-[312.758px] w-[670.39px]"
+          style={{ backgroundImage: TOP_OVERLAY_BG }}
+          data-node-id="3591:1753"
+        />
+
+        {/* Bottom overlay */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute bottom-0 left-0 h-[105.005px] w-[636.501px]"
+          style={{ backgroundImage: BOTTOM_OVERLAY_BG }}
+          data-node-id="3591:1754"
+        />
 
         {/* Header: title + subtitle */}
         <div
-          className="absolute top-[59.64px] left-1/2 flex w-[800px] -translate-x-1/2 flex-col items-center gap-[24px]"
-          data-node-id="2761:3744"
+          className="absolute top-[26.14px] left-1/2 flex w-[800px] -translate-x-1/2 flex-col items-center gap-[24px]"
+          data-node-id="3591:1755"
         >
           <div className="relative px-[10px]" data-name="Title">
             <GradientTitle
               gradientDeg="132.656deg"
-              nodeId="2761:3747"
+              nodeId="3591:1758"
               className="text-center whitespace-nowrap"
             >
               {heading}
@@ -288,130 +400,29 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
           </div>
           <p
             className={`${interRegular.className} w-[718px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
-            data-node-id="2761:3752"
+            data-node-id="3591:1763"
           >
             {subtitle}
           </p>
         </div>
 
-        {/* Orbit ellipse */}
+        {/* Feature grid */}
         <div
-          className="absolute top-[470.87px] left-1/2 h-[1087.082px] w-[1713.258px] -translate-x-1/2"
-          data-node-id="2761:3753"
+          className="absolute top-[272.5px] left-[678.27px] grid h-[516px] w-[707px] grid-cols-2 gap-x-[35px] gap-y-[50px]"
+          data-node-id="3591:1764"
         >
-          <img
-            alt=""
-            aria-hidden
-            src={orbitVisual}
-            className="absolute inset-0 block size-full max-w-none"
-          />
-        </div>
-
-        {/* Center card */}
-        <div
-          className="absolute top-[282.97px] left-1/2 -translate-x-1/2"
-          data-node-id="2761:3754"
-        >
-          <DvkCard
-            size={255.175}
-            padding={12.759}
-            gap={12.759}
-            backdropBlur={12.759}
-            background={CENTER_CARD_BG}
-            imageSrc={centerImage}
-            imageW={248.65}
-            imageH={196.444}
-            imageBlur={0}
-            cornerW={2.707}
-            cornerH={2.545}
-            cornerSrc={CENTER_CORNER}
-            nodeId="2761:3754"
-          />
-        </div>
-
-        {/* Satellite cards */}
-        {SATELLITE_CARDS.map((card, idx) => (
-          <div
-            key={card.nodeId}
-            className="absolute -translate-x-1/2"
-            style={{
-              top: `${card.top}px`,
-              left: `calc(50% + ${card.offset}px)`,
-            }}
-          >
-            <DvkCard
-              size={card.size}
-              padding={10}
-              gap={10}
-              backdropBlur={10}
-              background="rgba(0,0,0,0.2)"
-              imageSrc={
-                mediaUrl(satelliteCards[idx]?.image) || card.imageSrc
-              }
-              imageW={card.imageW}
-              imageH={card.imageH}
-              imageBlur={card.imageBlur}
-              cornerW={2.122}
-              cornerH={1.995}
-              cornerSrc={SMALL_CORNER}
-              flipped={card.flipped}
-              nodeId={card.nodeId}
+          {features.map((title, idx) => (
+            <FeatureCard
+              key={FEATURE_NODE_IDS[idx] || idx}
+              title={title}
+              nodeId={FEATURE_NODE_IDS[idx]}
             />
-          </div>
-        ))}
-
-        {/* Center caption */}
-        <div
-          className="absolute top-[583.14px] left-1/2 flex w-[345px] -translate-x-1/2 flex-col items-center"
-          data-node-id="2761:3784"
-        >
-          <div className="flex w-full flex-col items-center justify-center gap-[10px] text-center not-italic">
-            <p
-              className={`${gilroyMedium.className} text-[20.211px] leading-[28.295px] tracking-[-0.4539px] whitespace-nowrap text-white`}
-              data-node-id="2761:3786"
-            >
-              {centerCaption}
-            </p>
-            <p
-              className={`${interRegular.className} min-w-full w-[min-content] text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)]`}
-              data-node-id="2761:3787"
-            >
-              {centerCaptionBody}
-            </p>
-          </div>
-        </div>
-
-        {/* Bottom image */}
-        <div
-          className="absolute top-[659.14px] left-0 h-[185.861px] w-[1437.878px]"
-          data-node-id="2761:3789"
-        >
-          <img
-            alt=""
-            aria-hidden
-            src={bottomImg}
-            className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
-          />
+          ))}
         </div>
       </div>
 
       {/* MOBILE (<1024px) */}
       <div className="relative flex w-full flex-col items-center min-[1024px]:hidden">
-        {/* Background */}
-        <div aria-hidden className="pointer-events-none absolute inset-0">
-          <div className="absolute inset-0 bg-black" />
-          <img
-            alt=""
-            aria-hidden
-            src={bgImg}
-            className="absolute inset-0 size-full max-w-none object-bottom opacity-50"
-          />
-          <div
-            className="absolute inset-0"
-            style={{ backgroundImage: DVK_BG_OVERLAY }}
-          />
-        </div>
-
         <div className="relative z-10 flex w-full flex-col items-center gap-[40px] px-[24px] pt-[72px] pb-[64px]">
           {/* Header */}
           <div className="flex w-full flex-col items-center gap-[24px]">
@@ -436,50 +447,40 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
             </p>
           </div>
 
-          {/* Center card */}
-          <div
-            className="relative flex size-[200px] flex-col items-center justify-center"
-            style={{
-              padding: 12,
-              gap: 12,
-              backdropFilter: "blur(12px)",
-              WebkitBackdropFilter: "blur(12px)",
-              background: CENTER_CARD_BG,
-            }}
-          >
-            <div className="relative h-[150px] w-[190px] shrink-0">
-              <img
-                alt=""
-                aria-hidden
-                src={centerImage}
-                className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+          {/* Product cards */}
+          <div className="grid w-full max-w-[496px] grid-cols-2 gap-[18px]">
+            {[cardAt(0, 0), cardAt(1, 1), cardAt(0, 1), cardAt(1, 2)].map(
+              (card) => (
+                <div
+                  key={card.nodeId}
+                  className="relative flex w-full flex-col items-center justify-center gap-[10px] p-[10px] backdrop-blur-[10px]"
+                  style={{
+                    aspectRatio: "238 / 219",
+                    background: MARQUEE_CARD_BG,
+                  }}
+                >
+                  <div className="relative aspect-[194.886/153.968] w-[82%] shrink-0">
+                    <img
+                      alt=""
+                      aria-hidden
+                      src={card.imageSrc}
+                      className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+                    />
+                  </div>
+                  <CardCorners w={2.122} h={1.995} src={SMALL_CORNER} />
+                </div>
+              ),
+            )}
+          </div>
+
+          {/* Feature cards */}
+          <div className="grid w-full max-w-[496px] grid-cols-1 gap-[24px]">
+            {features.map((title, idx) => (
+              <FeatureCard
+                key={FEATURE_NODE_IDS[idx] || idx}
+                title={title}
               />
-            </div>
-            <CardCorners w={2.707} h={2.545} src={CENTER_CORNER} />
-          </div>
-
-          {/* Caption */}
-          <div className="flex w-full max-w-[345px] flex-col items-center gap-[10px] text-center">
-            <p
-              className={`${gilroyMedium.className} text-[20.211px] leading-[28.295px] tracking-[-0.4539px] whitespace-nowrap text-white`}
-            >
-              {centerCaption}
-            </p>
-            <p
-              className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)]`}
-            >
-              {centerCaptionBody}
-            </p>
-          </div>
-
-          {/* Bottom image */}
-          <div className="h-[140px] w-full overflow-hidden">
-            <img
-              alt=""
-              aria-hidden
-              src={bottomImg}
-              className="pointer-events-none size-full max-w-none object-cover"
-            />
+            ))}
           </div>
         </div>
       </div>

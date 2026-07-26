@@ -22,7 +22,7 @@ export function CompanyArticleCardCompact({
 }: CompanyArticleCardCompactProps) {
   return (
     <article
-      className="relative w-[590px] shrink-0 overflow-visible border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)]"
+      className="relative w-[590px] shrink-0 overflow-visible border-[0.5px] border-solid border-[rgba(240,240,240,0.3)] bg-[rgba(0,0,0,0.5)]"
       style={{ height }}
       data-node-id={nodeId}
       data-name="Article"

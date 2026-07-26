@@ -1,1 +1,25 @@
-﻿{ "collectionName": "components_som_prototype_cards", "info": { "displayName": "Prototype Card", "description": "SOM prototype card" }, "options": {}, "attributes": { "title": { "type": "string", "required": true }, "description": { "type": "text" } } }
+{
+  "collectionName": "components_som_prototype_cards",
+  "info": {
+    "displayName": "Prototype Card",
+    "description": "SOM prototype card"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}

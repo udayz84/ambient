@@ -57,7 +57,8 @@ function PrimaryCtaCorners() {
 export function SomHero({ data }: { data?: any }) {
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const backgroundImage = mediaUrl(data?.background_image) || FALLBACK_BG;
-  const titleLines = (data?.title || FALLBACK_TITLE).split("\n");
+  const rawTitle = data?.title || FALLBACK_TITLE;
+  const titleLines = (rawTitle === "The shortest path to volume production." ? "The shortest path to\nvolume production." : rawTitle).split("\n");
   const primaryLabel =
     data?.primary_button?.label || FALLBACK_PRIMARY_LABEL;
   const primaryHref = data?.primary_button?.href || "#";

@@ -903,6 +903,7 @@ export interface DvkModuleCard extends Struct.ComponentSchema {
   };
   attributes: {
     description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -1211,7 +1212,7 @@ export interface NewsHero extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
-    background_image: Schema.Attribute.Media;
+    background_image: Schema.Attribute.Media<'images'>;
     cta_label: Schema.Attribute.String;
     pagination_text: Schema.Attribute.String;
     subtitle: Schema.Attribute.Text;
@@ -2078,6 +2079,7 @@ export interface SomIntelligenceCard extends Struct.ComponentSchema {
   };
   attributes: {
     description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -2090,6 +2092,7 @@ export interface SomPrototypeCard extends Struct.ComponentSchema {
   };
   attributes: {
     description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -2130,6 +2133,7 @@ export interface SomSpec extends Struct.ComponentSchema {
     displayName: 'Spec';
   };
   attributes: {
+    image: Schema.Attribute.Media<'images'>;
     label: Schema.Attribute.String & Schema.Attribute.Required;
     value: Schema.Attribute.String;
   };

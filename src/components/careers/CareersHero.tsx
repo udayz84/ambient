@@ -20,6 +20,7 @@ export function CareersHero({ data }: { data?: any }) {
 
   return (
     <section
+      id="careers-hero"
       className="relative flex h-[798px] w-full justify-center overflow-hidden bg-black"
       data-node-id="2379:8679"
       data-name="Hero Section"
@@ -240,10 +241,17 @@ export function CareersHero({ data }: { data?: any }) {
         </div>
 
         {/* 2379:8707 — scroll indicator */}
-        <div
-          className={`${interRegular.className} pointer-events-none absolute top-[616px] left-[1335.5px] z-10 flex h-[75px] w-[18px] flex-col content-stretch items-center gap-[10px]`}
+        <button
+          type="button"
+          aria-label="Scroll down"
+          onClick={() => {
+            const hero = document.getElementById("careers-hero");
+            if (hero && hero.nextElementSibling) {
+              hero.nextElementSibling.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
+          className={`${interRegular.className} cursor-pointer absolute top-[616px] left-[1335.5px] z-10 flex h-[75px] w-[18px] flex-col content-stretch items-center gap-[10px] hover:opacity-80 transition-opacity duration-200`}
           data-node-id="2379:8707"
-          aria-hidden
         >
           <div
             className="relative size-[18px] shrink-0 overflow-clip"
@@ -275,7 +283,7 @@ export function CareersHero({ data }: { data?: any }) {
               </p>
             </div>
           </div>
-        </div>
+        </button>
       </div>
     </section>
   );

@@ -1,7 +1,3 @@
-"use client";
-
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import {
@@ -18,31 +14,18 @@ import {
 } from "./dvk-data";
 import { mediaUrl } from "@/lib/strapi";
 
-// Refined coordinates (in percentages) for the highlight box on the board image
-const HIGHLIGHT_REGIONS = [
-  { left: "16%", top: "25%", width: "16%", height: "55%" }, // Memory (left chip clusters)
-  { left: "68%", top: "12%", width: "10%", height: "15%" }, // Wireless (top right antenna area)
-  { left: "34%", top: "15%", width: "12%", height: "15%" }, // Sensors (small components top middle-left)
-  { left: "82%", top: "75%", width: "8%", height: "15%" }, // Debug Ports (bottom right headers/ports)
-  { left: "91%", top: "15%", width: "6%", height: "70%" }, // Interfaces (far right edge pin rows)
-];
-
 const DEFAULT_HEADING =
   "The complete Edge AI hardware stack in a single footprint";
 const DEFAULT_SUBTITLE =
   "An exhaustive suite of sensors, interfaces, and debug tools pre-integrated with the GPX-10 Pro AI Processor.";
 const DEFAULT_LABEL = "The Hardware Blueprint";
-const DEFAULT_BOARD_IMAGE = "/dvk/board-main.png";
-const DEFAULT_CHIP_IMAGE = "/dvk/board-chip.png";
+const DEFAULT_BOARD_IMAGE = "/dvk/board-blueprint.webp";
 
 export function DvkHardwareStack({ data }: { data?: any }) {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
   const heading = data?.heading || DEFAULT_HEADING;
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
   const label = data?.label || DEFAULT_LABEL;
   const boardImage = mediaUrl(data?.board_image) || DEFAULT_BOARD_IMAGE;
-  const chipImage = mediaUrl(data?.chip_image) || DEFAULT_CHIP_IMAGE;
   const cards: SpecCardType[] =
     data?.spec_cards && Array.isArray(data.spec_cards) && data.spec_cards.length > 0
       ? data.spec_cards.map((c: any, i: number) => ({
@@ -88,11 +71,11 @@ export function DvkHardwareStack({ data }: { data?: any }) {
         </p>
       </div>
 
-      {/* Content */}
-      <div className="flex w-full flex-col items-center justify-center gap-[24px]">
+      {/* Content (Figma 2761:2915) */}
+      <div className="flex w-full items-center justify-center gap-[24px]">
         {/* Feature card (Board Image) */}
         <div
-          className="relative flex w-full flex-col items-center justify-center gap-[20px] overflow-clip border-[0.5px] border-solid p-[16px]"
+          className="relative flex min-w-px flex-1 flex-col items-center justify-center gap-[20px] overflow-clip border-[0.5px] border-solid p-[16px]"
           style={{
             backgroundColor: FEATURE_CARD_BG,
             borderColor: CARD_BORDER,
@@ -104,64 +87,27 @@ export function DvkHardwareStack({ data }: { data?: any }) {
           >
             {label}
           </p>
-
-          {/* Circuit board container */}
-          <div className="relative h-[300px] w-[739.724px] shrink-0 overflow-hidden rounded-[7.572px]">
+          <div className="relative size-[435.976px] shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt=""
               src={boardImage}
-              className="pointer-events-none absolute inset-0 size-full max-w-none rounded-[7.572px] object-bottom"
+              className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
             />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt=""
-              src={chipImage}
-              className="pointer-events-none absolute max-w-none rounded-[7.572px] object-bottom"
-              style={{
-                left: 263.37890625,
-                top: 55.32421875,
-                width: 221.3364715576172,
-                height: 197.49679565429688,
-              }}
-            />
-
-            {/* Dynamic Highlight Box */}
-            <AnimatePresence>
-              {hoveredIndex !== null && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{
-                    opacity: 1,
-                    left: HIGHLIGHT_REGIONS[hoveredIndex].left,
-                    top: HIGHLIGHT_REGIONS[hoveredIndex].top,
-                    width: HIGHLIGHT_REGIONS[hoveredIndex].width,
-                    height: HIGHLIGHT_REGIONS[hoveredIndex].height,
-                  }}
-                  exit={{ opacity: 0 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  className="pointer-events-none absolute z-10 border border-[#a8ed90]/50 rounded-md"
-                  style={{
-                    boxShadow:
-                      "0 0 0 9999px rgba(0, 0, 0, 0.75), 0 0 20px 2px rgba(168, 237, 144, 0.3), inset 0 0 12px 0 rgba(168, 237, 144, 0.2)",
-                  }}
-                />
-              )}
-            </AnimatePresence>
           </div>
         </div>
 
-        {/* Spec cards row */}
-        <div className="flex w-full items-stretch gap-[8px]">
-          {cards.map((card, idx) => (
-            <SpecCard
-              key={card.title || idx}
-              card={card}
-              isHovered={hoveredIndex === idx}
-              onMouseEnter={() => setHoveredIndex(idx)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            />
-          ))}
+        {/* Spec cards column */}
+        <div className="flex w-[571px] shrink-0 flex-col gap-[8px]">
+          <div className="flex w-full gap-[8px]">
+            <SpecCard card={cards[0]} />
+            <SpecCard card={cards[1]} />
+          </div>
+          <div className="flex w-full gap-[8px]">
+            <SpecCard card={cards[2]} />
+            <SpecCard card={cards[3]} />
+          </div>
+          <SpecCard card={cards[4]} fullWidth />
         </div>
       </div>
     </div>
@@ -170,24 +116,21 @@ export function DvkHardwareStack({ data }: { data?: any }) {
 
 function SpecCard({
   card,
-  isHovered,
-  onMouseEnter,
-  onMouseLeave,
+  fullWidth = false,
 }: {
   card: SpecCardType;
-  isHovered: boolean;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
+  fullWidth?: boolean;
 }) {
+  if (!card) return null;
   return (
     <div
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      className={`relative flex min-w-px flex-1 flex-col items-center gap-[20px] self-stretch overflow-clip border-[0.5px] border-solid px-[16px] pt-[16px] pb-[24px] cursor-default transition-colors duration-300 ${
-        isHovered
-          ? "bg-[rgba(68,120,7,0.2)] border-[#a8ed90]"
-          : "bg-[rgba(0,0,0,0.2)] border-[rgba(240,240,240,0.2)]"
+      className={`relative flex flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid px-[16px] pt-[16px] pb-[24px] ${
+        fullWidth ? "w-full" : "min-w-px flex-1"
       }`}
+      style={{
+        backgroundColor: card.accent ? ACCENT_CARD_BG : CARD_BG,
+        borderColor: card.accent ? ACCENT_CARD_BORDER : CARD_BORDER,
+      }}
     >
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
       <div className="flex w-full flex-col items-start">

@@ -206,7 +206,7 @@ function LocationCard({ title, address, iconPosition }: { title: string; address
   const isRight = iconPosition === "right";
   return (
     <div
-      className={`relative flex h-[107px] w-[343px] items-center bg-black border-[0.474px] border-solid border-[rgba(240,240,240,0.2)] ${isRight ? "justify-center gap-[9px]" : "gap-[4px] pl-[4.019px] pr-[9.981px]"}`}
+      className={`relative flex h-[107px] w-[343px] items-center bg-[rgba(0,0,0,0.5)] border-[0.474px] border-solid border-[rgba(240,240,240,0.2)] ${isRight ? "justify-center gap-[9px]" : "gap-[4px] pl-[4.019px] pr-[9.981px]"}`}
     >
       {/* Location icon tile (83x85) — gradient square 67.587x69.5 + 24.806 pin */}
       <div className={`relative h-[85px] w-[83px] shrink-0 ${isRight ? "order-2" : "order-1"}`}>
@@ -319,7 +319,10 @@ const MAP_LOCATIONS = [
 function ContactMapMobile({ data }: { data?: any }) {
   const globeImage = mediaUrl(data?.globe_image) || "/contact/Globe image.png";
   const mapBase = mediaUrl(data?.map_base) || "/contact/map-base.svg";
-  const headingLines = (data?.heading || MAP_DEFAULT_HEADING).split("\n");
+  const headingText = data?.heading || MAP_DEFAULT_HEADING;
+  const headingLines = headingText.includes("\n") 
+    ? headingText.split("\n") 
+    : headingText.replace(/\.\s+/, ".\n").split("\n");
   const subtitle = data?.subtitle || MAP_DEFAULT_SUBTITLE;
   const strapiLocations: ReadonlyArray<any> = Array.isArray(data?.locations)
     ? data.locations

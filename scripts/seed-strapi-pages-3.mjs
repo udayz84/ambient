@@ -354,7 +354,7 @@ const ASSETS = {
   som_motion_icon: "som/motion-icon.svg",
   som_vision_icon: "som/vision-icon.svg",
   som_module_photo: "som/module-photo.png",
-  som_ready_image: "Frame 1984079439.png",
+  som_ready_image: "som/sparsh-chip.png",
   som_footer_merge: "som/footer-merge.svg",
 
   // WEARABLES -------------------------------------------------------
@@ -542,29 +542,42 @@ const DEVELOPER_PAYLOAD = {
     heading: "Hello world in three lines",
     subtitle:
       "We invisibly map AI cores to your host drop your model straight into your existing application.",
-    code_snippet: `#include <ambient.h>
-#include <sensor_drivers.h>
+    code_snippet: `main.c
 
-int main(void) {
-    // Initialize system
-    ambient_init();
-    sensor_config_t sensor;
-    model_t model_obj;
+#include "sys_clk.h"
+#include "FreeRTOS.h"
 
-    // Load AI model
-    ambient_load_model(&model_obj, "fall_detect.bin");
+void main()
 
-    while(1) {
-        ambient_read_i2s_mic(&sensor);
+{
+APP_Start();
+}
 
-        ambient_run_fft(&sensor);
+static void APP_Start()
+{
 
-        run_ai_inference(&model_obj);
+	xTaskCreate(application_read_task_entry,
+				"DataTask",
+				1024,
+				(void *)0,
+				tskIDLE_PRIORITY + 4,
+				NULL );
 
-        if(model_obj.result > THRESHOLD) {
-            trigger_alert();
-        }
-    }
+	xTaskCreate(application_process_task_entry,
+				"ProcessTask",
+				1024,
+				(void *)0,
+				tskIDLE_PRIORITY + 3,
+				NULL );
+
+
+	xTaskCreate(application_LCD_DISPLAY_task_entry,
+				"PrintTask",
+				1024,
+				(void *)0,
+				tskIDLE_PRIORITY + 2,
+				NULL );
+
 }`,
     articles: [
       {
@@ -1141,7 +1154,7 @@ const SOM_PAYLOAD = {
     heading: "Ready to deploy?",
     subtitle:
       "Start building with the Sparsh module today, or secure your place in line for our upcoming vertical-specific SOMs.",
-    primary_title: "Get the Sparsh AI Module",
+    primary_title: "Get the Sparsh\nAI Module",
     primary_cta_label: "Request Sparsh Module",
     secondary_text: "Start testing motion and audio models on the metal immediately.",
     image: media(ASSETS.som_ready_image),

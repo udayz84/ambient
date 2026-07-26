@@ -18,7 +18,8 @@ type NewsListingHeroProps = {
 };
 
 export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
-  const heroImage = mediaUrl(data?.background_image) || FALLBACK_HERO_IMAGE;
+  const mainBackgroundImage = FALLBACK_HERO_IMAGE;
+  const featuredImage = mediaUrl(data?.background_image) || FALLBACK_HERO_IMAGE;
   const tagText = (data?.tag?.text as string) || FALLBACK_TAG;
   const title = (data?.title as string) || FALLBACK_TITLE;
   const subtitle = (data?.subtitle as string) || FALLBACK_SUBTITLE;
@@ -41,7 +42,7 @@ export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
           data-name="Image"
         >
           <Image
-            src={heroImage}
+            src={mainBackgroundImage}
             alt=""
             fill
             sizes="1440px"
@@ -110,7 +111,7 @@ export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
               data-name="Image"
             >
               <Image
-                src={heroImage}
+                src={featuredImage}
                 alt=""
                 fill
                 sizes="164px"
@@ -147,7 +148,7 @@ export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
       <div className="relative w-full min-[1024px]:hidden">
         <div className="relative h-[440px] w-full overflow-hidden">
           <Image
-            src={heroImage}
+            src={mainBackgroundImage}
             alt=""
             fill
             sizes="100vw"
