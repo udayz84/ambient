@@ -2,7 +2,6 @@
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
-import { WearablesCarousel } from "./WearablesCarousel";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const WEARABLES_BG_GRADIENT =
@@ -65,10 +64,8 @@ function SecondaryCta({ label, href }: { label: string; href: string }) {
 
 export function WearablesHero({
   data,
-  carouselImages,
 }: {
   data?: any;
-  carouselImages?: string[];
 }) {
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const watermark = data?.watermark || FALLBACK_WATERMARK;
@@ -120,8 +117,6 @@ export function WearablesHero({
             {watermark}
           </p>
         </div>
-
-        <WearablesCarousel images={carouselImages} />
 
         {/* Foreground image 163 with gradient overlay */}
         <div
@@ -216,8 +211,6 @@ export function WearablesHero({
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black" />
         </div>
-
-        <WearablesCarousel images={carouselImages} />
 
         <div className="relative z-10 flex w-full flex-col items-start gap-[20px] px-[24px] pt-[104px] pb-[64px]">
           {/* Title */}

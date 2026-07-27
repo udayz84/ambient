@@ -148,7 +148,7 @@ function ModesChevronFlow() {
           { src: MODES_CHEV_LEFT[1], left: 523.4, width: 21.95 },
           { src: MODES_CHEV_LEFT[2], left: 539.3, width: 22.71 },
         ]}
-        delays={[0, 0.25, 0.5]}
+        delays={[-0.5, -0.25, 0]}
       />
       <ChevronBadge
         badgeSrc={MODES_BADGE_RIGHT}
@@ -158,7 +158,7 @@ function ModesChevronFlow() {
           { src: MODES_CHEV_RIGHT[1], left: 916.29, width: 21.95 },
           { src: MODES_CHEV_RIGHT[2], left: 932.94, width: 21.95 },
         ]}
-        delays={[0.5, 0.25, 0]}
+        delays={[0, -0.25, -0.5]}
       />
     </div>
   );
@@ -307,6 +307,7 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
       ...cfg,
       title: (mc?.title as string) || cfg.title,
       bullet: (mc?.bullets as string) || cfg.bullet,
+      caption: (mc?.caption as string) || cfg.caption,
     };
   });
 

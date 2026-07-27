@@ -2258,6 +2258,7 @@ export interface TechModeCard extends Struct.ComponentSchema {
   };
   attributes: {
     bullets: Schema.Attribute.Text;
+    caption: Schema.Attribute.String;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -2329,10 +2330,12 @@ export interface TechProblem extends Struct.ComponentSchema {
     displayName: 'Problem';
   };
   attributes: {
+    acube_stats: Schema.Attribute.Component<'tech.stat-row', true>;
     alt: Schema.Attribute.String;
     background_image: Schema.Attribute.Media;
     comparison_cards: Schema.Attribute.Component<'tech.problem-card', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
+    legacy_stats: Schema.Attribute.Component<'tech.stat-row', true>;
     stat_description: Schema.Attribute.Text;
     stat_value: Schema.Attribute.String;
     subtitle: Schema.Attribute.Text;
@@ -2386,6 +2389,19 @@ export interface TechSiliconStat extends Struct.ComponentSchema {
     label: Schema.Attribute.String;
     unit: Schema.Attribute.String;
     value: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface TechStatRow extends Struct.ComponentSchema {
+  collectionName: 'components_tech_stat_rows';
+  info: {
+    description: 'A single statistic row';
+    displayName: 'Stat Row';
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    value: Schema.Attribute.String & Schema.Attribute.Required;
+    valueColor: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#ffffff'>;
   };
 }
 
@@ -2776,6 +2792,7 @@ declare module '@strapi/strapi' {
       'tech.problem-card': TechProblemCard;
       'tech.silicon': TechSilicon;
       'tech.silicon-stat': TechSiliconStat;
+      'tech.stat-row': TechStatRow;
       'wearables.carousel': WearablesCarousel;
       'wearables.ecg-card': WearablesEcgCard;
       'wearables.empirical-proof': WearablesEmpiricalProof;

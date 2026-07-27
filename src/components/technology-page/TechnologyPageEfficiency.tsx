@@ -1,199 +1,646 @@
-import { gilroyMedium, interBold, interMedium, interRegular } from "../hero/fonts";
-import { GradientTitle, CornerDecor } from "../contact/contact-shared";
+import { gilroyMedium, interMedium, interRegular } from "../hero/fonts";
+import { GradientTitle } from "../contact/contact-shared";
 
 const TITLE_GRADIENT_DEG = "114.359deg";
 const FALLBACK_SUBTITLE =
   "The same chip, tuned to the job — from a wrist to a factory floor.";
-const FALLBACK_FOOTNOTE =
-  "* Architectural efficiency, edge SKUs. Silicon-measured figures on the GPX10 page.";
+const FALLBACK_HEADING =
+  "The efficiency gap isn’t a few\npercent. It’s a different category.";
 
-const FALLBACK_HEADERS = ["APPROACH", "Peak compute", "POWER", "EFFICIENCY", "TRADEOFF"];
+const HEADERS = ["Rank", "Architecture", "Power", "Area", "The Trade - off"];
 
-type Row = {
-  label: string;
-  values: string[];
-  bg: "none" | "marker" | "green";
+type RowIcon = "check" | "warning" | "heat" | "x";
+type RowImage = "acube" | "flash" | "gpu" | "mcu";
+
+type RankRow = {
+  rank: string;
+  name: string;
+  highlighted: boolean;
+  sub: string;
+  power: string;
+  powerBar: number;
+  area: string;
+  areaBar: number;
+  tradeoff: string;
+  icon: RowIcon;
+  image: RowImage;
 };
 
-const FALLBACK_ROWS: Row[] = [
+const ROWS: RankRow[] = [
   {
-    label: "Conventional MCU",
-    values: ["0.002 GOPS", "600 mW", "0.03 TOPS/W", "No real AI"],
-    bg: "none",
+    rank: "1",
+    name: "A cube",
+    highlighted: true,
+    sub: "Analog digital in memory",
+    power: "~30 TOPS/W",
+    powerBar: 170.951,
+    area: "~5 TOPS/mm",
+    areaBar: 170.951,
+    tradeoff: "None",
+    icon: "check",
+    image: "acube",
   },
   {
-    label: "MCU + NPU",
-    values: ["100 GOPS", "200 \u00b5W idle / 80 mW active", "1.2 TOPS/W", "Fixed models, host polling"],
-    bg: "marker",
+    rank: "2",
+    name: "Flash",
+    highlighted: false,
+    sub: "Compute in memeory",
+    power: "~5 TOPS/W",
+    powerBar: 56.883,
+    area: "~1 TOPS/mm",
+    areaBar: 35.014,
+    tradeoff: "Model Lock In",
+    icon: "warning",
+    image: "flash",
   },
   {
-    label: "GPU / EDGE Accelerator",
-    values: ["1-10 TOPS", "1-5 W", "2\u20135 TOPS/W", "Needs cloud or wall power"],
-    bg: "none",
+    rank: "3",
+    name: "GPU",
+    highlighted: false,
+    sub: "Paralle SMO",
+    power: "~30 TOPS/W",
+    powerBar: 35.014,
+    area: "~0.5 TOPS/mm",
+    areaBar: 19.654,
+    tradeoff: "Too-hot",
+    icon: "heat",
+    image: "gpu",
   },
   {
-    label: "A-Cube",
-    values: ["512 GOPS", "~80 \u00b5W always-on", "~30 TOPS/W*", "None \u2014 full AI at coin-cell power"],
-    bg: "green",
+    rank: "4",
+    name: "MCU",
+    highlighted: false,
+    sub: "Analog digital in memory",
+    power: "~30 TOPS/W",
+    powerBar: 11.791,
+    area: "~0.1 TOPS/mm",
+    areaBar: 14.406,
+    tradeoff: "Not built for AI",
+    icon: "x",
+    image: "mcu",
   },
 ];
 
-const FALLBACK_HEADING =
-  "The efficiency gap isn't a few\npercent. It's a different category.";
+/* Row vertical anchors inside the 1166x468 panel (Figma 3508:615). */
+const ROW_TOP = [89.93, 183.15, 276.38, 369.6];
+const BADGE_TOP = [93.66, 186.89, 280.11, 373.33];
+const SUB_TOP = [130.93, 224.15, 317.37, 410.59];
+const BAR_TOP = [124, 217.22, 310.44, 403.66];
+const TRADE_TOP = [100.5, 193.15, 278.38, 375.6];
+const TRADE_LEFT = [909.95, 906.95, 907.95, 906.95];
+const LINE_TOP = [159.22, 252.44, 345.66];
 
-const ROW_BG: Record<Row["bg"], string> = {
-  none: "",
-  marker: "bg-[rgba(255,255,255,0.05)]",
-  green: "bg-[rgba(83,216,36,0.3)]",
-};
+function CheckIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M10 0C4.5014 0 0 4.50119 0 10C0 15.4988 4.50119 20 10 20C15.4988 20 20 15.4988 20 10C20 4.50119 15.4988 0 10 0ZM13.6482 6.42593C14.2049 5.79661 15.1614 6.6421 14.6047 7.27226L9.04011 13.573C8.79889 13.8451 8.37739 13.8618 8.11699 13.6072L8.11615 13.608L5.4286 10.9797C4.82515 10.3912 5.71823 9.47646 6.32001 10.0632L8.52851 12.2232L13.6482 6.42593Z"
+        fill="#53D824"
+      />
+    </svg>
+  );
+}
 
-const COL_W = "w-[250.6px]";
+function WarningIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 22.3826 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+    >
+      <path
+        d="M21.9168 16.557L13.1749 1.4193C12.6287 0.472353 11.9101 0 11.1893 0C10.4684 0 9.74982 0.472353 9.20359 1.4193L0.472894 16.557C-0.630755 18.4509 0.2647 20 2.45857 20H19.92C22.1138 20 23.0093 18.4509 21.9168 16.557ZM10.052 7.63152H12.3287V12.9281H10.0498V7.63152H10.052ZM11.1915 16.3622C10.9449 16.3622 10.7038 16.2891 10.4987 16.1521C10.2937 16.0151 10.1339 15.8203 10.0395 15.5925C9.94512 15.3646 9.92042 15.1139 9.96854 14.872C10.0166 14.6301 10.1354 14.408 10.3098 14.2336C10.4842 14.0592 10.7064 13.9404 10.9482 13.8923C11.1901 13.8442 11.4408 13.8689 11.6687 13.9633C11.8965 14.0577 12.0913 14.2175 12.2283 14.4225C12.3653 14.6276 12.4384 14.8687 12.4384 15.1153C12.4387 15.2794 12.4066 15.442 12.3439 15.5937C12.2813 15.7454 12.1893 15.8832 12.0732 15.9992C11.9572 16.1153 11.8193 16.2073 11.6676 16.27C11.516 16.3326 11.3534 16.3647 11.1893 16.3645L11.1915 16.3622Z"
+        fill="#FFDB43"
+      />
+    </svg>
+  );
+}
 
-function EfficiencyTable({
-  headers,
-  rows,
+function HeatWaveIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 25.8333 5.83333"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+    >
+      <path
+        d="M22.6083 2.08333C21.8375 1.2 20.775 0 18.75 0C16.725 0 15.6667 1.20833 14.8917 2.08333C14.1167 2.95833 13.7708 3.33333 12.9167 3.33333C12.0625 3.33333 11.6667 2.91667 10.9417 2.08333C10.2167 1.25 9.10833 0 7.08333 0C5.05833 0 4 1.20833 3.225 2.08333C2.45 2.95833 2.08333 3.33333 1.25 3.33333H0V5.83333H1.25C3.275 5.83333 4.33333 4.625 5.10833 3.75C5.88333 2.875 6.25 2.5 7.08333 2.5C7.91667 2.5 8.33333 2.91667 9.05833 3.75C9.78333 4.58333 10.8917 5.83333 12.9167 5.83333C14.9417 5.83333 16 4.625 16.775 3.75C17.55 2.875 17.9167 2.5 18.75 2.5C19.5833 2.5 20 2.91667 20.725 3.75C21.45 4.58333 22.5583 5.83333 24.5833 5.83333H25.8333V3.33333H24.5833C23.75 3.33333 23.3333 2.91667 22.6083 2.08333Z"
+        fill="#D96E06"
+      />
+    </svg>
+  );
+}
+
+function HeatWispIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 5.83333 10.8333"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+    >
+      <path
+        d="M2.5 9.58333C2.5 7.9375 3.11667 7.17083 3.89167 6.19583C4.75833 5.11667 5.83333 3.77083 5.83333 1.25V0H3.33333V1.25C3.33333 2.89583 2.71667 3.6625 1.94167 4.6375C1.075 5.71667 0 7.0625 0 9.58333V10.8333H2.5V9.58333Z"
+        fill="#D96E06"
+      />
+    </svg>
+  );
+}
+
+function XIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+    >
+      <path
+        d="M10 0C4.4905 0 0 4.4905 0 10C0 15.5095 4.48954 20 10 20C15.5095 20 20 15.5105 20 10C20 4.4905 15.5095 0 10 0ZM14.7098 13.2896L13.2896 14.7098L10 11.41L6.71042 14.7098L5.29015 13.2896L8.59004 10L5.29015 6.71042L6.71042 5.29015L10 8.59004L13.2896 5.29015L14.7098 6.71042L11.41 10L14.7098 13.2896Z"
+        fill="#D24924"
+      />
+    </svg>
+  );
+}
+
+/* Corner bracket used around the section title (Figma 3346:941-944). */
+function TitleTick({
+  className = "",
+  flip = "",
 }: {
-  headers: string[];
-  rows: Row[];
+  className?: string;
+  flip?: string;
 }) {
   return (
     <div
-      className="absolute top-[268px] left-[91.5px] flex w-[1253px] flex-col"
-      data-node-id="2995:1344"
-      data-name="Category"
+      className={`pointer-events-none absolute flex size-[4px] items-center justify-center ${className}`}
+      aria-hidden
     >
-      {/* header row */}
-      <div className="flex">
-        {headers.map((h, i) => (
-          <div
-            key={`hdr-${i}`}
-            className={`${COL_W} flex h-[56px] shrink-0 items-center bg-[#191c1b] py-[4px] pr-[4px] pl-[20px]`}
+      <div className={`flex-none ${flip}`}>
+        <div className="relative size-[4px]">
+          <svg
+            className="absolute inset-[0_0_-12.5%_-12.5%] block size-full max-w-none"
+            viewBox="0 0 4.5 4.5"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
           >
-            <p
-              className={`${interMedium.className} text-[12px] leading-[16px] font-medium whitespace-nowrap text-white not-italic`}
-            >
-              {h}
-            </p>
-          </div>
-        ))}
+            <path d="M0.5 0L0.5 4H4.5" stroke="white" />
+          </svg>
+        </div>
       </div>
+    </div>
+  );
+}
 
-      {/* data rows */}
-      {rows.map((row, ri) => {
-        const isAcube = row.bg === "green";
-        const valueColor = isAcube ? "text-[#e2f9da]" : "text-white";
-        return (
-          <div key={`row-${ri}`} className="flex">
-            {/* label cell (left-aligned) */}
-            <div
-              className={`${COL_W} flex h-[48px] shrink-0 items-center py-[4px] pr-[4px] pl-[20px] ${ROW_BG[row.bg]}`}
-            >
-              <p
-                className={
-                  isAcube
-                    ? `${interBold.className} text-[16px] leading-[16px] font-bold whitespace-nowrap text-[#e2f9da] not-italic`
-                    : `${interMedium.className} text-[14px] leading-[16px] font-medium whitespace-nowrap text-white not-italic`
-                }
-              >
-                {row.label}
-              </p>
+/* Panel corner elements (Figma 3508:617) — bottom ticks clip against the
+   468px panel exactly as in the source frame. */
+function PanelCorners() {
+  return (
+    <svg
+      className="absolute top-[0.51px] left-[0.39px] h-[598.994px] w-[1165.605px]"
+      viewBox="0 0 1166.61 599.994"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="none"
+      data-node-id="3508:617"
+      aria-hidden
+    >
+      <path d="M1166.11 595.494L1166.11 599.494H1162.11" stroke="white" />
+      <path d="M0.5 4.5L0.5 0.5H4.5" stroke="white" />
+      <path d="M1166.11 4.5L1166.11 0.5H1162.11" stroke="white" />
+      <path d="M778.5 595.494L778.5 599.494H782.5" stroke="white" />
+    </svg>
+  );
+}
+
+/* 180x12 comparison bar, reproducing Figma's rotated-gradient structure
+   (3508:660-675) so the gradient direction matches the source exactly. */
+function UsageBar({
+  left,
+  top,
+  segment,
+  muted,
+  nodeId,
+}: {
+  left: number;
+  top: number;
+  segment: number;
+  muted: boolean;
+  nodeId?: string;
+}) {
+  return (
+    <div
+      className="absolute flex h-[12px] w-[180px] items-center justify-center"
+      style={{ left: `${left}px`, top: `${top}px` }}
+      data-node-id={nodeId}
+    >
+      <div className="flex-none -rotate-90 -scale-y-100">
+        <div className="relative flex h-[180px] w-[12px] flex-col items-center justify-end bg-gradient-to-b from-[#535353] to-[#313131]">
+          <div
+            className={`relative w-full shrink-0 rounded-[0.384px] bg-gradient-to-b from-[#8ce66c] to-[#1b2f14] ${muted ? "mix-blend-luminosity" : ""}`}
+            style={{ height: `${segment}px` }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* Chip thumbnails (Figma 3508:659 / 683 / 686 / 688). */
+function ChipImage({ variant }: { variant: RowImage }) {
+  if (variant === "acube") {
+    return (
+      <div
+        className="absolute top-[84.62px] left-[138px] h-[52.376px] w-[54.666px] mix-blend-lighten"
+        data-node-id="3508:659"
+      >
+        <img
+          alt=""
+          src="/technology/eff-chip-acube.png"
+          className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+        />
+      </div>
+    );
+  }
+  if (variant === "gpu") {
+    return (
+      <div
+        className="absolute top-[calc(50%+60.12px)] left-[calc(50%-417.67px)] h-[54.503px] w-[46.726px] -translate-x-1/2 -translate-y-1/2"
+        data-node-id="3508:686"
+      >
+        <img
+          alt=""
+          src="/technology/eff-chip-gpu.png"
+          className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+        />
+      </div>
+    );
+  }
+  const topClass =
+    variant === "flash"
+      ? "top-[calc(50%-29.88px)]"
+      : "top-[calc(50%+155.33px)]";
+  const nodeId = variant === "flash" ? "3508:683" : "3508:688";
+  return (
+    <div
+      className={`absolute ${topClass} left-[calc(50%-417.67px)] h-[63.765px] w-[54.666px] -translate-x-1/2 -translate-y-1/2`}
+      data-node-id={nodeId}
+    >
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <img
+          alt=""
+          src="/technology/eff-chip-mcu.png"
+          className="absolute top-[7.03%] left-[-9.63%] h-[85.93%] w-[120.67%] max-w-none"
+        />
+      </div>
+    </div>
+  );
+}
+
+/* Trade-off icons, absolutely placed per Figma (3508:676, 3523:547,
+   3523:561-564, 3524:570). */
+function TradeoffIcon({ icon }: { icon: RowIcon }) {
+  if (icon === "check") {
+    return (
+      <CheckIcon
+        className="absolute top-[104.5px] left-[879.48px] size-[20px]"
+      />
+    );
+  }
+  if (icon === "warning") {
+    return (
+      <WarningIcon className="absolute top-[197.15px] left-[876.29px] h-[20px] w-[22.383px]" />
+    );
+  }
+  if (icon === "heat") {
+    return (
+      <>
+        <HeatWaveIcon className="absolute top-[297.54px] left-[875.56px] h-[5.833px] w-[25.833px]" />
+        <HeatWispIcon className="absolute top-[283.38px] left-[878.48px] h-[10.833px] w-[5.833px]" />
+        <HeatWispIcon className="absolute top-[283.38px] left-[886.81px] h-[10.833px] w-[5.833px]" />
+        <HeatWispIcon className="absolute top-[283.38px] left-[895.14px] h-[10.833px] w-[5.833px]" />
+      </>
+    );
+  }
+  return (
+    <XIcon className="absolute top-[380.6px] left-[877.48px] size-[20px]" />
+  );
+}
+
+/* Section background glow — same footer-bg asset the design reuses at the
+   top (3346:937) and bottom (3346:936) of the frame. */
+function Glow({
+  top,
+  height,
+  flipClass,
+  fromStop,
+  toStop,
+  nodeId,
+}: {
+  top: string;
+  height: string;
+  flipClass: string;
+  fromStop: string;
+  toStop: string;
+  nodeId: string;
+}) {
+  return (
+    <div
+      className={`absolute left-0 flex w-full items-center justify-center ${top} ${height}`}
+      data-node-id={nodeId}
+      aria-hidden
+    >
+      <div className={`flex-none w-full ${flipClass}`}>
+        <div className={`relative w-full ${height}`}>
+          <div className="pointer-events-none absolute inset-0">
+            <div className="absolute inset-0 bg-black" />
+            <div className="absolute inset-0 overflow-hidden">
+              <img
+                alt=""
+                src="/footer/footer-bg.png"
+                className="absolute top-[-26.76%] left-[-0.02%] h-[279.02%] w-full max-w-none"
+              />
             </div>
-            {/* value cells (centered) */}
-            {row.values.map((v, i) => (
-              <div
-                key={`cell-${ri}-${i}`}
-                className={`${COL_W} flex h-[48px] shrink-0 items-center justify-center py-[4px] px-[4px] ${ROW_BG[row.bg]}`}
-              >
-                <p
-                  className={`${interMedium.className} text-center text-[14px] leading-[16px] font-medium whitespace-nowrap ${valueColor} not-italic`}
-                >
-                  {v}
-                </p>
-              </div>
-            ))}
+            <div
+              className={`absolute inset-0 bg-gradient-to-b from-black to-[rgba(0,0,0,0)] ${fromStop} ${toStop}`}
+            />
           </div>
-        );
-      })}
+        </div>
+      </div>
     </div>
   );
 }
 
 export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
   const heading = data?.heading || FALLBACK_HEADING;
-  const headingLines = heading.split("\n");
+  // The design mandates a two-line title. Strapi stores the same copy as a
+  // single line, so when the text matches (apostrophe/whitespace-insensitive)
+  // fall back to the design's canonical line break.
+  const rawLines: string[] = heading.split("\n");
+  const normalize = (s: string) =>
+    s.replace(/[’']/g, "'").replace(/\s+/g, " ").trim();
+  const headingLines =
+    rawLines.length === 1 &&
+    normalize(rawLines[0]) === normalize(FALLBACK_HEADING.replace("\n", " "))
+      ? FALLBACK_HEADING.split("\n")
+      : rawLines;
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
-  const footnote = data?.footnote || FALLBACK_FOOTNOTE;
-
-  const headersText = typeof data?.headers === "string" ? data.headers : null;
-  const headers: string[] = headersText
-    ? headersText.split("\t")
-    : FALLBACK_HEADERS;
-
-  const strapiRows = Array.isArray(data?.rows) ? data.rows : null;
-  const rows: Row[] =
-    strapiRows && strapiRows.length > 0
-      ? strapiRows.map((r: any) => ({
-          label: (r?.approach as string) || "",
-          values: [
-            (r?.peak_compute as string) || "",
-            (r?.power as string) || "",
-            (r?.efficiency as string) || "",
-            (r?.tradeoff as string) || "",
-          ],
-          bg: r?.is_highlighted ? "green" : "none",
-        }))
-      : FALLBACK_ROWS;
 
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
-      data-node-id="3018:490"
-      data-name="Table for efficient"
+      data-node-id="3346:935"
+      data-name="Desktop - 15"
       aria-label="The efficiency gap is a different category"
     >
+      {/* Full-bleed Glows for DESKTOP (>=1024px) */}
+      <div className="absolute inset-0 z-0 hidden w-full min-[1024px]:block">
+        <Glow
+          top="top-[350px]"
+          height="h-[591px]"
+          flipClass="rotate-180"
+          fromStop="from-[29.711%]"
+          toStop="to-[42.418%]"
+          nodeId="3346:936"
+        />
+        <Glow
+          top="top-[-74px]"
+          height="h-[424px]"
+          flipClass="-scale-y-100 rotate-180"
+          fromStop="from-[15.366%]"
+          toStop="to-[63.608%]"
+          nodeId="3346:937"
+        />
+      </div>
+
       {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden h-[635px] w-full max-w-[1440px] min-[1024px]:block">
-        {/* 2995:1336 — section title (left-aligned) */}
+      <div className="relative z-10 hidden h-[770px] w-full max-w-[1440px] min-[1024px]:block">
+
+        {/* 3346:938 — Section Title */}
         <div
-          className="absolute top-[73px] left-[93.5px] flex flex-col items-start gap-[24px]"
-          data-node-id="2995:1336"
+          className="absolute top-[38.5px] left-1/2 flex -translate-x-1/2 flex-col items-center justify-center gap-[24px]"
+          data-node-id="3346:938"
           data-name="Section Title"
         >
-          <div
-            className="relative flex flex-col items-center px-[10px]"
-            data-node-id="2995:1337"
-            data-name="Title"
+          <GradientTitle
+            gradientDeg={TITLE_GRADIENT_DEG}
+            nodeId="3346:940"
+            className="text-center whitespace-nowrap"
           >
-            <GradientTitle gradientDeg={TITLE_GRADIENT_DEG} nodeId="2995:1338">
-              <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-                {headingLines[0] ?? ""}
-              </span>
-              <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-                {headingLines[1] ?? ""}
-              </span>
-            </GradientTitle>
-            <CornerDecor />
-          </div>
+            {headingLines.map((line: string, i: number) => (
+              <p key={`title-${i}`} className="leading-[49px]">
+                {line}
+              </p>
+            ))}
+          </GradientTitle>
+          <TitleTick className="top-0 left-0" flip="-scale-y-100" />
+          <TitleTick className="top-0 right-0" flip="rotate-180" />
+          <TitleTick className="bottom-[45px] left-0" />
+          <TitleTick
+            className="right-0 bottom-[45px]"
+            flip="-scale-y-100 rotate-180"
+          />
           <p
             className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic`}
-            data-node-id="2995:1343"
+            data-node-id="3346:945"
           >
             {subtitle}
           </p>
         </div>
 
-        <EfficiencyTable headers={headers} rows={rows} />
-
-        {/* footnote */}
-        <p
-          className={`${interRegular.className} absolute top-[540px] left-[93.5px] text-[14px] leading-[22.75px] font-normal tracking-[-0.1504px] whitespace-nowrap text-[rgba(255,255,255,0.4)] not-italic`}
-          data-node-id="2999:1616"
+        {/* 3508:615 — Lower power consumption panel */}
+        <div
+          className="absolute top-[210.5px] left-1/2 h-[468px] w-[1166px] -translate-x-1/2 overflow-clip"
+          data-node-id="3508:615"
+          data-name="Lower power consumption"
         >
-          {footnote}
-        </p>
+          {/* background */}
+          <div
+            className="absolute top-0 left-0 h-[468px] w-[1166px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)]"
+            style={{
+              backgroundImage:
+                "linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), linear-gradient(90deg, rgba(15, 14, 14, 0.75) 0%, rgba(15, 14, 14, 0.75) 100%)",
+            }}
+            data-node-id="3508:616"
+            data-name="background"
+          />
+          {/* row-1 highlight band */}
+          <div
+            className="absolute top-[72.89px] left-[0.39px] h-[86.066px] w-[1165.605px] border-t border-b border-solid border-[#bfe9b1] opacity-60"
+            style={{
+              backgroundImage:
+                "linear-gradient(89.2557deg, rgba(83, 216, 36, 0) 75.369%, rgba(83, 216, 36, 0.2) 99.944%), linear-gradient(90deg, rgba(83, 216, 36, 0.2) 0%, rgba(83, 216, 36, 0) 34.507%), linear-gradient(90deg, rgba(83, 216, 36, 0.1) 0%, rgba(83, 216, 36, 0.1) 100%)",
+            }}
+            data-node-id="3508:681"
+          />
+          {/* header band */}
+          <div
+            className="absolute top-[0.5px] left-0 h-[72px] w-[1166px] bg-[rgba(51,51,51,0.1)]"
+            data-node-id="3529:655"
+          />
+          <PanelCorners />
+
+          {/* row labels */}
+          {ROWS.map((row, i) => (
+            <p
+              key={`name-${i}`}
+              className={`${gilroyMedium.className} absolute left-[201.5px] text-[26px] leading-[29px] font-medium whitespace-nowrap not-italic ${
+                row.highlighted ? "text-[#53d824]" : "text-[#d2d2d2]"
+              }`}
+              style={{ top: `${ROW_TOP[i]}px` }}
+            >
+              {row.name}
+            </p>
+          ))}
+
+          {/* power values */}
+          {ROWS.map((row, i) => (
+            <p
+              key={`power-${i}`}
+              className={`${gilroyMedium.className} absolute left-[395.32px] text-[22px] leading-[28px] font-medium whitespace-nowrap text-[#e2f9da] not-italic`}
+              style={{ top: `${ROW_TOP[i]}px` }}
+            >
+              {row.power}
+            </p>
+          ))}
+
+          {/* area values */}
+          {ROWS.map((row, i) => (
+            <p
+              key={`area-${i}`}
+              className={`${gilroyMedium.className} absolute left-[641.72px] text-[0px] leading-[0] font-medium whitespace-nowrap text-[#e2f9da] not-italic`}
+              style={{ top: `${ROW_TOP[i]}px` }}
+            >
+              <span className="text-[22px] leading-[28px]">{row.area}</span>
+              <span className="text-[14.19px] leading-[28px]">2</span>
+            </p>
+          ))}
+
+          {/* trade-off values */}
+          {ROWS.map((row, i) => (
+            <p
+              key={`trade-${i}`}
+              className={`${gilroyMedium.className} absolute text-[22px] leading-[28px] font-medium whitespace-nowrap text-[#e2f9da] not-italic`}
+              style={{ top: `${TRADE_TOP[i]}px`, left: `${TRADE_LEFT[i]}px` }}
+            >
+              {row.tradeoff}
+            </p>
+          ))}
+
+          {/* rank badges */}
+          {ROWS.map((row, i) => (
+            <div
+              key={`rank-${i}`}
+              className={`absolute left-[31.55px] flex h-[32px] w-[33.143px] flex-col items-center justify-center rounded-[4px] px-[10px] ${
+                row.highlighted
+                  ? "bg-[#3a9719]"
+                  : "bg-[rgba(83,216,36,0.1)]"
+              }`}
+              style={{ top: `${BADGE_TOP[i]}px` }}
+            >
+              <p
+                className={`${gilroyMedium.className} w-full shrink-0 text-center text-[16px] leading-[28px] font-medium text-[#e2f9da] not-italic`}
+              >
+                {row.rank}
+              </p>
+            </div>
+          ))}
+
+          {/* row separators */}
+          {LINE_TOP.map((top, i) => (
+            <div
+              key={`line-${i}`}
+              className="absolute left-[49.86px] h-0 w-[1077.925px]"
+              style={{ top: `${top}px` }}
+            >
+              <div
+                className="absolute inset-[-1px_0_0_0] opacity-30"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(270deg, rgba(255,255,255,0) 0%, #ffffff 50%, rgba(255,255,255,0) 100%)",
+                }}
+              />
+            </div>
+          ))}
+
+          {/* header row */}
+          <div
+            className={`${interMedium.className} absolute top-[6px] left-[-0.45px] flex h-[56px] w-[1166px] flex-wrap items-start gap-0 px-[32px] py-[20px] text-[14px] leading-[0] font-medium text-[#d2d2d2] uppercase not-italic`}
+            data-node-id="3508:649"
+          >
+            {HEADERS.map((h, i) => (
+              <div
+                key={`hdr-${i}`}
+                className={`relative flex h-full shrink-0 flex-col justify-center ${
+                  i === 0 ? "w-[117.695px]" : "min-w-px flex-[1_0_0]"
+                }`}
+              >
+                <p className="leading-[16px]">{h}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* architecture sub-labels */}
+          {ROWS.map((row, i) => (
+            <div
+              key={`sub-${i}`}
+              className={`${interRegular.className} absolute left-[198.97px] flex -translate-y-1/2 flex-col justify-center text-[12px] leading-[0] font-normal whitespace-nowrap text-white not-italic`}
+              style={{ top: `${SUB_TOP[i]}px` }}
+            >
+              <p className="leading-[18px]">{row.sub}</p>
+            </div>
+          ))}
+
+          {/* chip thumbnails */}
+          {ROWS.map((row, i) => (
+            <ChipImage key={`chip-${i}`} variant={row.image} />
+          ))}
+
+          {/* power bars */}
+          {ROWS.map((row, i) => (
+            <UsageBar
+              key={`pbar-${i}`}
+              left={395}
+              top={BAR_TOP[i]}
+              segment={row.powerBar}
+              muted={!row.highlighted}
+            />
+          ))}
+
+          {/* area bars */}
+          {ROWS.map((row, i) => (
+            <UsageBar
+              key={`abar-${i}`}
+              left={641.4}
+              top={BAR_TOP[i]}
+              segment={row.areaBar}
+              muted={!row.highlighted}
+            />
+          ))}
+
+          {/* trade-off icons */}
+          {ROWS.map((row, i) => (
+            <TradeoffIcon key={`icon-${i}`} icon={row.icon} />
+          ))}
+        </div>
       </div>
 
-      {/* MOBILE (<1024px) — card-based comparison */}
+      {/* MOBILE (<1024px) — stacked rank cards, same content */}
       <div className="flex w-full flex-col gap-[20px] px-[24px] py-[56px] min-[1024px]:hidden">
         <div
           className={`${gilroyMedium.className} bg-clip-text text-[28px] leading-[33px] font-medium text-transparent not-italic`}
@@ -203,8 +650,7 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
             backgroundClip: "text",
           }}
         >
-          <span className="block">{headingLines[0] ?? ""}</span>
-          <span className="block">{headingLines[1] ?? ""}</span>
+          {headingLines.join(" ")}
         </div>
         <p
           className={`${interRegular.className} max-w-[327px] text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
@@ -212,45 +658,105 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
           {subtitle}
         </p>
 
-        {rows.map((row, ri) => {
-          const isAcube = row.bg === "green";
-          return (
-            <div
-              key={`m-row-${ri}`}
-              className={`flex flex-col gap-[10px] rounded-[6px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] p-[16px] ${
-                isAcube ? "bg-[rgba(83,216,36,0.3)]" : row.bg === "marker" ? "bg-[rgba(255,255,255,0.05)]" : "bg-[rgba(15,14,14,0.4)]"
-              }`}
-            >
-              <p
-                className={
-                  isAcube
-                    ? `${interBold.className} text-[18px] leading-[20px] font-bold text-[#e2f9da] not-italic`
-                    : `${interMedium.className} text-[16px] leading-[18px] font-medium text-white not-italic`
-                }
+        {ROWS.map((row, i) => (
+          <div
+            key={`m-row-${i}`}
+            className="flex flex-col gap-[12px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] p-[16px]"
+            style={{
+              backgroundImage: row.highlighted
+                ? "linear-gradient(90deg, rgba(83, 216, 36, 0.2) 0%, rgba(83, 216, 36, 0) 60%), linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), linear-gradient(90deg, rgba(15, 14, 14, 0.75) 0%, rgba(15, 14, 14, 0.75) 100%)"
+                : "linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), linear-gradient(90deg, rgba(15, 14, 14, 0.75) 0%, rgba(15, 14, 14, 0.75) 100%)",
+            }}
+          >
+            <div className="flex items-center gap-[12px]">
+              <div
+                className={`flex h-[32px] w-[33.143px] shrink-0 flex-col items-center justify-center rounded-[4px] ${
+                  row.highlighted
+                    ? "bg-[#3a9719]"
+                    : "bg-[rgba(83,216,36,0.1)]"
+                }`}
               >
-                {row.label}
-              </p>
-              {headers.slice(1).map((h: string, i: number) => (
-                <div key={`m-cell-${ri}-${i}`} className="flex items-baseline justify-between gap-[12px]">
-                  <span className={`${interRegular.className} text-[11px] leading-[14px] font-normal tracking-[0.2px] whitespace-nowrap text-[rgba(255,255,255,0.5)] uppercase not-italic`}>
-                    {h}
-                  </span>
-                  <span
-                    className={`${interMedium.className} text-right text-[13px] leading-[16px] font-medium text-white not-italic`}
-                  >
-                    {row.values[i]}
-                  </span>
-                </div>
-              ))}
+                <p
+                  className={`${gilroyMedium.className} text-center text-[16px] leading-[28px] font-medium text-[#e2f9da] not-italic`}
+                >
+                  {row.rank}
+                </p>
+              </div>
+              <div className="flex flex-col">
+                <p
+                  className={`${gilroyMedium.className} text-[20px] leading-[24px] font-medium not-italic ${
+                    row.highlighted ? "text-[#53d824]" : "text-[#d2d2d2]"
+                  }`}
+                >
+                  {row.name}
+                </p>
+                <p
+                  className={`${interRegular.className} text-[12px] leading-[18px] font-normal text-white not-italic`}
+                >
+                  {row.sub}
+                </p>
+              </div>
             </div>
-          );
-        })}
 
-        <p
-          className={`${interRegular.className} text-[12px] leading-[18px] font-normal text-[rgba(255,255,255,0.4)] not-italic`}
-        >
-          {footnote}
-        </p>
+            {[
+              { label: "Power", value: row.power, bar: row.powerBar },
+              { label: "Area", value: row.area, bar: row.areaBar, sup: true },
+            ].map((metric) => (
+              <div
+                key={`m-${metric.label}-${i}`}
+                className="flex items-center justify-between gap-[12px]"
+              >
+                <div className="flex flex-col gap-[6px]">
+                  <span
+                    className={`${interMedium.className} text-[11px] leading-[14px] font-medium tracking-[0.2px] text-[#d2d2d2] uppercase not-italic`}
+                  >
+                    {metric.label}
+                  </span>
+                  <div className="relative h-[12px] w-[140px] overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#313131] to-[#535353]" />
+                    <div
+                      className={`absolute top-0 left-0 h-full bg-gradient-to-r from-[#1b2f14] to-[#8ce66c] ${
+                        row.highlighted ? "" : "mix-blend-luminosity"
+                      }`}
+                      style={{ width: `${(metric.bar / 180) * 100}%` }}
+                    />
+                  </div>
+                </div>
+                <p
+                  className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium whitespace-nowrap text-[#e2f9da] not-italic`}
+                >
+                  {metric.value}
+                  {metric.sup ? (
+                    <span className="text-[11.61px]">2</span>
+                  ) : null}
+                </p>
+              </div>
+            ))}
+
+            <div className="flex items-center gap-[10px]">
+              {row.icon === "check" && (
+                <CheckIcon className="size-[20px] shrink-0" />
+              )}
+              {row.icon === "warning" && (
+                <WarningIcon className="h-[20px] w-[22.383px] shrink-0" />
+              )}
+              {row.icon === "heat" && (
+                <span className="relative block h-[20px] w-[26px] shrink-0">
+                  <HeatWispIcon className="absolute top-0 left-[3px] h-[10.833px] w-[5.833px]" />
+                  <HeatWispIcon className="absolute top-0 left-[11px] h-[10.833px] w-[5.833px]" />
+                  <HeatWispIcon className="absolute top-0 left-[19px] h-[10.833px] w-[5.833px]" />
+                  <HeatWaveIcon className="absolute bottom-0 left-0 h-[5.833px] w-[25.833px]" />
+                </span>
+              )}
+              {row.icon === "x" && <XIcon className="size-[20px] shrink-0" />}
+              <p
+                className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium text-[#e2f9da] not-italic`}
+              >
+                {row.tradeoff}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

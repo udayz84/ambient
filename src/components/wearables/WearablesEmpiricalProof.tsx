@@ -388,7 +388,7 @@ function EcgCard({
         aria-hidden
       >
         <div className="-scale-y-100 flex-none rotate-180">
-          <div className="relative size-[283.436px]" data-name="image">
+          <div className="relative size-[283.436px] scale-85" data-name="image">
             <img alt="" src={imageSrc} className="absolute size-full max-w-none object-cover" />
             <div className="absolute inset-0" style={{ backgroundImage: IMG_OVERLAY_1 }} />
           </div>
@@ -457,7 +457,7 @@ function EcgCardMobile({
         aria-hidden
       >
         <div className="-scale-y-100 flex-none rotate-180">
-          <div className="relative h-[220px] w-full">
+          <div className="relative h-[220px] w-full scale-85">
             <img alt="" src={imageSrc} className="absolute size-full max-w-none object-cover" />
             <div className="absolute inset-0" style={{ backgroundImage: IMG_OVERLAY_1 }} />
           </div>

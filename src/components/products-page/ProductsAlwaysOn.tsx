@@ -1,408 +1,569 @@
-import { mediaUrl } from "@/lib/strapi";
-import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
-import { TabSwitcher } from "./TabSwitcher";
-import { Corners } from "../shared/Corners";
-import {
-  ALWAYSON_SECTION_HEIGHT,
-  ALWAYSON_STATS,
-  ALWAYSON_STATS_DATA,
-  ALWAYSON_TITLE,
-  ALWAYSON_TITLE_GRADIENT,
-  CORNER_LEFT,
-  CORNER_RIGHT,
-  HAND_BG,
-  HAND_OVERLAY,
-  ICON_TILE_BG,
-} from "./products-data";
+/* eslint-disable @next/next/no-img-element */
+"use client";
+
+import { useState } from "react";
+import { dmMono, gilroyMedium, interBold, interRegular, interSemiBold } from "../hero/fonts";
+
+/**
+ * "Always on. Never asleep." section — Figma 3708:462 (1440×833).
+ * The Subconscious / Reflex Surge toggle crossfades the chip visual between
+ * the baseline render and the surge render, and moves the switch.
+ */
+
+const BG_SURGE = "/products/alwayson/bg-surge.png";
+const BG_SUBCONSCIOUS = "/products/alwayson/bg-subconscious-green.png";
+const AI_CORE_ICON = "/products/alwayson/ai-core-icon.png";
+const HOST_CPU_IMG = "/products/alwayson/host-cpu.png";
+const CORNER_42 = "/products/alwayson/corner-42.svg";
+const CORNER_43 = "/products/alwayson/corner-43.svg";
+const CORNER_44 = "/products/alwayson/corner-44.svg";
+const CORNER_45 = "/products/alwayson/corner-45.svg";
+const CORNER_55 = "/products/alwayson/corner-55.svg";
+const CORNER_58 = "/products/alwayson/corner-58.svg";
+const GLOW_SWOOSH = "/products/alwayson/glow-swoosh.svg";
+const CARD_CORNERS = "/products/alwayson/card-corners.svg";
+const CARD_ICON = "/products/alwayson/card-icon.svg";
+const LINE_920 = "/products/alwayson/line-920.svg";
+const DOT_GREEN = "/products/alwayson/dot-green.svg";
+const BRACKET_LEFT = "/products/alwayson/bracket-left.svg";
+const BRACKET_RIGHT = "/products/alwayson/bracket-right.svg";
+const ON_DOT_OUTER = "/products/alwayson/on-dot-outer.svg";
+const ON_DOT_INNER = "/products/alwayson/on-dot-inner.svg";
+const ON_GLOW = "/products/alwayson/on-glow.svg";
+
+const TITLE_GRADIENT =
+  "linear-gradient(124.465deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
+
+const CARD_BG =
+  "linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), linear-gradient(90deg, rgba(15, 14, 14, 0.75) 0%, rgba(15, 14, 14, 0.75) 100%)";
+
+const ICON_TILE_BG = `url("data:image/svg+xml;utf8,<svg viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(2.2748e-14 1.4501 -2.9369 -1.8948e-15 20 -2.403)'><stop stop-color='rgba(57,74,54,1)' offset='0'/><stop stop-color='rgba(43,54,41,1)' offset='0.5'/><stop stop-color='rgba(29,34,28,1)' offset='1'/></radialGradient></defs></svg>")`;
 
 const FALLBACK_HEADING = "Always on. Never asleep.";
 const FALLBACK_SUBTITLE =
   "GPX10 Pro runs AI around the clock at microwatts — and the instant something matters, it surges to full power. No reset. No waking up. It was never off.";
 
-function splitLines(value: string): string[] {
-  return value.split("\n");
-}
-
-/**
- * "Always On. Never asleep." section.
- * Combines Figma 2915:1219 (title), 2908:487 (hand background) and
- * 2915:1234 (stats row) on a 1442-wide desktop canvas.
- */
-export function ProductsAlwaysOn({ data }: { data?: any }) {
-  const heading = data?.heading || FALLBACK_HEADING;
-  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
-  const image = mediaUrl(data?.image) || "/products/hand.png";
-  const stats =
-    Array.isArray(data?.stats) && data.stats.length > 0
-      ? data.stats.map((s: any, i: number) => {
-          const fallback = ALWAYSON_STATS_DATA[i] || ALWAYSON_STATS_DATA[0];
-          const titleLines = splitLines(s?.title_lines || fallback.titleLines.join("\n"));
-          const badge = s?.badge || fallback.badge.label;
-          return {
-            nodeId: `stat-${i}`,
-            titleLines: [titleLines[0] || "", titleLines[1] || ""],
-            badge: {
-              label: badge,
-              width: fallback.badge.width,
-              rightBarLeft: fallback.badge.rightBarLeft,
-            },
-            statIcon: mediaUrl(s?.stat_icon) || "/products/stat-icon.svg",
-          };
-        })
-      : ALWAYSON_STATS_DATA;
-  return (
-    <>
-      {/* DESKTOP (>=1024px) */}
-      <section
-        className="relative mx-auto hidden w-full bg-black min-[1024px]:block pb-[120px]"
-        aria-label="Always on"
-      >
-        <div
-          className="relative mx-auto w-[1442px]"
-          style={{ height: ALWAYSON_SECTION_HEIGHT }}
-        >
-          <ProductsAlwaysOnDesktop
-            heading={heading}
-            subtitle={subtitle}
-            image={image}
-            stats={stats}
-          />
-        </div>
-      </section>
-
-      {/* MOBILE (<1024px) */}
-      <ProductsAlwaysOnMobile
-        heading={heading}
-        subtitle={subtitle}
-        image={image}
-        stats={stats}
-      />
-    </>
-  );
-}
-
-function ProductsAlwaysOnDesktop({
-  heading,
-  subtitle,
-  image,
-  stats,
+/* ── Four corner ticks (left pair / right pair) ──────────────── */
+function FrameCorners({
+  leftSrc,
+  rightSrc,
+  size = 4,
 }: {
-  heading: string;
-  subtitle: string;
-  image: string;
-  stats: any[];
+  leftSrc: string;
+  rightSrc: string;
+  size?: number;
 }) {
+  const dim = { width: size, height: size } as const;
   return (
     <>
-      {/* Hand background — 2908:487 */}
-      <div
-        className="pointer-events-none absolute overflow-hidden"
-        style={{
-          left: HAND_BG.left,
-          top: HAND_BG.top,
-          width: HAND_BG.width,
-          height: HAND_BG.height,
-        }}
-        data-node-id="2908:487"
-        data-name="hand"
-        aria-hidden
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt=""
-          src={image}
-          className="absolute inset-0 size-full max-w-none object-bottom"
-        />
-        <div
-          className="absolute inset-0"
-          style={{ backgroundImage: HAND_OVERLAY }}
-        />
-      </div>
-
-      {/* Section title — 2915:1219 */}
-      <div
-        className="absolute flex flex-col items-center gap-[24px]"
-        style={{
-          left: ALWAYSON_TITLE.left,
-          top: ALWAYSON_TITLE.top,
-          width: ALWAYSON_TITLE.width,
-        }}
-        data-node-id="2915:1219"
-        data-name="Section Title"
-      >
-        <div
-          className="relative px-[10px]"
-          style={{ width: 540, height: 49 }}
-          data-node-id="2915:1220"
-          data-name="Title"
-        >
-          <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-          <h2
-            className={`${gilroyMedium.className} absolute m-0 w-[520px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
-            style={{
-              left: 10,
-              top: 0,
-              backgroundImage: ALWAYSON_TITLE_GRADIENT,
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-            }}
-            data-node-id="2915:1221"
-          >
-            {heading}
-          </h2>
+      <div className="absolute flex items-center justify-center left-0 top-0" style={dim} aria-hidden>
+        <div className="-scale-y-100 flex-none">
+          <div className="relative" style={dim}>
+            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+              <img alt="" className="block max-w-none size-full" src={leftSrc} />
+            </div>
+          </div>
         </div>
-        <p
-          className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
-          data-node-id="2915:1226"
-        >
-          {subtitle}
-        </p>
-        <TabSwitcher className="mt-[8px]" />
       </div>
-
-      {/* Stats frame — 2915:1234 */}
-      <div
-        className="absolute flex items-start gap-[32px] px-[20px] border border-white/10 rounded-sm"
-        style={{
-          left: ALWAYSON_STATS.left,
-          top: ALWAYSON_STATS.top,
-          width: ALWAYSON_STATS.width,
-          height: ALWAYSON_STATS.height,
-          backgroundColor: "rgba(0,0,0,0.1)",
-        }}
-        data-node-id="2915:1234"
-        data-name="Frame 1984079438"
-      >
-        <Stat stat={stats[0]} />
-        <GridDivider />
-        <Stat stat={stats[1]} />
-        <GridDivider />
-        <Stat stat={stats[2]} />
-
-        {/* Frame corner marks */}
-        <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+      <div className="absolute flex items-center justify-center right-0 top-0" style={dim} aria-hidden>
+        <div className="flex-none rotate-180">
+          <div className="relative" style={dim}>
+            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+              <img alt="" className="block max-w-none size-full" src={rightSrc} />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute bottom-0 left-0" style={dim} aria-hidden>
+        <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+          <img alt="" className="block max-w-none size-full" src={leftSrc} />
+        </div>
+      </div>
+      <div className="absolute bottom-0 flex items-center justify-center right-0" style={dim} aria-hidden>
+        <div className="-scale-y-100 flex-none rotate-180">
+          <div className="relative" style={dim}>
+            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+              <img alt="" className="block max-w-none size-full" src={rightSrc} />
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
 }
 
-function Stat({ stat }: { stat: any }) {
-  const { badge } = stat;
-  const statIcon = stat.statIcon || "/products/stat-icon.svg";
+/* ── "The signature mode" badge ──────────────────────────────── */
+function SectionBadge() {
   return (
     <div
-      className="relative flex h-[181px] w-[340px] shrink-0 flex-col justify-between py-[12px]"
-      data-node-id={stat.nodeId}
-      data-name="Stat"
+      className="bg-[rgba(255,255,255,0.06)] h-[27px] overflow-clip relative shrink-0 w-[170px]"
+      data-node-id="3710:1859"
+      data-name="Menu"
     >
-      {/* Icon tile */}
-      <div
-        className="relative size-[40px] shrink-0 overflow-clip"
-        style={{ borderRadius: 6.667, backgroundImage: ICON_TILE_BG }}
-        data-name="Icon"
-        aria-hidden
+      <FrameCorners leftSrc={CORNER_42} rightSrc={CORNER_43} size={4.133} />
+      <p
+        className={`${dmMono.className} [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] absolute leading-[20.149px] left-[calc(50%-69.5px)] not-italic text-[#ecfae5] text-[13.433px] top-[calc(50%-4.5px)] tracking-[-0.403px] uppercase whitespace-nowrap`}
+        data-node-id="3710:1864"
       >
-        <div className="absolute left-1/2 top-1/2 h-[26.667px] w-[28.148px] -translate-x-1/2 -translate-y-1/2">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt=""
-            src={statIcon}
-            className="block size-full max-w-none"
-          />
-        </div>
-      </div>
-
-      {/* Badge (next to icon) */}
-      <div
-        className="absolute left-[56px] top-[18.39px]"
-        data-name="Logo and Menu"
-      >
-        <StatBadge label={badge.label} width={badge.width} rightBarLeft={badge.rightBarLeft} />
-      </div>
-
-      {/* Title */}
-      <h3
-        className={`${gilroyMedium.className} w-[279px] shrink-0 text-[32px] leading-[38px] font-medium text-white not-italic [word-break:break-word]`}
-        data-name="Title"
-      >
-        <span className="block leading-[38px]">{stat.titleLines[0]}</span>
-        <span className="block leading-[38px]">{stat.titleLines[1]}</span>
-      </h3>
+        The signature mode
+      </p>
+      <div className="-translate-y-1/2 absolute bg-white h-[12.399px] left-[6.7px] opacity-60 top-1/2 w-[2.067px]" data-name="Indicator" />
+      <div className="-translate-y-1/2 absolute bg-white h-[12.399px] opacity-60 right-[7px] top-1/2 w-[2.067px]" data-name="Indicator" />
     </div>
   );
 }
 
-function StatBadge({
-  label,
-  width,
-  rightBarLeft,
-}: {
-  label: string;
-  width: number;
-  rightBarLeft: number;
-}) {
+/* ── Card badge ("power" / "Performance") ────────────────────── */
+function CardBadge({ label, width }: { label: string; width: number }) {
   return (
     <div
-      className={`${dmMono.className} relative h-[26px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)] border-[0.5px] border-white/20 rounded-[4px]`}
+      className="bg-[rgba(255,255,255,0.06)] h-[26px] overflow-clip relative shrink-0"
       style={{ width }}
       data-name="Menu"
     >
-      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+      <FrameCorners leftSrc={CORNER_44} rightSrc={CORNER_45} />
       <p
-        className="absolute left-1/2 top-[calc(50%-4.5px)] -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word]"
-        data-name="Menu Text"
+        className={`${dmMono.className} -translate-x-1/2 [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] absolute leading-[19.5px] left-[calc(50%-0.5px)] not-italic text-[#ecfae5] text-[13px] text-center top-[calc(50%-4.5px)] tracking-[-0.39px] uppercase whitespace-nowrap`}
       >
         {label}
       </p>
-      <div className="absolute top-1/2 left-[6.48px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
-      <div
-        className="absolute top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60"
-        style={{ left: rightBarLeft }}
-      />
+      <div className="-translate-y-1/2 absolute bg-white h-[12px] left-[6.48px] opacity-60 top-1/2 w-[2px]" data-name="Secondary Menu Indicator" />
+      <div className="-translate-y-1/2 absolute bg-white h-[12px] opacity-60 right-[7.52px] top-1/2 w-[2px]" data-name="Menu Indicator" />
     </div>
   );
 }
 
-function GridDivider() {
+/* ── Glow swoosh shared by cards and the toggle frame ────────── */
+function GlowSwoosh({ top = -25.66 }: { top?: number }) {
   return (
     <div
-      className="relative h-[181px] w-[8px] shrink-0 overflow-clip"
-      data-name="Grid Line'"
+      className="pointer-events-none absolute h-[168.649px] left-[90px] w-[234.951px]"
+      style={{ top }}
       aria-hidden
     >
-      {/* Top cap */}
-      <div className="absolute left-0 top-[0.46px] flex h-[4px] w-[8px] items-center justify-center">
-        <div className="-scale-y-100 flex-none">
-          <div className="relative h-[4px] w-[8px]">
-            <div className="absolute inset-[0_0_-12.5%_0]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                alt=""
-                src="/products/grid-line-cap.svg"
-                className="block size-full max-w-none"
-              />
-            </div>
-          </div>
+      <div className="absolute inset-[-119.54%_-85.81%]">
+        <img alt="" className="block max-w-none size-full" src={GLOW_SWOOSH} />
+      </div>
+    </div>
+  );
+}
+
+/* ── Stat card (power / performance) ─────────────────────────── */
+function StatCard({
+  badgeLabel,
+  badgeWidth,
+  stat,
+  sub,
+  footerLabel,
+  className = "",
+}: {
+  badgeLabel: string;
+  badgeWidth: number;
+  stat: string;
+  sub: string;
+  footerLabel: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`h-[218px] overflow-clip w-[364px] ${className}`}
+      data-name="Lower power consumption"
+    >
+      <div
+        className="absolute border-[0.5px] border-[rgba(255,255,255,0.1)] border-solid h-[217.5px] left-0 top-0 w-[364px]"
+        style={{ backgroundImage: CARD_BG }}
+      />
+      <GlowSwoosh />
+      <div
+        className="pointer-events-none absolute h-[216.994px] left-[-23.61px] top-[0.51px] w-[387.605px]"
+        data-name="Cornor Elements"
+        aria-hidden
+      >
+        <div className="absolute inset-[-0.23%_-0.13%]">
+          <img alt="" className="block max-w-none size-full" src={CARD_CORNERS} />
         </div>
       </div>
-      {/* Vertical line */}
-      <div className="absolute left-[3.5px] top-[4px] flex h-[259px] w-0 items-center justify-center">
-        <div className="flex-none rotate-90">
-          <div className="relative h-0 w-[259px]">
-            <div className="absolute inset-[-1px_0_0_0]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                alt=""
-                src="/products/grid-line-87.svg"
-                className="block size-full max-w-none"
-              />
-            </div>
-          </div>
+      <div
+        className="absolute left-[29px] rounded-[6.667px] size-[40px] top-[21px]"
+        style={{ backgroundImage: ICON_TILE_BG }}
+        data-name="Icon"
+      >
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute h-[26.667px] left-1/2 top-1/2 w-[28.148px]">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={CARD_ICON} />
         </div>
       </div>
-      {/* Bottom cap */}
-      <div className="absolute bottom-[0.5px] left-0 h-[4px] w-[8px]">
-        <div className="absolute inset-[0_0_-12.5%_0]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt=""
-            src="/products/grid-line-cap.svg"
-            className="block size-full max-w-none"
-          />
+      <div className="absolute flex gap-[27.778px] items-center left-[85px] top-[27.67px]" data-name="Logo and Menu">
+        <CardBadge label={badgeLabel} width={badgeWidth} />
+      </div>
+      <p
+        className={`${gilroyMedium.className} [word-break:break-word] absolute leading-[38px] left-[32.75px] not-italic text-[32px] text-white top-[73.28px] whitespace-nowrap`}
+      >
+        {stat}
+      </p>
+      <p
+        className={`${gilroyMedium.className} [word-break:break-word] absolute leading-[28px] left-[34.01px] not-italic text-[22px] text-white top-[116.99px] whitespace-nowrap`}
+      >
+        {sub}
+      </p>
+      <p
+        className={`${interRegular.className} [word-break:break-word] absolute font-normal leading-[24px] left-[53.69px] not-italic text-[14px] text-white top-[166.76px] uppercase whitespace-nowrap`}
+      >
+        {footerLabel}
+      </p>
+      <div className="-translate-x-1/2 absolute h-0 left-1/2 top-[157.48px] w-[300px]" aria-hidden>
+        <div className="absolute inset-[-1px_0_0_0]">
+          <img alt="" className="block max-w-none size-full" src={LINE_920} />
+        </div>
+      </div>
+      <div className="absolute left-[34.01px] size-[8px] top-[174.76px]" aria-hidden>
+        <div className="absolute inset-[-12.5%]">
+          <img alt="" className="block max-w-none size-full" src={DOT_GREEN} />
         </div>
       </div>
     </div>
   );
 }
 
-function ProductsAlwaysOnMobile({
-  heading,
-  subtitle,
-  image,
-  stats,
+/* ── "ON" chips (AI CORE / HOST CPU) ─────────────────────────── */
+function OnChip({
+  label,
+  width,
+  icon,
+  className = "",
 }: {
-  heading: string;
-  subtitle: string;
-  image: string;
-  stats: any[];
+  label: string;
+  width: number;
+  icon: "ai" | "cpu";
+  className?: string;
 }) {
   return (
-    <section
-      className="relative w-full overflow-hidden bg-black min-[1024px]:hidden"
-      aria-label="Always on"
+    <div
+      className={`bg-[rgba(56,99,41,0.31)] h-[50px] overflow-clip ${className}`}
+      style={{ width }}
+      data-name="ON"
     >
-      {/* Hand background */}
-      <div className="pointer-events-none absolute inset-0">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt=""
-          src={image}
-          className="absolute inset-0 size-full object-cover object-center opacity-50"
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.95) 100%)",
-          }}
-        />
+      <div className="-translate-y-1/2 absolute left-[6.53px] size-[10.656px] top-1/2" aria-hidden>
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={ON_DOT_OUTER} />
       </div>
+      <div
+        className="-translate-x-1/2 pointer-events-none absolute h-[110.447px] top-[-25.66px] w-[126.547px]"
+        style={{ left: `calc(50% + ${icon === "ai" ? 16.27 : 17.77}px)` }}
+        aria-hidden
+      >
+        <div className="absolute inset-[-182.53%_-159.31%]">
+          <img alt="" className="block max-w-none size-full" src={ON_GLOW} />
+        </div>
+      </div>
+      {icon === "ai" ? (
+        <div className="-translate-y-1/2 absolute h-[36px] left-[24.62px] top-1/2 w-[37.756px]" aria-hidden>
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={AI_CORE_ICON} />
+        </div>
+      ) : (
+        <div
+          className="-translate-x-1/2 -translate-y-1/2 absolute h-[40.126px] left-[calc(50%-40.43px)] mix-blend-luminosity top-1/2 w-[63.077px]"
+          data-name="image 76"
+          aria-hidden
+        >
+          <img alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none size-full" src={HOST_CPU_IMG} />
+        </div>
+      )}
+      <p
+        className={`${interSemiBold.className} -translate-x-1/2 [word-break:break-word] absolute font-semibold leading-[24px] not-italic text-[#63da38] text-[16px] text-center top-[13px] whitespace-pre`}
+        style={{ left: icon === "ai" ? 103.02 : 103.52 }}
+      >
+        {label}
+      </p>
+      <div className="-translate-y-1/2 absolute left-[8.29px] size-[7.129px] top-1/2" aria-hidden>
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={ON_DOT_INNER} />
+      </div>
+    </div>
+  );
+}
 
-      <div className="relative z-10 flex flex-col items-center gap-[20px] px-[24px] pt-[80px] pb-[16px]">
+/* ── Toggle switch ───────────────────────────────────────────── */
+function SurgeSwitch({
+  surge,
+  onToggle,
+}: {
+  surge: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={surge}
+      aria-label="Toggle Reflex Surge"
+      onClick={onToggle}
+      className={`-translate-x-1/2 absolute block cursor-pointer h-[40px] left-[calc(50%+5.25px)] rounded-[100px] top-[19px] w-[73.333px] transition-colors duration-500 ease-in-out ${
+        surge ? "bg-[#6fe047]" : "bg-[#3a3a3a]"
+      }`}
+      data-name="Switch"
+    >
+      <div
+        className="absolute bg-[#112f06] rounded-[100px] shadow-[0px_3.333px_6.667px_0px_rgba(39,39,39,0.1)] size-[33.333px] left-[3.33px] top-[3.33px] transition-transform duration-500 ease-in-out will-change-transform"
+        style={{ transform: surge ? "translateX(33.34px)" : "translateX(0px)" }}
+        data-name="Switch"
+      />
+    </button>
+  );
+}
+
+/* ── Toggle frame (desktop absolute / mobile static) ─────────── */
+function ToggleFrame({
+  surge,
+  onToggle,
+  className = "",
+}: {
+  surge: boolean;
+  onToggle: () => void;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`bg-[rgba(0,0,0,0.1)] h-[80px] overflow-clip w-[410px] ${className}`}
+      data-name="Lower power consumption"
+    >
+      <GlowSwoosh top={-25.16} />
+      <SurgeSwitch surge={surge} onToggle={onToggle} />
+      <p
+        className={`${interBold.className} -translate-x-1/2 [word-break:break-word] absolute font-bold leading-[21px] left-[calc(50%-115.41px)] not-italic text-[18px] text-white text-center top-[calc(50%-11.5px)] whitespace-nowrap transition-opacity duration-500 ease-in-out ${
+          surge ? "opacity-70" : "opacity-100"
+        }`}
+      >
+        Subconscious
+      </p>
+      <p
+        className={`${interBold.className} [word-break:break-word] absolute font-bold leading-[21px] left-[calc(50%+67.23px)] not-italic text-[18px] text-white top-[calc(50%-11.5px)] whitespace-nowrap transition-opacity duration-500 ease-in-out ${
+          surge ? "opacity-100" : "opacity-70"
+        }`}
+      >
+        Reflex Surge
+      </p>
+      <FrameCorners leftSrc={CORNER_44} rightSrc={CORNER_45} />
+    </div>
+  );
+}
+
+/* ── Section title block ─────────────────────────────────────── */
+function SectionTitle({ heading, subtitle }: { heading: string; subtitle: string }) {
+  return (
+    <>
+      <SectionBadge />
+      <div className="flex flex-col items-center px-[10px] relative shrink-0" data-name="Title">
         <h2
-          className={`${gilroyMedium.className} max-w-full bg-clip-text text-center text-[30px] leading-[34px] font-medium text-transparent not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} [word-break:break-word] bg-clip-text leading-[49px] not-italic relative shrink-0 text-[46px] text-center text-transparent whitespace-nowrap`}
           style={{
-            backgroundImage: ALWAYSON_TITLE_GRADIENT,
+            backgroundImage: TITLE_GRADIENT,
             WebkitBackgroundClip: "text",
             backgroundClip: "text",
           }}
         >
           {heading}
         </h2>
-        <p
-          className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]`}
-        >
-          {subtitle}
-        </p>
-        <TabSwitcher className="mt-[8px]" />
+        <FrameCorners leftSrc={CORNER_58} rightSrc={CORNER_55} />
       </div>
+      <p
+        className={`${interRegular.className} [word-break:break-word] font-normal leading-[21px] not-italic relative shrink-0 text-[14px] text-[#f0f0f0] text-center w-[540px]`}
+      >
+        {subtitle}
+      </p>
+    </>
+  );
+}
 
-      {/* Stats */}
-      <div className="relative z-10 flex flex-col px-[24px] pb-[80px]">
-        {stats.map((stat, index) => (
-          <div key={stat.nodeId}>
-            <div className="flex flex-col gap-[16px] py-[20px]">
-              <div className="flex items-center gap-[16px]">
-                <div
-                  className="flex size-[40px] shrink-0 items-center justify-center overflow-clip"
-                  style={{ borderRadius: 6.667, backgroundImage: ICON_TILE_BG }}
-                  aria-hidden
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    alt=""
-                    src={stat.statIcon || "/products/stat-icon.svg"}
-                    className="block h-[26.667px] w-[28.148px]"
-                  />
-                </div>
-                <StatBadge
-                  label={stat.badge.label}
-                  width={stat.badge.width}
-                  rightBarLeft={stat.badge.rightBarLeft}
-                />
-              </div>
-              <h3
-                className={`${gilroyMedium.className} text-[26px] leading-[32px] font-medium text-white not-italic`}
-              >
-                {stat.titleLines[0]} {stat.titleLines[1]}
-              </h3>
-            </div>
-            {index < stats.length - 1 && (
-              <div className="h-px w-full border-t border-dashed border-white/15" />
-            )}
+export function ProductsAlwaysOn({ data }: { data?: any }) {
+  const heading = data?.heading || FALLBACK_HEADING;
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const [surge, setSurge] = useState(true);
+  const toggle = () => setSurge((v) => !v);
+
+  return (
+    <>
+      {/* DESKTOP (>=1024px) — Figma 3708:462, 1440×833 */}
+      <section
+        className="relative mx-auto hidden w-full bg-black min-[1024px]:block"
+        aria-label="Always on"
+      >
+        <div
+          className="bg-black h-[833px] overflow-clip relative mx-auto w-[1440px]"
+          data-node-id="3708:462"
+        >
+          {/* Chip visual — subconscious (baseline) render, always underneath */}
+          <div
+            className="-translate-x-1/2 absolute h-[810.43px] left-1/2 top-[32.55px] w-[1440px]"
+            data-name="ChatGPT Image Jul 2, 2026, 12_54_47 PM 1"
+          >
+            <img
+              alt=""
+              className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
+              src={BG_SUBCONSCIOUS}
+            />
           </div>
-        ))}
-      </div>
-    </section>
+          {/* Chip visual — surge render, fades smoothly over the baseline */}
+          <div
+            className="-translate-x-1/2 absolute h-[832.553px] left-1/2 top-0 w-[1440px] transition-opacity duration-700 ease-in-out will-change-[opacity]"
+            style={{ opacity: surge ? 1 : 0 }}
+            data-name="ChatGPT Image Jul 2, 2026, 12_54_47 PM 2"
+            aria-hidden={!surge}
+          >
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <img
+                alt=""
+                className="absolute h-[99.93%] left-[0.02%] max-w-none top-[0.07%] w-[99.97%]"
+                src={BG_SURGE}
+              />
+            </div>
+          </div>
+
+          {/* Section Title */}
+          <div
+            className="-translate-x-1/2 absolute flex flex-col gap-[12px] items-center justify-center left-1/2 top-[37.55px]"
+            data-name="Section Title"
+          >
+            <SectionTitle heading={heading} subtitle={subtitle} />
+          </div>
+
+          {/* Caption */}
+          <p
+            className={`${interRegular.className} -translate-x-1/2 [word-break:break-word] absolute font-normal leading-[18px] left-1/2 not-italic text-[12px] text-[#bbbbbb] text-center top-[768.96px] uppercase w-[540px]`}
+          >
+            Return to the baseline
+          </p>
+
+          {/* Stat cards */}
+          <StatCard
+            className="absolute left-[990px] top-[535.55px]"
+            badgeLabel="Performance"
+            badgeWidth={137}
+            stat="512 GOPS "
+            sub="instant"
+            footerLabel="REFLEX SURGE"
+          />
+          <StatCard
+            className="absolute left-[86px] top-[535.55px]"
+            badgeLabel="power"
+            badgeWidth={97}
+            stat="< 100 uW"
+            sub="always on AI"
+            footerLabel="Continuous pulse"
+          />
+
+          {/* Toggle */}
+          <ToggleFrame surge={surge} onToggle={toggle} className="absolute left-[515px] top-[671.05px]" />
+
+          {/* Brackets under the cards */}
+          <div className="absolute h-[52.627px] left-[491.15px] top-[724.84px] w-[164.886px]" data-name="Vector" aria-hidden>
+            <div className="absolute inset-[-5.49%_0_-0.95%_-0.3%]">
+              <img alt="" className="block max-w-none size-full" src={BRACKET_LEFT} />
+            </div>
+          </div>
+          <div className="absolute flex h-[52.627px] items-center justify-center left-[784.23px] top-[724.84px] w-[164.886px]" aria-hidden>
+            <div className="-scale-y-100 flex-none rotate-180">
+              <div className="h-[52.627px] relative w-[164.886px]" data-name="Vector">
+                <div className="absolute inset-[-5.07%_0_-0.95%_-0.3%]">
+                  <img alt="" className="block max-w-none size-full" src={BRACKET_RIGHT} />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ON chips */}
+          <OnChip label="AI CORE" width={144} icon="ai" className="absolute left-[552px] top-[207.55px]" />
+          <OnChip label={`HOST  CPU`} width={157} icon="cpu" className="absolute left-[715px] top-[207.55px]" />
+        </div>
+      </section>
+
+      {/* MOBILE (<1024px) */}
+      <section
+        className="relative w-full overflow-hidden bg-black min-[1024px]:hidden"
+        aria-label="Always on"
+      >
+        <div className="flex flex-col items-center gap-[16px] px-[24px] pt-[64px]">
+          <SectionBadge />
+          <div className="relative flex flex-col items-center px-[10px]">
+            <h2
+              className={`${gilroyMedium.className} bg-clip-text text-center text-[30px] leading-[34px] font-medium text-transparent not-italic`}
+              style={{
+                backgroundImage: TITLE_GRADIENT,
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
+            >
+              {heading}
+            </h2>
+            <FrameCorners leftSrc={CORNER_58} rightSrc={CORNER_55} />
+          </div>
+          <p className={`${interRegular.className} text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}>
+            {subtitle}
+          </p>
+        </div>
+
+        {/* ON chips */}
+        <div className="mt-[24px] flex flex-wrap items-center justify-center gap-[12px] px-[24px]">
+          <OnChip label="AI CORE" width={144} icon="ai" className="relative" />
+          <OnChip label={`HOST  CPU`} width={157} icon="cpu" className="relative" />
+        </div>
+
+        {/* Chip visual */}
+        <div className="relative mt-[16px] aspect-[1440/832.55] w-full overflow-hidden">
+          <img
+            alt=""
+            src={BG_SUBCONSCIOUS}
+            className="absolute inset-0 size-full object-cover"
+          />
+          <img
+            alt=""
+            src={BG_SURGE}
+            className="absolute inset-0 size-full object-cover transition-opacity duration-700 ease-in-out will-change-[opacity]"
+            style={{ opacity: surge ? 1 : 0 }}
+            aria-hidden={!surge}
+          />
+        </div>
+
+        {/* Stat cards — 364px design scaled down proportionally on narrow screens */}
+        <div className="mt-[24px] flex w-full flex-col items-center gap-[20px] px-[24px]">
+          <div className="relative aspect-[364/218] w-full max-w-[364px]">
+            <div className="absolute left-0 top-0 origin-top-left scale-[min(1,calc((100vw_-_48px)/364))]">
+              <StatCard
+                className="relative"
+                badgeLabel="power"
+                badgeWidth={97}
+                stat="< 100 uW"
+                sub="always on AI"
+                footerLabel="Continuous pulse"
+              />
+            </div>
+          </div>
+          <div className="relative aspect-[364/218] w-full max-w-[364px]">
+            <div className="absolute left-0 top-0 origin-top-left scale-[min(1,calc((100vw_-_48px)/364))]">
+              <StatCard
+                className="relative"
+                badgeLabel="Performance"
+                badgeWidth={137}
+                stat="512 GOPS "
+                sub="instant"
+                footerLabel="REFLEX SURGE"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Toggle — 410px design scaled down proportionally on narrow screens */}
+        <div className="mt-[24px] flex justify-center px-[24px]">
+          <div className="relative aspect-[410/80] w-full max-w-[410px]">
+            <div className="absolute left-0 top-0 origin-top-left scale-[min(1,calc((100vw_-_48px)/410))]">
+              <ToggleFrame surge={surge} onToggle={toggle} className="relative" />
+            </div>
+          </div>
+        </div>
+
+        <p
+          className={`${interRegular.className} mt-[16px] px-[24px] pb-[64px] text-center text-[12px] leading-[18px] font-normal uppercase text-[#bbbbbb] not-italic`}
+        >
+          Return to the baseline
+        </p>
+      </section>
+    </>
   );
 }

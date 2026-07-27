@@ -6,7 +6,7 @@ import { WearablesEmpiricalProof } from "@/components/wearables/WearablesEmpiric
 import { WearablesLabToProduct } from "@/components/wearables/WearablesLabToProduct";
 import { WearablesSubconscious } from "@/components/wearables/WearablesSubconscious";
 import { WearablesFooterAccent } from "@/components/wearables/WearablesFooterAccent";
-import { getCollection, mediaUrl, buildPopulate } from "@/lib/strapi";
+import { getCollection, buildPopulate } from "@/lib/strapi";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
@@ -22,7 +22,6 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
   try {
     const query = `filters[slug][$eq]=${resolvedParams.slug}&${buildPopulate([
       "hero",
-      "carousel",
       "paradigm",
       "subconscious",
       "empirical_proof",
@@ -42,16 +41,10 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
     notFound();
   }
 
-  const carouselImages = Array.isArray(data?.carousel?.images)
-    ? data.carousel.images
-        .map((m: any) => mediaUrl(m))
-        .filter((url: string | null): url is string => Boolean(url))
-    : undefined;
-
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       {data?.hero && (
-        <WearablesHero data={data.hero} carouselImages={carouselImages} />
+        <WearablesHero data={data.hero} />
       )}
       {data?.paradigm && <WearablesParadigm data={data.paradigm} />}
       {data?.empirical_proof && (

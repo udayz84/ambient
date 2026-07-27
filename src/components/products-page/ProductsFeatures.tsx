@@ -1,316 +1,225 @@
-import { mediaUrl } from "@/lib/strapi";
-import { gilroyMedium, interRegular } from "../hero/fonts";
+import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import {
-  ABSTRACT_DESIGN,
-  CARD_BG,
-  CARD_BORDER,
-  CARD_DESC_COLOR,
   CORNER_LEFT,
   CORNER_RIGHT,
-  FEATURE_CARDS,
-  ICON_TILE_BG,
   SECTION_TITLE_GRADIENT,
 } from "./products-data";
+import {
+  PRODUCTS_FEATURE_CARDS,
+  ProductsFeatureCard,
+} from "./ProductsFeatureCard";
+import { ProductsFeaturesCarousel } from "./ProductsFeaturesCarousel";
 
-const FALLBACK_HEADING = "The chip that ends the \npower-vs-intelligence tradeoff.";
+const FALLBACK_HEADING =
+  "The chip that ends the \npower-vs-intelligence tradeoff.";
 const FALLBACK_SUBTITLE =
   "For a decade, product makers chose: a dumb MCU that lasts months, or a smart NPU that dies by lunch. GPX10 Pro is the first that refuses to choose.";
+const BADGE_TEXT = "What GPX10 Pro unlocks";
+const CAPTION =
+  "One chip replaces the MCU + AI accelerator + sensor hub + memory you’re juggling today — and it stays aware while it sleeps.";
 
-function splitLines(value: string): string[] {
-  return value.split("\n");
-}
-
-/**
- * Figma 2901:794 — "The chip that ends the power-vs-intelligence tradeoff".
- * Desktop section canvas is 1232 wide / 968 tall, centered below the hero.
- */
-export function ProductsFeatures({ data }: { data?: any }) {
-  const heading = data?.heading || FALLBACK_HEADING;
-  const headingLines = splitLines(heading);
-  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
-  const abstractDesign = "/products/abstract-design.svg";
-  const cards =
-    Array.isArray(data?.feature_cards) && data.feature_cards.length > 0
-      ? data.feature_cards.map((c: any, i: number) => ({
-          nodeId: `feature-${i}`,
-          title: c?.title ?? "",
-          description: c?.description ?? "",
-          icon: mediaUrl(c?.icon) || `/products/icon-frame-${(i % 2) + 1}.svg`,
-          cardImage: mediaUrl(c?.card_image) || "/products/card-image.png",
-          paddingTop: i === 0 ? 24 : 16,
-        }))
-      : FEATURE_CARDS;
-  return (
-    <>
-      {/* DESKTOP (>=1024px) */}
-      <section
-        id="products-features"
-        className="relative mx-auto hidden w-[1232px] bg-black min-[1024px]:block pb-[120px]"
-        aria-label="Product capabilities"
-      >
-        <ProductsFeaturesDesktop
-          headingLines={headingLines}
-          subtitle={subtitle}
-          abstractDesign={abstractDesign}
-          cards={cards}
-        />
-      </section>
-
-      {/* MOBILE (<1024px) */}
-      <ProductsFeaturesMobile
-        headingLines={headingLines}
-        subtitle={subtitle}
-        cards={cards}
-      />
-    </>
-  );
-}
-
-function ProductsFeaturesDesktop({
-  headingLines,
-  subtitle,
-  abstractDesign,
-  cards,
+/* Corner tick for the badge — Figma 3707:1626-1629 (Vector 42/43). */
+function BadgeTick({
+  className = "",
+  flip = "",
 }: {
-  headingLines: string[];
-  subtitle: string;
-  abstractDesign: string;
-  cards: any[];
+  className?: string;
+  flip?: string;
 }) {
   return (
-    <div className="relative" style={{ height: 968 }} data-node-id="2901:794">
-      {/* Abstract decorative header — 2901:987 (overflows above into hero) */}
-      <div
-        className="pointer-events-none absolute z-10"
-        style={{
-          left: ABSTRACT_DESIGN.left,
-          top: ABSTRACT_DESIGN.top,
-          width: ABSTRACT_DESIGN.width,
-          height: ABSTRACT_DESIGN.height,
-        }}
-        data-node-id="2901:987"
-        data-name="Abstract Design"
-        aria-hidden
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt=""
-          src={abstractDesign}
-          className="absolute inset-0 block size-full max-w-none"
-        />
-      </div>
-
-      {/* Section title — 2901:795 (centered, top=0) */}
-      <div
-        className="absolute flex flex-col items-center gap-[24px] z-20"
-        style={{ left: 279, top: 0, width: 674 }}
-        data-node-id="2901:795"
-        data-name="Section Title"
-      >
-        <div
-          className="relative px-[10px]"
-          style={{ width: 674, height: 98 }}
-          data-node-id="2901:796"
-          data-name="Title"
-        >
-          <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-          <h2
-            className={`${gilroyMedium.className} absolute m-0 w-[654px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
-            style={{
-              left: 10,
-              top: 0,
-              backgroundImage: SECTION_TITLE_GRADIENT,
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-            }}
-            data-node-id="2901:797"
+    <div
+      className={`pointer-events-none absolute flex size-[4.133px] items-center justify-center ${className}`}
+      aria-hidden
+    >
+      <div className={`flex-none ${flip}`}>
+        <div className="relative size-[4.133px]">
+          <svg
+            className="absolute inset-[0_0_-12.5%_-12.5%] block size-full max-w-none"
+            viewBox="0 0 4.6498 4.6498"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
           >
-            {headingLines.map((line, i) => (
-              <span key={i} className="block">{line}</span>
-            ))}
-          </h2>
+            <path
+              d="M0.516645 0L0.516645 4.13316H4.6498"
+              stroke="white"
+              strokeWidth="1.03329"
+            />
+          </svg>
         </div>
-        <p
-          className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
-          data-node-id="2901:802"
-        >
-          {subtitle}
-        </p>
-      </div>
-
-      {/* Row 1 — 2901:803 (top=212) */}
-      <div
-        className="absolute flex items-center gap-[36px]"
-        style={{ left: 0, top: 212, width: 1232 }}
-        data-node-id="2901:803"
-      >
-        <FeatureCard card={cards[0]} />
-        <FeatureCard card={cards[1]} />
-      </div>
-
-      {/* Row 2 — 2901:926 (top=614) */}
-      <div
-        className="absolute flex items-center gap-[36px]"
-        style={{ left: 0, top: 614, width: 1232 }}
-        data-node-id="2901:926"
-      >
-        <FeatureCard card={cards[2]} />
-        <FeatureCard card={cards[3]} />
       </div>
     </div>
   );
 }
 
-function FeatureCard({
-  card,
-}: {
-  card: any;
-}) {
+/* "What GPX10 Pro unlocks" badge — Figma 3707:1625. */
+function UnlockBadge() {
   return (
-    <article
-      className="relative flex h-[354px] w-[598px] shrink-0 flex-col justify-end overflow-clip border-[0.5px] border-solid"
-      style={{
-        backgroundColor: CARD_BG,
-        borderColor: CARD_BORDER,
-        paddingLeft: 32,
-        paddingRight: 32,
-        paddingBottom: 24,
-        paddingTop: card.paddingTop,
-      }}
-      data-node-id={card.nodeId}
-      data-name="Article"
+    <div
+      className="relative h-[27px] w-[214px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)]"
+      data-node-id="3707:1625"
+      data-name="Menu"
     >
-      {/* Decorative card image — top-right */}
-      <div
-        className="pointer-events-none absolute overflow-hidden"
-        style={{ right: 1.03, top: 0.36, width: 297.96875, height: 262.6378173828125 }}
-        data-name="ChatGPT Image May 19, 2026, 01_09_18 PM 1"
-        aria-hidden
+      <BadgeTick className="top-0 left-0" flip="-scale-y-100" />
+      <BadgeTick className="top-0 right-[0.01px]" flip="rotate-180" />
+      <BadgeTick className="bottom-[0.13px] left-0" />
+      <BadgeTick
+        className="right-[0.01px] bottom-[0.13px]"
+        flip="-scale-y-100 rotate-180"
+      />
+      <p
+        className={`${dmMono.className} absolute top-[calc(50%-4.5px)] left-[calc(50%-84.5px)] text-[13.433px] leading-[20.149px] font-normal tracking-[-0.403px] whitespace-nowrap text-[#ecfae5] uppercase not-italic`}
+        data-node-id="3707:1630"
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt=""
-          src={card.cardImage}
-          className="absolute left-0 max-w-none"
-          style={{ top: "-23.63%", width: "116.47%", height: "132.14%" }}
-        />
-      </div>
-
-      {/* Icon tile — top-left */}
-      <div
-        className="absolute overflow-clip"
-        style={{
-          left: 32,
-          top: 24,
-          width: 66.14035034179688,
-          height: 65,
-          borderRadius: 13.684,
-          backgroundImage: ICON_TILE_BG,
-        }}
-        data-name="Icon"
-        aria-hidden
-      >
-        <div className="absolute left-1/2 top-1/2 size-[45.614px] -translate-x-1/2 -translate-y-1/2">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt=""
-            src={card.icon}
-            className="block size-full max-w-none"
-          />
-        </div>
-      </div>
-
-      {/* Content — title + description */}
-      <div
-        className="relative flex w-full flex-col gap-[12px] [word-break:break-word] not-italic"
-        data-name="NewsSection"
-      >
-        <h3
-          className={`${gilroyMedium.className} w-[489.220703125px] shrink-0 text-[32px] leading-[38px] font-medium whitespace-nowrap text-white`}
-          data-name="Title"
-        >
-          {card.title}
-        </h3>
-        <p
-          className={`${interRegular.className} w-[489.220703125px] shrink-0 text-[16px] leading-[24px] font-normal`}
-          style={{ color: CARD_DESC_COLOR }}
-          data-name="Description"
-        >
-          {card.description}
-        </p>
-      </div>
-
-      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-    </article>
+        {BADGE_TEXT}
+      </p>
+      <div className="absolute top-1/2 left-[6.7px] h-[12.399px] w-[2.067px] -translate-y-1/2 bg-white opacity-60" />
+      <div className="absolute top-1/2 right-[7px] h-[12.399px] w-[2.067px] -translate-y-1/2 bg-white opacity-60" />
+    </div>
   );
 }
 
-function ProductsFeaturesMobile({
-  headingLines,
-  subtitle,
-  cards,
-}: {
-  headingLines: string[];
-  subtitle: string;
-  cards: any[];
-}) {
+/* Full-bleed section background — Figma 3286:1931 backdrop. */
+function SectionBackdrop() {
+  return (
+    <div aria-hidden className="pointer-events-none absolute inset-0">
+      <div className="absolute inset-0 bg-black" />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        alt=""
+        src="/products/features-bg.png"
+        className="absolute size-full max-w-none object-bottom opacity-75"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0)] from-[88.149%] to-black" />
+    </div>
+  );
+}
+
+/**
+ * Figma 3286:1931 — "Section 6" (The chip that ends the
+ * power-vs-intelligence tradeoff). Desktop uses the homepage MeasuredProof
+ * carousel behaviour: a 300vh section with a sticky 100vh stage; vertical
+ * scroll pans the card strip horizontally (see ProductsFeaturesCarousel).
+ */
+export function ProductsFeatures({ data }: { data?: any }) {
+  const heading = data?.heading || FALLBACK_HEADING;
+  // The design mandates a two-line title. Strapi stores the same copy as a
+  // single line, so when the text matches (whitespace-insensitive) fall back
+  // to the design's canonical line break.
+  const rawLines: string[] = heading.split("\n");
+  const normalize = (s: string) => s.replace(/\s+/g, " ").trim();
+  const headingLines =
+    rawLines.length === 1 &&
+    normalize(rawLines[0]) === normalize(FALLBACK_HEADING.replace("\n", " "))
+      ? FALLBACK_HEADING.split("\n")
+      : rawLines;
+  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+
   return (
     <section
-      className="relative w-full bg-black px-[24px] pt-[64px] pb-[80px] min-[1024px]:hidden"
+      id="products-features"
+      className="relative left-1/2 w-screen max-w-none -translate-x-1/2 bg-black max-[1023px]:h-auto min-[1024px]:h-[300vh]"
+      data-node-id="3286:1931"
+      data-name="Section 6"
       aria-label="Product capabilities"
     >
-      {/* Title */}
-      <div className="flex flex-col items-center gap-[20px]">
-        <h2
-          className={`${gilroyMedium.className} max-w-full bg-clip-text text-center text-[30px] leading-[34px] font-medium text-transparent not-italic [word-break:break-word]`}
-          style={{
-            backgroundImage: SECTION_TITLE_GRADIENT,
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-          }}
-        >
-          {headingLines.join(" ")}
-        </h2>
-        <p
-          className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]`}
-        >
-          {subtitle}
-        </p>
+      {/* DESKTOP (>=1024px) — sticky stage */}
+      <div className="sticky top-0 hidden h-[100vh] min-h-[945px] w-full overflow-hidden min-[1024px]:block">
+        <SectionBackdrop />
+
+        <div className="relative mx-auto h-full w-full max-w-[1440px]">
+          {/* 3286:2105 — Section Title */}
+          <div
+            className="absolute top-[22.5px] left-1/2 flex -translate-x-1/2 flex-col items-center justify-center gap-[24px]"
+            data-node-id="3286:2105"
+            data-name="Section Title"
+          >
+            <UnlockBadge />
+            <div
+              className="relative flex shrink-0 flex-col items-center px-[10px]"
+              data-node-id="3286:2106"
+              data-name="Title"
+            >
+              <div
+                className={`${gilroyMedium.className} relative shrink-0 bg-clip-text text-center text-[46px] leading-[0] font-medium whitespace-nowrap text-transparent not-italic [word-break:break-word]`}
+                style={{
+                  backgroundImage: SECTION_TITLE_GRADIENT,
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                }}
+                data-node-id="3286:2107"
+              >
+                {headingLines.map((line, i) => (
+                  <p
+                    key={`title-${i}`}
+                    className={`leading-[49px] whitespace-pre ${i === 0 ? "mb-0" : ""}`}
+                  >
+                    {line}
+                  </p>
+                ))}
+              </div>
+              <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+            </div>
+            <p
+              className={`${interRegular.className} w-[650px] shrink-0 text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+              data-node-id="3286:2112"
+            >
+              {subtitle}
+            </p>
+          </div>
+
+          <ProductsFeaturesCarousel cards={PRODUCTS_FEATURE_CARDS} />
+
+          {/* 3710:1634 — caption (Figma top 917 of the 1057 canvas; rises on
+              shorter stages so it never overlaps the 600px cards) */}
+          <p
+            className={`${interRegular.className} absolute bottom-[clamp(12px,calc(100vh-957px),98px)] left-1/2 w-[603.549px] -translate-x-1/2 text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            data-node-id="3710:1634"
+          >
+            {CAPTION}
+          </p>
+        </div>
       </div>
 
-      {/* Cards */}
-      <div className="mt-[40px] flex flex-col gap-[20px]">
-        {cards.map((card) => (
-          <article
-            key={card.nodeId}
-            className="relative flex flex-col gap-[16px] overflow-clip border-[0.5px] border-solid p-[20px]"
-            style={{ backgroundColor: CARD_BG, borderColor: CARD_BORDER }}
-          >
-            <div
-              className="flex size-[48px] shrink-0 items-center justify-center overflow-clip"
-              style={{ borderRadius: 12, backgroundImage: ICON_TILE_BG }}
-              aria-hidden
+      {/* MOBILE (<1024px) — stacked header + swipeable card strip */}
+      <div className="relative z-10 w-full min-[1024px]:hidden">
+        <SectionBackdrop />
+        <div className="relative flex flex-col items-center gap-[20px] px-[24px] pt-[56px]">
+          <UnlockBadge />
+          <div className="relative px-[10px]" data-name="Title">
+            <h2
+              className={`${gilroyMedium.className} bg-clip-text text-center text-[30px] leading-[34px] font-medium text-transparent not-italic [word-break:break-word]`}
+              style={{
+                backgroundImage: SECTION_TITLE_GRADIENT,
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" src={card.icon} className="block size-[34px]" />
-            </div>
-            <div className="flex flex-col gap-[8px] not-italic">
-              <h3
-                className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white`}
-              >
-                {card.title}
-              </h3>
-              <p
-                className={`${interRegular.className} text-[14px] leading-[21px] font-normal`}
-                style={{ color: CARD_DESC_COLOR }}
-              >
-                {card.description}
-              </p>
-            </div>
+              {headingLines.join(" ")}
+            </h2>
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-          </article>
-        ))}
+          </div>
+          <p
+            className={`${interRegular.className} max-w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
+          >
+            {subtitle}
+          </p>
+        </div>
+
+        <div className="relative mt-[40px] flex snap-x snap-mandatory gap-[24px] overflow-x-auto px-[24px] pb-[8px]">
+          {PRODUCTS_FEATURE_CARDS.map((card) => (
+            <div key={`m-${card.nodeId}`} className="snap-center">
+              <ProductsFeatureCard card={card} />
+            </div>
+          ))}
+        </div>
+
+        <p
+          className={`${interRegular.className} relative mx-auto mt-[32px] max-w-[603.549px] px-[24px] pb-[56px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
+        >
+          {CAPTION}
+        </p>
       </div>
     </section>
   );

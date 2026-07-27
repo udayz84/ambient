@@ -1,89 +1,311 @@
+import { Fragment } from "react";
 import { mediaUrl } from "@/lib/strapi";
-import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
-import { Corners } from "../shared/Corners";
+import { dmMono, gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 
 /**
- * Figma 2940:1244 — "The full picture".
- * Centered product image with 8 floating spec callout cards.
+ * Figma 3713:1975 inside 3309:2368 "Desktop - 16" (1440×930) — "The full picture."
+ * Eyebrow chip + gradient title + 9 light spec cards over flipped aurora images.
  * Self-contained: all layout data derived directly from the Figma frame.
  */
 
-/* ---- Canvas (Figma frame width = 1440) ---- */
-const CANVAS_WIDTH = 1440;
-const SECTION_HEIGHT = 1000;
+/* ---- Assets (exported from Figma) ---- */
+const AURORA = "/products/fullpicture-aurora.png"; // 1024×855, used by both footer layers
+const LINE = "/products/spec-line.svg"; // same white 4% 1px rule as the design's Line assets
+const ICON_GLYPH = "/products/fp-spec-icon.svg";
+const MENU_CORNER_L = "/products/fp-menu-corner-left.svg"; // Vector 42
+const MENU_CORNER_R = "/products/fp-menu-corner-right.svg"; // Vector 43
+const TITLE_CORNER_L = "/products/fp-title-corner-left.svg"; // Vector 58
+const TITLE_CORNER_R = "/products/fp-title-corner-right.svg"; // Vector 55
 
 /* ---- Tokens ---- */
 const TITLE_GRADIENT =
-  "linear-gradient(112.319deg, rgb(255,255,255) 1.3527%, rgb(212,233,188) 55.161%, rgb(255,255,255) 111.67%)";
-const IMAGE_VIGNETTE =
-  "radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%)";
+  "linear-gradient(112.899deg, rgb(255,255,255) 1.3527%, rgb(212,233,188) 55.161%, rgb(255,255,255) 111.67%)";
 const ICON_TILE_BG =
   "radial-gradient(60% 75% at 50% 0%, rgba(57,74,54,1) 0%, rgba(43,54,41,1) 50%, rgba(29,34,28,1) 100%)";
+const HEADER_COLOR = "#21570e"; // Colors/Primary/1000
+const PLUS_GREEN = "#3a9719"; // Colors/Primary/800
+const BORDER_LIGHT = "rgba(255,255,255,0.1)";
+const BORDER_DARK = "rgba(51,51,51,0.1)"; // Colors/Neutral/Alpha/10
+const patternGreen = (deg: number) =>
+  `linear-gradient(${deg}deg, rgba(188,229,174,0) 30.174%, rgb(188,229,174) 76.687%)`;
 
-const HEADER_COLOR = "#6fe047";
-const PLUS_COLOR = "#3a9719";
-const ITEM_TEXT_COLOR = "rgba(255,255,255,0.9)";
+const FALLBACK_HEADING = "The full picture.";
+const FALLBACK_MENU = "Specs & resources";
 
-/* ---- Central image — 2940:1245 ---- */
-const IMAGE = { left: 247, top: 191, width: 946.5, height: 631 };
-
-/* ---- Callout card geometry — 2940:1340 et al. ---- */
-const CALLOUT_WIDTH = 284.6950378417969;
-const CARD_BG = "rgba(21,21,21,0.1)";
-const CARD_DIVIDER = "rgba(255,255,255,0.1)";
-
-const FALLBACK_HEADING = "The full picture";
-const FALLBACK_SUBTITLE =
-  "Bridge the lab and real world. The Sparsh module offers continuous, microwatt intelligence in a 21×21mm size, with a breakout board that snaps off for production.";
-
-const FALLBACK_MEMORY_ITEMS = [
-  "120 KB L0 cache",
-  "2048 KB unified L1 SRAM",
-  "Video + multi-bank sensor buffers",
-  "Boot ROM",
-  "External SRAM/Flash via QSPI/SPI",
-];
-
-const FALLBACK_SECURITY_ITEMS = [
-  "Secure boot with signed firmware",
-  "AES-256 hardware acceleration",
-  "True random number generator",
-  "Tamper-resistant key storage",
-  "Active tamper detection",
-];
-
-const FALLBACK_CONNECTIVITY_ITEMS = [
-  "Quad-SPI / SPI",
-  "I2C x 4",
-  "UART x 4",
-  "USB 2.0 OTG",
-  "84 programmable GPIO",
-];
-
-type Callout = {
+/* ---- Card geometry (all values straight from Figma) ---- */
+type LineSpec = {
+  top: number;
+  left: number;
+  width: number;
+  variant?: "rotate" | "skew";
+};
+type ItemSpec = { text: string; top: number; plusTop: number };
+type SpecCard = {
   nodeId: string;
+  title: string;
   left: number;
   top: number;
-  header: string;
-  items: string[];
-  icon?: string | null;
+  height: number;
+  borderColor: string;
+  face: { height: number; left: number; top: number };
+  pattern: {
+    height: number;
+    gradient: string;
+    style: Record<string, string | number>;
+  };
+  header: { left: number; top: number; width: number };
+  itemsLeft: number;
+  plusLeft: number;
+  plusColor: string;
+  items: ItemSpec[];
+  lines: LineSpec[];
+  icon: { left: number; top: number };
 };
 
-const FALLBACK_CALLOUTS: Callout[] = [
-  { nodeId: "2940:1340", left: 78, top: 238, header: "Memory", items: FALLBACK_MEMORY_ITEMS },
-  { nodeId: "2940:1467", left: 578, top: 232, header: "Compute", items: ["512 GOPS neural compute"] },
-  { nodeId: "2940:1372", left: 1058, top: 243, header: "Memory", items: FALLBACK_MEMORY_ITEMS },
-  { nodeId: "2940:1435", left: 106, top: 489, header: "Power", items: ["Under 100 µW always-on"] },
-  { nodeId: "2940:1483", left: 1060, top: 491, header: "Sensing", items: ["10 fused sensor streams"] },
-  { nodeId: "2940:1404", left: 109, top: 610, header: "Security", items: FALLBACK_SECURITY_ITEMS },
+const item = (text: string, top: number): ItemSpec => ({
+  text,
+  top,
+  plusTop: +(top + 3.5).toFixed(2),
+});
+
+const CARDS: SpecCard[] = [
   {
-    nodeId: "2940:1499",
-    left: 974.017578125,
-    top: 592.53173828125,
-    header: "Connectivity",
-    items: FALLBACK_CONNECTIVITY_ITEMS,
+    nodeId: "3309:2459",
+    title: "Control",
+    left: 0,
+    top: 0.84,
+    height: 99,
+    borderColor: BORDER_DARK,
+    face: { height: 230.609, left: -1, top: -0.84 },
+    pattern: {
+      height: 230.844,
+      gradient: patternGreen(140.837),
+      style: { left: "50%", top: -0.84, transform: "translateX(-50%)" },
+    },
+    header: { left: 15, top: 14.16, width: 345 },
+    itemsLeft: 33,
+    plusLeft: 15,
+    plusColor: HEADER_COLOR,
+    items: [item("ARM Cortex-M4F (32-bit, FPU)", 57.33)],
+    lines: [],
+    icon: { left: 332.44, top: 5 },
   },
-  { nodeId: "2940:1451", left: 569, top: 725, header: "Package", items: ["21 × 21 mm module"] },
+  {
+    nodeId: "3309:2381",
+    title: "Sensing & Analog",
+    left: 0,
+    top: 120.84,
+    height: 231,
+    borderColor: BORDER_LIGHT,
+    face: { height: 230.757, left: -1, top: -0.87 },
+    pattern: {
+      height: 230.991,
+      gradient:
+        "linear-gradient(14.3795deg, rgba(255,255,255,0) 13.463%, rgb(255,255,255) 71.165%)",
+      style: { right: -1, top: "50%", transform: "translateY(-50%)", opacity: 0.24 },
+    },
+    header: { left: 15, top: 15.16, width: 342 },
+    itemsLeft: 33,
+    plusLeft: 15,
+    plusColor: PLUS_GREEN,
+    items: [
+      item("16-bit ADC, 8 simultaneous analog inputs", 57.33),
+      item("16-bit audio ADC", 100.97),
+      item("Sensor-fusion DMA up to 10 streams", 144.44),
+      item("Battery-low detection", 188.08),
+    ],
+    lines: [
+      { top: 87.33, left: 17.12, width: 233.885, variant: "rotate" },
+      { top: 130.97, left: 17.12, width: 233.885, variant: "rotate" },
+      { top: 174.61, left: 17.12, width: 233.885, variant: "rotate" },
+    ],
+    icon: { left: 330.44, top: 5 },
+  },
+  {
+    nodeId: "3309:2437",
+    title: "Power",
+    left: 0,
+    top: 371.84,
+    height: 231,
+    borderColor: BORDER_DARK,
+    face: { height: 230.609, left: -1, top: -0.84 },
+    pattern: {
+      height: 230.844,
+      gradient: patternGreen(140.837),
+      style: { left: "50%", top: -0.84, transform: "translateX(-50%)" },
+    },
+    header: { left: 15, top: 15.16, width: 342 },
+    itemsLeft: 33,
+    plusLeft: 15,
+    plusColor: HEADER_COLOR,
+    items: [
+      item("Core 1.2 V (0.9–1.3 V)", 57.33),
+      item("Analog/IO 3.3 V", 100.97),
+      item("~80 µW always-on", 144.44),
+      item("Two power domains", 188.08),
+    ],
+    lines: [
+      { top: 87.33, left: 17.12, width: 233.885, variant: "rotate" },
+      { top: 130.97, left: 17.12, width: 233.885, variant: "rotate" },
+      { top: 174.61, left: 17.12, width: 233.885, variant: "rotate" },
+    ],
+    icon: { left: 330.44, top: 5 },
+  },
+  {
+    nodeId: "3309:2403",
+    title: "Peripherals",
+    left: 422,
+    top: 0.84,
+    height: 348,
+    borderColor: BORDER_DARK,
+    face: { height: 347.49, left: -1, top: -0.84 },
+    pattern: {
+      height: 347.844,
+      gradient: patternGreen(129.172),
+      style: { left: "50%", top: -0.84, transform: "translateX(-50%)" },
+    },
+    header: { left: 15, top: 15.16, width: 338 },
+    itemsLeft: 33.5,
+    plusLeft: 15.5,
+    plusColor: PLUS_GREEN,
+    items: [
+      item("OSPI (XIP)", 57.33),
+      item("I²S Master", 100.97),
+      item("SPI", 144.44),
+      item("I²C", 188.08),
+      item("UART", 231.55),
+      item("GPIO", 272.14),
+      item("GPIO", 312.73),
+    ],
+    lines: [
+      { top: 87.57, left: 17.62, width: 329.877 },
+      { top: 131.21, left: 17.62, width: 329.877 },
+      { top: 174.85, left: 17.62, width: 329.877 },
+      { top: 219.76, left: 17.62, width: 329.877 },
+      { top: 260.35, left: 17.62, width: 329.877 },
+      { top: 300.94, left: 17.62, width: 329.877 },
+    ],
+    icon: { left: 326.94, top: 5 },
+  },
+  {
+    nodeId: "3309:2472",
+    title: "Control",
+    left: 420,
+    top: 371.84,
+    height: 99,
+    borderColor: BORDER_DARK,
+    face: { height: 98.899, left: -1, top: -0.84 },
+    pattern: {
+      height: 99,
+      gradient: patternGreen(160.745),
+      style: { left: "50%", top: -0.84, transform: "translateX(-50%)" },
+    },
+    header: { left: 15, top: 14.16, width: 344 },
+    itemsLeft: 33,
+    plusLeft: 15,
+    plusColor: PLUS_GREEN,
+    items: [item("ARM Cortex-M4F (32-bit, FPU)", 57.33)],
+    lines: [],
+    icon: { left: 331.44, top: 5 },
+  },
+  {
+    nodeId: "3309:2485",
+    title: "Temperature",
+    left: 420,
+    top: 504,
+    height: 99,
+    borderColor: BORDER_DARK,
+    face: { height: 98.899, left: -1, top: -1 },
+    pattern: {
+      height: 99,
+      gradient: patternGreen(160.745),
+      style: { left: "50%", top: -1, transform: "translateX(-50%)" },
+    },
+    header: { left: 15, top: 14.16, width: 344 },
+    itemsLeft: 33,
+    plusLeft: 15,
+    plusColor: PLUS_GREEN,
+    items: [item("0–85 °C (junction)", 57.33)],
+    lines: [],
+    icon: { left: 331.44, top: 5 },
+  },
+  {
+    nodeId: "3309:2527",
+    title: "Memory",
+    left: 844,
+    top: 1,
+    height: 276,
+    borderColor: BORDER_LIGHT,
+    face: { height: 275.72, left: -1, top: -1 },
+    pattern: {
+      height: 276,
+      gradient: patternGreen(135.759),
+      style: { left: "50%", top: -1, transform: "translateX(-50%)" },
+    },
+    header: { left: 15, top: 15, width: 342 },
+    itemsLeft: 33,
+    plusLeft: 15,
+    plusColor: PLUS_GREEN,
+    items: [
+      item("120 KB L0 cache", 57.18),
+      item("2048 KB unified L1 SRAM", 100.82),
+      item("Video + multi-bank sensor buffers", 144.29),
+      item("Boot ROM", 187.93),
+      item("External SRAM/Flash via QSPI/SPI", 233.28),
+    ],
+    lines: [
+      { top: 87.42, left: 17.12, width: 339.885, variant: "skew" },
+      { top: 131.05, left: 17.12, width: 339.885, variant: "skew" },
+      { top: 174.69, left: 17.12, width: 339.885, variant: "skew" },
+      { top: 220.05, left: 17.12, width: 339.885, variant: "skew" },
+    ],
+    icon: { left: 330.44, top: 4.84 },
+  },
+  {
+    nodeId: "3309:2511",
+    title: "Package",
+    left: 844.5,
+    top: 304,
+    height: 167,
+    borderColor: BORDER_DARK,
+    face: { height: 167, left: -0.5, top: -1 },
+    pattern: {
+      height: 167,
+      gradient: patternGreen(149.492),
+      style: { left: "calc(50% + 0.5px)", top: -1, transform: "translateX(-50%)" },
+    },
+    header: { left: 14.5, top: 14.16, width: 344 },
+    itemsLeft: 32.5,
+    plusLeft: 14.5,
+    plusColor: PLUS_GREEN,
+    items: [
+      item("ARM Cortex-M4F (32-bit, FPU)", 57.33),
+      item("CSP 3.2×3.2 mm (on demand)", 106.25),
+    ],
+    lines: [{ top: 92.07, left: 14.5, width: 329.877 }],
+    icon: { left: 330.94, top: 5 },
+  },
+  {
+    nodeId: "3309:2498",
+    title: "Security",
+    left: 844.5,
+    top: 503.84,
+    height: 99,
+    borderColor: BORDER_DARK,
+    face: { height: 98.899, left: -0.5, top: -0.84 },
+    pattern: {
+      height: 99,
+      gradient: patternGreen(160.745),
+      style: { left: "calc(50% + 0.5px)", top: -0.84, transform: "translateX(-50%)" },
+    },
+    header: { left: 15, top: 14.16, width: 344 },
+    itemsLeft: 33,
+    plusLeft: 15,
+    plusColor: PLUS_GREEN,
+    items: [item("AES-128", 57.33)],
+    lines: [],
+    icon: { left: 331.44, top: 5 },
+  },
 ];
 
 function splitLinesFilter(value: string | undefined | null): string[] {
@@ -94,23 +316,272 @@ function splitLinesFilter(value: string | undefined | null): string[] {
     .filter(Boolean);
 }
 
+/* ---- Small building blocks ---- */
+
+function CornerTick({
+  src,
+  placement,
+  nodeId,
+}: {
+  src: string;
+  placement: "tl" | "tr" | "bl" | "br";
+  nodeId?: string;
+}) {
+  // Mirrors the Figma structure: 4px tick box, image inset [0_0_-12.5%_-12.5%],
+  // flipped per corner. tl = flipY, bl = plain, tr = rotate180, br = flipY+rotate180.
+  const posClass =
+    placement === "tl"
+      ? "left-0 top-0"
+      : placement === "tr"
+        ? "right-0 top-0"
+        : placement === "bl"
+          ? "bottom-0 left-0"
+          : "bottom-0 right-0";
+  const flipClass =
+    placement === "tl"
+      ? "-scale-y-100"
+      : placement === "tr"
+        ? "rotate-180"
+        : placement === "br"
+          ? "-scale-y-100 rotate-180"
+          : "";
+  const inner = (
+    <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img alt="" className="block max-w-none size-full" src={src} aria-hidden />
+    </div>
+  );
+  return (
+    <div
+      className={`absolute ${posClass} size-[4px] ${flipClass ? "flex items-center justify-center" : ""}`}
+      data-node-id={nodeId}
+      aria-hidden
+    >
+      {flipClass ? (
+        <div className={`${flipClass} flex-none`}>
+          <div className="relative size-[4px]">{inner}</div>
+        </div>
+      ) : (
+        inner
+      )}
+    </div>
+  );
+}
+
+function MenuChip({ label }: { label: string }) {
+  return (
+    <div
+      className={`${dmMono.className} bg-[rgba(255,255,255,0.06)] flex gap-[6px] h-[26px] items-center overflow-clip px-[24px] relative shrink-0`}
+      data-node-id="3713:1966"
+      data-name="Menu"
+    >
+      <p
+        className="[text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] leading-[20.149px] not-italic relative shrink-0 text-[#ecfae5] text-[13.433px] tracking-[-0.403px] uppercase whitespace-nowrap"
+        data-node-id="3713:1967"
+      >
+        {label}
+      </p>
+      <CornerTick src={MENU_CORNER_L} placement="tl" nodeId="3713:1968" />
+      <CornerTick src={MENU_CORNER_L} placement="bl" nodeId="3713:1969" />
+      <div
+        className="absolute bg-white h-[12.399px] left-[12px] opacity-60 top-[7.3px] w-[2.067px]"
+        data-node-id="3713:1970"
+        aria-hidden
+      />
+      <div
+        className="-translate-y-1/2 absolute bg-white h-[12.399px] opacity-60 right-[12px] top-[calc(50%-0.5px)] w-[2.067px]"
+        data-node-id="3713:1971"
+        aria-hidden
+      />
+      <CornerTick src={MENU_CORNER_R} placement="tr" nodeId="3713:1972" />
+      <CornerTick src={MENU_CORNER_R} placement="br" nodeId="3713:1973" />
+    </div>
+  );
+}
+
+function GradientTitleBlock({ heading }: { heading: string }) {
+  return (
+    <div
+      className="flex flex-col items-center px-[10px] relative shrink-0"
+      data-node-id="3309:2373"
+      data-name="Title"
+    >
+      <h2
+        className={`${gilroyMedium.className} [word-break:break-word] bg-clip-text m-0 leading-[49px] not-italic relative shrink-0 text-[46px] text-center text-transparent whitespace-nowrap`}
+        style={{
+          backgroundImage: TITLE_GRADIENT,
+          WebkitBackgroundClip: "text",
+          backgroundClip: "text",
+        }}
+        data-node-id="3309:2374"
+      >
+        {heading}
+      </h2>
+      <CornerTick src={TITLE_CORNER_L} placement="tl" nodeId="3309:2375" />
+      <CornerTick src={TITLE_CORNER_R} placement="tr" nodeId="3309:2376" />
+      <CornerTick src={TITLE_CORNER_L} placement="bl" nodeId="3309:2377" />
+      <CornerTick src={TITLE_CORNER_R} placement="br" nodeId="3309:2378" />
+    </div>
+  );
+}
+
+function CardLine({ line }: { line: LineSpec }) {
+  const img = (
+    <div className="absolute inset-[-1px_0_0_0]">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img alt="" className="block max-w-none size-full" src={LINE} aria-hidden />
+    </div>
+  );
+  if (line.variant === "rotate") {
+    return (
+      <div
+        className="absolute flex h-[0.482px] items-center justify-center"
+        style={{ left: line.left, top: line.top, width: line.width }}
+        aria-hidden
+      >
+        <div className="flex-none rotate-[0.12deg]">
+          <div className="h-0 relative" style={{ width: line.width }}>
+            {img}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (line.variant === "skew") {
+    return (
+      <div
+        className="absolute flex h-0 items-center justify-center"
+        style={{ left: line.left, top: line.top, width: line.width }}
+        aria-hidden
+      >
+        <div className="flex-none skew-x-[-0.09deg]">
+          <div className="h-0 relative" style={{ width: line.width }}>
+            {img}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div
+      className="absolute h-0"
+      style={{ left: line.left, top: line.top, width: line.width }}
+      aria-hidden
+    >
+      {img}
+    </div>
+  );
+}
+
+type RenderCard = SpecCard & { iconSrc: string };
+
+function SpecCardView({ card }: { card: RenderCard }) {
+  return (
+    <div
+      className="absolute bg-[#1d201d] border border-solid overflow-clip rounded-[12px]"
+      style={{
+        left: card.left,
+        top: card.top,
+        height: card.height,
+        width: 378,
+        borderColor: card.borderColor,
+      }}
+      data-node-id={card.nodeId}
+      data-name="COntainer"
+    >
+      {/* Light face */}
+      <div
+        className="absolute bg-[#dbe8c8] border-[1.5px] border-[rgba(255,255,255,0)] border-solid"
+        style={{
+          height: card.face.height,
+          left: card.face.left,
+          top: card.face.top,
+          width: 378,
+        }}
+        aria-hidden
+      />
+      {/* Pattern gradient overlay */}
+      <div
+        className="absolute w-[378px]"
+        style={{
+          height: card.pattern.height,
+          backgroundImage: card.pattern.gradient,
+          ...card.pattern.style,
+        }}
+        data-name="Pattern"
+        aria-hidden
+      />
+      {/* Header */}
+      <div
+        className="absolute border-b border-solid flex flex-col items-start pb-[13px]"
+        style={{
+          left: card.header.left,
+          top: card.header.top,
+          width: card.header.width,
+          borderColor: BORDER_DARK,
+        }}
+        data-name="Container"
+      >
+        <p
+          className={`${gilroySemiBold.className} [word-break:break-word] leading-[16px] not-italic relative shrink-0 text-[18px] tracking-[0.6px] uppercase whitespace-nowrap`}
+          style={{ color: HEADER_COLOR }}
+        >
+          {card.title}
+        </p>
+      </div>
+      {/* Items with "+" markers */}
+      {card.items.map((it, i) => (
+        <Fragment key={i}>
+          <p
+            className={`${interRegular.className} [word-break:break-word] absolute font-normal leading-[normal] not-italic text-[14px] text-black tracking-[-0.1504px] whitespace-nowrap`}
+            style={{ left: card.itemsLeft, top: it.top }}
+          >
+            {it.text}
+          </p>
+          <p
+            className={`${interRegular.className} [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] absolute font-normal leading-[normal] not-italic text-[14px] tracking-[-0.1504px] whitespace-nowrap`}
+            style={{ left: card.plusLeft, top: it.plusTop, color: card.plusColor }}
+          >
+            +
+          </p>
+        </Fragment>
+      ))}
+      {/* Divider lines (white 4% — imperceptible on the light face, kept per design) */}
+      {card.lines.map((l, i) => (
+        <CardLine key={i} line={l} />
+      ))}
+      {/* Icon tile */}
+      <div
+        className="absolute overflow-clip rounded-[5.895px] size-[32px]"
+        style={{
+          left: card.icon.left,
+          top: card.icon.top,
+          backgroundImage: ICON_TILE_BG,
+        }}
+        data-name="Icon"
+        aria-hidden
+      >
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex items-center left-1/2 size-[22px] top-1/2">
+          <div className="relative shrink-0 size-[22px]" data-name="Frame">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              alt=""
+              className="absolute block inset-0 max-w-none size-full"
+              src={card.iconSrc}
+              aria-hidden
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function ProductsFullPicture({ data }: { data?: any }) {
   const heading = data?.heading || FALLBACK_HEADING;
-  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
-  const image = mediaUrl(data?.image) || "/products/full-picture.png";
+  const menuLabel = data?.menu_text || FALLBACK_MENU;
 
-  const memoryItems =
-    splitLinesFilter(data?.memory_items) || FALLBACK_MEMORY_ITEMS;
-  const securityItems =
-    splitLinesFilter(data?.security_items) || FALLBACK_SECURITY_ITEMS;
-  const connectivityItems =
-    splitLinesFilter(data?.connectivity_items) || FALLBACK_CONNECTIVITY_ITEMS;
-
-  const itemsByHeader: Record<string, string[]> = {
-    Memory: memoryItems,
-    Security: securityItems,
-    Connectivity: connectivityItems,
-  };
+  const memoryOverride = splitLinesFilter(data?.memory_items);
 
   const strapiCallouts: Record<string, string | null> = {};
   if (Array.isArray(data?.callouts)) {
@@ -119,317 +590,169 @@ export function ProductsFullPicture({ data }: { data?: any }) {
     }
   }
 
-  const callouts = FALLBACK_CALLOUTS.map((c) => {
-    const dynamicItems = itemsByHeader[c.header];
-    return {
-      ...c,
-      items: dynamicItems && dynamicItems.length > 0 ? dynamicItems : c.items,
-      icon: strapiCallouts[c.header] ?? null,
-    };
+  const cards: RenderCard[] = CARDS.map((c) => {
+    let items = c.items;
+    if (c.title === "Memory" && memoryOverride.length > 0) {
+      items = c.items.map((slot, i) => ({
+        ...slot,
+        text: memoryOverride[i] ?? slot.text,
+      }));
+    }
+    return { ...c, items, iconSrc: strapiCallouts[c.title] || ICON_GLYPH };
   });
 
   return (
     <>
-      {/* DESKTOP (>=1024px) */}
+      {/* DESKTOP (>=1024px) — 3309:2368 "Desktop - 16" (1440×930) */}
       <section
-        className="relative mx-auto hidden w-full bg-black min-[1024px]:block"
+        className="relative flex w-full justify-center bg-black"
         aria-label="The full picture"
       >
         <div
-          className="relative mx-auto"
-          style={{ width: CANVAS_WIDTH, height: SECTION_HEIGHT - 120 }}
-          data-node-id="2940:1244"
-          data-name="The full picture"
+          className="relative hidden h-[930px] w-full max-w-[1440px] min-[1024px]:block"
+          data-node-id="3309:2368"
+          data-name="Desktop - 16"
         >
-          <div className="relative size-full">
-            <FullPictureDesktop
-              heading={heading}
-              subtitle={subtitle}
-              image={image}
-              callouts={callouts}
-            />
+          {/* 3309:2369 — bottom aurora (rotated 180°) */}
+          <div
+            className="absolute flex h-[486px] items-center justify-center left-0 top-[444px] w-[1440px]"
+            data-node-id="3309:2369"
+          >
+            <div className="flex-none rotate-180">
+              <div className="h-[486px] relative w-[1440px]" data-name="footer">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  alt=""
+                  className="absolute inset-0 max-w-none object-bottom pointer-events-none size-full"
+                  src={AURORA}
+                  aria-hidden
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* 3309:2370 — top aurora (mirrored) */}
+          <div
+            className="absolute flex h-[463px] items-center justify-center left-0 top-[-18.5px] w-[1440px]"
+            data-node-id="3309:2370"
+          >
+            <div className="-scale-y-100 flex-none rotate-180">
+              <div className="h-[463px] relative w-[1440px]" data-name="footer">
+                <div aria-hidden className="absolute inset-0 pointer-events-none">
+                  <div className="absolute bg-black inset-0" />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    alt=""
+                    className="absolute max-w-none object-bottom size-full"
+                    src={AURORA}
+                    aria-hidden
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 3713:1975 — content frame (centered) */}
+          <div
+            className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col gap-[42px] items-center left-1/2 top-1/2 w-[1222px]"
+            data-node-id="3713:1975"
+          >
+            {/* Heading */}
+            <div
+              className="flex flex-col gap-[24px] items-center relative shrink-0 w-[800px]"
+              data-node-id="3309:2371"
+              data-name="Heading"
+            >
+              <MenuChip label={menuLabel} />
+              <div
+                className="flex flex-col gap-[24px] items-center justify-center relative shrink-0"
+                data-node-id="3309:2372"
+                data-name="Section Title"
+              >
+                <GradientTitleBlock heading={heading} />
+              </div>
+            </div>
+
+            {/* Card container */}
+            <div
+              className="h-[603px] relative shrink-0 w-full"
+              data-node-id="3309:2380"
+              data-name="Container"
+            >
+              {cards.map((c) => (
+                <SpecCardView key={c.nodeId} card={c} />
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* MOBILE (<1024px) */}
-      <FullPictureMobile
-        heading={heading}
-        subtitle={subtitle}
-        image={image}
-        callouts={callouts}
-      />
-    </>
-  );
-}
-
-function FullPictureDesktop({
-  heading,
-  subtitle,
-  image,
-  callouts,
-}: {
-  heading: string;
-  subtitle: string;
-  image: string;
-  callouts: Callout[];
-}) {
-  return (
-    <>
-      {/* Section title — 2940:1331 (centered, w=800) */}
-      <div
-        className="absolute flex flex-col items-center gap-[24px]"
-        style={{ left: 320, top: 52.5, width: 800 }}
-        data-node-id="2940:1331"
-        data-name="Frame 1984079432"
+      <section
+        className="relative w-full overflow-hidden bg-black px-[24px] pt-[64px] pb-[80px] min-[1024px]:hidden"
+        aria-label="The full picture"
       >
-        <div
-          className="relative px-[10px]"
-          style={{ width: 331, height: 49 }}
-          data-node-id="2940:1333"
-          data-name="Title"
-        >
-          <Corners />
+        <div className="flex flex-col items-center gap-[20px]">
+          <MenuChip label={menuLabel} />
           <h2
-            className={`${gilroyMedium.className} absolute m-0 w-[311px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} [word-break:break-word] bg-clip-text m-0 max-w-full text-center text-[30px] leading-[34px] font-medium text-transparent not-italic`}
             style={{
-              left: 10,
-              top: 0,
               backgroundImage: TITLE_GRADIENT,
               WebkitBackgroundClip: "text",
               backgroundClip: "text",
             }}
-            data-node-id="2940:1334"
           >
             {heading}
           </h2>
         </div>
-        <p
-          className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
-          data-node-id="2940:1339"
-        >
-          {subtitle}
-        </p>
-      </div>
 
-      {/* Central image — 2940:1245 */}
-      <div
-        className="pointer-events-none absolute overflow-hidden"
-        style={{
-          left: IMAGE.left,
-          top: IMAGE.top,
-          width: IMAGE.width,
-          height: IMAGE.height,
-        }}
-        data-node-id="2940:1245"
-        data-name="ChatGPT Image Jun 11, 2026, 07_07_16 PM 1"
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt="Sparsh module"
-          src={image}
-          className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
-        />
-        <div
-          className="absolute inset-0"
-          style={{ backgroundImage: IMAGE_VIGNETTE, opacity: 0.7 }}
-        />
-      </div>
-
-      {/* Spec callout cards */}
-      {callouts.map((callout) => (
-        <CalloutCard key={callout.nodeId} callout={callout} />
-      ))}
-    </>
-  );
-}
-
-function CalloutCard({ callout }: { callout: Callout }) {
-  return (
-    <div
-      className="absolute flex flex-col items-start gap-[8px] px-[12px] pb-[16px] pt-[8px] border border-white/10 rounded-[4px]"
-      style={{
-        left: callout.left,
-        top: callout.top,
-        width: CALLOUT_WIDTH,
-        backgroundColor: CARD_BG,
-      }}
-      data-node-id={callout.nodeId}
-      data-name="Content"
-    >
-      {/* Header (title + icon) — 2940:1341 */}
-      <div
-        className="flex w-full items-center justify-between border-b border-solid pb-[6px]"
-        style={{ borderColor: CARD_DIVIDER }}
-        data-node-id="2940:1341"
-        data-name="Container"
-      >
-        <p
-          className={`${gilroySemiBold.className} text-[16px] leading-[16px] font-semibold tracking-[0.6px] whitespace-nowrap uppercase not-italic`}
-          style={{ color: HEADER_COLOR }}
-        >
-          {callout.header}
-        </p>
-        <div
-          className="relative flex size-[27.649px] shrink-0 items-center justify-center overflow-clip rounded-[5.895px]"
-          style={{ backgroundImage: ICON_TILE_BG }}
-          aria-hidden
-          data-name="Icon"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt=""
-            src={callout.icon || "/products/spec-icon.svg"}
-            className="block size-[19.649px] max-w-none"
-          />
-        </div>
-      </div>
-
-      {/* Items with dividers between */}
-      {callout.items.map((item, i) => (
-        <div key={i} className="contents">
-          {i > 0 && (
-            <div className="flex h-[1px] w-full shrink-0 items-center justify-center overflow-visible">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                alt=""
-                src="/products/spec-line.svg"
-                className="block h-[1px] w-full max-w-none"
+        <div className="mt-[32px] grid grid-cols-1 gap-[16px]">
+          {cards.map((c) => (
+            <div
+              key={c.nodeId}
+              className="relative overflow-clip rounded-[12px] bg-[#dbe8c8] px-[15px] pt-[15px] pb-[16px]"
+            >
+              <div
+                className="pointer-events-none absolute inset-0"
+                style={{ backgroundImage: c.pattern.gradient }}
                 aria-hidden
               />
-            </div>
-          )}
-          <div className="relative h-[17px] w-full shrink-0">
-            <span
-              className={`${interRegular.className} absolute left-0 top-[1.5px] text-[14px] font-normal leading-[normal] tracking-[-0.1504px] not-italic`}
-              style={{ color: PLUS_COLOR }}
-            >
-              +
-            </span>
-            <span
-              className={`${interRegular.className} absolute left-[15px] top-0 text-[13px] font-normal leading-[normal] whitespace-nowrap not-italic`}
-              style={{ color: ITEM_TEXT_COLOR }}
-            >
-              {item}
-            </span>
-          </div>
-        </div>
-      ))}
-
-      <Corners />
-    </div>
-  );
-}
-
-function FullPictureMobile({
-  heading,
-  subtitle,
-  image,
-  callouts,
-}: {
-  heading: string;
-  subtitle: string;
-  image: string;
-  callouts: Callout[];
-}) {
-  return (
-    <section
-      className="relative w-full overflow-hidden bg-black px-[24px] pt-[64px] pb-[80px] min-[1024px]:hidden"
-      aria-label="The full picture"
-    >
-      {/* Title */}
-      <div className="flex flex-col items-center gap-[16px]">
-        <h2
-          className={`${gilroyMedium.className} max-w-full bg-clip-text text-center text-[30px] leading-[34px] font-medium text-transparent not-italic [word-break:break-word]`}
-          style={{
-            backgroundImage: TITLE_GRADIENT,
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-          }}
-        >
-          {heading}
-        </h2>
-        <p
-          className={`${interRegular.className} max-w-full text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65`}
-        >
-          {subtitle}
-        </p>
-      </div>
-
-      {/* Central image */}
-      <div className="relative mt-[24px]">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt="Sparsh module"
-          src={image}
-          className="h-auto w-full rounded-[8px]"
-        />
-      </div>
-
-      {/* Callouts as stacked grid */}
-      <div className="mt-[32px] grid grid-cols-1 gap-[24px] sm:grid-cols-2">
-        {callouts.map((callout) => (
-          <div
-            key={callout.nodeId}
-            className="relative flex flex-col gap-[8px] px-[12px] pb-[12px] pt-[8px] border border-white/10 rounded-[4px]"
-            style={{ backgroundColor: CARD_BG }}
-          >
-            <div
-              className="flex w-full items-center justify-between border-b border-solid pb-[6px]"
-              style={{ borderColor: CARD_DIVIDER }}
-            >
-              <p
-                className={`${gilroySemiBold.className} text-[14px] font-semibold tracking-[0.6px] uppercase not-italic`}
-                style={{ color: HEADER_COLOR }}
-              >
-                {callout.header}
-              </p>
               <div
-                className="flex size-[24px] items-center justify-center rounded-[5px]"
-                style={{ backgroundImage: ICON_TILE_BG }}
-                aria-hidden
+                className="relative flex w-full items-center justify-between border-b border-solid pb-[10px]"
+                style={{ borderColor: BORDER_DARK }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  alt=""
-                  src={callout.icon || "/products/spec-icon.svg"}
-                  className="block size-[16px]"
-                />
-              </div>
-            </div>
-            {callout.items.map((item, i) => (
-              <div key={i} className="contents">
-                {i > 0 && (
-                  <div className="flex h-[1px] w-full shrink-0 items-center justify-center overflow-visible">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      alt=""
-                      src="/products/spec-line.svg"
-                      className="block h-[1px] w-full max-w-none"
-                      aria-hidden
-                    />
-                  </div>
-                )}
-                <div className="relative h-[17px] w-full shrink-0">
-                  <span
-                    className={`${interRegular.className} absolute left-0 top-[1.5px] text-[14px] font-normal leading-[normal] tracking-[-0.1504px] not-italic`}
-                    style={{ color: PLUS_COLOR }}
-                  >
-                    +
-                  </span>
-                  <span
-                    className={`${interRegular.className} absolute left-[15px] top-0 text-[13px] font-normal leading-[normal] whitespace-nowrap not-italic`}
-                    style={{ color: ITEM_TEXT_COLOR }}
-                  >
-                    {item}
-                  </span>
+                <p
+                  className={`${gilroySemiBold.className} text-[16px] leading-[16px] not-italic tracking-[0.6px] uppercase whitespace-nowrap`}
+                  style={{ color: HEADER_COLOR }}
+                >
+                  {c.title}
+                </p>
+                <div
+                  className="flex size-[28px] items-center justify-center overflow-clip rounded-[5.895px]"
+                  style={{ backgroundImage: ICON_TILE_BG }}
+                  aria-hidden
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img alt="" src={c.iconSrc} className="block size-[19px] max-w-none" />
                 </div>
               </div>
-            ))}
-            <Corners />
-          </div>
-        ))}
-      </div>
-    </section>
+              <div className="relative mt-[10px] flex flex-col gap-[10px]">
+                {c.items.map((it, i) => (
+                  <p
+                    key={i}
+                    className={`${interRegular.className} text-[14px] font-normal leading-[normal] tracking-[-0.1504px] text-black not-italic`}
+                  >
+                    <span className="mr-[6px]" style={{ color: c.plusColor }}>
+                      +
+                    </span>
+                    {it.text}
+                  </p>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }

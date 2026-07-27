@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>html,body{margin:0;height:100%;overflow:hidden}iframe{border:0;width:100vw;height:100vh;display:block}</style>
+</head>
+<body>
+<iframe id="f" src="/products"></iframe>
+<script>
+  var y = Number(new URLSearchParams(location.search).get('y') || 0);
+  var f = document.getElementById('f');
+  f.addEventListener('load', function () {
+    setTimeout(function () {
+      var w = f.contentWindow;
+      var ls = w.locomotiveScroll;
+      if (ls && ls.lenisInstance) {
+        ls.lenisInstance.scrollTo(y, { immediate: true, force: true });
+      } else {
+        w.scrollTo(0, y);
+      }
+    }, 2200);
+  });
+</script>
+</body>
+</html>

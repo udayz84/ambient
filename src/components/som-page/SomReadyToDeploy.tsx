@@ -121,7 +121,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
             className={`${gilroyMedium.className} absolute left-[75.44px] top-[140.41px] w-[222px] text-[32px] leading-[38px] font-medium text-white not-italic [word-break:break-word]`}
             data-node-id="2438:5334"
           >
-            {primaryTitleLines.map((line, i) => (
+            {primaryTitleLines.map((line: string, i: number) => (
               <p key={i} className="leading-[38px]">
                 {line}
               </p>
@@ -188,7 +188,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
           <h3
             className={`${gilroyMedium.className} text-center text-[26px] leading-[32px] font-medium text-white not-italic [word-break:break-word]`}
           >
-            {primaryTitleLines.map((line, i) => (
+            {primaryTitleLines.map((line: string, i: number) => (
               <p key={i} className="leading-[32px]">
                 {line}
               </p>

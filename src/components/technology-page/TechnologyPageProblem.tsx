@@ -62,14 +62,14 @@ type StatRow = {
   valueWidth?: number;
 };
 
-const LEGACY_ROWS: StatRow[] = [
+const FALLBACK_LEGACY_ROWS: StatRow[] = [
   { label: "Where compute happens", value: "Outside Memory", valueColor: WHITE, top: 26.28 },
   { label: "Data Movement", value: "High", valueColor: WHITE, top: 59.01 },
   { label: "Efforts spent on moving data", value: "High", valueColor: RED, top: 91.74 },
   { label: "Efficiency", value: "Low", valueColor: RED, top: 123.72, valueTop: 123 },
 ];
 
-const ACUBE_ROWS: StatRow[] = [
+const FALLBACK_ACUBE_ROWS: StatRow[] = [
   { label: "Where compute happens", value: "Inside Memory", valueColor: WHITE, top: 26.2, valueWidth: 129 },
   { label: "Data Movement", value: "Minimal", valueColor: WHITE, top: 59.2 },
   { label: "Efforts spent on moving data", value: "Low", valueColor: GREEN, top: 92.2 },
@@ -431,7 +431,7 @@ function ChevronDecor() {
     <>
       <div
         className="animate-technology-chevron-flow absolute top-[484.42px] left-[688.88px] h-[97.26px] w-[47.33px]"
-        style={{ animationDelay: "0.75s" }}
+        style={{ animationDelay: "0s" }}
         data-node-id="3329:1028"
       >
         <div className="absolute inset-[-12.8%_-22.81%_-12.8%_-30.55%]">
@@ -441,7 +441,7 @@ function ChevronDecor() {
       </div>
       <div
         className="animate-technology-chevron-flow absolute top-[515.96px] left-[697.23px] h-[34.17px] w-[16.63px]"
-        style={{ animationDelay: "0.5s" }}
+        style={{ animationDelay: "-0.25s" }}
         data-node-id="3329:1030"
       >
         <div className="absolute inset-[-1.02%_-4.2%_-1.02%_-2.16%]">
@@ -451,7 +451,7 @@ function ChevronDecor() {
       </div>
       <div
         className="animate-technology-chevron-flow absolute top-[522.66px] left-[680.08px] h-[23.88px] w-[11.62px]"
-        style={{ animationDelay: "0.25s" }}
+        style={{ animationDelay: "-0.5s" }}
         data-node-id="3329:1031"
       >
         <div className="absolute inset-[-1.46%_-6.01%_-1.46%_-3.09%]">
@@ -461,7 +461,7 @@ function ChevronDecor() {
       </div>
       <div
         className="animate-technology-chevron-flow absolute top-[526.56px] left-[666.14px] h-[16.06px] w-[7.82px] mix-blend-luminosity"
-        style={{ animationDelay: "0s" }}
+        style={{ animationDelay: "-0.75s" }}
         data-node-id="3329:1228"
       >
         <div className="absolute inset-[-2.18%_-8.93%_-2.17%_-4.6%]">
@@ -473,7 +473,7 @@ function ChevronDecor() {
   );
 }
 
-function LegacyStatsPanel() {
+function LegacyStatsPanel({ rows }: { rows: StatRow[] }) {
   return (
     <div
       className="absolute top-[650px] left-[134px] h-[170px] w-[500px] bg-[rgba(128,128,128,0.1)]"
@@ -488,12 +488,12 @@ function LegacyStatsPanel() {
         nodeId="3329:1058"
       />
       <BottomCorners />
-      <StatRows rows={LEGACY_ROWS} valueRight={463.73} />
+      <StatRows rows={rows} valueRight={463.73} />
     </div>
   );
 }
 
-function ACubeStatsPanel() {
+function ACubeStatsPanel({ rows }: { rows: StatRow[] }) {
   return (
     <div
       className="absolute top-[652.05px] left-[754px] h-[164px] w-[575px] border border-solid border-[rgba(255,247,247,0.16)] bg-top-left"
@@ -509,7 +509,7 @@ function ACubeStatsPanel() {
         nodeId="3329:1217"
       />
       <BottomCorners />
-      <StatRows rows={ACUBE_ROWS} valueRight={540.81} />
+      <StatRows rows={rows} valueRight={540.81} />
     </div>
   );
 }
@@ -565,6 +565,32 @@ export function TechnologyPageProblem({ data }: { data?: any } = {}) {
   const legacy = cards[0] ?? FALLBACK_CARDS[0];
   const acube = cards[1] ?? FALLBACK_CARDS[1];
 
+  const strapiLegacyStats = Array.isArray(data?.legacy_stats) ? data.legacy_stats : null;
+  const legacyRows = (strapiLegacyStats && strapiLegacyStats.length > 0 ? strapiLegacyStats : FALLBACK_LEGACY_ROWS).map((r: any, i: number) => {
+    const fallback = FALLBACK_LEGACY_ROWS[i] || FALLBACK_LEGACY_ROWS[0];
+    return {
+      label: r?.label || fallback.label,
+      value: r?.value || fallback.value,
+      valueColor: r?.valueColor || fallback.valueColor,
+      top: fallback.top,
+      valueTop: fallback.valueTop,
+      valueWidth: fallback.valueWidth,
+    };
+  });
+
+  const strapiACubeStats = Array.isArray(data?.acube_stats) ? data.acube_stats : null;
+  const acubeRows = (strapiACubeStats && strapiACubeStats.length > 0 ? strapiACubeStats : FALLBACK_ACUBE_ROWS).map((r: any, i: number) => {
+    const fallback = FALLBACK_ACUBE_ROWS[i] || FALLBACK_ACUBE_ROWS[0];
+    return {
+      label: r?.label || fallback.label,
+      value: r?.value || fallback.value,
+      valueColor: r?.valueColor || fallback.valueColor,
+      top: fallback.top,
+      valueTop: fallback.valueTop,
+      valueWidth: fallback.valueWidth,
+    };
+  });
+
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -592,8 +618,8 @@ export function TechnologyPageProblem({ data }: { data?: any } = {}) {
           statDesc={statDesc}
         />
         <ChevronDecor />
-        <LegacyStatsPanel />
-        <ACubeStatsPanel />
+        <LegacyStatsPanel rows={legacyRows} />
+        <ACubeStatsPanel rows={acubeRows} />
       </div>
 
       {/* MOBILE (<1024px) — basic responsive version */}
@@ -689,7 +715,7 @@ export function TechnologyPageProblem({ data }: { data?: any } = {}) {
 
         {/* Legacy stats */}
         <div className="relative w-full max-w-[500px] bg-[rgba(128,128,128,0.1)] px-[20px] py-[24px]">
-          <MobileStatRows rows={LEGACY_ROWS} />
+          <MobileStatRows rows={legacyRows} />
         </div>
 
         {/* A-Cube stats */}
@@ -697,7 +723,7 @@ export function TechnologyPageProblem({ data }: { data?: any } = {}) {
           className="relative w-full max-w-[500px] border border-solid border-[rgba(255,247,247,0.16)] bg-top-left px-[20px] py-[24px]"
           style={{ backgroundImage: ACUBE_PANEL_BG, backgroundSize: ACUBE_BG_SIZE }}
         >
-          <MobileStatRows rows={ACUBE_ROWS} />
+          <MobileStatRows rows={acubeRows} />
         </div>
       </div>
     </section>

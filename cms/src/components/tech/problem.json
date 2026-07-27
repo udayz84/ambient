@@ -1,1 +1,50 @@
-{ "collectionName": "components_tech_problems", "info": { "displayName": "Problem", "description": "Technology problem section" }, "options": {}, "attributes": { "tag": { "type": "component", "repeatable": false, "component": "shared.tag" }, "heading": { "type": "string", "required": true }, "subtitle": { "type": "text" }, "stat_value": { "type": "string" }, "stat_description": { "type": "text" }, "background_image": { "type": "media", "multiple": false }, "alt": { "type": "string" }, "comparison_cards": { "type": "component", "repeatable": true, "component": "tech.problem-card" } } }
+{
+  "collectionName": "components_tech_problems",
+  "info": {
+    "displayName": "Problem",
+    "description": "Technology problem section"
+  },
+  "options": {},
+  "attributes": {
+    "tag": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.tag"
+    },
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "stat_value": {
+      "type": "string"
+    },
+    "stat_description": {
+      "type": "text"
+    },
+    "background_image": {
+      "type": "media",
+      "multiple": false
+    },
+    "alt": {
+      "type": "string"
+    },
+    "comparison_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "tech.problem-card"
+    },
+    "legacy_stats": {
+      "type": "component",
+      "repeatable": true,
+      "component": "tech.stat-row"
+    },
+    "acube_stats": {
+      "type": "component",
+      "repeatable": true,
+      "component": "tech.stat-row"
+    }
+  }
+}

@@ -21,25 +21,25 @@ const CARDS = [
     title: "Motion & Fall Detection",
     description:
       "Leverage the 6-axis IMU for microwatt-level continuous activity recognition and instant fall detection.",
-    image: null,
+    imageUrl: null,
   },
   {
     title: "Voice Identity & Commands",
     description:
       "Run continuous wake-word and secure voice authentication locally via the Knowles digital mic.",
-    image: null,
+    imageUrl: null,
   },
   {
     title: "Acoustic Anomalies",
     description:
       "Deploy models for health monitoring (like asthma/cough detection) or security (assault detection) entirely on-device, preserving user privacy.",
-    image: null,
+    imageUrl: null,
   },
   {
     title: "Safety & Geofencing",
     description:
       "Utilize the onboard BLE and processing technology to trigger instant localized alerts when boundaries are breached.",
-    image: null,
+    imageUrl: null,
   },
 ] as const;
 

@@ -373,30 +373,30 @@ const PRODUCTS_PAYLOAD = {
       "For a decade, product makers chose: a dumb MCU that lasts months, or a smart NPU that dies by lunch. GPX10 Pro is the first that refuses to choose.",
     feature_cards: [
       {
-        title: "AI features in a new form.",
+        title: "Premium AI features in a new form.",
         description:
-          "Utilize the onboard I2S and analog microphones to instantly test offline wake-word detection and continuous voice commands in physically noisy environments.",
+          "Run complex models in a hearing aid, a ring, a patch — no bulky battery, no redesign.",
         icon: media(ASSETS.products_features_icon_1),
         card_image: media(ASSETS.products_features_card_image),
       },
       {
         title: "Months on a coin cell.",
         description:
-          "Utilize the onboard I2S and analog microphones to instantly test offline wake-word detection and continuous voice commands in physically noisy environments.",
+          "Always-on AI at ~80 µW. Ship the battery life your reviews live or die on.",
         icon: media(ASSETS.products_features_icon_2),
         card_image: media(ASSETS.products_features_card_image),
       },
       {
         title: "Private by default.",
         description:
-          "Utilize the onboard I2S and analog microphones to instantly test offline wake-word detection and continuous voice commands in physically noisy environments.",
+          "Data never leaves the device. No cloud round-trip, no latency, no privacy liability.",
         icon: media(ASSETS.products_features_icon_2),
         card_image: media(ASSETS.products_features_card_image),
       },
       {
         title: "One chip replaces the stack.",
         description:
-          "Utilize the onboard I2S and analog microphones to instantly test offline wake-word detection and continuous voice commands in physically noisy environments.",
+          "MCU + AI accelerator + sensor hub + memory you’re juggling today — and it stays aware while it sleeps.",
         icon: media(ASSETS.products_features_icon_2),
         card_image: media(ASSETS.products_features_card_image),
       },
@@ -803,44 +803,8 @@ const TECHNOLOGY_PAYLOAD = {
   },
 
   efficiency: {
-    heading: "The efficiency gap isn't a few percent. It's a different category.",
+    heading: "The efficiency gap isn’t a few\npercent. It’s a different category.",
     subtitle: "The same chip, tuned to the job — from a wrist to a factory floor.",
-    headers: "APPROACH\tPeak compute\tPOWER\tEFFICIENCY\tTRADEOFF",
-    rows: [
-      {
-        approach: "Conventional MCU",
-        peak_compute: "0.002 GOPS",
-        power: "600 mW",
-        efficiency: "0.03 TOPS/W",
-        tradeoff: "No real AI",
-        is_highlighted: false,
-      },
-      {
-        approach: "MCU + NPU",
-        peak_compute: "100 GOPS",
-        power: "200 µW idle / 80 mW active",
-        efficiency: "1.2 TOPS/W",
-        tradeoff: "Fixed models, host polling",
-        is_highlighted: false,
-      },
-      {
-        approach: "GPU / EDGE Accelerator",
-        peak_compute: "1-10 TOPS",
-        power: "1-5 W",
-        efficiency: "2–5 TOPS/W",
-        tradeoff: "Needs cloud or wall power",
-        is_highlighted: false,
-      },
-      {
-        approach: "A-Cube",
-        peak_compute: "512 GOPS",
-        power: "~80 µW always-on",
-        efficiency: "~30 TOPS/W*",
-        tradeoff: "None — full AI at coin-cell power",
-        is_highlighted: true,
-      },
-    ],
-    footnote: "* Architectural efficiency, edge SKUs. Silicon-measured figures on the GPX10 page.",
   },
 
   bottom_cta: {

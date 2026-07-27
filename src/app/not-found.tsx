@@ -10,7 +10,17 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <main className="relative flex w-full flex-col items-center z-[10] pt-[40px] lg:pt-[80px] mb-[-300px] lg:mb-[-470px]">
-      <div className="relative flex flex-col items-center z-10 w-full max-w-[1440px] px-4">
+      <div className="relative flex flex-col items-center z-10 w-full max-w-[1440px] px-4 min-h-[500px]">
+        {/* Left cable */}
+        <div className="hidden lg:block -translate-x-1/2 absolute h-[264.732px] left-[calc(50%-361.16px)] mix-blend-screen top-[60px] w-[280.427px] overflow-hidden pointer-events-none">
+          <img alt="" className="absolute h-[139.65%] left-0 max-w-none top-[-19.82%] w-[180.37%]" src="/404-cable.png" />
+        </div>
+        
+        {/* Right cable */}
+        <div className="hidden lg:block -translate-x-1/2 absolute h-[264.732px] left-[calc(50%+391.16px)] mix-blend-screen top-[60px] w-[280.427px] overflow-hidden pointer-events-none">
+          <img alt="" className="absolute h-[139.65%] left-[-108.43%] max-w-none top-[-19.82%] w-[180.37%]" src="/404-cable.png" />
+        </div>
+
         <h1 
           className={`${gilroyBold.className} bg-clip-text text-[150px] lg:text-[280px] leading-none text-transparent opacity-86 tracking-[-4.8px] mb-[0px]`}
           style={{

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>html,body{margin:0;height:100%;overflow:hidden}iframe{border:0;width:100vw;height:100vh;display:block}</style>
+</head>
+<body>
+<iframe id="f" src="/products"></iframe>
+<script>
+  var f = document.getElementById('f');
+  f.addEventListener('load', function () {
+    setTimeout(function () {
+      var w = f.contentWindow, d = w.document;
+      var ls = w.locomotiveScroll;
+      if (ls && ls.lenisInstance) ls.lenisInstance.scrollTo(1000, { immediate: true, force: true });
+      var art = d.querySelector('article[data-node-id="3742:932"]');
+      if (!art) { document.title = 'no article'; return; }
+      var r = art.getBoundingClientRect();
+      var img = art.querySelector('img[src*="features-card-corners"]');
+      var ir = img ? img.getBoundingClientRect() : null;
+      var div = d.createElement('div');
+      div.style.cssText = 'position:fixed;left:8px;top:8px;z-index:99999;background:#000;color:#0f0;font:14px monospace;padding:8px;white-space:pre;';
+      div.textContent = 'article: ' + [r.left, r.top, r.width, r.height].join(',') +
+        '\nimg: ' + (ir ? [ir.left, ir.top, ir.width, ir.height].join(',') : 'MISSING') +
+        '\nimgSrc: ' + (img ? img.currentSrc.slice(-40) : '-') +
+        '\nimgNatural: ' + (img ? img.naturalWidth + 'x' + img.naturalHeight : '-');
+      d.body.appendChild(div);
+      // mark exact tick spots with magenta dots
+      [[0.4, 595], [387.6, 595], [0.4, 1], [387.6, 1]].forEach(function (p) {
+        var m = d.createElement('div');
+        m.style.cssText = 'position:fixed;z-index:99998;width:30px;height:30px;outline:2px solid #f0f;left:' +
+          (r.left + p[0] - 4) + 'px;top:' + (r.top + p[1] - 4) + 'px;';
+        d.body.appendChild(m);
+      });
+    }, 2600);
+  });
+</script>
+</body>
+</html>

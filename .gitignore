@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Figma and tmp files
+.tmp-figma/
+.figma-cache/
+scripts/.figma-cache/
+
+
+out.json
+query*.json
+test_query*.json
+scratch.html
