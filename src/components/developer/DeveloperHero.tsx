@@ -39,6 +39,12 @@ export function DeveloperHero({ data }: { data?: any }) {
                 "linear-gradient(247.952deg, rgba(0, 0, 0, 0) 62.969%, rgb(0, 0, 0) 95.031%)",
             }}
           />
+          {/* 
+            Cover for baked-in ghost text on the left edge of the image 
+            We use a black-to-transparent gradient to smoothly hide the artifacts 
+            without a hard clipping line.
+          */}
+          <div className="absolute left-0 top-0 bottom-0 w-[140px] bg-gradient-to-r from-black via-black/90 to-transparent" />
         </div>
       </div>
 

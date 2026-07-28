@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
@@ -17,7 +16,7 @@ const FALLBACK_SUBTITLE =
 const FALLBACK_CTA_LABEL = "Join the Waitlist";
 
 export function SomFooterMerge({ data }: { data?: any }) {
-  const image = mediaUrl(data?.image) || FALLBACK_IMAGE;
+  const image = FALLBACK_IMAGE;
   const heading = data?.heading || FALLBACK_HEADING;
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const ctaLabel = data?.cta_label || FALLBACK_CTA_LABEL;
@@ -57,7 +56,7 @@ export function SomFooterMerge({ data }: { data?: any }) {
             </p>
             <a
               href="#"
-              className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[231px] shrink-0 items-center justify-center overflow-hidden`}
+              className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[231px] shrink-0 items-center justify-center`}
             >
               <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
               <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
@@ -89,7 +88,7 @@ export function SomFooterMerge({ data }: { data?: any }) {
           </p>
           <a
             href="#"
-            className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-hidden`}
+            className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center`}
           >
             <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
             <span className="relative text-[14px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">

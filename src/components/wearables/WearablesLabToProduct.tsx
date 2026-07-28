@@ -118,7 +118,7 @@ function LabCard({ data, image }: { data: CardData; image: string }) {
         {/* CTA */}
         <a
           href={data.ctaHref}
-          className={`${gilroyMedium.className} absolute left-0 top-[461px] flex cursor-pointer items-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+          className={`${gilroyMedium.className} absolute left-0 top-[461px] flex cursor-pointer items-center bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
           data-name="CTA - Secondary"
         >
           <span className="whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic">
@@ -273,7 +273,7 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
               {/* CTA */}
               <a
                 href={card.ctaHref}
-                className={`${gilroyMedium.className} mt-[16px] flex h-[44px] w-full cursor-pointer items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)]`}
+                className={`${gilroyMedium.className} mt-[16px] flex h-[44px] w-full cursor-pointer items-center justify-center bg-[rgba(226,241,202,0.12)]`}
               >
                 <span className="relative whitespace-nowrap text-[13px] leading-[28px] font-medium text-white uppercase not-italic">
                   {card.cta}

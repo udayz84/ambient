@@ -63,11 +63,11 @@ function WatchExplainerCta({
   return (
     <a
       href={href}
-      className={`${gilroyMedium.className} relative block h-[48px] ${fullWidth ? "w-full" : "w-[263px]"} shrink-0 overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+      className={`${gilroyMedium.className} relative block h-[48px] ${fullWidth ? "w-full" : "w-[263px]"} shrink-0 bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
       data-node-id="2931:1459"
       data-name="CTA - Secondary"
     >
-      <span className="relative flex h-full items-center text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
+      <span className="relative flex h-full items-center text-[12px] min-[310px]:text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
         {label}
       </span>
       <GreenCtaCorners />

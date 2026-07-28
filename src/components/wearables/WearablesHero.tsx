@@ -8,7 +8,7 @@ import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const WEARABLES_BG_GRADIENT =
-  "linear-gradient(260.505deg, rgba(255, 255, 255, 0.12) 0.12143%, rgba(255, 255, 255, 0.6) 44.084%, rgba(255, 255, 255, 0) 113.37%)";
+  "linear-gradient(260.505deg, rgba(255, 255, 255, 0.35) 0.12143%, rgba(255, 255, 255, 0.85) 44.084%, rgba(255, 255, 255, 0.15) 113.37%)";
 
 const TITLE_GRADIENT =
   "linear-gradient(104.008deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -50,7 +50,7 @@ function SecondaryCta({ label, href }: { label: string; href: string }) {
   return (
     <a
       href={href}
-      className={`${gilroyMedium.className} relative flex shrink-0 cursor-pointer items-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+      className={`${gilroyMedium.className} relative flex shrink-0 cursor-pointer items-center bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
       data-node-id="2509:400"
       data-name="CTA - Secondary"
     >
@@ -141,9 +141,9 @@ export function WearablesHero({
           <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0)] from-[63.47%] to-black to-[90.573%]" />
         </div>
 
-        {/* Edge blending for ultra-wide screens */}
-        <div className="pointer-events-none absolute top-[-100px] bottom-[-100px] left-0 w-[200px] bg-gradient-to-r from-black to-transparent z-0" />
-        <div className="pointer-events-none absolute top-[-100px] bottom-[-100px] right-0 w-[200px] bg-gradient-to-l from-black to-transparent z-0" />
+        {/* Subtle edge blending */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-0 w-[60px] bg-gradient-to-r from-black/40 to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-0 w-[60px] bg-gradient-to-l from-black/40 to-transparent" />
 
         {/* Title — "Clinical precision. Coin-cell power." */}
         <div
@@ -276,7 +276,7 @@ export function WearablesHero({
             </a>
             <a
               href={secondaryHref}
-              className={`${gilroyMedium.className} relative flex h-[48px] w-full cursor-pointer items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)]`}
+              className={`${gilroyMedium.className} relative flex h-[48px] w-full cursor-pointer items-center justify-center bg-[rgba(226,241,202,0.12)]`}
             >
               <span className="relative whitespace-nowrap text-[14px] leading-[28px] font-medium text-white uppercase not-italic">
                 {secondaryLabel}

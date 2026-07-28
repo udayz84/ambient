@@ -98,7 +98,7 @@ function GraphCtas({
       </a>
       <a
         href={secondaryHref}
-        className={`${gilroyMedium.className} relative block h-[48px] w-[263px] shrink-0 overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+        className={`${gilroyMedium.className} relative block h-[48px] w-[263px] shrink-0 bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
         data-node-id="3035:725"
         data-name="CTA - Secondary"
       >
@@ -396,9 +396,9 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
           </a>
           <a
             href={secondaryHref}
-            className={`${gilroyMedium.className} relative block h-[48px] w-full overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+            className={`${gilroyMedium.className} relative block h-[48px] w-full bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
           >
-            <span className="relative flex h-full items-center justify-center text-[15px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
+            <span className="relative flex h-full items-center justify-center text-[12px] min-[290px]:text-[15px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
               {secondaryLabel}
             </span>
             <GreenCtaCorners />

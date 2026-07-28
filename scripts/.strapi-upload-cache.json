@@ -1356,5 +1356,19 @@
     "url": "/uploads/architecture_4ec3c9b07c.png",
     "name": "architecture.png",
     "sourcePath": "products/architecture.png"
+  },
+  "a43afee5cf037e59f75cd1e2ac3023b4cdb77ccd": {
+    "id": 270,
+    "documentId": "h5h8qziepal6idcz82a3kkmk",
+    "url": "/uploads/hero_bg_14421d8475.png",
+    "name": "hero-bg.png",
+    "sourcePath": "applications/hero-bg.png"
+  },
+  "8dc932695b69dd168592d379a5d152e614003f9a": {
+    "id": 271,
+    "documentId": "rzwa3zgv8dp9quinq1lhwknt",
+    "url": "/uploads/dvk_m_humanoid_2874dd58e4.png",
+    "name": "dvk-m-humanoid.png",
+    "sourcePath": "applications/dvk-m-humanoid.png"
   }
 }

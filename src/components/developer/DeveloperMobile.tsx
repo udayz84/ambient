@@ -88,7 +88,7 @@ function DeveloperHeroMobile({ data }: { data?: any }) {
         </a>
         <a
           href={secondaryHref}
-          className={`${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+          className={`${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-center bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
         >
           <span className="relative text-[14px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
             {secondaryLabel}
@@ -446,7 +446,7 @@ function DeveloperModulesMobile({ data }: { data?: any }) {
                 </div>
                 <a
                   href={ctaHref}
-                  className={`${gilroyMedium.className} relative flex h-[44px] w-full shrink-0 items-center justify-center gap-[8px] overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+                  className={`${gilroyMedium.className} relative flex h-[44px] w-full shrink-0 items-center justify-center gap-[8px] bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
                 >
                   <span className="relative text-[13px] leading-[20px] font-medium uppercase whitespace-nowrap text-white not-italic">
                     {ctaLabel}
@@ -540,7 +540,7 @@ function DeveloperCopilotsMobile({ data }: { data?: any }) {
               </div>
               <a
                 href={ctaHref}
-                className={`${gilroyMedium.className} relative flex h-[44px] w-full shrink-0 items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+                className={`${gilroyMedium.className} relative flex h-[44px] w-full shrink-0 items-center justify-center bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
               >
                 <span className="relative text-center text-[13px] leading-[20px] font-medium uppercase whitespace-nowrap text-white not-italic">
                   {ctaLabel}

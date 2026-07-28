@@ -472,7 +472,7 @@ function SecondaryCta({
   return (
     <a
       href={href}
-      className={`${gilroyMedium.className} relative flex h-[48px] shrink-0 items-center justify-center overflow-clip`}
+      className={`${gilroyMedium.className} relative flex h-[48px] shrink-0 items-center justify-center`}
       style={{ backgroundColor: SECONDARY_CTA_BG, width: 227 }}
       data-node-id="2901:2155"
       data-name="CTA - Secondary"
@@ -586,7 +586,7 @@ function ProductsUseCasesMobile({
         </a>
         <a
           href={secondary.href}
-          className={`${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-center overflow-clip`}
+          className={`${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-center`}
           style={{ backgroundColor: SECONDARY_CTA_BG }}
         >
           <span className="relative px-[20px] py-[10px] text-[14px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">

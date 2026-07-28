@@ -111,11 +111,11 @@ export function DeveloperPipeline({ data }: { data?: any }) {
       </div>
 
       {/* Active Tab Glow */}
-      {activeTab !== 1 && (
+      {activeTab !== 1 && activeTab !== 0 && (
         <div
           className="absolute w-[100px] h-[100px] rounded-full pointer-events-none transition-all duration-300"
           style={{
-            left: activeTab === 0 ? 524 : activeTab === 2 ? 773 : 920,
+            left: activeTab === 2 ? 773 : 920,
             top: 226.5,
             transform: "translate(-50%, -50%)",
             border: "2px solid rgba(108,237,63,1)",
@@ -126,27 +126,36 @@ export function DeveloperPipeline({ data }: { data?: any }) {
         />
       )}
 
-      {/* Logos — mix-blend-lighten, top 178.32 */}
+      {/* Combined Inactive Background */}
       <PipelineLogo
-        src={logos[0] || DEFAULT_LOGOS[0]}
-        left="calc(50% - 195.66px)"
-        width={152.288}
-        fit="object-bottom"
-        style={{ filter: activeTab === 0 ? "brightness(1.2)" : "brightness(0.7) grayscale(0.3)" }}
+        src="/developer/pipeline/ChatGPT%20Image%20May%2022,%202026,%2008_08_04%20PM%201.png"
+        left="50%"
+        width={544}
+        fit="object-contain"
+        style={{ filter: "none" }}
+      />
+      
+      {/* Active Overlays */}
+      <PipelineLogo
+        src="/developer/pipeline/active-1.png"
+        left="calc(50% - 212px)"
+        width={84}
+        fit="object-contain"
+        style={{ filter: "none", opacity: activeTab === 0 ? 1 : 0, marginTop: "0.5px" }}
       />
       <PipelineLogo
         src={logos[2] || DEFAULT_LOGOS[2]}
         left="calc(50% + 126.66px)"
         width={290.304}
         fit="object-bottom"
-        style={{ filter: activeTab === 2 || activeTab === 3 ? "none" : "brightness(0.7) grayscale(0.3)" }}
+        style={{ filter: activeTab === 2 || activeTab === 3 ? "none" : "brightness(0.7) grayscale(0.3)", opacity: activeTab === 2 || activeTab === 3 ? 1 : 0 }}
       />
       <PipelineLogo
         src={logos[1] || DEFAULT_LOGOS[1]}
         left="calc(50% - 69.01px)"
-        width={101.024}
+        width={110}
         fit="object-cover"
-        style={{ filter: activeTab === 1 ? "brightness(1.2)" : "brightness(0.4) grayscale(0.6)" }}
+        style={{ filter: activeTab === 1 ? "brightness(1.2)" : "brightness(0.4) grayscale(0.6)", opacity: activeTab === 1 ? 1 : 0 }}
       />
 
       {/* Clickable hotspots to change active tab diagram */}
@@ -229,16 +238,7 @@ function FlowDiagram({
 }) {
   return (
     <div className="pointer-events-none">
-      <style>{`
-        @keyframes sweep {
-          0% { transform: translateX(-200%); }
-          100% { transform: translateX(300%); }
-        }
-        .animate-sweep {
-          animation: sweep 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-        }
-      `}</style>
-      
+
       {/* State 0: Train */}
       <div
         className={`absolute -translate-x-1/2 overflow-hidden transition-opacity duration-300 ${activeTab === 0 ? "opacity-100" : "opacity-0"}`}
@@ -247,7 +247,7 @@ function FlowDiagram({
         <div className="absolute inset-0 overflow-hidden">
           <img alt="" src={flowSrc(0)} className="absolute left-[-36.45%] top-[-42.84%] h-[194.25%] w-[138.68%] max-w-none" />
         </div>
-        <div className="absolute top-0 bottom-0 w-[30%] bg-gradient-to-r from-transparent via-white/50 to-transparent mix-blend-color-dodge animate-sweep pointer-events-none blur-lg" />
+
       </div>
 
       {/* State 1: Optimize */}
@@ -258,7 +258,7 @@ function FlowDiagram({
         <div className="absolute inset-0 overflow-hidden">
           <img alt="" src={flowSrc(1)} className="absolute left-[-28.88%] top-[-36.36%] h-[181.28%] w-[128.88%] max-w-none" />
         </div>
-        <div className="absolute top-0 bottom-0 w-[30%] bg-gradient-to-r from-transparent via-white/50 to-transparent mix-blend-color-dodge animate-sweep pointer-events-none blur-lg" />
+
       </div>
 
       {/* State 2: Integrate */}
@@ -267,7 +267,7 @@ function FlowDiagram({
         style={{ left: "50%", top: 342.58, width: 1271.162, height: 284.896 }}
       >
         <img alt="" src={flowSrc(2)} className="absolute inset-0 size-full max-w-none object-cover" />
-        <div className="absolute top-0 bottom-0 w-[30%] bg-gradient-to-r from-transparent via-white/50 to-transparent mix-blend-color-dodge animate-sweep pointer-events-none blur-lg" />
+
       </div>
 
       {/* State 3: Deploy */}
@@ -276,7 +276,7 @@ function FlowDiagram({
         style={{ left: "50%", top: 361.08, width: 1280.186, height: 216.001 }}
       >
         <img alt="" src={flowSrc(3)} className="absolute inset-0 size-full max-w-none object-cover" />
-        <div className="absolute top-0 bottom-0 w-[30%] bg-gradient-to-r from-transparent via-white/50 to-transparent mix-blend-color-dodge animate-sweep pointer-events-none blur-lg" />
+
       </div>
     </div>
   );

@@ -198,7 +198,7 @@ function PillarCta({ pillar }: { pillar: Pillar }) {
   return (
     <a
       href={pillar.ctaHref || "/developer"}
-      className={`${gilroyMedium.className} relative block h-[48px] w-[250px] max-[1023px]:w-full shrink-0 overflow-clip ${CTA_SHADOW}`}
+      className={`${gilroyMedium.className} relative block h-[48px] w-[250px] max-[1023px]:w-full shrink-0 ${CTA_SHADOW}`}
       data-node-id="3919:515"
       data-name="Cta"
     >

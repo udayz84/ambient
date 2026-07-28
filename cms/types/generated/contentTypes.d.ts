@@ -503,7 +503,10 @@ export interface ApiApplicationsPageApplicationsPage
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    dvk: Schema.Attribute.Component<'apps.dvk', false>;
+    death_of_hardware_tradeoffs: Schema.Attribute.Component<
+      'apps.death-of-hardware-tradeoffs',
+      false
+    >;
     hero: Schema.Attribute.Component<'apps.hero', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<

@@ -20,8 +20,8 @@ export default async function SomPage() {
   try {
     data = await getSingleType<any>("som-page", [
       "hero",
-      { section: "features", fields: ["icon_background"], nested: ["cards"] },
-      { section: "ecosystem", fields: ["background_image", "chip_image"], nested: ["cards"] },
+      { section: "features", nested: ["cards"] },
+      { section: "ecosystem", nested: ["cards"] },
       { section: "inside_module", fields: ["image"], nested: ["specs"] },
       { section: "prototype", nested: ["cards"] },
       { section: "intelligence", nested: ["cards"] },
@@ -35,14 +35,14 @@ export default async function SomPage() {
 
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
-      {data?.hero && <SomHero data={data.hero} />}
-      {data?.features && <SomFeatures data={data.features} />}
-      {data?.ecosystem && <SomEcosystem data={data.ecosystem} />}
-      {data?.inside_module && <SomInsideModule data={data.inside_module} />}
-      {data?.prototype && <SomPrototypeTitle data={data.prototype} />}
-      {data?.intelligence && <SomIntelligence data={data.intelligence} />}
-      {data?.ready_to_deploy && <SomReadyToDeploy data={data.ready_to_deploy} />}
-      {data?.footer_merge && <SomFooterMerge data={data.footer_merge} />}
+      <SomHero data={data?.hero} />
+      <SomFeatures data={data?.features} />
+      <SomEcosystem data={data?.ecosystem} />
+      <SomInsideModule data={data?.inside_module} />
+      <SomPrototypeTitle data={data?.prototype} />
+      <SomIntelligence data={data?.intelligence} />
+      <SomReadyToDeploy data={data?.ready_to_deploy} />
+      <SomFooterMerge data={data?.footer_merge} />
     </main>
   );
 }

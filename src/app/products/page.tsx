@@ -9,6 +9,7 @@ import { ProductsModelForge } from "@/components/products-page/ProductsModelForg
 import { ProductsBenchToVolume } from "@/components/products-page/ProductsBenchToVolume";
 import { ProductsFullPicture } from "@/components/products-page/ProductsFullPicture";
 import { ProductsStartBuilding } from "@/components/products-page/ProductsStartBuilding";
+import { ProductsStickyNav } from "@/components/products-page/ProductsStickyNav";
 import { getSingleType } from "@/lib/strapi";
 
 export const metadata: Metadata = {
@@ -44,14 +45,15 @@ export default async function ProductsPage() {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       <ProductsHero data={data?.hero} />
-      <ProductsFeatures data={data?.features} />
-      <ProductsAlwaysOn data={data?.always_on} />
-      <ProductsUseCases data={data?.use_cases} />
-      <ProductsMeasured data={data?.measured} />
-      <ProductsArchitecture data={data?.architecture} />
+      <ProductsStickyNav />
+      <div id="features"><ProductsFeatures data={data?.features} /></div>
+      <div id="always-on"><ProductsAlwaysOn data={data?.always_on} /></div>
+      <div id="use-cases"><ProductsUseCases data={data?.use_cases} /></div>
+      <div id="metrics"><ProductsMeasured data={data?.measured} /></div>
+      <div id="architecture"><ProductsArchitecture data={data?.architecture} /></div>
       <ProductsModelForge data={data?.modelforge} />
       <ProductsBenchToVolume data={data?.bench_to_volume} />
-      <ProductsFullPicture data={data?.full_picture} />
+      <div id="full-picture"><ProductsFullPicture data={data?.full_picture} /></div>
       <ProductsStartBuilding data={data?.start_building} />
     </main>
   );

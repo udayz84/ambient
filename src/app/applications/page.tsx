@@ -18,7 +18,7 @@ export default async function ApplicationsPage() {
   try {
     data = await getSingleType<any>("applications-page", [
       "hero",
-      { section: "dvk", fields: ["background_image", "bottom_background", "orbit_visual"], nested: ["center_card", "satellite_cards"] },
+      { section: "death_of_hardware_tradeoffs", fields: ["carousel_images"], nested: ["features"] },
       "continuum",
       { section: "articles", nested: ["articles"] },
       { section: "wins", nested: ["cards"] },
@@ -32,7 +32,9 @@ export default async function ApplicationsPage() {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       {data?.hero && <ApplicationsPageHero data={data.hero} />}
-      {data?.dvk && <ApplicationsPageDvk data={data.dvk} />}
+      {data?.death_of_hardware_tradeoffs && (
+        <ApplicationsPageDvk data={data.death_of_hardware_tradeoffs} />
+      )}
       {data?.continuum && <ApplicationsPageContinuum data={data.continuum} />}
       {data?.articles && <ApplicationsPageArticles data={data.articles} />}
       {data?.wins && <ApplicationsPageWins data={data.wins} />}

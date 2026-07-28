@@ -23,7 +23,7 @@ function RequestCta({ label }: { label: string }) {
   return (
     <a
       href="#"
-      className={`relative flex h-[48px] w-[262px] shrink-0 items-center justify-center overflow-clip ${GREEN_CTA_SHADOW}`}
+      className={`relative flex h-[48px] w-[262px] shrink-0 items-center justify-center ${GREEN_CTA_SHADOW}`}
       data-node-id="2438:5362"
       data-name="Cta"
     >

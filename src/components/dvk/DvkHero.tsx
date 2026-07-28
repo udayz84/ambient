@@ -201,7 +201,7 @@ function PrimaryCta({ children }: { children: React.ReactNode }) {
   return (
     <a
       href="#"
-      className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[229px] shrink-0 items-center justify-center overflow-hidden`}
+      className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[229px] shrink-0 items-center justify-center`}
       data-node-id="2761:2988"
       data-name="Cta"
     >

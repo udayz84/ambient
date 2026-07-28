@@ -13,8 +13,8 @@ const FALLBACK_SUBTITLE =
 const IMG_OVERLAY_1 =
   "linear-gradient(185.768deg, rgb(0, 0, 0) 6.3744%, rgba(0, 0, 0, 0) 20.894%)";
 
-const CARD_BORDER = "border border-solid border-[#ccd7ff]";
-const CARD_BG = `bg-gradient-to-b from-[#0c160b] to-[rgba(12,22,11,0)] ${CARD_BORDER} rounded-[1px] overflow-clip`;
+const CARD_BORDER = "";
+const CARD_BG = `bg-gradient-to-b from-[#0c160b] to-[rgba(12,22,11,0)] rounded-[1px] overflow-clip`;
 
 const GREEN_BAR_SMALL =
   "bg-gradient-to-b from-[42.377%] from-[rgba(140,230,108,0.5)] to-[150.73%] to-[rgba(27,47,20,0.5)] mix-blend-luminosity";
@@ -88,10 +88,6 @@ function HealthCard({ data }: { data?: any }) {
       data-name="Card"
     >
       <CardAbstractBg />
-      <Corners
-        leftSrc="/applications/wearables/vector-47.svg"
-        rightSrc="/applications/wearables/vector-46.svg"
-      />
       {/* Badge */}
       <div className="absolute left-[35px] top-[33.74px] flex items-center gap-[27.778px]">
         <Badge label={badge} width={137} />
@@ -113,7 +109,7 @@ function HealthCard({ data }: { data?: any }) {
       {/* CTA */}
       <a
         href="#"
-        className={`${gilroyMedium.className} absolute left-[35px] top-[238.74px] h-[48px] w-[251px] cursor-pointer overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+        className={`${gilroyMedium.className} absolute left-[35px] top-[238.74px] flex h-[48px] w-[251px] items-center justify-center gap-[8px] cursor-pointer overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
         data-name="Cta"
       >
         <span
@@ -121,13 +117,13 @@ function HealthCard({ data }: { data?: any }) {
           className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
         />
         <GreenCtaCorners />
-        <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic">
+        <span className="relative z-10 whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic">
           {ctaLabel}
         </span>
         <img
           alt=""
           src="/applications/wearables/cta-icon.svg"
-          className="absolute left-[213px] top-[14.03px] size-[20px] max-w-none"
+          className="relative z-10 size-[20px] max-w-none"
           aria-hidden
         />
         <span
@@ -220,10 +216,6 @@ function PowerCard({ data }: { data?: any }) {
       data-name="Card"
     >
       <CardAbstractBg />
-      <Corners
-        leftSrc="/applications/wearables/vector-47.svg"
-        rightSrc="/applications/wearables/vector-46.svg"
-      />
       {/* Badge centered */}
       <div className="absolute left-1/2 top-[26.75px] -translate-x-1/2">
         <Badge label={badge} width={176} />
@@ -332,10 +324,6 @@ function WorkloadCard({ data }: { data?: any }) {
       data-name="Card"
     >
       <CardAbstractBg />
-      <Corners
-        leftSrc="/applications/wearables/vector-47.svg"
-        rightSrc="/applications/wearables/vector-46.svg"
-      />
       {/* Badge centered */}
       <div className="absolute left-1/2 top-[26.75px] -translate-x-1/2">
         <Badge label={badge} width={137} />
@@ -374,21 +362,17 @@ function EcgCard({
 }) {
   return (
     <div
-      className={`relative h-[292px] w-[301px] shrink-0 ${CARD_BG}`}
+      className="relative h-[292px] w-[301px] shrink-0 bg-gradient-to-b from-[#0c160b] to-[rgba(12,22,11,0)] rounded-[1px]"
       data-name="Card"
     >
       <CardAbstractBg />
-      <Corners
-        leftSrc="/applications/wearables/vector-47.svg"
-        rightSrc="/applications/wearables/vector-46.svg"
-      />
       {/* Image */}
       <div
-        className="pointer-events-none absolute left-[51.16px] top-[-8.26px] flex size-[283.436px] items-center justify-center mix-blend-lighten"
+        className="pointer-events-none absolute left-[calc(50%+35px)] -translate-x-1/2 top-[-8.26px] flex size-[250px] items-center justify-center mix-blend-lighten"
         aria-hidden
       >
         <div className="-scale-y-100 flex-none rotate-180">
-          <div className="relative size-[283.436px] scale-85" data-name="image">
+          <div className="relative size-[250px] scale-85" data-name="image">
             <img alt="" src={imageSrc} className="absolute size-full max-w-none object-cover" />
             <div className="absolute inset-0" style={{ backgroundImage: IMG_OVERLAY_1 }} />
           </div>

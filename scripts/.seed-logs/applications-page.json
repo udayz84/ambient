@@ -5,32 +5,37 @@
     },
     "title": "Intelligence in Every Environment",
     "subtitle": "From microwatt edge sensors running on coin cells to air-cooled high-performance compute arrays, the GPX architecture scales seamlessly across the physical world.",
-    "background_image": 103,
-    "title_frame": null
+    "background_image": 270
   },
-  "dvk": {
+  "death_of_hardware_tradeoffs": {
     "heading": "The death of hardware tradeoffs.",
     "subtitle": "Legacy silicon forces you to choose. High performance or low power. Complex models or small footprint. We re-architected the physics so you can finally unleash your creativity and build with freedom.",
-    "background_image": null,
-    "bottom_background": null,
-    "orbit_visual": null,
-    "center_card": {
-      "caption": "Wearables",
-      "caption_body": "Always-on biometric tracking and complex activity recognition running continuously on standard wearable batteries.",
-      "image": 16
-    },
-    "satellite_cards": [
+    "carousel_images": [
+      16,
+      18,
+      271,
+      23,
+      21,
+      20
+    ],
+    "features": [
       {
-        "image": 18
+        "title": "Complex AI Model"
       },
       {
-        "image": 23
+        "title": "Realtime & low latency"
       },
       {
-        "image": 108
+        "title": "Ondevice, cloud-free"
       },
       {
-        "image": 21
+        "title": "Compact footprint"
+      },
+      {
+        "title": "Programmable & future proof"
+      },
+      {
+        "title": "Ultra -low power consumption"
       }
     ]
   },

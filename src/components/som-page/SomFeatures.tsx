@@ -179,7 +179,7 @@ export function SomFeatures({ data }: { data?: any }) {
           className="flex w-full items-center gap-[36px] pt-[30px]"
           data-node-id="2438:4887"
         >
-          {CARDS.map((card, i) => (
+          {cards.map((card, i) => (
             <FeatureCard key={i} {...card} />
           ))}
         </div>
@@ -215,8 +215,8 @@ export function SomFeatures({ data }: { data?: any }) {
 
         {/* Stacked cards */}
         <div className="flex w-full flex-col gap-[24px]">
-          {CARDS.map((card) => (
-            <FeatureCard key={card.title} {...card} />
+          {cards.map((card, i) => (
+            <FeatureCard key={i} {...card} />
           ))}
         </div>
       </div>

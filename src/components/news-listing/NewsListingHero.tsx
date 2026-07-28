@@ -18,8 +18,8 @@ type NewsListingHeroProps = {
 };
 
 export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
-  const mainBackgroundImage = FALLBACK_HERO_IMAGE;
-  const featuredImage = mediaUrl(data?.background_image) || FALLBACK_HERO_IMAGE;
+  const mainBackgroundImage = mediaUrl(data?.background_image) || FALLBACK_HERO_IMAGE;
+  const featuredImage = FALLBACK_HERO_IMAGE;
   const tagText = (data?.tag?.text as string) || FALLBACK_TAG;
   const title = (data?.title as string) || FALLBACK_TITLE;
   const subtitle = (data?.subtitle as string) || FALLBACK_SUBTITLE;

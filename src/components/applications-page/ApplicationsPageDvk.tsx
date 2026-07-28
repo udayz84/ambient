@@ -302,6 +302,23 @@ const MARQUEE_COLUMNS: Array<{
   },
 ];
 
+const COLUMN_LAYOUTS = MARQUEE_COLUMNS.map((c) => ({
+  offset: c.offset,
+  top: c.top,
+  gap: c.gap,
+  direction: c.direction,
+  setsPerHalf: c.setsPerHalf,
+}));
+
+/** Distribute a flat list of carousel image URLs across the two columns. */
+function buildColumns(images: string[]): typeof MARQUEE_COLUMNS {
+  const groups: MarqueeCardDef[][] = [[], []];
+  images.forEach((src, i) => {
+    groups[i % 2].push({ height: 219, imageSrc: src, nodeId: `carousel-${i}` });
+  });
+  return COLUMN_LAYOUTS.map((layout, idx) => ({ ...layout, cards: groups[idx] }));
+}
+
 const FEATURE_NODE_IDS = [
   "3591:1765",
   "3591:1786",
@@ -324,19 +341,32 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
   const heading = data?.heading || FALLBACK_HEADING;
   const subtitle = data?.subtitle || SUBTITLE;
 
-  const satelliteCards: any[] = Array.isArray(data?.satellite_cards)
-    ? data.satellite_cards
-    : [];
+  // Carousel images drive both marquee columns. When the CMS provides images
+  // they are distributed across the two columns (interleaved) so any image
+  // added in Strapi automatically appears in the carousel. When absent, the
+  // hardcoded pixel-perfect fallback columns are used.
+  const cmsCarousel: string[] = (Array.isArray(data?.carousel_images)
+    ? data.carousel_images
+    : []
+  )
+    .map((m: any) => mediaUrl(m))
+    .filter((u: string | null): u is string => !!u);
 
-  // Flat card index across both columns (col A first) for CMS overrides
-  const cardAt = (colIdx: number, cardIdx: number) => {
-    const base = colIdx === 0 ? 0 : MARQUEE_COLUMNS[0].cards.length;
-    const card = MARQUEE_COLUMNS[colIdx].cards[cardIdx];
-    return {
-      ...card,
-      imageSrc: mediaUrl(satelliteCards[base + cardIdx]?.image) || card.imageSrc,
-    };
-  };
+  const columns =
+    cmsCarousel.length > 0 ? buildColumns(cmsCarousel) : MARQUEE_COLUMNS;
+
+  const mobileCards: { imageSrc: string; nodeId: string }[] =
+    cmsCarousel.length > 0
+      ? cmsCarousel.slice(0, 4).map((src, i) => ({
+          imageSrc: src,
+          nodeId: `carousel-m-${i}`,
+        }))
+      : [
+          MARQUEE_COLUMNS[0].cards[0],
+          MARQUEE_COLUMNS[1].cards[1],
+          MARQUEE_COLUMNS[0].cards[1],
+          MARQUEE_COLUMNS[1].cards[2],
+        ];
 
   const features: string[] = Array.isArray(data?.features)
     ? data.features.map(
@@ -355,15 +385,15 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
       {/* DESKTOP (>=1024px) */}
       <div className="relative hidden h-[825px] w-full max-w-[1440px] min-[1024px]:block">
         {/* Marquee columns (opposite directions) */}
-        {MARQUEE_COLUMNS.map((col, colIdx) => (
+        {columns.map((col, colIdx) => (
           <MarqueeColumn
-            key={col.offset}
+            key={colIdx}
             offset={col.offset}
             top={col.top}
             gap={col.gap}
             direction={col.direction}
             setsPerHalf={col.setsPerHalf}
-            cards={col.cards.map((_, cardIdx) => cardAt(colIdx, cardIdx))}
+            cards={col.cards}
           />
         ))}
 
@@ -449,28 +479,26 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
 
           {/* Product cards */}
           <div className="grid w-full max-w-[496px] grid-cols-2 gap-[18px]">
-            {[cardAt(0, 0), cardAt(1, 1), cardAt(0, 1), cardAt(1, 2)].map(
-              (card) => (
-                <div
-                  key={card.nodeId}
-                  className="relative flex w-full flex-col items-center justify-center gap-[10px] p-[10px] backdrop-blur-[10px]"
-                  style={{
-                    aspectRatio: "238 / 219",
-                    background: MARQUEE_CARD_BG,
-                  }}
-                >
-                  <div className="relative aspect-[194.886/153.968] w-[82%] shrink-0">
-                    <img
-                      alt=""
-                      aria-hidden
-                      src={card.imageSrc}
-                      className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
-                    />
-                  </div>
-                  <CardCorners w={2.122} h={1.995} src={SMALL_CORNER} />
+            {mobileCards.map((card) => (
+              <div
+                key={card.nodeId}
+                className="relative flex w-full flex-col items-center justify-center gap-[10px] p-[10px] backdrop-blur-[10px]"
+                style={{
+                  aspectRatio: "238 / 219",
+                  background: MARQUEE_CARD_BG,
+                }}
+              >
+                <div className="relative aspect-[194.886/153.968] w-[82%] shrink-0">
+                  <img
+                    alt=""
+                    aria-hidden
+                    src={card.imageSrc}
+                    className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+                  />
                 </div>
-              ),
-            )}
+                <CardCorners w={2.122} h={1.995} src={SMALL_CORNER} />
+              </div>
+            ))}
           </div>
 
           {/* Feature cards */}

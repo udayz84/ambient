@@ -257,7 +257,7 @@ function GreenCta({ children, width, fullWidth = false, href = "#" }: { children
   return (
     <a
       href={href}
-      className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[52px] ${fullWidth ? "w-full" : "shrink-0"} items-center justify-center overflow-hidden`}
+      className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[52px] ${fullWidth ? "w-full" : "shrink-0"} items-center justify-center`}
       style={fullWidth ? undefined : { width }}
     >
       <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />

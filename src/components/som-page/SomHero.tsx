@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { RepelDots } from "../shared/RepelDots";
 import { Corners } from "../shared/Corners";
@@ -56,7 +55,7 @@ function PrimaryCtaCorners() {
 
 export function SomHero({ data }: { data?: any }) {
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
-  const backgroundImage = mediaUrl(data?.background_image) || FALLBACK_BG;
+  const backgroundImage = FALLBACK_BG;
   const rawTitle = data?.title || FALLBACK_TITLE;
   const titleLines = (rawTitle === "The shortest path to volume production." ? "The shortest path to\nvolume production." : rawTitle).split("\n");
   const primaryLabel =
@@ -192,7 +191,7 @@ export function SomHero({ data }: { data?: any }) {
               {/* Secondary CTA */}
               <a
                 href={secondaryHref}
-                className={`${gilroyMedium.className} relative h-[48px] w-[226px] shrink-0 overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+                className={`${gilroyMedium.className} relative h-[48px] w-[226px] shrink-0 bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
                 data-node-id="3210:1569"
                 data-name="CTA - Secondary"
               >
@@ -270,7 +269,7 @@ export function SomHero({ data }: { data?: any }) {
             {/* Secondary CTA */}
             <a
               href={secondaryHref}
-              className={`${gilroyMedium.className} relative block h-[48px] w-full overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+              className={`${gilroyMedium.className} relative block h-[48px] w-full bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
             >
               <p className="absolute left-1/2 top-[calc(50%-14px)] -translate-x-1/2 text-[14px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
                 {secondaryLabel}

@@ -1,4 +1,5 @@
 import { gilroyMedium, interRegular, dmMono } from "../hero/fonts";
+import { mediaUrl } from "@/lib/strapi";
 import { Corners } from "../shared/Corners";
 import {
   CORNER_LEFT,
@@ -9,7 +10,15 @@ import {
 const DEFAULT_HEADING = "Powered by ModelForge.";
 const DEFAULT_SUBTITLE =
   "Don't let software be the bottleneck. The Cranium DVK is fully supported by our unified software toolchain, designed to take you from a standard TensorFlow model to on-silicon inference in under 15 minutes.";
+const DEFAULT_TOOLCHAIN_TITLE = "ModelForge SDK";
+const DEFAULT_TOOLCHAIN_SUBTITLE = "Pre-integrated RTOS & Eclipse-based Unified Build";
 const DEFAULT_TOOLCHAIN_LABELS = "RTOS\nDRIVERS\nCOMPILER";
+const DEFAULT_FLOATING_TAGS = "RTOS\nDSP\nDrivers\nBuild";
+
+const DEFAULT_YOUR_MODEL_TITLE = "Your Model";
+const DEFAULT_YOUR_MODEL_DESC = "Automated TFLite conversion & quantization";
+const DEFAULT_DVK_BOARD_TITLE = "Cranium DVK";
+const DEFAULT_DVK_BOARD_DESC = "15 minutes to on-silicon execution";
 
 const ABSTRACT_IMG = "/dvk/modelforge-abstract.svg";
 const CENTER_IMG = "/dvk/modelforge-center.webp";
@@ -37,9 +46,26 @@ const MEDIA_RADIAL =
 export function DvkModelForge({ data }: { data?: any }) {
   const heading = data?.heading || DEFAULT_HEADING;
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
-  const toolchainLabels = (data?.toolchain_labels || DEFAULT_TOOLCHAIN_LABELS)
-    .split("\n")
-    .filter(Boolean);
+  const centerImage = mediaUrl(data?.center_image) || CENTER_IMG;
+  
+  const yourModelTitle = data?.your_model_title || DEFAULT_YOUR_MODEL_TITLE;
+  const yourModelDesc = data?.your_model_description || DEFAULT_YOUR_MODEL_DESC;
+  const yourModelImage = mediaUrl(data?.your_model_image) || YOUR_MODEL_IMG;
+  
+  const dvkBoardTitle = data?.dvk_board_title || DEFAULT_DVK_BOARD_TITLE;
+  const dvkBoardDesc = data?.dvk_board_description || DEFAULT_DVK_BOARD_DESC;
+  const dvkBoardImage = mediaUrl(data?.dvk_board_image) || DVK_BOARD_IMG;
+  
+  const toolchainTitle = data?.toolchain_title || DEFAULT_TOOLCHAIN_TITLE;
+  const toolchainSubtitle = data?.toolchain_subtitle || DEFAULT_TOOLCHAIN_SUBTITLE;
+  
+  const toolchainLabels = Array.isArray(data?.toolchain_labels) && data.toolchain_labels.length > 0
+    ? data.toolchain_labels.map((t: any) => t?.text).filter(Boolean)
+    : DEFAULT_TOOLCHAIN_LABELS.split("\n");
+    
+  const floatingTags = Array.isArray(data?.floating_tags) && data.floating_tags.length > 0
+    ? data.floating_tags.map((t: any) => t?.text).filter(Boolean)
+    : DEFAULT_FLOATING_TAGS.split("\n");
 
   return (
     <div className="relative h-[873px] w-[1440px]" data-node-id="3773:685">
@@ -58,7 +84,7 @@ export function DvkModelForge({ data }: { data?: any }) {
       <div className="absolute top-[330px] left-[calc(50%+3.5px)] h-[350px] w-[345px] -translate-x-1/2">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={CENTER_IMG}
+          src={centerImage}
           alt=""
           className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
         />
@@ -89,20 +115,20 @@ export function DvkModelForge({ data }: { data?: any }) {
       {/* Left article — Your Model (2761:3030) */}
       <ModelCard
         className="top-[363.4px] left-[112px]"
-        image={YOUR_MODEL_IMG}
+        image={yourModelImage}
         imagePadding="px-[21px] py-px"
-        title="Your Model"
-        description="Automated TFLite conversion & quantization"
+        title={yourModelTitle}
+        description={yourModelDesc}
       />
 
       {/* Right article — Cranium DVK (2761:3017) */}
       <ModelCard
         className="top-[363.4px] left-[1004px] h-[386px]"
-        image={DVK_BOARD_IMG}
+        image={dvkBoardImage}
         imagePadding="p-[21px]"
         imageRounded
-        title="Cranium DVK"
-        description="15 minutes to on-silicon execution"
+        title={dvkBoardTitle}
+        description={dvkBoardDesc}
       />
 
       {/* Arrow — left (2761:3048) */}
@@ -130,12 +156,12 @@ export function DvkModelForge({ data }: { data?: any }) {
         <p
           className={`${gilroyMedium.className} w-[min-content] min-w-full text-center text-[32px] leading-[38px] text-white not-italic [word-break:break-word]`}
         >
-          ModelForge SDK
+          {toolchainTitle}
         </p>
         <p
           className={`${interRegular.className} w-[min-content] min-w-full text-center text-[14px] leading-[21px] font-normal text-[#bbbbbb] not-italic [word-break:break-word]`}
         >
-          Pre-integrated RTOS &amp; Eclipse-based Unified Build
+          {toolchainSubtitle}
         </p>
         <div className="flex items-center gap-[10px]">
           {toolchainLabels.map((tag: string, i: number) => (
@@ -154,10 +180,10 @@ export function DvkModelForge({ data }: { data?: any }) {
       <Connector className="top-[423.5px] left-[870.5px] -scale-y-100 rotate-180" src={CONN_RT} />
 
       {/* Floating tags */}
-      <Tag label="RTOS" className="top-[383px] left-[468px]" />
-      <Tag label="Drivers" className="top-[661px] left-[468px]" />
-      <Tag label="Build" className="top-[658px] left-[932px]" />
-      <Tag label="DSP" className="top-[403px] left-[933px]" />
+      {floatingTags.length > 0 && <Tag label={floatingTags[0]} className="top-[383px] left-[468px]" />}
+      {floatingTags.length > 1 && <Tag label={floatingTags[1]} className="top-[403px] left-[933px]" />}
+      {floatingTags.length > 2 && <Tag label={floatingTags[2]} className="top-[661px] left-[468px]" />}
+      {floatingTags.length > 3 && <Tag label={floatingTags[3]} className="top-[658px] left-[932px]" />}
     </div>
   );
 }

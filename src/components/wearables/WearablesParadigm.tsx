@@ -1,6 +1,7 @@
 import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { CornerDecor } from "../contact/contact-shared";
+import { mediaUrl } from "@/lib/strapi";
 
 const TITLE_GRADIENT =
   "linear-gradient(117.952deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -466,8 +467,19 @@ const FALLBACK_SUBTITLE =
 export function WearablesParadigm({ data }: { data?: any }) {
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const heading = data?.heading || FALLBACK_HEADING;
-  const legacy = FALLBACK_CARDS[0];
-  const acube = FALLBACK_CARDS[1];
+  const legacy = {
+    label: data?.cards?.[0]?.title || FALLBACK_CARDS[0].label,
+    description: data?.cards?.[0]?.body || FALLBACK_CARDS[0].description,
+    image: mediaUrl(data?.cards?.[0]?.background_image) || FALLBACK_CARDS[0].image,
+  };
+  const acube = {
+    label: data?.cards?.[1]?.title || FALLBACK_CARDS[1].label,
+    description: data?.cards?.[1]?.body || FALLBACK_CARDS[1].description,
+    image: mediaUrl(data?.cards?.[1]?.background_image) || FALLBACK_CARDS[1].image,
+  };
+
+  const statValue = data?.cards?.[1]?.stat_value || FALLBACK_STAT_VALUE;
+  const statDesc = data?.cards?.[1]?.stat_desc || FALLBACK_STAT_DESC;
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -515,8 +527,8 @@ export function WearablesParadigm({ data }: { data?: any }) {
             label={acube.label}
             description={acube.description}
             cubeSrc={acube.image}
-            statValue={FALLBACK_STAT_VALUE}
-            statDesc={FALLBACK_STAT_DESC}
+            statValue={statValue}
+            statDesc={statDesc}
           />
           <ChevronDecor />
           <LegacyStatsPanel />
@@ -607,10 +619,10 @@ export function WearablesParadigm({ data }: { data?: any }) {
                 backgroundClip: "text",
               }}
             >
-              {FALLBACK_STAT_VALUE}
+              {statValue}
             </p>
             <p className={`${interRegular.className} -mt-[16px] text-[13px] leading-[18px] font-normal text-[#e2f9da] not-italic`}>
-              {FALLBACK_STAT_DESC}
+              {statDesc}
             </p>
           </div>
 

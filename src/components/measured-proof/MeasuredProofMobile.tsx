@@ -240,7 +240,7 @@ export function MeasuredProofMobile({ data }: { data?: any }) {
         </a>
         <a
           href={secondary.href || "/products"}
-          className={`${gilroyMedium.className} relative flex h-[48px] w-[171px] items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)]`}
+          className={`${gilroyMedium.className} relative flex h-[48px] w-[171px] items-center justify-center bg-[rgba(226,241,202,0.12)]`}
         >
           <p className="relative text-[13px] leading-[24px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
             {secondary.label || "Explore ambient store"}

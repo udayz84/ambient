@@ -24,13 +24,6 @@
     "stat_description": {
       "type": "text"
     },
-    "background_image": {
-      "type": "media",
-      "multiple": false
-    },
-    "alt": {
-      "type": "string"
-    },
     "comparison_cards": {
       "type": "component",
       "repeatable": true,

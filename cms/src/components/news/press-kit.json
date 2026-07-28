@@ -3,8 +3,4 @@
     "cta_file_alt": {
       "type": "string"
     },
-    "file_info": { "type": "string" },
-    "icon": { "type": "media", "multiple": false },
-    "icon_alt": {
-      "type": "string"
-    } } }
+    "file_info": { "type": "string" } } }

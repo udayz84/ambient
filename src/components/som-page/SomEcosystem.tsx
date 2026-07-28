@@ -2,7 +2,6 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
-import { mediaUrl } from "@/lib/strapi";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 
@@ -141,7 +140,7 @@ function EcoCta({
 }) {
   return (
     <div
-      className={`relative h-[48px] shrink-0 overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] ${soon ? "opacity-60" : ""} ${widthClass}`}
+      className={`relative h-[48px] shrink-0 bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] ${soon ? "opacity-60" : ""} ${widthClass}`}
       data-name="CTA - Secondary"
     >
       <div className="flex h-full items-center justify-center">
@@ -354,8 +353,8 @@ const CARDS: CardData[] = [
 export function SomEcosystem({ data }: { data?: any }) {
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const heading = data?.heading || FALLBACK_HEADING;
-  const chipImg = mediaUrl(data?.chip_image) || FALLBACK_CHIP_IMG;
-  const bgImage = mediaUrl(data?.background_image) || FALLBACK_BG;
+  const chipImg = FALLBACK_CHIP_IMG;
+  const bgImage = FALLBACK_BG;
   const dataCards: any[] = Array.isArray(data?.cards) ? data.cards : [];
   const cards: CardData[] = CARDS.map((fb, i) => {
     const c = dataCards[i];

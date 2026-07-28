@@ -145,7 +145,7 @@ function ModuleCta({
   return (
     <a
       href={href}
-      className={`${gilroyMedium.className} ${CTA_HOVER_GLOW} relative flex h-[48px] shrink-0 items-center justify-center gap-[10px] overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] not-italic transition-[box-shadow,background-color] duration-200 group-hover:bg-transparent`}
+      className={`${gilroyMedium.className} ${CTA_HOVER_GLOW} relative flex h-[48px] shrink-0 items-center justify-center gap-[10px] bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] not-italic transition-[box-shadow,background-color] duration-200 group-hover:bg-transparent`}
       data-node-id="2438:4622"
     >
       <span

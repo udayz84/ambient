@@ -1,0 +1,1 @@
+{ "collectionName": "components_apps_features", "info": { "displayName": "Feature", "description": "Death of hardware tradeoffs feature card" }, "options": {}, "attributes": { "title": { "type": "string", "required": true } } }

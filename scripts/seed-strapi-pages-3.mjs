@@ -274,6 +274,12 @@ const ASSETS = {
   apps_card_right_mid: "applications/card-right-mid.png",
   apps_card_left_far: "applications/card-left-far.png",
   apps_card_right_far: "applications/card-right-far.png",
+  apps_dvk_m_watch: "applications/dvk-m-watch.png",
+  apps_dvk_m_robot_arm: "applications/dvk-m-robot-arm.png",
+  apps_dvk_m_humanoid: "applications/dvk-m-humanoid.png",
+  apps_dvk_m_headphones: "applications/dvk-m-headphones.png",
+  apps_dvk_m_rover: "applications/dvk-m-rover.png",
+  apps_dvk_m_surgical: "applications/dvk-m-surgical.png",
   apps_continuum: "applications/continuum.png",
   apps_medical: "applications/app-medical.png",
   apps_drones: "applications/app-drones.png",
@@ -386,27 +392,27 @@ const APPLICATIONS_PAYLOAD = {
     subtitle:
       "From microwatt edge sensors running on coin cells to air-cooled high-performance compute arrays, the GPX architecture scales seamlessly across the physical world.",
     background_image: media(ASSETS.apps_hero_bg),
-    title_frame: null,
   },
 
-  dvk: {
+  death_of_hardware_tradeoffs: {
     heading: "The death of hardware tradeoffs.",
     subtitle:
       "Legacy silicon forces you to choose. High performance or low power. Complex models or small footprint. We re-architected the physics so you can finally unleash your creativity and build with freedom.",
-    background_image: null,
-    bottom_background: null,
-    orbit_visual: null,
-    center_card: {
-      caption: "Wearables",
-      caption_body:
-        "Always-on biometric tracking and complex activity recognition running continuously on standard wearable batteries.",
-      image: media(ASSETS.apps_card_center),
-    },
-    satellite_cards: [
-      { image: media(ASSETS.apps_card_left_mid) },
-      { image: media(ASSETS.apps_card_right_mid) },
-      { image: media(ASSETS.apps_card_left_far) },
-      { image: media(ASSETS.apps_card_right_far) },
+    carousel_images: mediaArr(
+      ASSETS.apps_dvk_m_watch,
+      ASSETS.apps_dvk_m_robot_arm,
+      ASSETS.apps_dvk_m_humanoid,
+      ASSETS.apps_dvk_m_headphones,
+      ASSETS.apps_dvk_m_rover,
+      ASSETS.apps_dvk_m_surgical,
+    ),
+    features: [
+      { title: "Complex AI Model" },
+      { title: "Realtime & low latency" },
+      { title: "Ondevice, cloud-free" },
+      { title: "Compact footprint" },
+      { title: "Programmable & future proof" },
+      { title: "Ultra -low power consumption" },
     ],
   },
 
@@ -1028,15 +1034,12 @@ const SOM_PAYLOAD = {
       "Avoid custom RF and power management. Use our pre-engineered System-on-Modules (SOMs) for your edge AI deployments.",
     primary_button: { label: "Pre-Order / Register Interest", href: "/contact", variant: "primary" },
     secondary_button: { label: "Talk to the Sales Team", href: "/contact", variant: "secondary" },
-    background_image: media(ASSETS.som_hero_bg),
-    title_frame: null,
   },
 
   features: {
     heading: "Stop Routing. Start Shipping.",
     subtitle:
       "Spinning a custom PCB with extreme space and power constraints takes months of trial and error. We solved the hardware physics so you can focus entirely on your application logic.",
-    icon_background: null,
     cards: [
       {
         icon: media(ASSETS.som_icon_card_1),
@@ -1066,21 +1069,17 @@ const SOM_PAYLOAD = {
     heading: "The Ambient SOM Ecosystem",
     subtitle:
       "Purpose-built edge modules. Validate your software on our evaluation kits today, and drop our SOMs directly into your final product tomorrow.",
-    background_image: null,
-    chip_image: media(ASSETS.som_chip),
     cards: [
       {
         title: "Motion SOM",
         subtitle: "Motion & Audio",
         status: "Available",
-        icon: media(ASSETS.som_motion_icon),
         cta_label: "VIEW MORE",
       },
       {
         title: "Vision SOM",
         subtitle: "Motion & Audio",
         status: "Under-development",
-        icon: media(ASSETS.som_vision_icon),
         cta_label: "Coming soon",
       },
       {
@@ -1178,7 +1177,6 @@ const SOM_PAYLOAD = {
     subtitle:
       "Be the first to access our upcoming Vision, Sound, and Industrial modules.",
     cta_label: "Join the Waitlist",
-    image: media(ASSETS.som_footer_merge),
   },
 
   seo: {

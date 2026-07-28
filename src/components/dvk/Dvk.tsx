@@ -161,7 +161,7 @@ function DvkHeroMobile({ data }: { data?: any }) {
 
           <a
             href="#"
-            className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative mt-[9px] flex h-[48px] w-[229px] shrink-0 items-center justify-center overflow-hidden`}
+            className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative mt-[9px] flex h-[48px] w-[229px] shrink-0 items-center justify-center`}
           >
             <span
               aria-hidden

@@ -13,7 +13,7 @@ export default async function TechnologyPage() {
   try {
     data = await getSingleType<any>("technology-page", [
       "hero",
-      { section: "problem", fields: ["background_image"], nested: ["comparison_cards"] },
+      { section: "problem", nested: ["comparison_cards"] },
       "architecture",
       { section: "pillars", nested: ["pillars"] },
       "modes",

@@ -61,7 +61,7 @@ export function MeasuredProofCtas({ data }: { data?: any }) {
 
       <a
         href={secondaryHref}
-        className={`${gilroyMedium.className} relative h-[48px] w-[204px] shrink-0 overflow-clip bg-[rgba(226,241,202,0.12)]`}
+        className={`${gilroyMedium.className} relative h-[48px] w-[204px] shrink-0 bg-[rgba(226,241,202,0.12)]`}
         data-node-id="2379:1497"
         data-name="Menu"
       >

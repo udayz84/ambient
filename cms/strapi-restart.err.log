@@ -1,0 +1,184 @@
+- Cleaning dist dir C:/Users/speed/Documents/scraft/ambient/cms/dist
+✔ Cleaning dist dir (432ms)
+- Loading Strapi
+Config file not loaded, extension must be one of .js,.json): admin.js.map
+Config file not loaded, extension must be one of .js,.json): cron.js.map
+Config file not loaded, extension must be one of .js,.json): database.js.map
+Config file not loaded, extension must be one of .js,.json): middlewares.js.map
+Config file not loaded, extension must be one of .js,.json): plugins.js.map
+Config file not loaded, extension must be one of .js,.json): server.js.map
+(node:3812) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+- Building build context
+✔ Building build context (63ms)
+- Creating admin
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+✔ Creating admin (350ms)
+✔ Loading Strapi (7996ms)
+- Generating types
+✔ Generating types (932ms)
+- Compiling TS
+- Cleaning dist dir C:/Users/speed/Documents/scraft/ambient/cms/dist
+✔ Cleaning dist dir (146ms)
+✔ Compiling TS (1844ms)
+- Cleaning dist dir C:/Users/speed/Documents/scraft/ambient/cms/dist
+✔ Cleaning dist dir (37ms)
+- Loading Strapi
+Config file not loaded, extension must be one of .js,.json): admin.js.map
+Config file not loaded, extension must be one of .js,.json): cron.js.map
+Config file not loaded, extension must be one of .js,.json): database.js.map
+Config file not loaded, extension must be one of .js,.json): middlewares.js.map
+Config file not loaded, extension must be one of .js,.json): plugins.js.map
+Config file not loaded, extension must be one of .js,.json): server.js.map
+(node:21836) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+- Building build context
+✔ Building build context (618ms)
+- Creating admin
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+✔ Creating admin (1245ms)
+✔ Loading Strapi (17840ms)
+- Generating types
+✔ Generating types (1014ms)
+- Compiling TS
+- Cleaning dist dir C:/Users/speed/Documents/scraft/ambient/cms/dist
+✔ Cleaning dist dir (157ms)
+✔ Compiling TS (3127ms)
+- Cleaning dist dir C:/Users/speed/Documents/scraft/ambient/cms/dist
+✔ Cleaning dist dir (34ms)
+- Loading Strapi
+Config file not loaded, extension must be one of .js,.json): admin.js.map
+Config file not loaded, extension must be one of .js,.json): cron.js.map
+Config file not loaded, extension must be one of .js,.json): database.js.map
+Config file not loaded, extension must be one of .js,.json): middlewares.js.map
+Config file not loaded, extension must be one of .js,.json): plugins.js.map
+Config file not loaded, extension must be one of .js,.json): server.js.map
+(node:17852) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+- Building build context
+✔ Building build context (101ms)
+- Creating admin
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+✔ Creating admin (676ms)
+✔ Loading Strapi (19149ms)
+- Generating types
+✔ Generating types (1896ms)
+- Compiling TS
+- Cleaning dist dir C:/Users/speed/Documents/scraft/ambient/cms/dist
+✔ Cleaning dist dir (141ms)
+✔ Compiling TS (5590ms)
+- Cleaning dist dir C:/Users/speed/Documents/scraft/ambient/cms/dist
+✔ Cleaning dist dir (602ms)
+- Loading Strapi
+Config file not loaded, extension must be one of .js,.json): admin.js.map
+Config file not loaded, extension must be one of .js,.json): cron.js.map
+Config file not loaded, extension must be one of .js,.json): database.js.map
+Config file not loaded, extension must be one of .js,.json): middlewares.js.map
+Config file not loaded, extension must be one of .js,.json): plugins.js.map
+Config file not loaded, extension must be one of .js,.json): server.js.map
+(node:12308) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+- Building build context
+✔ Building build context (249ms)
+- Creating admin
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+✔ Creating admin (513ms)
+✔ Loading Strapi (15389ms)
+- Generating types
+✔ Generating types (1002ms)
+- Compiling TS
+- Cleaning dist dir C:/Users/speed/Documents/scraft/ambient/cms/dist
+✔ Cleaning dist dir (140ms)
+✔ Compiling TS (2173ms)
+- Cleaning dist dir C:/Users/speed/Documents/scraft/ambient/cms/dist
+✔ Cleaning dist dir (791ms)
+- Loading Strapi
+Config file not loaded, extension must be one of .js,.json): admin.js.map
+Config file not loaded, extension must be one of .js,.json): cron.js.map
+Config file not loaded, extension must be one of .js,.json): database.js.map
+Config file not loaded, extension must be one of .js,.json): middlewares.js.map
+Config file not loaded, extension must be one of .js,.json): plugins.js.map
+Config file not loaded, extension must be one of .js,.json): server.js.map
+(node:19672) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+- Building build context
+✔ Building build context (272ms)
+- Creating admin
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+✔ Creating admin (999ms)
+✔ Loading Strapi (15786ms)
+- Generating types
+✔ Generating types (2107ms)
+- Compiling TS
+- Cleaning dist dir C:/Users/speed/Documents/scraft/ambient/cms/dist
+✔ Cleaning dist dir (194ms)
+✔ Compiling TS (5005ms)
+- Cleaning dist dir C:/Users/speed/Documents/scraft/ambient/cms/dist
+✔ Cleaning dist dir (54ms)
+- Loading Strapi
+Config file not loaded, extension must be one of .js,.json): admin.js.map
+Config file not loaded, extension must be one of .js,.json): cron.js.map
+Config file not loaded, extension must be one of .js,.json): database.js.map
+Config file not loaded, extension must be one of .js,.json): middlewares.js.map
+Config file not loaded, extension must be one of .js,.json): plugins.js.map
+Config file not loaded, extension must be one of .js,.json): server.js.map
+(node:3208) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+- Building build context
+✔ Building build context (84ms)
+- Creating admin
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+✔ Creating admin (503ms)
+✔ Loading Strapi (15504ms)
+- Generating types
+✔ Generating types (1086ms)
+- Compiling TS
+- Cleaning dist dir C:/Users/speed/Documents/scraft/ambient/cms/dist
+✔ Cleaning dist dir (156ms)
+✔ Compiling TS (2248ms)
+- Cleaning dist dir C:/Users/speed/Documents/scraft/ambient/cms/dist
+✔ Cleaning dist dir (52ms)
+- Loading Strapi
+Config file not loaded, extension must be one of .js,.json): admin.js.map
+Config file not loaded, extension must be one of .js,.json): cron.js.map
+Config file not loaded, extension must be one of .js,.json): database.js.map
+Config file not loaded, extension must be one of .js,.json): middlewares.js.map
+Config file not loaded, extension must be one of .js,.json): plugins.js.map
+Config file not loaded, extension must be one of .js,.json): server.js.map
+(node:8032) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+- Building build context
+✔ Building build context (77ms)
+- Creating admin
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+✔ Creating admin (501ms)
+✔ Loading Strapi (11973ms)
+- Generating types
+✔ Generating types (1097ms)
+- Compiling TS
+- Cleaning dist dir C:/Users/speed/Documents/scraft/ambient/cms/dist
+✔ Cleaning dist dir (135ms)
+✔ Compiling TS (2978ms)
+node:internal/fs/watchers:321
+    const error = new UVException({
+                  ^
+
+Error: EBUSY: resource busy or locked, watch 'C:\Users\speed\Documents\scraft\ambient\cms\dist\build\uploads\5ea88c9857cac5dd5f661628b689c63dfada2ff3_5f77ccbcb5.png'
+    at FSWatcher.<computed> (node:internal/fs/watchers:321:19)
+    at Object.watch (node:fs:2548:36)
+    at createFsWatchInstance (file:///C:/Users/speed/Documents/scraft/ambient/cms/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:42780:17)
+    at setFsWatchListener (file:///C:/Users/speed/Documents/scraft/ambient/cms/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:42827:15)
+    at NodeFsHandler._watchWithNodeFs (file:///C:/Users/speed/Documents/scraft/ambient/cms/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:42982:14)
+    at NodeFsHandler._handleFile (file:///C:/Users/speed/Documents/scraft/ambient/cms/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:43046:23)
+    at NodeFsHandler._addToNodeFs (file:///C:/Users/speed/Documents/scraft/ambient/cms/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:43288:21)
+Emitted 'error' event on FSWatcher instance at:
+    at FSWatcher._handleError (file:///C:/Users/speed/Documents/scraft/ambient/cms/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:44481:10)
+    at NodeFsHandler._addToNodeFs (file:///C:/Users/speed/Documents/scraft/ambient/cms/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:43296:18) {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'C:\\Users\\speed\\Documents\\scraft\\ambient\\cms\\dist\\build\\uploads\\5ea88c9857cac5dd5f661628b689c63dfada2ff3_5f77ccbcb5.png',
+  filename: 'C:\\Users\\speed\\Documents\\scraft\\ambient\\cms\\dist\\build\\uploads\\5ea88c9857cac5dd5f661628b689c63dfada2ff3_5f77ccbcb5.png'
+}
+
+Node.js v24.16.0
