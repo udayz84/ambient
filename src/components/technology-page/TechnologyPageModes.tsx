@@ -6,8 +6,10 @@ import { gilroySemiBold, interRegular, interSemiBold } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 
-const MODES_TOP = "/technology/modes-top.png";
-const MODES_BOTTOM = "/technology/modes-bottom.png";
+const MODES_TOP = "/technology/modes-top-new.png";
+const MODES_BOTTOM = "/technology/modes-bottom-new.png";
+const MODES_CUBE = "/technology/modes-cube.png";
+const MODES_CUBE_GLOW = "/technology/modes-cube-glow.png";
 const MODE_ICON = "/technology/mode-icon.svg";
 const MODES_BADGE_LEFT = "/technology/modes-badge-left.png";
 const MODES_BADGE_RIGHT = "/technology/modes-badge-right.png";
@@ -73,12 +75,12 @@ const MODE_CARD_CONFIG: ModeCardConfig[] = [
     left: "left-[614px]",
     top: "top-[623px]",
     width: "w-[236px]",
-    height: "h-[116px]",
-    title: "SETTLES",
+    height: "h-[83px]",
+    title: "",
     bullet:
       "Once the task is completed, the chip settles back into subconscious mode.",
     bulletLeft: "10px",
-    bulletTop: "49.48px",
+    bulletTop: "18px",
   },
 ];
 
@@ -122,14 +124,14 @@ function ChevronBadge({
       <img
         src={badgeSrc}
         alt=""
-        className="absolute top-[646.76px] h-[47.24px] w-[85.54px] max-w-none"
+        className="absolute top-[636.76px] h-[47.24px] w-[85.54px] max-w-none"
         style={{ left: badgeLeft }}
         aria-hidden
       />
       {chevrons.map((c, i) => (
         <div
           key={c.src}
-          className="animate-technology-chevron-flow absolute top-[651.82px] h-[37.12px]"
+          className="animate-technology-chevron-flow absolute top-[641.82px] h-[37.12px]"
           style={{ left: c.left, width: c.width, animationDelay: `${delays[i]}s` }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -221,22 +223,24 @@ function ModeCard({
       <CornerDecor />
 
       {/* top container — title + icon */}
-      <div
-        className="absolute top-[8px] left-[12px] right-[12.3px] flex h-[33.65px] items-center justify-between border-b border-solid border-[rgba(255,255,255,0.1)] pb-[6px]"
-        data-name="Container"
-      >
-        <p
-          className={`${gilroySemiBold.className} text-[16px] leading-[16px] font-semibold tracking-[0.6px] whitespace-nowrap text-[#6fe047] uppercase not-italic`}
+      {title ? (
+        <div
+          className="absolute top-[8px] left-[12px] right-[12.3px] flex h-[33.65px] items-center justify-between border-b border-solid border-[rgba(255,255,255,0.1)] pb-[6px]"
+          data-name="Container"
         >
-          {title}
-        </p>
-        <ModeIcon />
-      </div>
+          <p
+            className={`${gilroySemiBold.className} text-[16px] leading-[16px] font-semibold tracking-[0.6px] whitespace-nowrap text-[#6fe047] uppercase not-italic`}
+          >
+            {title}
+          </p>
+          <ModeIcon />
+        </div>
+      ) : null}
 
       {/* bullet */}
       <div
         className="absolute"
-        style={{ left: bulletLeft, top: bulletTop }}
+        style={{ left: bulletLeft, top: bulletTop, transform: bulletTop === "50%" ? "translateY(-50%)" : "none" }}
         data-name="Frame 1984079529"
       >
         <p className="absolute top-[3.5px] left-0 text-[14px] tracking-[-0.1504px] whitespace-nowrap text-[#3a9719] not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
@@ -303,17 +307,17 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
   const heading = data?.heading || FALLBACK_HEADING;
   const headingLines = heading.split("\n");
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
-  const topImg = mediaUrl(data?.top_image) || MODES_TOP;
-  const bottomImg = mediaUrl(data?.bottom_image) || MODES_BOTTOM;
+  const topImg = MODES_TOP;
+  const bottomImg = MODES_BOTTOM;
 
   const strapiCards = Array.isArray(data?.mode_cards) ? data.mode_cards : [];
   const renderCards: ModeCardConfig[] = MODE_CARD_CONFIG.map((cfg, i) => {
     const mc = strapiCards[i];
     return {
       ...cfg,
-      title: (mc?.title as string) || cfg.title,
+      title: i === 2 ? "" : ((mc?.title as string) || cfg.title),
       bullet: (mc?.bullets as string) || cfg.bullet,
-      caption: (mc?.caption as string) || cfg.caption,
+      caption: i === 2 ? "" : ((mc?.caption as string) || cfg.caption),
     };
   });
 
@@ -340,34 +344,53 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
     >
       {/* DESKTOP (>=1024px) */}
       <div className="relative hidden h-[787px] w-full max-w-[1440px] min-[1024px]:block">
-        {/* 3004:1231 — image 194 (top center visual) */}
+        {/* Top wavy lines (image 196 in Figma) */}
         <div
-          className="pointer-events-none absolute top-[315.32px] left-[320px] z-0 h-[219.17px] w-[823.35px] overflow-hidden"
-          data-node-id="3004:1231"
-          data-name="image 194"
+          className="-translate-x-1/2 absolute h-[114.649px] left-[calc(50%+9.1px)] top-[313px] w-[838.264px] pointer-events-none z-0"
+          data-name="image 196"
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={topImg}
-            alt=""
-            className="absolute top-[-38.49%] left-[-8.37%] h-[217.12%] w-[116.37%] max-w-none"
-            aria-hidden
-          />
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img alt="" className="absolute h-[277.89%] left-[0.16%] max-w-none top-[-95.79%] w-[99.82%]" src={topImg} />
+          </div>
+        </div>
+
+        {/* The new 3D Cube */}
+        <div className="-translate-x-1/2 absolute h-[304.921px] left-[calc(50%+10px)] overflow-clip top-[350.73px] w-[317.216px] z-10" data-name="Cube">
+          <div className="absolute h-[299.208px] left-0 top-[10.85px] w-[322.463px]" data-name="Object">
+            <div aria-hidden className="absolute inset-0 pointer-events-none">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img alt="" className="absolute max-w-none object-cover size-full" src={MODES_CUBE} />
+              <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(180.162deg, rgba(0, 0, 0, 0) 59.958%, rgb(0, 0, 0) 88.127%)" }} />
+            </div>
+          </div>
+          <div className="absolute flex h-[61.525px] items-center justify-center left-[147.28px] top-[44.96px] w-[87.575px]">
+            <div className="flex-none rotate-[-13.44deg]">
+              <div className="h-[44.265px] relative w-[79.462px]" data-name="Rectangle">
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img alt="" className="absolute h-[316.18%] left-[-22.33%] max-w-none top-[-109.44%] w-[146.26%]" src={MODES_CUBE_GLOW} />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* 3003:494 — image 192 (bottom wide visual) */}
         <div
-          className="pointer-events-none absolute top-[568px] left-[150.2px] z-0 h-[228.06px] w-[1162.96px] overflow-hidden"
+          className="pointer-events-none absolute h-[228.063px] left-[150.2px] top-[558px] w-[1162.959px] z-0"
           data-node-id="3003:494"
           data-name="image 192"
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={bottomImg}
-            alt=""
-            className="absolute top-[-184.09%] left-0 h-[284.09%] w-full max-w-none"
-            aria-hidden
-          />
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={bottomImg}
+              alt=""
+              className="absolute h-[284.09%] left-0 max-w-none top-[-184.09%] w-full"
+              aria-hidden
+            />
+          </div>
         </div>
 
         {/* flowing chevron overlays for the loop badges */}
@@ -480,6 +503,13 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
           className="h-auto w-full max-w-[327px] rounded-[4px] object-cover"
           aria-hidden
         />
+
+        {/* Mobile 3D Cube (Added for mobile view) */}
+        <div className="relative h-[240px] w-full max-w-[327px] overflow-hidden flex items-center justify-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img alt="" className="absolute max-w-[80%] object-contain" src={MODES_CUBE} />
+          <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(180.162deg, rgba(0, 0, 0, 0) 59.958%, rgb(0, 0, 0) 88.127%)" }} />
+        </div>
 
         <ModeCardMobile
           title={sideCard0?.title ?? "Subconscious AI"}

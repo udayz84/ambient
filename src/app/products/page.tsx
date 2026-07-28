@@ -11,12 +11,25 @@ import { ProductsFullPicture } from "@/components/products-page/ProductsFullPict
 import { ProductsStartBuilding } from "@/components/products-page/ProductsStartBuilding";
 import { ProductsStickyNav } from "@/components/products-page/ProductsStickyNav";
 import { getSingleType } from "@/lib/strapi";
+import { buildMetadata, type SeoData } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Products | Ambient Scientific",
-  description:
-    "The world's first energy-aware AI processor — running real neural networks, not rule-based shortcuts, at microwatt power. Built on the A-Cube architecture.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  let seo: SeoData | null = null;
+  try {
+    const data = await getSingleType<{ seo: SeoData | null }>(
+      "products-page",
+      ["seo"]
+    );
+    seo = data?.seo ?? null;
+  } catch {
+    seo = null;
+  }
+  return buildMetadata(seo, {
+    title: "Products | Ambient Scientific",
+    description:
+      "The world's first energy-aware AI processor — running real neural networks, not rule-based shortcuts, at microwatt power. Built on the A-Cube architecture.",
+  });
+}
 
 export default async function ProductsPage() {
   let data: any = null;

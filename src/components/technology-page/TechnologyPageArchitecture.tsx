@@ -56,7 +56,7 @@ type Pillar = {
 const PILLARS: Pillar[] = [
   {
     nodeId: "3037:480",
-    left: 162,
+    left: 122,
     top: 275.35,
     cardWidth: 380,
     statWidth: 340,
@@ -84,7 +84,7 @@ const PILLARS: Pillar[] = [
   },
   {
     nodeId: "3346:600",
-    left: 155,
+    left: 115,
     top: 794,
     cardWidth: 389,
     statWidth: 340,
@@ -109,7 +109,7 @@ const PILLARS: Pillar[] = [
   },
   {
     nodeId: "3346:507",
-    left: 152.5,
+    left: 112.5,
     top: 1305,
     cardWidth: 396,
     statWidth: 356,
@@ -430,7 +430,7 @@ export function TechnologyPageArchitecture({
         {pillars.map((pillar) => (
           <div
             key={pillar.nodeId}
-            className="absolute flex flex-col items-center bg-[rgba(0,0,0,0.1)] px-[20px]"
+            className="absolute flex flex-col items-center bg-[rgba(0,0,0,0.1)] px-[20px] border border-[rgba(255,255,255,0.12)]"
             style={{
               left: pillar.left,
               top: pillar.top,
@@ -444,9 +444,9 @@ export function TechnologyPageArchitecture({
         ))}
 
         {/* Connectors — card → brain */}
-        <Connector left={627} top={493} />
-        <Connector left={627} top={933} />
-        <Connector left={629} top={1493} />
+        <Connector left={547} top={493} />
+        <Connector left={547} top={933} />
+        <Connector left={549} top={1493} />
       </div>
 
       {/* MOBILE (<1024px) — basic responsive version */}
@@ -473,7 +473,7 @@ export function TechnologyPageArchitecture({
         {pillars.map((pillar) => (
           <div
             key={pillar.nodeId}
-            className="relative flex w-full flex-col bg-[rgba(0,0,0,0.1)] px-[20px]"
+            className="relative flex w-full flex-col bg-[rgba(0,0,0,0.1)] px-[20px] border border-[rgba(255,255,255,0.12)]"
           >
             <PillarStat pillar={pillar} fullWidth />
             <CornerDecor />

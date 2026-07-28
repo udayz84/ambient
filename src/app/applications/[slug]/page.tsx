@@ -7,13 +7,25 @@ import { WearablesLabToProduct } from "@/components/wearables/WearablesLabToProd
 import { WearablesSubconscious } from "@/components/wearables/WearablesSubconscious";
 import { WearablesFooterAccent } from "@/components/wearables/WearablesFooterAccent";
 import { getCollection, buildPopulate } from "@/lib/strapi";
+import { buildMetadata, type SeoData } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
-  return {
+  let seo: SeoData | null = null;
+  try {
+    const query = `filters[slug][$eq]=${resolvedParams.slug}&${buildPopulate(["seo"])}`;
+    const results = await getCollection<{ seo: SeoData | null }>(
+      "application-pages",
+      query
+    );
+    seo = results[0]?.seo ?? null;
+  } catch {
+    seo = null;
+  }
+  return buildMetadata(seo, {
     title: "Applications | Ambient Scientific",
     description: "Ambient Scientific Applications",
-  };
+  });
 }
 
 export default async function ApplicationPage({ params }: { params: Promise<{ slug: string }> }) {

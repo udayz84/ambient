@@ -32,7 +32,7 @@ const CONN_RT = "/dvk/modelforge-conn-rt.svg";
 const CONN_RB = "/dvk/modelforge-conn-rb.svg";
 
 const CARD_BG = "rgba(0,0,0,0.5)";
-const CARD_BORDER = "rgba(240,240,240,0.2)";
+const CARD_BORDER = "rgba(255,255,255,0.3)";
 const TAG_BG = "rgba(0,0,0,0.2)";
 /** Figma 2761:3018 — media container radial fade. */
 const MEDIA_RADIAL =
@@ -114,7 +114,7 @@ export function DvkModelForge({ data }: { data?: any }) {
 
       {/* Left article — Your Model (2761:3030) */}
       <ModelCard
-        className="top-[363.4px] left-[112px]"
+        className="top-[363.4px] left-[88px]"
         image={yourModelImage}
         imagePadding="px-[21px] py-px"
         title={yourModelTitle}
@@ -123,7 +123,7 @@ export function DvkModelForge({ data }: { data?: any }) {
 
       {/* Right article — Cranium DVK (2761:3017) */}
       <ModelCard
-        className="top-[363.4px] left-[1004px] h-[386px]"
+        className="top-[363.4px] left-[1028px] h-[386px]"
         image={dvkBoardImage}
         imagePadding="p-[21px]"
         imageRounded
@@ -132,7 +132,7 @@ export function DvkModelForge({ data }: { data?: any }) {
       />
 
       {/* Arrow — left (2761:3048) */}
-      <div className="absolute top-[533.84px] left-[444.89px] h-0 w-[85.992px]">
+      <div className="absolute top-[533.84px] left-[420.89px] h-0 w-[109.992px]">
         <div className="absolute inset-[-2.89px_-3.36%_-2.89px_-3.1%]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={LINE_LEFT} alt="" aria-hidden className="block size-full max-w-none" />
@@ -140,9 +140,9 @@ export function DvkModelForge({ data }: { data?: any }) {
       </div>
 
       {/* Arrow — right (2761:3049) */}
-      <div className="absolute top-[533.84px] left-[916.27px] flex h-0 w-[85.992px] items-center justify-center">
+      <div className="absolute top-[533.84px] left-[916.27px] flex h-0 w-[109.992px] items-center justify-center">
         <div className="flex-none -scale-y-100 rotate-180">
-          <div className="relative h-0 w-[85.992px]">
+          <div className="relative h-0 w-[109.992px]">
             <div className="absolute inset-[-2.89px_-3.36%_-2.89px_-3.1%]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={LINE_RIGHT} alt="" aria-hidden className="block size-full max-w-none" />
@@ -180,10 +180,10 @@ export function DvkModelForge({ data }: { data?: any }) {
       <Connector className="top-[423.5px] left-[870.5px] -scale-y-100 rotate-180" src={CONN_RT} />
 
       {/* Floating tags */}
-      {floatingTags.length > 0 && <Tag label={floatingTags[0]} className="top-[383px] left-[468px]" />}
-      {floatingTags.length > 1 && <Tag label={floatingTags[1]} className="top-[403px] left-[933px]" />}
-      {floatingTags.length > 2 && <Tag label={floatingTags[2]} className="top-[661px] left-[468px]" />}
-      {floatingTags.length > 3 && <Tag label={floatingTags[3]} className="top-[658px] left-[932px]" />}
+      {floatingTags.length > 0 && <Tag label={floatingTags[0]} className="top-[383px] right-[926px]" />}
+      {floatingTags.length > 1 && <Tag label={floatingTags[1]} className="top-[403px] left-[948px]" />}
+      {floatingTags.length > 2 && <Tag label={floatingTags[2]} className="top-[661px] right-[926px]" />}
+      {floatingTags.length > 3 && <Tag label={floatingTags[3]} className="top-[658px] left-[948px]" />}
     </div>
   );
 }
@@ -244,7 +244,10 @@ function ModelCard({
 
 function ToolchainChip({ label, last }: { label: string; last?: boolean }) {
   return (
-    <div className="relative h-[26px] w-[103px] shrink-0 overflow-clip bg-[rgba(115,190,91,0.12)]">
+    <div 
+      className="relative h-[26px] w-[103px] shrink-0 overflow-clip bg-[rgba(115,190,91,0.12)] border-[0.5px] border-solid"
+      style={{ borderColor: CARD_BORDER }}
+    >
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
       <p
         className={`${dmMono.className} absolute top-[calc(50%-4.5px)] -translate-x-1/2 text-center text-[13px] leading-[19.5px] tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] ${

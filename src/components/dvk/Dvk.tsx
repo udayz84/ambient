@@ -1,4 +1,4 @@
-import { gilroyMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interRegular, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { DvkHero } from "./DvkHero";
 import { DvkHardwareStack } from "./DvkHardwareStack";
@@ -375,28 +375,172 @@ function DvkModelForgeMobile({ data }: { data?: any }) {
   const subtitle =
     data?.subtitle ||
     "Don't let software be the bottleneck. The Cranium DVK is fully supported by our unified software toolchain, designed to take you from a standard TensorFlow model to on-silicon inference in under 15 minutes.";
+  const centerImage =
+    mediaUrl(data?.center_image) || "/dvk/modelforge-center.webp";
+
+  const yourModelTitle = data?.your_model_title || "Your Model";
+  const yourModelDesc =
+    data?.your_model_description || "Automated TFLite conversion & quantization";
+  const yourModelImage =
+    mediaUrl(data?.your_model_image) || "/dvk/modelforge-your-model.webp";
+
+  const dvkBoardTitle = data?.dvk_board_title || "Cranium DVK";
+  const dvkBoardDesc =
+    data?.dvk_board_description || "15 minutes to on-silicon execution";
+  const dvkBoardImage = mediaUrl(data?.dvk_board_image) || "/dvk/board-blueprint.webp";
+
+  const toolchainTitle = data?.toolchain_title || "ModelForge SDK";
+  const toolchainSubtitle =
+    data?.toolchain_subtitle ||
+    "Pre-integrated RTOS & Eclipse-based Unified Build";
+  const toolchainLabels =
+    Array.isArray(data?.toolchain_labels) && data.toolchain_labels.length > 0
+      ? data.toolchain_labels.map((t: any) => t?.text).filter(Boolean)
+      : ["RTOS", "DRIVERS", "COMPILER"];
+
   return (
     <section
       className="relative w-full bg-black min-[1024px]:hidden"
       aria-label="Powered by ModelForge"
     >
-      <div className="flex w-full flex-col items-center justify-center gap-[16px] px-[24px] pt-[64px] pb-[48px]">
-        <h2
-          className={`${gilroyMedium.className} max-w-full bg-clip-text text-center text-[28px] leading-[32px] font-medium text-transparent not-italic [word-break:break-word]`}
-          style={{
-            backgroundImage: MODELFORGE_TITLE_GRADIENT,
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-          }}
-        >
-          {heading}
-        </h2>
-        <p
-          className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
-        >
-          {subtitle}
-        </p>
+      <div className="flex w-full flex-col items-center justify-center gap-[24px] px-[24px] pt-[64px] pb-[48px]">
+        {/* Heading + subtitle */}
+        <div className="flex w-full flex-col items-center gap-[12px]">
+          <h2
+            className={`${gilroyMedium.className} max-w-full bg-clip-text text-center text-[28px] leading-[32px] font-medium text-transparent not-italic [word-break:break-word]`}
+            style={{
+              backgroundImage: MODELFORGE_TITLE_GRADIENT,
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+            }}
+          >
+            {heading}
+          </h2>
+          <p
+            className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
+          >
+            {subtitle}
+          </p>
+        </div>
+
+        {/* Center visual */}
+        <div className="relative flex w-full max-w-[345px] justify-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt=""
+            src={centerImage}
+            className="pointer-events-none h-auto w-full max-w-[345px] object-contain"
+          />
+        </div>
+
+        {/* Your Model card */}
+        <MobileModelCard
+          image={yourModelImage}
+          title={yourModelTitle}
+          description={yourModelDesc}
+        />
+
+        {/* Cranium DVK card */}
+        <MobileModelCard
+          image={dvkBoardImage}
+          title={dvkBoardTitle}
+          description={dvkBoardDesc}
+          imageRounded
+        />
+
+        {/* Toolchain block */}
+        <div className="flex w-full flex-col items-center gap-[12px]">
+          <p
+            className={`${gilroyMedium.className} text-center text-[24px] leading-[30px] text-white not-italic [word-break:break-word]`}
+          >
+            {toolchainTitle}
+          </p>
+          <p
+            className={`${interRegular.className} text-center text-[14px] leading-[21px] font-normal text-[#bbbbbb] not-italic [word-break:break-word]`}
+          >
+            {toolchainSubtitle}
+          </p>
+          {toolchainLabels.length > 0 && (
+            <div className="flex flex-wrap items-center justify-center gap-[10px]">
+              {toolchainLabels.map((label: string) => (
+                <MobileToolchainChip key={label} label={label} />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </section>
+  );
+}
+
+function MobileModelCard({
+  image,
+  title,
+  description,
+  imageRounded = false,
+}: {
+  image: string;
+  title: string;
+  description: string;
+  imageRounded?: boolean;
+}) {
+  return (
+    <div
+      className="relative flex w-full flex-col items-center gap-[16px] overflow-clip border-[0.5px] border-solid px-[20px] pt-[20px] pb-[28px]"
+      style={{
+        backgroundColor: "rgba(0,0,0,0.5)",
+        borderColor: "rgba(255,255,255,0.3)",
+      }}
+    >
+      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+      <div
+        className="relative flex h-[200px] w-full shrink-0 items-center justify-center rounded-[6px] border border-solid p-[12px]"
+        style={{
+          borderColor: "rgba(0,255,0,0.3)",
+          backgroundImage:
+            "radial-gradient(ellipse 363.01px 135px at 146px 135px, rgba(26,26,26,1) 0%, rgba(13,13,13,1) 25%, rgba(7,7,7,1) 37.5%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%)",
+        }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          alt=""
+          src={image}
+          className={`pointer-events-none absolute inset-0 size-full max-w-none object-contain ${imageRounded ? "rounded-[6px]" : ""}`}
+        />
+      </div>
+      <div className="flex w-full flex-col items-center gap-[8px]">
+        <p
+          className={`${gilroyMedium.className} text-center text-[22px] leading-[28px] text-white not-italic [word-break:break-word]`}
+        >
+          {title}
+        </p>
+        <p
+          className={`${interRegular.className} text-center text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
+        >
+          {description}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function MobileToolchainChip({ label }: { label: string }) {
+  return (
+    <div
+      className="relative h-[26px] w-[103px] shrink-0 overflow-clip border-[0.5px] border-solid"
+      style={{
+        backgroundColor: "rgba(115,190,91,0.12)",
+        borderColor: "rgba(255,255,255,0.3)",
+      }}
+    >
+      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+      <p
+        className={`${dmMono.className} absolute top-[calc(50%-4.5px)] left-1/2 -translate-x-1/2 text-center text-[13px] leading-[19.5px] tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [word-break:break-word]`}
+      >
+        {label}
+      </p>
+      <div className="absolute top-1/2 left-[7px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+      <div className="absolute top-1/2 right-[7px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+    </div>
   );
 }

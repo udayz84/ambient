@@ -14,6 +14,7 @@ const NAV_ITEMS = [
 
 export function ProductsStickyNav() {
   const [activeId, setActiveId] = useState<string>("");
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,6 +48,13 @@ export function ProductsStickyNav() {
       }
       
       setActiveId(current);
+      
+      // Determine visibility
+      if (window.scrollY > 300) {
+         setIsVisible(true);
+      } else {
+         setIsVisible(false);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -55,8 +63,14 @@ export function ProductsStickyNav() {
   }, []);
 
   return (
-    <div className="sticky top-[100px] z-50 mx-auto -mt-8 mb-8 flex w-full max-w-7xl justify-center px-4 animate-in slide-in-from-top-8 fade-in duration-700">
-      <div className="flex items-center gap-[4px] rounded-[30px] bg-[#1a1a1a] p-[6px] shadow-2xl overflow-x-auto overflow-y-hidden no-scrollbar">
+    <div
+      className={`fixed bottom-0 left-0 right-0 z-50 flex w-full flex-col items-center justify-end px-4 pb-8 pt-24 transition-all duration-500 pointer-events-none ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      }`}
+    >
+      <div className="absolute inset-0 bg-gradient-to-t from-[#000000e6] via-[#00000080] to-transparent pointer-events-none" aria-hidden="true" />
+      <div className="relative pointer-events-auto flex w-full max-w-7xl justify-center">
+        <div className="flex items-center gap-[4px] rounded-[30px] bg-[#1a1a1a] p-[6px] shadow-2xl overflow-x-auto overflow-y-hidden no-scrollbar">
         {NAV_ITEMS.map((item) => {
           const isActive = activeId === item.id;
           return (
@@ -81,6 +95,7 @@ export function ProductsStickyNav() {
             </a>
           );
         })}
+      </div>
       </div>
     </div>
   );

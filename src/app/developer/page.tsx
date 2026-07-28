@@ -8,12 +8,25 @@ import { DeveloperCopilotsSection } from "@/components/developer/DeveloperCopilo
 import { ScaledCanvas } from "@/components/developer/ScaledCanvas";
 import { DeveloperMobile } from "@/components/developer/DeveloperMobile";
 import { getSingleType } from "@/lib/strapi";
+import { buildMetadata, type SeoData } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Developer | Ambient Scientific",
-  description:
-    "ModelForge bridges training and deployment. Quantize, compile, and merge neural networks with your firmware — model to deployment in 15 minutes.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  let seo: SeoData | null = null;
+  try {
+    const data = await getSingleType<{ seo: SeoData | null }>(
+      "developer-page",
+      ["seo"]
+    );
+    seo = data?.seo ?? null;
+  } catch {
+    seo = null;
+  }
+  return buildMetadata(seo, {
+    title: "Developer | Ambient Scientific",
+    description:
+      "ModelForge bridges training and deployment. Quantize, compile, and merge neural networks with your firmware — model to deployment in 15 minutes.",
+  });
+}
 
 const CANVAS_HEIGHT = 4521;
 

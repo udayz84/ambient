@@ -6,6 +6,7 @@ import {
   PRODUCTS_FEATURE_CARDS,
   SECTION_TITLE_GRADIENT,
 } from "./products-data";
+import type { ProductsFeatureCardData } from "./products-data";
 import { ProductsFeatureCard } from "./ProductsFeatureCard";
 import { ProductsFeaturesCarousel } from "./ProductsFeaturesCarousel";
 
@@ -114,6 +115,28 @@ export function ProductsFeatures({ data }: { data?: any }) {
       : rawLines;
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
 
+  // Merge Strapi feature cards over the design's fallback cards by index.
+  // Only title + description are CMS-editable; the per-card visual variant
+  // (brain/coin/bubble/stack) and pixel layout (titleLeft/titleWidth/nodeId)
+  // are design-specific and have no Strapi field, so they stay from fallback.
+  const rawFeatureCards: any[] = Array.isArray(data?.feature_cards)
+    ? data.feature_cards
+    : [];
+  const featureCards: ProductsFeatureCardData[] = PRODUCTS_FEATURE_CARDS.map(
+    (fb, i) => {
+      const c = rawFeatureCards[i] || {};
+      const strapiTitle = c.title?.trim();
+      return {
+        ...fb,
+        title: strapiTitle || fb.title,
+        description: c.description?.trim() || fb.description,
+        // When CMS overrides the title, drop the design's explicit two-line
+        // break so the new copy renders (it auto-wraps via word-break).
+        titleLines: strapiTitle ? null : fb.titleLines,
+      };
+    }
+  );
+
   return (
     <section
       id="products-features"
@@ -167,7 +190,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
             </p>
           </div>
 
-          <ProductsFeaturesCarousel cards={PRODUCTS_FEATURE_CARDS} />
+          <ProductsFeaturesCarousel cards={featureCards} />
 
           {/* 3710:1634 — caption (Figma top 917 of the 1057 canvas; rises on
               shorter stages so it never overlaps the 600px cards) */}
@@ -206,7 +229,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
         </div>
 
         <div className="relative mt-[40px] flex snap-x snap-mandatory gap-[24px] overflow-x-auto px-[24px] pb-[8px]">
-          {PRODUCTS_FEATURE_CARDS.map((card) => (
+          {featureCards.map((card) => (
             <div key={`m-${card.nodeId}`} className="snap-center">
               <ProductsFeatureCard card={card} />
             </div>

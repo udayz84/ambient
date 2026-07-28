@@ -8,12 +8,25 @@ import { SomIntelligence } from "@/components/som-page/SomIntelligence";
 import { SomReadyToDeploy } from "@/components/som-page/SomReadyToDeploy";
 import { SomFooterMerge } from "@/components/som-page/SomFooterMerge";
 import { getSingleType } from "@/lib/strapi";
+import { buildMetadata, type SeoData } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "SOM | Ambient Scientific",
-  description:
-    "Avoid custom RF and power management. Use our pre-engineered System-on-Modules (SOMs) for your edge AI deployments.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  let seo: SeoData | null = null;
+  try {
+    const data = await getSingleType<{ seo: SeoData | null }>(
+      "som-page",
+      ["seo"]
+    );
+    seo = data?.seo ?? null;
+  } catch {
+    seo = null;
+  }
+  return buildMetadata(seo, {
+    title: "SOM | Ambient Scientific",
+    description:
+      "Avoid custom RF and power management. Use our pre-engineered System-on-Modules (SOMs) for your edge AI deployments.",
+  });
+}
 
 export default async function SomPage() {
   let data: any = null;

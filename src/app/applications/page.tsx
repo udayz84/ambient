@@ -6,12 +6,25 @@ import { ApplicationsPageArticles } from "@/components/applications-page/Applica
 import { ApplicationsPageWins } from "@/components/applications-page/ApplicationsPageWins";
 import { ApplicationsPageSom } from "@/components/applications-page/ApplicationsPageSom";
 import { getSingleType } from "@/lib/strapi";
+import { buildMetadata, type SeoData } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Applications | Ambient Scientific",
-  description:
-    "From microwatt edge sensors running on coin cells to air-cooled high-performance compute arrays, the GPX architecture scales seamlessly across the physical world.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  let seo: SeoData | null = null;
+  try {
+    const data = await getSingleType<{ seo: SeoData | null }>(
+      "applications-page",
+      ["seo"]
+    );
+    seo = data?.seo ?? null;
+  } catch {
+    seo = null;
+  }
+  return buildMetadata(seo, {
+    title: "Applications | Ambient Scientific",
+    description:
+      "From microwatt edge sensors running on coin cells to air-cooled high-performance compute arrays, the GPX architecture scales seamlessly across the physical world.",
+  });
+}
 
 export default async function ApplicationsPage() {
   let data: any = null;
@@ -22,7 +35,7 @@ export default async function ApplicationsPage() {
       "continuum",
       { section: "articles", nested: ["articles"] },
       { section: "wins", nested: ["cards"] },
-      "som",
+      { section: "som", fields: ["primary_button", "secondary_button"], nested: ["cards"] },
       "seo",
     ]);
   } catch {

@@ -142,7 +142,7 @@ export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
       aria-label="Put A-Cube to work"
     >
       {/* DESKTOP (>=1024px) */}
-      <div className="hidden flex-col items-center min-[1024px]:flex">
+      <div className="hidden flex-col items-center min-[1024px]:flex min-[1024px]:pt-[160px]">
         {/* section title */}
         <div
           className="flex w-[492.93px] flex-col items-center gap-[24px]"

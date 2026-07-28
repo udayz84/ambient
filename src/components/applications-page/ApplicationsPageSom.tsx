@@ -16,21 +16,35 @@ const FALLBACK_STATUS_PILL = "LAUNCHING SOON";
 const FALLBACK_IMG_A = "/applications/som-img-a.png";
 const FALLBACK_IMG_B = "/applications/som-img-b.png";
 
-const FALLBACK_DATA_LABELS = [
+type SomCardData = {
+  value: string;
+  label: string;
+  sublabel: string;
+  is_upcoming: boolean;
+  visual_style: "sharp" | "blurry" | "layered";
+};
+
+const FALLBACK_CARDS: SomCardData[] = [
   {
     value: "<1mW",
     label: "GPX-Edge Micro",
     sublabel: "Wearables & Hearables",
+    is_upcoming: false,
+    visual_style: "sharp",
   },
   {
     value: "<1mW",
     label: "GPX-Edge Micro",
     sublabel: "Wearables & Hearables",
+    is_upcoming: true,
+    visual_style: "blurry",
   },
   {
     value: "<1mW",
     label: "GPX-Edge Micro",
     sublabel: "Wearables & Hearables",
+    is_upcoming: true,
+    visual_style: "layered",
   },
 ];
 
@@ -199,24 +213,34 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
   };
   const statusPill = data?.status_pill || FALLBACK_STATUS_PILL;
 
-  const rawDataLabels = Array.isArray(data?.data_labels)
-    ? data.data_labels
-    : [];
-  const dataLabels = [0, 1, 2].map((i) => ({
-    value: rawDataLabels[i]?.value || FALLBACK_DATA_LABELS[i].value,
-    label: rawDataLabels[i]?.label || FALLBACK_DATA_LABELS[i].label,
-    sublabel: rawDataLabels[i]?.sublabel || FALLBACK_DATA_LABELS[i].sublabel,
-  }));
-
-  const rawImages: any[] = Array.isArray(data?.images) ? data.images : [];
-  const imgA = mediaUrl(rawImages[0]) || FALLBACK_IMG_A;
-  const imgB = mediaUrl(rawImages[1]) || FALLBACK_IMG_B;
-
-  const CARDS = [
-    { key: "som-1", visual: <Visual1 src={imgA} />, isUpcoming: false },
-    { key: "som-2", visual: <Visual2 src={imgB} />, isUpcoming: true },
-    { key: "som-3", visual: <Visual3 srcA={imgA} srcB={imgB} />, isUpcoming: true },
-  ];
+  const rawCards: any[] = Array.isArray(data?.cards) ? data.cards : [];
+  const cards = [0, 1, 2].map((i) => {
+    const c = rawCards[i] || {};
+    const fb = FALLBACK_CARDS[i];
+    const value = c.value || fb.value;
+    const label = c.label || fb.label;
+    const sublabel = c.sublabel || fb.sublabel;
+    const isUpcoming = c.is_upcoming ?? fb.is_upcoming;
+    const visualStyle = c.visual_style || fb.visual_style;
+    const imgA = mediaUrl(c.image_a) || FALLBACK_IMG_A;
+    const imgB = mediaUrl(c.image_b) || FALLBACK_IMG_B;
+    let visual: React.ReactNode;
+    if (visualStyle === "blurry") {
+      visual = <Visual2 src={imgB} />;
+    } else if (visualStyle === "layered") {
+      visual = <Visual3 srcA={imgA} srcB={imgB} />;
+    } else {
+      visual = <Visual1 src={imgA} />;
+    }
+    return {
+      key: `som-${i + 1}`,
+      visual,
+      isUpcoming,
+      value,
+      label,
+      sublabel,
+    };
+  });
 
   return (
     <section
@@ -251,15 +275,15 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
 
         {/* 3 SOM cards */}
         <div className="flex w-full items-start justify-center gap-[40px]">
-          {CARDS.map((card, i) => (
+          {cards.map((card) => (
             <SomCard
               key={card.key}
               visual={card.visual}
               isUpcoming={card.isUpcoming}
               statusPill={statusPill}
-              value={dataLabels[i].value}
-              label={dataLabels[i].label}
-              sublabel={dataLabels[i].sublabel}
+              value={card.value}
+              label={card.label}
+              sublabel={card.sublabel}
             />
           ))}
         </div>
@@ -294,15 +318,15 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
           </p>
         </div>
         <div className="flex w-full flex-col items-center gap-[48px]">
-          {CARDS.map((card, i) => (
+          {cards.map((card) => (
             <SomCard
               key={card.key}
               visual={card.visual}
               isUpcoming={card.isUpcoming}
               statusPill={statusPill}
-              value={dataLabels[i].value}
-              label={dataLabels[i].label}
-              sublabel={dataLabels[i].sublabel}
+              value={card.value}
+              label={card.label}
+              sublabel={card.sublabel}
             />
           ))}
         </div>

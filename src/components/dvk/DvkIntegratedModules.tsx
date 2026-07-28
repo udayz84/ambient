@@ -240,8 +240,8 @@ function DvkIntegratedModulesMobile({
 function DevChip() {
   return (
     <div
-      className={`${dmMono.className} relative h-[26px] w-[153px] shrink-0 overflow-clip`}
-      style={{ backgroundColor: DEV_CHIP_BG }}
+      className={`${dmMono.className} relative h-[26px] w-[153px] shrink-0 overflow-clip border-[0.5px] border-solid`}
+      style={{ backgroundColor: DEV_CHIP_BG, borderColor: "rgba(255,255,255,0.3)" }}
     >
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
       <p className="absolute left-[calc(50%+0.5px)] top-[calc(50%-4.5px)] -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
