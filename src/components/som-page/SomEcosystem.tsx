@@ -1,4 +1,7 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element */
+import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { mediaUrl } from "@/lib/strapi";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
@@ -192,9 +195,12 @@ function EcoCard({
   ctaWidthClass,
   dataName = "Article",
 }: EcoCardProps) {
+  const { fadeRef, isVisible } = useFadeIn();
+
   return (
     <div
-      className={`flex flex-col overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] transition-colors duration-300 cursor-default ${cardBg} ${padClass} ${frameClass}`}
+      ref={fadeRef}
+      className={`flex flex-col overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] transition-colors duration-300 cursor-default ${cardBg} ${padClass} ${frameClass} ${getFadeInClass(isVisible)}`}
       data-name={dataName}
     >
       <div className="relative flex w-full flex-1 flex-col items-start justify-between">

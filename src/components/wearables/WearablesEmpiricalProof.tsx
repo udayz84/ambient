@@ -717,8 +717,8 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
           </p>
         </div>
 
-        {/* ECG cards (mobile) — 2x2 grid */}
-        <div className="grid w-full grid-cols-2 gap-[12px]">
+        {/* ECG cards (mobile) — 2x2 grid on standard phones, single column on narrow viewports to prevent badge clipping */}
+        <div className="grid w-full grid-cols-1 gap-[12px] min-[360px]:grid-cols-2">
           {ecgCards.map((card, i) => (
             <EcgCardMobile
               key={i}

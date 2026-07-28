@@ -257,8 +257,8 @@ function ProductsHeroDesktop({
 
       {/* Title + description — 2900:463 (left=100, top=417.87, w=442) */}
       <div
-        className={`${gilroyMedium.className} absolute flex flex-col items-start gap-[15px] not-italic [word-break:break-word]`}
-        style={{ left: 100, top: 417.86553955078125, width: 442 }}
+        className={`${gilroyMedium.className} absolute flex flex-col items-start gap-[15px] not-italic [word-break:break-word] animate-hero-text-fade-in opacity-0`}
+        style={{ left: 100, top: 417.86553955078125, width: 442, animationDelay: "200ms" }}
         data-node-id="2900:463"
         data-name="Container"
       >
@@ -420,7 +420,10 @@ function ProductsHeroMobile({
         </div>
 
         {/* Text area */}
-        <div className="relative z-10 flex flex-col gap-[15px] px-[24px]">
+        <div 
+          className="relative z-10 flex flex-col gap-[15px] px-[24px] animate-hero-text-fade-in opacity-0"
+          style={{ animationDelay: "200ms" }}
+        >
           <h1
             className={`${gilroyMedium.className} w-[320px] max-w-full bg-clip-text text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
             style={{

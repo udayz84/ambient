@@ -1,4 +1,7 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element */
+import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { gilroyBold, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
@@ -89,9 +92,12 @@ type WinCardProps = {
 };
 
 function WinCard({ label, stat, statLabel, visual, body }: WinCardProps) {
+  const { fadeRef, isVisible } = useFadeIn();
+
   return (
     <div
-      className="relative h-[640px] w-[426px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black"
+      ref={fadeRef}
+      className={`relative h-[640px] w-[426px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black ${getFadeInClass(isVisible)}`}
       data-name="Container"
     >
       {visual}
@@ -137,8 +143,10 @@ function WinCard({ label, stat, statLabel, visual, body }: WinCardProps) {
 }
 
 function WinCardMobile({ label, stat, statLabel, mobileImg, body }: { label: string; stat: string; statLabel: string; mobileImg: string; body: string }) {
+  const { fadeRef, isVisible } = useFadeIn();
+
   return (
-    <div className="relative w-full max-w-[426px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black">
+    <div ref={fadeRef} className={`relative w-full max-w-[426px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black ${getFadeInClass(isVisible)}`}>
       <div className="relative h-[240px] w-full overflow-hidden">
         <img alt="" aria-hidden src={mobileImg} className="absolute inset-0 size-full object-cover" />
         <div className="absolute inset-0" style={{ backgroundImage: OVERLAY_2 }} />

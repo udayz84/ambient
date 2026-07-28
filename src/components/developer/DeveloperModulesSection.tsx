@@ -1,4 +1,7 @@
+"use client";
+
 import { gilroyMedium, interRegular } from "../hero/fonts";
+import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { Corners } from "../shared/Corners";
 import {
   CORNER_LEFT,
@@ -82,13 +85,16 @@ function ModuleCard({
 }) {
   const image = mediaUrl(module?.image) || fallback.image;
   const title = module?.title || fallback.title;
-  const description = fallback.description;
+  const description = module?.description || fallback.description;
   const ctaLabel = module?.cta_label || fallback.ctaLabel;
   const ctaHref = module?.cta_href || "#";
   const ctaArrow = fallback.ctaArrow;
+  const { fadeRef, isVisible } = useFadeIn();
+
   return (
     <div
-      className="group relative flex w-[590px] shrink-0 flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[16px] pt-[10px] pb-[20px]"
+      ref={fadeRef}
+      className={`group relative flex w-[590px] shrink-0 flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[16px] pt-[10px] pb-[20px] ${getFadeInClass(isVisible)}`}
       data-node-id="2438:4598"
     >
       {/* Image — 2438:4599 (570×400, object-cover + darkening overlay) */}

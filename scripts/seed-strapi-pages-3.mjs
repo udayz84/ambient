@@ -633,7 +633,10 @@ static void APP_Start()
     subtitle:
       "Validate your build in a virtual sandbox,\nno need to wait for hardware.",
     card_title: "Virtual Sandbox Coming Soon",
+    card_description:
+      "Complete virtual validation environment for testing your builds before hardware arrives.",
     cta_label: "Join the Virtual Sandbox Waitlist",
+    cta_href: "#",
     image: media(ASSETS.dev_sandbox_image),
     background: null,
   },
@@ -646,12 +649,16 @@ static void APP_Start()
       {
         image: media(ASSETS.dev_module_dvk),
         title: "GPX Evaluation Kits (DVKs)",
+        description:
+          "Stop fighting with breakout boards. Our fully integrated Evaluation Kits come equipped with standard interfaces, allowing you to plug in your cameras, microphones, and industrial sensors out-of-the-box for immediate physical validation.",
         cta_label: "View Evaluation Kits",
         cta_href: "#",
       },
       {
         image: media(ASSETS.dev_module_som),
         title: "Production-Ready SOMs",
+        description:
+          "Skip the nightmare of custom RF and power routing. Drop our high-density System-on-Modules (SOMs) directly into your custom carrier boards. They're engineered for extreme space-constrained environments, radically accelerating your time-to-market.",
         cta_label: "View System-on-Modules",
         cta_href: "#",
       },
@@ -666,18 +673,24 @@ static void APP_Start()
       {
         icon: media(ASSETS.dev_copilot_icon_1),
         title: "Exhaustive Documentation",
+        description:
+          "No disorganized wikis. Access the fully searchable ModelForge deployment guide, comprehensive DSP/Pre-processing C-libraries, and lower-level hardware API references.",
         cta_label: "Browse Developer Docs",
         cta_href: "#",
       },
       {
         icon: media(ASSETS.dev_copilot_icon_2),
         title: "10 Minutes to Mastery",
+        description:
+          "Get up and running visually. Access our self-serve library of YouTube masterclasses walking you step-by-step through everything from model porting to integrated compilation.",
         cta_label: "View Training Playlist",
         cta_href: "#",
       },
       {
         icon: media(ASSETS.dev_copilot_icon_3),
         title: "Your Technical Copilots",
+        description:
+          "Skip the generic help desk. Get direct, architectural-level support from our Field Application Engineers. We will handhold your team to help optimize your specific neural network and heterogeneous build.",
         cta_label: "Schedule Technical Consultation",
         cta_href: "#",
       },

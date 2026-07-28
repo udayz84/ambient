@@ -211,7 +211,7 @@ function DvkIntegratedModulesMobile({
             >
               {card.imageUrl && <img src={card.imageUrl} alt="" className="absolute inset-0 size-full object-contain" />}
             </div>
-            <div className="flex items-center justify-between gap-[10px] w-full">
+            <div className="flex flex-wrap items-center justify-between gap-[10px] w-full">
               <h3 className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic`}>
                 {card.title}
               </h3>

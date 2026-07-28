@@ -3,6 +3,7 @@ import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useState } from "react";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyExtraBold, gilroyMedium, interRegular } from "../hero/fonts";
+import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { Corners } from "../shared/Corners";
 import {
   CORNER_LEFT,
@@ -400,9 +401,12 @@ function Indicator({
 }
 
 function UseCaseCardView({ card }: { card: any }) {
+  const { fadeRef, isVisible } = useFadeIn();
+
   return (
     <div
-      className="absolute flex flex-col items-start gap-[10px] p-[32px]"
+      ref={fadeRef}
+      className={`absolute flex flex-col items-start gap-[10px] p-[32px] ${getFadeInClass(isVisible)}`}
       style={{
         left: card.left,
         top: card.top,
@@ -557,23 +561,7 @@ function ProductsUseCasesMobile({
       {/* Cards */}
       <div className="mt-[32px] flex flex-col gap-[16px]">
         {cards.map((card: any) => (
-          <div
-            key={card.nodeId}
-            className="relative flex flex-col gap-[8px] p-[20px]"
-            style={{ backgroundColor: card.bg }}
-          >
-            <h4
-              className={`${gilroyMedium.className} text-[20px] leading-[26px] font-medium text-white not-italic`}
-            >
-              {card.title}
-            </h4>
-            <p
-              className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
-            >
-              {card.description}
-            </p>
-            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-          </div>
+          <UseCaseCardMobileView key={card.nodeId} card={card} />
         ))}
       </div>
 
@@ -608,5 +596,29 @@ function ProductsUseCasesMobile({
         </a>
       </div>
     </section>
+  );
+}
+
+function UseCaseCardMobileView({ card }: { card: any }) {
+  const { fadeRef, isVisible } = useFadeIn();
+
+  return (
+    <div
+      ref={fadeRef}
+      className={`relative flex flex-col gap-[8px] p-[20px] ${getFadeInClass(isVisible)}`}
+      style={{ backgroundColor: card.bg }}
+    >
+      <h4
+        className={`${gilroyMedium.className} text-[20px] leading-[26px] font-medium text-white not-italic`}
+      >
+        {card.title}
+      </h4>
+      <p
+        className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
+      >
+        {card.description}
+      </p>
+      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+    </div>
   );
 }

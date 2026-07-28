@@ -706,13 +706,13 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
                 key={`m-${metric.label}-${i}`}
                 className="flex items-center justify-between gap-[12px]"
               >
-                <div className="flex flex-col gap-[6px]">
+                <div className="flex min-w-0 flex-1 flex-col gap-[6px]">
                   <span
                     className={`${interMedium.className} text-[11px] leading-[14px] font-medium tracking-[0.2px] text-[#d2d2d2] uppercase not-italic`}
                   >
                     {metric.label}
                   </span>
-                  <div className="relative h-[12px] w-[140px] overflow-hidden">
+                  <div className="relative h-[12px] w-full max-w-[140px] overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-r from-[#313131] to-[#535353]" />
                     <div
                       className={`absolute top-0 left-0 h-full bg-gradient-to-r from-[#1b2f14] to-[#8ce66c] ${
@@ -723,7 +723,7 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
                   </div>
                 </div>
                 <p
-                  className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium whitespace-nowrap text-[#e2f9da] not-italic`}
+                  className={`${gilroyMedium.className} shrink-0 whitespace-nowrap text-[18px] leading-[24px] font-medium text-[#e2f9da] not-italic`}
                 >
                   {metric.value}
                   {metric.sup ? (

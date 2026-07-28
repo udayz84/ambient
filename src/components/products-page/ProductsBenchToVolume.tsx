@@ -1,4 +1,7 @@
+"use client";
+
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import {
@@ -43,9 +46,11 @@ export function ProductsBenchToVolume({ data }: { data?: any }) {
             cta: c?.cta_label ?? fallback.cta,
             ctaHref: c?.cta_href ?? "#",
             ctaWidth: fallback.ctaWidth,
+            image: c?.image ?? fallback.image,
+            chipLabel: c?.chipLabel ?? fallback.chipLabel ?? chipLabel,
           };
         })
-      : BENCH_CARDS;
+      : BENCH_CARDS.map(c => ({ ...c, chipLabel: c.chipLabel || chipLabel }));
   return (
     <>
       {/* DESKTOP (>=1024px) */}
@@ -131,7 +136,7 @@ function ProductsBenchToVolumeDesktop({
         data-name="Frame 1984079440"
       >
         {cards.map((card) => (
-          <BenchCardView key={card.nodeId} card={card} chipLabel={chipLabel} />
+          <BenchCardView key={card.nodeId} card={card} chipLabel={card.chipLabel || chipLabel} />
         ))}
       </div>
     </div>
@@ -139,9 +144,12 @@ function ProductsBenchToVolumeDesktop({
 }
 
 function BenchCardView({ card, chipLabel }: { card: any; chipLabel: string }) {
+  const { fadeRef, isVisible } = useFadeIn();
+
   return (
     <article
-      className="relative flex flex-1 flex-col overflow-clip border-[0.5px] border-solid px-[20px] pt-[20px] pb-[32px]"
+      ref={fadeRef}
+      className={`relative flex flex-1 flex-col overflow-clip border-[0.5px] border-solid px-[20px] pt-[20px] pb-[32px] ${getFadeInClass(isVisible)}`}
       style={{
         backgroundColor: BENCH_CARD.bg,
         borderColor: BENCH_CARD.border,
@@ -151,7 +159,7 @@ function BenchCardView({ card, chipLabel }: { card: any; chipLabel: string }) {
     >
       {/* Image box (vignette placeholder) — 2918:1478 */}
       <div
-        className="flex shrink-0 items-center justify-center rounded-[6px] border border-solid"
+        className="relative flex shrink-0 items-center justify-center overflow-hidden rounded-[6px] border border-solid"
         style={{
           width: BENCH_IMAGE_BOX.width,
           height: BENCH_IMAGE_BOX.height,
@@ -161,13 +169,20 @@ function BenchCardView({ card, chipLabel }: { card: any; chipLabel: string }) {
         data-name="Container"
         aria-hidden
       >
-        {/* Product logo/image placeholder — 2918:1479 (empty in source) */}
-        <div
-          style={{
-            width: BENCH_IMAGE_BOX.placeholderWidth,
-            height: BENCH_IMAGE_BOX.placeholderHeight,
-          }}
-        />
+        {card.image ? (
+          <img
+            src={card.image}
+            alt=""
+            className="absolute inset-0 size-full max-w-none rounded-[6px] object-contain"
+          />
+        ) : (
+          <div
+            style={{
+              width: BENCH_IMAGE_BOX.placeholderWidth,
+              height: BENCH_IMAGE_BOX.placeholderHeight,
+            }}
+          />
+        )}
       </div>
 
       {/* Content — chip + title + description */}
@@ -205,7 +220,7 @@ function DevChip({ chipLabel }: { chipLabel: string }) {
       data-name="Menu"
     >
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-      <p className="absolute left-1/2 top-[calc(50%-4.5px)] -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
+      <p className="absolute left-[calc(50%+0.5px)] top-[calc(50%-4.5px)] -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
         {chipLabel}
       </p>
       <div className="absolute top-1/2 left-[7px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
@@ -284,24 +299,43 @@ function ProductsBenchToVolumeMobile({
       {/* Cards */}
       <div className="mt-[32px] flex flex-col gap-[20px]">
         {cards.map((card) => (
-          <article
-            key={card.nodeId}
-            className="relative flex flex-col border-[0.5px] border-solid p-[20px]"
-            style={{
-              backgroundColor: BENCH_CARD.bg,
-              borderColor: BENCH_CARD.border,
-            }}
-          >
+          <BenchCardMobileView key={card.nodeId} card={card} chipLabel={card.chipLabel || chipLabel} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function BenchCardMobileView({ card, chipLabel }: { card: any; chipLabel: string }) {
+  const { fadeRef, isVisible } = useFadeIn();
+
+  return (
+    <article
+      ref={fadeRef}
+      className={`relative flex flex-col border-[0.5px] border-solid p-[20px] ${getFadeInClass(isVisible)}`}
+      style={{
+        backgroundColor: BENCH_CARD.bg,
+        borderColor: BENCH_CARD.border,
+      }}
+    >
             {/* Image box */}
             <div
-              className="mb-[16px] flex h-[200px] w-full items-center justify-center rounded-[6px] border border-solid"
+              className="relative mb-[16px] flex h-[200px] w-full items-center justify-center overflow-hidden rounded-[6px] border border-solid"
               style={{
                 borderColor: BENCH_CARD.imageBorder,
                 backgroundImage: BENCH_IMAGE_VIGNETTE,
               }}
               aria-hidden
-            />
-            <DevChip chipLabel={chipLabel} />
+            >
+              {card.image && (
+                <img
+                  src={card.image}
+                  alt=""
+                  className="absolute inset-0 size-full max-w-none rounded-[6px] object-contain"
+                />
+              )}
+            </div>
+            <DevChip chipLabel={card.chipLabel || chipLabel} />
             <h3
               className={`${gilroyMedium.className} mt-[10px] text-[22px] leading-[28px] font-medium text-white not-italic`}
             >
@@ -318,9 +352,6 @@ function ProductsBenchToVolumeMobile({
               </GreenCta>
             </div>
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-          </article>
-        ))}
-      </div>
-    </section>
+    </article>
   );
 }

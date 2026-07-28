@@ -25,7 +25,11 @@ export default async function ProductsPage() {
       { section: "features", nested: ["feature_cards"] },
       { section: "always_on", fields: ["image"], nested: ["stats"] },
       { section: "use_cases", nested: ["tabs"] },
-      "measured",
+      {
+        section: "measured",
+        fields: ["tag", "primary_button", "secondary_button"],
+        nested: ["cards"],
+      },
       { section: "architecture", fields: ["image"], nested: ["stats"] },
       "modelforge",
       "bench_to_volume",

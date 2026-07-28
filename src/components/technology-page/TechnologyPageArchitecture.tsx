@@ -198,7 +198,7 @@ function PillarCta({ pillar }: { pillar: Pillar }) {
   return (
     <a
       href={pillar.ctaHref || "/developer"}
-      className={`${gilroyMedium.className} relative block h-[48px] w-[250px] shrink-0 overflow-clip ${CTA_SHADOW}`}
+      className={`${gilroyMedium.className} relative block h-[48px] w-[250px] max-[1023px]:w-full shrink-0 overflow-clip ${CTA_SHADOW}`}
       data-node-id="3919:515"
       data-name="Cta"
     >
@@ -260,7 +260,7 @@ function PillarStat({
         data-name="Frame 1984079533"
       >
         <p
-          className={`${gilroyMedium.className} w-[279px] text-[32px] leading-[38px] font-medium text-white not-italic`}
+          className={`${gilroyMedium.className} w-[279px] max-[1023px]:w-full text-[32px] leading-[38px] font-medium text-white not-italic`}
         >
           {pillar.title}
         </p>

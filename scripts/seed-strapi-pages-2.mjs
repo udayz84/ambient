@@ -279,6 +279,10 @@ const ASSETS = {
   products_use_app_medical: "applications/app-medical.png",
   products_use_app_agriculture: "applications/app-agriculture.png",
 
+  products_measured_chip_gpx10: "products/measured-chip-gpx10.png",
+  products_measured_chip_risc: "products/measured-chip-risc.png",
+  products_measured_chip_mcu_npu: "products/measured-chip-mcu-npu.png",
+
   products_arch_image: "products/architecture.png",
   products_arch_stat_icon: "products/arch-stat-icon.svg",
 
@@ -479,58 +483,67 @@ const PRODUCTS_PAYLOAD = {
   },
 
   measured: {
-    tag: { text: "Sensor-Fusion AI" },
-    heading: "Not projected. Measured in silicon.",
-    subtitle: "The same chip, tuned to the job — from a wrist to a factory floor.",
-    comparison_metrics: [
-      { label: "Peak compute" },
-      { label: "Always-on power" },
-      { label: "Efficiency (TOPS/W)" },
-      { label: "AI model support" },
-      { label: "Cloud dependency" },
-      { label: "Sensor streams" },
+    tag: { text: "Measured proof" },
+    heading: "Not projected.\nMeasured in silicon.",
+    subtitle: "Here's GPX10 Pro against the alternatives a design team actually weighs.",
+    cards: [
+      {
+        name: "GPX10 Pro",
+        variant: "gpx10",
+        chip_image: media(ASSETS.products_measured_chip_gpx10),
+        stats: [
+          { icon: "speed", label: "Peak Compute (GOPS)", value: "512", is_green: true },
+          { icon: "energy", label: "Active Power", value: "40 - 120 µW", is_green: true },
+          { icon: "eco", label: "Efficiency (TOPS/W)", value: "7.3", is_green: true },
+        ],
+      },
+      {
+        name: "RISC MCU",
+        variant: "risc_mcu",
+        chip_image: media(ASSETS.products_measured_chip_risc),
+        stats: [
+          { icon: "speed", label: "Peak Compute (GOPS)", value: "0.02" },
+          { icon: "energy", label: "Active Power", value: "600 mW" },
+          { icon: "eco", label: "Efficiency (TOPS/W)", value: "0.02" },
+        ],
+      },
+      {
+        name: "MCU + NPU",
+        variant: "mcu_npu",
+        chip_image: media(ASSETS.products_measured_chip_mcu_npu),
+        stats: [
+          // Figma renders this card's "100" in Gilroy Medium, the rest in Bold.
+          { icon: "speed", label: "Peak Compute (GOPS)", value: "100", is_medium: true },
+          { icon: "energy", label: "Active Power", value: "200 mW" },
+          { icon: "eco", label: "Efficiency (TOPS/W)", value: "1.2" },
+        ],
+      },
     ],
-    comparison_columns: [
-      {
-        label: "RISC MCU",
-        values: "0.02 GOPS\n600 mW\n0.02\nRule-based only\nYes\n1–2",
-        is_highlighted: false,
-      },
-      {
-        label: "MCU + NPU",
-        // Source frame ships placeholder values for this column — see extraction notes.
-        values: "100 GOPS\n200 µW idle / 80 mW active\n1.2 TOPS/W\nFixed models\nYes\n2–4",
-        is_highlighted: false,
-      },
-      {
-        label: "GPX10 Pro",
-        values:
-          "512 GOPS\n< 100 µW\n7.3\nCNN, RNN, LSTM, GRU\nNone — fully on-device\nUp to 10 fused on-chip",
-        is_highlighted: true,
-      },
-    ],
+    // Labels are Figma-verbatim (leading space is part of the design text).
+    primary_button: { label: " Download the Full Datasheet", href: "#", variant: "primary" },
+    secondary_button: { label: " Read the Architecture Whitepaper", href: "#", variant: "secondary" },
   },
 
   architecture: {
-    heading: "Everything in one chip. Nothing wasted.",
+    label: "Architecture",
+    heading: "Everything in one chip. \nNothing wasted.",
     subtitle:
       "A complete edge-AI SoC — AI engine, control, sensing, memory, and security — integrated so your board doesn't have to be.",
     image: media(ASSETS.products_arch_image),
+    alt: "GPX10 Pro hardware blueprint",
+    caption: "The Hardware Blueprint",
     stats: [
       {
-        value: "10",
         label: "A-Cube compute",
         description: "10 MX8 cores, 2,560 MACs/cycle, replaces a separate AI accelerator.",
         stat_icon: media(ASSETS.products_arch_stat_icon),
       },
       {
-        value: "2",
         label: "Two power domains",
         description: "A 5-core island sips microwatts; the rest powers down.",
         stat_icon: media(ASSETS.products_arch_stat_icon),
       },
       {
-        value: "10",
         label: "Integrated sensing",
         description: "Up to 10 sensor streams fused on-chip; no external sensor hub.",
         stat_icon: media(ASSETS.products_arch_stat_icon),

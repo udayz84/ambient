@@ -1,4 +1,7 @@
+"use client";
+
 import { gilroyMedium, interRegular } from "../hero/fonts";
+import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { Corners } from "../shared/Corners";
 import {
   COPILOT_CARD_BG,
@@ -99,13 +102,16 @@ function CopilotCard({
 }) {
   const icon = mediaUrl(copilot?.icon) || fallback.icon;
   const title = copilot?.title || fallback.title;
-  const description = fallback.description;
+  const description = copilot?.description || fallback.description;
   const ctaLabel = copilot?.cta_label || fallback.ctaLabel;
   const ctaHref = copilot?.cta_href || "#";
   const ctaFullWidth = fallback.ctaFullWidth;
+  const { fadeRef, isVisible } = useFadeIn();
+
   return (
     <div
-      className="group relative flex h-[409px] w-[385px] shrink-0 flex-col justify-between p-[32px]"
+      ref={fadeRef}
+      className={`group relative flex h-[409px] w-[385px] shrink-0 flex-col justify-between p-[32px] ${getFadeInClass(isVisible)}`}
       style={{ backgroundImage: COPILOT_CARD_BG }}
       data-node-id="2438:4678"
     >

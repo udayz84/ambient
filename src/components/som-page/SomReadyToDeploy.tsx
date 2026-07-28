@@ -54,7 +54,7 @@ function ChipImage({ className, src }: { className?: string; src: string }) {
       data-name="Chip Image"
     >
       <div
-        className="absolute left-[13.448px] top-[13.159px] h-[433.25px] w-[417.835px] overflow-hidden"
+        className="absolute left-[13.448px] top-[13.159px] h-[433.25px] w-[417.835px] max-[1023px]:left-0 max-[1023px]:top-0 max-[1023px]:h-full max-[1023px]:w-full overflow-hidden"
         data-node-id="2438:5331"
         data-name="Background"
       >

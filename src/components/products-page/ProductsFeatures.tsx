@@ -3,12 +3,10 @@ import { Corners } from "../shared/Corners";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
+  PRODUCTS_FEATURE_CARDS,
   SECTION_TITLE_GRADIENT,
 } from "./products-data";
-import {
-  PRODUCTS_FEATURE_CARDS,
-  ProductsFeatureCard,
-} from "./ProductsFeatureCard";
+import { ProductsFeatureCard } from "./ProductsFeatureCard";
 import { ProductsFeaturesCarousel } from "./ProductsFeaturesCarousel";
 
 const FALLBACK_HEADING =

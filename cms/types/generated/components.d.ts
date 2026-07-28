@@ -664,7 +664,7 @@ export interface DeveloperCode extends Struct.ComponentSchema {
   };
   attributes: {
     articles: Schema.Attribute.Component<'developer.code-article', true>;
-    code_snippet: Schema.Attribute.RichText;
+    code_snippet: Schema.Attribute.Text;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     subtitle: Schema.Attribute.Text;
   };
@@ -693,7 +693,9 @@ export interface DeveloperComingSoon extends Struct.ComponentSchema {
   attributes: {
     background: Schema.Attribute.Media;
     background_alt: Schema.Attribute.String;
+    card_description: Schema.Attribute.Text;
     card_title: Schema.Attribute.String;
+    cta_href: Schema.Attribute.String;
     cta_label: Schema.Attribute.String;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     image: Schema.Attribute.Media;
@@ -712,6 +714,7 @@ export interface DeveloperCopilot extends Struct.ComponentSchema {
     alt: Schema.Attribute.String;
     cta_href: Schema.Attribute.String;
     cta_label: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
     icon: Schema.Attribute.Media;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -756,6 +759,7 @@ export interface DeveloperModule extends Struct.ComponentSchema {
     alt: Schema.Attribute.String;
     cta_href: Schema.Attribute.String;
     cta_label: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
     image: Schema.Attribute.Media;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -1284,13 +1288,16 @@ export interface ProductsAlwaysonStat extends Struct.ComponentSchema {
 export interface ProductsArchitecture extends Struct.ComponentSchema {
   collectionName: 'components_products_architectures';
   info: {
-    description: 'Products architecture section';
+    description: 'Products architecture section \u2014 Figma 3713:1965';
     displayName: 'Architecture';
   };
   attributes: {
     alt: Schema.Attribute.String;
+    caption: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'The Hardware Blueprint'>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     image: Schema.Attribute.Media;
+    label: Schema.Attribute.String & Schema.Attribute.DefaultTo<'Architecture'>;
     stats: Schema.Attribute.Component<'shared.stat', true>;
     subtitle: Schema.Attribute.Text;
   };
@@ -1321,31 +1328,6 @@ export interface ProductsBenchToVolume extends Struct.ComponentSchema {
     chip_label: Schema.Attribute.String;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     subtitle: Schema.Attribute.Text;
-  };
-}
-
-export interface ProductsComparisonColumn extends Struct.ComponentSchema {
-  collectionName: 'components_products_comparison_columns';
-  info: {
-    description: 'Comparison table column';
-    displayName: 'Comparison Column';
-  };
-  attributes: {
-    is_highlighted: Schema.Attribute.Boolean &
-      Schema.Attribute.DefaultTo<false>;
-    label: Schema.Attribute.String & Schema.Attribute.Required;
-    values: Schema.Attribute.Text & Schema.Attribute.Required;
-  };
-}
-
-export interface ProductsComparisonMetric extends Struct.ComponentSchema {
-  collectionName: 'components_products_comparison_metrics';
-  info: {
-    description: 'Comparison table metric row label';
-    displayName: 'Comparison Metric';
-  };
-  attributes: {
-    label: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -1418,21 +1400,49 @@ export interface ProductsHero extends Struct.ComponentSchema {
 export interface ProductsMeasured extends Struct.ComponentSchema {
   collectionName: 'components_products_measureds';
   info: {
-    description: 'Products measured section with comparison table';
+    description: 'Products measured section \u2014 three spec cards + CTAs';
     displayName: 'Measured';
   };
   attributes: {
-    comparison_columns: Schema.Attribute.Component<
-      'products.comparison-column',
-      true
-    >;
-    comparison_metrics: Schema.Attribute.Component<
-      'products.comparison-metric',
-      true
-    >;
+    cards: Schema.Attribute.Component<'products.measured-card', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
+    primary_button: Schema.Attribute.Component<'shared.button', false>;
+    secondary_button: Schema.Attribute.Component<'shared.button', false>;
     subtitle: Schema.Attribute.Text;
     tag: Schema.Attribute.Component<'shared.tag', false>;
+  };
+}
+
+export interface ProductsMeasuredCard extends Struct.ComponentSchema {
+  collectionName: 'components_products_measured_cards';
+  info: {
+    description: 'Measured section spec card (chip image + stat rows)';
+    displayName: 'Measured Card';
+  };
+  attributes: {
+    chip_image: Schema.Attribute.Media;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    stats: Schema.Attribute.Component<'products.measured-stat', true>;
+    variant: Schema.Attribute.Enumeration<['gpx10', 'risc_mcu', 'mcu_npu']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'gpx10'>;
+  };
+}
+
+export interface ProductsMeasuredStat extends Struct.ComponentSchema {
+  collectionName: 'components_products_measured_stats';
+  info: {
+    description: 'Icon + label + value row inside a measured card';
+    displayName: 'Measured Stat';
+  };
+  attributes: {
+    icon: Schema.Attribute.Enumeration<['speed', 'energy', 'eco']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'speed'>;
+    is_green: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    is_medium: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    value: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -1911,7 +1921,7 @@ export interface SharedStat extends Struct.ComponentSchema {
     description: Schema.Attribute.Text;
     label: Schema.Attribute.String & Schema.Attribute.Required;
     stat_icon: Schema.Attribute.Media;
-    value: Schema.Attribute.String & Schema.Attribute.Required;
+    value: Schema.Attribute.String;
   };
 }
 
@@ -2724,13 +2734,13 @@ declare module '@strapi/strapi' {
       'products.architecture': ProductsArchitecture;
       'products.bench-card': ProductsBenchCard;
       'products.bench-to-volume': ProductsBenchToVolume;
-      'products.comparison-column': ProductsComparisonColumn;
-      'products.comparison-metric': ProductsComparisonMetric;
       'products.feature-card': ProductsFeatureCard;
       'products.features': ProductsFeatures;
       'products.full-picture': ProductsFullPicture;
       'products.hero': ProductsHero;
       'products.measured': ProductsMeasured;
+      'products.measured-card': ProductsMeasuredCard;
+      'products.measured-stat': ProductsMeasuredStat;
       'products.modelforge': ProductsModelforge;
       'products.modelforge-step': ProductsModelforgeStep;
       'products.spec-callout': ProductsSpecCallout;

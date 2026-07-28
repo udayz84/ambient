@@ -1,4 +1,7 @@
+"use client";
+
 import { mediaUrl } from "@/lib/strapi";
+import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GradientTitle } from "../contact/contact-shared";
@@ -52,9 +55,12 @@ function IntelligenceCard({
   description: string;
   imageUrl?: string | null;
 }) {
+  const { fadeRef, isVisible } = useFadeIn();
+
   return (
     <div
-      className="relative flex w-full flex-col overflow-clip p-[32px] min-[1024px]:h-[336.418px] min-[1024px]:w-[320px] min-[1024px]:shrink-0 min-[1024px]:justify-end"
+      ref={fadeRef}
+      className={`relative flex w-full flex-col overflow-clip p-[32px] min-[1024px]:h-[336.418px] min-[1024px]:w-[320px] min-[1024px]:shrink-0 min-[1024px]:justify-end ${getFadeInClass(isVisible)}`}
       style={{ backgroundImage: CARD_BG }}
       data-name="Content"
     >

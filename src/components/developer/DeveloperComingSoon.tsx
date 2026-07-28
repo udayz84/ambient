@@ -1,4 +1,7 @@
+"use client";
+
 import { gilroyMedium, interRegular } from "../hero/fonts";
+import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { Corners } from "../shared/Corners";
 import { CORNER_LEFT, CORNER_RIGHT, PRIMARY_CTA_SHADOW } from "./developer-data";
 import { mediaUrl } from "@/lib/strapi";
@@ -28,8 +31,11 @@ export function DeveloperComingSoon({ data }: { data?: any }) {
     ? data.subtitle.split("\n")
     : DEFAULT_SUBTITLE.split("\n");
   const cardTitle = data?.card_title || DEFAULT_CARD_TITLE;
+  const cardDescription = data?.card_description || DEFAULT_CARD_DESCRIPTION;
   const ctaLabel = data?.cta_label || DEFAULT_CTA_LABEL;
+  const ctaHref = data?.cta_href || "#";
   const imgSrc = mediaUrl(data?.image) || DEFAULT_IMAGE;
+  const { fadeRef, isVisible } = useFadeIn();
   return (
     <div
       className="absolute"
@@ -74,7 +80,7 @@ export function DeveloperComingSoon({ data }: { data?: any }) {
         </p>
 
         {/* Article card — 2438:4646 */}
-        <div className="relative flex w-[508px] flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0)] px-[16px] pt-[16px] pb-[24px]">
+        <div ref={fadeRef} className={`relative flex w-[508px] flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0)] px-[16px] pt-[16px] pb-[24px] ${getFadeInClass(isVisible)}`}>
           {/* image 140 — 2438:4647 */}
           <div className="relative h-[173px] w-[175px] shrink-0">
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -96,12 +102,12 @@ export function DeveloperComingSoon({ data }: { data?: any }) {
             <p
               className={`${interRegular.className} w-[406px] text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic`}
             >
-              {DEFAULT_CARD_DESCRIPTION}
+              {cardDescription}
             </p>
           </div>
           {/* CTA — 2438:4651 */}
           <a
-            href="#"
+            href={ctaHref}
             className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] items-center justify-center gap-[10px] overflow-hidden px-[20px] py-[10px]`}
             data-node-id="2438:4651"
           >

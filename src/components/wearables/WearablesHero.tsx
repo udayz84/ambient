@@ -1,4 +1,7 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element */
+import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
@@ -76,6 +79,10 @@ export function WearablesHero({
   const primaryHref = data?.primary_button?.href || "#";
   const secondaryLabel = data?.secondary_button?.label || FALLBACK_SECONDARY_LABEL;
   const secondaryHref = data?.secondary_button?.href || "#";
+  
+  const { fadeRef: desktopRef, isVisible: desktopVisible } = useFadeIn();
+  const { fadeRef: mobileRef, isVisible: mobileVisible } = useFadeIn();
+
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -118,22 +125,25 @@ export function WearablesHero({
           </p>
         </div>
 
-        {/* Foreground image 163 with gradient overlay */}
+        {/* Foreground image 163 with gradient overlay — 2509:377 (top=-62.65) */}
         <div
-          className="pointer-events-none absolute top-[-37px] left-0 h-[876px] w-[1440px]"
+          ref={desktopRef}
+          className={`pointer-events-none absolute top-[-62.65px] left-0 h-[876px] w-[1440px] ${getFadeInClass(desktopVisible)}`}
           data-node-id="2509:377"
           data-name="image 163"
           aria-hidden
         >
-          <div className="absolute inset-0 overflow-hidden">
-            <img
-              src={bg2}
-              alt=""
-              className="absolute top-[-11.78%] left-0 size-full max-w-none object-cover"
-            />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0)] from-[63.47%] to-black to-[90.411%]" />
+          <img
+            src={bg2}
+            alt=""
+            className="absolute inset-0 size-full max-w-none object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0)] from-[63.47%] to-black to-[90.573%]" />
         </div>
+
+        {/* Edge blending for ultra-wide screens */}
+        <div className="pointer-events-none absolute top-[-100px] bottom-[-100px] left-0 w-[200px] bg-gradient-to-r from-black to-transparent z-0" />
+        <div className="pointer-events-none absolute top-[-100px] bottom-[-100px] right-0 w-[200px] bg-gradient-to-l from-black to-transparent z-0" />
 
         {/* Title — "Clinical precision. Coin-cell power." */}
         <div
@@ -159,7 +169,7 @@ export function WearablesHero({
               />
             </div>
             <div
-              className={`${gilroyMedium.className} absolute top-[10px] left-1/2 -translate-x-1/2 text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} absolute top-[10px] left-1/2 w-full -translate-x-1/2 px-[10px] text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: TITLE_GRADIENT,
                 WebkitBackgroundClip: "text",
@@ -170,7 +180,7 @@ export function WearablesHero({
               {titleLines.map((line: string, i: number) => (
                 <span
                   key={i}
-                  className="block h-[49px] leading-[49px] whitespace-nowrap"
+                  className="block leading-[49px]"
                 >
                   {line}
                 </span>
@@ -203,9 +213,10 @@ export function WearablesHero({
 
       {/* MOBILE (<1024px) */}
       <div className="relative flex w-full flex-col overflow-hidden min-[1024px]:hidden">
-        <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <div ref={mobileRef} className={`pointer-events-none absolute inset-0 ${getFadeInClass(mobileVisible)}`} aria-hidden>
+          {/* Full scene photo (image 162) */}
           <img
-            src={bg2}
+            src={bg1}
             alt=""
             className="size-full max-w-none object-cover"
           />

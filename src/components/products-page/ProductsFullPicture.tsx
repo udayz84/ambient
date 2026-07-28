@@ -1,4 +1,7 @@
+"use client";
+
 import { Fragment } from "react";
+import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { mediaUrl } from "@/lib/strapi";
 import { dmMono, gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 
@@ -476,9 +479,12 @@ function CardLine({ line }: { line: LineSpec }) {
 type RenderCard = SpecCard & { iconSrc: string };
 
 function SpecCardView({ card }: { card: RenderCard }) {
+  const { fadeRef, isVisible } = useFadeIn();
+
   return (
     <div
-      className="absolute bg-[#1d201d] border border-solid overflow-clip rounded-[12px]"
+      ref={fadeRef}
+      className={`absolute bg-[#1d201d] border border-solid overflow-clip rounded-[12px] ${getFadeInClass(isVisible)}`}
       style={{
         left: card.left,
         top: card.top,
@@ -605,7 +611,7 @@ export function ProductsFullPicture({ data }: { data?: any }) {
     <>
       {/* DESKTOP (>=1024px) — 3309:2368 "Desktop - 16" (1440×930) */}
       <section
-        className="relative flex w-full justify-center bg-black"
+        className="relative flex w-full justify-center bg-black overflow-hidden"
         aria-label="The full picture"
       >
         <div
@@ -615,16 +621,16 @@ export function ProductsFullPicture({ data }: { data?: any }) {
         >
           {/* 3309:2369 — bottom aurora (rotated 180°) */}
           <div
-            className="absolute flex h-[486px] items-center justify-center left-0 top-[444px] w-[1440px]"
+            className="absolute flex h-[486px] items-center justify-center left-1/2 -translate-x-1/2 top-[444px] w-[100vw] min-w-[1440px]"
             data-node-id="3309:2369"
           >
-            <div className="flex-none rotate-180">
-              <div className="h-[486px] relative w-[1440px]" data-name="footer">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
+            <div className="flex-none rotate-180 w-full h-full">
+              <div className="h-[486px] relative w-full" data-name="footer">
                 <img
                   alt=""
-                  className="absolute inset-0 max-w-none object-bottom pointer-events-none size-full"
+                  className="absolute inset-0 w-full h-full pointer-events-none"
                   src={AURORA}
+                  style={{ objectFit: "fill" }}
                   aria-hidden
                 />
               </div>
@@ -633,18 +639,18 @@ export function ProductsFullPicture({ data }: { data?: any }) {
 
           {/* 3309:2370 — top aurora (mirrored) */}
           <div
-            className="absolute flex h-[463px] items-center justify-center left-0 top-[-18.5px] w-[1440px]"
+            className="absolute flex h-[463px] items-center justify-center left-1/2 -translate-x-1/2 top-[-18.5px] w-[100vw] min-w-[1440px]"
             data-node-id="3309:2370"
           >
-            <div className="-scale-y-100 flex-none rotate-180">
-              <div className="h-[463px] relative w-[1440px]" data-name="footer">
+            <div className="-scale-y-100 flex-none rotate-180 w-full h-full">
+              <div className="h-[463px] relative w-full" data-name="footer">
                 <div aria-hidden className="absolute inset-0 pointer-events-none">
                   <div className="absolute bg-black inset-0" />
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     alt=""
-                    className="absolute max-w-none object-bottom size-full"
+                    className="absolute w-full h-full"
                     src={AURORA}
+                    style={{ objectFit: "fill" }}
                     aria-hidden
                   />
                 </div>
@@ -708,51 +714,59 @@ export function ProductsFullPicture({ data }: { data?: any }) {
 
         <div className="mt-[32px] grid grid-cols-1 gap-[16px]">
           {cards.map((c) => (
-            <div
-              key={c.nodeId}
-              className="relative overflow-clip rounded-[12px] bg-[#dbe8c8] px-[15px] pt-[15px] pb-[16px]"
-            >
-              <div
-                className="pointer-events-none absolute inset-0"
-                style={{ backgroundImage: c.pattern.gradient }}
-                aria-hidden
-              />
-              <div
-                className="relative flex w-full items-center justify-between border-b border-solid pb-[10px]"
-                style={{ borderColor: BORDER_DARK }}
-              >
-                <p
-                  className={`${gilroySemiBold.className} text-[16px] leading-[16px] not-italic tracking-[0.6px] uppercase whitespace-nowrap`}
-                  style={{ color: HEADER_COLOR }}
-                >
-                  {c.title}
-                </p>
-                <div
-                  className="flex size-[28px] items-center justify-center overflow-clip rounded-[5.895px]"
-                  style={{ backgroundImage: ICON_TILE_BG }}
-                  aria-hidden
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img alt="" src={c.iconSrc} className="block size-[19px] max-w-none" />
-                </div>
-              </div>
-              <div className="relative mt-[10px] flex flex-col gap-[10px]">
-                {c.items.map((it, i) => (
-                  <p
-                    key={i}
-                    className={`${interRegular.className} text-[14px] font-normal leading-[normal] tracking-[-0.1504px] text-black not-italic`}
-                  >
-                    <span className="mr-[6px]" style={{ color: c.plusColor }}>
-                      +
-                    </span>
-                    {it.text}
-                  </p>
-                ))}
-              </div>
-            </div>
+            <SpecCardMobileView key={c.nodeId} card={c} />
           ))}
         </div>
       </section>
     </>
+  );
+}
+
+function SpecCardMobileView({ card: c }: { card: RenderCard }) {
+  const { fadeRef, isVisible } = useFadeIn();
+
+  return (
+    <div
+      ref={fadeRef}
+      className={`relative overflow-clip rounded-[12px] bg-[#dbe8c8] px-[15px] pt-[15px] pb-[16px] ${getFadeInClass(isVisible)}`}
+    >
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{ backgroundImage: c.pattern.gradient }}
+        aria-hidden
+      />
+      <div
+        className="relative flex w-full items-center justify-between border-b border-solid pb-[10px]"
+        style={{ borderColor: BORDER_DARK }}
+      >
+        <p
+          className={`${gilroySemiBold.className} text-[16px] leading-[16px] not-italic tracking-[0.6px] uppercase whitespace-nowrap`}
+          style={{ color: HEADER_COLOR }}
+        >
+          {c.title}
+        </p>
+        <div
+          className="flex size-[28px] items-center justify-center overflow-clip rounded-[5.895px]"
+          style={{ backgroundImage: ICON_TILE_BG }}
+          aria-hidden
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img alt="" src={c.iconSrc} className="block size-[19px] max-w-none" />
+        </div>
+      </div>
+      <div className="relative mt-[10px] flex flex-col gap-[10px]">
+        {c.items.map((it, i) => (
+          <p
+            key={i}
+            className={`${interRegular.className} text-[14px] font-normal leading-[normal] tracking-[-0.1504px] text-black not-italic`}
+          >
+            <span className="mr-[6px]" style={{ color: c.plusColor }}>
+              +
+            </span>
+            {it.text}
+          </p>
+        ))}
+      </div>
+    </div>
   );
 }

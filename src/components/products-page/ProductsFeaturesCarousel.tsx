@@ -11,10 +11,8 @@
  */
 import { useEffect, useRef, useState } from "react";
 import LocomotiveScroll from "locomotive-scroll";
-import {
-  ProductsFeatureCard,
-  type ProductsFeatureCardData,
-} from "./ProductsFeatureCard";
+import { ProductsFeatureCard } from "./ProductsFeatureCard";
+import type { ProductsFeatureCardData } from "./products-data";
 
 const SLIDE_DISTANCE = 60;
 const STAGGER = 0.12;

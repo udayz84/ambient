@@ -1,1 +1,0 @@
-﻿{ "collectionName": "components_products_comparison_metrics", "info": { "displayName": "Comparison Metric", "description": "Comparison table metric row label" }, "options": {}, "attributes": { "label": { "type": "string", "required": true } } }

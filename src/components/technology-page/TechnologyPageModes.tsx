@@ -1,4 +1,7 @@
+"use client";
+
 import { mediaUrl } from "@/lib/strapi";
+import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { gilroySemiBold, interRegular, interSemiBold } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
@@ -206,9 +209,12 @@ function ModeCard({
   bulletLeft = "12px",
   bulletTop = "49.65px",
 }: ModeCardProps) {
+  const { fadeRef, isVisible } = useFadeIn();
+
   return (
     <div
-      className={`absolute ${left} ${top} ${width} ${height} z-20 bg-[rgba(21,21,21,0.08)] backdrop-blur-sm border border-white/10`}
+      ref={fadeRef}
+      className={`absolute ${left} ${top} ${width} ${height} z-20 bg-[rgba(21,21,21,0.08)] backdrop-blur-sm border border-white/10 ${getFadeInClass(isVisible)}`}
       data-node-id={nodeId}
       data-name="Content"
     >
@@ -475,22 +481,14 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
           aria-hidden
         />
 
-        <div className="flex w-full max-w-[327px] flex-col gap-[14px] rounded-[4px] bg-[rgba(21,21,21,0.08)] backdrop-blur-sm border border-white/10 p-[16px]">
-          <div className="flex items-center justify-between border-b border-solid border-[rgba(255,255,255,0.1)] pb-[8px]">
-            <span className={`${gilroySemiBold.className} text-[14px] font-semibold tracking-[0.6px] text-[#6fe047] uppercase not-italic`}>
-              {sideCard0?.title ?? "Subconscious AI"}
-            </span>
-            <ModeIcon />
-          </div>
-          <p className={`${interRegular.className} text-[13px] leading-[normal] font-normal text-[rgba(255,255,255,0.9)] not-italic`}>
-            <span className="text-[#3a9719]">+ </span>
-            {sideCard0?.bullet ??
-              "Legacy chips switch off. A-Cube sleeps like you: the brain stays aware. Our island runs AI at microwatts while the ARM core is powered down."}
-          </p>
-          <p className={`${interSemiBold.className} border-t border-solid border-[rgba(255,255,255,0.1)] pt-[8px] text-center text-[10px] font-semibold tracking-[0.6px] text-[#e2f9da] uppercase not-italic`}>
-            {sideCard0?.caption ?? "Always processing, never draining."}
-          </p>
-        </div>
+        <ModeCardMobile
+          title={sideCard0?.title ?? "Subconscious AI"}
+          bullet={
+            sideCard0?.bullet ??
+            "Legacy chips switch off. A-Cube sleeps like you: the brain stays aware. Our island runs AI at microwatts while the ARM core is powered down."
+          }
+          caption={sideCard0?.caption ?? "Always processing, never draining."}
+        />
 
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -500,23 +498,40 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
           aria-hidden
         />
 
-        <div className="flex w-full max-w-[327px] flex-col gap-[14px] rounded-[4px] bg-[rgba(21,21,21,0.08)] backdrop-blur-sm border border-white/10 p-[16px]">
-          <div className="flex items-center justify-between border-b border-solid border-[rgba(255,255,255,0.1)] pb-[8px]">
-            <span className={`${gilroySemiBold.className} text-[14px] font-semibold tracking-[0.6px] text-[#6fe047] uppercase not-italic`}>
-              {sideCard1?.title ?? "Turboboost mode"}
-            </span>
-            <ModeIcon />
-          </div>
-          <p className={`${interRegular.className} text-[13px] leading-[normal] font-normal text-[rgba(255,255,255,0.9)] not-italic`}>
-            <span className="text-[#3a9719]">+ </span>
-            {sideCard1?.bullet ??
-              "When something matters, the brain wakes instantly. SenseMesh flags real events and ramps the chip to full performance, then settles back down."}
-          </p>
-          <p className={`${interSemiBold.className} border-t border-solid border-[rgba(255,255,255,0.1)] pt-[8px] text-center text-[10px] font-semibold tracking-[0.6px] text-[#e2f9da] uppercase not-italic`}>
-            {sideCard1?.caption ?? "live, no reset \u2014 settles back down."}
-          </p>
-        </div>
+        <ModeCardMobile
+          title={sideCard1?.title ?? "Turboboost mode"}
+          bullet={
+            sideCard1?.bullet ??
+            "When something matters, the brain wakes instantly. SenseMesh flags real events and ramps the chip to full performance, then settles back down."
+          }
+          caption={sideCard1?.caption ?? "live, no reset \u2014 settles back down."}
+        />
       </div>
     </section>
+  );
+}
+
+function ModeCardMobile({ title, bullet, caption }: { title: string; bullet: string; caption: string }) {
+  const { fadeRef, isVisible } = useFadeIn();
+
+  return (
+    <div
+      ref={fadeRef}
+      className={`flex w-full max-w-[327px] flex-col gap-[14px] rounded-[4px] bg-[rgba(21,21,21,0.08)] backdrop-blur-sm border border-white/10 p-[16px] ${getFadeInClass(isVisible)}`}
+    >
+      <div className="flex items-center justify-between border-b border-solid border-[rgba(255,255,255,0.1)] pb-[8px]">
+        <span className={`${gilroySemiBold.className} text-[14px] font-semibold tracking-[0.6px] text-[#6fe047] uppercase not-italic`}>
+          {title}
+        </span>
+        <ModeIcon />
+      </div>
+      <p className={`${interRegular.className} text-[13px] leading-[normal] font-normal text-[rgba(255,255,255,0.9)] not-italic`}>
+        <span className="text-[#3a9719]">+ </span>
+        {bullet}
+      </p>
+      <p className={`${interSemiBold.className} border-t border-solid border-[rgba(255,255,255,0.1)] pt-[8px] text-center text-[10px] font-semibold tracking-[0.6px] text-[#e2f9da] uppercase not-italic`}>
+        {caption}
+      </p>
+    </div>
   );
 }

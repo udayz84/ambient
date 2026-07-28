@@ -1,4 +1,7 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element */
+import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
@@ -115,9 +118,12 @@ function SectionTitle({ heading }: { heading: string }) {
 }
 
 function ArticleCard({ article }: { article: Article }) {
+  const { fadeRef, isVisible } = useFadeIn();
+
   return (
     <div
-      className="relative flex h-[400px] w-full flex-col items-center gap-[16px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[16px] pt-[16px] pb-[24px]"
+      ref={fadeRef}
+      className={`relative flex h-[400px] w-full flex-col items-center gap-[16px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[16px] pt-[16px] pb-[24px] ${getFadeInClass(isVisible)}`}
       data-name="Article"
     >
       {/* Image */}

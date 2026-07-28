@@ -1,269 +1,679 @@
-import { interMedium, interRegular, interSemiBold, gilroyMedium } from "../hero/fonts";
-import { TabSwitcher } from "./TabSwitcher";
-import { Corners } from "../shared/Corners";
+"use client";
+
+import { mediaUrl } from "@/lib/strapi";
+import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
+import { dmMono, gilroyBold, gilroyMedium, interRegular } from "../hero/fonts";
 import {
-  COMPARISON_COLUMNS,
-  type ComparisonColumn,
-  COMPARISON_METRICS,
-  CORNER_LEFT,
-  CORNER_RIGHT,
-  GPX_TAG_BG,
-  GPX_TAG_TEXT,
-  HIGHLIGHT_COL_BG,
-  HIGHLIGHT_COL_BORDER,
-  HIGHLIGHT_ROW_MARKER_BG,
   MEASURED_TITLE_GRADIENT,
-  ROW_MARKER_BG,
-  TABLE_BG,
+  PRIMARY_CTA_INSET,
+  PRIMARY_CTA_SHADOW,
+  SECONDARY_CTA_BG,
 } from "./products-data";
+
+/**
+ * Figma 3309:1912 "Desktop - 15" (1440×1043) — "Not projected. Measured in silicon."
+ * Eyebrow chip + gradient title + three spec cards (GPX10 Pro / RISC MCU / MCU + NPU)
+ * over aurora backgrounds, with datasheet / whitepaper CTAs.
+ */
+
+/* ---- Assets (exported from Figma) ---- */
+const AURORA = "/products/measured-aurora.png"; // 3309:1913/1914 footer image
+const CARD_CORNERS = "/products/measured-card-corners.svg"; // 3468:2233 "Cornor Elements"
+const CHIP_GLOW = "/products/measured-chip-glow.svg"; // 3468:2238 Vector 94
+const CHIP_GPX10 = "/products/measured-chip-gpx10.png"; // 3468:2258 image 76
+const CHIP_RISC = "/products/measured-chip-risc.png"; // 3468:2285 image 76
+const CHIP_MCU_NPU = "/products/measured-chip-mcu-npu.png"; // 3468:2312 image 77
+const ICON_SPEED = "/products/measured-icon-speed.svg"; // dashboard-speed-01 elements
+const ICON_ENERGY = "/products/measured-icon-energy.svg"; // energy-rectangle elements
+const ICON_ECO = "/products/measured-icon-eco.svg"; // eco-energy elements
+const LINE_88 = "/products/measured-line-88.svg"; // 3468:2257 Line 88
+const CTA_CORNER_L = "/products/measured-cta-corner-left.svg"; // 3712:1929/1932 Vector 47
+const CTA_CORNER_R = "/products/measured-cta-corner-right.svg"; // 3712:1928/1931 Vector 46
+/* Identical to the FullPicture section's exports (verified byte-for-byte). */
+const MENU_CORNER_L = "/products/fp-menu-corner-left.svg"; // 3710:1912/1913 Vector 42
+const MENU_CORNER_R = "/products/fp-menu-corner-right.svg"; // 3710:1916/1917 Vector 43
+const TITLE_CORNER_L = "/products/fp-title-corner-left.svg"; // 3309:1918/1920 Vector 58
+const TITLE_CORNER_R = "/products/fp-title-corner-right.svg"; // 3309:1919/1921 Vector 55
+
+const GREEN = "#53d824"; // Colors/Primary/600
+const GREY = "#f0f0f0"; // Grey Color
+const STAT_BORDER = "rgba(255,255,255,0.1)";
 
 const FALLBACK_HEADING = "Not projected. \nMeasured in silicon.";
 const FALLBACK_SUBTITLE =
-  "The same chip, tuned to the job — from a wrist to a factory floor.";
+  "Here's GPX10 Pro against the alternatives a design team actually weighs.";
+const FALLBACK_MENU = "Measured proof";
+const FALLBACK_PRIMARY = { label: " Download the Full Datasheet", href: "#" };
+const FALLBACK_SECONDARY = { label: " Read the Architecture Whitepaper", href: "#" };
 
 function splitLines(value: string): string[] {
   return value.split("\n");
 }
 
-/**
- * Figma 2906:3290 (title) + 2906:3186 (comparison table).
- * "Not projected. Measured in silicon."
- */
+/* ---- Card data (values straight from Figma) ---- */
+
+type IconSpec = {
+  src: string;
+  name: string;
+  /** Inner "elements" box inset within the 36px icon instance. */
+  boxInset: string;
+  /** Exported-SVG bleed inset (drop-shadow padding) within the elements box. */
+  imgInset: string;
+};
+
+const ICONS: Record<"speed" | "energy" | "eco", IconSpec> = {
+  speed: {
+    src: ICON_SPEED,
+    name: "dashboard-speed-01",
+    boxInset: "inset-[10.42%]",
+    imgInset: "inset-[-74.03%_-74.04%_-74.04%_-74.03%]",
+  },
+  energy: {
+    src: ICON_ENERGY,
+    name: "energy-rectangle",
+    boxInset: "inset-[10.42%]",
+    imgInset: "inset-[-74.04%]",
+  },
+  eco: {
+    src: ICON_ECO,
+    name: "eco-energy",
+    boxInset: "inset-[8.33%]",
+    imgInset: "inset-[-70.33%]",
+  },
+};
+
+type MeasuredStat = {
+  icon: IconSpec;
+  label: string;
+  value: string;
+  /** Green value text (GPX10 Pro card); grey otherwise. */
+  green?: boolean;
+  /** Figma renders MCU + NPU "100" in Gilroy Medium, the rest in Bold. */
+  medium?: boolean;
+};
+
+const stat = (
+  icon: IconSpec,
+  label: string,
+  value: string,
+  opts: { green?: boolean; medium?: boolean } = {},
+): MeasuredStat => ({ icon, label, value, ...opts });
+
+type MeasuredVariant = "gpx10" | "risc_mcu" | "mcu_npu";
+
+type MeasuredCard = {
+  nodeId: string;
+  name: string;
+  /** 3468:2238 green blur behind the chip (GPX10 Pro only). */
+  glow?: boolean;
+  imageSrc: string;
+  /** Geometry of the absolutely-positioned, centered chip image box. */
+  imageBoxClass: string;
+  /** mix-blend-luminosity on competitor chip images. */
+  luminosity?: boolean;
+  /** RISC MCU: image cropped inside an inner overflow-hidden frame. */
+  cropped?: boolean;
+  stats: MeasuredStat[];
+};
+
+/** Per-variant visuals straight from Figma; also the fallback when Strapi is empty. */
+const FALLBACK_CARDS: Record<MeasuredVariant, MeasuredCard> = {
+  gpx10: {
+    nodeId: "3468:2231",
+    name: "GPX10 Pro",
+    glow: true,
+    imageSrc: CHIP_GPX10,
+    imageBoxClass:
+      "left-[calc(50%-10.58px)] top-[calc(50%-60px)] h-[255.188px] w-[401.15px]",
+    stats: [
+      stat(ICONS.speed, "Peak Compute (GOPS)", "512", { green: true }),
+      stat(ICONS.energy, "Active Power", "40 - 120 µW", { green: true }),
+      stat(ICONS.eco, "Efficiency (TOPS/W)", "7.3", { green: true }),
+    ],
+  },
+  risc_mcu: {
+    nodeId: "3468:2259",
+    name: "RISC MCU",
+    imageSrc: CHIP_RISC,
+    imageBoxClass:
+      "left-[calc(50%-10.58px)] top-[calc(50%-60px)] h-[255.188px] w-[401.15px]",
+    luminosity: true,
+    cropped: true,
+    stats: [
+      stat(ICONS.speed, "Peak Compute (GOPS)", "0.02"),
+      stat(ICONS.energy, "Active Power", "600 mW"),
+      stat(ICONS.eco, "Efficiency (TOPS/W)", "0.02"),
+    ],
+  },
+  mcu_npu: {
+    nodeId: "3468:2286",
+    name: "MCU + NPU",
+    imageSrc: CHIP_MCU_NPU,
+    imageBoxClass:
+      "left-[calc(50%-10.9px)] top-[calc(50%-64.16px)] h-[198.985px] w-[312.801px]",
+    luminosity: true,
+    stats: [
+      stat(ICONS.speed, "Peak Compute (GOPS)", "100", { medium: true }),
+      stat(ICONS.energy, "Active Power", "200 mW"),
+      stat(ICONS.eco, "Efficiency (TOPS/W)", "1.2"),
+    ],
+  },
+};
+
+const CARD_ORDER: MeasuredVariant[] = ["gpx10", "risc_mcu", "mcu_npu"];
+
+/** Map a Strapi measured-card onto the Figma-driven view model for its variant. */
+function strapiCardToView(c: any): MeasuredCard {
+  const variant: MeasuredVariant =
+    c?.variant === "risc_mcu" || c?.variant === "mcu_npu"
+      ? c.variant
+      : "gpx10";
+  const fallback = FALLBACK_CARDS[variant];
+  const stats: MeasuredStat[] =
+    Array.isArray(c?.stats) && c.stats.length > 0
+      ? c.stats.map((s: any) => ({
+          icon: ICONS[s?.icon as keyof typeof ICONS] ?? ICONS.speed,
+          label: s?.label ?? "",
+          value: s?.value ?? "",
+          green: !!s?.is_green,
+          medium: !!s?.is_medium,
+        }))
+      : fallback.stats;
+  return {
+    ...fallback,
+    name: c?.name || fallback.name,
+    imageSrc: mediaUrl(c?.chip_image) || fallback.imageSrc,
+    stats,
+  };
+}
+
+/* ---- Small building blocks ---- */
+
+function CornerTick({
+  src,
+  placement,
+  size = 4,
+  nodeId,
+}: {
+  src: string;
+  placement: "tl" | "tr" | "bl" | "br";
+  size?: number;
+  nodeId?: string;
+}) {
+  // Mirrors the Figma structure: tick box, image inset [0_0_-12.5%_-12.5%],
+  // flipped per corner. tl = flipY, bl = plain, tr = rotate180, br = flipY+rotate180.
+  const posClass =
+    placement === "tl"
+      ? "left-0 top-0"
+      : placement === "tr"
+        ? "right-0 top-0"
+        : placement === "bl"
+          ? "bottom-0 left-0"
+          : "bottom-0 right-0";
+  const flipClass =
+    placement === "tl"
+      ? "-scale-y-100"
+      : placement === "tr"
+        ? "rotate-180"
+        : placement === "br"
+          ? "-scale-y-100 rotate-180"
+          : "";
+  const inner = (
+    <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img alt="" className="block max-w-none size-full" src={src} aria-hidden />
+    </div>
+  );
+  return (
+    <div
+      className={`absolute ${posClass} ${flipClass ? "flex items-center justify-center" : ""}`}
+      style={{ width: size, height: size }}
+      data-node-id={nodeId}
+      aria-hidden
+    >
+      {flipClass ? (
+        <div className={`${flipClass} flex-none`}>
+          <div className="relative" style={{ width: size, height: size }}>
+            {inner}
+          </div>
+        </div>
+      ) : (
+        inner
+      )}
+    </div>
+  );
+}
+
+function MenuChip({ label }: { label: string }) {
+  return (
+    <div
+      className={`${dmMono.className} bg-[rgba(255,255,255,0.06)] flex gap-[6px] h-[27px] items-center overflow-clip px-[24px] relative shrink-0`}
+      data-node-id="3710:1910"
+      data-name="Menu"
+    >
+      <p
+        className="[text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] leading-[20.149px] not-italic relative shrink-0 text-[#ecfae5] text-[13.433px] tracking-[-0.403px] uppercase whitespace-nowrap"
+        data-node-id="3710:1911"
+      >
+        {label}
+      </p>
+      <CornerTick src={MENU_CORNER_L} placement="tl" size={4.133} nodeId="3710:1912" />
+      <CornerTick src={MENU_CORNER_L} placement="bl" size={4.133} nodeId="3710:1913" />
+      <div
+        className="absolute bg-white h-[12.399px] left-[12px] opacity-60 top-[7.3px] w-[2.067px]"
+        data-node-id="3710:1914"
+        aria-hidden
+      />
+      <div
+        className="-translate-y-1/2 absolute bg-white h-[12.399px] opacity-60 right-[12px] top-1/2 w-[2.067px]"
+        data-node-id="3710:1915"
+        aria-hidden
+      />
+      <CornerTick src={MENU_CORNER_R} placement="tr" size={4.133} nodeId="3710:1916" />
+      <CornerTick src={MENU_CORNER_R} placement="br" size={4.133} nodeId="3710:1917" />
+    </div>
+  );
+}
+
+function GradientTitleBlock({ headingLines }: { headingLines: string[] }) {
+  return (
+    <div
+      className="flex flex-col items-center px-[10px] relative shrink-0"
+      data-node-id="3309:1916"
+      data-name="Title"
+    >
+      <h2
+        className={`${gilroyMedium.className} [word-break:break-word] bg-clip-text font-medium leading-[0] m-0 not-italic relative shrink-0 text-[46px] text-center text-transparent whitespace-nowrap`}
+        style={{
+          backgroundImage: MEASURED_TITLE_GRADIENT,
+          WebkitBackgroundClip: "text",
+          backgroundClip: "text",
+        }}
+        data-node-id="3309:1917"
+      >
+        {headingLines.map((line, i) => (
+          <span key={i} className="block leading-[49px] whitespace-pre">
+            {line}
+          </span>
+        ))}
+      </h2>
+      <CornerTick src={TITLE_CORNER_L} placement="tl" nodeId="3309:1918" />
+      <CornerTick src={TITLE_CORNER_R} placement="tr" nodeId="3309:1919" />
+      <CornerTick src={TITLE_CORNER_L} placement="bl" nodeId="3309:1920" />
+      <CornerTick src={TITLE_CORNER_R} placement="br" nodeId="3309:1921" />
+    </div>
+  );
+}
+
+function StatRow({ stat, bordered }: { stat: MeasuredStat; bordered: boolean }) {
+  return (
+    <div
+      className={`flex items-center justify-between pb-[14px] relative shrink-0 w-full ${
+        bordered ? "border-b border-solid" : ""
+      }`}
+      style={bordered ? { borderColor: STAT_BORDER } : undefined}
+    >
+      <div className="flex gap-[8px] items-center relative shrink-0">
+        <div className="relative shrink-0 size-[36px]" data-name={stat.icon.name}>
+          <div className={`absolute ${stat.icon.boxInset}`} data-name="elements">
+            <div className={`absolute ${stat.icon.imgInset}`}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img alt="" className="block max-w-none size-full" src={stat.icon.src} aria-hidden />
+            </div>
+          </div>
+        </div>
+        <p
+          className={`${interRegular.className} [word-break:break-word] font-normal leading-[24px] not-italic opacity-90 relative shrink-0 text-[16px] text-white whitespace-nowrap`}
+        >
+          {stat.label}
+        </p>
+      </div>
+      <p
+        className={`${stat.medium ? gilroyMedium.className : gilroyBold.className} [word-break:break-word] leading-[28px] not-italic opacity-90 relative shrink-0 text-[22px] whitespace-nowrap`}
+        style={{ color: stat.green ? GREEN : GREY }}
+      >
+        {stat.value}
+      </p>
+    </div>
+  );
+}
+
+function MeasuredCardView({ card }: { card: MeasuredCard }) {
+  const { fadeRef, isVisible } = useFadeIn();
+
+  return (
+    <div
+      ref={fadeRef}
+      className={`h-[600px] overflow-clip relative shrink-0 w-[388px] max-w-full ${getFadeInClass(isVisible)}`}
+      data-node-id={card.nodeId}
+      data-name="Lower power consumption"
+    >
+      {/* 3468:2232 — surface */}
+      <div
+        className="absolute border-[0.5px] border-[rgba(255,255,255,0.1)] border-solid h-[600px] left-0 top-0 w-[388px] max-w-full"
+        style={{
+          backgroundImage:
+            "linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), linear-gradient(90deg, rgba(15, 14, 14, 0.75) 0%, rgba(15, 14, 14, 0.75) 100%)",
+        }}
+        aria-hidden
+      />
+      {/* 3468:2233 — corner elements */}
+      <div
+        className="absolute h-[598.994px] left-[0.39px] top-[0.51px] w-[387.605px]"
+        data-name="Cornor Elements"
+        aria-hidden
+      >
+        <div className="absolute inset-[0_-0.13%]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img alt="" className="block max-w-none size-full" src={CARD_CORNERS} />
+        </div>
+      </div>
+      {/* 3468:2238 — green glow behind the chip (GPX10 Pro only) */}
+      {card.glow && (
+        <div
+          className="absolute h-[168.649px] left-[89.88px] top-[159.43px] w-[234.951px]"
+          data-node-id="3468:2238"
+          aria-hidden
+        >
+          <div className="absolute inset-[-119.54%_-85.81%]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img alt="" className="block max-w-none size-full" src={CHIP_GLOW} />
+          </div>
+        </div>
+      )}
+      {/* Stats — 3468:2239 (bottom-30, centered, w-328) */}
+      <div className="-translate-x-1/2 absolute bottom-[30px] flex flex-col gap-[10px] items-start left-1/2 w-[328px] max-w-[calc(100%-30px)]">
+        {card.stats.map((s, i) => (
+          <StatRow key={s.label} stat={s} bordered={i < card.stats.length - 1} />
+        ))}
+      </div>
+      {/* Card title — 3468:2255 (left-30, top-30, w-299) */}
+      <div className="absolute flex flex-col gap-[12px] items-center left-[30px] top-[30px] w-[299px]">
+        <p
+          className={`${gilroyMedium.className} [word-break:break-word] leading-[47px] not-italic relative shrink-0 text-[38px] text-white whitespace-nowrap`}
+        >
+          {card.name}
+        </p>
+        <div className="h-0 relative shrink-0 w-[151.832px]" aria-hidden>
+          <div className="absolute inset-[-1px_0_0_0]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img alt="" className="block max-w-none size-full" src={LINE_88} />
+          </div>
+        </div>
+      </div>
+      {/* Chip image */}
+      <div
+        className={`-translate-x-1/2 -translate-y-1/2 absolute ${card.imageBoxClass} ${card.luminosity ? "mix-blend-luminosity" : ""}`}
+        data-name={card.cropped ? "image 76" : undefined}
+        aria-hidden
+      >
+        {card.cropped ? (
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              alt=""
+              className="absolute h-[85.93%] left-[18.48%] max-w-none top-[7.03%] w-[65.81%]"
+              src={card.imageSrc}
+            />
+          </div>
+        ) : (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            alt=""
+            className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
+            src={card.imageSrc}
+          />
+        )}
+      </div>
+    </div>
+  );
+}
+
+function PrimaryCta({
+  label,
+  href,
+  centered = false,
+}: {
+  label: string;
+  href: string;
+  centered?: boolean;
+}) {
+  return (
+    <a
+      href={href}
+      className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] shrink-0 overflow-hidden ${
+        centered ? "w-full max-w-[293px] items-center justify-center" : "w-[293px]"
+      }`}
+      data-node-id="3712:1922"
+      data-name="Cta"
+    >
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+      />
+      <span
+        className={`[word-break:break-word] leading-[28px] not-italic text-[16px] text-white uppercase whitespace-nowrap ${
+          centered ? "relative" : "absolute left-[16.5px] top-[calc(50%-14px)]"
+        }`}
+        data-node-id="3712:1923"
+      >
+        {label}
+      </span>
+      <span
+        aria-hidden
+        className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`}
+      />
+      <CornerTick src={CTA_CORNER_R} placement="tr" nodeId="3712:1928" />
+      <CornerTick src={CTA_CORNER_L} placement="tl" nodeId="3712:1929" />
+      <CornerTick src={CTA_CORNER_R} placement="br" nodeId="3712:1931" />
+      <CornerTick src={CTA_CORNER_L} placement="bl" nodeId="3712:1932" />
+    </a>
+  );
+}
+
+function SecondaryCta({
+  label,
+  href,
+  centered = false,
+}: {
+  label: string;
+  href: string;
+  centered?: boolean;
+}) {
+  return (
+    <a
+      href={href}
+      className={`${gilroyMedium.className} relative flex h-[48px] shrink-0 overflow-clip px-[20px] py-[10px] ${
+        centered ? "w-full max-w-[331px] items-center justify-center" : "w-[331px] items-start"
+      }`}
+      style={{ backgroundColor: SECONDARY_CTA_BG }}
+      data-node-id="3712:1933"
+      data-name="CTA - Secondary"
+    >
+      <span
+        className={`${gilroyMedium.className} [word-break:break-word] leading-[28px] not-italic relative shrink-0 text-[16px] text-white uppercase whitespace-nowrap`}
+        data-node-id="3712:1935"
+      >
+        {label}
+      </span>
+      <CornerTick src={TITLE_CORNER_L} placement="tl" nodeId="3712:1936" />
+      <CornerTick src={TITLE_CORNER_R} placement="tr" nodeId="3712:1937" />
+      <CornerTick src={TITLE_CORNER_L} placement="bl" nodeId="3712:1938" />
+      <CornerTick src={TITLE_CORNER_R} placement="br" nodeId="3712:1939" />
+    </a>
+  );
+}
+
+/* ---- Section ---- */
+
 export function ProductsMeasured({ data }: { data?: any }) {
   const heading = data?.heading || FALLBACK_HEADING;
   const headingLines = splitLines(heading);
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const menuLabel = data?.tag?.text || FALLBACK_MENU;
+  const primary = {
+    label: data?.primary_button?.label ?? FALLBACK_PRIMARY.label,
+    href: data?.primary_button?.href ?? FALLBACK_PRIMARY.href,
+  };
+  const secondary = {
+    label: data?.secondary_button?.label ?? FALLBACK_SECONDARY.label,
+    href: data?.secondary_button?.href ?? FALLBACK_SECONDARY.href,
+  };
+  const cards: MeasuredCard[] =
+    Array.isArray(data?.cards) && data.cards.length > 0
+      ? data.cards.map(strapiCardToView)
+      : CARD_ORDER.map((v) => FALLBACK_CARDS[v]);
 
-  const metricLabels =
-    Array.isArray(data?.comparison_metrics) && data.comparison_metrics.length > 0
-      ? data.comparison_metrics.map((m: any) => m?.label || "")
-      : COMPARISON_METRICS;
-
-  const columns: ComparisonColumn[] =
-    Array.isArray(data?.comparison_columns) && data.comparison_columns.length > 0
-      ? data.comparison_columns.map((c: any) => ({
-          header: c?.label ?? "",
-          values: (c?.values || "").split("\n"),
-          highlight: !!c?.is_highlighted,
-        }))
-      : COMPARISON_COLUMNS.map((col) =>
-          col.header === "METRICS"
-            ? { ...col, values: metricLabels }
-            : col
-        );
   return (
     <>
-      {/* DESKTOP (>=1024px) */}
+      {/* DESKTOP (>=1024px) — 3309:1912 "Desktop - 15" (1440×1043) */}
       <section
-        className="relative mx-auto hidden w-[1253px] bg-black min-[1024px]:block"
+        className="relative flex w-full justify-center bg-black overflow-hidden"
         aria-label="Measured in silicon"
       >
-        <ProductsMeasuredDesktop
-          headingLines={headingLines}
-          subtitle={subtitle}
-          columns={columns}
-        />
+        <div
+          className="relative hidden h-[1043px] w-full max-w-[1440px] min-[1024px]:block"
+          data-node-id="3309:1912"
+          data-name="Desktop - 15"
+        >
+          {/* 3309:1913 — bottom aurora (rotated 180°) */}
+          <div
+            className="absolute flex h-[553.005px] items-center justify-center left-1/2 -translate-x-1/2 top-[399.91px] w-[100vw] min-w-[1513.931px]"
+            data-node-id="3309:1913"
+            aria-hidden
+          >
+            <div className="flex-none rotate-180 w-full h-full">
+              <div className="h-full relative w-full" data-name="footer">
+                <div className="absolute inset-0 pointer-events-none">
+                  <div className="absolute bg-black inset-0" />
+                  <div className="absolute inset-0 overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      alt=""
+                      className="absolute h-[279.02%] left-[-0.02%] max-w-none top-[-26.76%] w-[100.04%] object-cover"
+                      src={AURORA}
+                    />
+                  </div>
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(to bottom, rgb(0,0,0) 29.711%, rgba(0,0,0,0) 42.418%)",
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 3309:1914 — top aurora (mirrored + rotated 180°) */}
+          <div
+            className="absolute flex h-[551.954px] items-center justify-center left-1/2 -translate-x-1/2 top-[-152.05px] w-[100vw] min-w-[1513.931px]"
+            data-node-id="3309:1914"
+            aria-hidden
+          >
+            <div className="-scale-y-100 flex-none rotate-180 w-full h-full">
+              <div className="h-full relative w-full" data-name="footer">
+                <div className="absolute inset-0 pointer-events-none">
+                  <div className="absolute bg-black inset-0" />
+                  <div className="absolute inset-0 overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      alt=""
+                      className="absolute h-[279.02%] left-[-0.02%] max-w-none top-[-26.76%] w-[100.04%] object-cover"
+                      src={AURORA}
+                    />
+                  </div>
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(to bottom, rgb(0,0,0) 15.366%, rgba(0,0,0,0) 63.608%)",
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 3309:1915 — section title */}
+          <div
+            className="-translate-x-1/2 absolute flex flex-col gap-[12px] items-center justify-center left-1/2 top-[15.75px]"
+            data-node-id="3309:1915"
+            data-name="Section Title"
+          >
+            <MenuChip label={menuLabel} />
+            <GradientTitleBlock headingLines={headingLines} />
+            <p
+              className={`${interRegular.className} [word-break:break-word] font-normal leading-[21px] not-italic relative shrink-0 text-[14px] text-center whitespace-nowrap`}
+              style={{ color: GREY }}
+              data-node-id="3309:1922"
+            >
+              {subtitle}
+            </p>
+          </div>
+
+          {/* 3468:2230 — cards row */}
+          <div
+            className="-translate-x-1/2 absolute flex items-center justify-between left-[calc(50%-11.5px)] top-[241px] w-[1247px]"
+            data-node-id="3468:2230"
+          >
+            {cards.map((card) => (
+              <MeasuredCardView key={card.nodeId} card={card} />
+            ))}
+          </div>
+
+          {/* 3712:1921 — CTA row */}
+          <div
+            className="-translate-x-1/2 absolute bottom-[104px] flex gap-[24px] items-start left-[calc(50%+4px)]"
+            data-node-id="3712:1921"
+          >
+            <PrimaryCta label={primary.label} href={primary.href} />
+            <SecondaryCta label={secondary.label} href={secondary.href} />
+          </div>
+        </div>
       </section>
 
       {/* MOBILE (<1024px) */}
-      <ProductsMeasuredMobile
-        headingLines={headingLines}
-        subtitle={subtitle}
-        columns={columns}
-      />
-    </>
-  );
-}
-
-function ProductsMeasuredDesktop({
-  headingLines,
-  subtitle,
-  columns,
-}: {
-  headingLines: string[];
-  subtitle: string;
-  columns: ComparisonColumn[];
-}) {
-  return (
-    <div className="flex flex-col pb-[120px]">
-      {/* Header row: Title + Tabs */}
-      <div className="flex w-full items-end justify-between">
-        {/* Section title — 2906:3290 (left-aligned, w=430) */}
-        <div
-          className="flex flex-col items-start gap-[24px]"
-          style={{ width: 430 }}
-        data-node-id="2906:3290"
-        data-name="Section Title"
+      <section
+        className="relative w-full bg-black px-[24px] pt-[64px] pb-[80px] min-[1024px]:hidden"
+        aria-label="Measured in silicon"
       >
-        <div
-          className="relative px-[10px]"
-          style={{ width: 430, height: 98 }}
-          data-node-id="2906:3291"
-          data-name="Title"
-        >
-          <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+        <div className="flex flex-col items-center gap-[16px]">
+          <MenuChip label={menuLabel} />
           <h2
-            className={`${gilroyMedium.className} absolute m-0 w-[410px] bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} [word-break:break-word] bg-clip-text font-medium m-0 max-w-full not-italic text-[30px] leading-[34px] text-center text-transparent`}
             style={{
-              left: 10,
-              top: 0,
               backgroundImage: MEASURED_TITLE_GRADIENT,
               WebkitBackgroundClip: "text",
               backgroundClip: "text",
             }}
-            data-node-id="2906:3292"
           >
             {headingLines.map((line, i) => (
-              <span key={i} className="block leading-[49px]">{line}</span>
+              <span key={i} className="block leading-[34px]">
+                {line.trim()}
+              </span>
             ))}
           </h2>
+          <p
+            className={`${interRegular.className} max-w-full text-[14px] leading-[21px] font-normal not-italic text-center`}
+            style={{ color: GREY }}
+          >
+            {subtitle}
+          </p>
         </div>
-        <p
-          className={`${interRegular.className} w-[428px] text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
-          data-node-id="2906:3297"
-        >
-          {subtitle}
-        </p>
-      </div>
 
-      <TabSwitcher />
-    </div>
-
-    {/* Comparison table — 2906:3186 */}
-      <div className="mt-[52px]">
-        <ComparisonTable columns={columns} />
-      </div>
-    </div>
-  );
-}
-
-function ComparisonTable({ columns }: { columns: ComparisonColumn[] }) {
-  return (
-    <div
-      className="flex w-full overflow-clip rounded-[8px]"
-      style={{ backgroundColor: TABLE_BG }}
-      data-node-id="2906:3186"
-      data-name="Category"
-    >
-      {columns.map((col) => (
-        <ComparisonColumnView key={col.header} col={col} />
-      ))}
-    </div>
-  );
-}
-
-function ComparisonColumnView({ col }: { col: ComparisonColumn }) {
-  const highlight = !!col.highlight;
-  return (
-    <div
-      className="flex flex-1 flex-col items-start"
-      style={{
-        backgroundColor: highlight ? HIGHLIGHT_COL_BG : undefined,
-        borderLeft: highlight
-          ? `1px solid ${HIGHLIGHT_COL_BORDER}`
-          : undefined,
-      }}
-      data-name="Сompetitor"
-    >
-      {/* Header cell (h=56) */}
-      <div className="flex h-[56px] w-full shrink-0 flex-col items-center justify-center p-[4px]">
-        {highlight ? (
-          <div
-            className="flex h-[37px] w-[145px] items-center justify-center"
-            style={{ backgroundColor: GPX_TAG_BG }}
-            data-node-id="2906:3193"
-            data-name="Tag"
-          >
-            <span
-              className={`${interSemiBold.className} text-[12px] leading-[16px] font-semibold whitespace-nowrap not-italic`}
-              style={{ color: GPX_TAG_TEXT }}
-            >
-              {col.header || "GPX10 Pro"}
-            </span>
-          </div>
-        ) : (
-          <span
-            className={`${interMedium.className} text-center text-[12px] leading-[16px] font-medium text-white not-italic`}
-          >
-            {col.header}
-          </span>
-        )}
-      </div>
-
-      {/* Data cells (h=48 each) */}
-      {col.values.map((value, rowIndex) => {
-        const isMarkerRow = rowIndex % 2 === 0;
-        const bg = highlight
-          ? isMarkerRow
-            ? HIGHLIGHT_ROW_MARKER_BG
-            : "transparent"
-          : isMarkerRow
-            ? ROW_MARKER_BG
-            : "transparent";
-        return (
-          <div
-            key={rowIndex}
-            className="flex h-[48px] w-full shrink-0 flex-col items-center justify-center p-[4px]"
-            style={{ backgroundColor: bg }}
-            data-name="Cell"
-          >
-            <span
-              className={`${interMedium.className} text-center text-[14px] leading-[16px] font-medium text-white not-italic [word-break:break-word]`}
-            >
-              {value}
-            </span>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
-function ProductsMeasuredMobile({
-  headingLines,
-  subtitle,
-  columns,
-}: {
-  headingLines: string[];
-  subtitle: string;
-  columns: ComparisonColumn[];
-}) {
-  return (
-    <section
-      className="relative w-full bg-black px-[24px] pt-[64px] pb-[80px] min-[1024px]:hidden"
-      aria-label="Measured in silicon"
-    >
-      {/* Title */}
-      <div className="flex flex-col items-start gap-[16px]">
-        <h2
-          className={`${gilroyMedium.className} max-w-full bg-clip-text text-[30px] leading-[34px] font-medium text-transparent not-italic [word-break:break-word]`}
-          style={{
-            backgroundImage: MEASURED_TITLE_GRADIENT,
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-          }}
-        >
-          {headingLines.join(" ")}
-        </h2>
-        <p
-          className={`${interRegular.className} max-w-full text-[14px] leading-[21px] font-normal text-[#f0f0f0]`}
-        >
-          {subtitle}
-        </p>
-        <TabSwitcher />
-      </div>
-
-      {/* Comparison table — horizontally scrollable to preserve structure */}
-      <div className="mt-[32px] -mx-[24px] overflow-x-auto px-[24px] pb-[8px]">
-        <div
-          className="flex w-[720px] shrink-0 overflow-clip rounded-[8px]"
-          style={{ backgroundColor: TABLE_BG }}
-        >
-          {columns.map((col) => (
-            <ComparisonColumnView key={col.header} col={col} />
+        <div className="mt-[32px] flex flex-col items-center gap-[24px]">
+          {cards.map((card) => (
+            <MeasuredCardView key={card.nodeId} card={card} />
           ))}
         </div>
-      </div>
-    </section>
+
+        <div className="mt-[32px] flex flex-col items-center gap-[16px]">
+          <PrimaryCta label={primary.label} href={primary.href} centered />
+          <SecondaryCta label={secondary.label} href={secondary.href} centered />
+        </div>
+      </section>
+    </>
   );
 }

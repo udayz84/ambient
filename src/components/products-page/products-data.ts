@@ -120,6 +120,66 @@ export const FEATURE_CARDS: FeatureCard[] = [
 ];
 
 /* ------------------------------------------------------------------ */
+/* Features strip "Section 6" — Figma 3286:1931,                      */
+/* cards 3742:932 / 951 / 970 / 989 (data shared by the server-        */
+/* rendered mobile stack and the client carousel).                     */
+/* ------------------------------------------------------------------ */
+
+export type ProductsFeatureCardData = {
+  nodeId: string;
+  /** Single-paragraph title (wraps) OR explicit pre-broken lines. */
+  title: string;
+  titleLines: [string, string] | null;
+  titleLeft: number;
+  titleWidth: number | null;
+  description: string;
+  image: "brain" | "coin" | "bubble" | "stack";
+};
+
+export const PRODUCTS_FEATURE_CARDS: ProductsFeatureCardData[] = [
+  {
+    nodeId: "3742:932",
+    title: "Premium AI features in a new form.",
+    titleLines: null,
+    titleLeft: 23,
+    titleWidth: 354.275,
+    description:
+      "Run complex models in a hearing aid, a ring, a patch — no bulky battery, no redesign.",
+    image: "brain",
+  },
+  {
+    nodeId: "3742:951",
+    title: "Months on a coin cell.",
+    titleLines: ["Months on a ", "coin cell."],
+    titleLeft: 30,
+    titleWidth: null,
+    description:
+      "Always-on AI at ~80 µW. Ship the battery life your reviews live or die on.",
+    image: "coin",
+  },
+  {
+    nodeId: "3742:970",
+    title: "Private by default.",
+    titleLines: ["Private by ", "default."],
+    titleLeft: 30,
+    titleWidth: null,
+    description:
+      "Data never leaves the device. No cloud round-trip, no latency, no privacy liability.",
+    image: "bubble",
+  },
+  {
+    nodeId: "3742:989",
+    title: "One chip replaces the stack.",
+    titleLines: null,
+    titleLeft: 30,
+    titleWidth: 358.127,
+    description:
+      "MCU + AI accelerator + sensor hub + memory you’re juggling today — and it stays aware while it sleeps.",
+    image: "stack",
+  },
+];
+
+/* ------------------------------------------------------------------ */
 /* "Always On" section — Figma 2915:1219 / 2908:487 / 2915:1234        */
 /* ------------------------------------------------------------------ */
 
@@ -323,52 +383,75 @@ export const COMPARISON_COLUMNS: ComparisonColumn[] = [
 ];
 
 /* ------------------------------------------------------------------ */
-/* "Everything in one chip" architecture section — Figma 2903:2164 /  */
-/* 2903:2163 / 2903:2204                                              */
+/* "Everything in one chip" architecture section — Figma 3713:1965    */
+/* (title 2903:2164 + menu chip 3712:1942 + content row 3529:615:     */
+/* article 3529:616 + stats column 3529:623)                          */
 /* ------------------------------------------------------------------ */
 
 /** Figma 2903:2166 — section title text gradient. */
 export const ARCH_TITLE_GRADIENT =
   "linear-gradient(107.715deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
-export const ARCH_IMAGE = {
-  width: 1205.5933837890625,
-  height: 619.33056640625,
+/** Figma 3713:1965 — root content width. */
+export const ARCH_FRAME_WIDTH = 1235;
+
+/** Figma 3529:616 — "Article" image card. */
+export const ARCH_ARTICLE = {
+  width: 831,
+  height: 558,
 };
 
+/** Figma 3529:617 — architecture image box inside the article card. */
+export const ARCH_IMAGE = {
+  left: 9.5,
+  top: 9.5,
+  width: 811,
+  height: 492,
+};
+
+/** Figma 3529:622 — caption inside the article card. */
+export const ARCH_CAPTION = {
+  left: 15.5,
+  top: 515.5,
+};
+
+/** Figma 3529:623 — stats column (height is content-driven). */
 export const ARCH_STATS_FRAME = {
-  width: 1204,
-  height: 214,
+  width: 380,
 };
 
 export const ARCH_STAT = {
   width: 340,
-  height: 214,
-  iconWidth: 42.11072540283203,
-  iconHeight: 42,
+  iconWidth: 32.0843620300293,
+  iconHeight: 32,
 };
 
 export type ArchStat = {
   nodeId: string;
   title: string;
   description: string;
+  /** Figma text width of the 32/38 Gilroy title. */
+  titleWidth: number;
 };
 
 export const ARCH_STATS: ArchStat[] = [
   {
-    nodeId: "2903:2205",
+    nodeId: "3529:624",
     title: "A-Cube compute",
     description: "10 MX8 cores, 2,560 MACs/cycle, replaces a separate AI accelerator.",
+    titleWidth: 279,
   },
   {
-    nodeId: "2903:2269",
+    nodeId: "3529:634",
     title: "Two power domains",
     description: "A 5-core island sips microwatts; the rest powers down.",
+    titleWidth: 327.1,
   },
   {
-    nodeId: "2903:2276",
+    nodeId: "3529:644",
     title: "Integrated sensing",
     description: "Up to 10 sensor streams fused on-chip; no external sensor hub.",
+    titleWidth: 279,
   },
 ];
 
@@ -473,34 +556,41 @@ export const BENCH_IMAGE_BOX = {
 
 export type BenchCard = {
   nodeId: string;
+  chipLabel?: string;
   title: string;
   description: string;
   cta: string;
   ctaWidth: number;
+  image?: string;
 };
 
 export const BENCH_CARDS: BenchCard[] = [
   {
     nodeId: "2918:1477",
+    chipLabel: "Evaluate",
     title: "Cranium DVK",
-    description: "A dev kit with sensors, camera, mics, and demos. Measure power from day one.",
+    description: "A complete dev kit with onboard sensors, camera, mics, and pre-loaded demos. Measure the power yourself, day one.",
     cta: "View Dev Kit",
     ctaWidth: 157,
+    image: "/products page/Container1.png",
   },
   {
     nodeId: "2918:1518",
+    chipLabel: "Integrate",
     title: "Sparsh SOM",
-    description:
-      "Use our System-on-Module in your carrier board. Avoid RF, power, and sensor issues.",
+    description: "Drop our pre-engineered System-on-Module into your carrier board. Skip the RF, power, and sensor-routing nightmare.",
     cta: "View SOMs",
     ctaWidth: 158,
+    image: "/products page/Container2.png",
   },
   {
     nodeId: "2918:1497",
+    chipLabel: "Scale",
     title: "GPX10 Pro Silicon",
     description: "The raw SoC for high-volume production.",
     cta: "Talk to Sales",
     ctaWidth: 177,
+    image: "/products page/3.png",
   },
 ];
 

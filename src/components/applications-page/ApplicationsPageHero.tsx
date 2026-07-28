@@ -144,7 +144,7 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
             }}
           >
             {titleLines.map((line: string, i: number) => (
-              <span key={i} className="block whitespace-nowrap">
+              <span key={i} className="block">
                 {line}
               </span>
             ))}

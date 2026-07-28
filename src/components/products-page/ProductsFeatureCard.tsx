@@ -2,64 +2,15 @@
  * Feature card for the products "Section 6" features strip — Figma 3286:1931,
  * cards 3742:932 / 951 / 970 / 989 (388x600 each).
  *
- * Plain shared component (no "use client") so it can render inside the
- * client carousel track and inside the server-rendered mobile stack.
+ * Client component (useFadeIn) rendering a single card; the card data lives in
+ * ./products-data so server components can import it without pulling in a
+ * client module.
  */
+"use client";
+
 import { gilroyMedium, interRegular } from "../hero/fonts";
-
-export type ProductsFeatureCardData = {
-  nodeId: string;
-  /** Single-paragraph title (wraps) OR explicit pre-broken lines. */
-  title: string;
-  titleLines: [string, string] | null;
-  titleLeft: number;
-  titleWidth: number | null;
-  description: string;
-  image: "brain" | "coin" | "bubble" | "stack";
-};
-
-export const PRODUCTS_FEATURE_CARDS: ProductsFeatureCardData[] = [
-  {
-    nodeId: "3742:932",
-    title: "Premium AI features in a new form.",
-    titleLines: null,
-    titleLeft: 23,
-    titleWidth: 354.275,
-    description:
-      "Run complex models in a hearing aid, a ring, a patch — no bulky battery, no redesign.",
-    image: "brain",
-  },
-  {
-    nodeId: "3742:951",
-    title: "Months on a coin cell.",
-    titleLines: ["Months on a ", "coin cell."],
-    titleLeft: 30,
-    titleWidth: null,
-    description:
-      "Always-on AI at ~80 µW. Ship the battery life your reviews live or die on.",
-    image: "coin",
-  },
-  {
-    nodeId: "3742:970",
-    title: "Private by default.",
-    titleLines: ["Private by ", "default."],
-    titleLeft: 30,
-    titleWidth: null,
-    description:
-      "Data never leaves the device. No cloud round-trip, no latency, no privacy liability.",
-    image: "bubble",
-  },
-  {
-    nodeId: "3742:989",
-    title: "One chip replaces the stack.",
-    titleLines: null,
-    titleLeft: 30,
-    titleWidth: 358.127,
-    description:
-      "MCU + AI accelerator + sensor hub + memory you’re juggling today — and it stays aware while it sleeps.",
-    image: "stack",
-  },
-];
+import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
+import type { ProductsFeatureCardData } from "./products-data";
 
 const CARD_IMAGES: Record<ProductsFeatureCardData["image"], string> = {
   brain: "/products/features-card-brain.png",
@@ -187,9 +138,12 @@ export function ProductsFeatureCard({
 }: {
   card: ProductsFeatureCardData;
 }) {
+  const { fadeRef, isVisible } = useFadeIn();
+
   return (
     <article
-      className="relative h-[600px] w-[388px] shrink-0 overflow-clip"
+      ref={fadeRef}
+      className={`relative h-[600px] w-[388px] shrink-0 overflow-clip ${getFadeInClass(isVisible)}`}
       data-node-id={card.nodeId}
       data-name="Lower power consumption"
     >
