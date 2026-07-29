@@ -70,12 +70,14 @@ export function ApplicationsCategoryNav({
     if (!containerRef.current) return;
     const activeBtn = containerRef.current.querySelector(
       `button[data-index="${activeIndex}"]`
-    );
+    ) as HTMLElement;
     if (activeBtn) {
-      activeBtn.scrollIntoView({
+      const container = containerRef.current;
+      const scrollLeft =
+        activeBtn.offsetLeft - container.clientWidth / 2 + activeBtn.clientWidth / 2;
+      container.scrollTo({
+        left: scrollLeft,
         behavior: "smooth",
-        inline: "center",
-        block: "nearest",
       });
     }
   }, [activeIndex]);
