@@ -11,7 +11,7 @@ import { dmMono, gilroyMedium, interBold, interRegular, interSemiBold } from "..
  */
 
 const BG_SURGE = "/products/alwayson/bg-surge.png";
-const BG_SUBCONSCIOUS = "/products/alwayson/bg-subconscious-green.png";
+const BG_SUBCONSCIOUS = "/notfound/ChatGPT%20Image%20Jul%2024,%202026,%2005_14_17%20PM.png";
 const AI_CORE_ICON = "/products/alwayson/ai-core-icon.png";
 const HOST_CPU_IMG = "/products/alwayson/host-cpu.png";
 const CORNER_42 = "/products/alwayson/corner-42.svg";
@@ -240,17 +240,17 @@ function OnChip({
 }) {
   return (
     <div
-      className={`h-[50px] overflow-clip transition-colors duration-[1000ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+      className={`h-[50px] overflow-clip transition-colors duration-[1200ms] ease-in-out ${
         active ? "bg-[rgba(56,99,41,0.31)]" : "bg-[rgba(58,58,58,0.7)]"
       } ${className}`}
       style={{ width }}
       data-name="ON"
     >
       <div className="-translate-y-1/2 absolute left-[6.53px] size-[10.656px] top-1/2" aria-hidden>
-        <img alt="" className={`absolute block inset-0 max-w-none size-full transition-all duration-[1000ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${active ? "grayscale-0 opacity-100" : "grayscale opacity-50"}`} src={ON_DOT_OUTER} />
+        <img alt="" className={`absolute block inset-0 max-w-none size-full transition-all duration-[1200ms] ease-in-out ${active ? "grayscale-0 opacity-100" : "grayscale opacity-50"}`} src={ON_DOT_OUTER} />
       </div>
       <div
-        className={`-translate-x-1/2 pointer-events-none absolute h-[110.447px] top-[-25.66px] w-[126.547px] transition-opacity duration-[1000ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        className={`-translate-x-1/2 pointer-events-none absolute h-[110.447px] top-[-25.66px] w-[126.547px] transition-opacity duration-[1200ms] ease-in-out ${
           active ? "opacity-100" : "opacity-0"
         }`}
         style={{ left: `calc(50% + ${icon === "ai" ? 16.27 : 17.77}px)` }}
@@ -261,12 +261,12 @@ function OnChip({
         </div>
       </div>
       {icon === "ai" ? (
-        <div className={`-translate-y-1/2 absolute h-[36px] left-[24.62px] top-1/2 w-[37.756px] transition-all duration-[1000ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${active ? "grayscale-0 opacity-100" : "grayscale opacity-50"}`} aria-hidden>
+        <div className={`-translate-y-1/2 absolute h-[36px] left-[24.62px] top-1/2 w-[37.756px] transition-all duration-[1200ms] ease-in-out ${active ? "grayscale-0 opacity-100" : "grayscale opacity-50"}`} aria-hidden>
           <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={AI_CORE_ICON} />
         </div>
       ) : (
         <div
-          className={`-translate-x-1/2 -translate-y-1/2 absolute h-[40.126px] left-[calc(50%-40.43px)] top-1/2 w-[63.077px] transition-all duration-[1000ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          className={`-translate-x-1/2 -translate-y-1/2 absolute h-[40.126px] left-[calc(50%-40.43px)] top-1/2 w-[63.077px] transition-all duration-[1200ms] ease-in-out ${
             active ? "mix-blend-luminosity opacity-100 grayscale-0" : "mix-blend-normal opacity-50 grayscale"
           }`}
           data-name="image 76"
@@ -276,7 +276,7 @@ function OnChip({
         </div>
       )}
       <p
-        className={`${interSemiBold.className} -translate-x-1/2 [word-break:break-word] absolute font-semibold leading-[24px] not-italic text-[16px] text-center top-[13px] whitespace-pre transition-colors duration-[1000ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        className={`${interSemiBold.className} -translate-x-1/2 [word-break:break-word] absolute font-semibold leading-[24px] not-italic text-[16px] text-center top-[13px] whitespace-pre transition-colors duration-[1200ms] ease-in-out ${
           active ? "text-[#63da38]" : "text-[#aaaaaa]"
         }`}
         style={{ left: icon === "ai" ? 103.02 : 103.52 }}
@@ -284,7 +284,7 @@ function OnChip({
         {label}
       </p>
       <div className="-translate-y-1/2 absolute left-[8.29px] size-[7.129px] top-1/2" aria-hidden>
-        <img alt="" className={`absolute block inset-0 max-w-none size-full transition-all duration-[1000ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${active ? "grayscale-0 opacity-100" : "grayscale opacity-50"}`} src={ON_DOT_INNER} />
+        <img alt="" className={`absolute block inset-0 max-w-none size-full transition-all duration-[1200ms] ease-in-out ${active ? "grayscale-0 opacity-100" : "grayscale opacity-50"}`} src={ON_DOT_INNER} />
       </div>
     </div>
   );
@@ -305,13 +305,13 @@ function SurgeSwitch({
       aria-checked={surge}
       aria-label="Toggle Reflex Surge"
       onClick={onToggle}
-      className={`-translate-x-1/2 absolute block cursor-pointer h-[40px] left-[calc(50%+5.25px)] rounded-[100px] top-[19px] w-[73.333px] transition-colors duration-[1000ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+      className={`-translate-x-1/2 absolute block cursor-pointer h-[40px] left-[calc(50%+5.25px)] rounded-[100px] top-[19px] w-[73.333px] transition-colors duration-[1200ms] ease-in-out ${
         surge ? "bg-[#6fe047]" : "bg-[#3a3a3a]"
       }`}
       data-name="Switch"
     >
       <div
-        className="absolute bg-[#112f06] rounded-[100px] shadow-[0px_3.333px_6.667px_0px_rgba(39,39,39,0.1)] size-[33.333px] left-[3.33px] top-[3.33px] transition-transform duration-[1000ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform"
+        className="absolute bg-[#112f06] rounded-[100px] shadow-[0px_3.333px_6.667px_0px_rgba(39,39,39,0.1)] size-[33.333px] left-[3.33px] top-[3.33px] transition-transform duration-[1200ms] ease-in-out will-change-transform"
         style={{ transform: surge ? "translateX(33.34px)" : "translateX(0px)" }}
         data-name="Switch"
       />
@@ -337,14 +337,14 @@ function ToggleFrame({
       <GlowSwoosh top={-25.16} />
       <SurgeSwitch surge={surge} onToggle={onToggle} />
       <p
-        className={`${interBold.className} -translate-x-1/2 [word-break:break-word] absolute font-bold leading-[21px] left-[calc(50%-115.41px)] not-italic text-[18px] text-white text-center top-[calc(50%-11.5px)] whitespace-nowrap transition-all duration-[1000ms] ease-[cubic-bezier(0.22,1,0.36,1)] origin-right ${
+        className={`${interBold.className} -translate-x-1/2 [word-break:break-word] absolute font-bold leading-[21px] left-[calc(50%-115.41px)] not-italic text-[18px] text-white text-center top-[calc(50%-11.5px)] whitespace-nowrap transition-all duration-[1200ms] ease-in-out origin-right ${
           surge ? "opacity-70 scale-[0.85]" : "opacity-100 scale-100"
         }`}
       >
         Subconscious
       </p>
       <p
-        className={`${interBold.className} [word-break:break-word] absolute font-bold leading-[21px] left-[calc(50%+67.23px)] not-italic text-[18px] text-white top-[calc(50%-11.5px)] whitespace-nowrap transition-all duration-[1000ms] ease-[cubic-bezier(0.22,1,0.36,1)] origin-left ${
+        className={`${interBold.className} [word-break:break-word] absolute font-bold leading-[21px] left-[calc(50%+67.23px)] not-italic text-[18px] text-white top-[calc(50%-11.5px)] whitespace-nowrap transition-all duration-[1200ms] ease-in-out origin-left ${
           surge ? "opacity-100 scale-100" : "opacity-70 scale-[0.85]"
         }`}
       >
@@ -412,7 +412,7 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
           </div>
           {/* Chip visual — surge render, fades smoothly over the baseline */}
           <div
-            className="-translate-x-1/2 absolute h-[832.553px] left-1/2 top-0 w-[1440px] transition-opacity duration-[1000ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[opacity]"
+            className="-translate-x-1/2 absolute h-[832.553px] left-1/2 top-0 w-[1440px] transition-opacity duration-[1200ms] ease-in-out will-change-[opacity]"
             style={{ opacity: surge ? 1 : 0 }}
             data-name="ChatGPT Image Jul 2, 2026, 12_54_47 PM 2"
             aria-hidden={!surge}
@@ -525,7 +525,7 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
           <img
             alt=""
             src={BG_SURGE}
-            className="absolute inset-0 size-full object-cover transition-opacity duration-[1000ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[opacity]"
+            className="absolute inset-0 size-full object-cover transition-opacity duration-[1200ms] ease-in-out will-change-[opacity]"
             style={{ opacity: surge ? 1 : 0 }}
             aria-hidden={!surge}
           />

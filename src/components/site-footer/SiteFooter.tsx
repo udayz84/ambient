@@ -1,4 +1,4 @@
-import { gilroyMedium, gilroyBold, interRegular, interMedium } from "../hero/fonts";
+import { gilroyMedium, gilroyBold, interRegular, interMedium, interLight } from "../hero/fonts";
 import {
   FALLBACK_FOOTER_NAV_SECTIONS,
   FALLBACK_FOOTER_SOCIAL_LINKS,
@@ -176,7 +176,7 @@ export function SiteFooter({
       </nav>
 
       {/* Bottom Section */}
-      <div className="relative z-[1] mt-[48px] flex w-full flex-col items-start justify-center gap-[20px] px-[24px] lg:absolute lg:top-[940px] lg:left-0 lg:mt-0 lg:flex-row lg:items-end lg:justify-between lg:gap-0 lg:px-[120px]">
+      <div className="relative z-[1] mt-[48px] flex w-full flex-col items-start justify-center gap-[20px] px-[24px] lg:absolute lg:top-[932px] lg:left-0 lg:mt-0 lg:flex-row lg:items-end lg:justify-between lg:gap-0 lg:px-[130px]">
         
         {/* Left Side */}
         <div className="flex w-full flex-col items-start gap-[20px] lg:w-auto lg:flex-row lg:items-end lg:gap-[22px]">
@@ -185,7 +185,7 @@ export function SiteFooter({
             <p className={`${gilroyMedium.className} text-[10px] leading-[1.4] font-medium tracking-[0.4px] uppercase text-white/60 not-italic lg:text-[10px]`}>
               CONNECT WITH US
             </p>
-            <div className="flex items-center justify-start gap-[16px] lg:justify-start">
+            <div className="flex items-center justify-start gap-[24px] lg:gap-[32px] lg:justify-start">
               {socialLinks.map((social) => (
                 <a key={social.platform} href={social.href} aria-label={social.label} className="block size-[20px] lg:size-[24px]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -220,7 +220,7 @@ export function SiteFooter({
 
         {/* Right Side */}
         <div className="flex w-full flex-row items-center justify-between gap-[12px] pb-[4px] lg:w-auto lg:justify-start lg:gap-[48px]">
-          <p className={`${interRegular.className} text-[10px] leading-[1.3] text-[rgba(255,255,255,0.8)]`}>
+          <p className={`${interRegular.className} text-[12px] leading-[1.3] text-[rgba(255,255,255,0.8)]`}>
             {copyrightText}
           </p>
           <CraftedByAttribution text={craftedByText} logoSrc={craftedByLogoSrc} />
@@ -243,7 +243,7 @@ export function SiteFooter({
 
       <p
         aria-hidden
-        className={`${gilroyBold.className} pointer-events-none absolute bottom-[-15px] left-1/2 -translate-x-1/2 bg-clip-text text-[110px] leading-none font-bold tracking-[-2px] whitespace-nowrap text-[transparent] opacity-[0.15] hidden lg:block lg:top-[1000px] lg:bottom-auto lg:left-[calc(50%-568px)] lg:translate-x-0 lg:text-[300px] lg:tracking-[-6px] lg:opacity-30 not-italic`}
+        className={`${gilroyBold.className} pointer-events-none absolute bottom-[-15px] left-1/2 -translate-x-1/2 bg-clip-text text-[110px] leading-none font-bold tracking-[-2px] whitespace-nowrap text-[transparent] opacity-[0.15] hidden lg:block lg:top-[1040px] lg:bottom-auto lg:left-[calc(50%-568px)] lg:translate-x-0 lg:text-[300px] lg:tracking-[-6px] lg:opacity-30 not-italic`}
         style={{
           backgroundImage:
             "linear-gradient(to right, rgba(46,76,38,0.4), #ddf5d3 50%, rgba(46,76,38,0.4))",
@@ -267,7 +267,7 @@ function CraftedByAttribution({
   return (
     <div className="flex items-center gap-[4px]">
       <p
-        className={`${interRegular.className} text-[12px] leading-[1.3] font-normal whitespace-nowrap text-white not-italic`}
+        className={`${interLight.className} text-[12px] leading-[1.3] font-light whitespace-nowrap text-[rgba(255,255,255,0.8)] not-italic`}
         data-node-id="2379:817"
       >
         {text}

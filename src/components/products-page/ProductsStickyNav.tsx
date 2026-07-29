@@ -50,7 +50,7 @@ export function ProductsStickyNav() {
       setActiveId(current);
       
       // Determine visibility
-      if (window.scrollY > 300) {
+      if (window.scrollY > 300 && current !== "full-picture") {
          setIsVisible(true);
       } else {
          setIsVisible(false);
