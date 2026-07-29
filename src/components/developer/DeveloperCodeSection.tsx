@@ -1,4 +1,4 @@
-import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
+import { dmMono, gilroyMedium, gilroyRegular, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
 import {
@@ -75,6 +75,24 @@ export function DeveloperCodeSection({ data }: { data?: any }) {
       style={{ left: 119, top: 671, width: 1204 }}
       data-node-id="2640:1215"
     >
+      {/* Section background — full-viewport-width circuit texture, dimmed, fades to black at section bottom */}
+      <div
+        aria-hidden
+        className="absolute -z-10"
+        style={{
+          left: "50%",
+          transform: "translateX(-50%)",
+          top: -45,
+          width: "max(1440px, 100vw)",
+          height: 854 /* 45px above section + 809px section height — ends at section bottom */,
+          backgroundImage:
+            "linear-gradient(to bottom, rgba(0,0,0,0) 55%, rgba(0,0,0,1) 100%), url('/developer/Gemini_Generated_Image_6dyqpp6dyqpp6dyq 5.png')",
+          backgroundSize: "100% 100%, cover",
+          backgroundPosition: "0 0, center top",
+          backgroundRepeat: "no-repeat, no-repeat",
+          filter: "brightness(0.8)",
+        }}
+      />
       {/* Section title block — 2640:1216 (800 wide, centered) */}
       <div
         className="flex w-[800px] flex-col items-center gap-[24px]"
@@ -259,7 +277,7 @@ function ArticleCard({
       {/* Text — 3586:1385 */}
       <div className="flex min-w-px flex-[1_0_0] flex-col items-start gap-[10px]">
         <p
-          className={`${gilroyMedium.className} w-full text-[26px] leading-[29px] font-medium text-white not-italic [word-break:break-word]`}
+          className={`${gilroyRegular.className} w-full text-[26px] leading-[29px] font-normal text-white not-italic [word-break:break-word]`}
         >
           {article.title}
         </p>

@@ -28,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-const CANVAS_HEIGHT = 4521;
+const CANVAS_HEIGHT = 4421;
 
 export default async function DeveloperPage() {
   let data: any = null;

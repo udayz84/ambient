@@ -158,7 +158,7 @@ function ArticleCard({ article }: { article: Article }) {
       </div>
 
       {/* CTA - Secondary */}
-      <div className="relative mt-auto flex shrink-0 items-center px-[20px] py-[10px]">
+      <div className="relative mt-auto flex shrink-0 items-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] px-[20px] py-[10px]">
         <p
           className={`${gilroyMedium.className} text-[16px] leading-[28px] uppercase whitespace-nowrap text-white`}
         >
@@ -198,7 +198,7 @@ export function ApplicationsPageArticles({ data }: { data?: any }) {
       aria-label="Intelligence without boundaries"
     >
       {/* DESKTOP (>=1024px) */}
-      <div className="hidden w-full max-w-[1440px] flex-col items-center gap-[40px] pt-[96px] pb-[120px] min-[1024px]:flex">
+      <div className="hidden w-full max-w-[1440px] flex-col items-center gap-[40px] pt-[96px] pb-[64px] min-[1024px]:flex">
         <SectionTitle heading={heading} />
         <div className="grid grid-cols-[repeat(3,377px)] gap-[36px]">
           {articles.map((article) => (
@@ -208,7 +208,7 @@ export function ApplicationsPageArticles({ data }: { data?: any }) {
       </div>
 
       {/* MOBILE (<1024px) */}
-      <div className="flex w-full flex-col items-center gap-[40px] px-[24px] pt-[64px] pb-[80px] min-[1024px]:hidden">
+      <div className="flex w-full flex-col items-center gap-[40px] px-[24px] pt-[64px] pb-[40px] min-[1024px]:hidden">
         <div className="relative inline-block px-[10px]">
           <h2
             className={`${gilroyMedium.className} bg-clip-text text-center text-[32px] leading-[38px] font-medium text-transparent not-italic [word-break:break-word]`}

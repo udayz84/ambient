@@ -130,7 +130,7 @@ function SomLabel({ value, label, sublabel }: { value: string; label: string; su
 function SomCard({ visual, isUpcoming, statusPill, value, label, sublabel }: { visual: React.ReactNode; isUpcoming?: boolean; statusPill: string; value: string; label: string; sublabel: string }) {
   return (
     <div className="flex w-full flex-col items-center gap-[32px]">
-      <div className="flex h-[320px] w-full items-center justify-center">
+      <div className="flex h-[320px] w-full px-[30px] items-center justify-center">
         <div
           className={`relative flex w-full items-center justify-center overflow-clip transition-transform ${isUpcoming ? 'h-[260px] scale-95' : 'h-[320px]'}`}
         >
@@ -248,7 +248,7 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
       aria-label="Don't start from scratch"
     >
       {/* DESKTOP (>=1024px) */}
-      <div className="hidden w-full max-w-[1440px] flex-col items-center gap-[72px] pt-[120px] pb-[120px] min-[1024px]:flex">
+      <div className="hidden w-full max-w-[1440px] flex-col items-center gap-[72px] pt-[64px] pb-[64px] min-[1024px]:flex">
         {/* Header */}
         <div className="flex w-full flex-col items-center gap-[24px]">
           <div className="relative inline-block px-[14px]">
@@ -296,7 +296,7 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
       </div>
 
       {/* MOBILE (<1024px) */}
-      <div className="flex w-full flex-col items-center gap-[56px] px-[24px] pt-[72px] pb-[80px] min-[1024px]:hidden">
+      <div className="flex w-full flex-col items-center gap-[56px] px-[24px] pt-[40px] pb-[40px] min-[1024px]:hidden">
         <div className="flex w-full flex-col items-center gap-[20px]">
           <div className="relative inline-block px-[10px]">
             <h2

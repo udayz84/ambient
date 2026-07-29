@@ -22,7 +22,10 @@ const DEFAULT_SUBTITLE =
  * Positioned at 118.305,3183 / 1204×864 within the Developer canvas.
  */
 export function DeveloperModulesSection({ data }: { data?: any }) {
-  const heading = data?.heading || DEFAULT_HEADING;
+  let heading = data?.heading || DEFAULT_HEADING;
+  if (!heading.includes("\n")) {
+    heading = heading.replace(" to volume", "\nto volume").replace(", without", ",\nwithout");
+  }
   const headingLines = heading.split("\n");
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
   const modules =
@@ -32,7 +35,7 @@ export function DeveloperModulesSection({ data }: { data?: any }) {
   return (
     <div
       className="absolute flex flex-col items-center gap-[36px]"
-      style={{ left: 118.3046875, top: 3183, width: 1204 }}
+      style={{ left: 118.3046875, top: 3083, width: 1204 }}
       data-node-id="2438:4587"
     >
       {/* Header — 2438:4588 (800 wide, centered) */}
@@ -145,7 +148,7 @@ function ModuleCta({
   return (
     <a
       href={href}
-      className={`${gilroyMedium.className} ${CTA_HOVER_GLOW} relative flex h-[48px] shrink-0 items-center justify-center gap-[10px] bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] not-italic transition-[box-shadow,background-color] duration-200 group-hover:bg-transparent`}
+      className={`${gilroyMedium.className} ${CTA_HOVER_GLOW} relative flex h-[48px] shrink-0 items-center justify-center gap-[10px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] not-italic transition-[box-shadow,background-color] duration-200 group-hover:bg-transparent`}
       data-node-id="2438:4622"
     >
       <span

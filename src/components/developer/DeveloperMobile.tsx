@@ -1,5 +1,5 @@
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
-import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
+import { dmMono, gilroyMedium, gilroyRegular, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
@@ -117,6 +117,19 @@ function DeveloperCodeSectionMobile({ data }: { data?: any }) {
       : DEVELOPER_ARTICLES;
   return (
     <section className="relative flex w-full flex-col items-center px-[24px] py-[48px]">
+      {/* Section background — full-width circuit texture, dimmed, fades to black at bottom */}
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10"
+        style={{
+          backgroundImage:
+            "linear-gradient(to bottom, rgba(0,0,0,0) 55%, rgba(0,0,0,1) 100%), url('/developer/Gemini_Generated_Image_6dyqpp6dyqpp6dyq 5.png')",
+          backgroundSize: "100% 100%, cover",
+          backgroundPosition: "0 0, center top",
+          backgroundRepeat: "no-repeat, no-repeat",
+          filter: "brightness(0.8)",
+        }}
+      />
       <div className="relative w-full px-[10px]">
         <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
         <h2
@@ -209,7 +222,7 @@ int main(void) {
             </div>
             <div className="flex min-w-0 flex-1 flex-col gap-[6px]">
               <p
-                className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium text-white not-italic [word-break:break-word]`}
+                className={`${gilroyRegular.className} text-[18px] leading-[24px] font-normal text-white not-italic [word-break:break-word]`}
               >
                 {article.title}
               </p>
@@ -292,7 +305,10 @@ const COMING_DEFAULT_CTA = "Join the Virtual Sandbox Waitlist";
 const COMING_DEFAULT_IMG = "/developer/sandbox-image.png";
 
 function DeveloperComingSoonMobile({ data }: { data?: any }) {
-  const heading = data?.heading || `${COMING_DEFAULT_HEADING_LINE_1}\n${COMING_DEFAULT_HEADING_LINE_2}`;
+  let heading = data?.heading || `${COMING_DEFAULT_HEADING_LINE_1}\n${COMING_DEFAULT_HEADING_LINE_2}`;
+  if (!heading.includes("\n")) {
+    heading = heading.replace(" to volume", "\nto volume").replace(", without", ",\nwithout");
+  }
   const headingLines = heading.split("\n");
   const subtitle = data?.subtitle || COMING_DEFAULT_SUBTITLE;
   const cardTitle = data?.card_title || COMING_DEFAULT_CARD_TITLE;
@@ -380,7 +396,10 @@ function DeveloperComingSoonMobile({ data }: { data?: any }) {
 
 /* ── Modules section (mobile) ─────────────────────────────────── */
 function DeveloperModulesMobile({ data }: { data?: any }) {
-  const heading = data?.heading || "From bench validation\nto volume production.";
+  let heading = data?.heading || "From bench validation\nto volume production.";
+  if (!heading.includes("\n")) {
+    heading = heading.replace(" to volume", "\nto volume").replace(", without", ",\nwithout");
+  }
   const headingLines = heading.split("\n");
   const subtitle =
     data?.subtitle ||

@@ -15,23 +15,18 @@ export function Developer() {
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       {/* DESKTOP (>=1024px) — absolute canvas */}
       <div
-        className="relative mx-auto -mt-[78px] hidden w-full overflow-x-clip overflow-y-visible bg-black min-[1024px]:block"
-        style={{ height: DEV_DESKTOP_HEIGHT }}
+        className="relative mx-auto -mt-[78px] hidden w-full overflow-x-clip overflow-y-visible min-[1024px]:block"
+        style={{
+          height: DEV_DESKTOP_HEIGHT,
+          backgroundColor: "#000",
+          backgroundImage: "url('/developer/section-bg-2.png')",
+          backgroundPosition: "center 626px",
+          backgroundSize: "100% 1435px",
+          backgroundRepeat: "no-repeat",
+        }}
         data-node-id="2438:4365"
         data-name="Developer"
       >
-        {/* Section background — 2438:4366 (626→2061), full viewport width (edge-to-edge) */}
-        <div
-          className="pointer-events-none absolute inset-x-0 top-[626px] h-[1435.27px] overflow-hidden"
-          aria-hidden
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt=""
-            src="/developer/section-bg.png"
-            className="block h-full w-full object-cover"
-          />
-        </div>
 
         <div className="relative mx-auto h-full w-[1440px]">
           <DeveloperHero />

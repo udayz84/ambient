@@ -118,7 +118,7 @@ function SecondaryCta({
   return (
     <a
       href={href}
-      className={`${gilroyMedium.className} relative flex h-[48px] w-[249px] shrink-0 items-center justify-center bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+      className={`${gilroyMedium.className} relative flex h-[48px] w-[249px] shrink-0 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
       data-node-id="2438:4580"
     >
       <span className="relative not-italic text-[16px] font-medium uppercase whitespace-nowrap leading-[28px] text-white">

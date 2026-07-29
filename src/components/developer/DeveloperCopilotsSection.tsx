@@ -33,7 +33,7 @@ export function DeveloperCopilotsSection({ data }: { data?: any }) {
   return (
     <div
       className="absolute flex flex-col items-center gap-[40px]"
-      style={{ left: 118.3046875, top: 4197, width: 1204 }}
+      style={{ left: 118.3046875, top: 4097, width: 1204 }}
       data-node-id="2438:4666"
     >
       {/* Header — 2438:4667 */}
@@ -111,7 +111,7 @@ function CopilotCard({
   return (
     <div
       ref={fadeRef}
-      className={`group relative flex h-[409px] w-[385px] shrink-0 flex-col justify-between p-[32px] ${getFadeInClass(isVisible)}`}
+      className={`group relative flex h-[409px] w-[385px] shrink-0 flex-col justify-between border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[#0A0A0A] p-[32px] ${getFadeInClass(isVisible)}`}
       style={{ backgroundImage: COPILOT_CARD_BG }}
       data-node-id="2438:4678"
     >
@@ -164,7 +164,7 @@ function CopilotCta({
   return (
     <a
       href={href}
-      className={`${gilroyMedium.className} ${CTA_HOVER_GLOW} relative flex h-[48px] ${fullWidth ? "w-full" : "shrink-0"} items-center justify-center bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] not-italic opacity-100 transition-[box-shadow,background-color] duration-200 group-hover:bg-transparent`}
+      className={`${gilroyMedium.className} ${CTA_HOVER_GLOW} relative flex h-[48px] ${fullWidth ? "w-full" : "shrink-0"} items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] not-italic opacity-100 transition-[box-shadow,background-color] duration-200 group-hover:bg-transparent`}
       data-node-id="2438:4688"
     >
       <span

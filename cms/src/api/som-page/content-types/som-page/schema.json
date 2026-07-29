@@ -1,1 +1,66 @@
-﻿{ "kind": "singleType", "collectionName": "som_pages", "info": { "singularName": "som-page", "pluralName": "som-pages", "displayName": "SOM Page", "description": "System-on-Module page" }, "options": { "draftAndPublish": true }, "pluginOptions": {}, "attributes": { "hero": { "type": "component", "repeatable": false, "component": "som.hero" }, "features": { "type": "component", "repeatable": false, "component": "som.features" }, "ecosystem": { "type": "component", "repeatable": false, "component": "som.ecosystem" }, "inside_module": { "type": "component", "repeatable": false, "component": "som.inside-module" }, "prototype": { "type": "component", "repeatable": false, "component": "som.prototypes" }, "intelligence": { "type": "component", "repeatable": false, "component": "som.intelligence" }, "ready_to_deploy": { "type": "component", "repeatable": false, "component": "som.ready-to-deploy" }, "footer_merge": { "type": "component", "repeatable": false, "component": "som.footer-merge" }, "seo": { "type": "component", "repeatable": false, "component": "shared.seo" } } }
+{
+  "kind": "singleType",
+  "collectionName": "som_pages",
+  "info": {
+    "singularName": "som-page",
+    "pluralName": "som-pages",
+    "displayName": "SOM Page",
+    "description": "System-on-Module page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hero": {
+      "type": "component",
+      "component": "som.hero",
+      "repeatable": false
+    },
+    "features": {
+      "type": "component",
+      "component": "som.features",
+      "repeatable": false
+    },
+    "ecosystem": {
+      "type": "component",
+      "component": "som.ecosystem",
+      "repeatable": false
+    },
+    "inside_module": {
+      "type": "component",
+      "component": "som.inside-module",
+      "repeatable": false
+    },
+    "intelligence": {
+      "type": "component",
+      "component": "som.intelligence",
+      "repeatable": false
+    },
+    "ready_to_deploy": {
+      "type": "component",
+      "component": "som.ready-to-deploy",
+      "repeatable": false
+    },
+    "footer_merge": {
+      "type": "component",
+      "component": "som.footer-merge",
+      "repeatable": false
+    },
+    "seo": {
+      "type": "component",
+      "component": "shared.seo",
+      "repeatable": false
+    },
+    "bg_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

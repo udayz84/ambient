@@ -173,7 +173,7 @@ function WinCardMobile({ label, stat, statLabel, mobileImg, body }: { label: str
   );
 }
 
-function VisualWearable() {
+function VisualWearable({ img = "/applications/wins-img-1.png" }: { img?: string }) {
   return (
     <div className="absolute left-[111.3px] top-[55.5px] flex size-[342.201px] items-center justify-center mix-blend-lighten">
       <div className="-scale-y-100 rotate-180">
@@ -181,7 +181,7 @@ function VisualWearable() {
           <img
             alt=""
             aria-hidden
-            src="/applications/wins-img-1.png"
+            src={img}
             className="absolute inset-0 size-full object-cover"
           />
           <div
@@ -194,15 +194,15 @@ function VisualWearable() {
   );
 }
 
-function VisualMedical() {
+function VisualMedical({ img = "/applications/wins-img-2.png" }: { img?: string }) {
   return (
     <div className="absolute left-[26.82px] top-[-31.2px] size-[389.396px] mix-blend-lighten">
       <div className="absolute inset-0 overflow-hidden">
         <img
           alt=""
           aria-hidden
-          src="/applications/wins-img-2.png"
-          className="absolute left-[-31.7%] top-[33.25%] h-[70.15%] w-[124.71%] max-w-none object-cover"
+          src={img}
+          className="absolute inset-0 size-full object-contain px-[40px] pt-[80px] pb-[20px]"
         />
       </div>
       <div className="absolute inset-0" style={{ backgroundImage: OVERLAY_2 }} />
@@ -210,7 +210,7 @@ function VisualMedical() {
   );
 }
 
-function VisualAr() {
+function VisualAr({ img = "/applications/wins-img-3.png" }: { img?: string }) {
   return (
     <div className="absolute left-[26.82px] top-[-31.2px] flex size-[389.396px] items-center justify-center mix-blend-lighten">
       <div className="-scale-y-100 rotate-180">
@@ -219,16 +219,8 @@ function VisualAr() {
             <img
               alt=""
               aria-hidden
-              src="/applications/wins-img-2.png"
-              className="absolute left-[-31.7%] top-[33.25%] h-[70.15%] w-[124.71%] max-w-none object-cover"
-            />
-          </div>
-          <div className="absolute inset-0 overflow-hidden">
-            <img
-              alt=""
-              aria-hidden
-              src="/applications/wins-img-3.png"
-              className="absolute left-[-18.3%] top-[19.38%] h-[68.65%] w-[131.65%] max-w-none object-cover"
+              src={img}
+              className="absolute inset-0 size-full object-contain scale-[1.35]"
             />
           </div>
           <div
@@ -279,14 +271,23 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
   const rawCards = Array.isArray(data?.cards) ? data.cards : [];
   const cards =
     rawCards.length > 0
-      ? rawCards.map((c: any, i: number) => ({
-          label: c?.label || CARDS[i]?.label || "",
-          stat: c?.stat || CARDS[i]?.stat || "",
-          statLabel: c?.stat_label || CARDS[i]?.statLabel || "",
-          visual: WIN_VISUALS[i] || WIN_VISUALS[0],
-          mobileImg:
-            mediaUrl(c?.image) || CARDS[i]?.mobileImg || "/applications/wins-img-1.png",
-        }))
+      ? rawCards.map((c: any, i: number) => {
+          const mobileImg = mediaUrl(c?.image) || CARDS[i]?.mobileImg || "/applications/wins-img-1.png";
+          
+          let visual;
+          if (i === 0) visual = <VisualWearable img={mobileImg} key="wearable" />;
+          else if (i === 1) visual = <VisualMedical img={mobileImg} key="medical" />;
+          else if (i === 2) visual = <VisualAr img={mobileImg} key="ar" />;
+          else visual = <VisualWearable img={mobileImg} key={`extra-${i}`} />;
+
+          return {
+            label: c?.label || CARDS[i]?.label || "",
+            stat: c?.stat || CARDS[i]?.stat || "",
+            statLabel: c?.stat_label || CARDS[i]?.statLabel || "",
+            visual,
+            mobileImg,
+          };
+        })
       : CARDS;
 
   return (
@@ -309,7 +310,7 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
       </div>
 
       {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden w-full max-w-[1440px] flex-col items-center min-[1024px]:flex pt-[120px] pb-[120px]">
+      <div className="relative hidden w-full max-w-[1440px] flex-col items-center min-[1024px]:flex pt-[64px] pb-[64px]">
         <div className="flex flex-col items-center gap-[20px]">
           <div className="relative flex items-center justify-center bg-[rgba(255,255,255,0.06)] px-[20px] py-[8px]">
             <div className="absolute left-[6px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
@@ -351,7 +352,7 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
       </div>
 
       {/* MOBILE (<1024px) */}
-      <div className="relative flex w-full flex-col items-center gap-[40px] px-[24px] pt-[72px] pb-[72px] min-[1024px]:hidden">
+      <div className="relative flex w-full flex-col items-center gap-[40px] px-[24px] pt-[40px] pb-[40px] min-[1024px]:hidden">
         <div className="flex flex-col items-center gap-[16px]">
           <div className="relative flex items-center justify-center bg-[rgba(255,255,255,0.06)] px-[20px] py-[8px]">
             <div className="absolute left-[6px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />

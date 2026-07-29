@@ -57,7 +57,7 @@ export type DeveloperModule = {
 
 export const DEVELOPER_MODULES: DeveloperModule[] = [
   {
-    image: "/developer/module-dvk.png",
+    image: "/developer/image-2.png",
     title: "GPX Evaluation Kits (DVKs)",
     description:
       "Stop fighting with breakout boards. Our fully integrated Evaluation Kits come equipped with standard interfaces, allowing you to plug in your cameras, microphones, and industrial sensors out-of-the-box for immediate physical validation.",
@@ -65,7 +65,7 @@ export const DEVELOPER_MODULES: DeveloperModule[] = [
     ctaArrow: true,
   },
   {
-    image: "/developer/module-som.png",
+    image: "/developer/image-3.png",
     title: "Production-Ready SOMs",
     description:
       "Skip the nightmare of custom RF and power routing. Drop our high-density System-on-Modules (SOMs) directly into your custom carrier boards. They're engineered for extreme space-constrained environments, radically accelerating your time-to-market.",

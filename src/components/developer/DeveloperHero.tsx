@@ -1,6 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
+"use client";
+
 import { mediaUrl } from "@/lib/strapi";
 import { DeveloperHeroContent } from "./DeveloperHeroContent";
+import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 
 /**
  * Figma 2438:4365 (hero region) — Developer page hero section.
@@ -14,11 +17,14 @@ import { DeveloperHeroContent } from "./DeveloperHeroContent";
  */
 export function DeveloperHero({ data }: { data?: any }) {
   const bgImg = mediaUrl(data?.background_image) || "/developer/hero-bg-3.png";
+  const { fadeRef, isVisible } = useFadeIn<HTMLDivElement>(0.12);
+
   return (
     <>
       {/* Hero background — 2438:4562 (724.277, 78.033 / 687.038×577.687) */}
       <div
-        className="pointer-events-none absolute z-0"
+        ref={fadeRef}
+        className={`pointer-events-none absolute z-0 ${getFadeInClass(isVisible)}`}
         style={{ left: 724.277, top: 78.033, width: 687.038, height: 577.687 }}
         data-node-id="2438:4562"
         data-name="Gemini_Generated_Image_9x8w339x8w339x8w 1"

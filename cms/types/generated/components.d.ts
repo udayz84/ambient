@@ -2021,6 +2021,7 @@ export interface SomHero extends Struct.ComponentSchema {
     displayName: 'Hero';
   };
   attributes: {
+    image: Schema.Attribute.Media<'images'>;
     primary_button: Schema.Attribute.Component<'shared.button', false>;
     secondary_button: Schema.Attribute.Component<'shared.button', false>;
     subtitle: Schema.Attribute.Text;

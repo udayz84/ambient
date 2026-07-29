@@ -25,7 +25,10 @@ const DEFAULT_IMAGE = "/developer/sandbox-image.png";
  * Positioned at -6.7,2394 / 1453×683 within the Developer canvas.
  */
 export function DeveloperComingSoon({ data }: { data?: any }) {
-  const heading = data?.heading || DEFAULT_HEADING;
+  let heading = data?.heading || DEFAULT_HEADING;
+  if (!heading.includes("\n")) {
+    heading = heading.replace(" to volume", "\nto volume").replace(", without", ",\nwithout");
+  }
   const headingLines = heading.split("\n");
   const subtitle = data?.subtitle
     ? data.subtitle.split("\n")
@@ -39,7 +42,7 @@ export function DeveloperComingSoon({ data }: { data?: any }) {
   return (
     <div
       className="absolute"
-      style={{ left: -6.6953125, top: 2394, width: 1453, height: 683 }}
+      style={{ left: -6.6953125, top: 2294, width: 1453, height: 683 }}
       data-node-id="2438:4634"
       data-name="Coming soon"
     >

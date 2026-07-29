@@ -422,10 +422,11 @@ const APPLICATIONS_PAYLOAD = {
       "A unified analog architecture, scaled for your exact power and performance needs.",
     image: media(ASSETS.apps_continuum),
     cards: [
-      { title: "Microwatt Edge AI", body: "Always-on intelliegence for wearabes, audio & battery IoT." },
-      { title: "Physical AI", body: "Real-time perception & control for robots, drones & smart machines" },
-      { title: "Personal AI Servers", body: "Private, local AI compute for creators, developers & businesses" },
-      { title: "Air-Cooled HPC", body: "Always-on intelliegence for wearabes, audio & battery IoT." },
+      { title: "GPX10PRO", body: "Always-on intelliegence for wearabes, audio & battery IoT." },
+      { title: "GPX64", body: "Real-time perception & control for robots, drones & smart machines" },
+      { title: "GPX256", body: "Private, local AI compute for creators, developers & businesses" },
+      { title: "GPX2000", body: "Private, local AI compute for creators, developers & businesses" },
+      { title: "GPX8000", body: "Always-on intelliegence for wearabes, audio & battery IoT." },
     ],
   },
 
