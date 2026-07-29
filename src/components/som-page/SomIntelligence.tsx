@@ -60,7 +60,7 @@ function IntelligenceCard({
   return (
     <div
       ref={fadeRef}
-      className={`relative flex w-full flex-col overflow-clip p-[32px] min-[1024px]:h-[336.418px] min-[1024px]:w-[320px] min-[1024px]:shrink-0 min-[1024px]:justify-end ${getFadeInClass(isVisible)}`}
+      className={`relative flex w-full flex-col overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] p-[32px] min-[1024px]:h-[336.418px] min-[1024px]:w-[320px] min-[1024px]:shrink-0 min-[1024px]:justify-end ${getFadeInClass(isVisible)}`}
       style={{ backgroundImage: CARD_BG }}
       data-name="Content"
     >

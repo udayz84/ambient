@@ -1,6 +1,7 @@
 import { gilroyMedium, interRegular, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { DvkHero } from "./DvkHero";
+import { DvkScrollIndicator } from "./DvkScrollIndicator";
 import { DvkHardwareStack } from "./DvkHardwareStack";
 import { SPEC_CARDS } from "./dvk-data";
 import { DvkDemos } from "./DvkDemos";
@@ -46,11 +47,12 @@ export function Dvk({ data }: { data?: any }) {
         <div className="relative mx-auto h-full w-[1442px]">
           {data?.hero ? <DvkHero data={data.hero} /> : null}
         </div>
+        <DvkScrollIndicator />
       </div>
 
       {/* DESKTOP (>=1024px) — hardware stack section (2761:2905) */}
-      <div className="relative mx-auto hidden w-full bg-black min-[1024px]:block">
-        <div className="mx-auto w-[1232px] pb-[120px]">
+      <div id="dvk-content" className="relative mx-auto hidden w-full bg-black min-[1024px]:block">
+        <div className="mx-auto w-[1232px] pb-[60px]">
           {data?.hardware_stack ? (
             <DvkHardwareStack data={data.hardware_stack} />
           ) : null}
@@ -59,7 +61,7 @@ export function Dvk({ data }: { data?: any }) {
 
       {/* DESKTOP (>=1024px) — demos section (2761:2791 + cards row) */}
       <div className="relative mx-auto hidden w-full bg-black min-[1024px]:block">
-        <div className="mx-auto w-[1256px] pb-[129.5px]">
+        <div className="mx-auto w-[1256px] pb-[64px]">
           {data?.demos ? <DvkDemos data={data.demos} /> : null}
         </div>
       </div>
@@ -86,7 +88,7 @@ export function Dvk({ data }: { data?: any }) {
 }
 
 function DvkHeroMobile({ data }: { data?: any }) {
-  const bgImg = mediaUrl(data?.background_image) || "/dvk/hero-bg-2.png";
+  const bgImg = mediaUrl(data?.background_image);
   const title =
     data?.title || "The physical launchpad for microwatt Edge AI.";
   const subtitle =
@@ -101,12 +103,13 @@ function DvkHeroMobile({ data }: { data?: any }) {
       <div className="relative flex w-full flex-col pt-[100px] pb-[56px]">
         {/* Background image */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt=""
-            src={bgImg}
-            className="absolute inset-0 size-full object-cover object-center"
-          />
+          {bgImg && (
+            <img
+              alt=""
+              src={bgImg}
+              className="absolute inset-0 size-full object-cover object-center"
+            />
+          )}
           <div
             className="absolute inset-0"
             style={{ backgroundImage: HERO_IMAGE_OVERLAY }}
@@ -365,6 +368,15 @@ function DvkDemosMobile({ data }: { data?: any }) {
             </div>
           ))}
         </div>
+
+        {/* Explore CTA */}
+        <a
+          href="/applications"
+          className={`${interRegular.className} relative mt-[8px] flex h-[48px] w-full max-w-[320px] items-center justify-center border border-solid border-[rgba(255,255,255,0.15)] bg-[#1a1a1a] px-[24px] text-[13px] tracking-[0.02em] text-white transition-colors hover:bg-[#2a2a2a]`}
+        >
+          <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+          EXPLORE TARGET APPLICATIONS &rarr;
+        </a>
       </div>
     </section>
   );

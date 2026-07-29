@@ -112,7 +112,7 @@ function EcoTag({
 }) {
   return (
     <div
-      className={`relative h-[26px] shrink-0 overflow-clip ${available ? "bg-[rgba(115,190,91,0.8)]" : "bg-[rgba(115,190,91,0.12)]"} ${widthClass}`}
+      className={`relative h-[26px] shrink-0 overflow-clip ${available ? "bg-[rgba(115,190,91,0.8)]" : "bg-[rgba(115,190,91,0.12)] border-[0.5px] border-solid border-[rgba(240,240,240,0.4)]"} ${widthClass}`}
       data-name="Menu"
     >
       <Corners />
@@ -140,12 +140,12 @@ function EcoCta({
 }) {
   return (
     <div
-      className={`relative h-[48px] shrink-0 bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] ${soon ? "opacity-60" : ""} ${widthClass}`}
+      className={`relative h-[48px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] px-[20px] py-[10px] ${soon ? "bg-transparent opacity-40" : "bg-[rgba(226,241,202,0.12)] hover:bg-[rgba(226,241,202,0.2)] transition-colors"} ${widthClass}`}
       data-name="CTA - Secondary"
     >
       <div className="flex h-full items-center justify-center">
         <p
-          className={`${gilroyMedium.className} text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap not-italic [word-break:break-word] ${soon ? "text-[rgba(255,255,255,0.6)]" : "text-white"}`}
+          className={`${gilroyMedium.className} text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap not-italic [word-break:break-word] ${soon ? "text-[rgba(255,255,255,0.8)]" : "text-white"}`}
         >
           {label}
         </p>
@@ -199,7 +199,7 @@ function EcoCard({
   return (
     <div
       ref={fadeRef}
-      className={`flex flex-col overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] transition-colors duration-300 cursor-default ${cardBg} ${padClass} ${frameClass} ${getFadeInClass(isVisible)}`}
+      className={`flex flex-col overflow-visible border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] transition-colors duration-300 cursor-pointer ${cardBg} ${padClass} ${frameClass} ${getFadeInClass(isVisible)}`}
       data-name={dataName}
     >
       <div className="relative flex w-full flex-1 flex-col items-start justify-between">
@@ -330,7 +330,7 @@ const CARDS: CardData[] = [
   },
   {
     desktopPos: "absolute left-[734px] top-[606px]",
-    desktopSize: "w-[400px] h-[349px]",
+    desktopSize: "w-[400px] h-[370px]",
     overlay: () => null,
     cardBg: "bg-[rgba(0,0,0,0.2)]",
     padClass: "px-[32px] pt-[16px] pb-[24px]",
@@ -369,7 +369,7 @@ export function SomEcosystem({ data }: { data?: any }) {
       subtitle: c.subtitle || fb.subtitle,
       description: fb.description,
       ctaLabel: c.cta_label || fb.ctaLabel,
-      ctaSoon: c.cta_label ? false : fb.ctaSoon,
+      ctaSoon: (c.cta_label || fb.ctaLabel).toLowerCase() === "coming soon" || (!c.cta_label && fb.ctaSoon),
     };
   });
   return (

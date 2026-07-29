@@ -66,7 +66,7 @@ export function SomInsideModule({ data }: { data?: any }) {
       aria-label="Inside the Sparsh AI Module"
     >
       {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden w-[1192.509px] flex-col items-center gap-[48px] pt-[80px] pb-[80px] min-[1024px]:flex">
+      <div className="relative hidden w-[1192.509px] flex-col items-center gap-[48px] pt-[80px] pb-[40px] min-[1024px]:flex">
         {/* Header */}
         <div
           className="flex w-[800px] flex-col items-center gap-[24px]"
@@ -106,10 +106,6 @@ export function SomInsideModule({ data }: { data?: any }) {
               />
             </div>
             {/* Decorative overlays on the module photo */}
-            <div
-              aria-hidden
-              className="absolute left-[27.577px] top-[9.5px] h-[46.07px] w-[204.2px] bg-black"
-            />
             <div
               aria-hidden
               className="absolute left-[163.479px] top-[236.232px] h-[121.389px] w-[132.8px] mix-blend-plus-lighter"

@@ -32,11 +32,10 @@ export default async function SomPage() {
   let data: any = null;
   try {
     data = await getSingleType<any>("som-page", [
-      "hero",
+      { section: "hero", fields: ["image"], nested: ["primary_button", "secondary_button"] },
       { section: "features", nested: ["cards"] },
       { section: "ecosystem", nested: ["cards"] },
       { section: "inside_module", fields: ["image"], nested: ["specs"] },
-      { section: "prototype", nested: ["cards"] },
       { section: "intelligence", nested: ["cards"] },
       "ready_to_deploy",
       "footer_merge",

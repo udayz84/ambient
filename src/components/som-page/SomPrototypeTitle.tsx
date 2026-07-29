@@ -96,7 +96,7 @@ export function SomPrototypeTitle({ data }: { data?: any }) {
       aria-label="Prototype to Product in a Snap"
     >
       {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden w-[1204px] flex-col items-center gap-[36px] pt-[100px] pb-[60px] min-[1024px]:flex">
+      <div className="relative hidden w-[1204px] flex-col items-center gap-[36px] pt-[40px] pb-[60px] min-[1024px]:flex">
         <div className="relative px-[10px]" data-name="Title">
           <h2
             className={`${gilroyMedium.className} text-center text-[46px] leading-[49px] font-medium text-white whitespace-nowrap not-italic [word-break:break-word]`}

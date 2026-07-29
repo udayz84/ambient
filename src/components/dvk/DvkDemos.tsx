@@ -58,6 +58,15 @@ export function DvkDemos({ data }: { data?: any }) {
 
       {/* Demo cards row — 1256 wide */}
       <DvkDemosCards data={data} />
+
+      {/* Explore CTA */}
+      <a
+        href="/applications"
+        className={`${interRegular.className} relative mt-[11px] flex h-[48px] items-center justify-center border border-solid border-[rgba(255,255,255,0.15)] bg-[#1a1a1a] px-[24px] text-[13px] tracking-[0.02em] text-white transition-colors hover:bg-[#2a2a2a]`}
+      >
+        <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+        EXPLORE TARGET APPLICATIONS &rarr;
+      </a>
     </div>
   );
 }

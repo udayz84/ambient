@@ -22,7 +22,11 @@ export function DvkScrollIndicator() {
     <button
       type="button"
       onClick={handleScroll}
-      className={`${interRegular.className} absolute left-[1335.38671875px] top-[616.033203125px] flex h-[75px] w-[18px] cursor-pointer flex-col content-stretch items-center gap-[10px] border-0 bg-transparent p-0`}
+      className={`${interRegular.className} absolute flex h-[75px] w-[18px] cursor-pointer flex-col content-stretch items-center gap-[10px] border-0 bg-transparent p-0 z-50`}
+      style={{
+        bottom: 40,
+        right: "max(24px, calc(50% - 633px))"
+      }}
       data-node-id="2761:3005"
       data-name="Frame 1000003871"
       aria-label="Scroll to next section"

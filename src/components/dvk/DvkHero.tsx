@@ -31,29 +31,31 @@ export function DvkHero({ data }: { data?: any }) {
   const title = data?.title || DEFAULT_TITLE;
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
   const ctaLabel = data?.cta_label || DEFAULT_CTA_LABEL;
-  const bg = mediaUrl(data?.background_image) || DEFAULT_BG;
+  const bg = mediaUrl(data?.background_image);
   return (
     <>
       {/* Hero background — image group 2761:2972 */}
-      <div
-        className="pointer-events-none absolute overflow-hidden"
-        style={{
-          left: 329.625,
-          top: 10.18359375,
-          width: 1120.3746337890625,
-          height: 610.349609375,
-        }}
-        data-node-id="2761:2972"
-        data-name="image 105"
-        aria-hidden
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt=""
-          src={bg}
-          className="absolute inset-0 size-full max-w-none object-bottom"
-        />
-      </div>
+      {bg && (
+        <div
+          className="pointer-events-none absolute overflow-hidden"
+          style={{
+            left: 329.625,
+            top: 10.18359375,
+            width: 1120.3746337890625,
+            height: 610.349609375,
+          }}
+          data-node-id="2761:2972"
+          data-name="image 105"
+          aria-hidden
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt=""
+            src={bg}
+            className="absolute inset-0 size-full max-w-none object-contain object-bottom"
+          />
+        </div>
+      )}
 
       {/* Right-side blend into black for screens wider than the 1442 canvas.
           The hero overlay only darkens the left (for text legibility), so the
@@ -192,7 +194,6 @@ export function DvkHero({ data }: { data?: any }) {
         </div>
       </div>
 
-      <DvkScrollIndicator />
     </>
   );
 }

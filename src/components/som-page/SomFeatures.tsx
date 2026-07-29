@@ -21,12 +21,13 @@ type FeatureCardProps = {
   tag: string;
   title: string;
   body: string;
+  glowPosition?: string;
 };
 
 function CardTag({ label }: { label: string }) {
   return (
     <div
-      className="relative h-[26px] w-full min-[1024px]:w-[255px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)]"
+      className="relative h-[26px] w-full min-[1024px]:w-[255px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.06)] backdrop-blur-[10px]"
       data-name="Menu"
     >
       <Corners />
@@ -47,13 +48,17 @@ function FeatureCard({
   tag,
   title,
   body,
+  glowPosition = "at 50% 50%",
 }: FeatureCardProps) {
   const { fadeRef, isVisible } = useFadeIn();
 
   return (
     <div
       ref={fadeRef}
-      className={`relative flex w-full flex-col items-start gap-[24px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[16px] pt-[16px] pb-[24px] min-[1024px]:h-[400px] min-[1024px]:w-[377px] min-[1024px]:gap-[36px] transition-all duration-300 hover:-translate-y-[10px] hover:shadow-[0px_94px_94px_-80px_#6fe047] min-[1024px]:hover:-translate-y-[30px] ${getFadeInClass(isVisible)}`}
+      className={`relative flex w-full flex-col items-start gap-[24px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[16px] pt-[16px] pb-[24px] min-[1024px]:h-[400px] min-[1024px]:w-[377px] min-[1024px]:gap-[36px] transition-all duration-300 hover:-translate-y-[10px] hover:shadow-[0px_94px_94px_-80px_#6fe047] min-[1024px]:hover:-translate-y-[30px] cursor-pointer ${getFadeInClass(isVisible)}`}
+      style={{
+        backgroundImage: `radial-gradient(circle ${glowPosition}, rgba(111,224,71,0.12) 0%, rgba(0,0,0,0) 70%)`
+      }}
       data-name="Article"
     >
       {/* Icon */}
@@ -102,6 +107,7 @@ const CARDS: FeatureCardProps[] = [
     tag: "PRE-ENGINEERED HARDWARE",
     title: "Microwatt AI in a Micro Footprint",
     body: "We pre-routed the GPX10 AI processor and wireless stacks into high-density footprints. Skip RF certification nightmares and achieve scale.",
+    glowPosition: "at 100% 40%",
   },
   {
     iconSrc: "/som/icon-card-2.svg",
@@ -109,6 +115,7 @@ const CARDS: FeatureCardProps[] = [
     tag: "Vertical-Specific Integration",
     title: "Purpose-Built Peripherals",
     body: "Simplify sourcing and driver integration. Each SOM is pre-integrated with the sensors and interfaces your vertical needs—vision, telemetry, or acoustics.",
+    glowPosition: "at 0% 40%",
   },
   {
     iconSrc: "/som/icon-card-3.svg",
@@ -116,12 +123,17 @@ const CARDS: FeatureCardProps[] = [
     tag: "Ecosystem Portability",
     title: "1:1 Code Portability",
     body: "The exact C-code, AI object files, and unified Eclipse build you validated on the Cranium Evaluation Kit ports directly to any of our production SOMs with zero rewrites.",
+    glowPosition: "at 0% 40%",
   },
 ];
 
 export function SomFeatures({ data }: { data?: any }) {
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
-  const headingLines = (data?.heading || FALLBACK_HEADING).split("\n");
+  const rawHeading = data?.heading || FALLBACK_HEADING;
+  const processedHeading = rawHeading === "Stop Routing. Start Shipping."
+    ? "Stop Routing.\nStart Shipping."
+    : rawHeading;
+  const headingLines = processedHeading.split("\n");
   const cards: FeatureCardProps[] = Array.isArray(data?.cards) && data.cards.length > 0
     ? data.cards.map((c: any, i: number) => {
         const fb = CARDS[i] || CARDS[0];
@@ -131,6 +143,7 @@ export function SomFeatures({ data }: { data?: any }) {
           tag: c?.tag || fb.tag,
           title: c?.title || fb.title,
           body: c?.description || fb.body,
+          glowPosition: fb.glowPosition,
         };
       })
     : CARDS;

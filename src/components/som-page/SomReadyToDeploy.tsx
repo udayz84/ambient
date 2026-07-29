@@ -61,7 +61,7 @@ function ChipImage({ className, src }: { className?: string; src: string }) {
         <img
           src={src}
           alt="Sparsh AI Module"
-          className="absolute left-0 top-[10.17%] h-[79.67%] w-full max-w-none"
+          className="absolute inset-0 size-full object-contain"
         />
       </div>
     </div>
@@ -79,13 +79,13 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
   ).split("\n");
   return (
     <section
-      className="relative flex w-full justify-center overflow-hidden bg-black"
+      className="relative z-30 flex w-full justify-center overflow-hidden bg-black"
       aria-label="Ready to deploy?"
     >
       {/* DESKTOP (>=1024px) — 1204 container, Figma absolute geometry.
           Bottom padding 145.2px: SomFooterMerge's -mb-[400px] pulls the opaque
           site footer 189px up over this section; this keeps all content clear. */}
-      <div className="relative hidden w-[1204px] flex-col items-center pt-[80px] pb-[145.2px] min-[1024px]:flex">
+      <div className="relative hidden w-[1204px] flex-col items-center pt-[80px] pb-[60px] min-[1024px]:flex">
         {/* Title block — 2438:5194 (800 wide, gap 24) */}
         <div
           className="flex w-[800px] flex-col items-center gap-[24px]"
@@ -110,7 +110,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
         </div>
 
         {/* Body — chip top sits 28.89px below the title block; 446.196 tall */}
-        <div className="relative mt-[28.89px] h-[446.196px] w-full">
+        <div className="relative mt-[10px] h-[446.196px] w-full">
           <ChipImage
             className="absolute left-[401.108px] top-0 h-[446.196px] w-[430.321px]"
             src={chipSrc}
@@ -142,20 +142,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
             <RequestCta label={ctaLabel} />
           </div>
 
-          {/* Connector line — 2438:5333 (left 402.44, top 234.72) */}
-          <div
-            className="absolute left-[402.439px] top-[234.72px] h-[23.245px] w-[320.82px]"
-            data-node-id="2438:5333"
-            aria-hidden
-          >
-            <div className="absolute inset-[-2.15%_0_-11.88%_-0.86%]">
-              <img
-                alt=""
-                src={CONNECTOR_LINE}
-                className="block size-full max-w-none"
-              />
-            </div>
-          </div>
+
         </div>
       </div>
 
