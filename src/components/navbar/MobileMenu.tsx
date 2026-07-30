@@ -78,6 +78,7 @@ export function MobileMenu({ data }: { data?: any }) {
     ? mapStrapiNavItems(data.nav_items)
     : FALLBACK_NAV_ITEMS;
   const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const isClient = useSyncExternalStore(
     emptySubscribe,
@@ -112,7 +113,10 @@ export function MobileMenu({ data }: { data?: any }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  const close = () => setOpen(false);
+  const close = () => {
+    setOpen(false);
+    setExpanded(null);
+  };
 
   return (
     <>
@@ -185,6 +189,75 @@ export function MobileMenu({ data }: { data?: any }) {
               <ul className="px-[24px] pt-[8px]">
                 {navItems.map((item) => {
                   const active = item.href !== "#" && pathname === item.href;
+                  const isExpanded = expanded === item.label;
+                  if (item.children?.length) {
+                    return (
+                      <li
+                        key={item.label}
+                        className="border-b border-white/[0.06]"
+                      >
+                        <div className="flex items-center justify-between py-[16px]">
+                          <Link
+                            href={item.href}
+                            onClick={close}
+                            className="text-[16px] leading-[normal] tracking-[-0.42px]"
+                          >
+                            <span className={active ? "text-[#6ced3f]" : "text-white"}>
+                              {item.label}
+                            </span>
+                          </Link>
+                          <button
+                            type="button"
+                            aria-label={`Toggle ${item.label} submenu`}
+                            aria-expanded={isExpanded}
+                            onClick={() =>
+                              setExpanded(isExpanded ? null : item.label)
+                            }
+                            className="flex h-[24px] w-[24px] items-center justify-center"
+                          >
+                            <span
+                              className={`transition-transform duration-200 ${
+                                isExpanded ? "rotate-180" : ""
+                              }`}
+                            >
+                              <ChevronDown />
+                            </span>
+                          </button>
+                        </div>
+                        <div
+                          className={`overflow-hidden transition-[max-height] duration-300 ease-out ${
+                            isExpanded ? "max-h-[400px]" : "max-h-0"
+                          }`}
+                        >
+                          <ul className="pb-[8px] pl-[16px]">
+                            {item.children.map((child) => {
+                              const childActive =
+                                child.href !== "#" && pathname === child.href;
+                              return (
+                                <li key={child.label}>
+                                  <Link
+                                    href={child.href}
+                                    onClick={close}
+                                    className="block py-[10px] text-[14px] leading-[normal] tracking-[-0.42px]"
+                                  >
+                                    <span
+                                      className={
+                                        childActive
+                                          ? "text-[#6ced3f]"
+                                          : "text-white/70"
+                                      }
+                                    >
+                                      {child.label}
+                                    </span>
+                                  </Link>
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </div>
+                      </li>
+                    );
+                  }
                   return (
                     <li
                       key={item.label}
@@ -195,7 +268,13 @@ export function MobileMenu({ data }: { data?: any }) {
                         onClick={close}
                         className="flex items-center justify-between py-[16px] text-[16px] leading-[normal] tracking-[-0.42px]"
                       >
-                        <span className={active ? "text-[#6ced3f]" : "text-white"}>
+                        <span
+                          className={
+                            item.highlight || active
+                              ? "text-[#6ced3f]"
+                              : "text-white"
+                          }
+                        >
                           {item.label}
                         </span>
                       </Link>

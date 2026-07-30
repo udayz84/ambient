@@ -17,6 +17,15 @@
     "has_dropdown": {
       "type": "boolean",
       "default": false
+    },
+    "highlight": {
+      "type": "boolean",
+      "default": false
+    },
+    "children": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.nav-sub-item"
     }
   }
 }

@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_shared_nav_sub_items",
+  "info": {
+    "displayName": "Nav Sub Item",
+    "description": "Navigation submenu link"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "href": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

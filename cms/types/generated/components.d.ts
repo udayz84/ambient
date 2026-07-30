@@ -1838,7 +1838,21 @@ export interface SharedNavItem extends Struct.ComponentSchema {
     displayName: 'Nav Item';
   };
   attributes: {
+    children: Schema.Attribute.Component<'shared.nav-sub-item', true>;
     has_dropdown: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    highlight: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    href: Schema.Attribute.String & Schema.Attribute.Required;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SharedNavSubItem extends Struct.ComponentSchema {
+  collectionName: 'components_shared_nav_sub_items';
+  info: {
+    description: 'Navigation submenu link';
+    displayName: 'Nav Sub Item';
+  };
+  attributes: {
     href: Schema.Attribute.String & Schema.Attribute.Required;
     label: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -2703,6 +2717,7 @@ declare module '@strapi/strapi' {
       'shared.link': SharedLink;
       'shared.location': SharedLocation;
       'shared.nav-item': SharedNavItem;
+      'shared.nav-sub-item': SharedNavSubItem;
       'shared.newsletter': SharedNewsletter;
       'shared.seo': SharedSeo;
       'shared.social-link': SharedSocialLink;

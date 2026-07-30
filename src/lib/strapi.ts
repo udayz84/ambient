@@ -164,9 +164,12 @@ export async function getCollection<T = unknown>(
   return res.data || [];
 }
 
-/** Fetch the navbar single type (brand + header). */
+/** Fetch the navbar single type (brand + header with nested nav sub-items). */
 export async function getNavbar<T = unknown>(): Promise<T | null> {
-  const sections: PopulateSection[] = ["brand", "header"];
+  const sections: PopulateSection[] = [
+    "brand",
+    { section: "header", fields: ["cta_dot_icon"], nested: ["nav_items.children"] },
+  ];
   const res = await fetchStrapi<StrapiResponse<T>>(
     `/api/navbar?${buildPopulate(sections)}`
   );
