@@ -55,7 +55,7 @@ export const FALLBACK_NAV_ITEMS: NavItem[] = [
       { label: "News & Media", href: "/news-listing" },
     ],
   },
-  { label: "Shop", hasChevron: false, href: "/products", highlight: true },
+  { label: "Shop", hasChevron: false, href: "https://www.digikey.com/en/supplier-centers/ambient-scientific", highlight: true },
 ];
 
 type RawNavItem = {
@@ -86,10 +86,16 @@ export function mapStrapiNavItems(
     .map((raw) => {
       const label = typeof raw?.label === "string" ? raw.label : "";
       const children = mapStrapiSubItems(raw?.children) ?? mapStrapiSubItems(raw?.sub_items);
+      let href = typeof raw?.href === "string" && raw.href ? raw.href : "#";
+      
+      if (label.toLowerCase() === "shop") {
+        href = "https://www.digikey.com/en/supplier-centers/ambient-scientific";
+      }
+
       return {
         label,
         hasChevron: Boolean(raw?.has_dropdown) || Boolean(children?.length),
-        href: typeof raw?.href === "string" && raw.href ? raw.href : "#",
+        href,
         highlight: Boolean(raw?.highlight),
         ...(children?.length ? { children } : {}),
       };
