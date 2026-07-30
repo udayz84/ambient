@@ -382,23 +382,23 @@ export function SomEcosystem({ data }: { data?: any }) {
       {/* ============================ DESKTOP (>=1024px) ============================ */}
       <div className="relative mx-auto hidden h-[1008px] w-[1440px] min-[1024px]:block">
         {/* Abstract design */}
-        <div className="absolute left-1/2 top-[-50px] h-[320px] w-[881.616px] -translate-x-1/2">
+        <div className="absolute left-1/2 top-0 h-[320px] w-[881.616px] -translate-x-1/2">
           <img
             src="/som/ecosystem-abstract.svg"
             alt=""
             aria-hidden
-            className="block size-full max-w-none"
+            className="block size-full max-w-none object-cover object-bottom"
           />
         </div>
 
         {/* Background image 124 */}
-        <div className="absolute left-0 top-[163px] h-[922.344px] w-[1440px] opacity-40">
+        <div className="absolute inset-0 opacity-40">
           <div className="absolute inset-0 overflow-hidden">
             <img
               src={bgImage}
               alt=""
               aria-hidden
-              className="absolute left-0 top-[0.03%] h-[119.42%] w-[99.99%] max-w-none"
+              className="absolute inset-0 size-full max-w-none object-cover"
             />
           </div>
           <div

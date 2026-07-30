@@ -733,27 +733,37 @@ const DVK_PAYLOAD = {
     spec_cards: [
       {
         title: "Memory",
-        items: "512KB SRAM\n8MB Flash\nExternal SPI Support",
+        items: "64Mb Flash\nExternal Flash connection via SPI, QPI",
         is_accent: false,
       },
       {
         title: "Wireless",
-        items: "Bluetooth 5.0 LE\n802.15.4 Ready\nOnboard Antenna",
+        items: "UART-Based: Micro chip BLE",
         is_accent: false,
       },
       {
         title: "Sensors",
-        items: "I2S Digital Mic\nAnalog Mic\n3-Axis Accelerometer\nAmbient Light Sensor",
+        items: "I²C-Based: MC3419, MXC6655\nADC-Based: Optical, Humidity, and Temperature Sensors\nI²S-Based: Microphone (Audio Pipeline)\nADC-Based: Microphone (Audio Pipeline)\nDVP-Based: Camera",
         is_accent: true,
       },
       {
         title: "Debug Ports",
-        items: "USB-C Programming\n10-Pin JTAG\nUART Console\nGPIO Breakout",
+        items: "20 Pin JTAG for debug\nUART-Based: TTL for debug prints\nGPIO-Based: LEDs",
         is_accent: false,
       },
       {
         title: "Interfaces",
-        items: "SPI, I2C, UART\nCamera Connector\nProgrammable LEDs\nButton Inputs",
+        items: "SPI0\nSPI1\nI2C Master\nI2C Slave\nDVP Interface\nI2S\nADC\nUART\nQPI",
+        is_accent: false,
+      },
+      {
+        title: "MCU",
+        items: "GPX10PRO",
+        is_accent: false,
+      },
+      {
+        title: "Booting",
+        items: "Chip_ID Switches",
         is_accent: false,
       },
     ],

@@ -19,24 +19,27 @@ const DEFAULT_HEADING =
 const DEFAULT_SUBTITLE =
   "An exhaustive suite of sensors, interfaces, and debug tools pre-integrated with the GPX-10 Pro AI Processor.";
 const DEFAULT_LABEL = "The Hardware Blueprint";
-const DEFAULT_BOARD_IMAGE = "/dvk/board-blueprint.webp";
+const DEFAULT_BOARD_IMAGE = "/dvk/board-stack.png";
 
 export function DvkHardwareStack({ data }: { data?: any }) {
   const heading = data?.heading || DEFAULT_HEADING;
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
   const label = data?.label || DEFAULT_LABEL;
   const boardImage = mediaUrl(data?.board_image) || DEFAULT_BOARD_IMAGE;
-  const cards: SpecCardType[] =
-    data?.spec_cards && Array.isArray(data.spec_cards) && data.spec_cards.length > 0
-      ? data.spec_cards.map((c: any, i: number) => ({
-          title: c?.title || SPEC_CARDS[i]?.title || "",
-          items:
-            c?.items && c.items.length > 0
-              ? c.items.split("\n").filter(Boolean)
-              : SPEC_CARDS[i]?.items || [],
-          accent: c?.is_accent === true,
-        }))
-      : SPEC_CARDS;
+  // Figma 2761:2925 — fixed 7 card slots; CMS entries override per index.
+  const source: any[] = Array.isArray(data?.spec_cards) ? data.spec_cards : [];
+  const cards: SpecCardType[] = SPEC_CARDS.map((def, i) => {
+    const c = source[i];
+    if (!c) return def;
+    return {
+      title: c?.title || def.title,
+      items:
+        c?.items && c.items.length > 0
+          ? c.items.split("\n").filter(Boolean)
+          : def.items,
+      accent: c?.is_accent === true,
+    };
+  });
 
   return (
     <div
@@ -75,7 +78,7 @@ export function DvkHardwareStack({ data }: { data?: any }) {
       <div className="flex w-full items-center justify-center gap-[24px]">
         {/* Feature card (Board Image) */}
         <div
-          className="relative flex min-w-px flex-1 flex-col items-center justify-center gap-[20px] overflow-clip border-[0.5px] border-solid p-[16px]"
+          className="relative flex min-w-px flex-1 flex-col items-center justify-center gap-[20px] self-stretch overflow-clip border-[0.5px] border-solid p-[16px]"
           style={{
             backgroundColor: FEATURE_CARD_BG,
             borderColor: CARD_BORDER,
@@ -87,12 +90,13 @@ export function DvkHardwareStack({ data }: { data?: any }) {
           >
             {label}
           </p>
-          <div className="relative size-[435.976px] shrink-0">
+          {/* Figma 4049:8277 — DVK Board 1 */}
+          <div className="relative h-[528.474px] w-[572.67px] shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt=""
               src={boardImage}
-              className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+              className="pointer-events-none absolute inset-0 size-full max-w-none object-bottom"
             />
           </div>
         </div>
@@ -107,7 +111,14 @@ export function DvkHardwareStack({ data }: { data?: any }) {
             <SpecCard card={cards[2]} />
             <SpecCard card={cards[3]} />
           </div>
-          <SpecCard card={cards[4]} fullWidth />
+          {/* Row 3 (Figma 4022:2660) — Interfaces + stacked MCU/Booting */}
+          <div className="flex w-full gap-[8px]">
+            <SpecCard card={cards[4]} />
+            <div className="flex min-w-px flex-1 flex-col items-start justify-center gap-[8px] self-stretch">
+              <SpecCard card={cards[5]} stacked />
+              <SpecCard card={cards[6]} stacked />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -116,16 +127,16 @@ export function DvkHardwareStack({ data }: { data?: any }) {
 
 function SpecCard({
   card,
-  fullWidth = false,
+  stacked = false,
 }: {
   card: SpecCardType;
-  fullWidth?: boolean;
+  stacked?: boolean;
 }) {
   if (!card) return null;
   return (
     <div
       className={`relative flex flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid px-[16px] pt-[16px] pb-[24px] ${
-        fullWidth ? "w-full" : "min-w-px flex-1"
+        stacked ? "min-h-px w-full flex-1" : "min-w-px flex-1"
       }`}
       style={{
         backgroundColor: card.accent ? ACCENT_CARD_BG : CARD_BG,

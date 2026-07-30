@@ -15,7 +15,7 @@ export function NewsBackdrop({ data }: NewsBackdropProps = {}) {
 
   return (
     <div
-      className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+      className="pointer-events-none absolute inset-0 z-0 overflow-hidden min-[1024px]:-bottom-[409px]"
       aria-hidden
       data-node-id="2500:1654"
       data-name="image 107"

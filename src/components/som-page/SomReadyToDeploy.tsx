@@ -79,7 +79,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
   ).split("\n");
   return (
     <section
-      className="relative z-30 flex w-full justify-center overflow-hidden bg-black"
+      className="relative z-30 flex w-full justify-center overflow-hidden bg-[linear-gradient(to_bottom,black_0%,black_85%,transparent_100%)]"
       aria-label="Ready to deploy?"
     >
       {/* DESKTOP (>=1024px) — 1204 container, Figma absolute geometry.
@@ -142,6 +142,21 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
             <RequestCta label={ctaLabel} />
           </div>
 
+          {/* Connector Line — 2438:5333 */}
+          <div
+            className="pointer-events-none absolute left-[402.44px] top-[234.71px] h-[23.24px] w-[320.82px]"
+            data-node-id="2438:5333"
+            aria-hidden
+          >
+            <div className="absolute inset-[-2.15%_0_-11.88%_-0.86%]">
+              <img
+                src={CONNECTOR_LINE}
+                alt=""
+                className="block size-full max-w-none"
+                aria-hidden
+              />
+            </div>
+          </div>
 
         </div>
       </div>

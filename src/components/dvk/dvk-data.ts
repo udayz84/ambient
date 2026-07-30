@@ -46,36 +46,55 @@ export type SpecCardType = {
   accent?: boolean;
 };
 
+/** Figma 2761:2925 — hardware stack spec cards (7 cards, 3 rows). */
 export const SPEC_CARDS: SpecCardType[] = [
   {
     title: "Memory",
-    items: ["512KB SRAM", "8MB Flash", "External SPI Support"],
+    items: ["64Mb Flash", "External Flash connection via SPI, QPI"],
   },
   {
     title: "Wireless",
-    items: ["Bluetooth 5.0 LE", "802.15.4 Ready", "Onboard Antenna"],
+    items: ["UART-Based: Micro chip BLE"],
   },
   {
     title: "Sensors",
     accent: true,
     items: [
-      "I2S Digital Mic",
-      "Analog Mic",
-      "3-Axis Accelerometer",
-      "Ambient Light Sensor",
+      "I²C-Based: MC3419, MXC6655",
+      "ADC-Based: Optical, Humidity, and Temperature Sensors",
+      "I²S-Based: Microphone (Audio Pipeline)",
+      "ADC-Based: Microphone (Audio Pipeline)",
+      "DVP-Based: Camera",
     ],
   },
   {
     title: "Debug Ports",
-    items: ["USB-C Programming", "10-Pin JTAG", "UART Console", "GPIO Breakout"],
+    items: [
+      "20 Pin JTAG for debug",
+      "UART-Based: TTL for debug prints",
+      "GPIO-Based: LEDs",
+    ],
   },
   {
     title: "Interfaces",
     items: [
-      "SPI, I2C, UART",
-      "Camera Connector",
-      "Programmable LEDs",
-      "Button Inputs",
+      "SPI0",
+      "SPI1",
+      "I2C Master",
+      "I2C Slave",
+      "DVP Interface",
+      "I2S",
+      "ADC",
+      "UART",
+      "QPI",
     ],
+  },
+  {
+    title: "MCU",
+    items: ["GPX10PRO"],
+  },
+  {
+    title: "Booting",
+    items: ["Chip_ID Switches"],
   },
 ];

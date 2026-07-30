@@ -76,7 +76,7 @@ export function SomHero({ data }: { data?: any }) {
       <div className="relative hidden h-[703px] w-full max-w-[1442px] min-[1024px]:block">
         {/* Background image "DVK 1" */}
         <div
-          className="pointer-events-none absolute top-0 left-[-23.4717px] h-[710.5659px] w-[1465.4717px]"
+          className="pointer-events-none absolute top-0 right-0 h-[710px] w-[900px]"
           data-node-id="3210:1546"
           data-name="DVK 1"
           aria-hidden

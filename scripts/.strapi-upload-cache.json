@@ -1370,5 +1370,12 @@
     "url": "/uploads/dvk_m_humanoid_2874dd58e4.png",
     "name": "dvk-m-humanoid.png",
     "sourcePath": "applications/dvk-m-humanoid.png"
+  },
+  "243d3bc5e3caa567dcc45988db76774cf90d4add": {
+    "id": 287,
+    "documentId": "twh1lzv1gmnn1m5xir04ihyg",
+    "url": "/uploads/board_stack_4813705410.png",
+    "name": "board-stack.png",
+    "sourcePath": "dvk/board-stack.png"
   }
 }

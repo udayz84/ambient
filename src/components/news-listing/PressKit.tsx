@@ -216,7 +216,7 @@ export function PressKit({ data }: PressKitProps = {}) {
 
   return (
     <section
-      className="relative z-10 flex w-full justify-center overflow-hidden bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.15)_1.5px,_transparent_1.5px)] bg-[length:16px_16px]"
+      className="relative z-10 flex w-full justify-center overflow-hidden bg-transparent"
       aria-label="Writing about Ambient"
       data-node-id="2500:1659"
       data-name="Building with Ambient"
