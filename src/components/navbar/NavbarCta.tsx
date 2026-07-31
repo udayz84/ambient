@@ -59,8 +59,8 @@ function getRepelOffset(
 }
 
 export function NavbarCta({ data }: { data?: any } = {}) {
-  const ctaLabel = data?.cta_label || "GET IN TOUCH";
-  const ctaHref = data?.cta_href || "/contact";
+  const ctaLabel = data?.cta_label ?? "";
+  const ctaHref = data?.cta_href ?? "#";
   const buttonRef = useRef<HTMLAnchorElement>(null);
   const particleRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const offsetRefs = useRef<{ x: number; y: number }[]>([]);

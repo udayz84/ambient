@@ -3,6 +3,8 @@
 
 import { useState } from "react";
 import { dmMono, gilroyMedium, interBold, interRegular, interSemiBold } from "../hero/fonts";
+import { TagBadge } from "../hero/TagBadge";
+import { Corners } from "../shared/Corners";
 
 /**
  * "Always on. Never asleep." section — Figma 3708:462 (1440×833).
@@ -95,41 +97,27 @@ function FrameCorners({
 /* ── "The signature mode" badge ──────────────────────────────── */
 function SectionBadge() {
   return (
-    <div
-      className="bg-[rgba(255,255,255,0.06)] h-[27px] overflow-clip relative shrink-0 w-[170px]"
-      data-node-id="3710:1859"
-      data-name="Menu"
-    >
-      <FrameCorners leftSrc={CORNER_42} rightSrc={CORNER_43} size={4.133} />
-      <p
-        className={`${dmMono.className} [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] absolute leading-[20.149px] left-[calc(50%-69.5px)] not-italic text-[#ecfae5] text-[13.433px] top-[calc(50%-4.5px)] tracking-[-0.403px] uppercase whitespace-nowrap`}
-        data-node-id="3710:1864"
-      >
-        The signature mode
-      </p>
-      <div className="-translate-y-1/2 absolute bg-white h-[12.399px] left-[6.7px] opacity-60 top-1/2 w-[2.067px]" data-name="Indicator" />
-      <div className="-translate-y-1/2 absolute bg-white h-[12.399px] opacity-60 right-[7px] top-1/2 w-[2.067px]" data-name="Indicator" />
-    </div>
+    <TagBadge
+      label="The signature mode"
+      width={170}
+      centerLabel
+      labelOffsetX={0}
+      rightBarLeft={160}
+    />
   );
 }
 
 /* ── Card badge ("power" / "Performance") ────────────────────── */
 function CardBadge({ label, width }: { label: string; width: number }) {
   return (
-    <div
-      className="bg-[rgba(255,255,255,0.06)] h-[26px] overflow-clip relative shrink-0"
-      style={{ width }}
-      data-name="Menu"
-    >
-      <FrameCorners leftSrc={CORNER_44} rightSrc={CORNER_45} />
-      <p
-        className={`${dmMono.className} -translate-x-1/2 [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] absolute leading-[19.5px] left-[calc(50%-0.5px)] not-italic text-[#ecfae5] text-[13px] text-center top-[calc(50%-4.5px)] tracking-[-0.39px] uppercase whitespace-nowrap`}
-      >
-        {label}
-      </p>
-      <div className="-translate-y-1/2 absolute bg-white h-[12px] left-[6.48px] opacity-60 top-1/2 w-[2px]" data-name="Secondary Menu Indicator" />
-      <div className="-translate-y-1/2 absolute bg-white h-[12px] opacity-60 right-[7.52px] top-1/2 w-[2px]" data-name="Menu Indicator" />
-    </div>
+    <TagBadge
+      label={label}
+      width={width}
+      height={26}
+      centerLabel
+      labelOffsetX={0}
+      rightBarLeft={width - 9.52}
+    />
   );
 }
 
@@ -240,17 +228,17 @@ function OnChip({
 }) {
   return (
     <div
-      className={`h-[50px] overflow-clip transition-colors duration-[1200ms] ease-in-out ${
+      className={`h-[50px] overflow-clip transition-colors duration-[400ms] ease-in-out ${
         active ? "bg-[rgba(56,99,41,0.31)]" : "bg-[rgba(58,58,58,0.7)]"
       } ${className}`}
       style={{ width }}
       data-name="ON"
     >
       <div className="-translate-y-1/2 absolute left-[6.53px] size-[10.656px] top-1/2" aria-hidden>
-        <img alt="" className={`absolute block inset-0 max-w-none size-full transition-all duration-[1200ms] ease-in-out ${active ? "grayscale-0 opacity-100" : "grayscale opacity-50"}`} src={ON_DOT_OUTER} />
+        <img alt="" className={`absolute block inset-0 max-w-none size-full transition-all duration-[400ms] ease-in-out ${active ? "grayscale-0 opacity-100" : "grayscale opacity-50"}`} src={ON_DOT_OUTER} />
       </div>
       <div
-        className={`-translate-x-1/2 pointer-events-none absolute h-[110.447px] top-[-25.66px] w-[126.547px] transition-opacity duration-[1200ms] ease-in-out ${
+        className={`-translate-x-1/2 pointer-events-none absolute h-[110.447px] top-[-25.66px] w-[126.547px] transition-opacity duration-[400ms] ease-in-out ${
           active ? "opacity-100" : "opacity-0"
         }`}
         style={{ left: `calc(50% + ${icon === "ai" ? 16.27 : 17.77}px)` }}
@@ -261,12 +249,12 @@ function OnChip({
         </div>
       </div>
       {icon === "ai" ? (
-        <div className={`-translate-y-1/2 absolute h-[36px] left-[24.62px] top-1/2 w-[37.756px] transition-all duration-[1200ms] ease-in-out ${active ? "grayscale-0 opacity-100" : "grayscale opacity-50"}`} aria-hidden>
+        <div className={`-translate-y-1/2 absolute h-[36px] left-[24.62px] top-1/2 w-[37.756px] transition-all duration-[400ms] ease-in-out ${active ? "grayscale-0 opacity-100" : "grayscale opacity-50"}`} aria-hidden>
           <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={AI_CORE_ICON} />
         </div>
       ) : (
         <div
-          className={`-translate-x-1/2 -translate-y-1/2 absolute h-[40.126px] left-[calc(50%-40.43px)] top-1/2 w-[63.077px] transition-all duration-[1200ms] ease-in-out ${
+          className={`-translate-x-1/2 -translate-y-1/2 absolute h-[40.126px] left-[calc(50%-40.43px)] top-1/2 w-[63.077px] transition-all duration-[400ms] ease-in-out ${
             active ? "mix-blend-luminosity opacity-100 grayscale-0" : "mix-blend-normal opacity-50 grayscale"
           }`}
           data-name="image 76"
@@ -276,7 +264,7 @@ function OnChip({
         </div>
       )}
       <p
-        className={`${interSemiBold.className} -translate-x-1/2 [word-break:break-word] absolute font-semibold leading-[24px] not-italic text-[16px] text-center top-[13px] whitespace-pre transition-colors duration-[1200ms] ease-in-out ${
+        className={`${interSemiBold.className} -translate-x-1/2 [word-break:break-word] absolute font-semibold leading-[24px] not-italic text-[16px] text-center top-[13px] whitespace-pre transition-colors duration-[400ms] ease-in-out ${
           active ? "text-[#63da38]" : "text-[#aaaaaa]"
         }`}
         style={{ left: icon === "ai" ? 103.02 : 103.52 }}
@@ -284,7 +272,7 @@ function OnChip({
         {label}
       </p>
       <div className="-translate-y-1/2 absolute left-[8.29px] size-[7.129px] top-1/2" aria-hidden>
-        <img alt="" className={`absolute block inset-0 max-w-none size-full transition-all duration-[1200ms] ease-in-out ${active ? "grayscale-0 opacity-100" : "grayscale opacity-50"}`} src={ON_DOT_INNER} />
+        <img alt="" className={`absolute block inset-0 max-w-none size-full transition-all duration-[400ms] ease-in-out ${active ? "grayscale-0 opacity-100" : "grayscale opacity-50"}`} src={ON_DOT_INNER} />
       </div>
     </div>
   );
@@ -305,13 +293,13 @@ function SurgeSwitch({
       aria-checked={surge}
       aria-label="Toggle Reflex Surge"
       onClick={onToggle}
-      className={`-translate-x-1/2 absolute block cursor-pointer h-[40px] left-[calc(50%+5.25px)] rounded-[100px] top-[19px] w-[73.333px] transition-colors duration-[1200ms] ease-in-out ${
+      className={`-translate-x-1/2 absolute block cursor-pointer h-[40px] left-[calc(50%+5.25px)] rounded-[100px] top-[19px] w-[73.333px] transition-colors duration-[400ms] ease-in-out ${
         surge ? "bg-[#6fe047]" : "bg-[#3a3a3a]"
       }`}
       data-name="Switch"
     >
       <div
-        className="absolute bg-[#112f06] rounded-[100px] shadow-[0px_3.333px_6.667px_0px_rgba(39,39,39,0.1)] size-[33.333px] left-[3.33px] top-[3.33px] transition-transform duration-[1200ms] ease-in-out will-change-transform"
+        className="absolute bg-[#112f06] rounded-[100px] shadow-[0px_3.333px_6.667px_0px_rgba(39,39,39,0.1)] size-[33.333px] left-[3.33px] top-[3.33px] transition-transform duration-[400ms] ease-in-out will-change-transform"
         style={{ transform: surge ? "translateX(33.34px)" : "translateX(0px)" }}
         data-name="Switch"
       />
@@ -331,26 +319,26 @@ function ToggleFrame({
 }) {
   return (
     <div
-      className={`bg-[rgba(0,0,0,0.1)] h-[80px] overflow-clip w-[410px] ${className}`}
+      className={`bg-[rgba(0,0,0,0.1)] border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] h-[80px] overflow-clip w-[410px] ${className}`}
       data-name="Lower power consumption"
     >
       <GlowSwoosh top={-25.16} />
       <SurgeSwitch surge={surge} onToggle={onToggle} />
       <p
-        className={`${interBold.className} -translate-x-1/2 [word-break:break-word] absolute font-bold leading-[21px] left-[calc(50%-115.41px)] not-italic text-[18px] text-white text-center top-[calc(50%-11.5px)] whitespace-nowrap transition-all duration-[1200ms] ease-in-out origin-right ${
+        className={`${interBold.className} -translate-x-1/2 [word-break:break-word] absolute font-bold leading-[21px] left-[calc(50%-115.41px)] not-italic text-[18px] text-white text-center top-[calc(50%-11.5px)] whitespace-nowrap transition-all duration-[400ms] ease-in-out origin-right ${
           surge ? "opacity-70 scale-[0.85]" : "opacity-100 scale-100"
         }`}
       >
         Subconscious
       </p>
       <p
-        className={`${interBold.className} [word-break:break-word] absolute font-bold leading-[21px] left-[calc(50%+67.23px)] not-italic text-[18px] text-white top-[calc(50%-11.5px)] whitespace-nowrap transition-all duration-[1200ms] ease-in-out origin-left ${
+        className={`${interBold.className} [word-break:break-word] absolute font-bold leading-[21px] left-[calc(50%+67.23px)] not-italic text-[18px] text-white top-[calc(50%-11.5px)] whitespace-nowrap transition-all duration-[400ms] ease-in-out origin-left ${
           surge ? "opacity-100 scale-100" : "opacity-70 scale-[0.85]"
         }`}
       >
         Reflex Surge
       </p>
-      <FrameCorners leftSrc={CORNER_44} rightSrc={CORNER_45} />
+      <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
     </div>
   );
 }
@@ -392,16 +380,16 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
     <>
       {/* DESKTOP (>=1024px) — Figma 3708:462, 1440×833 */}
       <section
-        className="relative mx-auto hidden w-full bg-black min-[1024px]:block"
+        className="relative mx-auto hidden w-full bg-black min-[1024px]:block overflow-hidden"
         aria-label="Always on"
       >
         <div
-          className="bg-black h-[833px] overflow-clip relative mx-auto w-[1440px]"
+          className="bg-black h-[833px] relative mx-auto w-[1440px]"
           data-node-id="3708:462"
         >
           {/* Chip visual — subconscious (baseline) render, always underneath */}
           <div
-            className="-translate-x-1/2 absolute h-[810.43px] left-1/2 top-[32.55px] w-[1440px]"
+            className="-translate-x-1/2 absolute h-[810.43px] left-1/2 top-[32.55px] w-[1450px] max-w-[120vw]"
             data-name="ChatGPT Image Jul 2, 2026, 12_54_47 PM 1"
           >
             <img
@@ -412,7 +400,7 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
           </div>
           {/* Chip visual — surge render, fades smoothly over the baseline */}
           <div
-            className="-translate-x-1/2 absolute h-[832.553px] left-1/2 top-0 w-[1440px] transition-opacity duration-[1200ms] ease-in-out will-change-[opacity]"
+            className="-translate-x-1/2 absolute h-[832.553px] left-1/2 top-0 w-[1450px] max-w-[120vw] transition-opacity duration-[800ms] ease-in-out will-change-[opacity]"
             style={{ opacity: surge ? 1 : 0 }}
             data-name="ChatGPT Image Jul 2, 2026, 12_54_47 PM 2"
             aria-hidden={!surge}
@@ -525,7 +513,7 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
           <img
             alt=""
             src={BG_SURGE}
-            className="absolute inset-0 size-full object-cover transition-opacity duration-[1200ms] ease-in-out will-change-[opacity]"
+            className="absolute inset-0 size-full object-cover transition-opacity duration-[800ms] ease-in-out will-change-[opacity]"
             style={{ opacity: surge ? 1 : 0 }}
             aria-hidden={!surge}
           />

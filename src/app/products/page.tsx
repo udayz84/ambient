@@ -35,7 +35,7 @@ export default async function ProductsPage() {
   let data: any = null;
   try {
     data = await getSingleType<any>("products-page", [
-      "hero",
+      { section: "hero", nested: ["tags"] },
       { section: "features", nested: ["feature_cards"] },
       { section: "always_on", fields: ["image"], nested: ["stats"] },
       { section: "use_cases", nested: ["tabs"] },
@@ -45,7 +45,7 @@ export default async function ProductsPage() {
         nested: ["cards"],
       },
       { section: "architecture", fields: ["image"], nested: ["stats"] },
-      "modelforge",
+      { section: "modelforge", fields: ["image"], nested: ["steps", "subfeatures"] },
       "bench_to_volume",
       { section: "full_picture", fields: ["image"], nested: ["callouts"] },
       "start_building",

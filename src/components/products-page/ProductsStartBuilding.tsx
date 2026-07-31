@@ -2,6 +2,7 @@ import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
@@ -217,6 +218,7 @@ function StartCta({
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
+      <AnimatedDotsBackground />
       <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
         {children}
       </span>

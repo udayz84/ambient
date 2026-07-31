@@ -52,7 +52,7 @@ function Badge({
 }) {
   return (
     <div
-      className="relative h-[26px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)]"
+      className="relative flex items-center justify-center h-[26px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)] border-[0.5px] border-[rgba(255,255,255,0.2)]"
       style={{ width }}
       data-name="Menu"
     >
@@ -61,7 +61,7 @@ function Badge({
         rightSrc="/applications/wearables/vector-46.svg"
       />
       <p
-        className={`${dmMono.className} absolute top-[calc(50%-4.5px)] left-1/2 -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] text-[#ecfae5] uppercase whitespace-nowrap not-italic`}
+        className={`${dmMono.className} text-[13px] leading-none font-normal tracking-[-0.39px] text-[#ecfae5] uppercase whitespace-nowrap not-italic`}
       >
         {label}
       </p>

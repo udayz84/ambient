@@ -3,12 +3,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { mediaUrl } from "@/lib/strapi";
-import { gilroyMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interRegular, gilroyExtraBold } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const WEARABLES_BG_GRADIENT =
-  "linear-gradient(260.505deg, rgba(255, 255, 255, 0.35) 0.12143%, rgba(255, 255, 255, 0.85) 44.084%, rgba(255, 255, 255, 0.15) 113.37%)";
+  "linear-gradient(260.505deg, rgba(255, 255, 255, 0.12) 0.12143%, rgba(255, 255, 255, 0.6) 44.084%, rgba(255, 255, 255, 0) 113.37%)";
 
 const TITLE_GRADIENT =
   "linear-gradient(104.008deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -50,7 +50,7 @@ function SecondaryCta({ label, href }: { label: string; href: string }) {
   return (
     <a
       href={href}
-      className={`${gilroyMedium.className} relative flex shrink-0 cursor-pointer items-center bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+      className={`${gilroyMedium.className} relative flex shrink-0 cursor-pointer items-center border border-white/20 bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
       data-node-id="2509:400"
       data-name="CTA - Secondary"
     >
@@ -85,13 +85,13 @@ export function WearablesHero({
 
   return (
     <section
-      className="relative flex w-full justify-center overflow-hidden bg-black"
+      className="relative -mt-[78px] flex w-full justify-center overflow-hidden bg-black"
       data-node-id="2509:372"
       data-name="Hero Section"
       aria-label="Wearables hero"
     >
       {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden h-[800px] w-full max-w-[1440px] min-[1024px]:block">
+      <div className="relative hidden h-[878px] w-full max-w-[1440px] min-[1024px]:block">
         {/* Background image 162 */}
         <div
           className="pointer-events-none absolute top-[-37px] left-0 h-[824.693px] w-[1440px]"
@@ -113,7 +113,7 @@ export function WearablesHero({
           data-name="BG"
         >
           <p
-            className="whitespace-nowrap bg-clip-text text-center text-[200px] leading-[210px] tracking-[0.5px] font-extrabold text-transparent uppercase not-italic [word-break:break-word]"
+            className={`${gilroyExtraBold.className} whitespace-nowrap bg-clip-text text-center text-[200px] leading-[210px] tracking-[0.5px] font-extrabold text-transparent uppercase not-italic [word-break:break-word]`}
             style={{
               backgroundImage: WEARABLES_BG_GRADIENT,
               WebkitBackgroundClip: "text",
@@ -138,16 +138,19 @@ export function WearablesHero({
             alt=""
             className="absolute inset-0 size-full max-w-none object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0)] from-[63.47%] to-black to-[90.573%]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent from-60% to-black/90" />
         </div>
 
         {/* Subtle edge blending */}
         <div className="pointer-events-none absolute inset-y-0 left-0 z-0 w-[60px] bg-gradient-to-r from-black/40 to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-0 w-[60px] bg-gradient-to-l from-black/40 to-transparent" />
 
+        {/* Foreground Content Wrapper */}
+        <div className="relative mt-[78px] h-[800px] w-full">
+
         {/* Title — "Clinical precision. Coin-cell power." */}
         <div
-          className="absolute bottom-[103.19px] left-[98px] flex flex-col items-start"
+          className="absolute bottom-[158px] left-[98px] flex flex-col items-start"
           data-node-id="2509:378"
           data-name="Content"
         >
@@ -191,7 +194,7 @@ export function WearablesHero({
 
         {/* Subtitle + CTAs */}
         <div
-          className="absolute top-[624px] left-[790px] flex w-[590px] flex-col items-start gap-[12px] pl-[22px]"
+          className="absolute top-[569px] left-[790px] flex w-[590px] flex-col items-start gap-[12px] pl-[22px]"
           data-node-id="2509:386"
           data-name="Sub"
         >
@@ -207,6 +210,7 @@ export function WearablesHero({
           >
             <PrimaryCta label={primaryLabel} href={primaryHref} />
             <SecondaryCta label={secondaryLabel} href={secondaryHref} />
+          </div>
           </div>
         </div>
       </div>
@@ -276,7 +280,7 @@ export function WearablesHero({
             </a>
             <a
               href={secondaryHref}
-              className={`${gilroyMedium.className} relative flex h-[48px] w-full cursor-pointer items-center justify-center bg-[rgba(226,241,202,0.12)]`}
+              className={`${gilroyMedium.className} relative flex h-[48px] w-full cursor-pointer items-center justify-center border border-white/20 bg-[rgba(226,241,202,0.12)]`}
             >
               <span className="relative whitespace-nowrap text-[14px] leading-[28px] font-medium text-white uppercase not-italic">
                 {secondaryLabel}

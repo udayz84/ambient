@@ -44,13 +44,16 @@ export function Hero({ data }: { data?: any }) {
 
   return (
     <section
-      className="relative -mt-[78px] flex h-[798px] w-full justify-center overflow-hidden bg-black max-[1023px]:h-auto"
+      className="relative -mt-[78px] flex h-[876px] w-full justify-center overflow-hidden bg-black max-[1023px]:h-auto"
       data-node-id="2379:734"
       data-name="Hero Section"
       aria-label="Hero"
     >
       <div className="relative hidden h-full w-full max-w-[1442px] min-[1024px]:block">
         <HeroVisual videoSrc={videoSrc} />
+
+        {/* Foreground Content Wrapper */}
+        <div className="relative mt-[78px] h-[798px] w-full">
 
         <div className="pointer-events-none absolute top-[79px] left-[95px] flex h-[821px] w-0 items-center justify-center">
           <div className="flex-none rotate-90">
@@ -137,6 +140,7 @@ export function Hero({ data }: { data?: any }) {
 
         <HeroMetrics metrics={metrics} />
         <HeroScrollIndicator scrollText={scrollText} />
+        </div>
       </div>
 
       {/* MOBILE (<1024px) — dedicated layout, desktop is untouched above */}

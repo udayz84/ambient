@@ -2,6 +2,7 @@ import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
 import { TagBadge } from "../hero/TagBadge";
 import { ProductsScrollIndicator } from "./ProductsScrollIndicator";
 import {
@@ -17,7 +18,7 @@ import {
   SECONDARY_CTA_BG,
 } from "./products-data";
 
-const HERO_DESKTOP_HEIGHT = 798;
+const HERO_DESKTOP_HEIGHT = 876;
 
 const FALLBACK_TITLE = "Full AI inference. \nOn a coin cell.";
 const FALLBACK_SUBTITLE =
@@ -43,6 +44,7 @@ export function ProductsHero({ data }: { data?: any }) {
   };
   const chipset1 = mediaUrl(data?.chipset_image_2) || "/products/coin-chipset-1.png";
   const chipset2 = mediaUrl(data?.chipset_image_1) || "/products/coin-chipset-2.png";
+  const strapiTags = Array.isArray(data?.tags) ? data.tags : [];
   return (
     <>
       {/* DESKTOP (>=1024px) — hero canvas, source of truth (Figma 2900:418) */}
@@ -62,6 +64,7 @@ export function ProductsHero({ data }: { data?: any }) {
             secondary={secondary}
             chipset1={chipset1}
             chipset2={chipset2}
+            strapiTags={strapiTags}
           />
         </div>
         {/* Blend the coin image's bright right edge into black on screens
@@ -95,6 +98,7 @@ function ProductsHeroDesktop({
   secondary,
   chipset1,
   chipset2,
+  strapiTags,
 }: {
   titleLines: string[];
   subtitle: string;
@@ -102,9 +106,11 @@ function ProductsHeroDesktop({
   secondary: { label: string; href: string };
   chipset1: string;
   chipset2: string;
+  strapiTags: any[];
 }) {
   return (
     <>
+      <div className="relative mt-[78px] h-[798px] w-full">
       {/* Coin & chipset image group — 2900:507 */}
       <div
         className="pointer-events-none absolute overflow-clip"
@@ -239,20 +245,20 @@ function ProductsHeroDesktop({
         data-node-id="2900:571"
         data-name="Menu Container"
       >
-        <TagBadge
-          label="Real-time AI at edge"
-          width={185.9921875}
-          labelOffsetX={77}
-          rightBarLeft={176.15625}
-          nodeId="2900:545"
-        />
-        <TagBadge
-          label="Real-time AI at edge"
-          width={185.9921875}
-          labelOffsetX={77}
-          rightBarLeft={176.15625}
-          nodeId="2900:563"
-        />
+        {(Array.isArray(strapiTags) && strapiTags.length > 0
+          ? strapiTags
+          : [{ text: "GPX10PRO  ·  A-CUBE ARCHITECTURE" }]
+        ).map((t: any, i: number) => (
+          <TagBadge
+            key={i}
+            label={t.text}
+            width={300}
+            centerLabel
+            labelOffsetX={0}
+            rightBarLeft={290.5}
+            nodeId="2900:545"
+          />
+        ))}
       </div>
 
       {/* Title + description — 2900:463 (left=100, top=417.87, w=442) */}
@@ -297,7 +303,8 @@ function ProductsHeroDesktop({
       </div>
 
       {/* Scroll indicator — 2900:460 (left=1335.5, top=696) */}
-      <ProductsScrollIndicator />
+        <ProductsScrollIndicator />
+        </div>
     </>
   );
 }
@@ -320,6 +327,7 @@ function PrimaryCta({
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
+      <AnimatedDotsBackground />
       <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
         {children}
       </span>
@@ -342,7 +350,7 @@ function SecondaryCta({
   return (
     <a
       href={href}
-      className={`${gilroyMedium.className} relative flex h-[48px] w-[255px] shrink-0 items-center justify-center overflow-clip`}
+      className={`${gilroyMedium.className} relative flex h-[48px] w-[255px] shrink-0 items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
       style={{ backgroundColor: SECONDARY_CTA_BG }}
       data-node-id="2900:584"
       data-name="CTA - Secondary"
@@ -449,6 +457,7 @@ function ProductsHeroMobile({
                 aria-hidden
                 className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
               />
+              <AnimatedDotsBackground />
               <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
                 {primary.label}
               </span>
@@ -460,7 +469,7 @@ function ProductsHeroMobile({
             </a>
             <a
               href={secondary.href}
-              className={`${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-clip`}
+              className={`${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
               style={{ backgroundColor: SECONDARY_CTA_BG }}
             >
               <span className="relative px-[20px] py-[10px] text-[14px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">

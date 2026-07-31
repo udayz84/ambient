@@ -63,7 +63,7 @@ function WatchExplainerCta({
   return (
     <a
       href={href}
-      className={`${gilroyMedium.className} relative block h-[48px] ${fullWidth ? "w-full" : "w-[263px]"} shrink-0 bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+      className={`${gilroyMedium.className} relative block h-[48px] ${fullWidth ? "w-full" : "w-[263px]"} shrink-0 border border-white/20 bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
       data-node-id="2931:1459"
       data-name="CTA - Secondary"
     >
@@ -84,8 +84,8 @@ export function TechnologyPageHero({ data }: { data?: any } = {}) {
   const secondaryLabel =
     data?.secondary_button?.label || FALLBACK_SECONDARY_LABEL;
   const secondaryHref = data?.secondary_button?.href || "#";
-  const bgSrc = mediaUrl(data?.background_image) || HERO_BG;
-  const objectSrc = mediaUrl(data?.hero_object) || HERO_OBJECT;
+  const bgSrc = mediaUrl(data?.background_image);
+  const objectSrc = mediaUrl(data?.hero_object);
 
   return (
     <section
@@ -93,50 +93,27 @@ export function TechnologyPageHero({ data }: { data?: any } = {}) {
       data-node-id="2921:2682"
       aria-label="Technology hero"
     >
-      {/* DESKTOP (>=1024px) — pixel-perfect from Figma node 2921:2682 (hero region) */}
-      <div className="relative hidden h-[687px] w-full max-w-[1440px] min-[1024px]:block">
-        {/* 2971:1200 — full-bleed hero background image (bleeds up behind navbar) */}
-        <div
-          className="pointer-events-none absolute top-[-92.16px] left-0 h-[779.11px] w-[1440px] overflow-hidden"
-          data-node-id="2971:1200"
-          data-name="image - hero bg"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
+      {/* Full-bleed desktop background */}
+      <div className="pointer-events-none absolute inset-0 hidden min-[1024px]:block" aria-hidden>
+        {(bgSrc || objectSrc) && (
+          // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={bgSrc}
+            src={bgSrc || objectSrc || undefined}
             alt=""
-            className="absolute top-0 left-0 h-[119.16%] w-full max-w-none"
-            aria-hidden
+            className="size-full object-cover opacity-80"
           />
-          <div
-            aria-hidden
-            className="absolute inset-0 bg-gradient-to-b from-[43.649%] from-[rgba(0,0,0,0)] to-black"
-          />
-          {/* Fade left/right edges into the black background on ultrawide screens */}
-          <div
-            aria-hidden
-            className="absolute inset-y-0 left-0 hidden w-[300px] bg-gradient-to-r from-black to-transparent min-[1441px]:block"
-          />
-          <div
-            aria-hidden
-            className="absolute inset-y-0 right-0 hidden w-[300px] bg-gradient-to-l from-black to-transparent min-[1441px]:block"
-          />
-        </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-b from-[43.649%] from-[rgba(0,0,0,0)] to-black" />
+        
+        {/* Fade left/right edges into the black background on ultrawide screens */}
+        <div className="absolute inset-y-0 left-0 hidden w-[300px] bg-gradient-to-r from-black to-transparent min-[1441px]:block" />
+        <div className="absolute inset-y-0 right-0 hidden w-[300px] bg-gradient-to-l from-black to-transparent min-[1441px]:block" />
+      </div>
 
-        {/* 2971:1206 — hero chip object */}
-        <div
-          className="pointer-events-none absolute top-[130.13px] left-[568px] h-[352.11px] w-[325px]"
-          data-node-id="2971:1206"
-          data-name="Object"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={objectSrc}
-            alt=""
-            className="absolute inset-0 size-full max-w-none object-contain object-bottom"
-            aria-hidden
-          />
-        </div>
+      {/* DESKTOP (>=1024px) — pixel-perfect from Figma node 2921:2682 (hero region) */}
+      <div className="relative hidden h-[765px] w-full max-w-[1440px] min-[1024px]:block">
+        {/* Foreground Content Wrapper */}
+        <div className="relative mt-[78px] h-[687px] w-full">
 
         {/* 2931:1430 — eyebrow tag */}
         <div
@@ -169,23 +146,26 @@ export function TechnologyPageHero({ data }: { data?: any } = {}) {
           </GradientTitle>
         </div>
 
-        {/* 2931:1429 — description (right-aligned) */}
-        <p
-          className={`${interRegular.className} absolute top-[500.46px] left-[882.64px] h-[48px] w-[486px] text-right text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-80 not-italic [word-break:break-word]`}
-          data-node-id="2931:1429"
-          data-name="Description"
-        >
-          {descText}
-        </p>
-
-        {/* 2931:1447 — CTAs */}
-        <div
-          className="absolute top-[568.46px] left-[858.64px] flex h-[48px] w-[510px] items-start gap-[24px]"
-          data-node-id="2931:1447"
-          data-name="Frame 1984079464"
-        >
-          <ReadWhitepaperCta label={primaryLabel} href={primaryHref} />
-          <WatchExplainerCta label={secondaryLabel} href={secondaryHref} />
+        <div className="absolute top-[500.46px] right-[71.36px] flex w-[510px] flex-col items-end gap-[20px]">
+          {/* 2931:1429 — description (right-aligned) */}
+          <p
+            className={`${interRegular.className} w-[486px] text-right text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-80 not-italic [word-break:break-word]`}
+            data-node-id="2931:1429"
+            data-name="Description"
+          >
+            {descText}
+          </p>
+  
+          {/* 2931:1447 — CTAs */}
+          <div
+            className="flex h-[48px] w-full items-start justify-end gap-[24px]"
+            data-node-id="2931:1447"
+            data-name="Frame 1984079464"
+          >
+            <ReadWhitepaperCta label={primaryLabel} href={primaryHref} />
+            <WatchExplainerCta label={secondaryLabel} href={secondaryHref} />
+          </div>
+        </div>
         </div>
       </div>
 
@@ -193,12 +173,14 @@ export function TechnologyPageHero({ data }: { data?: any } = {}) {
       <div className="relative flex min-h-[560px] w-full flex-col items-center overflow-hidden min-[1024px]:hidden">
         {/* Background image */}
         <div className="pointer-events-none absolute inset-0" aria-hidden>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={bgSrc}
-            alt=""
-            className="size-full max-w-none object-cover"
-          />
+          {(bgSrc || objectSrc) && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={bgSrc || objectSrc || undefined}
+              alt=""
+              className="size-full max-w-none object-cover"
+            />
+          )}
           <div className="absolute inset-0 bg-black/60" />
         </div>
 

@@ -88,7 +88,7 @@ export function WearablesSubconscious({ data }: { data?: any }) {
       aria-label="Continuous AI-native operations in subconscious mode"
     >
       {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden w-full max-w-[1440px] flex-col items-center gap-[48px] pt-[80px] pb-[100px] px-[24px] min-[1024px]:flex">
+      <div className="relative hidden w-full max-w-[1440px] flex-col items-center gap-[48px] pt-[80px] pb-[40px] px-[24px] min-[1024px]:flex">
         {/* Title */}
         <div className="flex flex-col items-center gap-[24px]">
           <div className="relative flex flex-col items-center px-[10px]">

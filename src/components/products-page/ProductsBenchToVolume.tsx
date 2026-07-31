@@ -4,6 +4,7 @@ import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
 import {
   BENCH_CARD,
   BENCH_CARDS,
@@ -249,6 +250,7 @@ function GreenCta({
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
+      <AnimatedDotsBackground />
       <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
         {children}
       </span>

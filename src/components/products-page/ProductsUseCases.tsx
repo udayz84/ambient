@@ -4,6 +4,8 @@ import { useState } from "react";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyExtraBold, gilroyMedium, interRegular } from "../hero/fonts";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
+import { TagBadge } from "../hero/TagBadge";
+import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
 import { Corners } from "../shared/Corners";
 import {
   CORNER_LEFT,
@@ -106,7 +108,7 @@ export function ProductsUseCases({ data }: { data?: any }) {
     <>
       {/* DESKTOP (>=1024px) */}
       <section
-        className="relative mx-auto hidden w-full bg-black min-[1024px]:block"
+        className="relative mx-auto hidden w-full bg-black min-[1024px]:block mt-[60px]"
         aria-label="Use cases"
       >
         <div
@@ -175,6 +177,7 @@ function ProductsUseCasesDesktop({
         data-node-id="2901:2134"
         data-name="Section Title"
       >
+        <TagBadge label="BEST-FIT APPLICATIONS" width={220} centerLabel />
         <div
           className="relative px-[10px]"
           style={{ width: 512, height: 98 }}
@@ -450,6 +453,7 @@ function PrimaryCta({
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
+      <AnimatedDotsBackground />
       <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
         {children}
       </span>
@@ -472,7 +476,7 @@ function SecondaryCta({
   return (
     <a
       href={href}
-      className={`${gilroyMedium.className} relative flex h-[48px] shrink-0 items-center justify-center`}
+      className={`${gilroyMedium.className} relative flex h-[48px] shrink-0 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
       style={{ backgroundColor: SECONDARY_CTA_BG, width: 227 }}
       data-node-id="2901:2155"
       data-name="CTA - Secondary"
@@ -499,11 +503,12 @@ function ProductsUseCasesMobile({
 }: any) {
   return (
     <section
-      className="relative w-full overflow-hidden bg-black px-[24px] pt-[64px] pb-[80px] min-[1024px]:hidden"
+      className="relative w-full overflow-hidden bg-black px-[24px] pt-[80px] pb-[80px] min-[1024px]:hidden"
       aria-label="Use cases"
     >
       {/* Title */}
       <div className="flex flex-col items-center gap-[16px]">
+        <TagBadge label="BEST-FIT APPLICATIONS" width={220} centerLabel />
         <h2
           className={`${gilroyMedium.className} max-w-full bg-clip-text text-center text-[30px] leading-[34px] font-medium text-transparent not-italic [word-break:break-word]`}
           style={{
@@ -575,6 +580,7 @@ function ProductsUseCasesMobile({
             aria-hidden
             className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
           />
+          <AnimatedDotsBackground />
           <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
             {primary.label}
           </span>
@@ -586,7 +592,7 @@ function ProductsUseCasesMobile({
         </a>
         <a
           href={secondary.href}
-          className={`${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-center`}
+          className={`${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
           style={{ backgroundColor: SECONDARY_CTA_BG }}
         >
           <span className="relative px-[20px] py-[10px] text-[14px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">

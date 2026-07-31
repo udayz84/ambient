@@ -1,6 +1,7 @@
 import { mediaUrl } from "@/lib/strapi";
-import { gilroyMedium, interRegular } from "../hero/fonts";
+import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
@@ -20,6 +21,48 @@ const FALLBACK_SUBTITLE =
   "A new architecture shouldn't mean a new way of working. With ModelForge, it doesn't.";
 const FALLBACK_PRIMARY = { label: "Explore the Developer Hub", href: "#" };
 const FALLBACK_SECONDARY = { label: "Request the SDK", href: "#" };
+
+const SUB_FEATURES = [
+  {
+    icon: (
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+        <path d="M3 9h18" />
+        <path d="M3 15h18" />
+        <path d="M9 3v18" />
+        <path d="M15 3v18" />
+      </svg>
+    ),
+    text: "Speaks matrix math natively — none of the translation tax Arm/RISC-V pay",
+  },
+  {
+    icon: (
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+        <path d="M2 17l10 5 10-5" />
+        <path d="M2 12l10 5 10-5" />
+        <circle cx="2" cy="7" r="1.5" fill="currentColor"/>
+        <circle cx="22" cy="7" r="1.5" fill="currentColor"/>
+        <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+        <circle cx="12" cy="2" r="1.5" fill="currentColor"/>
+      </svg>
+    ),
+    text: "Pre-integrated RTOS, drivers, DSP libraries",
+  },
+  {
+    icon: (
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M8 4H5a1 1 0 0 0-1 1v3" />
+        <path d="M16 4h3a1 1 0 0 1 1 1v3" />
+        <path d="M20 16v3a1 1 0 0 1-1 1h-3" />
+        <path d="M4 16v3a1 1 0 0 0 1 1h3" />
+        <circle cx="11" cy="11" r="3" />
+        <path d="m13.5 13.5 3.5 3.5" />
+      </svg>
+    ),
+    text: "Simulator + profiler — validate power and accuracy before the board arrives",
+  },
+];
 
 /**
  * Figma 2917:1333 (title) + 2917:1341/1359/1377 (Train/Compile/Deploy cards).
@@ -47,11 +90,24 @@ export function ProductsModelForge({ data }: { data?: any }) {
             number: stepNum,
             title: fallback.title,
             description: s?.description ?? fallback.description,
+            image: mediaUrl(s?.image),
             imgLeft: fallback.imgLeft,
             imgTop: fallback.imgTop,
           };
         })
       : MODELFORGE_STEPS;
+      
+  const subfeatures =
+    Array.isArray(data?.subfeatures) && data.subfeatures.length > 0
+      ? data.subfeatures.map((sf: any, i: number) => {
+          const fallback = SUB_FEATURES[i] || SUB_FEATURES[0];
+          return {
+            text: sf.text || fallback.text,
+            icon: fallback.icon,
+          };
+        })
+      : SUB_FEATURES;
+
   return (
     <>
       {/* DESKTOP (>=1024px) */}
@@ -66,6 +122,7 @@ export function ProductsModelForge({ data }: { data?: any }) {
           steps={steps}
           primary={primary}
           secondary={secondary}
+          subfeatures={subfeatures}
         />
       </section>
 
@@ -75,6 +132,7 @@ export function ProductsModelForge({ data }: { data?: any }) {
         subtitle={subtitle}
         image={image}
         steps={steps}
+        subfeatures={subfeatures}
       />
     </>
   );
@@ -87,6 +145,7 @@ function ProductsModelForgeDesktop({
   steps,
   primary,
   secondary,
+  subfeatures,
 }: {
   heading: string;
   subtitle: string;
@@ -94,6 +153,7 @@ function ProductsModelForgeDesktop({
   steps: any[];
   primary: { label: string; href: string };
   secondary: { label: string; href: string };
+  subfeatures: any[];
 }) {
   return (
     <div className="mx-auto flex w-full max-w-[1256px] flex-col items-center pb-[120px]">
@@ -104,6 +164,7 @@ function ProductsModelForgeDesktop({
         data-node-id="2917:1333"
         data-name="Section Title"
       >
+        <MenuChip label="BUILD WITH GPX10PRO" />
         <div
           className="relative px-[10px]"
           style={{ width: 739, height: 49 }}
@@ -139,7 +200,31 @@ function ProductsModelForgeDesktop({
         style={{ gap: MODELFORGE_CARD.gap }}
       >
         {steps.map((step) => (
-          <ModelForgeCard key={step.nodeId} step={step} image={image} />
+          <ModelForgeCard key={step.nodeId} step={step} />
+        ))}
+      </div>
+
+      {/* Sub-features row */}
+      <div
+        className="mt-[28px] flex items-stretch"
+        style={{ gap: MODELFORGE_CARD.gap }}
+      >
+        {subfeatures.map((feat, i) => (
+          <div 
+            key={i} 
+            className="relative flex flex-col p-[24px] border border-solid"
+            style={{ 
+              width: MODELFORGE_CARD.width,
+              borderColor: MODELFORGE_CARD_BORDER,
+              background: "linear-gradient(90deg, rgba(21,43,14,0.6) 0%, rgba(5,10,3,0.3) 100%)"
+            }}
+          >
+            <div className="text-[#d4e9bc] mb-[16px]">
+              {feat.icon}
+            </div>
+            <p className={`${interRegular.className} text-[14px] leading-[21px] text-[#f0f0f0]`}>{feat.text}</p>
+            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+          </div>
         ))}
       </div>
 
@@ -151,6 +236,7 @@ function ProductsModelForgeDesktop({
           className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[251px] shrink-0 items-center justify-center overflow-hidden uppercase bg-transparent border-0 cursor-pointer text-white text-[16px] leading-[28px]`}
         >
           <div aria-hidden className="absolute bg-gradient-to-b from-[#6ced3f] inset-0 pointer-events-none to-[#38a612]" />
+          <AnimatedDotsBackground />
           <span className="relative z-10">{primary.label}</span>
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <div className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
@@ -169,10 +255,11 @@ function ProductsModelForgeDesktop({
   );
 }
 
-function ModelForgeCard({ step, image }: { step: any; image: string }) {
+function ModelForgeCard({ step }: { step: any }) {
+
   return (
     <article
-      className="relative flex flex-col border-[0.5px] border-solid px-[32px] pt-[16px] pb-[24px]"
+      className="relative flex flex-col border border-solid px-[32px] pt-[16px] pb-[24px]"
       style={{
         width: MODELFORGE_CARD.width,
         height: MODELFORGE_CARD.height,
@@ -196,18 +283,13 @@ function ModelForgeCard({ step, image }: { step: any; image: string }) {
           data-name="image 168"
           aria-hidden
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt=""
-            src={image}
-            className="absolute max-w-none"
-            style={{
-              width: "225.52%",
-              height: "312.6%",
-              left: `${step.imgLeft}%`,
-              top: `${step.imgTop}%`,
-            }}
-          />
+          {step.image && (
+            <img
+              alt=""
+              src={step.image}
+              className="absolute inset-0 h-full w-full object-contain"
+            />
+          )}
           {/* Fade overlay — transparent until 88%, then to black */}
           <div
             className="absolute inset-0"
@@ -229,6 +311,7 @@ function ModelForgeCard({ step, image }: { step: any; image: string }) {
           >
             {step.title}
           </h3>
+
           <p
             className={`${interRegular.className} w-[333.99px] shrink-0 text-[16px] leading-[26px] font-normal text-[#99a1af] tracking-[-0.3125px]`}
           >
@@ -239,7 +322,7 @@ function ModelForgeCard({ step, image }: { step: any; image: string }) {
 
       {/* Step number — card-relative, left-aligned with content */}
       <span
-        className={`${gilroyMedium.className} pointer-events-none absolute bg-clip-text text-[70px] leading-[64px] font-medium text-transparent opacity-50 not-italic`}
+        className={`${gilroyMedium.className} pointer-events-none absolute bg-clip-text text-[70px] leading-[70px] font-medium text-transparent opacity-50 not-italic whitespace-nowrap`}
         style={{
           left: 32,
           top: 257,
@@ -249,7 +332,7 @@ function ModelForgeCard({ step, image }: { step: any; image: string }) {
         }}
         aria-hidden
       >
-        {step.number}
+        {step.number.split(" ")[0]}
       </span>
 
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
@@ -262,11 +345,13 @@ function ProductsModelForgeMobile({
   subtitle,
   image,
   steps,
+  subfeatures,
 }: {
   heading: string;
   subtitle: string;
   image: string;
   steps: any[];
+  subfeatures: any[];
 }) {
   return (
     <section
@@ -275,6 +360,7 @@ function ProductsModelForgeMobile({
     >
       {/* Title */}
       <div className="flex flex-col items-center gap-[16px]">
+        <MenuChip label="BUILD WITH GPX10PRO" />
         <h2
           className={`${gilroyMedium.className} max-w-full bg-clip-text text-center text-[30px] leading-[34px] font-medium text-transparent not-italic [word-break:break-word]`}
           style={{
@@ -297,7 +383,7 @@ function ProductsModelForgeMobile({
         {steps.map((step) => (
           <article
             key={step.nodeId}
-            className="relative flex flex-col border-[0.5px] border-solid p-[20px]"
+            className="relative flex flex-col border border-solid p-[20px]"
             style={{
               backgroundColor: MODELFORGE_CARD_BG,
               borderColor: MODELFORGE_CARD_BORDER,
@@ -308,18 +394,13 @@ function ProductsModelForgeMobile({
               className="relative mb-[16px] h-[180px] w-full overflow-hidden"
               aria-hidden
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                alt=""
-                src={image}
-                className="absolute max-w-none"
-                style={{
-                  width: "225.52%",
-                  height: "312.6%",
-                  left: `${step.imgLeft}%`,
-                  top: `${step.imgTop}%`,
-                }}
-              />
+              {step.image && (
+                <img
+                  alt=""
+                  src={step.image}
+                  className="absolute inset-0 h-full w-full object-contain"
+                />
+              )}
               <div
                 className="absolute inset-0"
                 style={{
@@ -339,7 +420,7 @@ function ProductsModelForgeMobile({
                 }}
                 aria-hidden
               >
-                {step.number}
+                {step.number.split(" ")[0]}
               </span>
               <h3
                 className={`${gilroyMedium.className} text-[24px] leading-[30px] font-medium text-white not-italic`}
@@ -357,6 +438,48 @@ function ProductsModelForgeMobile({
           </article>
         ))}
       </div>
+
+      {/* Mobile Sub-features */}
+      <div className="mt-[20px] flex flex-col gap-[20px]">
+        {subfeatures.map((feat, i) => (
+          <div 
+            key={i} 
+            className="relative flex flex-col p-[20px] border border-solid"
+            style={{ 
+              borderColor: MODELFORGE_CARD_BORDER,
+              background: "linear-gradient(90deg, rgba(21,43,14,0.6) 0%, rgba(5,10,3,0.3) 100%)"
+            }}
+          >
+            <div className="text-[#d4e9bc] mb-[16px]">
+              {feat.icon}
+            </div>
+            <p className={`${interRegular.className} text-[14px] leading-[21px] text-[#f0f0f0]`}>{feat.text}</p>
+            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+          </div>
+        ))}
+      </div>
     </section>
+  );
+}
+
+function MenuChip({ label }: { label: string }) {
+  return (
+    <div
+      className={`${dmMono.className} bg-[rgba(255,255,255,0.06)] flex gap-[6px] h-[27px] items-center overflow-clip px-[24px] relative shrink-0 border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
+      data-name="Menu"
+    >
+      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+      <p className="[text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] leading-[20px] not-italic relative shrink-0 text-[#ecfae5] text-[13px] tracking-[-0.4px] uppercase whitespace-nowrap">
+        {label}
+      </p>
+      <div
+        className="absolute bg-white h-[12px] left-[12px] opacity-60 top-1/2 -translate-y-1/2 w-[2px]"
+        aria-hidden
+      />
+      <div
+        className="absolute bg-white h-[12px] opacity-60 right-[12px] top-1/2 -translate-y-1/2 w-[2px]"
+        aria-hidden
+      />
+    </div>
   );
 }

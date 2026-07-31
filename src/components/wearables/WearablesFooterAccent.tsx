@@ -3,7 +3,7 @@ import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
-const SHAPE = "/applications/wearables/rectangle-divider.svg";
+const SHAPE = "/Rectangle 1618873545.png";
 
 const TITLE_GRADIENT =
   "linear-gradient(107.367deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";

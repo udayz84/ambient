@@ -11,53 +11,6 @@ export type NavItem = {
   children?: NavSubItem[];
 };
 
-export const FALLBACK_NAV_ITEMS: NavItem[] = [
-  { label: "Home", hasChevron: false, href: "/" },
-  {
-    label: "Products",
-    hasChevron: true,
-    href: "/products",
-    children: [
-      { label: "Product", href: "/products" },
-      { label: "SOM", href: "/SOM" },
-      { label: "DVK", href: "/dvk" },
-    ],
-  },
-  {
-    label: "Company",
-    hasChevron: true,
-    href: "/company",
-    children: [
-      { label: "Company", href: "/company" },
-      { label: "Careers", href: "/careers" },
-    ],
-  },
-  { label: "Technology", hasChevron: false, href: "/technology" },
-  { label: "Developers Hub", hasChevron: false, href: "/developer" },
-  {
-    label: "Application",
-    hasChevron: true,
-    href: "/applications",
-    children: [
-      { label: "Application", href: "/applications" },
-      { label: "Wearables", href: "/applications/wearables" },
-      { label: "Smart Homes", href: "/applications/smart-homes" },
-      { label: "Medical Devices", href: "/applications/medical-devices" },
-    ],
-  },
-  {
-    label: "Resources",
-    hasChevron: true,
-    href: "/resources",
-    children: [
-      { label: "Resources Centre", href: "/resources" },
-      { label: "Blogs", href: "/resources" },
-      { label: "News & Media", href: "/news-listing" },
-    ],
-  },
-  { label: "Shop", hasChevron: false, href: "https://www.digikey.com/en/supplier-centers/ambient-scientific", highlight: true },
-];
-
 type RawNavItem = {
   label?: unknown;
   href?: unknown;
@@ -86,11 +39,7 @@ export function mapStrapiNavItems(
     .map((raw) => {
       const label = typeof raw?.label === "string" ? raw.label : "";
       const children = mapStrapiSubItems(raw?.children) ?? mapStrapiSubItems(raw?.sub_items);
-      let href = typeof raw?.href === "string" && raw.href ? raw.href : "#";
-      
-      if (label.toLowerCase() === "shop") {
-        href = "https://www.digikey.com/en/supplier-centers/ambient-scientific";
-      }
+      const href = typeof raw?.href === "string" && raw.href ? raw.href : "#";
 
       return {
         label,

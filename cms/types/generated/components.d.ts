@@ -1361,11 +1361,8 @@ export interface ProductsFullPicture extends Struct.ComponentSchema {
   attributes: {
     alt: Schema.Attribute.String;
     callouts: Schema.Attribute.Component<'products.spec-callout', true>;
-    connectivity_items: Schema.Attribute.Text;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     image: Schema.Attribute.Media;
-    memory_items: Schema.Attribute.Text;
-    security_items: Schema.Attribute.Text;
     subtitle: Schema.Attribute.Text;
   };
 }
@@ -1384,7 +1381,7 @@ export interface ProductsHero extends Struct.ComponentSchema {
     primary_button: Schema.Attribute.Component<'shared.button', false>;
     secondary_button: Schema.Attribute.Component<'shared.button', false>;
     subtitle: Schema.Attribute.Text;
-    tag: Schema.Attribute.Component<'shared.tag', false>;
+    tags: Schema.Attribute.Component<'shared.tag', true>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -1451,6 +1448,10 @@ export interface ProductsModelforge extends Struct.ComponentSchema {
     primary_button: Schema.Attribute.Component<'shared.button', false>;
     secondary_button: Schema.Attribute.Component<'shared.button', false>;
     steps: Schema.Attribute.Component<'products.modelforge-step', true>;
+    subfeatures: Schema.Attribute.Component<
+      'products.modelforge-subfeature',
+      true
+    >;
     subtitle: Schema.Attribute.Text;
   };
 }
@@ -1463,7 +1464,19 @@ export interface ProductsModelforgeStep extends Struct.ComponentSchema {
   };
   attributes: {
     description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images'>;
     step: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ProductsModelforgeSubfeature extends Struct.ComponentSchema {
+  collectionName: 'components_products_modelforge_subfeatures';
+  info: {
+    description: 'Subfeature for the ModelForge section';
+    displayName: 'ModelForge Subfeature';
+  };
+  attributes: {
+    text: Schema.Attribute.Text & Schema.Attribute.Required;
   };
 }
 
@@ -1476,6 +1489,7 @@ export interface ProductsSpecCallout extends Struct.ComponentSchema {
   attributes: {
     alt: Schema.Attribute.String;
     icon: Schema.Attribute.Media;
+    items: Schema.Attribute.Text;
     label: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -2200,8 +2214,10 @@ export interface TechGraphLabel extends Struct.ComponentSchema {
     displayName: 'Graph Label';
   };
   attributes: {
+    bottom_image: Schema.Attribute.Media<'images'>;
     label: Schema.Attribute.String & Schema.Attribute.Required;
     sub_label: Schema.Attribute.String;
+    top_image: Schema.Attribute.Media<'images'>;
   };
 }
 
@@ -2474,7 +2490,9 @@ export interface WearablesLabCard extends Struct.ComponentSchema {
     cta_href: Schema.Attribute.String;
     cta_label: Schema.Attribute.String;
     description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media;
     step: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String;
   };
 }
 
@@ -2485,10 +2503,8 @@ export interface WearablesLabToProduct extends Struct.ComponentSchema {
     displayName: 'Lab To Product';
   };
   attributes: {
-    alt: Schema.Attribute.String;
     cards: Schema.Attribute.Component<'wearables.lab-card', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
-    image: Schema.Attribute.Media;
     subtitle: Schema.Attribute.Text;
   };
 }
@@ -2693,6 +2709,7 @@ declare module '@strapi/strapi' {
       'products.measured-stat': ProductsMeasuredStat;
       'products.modelforge': ProductsModelforge;
       'products.modelforge-step': ProductsModelforgeStep;
+      'products.modelforge-subfeature': ProductsModelforgeSubfeature;
       'products.spec-callout': ProductsSpecCallout;
       'products.start-building': ProductsStartBuilding;
       'products.start-card': ProductsStartCard;

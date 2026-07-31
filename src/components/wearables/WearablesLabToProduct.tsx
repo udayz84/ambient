@@ -22,6 +22,7 @@ type CardData = {
   ctaHref: string;
   imgLeft: string;
   imgTop: string;
+  image?: string;
 };
 
 const CARDS: CardData[] = [
@@ -54,10 +55,11 @@ const CARDS: CardData[] = [
   },
 ];
 
-function LabCard({ data, image }: { data: CardData; image: string }) {
+function LabCard({ data }: { data: CardData }) {
+  const image = data.image || FALLBACK_IMAGE;
   return (
     <div
-      className="relative flex h-[549px] flex-1 flex-col border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] pt-[16px] pb-[24px] px-[32px]"
+      className="relative flex h-[549px] flex-1 flex-col border border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] pt-[16px] pb-[24px] px-[32px]"
       data-name="Article"
     >
       <Corners
@@ -69,7 +71,7 @@ function LabCard({ data, image }: { data: CardData; image: string }) {
       <div className="relative w-full min-h-0 flex-1" data-name="NewsSection">
         {/* Image */}
         <div
-          className="absolute top-[-3.05px] left-[calc(50%-4.53px)] h-[231.502px] w-[427.851px] -translate-x-1/2"
+          className="absolute top-[-3.05px] left-0 h-[231.502px] w-full overflow-hidden"
           data-name="image 168"
           aria-hidden
         >
@@ -78,13 +80,7 @@ function LabCard({ data, image }: { data: CardData; image: string }) {
               <img
                 alt=""
                 src={image}
-                className="absolute max-w-none"
-                style={{
-                  height: "312.6%",
-                  left: data.imgLeft,
-                  top: data.imgTop,
-                  width: "225.52%",
-                }}
+                className="absolute inset-0 size-full object-contain"
               />
             </div>
             <div
@@ -96,7 +92,7 @@ function LabCard({ data, image }: { data: CardData; image: string }) {
 
         {/* Large faded number */}
         <p
-          className={`${gilroyMedium.className} absolute right-[333.5px] top-[256.5px] translate-x-1/2 whitespace-nowrap bg-gradient-to-b from-white to-[rgba(255,255,255,0)] bg-clip-text text-[70px] leading-[64px] text-center text-transparent opacity-50 not-italic`}
+          className={`${gilroyMedium.className} absolute left-0 top-[256.5px] whitespace-nowrap bg-gradient-to-b from-white to-[rgba(255,255,255,0)] bg-clip-text text-[70px] leading-[64px] text-transparent opacity-50 not-italic`}
         >
           {data.number}
         </p>
@@ -118,7 +114,7 @@ function LabCard({ data, image }: { data: CardData; image: string }) {
         {/* CTA */}
         <a
           href={data.ctaHref}
-          className={`${gilroyMedium.className} absolute left-0 top-[461px] flex cursor-pointer items-center bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+          className={`${gilroyMedium.className} absolute left-0 top-[461px] flex cursor-pointer items-center border border-white/20 bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
           data-name="CTA - Secondary"
         >
           <span className="whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic">
@@ -137,17 +133,18 @@ function LabCard({ data, image }: { data: CardData; image: string }) {
 export function WearablesLabToProduct({ data }: { data?: any }) {
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const heading = data?.heading || FALLBACK_HEADING;
-  const image = mediaUrl(data?.image) || FALLBACK_IMAGE;
   const dataCards: any[] = Array.isArray(data?.cards) ? data.cards : [];
   const cards = CARDS.map((fb, i) => {
     const c = dataCards[i];
-    if (!c) return fb;
+    if (!c) return { ...fb, image: FALLBACK_IMAGE };
     return {
       ...fb,
-      title: c.step || fb.title,
+      number: c.step || fb.number,
+      title: c.title || fb.title,
       body: c.description || fb.body,
       cta: c.cta_label || fb.cta,
       ctaHref: c.cta_href || fb.ctaHref,
+      image: mediaUrl(c.image) || FALLBACK_IMAGE,
     };
   });
   return (
@@ -158,7 +155,7 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
       aria-label="From lab to product in months, not years"
     >
       {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden w-full max-w-[1440px] flex-col items-center gap-[48px] pt-[80px] pb-[100px] px-[24px] min-[1024px]:flex">
+      <div className="relative hidden w-full max-w-[1440px] flex-col items-center gap-[48px] pt-[40px] pb-[60px] px-[24px] min-[1024px]:flex">
         {/* Title */}
         <div className="flex flex-col items-center gap-[24px]">
           <div className="relative flex flex-col items-center px-[10px]">
@@ -185,15 +182,15 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
         </div>
 
         {/* Cards */}
-        <div className="flex w-full items-stretch gap-[24px]">
-          {cards.map((card) => (
-            <LabCard key={card.number} data={card} image={image} />
+        <div className="flex w-[1222px] items-start gap-[24px]">
+          {cards.map((c) => (
+            <LabCard key={c.number} data={c} />
           ))}
         </div>
       </div>
 
       {/* MOBILE (<1024px) */}
-      <div className="relative flex w-full flex-col items-center gap-[40px] px-[24px] pt-[72px] pb-[72px] min-[1024px]:hidden">
+      <div className="relative flex w-full flex-col items-center gap-[40px] px-[24px] pt-[72px] pb-[48px] min-[1024px]:hidden">
         {/* Title */}
         <div className="flex flex-col items-center gap-[20px]">
           <div className="relative flex flex-col items-center px-[10px]">
@@ -224,7 +221,7 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
           {cards.map((card) => (
             <div
               key={card.number}
-              className="relative flex w-full flex-col border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] pt-[16px] pb-[24px] px-[24px]"
+              className="relative flex w-full flex-col border border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] pt-[16px] pb-[24px] px-[24px]"
             >
               <Corners
                 leftSrc="/applications/wearables/vector-42.svg"
@@ -237,14 +234,8 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
               >
                 <img
                   alt=""
-                  src={image}
-                  className="absolute max-w-none object-cover"
-                  style={{
-                    height: "312.6%",
-                    left: card.imgLeft,
-                    top: card.imgTop,
-                    width: "225.52%",
-                  }}
+                  src={card.image || FALLBACK_IMAGE}
+                  className="absolute inset-0 size-full object-contain"
                 />
                 <div
                   className="absolute inset-0"
@@ -273,7 +264,7 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
               {/* CTA */}
               <a
                 href={card.ctaHref}
-                className={`${gilroyMedium.className} mt-[16px] flex h-[44px] w-full cursor-pointer items-center justify-center bg-[rgba(226,241,202,0.12)]`}
+                className={`${gilroyMedium.className} mt-[16px] flex h-[44px] w-full cursor-pointer items-center justify-center border border-white/20 bg-[rgba(226,241,202,0.12)]`}
               >
                 <span className="relative whitespace-nowrap text-[13px] leading-[28px] font-medium text-white uppercase not-italic">
                   {card.cta}

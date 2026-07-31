@@ -2,7 +2,7 @@ import { interMedium } from "../hero/fonts";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";
-import { FALLBACK_NAV_ITEMS, mapStrapiNavItems } from "./nav-items";
+import { mapStrapiNavItems } from "./nav-items";
 import { MobileMenu } from "./MobileMenu";
 import { NavbarCta } from "./NavbarCta";
 import { mediaUrl } from "@/lib/strapi";
@@ -21,9 +21,8 @@ function NavChevron({ className = "" }: { className?: string }) {
 }
 
 export function Navbar({ data, brandData }: { data?: any; brandData?: any }) {
-  const strapiItems = mapStrapiNavItems(data?.nav_items);
-  const navItems = strapiItems.length > 0 ? strapiItems : FALLBACK_NAV_ITEMS;
-  const logoSrc = mediaUrl(brandData?.logo) || "/navbar/logo.png";
+  const navItems = mapStrapiNavItems(data?.nav_items);
+  const logoSrc = mediaUrl(brandData?.logo);
   return (
     <header
       className={`${interMedium.className} sticky top-0 z-50 h-[78px] w-full overflow-x-clip drop-shadow-[0px_6px_12px_rgba(83,216,36,0.12)]`}
@@ -81,15 +80,17 @@ export function Navbar({ data, brandData }: { data?: any; brandData?: any }) {
           className="absolute top-[19.158px] left-[40px] hidden h-[38px] w-[135.443px] min-[1440px]:left-[110px] lg:block"
           data-node-id="2379:1574"
         >
-          <Image
-            src={logoSrc}
-            alt="Ambient Scientific"
-            width={135}
-            height={38}
-            className="h-[38px] w-[135.443px] object-cover object-left"
-            priority
-            unoptimized
-          />
+          {logoSrc ? (
+            <Image
+              src={logoSrc}
+              alt="Ambient Scientific"
+              width={135}
+              height={38}
+              className="h-[38px] w-[135.443px] object-cover object-left"
+              priority
+              unoptimized
+            />
+          ) : null}
         </Link>
 
         <nav
@@ -153,19 +154,21 @@ export function Navbar({ data, brandData }: { data?: any; brandData?: any }) {
             href="/"
             className="absolute top-[20px] left-[16px] flex h-[38px] w-[135px] items-center overflow-hidden"
           >
-            <Image
-              src={logoSrc}
-              alt="Ambient Scientific"
-              width={135}
-              height={38}
-              className="h-[38px] w-auto object-contain object-left"
-              priority
-              unoptimized
-            />
+            {logoSrc ? (
+              <Image
+                src={logoSrc}
+                alt="Ambient Scientific"
+                width={135}
+                height={38}
+                className="h-[38px] w-auto object-contain object-left"
+                priority
+                unoptimized
+              />
+            ) : null}
           </Link>
 
           <div className="absolute top-[21px] right-[16px] flex h-[36px] w-[36px] items-center justify-center">
-            <MobileMenu data={data} />
+            <MobileMenu data={data} brandData={brandData} />
           </div>
         </div>
       </div>

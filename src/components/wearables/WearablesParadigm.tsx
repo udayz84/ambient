@@ -488,7 +488,7 @@ export function WearablesParadigm({ data }: { data?: any }) {
       aria-label="The Paradigm Shift"
     >
       {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden w-full max-w-[1440px] flex-col items-center gap-[48px] pt-[80px] pb-[100px] min-[1024px]:flex">
+      <div className="relative hidden w-full max-w-[1440px] flex-col items-center gap-[48px] pt-[20px] pb-[100px] min-[1024px]:flex">
         {/* Headings */}
         <div className="flex flex-col items-center gap-[24px]">
           <div className="relative flex flex-col items-center px-[10px]">
@@ -537,7 +537,7 @@ export function WearablesParadigm({ data }: { data?: any }) {
       </div>
 
       {/* MOBILE (<1024px) */}
-      <div className="relative flex w-full flex-col items-center gap-[40px] px-[24px] pt-[72px] pb-[72px] min-[1024px]:hidden">
+      <div className="relative flex w-full flex-col items-center gap-[40px] px-[24px] pt-[24px] pb-[72px] min-[1024px]:hidden">
         {/* Headings */}
         <div className="flex flex-col items-center gap-[20px]">
           <div className="relative flex flex-col items-center px-[10px]">

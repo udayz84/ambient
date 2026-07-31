@@ -2,6 +2,7 @@
 
 import { Fragment } from "react";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
+import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
 import { dmMono, gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 
@@ -15,8 +16,6 @@ import { dmMono, gilroyMedium, gilroySemiBold, interRegular } from "../hero/font
 const AURORA = "/products/fullpicture-aurora.png"; // 1024×855, used by both footer layers
 const LINE = "/products/spec-line.svg"; // same white 4% 1px rule as the design's Line assets
 const ICON_GLYPH = "/products/fp-spec-icon.svg";
-const MENU_CORNER_L = "/products/fp-menu-corner-left.svg"; // Vector 42
-const MENU_CORNER_R = "/products/fp-menu-corner-right.svg"; // Vector 43
 const TITLE_CORNER_L = "/products/fp-title-corner-left.svg"; // Vector 58
 const TITLE_CORNER_R = "/products/fp-title-corner-right.svg"; // Vector 55
 
@@ -374,30 +373,27 @@ function CornerTick({
 function MenuChip({ label }: { label: string }) {
   return (
     <div
-      className={`${dmMono.className} bg-[rgba(255,255,255,0.06)] flex gap-[6px] h-[26px] items-center overflow-clip px-[24px] relative shrink-0`}
-      data-node-id="3713:1966"
+      className={`${dmMono.className} bg-[rgba(255,255,255,0.06)] flex gap-[6px] h-[27px] items-center overflow-clip px-[24px] relative shrink-0 border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
+      data-node-id="3710:1910"
       data-name="Menu"
     >
+      <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
       <p
         className="[text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] leading-[20.149px] not-italic relative shrink-0 text-[#ecfae5] text-[13.433px] tracking-[-0.403px] uppercase whitespace-nowrap"
-        data-node-id="3713:1967"
+        data-node-id="3710:1911"
       >
         {label}
       </p>
-      <CornerTick src={MENU_CORNER_L} placement="tl" nodeId="3713:1968" />
-      <CornerTick src={MENU_CORNER_L} placement="bl" nodeId="3713:1969" />
       <div
-        className="absolute bg-white h-[12.399px] left-[12px] opacity-60 top-[7.3px] w-[2.067px]"
-        data-node-id="3713:1970"
+        className="absolute bg-white h-[12.399px] left-[12px] opacity-60 top-1/2 -translate-y-1/2 w-[2.067px]"
+        data-node-id="3710:1914"
         aria-hidden
       />
       <div
-        className="-translate-y-1/2 absolute bg-white h-[12.399px] opacity-60 right-[12px] top-[calc(50%-0.5px)] w-[2.067px]"
-        data-node-id="3713:1971"
+        className="absolute bg-white h-[12.399px] opacity-60 right-[12px] top-1/2 -translate-y-1/2 w-[2.067px]"
+        data-node-id="3710:1915"
         aria-hidden
       />
-      <CornerTick src={MENU_CORNER_R} placement="tr" nodeId="3713:1972" />
-      <CornerTick src={MENU_CORNER_R} placement="br" nodeId="3713:1973" />
     </div>
   );
 }
@@ -587,24 +583,47 @@ export function ProductsFullPicture({ data }: { data?: any }) {
   const heading = data?.heading || FALLBACK_HEADING;
   const menuLabel = data?.menu_text || FALLBACK_MENU;
 
-  const memoryOverride = splitLinesFilter(data?.memory_items);
-
-  const strapiCallouts: Record<string, string | null> = {};
+  const strapiCallouts: Record<string, { iconUrl: string | null; items: string[] }> = {};
   if (Array.isArray(data?.callouts)) {
     for (const c of data.callouts) {
-      if (c?.label) strapiCallouts[c.label] = mediaUrl(c?.icon) || null;
+      if (c?.label) {
+        strapiCallouts[c.label] = {
+          iconUrl: mediaUrl(c?.icon) || null,
+          items: splitLinesFilter(c?.items),
+        };
+      }
     }
   }
 
   const cards: RenderCard[] = CARDS.map((c) => {
     let items = c.items;
-    if (c.title === "Memory" && memoryOverride.length > 0) {
-      items = c.items.map((slot, i) => ({
-        ...slot,
-        text: memoryOverride[i] ?? slot.text,
-      }));
+    let lines = c.lines;
+    const strapiData = strapiCallouts[c.title];
+    if (strapiData && strapiData.items.length > 0) {
+      items = strapiData.items.map((text, i) => {
+        if (i < c.items.length) {
+          return { ...c.items[i], text };
+        }
+        // Generate new top coordinate dynamically
+        const lastBaseTop = c.items.length > 0 ? c.items[c.items.length - 1].top : 14;
+        const newTop = lastBaseTop + (i - c.items.length + 1) * 43.64;
+        return { text, top: newTop, plusTop: +(newTop + 3.5).toFixed(2) };
+      });
+      
+      // Also adjust lines to match the number of items - 1
+      if (items.length > 1) {
+        const numLinesNeeded = items.length - 1;
+        lines = Array.from({ length: numLinesNeeded }).map((_, i) => {
+          if (i < c.lines.length) return c.lines[i];
+          const lastLine = c.lines[c.lines.length - 1] || { top: 40, left: 17, width: 233 };
+          const newLineTop = lastLine.top + (i - c.lines.length + 1) * 43.64;
+          return { ...lastLine, top: newLineTop };
+        });
+      } else {
+        lines = [];
+      }
     }
-    return { ...c, items, iconSrc: strapiCallouts[c.title] || ICON_GLYPH };
+    return { ...c, items, lines, iconSrc: strapiData?.iconUrl || ICON_GLYPH };
   });
 
   return (

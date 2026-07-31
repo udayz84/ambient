@@ -1,1 +1,29 @@
-﻿{ "collectionName": "components_tech_graph_labels", "info": { "displayName": "Graph Label", "description": "Scale graph label" }, "options": {}, "attributes": { "label": { "type": "string", "required": true }, "sub_label": { "type": "string" } } }
+{
+  "collectionName": "components_tech_graph_labels",
+  "info": {
+    "displayName": "Graph Label",
+    "description": "Scale graph label"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "sub_label": {
+      "type": "string"
+    },
+    "top_image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "bottom_image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    }
+  }
+}

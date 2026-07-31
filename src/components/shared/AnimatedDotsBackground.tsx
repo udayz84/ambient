@@ -47,7 +47,8 @@ export function AnimatedDotsBackground() {
     if (!isGreenCta) return;
 
     const updateDimensions = () => {
-      const rect = containerRef.current!.getBoundingClientRect();
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
       const cols = Math.ceil(rect.width / DOT_SPACING);
       const rows = Math.ceil(rect.height / DOT_SPACING);
       const items: Particle[] = [];

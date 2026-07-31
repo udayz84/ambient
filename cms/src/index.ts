@@ -150,6 +150,72 @@ export default {
         console.error('Error seeding contact form fields:', err);
       }
 
+      // Seeding Products Page ModelForge Subfeatures
+      try {
+        const productsPage = await strapi.documents('api::products-page.products-page').findFirst({
+          populate: { modelforge: { populate: '*' } }
+        });
+
+        if (productsPage && productsPage.modelforge) {
+          const subfeatures = productsPage.modelforge.subfeatures || [];
+          if (subfeatures.length === 0) {
+            console.log('Seeding ModelForge subfeatures...');
+            await strapi.documents('api::products-page.products-page').update({
+              documentId: productsPage.documentId,
+              data: {
+                modelforge: {
+                  ...productsPage.modelforge,
+                  subfeatures: [
+                    { text: "Speaks matrix math natively — none of the translation tax Arm/RISC-V pay" },
+                    { text: "Pre-integrated RTOS, drivers, DSP libraries" },
+                    { text: "Simulator + profiler — validate power and accuracy before the board arrives" }
+                  ]
+                }
+              }
+            });
+            console.log('Successfully seeded ModelForge subfeatures!');
+          }
+        }
+      } catch (err) {
+        console.error('Error seeding ModelForge subfeatures:', err);
+      }
+
+      // Seeding Products Page Full Picture Callouts
+      try {
+        const productsPage = await strapi.documents('api::products-page.products-page').findFirst({
+          populate: { full_picture: { populate: '*' } }
+        });
+
+        if (productsPage && productsPage.full_picture) {
+          const callouts = productsPage.full_picture.callouts || [];
+          if (callouts.length === 0) {
+            console.log('Seeding Full Picture callouts...');
+            const defaultCallouts = [
+              { label: "Control", items: "ARM Cortex-M4F (32-bit, FPU)" },
+              { label: "Sensing & Analog", items: "16-bit ADC, 8 simultaneous analog inputs\n16-bit audio ADC\nSensor-fusion DMA up to 10 streams\nBattery-low detection" },
+              { label: "Power", items: "Core 1.2 V (0.9–1.3 V)\nAnalog/IO 3.3 V\n~80 µW always-on\nTwo power domains" },
+              { label: "Peripherals", items: "OSPI (XIP)\nI²S Master\nSPI\nI²C\nUART\nGPIO\nGPIO" },
+              { label: "Temperature", items: "0–85 °C (junction)" },
+              { label: "Memory", items: "120 KB L0 cache\n2048 KB unified L1 SRAM\nVideo + multi-bank sensor buffers\nBoot ROM\nExternal SRAM/Flash via QSPI/SPI" },
+              { label: "Package", items: "ARM Cortex-M4F (32-bit, FPU)\nCSP 3.2×3.2 mm (on demand)" },
+              { label: "Security", items: "AES-128" }
+            ];
+            await strapi.documents('api::products-page.products-page').update({
+              documentId: productsPage.documentId,
+              data: {
+                full_picture: {
+                  ...productsPage.full_picture,
+                  callouts: defaultCallouts
+                }
+              }
+            });
+            console.log('Successfully seeded Full Picture callouts!');
+          }
+        }
+      } catch (err) {
+        console.error('Error seeding Full Picture callouts:', err);
+      }
+
       // -------------------------------------------------------------------------
       // Next.js revalidation webhook (auto-registers on every Strapi startup).
       // Triggered when an editor publishes/unpublishes any entry. Receiver is
@@ -342,6 +408,34 @@ export default {
         }
       } catch (err) {
         console.error('Error setting popup permissions:', err);
+      }
+
+      // Grant Public read permissions to footer
+      try {
+        const publicRole = await strapi.db.query('plugin::users-permissions.role').findOne({
+          where: { type: 'public' },
+        });
+
+        if (publicRole) {
+          const permissionExists = await strapi.db.query('plugin::users-permissions.permission').findOne({
+            where: {
+              role: publicRole.id,
+              action: 'api::footer.footer.find',
+            }
+          });
+
+          if (!permissionExists) {
+            console.log('Granting Public access to api::footer.footer.find');
+            await strapi.db.query('plugin::users-permissions.permission').create({
+              data: {
+                action: 'api::footer.footer.find',
+                role: publicRole.id,
+              }
+            });
+          }
+        }
+      } catch (err) {
+        console.error('Error setting footer permissions:', err);
       }
     } catch (e) {
       console.error('Seed error:', e);

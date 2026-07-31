@@ -51,6 +51,14 @@ function CtaCard({
       className="relative h-[320px] w-[558px] shrink-0"
       data-node-id={card.nodeId}
     >
+      {/* card background image */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/technology/cta-card-bg.png"
+        alt=""
+        aria-hidden
+        className="absolute top-[0.12px] left-[0.5px] block h-[319.572px] w-[557.336px] max-w-none"
+      />
       {/* card outline */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
@@ -142,7 +150,7 @@ export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
       aria-label="Put A-Cube to work"
     >
       {/* DESKTOP (>=1024px) */}
-      <div className="hidden flex-col items-center min-[1024px]:flex min-[1024px]:pt-[160px]">
+      <div className="hidden flex-col items-center min-[1024px]:flex min-[1024px]:pt-[80px]">
         {/* section title */}
         <div
           className="flex w-[492.93px] flex-col items-center gap-[24px]"

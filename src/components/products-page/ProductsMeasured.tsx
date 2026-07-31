@@ -2,6 +2,8 @@
 
 import { mediaUrl } from "@/lib/strapi";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
+import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
+import { Corners } from "../shared/Corners";
 import { dmMono, gilroyBold, gilroyMedium, interRegular } from "../hero/fonts";
 import {
   MEASURED_TITLE_GRADIENT,
@@ -247,30 +249,27 @@ function CornerTick({
 function MenuChip({ label }: { label: string }) {
   return (
     <div
-      className={`${dmMono.className} bg-[rgba(255,255,255,0.06)] flex gap-[6px] h-[27px] items-center overflow-clip px-[24px] relative shrink-0`}
+      className={`${dmMono.className} bg-[rgba(255,255,255,0.06)] flex gap-[6px] h-[27px] items-center overflow-clip px-[24px] relative shrink-0 border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
       data-node-id="3710:1910"
       data-name="Menu"
     >
+      <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
       <p
         className="[text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] leading-[20.149px] not-italic relative shrink-0 text-[#ecfae5] text-[13.433px] tracking-[-0.403px] uppercase whitespace-nowrap"
         data-node-id="3710:1911"
       >
         {label}
       </p>
-      <CornerTick src={MENU_CORNER_L} placement="tl" size={4.133} nodeId="3710:1912" />
-      <CornerTick src={MENU_CORNER_L} placement="bl" size={4.133} nodeId="3710:1913" />
       <div
-        className="absolute bg-white h-[12.399px] left-[12px] opacity-60 top-[7.3px] w-[2.067px]"
+        className="absolute bg-white h-[12.399px] left-[12px] opacity-60 top-1/2 -translate-y-1/2 w-[2.067px]"
         data-node-id="3710:1914"
         aria-hidden
       />
       <div
-        className="-translate-y-1/2 absolute bg-white h-[12.399px] opacity-60 right-[12px] top-1/2 w-[2.067px]"
+        className="absolute bg-white h-[12.399px] opacity-60 right-[12px] top-1/2 -translate-y-1/2 w-[2.067px]"
         data-node-id="3710:1915"
         aria-hidden
       />
-      <CornerTick src={MENU_CORNER_R} placement="tr" size={4.133} nodeId="3710:1916" />
-      <CornerTick src={MENU_CORNER_R} placement="br" size={4.133} nodeId="3710:1917" />
     </div>
   );
 }
@@ -451,6 +450,7 @@ function PrimaryCta({
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
+      <AnimatedDotsBackground />
       <span
         className={`[word-break:break-word] leading-[28px] not-italic text-[16px] text-white uppercase whitespace-nowrap ${
           centered ? "relative" : "absolute left-[16.5px] top-[calc(50%-14px)]"
@@ -483,7 +483,7 @@ function SecondaryCta({
   return (
     <a
       href={href}
-      className={`${gilroyMedium.className} relative flex h-[48px] shrink-0 overflow-clip px-[20px] py-[10px] ${
+      className={`${gilroyMedium.className} relative flex h-[48px] shrink-0 overflow-clip px-[20px] py-[10px] border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] ${
         centered ? "w-full max-w-[331px] items-center justify-center" : "w-[331px] items-start"
       }`}
       style={{ backgroundColor: SECONDARY_CTA_BG }}
@@ -496,10 +496,7 @@ function SecondaryCta({
       >
         {label}
       </span>
-      <CornerTick src={TITLE_CORNER_L} placement="tl" nodeId="3712:1936" />
-      <CornerTick src={TITLE_CORNER_R} placement="tr" nodeId="3712:1937" />
-      <CornerTick src={TITLE_CORNER_L} placement="bl" nodeId="3712:1938" />
-      <CornerTick src={TITLE_CORNER_R} placement="br" nodeId="3712:1939" />
+      <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
     </a>
   );
 }
@@ -528,7 +525,7 @@ export function ProductsMeasured({ data }: { data?: any }) {
     <>
       {/* DESKTOP (>=1024px) — 3309:1912 "Desktop - 15" (1440×1043) */}
       <section
-        className="relative flex w-full justify-center bg-black overflow-hidden"
+        className="relative flex w-full justify-center bg-black overflow-hidden mt-[60px]"
         aria-label="Measured in silicon"
       >
         <div
@@ -636,7 +633,7 @@ export function ProductsMeasured({ data }: { data?: any }) {
 
       {/* MOBILE (<1024px) */}
       <section
-        className="relative w-full bg-black px-[24px] pt-[64px] pb-[80px] min-[1024px]:hidden"
+        className="relative w-full bg-black px-[24px] pt-[80px] pb-[80px] min-[1024px]:hidden"
         aria-label="Measured in silicon"
       >
         <div className="flex flex-col items-center gap-[16px]">

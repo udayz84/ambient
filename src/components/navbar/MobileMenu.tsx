@@ -6,8 +6,9 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { interMedium } from "../hero/fonts";
-import { FALLBACK_NAV_ITEMS, mapStrapiNavItems } from "./nav-items";
+import { mapStrapiNavItems } from "./nav-items";
 import { NavbarCta } from "./NavbarCta";
+import { mediaUrl } from "@/lib/strapi";
 
 const emptySubscribe = () => () => {};
 const getClientSnapshot = () => true;
@@ -73,10 +74,9 @@ function ChevronDown() {
   );
 }
 
-export function MobileMenu({ data }: { data?: any }) {
-  const navItems = data?.nav_items
-    ? mapStrapiNavItems(data.nav_items)
-    : FALLBACK_NAV_ITEMS;
+export function MobileMenu({ data, brandData }: { data?: any; brandData?: any }) {
+  const navItems = mapStrapiNavItems(data?.nav_items);
+  const logoSrc = mediaUrl(brandData?.logo);
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -155,14 +155,16 @@ export function MobileMenu({ data }: { data?: any }) {
                 onClick={close}
                 className="absolute top-[20px] left-[16px] flex h-[38px] w-[135px] items-center overflow-hidden"
               >
-                <Image
-                  src="/navbar/logo.png"
-                  alt="Ambient Scientific"
-                  width={135}
-                  height={38}
-                  className="h-[38px] w-auto object-contain object-left"
-                  unoptimized
-                />
+                {logoSrc ? (
+                  <Image
+                    src={logoSrc}
+                    alt="Ambient Scientific"
+                    width={135}
+                    height={38}
+                    className="h-[38px] w-auto object-contain object-left"
+                    unoptimized
+                  />
+                ) : null}
               </Link>
 
               <div className="absolute top-[21px] right-[16px] flex h-[36px] w-[36px] items-center justify-center">

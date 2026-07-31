@@ -112,11 +112,13 @@ function ChevronBadge({
   badgeLeft,
   chevrons,
   delays,
+  flip = false,
 }: {
   badgeSrc: string;
   badgeLeft: number;
   chevrons: { src: string; left: number; width: number }[];
   delays: number[];
+  flip?: boolean;
 }) {
   return (
     <>
@@ -124,7 +126,7 @@ function ChevronBadge({
       <img
         src={badgeSrc}
         alt=""
-        className="absolute top-[636.76px] h-[47.24px] w-[85.54px] max-w-none"
+        className={`absolute top-[636.76px] h-[47.24px] w-[85.54px] max-w-none ${flip ? "scale-x-[-1]" : ""}`}
         style={{ left: badgeLeft }}
         aria-hidden
       />
@@ -135,7 +137,7 @@ function ChevronBadge({
           style={{ left: c.left, width: c.width, animationDelay: `${delays[i]}s` }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={c.src} alt="" className="block size-full max-w-none" aria-hidden />
+          <img src={c.src} alt="" className={`block size-full max-w-none ${flip ? "scale-x-[-1]" : ""}`} aria-hidden />
         </div>
       ))}
     </>
@@ -153,7 +155,8 @@ function ModesChevronFlow() {
           { src: MODES_CHEV_LEFT[1], left: 523.4, width: 21.95 },
           { src: MODES_CHEV_LEFT[2], left: 539.3, width: 22.71 },
         ]}
-        delays={[-0.5, -0.25, 0]}
+        delays={[0.8, 0.4, 0]} // Reverse flow <-
+        flip={true}
       />
       <ChevronBadge
         badgeSrc={MODES_BADGE_RIGHT}
@@ -163,7 +166,7 @@ function ModesChevronFlow() {
           { src: MODES_CHEV_RIGHT[1], left: 916.29, width: 21.95 },
           { src: MODES_CHEV_RIGHT[2], left: 932.94, width: 21.95 },
         ]}
-        delays={[0, -0.25, -0.5]}
+        delays={[0.8, 0.4, 0]} // Reverse flow <-
       />
     </div>
   );
@@ -418,10 +421,10 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
           >
             <GradientTitle gradientDeg={TITLE_GRADIENT_DEG} className="text-center">
               <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-                {headingLines[0] ?? ""}
+                {heading.split(". ")[0]}{heading.includes(". ") ? "." : ""}
               </span>
               <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-                {headingLines[1] ?? ""}
+                {heading.split(". ")[1] || ""}
               </span>
             </GradientTitle>
             <CornerDecor />

@@ -81,19 +81,19 @@ function StatCard({
 }) {
   return (
     <div
-      className="absolute w-[372px] h-[266px] overflow-clip"
+      className="absolute w-[372px] h-[266px] overflow-visible"
       style={{ left, top }}
       data-node-id={nodeId}
       data-name="Lower power consumption"
     >
-      <div className="absolute inset-0 border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.15)]" />
+      <div className="absolute inset-0 border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.15)] backdrop-blur-[2px]" />
       {/* corner elements */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={STAT_CORNERS}
         alt=""
         aria-hidden
-        className="absolute left-[-15.61px] top-[0.51px] block h-[264.994px] w-[387.605px] max-w-none"
+        className="absolute inset-0 block h-full w-full max-w-none"
       />
 
       {/* stat block */}
@@ -273,10 +273,10 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
           >
             <GradientTitle gradientDeg={TITLE_GRADIENT_DEG} className="text-center">
               <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-                {headingLines[0] ?? ""}
+                {heading.split(", ")[0]}{heading.includes(", ") ? "," : ""}
               </span>
               <span className="block h-[49px] leading-[49px] whitespace-nowrap">
-                {headingLines[1] ?? ""}
+                {heading.split(", ")[1] || ""}
               </span>
             </GradientTitle>
             <CornerDecor />

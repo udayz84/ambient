@@ -29,15 +29,12 @@ export default async function RootLayout({
 }>) {
   let navbar: any = null;
   let footer: any = null;
-  try {
-    [navbar, footer] = await Promise.all([
-      getNavbar<any>(),
-      getFooter<any>(),
-    ]);
-  } catch {
-    navbar = null;
-    footer = null;
-  }
+  const [navbarRes, footerRes] = await Promise.allSettled([
+    getNavbar<any>(),
+    getFooter<any>(),
+  ]);
+  if (navbarRes.status === "fulfilled") navbar = navbarRes.value;
+  if (footerRes.status === "fulfilled") footer = footerRes.value;
   return (
     <html
       lang="en"

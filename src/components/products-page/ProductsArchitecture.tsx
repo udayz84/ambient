@@ -14,8 +14,6 @@ import {
   CORNER_RIGHT,
 } from "./products-data";
 
-const MENU_CORNER_LEFT = "/products/fp-menu-corner-left.svg"; // Figma Vector 42
-const MENU_CORNER_RIGHT = "/products/fp-menu-corner-right.svg"; // Figma Vector 43
 const GRID_LINE = "/products/arch-grid-line.svg"; // Figma 3529:630 / 3529:640
 const STAT_ICON = "/products/arch-stat-icon.svg";
 
@@ -138,30 +136,27 @@ function CornerTick({
 function MenuChip({ label }: { label: string }) {
   return (
     <div
-      className={`${dmMono.className} bg-[rgba(255,255,255,0.06)] flex gap-[6px] h-[27px] items-center overflow-clip px-[24px] relative shrink-0`}
-      data-node-id="3712:1942"
+      className={`${dmMono.className} bg-[rgba(255,255,255,0.06)] flex gap-[6px] h-[27px] items-center overflow-clip px-[24px] relative shrink-0 border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
+      data-node-id="3710:1910"
       data-name="Menu"
     >
+      <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
       <p
         className="[text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] leading-[20.149px] not-italic relative shrink-0 text-[#ecfae5] text-[13.433px] tracking-[-0.403px] uppercase whitespace-nowrap"
-        data-node-id="3712:1943"
+        data-node-id="3710:1911"
       >
         {label}
       </p>
-      <CornerTick src={MENU_CORNER_LEFT} placement="tl" nodeId="3712:1944" size={4.133} style={{ left: 0, top: 0 }} />
-      <CornerTick src={MENU_CORNER_LEFT} placement="bl" nodeId="3712:1945" size={4.133} style={{ left: 0, bottom: 0 }} />
       <div
-        className="absolute bg-white h-[12.399px] left-[12px] opacity-60 top-[7.3px] w-[2.067px]"
-        data-node-id="3712:1946"
+        className="absolute bg-white h-[12.399px] left-[12px] opacity-60 top-1/2 -translate-y-1/2 w-[2.067px]"
+        data-node-id="3710:1914"
         aria-hidden
       />
       <div
-        className="-translate-y-1/2 absolute bg-white h-[12.399px] opacity-60 right-[12px] top-1/2 w-[2.067px]"
-        data-node-id="3712:1947"
+        className="absolute bg-white h-[12.399px] opacity-60 right-[12px] top-1/2 -translate-y-1/2 w-[2.067px]"
+        data-node-id="3710:1915"
         aria-hidden
       />
-      <CornerTick src={MENU_CORNER_RIGHT} placement="tr" nodeId="3712:1948" size={4.133} style={{ right: 0, top: 0 }} />
-      <CornerTick src={MENU_CORNER_RIGHT} placement="br" nodeId="3712:1949" size={4.133} style={{ right: 0, bottom: 0 }} />
     </div>
   );
 }
@@ -267,46 +262,28 @@ function ProductsArchitectureDesktop({
 
         {/* Stats column — 3529:623 */}
         <div
-          className="relative flex shrink-0 flex-col items-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.1)] px-[20px]"
-          style={{ width: ARCH_STATS_FRAME.width }}
+          className="relative flex shrink-0 flex-col gap-[16px]"
+          style={{ width: ARCH_STATS_FRAME.width, height: ARCH_ARTICLE.height }}
           data-node-id="3529:623"
           data-name="Frame 1000003873"
         >
-          <ArchStatView stat={stats[0]} variant="first" />
-          <ArchGridDivider nodeId="3529:630" />
-          <ArchStatView stat={stats[1]} variant="middle" />
-          <ArchGridDivider nodeId="3529:640" />
-          <ArchStatView stat={stats[2]} variant="last" />
-          {/* Corner ticks — 3529:650-653 */}
-          <CornerTick src={CORNER_RIGHT} placement="tr" nodeId="3529:650" style={{ right: 0.52, top: 0.49 }} />
-          <CornerTick src={CORNER_RIGHT} placement="br" nodeId="3529:651" style={{ right: 0.52, bottom: 0.53 }} />
-          <CornerTick src={CORNER_LEFT} placement="tl" nodeId="3529:652" style={{ left: 0.51, top: 0.51 }} />
-          <CornerTick src={CORNER_LEFT} placement="bl" nodeId="3529:653" style={{ left: 0.51, bottom: 0.5 }} />
+          {stats.map((stat) => (
+            <ArchStatView key={stat.nodeId} stat={stat} />
+          ))}
         </div>
       </div>
     </div>
   );
 }
 
-function ArchStatView({
-  stat,
-  variant,
-}: {
-  stat: any;
-  variant: "first" | "middle" | "last";
-}) {
-  const spacingClass =
-    variant === "first"
-      ? "gap-[20px] py-[20px]"
-      : variant === "middle"
-        ? "gap-[20px] pb-[24px]"
-        : "gap-[10px] pb-[20px]";
+function ArchStatView({ stat }: { stat: any }) {
   return (
     <div
-      className={`relative flex shrink-0 flex-col items-start ${spacingClass}`}
+      className="relative flex flex-1 w-full flex-col items-start justify-center gap-[12px] px-[28px] py-[16px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.1)] overflow-hidden"
       data-node-id={stat.nodeId}
       data-name="Stat"
     >
+      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
       {/* Icon */}
       <div
         className="relative shrink-0"
@@ -346,23 +323,7 @@ function ArchStatView({
   );
 }
 
-function ArchGridDivider({ nodeId }: { nodeId: string }) {
-  return (
-    <div
-      className="relative h-px w-[8px] shrink-0"
-      data-node-id={nodeId}
-      data-name="Grid Line'"
-      aria-hidden
-    >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        alt=""
-        src={GRID_LINE}
-        className="absolute inset-0 block size-full max-w-none"
-      />
-    </div>
-  );
-}
+
 
 function ProductsArchitectureMobile({
   label,
@@ -420,33 +381,32 @@ function ProductsArchitectureMobile({
       </div>
 
       {/* Stats */}
-      <div className="mt-[32px] flex flex-col">
-        {stats.map((stat, index) => (
-          <div key={stat.nodeId}>
-            <div className="flex flex-col gap-[12px] py-[20px]">
-              <div className="flex items-center gap-[16px]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  alt=""
-                  src={stat.statIcon || STAT_ICON}
-                  className="h-[36px] w-[36px] shrink-0"
-                  aria-hidden
-                />
-              </div>
-              <h3
-                className={`${gilroyMedium.className} text-[24px] leading-[30px] font-medium text-white not-italic`}
-              >
-                {stat.title}
-              </h3>
-              <p
-                className={`${interRegular.className} text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
-              >
-                {stat.description}
-              </p>
+      <div className="mt-[32px] flex flex-col gap-[16px]">
+        {stats.map((stat) => (
+          <div
+            key={stat.nodeId}
+            className="relative flex flex-col gap-[12px] px-[24px] py-[20px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.1)]"
+          >
+            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+            <div className="flex items-center gap-[16px]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                alt=""
+                src={stat.statIcon || STAT_ICON}
+                className="h-[36px] w-[36px] shrink-0"
+                aria-hidden
+              />
             </div>
-            {index < stats.length - 1 && (
-              <div className="h-px w-full border-t border-dashed border-white/15" />
-            )}
+            <h3
+              className={`${gilroyMedium.className} text-[24px] leading-[30px] font-medium text-white not-italic`}
+            >
+              {stat.title}
+            </h3>
+            <p
+              className={`${interRegular.className} text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
+            >
+              {stat.description}
+            </p>
           </div>
         ))}
       </div>

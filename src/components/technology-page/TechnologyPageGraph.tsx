@@ -1,3 +1,4 @@
+import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular, interSemiBold } from "../hero/fonts";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
@@ -57,6 +58,8 @@ type LabelConfig = {
   top: number;
   name: string;
   cat: string;
+  topImageSrc?: string;
+  bottomImageSrc?: string;
 };
 
 const LABEL_CONFIG: LabelConfig[] = [
@@ -131,6 +134,8 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
       ...cfg,
       name: (l?.label as string) || cfg.name,
       cat: (l?.sub_label as string) || cfg.cat,
+      topImageSrc: mediaUrl(l?.top_image) || undefined,
+      bottomImageSrc: mediaUrl(l?.bottom_image) || undefined,
     };
   });
 
@@ -172,23 +177,27 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
         </div>
 
         {/* chip/device renders above the labels */}
-        {TOP_IMAGES.map((img) => (
-          <div
-            key={img.nodeId}
-            className="absolute"
-            style={{ left: img.left, top: img.top, width: img.w, height: img.h }}
-            data-node-id={img.nodeId}
-            data-name="Product Image"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={img.src}
-              alt=""
-              aria-hidden
-              className={`pointer-events-none absolute inset-0 size-full max-w-none ${img.fit}`}
-            />
-          </div>
-        ))}
+        {TOP_IMAGES.map((img, i) => {
+          const src = labels[i]?.topImageSrc;
+          if (!src) return null;
+          return (
+            <div
+              key={img.nodeId}
+              className="absolute"
+              style={{ left: img.left, top: img.top, width: img.w, height: img.h }}
+              data-node-id={img.nodeId}
+              data-name="Product Image"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={src}
+                alt=""
+                aria-hidden
+                className={`pointer-events-none absolute inset-0 size-full max-w-none ${img.fit}`}
+              />
+            </div>
+          );
+        })}
 
         {/* product labels (Product Details) */}
         {labels.map((l, i) => (
@@ -244,40 +253,31 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
         ))}
 
         {/* glowing cubes above the baseline */}
-        {CUBES.map((img) => (
-          <div
-            key={img.nodeId}
-            className="absolute"
-            style={{ left: img.left, top: img.top, width: img.w, height: img.h }}
-            data-node-id={img.nodeId}
-            data-name="Product Image"
-          >
-            {img.innerH ? (
-              <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={img.src}
-                  alt=""
-                  aria-hidden
-                  className="absolute left-0 w-full max-w-none"
-                  style={{ height: img.innerH, top: img.innerTop }}
-                />
-              </div>
-            ) : (
-              /* eslint-disable-next-line @next/next/no-img-element */
+        {CUBES.map((img, i) => {
+          const src = labels[i]?.bottomImageSrc;
+          if (!src) return null;
+          return (
+            <div
+              key={img.nodeId}
+              className="absolute"
+              style={{ left: img.left, top: img.top, width: img.w, height: img.h }}
+              data-node-id={img.nodeId}
+              data-name="Product Image"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={img.src}
+                src={src}
                 alt=""
                 aria-hidden
-                className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+                className="pointer-events-none absolute inset-0 size-full max-w-none object-contain"
               />
-            )}
-          </div>
-        ))}
+            </div>
+          );
+        })}
 
         {/* baseline (line 118) */}
         <div
-          className="absolute top-[673.05px] left-1/2 h-0 w-[1260px] -translate-x-1/2"
+          className="absolute top-[673.05px] left-1/2 h-px w-[1260px] -translate-x-1/2"
           data-node-id="3031:521"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}

@@ -37,7 +37,7 @@ export default async function TechnologyPage() {
       "architecture",
       { section: "pillars", nested: ["pillars"] },
       "modes",
-      "graph",
+      { section: "graph", nested: ["labels"], fields: ["primary_button", "secondary_button"] },
       "silicon",
       "efficiency",
       "bottom_cta",
