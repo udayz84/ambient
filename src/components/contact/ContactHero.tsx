@@ -44,7 +44,7 @@ export function ContactHero({ data }: { data?: any }) {
           data-node-id="2379:4953"
           data-name="Title"
         >
-          <GradientTitle nodeId="2379:4954" className="whitespace-nowrap">
+          <GradientTitle nodeId="2379:4954" className="text-center">
             {titleLines[0] && <p className="mb-0 leading-[49px]">{titleLines[0]}</p>}
             {titleLines[1] && <p className="leading-[49px]">{titleLines[1]}</p>}
           </GradientTitle>

@@ -6,22 +6,22 @@ import { ADVISORY_BOARD, type LeadershipMember } from "./company-leadership-data
 const PORTRAIT_CLASS =
   "absolute inset-0 size-full max-w-none object-cover object-top";
 
-function toAdvisoryMember(raw: any, fallback: LeadershipMember, index: number): LeadershipMember {
+function toAdvisoryMember(raw: any, fallback: LeadershipMember | undefined, index: number): LeadershipMember {
   const bioText = (raw?.bio_paragraphs as string) || "";
   const bioParagraphs = bioText
     ? bioText.split(/\n\n+/).map((p) => p.trim()).filter(Boolean)
-    : fallback.bioParagraphs;
+    : (fallback?.bioParagraphs ?? []);
   return {
-    name: (raw?.name as string) || fallback.name,
-    role: (raw?.title as string) || fallback.role,
+    name: (raw?.name as string) || fallback?.name || "",
+    role: (raw?.title as string) || fallback?.role || "",
     bioParagraphs,
-    imageSrc: mediaUrl(raw?.photo) || fallback.imageSrc,
-    imageClassName: fallback.imageClassName ?? PORTRAIT_CLASS,
-    linkedInHref: (raw?.linkedin_url as string) || fallback.linkedInHref,
-    nodeId: raw?.id ? `advisor-${raw.id}` : `advisor-strapi-${index}`,
-    imageNodeId: fallback.imageNodeId,
-    nameNodeId: fallback.nameNodeId,
-    readMoreNodeId: fallback.readMoreNodeId,
+    imageSrc: mediaUrl(raw?.photo) || fallback?.imageSrc || "",
+    imageClassName: fallback?.imageClassName ?? PORTRAIT_CLASS,
+    linkedInHref: (raw?.linkedin_url as string) || fallback?.linkedInHref || "",
+    nodeId: raw?.id ? `advisor-${raw.id}` : fallback?.nodeId || `advisor-strapi-${index}`,
+    imageNodeId: fallback?.imageNodeId || `advisor-image-${index}`,
+    nameNodeId: fallback?.nameNodeId || `advisor-name-${index}`,
+    readMoreNodeId: fallback?.readMoreNodeId || `advisor-readmore-${index}`,
   };
 }
 

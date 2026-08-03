@@ -119,7 +119,7 @@ export function DvkDemosCards({ data }: { data?: any }) {
             titleLine1: c?.title_line_1 || fallback.titleLine1,
             titleLine2: c?.title_line_2 || fallback.titleLine2,
             desc: c?.description || fallback.desc,
-            img: mediaUrl(c?.image) || fallback.img,
+            img: mediaUrl(c?.image) || null,
           };
         })
       : DEMO_CARDS;
@@ -149,12 +149,14 @@ function DemoCardItem({ card }: { card: DemoCard }) {
           height: 268,
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt=""
-          src={card.img}
-          className="absolute inset-0 size-full max-w-none object-cover"
-        />
+        {card.img && (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            alt=""
+            src={card.img}
+            className="absolute inset-0 size-full max-w-none object-cover"
+          />
+        )}
         {card.imgOverlay && (
           // eslint-disable-next-line @next/next/no-img-element
           <img

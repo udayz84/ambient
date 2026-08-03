@@ -48,7 +48,7 @@ export function SomInsideModule({ data }: { data?: any }) {
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const heading = data?.heading || FALLBACK_HEADING;
   const label = data?.label || FALLBACK_LABEL;
-  const image = mediaUrl(data?.image) || FALLBACK_IMAGE;
+  const image = mediaUrl(data?.image);
   const specs: { title: string; body: string }[] = Array.isArray(data?.specs) && data.specs.length > 0
     ? data.specs.map((s: any, i: number) => {
         const fb = SPECS[i] || SPECS[0];
@@ -97,13 +97,14 @@ export function SomInsideModule({ data }: { data?: any }) {
             <div
               className="relative h-[464.191px] w-[558.509px] shrink-0 overflow-hidden"
               data-node-id="2438:4976"
-              data-name="image 156"
             >
-              <img
-                src={image}
-                alt="Sparsh AI Module"
-                className="absolute inset-0 size-full object-cover"
-              />
+              {image && (
+                <img
+                  src={image}
+                  alt=""
+                  className="absolute inset-0 size-full max-w-none object-contain"
+                />
+              )}
             </div>
             {/* Decorative overlays on the module photo */}
             <div
@@ -161,11 +162,13 @@ export function SomInsideModule({ data }: { data?: any }) {
           {/* Module photo card */}
           <div className="relative flex w-full flex-col items-center gap-[16px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] pt-[10px] px-[16px] pb-[20px]">
             <div className="relative h-[200px] w-full shrink-0 overflow-hidden">
-              <img
-                src={image}
-                alt="Sparsh AI Module"
-                className="absolute inset-0 size-full object-cover"
-              />
+              {image && (
+                <img
+                  src={image}
+                  alt="Sparsh AI Module"
+                  className="absolute inset-0 size-full object-cover"
+                />
+              )}
             </div>
             <p
               className={`${gilroyMedium.className} min-w-full w-full text-[20px] leading-[26px] font-medium text-white not-italic`}

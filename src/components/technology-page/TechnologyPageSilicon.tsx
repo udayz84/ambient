@@ -5,8 +5,6 @@ import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const SILICON_BG = "/technology/silicon-bg.png";
-const CHIP_BG = "/technology/chip-bg.png";
-const CHIP_OBJECT = "/technology/chip-object.png";
 const INDICATOR_1 = "/technology/silicon-indicator-1.svg";
 const INDICATOR_2 = "/technology/silicon-indicator-2.svg";
 const STAT_CORNERS = "/technology/stat-corners.svg";
@@ -135,8 +133,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
   const headingLines = heading.split("\n");
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const bgSrc = mediaUrl(data?.background_image) || SILICON_BG;
-  const chipBgSrc = mediaUrl(data?.chip_background) || CHIP_BG;
-  const chipObjectSrc = mediaUrl(data?.chip_object) || CHIP_OBJECT;
+  const chipBgSrc = mediaUrl(data?.chip_background);
   const ctaLabel = data?.cta?.label || FALLBACK_CTA_LABEL;
   const ctaHref = data?.cta?.href || "#";
 
@@ -169,12 +166,14 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
           data-name="image 108"
         >
           <div aria-hidden className="absolute inset-0">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={bgSrc}
-              alt=""
-              className="absolute inset-0 size-full max-w-none object-bottom"
-            />
+            {bgSrc && (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                src={bgSrc}
+                alt=""
+                className="absolute inset-0 size-full max-w-none object-bottom"
+              />
+            )}
             <div
               className="absolute inset-0"
               style={{ backgroundImage: VIGNETTE }}
@@ -199,23 +198,16 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
         >
           {/* background */}
           <div className="absolute left-1/2 top-1/2 h-[536.9px] w-[417.67px] -translate-x-1/2 -translate-y-1/2 overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={chipBgSrc}
-              alt=""
-              className="absolute left-0 top-[5.31%] h-[89.37%] w-full max-w-none"
-            />
+            {chipBgSrc && (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                src={chipBgSrc}
+                alt=""
+                className="absolute left-0 top-[5.31%] h-[89.37%] w-full max-w-none"
+              />
+            )}
           </div>
-          {/* object overlay */}
-          <div className="absolute top-[110.4px] left-[150px] h-[59.93px] w-[116.72px] rotate-[1.84deg] overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={chipObjectSrc}
-              alt=""
-              className="absolute left-[-44.69%] top-[-28.9%] h-[127.84%] w-[144.32%] max-w-none"
-            />
-            <div className="pointer-events-none absolute inset-0 shadow-[inset_0px_3.858px_3.858px_0px_rgba(0,0,0,0.25)]" />
-          </div>
+
         </div>
 
         {/* indicators */}
@@ -358,13 +350,15 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
         </p>
 
         {/* chip image */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={chipBgSrc}
-          alt=""
-          className="h-auto w-full max-w-[327px] rounded-[8px] object-contain"
-          aria-hidden
-        />
+        {chipBgSrc && (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            src={chipBgSrc}
+            alt=""
+            className="h-auto w-full max-w-[327px] rounded-[8px] object-contain"
+            aria-hidden
+          />
+        )}
 
         {/* stat cards */}
         {statCards.map((s, i) => (

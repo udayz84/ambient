@@ -56,7 +56,7 @@ function PrimaryCtaCorners() {
 
 export function SomHero({ data }: { data?: any }) {
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
-  const backgroundImage = mediaUrl(data?.image) || FALLBACK_BG;
+  const backgroundImage = mediaUrl(data?.image);
   const rawTitle = data?.title || FALLBACK_TITLE;
   const titleLines = (rawTitle === "The shortest path to volume production." ? "The shortest path to\nvolume production." : rawTitle).split("\n");
   const primaryLabel =
@@ -81,11 +81,13 @@ export function SomHero({ data }: { data?: any }) {
           data-name="DVK 1"
           aria-hidden
         >
-          <img
-            src={backgroundImage}
-            alt=""
-            className="absolute inset-0 size-full max-w-none object-cover"
-          />
+          {backgroundImage && (
+            <img
+              src={backgroundImage}
+              alt=""
+              className="absolute inset-0 size-full max-w-none object-cover"
+            />
+          )}
           <div
             className="absolute inset-0"
             style={{
@@ -213,11 +215,13 @@ export function SomHero({ data }: { data?: any }) {
       <div className="relative flex w-full flex-col min-[1024px]:hidden">
         {/* Background */}
         <div aria-hidden className="pointer-events-none absolute inset-0">
-          <img
-            src={backgroundImage}
-            alt=""
-            className="size-full max-w-none object-cover"
-          />
+          {backgroundImage && (
+            <img
+              src={backgroundImage}
+              alt=""
+              className="size-full max-w-none object-cover"
+            />
+          )}
           <div className="absolute inset-0 bg-black/55" />
         </div>
 

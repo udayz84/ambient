@@ -25,7 +25,7 @@ export function DvkHardwareStack({ data }: { data?: any }) {
   const heading = data?.heading || DEFAULT_HEADING;
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
   const label = data?.label || DEFAULT_LABEL;
-  const boardImage = mediaUrl(data?.board_image) || DEFAULT_BOARD_IMAGE;
+  const boardImage = mediaUrl(data?.board_image);
   // Figma 2761:2925 — fixed 7 card slots; CMS entries override per index.
   const source: any[] = Array.isArray(data?.spec_cards) ? data.spec_cards : [];
   const cards: SpecCardType[] = SPEC_CARDS.map((def, i) => {
@@ -92,12 +92,14 @@ export function DvkHardwareStack({ data }: { data?: any }) {
           </p>
           {/* Figma 4049:8277 — DVK Board 1 */}
           <div className="relative h-[528.474px] w-[572.67px] shrink-0">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt=""
-              src={boardImage}
-              className="pointer-events-none absolute inset-0 size-full max-w-none object-bottom"
-            />
+            {boardImage && (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                alt=""
+                src={boardImage}
+                className="absolute inset-0 size-full max-w-none object-contain"
+              />
+            )}
           </div>
         </div>
 

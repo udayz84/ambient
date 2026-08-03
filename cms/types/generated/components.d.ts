@@ -2344,7 +2344,9 @@ export interface TechSilicon extends Struct.ComponentSchema {
     displayName: 'Silicon';
   };
   attributes: {
+    background_image: Schema.Attribute.Media;
     chip_background: Schema.Attribute.Media;
+    chip_object: Schema.Attribute.Media;
     cta: Schema.Attribute.Component<'shared.button', false>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     stat_cards: Schema.Attribute.Component<'tech.silicon-stat', true>;

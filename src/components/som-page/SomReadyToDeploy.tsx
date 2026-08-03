@@ -73,7 +73,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
   const heading = data?.heading || "Ready to deploy?";
   const ctaLabel = data?.primary_cta_label || CTA_LABEL;
   const description = data?.secondary_text || DESCRIPTION;
-  const chipSrc = mediaUrl(data?.image) || FALLBACK_CHIP;
+  const chipSrc = mediaUrl(data?.image);
   const primaryTitleLines = (
     data?.primary_title || DEFAULT_PRIMARY_TITLE
   ).split("\n");
@@ -111,10 +111,12 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
 
         {/* Body — chip top sits 28.89px below the title block; 446.196 tall */}
         <div className="relative mt-[10px] h-[446.196px] w-full">
-          <ChipImage
-            className="absolute left-[401.108px] top-0 h-[446.196px] w-[430.321px]"
-            src={chipSrc}
-          />
+          {chipSrc && (
+            <ChipImage
+              className="absolute left-[401.108px] top-0 h-[446.196px] w-[430.321px]"
+              src={chipSrc}
+            />
+          )}
 
           {/* Heading — 2438:5334 (left 75.44, top 140.41 rel. to body) */}
           <h3
@@ -184,7 +186,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
           </p>
         </div>
 
-        <ChipImage className="h-[300px] w-full max-w-[290px]" src={chipSrc} />
+        {chipSrc && <ChipImage className="h-[300px] w-full max-w-[290px]" src={chipSrc} />}
 
         <div className="flex w-full flex-col items-center gap-[20px]">
           <h3

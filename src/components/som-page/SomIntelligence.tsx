@@ -126,7 +126,7 @@ export function SomIntelligence({ data }: { data?: any }) {
     return {
       title: c.title || fb.title,
       description: c.description || fb.description,
-      imageUrl: mediaUrl(c.image) || fb.imageUrl,
+      imageUrl: mediaUrl(c.image) || null,
     };
   });
   return (

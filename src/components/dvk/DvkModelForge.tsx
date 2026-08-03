@@ -46,15 +46,15 @@ const MEDIA_RADIAL =
 export function DvkModelForge({ data }: { data?: any }) {
   const heading = data?.heading || DEFAULT_HEADING;
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
-  const centerImage = mediaUrl(data?.center_image) || CENTER_IMG;
+  const centerImage = mediaUrl(data?.center_image);
   
   const yourModelTitle = data?.your_model_title || DEFAULT_YOUR_MODEL_TITLE;
   const yourModelDesc = data?.your_model_description || DEFAULT_YOUR_MODEL_DESC;
-  const yourModelImage = mediaUrl(data?.your_model_image) || YOUR_MODEL_IMG;
+  const yourModelImage = mediaUrl(data?.your_model_image);
   
   const dvkBoardTitle = data?.dvk_board_title || DEFAULT_DVK_BOARD_TITLE;
   const dvkBoardDesc = data?.dvk_board_description || DEFAULT_DVK_BOARD_DESC;
-  const dvkBoardImage = mediaUrl(data?.dvk_board_image) || DVK_BOARD_IMG;
+  const dvkBoardImage = mediaUrl(data?.dvk_board_image);
   
   const toolchainTitle = data?.toolchain_title || DEFAULT_TOOLCHAIN_TITLE;
   const toolchainSubtitle = data?.toolchain_subtitle || DEFAULT_TOOLCHAIN_SUBTITLE;
@@ -82,12 +82,13 @@ export function DvkModelForge({ data }: { data?: any }) {
 
       {/* Center visual (2761:3008) */}
       <div className="absolute top-[330px] left-[calc(50%+3.5px)] h-[350px] w-[345px] -translate-x-1/2">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={centerImage}
-          alt=""
-          className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
-        />
+        {centerImage && (
+          <img
+            src={centerImage}
+            alt=""
+            className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+          />
+        )}
       </div>
 
       {/* Section title (2761:3009) */}
@@ -197,7 +198,7 @@ function ModelCard({
   description,
 }: {
   className?: string;
-  image: string;
+  image?: string | null;
   imagePadding: string;
   imageRounded?: boolean;
   title: string;
@@ -214,12 +215,14 @@ function ModelCard({
         style={{ borderColor: "rgba(0,255,0,0.3)", backgroundImage: MEDIA_RADIAL }}
       >
         <div className={`relative h-full min-w-px flex-1 ${imageRounded ? "rounded-[6px]" : ""}`}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={image}
-            alt=""
-            className={`pointer-events-none absolute inset-0 size-full max-w-none border-0 border-solid border-transparent bg-clip-padding object-contain ${imageRounded ? "rounded-[6px]" : ""}`}
-          />
+          {image && (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              src={image}
+              alt=""
+              className={`pointer-events-none absolute inset-0 size-full max-w-none border-0 border-solid border-transparent bg-clip-padding object-contain ${imageRounded ? "rounded-[6px]" : ""}`}
+            />
+          )}
         </div>
       </div>
       <div className="flex w-full flex-col items-start">

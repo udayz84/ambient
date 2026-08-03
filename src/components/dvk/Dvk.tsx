@@ -193,7 +193,7 @@ function DvkHardwareStackMobile({ data }: { data?: any }) {
     data?.subtitle ||
     "An exhaustive suite of sensors, interfaces, and debug tools pre-integrated with the GPX-10 Pro AI Processor.";
   const label = data?.label || "The Hardware Blueprint";
-  const boardImage = mediaUrl(data?.board_image) || "/dvk/board-main.png";
+  const boardImage = mediaUrl(data?.board_image);
   const cards =
     data?.spec_cards && Array.isArray(data?.spec_cards) && data.spec_cards.length > 0
       ? data.spec_cards.map((c: any, i: number) => ({
@@ -241,12 +241,14 @@ function DvkHardwareStackMobile({ data }: { data?: any }) {
           >
             {label}
           </p>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt=""
-            src={boardImage}
-            className="pointer-events-none h-auto w-full rounded-[7.572px] object-bottom"
-          />
+          {boardImage && (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              alt=""
+              src={boardImage}
+              className="pointer-events-none h-auto w-full rounded-[7.572px] object-bottom"
+            />
+          )}
         </div>
 
         {/* Spec cards — stacked */}
@@ -301,7 +303,7 @@ function DvkDemosMobile({ data }: { data?: any }) {
             c?.description ||
             DEMO_CARDS[i]?.desc ||
             "",
-          img: mediaUrl(c?.image) || DEMO_CARDS[i]?.img || "/dvk/demo-fall.png",
+          img: mediaUrl(c?.image) || null,
           imgOverlay: DEMO_CARDS[i]?.imgOverlay,
         }))
       : DEMO_CARDS;
@@ -339,12 +341,14 @@ function DvkDemosMobile({ data }: { data?: any }) {
             >
               {/* Header image */}
               <div className="relative h-[200px] w-full overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  alt=""
-                  src={card.img}
-                  className="absolute inset-0 size-full object-cover"
-                />
+                {card.img && (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    alt=""
+                    src={card.img}
+                    className="absolute inset-0 size-full object-cover"
+                  />
+                )}
                 {card.imgOverlay && (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
@@ -387,19 +391,17 @@ function DvkModelForgeMobile({ data }: { data?: any }) {
   const subtitle =
     data?.subtitle ||
     "Don't let software be the bottleneck. The Cranium DVK is fully supported by our unified software toolchain, designed to take you from a standard TensorFlow model to on-silicon inference in under 15 minutes.";
-  const centerImage =
-    mediaUrl(data?.center_image) || "/dvk/modelforge-center.webp";
+  const centerImage = mediaUrl(data?.center_image);
 
   const yourModelTitle = data?.your_model_title || "Your Model";
   const yourModelDesc =
     data?.your_model_description || "Automated TFLite conversion & quantization";
-  const yourModelImage =
-    mediaUrl(data?.your_model_image) || "/dvk/modelforge-your-model.webp";
+  const yourModelImage = mediaUrl(data?.your_model_image);
 
   const dvkBoardTitle = data?.dvk_board_title || "Cranium DVK";
   const dvkBoardDesc =
     data?.dvk_board_description || "15 minutes to on-silicon execution";
-  const dvkBoardImage = mediaUrl(data?.dvk_board_image) || "/dvk/board-blueprint.webp";
+  const dvkBoardImage = mediaUrl(data?.dvk_board_image);
 
   const toolchainTitle = data?.toolchain_title || "ModelForge SDK";
   const toolchainSubtitle =
@@ -437,12 +439,14 @@ function DvkModelForgeMobile({ data }: { data?: any }) {
 
         {/* Center visual */}
         <div className="relative flex w-full max-w-[345px] justify-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt=""
-            src={centerImage}
-            className="pointer-events-none h-auto w-full max-w-[345px] object-contain"
-          />
+          {centerImage && (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              alt=""
+              src={centerImage}
+              className="pointer-events-none h-auto w-full max-w-[345px] object-contain"
+            />
+          )}
         </div>
 
         {/* Your Model card */}
@@ -491,7 +495,7 @@ function MobileModelCard({
   description,
   imageRounded = false,
 }: {
-  image: string;
+  image?: string | null;
   title: string;
   description: string;
   imageRounded?: boolean;
@@ -513,12 +517,14 @@ function MobileModelCard({
             "radial-gradient(ellipse 363.01px 135px at 146px 135px, rgba(26,26,26,1) 0%, rgba(13,13,13,1) 25%, rgba(7,7,7,1) 37.5%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%)",
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt=""
-          src={image}
-          className={`pointer-events-none absolute inset-0 size-full max-w-none object-contain ${imageRounded ? "rounded-[6px]" : ""}`}
-        />
+        {image && (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            alt=""
+            src={image}
+            className={`pointer-events-none absolute inset-0 size-full max-w-none object-contain ${imageRounded ? "rounded-[6px]" : ""}`}
+          />
+        )}
       </div>
       <div className="flex w-full flex-col items-center gap-[8px]">
         <p

@@ -68,13 +68,16 @@ function FeatureCard({
         data-name="Icon"
       >
         <div className="absolute inset-0 flex items-center justify-center">
-          <img
-            alt=""
-            aria-hidden
-            src={iconSrc}
-            className="block max-w-none"
-            style={{ width: iconSize, height: iconSize }}
-          />
+          {iconSrc && (
+            <img
+              src={iconSrc}
+              alt=""
+              width={iconSize}
+              height={iconSize}
+              className="max-w-none"
+              aria-hidden
+            />
+          )}
         </div>
       </div>
 
@@ -138,7 +141,7 @@ export function SomFeatures({ data }: { data?: any }) {
     ? data.cards.map((c: any, i: number) => {
         const fb = CARDS[i] || CARDS[0];
         return {
-          iconSrc: mediaUrl(c?.icon) || fb.iconSrc,
+          iconSrc: mediaUrl(c?.icon) || null,
           iconSize: fb.iconSize,
           tag: c?.tag || fb.tag,
           title: c?.title || fb.title,
