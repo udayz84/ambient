@@ -131,7 +131,7 @@ export function WhiteCtaButton({
   return (
     <a
       href={href}
-      className={`${gilroySemiBold.className} relative block h-[48px] shrink-0 shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15),0px_10.268px_6.699px_rgba(255,255,255,0.15),0px_3.714px_2.423px_rgba(255,255,255,0.1)] ${className}`}
+      className={`${gilroySemiBold.className} relative block h-[48px] shrink-0 overflow-hidden shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15),0px_10.268px_6.699px_rgba(255,255,255,0.15),0px_3.714px_2.423px_rgba(255,255,255,0.1)] ${className}`}
     >
       <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
       <span
@@ -148,8 +148,8 @@ export function WhiteCtaButton({
           lowercase ? "normal-case" : "uppercase"
         } not-italic ${
           centered
-            ? "absolute inset-0 justify-center"
-            : "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+            ? "absolute inset-0 justify-center overflow-hidden text-ellipsis"
+            : "absolute top-1/2 left-1/2 max-w-full -translate-x-1/2 -translate-y-1/2 overflow-hidden text-ellipsis"
         }`}
       >
         {children}

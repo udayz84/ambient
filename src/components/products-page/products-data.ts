@@ -179,6 +179,58 @@ export const PRODUCTS_FEATURE_CARDS: ProductsFeatureCardData[] = [
   },
 ];
 
+/**
+ * Visual variants cycled for Strapi-provided cards past the Figma design
+ * count (4). The `image` field on `ProductsFeatureCardData` has no Strapi
+ * counterpart — it selects which Figma raster asset the card renders — so
+ * extras cycle through the four designed variants.
+ */
+export const FEATURE_IMAGE_VARIANTS = [
+  "brain",
+  "coin",
+  "bubble",
+  "stack",
+] as const;
+
+/**
+ * Resolve the visible feature cards. When Strapi provides cards, the
+ * rendered count equals `rawCards.length` (no longer locked to the 4
+ * hardcoded Figma slots). Per-card layout fields (`titleLeft`, `titleWidth`,
+ * `nodeId`) and the visual variant (`image`) come from the Figma fallback
+ * for the first 4 cards; extras cycle through `FEATURE_IMAGE_VARIANTS` and
+ * reuse the most common layout values. When Strapi provides no cards, the
+ * designed fallback array is returned unchanged.
+ */
+export function resolveFeatureCards(
+  rawCards: readonly any[] | null | undefined,
+): ProductsFeatureCardData[] {
+  if (!rawCards || rawCards.length === 0) {
+    return [...PRODUCTS_FEATURE_CARDS];
+  }
+  return rawCards.map((c: any, i: number) => {
+    const withinDesign = i < PRODUCTS_FEATURE_CARDS.length;
+    const fb = withinDesign
+      ? PRODUCTS_FEATURE_CARDS[i]
+      : PRODUCTS_FEATURE_CARDS[0];
+    const strapiTitle = typeof c?.title === "string" ? c.title.trim() : "";
+    const strapiDescription =
+      typeof c?.description === "string" ? c.description.trim() : "";
+    const image = withinDesign
+      ? fb.image
+      : (FEATURE_IMAGE_VARIANTS[i % FEATURE_IMAGE_VARIANTS.length] as ProductsFeatureCardData["image"]);
+    return {
+      nodeId:
+        c?.documentId ?? c?.id ?? `feature-card-strapi-${i}`,
+      title: strapiTitle || fb.title,
+      titleLines: strapiTitle ? null : fb.titleLines,
+      titleLeft: fb.titleLeft,
+      titleWidth: fb.titleWidth,
+      description: strapiDescription || fb.description,
+      image,
+    };
+  });
+}
+
 /* ------------------------------------------------------------------ */
 /* "Always On" section — Figma 2915:1219 / 2908:487 / 2915:1234        */
 /* ------------------------------------------------------------------ */

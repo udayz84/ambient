@@ -25,16 +25,7 @@ const agricultureWatermarkGradient =
 const hearablesWatermarkGradient =
   "linear-gradient(261.051deg, rgba(255, 255, 255, 0.12) 0.12143%, rgba(255, 255, 255, 0.6) 44.084%, rgba(255, 255, 255, 0) 113.37%)";
 
-const HERO_IMAGES: Record<string, string> = {
-  AUTOMOTIVE: "/applications/car-hero.png",
-  MEDICAL: "/applications/app-medical.png",
-  INDUSTRIAL: "/applications/app-industrial.png",
-  "SMART HOMES": "/applications/app-smart-home.png",
-  WEARABLES: "/applications/app-wearables.png",
-  DRONES: "/applications/app-drones.png",
-  AGRICULTURE: "/applications/app-agriculture.png",
-  HEARABLES: "/applications/app-hearables.png",
-};
+const HERO_IMAGES: Record<string, string> = {};
 
 const variants = {
   enter: (direction: number) => ({
@@ -79,7 +70,7 @@ export function ApplicationsHeroVisual({
     const imgSrc =
       strapiHeroImage(activeTab) ||
       HERO_IMAGES[activeTab] ||
-      "/applications/car-hero.png";
+      "";
 
     if (activeTab === "INDUSTRIAL") {
       return (
@@ -89,7 +80,7 @@ export function ApplicationsHeroVisual({
             style={{ backgroundImage: industrialWatermarkGradient }}
             data-node-id="2901:1272"
           >
-            {strapiWatermark("INDUSTRIAL") || "Industry 4.0"}
+            {strapiWatermark("INDUSTRIAL") || ""}
           </p>
 
           <div
@@ -97,13 +88,15 @@ export function ApplicationsHeroVisual({
             data-node-id="2901:1273"
             data-name="Image"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt=""
-              src={imgSrc}
-              className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
-              aria-hidden
-            />
+            {imgSrc ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                alt=""
+                src={imgSrc}
+                className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+                aria-hidden
+              />
+            ) : null}
           </div>
 
           <div
@@ -169,7 +162,7 @@ export function ApplicationsHeroVisual({
             style={{ backgroundImage: smartHomeWatermarkGradient }}
             data-node-id="2901:1480"
           >
-            {strapiWatermark("SMART HOMES") || "Smart Home"}
+            {strapiWatermark("SMART HOMES") || ""}
           </p>
 
           <div
@@ -177,13 +170,15 @@ export function ApplicationsHeroVisual({
             data-node-id="3202:465"
             data-name="Product image"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt=""
-              src={imgSrc}
-              className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
-              aria-hidden
-            />
+            {imgSrc ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                alt=""
+                src={imgSrc}
+                className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+                aria-hidden
+              />
+            ) : null}
           </div>
 
           <div
@@ -249,7 +244,7 @@ export function ApplicationsHeroVisual({
             style={{ backgroundImage: wearablesWatermarkGradient }}
             data-node-id="2901:1580"
           >
-            {strapiWatermark("WEARABLES") || "Wearables"}
+            {strapiWatermark("WEARABLES") || ""}
           </p>
 
           <div
@@ -257,13 +252,15 @@ export function ApplicationsHeroVisual({
             data-node-id="2901:1581"
             data-name="Image"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt=""
-              src={imgSrc}
-              className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
-              aria-hidden
-            />
+            {imgSrc ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                alt=""
+                src={imgSrc}
+                className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+                aria-hidden
+              />
+            ) : null}
           </div>
 
           <div
@@ -329,7 +326,7 @@ export function ApplicationsHeroVisual({
             style={{ backgroundImage: dronesWatermarkGradient }}
             data-node-id="2901:1895"
           >
-            {strapiWatermark("DRONES") || "Drones "}
+            {strapiWatermark("DRONES") || ""}
           </p>
 
           <div
@@ -337,13 +334,15 @@ export function ApplicationsHeroVisual({
             data-node-id="2901:1896"
             data-name="Image"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt=""
-              src={imgSrc}
-              className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
-              aria-hidden
-            />
+            {imgSrc ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                alt=""
+                src={imgSrc}
+                className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+                aria-hidden
+              />
+            ) : null}
           </div>
 
           <div
@@ -409,7 +408,7 @@ export function ApplicationsHeroVisual({
             style={{ backgroundImage: agricultureWatermarkGradient }}
             data-node-id="2901:1999"
           >
-            {strapiWatermark("AGRICULTURE") || "Agriculture"}
+            {strapiWatermark("AGRICULTURE") || ""}
           </p>
 
           <div
@@ -417,13 +416,15 @@ export function ApplicationsHeroVisual({
             data-node-id="2901:2000"
             data-name="Image"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt=""
-              src={imgSrc}
-              className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
-              aria-hidden
-            />
+            {imgSrc ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                alt=""
+                src={imgSrc}
+                className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+                aria-hidden
+              />
+            ) : null}
           </div>
 
           <div
@@ -489,7 +490,7 @@ export function ApplicationsHeroVisual({
             style={{ backgroundImage: hearablesWatermarkGradient }}
             data-node-id="3206:935"
           >
-            Hearables
+            {strapiWatermark("HEARABLES") || ""}
           </p>
 
           <div
@@ -497,13 +498,15 @@ export function ApplicationsHeroVisual({
             data-node-id="3206:936"
             data-name="image 145"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt=""
-              src={imgSrc}
-              className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
-              aria-hidden
-            />
+            {imgSrc ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                alt=""
+                src={imgSrc}
+                className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+                aria-hidden
+              />
+            ) : null}
           </div>
 
           <div className="contents" data-node-id="3206:953">
@@ -569,17 +572,19 @@ export function ApplicationsHeroVisual({
           data-name="unnamed-(1) 1"
         >
           <div className={activeTab === "AUTOMOTIVE" ? "-scale-y-100 rotate-180 flex-none" : "flex-none w-full h-full flex items-center justify-center"}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt=""
-              src={imgSrc}
-              className={`pointer-events-none max-w-none ${
-                activeTab === "AUTOMOTIVE" 
-                  ? "h-[435.28900146484375px] w-[984.82421875px] object-bottom" 
-                  : "max-h-[435px] max-w-[984px] w-auto h-auto object-contain"
-              }`}
-              aria-hidden
-            />
+            {imgSrc ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                alt=""
+                src={imgSrc}
+                className={`pointer-events-none max-w-none ${
+                  activeTab === "AUTOMOTIVE"
+                    ? "h-[435.28900146484375px] w-[984.82421875px] object-bottom"
+                    : "max-h-[435px] max-w-[984px] w-auto h-auto object-contain"
+                }`}
+                aria-hidden
+              />
+            ) : null}
           </div>
         </div>
 

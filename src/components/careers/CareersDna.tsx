@@ -12,50 +12,22 @@ import { mediaUrl } from "@/lib/strapi";
 
 const CHIP_FADE_IN_CLASS = "animate-hero-text-fade-in opacity-0";
 
-const DNA_HEADING_FALLBACK = "Driven by physics.\nDefined by our DNA.";
-const DNA_SUBTITLE_FALLBACK = "This is how we work, build, and solve at Ambient.";
-
-const DNA_PANEL_FALLBACKS = [
-  {
-    title: "Grounded in Science",
-    description:
-      "You work from first principles. Every decision you make is expected to be backed by data, validation, and a clear understanding of the underlying system.",
-  },
-  {
-    title: "Stay Curious. Stay Skeptical.",
-    description:
-      "You are encouraged to question, challenge, and refine. Strong thinking, clear reasoning, and continuous learning are expected at every stage of the work.",
-  },
-  {
-    title: "Chase the Impossible",
-    description:
-      "You take on problems that don't have predefined solutions. The expectation is not iteration, but pushing beyond accepted limits and building what doesn't yet exist.",
-  },
-  {
-    title: "Build for Everyone",
-    description:
-      "Your work is not isolated. You build systems that must scale across real-world environments, constraints, and users, making advanced technology practical and usable.",
-  },
-  {
-    title: "Protect What Powers Us",
-    description:
-      "You design with power as a constraint from day one. Efficiency is not an afterthought, it is a core part of how you think, build, and optimize systems.",
-  },
-];
-
 export function CareersDna({ data }: { data?: any }) {
-  const headingText = data?.heading || DNA_HEADING_FALLBACK;
+  const headingText = data?.heading || "";
   const headingLines = headingText.split("\n");
-  const subtitle = data?.subtitle || DNA_SUBTITLE_FALLBACK;
+  const subtitle = data?.subtitle || "";
   const bgImg = "/careers/dna-section-bg.png";
-  const chipObject =
-    mediaUrl(data?.chip_object) || "/careers/chip-object.png";
+  const chipObject = mediaUrl(data?.chip_object);
   const strapiPanels: any[] =
     data?.panels && Array.isArray(data.panels) ? data.panels : [];
-  const panels = DNA_PANEL_FALLBACKS.map((fallback, i) => ({
-    title: strapiPanels[i]?.title || fallback.title,
-    description: strapiPanels[i]?.description || fallback.description,
+  const panels = strapiPanels.map((p: any) => ({
+    title: p?.title || "",
+    description: p?.description || "",
   }));
+  // Pad panels to 5 to match designed DNA section layout (uses indices 0..4)
+  while (panels.length < 5) {
+    panels.push({ title: "", description: "" });
+  }
 
   return (
     <section
@@ -166,7 +138,7 @@ export function CareersDna({ data }: { data?: any }) {
 function CareersDnaChipImage({
   chipObject,
 }: {
-  chipObject: string;
+  chipObject: string | null;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -198,11 +170,14 @@ function CareersDnaChipImage({
       data-node-id="2379:8873"
       data-name="Chip Image"
     >
-      <img
-        src={chipObject}
-        alt=""
-        className="w-full max-h-[449px] object-contain scale-[1.2]"
-      />
+      {chipObject ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={chipObject}
+          alt=""
+          className="w-full max-h-[449px] object-contain scale-[1.2]"
+        />
+      ) : null}
     </div>
   );
 }

@@ -6,8 +6,8 @@ import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 export function ApplicationsCta({ data }: { data?: any }) {
   const cta = data?.cta || {};
-  const label = cta.label || "EXPLORE APPLICATION";
-  const href = cta.href || "/applications";
+  const label = cta.label || "";
+  const href = cta.href || "";
   const dotIcon = mediaUrl(cta.dot_icon) || "/applications/cta-dot.svg";
   return (
     <a

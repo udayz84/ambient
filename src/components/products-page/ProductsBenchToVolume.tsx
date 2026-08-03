@@ -190,12 +190,12 @@ function BenchCardView({ card, chipLabel }: { card: any; chipLabel: string }) {
       <div className="relative mt-[20px] flex flex-col items-start gap-[10px] not-italic">
         <DevChip chipLabel={chipLabel} />
         <h3
-          className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium whitespace-nowrap text-white`}
+          className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium whitespace-nowrap text-white overflow-hidden text-ellipsis`}
         >
           {card.title}
         </h3>
         <p
-          className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word]`}
+          className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         >
           {card.description}
         </p>

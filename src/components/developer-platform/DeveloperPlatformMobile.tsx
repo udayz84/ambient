@@ -4,22 +4,20 @@ import { gilroyMedium, interRegular } from "../hero/fonts";
 import { DEVELOPER_PLATFORM_CARDS } from "./developer-platform-cards";
 
 export function DeveloperPlatformMobile({ data }: { data?: any }) {
-  const heading = data?.heading || "Build the impossible today";
-  const subtitle =
-    data?.subtitle ||
-    "Don't let legacy design limit your roadmap. Discover the market-differentiating features of the GPX10 and what's coming next.";
+  const heading = data?.heading || "";
+  const subtitle = data?.subtitle || "";
 
-  // Render the same Strapi cards as desktop, falling back to the hardcoded
-  // config defaults when CMS data is unavailable. Images come from Strapi via
-  // mediaUrl() when present.
+  // Render the same Strapi cards as desktop, falling back to the layout
+  // config defaults when CMS data is unavailable. Images come from Strapi
+  // via mediaUrl() when present.
   const strapiCards: any[] = Array.isArray(data?.cards) ? data.cards : [];
   const cards = DEVELOPER_PLATFORM_CARDS.map((config, index) => {
     const strapiCard = strapiCards[index] || {};
     return {
       key: config.nodeId,
-      title: strapiCard.title ?? config.title,
-      body: strapiCard.body ?? config.body,
-      imageSrc: mediaUrl(strapiCard.image) || config.imageSrc,
+      title: strapiCard.title ?? "",
+      body: strapiCard.body ?? "",
+      imageSrc: mediaUrl(strapiCard.image) || "",
     };
   });
   return (

@@ -176,7 +176,7 @@ function CopilotCta({
         className="pointer-events-none absolute inset-0 opacity-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] transition-opacity duration-200 group-hover:opacity-100"
       />
       <span
-        className={`relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white ${fullWidth ? "text-center" : ""}`}
+        className={`relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white overflow-hidden text-ellipsis ${fullWidth ? "text-center" : ""}`}
       >
         {children}
       </span>

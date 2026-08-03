@@ -912,7 +912,6 @@ const NEWS_LISTING_PAYLOAD = {
     cta_label: "Download Press Kit (.ZIP)",
     cta_file: null,
     file_info: "2.3 MB • Last updated May 2026",
-    icon: media(ASSETS.news_press_icon),
   },
 
   grid: {

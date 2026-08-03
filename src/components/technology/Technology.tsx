@@ -75,7 +75,7 @@ function ChipVisualCorners() {
 }
 
 export function Technology({ data }: { data?: any }) {
-  const tagText = data?.tag?.text || "Real-time AI at edge";
+  const tagText = data?.tag?.text || "";
   return (
     <section
       className="relative left-1/2 h-[930px] w-screen max-w-none -translate-x-1/2 overflow-hidden bg-black max-[1023px]:h-auto"

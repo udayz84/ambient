@@ -1,12 +1,25 @@
 import type { Metadata } from "next";
 import { Careers } from "@/components/careers/Careers";
 import { getSingleType, getCollection } from "@/lib/strapi";
+import { buildMetadata, type SeoData } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Careers | Ambient Scientific",
-  description:
-    "Join Ambient Scientific to re-architect the physics of AI and build the fundamental compute substrate for the next generation of intelligence.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  let seo: SeoData | null = null;
+  try {
+    const data = await getSingleType<{ seo: SeoData | null }>(
+      "careers-page",
+      ["seo"]
+    );
+    seo = data?.seo ?? null;
+  } catch {
+    seo = null;
+  }
+  return buildMetadata(seo, {
+    title: "Careers",
+    description:
+      "Join Ambient Scientific to re-architect the physics of AI and build the fundamental compute substrate for the next generation of intelligence.",
+  });
+}
 
 export default async function CareersPage() {
   let data: any = null;

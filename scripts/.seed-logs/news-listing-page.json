@@ -25,19 +25,156 @@
     ],
     "cta_label": "Download Press Kit (.ZIP)",
     "cta_file": null,
-    "file_info": "2.3 MB • Last updated May 2026",
-    "icon": 139
+    "file_info": "2.3 MB • Last updated May 2026"
   },
   "grid": {
     "filter_pills": [
       {
-        "label": "NEWS"
+        "label": "NEWS",
+        "category_id": "news",
+        "is_active": true,
+        "cards": [
+          {
+            "category": "Blog",
+            "title": "GP Singh interviewed by SemiWiki founder Daniel Nenni",
+            "title_font_size": 22,
+            "excerpt": "Our CEO discusses Ambient Scientific’s ultra low power edge AI, DigAn archi.... ",
+            "image_overlay": 191
+          },
+          {
+            "category": "PRODUCT UPDATE",
+            "title": "Beyond the Bit Episode 02 The Truth About India’s Chip Industry",
+            "title_font_size": 22,
+            "excerpt": "Episode 02 of Beyond the Bit is now live, featuring Saharsh Singhania an... ",
+            "image_overlay": 192
+          },
+          {
+            "category": "Press Release",
+            "title": "PyTorch vs TensorFlow for Production and Edge AI Deployment",
+            "title_font_size": 21,
+            "excerpt": "This article compares PyTorch and TensorFlow from a real-world de... ",
+            "image_overlay": 193
+          },
+          {
+            "category": "EVENT",
+            "title": "Breaking the Von Neumann Bottleneck Coin Cell AI at the Edge",
+            "title_font_size": 21,
+            "excerpt": "In this session, Ambient Scientific explores a new approach to edge AI by a... ",
+            "image_overlay": 194
+          },
+          {
+            "category": "Blog",
+            "title": "Ambient Scientific and Dimension NXG Introduce MAI",
+            "title_font_size": 22,
+            "excerpt": "Ambient Scientific, in collaboration with Dimension NXG, introduces MA... ",
+            "image_overlay": 195
+          },
+          {
+            "category": "WEBINAR",
+            "title": "Boot Blink and Believe Edge AI from Prototype to Production",
+            "title_font_size": 22,
+            "excerpt": "The recording of our webinar Boot Blink and Believe Edge AI from Prototy... ",
+            "image_overlay": 196
+          }
+        ]
       },
       {
-        "label": "PRESS RELEASES"
+        "label": "PRESS RELEASES",
+        "category_id": "press-releases",
+        "is_active": false,
+        "cards": [
+          {
+            "category": "Blog",
+            "title": "GP Singh interviewed by SemiWiki founder Daniel Nenni",
+            "title_font_size": 22,
+            "excerpt": "Our CEO discusses Ambient Scientific’s ultra low power edge AI, DigAn archi.... ",
+            "image_overlay": 191
+          },
+          {
+            "category": "PRODUCT UPDATE",
+            "title": "Beyond the Bit Episode 02 The Truth About India’s Chip Industry",
+            "title_font_size": 22,
+            "excerpt": "Episode 02 of Beyond the Bit is now live, featuring Saharsh Singhania an... ",
+            "image_overlay": 192
+          },
+          {
+            "category": "Press Release",
+            "title": "PyTorch vs TensorFlow for Production and Edge AI Deployment",
+            "title_font_size": 21,
+            "excerpt": "This article compares PyTorch and TensorFlow from a real-world de... ",
+            "image_overlay": 193
+          },
+          {
+            "category": "EVENT",
+            "title": "Breaking the Von Neumann Bottleneck Coin Cell AI at the Edge",
+            "title_font_size": 21,
+            "excerpt": "In this session, Ambient Scientific explores a new approach to edge AI by a... ",
+            "image_overlay": 194
+          },
+          {
+            "category": "Blog",
+            "title": "Ambient Scientific and Dimension NXG Introduce MAI",
+            "title_font_size": 22,
+            "excerpt": "Ambient Scientific, in collaboration with Dimension NXG, introduces MA... ",
+            "image_overlay": 195
+          },
+          {
+            "category": "WEBINAR",
+            "title": "Boot Blink and Believe Edge AI from Prototype to Production",
+            "title_font_size": 22,
+            "excerpt": "The recording of our webinar Boot Blink and Believe Edge AI from Prototy... ",
+            "image_overlay": 196
+          }
+        ]
       },
       {
-        "label": "BLOGS & ARTICLES"
+        "label": "BLOGS & ARTICLES",
+        "category_id": "blogs",
+        "is_active": false,
+        "cards": [
+          {
+            "category": "Blog",
+            "title": "GP Singh interviewed by SemiWiki founder Daniel Nenni",
+            "title_font_size": 22,
+            "excerpt": "Our CEO discusses Ambient Scientific’s ultra low power edge AI, DigAn archi.... ",
+            "image_overlay": 191
+          },
+          {
+            "category": "PRODUCT UPDATE",
+            "title": "Beyond the Bit Episode 02 The Truth About India’s Chip Industry",
+            "title_font_size": 22,
+            "excerpt": "Episode 02 of Beyond the Bit is now live, featuring Saharsh Singhania an... ",
+            "image_overlay": 192
+          },
+          {
+            "category": "Press Release",
+            "title": "PyTorch vs TensorFlow for Production and Edge AI Deployment",
+            "title_font_size": 21,
+            "excerpt": "This article compares PyTorch and TensorFlow from a real-world de... ",
+            "image_overlay": 193
+          },
+          {
+            "category": "EVENT",
+            "title": "Breaking the Von Neumann Bottleneck Coin Cell AI at the Edge",
+            "title_font_size": 21,
+            "excerpt": "In this session, Ambient Scientific explores a new approach to edge AI by a... ",
+            "image_overlay": 194
+          },
+          {
+            "category": "Blog",
+            "title": "Ambient Scientific and Dimension NXG Introduce MAI",
+            "title_font_size": 22,
+            "excerpt": "Ambient Scientific, in collaboration with Dimension NXG, introduces MA... ",
+            "image_overlay": 195
+          },
+          {
+            "category": "WEBINAR",
+            "title": "Boot Blink and Believe Edge AI from Prototype to Production",
+            "title_font_size": 22,
+            "excerpt": "The recording of our webinar Boot Blink and Believe Edge AI from Prototy... ",
+            "image_overlay": 196
+          }
+        ]
       }
     ],
     "load_more_label": "Load More Resources",

@@ -40,13 +40,15 @@ export function LatestNewsCard({
         data-name="NewsSection"
       >
         <div className="absolute top-[-0.09px] left-0 h-[229px] w-[386px] overflow-hidden">
-          <Image
-            src={imageSrc}
-            alt=""
-            fill
-            className={imageClassName}
-            sizes={imageSizes}
-          />
+          {imageSrc ? (
+            <Image
+              src={imageSrc}
+              alt=""
+              fill
+              className={imageClassName}
+              sizes={imageSizes}
+            />
+          ) : null}
         </div>
         <div
           className="absolute top-[-0.09px] left-0 h-[229px] w-[386px] bg-gradient-to-t from-[rgba(0,0,0,0.8)] to-[rgba(0,0,0,0)]"
@@ -60,17 +62,17 @@ export function LatestNewsCard({
           width={180}
           labelOffsetX={categoryOffsetX}
           rightBarLeft={170.48046875}
-          centerLabel={category === "TECHNICAL INSIGHT"}
+          centerLabel={categoryOffsetX === 0 || category === "TECHNICAL INSIGHT"}
         />
 
         <h3
-          className={`${gilroyMedium.className} w-[353.684px] shrink-0 text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} w-[353.684px] shrink-0 text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
         >
           {title}
         </h3>
 
         <p
-          className={`${interRegular.className} w-[346.611px] shrink-0 text-[16px] leading-[24px] font-normal not-italic [word-break:break-word]`}
+          className={`${interRegular.className} w-[346.611px] shrink-0 text-[16px] leading-[24px] font-normal not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         >
           <span className="text-[rgba(240,240,240,0.8)]">{excerpt}</span>{" "}
           <Link href={href} className="text-[#53d824] transition-colors hover:text-[#6ced3f]">
@@ -90,7 +92,7 @@ export function LatestNewsCard({
             />
           </div>
           <p
-            className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#99a1af] not-italic`}
+            className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#99a1af] not-italic overflow-hidden text-ellipsis`}
           >
             {date}
           </p>

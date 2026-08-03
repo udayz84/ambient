@@ -52,12 +52,12 @@ export function ApplicationsFeatureCard({
         </div>
 
         <p
-          className={`${gilroyMedium.className} relative z-[1] w-full min-w-full shrink-0 text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} relative z-[1] w-full min-w-full shrink-0 text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
         >
           {title}
         </p>
         <p
-          className={`${interRegular.className} relative z-[1] w-full min-w-full shrink-0 text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+          className={`${interRegular.className} relative z-[1] w-full min-w-full shrink-0 text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         >
           {description}
         </p>

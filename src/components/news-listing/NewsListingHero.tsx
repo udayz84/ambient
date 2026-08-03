@@ -6,25 +6,19 @@ import { WhiteTag } from "./WhiteTag";
 import { GreenCta } from "./GreenCta";
 
 const FALLBACK_HERO_IMAGE = "/news-listing/hero-bg.png";
-const FALLBACK_TAG = "Product Launch";
-const FALLBACK_TITLE = "Re-architecting the Physics of AI Compute.";
-const FALLBACK_SUBTITLE =
-  "Standard chips waste time. Our architecture processes matrix math for high performance.";
-const FALLBACK_PAGINATION = "NEXT 01/03";
-const FALLBACK_CTA = "Read documentation";
 
 type NewsListingHeroProps = {
   data?: any;
 };
 
 export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
-  const mainBackgroundImage = mediaUrl(data?.background_image) || FALLBACK_HERO_IMAGE;
+  const mainBackgroundImage = mediaUrl(data?.background_image) || "";
   const featuredImage = FALLBACK_HERO_IMAGE;
-  const tagText = (data?.tag?.text as string) || FALLBACK_TAG;
-  const title = (data?.title as string) || FALLBACK_TITLE;
-  const subtitle = (data?.subtitle as string) || FALLBACK_SUBTITLE;
-  const paginationText = (data?.pagination_text as string) || FALLBACK_PAGINATION;
-  const ctaLabel = (data?.cta_label as string) || FALLBACK_CTA;
+  const tagText = (data?.tag?.text as string) || "";
+  const title = (data?.title as string) || "";
+  const subtitle = (data?.subtitle as string) || "";
+  const paginationText = (data?.pagination_text as string) || "";
+  const ctaLabel = (data?.cta_label as string) || "";
 
   return (
     <section
@@ -41,14 +35,16 @@ export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
           data-node-id="2653:686"
           data-name="Image"
         >
-          <Image
-            src={mainBackgroundImage}
-            alt=""
-            fill
-            sizes="1440px"
-            className="object-cover"
-            priority
-          />
+          {mainBackgroundImage ? (
+            <Image
+              src={mainBackgroundImage}
+              alt={data?.alt || ""}
+              fill
+              sizes="1440px"
+              className="object-cover"
+              priority
+            />
+          ) : null}
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0"
@@ -147,14 +143,16 @@ export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
       {/* MOBILE (<1024px) — dedicated responsive layout */}
       <div className="relative w-full min-[1024px]:hidden">
         <div className="relative h-[440px] w-full overflow-hidden">
-          <Image
-            src={mainBackgroundImage}
-            alt=""
-            fill
-            sizes="100vw"
-            className="object-cover"
-            priority
-          />
+          {mainBackgroundImage ? (
+            <Image
+              src={mainBackgroundImage}
+              alt={data?.alt || ""}
+              fill
+              sizes="100vw"
+              className="object-cover"
+              priority
+            />
+          ) : null}
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0"

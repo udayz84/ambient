@@ -55,8 +55,9 @@ export function DeveloperModulesSection({ data }: { data?: any }) {
             ))}
           </h2>
         </div>
+        {/* Description — 2438:4590 (subtitle) */}
         <p
-          className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65`}
+          className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         >
           {subtitle}
         </p>
@@ -116,12 +117,12 @@ function ModuleCard({
       <div className="flex w-full flex-col items-start gap-[20px]">
         <div className="flex w-full flex-col gap-[10px]">
           <p
-            className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white not-italic`}
+            className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
           >
             {title}
           </p>
           <p
-            className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic`}
+            className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:4] overflow-hidden`}
           >
             {description}
           </p>

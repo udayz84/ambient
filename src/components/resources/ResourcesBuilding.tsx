@@ -5,11 +5,6 @@ import { WhiteCtaButton } from "../contact/contact-shared";
 const BUILDING_TITLE_GRADIENT =
   "linear-gradient(122.573deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
-const FALLBACK_HEADING = "Building with Ambient?";
-const FALLBACK_SUBTITLE =
-  "Access the ModelForge SDK, API references, model compilation guides, and hardware documentation.";
-const FALLBACK_CTA_LABEL = "Go to Developer Hub";
-const FALLBACK_CTA_HREF = "#";
 const FALLBACK_BG = "/resources/building-bg.png";
 const BUILDING_TITLE_FRAME = "/resources/building-title-frame.svg";
 
@@ -18,10 +13,10 @@ type ResourcesBuildingProps = {
 };
 
 export function ResourcesBuilding({ data }: ResourcesBuildingProps = {}) {
-  const heading = (data?.heading as string) || FALLBACK_HEADING;
-  const subtitle = (data?.subtitle as string) || FALLBACK_SUBTITLE;
-  const ctaLabel = (data?.cta_label as string) || FALLBACK_CTA_LABEL;
-  const ctaHref = (data?.cta_href as string) || FALLBACK_CTA_HREF;
+  const heading = (data?.heading as string) || "";
+  const subtitle = (data?.subtitle as string) || "";
+  const ctaLabel = (data?.cta_label as string) || "";
+  const ctaHref = (data?.cta_href as string) || "";
   const bgSrc = FALLBACK_BG;
 
   return (

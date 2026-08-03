@@ -78,7 +78,7 @@ export function CompanyEngagementCard({
         />
 
         <p
-          className={`${interRegular.className} mt-[20px] text-[18px] leading-[27px] font-normal text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
+          className={`${interRegular.className} mt-[20px] text-[18px] leading-[27px] font-normal text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:4] overflow-hidden`}
           style={{ width: descriptionWidth }}
         >
           {finalDescription}

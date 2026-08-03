@@ -58,13 +58,15 @@ export function MeasuredProofCard({
         style={{ top: imageTop, width: imageWidth, height: imageHeight }}
       >
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <Image
-            src={imageSrc}
-            alt=""
-            fill
-            className={imageClassName}
-            sizes={imageSizes}
-          />
+          {imageSrc ? (
+            <Image
+              src={imageSrc}
+              alt=""
+              fill
+              className={imageClassName}
+              sizes={imageSizes}
+            />
+          ) : null}
         </div>
       </div>
 

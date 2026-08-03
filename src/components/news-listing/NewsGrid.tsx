@@ -5,7 +5,7 @@ import { interRegular, gilroyMedium } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
 import { NewsArticleCard } from "./NewsArticleCard";
-import { NEWS_ARTICLES, type NewsArticle } from "./news-data";
+import { type NewsArticle } from "./news-data";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const ROW_ONE_BG = "bg-[rgba(255,255,255,0.04)]";
@@ -14,8 +14,6 @@ const ROW_TWO_BG = "bg-[rgba(0,0,0,0.04)]";
 const GREEN_GLOW_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
 
-const FALLBACK_LOAD_MORE_LABEL = "Load More Resources";
-
 type Pill = {
   id: string;
   label: string;
@@ -23,60 +21,37 @@ type Pill = {
   cards: NewsArticle[];
 };
 
-const FALLBACK_CARDS: NewsArticle[] = NEWS_ARTICLES;
-
-const FALLBACK_FILTER_PILLS: Pill[] = [
-  { id: "news", label: "NEWS", active: true, cards: FALLBACK_CARDS },
-  {
-    id: "press-releases",
-    label: "PRESS RELEASES",
-    active: false,
-    cards: FALLBACK_CARDS,
-  },
-  {
-    id: "blogs",
-    label: "BLOGS & ARTICLES",
-    active: false,
-    cards: FALLBACK_CARDS,
-  },
-];
-
 type NewsGridProps = {
   data?: any;
 };
 
 function cardsToArticles(cards: unknown): NewsArticle[] {
-  if (!Array.isArray(cards) || cards.length === 0) return FALLBACK_CARDS;
+  if (!Array.isArray(cards) || cards.length === 0) return [];
   return cards.map((c: any, i: number) => {
-    const fallback = NEWS_ARTICLES[i] || NEWS_ARTICLES[0];
     return {
-      nodeId: (c?.nodeId as string) || fallback.nodeId,
-      category: (c?.category as string) || fallback.category,
-      title: (c?.title as string) || fallback.title,
+      nodeId: (c?.nodeId as string) || `news-card-${i}`,
+      category: (c?.category as string) || "",
+      title: (c?.title as string) || "",
       titleFontSize:
         typeof c?.title_font_size === "number"
           ? c.title_font_size
-          : fallback.titleFontSize,
-      excerpt: (c?.excerpt as string) || fallback.excerpt,
-      imageOverlaySrc:
-        mediaUrl(c?.image_overlay) || fallback.imageOverlaySrc,
+          : undefined,
+      excerpt: (c?.excerpt as string) || "",
+      imageOverlaySrc: mediaUrl(c?.image_overlay) || "",
     };
   });
 }
 
 function buildPills(data: any): Pill[] {
   const raw = Array.isArray(data?.filter_pills) ? data.filter_pills : [];
-  if (raw.length === 0) return FALLBACK_FILTER_PILLS;
-  const pills: Pill[] = raw.map((p: any, i: number) => {
-    const fallback = FALLBACK_FILTER_PILLS[i] || FALLBACK_FILTER_PILLS[0];
+  return raw.map((p: any) => {
     return {
-      id: (p?.category_id as string) || fallback.id,
-      label: (p?.label as string) || fallback.label,
+      id: (p?.category_id as string) || "",
+      label: (p?.label as string) || "",
       active: Boolean(p?.is_active),
       cards: cardsToArticles(p?.cards),
     };
   });
-  return pills.length > 0 ? pills : FALLBACK_FILTER_PILLS;
 }
 
 function Tick({ height, tone }: { height: number; tone: "white" | "dark" }) {
@@ -200,15 +175,14 @@ function LoadMoreCta({ label }: { label: string }) {
 
 export function NewsGrid({ data }: NewsGridProps = {}) {
   const pills = buildPills(data);
-  const loadMoreLabel =
-    (data?.load_more_label as string) || FALLBACK_LOAD_MORE_LABEL;
+  const loadMoreLabel = (data?.load_more_label as string) || "";
 
   const initialActiveId =
-    pills.find((p) => p.active)?.id || pills[0]?.id || "news";
+    pills.find((p) => p.active)?.id || pills[0]?.id || "";
   const [activeId, setActiveId] = useState(initialActiveId);
 
   const activePill = pills.find((p) => p.id === activeId) || pills[0];
-  const activeCards = activePill?.cards || FALLBACK_CARDS;
+  const activeCards: NewsArticle[] = activePill?.cards || [];
 
   return (
     <section

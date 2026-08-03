@@ -6,11 +6,6 @@ import { mediaUrl } from "@/lib/strapi";
 import { MeasuredProofCard } from "./MeasuredProofCard";
 
 type FallbackCard = {
-  nodeId: string;
-  metric: string;
-  label: string;
-  description: string;
-  imageSrc: string;
   imageWidth: number;
   imageHeight: number;
   imageTop: number;
@@ -24,12 +19,6 @@ type FallbackCard = {
 
 const FALLBACK_CARDS: FallbackCard[] = [
   {
-    nodeId: "2379:1504",
-    metric: "100x",
-    label: "LOWER POWER CONSUMPTION",
-    description:
-      "Extend battery life at the edge and lower energy Opex in more compute-intensive environments",
-    imageSrc: "/measured-proof/card-power.png",
     imageWidth: 270.353,
     imageHeight: 250,
     imageTop: 161,
@@ -40,12 +29,6 @@ const FALLBACK_CARDS: FallbackCard[] = [
     descriptionWidth: 290,
   },
   {
-    nodeId: "2379:1524",
-    metric: "25x",
-    label: "AI PERFORMANCE",
-    description:
-      "Unlock richer models, faster local inference, and more capable intelligence in constrained systems",
-    imageSrc: "/measured-proof/card-ai.png",
     imageWidth: 331.144,
     imageHeight: 260,
     imageTop: 169,
@@ -55,12 +38,6 @@ const FALLBACK_CARDS: FallbackCard[] = [
     statJustifyEnd: true,
   },
   {
-    nodeId: "2379:1539",
-    metric: "10x",
-    label: "COMPUTE DENSITY",
-    description:
-      "Pack more intelligence into the same footprint without scaling power and system complexity the old way",
-    imageSrc: "/measured-proof/card-density.png",
     imageWidth: 305.672,
     imageHeight: 240,
     imageTop: 174.67,
@@ -69,12 +46,6 @@ const FALLBACK_CARDS: FallbackCard[] = [
     descriptionWidth: 317,
   },
   {
-    nodeId: "2379:1554",
-    metric: "100%",
-    label: "PROGRAMMABLE DESIGN",
-    description:
-      "Preserve the freedom to build differentiated AI systems without locking into rigid fixed-function tradeoffs",
-    imageSrc: "/measured-proof/card-programmable.png",
     imageWidth: 218.055,
     imageHeight: 260,
     imageTop: 151,
@@ -126,19 +97,15 @@ function getCardMotion(progress: number, index: number) {
 }
 
 export function MeasuredProofCards({ data }: { data?: any }) {
-  const cards = (Array.isArray(data?.stat_cards) && data.stat_cards.length
-    ? data.stat_cards
-    : FALLBACK_CARDS
-  ).map((card: any, index: number) => {
+  const statCards: any[] = Array.isArray(data?.stat_cards) ? data.stat_cards : [];
+  const cards = statCards.map((card: any, index: number) => {
     const fallback: FallbackCard = FALLBACK_CARDS[index] || ({} as FallbackCard);
-    const imageSrc =
-      mediaUrl(card?.image) || fallback.imageSrc || "/measured-proof/card-power.png";
     return {
       nodeId: `2379:1504-${index}`,
-      metric: card?.metric ?? fallback.metric ?? "",
-      label: card?.label ?? fallback.label ?? "",
-      description: card?.description ?? fallback.description ?? "",
-      imageSrc,
+      metric: card?.metric ?? "",
+      label: card?.label ?? "",
+      description: card?.description ?? "",
+      imageSrc: mediaUrl(card?.image) || "",
       imageWidth: fallback.imageWidth ?? 331,
       imageHeight: fallback.imageHeight ?? 260,
       imageTop: fallback.imageTop ?? 169,

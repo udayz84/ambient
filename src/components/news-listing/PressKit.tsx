@@ -17,12 +17,6 @@ const BADGE_GRADIENT =
 const GREEN_GLOW_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
 
-const FALLBACK_MENUS = ["Logos & Marks", "Executive Photos", "Product Renders"];
-const FALLBACK_HEADING = "Writing about Ambient?";
-const FALLBACK_SUBTITLE =
-  "Download official brand assets, executive bios, and high-resolution hardware photography.";
-const FALLBACK_CTA = "Download Press Kit (.ZIP)";
-const FALLBACK_FILE_INFO = "2.3 MB • Last updated May 2026";
 const FALLBACK_ICON = "/news-listing/press-icon.svg";
 const PRESS_TITLE_FRAME = "/news-listing/press-title-frame.svg";
 
@@ -201,18 +195,17 @@ function PressCluster({ iconSrc }: { iconSrc: string }) {
 }
 
 export function PressKit({ data }: PressKitProps = {}) {
-  const heading = (data?.heading as string) || FALLBACK_HEADING;
-  const subtitle = (data?.subtitle as string) || FALLBACK_SUBTITLE;
-  const ctaLabel = (data?.cta_label as string) || FALLBACK_CTA;
+  const heading = (data?.heading as string) || "";
+  const subtitle = (data?.subtitle as string) || "";
+  const ctaLabel = (data?.cta_label as string) || "";
   const ctaHref = mediaUrl(data?.cta_file) || "#";
-  const fileInfo = (data?.file_info as string) || FALLBACK_FILE_INFO;
-  const iconSrc = mediaUrl(data?.icon) || FALLBACK_ICON;
-  const menus: string[] =
-    Array.isArray(data?.menus) && data.menus.length > 0
-      ? data.menus
-          .map((m: any) => m?.label)
-          .filter((label: unknown): label is string => typeof label === "string")
-      : FALLBACK_MENUS;
+  const fileInfo = (data?.file_info as string) || "";
+  const iconSrc = FALLBACK_ICON;
+  const menus: string[] = Array.isArray(data?.menus)
+    ? data.menus
+        .map((m: any) => m?.label)
+        .filter((label: unknown): label is string => typeof label === "string")
+    : [];
 
   return (
     <section

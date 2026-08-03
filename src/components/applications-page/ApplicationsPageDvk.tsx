@@ -371,7 +371,7 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
   const features: string[] = Array.isArray(data?.features)
     ? data.features.map(
         (f: { title?: string } | null, i: number) =>
-          f?.title || FALLBACK_FEATURES[i],
+          f?.title || FALLBACK_FEATURES[i] || FALLBACK_FEATURES[0] || "",
       )
     : FALLBACK_FEATURES;
 

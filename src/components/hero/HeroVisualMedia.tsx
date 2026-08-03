@@ -2,9 +2,6 @@
 
 import { useEffect, useRef } from "react";
 
-const HERO_VISUAL_WEBM = "/hero/Ambient Hero Dummy Video.webm";
-const HERO_VISUAL_MOBILE_MP4 = "/mobile/Keep_camera_angle_202604021718.mp4";
-
 export function HeroVisualMedia({
   mobile = false,
   videoSrc,
@@ -16,7 +13,7 @@ export function HeroVisualMedia({
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !videoSrc) return;
 
     const play = () => {
       void video.play().catch(() => undefined);
@@ -27,11 +24,14 @@ export function HeroVisualMedia({
     } else {
       video.addEventListener("loadeddata", play, { once: true });
     }
-  }, []);
+  }, [videoSrc]);
 
-  const fallbackSrc = mobile ? HERO_VISUAL_MOBILE_MP4 : HERO_VISUAL_WEBM;
-  const src = videoSrc || fallbackSrc;
+  const src = videoSrc;
   const type = mobile ? "video/mp4" : "video/webm";
+
+  if (!src) {
+    return null;
+  }
 
   return (
     <video

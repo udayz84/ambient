@@ -112,7 +112,7 @@ export function DeveloperCodeSection({ data }: { data?: any }) {
           </h2>
         </div>
         <p
-          className={`${interRegular.className} w-[500px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65 [word-break:break-word]`}
+          className={`${interRegular.className} w-[500px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
           data-node-id="2640:1224"
         >
           {subtitle}
@@ -277,12 +277,12 @@ function ArticleCard({
       {/* Text — 3586:1385 */}
       <div className="flex min-w-px flex-[1_0_0] flex-col items-start gap-[10px]">
         <p
-          className={`${gilroyRegular.className} w-full text-[26px] leading-[29px] font-normal text-white not-italic [word-break:break-word]`}
+          className={`${gilroyRegular.className} w-full text-[26px] leading-[29px] font-normal text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
         >
           {article.title}
         </p>
         <p
-          className={`${interRegular.className} w-[438.651px] text-[18px] leading-[27px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
+          className={`${interRegular.className} w-[438.651px] text-[18px] leading-[27px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         >
           {article.description}
         </p>

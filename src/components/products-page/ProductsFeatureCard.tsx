@@ -161,14 +161,14 @@ export function ProductsFeatureCard({
           <div
             className={`${gilroyMedium.className} relative shrink-0 text-[38px] leading-[0] font-medium whitespace-nowrap text-white not-italic`}
           >
-            <p className="mb-0 leading-[47px] whitespace-pre">
+            <p className="mb-0 overflow-hidden text-ellipsis leading-[47px] whitespace-pre">
               {card.titleLines[0]}
             </p>
-            <p className="leading-[47px] whitespace-pre">{card.titleLines[1]}</p>
+            <p className="overflow-hidden text-ellipsis leading-[47px] whitespace-pre">{card.titleLines[1]}</p>
           </div>
         ) : (
           <p
-            className={`${gilroyMedium.className} relative shrink-0 text-[38px] leading-[47px] font-medium text-white not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} relative shrink-0 text-[38px] leading-[47px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
             style={card.titleWidth ? { width: `${card.titleWidth}px` } : undefined}
           >
             {card.title}
@@ -181,7 +181,7 @@ export function ProductsFeatureCard({
 
       {/* description */}
       <p
-        className={`${interRegular.className} absolute bottom-[126px] left-[calc(50%-164px)] w-[328px] translate-y-full text-[16px] leading-[24px] font-normal text-white not-italic opacity-90 [word-break:break-word]`}
+        className={`${interRegular.className} absolute bottom-[126px] left-[calc(50%-164px)] w-[328px] translate-y-full text-[16px] leading-[24px] font-normal text-white not-italic opacity-90 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
       >
         {card.description}
       </p>

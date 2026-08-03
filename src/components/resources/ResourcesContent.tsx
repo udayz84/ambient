@@ -3,9 +3,7 @@
 import Image from "next/image";
 import { Fragment, useEffect, useState } from "react";
 import { interRegular } from "../hero/fonts";
-import { GreenCtaButton } from "../contact/contact-shared";
 import {
-  RESOURCE_ARTICLES,
   RESOURCE_CATEGORIES,
   filterCategoryId,
   type ResourceArticle,
@@ -17,7 +15,6 @@ const scrollArrowLeft = "/applications/nav-arrow-right.svg";
 const DEFAULT_INITIAL_VISIBLE = 6;
 const DEFAULT_LOAD_MORE_COUNT = 3;
 const LOAD_MORE_DELAY_MS = 800;
-const FALLBACK_LOAD_MORE_LABEL = "Load More Resources";
 const FALLBACK_BG = "/resources/image-107.png";
 
 const IMAGE_107_GRADIENT =
@@ -32,24 +29,15 @@ type Category = {
 
 function buildCategories(data: any): Category[] {
   const strapiCats = Array.isArray(data?.categories) ? data.categories : [];
-  if (strapiCats.length === 0) {
-    return RESOURCE_CATEGORIES.map((c) => ({
-      id: c.id,
-      label: c.label,
-      nodeId: c.nodeId,
-      active: "active" in c ? c.active : undefined,
-    }));
-  }
-  const result: Category[] = strapiCats.map((c: any, i: number) => {
-    const fallback = RESOURCE_CATEGORIES[i] || RESOURCE_CATEGORIES[0];
+  return strapiCats.map((c: any, i: number) => {
+    const layout = RESOURCE_CATEGORIES[i] || RESOURCE_CATEGORIES[0];
     return {
-      id: (c?.category_id as string) || fallback.id,
-      label: (c?.label as string) || fallback.label,
-      nodeId: fallback.nodeId,
+      id: (c?.category_id as string) || "",
+      label: (c?.label as string) || "",
+      nodeId: layout.nodeId,
       active: Boolean(c?.is_active),
     };
   });
-  return result;
 }
 
 type ResourcesContentProps = {
@@ -72,12 +60,10 @@ export function ResourcesContent({
     typeof data?.load_more_count === "number"
       ? data.load_more_count
       : DEFAULT_LOAD_MORE_COUNT;
-  const loadMoreLabel =
-    (data?.load_more_label as string) || FALLBACK_LOAD_MORE_LABEL;
+  const loadMoreLabel = (data?.load_more_label as string) || "";
   const bgSrc = FALLBACK_BG;
 
-  const allArticles =
-    articles && articles.length > 0 ? articles : RESOURCE_ARTICLES;
+  const allArticles = Array.isArray(articles) ? articles : [];
 
   const initialActiveId =
     categories.find((c) => c.active)?.id || categories[0]?.id || "webinar";

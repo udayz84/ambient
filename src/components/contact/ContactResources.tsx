@@ -13,14 +13,6 @@ const GLASS_BACKGROUND = `
   linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(10, 15, 20, 0.3) 25%, rgba(10, 15, 20, 0.4) 100%)
 `;
 
-const DEFAULT_HEADING = "Looking for immediate resources?";
-
-const DEFAULT_CTAS = [
-  { label: "Download Datasheets & SDK", href: "#", variant: "primary" },
-  { label: "Download Press Kit", href: "#", variant: "secondary" },
-  { label: "Case Studies & Whitepapers", href: "#", variant: "secondary" },
-] as const;
-
 // Strapi shared.button variants are `primary | secondary | ghost`.
 // `primary` renders the green CTA; everything else renders the white CTA.
 function isPrimaryCta(variant: string | undefined): boolean {
@@ -29,9 +21,9 @@ function isPrimaryCta(variant: string | undefined): boolean {
 
 export function ContactResources({ data }: { data?: any }) {
   const [isVisible, setIsVisible] = useState(false);
-  const heading = data?.heading || DEFAULT_HEADING;
+  const heading = data?.heading || "";
   const ctas: ReadonlyArray<{ label: string; href: string; variant: string }> =
-    Array.isArray(data?.ctas) && data.ctas.length > 0 ? data.ctas : DEFAULT_CTAS;
+    Array.isArray(data?.ctas) ? data.ctas : [];
 
   useEffect(() => {
     const timer = window.setTimeout(() => setIsVisible(true), RESOURCES_DELAY_MS);

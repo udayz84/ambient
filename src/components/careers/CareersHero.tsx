@@ -5,18 +5,14 @@ import { RepelDots } from "../shared/RepelDots";
 import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
 
-const HERO_TITLE_FALLBACK = "Re-architect the\nphysics of AI";
-
 export function CareersHero({ data }: { data?: any }) {
-  const bgImg = mediaUrl(data?.background_image) || "/careers/hero-bg.png";
-  const titleText = data?.title || HERO_TITLE_FALLBACK;
+  const bgImg = mediaUrl(data?.background_image);
+  const titleText = data?.title || "";
   const titleLines = titleText.split("\n");
-  const subtitle =
-    data?.subtitle ||
-    "Don't iterate on legacy silicon. Build the fundamental compute substrate for the next generation of intelligence.";
-  const ctaLabel = data?.cta_label || "VIEW OPEN ROLES";
-  const ctaHref = data?.cta_href || "#open-roles";
-  const scrollText = data?.scroll_text || "SCROLL";
+  const subtitle = data?.subtitle || "";
+  const ctaLabel = data?.cta_label || "";
+  const ctaHref = data?.cta_href || "";
+  const scrollText = data?.scroll_text || "";
 
   return (
     <section
@@ -34,12 +30,14 @@ export function CareersHero({ data }: { data?: any }) {
           data-name="image 105"
         >
           <div className="absolute inset-0 overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={bgImg}
-              alt=""
-              className="absolute top-0 left-[0.05%] h-full w-[99.91%] max-w-none object-cover"
-            />
+            {bgImg ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={bgImg}
+                alt={data?.alt || ""}
+                className="absolute top-0 left-[0.05%] h-full w-[99.91%] max-w-none object-cover"
+              />
+            ) : null}
           </div>
           {/* Edge fade gradients for large screens */}
           <div className="absolute inset-y-0 left-0 w-[200px] bg-gradient-to-r from-black to-transparent max-[1442px]:hidden" />

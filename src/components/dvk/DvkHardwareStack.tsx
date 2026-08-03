@@ -147,7 +147,7 @@ function SpecCard({
       <div className="flex w-full flex-col items-start">
         <div className="flex w-full flex-col gap-[10px]">
           <p
-            className={`${gilroyMedium.className} w-full shrink-0 text-[22px] leading-[28px] text-white not-italic`}
+            className={`${gilroyMedium.className} w-full shrink-0 text-[22px] leading-[28px] text-white not-italic overflow-hidden text-ellipsis whitespace-nowrap`}
           >
             {card.title}
           </p>
@@ -156,7 +156,7 @@ function SpecCard({
           >
             {card.items.map((item) => (
               <li key={item} className="ms-[24px]">
-                <span className="leading-[24px]">{item}</span>
+                <span className="leading-[24px] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">{item}</span>
               </li>
             ))}
           </ul>

@@ -307,13 +307,13 @@ function ModelForgeCard({ step }: { step: any }) {
           data-name="Frame 1618875841"
         >
           <h3
-            className={`${gilroyMedium.className} w-[333.991px] shrink-0 text-[32px] leading-[38px] font-medium text-white`}
+            className={`${gilroyMedium.className} w-[333.991px] shrink-0 text-[32px] leading-[38px] font-medium text-white [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
           >
             {step.title}
           </h3>
 
           <p
-            className={`${interRegular.className} w-[333.99px] shrink-0 text-[16px] leading-[26px] font-normal text-[#99a1af] tracking-[-0.3125px]`}
+            className={`${interRegular.className} w-[333.99px] shrink-0 text-[16px] leading-[26px] font-normal text-[#99a1af] tracking-[-0.3125px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
           >
             {step.description}
           </p>

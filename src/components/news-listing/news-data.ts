@@ -4,7 +4,7 @@ export type NewsArticle = {
   title: string;
   titleFontSize?: number;
   excerpt: string;
-  imageOverlaySrc: string;
+  imageOverlaySrc?: string;
 };
 
 export const NEWS_ARTICLE_IMAGE_BASE = "/resources/article-image-base.png";

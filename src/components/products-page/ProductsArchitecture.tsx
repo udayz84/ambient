@@ -301,7 +301,7 @@ function ArchStatView({ stat }: { stat: any }) {
 
       {/* Title */}
       <h3
-        className={`${gilroyMedium.className} m-0 text-[32px] leading-[38px] font-medium text-white not-italic [word-break:break-word]`}
+        className={`${gilroyMedium.className} m-0 text-[32px] leading-[38px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
         style={{ width: stat.titleWidth }}
       >
         {stat.title}
@@ -314,7 +314,7 @@ function ArchStatView({ stat }: { stat: any }) {
         data-name="Content"
       >
         <p
-          className={`${interRegular.className} m-0 w-full text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+          className={`${interRegular.className} m-0 w-full text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
         >
           {stat.description}
         </p>
@@ -398,12 +398,12 @@ function ProductsArchitectureMobile({
               />
             </div>
             <h3
-              className={`${gilroyMedium.className} text-[24px] leading-[30px] font-medium text-white not-italic`}
+              className={`${gilroyMedium.className} text-[24px] leading-[30px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
             >
               {stat.title}
             </h3>
             <p
-              className={`${interRegular.className} text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
+              className={`${interRegular.className} text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
             >
               {stat.description}
             </p>

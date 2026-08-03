@@ -8,8 +8,6 @@ import { ResourcesFeaturedCard } from "./ResourcesFeaturedCard";
 
 const FADE_IN_CLASS = "animate-hero-text-fade-in opacity-0";
 
-const FALLBACK_HEADING = "Featured Resources";
-
 type ResourcesFeaturedProps = {
   data?: any;
 };
@@ -33,28 +31,25 @@ type MergedCard = {
 
 function buildCards(data: any): MergedCard[] {
   const strapiCards = Array.isArray(data?.cards) ? data.cards : [];
-  const layoutCount = FEATURED_RESOURCES.length;
-  const totalCount = Math.max(layoutCount, strapiCards.length);
 
-  return Array.from({ length: totalCount }, (_, i): MergedCard => {
+  return strapiCards.map((card: any, i: number): MergedCard => {
     const layout = FEATURED_RESOURCES[i] ?? FEATURED_RESOURCES[0];
-    const card = strapiCards[i] ?? {};
     return {
       nodeId: layout.nodeId,
       imageNodeId: layout.imageNodeId,
       imageWidth: layout.imageWidth,
-      imageSrc: mediaUrl(card.image) || layout.imageSrc,
+      imageSrc: mediaUrl(card?.image) || "",
       imageClassName: layout.imageClassName,
       badgeNodeId: layout.badgeNodeId,
-      badgeLabel: (card.badge_label as string) || layout.badgeLabel,
+      badgeLabel: (card?.badge_label as string) || "",
       badgeVariant:
-        (card.badge_variant as "white" | "stacked") || layout.badgeVariant,
-      title: (card.title as string) || undefined,
-      description: (card.description as string) || undefined,
-      ctaLabel: (card.cta_label as string) || undefined,
-      ctaHref: (card.cta_href as string) || undefined,
-      pdfUrl: mediaUrl(card.pdf_file) || undefined,
-      enableDownloadPopup: Boolean(card.enable_download_popup),
+        (card?.badge_variant as "white" | "stacked") || layout.badgeVariant,
+      title: (card?.title as string) || undefined,
+      description: (card?.description as string) || undefined,
+      ctaLabel: (card?.cta_label as string) || undefined,
+      ctaHref: (card?.cta_href as string) || undefined,
+      pdfUrl: mediaUrl(card?.pdf_file) || undefined,
+      enableDownloadPopup: Boolean(card?.enable_download_popup),
     };
   });
 }
@@ -81,7 +76,7 @@ export function ResourcesFeatured({ data }: ResourcesFeaturedProps = {}) {
     return () => observer.disconnect();
   }, []);
 
-  const heading = (data?.heading as string) || FALLBACK_HEADING;
+  const heading = (data?.heading as string) || "";
   const cards = buildCards(data);
 
   return (

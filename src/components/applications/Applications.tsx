@@ -7,14 +7,11 @@ import { ApplicationsFeatureCard } from "./ApplicationsFeatureCard";
 import { ApplicationsHeader } from "./ApplicationsHeader";
 import { ApplicationsHeroVisual } from "./ApplicationsHeroVisual";
 import { ApplicationsMobile } from "./ApplicationsMobile";
-import { APPLICATION_TABS, FEATURE_CARDS } from "./applications-data";
 
 const INITIAL_ACTIVE_INDEX = 3;
 
 export function Applications({ data }: { data?: any }) {
-  const tabs: any[] = Array.isArray(data?.tabs)
-    ? data.tabs
-    : APPLICATION_TABS.map((label) => ({ label }));
+  const tabs: any[] = Array.isArray(data?.tabs) ? data.tabs : [];
 
   // NOTE: `active_tab` is NOT a field in the Strapi `home.applications` schema,
   // so it is intentionally ignored here. The initial tab falls back to the
@@ -40,20 +37,15 @@ export function Applications({ data }: { data?: any }) {
     });
   };
 
-  const activeTab = tabs[activeIndex]?.label || APPLICATION_TABS[0];
+  const activeTab = tabs[activeIndex]?.label || "";
 
   // feature_cards are nested INSIDE each tab in the schema (home.app-tab).
-  // Fall back to hardcoded pair when the active tab has no Strapi cards.
   const activeTabData = tabs[activeIndex];
   const strapiFeatureCards: any[] = Array.isArray(activeTabData?.feature_cards)
     ? activeTabData.feature_cards
     : [];
-  const featureCards: any[] =
-    strapiFeatureCards.length > 0
-      ? strapiFeatureCards
-      : [FEATURE_CARDS.left, FEATURE_CARDS.right];
-  const leftCard = featureCards[0] || FEATURE_CARDS.left;
-  const rightCard = featureCards[1] || FEATURE_CARDS.right;
+  const leftCard = strapiFeatureCards[0] || {};
+  const rightCard = strapiFeatureCards[1] || {};
 
   return (
     <section
@@ -83,11 +75,8 @@ export function Applications({ data }: { data?: any }) {
           <ApplicationsFeatureCard
             wrapperNodeId="2379:925"
             contentNodeId="2379:926"
-            title={leftCard?.title ?? "Tire Pressure Monitoring"}
-            description={
-              leftCard?.description ??
-              "On-device air pressure and temperature sensors provide real-time alerts for tire health to prevent accidents and optimize maintenance and fuel expenses"
-            }
+            title={leftCard?.title ?? ""}
+            description={leftCard?.description ?? ""}
             background="rgba(0, 0, 0, 0.1)"
             height={198}
             position="left"
@@ -95,11 +84,8 @@ export function Applications({ data }: { data?: any }) {
           <ApplicationsFeatureCard
             wrapperNodeId="2379:917"
             contentNodeId="2379:918"
-            title={rightCard?.title ?? "Battery Management"}
-            description={
-              rightCard?.description ??
-              "Monitoring of cell utilization, charging patterns, heat generation, etc. in electric vehicle batteries to prevent mishaps and optimize battery life"
-            }
+            title={rightCard?.title ?? ""}
+            description={rightCard?.description ?? ""}
             background="rgba(21, 21, 21, 0.1)"
             height={174}
             position="right"
@@ -112,7 +98,7 @@ export function Applications({ data }: { data?: any }) {
       <div className="relative w-full min-[1024px]:hidden">
         <ApplicationsMobile
           tabs={tabs}
-          featureCards={featureCards}
+          featureCards={strapiFeatureCards}
           data={data}
           categoryActiveIndex={activeIndex}
           setCategoryActiveIndex={setActiveIndex}

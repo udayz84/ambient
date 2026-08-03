@@ -338,26 +338,30 @@ function CompanyLeadershipMobile({ data }: { data?: any }) {
       </div>
 
       {/* ===== Advisory board ===== */}
-      <div className="mt-[47px] px-[21px] pt-[30px]">
-        <div className="relative mx-auto h-[62px] w-[350px]">
-          <div
-            className="pointer-events-none absolute left-1/2 top-[4px] h-[54px] w-[353px] -translate-x-1/2"
-            aria-hidden
-          >
-            <Corners />
+      {(advisoryMembers ?? ADVISORY_BOARD).length > 0 ? (
+        <>
+          <div className="mt-[47px] px-[21px] pt-[30px]">
+            <div className="relative mx-auto h-[62px] w-[350px]">
+              <div
+                className="pointer-events-none absolute left-1/2 top-[4px] h-[54px] w-[353px] -translate-x-1/2"
+                aria-hidden
+              >
+                <Corners />
+              </div>
+              <h2
+                className={`${gilroyMedium.className} absolute inset-x-0 top-[13px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+                style={{ backgroundImage: gradient("114.188deg") }}
+              >
+                Advisory Board
+              </h2>
+            </div>
           </div>
-          <h2
-            className={`${gilroyMedium.className} absolute inset-x-0 top-[13px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
-            style={{ backgroundImage: gradient("114.188deg") }}
-          >
-            Advisory Board
-          </h2>
-        </div>
-      </div>
 
-      <div className="mt-[34px]">
-        <LeadershipCarousel members={advisoryMembers ?? ADVISORY_BOARD} variant="advisory" />
-      </div>
+          <div className="mt-[34px]">
+            <LeadershipCarousel members={advisoryMembers ?? ADVISORY_BOARD} variant="advisory" />
+          </div>
+        </>
+      ) : null}
     </section>
   );
 }

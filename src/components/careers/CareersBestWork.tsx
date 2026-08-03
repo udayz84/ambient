@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { CornerDecor, GradientTitle } from "../contact/contact-shared";
-import { CAREERS_WORK_CARDS } from "./careers-data";
 import { CareersGradientCard } from "./careers-shared";
 import { mediaUrl } from "@/lib/strapi";
 import type { CareersValueCard } from "./careers-data";
@@ -13,19 +12,13 @@ export function CareersBestWork({ data }: { data?: any }) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
-  const heading = data?.heading || "Do the best work of your life";
+  const heading = data?.heading || "";
   const cards: CareersValueCard[] = (
-    data?.cards && Array.isArray(data.cards) && data.cards.length > 0
-      ? data.cards
-      : CAREERS_WORK_CARDS
-  ).map((c: any, i: number) => ({
-    icon:
-      mediaUrl(c?.icon) ||
-      CAREERS_WORK_CARDS[i]?.icon ||
-      "",
-    title: c?.title || CAREERS_WORK_CARDS[i]?.title || "",
-    description:
-      c?.description || CAREERS_WORK_CARDS[i]?.description || "",
+    Array.isArray(data?.cards) ? data.cards : []
+  ).map((c: any) => ({
+    icon: mediaUrl(c?.icon) || "",
+    title: c?.title || "",
+    description: c?.description || "",
   }));
 
   useEffect(() => {
@@ -75,7 +68,7 @@ export function CareersBestWork({ data }: { data?: any }) {
       >
         {cards.map((card, index) => (
           <CareersGradientCard
-            key={card.title}
+            key={`best-work-card-${index}`}
             card={card}
             nodeId={index === 0 ? "2379:8719" : index === 1 ? "2379:8730" : "2379:8743"}
           />

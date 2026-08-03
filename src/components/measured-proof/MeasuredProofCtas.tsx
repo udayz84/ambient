@@ -15,17 +15,13 @@ export function MeasuredProofCtas({ data }: { data?: any }) {
   const find = (variant: string) =>
     ctas.find((c) => (c?.variant || "").toLowerCase() === variant);
 
-  const primary =
-    find("primary") ||
-    { label: "SEE WHAT WE CAN DO", href: "/technology", variant: "primary" };
-  const secondary =
-    find("secondary") ||
-    { label: "Explore ambient store", href: "/products", variant: "secondary" };
+  const primary = find("primary") || { variant: "primary" };
+  const secondary = find("secondary") || { variant: "secondary" };
 
-  const primaryLabel = primary.label || "SEE WHAT WE CAN DO";
-  const primaryHref = primary.href || "/technology";
-  const secondaryLabel = secondary.label || "Explore ambient store";
-  const secondaryHref = secondary.href || "/products";
+  const primaryLabel = primary.label || "";
+  const primaryHref = primary.href || "";
+  const secondaryLabel = secondary.label || "";
+  const secondaryHref = secondary.href || "";
 
   return (
     <div

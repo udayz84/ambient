@@ -1,12 +1,25 @@
 import type { Metadata } from "next";
 import { Company } from "@/components/company/Company";
 import { getSingleType } from "@/lib/strapi";
+import { buildMetadata, type SeoData } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Company | Ambient Scientific",
-  description:
-    "A new paradigm for efficient AI compute. We build energy-aware, programmable, mixed-signal AI processors that unlock orders-of-magnitude improvements in performance-per-watt.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  let seo: SeoData | null = null;
+  try {
+    const data = await getSingleType<{ seo: SeoData | null }>(
+      "company-page",
+      ["seo"]
+    );
+    seo = data?.seo ?? null;
+  } catch {
+    seo = null;
+  }
+  return buildMetadata(seo, {
+    title: "Company",
+    description:
+      "A new paradigm for efficient AI compute. We build energy-aware, programmable, mixed-signal AI processors that unlock orders-of-magnitude improvements in performance-per-watt.",
+  });
+}
 
 export default async function CompanyPage() {
   let data: any = null;

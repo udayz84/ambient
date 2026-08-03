@@ -135,12 +135,12 @@ function DvkIntegratedModulesDesktop({
               )}
             </div>
             <div className="relative mt-[20px] flex items-center justify-between gap-[10px] not-italic">
-              <h3 className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium whitespace-nowrap text-white`}>
+              <h3 className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium whitespace-nowrap text-white overflow-hidden text-ellipsis`}>
                 {card.title}
               </h3>
               <DevChip />
             </div>
-            <p className={`${interRegular.className} mt-[10px] w-full text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word]`}>
+            <p className={`${interRegular.className} mt-[10px] w-full text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}>
               {card.description}
             </p>
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />

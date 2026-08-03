@@ -4,7 +4,6 @@ import { useCallback, useState } from "react";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import {
   DEFAULT_GPX_INDEX,
-  GPX_PRODUCTS,
   type GpxProduct,
 } from "./platform-scale-data";
 import { Corners } from "../shared/Corners";
@@ -23,11 +22,19 @@ const LABEL_GAP = 10;
 const TRANSITION_MS = 700;
 const TRANSITION_EASING = "cubic-bezier(0.4, 0, 0.2, 1)";
 
+const EMPTY_PRODUCT: GpxProduct = {
+  id: "",
+  label: "",
+  description: "",
+  chip_image: null,
+};
+
 function getVirtualProduct(
   virtualIndex: number,
   products: GpxProduct[]
 ): GpxProduct {
-  const total = products.length || 1;
+  if (products.length === 0) return EMPTY_PRODUCT;
+  const total = products.length;
   return products[((virtualIndex % total) + total) % total];
 }
 
@@ -185,12 +192,14 @@ function CarouselChipItem({
           }}
         >
           <div className="relative size-full shadow-[0px_21px_20px_0px_#0d2006]">
-            <img
-              alt=""
-              src={mediaUrl(product.chip_image) || "/platform-scale/chip-hero.png"}
-              className="pointer-events-none absolute inset-0 size-full max-w-none object-bottom"
-              aria-hidden
-            />
+            {mediaUrl(product.chip_image) ? (
+              <img
+                alt=""
+                src={mediaUrl(product.chip_image) as string}
+                className="pointer-events-none absolute inset-0 size-full max-w-none object-bottom"
+                aria-hidden
+              />
+            ) : null}
           </div>
 
           <div className="absolute top-[-7.69921875px] right-[-6.900390625px] bottom-[-11.013671875px] left-[-6.900390625px]">
@@ -228,12 +237,14 @@ function CarouselChipItem({
           }}
         >
           <div className="relative size-full">
-            <img
-              alt=""
-              src={mediaUrl(product.chip_image) || "/platform-scale/chip-hero.png"}
-              className="pointer-events-none absolute inset-0 size-full max-w-none object-bottom"
-              aria-hidden
-            />
+            {mediaUrl(product.chip_image) ? (
+              <img
+                alt=""
+                src={mediaUrl(product.chip_image) as string}
+                className="pointer-events-none absolute inset-0 size-full max-w-none object-bottom"
+                aria-hidden
+              />
+            ) : null}
           </div>
 
           <div className="absolute top-[-7.69921875px] right-[-6.900390625px] bottom-[-11.013671875px] left-[-6.900390625px]">
@@ -318,17 +329,14 @@ function PlatformScaleStatPanel({ product }: { product: GpxProduct }) {
 
 export function PlatformScaleCarousel({ data }: { data?: any }) {
   const products: GpxProduct[] =
-    Array.isArray(data?.products) && data.products.length
-      ? data.products.map((p: any, index: number) => {
-          const fallback = GPX_PRODUCTS[index] || ({} as GpxProduct);
-          return {
-            id: p?.product_id || fallback.id || `gpx-${index}`,
-            label: p?.label || fallback.label || "",
-            description: p?.description || fallback.description || "",
-            chip_image: p?.chip_image || fallback.chip_image || null,
-          };
-        })
-      : GPX_PRODUCTS;
+    Array.isArray(data?.products)
+      ? data.products.map((p: any) => ({
+          id: p?.product_id || "",
+          label: p?.label || "",
+          description: p?.description || "",
+          chip_image: p?.chip_image || null,
+        }))
+      : [];
 
   const TOTAL = products.length || 1;
   const defaultIndex =

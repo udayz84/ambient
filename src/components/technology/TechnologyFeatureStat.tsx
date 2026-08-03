@@ -28,13 +28,15 @@ export function TechnologyFeatureStat({
         style={{ width: iconWidth, height: iconHeight }}
         data-name="Vector"
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={iconSrc}
-          alt=""
-          className="absolute inset-0 block size-full max-w-none"
-          aria-hidden
-        />
+        {iconSrc ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={iconSrc}
+            alt=""
+            className="absolute inset-0 block size-full max-w-none"
+            aria-hidden
+          />
+        ) : null}
       </div>
       <div
         className={`${gilroyMedium.className} w-[279px] shrink-0 text-[32px] leading-[38px] font-medium text-white [word-break:break-word] not-italic`}

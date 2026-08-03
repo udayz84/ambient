@@ -2,7 +2,6 @@
 
 import { Fragment, useEffect, useRef } from "react";
 import { interRegular } from "../hero/fonts";
-import { APPLICATION_TABS } from "./applications-data";
 import { Corners } from "../shared/Corners";
 
 const tabCornerTl = "/applications/corners/tab-corner-tl.svg";
@@ -59,7 +58,7 @@ export function CategoryDivider({
 }
 
 export function ApplicationsCategoryNav({
-  tabs = APPLICATION_TABS.map((label) => ({ label })),
+  tabs = [],
   activeIndex,
   onTabClick,
   onShift,
@@ -109,7 +108,7 @@ export function ApplicationsCategoryNav({
       </button>
 
       {tabs.map((tab, index) => {
-        const label = tab?.label ?? APPLICATION_TABS[index] ?? `Tab ${index}`;
+        const label = tab?.label ?? `Tab ${index}`;
         const isActive = index === activeIndex;
         const dividerVariant =
           index === activeIndex

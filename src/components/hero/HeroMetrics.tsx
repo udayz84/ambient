@@ -22,8 +22,8 @@ export function HeroMetrics({ metrics = [] }: { metrics?: HeroMetric[] }) {
   const m0 = metrics[0] || {};
   const m1 = metrics[1] || {};
 
-  const v0 = m0.value || "100%";
-  const v1 = m1.value || "512 GOPs";
+  const v0 = m0.value || "";
+  const v1 = m1.value || "";
 
   const v0Split = splitValue(v0);
   const v1Split = splitValue(v1);
@@ -35,7 +35,7 @@ export function HeroMetrics({ metrics = [] }: { metrics?: HeroMetric[] }) {
       data-name="Mesarable Proof Metrics"
     >
       <HeroStat
-        tag={m0.tag || "Real-time AI at edge"}
+        tag={m0.tag || ""}
         tagWidth={180}
         labelOffsetX={74.5}
         rightBarLeft={170.48}
@@ -64,11 +64,8 @@ export function HeroMetrics({ metrics = [] }: { metrics?: HeroMetric[] }) {
             )}
           </p>
         }
-        title={m0.title || "Programmability"}
-        description={
-          m0.description ||
-          "AI cores with 4 to 32 bit resolution for control in applications."
-        }
+        title={m0.title || ""}
+        description={m0.description || ""}
       />
       <div
         className="relative h-[112px] w-[8px] shrink-0"
@@ -84,7 +81,7 @@ export function HeroMetrics({ metrics = [] }: { metrics?: HeroMetric[] }) {
         />
       </div>
       <HeroStat
-        tag={m1.tag || "Scalable arch."}
+        tag={m1.tag || ""}
         tagWidth={129}
         labelOffsetX={49}
         rightBarLeft={121.48}
@@ -112,11 +109,8 @@ export function HeroMetrics({ metrics = [] }: { metrics?: HeroMetric[] }) {
             )}
           </p>
         }
-        title={m1.title || "Peak Performance"}
-        description={
-          m1.description ||
-          "Unmatched AI throughput far exceeds typical low-power MCUs."
-        }
+        title={m1.title || ""}
+        description={m1.description || ""}
       />
     </div>
   );

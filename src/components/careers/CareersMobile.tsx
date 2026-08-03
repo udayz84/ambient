@@ -15,13 +15,6 @@ import {
   CARD_GRADIENT_BG,
   GLASS_PANEL_VISIBLE_BORDER_CLASS,
 } from "./careers-shared";
-import {
-  CAREERS_BENEFITS_CARDS,
-  CAREERS_JOBS,
-  CAREERS_JOB_TYPE_FILTER_OPTIONS,
-  CAREERS_LOCATION_FILTER_OPTIONS,
-  CAREERS_WORK_CARDS,
-} from "./careers-data";
 import { mediaUrl } from "@/lib/strapi";
 import type { CareersValueCard } from "./careers-data";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
@@ -160,13 +153,11 @@ function WhiteCta({ children, href = "#" }: { children: React.ReactNode; href?: 
 
 /* ---------------------------------- HERO ---------------------------------- */
 function CareersHeroMobile({ data }: { data?: any }) {
-  const bgImg = mediaUrl(data?.background_image) || "/careers/hero-bg.png";
-  const title = (data?.title || "Re-architect the physics of AI").replace(/\n/g, " ");
-  const subtitle =
-    data?.subtitle ||
-    "Don't iterate on legacy silicon. Build the fundamental compute substrate for the next generation of intelligence.";
-  const ctaLabel = data?.cta_label || "VIEW OPEN ROLES";
-  const ctaHref = data?.cta_href || "#open-roles";
+  const bgImg = mediaUrl(data?.background_image);
+  const title = (data?.title || "").replace(/\n/g, " ");
+  const subtitle = data?.subtitle || "";
+  const ctaLabel = data?.cta_label || "";
+  const ctaHref = data?.cta_href || "";
 
   return (
     <section
@@ -178,12 +169,14 @@ function CareersHeroMobile({ data }: { data?: any }) {
         <div className="relative mx-auto h-[557px] w-full">
           {/* image 105 (3243:3928) — full brightness, bleeds off both edges */}
           <div className="pointer-events-none absolute left-[calc(50%-76px)] top-[188px] h-[290px] w-[545px] max-w-none -translate-x-1/2 overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={bgImg}
-              alt=""
-              className="absolute inset-0 size-full max-w-none object-cover"
-            />
+            {bgImg ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={bgImg}
+                alt={data?.alt || ""}
+                className="absolute inset-0 size-full max-w-none object-cover"
+              />
+            ) : null}
           </div>
 
           {/* Content (3243:335) — title + subtitle */}
@@ -221,17 +214,14 @@ function CareersHeroMobile({ data }: { data?: any }) {
 
 /* -------------------------------- BEST WORK ------------------------------- */
 function CareersBestWorkMobile({ data }: { data?: any }) {
-  const headingRaw = data?.heading || "Do the best work\nof your life";
+  const headingRaw = data?.heading || "";
   const heading = headingRaw.split("\n").length > 1 ? headingRaw : headingRaw;
   const cards: CareersValueCard[] = (
-    data?.cards && Array.isArray(data.cards) && data.cards.length > 0
-      ? data.cards
-      : CAREERS_WORK_CARDS
-  ).map((c: any, i: number) => ({
-    icon: mediaUrl(c?.icon) || CAREERS_WORK_CARDS[i]?.icon || "",
-    title: c?.title || CAREERS_WORK_CARDS[i]?.title || "",
-    description:
-      c?.description || CAREERS_WORK_CARDS[i]?.description || "",
+    Array.isArray(data?.cards) ? data.cards : []
+  ).map((c: any) => ({
+    icon: mediaUrl(c?.icon) || "",
+    title: c?.title || "",
+    description: c?.description || "",
   }));
 
   return (
@@ -250,9 +240,9 @@ function CareersBestWorkMobile({ data }: { data?: any }) {
       </div>
 
       <div className="flex w-full flex-col gap-[14px]">
-        {cards.map((card) => (
+        {cards.map((card, index) => (
           <article
-            key={card.title}
+            key={`best-work-mobile-${index}`}
             className={`relative flex flex-col justify-between h-[236px] p-[32px] ${GLASS_PANEL_VISIBLE_BORDER_CLASS}`}
             style={{
               backgroundImage:
@@ -260,14 +250,16 @@ function CareersBestWorkMobile({ data }: { data?: any }) {
             }}
           >
             <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
-            
+
             <div className="relative size-[36px] shrink-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                alt=""
-                src={card.icon}
-                className="absolute inset-0 size-full object-contain"
-              />
+              {card.icon ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  alt=""
+                  src={card.icon}
+                  className="absolute inset-0 size-full object-contain"
+                />
+              ) : null}
             </div>
             
             <div className="flex flex-col gap-[10px]">
@@ -290,48 +282,21 @@ function CareersBestWorkMobile({ data }: { data?: any }) {
 }
 
 /* ----------------------------------- DNA ---------------------------------- */
-const DNA_PANEL_FALLBACKS_MOBILE = [
-  {
-    title: "Grounded in Science",
-    description:
-      "You work from first principles. Every decision you make is expected to be backed by data, validation, and a clear understanding of the underlying system.",
-  },
-  {
-    title: "Stay Curious. Stay Skeptical.",
-    description:
-      "You are encouraged to question, challenge, and refine. Strong thinking, clear reasoning, and continuous learning are expected at every stage of the work.",
-  },
-  {
-    title: "Chase the Impossible",
-    description:
-      "You take on problems that don't have predefined solutions. The expectation is not iteration, but pushing beyond accepted limits and building what doesn't yet exist.",
-  },
-  {
-    title: "Build for Everyone",
-    description:
-      "Your work is not isolated. You build systems that must scale across real-world environments, constraints, and users, making advanced technology practical and usable.",
-  },
-  {
-    title: "Protect What Powers Us",
-    description:
-      "You design with power as a constraint from day one. Efficiency is not an afterthought, it is a core part of how you think, build, and optimize systems.",
-  },
-];
-
 function CareersDnaMobile({ data }: { data?: any }) {
-  const heading =
-    data?.heading || "Driven by physics.\nDefined by our DNA.";
-  const subtitle =
-    data?.subtitle || "This is how we work, build, and solve at Ambient.";
+  const heading = data?.heading || "";
+  const subtitle = data?.subtitle || "";
   const bgImg = "/mobile/career/image 108.png";
-  const chipImg =
-    mediaUrl(data?.mobile_chip_object) || mediaUrl(data?.chip_object) || "/mobile/career/Chip Image.png";
+  const chipImg = mediaUrl(data?.mobile_chip_object) || mediaUrl(data?.chip_object);
   const strapiPanels: any[] =
     data?.panels && Array.isArray(data.panels) ? data.panels : [];
-  const panels = DNA_PANEL_FALLBACKS_MOBILE.map((fallback, i) => ({
-    title: strapiPanels[i]?.title || fallback.title,
-    description: strapiPanels[i]?.description || fallback.description,
+  const panels = strapiPanels.map((p: any) => ({
+    title: p?.title || "",
+    description: p?.description || "",
   }));
+  // Pad panels to 5 to match designed DNA section layout (uses indices 0..4)
+  while (panels.length < 5) {
+    panels.push({ title: "", description: "" });
+  }
 
   return (
     <section
@@ -371,13 +336,15 @@ function CareersDnaMobile({ data }: { data?: any }) {
         </div>
 
         <div className="relative flex h-[349px] w-[336px] shrink-0 items-center justify-center">
-          <Image
-            src={chipImg}
-            alt=""
-            fill
-            className="object-contain object-center relative z-10"
-            sizes="336px"
-          />
+          {chipImg ? (
+            <Image
+              src={chipImg}
+              alt={data?.mobile_chip_object_alt || data?.chip_object_alt || ""}
+              fill
+              className="object-contain object-center relative z-10"
+              sizes="336px"
+            />
+          ) : null}
         </div>
 
         <div className="flex w-full flex-col gap-[14px]">
@@ -415,18 +382,15 @@ function CareersOpenRolesMobile({ data }: { data?: any }) {
   const [jobTypeFilter, setJobTypeFilter] = useState("all");
   const [locationFilter, setLocationFilter] = useState("all");
 
-  const heading = data?.heading || "Open Roles";
-  const generalAppTitle =
-    data?.general_app_title || "Don't See The Right Role?";
-  const generalAppSubtitle =
-    data?.general_app_subtitle ||
-    "Submit a general application and we'll reach out when a matching position opens.";
-  const generalAppCtaLabel =
-    data?.general_app_cta_label || "SHARE YOUR PROFILE";
-  const applyButtonLabel = data?.apply_button_label || "APPLY NOW";
+  const heading = data?.heading || "";
+  const generalAppTitle = data?.general_app_title || "";
+  const generalAppSubtitle = data?.general_app_subtitle || "";
+  const generalAppCtaLabel = data?.general_app_cta_label || "";
+  const applyButtonLabel = data?.apply_button_label || "";
 
-  // Use dynamically fetched jobs if available, otherwise fallback to static data
-  const jobs = data?.fetchedJobs?.length ? data.fetchedJobs : CAREERS_JOBS;
+  const jobs: ReadonlyArray<any> = Array.isArray(data?.fetchedJobs)
+    ? data.fetchedJobs
+    : [];
 
   // Build Job Type options from dynamic categories if available
   const jobTypeOptions = data?.fetchedCategories?.length
@@ -437,7 +401,7 @@ function CareersOpenRolesMobile({ data }: { data?: any }) {
           label: c.name || "Unknown",
         })),
       ]
-    : CAREERS_JOB_TYPE_FILTER_OPTIONS;
+    : [{ value: "all", label: "All" }];
 
   // Build location options from the jobs list dynamically
   const uniqueLocations = Array.from(
@@ -453,7 +417,7 @@ function CareersOpenRolesMobile({ data }: { data?: any }) {
             .replace(/\b\w/g, (l) => l.toUpperCase()),
         })),
       ]
-    : CAREERS_LOCATION_FILTER_OPTIONS;
+    : [{ value: "all", label: "All" }];
 
   const filteredJobs = useMemo(
     () =>
@@ -699,16 +663,13 @@ function JobRowMobile({
 
 /* -------------------------------- BENEFITS -------------------------------- */
 function CareersBenefitsMobile({ data }: { data?: any }) {
-  const heading = data?.heading || "Benefits & Perks";
+  const heading = data?.heading || "";
   const cards: CareersValueCard[] = (
-    data?.cards && Array.isArray(data.cards) && data.cards.length > 0
-      ? data.cards
-      : CAREERS_BENEFITS_CARDS
-  ).map((c: any, i: number) => ({
-    icon: mediaUrl(c?.icon) || CAREERS_BENEFITS_CARDS[i]?.icon || "",
-    title: c?.title || CAREERS_BENEFITS_CARDS[i]?.title || "",
-    description:
-      c?.description || CAREERS_BENEFITS_CARDS[i]?.description || "",
+    Array.isArray(data?.cards) ? data.cards : []
+  ).map((c: any) => ({
+    icon: mediaUrl(c?.icon) || "",
+    title: c?.title || "",
+    description: c?.description || "",
   }));
 
   return (
@@ -727,9 +688,9 @@ function CareersBenefitsMobile({ data }: { data?: any }) {
       </div>
 
       <div className="flex w-full flex-col gap-[14px]">
-        {cards.map((card) => (
+        {cards.map((card, index) => (
           <article
-            key={card.title}
+            key={`benefit-mobile-${index}`}
             className={`relative flex h-[222px] w-full max-w-[353px] flex-col justify-between items-start p-[32px] mx-auto overflow-clip ${GLASS_PANEL_VISIBLE_BORDER_CLASS}`}
             style={{
               backgroundImage:
@@ -737,14 +698,16 @@ function CareersBenefitsMobile({ data }: { data?: any }) {
             }}
           >
             <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
-            
+
             <div className="relative size-[36px] shrink-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                alt=""
-                src={card.icon}
-                className="absolute inset-0 size-full object-contain"
-              />
+              {card.icon ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  alt=""
+                  src={card.icon}
+                  className="absolute inset-0 size-full object-contain"
+                />
+              ) : null}
             </div>
             
             <div className="flex flex-col gap-[10px] w-full mt-auto">
@@ -768,19 +731,15 @@ function CareersBenefitsMobile({ data }: { data?: any }) {
 
 /* ------------------------------- BOTTOM CTA ------------------------------- */
 function CareersBottomCtaMobile({ data }: { data?: any }) {
-  const heading =
-    data?.heading || "Ready to build the future of compute?";
+  const heading = data?.heading || "";
   const buttons: Array<{ label: string; href: string; variant: string }> =
-    data?.buttons && Array.isArray(data.buttons) && data.buttons.length > 0
+    Array.isArray(data?.buttons)
       ? data.buttons.map((b: any) => ({
           label: b?.label || "",
-          href: b?.href || "#",
+          href: b?.href || "",
           variant: b?.variant || "primary",
         }))
-      : [
-          { label: "APPLY NOW", href: "#", variant: "primary" },
-          { label: "REFER A CANDIDATE", href: "#", variant: "secondary" },
-        ];
+      : [];
 
   return (
     <section

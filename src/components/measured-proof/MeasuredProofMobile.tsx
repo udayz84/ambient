@@ -4,20 +4,13 @@ import Image from "next/image";
 import { mediaUrl } from "@/lib/strapi";
 import { TagBadge } from "../hero/TagBadge";
 import { gilroyMedium } from "../hero/fonts";
-import { useEffect, useRef, useState, useMemo } from "react";
 import { MeasuredProofCard } from "./MeasuredProofCard";
-import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
 
 type FallbackCard = {
-  nodeId: string;
-  metric: string;
-  label: string;
-  description: string;
-  imageSrc: string;
   imageWidth: number;
   imageHeight: number;
   imageTop: number;
@@ -31,12 +24,6 @@ type FallbackCard = {
 
 const DESKTOP_CARDS: FallbackCard[] = [
   {
-    nodeId: "mobile:1504",
-    metric: "100x",
-    label: "LOWER POWER CONSUMPTION",
-    description:
-      "Extend battery life at the edge and lower energy Opex in more compute-intensive environments",
-    imageSrc: "/measured-proof/card-power.png",
     imageWidth: 270.353,
     imageHeight: 250,
     imageTop: 161,
@@ -47,12 +34,6 @@ const DESKTOP_CARDS: FallbackCard[] = [
     descriptionWidth: 290,
   },
   {
-    nodeId: "mobile:1524",
-    metric: "25x",
-    label: "AI PERFORMANCE",
-    description:
-      "Unlock richer models, faster local inference, and more capable intelligence in constrained systems",
-    imageSrc: "/measured-proof/card-ai.png",
     imageWidth: 331.144,
     imageHeight: 260,
     imageTop: 169,
@@ -62,12 +43,6 @@ const DESKTOP_CARDS: FallbackCard[] = [
     statJustifyEnd: true,
   },
   {
-    nodeId: "mobile:1539",
-    metric: "10x",
-    label: "COMPUTE DENSITY",
-    description:
-      "Pack more intelligence into the same footprint without scaling power and system complexity the old way",
-    imageSrc: "/measured-proof/card-density.png",
     imageWidth: 305.672,
     imageHeight: 240,
     imageTop: 174.67,
@@ -76,12 +51,6 @@ const DESKTOP_CARDS: FallbackCard[] = [
     descriptionWidth: 317,
   },
   {
-    nodeId: "mobile:1554",
-    metric: "100%",
-    label: "PROGRAMMABLE DESIGN",
-    description:
-      "Preserve the freedom to build differentiated AI systems without locking into rigid fixed-function tradeoffs",
-    imageSrc: "/measured-proof/card-programmable.png",
     imageWidth: 218.055,
     imageHeight: 260,
     imageTop: 151,
@@ -96,34 +65,25 @@ const DESKTOP_CARDS: FallbackCard[] = [
 ];
 
 export function MeasuredProofMobile({ data }: { data?: any }) {
-  const tagText = data?.tag?.text || "Real-time AI at edge";
-  const headingLines = (data?.heading || "Measured\nproof in silicon").split("\n");
-  const headingLine1 = headingLines[0] || "Measured";
-  const headingLine2Rest = headingLines.slice(1).join("\n") || "proof in silicon";
+  const tagText = data?.tag?.text || "";
+  const headingLines = (data?.heading || "").split("\n");
+  const headingLine1 = headingLines[0] || "";
+  const headingLine2Rest = headingLines.slice(1).join("\n") || "";
 
   const ctas: any[] = Array.isArray(data?.ctas) ? data.ctas : [];
   const find = (variant: string) =>
     ctas.find((c) => (c?.variant || "").toLowerCase() === variant);
-  const primary =
-    find("primary") ||
-    { label: "See what we can do", href: "/technology", variant: "primary" };
-  const secondary =
-    find("secondary") ||
-    { label: "Explore ambient store", href: "/products", variant: "secondary" };
+  const primary = find("primary") || { variant: "primary" };
+  const secondary = find("secondary") || { variant: "secondary" };
 
-  const cards = (Array.isArray(data?.stat_cards) && data.stat_cards.length
-    ? data.stat_cards
-    : DESKTOP_CARDS
-  ).map((card: any, index: number) => {
+  const cards = (Array.isArray(data?.stat_cards) ? data.stat_cards : []).map((card: any, index: number) => {
     const fallback: FallbackCard = DESKTOP_CARDS[index] || ({} as FallbackCard);
-    const imageSrc =
-      mediaUrl(card?.image) || fallback.imageSrc || "/measured-proof/card-power.png";
     return {
       nodeId: `mobile:1504-${index}`,
-      metric: card?.metric ?? fallback.metric ?? "",
-      label: card?.label ?? fallback.label ?? "",
-      description: card?.description ?? fallback.description ?? "",
-      imageSrc,
+      metric: card?.metric ?? "",
+      label: card?.label ?? "",
+      description: card?.description ?? "",
+      imageSrc: mediaUrl(card?.image) || "",
       imageWidth: fallback.imageWidth ?? 331,
       imageHeight: fallback.imageHeight ?? 260,
       imageTop: fallback.imageTop ?? 169,
@@ -194,7 +154,7 @@ export function MeasuredProofMobile({ data }: { data?: any }) {
       </div>
 
       <div className="mt-[28px] flex w-[calc(100%+48px)] -mx-[24px] px-[calc(50vw-132px)] snap-x snap-mandatory gap-[14px] overflow-x-auto pb-[8px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {DESKTOP_CARDS.map((card, index) => (
+        {cards.map((card: any, index: number) => (
           <div
             key={card.nodeId}
             className="animate-hero-text-fade-in shrink-0 snap-center"
@@ -213,7 +173,7 @@ export function MeasuredProofMobile({ data }: { data?: any }) {
                 height: 600,
               }}
             >
-              <MeasuredProofCard {...(cards[index] || card)} />
+              <MeasuredProofCard {...card} />
             </div>
           </div>
         ))}
@@ -221,7 +181,7 @@ export function MeasuredProofMobile({ data }: { data?: any }) {
 
       <div className="mt-[28px] flex w-full flex-row justify-center gap-[9px]">
         <a
-          href={primary.href || "/technology"}
+          href={primary.href || ""}
           className={`${gilroyMedium.className} relative flex h-[48px] w-[171px] items-center justify-center ${GREEN_CTA_SHADOW}`}
         >
           <span
@@ -233,17 +193,17 @@ export function MeasuredProofMobile({ data }: { data?: any }) {
             className="pointer-events-none absolute inset-0 overflow-hidden z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
           />
           <p className="relative z-10 text-[13px] leading-[24px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
-            {primary.label || "See what we can do"}
+            {primary.label || ""}
           </p>
           
           <GreenCtaCorners />
         </a>
         <a
-          href={secondary.href || "/products"}
+          href={secondary.href || ""}
           className={`${gilroyMedium.className} relative flex h-[48px] w-[171px] items-center justify-center bg-[rgba(226,241,202,0.12)]`}
         >
           <p className="relative text-[13px] leading-[24px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
-            {secondary.label || "Explore ambient store"}
+            {secondary.label || ""}
           </p>
           <GreenCtaCorners />
         </a>

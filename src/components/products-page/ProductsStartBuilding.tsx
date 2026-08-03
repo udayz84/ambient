@@ -181,15 +181,15 @@ function StartCardView({
                 backgroundClip: "text",
               }}
             >
-              <span className="block leading-[49px]">{card.titleLines[0]}{` `}</span>
-              <span className="block leading-[49px]">{card.titleLines[1]}</span>
+              <span className="block overflow-hidden text-ellipsis leading-[49px]">{card.titleLines[0]}{` `}</span>
+              <span className="block overflow-hidden text-ellipsis leading-[49px]">{card.titleLines[1]}</span>
             </h3>
           </div>
 
           {/* Description + CTA */}
           <div className="flex w-[450px] flex-col items-center gap-[20px]">
             <p
-              className={`${interRegular.className} h-[48px] w-full text-center text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-white not-italic [word-break:break-word]`}
+              className={`${interRegular.className} h-[48px] w-full text-center text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
             >
               {card.description}
             </p>

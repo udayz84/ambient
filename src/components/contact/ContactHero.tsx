@@ -7,18 +7,11 @@ import { CornerDecor, GradientTitle } from "./contact-shared";
 
 const HERO_FADE_IN_CLASS = "animate-hero-text-fade-in opacity-0";
 
-const DEFAULT_TITLE = "Start building\nwith Ambient";
-const DEFAULT_SUBTITLE =
-  "Skip the generic sales inbox. Get direct access to our engineering team, technical documentation, and commercial partners.";
-
 export function ContactHero({ data }: { data?: any }) {
-  const bg = mediaUrl(data?.background_image) || "/contact/hand.png";
-  let title = data?.title || DEFAULT_TITLE;
-  if (title === "Start building with Ambient") {
-    title = "Start building\nwith Ambient";
-  }
+  const bg = mediaUrl(data?.background_image);
+  const title = data?.title || "";
   const titleLines = title.split("\n");
-  const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
+  const subtitle = data?.subtitle || "";
 
   return (
     <>
@@ -27,16 +20,18 @@ export function ContactHero({ data }: { data?: any }) {
         data-node-id="2379:4951"
         data-name="hand"
       >
-        <Image
-          src={bg}
-          alt=""
-          fill
-          className="object-cover object-bottom scale-[1.05] origin-bottom"
-          sizes="(max-width: 1440px) 100vw, 2880px"
-          quality={100}
-          priority
-          unoptimized
-        />
+        {bg ? (
+          <Image
+            src={bg}
+            alt={data?.background_image_alt || ""}
+            fill
+            className="object-cover object-bottom scale-[1.05] origin-bottom"
+            sizes="(max-width: 1440px) 100vw, 2880px"
+            quality={100}
+            priority
+            unoptimized
+          />
+        ) : null}
       </div>
 
       <div

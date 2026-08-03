@@ -61,12 +61,12 @@ export function CompanyArticleCardCompact({
 
         <div className="mt-[20px] flex flex-col">
           <h3
-            className={`${gilroyMedium.className} w-[353.684px] text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} w-[353.684px] text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
           >
             {title}
           </h3>
           <p
-            className={`${interRegular.className} mt-[10px] text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} mt-[10px] text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
             style={{ width: excerptWidth }}
           >
             {excerpt}

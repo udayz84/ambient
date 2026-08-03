@@ -4,52 +4,24 @@ import { Corners } from "../shared/Corners";
 import { TechnologyFeatureStat } from "./TechnologyFeatureStat";
 import { TechnologyGridLine } from "./TechnologyGridLine";
 
-const FALLBACK_FEATURES = [
-  {
-    iconSrc: "/technology/icon-speak-ai.svg",
-    iconWidth: 42.111,
-    titleParts: ["Speak AI", "natively"],
-    description:
-      "Standard chips waste time translating AI workloads. Our architecture processes matrix math natively for high-density performance.",
-  },
-  {
-    iconSrc: "/technology/icon-compute.svg",
-    iconWidth: 42.02,
-    titleParts: ["Compute where the data lives"],
-    description:
-      "We built our analog processing engine in memory. Processing in place eliminates data commute, saving battery life.",
-  },
-  {
-    iconSrc: "/technology/icon-tools.svg",
-    iconWidth: 42,
-    titleParts: ["Standard tools. zero friction"],
-    description:
-      "Our platform adapts to your software. Compile your PyTorch or TensorFlow models in minutes, no coding needed.",
-  },
-] as const;
+const FALLBACK_FEATURE_WIDTHS = [42.111, 42.02, 42] as const;
 
 export function TechnologyFeatures({ data }: { data?: any }) {
-  const features = (Array.isArray(data?.features) && data.features.length
-    ? data.features
-    : FALLBACK_FEATURES
-  ).map((feature: any, index: number) => {
-    const fallback = FALLBACK_FEATURES[index] || {};
-    const iconSrc =
-      mediaUrl(feature?.icon) || fallback.iconSrc || "/technology/icon-tools.svg";
+  const features = (Array.isArray(data?.features) ? data.features : []).map((feature: any, index: number) => {
+    const iconWidth = FALLBACK_FEATURE_WIDTHS[index] ?? 42;
+    const iconSrc = mediaUrl(feature?.icon) || "";
     let titleParts: string[];
     if (index === 0) {
-      let rawTitle = feature?.title || fallback.titleParts.join("\n");
-      rawTitle = rawTitle.replace(/\\n/g, "\n");
+      const rawTitle = (feature?.title || "").replace(/\\n/g, "\n");
       titleParts = rawTitle.split("\n");
     } else {
-      const rawTitle = feature?.title || fallback.titleParts?.[0] || "";
-      titleParts = [rawTitle];
+      titleParts = [feature?.title || ""];
     }
     return {
       iconSrc,
-      iconWidth: fallback.iconWidth ?? 42,
+      iconWidth,
       titleParts,
-      description: feature?.description ?? fallback.description ?? "",
+      description: feature?.description ?? "",
     };
   });
 

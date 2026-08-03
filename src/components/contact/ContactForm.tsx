@@ -16,22 +16,9 @@ import { Corners } from "../shared/Corners";
 
 type TrackId = "sales" | "developer" | "media";
 
-const DEFAULT_HEADING = "Prefer to write to us?";
-const DEFAULT_SUBTITLE =
-  "Select your track below to ensure your message reaches the right desk immediately.";
-const DEFAULT_LEFT_BLURB =
-  "Choose the right team to ensure your message reaches the right experts.";
-const DEFAULT_MESSAGE_HEADING = "Drop Us a Message";
-const DEFAULT_CHECKBOX_LABEL = "Sign up for news & updates";
-const DEFAULT_SUBMIT_LABEL = "Send Message";
-
 const tracks = [
   {
     id: "sales" as const,
-    title: "Sales & Enterprise",
-    description:
-      "Request a quote, discuss volume licensing, or inquire about custom ASIC development.",
-    icon: "/contact/track-sales.svg",
     top: 66,
     height: 134,
     checkboxTop: 57,
@@ -40,10 +27,6 @@ const tracks = [
   },
   {
     id: "developer" as const,
-    title: "Developer Support",
-    description:
-      "Report a bug, request documentation, or get help compiling your model via the Nebula SDK.",
-    icon: "/contact/track-developer.svg",
     top: 212,
     height: 158,
     checkboxTop: 69,
@@ -52,10 +35,6 @@ const tracks = [
   },
   {
     id: "media" as const,
-    title: "Media & Press",
-    description:
-      "Request an interview with our leadership team, access press materials, or coordinate coverage.",
-    icon: "/contact/track-media.svg",
     top: 382,
     height: 158,
     checkboxTop: 69,
@@ -65,12 +44,12 @@ const tracks = [
 ] as const;
 
 const formFields = [
-  { label: "First Name", placeholder: "Enter Your First Name", left: 16, top: 83, nodeId: "2379:8555" },
-  { label: "Last Name", placeholder: "Enter Your Last Name", left: 301, top: 83, nodeId: "2379:8556" },
-  { label: "Company Name", placeholder: "Enter Your Company Name", left: 16, top: 172, nodeId: "2379:8557" },
-  { label: "Job Title", placeholder: "Enter Your Job Title", left: 301, top: 172, nodeId: "2379:8558" },
-  { label: "Corporate Email", placeholder: "Enter Your Corporate Email", left: 16, top: 261, nodeId: "2379:8559" },
-  { label: "Phone Number", placeholder: "Enter Your Phone Number", left: 301, top: 261, nodeId: "2379:8560" },
+  { left: 16, top: 83, nodeId: "2379:8555" },
+  { left: 301, top: 83, nodeId: "2379:8556" },
+  { left: 16, top: 172, nodeId: "2379:8557" },
+  { left: 301, top: 172, nodeId: "2379:8558" },
+  { left: 16, top: 261, nodeId: "2379:8559" },
+  { left: 301, top: 261, nodeId: "2379:8560" },
 ] as const;
 
 function mapInputType(fieldType: string | undefined | null): string {
@@ -88,23 +67,23 @@ export function ContactForm({ data }: { data?: any }) {
   const [activeTrackId, setActiveTrackId] = useState<TrackId>("sales");
   const [subscribed, setSubscribed] = useState(false);
 
-  const heading = data?.heading || DEFAULT_HEADING;
-  const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
-  const messageHeading = data?.message_heading || DEFAULT_MESSAGE_HEADING;
-  const checkboxLabel = data?.checkbox_label || DEFAULT_CHECKBOX_LABEL;
-  const submitLabel = data?.submit_label || DEFAULT_SUBMIT_LABEL;
-  const submitHref = data?.submit_href || "#";
+  const heading = data?.heading || "";
+  const subtitle = data?.subtitle || "";
+  const messageHeading = data?.message_heading || "";
+  const checkboxLabel = data?.checkbox_label || "";
+  const submitLabel = data?.submit_label || "";
+  const submitHref = data?.submit_href || "";
 
   const strapiTracks: ReadonlyArray<any> = Array.isArray(data?.tracks)
     ? data.tracks
     : [];
   const mergedTracks = tracks.map((track, index) => {
     const remote = strapiTracks[index];
-    if (!remote) return { ...track, remoteIcon: null, strapiFields: [] };
+    if (!remote) return { ...track, title: "", description: "", remoteIcon: null, strapiFields: [] };
     return {
       ...track,
-      title: remote.label || track.title,
-      description: remote.description || track.description,
+      title: remote.label || "",
+      description: remote.description || "",
       remoteIcon: mediaUrl(remote.icon),
       strapiFields: Array.isArray(remote.form) ? remote.form : [],
     };
@@ -122,24 +101,22 @@ export function ContactForm({ data }: { data?: any }) {
     (f: any) => f.field_type === "textarea",
   );
 
-  // Build 6 grid-position fields — Strapi data where available, fallback for the rest
+  // Build 6 grid-position fields from Strapi data where available
   const mergedFields = formFields.map((fallback, index) => {
     const remote = strapiInputFields[index];
-    if (!remote) return { ...fallback, inputType: "text" };
+    if (!remote) return { ...fallback, label: "", placeholder: "", inputType: "text" };
     return {
       ...fallback,
-      label: remote.label || fallback.label,
-      placeholder: remote.placeholder || fallback.placeholder,
+      label: remote.label || "",
+      placeholder: remote.placeholder || "",
       inputType: mapInputType(remote.field_type),
       nodeId: `${fallback.nodeId}-${index}`,
     };
   });
 
-  // Bottom textarea: use Strapi data if available, otherwise fallback
-  const textareaLabel = strapiTextareaField?.label || "How can we help?";
-  const textareaPlaceholder =
-    strapiTextareaField?.placeholder ||
-    "Describe your use case, technical requirements, or business needs...";
+  // Bottom textarea from Strapi data
+  const textareaLabel = strapiTextareaField?.label || "";
+  const textareaPlaceholder = strapiTextareaField?.placeholder || "";
 
   const activeConnectorTop =
     mergedTracks.find((track) => track.id === activeTrackId)?.connectorTop ??
@@ -188,7 +165,7 @@ export function ContactForm({ data }: { data?: any }) {
           className={`${interRegular.className} absolute top-0 left-0 w-[550px] text-[18px] leading-[27px] font-normal text-white opacity-65 not-italic [word-break:break-word]`}
           data-node-id="2379:8505"
         >
-          {DEFAULT_LEFT_BLURB}
+          {subtitle}
         </p>
 
         {mergedTracks.map((track) => (
@@ -289,7 +266,6 @@ export function ContactForm({ data }: { data?: any }) {
 function TrackCard({
   title,
   description,
-  icon,
   remoteIcon,
   selected,
   top,
@@ -297,12 +273,14 @@ function TrackCard({
   checkboxTop,
   nodeId,
   onSelect,
-}: (typeof tracks)[number] & {
+}: Omit<(typeof tracks)[number], "icon"> & {
+  title: string;
+  description: string;
   remoteIcon: string | null;
   selected: boolean;
   onSelect: () => void;
 }) {
-  const iconSrc = remoteIcon || icon;
+  const iconSrc = remoteIcon;
   return (
     <button
       type="button"
@@ -319,15 +297,17 @@ function TrackCard({
       <Corners />
 
       <div className="relative size-[32px] shrink-0" data-name="Frame">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt=""
-          className={`absolute inset-0 block size-full max-w-none transition-[filter,opacity] duration-200 ${
-            selected ? "opacity-100" : "opacity-70 brightness-0 invert"
-          }`}
-          src={iconSrc}
-          aria-hidden
-        />
+        {iconSrc ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            alt=""
+            className={`absolute inset-0 block size-full max-w-none transition-[filter,opacity] duration-200 ${
+              selected ? "opacity-100" : "opacity-70 brightness-0 invert"
+            }`}
+            src={iconSrc}
+            aria-hidden
+          />
+        ) : null}
       </div>
 
       <div

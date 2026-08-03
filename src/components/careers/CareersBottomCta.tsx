@@ -2,12 +2,6 @@ import { CornerDecor } from "../contact/contact-shared";
 import { gilroyMedium } from "../hero/fonts";
 import { CareersGreenCta, CareersWhiteCta } from "./careers-shared";
 
-const BOTTOM_CTA_HEADING_FALLBACK = "Ready to build the future of compute?";
-const BOTTOM_CTA_BUTTONS_FALLBACK = [
-  { label: "APPLY NOW", href: "#", variant: "primary" },
-  { label: "REFER A CANDIDATE", href: "#", variant: "secondary" },
-];
-
 export function CareersBottomCta({
   data,
   offsetY = 0,
@@ -15,15 +9,15 @@ export function CareersBottomCta({
   data?: any;
   offsetY?: number;
 }) {
-  const heading = data?.heading || BOTTOM_CTA_HEADING_FALLBACK;
+  const heading = data?.heading || "";
   const buttons: Array<{ label: string; href: string; variant: string }> =
-    data?.buttons && Array.isArray(data.buttons) && data.buttons.length > 0
+    Array.isArray(data?.buttons)
       ? data.buttons.map((b: any) => ({
           label: b?.label || "",
-          href: b?.href || "#",
+          href: b?.href || "",
           variant: b?.variant || "primary",
         }))
-      : BOTTOM_CTA_BUTTONS_FALLBACK;
+      : [];
 
   return (
     <section

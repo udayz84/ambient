@@ -5,17 +5,24 @@ import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interMedium, interRegular } from "../hero/fonts";
 import {
   DEFAULT_GPX_INDEX,
-  GPX_PRODUCTS,
   type GpxProduct,
 } from "./platform-scale-data";
 import { useState, useCallback } from "react";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
+const EMPTY_PRODUCT: GpxProduct = {
+  id: "",
+  label: "",
+  description: "",
+  chip_image: null,
+};
+
 function getVirtualProduct(
   virtualIndex: number,
   products: GpxProduct[]
 ) {
-  const total = products.length || 1;
+  if (products.length === 0) return EMPTY_PRODUCT;
+  const total = products.length;
   return products[((virtualIndex % total) + total) % total];
 }
 
@@ -124,32 +131,27 @@ const MOBILE_SLOT: Record<-2 | -1 | 0 | 1 | 2, MobileSlot> = {
 
 export function PlatformScaleMobile({ data }: { data?: any }) {
   const products: GpxProduct[] =
-    Array.isArray(data?.products) && data.products.length
-      ? data.products.map((p: any, index: number) => {
-          const fallback = GPX_PRODUCTS[index] || ({} as GpxProduct);
-          return {
-            id: p?.product_id || fallback.id || `gpx-${index}`,
-            label: p?.label || fallback.label || "",
-            description: p?.description || fallback.description || "",
-            chip_image: p?.chip_image || fallback.chip_image || null,
-          };
-        })
-      : GPX_PRODUCTS;
+    Array.isArray(data?.products)
+      ? data.products.map((p: any) => ({
+          id: p?.product_id || "",
+          label: p?.label || "",
+          description: p?.description || "",
+          chip_image: p?.chip_image || null,
+        }))
+      : [];
 
   const TOTAL = products.length || 1;
   const defaultIndex =
     typeof data?.default_index === "number" ? data.default_index : DEFAULT_GPX_INDEX;
 
-  const heading = data?.heading || "One platform,\ninfinite scale";
+  const heading = data?.heading || "";
   const headingLines = heading.split("\n");
-  const headingLine1 = headingLines[0] || "One platform,";
-  const headingLine2 = headingLines.slice(1).join("\n") || "infinite scale";
-  const subtitle =
-    data?.subtitle ||
-    "A modular compute fabric for your entire product roadmap, from a microwatt edge array to a hyperscaler server grid, without ever changing your software";
+  const headingLine1 = headingLines[0] || "";
+  const headingLine2 = headingLines.slice(1).join("\n") || "";
+  const subtitle = data?.subtitle || "";
   const cta = data?.cta || {};
-  const ctaLabel = cta.label || "EXPLORE AMBIENT SILICON";
-  const ctaHref = cta.href || "/technology";
+  const ctaLabel = cta.label || "";
+  const ctaHref = cta.href || "";
 
   const [virtualIndex, setVirtualIndex] = useState(TOTAL * 10 + defaultIndex);
 
@@ -274,13 +276,15 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
                     }}
                   >
                     <div className="relative size-full shadow-[0px_12.264px_11.68px_0px_#0d2006]">
-                      <Image
-                        src={mediaUrl(product.chip_image) || "/mobile/image 77.png"}
-                        alt=""
-                        fill
-                        className="object-bottom"
-                        sizes="188px"
-                      />
+                      {mediaUrl(product.chip_image) ? (
+                        <Image
+                          src={mediaUrl(product.chip_image) as string}
+                          alt=""
+                          fill
+                          className="object-bottom"
+                          sizes="188px"
+                        />
+                      ) : null}
                       <div className="absolute top-[-7.7px] right-[-6.9px] bottom-[-11px] left-[-6.9px]">
                         <div className="absolute inset-[-0.15%]">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -303,13 +307,15 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
                     }}
                   >
                     <div className="relative size-full">
-                      <Image
-                        src={mediaUrl(product.chip_image) || "/mobile/image 81.png"}
-                        alt=""
-                        fill
-                        className="object-contain object-bottom"
-                        sizes={`${slot.width}px`}
-                      />
+                      {mediaUrl(product.chip_image) ? (
+                        <Image
+                          src={mediaUrl(product.chip_image) as string}
+                          alt=""
+                          fill
+                          className="object-contain object-bottom"
+                          sizes={`${slot.width}px`}
+                        />
+                      ) : null}
                     </div>
                   </div>
                 </div>

@@ -4,7 +4,6 @@ import { useState, useCallback, useRef, useEffect, Fragment } from "react";
 import Image from "next/image";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyExtraBold, gilroyMedium, interRegular, interMedium } from "../hero/fonts";
-import { APPLICATION_TABS, FEATURE_CARDS } from "./applications-data";
 import { CategoryDivider } from "./ApplicationsCategoryNav";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
@@ -15,27 +14,7 @@ const tabCornerTr = "/applications/corners/tab-corner-tr.svg";
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
 
-const MOBILE_HERO_IMAGES: Record<string, string> = {
-  WEARABLES: "/applications/app-wearables.png",
-  "SMART HOMES": "/applications/app-smart-home.png",
-  INDUSTRIAL: "/applications/app-industrial.png",
-  AUTOMOTIVE: "/applications/car-hero-new.png",
-  MEDICAL: "/applications/app-medical.png",
-  AGRICULTURE: "/applications/app-agriculture.png",
-  DRONES: "/applications/app-drones.png",
-  HEARABLES: "/applications/app-hearables.png",
-};
-
-const MOBILE_WATERMARK_TEXTS: Record<string, string> = {
-  WEARABLES: "Wearables",
-  "SMART HOMES": "Smart Home",
-  INDUSTRIAL: "Industry 4.0",
-  AUTOMOTIVE: "Automotive",
-  MEDICAL: "Medical",
-  AGRICULTURE: "Agriculture",
-  DRONES: "Drones",
-  HEARABLES: "Hearables",
-};
+const MOBILE_HERO_IMAGES: Record<string, string> = {};
 
 const mobileWatermarkGradient =
   "linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%)";
@@ -49,19 +28,17 @@ type ApplicationsMobileProps = {
 };
 
 export function ApplicationsMobile({
-  tabs = APPLICATION_TABS.map((label) => ({ label })),
-  featureCards = [FEATURE_CARDS.left, FEATURE_CARDS.right],
+  tabs = [],
+  featureCards = [],
   data,
   categoryActiveIndex,
   setCategoryActiveIndex,
 }: ApplicationsMobileProps) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const features = featureCards.length
-    ? featureCards
-    : [FEATURE_CARDS.left, FEATURE_CARDS.right];
-  const activeFeature = features[activeIndex] || FEATURE_CARDS.left;
+  const features = featureCards.length ? featureCards : [];
+  const activeFeature = features[activeIndex] || {};
 
-  const activeTab = tabs[categoryActiveIndex]?.label || APPLICATION_TABS[0];
+  const activeTab = tabs[categoryActiveIndex]?.label || "";
   const activeTabData = tabs.find(
     (t) => (t?.label || "").toUpperCase() === activeTab.toUpperCase()
   );
@@ -69,22 +46,18 @@ export function ApplicationsMobile({
     mediaUrl(activeTabData?.mobile_hero_image) ||
     mediaUrl(activeTabData?.hero_image) ||
     MOBILE_HERO_IMAGES[activeTab] ||
-    "/applications/car-hero.png";
+    "";
   const watermarkText =
-    activeTabData?.watermark_text ||
-    MOBILE_WATERMARK_TEXTS[activeTab] ||
-    activeTab;
+    activeTabData?.watermark_text || "";
 
-  const heading = data?.heading || "Build the\nimpossible today";
+  const heading = data?.heading || "";
   const headingLines = heading.split("\n");
-  const headingLine1 = headingLines[0] || "Build the";
-  const headingLine2 = headingLines.slice(1).join("\n") || "impossible today";
-  const subtitle =
-    data?.subtitle ||
-    "Don't let legacy design limit your roadmap. Discover the market-differentiating features of the GPX10 and what's coming next.";
+  const headingLine1 = headingLines[0] || "";
+  const headingLine2 = headingLines.slice(1).join("\n") || "";
+  const subtitle = data?.subtitle || "";
   const cta = data?.cta || {};
-  const ctaLabel = cta.label || "EXPLORE APPLICATION";
-  const ctaHref = cta.href || "/applications";
+  const ctaLabel = cta.label || "";
+  const ctaHref = cta.href || "";
   const dotIcon = mediaUrl(cta.dot_icon) || "/applications/cta-dot.svg";
 
   const goNext = useCallback(() => setActiveIndex((i) => (i + 1) % features.length), [features.length]);
@@ -184,7 +157,7 @@ export function ApplicationsMobile({
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {tabs.map((tab, index) => {
-            const label = tab?.label ?? APPLICATION_TABS[index] ?? `Tab ${index}`;
+            const label = tab?.label ?? `Tab ${index}`;
             const isActive = index === categoryActiveIndex;
             const dividerVariant =
               index === categoryActiveIndex
@@ -236,15 +209,17 @@ export function ApplicationsMobile({
 
         {/* Hero Image */}
         <div className="relative z-10 mt-[24px] flex w-full justify-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt=""
-            src={imgSrc}
-            className={`h-auto max-h-[360px] w-[130%] max-w-none object-contain drop-shadow-2xl ${
-              activeTab === "AUTOMOTIVE" ? "translate-x-[4%] scale-110" : "scale-105"
-            }`}
-            aria-hidden
-          />
+          {imgSrc ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              alt=""
+              src={imgSrc}
+              className={`h-auto max-h-[360px] w-[130%] max-w-none object-contain drop-shadow-2xl ${
+                activeTab === "AUTOMOTIVE" ? "translate-x-[4%] scale-110" : "scale-105"
+              }`}
+              aria-hidden
+            />
+          ) : null}
         </div>
       </div>
 
@@ -277,11 +252,10 @@ export function ApplicationsMobile({
 
         <div key={activeIndex} className="flex flex-col animate-slide-fade">
           <h3 className={`${gilroyMedium.className} text-[20px] text-white leading-[28px] not-italic`}>
-            {activeFeature?.title ?? "Tire Pressure Monitoring"}
+            {activeFeature?.title ?? ""}
           </h3>
           <p className={`${interRegular.className} mt-[16px] text-[14px] text-[#f0f0f0] opacity-65 leading-[22px] not-italic`}>
-            {activeFeature?.description ??
-              "On-device air pressure and temperature sensors provide real-time alerts for tire health to prevent accidents and optimize maintenance and fuel expenses"}
+            {activeFeature?.description ?? ""}
           </p>
         </div>
       </div>

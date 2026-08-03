@@ -175,12 +175,12 @@ function LegacyCard({
           className="absolute top-[8px] right-0 left-0 flex flex-col items-start gap-[8px] border-b border-solid border-[rgba(255,255,255,0.1)] pb-[11px]"
         >
           <p
-            className={`${gilroyMedium.className} w-[279px] text-[32px] leading-[38px] font-medium text-white not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} w-[279px] text-[32px] leading-[38px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
           >
             {label}
           </p>
           <p
-            className={`${interRegular.className} w-full text-[13px] leading-[normal] font-normal text-[#8e8e8e] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-full text-[13px] leading-[normal] font-normal text-[#8e8e8e] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
           >
             {description}
           </p>
@@ -309,19 +309,19 @@ function ACubeCard({
         className="absolute top-[24px] left-[29px] flex w-[234px] flex-col items-start justify-center gap-[8px] border-b border-solid border-[rgba(255,255,255,0.1)] pb-[11px]"
       >
         <p
-          className={`${gilroyMedium.className} text-center text-[32px] leading-[38px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} text-center text-[32px] leading-[38px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word] overflow-hidden text-ellipsis`}
         >
           {label}
         </p>
         <p
-          className={`${interRegular.className} w-full text-[13px] leading-[normal] font-normal text-[#8e8e8e] not-italic [word-break:break-word]`}
+          className={`${interRegular.className} w-full text-[13px] leading-[normal] font-normal text-[#8e8e8e] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
         >
           {description}
         </p>
       </div>
 
       <p
-        className={`${gilroySemiBold.className} absolute top-[232.05px] left-[29px] w-[195px] bg-clip-text text-[50px] leading-[1.2] font-semibold text-transparent not-italic [word-break:break-word]`}
+        className={`${gilroySemiBold.className} absolute top-[232.05px] left-[29px] w-[195px] bg-clip-text text-[50px] leading-[1.2] font-semibold text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
         style={{
           backgroundImage:
             "linear-gradient(146.757deg, rgb(255, 255, 255) 29.352%, rgba(115, 115, 115, 0.5) 98.158%)",
@@ -332,7 +332,7 @@ function ACubeCard({
         {statValue}
       </p>
       <p
-        className={`${interRegular.className} absolute top-[297.43px] left-[26.1px] w-[197.9px] text-[14px] leading-[18px] font-normal text-[#e2f9da] not-italic [word-break:break-word]`}
+        className={`${interRegular.className} absolute top-[297.43px] left-[26.1px] w-[197.9px] text-[14px] leading-[18px] font-normal text-[#e2f9da] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
       >
         {statDesc}
       </p>

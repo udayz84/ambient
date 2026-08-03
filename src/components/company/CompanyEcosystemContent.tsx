@@ -144,7 +144,7 @@ export function CompanyEcosystemContent({ data }: CompanyEcosystemContentProps =
             </div>
           </div>
           <p
-            className={`${interRegular.className} absolute top-[8.5px] left-[680px] h-[81px] w-[444px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} absolute top-[8.5px] left-[680px] h-[81px] w-[444px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
             data-node-id="2379:4647"
           >
             {subtitle}
@@ -176,14 +176,14 @@ export function CompanyEcosystemContent({ data }: CompanyEcosystemContentProps =
                   nodeId={col.iconNodeId}
                 />
                 <p
-                  className={`${gilroyMedium.className} absolute top-[1.5px] ${col.left} h-[29px] ${col.titleWidth} text-[26px] leading-[28px] font-medium whitespace-nowrap text-white not-italic`}
+                  className={`${gilroyMedium.className} absolute top-[1.5px] ${col.left} h-[29px] ${col.titleWidth} text-[26px] leading-[28px] font-medium whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis`}
                   data-node-id={col.titleNodeId}
                 >
                   {col.title}
                 </p>
               </div>
               <p
-                className={`${interRegular.className} absolute top-[44px] left-0 h-[72px] ${col.descWidth} text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+                className={`${interRegular.className} absolute top-[44px] left-0 h-[72px] ${col.descWidth} text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
                 data-node-id={col.descNodeId}
               >
                 {col.description}

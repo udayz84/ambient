@@ -1,10 +1,7 @@
 import Image from "next/image";
 import { TagBadge } from "../hero/TagBadge";
 import { gilroyMedium, interRegular } from "../hero/fonts";
-import {
-  ARTICLE_IMAGE_BASE,
-  type ResourceArticle,
-} from "./resources-data";
+import { type ResourceArticle } from "./resources-data";
 
 const frameCornerLeft = "/hero/vector-57.svg";
 const frameCornerRight = "/hero/vector-55.svg";
@@ -32,14 +29,16 @@ export function ResourcesArticleCard({
         className="relative h-[259.161px] w-[356px] shrink-0 overflow-clip"
         data-name="Image"
       >
-        <Image
-          src={imageSrc || ARTICLE_IMAGE_BASE}
-          alt=""
-          width={356}
-          height={259}
-          className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
-          unoptimized
-        />
+        {imageSrc ? (
+          <Image
+            src={imageSrc}
+            alt=""
+            width={356}
+            height={259}
+            className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+            unoptimized
+          />
+        ) : null}
         {imageOverlaySrc ? (
           <div className="absolute top-[0.41px] left-0 h-[258.753px] w-[356.446px]">
             <Image
@@ -65,7 +64,7 @@ export function ResourcesArticleCard({
 
         <div className="flex flex-col gap-[10px]">
           <h3
-            className={`${gilroyMedium.className} w-full font-medium text-white not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} w-full font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
             style={{
               fontSize: titleFontSize,
               lineHeight: "28px",
@@ -74,10 +73,10 @@ export function ResourcesArticleCard({
             {title}
           </h3>
           <p
-            className={`${interRegular.className} w-[346.611px] text-[16px] leading-[24px] font-normal not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[346.611px] text-[16px] leading-[24px] font-normal not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
           >
             <span className="text-[rgba(240,240,240,0.6)]">
-              {excerpt.length > 70 ? `${excerpt.substring(0, 70)}...` : excerpt}
+              {excerpt}
             </span>
             {" "}
             <a href={href} className="text-[#53d824] transition-opacity hover:opacity-80">read more</a>

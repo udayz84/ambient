@@ -5,7 +5,7 @@ const cornerLeft = "/hero/corner-tag-1.svg";
 const cornerRight = "/hero/corner-tag-2.svg";
 
 export function PlatformScaleHeader({ data }: { data?: any }) {
-  let heading = data?.heading || "One platform,\ninfinite scale";
+  let heading = data?.heading || "";
   heading = heading.replace(/\\n/g, "\n");
   if (!heading.includes("\n") && heading.includes(",")) {
     heading = heading.replace(",", ",\n");
@@ -13,9 +13,7 @@ export function PlatformScaleHeader({ data }: { data?: any }) {
   const lines = heading.split("\n");
   const line1 = lines[0];
   const line2 = lines.slice(1).join("\n");
-  const subtitle =
-    data?.subtitle ||
-    "A modular compute fabric for your entire product roadmap, from a microwatt edge array to a hyperscaler server grid, without ever changing your software";
+  const subtitle = data?.subtitle || "";
   return (
     <>
       <div

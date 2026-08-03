@@ -1,11 +1,10 @@
 import Image from "next/image";
+import { Fragment } from "react";
 import { gilroySemiBold } from "../hero/fonts";
 import {
   type PartnerRowConfig,
   type EcosystemPartner,
   resolvePartners,
-  SILICON_PARTNERS_FALLBACK,
-  DEVELOPMENT_PARTNERS_FALLBACK,
 } from "./ecosystem-data";
 import { EcosystemGridLine } from "./EcosystemGridLine";
 import { Corners } from "../shared/Corners";
@@ -31,19 +30,21 @@ function PartnerLogoStat({
       data-node-id={nodeId}
       data-name="Stat"
     >
-      <div
-        className="relative shrink-0 overflow-clip flex flex-row items-center gap-[10px]"
-        data-name="Icon"
-      >
-        <Image
-          src={src}
-          alt=""
-          width={width}
-          height={height}
-          className="block max-w-none object-contain"
-          style={{ width: `${width}px`, height: `${height}px` }}
-        />
-      </div>
+      {src ? (
+        <div
+          className="relative shrink-0 overflow-clip flex flex-row items-center gap-[10px]"
+          data-name="Icon"
+        >
+          <Image
+            src={src}
+            alt=""
+            width={width}
+            height={height}
+            className="block max-w-none object-contain"
+            style={{ width: `${width}px`, height: `${height}px` }}
+          />
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -64,13 +65,13 @@ export function EcosystemPartnerRow({
   partners,
   isDevelopment,
 }: EcosystemPartnerRowProps) {
-  const resolved = resolvePartners(
-    partners,
-    isDevelopment ? DEVELOPMENT_PARTNERS_FALLBACK : SILICON_PARTNERS_FALLBACK
-  );
-  
-  const [logo1, logo2, logo3, logo4, logo5] = resolved;
-  const [stat1, stat2, stat3] = logoStatNodeIds;
+  void isDevelopment;
+  const resolved = resolvePartners(partners);
+
+  // Build (logo, gridLine) pairs by interleaving. The last logo has no
+  // trailing grid line. Grid-line configs cycle for counts beyond the 4
+  // hardcoded Figma entries.
+  const gridLines = config.gridLines;
 
   return (
     <div
@@ -87,27 +88,40 @@ export function EcosystemPartnerRow({
         />
       </div>
 
-      <PartnerLogoStat nodeId={stat1} {...logo1} />
-      <EcosystemGridLine {...config.gridLines[0]} />
+      {resolved.map((logo, i) => {
+        // Pick a stable nodeId — prefer the configured Figma ids for the
+        // first three slots, then the tezos/octane ids for slots 4/5, then
+        // a synthesised id beyond that.
+        const configuredNodeId =
+          (i < 3 && logoStatNodeIds[i]) ||
+          (i === 3 && config.tezos.statNodeId) ||
+          (i === 4 && config.octane.statNodeId) ||
+          null;
+        const nodeId = configuredNodeId ?? `${config.rowNodeId}-slot-${i}`;
+        const textNodeId =
+          i === 3
+            ? config.tezos.textNodeId
+            : i === 4
+              ? config.octane.textNodeId
+              : undefined;
+        const gridLine = gridLines[i % gridLines.length];
 
-      <PartnerLogoStat nodeId={stat2} {...logo2} />
-      <EcosystemGridLine {...config.gridLines[1]} />
-
-      <PartnerLogoStat nodeId={stat3} {...logo3} />
-      <EcosystemGridLine {...config.gridLines[2]} />
-
-      <PartnerLogoStat 
-        nodeId={config.tezos.statNodeId} 
-        textNodeId={config.tezos.textNodeId}
-        {...logo4} 
-      />
-      <EcosystemGridLine {...config.gridLines[3]} />
-
-      <PartnerLogoStat 
-        nodeId={config.octane.statNodeId} 
-        textNodeId={config.octane.textNodeId}
-        {...logo5} 
-      />
+        return (
+          <Fragment key={nodeId}>
+            <PartnerLogoStat
+              nodeId={nodeId}
+              textNodeId={textNodeId}
+              src={logo.src}
+              width={logo.width}
+              height={logo.height}
+              name={logo.name}
+            />
+            {i < resolved.length - 1 ? (
+              <EcosystemGridLine {...gridLine} />
+            ) : null}
+          </Fragment>
+        );
+      })}
 
       <Corners
         leftSrc="/ecosystem/corner-tl.svg"

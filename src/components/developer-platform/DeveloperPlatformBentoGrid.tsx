@@ -7,9 +7,9 @@ export function DeveloperPlatformBentoGrid({ data }: { data?: any }) {
 
   const cards = DEVELOPER_PLATFORM_CARDS.map((config, index) => {
     const strapiCard = strapiCards[index] || {};
-    const title = strapiCard.title ?? config.title;
-    const body = strapiCard.body ?? config.body;
-    const imageSrc = mediaUrl(strapiCard.image) || config.imageSrc;
+    const title = strapiCard.title ?? "";
+    const body = strapiCard.body ?? "";
+    const imageSrc = mediaUrl(strapiCard.image) || "";
     return { ...config, title, body, imageSrc };
   });
 

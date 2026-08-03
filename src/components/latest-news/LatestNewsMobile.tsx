@@ -4,38 +4,57 @@ import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
-import { LATEST_NEWS_ARTICLES } from "./latest-news-data";
+import {
+  LATEST_NEWS_ARTICLES,
+  mapArticleToNewsCard,
+  type LatestNewsArticle,
+} from "./latest-news-data";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
 
-export function LatestNewsMobile({ data }: { data?: any }) {
-  const heading = data?.heading || "Latest from Ambient";
-  const subtitle =
-    data?.subtitle ||
-    "Ambient works with partners across silicon, development, distribution, and system integration, helping teams move from evaluation to deployment with confidence";
-  const ctaLabel = data?.cta_label || "Explore more";
-  const ctaHref = data?.cta_href || "/news-listing";
+/** Mobile carousel shows up to 6 cards (2 × visible-by-3 swipe). */
+const VISIBLE_CARD_COUNT = 6;
 
-  // Consume the same Strapi data as desktop. Fall back to the hardcoded
-  // articles when CMS cards are unavailable.
-  const articles =
-    data?.cards && data.cards.length > 0
-      ? data.cards.map((c: any, index: number) => {
-          const fallback =
-            LATEST_NEWS_ARTICLES[index % LATEST_NEWS_ARTICLES.length];
-          return {
-            nodeId: `cms-news-card-mobile-${index}`,
-            title: c.title || fallback.title,
-            excerpt: c.body || fallback.excerpt,
-            category: fallback.category,
-            categoryOffsetX: fallback.categoryOffsetX,
-            date: fallback.date,
-            href: fallback.href,
-            imageSrc: (mediaUrl(c.image) && !mediaUrl(c.image)?.match(/\.(mp4|webm)$/i)) ? mediaUrl(c.image) : fallback.imageSrc,
-          };
-        })
-      : LATEST_NEWS_ARTICLES;
+function resolveCards(data: any): LatestNewsArticle[] {
+  const collectionArticles = Array.isArray(data?.articles)
+    ? data.articles
+    : null;
+  if (collectionArticles && collectionArticles.length > 0) {
+    return collectionArticles
+      .slice(0, VISIBLE_CARD_COUNT)
+      .map((a: any, i: number) =>
+        mapArticleToNewsCard(a, i, { nodeIdPrefix: "cms-news-card-mobile" }),
+      );
+  }
+  if (data?.cards && data.cards.length > 0) {
+    return data.cards.slice(0, VISIBLE_CARD_COUNT).map((c: any, index: number) => {
+      const fallback =
+        LATEST_NEWS_ARTICLES[index % LATEST_NEWS_ARTICLES.length];
+      return {
+        nodeId: `cms-news-card-mobile-${index}`,
+        title: c.title || "",
+        excerpt: c.body || "",
+        category: fallback.category,
+        categoryOffsetX: fallback.categoryOffsetX,
+        date: fallback.date,
+        href: fallback.href,
+        imageSrc:
+          mediaUrl(c.image) && !mediaUrl(c.image)?.match(/\.(mp4|webm)$/i)
+            ? mediaUrl(c.image)
+            : "",
+      };
+    });
+  }
+  return [];
+}
+
+export function LatestNewsMobile({ data }: { data?: any }) {
+  const heading = data?.heading || "";
+  const subtitle = data?.subtitle || "";
+  const ctaLabel = data?.cta_label || "";
+  const ctaHref = data?.cta_href || "";
+  const articles = resolveCards(data);
   return (
     <div className="relative flex flex-col items-center py-[48px]">
       <div className="relative flex flex-col items-center">
@@ -94,13 +113,15 @@ export function LatestNewsMobile({ data }: { data?: any }) {
             className="relative flex w-[327px] shrink-0 snap-start flex-col overflow-clip bg-[rgba(255,255,255,0.04)]"
           >
             <div className="relative h-[184px] w-full shrink-0 overflow-hidden">
-              <Image
-                src={article.imageSrc}
-                alt=""
-                fill
-                className="object-cover"
-                sizes="327px"
-              />
+              {article.imageSrc ? (
+                <Image
+                  src={article.imageSrc}
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="327px"
+                />
+              ) : null}
               <div
                 className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"
                 aria-hidden
@@ -113,7 +134,7 @@ export function LatestNewsMobile({ data }: { data?: any }) {
                 width={180}
                 labelOffsetX={article.categoryOffsetX}
                 rightBarLeft={170.48046875}
-                centerLabel={article.category === "TECHNICAL INSIGHT"}
+                centerLabel={article.categoryOffsetX === 0 || article.category === "TECHNICAL INSIGHT"}
               />
 
               <h3

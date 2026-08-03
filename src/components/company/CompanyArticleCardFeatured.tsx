@@ -51,13 +51,13 @@ export function CompanyArticleCardFeatured({
         <CompanyArticleGreenBadge label={category} />
 
         <h3
-          className={`${gilroyMedium.className} mt-[20px] w-[542px] text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} mt-[20px] w-[542px] text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
         >
           {title}
         </h3>
 
         <p
-          className={`${interRegular.className} mt-[10px] w-[542px] text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
+          className={`${interRegular.className} mt-[10px] w-[542px] text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         >
           {excerpt}
         </p>
@@ -77,11 +77,11 @@ export function CompanyArticleCardFeatured({
 function CompanyArticleGreenBadge({ label }: { label: string }) {
   return (
     <div
-      className={`${dmMono.className} relative h-[26px] w-[180px] shrink-0 border-[0.5px] border-solid border-[rgba(240,240,240,0.3)] bg-[rgba(255,255,255,0.06)]`}
+      className={`${dmMono.className} relative h-[26px] w-[180px] shrink-0 overflow-hidden border-[0.5px] border-solid border-[rgba(240,240,240,0.3)] bg-[rgba(255,255,255,0.06)]`}
       data-name="Menu"
     >
       <Corners leftSrc={cornerLeft} rightSrc={cornerRight} />
-      <p className="absolute top-[calc(50%-4.5px)] left-1/2 -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#53d824] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
+      <p className="absolute top-[calc(50%-4.5px)] left-1/2 max-w-[calc(100%-16px)] -translate-x-1/2 overflow-hidden text-ellipsis text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#53d824] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
         {label}
       </p>
       <div className="absolute top-1/2 left-[6.48px] h-[12px] w-[2px] -translate-y-1/2 bg-[#53d824]" />
@@ -92,13 +92,13 @@ function CompanyArticleGreenBadge({ label }: { label: string }) {
 
 function MetadataItem({ children }: { children: string }) {
   return (
-    <div className="flex shrink-0 items-center gap-[6px]">
+    <div className="flex min-w-0 shrink items-center gap-[6px]">
       <span
         className="h-[12px] w-[2px] shrink-0 bg-[#53d824] opacity-60"
         aria-hidden
       />
       <span
-        className={`${interRegular.className} text-[16px] leading-[24px] font-normal whitespace-nowrap text-[rgba(255,255,255,0.5)] not-italic`}
+        className={`${interRegular.className} overflow-hidden text-ellipsis text-[16px] leading-[24px] font-normal whitespace-nowrap text-[rgba(255,255,255,0.5)] not-italic`}
       >
         {children}
       </span>

@@ -291,8 +291,8 @@ export function filterCategoryId(filterId: string): string {
 
 /**
  * Map Strapi `article` collection rows into the shape the article cards
- * render. Returns the hardcoded fallback list when the collection is empty
- * or unavailable so the page always renders.
+ * render. Returns an empty array when the collection is empty so the page
+ * renders nothing rather than stale hardcoded content.
  */
 type StrapiArticleRow = {
   id?: number;
@@ -306,13 +306,12 @@ type StrapiArticleRow = {
 
 export function buildArticles(strapiArticles: unknown): ResourceArticle[] {
   if (!Array.isArray(strapiArticles) || strapiArticles.length === 0) {
-    return RESOURCE_ARTICLES;
+    return [];
   }
   return (strapiArticles as StrapiArticleRow[]).map(
     (a, i): ResourceArticle => {
-      const fallback = RESOURCE_ARTICLES[i % RESOURCE_ARTICLES.length];
       const cat = String(a?.category || "");
-      
+
       let imageUrl = mediaUrl(a?.featured_image) || undefined;
       if (imageUrl && imageUrl.match(/\.(mp4|webm)$/i)) {
         imageUrl = undefined;
@@ -326,11 +325,11 @@ export function buildArticles(strapiArticles: unknown): ResourceArticle[] {
         categoryId: articleCategoryId(cat),
         categoryOffsetX: 0.5,
         centerCategory: true,
-        title: (a?.title as string) || fallback.title,
-        excerpt: (a?.excerpt as string) || fallback.excerpt,
-        imageSrc: imageUrl || fallback.imageSrc,
-        imageOverlaySrc: imageUrl ? undefined : fallback.imageOverlaySrc,
-        href: (a?.external_url as string) || fallback.href,
+        title: (a?.title as string) || "",
+        excerpt: (a?.excerpt as string) || "",
+        imageSrc: imageUrl,
+        imageOverlaySrc: imageUrl ? undefined : undefined,
+        href: (a?.external_url as string) || undefined,
       };
     }
   );

@@ -4,7 +4,7 @@ import { TagBadge } from "../hero/TagBadge";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
-  PRODUCTS_FEATURE_CARDS,
+  resolveFeatureCards,
   SECTION_TITLE_GRADIENT,
 } from "./products-data";
 import type { ProductsFeatureCardData } from "./products-data";
@@ -56,27 +56,14 @@ export function ProductsFeatures({ data }: { data?: any }) {
       : rawLines;
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
 
-  // Merge Strapi feature cards over the design's fallback cards by index.
-  // Only title + description are CMS-editable; the per-card visual variant
-  // (brain/coin/bubble/stack) and pixel layout (titleLeft/titleWidth/nodeId)
-  // are design-specific and have no Strapi field, so they stay from fallback.
+  // Resolve Strapi feature cards. The visual variant (brain/coin/bubble/
+  // stack) and pixel layout (titleLeft/titleWidth/nodeId) have no Strapi
+  // field, so they come from the Figma fallback — extras cycle variants.
   const rawFeatureCards: any[] = Array.isArray(data?.feature_cards)
     ? data.feature_cards
     : [];
-  const featureCards: ProductsFeatureCardData[] = PRODUCTS_FEATURE_CARDS.map(
-    (fb, i) => {
-      const c = rawFeatureCards[i] || {};
-      const strapiTitle = c.title?.trim();
-      return {
-        ...fb,
-        title: strapiTitle || fb.title,
-        description: c.description?.trim() || fb.description,
-        // When CMS overrides the title, drop the design's explicit two-line
-        // break so the new copy renders (it auto-wraps via word-break).
-        titleLines: strapiTitle ? null : fb.titleLines,
-      };
-    }
-  );
+  const featureCards: ProductsFeatureCardData[] =
+    resolveFeatureCards(rawFeatureCards);
 
   return (
     <section

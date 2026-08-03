@@ -62,38 +62,14 @@ export const LEADERSHIP_TEAM: LeadershipMember[] = [
   },
 ];
 
-const GP_SINGH_ADVISORY = {
-  name: "GP Singh",
-  role: "",
-  bioParagraphs: [] as string[],
-  imageSrc: "/company/leadership/gp-singh.png",
-  imageClassName: ADVISORY_PORTRAIT_CLASS,
-  linkedInHref: "https://www.linkedin.com/in/gp-singh-340732/",
-} as const;
-
-export const ADVISORY_BOARD: LeadershipMember[] = [
-  {
-    ...GP_SINGH_ADVISORY,
-    nodeId: "2379:2300",
-    imageNodeId: "2379:2304",
-    nameNodeId: "2379:2311",
-  },
-  {
-    ...GP_SINGH_ADVISORY,
-    nodeId: "2379:2314",
-    imageNodeId: "2379:2318",
-    nameNodeId: "2379:2325",
-  },
-  {
-    ...GP_SINGH_ADVISORY,
-    nodeId: "2379:2328",
-    imageNodeId: "2379:2332",
-    nameNodeId: "2379:2339",
-  },
-  {
-    ...GP_SINGH_ADVISORY,
-    nodeId: "2379:2342",
-    imageNodeId: "2379:2346",
-    nameNodeId: "2379:2353",
-  },
-];
+/**
+ * Advisory board fallback.
+ *
+ * Previously this contained four placeholder clones of GP Singh, which made
+ * the site appear to ship an advisory board that does not exist. The schema
+ * (`leadership.advisory_board` → `shared.leader`) and the translation layer
+ * in `CompanyAdvisoryBoard.tsx` are fully wired, so real advisors should be
+ * seeded in Strapi. Until then the section is hidden entirely (see
+ * `CompanyAdvisoryBoard.tsx`).
+ */
+export const ADVISORY_BOARD: LeadershipMember[] = [];

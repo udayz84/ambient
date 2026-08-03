@@ -5,11 +5,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { gilroyMedium, interMedium, interRegular } from "../hero/fonts";
 import { CompanyCardCorners } from "../company/company-corners";
 import { dmMono } from "../hero/fonts";
-import {
-  CAREERS_JOBS,
-  CAREERS_JOB_TYPE_FILTER_OPTIONS,
-  CAREERS_LOCATION_FILTER_OPTIONS,
-} from "./careers-data";
 import { CareersRolesProfileCta } from "./careers-shared";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
@@ -47,18 +42,15 @@ export function CareersOpenRoles({
   const [jobTypeFilter, setJobTypeFilter] = useState<string>("all");
   const [locationFilter, setLocationFilter] = useState<string>("all");
 
-  const heading = data?.heading || "Open Roles";
-  const generalAppTitle =
-    data?.general_app_title || "Don't See The Right Role?";
-  const generalAppSubtitle =
-    data?.general_app_subtitle ||
-    "Submit a general application and we'll reach out when a matching position opens.";
-  const generalAppCtaLabel =
-    data?.general_app_cta_label || "SHARE YOUR PROFILE";
-  const applyButtonLabel = data?.apply_button_label || "APPLY NOW";
-  
-  // Use dynamically fetched jobs if available, otherwise fallback to static data
-  const jobs = data?.fetchedJobs?.length ? data.fetchedJobs : CAREERS_JOBS;
+  const heading = data?.heading || "";
+  const generalAppTitle = data?.general_app_title || "";
+  const generalAppSubtitle = data?.general_app_subtitle || "";
+  const generalAppCtaLabel = data?.general_app_cta_label || "";
+  const applyButtonLabel = data?.apply_button_label || "";
+
+  const jobs: ReadonlyArray<any> = Array.isArray(data?.fetchedJobs)
+    ? data.fetchedJobs
+    : [];
 
   // Build Job Type options from dynamic categories if available
   const dynamicJobTypeOptions = data?.fetchedCategories?.length
@@ -69,7 +61,7 @@ export function CareersOpenRoles({
           label: c.name || "Unknown",
         })),
       ]
-    : CAREERS_JOB_TYPE_FILTER_OPTIONS;
+    : [{ value: "all", label: "All" }];
 
   // Build location options from the jobs list dynamically
   const uniqueLocations = Array.from(new Set(jobs.map((j: any) => j.location).filter(Boolean)));
@@ -81,7 +73,7 @@ export function CareersOpenRoles({
           label: String(loc).replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
         })),
       ]
-    : CAREERS_LOCATION_FILTER_OPTIONS;
+    : [{ value: "all", label: "All" }];
 
   const filteredJobs = useMemo(
     () =>

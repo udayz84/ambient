@@ -5,10 +5,8 @@ const cornerLeft = "/hero/corner-tag-1.svg";
 const cornerRight = "/hero/corner-tag-2.svg";
 
 export function DeveloperPlatformHeader({ data }: { data?: any }) {
-  const heading = data?.heading || "Build the impossible today";
-  const subtitle =
-    data?.subtitle ||
-    "Don't let legacy design limit your roadmap. Discover the market-differentiating features of the GPX10 and what's coming next.";
+  const heading = data?.heading || "";
+  const subtitle = data?.subtitle || "";
   return (
     <div
       className="absolute top-0 left-1/2 z-10 h-[151px] w-[604.2265625px] -translate-x-1/2"

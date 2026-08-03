@@ -3,9 +3,6 @@ import { mediaUrl } from "@/lib/strapi";
 import { Corners } from "../shared/Corners";
 import { CornerDecor, GradientTitle } from "./contact-shared";
 
-const DEFAULT_HEADING = "Schedule a Consultation";
-const DEFAULT_SUBTITLE = "Book a direct meeting with our engineering or commercial teams.";
-
 const cards = [
   {
     nodeId: "2379:8448",
@@ -15,14 +12,8 @@ const cards = [
     descNodeId: "2379:8460",
     ctaNodeId: "2379:8461",
     imageNodeId: "2379:8470",
-    tag: "Technical",
-    title: "Talk to an FAE (Field Application Engineer)",
-    description:
-      "Book a 30-minute session with our engineers. Discuss power profiling, model quantization, or deployment architecture for your use case.",
     descriptionWidth: "w-[366px]",
-    ctaLabel: "View FAE Calendar",
     ctaWidth: "w-[225px]",
-    imageSrc: "/contact/schedule-fae.png",
     imageClassName:
       "absolute h-[151%] left-[-15.13%] top-[-23.38%] w-[110.37%] max-w-none",
   },
@@ -34,42 +25,32 @@ const cards = [
     descNodeId: "2379:8483",
     ctaNodeId: "2379:8484",
     imageNodeId: "2379:8493",
-    tag: "Commercial",
-    title: "Commercial Scaling & Enterprise",
-    description:
-      "Connect with Business Development to discuss pricing, ASIC development, timelines, licensing, or supply partnerships.",
     descriptionWidth: "w-[387px]",
-    ctaLabel: "View Commercial Calendar",
     ctaWidth: "w-[291px]",
-    imageSrc: "/contact/schedule-commercial.png",
     imageClassName:
       "absolute h-[112.61%] left-[-45.12%] top-[-12.61%] w-[185%] max-w-none",
   },
 ] as const;
 
 export function ContactSchedule({ data }: { data?: any }) {
-  const heading = data?.heading || DEFAULT_HEADING;
-  const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
+  const heading = data?.heading || "";
+  const subtitle = data?.subtitle || "";
   const sectionIcon = mediaUrl(data?.icon);
   const strapiCards: ReadonlyArray<any> = Array.isArray(data?.cards)
     ? data.cards
     : [];
   // Render every CMS card. Layout metadata (widths, image scaling, node ids)
   // cycles through the designed 2-card templates so any count is supported.
-  const mergedCards = (
-    strapiCards.length > 0 ? strapiCards : cards
-  ).map((remote: any, index: number) => {
+  const mergedCards = strapiCards.map((remote: any, index: number) => {
     const layout = cards[index] || cards[index % cards.length];
-    const fallback = cards[index] || {};
     return {
       ...layout,
-      tag: remote.tag || fallback.tag,
-      title: remote.title || fallback.title,
-      description: remote.description || fallback.description,
-      ctaLabel: remote.cta_label || fallback.ctaLabel,
-      // schedule-card schema has no url field; read cta_href forward-compat,
-      // fall back to "#" when absent.
-      ctaHref: remote.cta_href || "#",
+      tag: remote.tag || "",
+      title: remote.title || "",
+      description: remote.description || "",
+      ctaLabel: remote.cta_label || "",
+      // schedule-card schema has no url field; read cta_href forward-compat.
+      ctaHref: remote.cta_href || "",
       remoteImage: mediaUrl(remote.image),
     };
   });
@@ -146,18 +127,21 @@ function ScheduleCard({
   ctaLabel,
   ctaHref,
   ctaWidth,
-  imageSrc,
   remoteImage,
   imageClassName,
   className,
   style,
-}: (typeof cards)[number] & {
-  remoteImage: string | null;
+}: Omit<(typeof cards)[number], "imageSrc"> & {
+  tag: string;
+  title: string;
+  description: string;
+  ctaLabel: string;
   ctaHref: string;
+  remoteImage: string | null;
   className: string;
   style?: React.CSSProperties;
 }) {
-  const imageFinal = remoteImage || imageSrc;
+  const imageFinal = remoteImage;
   return (
     <div
       className={`absolute top-0 ${className} h-[320px] w-[590px] overflow-visible bg-[rgba(0,0,0,0.2)]`}
@@ -187,14 +171,16 @@ function ScheduleCard({
         </div>
       </div>
 
-      <ScheduleCta label={ctaLabel} href={ctaHref || "#"} nodeId={ctaNodeId} widthClass={ctaWidth} />
+      <ScheduleCta label={ctaLabel} href={ctaHref} nodeId={ctaNodeId} widthClass={ctaWidth} />
 
       <div
         className="pointer-events-none absolute top-[90px] left-[380px] z-[1] h-[230px] w-[210px] overflow-hidden"
         data-node-id={imageNodeId}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img alt="" className={imageClassName} src={imageFinal} />
+        {imageFinal ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img alt="" className={imageClassName} src={imageFinal} />
+        ) : null}
       </div>
 
       <div className="pointer-events-none absolute inset-0 z-[30] border-[0.5px] border-solid border-[rgba(240,240,240,0.45)]">

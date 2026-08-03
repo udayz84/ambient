@@ -109,13 +109,15 @@ export function TechnologyVisual({ data }: { data?: any } = {}) {
           data-node-id="2379:1424"
           data-name="image 37"
         >
-          <Image
-            src={mediaUrl(data?.image) || "/technology/chip-visual.png"}
-            alt={data?.image_alt || ""}
-            fill
-            className="object-bottom"
-            sizes="732px"
-          />
+          {mediaUrl(data?.image) ? (
+            <Image
+              src={mediaUrl(data?.image) as string}
+              alt={data?.image_alt || ""}
+              fill
+              className="object-bottom"
+              sizes="732px"
+            />
+          ) : null}
         </div>
       </div>
     </TechnologyVisualFadeIn>

@@ -96,27 +96,15 @@ function SectionWrap({
 }
 
 /* ---------------------------------- HERO ---------------------------------- */
-const HERO_DEFAULT_TITLE = "Start building\nwith Ambient";
-const HERO_DEFAULT_SUBTITLE =
-  "Skip the generic sales inbox. Get direct access to our engineering team, technical documentation, and commercial partners.";
-const RESOURCES_DEFAULT_HEADING = "Looking for immediate resources?";
-const RESOURCES_DEFAULT_CTAS = [
-  { label: "Download Datasheets & SDK", href: "#", variant: "primary" },
-  { label: "Download Press Kit", href: "#", variant: "secondary" },
-  { label: "Case Studies & Whitepapers", href: "#", variant: "secondary" },
-] as const;
-
 function ContactHeroMobile({ data }: { data?: any }) {
   const heroData = data?.hero;
   const resourcesData = data?.resources;
-  const bg = mediaUrl(heroData?.mobile_background_image) || mediaUrl(heroData?.background_image) || "/mobile/contact/hand.png";
-  const titleLines = (heroData?.title || HERO_DEFAULT_TITLE).split("\n");
-  const subtitle = heroData?.subtitle || HERO_DEFAULT_SUBTITLE;
-  const heading = resourcesData?.heading || RESOURCES_DEFAULT_HEADING;
+  const bg = mediaUrl(heroData?.mobile_background_image) || mediaUrl(heroData?.background_image);
+  const titleLines = (heroData?.title || "").split("\n");
+  const subtitle = heroData?.subtitle || "";
+  const heading = resourcesData?.heading || "";
   const ctas: ReadonlyArray<{ label: string; href: string; variant: string }> =
-    Array.isArray(resourcesData?.ctas) && resourcesData.ctas.length > 0
-      ? resourcesData.ctas
-      : RESOURCES_DEFAULT_CTAS;
+    Array.isArray(resourcesData?.ctas) ? resourcesData.ctas : [];
 
   return (
     <section
@@ -132,14 +120,16 @@ function ContactHeroMobile({ data }: { data?: any }) {
           style={{ top: 60, height: 518 }}
           aria-hidden
         >
-          <Image
-            src={bg}
-            alt=""
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
-          />
+          {bg ? (
+            <Image
+              src={bg}
+              alt={heroData?.mobile_background_image_alt || heroData?.background_image_alt || ""}
+              fill
+              className="object-cover"
+              sizes="100vw"
+              priority
+            />
+          ) : null}
           <div
             className="absolute inset-0"
             style={{ backgroundImage: "linear-gradient(177.572deg, rgba(0, 0, 0, 0) 74.733%, rgb(0, 0, 0) 100.97%)" }}
@@ -287,29 +277,19 @@ function MapIndicator({
   );
 }
 
-const MAP_DEFAULT_HEADING = "Global scale.\nLocal support.";
-const MAP_DEFAULT_SUBTITLE =
-  "From our research labs to your production line, we maintain direct engineering presence across three continents to ensure rapid deployment and ongoing support.";
-
 const MAP_LOCATIONS = [
   {
-    title: "USA Headquarters",
-    address: "Ambient Scientific Inc. 4633 Old Ironsides Drive Santa Clara California 95054. USA",
     iconPosition: "left" as const,
     cardTop: 240,
     connector: { centerX: 24.14, top: 260, height: 381.28, diamondAt: "bottom" as const },
   },
   {
-    title: "Singapore Headquarters",
-    address: "137 Telok Ayer Street, #05-02, Singapore 068602",
     iconPosition: "right" as const,
     cardTop: 380,
     cardLeft: 29,
     connector: { centerX: 357.14, top: 480, height: 202.28, diamondAt: "bottom" as const },
   },
   {
-    title: "India Headquarters",
-    address: "Ramky House, 1st Cross, Raghavendra Nagar, Kalyan Nagar, Bengaluru Karnataka, 560043, India",
     iconPosition: "left" as const,
     cardTop: 740,
     connector: { centerX: 282.43, top: 638, height: 155, diamondAt: "top" as const },
@@ -317,27 +297,24 @@ const MAP_LOCATIONS = [
 ];
 
 function ContactMapMobile({ data }: { data?: any }) {
-  const globeImage = mediaUrl(data?.globe_image) || "/contact/Globe image.png";
-  const mapBase = mediaUrl(data?.map_base) || "/contact/map-base.svg";
-  const headingText = data?.heading || MAP_DEFAULT_HEADING;
-  const headingLines = headingText.includes("\n") 
-    ? headingText.split("\n") 
+  const globeImage = mediaUrl(data?.globe_image);
+  const mapBase = mediaUrl(data?.map_base);
+  const headingText = data?.heading || "";
+  const headingLines = headingText.includes("\n")
+    ? headingText.split("\n")
     : headingText.replace(/\.\s+/, ".\n").split("\n");
-  const subtitle = data?.subtitle || MAP_DEFAULT_SUBTITLE;
+  const subtitle = data?.subtitle || "";
   const strapiLocations: ReadonlyArray<any> = Array.isArray(data?.locations)
     ? data.locations
     : [];
   // Render every CMS location. Layout metadata cycles through the designed
   // 3-slot templates so any count is supported while preserving the layout.
-  const mergedLocations = (
-    strapiLocations.length > 0 ? strapiLocations : MAP_LOCATIONS
-  ).map((remote: any, index: number) => {
+  const mergedLocations = strapiLocations.map((remote: any, index: number) => {
     const layout = MAP_LOCATIONS[index] || MAP_LOCATIONS[index % MAP_LOCATIONS.length];
-    const fallback = MAP_LOCATIONS[index] || {};
     return {
       ...layout,
-      title: remote.title || fallback.title,
-      address: remote.address || fallback.address,
+      title: remote.title || "",
+      address: remote.address || "",
     };
   });
 
@@ -348,13 +325,15 @@ function ContactMapMobile({ data }: { data?: any }) {
         className="pointer-events-none absolute left-[-485.6px] top-[692px] h-[692.08px] w-[1365.19px] overflow-hidden"
         aria-hidden
       >
-        <Image
-          src={globeImage}
-          alt=""
-          fill
-          className="object-cover object-top"
-          sizes="393px"
-        />
+        {globeImage ? (
+          <Image
+            src={globeImage}
+            alt={data?.globe_image_alt || ""}
+            fill
+            className="object-cover object-top"
+            sizes="393px"
+          />
+        ) : null}
       </div>
 
       {/* Dotted map-base grid (background mapping) per Figma — at section (-38, 587), 497.39x162.35 */}
@@ -362,8 +341,10 @@ function ContactMapMobile({ data }: { data?: any }) {
         className="pointer-events-none absolute left-[-38px] top-[587px] h-[162.353px] w-[497.388px] opacity-20"
         aria-hidden
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={mapBase} alt="" className="block size-full max-w-none object-cover" />
+        {mapBase ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={mapBase} alt={data?.map_base_alt || ""} className="block size-full max-w-none object-cover" />
+        ) : null}
       </div>
 
       <div className="relative z-10 flex flex-col items-center w-full pt-[30px] h-full">
@@ -416,51 +397,32 @@ function ContactMapMobile({ data }: { data?: any }) {
 }
 
 /* -------------------------------- SCHEDULE -------------------------------- */
-const SCHEDULE_DEFAULT_HEADING = "Schedule a Consultation";
-const SCHEDULE_DEFAULT_SUBTITLE =
-  "Book a direct meeting with our engineering or commercial teams.";
-
 const SCHEDULE_CARDS = [
   {
-    tag: "Technical",
-    title: "Talk to an FAE (Field Application Engineer)",
-    description:
-      "Book a 30-minute session with our engineers. Discuss power profiling, model quantization, or deployment architecture for your use case.",
-    ctaLabel: "View FAE Calendar",
-    imageSrc: "/contact/schedule-fae.png",
     widthClass: "w-[178px]",
   },
   {
-    tag: "Commercial",
-    title: "Commercial Scaling & Enterprise",
-    description:
-      "Connect with Business Development to discuss pricing, ASIC development, timelines, licensing, or supply partnerships.",
-    ctaLabel: "View Commercial Calendar",
-    imageSrc: "/contact/schedule-commercial.png",
     widthClass: "w-[218px]",
   },
 ];
 
 function ContactScheduleMobile({ data }: { data?: any }) {
-  const heading = data?.heading || SCHEDULE_DEFAULT_HEADING;
-  const subtitle = data?.subtitle || SCHEDULE_DEFAULT_SUBTITLE;
+  const heading = data?.heading || "";
+  const subtitle = data?.subtitle || "";
   const strapiCards: ReadonlyArray<any> = Array.isArray(data?.cards)
     ? data.cards
     : [];
-  // Render every CMS card. Layout metadata (image scaling, widths) cycles
-  // through the designed 2-card templates so any count is supported.
-  const mergedCards = (
-    strapiCards.length > 0 ? strapiCards : SCHEDULE_CARDS
-  ).map((remote: any, index: number) => {
+  // Render every CMS card. Layout metadata (widths) cycles through the
+  // designed 2-card templates so any count is supported.
+  const mergedCards = strapiCards.map((remote: any, index: number) => {
     const layout = SCHEDULE_CARDS[index] || SCHEDULE_CARDS[index % SCHEDULE_CARDS.length];
-    const fallback = SCHEDULE_CARDS[index] || {};
     return {
       ...layout,
-      tag: remote.tag || fallback.tag,
-      title: remote.title || fallback.title,
-      description: remote.description || fallback.description,
-      ctaLabel: remote.cta_label || fallback.ctaLabel,
-      ctaHref: remote.cta_href || "#",
+      tag: remote.tag || "",
+      title: remote.title || "",
+      description: remote.description || "",
+      ctaLabel: remote.cta_label || "",
+      ctaHref: remote.cta_href || "",
       remoteImage: mediaUrl(remote.image),
     };
   });
@@ -483,33 +445,35 @@ function ContactScheduleMobile({ data }: { data?: any }) {
       </div>
 
       <div className="mt-[24px] flex w-[353px] flex-col gap-[24px]">
-        {mergedCards.map((card) => {
-          const isCommercial = card.tag === "Commercial";
-          const imageFinal = card.remoteImage || card.imageSrc;
+        {mergedCards.map((card, index) => {
+          const isCommercial = index % 2 === 1;
+          const imageFinal = card.remoteImage;
           return (
             <article
-              key={card.title}
+              key={`schedule-card-${index}`}
               className="relative flex flex-col h-[361px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-transparent pt-[16px] px-[16px] pb-[24px]"
             >
               <Corners />
 
               {/* Image Container Wrapper to match desktop scaling exactly */}
               <div className="pointer-events-none absolute bottom-0 right-0 z-0 h-[242px] w-[227px] overflow-hidden">
-                {isCommercial ? (
-                  /* eslint-disable-next-line @next/next/no-img-element */
-                  <img
-                    src={imageFinal}
-                    alt=""
-                    className="absolute h-[80%] left-[5%] top-[20%] w-[125%] max-w-none"
-                  />
-                ) : (
-                  /* eslint-disable-next-line @next/next/no-img-element */
-                  <img
-                    src={imageFinal}
-                    alt=""
-                    className="absolute h-[151%] left-[-15.13%] top-[-10%] w-[110.37%] max-w-none"
-                  />
-                )}
+                {imageFinal ? (
+                  isCommercial ? (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
+                      src={imageFinal}
+                      alt=""
+                      className="absolute h-[80%] left-[5%] top-[20%] w-[125%] max-w-none"
+                    />
+                  ) : (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
+                      src={imageFinal}
+                      alt=""
+                      className="absolute h-[151%] left-[-15.13%] top-[-10%] w-[110.37%] max-w-none"
+                    />
+                  )
+                ) : null}
               </div>
 
               <div className="flex flex-col items-start gap-[20px] w-full relative z-10 pointer-events-none">
@@ -562,44 +526,19 @@ function ContactScheduleMobile({ data }: { data?: any }) {
 /* ---------------------------------- FORM ---------------------------------- */
 type TrackId = "sales" | "developer" | "media";
 
-const FORM_DEFAULT_HEADING = "Prefer to write to us?";
-const FORM_DEFAULT_SUBTITLE =
-  "Select your track below to ensure your message reaches the right desk immediately.";
-const FORM_DEFAULT_MESSAGE_HEADING = "Drop Us a Message";
-const FORM_DEFAULT_CHECKBOX_LABEL = "Sign up for news & updates";
-const FORM_DEFAULT_SUBMIT_LABEL = "Send Message";
-
-const TRACKS: { id: TrackId; title: string; description: string; icon: string }[] = [
-  {
-    id: "sales",
-    title: "Sales & Enterprise",
-    description:
-      "Request a quote, discuss volume licensing, or inquire about custom ASIC development.",
-    icon: "/contact/track-sales.svg",
-  },
-  {
-    id: "developer",
-    title: "Developer Support",
-    description:
-      "Report a bug, request documentation, or get help compiling your model via the Nebula SDK.",
-    icon: "/contact/track-developer.svg",
-  },
-  {
-    id: "media",
-    title: "Media & Press",
-    description:
-      "Request an interview with our leadership team, access press materials, or coordinate coverage.",
-    icon: "/contact/track-media.svg",
-  },
+const TRACKS: { id: TrackId }[] = [
+  { id: "sales" },
+  { id: "developer" },
+  { id: "media" },
 ];
 
 const FORM_FIELDS = [
-  { label: "First Name", placeholder: "Enter Your First Name", type: "text" },
-  { label: "Last Name", placeholder: "Enter Your Last Name", type: "text" },
-  { label: "Company Name", placeholder: "Enter Your Company Name", type: "text" },
-  { label: "Job Title", placeholder: "Enter Your Job Title", type: "text" },
-  { label: "Corporate Email", placeholder: "Enter Your Corporate Email", type: "email" },
-  { label: "Phone Number", placeholder: "Enter Your Phone Number", type: "tel" },
+  { type: "text" },
+  { type: "text" },
+  { type: "text" },
+  { type: "text" },
+  { type: "email" },
+  { type: "tel" },
 ];
 
 function mapInputTypeMobile(fieldType: string | undefined | null): string {
@@ -617,23 +556,23 @@ function ContactFormMobile({ data }: { data?: any }) {
   const [activeTrackId, setActiveTrackId] = useState<TrackId>("sales");
   const [subscribed, setSubscribed] = useState(false);
 
-  const heading = data?.heading || FORM_DEFAULT_HEADING;
-  const subtitle = data?.subtitle || FORM_DEFAULT_SUBTITLE;
-  const messageHeading = data?.message_heading || FORM_DEFAULT_MESSAGE_HEADING;
-  const checkboxLabel = data?.checkbox_label || FORM_DEFAULT_CHECKBOX_LABEL;
-  const submitLabel = data?.submit_label || FORM_DEFAULT_SUBMIT_LABEL;
-  const submitHref = data?.submit_href || "#";
+  const heading = data?.heading || "";
+  const subtitle = data?.subtitle || "";
+  const messageHeading = data?.message_heading || "";
+  const checkboxLabel = data?.checkbox_label || "";
+  const submitLabel = data?.submit_label || "";
+  const submitHref = data?.submit_href || "";
 
   const strapiTracks: ReadonlyArray<any> = Array.isArray(data?.tracks)
     ? data.tracks
     : [];
   const mergedTracks = TRACKS.map((track, index) => {
     const remote = strapiTracks[index];
-    if (!remote) return { ...track, remoteIcon: null, strapiFields: [] };
+    if (!remote) return { ...track, title: "", description: "", remoteIcon: null, strapiFields: [] };
     return {
       ...track,
-      title: remote.label || track.title,
-      description: remote.description || track.description,
+      title: remote.label || "",
+      description: remote.description || "",
       remoteIcon: mediaUrl(remote.icon),
       strapiFields: Array.isArray(remote.form) ? remote.form : [],
     };
@@ -651,22 +590,20 @@ function ContactFormMobile({ data }: { data?: any }) {
     (f: any) => f.field_type === "textarea",
   );
 
-  // Build input fields — Strapi data where available, fallback for the rest
+  // Build input fields from Strapi data where available
   const mergedFields = FORM_FIELDS.map((fallback, index) => {
     const remote = strapiInputFields[index];
-    if (!remote) return { ...fallback };
+    if (!remote) return { ...fallback, label: "", placeholder: "" };
     return {
-      label: remote.label || fallback.label,
-      placeholder: remote.placeholder || fallback.placeholder,
+      label: remote.label || "",
+      placeholder: remote.placeholder || "",
       type: mapInputTypeMobile(remote.field_type),
     };
   });
 
-  // Bottom textarea: use Strapi data if available, otherwise fallback
-  const textareaLabel = strapiTextareaField?.label || "How can we help?";
-  const textareaPlaceholder =
-    strapiTextareaField?.placeholder ||
-    "Describe your use case, technical requirements, or business needs...";
+  // Bottom textarea from Strapi data
+  const textareaLabel = strapiTextareaField?.label || "";
+  const textareaPlaceholder = strapiTextareaField?.placeholder || "";
 
   return (
     <SectionWrap aria-label="Contact form" className="!pb-[20px] relative z-10 -mb-[266px]">
@@ -681,7 +618,7 @@ function ContactFormMobile({ data }: { data?: any }) {
       <div className="mt-[24px] flex w-full flex-col gap-[10px] relative z-10">
         {mergedTracks.map((track) => {
           const selected = activeTrackId === track.id;
-          const iconSrc = track.remoteIcon || track.icon;
+          const iconSrc = track.remoteIcon;
           return (
             <button
               key={track.id}
@@ -696,13 +633,15 @@ function ContactFormMobile({ data }: { data?: any }) {
             >
               <Corners />
               <div className="relative size-[28px] shrink-0">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  alt=""
-                  src={iconSrc}
-                  className={`absolute inset-0 size-full object-contain ${selected ? "opacity-100" : "opacity-70 brightness-0 invert"}`}
-                  aria-hidden
-                />
+                {iconSrc ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    alt=""
+                    src={iconSrc}
+                    className={`absolute inset-0 size-full object-contain ${selected ? "opacity-100" : "opacity-70 brightness-0 invert"}`}
+                    aria-hidden
+                  />
+                ) : null}
               </div>
               <div className="flex flex-1 flex-col gap-[4px]">
                 <p className={`${gilroyMedium.className} text-[16px] leading-[20px] font-medium text-white not-italic`}>

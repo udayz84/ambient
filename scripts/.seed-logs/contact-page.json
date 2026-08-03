@@ -57,6 +57,7 @@
         "title": "Talk to an FAE (Field Application Engineer)",
         "description": "Book a 30-minute session with our engineers. Discuss power profiling, model quantization, or deployment architecture for your use case.",
         "cta_label": "View FAE Calendar",
+        "cta_href": "https://calendly.com/ambientscientific/fae",
         "image": 58
       },
       {
@@ -64,6 +65,7 @@
         "title": "Commercial Scaling & Enterprise",
         "description": "Connect with Business Development to discuss pricing, ASIC development, timelines, licensing, or supply partnerships.",
         "cta_label": "View Commercial Calendar",
+        "cta_href": "https://calendly.com/ambientscientific/commercial",
         "image": 59
       }
     ]
@@ -74,58 +76,133 @@
     "message_heading": "Drop Us a Message",
     "checkbox_label": "Sign up for news & updates",
     "submit_label": "Send Message",
+    "submit_href": "#",
     "tracks": [
       {
         "label": "Sales & Enterprise",
         "description": "Request a quote, discuss volume licensing, or inquire about custom ASIC development.",
-        "icon": 60
+        "icon": 60,
+        "form": [
+          {
+            "label": "First Name",
+            "placeholder": "Enter Your First Name",
+            "field_type": "text"
+          },
+          {
+            "label": "Last Name",
+            "placeholder": "Enter Your Last Name",
+            "field_type": "text"
+          },
+          {
+            "label": "Company Name",
+            "placeholder": "Enter Your Company Name",
+            "field_type": "text"
+          },
+          {
+            "label": "Job Title",
+            "placeholder": "Enter Your Job Title",
+            "field_type": "text"
+          },
+          {
+            "label": "Corporate Email",
+            "placeholder": "Enter Your Corporate Email",
+            "field_type": "email"
+          },
+          {
+            "label": "Phone Number",
+            "placeholder": "Enter Your Phone Number",
+            "field_type": "phone"
+          },
+          {
+            "label": "How can we help?",
+            "placeholder": "Describe your use case, technical requirements, or business needs...",
+            "field_type": "textarea"
+          }
+        ]
       },
       {
         "label": "Developer Support",
         "description": "Report a bug, request documentation, or get help compiling your model via the Nebula SDK.",
-        "icon": 61
+        "icon": 61,
+        "form": [
+          {
+            "label": "First Name",
+            "placeholder": "Enter Your First Name",
+            "field_type": "text"
+          },
+          {
+            "label": "Last Name",
+            "placeholder": "Enter Your Last Name",
+            "field_type": "text"
+          },
+          {
+            "label": "Company Name",
+            "placeholder": "Enter Your Company Name",
+            "field_type": "text"
+          },
+          {
+            "label": "Job Title",
+            "placeholder": "Enter Your Job Title",
+            "field_type": "text"
+          },
+          {
+            "label": "Corporate Email",
+            "placeholder": "Enter Your Corporate Email",
+            "field_type": "email"
+          },
+          {
+            "label": "Phone Number",
+            "placeholder": "Enter Your Phone Number",
+            "field_type": "phone"
+          },
+          {
+            "label": "How can we help?",
+            "placeholder": "Describe your use case, technical requirements, or business needs...",
+            "field_type": "textarea"
+          }
+        ]
       },
       {
         "label": "Media & Press",
         "description": "Request an interview with our leadership team, access press materials, or coordinate coverage.",
-        "icon": 62
-      }
-    ],
-    "fields": [
-      {
-        "label": "First Name",
-        "placeholder": "Enter Your First Name",
-        "field_type": "text"
-      },
-      {
-        "label": "Last Name",
-        "placeholder": "Enter Your Last Name",
-        "field_type": "text"
-      },
-      {
-        "label": "Company Name",
-        "placeholder": "Enter Your Company Name",
-        "field_type": "text"
-      },
-      {
-        "label": "Job Title",
-        "placeholder": "Enter Your Job Title",
-        "field_type": "text"
-      },
-      {
-        "label": "Corporate Email",
-        "placeholder": "Enter Your Corporate Email",
-        "field_type": "email"
-      },
-      {
-        "label": "Phone Number",
-        "placeholder": "Enter Your Phone Number",
-        "field_type": "phone"
-      },
-      {
-        "label": "How can we help?",
-        "placeholder": "Describe your use case, technical requirements, or business needs...",
-        "field_type": "textarea"
+        "icon": 62,
+        "form": [
+          {
+            "label": "First Name",
+            "placeholder": "Enter Your First Name",
+            "field_type": "text"
+          },
+          {
+            "label": "Last Name",
+            "placeholder": "Enter Your Last Name",
+            "field_type": "text"
+          },
+          {
+            "label": "Company Name",
+            "placeholder": "Enter Your Company Name",
+            "field_type": "text"
+          },
+          {
+            "label": "Job Title",
+            "placeholder": "Enter Your Job Title",
+            "field_type": "text"
+          },
+          {
+            "label": "Corporate Email",
+            "placeholder": "Enter Your Corporate Email",
+            "field_type": "email"
+          },
+          {
+            "label": "Phone Number",
+            "placeholder": "Enter Your Phone Number",
+            "field_type": "phone"
+          },
+          {
+            "label": "How can we help?",
+            "placeholder": "Describe your use case, technical requirements, or business needs...",
+            "field_type": "textarea"
+          }
+        ]
       }
     ]
   },

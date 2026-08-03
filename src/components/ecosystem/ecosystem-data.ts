@@ -85,21 +85,53 @@ export const DEVELOPMENT_PARTNER_ROW: PartnerRowConfig = {
 
 export type ResolvedPartner = PartnerLogo & { name: string | null };
 
+// Slot index -> layout dimensions (sourced from Figma, not Strapi).
+// Used as the per-slot dimension fallback when Strapi does not provide
+// its own `logo.width`/`logo.height`, and as the empty-slot template
+// when no partners are supplied.
+const SLOT_DIMENSIONS: readonly PartnerLogo[] = [
+  { src: "", width: 86, height: 23 },
+  { src: "", width: 120, height: 22 },
+  { src: "", width: 81, height: 19 },
+  { src: "", width: 35, height: 35 },
+  { src: "", width: 35, height: 35 },
+];
+
+const DEFAULT_SLOT: PartnerLogo = { src: "", width: 86, height: 23 };
+
+/**
+ * Resolve Strapi partners into the rendered shape. The rendered count is
+ * no longer locked to 5 — when Strapi provides partners, every partner
+ * gets its own slot. When Strapi provides none, we fall back to the 5
+ * Figma slots so the empty row keeps its designed proportions.
+ *
+ * Per-slot dimensions come from `SLOT_DIMENSIONS` (cycling for indices
+ * past the Figma list) so layout density stays consistent regardless of
+ * how many partners the editor has configured.
+ */
 export function resolvePartners(
   partners: readonly EcosystemPartner[] | undefined | null,
-  fallbackLogos: readonly PartnerLogo[]
+  fallbackLogos?: readonly PartnerLogo[]
 ): ResolvedPartner[] {
-  const result: ResolvedPartner[] = [];
-  for (let i = 0; i < 5; i++) {
-    const fallback = fallbackLogos[i] ?? { src: "/ecosystem/logo-partner-1.svg", width: 86, height: 23 };
-    const p = partners?.[i];
-    const url = mediaUrl(p?.logo);
-    result.push({
-      src: url || fallback.src,
-      width: p?.logo?.width || fallback.width,
-      height: p?.logo?.height || fallback.height,
-      name: p?.name || null,
-    });
+  void fallbackLogos;
+
+  if (!partners || partners.length === 0) {
+    return SLOT_DIMENSIONS.map((slot) => ({
+      src: slot.src,
+      width: slot.width,
+      height: slot.height,
+      name: null,
+    }));
   }
-  return result;
+
+  return partners.map((p, i) => {
+    const slot = SLOT_DIMENSIONS[i % SLOT_DIMENSIONS.length] ?? DEFAULT_SLOT;
+    const url = mediaUrl(p?.logo);
+    return {
+      src: url || "",
+      width: p?.logo?.width || slot.width,
+      height: p?.logo?.height || slot.height,
+      name: p?.name || null,
+    };
+  });
 }

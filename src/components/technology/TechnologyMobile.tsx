@@ -3,47 +3,18 @@ import { mediaUrl } from "@/lib/strapi";
 import { TagBadge } from "../hero/TagBadge";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 
-const FALLBACK_FEATURES = [
-  {
-    iconSrc: "/technology/icon-speak-ai.svg",
-    title: "Speak AI natively",
-    description:
-      "Standard chips waste time translating AI workloads. Our architecture processes matrix math natively for high-density performance.",
-  },
-  {
-    iconSrc: "/technology/icon-compute.svg",
-    title: "Compute where the data lives",
-    description:
-      "We built our analog processing engine in memory. Processing in place eliminates data commute, saving battery life.",
-  },
-  {
-    iconSrc: "/technology/icon-tools.svg",
-    title: "Standard tools. zero friction",
-    description:
-      "Our platform adapts to your software. Compile your PyTorch or TensorFlow models in minutes, no coding needed.",
-  },
-] as const;
-
 export function TechnologyMobile({ data }: { data?: any }) {
-  const tagText = data?.tag?.text || "Real-time AI at edge";
-  let heading = data?.heading || "Re-architecting\nthe physics of\nAI compute";
-  if (heading === "Re-architecting the physics of AI compute") {
-    heading = "Re-architecting\nthe physics of\nAI compute";
-  }
+  const tagText = data?.tag?.text || "";
+  let heading = data?.heading || "";
   const headingLines = heading.split("\n");
   while (headingLines.length < 3) headingLines.push("");
 
-  const features = (Array.isArray(data?.features) && data.features.length
-    ? data.features
-    : FALLBACK_FEATURES
-  ).map((feature: any, index: number) => {
-    const fallback = FALLBACK_FEATURES[index] || {};
-    const iconSrc =
-      mediaUrl(feature?.icon) || fallback.iconSrc || "/technology/icon-tools.svg";
+  const features = (Array.isArray(data?.features) ? data.features : []).map((feature: any) => {
+    const iconSrc = mediaUrl(feature?.icon) || "";
     return {
       iconSrc,
-      title: feature?.title || fallback.title || "",
-      description: feature?.description || fallback.description || "",
+      title: feature?.title || "",
+      description: feature?.description || "",
     };
   });
 
@@ -117,14 +88,16 @@ export function TechnologyMobile({ data }: { data?: any }) {
             WebkitMaskImage: "radial-gradient(ellipse at center, black 70%, transparent 100%)",
           }}
         >
-          <Image
-            src={mediaUrl(data?.image) || "/mobile/Image-re-arch.png"}
-            alt={data?.image_alt || ""}
-            width={389}
-            height={184}
-            className="w-full h-auto object-cover"
-            sizes="100vw"
-          />
+          {mediaUrl(data?.image) ? (
+            <Image
+              src={mediaUrl(data?.image) as string}
+              alt={data?.image_alt || ""}
+              width={389}
+              height={184}
+              className="w-full h-auto object-cover"
+              sizes="100vw"
+            />
+          ) : null}
         </div>
 
         {/* Features Content with Padding */}
@@ -169,12 +142,14 @@ export function TechnologyMobile({ data }: { data?: any }) {
 
                 <div className="flex flex-col gap-[3px] items-start py-[20px] relative w-full">
                   <div className="relative size-[33px] shrink-0">
-                    <img
-                      src={feature.iconSrc}
-                      alt=""
-                      className="absolute inset-0 size-full object-contain"
-                      aria-hidden
-                    />
+                    {feature.iconSrc ? (
+                      <img
+                        src={feature.iconSrc}
+                        alt=""
+                        className="absolute inset-0 size-full object-contain"
+                        aria-hidden
+                      />
+                    ) : null}
                   </div>
                   <p
                     className={`${gilroyMedium.className} [word-break:break-word] text-[22px] leading-[38px] whitespace-nowrap text-white not-italic shrink-0 relative`}

@@ -8,10 +8,7 @@ import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular, interSemiBold, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import {
-  ARTICLE_IMAGE_BASE,
   FEATURED_RESOURCES,
-  RESOURCE_ARTICLES,
-  RESOURCE_CATEGORIES,
   filterCategoryId,
   type ResourceArticle,
 } from "./resources-data";
@@ -21,27 +18,6 @@ const GREEN_CTA_SHADOW =
 
 const INITIAL_VISIBLE_COUNT = 6;
 const LOAD_MORE_COUNT = 3;
-
-const FALLBACK_HERO_TITLE = "Explore whitepapers,\narchitectural deep-\ndives, and\nperformance data";
-const FALLBACK_SEARCH_PLACEHOLDER = "Search architecture, case studies, or GPX...";
-const FALLBACK_SEARCH_LABEL = "Search";
-const FALLBACK_CONTACT_TEXT = "Contact Us";
-const FALLBACK_CONTACT_HREF = "/contact";
-const FALLBACK_HERO_BG = "/mobile/resources/image 102.png";
-const FALLBACK_FEATURED_HEADING = "Featured Resources";
-const FALLBACK_FEATURED_TITLE = "Re-architecting the Physics of AI Compute.";
-const FALLBACK_FEATURED_DESC =
-  "Standard chips waste time translating AI workloads. Our architecture processes matrix math natively for high-density performance.";
-const FALLBACK_FEATURED_CTA = "DOWNLOAD PDF";
-const FALLBACK_BUILDING_HEADING = "Building with\nAmbient?";
-const FALLBACK_BUILDING_SUBTITLE =
-  "Access the ModelForge SDK, API references, model compilation guides, and hardware documentation.";
-const FALLBACK_BUILDING_CTA = "GO TO DEVELOPER HUB";
-const FALLBACK_BUILDING_CTA_HREF = "#";
-const FALLBACK_LOAD_MORE_LABEL = "Load More Resources";
-const FALLBACK_NEWS_HEADING =
-  "Looking for latest developments, events, and announcements?";
-const FALLBACK_NEWS_CTA = "VISIT NEWS PAGE";
 
 function gradient(deg: string) {
   return `linear-gradient(${deg}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`;
@@ -130,20 +106,16 @@ function WhiteCta({
 
 /* ---------------------------------- HERO ---------------------------------- */
 function ResourcesHeroMobile({ data }: { data?: any } = {}) {
-  const titleRaw = (data?.title as string) || FALLBACK_HERO_TITLE;
+  const titleRaw = (data?.title as string) || "";
   const titleLines = titleRaw.split("\n");
-  const placeholder =
-    (data?.search_placeholder as string) || FALLBACK_SEARCH_PLACEHOLDER;
-  const searchLabel =
-    (data?.search_button_label as string) || FALLBACK_SEARCH_LABEL;
-  const contactText =
-    (data?.contact_link_text as string) || FALLBACK_CONTACT_TEXT;
-  const contactHref =
-    (data?.contact_link_href as string) || FALLBACK_CONTACT_HREF;
+  const placeholder = (data?.search_placeholder as string) || "";
+  const searchLabel = (data?.search_button_label as string) || "";
+  const contactText = (data?.contact_link_text as string) || "";
+  const contactHref = (data?.contact_link_href as string) || "";
   const heroBgSrc =
     mediaUrl(data?.mobile_background_image) ||
     mediaUrl(data?.background_image) ||
-    FALLBACK_HERO_BG;
+    "";
 
   return (
     <section
@@ -151,14 +123,16 @@ function ResourcesHeroMobile({ data }: { data?: any } = {}) {
       aria-label="Resources hero"
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-        <Image
-          src={heroBgSrc}
-          alt=""
-          fill
-          className="object-cover object-top opacity-100 brightness-125"
-          sizes="100vw"
-          priority
-        />
+        {heroBgSrc ? (
+          <Image
+            src={heroBgSrc}
+            alt={data?.mobile_background_image_alt || data?.background_image_alt || ""}
+            fill
+            className="object-cover object-top opacity-100 brightness-125"
+            sizes="100vw"
+            priority
+          />
+        ) : null}
       </div>
 
       <h1
@@ -268,19 +242,19 @@ function ResourcesHeroMobile({ data }: { data?: any } = {}) {
 
 /* ------------------------------- FEATURED --------------------------------- */
 function ResourcesFeaturedMobile({ data }: { data?: any } = {}) {
-  const heading = (data?.heading as string) || FALLBACK_FEATURED_HEADING;
+  const heading = (data?.heading as string) || "";
   const strapiCards = Array.isArray(data?.cards) ? data.cards : [];
-  const cards = FEATURED_RESOURCES.map((layout, i) => {
-    const card = strapiCards[i] || {};
+  const cards = strapiCards.map((card: any, i: number) => {
+    const layout = FEATURED_RESOURCES[i] || FEATURED_RESOURCES[0];
     return {
       ...layout,
-      imageSrc: mediaUrl(card.image) || layout.imageSrc,
-      badgeLabel: (card.badge_label as string) || layout.badgeLabel,
-      title: (card.title as string) || FALLBACK_FEATURED_TITLE,
-      description: (card.description as string) || FALLBACK_FEATURED_DESC,
-      ctaLabel: (card.cta_label as string) || FALLBACK_FEATURED_CTA,
-      ctaHref: (card.cta_href as string) || "#",
-      pdfUrl: mediaUrl(card.pdf_file) || undefined,
+      imageSrc: mediaUrl(card?.image) || "",
+      badgeLabel: (card?.badge_label as string) || "",
+      title: (card?.title as string) || "",
+      description: (card?.description as string) || "",
+      ctaLabel: (card?.cta_label as string) || "",
+      ctaHref: (card?.cta_href as string) || "",
+      pdfUrl: mediaUrl(card?.pdf_file) || undefined,
     };
   });
 
@@ -296,21 +270,23 @@ function ResourcesFeaturedMobile({ data }: { data?: any } = {}) {
       </h2>
 
       <div className="flex w-full snap-x snap-mandatory gap-[10px] overflow-x-auto px-[calc(50%-124px)] pb-[32px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {cards.map((card) => (
+        {cards.map((card: any, index: number) => (
           <article
-            key={card.nodeId}
+            key={`featured-card-${index}`}
             className="relative flex w-[248px] shrink-0 snap-center flex-col bg-[#191919] border-[0.5px] border-solid border-[rgba(255,255,255,0.3)] p-[10px]"
           >
             <Corners />
             <div className="relative flex h-[215px] w-[228px] shrink-0 flex-col items-end overflow-clip p-[12px]">
               <div aria-hidden className="pointer-events-none absolute inset-0">
-                <Image
-                  src={card.imageSrc}
-                  alt=""
-                  fill
-                  className={card.imageClassName || "object-cover"}
-                  sizes="228px"
-                />
+                {card.imageSrc ? (
+                  <Image
+                    src={card.imageSrc}
+                    alt=""
+                    fill
+                    className={card.imageClassName || "object-cover"}
+                    sizes="228px"
+                  />
+                ) : null}
                 <div className="absolute inset-0 bg-gradient-to-b from-[rgba(25,25,25,0)] from-[79.181%] to-[#191919]" />
               </div>
 
@@ -351,11 +327,11 @@ function ResourcesFeaturedMobile({ data }: { data?: any } = {}) {
 
 /* ------------------------------- BUILDING --------------------------------- */
 function ResourcesBuildingMobile({ data }: { data?: any } = {}) {
-  const headingRaw = (data?.heading as string) || FALLBACK_BUILDING_HEADING;
+  const headingRaw = (data?.heading as string) || "";
   const headingLines = headingRaw.split("\n");
-  const subtitle = (data?.subtitle as string) || FALLBACK_BUILDING_SUBTITLE;
-  const ctaLabel = (data?.cta_label as string) || FALLBACK_BUILDING_CTA;
-  const ctaHref = (data?.cta_href as string) || FALLBACK_BUILDING_CTA_HREF;
+  const subtitle = (data?.subtitle as string) || "";
+  const ctaLabel = (data?.cta_label as string) || "";
+  const ctaHref = (data?.cta_href as string) || "";
 
   return (
     <section
@@ -444,23 +420,15 @@ function ResourcesContentMobile({
   articles?: ResourceArticle[];
 } = {}) {
   const strapiCats = Array.isArray(data?.categories) ? data.categories : [];
-  const categories: MobileCategory[] =
-    strapiCats.length > 0
-      ? strapiCats.map((c: any, i: number) => {
-          const fallback = RESOURCE_CATEGORIES[i] || RESOURCE_CATEGORIES[0];
-          return {
-            id: (c?.category_id as string) || fallback.id,
-            label: (c?.label as string) || fallback.label,
-            active: Boolean(c?.is_active),
-          };
-        })
-      : RESOURCE_CATEGORIES.map((c) => ({
-          id: c.id,
-          label: c.label,
-          active: "active" in c ? Boolean(c.active) : false,
-        }));
+  const categories: MobileCategory[] = strapiCats.map((c: any) => {
+    return {
+      id: (c?.category_id as string) || "",
+      label: (c?.label as string) || "",
+      active: Boolean(c?.is_active),
+    };
+  });
   const initialActiveId =
-    categories.find((c) => c.active)?.id || categories[0]?.id || "webinar";
+    categories.find((c) => c.active)?.id || categories[0]?.id || "";
   const initialVisible: number =
     typeof data?.initial_visible === "number"
       ? data.initial_visible
@@ -469,11 +437,10 @@ function ResourcesContentMobile({
     typeof data?.load_more_count === "number"
       ? data.load_more_count
       : LOAD_MORE_COUNT;
-  const loadMoreLabel =
-    (data?.load_more_label as string) || FALLBACK_LOAD_MORE_LABEL;
+  const loadMoreLabel = (data?.load_more_label as string) || "";
+  void loadMoreCount;
 
-  const allArticles =
-    articles && articles.length > 0 ? articles : RESOURCE_ARTICLES;
+  const allArticles = Array.isArray(articles) ? articles : [];
 
   const [activeCategory, setActiveCategory] = useState(initialActiveId);
   const [visibleCount, setVisibleCount] = useState(initialVisible);
@@ -532,13 +499,15 @@ function ResourcesContentMobile({
           >
             <Corners />
             <div className="relative h-[244px] w-full shrink-0 overflow-hidden bg-[#151515]">
-              <Image
-                src={article.imageSrc || ARTICLE_IMAGE_BASE}
-                alt=""
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 335px"
-              />
+              {article.imageSrc ? (
+                <Image
+                  src={article.imageSrc}
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 335px"
+                />
+              ) : null}
               {article.imageOverlaySrc ? (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <Image
@@ -583,9 +552,9 @@ function ResourcesContentMobile({
 
 /* ------------------------------- NEWS CTA --------------------------------- */
 function ResourcesNewsCtaMobile({ data }: { data?: any } = {}) {
-  const heading = (data?.heading as string) || FALLBACK_NEWS_HEADING;
-  const ctaLabel = (data?.cta_label as string) || FALLBACK_NEWS_CTA;
-  const ctaHref = (data?.cta_href as string) || "/news-listing";
+  const heading = (data?.heading as string) || "";
+  const ctaLabel = (data?.cta_label as string) || "";
+  const ctaHref = (data?.cta_href as string) || "";
 
   return (
     <section

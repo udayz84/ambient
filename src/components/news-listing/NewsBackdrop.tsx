@@ -1,8 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { mediaUrl } from "@/lib/strapi";
 
-const FALLBACK_BACKDROP = "/news-listing/backdrop-dots.png";
-
 /* Node 2500:1654 vignette, mapped into the final landscape 1440x810 box
  * (Figma applies the radial gradient to the 810x1440 portrait box and then
  * rotates it with the box; this is the equivalent direct-landscape gradient:
@@ -15,7 +13,7 @@ type NewsBackdropProps = {
 };
 
 export function NewsBackdrop({ data }: NewsBackdropProps = {}) {
-  const backdropSrc = mediaUrl(data?.backdrop_image) || FALLBACK_BACKDROP;
+  const backdropSrc = mediaUrl(data?.backdrop_image);
 
   return (
     <div
@@ -25,12 +23,14 @@ export function NewsBackdrop({ data }: NewsBackdropProps = {}) {
       data-name="image 107"
     >
       <div className="absolute inset-0 w-full h-full">
-        <img
-          src={backdropSrc}
-          alt=""
-          aria-hidden
-          className="absolute inset-0 size-full object-cover"
-        />
+        {backdropSrc ? (
+          <img
+            src={backdropSrc}
+            alt={data?.alt || ""}
+            aria-hidden
+            className="absolute inset-0 size-full object-cover"
+          />
+        ) : null}
         <div className="absolute inset-0" style={{ backgroundImage: VIGNETTE }} />
       </div>
     </div>

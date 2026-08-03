@@ -42,6 +42,12 @@ export function CompanyAdvisoryBoard({ data }: CompanyAdvisoryBoardProps = {}) {
         )
       : ADVISORY_BOARD;
 
+  // No Strapi advisory data and no fallback advisors — hide the section
+  // entirely rather than rendering an empty title block.
+  if (members.length === 0) {
+    return null;
+  }
+
   return (
     <div
       className="relative mt-[60px] h-[438px] w-full shrink-0"

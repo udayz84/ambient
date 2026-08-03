@@ -10,11 +10,6 @@ const badgeCornerTr = "/resources/badge-corner-tr.svg";
 const cardCornerLeft = "/hero/vector-57.svg";
 const cardCornerRight = "/hero/vector-55.svg";
 
-const FALLBACK_TITLE = "Re-architecting the Physics of AI Compute.";
-const FALLBACK_DESCRIPTION =
-  "Standard chips waste time translating AI workloads. Our architecture processes matrix math natively for high-density performance.";
-const FALLBACK_CTA_LABEL = "Download PDF";
-
 type ResourcesFeaturedCardProps = ResourceFeaturedCard & {
   title?: string;
   description?: string;
@@ -33,9 +28,9 @@ export function ResourcesFeaturedCard({
   badgeNodeId,
   badgeLabel,
   badgeVariant,
-  title = FALLBACK_TITLE,
-  description = FALLBACK_DESCRIPTION,
-  ctaLabel = FALLBACK_CTA_LABEL,
+  title,
+  description,
+  ctaLabel,
   ctaHref = "#",
   pdfUrl,
   enableDownloadPopup = false,
@@ -63,8 +58,10 @@ export function ResourcesFeaturedCard({
           data-name="Image"
         >
           <div aria-hidden className="pointer-events-none absolute inset-0">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt="" className={imageClassName} src={imageSrc} />
+            {imageSrc ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img alt="" className={imageClassName} src={imageSrc} />
+            ) : null}
             <div className="absolute inset-0 bg-gradient-to-b from-[rgba(25,25,25,0)] from-[79.181%] to-[#191919]" />
           </div>
           <WhitepaperBadge
@@ -77,12 +74,12 @@ export function ResourcesFeaturedCard({
         <div className="flex w-full flex-col gap-[24px] p-[16px]">
           <div className="flex flex-col gap-[12px]">
             <h3
-              className={`${gilroyMedium.className} w-[290px] text-[22px] leading-[28px] font-medium text-white opacity-90 not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} w-[290px] text-[22px] leading-[28px] font-medium text-white opacity-90 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
             >
               {title}
             </h3>
             <p
-              className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[#a4a4a4] opacity-90 not-italic [word-break:break-word]`}
+              className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[#a4a4a4] opacity-90 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
             >
               {description}
             </p>

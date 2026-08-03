@@ -1,4 +1,3 @@
-import { CAREERS_BENEFITS_CARDS } from "./careers-data";
 import { CareersFramedTitle, CareersGradientCard } from "./careers-shared";
 import { mediaUrl } from "@/lib/strapi";
 import type { CareersValueCard } from "./careers-data";
@@ -10,17 +9,14 @@ export function CareersBenefits({
   data?: any;
   offsetY?: number;
 }) {
-  const heading = data?.heading || "Benefits & Perks";
+  const heading = data?.heading || "";
   const titleFrame = "/careers/title-frame-benefits.svg";
   const cards: CareersValueCard[] = (
-    data?.cards && Array.isArray(data.cards) && data.cards.length > 0
-      ? data.cards
-      : CAREERS_BENEFITS_CARDS
-  ).map((c: any, i: number) => ({
-    icon: mediaUrl(c?.icon) || CAREERS_BENEFITS_CARDS[i]?.icon || "",
-    title: c?.title || CAREERS_BENEFITS_CARDS[i]?.title || "",
-    description:
-      c?.description || CAREERS_BENEFITS_CARDS[i]?.description || "",
+    Array.isArray(data?.cards) ? data.cards : []
+  ).map((c: any) => ({
+    icon: mediaUrl(c?.icon) || "",
+    title: c?.title || "",
+    description: c?.description || "",
     titleSize: "lg" as const,
   }));
 
@@ -49,7 +45,7 @@ export function CareersBenefits({
       >
         {cards.map((card, index) => (
           <CareersGradientCard
-            key={card.title}
+            key={`benefit-card-${index}`}
             card={card}
             className="cursor-pointer"
             nodeId={

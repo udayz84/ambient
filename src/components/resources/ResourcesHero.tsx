@@ -9,14 +9,6 @@ const IMAGE_102_GRADIENT =
 
 const TEXT_FADE_IN_CLASS = "animate-hero-text-fade-in opacity-0";
 
-const FALLBACK_TITLE =
-  "Explore whitepapers, architectural deep-dives, and performance data";
-const FALLBACK_PLACEHOLDER =
-  "Search architecture, case studies, or GPX metrics...";
-const FALLBACK_SEARCH_LABEL = "Search";
-const FALLBACK_CONTACT_TEXT = "Contact Us";
-const FALLBACK_CONTACT_HREF = "/contact";
-const FALLBACK_BG = "/resources/image-102.png";
 const HERO_TITLE_FRAME = "/resources/hero-title-frame.svg";
 
 type ResourcesHeroProps = {
@@ -24,16 +16,12 @@ type ResourcesHeroProps = {
 };
 
 export function ResourcesHero({ data }: ResourcesHeroProps = {}) {
-  const title = (data?.title as string) || FALLBACK_TITLE;
-  const placeholder =
-    (data?.search_placeholder as string) || FALLBACK_PLACEHOLDER;
-  const searchLabel =
-    (data?.search_button_label as string) || FALLBACK_SEARCH_LABEL;
-  const contactText =
-    (data?.contact_link_text as string) || FALLBACK_CONTACT_TEXT;
-  const contactHref =
-    (data?.contact_link_href as string) || FALLBACK_CONTACT_HREF;
-  const bgSrc = mediaUrl(data?.background_image) || FALLBACK_BG;
+  const title = (data?.title as string) || "";
+  const placeholder = (data?.search_placeholder as string) || "";
+  const searchLabel = (data?.search_button_label as string) || "";
+  const contactText = (data?.contact_link_text as string) || "";
+  const contactHref = (data?.contact_link_href as string) || "";
+  const bgSrc = mediaUrl(data?.background_image);
   const titleLines = title.split("\n");
 
   return (
@@ -51,15 +39,17 @@ export function ResourcesHero({ data }: ResourcesHeroProps = {}) {
               data-node-id="2379:1603"
               data-name="image 102"
             >
-              <Image
-                src={bgSrc}
-                alt=""
-                fill
-                className="max-w-none object-cover"
-                sizes="825px"
-                priority
-                unoptimized
-              />
+              {bgSrc ? (
+                <Image
+                  src={bgSrc}
+                  alt={data?.background_image_alt || ""}
+                  fill
+                  className="max-w-none object-cover"
+                  sizes="825px"
+                  priority
+                  unoptimized
+                />
+              ) : null}
               <div
                 className="absolute inset-0"
                 style={{ backgroundImage: IMAGE_102_GRADIENT }}

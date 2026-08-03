@@ -2,7 +2,7 @@ import Image from "next/image";
 import { gilroyMedium } from "../hero/fonts";
 
 export function TechnologyHeadline({ data }: { data?: any }) {
-  let heading = data?.heading || "Re-architecting the\nphysics of AI compute";
+  let heading = data?.heading || "";
   if (heading === "Re-architecting the physics of AI compute") {
     heading = "Re-architecting the\nphysics of AI compute";
   }

@@ -5,8 +5,8 @@ import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 export function PlatformScaleCta({ data }: { data?: any }) {
   const cta = data?.cta || {};
-  const label = cta.label || "EXPLORE AMBIENT SILICON";
-  const href = cta.href || "/technology";
+  const label = cta.label || "";
+  const href = cta.href || "";
   return (
     <a
       href={href}

@@ -3,8 +3,8 @@ import { TagBadge } from "../hero/TagBadge";
 import { gilroyMedium } from "../hero/fonts";
 
 export function MeasuredProofHeader({ data }: { data?: any }) {
-  const tagText = data?.tag?.text || "Real-time AI at edge";
-  const heading = data?.heading || "Measured proof in silicon";
+  const tagText = data?.tag?.text || "";
+  const heading = data?.heading || "";
   return (
     <div
       className="absolute top-[30px] left-1/2 flex w-[748px] -translate-x-1/2 flex-col content-stretch items-center gap-[16px]"

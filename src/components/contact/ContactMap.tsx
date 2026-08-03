@@ -3,16 +3,8 @@ import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { CornerDecor, FramedBox, GradientTitle, LocationIcon } from "./contact-shared";
 
-const DEFAULT_HEADING = "Global scale.\nLocal support.";
-const DEFAULT_SUBTITLE =
-  "From our research labs to your production line, we maintain direct engineering presence across three continents to ensure rapid deployment and ongoing support.";
-
 const locations = [
   {
-    title: "USA Headquarters",
-    address:
-      "Ambient Scientific Inc. 4633 Old Ironsides Drive Santa Clara California 95054. USA",
-    indicator: "/contact/map-indicator-us.svg",
     indicatorClass: "absolute left-[100px] top-[107px] h-[102.632px] w-[28.284px]",
     indicatorInset: "inset-[-3.9%_-14.14%_0_-14.14%]",
     indicatorGroupNodeId: "2379:8346",
@@ -22,9 +14,6 @@ const locations = [
     nodeId: "2379:8362",
   },
   {
-    title: "Singapore Headquarters",
-    address: "137 Telok Ayer Street, #05-02, Singapore 068602",
-    indicator: "/contact/map-indicator-sg.svg",
     indicatorLayout: "rotated",
     indicatorClass:
       "absolute left-[757px] top-[164px] flex h-[164px] w-[28.284px] items-center justify-center",
@@ -35,16 +24,6 @@ const locations = [
     nodeId: "2379:8376",
   },
   {
-    title: "India Headquarters",
-    address: (
-      <>
-        <span className="block leading-[24px]">Ramky House, 1st Cross,</span>
-        <span className="block leading-[24px]">
-          Raghavendra Nagar, Kalyan Nagar, Bengaluru Karnataka, 560043, India
-        </span>
-      </>
-    ),
-    indicator: "/contact/map-indicator-in.svg",
     indicatorClass: "absolute left-[961px] top-[56px] h-[165.284px] w-[28.284px]",
     indicatorInset: "inset-[0_-14.14%_-2.42%_-14.14%]",
     indicatorGroupNodeId: "2379:8358",
@@ -58,28 +37,25 @@ const CONTACT_VIEWPORT_SCALE =
   "translateX(-50%) scaleX(max(1, calc(100vw / 1440px)))";
 
 export function ContactMap({ data }: { data?: any }) {
-  const globeImage = mediaUrl(data?.globe_image) || "/contact/Globe image.png";
-  const mapBase = mediaUrl(data?.map_base) || "/contact/map-base.svg";
-  const headingText = data?.heading || DEFAULT_HEADING;
-  const headingLines = headingText.includes("\n") 
-    ? headingText.split("\n") 
+  const globeImage = mediaUrl(data?.globe_image) ?? "";
+  const mapBase = mediaUrl(data?.map_base) ?? "";
+  const headingText = data?.heading || "";
+  const headingLines = headingText.includes("\n")
+    ? headingText.split("\n")
     : headingText.replace(/\.\s+/, ".\n").split("\n");
-  const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
+  const subtitle = data?.subtitle || "";
   const strapiLocations: ReadonlyArray<any> = Array.isArray(data?.locations)
     ? data.locations
     : [];
   // Render every CMS location. Layout metadata (indicator + card positions)
   // cycles through the designed 3-slot templates so any count is supported
   // while the designed layout is preserved.
-  const mergedLocations = (
-    strapiLocations.length > 0 ? strapiLocations : locations
-  ).map((remote: any, index: number) => {
+  const mergedLocations = strapiLocations.map((remote: any, index: number) => {
     const layout = locations[index] || locations[index % locations.length];
-    const fallback = locations[index] || {};
     return {
       ...layout,
-      title: remote.title || fallback.title,
-      address: remote.address || fallback.address,
+      title: remote.title || "",
+      address: remote.address || "",
       remoteIcon: mediaUrl(remote.indicator_icon),
     };
   });
@@ -100,14 +76,16 @@ export function ContactMap({ data }: { data?: any }) {
         <div className="flex-none">
           <div className="relative h-[1002px] w-[1440px]" data-node-id="2379:5087">
             <div aria-hidden className="pointer-events-none absolute inset-0">
-              <Image
-                src={globeImage}
-                alt=""
-                fill
-                className="object-cover object-center"
-                sizes="1440px"
-                priority
-              />
+              {globeImage ? (
+                <Image
+                  src={globeImage}
+                  alt={data?.globe_image_alt || ""}
+                  fill
+                  className="object-cover object-center"
+                  sizes="1440px"
+                  priority
+                />
+              ) : null}
             </div>
             <div className="pointer-events-none absolute inset-y-0 left-0 w-[250px] bg-gradient-to-r from-black to-transparent" />
             <div className="pointer-events-none absolute inset-y-0 right-0 w-[250px] bg-gradient-to-l from-black to-transparent" />
@@ -144,12 +122,14 @@ export function ContactMap({ data }: { data?: any }) {
         className="pointer-events-none absolute top-[609px] left-[38px] h-[392px] w-[1204px] origin-center overflow-clip opacity-20"
         data-node-id="2379:5089"
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt=""
-          className="absolute inset-0 block size-full max-w-none object-cover object-center"
-          src={mapBase}
-        />
+        {mapBase ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            alt={data?.map_base_alt || ""}
+            className="absolute inset-0 block size-full max-w-none object-cover object-center"
+            src={mapBase}
+          />
+        ) : null}
       </div>
 
       <div
@@ -180,7 +160,7 @@ function LocationBlock({
 }: {
   title: string;
   address: React.ReactNode;
-  indicator: string;
+  indicator?: string;
   remoteIcon: string | null;
   indicatorClass: string;
   indicatorLayout?: "rotated";
@@ -212,8 +192,10 @@ function LocationBlock({
               data-name="Indicator"
             >
               <div className="absolute inset-[-14.14%_0_-14.14%_-2.44%]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img alt="" className="block size-full max-w-none" src={indicatorSrc} />
+                {indicatorSrc ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img alt="" className="block size-full max-w-none" src={indicatorSrc} />
+                ) : null}
               </div>
             </div>
           </div>
@@ -223,8 +205,10 @@ function LocationBlock({
             data-node-id={indicatorNodeId}
             data-name="Indicator"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt="" className="block size-full max-w-none" src={indicatorSrc} />
+            {indicatorSrc ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img alt="" className="block size-full max-w-none" src={indicatorSrc} />
+            ) : null}
           </div>
         )}
       </div>

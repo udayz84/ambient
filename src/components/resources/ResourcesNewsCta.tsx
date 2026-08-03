@@ -10,25 +10,16 @@ const titleLineStyle = {
   backgroundClip: "text",
 } as const;
 
-const FALLBACK_HEADING_LINES = [
-  "Looking for latest developments,",
-  "events, and announcements?",
-];
-const FALLBACK_CTA_LABEL = "Visit News Page";
-const FALLBACK_CTA_HREF = "/news-listing";
-
 type ResourcesNewsCtaProps = {
   top: number;
   data?: any;
 };
 
 export function ResourcesNewsCta({ top, data }: ResourcesNewsCtaProps) {
-  const headingRaw = (data?.heading as string) || null;
-  const headingLines = headingRaw
-    ? headingRaw.split("\n")
-    : FALLBACK_HEADING_LINES;
-  const ctaLabel = (data?.cta_label as string) || FALLBACK_CTA_LABEL;
-  const ctaHref = (data?.cta_href as string) || FALLBACK_CTA_HREF;
+  const headingRaw = (data?.heading as string) || "";
+  const headingLines = headingRaw ? headingRaw.split("\n") : [];
+  const ctaLabel = (data?.cta_label as string) || "";
+  const ctaHref = (data?.cta_href as string) || "";
 
   return (
     <section

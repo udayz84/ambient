@@ -48,13 +48,11 @@ function PartnerSectionMobile({
 }
 
 export function EcosystemMobile({ data }: { data?: any }) {
-  const heading = data?.heading || "Supported by a growing ecosystem";
-  const subtitle =
-    data?.subtitle ||
-    "Ambient works with partners across silicon, development, distribution, and system integration, helping teams move from evaluation to deployment with confidence";
+  const heading = data?.heading || "";
+  const subtitle = data?.subtitle || "";
   const cta = data?.cta || {};
-  const ctaLabel = cta.label || "WORK WITH US";
-  const ctaHref = cta.href || "/contact";
+  const ctaLabel = cta.label || "";
+  const ctaHref = cta.href || "";
   return (
     <div className="relative flex flex-col items-center py-[48px]">
       <div className="relative inline-flex flex-col items-center justify-center w-fit max-w-[350px] px-[16px] py-[12px]">

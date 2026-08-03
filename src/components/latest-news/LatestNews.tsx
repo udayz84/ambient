@@ -5,7 +5,11 @@ import { RepelDots } from "../shared/RepelDots";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { LatestNewsCard } from "./LatestNewsCard";
-import { LATEST_NEWS_ARTICLES } from "./latest-news-data";
+import {
+  LATEST_NEWS_ARTICLES,
+  mapArticleToNewsCard,
+  type LatestNewsArticle,
+} from "./latest-news-data";
 import { LatestNewsMobile } from "./LatestNewsMobile";
 
 const cornerLeft = "/hero/corner-tag-1.svg";
@@ -13,13 +17,53 @@ const cornerRight = "/hero/corner-tag-2.svg";
 const ctaDot = "/navbar/cta-dot.svg";
 const ctaTextClass = `${interRegular.className} text-[16px] leading-[normal] font-normal`;
 
+/**
+ * Resolve the visible news cards. Articles from the `articles` collection
+ * (flagged with `show_on_homepage`) take precedence; otherwise we fall back
+ * to the embedded `latest_news.cards` components. Capped to 3 to preserve
+ * the home-page layout (3 × 388px cards in a 1204px row).
+ */
+const VISIBLE_CARD_COUNT = 3;
+
+function resolveCards(data: any): LatestNewsArticle[] {
+  const collectionArticles = Array.isArray(data?.articles)
+    ? data.articles
+    : null;
+  if (collectionArticles && collectionArticles.length > 0) {
+    return collectionArticles
+      .slice(0, VISIBLE_CARD_COUNT)
+      .map((a: any, i: number) => mapArticleToNewsCard(a, i));
+  }
+  if (data?.cards && data.cards.length > 0) {
+    return data.cards
+      .slice(0, VISIBLE_CARD_COUNT)
+      .map((c: any, index: number) => {
+        const fallback =
+          LATEST_NEWS_ARTICLES[index % LATEST_NEWS_ARTICLES.length];
+        return {
+          nodeId: `cms-news-card-${index}`,
+          title: c.title || "",
+          excerpt: c.body || "",
+          category: fallback.category,
+          categoryOffsetX: fallback.categoryOffsetX,
+          date: fallback.date,
+          href: fallback.href,
+          imageSrc:
+            mediaUrl(c.image) && !mediaUrl(c.image)?.match(/\.(mp4|webm)$/i)
+              ? mediaUrl(c.image)
+              : "",
+        };
+      });
+  }
+  return [];
+}
+
 export function LatestNews({ data }: { data?: any }) {
-  const heading = data?.heading || "Latest from Ambient";
-  const subtitle =
-    data?.subtitle ||
-    "Ambient works with partners across silicon, development, distribution, and system integration, helping teams move from evaluation to deployment with confidence";
-  const ctaLabel = data?.cta_label || "Explore more";
-  const ctaHref = data?.cta_href || "/news-listing";
+  const heading = data?.heading || "";
+  const subtitle = data?.subtitle || "";
+  const ctaLabel = data?.cta_label || "";
+  const ctaHref = data?.cta_href || "";
+  const cards = resolveCards(data);
   return (
     <section
       className="relative mt-[150px] flex w-full justify-center overflow-x-clip bg-black max-[1023px]:mt-[24px]"
@@ -85,22 +129,7 @@ export function LatestNews({ data }: { data?: any }) {
             className="flex w-full shrink-0 items-center gap-[20px]"
             data-node-id="2379:1291"
           >
-            {(data?.cards && data.cards.length > 0
-              ? data.cards.map((c: any, index: number) => {
-                  const fallback = LATEST_NEWS_ARTICLES[index % LATEST_NEWS_ARTICLES.length];
-                  return {
-                    nodeId: `cms-news-card-${index}`,
-                    title: c.title || fallback.title,
-                    excerpt: c.body || fallback.excerpt,
-                    category: fallback.category,
-                    categoryOffsetX: fallback.categoryOffsetX,
-                    date: fallback.date,
-                    href: fallback.href,
-                    imageSrc: (mediaUrl(c.image) && !mediaUrl(c.image)?.match(/\.(mp4|webm)$/i)) ? mediaUrl(c.image) : fallback.imageSrc,
-                  };
-                })
-              : LATEST_NEWS_ARTICLES
-            ).map((article: any) => (
+            {cards.map((article: LatestNewsArticle) => (
               <LatestNewsCard key={article.nodeId} {...article} />
             ))}
           </div>
