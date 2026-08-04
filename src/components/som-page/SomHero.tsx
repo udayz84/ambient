@@ -211,77 +211,114 @@ export function SomHero({ data }: { data?: any }) {
         </div>
       </div>
 
-      {/* MOBILE (<1024px) */}
-      <div className="relative flex w-full flex-col min-[1024px]:hidden">
-        {/* Background */}
-        <div aria-hidden className="pointer-events-none absolute inset-0">
+      {/* MOBILE (<1024px) — Figma node 4046:7801 "Banner" 393×700 */}
+      <div
+        className="relative mx-auto h-[700px] w-[393px] overflow-hidden bg-black min-[1024px]:hidden"
+        data-node-id="4046:7801"
+        data-name="Banner"
+      >
+        {/* Hero image — 4046:7810 (x0, y208, 393×360) */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-0 top-[208px] h-[360px] w-full overflow-hidden"
+          data-node-id="4046:7810"
+          data-name="Gemini_Generated_Image_9x8w339x8w339x8w 1"
+        >
           {backgroundImage && (
             <img
               src={backgroundImage}
               alt=""
-              className="size-full max-w-none object-cover"
+              className="absolute inset-0 size-full object-cover"
             />
           )}
-          <div className="absolute inset-0 bg-black/55" />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                "linear-gradient(180deg, rgb(0,0,0) 1.5278%, rgba(0,0,0,0) 19.444%), linear-gradient(185.17926217504382deg, rgba(0,0,0,0) 65.85%, rgb(0,0,0) 99.321%)",
+            }}
+          />
         </div>
 
-        <div className="relative z-10 flex w-full flex-col gap-[20px] px-[24px] pt-[100px] pb-[72px]">
-          {/* Title */}
+        {/* Text group — 4046:7802 (x20, y0, 352×193) */}
+        <div
+          className="absolute left-[20px] top-0 flex w-[352px] flex-col items-center gap-[15px]"
+          data-node-id="4046:7802"
+        >
+          {/* Title group — 4046:7803 (352×115) */}
           <div
-            className={`${gilroyMedium.className} bg-clip-text text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
-            style={{
-              backgroundImage: `linear-gradient(${TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-            }}
+            className="relative h-[115px] w-[352px]"
+            data-node-id="4046:7803"
           >
-            {titleLines.map((line: string, i: number) => (
-              <span key={i} className="block">
-                {line}
-              </span>
-            ))}
+            <img
+              src={TITLE_FRAME}
+              alt=""
+              aria-hidden
+              className="pointer-events-none absolute inset-0 size-full max-w-none"
+            />
+            <div
+              className={`${gilroyMedium.className} absolute left-[16px] top-[7px] w-[321px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              style={{
+                backgroundImage:
+                  "linear-gradient(100.88178274651231deg, rgb(255,255,255) 1.3527%, rgb(212,233,188) 55.161%, rgb(255,255,255) 111.67%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
+            >
+              {titleLines.join(" ")}
+            </div>
           </div>
 
+          {/* Subtitle — 4046:7809 (336×63) */}
           <p
-            className={`${interRegular.className} max-w-[332px] text-[14px] leading-[21px] font-normal text-[#f0f0f0]/80 not-italic`}
+            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word]`}
+            data-node-id="4046:7809"
           >
             {subtitle}
           </p>
+        </div>
 
-          <div className="mt-[8px] flex w-full flex-col gap-[16px]">
-            {/* Primary CTA */}
-            <a
-              href={primaryHref}
-              className={`${gilroyMedium.className} relative block h-[48px] w-full ${PRIMARY_CTA_SHADOW}`}
-            >
-              <span
-                aria-hidden
-                className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-              />
-              <span className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
-                <RepelDots />
-              </span>
-              <p className="absolute left-1/2 top-[calc(50%-14px)] z-10 -translate-x-1/2 text-[14px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
-                {primaryLabel}
-              </p>
-              <span
-                aria-hidden
-                className="pointer-events-none absolute inset-0 z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
-              />
-              <PrimaryCtaCorners />
-            </a>
+        {/* CTA group — 4046:7811 (x57, y588, 280×112) */}
+        <div
+          className="absolute bottom-0 left-1/2 flex w-[280px] -translate-x-1/2 flex-col gap-[16px]"
+          data-node-id="4046:7811"
+        >
+          {/* Primary CTA — 4046:7812 */}
+          <a
+            href={primaryHref}
+            className={`${gilroyMedium.className} relative block h-[48px] w-full ${PRIMARY_CTA_SHADOW}`}
+            data-node-id="4046:7812"
+            data-name="Cta"
+          >
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+            />
+            <span className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
+              <RepelDots />
+            </span>
+            <p className="absolute left-1/2 top-[calc(50%-14px)] z-10 -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
+              {primaryLabel}
+            </p>
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-0 z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
+            />
+            <PrimaryCtaCorners />
+          </a>
 
-            {/* Secondary CTA */}
-            <a
-              href={secondaryHref}
-              className={`${gilroyMedium.className} relative block h-[48px] w-full bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
-            >
-              <p className="absolute left-1/2 top-[calc(50%-14px)] -translate-x-1/2 text-[14px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
-                {secondaryLabel}
-              </p>
-              <GreenCtaCorners />
-            </a>
-          </div>
+          {/* Secondary CTA — 4046:7823 */}
+          <a
+            href={secondaryHref}
+            className={`${gilroyMedium.className} relative block h-[48px] w-full bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+            data-node-id="4046:7823"
+            data-name="CTA - Secondary"
+          >
+            <p className="absolute left-1/2 top-[calc(50%-14px)] -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
+              {secondaryLabel}
+            </p>
+            <GreenCtaCorners />
+          </a>
         </div>
       </div>
     </section>

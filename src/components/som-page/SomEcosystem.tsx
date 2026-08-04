@@ -21,6 +21,16 @@ const SECTION_TITLE_STYLE = {
   backgroundClip: "text",
 } as const;
 
+/* ----------------------------- Mobile (Figma 4046:7908) ----------------------------- */
+const MOBILE_TITLE_GRADIENT_DEG = "103.536deg";
+const MOBILE_TOP_BG = "/som/ecosystem-mobile-topbg.png";
+const MOBILE_BOTTOM_GLOW = "/som/features-mobile-glow.png";
+const MOBILE_TITLE_STYLE = {
+  backgroundImage: `linear-gradient(${MOBILE_TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
+  WebkitBackgroundClip: "text",
+  backgroundClip: "text",
+} as const;
+
 /* ----------------------------- Decorative image overlays ----------------------------- */
 /* Rendered only inside the desktop tree. Positioned within the card's NewsSection. */
 
@@ -350,6 +360,220 @@ const CARDS: CardData[] = [
   },
 ];
 
+/* ------------------------------ Mobile card (4059:8948) ------------------------------ */
+
+type MobileOverlay = "motion" | "vision" | "sound" | "predictive" | null;
+
+function MobileMotionOverlay({ chipImg }: { chipImg: string }) {
+  return (
+    <>
+      <div className="pointer-events-none absolute left-[127px] top-[-48px] size-[230px] overflow-hidden">
+        <img
+          src={chipImg}
+          alt=""
+          aria-hidden
+          className="absolute left-[-21.85%] top-[-21.61%] h-[254.77%] w-[256.59%] max-w-none mix-blend-screen"
+        />
+      </div>
+      <img
+        src="/som/motion-icon.svg"
+        alt=""
+        aria-hidden
+        className="pointer-events-none absolute left-[201px] top-[21px] h-[42px] w-[33px] max-w-none"
+      />
+    </>
+  );
+}
+
+function MobileVisionOverlay({ chipImg }: { chipImg: string }) {
+  return (
+    <>
+      <div className="pointer-events-none absolute left-[128px] top-[-42px] h-[210px] w-[230px] overflow-hidden">
+        <img
+          src={chipImg}
+          alt=""
+          aria-hidden
+          className="absolute left-[-124.32%] top-[-26.4%] h-[264.72%] w-[239.65%] max-w-none mix-blend-screen"
+        />
+      </div>
+      <img
+        src="/som/vision-icon.svg"
+        alt=""
+        aria-hidden
+        className="pointer-events-none absolute left-[204px] top-[36px] size-[50px] max-w-none"
+      />
+    </>
+  );
+}
+
+function MobileSoundOverlay({ chipImg }: { chipImg: string }) {
+  return (
+    <>
+      <div className="pointer-events-none absolute left-[139px] top-[-32px] h-[210px] w-[224px] overflow-hidden">
+        <img
+          src={chipImg}
+          alt=""
+          aria-hidden
+          className="absolute left-[-16.41%] top-[-131.38%] h-[254.27%] w-[240.1%] max-w-none mix-blend-screen"
+        />
+      </div>
+      <div className="pointer-events-none absolute left-[230px] top-[6px] h-[40px] w-[37px] rounded-tl-[677.1px] rounded-tr-[677.1px] bg-[#f0f0f0]" />
+    </>
+  );
+}
+
+function MobilePredictiveOverlay({ chipImg }: { chipImg: string }) {
+  return (
+    <>
+      <div className="pointer-events-none absolute left-[136px] top-[-35px] h-[213px] w-[230px] overflow-hidden">
+        <img
+          src={chipImg}
+          alt=""
+          aria-hidden
+          className="absolute left-[-125.17%] top-[-135.5%] h-[259.87%] w-[240.52%] max-w-none mix-blend-screen"
+        />
+      </div>
+      <div className="pointer-events-none absolute left-[258px] top-[114px] h-[21px] w-[10px] rounded-[1.5px] bg-[#d9d9d9]" />
+      <div className="pointer-events-none absolute left-[287px] top-[92px] h-[44px] w-[10px] rounded-[1.5px] bg-[#d9d9d9]" />
+    </>
+  );
+}
+
+function MobileEcoOverlay({ type, chipImg }: { type: MobileOverlay; chipImg: string }) {
+  switch (type) {
+    case "motion":
+      return <MobileMotionOverlay chipImg={chipImg} />;
+    case "vision":
+      return <MobileVisionOverlay chipImg={chipImg} />;
+    case "sound":
+      return <MobileSoundOverlay chipImg={chipImg} />;
+    case "predictive":
+      return <MobilePredictiveOverlay chipImg={chipImg} />;
+    default:
+      return null;
+  }
+}
+
+type MobileCardMeta = {
+  height: number;
+  overlay: MobileOverlay;
+  tagWidth: string;
+  titleWidth: string;
+  descWidth: string;
+  contentGap: number;
+};
+
+const MOBILE_CARD_META: MobileCardMeta[] = [
+  { height: 310, overlay: "motion", tagWidth: "w-[120px]", titleWidth: "w-[296.417px]", descWidth: "w-[200.645px]", contentGap: 6 },
+  { height: 310, overlay: "vision", tagWidth: "w-[150px]", titleWidth: "w-[296.417px]", descWidth: "w-[206.603px]", contentGap: 10 },
+  { height: 310, overlay: "sound", tagWidth: "w-[150px]", titleWidth: "w-[296.417px]", descWidth: "w-[206.603px]", contentGap: 6 },
+  { height: 330, overlay: "predictive", tagWidth: "w-[150px]", titleWidth: "w-[200.641px]", descWidth: "w-[296.416px]", contentGap: 6 },
+  { height: 310, overlay: null, tagWidth: "w-full", titleWidth: "w-[296.417px]", descWidth: "w-[287.55px]", contentGap: 6 },
+];
+
+function MobileEcoTag({
+  label,
+  available,
+  widthClass,
+}: {
+  label: string;
+  available: boolean;
+  widthClass: string;
+}) {
+  return (
+    <div
+      className={`relative h-[24px] shrink-0 overflow-clip ${available ? "bg-[rgba(115,190,91,0.8)]" : "bg-[rgba(115,190,91,0.12)]"} ${widthClass}`}
+      data-name="Menu"
+    >
+      <Corners />
+      <p
+        className={`${dmMono.className} absolute left-1/2 top-[calc(50%-4px)] -translate-x-1/2 text-[12px] leading-[17.306px] font-normal tracking-[-0.36px] text-[#ecfae5] uppercase whitespace-nowrap not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word]`}
+      >
+        {label}
+      </p>
+      <div className="absolute top-[calc(50%-0.46px)] left-[6.21px] h-[10.65px] w-[1.775px] -translate-y-1/2 bg-white opacity-60" />
+      <div className="absolute top-[calc(50%-0.46px)] right-[6.21px] h-[10.65px] w-[1.775px] -translate-y-1/2 bg-white opacity-60" />
+    </div>
+  );
+}
+
+function MobileEcoCta({ label, soon }: { label: string; soon: boolean }) {
+  return (
+    <div
+      className={`relative inline-flex w-fit shrink-0 items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] ${soon ? "opacity-60" : ""}`}
+      data-name="CTA - Secondary"
+    >
+      <p
+        className={`${gilroyMedium.className} text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic [word-break:break-word]`}
+      >
+        {label}
+      </p>
+      <Corners />
+    </div>
+  );
+}
+
+type MobileEcoCardProps = {
+  meta: MobileCardMeta;
+  overlay: React.ReactNode;
+  tagLabel: string;
+  tagAvailable: boolean;
+  title: string;
+  subtitle: string;
+  description: string;
+  ctaLabel: string;
+  ctaSoon: boolean;
+  dataName?: string;
+};
+
+function MobileEcoCard({
+  meta,
+  overlay,
+  tagLabel,
+  tagAvailable,
+  title,
+  subtitle,
+  description,
+  ctaLabel,
+  ctaSoon,
+  dataName = "Article",
+}: MobileEcoCardProps) {
+  return (
+    <div
+      className="relative flex w-full flex-col items-center gap-[18px] overflow-clip border-[0.444px] border-solid border-[rgba(240,240,240,0.2)] bg-black px-[20px] py-[28px]"
+      style={{ height: `${meta.height}px` }}
+      data-name={dataName}
+    >
+      <div className="relative flex w-full flex-1 flex-col items-start justify-between">
+        {overlay}
+        <MobileEcoTag label={tagLabel} available={tagAvailable} widthClass={meta.tagWidth} />
+        <div
+          className="relative flex w-full flex-col items-start"
+          style={{ gap: `${meta.contentGap}px` }}
+        >
+          <h3
+            className={`${gilroyMedium.className} text-[28px] leading-[33.725px] font-medium text-white not-italic [word-break:break-word] ${meta.titleWidth}`}
+          >
+            {title}
+          </h3>
+          <p
+            className={`${interRegular.className} text-[16px] leading-[23.962px] font-normal uppercase whitespace-nowrap text-[#8ce66c] not-italic [word-break:break-word]`}
+          >
+            {subtitle}
+          </p>
+          <p
+            className={`${interRegular.className} text-[14px] leading-[23.075px] font-normal tracking-[-0.2773px] text-[#99a1af] not-italic [word-break:break-word] ${meta.descWidth}`}
+          >
+            {description}
+          </p>
+          <MobileEcoCta label={ctaLabel} soon={ctaSoon} />
+        </div>
+      </div>
+      <Corners />
+    </div>
+  );
+}
+
 export function SomEcosystem({ data }: { data?: any }) {
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const heading = data?.heading || FALLBACK_HEADING;
@@ -449,49 +673,83 @@ export function SomEcosystem({ data }: { data?: any }) {
         ))}
       </div>
 
-      {/* ============================= MOBILE (<1024px) ============================= */}
-      <div className="flex min-[1024px]:hidden flex-col items-center gap-[40px] px-[24px] pt-[64px] pb-[64px]">
-        {/* Section title */}
-        <div className="flex w-full flex-col items-center gap-[20px]">
-          <div className="relative px-[10px]" data-name="Title">
-            <div
-              className={`${gilroyMedium.className} bg-clip-text text-center text-[34px] leading-[37px] font-medium text-transparent not-italic [word-break:break-word]`}
-              style={SECTION_TITLE_STYLE}
+      {/* ============================= MOBILE (<1024px) — Figma 4046:7908 "3rd Fold" 393×1946 ============================= */}
+      <div
+        className="relative mx-auto h-[1946px] w-[393px] overflow-hidden bg-black min-[1024px]:hidden"
+        data-node-id="4046:7908"
+        data-name="3rd Fold"
+      >
+        {/* Top background graphic (4046:7995) */}
+        <img
+          src={MOBILE_TOP_BG}
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 top-0 h-[260px] w-[1441px] max-w-none -translate-x-1/2 object-cover"
+        />
+        {/* Bottom decorative glow (4046:7996) */}
+        <img
+          src={MOBILE_BOTTOM_GLOW}
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 top-[1340px] h-[341px] w-[1441px] max-w-none -translate-x-1/2 object-cover"
+        />
+        {/* Abstract design (4046:7909) */}
+        <div className="pointer-events-none absolute left-1/2 top-[36px] h-[247.559px] w-[682.036px] -translate-x-1/2">
+          <img
+            src="/som/ecosystem-abstract.svg"
+            alt=""
+            aria-hidden
+            className="block size-full max-w-none object-cover object-bottom"
+          />
+        </div>
+
+        {/* Title block (4046:7998) */}
+        <div
+          className="absolute left-1/2 top-[30px] flex w-[352px] -translate-x-1/2 flex-col items-center gap-[15px]"
+          data-node-id="4046:7998"
+        >
+          <div
+            className="relative flex w-[350px] justify-center"
+            data-name="Title"
+          >
+            <Corners />
+            <h2
+              className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              style={MOBILE_TITLE_STYLE}
             >
               {heading}
-            </div>
-            <Corners />
+            </h2>
           </div>
           <p
-            className={`${interRegular.className} max-w-[332px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/80 not-italic`}
+            className={`${interRegular.className} w-[352px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word]`}
           >
             {subtitle}
           </p>
         </div>
 
-        {/* Stacked cards */}
-        <div className="flex w-full flex-col gap-[24px]">
-          {cards.map((card) => (
-            <EcoCard
-              key={card.dataName}
-              frameClass="w-full relative"
-              cardBg={card.cardBg}
-              padClass={card.padClass}
-              overlay={null}
-              tagLabel={card.tagLabel}
-              tagAvailable={card.tagAvailable}
-              tagWidthClass={card.tagWidthClass}
-              title={card.title}
-              titleWidthClass={card.titleWidthClass}
-              subtitle={card.subtitle}
-              description={card.description}
-              descWidthClass={card.descWidthClass}
-              ctaLabel={card.ctaLabel}
-              ctaSoon={card.ctaSoon}
-              ctaWidthClass={card.ctaWidthClass}
-              dataName={card.dataName}
-            />
-          ))}
+        {/* Cards container (4059:8947) */}
+        <div
+          className="absolute left-1/2 top-[250px] flex w-[355px] -translate-x-1/2 flex-col gap-[24px]"
+          data-node-id="4059:8947"
+        >
+          {cards.map((card, i) => {
+            const meta = MOBILE_CARD_META[i] ?? MOBILE_CARD_META[0];
+            return (
+              <MobileEcoCard
+                key={card.dataName}
+                meta={meta}
+                overlay={<MobileEcoOverlay type={meta.overlay} chipImg={chipImg} />}
+                tagLabel={card.tagLabel}
+                tagAvailable={card.tagAvailable}
+                title={card.title}
+                subtitle={card.subtitle}
+                description={card.description}
+                ctaLabel={card.ctaLabel}
+                ctaSoon={card.ctaSoon}
+                dataName={card.dataName}
+              />
+            );
+          })}
         </div>
       </div>
     </section>

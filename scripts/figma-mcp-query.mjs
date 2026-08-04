@@ -11,6 +11,7 @@ import { writeFileSync, mkdirSync } from "node:fs";
 import { resolve } from "node:path";
 
 const BASE = process.env.FIGMA_MCP_BASE ?? "http://127.0.0.1:3845/mcp";
+const FILE_KEY = process.env.FIGMA_FILE_KEY ?? "xwsTDujqZsHTQtJL7G8qW0";
 const NODE_ID = process.argv[2];
 const PREFIX = process.argv[3] ?? "figma";
 const OUT_DIR = resolve("scripts/.figma-cache");
@@ -109,7 +110,7 @@ async function main() {
       "get_design_context",
       {
         nodeId: NODE_ID,
-        fileKey: "xwsTDujqZsHTQtJL7G8qW0",
+        fileKey: FILE_KEY,
         disableCodeConnect: false,
       },
       `${PREFIX}-context.txt`,
@@ -118,7 +119,7 @@ async function main() {
   if (toolNames.includes("get_motion_context")) {
     await call(
       "get_motion_context",
-      { nodeId: NODE_ID, fileKey: "xwsTDujqZsHTQtJL7G8qW0" },
+      { nodeId: NODE_ID, fileKey: FILE_KEY },
       `${PREFIX}-motion.txt`,
     );
   }

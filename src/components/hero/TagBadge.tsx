@@ -10,6 +10,7 @@ type TagBadgeProps = {
   centerLabel?: boolean;
   height?: number;
   leftBarLeft?: number;
+  labelClassName?: string;
 };
 
 export function TagBadge({
@@ -21,6 +22,7 @@ export function TagBadge({
   centerLabel = false,
   height = 26,
   leftBarLeft = 6.48,
+  labelClassName = "text-[13px] leading-[19.5px] tracking-[-0.39px]",
 }: TagBadgeProps) {
   return (
     <div
@@ -31,7 +33,7 @@ export function TagBadge({
     >
       <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
       <p
-        className={`absolute top-[calc(50%-4.5px)] max-w-[calc(100%-16px)] overflow-hidden text-ellipsis text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] ${centerLabel ? "left-1/2 -translate-x-1/2" : ""}`}
+        className={`absolute top-[calc(50%-4.5px)] max-w-[calc(100%-16px)] overflow-hidden text-ellipsis font-normal whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] ${labelClassName} ${centerLabel ? "left-1/2 -translate-x-1/2" : ""}`}
         style={centerLabel ? undefined : { left: `calc(50% - ${labelOffsetX}px)` }}
       >
         {label}

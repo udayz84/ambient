@@ -2,9 +2,10 @@
 
 import { mediaUrl } from "@/lib/strapi";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
-import { gilroySemiBold, interRegular, interSemiBold } from "../hero/fonts";
+import { gilroyMedium, gilroySemiBold, interRegular, interSemiBold } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
+import { MobileCornerMark, MobileTitleCorners } from "./mobile-shared";
 
 const MODES_TOP = "/technology/modes-top-new.png";
 const MODES_BOTTOM = "/technology/modes-bottom-new.png";
@@ -30,6 +31,9 @@ const FALLBACK_TAG = "Inside Sensemesh";
 const FALLBACK_HEADING = "Two named modes.\nOne continuous loop.";
 const FALLBACK_SUBTITLE =
   "Bridge the lab and real world. The Sparsh module offers continuous, microwatt intelligence in a 21\u00d721mm size,";
+
+const MODES_LOOP_MOBILE = "/technology/modes-loop-mobile.png";
+const MOBILE_TITLE_GRADIENT_DEG = "101.838deg";
 
 const ICON_BG =
   "radial-gradient(80% 100% at 50% 0%, #394a36 0%, #2b3629 50%, #1d221c 100%)";
@@ -305,6 +309,278 @@ function ModeLabel({
   );
 }
 
+function MobileModeCard({
+  title,
+  bullet,
+  caption,
+  topClassName,
+  bgClassName,
+  nodeId,
+}: {
+  title: string;
+  bullet: string;
+  caption: string;
+  topClassName: string;
+  bgClassName: string;
+  nodeId: string;
+}) {
+  return (
+    <div
+      className={`absolute right-[119px] h-[235px] w-[254px] ${topClassName} ${bgClassName}`}
+      data-node-id={nodeId}
+      data-name="Content"
+    >
+      <CornerDecor />
+      <div
+        className="absolute top-[8px] left-[12px] right-[12.3px] flex h-[33.649px] items-center justify-between border-b border-solid border-[rgba(255,255,255,0.1)] pb-[6px]"
+        data-name="Container"
+      >
+        <p
+          className={`${gilroySemiBold.className} text-[16px] leading-[16px] font-semibold tracking-[0.6px] whitespace-nowrap text-[#6fe047] uppercase not-italic [word-break:break-word]`}
+        >
+          {title}
+        </p>
+        <ModeIcon />
+      </div>
+      <div
+        className="absolute top-[49.65px] left-[12px] h-[17px] w-[124.078px]"
+        data-name="Frame 1984079529"
+      >
+        <p className="absolute top-[3.5px] left-0 text-[14px] tracking-[-0.1504px] whitespace-nowrap text-[#3a9719] not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
+          +
+        </p>
+        <p
+          className={`${interRegular.className} absolute top-0 left-[15.08px] w-[200.9px] text-[13px] leading-[normal] font-normal text-[rgba(255,255,255,0.9)] not-italic [word-break:break-word]`}
+        >
+          {bullet}
+        </p>
+      </div>
+      <div className="absolute top-[173.65px] left-[12px] right-[12.3px] h-px bg-[rgba(255,255,255,0.1)]" />
+      <div
+        className="absolute top-[188px] left-[12px] right-[12.3px] flex h-[33.649px] items-center justify-center border-t border-solid border-[rgba(255,255,255,0.1)] pt-[6px]"
+        data-name="Container"
+      >
+        <p
+          className={`${gilroySemiBold.className} text-[11px] leading-[16px] font-semibold tracking-[0.6px] whitespace-nowrap text-[#e2f9da] uppercase not-italic [word-break:break-word]`}
+        >
+          {caption}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/** 3572:8217 — loop scene: wavy lines, cube, mode labels, cards (393×1162). */
+function MobileModesScene({
+  cards,
+  labels,
+}: {
+  cards: ModeCardConfig[];
+  labels: ModeLabelConfig[];
+}) {
+  const [card1, card2, card3] = cards;
+  return (
+    <div
+      className="absolute top-[233px] left-[0.5px] h-[1162px] w-[393px] overflow-clip"
+      data-node-id="3572:8217"
+    >
+      {/* 3572:8218 — right vertical loop line */}
+      <div
+        className="absolute top-[-1px] left-[244px] flex h-[1163px] w-[154px] items-center justify-center"
+        data-node-id="3572:8218"
+      >
+        <div className="-rotate-90 flex-none">
+          <div className="relative h-[154px] w-[1163px]" data-name="image 192">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={MODES_BOTTOM}
+                alt=""
+                className="absolute left-0 top-[-272.63%] h-[420.72%] w-full max-w-none"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 3572:8219 — right-edge badge */}
+      <div
+        className="absolute top-[730.8px] left-[355px] flex h-[99.49px] w-[97.969px] items-center justify-center"
+        data-node-id="3572:8219"
+      >
+        <div className="-scale-y-100 flex-none rotate-90">
+          <div className="relative h-[97.969px] w-[99.49px]" data-name="image 195">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={MODES_BOTTOM}
+                alt=""
+                className="absolute top-[-488.78%] left-[-333.58%] h-[661.34%] w-[1168.92%] max-w-none"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 3572:8220 — center wavy line */}
+      <div
+        className="absolute top-[263px] left-[calc(50%-0.5px)] flex h-[744px] w-[102px] -translate-x-1/2 items-center justify-center"
+        data-node-id="3572:8220"
+      >
+        <div className="flex-none rotate-90">
+          <div className="relative h-[102px] w-[744px]" data-name="image 196">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={MODES_LOOP_MOBILE}
+                alt=""
+                className="absolute top-[-95.79%] left-[0.16%] h-[277.89%] w-[99.82%] max-w-none"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 3572:8221 — cube */}
+      <div
+        className="absolute top-[462px] left-1/2 h-[350px] w-[317px] -translate-x-1/2 overflow-clip"
+        data-node-id="3572:8221"
+        data-name="Cube"
+      >
+        <div
+          className="absolute top-[56px] left-[calc(50%+0.5px)] h-[274px] w-[260px] -translate-x-1/2"
+          data-node-id="3572:8222"
+          data-name="Object"
+        >
+          <div aria-hidden className="absolute inset-0 pointer-events-none">
+            <div className="absolute inset-0 overflow-hidden">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={MODES_CUBE}
+                alt=""
+                className="absolute top-[-5.59%] left-[-8.08%] h-[111.18%] w-[113.85%] max-w-none"
+              />
+            </div>
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage:
+                  "linear-gradient(180.184deg, rgba(0, 0, 0, 0) 59.958%, rgb(0, 0, 0) 88.127%)",
+              }}
+            />
+          </div>
+        </div>
+        <div
+          className="absolute top-[89.77px] left-[147.28px] flex h-[61.525px] w-[87.575px] items-center justify-center"
+          data-node-id="3572:8223"
+        >
+          <div className="flex-none rotate-[-13.44deg]">
+            <div className="relative h-[44.265px] w-[79.462px]" data-name="Rectangle">
+              <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={MODES_CUBE_GLOW}
+                  alt=""
+                  className="absolute top-[-109.44%] left-[-22.33%] h-[316.18%] w-[146.26%] max-w-none"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="absolute top-[4px] left-[calc(50%+0.5px)] h-[40px] w-[210px] -translate-x-1/2 bg-black"
+          data-node-id="3572:8224"
+        />
+        {/* turboboost labels */}
+        <p
+          className={`${interRegular.className} absolute top-[283px] left-[93px] text-[13px] leading-[normal] font-normal whitespace-nowrap text-[rgba(255,255,255,0.9)] uppercase not-italic`}
+          data-node-id="3572:8227"
+        >
+          {labels[2]?.label}
+        </p>
+        <p
+          className={`${interSemiBold.className} absolute top-[306px] left-[64px] text-[10px] leading-[16px] font-semibold tracking-[0.6px] whitespace-nowrap text-[#6fe047] uppercase not-italic`}
+          data-node-id="3572:8226"
+        >
+          {labels[3]?.label}
+        </p>
+        {/* subconscious labels */}
+        <p
+          className={`${interRegular.className} absolute top-[4px] left-[158.5px] -translate-x-1/2 text-[13px] leading-[normal] font-normal whitespace-nowrap text-[rgba(255,255,255,0.9)] uppercase not-italic`}
+          data-node-id="3572:8230"
+        >
+          {labels[0]?.label}
+        </p>
+        <p
+          className={`${interSemiBold.className} absolute top-[27px] left-[158.5px] -translate-x-1/2 text-[10px] leading-[16px] font-semibold tracking-[0.6px] whitespace-nowrap text-[#6fe047] uppercase not-italic`}
+          data-node-id="3572:8229"
+        >
+          {labels[1]?.label}
+        </p>
+      </div>
+
+      {/* cards */}
+      {card1 ? (
+        <MobileModeCard
+          title={card1.title}
+          bullet={card1.bullet}
+          caption={card1.caption ?? ""}
+          topClassName="top-[53px]"
+          bgClassName="bg-[rgba(21,21,21,0.59)]"
+          nodeId="3572:8231"
+        />
+      ) : null}
+      {card2 ? (
+        <MobileModeCard
+          title={card2.title}
+          bullet={card2.bullet}
+          caption={card2.caption ?? ""}
+          topClassName="top-[872px]"
+          bgClassName="bg-[rgba(21,21,21,0.08)]"
+          nodeId="3572:8250"
+        />
+      ) : null}
+
+      {/* 3572:8269 — middle note card */}
+      {card3 ? (
+        <div
+          className="absolute top-[340px] right-[26px] h-[83px] w-[236px] bg-[rgba(21,21,21,0.08)]"
+          data-node-id="3572:8269"
+          data-name="Content"
+        >
+          <div
+            className="absolute top-[calc(50%+1px)] left-[10px] h-[48px] w-[215.979px] -translate-y-1/2"
+            data-name="Frame 1984079529"
+          >
+            <p className="absolute top-[3.5px] left-0 text-[14px] leading-[normal] tracking-[-0.1504px] whitespace-nowrap text-[#3a9719] not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
+              +
+            </p>
+            <p
+              className={`${interRegular.className} absolute top-0 left-[15.08px] w-[200.9px] text-[13px] leading-[normal] font-normal whitespace-pre-wrap text-[rgba(255,255,255,0.9)] not-italic [word-break:break-word]`}
+            >
+              {card3.bullet}
+            </p>
+          </div>
+          <MobileCornerMark
+            src="/hero/corner-tag-2.svg"
+            sizeClassName="size-[4px]"
+            insetClassName="inset-[0_0_-12.5%_-12.5%]"
+            positionClassName="top-[3px] right-[16px]"
+            flipClassName="rotate-180"
+          />
+          <MobileCornerMark
+            src="/hero/corner-tag-2.svg"
+            sizeClassName="size-[4px]"
+            insetClassName="inset-[0_0_-12.5%_-12.5%]"
+            positionClassName="right-[16px] bottom-[-3px]"
+            flipClassName="-scale-y-100 rotate-180"
+          />
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 export function TechnologyPageModes({ data }: { data?: any } = {}) {
   const tagText = data?.tag?.text || FALLBACK_TAG;
   const heading = data?.heading || FALLBACK_HEADING;
@@ -312,6 +588,15 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const topImg = MODES_TOP;
   const bottomImg = MODES_BOTTOM;
+
+  // Mobile title reflows the first desktop line's last word onto the second
+  // block ("Two named" / "modes. One continuous loop.") per Figma 3572:8007.
+  const mobileHeadingLines = (() => {
+    const [l1 = "", l2 = ""] = headingLines;
+    const words = l1.trim().split(" ");
+    if (words.length < 2) return [l1, l2];
+    return [words.slice(0, -1).join(" "), [words[words.length - 1], l2].filter(Boolean).join(" ")];
+  })();
 
   const strapiCards = Array.isArray(data?.mode_cards) ? data.mode_cards : [];
   const renderCards: ModeCardConfig[] = MODE_CARD_CONFIG.map((cfg, i) => {
@@ -334,9 +619,6 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
       : (ml?.sublabel as string) || cfg.label;
     return { ...cfg, label: text };
   });
-
-  const sideCard0 = renderCards[0];
-  const sideCard1 = renderCards[1];
 
   return (
     <section
@@ -469,102 +751,50 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
         ))}
       </div>
 
-      {/* MOBILE (<1024px) — basic responsive version */}
-      <div className="flex w-full flex-col items-center gap-[28px] px-[24px] py-[56px] min-[1024px]:hidden">
-        <TagBadge
-          label={tagText}
-          width={168}
-          labelOffsetX={0}
-          rightBarLeft={158.15}
-          centerLabel
-          nodeId="3003:542"
-        />
+      {/* MOBILE (<1024px) — pixel-perfect from Figma node 3572:7989 (4th Fold, 393x1366) */}
+      <div className="relative w-full overflow-hidden min-[1024px]:hidden">
+        <div className="relative mx-auto h-[1366px] w-full max-w-[393px]">
+          {/* 3572:7996 — header */}
+          <div
+            className="absolute top-[39px] left-[20px] flex w-[354px] flex-col items-center justify-center gap-[10px]"
+            data-node-id="3572:7996"
+          >
+            <TagBadge
+              label={tagText}
+              width={146}
+              height={27}
+              labelOffsetX={55.5}
+              leftBarLeft={6.7}
+              rightBarLeft={136.16}
+              labelClassName="text-[12px] leading-[20.149px] tracking-[-0.36px]"
+              nodeId="3572:7998"
+            />
+            <div className="relative h-[117px] w-[356px]" data-node-id="3572:8006">
+              <div
+                className={`${gilroyMedium.className} absolute top-[7px] left-[3px] w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium whitespace-pre-wrap text-transparent not-italic [word-break:break-word]`}
+                style={{
+                  backgroundImage: `linear-gradient(${MOBILE_TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                }}
+                data-node-id="3572:8007"
+              >
+                <span className="block">{mobileHeadingLines[0] ?? ""}</span>
+                <span className="block">{mobileHeadingLines[1] ?? ""}</span>
+              </div>
+              <MobileTitleCorners />
+            </div>
+            <p
+              className={`${interRegular.className} w-[324px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+              data-node-id="3572:8012"
+            >
+              {subtitle}
+            </p>
+          </div>
 
-        <div
-          className={`${gilroySemiBold.className} bg-clip-text text-center text-[32px] leading-[37px] font-semibold text-transparent not-italic`}
-          style={{
-            backgroundImage: `linear-gradient(${TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-          }}
-        >
-          <span className="block">{headingLines[0] ?? ""}</span>
-          <span className="block">{headingLines[1] ?? ""}</span>
+          <MobileModesScene cards={renderCards} labels={renderLabels} />
         </div>
-
-        <p
-          className={`${interRegular.className} max-w-[327px] text-center text-[15px] leading-[22px] font-normal text-[#f0f0f0] not-italic`}
-          style={{ opacity: SUBTITLE_OPACITY }}
-        >
-          {subtitle}
-        </p>
-
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={topImg}
-          alt=""
-          className="h-auto w-full max-w-[327px] rounded-[4px] object-cover"
-          aria-hidden
-        />
-
-        {/* Mobile 3D Cube (Added for mobile view) */}
-        <div className="relative h-[240px] w-full max-w-[327px] overflow-hidden flex items-center justify-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="" className="absolute max-w-[80%] object-contain" src={MODES_CUBE} />
-          <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(180.162deg, rgba(0, 0, 0, 0) 59.958%, rgb(0, 0, 0) 88.127%)" }} />
-        </div>
-
-        <ModeCardMobile
-          title={sideCard0?.title ?? "Subconscious AI"}
-          bullet={
-            sideCard0?.bullet ??
-            "Legacy chips switch off. A-Cube sleeps like you: the brain stays aware. Our island runs AI at microwatts while the ARM core is powered down."
-          }
-          caption={sideCard0?.caption ?? "Always processing, never draining."}
-        />
-
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={bottomImg}
-          alt=""
-          className="h-auto w-full max-w-[327px] rounded-[4px] object-cover"
-          aria-hidden
-        />
-
-        <ModeCardMobile
-          title={sideCard1?.title ?? "Turboboost mode"}
-          bullet={
-            sideCard1?.bullet ??
-            "When something matters, the brain wakes instantly. SenseMesh flags real events and ramps the chip to full performance, then settles back down."
-          }
-          caption={sideCard1?.caption ?? "live, no reset \u2014 settles back down."}
-        />
       </div>
     </section>
-  );
-}
-
-function ModeCardMobile({ title, bullet, caption }: { title: string; bullet: string; caption: string }) {
-  const { fadeRef, isVisible } = useFadeIn();
-
-  return (
-    <div
-      ref={fadeRef}
-      className={`flex w-full max-w-[327px] flex-col gap-[14px] rounded-[4px] bg-[rgba(21,21,21,0.08)] backdrop-blur-sm border border-white/10 p-[16px] ${getFadeInClass(isVisible)}`}
-    >
-      <div className="flex items-center justify-between border-b border-solid border-[rgba(255,255,255,0.1)] pb-[8px]">
-        <span className={`${gilroySemiBold.className} text-[14px] font-semibold tracking-[0.6px] text-[#6fe047] uppercase not-italic`}>
-          {title}
-        </span>
-        <ModeIcon />
-      </div>
-      <p className={`${interRegular.className} text-[13px] leading-[normal] font-normal text-[rgba(255,255,255,0.9)] not-italic`}>
-        <span className="text-[#3a9719]">+ </span>
-        {bullet}
-      </p>
-      <p className={`${interSemiBold.className} border-t border-solid border-[rgba(255,255,255,0.1)] pt-[8px] text-center text-[10px] font-semibold tracking-[0.6px] text-[#e2f9da] uppercase not-italic`}>
-        {caption}
-      </p>
-    </div>
   );
 }

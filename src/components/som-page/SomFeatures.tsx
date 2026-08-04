@@ -12,6 +12,15 @@ const FALLBACK_SUBTITLE =
   "Spinning a custom PCB with extreme space and power constraints takes months of trial and error. We solved the hardware physics so you can focus entirely on your application logic.";
 const FALLBACK_HEADING = "Stop Routing.\nStart Shipping.";
 const ICON_BACKGROUND = "/som/icon-bg.svg";
+const MOBILE_SECTION_GLOW = "/som/features-mobile-glow.png";
+const MOBILE_TITLE_GRADIENT_DEG = "112.264deg";
+
+// Per-card mobile metrics sourced from Figma node 4054:8302
+const MOBILE_CARD_META = [
+  { iconSize: 42.71, tagWidth: 240 },
+  { iconSize: 37.454, tagWidth: 240 },
+  { iconSize: 37.454, tagWidth: 200 },
+];
 
 
 
@@ -100,6 +109,88 @@ function FeatureCard({
 
       <Corners />
     </div>
+  );
+}
+
+type MobileFeatureCardProps = {
+  iconSrc: string;
+  iconSize: number;
+  tagWidth: number;
+  tag: string;
+  title: string;
+  body: string;
+};
+
+function MobileFeatureCard({
+  iconSrc,
+  iconSize,
+  tagWidth,
+  tag,
+  title,
+  body,
+}: MobileFeatureCardProps) {
+  return (
+    <article
+      className="relative flex h-[370px] w-[353px] shrink-0 flex-col items-start gap-[36px] overflow-clip border-[0.468px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[14px] pt-[14px] pb-[22px]"
+      data-name="Article"
+    >
+      <Corners />
+
+      {/* Icon — 61.93×60.862, rounded-[12.813px] */}
+      <div
+        className="relative h-[60.862px] w-[61.93px] shrink-0 overflow-clip rounded-[12.813px]"
+        style={{ backgroundImage: `url(${ICON_BACKGROUND})` }}
+        data-name="Icon"
+      >
+        <div className="absolute inset-0 flex items-center justify-center">
+          {iconSrc && (
+            <img
+              src={iconSrc}
+              alt=""
+              width={iconSize}
+              height={iconSize}
+              className="max-w-none"
+              aria-hidden
+            />
+          )}
+        </div>
+      </div>
+
+      {/* NewsSection — fills remaining height, content bottom-aligned */}
+      <div className="flex w-full flex-1 flex-col justify-end" data-name="NewsSection">
+        <div className="flex w-full flex-col gap-[18px]">
+          {/* Tag pill */}
+          <div
+            className="relative h-[24px] w-[240px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)]"
+            style={{ width: `${tagWidth}px` }}
+            data-name="Menu"
+          >
+            <Corners />
+            <p
+              className={`${dmMono.className} absolute left-1/2 top-[calc(50%-4.09px)] -translate-x-1/2 text-[12px] leading-[18.259px] tracking-[-0.36px] font-normal text-[#ecfae5] uppercase whitespace-nowrap not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word]`}
+            >
+              {tag}
+            </p>
+            <div className="absolute left-[6.07px] top-1/2 h-[11.236px] w-[1.873px] -translate-y-1/2 bg-white opacity-60" />
+            <div className="absolute right-[7.27px] top-1/2 h-[11.236px] w-[1.873px] -translate-y-1/2 bg-white opacity-60" />
+          </div>
+
+          {/* Title + body */}
+          <div className="flex w-full flex-col gap-[9.363px]">
+            <h3
+              className={`${gilroyMedium.className} text-[18px] leading-[26.493px] tracking-[-0.425px] font-medium text-white not-italic [word-break:break-word]`}
+            >
+              {title}
+            </h3>
+            <p
+              className={`${interRegular.className} text-[14px] leading-[24.601px] tracking-[-0.2957px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
+            >
+              {body}
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
   );
 }
 
@@ -201,39 +292,82 @@ export function SomFeatures({ data }: { data?: any }) {
         </div>
       </div>
 
-      {/* MOBILE (<1024px) */}
-      <div className="relative flex w-full flex-col items-center gap-[40px] px-[24px] pt-[64px] pb-[64px] min-[1024px]:hidden">
-        {/* Section title */}
-        <div className="flex w-full flex-col items-center gap-[20px]">
-          <div className="relative px-[10px]">
-            <div
-              className={`${gilroyMedium.className} bg-clip-text text-center text-[34px] leading-[37px] font-medium text-transparent not-italic [word-break:break-word]`}
-              style={{
-                backgroundImage: `linear-gradient(${TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-              }}
-            >
-              {headingLines.map((line: string, i: number) => (
-                <span key={i} className="block">
-                  {line}
-                </span>
-              ))}
-            </div>
-            <Corners />
-          </div>
-          <p
-            className={`${interRegular.className} max-w-[332px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/80 not-italic`}
-          >
-            {subtitle}
-          </p>
-        </div>
+      {/* MOBILE (<1024px) — Figma node 4054:8302 "2nd Fold" 393×1400 */}
+      <div
+        className="relative mx-auto h-[1400px] w-[393px] overflow-hidden bg-black min-[1024px]:hidden"
+        data-node-id="4054:8302"
+        data-name="2nd Fold"
+      >
+        {/* Background glow — 4054:8306 (1441×341 at y1132) */}
+        <img
+          src={MOBILE_SECTION_GLOW}
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 top-[1132px] h-[341px] w-[1441px] max-w-none -translate-x-1/2"
+        />
 
-        {/* Stacked cards */}
-        <div className="flex w-full flex-col gap-[24px]">
-          {cards.map((card, i) => (
-            <FeatureCard key={i} {...card} />
-          ))}
+        {/* Content column — 4054:8307 (x20, y30, 353×1338) */}
+        <div
+          className="absolute left-[20px] top-[30px] flex w-[353px] flex-col items-end gap-[24px]"
+          data-node-id="4054:8307"
+        >
+          {/* Title block — 4054:8357 (352×180) */}
+          <div
+            className="flex w-[352px] flex-col items-center gap-[15px]"
+            data-node-id="4054:8357"
+          >
+            {/* Title group — 4054:8358 (352×81) */}
+            <div
+              className="relative flex w-[352px] justify-center py-[5px]"
+              data-node-id="4054:8358"
+            >
+              <Corners />
+              <h2
+                className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+                style={{
+                  backgroundImage: `linear-gradient(${MOBILE_TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                }}
+                data-node-id="4054:8359"
+              >
+                {headingLines.map((line: string, i: number) => (
+                  <span key={i} className="block">
+                    {line}
+                  </span>
+                ))}
+              </h2>
+            </div>
+
+            {/* Subtitle — 4054:8364 (336×84) */}
+            <p
+              className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word]`}
+              data-node-id="4054:8364"
+            >
+              {subtitle}
+            </p>
+          </div>
+
+          {/* Cards container — 4054:8467 (353×1134, gap 12) */}
+          <div
+            className="flex w-[353px] flex-col gap-[12px]"
+            data-node-id="4054:8467"
+          >
+            {cards.map((card, i) => {
+              const meta = MOBILE_CARD_META[i] ?? MOBILE_CARD_META[0];
+              return (
+                <MobileFeatureCard
+                  key={i}
+                  iconSrc={card.iconSrc}
+                  iconSize={meta.iconSize}
+                  tagWidth={meta.tagWidth}
+                  tag={card.tag}
+                  title={card.title}
+                  body={card.body}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

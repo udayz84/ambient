@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { Corners } from "../shared/Corners";
@@ -355,18 +356,35 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
   const columns =
     cmsCarousel.length > 0 ? buildColumns(cmsCarousel) : MARQUEE_COLUMNS;
 
-  const mobileCards: { imageSrc: string; nodeId: string }[] =
-    cmsCarousel.length > 0
-      ? cmsCarousel.slice(0, 4).map((src, i) => ({
-          imageSrc: src,
-          nodeId: `carousel-m-${i}`,
-        }))
-      : [
-          MARQUEE_COLUMNS[0].cards[0],
-          MARQUEE_COLUMNS[1].cards[1],
-          MARQUEE_COLUMNS[0].cards[1],
-          MARQUEE_COLUMNS[1].cards[2],
-        ];
+  // Mobile carousel: two staggered centered rows (peek layout) per Figma 4032:9152.
+  // Row 1 holds 2 cards, row 2 holds 3 cards.
+  const carouselRow1: MarqueeCardDef[] = (() => {
+    if (cmsCarousel.length > 0) {
+      return cmsCarousel.slice(0, 2).map((src, i) => ({
+        height: 219,
+        imageSrc: src,
+        nodeId: `m-row1-${i}`,
+      }));
+    }
+    return [
+      { height: 219, imageSrc: MARQUEE_COLUMNS[0].cards[0].imageSrc, nodeId: "4032:9093" },
+      { height: 219, imageSrc: MARQUEE_COLUMNS[1].cards[1].imageSrc, nodeId: "4032:9099" },
+    ];
+  })();
+  const carouselRow2: MarqueeCardDef[] = (() => {
+    if (cmsCarousel.length > 0) {
+      return cmsCarousel.slice(2, 5).map((src, i) => ({
+        height: 220,
+        imageSrc: src,
+        nodeId: `m-row2-${i}`,
+      }));
+    }
+    return [
+      { height: 220, imageSrc: MARQUEE_COLUMNS[0].cards[1].imageSrc, nodeId: "4032:9133" },
+      { height: 221, imageSrc: MARQUEE_COLUMNS[1].cards[2].imageSrc, nodeId: "4032:9139" },
+      { height: 220, imageSrc: MARQUEE_COLUMNS[0].cards[2].imageSrc, nodeId: "4032:9145" },
+    ];
+  })();
 
   const features: string[] = Array.isArray(data?.features)
     ? data.features.map(
@@ -451,63 +469,127 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
         </div>
       </div>
 
-      {/* MOBILE (<1024px) */}
-      <div className="relative flex w-full flex-col items-center min-[1024px]:hidden">
-        <div className="relative z-10 flex w-full flex-col items-center gap-[40px] px-[24px] pt-[72px] pb-[64px]">
-          {/* Header */}
-          <div className="flex w-full flex-col items-center gap-[24px]">
-            <div className="relative px-[10px]">
-              <div
-                className={`${gilroyMedium.className} bg-clip-text text-center text-[34px] leading-[37px] font-medium text-transparent not-italic [word-break:break-word]`}
-                style={{
-                  backgroundImage:
-                    "linear-gradient(132.656deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                }}
-              >
-                {heading}
-              </div>
-              <CornerDecor />
-            </div>
-            <p
-              className={`${interRegular.className} w-full max-w-[332px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
+      {/* MOBILE (<1024px) — node 4032:8633, desktop above is untouched */}
+      <div
+        className="relative flex w-full flex-col items-center overflow-hidden min-[1024px]:hidden"
+        data-node-id="4032:8633"
+        data-name="2nd Fold"
+      >
+        <style>{`.dvk-m-scroll::-webkit-scrollbar{display:none}.dvk-m-scroll{scrollbar-width:none;-ms-overflow-style:none}`}</style>
+
+        {/* Header: title + subtitle (node 4032:8646) */}
+        <div
+          className="relative z-10 mt-[30px] flex w-[350px] flex-col items-center gap-[10px]"
+          data-node-id="4032:8646"
+        >
+          {/* Title with corner brackets (node 4032:8655) */}
+          <div className="relative h-[79px] w-[356px]" data-node-id="4032:8655" data-name="Group 78">
+            <div
+              className={`${gilroyMedium.className} absolute inset-0 flex items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              style={{
+                backgroundImage:
+                  "linear-gradient(107.453deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
+              data-node-id="4032:8656"
             >
-              {subtitle}
-            </p>
-          </div>
+              {heading}
+            </div>
 
-          {/* Product cards */}
-          <div className="grid w-full max-w-[496px] grid-cols-2 gap-[18px]">
-            {mobileCards.map((card) => (
-              <div
-                key={card.nodeId}
-                className="relative flex w-full flex-col items-center justify-center gap-[10px] p-[10px] backdrop-blur-[10px]"
-                style={{
-                  aspectRatio: "238 / 219",
-                  background: MARQUEE_CARD_BG,
-                }}
-              >
-                <div className="relative aspect-[194.886/153.968] w-[82%] shrink-0">
-                  <img
-                    alt=""
-                    aria-hidden
-                    src={card.imageSrc}
-                    className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
-                  />
+            {/* Top-right bracket (Vector 55) */}
+            <div className="absolute left-[353px] top-[4px] flex h-[4px] w-[2.346px] items-center justify-center">
+              <div className="flex-none rotate-180">
+                <div className="relative h-[4px] w-[2.346px]">
+                  <div className="absolute inset-[0_0_-12.5%_-21.31%]">
+                    <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+                  </div>
                 </div>
-                <CardCorners w={2.122} h={1.995} src={SMALL_CORNER} />
               </div>
-            ))}
+            </div>
+            {/* Bottom-right bracket (Vector 56) */}
+            <div className="absolute left-[353px] top-[75px] flex h-[4px] w-[2.346px] items-center justify-center">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="relative h-[4px] w-[2.346px]">
+                  <div className="absolute inset-[0_0_-12.5%_-21.31%]">
+                    <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* Bottom-left bracket (Vector 57) */}
+            <div className="absolute left-[-3px] top-[75px] h-[4px] w-[2.346px]">
+              <div className="absolute inset-[0_0_-12.5%_-21.31%]">
+                <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+              </div>
+            </div>
+            {/* Top-left bracket (Vector 58) */}
+            <div className="absolute left-[-3px] top-[4px] flex h-[4px] w-[2.346px] items-center justify-center">
+              <div className="-scale-y-100 flex-none">
+                <div className="relative h-[4px] w-[2.346px]">
+                  <div className="absolute inset-[0_0_-12.5%_-21.31%]">
+                    <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Feature cards */}
-          <div className="grid w-full max-w-[496px] grid-cols-1 gap-[24px]">
+          {/* Subtitle (node 4032:8693) */}
+          <p
+            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+            data-node-id="4032:8693"
+          >
+            {subtitle}
+          </p>
+        </div>
+
+        {/* Carousel + Feature cards (node 4032:9153) */}
+        <div
+          className="relative z-10 mt-[38.5px] flex w-full flex-col items-center gap-[40px]"
+          data-node-id="4032:9153"
+        >
+          {/* Product image carousel: two centered rows that peek beyond the viewport (node 4032:9152) */}
+          <div className="flex w-full flex-col gap-[13px]" data-node-id="4032:9152">
+            <div className="flex w-full justify-center">
+              <div className="flex gap-[16px]">
+                {carouselRow1.map((card) => (
+                  <MarqueeCard
+                    key={card.nodeId}
+                    imageSrc={card.imageSrc}
+                    height={card.height}
+                    nodeId={card.nodeId}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="flex w-full justify-center">
+              <div className="flex gap-[16px]">
+                {carouselRow2.map((card) => (
+                  <MarqueeCard
+                    key={card.nodeId}
+                    imageSrc={card.imageSrc}
+                    height={card.height}
+                    nodeId={card.nodeId}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Feature cards: horizontal snap-scroll, one card centered per stop (node 4032:9001) */}
+          <div
+            className="dvk-m-scroll flex w-full snap-x snap-mandatory gap-[15px] overflow-x-auto px-[29px]"
+            data-node-id="4032:9001"
+            data-name="death of hardware"
+          >
             {features.map((title, idx) => (
-              <FeatureCard
+              <div
                 key={FEATURE_NODE_IDS[idx] || idx}
-                title={title}
-              />
+                className="w-[335px] shrink-0 snap-center"
+              >
+                <FeatureCard title={title} nodeId={FEATURE_NODE_IDS[idx]} />
+              </div>
             ))}
           </div>
         </div>

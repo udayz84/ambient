@@ -2,6 +2,7 @@ import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
+import { MobileCornerMark, MobileTitleCorners } from "./mobile-shared";
 
 const LEGACY_COMPUTE = "/technology/legacy-compute-new.png";
 const LEGACY_MEMORY = "/technology/legacy-memory-new.png";
@@ -25,6 +26,15 @@ const SUBTITLE_OPACITY = 0.65;
 const ACUBE_CARD_BG = `linear-gradient(90deg, rgba(63, 160, 43, 0.04) 0%, rgba(63, 160, 43, 0.04) 100%), linear-gradient(142.2deg, rgba(14, 15, 17, 0) 0.8302%, rgb(14, 15, 17) 56.9%), url("${ACUBE_GRID}"), linear-gradient(90deg, rgb(19, 47, 13) 0%, rgb(19, 47, 13) 100%)`;
 const ACUBE_PANEL_BG = `linear-gradient(90deg, rgba(63, 160, 43, 0.04) 0%, rgba(63, 160, 43, 0.04) 100%), linear-gradient(177.72deg, rgb(14, 15, 17) 75.004%, rgba(14, 15, 17, 0) 183.08%), url("${ACUBE_GRID}"), linear-gradient(90deg, rgb(19, 47, 13) 0%, rgb(19, 47, 13) 100%)`;
 const ACUBE_BG_SIZE = "auto, auto, 12.6px 12.6px, auto";
+
+const M_CORNER_CARD = "/technology/m-corner-card.svg";
+const M_CORNER_PANEL = "/technology/m-corner-panel.svg";
+const LINE_125 = "/technology/line-125.svg";
+
+const MOBILE_TITLE_GRADIENT_DEG = "101.838deg";
+const MOBILE_ACUBE_CARD_BG = `linear-gradient(90deg, rgba(63, 160, 43, 0.04) 0%, rgba(63, 160, 43, 0.04) 100%), linear-gradient(142.2deg, rgba(14, 15, 17, 0) 0.8302%, rgb(14, 15, 17) 56.9%), url("${ACUBE_GRID}"), linear-gradient(90deg, rgb(19, 47, 13) 0%, rgb(19, 47, 13) 100%)`;
+const MOBILE_ACUBE_PANEL_BG = `linear-gradient(90deg, rgba(63, 160, 43, 0.04) 0%, rgba(63, 160, 43, 0.04) 100%), linear-gradient(177.156deg, rgb(14, 15, 17) 75.004%, rgba(14, 15, 17, 0) 183.08%), url("${ACUBE_GRID}"), linear-gradient(90deg, rgb(19, 47, 13) 0%, rgb(19, 47, 13) 100%)`;
+const MOBILE_ACUBE_BG_SIZE = "auto, auto, 7.757px 7.757px, auto";
 
 const FALLBACK_TAG = "The PROBLEM";
 const FALLBACK_HEADING = "AI isn't a math problem.\nIt's a memory problem.";
@@ -514,24 +524,174 @@ function ACubeStatsPanel({ rows }: { rows: StatRow[] }) {
   );
 }
 
-function MobileStatRows({ rows }: { rows: StatRow[] }) {
+function MobileACubeCardCorners() {
+  const size = "h-[2.463px] w-[3.091px]";
+  const inset = "inset-[0_0_-12.5%_-9.96%]";
   return (
-    <div className="flex w-full flex-col gap-[14px]">
-      {rows.map((row) => (
-        <div key={row.label} className="flex w-full items-baseline justify-between gap-[16px]">
-          <p
-            className={`${interRegular.className} text-[12px] leading-[normal] font-normal text-[#8e8e8e] uppercase not-italic`}
-          >
+    <>
+      <MobileCornerMark src={M_CORNER_CARD} sizeClassName={size} insetClassName={inset} positionClassName="top-[-0.12px] right-0" flipClassName="rotate-180" />
+      <MobileCornerMark src={M_CORNER_CARD} sizeClassName={size} insetClassName={inset} positionClassName="right-0 bottom-[0.19px]" flipClassName="-scale-y-100 rotate-180" />
+      <MobileCornerMark src={M_CORNER_CARD} sizeClassName={size} insetClassName={inset} positionClassName="top-[-0.12px] left-0" flipClassName="-scale-y-100" />
+      <MobileCornerMark src={M_CORNER_CARD} sizeClassName={size} insetClassName={inset} positionClassName="bottom-[0.19px] left-0" />
+    </>
+  );
+}
+
+function MobileACubePanelCorners() {
+  const size = "h-[2.463px] w-[3.091px]";
+  const inset = "inset-[0_0_-12.5%_-9.96%]";
+  return (
+    <>
+      <MobileCornerMark src={M_CORNER_CARD} sizeClassName={size} insetClassName={inset} positionClassName="bottom-[-0.46px] left-0" />
+      <MobileCornerMark src={M_CORNER_CARD} sizeClassName={size} insetClassName={inset} positionClassName="right-0 bottom-[-0.46px]" flipClassName="-scale-y-100 rotate-180" />
+    </>
+  );
+}
+
+function MobileLegacyCardCorners() {
+  const size = "size-[2.832px]";
+  const inset = "inset-[0_0_-12.5%_-12.5%]";
+  return (
+    <>
+      <MobileCornerMark src={M_CORNER_PANEL} sizeClassName={size} insetClassName={inset} positionClassName="top-[0.07px] right-[0.37px]" flipClassName="rotate-180" />
+      <MobileCornerMark src={M_CORNER_PANEL} sizeClassName={size} insetClassName={inset} positionClassName="right-[0.37px] bottom-[0.01px]" flipClassName="-scale-y-100 rotate-180" />
+      <MobileCornerMark src={M_CORNER_PANEL} sizeClassName={size} insetClassName={inset} positionClassName="top-[0.08px] left-[0.36px]" flipClassName="-scale-y-100" />
+      <MobileCornerMark src={M_CORNER_PANEL} sizeClassName={size} insetClassName={inset} positionClassName="bottom-[0.01px] left-[0.36px]" />
+    </>
+  );
+}
+
+function MobileLegacyPanelCorners() {
+  const size = "size-[2.832px]";
+  const inset = "inset-[0_0_-12.5%_-12.5%]";
+  return (
+    <>
+      <MobileCornerMark src={M_CORNER_PANEL} sizeClassName={size} insetClassName={inset} positionClassName="bottom-0 left-0" />
+      <MobileCornerMark src={M_CORNER_PANEL} sizeClassName={size} insetClassName={inset} positionClassName="right-0 bottom-0" flipClassName="-scale-y-100 rotate-180" />
+    </>
+  );
+}
+
+function MobileUsageBar({
+  length,
+  thickness,
+  progressHeight,
+  progressGradient,
+  roundedClassName,
+  nodeId,
+}: {
+  length: number;
+  thickness: number;
+  progressHeight: number;
+  progressGradient: string;
+  roundedClassName: string;
+  nodeId?: string;
+}) {
+  return (
+    <div
+      className="flex shrink-0 items-center justify-center"
+      style={{ width: length, height: thickness }}
+      data-node-id={nodeId}
+    >
+      <div className="-rotate-90 -scale-y-100 flex-none">
+        <div
+          className="flex flex-col items-center justify-end bg-gradient-to-b from-[#535353] to-[#313131]"
+          style={{ width: thickness, height: length }}
+          data-name="Usage Bar"
+        >
+          <div
+            className={`w-full shrink-0 ${roundedClassName}`}
+            style={{ height: progressHeight, backgroundImage: progressGradient }}
+            data-name="Progress Segment"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MobileStatsRows({
+  rows,
+  topClassName,
+  efficiency,
+}: {
+  rows: StatRow[];
+  topClassName: string;
+  efficiency: "acube" | "legacy";
+}) {
+  const bar =
+    efficiency === "acube"
+      ? {
+          length: 58.487,
+          thickness: 7.388,
+          progressHeight: 54.94,
+          progressGradient: "linear-gradient(#8ce66c, #1b2f14)",
+          roundedClassName: "rounded-[0.236px]",
+          nodeId: "3572:7705",
+        }
+      : {
+          length: 67.26,
+          thickness: 8.496,
+          progressHeight: 16.657,
+          progressGradient:
+            "linear-gradient(rgb(255, 77, 0) 42.377%, rgb(58, 19, 30) 121.45%)",
+          roundedClassName: "rounded-[0.272px]",
+          nodeId: "3572:7758",
+        };
+  return (
+    <div
+      className={`absolute left-[calc(50%+0.06px)] flex w-[320.125px] -translate-x-1/2 items-center justify-between ${topClassName}`}
+    >
+      <div
+        className={`${interRegular.className} flex w-[204px] flex-col gap-[9px] text-[12px] leading-[normal] font-normal text-[#8e8e8e] uppercase not-italic`}
+      >
+        {rows.map((row) => (
+          <p key={row.label} className="w-full shrink-0 whitespace-nowrap [word-break:break-word]">
             {row.label}
           </p>
-          <p
-            className={`${interRegular.className} shrink-0 text-right text-[13px] leading-[normal] font-normal whitespace-nowrap not-italic`}
-            style={{ color: row.valueColor }}
-          >
-            {row.value}
-          </p>
-        </div>
-      ))}
+        ))}
+      </div>
+      <div className="flex w-[94.797px] flex-col items-end gap-[9px]">
+        {rows.map((row, i) => {
+          if (i < rows.length - 1) {
+            return (
+              <p
+                key={row.label}
+                className={`${interRegular.className} w-full shrink-0 text-right text-[12px] leading-[normal] font-normal not-italic [word-break:break-word]`}
+                style={{ color: row.valueColor }}
+              >
+                {row.value}
+              </p>
+            );
+          }
+          if (efficiency === "acube") {
+            return (
+              <div key={row.label} className="flex w-full items-center gap-[8px]">
+                <MobileUsageBar {...bar} />
+                <p
+                  className={`${interRegular.className} shrink-0 text-right text-[12px] leading-[normal] font-normal whitespace-nowrap not-italic [word-break:break-word]`}
+                  style={{ color: row.valueColor }}
+                >
+                  {row.value}
+                </p>
+              </div>
+            );
+          }
+          return (
+            <div key={row.label} className="relative h-[15px] w-full">
+              <div className="absolute top-[calc(50%-0.75px)] right-[34.15px] -translate-y-1/2">
+                <MobileUsageBar {...bar} />
+              </div>
+              <p
+                className={`${interRegular.className} absolute top-0 left-[92.64px] -translate-x-full text-right text-[12px] leading-[normal] font-normal whitespace-nowrap not-italic [word-break:break-word]`}
+                style={{ color: row.valueColor }}
+              >
+                {row.value}
+              </p>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -622,108 +782,229 @@ export function TechnologyPageProblem({ data }: { data?: any } = {}) {
         <ACubeStatsPanel rows={acubeRows} />
       </div>
 
-      {/* MOBILE (<1024px) — basic responsive version */}
-      <div className="relative flex w-full flex-col items-center gap-[32px] px-[24px] py-[64px] min-[1024px]:hidden">
-        <TagBadge
-          label={tagText}
-          width={131}
-          labelOffsetX={0}
-          rightBarLeft={121.16}
-          centerLabel
-          nodeId="2976:1226"
-        />
-
-        <div
-          className={`${gilroyMedium.className} bg-clip-text text-center text-[34px] leading-[39px] font-medium text-transparent not-italic`}
-          style={{
-            backgroundImage: `linear-gradient(${TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-          }}
-        >
-          <span className="block">{headingLines[0] ?? ""}</span>
-          <span className="block">{headingLines[1] ?? ""}</span>
-        </div>
-
-        <p
-          className={`${interRegular.className} max-w-[327px] text-center text-[15px] leading-[22px] font-normal text-[#f0f0f0] not-italic`}
-          style={{ opacity: SUBTITLE_OPACITY }}
-        >
-          {subtitle}
-        </p>
-
-        {/* Legacy card */}
-        <div className="relative flex w-full max-w-[500px] flex-col items-start gap-[16px] bg-[rgba(128,128,128,0.1)] px-[20px] py-[24px]">
-          <CornerDecor />
-          <div className="flex w-full flex-col items-start gap-[8px] border-b border-solid border-[rgba(255,255,255,0.1)] pb-[11px]">
-            <p className={`${gilroyMedium.className} text-[26px] leading-[32px] font-medium text-white not-italic`}>
-              {legacy.label}
-            </p>
-            <p className={`${interRegular.className} text-[13px] leading-[normal] font-normal text-[#8e8e8e] not-italic`}>
-              {legacy.description}
-            </p>
-          </div>
-          <p className={`${gilroyMedium.className} text-[18px] leading-[28px] font-medium text-white not-italic`}>
-            Compute
-          </p>
-          <div className="h-[160px] w-full overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={legacy.image} alt="" className="size-full object-contain" />
-          </div>
-          <p className={`${gilroyMedium.className} text-[18px] leading-[28px] font-medium text-white not-italic`}>
-            Memory
-          </p>
-          <div className="h-[140px] w-full overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={LEGACY_MEMORY} alt="" className="size-full object-contain" />
-          </div>
-        </div>
-
-        {/* A-Cube card */}
-        <div
-          className="relative flex w-full max-w-[500px] flex-col items-start gap-[16px] overflow-clip border border-solid border-[rgba(255,247,247,0.16)] bg-top-left px-[20px] py-[24px]"
-          style={{ backgroundImage: ACUBE_CARD_BG, backgroundSize: ACUBE_BG_SIZE }}
-        >
-          <CornerDecor />
-          <div className="flex w-full flex-col items-start gap-[8px] border-b border-solid border-[rgba(255,255,255,0.1)] pb-[11px]">
-            <p className={`${gilroyMedium.className} text-[26px] leading-[32px] font-medium text-white not-italic`}>
-              {acube.label}
-            </p>
-            <p className={`${interRegular.className} text-[13px] leading-[normal] font-normal text-[#8e8e8e] not-italic`}>
-              {acube.description}
-            </p>
-          </div>
-          <div className="h-[220px] w-full overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={acube.image} alt="" className="size-full object-contain" />
-          </div>
-          <p
-            className={`${gilroySemiBold.className} bg-clip-text text-[40px] leading-[1.2] font-semibold text-transparent not-italic`}
-            style={{
-              backgroundImage:
-                "linear-gradient(146.757deg, rgb(255, 255, 255) 29.352%, rgba(115, 115, 115, 0.5) 98.158%)",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-            }}
+      {/* MOBILE (<1024px) — pixel-perfect from Figma node 3572:6497 (1st Fold, 393x1066) */}
+      <div className="relative w-full overflow-hidden min-[1024px]:hidden">
+        <div className="relative mx-auto h-[1066px] w-full max-w-[393px]">
+          <div
+            className="absolute top-[48px] left-[20px] flex w-[354px] flex-col items-center gap-[34px]"
+            data-node-id="3572:7776"
           >
-            {statValue}
-          </p>
-          <p className={`${interRegular.className} -mt-[16px] text-[13px] leading-[18px] font-normal text-[#e2f9da] not-italic`}>
-            {statDesc}
-          </p>
-        </div>
+            {/* 3572:6504 — header */}
+            <div
+              className="flex w-full flex-col items-center justify-center gap-[10px]"
+              data-node-id="3572:6504"
+            >
+              <TagBadge
+                label={tagText}
+                width={131}
+                height={27}
+                centerLabel
+                leftBarLeft={6.7}
+                rightBarLeft={121.16}
+                labelClassName="text-[12px] leading-[20.149px] tracking-[-0.36px]"
+                nodeId="3572:7556"
+              />
+              <div className="relative h-[117px] w-[356px]" data-node-id="3572:6505">
+                <div
+                  className={`${gilroyMedium.className} absolute top-[7px] left-[3px] w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+                  style={{
+                    backgroundImage: `linear-gradient(${MOBILE_TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                  }}
+                  data-node-id="3572:6506"
+                >
+                  {headingLines.join(" ")}
+                </div>
+                <MobileTitleCorners />
+              </div>
+              <p
+                className={`${interRegular.className} w-[324px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+                data-node-id="3572:6511"
+              >
+                {subtitle}
+              </p>
+            </div>
 
-        {/* Legacy stats */}
-        <div className="relative w-full max-w-[500px] bg-[rgba(128,128,128,0.1)] px-[20px] py-[24px]">
-          <MobileStatRows rows={legacyRows} />
-        </div>
+            {/* 3572:7689 — cards */}
+            <div className="flex w-full flex-col gap-[15px]" data-node-id="3572:7689">
+              {/* 3572:7690 — A-Cube group */}
+              <div className="relative h-[360px] w-full" data-node-id="3572:7690">
+                <div
+                  className="absolute top-0 left-0 h-[233.948px] w-[354px] overflow-clip border-[0.616px] border-solid border-[rgba(255,247,247,0.16)] bg-top-left"
+                  style={{ backgroundImage: MOBILE_ACUBE_CARD_BG, backgroundSize: MOBILE_ACUBE_BG_SIZE }}
+                  data-node-id="3572:7708"
+                  data-name="card"
+                >
+                  <div
+                    className="absolute bottom-[65.73px] left-[206.19px] flex h-[146.147px] w-[253.135px] items-center justify-center"
+                    data-node-id="3572:7709"
+                  >
+                    <div className="-rotate-150 -skew-x-30 flex-none scale-y-87">
+                      <div className="relative h-[167.251px] w-[125.044px]" data-name="Filler Liner">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={FILLER_LINER} alt="" className="absolute inset-0 block size-full max-w-none" />
+                      </div>
+                    </div>
+                  </div>
+                  <MobileACubeCardCorners />
+                  <div
+                    className="absolute top-[81px] left-[169px] h-[151px] w-[162px]"
+                    data-node-id="3572:7725"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={acube.image}
+                      alt=""
+                      className="absolute inset-0 size-full max-w-none object-bottom pointer-events-none"
+                    />
+                  </div>
+                  <div
+                    className="absolute bottom-[-63px] left-[3.86px] flex h-[138.201px] w-[239.372px] items-center justify-center"
+                    data-node-id="3572:7726"
+                  >
+                    <div className="-skew-x-30 flex-none rotate-30 scale-y-87">
+                      <div className="relative h-[151.359px] w-[125.044px]" data-name="Filler Liner">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={FILLER_LINER_1} alt="" className="absolute inset-0 block size-full max-w-none" />
+                      </div>
+                    </div>
+                  </div>
+                  <p
+                    className={`${gilroySemiBold.className} absolute top-[132.86px] left-[17.85px] w-[120.052px] bg-clip-text text-[30px] leading-[1.2] font-semibold text-transparent not-italic [word-break:break-word]`}
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(147.43deg, rgb(255, 255, 255) 29.352%, rgba(115, 115, 115, 0.5) 98.158%)",
+                      WebkitBackgroundClip: "text",
+                      backgroundClip: "text",
+                    }}
+                    data-node-id="3572:7738"
+                  >
+                    {statValue}
+                  </p>
+                  <div
+                    className="absolute top-[15px] left-[18px] flex w-[313px] flex-col items-start justify-center gap-[4.925px] border-b-[0.616px] border-solid border-[rgba(255,255,255,0.1)] pb-[6.773px] not-italic"
+                    data-node-id="3572:7739"
+                  >
+                    <p
+                      className={`${gilroyMedium.className} shrink-0 text-center text-[24px] leading-[23.395px] font-medium whitespace-nowrap text-white`}
+                      data-node-id="3572:7740"
+                    >
+                      {acube.label}
+                    </p>
+                    <p
+                      className={`${interRegular.className} w-full shrink-0 text-[12px] leading-[normal] font-normal text-[#8e8e8e] [word-break:break-word]`}
+                      data-node-id="3572:7741"
+                    >
+                      {acube.description}
+                    </p>
+                  </div>
+                  <p
+                    className={`${interRegular.className} absolute top-[173px] left-[16px] w-[142px] text-[12px] leading-[15px] font-normal text-[#e2f9da] not-italic [word-break:break-word]`}
+                    data-node-id="3572:7742"
+                  >
+                    {statDesc}
+                  </p>
+                </div>
+                <div
+                  className="absolute top-[234px] left-0 h-[126px] w-[354px] border-[0.616px] border-solid border-[rgba(255,247,247,0.16)] bg-top-left"
+                  style={{ backgroundImage: MOBILE_ACUBE_PANEL_BG, backgroundSize: MOBILE_ACUBE_BG_SIZE }}
+                  data-node-id="3572:7691"
+                  data-name="card"
+                >
+                  <MobileACubePanelCorners />
+                  <MobileStatsRows rows={acubeRows} topClassName="top-[21.13px]" efficiency="acube" />
+                </div>
+              </div>
 
-        {/* A-Cube stats */}
-        <div
-          className="relative w-full max-w-[500px] border border-solid border-[rgba(255,247,247,0.16)] bg-top-left px-[20px] py-[24px]"
-          style={{ backgroundImage: ACUBE_PANEL_BG, backgroundSize: ACUBE_BG_SIZE }}
-        >
-          <MobileStatRows rows={acubeRows} />
+              {/* 3572:7743 — Legacy group */}
+              <div className="relative h-[388px] w-full" data-node-id="3572:7743">
+                <div
+                  className="absolute top-[267.64px] left-0 h-[120.365px] w-[354px] bg-[rgba(128,128,128,0.1)]"
+                  data-node-id="3572:7744"
+                >
+                  <MobileLegacyPanelCorners />
+                  <MobileStatsRows rows={legacyRows} topClassName="top-[16.38px]" efficiency="legacy" />
+                </div>
+                <div
+                  className="absolute top-0 left-0 h-[269.051px] w-[354px] bg-[rgba(128,128,128,0.1)]"
+                  data-node-id="3572:7761"
+                >
+                  <div
+                    className="absolute top-[11.36px] left-[14.51px] h-[244.968px] w-[324.972px]"
+                    data-node-id="3572:7762"
+                    data-name="Stat"
+                  >
+                    <div
+                      className="absolute top-[5.66px] right-0 left-0 flex flex-col items-start gap-[5.664px] border-b-[0.708px] border-solid border-[rgba(255,255,255,0.1)] pb-[7.788px] not-italic"
+                      data-node-id="3572:7763"
+                    >
+                      <p
+                        className={`${gilroyMedium.className} w-[197.532px] shrink-0 text-[24px] leading-[23.395px] font-medium text-white [word-break:break-word]`}
+                        data-node-id="3572:7764"
+                      >
+                        {legacy.label}
+                      </p>
+                      <p
+                        className={`${interRegular.className} w-full shrink-0 text-[12px] leading-[normal] font-normal text-[#8e8e8e] [word-break:break-word]`}
+                        data-node-id="3572:7765"
+                      >
+                        {legacy.description}
+                      </p>
+                    </div>
+                    <p
+                      className={`${gilroyMedium.className} absolute top-[99.12px] left-[34.23px] text-[14px] leading-[19.824px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
+                      data-node-id="3572:7766"
+                    >
+                      Compute
+                    </p>
+                    <div
+                      className="absolute top-[124.6px] left-[4.17px] h-[113.712px] w-[115.34px]"
+                      data-node-id="3572:7767"
+                      data-name="image 208"
+                    >
+                      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={legacy.image}
+                          alt=""
+                          className="absolute left-[-13.52%] top-[-40.34%] h-[187.21%] w-[136.24%] max-w-none"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      className="absolute top-[129.84px] left-[calc(50%+95.77px)] h-[103.242px] w-[130.729px] -translate-x-1/2"
+                      data-node-id="3572:7768"
+                      data-name="image 206"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={LEGACY_MEMORY}
+                        alt=""
+                        className="absolute inset-0 size-full max-w-none object-cover pointer-events-none"
+                      />
+                    </div>
+                    <div
+                      className="absolute top-[185.12px] left-[calc(50%-4.98px)] h-0 w-[81.203px] -translate-x-1/2"
+                      data-node-id="3572:7769"
+                    >
+                      <div className="absolute inset-[-14.16px_0_0_0]">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={LINE_125} alt="" className="block size-full max-w-none" />
+                      </div>
+                    </div>
+                    <p
+                      className={`${gilroyMedium.className} absolute top-[99.12px] left-[234.54px] text-[14px] leading-[19.824px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
+                      data-node-id="3572:7770"
+                    >
+                      Memory
+                    </p>
+                  </div>
+                  <MobileLegacyCardCorners />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -2,6 +2,14 @@
 export const HERO_TITLE_GRADIENT =
   "linear-gradient(109.15deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
+/** Figma 4059:10009 — mobile hero title text gradient. */
+export const HERO_TITLE_GRADIENT_MOBILE =
+  "linear-gradient(100.882deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
+
+/** Figma 4059:10015 — mobile hero board image fade overlays (top + bottom). */
+export const HERO_IMAGE_OVERLAY_MOBILE =
+  "linear-gradient(180deg, rgb(0, 0, 0) 1.5278%, rgba(0, 0, 0, 0) 19.444%), linear-gradient(185.179deg, rgba(0, 0, 0, 0) 65.85%, rgb(0, 0, 0) 99.321%)";
+
 /** Figma 2761:2909 — hardware stack section title gradient. */
 export const SECTION_TITLE_GRADIENT =
   "linear-gradient(115.097deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -9,6 +17,14 @@ export const SECTION_TITLE_GRADIENT =
 /** Figma 2761:2793 — demos section title gradient. */
 export const DEMOS_TITLE_GRADIENT =
   "linear-gradient(138.357deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
+
+/** Figma 4059:10216 — mobile demos section title gradient. */
+export const DEMOS_TITLE_GRADIENT_MOBILE =
+  "linear-gradient(99.118deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
+
+/** Figma 4062:10909 — mobile ModelForge section title gradient. */
+export const MODELFORGE_TITLE_GRADIENT_MOBILE =
+  "linear-gradient(103.536deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
 /** Figma 2761:3011 — ModelForge section title gradient. */
 export const MODELFORGE_TITLE_GRADIENT =

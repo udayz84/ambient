@@ -4,8 +4,6 @@ import { Corners } from "../shared/Corners";
 
 const IMAGE_GRADIENT_DESKTOP =
   "radial-gradient(683.75px 163.5px at 50% 50%, rgba(26,26,26,1) 0%, rgba(13,13,13,1) 25%, rgba(7,7,7,1) 37.5%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%)";
-const IMAGE_GRADIENT_MOBILE =
-  "radial-gradient(ellipse at center, rgba(26,26,26,1) 0%, rgba(13,13,13,1) 25%, rgba(7,7,7,1) 37.5%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%)";
 
 const PROTOTYPE_CARDS = [
   {
@@ -23,6 +21,63 @@ const PROTOTYPE_CARDS = [
 ] as const;
 
 const FALLBACK_HEADING = "Prototype to Product in a Snap";
+
+/* ----------------------------- Mobile (Figma 4046:8061) ----------------------------- */
+const MOBILE_TITLE_GRADIENT_DEG = "119.172deg";
+const MOBILE_PROTO_IMAGES = ["/som/prototype-mobile-1.png", "/som/prototype-mobile-2.png"];
+const MOBILE_TITLE_STYLE = {
+  backgroundImage: `linear-gradient(${MOBILE_TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
+  WebkitBackgroundClip: "text",
+  backgroundClip: "text",
+} as const;
+
+function MobilePrototypeCard({
+  title,
+  description,
+  imageUrl,
+}: {
+  title: string;
+  description: string;
+  imageUrl?: string | null;
+}) {
+  return (
+    <article
+      className="relative flex h-[310px] w-[355px] shrink-0 flex-col items-center gap-[12px] overflow-clip border-[0.301px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[12px] pt-[12px] pb-[18px]"
+      data-name="Article"
+    >
+      <Corners />
+      {/* Container (image) — 4059:9112 */}
+      <div
+        className="relative flex h-[198px] w-full items-center justify-center overflow-hidden rounded-[3.61px] border-[0.602px] border-solid border-[#ccd7ff] bg-gradient-to-b from-[#0c160b] to-[rgba(12,22,11,0)] p-[0.602px]"
+        data-name="Container"
+      >
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            alt={title}
+            className="size-full object-cover"
+          />
+        )}
+      </div>
+      {/* NewsSection — 4059:9114 */}
+      <div
+        className="flex w-full flex-col items-start gap-[6px]"
+        data-name="NewsSection"
+      >
+        <h3
+          className={`${gilroyMedium.className} w-full text-[14px] leading-[16.847px] font-medium text-white not-italic [word-break:break-word]`}
+        >
+          {title}
+        </h3>
+        <p
+          className={`${interRegular.className} w-full text-[10px] leading-[14.441px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
+        >
+          {description}
+        </p>
+      </div>
+    </article>
+  );
+}
 
 function PrototypeCard({
   title,
@@ -120,26 +175,39 @@ export function SomPrototypeTitle({ data }: { data?: any }) {
         </div>
       </div>
 
-      {/* MOBILE (<1024px) */}
-      <div className="relative flex w-full flex-col items-center gap-[40px] px-[24px] pt-[72px] pb-[48px] min-[1024px]:hidden">
-        <div className="relative px-[10px]" data-name="Title">
-          <h2
-            className={`${gilroyMedium.className} text-center text-[34px] leading-[38px] font-medium text-white not-italic [word-break:break-word]`}
-          >
-            {heading}
-          </h2>
-          <Corners />
+      {/* MOBILE (<1024px) — Figma node 4046:8061 "4th Fold" 393×800 */}
+      <div
+        className="relative mx-auto h-[800px] w-[393px] overflow-hidden bg-black min-[1024px]:hidden"
+        data-node-id="4046:8061"
+        data-name="4th Fold"
+      >
+        {/* Title block — 4046:8064 (x19, y30, 350×78) */}
+        <div
+          className="absolute left-1/2 top-[30px] flex w-[350px] -translate-x-1/2 flex-col items-center justify-center"
+          data-node-id="4046:8064"
+        >
+          <div className="relative flex w-[352px] justify-center py-[3px]" data-name="Title">
+            <Corners />
+            <h2
+              className={`${gilroyMedium.className} w-[321px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              style={MOBILE_TITLE_STYLE}
+            >
+              {heading}
+            </h2>
+          </div>
         </div>
-        <div className="flex w-full flex-col gap-[24px]">
-          {cards.map((card) => (
-            <PrototypeCard
+
+        {/* Cards container — 4059:9110 (x19, y138, 355×632, gap 12) */}
+        <div
+          className="absolute left-1/2 top-[138px] flex w-[355px] -translate-x-1/2 flex-col gap-[12px]"
+          data-node-id="4059:9110"
+        >
+          {cards.map((card, i) => (
+            <MobilePrototypeCard
               key={card.title}
               title={card.title}
               description={card.description}
-              widthClass="w-full"
-              imageHeightClass="h-[200px]"
-              imageGradient={IMAGE_GRADIENT_MOBILE}
-              imageUrl={card.imageUrl}
+              imageUrl={card.imageUrl || MOBILE_PROTO_IMAGES[i] || null}
             />
           ))}
         </div>

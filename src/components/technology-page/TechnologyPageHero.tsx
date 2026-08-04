@@ -169,50 +169,83 @@ export function TechnologyPageHero({ data }: { data?: any } = {}) {
         </div>
       </div>
 
-      {/* MOBILE (<1024px) — basic responsive version */}
-      <div className="relative flex min-h-[560px] w-full flex-col items-center overflow-hidden min-[1024px]:hidden">
-        {/* Background image */}
-        <div className="pointer-events-none absolute inset-0" aria-hidden>
-          {(bgSrc || objectSrc) && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={bgSrc || objectSrc || undefined}
-              alt=""
-              className="size-full max-w-none object-cover"
-            />
-          )}
-          <div className="absolute inset-0 bg-black/60" />
-        </div>
-
-        <div className="relative z-10 flex w-full flex-col items-center gap-[20px] px-[24px] pt-[72px] pb-[64px]">
-          <TagBadge
-            label={tagText}
-            width={192}
-            labelOffsetX={0}
-            rightBarLeft={182.15}
-            centerLabel
-            nodeId="2931:1431"
-          />
-
+      {/* MOBILE (<1024px) — pixel-perfect from Figma node 3572:6456 (Banner, 393x676) */}
+      <div className="relative w-full overflow-hidden min-[1024px]:hidden">
+        <div className="relative mx-auto h-[676px] w-full max-w-[393px]">
+          {/* 3572:7530 — hero object image */}
           <div
-            className={`${gilroyMedium.className} w-full max-w-[327px] bg-clip-text text-center text-[34px] leading-[39px] font-medium text-transparent not-italic [word-break:break-word]`}
-            style={{
-              backgroundImage: `linear-gradient(${TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-            }}
-            data-node-id="2931:1428"
+            className="absolute top-[228px] left-[calc(50%-13px)] h-[328px] w-[607px] -translate-x-1/2"
+            data-node-id="3572:7530"
+            data-name="ChatGPT Image Jun 12, 2026, 03_31_59 PM 1"
           >
-            {titleText}
+            <div aria-hidden className="pointer-events-none absolute inset-0">
+              <div className="absolute inset-0 overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={mediaUrl(data?.hero_object) || "/technology/hero-object-mobile.png"}
+                  alt=""
+                  className="absolute top-0 left-0 h-[119.16%] w-full max-w-none"
+                />
+              </div>
+              <div
+                className="absolute inset-0"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(0.213527deg, rgba(0, 0, 0, 0) 56.307%, rgb(0, 0, 0) 96.933%), linear-gradient(180deg, rgba(0, 0, 0, 0) 43.649%, rgb(0, 0, 0) 100%)",
+                }}
+              />
+            </div>
           </div>
 
-          <p
-            className={`${interRegular.className} w-full max-w-[327px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 not-italic`}
+          {/* 3572:6458 — eyebrow tag */}
+          <div
+            className="absolute top-0 left-[calc(50%-0.5px)] -translate-x-1/2"
+            data-node-id="3572:6458"
+            data-name="Menu Container"
           >
-            {descText}
-          </p>
+            <TagBadge
+              label={tagText}
+              width={163}
+              height={27}
+              labelOffsetX={68.5}
+              leftBarLeft={6.7}
+              rightBarLeft={156.16}
+              labelClassName="text-[12px] leading-[20.149px] tracking-[-0.36px]"
+              nodeId="3572:6459"
+            />
+          </div>
 
-          <div className="mt-[8px] flex w-full max-w-[327px] flex-col items-stretch gap-[12px]">
+          {/* 3572:6475 — title + description */}
+          <div
+            className="absolute top-[45px] left-[calc(50%+0.5px)] flex w-[308px] -translate-x-1/2 flex-col items-center gap-[15px] text-center"
+            data-node-id="3572:6475"
+            data-name="Frame 2147240742"
+          >
+            <div
+              className={`${gilroyMedium.className} w-[273px] shrink-0 bg-clip-text text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              style={{
+                backgroundImage: `linear-gradient(99.285351deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
+              data-node-id="3572:6476"
+            >
+              {titleText}
+            </div>
+            <p
+              className={`${interRegular.className} min-w-full shrink-0 text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 not-italic [word-break:break-word]`}
+              data-node-id="3572:6477"
+            >
+              {descText}
+            </p>
+          </div>
+
+          {/* 3572:7535 — CTAs */}
+          <div
+            className="absolute top-[542px] left-1/2 flex w-[263px] -translate-x-1/2 flex-col gap-[24px]"
+            data-node-id="3572:7535"
+            data-name="Frame 2147240743"
+          >
             <ReadWhitepaperCta
               fullWidth
               label={primaryLabel}

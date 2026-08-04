@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { mediaUrl } from "@/lib/strapi";
-import { gilroyMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GradientTitle } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
@@ -14,6 +14,15 @@ const DESCRIPTION =
 const CTA_LABEL = "Request Sparsh Module";
 const FALLBACK_CHIP = "/som/sparsh-chip.png";
 const CONNECTOR_LINE = "/som/ready-connector.svg";
+
+/* ----------------------------- Mobile (Figma 4046:8112) ----------------------------- */
+const MOBILE_TITLE_GRADIENT_DEG = "134.992deg";
+const MOBILE_CONNECTOR = "/som/ready-mobile-connector.svg";
+const MOBILE_TITLE_STYLE = {
+  backgroundImage: `linear-gradient(${MOBILE_TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
+  WebkitBackgroundClip: "text",
+  backgroundClip: "text",
+} as const;
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
@@ -163,47 +172,105 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
         </div>
       </div>
 
-      {/* MOBILE (<1024px) */}
-      <div className="relative flex w-full flex-col items-center gap-[40px] px-[24px] pt-[72px] pb-[80px] min-[1024px]:hidden">
-        <div className="flex w-full flex-col items-center gap-[20px]">
-          <div className="relative px-[10px]">
-            <div
-              className={`${gilroyMedium.className} bg-clip-text text-center text-[34px] leading-[37px] font-medium text-transparent not-italic [word-break:break-word]`}
-              style={{
-                backgroundImage: `linear-gradient(${TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-              }}
+      {/* MOBILE (<1024px) — Figma node 4046:8112 "6th Fold" 393×750 */}
+      <div
+        className="relative mx-auto h-[750px] w-[393px] overflow-hidden bg-black min-[1024px]:hidden"
+        data-node-id="4046:8112"
+        data-name="6th Fold"
+      >
+        {/* Title block — 4046:8115 (x19, y30, 350×119) */}
+        <div
+          className="absolute left-[19px] top-[30px] flex w-[350px] flex-col items-center gap-[10px]"
+          data-node-id="4046:8115"
+        >
+          <div className="relative flex w-[356px] justify-center py-[4px]" data-name="Title">
+            <Corners />
+            <h2
+              className={`${gilroyMedium.className} w-[324px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              style={MOBILE_TITLE_STYLE}
             >
               {heading}
-            </div>
-            <Corners />
+            </h2>
           </div>
           <p
-            className={`${interRegular.className} max-w-[332px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/80 not-italic`}
+            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word]`}
           >
             {subtitle}
           </p>
         </div>
 
-        {chipSrc && <ChipImage className="h-[300px] w-full max-w-[290px]" src={chipSrc} />}
+        {/* Content — 4059:9185 (y189, w355, gap 24) */}
+        <div
+          className="absolute left-1/2 top-[189px] flex w-[355px] -translate-x-1/2 flex-col items-center gap-[24px]"
+          data-node-id="4059:9185"
+          data-name="Do the best work of your life"
+        >
+          {/* Chip Image — 4059:9358 (355×300) */}
+          <div className="relative h-[300px] w-[355px] shrink-0" data-name="Chip Image">
+            <div
+              className="absolute left-1/2 top-[calc(50%+4.71px)] h-[357.417px] w-[344.7px] -translate-x-1/2 -translate-y-1/2 overflow-hidden"
+              data-name="Background"
+            >
+              {chipSrc && (
+                <img
+                  src={chipSrc || FALLBACK_CHIP}
+                  alt="Sparsh AI Module"
+                  className="absolute left-0 top-[10.17%] h-[79.67%] w-full max-w-none object-contain"
+                />
+              )}
+            </div>
+          </div>
 
-        <div className="flex w-full flex-col items-center gap-[20px]">
-          <h3
-            className={`${gilroyMedium.className} text-center text-[26px] leading-[32px] font-medium text-white not-italic [word-break:break-word]`}
+          {/* Frame — 4059:9361 (gap 10) */}
+          <div
+            className="flex w-full flex-col items-center gap-[10px]"
+            data-node-id="4059:9361"
           >
-            {primaryTitleLines.map((line: string, i: number) => (
-              <p key={i} className="leading-[32px]">
-                {line}
-              </p>
-            ))}
-          </h3>
-          <p
-            className={`${interRegular.className} max-w-[290px] text-center text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
-          >
-            {description}
-          </p>
-          <RequestCta label={ctaLabel} />
+            <h3
+              className={`${gilroyMedium.className} w-[200.641px] text-center text-[28px] leading-[33.725px] font-medium text-white not-italic [word-break:break-word]`}
+            >
+              {primaryTitleLines.map((line: string, i: number) => (
+                <span key={i} className="block">
+                  {line}
+                </span>
+              ))}
+            </h3>
+            <p
+              className={`${interRegular.className} w-[296.416px] text-center text-[14px] leading-[23.075px] font-normal tracking-[-0.2773px] text-[#99a1af] not-italic [word-break:break-word]`}
+            >
+              {description}
+            </p>
+
+            {/* CTA — 4059:9373 (231×48) */}
+            <a
+              href="#"
+              className={`relative flex h-[48px] w-[231px] shrink-0 items-center justify-center ${GREEN_CTA_SHADOW}`}
+              data-name="Cta"
+            >
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+              />
+              <span
+                className={`relative ${gilroySemiBold.className} text-[14px] font-medium uppercase whitespace-nowrap text-white not-italic`}
+              >
+                {ctaLabel}
+              </span>
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
+              />
+              <GreenCtaCorners />
+            </a>
+          </div>
+
+          {/* Connector line — 4059:9387 (vertical, centered, y268) */}
+          <img
+            src={MOBILE_CONNECTOR}
+            alt=""
+            aria-hidden
+            className="pointer-events-none absolute left-[177.5px] top-[268px] h-[70px] w-[5.7735px] max-w-none -translate-x-1/2"
+          />
         </div>
       </div>
     </section>

@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { CornerDecor } from "../contact/contact-shared";
+import { Corners } from "../shared/Corners";
 import { ContinuumOptionsBar } from "./ContinuumOptionsBar";
-import { mediaUrl } from "@/lib/strapi";
 
 const TITLE_GRADIENT =
   "linear-gradient(119.973deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -15,6 +15,9 @@ const FALLBACK_HEADING = "The Ambient Continuum.";
 const CONNECTOR = "/applications/cont-connector.png";
 const LINE_108 = "/applications/line-108.svg";
 const LINE_109 = "/applications/line-109.svg";
+
+const NAV_ARROW_LEFT = "/applications/nav-arrow-left.svg";
+const NAV_ARROW_RIGHT = "/applications/nav-arrow-right.svg";
 
 const HOVER_TRANSITION = "transition-all duration-300 ease-out";
 
@@ -356,7 +359,6 @@ function AirCooledVisual() {
 export function ApplicationsPageContinuum({ data }: { data?: any }) {
   const heading = data?.heading || FALLBACK_HEADING;
   const subtitle = data?.subtitle || SUBTITLE;
-  const image = mediaUrl(data?.image) || "/applications/continuum.png";
 
   const rawCards = Array.isArray(data?.cards) ? data.cards : [];
   const cards: ContinuumCard[] =
@@ -498,61 +500,164 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
         <ContinuumOptionsBar />
       </div>
 
-      {/* MOBILE (<1024px) */}
-      <div className="relative flex w-full flex-col items-center min-[1024px]:hidden">
-        {/* Header */}
-        <div className="flex w-full flex-col items-center gap-[24px] px-[24px] pt-[64px]">
-          <div className="relative w-full px-[24px]">
+      {/* MOBILE (<1024px) — node 4032:5788, desktop above is untouched */}
+      <div
+        className="relative flex w-full flex-col items-center overflow-hidden min-[1024px]:hidden"
+        data-node-id="4032:5788"
+        data-name="Frame 1984079474"
+      >
+        <style>{`.cont-m-scroll::-webkit-scrollbar{display:none}.cont-m-scroll{scrollbar-width:none;-ms-overflow-style:none}`}</style>
+
+        {/* Header: title + subtitle (node 4032:5792) */}
+        <div
+          className="mt-[29px] flex w-[350px] flex-col items-center gap-[10px]"
+          data-node-id="4032:5792"
+        >
+          {/* Title with corner brackets (node 4032:5793) */}
+          <div className="relative h-[79px] w-[353px]" data-node-id="4032:5793" data-name="Group 78">
             <h2
-              className={`${gilroyMedium.className} bg-clip-text text-center text-[32px] font-medium leading-[40px] tracking-[-0.64px] text-transparent not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} absolute inset-0 flex items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
-                backgroundImage: TITLE_GRADIENT,
+                backgroundImage:
+                  "linear-gradient(107.453deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
               }}
+              data-node-id="4032:5794"
             >
               {heading}
             </h2>
-            <CornerDecor />
+
+            {/* Top-right bracket (Vector 55) */}
+            <div className="absolute left-[351.5px] top-[4px] flex h-[4px] w-[2.346px] items-center justify-center">
+              <div className="flex-none rotate-180">
+                <div className="relative h-[4px] w-[2.346px]">
+                  <div className="absolute inset-[0_0_-12.5%_-21.31%]">
+                    { }
+                    <img alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* Bottom-right bracket (Vector 56) */}
+            <div className="absolute left-[351.5px] top-[75px] flex h-[4px] w-[2.346px] items-center justify-center">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="relative h-[4px] w-[2.346px]">
+                  <div className="absolute inset-[0_0_-12.5%_-21.31%]">
+                    { }
+                    <img alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* Bottom-left bracket (Vector 57) */}
+            <div className="absolute left-[-1.5px] top-[75px] h-[4px] w-[2.346px]">
+              <div className="absolute inset-[0_0_-12.5%_-21.31%]">
+                { }
+                <img alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
+              </div>
+            </div>
+            {/* Top-left bracket (Vector 58) */}
+            <div className="absolute left-[-1.5px] top-[4px] flex h-[4px] w-[2.346px] items-center justify-center">
+              <div className="-scale-y-100 flex-none">
+                <div className="relative h-[4px] w-[2.346px]">
+                  <div className="absolute inset-[0_0_-12.5%_-21.31%]">
+                    { }
+                    <img alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+
+          {/* Subtitle (node 4032:5799) */}
           <p
-            className={`${interRegular.className} w-full max-w-[332px] text-center text-[14px] font-normal leading-[1.4] text-[#f0f0f0] opacity-65 not-italic`}
+            className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            data-node-id="4032:5799"
           >
             {subtitle}
           </p>
         </div>
 
-        {/* Continuum image */}
-        <div className="mt-[40px] w-full px-[16px]">
-          <div className="aspect-[1024/299] w-full overflow-hidden">
-            <img
-              alt=""
-              aria-hidden
-              src={image}
-              className="pointer-events-none size-full max-w-none object-cover"
-            />
+        {/* Chip visual: horizontal scroll reusing the desktop pedestal visuals (node 4032:11892).
+            The inner uses the desktop 1440x808 coordinate space, offset up to crop the dead top
+            space so the pedestal staircase + labels fit a mobile-height band. */}
+        <div
+          className="cont-m-scroll relative mt-[13px] h-[540px] w-full overflow-x-auto overflow-y-hidden"
+          data-node-id="4032:11892"
+        >
+          <div className="relative h-[808px] w-[1440px] -mt-[200px]">
+            {/* Connector graphics between pedestals */}
+            {[192.87, 472.87, 744.87, 1014.87].map((left) => (
+              <div
+                key={left}
+                aria-hidden
+                className="absolute top-[476px] h-[60px] w-[207px]"
+                style={{ left }}
+              >
+                { }
+                <img
+                  alt=""
+                  aria-hidden
+                  src={CONNECTOR}
+                  className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+                />
+              </div>
+            ))}
+
+            {/* Pedestal visuals (base state; hover reveals are inert on touch) */}
+            <MicrowattVisual />
+            <PhysicalVisual />
+            <PersonalVisual />
+            <Personal2Visual />
+            <AirCooledVisual />
+
+            {/* Content labels row (node 3974:612) */}
+            <div
+              className="absolute left-[41.87px] top-[646px] flex w-[1356px] items-start justify-center gap-[10px] text-center text-white not-italic"
+              data-node-id="3974:612"
+            >
+              {cards.map((card) => (
+                <div
+                  key={card.nodeId}
+                  className={`flex shrink-0 flex-col items-center justify-center gap-[10px] p-[12px] ${
+                    card.wide ? "w-[276px]" : "w-[244px]"
+                  }`}
+                  data-node-id={card.nodeId}
+                  data-name="Content"
+                >
+                  <p
+                    className={`${gilroyMedium.className} w-full text-center text-[22px] leading-[28px] font-medium`}
+                  >
+                    {card.title}
+                  </p>
+                  <p
+                    className={`${interRegular.className} w-full text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0]`}
+                  >
+                    {renderBody(card.body)}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Cards */}
-        <div className="flex w-full flex-col items-center gap-[32px] px-[24px] pb-[64px] pt-[40px]">
-          {cards.map((card) => (
-            <div
-              key={card.nodeId}
-              className="flex w-full max-w-[300px] flex-col items-center justify-center gap-[10px] p-[12px] text-center text-white not-italic"
-            >
-              <p
-                className={`${gilroyMedium.className} w-full text-center text-[22px] font-medium leading-[28px] not-italic`}
-              >
-                {card.title}
-              </p>
-              <p
-                className={`${interRegular.className} w-full text-center text-[14px] font-normal leading-[21px] opacity-65`}
-              >
-                {renderBody(card.body)}
-              </p>
+        {/* Navigation arrows (node 4032:5855) — static, centered */}
+        <div className="mt-[20px] flex gap-[20px]" data-node-id="4032:5855">
+          <div className="relative size-[44px]">
+            <Corners />
+            <div className="absolute inset-0 flex items-center justify-center">
+              { }
+              <img alt="" aria-hidden src={NAV_ARROW_LEFT} className="size-[24px] max-w-none" />
             </div>
-          ))}
+          </div>
+          <div className="relative size-[44px]">
+            <Corners />
+            <div className="absolute inset-0 flex items-center justify-center">
+              { }
+              <img alt="" aria-hidden src={NAV_ARROW_RIGHT} className="size-[24px] max-w-none" />
+            </div>
+          </div>
         </div>
       </div>
     </section>

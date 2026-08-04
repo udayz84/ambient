@@ -3,6 +3,7 @@ import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { TechnologyPageArchitectureMobile } from "./TechnologyPageArchitectureMobile";
 
 /**
  * Figma 3330:1261 ("Desktop - 17") — "One architecture that thinks,
@@ -27,7 +28,7 @@ const FALLBACK_HEADING =
 const FALLBACK_SUBTITLE =
   "Three breakthroughs as one: a physics-based brain, a responsive nervous system, and familiar language. Server-class AI with low power.";
 
-type Pillar = {
+export type Pillar = {
   nodeId: string;
   /** Card geometry on the 1440×1833 canvas. */
   left: number;
@@ -162,7 +163,7 @@ function buildPillars(data: any): Pillar[] {
   });
 }
 
-function IconBox({ pillar }: { pillar: Pillar }) {
+export function IconBox({ pillar }: { pillar: Pillar }) {
   return (
     <div
       className="relative size-[40px] shrink-0 rounded-[6.667px]"
@@ -194,7 +195,7 @@ function IconBox({ pillar }: { pillar: Pillar }) {
   );
 }
 
-function PillarCta({ pillar }: { pillar: Pillar }) {
+export function PillarCta({ pillar }: { pillar: Pillar }) {
   return (
     <a
       href={pillar.ctaHref || "/developer"}
@@ -449,37 +450,12 @@ export function TechnologyPageArchitecture({
         <Connector left={549} top={1493} />
       </div>
 
-      {/* MOBILE (<1024px) — basic responsive version */}
-      <div className="flex w-full flex-col items-center gap-[40px] px-[24px] py-[56px] min-[1024px]:hidden">
-        <div className="flex flex-col items-center gap-[16px]">
-          <div
-            className={`${gilroyMedium.className} bg-clip-text text-center text-[32px] leading-[37px] font-medium text-transparent not-italic`}
-            style={{
-              backgroundImage: `linear-gradient(${TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-            }}
-          >
-            <span className="block">{headingLines[0] ?? ""}</span>
-            <span className="block">{headingLines[1] ?? ""}</span>
-          </div>
-          <p
-            className={`${interRegular.className} max-w-[327px] text-center text-[15px] leading-[22px] font-normal text-[#f0f0f0] not-italic opacity-65`}
-          >
-            {subtitle}
-          </p>
-        </div>
-
-        {pillars.map((pillar) => (
-          <div
-            key={pillar.nodeId}
-            className="relative flex w-full flex-col bg-[rgba(0,0,0,0.1)] px-[20px] border border-[rgba(255,255,255,0.12)]"
-          >
-            <PillarStat pillar={pillar} fullWidth />
-            <CornerDecor />
-          </div>
-        ))}
-      </div>
+      {/* MOBILE (<1024px) — pixel-perfect from Figma node 3572:6674 (3rd Fold, 393x966) */}
+      <TechnologyPageArchitectureMobile
+        heading={heading}
+        subtitle={subtitle}
+        pillars={pillars}
+      />
     </section>
   );
 }
