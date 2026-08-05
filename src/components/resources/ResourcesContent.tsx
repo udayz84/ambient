@@ -13,7 +13,7 @@ import { ResourcesArticleCard } from "./ResourcesArticleCard";
 import { Corners } from "../shared/Corners";
 import { GreenCtaButton } from "../contact/contact-shared";
 const scrollArrowLeft = "/applications/nav-arrow-right.svg";
-const DEFAULT_INITIAL_VISIBLE = 9;
+const DEFAULT_INITIAL_VISIBLE = 6;
 const DEFAULT_LOAD_MORE_COUNT = 3;
 const LOAD_MORE_DELAY_MS = 800;
 const FALLBACK_BG = "/resources/image-107.png";
