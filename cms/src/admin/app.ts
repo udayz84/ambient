@@ -1,3 +1,4 @@
+/// <reference path="./images.d.ts" />
 import logo from './assets/logo.png';
 import { setPluginConfig, defaultHtmlPreset } from '@_sh/strapi-plugin-ckeditor';
 import { MediaEmbed } from 'ckeditor5';

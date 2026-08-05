@@ -13,7 +13,8 @@
     },
     "subtitle": {
       "type": "text",
-      "required": true
+      "required": true,
+      "default": "Sign up to receive regular updates."
     },
     "input_placeholder": {
       "type": "string",

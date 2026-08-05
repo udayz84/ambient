@@ -7,7 +7,7 @@ import { CompanySectionTitle } from "./CompanySectionTitle";
 import type { CompanyEngagementCardData } from "./company-engagement-data";
 
 const CARD_BORDER =
-  "border-[0.5px] border-solid border-[rgba(240,240,240,0.2)]";
+  "border-[0.5px] border-solid border-[rgba(240,240,240,0.3)]";
 
 type CompanyEngagementCardProps = CompanyEngagementCardData & {
   strapi?: any;
@@ -41,27 +41,29 @@ export function CompanyEngagementCard({
 
   return (
     <article
-      className={`relative isolate z-[1] box-border h-[386px] flex-1 shrink-0 bg-black overflow-hidden ${CARD_BORDER}`}
+      className={`relative isolate z-[1] box-border h-[386px] flex-1 shrink-0 bg-black ${CARD_BORDER}`}
       data-node-id={nodeId}
       data-name="Article"
     >
-      <div
-        className="absolute pointer-events-none"
-        style={{
-          width: imageWidth,
-          height: imageHeight,
-          left: imageLeft,
-          top: imageTop,
-        }}
-        aria-hidden
-      >
-        <Image
-          src={finalImageSrc}
-          alt=""
-          fill
-          className="pointer-events-none object-contain"
-          unoptimized
-        />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div
+          className="absolute"
+          style={{
+            width: imageWidth,
+            height: imageHeight,
+            left: imageLeft,
+            top: imageTop,
+          }}
+          aria-hidden
+        >
+          <Image
+            src={finalImageSrc}
+            alt=""
+            fill
+            className="pointer-events-none object-contain"
+            unoptimized
+          />
+        </div>
       </div>
 
       <div

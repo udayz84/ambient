@@ -64,7 +64,7 @@ function FeatureCard({
   return (
     <div
       ref={fadeRef}
-      className={`relative flex w-full flex-col items-start gap-[24px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[16px] pt-[16px] pb-[24px] min-[1024px]:h-[400px] min-[1024px]:w-[377px] min-[1024px]:gap-[36px] transition-all duration-300 hover:-translate-y-[10px] hover:shadow-[0px_94px_94px_-80px_#6fe047] min-[1024px]:hover:-translate-y-[30px] cursor-pointer ${getFadeInClass(isVisible)}`}
+      className={`relative flex w-full flex-col items-start gap-[24px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[16px] pt-[16px] pb-[24px] min-[1024px]:h-[400px] min-[1024px]:w-[377px] min-[1024px]:gap-[36px] transition-all duration-300 hover:-translate-y-[10px] hover:shadow-[0px_94px_94px_-80px_#6fe047] min-[1024px]:hover:-translate-y-[30px] ${getFadeInClass(isVisible)}`}
       style={{
         backgroundImage: `radial-gradient(circle ${glowPosition}, rgba(111,224,71,0.12) 0%, rgba(0,0,0,0) 70%)`
       }}

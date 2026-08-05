@@ -39,6 +39,8 @@ function LeadershipBackground() {
   );
 }
 
+import { LEADERSHIP_TEAM } from "./company-leadership-data";
+
 type CompanyLeadershipProps = {
   data?: any;
 };
@@ -50,6 +52,8 @@ export function CompanyLeadership({ data }: CompanyLeadershipProps = {}) {
   const prevArrowSrc = FALLBACK_PREV_ARROW;
   const nextArrowSrc = FALLBACK_NEXT_ARROW;
   const team = Array.isArray(data?.team) ? data.team : null;
+  const membersCount = team && team.length > 0 ? team.length : LEADERSHIP_TEAM.length;
+  const showArrows = membersCount > 3;
 
   return (
     <section
@@ -126,22 +130,6 @@ export function CompanyLeadership({ data }: CompanyLeadershipProps = {}) {
 
         <CompanyAdvisoryBoard data={data?.advisory_board} />
       </div>
-
-      <button
-        type="button"
-        className="absolute top-[593px] left-[39px] z-20 flex size-[44px] cursor-pointer items-center justify-center transition-opacity hover:opacity-80"
-        aria-label="Previous"
-      >
-        <Image src={prevArrowSrc} alt="" width={44} height={44} className="block size-full max-w-none" />
-      </button>
-
-      <button
-        type="button"
-        className="absolute top-[593px] left-[1347px] z-20 flex size-[44px] cursor-pointer items-center justify-center transition-opacity hover:opacity-80"
-        aria-label="Next"
-      >
-        <Image src={nextArrowSrc} alt="" width={44} height={44} className="block size-full max-w-none" />
-      </button>
     </section>
   );
 }

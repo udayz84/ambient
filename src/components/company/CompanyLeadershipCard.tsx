@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import type { RefCallback } from "react";
 import { gilroyMedium, interRegular } from "../hero/fonts";
@@ -37,7 +39,7 @@ const ADVISORY_SPEC = {
   cardHeight: 365,
   borderSrc: "/company/user-image-border-advisory.svg",
   footerLeft: 27,
-  footerTop: 314.6376953125,
+  footerBottom: 22.4,
   footerWidth: 241,
   footerHeight: 28,
   linkedInMarginTop: 2,
@@ -249,10 +251,10 @@ function PersonFooter({
     <div
       className="absolute z-40 flex items-start justify-between"
       style={{
-        top: spec.footerTop,
-        left: spec.footerLeft,
-        width: spec.footerWidth,
-        minHeight: spec.footerHeight,
+        bottom: (spec as typeof ADVISORY_SPEC).footerBottom,
+        left: (spec as typeof ADVISORY_SPEC).footerLeft,
+        width: (spec as typeof ADVISORY_SPEC).footerWidth,
+        minHeight: (spec as typeof ADVISORY_SPEC).footerHeight,
       }}
       data-name="Frame 1984079465"
     >
@@ -280,6 +282,7 @@ function PersonFooter({
         className="relative z-40 size-[24px] shrink-0 cursor-pointer"
         style={{ marginTop: spec.linkedInMarginTop }}
         aria-label={`${name} on LinkedIn`}
+        onClick={(event) => event.stopPropagation()}
       >
         <Image
           src={linkedInIconSrc}

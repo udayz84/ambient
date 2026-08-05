@@ -13,7 +13,7 @@ export function CompanyDnaBackground({ bgImage }: { bgImage?: string | null }) {
         data-node-id="2379:2088"
         data-name="image 137"
       >
-        <TechnologyVisualFadeIn className="absolute inset-0" style={{ animationDelay: '1s' }}>
+        <TechnologyVisualFadeIn className="absolute inset-0" style={{ animationDelay: '0.3s' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt=""

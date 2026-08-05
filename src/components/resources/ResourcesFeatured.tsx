@@ -82,7 +82,7 @@ export function ResourcesFeatured({ data }: ResourcesFeaturedProps = {}) {
   return (
     <section
       ref={ref}
-      style={{ animationDelay: '1s' }}
+      style={{ animationDelay: '0.3s' }}
       className={`absolute top-[716px] left-1/2 flex w-[1432px] -translate-x-1/2 flex-col gap-[20px] bg-[#010101] px-[56px] py-[80px] ${
         isVisible ? FADE_IN_CLASS : "translate-y-[25px] opacity-0"
       }`}

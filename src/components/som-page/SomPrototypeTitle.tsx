@@ -10,13 +10,13 @@ const PROTOTYPE_CARDS = [
     title: "The Lab",
     description:
       "Use the integrated breakout board for rapid prototyping. It includes a USB-C port for charging, a 10-pin JTAG connector, programmable LEDs, and headers for easy signal probing and power analysis.",
-    imageUrl: null,
+    imageUrl: "/som/prototype-mobile-1.png",
   },
   {
     title: "Production-Ready SOMs",
     description:
       "Once your software is validated, simply snap off the breakout half. The remaining 21×21mm core module embeds directly into your space-constrained product with zero hardware redesign required.",
-    imageUrl: null,
+    imageUrl: "/som/prototype-mobile-2.png",
   },
 ] as const;
 

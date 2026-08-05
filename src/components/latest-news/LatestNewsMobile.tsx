@@ -40,7 +40,7 @@ function resolveCards(data: any): LatestNewsArticle[] {
         date: fallback.date,
         href: fallback.href,
         imageSrc:
-          mediaUrl(c.image) && !mediaUrl(c.image)?.match(/\.(mp4|webm)$/i)
+          mediaUrl(c.image)
             ? mediaUrl(c.image)
             : "",
       };
@@ -114,13 +114,24 @@ export function LatestNewsMobile({ data }: { data?: any }) {
           >
             <div className="relative h-[184px] w-full shrink-0 overflow-hidden">
               {article.imageSrc ? (
-                <Image
-                  src={article.imageSrc}
-                  alt=""
-                  fill
-                  className="object-cover"
-                  sizes="327px"
-                />
+                /\.(mp4|webm)$/i.test(article.imageSrc) ? (
+                  <video
+                    src={article.imageSrc}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="object-cover size-full absolute inset-0"
+                  />
+                ) : (
+                  <Image
+                    src={article.imageSrc}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="327px"
+                  />
+                )
               ) : null}
               <div
                 className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"

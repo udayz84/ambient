@@ -501,7 +501,7 @@ function ApplyButton({ label, href }: { label: string; href?: string }) {
   return (
     <a
       href={href || "#"}
-      className={`${interMedium.className} absolute top-[51px] right-[49px] flex h-[48px] items-center justify-center gap-[20px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic transition-[box-shadow,background-color] duration-200 group-hover:bg-transparent group-hover:shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+      className={`${interMedium.className} absolute top-[51px] right-[49px] flex h-[48px] items-center justify-center gap-[20px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-transparent px-[20px] py-[10px] text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic transition-[box-shadow,background-color] duration-200 group-hover:bg-[rgba(255,255,255,0.05)] group-hover:shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
     >
       <span
         aria-hidden
@@ -522,7 +522,46 @@ function ApplyButton({ label, href }: { label: string; href?: string }) {
           aria-hidden
         />
       </span>
-      <GreenCtaCorners />
+      <ApplyButtonCorners />
     </a>
+  );
+}
+
+function ApplyButtonCorners() {
+  return (
+    <>
+      <div className="pointer-events-none absolute right-0 top-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="-scale-x-100 -scale-y-100 flex-none">
+          <div className="relative size-[4px]">
+            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+              <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute left-0 top-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="-scale-y-100 flex-none">
+          <div className="relative size-[4px]">
+            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+              <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute bottom-0 right-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="-scale-x-100 flex-none">
+          <div className="relative size-[4px]">
+            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+              <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute bottom-0 left-0 z-20 size-[4px]">
+        <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+          <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden />
+        </div>
+      </div>
+    </>
   );
 }

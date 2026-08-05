@@ -21,7 +21,7 @@ export function DeveloperPlatformCard({
   patternGradient,
   overlayGradient,
   imageSrc,
-  imageClassName,
+  imageVariant,
 }: DeveloperPlatformCardConfig) {
   return (
     <div
@@ -36,28 +36,65 @@ export function DeveloperPlatformCard({
 
       {overlayGradient ? (
         <div
-          className={`absolute ${height === 600 ? "-translate-x-1/2 left-1/2 top-[-0.15px] h-[600.147px] w-[388px]" : "-translate-x-1/2 left-1/2 top-[-0.15px] h-[290.295px] w-[796px]"}`}
+          className={`absolute -translate-x-1/2 left-1/2 top-[-0.15px] ${height === 600 ? "h-[600.147px] w-[388px]" : "h-[290.295px] w-[796px]"}`}
           style={{ backgroundImage: overlayGradient }}
           aria-hidden
         />
       ) : null}
 
       <div
-        className={`absolute -translate-y-1/2 top-1/2 opacity-[0.24] ${height === 600 ? "right-0 h-[600px] w-[388px]" : height === 290 && width === 796 ? "right-0 h-[290.295px] w-[796px]" : "right-0 h-[290.295px] w-[388px]"}`}
+        className={`absolute -translate-y-1/2 top-1/2 right-0 opacity-[0.24] ${height === 600 ? "h-[600px] w-[388px]" : height === 290 && width === 796 ? "h-[290.295px] w-[796px]" : "h-[290.295px] w-[388px]"}`}
         style={{ backgroundImage: patternGradient }}
         data-name="Pattern"
         aria-hidden
       />
 
-      {imageSrc && imageClassName ? (
-        <div className={imageClassName} data-name="image 76">
+      {imageSrc && imageVariant === "chipset" ? (
+        <div
+          className="absolute top-[-25.98px] left-[calc(50%+138.68px)] size-[153px] -translate-x-1/2"
+          data-node-id="3818:500"
+          data-name="Chipset 1"
+        >
           <Image
             src={imageSrc}
             alt=""
             fill
-            className="pointer-events-none object-bottom object-cover"
-            sizes={`${width}px`}
+            className="pointer-events-none object-cover"
+            sizes="153px"
           />
+        </div>
+      ) : null}
+
+      {imageSrc && imageVariant === "devkit" ? (
+        <div
+          className="absolute top-[calc(50%-61.48px)] left-[calc(50%+70.18px)] h-[315px] w-[388px] -translate-x-1/2 -translate-y-1/2"
+          data-node-id="4054:8291"
+          data-name="image 249"
+        >
+          <Image
+            src={imageSrc}
+            alt=""
+            fill
+            className="pointer-events-none object-cover"
+            sizes="388px"
+          />
+        </div>
+      ) : null}
+
+      {imageSrc && imageVariant === "modules" ? (
+        <div
+          className="absolute top-[calc(50%+12.5px)] left-[336px] h-[187px] w-[436px] -translate-y-1/2"
+          data-node-id="2379:1008"
+          data-name="image 76"
+        >
+          <div className="pointer-events-none absolute inset-0 overflow-hidden">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={imageSrc}
+              alt=""
+              className="absolute top-[-27.04%] left-[-29.37%] h-[156.76%] w-[129.56%] max-w-none"
+            />
+          </div>
         </div>
       ) : null}
 

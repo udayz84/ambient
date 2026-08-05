@@ -313,7 +313,7 @@ export function CareersJobCard({
       </p>
       <a
         href="#"
-        className={`${interMedium.className} absolute top-[51px] right-[49px] flex h-[48px] items-center gap-[20px] bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic ${BOX_BORDER_CLASS}`}
+        className={`${interMedium.className} absolute top-[51px] right-[49px] flex h-[48px] items-center gap-[20px] bg-transparent transition-[background-color] duration-200 hover:bg-[rgba(255,255,255,0.05)] px-[20px] py-[10px] text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic ${BOX_BORDER_CLASS}`}
       >
         APPLY NOW
         <Image

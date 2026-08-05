@@ -33,13 +33,30 @@ export function HeroVisualMedia({
     return null;
   }
 
+  const isVideo = /\.(mp4|webm)$/i.test(src);
+
+  if (!isVideo) {
+    return (
+      <img
+        src={src}
+        alt=""
+        className={
+          mobile
+            ? "absolute inset-0 size-full max-w-none object-cover object-center"
+            : "absolute inset-0 size-full max-w-none object-cover object-center"
+        }
+        aria-hidden
+      />
+    );
+  }
+
   return (
     <video
       ref={videoRef}
       className={
         mobile
-          ? "absolute inset-0 size-full max-w-none object-cover object-center pl-[164px]"
-          : "absolute inset-0 size-full max-w-none object-cover object-center pl-[70px] pt-[102px]"
+          ? "absolute inset-0 size-full max-w-none object-cover object-center"
+          : "absolute inset-0 size-full max-w-none object-cover object-center"
       }
       autoPlay
       loop

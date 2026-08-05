@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { CornerDecor } from "../contact/contact-shared";
 import { Corners } from "../shared/Corners";
@@ -137,8 +138,21 @@ function Float({
   imgClassName?: string;
   clip?: boolean;
 }) {
+  const hasObjectCover = imgClassName.includes("object-cover");
+  const wrapperClass = imgClassName.replace("object-cover", "").replace("max-w-none", "").trim();
+
   const img = (
-    <img alt="" aria-hidden src={src} className={imgClassName} />
+    <div className={wrapperClass}>
+      <Image 
+        alt="" 
+        aria-hidden 
+        src={src} 
+        fill 
+        sizes="400px" 
+        quality={100}
+        className={hasObjectCover ? "object-cover max-w-none" : "max-w-none"} 
+      />
+    </div>
   );
   return (
     <div

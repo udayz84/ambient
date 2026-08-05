@@ -133,9 +133,11 @@ function MarqueeCard({
 
 function FeatureCard({
   title,
+  iconSrc,
   nodeId,
 }: {
   title: string;
+  iconSrc?: string;
   nodeId?: string;
 }) {
   return (
@@ -153,7 +155,7 @@ function FeatureCard({
             <img
               alt=""
               aria-hidden
-              src={FEATURE_ICON}
+              src={iconSrc || FEATURE_ICON}
               className="absolute inset-0 block size-full max-w-none"
             />
           </div>
@@ -338,6 +340,15 @@ const FALLBACK_FEATURES = [
   "Ultra -low power consumption",
 ];
 
+const FALLBACK_FEATURE_ICONS = [
+  "/applications/dvk-icon-1.svg",
+  "/applications/dvk-icon-2.svg",
+  "/applications/dvk-icon-3.svg",
+  "/applications/dvk-icon-4.svg",
+  "/applications/dvk-icon-5.svg",
+  "/applications/dvk-icon-6.svg",
+];
+
 export function ApplicationsPageDvk({ data }: { data?: any }) {
   const heading = data?.heading || FALLBACK_HEADING;
   const subtitle = data?.subtitle || SUBTITLE;
@@ -386,12 +397,17 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
     ];
   })();
 
-  const features: string[] = Array.isArray(data?.features)
+  const features = Array.isArray(data?.features)
     ? data.features.map(
-        (f: { title?: string } | null, i: number) =>
-          f?.title || FALLBACK_FEATURES[i] || FALLBACK_FEATURES[0] || "",
+        (f: { title?: string; icon?: any } | null, i: number) => ({
+          title: f?.title || FALLBACK_FEATURES[i] || FALLBACK_FEATURES[0] || "",
+          iconSrc: mediaUrl(f?.icon) || FALLBACK_FEATURE_ICONS[i] || FEATURE_ICON,
+        })
       )
-    : FALLBACK_FEATURES;
+    : FALLBACK_FEATURES.map((title, i) => ({
+        title,
+        iconSrc: FALLBACK_FEATURE_ICONS[i] || FEATURE_ICON,
+      }));
 
   return (
     <section
@@ -459,10 +475,11 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
           className="absolute top-[272.5px] left-[678.27px] grid h-[516px] w-[707px] grid-cols-2 gap-x-[35px] gap-y-[50px]"
           data-node-id="3591:1764"
         >
-          {features.map((title, idx) => (
+          {features.map((feature, idx) => (
             <FeatureCard
               key={FEATURE_NODE_IDS[idx] || idx}
-              title={title}
+              title={feature.title}
+              iconSrc={feature.iconSrc}
               nodeId={FEATURE_NODE_IDS[idx]}
             />
           ))}
@@ -583,12 +600,12 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
             data-node-id="4032:9001"
             data-name="death of hardware"
           >
-            {features.map((title, idx) => (
+            {features.map((feature, idx) => (
               <div
                 key={FEATURE_NODE_IDS[idx] || idx}
                 className="w-[335px] shrink-0 snap-center"
               >
-                <FeatureCard title={title} nodeId={FEATURE_NODE_IDS[idx]} />
+                <FeatureCard title={feature.title} iconSrc={feature.iconSrc} nodeId={FEATURE_NODE_IDS[idx]} />
               </div>
             ))}
           </div>

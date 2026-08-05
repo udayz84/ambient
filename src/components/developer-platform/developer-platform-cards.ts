@@ -17,7 +17,7 @@ export type DeveloperPlatformCardConfig = {
   patternGradient: string;
   overlayGradient?: string;
   imageSrc?: string;
-  imageClassName?: string;
+  imageVariant?: "chipset" | "devkit" | "modules";
 };
 
 export const DEVELOPER_PLATFORM_CARDS: DeveloperPlatformCardConfig[] = [
@@ -39,6 +39,8 @@ export const DEVELOPER_PLATFORM_CARDS: DeveloperPlatformCardConfig[] = [
     lineWidth: 151.83203125,
     patternGradient:
       "linear-gradient(17.4266deg, rgba(255, 255, 255, 0) 13.463%, rgb(255, 255, 255) 71.165%)",
+    imageSrc: "/developer-platform/chipset-1.png",
+    imageVariant: "chipset",
   },
   {
     nodeId: "2379:987",
@@ -46,13 +48,13 @@ export const DEVELOPER_PLATFORM_CARDS: DeveloperPlatformCardConfig[] = [
     top: 0,
     width: 388,
     height: 290,
-    title: "Evaluate with development kits",
+    title: "Develop with ModelForge",
     titleLeft: 30,
     body:
-      "Get hands-on with the platform through development kits designed to accelerate validation and shorten time to first insight",
-    bodyLeft: 24,
-    bodyWidth: 290,
-    bodyBottomOffset: 163.98,
+      "Train, deploy, and optimize through a development workflow designed to help teams build with Ambient without starting from scratch",
+    bodyLeft: 23.56,
+    bodyWidth: 340.886,
+    bodyBottomOffset: 157,
     lineLeft: 31.27734375,
     lineTop: 77.34765625,
     lineWidth: 151.83203125,
@@ -65,10 +67,10 @@ export const DEVELOPER_PLATFORM_CARDS: DeveloperPlatformCardConfig[] = [
     top: 0,
     width: 388,
     height: 600,
-    title: "Develop with ModelForge",
+    title: "Evaluate with development kits",
     titleLeft: 20,
     body:
-      "Train, deploy, and optimize through a development workflow designed to help teams build with Ambient without starting from scratch",
+      "Get hands-on with the platform through development kits designed to accelerate validation and shorten time to first insight",
     bodyLeft: 20,
     bodyWidth: 290,
     bodyBottomOffset: 187.98,
@@ -77,11 +79,8 @@ export const DEVELOPER_PLATFORM_CARDS: DeveloperPlatformCardConfig[] = [
     lineWidth: 151.83203125,
     patternGradient:
       "linear-gradient(32.9743deg, rgba(255, 255, 255, 0) 13.463%, rgb(255, 255, 255) 71.165%)",
-    overlayGradient:
-      "linear-gradient(115.861deg, rgba(188, 229, 174, 0) 30.174%, rgb(188, 229, 174) 76.687%)",
-    imageSrc: "/developer-platform/card-image-model-forge.png",
-    imageClassName:
-      "absolute top-[calc(50%-56.48px)] right-[-0.11px] h-[337px] w-[388px] -translate-y-1/2",
+    imageSrc: "/developer-platform/card-image-devkits.png",
+    imageVariant: "devkit",
   },
   {
     nodeId: "2379:1003",
@@ -103,8 +102,7 @@ export const DEVELOPER_PLATFORM_CARDS: DeveloperPlatformCardConfig[] = [
       "linear-gradient(8.69891deg, rgba(255, 255, 255, 0) 13.463%, rgb(255, 255, 255) 71.165%)",
     overlayGradient:
       "linear-gradient(154.062deg, rgba(188, 229, 174, 0) 30.174%, rgb(188, 229, 174) 76.687%)",
-    imageSrc: "/developer-platform/card-image-modules.png",
-    imageClassName:
-      "absolute top-[calc(50%+0.02px)] left-[435.11px] h-[290px] w-[361px] -translate-y-1/2",
+    imageSrc: "/developer-platform/card-image-modules-figma.png",
+    imageVariant: "modules",
   },
 ];

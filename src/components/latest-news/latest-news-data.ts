@@ -93,8 +93,7 @@ export function mapArticleToNewsCard(
     LATEST_NEWS_ARTICLES[index % LATEST_NEWS_ARTICLES.length];
   const prefix = opts.nodeIdPrefix ?? "cms-news-card";
   const image = mediaUrl(article?.featured_image);
-  const imageSrc =
-    image && !/\.(mp4|webm)$/i.test(image) ? image : "";
+  const imageSrc = image ? image : "";
   return {
     nodeId: `${prefix}-${article?.documentId ?? article?.id ?? index}`,
     title: (article?.title as string) || "",

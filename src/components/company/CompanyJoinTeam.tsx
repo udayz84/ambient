@@ -7,7 +7,7 @@ import { CompanySectionTitle } from "./CompanySectionTitle";
 import { COMPANY_JOIN_TEAM } from "./company-engagement-data";
 
 const CARD_BORDER =
-  "border-[0.5px] border-solid border-[rgba(240,240,240,0.2)]";
+  "border-[0.5px] border-solid border-[rgba(240,240,240,0.3)]";
 
 type CompanyJoinTeamProps = {
   data?: any;
@@ -23,23 +23,25 @@ export function CompanyJoinTeam({ data }: CompanyJoinTeamProps = {}) {
 
   return (
     <div
-      className={`relative isolate z-[1] h-[340px] w-[1200px] shrink-0 overflow-visible bg-black ${CARD_BORDER}`}
+      className={`relative isolate z-[1] h-[340px] w-[1200px] shrink-0 bg-black ${CARD_BORDER}`}
       data-node-id={COMPANY_JOIN_TEAM.nodeId}
       data-name="Frame 1618875876"
     >
-      <div
-        className="absolute top-0 left-0 h-[340px] w-[780px] overflow-hidden"
-        data-node-id={COMPANY_JOIN_TEAM.imageNodeId}
-        data-name="image 105"
-      >
-        <Image
-          src={imageSrc}
-          alt=""
-          width={780}
-          height={340}
-          className="absolute inset-0 size-full max-w-none object-cover"
-          unoptimized
-        />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div
+          className="absolute top-0 left-0 h-[340px] w-[780px]"
+          data-node-id={COMPANY_JOIN_TEAM.imageNodeId}
+          data-name="image 105"
+        >
+          <Image
+            src={imageSrc}
+            alt=""
+            width={780}
+            height={340}
+            className="absolute inset-0 size-full max-w-none object-cover"
+            unoptimized
+          />
+        </div>
       </div>
 
       <div

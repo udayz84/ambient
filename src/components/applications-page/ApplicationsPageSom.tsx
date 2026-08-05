@@ -68,7 +68,7 @@ function Visual2({ src }: { src: string }) {
         alt=""
         aria-hidden
         src={src}
-        className="absolute inset-0 size-full max-w-none object-cover"
+        className="absolute inset-0 size-full max-w-none object-cover object-left"
       />
     </div>
   );
@@ -81,14 +81,14 @@ function Visual3({ srcA, srcB }: { srcA: string; srcB: string }) {
         alt=""
         aria-hidden
         src={srcB}
-        className="absolute inset-0 size-full max-w-none object-cover"
+        className="absolute inset-0 size-full max-w-none object-cover object-left"
       />
       <div className="absolute inset-0 overflow-hidden">
         <img
           alt=""
           aria-hidden
           src={srcA}
-          className="absolute left-0 top-[0.48%] h-[100.61%] w-full max-w-none object-cover"
+          className="absolute left-0 top-[0.48%] h-[100.61%] w-full max-w-none object-cover object-left"
         />
       </div>
     </div>
@@ -132,7 +132,7 @@ function SomCard({ visual, isUpcoming, statusPill, value, label, sublabel }: { v
     <div className="flex w-full flex-col items-center gap-[32px]">
       <div className="flex h-[320px] w-full px-[30px] items-center justify-center">
         <div
-          className={`relative flex w-full items-center justify-center overflow-clip transition-transform ${isUpcoming ? 'h-[260px] scale-95' : 'h-[320px]'}`}
+          className={`relative flex items-center justify-center overflow-clip transition-transform ${isUpcoming ? 'h-[260px] w-[80%] scale-95' : 'h-[320px] w-full'}`}
         >
           {visual}
           {isUpcoming && (

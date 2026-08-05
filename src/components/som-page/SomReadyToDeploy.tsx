@@ -153,9 +153,9 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
             <RequestCta label={ctaLabel} />
           </div>
 
-          {/* Connector Line — 2438:5333 */}
+          {/* Connector Line */}
           <div
-            className="pointer-events-none absolute left-[402.44px] top-[234.71px] h-[23.24px] w-[320.82px]"
+            className="pointer-events-none absolute left-[80px] top-[215px] h-[23.24px] w-[320.82px]"
             data-node-id="2438:5333"
             aria-hidden
           >
@@ -163,7 +163,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
               <img
                 src={CONNECTOR_LINE}
                 alt=""
-                className="block size-full max-w-none"
+                className="block size-full max-w-none rotate-180"
                 aria-hidden
               />
             </div>

@@ -1,6 +1,7 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
+import Link from "next/link";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
@@ -20,6 +21,7 @@ type Article = {
   imageH: number;
   objectBottom?: boolean;
   ctaLabel: string;
+  ctaLink?: string;
 };
 
 const ARTICLES: Article[] = [
@@ -158,14 +160,14 @@ function ArticleCard({ article }: { article: Article }) {
       </div>
 
       {/* CTA - Secondary */}
-      <div className="relative mt-auto flex shrink-0 items-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] px-[20px] py-[10px]">
+      <Link href={article.ctaLink || "#"} className="relative mt-auto flex shrink-0 cursor-pointer items-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] px-[20px] py-[10px] transition-colors hover:bg-[rgba(240,240,240,0.1)]">
         <p
           className={`${gilroyMedium.className} text-[16px] leading-[28px] uppercase whitespace-nowrap text-white`}
         >
           {article.ctaLabel}
         </p>
         <Corners />
-      </div>
+      </Link>
 
       {/* Card corners */}
       <Corners />
@@ -187,6 +189,7 @@ export function ApplicationsPageArticles({ data }: { data?: any }) {
           imageH: ARTICLES[i]?.imageH ?? 162,
           objectBottom: ARTICLES[i]?.objectBottom,
           ctaLabel: a?.cta_label || ARTICLES[i]?.ctaLabel || FALLBACK_CTA,
+          ctaLink: a?.cta_href || ARTICLES[i]?.ctaLink || "",
         }))
       : ARTICLES;
 

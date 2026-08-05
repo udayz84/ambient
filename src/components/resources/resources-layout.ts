@@ -13,7 +13,7 @@ export function getResourcesExtraHeight(
   canLoadMore: boolean
 ) {
   const rowCount = Math.ceil(visibleCount / 3);
-  const extraRows = Math.max(0, rowCount - RESOURCES_INITIAL_ROWS);
+  const extraRows = rowCount - RESOURCES_INITIAL_ROWS;
   const buttonOffset = canLoadMore ? 0 : -RESOURCES_LOAD_MORE_BUTTON_BLOCK;
 
   return extraRows * RESOURCES_ROW_BLOCK_HEIGHT + buttonOffset;

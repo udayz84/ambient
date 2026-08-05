@@ -216,6 +216,57 @@ export default {
         console.error('Error seeding Full Picture callouts:', err);
       }
 
+      // Seeding Applications Page Articles
+      try {
+        const appsPage = await strapi.documents('api::applications-page.applications-page').findFirst({
+          populate: { articles: { populate: ['articles'] } }
+        });
+
+        const fallbackArticles = [
+          { title: "Wearables", body: "Always-on biometric tracking and complex activity recognition running continuously on standard wearable batteries.", cta_label: "Learn More", cta_href: "#" },
+          { title: "Hearables", body: "Always-on wake-word detection and real-time audio enhancement running continuously on microscopic power budgets.", cta_label: "Learn More", cta_href: "#" },
+          { title: "Smart Home", body: "True on-device voice processing and presence detection without sacrificing consumer privacy to the cloud.", cta_label: "Learn More", cta_href: "#" },
+          { title: "Industry 4.0", body: "High-frequency predictive maintenance and visual defect detection directly on the factory floor.", cta_label: "Learn More", cta_href: "#" },
+          { title: "Medical Devices", body: "Clinical-grade monitoring and real-time anomaly detection deployed in miniaturized form factors.", cta_label: "Learn More", cta_href: "#" },
+          { title: "Agriculture & Livestock", body: "Complex visual monitoring and behavioral tracking deployed in remote environments where cloud connectivity is impossible.", cta_label: "Learn More", cta_href: "#" },
+          { title: "Drones", body: "High-speed object detection and autonomous navigation processed natively without sacrificing critical flight time.", cta_label: "Learn More", cta_href: "#" },
+          { title: "Robotics", body: "Instantaneous multi-sensor fusion and complex kinematic control operating completely untethered from the cloud.", cta_label: "Learn More", cta_href: "#" },
+          { title: "Automotive", body: "Ultra-low latency sensor fusion and continuous in-cabin monitoring executing natively for next-generation safety.", cta_label: "Learn More", cta_href: "#" }
+        ];
+
+        if (!appsPage) {
+          console.log('Seeding initial Applications Page with articles...');
+          await strapi.documents('api::applications-page.applications-page').create({
+            data: {
+              articles: {
+                heading: "Intelligence without boundaries.",
+                articles: fallbackArticles
+              }
+            }
+          });
+          console.log('Successfully created and seeded Applications Page!');
+        } else {
+          let hasArticles = appsPage.articles?.articles?.length > 0;
+          
+          if (!hasArticles) {
+            console.log('Seeding Applications Page articles...');
+            await strapi.documents('api::applications-page.applications-page').update({
+              documentId: appsPage.documentId,
+              data: {
+                articles: {
+                  ...appsPage.articles,
+                  heading: appsPage.articles?.heading || "Intelligence without boundaries.",
+                  articles: fallbackArticles
+                }
+              }
+            });
+            console.log('Successfully seeded Applications Page articles!');
+          }
+        }
+      } catch (err) {
+        console.error('Error seeding Applications Page articles:', err);
+      }
+
       // -------------------------------------------------------------------------
       // Next.js revalidation webhook (auto-registers on every Strapi startup).
       // Triggered when an editor publishes/unpublishes any entry. Receiver is

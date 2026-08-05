@@ -9,7 +9,7 @@ export function HeroVisual({ videoSrc }: { videoSrc?: string }) {
       data-name="Mask group"
     >
       <div
-        className="absolute top-[-1px] left-[0.11px] h-[802px] w-[1442px] overflow-hidden"
+        className="absolute top-[-1px] left-[0.11px] h-[802px] w-[1442px] overflow-hidden scale-[0.85] origin-center"
         style={heroVisualMaskStyle}
         data-node-id="2379:737"
         data-name="Rectangle 1618873457"

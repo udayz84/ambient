@@ -5,7 +5,7 @@ import { mediaUrl } from "@/lib/strapi";
 import { interRegular } from "../hero/fonts";
 import { CornerDecor, GradientTitle } from "./contact-shared";
 
-const HERO_FADE_IN_CLASS = "animate-hero-text-fade-in opacity-0";
+const HERO_FADE_IN_CLASS = "animate-hero-text-fade-in [animation-duration:300ms] opacity-0";
 
 export function ContactHero({ data }: { data?: any }) {
   const bg = mediaUrl(data?.background_image);

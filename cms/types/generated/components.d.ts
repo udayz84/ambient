@@ -9,6 +9,7 @@ export interface AppsArticleCard extends Struct.ComponentSchema {
   attributes: {
     alt: Schema.Attribute.String;
     body: Schema.Attribute.Text;
+    cta_href: Schema.Attribute.String;
     cta_label: Schema.Attribute.String;
     image: Schema.Attribute.Media;
     title: Schema.Attribute.String & Schema.Attribute.Required;
@@ -1890,7 +1891,9 @@ export interface SharedNewsletter extends Struct.ComponentSchema {
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'Your Email ID'>;
     show_on_paths: Schema.Attribute.JSON;
-    subtitle: Schema.Attribute.Text & Schema.Attribute.Required;
+    subtitle: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Sign up to receive regular updates.'>;
     texture_image: Schema.Attribute.Media;
   };
 }
@@ -1925,7 +1928,7 @@ export interface SharedSocialLink extends Struct.ComponentSchema {
   attributes: {
     alt: Schema.Attribute.String;
     href: Schema.Attribute.String & Schema.Attribute.Required;
-    icon: Schema.Attribute.Media & Schema.Attribute.Required;
+    icon: Schema.Attribute.Media;
     platform: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }

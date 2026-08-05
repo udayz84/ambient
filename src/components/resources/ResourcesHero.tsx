@@ -63,7 +63,7 @@ export function ResourcesHero({ data }: ResourcesHeroProps = {}) {
       {/* Hero text block — headline, search, contact */}
       <div
         className={`absolute top-[294px] left-0 z-10 h-[233.17px] w-full ${TEXT_FADE_IN_CLASS}`}
-        style={{ animationDelay: '1s' }}
+        style={{ animationDelay: '0.3s' }}
         data-name="Hero text"
       >
         <div

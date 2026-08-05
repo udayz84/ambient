@@ -34,7 +34,7 @@ export default async function Home() {
       "hero",
       { section: "measured_proof", nested: ["tag", "stat_cards", "ctas"] },
       { section: "technology", nested: ["tag", "features", "image"] },
-      "platform_scale",
+      { section: "platform_scale", nested: ["products", "cta"] },
       { section: "applications", nested: ["tabs", "cta"] },
       { section: "developer_platform", nested: ["cards"] },
       { section: "ecosystem", nested: ["silicon_partners", "development_partners", "cta"] },

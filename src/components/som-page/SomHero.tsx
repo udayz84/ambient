@@ -76,7 +76,7 @@ export function SomHero({ data }: { data?: any }) {
       <div className="relative hidden h-[703px] w-full max-w-[1442px] min-[1024px]:block">
         {/* Background image "DVK 1" */}
         <div
-          className="pointer-events-none absolute top-0 right-0 h-[710px] w-[900px]"
+          className="pointer-events-none absolute inset-0 size-full"
           data-node-id="3210:1546"
           data-name="DVK 1"
           aria-hidden
@@ -95,14 +95,10 @@ export function SomHero({ data }: { data?: any }) {
                 "linear-gradient(179.893deg, rgba(0, 0, 0, 0) 50%, rgb(0, 0, 0) 103.83%)",
             }}
           />
-          {/* Fade left/right edges into the black background on ultrawide screens */}
+          {/* Fade left edge into the black background on ultrawide screens */}
           <div
             aria-hidden
             className="absolute inset-y-0 left-0 hidden w-[300px] bg-gradient-to-r from-black to-transparent min-[1443px]:block"
-          />
-          <div
-            aria-hidden
-            className="absolute inset-y-0 right-0 hidden w-[300px] bg-gradient-to-l from-black to-transparent min-[1443px]:block"
           />
         </div>
 
@@ -194,7 +190,7 @@ export function SomHero({ data }: { data?: any }) {
               {/* Secondary CTA */}
               <a
                 href={secondaryHref}
-                className={`${gilroyMedium.className} relative h-[48px] w-[226px] shrink-0 bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+                className={`${gilroyMedium.className} relative h-[48px] w-[226px] shrink-0 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
                 data-node-id="3210:1569"
                 data-name="CTA - Secondary"
               >
@@ -310,7 +306,7 @@ export function SomHero({ data }: { data?: any }) {
           {/* Secondary CTA — 4046:7823 */}
           <a
             href={secondaryHref}
-            className={`${gilroyMedium.className} relative block h-[48px] w-full bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+            className={`${gilroyMedium.className} relative block h-[48px] w-full border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
             data-node-id="4046:7823"
             data-name="CTA - Secondary"
           >

@@ -16,8 +16,7 @@
     },
     "icon": {
       "type": "media",
-      "multiple": false,
-      "required": true
+      "multiple": false
     },
     "alt": {
       "type": "string"

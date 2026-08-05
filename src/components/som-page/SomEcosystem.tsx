@@ -109,6 +109,21 @@ function PredictiveImage({ chipImg }: { chipImg: string }) {
   );
 }
 
+function PetImage() {
+  return (
+    <>
+      <div className="pointer-events-none absolute right-[10px] top-[-40px] h-[240px] w-[220px] overflow-hidden flex items-center justify-center">
+        <img
+          src="/pet.png"
+          alt=""
+          aria-hidden
+          className="size-full object-contain mix-blend-screen"
+        />
+      </div>
+    </>
+  );
+}
+
 /* --------------------------------- Tag / Menu --------------------------------- */
 
 function EcoTag({
@@ -341,14 +356,14 @@ const CARDS: CardData[] = [
   {
     desktopPos: "absolute left-[734px] top-[606px]",
     desktopSize: "w-[400px] h-[370px]",
-    overlay: () => null,
-    cardBg: "bg-[rgba(0,0,0,0.2)]",
-    padClass: "px-[32px] pt-[16px] pb-[24px]",
+    overlay: () => <PetImage />,
+    cardBg: "bg-black",
+    padClass: "px-[20px] py-[28px]",
     tagLabel: "Under-development",
     tagAvailable: false,
-    tagWidthClass: "w-full",
+    tagWidthClass: "w-[170px]",
     title: "Pet & Livestock SOM",
-    titleWidthClass: "min-[1024px]:w-[333.991px]",
+    titleWidthClass: "min-[1024px]:w-[235px]",
     subtitle: "Motion & Audio",
     description:
       "Continuous voice and gesture intelligence running for months on a micro battery.",
@@ -362,7 +377,7 @@ const CARDS: CardData[] = [
 
 /* ------------------------------ Mobile card (4059:8948) ------------------------------ */
 
-type MobileOverlay = "motion" | "vision" | "sound" | "predictive" | null;
+type MobileOverlay = "motion" | "vision" | "sound" | "predictive" | "pet" | null;
 
 function MobileMotionOverlay({ chipImg }: { chipImg: string }) {
   return (
@@ -439,6 +454,21 @@ function MobilePredictiveOverlay({ chipImg }: { chipImg: string }) {
   );
 }
 
+function MobilePetOverlay() {
+  return (
+    <>
+      <div className="pointer-events-none absolute left-[100px] top-[-10px] h-[250px] w-[230px] overflow-hidden flex items-center justify-center">
+        <img
+          src="/pet.png"
+          alt=""
+          aria-hidden
+          className="size-full object-contain max-w-none"
+        />
+      </div>
+    </>
+  );
+}
+
 function MobileEcoOverlay({ type, chipImg }: { type: MobileOverlay; chipImg: string }) {
   switch (type) {
     case "motion":
@@ -449,6 +479,8 @@ function MobileEcoOverlay({ type, chipImg }: { type: MobileOverlay; chipImg: str
       return <MobileSoundOverlay chipImg={chipImg} />;
     case "predictive":
       return <MobilePredictiveOverlay chipImg={chipImg} />;
+    case "pet":
+      return <MobilePetOverlay />;
     default:
       return null;
   }
@@ -468,7 +500,7 @@ const MOBILE_CARD_META: MobileCardMeta[] = [
   { height: 310, overlay: "vision", tagWidth: "w-[150px]", titleWidth: "w-[296.417px]", descWidth: "w-[206.603px]", contentGap: 10 },
   { height: 310, overlay: "sound", tagWidth: "w-[150px]", titleWidth: "w-[296.417px]", descWidth: "w-[206.603px]", contentGap: 6 },
   { height: 330, overlay: "predictive", tagWidth: "w-[150px]", titleWidth: "w-[200.641px]", descWidth: "w-[296.416px]", contentGap: 6 },
-  { height: 310, overlay: null, tagWidth: "w-full", titleWidth: "w-[296.417px]", descWidth: "w-[287.55px]", contentGap: 6 },
+  { height: 330, overlay: "pet", tagWidth: "w-[150px]", titleWidth: "w-[296.417px]", descWidth: "w-[287.55px]", contentGap: 6 },
 ];
 
 function MobileEcoTag({

@@ -72,6 +72,7 @@ function LeadershipCardMobile({
               rel="noopener noreferrer"
               className="relative size-[24px] shrink-0"
               aria-label={`${member.name} on LinkedIn`}
+              onClick={(event) => event.stopPropagation()}
             >
               <Image
                 src="/company/linkedin-icon.svg"

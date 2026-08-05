@@ -1242,6 +1242,7 @@ export interface ApiSomPageSomPage extends Struct.SingleTypeSchema {
       'api::som-page.som-page'
     > &
       Schema.Attribute.Private;
+    prototype: Schema.Attribute.Component<'som.prototypes', false>;
     publishedAt: Schema.Attribute.DateTime;
     ready_to_deploy: Schema.Attribute.Component<'som.ready-to-deploy', false>;
     seo: Schema.Attribute.Component<'shared.seo', false>;

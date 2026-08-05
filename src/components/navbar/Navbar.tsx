@@ -1,7 +1,10 @@
+"use client";
+
 import { interMedium } from "../hero/fonts";
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment } from "react";
+import { Fragment, useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { mapStrapiNavItems } from "./nav-items";
 import { MobileMenu } from "./MobileMenu";
 import { NavbarCta } from "./NavbarCta";
@@ -17,6 +20,68 @@ function NavChevron({ className = "" }: { className?: string }) {
       className={`h-[4px] w-[5px] shrink-0 ${className}`}
       aria-hidden
     />
+  );
+}
+
+function NavItem({ item }: { item: any }) {
+  const [clicked, setClicked] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setClicked(false);
+  }, [pathname]);
+
+  if (item.children?.length) {
+    return (
+      <div
+        className="group relative flex h-full items-center gap-[12px]"
+        onMouseLeave={() => setClicked(false)}
+      >
+        <Link
+          href={item.href}
+          className="shrink-0 text-center text-[14px] leading-[normal] font-medium tracking-[-0.42px] whitespace-nowrap text-white transition-colors group-hover:text-[#6ced3f]"
+        >
+          {item.label}
+        </Link>
+        <NavChevron className="transition-transform duration-200 group-hover:rotate-180" />
+        <div
+          className={`absolute top-full left-1/2 z-30 -translate-x-1/2 pt-[24px] transition-opacity duration-200 ${
+            clicked
+              ? "invisible opacity-0"
+              : "invisible opacity-0 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
+          }`}
+        >
+          <div className="min-w-[220px] rounded-2xl border border-white/10 bg-[#0A0A0A]/95 p-[8px] shadow-[0px_8px_32px_rgba(108,237,63,0.15)] backdrop-blur-xl">
+            {item.children.map((child: any) => (
+              <Link
+                key={child.label}
+                href={child.href}
+                onClick={() => setClicked(true)}
+                className="block rounded-lg px-[16px] py-[10px] text-[14px] leading-[normal] font-medium tracking-[-0.42px] whitespace-nowrap text-white/90 transition-all hover:bg-white/5 hover:text-[#6ced3f]"
+              >
+                {child.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <span className="contents">
+      <Link
+        href={item.href}
+        className={`shrink-0 text-center text-[14px] leading-[normal] font-medium tracking-[-0.42px] whitespace-nowrap transition-colors ${
+          item.highlight
+            ? "text-[#6ced3f] drop-shadow-[0px_2px_8px_rgba(83,216,36,0.4)]"
+            : "text-white hover:text-[#6ced3f]"
+        }`}
+      >
+        {item.label}
+      </Link>
+      {item.hasChevron ? <NavChevron /> : null}
+    </span>
   );
 }
 
@@ -99,48 +164,7 @@ export function Navbar({ data, brandData }: { data?: any; brandData?: any }) {
           data-node-id="2379:1575"
         >
           {navItems.map((item, index) => (
-            <Fragment key={item.label}>
-              {item.children?.length ? (
-                <div
-                  className="group relative flex h-full items-center gap-[12px]"
-                >
-                  <Link
-                    href={item.href}
-                    className="shrink-0 text-center text-[14px] leading-[normal] font-medium tracking-[-0.42px] whitespace-nowrap text-white transition-colors group-hover:text-[#6ced3f]"
-                  >
-                    {item.label}
-                  </Link>
-                  <NavChevron className="transition-transform duration-200 group-hover:rotate-180" />
-                  <div className="invisible absolute top-full left-1/2 z-30 -translate-x-1/2 pt-[24px] opacity-0 transition-opacity duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                    <div className="min-w-[220px] rounded-2xl border border-white/10 bg-[#0A0A0A]/95 p-[8px] shadow-[0px_8px_32px_rgba(108,237,63,0.15)] backdrop-blur-xl">
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.label}
-                          href={child.href}
-                          className="block rounded-lg px-[16px] py-[10px] text-[14px] leading-[normal] font-medium tracking-[-0.42px] whitespace-nowrap text-white/90 transition-all hover:bg-white/5 hover:text-[#6ced3f]"
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <span className="contents">
-                  <Link
-                    href={item.href}
-                    className={`shrink-0 text-center text-[14px] leading-[normal] font-medium tracking-[-0.42px] whitespace-nowrap transition-colors ${
-                      item.highlight
-                        ? "text-[#6ced3f] drop-shadow-[0px_2px_8px_rgba(83,216,36,0.4)]"
-                        : "text-white hover:text-[#6ced3f]"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                  {item.hasChevron ? <NavChevron /> : null}
-                </span>
-              )}
-            </Fragment>
+            <NavItem key={item.label} item={item} />
           ))}
         </nav>
 

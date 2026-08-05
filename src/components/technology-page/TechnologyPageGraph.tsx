@@ -37,11 +37,11 @@ const CUBES = [
 
 /** Chip/device renders above each product label (3510:539 / 3515:539 / 3515:541 / 3522:530 / 3522:533). */
 const TOP_IMAGES = [
-  { nodeId: "3510:539", left: 126, top: 260, w: 129, h: 123, src: "/technology/graph-chip-1.png", fit: "object-contain" },
-  { nodeId: "3515:539", left: 353, top: 223, w: 129, h: 123, src: "/technology/graph-chip-2.png", fit: "object-contain" },
-  { nodeId: "3515:541", left: 602, top: 193, w: 129, h: 123, src: "/technology/graph-chip-3.png", fit: "object-contain" },
-  { nodeId: "3522:530", left: 847.17, top: 185, w: 158.119, h: 90.354, src: "/technology/graph-device-1.png", fit: "object-cover" },
-  { nodeId: "3522:533", left: 1106.6, top: 171.82, w: 141.252, h: 70.626, src: "/technology/graph-device-2.png", fit: "object-cover" },
+  { nodeId: "3510:539", left: 125.64, top: 260, w: 129, h: 123, src: "/technology/graph-chip-1.png", fit: "object-contain" },
+  { nodeId: "3515:539", left: 353.5, top: 223, w: 129, h: 123, src: "/technology/graph-chip-2.png", fit: "object-contain" },
+  { nodeId: "3515:541", left: 603.52, top: 193, w: 129, h: 123, src: "/technology/graph-chip-3.png", fit: "object-contain" },
+  { nodeId: "3522:530", left: 836.94, top: 185, w: 158.119, h: 90.354, src: "/technology/graph-device-1.png", fit: "object-cover" },
+  { nodeId: "3522:533", left: 1106.52, top: 171.82, w: 141.252, h: 70.626, src: "/technology/graph-device-2.png", fit: "object-cover" },
 ];
 
 /** Dashed vertical guide lines — horizontal svgs rotated 90° (3031:525/571/581/591/610). */
@@ -63,11 +63,11 @@ type LabelConfig = {
 };
 
 const LABEL_CONFIG: LabelConfig[] = [
-  { left: 142.15, top: 385, name: "GPX10", cat: "EDGE SENSOR" },
-  { left: 357.18, top: 349, name: "GPX10 Pro", cat: "EDGE AI SOC" },
-  { left: 608.2, top: 317, name: "GPX Vision", cat: "ON - DEVICE VISION" },
-  { left: 841.22, top: 287, name: "GPX Compute", cat: "ON - DEVICE VISION" },
-  { left: 1101.22, top: 257, name: "GPX Compute", cat: "ON - DEVICE VISION" },
+  { left: 114.22, top: 385, name: "GPX10", cat: "EDGE SENSOR" },
+  { left: 342.08, top: 349, name: "GPX10 Pro", cat: "EDGE AI SOC" },
+  { left: 592.1, top: 317, name: "GPX Vision", cat: "ON - DEVICE VISION" },
+  { left: 840.08, top: 287, name: "GPX Compute", cat: "ON - DEVICE VISION" },
+  { left: 1101.23, top: 257, name: "GPX Compute", cat: "ON - DEVICE VISION" },
 ];
 
 const GREEN_CTA_SHADOW =
@@ -203,17 +203,17 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
         {labels.map((l, i) => (
           <div
             key={`label-${i}`}
-            className="absolute flex flex-col items-start gap-[12px]"
+            className="absolute flex flex-col items-center gap-[12px]"
             style={{ left: l.left, top: l.top }}
             data-name="Product Details"
           >
             <p
-              className={`${gilroyMedium.className} text-[26px] leading-[29px] font-medium whitespace-nowrap text-white not-italic`}
+              className={`${gilroyMedium.className} text-center text-[26px] leading-[29px] font-medium whitespace-nowrap text-white not-italic`}
             >
               {l.name}
             </p>
             <p
-              className={`${interRegular.className} text-[12px] leading-[18px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic`}
+              className={`${interRegular.className} text-center text-[12px] leading-[18px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic`}
             >
               {l.cat}
             </p>

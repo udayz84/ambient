@@ -112,7 +112,7 @@ export function Hero({ data }: { data?: any }) {
 
         <div
           className={`${gilroyMedium.className} absolute top-[130px] left-[936px] flex w-[442px] flex-col items-start gap-[15px] [word-break:break-word] not-italic animate-hero-text-fade-in transform-gpu`}
-          style={{ animationDelay: '1s', animationDuration: '1000ms' }}
+          style={{ animationDelay: '0.3s', animationDuration: '1000ms' }}
           data-node-id="2379:780"
         >
           <h1
@@ -184,7 +184,7 @@ export function Hero({ data }: { data?: any }) {
 
         {/* Video Area - Absolute to overlap stats as per Figma (3174:48788) */}
         <div
-          className="pointer-events-none absolute top-[242px] left-[50%] h-[398.341px] w-[716.22px] -translate-x-1/2 overflow-hidden"
+          className="pointer-events-none absolute top-[242px] left-[50%] h-[398.341px] w-[716.22px] -translate-x-1/2 overflow-hidden scale-[0.85] origin-top"
           style={{
             maskImage: "url(/hero/mask-shape.svg)",
             WebkitMaskImage: "url(/hero/mask-shape.svg)",

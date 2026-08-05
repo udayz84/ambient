@@ -41,13 +41,24 @@ export function LatestNewsCard({
       >
         <div className="absolute top-[-0.09px] left-0 h-[229px] w-[386px] overflow-hidden">
           {imageSrc ? (
-            <Image
-              src={imageSrc}
-              alt=""
-              fill
-              className={imageClassName}
-              sizes={imageSizes}
-            />
+            /\.(mp4|webm)$/i.test(imageSrc) ? (
+              <video
+                src={imageSrc}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className={imageClassName}
+              />
+            ) : (
+              <Image
+                src={imageSrc}
+                alt=""
+                fill
+                className={imageClassName}
+                sizes={imageSizes}
+              />
+            )
           ) : null}
         </div>
         <div

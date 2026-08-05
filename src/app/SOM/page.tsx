@@ -36,6 +36,7 @@ export default async function SomPage() {
       { section: "features", nested: ["cards"] },
       { section: "ecosystem", nested: ["cards"] },
       { section: "inside_module", fields: ["image"], nested: ["specs"] },
+      { section: "prototype", nested: ["cards"] },
       { section: "intelligence", nested: ["cards"] },
       "ready_to_deploy",
       "footer_merge",

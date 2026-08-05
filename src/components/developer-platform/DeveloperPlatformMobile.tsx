@@ -3,23 +3,186 @@ import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { DEVELOPER_PLATFORM_CARDS } from "./developer-platform-cards";
 
+const normalize = (value: unknown) =>
+  typeof value === "string" ? value.trim().toLowerCase() : "";
+
+const PATTERN_WIDE =
+  "linear-gradient(10.9638deg, rgba(255, 255, 255, 0) 13.463%, rgb(255, 255, 255) 71.165%)";
+const PATTERN_SMALL =
+  "linear-gradient(24.1549deg, rgba(255, 255, 255, 0) 13.463%, rgb(255, 255, 255) 71.165%)";
+const OVERLAY_WIDE =
+  "linear-gradient(149.536deg, rgba(188, 229, 174, 0) 30.174%, rgb(188, 229, 174) 76.687%)";
+
+function WideCard({
+  nodeId,
+  title,
+  body,
+  bodyWidth,
+  imageSrc,
+  imageVariant,
+}: {
+  nodeId: string;
+  title: string;
+  body: string;
+  bodyWidth: number;
+  imageSrc?: string;
+  imageVariant?: "chipset" | "devkit";
+}) {
+  return (
+    <div
+      className="relative h-[146px] w-full shrink-0 overflow-clip"
+      data-node-id={nodeId}
+    >
+      <div className="absolute top-0 left-0 h-[160px] w-[calc(100%+20px)] border-[0.658px] border-solid border-[rgba(255,255,255,0)] bg-[#dbe8c8]" />
+      <div
+        className="absolute top-[6px] left-[calc(50%-2.5px)] h-[157px] w-full -translate-x-1/2"
+        style={{ backgroundImage: OVERLAY_WIDE }}
+        aria-hidden
+      />
+      <div
+        className="absolute top-[calc(50%+8.5px)] right-0 h-[163px] w-full -translate-y-1/2 opacity-[0.24]"
+        style={{ backgroundImage: PATTERN_WIDE }}
+        data-name="Pattern"
+        aria-hidden
+      />
+
+      {imageSrc && imageVariant === "chipset" ? (
+        <div
+          className="absolute top-[calc(50%-32.5px)] right-[-21px] size-[139px] -translate-y-1/2"
+          data-name="Chipset 1"
+        >
+          <Image
+            src={imageSrc}
+            alt=""
+            fill
+            className="pointer-events-none object-cover"
+            sizes="139px"
+          />
+        </div>
+      ) : null}
+
+      {imageSrc && imageVariant === "devkit" ? (
+        <div
+          className="absolute top-[calc(50%+5px)] right-[-83px] h-[156px] w-[192px] -translate-y-1/2"
+          data-name="image 249"
+        >
+          <Image
+            src={imageSrc}
+            alt=""
+            fill
+            className="pointer-events-none object-cover"
+            sizes="192px"
+          />
+        </div>
+      ) : null}
+
+      <div
+        className={`${gilroyMedium.className} absolute bottom-[12px] left-[12px] flex flex-col justify-end text-[14px] leading-[0] font-medium text-[#0a3315] opacity-90 not-italic [word-break:break-word]`}
+        style={{ width: `${bodyWidth}px` }}
+      >
+        <p className="leading-[17px]">{body}</p>
+      </div>
+
+      <p
+        className={`${interRegular.className} absolute top-[12.15px] left-[12px] text-[12px] leading-[11.835px] font-normal whitespace-nowrap text-[#0a3315] not-italic [word-break:break-word]`}
+      >
+        {title}
+      </p>
+
+      <div className="absolute top-[32.75px] left-[12px] h-0 w-[66.553px]">
+        <div className="absolute inset-[-1px_0_0_0]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt=""
+            src="/developer-platform/line-88-mobile.svg"
+            className="block size-full max-w-none"
+            aria-hidden
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SmallCard({
+  nodeId,
+  title,
+  titleWraps,
+  body,
+  bodyWidth,
+}: {
+  nodeId: string;
+  title: string;
+  titleWraps?: boolean;
+  body: string;
+  bodyWidth: number;
+}) {
+  return (
+    <div
+      className="relative h-[191px] w-[calc(50%-2.5px)] shrink-0 overflow-clip"
+      data-node-id={nodeId}
+    >
+      <div className="absolute top-[-6px] left-[-8px] h-[192px] w-[calc(100%+16px)] border-[0.658px] border-solid border-[rgba(255,255,255,0)] bg-[#dbe8c8]" />
+      <div
+        className="absolute top-[calc(50%-2.5px)] right-0 h-[186px] w-[calc(100%+16px)] -translate-y-1/2 opacity-[0.24]"
+        style={{ backgroundImage: PATTERN_SMALL }}
+        data-name="Pattern"
+        aria-hidden
+      />
+
+      <div
+        className={`${gilroyMedium.className} absolute bottom-[17px] left-[12px] flex flex-col justify-end text-[14px] leading-[0] font-medium text-[#0a3315] opacity-90 not-italic [word-break:break-word]`}
+        style={{ width: `${bodyWidth}px` }}
+      >
+        <p className="leading-[17px]">{body}</p>
+      </div>
+
+      <div className="absolute top-[12px] left-[12px] flex w-[82px] flex-col items-start gap-[9px]">
+        <p
+          className={`${interRegular.className} relative shrink-0 text-[12px] leading-[11.835px] font-normal text-[#0a3315] not-italic [word-break:break-word] ${titleWraps ? "w-[155px]" : "whitespace-nowrap"}`}
+        >
+          {title}
+        </p>
+        <div className="relative h-0 w-full shrink-0">
+          <div className="absolute inset-[-1px_0_0_0]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              alt=""
+              src="/developer-platform/line-89.svg"
+              className="block size-full max-w-none"
+              aria-hidden
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function DeveloperPlatformMobile({ data }: { data?: any }) {
   const heading = data?.heading || "";
   const subtitle = data?.subtitle || "";
 
-  // Render the same Strapi cards as desktop, falling back to the layout
-  // config defaults when CMS data is unavailable. Images come from Strapi
-  // via mediaUrl() when present.
+  // Match CMS cards to their design slot by title so CMS ordering can't
+  // break the Figma layout; fall back to the local config defaults.
   const strapiCards: any[] = Array.isArray(data?.cards) ? data.cards : [];
   const cards = DEVELOPER_PLATFORM_CARDS.map((config, index) => {
-    const strapiCard = strapiCards[index] || {};
+    const strapiCard =
+      strapiCards.find(
+        (card) => normalize(card?.title) === normalize(config.title),
+      ) ||
+      strapiCards[index] ||
+      {};
     return {
       key: config.nodeId,
-      title: strapiCard.title ?? "",
-      body: strapiCard.body ?? "",
-      imageSrc: mediaUrl(strapiCard.image) || "",
+      title: strapiCard.title ?? config.title,
+      body: strapiCard.body ?? config.body,
+      imageSrc: mediaUrl(strapiCard.image) || config.imageSrc,
+      imageVariant: config.imageVariant,
     };
   });
+  const [explore, modelForge, evaluate, prototype] = cards;
+
   return (
     <div className="relative w-full">
       <div
@@ -47,7 +210,7 @@ export function DeveloperPlatformMobile({ data }: { data?: any }) {
           >
             {heading}
           </h2>
-          
+
           <div className="relative col-start-1 row-start-1 mt-0 ml-[353.65px] flex size-[4px] items-center justify-center">
             <div className="rotate-180 flex-none">
               <div className="relative size-[4px]">
@@ -83,19 +246,41 @@ export function DeveloperPlatformMobile({ data }: { data?: any }) {
         </div>
 
         <p
-          className={`${interRegular.className} mt-[10px] w-[350px] text-center text-[14px] leading-[16px] font-normal text-white not-italic [word-break:break-word] px-[12px]`}
+          className={`${interRegular.className} mt-[10px] w-[350px] px-[12px] text-center text-[14px] leading-[16px] font-normal text-white not-italic [word-break:break-word]`}
         >
           {subtitle}
         </p>
 
-        <div className="mt-[28px] w-full px-[24px]">
-          <Image
-            src="/mobile/Frame-1984079478.png"
-            alt="Developer Platform Mobile"
-            width={353}
-            height={493}
-            className="w-full h-auto object-contain"
-            sizes="100vw"
+        {/* Bento cards — Figma 3174:49214 (replaces the old static photo) */}
+        <div className="mt-[28px] flex w-[calc(100%-24px)] max-w-[400px] flex-wrap content-start items-start gap-[5px]">
+          <WideCard
+            nodeId="4164:13360"
+            title={explore.title}
+            body={explore.body}
+            bodyWidth={220}
+            imageSrc={explore.imageSrc}
+            imageVariant="chipset"
+          />
+          <SmallCard
+            nodeId="4164:13372"
+            title={modelForge.title}
+            body={modelForge.body}
+            bodyWidth={153}
+          />
+          <SmallCard
+            nodeId="3174:49224"
+            title={prototype.title}
+            titleWraps
+            body={prototype.body}
+            bodyWidth={147}
+          />
+          <WideCard
+            nodeId="3174:49240"
+            title={evaluate.title}
+            body={evaluate.body}
+            bodyWidth={229}
+            imageSrc={evaluate.imageSrc}
+            imageVariant="devkit"
           />
         </div>
       </div>

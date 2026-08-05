@@ -49,9 +49,9 @@ function resolveCards(data: any): LatestNewsArticle[] {
           date: fallback.date,
           href: fallback.href,
           imageSrc:
-            mediaUrl(c.image) && !mediaUrl(c.image)?.match(/\.(mp4|webm)$/i)
+            mediaUrl(c.image)
               ? mediaUrl(c.image)
-              : "",
+              : fallback.imageSrc,
         };
       });
   }

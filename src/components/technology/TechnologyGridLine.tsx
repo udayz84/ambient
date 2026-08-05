@@ -19,7 +19,7 @@ export function TechnologyGridLine() {
             <div className="absolute inset-[-1px_0_0_0]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/technology/line-87.svg"
+                src="/technology/line-87.svg?v=2"
                 alt=""
                 className="block size-full max-w-none"
                 aria-hidden

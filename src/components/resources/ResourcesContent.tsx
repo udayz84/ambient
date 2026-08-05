@@ -11,8 +11,9 @@ import {
 import { getResourcesExtraHeight } from "./resources-layout";
 import { ResourcesArticleCard } from "./ResourcesArticleCard";
 import { Corners } from "../shared/Corners";
+import { GreenCtaButton } from "../contact/contact-shared";
 const scrollArrowLeft = "/applications/nav-arrow-right.svg";
-const DEFAULT_INITIAL_VISIBLE = 6;
+const DEFAULT_INITIAL_VISIBLE = 9;
 const DEFAULT_LOAD_MORE_COUNT = 3;
 const LOAD_MORE_DELAY_MS = 800;
 const FALLBACK_BG = "/resources/image-107.png";
@@ -79,9 +80,11 @@ export function ResourcesContent({
   const visibleArticles = filteredArticles.slice(0, visibleCount);
   const canLoadMore = visibleCount < filteredArticles.length;
 
+  const currentExtraHeight = getResourcesExtraHeight(visibleArticles.length, canLoadMore);
+
   useEffect(() => {
-    onExtraHeightChange?.(getResourcesExtraHeight(visibleCount, canLoadMore));
-  }, [visibleCount, canLoadMore, onExtraHeightChange]);
+    onExtraHeightChange?.(currentExtraHeight);
+  }, [visibleArticles.length, canLoadMore, onExtraHeightChange]);
 
   const articleRows = Array.from(
     { length: Math.ceil(visibleArticles.length / 3) },
@@ -124,25 +127,34 @@ export function ResourcesContent({
       data-node-id="2379:1772"
     >
       <div 
-        className="pointer-events-none absolute top-[477px] left-1/2 -z-10 h-[810px] w-[1440px] -translate-x-1/2 flex items-center justify-center overflow-hidden mix-blend-screen"
-        data-node-id="2379:1602"
-        data-name="image 107 wrapper"
+        className="absolute top-[477px] left-1/2 -z-10 w-[1440px] -translate-x-1/2 overflow-hidden"
+        style={{ 
+          height: Math.max(200, 810 + currentExtraHeight),
+          maskImage: "linear-gradient(to bottom, black calc(100% - 150px), transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black calc(100% - 150px), transparent 100%)"
+        }}
       >
-        <div className="-rotate-90 flex-none">
-          <div className="relative h-[1440px] w-[810px]">
-            <Image
-              src={bgSrc}
-              alt=""
-              fill
-              className="max-w-none object-cover"
-              sizes="810px"
-              unoptimized
-            />
-            <div
-              className="absolute inset-0"
-              style={{ backgroundImage: IMAGE_107_GRADIENT }}
-              aria-hidden
-            />
+        <div 
+          className="pointer-events-none absolute top-0 left-0 h-[810px] w-full flex items-center justify-center overflow-hidden mix-blend-screen"
+          data-node-id="2379:1602"
+          data-name="image 107 wrapper"
+        >
+          <div className="-rotate-90 flex-none">
+            <div className="relative h-[1440px] w-[810px]">
+              <Image
+                src={bgSrc}
+                alt=""
+                fill
+                className="max-w-none object-cover"
+                sizes="810px"
+                unoptimized
+              />
+              <div
+                className="absolute inset-0"
+                style={{ backgroundImage: IMAGE_107_GRADIENT }}
+                aria-hidden
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -153,7 +165,7 @@ export function ResourcesContent({
       >
         <button
           type="button"
-          className="relative size-[44px] shrink-0 transition-opacity hover:opacity-80 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.03)]"
+          className="relative size-[44px] shrink-0 cursor-pointer transition-opacity hover:opacity-80 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.03)]"
           aria-label="Previous category"
           onClick={handlePrevCategory}
           data-node-id="2379:1774"
@@ -184,8 +196,8 @@ export function ResourcesContent({
               <button
                 type="button"
                 onClick={() => selectCategory(category.id)}
-                className={`${interRegular.className} relative flex h-[52px] shrink-0 items-center justify-center px-[20px] text-[16px] leading-[24px] font-normal whitespace-nowrap not-italic ${
-                  isActive ? "text-[#0e1a0e]" : "text-[#666]"
+                className={`${interRegular.className} relative flex h-[52px] shrink-0 cursor-pointer items-center justify-center px-[20px] text-[16px] leading-[24px] font-normal whitespace-nowrap not-italic transition-colors ${
+                  isActive ? "text-[#0e1a0e]" : "text-[#666] hover:text-white"
                 }`}
                 data-node-id={category.nodeId}
               >
@@ -209,7 +221,7 @@ export function ResourcesContent({
 
         <button
           type="button"
-          className="relative size-[44px] shrink-0 transition-opacity hover:opacity-80 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.03)]"
+          className="relative size-[44px] shrink-0 cursor-pointer transition-opacity hover:opacity-80 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.03)]"
           aria-label="Next category"
           onClick={handleNextCategory}
           data-node-id="2379:1825"
@@ -238,7 +250,16 @@ export function ResourcesContent({
             ))}
           </div>
         ))}
-        {/* Load more button removed per user request */}
+        {canLoadMore ? (
+          <GreenCtaButton
+            className="w-[225px]"
+            onClick={handleLoadMore}
+            loading={isLoadingMore}
+            disabled={isLoadingMore}
+          >
+            {loadMoreLabel || "Load More"}
+          </GreenCtaButton>
+        ) : null}
       </div>
     </section>
   );

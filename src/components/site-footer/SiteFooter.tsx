@@ -82,7 +82,7 @@ export function SiteFooter({
   const copyrightText = data?.copyright_text || FALLBACK_FOOTER_COPYRIGHT;
   const craftedByText = data?.crafted_by_text || FALLBACK_FOOTER_CRAFTED_BY_TEXT;
   const craftedByLogoSrc = mediaUrl(data?.crafted_by_logo) || null;
-  const siteName = brandData?.site_name || "ambient";
+  const siteName = "ambient";
 
   return (
     <footer
@@ -259,7 +259,6 @@ export function SiteFooter({
 
 function CraftedByAttribution({
   text,
-  logoSrc,
 }: {
   text: string;
   logoSrc: string | null;
@@ -272,12 +271,7 @@ function CraftedByAttribution({
       >
         {text}
       </p>
-      {logoSrc ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={logoSrc} alt="3minds" className="h-[12px] w-auto max-w-[54px] object-contain" />
-      ) : (
-        <ThreeMindsLogo />
-      )}
+      <ThreeMindsLogo />
     </div>
   );
 }
@@ -286,48 +280,16 @@ function CraftedByAttribution({
 function ThreeMindsLogo() {
   return (
     <div
-      className="relative h-[11.999px] w-[53.193px] shrink-0"
+      className="relative flex h-[12px] w-[54px] items-center justify-center shrink-0"
       data-node-id="2379:5058"
       data-name="Group"
     >
-      <div
-        className="absolute top-[0.861px] left-0 h-[11.138px] w-[7.911px]"
-        data-node-id="2379:5060"
-        data-name="Group"
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt=""
-          className="block size-full max-w-none"
-          src="/footer/crafted-by-3.svg"
-          aria-hidden
-        />
-      </div>
-      <div
-        className="absolute top-0 left-[10px] h-[11.984px] w-[43.197px]"
-        data-node-id="2379:5063"
-        data-name="Group"
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt="3minds"
-          className="block size-full max-w-none"
-          src="/footer/crafted-by-minds.svg"
-        />
-      </div>
-      <div
-        className="absolute top-[0.011px] left-[24.086px] h-[2.607px] w-[2.379px]"
-        data-node-id="2379:5069"
-        data-name="Vector"
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt=""
-          className="block size-full max-w-none"
-          src="/footer/crafted-by-connector.svg"
-          aria-hidden
-        />
-      </div>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        alt="3minds"
+        className="block h-full w-full object-contain max-w-none"
+        src="/footer/3minds.png"
+      />
     </div>
   );
 }
