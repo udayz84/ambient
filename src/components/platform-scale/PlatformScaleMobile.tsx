@@ -275,7 +275,7 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
                       transition: "opacity 500ms cubic-bezier(0.4,0,0.2,1)",
                     }}
                   >
-                    <div className="relative size-full shadow-[0px_12.264px_11.68px_0px_#0d2006]">
+                    <div className="relative size-full">
                       {mediaUrl(product.chip_image) ? (
                         <Image
                           src={mediaUrl(product.chip_image) as string}
@@ -285,17 +285,6 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
                           sizes="188px"
                         />
                       ) : null}
-                      <div className="absolute top-[-7.7px] right-[-6.9px] bottom-[-11px] left-[-6.9px]">
-                        <div className="absolute inset-[-0.15%]">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            alt=""
-                            src="/platform-scale/chip-frame.svg"
-                            className="block size-full object-fill"
-                            aria-hidden
-                          />
-                        </div>
-                      </div>
                     </div>
                   </div>
                   {/* Side layer (image 81) */}

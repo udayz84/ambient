@@ -1,5 +1,7 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element */
-import { mediaUrl } from "@/lib/strapi";
+import { useState } from "react";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GradientTitle } from "../contact/contact-shared";
@@ -9,10 +11,18 @@ const FALLBACK_SUBTITLE =
   "Bridge the lab and real world. The Sparsh module offers continuous, microwatt intelligence in a 21×21mm size, with a breakout board that snaps off for production.";
 const FALLBACK_HEADING = "Inside the Sparsh AI Module";
 const FALLBACK_LABEL = "The Hardware Blueprint";
-const FALLBACK_IMAGE = "/som/module-photo.png";
 
-const IMAGE_OVERLAY_GRADIENT =
-  "linear-gradient(136.703deg, rgb(76, 147, 218) 2.1612%, rgb(175, 121, 45) 100%)";
+const BOARD_IMAGE = "/som/inside-module/pcba.png";
+const POWER_V95 = "/som/inside-module/power-v95.png";
+const POWER_V96 = "/som/inside-module/power-v96.png";
+const POWER_V97 = "/som/inside-module/power-v97.png";
+const SENSORS_V95 = "/som/inside-module/sensors-v95.png";
+const SENSORS_ELLIPSE = "/som/inside-module/sensors-ellipse.png";
+const COMMS_V95 = "/som/inside-module/comms-v95.png";
+const COMMS_V97 = "/som/inside-module/comms-v97.png";
+const COMMS_V99 = "/som/inside-module/comms-v99.png";
+const COMMS_V100 = "/som/inside-module/comms-v100.png";
+const COMMS_V98 = "/som/inside-module/comms-v98.png";
 
 const SPECS: { title: string; body: string }[] = [
   { title: "Footprint", body: "21×21mm (Core) | 42×21mm (With Breakout)" },
@@ -21,10 +31,25 @@ const SPECS: { title: string; body: string }[] = [
   { title: "Comms & I/O", body: "Onboard BLE, SPI, I2C, and UART interfaces" },
 ];
 
-function SpecCard({ title, body }: { title: string; body: string }) {
+function SpecCard({ 
+  title, 
+  body,
+  isActive,
+  onHover,
+}: { 
+  title: string; 
+  body: string;
+  isActive?: boolean;
+  onHover?: () => void;
+}) {
   return (
     <div
-      className="relative flex w-full flex-col items-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] px-[16px] pt-[16px] pb-[20px] min-[1024px]:h-[102px] min-[1024px]:pb-[24px]"
+      className={`relative flex w-full flex-col items-center overflow-clip border-[0.5px] border-solid transition-colors duration-300 ${
+        isActive
+          ? "border-[#a8ed90] bg-[rgba(68,120,7,0.2)]"
+          : "border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] hover:bg-[rgba(255,255,255,0.03)]"
+      } px-[16px] pt-[16px] pb-[20px] min-[1024px]:h-[102px] min-[1024px]:pb-[24px] cursor-default`}
+      onMouseEnter={onHover}
       data-name="Article"
     >
       <div className="flex w-full flex-col items-start gap-[10px]">
@@ -45,10 +70,10 @@ function SpecCard({ title, body }: { title: string; body: string }) {
 }
 
 export function SomInsideModule({ data }: { data?: any }) {
+  const [hoveredIndex, setHoveredIndex] = useState(-1);
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const heading = data?.heading || FALLBACK_HEADING;
   const label = data?.label || FALLBACK_LABEL;
-  const image = mediaUrl(data?.image);
   const specs: { title: string; body: string }[] = Array.isArray(data?.specs) && data.specs.length > 0
     ? data.specs.map((s: any, i: number) => {
         const fb = SPECS[i] || SPECS[0];
@@ -98,20 +123,28 @@ export function SomInsideModule({ data }: { data?: any }) {
               className="relative h-[464.191px] w-[558.509px] shrink-0 overflow-hidden"
               data-node-id="2438:4976"
             >
-              {image && (
-                <img
-                  src={image}
-                  alt=""
-                  className="absolute inset-0 size-full max-w-none object-contain"
-                />
-              )}
+              <img
+                src={BOARD_IMAGE}
+                alt=""
+                className="pointer-events-none absolute inset-0 size-full max-w-none object-contain"
+              />
+              <div className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === 1 ? "opacity-100" : "opacity-0"}`}>
+                <img src={POWER_V95} alt="" aria-hidden className="absolute left-[183.97px] top-[364.42px] block h-[50.16px] w-[79.58px] max-w-none" />
+                <img src={POWER_V96} alt="" aria-hidden className="absolute left-[437.24px] top-[177.31px] block h-[105.68px] w-[113.99px] max-w-none" />
+                <img src={POWER_V97} alt="" aria-hidden className="absolute left-[40.44px] top-[293.91px] block h-[66.94px] w-[62.47px] max-w-none" />
+              </div>
+              <div className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === 2 ? "opacity-100" : "opacity-0"}`}>
+                <img src={SENSORS_V95} alt="" aria-hidden className="absolute left-[164.46px] top-[277.76px] block h-[72.39px] w-[61.1px] max-w-none" />
+                <img src={SENSORS_ELLIPSE} alt="" aria-hidden className="absolute left-[18.33px] top-[39.74px] block h-[53.34px] w-[53.34px] max-w-none" />
+              </div>
+              <div className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === 3 ? "opacity-100" : "opacity-0"}`}>
+                <img src={COMMS_V95} alt="" aria-hidden className="absolute left-[236.81px] top-[243.82px] block h-[178.57px] w-[119.69px] max-w-none" />
+                <img src={COMMS_V97} alt="" aria-hidden className="absolute left-[36.81px] top-[291.81px] block h-[69.88px] w-[68.74px] max-w-none" />
+                <img src={COMMS_V99} alt="" aria-hidden className="absolute left-[259.81px] top-[114.81px] block h-[67.3px] w-[61.38px] max-w-none" />
+                <img src={COMMS_V100} alt="" aria-hidden className="absolute left-[425.81px] top-[134.81px] block h-[62.3px] w-[126.38px] max-w-none" />
+                <img src={COMMS_V98} alt="" aria-hidden className="absolute left-[30.31px] top-[144.31px] block h-[52.38px] w-[52.38px] max-w-none" />
+              </div>
             </div>
-            {/* Decorative overlays on the module photo */}
-            <div
-              aria-hidden
-              className="absolute left-[163.479px] top-[236.232px] h-[121.389px] w-[132.8px] mix-blend-plus-lighter"
-              style={{ backgroundImage: IMAGE_OVERLAY_GRADIENT }}
-            />
             <p
               className={`${gilroyMedium.className} min-w-full w-full text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
               data-node-id="2438:4981"
@@ -125,9 +158,15 @@ export function SomInsideModule({ data }: { data?: any }) {
           <div
             className="flex w-[578px] shrink-0 flex-col justify-between self-stretch"
             data-node-id="2438:4984"
+            onMouseLeave={() => setHoveredIndex(-1)}
           >
-            {specs.map((spec) => (
-              <SpecCard key={spec.title} {...spec} />
+            {specs.map((spec, index) => (
+              <SpecCard 
+                key={spec.title} 
+                {...spec} 
+                isActive={hoveredIndex === index}
+                onHover={() => setHoveredIndex(index)}
+              />
             ))}
           </div>
         </div>
@@ -162,13 +201,11 @@ export function SomInsideModule({ data }: { data?: any }) {
           {/* Module photo card */}
           <div className="relative flex w-full flex-col items-center gap-[16px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] pt-[10px] px-[16px] pb-[20px]">
             <div className="relative h-[200px] w-full shrink-0 overflow-hidden">
-              {image && (
-                <img
-                  src={image}
-                  alt="Sparsh AI Module"
-                  className="absolute inset-0 size-full object-cover"
-                />
-              )}
+              <img
+                src={BOARD_IMAGE}
+                alt="Sparsh AI Module"
+                className="absolute inset-0 size-full object-cover"
+              />
             </div>
             <p
               className={`${gilroyMedium.className} min-w-full w-full text-[20px] leading-[26px] font-medium text-white not-italic`}

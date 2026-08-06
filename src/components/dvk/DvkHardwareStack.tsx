@@ -1,3 +1,7 @@
+"use client";
+
+/* eslint-disable @next/next/no-img-element */
+import { useState } from "react";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import {
@@ -12,21 +16,26 @@ import {
   SPEC_CARDS,
   type SpecCardType,
 } from "./dvk-data";
-import { mediaUrl } from "@/lib/strapi";
 
 const DEFAULT_HEADING =
   "The complete Edge AI hardware stack in a single footprint";
 const DEFAULT_SUBTITLE =
   "An exhaustive suite of sensors, interfaces, and debug tools pre-integrated with the GPX-10 Pro AI Processor.";
 const DEFAULT_LABEL = "The Hardware Blueprint";
-const DEFAULT_BOARD_IMAGE = "/dvk/board-stack.png";
+
+const BOARD_IMAGE = "/dvk/inside-module/dvk-board.png";
+const HIGHLIGHT_FILL = "/dvk/inside-module/dvk-fill.png";
+const SENSORS_VECTOR = "/dvk/inside-module/dvk-v101.png";
+const INTERFACES_VECTOR = "/dvk/inside-module/dvk-v102.png";
+
+const RECT_BORDER =
+  "border-[1.09px] border-[#47b81f] border-solid shadow-[0px_7px_7.1px_0px_rgba(111,224,71,0.3)]";
 
 export function DvkHardwareStack({ data }: { data?: any }) {
+  const [hoveredIndex, setHoveredIndex] = useState(-1);
   const heading = data?.heading || DEFAULT_HEADING;
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
   const label = data?.label || DEFAULT_LABEL;
-  const boardImage = mediaUrl(data?.board_image);
-  // Figma 2761:2925 — fixed 7 card slots; CMS entries override per index.
   const source: any[] = Array.isArray(data?.spec_cards) ? data.spec_cards : [];
   const cards: SpecCardType[] = SPEC_CARDS.map((def, i) => {
     const c = source[i];
@@ -85,40 +94,205 @@ export function DvkHardwareStack({ data }: { data?: any }) {
           }}
         >
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+          {/* Figma 4049:8277 — DVK Board 1 (605x566) */}
+          <div className="relative h-[566px] w-[605px] shrink-0 overflow-hidden">
+            <img
+              alt=""
+              src={BOARD_IMAGE}
+              className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+            />
+
+            {/* Memory (cards[0]) — variant 4448:8597 / A. */}
+            <div
+              className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === 0 ? "opacity-100" : "opacity-0"}`}
+            >
+              <div
+                className={`absolute left-[62px] top-[225px] h-[58px] w-[56px] ${RECT_BORDER}`}
+              >
+                <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                  <img
+                    alt=""
+                    aria-hidden
+                    src={HIGHLIGHT_FILL}
+                    className="absolute h-[1015.28%] left-[-117.41%] top-[-408.32%] w-[1128.65%] max-w-none"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Wireless (cards[1]) — variant 4448:8595 / B. */}
+            <div
+              className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === 1 ? "opacity-100" : "opacity-0"}`}
+            >
+              <div
+                className={`absolute left-[147px] top-[484px] h-[78px] w-[76px] ${RECT_BORDER}`}
+              >
+                <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                  <img
+                    alt=""
+                    aria-hidden
+                    src={HIGHLIGHT_FILL}
+                    className="absolute h-[795.76%] left-[-220.03%] top-[-689.18%] w-[877.84%] max-w-none"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Sensors (cards[2]) — variant 4448:8596 / C. */}
+            <div
+              className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === 2 ? "opacity-100" : "opacity-0"}`}
+            >
+              <div
+                className={`absolute left-[168px] top-[95px] h-[104px] w-[65px] ${RECT_BORDER}`}
+              >
+                <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                  <img
+                    alt=""
+                    aria-hidden
+                    src={HIGHLIGHT_FILL}
+                    className="absolute h-[605.21%] left-[-300.38%] top-[-100.65%] w-[1038.72%] max-w-none"
+                  />
+                </div>
+              </div>
+              <div className="absolute left-[268px] top-[34px] h-[249px] w-[253px]">
+                <div className="absolute inset-[-0.48%_-3.24%_-6.1%_-3.24%]">
+                  <img
+                    alt=""
+                    aria-hidden
+                    src={SENSORS_VECTOR}
+                    className="block size-full max-w-none"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Debug Ports (cards[3]) — variant 4448:8598 / D. */}
+            <div
+              className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === 3 ? "opacity-100" : "opacity-0"}`}
+            >
+              <div
+                className={`absolute left-[543px] top-[298px] h-[185px] w-[51px] ${RECT_BORDER}`}
+              >
+                <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                  <img
+                    alt=""
+                    aria-hidden
+                    src={HIGHLIGHT_FILL}
+                    className="absolute h-[322.44%] left-[-1132.84%] top-[-174.81%] w-[1254.67%] max-w-none"
+                  />
+                </div>
+              </div>
+              <div
+                className={`absolute left-[74px] top-[16px] h-[49px] w-[62px] ${RECT_BORDER}`}
+              >
+                <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                  <img
+                    alt=""
+                    aria-hidden
+                    src={HIGHLIGHT_FILL}
+                    className="absolute h-[1325.6%] left-[-142.11%] top-[-38.17%] w-[1122.6%] max-w-none"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Interfaces (cards[4]) — variant 4448:8599 / E. */}
+            <div
+              className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === 4 ? "opacity-100" : "opacity-0"}`}
+            >
+              <div
+                className={`absolute left-[245px] top-[493px] h-[36px] w-[68px] ${RECT_BORDER}`}
+              >
+                <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                  <img
+                    alt=""
+                    aria-hidden
+                    src={HIGHLIGHT_FILL}
+                    className="absolute h-[1657%] left-[-384.86%] top-[-1446.74%] w-[941%] max-w-none"
+                  />
+                </div>
+              </div>
+              <div
+                className={`absolute left-[10px] top-[420px] h-[55px] w-[47px] ${RECT_BORDER}`}
+              >
+                <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                  <img
+                    alt=""
+                    aria-hidden
+                    src={HIGHLIGHT_FILL}
+                    className="absolute h-[1125.51%] left-[-25.72%] top-[-838.53%] w-[1421.96%] max-w-none"
+                  />
+                </div>
+              </div>
+              <div className="absolute left-[17.5px] top-[228.5px] h-[156.5px] w-[83px]">
+                <div className="absolute inset-[-0.35%_-0.66%]">
+                  <img
+                    alt=""
+                    aria-hidden
+                    src={INTERFACES_VECTOR}
+                    className="block size-full max-w-none"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
           <p
             className={`${gilroyMedium.className} min-w-full w-[min-content] shrink-0 text-center text-[22px] leading-[28px] text-white not-italic`}
           >
             {label}
           </p>
-          {/* Figma 4049:8277 — DVK Board 1 */}
-          <div className="relative h-[528.474px] w-[572.67px] shrink-0">
-            {boardImage && (
-              /* eslint-disable-next-line @next/next/no-img-element */
-              <img
-                alt=""
-                src={boardImage}
-                className="absolute inset-0 size-full max-w-none object-contain"
-              />
-            )}
-          </div>
         </div>
 
         {/* Spec cards column */}
-        <div className="flex w-[571px] shrink-0 flex-col gap-[8px]">
+        <div
+          className="flex w-[571px] shrink-0 flex-col gap-[8px]"
+          onMouseLeave={() => setHoveredIndex(-1)}
+        >
           <div className="flex w-full gap-[8px]">
-            <SpecCard card={cards[0]} />
-            <SpecCard card={cards[1]} />
+            <SpecCard
+              card={cards[0]}
+              isActive={hoveredIndex === 0}
+              onHover={() => setHoveredIndex(0)}
+            />
+            <SpecCard
+              card={cards[1]}
+              isActive={hoveredIndex === 1}
+              onHover={() => setHoveredIndex(1)}
+            />
           </div>
           <div className="flex w-full gap-[8px]">
-            <SpecCard card={cards[2]} />
-            <SpecCard card={cards[3]} />
+            <SpecCard
+              card={cards[2]}
+              isActive={hoveredIndex === 2}
+              onHover={() => setHoveredIndex(2)}
+            />
+            <SpecCard
+              card={cards[3]}
+              isActive={hoveredIndex === 3}
+              onHover={() => setHoveredIndex(3)}
+            />
           </div>
           {/* Row 3 (Figma 4022:2660) — Interfaces + stacked MCU/Booting */}
           <div className="flex w-full gap-[8px]">
-            <SpecCard card={cards[4]} />
+            <SpecCard
+              card={cards[4]}
+              isActive={hoveredIndex === 4}
+              onHover={() => setHoveredIndex(4)}
+            />
             <div className="flex min-w-px flex-1 flex-col items-start justify-center gap-[8px] self-stretch">
-              <SpecCard card={cards[5]} stacked />
-              <SpecCard card={cards[6]} stacked />
+              <SpecCard
+                card={cards[5]}
+                stacked
+                isActive={hoveredIndex === 5}
+                onHover={() => setHoveredIndex(5)}
+              />
+              <SpecCard
+                card={cards[6]}
+                stacked
+                isActive={hoveredIndex === 6}
+                onHover={() => setHoveredIndex(6)}
+              />
             </div>
           </div>
         </div>
@@ -130,19 +304,25 @@ export function DvkHardwareStack({ data }: { data?: any }) {
 function SpecCard({
   card,
   stacked = false,
+  isActive = false,
+  onHover,
 }: {
   card: SpecCardType;
   stacked?: boolean;
+  isActive?: boolean;
+  onHover?: () => void;
 }) {
   if (!card) return null;
+  const active = isActive;
   return (
     <div
-      className={`relative flex flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid px-[16px] pt-[16px] pb-[24px] ${
+      onMouseEnter={onHover}
+      className={`relative flex flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid px-[16px] pt-[16px] pb-[24px] transition-colors duration-300 ${
         stacked ? "min-h-px w-full flex-1" : "min-w-px flex-1"
       }`}
       style={{
-        backgroundColor: card.accent ? ACCENT_CARD_BG : CARD_BG,
-        borderColor: card.accent ? ACCENT_CARD_BORDER : CARD_BORDER,
+        backgroundColor: active ? ACCENT_CARD_BG : CARD_BG,
+        borderColor: active ? ACCENT_CARD_BORDER : CARD_BORDER,
       }}
     >
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />

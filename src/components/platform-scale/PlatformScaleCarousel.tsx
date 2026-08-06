@@ -129,17 +129,6 @@ function getSlotKey(offset: number): SlotKey | null {
   return String(offset) as SlotKey;
 }
 
-function ChipGlassImage() {
-  return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      alt=""
-      src="/platform-scale/chip-glass.png"
-      className={chipGlassCropClass}
-      aria-hidden
-    />
-  );
-}
 
 function CarouselChipItem({
   product,
@@ -191,7 +180,7 @@ function CarouselChipItem({
             height: HERO_CHIP_HEIGHT,
           }}
         >
-          <div className="relative size-full shadow-[0px_21px_20px_0px_#0d2006]">
+          <div className="relative size-full">
             {mediaUrl(product.chip_image) ? (
               <img
                 alt=""
@@ -200,22 +189,6 @@ function CarouselChipItem({
                 aria-hidden
               />
             ) : null}
-          </div>
-
-          <div className="absolute top-[-7.69921875px] right-[-6.900390625px] bottom-[-11.013671875px] left-[-6.900390625px]">
-            <div className="absolute inset-[-0.15%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                alt=""
-                src="/platform-scale/chip-frame.svg"
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-
-          <div className="pointer-events-none absolute inset-0 overflow-hidden">
-            <ChipGlassImage />
           </div>
         </div>
       </div>
@@ -245,22 +218,6 @@ function CarouselChipItem({
                 aria-hidden
               />
             ) : null}
-          </div>
-
-          <div className="absolute top-[-7.69921875px] right-[-6.900390625px] bottom-[-11.013671875px] left-[-6.900390625px]">
-            <div className="absolute inset-[-0.15%]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                alt=""
-                src="/platform-scale/chip-frame.svg"
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-
-          <div className="pointer-events-none absolute inset-0 overflow-hidden">
-            <ChipGlassImage />
           </div>
         </div>
 

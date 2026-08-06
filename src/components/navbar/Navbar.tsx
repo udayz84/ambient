@@ -41,7 +41,11 @@ function NavItem({ item }: { item: any }) {
 
   if (item.hasChevron || item.children?.length) {
     return (
-      <div className="relative flex h-full items-center gap-[12px]">
+      <div 
+        className="relative flex h-full items-center gap-[12px] group"
+        onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={() => setIsOpen(false)}
+      >
         <button
           type="button"
           onClick={(e) => {

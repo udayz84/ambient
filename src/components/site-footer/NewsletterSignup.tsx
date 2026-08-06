@@ -29,10 +29,13 @@ export function NewsletterSignup({
     : [headingTop, headingBottom];
   return (
     <div
-      className="relative flex w-full max-w-[600px] flex-col items-center px-[24px] sm:px-0"
+      className="relative flex w-full max-w-[700px] flex-col items-center px-[24px] py-[40px] sm:px-[40px]"
       data-node-id="2379:1393"
       data-name="Group 90"
     >
+      <div className="absolute inset-0 -z-10 w-full h-full">
+        <Image src="/home1618873545.png" alt="" fill className="object-fill" />
+      </div>
       <div className="relative inline-grid grid-cols-[max-content] grid-rows-[max-content] place-items-center leading-[0]">
         <Corner className="absolute top-0 right-0" src={cornerRight} rotate={true} />
         <Corner className="absolute bottom-0 right-0" src={cornerRight} rotate={true} flipY={true} />
