@@ -251,14 +251,16 @@ export function ResourcesContent({
           </div>
         ))}
         {canLoadMore ? (
-          <GreenCtaButton
-            className="w-[225px]"
-            onClick={handleLoadMore}
-            loading={isLoadingMore}
-            disabled={isLoadingMore}
-          >
-            {loadMoreLabel || "Load More"}
-          </GreenCtaButton>
+          <div className="mt-[28px] mb-[20px]">
+            <GreenCtaButton
+              className="w-[225px]"
+              onClick={handleLoadMore}
+              loading={isLoadingMore}
+              disabled={isLoadingMore}
+            >
+              {loadMoreLabel || "Load More"}
+            </GreenCtaButton>
+          </div>
         ) : null}
       </div>
     </section>

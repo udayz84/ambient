@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+export const dynamic = "force-dynamic";
+
 import { Careers } from "@/components/careers/Careers";
 import { getSingleType, getCollection } from "@/lib/strapi";
 import { buildMetadata, type SeoData } from "@/lib/seo";

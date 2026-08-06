@@ -41,7 +41,7 @@ type LineSpec = {
   width: number;
   variant?: "rotate" | "skew";
 };
-type ItemSpec = { text: string; top: number; plusTop: number };
+type ItemSpec = { text: string; top: number; plusTop: number; left?: number; plusLeft?: number };
 type SpecCard = {
   nodeId: string;
   title: string;
@@ -64,10 +64,12 @@ type SpecCard = {
   icon: { left: number; top: number };
 };
 
-const item = (text: string, top: number): ItemSpec => ({
+const item = (text: string, top: number, left?: number, plusLeft?: number): ItemSpec => ({
   text,
   top,
   plusTop: +(top + 3.5).toFixed(2),
+  ...(left !== undefined ? { left } : {}),
+  ...(plusLeft !== undefined ? { plusLeft } : {}),
 });
 
 const CARDS: SpecCard[] = [
@@ -78,9 +80,9 @@ const CARDS: SpecCard[] = [
     top: 0.84,
     height: 99,
     borderColor: BORDER_DARK,
-    face: { height: 230.609, left: -1, top: -0.84 },
+    face: { height: 99, left: -1, top: -0.84 },
     pattern: {
-      height: 230.844,
+      height: 99,
       gradient: patternGreen(140.837),
       style: { left: "50%", top: -0.84, transform: "translateX(-50%)" },
     },
@@ -124,97 +126,10 @@ const CARDS: SpecCard[] = [
     icon: { left: 330.44, top: 5 },
   },
   {
-    nodeId: "3309:2437",
-    title: "Power",
-    left: 0,
-    top: 371.84,
-    height: 231,
-    borderColor: BORDER_DARK,
-    face: { height: 230.609, left: -1, top: -0.84 },
-    pattern: {
-      height: 230.844,
-      gradient: patternGreen(140.837),
-      style: { left: "50%", top: -0.84, transform: "translateX(-50%)" },
-    },
-    header: { left: 15, top: 15.16, width: 342 },
-    itemsLeft: 33,
-    plusLeft: 15,
-    plusColor: HEADER_COLOR,
-    items: [
-      item("Core 1.2 V (0.9–1.3 V)", 57.33),
-      item("Analog/IO 3.3 V", 100.97),
-      item("~80 µW always-on", 144.44),
-      item("Two power domains", 188.08),
-    ],
-    lines: [
-      { top: 87.33, left: 17.12, width: 233.885, variant: "rotate" },
-      { top: 130.97, left: 17.12, width: 233.885, variant: "rotate" },
-      { top: 174.61, left: 17.12, width: 233.885, variant: "rotate" },
-    ],
-    icon: { left: 330.44, top: 5 },
-  },
-  {
-    nodeId: "3309:2403",
-    title: "Peripherals",
-    left: 422,
-    top: 0.84,
-    height: 348,
-    borderColor: BORDER_DARK,
-    face: { height: 347.49, left: -1, top: -0.84 },
-    pattern: {
-      height: 347.844,
-      gradient: patternGreen(129.172),
-      style: { left: "50%", top: -0.84, transform: "translateX(-50%)" },
-    },
-    header: { left: 15, top: 15.16, width: 338 },
-    itemsLeft: 33.5,
-    plusLeft: 15.5,
-    plusColor: PLUS_GREEN,
-    items: [
-      item("OSPI (XIP)", 57.33),
-      item("I²S Master", 100.97),
-      item("SPI", 144.44),
-      item("I²C", 188.08),
-      item("UART", 231.55),
-      item("GPIO", 272.14),
-      item("GPIO", 312.73),
-    ],
-    lines: [
-      { top: 87.57, left: 17.62, width: 329.877 },
-      { top: 131.21, left: 17.62, width: 329.877 },
-      { top: 174.85, left: 17.62, width: 329.877 },
-      { top: 219.76, left: 17.62, width: 329.877 },
-      { top: 260.35, left: 17.62, width: 329.877 },
-      { top: 300.94, left: 17.62, width: 329.877 },
-    ],
-    icon: { left: 326.94, top: 5 },
-  },
-  {
-    nodeId: "3309:2472",
-    title: "Control",
-    left: 420,
-    top: 371.84,
-    height: 99,
-    borderColor: BORDER_DARK,
-    face: { height: 98.899, left: -1, top: -0.84 },
-    pattern: {
-      height: 99,
-      gradient: patternGreen(160.745),
-      style: { left: "50%", top: -0.84, transform: "translateX(-50%)" },
-    },
-    header: { left: 15, top: 14.16, width: 344 },
-    itemsLeft: 33,
-    plusLeft: 15,
-    plusColor: PLUS_GREEN,
-    items: [item("ARM Cortex-M4F (32-bit, FPU)", 57.33)],
-    lines: [],
-    icon: { left: 331.44, top: 5 },
-  },
-  {
     nodeId: "3309:2485",
     title: "Temperature",
-    left: 420,
-    top: 504,
+    left: 0,
+    top: 372.84,
     height: 99,
     borderColor: BORDER_DARK,
     face: { height: 98.899, left: -1, top: -1 },
@@ -230,6 +145,81 @@ const CARDS: SpecCard[] = [
     items: [item("0–85 °C (junction)", 57.33)],
     lines: [],
     icon: { left: 331.44, top: 5 },
+  },
+  {
+    nodeId: "3309:2511",
+    title: "Package",
+    left: 422,
+    top: 0.84,
+    height: 167,
+    borderColor: BORDER_DARK,
+    face: { height: 167, left: -0.5, top: -1 },
+    pattern: {
+      height: 167,
+      gradient: patternGreen(149.492),
+      style: { left: "calc(50% + 0.5px)", top: -1, transform: "translateX(-50%)" },
+    },
+    header: { left: 14.5, top: 14.16, width: 344 },
+    itemsLeft: 32.5,
+    plusLeft: 14.5,
+    plusColor: PLUS_GREEN,
+    items: [
+      item("ARM Cortex-M4F (32-bit, FPU)", 57.33),
+      item("CSP 3.2×3.2 mm (on demand)", 106.25),
+    ],
+    lines: [{ top: 92.07, left: 14.5, width: 329.877 }],
+    icon: { left: 330.94, top: 5 },
+  },
+  {
+    nodeId: "3309:2498",
+    title: "Security",
+    left: 422,
+    top: 188.84,
+    height: 99,
+    borderColor: BORDER_DARK,
+    face: { height: 98.899, left: -0.5, top: -0.84 },
+    pattern: {
+      height: 99,
+      gradient: patternGreen(160.745),
+      style: { left: "calc(50% + 0.5px)", top: -0.84, transform: "translateX(-50%)" },
+    },
+    header: { left: 15, top: 14.16, width: 344 },
+    itemsLeft: 33,
+    plusLeft: 15,
+    plusColor: PLUS_GREEN,
+    items: [item("AES-128", 57.33)],
+    lines: [],
+    icon: { left: 331.44, top: 5 },
+  },
+  {
+    nodeId: "3309:2403",
+    title: "Peripherals",
+    left: 422,
+    top: 308.84,
+    height: 162.84,
+    borderColor: BORDER_DARK,
+    face: { height: 162.84, left: -1, top: -0.84 },
+    pattern: {
+      height: 162.84,
+      gradient: patternGreen(129.172),
+      style: { left: "50%", top: -0.84, transform: "translateX(-50%)" },
+    },
+    header: { left: 15, top: 15.16, width: 338 },
+    itemsLeft: 33.5,
+    plusLeft: 15.5,
+    plusColor: PLUS_GREEN,
+    items: [
+      item("OSPI (XIP)", 57.33, 33.5, 15.5),
+      item("I²S Master", 57.33, 130, 112),
+      item("SPI", 57.33, 220, 202),
+      item("I²C", 57.33, 290, 272),
+      item("UART", 100.97, 33.5, 15.5),
+      item("GPIO", 100.97, 130, 112),
+    ],
+    lines: [
+      { top: 87.57, left: 17.62, width: 329.877 },
+    ],
+    icon: { left: 326.94, top: 5 },
   },
   {
     nodeId: "3309:2527",
@@ -264,49 +254,32 @@ const CARDS: SpecCard[] = [
     icon: { left: 330.44, top: 4.84 },
   },
   {
-    nodeId: "3309:2511",
-    title: "Package",
-    left: 844.5,
-    top: 304,
-    height: 167,
+    nodeId: "3309:2437",
+    title: "Power",
+    left: 844,
+    top: 298,
+    height: 173.84,
     borderColor: BORDER_DARK,
-    face: { height: 167, left: -0.5, top: -1 },
+    face: { height: 173.84, left: -1, top: -0.84 },
     pattern: {
-      height: 167,
-      gradient: patternGreen(149.492),
-      style: { left: "calc(50% + 0.5px)", top: -1, transform: "translateX(-50%)" },
+      height: 173.84,
+      gradient: patternGreen(140.837),
+      style: { left: "50%", top: -0.84, transform: "translateX(-50%)" },
     },
-    header: { left: 14.5, top: 14.16, width: 344 },
-    itemsLeft: 32.5,
-    plusLeft: 14.5,
-    plusColor: PLUS_GREEN,
-    items: [
-      item("ARM Cortex-M4F (32-bit, FPU)", 57.33),
-      item("CSP 3.2×3.2 mm (on demand)", 106.25),
-    ],
-    lines: [{ top: 92.07, left: 14.5, width: 329.877 }],
-    icon: { left: 330.94, top: 5 },
-  },
-  {
-    nodeId: "3309:2498",
-    title: "Security",
-    left: 844.5,
-    top: 503.84,
-    height: 99,
-    borderColor: BORDER_DARK,
-    face: { height: 98.899, left: -0.5, top: -0.84 },
-    pattern: {
-      height: 99,
-      gradient: patternGreen(160.745),
-      style: { left: "calc(50% + 0.5px)", top: -0.84, transform: "translateX(-50%)" },
-    },
-    header: { left: 15, top: 14.16, width: 344 },
+    header: { left: 15, top: 15.16, width: 342 },
     itemsLeft: 33,
     plusLeft: 15,
-    plusColor: PLUS_GREEN,
-    items: [item("AES-128", 57.33)],
-    lines: [],
-    icon: { left: 331.44, top: 5 },
+    plusColor: HEADER_COLOR,
+    items: [
+      item("Core 1.2 V (0.9–1.3 V)", 57.33, 33, 15),
+      item("Analog/IO 3.3 V", 57.33, 200, 182),
+      item("~80 µW always-on", 100.97, 33, 15),
+      item("Two power domains", 100.97, 200, 182),
+    ],
+    lines: [
+      { top: 87.33, left: 17.12, width: 339.885, variant: "rotate" },
+    ],
+    icon: { left: 330.44, top: 5 },
   },
 ];
 
@@ -536,13 +509,13 @@ function SpecCardView({ card }: { card: RenderCard }) {
         <Fragment key={i}>
           <p
             className={`${interRegular.className} [word-break:break-word] absolute font-normal leading-[normal] not-italic text-[14px] text-black tracking-[-0.1504px] whitespace-nowrap`}
-            style={{ left: card.itemsLeft, top: it.top }}
+            style={{ left: it.left ?? card.itemsLeft, top: it.top }}
           >
             {it.text}
           </p>
           <p
             className={`${interRegular.className} [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] absolute font-normal leading-[normal] not-italic text-[14px] tracking-[-0.1504px] whitespace-nowrap`}
-            style={{ left: card.plusLeft, top: it.plusTop, color: card.plusColor }}
+            style={{ left: it.plusLeft ?? card.plusLeft, top: it.plusTop, color: card.plusColor }}
           >
             +
           </p>
@@ -583,12 +556,11 @@ export function ProductsFullPicture({ data }: { data?: any }) {
   const heading = data?.heading || FALLBACK_HEADING;
   const menuLabel = data?.menu_text || FALLBACK_MENU;
 
-  const strapiCallouts: Record<string, { iconUrl: string | null; items: string[] }> = {};
+  const strapiCallouts: Record<string, { items: string[] }> = {};
   if (Array.isArray(data?.callouts)) {
     for (const c of data.callouts) {
       if (c?.label) {
         strapiCallouts[c.label] = {
-          iconUrl: mediaUrl(c?.icon) || null,
           items: splitLinesFilter(c?.items),
         };
       }
@@ -623,7 +595,12 @@ export function ProductsFullPicture({ data }: { data?: any }) {
         lines = [];
       }
     }
-    return { ...c, items, lines, iconSrc: strapiData?.iconUrl || ICON_GLYPH };
+    const iconMap: Record<string, string> = {
+      "Power": "/products/measured-icon-energy.svg",
+      "Control": "/products/measured-icon-speed.svg",
+      "Temperature": "/products/measured-icon-eco.svg",
+    };
+    return { ...c, items, lines, iconSrc: iconMap[c.title] || ICON_GLYPH };
   });
 
   return (

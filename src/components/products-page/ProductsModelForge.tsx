@@ -71,7 +71,6 @@ const SUB_FEATURES = [
 export function ProductsModelForge({ data }: { data?: any }) {
   const heading = data?.heading || FALLBACK_HEADING;
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
-  const image = mediaUrl(data?.image) || "/products/modelforge-image.png";
   const primary = {
     label: data?.primary_button?.label ?? FALLBACK_PRIMARY.label,
     href: data?.primary_button?.href ?? FALLBACK_PRIMARY.href,
@@ -118,7 +117,6 @@ export function ProductsModelForge({ data }: { data?: any }) {
         <ProductsModelForgeDesktop
           heading={heading}
           subtitle={subtitle}
-          image={image}
           steps={steps}
           primary={primary}
           secondary={secondary}
@@ -130,7 +128,6 @@ export function ProductsModelForge({ data }: { data?: any }) {
       <ProductsModelForgeMobile
         heading={heading}
         subtitle={subtitle}
-        image={image}
         steps={steps}
         subfeatures={subfeatures}
       />
@@ -141,7 +138,6 @@ export function ProductsModelForge({ data }: { data?: any }) {
 function ProductsModelForgeDesktop({
   heading,
   subtitle,
-  image,
   steps,
   primary,
   secondary,
@@ -149,7 +145,6 @@ function ProductsModelForgeDesktop({
 }: {
   heading: string;
   subtitle: string;
-  image: string;
   steps: any[];
   primary: { label: string; href: string };
   secondary: { label: string; href: string };
@@ -343,13 +338,11 @@ function ModelForgeCard({ step }: { step: any }) {
 function ProductsModelForgeMobile({
   heading,
   subtitle,
-  image,
   steps,
   subfeatures,
 }: {
   heading: string;
   subtitle: string;
-  image: string;
   steps: any[];
   subfeatures: any[];
 }) {

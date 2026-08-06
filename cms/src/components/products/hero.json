@@ -28,18 +28,11 @@
       "repeatable": false,
       "component": "shared.button"
     },
-    "chipset_image_1": {
+    "chipset_image": {
       "type": "media",
       "multiple": false
     },
-    "chipset_image_1_alt": {
-      "type": "string"
-    },
-    "chipset_image_2": {
-      "type": "media",
-      "multiple": false
-    },
-    "chipset_image_2_alt": {
+    "chipset_image_alt": {
       "type": "string"
     }
   }

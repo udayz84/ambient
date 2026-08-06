@@ -38,7 +38,8 @@ export function ProductsArchitecture({ data }: { data?: any }) {
   const heading = data?.heading || FALLBACK_HEADING;
   const headingLines = splitLines(heading);
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
-  const image = mediaUrl(data?.image) || "/products/architecture.png";
+  const image = mediaUrl(data?.image) || null;
+  console.log("Architecture image:", image);
   const caption = data?.caption || FALLBACK_CAPTION;
   const stats =
     Array.isArray(data?.stats) && data.stats.length > 0
@@ -172,7 +173,7 @@ function ProductsArchitectureDesktop({
   label: string;
   headingLines: string[];
   subtitle: string;
-  image: string;
+  image: string | null;
   caption: string;
   stats: any[];
 }) {
@@ -239,11 +240,13 @@ function ProductsArchitectureDesktop({
           >
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                alt="GPX10 Pro architecture"
-                src={image}
-                className="absolute top-0 left-[-0.73%] h-full w-[100.34%] max-w-none"
-              />
+              {image && (
+                <img
+                  alt="GPX10 Pro architecture"
+                  src={image}
+                  className="absolute inset-0 size-full object-contain object-center"
+                />
+              )}
             </div>
           </div>
           {/* Corner ticks — 3529:618-621 (right/bottom ones clipped per design) */}
@@ -336,7 +339,7 @@ function ProductsArchitectureMobile({
   label: string;
   headingLines: string[];
   subtitle: string;
-  image: string;
+  image: string | null;
   caption: string;
   stats: any[];
 }) {
@@ -368,11 +371,13 @@ function ProductsArchitectureMobile({
       {/* Architecture image + caption */}
       <div className="mt-[24px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] p-[10px]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt="GPX10 Pro architecture"
-          src={image}
-          className="h-auto w-full"
-        />
+        {image && (
+          <img
+            alt="GPX10 Pro architecture"
+            src={image}
+            className="h-auto w-full"
+          />
+        )}
         <p
           className={`${gilroyMedium.className} mt-[16px] mb-[6px] ml-[6px] text-[22px] leading-[28px] font-medium text-white not-italic`}
         >

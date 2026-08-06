@@ -42,8 +42,7 @@ export function ProductsHero({ data }: { data?: any }) {
     label: data?.secondary_button?.label ?? FALLBACK_SECONDARY.label,
     href: data?.secondary_button?.href ?? FALLBACK_SECONDARY.href,
   };
-  const chipset1 = mediaUrl(data?.chipset_image_2) || "/products/coin-chipset-1.png";
-  const chipset2 = mediaUrl(data?.chipset_image_1) || "/products/coin-chipset-2.png";
+  const chipsetImage = mediaUrl(data?.chipset_image);
   const strapiTags = Array.isArray(data?.tags) ? data.tags : [];
   return (
     <>
@@ -55,6 +54,16 @@ export function ProductsHero({ data }: { data?: any }) {
         data-name="Hero Section"
         aria-label="Products"
       >
+        {chipsetImage ? (
+          <div className="pointer-events-none absolute inset-0 mx-auto w-full max-w-[1442px] overflow-hidden" aria-hidden>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              alt=""
+              src={chipsetImage}
+              className="absolute inset-0 size-full max-w-none object-cover"
+            />
+          </div>
+        ) : null}
       <div
         className="relative mx-auto h-full w-[1442px]">
           <ProductsHeroDesktop
@@ -62,8 +71,6 @@ export function ProductsHero({ data }: { data?: any }) {
             subtitle={subtitle}
             primary={primary}
             secondary={secondary}
-            chipset1={chipset1}
-            chipset2={chipset2}
             strapiTags={strapiTags}
           />
         </div>
@@ -85,7 +92,7 @@ export function ProductsHero({ data }: { data?: any }) {
         subtitle={subtitle}
         primary={primary}
         secondary={secondary}
-        chipset2={chipset2}
+        chipsetImage={chipsetImage}
       />
     </>
   );
@@ -96,80 +103,20 @@ function ProductsHeroDesktop({
   subtitle,
   primary,
   secondary,
-  chipset1,
-  chipset2,
   strapiTags,
 }: {
   titleLines: string[];
   subtitle: string;
   primary: { label: string; href: string };
   secondary: { label: string; href: string };
-  chipset1: string;
-  chipset2: string;
   strapiTags: any[];
 }) {
   return (
     <>
       <div className="relative mt-[78px] h-[798px] w-full">
-      {/* Coin & chipset image group — 2900:507 */}
-      <div
-        className="pointer-events-none absolute overflow-clip"
-        style={{
-          left: COIN_GROUP.left,
-          top: COIN_GROUP.top,
-          width: COIN_GROUP.width,
-          height: COIN_GROUP.height,
-        }}
-        data-node-id="2900:507"
-        data-name="Coin And Chipset"
-        aria-hidden
-      >
-        {/* Background coin+chipset — 2900:508 */}
-        <div
-          className="absolute"
-          style={{
-            left: COIN_BG.left,
-            top: COIN_BG.top,
-            width: COIN_BG.width,
-            height: COIN_BG.height,
-          }}
-          data-node-id="2900:508"
-          data-name="Coin and the chipset 2"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt=""
-            src={chipset2}
-            className="absolute inset-0 size-full max-w-none object-bottom"
-          />
-          <div
-            className="absolute inset-0"
-            style={{ backgroundImage: HERO_IMAGE_OVERLAY }}
-          />
-        </div>
-        {/* Foreground chip — 2900:509 */}
-        <div
-          className="absolute"
-          style={{
-            right: COIN_FG.right,
-            top: COIN_FG.top,
-            width: COIN_FG.width,
-            height: COIN_FG.height,
-          }}
-          data-node-id="2900:509"
-          data-name="Coin and the chipset 1"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt=""
-            src={chipset1}
-            className="absolute inset-0 size-full max-w-none object-bottom"
-          />
-        </div>
-      </div>
 
       {/* Left vertical guide line — 2900:421 (h-821) */}
-      <div className="pointer-events-none absolute top-[79px] left-[95px] flex h-[821px] w-0 items-center justify-center">
+      <div className="pointer-events-none absolute top-0 left-[95px] flex h-[821px] w-0 items-center justify-center">
         <div className="flex-none rotate-90">
           <div
             className="relative h-0 w-[821px]"
@@ -190,7 +137,7 @@ function ProductsHeroDesktop({
       </div>
       {/* Left line cap — 2900:422 */}
       <div
-        className="pointer-events-none absolute top-[77px] left-[93px] h-[4px] w-[5px]"
+        className="pointer-events-none absolute top-[-2px] left-[93px] h-[4px] w-[5px]"
         data-node-id="2900:422"
         data-name="Vector"
       >
@@ -204,7 +151,7 @@ function ProductsHeroDesktop({
       </div>
 
       {/* Right vertical guide line — 2900:423 (h-597) */}
-      <div className="pointer-events-none absolute top-[79px] right-[95px] flex h-[597px] w-0 items-center justify-center">
+      <div className="pointer-events-none absolute top-0 right-[95px] flex h-[597px] w-0 items-center justify-center">
         <div className="flex-none rotate-90">
           <div
             className="relative h-0 w-[597px]"
@@ -225,7 +172,7 @@ function ProductsHeroDesktop({
       </div>
       {/* Right line cap — 2900:424 */}
       <div
-        className="pointer-events-none absolute top-[77.634765625px] left-[1344.5px] h-[4px] w-[5px]"
+        className="pointer-events-none absolute top-[-2px] left-[1344.5px] h-[4px] w-[5px]"
         data-node-id="2900:424"
         data-name="Vector"
       >
@@ -368,13 +315,13 @@ function ProductsHeroMobile({
   subtitle,
   primary,
   secondary,
-  chipset2,
+  chipsetImage,
 }: {
   titleLines: string[];
   subtitle: string;
   primary: { label: string; href: string };
   secondary: { label: string; href: string };
-  chipset2: string;
+  chipsetImage: string | null;
 }) {
   return (
     <section
@@ -384,23 +331,18 @@ function ProductsHeroMobile({
       <div className="relative flex w-full flex-col pt-[100px] pb-[56px]">
         {/* Background chip image */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt=""
-            src={chipset2}
-            className="absolute inset-0 size-full object-cover object-[center_bottom] opacity-60"
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(0deg, #000000 12%, rgba(0,0,0,0.55) 48%, rgba(0,0,0,0.2) 100%)",
-            }}
-          />
+          {chipsetImage ? (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              alt=""
+              src={chipsetImage}
+              className="absolute inset-0 size-full object-cover object-[center_bottom] opacity-60"
+            />
+          ) : null}
         </div>
 
         {/* Background vertical lines connecting to Navbar */}
-        <div className="pointer-events-none absolute top-[78px] bottom-0 left-[26px] z-0">
+        <div className="pointer-events-none absolute top-0 bottom-0 left-[26px] z-0">
           <div className="absolute top-0 left-1/2 h-full w-[1px] -translate-x-1/2 overflow-hidden">
             <div className="absolute top-0 left-0 h-full w-[821px] origin-top-left rotate-90 opacity-60">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -413,7 +355,7 @@ function ProductsHeroMobile({
             </div>
           </div>
         </div>
-        <div className="pointer-events-none absolute top-[78px] bottom-0 right-[26px] z-0">
+        <div className="pointer-events-none absolute top-0 bottom-0 right-[26px] z-0">
           <div className="absolute top-0 left-1/2 h-full w-[1px] -translate-x-1/2 overflow-hidden">
             <div className="absolute top-0 left-0 h-full w-[821px] origin-top-left rotate-90 opacity-60">
               {/* eslint-disable-next-line @next/next/no-img-element */}

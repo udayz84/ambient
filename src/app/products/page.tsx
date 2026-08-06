@@ -4,6 +4,8 @@ import { ProductsFeatures } from "@/components/products-page/ProductsFeatures";
 import { ProductsAlwaysOn } from "@/components/products-page/ProductsAlwaysOn";
 import { ProductsUseCases } from "@/components/products-page/ProductsUseCases";
 import { ProductsMeasured } from "@/components/products-page/ProductsMeasured";
+export const dynamic = "force-dynamic";
+
 import { ProductsArchitecture } from "@/components/products-page/ProductsArchitecture";
 import { ProductsModelForge } from "@/components/products-page/ProductsModelForge";
 import { ProductsBenchToVolume } from "@/components/products-page/ProductsBenchToVolume";
@@ -35,9 +37,9 @@ export default async function ProductsPage() {
   let data: any = null;
   try {
     data = await getSingleType<any>("products-page", [
-      { section: "hero", nested: ["tags"] },
+      { section: "hero", fields: ["chipset_image"], nested: ["tags"] },
       { section: "features", nested: ["feature_cards"] },
-      { section: "always_on", fields: ["image"], nested: ["stats"] },
+      { section: "always_on", nested: ["stats"] },
       { section: "use_cases", nested: ["tabs"] },
       {
         section: "measured",
@@ -45,14 +47,15 @@ export default async function ProductsPage() {
         nested: ["cards"],
       },
       { section: "architecture", fields: ["image"], nested: ["stats"] },
-      { section: "modelforge", fields: ["image"], nested: ["steps", "subfeatures"] },
+      { section: "modelforge", nested: ["steps", "subfeatures"] },
       "bench_to_volume",
-      { section: "full_picture", fields: ["image"], nested: ["callouts"] },
+      { section: "full_picture", nested: ["callouts"] },
       "start_building",
       "seo",
     ]);
-  } catch {
+  } catch (error) {
     // Strapi unavailable — render with no data; sections will fall back to defaults
+    console.error("Failed to fetch products page data:", error);
   }
 
   return (

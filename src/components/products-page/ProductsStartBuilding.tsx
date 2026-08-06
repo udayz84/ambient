@@ -29,8 +29,7 @@ function splitLines(value: string): string[] {
 export function ProductsStartBuilding({ data }: { data?: any }) {
   const heading = data?.heading || FALLBACK_HEADING;
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
-  const cardBackground =
-    mediaUrl(data?.card_background) || "/products/cta-card-bg.svg";
+  const cardBackground = "/Rectangle 1618873545.png";
   const cards =
     Array.isArray(data?.cards) && data.cards.length > 0
       ? data.cards.map((c: any, i: number) => {

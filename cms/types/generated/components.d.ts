@@ -1258,7 +1258,6 @@ export interface ProductsAlwaysOn extends Struct.ComponentSchema {
   attributes: {
     alt: Schema.Attribute.String;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
-    image: Schema.Attribute.Media;
     stats: Schema.Attribute.Component<'products.alwayson-stat', true>;
     subtitle: Schema.Attribute.Text;
   };
@@ -1331,11 +1330,7 @@ export interface ProductsFeatureCard extends Struct.ComponentSchema {
     displayName: 'Feature Card';
   };
   attributes: {
-    card_image: Schema.Attribute.Media;
-    card_image_alt: Schema.Attribute.String;
     description: Schema.Attribute.Text;
-    icon: Schema.Attribute.Media;
-    icon_alt: Schema.Attribute.String;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -1360,10 +1355,8 @@ export interface ProductsFullPicture extends Struct.ComponentSchema {
     displayName: 'Full Picture';
   };
   attributes: {
-    alt: Schema.Attribute.String;
     callouts: Schema.Attribute.Component<'products.spec-callout', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
-    image: Schema.Attribute.Media;
     subtitle: Schema.Attribute.Text;
   };
 }
@@ -1375,10 +1368,8 @@ export interface ProductsHero extends Struct.ComponentSchema {
     displayName: 'Hero';
   };
   attributes: {
-    chipset_image_1: Schema.Attribute.Media;
-    chipset_image_1_alt: Schema.Attribute.String;
-    chipset_image_2: Schema.Attribute.Media;
-    chipset_image_2_alt: Schema.Attribute.String;
+    chipset_image: Schema.Attribute.Media;
+    chipset_image_alt: Schema.Attribute.String;
     primary_button: Schema.Attribute.Component<'shared.button', false>;
     secondary_button: Schema.Attribute.Component<'shared.button', false>;
     subtitle: Schema.Attribute.Text;
@@ -1443,9 +1434,7 @@ export interface ProductsModelforge extends Struct.ComponentSchema {
     displayName: 'ModelForge';
   };
   attributes: {
-    alt: Schema.Attribute.String;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
-    image: Schema.Attribute.Media;
     primary_button: Schema.Attribute.Component<'shared.button', false>;
     secondary_button: Schema.Attribute.Component<'shared.button', false>;
     steps: Schema.Attribute.Component<'products.modelforge-step', true>;
@@ -1488,8 +1477,6 @@ export interface ProductsSpecCallout extends Struct.ComponentSchema {
     displayName: 'Spec Callout';
   };
   attributes: {
-    alt: Schema.Attribute.String;
-    icon: Schema.Attribute.Media;
     items: Schema.Attribute.Text;
     label: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -1503,7 +1490,6 @@ export interface ProductsStartBuilding extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
-    card_background: Schema.Attribute.Media;
     cards: Schema.Attribute.Component<'products.start-card', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     subtitle: Schema.Attribute.Text;

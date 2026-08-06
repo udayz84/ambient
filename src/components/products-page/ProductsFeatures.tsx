@@ -68,7 +68,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
   return (
     <section
       id="products-features"
-      className="relative left-1/2 w-screen max-w-none -translate-x-1/2 bg-black max-[1023px]:h-auto min-[1024px]:h-[300vh]"
+      className="relative left-1/2 w-screen max-w-none -translate-x-1/2 bg-black max-[1023px]:h-auto min-[1024px]:h-[200vh]"
       data-node-id="3286:1931"
       data-name="Section 6"
       aria-label="Product capabilities"

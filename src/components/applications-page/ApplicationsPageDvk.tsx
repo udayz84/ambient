@@ -475,7 +475,7 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
           className="absolute top-[272.5px] left-[678.27px] grid h-[516px] w-[707px] grid-cols-2 gap-x-[35px] gap-y-[50px]"
           data-node-id="3591:1764"
         >
-          {features.map((feature, idx) => (
+          {features.map((feature: any, idx: number) => (
             <FeatureCard
               key={FEATURE_NODE_IDS[idx] || idx}
               title={feature.title}
@@ -600,7 +600,7 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
             data-node-id="4032:9001"
             data-name="death of hardware"
           >
-            {features.map((feature, idx) => (
+            {features.map((feature: any, idx: number) => (
               <div
                 key={FEATURE_NODE_IDS[idx] || idx}
                 className="w-[335px] shrink-0 snap-center"

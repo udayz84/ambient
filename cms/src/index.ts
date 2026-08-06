@@ -4,7 +4,7 @@ export default {
     try {
       const homePage = await strapi.documents('api::home-page.home-page').findFirst({
         populate: {
-          latest_news: { populate: ['cards'] },
+          latest_news: { populate: { cards: { populate: ['image'] } } },
           platform_scale: { populate: { products: { populate: ['chip_image'] } } },
           ecosystem: { populate: ['silicon_partners', 'development_partners'] }
         }
@@ -350,89 +350,6 @@ export default {
         console.error('Error seeding Navbar:', err);
       }
 
-      // Seeding Footer
-      try {
-        const footerCount = await strapi.documents('api::footer.footer').count();
-        if (footerCount === 0) {
-          console.log('Seeding initial Footer settings...');
-          const findMedia = async (name: string) =>
-            (await strapi.db.query('plugin::upload.file').findOne({ where: { name } }))?.id ?? null;
-          const socialLinks = [
-            { platform: 'linkedin', href: '#', icon: await findMedia('social-linkedin.svg') },
-            { platform: 'x', href: '#', icon: await findMedia('social-x.svg') },
-            { platform: 'youtube', href: '#', icon: await findMedia('social-youtube.svg') },
-          ].filter((s) => s.icon);
-
-          await strapi.documents('api::footer.footer').create({
-            data: {
-              footer: {
-                nav_sections: [
-                  {
-                    title: 'PRODUCTS',
-                    links: [
-                      { label: 'GPX10', href: '#' },
-                      { label: 'GPX64', href: '#' },
-                      { label: 'Development Kits', href: '#' },
-                      { label: 'ModelForge', href: '#' },
-                    ],
-                  },
-                  {
-                    title: 'SOLUTIONS',
-                    links: [
-                      { label: 'Medical & Wearables', href: '#' },
-                      { label: 'Smart Home', href: '#' },
-                      { label: 'Industrial IoT', href: '#' },
-                      { label: 'Robotics', href: '#' },
-                    ],
-                  },
-                  {
-                    title: 'Resources',
-                    links: [
-                      { label: 'Documentation', href: '#' },
-                      { label: 'Case Studies', href: '#' },
-                      { label: 'Technical Papers', href: '#' },
-                      { label: 'Blog', href: '#' },
-                    ],
-                  },
-                  {
-                    title: 'Company',
-                    links: [
-                      { label: 'About', href: '#' },
-                      { label: 'Careers', href: '#' },
-                      { label: 'Industrial IoT', href: '#' },
-                      { label: 'Contact', href: '#' },
-                    ],
-                  },
-                ],
-                social_links: socialLinks,
-                legal_links: [
-                  { label: 'Privacy Policy', href: '#' },
-                  { label: 'Terms of Service', href: '#' },
-                  { label: 'Cookie Policy', href: '#' },
-                ],
-                copyright_text: '© 2026 Ambient AI. All rights reserved.',
-              },
-              newsletter: {
-                heading: 'Want to stay in the forefront of AI tech.',
-                subtitle: 'Sign up to receive regular updates.',
-                input_placeholder: 'Your Email ID',
-                button_label: 'SUBSCRIBE',
-              },
-              contact_details: {
-                email: 'contact@ambientscientific.com',
-              },
-              default_seo: {
-                meta_title: 'Ambient Scientific',
-                meta_description: 'Ambient Scientific default SEO configuration',
-              },
-            },
-          });
-          console.log('Successfully seeded Footer!');
-        }
-      } catch (err) {
-        console.error('Error seeding Footer:', err);
-      }
-
       // Grant Public read permissions to popup
       try {
         const publicRole = await strapi.db.query('plugin::users-permissions.role').findOne({
@@ -461,33 +378,6 @@ export default {
         console.error('Error setting popup permissions:', err);
       }
 
-      // Grant Public read permissions to footer
-      try {
-        const publicRole = await strapi.db.query('plugin::users-permissions.role').findOne({
-          where: { type: 'public' },
-        });
-
-        if (publicRole) {
-          const permissionExists = await strapi.db.query('plugin::users-permissions.permission').findOne({
-            where: {
-              role: publicRole.id,
-              action: 'api::footer.footer.find',
-            }
-          });
-
-          if (!permissionExists) {
-            console.log('Granting Public access to api::footer.footer.find');
-            await strapi.db.query('plugin::users-permissions.permission').create({
-              data: {
-                action: 'api::footer.footer.find',
-                role: publicRole.id,
-              }
-            });
-          }
-        }
-      } catch (err) {
-        console.error('Error setting footer permissions:', err);
-      }
     } catch (e) {
       console.error('Seed error:', e);
     }

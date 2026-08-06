@@ -1,84 +1,92 @@
 /**
  * seed-footer.js
  * ----------------------------------------------------------------------------
- * Rebuilds and seeds the `footer` single type (api::footer.footer) from scratch.
+ * Seeds the `footer` single type (api::footer.footer) via the Strapi REST API.
  *
  * What it does
- *   1. Boots Strapi programmatically via createStrapi(). The load() step runs
- *      the DB schema synchronisation, which (re)creates every footer-related
- *      table that is missing — so this script is safe to run on a fresh DB.
- *   2. Resolves media (icons / logos / background) by file name from the
- *      existing Strapi media library. Missing media is skipped gracefully.
- *   3. Upserts the footer single type with the full content:
- *        - footer.nav_sections  (4 columns of links)
- *        - footer.social_links  (linkedin / x / youtube)
- *        - footer.legal_links   (privacy / terms / cookie)
+ *   1. Resolves media (icons / logos / background) by file name from the
+ *      Strapi media library via /api/upload/files. Missing media is skipped
+ *      gracefully (the schema marks all media fields optional).
+ *   2. Upserts the footer single type:
+ *        - footer.nav_sections   (4 columns of links)
+ *        - footer.social_links   (linkedin / x / youtube)
+ *        - footer.legal_links    (privacy / terms / cookie)
  *        - footer.copyright_text / crafted_by_text / crafted_by_logo / background_image
- *        - newsletter           (heading / subtitle / placeholder / button / show_on_paths)
- *        - contact_details      (email / phone / locations)
- *        - default_seo          (meta title / description)
- *   4. Grants the Public role read access to api::footer.footer.find so the
- *      Next.js frontend can fetch it without a token.
+ *        - newsletter            (heading / subtitle / placeholder / button / show_on_paths)
+ *        - contact_details       (email / phone / locations)
+ *        - default_seo           (meta title / description)
+ *   3. Reads the fully-populated entry back and prints a verification summary.
  *
  * Idempotent: re-running updates the existing entry (does not duplicate).
  *
  * Usage (from /cms):
  *   node seed-footer.js
+ *   # or override the URL / token inline:
+ *   STRAPI_URL=http://127.0.0.1:1338 STRAPI_TOKEN=xxx node seed-footer.js
  *
  * Static values mirror the Next.js fallback constants:
  *   src/components/site-footer/footer-data.ts
  * ----------------------------------------------------------------------------
  */
-const path = require('path');
-const { createStrapi } = require('@strapi/strapi');
 
-const FOOTER_UID = 'api::footer.footer';
+const STRAPI_URL = (process.env.STRAPI_URL || 'http://127.0.0.1:1338').replace(/\/$/, '');
+const STRAPI_TOKEN = process.env.STRAPI_TOKEN || '';
+const FOOTER_PATH = '/api/footer';
+
+if (!STRAPI_TOKEN) {
+  console.error('Missing STRAPI_TOKEN. Set it inline or in cms/.env');
+  process.exit(1);
+}
+
+/** JSON fetch helper that attaches the API token. */
+async function api(path, { method = 'GET', body, expect404 = false } = {}) {
+  const res = await fetch(`${STRAPI_URL}${path}`, {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${STRAPI_TOKEN}`,
+    },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  const text = await res.text();
+  let json = null;
+  try { json = text ? JSON.parse(text) : null; } catch { /* non-JSON body */ }
+
+  if (!res.ok) {
+    if (expect404 && res.status === 404) return null;
+    const msg = json?.error?.message || text || res.statusText;
+    throw new Error(`${method} ${path} -> ${res.status}: ${msg}`);
+  }
+  return json;
+}
+
+/** Look up a media file id by exact (case-insensitive) name. */
+async function findMediaByName(name) {
+  if (!name) return null;
+  const json = await api(
+    `/api/upload/files?filters[name][$eq]=${encodeURIComponent(name)}&pageSize=1`
+  );
+  const id = json?.results?.[0]?.id ?? json?.[0]?.id ?? null;
+  if (!id) console.warn(`  ! media not found in library: "${name}" (skipping)`);
+  return id;
+}
 
 async function main() {
-  console.log('Loading Strapi (this also synchronises the DB schema) ...');
-  const strapi = createStrapi({
-    appDir: __dirname,
-    distDir: path.join(__dirname, 'dist'),
-  });
-  await strapi.load();
-  console.log('Strapi loaded.');
+  console.log(`Seeding footer at ${STRAPI_URL}${FOOTER_PATH}`);
 
-  // -- 0. Sanity check: the footer content type + table must be available now.
-  const ct = strapi.contentType(FOOTER_UID);
-  if (!ct) {
-    throw new Error(`Content type ${FOOTER_UID} is not registered. Check src/api/footer.`);
-  }
-  try {
-    await strapi.documents(FOOTER_UID).count();
-    console.log('Footer table is present.');
-  } catch (e) {
-    throw new Error(
-      `Footer table is still missing after schema sync: ${e.message}\n` +
-      `Run "npm run build" inside /cms first, then re-run this script.`
-    );
-  }
+  // -- 1. Resolve media from the library (skips gracefully if absent).
+  console.log('Resolving media by name...');
+  const [
+    socialLinkedin, socialX, socialYoutube, craftedByLogo, backgroundImage,
+  ] = await Promise.all([
+    findMediaByName('social-linkedin.svg'),
+    findMediaByName('social-x.svg'),
+    findMediaByName('social-youtube.svg'),
+    findMediaByName('crafted-by.svg'),
+    findMediaByName('footer-bg.png'),
+  ]);
 
-  // -- 1. Index media library by (lowercased) name for icon/logo lookups.
-  const files = await strapi.db.query('plugin::upload.file').findMany({ limit: 1000 });
-  const byName = {};
-  for (const f of files) {
-    const key = (f.name || '').toLowerCase();
-    if (key && !(key in byName)) byName[key] = f.id; // first match wins
-  }
-  const findMedia = async (name) => {
-    const id = byName[(name || '').toLowerCase()] || null;
-    if (!id) console.warn(`  ! media not found in library: "${name}" (skipping)`);
-    return id;
-  };
-
-  // -- 2. Build the payload.
-  //     (media ids are attached when available; the schema marks them optional)
-  const socialLinks = [
-    { platform: 'linkedin', href: '#', icon: await findMedia('social-linkedin.svg') },
-    { platform: 'x', href: '#', icon: await findMedia('social-x.svg') },
-    { platform: 'youtube', href: '#', icon: await findMedia('social-youtube.svg') },
-  ];
-
+  // -- 2. Build the payload (mirrors src/components/site-footer/footer-data.ts).
   const data = {
     footer: {
       nav_sections: [
@@ -119,7 +127,11 @@ async function main() {
           ],
         },
       ],
-      social_links: socialLinks,
+      social_links: [
+        { platform: 'linkedin', href: '#', icon: socialLinkedin },
+        { platform: 'x', href: '#', icon: socialX },
+        { platform: 'youtube', href: '#', icon: socialYoutube },
+      ].filter((s) => s.icon),
       legal_links: [
         { label: 'Privacy Policy', href: '#' },
         { label: 'Terms of Service', href: '#' },
@@ -127,8 +139,10 @@ async function main() {
       ],
       copyright_text: '© 2026 Ambient AI. All rights reserved.',
       crafted_by_text: 'Carefully crafted by',
-      crafted_by_logo: await findMedia('crafted-by.svg'),
-      background_image: await findMedia('footer-bg.png'),
+      crafted_by_logo: craftedByLogo,
+      crafted_by_logo_alt: 'Crafted by 3minds',
+      background_image: backgroundImage,
+      background_image_alt: 'Footer background',
     },
     newsletter: {
       heading: 'Want to stay in the forefront of AI tech.',
@@ -151,78 +165,51 @@ async function main() {
     },
   };
 
-  // -- 3. Upsert the footer single type.
-  const existing = await strapi.documents(FOOTER_UID).findFirst();
+  // -- 3. Upsert the footer single type (singleType auto-creates on PUT in v5).
+  const existing = await api(FOOTER_PATH, { expect404: true });
   let docId;
-  if (existing) {
-    const updated = await strapi.documents(FOOTER_UID).update({
-      documentId: existing.documentId,
-      data,
-    });
-    docId = updated.documentId;
+  if (existing?.data?.documentId) {
+    const updated = await api(FOOTER_PATH, { method: 'PUT', body: { data } });
+    docId = updated?.data?.documentId;
     console.log(`Updated Footer (documentId: ${docId})`);
   } else {
-    const created = await strapi.documents(FOOTER_UID).create({ data });
-    docId = created.documentId;
+    const created = await api(FOOTER_PATH, { method: 'POST', body: { data } });
+    docId = created?.data?.documentId;
     console.log(`Created Footer (documentId: ${docId})`);
   }
 
-  // -- 4. Grant the Public role read access (so the frontend can fetch it).
-  await grantPublicRead(strapi, 'api::footer.footer.find');
-
-  // -- 5. Verify by reading the fully-populated entry back.
-  const verify = await strapi.documents(FOOTER_UID).findFirst({
-    populate: {
-      footer: { populate: { nav_sections: { populate: { links: true } }, social_links: true, legal_links: true, crafted_by_logo: true, background_image: true } },
-      newsletter: true,
-      contact_details: { populate: { locations: true } },
-      default_seo: true,
-    },
-  });
-  const navCount = verify?.footer?.nav_sections?.length || 0;
-  const linkTotal = (verify?.footer?.nav_sections || []).reduce(
-    (n, s) => n + (s.links?.length || 0), 0
+  // -- 4. Verify by reading the fully-populated entry back.
+  const verify = await api(
+    `${FOOTER_PATH}?populate[footer][populate][nav_sections][populate][links]=true` +
+    `&populate[footer][populate][social_links]=true` +
+    `&populate[footer][populate][legal_links]=true` +
+    `&populate[footer][populate][crafted_by_logo]=true` +
+    `&populate[footer][populate][background_image]=true` +
+    `&populate[newsletter]=true` +
+    `&populate[contact_details][populate][locations]=true` +
+    `&populate[default_seo]=true`
   );
-  const socialCount = verify?.footer?.social_links?.length || 0;
-  const legalCount = verify?.footer?.legal_links?.length || 0;
+  const f = verify?.data?.footer || {};
+  const navSections = f.nav_sections || [];
+  const linkTotal = navSections.reduce((n, s) => n + (s.links?.length || 0), 0);
   console.log('\n--- Verification ---');
-  console.log(`documentId       : ${verify.documentId}`);
-  console.log(`nav_sections     : ${navCount} columns, ${linkTotal} links`);
-  console.log(`social_links     : ${socialCount}`);
-  console.log(`legal_links      : ${legalCount}`);
-  console.log(`copyright_text   : ${verify?.footer?.copyright_text}`);
-  console.log(`newsletter       : ${verify?.newsletter?.heading}`);
-  console.log(`contact email    : ${verify?.contact_details?.email}`);
-  console.log(`default_seo      : ${verify?.default_seo?.meta_title}`);
+  console.log(`documentId       : ${verify?.data?.documentId}`);
+  console.log(`nav_sections     : ${navSections.length} columns, ${linkTotal} links`);
+  console.log(`social_links     : ${f.social_links?.length || 0}`);
+  console.log(`legal_links      : ${f.legal_links?.length || 0}`);
+  console.log(`copyright_text   : ${f.copyright_text}`);
+  console.log(`crafted_by_logo  : ${f.crafted_by_logo ? 'present' : 'none'}`);
+  console.log(`background_image : ${f.background_image ? 'present' : 'none'}`);
+  console.log(`newsletter       : ${verify?.data?.newsletter?.heading}`);
+  console.log(`contact email    : ${verify?.data?.contact_details?.email}`);
+  console.log(`default_seo      : ${verify?.data?.default_seo?.meta_title}`);
   console.log('--------------------');
 
-  await strapi.destroy();
   console.log('\nFooter seed complete.');
   process.exit(0);
 }
 
-async function grantPublicRead(strapi, action) {
-  const publicRole = await strapi.db
-    .query('plugin::users-permissions.role')
-    .findOne({ where: { type: 'public' } });
-  if (!publicRole) {
-    console.warn('  ! Public role not found — skipping permission grant.');
-    return;
-  }
-  const exists = await strapi.db
-    .query('plugin::users-permissions.permission')
-    .findOne({ where: { role: publicRole.id, action } });
-  if (exists) {
-    console.log(`Public already has ${action}`);
-  } else {
-    await strapi.db.query('plugin::users-permissions.permission').create({
-      data: { action, role: publicRole.id },
-    });
-    console.log(`Granted Public access to ${action}`);
-  }
-}
-
 main().catch((err) => {
-  console.error('Seed failed:', err);
+  console.error('Seed failed:', err.message || err);
   process.exit(1);
 });

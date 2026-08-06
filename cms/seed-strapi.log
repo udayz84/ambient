@@ -1,0 +1,139 @@
+
+> ambient-cms@0.1.0 develop
+> strapi develop
+
+[2026-08-05 23:12:19.927] [33mwarn[39m: The strapi::cors middleware no longer supports the `enabled` option. Using it to conditionally enable CORS might cause an insecure default. To disable strapi::cors, remove it from the exported array in config/middleware.js
+[2026-08-05 23:12:22.469] [33mwarn[39m: [email]: The "sendmail" email provider is still supported, but for most production setups that use a dedicated SMTP relay, consider switching to @strapi/provider-email-nodemailer (set `provider` to `"nodemailer"` in your email plugin config). This message is only shown in non-production environments.
+[webhook] NEXT_SITE_URL or REVALIDATE_SECRET not set in cms/.env — skipping auto-registration.
+
+ Project information
+
+[90m╭────────────────────[39m[90m┬──────────────────────────────────────────────────╮[39m
+[90m│[39m Time               [90m│[39m Wed Aug 05 2026 23:12:31 GMT-0700 (Pacific Dayl… [90m│[39m
+[90m│[39m Launched in        [90m│[39m 21373 ms                                         [90m│[39m
+[90m│[39m Environment        [90m│[39m development                                      [90m│[39m
+[90m│[39m Process PID        [90m│[39m 22112                                            [90m│[39m
+[90m│[39m Version            [90m│[39m 5.50.0 (node v24.16.0)                           [90m│[39m
+[90m│[39m Edition            [90m│[39m Community                                        [90m│[39m
+[90m│[39m Database           [90m│[39m postgres                                         [90m│[39m
+[90m│[39m Database name      [90m│[39m postgres                                         [90m│[39m
+[90m╰────────────────────[39m[90m┴──────────────────────────────────────────────────╯[39m
+
+ Actions available
+
+Welcome back!
+To access the server ⚡️, go to:
+http://localhost:1338
+
+[2026-08-05 23:12:31.590] [32minfo[39m: Strapi started successfully
+[2026-08-05 23:12:35.501] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996755221 (275 ms) 200
+[2026-08-05 23:12:35.962] [32mhttp[39m: GET /api/products-page?populate[seo][populate]=* (350 ms) 200
+[2026-08-05 23:12:36.008] [32mhttp[39m: GET /api/footer?populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (398 ms) 404
+[2026-08-05 23:12:36.049] [32mhttp[39m: GET /api/navbar?populate[brand][populate]=*&populate[header][populate][cta_dot_icon]=true&populate[header][populate][nav_items][populate][children][populate]=* (520 ms) 200
+[2026-08-05 23:12:37.472] [32mhttp[39m: GET /api/products-page?populate[hero][populate][chipset_image]=true&populate[hero][populate][tags][populate]=*&populate[features][populate][feature_cards][populate]=*&populate[always_on][populate][image]=true&populate[always_on][populate][stats][populate]=*&populate[use_cases][populate][tabs][populate]=*&populate[measured][populate][tag]=true&populate[measured][populate][primary_button]=true&populate[measured][populate][secondary_button]=true&populate[measured][populate][cards][populate]=*&populate[architecture][populate][image]=true&populate[architecture][populate][stats][populate]=*&populate[modelforge][populate][steps][populate]=*&populate[modelforge][populate][subfeatures][populate]=*&populate[bench_to_volume][populate]=*&populate[full_picture][populate][callouts][populate]=*&populate[start_building][populate]=*&populate[seo][populate]=* (1861 ms) 200
+[2026-08-05 23:12:38.122] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fnavbar%2Fsubtract.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fnavbar%2Fsubtract.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996757966 (155 ms) 200
+[2026-08-05 23:12:38.160] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fhero%2Fline-cap-left.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fhero%2Fline-cap-left.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996757969 (189 ms) 200
+[2026-08-05 23:12:38.196] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fnavbar%2Fvector-36.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fnavbar%2Fvector-36.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996757968 (228 ms) 200
+[2026-08-05 23:12:38.218] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fmobile%2FVector%252036.png&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fmobile%2FVector%252036.png&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996757969 (248 ms) 200
+[2026-08-05 23:12:38.226] [32mhttp[39m: GET /uploads/3_0e261dbc8b.png (5 ms) 200
+[2026-08-05 23:12:38.236] [32mhttp[39m: GET /uploads/2_f0ddeb4f49.png (13 ms) 200
+[2026-08-05 23:12:38.241] [32mhttp[39m: GET /uploads/1_affe269431.png (17 ms) 200
+[2026-08-05 23:12:38.247] [32mhttp[39m: GET /uploads/logo_c9d2012993.png (22 ms) 200
+[2026-08-05 23:12:38.262] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fhero%2Fcorner-tag-2.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fhero%2Fcorner-tag-2.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996757996 (264 ms) 200
+[2026-08-05 23:12:38.272] [32mhttp[39m: GET /uploads/Hero_Section_a6ea0971ee.png (37 ms) 200
+[2026-08-05 23:12:38.289] [32mhttp[39m: GET /uploads/Architecture_1_b00ebef2dc.png (49 ms) 200
+[2026-08-05 23:12:38.306] [32mhttp[39m: GET /uploads/Vector_a9a9f492ac.png (23 ms) 200
+[2026-08-05 23:12:38.310] [32mhttp[39m: GET /uploads/Vector_6bde41eb27.png (9 ms) 200
+[2026-08-05 23:12:38.314] [32mhttp[39m: GET /uploads/Vector_f9c75372c8.png (15 ms) 200
+[2026-08-05 23:12:38.316] [32mhttp[39m: GET /uploads/app_hearables_bedd375bf3.png (11 ms) 404
+[2026-08-05 23:12:38.322] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Ffeatures-bg.png&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Ffeatures-bg.png&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996758153 (169 ms) 200
+[2026-08-05 23:12:38.336] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fhero%2Fline-cap-right.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fhero%2Fline-cap-right.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996757997 (337 ms) 200
+[2026-08-05 23:12:38.357] [32mhttp[39m: GET /uploads/image_76_91ece687a8.png (7 ms) 200
+[2026-08-05 23:12:38.371] [32mhttp[39m: GET /uploads/2_80e8fde83e.png (19 ms) 200
+[2026-08-05 23:12:38.376] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fhero%2Fline-82.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fhero%2Fline-82.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996758172 (204 ms) 200
+[2026-08-05 23:12:38.377] [32mhttp[39m: GET /uploads/3_ff75bc5450.png (22 ms) 200
+[2026-08-05 23:12:38.405] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fhero%2Fline-83.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fhero%2Fline-83.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996758211 (194 ms) 200
+[2026-08-05 23:12:38.527] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fhero%2Fcorner-tag-1.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fhero%2Fcorner-tag-1.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996758227 (287 ms) 200
+[2026-08-05 23:12:38.602] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fnavbar%2Fchevron.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fnavbar%2Fchevron.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996758276 (302 ms) 200
+[2026-08-05 23:12:38.669] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fnavbar%2Fcta-dot.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fnavbar%2Fcta-dot.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996758354 (313 ms) 200
+[2026-08-05 23:12:38.736] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Ffooter%2Ffooter-bg.png&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Ffooter%2Ffooter-bg.png&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996758383 (332 ms) 200
+[2026-08-05 23:12:38.740] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Ffooter%2Fsocial-x.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Ffooter%2Fsocial-x.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996758467 (273 ms) 200
+[2026-08-05 23:12:38.746] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Ffooter%2Fsocial-linkedin.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Ffooter%2Fsocial-linkedin.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996758421 (325 ms) 200
+[2026-08-05 23:12:38.885] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Ffooter%2Fsocial-youtube.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Ffooter%2Fsocial-youtube.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996758549 (336 ms) 200
+[2026-08-05 23:12:38.930] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Ffooter%2F3minds.png&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Ffooter%2F3minds.png&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996758734 (196 ms) 200
+[2026-08-05 23:12:38.977] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Fcta-card-bg.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Fcta-card-bg.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996758753 (224 ms) 200
+[2026-08-05 23:12:38.980] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2F404-cable.png&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2F404-cable.png&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996758725 (255 ms) 200
+[2026-08-05 23:12:38.986] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Ffeatures-card-corners.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Ffeatures-card-corners.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996758763 (219 ms) 200
+[2026-08-05 23:12:38.996] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Ffeatures-card-brain.png&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Ffeatures-card-brain.png&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996758768 (228 ms) 200
+[2026-08-05 23:12:39.078] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Ffeatures-card-coin.png&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Ffeatures-card-coin.png&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996758902 (176 ms) 200
+[2026-08-05 23:12:39.102] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Ffeatures-card-bubble.png&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Ffeatures-card-bubble.png&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996758940 (162 ms) 200
+[2026-08-05 23:12:39.120] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Ffeatures-card-stack-back.png&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Ffeatures-card-stack-back.png&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996758986 (127 ms) 200
+[2026-08-05 23:12:39.145] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fnotfound%2FChatGPT%2520Image%2520Jul%252024%2C%25202026%2C%252005_14_17%2520PM.png&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fnotfound%2FChatGPT%2520Image%2520Jul%252024%2C%25202026%2C%252005_14_17%2520PM.png&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996759016 (129 ms) 200
+[2026-08-05 23:12:39.146] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fbg-surge.png&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fbg-surge.png&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996759017 (129 ms) 200
+[2026-08-05 23:12:39.154] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Ffeatures-card-stack-front.png&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Ffeatures-card-stack-front.png&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996759002 (152 ms) 200
+[2026-08-05 23:12:39.255] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fcorner-58.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fcorner-58.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996759108 (147 ms) 200
+[2026-08-05 23:12:39.287] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fcorner-55.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fcorner-55.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996759124 (162 ms) 200
+[2026-08-05 23:12:39.407] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fglow-swoosh.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fglow-swoosh.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996759138 (269 ms) 200
+[2026-08-05 23:12:39.415] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fcard-icon.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fcard-icon.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996759179 (236 ms) 200
+[2026-08-05 23:12:39.420] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fcard-corners.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fcard-corners.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996759173 (247 ms) 200
+[2026-08-05 23:12:39.505] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fline-920.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fline-920.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996759186 (318 ms) 200
+[2026-08-05 23:12:39.512] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fdot-green.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fdot-green.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996759294 (218 ms) 200
+[2026-08-05 23:12:39.543] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Fmeasured-aurora.png&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Fmeasured-aurora.png&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996759266 (277 ms) 200
+[2026-08-05 23:12:39.584] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fbracket-left.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fbracket-left.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996759416 (167 ms) 200
+[2026-08-05 23:12:39.623] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fbracket-right.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fbracket-right.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996759430 (193 ms) 200
+[2026-08-05 23:12:39.660] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fon-dot-outer.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fon-dot-outer.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996759431 (229 ms) 200
+[2026-08-05 23:12:39.694] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fon-glow.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fon-glow.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996759521 (172 ms) 200
+[2026-08-05 23:12:39.726] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fai-core-icon.png&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fai-core-icon.png&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996759528 (198 ms) 200
+[2026-08-05 23:12:39.834] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Ftab-arrow-left.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Ftab-arrow-left.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996759653 (181 ms) 200
+[2026-08-05 23:12:39.885] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fon-dot-inner.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fon-dot-inner.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996759611 (274 ms) 200
+[2026-08-05 23:12:39.966] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Ftab-arrow-right.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Ftab-arrow-right.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996759687 (279 ms) 200
+[2026-08-05 23:12:39.985] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fhost-cpu.png&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Falwayson%2Fhost-cpu.png&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996759652 (333 ms) 200
+[2026-08-05 23:12:40.072] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Findicator-1.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Findicator-1.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996759724 (348 ms) 200
+[2026-08-05 23:12:40.174] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Ffp-title-corner-left.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Ffp-title-corner-left.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996759944 (230 ms) 200
+[2026-08-05 23:12:40.177] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Findicator-2.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Findicator-2.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996759924 (253 ms) 200
+[2026-08-05 23:12:40.231] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Fmeasured-chip-glow.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Fmeasured-chip-glow.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996760097 (131 ms) 200
+[2026-08-05 23:12:40.237] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Fmeasured-card-corners.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Fmeasured-card-corners.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996760034 (202 ms) 200
+[2026-08-05 23:12:40.261] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Ffp-title-corner-right.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Ffp-title-corner-right.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996760033 (227 ms) 200
+[2026-08-05 23:12:40.304] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Fmeasured-icon-speed.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Fmeasured-icon-speed.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996760104 (200 ms) 200
+[2026-08-05 23:12:40.355] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Fmeasured-icon-eco.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Fmeasured-icon-eco.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996760208 (147 ms) 200
+[2026-08-05 23:12:40.359] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Fmeasured-icon-energy.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Fmeasured-icon-energy.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996760184 (166 ms) 200
+[2026-08-05 23:12:40.415] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Fmeasured-cta-corner-left.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Fmeasured-cta-corner-left.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996760280 (134 ms) 200
+[2026-08-05 23:12:40.419] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Fmeasured-line-88.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Fmeasured-line-88.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996760255 (163 ms) 200
+[2026-08-05 23:12:40.473] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2520page%2FContainer1.png&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2520page%2FContainer1.png&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996760332 (141 ms) 200
+[2026-08-05 23:12:40.476] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Fmeasured-cta-corner-right.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Fmeasured-cta-corner-right.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996760274 (202 ms) 200
+[2026-08-05 23:12:40.509] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2520page%2FContainer2.png&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2520page%2FContainer2.png&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996760377 (132 ms) 200
+[2026-08-05 23:12:40.510] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2520page%2F3.png&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2520page%2F3.png&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996760377 (132 ms) 200
+[2026-08-05 23:12:40.738] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Ffullpicture-aurora.png&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Ffullpicture-aurora.png&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996760424 (314 ms) 200
+[2026-08-05 23:12:40.786] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Ffp-spec-icon.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Ffp-spec-icon.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996760428 (358 ms) 200
+[2026-08-05 23:12:40.916] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Fspec-line.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Fspec-line.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996760486 (429 ms) 200
+[2026-08-05 23:12:40.919] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts%2Ffeatures-card-mask.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts%2Ffeatures-card-mask.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996760487 (432 ms) 200
+[2026-08-05 23:12:40.966] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fhero%2Fvector-55.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fhero%2Fvector-55.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996760520 (446 ms) 200
+[2026-08-05 23:12:40.986] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fhero%2Fvector-57.svg&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fhero%2Fvector-57.svg&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1785996760526 (460 ms) 200
+[2026-08-05 23:13:48.460] [32mhttp[39m: GET /admin/content-manager/single-types/api::footer.footer (100 ms) 200
+[2026-08-05 23:13:49.269] [32mhttp[39m: GET /admin/project-type (3 ms) 200
+[2026-08-05 23:13:49.444] [32mhttp[39m: GET /admin/init (48 ms) 200
+[2026-08-05 23:13:49.643] [32mhttp[39m: GET /admin/users/me (243 ms) 200
+[2026-08-05 23:13:49.670] [32mhttp[39m: GET /admin/telemetry-properties (214 ms) 200
+[2026-08-05 23:13:49.702] [32mhttp[39m: GET /admin/users/me/permissions (294 ms) 200
+[2026-08-05 23:13:49.751] [32mhttp[39m: GET /admin/information (297 ms) 200
+[2026-08-05 23:13:49.785] [32mhttp[39m: GET /admin/license-limit-information (6 ms) 200
+[2026-08-05 23:13:49.896] [32mhttp[39m: GET /content-manager/init (109 ms) 200
+[2026-08-05 23:13:50.095] [32mhttp[39m: GET /content-manager/content-types-settings (309 ms) 200
+[2026-08-05 23:13:50.132] [32mhttp[39m: GET /admin/guided-tour-meta (355 ms) 200
+[2026-08-05 23:13:50.234] [32mhttp[39m: GET /content-manager/init (101 ms) 200
+[2026-08-05 23:13:50.333] [32mhttp[39m: GET /content-manager/content-types/api::footer.footer/configuration (155 ms) 200
+[2026-08-05 23:13:50.438] [32mhttp[39m: GET /content-manager/single-types/api::footer.footer (258 ms) 404
+[2026-08-05 23:13:50.667] [32mhttp[39m: GET /admin/ai-feature-config (118 ms) 404
+[2026-08-05 23:13:50.679] [32mhttp[39m: GET /i18n/ai-localization-jobs/single-types/api::footer.footer (124 ms) 404
+[2026-08-05 23:13:50.699] [32mhttp[39m: GET /i18n/locales (146 ms) 200
+[2026-08-05 23:13:50.709] [32mhttp[39m: GET /i18n/settings (155 ms) 200
+[2026-08-05 23:14:48.122] [32minfo[39m: File changed: C:\Users\speed\Documents\scraft\ambient\cms\src\components\products\feature-card.json
+[2026-08-05 23:14:48.243] [32minfo[39m: File changed: C:\Users\speed\Documents\scraft\ambient\cms\seed-strapi.err
+[2026-08-05 23:14:50.045] [32minfo[39m: Shutting down Strapi
+[2026-08-05 23:14:50.322] [32minfo[39m: Strapi has been shut down
+┌───────────────────────────────────────────────────────────────────────────┐
+│                                                                           │
+│   Error: connect ETIMEDOUT 178.236.185.20:6000                            │
+│       at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)   │
+│                                                                           │
+└───────────────────────────────────────────────────────────────────────────┘

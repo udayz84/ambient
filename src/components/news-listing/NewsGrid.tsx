@@ -1,12 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import Image from "next/image";
+import { Fragment, useState } from "react";
 import { interRegular, gilroyMedium } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
 import { NewsArticleCard } from "./NewsArticleCard";
 import { type NewsArticle } from "./news-data";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+
+const scrollArrowLeft = "/applications/nav-arrow-right.svg";
 
 const ROW_ONE_BG = "bg-[rgba(255,255,255,0.04)]";
 const ROW_TWO_BG = "bg-[rgba(0,0,0,0.04)]";
@@ -54,32 +57,45 @@ function buildPills(data: any): Pill[] {
   });
 }
 
-function Tick({ height, tone }: { height: number; tone: "white" | "dark" }) {
-  return (
-    <span
-      aria-hidden
-      className={`w-px shrink-0 ${tone === "white" ? "bg-white/70" : "bg-[#333333]"}`}
-      style={{ height: `${height}px` }}
-    />
-  );
-}
+function CategoryDivider({
+  variant = "normal",
+}: {
+  variant?: "normal" | "before-active" | "after-active";
+}) {
+  const segments =
+    variant === "before-active"
+      ? [
+          { height: 4, color: "bg-[#333333]" },
+          { height: 5, color: "bg-[#333333]" },
+          { height: 6, color: "bg-[#333333]" },
+          { height: 7, color: "bg-white/70" },
+          { height: 8, color: "bg-white" },
+        ]
+      : variant === "after-active"
+      ? [
+          { height: 8, color: "bg-white" },
+          { height: 7, color: "bg-white/70" },
+          { height: 6, color: "bg-[#333333]" },
+          { height: 5, color: "bg-[#333333]" },
+          { height: 4, color: "bg-[#333333]" },
+        ]
+      : [
+          { height: 8, color: "bg-[#333333]" },
+          { height: 8, color: "bg-[#333333]" },
+          { height: 8, color: "bg-[#333333]" },
+          { height: 8, color: "bg-[#333333]" },
+          { height: 8, color: "bg-[#333333]" },
+        ];
 
-function NewsPill({ label }: { label: string }) {
   return (
-    <div
-      className="relative flex h-[44px] w-fit shrink-0 items-center justify-center overflow-clip bg-[#f0f0f0] px-[10px]"
-      data-node-id="2500:1853"
-      data-name="Cta"
-    >
-      <span
-        className={`${interRegular.className} relative text-[16px] leading-[24px] font-normal whitespace-nowrap text-[#0e1a0e] not-italic`}
-      >
-        {label}
-      </span>
-      <Corners
-        leftSrc="/applications/corners/tab-corner-tl.svg"
-        rightSrc="/applications/corners/tab-corner-tr.svg"
-      />
+    <div className="flex shrink-0 items-center gap-[8.36px]" aria-hidden>
+      {segments.map((seg, i) => (
+        <span
+          key={i}
+          className={`w-px ${seg.color}`}
+          style={{ height: `${seg.height}px` }}
+        />
+      ))}
     </div>
   );
 }
@@ -93,59 +109,94 @@ function NewsFilterBar({
   activeId: string;
   onSelect: (id: string) => void;
 }) {
+  const currentIndex = pills.findIndex((p) => p.id === activeId);
+
+  const handlePrevCategory = () => {
+    const prevIndex = currentIndex > 0 ? currentIndex - 1 : pills.length - 1;
+    onSelect(pills[prevIndex].id);
+  };
+
+  const handleNextCategory = () => {
+    const nextIndex = currentIndex < pills.length - 1 ? currentIndex + 1 : 0;
+    onSelect(pills[nextIndex].id);
+  };
+
   return (
-    <div
-      className="flex w-[712px] max-w-full items-center justify-between overflow-x-auto"
-      data-node-id="2500:1826"
-      data-name="Options"
+    <nav
+      className="flex h-[52px] w-full items-center justify-between gap-[9.61px]"
+      aria-label="News categories"
     >
+      <button
+        type="button"
+        className="relative size-[44px] shrink-0 cursor-pointer transition-opacity hover:opacity-80 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.03)]"
+        aria-label="Previous category"
+        onClick={handlePrevCategory}
+      >
+        <Corners />
+        <Image
+          src={scrollArrowLeft}
+          alt=""
+          width={44}
+          height={44}
+          className="block size-full max-w-none rotate-180"
+          aria-hidden
+        />
+      </button>
+
       {pills.map((pill, index) => {
-        const isActive = pill.id === activeId;
-        const isLast = index === pills.length - 1;
+        const isActive = activeId === pill.id;
+        const dividerVariant =
+          index === currentIndex
+            ? "before-active"
+            : index === currentIndex + 1
+            ? "after-active"
+            : "normal";
+
         return (
-          <div
-            className={`flex shrink-0 items-center ${isActive ? "gap-[24px]" : "gap-0"}`}
-            key={pill.id}
-          >
-            {isActive ? (
-              <>
-                <Tick height={7} tone="white" />
-                <Tick height={8} tone="white" />
-              </>
-            ) : (
-              <>
-                <Tick height={8} tone="dark" />
-                <Tick height={8} tone="dark" />
-              </>
-            )}
-
-            {isActive ? (
-              <NewsPill label={pill.label} />
-            ) : (
-              <button
-                type="button"
-                onClick={() => onSelect(pill.id)}
-                className={`${interRegular.className} shrink-0 cursor-pointer px-[20px] py-[14px] text-[16px] leading-[24px] font-normal whitespace-nowrap text-[#666] transition-colors not-italic hover:text-[#bdbdbd]`}
-              >
-                {pill.label}
-              </button>
-            )}
-
-            {isActive ? (
-              <>
-                <Tick height={8} tone="white" />
-                <Tick height={7} tone="white" />
-              </>
-            ) : isLast ? (
-              <>
-                <Tick height={8} tone="dark" />
-                <Tick height={8} tone="dark" />
-              </>
-            ) : null}
-          </div>
+          <Fragment key={`${pill.id}-${index}`}>
+            <CategoryDivider variant={dividerVariant} />
+            <button
+              type="button"
+              onClick={() => onSelect(pill.id)}
+              className={`${interRegular.className} relative flex h-[52px] shrink-0 cursor-pointer items-center justify-center px-[20px] text-[16px] leading-[24px] font-normal whitespace-nowrap not-italic transition-colors ${
+                isActive ? "text-[#0e1a0e]" : "text-[#666] hover:text-white"
+              }`}
+            >
+              {isActive ? (
+                <span className="pointer-events-none absolute inset-y-[4px] inset-x-[13px] overflow-clip bg-[#f0f0f0]">
+                  <Corners />
+                </span>
+              ) : null}
+              <span className="relative">{pill.label}</span>
+            </button>
+          </Fragment>
         );
       })}
-    </div>
+      <CategoryDivider
+        variant={
+          currentIndex === pills.length - 1
+            ? "after-active"
+            : "normal"
+        }
+      />
+
+      <button
+        type="button"
+        className="relative size-[44px] shrink-0 cursor-pointer transition-opacity hover:opacity-80 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.03)]"
+        aria-label="Next category"
+        onClick={handleNextCategory}
+      >
+        <Corners />
+        <Image
+          src={scrollArrowLeft}
+          alt=""
+          width={44}
+          height={44}
+          className="block size-full max-w-none"
+          aria-hidden
+        />
+      </button>
+    </nav>
   );
 }
 
@@ -193,7 +244,7 @@ export function NewsGrid({ data }: NewsGridProps = {}) {
       <div className="flex w-full min-[1024px]:w-[1236px] flex-col items-center gap-[60px] px-[24px] py-[64px] min-[1024px]:px-0">
         <NewsFilterBar pills={pills} activeId={activeId} onSelect={setActiveId} />
 
-        <div className="relative z-10 flex w-full flex-col items-center bg-transparent">
+        <div className="relative z-10 flex w-full flex-col items-center gap-[36px] bg-transparent">
           <div className="grid w-full grid-cols-1 gap-[36px] min-[1024px]:grid-cols-3">
             {activeCards.slice(0, 3).map((article, i) => (
               <NewsArticleCard
