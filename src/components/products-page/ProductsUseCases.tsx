@@ -216,9 +216,9 @@ function ProductsUseCasesDesktop({
       <h3
         className={`${gilroyExtraBold.className} absolute m-0 text-center text-[200px] uppercase whitespace-nowrap tracking-[0.5px] leading-[210px] bg-clip-text text-transparent [word-break:break-word] not-italic`}
         style={{
-          left: 184.69921875,
+          left: 0,
           top: 345,
-          width: 1079,
+          width: USECASES_CANVAS_WIDTH,
           height: 210,
           backgroundImage: WATERMARK_GRADIENT,
           WebkitBackgroundClip: "text",
