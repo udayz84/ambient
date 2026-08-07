@@ -1,12 +1,22 @@
+"use client";
+
+import { useState } from "react";
 import { mediaUrl } from "@/lib/strapi";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import {
   ARCH_ARTICLE,
+  ARCH_ASSETS,
+  ARCH_BLOCKS,
   ARCH_CAPTION,
+  ARCH_FRAME,
   ARCH_FRAME_WIDTH,
-  ARCH_IMAGE,
+  ARCH_HIGHLIGHTS,
+  ARCH_HIGHLIGHT_RECT,
+  ARCH_LINES,
   ARCH_STAT,
+  ARCH_STAT_ACTIVE_BG,
+  ARCH_STAT_ACTIVE_BORDER,
   ARCH_STATS,
   ARCH_STATS_FRAME,
   ARCH_TITLE_GRADIENT,
@@ -34,6 +44,7 @@ function splitLines(value: string): string[] {
  * vertical stats column (3529:623).
  */
 export function ProductsArchitecture({ data }: { data?: any }) {
+  const [hoveredIndex, setHoveredIndex] = useState(-1);
   const label = data?.label || FALLBACK_LABEL;
   const heading = data?.heading || FALLBACK_HEADING;
   const headingLines = splitLines(heading);
@@ -65,6 +76,8 @@ export function ProductsArchitecture({ data }: { data?: any }) {
           image={image}
           caption={caption}
           stats={stats}
+          hoveredIndex={hoveredIndex}
+          onHover={setHoveredIndex}
         />
       </section>
 
@@ -162,13 +175,120 @@ function MenuChip({ label }: { label: string }) {
   );
 }
 
+/**
+ * Figma 4443:7622 — layered chip "Architecture" frame (821×556), rendered
+ * from the exact Figma assets at native size so the per-stat highlight
+ * rects land at exact pixel coordinates. Default layers sit underneath;
+ * the green hover layers (base + lines + blocks) cross-fade in on any
+ * hover, and each stat's highlight rects fade in for the active stat.
+ */
+function ArchDiagram({ hoveredIndex }: { hoveredIndex: number }) {
+  const hovering = hoveredIndex !== -1;
+  const fade = "transition-opacity duration-500 ease-in-out";
+  return (
+    <div
+      className="pointer-events-none absolute"
+      style={{
+        left: ARCH_FRAME.left,
+        top: ARCH_FRAME.top,
+        width: ARCH_FRAME.width,
+        height: ARCH_FRAME.height,
+      }}
+      data-node-id="4443:7622"
+      data-name="Architecture"
+    >
+      {/* Default layers */}
+      <div className={`absolute inset-0 ${fade} ${hovering ? "opacity-0" : "opacity-100"}`}>
+        {/* Base — 4443:7623 */}
+        <div className="absolute left-[10px] top-[20px] h-[536px] w-[811px]">
+          <div className="absolute inset-0 overflow-hidden">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img alt="" aria-hidden src={ARCH_ASSETS.baseDefault} className="absolute left-[-3.08%] top-[-1.1%] h-[107.25%] w-[106.33%] max-w-none" />
+          </div>
+        </div>
+        {/* Blocks (default texture) */}
+        {ARCH_BLOCKS.map((b, i) => (
+          <div key={i} className="absolute overflow-hidden" style={{ left: b.left, top: b.top, width: b.width, height: b.height }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img alt="" aria-hidden src={ARCH_ASSETS.blockDefault} className="absolute max-w-none" style={{ height: b.defaultInsetImg.height, left: b.defaultInsetImg.left, top: b.defaultInsetImg.top, width: b.defaultInsetImg.width }} />
+          </div>
+        ))}
+        {/* Lines (default) */}
+        {ARCH_LINES.map((l, i) => (
+          <ArchLine key={i} line={l} src={l.defaultSrc} />
+        ))}
+      </div>
+
+      {/* Hover layers (green) */}
+      <div className={`absolute inset-0 ${fade} ${hovering ? "opacity-100" : "opacity-0"}`}>
+        {/* Base hover — 4444:7876 */}
+        <div className="absolute left-[10px] top-[20px] h-[536px] w-[811px]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img alt="" aria-hidden src={ARCH_ASSETS.baseHover} className="absolute inset-0 size-full max-w-none object-bottom" />
+        </div>
+        {/* Blocks (hover) */}
+        {ARCH_BLOCKS.map((b, i) => (
+          <div key={i} className="absolute overflow-hidden" style={{ left: b.left, top: b.top, width: b.width, height: b.height }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img alt="" aria-hidden src={b.hoverSrc} className="absolute inset-0 size-full max-w-none object-bottom" />
+          </div>
+        ))}
+        {/* Lines (hover) */}
+        {ARCH_LINES.map((l, i) => (
+          <ArchLine key={i} line={l} src={l.hoverSrc} />
+        ))}
+      </div>
+
+      {/* Per-stat highlight rects — Figma 4444:7896/7897, 7920/7921, 8006/8007 */}
+      {ARCH_HIGHLIGHTS.map((rects, statIndex) => (
+        <div key={statIndex} className={`absolute inset-0 ${fade} ${hoveredIndex === statIndex ? "opacity-100" : "opacity-0"}`}>
+          {rects.map((rect, rectIndex) => (
+            <div key={rectIndex} className={`absolute ${ARCH_HIGHLIGHT_RECT}`} style={{ left: rect.left, top: rect.top, width: rect.width, height: rect.height }}>
+              <div className="absolute inset-0 overflow-hidden rounded-[6px]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img alt="" aria-hidden src={ARCH_ASSETS.blockDefault} className="absolute max-w-none" style={{ height: rect.fillImg.height, left: rect.fillImg.left, top: rect.fillImg.top, width: rect.fillImg.width }} />
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ArchLine({ line, src }: { line: (typeof ARCH_LINES)[number]; src: string }) {
+  if (line.rotate) {
+    return (
+      <div className="absolute flex items-center justify-center" style={{ left: line.left, top: line.top, width: line.width, height: line.height }}>
+        <div className={`flex-none ${line.rotate}`}>
+          <div className="relative" style={{ width: line.innerWidth, height: line.innerHeight ?? 0 }}>
+            <div className={`absolute ${line.inset}`}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img alt="" aria-hidden src={src} className="block size-full max-w-none" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="absolute" style={{ left: line.left, top: line.top, width: line.width, height: line.height }}>
+      <div className={`absolute ${line.inset}`}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img alt="" aria-hidden src={src} className="block size-full max-w-none" />
+      </div>
+    </div>
+  );
+}
+
 function ProductsArchitectureDesktop({
   label,
   headingLines,
   subtitle,
-  image,
   caption,
   stats,
+  hoveredIndex,
+  onHover,
 }: {
   label: string;
   headingLines: string[];
@@ -176,6 +296,8 @@ function ProductsArchitectureDesktop({
   image: string | null;
   caption: string;
   stats: any[];
+  hoveredIndex: number;
+  onHover: (i: number) => void;
 }) {
   return (
     <div
@@ -227,28 +349,7 @@ function ProductsArchitectureDesktop({
           data-node-id="3529:616"
           data-name="Article"
         >
-          <div
-            className="absolute"
-            style={{
-              left: ARCH_IMAGE.left,
-              top: ARCH_IMAGE.top,
-              width: ARCH_IMAGE.width,
-              height: ARCH_IMAGE.height,
-            }}
-            data-node-id="3529:617"
-            data-name="Architecture 1"
-          >
-            <div className="pointer-events-none absolute inset-0 overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              {image && (
-                <img
-                  alt="GPX10 Pro architecture"
-                  src={image}
-                  className="absolute inset-0 size-full object-contain object-center"
-                />
-              )}
-            </div>
-          </div>
+          <ArchDiagram hoveredIndex={hoveredIndex} />
           {/* Corner ticks — 3529:618-621 (right/bottom ones clipped per design) */}
           <CornerTick src={CORNER_LEFT} placement="tl" nodeId="3529:618" style={{ left: -0.5, top: -0.5 }} />
           <CornerTick src={CORNER_RIGHT} placement="tr" nodeId="3529:619" style={{ right: -40.5, top: -0.5 }} />
@@ -269,9 +370,15 @@ function ProductsArchitectureDesktop({
           style={{ width: ARCH_STATS_FRAME.width, height: ARCH_ARTICLE.height }}
           data-node-id="3529:623"
           data-name="Frame 1000003873"
+          onMouseLeave={() => onHover(-1)}
         >
-          {stats.map((stat) => (
-            <ArchStatView key={stat.nodeId} stat={stat} />
+          {stats.map((stat, index) => (
+            <ArchStatView
+              key={stat.nodeId}
+              stat={stat}
+              isActive={hoveredIndex === index}
+              onHover={() => onHover(index)}
+            />
           ))}
         </div>
       </div>
@@ -279,10 +386,23 @@ function ProductsArchitectureDesktop({
   );
 }
 
-function ArchStatView({ stat }: { stat: any }) {
+function ArchStatView({
+  stat,
+  isActive = false,
+  onHover,
+}: {
+  stat: any;
+  isActive?: boolean;
+  onHover?: () => void;
+}) {
   return (
     <div
-      className="relative flex flex-1 w-full flex-col items-start justify-center gap-[12px] px-[28px] py-[16px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.1)] overflow-hidden"
+      className="relative flex flex-1 w-full flex-col items-start justify-center gap-[12px] px-[28px] py-[16px] border-[0.5px] border-solid overflow-hidden transition-colors duration-300"
+      style={{
+        backgroundColor: isActive ? ARCH_STAT_ACTIVE_BG : "rgba(0,0,0,0.1)",
+        borderColor: isActive ? ARCH_STAT_ACTIVE_BORDER : "rgba(240,240,240,0.2)",
+      }}
+      onMouseEnter={onHover}
       data-node-id={stat.nodeId}
       data-name="Stat"
     >

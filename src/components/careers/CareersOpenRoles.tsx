@@ -144,7 +144,7 @@ export function CareersOpenRoles({
 
       {/* 2379:8902 — header row */}
       <div
-        className="flex h-[60px] w-[1204px] shrink-0 items-end justify-between"
+        className="sticky top-[78px] z-50 flex h-[80px] w-[1204px] shrink-0 items-end justify-between bg-black pb-[10px] pt-[10px]"
         data-node-id="2379:8902"
       >
         <OpenRolesTitle title={heading} />
@@ -252,10 +252,11 @@ export function CareersOpenRoles({
         </div>
       </div>
       
-      <CareersApplicationModal 
-        isOpen={!!selectedJob} 
-        onClose={() => setSelectedJob(null)} 
-        jobTitle={selectedJob || undefined} 
+      <CareersApplicationModal
+        isOpen={!!selectedJob}
+        onClose={() => setSelectedJob(null)}
+        jobTitle={selectedJob || undefined}
+        roles={jobs.map((j: any) => j.title).filter(Boolean)}
       />
     </section>
   );

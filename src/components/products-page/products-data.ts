@@ -447,13 +447,25 @@ export const ARCH_TITLE_GRADIENT =
 /** Figma 3713:1965 — root content width. */
 export const ARCH_FRAME_WIDTH = 1235;
 
-/** Figma 3529:616 — "Article" image card. */
+/** Figma 3529:616 — "Article" image card (matches variant Article 831×632). */
 export const ARCH_ARTICLE = {
   width: 831,
-  height: 558,
+  height: 632,
 };
 
-/** Figma 3529:617 — architecture image box inside the article card. */
+/**
+ * Figma 4443:7622 — the "Architecture" frame holding the layered chip
+ * diagram. Rendered at native 821×556 so the per-stat highlight rects land
+ * at exact pixel coordinates from the hover variants.
+ */
+export const ARCH_FRAME = {
+  left: -0.5,
+  top: -0.5,
+  width: 821,
+  height: 556,
+};
+
+/** Kept for compatibility (no longer the diagram container). */
 export const ARCH_IMAGE = {
   left: 9.5,
   top: 9.5,
@@ -461,10 +473,10 @@ export const ARCH_IMAGE = {
   height: 492,
 };
 
-/** Figma 3529:622 — caption inside the article card. */
+/** Figma 4443:7621 — caption inside the article card. */
 export const ARCH_CAPTION = {
-  left: 15.5,
-  top: 515.5,
+  left: 25.5,
+  top: 574.5,
 };
 
 /** Figma 3529:623 — stats column (height is content-driven). */
@@ -506,6 +518,125 @@ export const ARCH_STATS: ArchStat[] = [
     titleWidth: 279,
   },
 ];
+
+/* ------------------------------------------------------------------ */
+/* Architecture diagram layers — Figma Default (4443:7622) + hover     */
+/* variants (4444:8011 / 8009 / 8010). Rendered at native 821×556.     */
+/* ------------------------------------------------------------------ */
+
+export const ARCH_ASSETS = {
+  baseDefault: "/products/arch/base-default.png",
+  baseHover: "/products/arch/base-hover.png",
+  blockDefault: "/products/arch/block-default.png",
+  block3Hover: "/products/arch/block3-hover.png",
+  block1Hover: "/products/arch/block1-hover.png",
+  block2Hover: "/products/arch/block2-hover.png",
+};
+
+/** Figma 4443:7624 / 7645 / 7646 — small chip blocks (positions stable). */
+export const ARCH_BLOCKS = [
+  {
+    left: 202,
+    top: 283,
+    width: 38,
+    height: 27,
+    defaultInsetImg: { height: "2129.18%", left: "-573.56%", top: "-969.92%", width: "2269.26%" },
+    hoverSrc: ARCH_ASSETS.block3Hover,
+  },
+  {
+    left: 211,
+    top: 414,
+    width: 22,
+    height: 50,
+    defaultInsetImg: { height: "1149.76%", left: "-1022.52%", top: "-691.76%", width: "3919.63%" },
+    hoverSrc: ARCH_ASSETS.block1Hover,
+  },
+  {
+    left: 203,
+    top: 242,
+    width: 22,
+    height: 45,
+    defaultInsetImg: { height: "1277.51%", left: "-1022.52%", top: "-775.29%", width: "3919.63%" },
+    hoverSrc: ARCH_ASSETS.block2Hover,
+  },
+];
+
+/**
+ * Figma 4443:7629–7644 — connection line vectors. `rotate` lines wrap the
+ * SVG in a flex-centered rotation box; plain lines place the inset image
+ * directly. Default + hover SVGs share identical geometry.
+ */
+export type ArchLine = {
+  left: number;
+  top: number;
+  width: number;
+  height: number;
+  rotate?: string;
+  innerWidth?: number;
+  innerHeight?: number;
+  inset: string;
+  defaultSrc: string;
+  hoverSrc: string;
+};
+
+const L = "/products/arch";
+export const ARCH_LINES: ArchLine[] = [
+  { left: 205.5, top: 88, width: 0, height: 40.648, rotate: "rotate-90", innerWidth: 40.648, inset: "inset-[-4.5px_-9.84%]", defaultSrc: `${L}/line-default-921.svg`, hoverSrc: `${L}/line-hover-926.svg` },
+  { left: 207, top: 143.5, width: 0, height: 23.887, rotate: "rotate-90", innerWidth: 23.887, inset: "inset-[-4.5px_-16.75%]", defaultSrc: `${L}/line-default-922.svg`, hoverSrc: `${L}/line-hover-927.svg` },
+  { left: 203, top: 443, width: 7.887, height: 0, inset: "inset-[-8.62px_-50.72%_-8.62px_-52.15%]", defaultSrc: `${L}/line-default-934.svg`, hoverSrc: `${L}/line-hover-939.svg` },
+  { left: 195, top: 265, width: 7.887, height: 0, inset: "inset-[-8.62px_-50.72%_-8.62px_-52.15%]", defaultSrc: `${L}/line-default-935.svg`, hoverSrc: `${L}/line-hover-940.svg` },
+  { left: 206, top: 196.5, width: 0, height: 9.066, rotate: "rotate-90", innerWidth: 9.066, inset: "inset-[-4.5px_-44.12%]", defaultSrc: `${L}/line-default-924.svg`, hoverSrc: `${L}/line-hover-941.svg` },
+  { left: 160.76, top: 196, width: 45.738, height: 0, inset: "inset-[-4.5px_-8.75%]", defaultSrc: `${L}/line-default-925.svg`, hoverSrc: `${L}/line-hover-942.svg` },
+  { left: 160.77, top: 144, width: 45.735, height: 0, inset: "inset-[-4.5px_-8.75%]", defaultSrc: `${L}/line-default-923.svg`, hoverSrc: `${L}/line-hover-943.svg` },
+  { left: 556.76, top: 264.63, width: 26.695, height: 0, rotate: "rotate-180", innerWidth: 26.695, inset: "inset-[-4.62px_0]", defaultSrc: `${L}/line-default-936.svg`, hoverSrc: `${L}/line-hover-944.svg` },
+  { left: 557.51, top: 264.62, width: 0.168, height: 21.687, rotate: "rotate-[90.21deg]", innerWidth: 21.687, innerHeight: 0.088, inset: "inset-[-904.29%_0]", defaultSrc: `${L}/line-default-937.svg`, hoverSrc: `${L}/line-hover-945.svg` },
+  { left: 557.59, top: 295.98, width: 0, height: 88.165, rotate: "-rotate-90", innerWidth: 88.165, inset: "inset-[-4.62px_-0.91%_-4.62px_0]", defaultSrc: `${L}/line-default-938.svg`, hoverSrc: `${L}/line-hover-946.svg` },
+  { left: 482.5, top: 291, width: 182.301, height: 4, inset: "inset-[-20%_0_-115.47%_0]", defaultSrc: `${L}/line-default-928.svg`, hoverSrc: `${L}/line-hover-947.svg` },
+  { left: 664, top: 295.5, width: 0, height: 76.5, rotate: "rotate-90", innerWidth: 76.5, inset: "inset-[-0.8px_0]", defaultSrc: `${L}/line-default-929.svg`, hoverSrc: `${L}/line-hover-948.svg` },
+  { left: 340, top: 498, width: 13.559, height: 0, inset: "inset-[-4.8px_-29.5%]", defaultSrc: `${L}/line-default-930.svg`, hoverSrc: `${L}/line-hover-949.svg` },
+  { left: 182.2, top: 498, width: 42.297, height: 0, inset: "inset-[-4.8px_-9.46%]", defaultSrc: `${L}/line-default-933.svg`, hoverSrc: `${L}/line-hover-950.svg` },
+  { left: 353, top: 464.37, width: 0, height: 34.426, rotate: "rotate-90", innerWidth: 34.426, inset: "inset-[-4.8px_-11.62%]", defaultSrc: `${L}/line-default-931.svg`, hoverSrc: `${L}/line-hover-951.svg` },
+  { left: 183, top: 443.59, width: 0, height: 55.199, rotate: "rotate-90", innerWidth: 55.199, inset: "inset-[-4.8px_-7.25%]", defaultSrc: `${L}/line-default-932.svg`, hoverSrc: `${L}/line-hover-952.svg` },
+];
+
+/**
+ * Per-stat highlight rectangles (Figma 4444:7896/7897, 7920/7921,
+ * 8006/8007). Raw px inside the 821×556 frame; `fillImg` is the green
+ * texture (block-default) positioned per the variant.
+ */
+export type ArchHighlightRect = {
+  left: number;
+  top: number;
+  width: number;
+  height: number;
+  fillImg: { height: string; left: string; top: string; width: string };
+};
+
+export const ARCH_HIGHLIGHTS: ArchHighlightRect[][] = [
+  // A-Cube compute
+  [
+    { left: 570, top: 193, width: 174, height: 98, fillImg: { height: "658.85%", left: "-386.42%", top: "-214.87%", width: "558.31%" } },
+    { left: 618, top: 370, width: 133, height: 84, fillImg: { height: "677.75%", left: "-469.95%", top: "-419.67%", width: "642.08%" } },
+  ],
+  // Two power domains
+  [
+    { left: 542, top: 57, width: 192, height: 115, fillImg: { height: "489.3%", left: "-283.74%", top: "-38.69%", width: "439.61%" } },
+    { left: 613, top: 474, width: 103, height: 44, fillImg: { height: "1378.33%", left: "-646.28%", top: "-1104.85%", width: "883.2%" } },
+  ],
+  // Integrated sensing
+  [
+    { left: 22, top: 62, width: 145, height: 419, fillImg: { height: "136.75%", left: "-24.12%", top: "-11.29%", width: "592.76%" } },
+    { left: 434, top: 350, width: 49, height: 140, fillImg: { height: "412.91%", left: "-919.21%", top: "-241.36%", width: "1769.62%" } },
+  ],
+];
+
+/** Figma 4444:7896 — highlight rect border + glow. */
+export const ARCH_HIGHLIGHT_RECT =
+  "border-[1.09px] border-[#47b81f] border-solid rounded-[6px] shadow-[0px_7px_7.1px_0px_rgba(111,224,71,0.3)]";
+
+/** Figma 4444:7780 — active stat card surface + border. */
+export const ARCH_STAT_ACTIVE_BG = "rgba(68,120,7,0.2)";
+export const ARCH_STAT_ACTIVE_BORDER = "rgba(83,216,36,0.5)";
 
 /* ------------------------------------------------------------------ */
 /* ModelForge "Train / Compile / Deploy" section — Figma 2917:1333 /  */
