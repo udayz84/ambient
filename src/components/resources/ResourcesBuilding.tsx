@@ -5,7 +5,7 @@ import { WhiteCtaButton } from "../contact/contact-shared";
 const BUILDING_TITLE_GRADIENT =
   "linear-gradient(122.573deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
-const FALLBACK_BG = "/resources/building-bg.png";
+const FALLBACK_BG = "/Rectangle 1618873545.png";
 const BUILDING_TITLE_FRAME = "/resources/building-title-frame.svg";
 
 type ResourcesBuildingProps = {
@@ -26,15 +26,15 @@ export function ResourcesBuilding({ data }: ResourcesBuildingProps = {}) {
       data-node-id="2379:1606"
     >
       <div
-        className="pointer-events-none absolute top-[-68px] left-1/2 h-[581px] w-[1440px] -translate-x-1/2 drop-shadow-[0px_4px_12px_rgba(0,0,0,0.25)]"
+        className="pointer-events-none absolute inset-0 w-full h-full"
         data-node-id="2379:1607"
       >
-        <div className="absolute top-[55px] left-0 h-[489px] w-[1440px] overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
           <Image
             src={bgSrc}
             alt=""
             fill
-            className="object-cover object-bottom"
+            className="object-cover object-center"
             sizes="1440px"
             unoptimized
           />
@@ -42,7 +42,7 @@ export function ResourcesBuilding({ data }: ResourcesBuildingProps = {}) {
             className="absolute inset-0"
             style={{
               backgroundImage:
-                "linear-gradient(90deg, rgba(0, 0, 0, 0.7) 47.014%, rgba(0, 0, 0, 0) 100%), url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 1440 489' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-7.9627e-16 19.307 -44.268 -8.7713e-16 720 244.5)'><stop stop-color='rgba(0,0,0,0)' offset='0'/><stop stop-color='rgba(0,0,0,1)' offset='1'/></radialGradient></defs></svg>\")"
+                "linear-gradient(90deg, rgba(0, 0, 0, 0.55) 47.014%, rgba(0, 0, 0, 0) 100%), url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 1440 513' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-7.9627e-16 19.307 -44.268 -8.7713e-16 720 256.5)'><stop stop-color='rgba(0,0,0,0)' offset='0'/><stop stop-color='rgba(0,0,0,0.6)' offset='1'/></radialGradient></defs></svg>\")"
             }}
             aria-hidden
           />

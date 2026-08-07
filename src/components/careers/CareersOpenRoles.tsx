@@ -42,7 +42,7 @@ export function CareersOpenRoles({
 } = {}) {
   const [jobTypeFilter, setJobTypeFilter] = useState<string>("all");
   const [locationFilter, setLocationFilter] = useState<string>("all");
-  const [selectedJob, setSelectedJob] = useState<string | null>(null);
+  const [selectedJob, setSelectedJob] = useState<any | null>(null);
 
   const heading = data?.heading || "";
   const generalAppTitle = data?.general_app_title || "";
@@ -189,7 +189,7 @@ export function CareersOpenRoles({
               category={job.category}
               location={job.location}
               applyLabel={applyButtonLabel}
-              onApply={() => setSelectedJob(job.title)}
+              onApply={() => setSelectedJob(job)}
               nodeId={JOB_ROW_NODE_IDS[index] ?? JOB_ROW_NODE_IDS[0]}
             />
           ))
@@ -255,8 +255,13 @@ export function CareersOpenRoles({
       <CareersApplicationModal
         isOpen={!!selectedJob}
         onClose={() => setSelectedJob(null)}
-        jobTitle={selectedJob || undefined}
+        jobTitle={selectedJob?.title || undefined}
         roles={jobs.map((j: any) => j.title).filter(Boolean)}
+        jobDescription={selectedJob ? {
+          about_role: selectedJob.about_role,
+          responsibilities: selectedJob.responsibilities,
+          perks_benefits: selectedJob.perks_benefits,
+        } : undefined}
       />
     </section>
   );

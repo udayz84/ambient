@@ -129,7 +129,7 @@ function SomLabel({ value, label, sublabel }: { value: string; label: string; su
 
 function SomCard({ visual, isUpcoming, statusPill, value, label, sublabel }: { visual: React.ReactNode; isUpcoming?: boolean; statusPill: string; value: string; label: string; sublabel: string }) {
   return (
-    <div className="flex w-full flex-col items-center gap-[32px]">
+    <div className="flex w-[450px] shrink-0 flex-col items-center gap-[32px]">
       <div className="flex h-[320px] w-full px-[30px] items-center justify-center">
         <div
           className={`relative flex items-center justify-center overflow-clip transition-transform ${isUpcoming ? 'h-[260px] w-[80%] scale-95' : 'h-[320px] w-full'}`}
@@ -274,7 +274,7 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
         </div>
 
         {/* 3 SOM cards */}
-        <div className="flex w-full items-start justify-center gap-[40px]">
+        <div className="flex w-full items-start justify-start gap-[40px] pl-[235px] overflow-visible">
           {cards.map((card) => (
             <SomCard
               key={card.key}

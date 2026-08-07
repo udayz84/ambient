@@ -33,8 +33,16 @@
       "enum": ["full_time", "part_time", "contract"],
       "default": "full_time"
     },
-    "description": {
-      "type": "richtext"
+    "about_role": {
+      "type": "text"
+    },
+    "responsibilities": {
+      "type": "text",
+      "description": "Enter each responsibility on a new line"
+    },
+    "perks_benefits": {
+      "type": "text",
+      "description": "Enter each perk or benefit on a new line"
     },
     "apply_url": {
       "type": "string",

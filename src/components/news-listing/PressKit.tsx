@@ -140,15 +140,15 @@ export function PressKit({ data }: PressKitProps = {}) {
       {/* DESKTOP (>=1024px) — exact Figma layout */}
       <div className="relative hidden h-[489px] w-[1440px] min-[1024px]:block">
         <div
-          className="pointer-events-none absolute left-[700px] top-[15px] h-[460px] w-[720px]"
+          className="pointer-events-none absolute left-0 top-0 h-[489px] w-[1440px]"
           aria-hidden
         >
           <Image
             src="/news-listing/press-kit-graphic.png"
             alt=""
             fill
-            className="object-contain"
-            sizes="633px"
+            className="object-contain object-right"
+            sizes="1440px"
           />
         </div>
 

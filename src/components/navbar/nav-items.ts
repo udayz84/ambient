@@ -20,13 +20,26 @@ type RawNavItem = {
   sub_items?: unknown;
 };
 
-function mapStrapiSubItems(items: unknown): NavSubItem[] | undefined {
+function mapStrapiSubItems(items: unknown, parentLabel?: string): NavSubItem[] | undefined {
   if (!Array.isArray(items)) return undefined;
   const mapped = (items as RawNavItem[])
-    .map((raw) => ({
-      label: typeof raw?.label === "string" ? raw.label : "",
-      href: typeof raw?.href === "string" && raw.href ? raw.href : "#",
-    }))
+    .map((raw) => {
+      let href = typeof raw?.href === "string" && raw.href ? raw.href : "#";
+      
+      if (href !== "#" && !href.startsWith("/") && !href.startsWith("http")) {
+        const pLabel = parentLabel?.toLowerCase() || "";
+        if (pLabel === "application" || pLabel === "applications") {
+          href = `/applications/${href}`;
+        } else {
+          href = `/${href}`;
+        }
+      }
+
+      return {
+        label: typeof raw?.label === "string" ? raw.label : "",
+        href,
+      };
+    })
     .filter((item) => item.label.length > 0);
   return mapped.length > 0 ? mapped : undefined;
 }
@@ -38,8 +51,12 @@ export function mapStrapiNavItems(
   const mapped = (items as RawNavItem[])
     .map((raw) => {
       const label = typeof raw?.label === "string" ? raw.label : "";
-      const children = mapStrapiSubItems(raw?.children) ?? mapStrapiSubItems(raw?.sub_items);
-      const href = typeof raw?.href === "string" && raw.href ? raw.href : "#";
+      const children = mapStrapiSubItems(raw?.children, label) ?? mapStrapiSubItems(raw?.sub_items, label);
+      let href = typeof raw?.href === "string" && raw.href ? raw.href : "#";
+
+      if (href !== "#" && !href.startsWith("/") && !href.startsWith("http")) {
+        href = `/${href}`;
+      }
 
       return {
         label,

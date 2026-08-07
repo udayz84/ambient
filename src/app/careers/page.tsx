@@ -44,6 +44,9 @@ export default async function CareersPage() {
         location: job.location?.name || "Unknown",
         apply_url: job.apply_url,
         category: job.category?.name || "Unknown",
+        about_role: job.about_role || "",
+        responsibilities: job.responsibilities || "",
+        perks_benefits: job.perks_benefits || "",
       }));
 
       const categories = Array.from(new Set(data.open_roles.fetchedJobs.map((j: any) => j.category)));

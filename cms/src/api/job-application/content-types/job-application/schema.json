@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "job_applications",
+  "info": {
+    "singularName": "job-application",
+    "pluralName": "job-applications",
+    "displayName": "Job Applications",
+    "description": "Applications submitted via the careers Apply Now form"
+  },
+  "options": { "draftAndPublish": false },
+  "pluginOptions": {},
+  "attributes": {
+    "full_name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "required": true,
+      "maxLength": 30
+    },
+    "role": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "other_role": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "resume": {
+      "type": "media",
+      "allowedTypes": ["files"],
+      "multiple": false
+    },
+    "cover_letter": {
+      "type": "text"
+    },
+    "consent": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

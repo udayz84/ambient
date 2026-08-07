@@ -23,6 +23,16 @@ function NavChevron({ className = "" }: { className?: string }) {
   );
 }
 
+function ShoppingCartIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <circle cx="9" cy="21" r="1"></circle>
+      <circle cx="20" cy="21" r="1"></circle>
+      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+    </svg>
+  );
+}
+
 function NavItem({ item }: { item: any }) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
@@ -39,6 +49,8 @@ function NavItem({ item }: { item: any }) {
     return () => document.removeEventListener("click", handleClickOutside);
   }, [isOpen]);
 
+  const isShop = item.label?.toLowerCase() === "shop";
+
   if (item.hasChevron || item.children?.length) {
     return (
       <div 
@@ -52,10 +64,9 @@ function NavItem({ item }: { item: any }) {
             e.stopPropagation();
             setIsOpen(!isOpen);
           }}
-          className="flex items-center gap-[12px] shrink-0 text-center text-[14px] leading-[normal] font-medium tracking-[-0.42px] whitespace-nowrap text-white transition-opacity hover:opacity-80"
+          className="flex items-center gap-[6px] shrink-0 text-center text-[14px] leading-[normal] font-medium tracking-[-0.42px] whitespace-nowrap text-white transition-opacity hover:opacity-80"
         >
           {item.label}
-          <NavChevron className={`transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
         </button>
         <div
           onClick={(e) => e.stopPropagation()}
@@ -88,15 +99,88 @@ function NavItem({ item }: { item: any }) {
     );
   }
 
+  if (isShop) {
+    return (
+      <span className="contents">
+        <Link
+          href={item.href}
+          className="relative flex h-[36px] items-center gap-[6px] shrink-0 justify-center bg-white px-[20px] shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15)] transition-opacity hover:opacity-90"
+        >
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-[length:307.2px_307.2px] bg-top-left opacity-40 mix-blend-plus-lighter"
+            style={{ backgroundImage: "url(/contact/cta-texture.png)" }}
+          />
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(45,45,45,0.6)]"
+          />
+          <span className="relative z-10 flex items-center gap-[6px] text-[#121212]">
+            <ShoppingCartIcon />
+            <span className="text-[14px] leading-[normal] font-bold uppercase tracking-[-0.42px] whitespace-nowrap">
+              {item.label}
+            </span>
+          </span>
+          <div className="pointer-events-none absolute right-0 top-0 z-20 flex size-[4px] items-center justify-center">
+            <div className="-scale-x-100 -scale-y-100 flex-none">
+              <div className="relative size-[4px]">
+                <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+                  <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none brightness-0" aria-hidden />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="pointer-events-none absolute left-0 top-0 z-20 flex size-[4px] items-center justify-center">
+            <div className="-scale-y-100 flex-none">
+              <div className="relative size-[4px]">
+                <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+                  <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none brightness-0" aria-hidden />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="pointer-events-none absolute bottom-0 right-0 z-20 flex size-[4px] items-center justify-center">
+            <div className="-scale-x-100 flex-none">
+              <div className="relative size-[4px]">
+                <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+                  <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none brightness-0" aria-hidden />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="pointer-events-none absolute bottom-0 left-0 z-20 size-[4px]">
+            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+              <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none brightness-0" aria-hidden />
+            </div>
+          </div>
+        </Link>
+      </span>
+    );
+  }
+
   return (
     <span className="contents">
       <Link
         href={item.href}
-        className="shrink-0 text-center text-[14px] leading-[normal] font-medium tracking-[-0.42px] whitespace-nowrap text-white transition-opacity hover:opacity-80"
+        className="flex items-center gap-[6px] shrink-0 text-center text-[14px] leading-[normal] font-medium tracking-[-0.42px] whitespace-nowrap text-white transition-opacity hover:opacity-80"
       >
         {item.label}
       </Link>
     </span>
+  );
+}
+
+function NavVectorDivider() {
+  return (
+    <div className="flex items-center justify-center mx-[2px] opacity-50" aria-hidden="true">
+      <Image
+        src="/hero/line-cap-left.svg"
+        alt=""
+        width={5}
+        height={4}
+        className="block"
+      />
+    </div>
   );
 }
 
@@ -178,8 +262,12 @@ export function Navbar({ data, brandData }: { data?: any; brandData?: any }) {
           aria-label="Main"
           data-node-id="2379:1575"
         >
+          <NavVectorDivider />
           {navItems.map((item, index) => (
-            <NavItem key={item.label} item={item} />
+            <Fragment key={item.label}>
+              {index > 0 && <NavVectorDivider />}
+              <NavItem item={item} />
+            </Fragment>
           ))}
         </nav>
 

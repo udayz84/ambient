@@ -1,3 +1,7 @@
+"use client";
+
+import Image from "next/image";
+import { useState } from "react";
 import { mediaUrl } from "@/lib/strapi";
 import { CompanyAdvisoryBoardTitle } from "./CompanyAdvisoryBoardTitle";
 import { CompanyLeadershipCard } from "./CompanyLeadershipCard";
@@ -30,6 +34,8 @@ type CompanyAdvisoryBoardProps = {
 };
 
 export function CompanyAdvisoryBoard({ data }: CompanyAdvisoryBoardProps = {}) {
+  const [activeIndex, setActiveIndex] = useState(0);
+
   const strapiAdvisors = Array.isArray(data) ? data : null;
   const members: LeadershipMember[] =
     strapiAdvisors && strapiAdvisors.length > 0
@@ -42,11 +48,14 @@ export function CompanyAdvisoryBoard({ data }: CompanyAdvisoryBoardProps = {}) {
         )
       : ADVISORY_BOARD;
 
-  // No Strapi advisory data and no fallback advisors — hide the section
-  // entirely rather than rendering an empty title block.
   if (members.length === 0) {
     return null;
   }
+
+  const showArrows = members.length > 4;
+
+  const handlePrev = () => setActiveIndex((prev) => Math.max(0, prev - 1));
+  const handleNext = () => setActiveIndex((prev) => Math.min(members.length - 4, prev + 1));
 
   return (
     <div
@@ -57,18 +66,49 @@ export function CompanyAdvisoryBoard({ data }: CompanyAdvisoryBoardProps = {}) {
       <div className="relative flex h-full w-full flex-col items-start">
         <CompanyAdvisoryBoardTitle />
 
-        <div
-          className="relative mt-[24px] flex h-[365px] w-[1204px] shrink-0 items-start justify-center gap-[12px]"
-          data-node-id="2379:2299"
-          data-name="User Images"
-        >
-          {members.map((member) => (
-            <CompanyLeadershipCard
-              key={member.nodeId}
-              member={member}
-              variant="advisory"
-            />
-          ))}
+        <div className="relative mt-[24px] h-[365px] w-[1204px] shrink-0">
+          <div className="absolute inset-0 overflow-hidden">
+            <div
+              className={`relative h-full w-full transition-transform duration-500 ease-in-out flex items-start ${!showArrows ? "justify-center" : ""}`}
+              style={{
+                gap: "12px",
+                transform: showArrows ? `translateX(-${activeIndex * 304}px)` : "none",
+              }}
+              data-node-id="2379:2299"
+              data-name="User Images"
+            >
+              {members.map((member) => (
+                <CompanyLeadershipCard
+                  key={member.nodeId}
+                  member={member}
+                  variant="advisory"
+                />
+              ))}
+            </div>
+          </div>
+
+          {showArrows && (
+            <>
+              <button
+                type="button"
+                className="absolute top-1/2 -left-[74px] z-20 flex size-[44px] -translate-y-1/2 cursor-pointer items-center justify-center transition-opacity hover:opacity-80 disabled:cursor-default disabled:opacity-30"
+                aria-label="Previous"
+                onClick={handlePrev}
+                disabled={activeIndex === 0}
+              >
+                <Image src="/applications/nav-arrow-left.svg" alt="" width={44} height={44} className="block size-full max-w-none" />
+              </button>
+              <button
+                type="button"
+                className="absolute top-1/2 -right-[74px] z-20 flex size-[44px] -translate-y-1/2 cursor-pointer items-center justify-center transition-opacity hover:opacity-80 disabled:cursor-default disabled:opacity-30"
+                aria-label="Next"
+                onClick={handleNext}
+                disabled={activeIndex >= members.length - 4}
+              >
+                <Image src="/applications/nav-arrow-right.svg" alt="" width={44} height={44} className="block size-full max-w-none" />
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>

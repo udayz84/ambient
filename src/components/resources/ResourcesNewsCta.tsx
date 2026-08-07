@@ -28,15 +28,7 @@ export function ResourcesNewsCta({ top, data }: ResourcesNewsCtaProps) {
       aria-label="Latest news"
       data-node-id="2379:1762"
     >
-      <div className="pointer-events-none absolute inset-0 -z-10 h-full w-full">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt=""
-          src="/home1618873545.png"
-          className="absolute inset-0 block size-full max-w-none object-fill"
-          aria-hidden
-        />
-      </div>
+
 
       <div className="relative h-[126px] w-[728px] shrink-0">
 

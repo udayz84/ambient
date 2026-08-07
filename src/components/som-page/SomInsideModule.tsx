@@ -13,6 +13,7 @@ const FALLBACK_HEADING = "Inside the Sparsh AI Module";
 const FALLBACK_LABEL = "The Hardware Blueprint";
 
 const BOARD_IMAGE = "/som/inside-module/pcba.png";
+const COLORFUL_BOARD = "/som/sparsh-chip.png";
 const POWER_V95 = "/som/inside-module/power-v95.png";
 const POWER_V96 = "/som/inside-module/power-v96.png";
 const POWER_V97 = "/som/inside-module/power-v97.png";
@@ -123,11 +124,20 @@ export function SomInsideModule({ data }: { data?: any }) {
               className="relative h-[464.191px] w-[558.509px] shrink-0 overflow-hidden"
               data-node-id="2438:4976"
             >
-              <img
-                src={BOARD_IMAGE}
-                alt=""
-                className="pointer-events-none absolute inset-0 size-full max-w-none object-contain"
-              />
+              <div className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === -1 || hoveredIndex === 0 ? "opacity-100" : "opacity-0"}`}>
+                <img
+                  src={COLORFUL_BOARD}
+                  alt=""
+                  className="absolute inset-0 size-full max-w-none object-contain"
+                />
+              </div>
+              <div className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === 1 || hoveredIndex === 2 || hoveredIndex === 3 ? "opacity-100" : "opacity-0"}`}>
+                <img
+                  src={BOARD_IMAGE}
+                  alt=""
+                  className="absolute inset-0 size-full max-w-none object-contain"
+                />
+              </div>
               <div className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === 1 ? "opacity-100" : "opacity-0"}`}>
                 <img src={POWER_V95} alt="" aria-hidden className="absolute left-[183.97px] top-[364.42px] block h-[50.16px] w-[79.58px] max-w-none" />
                 <img src={POWER_V96} alt="" aria-hidden className="absolute left-[437.24px] top-[177.31px] block h-[105.68px] w-[113.99px] max-w-none" />

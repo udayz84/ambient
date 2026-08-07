@@ -40,7 +40,7 @@ export const FALLBACK_FOOTER_NAV_SECTIONS: FooterNavSection[] = [
       { label: "Documentation", href: "#" },
       { label: "Case Studies", href: "#" },
       { label: "Technical Papers", href: "#" },
-      { label: "Blog", href: "#" },
+      { label: "News", href: "/news-listing" },
     ],
   },
   {

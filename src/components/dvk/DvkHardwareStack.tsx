@@ -24,6 +24,7 @@ const DEFAULT_SUBTITLE =
 const DEFAULT_LABEL = "The Hardware Blueprint";
 
 const BOARD_IMAGE = "/dvk/inside-module/dvk-board.png";
+const COLORFUL_BOARD = "/dvk/board-stack.png";
 const HIGHLIGHT_FILL = "/dvk/inside-module/dvk-fill.png";
 const SENSORS_VECTOR = "/dvk/inside-module/dvk-v101.png";
 const INTERFACES_VECTOR = "/dvk/inside-module/dvk-v102.png";
@@ -96,11 +97,20 @@ export function DvkHardwareStack({ data }: { data?: any }) {
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           {/* Figma 4049:8277 — DVK Board 1 (605x566) */}
           <div className="relative h-[566px] w-[605px] shrink-0 overflow-hidden">
-            <img
-              alt=""
-              src={BOARD_IMAGE}
-              className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
-            />
+            <div className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === -1 || hoveredIndex === 5 || hoveredIndex === 6 ? "opacity-100" : "opacity-0"}`}>
+              <img
+                alt=""
+                src={COLORFUL_BOARD}
+                className="absolute inset-0 size-full max-w-none object-cover"
+              />
+            </div>
+            <div className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === 0 || hoveredIndex === 1 || hoveredIndex === 2 || hoveredIndex === 3 || hoveredIndex === 4 ? "opacity-100" : "opacity-0"}`}>
+              <img
+                alt=""
+                src={BOARD_IMAGE}
+                className="absolute inset-0 size-full max-w-none object-cover"
+              />
+            </div>
 
             {/* Memory (cards[0]) — variant 4448:8597 / A. */}
             <div

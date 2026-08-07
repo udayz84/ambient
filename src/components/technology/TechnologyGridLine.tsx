@@ -13,21 +13,7 @@ export function TechnologyGridLine() {
           aria-hidden
         />
       </div>
-      <div className="absolute top-[4px] left-[3.5px] flex h-[259px] w-0 items-center justify-center">
-        <div className="rotate-90 flex-none">
-          <div className="relative h-0 w-[259px]">
-            <div className="absolute inset-[-1px_0_0_0]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/technology/line-87.svg?v=2"
-                alt=""
-                className="block size-full max-w-none"
-                aria-hidden
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+      <div className="absolute top-[4.5px] bottom-[4.5px] left-[3.5px] w-[1px] bg-white/20"></div>
       <div className="absolute bottom-[0.5px] left-0 flex h-[4px] w-[8px] items-center justify-center">
         <div className="flex-none">
           <div className="relative h-[4px] w-[8px]">

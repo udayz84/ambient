@@ -855,6 +855,57 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiJobApplicationJobApplication
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'job_applications';
+  info: {
+    description: 'Applications submitted via the careers Apply Now form';
+    displayName: 'Job Applications';
+    pluralName: 'job-applications';
+    singularName: 'job-application';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    consent: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    cover_letter: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    full_name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::job-application.job-application'
+    > &
+      Schema.Attribute.Private;
+    other_role: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    phone: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 30;
+      }>;
+    publishedAt: Schema.Attribute.DateTime;
+    resume: Schema.Attribute.Media<'files'>;
+    role: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiJobCategoryJobCategory extends Struct.CollectionTypeSchema {
   collectionName: 'job_categories';
   info: {
@@ -929,6 +980,7 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    about_role: Schema.Attribute.Text;
     apply_url: Schema.Attribute.String &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 500;
@@ -940,7 +992,6 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.RichText;
     employment_type: Schema.Attribute.Enumeration<
       ['full_time', 'part_time', 'contract']
     > &
@@ -953,7 +1004,9 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
       'oneToOne',
       'api::job-location.job-location'
     >;
+    perks_benefits: Schema.Attribute.Text;
     publishedAt: Schema.Attribute.DateTime;
+    responsibilities: Schema.Attribute.Text;
     slug: Schema.Attribute.UID<'title'>;
     title: Schema.Attribute.String &
       Schema.Attribute.SetMinMaxLength<{
@@ -1812,6 +1865,7 @@ declare module '@strapi/strapi' {
       'api::dvk-page.dvk-page': ApiDvkPageDvkPage;
       'api::footer.footer': ApiFooterFooter;
       'api::home-page.home-page': ApiHomePageHomePage;
+      'api::job-application.job-application': ApiJobApplicationJobApplication;
       'api::job-category.job-category': ApiJobCategoryJobCategory;
       'api::job-location.job-location': ApiJobLocationJobLocation;
       'api::job.job': ApiJobJob;

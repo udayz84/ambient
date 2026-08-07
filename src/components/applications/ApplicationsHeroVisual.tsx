@@ -567,21 +567,23 @@ export function ApplicationsHeroVisual({
         </p>
 
         <div
-          className="absolute top-[301.22119140625px] left-[calc(50%+26.3896484375px)] flex h-[435.28900146484375px] w-[984.82421875px] -translate-x-1/2 items-center justify-center"
+          className={`absolute top-[301.22119140625px] left-[calc(50%+26.3896484375px)] flex h-[435.28900146484375px] -translate-x-1/2 items-center justify-center ${
+            activeTab === "AUTOMOTIVE" ? "w-[1200px] min-[1440px]:w-[1440px]" : "w-[984.82421875px]"
+          }`}
           data-node-id="2379:850"
           data-name="unnamed-(1) 1"
         >
-          <div className={activeTab === "AUTOMOTIVE" ? "-scale-y-100 rotate-180 flex-none" : "flex-none w-full h-full flex items-center justify-center"}>
+          <div className={activeTab === "AUTOMOTIVE" ? "w-full h-full -scale-y-100 rotate-180 flex-none flex items-center justify-center" : "flex-none w-full h-full flex items-center justify-center"}>
             {imgSrc ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 alt=""
                 src={imgSrc}
-                className={`pointer-events-none max-w-none ${
+                className={
                   activeTab === "AUTOMOTIVE"
-                    ? "h-[435.28900146484375px] w-[984.82421875px] object-bottom"
-                    : "max-h-[435px] max-w-[984px] w-auto h-auto object-contain"
-                }`}
+                    ? "pointer-events-none h-full w-auto max-w-none object-contain"
+                    : "pointer-events-none max-h-[435px] max-w-full w-auto h-auto object-contain"
+                }
                 aria-hidden
               />
             ) : null}

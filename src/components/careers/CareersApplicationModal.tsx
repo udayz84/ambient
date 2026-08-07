@@ -21,11 +21,17 @@ export function CareersApplicationModal({
   onClose,
   jobTitle,
   roles,
+  jobDescription,
 }: {
   isOpen: boolean;
   onClose: () => void;
   jobTitle?: string;
   roles?: string[];
+  jobDescription?: {
+    about_role?: string;
+    responsibilities?: string;
+    perks_benefits?: string;
+  };
 }) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -112,6 +118,7 @@ export function CareersApplicationModal({
             jobTitle={jobTitle}
             onApply={() => setStep("form")}
             onClose={handleClose}
+            jobDescription={jobDescription}
           />
         )}
 
@@ -137,11 +144,42 @@ function DescriptionStep({
   jobTitle,
   onApply,
   onClose,
+  jobDescription,
 }: {
   jobTitle?: string;
   onApply: () => void;
   onClose: () => void;
+  jobDescription?: {
+    about_role?: string;
+    responsibilities?: string;
+    perks_benefits?: string;
+  };
 }) {
+  const aboutRole = jobDescription?.about_role || "Lead the strategy, roadmap, and execution of next-generation Edge AI semiconductor products, collaborating with engineering, AI, software, and business teams to deliver innovative solutions. Define product requirements, prioritize features, analyze market trends, and drive successful product launches. Work closely with customers and stakeholders to ensure Ambient Scientific's ultra-low-power AI processors meet evolving industry needs while accelerating the adoption of intelligent edge computing technologies.";
+  
+  const responsibilities = jobDescription?.responsibilities
+    ? jobDescription.responsibilities.split("\n").filter((l) => l.trim())
+    : [
+        "Define and execute the product vision, strategy, and roadmap for Ambient Scientific's Edge AI and semiconductor solutions.",
+        "Gather customer, partner, and market insights to identify product opportunities and drive innovation.",
+        "Collaborate with hardware, AI, firmware, and software engineering teams throughout the product lifecycle.",
+        "Translate business goals into clear product requirements, user stories, and technical specifications.",
+        "Prioritize features, manage product backlogs, and ensure timely delivery of high-impact releases.",
+        "Work closely with sales, marketing, and business development teams to support product positioning, launches, and customer engagements.",
+        "Monitor industry trends, competitive landscape, and emerging AI technologies to maintain product leadership.",
+        "Define and track product KPIs, analyze performance metrics, and continuously optimize product success.",
+      ];
+
+  const perks = jobDescription?.perks_benefits
+    ? jobDescription.perks_benefits.split("\n").filter((l) => l.trim())
+    : [
+        "Competitive salary with performance-based incentives and long-term career growth opportunities.",
+        "Work on cutting-edge Edge AI and semiconductor technologies alongside industry experts.",
+        "Collaborative, innovation-driven culture with opportunities to influence product strategy and business decisions.",
+        "Comprehensive health benefits, paid time off, and flexible work arrangements to support work-life balance.",
+        "Access to continuous learning, technical training, conferences, and professional development programs.",
+      ];
+
   return (
     <>
       <PanelHeader
@@ -154,63 +192,28 @@ function DescriptionStep({
       <Divider />
 
       <div
-        className={`${interRegular.className} custom-scrollbar absolute bottom-[40px] left-[40px] right-[40px] top-[143px] flex flex-col gap-[24px] overflow-y-auto pr-[8px] font-normal text-[#a4a4a4] not-italic`}
+        className={`${interRegular.className} custom-scrollbar absolute bottom-[80px] left-[40px] right-[40px] top-[143px] flex flex-col gap-[24px] overflow-y-auto pb-[20px] pr-[8px] font-normal text-[#a4a4a4] not-italic`}
       >
         <section className="flex flex-col gap-[10px]">
           <h3 className="text-[20px] leading-[27px] font-normal text-white">About the Role</h3>
-          <p className="text-[12px] leading-[18px]">
-            Lead the strategy, roadmap, and execution of next-generation Edge AI semiconductor products, collaborating with engineering, AI, software, and business teams to deliver innovative solutions. Define product requirements, prioritize features, analyze market trends, and drive successful product launches. Work closely with customers and stakeholders to ensure Ambient Scientific&apos;s ultra-low-power AI processors meet evolving industry needs while accelerating the adoption of intelligent edge computing technologies.
-          </p>
+          <p className="text-[12px] leading-[18px]">{aboutRole}</p>
         </section>
 
         <section className="flex flex-col gap-[10px]">
           <h3 className="text-[20px] leading-[27px] font-normal text-white">Key Responsibilities</h3>
           <ul className="block list-disc text-[12px] leading-[18px]">
-            <li className="ms-[18px] leading-[18px]">
-              Define and execute the product vision, strategy, and roadmap for Ambient Scientific&apos;s Edge AI and semiconductor solutions.
-            </li>
-            <li className="ms-[18px] leading-[18px]">
-              Gather customer, partner, and market insights to identify product opportunities and drive innovation.
-            </li>
-            <li className="ms-[18px] leading-[18px]">
-              Collaborate with hardware, AI, firmware, and software engineering teams throughout the product lifecycle.
-            </li>
-            <li className="ms-[18px] leading-[18px]">
-              Translate business goals into clear product requirements, user stories, and technical specifications.
-            </li>
-            <li className="ms-[18px] leading-[18px]">
-              Prioritize features, manage product backlogs, and ensure timely delivery of high-impact releases.
-            </li>
-            <li className="ms-[18px] leading-[18px]">
-              Work closely with sales, marketing, and business development teams to support product positioning, launches, and customer engagements.
-            </li>
-            <li className="ms-[18px] leading-[18px]">
-              Monitor industry trends, competitive landscape, and emerging AI technologies to maintain product leadership.
-            </li>
-            <li className="ms-[18px] leading-[18px]">
-              Define and track product KPIs, analyze performance metrics, and continuously optimize product success.
-            </li>
+            {responsibilities.map((item, i) => (
+              <li key={i} className="ms-[18px] leading-[18px]">{item}</li>
+            ))}
           </ul>
         </section>
 
         <section className="flex flex-col gap-[10px]">
           <h3 className="text-[20px] leading-[27px] font-normal text-white">Perks and Benefits</h3>
           <ul className="block list-disc text-[12px] leading-[18px]">
-            <li className="ms-[18px] leading-[18px]">
-              Competitive salary with performance-based incentives and long-term career growth opportunities.
-            </li>
-            <li className="ms-[18px] leading-[18px]">
-              Work on cutting-edge Edge AI and semiconductor technologies alongside industry experts.
-            </li>
-            <li className="ms-[18px] leading-[18px]">
-              Collaborative, innovation-driven culture with opportunities to influence product strategy and business decisions.
-            </li>
-            <li className="ms-[18px] leading-[18px]">
-              Comprehensive health benefits, paid time off, and flexible work arrangements to support work-life balance.
-            </li>
-            <li className="ms-[18px] leading-[18px]">
-              Access to continuous learning, technical training, conferences, and professional development programs.
-            </li>
+            {perks.map((item, i) => (
+              <li key={i} className="ms-[18px] leading-[18px]">{item}</li>
+            ))}
           </ul>
         </section>
       </div>
@@ -258,11 +261,44 @@ function FormStep({
   const [phone, setPhone] = useState("");
   const [role, setRole] = useState(jobTitle || "Senior Product Manager");
   const [otherRole, setOtherRole] = useState("");
-  const [resume, setResume] = useState("");
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [coverLetter, setCoverLetter] = useState("");
   const [consent, setConsent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const roleOptions = Array.from(new Set([jobTitle || "Senior Product Manager", ...(roles ?? [])]));
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (status === "submitting") return;
+    setStatus("submitting");
+    setErrorMessage("");
+
+    const formData = new FormData();
+    formData.append("fullName", fullName);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("role", role);
+    formData.append("otherRole", otherRole);
+    formData.append("coverLetter", coverLetter);
+    formData.append("consent", String(consent));
+    if (resumeFile) formData.append("resume", resumeFile);
+
+    try {
+      const res = await fetch("/api/job-applicants", { method: "POST", body: formData });
+      const payload = (await res.json().catch(() => ({}))) as { error?: string };
+      if (!res.ok) {
+        throw new Error(payload.error || "Could not submit your application.");
+      }
+      onSubmit();
+    } catch (err) {
+      setStatus("error");
+      setErrorMessage(err instanceof Error ? err.message : "Something went wrong.");
+    }
+  }
+
+  const submitting = status === "submitting";
 
   return (
     <>
@@ -270,10 +306,7 @@ function FormStep({
       <Divider />
 
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          onSubmit();
-        }}
+        onSubmit={handleSubmit}
         className={`${interRegular.className} absolute bottom-[40px] left-[40px] right-[40px] top-[138px] flex flex-col gap-[24px] overflow-y-auto pr-[8px] font-normal not-italic`}
       >
         {/* Full name */}
@@ -371,9 +404,9 @@ function FormStep({
         <Field label="Upload Resume*" className="w-[301px]">
           <label className="relative flex h-[42px] w-full cursor-pointer items-center justify-between border-[0.5px] border-solid border-[#4a4a4a] bg-transparent px-[12px] focus-within:border-[rgba(255,255,255,0.5)]">
             <span
-              className={`truncate text-[14px] leading-[21px] ${resume ? "text-white" : "text-[#4a4a4a]"}`}
+              className={`truncate text-[14px] leading-[21px] ${resumeFile ? "text-white" : "text-[#4a4a4a]"}`}
             >
-              {resume || "Upload File here"}
+              {resumeFile?.name || "Upload File here"}
             </span>
             <svg
               width="24"
@@ -394,7 +427,8 @@ function FormStep({
             <input
               type="file"
               className="hidden"
-              onChange={(e) => setResume(e.target.files?.[0]?.name ?? "")}
+              disabled={submitting}
+              onChange={(e) => setResumeFile(e.target.files?.[0] ?? null)}
             />
           </label>
         </Field>
@@ -435,8 +469,19 @@ function FormStep({
             </span>
           </label>
 
-          <GreenCta label="Submit" width="w-[140px]" type="submit" />
+          <GreenCta
+            label={submitting ? "Submitting…" : "Submit"}
+            width="w-[140px]"
+            type="submit"
+            disabled={submitting}
+          />
         </div>
+
+        {status === "error" && (
+          <p className="text-[12px] leading-[18px] font-normal text-[#ff6b6b] not-italic">
+            {errorMessage}
+          </p>
+        )}
       </form>
     </>
   );
@@ -559,14 +604,16 @@ function GreenCta({
   onClick,
   href,
   type = "button",
+  disabled = false,
 }: {
   label: string;
   width?: string;
   onClick?: () => void;
   href?: string;
   type?: "button" | "submit";
+  disabled?: boolean;
 }) {
-  const className = `${gilroySemiBold.className} ${GREEN_CTA_SHADOW} relative flex h-[48px] ${width} shrink-0 cursor-pointer items-center justify-center overflow-hidden`;
+  const className = `${gilroySemiBold.className} ${GREEN_CTA_SHADOW} relative flex h-[48px] ${width} shrink-0 cursor-pointer items-center justify-center overflow-hidden ${disabled ? "pointer-events-none opacity-60" : ""}`;
 
   const inner = (
     <>

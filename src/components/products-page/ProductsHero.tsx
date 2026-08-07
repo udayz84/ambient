@@ -81,7 +81,7 @@ export function ProductsHero({ data }: { data?: any }) {
           className="pointer-events-none absolute top-0 right-0 hidden h-full w-[360px] min-[1442px]:block"
           style={{
             background:
-              "linear-gradient(270deg, #000000 6%, rgba(0,0,0,0.86) 22%, rgba(0,0,0,0.4) 52%, rgba(0,0,0,0) 100%)",
+              "linear-gradient(270deg, rgba(0,0,0,0.7) 6%, rgba(0,0,0,0.55) 22%, rgba(0,0,0,0.25) 52%, rgba(0,0,0,0) 100%)",
           }}
         />
       </div>

@@ -1,6 +1,6 @@
 "use client";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyExtraBold, gilroyMedium, interRegular } from "../hero/fonts";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
@@ -102,6 +102,19 @@ export function ProductsUseCases({ data }: { data?: any }) {
   const activeImage = activeTab?.image || "/products/use-case-image.png";
   const cards = activeTab?.featureCards || USECASE_CARDS;
 
+  // Scale the fixed 1448px canvas down on narrower viewports so it never clips.
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const [canvasScale, setCanvasScale] = useState(1);
+  useEffect(() => {
+    const update = () => {
+      const w = wrapRef.current?.clientWidth ?? window.innerWidth;
+      setCanvasScale(Math.min(1, w / USECASES_CANVAS_WIDTH));
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
   const nextTab = () => setActiveIdx((i) => (i + 1) % tabs.length);
   const prevTab = () => setActiveIdx((i) => (i - 1 + tabs.length) % tabs.length);
   return (
@@ -112,28 +125,38 @@ export function ProductsUseCases({ data }: { data?: any }) {
         aria-label="Use cases"
       >
         <div
-          className="relative mx-auto"
+          ref={wrapRef}
+          className="relative mx-auto w-full overflow-hidden"
           style={{
-            height: USECASES_SECTION_HEIGHT,
-            width: USECASES_CANVAS_WIDTH,
+            maxWidth: USECASES_CANVAS_WIDTH,
+            aspectRatio: `${USECASES_CANVAS_WIDTH} / ${USECASES_SECTION_HEIGHT}`,
           }}
-          data-node-id="2901:2033"
-          data-name="Desktop - 14"
         >
-          <ProductsUseCasesDesktop
-            headingLines={headingLines}
-            subtitle={subtitle}
-            activeTab={activeTab}
-            activeImage={activeImage}
-            onNext={nextTab}
-            onPrev={prevTab}
-            onSelect={setActiveIdx}
-            activeIdx={activeIdx}
-            tabs={tabs}
-            cards={cards}
-            primary={primary}
-            secondary={secondary}
-          />
+          <div
+            className="absolute left-0 top-0 origin-top-left"
+            style={{
+              height: USECASES_SECTION_HEIGHT,
+              width: USECASES_CANVAS_WIDTH,
+              transform: `scale(${canvasScale})`,
+            }}
+            data-node-id="2901:2033"
+            data-name="Desktop - 14"
+          >
+            <ProductsUseCasesDesktop
+              headingLines={headingLines}
+              subtitle={subtitle}
+              activeTab={activeTab}
+              activeImage={activeImage}
+              onNext={nextTab}
+              onPrev={prevTab}
+              onSelect={setActiveIdx}
+              activeIdx={activeIdx}
+              tabs={tabs}
+              cards={cards}
+              primary={primary}
+              secondary={secondary}
+            />
+          </div>
         </div>
       </section>
 
@@ -241,7 +264,7 @@ function ProductsUseCasesDesktop({
         <img
           alt=""
           src={activeImage}
-          className="absolute inset-0 size-full max-w-none object-cover"
+          className={`absolute inset-0 size-full max-w-none ${activeTab?.label?.toUpperCase() === "AUTOMOTIVE" ? "object-contain" : "object-cover"}`}
         />
       </div>
 
