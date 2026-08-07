@@ -100,7 +100,7 @@ export function CareersApplicationModal({
       {/* Panel — 700 x 800 shaped container (form.png defines the silhouette via its alpha channel); shared across all steps, slides in from the right */}
       <div
         ref={modalRef}
-        className={`relative h-[800px] w-[700px] shrink-0 overflow-hidden transition-all duration-300 ease-out ${isAnimating ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"}`}
+        className={`relative h-full w-full md:h-[800px] md:w-[700px] shrink-0 overflow-hidden transition-all duration-300 ease-out ${isAnimating ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"}`}
       >
         {/* Background — Rectangle 1618873545 */}
         <Image
@@ -192,7 +192,7 @@ function DescriptionStep({
       <Divider />
 
       <div
-        className={`${interRegular.className} custom-scrollbar absolute bottom-[80px] left-[40px] right-[40px] top-[143px] flex flex-col gap-[24px] overflow-y-auto pb-[20px] pr-[8px] font-normal text-[#a4a4a4] not-italic`}
+        className={`${interRegular.className} custom-scrollbar absolute bottom-[40px] left-[20px] right-[20px] top-[100px] md:bottom-[80px] md:left-[40px] md:right-[40px] md:top-[143px] flex flex-col gap-[24px] overflow-y-auto pb-[20px] pr-[8px] font-normal text-[#a4a4a4] not-italic`}
       >
         <section className="flex flex-col gap-[10px]">
           <h3 className="text-[20px] leading-[27px] font-normal text-white">About the Role</h3>
@@ -307,7 +307,7 @@ function FormStep({
 
       <form
         onSubmit={handleSubmit}
-        className={`${interRegular.className} absolute bottom-[40px] left-[40px] right-[40px] top-[138px] flex flex-col gap-[24px] overflow-y-auto pr-[8px] font-normal not-italic`}
+        className={`${interRegular.className} absolute bottom-[40px] left-[20px] right-[20px] top-[100px] md:bottom-[40px] md:left-[40px] md:right-[40px] md:top-[138px] flex flex-col gap-[24px] overflow-y-auto pr-[8px] font-normal not-italic`}
       >
         {/* Full name */}
         <Field label="Full name*">
@@ -321,7 +321,7 @@ function FormStep({
         </Field>
 
         {/* Email + Phone */}
-        <div className="flex gap-[18px]">
+        <div className="flex flex-col md:flex-row gap-[18px]">
           <Field label="Email ID*" className="min-w-0 flex-1">
             <input
               type="email"
@@ -366,7 +366,7 @@ function FormStep({
         </div>
 
         {/* Role applying for + Didn't find a role */}
-        <div className="flex gap-[18px]">
+        <div className="flex flex-col md:flex-row gap-[18px]">
           <Field label="Role applying for*" className="min-w-0 flex-1">
             <div className="relative h-[42px] w-full border-[0.5px] border-solid border-[#4a4a4a] bg-transparent focus-within:border-[rgba(255,255,255,0.5)]">
               <select
@@ -401,7 +401,7 @@ function FormStep({
         </div>
 
         {/* Upload Resume */}
-        <Field label="Upload Resume*" className="w-[301px]">
+        <Field label="Upload Resume*" className="w-full md:w-[301px]">
           <label className="relative flex h-[42px] w-full cursor-pointer items-center justify-between border-[0.5px] border-solid border-[#4a4a4a] bg-transparent px-[12px] focus-within:border-[rgba(255,255,255,0.5)]">
             <span
               className={`truncate text-[14px] leading-[21px] ${resumeFile ? "text-white" : "text-[#4a4a4a]"}`}
@@ -444,7 +444,7 @@ function FormStep({
         </Field>
 
         {/* Consent + Submit */}
-        <div className="flex items-center justify-between gap-[18px]">
+        <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-[18px] md:gap-[18px]">
           <label className="flex min-w-0 flex-1 cursor-pointer items-center gap-[12px]">
             <span
               className={`relative flex size-[20px] shrink-0 items-center justify-center border-[0.5px] border-solid ${
@@ -497,7 +497,7 @@ function ConfirmationStep({ onClose }: { onClose: () => void }) {
         type="button"
         onClick={onClose}
         aria-label="Close"
-        className="absolute right-[40px] top-[40px] flex size-[40px] shrink-0 cursor-pointer items-center justify-center"
+        className="absolute right-[20px] top-[20px] md:right-[40px] md:top-[40px] flex size-[40px] shrink-0 cursor-pointer items-center justify-center"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" aria-hidden>
           <line x1="6" y1="6" x2="18" y2="18" />
@@ -505,7 +505,7 @@ function ConfirmationStep({ onClose }: { onClose: () => void }) {
         </svg>
       </button>
 
-      <div className="absolute left-1/2 top-[calc(50%-27.5px)] flex w-[620px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[24px]">
+      <div className="absolute left-1/2 top-[calc(50%-27.5px)] flex w-full px-[20px] md:px-0 md:w-[620px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[24px]">
         {/* Success illustration */}
         <div className="relative size-[250px] shrink-0">
           <Image
@@ -518,15 +518,15 @@ function ConfirmationStep({ onClose }: { onClose: () => void }) {
           />
         </div>
 
-        <h2 className={`${gilroyMedium.className} text-center text-[38px] leading-[47px] font-medium whitespace-nowrap text-white not-italic`}>
+        <h2 className={`${gilroyMedium.className} text-center text-[30px] md:text-[38px] leading-[40px] md:leading-[47px] font-medium whitespace-nowrap text-white not-italic`}>
           Thank you for applying!
         </h2>
 
-        <p className={`${interRegular.className} w-[540px] text-center text-[12px] leading-[18px] font-normal text-[#a4a4a4] not-italic`}>
+        <p className={`${interRegular.className} w-full md:w-[540px] text-center text-[12px] leading-[18px] font-normal text-[#a4a4a4] not-italic`}>
           We&apos;ve received your application and truly appreciate your interest in this opportunity. Our team will review your profile and get in touch if your experience aligns with our requirements.
         </p>
 
-        <p className={`${gilroyMedium.className} w-[540px] text-center text-[22px] leading-[28px] font-medium text-white not-italic`}>
+        <p className={`${gilroyMedium.className} w-full md:w-[540px] text-center text-[22px] leading-[28px] font-medium text-white not-italic`}>
           Stay tuned—and best of luck!
         </p>
 
@@ -554,18 +554,18 @@ function PanelHeader({
 }) {
   return (
     <div
-      className={`absolute left-[40px] top-[30px] flex h-[48px] items-center ${cta ? "w-[620px] justify-between" : "gap-[25px]"}`}
+      className={`absolute left-[20px] top-[20px] md:left-[40px] md:top-[30px] flex h-[48px] items-center ${cta ? "w-[calc(100%-40px)] md:w-[620px] justify-between" : "gap-[15px] md:gap-[25px]"}`}
     >
-      <div className="flex h-full items-center gap-[25px]">
+      <div className="flex h-full min-w-0 items-center gap-[15px] md:gap-[25px]">
         <MenuButton onClick={onClose} />
-        <div className="flex h-full flex-col justify-between">
+        <div className="flex h-full min-w-0 flex-col justify-between">
           <h2
-            className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} truncate text-[16px] md:text-[22px] leading-[normal] md:leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
           >
             {jobTitle || "Senior Product Manager"}
           </h2>
           <div
-            className={`${interLight.className} flex gap-[20px] text-[10px] leading-[15px] font-light text-white not-italic`}
+            className={`${interLight.className} flex gap-[10px] md:gap-[20px] text-[10px] leading-[15px] font-light text-white not-italic`}
           >
             <span>10+ Years Experience</span>
             <span>Mumbai</span>
@@ -578,7 +578,7 @@ function PanelHeader({
 }
 
 function Divider() {
-  return <div className="absolute left-0 top-[108px] h-px w-full bg-[rgba(255,255,255,0.1)]" />;
+  return <div className="absolute left-0 top-[80px] md:top-[108px] h-px w-full bg-[rgba(255,255,255,0.1)]" />;
 }
 
 function MenuButton({ onClick }: { onClick: () => void }) {

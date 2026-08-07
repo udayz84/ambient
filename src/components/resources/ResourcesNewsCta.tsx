@@ -1,5 +1,6 @@
 import { CornerDecor } from "../contact/contact-shared";
 import { gilroyMedium } from "../hero/fonts";
+import Image from "next/image";
 
 const NEWS_CTA_TITLE_GRADIENT =
   "linear-gradient(115.045deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -28,10 +29,19 @@ export function ResourcesNewsCta({ top, data }: ResourcesNewsCtaProps) {
       aria-label="Latest news"
       data-node-id="2379:1762"
     >
-
+      {/* Background Image Container */}
+      <div className="pointer-events-none absolute top-1/2 left-1/2 -z-10 h-[320px] w-[800px] -translate-x-1/2 -translate-y-1/2 overflow-hidden">
+        <Image
+          src="/Rectangle 1618873545.png"
+          alt="News background"
+          fill
+          className="object-fill"
+          sizes="800px"
+          unoptimized
+        />
+      </div>
 
       <div className="relative h-[126px] w-[728px] shrink-0">
-
         <div
           className="absolute inset-0 flex flex-col items-center justify-center"
           data-node-id="2379:1763"
