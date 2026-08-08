@@ -13,6 +13,9 @@ const TITLE_GRADIENT =
 const FALLBACK_HEADING = "Intelligence without boundaries.";
 const FALLBACK_CTA = "Learn More";
 
+const NAV_ARROW_LEFT = "/applications/nav-arrow-left.svg";
+const NAV_ARROW_RIGHT = "/applications/nav-arrow-right.svg";
+
 type Article = {
   title: string;
   body: string;
@@ -210,27 +213,103 @@ export function ApplicationsPageArticles({ data }: { data?: any }) {
         </div>
       </div>
 
-      {/* MOBILE (<1024px) */}
-      <div className="flex w-full flex-col items-center gap-[40px] px-[24px] pt-[64px] pb-[40px] min-[1024px]:hidden">
-        <div className="relative inline-block px-[10px]">
+      {/* MOBILE (<1024px) — horizontal carousel per Figma 4032:5870 */}
+      <div
+        className="relative flex w-full flex-col items-center overflow-hidden pb-[30px] min-[1024px]:hidden"
+        data-node-id="4032:5870"
+      >
+        <style>{`.art-m-scroll::-webkit-scrollbar{display:none}.art-m-scroll{scrollbar-width:none;-ms-overflow-style:none}`}</style>
+
+        {/* Top background strip */}
+        <div
+          className="pointer-events-none absolute left-1/2 top-0 h-[260px] w-[1441px] -translate-x-1/2 overflow-hidden"
+          aria-hidden
+        >
+          <img src="/applications/dvk-bg.png" alt="" className="size-full object-cover" />
+        </div>
+
+        {/* Bottom background strip */}
+        <div
+          className="pointer-events-none absolute bottom-0 left-[calc(50%+30px)] flex h-[341px] w-[1441px] -translate-x-1/2 items-center justify-center overflow-hidden"
+          aria-hidden
+        >
+          <div className="-scale-y-100">
+            <img src="/applications/dvk-bottom.png" alt="" className="h-[341px] w-[1441px] object-cover" />
+          </div>
+        </div>
+
+        {/* Title with corner brackets (node 4032:14134) */}
+        <div className="relative z-10 mt-[36.5px] h-[79px] w-[353px]" data-name="Group 78">
           <h2
-            className={`${gilroyMedium.className} bg-clip-text text-center text-[32px] leading-[38px] font-medium text-transparent not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} absolute inset-0 flex items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
             style={{
-              backgroundImage: TITLE_GRADIENT,
+              backgroundImage:
+                "linear-gradient(107.453deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
               WebkitBackgroundClip: "text",
               backgroundClip: "text",
             }}
+            data-node-id="4032:14135"
           >
             {heading}
           </h2>
-          <Corners />
+
+          <div className="absolute left-[351.5px] top-[4px] flex h-[4px] w-[2.346px] items-center justify-center">
+            <div className="flex-none rotate-180">
+              <div className="relative h-[4px] w-[2.346px]">
+                <div className="absolute inset-[0_0_-12.5%_-21.31%]">
+                  <img alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="absolute left-[351.5px] top-[75px] flex h-[4px] w-[2.346px] items-center justify-center">
+            <div className="-scale-y-100 flex-none rotate-180">
+              <div className="relative h-[4px] w-[2.346px]">
+                <div className="absolute inset-[0_0_-12.5%_-21.31%]">
+                  <img alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="absolute left-[-1.5px] top-[75px] h-[4px] w-[2.346px]">
+            <div className="absolute inset-[0_0_-12.5%_-21.31%]">
+              <img alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
+            </div>
+          </div>
+          <div className="absolute left-[-1.5px] top-[4px] flex h-[4px] w-[2.346px] items-center justify-center">
+            <div className="-scale-y-100 flex-none">
+              <div className="relative h-[4px] w-[2.346px]">
+                <div className="absolute inset-[0_0_-12.5%_-21.31%]">
+                  <img alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex w-full flex-col items-center gap-[24px]">
+
+        {/* Article carousel: horizontal snap-scroll (node 4032:14487) */}
+        <div className="art-m-scroll relative z-10 mt-[40px] flex w-full gap-[6px] overflow-x-auto px-[29.5px] snap-x snap-mandatory">
           {articles.map((article) => (
-            <div key={article.title} className="w-full max-w-[377px]">
+            <div key={article.title} className="w-[334px] shrink-0 snap-center">
               <ArticleCard article={article} />
             </div>
           ))}
+        </div>
+
+        {/* Navigation arrows (node 4032:5932) */}
+        <div className="relative z-10 mt-[40px] flex gap-[20px]">
+          <div className="relative size-[44px]">
+            <Corners />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <img alt="" aria-hidden src={NAV_ARROW_LEFT} className="size-[24px] max-w-none" />
+            </div>
+          </div>
+          <div className="relative size-[44px]">
+            <Corners />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <img alt="" aria-hidden src={NAV_ARROW_RIGHT} className="size-[24px] max-w-none" />
+            </div>
+          </div>
         </div>
       </div>
     </section>

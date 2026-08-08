@@ -27,7 +27,7 @@ export function TagBadge({
   return (
     <div
       className={`${dmMono.className} relative shrink-0 overflow-hidden border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] bg-[rgba(255,255,255,0.06)]`}
-      style={{ width, height }}
+      style={{ width: `var(--tag-w, ${width}px)`, height }}
       data-node-id={nodeId}
       data-name="Menu"
     >
@@ -40,11 +40,11 @@ export function TagBadge({
       </p>
       <div
         className="absolute top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60"
-        style={{ left: leftBarLeft }}
+        style={{ left: `var(--tag-lb, ${leftBarLeft}px)` }}
       />
       <div
         className="absolute top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60"
-        style={{ left: rightBarLeft }}
+        style={{ left: `var(--tag-rb, ${rightBarLeft}px)` }}
       />
     </div>
   );

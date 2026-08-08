@@ -16,12 +16,12 @@ export function NewsArticleCard({
 
   return (
     <article
-      className={`relative flex w-full min-[1024px]:w-[388px] shrink-0 flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] px-[12px] pt-[12px] pb-[24px] ${bgClass}`}
+      className={`relative flex w-full min-[1024px]:w-[388px] shrink-0 flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] px-[12px] pt-[9px] min-[1024px]:pt-[12px] pb-[24px] [--tag-w:129px] min-[1024px]:[--tag-w:180px] [--tag-rb:120.48px] min-[1024px]:[--tag-rb:170.48046875px] ${bgClass}`}
       data-node-id={nodeId}
       data-name="Article"
     >
       <div
-        className="relative h-[200px] min-[1024px]:h-[259.161px] w-full min-[1024px]:w-[356px] shrink-0 overflow-clip"
+        className="relative h-[244px] min-[1024px]:h-[259.161px] w-full min-[1024px]:w-[356px] shrink-0 overflow-clip"
         data-name="Image"
       >
         {imageOverlaySrc ? (
@@ -45,17 +45,18 @@ export function NewsArticleCard({
           labelOffsetX={0.5}
           rightBarLeft={170.48046875}
           centerLabel
+          labelClassName="text-[12px] leading-[19.5px] tracking-[-0.36px] min-[1024px]:text-[13px] min-[1024px]:tracking-[-0.39px]"
         />
 
         <div className="flex flex-col gap-[10px]">
           <h3
-            className={`${gilroyMedium.className} w-full font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
-            style={{ fontSize: titleFontSize, lineHeight: "28px" }}
+            className={`${gilroyMedium.className} w-full font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden text-[16px] leading-[18px] min-[1024px]:text-[length:var(--card-tfs)] min-[1024px]:leading-[var(--card-tlh)]`}
+            style={{ "--card-tfs": `${titleFontSize}px`, "--card-tlh": "28px" } as React.CSSProperties}
           >
             {title}
           </h3>
           <p
-            className={`${interRegular.className} w-full min-[1024px]:w-[346.611px] text-[16px] leading-[24px] font-normal not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-full min-[1024px]:w-[346.611px] text-[14px] leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] font-normal not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
           >
             <span className="text-[rgba(240,240,240,0.6)]">{excerpt}</span>
             <a href="#" className="text-[#53d824] transition-opacity hover:opacity-80">

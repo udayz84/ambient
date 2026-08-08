@@ -522,6 +522,32 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
       >
         <style>{`.cont-m-scroll::-webkit-scrollbar{display:none}.cont-m-scroll{scrollbar-width:none;-ms-overflow-style:none}`}</style>
 
+        {/* Top background strip */}
+        <div
+          className="pointer-events-none absolute left-1/2 top-0 h-[260px] w-[1441px] -translate-x-1/2 overflow-hidden"
+          aria-hidden
+        >
+          <img
+            src="/applications/dvk-bg.png"
+            alt=""
+            className="size-full object-cover"
+          />
+        </div>
+
+        {/* Bottom background strip */}
+        <div
+          className="pointer-events-none absolute bottom-0 left-[calc(50%+30px)] flex h-[341px] w-[1441px] -translate-x-1/2 items-center justify-center overflow-hidden"
+          aria-hidden
+        >
+          <div className="-scale-y-100">
+            <img
+              src="/applications/dvk-bottom.png"
+              alt=""
+              className="h-[341px] w-[1441px] object-cover"
+            />
+          </div>
+        </div>
+
         {/* Header: title + subtitle (node 4032:5792) */}
         <div
           className="mt-[29px] flex w-[350px] flex-col items-center gap-[10px]"

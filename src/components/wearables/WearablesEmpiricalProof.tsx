@@ -583,14 +583,27 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
       </div>
 
       {/* MOBILE (<1024px) */}
-      <div className="relative flex w-full flex-col items-center gap-[40px] px-[24px] pt-[72px] pb-[72px] min-[1024px]:hidden">
+      <div className="relative flex w-full flex-col items-center gap-[40px] px-[21px] pt-[30px] pb-[72px] min-[1024px]:hidden">
+        {/* Top background strip */}
+        <div className="pointer-events-none absolute left-1/2 top-0 h-[260px] w-[1441px] -translate-x-1/2 overflow-hidden" aria-hidden>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/applications/dvk-bg.png" alt="" className="size-full object-cover" />
+        </div>
+        {/* Bottom background strip */}
+        <div className="pointer-events-none absolute bottom-0 left-[calc(50%+30px)] flex h-[341px] w-[1441px] -translate-x-1/2 items-center justify-center overflow-hidden" aria-hidden>
+          <div className="-scale-y-100">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/applications/dvk-bottom.png" alt="" className="h-[341px] w-[1441px] object-cover" />
+          </div>
+        </div>
+
         {/* Title */}
-        <div className="flex flex-col items-center gap-[20px]">
-          <div className="relative flex flex-col items-center px-[10px]">
+        <div className="relative z-10 flex w-[350px] flex-col items-center gap-[10px]">
+          <div className="relative h-[82px] w-[356px]">
             <h2
-              className={`${gilroyMedium.className} bg-clip-text text-center text-[32px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} absolute inset-0 flex items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
-                backgroundImage: TITLE_GRADIENT,
+                backgroundImage: "linear-gradient(107.4537261117953deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
               }}
@@ -603,7 +616,7 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
             />
           </div>
           <p
-            className={`${interRegular.className} max-w-[327px] text-center text-[13px] leading-[20px] text-[#f0f0f0] not-italic`}
+            className={`${interRegular.className} w-[352px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic`}
           >
             {subtitle}
           </p>

@@ -4,6 +4,7 @@
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { gilroyBold, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { TagBadge } from "../hero/TagBadge";
 import { mediaUrl } from "@/lib/strapi";
 
 const TILE_BG =
@@ -146,28 +147,40 @@ function WinCardMobile({ label, stat, statLabel, mobileImg, body }: { label: str
   const { fadeRef, isVisible } = useFadeIn();
 
   return (
-    <div ref={fadeRef} className={`relative w-full max-w-[426px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black ${getFadeInClass(isVisible)}`}>
-      <div className="relative h-[240px] w-full overflow-hidden">
+    <div
+      ref={fadeRef}
+      className={`relative h-[550px] w-[355px] shrink-0 overflow-clip border-[0.417px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] ${getFadeInClass(isVisible)}`}
+      data-name="Container"
+    >
+      {/* Background image */}
+      <div className="absolute inset-0 overflow-hidden">
         <img alt="" aria-hidden src={mobileImg} className="absolute inset-0 size-full object-cover" />
         <div className="absolute inset-0" style={{ backgroundImage: OVERLAY_2 }} />
       </div>
-      <div className="flex flex-col gap-[16px] p-[20px]">
-        <div className="flex items-center gap-[12px]">
-          <LabelTile />
-          <p className={`${interRegular.className} text-[16px] leading-[24px] font-normal text-[#f0f0f0]`}>{label}</p>
-        </div>
+
+      {/* Label */}
+      <div className="absolute left-[17.58px] top-[17.58px] z-10 flex items-center gap-[12px]">
+        <LabelTile />
+        <p className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-[#f0f0f0] whitespace-nowrap`}>{label}</p>
+      </div>
+
+      {/* Stats */}
+      <div className="absolute left-[16px] top-[232.92px] z-10 flex w-[319px] flex-col gap-[12.5px]">
         <div className="flex flex-col">
           <p
-            className={`${gilroyBold.className} bg-clip-text text-[48px] leading-[54px] tracking-[-0.96px] text-transparent`}
+            className={`${gilroyBold.className} bg-clip-text text-[52px] leading-[83.333px] tracking-[-1.04px] text-transparent`}
             style={{ backgroundImage: STAT_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
           >
             {stat}
           </p>
-          <p className={`${gilroyMedium.className} text-[18px] leading-[22px] uppercase text-[#c5f3b5]`}>{statLabel}</p>
+          <p className={`${gilroyMedium.className} text-[22px] leading-[24.167px] uppercase text-[#c5f3b5]`}>{statLabel}</p>
         </div>
-        <p className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)]`}>{body}</p>
-        <FeatureRow />
+        <div className="flex flex-col gap-[11.667px]">
+          <p className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-[rgba(240,240,240,0.6)]`}>{body}</p>
+          <FeatureRow />
+        </div>
       </div>
+
       <Corners />
     </div>
   );
@@ -296,7 +309,7 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
       aria-label="Wins"
     >
       {/* Full-bleed background image 124 */}
-      <div className="pointer-events-none absolute inset-0 hidden opacity-50 min-[1024px]:block">
+      <div className="pointer-events-none absolute inset-0 opacity-50">
         <img
           alt=""
           aria-hidden
@@ -351,34 +364,76 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
         </div>
       </div>
 
-      {/* MOBILE (<1024px) */}
-      <div className="relative flex w-full flex-col items-center gap-[40px] px-[24px] pt-[40px] pb-[40px] min-[1024px]:hidden">
-        <div className="flex flex-col items-center gap-[16px]">
-          <div className="relative flex items-center justify-center bg-[rgba(255,255,255,0.06)] px-[20px] py-[8px]">
-            <div className="absolute left-[6px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
-            <span className="font-mono text-[11px] uppercase tracking-[-0.33px] text-[#ecfae5]">
-              Real-time AI at edge
-            </span>
-            <div className="absolute right-[6px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
-            <Corners />
-          </div>
+      {/* MOBILE (<1024px) — node 4032:5947 */}
+      <div
+        className="relative flex w-full flex-col items-center px-[19px] pt-[30px] pb-[73px] min-[1024px]:hidden"
+        data-node-id="4032:5947"
+        data-name="4th Fold"
+      >
+        {/* Header: tag badge + title (node 4032:14671) */}
+        <div className="relative z-10 flex w-[350px] flex-col items-center gap-[10px]">
+          <TagBadge
+            label="Real-time AI at edge"
+            width={190}
+            rightBarLeft={181.48}
+            leftBarLeft={6.48}
+            centerLabel
+            nodeId="4032:14673"
+            labelClassName="text-[13px] leading-[19.5px] tracking-[-0.39px]"
+          />
 
-          <div className="relative inline-block px-[10px]">
+          {/* Title with corner brackets (node 4032:14681) */}
+          <div className="relative h-[81px] w-[356px]" data-name="Group 78">
             <h2
-              className={`${gilroyMedium.className} bg-clip-text text-center text-[32px] leading-[38px] font-medium text-transparent not-italic`}
+              className={`${gilroyMedium.className} absolute inset-0 flex items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage:
-                  "linear-gradient(125.581deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
+                  "linear-gradient(107.28587521021382deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
               }}
+              data-node-id="4032:14682"
             >
               {heading}
             </h2>
-            <Corners />
+
+            <div className="absolute left-[353px] top-[38.82px] flex h-[2.817px] w-[2.346px] items-center justify-center">
+              <div className="flex-none rotate-180">
+                <div className="relative h-[2.817px] w-[2.346px]">
+                  <div className="absolute inset-[0_0_-17.75%_-21.31%]">
+                    <img alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="absolute left-[353px] top-[114.18px] flex h-[2.817px] w-[2.346px] items-center justify-center">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="relative h-[2.817px] w-[2.346px]">
+                  <div className="absolute inset-[0_0_-17.75%_-21.31%]">
+                    <img alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="absolute left-[-3px] top-[114.18px] h-[2.817px] w-[2.346px]">
+              <div className="absolute inset-[0_0_-17.75%_-21.31%]">
+                <img alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
+              </div>
+            </div>
+            <div className="absolute left-[-3px] top-[38.82px] flex h-[2.817px] w-[2.346px] items-center justify-center">
+              <div className="-scale-y-100 flex-none">
+                <div className="relative h-[2.817px] w-[2.346px]">
+                  <div className="absolute inset-[0_0_-17.75%_-21.31%]">
+                    <img alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="flex w-full flex-col items-center gap-[24px]">
+
+        {/* Cards (node 4032:5958) */}
+        <div className="relative z-10 mt-[35px] flex w-full flex-col items-center gap-[14px]">
           {cards.map((card: any) => (
             <WinCardMobile
               key={card.label}

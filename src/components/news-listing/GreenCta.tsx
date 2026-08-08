@@ -6,13 +6,21 @@ type GreenCtaProps = {
   label: string;
   href?: string;
   nodeId?: string;
+  widthClass?: string;
+  textSizeClass?: string;
 };
 
-export function GreenCta({ label, href = "#", nodeId }: GreenCtaProps) {
+export function GreenCta({
+  label,
+  href = "#",
+  nodeId,
+  widthClass = "w-[231px]",
+  textSizeClass = "text-[16px]",
+}: GreenCtaProps) {
   return (
     <a
       href={href}
-      className={`${gilroyMedium.className} drop-shadow-[0px_42px_53.5px_rgba(69,196,24,0.2)] relative flex h-[48px] w-[231px] shrink-0 items-center justify-center`}
+      className={`${gilroyMedium.className} drop-shadow-[0px_42px_53.5px_rgba(69,196,24,0.2)] relative flex h-[48px] ${widthClass} shrink-0 items-center justify-center`}
       data-node-id={nodeId}
       data-name="Cta"
     >
@@ -20,7 +28,7 @@ export function GreenCta({ label, href = "#", nodeId }: GreenCtaProps) {
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
-      <span className="relative z-10 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
+      <span className={`relative z-10 ${textSizeClass} leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]`}>
         {label}
       </span>
       <GreenCtaCorners />

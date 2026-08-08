@@ -4,12 +4,13 @@ import { Corners } from "../shared/Corners";
 type WhiteTagProps = {
   label: string;
   nodeId?: string;
+  widthClass?: string;
 };
 
-export function WhiteTag({ label, nodeId }: WhiteTagProps) {
+export function WhiteTag({ label, nodeId, widthClass = "w-[140px]" }: WhiteTagProps) {
   return (
     <div
-      className={`${dmMono.className} relative h-[26px] w-[140px] shrink-0 bg-white`}
+      className={`${dmMono.className} relative h-[26px] ${widthClass} shrink-0 bg-white`}
       data-node-id={nodeId}
       data-name="Menu"
     >

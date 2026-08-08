@@ -8,9 +8,6 @@ import {
 } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 
-const TITLE_GRADIENT =
-  "linear-gradient(123.792deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
-
 const BADGE_GRADIENT =
   "linear-gradient(135deg, rgb(229, 231, 235) 0%, rgb(209, 213, 220) 100%)";
 
@@ -31,9 +28,8 @@ function PressTitle({ heading }: { heading: string }) {
       data-node-id="2500:1663"
     >
       <h2
-        className={`${gilroyMedium.className} relative w-full bg-clip-text text-center text-[32px] leading-[38px] font-medium text-transparent not-italic [word-break:break-word] min-[1024px]:absolute min-[1024px]:left-1/2 min-[1024px]:top-[7px] min-[1024px]:-translate-x-1/2 min-[1024px]:text-[46px] min-[1024px]:leading-[49px] min-[1024px]:whitespace-nowrap`}
+        className={`${gilroyMedium.className} relative w-full bg-clip-text bg-[linear-gradient(107.4537261117953deg,rgb(255,255,255)_1.3527%,rgb(212,233,188)_55.161%,rgb(255,255,255)_111.67%)] min-[1024px]:bg-[linear-gradient(123.792deg,rgb(255,255,255)_1.3527%,rgb(212,233,188)_55.161%,rgb(255,255,255)_111.67%)] text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word] mt-[7px] min-[1024px]:mt-0 min-[1024px]:absolute min-[1024px]:left-1/2 min-[1024px]:top-[7px] min-[1024px]:-translate-x-1/2 min-[1024px]:text-[46px] min-[1024px]:leading-[49px] min-[1024px]:whitespace-nowrap`}
         style={{
-          backgroundImage: TITLE_GRADIENT,
           WebkitBackgroundClip: "text",
           backgroundClip: "text",
         }}
@@ -63,7 +59,7 @@ function PressTitle({ heading }: { heading: string }) {
 function PressMenu({ label }: { label: string }) {
   return (
     <div
-      className="relative flex h-[26px] w-[180px] shrink-0 items-center justify-center overflow-clip border border-solid border-[rgba(255,255,255,0.3)] bg-[rgba(255,255,255,0.06)]"
+      className="relative flex h-[26px] w-[150px] min-[1024px]:w-[180px] shrink-0 items-center justify-center overflow-clip min-[1024px]:border min-[1024px]:border-solid min-[1024px]:border-[rgba(255,255,255,0.3)] bg-[rgba(255,255,255,0.06)]"
       data-name="Menu"
     >
       <Corners />
@@ -75,11 +71,11 @@ function PressMenu({ label }: { label: string }) {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute left-[170.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60"
+        className="pointer-events-none absolute left-[141.48px] min-[1024px]:left-[170.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60"
       />
 
       <p
-        className={`${dmMono.className} text-[13px] leading-[13px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic pt-px`}
+        className={`${dmMono.className} text-[12px] min-[1024px]:text-[13px] leading-[19.5px] min-[1024px]:leading-[13px] font-normal tracking-[-0.36px] min-[1024px]:tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic min-[1024px]:pt-px`}
       >
         {label}
       </p>
@@ -95,7 +91,7 @@ function PressCta({ label, href }: { label: string; href: string }) {
       rel="noopener noreferrer"
       download
       aria-disabled={href === "#"}
-      className={`${gilroyMedium.className} ${GREEN_GLOW_SHADOW} relative flex h-[48px] w-[267px] shrink-0 items-center justify-center`}
+      className={`${gilroyMedium.className} ${GREEN_GLOW_SHADOW} relative flex h-[48px] w-[231px] min-[1024px]:w-[267px] shrink-0 items-center justify-center`}
       data-node-id="2500:1671"
       data-name="Cta"
     >
@@ -105,7 +101,7 @@ function PressCta({ label, href }: { label: string; href: string }) {
         className="pointer-events-none absolute inset-0 bg-[length:307.2px_307.2px] bg-top-left opacity-40 mix-blend-plus-lighter"
         style={{ backgroundImage: "url(/resources/news-cta-texture.png)" }}
       />
-      <span className="relative z-10 text-[16px] leading-[28px] font-medium whitespace-nowrap text-[#151515] uppercase not-italic [word-break:break-word]">
+      <span className="relative z-10 text-[14px] min-[1024px]:text-[16px] leading-[28px] font-medium whitespace-nowrap text-[#151515] uppercase not-italic [word-break:break-word]">
         {label}
       </span>
       <span
@@ -199,26 +195,67 @@ export function PressKit({ data }: PressKitProps = {}) {
         </div>
       </div>
 
-      {/* MOBILE (<1024px) — responsive adaptation */}
+      {/* MOBILE (<1024px) — exact Figma mobile layout (396×351 frame) */}
       <div className="relative w-full min-[1024px]:hidden">
-        <div className="flex w-full flex-col gap-[40px] px-[24px] py-[56px]">
-          <div className="flex w-full flex-col gap-[14px]">
+        {/* Background image — rotated press-kit-graphic with radial vignette */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+          <div className="absolute left-[calc(50%+225px)] top-[calc(50%+44px)] flex h-[500px] w-[888px] -translate-x-1/2 -translate-y-1/2 items-center justify-center">
+            <div className="-rotate-90 -scale-y-100">
+              <div className="relative h-[888px] w-[500px]">
+                <Image
+                  src="/news-listing/press-kit-graphic.png"
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="500px"
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "radial-gradient(284px 549.77px at 224.61px 444px, rgba(0,0,0,0.6) 0%, rgba(0,0,0,1) 100%)",
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="relative flex w-full flex-col items-center px-[23px] pt-[30px] pb-[11.46px]">
+          {/* Main content: title, subtitle, menus */}
+          <div className="flex w-full flex-col items-center gap-[10px]">
             <PressTitle heading={heading} />
             <p
-              className={`${interRegular.className} w-full text-[18px] leading-[27px] font-normal text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} w-full text-center text-[14px] leading-[19px] font-normal text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
+              data-node-id="4153:8321"
             >
               {subtitle}
             </p>
-            <div className="mt-[8px] flex w-full flex-wrap gap-[18px]">
-              {menus.map((label) => (
-                <PressMenu key={label} label={label} />
-              ))}
+
+            {/* Menu tags: 2 in row 1, remaining centered in row 2 */}
+            <div className="flex flex-col items-center gap-[10px]">
+              <div className="flex gap-[10px]">
+                {menus.slice(0, 2).map((label) => (
+                  <PressMenu key={label} label={label} />
+                ))}
+              </div>
+              {menus.length > 2 && (
+                <div className="flex gap-[10px]">
+                  {menus.slice(2).map((label) => (
+                    <PressMenu key={label} label={label} />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
-          <div className="flex flex-wrap items-center gap-[19px]">
+
+          {/* CTA + info */}
+          <div className="mt-[28.54px] flex w-[231px] flex-col items-center gap-[6px]">
             <PressCta label={ctaLabel} href={ctaHref} />
             <p
-              className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#e8e8e8] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} w-full text-center text-[12px] leading-[18px] font-normal text-[#e8e8e8] not-italic [word-break:break-word]`}
+              data-node-id="4153:8911"
             >
               {fileInfo}
             </p>

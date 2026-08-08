@@ -5,7 +5,7 @@ import { GradientTitle } from "../contact/contact-shared";
 import { mediaUrl } from "@/lib/strapi";
 
 const MOBILE_TITLE_GRADIENT =
-  "linear-gradient(98.313deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
+  "linear-gradient(98.22145329235457deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
 const MOBILE_BG_OVERLAY =
   "linear-gradient(186.64286809298935deg, rgb(0, 0, 0) 2.1162%, rgba(0, 0, 0, 0) 41.147%), linear-gradient(174.65220349058134deg, rgba(0, 0, 0, 0) 50.755%, rgb(0, 0, 0) 94.082%)";
@@ -118,7 +118,7 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
 
       {/* MOBILE (<1024px) — node 4032:5727, desktop above is untouched */}
       <div
-        className="relative w-full overflow-hidden min-[1024px]:hidden"
+        className="relative h-[600px] w-full overflow-hidden min-[1024px]:hidden"
         data-node-id="4032:5727"
         data-name="Banner"
       >
@@ -166,12 +166,12 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
 
             {/* Title with corner brackets */}
             <div
-              className="relative h-[115px] w-[356px]"
+              className="relative h-[115px] w-[352px]"
               data-node-id="4032:8626"
               data-name="Group 78"
             >
               <div
-                className={`${gilroyMedium.className} absolute left-[55px] top-[43px] w-[244px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+                className={`${gilroyMedium.className} absolute left-[56px] top-[43px] w-[241px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
                 style={{
                   backgroundImage: MOBILE_TITLE_GRADIENT,
                   WebkitBackgroundClip: "text",
@@ -187,36 +187,36 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
               </div>
 
               {/* Top-right bracket (Vector 55) */}
-              <div className="absolute left-[353px] top-[40px] flex h-[4px] w-[2.346px] items-center justify-center">
+              <div className="absolute left-[351px] top-[40px] flex h-[4px] w-[2.32px] items-center justify-center">
                 <div className="flex-none rotate-180">
-                  <div className="relative h-[4px] w-[2.346px]">
-                    <div className="absolute inset-[0_0_-12.5%_-21.31%]">
+                  <div className="relative h-[4px] w-[2.32px]">
+                    <div className="absolute inset-[0_0_-12.5%_-21.56%]">
                       <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
                     </div>
                   </div>
                 </div>
               </div>
               {/* Bottom-right bracket (Vector 56) */}
-              <div className="absolute left-[353px] top-[147px] flex h-[4px] w-[2.346px] items-center justify-center">
+              <div className="absolute left-[351px] top-[147px] flex h-[4px] w-[2.32px] items-center justify-center">
                 <div className="-scale-y-100 flex-none rotate-180">
-                  <div className="relative h-[4px] w-[2.346px]">
-                    <div className="absolute inset-[0_0_-12.5%_-21.31%]">
+                  <div className="relative h-[4px] w-[2.32px]">
+                    <div className="absolute inset-[0_0_-12.5%_-21.56%]">
                       <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
                     </div>
                   </div>
                 </div>
               </div>
               {/* Bottom-left bracket (Vector 57) */}
-              <div className="absolute left-[-3px] top-[147px] h-[4px] w-[2.346px]">
-                <div className="absolute inset-[0_0_-12.5%_-21.31%]">
+              <div className="absolute left-[-1px] top-[147px] h-[4px] w-[2.32px]">
+                <div className="absolute inset-[0_0_-12.5%_-21.56%]">
                   <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
                 </div>
               </div>
               {/* Top-left bracket (Vector 58) */}
-              <div className="absolute left-[-3px] top-[40px] flex h-[4px] w-[2.346px] items-center justify-center">
+              <div className="absolute left-[-1px] top-[40px] flex h-[4px] w-[2.32px] items-center justify-center">
                 <div className="-scale-y-100 flex-none">
-                  <div className="relative h-[4px] w-[2.346px]">
-                    <div className="absolute inset-[0_0_-12.5%_-21.31%]">
+                  <div className="relative h-[4px] w-[2.32px]">
+                    <div className="absolute inset-[0_0_-12.5%_-21.56%]">
                       <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
                     </div>
                   </div>

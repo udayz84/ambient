@@ -140,9 +140,10 @@ export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
         </div>
       </div>
 
-      {/* MOBILE (<1024px) — dedicated responsive layout */}
+      {/* MOBILE (<1024px) — exact Figma mobile layout (393×690 frame) */}
       <div className="relative w-full min-[1024px]:hidden">
-        <div className="relative h-[440px] w-full overflow-hidden">
+        {/* Image area: full-bleed background with gradient overlay */}
+        <div className="relative h-[487px] w-full overflow-hidden" data-name="Image">
           {mainBackgroundImage ? (
             <Image
               src={mainBackgroundImage}
@@ -158,29 +159,84 @@ export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
             className="pointer-events-none absolute inset-0"
             style={{
               backgroundImage:
-                "linear-gradient(185.739deg, rgba(25, 25, 25, 0) 40%, rgb(4, 4, 4) 92%)",
+                "linear-gradient(179.96262284694768deg, rgba(25, 25, 25, 0) 42.734%, rgb(4, 4, 4) 72.236%)",
             }}
           />
 
-          <p
-            className={`${interRegular.className} absolute right-[16px] top-[96px] text-[11px] leading-[18px] font-normal whitespace-nowrap text-white not-italic`}
-          >
-            {paginationText}
-          </p>
-
-          <div className="absolute bottom-[24px] left-0 flex w-full flex-col gap-[12px] px-[24px]">
-            <WhiteTag label={tagText} />
+          {/* Caption overlay — bottom of image area */}
+          <div className="absolute bottom-[15px] left-[20px] right-[18px] flex flex-col gap-[15px]">
+            <WhiteTag label={tagText} widthClass="w-[120px]" />
             <h2
-              className={`${gilroyMedium.className} w-full text-[20px] leading-[26px] font-medium text-white opacity-90 not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white opacity-90 not-italic [word-break:break-word]`}
+              data-node-id="4153:8670"
             >
               {title}
             </h2>
             <p
-              className={`${interRegular.className} w-full text-[13px] leading-[20px] font-normal text-[#d2d2d2] opacity-90 not-italic [word-break:break-word]`}
+              className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#d2d2d2] opacity-90 not-italic [word-break:break-word]`}
+              data-node-id="4153:8674"
             >
               {subtitle}
             </p>
-            <GreenCta label={ctaLabel} />
+            <GreenCta
+              label={ctaLabel}
+              widthClass="w-full"
+              textSizeClass="text-[14px]"
+            />
+          </div>
+        </div>
+
+        {/* Pagination indicator + Featured card */}
+        <div className="flex flex-col gap-[10px] px-[19px] pt-[15px] pb-[30px]">
+          <p
+            className={`${interRegular.className} text-right text-[12px] leading-[18px] font-normal whitespace-nowrap text-white not-italic`}
+            data-node-id="4153:8854"
+          >
+            {paginationText}
+          </p>
+
+          {/* Featured card */}
+          <div
+            className="relative flex gap-[6px] border border-solid border-white bg-[#191919] p-[8px]"
+            data-node-id="4153:8855"
+            data-name="Re-architecting the Physics of AI Compute."
+          >
+            {/* Card image */}
+            <div className="relative flex h-[114px] w-[130px] shrink-0 flex-col items-center overflow-clip p-[8px]">
+              <Image
+                src={featuredImage}
+                alt=""
+                fill
+                sizes="130px"
+                className="object-cover"
+              />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(88.92301976638984deg, rgba(25, 25, 25, 0) 60.881%, rgb(25, 25, 25) 99.17%)",
+                }}
+              />
+              <WhiteTag label={tagText} widthClass="w-[120px]" />
+            </div>
+
+            {/* Card content */}
+            <div className="flex h-[114px] flex-1 flex-col justify-between">
+              <h3
+                className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-white opacity-90 not-italic [word-break:break-word]`}
+                data-node-id="4153:8865"
+              >
+                {title}
+              </h3>
+              <GreenCta
+                label={ctaLabel}
+                widthClass="w-full"
+                textSizeClass="text-[14px]"
+              />
+            </div>
+
+            <Corners className="z-[3]" />
           </div>
         </div>
       </div>

@@ -488,11 +488,37 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
 
       {/* MOBILE (<1024px) — node 4032:8633, desktop above is untouched */}
       <div
-        className="relative flex w-full flex-col items-center overflow-hidden min-[1024px]:hidden"
+        className="relative flex w-full flex-col items-center overflow-hidden pb-[30px] min-[1024px]:hidden"
         data-node-id="4032:8633"
         data-name="2nd Fold"
       >
         <style>{`.dvk-m-scroll::-webkit-scrollbar{display:none}.dvk-m-scroll{scrollbar-width:none;-ms-overflow-style:none}`}</style>
+
+        {/* Top background strip (node 4032:8644) */}
+        <div
+          className="pointer-events-none absolute left-1/2 top-0 h-[260px] w-[1441px] -translate-x-1/2 overflow-hidden"
+          aria-hidden
+        >
+          <img
+            src="/applications/dvk-bg.png"
+            alt=""
+            className="size-full object-cover"
+          />
+        </div>
+
+        {/* Bottom background strip (node 4032:8645) */}
+        <div
+          className="pointer-events-none absolute bottom-0 left-[calc(50%+30px)] flex h-[341px] w-[1441px] -translate-x-1/2 items-center justify-center overflow-hidden"
+          aria-hidden
+        >
+          <div className="-scale-y-100">
+            <img
+              src="/applications/dvk-bottom.png"
+              alt=""
+              className="h-[341px] w-[1441px] object-cover"
+            />
+          </div>
+        </div>
 
         {/* Header: title + subtitle (node 4032:8646) */}
         <div
@@ -563,7 +589,7 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
 
         {/* Carousel + Feature cards (node 4032:9153) */}
         <div
-          className="relative z-10 mt-[38.5px] flex w-full flex-col items-center gap-[40px]"
+          className="relative z-10 mt-[30px] flex w-full flex-col items-center gap-[40px]"
           data-node-id="4032:9153"
         >
           {/* Product image carousel: two centered rows that peek beyond the viewport (node 4032:9152) */}
@@ -609,6 +635,16 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Navigation arrows (node 4366:12009) */}
+        <div className="relative z-10 mt-[24px] flex gap-[20px]">
+          <button type="button" className="relative size-[44px] shrink-0 cursor-pointer" aria-label="Previous">
+            <Image src="/applications/nav-arrow-left.svg" alt="" width={44} height={44} className="block size-full max-w-none" aria-hidden />
+          </button>
+          <button type="button" className="relative size-[44px] shrink-0 cursor-pointer" aria-label="Next">
+            <Image src="/applications/nav-arrow-right.svg" alt="" width={44} height={44} className="block size-full max-w-none" aria-hidden />
+          </button>
         </div>
       </div>
     </section>

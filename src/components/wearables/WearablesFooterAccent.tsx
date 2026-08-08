@@ -160,7 +160,7 @@ export function WearablesFooterAccent({ data }: { data?: any }) {
       </div>
 
       {/* MOBILE (<1024px) */}
-      <div className="relative flex w-full flex-col items-center gap-[20px] px-[24px] pt-[60px] pb-[40px] min-[1024px]:hidden">
+      <div className="relative flex w-full flex-col items-center gap-[14px] px-[20px] pt-[43px] pb-[40px] min-[1024px]:hidden">
         {panels.map((panel) => (
           <div key={panel.title} className="relative w-full">
             {/* Shape background */}

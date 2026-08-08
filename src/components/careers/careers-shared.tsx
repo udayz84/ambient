@@ -285,11 +285,13 @@ export function CareersJobCard({
   title,
   category,
   location,
+  onApply,
   nodeId,
 }: {
   title: string;
   category: string;
   location: string;
+  onApply?: () => void;
   nodeId?: string;
 }) {
   return (
@@ -315,7 +317,7 @@ export function CareersJobCard({
         href="#"
         onClick={(e) => {
           e.preventDefault();
-          onApply();
+          onApply?.();
         }}
         className={`${interMedium.className} absolute top-[51px] right-[49px] flex h-[48px] cursor-pointer items-center gap-[20px] bg-transparent transition-[background-color] duration-200 hover:bg-[rgba(255,255,255,0.05)] px-[20px] py-[10px] text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic ${BOX_BORDER_CLASS}`}
       >

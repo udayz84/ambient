@@ -215,82 +215,153 @@ export function WearablesHero({
         </div>
       </div>
 
-      {/* MOBILE (<1024px) */}
-      <div className="relative flex w-full flex-col overflow-hidden min-[1024px]:hidden">
-        <div ref={mobileRef} className={`pointer-events-none absolute inset-0 ${getFadeInClass(mobileVisible)}`} aria-hidden>
-          {/* Full scene photo (image 162) */}
-          <img
-            src={bg1}
-            alt=""
-            className="size-full max-w-none object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black" />
-        </div>
-
-        <div className="relative z-10 flex w-full flex-col items-start gap-[20px] px-[24px] pt-[104px] pb-[64px]">
-          {/* Title */}
-          <div className="relative h-[82px] w-full max-w-[300px] shrink-0">
-            <img
-              src="/applications/wearables/title-frame.svg"
-              alt=""
-              className="block size-full max-w-none"
-              aria-hidden
-            />
+      {/* MOBILE (<1024px) — node 4153:9901, frame 393×630 */}
+      <div
+        className="relative h-[630px] w-full overflow-hidden min-[1024px]:hidden"
+        data-node-id="4153:9901"
+        data-name="Banner"
+      >
+        {/* Header: title + subtitle (node 4153:10651 at top-5) */}
+        <div className="absolute left-1/2 top-[5px] z-10 flex w-[352px] -translate-x-1/2 flex-col items-center gap-[15px]">
+          {/* Title with corner brackets */}
+          <div className="relative h-[80px] w-[352px]" data-name="Group 78">
             <div
-              className={`${gilroyMedium.className} absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 text-center text-[28px] leading-[30px] font-medium text-transparent not-italic`}
+              className={`${gilroyMedium.className} absolute inset-0 flex items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
-                backgroundImage: TITLE_GRADIENT,
+                backgroundImage:
+                  "linear-gradient(112.51485485760136deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
               }}
+              data-node-id="4153:10653"
             >
               {titleLines.map((line: string, i: number) => (
-                <span key={i} className="block">
-                  {line}
-                </span>
+                <span key={i} className="block leading-[36px]">{line}</span>
               ))}
+            </div>
+
+            <div className="absolute left-[349.68px] top-0 flex h-[2.783px] w-[2.32px] items-center justify-center">
+              <div className="flex-none rotate-180">
+                <div className="relative h-[2.783px] w-[2.32px]">
+                  <div className="absolute inset-[0_0_-17.97%_-21.56%]">
+                    <img alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="absolute left-[349.68px] top-[77.22px] flex h-[2.783px] w-[2.32px] items-center justify-center">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="relative h-[2.783px] w-[2.32px]">
+                  <div className="absolute inset-[0_0_-17.97%_-21.56%]">
+                    <img alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="absolute left-0 top-[77.22px] h-[2.783px] w-[2.32px]">
+              <div className="absolute inset-[0_0_-17.97%_-21.56%]">
+                <img alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
+              </div>
+            </div>
+            <div className="absolute left-0 top-0 flex h-[2.783px] w-[2.32px] items-center justify-center">
+              <div className="-scale-y-100 flex-none">
+                <div className="relative h-[2.783px] w-[2.32px]">
+                  <div className="absolute inset-[0_0_-17.97%_-21.56%]">
+                    <img alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Subtitle */}
           <p
-            className={`${interRegular.className} w-full max-w-[327px] text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
+            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+            data-node-id="4153:10658"
           >
             {subtitle}
           </p>
+        </div>
 
-          {/* CTAs */}
-          <div className="flex w-full flex-col items-stretch gap-[14px]">
-            <a
-              href={primaryHref}
-              className={`${gilroyMedium.className} relative flex h-[48px] w-full cursor-pointer items-center justify-center overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+        {/* Product image with watermark (node 4153:10666 at top-168) */}
+        <div
+          className="absolute left-1/2 top-[168px] h-[300px] w-[508px] -translate-x-1/2 overflow-hidden"
+          data-node-id="4153:10666"
+        >
+          {/* Image 162 — base product photo */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={bg1}
+            alt=""
+            className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+            aria-hidden
+          />
+
+          {/* Watermark text */}
+          <div
+            className="pointer-events-none absolute left-1/2 top-[56.42px] -translate-x-1/2"
+            data-name="BG"
+          >
+            <p
+              className={`${gilroyExtraBold.className} whitespace-nowrap bg-clip-text text-center text-[70.559px] leading-[74.087px] tracking-[0.1764px] font-extrabold text-transparent uppercase not-italic`}
+              style={{
+                backgroundImage: WEARABLES_BG_GRADIENT,
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
+              data-node-id="4153:10670"
             >
-              <span
-                aria-hidden
-                className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-              />
-              <GreenCtaCorners />
-              <span className="relative whitespace-nowrap text-[14px] leading-[28px] font-medium text-white uppercase not-italic">
-                {primaryLabel}
-              </span>
-              <span
-                aria-hidden
-                className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
-              />
-            </a>
-            <a
-              href={secondaryHref}
-              className={`${gilroyMedium.className} relative flex h-[48px] w-full cursor-pointer items-center justify-center border border-white/20 bg-[rgba(226,241,202,0.12)]`}
-            >
-              <span className="relative whitespace-nowrap text-[14px] leading-[28px] font-medium text-white uppercase not-italic">
-                {secondaryLabel}
-              </span>
-              <Corners
-                leftSrc="/applications/wearables/vector-42.svg"
-                rightSrc="/applications/wearables/vector-43.svg"
-              />
-            </a>
+              {watermark}
+            </p>
           </div>
+
+          {/* Image 163 overlay with gradient fades */}
+          <div className="pointer-events-none absolute inset-0">
+            <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0)] from-[69.488%] to-black to-[96.665%]" />
+            <div className="absolute inset-0 overflow-hidden">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={bg2}
+                alt=""
+                className="absolute left-0 top-[-6.07%] h-[109.08%] w-full max-w-none object-cover"
+              />
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black from-[4.128%] to-[rgba(0,0,0,0)] to-[24.636%]" />
+          </div>
+        </div>
+
+        {/* CTAs (node 4153:9915 at top-508) */}
+        <div className="absolute left-1/2 top-[508px] z-10 flex w-[263px] -translate-x-1/2 flex-col items-start gap-[16px]">
+          {/* Primary CTA */}
+          <a
+            href={primaryHref}
+            className={`${gilroyMedium.className} relative flex h-[48px] w-[263px] shrink-0 cursor-pointer items-center justify-center shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+            data-node-id="4153:9916"
+            data-name="Cta"
+          >
+            <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
+            <GreenCtaCorners />
+            <span className="relative whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic">
+              {primaryLabel}
+            </span>
+            <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
+          </a>
+
+          {/* Secondary CTA */}
+          <a
+            href={secondaryHref}
+            className={`${gilroyMedium.className} relative flex h-[48px] shrink-0 cursor-pointer items-center justify-center bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+            data-node-id="4153:9927"
+            data-name="CTA - Secondary"
+          >
+            <span className="relative whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic">
+              {secondaryLabel}
+            </span>
+            <Corners
+              leftSrc="/applications/wearables/vector-42.svg"
+              rightSrc="/applications/wearables/vector-43.svg"
+            />
+          </a>
         </div>
       </div>
     </section>
