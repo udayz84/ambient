@@ -4,6 +4,7 @@ import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { TagBadge } from "../hero/TagBadge";
 import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
 import {
   BENCH_CARD,
@@ -276,84 +277,125 @@ function ProductsBenchToVolumeMobile({
 }) {
   return (
     <section
-      className="relative w-full bg-black px-[24px] pt-[64px] pb-[80px] min-[1024px]:hidden"
+      className="relative w-full overflow-hidden bg-black min-[1024px]:hidden"
       aria-label="From bench to volume"
+      data-node-id="4105:7391"
     >
-      {/* Title */}
-      <div className="flex flex-col items-center gap-[16px]">
-        <h2
-          className={`${gilroyMedium.className} max-w-full bg-clip-text text-center text-[30px] leading-[34px] font-medium text-transparent not-italic [word-break:break-word]`}
-          style={{
-            backgroundImage: BENCH_TITLE_GRADIENT,
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-          }}
-        >
-          {headingLines.join(" ").trim()}
-        </h2>
-        <p
-          className={`${interRegular.className} max-w-full text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65`}
-        >
-          {subtitle}
-        </p>
-      </div>
+      <div className="relative mx-auto w-full" style={{ maxWidth: 393 }}>
 
-      {/* Cards */}
-      <div className="mt-[32px] flex flex-col gap-[20px]">
-        {cards.map((card) => (
-          <BenchCardMobileView key={card.nodeId} card={card} chipLabel={card.chipLabel || chipLabel} />
-        ))}
+        {/* ── Header — 4105:7396 (top=30, centred, 350 wide, gap=10) ── */}
+        <div className="flex flex-col items-center gap-[10px] px-[21px] pt-[30px]">
+          <TagBadge
+            label="From eval to production"
+            width={190}
+            height={27}
+            centerLabel
+            leftBarLeft={5.7}
+            rightBarLeft={182.16}
+            labelClassName="text-[12px] leading-[20.149px] tracking-[-0.36px]"
+          />
+          {/* Title */}
+          <div className="relative">
+            <h2
+              className={`${gilroyMedium.className} w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              style={{
+                backgroundImage:
+                  "linear-gradient(98.934deg, rgb(255,255,255) 1.3527%, rgb(212,233,188) 55.161%, rgb(255,255,255) 111.67%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
+            >
+              {headingLines.map((line, i) => (
+                <span key={i} className="block leading-[36px]">{line.trim()}</span>
+              ))}
+            </h2>
+            <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
+          </div>
+          {/* Description */}
+          <p
+            className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+          >
+            {subtitle}
+          </p>
+        </div>
+
+        {/* ── Cards — 4105:7737 (355 wide, gap=12) ── */}
+        <div className="mx-auto mt-[24px] flex w-[355px] flex-col gap-[12px] pb-[30px]">
+          {cards.map((card) => (
+            <MobileBenchCard key={card.nodeId} card={card} />
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
-function BenchCardMobileView({ card, chipLabel }: { card: any; chipLabel: string }) {
-  const { fadeRef, isVisible } = useFadeIn();
-
+/* ── Mobile bench card — Figma 4105:7738 (355 wide) ── */
+function MobileBenchCard({ card }: { card: any }) {
   return (
     <article
-      ref={fadeRef}
-      className={`relative flex flex-col border-[0.5px] border-solid p-[20px] ${getFadeInClass(isVisible)}`}
-      style={{
-        backgroundColor: BENCH_CARD.bg,
-        borderColor: BENCH_CARD.border,
-      }}
+      className="relative flex w-[355px] flex-col gap-[16px] overflow-clip border-[0.461px] border-solid border-[rgba(240,240,240,0.2)] bg-black px-[18px] pb-[30px] pt-[18px]"
+      data-node-id={card.nodeId}
+      data-name="Article"
     >
-            {/* Image box */}
-            <div
-              className="relative mb-[16px] flex h-[200px] w-full items-center justify-center overflow-hidden rounded-[6px] border border-solid"
-              style={{
-                borderColor: BENCH_CARD.imageBorder,
-                backgroundImage: BENCH_IMAGE_VIGNETTE,
-              }}
-              aria-hidden
-            >
-              {card.image && (
-                <img
-                  src={card.image}
-                  alt=""
-                  className="absolute inset-0 size-full max-w-none rounded-[6px] object-contain"
-                />
-              )}
-            </div>
-            <DevChip chipLabel={card.chipLabel || chipLabel} />
-            <h3
-              className={`${gilroyMedium.className} mt-[10px] text-[22px] leading-[28px] font-medium text-white not-italic`}
-            >
-              {card.title}
-            </h3>
-            <p
-              className={`${interRegular.className} mt-[10px] text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)]`}
-            >
-              {card.description}
+      {/* Image container — 319×300, rounded, green border */}
+      <div
+        className="relative flex h-[300px] w-full shrink-0 items-center justify-center overflow-hidden rounded-[5.528px] border-[0.921px] border-solid border-[rgba(0,255,0,0.3)]"
+        style={{ backgroundImage: BENCH_IMAGE_VIGNETTE }}
+        aria-hidden
+      >
+        {card.image && (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            src={card.image}
+            alt=""
+            className="absolute inset-0 size-full max-w-none rounded-[5.528px] object-contain"
+          />
+        )}
+      </div>
+
+      {/* Content — chip + title + description */}
+      <div className="flex flex-col gap-[8px]">
+        <div className="flex flex-col gap-[8px]">
+          {/* Chip badge */}
+          <div
+            className={`${dmMono.className} relative h-[27px] w-[140px] shrink-0 overflow-clip bg-[rgba(115,190,91,0.12)]`}
+          >
+            <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
+            <p className="absolute left-1/2 top-[calc(50%-3.72px)] -translate-x-1/2 text-[12px] leading-[20.149px] tracking-[-0.36px] uppercase whitespace-nowrap text-[#ecfae5] not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
+              {card.chipLabel}
             </p>
-            <div className="mt-[20px]">
-              <GreenCta width={card.ctaWidth} href={card.ctaHref}>
-                {card.cta}
-              </GreenCta>
-            </div>
-            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+            <div className="absolute left-[5.7px] top-1/2 h-[12.399px] w-[2.067px] -translate-y-1/2 bg-white opacity-60" />
+            <div className="absolute right-[5.7px] top-1/2 h-[12.399px] w-[2.067px] -translate-y-1/2 bg-white opacity-60" />
+          </div>
+          {/* Title */}
+          <p
+            className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
+          >
+            {card.title}
+          </p>
+        </div>
+        {/* Description */}
+        <p
+          className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
+        >
+          {card.description}
+        </p>
+      </div>
+
+      {/* CTA — 140×48 */}
+      <a
+        href={card.ctaHref || "#"}
+        className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[140px] shrink-0 items-center justify-center overflow-hidden`}
+      >
+        <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
+        <AnimatedDotsBackground />
+        <span className="relative text-[12px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+          {card.cta}
+        </span>
+        <span aria-hidden className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
+        <GreenCtaCorners />
+      </a>
     </article>
   );
 }

@@ -3,6 +3,7 @@ import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { MobileTitleCorners } from "./mobile-shared";
 
 const SILICON_BG = "/technology/silicon-bg.png";
 const INDICATOR_1 = "/technology/silicon-indicator-1.svg";
@@ -11,6 +12,7 @@ const STAT_CORNERS = "/technology/stat-corners.svg";
 const LABEL_LINE = "/technology/graph-label-line.svg";
 
 const TITLE_GRADIENT_DEG = "102.791deg";
+const MOBILE_TITLE_GRADIENT_DEG = "107.454deg";
 const SUBTITLE_OPACITY = 0.65;
 const FALLBACK_TAG = "Inside Sensemesh";
 const FALLBACK_HEADING = "Proven in silicon,\nshipping today.";
@@ -123,6 +125,53 @@ function StatCard({
       >
         {description}
       </p>
+    </div>
+  );
+}
+
+function MobileStatCard({ stat }: { stat: StatCardData }) {
+  return (
+    <div className="relative h-[227px] w-[355px] overflow-clip">
+      <div className="absolute inset-0 border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.15)]" />
+      {/* corner elements */}
+      <div className="absolute left-0 top-[0.51px] h-[225.994px] w-[355px]">
+        <div className="absolute inset-[-0.22%_-0.14%]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={STAT_CORNERS} alt="" aria-hidden className="block size-full max-w-none" />
+        </div>
+      </div>
+      {/* content */}
+      <div className="absolute left-[23px] top-[22px] flex w-[308px] flex-col gap-[18px]">
+        <div className="flex w-[299px] flex-col gap-[4px]">
+          <p className={`${gilroyMedium.className} whitespace-nowrap text-white not-italic`}>
+            <span className="text-[68px] leading-[72px]">{stat.value} </span>
+            <span className={stat.unitClass}>{stat.unit}</span>
+          </p>
+          <p className={`${interRegular.className} text-[16px] leading-[27px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic`}>
+            {stat.label}
+          </p>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={LABEL_LINE} alt="" aria-hidden className="block h-px w-[151.832px] max-w-none" />
+        </div>
+        <p className={`${interRegular.className} text-[16px] leading-[27px] font-normal text-white not-italic`} style={{ opacity: 0.9 }}>
+          {stat.description}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function MobileIndicator({ rotateClass }: { rotateClass: string }) {
+  return (
+    <div className="flex h-[76.611px] w-[14.142px] items-center justify-center" aria-hidden>
+      <div className={`flex-none ${rotateClass}`}>
+        <div className="relative h-[14.142px] w-[76.611px]">
+          <div className="absolute inset-[-28.28%_-5.22%_-28.29%_0]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={INDICATOR_1} alt="" className="block size-full max-w-none" />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -319,83 +368,104 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
         </div>
       </div>
 
-      {/* MOBILE (<1024px) — basic responsive version */}
-      <div className="flex w-full flex-col items-center gap-[28px] px-[24px] py-[56px] min-[1024px]:hidden">
-        <TagBadge
-          label={tagText}
-          width={168}
-          labelOffsetX={0}
-          rightBarLeft={158.15}
-          centerLabel
-          nodeId="3015:521"
-        />
-
+      {/* MOBILE (<1024px) — Figma 3572:8893 (393×~1330) */}
+      <div className="relative mx-auto w-full max-w-[393px] overflow-hidden min-[1024px]:hidden">
+        {/* Background visual — 3572:8896 (image 108 rotated 90° + vignette) */}
         <div
-          className={`${gilroyMedium.className} bg-clip-text text-center text-[32px] leading-[37px] font-medium text-transparent not-italic`}
-          style={{
-            backgroundImage: `linear-gradient(${TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-          }}
+          className="pointer-events-none absolute top-[218px] left-1/2 z-0 overflow-hidden"
+          style={{ width: 502, height: 1052, transform: "translateX(calc(-50% + 30.5px))" }}
         >
-          <span className="block">{headingLines[0] ?? ""}</span>
-          <span className="block">{headingLines[1] ?? ""}</span>
+          <div className="flex h-full w-full items-center justify-center">
+            <div className="flex-none rotate-90">
+              <div className="relative h-[502px] w-[1052px]">
+                {bgSrc && (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img src={bgSrc} alt="" aria-hidden className="absolute inset-0 size-full max-w-none object-bottom" />
+                )}
+                <div className="absolute inset-0" style={{ backgroundImage: VIGNETTE }} />
+              </div>
+            </div>
+          </div>
         </div>
 
-        <p
-          className={`${interRegular.className} max-w-[327px] text-center text-[15px] leading-[22px] font-normal text-[#f0f0f0] not-italic`}
-          style={{ opacity: SUBTITLE_OPACITY }}
-        >
-          {subtitle}
-        </p>
-
-        {/* chip image */}
-        {chipBgSrc && (
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img
-            src={chipBgSrc}
-            alt=""
-            className="h-auto w-full max-w-[327px] rounded-[8px] object-contain"
-            aria-hidden
+        {/* Header — 3572:8897 */}
+        <div className="relative z-10 flex flex-col items-center gap-[10px] pt-[10px]">
+          <TagBadge
+            label={tagText}
+            width={146}
+            height={27}
+            centerLabel
+            leftBarLeft={6.7}
+            rightBarLeft={136.15}
+            labelClassName="text-[12px] tracking-[-0.36px]"
           />
-        )}
-
-        {/* stat cards */}
-        {statCards.map((s, i) => (
-          <div
-            key={`m-stat-${i}`}
-            className="flex w-full max-w-[327px] flex-col gap-[16px] rounded-[4px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.15)] p-[20px]"
-          >
-            <p className={`${gilroyMedium.className} text-white not-italic`}>
-              <span className="text-[44px] leading-[48px]">{s.value} </span>
-              <span className={STAT_CARD_CONFIG[i].mobileUnitClass}>{s.unit}</span>
+          <div className="relative w-[350px]">
+            <p
+              className={`${gilroyMedium.className} w-full bg-clip-text text-center text-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              style={{
+                backgroundImage: `linear-gradient(${MOBILE_TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
+            >
+              <span className="block leading-[36px]">{headingLines[0] ?? ""}</span>
+              <span className="block leading-[36px]">{headingLines[1] ?? ""}</span>
             </p>
-            <p className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-[#f0f0f0] not-italic`}>
-              {s.label}
-            </p>
-            <p className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-white not-italic`} style={{ opacity: 0.9 }}>
-              {s.description}
-            </p>
+            <MobileTitleCorners />
           </div>
-        ))}
+          <p
+            className={`${interRegular.className} w-[324px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            style={{ opacity: SUBTITLE_OPACITY }}
+          >
+            {subtitle}
+          </p>
+        </div>
 
-        <p
-          className={`${interRegular.className} max-w-[327px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
-          style={{ opacity: 0.8 }}
-        >
-          {FALLBACK_DESC}
-        </p>
+        {/* Content — 3572:8914 (stat card → indicator → chip → indicator → stat card) */}
+        <div className="relative z-10 mx-auto flex w-[355px] flex-col items-center gap-[6px] pt-[28px]">
+          {/* Group 1 */}
+          <div className="flex w-full flex-col items-center gap-px">
+            <MobileStatCard stat={statCards[0]} />
+            <MobileIndicator rotateClass="rotate-90" />
+          </div>
 
-        <a
-          href={ctaHref}
-          className={`${gilroyMedium.className} ${GREEN_CTA_SHADOW} relative block h-[48px] w-full max-w-[327px]`}
-        >
-          <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
-          <span className="absolute top-[calc(50%-14px)] left-1/2 -translate-x-1/2 text-[15px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
-            {ctaLabel}
-          </span>
-          <GreenCtaCorners />
-        </a>
+          {/* Chip image — 3572:8943 */}
+          <div className="relative h-[349px] w-[336.583px]">
+            <div className="absolute left-1/2 top-1/2 h-[391.741px] w-[377.803px] -translate-x-1/2 -translate-y-1/2 overflow-hidden">
+              {chipBgSrc && (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img src={chipBgSrc} alt="" aria-hidden className="absolute left-[-10.68%] top-[-4.24%] h-[108.47%] w-[121.37%] max-w-none" />
+              )}
+            </div>
+          </div>
+
+          {/* Group 2 */}
+          <div className="flex w-full flex-col items-center gap-px">
+            <MobileIndicator rotateClass="-rotate-90" />
+            <MobileStatCard stat={statCards[1]} />
+          </div>
+        </div>
+
+        {/* CTA — 3572:8990 */}
+        <div className="relative z-10 mx-auto flex w-[377px] flex-col items-center gap-[17px] pt-[30px] pb-[40px]">
+          <p
+            className={`${interRegular.className} w-[335px] text-center text-[14px] leading-[20px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            style={{ opacity: 0.8 }}
+          >
+            {FALLBACK_DESC}
+          </p>
+          <a
+            href={ctaHref}
+            className={`${gilroyMedium.className} ${GREEN_CTA_SHADOW} relative block h-[48px] w-[223px] shrink-0`}
+          >
+            <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
+            <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
+            <span className="absolute top-[calc(50%-14px)] left-1/2 -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
+              {ctaLabel}
+            </span>
+            <GreenCtaCorners />
+          </a>
+        </div>
       </div>
     </section>
   );

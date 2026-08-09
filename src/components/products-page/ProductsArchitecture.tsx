@@ -4,6 +4,7 @@ import { useState } from "react";
 import { mediaUrl } from "@/lib/strapi";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { TagBadge } from "../hero/TagBadge";
 import {
   ARCH_ARTICLE,
   ARCH_ASSETS,
@@ -22,6 +23,7 @@ import {
   ARCH_TITLE_GRADIENT,
   CORNER_LEFT,
   CORNER_RIGHT,
+  FEATURES_TITLE_GRADIENT_MOBILE,
 } from "./products-data";
 
 const GRID_LINE = "/products/arch-grid-line.svg"; // Figma 3529:630 / 3529:640
@@ -465,75 +467,116 @@ function ProductsArchitectureMobile({
 }) {
   return (
     <section
-      className="relative w-full bg-black px-[24px] pt-[64px] pb-[80px] min-[1024px]:hidden"
+      className="relative w-full overflow-hidden bg-black min-[1024px]:hidden"
       aria-label="Architecture"
+      data-node-id="3568:4644"
     >
-      {/* Title */}
-      <div className="flex flex-col items-center gap-[16px]">
-        <MenuChip label={label} />
-        <h2
-          className={`${gilroyMedium.className} max-w-full bg-clip-text text-center text-[30px] leading-[34px] font-medium text-transparent not-italic [word-break:break-word]`}
-          style={{
-            backgroundImage: ARCH_TITLE_GRADIENT,
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-          }}
-        >
-          {headingLines.join(" ")}
-        </h2>
-        <p
-          className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]`}
-        >
-          {subtitle}
-        </p>
-      </div>
+      <div className="relative mx-auto w-full" style={{ maxWidth: 393 }}>
 
-      {/* Architecture image + caption */}
-      <div className="mt-[24px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] p-[10px]">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        {image && (
-          <img
-            alt="GPX10 Pro architecture"
-            src={image}
-            className="h-auto w-full"
+        {/* ── Header — 3568:4704 (top=30, centred, 350 wide, gap=10) ── */}
+        <div className="flex flex-col items-center gap-[10px] px-[21px] pt-[30px]">
+          <TagBadge
+            label={label}
+            width={120}
+            height={27}
+            centerLabel
+            leftBarLeft={5.7}
+            rightBarLeft={111.16}
+            labelClassName="text-[12px] leading-[20.149px] tracking-[-0.36px]"
           />
-        )}
-        <p
-          className={`${gilroyMedium.className} mt-[16px] mb-[6px] ml-[6px] text-[22px] leading-[28px] font-medium text-white not-italic`}
-        >
-          {caption}
-        </p>
-      </div>
-
-      {/* Stats */}
-      <div className="mt-[32px] flex flex-col gap-[16px]">
-        {stats.map((stat) => (
-          <div
-            key={stat.nodeId}
-            className="relative flex flex-col gap-[12px] px-[24px] py-[20px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.1)]"
+          {/* Title — 3568:4705 */}
+          <div className="relative">
+            <h2
+              className={`${gilroyMedium.className} w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              style={{
+                backgroundImage: FEATURES_TITLE_GRADIENT_MOBILE,
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
+            >
+              {headingLines.map((line, i) => (
+                <span key={i} className="block leading-[36px]">{line.trim()}</span>
+              ))}
+            </h2>
+            <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
+          </div>
+          {/* Description */}
+          <p
+            className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           >
-            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-            <div className="flex items-center gap-[16px]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                alt=""
-                src={stat.statIcon || STAT_ICON}
-                className="h-[36px] w-[36px] shrink-0"
-                aria-hidden
-              />
+            {subtitle}
+          </p>
+        </div>
+
+        {/* ── Article card — 3568:4713 (353×492) ── */}
+        <div className="mx-auto mt-[15px] w-[353px]">
+          <div
+            className="relative h-[492px] w-[353px] border border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)]"
+            data-name="Article"
+          >
+            {/* Architecture diagram — rotated 90° (300×451) */}
+            <div
+              className="absolute left-1/2 top-[14px] h-[451px] w-[300px] -translate-x-1/2 overflow-hidden"
+            >
+              <div
+                className="absolute left-1/2 top-1/2"
+                style={{ transform: "translate(-50%, -50%) rotate(90deg)" }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  alt="GPX10 Pro architecture"
+                  src={image || "/products/architecture.png"}
+                  className="object-cover"
+                  style={{ width: 451, height: 300 }}
+                />
+              </div>
             </div>
-            <h3
-              className={`${gilroyMedium.className} text-[24px] leading-[30px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
-            >
-              {stat.title}
-            </h3>
+            {/* Corner ticks */}
+            <CornerTick src="/hero/vector-57.svg" placement="tl" style={{ left: -1, top: -0.36 }} />
+            <CornerTick src="/hero/vector-55.svg" placement="tr" style={{ right: -1, top: -0.36 }} size={3} />
+            <CornerTick src="/hero/vector-55.svg" placement="br" style={{ right: -1, bottom: 90 }} size={3} />
+            <CornerTick src="/hero/vector-57.svg" placement="bl" style={{ left: -1, bottom: 90 }} />
+            {/* Caption */}
             <p
-              className={`${interRegular.className} text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+              className={`${gilroyMedium.className} absolute whitespace-nowrap text-[14px] leading-[28px] font-medium text-white not-italic`}
+              style={{ left: 12, top: 465 }}
             >
-              {stat.description}
+              {caption}
             </p>
           </div>
-        ))}
+
+          {/* ── Stats cards — 4105:8015 (353 wide, gap=12) ── */}
+          <div className="mt-[5px] flex flex-col gap-[12px]">
+            {stats.map((stat) => (
+              <div
+                key={stat.nodeId}
+                className="relative flex w-[353px] flex-col items-center bg-[rgba(0,0,0,0.1)] p-[20px]"
+              >
+                <div className="flex w-[324px] flex-col gap-[7px]">
+                  {/* Icon + title */}
+                  <div className="flex items-center gap-[8px]">
+                    <div className="h-[32px] w-[32px] shrink-0">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img alt="" src={stat.statIcon || STAT_ICON} className="block size-full max-w-none" aria-hidden />
+                    </div>
+                    <h3
+                      className={`${gilroyMedium.className} whitespace-nowrap text-[24px] leading-[38px] font-medium text-white not-italic [word-break:break-word]`}
+                    >
+                      {stat.title}
+                    </h3>
+                  </div>
+                  {/* Description */}
+                  <p
+                    className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+                  >
+                    {stat.description}
+                  </p>
+                </div>
+                <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

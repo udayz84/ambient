@@ -52,6 +52,10 @@ export const COIN_FG = {
 export const SECTION_TITLE_GRADIENT =
   "linear-gradient(113.347deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
+/** Figma 3566:3698 — mobile features/architecture title text gradient (393 frame). */
+export const FEATURES_TITLE_GRADIENT_MOBILE =
+  "linear-gradient(101.838deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
+
 /** Figma 2901:901 — article card surface + border. */
 export const CARD_BG = "rgba(0,0,0,0.2)";
 export const CARD_BORDER = "rgba(240,240,240,0.2)";

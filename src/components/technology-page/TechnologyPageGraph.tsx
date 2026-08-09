@@ -1,7 +1,9 @@
+import { Fragment } from "react";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular, interSemiBold } from "../hero/fonts";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { MobileTitleCorners } from "./mobile-shared";
 
 /**
  * Figma 3031:508 ("Graph") — "A unified architecture for seamless adoption
@@ -51,6 +53,56 @@ const VLINES = [
   { left: 668.02, top: 408, h: 264.559, w: 0, deg: "rotate-90", src: "/technology/graph-vline-new-3.svg", inset: "-1.73px -0.12% -1.73px -0.66%" },
   { left: 916, top: 378, h: 294, w: 0, deg: "rotate-90", src: "/technology/graph-vline-new-4.svg", inset: "-1.73px -0.11% -1.73px -0.59%" },
   { left: 1177.15, top: 348, h: 324, w: 0, deg: "rotate-90", src: "/technology/graph-vline-new-5.svg", inset: "-1.73px -0.1% -1.73px -0.53%" },
+];
+
+const MOBILE_TITLE_GRADIENT_DEG = "98.934deg";
+
+type MobileImg = {
+  left: number;
+  top: number;
+  w: number;
+  h: number;
+  overflow?: boolean;
+  innerH?: string;
+  innerLeft?: string;
+  innerTop?: string;
+  innerW?: string;
+  fit?: string;
+};
+
+type MobileProduct = {
+  left: MobileImg;
+  right: MobileImg;
+  label: { left: number; top: number };
+};
+
+/** Figma 3572:6588 — exact pixel positions for the 5 products in the vertical mobile graph (393×1325). */
+const MOBILE_PRODUCTS: MobileProduct[] = [
+  {
+    left: { left: 80.03, top: 259, w: 129, h: 123 },
+    right: { left: 250, top: 249, w: 105.147, h: 100, overflow: true, innerH: "110.76%", innerLeft: "-1.38%", innerTop: "-10.31%", innerW: "103.31%" },
+    label: { left: 244, top: 351.5 },
+  },
+  {
+    left: { left: 58.53, top: 412.5, w: 168, h: 161 },
+    right: { left: 250, top: 431, w: 105.147, h: 100, fit: "object-cover" },
+    label: { left: 244, top: 533.5 },
+  },
+  {
+    left: { left: 73, top: 598, w: 157, h: 149 },
+    right: { left: 246, top: 603, w: 116.176, h: 100, overflow: true, innerH: "116.18%", innerTop: "-11.76%", innerW: "100%" },
+    label: { left: 244, top: 705.52 },
+  },
+  {
+    left: { left: 80, top: 755, w: 141, h: 150, overflow: true, innerH: "104.37%", innerLeft: "-5.67%", innerTop: "-3.78%", innerW: "110.64%" },
+    right: { left: 246, top: 780, w: 116.176, h: 100, overflow: true, innerH: "127.3%", innerLeft: "-4.95%", innerTop: "-16.9%", innerW: "109.5%" },
+    label: { left: 244, top: 883.72 },
+  },
+  {
+    left: { left: 67, top: 931, w: 161, h: 153, overflow: true, innerH: "104.8%", innerTop: "-3.71%", innerW: "100%" },
+    right: { left: 246, top: 959, w: 116.176, h: 100, fit: "object-contain" },
+    label: { left: 244, top: 1063.31 },
+  },
 ];
 
 type LabelConfig = {
@@ -329,76 +381,195 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
         />
       </div>
 
-      {/* MOBILE (<1024px) — basic responsive version */}
-      <div className="flex w-full flex-col items-start gap-[28px] px-[24px] py-[56px] min-[1024px]:hidden">
+      {/* MOBILE (<1024px) — Figma 3572:6588 (393×1325) vertical graph */}
+      <div className="relative mx-auto h-[1325px] w-full max-w-[393px] overflow-hidden min-[1024px]:hidden">
+        {/* Header — 3572:6666 */}
+        <div className="absolute top-[9px] left-1/2 flex w-[350px] -translate-x-1/2 flex-col items-center gap-[10px]">
+          <div className="relative w-full">
+            <p
+              className={`${gilroyMedium.className} w-full bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              style={{
+                backgroundImage: `linear-gradient(${MOBILE_TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
+            >
+              {heading}
+            </p>
+            <MobileTitleCorners />
+          </div>
+          <p
+            className={`${interRegular.className} w-[334px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+          >
+            {subtitle}
+          </p>
+        </div>
+
+        {/* Vertical center line — 3572:8365 (line 118 rotated 90°) */}
         <div
-          className={`${gilroyMedium.className} bg-clip-text text-[30px] leading-[35px] font-medium text-transparent not-italic`}
-          style={{
-            backgroundImage: `linear-gradient(${TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-          }}
+          className="absolute top-[220px] left-[calc(50%-139.5px)] flex h-[926px] w-0 -translate-x-1/2 items-center justify-center"
+          aria-hidden
         >
-          {heading}
-        </div>
-        <p
-          className={`${interRegular.className} max-w-[327px] text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
-        >
-          {subtitle}
-        </p>
-
-        {/* scaled cube row — positioned by % so they always fit the container */}
-        <div className="relative mx-auto h-[220px] w-full max-w-[380px] overflow-hidden">
-          {CUBES.map((img, i) => {
-            const scale = 380 / 1440;
-            return (
-              <div
-                key={`m-cube-${i}`}
-                className="absolute origin-bottom-left"
-                style={{
-                  left: `${(img.left / 1440) * 100}%`,
-                  bottom: 0,
-                  width: img.w * scale,
-                  height: img.h * scale,
-                }}
-              >
+          <div className="flex-none rotate-90">
+            <div className="relative h-0 w-[926px]">
+              <div className="absolute inset-[-1px_0_0_0]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={img.src} alt="" aria-hidden className="block size-full max-w-none object-cover" />
+                <img src={BASELINE} alt="" className="block size-full max-w-none" />
               </div>
-            );
-          })}
-          <div className="absolute bottom-0 left-0 h-px w-full bg-[#4a4a4a]" />
-        </div>
-
-        <div className="grid w-full grid-cols-2 gap-x-[16px] gap-y-[16px]">
-          {labels.map((l, i) => (
-            <div key={`m-label-${i}`} className="flex flex-col gap-[4px]">
-              <p className={`${gilroyMedium.className} text-[18px] leading-[22px] font-medium text-white not-italic`}>
-                {l.name}
-              </p>
-              <p className={`${interRegular.className} text-[10px] leading-[14px] font-normal tracking-[0.2px] whitespace-nowrap text-[#f0f0f0] uppercase not-italic`}>
-                {l.cat}
-              </p>
             </div>
-          ))}
+          </div>
         </div>
 
-        <div className="mt-[8px] flex w-full flex-col items-stretch gap-[12px]">
+        {/* Axis label — top (MICROWATT EDGE) */}
+        <div
+          className="absolute top-[220px] left-[29px] flex h-[124px] w-[23px] items-center justify-center"
+          aria-hidden
+        >
+          <div className="flex-none rotate-90">
+            <p
+              className={`${interRegular.className} text-[14px] leading-[22.75px] font-normal tracking-[-0.1504px] whitespace-nowrap text-[rgba(255,255,255,0.4)] not-italic`}
+            >
+              {axisLeft}
+            </p>
+          </div>
+        </div>
+
+        {/* Axis label — bottom (HYPERSCALE CLOUD) */}
+        <div
+          className="absolute top-[1004px] left-[52.47px] flex h-[142px] w-[23px] -translate-x-full items-center justify-center"
+          aria-hidden
+        >
+          <div className="flex-none rotate-90">
+            <p
+              className={`${interRegular.className} text-right text-[14px] leading-[22.75px] font-normal tracking-[-0.1504px] whitespace-nowrap text-[rgba(255,255,255,0.4)] not-italic`}
+            >
+              {axisRight}
+            </p>
+          </div>
+        </div>
+
+        {/* Products — left images, right images, labels */}
+        {MOBILE_PRODUCTS.map((p, i) => {
+          const label = labels[i];
+          if (!label) return null;
+          const leftSrc = label.bottomImageSrc || CUBES[i]?.src;
+          const rightSrc = label.topImageSrc || TOP_IMAGES[i]?.src;
+          return (
+            <Fragment key={`m-graph-${i}`}>
+              {/* Left image (large product render / cube) */}
+              {leftSrc && (
+                <div
+                  className="absolute"
+                  style={{ left: p.left.left, top: p.left.top, width: p.left.w, height: p.left.h }}
+                >
+                  {p.left.overflow ? (
+                    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={leftSrc}
+                        alt=""
+                        aria-hidden
+                        className="absolute max-w-none"
+                        style={{
+                          height: p.left.innerH,
+                          left: p.left.innerLeft || 0,
+                          top: p.left.innerTop || 0,
+                          width: p.left.innerW || "100%",
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
+                      src={leftSrc}
+                      alt=""
+                      aria-hidden
+                      className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+                    />
+                  )}
+                </div>
+              )}
+
+              {/* Right image (device render) */}
+              {rightSrc && (
+                <div
+                  className="absolute"
+                  style={{ left: p.right.left, top: p.right.top, width: p.right.w, height: p.right.h }}
+                >
+                  {p.right.overflow ? (
+                    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={rightSrc}
+                        alt=""
+                        aria-hidden
+                        className="absolute max-w-none"
+                        style={{
+                          height: p.right.innerH,
+                          left: p.right.innerLeft || 0,
+                          top: p.right.innerTop || 0,
+                          width: p.right.innerW || "100%",
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
+                      src={rightSrc}
+                      alt=""
+                      aria-hidden
+                      className={`pointer-events-none absolute inset-0 size-full max-w-none ${p.right.fit || "object-contain"}`}
+                    />
+                  )}
+                </div>
+              )}
+
+              {/* Product label — 3572:8368 etc */}
+              <div
+                className="absolute flex flex-col items-start gap-[4px]"
+                style={{ left: p.label.left, top: p.label.top }}
+              >
+                <p
+                  className={`${gilroyMedium.className} text-[20px] leading-[29px] font-medium whitespace-nowrap text-white not-italic`}
+                >
+                  {label.name}
+                </p>
+                <p
+                  className={`${interRegular.className} text-[12px] leading-[18px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic`}
+                >
+                  {label.cat}
+                </p>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={LABEL_LINE}
+                  alt=""
+                  aria-hidden
+                  className="block max-w-none"
+                  style={{ width: 151.832, height: 1 }}
+                />
+              </div>
+            </Fragment>
+          );
+        })}
+
+        {/* CTA buttons — 4129:8251 */}
+        <div className="absolute bottom-[30px] left-1/2 flex -translate-x-1/2 flex-col items-start gap-[24px]">
           <a
             href={primaryHref}
-            className={`${gilroyMedium.className} ${GREEN_CTA_SHADOW} relative block h-[48px] w-full`}
+            className={`${gilroyMedium.className} ${GREEN_CTA_SHADOW} relative block h-[48px] w-[263px] shrink-0`}
           >
             <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
-            <span className="absolute top-[calc(50%-14px)] left-1/2 -translate-x-1/2 text-[15px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
+            <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
+            <span className="absolute top-[calc(50%-14px)] left-1/2 -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
               {primaryLabel}
             </span>
             <GreenCtaCorners />
           </a>
           <a
             href={secondaryHref}
-            className={`${gilroyMedium.className} relative block h-[48px] w-full bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+            className={`${gilroyMedium.className} relative block shrink-0 bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
           >
-            <span className="relative flex h-full items-center justify-center text-[12px] min-[290px]:text-[15px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
+            <span className="relative flex items-center text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
               {secondaryLabel}
             </span>
             <GreenCtaCorners />

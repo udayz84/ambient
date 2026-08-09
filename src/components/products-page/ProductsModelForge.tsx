@@ -1,7 +1,9 @@
 import { mediaUrl } from "@/lib/strapi";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { TagBadge } from "../hero/TagBadge";
 import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
@@ -14,6 +16,7 @@ import {
   STEP_NUMBER_GRADIENT,
   PRIMARY_CTA_SHADOW,
   PRIMARY_CTA_INSET,
+  SECONDARY_CTA_BG,
 } from "./products-data";
 
 const FALLBACK_HEADING = "Your models. Your IDE. No rewrites.";
@@ -129,7 +132,8 @@ export function ProductsModelForge({ data }: { data?: any }) {
         heading={heading}
         subtitle={subtitle}
         steps={steps}
-        subfeatures={subfeatures}
+        primary={primary}
+        secondary={secondary}
       />
     </>
   );
@@ -339,119 +343,146 @@ function ProductsModelForgeMobile({
   heading,
   subtitle,
   steps,
-  subfeatures,
+  primary,
+  secondary,
 }: {
   heading: string;
   subtitle: string;
   steps: any[];
-  subfeatures: any[];
+  primary: { label: string; href: string };
+  secondary: { label: string; href: string };
 }) {
   return (
     <section
-      className="relative w-full bg-black px-[24px] pt-[64px] pb-[80px] min-[1024px]:hidden"
+      className="relative w-full overflow-hidden bg-black min-[1024px]:hidden"
       aria-label="ModelForge workflow"
+      data-node-id="3568:4778"
     >
-      {/* Title */}
-      <div className="flex flex-col items-center gap-[16px]">
-        <MenuChip label="BUILD WITH GPX10PRO" />
-        <h2
-          className={`${gilroyMedium.className} max-w-full bg-clip-text text-center text-[30px] leading-[34px] font-medium text-transparent not-italic [word-break:break-word]`}
+      <div className="relative mx-auto w-full" style={{ maxWidth: 393 }}>
+
+        {/* ── Header — 3568:4786 (top=30, centred, 350 wide, gap=10) ── */}
+        <div className="flex flex-col items-center gap-[10px] px-[21px] pt-[30px]">
+          <TagBadge
+            label="Build with GPX10PRO"
+            width={160}
+            height={27}
+            centerLabel
+            leftBarLeft={5.7}
+            rightBarLeft={151.16}
+            labelClassName="text-[12px] leading-[20.149px] tracking-[-0.36px]"
+          />
+          {/* Title */}
+          <div className="relative">
+            <h2
+              className={`${gilroyMedium.className} w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              style={{
+                backgroundImage:
+                  "linear-gradient(107.454deg, rgb(255,255,255) 1.3527%, rgb(212,233,188) 55.161%, rgb(255,255,255) 111.67%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
+            >
+              {heading}
+            </h2>
+            <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
+          </div>
+          {/* Description */}
+          <p
+            className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+          >
+            {subtitle}
+          </p>
+        </div>
+
+        {/* ── Cards — 3572:8992 (354 wide, gap=14) ── */}
+        <div className="mx-auto mt-[26px] flex w-[354px] flex-col gap-[14px]">
+          {steps.map((step) => (
+            <MobileModelForgeCard key={step.nodeId} step={step} />
+          ))}
+        </div>
+
+        {/* ── CTA row — 3572:9026 (354 wide, gap=14) ── */}
+        <div className="mx-auto mt-[30px] flex gap-[14px] pb-[30px]">
+          {/* Primary — 211×48 */}
+          <a
+            href={primary.href}
+            className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[211px] shrink-0 items-center justify-center overflow-hidden`}
+          >
+            <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
+            <AnimatedDotsBackground />
+            <span className="relative text-[12px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+              {primary.label}
+            </span>
+            <span aria-hidden className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
+            <GreenCtaCorners />
+          </a>
+          {/* Secondary — 129×48 */}
+          <a
+            href={secondary.href}
+            className={`${gilroyMedium.className} relative flex h-[48px] w-[129px] shrink-0 items-center justify-center overflow-clip px-[20px] py-[10px]`}
+            style={{ backgroundColor: SECONDARY_CTA_BG }}
+          >
+            <span className="relative text-[12px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+              {secondary.label}
+            </span>
+            <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Mobile ModelForge card — Figma 3572:8993 (354×400) ── */
+function MobileModelForgeCard({ step }: { step: any }) {
+  return (
+    <article
+      className="relative h-[400px] w-[354px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)]"
+      data-node-id={step.nodeId}
+      data-name="Article"
+    >
+      {/* NewsSection — content area at (32, 16) */}
+      <div className="absolute left-[32px] top-[16px] h-[359px] w-[290px]" data-name="NewsSection">
+        {/* Image */}
+        {step.image && (
+          <div className="absolute left-[-16px] top-0 h-[210px] w-[322px] overflow-hidden" data-name="image" aria-hidden>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img alt="" src={step.image} className="absolute inset-0 size-full object-cover" />
+            <div
+              className="absolute inset-0"
+              style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0) 88.146%, #000000 100%)" }}
+            />
+          </div>
+        )}
+        {/* Step number — 70px watermark */}
+        <span
+          className={`${gilroyMedium.className} pointer-events-none absolute left-[-15px] top-[215px] bg-clip-text text-[70px] leading-[64px] font-medium text-transparent opacity-50 not-italic whitespace-nowrap`}
           style={{
-            backgroundImage: MODELFORGE_TITLE_GRADIENT,
+            backgroundImage: STEP_NUMBER_GRADIENT,
             WebkitBackgroundClip: "text",
             backgroundClip: "text",
           }}
+          aria-hidden
         >
-          {heading}
-        </h2>
-        <p
-          className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]`}
-        >
-          {subtitle}
-        </p>
-      </div>
-
-      {/* Cards */}
-      <div className="mt-[32px] flex flex-col gap-[20px]">
-        {steps.map((step) => (
-          <article
-            key={step.nodeId}
-            className="relative flex flex-col border border-solid p-[20px]"
-            style={{
-              backgroundColor: MODELFORGE_CARD_BG,
-              borderColor: MODELFORGE_CARD_BORDER,
-            }}
+          {step.number}
+        </span>
+        {/* Title + description */}
+        <div className="absolute left-[-16px] top-[259px] flex w-[322px] flex-col gap-[5px]">
+          <h3
+            className={`${gilroyMedium.className} text-[24px] leading-[38px] font-medium text-white not-italic [word-break:break-word]`}
           >
-            {/* Image */}
-            <div
-              className="relative mb-[16px] h-[180px] w-full overflow-hidden"
-              aria-hidden
-            >
-              {step.image && (
-                <img
-                  alt=""
-                  src={step.image}
-                  className="absolute inset-0 h-full w-full object-contain"
-                />
-              )}
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(to bottom, rgba(0,0,0,0) 80%, #000000 100%)",
-                }}
-              />
-            </div>
-
-            <div className="flex items-center gap-[12px]">
-              <span
-                className={`${gilroyMedium.className} bg-clip-text text-[44px] leading-[44px] font-medium text-transparent opacity-50 not-italic`}
-                style={{
-                  backgroundImage: STEP_NUMBER_GRADIENT,
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                }}
-                aria-hidden
-              >
-                {step.number.split(" ")[0]}
-              </span>
-              <h3
-                className={`${gilroyMedium.className} text-[24px] leading-[30px] font-medium text-white not-italic`}
-              >
-                {step.title}
-              </h3>
-            </div>
-            <p
-              className={`${interRegular.className} mt-[8px] text-[14px] leading-[21px] font-normal text-[#99a1af] not-italic`}
-            >
-              {step.description}
-            </p>
-
-            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-          </article>
-        ))}
-      </div>
-
-      {/* Mobile Sub-features */}
-      <div className="mt-[20px] flex flex-col gap-[20px]">
-        {subfeatures.map((feat, i) => (
-          <div 
-            key={i} 
-            className="relative flex flex-col p-[20px] border border-solid"
-            style={{ 
-              borderColor: MODELFORGE_CARD_BORDER,
-              background: "linear-gradient(90deg, rgba(21,43,14,0.6) 0%, rgba(5,10,3,0.3) 100%)"
-            }}
+            {step.title}
+          </h3>
+          <p
+            className={`${interRegular.className} text-[14px] leading-[22px] font-normal tracking-[-0.3125px] text-[#99a1af] not-italic [word-break:break-word]`}
           >
-            <div className="text-[#d4e9bc] mb-[16px]">
-              {feat.icon}
-            </div>
-            <p className={`${interRegular.className} text-[14px] leading-[21px] text-[#f0f0f0]`}>{feat.text}</p>
-            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-          </div>
-        ))}
+            {step.description}
+          </p>
+        </div>
       </div>
-    </section>
+      {/* Corner ticks */}
+      <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
+    </article>
   );
 }
 

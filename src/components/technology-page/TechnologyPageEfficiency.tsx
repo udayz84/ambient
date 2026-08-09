@@ -1,5 +1,6 @@
 import { gilroyMedium, interMedium, interRegular } from "../hero/fonts";
 import { GradientTitle } from "../contact/contact-shared";
+import { MobileTitleCorners } from "./mobile-shared";
 
 const TITLE_GRADIENT_DEG = "114.359deg";
 const FALLBACK_SUBTITLE =
@@ -386,6 +387,185 @@ function Glow({
   );
 }
 
+const MOBILE_TITLE_GRADIENT_DEG = "98.934deg";
+
+/** Shared inner content for the 1166×468 "Lower power consumption" panel.
+ *  Used by both desktop (absolute-positioned) and mobile (scrollable). */
+function EfficiencyTableContent() {
+  return (
+    <>
+      {/* background */}
+      <div
+        className="absolute top-0 left-0 h-[468px] w-[1166px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)]"
+        style={{
+          backgroundImage:
+            "linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), linear-gradient(90deg, rgba(15, 14, 14, 0.75) 0%, rgba(15, 14, 14, 0.75) 100%)",
+        }}
+        data-node-id="3508:616"
+        data-name="background"
+      />
+      {/* row-1 highlight band */}
+      <div
+        className="absolute top-[72.89px] left-[0.39px] h-[86.066px] w-[1165.605px] border-t border-b border-solid border-[#bfe9b1] opacity-60"
+        style={{
+          backgroundImage:
+            "linear-gradient(89.2557deg, rgba(83, 216, 36, 0) 75.369%, rgba(83, 216, 36, 0.2) 99.944%), linear-gradient(90deg, rgba(83, 216, 36, 0.2) 0%, rgba(83, 216, 36, 0) 34.507%), linear-gradient(90deg, rgba(83, 216, 36, 0.1) 0%, rgba(83, 216, 36, 0.1) 100%)",
+        }}
+        data-node-id="3508:681"
+      />
+      {/* header band */}
+      <div
+        className="absolute top-[0.5px] left-0 h-[72px] w-[1166px] bg-[rgba(51,51,51,0.1)]"
+        data-node-id="3529:655"
+      />
+      <PanelCorners />
+
+      {/* row labels */}
+      {ROWS.map((row, i) => (
+        <p
+          key={`name-${i}`}
+          className={`${gilroyMedium.className} absolute left-[201.5px] text-[26px] leading-[29px] font-medium whitespace-nowrap not-italic ${
+            row.highlighted ? "text-[#53d824]" : "text-[#d2d2d2]"
+          }`}
+          style={{ top: `${ROW_TOP[i]}px` }}
+        >
+          {row.name}
+        </p>
+      ))}
+
+      {/* power values */}
+      {ROWS.map((row, i) => (
+        <p
+          key={`power-${i}`}
+          className={`${gilroyMedium.className} absolute left-[395.32px] text-[22px] leading-[28px] font-medium whitespace-nowrap text-[#e2f9da] not-italic`}
+          style={{ top: `${ROW_TOP[i]}px` }}
+        >
+          {row.power}
+        </p>
+      ))}
+
+      {/* area values */}
+      {ROWS.map((row, i) => (
+        <p
+          key={`area-${i}`}
+          className={`${gilroyMedium.className} absolute left-[641.72px] text-[0px] leading-[0] font-medium whitespace-nowrap text-[#e2f9da] not-italic`}
+          style={{ top: `${ROW_TOP[i]}px` }}
+        >
+          <span className="text-[22px] leading-[28px]">{row.area}</span>
+          <span className="text-[14.19px] leading-[28px]">2</span>
+        </p>
+      ))}
+
+      {/* trade-off values */}
+      {ROWS.map((row, i) => (
+        <p
+          key={`trade-${i}`}
+          className={`${gilroyMedium.className} absolute text-[22px] leading-[28px] font-medium whitespace-nowrap text-[#e2f9da] not-italic`}
+          style={{ top: `${TRADE_TOP[i]}px`, left: `${TRADE_LEFT[i]}px` }}
+        >
+          {row.tradeoff}
+        </p>
+      ))}
+
+      {/* rank badges */}
+      {ROWS.map((row, i) => (
+        <div
+          key={`rank-${i}`}
+          className={`absolute left-[31.55px] flex h-[32px] w-[33.143px] flex-col items-center justify-center rounded-[4px] px-[10px] ${
+            row.highlighted
+              ? "bg-[#3a9719]"
+              : "bg-[rgba(83,216,36,0.1)]"
+          }`}
+          style={{ top: `${BADGE_TOP[i]}px` }}
+        >
+          <p
+            className={`${gilroyMedium.className} w-full shrink-0 text-center text-[16px] leading-[28px] font-medium text-[#e2f9da] not-italic`}
+          >
+            {row.rank}
+          </p>
+        </div>
+      ))}
+
+      {/* row separators */}
+      {LINE_TOP.map((top, i) => (
+        <div
+          key={`line-${i}`}
+          className="absolute left-[49.86px] h-0 w-[1077.925px]"
+          style={{ top: `${top}px` }}
+        >
+          <div
+            className="absolute inset-[-1px_0_0_0] opacity-30"
+            style={{
+              backgroundImage:
+                "linear-gradient(270deg, rgba(255,255,255,0) 0%, #ffffff 50%, rgba(255,255,255,0) 100%)",
+            }}
+          />
+        </div>
+      ))}
+
+      {/* header row */}
+      <div
+        className={`${interMedium.className} absolute top-[6px] left-[-0.45px] flex h-[56px] w-[1166px] flex-wrap items-start gap-0 px-[32px] py-[20px] text-[14px] leading-[0] font-medium text-[#d2d2d2] uppercase not-italic`}
+        data-node-id="3508:649"
+      >
+        {HEADERS.map((h, i) => (
+          <div
+            key={`hdr-${i}`}
+            className={`relative flex h-full shrink-0 flex-col justify-center ${
+              i === 0 ? "w-[117.695px]" : "min-w-px flex-[1_0_0]"
+            }`}
+          >
+            <p className="leading-[16px]">{h}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* architecture sub-labels */}
+      {ROWS.map((row, i) => (
+        <div
+          key={`sub-${i}`}
+          className={`${interRegular.className} absolute left-[198.97px] flex -translate-y-1/2 flex-col justify-center text-[12px] leading-[0] font-normal whitespace-nowrap text-white not-italic`}
+          style={{ top: `${SUB_TOP[i]}px` }}
+        >
+          <p className="leading-[18px]">{row.sub}</p>
+        </div>
+      ))}
+
+      {/* chip thumbnails */}
+      {ROWS.map((row, i) => (
+        <ChipImage key={`chip-${i}`} variant={row.image} />
+      ))}
+
+      {/* power bars */}
+      {ROWS.map((row, i) => (
+        <UsageBar
+          key={`pbar-${i}`}
+          left={395}
+          top={BAR_TOP[i]}
+          segment={row.powerBar}
+          muted={!row.highlighted}
+        />
+      ))}
+
+      {/* area bars */}
+      {ROWS.map((row, i) => (
+        <UsageBar
+          key={`abar-${i}`}
+          left={641.4}
+          top={BAR_TOP[i]}
+          segment={row.areaBar}
+          muted={!row.highlighted}
+        />
+      ))}
+
+      {/* trade-off icons */}
+      {ROWS.map((row, i) => (
+        <TradeoffIcon key={`icon-${i}`} icon={row.icon} />
+      ))}
+    </>
+  );
+}
+
 export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
   const heading = data?.heading || FALLBACK_HEADING;
   // The design mandates a two-line title. Strapi stores the same copy as a
@@ -469,294 +649,61 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
           data-node-id="3508:615"
           data-name="Lower power consumption"
         >
-          {/* background */}
-          <div
-            className="absolute top-0 left-0 h-[468px] w-[1166px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)]"
-            style={{
-              backgroundImage:
-                "linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), linear-gradient(90deg, rgba(15, 14, 14, 0.75) 0%, rgba(15, 14, 14, 0.75) 100%)",
-            }}
-            data-node-id="3508:616"
-            data-name="background"
-          />
-          {/* row-1 highlight band */}
-          <div
-            className="absolute top-[72.89px] left-[0.39px] h-[86.066px] w-[1165.605px] border-t border-b border-solid border-[#bfe9b1] opacity-60"
-            style={{
-              backgroundImage:
-                "linear-gradient(89.2557deg, rgba(83, 216, 36, 0) 75.369%, rgba(83, 216, 36, 0.2) 99.944%), linear-gradient(90deg, rgba(83, 216, 36, 0.2) 0%, rgba(83, 216, 36, 0) 34.507%), linear-gradient(90deg, rgba(83, 216, 36, 0.1) 0%, rgba(83, 216, 36, 0.1) 100%)",
-            }}
-            data-node-id="3508:681"
-          />
-          {/* header band */}
-          <div
-            className="absolute top-[0.5px] left-0 h-[72px] w-[1166px] bg-[rgba(51,51,51,0.1)]"
-            data-node-id="3529:655"
-          />
-          <PanelCorners />
-
-          {/* row labels */}
-          {ROWS.map((row, i) => (
-            <p
-              key={`name-${i}`}
-              className={`${gilroyMedium.className} absolute left-[201.5px] text-[26px] leading-[29px] font-medium whitespace-nowrap not-italic ${
-                row.highlighted ? "text-[#53d824]" : "text-[#d2d2d2]"
-              }`}
-              style={{ top: `${ROW_TOP[i]}px` }}
-            >
-              {row.name}
-            </p>
-          ))}
-
-          {/* power values */}
-          {ROWS.map((row, i) => (
-            <p
-              key={`power-${i}`}
-              className={`${gilroyMedium.className} absolute left-[395.32px] text-[22px] leading-[28px] font-medium whitespace-nowrap text-[#e2f9da] not-italic`}
-              style={{ top: `${ROW_TOP[i]}px` }}
-            >
-              {row.power}
-            </p>
-          ))}
-
-          {/* area values */}
-          {ROWS.map((row, i) => (
-            <p
-              key={`area-${i}`}
-              className={`${gilroyMedium.className} absolute left-[641.72px] text-[0px] leading-[0] font-medium whitespace-nowrap text-[#e2f9da] not-italic`}
-              style={{ top: `${ROW_TOP[i]}px` }}
-            >
-              <span className="text-[22px] leading-[28px]">{row.area}</span>
-              <span className="text-[14.19px] leading-[28px]">2</span>
-            </p>
-          ))}
-
-          {/* trade-off values */}
-          {ROWS.map((row, i) => (
-            <p
-              key={`trade-${i}`}
-              className={`${gilroyMedium.className} absolute text-[22px] leading-[28px] font-medium whitespace-nowrap text-[#e2f9da] not-italic`}
-              style={{ top: `${TRADE_TOP[i]}px`, left: `${TRADE_LEFT[i]}px` }}
-            >
-              {row.tradeoff}
-            </p>
-          ))}
-
-          {/* rank badges */}
-          {ROWS.map((row, i) => (
-            <div
-              key={`rank-${i}`}
-              className={`absolute left-[31.55px] flex h-[32px] w-[33.143px] flex-col items-center justify-center rounded-[4px] px-[10px] ${
-                row.highlighted
-                  ? "bg-[#3a9719]"
-                  : "bg-[rgba(83,216,36,0.1)]"
-              }`}
-              style={{ top: `${BADGE_TOP[i]}px` }}
-            >
-              <p
-                className={`${gilroyMedium.className} w-full shrink-0 text-center text-[16px] leading-[28px] font-medium text-[#e2f9da] not-italic`}
-              >
-                {row.rank}
-              </p>
-            </div>
-          ))}
-
-          {/* row separators */}
-          {LINE_TOP.map((top, i) => (
-            <div
-              key={`line-${i}`}
-              className="absolute left-[49.86px] h-0 w-[1077.925px]"
-              style={{ top: `${top}px` }}
-            >
-              <div
-                className="absolute inset-[-1px_0_0_0] opacity-30"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(270deg, rgba(255,255,255,0) 0%, #ffffff 50%, rgba(255,255,255,0) 100%)",
-                }}
-              />
-            </div>
-          ))}
-
-          {/* header row */}
-          <div
-            className={`${interMedium.className} absolute top-[6px] left-[-0.45px] flex h-[56px] w-[1166px] flex-wrap items-start gap-0 px-[32px] py-[20px] text-[14px] leading-[0] font-medium text-[#d2d2d2] uppercase not-italic`}
-            data-node-id="3508:649"
-          >
-            {HEADERS.map((h, i) => (
-              <div
-                key={`hdr-${i}`}
-                className={`relative flex h-full shrink-0 flex-col justify-center ${
-                  i === 0 ? "w-[117.695px]" : "min-w-px flex-[1_0_0]"
-                }`}
-              >
-                <p className="leading-[16px]">{h}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* architecture sub-labels */}
-          {ROWS.map((row, i) => (
-            <div
-              key={`sub-${i}`}
-              className={`${interRegular.className} absolute left-[198.97px] flex -translate-y-1/2 flex-col justify-center text-[12px] leading-[0] font-normal whitespace-nowrap text-white not-italic`}
-              style={{ top: `${SUB_TOP[i]}px` }}
-            >
-              <p className="leading-[18px]">{row.sub}</p>
-            </div>
-          ))}
-
-          {/* chip thumbnails */}
-          {ROWS.map((row, i) => (
-            <ChipImage key={`chip-${i}`} variant={row.image} />
-          ))}
-
-          {/* power bars */}
-          {ROWS.map((row, i) => (
-            <UsageBar
-              key={`pbar-${i}`}
-              left={395}
-              top={BAR_TOP[i]}
-              segment={row.powerBar}
-              muted={!row.highlighted}
-            />
-          ))}
-
-          {/* area bars */}
-          {ROWS.map((row, i) => (
-            <UsageBar
-              key={`abar-${i}`}
-              left={641.4}
-              top={BAR_TOP[i]}
-              segment={row.areaBar}
-              muted={!row.highlighted}
-            />
-          ))}
-
-          {/* trade-off icons */}
-          {ROWS.map((row, i) => (
-            <TradeoffIcon key={`icon-${i}`} icon={row.icon} />
-          ))}
+          <EfficiencyTableContent />
         </div>
       </div>
 
-      {/* MOBILE (<1024px) — stacked rank cards, same content */}
-      <div className="flex w-full flex-col gap-[20px] px-[24px] py-[56px] min-[1024px]:hidden">
-        <div
-          className={`${gilroyMedium.className} bg-clip-text text-[28px] leading-[33px] font-medium text-transparent not-italic`}
-          style={{
-            backgroundImage: `linear-gradient(${TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-          }}
-        >
-          {headingLines.join(" ")}
-        </div>
-        <p
-          className={`${interRegular.className} max-w-[327px] text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
-        >
-          {subtitle}
-        </p>
+      {/* MOBILE (<1024px) — Figma 3572:6805 */}
+      <div className="relative w-full overflow-hidden min-[1024px]:hidden">
+        {/* Background glows — 3572:6807 / 3572:6808 */}
+        <Glow
+          top="top-[-104px]"
+          height="h-[539px]"
+          flipClass="-scale-y-100 rotate-180"
+          fromStop="from-[15.366%]"
+          toStop="to-[63.608%]"
+          nodeId="3572:6808"
+        />
+        <Glow
+          top="top-[435px]"
+          height="h-[540px]"
+          flipClass="rotate-180"
+          fromStop="from-[29.711%]"
+          toStop="to-[42.418%]"
+          nodeId="3572:6807"
+        />
 
-        {ROWS.map((row, i) => (
-          <div
-            key={`m-row-${i}`}
-            className="flex flex-col gap-[12px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] p-[16px]"
-            style={{
-              backgroundImage: row.highlighted
-                ? "linear-gradient(90deg, rgba(83, 216, 36, 0.2) 0%, rgba(83, 216, 36, 0) 60%), linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), linear-gradient(90deg, rgba(15, 14, 14, 0.75) 0%, rgba(15, 14, 14, 0.75) 100%)"
-                : "linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), linear-gradient(90deg, rgba(15, 14, 14, 0.75) 0%, rgba(15, 14, 14, 0.75) 100%)",
-            }}
-          >
-            <div className="flex items-center gap-[12px]">
-              <div
-                className={`flex h-[32px] w-[33.143px] shrink-0 flex-col items-center justify-center rounded-[4px] ${
-                  row.highlighted
-                    ? "bg-[#3a9719]"
-                    : "bg-[rgba(83,216,36,0.1)]"
-                }`}
-              >
-                <p
-                  className={`${gilroyMedium.className} text-center text-[16px] leading-[28px] font-medium text-[#e2f9da] not-italic`}
-                >
-                  {row.rank}
-                </p>
-              </div>
-              <div className="flex flex-col">
-                <p
-                  className={`${gilroyMedium.className} text-[20px] leading-[24px] font-medium not-italic ${
-                    row.highlighted ? "text-[#53d824]" : "text-[#d2d2d2]"
-                  }`}
-                >
-                  {row.name}
-                </p>
-                <p
-                  className={`${interRegular.className} text-[12px] leading-[18px] font-normal text-white not-italic`}
-                >
-                  {row.sub}
-                </p>
-              </div>
-            </div>
-
-            {[
-              { label: "Power", value: row.power, bar: row.powerBar },
-              { label: "Area", value: row.area, bar: row.areaBar, sup: true },
-            ].map((metric) => (
-              <div
-                key={`m-${metric.label}-${i}`}
-                className="flex items-center justify-between gap-[12px]"
-              >
-                <div className="flex min-w-0 flex-1 flex-col gap-[6px]">
-                  <span
-                    className={`${interMedium.className} text-[11px] leading-[14px] font-medium tracking-[0.2px] text-[#d2d2d2] uppercase not-italic`}
-                  >
-                    {metric.label}
-                  </span>
-                  <div className="relative h-[12px] w-full max-w-[140px] overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#313131] to-[#535353]" />
-                    <div
-                      className={`absolute top-0 left-0 h-full bg-gradient-to-r from-[#1b2f14] to-[#8ce66c] ${
-                        row.highlighted ? "" : "mix-blend-luminosity"
-                      }`}
-                      style={{ width: `${(metric.bar / 180) * 100}%` }}
-                    />
-                  </div>
-                </div>
-                <p
-                  className={`${gilroyMedium.className} shrink-0 whitespace-nowrap text-[18px] leading-[24px] font-medium text-[#e2f9da] not-italic`}
-                >
-                  {metric.value}
-                  {metric.sup ? (
-                    <span className="text-[11.61px]">2</span>
-                  ) : null}
-                </p>
-              </div>
-            ))}
-
-            <div className="flex items-center gap-[10px]">
-              {row.icon === "check" && (
-                <CheckIcon className="size-[20px] shrink-0" />
-              )}
-              {row.icon === "warning" && (
-                <WarningIcon className="h-[20px] w-[22.383px] shrink-0" />
-              )}
-              {row.icon === "heat" && (
-                <span className="relative block h-[20px] w-[26px] shrink-0">
-                  <HeatWispIcon className="absolute top-0 left-[3px] h-[10.833px] w-[5.833px]" />
-                  <HeatWispIcon className="absolute top-0 left-[11px] h-[10.833px] w-[5.833px]" />
-                  <HeatWispIcon className="absolute top-0 left-[19px] h-[10.833px] w-[5.833px]" />
-                  <HeatWaveIcon className="absolute bottom-0 left-0 h-[5.833px] w-[25.833px]" />
-                </span>
-              )}
-              {row.icon === "x" && <XIcon className="size-[20px] shrink-0" />}
+        {/* Content */}
+        <div className="relative z-10 flex flex-col items-center pb-[60px] pt-[30px]">
+          {/* Header — 3572:6813 */}
+          <div className="flex w-[350px] flex-col items-center gap-[10px]">
+            <div className="relative w-full">
               <p
-                className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium text-[#e2f9da] not-italic`}
+                className={`${gilroyMedium.className} w-full bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+                style={{
+                  backgroundImage: `linear-gradient(${MOBILE_TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                }}
               >
-                {row.tradeoff}
+                {headingLines.join(" ")}
               </p>
+              <MobileTitleCorners />
+            </div>
+            <p
+              className={`${interRegular.className} w-full text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            >
+              {subtitle}
+            </p>
+          </div>
+
+          {/* Scrollable table — 3572:8514 */}
+          <div className="mt-[40px] w-full px-[20px] overflow-x-auto overflow-y-hidden">
+            <div className="relative mx-auto h-[468px] w-[1166px] shrink-0 overflow-clip">
+              <EfficiencyTableContent />
             </div>
           </div>
-        ))}
+        </div>
       </div>
     </section>
   );

@@ -209,7 +209,7 @@ export function SomHero({ data }: { data?: any }) {
 
       {/* MOBILE (<1024px) — Figma node 4046:7801 "Banner" 393×700 */}
       <div
-        className="relative mx-auto h-[700px] w-[393px] overflow-hidden bg-black min-[1024px]:hidden"
+        className="relative mx-auto mt-[40px] h-[700px] w-[393px] overflow-hidden bg-black min-[1024px]:hidden"
         data-node-id="4046:7801"
         data-name="Banner"
       >

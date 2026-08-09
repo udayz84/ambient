@@ -4,6 +4,7 @@ import { mediaUrl } from "@/lib/strapi";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
 import { Corners } from "../shared/Corners";
+import { TagBadge } from "../hero/TagBadge";
 import { dmMono, gilroyBold, gilroyMedium, interRegular } from "../hero/fonts";
 import {
   MEASURED_TITLE_GRADIENT,
@@ -428,6 +429,111 @@ function MeasuredCardView({ card }: { card: MeasuredCard }) {
   );
 }
 
+/* ── Mobile stat row — Figma 4087:8894 (24px icon, 12px label, 14px value) ── */
+function MobileStatRow({ stat, bordered }: { stat: MeasuredStat; bordered: boolean }) {
+  return (
+    <div
+      className={`relative flex w-full shrink-0 items-center justify-between pb-[9.659px] ${
+        bordered ? "border-b-[0.69px] border-solid" : ""
+      }`}
+      style={bordered ? { borderColor: STAT_BORDER } : undefined}
+    >
+      <div className="relative flex shrink-0 items-center gap-[5.52px]">
+        <div className="relative size-[24px] shrink-0" data-name={stat.icon.name}>
+          <div className={`absolute ${stat.icon.boxInset}`} data-name="elements">
+            <div className={`absolute ${stat.icon.imgInset}`}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img alt="" className="block size-full max-w-none" src={stat.icon.src} aria-hidden />
+            </div>
+          </div>
+        </div>
+        <p
+          className={`${interRegular.className} whitespace-nowrap text-[12px] leading-[16.559px] font-normal text-white opacity-90 not-italic [word-break:break-word]`}
+        >
+          {stat.label}
+        </p>
+      </div>
+      <p
+        className={`${stat.medium ? gilroyMedium.className : gilroyBold.className} whitespace-nowrap text-[14px] leading-[19.318px] opacity-90 not-italic [word-break:break-word]`}
+        style={{ color: stat.green ? GREEN : GREY }}
+      >
+        {stat.value}
+      </p>
+    </div>
+  );
+}
+
+/* ── Mobile measured card — Figma 4087:8884 (248×385) ── */
+function MobileMeasuredCard({ card }: { card: MeasuredCard }) {
+  return (
+    <div
+      className="relative h-[385px] w-[248px] shrink-0 overflow-clip"
+      data-node-id={card.nodeId}
+      data-name="Lower power consumption"
+    >
+      {/* Surface */}
+      <div
+        className="absolute left-0 top-0 h-[385px] w-[248.967px] border-[0.321px] border-solid border-[rgba(255,255,255,0.1)]"
+        style={{ backgroundColor: "rgba(15,14,14,0.75)" }}
+      />
+      {/* Corner elements */}
+      <div
+        className="pointer-events-none absolute left-[-0.75px] top-[0.32px] h-[384.355px] w-[248.713px]"
+        aria-hidden
+      >
+        <div className="absolute inset-[0_-0.13%]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img alt="" className="block size-full max-w-none" src={CARD_CORNERS} />
+        </div>
+      </div>
+      {/* Glow (GPX10 Pro only) */}
+      {card.glow && (
+        <div
+          className="pointer-events-none absolute left-1/2 top-[calc(50%-27.5px)] h-[114px] w-[125.5px] -translate-x-1/2"
+          aria-hidden
+        >
+          <div className="absolute inset-[-176.84%_-160.64%]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img alt="" className="block size-full max-w-none" src={CHIP_GLOW} />
+          </div>
+        </div>
+      )}
+      {/* Title + underline — top-[19.25px], centred */}
+      <div className="absolute left-1/2 top-[19.25px] flex -translate-x-1/2 flex-col items-center">
+        <p
+          className={`${gilroyMedium.className} whitespace-nowrap text-[24px] leading-[47px] text-white not-italic [word-break:break-word]`}
+        >
+          {card.name}
+        </p>
+        <div className="relative h-0 w-[151.832px]" aria-hidden>
+          <div className="absolute inset-[-1px_0_0_0]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img alt="" className="block size-full max-w-none" src={LINE_88} />
+          </div>
+        </div>
+      </div>
+      {/* Chip image — centred, top-[88px], 212×140 (MCU+NPU: 240×140 at top-[94px]) */}
+      <div
+        className={`absolute left-1/2 top-[88px] h-[140px] w-[212px] -translate-x-1/2 ${card.luminosity ? "mix-blend-luminosity" : ""}`}
+        aria-hidden
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          alt=""
+          src={card.imageSrc}
+          className="absolute inset-0 size-full object-cover"
+        />
+      </div>
+      {/* Stats — bottom-[13px], centred, w-[226px], gap-[6.899px] */}
+      <div className="absolute bottom-[13px] left-1/2 flex w-[226px] -translate-x-1/2 flex-col gap-[6.899px]">
+        {card.stats.map((s, i) => (
+          <MobileStatRow key={s.label} stat={s} bordered={i < card.stats.length - 1} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function PrimaryCta({
   label,
   href,
@@ -631,44 +737,97 @@ export function ProductsMeasured({ data }: { data?: any }) {
         </div>
       </section>
 
-      {/* MOBILE (<1024px) */}
+      {/* MOBILE (<1024px) — Figma 3567:4246 (393×780) */}
       <section
-        className="relative w-full bg-black px-[24px] pt-[80px] pb-[80px] min-[1024px]:hidden"
+        className="relative w-full overflow-hidden bg-black min-[1024px]:hidden"
         aria-label="Measured in silicon"
+        data-node-id="3567:4246"
       >
-        <div className="flex flex-col items-center gap-[16px]">
-          <MenuChip label={menuLabel} />
-          <h2
-            className={`${gilroyMedium.className} [word-break:break-word] bg-clip-text font-medium m-0 max-w-full not-italic text-[30px] leading-[34px] text-center text-transparent`}
-            style={{
-              backgroundImage: MEASURED_TITLE_GRADIENT,
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-            }}
+        <div className="relative mx-auto w-full" style={{ maxWidth: 393 }}>
+
+          {/* ── Header — 3567:4337 (top=30, centred, 350 wide, gap=10) ── */}
+          <div className="flex flex-col items-center gap-[10px] px-[21px] pt-[30px]">
+            <TagBadge
+              label={menuLabel}
+              width={130}
+              height={27}
+              centerLabel
+              leftBarLeft={5.7}
+              rightBarLeft={121.16}
+              labelClassName="text-[12px] leading-[20.149px] tracking-[-0.36px]"
+            />
+            {/* Title — 3567:4338 */}
+            <div className="relative">
+              <h2
+                className={`${gilroyMedium.className} w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+                style={{
+                  backgroundImage:
+                    "linear-gradient(107.454deg, rgb(255,255,255) 1.3527%, rgb(212,233,188) 55.161%, rgb(255,255,255) 111.67%)",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                }}
+              >
+                {headingLines.map((line, i) => (
+                  <span key={i} className="block leading-[36px]">{line.trim()}</span>
+                ))}
+              </h2>
+              <CornerTick src={TITLE_CORNER_L} placement="tl" />
+              <CornerTick src={TITLE_CORNER_R} placement="tr" />
+              <CornerTick src={TITLE_CORNER_L} placement="bl" />
+              <CornerTick src={TITLE_CORNER_R} placement="br" />
+            </div>
+            {/* Description — 3567:4344 */}
+            <p
+              className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            >
+              {subtitle}
+            </p>
+          </div>
+
+          {/* ── Cards carousel — 4087:8883 (cards 248×385, gap=15) ── */}
+          <div
+            className="mt-[33px] overflow-x-auto pb-[8px] [scrollbar-width:none] snap-x snap-mandatory [&::-webkit-scrollbar]:hidden"
+            style={{ scrollPaddingInline: "calc((100% - 248px) / 2)" }}
           >
-            {headingLines.map((line, i) => (
-              <span key={i} className="block leading-[34px]">
-                {line.trim()}
+            <div className="flex w-max gap-[15px] px-[calc((100%-248px)/2)]">
+              {cards.map((card) => (
+                <div key={card.nodeId} className="snap-center shrink-0">
+                  <MobileMeasuredCard card={card} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* ── CTA column — 4087:9003 (240 wide, gap=14) ── */}
+          <div className="mx-auto mt-[32px] flex w-[240px] flex-col gap-[14px] pb-[32px]">
+            {/* Primary — 240×48 */}
+            <a
+              href={primary.href}
+              className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[240px] shrink-0 items-center justify-center overflow-hidden`}
+            >
+              <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
+              <AnimatedDotsBackground />
+              <span className="relative text-[12px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+                {primary.label}
               </span>
-            ))}
-          </h2>
-          <p
-            className={`${interRegular.className} max-w-full text-[14px] leading-[21px] font-normal not-italic text-center`}
-            style={{ color: GREY }}
-          >
-            {subtitle}
-          </p>
-        </div>
-
-        <div className="mt-[32px] flex flex-col items-center gap-[24px]">
-          {cards.map((card) => (
-            <MeasuredCardView key={card.nodeId} card={card} />
-          ))}
-        </div>
-
-        <div className="mt-[32px] flex flex-col items-center gap-[16px]">
-          <PrimaryCta label={primary.label} href={primary.href} centered />
-          <SecondaryCta label={secondary.label} href={secondary.href} centered />
+              <span aria-hidden className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
+              <CornerTick src={CTA_CORNER_L} placement="tl" />
+              <CornerTick src={CTA_CORNER_R} placement="tr" />
+              <CornerTick src={CTA_CORNER_R} placement="br" />
+              <CornerTick src={CTA_CORNER_L} placement="bl" />
+            </a>
+            {/* Secondary — 240×48 */}
+            <a
+              href={secondary.href}
+              className={`${gilroyMedium.className} relative flex h-[48px] w-[240px] shrink-0 items-center justify-center overflow-clip px-[20px] py-[10px]`}
+              style={{ backgroundColor: SECONDARY_CTA_BG }}
+            >
+              <span className="relative text-[12px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+                {secondary.label}
+              </span>
+              <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
+            </a>
+          </div>
         </div>
       </section>
     </>

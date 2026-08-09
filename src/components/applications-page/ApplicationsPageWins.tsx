@@ -397,7 +397,7 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
               {heading}
             </h2>
 
-            <div className="absolute left-[353px] top-[38.82px] flex h-[2.817px] w-[2.346px] items-center justify-center">
+            <div className="absolute left-[353px] top-[4px] flex h-[2.817px] w-[2.346px] items-center justify-center">
               <div className="flex-none rotate-180">
                 <div className="relative h-[2.817px] w-[2.346px]">
                   <div className="absolute inset-[0_0_-17.75%_-21.31%]">
@@ -406,7 +406,7 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
                 </div>
               </div>
             </div>
-            <div className="absolute left-[353px] top-[114.18px] flex h-[2.817px] w-[2.346px] items-center justify-center">
+            <div className="absolute left-[353px] top-[75px] flex h-[2.817px] w-[2.346px] items-center justify-center">
               <div className="-scale-y-100 flex-none rotate-180">
                 <div className="relative h-[2.817px] w-[2.346px]">
                   <div className="absolute inset-[0_0_-17.75%_-21.31%]">
@@ -415,12 +415,12 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
                 </div>
               </div>
             </div>
-            <div className="absolute left-[-3px] top-[114.18px] h-[2.817px] w-[2.346px]">
+            <div className="absolute left-[-3px] top-[75px] h-[2.817px] w-[2.346px]">
               <div className="absolute inset-[0_0_-17.75%_-21.31%]">
                 <img alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
               </div>
             </div>
-            <div className="absolute left-[-3px] top-[38.82px] flex h-[2.817px] w-[2.346px] items-center justify-center">
+            <div className="absolute left-[-3px] top-[4px] flex h-[2.817px] w-[2.346px] items-center justify-center">
               <div className="-scale-y-100 flex-none">
                 <div className="relative h-[2.817px] w-[2.346px]">
                   <div className="absolute inset-[0_0_-17.75%_-21.31%]">

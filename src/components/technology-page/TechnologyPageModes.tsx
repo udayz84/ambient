@@ -326,7 +326,7 @@ function MobileModeCard({
 }) {
   return (
     <div
-      className={`absolute right-[119px] h-[235px] w-[254px] ${topClassName} ${bgClassName}`}
+      className={`absolute right-[119px] h-[235px] w-[254px] ${topClassName} ${bgClassName} backdrop-blur-md`}
       data-node-id={nodeId}
       data-name="Content"
     >

@@ -2,10 +2,13 @@ import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { MobileTitleCorners } from "./mobile-shared";
 
 const CARD_OUTLINE = "/technology/cta-card-outline.svg";
+const MOBILE_CARD_FRAME = "/technology/bottom-cta-card-frame.svg";
 
 const SECTION_TITLE_DEG = "119.349deg";
+const MOBILE_SECTION_TITLE_DEG = "122.163deg";
 const CARD_TITLE_DEG = "107.367deg";
 const FALLBACK_SECTION_TITLE = "Put A-Cube to Work";
 const FALLBACK_SECTION_SUBTITLE =
@@ -13,6 +16,8 @@ const FALLBACK_SECTION_SUBTITLE =
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
+const MOBILE_CTA_SHADOW =
+  "shadow-[0px_26.55px_67.639px_0px_rgba(69,196,24,0.2),0px_15.627px_20.391px_0px_rgba(83,216,36,0.15),0px_6.491px_8.469px_0px_rgba(83,216,36,0.15),0px_2.348px_3.063px_0px_rgba(83,216,36,0.1)]";
 
 type CardData = {
   nodeId: string;
@@ -178,57 +183,87 @@ export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
         </div>
       </div>
 
-      {/* MOBILE (<1024px) */}
-      <div className="flex flex-col items-center gap-[32px] px-[24px] py-[56px] min-[1024px]:hidden">
-        <div
-          className={`${gilroyMedium.className} bg-clip-text text-center text-[30px] leading-[35px] font-medium text-transparent not-italic`}
-          style={{
-            backgroundImage: `linear-gradient(${SECTION_TITLE_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-          }}
-        >
-          {sectionTitle}
-        </div>
-        <p
-          className={`${interRegular.className} max-w-[327px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
-        >
-          {sectionSubtitle}
-        </p>
-
-        {cards.map((card) => (
-          <div
-            key={`m-${card.nodeId}`}
-            className="flex w-full max-w-[327px] flex-col gap-[20px] rounded-[8px] border-[0.5px] border-solid border-[rgba(255,255,255,0.15)] p-[20px]"
-          >
-            <div
-              className={`${gilroyMedium.className} bg-clip-text text-center text-[24px] leading-[28px] font-medium text-transparent not-italic`}
+      {/* MOBILE (<1024px) — Figma 3572:7372 */}
+      <div className="flex flex-col items-center gap-[34px] px-[20px] pt-[41px] min-[1024px]:hidden">
+        {/* Section heading */}
+        <div className="flex w-full flex-col items-center gap-[10px]">
+          <div className="relative w-[350px]">
+            <p
+              className={`${gilroyMedium.className} w-full bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
-                backgroundImage: `linear-gradient(${CARD_TITLE_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
+                backgroundImage: `linear-gradient(${MOBILE_SECTION_TITLE_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
               }}
             >
-              <span className="block">{card.titleLines[0]}</span>
-              <span className="block">{card.titleLines[1]}</span>
-            </div>
-            <p
-              className={`${interRegular.className} text-center text-[13px] leading-[19px] font-normal text-white not-italic`}
-            >
-              {card.body}
+              {sectionTitle}
             </p>
-            <a
-              href={card.ctaHref}
-              className={`${gilroyMedium.className} relative block h-[48px] w-full ${GREEN_CTA_SHADOW}`}
-            >
-              <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
-              <span className="absolute top-[calc(50%-14px)] left-1/2 -translate-x-1/2 text-[14px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
-                {card.cta}
-              </span>
-              <GreenCtaCorners />
-            </a>
+            <MobileTitleCorners />
           </div>
-        ))}
+          <p
+            className={`${interRegular.className} text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+          >
+            {sectionSubtitle}
+          </p>
+        </div>
+
+        {/* CTA cards */}
+        <div className="flex flex-col gap-[14.544px]">
+          {cards.map((card) => (
+            <div
+              key={`m-${card.nodeId}`}
+              className="relative h-[202.286px] w-[352.736px] shrink-0"
+            >
+              {/* card frame */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={MOBILE_CARD_FRAME}
+                alt=""
+                aria-hidden
+                className="absolute left-[0.32px] top-[0.08px] block h-[202.015px] w-[352.316px] max-w-none"
+              />
+
+              {/* content */}
+              <div className="absolute left-[32.87px] top-1/2 flex w-[284.464px] -translate-y-1/2 flex-col gap-[11px]">
+                {/* title */}
+                <div className="relative h-[68.271px] w-full">
+                  <p
+                    className={`${gilroyMedium.className} absolute left-1/2 w-[299.558px] -translate-x-1/2 bg-clip-text text-center text-[30px] font-medium text-transparent not-italic`}
+                    style={{
+                      backgroundImage: `linear-gradient(${CARD_TITLE_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
+                      WebkitBackgroundClip: "text",
+                      backgroundClip: "text",
+                    }}
+                  >
+                    <span className="block leading-[30.975px]">{card.titleLines[0]}</span>
+                    <span className="block leading-[30.975px]">{card.titleLines[1]}</span>
+                  </p>
+                  <CornerDecor />
+                </div>
+
+                {/* body + CTA */}
+                <div className="flex w-full flex-col gap-[14px]">
+                  <p
+                    className={`${interRegular.className} h-[44px] text-center text-[12px] leading-[15.171px] font-normal tracking-[-0.1975px] text-white not-italic [word-break:break-word]`}
+                  >
+                    {card.body}
+                  </p>
+                  <a
+                    href={card.ctaHref}
+                    className={`${gilroyMedium.className} ${MOBILE_CTA_SHADOW} relative block h-[30.343px] w-full shrink-0`}
+                  >
+                    <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
+                    <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_0.632px_11.379px_0px_rgba(217,255,240,0.6)]" />
+                    <span className="absolute top-[calc(50%-8.85px)] left-1/2 -translate-x-1/2 text-[10.114px] leading-[17.7px] font-medium whitespace-nowrap text-white uppercase not-italic">
+                      {card.cta}
+                    </span>
+                    <GreenCtaCorners />
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

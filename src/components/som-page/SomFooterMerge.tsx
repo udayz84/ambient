@@ -26,10 +26,21 @@ export function SomFooterMerge({ data }: { data?: any }) {
       data-node-id="2438:5337"
     >
       <div className="relative flex h-[211px] max-[1023px]:h-auto w-full max-w-[1203px] items-center justify-center">
+        {/* Desktop Background */}
         <img
           src={image}
           alt=""
-          className="pointer-events-none absolute inset-0 size-full brightness-[1.15] opacity-80"
+          className="pointer-events-none absolute inset-0 size-full brightness-[1.15] opacity-80 max-[1023px]:hidden"
+        />
+        {/* Mobile Background */}
+        <img
+          src="/footer/footer%20mobile.png"
+          alt=""
+          className="pointer-events-none absolute inset-0 size-full object-cover brightness-[1.15] opacity-80 min-[1024px]:hidden"
+          style={{
+            maskImage: "linear-gradient(to bottom, black 50%, transparent 100%)",
+            WebkitMaskImage: "linear-gradient(to bottom, black 50%, transparent 100%)",
+          }}
         />
 
         {/* DESKTOP (>=1024px) — original layout, unchanged */}

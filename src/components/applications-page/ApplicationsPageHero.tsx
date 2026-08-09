@@ -118,13 +118,13 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
 
       {/* MOBILE (<1024px) — node 4032:5727, desktop above is untouched */}
       <div
-        className="relative h-[600px] w-full overflow-hidden min-[1024px]:hidden"
+        className="relative min-h-[800px] w-full overflow-hidden min-[1024px]:hidden pt-[78px] pb-[40px]"
         data-node-id="4032:5727"
         data-name="Banner"
       >
         {/* Background image 125 (offset to the right, clipped) */}
         <div
-          className="pointer-events-none absolute top-[117px] right-[-143px] h-[608px] w-[1031px]"
+          className="pointer-events-none absolute top-[280px] right-[-143px] h-[608px] w-[1031px]"
           data-node-id="4032:5728"
           data-name="image 125"
           aria-hidden
@@ -166,7 +166,7 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
 
             {/* Title with corner brackets */}
             <div
-              className="relative h-[115px] w-[352px]"
+              className="relative h-[170px] w-[352px]"
               data-node-id="4032:8626"
               data-name="Group 78"
             >

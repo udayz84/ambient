@@ -1,6 +1,7 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
+import { useRef } from "react";
 import Link from "next/link";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { gilroyMedium, interRegular } from "../hero/fonts";
@@ -179,6 +180,20 @@ function ArticleCard({ article }: { article: Article }) {
 }
 
 export function ApplicationsPageArticles({ data }: { data?: any }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -340, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 340, behavior: "smooth" });
+    }
+  };
+
   const heading = data?.heading || FALLBACK_HEADING;
 
   const rawArticles = Array.isArray(data?.articles) ? data.articles : [];
@@ -220,14 +235,7 @@ export function ApplicationsPageArticles({ data }: { data?: any }) {
       >
         <style>{`.art-m-scroll::-webkit-scrollbar{display:none}.art-m-scroll{scrollbar-width:none;-ms-overflow-style:none}`}</style>
 
-        {/* Top background strip */}
-        <div
-          className="pointer-events-none absolute left-1/2 top-0 h-[260px] w-[1441px] -translate-x-1/2 overflow-hidden"
-          aria-hidden
-        >
-          <img src="/applications/dvk-bg.png" alt="" className="size-full object-cover" />
-        </div>
-
+        {/* Top background strip removed per request */}
         {/* Bottom background strip */}
         <div
           className="pointer-events-none absolute bottom-0 left-[calc(50%+30px)] flex h-[341px] w-[1441px] -translate-x-1/2 items-center justify-center overflow-hidden"
@@ -288,7 +296,7 @@ export function ApplicationsPageArticles({ data }: { data?: any }) {
         </div>
 
         {/* Article carousel: horizontal snap-scroll (node 4032:14487) */}
-        <div className="art-m-scroll relative z-10 mt-[40px] flex w-full gap-[6px] overflow-x-auto px-[29.5px] snap-x snap-mandatory">
+        <div ref={scrollRef} className="art-m-scroll relative z-10 mt-[40px] flex w-full gap-[6px] overflow-x-auto px-[29.5px] snap-x snap-mandatory">
           {articles.map((article) => (
             <div key={article.title} className="w-[334px] shrink-0 snap-center">
               <ArticleCard article={article} />
@@ -298,18 +306,12 @@ export function ApplicationsPageArticles({ data }: { data?: any }) {
 
         {/* Navigation arrows (node 4032:5932) */}
         <div className="relative z-10 mt-[40px] flex gap-[20px]">
-          <div className="relative size-[44px]">
-            <Corners />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <img alt="" aria-hidden src={NAV_ARROW_LEFT} className="size-[24px] max-w-none" />
-            </div>
-          </div>
-          <div className="relative size-[44px]">
-            <Corners />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <img alt="" aria-hidden src={NAV_ARROW_RIGHT} className="size-[24px] max-w-none" />
-            </div>
-          </div>
+          <button type="button" onClick={scrollLeft} className="relative size-[44px] shrink-0 cursor-pointer" aria-label="Previous">
+            <img src={NAV_ARROW_LEFT} alt="" className="block size-full max-w-none" aria-hidden />
+          </button>
+          <button type="button" onClick={scrollRight} className="relative size-[44px] shrink-0 cursor-pointer" aria-label="Next">
+            <img src={NAV_ARROW_RIGHT} alt="" className="block size-full max-w-none" aria-hidden />
+          </button>
         </div>
       </div>
     </section>

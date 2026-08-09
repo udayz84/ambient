@@ -131,7 +131,7 @@ function MobileFeatureCard({
 }: MobileFeatureCardProps) {
   return (
     <article
-      className="relative flex h-[370px] w-[353px] shrink-0 flex-col items-start gap-[36px] overflow-clip border-[0.468px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[14px] pt-[14px] pb-[22px]"
+      className="relative flex h-auto w-[353px] shrink-0 flex-col items-start gap-[24px] overflow-clip border-[0.468px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[14px] pt-[14px] pb-[22px]"
       data-name="Article"
     >
       <Corners />
@@ -156,8 +156,8 @@ function MobileFeatureCard({
         </div>
       </div>
 
-      {/* NewsSection — fills remaining height, content bottom-aligned */}
-      <div className="flex w-full flex-1 flex-col justify-end" data-name="NewsSection">
+      {/* NewsSection */}
+      <div className="flex w-full flex-col justify-start" data-name="NewsSection">
         <div className="flex w-full flex-col gap-[18px]">
           {/* Tag pill */}
           <div
@@ -294,7 +294,7 @@ export function SomFeatures({ data }: { data?: any }) {
 
       {/* MOBILE (<1024px) — Figma node 4054:8302 "2nd Fold" 393×1400 */}
       <div
-        className="relative mx-auto h-[1400px] w-[393px] overflow-hidden bg-black min-[1024px]:hidden"
+        className="relative mx-auto h-auto w-[393px] overflow-hidden bg-black pb-[60px] pt-[30px] min-[1024px]:hidden"
         data-node-id="4054:8302"
         data-name="2nd Fold"
       >
@@ -303,12 +303,12 @@ export function SomFeatures({ data }: { data?: any }) {
           src={MOBILE_SECTION_GLOW}
           alt=""
           aria-hidden
-          className="pointer-events-none absolute left-1/2 top-[1132px] h-[341px] w-[1441px] max-w-none -translate-x-1/2"
+          className="pointer-events-none absolute bottom-0 left-1/2 h-[341px] w-[1441px] max-w-none -translate-x-1/2"
         />
 
         {/* Content column — 4054:8307 (x20, y30, 353×1338) */}
         <div
-          className="absolute left-[20px] top-[30px] flex w-[353px] flex-col items-end gap-[24px]"
+          className="relative mx-auto flex w-[353px] flex-col items-end gap-[24px]"
           data-node-id="4054:8307"
         >
           {/* Title block — 4054:8357 (352×180) */}

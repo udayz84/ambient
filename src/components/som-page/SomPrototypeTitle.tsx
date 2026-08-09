@@ -48,7 +48,7 @@ function MobilePrototypeCard({
       <Corners />
       {/* Container (image) — 4059:9112 */}
       <div
-        className="relative flex h-[198px] w-full items-center justify-center overflow-hidden rounded-[3.61px] border-[0.602px] border-solid border-[#ccd7ff] bg-gradient-to-b from-[#0c160b] to-[rgba(12,22,11,0)] p-[0.602px]"
+        className="relative flex h-[198px] w-full items-center justify-center overflow-hidden rounded-[3.61px] bg-gradient-to-b from-[#0c160b] to-[rgba(12,22,11,0)]"
         data-name="Container"
       >
         {imageUrl && (

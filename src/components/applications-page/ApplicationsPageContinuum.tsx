@@ -1,4 +1,6 @@
+"use client";
 /* eslint-disable @next/next/no-img-element */
+import { useRef } from "react";
 import Image from "next/image";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { CornerDecor } from "../contact/contact-shared";
@@ -371,6 +373,20 @@ function AirCooledVisual() {
 }
 
 export function ApplicationsPageContinuum({ data }: { data?: any }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -340, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 340, behavior: "smooth" });
+    }
+  };
+
   const heading = data?.heading || FALLBACK_HEADING;
   const subtitle = data?.subtitle || SUBTITLE;
 
@@ -522,17 +538,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
       >
         <style>{`.cont-m-scroll::-webkit-scrollbar{display:none}.cont-m-scroll{scrollbar-width:none;-ms-overflow-style:none}`}</style>
 
-        {/* Top background strip */}
-        <div
-          className="pointer-events-none absolute left-1/2 top-0 h-[260px] w-[1441px] -translate-x-1/2 overflow-hidden"
-          aria-hidden
-        >
-          <img
-            src="/applications/dvk-bg.png"
-            alt=""
-            className="size-full object-cover"
-          />
-        </div>
+        {/* Top background strip removed per request */}
 
         {/* Bottom background strip */}
         <div
@@ -550,7 +556,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
 
         {/* Header: title + subtitle (node 4032:5792) */}
         <div
-          className="mt-[29px] flex w-[350px] flex-col items-center gap-[10px]"
+          className="relative z-10 mt-[29px] flex w-[350px] flex-col items-center gap-[10px]"
           data-node-id="4032:5792"
         >
           {/* Title with corner brackets (node 4032:5793) */}
@@ -623,7 +629,8 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
             The inner uses the desktop 1440x808 coordinate space, offset up to crop the dead top
             space so the pedestal staircase + labels fit a mobile-height band. */}
         <div
-          className="cont-m-scroll relative mt-[13px] h-[540px] w-full overflow-x-auto overflow-y-hidden"
+          ref={scrollRef}
+          className="cont-m-scroll relative -mt-[40px] h-[490px] w-full overflow-x-auto overflow-y-hidden"
           data-node-id="4032:11892"
         >
           <div className="relative h-[808px] w-[1440px] -mt-[200px]">
@@ -682,22 +689,14 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
           </div>
         </div>
 
-        {/* Navigation arrows (node 4032:5855) — static, centered */}
+        {/* Navigation arrows (node 4032:5855) — interactive */}
         <div className="mt-[20px] flex gap-[20px]" data-node-id="4032:5855">
-          <div className="relative size-[44px]">
-            <Corners />
-            <div className="absolute inset-0 flex items-center justify-center">
-              { }
-              <img alt="" aria-hidden src={NAV_ARROW_LEFT} className="size-[24px] max-w-none" />
-            </div>
-          </div>
-          <div className="relative size-[44px]">
-            <Corners />
-            <div className="absolute inset-0 flex items-center justify-center">
-              { }
-              <img alt="" aria-hidden src={NAV_ARROW_RIGHT} className="size-[24px] max-w-none" />
-            </div>
-          </div>
+          <button type="button" onClick={scrollLeft} className="relative size-[44px] shrink-0 cursor-pointer" aria-label="Previous">
+            <img src={NAV_ARROW_LEFT} alt="" className="block size-full max-w-none" aria-hidden />
+          </button>
+          <button type="button" onClick={scrollRight} className="relative size-[44px] shrink-0 cursor-pointer" aria-label="Next">
+            <img src={NAV_ARROW_RIGHT} alt="" className="block size-full max-w-none" aria-hidden />
+          </button>
         </div>
       </div>
     </section>

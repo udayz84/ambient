@@ -170,7 +170,7 @@ export function TechnologyPageHero({ data }: { data?: any } = {}) {
       </div>
 
       {/* MOBILE (<1024px) — pixel-perfect from Figma node 3572:6456 (Banner, 393x676) */}
-      <div className="relative w-full overflow-hidden min-[1024px]:hidden">
+      <div className="relative w-full overflow-hidden min-[1024px]:hidden pt-[78px]">
         <div className="relative mx-auto h-[676px] w-full max-w-[393px]">
           {/* 3572:7530 — hero object image */}
           <div

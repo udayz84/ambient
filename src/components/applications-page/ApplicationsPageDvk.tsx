@@ -1,4 +1,6 @@
+"use client";
 /* eslint-disable @next/next/no-img-element */
+import { useRef } from "react";
 import Image from "next/image";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
@@ -350,6 +352,20 @@ const FALLBACK_FEATURE_ICONS = [
 ];
 
 export function ApplicationsPageDvk({ data }: { data?: any }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -350, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 350, behavior: "smooth" });
+    }
+  };
+
   const heading = data?.heading || FALLBACK_HEADING;
   const subtitle = data?.subtitle || SUBTITLE;
 
@@ -494,17 +510,7 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
       >
         <style>{`.dvk-m-scroll::-webkit-scrollbar{display:none}.dvk-m-scroll{scrollbar-width:none;-ms-overflow-style:none}`}</style>
 
-        {/* Top background strip (node 4032:8644) */}
-        <div
-          className="pointer-events-none absolute left-1/2 top-0 h-[260px] w-[1441px] -translate-x-1/2 overflow-hidden"
-          aria-hidden
-        >
-          <img
-            src="/applications/dvk-bg.png"
-            alt=""
-            className="size-full object-cover"
-          />
-        </div>
+        {/* Top background strip removed per request */}
 
         {/* Bottom background strip (node 4032:8645) */}
         <div
@@ -594,8 +600,8 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
         >
           {/* Product image carousel: two centered rows that peek beyond the viewport (node 4032:9152) */}
           <div className="flex w-full flex-col gap-[13px]" data-node-id="4032:9152">
-            <div className="flex w-full justify-center">
-              <div className="flex gap-[16px]">
+            <div className="flex w-max">
+              <div className="flex gap-[16px] animate-dvk-marquee-left">
                 {carouselRow1.map((card) => (
                   <MarqueeCard
                     key={card.nodeId}
@@ -604,10 +610,18 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
                     nodeId={card.nodeId}
                   />
                 ))}
+                {carouselRow1.map((card) => (
+                  <MarqueeCard
+                    key={card.nodeId + "-dup"}
+                    imageSrc={card.imageSrc}
+                    height={card.height}
+                    nodeId={card.nodeId + "-dup"}
+                  />
+                ))}
               </div>
             </div>
-            <div className="flex w-full justify-center">
-              <div className="flex gap-[16px]">
+            <div className="flex w-max">
+              <div className="flex gap-[16px] animate-dvk-marquee-right">
                 {carouselRow2.map((card) => (
                   <MarqueeCard
                     key={card.nodeId}
@@ -616,12 +630,21 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
                     nodeId={card.nodeId}
                   />
                 ))}
+                {carouselRow2.map((card) => (
+                  <MarqueeCard
+                    key={card.nodeId + "-dup"}
+                    imageSrc={card.imageSrc}
+                    height={card.height}
+                    nodeId={card.nodeId + "-dup"}
+                  />
+                ))}
               </div>
             </div>
           </div>
 
           {/* Feature cards: horizontal snap-scroll, one card centered per stop (node 4032:9001) */}
           <div
+            ref={scrollRef}
             className="dvk-m-scroll flex w-full snap-x snap-mandatory gap-[15px] overflow-x-auto px-[29px]"
             data-node-id="4032:9001"
             data-name="death of hardware"
@@ -639,10 +662,10 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
 
         {/* Navigation arrows (node 4366:12009) */}
         <div className="relative z-10 mt-[24px] flex gap-[20px]">
-          <button type="button" className="relative size-[44px] shrink-0 cursor-pointer" aria-label="Previous">
+          <button type="button" onClick={scrollLeft} className="relative size-[44px] shrink-0 cursor-pointer" aria-label="Previous">
             <Image src="/applications/nav-arrow-left.svg" alt="" width={44} height={44} className="block size-full max-w-none" aria-hidden />
           </button>
-          <button type="button" className="relative size-[44px] shrink-0 cursor-pointer" aria-label="Next">
+          <button type="button" onClick={scrollRight} className="relative size-[44px] shrink-0 cursor-pointer" aria-label="Next">
             <Image src="/applications/nav-arrow-right.svg" alt="" width={44} height={44} className="block size-full max-w-none" aria-hidden />
           </button>
         </div>

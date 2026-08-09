@@ -132,7 +132,7 @@ function SomCard({ visual, isUpcoming, statusPill, value, label, sublabel }: { v
     <div className="flex w-[355px] min-[1024px]:w-[450px] shrink-0 flex-col items-center gap-[16px] min-[1024px]:gap-[32px]">
       <div className="flex h-[290px] min-[1024px]:h-[320px] w-full min-[1024px]:px-[30px] items-center justify-center">
         <div
-          className={`relative flex items-center justify-center overflow-clip transition-transform ${isUpcoming ? 'h-[260px] w-[80%] scale-95' : 'h-[320px] w-full'}`}
+          className={`relative flex items-center justify-center overflow-clip transition-transform ${isUpcoming ? 'h-[260px] w-full min-[1024px]:w-[80%] scale-100 min-[1024px]:scale-95' : 'h-[320px] w-full'}`}
         >
           {visual}
           {isUpcoming && (

@@ -202,7 +202,7 @@ export function TechnologyPageArchitectureMobile({
 
   return (
     <div className="relative w-full overflow-hidden min-[1024px]:hidden">
-      <div className="relative mx-auto h-[966px] w-full max-w-[393px]">
+      <div className="relative mx-auto min-h-[966px] pb-[60px] w-full max-w-[393px]">
         <MobileBrainVisual />
 
         {/* 3572:6743 — header */}
@@ -236,11 +236,11 @@ export function TechnologyPageArchitectureMobile({
 
         {/* 3572:7866 — carousel */}
         <div
-          className="absolute top-[521px] left-[22px] flex w-[353.001px] flex-col items-center gap-[34px]"
+          className="relative pt-[521px] mx-auto flex w-[353.001px] flex-col items-center gap-[34px]"
           data-node-id="3572:7866"
         >
           <div
-            className="relative flex w-[353px] flex-col items-center bg-[rgba(0,0,0,0.1)] px-[20px]"
+            className="relative flex w-[353px] flex-col items-center bg-[rgba(0,0,0,0.1)] backdrop-blur-md px-[20px]"
             data-node-id="3572:7867"
           >
             <MobilePillarStat pillar={pillar} />

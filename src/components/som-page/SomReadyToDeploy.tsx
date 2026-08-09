@@ -88,7 +88,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
   ).split("\n");
   return (
     <section
-      className="relative z-30 flex w-full justify-center overflow-hidden bg-[linear-gradient(to_bottom,black_0%,black_85%,transparent_100%)]"
+      className="relative z-30 flex w-full justify-center overflow-hidden bg-[linear-gradient(to_bottom,black_0%,black_85%,transparent_100%)] max-[1023px]:-mb-[80px]"
       aria-label="Ready to deploy?"
     >
       {/* DESKTOP (>=1024px) — 1204 container, Figma absolute geometry.
@@ -174,7 +174,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
 
       {/* MOBILE (<1024px) — Figma node 4046:8112 "6th Fold" 393×750 */}
       <div
-        className="relative mx-auto h-[750px] w-[393px] overflow-hidden bg-black min-[1024px]:hidden"
+        className="relative mx-auto h-[750px] w-[393px] overflow-hidden min-[1024px]:hidden"
         data-node-id="4046:8112"
         data-name="6th Fold"
       >
