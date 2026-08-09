@@ -132,7 +132,7 @@ function StatCard({
 function MobileStatCard({ stat }: { stat: StatCardData }) {
   return (
     <div className="relative h-[227px] w-[355px] overflow-clip">
-      <div className="absolute inset-0 border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.15)]" />
+      <div className="absolute inset-0 border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.15)] backdrop-blur-md" />
       {/* corner elements */}
       <div className="absolute left-0 top-[0.51px] h-[225.994px] w-[355px]">
         <div className="absolute inset-[-0.22%_-0.14%]">
@@ -430,8 +430,8 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
           </div>
 
           {/* Chip image — 3572:8943 */}
-          <div className="relative h-[349px] w-[336.583px]">
-            <div className="absolute left-1/2 top-1/2 h-[391.741px] w-[377.803px] -translate-x-1/2 -translate-y-1/2 overflow-hidden">
+          <div className="relative h-[296px] w-[286px]">
+            <div className="absolute left-1/2 top-1/2 h-[333px] w-[321px] -translate-x-1/2 -translate-y-1/2 overflow-hidden">
               {chipBgSrc && (
                 /* eslint-disable-next-line @next/next/no-img-element */
                 <img src={chipBgSrc} alt="" aria-hidden className="absolute left-[-10.68%] top-[-4.24%] h-[108.47%] w-[121.37%] max-w-none" />
