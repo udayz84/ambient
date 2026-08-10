@@ -151,7 +151,7 @@ export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
 
   return (
     <section
-      className="relative z-20 mb-0 min-[1024px]:mb-[-409px] w-full bg-transparent"
+      className="relative z-20 mb-[-700px] min-[1024px]:mb-[-409px] w-full bg-transparent"
       aria-label="Put A-Cube to work"
     >
       {/* DESKTOP (>=1024px) */}
@@ -184,7 +184,7 @@ export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
       </div>
 
       {/* MOBILE (<1024px) — Figma 3572:7372 */}
-      <div className="flex flex-col items-center gap-[34px] px-[20px] pt-[41px] min-[1024px]:hidden">
+      <div className="flex flex-col items-center gap-[16px] px-[20px] pt-[41px] min-[1024px]:hidden">
         {/* Section heading */}
         <div className="flex w-full flex-col items-center gap-[10px]">
           <div className="relative w-[350px]">

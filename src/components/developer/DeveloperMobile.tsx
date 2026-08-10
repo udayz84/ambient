@@ -1,3 +1,6 @@
+"use client";
+
+import { Fragment, useState } from "react";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
@@ -13,7 +16,6 @@ import {
   DEVELOPER_ARTICLES,
   DEVELOPER_COPILOTS,
   DEVELOPER_MODULES,
-  SECTION_TITLE_GRADIENT,
 } from "./developer-data";
 
 /**
@@ -23,7 +25,7 @@ import {
  */
 export function DeveloperMobile({ data }: { data?: any }) {
   return (
-    <div className="relative flex w-full flex-col overflow-hidden">
+    <div className="relative flex w-full flex-col overflow-x-clip">
       <DeveloperHeroMobile data={data?.hero} />
       <DeveloperCodeSectionMobile data={data?.code} />
       <DeveloperPipelineMobile data={data?.pipeline} />
@@ -36,6 +38,58 @@ export function DeveloperMobile({ data }: { data?: any }) {
 
 /** Pipeline steps — derived from desktop labels 2900:677. */
 const PIPELINE_STEPS = ["Train", "Optimize", "Integrate", "Deploy"] as const;
+
+/** Tab frame widths in the sticky options bar (Figma 4164:21500). */
+const PIPELINE_TAB_WIDTHS = [78, 106, 117, 95];
+
+/** Title gradient for the pipeline section (Figma 4034:25140 — 108.656°). */
+const PIPELINE_TITLE_GRADIENT =
+  "linear-gradient(108.6565279812398deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
+
+const PIPELINE_SUBTITLE =
+  "From microwatt edge sensors running on coin cells to air-cooled high-performance compute arrays, the GPX architecture scales seamlessly across the physical world.";
+
+/**
+ * Divider line segments for the options bar (5 lines per group).
+ * Brightness tapers toward the active tab. Figma 4164:21501–21530.
+ */
+type Seg = { h: number; c: string };
+const DIV_BEFORE_ACTIVE: Seg[] = [
+  { h: 4, c: "#333333" },
+  { h: 5, c: "#333333" },
+  { h: 6, c: "#333333" },
+  { h: 7, c: "rgba(255,255,255,0.7)" },
+  { h: 8, c: "#ffffff" },
+];
+const DIV_AFTER_ACTIVE: Seg[] = [
+  { h: 8, c: "#ffffff" },
+  { h: 7, c: "rgba(255,255,255,0.7)" },
+  { h: 6, c: "#333333" },
+  { h: 5, c: "#333333" },
+  { h: 4, c: "#333333" },
+];
+const DIV_NORMAL: Seg[] = [
+  { h: 8, c: "#333333" },
+  { h: 8, c: "#333333" },
+  { h: 8, c: "#333333" },
+  { h: 8, c: "#333333" },
+  { h: 8, c: "#333333" },
+];
+
+function PipelineDivider({ segments }: { segments: Seg[] }) {
+  return (
+    <>
+      {segments.map((seg, i) => (
+        <span
+          key={i}
+          aria-hidden
+          className="w-px shrink-0"
+          style={{ height: `${seg.h}px`, backgroundColor: seg.c }}
+        />
+      ))}
+    </>
+  );
+}
 
 const HERO_DEFAULT_HEADING = "Model to deployment\nin 15 Minutes ";
 const HERO_DEFAULT_SUBTITLE =
@@ -307,55 +361,152 @@ int main(void) {
   );
 }
 
+/**
+ * Figma 4034:25039 — Developer "ModelForge Pipeline" section (mobile, 393×1615).
+ * Layout: background waves + abstract design → header (badge/title/subtitle)
+ * → sticky options bar (Train active) → central pipeline illustration.
+ */
 function DeveloperPipelineMobile({ data }: { data?: any }) {
   const tagText = data?.tag?.text || "Real-time AI at edge";
   const heading = data?.heading || "The ModelForge Pipeline";
+  const subtitle = data?.subtitle || PIPELINE_SUBTITLE;
   const rawTabs: any[] = Array.isArray(data?.tabs) ? data.tabs : [];
-  const steps: string[] =
+  const tabs: { label: string; width: number }[] =
     rawTabs.length > 0
-      ? rawTabs.map((t: any, i: number) => t?.label || PIPELINE_STEPS[i] || "")
-      : ([...PIPELINE_STEPS] as string[]);
-  return (
-    <section className="relative flex w-full flex-col items-center px-[24px] py-[48px]">
-      <TagBadge
-        label={tagText}
-        width={180}
-        labelOffsetX={74.5}
-        rightBarLeft={170.48046875}
-      />
+      ? rawTabs.map((t: any, i: number) => ({
+          label: t?.label || PIPELINE_STEPS[i] || "",
+          width: PIPELINE_TAB_WIDTHS[i] ?? 100,
+        }))
+      : PIPELINE_STEPS.map((label, i) => ({
+          label,
+          width: PIPELINE_TAB_WIDTHS[i],
+        }));
+  const [activeIndex, setActiveIndex] = useState(0);
 
-      <div className="relative mt-[24px] w-full px-[10px]">
-        <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-        <h2
-          className={`${gilroyMedium.className} bg-clip-text text-center text-[28px] leading-[34px] font-medium text-transparent not-italic [word-break:break-word]`}
-          style={{ backgroundImage: SECTION_TITLE_GRADIENT }}
-        >
-          {heading}
-        </h2>
+  return (
+    <section
+      className="relative w-full overflow-x-clip bg-black"
+      data-node-id="4034:25039"
+      data-name="3rd Fold"
+    >
+      {/* === BACKGROUND LAYER (absolute) === */}
+      {/* Top wave — Rectangle 1618873535 (1441×260, centered, y=0) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-0 h-[260px] w-[1441px] max-w-none -translate-x-1/2"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          alt=""
+          src="/developer/pipeline-mobile-wave-top.png"
+          className="size-full object-cover"
+        />
+      </div>
+      {/* Abstract Design — 4034:25040 (682.04×247.56, centered, y=36) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-[36px] h-[247.56px] w-[682.04px] max-w-none -translate-x-1/2"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          alt=""
+          src="/developer/pipeline-mobile-abstract.svg"
+          className="block size-full"
+        />
+      </div>
+      {/* Central pipeline illustration — 4034:25128 (353×1247, x=18, y=368) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-[18px] top-[368px] h-[1247px] w-[353px] overflow-hidden"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          alt=""
+          src="/developer/pipeline-mobile-illustration.png"
+          className="absolute left-[-37.85%] top-0 h-full w-[176.64%] max-w-none object-cover"
+        />
+      </div>
+      {/* Bottom wave — Rectangle 1618873536 (1441×341, mirrored, bottom) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute bottom-0 left-1/2 h-[341px] w-[1441px] max-w-none -translate-x-1/2 -scale-y-100"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          alt=""
+          src="/developer/pipeline-mobile-wave-bottom.png"
+          className="size-full object-cover"
+        />
       </div>
 
-      {/* Step list — vertical adaptation of the horizontal diagram 2900:787 */}
-      <div className="relative mt-[24px] flex w-full flex-col overflow-hidden border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)]">
-        {steps.map((step, index) => (
-          <div
-            key={step}
-            className={`relative flex items-center gap-[16px] px-[16px] py-[16px] ${
-              index !== 0 ? "border-t-[0.5px] border-solid border-[rgba(240,240,240,0.2)]" : ""
-            }`}
+      {/* === HEADER CONTENT — 4034:25129 (y=30, w=352, gap 15) === */}
+      <div className="relative mx-auto flex w-[352px] flex-col items-center gap-[15px] pt-[30px]">
+        {/* Title block — 4034:25130 (w=350, gap 10 between badge and title) */}
+        <div className="flex w-[350px] flex-col items-center gap-[10px]">
+          {/* Badge "Real-time AI at edge" — 4034:25131 (200×26) */}
+          <TagBadge
+            label={tagText}
+            width={200}
+            height={26}
+            leftBarLeft={6.48}
+            rightBarLeft={191.48}
+            nodeId="4034:25131"
+          />
+          {/* Title — 4034:25140 (Gilroy Medium 36px, gradient) */}
+          <h2
+            className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+            style={{ backgroundImage: PIPELINE_TITLE_GRADIENT }}
           >
-            <span
-              className={`${dmMono.className} text-[14px] leading-[20px] font-normal tracking-[-0.3px] text-[#6ced3f] not-italic`}
-            >
-              {String(index + 1).padStart(2, "0")}
-            </span>
-            <span
-              className={`${interRegular.className} text-[18px] leading-[24px] font-normal uppercase text-[#f0f0f0] not-italic [word-break:break-word]`}
-            >
-              {step}
-            </span>
+            {heading}
+          </h2>
+        </div>
+        {/* Subtitle — 4034:25145 (Inter Regular 14px/21px, opacity 75, w=336) */}
+        <p
+          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic`}
+        >
+          {subtitle}
+        </p>
+      </div>
+
+      {/* === STICKY OPTIONS BAR + ILLUSTRATION SCROLL AREA ===
+          Bar at y≈282 (mt-35 below header); illustration at y=368. */}
+      <div className="relative mt-[35px]">
+        {/* Options bar — 4164:21500 (sticky top-0, w=600, h=64, bg-black) */}
+        <div className="sticky top-0 z-20 overflow-x-auto bg-black pl-[10px] no-scrollbar">
+          <div className="flex w-[600px] items-center gap-[8px] py-[14px]">
+            {tabs.map((tab, index) => {
+              const isActive = index === activeIndex;
+              const segments =
+                index === activeIndex
+                  ? DIV_BEFORE_ACTIVE
+                  : index === activeIndex + 1
+                    ? DIV_AFTER_ACTIVE
+                    : DIV_NORMAL;
+              return (
+                <Fragment key={tab.label}>
+                  <PipelineDivider segments={segments} />
+                  <button
+                    type="button"
+                    onClick={() => setActiveIndex(index)}
+                    style={{ width: `${tab.width}px` }}
+                    className={`${interRegular.className} relative flex h-[36px] shrink-0 items-center justify-center text-[14px] leading-[21px] font-normal uppercase whitespace-nowrap not-italic transition-colors ${
+                      isActive
+                        ? "overflow-clip bg-[#f0f0f0] text-[#0e1a0e]"
+                        : "px-[20px] text-[#666] hover:text-[#f0f0f0]"
+                    }`}
+                  >
+                    {isActive ? (
+                      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+                    ) : null}
+                    <span className="relative">{tab.label}</span>
+                  </button>
+                </Fragment>
+              );
+            })}
           </div>
-        ))}
-        <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+        </div>
+        {/* Spacer matching the illustration height so the bar sticks while scrolling */}
+        <div className="relative h-[1247px]" />
       </div>
     </section>
   );
@@ -392,18 +543,18 @@ function DeveloperComingSoonMobile({ data }: { data?: any }) {
     <section className="relative flex w-full flex-col items-center overflow-hidden px-[19px] pt-[30px]">
       {/* Background image — 4035:25440 (opacity-60, radial fade) */}
       <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-0 h-full w-[639px] max-w-none -translate-x-1/2 opacity-60">
+        <div className="absolute left-[calc(50%+24px)] top-0 h-full w-[639px] max-w-none -translate-x-1/2 opacity-60">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt=""
             src="/developer/coming-bg.png"
-            className="absolute inset-0 size-full object-cover"
+            className="absolute inset-0 size-full object-cover object-bottom"
           />
           <div
             className="absolute inset-0"
             style={{
               backgroundImage:
-                "radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%)",
+                "radial-gradient(ellipse at 50% 47.9%, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%)",
             }}
           />
         </div>
@@ -449,7 +600,7 @@ function DeveloperComingSoonMobile({ data }: { data?: any }) {
           <img
             alt=""
             src={imgSrc}
-            className="absolute inset-0 size-full object-contain"
+            className="absolute left-[-3.1%] top-[-0.02%] h-[106.13%] w-[103.1%] max-w-none object-cover"
           />
         </div>
         {/* Text content — 4035:25451 (gap 10px) */}
@@ -466,26 +617,29 @@ function DeveloperComingSoonMobile({ data }: { data?: any }) {
           </p>
         </div>
 
-        {/* CTA — 4035:25454 (w323 h48, justify-between) */}
+        {/* CTA — 4035:25454 (w-full h48; content 306px justify-between) */}
         <a
           href={ctaHref}
-          className={`${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-between overflow-hidden px-[16px] py-[10px] shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+          className={`${gilroyMedium.className} relative flex h-[48px] w-full items-center overflow-hidden py-[10px] shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
         >
           <span
             aria-hidden
             className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
           />
-          <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
-            {ctaLabel}
-          </span>
-          <span className="relative size-[20px] shrink-0">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt=""
-              src="/developer/waitlist-icon.svg"
-              className="absolute inset-0 size-full max-w-none object-contain"
-            />
-          </span>
+          {/* Inner content — 4035:25464 (w306, justify-between) */}
+          <div className="relative mx-auto flex w-[306px] items-center justify-between">
+            <span className="text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+              {ctaLabel}
+            </span>
+            <span className="size-[20px] shrink-0">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                alt=""
+                src="/developer/waitlist-icon.svg"
+                className="size-full max-w-none object-contain"
+              />
+            </span>
+          </div>
           <span
             aria-hidden
             className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"

@@ -22,7 +22,7 @@ export function SomFooterMerge({ data }: { data?: any }) {
   const ctaLabel = data?.cta_label || FALLBACK_CTA_LABEL;
   return (
     <div
-      className="relative z-20 mb-0 min-[1024px]:-mb-[400px] flex w-full justify-center px-[24px]"
+      className="relative z-20 mb-[-700px] min-[1024px]:-mb-[400px] flex w-full justify-center px-[24px]"
       data-node-id="2438:5337"
     >
       <div className="relative flex h-[211px] max-[1023px]:h-auto w-full max-w-[1203px] items-center justify-center">
