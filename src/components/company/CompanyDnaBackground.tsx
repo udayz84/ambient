@@ -24,16 +24,16 @@ export function CompanyDnaBackground({ bgImage }: { bgImage?: string | null }) {
       </div>
 
       <div
-        className="absolute top-0 left-[2px] z-[2] h-[516px] w-[1441px] bg-gradient-to-b from-[#080808] from-[46.899%] to-[rgba(8,8,8,0)] to-[117.25%]"
+        className="absolute top-0 left-[2px] z-[2] h-[400px] w-[1441px] bg-gradient-to-b from-[#080808] from-[60%] to-[rgba(8,8,8,0)] to-[100%]"
         data-node-id="2379:2089"
         aria-hidden
       />
       <div
-        className="absolute top-[699px] left-px z-[2] flex h-[208px] w-[1442px] items-center justify-center"
+        className="absolute top-[729px] left-px z-[2] flex h-[178px] w-[1442px] items-center justify-center"
         data-node-id="2379:2134"
         aria-hidden
       >
-        <div className="-scale-y-100 h-[208px] w-[1442px] bg-gradient-to-b from-[#080808] to-[rgba(8,8,8,0)]" />
+        <div className="-scale-y-100 h-[178px] w-[1442px] bg-gradient-to-b from-[#080808] to-[rgba(8,8,8,0)]" />
       </div>
     </div>
   );

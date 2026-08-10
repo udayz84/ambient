@@ -29,7 +29,7 @@ const HERO_IMAGES: Record<string, string> = {};
 
 const variants = {
   enter: (direction: number) => ({
-    x: direction > 0 ? 100 : -100,
+    x: direction > 0 ? 1000 : -1000,
     opacity: 0,
   }),
   center: {
@@ -39,7 +39,7 @@ const variants = {
   },
   exit: (direction: number) => ({
     zIndex: 0,
-    x: direction < 0 ? 100 : -100,
+    x: direction < 0 ? 1000 : -1000,
     opacity: 0,
   }),
 };
@@ -636,22 +636,33 @@ export function ApplicationsHeroVisual({
   };
 
   return (
-    <AnimatePresence custom={direction}>
-      <motion.div
-        key={activeTab}
-        custom={direction}
-        variants={variants}
-        initial="enter"
-        animate="center"
-        exit="exit"
-        transition={{
-          x: { type: "spring", stiffness: 300, damping: 30 },
-          opacity: { duration: 0.3 },
-        }}
-        className="absolute inset-0"
-      >
-        {renderContent()}
-      </motion.div>
-    </AnimatePresence>
+    <>
+      <AnimatePresence custom={direction}>
+        <motion.div
+          key={activeTab}
+          custom={direction}
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{
+            x: { type: "spring", stiffness: 300, damping: 30 },
+            opacity: { duration: 0.3 },
+          }}
+          className="absolute inset-0"
+        >
+          {renderContent()}
+        </motion.div>
+      </AnimatePresence>
+      <div className="hidden" aria-hidden="true">
+        {tabs.map((t) => {
+          const img = strapiHeroImage(t?.label) || HERO_IMAGES[t?.label] || "";
+          return img ? (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img key={t.label} src={img} alt="" />
+          ) : null;
+        })}
+      </div>
+    </>
   );
 }

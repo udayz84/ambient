@@ -1,62 +1,140 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
-import { mediaUrl } from "@/lib/strapi";
+
+/* =========================================================================
+   CONSTANTS
+   ========================================================================= */
 
 const PIPELINE_TITLE_GRADIENT =
-  "linear-gradient(124.414deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
+  "linear-gradient(130.629deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
 const BADGE_LEFT = "/developer/pipeline-corner-42.svg";
 const BADGE_RIGHT = "/developer/pipeline-corner-43.svg";
+const CARD_CORNER_LEFT = "/developer/pipeline-card-corner-1.svg";
+const CARD_CORNER_RIGHT = "/developer/pipeline-card-corner-2.svg";
+
+const REMOVE_ICON = "/developer/pipeline-icon-remove.svg";
+const ADD_ICON = "/developer/pipeline-icon-add.svg";
+const ARROW_SVG = "/developer/pipeline-card-arrow.svg";
+
+const ICON_TILE_BG =
+  "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 65.123 64' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%25' width='100%25' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(3.7036e-14 2.3201 -4.7815 -3.0317e-15 32.561 -3.8447)'><stop stop-color='rgba(57,74,54,1)' offset='0'/><stop stop-color='rgba(43,54,41,1)' offset='0.5'/><stop stop-color='rgba(29,34,28,1)' offset='1'/></radialGradient></defs></svg>\")";
 
 const DEFAULT_HEADING = "The ModelForge Pipeline";
+const DEFAULT_SUBTITLE =
+  "From microwatt edge sensors running on coin cells to air-cooled high-performance compute arrays, the GPX architecture scales seamlessly across the physical world.";
 const DEFAULT_TAG = "Real-time AI at edge";
-const DEFAULT_TABS = ["Train", "Optimize", "Integrate", "Deploy"];
-const DEFAULT_FLOW_IMAGES = [
-  "/developer/train-flow-1.png",
-  "/developer/train-flow-2.png",
-  "/developer/train-flow-3.png",
-  "/developer/train-flow-4.png",
+
+/* =========================================================================
+   STAGE DATA  (Figma 4577:11008)
+   ========================================================================= */
+
+type Stage = {
+  label: string;
+  subtitle: string;
+  subtitleNoWrap: boolean;
+  icon: string;
+  cardImage: string;
+  cardImage2?: string;
+  cardGradient?: string;
+  collapseBg?: string;
+  collapseStyle?: { left: string; top: number; width: number; height: number };
+  collapseGradient?: string;
+  flowImage: string;
+};
+
+const STAGES: Stage[] = [
+  {
+    label: "Train",
+    subtitle: "Data Ingestion & Quantization",
+    subtitleNoWrap: true,
+    icon: "/developer/pipeline-icon-train.svg",
+    cardImage: "/developer/pipeline-card-train.png",
+    flowImage: "/developer/train-flow-1.png",
+  },
+  {
+    label: "Optimize",
+    subtitle: "Hardware-Aware Validation",
+    subtitleNoWrap: true,
+    icon: "/developer/pipeline-icon-optimize.svg",
+    cardImage: "/developer/pipeline-card-optimize.png",
+    cardGradient:
+      "linear-gradient(250.41deg, rgba(0,0,0,0) 59.19%, rgb(0,0,0) 75.24%)",
+    collapseBg: "/developer/pipeline-collapse-bg-optimize.png",
+    collapseStyle: {
+      left: "calc(50% - 15.44px)",
+      top: -1,
+      width: 934.339,
+      height: 127.041,
+    },
+    collapseGradient:
+      "linear-gradient(90.54deg, rgba(0,0,0,0) 82.82%, rgb(0,0,0) 99.98%), linear-gradient(90deg, rgb(0,0,0) 21.64%, rgba(0,0,0,0) 62.88%)",
+    flowImage: "/developer/train-flow-2.png",
+  },
+  {
+    label: "Integrate",
+    subtitle: "Embedded Application Assembly",
+    subtitleNoWrap: false,
+    icon: "/developer/pipeline-icon-integrate.svg",
+    cardImage: "/developer/pipeline-card-integrate-a.png",
+    cardImage2: "/developer/pipeline-card-integrate-b.png",
+    collapseBg: "/developer/pipeline-collapse-bg-integrate.png",
+    collapseStyle: {
+      left: "calc(50% - 15.44px)",
+      top: -1,
+      width: 934.339,
+      height: 127.041,
+    },
+    collapseGradient:
+      "linear-gradient(90deg, rgba(0,0,0,0) 79.37%, rgb(0,0,0) 93.88%), linear-gradient(90deg, rgb(0,0,0) 29.99%, rgba(0,0,0,0) 48.39%)",
+    flowImage: "/developer/train-flow-3.png",
+  },
+  {
+    label: "Deploy",
+    subtitle: "The Unified Build",
+    subtitleNoWrap: true,
+    icon: "/developer/pipeline-icon-deploy.svg",
+    cardImage: "/developer/pipeline-card-deploy.png",
+    cardGradient:
+      "linear-gradient(169.95deg, rgba(0,0,0,0) 55.52%, rgba(0,0,0,0.95) 69.78%)",
+    collapseBg: "/developer/pipeline-collapse-bg-deploy.png",
+    collapseStyle: {
+      left: "calc(50% - 104.62px)",
+      top: -97.81,
+      width: 1004.046,
+      height: 311.628,
+    },
+    collapseGradient:
+      "linear-gradient(89.94deg, rgba(0,0,0,0) 79.36%, rgb(0,0,0) 98.95%), linear-gradient(90deg, rgb(0,0,0) 31.11%, rgba(0,0,0,0) 91.38%)",
+    flowImage: "/developer/train-flow-4.png",
+  },
 ];
-const DEFAULT_LOGOS = [
-  "/developer/pipeline-logo-1.png",
-  "/developer/pipeline-logo-2.png",
-  "/developer/pipeline-logo-3.png",
-];
+
+/* =========================================================================
+   MAIN COMPONENT
+   ========================================================================= */
 
 export function DeveloperPipeline({ data }: { data?: any }) {
-  const [activeTab, setActiveTab] = useState(1); // 1 = Optimize
+  const [activeIndex, setActiveIndex] = useState(0); // 0 = Train expanded
 
   const heading = data?.heading || DEFAULT_HEADING;
+  const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
   const tagText = data?.tag?.text || DEFAULT_TAG;
-  const rawTabs = Array.isArray(data?.tabs) ? data.tabs : [];
-  const tabs = rawTabs.length
-    ? rawTabs.map((t: any, i: number) => ({
-        label: t?.label || DEFAULT_TABS[i] || "",
-        flowImage: mediaUrl(t?.flow_image) || DEFAULT_FLOW_IMAGES[i] || "",
-        logo: mediaUrl(t?.logo) || DEFAULT_LOGOS[i] || DEFAULT_LOGOS[0] || "",
-      }))
-    : DEFAULT_TABS.map((label, i) => ({
-        label,
-        flowImage: DEFAULT_FLOW_IMAGES[i] || "",
-        logo: DEFAULT_LOGOS[i] || DEFAULT_LOGOS[0] || "",
-      }));
-  const flowSrc = (i: number) => tabs[i]?.flowImage || DEFAULT_FLOW_IMAGES[i];
-  const tabLabels = tabs.map((t: any) => t.label);
 
   return (
     <div
       className="absolute"
-      style={{ left: 0, top: 1582, width: 1440, height: 665 }}
-      data-node-id="2900:677"
-      data-name="Model Forge - Pipeline"
+      style={{ left: 0, top: 1582, width: 1440, height: 1291 }}
+      data-node-id="4577:11008"
+      data-name="Model Forge - Train"
     >
-      {/* Abstract design background */}
+      {/* ── Abstract design background ─────────────────────────────────── */}
       <div
-        className="absolute -translate-x-1/2 pointer-events-none"
-        style={{ left: "50%", top: -69.74, width: 985.295, height: 357.632 }}
+        className="pointer-events-none absolute -translate-x-1/2"
+        style={{ left: "50%", top: -69.24, width: 985.295, height: 357.632 }}
         aria-hidden
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -67,7 +145,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
         />
       </div>
 
-      {/* Badge "Real-time AI at edge" */}
+      {/* ── Badge "Real-time AI at edge" ───────────────────────────────── */}
       <div
         className="absolute -translate-x-1/2 overflow-clip bg-[rgba(255,255,255,0.06)]"
         style={{ left: "calc(50% - 0.2px)", top: 48.9, width: 180, height: 26 }}
@@ -82,14 +160,15 @@ export function DeveloperPipeline({ data }: { data?: any }) {
         <div className="absolute left-[170.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
       </div>
 
-      {/* Title "The ModelForge Pipeline" */}
+      {/* ── Title + subtitle ───────────────────────────────────────────── */}
       <div
         className="absolute"
-        style={{ left: 438.37, top: 99.36, width: 558, height: 61 }}
+        style={{ left: "calc(50% + 0.5px)", top: 100, width: 643, height: 115 }}
       >
+        {/* Title frame SVG (decorative bracket around heading) */}
         <div
           className="absolute"
-          style={{ left: 1.21, top: 1.03, width: 555.646, height: 59 }}
+          style={{ left: 44, top: 0.89, width: 555.646, height: 59 }}
           aria-hidden
         >
           <div className="absolute inset-[-0.85%_0]">
@@ -101,158 +180,407 @@ export function DeveloperPipeline({ data }: { data?: any }) {
             />
           </div>
         </div>
-        <h2
-          className={`${gilroyMedium.className} absolute left-1/2 top-[calc(50%-24.5px)] -translate-x-1/2 bg-clip-text text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic`}
-          style={{ backgroundImage: PIPELINE_TITLE_GRADIENT }}
+        {/* Heading + subtitle text block */}
+        <div
+          className="absolute flex flex-col items-center gap-[20px] text-center"
+          style={{ left: -0.37, top: 6, width: 650 }}
         >
-          {heading}
-        </h2>
+          <h2
+            className={`${gilroyMedium.className} bg-clip-text text-[46px] leading-[49px] whitespace-nowrap font-medium text-transparent not-italic`}
+            style={{ backgroundImage: PIPELINE_TITLE_GRADIENT }}
+          >
+            {heading}
+          </h2>
+          <p
+            className={`${interRegular.className} text-[14px] leading-[21px] text-[#f0f0f0] not-italic`}
+          >
+            {subtitle}
+          </p>
+        </div>
       </div>
 
-      <PipelineFilterBar tabs={tabLabels} activeTab={activeTab} onSelect={setActiveTab} />
+      {/* ── Stage cards row (4577:11190) ───────────────────────────────── */}
+      <div
+        className="absolute -translate-x-1/2 flex items-center gap-[40px]"
+        style={{ left: "50%", top: 255 }}
+      >
+        {STAGES.map((stage, i) => (
+          <StageCard
+            key={i}
+            stage={stage}
+            index={i}
+            isActive={activeIndex === i}
+            onClick={() => setActiveIndex(i)}
+          />
+        ))}
+        {/* Connecting arrows between cards */}
+        {[0, 1, 2].map((i) => (
+          <div
+            key={`arrow-${i}`}
+            className="absolute h-0"
+            style={{
+              left: (i + 1) * 220 + i * 40,
+              top: i === 2 ? 65 : 65.5,
+              width: 40,
+            }}
+            aria-hidden
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              alt=""
+              src={ARROW_SVG}
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+              style={{ width: 58.2, height: 19.8 }}
+            />
+          </div>
+        ))}
+      </div>
 
-      {/* Dynamic Flow Diagrams */}
-      <FlowDiagram activeTab={activeTab} flowSrc={flowSrc} />
+      {/* ── Accordion (4577:11114) ─────────────────────────────────────── */}
+      <div
+        className="absolute -translate-x-1/2 flex flex-col gap-[24px]"
+        style={{ left: "50%", top: 475, width: 1204 }}
+      >
+        {STAGES.map((stage, i) => (
+          <AccordionItem
+            key={i}
+            stage={stage}
+            isActive={activeIndex === i}
+            onClick={() => setActiveIndex(i)}
+          />
+        ))}
+      </div>
     </div>
   );
 }
 
-function FlowDiagram({
-  activeTab,
-  flowSrc,
+/* =========================================================================
+   STAGE CARD  (220×180 — top row of preview cards)
+   ========================================================================= */
+
+function StageCard({
+  stage,
+  index,
+  isActive,
+  onClick,
 }: {
-  activeTab: number;
-  flowSrc: (i: number) => string;
+  stage: Stage;
+  index: number;
+  isActive: boolean;
+  onClick: () => void;
 }) {
   return (
-    <div className="pointer-events-none">
-      {/* State 0: Train */}
-      <div
-        className={`absolute -translate-x-1/2 overflow-hidden transition-opacity duration-300 ${activeTab === 0 ? "opacity-100" : "opacity-0"}`}
-        style={{ left: "50%", top: 347.8, width: 1135, height: 270 }}
-      >
-        <div className="absolute inset-0 overflow-hidden">
-          <img alt="" src={flowSrc(0)} className="absolute left-[-36.45%] top-[-42.84%] h-[194.25%] w-[138.68%] max-w-none" />
-        </div>
-      </div>
+    <button
+      type="button"
+      onClick={onClick}
+      className={`relative flex h-[180px] w-[220px] shrink-0 cursor-pointer flex-col items-start justify-end gap-[20px] overflow-clip border-[0.5px] border-solid px-[14px] py-[16px] text-left transition-colors duration-200 ${
+        isActive
+          ? "border-[rgba(240,240,240,0.5)] bg-black"
+          : "border-[rgba(240,240,240,0.2)] bg-black hover:border-[rgba(240,240,240,0.4)]"
+      }`}
+    >
+      <Corners leftSrc={CARD_CORNER_LEFT} rightSrc={CARD_CORNER_RIGHT} />
 
-      {/* State 1: Optimize */}
-      <div
-        className={`absolute -translate-x-1/2 overflow-hidden transition-opacity duration-300 ${activeTab === 1 ? "opacity-100" : "opacity-0"}`}
-        style={{ left: "50%", top: 310.58, width: 1292.934, height: 306.901 }}
-      >
-        <div className="absolute inset-0 overflow-hidden">
-          <img alt="" src={flowSrc(1)} className="absolute left-[-28.88%] top-[-36.36%] h-[181.28%] w-[128.88%] max-w-none" />
-        </div>
-      </div>
+      {/* Card image — composition varies per stage */}
+      <CardImage stage={stage} index={index} />
 
-      {/* State 2: Integrate */}
-      <div
-        className={`absolute -translate-x-1/2 overflow-hidden transition-opacity duration-300 ${activeTab === 2 ? "opacity-100" : "opacity-0"}`}
-        style={{ left: "50%", top: 342.58, width: 1271.162, height: 284.896 }}
-      >
-        <img alt="" src={flowSrc(2)} className="absolute inset-0 size-full max-w-none object-cover" />
+      {/* Label + subtitle */}
+      <div className="relative flex w-full flex-col items-center gap-[6px] text-center">
+        <p
+          className={`${gilroyMedium.className} text-[22px] leading-[28px] text-white`}
+        >
+          {stage.label}
+        </p>
+        <p
+          className={`${interRegular.className} text-[12px] leading-[18px] text-[#99a1af] ${
+            stage.subtitleNoWrap ? "whitespace-nowrap" : "w-full"
+          }`}
+        >
+          {stage.subtitle}
+        </p>
       </div>
-
-      {/* State 3: Deploy */}
-      <div
-        className={`absolute -translate-x-1/2 overflow-hidden transition-opacity duration-300 ${activeTab === 3 ? "opacity-100" : "opacity-0"}`}
-        style={{ left: "50%", top: 361.08, width: 1280.186, height: 216.001 }}
-      >
-        <img alt="" src={flowSrc(3)} className="absolute inset-0 size-full max-w-none object-cover" />
-      </div>
-    </div>
+    </button>
   );
 }
 
-function CategoryDivider({
-  variant = "normal",
-}: {
-  variant?: "normal" | "before-active" | "after-active";
-}) {
-  const segments =
-    variant === "before-active"
-      ? [
-          { height: 4, color: "bg-[#333333]" },
-          { height: 5, color: "bg-[#333333]" },
-          { height: 6, color: "bg-[#333333]" },
-          { height: 7, color: "bg-white/70" },
-          { height: 8, color: "bg-white" },
-        ]
-      : variant === "after-active"
-      ? [
-          { height: 8, color: "bg-white" },
-          { height: 7, color: "bg-white/70" },
-          { height: 6, color: "bg-[#333333]" },
-          { height: 5, color: "bg-[#333333]" },
-          { height: 4, color: "bg-[#333333]" },
-        ]
-      : [
-          { height: 8, color: "bg-[#333333]" },
-          { height: 8, color: "bg-[#333333]" },
-          { height: 8, color: "bg-[#333333]" },
-          { height: 8, color: "bg-[#333333]" },
-          { height: 8, color: "bg-[#333333]" },
-        ];
+/* =========================================================================
+   CARD IMAGE — pixel-perfect composition per stage index
+   ========================================================================= */
 
-  return (
-    <div className="flex shrink-0 items-center gap-[8.36px]" aria-hidden>
-      {segments.map((seg, i) => (
-        <span
-          key={i}
-          className={`w-px ${seg.color}`}
-          style={{ height: `${seg.height}px` }}
+function CardImage({ stage, index }: { stage: Stage; index: number }) {
+  /* --- Train (index 0): single image bleeding from top --- */
+  if (index === 0) {
+    return (
+      <div
+        className="absolute -translate-x-1/2 overflow-hidden"
+        style={{ left: "50%", top: -0.5, height: 130.787, width: 220 }}
+        aria-hidden
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          alt=""
+          src={stage.cardImage}
+          className="absolute h-full max-w-none"
+          style={{ left: "-7.44%", top: 0, width: "108.34%" }}
         />
-      ))}
+      </div>
+    );
+  }
+
+  /* --- Optimize (index 1): rotated -90° image with gradient fade --- */
+  if (index === 1) {
+    return (
+      <div
+        className="absolute -translate-x-1/2 flex items-center justify-center"
+        style={{ left: "50%", top: -0.5, height: 123, width: 194 }}
+        aria-hidden
+      >
+        <div className="-rotate-90">
+          <div className="relative" style={{ height: 194, width: 123 }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              alt=""
+              src={stage.cardImage}
+              className="absolute max-w-none"
+              style={{
+                height: "109.92%",
+                left: "-8.24%",
+                top: "-5.19%",
+                width: "115.58%",
+              }}
+            />
+            {stage.cardGradient && (
+              <div
+                className="pointer-events-none absolute inset-0"
+                style={{ backgroundImage: stage.cardGradient }}
+              />
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  /* --- Integrate (index 2): rotated image + square overlay --- */
+  if (index === 2) {
+    return (
+      <div
+        className="absolute -translate-x-1/2"
+        style={{ left: "50%", top: -0.5, height: 124, width: 216 }}
+        aria-hidden
+      >
+        {/* Rotated background image */}
+        <div
+          className="absolute -translate-x-1/2 flex items-center justify-center"
+          style={{
+            left: "calc(50% - 0.96px)",
+            top: -11.54,
+            height: 146.256,
+            width: 229.983,
+          }}
+        >
+          <div className="-rotate-90">
+            <div className="relative" style={{ height: 229.983, width: 146.256 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                alt=""
+                src={stage.cardImage}
+                className="absolute inset-0 size-full max-w-none object-cover"
+              />
+            </div>
+          </div>
+        </div>
+        {/* Square foreground image */}
+        <div
+          className="absolute -translate-x-1/2 overflow-hidden"
+          style={{ left: "50%", top: -17, height: 162, width: 162 }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt=""
+            src={stage.cardImage2}
+            className="absolute max-w-none"
+            style={{
+              height: "99.84%",
+              left: "-41.37%",
+              top: 0,
+              width: "177.39%",
+            }}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  /* --- Deploy (index 3): rotated 3.84° image with gradient fade --- */
+  return (
+    <div
+      className="absolute -translate-x-1/2 flex items-center justify-center"
+      style={{ left: "calc(50% - 0.06px)", top: -0.5, height: 141.012, width: 221.622 }}
+      aria-hidden
+    >
+      <div className="rotate-[3.84deg]">
+        <div className="relative" style={{ height: 126.976, width: 213.589 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt=""
+            src={stage.cardImage}
+            className="absolute inset-0 size-full max-w-none object-cover"
+          />
+          {stage.cardGradient && (
+            <div
+              className="pointer-events-none absolute inset-0"
+              style={{ backgroundImage: stage.cardGradient }}
+            />
+          )}
+        </div>
+      </div>
     </div>
   );
 }
 
-function PipelineFilterBar({
-  tabs,
-  activeTab,
-  onSelect,
+/* =========================================================================
+   ACCORDION ITEM — expands to 420px (with flow diagram) / collapses to 108px
+   ========================================================================= */
+
+function AccordionItem({
+  stage,
+  isActive,
+  onClick,
 }: {
-  tabs: string[];
-  activeTab: number;
-  onSelect: (index: number) => void;
+  stage: Stage;
+  isActive: boolean;
+  onClick: () => void;
 }) {
   return (
     <div
-      className="absolute flex items-center justify-center -translate-x-1/2"
-      style={{ left: "50%", top: 200, height: 52 }}
+      className="relative w-[1204px] shrink-0 border border-solid border-[rgba(240,240,240,0.2)] bg-black"
+      style={{
+        height: isActive ? 420 : 108,
+        overflow: "hidden",
+        transition: "height 300ms ease-in-out",
+      }}
     >
-      <nav className="flex h-[52px] items-center justify-center gap-[9.61px]">
-        {tabs.map((tabLabel, index) => {
-          const isActive = activeTab === index;
-          const dividerVariant =
-            index === activeTab
-              ? "before-active"
-              : index === activeTab + 1
-              ? "after-active"
-              : "normal";
+      {/* Container corners (always at outer edges) */}
+      <Corners leftSrc={BADGE_LEFT} rightSrc={BADGE_RIGHT} />
 
-          return (
-            <Fragment key={index}>
-              {index > 0 && <CategoryDivider variant={dividerVariant} />}
-              <button
-                type="button"
-                onClick={() => onSelect(index)}
-                className={`${interRegular.className} relative flex h-[52px] shrink-0 cursor-pointer items-center justify-center px-[20px] text-[16px] leading-[24px] font-normal whitespace-nowrap not-italic transition-colors ${
-                  isActive ? "text-[#0e1a0e]" : "text-[#666] hover:text-[#f0f0f0]"
-                }`}
-              >
-                {isActive ? (
-                  <span className="pointer-events-none absolute inset-y-[4px] inset-x-[13px] overflow-clip bg-[#f0f0f0]">
-                    <Corners />
-                  </span>
-                ) : null}
-                <span className="relative uppercase tracking-wide">{tabLabel}</span>
-              </button>
-            </Fragment>
-          );
-        })}
-      </nav>
+      {/* Collapsed background image (fades out when expanded) */}
+      {stage.collapseBg && stage.collapseStyle && (
+        <div
+          className="pointer-events-none absolute mix-blend-plus-lighter transition-opacity duration-300"
+          style={{
+            opacity: isActive ? 0 : 1,
+            ...stage.collapseStyle,
+            transform: "translateX(-50%)",
+          }}
+          aria-hidden
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt=""
+            src={stage.collapseBg}
+            className="absolute size-full max-w-none object-bottom"
+          />
+          <div
+            className="absolute inset-0"
+            style={{ backgroundImage: stage.collapseGradient }}
+          />
+        </div>
+      )}
+
+      {/* Header separator border (visible when expanded) */}
+      <div
+        className="pointer-events-none absolute left-0 top-[108px] w-full border-b border-solid border-[rgba(240,240,240,0.2)] transition-opacity duration-300"
+        style={{ opacity: isActive ? 1 : 0 }}
+        aria-hidden
+      />
+
+      {/* Header separator corners (at the 108px divider line) */}
+      <div
+        className="pointer-events-none absolute left-0 top-0 h-[108px] w-full transition-opacity duration-300"
+        style={{ opacity: isActive ? 1 : 0 }}
+        aria-hidden
+      >
+        <Corners leftSrc={BADGE_LEFT} rightSrc={BADGE_RIGHT} />
+      </div>
+
+      {/* Icon + Label (left side of header) */}
+      <div className="pointer-events-none absolute left-[29px] top-[54px] flex -translate-y-1/2 items-center gap-[12px]">
+        <IconTile icon={stage.icon} />
+        <p
+          className={`${gilroyMedium.className} text-[22px] leading-[28px] whitespace-nowrap text-white`}
+        >
+          {stage.label}
+        </p>
+      </div>
+
+      {/* Toggle button (right side of header) */}
+      <div className="pointer-events-none absolute right-[29px] top-[54px] flex size-[35px] -translate-y-1/2 items-center justify-center overflow-clip bg-[#303030]">
+        <Corners leftSrc={BADGE_LEFT} rightSrc={BADGE_RIGHT} />
+        <div className="relative size-[24px]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt=""
+            src={isActive ? REMOVE_ICON : ADD_ICON}
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            style={isActive ? { width: 17.5, height: 1.5 } : { width: 17.5, height: 17.5 }}
+          />
+        </div>
+      </div>
+
+      {/* Invisible click overlay for the header region */}
+      <button
+        type="button"
+        onClick={onClick}
+        className="absolute left-0 top-0 z-10 h-[108px] w-full cursor-pointer"
+        aria-label={`${isActive ? "Collapse" : "Expand"} ${stage.label}`}
+      />
+
+      {/* Flow diagram (fades in when expanded) */}
+      <div
+        className="pointer-events-none absolute -translate-x-1/2 overflow-hidden transition-opacity duration-300"
+        style={{
+          left: "calc(50% + 0.5px)",
+          top: 127,
+          width: 1135,
+          height: 270,
+          opacity: isActive ? 1 : 0,
+        }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          alt=""
+          src={stage.flowImage}
+          className="absolute inset-0 size-full max-w-none object-cover"
+        />
+      </div>
+    </div>
+  );
+}
+
+/* =========================================================================
+   ICON TILE — radial-gradient rounded square with centered SVG icon
+   ========================================================================= */
+
+function IconTile({ icon }: { icon: string }) {
+  return (
+    <div
+      className="flex shrink-0 items-start overflow-clip p-[9.739px]"
+      style={{
+        backgroundImage: ICON_TILE_BG,
+        borderRadius: 16.696,
+        width: 65.123,
+        height: 64,
+      }}
+    >
+      <div className="relative size-[44.522px]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          alt=""
+          src={icon}
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        />
+      </div>
     </div>
   );
 }

@@ -13,7 +13,7 @@ import { Corners } from "../shared/Corners";
  */
 
 const BG_SURGE = "/products/alwayson/bg-surge.png";
-const BG_SUBCONSCIOUS = "/notfound/ChatGPT%20Image%20Jul%2024,%202026,%2005_14_17%20PM.png";
+const BG_SUBCONSCIOUS = "/Property 1=Default.png";
 const AI_CORE_ICON = "/products/alwayson/ai-core-icon.png";
 const HOST_CPU_IMG = "/products/alwayson/host-cpu.png";
 const CORNER_42 = "/products/alwayson/corner-42.svg";

@@ -648,7 +648,7 @@ export function SomEcosystem({ data }: { data?: any }) {
         </div>
 
         {/* Background image 124 */}
-        <div className="absolute inset-0 opacity-40">
+        <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-[100vw] min-w-[1440px] opacity-40">
           <div className="absolute inset-0 overflow-hidden">
             <img
               src={bgImage}

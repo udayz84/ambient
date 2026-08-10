@@ -42,7 +42,7 @@ export function DeveloperComingSoon({ data }: { data?: any }) {
   return (
     <div
       className="absolute"
-      style={{ left: -6.6953125, top: 2294, width: 1453, height: 683 }}
+      style={{ left: -6.6953125, top: 2920, width: 1453, height: 683 }}
       data-node-id="2438:4634"
       data-name="Coming soon"
     >

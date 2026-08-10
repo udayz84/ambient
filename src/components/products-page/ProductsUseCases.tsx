@@ -7,6 +7,7 @@ import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { TagBadge } from "../hero/TagBadge";
 import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
 import { Corners } from "../shared/Corners";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
@@ -98,6 +99,7 @@ export function ProductsUseCases({ data }: { data?: any }) {
         }));
 
   const [activeIdx, setActiveIdx] = useState(0);
+  const [direction, setDirection] = useState(1);
   const activeTab = tabs[activeIdx] || tabs[0];
   const activeImage = activeTab?.image || "/products/use-case-image.png";
   const cards = activeTab?.featureCards || USECASE_CARDS;
@@ -115,8 +117,22 @@ export function ProductsUseCases({ data }: { data?: any }) {
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  const nextTab = () => setActiveIdx((i) => (i + 1) % tabs.length);
-  const prevTab = () => setActiveIdx((i) => (i - 1 + tabs.length) % tabs.length);
+  const handleSelect = (idx: number) => {
+    if (idx !== activeIdx) {
+      setDirection(idx > activeIdx ? 1 : -1);
+      setActiveIdx(idx);
+    }
+  };
+
+  const nextTab = () => {
+    setDirection(1);
+    setActiveIdx((i) => (i + 1) % tabs.length);
+  };
+
+  const prevTab = () => {
+    setDirection(-1);
+    setActiveIdx((i) => (i - 1 + tabs.length) % tabs.length);
+  };
   return (
     <>
       {/* DESKTOP (>=1024px) */}
@@ -149,8 +165,9 @@ export function ProductsUseCases({ data }: { data?: any }) {
               activeImage={activeImage}
               onNext={nextTab}
               onPrev={prevTab}
-              onSelect={setActiveIdx}
+              onSelect={handleSelect}
               activeIdx={activeIdx}
+              direction={direction}
               tabs={tabs}
               cards={cards}
               primary={primary}
@@ -177,6 +194,23 @@ export function ProductsUseCases({ data }: { data?: any }) {
   );
 }
 
+const variants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? 1000 : -1000,
+    opacity: 0,
+  }),
+  center: {
+    zIndex: 1,
+    x: 0,
+    opacity: 1,
+  },
+  exit: (direction: number) => ({
+    zIndex: 0,
+    x: direction < 0 ? 1000 : -1000,
+    opacity: 0,
+  }),
+};
+
 function ProductsUseCasesDesktop({
   headingLines,
   subtitle,
@@ -186,6 +220,7 @@ function ProductsUseCasesDesktop({
   onPrev,
   onSelect,
   activeIdx,
+  direction,
   tabs,
   cards,
   primary,
@@ -235,60 +270,78 @@ function ProductsUseCasesDesktop({
       {/* Options / tab ruler — 2901:2034 */}
       <TabRuler onNext={onNext} onPrev={onPrev} onSelect={onSelect} activeIdx={activeIdx} tabs={tabs} />
 
-      {/* Giant watermark — 2901:2103 */}
-      <h3
-        className={`${gilroyExtraBold.className} absolute m-0 text-center text-[200px] uppercase whitespace-nowrap tracking-[0.5px] leading-[210px] bg-clip-text text-transparent [word-break:break-word] not-italic`}
-        style={{
-          left: 0,
-          top: 345,
-          width: USECASES_CANVAS_WIDTH,
-          height: 210,
-          backgroundImage: WATERMARK_GRADIENT,
-          WebkitBackgroundClip: "text",
-          backgroundClip: "text",
-        }}
-        data-node-id="2901:2103"
-        aria-hidden
-      >
-        {activeTab.watermark}
-      </h3>
+      <div className="absolute inset-0 pointer-events-none">
+        <AnimatePresence custom={direction}>
+          <motion.div
+            key={activeIdx}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.3 },
+            }}
+            className="absolute inset-0 pointer-events-auto"
+          >
+            {/* Giant watermark — 2901:2103 */}
+            <h3
+              className={`${gilroyExtraBold.className} absolute m-0 text-center text-[200px] uppercase whitespace-nowrap tracking-[0.5px] leading-[210px] bg-clip-text text-transparent [word-break:break-word] not-italic`}
+              style={{
+                left: 0,
+                top: 345,
+                width: USECASES_CANVAS_WIDTH,
+                height: 210,
+                backgroundImage: WATERMARK_GRADIENT,
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
+              data-node-id="2901:2103"
+              aria-hidden
+            >
+              {activeTab.watermark}
+            </h3>
 
-      {/* Central image — 2901:2104 */}
-      <div
-        className="absolute overflow-hidden"
-        style={{ left: 407.759765625, top: 305.032958984375, width: 632.8800659179688, height: 500 }}
-        data-node-id="2901:2104"
-        data-name="image 145"
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt=""
-          src={activeImage}
-          className={`absolute inset-0 size-full max-w-none ${activeTab?.label?.toUpperCase() === "AUTOMOTIVE" ? "object-contain" : "object-cover"}`}
-        />
+            {/* Central image — 2901:2104 */}
+            <div
+              className="absolute overflow-hidden"
+              style={{ left: 407.759765625, top: 305.032958984375, width: 632.8800659179688, height: 500 }}
+              data-node-id="2901:2104"
+              data-name="image 145"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                alt=""
+                src={activeImage}
+                className={`absolute inset-0 size-full max-w-none ${activeTab?.label?.toUpperCase() === "AUTOMOTIVE" ? "object-contain" : "object-cover"}`}
+              />
+            </div>
+
+            {/* Connector indicators — 2901:2121 / 2901:2127 */}
+            <Indicator
+              src="/products/indicator-1.svg"
+              left={490.24}
+              top={653.06}
+              width={88.18}
+              height={14.14}
+              flipY
+            />
+            <Indicator
+              src="/products/indicator-2.svg"
+              left={843.43}
+              top={618.8}
+              width={87.659}
+              height={76.623}
+            />
+
+            {/* Content cards */}
+            {cards.map((card: any, i: number) => (
+              <UseCaseCardView key={card.nodeId || i} card={card} />
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
-
-      {/* Connector indicators — 2901:2121 / 2901:2127 */}
-      <Indicator
-        src="/products/indicator-1.svg"
-        left={490.24}
-        top={653.06}
-        width={88.18}
-        height={14.14}
-        flipY
-      />
-      <Indicator
-        src="/products/indicator-2.svg"
-        left={843.43}
-        top={618.8}
-        width={87.659}
-        height={76.623}
-      />
-
-      {/* Content cards */}
-      {cards.map((card: any, i: number) => (
-        <UseCaseCardView key={card.nodeId || i} card={card} />
-      ))}
 
       {/* CTA row — 2901:2143 */}
       <div

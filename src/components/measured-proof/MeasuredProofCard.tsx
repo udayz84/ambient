@@ -57,7 +57,7 @@ export function MeasuredProofCard({
         className="absolute left-1/2 -translate-x-1/2 shadow-[0px_20px_20px_0px_rgba(9,38,6,0.25)] max-[1023px]:shadow-none"
         style={{ top: imageTop, width: imageWidth, height: imageHeight }}
       >
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="pointer-events-none absolute inset-0">
           {imageSrc ? (
             <Image
               src={imageSrc}
