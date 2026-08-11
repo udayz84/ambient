@@ -1,9 +1,8 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
-import { useRef } from "react";
-import Image from "next/image";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState, useRef } from "react";
 import { gilroyMedium, interRegular } from "../hero/fonts";
-import { CornerDecor } from "../contact/contact-shared";
 import { Corners } from "../shared/Corners";
 import { ContinuumOptionsBar } from "./ContinuumOptionsBar";
 
@@ -15,54 +14,47 @@ const SUBTITLE =
 
 const FALLBACK_HEADING = "The Ambient Continuum.";
 
-const CONNECTOR = "/applications/cont-connector.png";
-const LINE_108 = "/applications/line-108.svg";
-const LINE_109 = "/applications/line-109.svg";
+/* --- New assets (downloaded from Figma 4574:7538) --- */
+const BG_IMAGE = "/applications/cont2-bg.png";
+const POLY_OVERLAY = "/applications/cont2-poly.svg";
+const ELLIPSE_BIG = "/applications/cont2-ellipse-big.svg";
+const ELLIPSE_GLOW = "/applications/cont2-ellipse-glow.svg";
+const CARD_BG = "/applications/cont2-card-bg.svg";
+const LINE_109 = "/applications/cont2-line-109.svg";
+const CORNER_55 = "/applications/cont2-corner-55.svg";
+const CORNER_57 = "/applications/cont2-corner-57.svg";
 
+/* Microwatt (GPX10PRO) assets */
+const MW_ICON = "/applications/cont2-mw-icon.png";
+const MW_PEDESTAL = "/applications/cont2-mw-pedestal.png";
+const MW_FLOAT = "/applications/cont2-mw-float.png";
+const MW_CHIP_MASK = "/applications/cont2-chip-mask.png";
+const MW_CHIP_MARK = "/applications/cont2-chip-mark.svg";
+
+/* Legacy pedestal assets for other products */
 const NAV_ARROW_LEFT = "/applications/nav-arrow-left.svg";
 const NAV_ARROW_RIGHT = "/applications/nav-arrow-right.svg";
 
-const HOVER_TRANSITION = "transition-all duration-300 ease-out";
+/* Center anchor for all product visuals (matches Microwatt centre in Figma) */
+const VISUAL_CENTER_X = 655.5;
+const VISUAL_CENTER_Y = 418;
 
-type ContinuumCard = {
-  nodeId: string;
+type ProductCard = {
   title: string;
-  body: React.ReactNode;
-  wide: boolean;
+  body: string;
 };
 
-const CARDS: ContinuumCard[] = [
-  {
-    nodeId: "3974:613",
-    title: "GPX10PRO",
-    body: "Always-on intelliegence for wearabes, audio & battery IoT.",
-    wide: false,
-  },
-  {
-    nodeId: "3974:620",
-    title: "GPX64",
-    body: "Real-time perception & control for robots, drones & smart machines",
-    wide: true,
-  },
-  {
-    nodeId: "3974:627",
-    title: "GPX256",
-    body: "Private, local AI compute for creators, developers & businesses",
-    wide: true,
-  },
-  {
-    nodeId: "3974:634",
-    title: "GPX2000",
-    body: "Private, local AI compute for creators, developers & businesses",
-    wide: true,
-  },
-  {
-    nodeId: "3974:641",
-    title: "GPX8000",
-    body: "Always-on intelliegence for wearabes, audio & battery IoT.",
-    wide: false,
-  },
+const FALLBACK_CARDS: ProductCard[] = [
+  { title: "GPX10PRO", body: "Always-on intelliegence for wearabes, audio & battery IoT." },
+  { title: "GPX64", body: "Real-time perception & control for robots, drones & smart machines" },
+  { title: "GPX256", body: "Private, local AI compute for creators, developers & businesses" },
+  { title: "GPX2000", body: "Private, local AI compute for creators, developers & businesses" },
+  { title: "GPX8000", body: "Always-on intelliegence for wearabes, audio & battery IoT." },
 ];
+
+/* ------------------------------------------------------------------ */
+/* Helpers                                                            */
+/* ------------------------------------------------------------------ */
 
 function renderBody(body: React.ReactNode): React.ReactNode {
   if (typeof body === "string") {
@@ -77,9 +69,8 @@ function renderBody(body: React.ReactNode): React.ReactNode {
   return body;
 }
 
-/* Under-pedestal glow: hidden by default, fades in on hover.
-   Figma ellipse: vertical gradient #81D713 → #CFF86C → #FBFCF8 + gaussian blur. */
-function Glow({
+/* Always-visible glow under pedestal */
+function StaticGlow({
   className,
   blur,
 }: {
@@ -89,7 +80,7 @@ function Glow({
   return (
     <div
       aria-hidden
-      className={`absolute rounded-[50%] opacity-0 ${HOVER_TRANSITION} group-hover:opacity-100 ${className}`}
+      className={`absolute rounded-[50%] ${className}`}
       style={{
         background:
           "linear-gradient(to top, #81D713 0%, #CFF86C 50%, #FBFCF8 100%)",
@@ -99,8 +90,31 @@ function Glow({
   );
 }
 
-/* Chip screen logo: white shape masked by the logo alpha + vectorized mark */
-function ChipLogo({
+/* Pedestal wrapper */
+function Pedestal({
+  className,
+  src,
+  children,
+}: {
+  className: string;
+  src: string;
+  children?: React.ReactNode;
+}) {
+  return (
+    <div className={`absolute overflow-clip ${className}`}>
+      <img
+        alt=""
+        aria-hidden
+        src={src}
+        className="pointer-events-none absolute inset-0 size-full max-w-none object-contain"
+      />
+      {children}
+    </div>
+  );
+}
+
+/* Chip logo at original (small) size — used inside scaled legacy visuals */
+function ChipLogoSmall({
   className,
   maskSrc,
   markSrc,
@@ -128,309 +142,289 @@ function ChipLogo({
   );
 }
 
-/* Hidden float layer revealed on hover */
-function Float({
-  className,
-  src,
-  imgClassName = "absolute inset-0 size-full max-w-none object-cover",
-  clip = false,
-}: {
-  className: string;
-  src: string;
-  imgClassName?: string;
-  clip?: boolean;
-}) {
-  const hasObjectCover = imgClassName.includes("object-cover");
-  const wrapperClass = imgClassName.replace("object-cover", "").replace("max-w-none", "").trim();
-
-  const img = (
-    <div className={wrapperClass}>
-      <Image 
-        alt="" 
-        aria-hidden 
-        src={src} 
-        fill 
-        sizes="400px" 
-        quality={100}
-        className={hasObjectCover ? "object-cover max-w-none" : "max-w-none"} 
-      />
-    </div>
-  );
+/* ------------------------------------------------------------------ */
+/* GPX10PRO — Microwatt visual (EXACT Figma 4574:7588)                */
+/* ------------------------------------------------------------------ */
+function MicrowattVisual() {
   return (
     <div
-      aria-hidden
-      className={`absolute opacity-0 ${HOVER_TRANSITION} group-hover:opacity-100 ${className}`}
+      className="absolute left-[350.26px] top-[158px] h-[520px] w-[610.48px] overflow-clip"
+      data-node-id="4574:7588"
+      data-name="Microwatt"
     >
-      {clip ? (
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          {img}
+      {/* Icon (Frame2147240770) */}
+      <div className="pointer-events-none absolute left-[297.38px] top-[34.89px] h-[196.038px] w-[156.166px]">
+        <img
+          alt=""
+          aria-hidden
+          src={MW_ICON}
+          className="absolute inset-0 size-full max-w-none object-contain"
+        />
+      </div>
+
+      {/* Glow ellipse (Ellipse16210) */}
+      <div className="absolute left-[257.51px] top-[440.93px] h-[41.534px] w-[232.588px]">
+        <div className="absolute inset-[-80%_-14.29%]">
+          <img
+            alt=""
+            aria-hidden
+            src={ELLIPSE_GLOW}
+            className="block size-full max-w-none"
+          />
         </div>
-      ) : (
-        img
-      )}
+      </div>
+
+      {/* Pedestal (Frame2147240764) */}
+      <Pedestal
+        className="left-[200px] top-[178px] h-[320px] w-[354.973px]"
+        src={MW_PEDESTAL}
+      >
+        {/* Chip logo (Rectangle1618873643 mask + Image3Vectorized mark) */}
+        <div className="absolute left-[152px] top-[54px] h-[60px] w-[52.105px]">
+          <div
+            aria-hidden
+            className="mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-size-[26.053px_30px] absolute left-0 top-0 h-[60px] w-[52.105px] bg-white"
+            style={{ maskImage: `url("${MW_CHIP_MASK}")` }}
+          />
+          <div className="absolute left-[11.05px] top-[15.79px] h-[30px] w-[26.842px]">
+            <img
+              alt=""
+              aria-hidden
+              src={MW_CHIP_MARK}
+              className="absolute inset-0 block size-full max-w-none"
+            />
+          </div>
+        </div>
+      </Pedestal>
+
+      {/* Float (Frame2147240769) */}
+      <div className="absolute left-0 top-[124.6px] h-[338.914px] w-[270.799px]">
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <img
+            alt=""
+            aria-hidden
+            src={MW_FLOAT}
+            className="absolute left-[8.53%] top-[-5.39%] h-[114.71%] w-[81.71%] max-w-none"
+          />
+        </div>
+      </div>
     </div>
   );
 }
 
-function Pedestal({
-  className,
-  src,
+/* ------------------------------------------------------------------ */
+/* Legacy product visuals — centered & scaled to match Microwatt      */
+/* ------------------------------------------------------------------ */
+
+function CenteredVisual({
+  w,
+  h,
+  scale,
   children,
 }: {
-  className: string;
-  src: string;
-  children?: React.ReactNode;
+  w: number;
+  h: number;
+  scale: number;
+  children: React.ReactNode;
 }) {
+  const left = VISUAL_CENTER_X - w / 2;
+  const top = VISUAL_CENTER_Y - h / 2;
   return (
-    <div className={`absolute overflow-clip ${className}`}>
-      <img
-        alt=""
-        aria-hidden
-        src={src}
-        className="pointer-events-none absolute inset-0 size-full max-w-none object-contain"
-      />
+    <div
+      className="absolute overflow-clip"
+      style={{
+        left: `${left}px`,
+        top: `${top}px`,
+        width: `${w}px`,
+        height: `${h}px`,
+        transform: `scale(${scale})`,
+        transformOrigin: "center center",
+      }}
+    >
       {children}
     </div>
   );
 }
 
-function MicrowattVisual() {
-  return (
-    <div
-      className="group absolute left-[-21.13px] top-[375px] h-[260px] w-[305.687px] overflow-clip"
-      data-node-id="3974:650"
-    >
-      <div className="absolute left-[148.69px] top-[17.44px] h-[98.019px] w-[78.083px]">
-        <img
-          alt=""
-          aria-hidden
-          src="/applications/cont-mw-icon.png"
-          className="pointer-events-none absolute inset-0 size-full max-w-none object-contain"
-        />
-      </div>
-      <Glow className="left-[128.75px] top-[218.47px] h-[20.767px] w-[116.294px]" blur={8.31} />
-      <Pedestal className="left-[100px] top-[89px] h-[160px] w-[177.486px]" src="/applications/cont-mw-pedestal.png">
-        <ChipLogo
-          className="left-[76px] top-[27px]"
-          maskSrc="/applications/cont-chip-mask-a.png"
-          markSrc="/applications/cont-chip-mark-a.svg"
-        />
-      </Pedestal>
-      <Float
-        className="left-[33.23px] top-[62.3px] h-[169.457px] w-[135.399px]"
-        src="/applications/cont-mw-float.png"
-        imgClassName="absolute left-[8.53%] top-[-5.39%] h-[114.71%] w-[81.71%] max-w-none"
-        clip
-      />
-    </div>
-  );
-}
-
+/* GPX64 — Physical (old 320.944×272.977, scale 1.684) */
 function PhysicalVisual() {
   return (
-    <div
-      className="group absolute left-[263px] top-[373.02px] h-[272.977px] w-[320.944px] overflow-clip"
-      data-node-id="3974:651"
-    >
-      <Glow className="left-1/2 top-[235.27px] h-[24.153px] w-[144.92px] -translate-x-1/2" blur={8.72} />
-      <div className="absolute left-1/2 top-[2.68px] h-[105.559px] w-[84.089px] -translate-x-1/2">
-        <img
-          alt=""
-          aria-hidden
-          src="/applications/cont-ph-icon.png"
-          className="pointer-events-none absolute inset-0 size-full max-w-none object-contain"
-        />
+    <CenteredVisual w={320.944} h={272.977} scale={1.684}>
+      <StaticGlow className="left-1/2 top-[235.27px] h-[24.153px] w-[144.92px] -translate-x-1/2" blur={8.72} />
+      <div className="pointer-events-none absolute left-1/2 top-[2.68px] h-[105.559px] w-[84.089px] -translate-x-1/2">
+        <img alt="" aria-hidden src="/applications/cont-ph-icon.png" className="absolute inset-0 size-full max-w-none object-contain" />
       </div>
-      <Pedestal
-        className="left-[calc(50%-1.28px)] top-[73px] h-[190px] w-[190.633px] -translate-x-1/2"
-        src="/applications/cont-ph-pedestal.png"
-      >
-        <ChipLogo
-          className="left-[82.6px] top-[40.5px]"
-          maskSrc="/applications/cont-chip-mask-b.png"
-          markSrc="/applications/cont-chip-mark-b.svg"
-        />
+      <Pedestal className="left-[calc(50%-1.28px)] top-[73px] h-[190px] w-[190.633px] -translate-x-1/2" src="/applications/cont-ph-pedestal.png">
+        <ChipLogoSmall className="left-[82.6px] top-[40.5px]" maskSrc="/applications/cont-chip-mask-b.png" markSrc="/applications/cont-chip-mark-b.svg" />
       </Pedestal>
-      <Float
-        className="left-[29.68px] top-[39.52px] h-[71.565px] w-[102.875px]"
-        src="/applications/cont-ph-float-a.png"
-      />
-      <Float
-        className="right-[17.89px] top-[23.1px] h-[80.511px] w-[95.719px]"
-        src="/applications/cont-ph-float-b.png"
-      />
-    </div>
+      <div aria-hidden className="absolute left-[29.68px] top-[39.52px] h-[71.565px] w-[102.875px]">
+        <img alt="" aria-hidden src="/applications/cont-ph-float-a.png" className="absolute inset-0 size-full max-w-none" />
+      </div>
+      <div aria-hidden className="absolute right-[17.89px] top-[23.1px] h-[80.511px] w-[95.719px]">
+        <img alt="" aria-hidden src="/applications/cont-ph-float-b.png" className="absolute inset-0 size-full max-w-none" />
+      </div>
+    </CenteredVisual>
   );
 }
 
+/* GPX256 — Personal (old 333.518×330.799, scale 1.506) */
 function PersonalVisual() {
   return (
-    <div
-      className="group absolute left-[539.94px] top-[323px] h-[330.799px] w-[333.518px] overflow-clip"
-      data-node-id="3974:652"
-    >
-      <Glow className="left-[calc(50%+1.86px)] top-[293.42px] h-[27.014px] w-[154.63px] -translate-x-1/2" blur={9.06} />
-      <div className="absolute left-1/2 top-[32.6px] h-[109.918px] w-[87.562px] -translate-x-1/2">
-        <img
-          alt=""
-          aria-hidden
-          src="/applications/cont-ps-icon.png"
-          className="pointer-events-none absolute inset-0 size-full max-w-none object-contain"
-        />
+    <CenteredVisual w={333.518} h={330.799} scale={1.506}>
+      <StaticGlow className="left-[calc(50%+1.86px)] top-[293.42px] h-[27.014px] w-[154.63px] -translate-x-1/2" blur={9.06} />
+      <div className="pointer-events-none absolute left-1/2 top-[32.6px] h-[109.918px] w-[87.562px] -translate-x-1/2">
+        <img alt="" aria-hidden src="/applications/cont-ps-icon.png" className="absolute inset-0 size-full max-w-none object-contain" />
       </div>
-      <Pedestal
-        className="bottom-[20.19px] left-[calc(50%-1.04px)] h-[212.5px] w-[213.208px] -translate-x-1/2"
-        src="/applications/cont-ps-pedestal.png"
-      >
-        <ChipLogo
-          className="left-[calc(50%+0.04px)] top-[calc(50%-43.06px)] -translate-x-1/2 -translate-y-1/2"
-          maskSrc="/applications/cont-chip-mask-c.png"
-          markSrc="/applications/cont-chip-mark-c.svg"
-        />
+      <Pedestal className="bottom-[20.19px] left-[calc(50%-1.04px)] h-[212.5px] w-[213.208px] -translate-x-1/2" src="/applications/cont-ps-pedestal.png">
+        <ChipLogoSmall className="left-[calc(50%+0.04px)] top-[calc(50%-43.06px)] -translate-x-1/2 -translate-y-1/2" maskSrc="/applications/cont-chip-mask-c.png" markSrc="/applications/cont-chip-mark-c.svg" />
       </Pedestal>
-      <Float
-        className="left-[31.86px] top-[32.79px] h-[89.425px] w-[107.123px]"
-        src="/applications/cont-ps-float-a.png"
-        imgClassName="absolute left-0 top-[-7.81%] h-[119.79%] w-full max-w-none"
-        clip
-      />
-      <Float
-        className="right-[7.78px] top-[39.31px] h-[75.452px] w-[89.425px]"
-        src="/applications/cont-ps-float-b.png"
-        imgClassName="absolute left-[-53%] top-[-0.31%] h-[176.67%] w-[222.9%] max-w-none"
-        clip
-      />
-    </div>
-  );
-}
-
-function Personal2Visual() {
-  return (
-    <div
-      className="group absolute left-[816.87px] top-[305px] h-[340px] w-[342.795px] overflow-clip"
-      data-node-id="3974:654"
-    >
-      <Glow className="left-[calc(50%+1.86px)] top-[293.42px] h-[27.014px] w-[154.63px] -translate-x-1/2" blur={9.32} />
-      <div className="absolute left-[calc(50%+0.65px)] top-[39px] h-[105.559px] w-[84.089px] -translate-x-1/2">
-        <img
-          alt=""
-          aria-hidden
-          src="/applications/cont-p2-icon.png"
-          className="pointer-events-none absolute inset-0 size-full max-w-none object-contain"
-        />
-      </div>
-      <Pedestal
-        className="bottom-[16px] left-[calc(50%-0.03px)] h-[220px] w-[220.733px] -translate-x-1/2"
-        src="/applications/cont-p2-pedestal.png"
-      >
-        <ChipLogo
-          className="left-[calc(50%+0.06px)] top-[calc(50%-42.5px)] -translate-x-1/2 -translate-y-1/2"
-          maskSrc="/applications/cont-chip-mask-a.png"
-          markSrc="/applications/cont-chip-mark-a.svg"
-        />
-      </Pedestal>
-      <Float
-        className="right-[48.67px] top-[45px] h-[89.425px] w-[107.123px]"
-        src="/applications/cont-p2-float.png"
-      />
-    </div>
-  );
-}
-
-function AirCooledVisual() {
-  return (
-    <div
-      className="group absolute left-[1090.87px] top-[245px] h-[420px] w-[359.442px] overflow-clip"
-      data-node-id="3974:653"
-    >
-      <Float
-        className="left-[calc(50%+0.12px)] top-[calc(50%-61.72px)] h-[267.628px] w-[317.442px] -translate-x-1/2 -translate-y-1/2"
-        src="/applications/cont-ac-server.png"
-      />
-      <Glow className="left-[calc(50%+1.95px)] top-[276.42px] h-[28.326px] w-[162.14px] -translate-x-1/2" blur={9.77} />
-      <div className="absolute left-1/2 top-[66.42px] h-[115.256px] w-[91.814px] -translate-x-1/2">
+      <div aria-hidden className="absolute left-[31.86px] top-[32.79px] h-[89.425px] w-[107.123px]">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <img
-            alt=""
-            aria-hidden
-            src="/applications/cont-ac-icon.png"
-            className="absolute left-[-3.97%] top-[-6.42%] h-[112.84%] w-[107.45%] max-w-none"
-          />
+          <img alt="" aria-hidden src="/applications/cont-ps-float-a.png" className="absolute left-0 top-[-7.81%] h-[119.79%] w-full max-w-none" />
         </div>
       </div>
-      <Pedestal
-        className="bottom-[37px] left-[calc(50%+0.7px)] h-[250px] w-[250.833px] -translate-x-1/2"
-        src="/applications/cont-ac-pedestal.png"
-      >
-        <ChipLogo
-          className="left-[calc(50%+2.33px)] top-[calc(50%-48px)] -translate-x-1/2 -translate-y-1/2"
-          maskSrc="/applications/cont-chip-mask-a.png"
-          markSrc="/applications/cont-chip-mark-a.svg"
-        />
-      </Pedestal>
-    </div>
+      <div aria-hidden className="absolute right-[7.78px] top-[39.31px] h-[75.452px] w-[89.425px]">
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <img alt="" aria-hidden src="/applications/cont-ps-float-b.png" className="absolute left-[-53%] top-[-0.31%] h-[176.67%] w-[222.9%] max-w-none" />
+        </div>
+      </div>
+    </CenteredVisual>
   );
 }
 
+/* GPX2000 — Personal2 (old 342.795×340, scale 1.455) */
+function Personal2Visual() {
+  return (
+    <CenteredVisual w={342.795} h={340} scale={1.455}>
+      <StaticGlow className="left-[calc(50%+1.86px)] top-[293.42px] h-[27.014px] w-[154.63px] -translate-x-1/2" blur={9.32} />
+      <div className="pointer-events-none absolute left-[calc(50%+0.65px)] top-[39px] h-[105.559px] w-[84.089px] -translate-x-1/2">
+        <img alt="" aria-hidden src="/applications/cont-p2-icon.png" className="absolute inset-0 size-full max-w-none object-contain" />
+      </div>
+      <Pedestal className="bottom-[16px] left-[calc(50%-0.03px)] h-[220px] w-[220.733px] -translate-x-1/2" src="/applications/cont-p2-pedestal.png">
+        <ChipLogoSmall className="left-[calc(50%+0.06px)] top-[calc(50%-42.5px)] -translate-x-1/2 -translate-y-1/2" maskSrc="/applications/cont-chip-mask-a.png" markSrc="/applications/cont-chip-mark-a.svg" />
+      </Pedestal>
+      <div aria-hidden className="absolute right-[48.67px] top-[45px] h-[89.425px] w-[107.123px]">
+        <img alt="" aria-hidden src="/applications/cont-p2-float.png" className="absolute inset-0 size-full max-w-none" />
+      </div>
+    </CenteredVisual>
+  );
+}
+
+/* GPX8000 — AirCooled (old 359.442×420, scale 1.28) */
+function AirCooledVisual() {
+  return (
+    <CenteredVisual w={359.442} h={420} scale={1.28}>
+      <div aria-hidden className="absolute left-[calc(50%+0.12px)] top-[calc(50%-61.72px)] h-[267.628px] w-[317.442px] -translate-x-1/2 -translate-y-1/2">
+        <img alt="" aria-hidden src="/applications/cont-ac-server.png" className="absolute inset-0 size-full max-w-none" />
+      </div>
+      <StaticGlow className="left-[calc(50%+1.95px)] top-[276.42px] h-[28.326px] w-[162.14px] -translate-x-1/2" blur={9.77} />
+      <div className="pointer-events-none absolute left-1/2 top-[66.42px] h-[115.256px] w-[91.814px] -translate-x-1/2">
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <img alt="" aria-hidden src="/applications/cont-ac-icon.png" className="absolute left-[-3.97%] top-[-6.42%] h-[112.84%] w-[107.45%] max-w-none" />
+        </div>
+      </div>
+      <Pedestal className="bottom-[37px] left-[calc(50%+0.7px)] h-[250px] w-[250.833px] -translate-x-1/2" src="/applications/cont-ac-pedestal.png">
+        <ChipLogoSmall className="left-[calc(50%+2.33px)] top-[calc(50%-48px)] -translate-x-1/2 -translate-y-1/2" maskSrc="/applications/cont-chip-mask-a.png" markSrc="/applications/cont-chip-mark-a.svg" />
+      </Pedestal>
+    </CenteredVisual>
+  );
+}
+
+const VISUALS = [
+  MicrowattVisual,
+  PhysicalVisual,
+  PersonalVisual,
+  Personal2Visual,
+  AirCooledVisual,
+];
+
+/* ------------------------------------------------------------------ */
+/* Main component                                                     */
+/* ------------------------------------------------------------------ */
 export function ApplicationsPageContinuum({ data }: { data?: any }) {
+  const [selected, setSelected] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scrollLeft = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: -340, behavior: "smooth" });
-    }
+    if (scrollRef.current) scrollRef.current.scrollBy({ left: -340, behavior: "smooth" });
   };
-
   const scrollRight = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: 340, behavior: "smooth" });
-    }
+    if (scrollRef.current) scrollRef.current.scrollBy({ left: 340, behavior: "smooth" });
   };
 
   const heading = data?.heading || FALLBACK_HEADING;
   const subtitle = data?.subtitle || SUBTITLE;
 
   const rawCards = Array.isArray(data?.cards) ? data.cards : [];
-  const cards: ContinuumCard[] =
+  const cards: ProductCard[] =
     rawCards.length > 0
-      ? rawCards.map((c: any, i: number) => ({
-          nodeId: CARDS[i]?.nodeId || `continuum-card-${i}`,
-          title: c?.title || "",
-          body: c?.body || "",
-          wide: CARDS[i]?.wide ?? true,
-        }))
-      : CARDS;
+      ? rawCards.map((c: any) => ({ title: c?.title || "", body: c?.body || "" }))
+      : FALLBACK_CARDS;
+
+  const activeCard = cards[selected] || FALLBACK_CARDS[selected];
+  const Visual = VISUALS[selected] || MicrowattVisual;
 
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
-      data-node-id="3974:600"
-      data-name="Desktop - 11"
+      data-node-id="4574:7538"
+      data-name="Desktop - 12"
       aria-label="The Ambient Continuum"
     >
-      {/* DESKTOP (>=1024px) */}
+      {/* ============= DESKTOP (>=1024px) ============= */}
       <div className="relative hidden h-[808px] w-full max-w-[1440px] min-[1024px]:block">
-        {/* Connector graphics between pedestals */}
-        {[192.87, 472.87, 744.87, 1014.87].map((left) => (
+        {/* --- Background image + radial gradient (image 29) --- */}
+        <div
+          aria-hidden
+          className="absolute h-[646.545px] w-[1450.195px]"
+          style={{ left: "50%", top: "179.73px", transform: "translateX(-50%)" }}
+        >
+          <img
+            alt=""
+            src={BG_IMAGE}
+            className="absolute inset-0 size-full max-w-none object-bottom"
+          />
           <div
-            key={left}
-            aria-hidden
-            className="absolute top-[476px] h-[60px] w-[207px]"
-            style={{ left }}
-          >
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse 50% 50% at 50% 44.3%, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%)",
+            }}
+          />
+        </div>
+
+        {/* --- Polygon overlay (Group 47) --- */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-[-76px] top-[236px] h-[588px] w-[1560px]"
+        >
+          <div className="absolute inset-[-17.01%_-6.41%]">
             <img
               alt=""
-              aria-hidden
-              src={CONNECTOR}
-              className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+              src={POLY_OVERLAY}
+              className="block size-full max-w-none"
             />
           </div>
-        ))}
+        </div>
 
-        {/* Header: title + subtitle */}
+        {/* --- Large ellipse (Ellipse16209) --- */}
         <div
-          className="absolute left-1/2 top-[32px] flex w-[607px] -translate-x-1/2 flex-col items-center"
-          data-node-id="3974:605"
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 top-[calc(50%+96px)] h-[528px] w-[1007px] -translate-x-1/2 -translate-y-1/2"
+        >
+          <div className="absolute inset-[-23.6%_-12.37%]">
+            <img
+              alt=""
+              src={ELLIPSE_BIG}
+              className="block size-full max-w-none"
+            />
+          </div>
+        </div>
+
+        {/* --- Title section (Group 78) --- */}
+        <div
+          className="absolute left-1/2 top-[27px] flex w-[607px] -translate-x-1/2 flex-col items-center"
+          data-node-id="4574:7544"
           data-name="Group 78"
         >
           <div className="relative h-[74px] w-full" data-name="Title">
@@ -441,66 +435,57 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
               }}
-              data-node-id="3974:606"
+              data-node-id="4574:7545"
             >
               {heading}
             </h2>
-            <CornerDecor />
+            <Corners leftSrc={CORNER_57} rightSrc={CORNER_55} />
           </div>
           <p
             className={`${interRegular.className} mt-[20px] w-[600px] text-center text-[14px] font-normal leading-[1.4] text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
-            data-node-id="3974:611"
+            data-node-id="4574:7550"
           >
             {subtitle}
           </p>
         </div>
 
-        {/* Content row */}
-        <div
-          className="absolute left-[41.87px] top-[646px] flex w-[1356px] items-start justify-center gap-[10px] text-center text-white not-italic"
-          data-node-id="3974:612"
-        >
-          {cards.map((card) => (
-            <div
-              key={card.nodeId}
-              className={`flex shrink-0 flex-col items-center justify-center gap-[10px] p-[12px] ${
-                card.wide ? "w-[276px]" : "w-[244px]"
-              }`}
-              data-node-id={card.nodeId}
-              data-name="Content"
-            >
-              <p
-                className={`${gilroyMedium.className} w-full text-center text-[22px] font-medium leading-[28px]`}
-              >
-                {card.title}
-              </p>
-              <p
-                className={`${interRegular.className} w-full text-center text-[14px] font-normal leading-[21px] opacity-65`}
-              >
-                {renderBody(card.body)}
-              </p>
-            </div>
-          ))}
-        </div>
+        {/* --- Options bar (interactive) --- */}
+        <ContinuumOptionsBar selected={selected} onSelect={setSelected} />
 
-        {/* Bottom lines (clipped by the frame, as in Figma) */}
+        {/* --- Product visual (switches with selection) --- */}
+        <Visual />
+
+        {/* --- Card (content switches with selection) --- */}
         <div
-          aria-hidden
-          className="absolute left-[0.17px] top-[887px] flex h-0 w-[1418.317px] items-center justify-center"
+          className="absolute left-1/2 top-[642px] h-[147px] w-[325px] -translate-x-1/2"
+          data-node-id="4574:7589"
+          data-name="cARD"
         >
-          <div className="flex-none skew-x-[0.75deg]">
-            <div className="relative h-0 w-[1418.318px]">
-              <div className="absolute inset-[-2.67px_-0.19%_-2.67px_0]">
-                <img
-                  alt=""
-                  aria-hidden
-                  src={LINE_108}
-                  className="block size-full max-w-none"
-                />
-              </div>
-            </div>
+          <div className="absolute left-[0.79px] top-[0.89px] h-[146.11px] w-[323.807px]">
+            <img
+              alt=""
+              aria-hidden
+              src={CARD_BG}
+              className="absolute inset-0 block size-full max-w-none"
+            />
+          </div>
+          <div className="absolute left-1/2 top-[calc(50%+1px)] flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-[10px] p-[12px] text-center text-white not-italic">
+            <p
+              className={`${gilroyMedium.className} min-w-full w-[min-content] text-[26px] font-medium leading-[29px]`}
+              data-node-id="4574:7592"
+            >
+              {activeCard.title}
+            </p>
+            <p
+              className={`${interRegular.className} w-[244px] text-[16px] font-normal leading-[24px] opacity-65`}
+              data-node-id="4574:7593"
+            >
+              {renderBody(activeCard.body)}
+            </p>
           </div>
         </div>
+
+        {/* --- Line 109 (bottom-right angled line) --- */}
         <div
           aria-hidden
           className="absolute left-[1071.39px] top-[885.99px] flex h-0 w-[347.107px] items-center justify-center"
@@ -518,19 +503,9 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
             </div>
           </div>
         </div>
-
-        {/* Pedestal visuals (hover reveals glow + floating layers) */}
-        <MicrowattVisual />
-        <PhysicalVisual />
-        <PersonalVisual />
-        <Personal2Visual />
-        <AirCooledVisual />
-
-        {/* Options bar (interactive) */}
-        <ContinuumOptionsBar />
       </div>
 
-      {/* MOBILE (<1024px) — node 4032:5788, desktop above is untouched */}
+      {/* ============= MOBILE (<1024px) ============= */}
       <div
         className="relative flex w-full flex-col items-center overflow-hidden min-[1024px]:hidden"
         data-node-id="4032:5788"
@@ -538,34 +513,26 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
       >
         <style>{`.cont-m-scroll::-webkit-scrollbar{display:none}.cont-m-scroll{scrollbar-width:none;-ms-overflow-style:none}`}</style>
 
-        {/* Top background strip removed per request */}
-
         {/* Bottom background strip */}
         <div
           className="pointer-events-none absolute bottom-0 left-[calc(50%+30px)] flex h-[341px] w-[1441px] -translate-x-1/2 items-center justify-center overflow-hidden"
           aria-hidden
         >
           <div className="-scale-y-100">
-            <img
-              src="/applications/dvk-bottom.png"
-              alt=""
-              className="h-[341px] w-[1441px] object-cover"
-            />
+            <img src="/applications/dvk-bottom.png" alt="" className="h-[341px] w-[1441px] object-cover" />
           </div>
         </div>
 
-        {/* Header: title + subtitle (node 4032:5792) */}
+        {/* Header: title + subtitle */}
         <div
           className="relative z-10 mt-[29px] flex w-[350px] flex-col items-center gap-[10px]"
           data-node-id="4032:5792"
         >
-          {/* Title with corner brackets (node 4032:5793) */}
           <div className="relative h-[79px] w-[353px]" data-node-id="4032:5793" data-name="Group 78">
             <h2
               className={`${gilroyMedium.className} absolute inset-0 flex items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
-                backgroundImage:
-                  "linear-gradient(107.453deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
+                backgroundImage: TITLE_GRADIENT,
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
               }}
@@ -573,50 +540,8 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
             >
               {heading}
             </h2>
-
-            {/* Top-right bracket (Vector 55) */}
-            <div className="absolute left-[351.5px] top-[4px] flex h-[4px] w-[2.346px] items-center justify-center">
-              <div className="flex-none rotate-180">
-                <div className="relative h-[4px] w-[2.346px]">
-                  <div className="absolute inset-[0_0_-12.5%_-21.31%]">
-                    { }
-                    <img alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* Bottom-right bracket (Vector 56) */}
-            <div className="absolute left-[351.5px] top-[75px] flex h-[4px] w-[2.346px] items-center justify-center">
-              <div className="-scale-y-100 flex-none rotate-180">
-                <div className="relative h-[4px] w-[2.346px]">
-                  <div className="absolute inset-[0_0_-12.5%_-21.31%]">
-                    { }
-                    <img alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* Bottom-left bracket (Vector 57) */}
-            <div className="absolute left-[-1.5px] top-[75px] h-[4px] w-[2.346px]">
-              <div className="absolute inset-[0_0_-12.5%_-21.31%]">
-                { }
-                <img alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
-              </div>
-            </div>
-            {/* Top-left bracket (Vector 58) */}
-            <div className="absolute left-[-1.5px] top-[4px] flex h-[4px] w-[2.346px] items-center justify-center">
-              <div className="-scale-y-100 flex-none">
-                <div className="relative h-[4px] w-[2.346px]">
-                  <div className="absolute inset-[0_0_-12.5%_-21.31%]">
-                    { }
-                    <img alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Corners leftSrc={CORNER_57} rightSrc={CORNER_55} />
           </div>
-
-          {/* Subtitle (node 4032:5799) */}
           <p
             className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
             data-node-id="4032:5799"
@@ -625,71 +550,36 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
           </p>
         </div>
 
-        {/* Chip visual: horizontal scroll reusing the desktop pedestal visuals (node 4032:11892).
-            The inner uses the desktop 1440x808 coordinate space, offset up to crop the dead top
-            space so the pedestal staircase + labels fit a mobile-height band. */}
+        {/* Horizontal scroll for desktop visual */}
         <div
           ref={scrollRef}
-          className="cont-m-scroll relative -mt-[40px] h-[490px] w-full overflow-x-auto overflow-y-hidden"
+          className="cont-m-scroll relative h-[490px] w-full overflow-x-auto overflow-y-hidden"
           data-node-id="4032:11892"
         >
-          <div className="relative h-[808px] w-[1440px] -mt-[200px]">
-            {/* Connector graphics between pedestals */}
-            {[192.87, 472.87, 744.87, 1014.87].map((left) => (
-              <div
-                key={left}
-                aria-hidden
-                className="absolute top-[476px] h-[60px] w-[207px]"
-                style={{ left }}
-              >
-                { }
-                <img
-                  alt=""
-                  aria-hidden
-                  src={CONNECTOR}
-                  className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
-                />
-              </div>
-            ))}
-
-            {/* Pedestal visuals (base state; hover reveals are inert on touch) */}
-            <MicrowattVisual />
-            <PhysicalVisual />
-            <PersonalVisual />
-            <Personal2Visual />
-            <AirCooledVisual />
-
-            {/* Content labels row (node 3974:612) */}
+          <div className="relative h-[808px] w-[1440px]">
+            <Visual />
+            {/* Card on mobile */}
             <div
-              className="absolute left-[41.87px] top-[646px] flex w-[1356px] items-start justify-center gap-[10px] text-center text-white not-italic"
-              data-node-id="3974:612"
+              className="absolute left-1/2 top-[642px] h-[147px] w-[325px] -translate-x-1/2"
+              data-node-id="4574:7589"
+              data-name="cARD"
             >
-              {cards.map((card) => (
-                <div
-                  key={card.nodeId}
-                  className={`flex shrink-0 flex-col items-center justify-center gap-[10px] p-[12px] ${
-                    card.wide ? "w-[276px]" : "w-[244px]"
-                  }`}
-                  data-node-id={card.nodeId}
-                  data-name="Content"
-                >
-                  <p
-                    className={`${gilroyMedium.className} w-full text-center text-[22px] leading-[28px] font-medium`}
-                  >
-                    {card.title}
-                  </p>
-                  <p
-                    className={`${interRegular.className} w-full text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0]`}
-                  >
-                    {renderBody(card.body)}
-                  </p>
-                </div>
-              ))}
+              <div className="absolute left-[0.79px] top-[0.89px] h-[146.11px] w-[323.807px]">
+                <img alt="" aria-hidden src={CARD_BG} className="absolute inset-0 block size-full max-w-none" />
+              </div>
+              <div className="absolute left-1/2 top-[calc(50%+1px)] flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-[10px] p-[12px] text-center text-white not-italic">
+                <p className={`${gilroyMedium.className} min-w-full w-[min-content] text-[26px] font-medium leading-[29px]`}>
+                  {activeCard.title}
+                </p>
+                <p className={`${interRegular.className} w-[244px] text-[16px] font-normal leading-[24px] opacity-65`}>
+                  {renderBody(activeCard.body)}
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Navigation arrows (node 4032:5855) — interactive */}
+        {/* Navigation arrows */}
         <div className="mt-[20px] flex gap-[20px]" data-node-id="4032:5855">
           <button type="button" onClick={scrollLeft} className="relative size-[44px] shrink-0 cursor-pointer" aria-label="Previous">
             <img src={NAV_ARROW_LEFT} alt="" className="block size-full max-w-none" aria-hidden />

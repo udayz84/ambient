@@ -831,8 +831,6 @@ export interface DvkHardwareStack extends Struct.ComponentSchema {
     displayName: 'Hardware Stack';
   };
   attributes: {
-    board_image: Schema.Attribute.Media;
-    board_image_alt: Schema.Attribute.String;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     label: Schema.Attribute.String;
     spec_cards: Schema.Attribute.Component<'dvk.spec-card', true>;

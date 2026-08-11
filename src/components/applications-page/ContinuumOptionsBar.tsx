@@ -1,18 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { useState } from "react";
 import { interRegular } from "../hero/fonts";
 
-/* Options bar — Figma 4084:2650.
+/* Options bar — Figma 4574:7552.
    Selected item: #f0f0f0 box + green corner brackets + #0e1a0e label.
    Box widths are fixed per item (as in Figma) so ticks never reflow. */
 const ITEMS = [
-  { label: "GPX10PRO", width: 107, nodeId: "4084:2663" },
-  { label: "GPX64", width: 93, nodeId: "4084:2670" },
-  { label: "GPX256", width: 102, nodeId: "4084:2677" },
-  { label: "GPX2000", width: 112, nodeId: "4084:2688" },
-  { label: "GPX8000", width: 113, nodeId: "4084:2695" },
+  { label: "GPX10PRO", width: 107, nodeId: "4574:7553" },
+  { label: "GPX64", width: 93, nodeId: "4574:7564" },
+  { label: "GPX256", width: 102, nodeId: "4574:7571" },
+  { label: "GPX2000", width: 112, nodeId: "4574:7578" },
+  { label: "GPX8000", width: 113, nodeId: "4574:7585" },
 ];
 
 /* Tick groups between items: flat 8s, ascending, descending, flat 8s */
@@ -54,13 +53,17 @@ function CornerBrackets() {
   );
 }
 
-export function ContinuumOptionsBar() {
-  const [selected, setSelected] = useState(0);
-
+export function ContinuumOptionsBar({
+  selected,
+  onSelect,
+}: {
+  selected: number;
+  onSelect: (index: number) => void;
+}) {
   return (
     <div
-      className="absolute left-[98px] top-[177px] flex h-[52px] w-[1244px] items-center justify-between"
-      data-node-id="4084:2650"
+      className="absolute left-[98px] top-[166px] flex h-[52px] w-[1244px] items-center justify-between"
+      data-node-id="4574:7552"
       data-name="Options"
       role="tablist"
       aria-label="Continuum options"
@@ -73,7 +76,7 @@ export function ContinuumOptionsBar() {
               type="button"
               role="tab"
               aria-selected={isSelected}
-              onClick={() => setSelected(i)}
+              onClick={() => onSelect(i)}
               className={`relative flex h-[52px] shrink-0 cursor-pointer items-center justify-center transition-colors duration-200 ${
                 isSelected ? "bg-[#f0f0f0]" : "bg-transparent"
               }`}

@@ -234,8 +234,6 @@ async function main() {
     heading: curStack.heading,
     subtitle: curStack.subtitle,
     label: curStack.label,
-    board_image: fileId,
-    board_image_alt: curStack.board_image_alt ?? null,
     spec_cards: SPEC_CARDS,
   };
   console.log("  hardware_stack.label:", JSON.stringify(hardware_stack.label));
@@ -243,7 +241,7 @@ async function main() {
 
   if (DRY_RUN) {
     console.log(
-      `\n[dry-run] would PUT /api/dvk-page with hardware_stack.board_image=${fileId} and 7 spec_cards`
+      `\n[dry-run] would PUT /api/dvk-page with hardware_stack spec_cards`
     );
     return;
   }

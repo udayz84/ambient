@@ -190,9 +190,7 @@ async function main() {
     heading: curStack.heading,
     subtitle: curStack.subtitle,
     label: curStack.label,
-    board_image: fileId,
     chip_image: curStack.chip_image ? curStack.chip_image.id : null,
-    board_image_alt: curStack.board_image_alt ?? null,
     chip_image_alt: curStack.chip_image_alt ?? null,
     spec_cards: (curStack.spec_cards || []).map((c) => ({
       title: c.title,
@@ -205,7 +203,7 @@ async function main() {
 
   if (DRY_RUN) {
     console.log(
-      `\n[dry-run] would PUT /api/dvk-page with hardware_stack.board_image=${fileId}`
+      `\n[dry-run] would PUT /api/dvk-page with hardware_stack`
     );
     return;
   }

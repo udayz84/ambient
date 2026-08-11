@@ -728,7 +728,6 @@ const DVK_PAYLOAD = {
     subtitle:
       "An exhaustive suite of sensors, interfaces, and debug tools pre-integrated with the GPX-10 Pro AI Processor.",
     label: "The Hardware Blueprint",
-    board_image: media(ASSETS.dvk_board_main),
     chip_image: media(ASSETS.dvk_board_chip),
     spec_cards: [
       {
