@@ -547,7 +547,7 @@ function DeveloperComingSoonMobile({ data }: { data?: any }) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt=""
-            src="/developer/coming-bg.png"
+            src="/developer/image%20250.png"
             className="absolute inset-0 size-full object-cover object-bottom"
           />
           <div

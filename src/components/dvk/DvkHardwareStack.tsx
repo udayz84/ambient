@@ -98,18 +98,18 @@ export function DvkHardwareStack({ data }: { data?: any }) {
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           {/* Figma 4049:8277 — DVK Board 1 (605x566) */}
           <div className="relative h-[566px] w-[605px] shrink-0 overflow-hidden">
-            <div className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === -1 || hoveredIndex === 5 || hoveredIndex === 6 ? "opacity-100" : "opacity-0"}`}>
+            <div className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === -1 ? "opacity-100" : "opacity-0"}`}>
               <img
                 alt=""
                 src={COLORFUL_BOARD}
-                className="absolute inset-0 size-full max-w-none object-cover"
+                className="absolute inset-0 size-full max-w-none object-bottom"
               />
             </div>
-            <div className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === 0 || hoveredIndex === 1 || hoveredIndex === 2 || hoveredIndex === 3 || hoveredIndex === 4 ? "opacity-100" : "opacity-0"}`}>
+            <div className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex !== -1 ? "opacity-100" : "opacity-0"}`}>
               <img
                 alt=""
                 src={BOARD_IMAGE}
-                className="absolute inset-0 size-full max-w-none object-cover"
+                className="absolute inset-0 size-full max-w-none object-bottom"
               />
             </div>
 
@@ -242,6 +242,54 @@ export function DvkHardwareStack({ data }: { data?: any }) {
                     aria-hidden
                     src={INTERFACES_VECTOR}
                     className="block size-full max-w-none"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* MCU (cards[5]) — variant 4638:4404 / node 4638:4408 */}
+            <div
+              className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === 5 ? "opacity-100" : "opacity-0"}`}
+            >
+              <div
+                className={`absolute left-[218px] top-[313px] h-[72px] w-[70px] ${RECT_BORDER}`}
+              >
+                <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                  <img
+                    alt=""
+                    aria-hidden
+                    src={HIGHLIGHT_FILL}
+                    className="absolute h-[920.56%] left-[-371.89%] top-[-515.29%] w-[1011.36%] max-w-none"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Booting (cards[6]) — variant 4638:7055 (Variant8) / nodes 4638:7059 + 4638:7153 */}
+            <div
+              className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === 6 ? "opacity-100" : "opacity-0"}`}
+            >
+              <div
+                className={`absolute left-[60px] top-[228px] h-[57px] w-[58px] ${RECT_BORDER}`}
+              >
+                <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                  <img
+                    alt=""
+                    aria-hidden
+                    src={HIGHLIGHT_FILL}
+                    className="absolute h-[1162.81%] left-[-129.73%] top-[-472.71%] w-[1220.61%] max-w-none"
+                  />
+                </div>
+              </div>
+              <div
+                className={`absolute left-[474px] top-[311px] h-[76px] w-[60px] ${RECT_BORDER}`}
+              >
+                <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                  <img
+                    alt=""
+                    aria-hidden
+                    src={HIGHLIGHT_FILL}
+                    className="absolute h-[872.1%] left-[-933.29%] top-[-487.42%] w-[1179.92%] max-w-none"
                   />
                 </div>
               </div>

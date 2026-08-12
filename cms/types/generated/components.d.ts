@@ -35,10 +35,8 @@ export interface AppsContinuum extends Struct.ComponentSchema {
     displayName: 'Continuum';
   };
   attributes: {
-    alt: Schema.Attribute.String;
     cards: Schema.Attribute.Component<'apps.continuum-card', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
-    image: Schema.Attribute.Media;
     subtitle: Schema.Attribute.Text;
   };
 }

@@ -7,9 +7,7 @@ import { CORNER_LEFT, CORNER_RIGHT, PRIMARY_CTA_SHADOW } from "./developer-data"
 import { mediaUrl } from "@/lib/strapi";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
-/** Radial fade overlay for the duplicated background images (Figma 2438:4635). */
-const BG_FADE =
-  "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 1212.6 683' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%25' width='100%25' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-0.000002985 38.877 -54.283 -0.000004168 606.29 326.94)'><stop stop-color='rgba(0,0,0,0)' offset='0'/><stop stop-color='rgba(0,0,0,1)' offset='1'/></radialGradient></defs></svg>\")";
+
 
 const DEFAULT_HEADING = "Test on the metal,\nwithout the metal.";
 const DEFAULT_SUBTITLE =
@@ -46,9 +44,8 @@ export function DeveloperComingSoon({ data }: { data?: any }) {
       data-node-id="2438:4634"
       data-name="Coming soon"
     >
-      {/* Background images (image 147, duplicated left & right, opacity 60) */}
-      <ComingBg left="calc(50% - 619.8px)" />
-      <ComingBg left="calc(50% + 778.2px)" />
+      {/* Background image (centered and spread to screen size) */}
+      <ComingBg left="50%" width="100vw" />
 
       {/* Content — 2438:4637 (centered) */}
       <div
@@ -146,23 +143,26 @@ export function DeveloperComingSoon({ data }: { data?: any }) {
   );
 }
 
-function ComingBg({ left }: { left: string }) {
+function ComingBg({ left, width = 1212.573 }: { left: string; width?: string | number }) {
   return (
     <div
       className="absolute -translate-x-1/2 -translate-y-1/2 opacity-60"
-      style={{ left, top: "50%", width: 1212.573, height: 683 }}
+      style={{ left, top: "50%", width, height: 683 }}
       aria-hidden
     >
       <div className="pointer-events-none absolute inset-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt=""
-          src="/developer/coming-bg.png"
+          src="/developer/image%20250.png"
           className="absolute inset-0 size-full max-w-none object-cover"
         />
         <div
           className="absolute inset-0"
-          style={{ backgroundImage: BG_FADE }}
+          style={{
+            backgroundImage:
+              "radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 20%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,1) 100%)",
+          }}
         />
       </div>
     </div>

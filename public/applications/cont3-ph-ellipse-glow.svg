@@ -1,0 +1,17 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="322.684" height="107.029" viewBox="0 0 322.684 107.029" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Ellipse 16210" filter="url(#filter0_f_6001_6542)">
+<ellipse cx="161.342" cy="53.5144" rx="129.393" ry="21.5655" fill="url(#paint0_linear_6001_6542)"/>
+</g>
+<defs>
+<filter id="filter0_f_6001_6542" x="0" y="0" width="322.684" height="107.029" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="15.9744" result="effect1_foregroundBlur_6001_6542"/>
+</filter>
+<linearGradient id="paint0_linear_6001_6542" x1="161.342" y1="75.0799" x2="161.342" y2="49.7087" gradientUnits="userSpaceOnUse">
+<stop stop-color="#81D713"/>
+<stop offset="0.5" stop-color="#CFF86C"/>
+<stop offset="1" stop-color="#FBFCF8"/>
+</linearGradient>
+</defs>
+</svg>

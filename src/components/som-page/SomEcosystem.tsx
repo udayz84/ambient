@@ -87,7 +87,7 @@ function SoundImage({ chipImg }: { chipImg: string }) {
           className="absolute left-[-16.41%] top-[-131.38%] h-[254.27%] w-[240.1%] max-w-none mix-blend-screen"
         />
       </div>
-      <div className="pointer-events-none absolute left-[258.62px] top-[7.38px] h-[45.468px] w-[42.073px] rounded-tl-[762.93px] rounded-tr-[762.93px] bg-[#f0f0f0]" />
+
     </>
   );
 }
@@ -224,7 +224,7 @@ function EcoCard({
   return (
     <div
       ref={fadeRef}
-      className={`flex flex-col overflow-visible border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] transition-colors duration-300 cursor-pointer ${cardBg} ${padClass} ${frameClass} ${getFadeInClass(isVisible)}`}
+      className={`flex flex-col overflow-y-visible overflow-x-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] transition-colors duration-300 cursor-pointer ${cardBg} ${padClass} ${frameClass} ${getFadeInClass(isVisible)}`}
       data-name={dataName}
     >
       <div className="relative flex w-full flex-1 flex-col items-start justify-between">
@@ -432,7 +432,7 @@ function MobileSoundOverlay({ chipImg }: { chipImg: string }) {
           className="absolute left-[-16.41%] top-[-131.38%] h-[254.27%] w-[240.1%] max-w-none mix-blend-screen"
         />
       </div>
-      <div className="pointer-events-none absolute left-[230px] top-[6px] h-[40px] w-[37px] rounded-tl-[677.1px] rounded-tr-[677.1px] bg-[#f0f0f0]" />
+
     </>
   );
 }

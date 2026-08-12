@@ -35,7 +35,7 @@ const headers = {
 };
 
 async function main() {
-  // 1. Read current continuum component to preserve heading/subtitle/image
+  // 1. Read current continuum component to preserve heading/subtitle
   const getRes = await fetch(
     `${STRAPI_URL}/api/applications-page?populate[continuum][populate]=*`,
     { headers },
@@ -50,7 +50,6 @@ async function main() {
   const continuum = {
     heading: current.heading ?? null,
     subtitle: current.subtitle ?? null,
-    image: current.image?.id ?? null,
     cards: CARDS,
   };
   const putRes = await fetch(`${STRAPI_URL}/api/applications-page?status=published`, {

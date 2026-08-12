@@ -55,7 +55,7 @@ function Visual1({ src }: { src: string }) {
         alt=""
         aria-hidden
         src={src}
-        className="absolute left-0 top-[0.48%] h-[100.61%] w-full max-w-none object-cover"
+        className="absolute inset-0 size-full max-w-none object-contain"
       />
     </div>
   );
@@ -88,7 +88,7 @@ function Visual3({ srcA, srcB }: { srcA: string; srcB: string }) {
           alt=""
           aria-hidden
           src={srcA}
-          className="absolute left-0 top-[0.48%] h-[100.61%] w-full max-w-none object-cover object-left"
+          className="absolute inset-0 size-full max-w-none object-contain"
         />
       </div>
     </div>

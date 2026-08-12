@@ -7,6 +7,7 @@ import { SPEC_CARDS } from "./dvk-data";
 import { DvkDemos } from "./DvkDemos";
 import { DEMO_CARDS } from "./DvkDemosCards";
 import { DvkModelForge } from "./DvkModelForge";
+import { DvkComingSoon } from "./DvkComingSoon";
 import { DvkIntegratedModules } from "./DvkIntegratedModules";
 import {
   ACCENT_CARD_BG,
@@ -70,6 +71,9 @@ export function Dvk({ data }: { data?: any }) {
           {data?.modelforge ? <DvkModelForge data={data.modelforge} /> : null}
         </div>
       </div>
+
+      {/* Coming Soon section — "Test on the metal, without the metal" (4497:2938) */}
+      <DvkComingSoon data={data?.coming_soon} />
 
       {/* MOBILE (<1024px) — stacked layout */}
       <DvkHeroMobile data={data?.hero} />

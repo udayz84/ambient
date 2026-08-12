@@ -143,7 +143,7 @@ export function ProductsFeaturesCarousel({
     >
       <div
         ref={trackRef}
-        className="flex w-max content-stretch gap-[24px] px-[100px] will-change-transform [backface-visibility:hidden]"
+        className="flex w-max content-stretch gap-[24px] px-[100px] transition-transform duration-300 ease-out will-change-transform [backface-visibility:hidden]"
       >
         {cards.map((card, index) => {
           const { translateY } = getCardMotion(scrollProgress, index);

@@ -1,6 +1,6 @@
 "use client";
 
-import { interMedium } from "../hero/fonts";
+import { interMedium, interRegular, gilroyMedium } from "../hero/fonts";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useState, useEffect } from "react";
@@ -33,6 +33,105 @@ function ShoppingCartIcon() {
   );
 }
 
+/** Figma 4625:8704 — Products mega-menu dropdown (800×210 panel). */
+function ProductsMegaMenu({ onNavigate }: { onNavigate: () => void }) {
+  return (
+    <div
+      className="relative w-[800px] border-[0.5px] border-[rgba(255,255,255,0.1)] bg-[#0f0e0e]"
+      data-node-id="4625:8704"
+      data-name="Dropdown"
+    >
+      {/* Corner elements overlay */}
+      <div className="pointer-events-none absolute left-[0.5px] top-[0.5px] h-[calc(100%-1px)] w-[calc(100%-1px)]">
+        <Image src="/navbar/dropdown-corners.svg" alt="" fill className="block max-w-none" aria-hidden />
+      </div>
+
+      {/* Content — 3 columns, gap 32px, padding 30px */}
+      <div className="relative flex items-start gap-[32px] p-[30px]">
+        {/* Column 1 — Processors (200px) */}
+        <div className="flex w-[200px] shrink-0 flex-col gap-[12px]">
+          <div className="flex shrink-0 items-center gap-[6px]">
+            <span className="relative size-[24px] shrink-0 overflow-clip">
+              <Image src="/navbar/dropdown-icon-chip.svg" alt="" fill className="object-contain" aria-hidden />
+            </span>
+            <span className={`${interRegular.className} whitespace-nowrap text-[16px] leading-[24px] font-normal text-[#f0f0f0]`}>
+              Processors
+            </span>
+          </div>
+          <div className="flex flex-col gap-[6px]">
+            <Link href="/products" onClick={onNavigate} className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#ccc] opacity-90 transition-opacity hover:opacity-100`}>
+              GPX10PRO
+            </Link>
+            <Link href="/products" onClick={onNavigate} className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#ccc] opacity-90 transition-opacity hover:opacity-100`}>
+              GPX64
+            </Link>
+          </div>
+        </div>
+
+        {/* Column 2 — System-on-Modules (flex-1) */}
+        <div className="flex min-w-px flex-1 flex-col gap-[12px]">
+          <div className="flex shrink-0 items-center gap-[6px]">
+            <span className="relative size-[24px] shrink-0 overflow-clip">
+              <Image src="/navbar/dropdown-icon-som.svg" alt="" fill className="object-contain" aria-hidden />
+            </span>
+            <span className={`${interRegular.className} whitespace-nowrap text-[16px] leading-[24px] font-normal text-[#f0f0f0]`}>
+              System-on-Modules
+            </span>
+          </div>
+          <p className={`${interRegular.className} w-full text-[12px] leading-[18px] font-normal text-[#ccc] opacity-90`}>
+            Drop-in reference modules for rapid product development
+          </p>
+          <DropdownCta href="/SOM" label="View all SOMs" onNavigate={onNavigate} />
+        </div>
+
+        {/* Column 3 — Development Kits (flex-1) */}
+        <div className="flex min-w-px flex-1 flex-col gap-[12px]">
+          <div className="flex shrink-0 items-center gap-[6px]">
+            <span className="relative size-[24px] shrink-0 overflow-clip">
+              <Image src="/navbar/dropdown-icon-devkit.svg" alt="" fill className="object-contain" aria-hidden />
+            </span>
+            <span className={`${interRegular.className} whitespace-nowrap text-[16px] leading-[24px] font-normal text-[#f0f0f0]`}>
+              Development Kits
+            </span>
+          </div>
+          <p className={`${interRegular.className} w-full text-[12px] leading-[18px] font-normal text-[#ccc] opacity-90`}>
+            Plug-and-play boards to test your models quickly
+          </p>
+          <DropdownCta href="/dvk" label="View all Dev Kits" onNavigate={onNavigate} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** Figma 4625:8736 — dropdown CTA button with corner brackets. */
+function DropdownCta({ href, label, onNavigate }: { href: string; label: string; onNavigate: () => void }) {
+  return (
+    <Link
+      href={href}
+      onClick={onNavigate}
+      className={`relative flex h-[48px] shrink-0 items-center justify-center bg-[rgba(226,241,202,0.12)] px-[20px] transition-opacity hover:opacity-90 ${gilroyMedium.className}`}
+      style={{ width: label.length > 18 ? 180 : 160 }}
+    >
+      <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white">
+        {label}
+      </span>
+      <div className="pointer-events-none absolute right-0 top-0 flex size-[4px] items-center justify-center">
+        <div className="rotate-180 flex-none"><div className="relative size-[4px]"><div className="absolute inset-[0_0_-12.5%_-12.5%]"><Image src="/hero/corner-tag-2.svg" alt="" fill className="block max-w-none" aria-hidden /></div></div></div>
+      </div>
+      <div className="pointer-events-none absolute top-0 left-0 flex size-[4px] items-center justify-center">
+        <div className="-scale-y-100 flex-none"><div className="relative size-[4px]"><div className="absolute inset-[0_0_-12.5%_-12.5%]"><Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden /></div></div></div>
+      </div>
+      <div className="pointer-events-none absolute right-0 bottom-0 flex size-[4px] items-center justify-center">
+        <div className="-scale-x-100 flex-none"><div className="relative size-[4px]"><div className="absolute inset-[0_0_-12.5%_-12.5%]"><Image src="/hero/corner-tag-2.svg" alt="" fill className="block max-w-none" aria-hidden /></div></div></div>
+      </div>
+      <div className="pointer-events-none absolute bottom-0 left-0 size-[4px]">
+        <div className="absolute inset-[0_0_-12.5%_-12.5%]"><Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden /></div>
+      </div>
+    </Link>
+  );
+}
+
 function NavItem({ item }: { item: any }) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
@@ -50,6 +149,7 @@ function NavItem({ item }: { item: any }) {
   }, [isOpen]);
 
   const isShop = item.label?.toLowerCase() === "shop";
+  const isProducts = item.label?.toLowerCase() === "products";
 
   if (item.hasChevron || item.children?.length) {
     return (
@@ -70,30 +170,41 @@ function NavItem({ item }: { item: any }) {
         </button>
         <div
           onClick={(e) => e.stopPropagation()}
-          className={`absolute top-full left-1/2 z-30 -translate-x-1/2 pt-[24px] transition-all duration-200 ${
+          className={`absolute top-full z-30 pt-[24px] transition-all duration-200 ${
+            isProducts ? "left-0" : "left-1/2 -translate-x-1/2"
+          } ${
             isOpen
               ? "visible opacity-100 translate-y-0"
               : "invisible opacity-0 -translate-y-2"
           }`}
         >
-          <div className="min-w-[220px] rounded-2xl border border-white/10 bg-[#0A0A0A]/95 p-[8px] shadow-lg backdrop-blur-xl">
-            {item.children && item.children.length > 0 ? (
-              item.children.map((child: any) => (
-                <Link
-                  key={child.label}
-                  href={child.href}
-                  onClick={() => setIsOpen(false)}
-                  className="block rounded-lg px-[16px] py-[10px] text-[14px] leading-[normal] font-medium tracking-[-0.42px] whitespace-nowrap text-white/90 transition-all hover:bg-white/5"
-                >
-                  {child.label}
-                </Link>
-              ))
-            ) : (
-              <div className="px-[16px] py-[10px] text-[14px] text-white/50 italic">
-                Coming soon
+          {isProducts ? (
+            <ProductsMegaMenu onNavigate={() => setIsOpen(false)} />
+          ) : (
+            <div className="relative border-[0.5px] border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.75)]">
+              <div className="pointer-events-none absolute inset-0">
+                <Image src="/navbar/dropdown-corners.svg" alt="" fill className="block max-w-none" aria-hidden />
               </div>
-            )}
-          </div>
+              <div className="relative p-[30px]">
+                {item.children && item.children.length > 0 ? (
+                  <div className="flex flex-col gap-[6px]">
+                    {item.children.map((child: any) => (
+                      <Link
+                        key={child.label}
+                        href={child.href}
+                        onClick={() => setIsOpen(false)}
+                        className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[#ccc] opacity-90 transition-opacity hover:opacity-100 whitespace-nowrap`}
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-[14px] text-white/50 italic">Coming soon</div>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );
@@ -104,18 +215,17 @@ function NavItem({ item }: { item: any }) {
       <span className="contents">
         <Link
           href={item.href}
-          className="relative flex h-[36px] items-center gap-[6px] shrink-0 justify-center bg-white px-[20px] shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15)] transition-opacity hover:opacity-90"
+          className="relative flex h-[36px] items-center gap-[6px] shrink-0 justify-center px-[20px] shadow-[0px_42px_107px_0px_rgba(0,196,255,0.2),0px_24.721px_32.257px_0px_rgba(0,196,255,0.15),0px_10.268px_13.398px_0px_rgba(0,196,255,0.15)] transition-opacity hover:opacity-90"
         >
           <span
             aria-hidden
-            className="pointer-events-none absolute inset-0 bg-[length:307.2px_307.2px] bg-top-left opacity-40 mix-blend-plus-lighter"
-            style={{ backgroundImage: "url(/contact/cta-texture.png)" }}
+            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#00d0ff] to-[#0055ff]"
           />
           <span
             aria-hidden
-            className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(45,45,45,0.6)]"
+            className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,255,0.6)]"
           />
-          <span className="relative z-10 flex items-center gap-[6px] text-[#121212]">
+          <span className="relative z-10 flex items-center gap-[6px] text-white">
             <ShoppingCartIcon />
             <span className="text-[14px] leading-[normal] font-bold uppercase tracking-[-0.42px] whitespace-nowrap">
               {item.label}
@@ -125,7 +235,7 @@ function NavItem({ item }: { item: any }) {
             <div className="-scale-x-100 -scale-y-100 flex-none">
               <div className="relative size-[4px]">
                 <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-                  <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none brightness-0" aria-hidden />
+                  <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden />
                 </div>
               </div>
             </div>
@@ -134,7 +244,7 @@ function NavItem({ item }: { item: any }) {
             <div className="-scale-y-100 flex-none">
               <div className="relative size-[4px]">
                 <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-                  <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none brightness-0" aria-hidden />
+                  <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden />
                 </div>
               </div>
             </div>
@@ -143,14 +253,14 @@ function NavItem({ item }: { item: any }) {
             <div className="-scale-x-100 flex-none">
               <div className="relative size-[4px]">
                 <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-                  <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none brightness-0" aria-hidden />
+                  <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden />
                 </div>
               </div>
             </div>
           </div>
           <div className="pointer-events-none absolute bottom-0 left-0 z-20 size-[4px]">
             <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none brightness-0" aria-hidden />
+              <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden />
             </div>
           </div>
         </Link>

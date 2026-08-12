@@ -280,7 +280,6 @@ const ASSETS = {
   apps_dvk_m_headphones: "applications/dvk-m-headphones.png",
   apps_dvk_m_rover: "applications/dvk-m-rover.png",
   apps_dvk_m_surgical: "applications/dvk-m-surgical.png",
-  apps_continuum: "applications/continuum.png",
   apps_medical: "applications/app-medical.png",
   apps_drones: "applications/app-drones.png",
   apps_robotics: "applications/app-robotics.png",
@@ -420,7 +419,6 @@ const APPLICATIONS_PAYLOAD = {
     heading: "The Ambient Continuum.",
     subtitle:
       "A unified analog architecture, scaled for your exact power and performance needs.",
-    image: media(ASSETS.apps_continuum),
     cards: [
       { title: "GPX10PRO", body: "Always-on intelliegence for wearabes, audio & battery IoT." },
       { title: "GPX64", body: "Real-time perception & control for robots, drones & smart machines" },

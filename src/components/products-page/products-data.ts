@@ -622,10 +622,10 @@ export const ARCH_HIGHLIGHTS: ArchHighlightRect[][] = [
     { left: 570, top: 193, width: 174, height: 98, fillImg: { height: "658.85%", left: "-386.42%", top: "-214.87%", width: "558.31%" } },
     { left: 618, top: 370, width: 133, height: 84, fillImg: { height: "677.75%", left: "-469.95%", top: "-419.67%", width: "642.08%" } },
   ],
-  // Two power domains
+  // Two power domains — Figma 4444:7920 / 7921
   [
-    { left: 542, top: 57, width: 192, height: 115, fillImg: { height: "489.3%", left: "-283.74%", top: "-38.69%", width: "439.61%" } },
-    { left: 613, top: 474, width: 103, height: 44, fillImg: { height: "1378.33%", left: "-646.28%", top: "-1104.85%", width: "883.2%" } },
+    { left: 195, top: 35, width: 583, height: 282, fillImg: { height: "207.84%", left: "-37.25%", top: "-8.87%", width: "150.8%" } },
+    { left: 195, top: 330, width: 583, height: 217, fillImg: { height: "271.57%", left: "-37.36%", top: "-149.59%", width: "151.62%" } },
   ],
   // Integrated sensing
   [

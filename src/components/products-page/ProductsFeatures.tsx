@@ -74,10 +74,11 @@ export function ProductsFeatures({ data }: { data?: any }) {
       aria-label="Product capabilities"
     >
       {/* DESKTOP (>=1024px) — sticky stage */}
-      <div className="sticky top-0 hidden h-[100vh] min-h-[1000px] w-full overflow-hidden min-[1024px]:block">
+      <div className="sticky top-0 hidden h-[100vh] w-full overflow-hidden min-[1024px]:block">
         <SectionBackdrop />
 
-        <div className="relative mx-auto h-full w-full max-w-[1440px]">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="relative mx-auto h-[1000px] w-full max-w-[1440px] transition-all duration-300 [@media(max-height:1000px)]:[zoom:0.85] [@media(max-height:850px)]:[zoom:0.75] [@media(max-height:750px)]:[zoom:0.65]">
           {/* 3286:2105 — Section Title */}
           <div
             className="absolute top-[22.5px] left-1/2 flex -translate-x-1/2 flex-col items-center justify-center gap-[24px]"
@@ -134,6 +135,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
           >
             {CAPTION}
           </p>
+        </div>
         </div>
       </div>
 

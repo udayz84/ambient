@@ -43,6 +43,7 @@ type Stage = {
   collapseBg?: string;
   collapseStyle?: { left: string; top: number; width: number; height: number };
   collapseGradient?: string;
+  collapseImgClass?: string;
   flowImage: string;
 };
 
@@ -53,6 +54,16 @@ const STAGES: Stage[] = [
     subtitleNoWrap: true,
     icon: "/developer/pipeline-icon-train.svg",
     cardImage: "/developer/pipeline-card-train.png",
+    collapseBg: "/developer/pipeline-card-train.png",
+    collapseStyle: {
+      left: "calc(50% - 15.44px)",
+      top: -1,
+      width: 934.339,
+      height: 127.041,
+    },
+    collapseGradient:
+      "linear-gradient(90.54deg, rgba(0,0,0,0) 82.82%, rgb(0,0,0) 99.98%), linear-gradient(90deg, rgb(0,0,0) 21.64%, rgba(0,0,0,0) 62.88%)",
+    collapseImgClass: "object-contain object-center",
     flowImage: "/developer/train-flow-1.png",
   },
   {
@@ -162,7 +173,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
 
       {/* ── Title + subtitle ───────────────────────────────────────────── */}
       <div
-        className="absolute"
+        className="absolute -translate-x-1/2"
         style={{ left: "calc(50% + 0.5px)", top: 100, width: 643, height: 115 }}
       >
         {/* Title frame SVG (decorative bracket around heading) */}
@@ -210,7 +221,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
             stage={stage}
             index={i}
             isActive={activeIndex === i}
-            onClick={() => setActiveIndex(i)}
+            onClick={() => setActiveIndex(activeIndex === i ? -1 : i)}
           />
         ))}
         {/* Connecting arrows between cards */}
@@ -246,7 +257,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
             key={i}
             stage={stage}
             isActive={activeIndex === i}
-            onClick={() => setActiveIndex(i)}
+            onClick={() => setActiveIndex(activeIndex === i ? -1 : i)}
           />
         ))}
       </div>
@@ -479,7 +490,7 @@ function AccordionItem({
           <img
             alt=""
             src={stage.collapseBg}
-            className="absolute size-full max-w-none object-bottom"
+            className={`absolute size-full max-w-none ${stage.collapseImgClass || "object-bottom"}`}
           />
           <div
             className="absolute inset-0"
@@ -551,7 +562,7 @@ function AccordionItem({
         <img
           alt=""
           src={stage.flowImage}
-          className="absolute inset-0 size-full max-w-none object-cover"
+          className="absolute inset-0 size-full max-w-none object-contain"
         />
       </div>
     </div>

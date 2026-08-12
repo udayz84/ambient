@@ -32,6 +32,7 @@ const FALLBACK_CARDS: FallbackCard[] = [
     imageWidth: 414,
     imageHeight: 324,
     imageTop: 208,
+    imageClassName: "absolute inset-0 max-w-none object-contain",
     imageSizes: "414px",
     statWidth: 187,
     descriptionWidth: 319,
@@ -109,7 +110,9 @@ export function MeasuredProofCards({ data }: { data?: any }) {
       imageWidth: fallback.imageWidth ?? 331,
       imageHeight: fallback.imageHeight ?? 260,
       imageTop: fallback.imageTop ?? 169,
-      imageClassName: fallback.imageClassName,
+      imageClassName: (card?.metric === "25x" || card?.label === "AI PERFORMANCE") 
+        ? `${fallback.imageClassName || "absolute inset-0 max-w-none object-cover"} scale-[1.05]`
+        : fallback.imageClassName,
       imageSizes: fallback.imageSizes ?? "332px",
       statWidth: fallback.statWidth ?? 200,
       descriptionWidth: fallback.descriptionWidth ?? 300,
@@ -218,7 +221,7 @@ export function MeasuredProofCards({ data }: { data?: any }) {
     >
       <div
         ref={trackRef}
-        className="flex w-max content-stretch items-center gap-[24px] px-[40px] min-[1440px]:px-[120px] will-change-transform [backface-visibility:hidden]"
+        className="flex w-max content-stretch items-center gap-[24px] px-[40px] min-[1440px]:px-[120px] transition-transform duration-300 ease-out will-change-transform [backface-visibility:hidden]"
       >
         {cards.map((card: any, index: number) => {
           const { translateY } = getCardMotion(scrollProgress, index);

@@ -47,7 +47,7 @@ export function CareersBenefits({
           <CareersGradientCard
             key={`benefit-card-${index}`}
             card={card}
-            className="cursor-pointer"
+            className="cursor-default"
             nodeId={
               index === 0
                 ? "2379:8962"
