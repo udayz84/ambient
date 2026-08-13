@@ -1,0 +1,12 @@
+<svg width="24" height="24" viewBox="0 0 21.5 20.5" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+<g id="elements">
+<path id="Vector" d="M11.75 19.75C15.4997 19.75 17.3746 19.75 18.6889 18.742C19.1134 18.4165 19.4867 18.0225 19.7951 17.5744C20.75 16.1871 20.75 14.2081 20.75 10.25C20.75 6.29195 20.75 4.31292 19.7951 2.92558C19.4867 2.47752 19.1134 2.0835 18.6889 1.75797C17.3746 0.750001 15.4997 0.750001 11.75 0.75L9.75 0.75C6.00027 0.75 4.1254 0.75 2.81107 1.75797C2.3866 2.0835 2.01331 2.47752 1.70492 2.92558C0.750001 4.31292 0.75 6.29195 0.75 10.25C0.75 14.2081 0.749999 16.1871 1.70491 17.5744C2.01331 18.0225 2.3866 18.4165 2.81107 18.742C4.1254 19.75 6.00027 19.75 9.75 19.75H11.75Z" stroke="#FAFAFA" stroke-width="1.5"/>
+<path id="Vector_2" d="M20.25 13.25L1.25 13.25" stroke="#FAFAFA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="Vector_3">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M15.741 16.25H15.75Z" fill="#FAFAFA"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M11.75 16.25H11.759Z" fill="#FAFAFA"/>
+<path d="M15.741 16.25H15.75M11.75 16.25H11.759" stroke="#FAFAFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<path id="Vector_4" d="M5.75 8.45C6.20526 8.45 6.68447 8.4782 7.09315 8.2271C7.24892 8.13138 7.35229 7.99907 7.55902 7.73446L9.5 5.25L12 9.25L13.8066 7.51564C14.0628 7.26973 14.3125 7.02042 14.6515 6.92176C14.8981 6.85 15.1821 6.85 15.75 6.85" stroke="#FAFAFA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>

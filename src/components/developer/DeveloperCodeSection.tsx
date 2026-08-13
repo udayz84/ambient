@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { dmMono, gilroyMedium, gilroyRegular, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
@@ -12,53 +15,71 @@ import {
 const DEFAULT_HEADING = "Hello world in three lines";
 const DEFAULT_SUBTITLE =
   "We invisibly map AI cores to your host drop your model straight into your existing application.";
-const DEFAULT_CODE_SNIPPET = `main.c
-
-#include "sys_clk.h"
-#include "FreeRTOS.h"
-
-void main()
-
-{
-APP_Start();
-}
-
-static void APP_Start()
-{
-
-	xTaskCreate(application_read_task_entry,
-				"DataTask",
-				1024,
-				(void *)0,
-				tskIDLE_PRIORITY + 4,
-				NULL );
-
-	xTaskCreate(application_process_task_entry,
-				"ProcessTask",
-				1024,
-				(void *)0,
-				tskIDLE_PRIORITY + 3,
-				NULL );
-
-
-	xTaskCreate(application_LCD_DISPLAY_task_entry,
-				"PrintTask",
-				1024,
-				(void *)0,
-				tskIDLE_PRIORITY + 2,
-				NULL );
-
-}`;
 
 /**
- * Figma 2640:1215 — "Hello world in three lines" section.
+ * Structured code lines for interactive hover highlighting (Figma 4661:9213).
+ * group maps each line to the article card that highlights it:
+ *   0 = "No Proprietary IDEs"  -> top skeleton (main / includes / APP_Start)
+ *   1 = "A Single Line of Inference" -> ProcessTask (inference) block
+ *   2 = "The End of Glue Code" -> ReadTask + LCD task-creation glue blocks
+ */
+type CodeLine = { text: string; group: 0 | 1 | 2 };
+
+const DEFAULT_CODE_LINES: CodeLine[] = [
+  { text: "main.c", group: 0 },
+  { text: "", group: 0 },
+  { text: '#include "sys_clk.h"', group: 0 },
+  { text: '#include "FreeRTOS.h"', group: 0 },
+  { text: "", group: 0 },
+  { text: "void main()", group: 0 },
+  { text: "", group: 0 },
+  { text: "{", group: 0 },
+  { text: "APP_Start();", group: 0 },
+  { text: "}", group: 0 },
+  { text: "", group: 0 },
+  { text: "static void APP_Start()", group: 0 },
+  { text: "{", group: 0 },
+  { text: "", group: 0 },
+  { text: "\txTaskCreate(application_read_task_entry,", group: 2 },
+  { text: '\t\t\t\t"DataTask",', group: 2 },
+  { text: "\t\t\t\t1024,", group: 2 },
+  { text: "\t\t\t\t(void *)0,", group: 2 },
+  { text: "\t\t\t\ttskIDLE_PRIORITY + 4,", group: 2 },
+  { text: "\t\t\t\tNULL );", group: 2 },
+  { text: "", group: 0 },
+  { text: "\txTaskCreate(application_process_task_entry,", group: 1 },
+  { text: '\t\t\t\t"ProcessTask",', group: 1 },
+  { text: "\t\t\t\t1024,", group: 1 },
+  { text: "\t\t\t\t(void *)0,", group: 1 },
+  { text: "\t\t\t\ttskIDLE_PRIORITY + 3,", group: 1 },
+  { text: "\t\t\t\tNULL );", group: 1 },
+  { text: "", group: 0 },
+  { text: "", group: 0 },
+  { text: "\txTaskCreate(application_LCD_DISPLAY_task_entry,", group: 2 },
+  { text: '\t\t\t\t"PrintTask",', group: 2 },
+  { text: "\t\t\t\t1024,", group: 2 },
+  { text: "\t\t\t\t(void *)0,", group: 2 },
+  { text: "\t\t\t\ttskIDLE_PRIORITY + 2,", group: 2 },
+  { text: "\t\t\t\tNULL );", group: 2 },
+  { text: "", group: 0 },
+  { text: "}", group: 0 },
+];
+
+/** Connector vector <-> article card index mapping (top -> bottom). */
+const CONNECTOR_LINE = "/developer/connector-line.svg";
+const CONNECTOR_VECTOR = "/developer/connector-vector.svg";
+
+/**
+ * Figma 2640:1215 / 4661:9213 — "Hello world in three lines" section.
  * Positioned at 119,671 / 1204×809 within the Developer canvas.
  * Code editor card (left, 602×646) + three article cards (right, 578) + connectors.
+ * Hovering an article card highlights the card, its linked code region, and animates the connector vector.
  */
 export function DeveloperCodeSection({ data }: { data?: any }) {
+  const [activeCard, setActiveCard] = useState<number | null>(null);
+
   const heading = data?.heading || DEFAULT_HEADING;
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
-  const codeSnippet = data?.code_snippet || DEFAULT_CODE_SNIPPET;
   const rawArticles = Array.isArray(data?.articles) ? data.articles : [];
   const articles =
     rawArticles.length > 0
@@ -69,6 +90,11 @@ export function DeveloperCodeSection({ data }: { data?: any }) {
             a?.description || DEVELOPER_ARTICLES[i]?.description || "",
         }))
       : DEVELOPER_ARTICLES;
+
+  /** Connector opacity: dim by default, bright on its card hover, faded when another card is active. */
+  const connectorOpacity = (i: number) =>
+    activeCard === null ? 0.45 : activeCard === i ? 1 : 0.2;
+
   return (
     <div
       className="absolute flex flex-col items-center gap-[36px]"
@@ -129,14 +155,22 @@ export function DeveloperCodeSection({ data }: { data?: any }) {
           className="relative flex w-full items-start justify-center gap-[24px]"
           data-node-id="3586:1356"
         >
-          <CodeEditorCard codeSnippet={codeSnippet} />
-          <ArticleColumn articles={articles} />
+          <CodeEditorCard activeCard={activeCard} />
+          <ArticleColumn
+            articles={articles}
+            activeCard={activeCard}
+            onHover={setActiveCard}
+          />
 
-          {/* Connectors (absolute, decorative) — exact Figma nested structure */}
-          {/* Line 102 — 3586:1422 */}
+          {/* Connectors (absolute, decorative) — animate opacity with active card */}
+          {/* Line 102 — 3586:1422 -> card 0 */}
           <div
-            className="absolute flex h-0 w-[24.008px] -translate-x-1/2 -translate-y-1/2 items-center justify-center"
-            style={{ left: "calc(50% + 12px)", top: "calc(50% - 216.22px)" }}
+            className="pointer-events-none absolute flex h-0 w-[24.008px] -translate-x-1/2 -translate-y-1/2 items-center justify-center transition-opacity duration-300"
+            style={{
+              left: "calc(50% + 12px)",
+              top: "calc(50% - 216.22px)",
+              opacity: connectorOpacity(0),
+            }}
             data-node-id="3586:1422"
             aria-hidden
           >
@@ -146,17 +180,17 @@ export function DeveloperCodeSection({ data }: { data?: any }) {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     alt=""
-                    src="/developer/connector-line.svg"
+                    src={CONNECTOR_LINE}
                     className="block size-full max-w-none"
                   />
                 </div>
               </div>
             </div>
           </div>
-          {/* Vector — 3586:1423 (left 538.31, top 313.79) */}
+          {/* Vector — 3586:1423 (left 538.31, top 313.79) -> card 1 */}
           <div
-            className="absolute h-0 w-[87.093px]"
-            style={{ left: 538.31, top: 313.79 }}
+            className="pointer-events-none absolute h-0 w-[87.093px] transition-opacity duration-300"
+            style={{ left: 538.31, top: 313.79, opacity: connectorOpacity(1) }}
             data-node-id="3586:1423"
             aria-hidden
           >
@@ -164,15 +198,15 @@ export function DeveloperCodeSection({ data }: { data?: any }) {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 alt=""
-                src="/developer/connector-vector.svg"
+                src={CONNECTOR_VECTOR}
                 className="block size-full max-w-none"
               />
             </div>
           </div>
-          {/* Vector — 3586:1424 (left 538.31, top 540.63, vertically flipped) */}
+          {/* Vector — 3586:1424 (left 538.31, top 540.63, vertically flipped) -> card 2 */}
           <div
-            className="absolute flex h-0 w-[87.093px] items-center justify-center"
-            style={{ left: 538.31, top: 540.63 }}
+            className="pointer-events-none absolute flex h-0 w-[87.093px] items-center justify-center transition-opacity duration-300"
+            style={{ left: 538.31, top: 540.63, opacity: connectorOpacity(2) }}
             data-node-id="3586:1424"
             aria-hidden
           >
@@ -182,7 +216,7 @@ export function DeveloperCodeSection({ data }: { data?: any }) {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     alt=""
-                    src="/developer/connector-vector.svg"
+                    src={CONNECTOR_VECTOR}
                     className="block size-full max-w-none"
                   />
                 </div>
@@ -196,7 +230,7 @@ export function DeveloperCodeSection({ data }: { data?: any }) {
 }
 
 /** Code editor card — 3586:1357 (602×646). */
-function CodeEditorCard({ codeSnippet }: { codeSnippet: string }) {
+function CodeEditorCard({ activeCard }: { activeCard: number | null }) {
   return (
     <div
       className="relative h-[646px] w-[602px] shrink-0 overflow-clip rounded-[16px] border border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.05)] backdrop-blur-[9.5px]"
@@ -224,19 +258,36 @@ function CodeEditorCard({ codeSnippet }: { codeSnippet: string }) {
         className="absolute left-[11px] top-[45px] flex flex-col items-start px-[24px] pt-[24px]"
         data-node-id="3586:1365"
       >
-        <pre
-          className={`${dmMono.className} w-[498.852px] text-[12px] leading-[15px] font-normal whitespace-pre-wrap text-[rgba(255,255,255,0.4)] not-italic [word-break:break-word]`}
-          data-node-id="3586:1366"
-        >
-{codeSnippet}
-        </pre>
+        {DEFAULT_CODE_LINES.map((line, i) => {
+          const isActive = activeCard === line.group;
+          return (
+            <span
+              key={i}
+              className={`${dmMono.className} block whitespace-pre text-[12px] leading-[15px] font-normal not-italic transition-colors duration-300 ${
+                isActive
+                  ? "text-white"
+                  : "text-[rgba(255,255,255,0.4)]"
+              }`}
+            >
+              {line.text || "\u00A0"}
+            </span>
+          );
+        })}
       </div>
     </div>
   );
 }
 
 /** Article column — 3586:1371 (578 wide, self-stretch, vertically centered). */
-function ArticleColumn({ articles }: { articles: typeof DEVELOPER_ARTICLES }) {
+function ArticleColumn({
+  articles,
+  activeCard,
+  onHover,
+}: {
+  articles: typeof DEVELOPER_ARTICLES;
+  activeCard: number | null;
+  onHover: (i: number | null) => void;
+}) {
   return (
     <div
       className="flex w-[578px] shrink-0 flex-col items-start justify-center self-stretch"
@@ -246,8 +297,14 @@ function ArticleColumn({ articles }: { articles: typeof DEVELOPER_ARTICLES }) {
         className="flex min-h-px w-full flex-[1_0_0] flex-col items-start gap-[24px]"
         data-node-id="3586:1372"
       >
-        {articles.map((article) => (
-          <ArticleCard key={article.title} article={article} />
+        {articles.map((article, i) => (
+          <ArticleCard
+            key={article.title}
+            article={article}
+            isActive={activeCard === i}
+            onHoverStart={() => onHover(i)}
+            onHoverEnd={() => onHover(null)}
+          />
         ))}
       </div>
     </div>
@@ -256,15 +313,34 @@ function ArticleColumn({ articles }: { articles: typeof DEVELOPER_ARTICLES }) {
 
 function ArticleCard({
   article,
+  isActive,
+  onHoverStart,
+  onHoverEnd,
 }: {
   article: (typeof DEVELOPER_ARTICLES)[number];
+  isActive: boolean;
+  onHoverStart: () => void;
+  onHoverEnd: () => void;
 }) {
   return (
-    <div className="relative flex min-h-px w-full flex-[1_0_0] items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] px-[16px] pt-[16px] pb-[24px]">
+    <div
+      onMouseEnter={onHoverStart}
+      onMouseLeave={onHoverEnd}
+      className={`relative flex min-h-px w-full flex-[1_0_0] cursor-default items-center gap-[20px] overflow-clip border-[0.5px] border-solid px-[16px] pt-[16px] pb-[24px] transition-colors duration-300 ${
+        isActive
+          ? "border-[#a8ed90] bg-[rgba(68,120,7,0.2)]"
+          : "border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)]"
+      }`}
+    >
       {/* Icon tile — 3586:1374 (50×49, rounded 12) */}
       <div
         className="relative h-[49px] w-[50px] shrink-0 overflow-clip rounded-[12px]"
-        style={{ backgroundImage: ARTICLE_ICON_BG, backgroundColor: "#1d221c" }}
+        style={{
+          backgroundImage: isActive
+            ? `${ARTICLE_ICON_BG}, linear-gradient(90deg, rgb(29, 34, 28) 0%, rgb(29, 34, 28) 100%)`
+            : ARTICLE_ICON_BG,
+          backgroundColor: "#1d221c",
+        }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img

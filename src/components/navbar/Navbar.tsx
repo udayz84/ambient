@@ -104,6 +104,103 @@ function ProductsMegaMenu({ onNavigate }: { onNavigate: () => void }) {
   );
 }
 
+/** Figma 4674:10315 / 4691:10527 / 4691:10636 — icon + label dropdown panel (212px wide).
+ *  Items come from Strapi nav sub-items; icons are mapped by label (Strapi has no icon field). */
+const NAV_ICON_BY_LABEL: Record<string, string> = {
+  company: "/navbar/nav-icon-company.svg",
+  careers: "/navbar/nav-icon-careers.svg",
+  application: "/navbar/nav-icon-chip.svg",
+  applications: "/navbar/nav-icon-chip.svg",
+  wearables: "/navbar/nav-icon-wearables.svg",
+  "smart homes": "/navbar/nav-icon-smart-homes.svg",
+  "medical devices": "/navbar/nav-icon-medical.svg",
+  "resources centre": "/navbar/nav-icon-chip.svg",
+  "resources center": "/navbar/nav-icon-chip.svg",
+  resources: "/navbar/nav-icon-chip.svg",
+  blogs: "/navbar/nav-icon-blog.svg",
+  "news & media": "/navbar/nav-icon-blog.svg",
+  "news and media": "/navbar/nav-icon-blog.svg",
+};
+
+const NAV_ICON_FALLBACK = "/navbar/nav-icon-chip.svg";
+
+function navIconFor(label?: string): string {
+  const key = (label || "").toLowerCase().trim();
+  return NAV_ICON_BY_LABEL[key] || NAV_ICON_FALLBACK;
+}
+
+function NavIconDropdown({
+  item,
+  onNavigate,
+  compact = false,
+}: {
+  item: { label?: string; children?: { label: string; href: string }[] };
+  onNavigate: () => void;
+  compact?: boolean;
+}) {
+  const children = Array.isArray(item?.children) ? item.children : [];
+  const width = compact ? 190 : 212;
+  const pad = compact ? 24 : 30;
+  const gap = compact ? 20 : 24;
+  const iconSize = compact ? 20 : 24;
+  const fontSize = compact ? 14 : 16;
+  const leading = compact ? 21 : 24;
+  const itemGap = compact ? 8 : 10;
+  const dividerWidth = compact ? 142 : 151.832;
+
+  return (
+    <div
+      className="relative border-[0.5px] border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.75)]"
+      style={{ width }}
+    >
+      <div className="pointer-events-none absolute inset-0">
+        <Image src="/navbar/dropdown-corners.svg" alt="" fill className="block max-w-none" aria-hidden />
+      </div>
+      <div className="relative flex flex-col" style={{ padding: pad, gap }}>
+        {children.length > 0 ? (
+          children.map((child) => (
+            <Link
+              key={child.label}
+              href={child.href}
+              onClick={onNavigate}
+              className="group flex flex-col"
+              style={{ gap: itemGap }}
+            >
+              <div className="flex items-center gap-[6px]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={navIconFor(child.label)}
+                  alt=""
+                  className="shrink-0"
+                  style={{ width: iconSize, height: iconSize }}
+                  aria-hidden
+                />
+                <span
+                  className={`${interRegular.className} whitespace-nowrap font-normal text-[#f0f0f0] transition-colors group-hover:text-white`}
+                  style={{ fontSize, lineHeight: `${leading}px` }}
+                >
+                  {child.label}
+                </span>
+              </div>
+              <div style={{ width: dividerWidth }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/navbar/nav-divider.svg"
+                  alt=""
+                  className="block h-[1px] w-full"
+                  aria-hidden
+                />
+              </div>
+            </Link>
+          ))
+        ) : (
+          <div className="text-[14px] text-white/50 italic">Coming soon</div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 /** Figma 4625:8736 — dropdown CTA button with corner brackets. */
 function DropdownCta({ href, label, onNavigate }: { href: string; label: string; onNavigate: () => void }) {
   return (
@@ -181,29 +278,13 @@ function NavItem({ item }: { item: any }) {
           {isProducts ? (
             <ProductsMegaMenu onNavigate={() => setIsOpen(false)} />
           ) : (
-            <div className="relative border-[0.5px] border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.75)]">
-              <div className="pointer-events-none absolute inset-0">
-                <Image src="/navbar/dropdown-corners.svg" alt="" fill className="block max-w-none" aria-hidden />
-              </div>
-              <div className="relative p-[30px]">
-                {item.children && item.children.length > 0 ? (
-                  <div className="flex flex-col gap-[6px]">
-                    {item.children.map((child: any) => (
-                      <Link
-                        key={child.label}
-                        href={child.href}
-                        onClick={() => setIsOpen(false)}
-                        className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[#ccc] opacity-90 transition-opacity hover:opacity-100 whitespace-nowrap`}
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-[14px] text-white/50 italic">Coming soon</div>
-                )}
-              </div>
-            </div>
+            <NavIconDropdown
+              item={item}
+              onNavigate={() => setIsOpen(false)}
+              compact={["company", "application", "applications"].includes(
+                (item.label || "").toLowerCase()
+              )}
+            />
           )}
         </div>
       </div>
