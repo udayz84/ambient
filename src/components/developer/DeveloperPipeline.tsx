@@ -45,6 +45,7 @@ type Stage = {
   collapseGradient?: string;
   collapseImgClass?: string;
   flowImage: string;
+  expandedHeaderStrip?: string;
 };
 
 const STAGES: Stage[] = [
@@ -65,6 +66,7 @@ const STAGES: Stage[] = [
       "linear-gradient(90.54deg, rgba(0,0,0,0) 82.82%, rgb(0,0,0) 99.98%), linear-gradient(90deg, rgb(0,0,0) 21.64%, rgba(0,0,0,0) 62.88%)",
     collapseImgClass: "object-contain object-center",
     flowImage: "/developer/train-flow-1.png",
+    expandedHeaderStrip: "/developer/train-expanded-strip.png",
   },
   {
     label: "Optimize",
@@ -495,6 +497,28 @@ function AccordionItem({
           <div
             className="absolute inset-0"
             style={{ backgroundImage: stage.collapseGradient }}
+          />
+        </div>
+      )}
+
+      {/* Header strip image (shows when closed, fades out when expanded) */}
+      {stage.expandedHeaderStrip && (
+        <div
+          className="pointer-events-none absolute -translate-x-1/2 transition-opacity duration-300"
+          style={{
+            left: "calc(50% + 20px)",
+            top: 0,
+            width: 935,
+            height: 108,
+            opacity: isActive ? 0 : 1,
+          }}
+          aria-hidden
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt=""
+            src={stage.expandedHeaderStrip}
+            className="absolute inset-0 size-full max-w-none object-contain object-center"
           />
         </div>
       )}
