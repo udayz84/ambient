@@ -21,7 +21,8 @@ export function SiteFooterWrapper({
       isContactPage={pathname === "/contact"}
       isCareersPage={pathname === "/careers"}
       isResourcesPage={pathname === "/resources"}
-      isOverlapPage={["/technology", "/products", "/applications", "/dvk", "/som"].includes(pathname)}
+      isOverlapPage={["/technology", "/products", "/applications", "/dvk", "/som", "/partners"].includes(pathname)}
+      pathname={pathname}
       data={data}
       brandData={brandData}
       newsletterData={newsletterData}

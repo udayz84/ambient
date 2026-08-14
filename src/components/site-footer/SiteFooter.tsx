@@ -18,6 +18,7 @@ export function SiteFooter({
   isCareersPage = false,
   isResourcesPage = false,
   isOverlapPage = false,
+  pathname = "",
   data,
   brandData,
   newsletterData,
@@ -27,6 +28,7 @@ export function SiteFooter({
   isCareersPage?: boolean;
   isResourcesPage?: boolean;
   isOverlapPage?: boolean;
+  pathname?: string;
   data?: any;
   brandData?: any;
   newsletterData?: any;
@@ -97,10 +99,13 @@ export function SiteFooter({
         <div className="absolute inset-0 overflow-hidden">
           {/* Mobile Background */}
           {showFullBackground ? (
-            <img
-              alt=""
-              src="/mobile/footer.png"
-              className="absolute inset-0 h-full w-full object-cover object-top opacity-100 lg:hidden"
+            <div
+              className="absolute inset-0 h-full w-full lg:hidden bg-no-repeat"
+              style={{
+                backgroundImage: "url(/mobile/footer.png)",
+                backgroundPosition: "center top",
+                backgroundSize: "100% auto",
+              }}
             />
           ) : (
             <div
@@ -122,7 +127,7 @@ export function SiteFooter({
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.4)] via-[rgba(0,0,0,0.1)] to-[rgba(0,0,0,0.6)] lg:from-black/80 lg:via-black/10 lg:to-black/10" />
       </div>
 
-      <div className={`relative mx-auto flex h-full w-full max-w-[1440px] flex-col items-center pb-0 lg:block lg:pt-0 lg:pb-0 ${isOverlapPage ? "pt-[700px]" : (isResourcesPage || isCareersPage || isContactPage) ? "pt-[376px]" : showNewsletter ? "pt-[100px]" : "pt-[24px]"}`}>
+      <div className={`relative mx-auto flex h-full w-full max-w-[1440px] flex-col items-center pb-0 lg:block lg:pt-0 lg:pb-0 ${(isOverlapPage && pathname !== "/partners") ? "pt-[700px]" : (isResourcesPage || isCareersPage || isContactPage) ? "pt-[376px]" : pathname === "/partners" ? "pt-[300px]" : showNewsletter ? "pt-[100px]" : "pt-[24px]"}`}>
         {showNewsletter && (
           <div className="relative z-[1] mb-[80px] flex flex-col items-center lg:mb-0 lg:pt-[120px]">
             <NewsletterSignup data={newsletterData} />

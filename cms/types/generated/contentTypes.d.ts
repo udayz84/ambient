@@ -1083,6 +1083,107 @@ export interface ApiNewsListingPageNewsListingPage
   };
 }
 
+export interface ApiPartnerApplicationPartnerApplication
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'partner_applications';
+  info: {
+    description: 'Partner-side \u201CBecome a Partner\u201D applications from the Partners page';
+    displayName: 'Partner Applications';
+    pluralName: 'partner-applications';
+    singularName: 'partner-application';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    capabilities: Schema.Attribute.JSON;
+    company: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    experience: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::partner-application.partner-application'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    publishedAt: Schema.Attribute.DateTime;
+    region: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    website: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 500;
+      }>;
+  };
+}
+
+export interface ApiPartnerInquiryPartnerInquiry
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'partner_inquiries';
+  info: {
+    description: 'Customer-side \u201CGet Matched\u201D submissions from the Partners page';
+    displayName: 'Partner Inquiries';
+    pluralName: 'partner-inquiries';
+    singularName: 'partner-inquiry';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    company: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    first_name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    help_areas: Schema.Attribute.JSON;
+    last_name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::partner-inquiry.partner-inquiry'
+    > &
+      Schema.Attribute.Private;
+    message: Schema.Attribute.Text;
+    publishedAt: Schema.Attribute.DateTime;
+    region: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiPopupPopup extends Struct.CollectionTypeSchema {
   collectionName: 'popups';
   info: {
@@ -1871,6 +1972,8 @@ declare module '@strapi/strapi' {
       'api::job.job': ApiJobJob;
       'api::navbar.navbar': ApiNavbarNavbar;
       'api::news-listing-page.news-listing-page': ApiNewsListingPageNewsListingPage;
+      'api::partner-application.partner-application': ApiPartnerApplicationPartnerApplication;
+      'api::partner-inquiry.partner-inquiry': ApiPartnerInquiryPartnerInquiry;
       'api::popup.popup': ApiPopupPopup;
       'api::products-page.products-page': ApiProductsPageProductsPage;
       'api::redirect.redirect': ApiRedirectRedirect;

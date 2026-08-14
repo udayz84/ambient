@@ -61,6 +61,7 @@ const ROUTE_OVERRIDES: Record<
   "/careers": { priority: 0.7, changeFrequency: "weekly" },
   "/SOM": { priority: 0.6, changeFrequency: "monthly" },
   "/contact": { priority: 0.6, changeFrequency: "yearly" },
+  "/partners": { priority: 0.8, changeFrequency: "monthly" },
 };
 
 /** Depth-based priority for routes that don't have an explicit override. */

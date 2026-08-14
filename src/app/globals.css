@@ -25,6 +25,69 @@
   --animate-dvk-marquee-right: dvk-marquee-right 26s linear infinite;
   --animate-technology-chevron-flow: technology-chevron-flow 2s ease-in-out infinite;
   --animate-technology-connector-flow: technology-connector-flow 1.8s linear infinite;
+  --animate-partners-pulse-ring: partners-pulse-ring 1.8s ease-out infinite;
+  --animate-partners-node-blink: partners-node-blink 2.6s ease-in-out infinite;
+
+  @keyframes partners-pulse-ring {
+    0% {
+      transform: scale(0.6);
+      opacity: 0.9;
+    }
+
+    100% {
+      transform: scale(2.4);
+      opacity: 0;
+    }
+  }
+
+  @keyframes partners-node-blink {
+    0%,
+    100% {
+      opacity: 0.35;
+      transform: scale(1);
+    }
+
+    50% {
+      opacity: 0.9;
+      transform: scale(1.25);
+    }
+  }
+
+  @keyframes partners-node-breathe {
+    0%,
+    100% {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+
+    50% {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+  }
+
+  @keyframes partners-core-breathe {
+    0%,
+    100% {
+      opacity: 0.88;
+      transform: scale(1);
+    }
+
+    50% {
+      opacity: 1;
+      transform: scale(1.035);
+    }
+  }
+
+  @keyframes partners-orbit-rotate {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
 
   @keyframes technology-connector-flow {
     from {
@@ -184,9 +247,32 @@ html, body {
   .animate-dvk-marquee-up,
   .animate-dvk-marquee-down,
   .animate-technology-chevron-flow,
-  .animate-technology-connector-flow {
+  .animate-technology-connector-flow,
+  .animate-partners-pulse-ring,
+  .animate-partners-node-blink,
+  .partners-node,
+  .partners-core,
+  .partners-orbit-slow,
+  .partners-ring-rotate {
     animation: none;
   }
+}
+
+/* Constellation breathing animations (Partners page) */
+.partners-node {
+  animation: partners-node-breathe 4.4s ease-in-out infinite;
+}
+
+.partners-core {
+  animation: partners-core-breathe 3.6s ease-in-out infinite;
+}
+
+.partners-orbit-slow {
+  animation: partners-orbit-rotate 140s linear infinite;
+}
+
+.partners-ring-rotate {
+  animation: partners-orbit-rotate 48s linear infinite;
 }
 
 /* Utility to hide scrollbars on specific elements */
