@@ -269,7 +269,7 @@ export function PartnersHero() {
             <div className="absolute top-1/2 left-[100px] w-[680px] -translate-y-1/2">
               <div className="flex animate-hero-text-fade-in transform-gpu flex-col items-start gap-[24px]">
                 <TagBadge label={tag} width={196} labelOffsetX={0} rightBarLeft={187} centerLabel />
-                <div className="relative p-[24px] -m-[24px] w-max max-w-full">
+                <div className="relative p-[16px] -m-[16px] w-max max-w-full">
                   <Corners />
                   <h1
                     className={`${gilroyMedium.className} bg-clip-text text-[46px] leading-[52px] font-medium text-transparent [word-break:break-word] not-italic`}

@@ -17,7 +17,9 @@ export function PartnersBenefits() {
       aria-label="Why build with a partner"
     >
       <div className="relative flex flex-col items-center gap-[16px] px-[10px]">
-        <PartnersSectionHeading deg="112.176deg">{PARTNERS_BENEFITS.heading}</PartnersSectionHeading>
+        <PartnersSectionHeading deg="112.176deg" className="min-[1024px]:!whitespace-normal min-[1024px]:max-w-[720px]">
+          {PARTNERS_BENEFITS.heading}
+        </PartnersSectionHeading>
         <Corners />
       </div>
 
