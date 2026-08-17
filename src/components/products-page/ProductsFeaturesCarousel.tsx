@@ -49,8 +49,10 @@ function getCardMotion(progress: number, index: number) {
 
 export function ProductsFeaturesCarousel({
   cards,
+  onScrollChange,
 }: {
   cards: ProductsFeatureCardData[];
+  onScrollChange?: (needsScroll: boolean) => void;
 }) {
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -63,10 +65,14 @@ export function ProductsFeaturesCarousel({
     const track = trackRef.current;
     if (!viewport || !track) return;
 
-    scrollStateRef.current.maxScroll = Math.max(
+    const maxScroll = Math.max(
       0,
       track.scrollWidth - viewport.clientWidth
     );
+    scrollStateRef.current.maxScroll = maxScroll;
+    if (onScrollChange) {
+      onScrollChange(maxScroll > 0);
+    }
   };
 
   useEffect(() => {
@@ -81,7 +87,6 @@ export function ProductsFeaturesCarousel({
       setScrollProgress(getScrollProgress(rect.top, viewportHeight));
 
       // Horizontal pan progress (triggers while section is sticky):
-      // the sticky container is 100vh, the section is 300vh.
       const maxScrollY = section.offsetHeight - viewportHeight;
       const currentScrollY = -rect.top;
 
@@ -90,6 +95,10 @@ export function ProductsFeaturesCarousel({
         const targetX = scrollStateRef.current.maxScroll * hProgress;
         if (trackRef.current) {
           trackRef.current.style.transform = `translate3d(${Math.round(-targetX)}px, 0, 0)`;
+        }
+      } else {
+        if (trackRef.current) {
+          trackRef.current.style.transform = `translate3d(0px, 0, 0)`;
         }
       }
     };

@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { TagBadge } from "../hero/TagBadge";
@@ -43,6 +46,8 @@ function SectionBackdrop() {
  * scroll pans the card strip horizontally (see ProductsFeaturesCarousel).
  */
 export function ProductsFeatures({ data }: { data?: any }) {
+  const [needsScroll, setNeedsScroll] = useState(true);
+
   const heading = data?.heading || FALLBACK_HEADING;
   // The design mandates a two-line title. Strapi stores the same copy as a
   // single line, so when the text matches (whitespace-insensitive) fall back
@@ -68,7 +73,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
   return (
     <section
       id="products-features"
-      className="relative left-1/2 w-screen max-w-none -translate-x-1/2 bg-black max-[1023px]:h-auto min-[1024px]:h-[200vh]"
+      className={`relative left-1/2 w-screen max-w-none -translate-x-1/2 bg-black max-[1023px]:h-auto ${needsScroll ? "min-[1024px]:h-[200vh]" : "min-[1024px]:h-[100vh]"}`}
       data-node-id="3286:1931"
       data-name="Section 6"
       aria-label="Product capabilities"
@@ -125,7 +130,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
             </p>
           </div>
 
-          <ProductsFeaturesCarousel cards={featureCards} />
+          <ProductsFeaturesCarousel cards={featureCards} onScrollChange={setNeedsScroll} />
 
           {/* 3710:1634 — caption (Figma top 917 of the 1057 canvas; rises on
               shorter stages so it never overlaps the 600px cards) */}

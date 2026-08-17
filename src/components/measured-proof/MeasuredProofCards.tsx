@@ -97,7 +97,7 @@ function getCardMotion(progress: number, index: number) {
   };
 }
 
-export function MeasuredProofCards({ data }: { data?: any }) {
+export function MeasuredProofCards({ data, onScrollChange }: { data?: any; onScrollChange?: (needsScroll: boolean) => void }) {
   const statCards: any[] = Array.isArray(data?.stat_cards) ? data.stat_cards : [];
   const cards = statCards.map((card: any, index: number) => {
     const fallback: FallbackCard = FALLBACK_CARDS[index] || ({} as FallbackCard);
@@ -129,17 +129,20 @@ export function MeasuredProofCards({ data }: { data?: any }) {
 
   const [scrollProgress, setScrollProgress] = useState(0);
 
-
-
   const updateMaxScroll = () => {
     const viewport = viewportRef.current;
     const track = trackRef.current;
     if (!viewport || !track) return;
 
-    scrollStateRef.current.maxScroll = Math.max(
+    const maxScroll = Math.max(
       0,
       track.scrollWidth - viewport.clientWidth
     );
+    scrollStateRef.current.maxScroll = maxScroll;
+    
+    if (onScrollChange) {
+      onScrollChange(maxScroll > 0);
+    }
   };
 
   useEffect(() => {
@@ -154,8 +157,6 @@ export function MeasuredProofCards({ data }: { data?: any }) {
       setScrollProgress(getScrollProgress(rect.top, viewportHeight));
 
       // Horizontal scroll progress (triggers while section is sticky)
-      // The sticky container is 100vh, the section is 400vh.
-      // So there is 300vh of scrolling to do.
       const maxScrollY = section.offsetHeight - viewportHeight;
       const currentScrollY = -rect.top;
 
@@ -163,11 +164,13 @@ export function MeasuredProofCards({ data }: { data?: any }) {
         let hProgress = currentScrollY / maxScrollY;
         hProgress = clamp(hProgress, 0, 1);
 
-        // Directly update the horizontal transform for 60fps smooth tracking
-        // We round the value to prevent subpixel rendering artifacts (blurring)
         const targetX = scrollStateRef.current.maxScroll * hProgress;
         if (trackRef.current) {
           trackRef.current.style.transform = `translate3d(${Math.round(-targetX)}px, 0, 0)`;
+        }
+      } else {
+        if (trackRef.current) {
+          trackRef.current.style.transform = `translate3d(0px, 0, 0)`;
         }
       }
     };
