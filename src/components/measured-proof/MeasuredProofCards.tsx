@@ -221,7 +221,7 @@ export function MeasuredProofCards({ data }: { data?: any }) {
     >
       <div
         ref={trackRef}
-        className="flex w-max content-stretch items-center gap-[24px] px-[40px] min-[1440px]:px-[120px] transition-transform duration-300 ease-out will-change-transform [backface-visibility:hidden]"
+        className="flex w-max content-stretch items-center gap-[24px] px-[40px] min-[1440px]:px-[120px] min-[1440px]:mx-auto transition-transform duration-300 ease-out will-change-transform [backface-visibility:hidden]"
       >
         {cards.map((card: any, index: number) => {
           const { translateY } = getCardMotion(scrollProgress, index);
