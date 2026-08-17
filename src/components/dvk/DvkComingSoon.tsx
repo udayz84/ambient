@@ -69,19 +69,18 @@ export function DvkComingSoon({ data }: { data?: any }) {
           {/* Ellipse glow (4497:2940) */}
           <div
             aria-hidden
-            className="pointer-events-none absolute left-1/2 top-[calc(50%-28.98px)] flex h-[724.013px] w-[779.814px] -translate-x-1/2 -translate-y-1/2 items-center justify-center"
+            className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
           >
-            <div className="rotate-[90.41deg] flex-none">
-              <div className="relative h-[774.633px] w-[718.424px]">
-                <div className="absolute inset-[-19.36%_-20.88%]">
-                  <img
-                    alt=""
-                    src={ELLIPSE_GLOW}
-                    className="block size-full max-w-none"
-                  />
-                </div>
-              </div>
-            </div>
+            <div
+              style={{
+                width: "984.207px",
+                height: "1061.212px",
+                transform: "rotate(90.415deg)",
+                borderRadius: "1061.212px",
+                background: "#000",
+                filter: "blur(75px)",
+              }}
+            />
           </div>
 
           {/* Content (4497:2941) */}

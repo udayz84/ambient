@@ -360,7 +360,7 @@ function ProductsUseCasesDesktop({
 function TabRuler({ onNext, onPrev, onSelect, activeIdx, tabs }: any) {
   return (
     <div
-      className="absolute flex items-center justify-between"
+      className="absolute flex items-center justify-between z-10"
       style={{ left: 64.19921875, top: 212.2783203125, width: 1320, height: 52 }}
       data-node-id="2901:2034"
       data-name="Options"
@@ -607,7 +607,10 @@ function ProductsUseCasesMobile({
         {tabs.map((tab: any, idx: number) => (
           <span
             key={tab.label}
-            className={`${interRegular.className} shrink-0 whitespace-nowrap text-[13px] tracking-[0.02em] not-italic ${
+            onClick={() => onSelect(idx)}
+            role="button"
+            tabIndex={0}
+            className={`${interRegular.className} cursor-pointer shrink-0 whitespace-nowrap text-[13px] tracking-[0.02em] not-italic ${
               idx === activeIdx
                 ? "bg-[#f0f0f0] px-[12px] py-[8px] text-black"
                 : "px-[8px] py-[8px] text-[#666]"

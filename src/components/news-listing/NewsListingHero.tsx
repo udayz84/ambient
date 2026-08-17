@@ -113,20 +113,20 @@ export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
           </div>
 
           {/* Slider controls */}
-          <div className="absolute right-[106px] top-[605px] z-10 flex items-center border border-white/20 bg-[#191919]">
+          <div className="absolute right-[106px] bottom-[24px] z-10 flex items-center gap-[12px]">
             <button 
               onClick={handlePrev}
-              className="flex h-[36px] w-[36px] items-center justify-center border-r border-white/20 transition-colors hover:bg-white/10"
+              className="flex h-[36px] w-[36px] items-center justify-center border border-white/20 bg-[#191919]/50 transition-colors hover:bg-white/10"
               aria-label="Previous slide"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
             </button>
-            <span className={`${interRegular.className} px-[16px] text-[12px] leading-[18px] font-normal text-white`}>
+            <span className={`${interRegular.className} text-[14px] leading-[18px] font-normal text-white`}>
               {paginationText}
             </span>
             <button 
               onClick={handleNext}
-              className="flex h-[36px] w-[36px] items-center justify-center border-l border-white/20 transition-colors hover:bg-white/10"
+              className="flex h-[36px] w-[36px] items-center justify-center border border-white/20 bg-[#191919]/50 transition-colors hover:bg-white/10"
               aria-label="Next slide"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -228,20 +228,20 @@ export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
         <div className="flex flex-col gap-[10px] px-[19px] pt-[15px] pb-[30px]">
           <div className="flex justify-end">
             {/* Slider controls */}
-            <div className="flex items-center border border-white/20 bg-[#191919] w-fit">
+            <div className="flex items-center gap-[12px] w-fit mb-[16px]">
               <button 
                 onClick={handlePrev}
-                className="flex h-[32px] w-[32px] items-center justify-center border-r border-white/20 transition-colors hover:bg-white/10"
+                className="flex h-[32px] w-[32px] items-center justify-center border border-white/20 bg-[#191919]/50 transition-colors hover:bg-white/10"
                 aria-label="Previous slide"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
               </button>
-              <span className={`${interRegular.className} px-[12px] text-[12px] leading-[18px] font-normal text-white`}>
+              <span className={`${interRegular.className} text-[13px] leading-[18px] font-normal text-white`}>
                 {paginationText}
               </span>
               <button 
                 onClick={handleNext}
-                className="flex h-[32px] w-[32px] items-center justify-center border-l border-white/20 transition-colors hover:bg-white/10"
+                className="flex h-[32px] w-[32px] items-center justify-center border border-white/20 bg-[#191919]/50 transition-colors hover:bg-white/10"
                 aria-label="Next slide"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>

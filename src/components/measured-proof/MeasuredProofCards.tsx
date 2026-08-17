@@ -110,7 +110,7 @@ export function MeasuredProofCards({ data }: { data?: any }) {
       imageWidth: fallback.imageWidth ?? 331,
       imageHeight: fallback.imageHeight ?? 260,
       imageTop: fallback.imageTop ?? 169,
-      imageClassName: (card?.metric === "25x" || card?.label === "AI PERFORMANCE") 
+      imageClassName: (card?.metric === "25x" || card?.label === "AI PERFORMANCE")
         ? `${fallback.imageClassName || "absolute inset-0 max-w-none object-cover"} scale-[1.05]`
         : fallback.imageClassName,
       imageSizes: fallback.imageSizes ?? "332px",
@@ -149,7 +149,7 @@ export function MeasuredProofCards({ data }: { data?: any }) {
     const updateProgress = () => {
       const rect = section.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
-      
+
       // Entrance animation progress (triggers when section enters viewport)
       setScrollProgress(getScrollProgress(rect.top, viewportHeight));
 
@@ -158,11 +158,11 @@ export function MeasuredProofCards({ data }: { data?: any }) {
       // So there is 300vh of scrolling to do.
       const maxScrollY = section.offsetHeight - viewportHeight;
       const currentScrollY = -rect.top;
-      
+
       if (maxScrollY > 0) {
         let hProgress = currentScrollY / maxScrollY;
         hProgress = clamp(hProgress, 0, 1);
-        
+
         // Directly update the horizontal transform for 60fps smooth tracking
         // We round the value to prevent subpixel rendering artifacts (blurring)
         const targetX = scrollStateRef.current.maxScroll * hProgress;
