@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { AnimatedDotsBackground } from "./AnimatedDotsBackground";
 
-export function GreenCtaCorners() {
+export function GreenCtaCorners({ disableDots }: { disableDots?: boolean }) {
   return (
     <>
-      <AnimatedDotsBackground />
+      {!disableDots && <AnimatedDotsBackground />}
       <div className="pointer-events-none absolute right-0 top-0 z-20 flex size-[4px] items-center justify-center">
         <div className="-scale-x-100 -scale-y-100 flex-none">
           <div className="relative size-[4px]">

@@ -8,6 +8,7 @@ type GreenCtaProps = {
   nodeId?: string;
   widthClass?: string;
   textSizeClass?: string;
+  disableDots?: boolean;
 };
 
 export function GreenCta({
@@ -16,6 +17,7 @@ export function GreenCta({
   nodeId,
   widthClass = "w-[231px]",
   textSizeClass = "text-[16px]",
+  disableDots,
 }: GreenCtaProps) {
   return (
     <a
@@ -31,7 +33,7 @@ export function GreenCta({
       <span className={`relative z-10 ${textSizeClass} leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]`}>
         {label}
       </span>
-      <GreenCtaCorners />
+      <GreenCtaCorners disableDots={disableDots} />
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"

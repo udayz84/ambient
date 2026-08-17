@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
@@ -17,19 +18,32 @@ type NewsListingHeroProps = {
 export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
+  const [direction, setDirection] = useState(0);
+
   // Fallback to array with single slide if `data.slides` doesn't exist yet
-  const slides = Array.isArray(data?.slides) && data.slides.length > 0 
+  const rawSlides = Array.isArray(data?.slides) && data.slides.length > 0 
     ? data.slides 
     : (data ? [data] : []);
 
+  // Ensure there are at least 3 slides if only 1 is provided, so it is scrollable
+  const slides = rawSlides.length === 1 
+    ? [rawSlides[0], rawSlides[0], rawSlides[0]]
+    : rawSlides;
+
   const currentSlide = slides[currentSlideIndex] || {};
 
-  const mainBackgroundImage = mediaUrl(currentSlide?.background_image) || FALLBACK_HERO_IMAGE;
+  // Main banner uses slides[0] so it stays static
+  const mainBackgroundImage = mediaUrl(slides[0]?.background_image) || FALLBACK_HERO_IMAGE;
+  const tagText = (slides[0]?.tag?.text as string) || (slides[0]?.tag as string) || "";
+  const title = (slides[0]?.title as string) || "";
+  const subtitle = (slides[0]?.subtitle as string) || "";
+  const ctaLabel = (slides[0]?.cta_label as string) || "";
+
+  // Featured card uses currentSlide
   const featuredImage = mediaUrl(currentSlide?.featured_image) || FALLBACK_HERO_IMAGE;
-  const tagText = (currentSlide?.tag?.text as string) || (currentSlide?.tag as string) || "";
-  const title = (currentSlide?.title as string) || "";
-  const subtitle = (currentSlide?.subtitle as string) || "";
-  const ctaLabel = (currentSlide?.cta_label as string) || "";
+  const cardTag = (currentSlide?.tag?.text as string) || (currentSlide?.tag as string) || "";
+  const cardTitle = (currentSlide?.title as string) || "";
+  const cardCta = (currentSlide?.cta_label as string) || "";
   
   // Dynamic pagination text (e.g. 01/03)
   const paginationText = slides.length > 0 
@@ -37,11 +51,30 @@ export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
     : "01/01";
 
   const handlePrev = () => {
+    setDirection(-1);
     setCurrentSlideIndex((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
   };
 
   const handleNext = () => {
+    setDirection(1);
     setCurrentSlideIndex((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+  };
+
+  const cardVariants = {
+    enter: (dir: number) => ({
+      x: dir > 0 ? 50 : -50,
+      opacity: 0,
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+    },
+    exit: (dir: number) => ({
+      zIndex: 0,
+      x: dir < 0 ? 50 : -50,
+      opacity: 0,
+    }),
   };
 
   return (
@@ -56,7 +89,6 @@ export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
         {/* Image frame: 1440x638 at top-[29px], horizontally centered */}
         <div
           className="absolute left-1/2 top-[29px] h-[638px] w-[1440px] -translate-x-1/2 overflow-clip transition-opacity duration-500"
-          key={currentSlideIndex}
           data-node-id="2653:686"
           data-name="Image"
         >
@@ -116,64 +148,77 @@ export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
           <div className="absolute right-[106px] bottom-[24px] z-10 flex items-center gap-[12px]">
             <button 
               onClick={handlePrev}
-              className="flex h-[36px] w-[36px] items-center justify-center border border-white/20 bg-[#191919]/50 transition-colors hover:bg-white/10"
+              className="relative flex h-[48px] w-[48px] items-center justify-center border border-white/30 bg-white/10 transition-colors hover:bg-white/20"
               aria-label="Previous slide"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              <Corners />
             </button>
-            <span className={`${interRegular.className} text-[14px] leading-[18px] font-normal text-white`}>
+            <span className={`${interRegular.className} text-[14px] leading-[18px] font-normal text-[#D2D2D2]`}>
               {paginationText}
             </span>
             <button 
               onClick={handleNext}
-              className="flex h-[36px] w-[36px] items-center justify-center border border-white/20 bg-[#191919]/50 transition-colors hover:bg-white/10"
+              className="relative flex h-[48px] w-[48px] items-center justify-center border border-white/30 bg-white/10 transition-colors hover:bg-white/20"
               aria-label="Next slide"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <Corners />
             </button>
           </div>
 
           {/* Right featured card */}
-          <div
-            className="absolute left-[894px] top-[445px] flex gap-[8px] border border-solid border-white bg-[#191919] p-[10px] animate-hero-text-fade-in"
-            data-node-id="2653:709"
-            data-name="Featured Card"
-          >
-            <div
-              className="relative flex h-[132px] w-[164px] shrink-0 flex-col items-end overflow-clip p-[12px]"
-              data-node-id="2653:710"
-              data-name="Image"
-            >
-              <Image
-                src={featuredImage}
-                alt=""
-                fill
-                sizes="164px"
-                className="object-cover"
-              />
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(88.8266deg, rgba(25, 25, 25, 0) 60.881%, rgb(25, 25, 25) 99.17%)",
-                }}
-              />
-              <WhiteTag label={tagText} nodeId="2653:711" />
-            </div>
-            <div
-              className="flex flex-col gap-[24px] px-[16px]"
-              data-node-id="2653:717"
-            >
-              <h3
-                className={`${gilroyMedium.className} w-[242px] text-[22px] leading-[28px] font-medium text-white opacity-90 not-italic [word-break:break-word]`}
-                data-node-id="2653:719"
+          <div className="absolute left-[894px] top-[389px] h-[152px] w-[450px]">
+            <AnimatePresence mode="wait" custom={direction}>
+              <motion.div
+                key={`featured-${currentSlideIndex}`}
+                custom={direction}
+                variants={cardVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="absolute inset-0 flex gap-[8px] border border-solid border-white/20 bg-[#191919] p-[10px]"
+                data-node-id="2653:709"
+                data-name="Featured Card"
               >
-                {title}
-              </h3>
-              <GreenCta label={ctaLabel} nodeId="2653:720" />
-            </div>
-            <Corners className="z-[3]" />
+                <div
+                  className="relative flex h-[132px] w-[164px] shrink-0 flex-col items-end overflow-clip p-[12px]"
+                  data-node-id="2653:710"
+                  data-name="Image"
+                >
+                  <Image
+                    src={featuredImage}
+                    alt=""
+                    fill
+                    sizes="164px"
+                    className="object-cover"
+                  />
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(88.8266deg, rgba(25, 25, 25, 0) 60.881%, rgb(25, 25, 25) 99.17%)",
+                    }}
+                  />
+                  <WhiteTag label={cardTag} nodeId="2653:711" />
+                </div>
+                <div
+                  className="flex flex-col gap-[24px] px-[16px]"
+                  data-node-id="2653:717"
+                >
+                  <h3
+                    className={`${gilroyMedium.className} w-[242px] text-[22px] leading-[28px] font-medium text-white opacity-90 not-italic [word-break:break-word] line-clamp-2`}
+                    data-node-id="2653:719"
+                  >
+                    {cardTitle}
+                  </h3>
+                  <GreenCta label={cardCta} nodeId="2653:720" disableDots={true} />
+                </div>
+                <Corners className="z-[3]" />
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>
@@ -181,7 +226,7 @@ export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
       {/* MOBILE (<1024px) — exact Figma mobile layout (393×690 frame) */}
       <div className="relative w-full min-[1024px]:hidden">
         {/* Image area: full-bleed background with gradient overlay */}
-        <div className="relative h-[487px] w-full overflow-hidden" data-name="Image" key={currentSlideIndex}>
+        <div className="relative h-[487px] w-full overflow-hidden" data-name="Image">
           {mainBackgroundImage ? (
             <Image
               src={mainBackgroundImage}
@@ -231,67 +276,80 @@ export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
             <div className="flex items-center gap-[12px] w-fit mb-[16px]">
               <button 
                 onClick={handlePrev}
-                className="flex h-[32px] w-[32px] items-center justify-center border border-white/20 bg-[#191919]/50 transition-colors hover:bg-white/10"
+                className="relative flex h-[40px] w-[40px] items-center justify-center border border-white/30 bg-white/10 transition-colors hover:bg-white/20"
                 aria-label="Previous slide"
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                <Corners />
               </button>
-              <span className={`${interRegular.className} text-[13px] leading-[18px] font-normal text-white`}>
+              <span className={`${interRegular.className} text-[13px] leading-[18px] font-normal text-[#D2D2D2]`}>
                 {paginationText}
               </span>
               <button 
                 onClick={handleNext}
-                className="flex h-[32px] w-[32px] items-center justify-center border border-white/20 bg-[#191919]/50 transition-colors hover:bg-white/10"
+                className="relative flex h-[40px] w-[40px] items-center justify-center border border-white/30 bg-white/10 transition-colors hover:bg-white/20"
                 aria-label="Next slide"
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <Corners />
               </button>
             </div>
           </div>
 
           {/* Featured card */}
-          <div
-            className="relative flex gap-[6px] border border-solid border-white bg-[#191919] p-[8px] animate-hero-text-fade-in"
-            key={`featured-${currentSlideIndex}`}
-            data-node-id="4153:8855"
-            data-name="Featured Card"
-          >
-            {/* Card image */}
-            <div className="relative flex h-[114px] w-[130px] shrink-0 flex-col items-center overflow-clip p-[8px]">
-              <Image
-                src={featuredImage}
-                alt=""
-                fill
-                sizes="130px"
-                className="object-cover"
-              />
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(88.92301976638984deg, rgba(25, 25, 25, 0) 60.881%, rgb(25, 25, 25) 99.17%)",
-                }}
-              />
-              <WhiteTag label={tagText} widthClass="w-[120px]" />
-            </div>
-
-            {/* Card content */}
-            <div className="flex h-[114px] flex-1 flex-col justify-between">
-              <h3
-                className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-white opacity-90 not-italic [word-break:break-word]`}
-                data-node-id="4153:8865"
+          <div className="relative h-[130px] w-full overflow-hidden">
+            <AnimatePresence mode="wait" custom={direction}>
+              <motion.div
+                className="absolute inset-0 flex gap-[6px] border border-solid border-white/20 bg-[#191919] p-[8px]"
+                key={`featured-mobile-${currentSlideIndex}`}
+                custom={direction}
+                variants={cardVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                data-node-id="4153:8855"
+                data-name="Featured Card"
               >
-                {title}
-              </h3>
-              <GreenCta
-                label={ctaLabel}
-                widthClass="w-full"
-                textSizeClass="text-[14px]"
-              />
-            </div>
+                {/* Card image */}
+                <div className="relative flex h-[114px] w-[130px] shrink-0 flex-col items-center overflow-clip p-[8px]">
+                  <Image
+                    src={featuredImage}
+                    alt=""
+                    fill
+                    sizes="130px"
+                    className="object-cover"
+                  />
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(88.92301976638984deg, rgba(25, 25, 25, 0) 60.881%, rgb(25, 25, 25) 99.17%)",
+                    }}
+                  />
+                  <WhiteTag label={cardTag} widthClass="w-[120px]" />
+                </div>
 
-            <Corners className="z-[3]" />
+                {/* Card content */}
+                <div className="flex h-[114px] flex-1 flex-col justify-between">
+                  <h3
+                    className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-white opacity-90 not-italic [word-break:break-word] line-clamp-2`}
+                    data-node-id="4153:8865"
+                  >
+                    {cardTitle}
+                  </h3>
+                  <GreenCta
+                    label={cardCta}
+                    widthClass="w-full"
+                    textSizeClass="text-[14px]"
+                    disableDots={true}
+                  />
+                </div>
+
+                <Corners className="z-[3]" />
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>
