@@ -1,5 +1,32 @@
+import fs from 'fs';
+import path from 'path';
+
+function copyJSONSync(srcDir: string, destDir: string) {
+  if (!fs.existsSync(srcDir)) return;
+  const entries = fs.readdirSync(srcDir, { withFileTypes: true });
+  for (const entry of entries) {
+    const srcPath = path.join(srcDir, entry.name);
+    const destPath = path.join(destDir, entry.name);
+    if (entry.isDirectory()) {
+      copyJSONSync(srcPath, destPath);
+    } else if (entry.isFile() && entry.name.endsWith('.json')) {
+      if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true });
+      fs.copyFileSync(srcPath, destPath);
+    }
+  }
+}
+
 export default {
-  register() {},
+  register() {
+    try {
+      const SRC = path.join(__dirname, '../../src');
+      const DEST = path.join(__dirname, '../../dist/src');
+      console.log("Auto-copying schemas to dist/ during register...");
+      copyJSONSync(SRC, DEST);
+    } catch (err) {
+      console.error("Failed to copy schemas:", err);
+    }
+  },
   async bootstrap({ strapi }) {
     try {
       const homePage = await strapi.documents('api::home-page.home-page').findFirst({
