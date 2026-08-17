@@ -165,6 +165,23 @@ function ComingBg({ left, width = 1212.573 }: { left: string; width?: string | n
           }}
         />
       </div>
+
+      {/* Ellipse glow */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
+      >
+        <div
+          style={{
+            width: "984.207px",
+            height: "1061.212px",
+            transform: "rotate(90.415deg)",
+            borderRadius: "1061.212px",
+            background: "#000",
+            filter: "blur(75px)",
+          }}
+        />
+      </div>
     </div>
   );
 }

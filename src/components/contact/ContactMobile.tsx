@@ -36,21 +36,45 @@ function SectionTitle({
 function GreenCta({
   children,
   href = "#",
+  onClick,
+  disabled = false,
+  loading = false,
 }: {
   children: React.ReactNode;
   href?: string;
+  onClick?: () => void;
+  disabled?: boolean;
+  loading?: boolean;
 }) {
-  return (
-    <a
-      href={href}
-      className={`${interSemiBold.className} relative flex h-[48px] w-full items-center justify-center overflow-hidden ${GREEN_CTA_SHADOW}`}
-    >
+  const className = `${interSemiBold.className} relative flex h-[48px] w-full items-center justify-center gap-[10px] overflow-hidden ${GREEN_CTA_SHADOW} disabled:cursor-not-allowed disabled:opacity-70`;
+  const content = (
+    <>
       <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
       <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
+      {loading ? (
+        <span
+          className="relative size-[18px] shrink-0 animate-spin rounded-full border-2 border-white/30 border-t-white"
+          aria-hidden
+        />
+      ) : null}
       <span className="relative text-[13px] leading-[normal] font-semibold uppercase whitespace-nowrap text-white not-italic">
-        {children}
+        {loading ? "Loading..." : children}
       </span>
       <GreenCtaCorners />
+    </>
+  );
+
+  if (onClick) {
+    return (
+      <button type="button" onClick={onClick} disabled={disabled || loading} aria-busy={loading} className={className}>
+        {content}
+      </button>
+    );
+  }
+
+  return (
+    <a href={href} className={className}>
+      {content}
     </a>
   );
 }
@@ -555,6 +579,11 @@ function mapInputTypeMobile(fieldType: string | undefined | null): string {
 function ContactFormMobile({ data }: { data?: any }) {
   const [activeTrackId, setActiveTrackId] = useState<TrackId>("sales");
   const [subscribed, setSubscribed] = useState(false);
+  const [values, setValues] = useState<Record<string, string>>({});
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   const heading = data?.heading || "";
   const subtitle = data?.subtitle || "";
@@ -604,6 +633,50 @@ function ContactFormMobile({ data }: { data?: any }) {
   // Bottom textarea from Strapi data
   const textareaLabel = strapiTextareaField?.label || "";
   const textareaPlaceholder = strapiTextareaField?.placeholder || "";
+
+  const setFieldValue = (label: string, value: string) =>
+    setValues((prev) => ({ ...prev, [label]: value }));
+
+  const emailFieldValue = () => {
+    const emailLabel = strapiInputFields.find(
+      (f: any) => f.field_type === "email",
+    )?.label;
+    if (emailLabel) return (values[emailLabel] || "").trim();
+    const key = Object.keys(values).find((k) => /e-?mail/i.test(k));
+    return key ? values[key].trim() : "";
+  };
+
+  const onSubmit = async () => {
+    const email = emailFieldValue();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    setError("");
+    setLoading(true);
+    try {
+      const res = await fetch("/api/contact-submissions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          track: activeTrackId,
+          email,
+          fields: values,
+          message: message.trim(),
+          subscribed,
+        }),
+      });
+      const json = await res.json().catch(() => null);
+      if (!res.ok || !json?.ok) {
+        throw new Error(json?.error || "Submission failed.");
+      }
+      setSubmitted(true);
+    } catch {
+      setError("Could not submit right now. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <SectionWrap aria-label="Contact form" className="!pb-[20px] relative z-10 -mb-[266px]">
@@ -680,6 +753,8 @@ function ContactFormMobile({ data }: { data?: any }) {
               <input
                 type={field.type}
                 placeholder={field.placeholder}
+                value={values[field.label] ?? ""}
+                onChange={(event) => setFieldValue(field.label, event.target.value)}
                 className={`${interRegular.className} h-[44px] w-full border-[0.5px] border-solid border-[#4a4a4a] bg-transparent px-[12px] text-[14px] font-normal text-white outline-none placeholder:text-[#4a4a4a] not-italic`}
               />
             </div>
@@ -691,6 +766,8 @@ function ContactFormMobile({ data }: { data?: any }) {
             </label>
             <textarea
               placeholder={textareaPlaceholder}
+              value={message}
+              onChange={(event) => setMessage(event.target.value)}
               className={`${interRegular.className} h-[110px] w-full resize-none border-[0.5px] border-solid border-[#4a4a4a] bg-transparent p-[12px] text-[14px] font-normal text-white outline-none placeholder:text-[#4a4a4a] not-italic`}
             />
           </div>
@@ -718,7 +795,23 @@ function ContactFormMobile({ data }: { data?: any }) {
             </span>
           </label>
 
-          <GreenCta href={submitHref}>{submitLabel}</GreenCta>
+          <GreenCta
+            href={submitHref}
+            onClick={submitted ? undefined : onSubmit}
+            disabled={submitted}
+            loading={loading}
+          >
+            {submitted ? "Submitted" : submitLabel}
+          </GreenCta>
+
+          {error ? (
+            <p
+              className={`${interRegular.className} text-[12px] leading-[18px] font-normal text-[#ff6b6b] not-italic`}
+              role="alert"
+            >
+              {error}
+            </p>
+          ) : null}
         </div>
       </div>
     </SectionWrap>

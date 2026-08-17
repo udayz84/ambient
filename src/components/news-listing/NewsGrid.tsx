@@ -217,10 +217,11 @@ function NewsFilterBar({
   );
 }
 
-function LoadMoreCta({ label }: { label: string }) {
+function LoadMoreCta({ label, onClick }: { label: string; onClick?: (e: React.MouseEvent) => void }) {
   return (
     <a
       href="#"
+      onClick={onClick}
       className={`${gilroyMedium.className} ${GREEN_GLOW_SHADOW} relative flex h-[48px] w-[231px] min-[1024px]:w-[225px] shrink-0 items-center justify-center`}
       data-node-id="2500:2002"
       data-name="Cta"
@@ -248,9 +249,25 @@ export function NewsGrid({ data }: NewsGridProps = {}) {
   const initialActiveId =
     pills.find((p) => p.active)?.id || pills[0]?.id || "";
   const [activeId, setActiveId] = useState(initialActiveId);
+  const [visibleCount, setVisibleCount] = useState(6);
+
+  useEffect(() => {
+    setVisibleCount(6);
+  }, [activeId]);
 
   const activePill = pills.find((p) => p.id === activeId) || pills[0];
   const activeCards: NewsArticle[] = activePill?.cards || [];
+
+  const handleLoadMore = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setVisibleCount((prev) => prev + 6);
+  };
+
+  const visibleCards = activeCards.slice(0, visibleCount);
+  const chunkedCards = [];
+  for (let i = 0; i < visibleCards.length; i += 3) {
+    chunkedCards.push(visibleCards.slice(i, i + 3));
+  }
 
   return (
     <section
@@ -262,27 +279,23 @@ export function NewsGrid({ data }: NewsGridProps = {}) {
         <NewsFilterBar pills={pills} activeId={activeId} onSelect={setActiveId} />
 
         <div className="relative z-10 flex w-full flex-col items-center gap-[19px] bg-transparent min-[1024px]:gap-[36px]">
-          <div className="grid w-full grid-cols-1 gap-[19px] min-[1024px]:grid-cols-3 min-[1024px]:gap-[36px]">
-            {activeCards.slice(0, 3).map((article, i) => (
-              <NewsArticleCard
-                key={`${article.nodeId}-${i}`}
-                article={article}
-                bgClass={ROW_ONE_BG}
-              />
-            ))}
-          </div>
-          <div className="grid w-full grid-cols-1 gap-[19px] min-[1024px]:grid-cols-3 min-[1024px]:gap-[36px]">
-            {activeCards.slice(3, 6).map((article, i) => (
-              <NewsArticleCard
-                key={`${article.nodeId}-${i}`}
-                article={article}
-                bgClass={ROW_TWO_BG}
-              />
-            ))}
-          </div>
-          <div className="mt-[11px] flex justify-center min-[1024px]:mt-0">
-            <LoadMoreCta label={loadMoreLabel} />
-          </div>
+          {chunkedCards.map((chunk, chunkIndex) => (
+            <div key={chunkIndex} className="grid w-full grid-cols-1 gap-[19px] min-[1024px]:grid-cols-3 min-[1024px]:gap-[36px]">
+              {chunk.map((article, i) => (
+                <NewsArticleCard
+                  key={`${article.nodeId}-${i}`}
+                  article={article}
+                  bgClass={chunkIndex % 2 === 0 ? ROW_ONE_BG : ROW_TWO_BG}
+                />
+              ))}
+            </div>
+          ))}
+
+          {activeCards.length > visibleCount && (
+            <div className="mt-[11px] flex justify-center min-[1024px]:mt-0">
+              <LoadMoreCta label={loadMoreLabel} onClick={handleLoadMore} />
+            </div>
+          )}
         </div>
       </div>
     </section>

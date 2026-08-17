@@ -558,6 +558,23 @@ function DeveloperComingSoonMobile({ data }: { data?: any }) {
             }}
           />
         </div>
+
+        {/* Ellipse glow for mobile */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-[50%] top-[45%] -translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
+        >
+          <div
+            style={{
+              width: "450px",
+              height: "600px",
+              transform: "rotate(90deg)",
+              borderRadius: "600px",
+              background: "#000",
+              filter: "blur(60px)",
+            }}
+          />
+        </div>
       </div>
 
       {/* Content block — 4035:25441 (title + subtitle, gap 10px) */}

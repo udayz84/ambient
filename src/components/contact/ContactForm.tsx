@@ -66,6 +66,11 @@ function mapInputType(fieldType: string | undefined | null): string {
 export function ContactForm({ data }: { data?: any }) {
   const [activeTrackId, setActiveTrackId] = useState<TrackId>("sales");
   const [subscribed, setSubscribed] = useState(false);
+  const [values, setValues] = useState<Record<string, string>>({});
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   const heading = data?.heading || "";
   const subtitle = data?.subtitle || "";
@@ -121,6 +126,50 @@ export function ContactForm({ data }: { data?: any }) {
   const activeConnectorTop =
     mergedTracks.find((track) => track.id === activeTrackId)?.connectorTop ??
     mergedTracks[0].connectorTop;
+
+  const setFieldValue = (label: string, value: string) =>
+    setValues((prev) => ({ ...prev, [label]: value }));
+
+  const emailFieldValue = () => {
+    const emailLabel = strapiInputFields.find(
+      (f: any) => f.field_type === "email",
+    )?.label;
+    if (emailLabel) return (values[emailLabel] || "").trim();
+    const key = Object.keys(values).find((k) => /e-?mail/i.test(k));
+    return key ? values[key].trim() : "";
+  };
+
+  const onSubmit = async () => {
+    const email = emailFieldValue();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    setError("");
+    setLoading(true);
+    try {
+      const res = await fetch("/api/contact-submissions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          track: activeTrackId,
+          email,
+          fields: values,
+          message: message.trim(),
+          subscribed,
+        }),
+      });
+      const json = await res.json().catch(() => null);
+      if (!res.ok || !json?.ok) {
+        throw new Error(json?.error || "Submission failed.");
+      }
+      setSubmitted(true);
+    } catch {
+      setError("Could not submit right now. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div
@@ -195,7 +244,12 @@ export function ContactForm({ data }: { data?: any }) {
         </p>
 
         {mergedFields.map((field) => (
-          <FormField key={field.nodeId} {...field} />
+          <FormField
+            key={field.nodeId}
+            {...field}
+            value={values[field.label] ?? ""}
+            onChange={(v) => setFieldValue(field.label, v)}
+          />
         ))}
 
         <FormField
@@ -207,6 +261,8 @@ export function ContactForm({ data }: { data?: any }) {
           height={132}
           multiline
           nodeId="2379:8561"
+          value={message}
+          onChange={setMessage}
         />
 
         <label
@@ -255,9 +311,21 @@ export function ContactForm({ data }: { data?: any }) {
           className="absolute top-[551px] left-[16px]"
           width="558px"
           href={submitHref}
+          onClick={submitted ? undefined : onSubmit}
+          disabled={submitted}
+          loading={loading}
         >
-          {submitLabel}
+          {submitted ? "Submitted" : submitLabel}
         </GreenCtaButton>
+
+        {error ? (
+          <p
+            className={`${interRegular.className} absolute top-[606px] left-[16px] w-[558px] text-[12px] leading-[18px] font-normal text-[#ff6b6b] not-italic`}
+            role="alert"
+          >
+            {error}
+          </p>
+        ) : null}
       </div>
     </div>
   );
@@ -383,6 +451,8 @@ function FormField({
   multiline = false,
   inputType = "text",
   nodeId,
+  value = "",
+  onChange,
 }: {
   label: string;
   placeholder: string;
@@ -393,6 +463,8 @@ function FormField({
   multiline?: boolean;
   inputType?: string;
   nodeId: string;
+  value?: string;
+  onChange?: (value: string) => void;
 }) {
   const fieldId = `field-${nodeId.replace(/:/g, "-")}`;
   const inputClassName = `${interRegular.className} w-full border-0 bg-transparent p-0 text-[14px] leading-[21px] font-normal text-white not-italic placeholder:text-[#4a4a4a] outline-none`;
@@ -415,6 +487,8 @@ function FormField({
             id={fieldId}
             name={fieldId}
             placeholder={placeholder}
+            value={value}
+            onChange={(event) => onChange?.(event.target.value)}
             className={`${inputClassName} h-full resize-none`}
           />
         ) : (
@@ -423,6 +497,8 @@ function FormField({
             name={fieldId}
             type={inputType}
             placeholder={placeholder}
+            value={value}
+            onChange={(event) => onChange?.(event.target.value)}
             className={inputClassName}
           />
         )}

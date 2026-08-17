@@ -673,6 +673,42 @@ export interface ApiCompanyPageCompanyPage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiContactFormDetailContactFormDetail
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'contact_form_details';
+  info: {
+    description: 'Submissions from the Contact page form';
+    displayName: 'Contact Form Details';
+    pluralName: 'contact-form-details';
+    singularName: 'contact-form-detail';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    fields: Schema.Attribute.JSON;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::contact-form-detail.contact-form-detail'
+    > &
+      Schema.Attribute.Private;
+    message: Schema.Attribute.Text;
+    publishedAt: Schema.Attribute.DateTime;
+    subscribed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    track: Schema.Attribute.Enumeration<['sales', 'developer', 'media']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'sales'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiContactPageContactPage extends Struct.SingleTypeSchema {
   collectionName: 'contact_pages';
   info: {
@@ -1961,6 +1997,7 @@ declare module '@strapi/strapi' {
       'api::article.article': ApiArticleArticle;
       'api::careers-page.careers-page': ApiCareersPageCareersPage;
       'api::company-page.company-page': ApiCompanyPageCompanyPage;
+      'api::contact-form-detail.contact-form-detail': ApiContactFormDetailContactFormDetail;
       'api::contact-page.contact-page': ApiContactPageContactPage;
       'api::developer-page.developer-page': ApiDeveloperPageDeveloperPage;
       'api::dvk-page.dvk-page': ApiDvkPageDvkPage;
