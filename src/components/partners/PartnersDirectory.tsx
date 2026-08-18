@@ -191,7 +191,7 @@ export function PartnersDirectory() {
     <section
       id="directory"
       ref={fadeRef}
-      className={`relative mx-auto flex w-full max-w-[1204px] scroll-mt-[78px] flex-col items-center gap-[40px] px-[24px] py-[40px] min-[1024px]:py-[96px] ${fadeCls} transform-gpu`}
+      className={`relative mx-auto flex w-full max-w-[1204px] scroll-mt-[78px] flex-col items-center gap-[40px] px-[24px] py-[40px] min-[1024px]:py-[64px] ${fadeCls} transform-gpu`}
       aria-label="Partner directory and global coverage"
     >
       <div className="relative flex flex-col items-center gap-[16px] px-[10px]">

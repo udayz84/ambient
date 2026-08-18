@@ -83,6 +83,22 @@ export function TechnologyVisualBackground({ data }: { data?: any }) {
             </div>
           </div>
         </div>
+
+        <div
+          className="absolute top-[83.5px] left-[215.564px] h-[528px] w-[1007px]"
+          data-node-id="3699:1323"
+          data-name="Ellipse 16209"
+        >
+          <div className="absolute inset-[-23.6%_-12.37%]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/technology/ellipse-16209.svg"
+              alt=""
+              className="block size-full max-w-none"
+              aria-hidden
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

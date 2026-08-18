@@ -13,7 +13,7 @@ export function PartnersFooterCtas() {
   return (
     <section
       ref={fadeRef}
-      className={`relative z-20 mb-[-250px] min-[1024px]:mb-[-400px] mx-auto flex w-full max-w-[1204px] flex-col items-center gap-[24px] min-[1024px]:gap-[40px] px-[24px] pt-[40px] min-[1024px]:pt-[120px] pb-0 min-[1024px]:pb-[40px] ${fadeCls} transform-gpu bg-transparent`}
+      className={`relative z-20 mb-[-250px] min-[1024px]:mb-[-400px] mx-auto flex w-full max-w-[1204px] flex-col items-center gap-[24px] min-[1024px]:gap-[40px] px-[24px] pt-[40px] min-[1024px]:pt-[88px] pb-0 min-[1024px]:pb-[40px] ${fadeCls} transform-gpu bg-transparent`}
       aria-label="Partners — next steps"
     >
       <div className="relative flex w-max max-w-full flex-col items-center p-[16px] -m-[16px] min-[1024px]:px-[20px] min-[1024px]:py-[28px] min-[1024px]:-mx-[20px] min-[1024px]:-my-[28px]">

@@ -46,7 +46,7 @@ export function PartnersProof() {
   return (
     <section
       ref={fadeRef}
-      className={`relative mx-auto flex w-full max-w-[1204px] flex-col items-center gap-[40px] px-[24px] py-[40px] min-[1024px]:py-[96px] ${fadeCls} transform-gpu`}
+      className={`relative mx-auto flex w-full max-w-[1204px] flex-col items-center gap-[40px] px-[24px] py-[40px] min-[1024px]:py-[64px] ${fadeCls} transform-gpu`}
       aria-label="GPX-native proof"
     >
       <div className="relative flex flex-col items-center gap-[16px] px-[10px]">

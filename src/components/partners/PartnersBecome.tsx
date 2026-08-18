@@ -135,7 +135,7 @@ export function PartnersBecome() {
 
       <div
         ref={fadeRef}
-        className={`relative mx-auto flex w-full max-w-[1204px] flex-col items-center gap-[48px] px-[24px] py-[40px] min-[1024px]:py-[96px] ${fadeCls} transform-gpu`}
+        className={`relative mx-auto flex w-full max-w-[1204px] flex-col items-center gap-[48px] px-[24px] py-[40px] min-[1024px]:py-[64px] ${fadeCls} transform-gpu`}
       >
         {/* ---------- header ---------- */}
         <div className="flex flex-col items-center gap-[24px]">
