@@ -485,7 +485,7 @@ function UseCaseCardView({ card }: { card: any }) {
   return (
     <div
       ref={fadeRef}
-      className={`absolute flex flex-col items-start gap-[10px] p-[32px] ${getFadeInClass(isVisible)}`}
+      className={`absolute flex flex-col items-start gap-[10px] p-[32px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] ${getFadeInClass(isVisible)}`}
       style={{
         left: card.left,
         top: card.top,
@@ -690,7 +690,7 @@ function UseCaseCardMobileView({ card }: { card: any }) {
   return (
     <div
       ref={fadeRef}
-      className={`relative flex flex-col gap-[8px] p-[20px] ${getFadeInClass(isVisible)}`}
+      className={`relative flex flex-col gap-[8px] p-[20px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] ${getFadeInClass(isVisible)}`}
       style={{ backgroundColor: card.bg }}
     >
       <h4

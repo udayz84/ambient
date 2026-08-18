@@ -4,7 +4,7 @@ import { interRegular, gilroyMedium, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFadeIn } from "../shared/useFadeIn";
 import { PARTNERS_BENEFITS } from "./partners-data";
-import { PartnersSectionHeading, WireframeIcon } from "./partners-shared";
+import { PartnersSectionHeading, WireframeIcon, PartnersBridgeBox } from "./partners-shared";
 
 export function PartnersBenefits() {
   const { fadeRef, isVisible } = useFadeIn<HTMLElement>();
@@ -53,13 +53,9 @@ export function PartnersBenefits() {
       </div>
 
       {/* bridge line */}
-      <div className="relative flex w-full max-w-[760px] items-center gap-[16px]">
-        <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-[rgba(83,216,36,0.4)]" aria-hidden />
-        <p className={`${gilroyMedium.className} text-center text-[18px] leading-[27px] font-medium text-[#a9e28c] not-italic min-[1024px]:shrink-0 min-[1024px]:whitespace-nowrap max-[1023px]:max-w-[280px] max-[1023px]:text-[14px] max-[1023px]:leading-[21px]`}>
-          {PARTNERS_BENEFITS.bridge}
-        </p>
-        <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-[rgba(83,216,36,0.4)]" aria-hidden />
-      </div>
+      <PartnersBridgeBox className="mt-[16px]">
+        {PARTNERS_BENEFITS.bridge}
+      </PartnersBridgeBox>
     </section>
   );
 }

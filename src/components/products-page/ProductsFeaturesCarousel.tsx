@@ -70,6 +70,16 @@ export function ProductsFeaturesCarousel({
       track.scrollWidth - viewport.clientWidth
     );
     scrollStateRef.current.maxScroll = maxScroll;
+    
+    // Center the track if it fits in the viewport
+    if (maxScroll === 0) {
+      track.style.marginLeft = "auto";
+      track.style.marginRight = "auto";
+    } else {
+      track.style.marginLeft = "0";
+      track.style.marginRight = "0";
+    }
+
     if (onScrollChange) {
       onScrollChange(maxScroll > 0);
     }
@@ -145,7 +155,7 @@ export function ProductsFeaturesCarousel({
   return (
     <div
       ref={viewportRef}
-      className="absolute top-[278.75px] left-1/2 w-[100vw] -translate-x-1/2 overflow-hidden touch-none select-none"
+      className="absolute top-[278.75px] left-1/2 -translate-x-1/2 overflow-hidden touch-none select-none w-[100vw] [@media(max-height:1000px)]:w-[117.64vw] [@media(max-height:850px)]:w-[133.33vw] [@media(max-height:750px)]:w-[153.84vw]"
       data-node-id="3742:931"
       data-name="Measured proof in silicon"
       aria-label="Product capability cards"

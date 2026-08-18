@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { dmMono, gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
+import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { RepelDots } from "../shared/RepelDots";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
@@ -74,7 +74,7 @@ export function GreenOutlineCorners() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Ghost CTA — hollow button with a green outline (dark sections)      */
+/* Secondary CTA — same construction as SecondaryCta site-wide         */
 /* ------------------------------------------------------------------ */
 
 export function GhostGreenCta({
@@ -83,35 +83,24 @@ export function GhostGreenCta({
   className = "",
   width,
   onClick,
-  tone = "dark",
 }: {
   children: React.ReactNode;
   href?: string;
   className?: string;
   width?: string;
   onClick?: () => void;
-  tone?: "dark" | "light";
 }) {
-  const isLight = tone === "light";
-  const cls = `${gilroySemiBold.className} relative block h-[48px] shrink-0 cursor-pointer overflow-hidden border border-solid transition-colors duration-200 ${
-    isLight
-      ? "border-[rgba(44,114,19,0.45)] bg-[rgba(83,216,36,0.05)] hover:bg-[rgba(83,216,36,0.12)]"
-      : "border-[rgba(83,216,36,0.5)] bg-[rgba(83,216,36,0.06)] hover:bg-[rgba(83,216,36,0.14)]"
-  } ${className}`;
+  const cls = `${gilroyMedium.className} relative flex h-[48px] shrink-0 cursor-pointer items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] bg-[rgba(226,241,202,0.12)] transition-colors duration-200 hover:bg-[rgba(226,241,202,0.2)] ${className}`;
   const style = width ? { width } : undefined;
   const onAnchorClick = (e: React.MouseEvent) => {
     if (href.startsWith("#")) handlePartnerAnchor(e, href.slice(1));
   };
   const content = (
     <>
-      <span
-        className={`relative flex h-full items-center justify-center px-[20px] text-[14px] leading-[normal] font-semibold tracking-[-0.42px] whitespace-nowrap uppercase not-italic ${
-          isLight ? "text-[#2c7213]" : "text-[#a9e28c]"
-        }`}
-      >
+      <span className="relative px-[20px] py-[10px] text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
         {children}
       </span>
-      <GreenOutlineCorners />
+      <Corners />
     </>
   );
   if (onClick) {
@@ -149,7 +138,7 @@ export function PartnersGreenCta({
   disabled?: boolean;
   loading?: boolean;
 }) {
-  const cls = `${gilroySemiBold.className} relative block h-[48px] shrink-0 cursor-pointer overflow-hidden ${GREEN_CTA_SHADOW} disabled:cursor-not-allowed disabled:opacity-70 ${className}`;
+  const cls = `${gilroyMedium.className} relative block h-[48px] shrink-0 cursor-pointer overflow-hidden ${GREEN_CTA_SHADOW} disabled:cursor-not-allowed disabled:opacity-70 ${className}`;
   const style = width ? { width } : undefined;
   const onAnchorClick = (e: React.MouseEvent) => {
     if (href.startsWith("#")) handlePartnerAnchor(e, href.slice(1));
@@ -158,7 +147,7 @@ export function PartnersGreenCta({
     <>
       <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
       <RepelDots />
-      <span className="relative flex h-full items-center justify-center gap-[10px] px-[20px] text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic">
+      <span className="relative flex h-full items-center justify-center gap-[10px] px-[20px] text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
         {loading ? (
           <span className="relative size-[18px] shrink-0 animate-spin rounded-full border-2 border-white/30 border-t-white" aria-hidden />
         ) : null}
@@ -500,5 +489,26 @@ export function PartnersSectionHeading({
     >
       {children}
     </h2>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Bridge text box                                                    */
+/* ------------------------------------------------------------------ */
+
+export function PartnersBridgeBox({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={`relative inline-flex items-center justify-center bg-[rgba(83,216,36,0.05)] px-[32px] py-[16px] backdrop-blur-[8px] ${className}`}>
+      <Corners />
+      <p className={`${gilroyMedium.className} text-center text-[18px] leading-[27px] font-medium text-white not-italic [word-break:break-word] max-[1023px]:text-[14px] max-[1023px]:leading-[21px]`}>
+        {children}
+      </p>
+    </div>
   );
 }

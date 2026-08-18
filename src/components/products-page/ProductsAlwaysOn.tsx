@@ -12,8 +12,8 @@ import { Corners } from "../shared/Corners";
  * the baseline render and the surge render, and moves the switch.
  */
 
-const BG_SURGE = "/products/alwayson/bg-surge.png";
-const BG_SUBCONSCIOUS = "/products/alwayson/bg-subconscious-v2.png";
+const BG_SURGE = "/products/alwayson/bg-surge-new.png";
+const BG_SUBCONSCIOUS = "/products/alwayson/bg-subconscious-new.png";
 const AI_CORE_ICON = "/products/alwayson/ai-core-icon.png";
 const HOST_CPU_IMG = "/products/alwayson/host-cpu.png";
 const CORNER_42 = "/products/alwayson/corner-42.svg";

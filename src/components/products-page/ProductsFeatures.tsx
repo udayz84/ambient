@@ -79,7 +79,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
       aria-label="Product capabilities"
     >
       {/* DESKTOP (>=1024px) — sticky stage */}
-      <div className="sticky top-0 hidden h-[100vh] w-full overflow-hidden min-[1024px]:block">
+      <div className="sticky top-[78px] hidden h-[calc(100vh-78px)] w-full overflow-hidden min-[1024px]:block">
         <SectionBackdrop />
 
         <div className="absolute inset-0 flex items-center justify-center">

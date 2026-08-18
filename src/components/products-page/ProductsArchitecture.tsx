@@ -303,7 +303,7 @@ function ProductsArchitectureDesktop({
 }) {
   return (
     <div
-      className="mx-auto flex w-full flex-col items-center gap-[49px] pb-[120px]"
+      className="mx-auto flex w-full flex-col items-center gap-[49px] pb-0"
       style={{ maxWidth: ARCH_FRAME_WIDTH }}
       data-node-id="3713:1965"
     >

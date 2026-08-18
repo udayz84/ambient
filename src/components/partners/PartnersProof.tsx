@@ -4,7 +4,7 @@ import { interRegular, gilroyMedium } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFadeIn } from "../shared/useFadeIn";
 import { PARTNERS_PROOF } from "./partners-data";
-import { PartnersSectionHeading } from "./partners-shared";
+import { GhostGreenCta, PartnersGreenCta, PartnersSectionHeading } from "./partners-shared";
 
 function ProofMarker() {
   return (
@@ -14,28 +14,6 @@ function ProofMarker() {
         <path d="M2.5 6.5L5 9L9.5 3.5" stroke="#53d824" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     </span>
-  );
-}
-
-function ProofLink({ label, href }: { label: string; href: string }) {
-  return (
-    <a
-      href={href}
-      className="group/link relative flex h-[48px] cursor-pointer items-center gap-[10px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(21,21,21,0.3)] px-[24px] backdrop-blur-[8px] transition-[border-color,background-color] duration-200 hover:border-[rgba(83,216,36,0.5)] hover:bg-[rgba(46,119,20,0.14)]"
-    >
-      <span className={`${gilroyMedium.className} text-[13px] leading-[18px] font-medium tracking-[0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic`}>
-        {label}
-      </span>
-      <svg
-        viewBox="0 0 14 8"
-        className="h-[8px] w-[14px] shrink-0 text-[#53d824] transition-transform duration-200 group-hover/link:translate-x-[4px]"
-        fill="none"
-        aria-hidden
-      >
-        <path d="M0 4H12M9 1L12.5 4L9 7" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-      <Corners />
-    </a>
   );
 }
 
@@ -75,9 +53,12 @@ export function PartnersProof() {
       </div>
 
       <div className="flex flex-wrap items-center justify-center gap-[16px]">
-        {PARTNERS_PROOF.links.map((link) => (
-          <ProofLink key={link.label} label={link.label} href={link.href} />
-        ))}
+        <PartnersGreenCta href={PARTNERS_PROOF.links[0].href}>
+          {PARTNERS_PROOF.links[0].label}
+        </PartnersGreenCta>
+        <GhostGreenCta href={PARTNERS_PROOF.links[1].href}>
+          {PARTNERS_PROOF.links[1].label}
+        </GhostGreenCta>
       </div>
     </section>
   );
