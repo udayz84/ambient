@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "mail_settings",
+  "info": {
+    "singularName": "mail-setting",
+    "pluralName": "mail-settings",
+    "displayName": "Mail Setting",
+    "description": "Recipient email address(es) for all website form submission notifications"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "recipients": {
+      "type": "text",
+      "required": true,
+      "default": "",
+      "maxLength": 2000
+    },
+    "ccRecipients": {
+      "type": "text",
+      "maxLength": 2000
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

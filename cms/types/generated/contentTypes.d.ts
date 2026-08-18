@@ -1054,6 +1054,45 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiMailSettingMailSetting extends Struct.SingleTypeSchema {
+  collectionName: 'mail_settings';
+  info: {
+    description: 'Recipient email address(es) for all website form submission notifications';
+    displayName: 'Mail Setting';
+    pluralName: 'mail-settings';
+    singularName: 'mail-setting';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    ccRecipients: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 2000;
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    enabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::mail-setting.mail-setting'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    recipients: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 2000;
+      }> &
+      Schema.Attribute.DefaultTo<''>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiNavbarNavbar extends Struct.SingleTypeSchema {
   collectionName: 'navbar';
   info: {
@@ -2007,6 +2046,7 @@ declare module '@strapi/strapi' {
       'api::job-category.job-category': ApiJobCategoryJobCategory;
       'api::job-location.job-location': ApiJobLocationJobLocation;
       'api::job.job': ApiJobJob;
+      'api::mail-setting.mail-setting': ApiMailSettingMailSetting;
       'api::navbar.navbar': ApiNavbarNavbar;
       'api::news-listing-page.news-listing-page': ApiNewsListingPageNewsListingPage;
       'api::partner-application.partner-application': ApiPartnerApplicationPartnerApplication;

@@ -6,13 +6,11 @@ import { useFadeIn } from "../shared/useFadeIn";
 import { PARTNERS_PROOF } from "./partners-data";
 import { GhostGreenCta, PartnersGreenCta, PartnersSectionHeading } from "./partners-shared";
 
-function ProofMarker() {
+function ProofMarker({ icon }: { icon: string }) {
   return (
-    <span className="relative flex size-[22px] shrink-0 items-center justify-center" aria-hidden>
+    <span className="relative flex size-[32px] shrink-0 items-center justify-center" aria-hidden>
       <span className="absolute inset-0 border-[0.5px] border-solid border-[rgba(83,216,36,0.6)] bg-[rgba(83,216,36,0.1)]" />
-      <svg viewBox="0 0 12 12" className="size-[10px]" fill="none">
-        <path d="M2.5 6.5L5 9L9.5 3.5" stroke="#53d824" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+      <img src={icon} alt="" className="size-[16px] object-contain" />
     </span>
   );
 }
@@ -41,7 +39,7 @@ export function PartnersProof() {
         <Corners />
         {PARTNERS_PROOF.points.map((point) => (
           <div key={point.title} className="flex min-h-[220px] flex-col items-start gap-[14px] p-[28px] max-[1023px]:border-b max-[1023px]:border-solid max-[1023px]:border-[rgba(83,216,36,0.2)] max-[1023px]:last:border-b-0">
-            <ProofMarker />
+            <ProofMarker icon={(point as any).icon} />
             <h3 className={`${gilroyMedium.className} w-full text-[20px] leading-[26px] font-medium text-white [word-break:break-word] not-italic min-[1024px]:text-[22px] min-[1024px]:leading-[28px]`}>
               {point.title}
             </h3>

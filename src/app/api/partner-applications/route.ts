@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { sendSubmissionMail } from "@/lib/notify-mail";
 
 /**
  * src/app/api/partner-applications/route.ts
@@ -90,6 +91,20 @@ export async function POST(req: Request): Promise<Response> {
     experience,
   };
 
+  const mailPayload = () => ({
+    formName: "Partner Application (Become a Partner)",
+    replyTo: email,
+    fields: [
+      { label: "Name", value: name },
+      { label: "Company", value: company },
+      { label: "Website", value: website },
+      { label: "Email", value: email },
+      { label: "Region", value: region },
+      { label: "Capability areas", value: capabilities.join(", ") },
+      { label: "Experience", value: experience },
+    ],
+  });
+
   try {
     const res = await fetch(`${STRAPI_URL}/api/partner-applications/submit`, {
       method: "POST",
@@ -97,15 +112,15 @@ export async function POST(req: Request): Promise<Response> {
       body: JSON.stringify({ data }),
     });
 
-    if (res.ok) return NextResponse.json({ ok: true });
+    if (!res.ok) {
+      console.log("[partner-application] Strapi unavailable — logged submission:", JSON.stringify(data));
+    }
 
-    // Strapi reachable but rejected (e.g. collection not registered yet) —
-    // log the submission server-side and succeed. Hardcoded-first: the
-    // partners page runs without any CMS wiring.
-    console.log("[partner-application] Strapi unavailable — logged submission:", JSON.stringify(data));
+    await sendSubmissionMail(mailPayload());
     return NextResponse.json({ ok: true });
   } catch {
     console.log("[partner-application] Strapi unreachable — logged submission:", JSON.stringify(data));
+    await sendSubmissionMail(mailPayload());
     return NextResponse.json({ ok: true });
   }
 }

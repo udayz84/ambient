@@ -405,6 +405,26 @@ export default {
         console.error('Error setting popup permissions:', err);
       }
 
+      // Seeding Mail Setting single type (recipient emails for form notifications)
+      try {
+        const mailSetting = await strapi
+          .documents('api::mail-setting.mail-setting')
+          .findFirst();
+
+        if (!mailSetting) {
+          await strapi.documents('api::mail-setting.mail-setting').create({
+            data: {
+              recipients: '',
+              ccRecipients: '',
+              enabled: true,
+            },
+          });
+          console.log('Created default Mail Setting entry — set recipients in Strapi admin.');
+        }
+      } catch (err) {
+        console.error('Error seeding mail setting:', err);
+      }
+
     } catch (e) {
       console.error('Seed error:', e);
     }

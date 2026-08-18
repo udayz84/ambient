@@ -74,6 +74,7 @@ export type GpxBadge = (typeof GPX_BADGES)[number];
 export type Partner = {
   name: string;
   monogram: string;
+  icon?: string;
   capability: PartnerCapabilityId;
   region: PartnerRegion;
   badges: GpxBadge[];
@@ -84,6 +85,7 @@ export const PARTNERS: Partner[] = [
   {
     name: "Axiom Neural Systems",
     monogram: "AN",
+    icon: "/partners/icons_partners/1.svg",
     capability: "ai-algorithm",
     region: "North America",
     badges: ["Model Zoo Contributor"],
@@ -93,6 +95,7 @@ export const PARTNERS: Partner[] = [
   {
     name: "Forge Firmware Studio",
     monogram: "FF",
+    icon: "/partners/icons_partners/2.svg",
     capability: "firmware-software",
     region: "EMEA",
     badges: [],
@@ -102,6 +105,7 @@ export const PARTNERS: Partner[] = [
   {
     name: "NorthBoard Design",
     monogram: "NB",
+    icon: "/partners/icons_partners/3.svg",
     capability: "hardware-board",
     region: "North America",
     badges: ["Published Reference Design"],
@@ -111,6 +115,7 @@ export const PARTNERS: Partner[] = [
   {
     name: "Momentum ODM",
     monogram: "MO",
+    icon: "/partners/icons_partners/4.svg",
     capability: "design-odm",
     region: "APAC / India",
     badges: [],
@@ -120,6 +125,7 @@ export const PARTNERS: Partner[] = [
   {
     name: "Vertex Assembly Group",
     monogram: "VA",
+    icon: "/partners/icons_partners/5.svg",
     capability: "ems-manufacturing",
     region: "APAC / India",
     badges: ["Volume Manufacturing"],
@@ -129,6 +135,7 @@ export const PARTNERS: Partner[] = [
   {
     name: "Lumen Edge Works",
     monogram: "LE",
+    icon: "/partners/icons_partners/6.svg",
     capability: "ai-algorithm",
     region: "EMEA",
     badges: ["Model Zoo Contributor", "Published Reference Design"],
@@ -139,7 +146,7 @@ export const PARTNERS: Partner[] = [
 
 export const PARTNERS_HERO = {
   tag: "Partner Ecosystem",
-  title: "You bring the vision. Our partners help you build it.",
+  title: "You bring the vision.\nOur partners help you\nbuild it.",
   subtitle:
     "Building an AI product takes more than a breakthrough chip — it takes specialized algorithms, tuned firmware, custom hardware, and manufacturing at scale. Ambient’s partner ecosystem brings world-class expertise across the entire stack, already fluent in the GPX platform, wherever you build.",
   primaryCta: { label: "Find a Partner", href: "#directory" },
@@ -153,11 +160,36 @@ export const PARTNERS_WHY = {
     "From algorithms to manufacturing, a great AI product spans the whole stack. Bring your strengths; our partners bring theirs — so every layer moves at full speed.",
   body: "The hard part of an AI product was never just the chip. It’s the specialized model that has to run inside a microwatt budget, the firmware tuned to squeeze out every last drop of efficiency, the board designed around tight power and space constraints, and the manufacturing partner who can build it at volume without surprises. A gap in any one of these can cost a roadmap months. You shouldn’t have to master all of them to ship.",
   journey: [
-    { label: "Model", state: "strong" as const },
-    { label: "Firmware", state: "strong" as const },
-    { label: "Hardware / Board", state: "gap" as const },
-    { label: "Manufacturing", state: "gap" as const },
-    { label: "Product", state: "ship" as const },
+    {
+      number: "01",
+      title: "MODEL",
+      description: "Specialized model development and power-optimized algorithms built for the A-Cube architecture — from custom CNNs, RNNs, and LSTMs to analog-aware quantization.",
+      image: "/partners/svg 2/7.svg",
+    },
+    {
+      number: "02",
+      title: "FIRMWARE",
+      description: "Embedded firmware, RTOS integration, and application software tuned to extract maximum efficiency from GPX silicon.",
+      image: "/partners/svg 2/8.svg",
+    },
+    {
+      number: "03",
+      title: "HARDWARE / BOARD",
+      description: "Custom board and system design around GPX10 — power, layout, sensor integration, and signal integrity.",
+      image: "/partners/svg 2/9.svg",
+    },
+    {
+      number: "04",
+      title: "MANUFACTURING",
+      description: "Volume manufacturing and assembly, ready to build GPX-based hardware at scale.",
+      image: "/partners/svg 2/10.svg",
+    },
+    {
+      number: "05",
+      title: "PRODUCT",
+      description: "End-to-end product design that takes a concept to a manufacturable product built around the GPX platform.",
+      image: "/partners/svg 2/11.svg",
+    },
   ],
   legendStrong: "Your in-house strengths",
   legendGap: "The gaps partners fill",
@@ -216,21 +248,25 @@ export const PARTNERS_PROOF = {
       title: "Reference designs, not blank pages.",
       description:
         "GPX10 reference designs from partners your team can rely on instead of starting from scratch.",
+      icon: "/applications/dvk-icon-1.svg",
     },
     {
       title: "Models proven on A-Cube.",
       description:
         "Partner-built models ship in the Ambient Model Zoo — real, deployable networks, already running on the architecture.",
+      icon: "/developer/pipeline-icon-train.svg",
     },
     {
       title: "Hardware built for the silicon.",
       description:
         "Partners have designed production hardware around GPX10 — boards engineered for its exact power and space envelope.",
+      icon: "/navbar/nav-icon-chip.svg",
     },
     {
       title: "Proven at volume.",
       description:
         "That hardware has gone into volume manufacturing — GPX-based products built at scale, not just prototyped.",
+      icon: "/company/ecosystem-icon-footprint.svg",
     },
   ],
   links: [

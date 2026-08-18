@@ -258,7 +258,7 @@ function ModelForgeCard({ step }: { step: any }) {
 
   return (
     <article
-      className="relative flex flex-col border border-solid px-[32px] pt-[16px] pb-[24px]"
+      className="relative flex flex-col overflow-hidden border border-solid px-[32px] pt-[16px] pb-[24px]"
       style={{
         width: MODELFORGE_CARD.width,
         height: MODELFORGE_CARD.height,

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { sendSubmissionMail } from "@/lib/notify-mail";
 
 /**
  * src/app/api/contact-submissions/route.ts
@@ -72,15 +73,42 @@ export async function POST(req: Request): Promise<Response> {
       body: JSON.stringify({ data }),
     });
 
-    if (res.ok) return NextResponse.json({ ok: true });
+    if (!res.ok) {
+      console.log("[contact-submission] Strapi unavailable — logged submission:", JSON.stringify(data));
+    }
 
-    // Strapi reachable but rejected (e.g. collection not registered yet) —
-    // log the submission server-side and succeed. Hardcoded-first: the
-    // contact page runs without any CMS wiring.
-    console.log("[contact-submission] Strapi unavailable — logged submission:", JSON.stringify(data));
+    await sendSubmissionMail({
+      formName: "Contact Form Submission",
+      replyTo: email,
+      fields: [
+        { label: "Track", value: track },
+        { label: "Email", value: email },
+        { label: "Message", value: message },
+        ...Object.entries(fields).map(([k, v]) => ({ label: k, value: v })),
+      ],
+      meta: [
+        { label: "Subscribed to updates", value: subscribed ? "Yes" : "No" },
+      ],
+    });
+
     return NextResponse.json({ ok: true });
   } catch {
     console.log("[contact-submission] Strapi unreachable — logged submission:", JSON.stringify(data));
+
+    await sendSubmissionMail({
+      formName: "Contact Form Submission",
+      replyTo: email,
+      fields: [
+        { label: "Track", value: track },
+        { label: "Email", value: email },
+        { label: "Message", value: message },
+        ...Object.entries(fields).map(([k, v]) => ({ label: k, value: v })),
+      ],
+      meta: [
+        { label: "Subscribed to updates", value: subscribed ? "Yes" : "No" },
+      ],
+    });
+
     return NextResponse.json({ ok: true });
   }
 }

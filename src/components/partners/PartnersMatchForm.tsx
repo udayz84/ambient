@@ -125,7 +125,7 @@ export function PartnersMatchForm() {
         {PARTNERS_MATCH.subheading}
       </p>
 
-      <div className="relative w-full max-w-[760px] border-[1.5px] border-solid border-[rgba(83,216,36,0.2)] bg-[rgba(46,119,20,0.14)] backdrop-blur-[8px]">
+      <div className="relative w-full max-w-[760px] bg-[rgba(46,119,20,0.14)] backdrop-blur-[8px]">
         <Corners />
 
         {submitted ? (

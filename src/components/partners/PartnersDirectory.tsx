@@ -26,9 +26,9 @@ const ALL = "All";
 /* ------------------------------------------------------------------ */
 
 const REGION_NODES = [
-  { region: "North America" as const, x: 17, y: 33, align: "right" },
-  { region: "EMEA" as const, x: 47, y: 26, align: "right" },
-  { region: "APAC / India" as const, x: 77, y: 39, align: "left" },
+  { region: "North America" as const, x: 15, y: 35, align: "right" },
+  { region: "EMEA" as const, x: 45, y: 30, align: "right" },
+  { region: "APAC / India" as const, x: 68, y: 46, align: "left" },
 ];
 
 function CoverageMap({ onRegionSelect }: { onRegionSelect: (region: string) => void }) {
@@ -84,11 +84,17 @@ function PartnerCard({ partner }: { partner: Partner }) {
     <article className="group/card relative flex flex-col border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(21,21,21,0.3)] p-[24px] backdrop-blur-[8px] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-[3px] hover:border-[rgba(83,216,36,0.5)] hover:shadow-[0px_20px_48px_0px_rgba(83,216,36,0.15)]">
       <Corners />
       <div className="flex w-full items-start gap-[16px]">
-        <span className="relative flex size-[48px] shrink-0 items-center justify-center" aria-hidden>
-          <span className="absolute inset-0 bg-gradient-to-b from-[#53d824] to-[#2c7213]" />
-          <span className={`${gilroyMedium.className} relative text-[16px] leading-[20px] font-medium tracking-[0.5px] text-[#091804]`}>
-            {partner.monogram}
-          </span>
+        <span className="relative flex size-[48px] shrink-0 items-center justify-center overflow-hidden" aria-hidden>
+          {partner.icon ? (
+            <img src={partner.icon} alt="" className="h-full w-full object-cover invert opacity-90" />
+          ) : (
+            <>
+              <span className="absolute inset-0 bg-gradient-to-b from-[#53d824] to-[#2c7213]" />
+              <span className={`${gilroyMedium.className} relative text-[16px] leading-[20px] font-medium tracking-[0.5px] text-[#091804]`}>
+                {partner.monogram}
+              </span>
+            </>
+          )}
         </span>
         <div className="flex min-w-0 flex-1 flex-col gap-[6px]">
           <h3 className={`${gilroyMedium.className} w-full text-[20px] leading-[26px] font-medium text-white [word-break:break-word] not-italic`}>

@@ -137,6 +137,16 @@ export function DeveloperPipeline({ data }: { data?: any }) {
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
   const tagText = data?.tag?.text || DEFAULT_TAG;
 
+  const mergedStages = STAGES.map((stage, i) => {
+    const tabData = data?.tabs?.[i];
+    return {
+      ...stage,
+      label: tabData?.label || tabData?.title || stage.label,
+      subtitle: tabData?.subtitle || tabData?.description || stage.subtitle,
+      flowImage: tabData?.image?.url || tabData?.media?.url || (i === 0 ? "/Train Flow 1.png" : stage.flowImage),
+    };
+  });
+
   return (
     <div
       className="absolute"
@@ -217,7 +227,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
         className="absolute -translate-x-1/2 flex items-center gap-[40px]"
         style={{ left: "50%", top: 255 }}
       >
-        {STAGES.map((stage, i) => (
+        {mergedStages.map((stage, i) => (
           <StageCard
             key={i}
             stage={stage}
@@ -254,7 +264,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
         className="absolute -translate-x-1/2 flex flex-col gap-[24px]"
         style={{ left: "50%", top: 475, width: 1204 }}
       >
-        {STAGES.map((stage, i) => (
+        {mergedStages.map((stage, i) => (
           <AccordionItem
             key={i}
             stage={stage}

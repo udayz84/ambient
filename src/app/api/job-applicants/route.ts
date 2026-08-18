@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { sendSubmissionMail, type MailAttachment } from "@/lib/notify-mail";
 
 /**
  * src/app/api/job-applicants/route.ts
@@ -81,29 +82,63 @@ export async function POST(req: Request): Promise<Response> {
     duplex: "half",
   };
 
+  const mailPayload = async () => {
+    let attachments: MailAttachment[] = [];
+    if (resume && typeof resume !== "string") {
+      const file = resume as File;
+      if (file.size > 0 && file.size <= 5 * 1024 * 1024) {
+        attachments = [
+          {
+            filename: file.name || "resume",
+            content: Buffer.from(await file.arrayBuffer()),
+            contentType: file.type || undefined,
+          },
+        ];
+      }
+    }
+    return {
+      formName: "Job Application",
+      replyTo: email,
+      fields: [
+        { label: "Full name", value: fullName },
+        { label: "Email", value: email },
+        { label: "Phone", value: phone },
+        { label: "Role", value: otherRole ? `${role} (${otherRole})` : role },
+        { label: "Cover letter", value: coverLetter },
+      ],
+      meta: [
+        { label: "Consent given", value: consent ? "Yes" : "No" },
+        ...(attachments.length ? [{ label: "Resume", value: attachments[0].filename }] : []),
+      ],
+      attachments,
+    };
+  };
+
+  let strapiSaved = false;
   try {
     const res = await fetch(`${STRAPI_URL}/api/job-applications/submit`, init);
 
     if (!res.ok) {
       const detail = await res.text().catch(() => "");
-      return NextResponse.json(
-        {
-          ok: false,
-          error: "Could not save your application. Please try again.",
-          detail,
-        },
-        { status: 502 }
-      );
+      console.log("[job-applicant] Strapi rejected — logged submission:", JSON.stringify(data), detail);
+    } else {
+      strapiSaved = true;
     }
-
-    return NextResponse.json({ ok: true });
   } catch {
+    console.log("[job-applicant] Strapi unreachable — logged submission:", JSON.stringify(data));
+  }
+
+  await sendSubmissionMail(await mailPayload());
+
+  if (!strapiSaved) {
     return NextResponse.json(
       {
         ok: false,
-        error: "Application service is unavailable. Please try again later.",
+        error: "Could not save your application. Please try again.",
       },
       { status: 502 }
     );
   }
+
+  return NextResponse.json({ ok: true });
 }

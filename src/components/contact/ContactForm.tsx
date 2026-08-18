@@ -12,6 +12,7 @@ import {
   GradientTitle,
   GreenCtaButton,
 } from "./contact-shared";
+import { ContactSuccessPopup } from "./ContactSuccessPopup";
 import { Corners } from "../shared/Corners";
 
 type TrackId = "sales" | "developer" | "media";
@@ -71,6 +72,8 @@ export function ContactForm({ data }: { data?: any }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [successDate, setSuccessDate] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const heading = data?.heading || "";
   const subtitle = data?.subtitle || "";
@@ -164,6 +167,14 @@ export function ContactForm({ data }: { data?: any }) {
         throw new Error(json?.error || "Submission failed.");
       }
       setSubmitted(true);
+      setSuccessDate(
+        new Date().toLocaleDateString("en-GB", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        }).replace(/ (\d+)/, ", $1"),
+      );
+      setShowSuccess(true);
     } catch {
       setError("Could not submit right now. Please try again.");
     } finally {
@@ -327,6 +338,12 @@ export function ContactForm({ data }: { data?: any }) {
           </p>
         ) : null}
       </div>
+
+      <ContactSuccessPopup
+        open={showSuccess}
+        dateLabel={successDate}
+        onClose={() => setShowSuccess(false)}
+      />
     </div>
   );
 }
