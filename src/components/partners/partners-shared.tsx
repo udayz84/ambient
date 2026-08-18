@@ -437,8 +437,8 @@ export function JourneyIcon({ name, className = "size-[26px]" }: { name: string;
       )}
       {name === "manufacturing" && (
         <g {...common}>
-          <path d="M3 22V10L9 14V10L15 14V10L21 14V6H23V22H3Z" />
-          <path d="M7 18H10" />
+          <circle cx="13" cy="13" r="4" />
+          <path d="M13 5V7M13 19V21M5 13H7M19 13H21M7.3 7.3L8.8 8.8M17.2 17.2L18.7 18.7M7.3 18.7L8.8 17.2M17.2 7.3L18.7 8.8" />
         </g>
       )}
       {name === "product" && (

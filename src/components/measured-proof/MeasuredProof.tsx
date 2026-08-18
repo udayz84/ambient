@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { mediaUrl } from "@/lib/strapi";
 import Image from "next/image";
 import { MeasuredProofCards } from "./MeasuredProofCards";
@@ -9,8 +8,6 @@ import { MeasuredProofHeader } from "./MeasuredProofHeader";
 import { MeasuredProofMobile } from "./MeasuredProofMobile";
 
 export function MeasuredProof({ data }: { data?: any }) {
-  const [needsScroll, setNeedsScroll] = useState(true);
-
   const backgroundImage =
     mediaUrl(data?.background_image) || "/measured-proof/bg-image-90.png";
   const gradientTop =
@@ -23,7 +20,7 @@ export function MeasuredProof({ data }: { data?: any }) {
   return (
     <section
       id="measured-proof"
-      className={`relative left-1/2 w-screen max-w-none -translate-x-1/2 bg-black max-[1023px]:h-auto ${needsScroll ? "min-[1024px]:h-[300vh]" : "min-[1024px]:h-[100vh]"}`}
+      className="relative left-1/2 w-screen max-w-none -translate-x-1/2 bg-black max-[1023px]:h-auto min-[1024px]:h-[100vh]"
       data-node-id="2379:1464"
       data-name="Section 6"
       aria-label="Measured proof in silicon"
@@ -74,7 +71,7 @@ export function MeasuredProof({ data }: { data?: any }) {
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="relative mx-auto h-[945px] w-full transition-all duration-300 [@media(max-height:945px)]:[zoom:0.85] [@media(max-height:800px)]:[zoom:0.75] [@media(max-height:700px)]:[zoom:0.65]">
             <MeasuredProofHeader data={data} />
-            <MeasuredProofCards data={data} onScrollChange={setNeedsScroll} />
+            <MeasuredProofCards data={data} />
             <MeasuredProofCtas data={data} />
           </div>
         </div>
