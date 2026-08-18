@@ -202,27 +202,27 @@ export const PARTNERS_BENEFITS = {
     "A partner who already knows the GPX platform turns months of trial-and-error into a running start.",
   cards: [
     {
-      title: "Faster time to market.",
+      title: "Faster to market",
       description:
-        "Skip the learning curve. Partners who already build on GPX take you from concept to production in a fraction of the time.",
+        "Skip the slow ramp. With GPX-ready partners already in motion, you move from concept to production much faster.",
       icon: "speed" as const,
     },
     {
-      title: "Higher success rate.",
+      title: "Higher success rate",
       description:
-        "Proven expertise and battle-tested reference designs mean fewer dead-ends and fewer costly re-spins.",
+        "Cut the false starts. Proven designs and real platform experience help you avoid re-spins, delays, and expensive surprises.",
       icon: "target" as const,
     },
     {
-      title: "De-risked development.",
+      title: "Lower development risk",
       description:
-        "Lean on specialists for the parts outside your core — from analog-aware model tuning to RF layout and volume manufacturing.",
+        "De-risk the hard parts. From analog-aware tuning to manufacturing realities, expert partners help keep your roadmap intact.",
       icon: "shield" as const,
     },
     {
-      title: "Focus on your differentiation.",
+      title: "Focus on your edge",
       description:
-        "Spend your energy on the product only you can build. Let partners handle the rest of the stack.",
+        "Own the part that matters. You build the differentiation. Our partners take care of the surrounding stack that gets you there.",
       icon: "focus" as const,
     },
   ],

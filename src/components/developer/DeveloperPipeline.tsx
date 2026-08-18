@@ -596,7 +596,7 @@ function AccordionItem({
         <img
           alt=""
           src={stage.flowImage}
-          className="absolute inset-0 size-full max-w-none object-contain"
+          className={`absolute inset-0 size-full max-w-none object-contain ${stage.label === "Train" ? "p-[40px]" : ""}`}
         />
       </div>
     </div>

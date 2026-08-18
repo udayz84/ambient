@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { gilroyBold, gilroySemiBold, interRegular } from "../hero/fonts";
 
@@ -74,8 +75,9 @@ export function ContactSuccessPopup({
   }, [open, onClose]);
 
   if (!open) return null;
+  if (typeof document === "undefined") return null;
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center bg-[rgba(0,0,0,0.7)]"
       role="dialog"
@@ -118,7 +120,7 @@ export function ContactSuccessPopup({
             <img
               alt=""
               className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
-              src="/contact/success-icon.jpg"
+              src="/contact/success-icon.png"
             />
           </div>
           <p
@@ -176,6 +178,7 @@ export function ContactSuccessPopup({
           </div>
         </button>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
