@@ -6,6 +6,8 @@ import { mediaUrl } from "@/lib/strapi";
 import { dmMono, gilroyMedium, gilroySemiBold, interLight, interRegular, interSemiBold } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { ContactBookingPopup } from "./ContactBookingPopup";
+import { ContactSuccessPopup } from "./ContactSuccessPopup";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
@@ -431,6 +433,8 @@ const SCHEDULE_CARDS = [
 ];
 
 function ContactScheduleMobile({ data }: { data?: any }) {
+  const [bookingCard, setBookingCard] = useState<number | null>(null);
+  const [bookedLabel, setBookedLabel] = useState("");
   const heading = data?.heading || "";
   const subtitle = data?.subtitle || "";
   const strapiCards: ReadonlyArray<any> = Array.isArray(data?.cards)
@@ -520,9 +524,10 @@ function ContactScheduleMobile({ data }: { data?: any }) {
                 </div>
               </div>
 
-              <a
-                href={card.ctaHref}
-                className={`mt-[24px] relative flex items-center justify-center gap-[8px] px-[31px] py-[14px] drop-shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15),0px_10.268px_6.699px_rgba(255,255,255,0.15),0px_3.714px_2.423px_rgba(255,255,255,0.1)] z-10 ${card.widthClass}`}
+              <button
+                type="button"
+                onClick={() => setBookingCard(index)}
+                className={`relative mt-[24px] flex cursor-pointer items-center justify-center gap-[8px] px-[31px] py-[14px] drop-shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15),0px_10.268px_6.699px_rgba(255,255,255,0.15),0px_3.714px_2.423px_rgba(255,255,255,0.1)] z-10 ${card.widthClass}`}
               >
                 <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
                 <span
@@ -538,11 +543,34 @@ function ContactScheduleMobile({ data }: { data?: any }) {
                 <span className={`${gilroySemiBold.className} relative z-10 text-[12px] leading-[normal] font-semibold uppercase whitespace-nowrap text-[#151515] not-italic`}>
                   {card.ctaLabel}
                 </span>
-              </a>
+              </button>
             </article>
           );
         })}
       </div>
+
+      <ContactBookingPopup
+        key={bookingCard === null ? "closed" : `booking-${bookingCard}`}
+        open={bookingCard !== null}
+        meetingTitle={bookingCard !== null ? mergedCards[bookingCard]?.title || "Product Demo" : "Product Demo"}
+        meetingDescription={
+          bookingCard !== null
+            ? mergedCards[bookingCard]?.description ||
+              "This is an example of a meeting you would have with a potential customer to demonstrate your product."
+            : ""
+        }
+        onClose={() => setBookingCard(null)}
+        onBooked={(label) => {
+          setBookedLabel(label);
+          setBookingCard(null);
+        }}
+      />
+
+      <ContactSuccessPopup
+        open={Boolean(bookedLabel)}
+        dateLabel={bookedLabel}
+        onClose={() => setBookedLabel("")}
+      />
     </SectionWrap>
   );
 }

@@ -71,7 +71,13 @@ export function ContactSuccessPopup({
       if (e.key === "Escape") onClose();
     };
     document.addEventListener("keydown", onEsc);
-    return () => document.removeEventListener("keydown", onEsc);
+    // Lock page scroll while the popup is open so it stays fixed/centered.
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onEsc);
+      document.body.style.overflow = prevOverflow;
+    };
   }, [open, onClose]);
 
   if (!open) return null;
@@ -79,21 +85,21 @@ export function ContactSuccessPopup({
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-[rgba(0,0,0,0.7)]"
+      className="fixed inset-0 z-[100] flex animate-popup-backdrop-in items-center justify-center overflow-y-auto bg-[rgba(0,0,0,0.7)] p-[16px]"
       role="dialog"
       aria-modal="true"
       aria-label="Thanks for reaching out"
       onClick={onClose}
     >
       <div
-        className="relative h-[609px] w-[700px] max-w-[calc(100vw-32px)] border-[0.5px] border-solid border-[rgba(240,240,240,0.3)] bg-[#141414]"
+        className="relative flex h-[609px] w-[700px] max-w-[calc(100vw-32px)] animate-popup-rise-in flex-col items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.3)] bg-[#141414] max-[767px]:h-auto max-[767px]:max-h-[calc(100dvh-32px)] max-[767px]:overflow-y-auto max-[767px]:py-[48px]"
         data-node-id="4751:4382"
         data-name="Success state"
         onClick={(e) => e.stopPropagation()}
       >
         {/* hand image — blurred, radial dark vignette */}
         <div
-          className="absolute top-[calc(50%-113.56px)] left-1/2 h-[337.89px] w-[663.794px] -translate-x-1/2 -translate-y-1/2 blur-[2px]"
+          className="absolute top-[calc(50%-113.56px)] left-1/2 h-[337.89px] w-[663.794px] -translate-x-1/2 -translate-y-1/2 blur-[2px] max-[767px]:top-[calc(50%-113.56px)] max-[767px]:left-1/2"
           data-node-id="4763:4387"
           data-name="hand"
         >
@@ -110,12 +116,12 @@ export function ContactSuccessPopup({
           </div>
         </div>
 
-        {/* content column */}
+        {/* content column — absolute-centered on desktop, flow on mobile */}
         <div
-          className="absolute top-[calc(50%-22.5px)] left-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[20px]"
+          className="absolute top-[calc(50%-22.5px)] left-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[20px] max-[767px]:static max-[767px]:w-full max-[767px]:translate-x-0 max-[767px]:translate-y-0 max-[767px]:px-[24px]"
           data-node-id="4751:4384"
         >
-          <div className="relative size-[250px] shrink-0" data-node-id="4751:4385">
+          <div className="relative size-[250px] shrink-0 max-[767px]:size-[200px] max-[480px]:size-[160px]" data-node-id="4751:4385">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt=""
@@ -124,13 +130,13 @@ export function ContactSuccessPopup({
             />
           </div>
           <p
-            className={`${gilroyBold.className} relative shrink-0 text-[38px] leading-[47px] whitespace-nowrap text-white not-italic`}
+            className={`${gilroyBold.className} relative shrink-0 text-center text-[38px] leading-[47px] text-white not-italic max-[767px]:text-[28px] max-[767px]:leading-[35px] max-[480px]:text-[22px] max-[480px]:leading-[28px]`}
             data-node-id="4751:4386"
           >
             Thanks for reaching out!
           </p>
           <p
-            className={`${interRegular.className} relative h-[36px] w-[540px] shrink-0 text-center text-[18px] leading-[27px] font-normal text-[#a4a4a4] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} relative h-[36px] w-[540px] shrink-0 text-center text-[18px] leading-[27px] font-normal text-[#a4a4a4] not-italic [word-break:break-word] max-[767px]:h-auto max-[767px]:w-full max-[767px]:text-[15px] max-[767px]:leading-[22px]`}
             data-node-id="4751:4387"
           >
             {`We’re looking forward to connecting with you on ${dateLabel}`}
@@ -143,7 +149,7 @@ export function ContactSuccessPopup({
           >
             <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
             <span
-              className={`${gilroySemiBold.className} absolute top-[calc(50%-9px)] left-[calc(50%-67px)] text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic`}
+              className={`${gilroySemiBold.className} absolute top-[calc(50%-9px)] left-1/2 flex w-full -translate-x-1/2 items-center justify-center text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic`}
               data-node-id="4751:4390"
             >
               Back to Homepage
@@ -161,7 +167,7 @@ export function ContactSuccessPopup({
           type="button"
           onClick={onClose}
           aria-label="Close"
-          className="absolute top-[39.5px] left-[619.5px] block size-[40px] cursor-pointer overflow-clip"
+          className="absolute top-[39.5px] left-[619.5px] block size-[40px] cursor-pointer overflow-clip max-[767px]:left-auto max-[767px]:top-[16px] max-[767px]:right-[16px]"
           data-node-id="4751:4400"
           data-name="cancel-01"
         >

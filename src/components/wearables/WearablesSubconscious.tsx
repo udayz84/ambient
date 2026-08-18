@@ -126,7 +126,7 @@ export function WearablesSubconscious({ data }: { data?: any }) {
               <img
                 alt=""
                 src={cardImage}
-                className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+                className="pointer-events-none absolute inset-0 size-full max-w-none object-contain"
                 aria-hidden
               />
             </div>
@@ -192,7 +192,7 @@ export function WearablesSubconscious({ data }: { data?: any }) {
             <img
               alt=""
               src={cardImage}
-              className="pointer-events-none absolute inset-0 size-full object-cover"
+              className="pointer-events-none absolute inset-0 size-full object-contain"
               aria-hidden
             />
           </div>

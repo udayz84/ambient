@@ -1,7 +1,12 @@
+"use client";
+
+import { useState } from "react";
 import { dmMono, gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { mediaUrl } from "@/lib/strapi";
 import { Corners } from "../shared/Corners";
 import { CornerDecor, GradientTitle } from "./contact-shared";
+import { ContactBookingPopup } from "./ContactBookingPopup";
+import { ContactSuccessPopup } from "./ContactSuccessPopup";
 
 const cards = [
   {
@@ -33,6 +38,8 @@ const cards = [
 ] as const;
 
 export function ContactSchedule({ data }: { data?: any }) {
+  const [bookingCard, setBookingCard] = useState<number | null>(null);
+  const [bookedLabel, setBookedLabel] = useState("");
   const heading = data?.heading || "";
   const subtitle = data?.subtitle || "";
   const sectionIcon = mediaUrl(data?.icon);
@@ -104,10 +111,34 @@ export function ContactSchedule({ data }: { data?: any }) {
               {...card}
               className={leftClass}
               style={topStyle}
+              onBook={() => setBookingCard(index)}
             />
           );
         })}
       </div>
+
+      <ContactBookingPopup
+        key={bookingCard === null ? "closed" : `booking-${bookingCard}`}
+        open={bookingCard !== null}
+        meetingTitle={bookingCard !== null ? mergedCards[bookingCard]?.title || "Product Demo" : "Product Demo"}
+        meetingDescription={
+          bookingCard !== null
+            ? mergedCards[bookingCard]?.description ||
+              "This is an example of a meeting you would have with a potential customer to demonstrate your product."
+            : ""
+        }
+        onClose={() => setBookingCard(null)}
+        onBooked={(label) => {
+          setBookedLabel(label);
+          setBookingCard(null);
+        }}
+      />
+
+      <ContactSuccessPopup
+        open={Boolean(bookedLabel)}
+        dateLabel={bookedLabel}
+        onClose={() => setBookedLabel("")}
+      />
     </div>
   );
 }
@@ -131,6 +162,7 @@ function ScheduleCard({
   imageClassName,
   className,
   style,
+  onBook,
 }: Omit<(typeof cards)[number], "imageSrc"> & {
   tag: string;
   title: string;
@@ -140,6 +172,7 @@ function ScheduleCard({
   remoteImage: string | null;
   className: string;
   style?: React.CSSProperties;
+  onBook: () => void;
 }) {
   const imageFinal = remoteImage;
   return (
@@ -171,7 +204,7 @@ function ScheduleCard({
         </div>
       </div>
 
-      <ScheduleCta label={ctaLabel} href={ctaHref} nodeId={ctaNodeId} widthClass={ctaWidth} />
+      <ScheduleCta label={ctaLabel} href={ctaHref} nodeId={ctaNodeId} widthClass={ctaWidth} onBook={onBook} />
 
       <div
         className="pointer-events-none absolute top-[90px] left-[380px] z-[1] h-[230px] w-[210px] overflow-hidden"
@@ -192,19 +225,21 @@ function ScheduleCard({
 
 function ScheduleCta({
   label,
-  href,
   nodeId,
   widthClass,
+  onBook,
 }: {
   label: string;
   href: string;
   nodeId: string;
   widthClass: string;
+  onBook: () => void;
 }) {
   return (
-    <a
-      href={href}
-      className={`${gilroySemiBold.className} absolute top-[248px] left-[16px] z-20 block h-[48px] ${widthClass} shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15),0px_10.268px_6.699px_rgba(255,255,255,0.15),0px_3.714px_2.423px_rgba(255,255,255,0.1)]`}
+    <button
+      type="button"
+      onClick={onBook}
+      className={`${gilroySemiBold.className} absolute top-[248px] left-[16px] z-20 block h-[48px] ${widthClass} cursor-pointer shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15),0px_10.268px_6.699px_rgba(255,255,255,0.15),0px_3.714px_2.423px_rgba(255,255,255,0.1)]`}
       data-node-id={nodeId}
       data-name="Cta"
     >
@@ -232,7 +267,7 @@ function ScheduleCta({
           {label}
         </span>
       </span>
-    </a>
+    </button>
   );
 }
 

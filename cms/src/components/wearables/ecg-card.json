@@ -1,1 +1,22 @@
-﻿{ "collectionName": "components_wearables_ecg_cards", "info": { "displayName": "ECG Card", "description": "ECG stat card" }, "options": {}, "attributes": { "stat": { "type": "string" }, "label": { "type": "string" } } }
+{
+  "collectionName": "components_wearables_ecg_cards",
+  "info": {
+    "displayName": "ECG Card",
+    "description": "ECG stat card"
+  },
+  "options": {},
+  "attributes": {
+    "stat": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    }
+  }
+}

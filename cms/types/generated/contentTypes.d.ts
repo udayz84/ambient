@@ -601,6 +601,45 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCalendarBookingCalendarBooking
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'calendar_bookings';
+  info: {
+    description: 'Meeting slot bookings from the Contact page calendar popup';
+    displayName: 'Calendar Bookings';
+    pluralName: 'calendar-bookings';
+    singularName: 'calendar-booking';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    bookingDate: Schema.Attribute.Date & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::calendar-booking.calendar-booking'
+    > &
+      Schema.Attribute.Private;
+    meetingDescription: Schema.Attribute.Text;
+    meetingTitle: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    status: Schema.Attribute.Enumeration<
+      ['pending', 'confirmed', 'cancelled']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'confirmed'>;
+    timeSlot: Schema.Attribute.String & Schema.Attribute.Required;
+    timeZone: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiCareersPageCareersPage extends Struct.SingleTypeSchema {
   collectionName: 'careers_pages';
   info: {
@@ -2034,6 +2073,7 @@ declare module '@strapi/strapi' {
       'api::application-page.application-page': ApiApplicationPageApplicationPage;
       'api::applications-page.applications-page': ApiApplicationsPageApplicationsPage;
       'api::article.article': ApiArticleArticle;
+      'api::calendar-booking.calendar-booking': ApiCalendarBookingCalendarBooking;
       'api::careers-page.careers-page': ApiCareersPageCareersPage;
       'api::company-page.company-page': ApiCompanyPageCompanyPage;
       'api::contact-form-detail.contact-form-detail': ApiContactFormDetailContactFormDetail;

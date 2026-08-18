@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { dmMono, gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
+import { mediaUrl } from "@/lib/strapi";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
@@ -373,7 +374,7 @@ function EcgCard({
       >
         <div className="-scale-y-100 flex-none rotate-180">
           <div className="relative size-[250px] scale-85" data-name="image">
-            <img alt="" src={imageSrc} className="absolute size-full max-w-none object-cover" />
+            <img alt="" src={imageSrc} className="absolute size-full max-w-none object-contain" />
             <div className="absolute inset-0" style={{ backgroundImage: IMG_OVERLAY_1 }} />
           </div>
         </div>
@@ -442,7 +443,7 @@ function EcgCardMobile({
       >
         <div className="-scale-y-100 flex-none rotate-180">
           <div className="relative h-[220px] w-full scale-85">
-            <img alt="" src={imageSrc} className="absolute size-full max-w-none object-cover" />
+            <img alt="" src={imageSrc} className="absolute size-full max-w-none object-contain" />
             <div className="absolute inset-0" style={{ backgroundImage: IMG_OVERLAY_1 }} />
           </div>
         </div>
@@ -488,7 +489,7 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
   const ecgCards = Array.from({ length: 4 }).map((_, i) => {
     const c = dataEcgCards[i];
     return {
-      imageSrc: ECG_IMAGES[i] ?? IMG_187,
+      imageSrc: mediaUrl(c?.image) || (ECG_IMAGES[i] ?? IMG_187),
       stat: c?.stat || ECG_FALLBACK_STAT,
       label: c?.label || ECG_FALLBACK_LABEL,
     };
