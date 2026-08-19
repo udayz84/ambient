@@ -1,3 +1,5 @@
+import { mediaUrl } from "@/lib/strapi";
+
 /** Figma 2900:464 — hero title text gradient. */
 export const HERO_TITLE_GRADIENT =
   "linear-gradient(106.263deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -137,7 +139,7 @@ export type ProductsFeatureCardData = {
   titleLeft: number;
   titleWidth: number | null;
   description: string;
-  image: "brain" | "coin" | "bubble" | "stack";
+  image: "brain" | "coin" | "bubble" | "stack" | string;
 };
 
 export const PRODUCTS_FEATURE_CARDS: ProductsFeatureCardData[] = [
@@ -219,9 +221,10 @@ export function resolveFeatureCards(
     const strapiTitle = typeof c?.title === "string" ? c.title.trim() : "";
     const strapiDescription =
       typeof c?.description === "string" ? c.description.trim() : "";
-    const image = withinDesign
+    const strapiImage = mediaUrl(c?.image);
+    const image = strapiImage || (withinDesign
       ? fb.image
-      : (FEATURE_IMAGE_VARIANTS[i % FEATURE_IMAGE_VARIANTS.length] as ProductsFeatureCardData["image"]);
+      : (FEATURE_IMAGE_VARIANTS[i % FEATURE_IMAGE_VARIANTS.length] as ProductsFeatureCardData["image"]));
     return {
       nodeId:
         c?.documentId ?? c?.id ?? `feature-card-strapi-${i}`,

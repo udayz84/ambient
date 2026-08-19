@@ -474,7 +474,7 @@ function ProductsArchitectureMobile({
       <div className="relative mx-auto w-full" style={{ maxWidth: 393 }}>
 
         {/* ── Header — 3568:4704 (top=30, centred, 350 wide, gap=10) ── */}
-        <div className="flex flex-col items-center gap-[10px] px-[21px] pt-[30px]">
+        <div className="flex flex-col items-center gap-[10px] px-[21px] pt-[80px]">
           <TagBadge
             label={label}
             width={120}
@@ -508,38 +508,29 @@ function ProductsArchitectureMobile({
           </p>
         </div>
 
-        {/* ── Article card — 3568:4713 (353×492) ── */}
-        <div className="mx-auto mt-[15px] w-[353px]">
+        {/* ── Article card — 3568:4713 (responsive) ── */}
+        <div className="mx-auto mt-[15px] w-full max-w-[353px] px-[20px] min-[393px]:px-0 pb-[80px]">
           <div
-            className="relative h-[492px] w-[353px] border border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)]"
+            className="relative w-full border border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] flex flex-col pt-[14px] pb-[16px]"
             data-name="Article"
           >
-            {/* Architecture diagram — rotated 90° (300×451) */}
-            <div
-              className="absolute left-1/2 top-[14px] h-[451px] w-[300px] -translate-x-1/2 overflow-hidden"
-            >
-              <div
-                className="absolute left-1/2 top-1/2"
-                style={{ transform: "translate(-50%, -50%) rotate(90deg)" }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  alt="GPX10 Pro architecture"
-                  src={image || "/products/architecture.png"}
-                  className="object-cover"
-                  style={{ width: 451, height: 300 }}
-                />
-              </div>
+            {/* Architecture diagram — horizontal, responsive */}
+            <div className="relative w-full px-[14px]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                alt="GPX10 Pro architecture"
+                src={image || "/products/architecture.png"}
+                className="w-full h-auto object-contain"
+              />
             </div>
             {/* Corner ticks */}
-            <CornerTick src="/hero/vector-57.svg" placement="tl" style={{ left: -1, top: -0.36 }} />
-            <CornerTick src="/hero/vector-55.svg" placement="tr" style={{ right: -1, top: -0.36 }} size={3} />
-            <CornerTick src="/hero/vector-55.svg" placement="br" style={{ right: -1, bottom: 90 }} size={3} />
-            <CornerTick src="/hero/vector-57.svg" placement="bl" style={{ left: -1, bottom: 90 }} />
+            <CornerTick src="/hero/vector-57.svg" placement="tl" style={{ left: -1, top: -1 }} />
+            <CornerTick src="/hero/vector-55.svg" placement="tr" style={{ right: -1, top: -1 }} size={3} />
+            <CornerTick src="/hero/vector-55.svg" placement="br" style={{ right: -1, bottom: -1 }} size={3} />
+            <CornerTick src="/hero/vector-57.svg" placement="bl" style={{ left: -1, bottom: -1 }} />
             {/* Caption */}
             <p
-              className={`${gilroyMedium.className} absolute whitespace-nowrap text-[14px] leading-[28px] font-medium text-white not-italic`}
-              style={{ left: 12, top: 465 }}
+              className={`${gilroyMedium.className} mt-[16px] px-[14px] whitespace-nowrap text-[14px] leading-[28px] font-medium text-white not-italic`}
             >
               {caption}
             </p>

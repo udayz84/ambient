@@ -361,7 +361,7 @@ function ProductsModelForgeMobile({
       <div className="relative mx-auto w-full" style={{ maxWidth: 393 }}>
 
         {/* ── Header — 3568:4786 (top=30, centred, 350 wide, gap=10) ── */}
-        <div className="flex flex-col items-center gap-[10px] px-[21px] pt-[30px]">
+        <div className="flex flex-col items-center gap-[10px] px-[21px] pt-[80px]">
           <TagBadge
             label="Build with GPX10PRO"
             width={160}
@@ -395,38 +395,44 @@ function ProductsModelForgeMobile({
         </div>
 
         {/* ── Cards — 3572:8992 (354 wide, gap=14) ── */}
-        <div className="mx-auto mt-[26px] flex w-[354px] flex-col gap-[14px]">
+        <div className="mx-auto mt-[26px] flex w-full max-w-[354px] px-[20px] min-[393px]:px-0 flex-col gap-[14px]">
           {steps.map((step) => (
-            <MobileModelForgeCard key={step.nodeId} step={step} />
+            <div key={step.nodeId} className="relative aspect-[354/400] w-full" style={{ containerType: "inline-size" }}>
+              <div className="absolute left-0 top-0 origin-top-left" style={{ transform: "scale(min(1, calc(100cqi / 354)))" }}>
+                <MobileModelForgeCard step={step} />
+              </div>
+            </div>
           ))}
         </div>
 
         {/* ── CTA row — 3572:9026 (354 wide, gap=14) ── */}
-        <div className="mx-auto mt-[30px] flex gap-[14px] pb-[30px]">
-          {/* Primary — 211×48 */}
-          <a
-            href={primary.href}
-            className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[211px] shrink-0 items-center justify-center overflow-hidden`}
-          >
-            <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
-            <AnimatedDotsBackground />
-            <span className="relative text-[12px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
-              {primary.label}
-            </span>
-            <span aria-hidden className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
-            <GreenCtaCorners />
-          </a>
-          {/* Secondary — 129×48 */}
-          <a
-            href={secondary.href}
-            className={`${gilroyMedium.className} relative flex h-[48px] w-[129px] shrink-0 items-center justify-center overflow-clip px-[20px] py-[10px]`}
-            style={{ backgroundColor: SECONDARY_CTA_BG }}
-          >
-            <span className="relative text-[12px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
-              {secondary.label}
-            </span>
-            <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
-          </a>
+        <div className="mx-auto mt-[30px] w-full max-w-[354px] px-[20px] min-[393px]:px-0 pb-[80px]" style={{ containerType: "inline-size" }}>
+          <div className="flex origin-top-left gap-[14px]" style={{ transform: "scale(min(1, calc(100cqi / 354)))" }}>
+            {/* Primary — 211×48 */}
+            <a
+              href={primary.href}
+              className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[211px] shrink-0 items-center justify-center overflow-hidden`}
+            >
+              <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
+              <AnimatedDotsBackground />
+              <span className="relative text-[12px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+                {primary.label}
+              </span>
+              <span aria-hidden className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
+              <GreenCtaCorners />
+            </a>
+            {/* Secondary — 129×48 */}
+            <a
+              href={secondary.href}
+              className={`${gilroyMedium.className} relative flex h-[48px] w-[129px] shrink-0 items-center justify-center overflow-clip px-[20px] py-[10px]`}
+              style={{ backgroundColor: SECONDARY_CTA_BG }}
+            >
+              <span className="relative text-[12px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+                {secondary.label}
+              </span>
+              <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -456,7 +462,7 @@ function MobileModelForgeCard({ step }: { step: any }) {
         )}
         {/* Step number — 70px watermark */}
         <span
-          className={`${gilroyMedium.className} pointer-events-none absolute left-[-15px] top-[215px] bg-clip-text text-[70px] leading-[64px] font-medium text-transparent opacity-50 not-italic whitespace-nowrap`}
+          className={`${gilroyMedium.className} pointer-events-none absolute left-[15px] top-[215px] bg-clip-text text-[70px] leading-[64px] font-medium text-transparent opacity-50 not-italic whitespace-nowrap`}
           style={{
             backgroundImage: STEP_NUMBER_GRADIENT,
             WebkitBackgroundClip: "text",
@@ -464,7 +470,7 @@ function MobileModelForgeCard({ step }: { step: any }) {
           }}
           aria-hidden
         >
-          {step.number}
+          {step.number.split(" ")[0]}
         </span>
         {/* Title + description */}
         <div className="absolute left-[-16px] top-[259px] flex w-[322px] flex-col gap-[5px]">

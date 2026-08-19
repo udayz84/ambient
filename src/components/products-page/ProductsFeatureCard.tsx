@@ -51,7 +51,7 @@ function CardTitleLine() {
   );
 }
 
-function CardImage({ variant }: { variant: ProductsFeatureCardData["image"] }) {
+function CardImage({ variant, isSpread }: { variant: ProductsFeatureCardData["image"]; isSpread?: boolean }) {
   if (variant === "brain") {
     return (
       <div
@@ -107,36 +107,63 @@ function CardImage({ variant }: { variant: ProductsFeatureCardData["image"] }) {
       </div>
     );
   }
-  /* stack — radial-masked back image + front overlay (Figma 3743:1033-1037) */
+  if (variant === "stack") {
+    /* stack — radial-masked back image + front overlay (Figma 3743:1033-1037) */
+    return (
+      <div
+        className="absolute top-[138.4px] left-[calc(50%-0.05px)] h-[321.949px] w-[386.268px] -translate-x-1/2"
+        aria-hidden
+      >
+        <div
+          className="absolute top-0 left-1/2 h-[321.949px] w-[386.268px] -translate-x-1/2 [mask-image:url(/products/features-card-mask.svg)] [mask-position:0_0] [mask-repeat:no-repeat] [mask-size:386.268px_321.949px]"
+        >
+          <img
+            alt=""
+            src={CARD_IMAGES.stack}
+            className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+          />
+        </div>
+        <div className="absolute top-0 left-1/2 h-[321.949px] w-[386.268px] -translate-x-1/2">
+          <img
+            alt=""
+            src="/products/features-card-stack-front.png"
+            className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+          />
+        </div>
+      </div>
+    );
+  }
+
+  /* Arbitrary Strapi image URL */
   return (
     <div
-      className="absolute top-[138.4px] left-[calc(50%-0.05px)] h-[321.949px] w-[386.268px] -translate-x-1/2"
+      className={`absolute left-1/2 -translate-x-1/2 flex items-center justify-center overflow-hidden ${isSpread ? "w-full top-[130px] h-[300px]" : "w-[364px] top-[110px] h-[340px]"}`}
       aria-hidden
     >
-      <div
-        className="absolute top-0 left-1/2 h-[321.949px] w-[386.268px] -translate-x-1/2 [mask-image:url(/products/features-card-mask.svg)] [mask-position:0_0] [mask-repeat:no-repeat] [mask-size:386.268px_321.949px]"
-      >
-        <img
-          alt=""
-          src={CARD_IMAGES.stack}
-          className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+      <img
+        alt=""
+        src={variant}
+        className={`pointer-events-none size-full ${isSpread ? "object-cover" : "object-contain"}`}
+      />
+      {isSpread && (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(to bottom, rgba(15,14,14,1) 0%, rgba(15,14,14,0) 25%, rgba(15,14,14,0) 75%, rgba(15,14,14,1) 100%)",
+          }}
         />
-      </div>
-      <div className="absolute top-0 left-1/2 h-[321.949px] w-[386.268px] -translate-x-1/2">
-        <img
-          alt=""
-          src="/products/features-card-stack-front.png"
-          className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
-        />
-      </div>
+      )}
     </div>
   );
 }
 
 export function ProductsFeatureCard({
   card,
+  isSpread = false,
 }: {
   card: ProductsFeatureCardData;
+  isSpread?: boolean;
 }) {
   const { fadeRef, isVisible } = useFadeIn();
 
@@ -147,7 +174,7 @@ export function ProductsFeatureCard({
       data-node-id={card.nodeId}
       data-name="Lower power consumption"
     >
-      <div className="absolute top-0 left-0 h-[600px] w-[388px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.75)]" />
+      <div className="absolute top-0 left-0 h-[600px] w-[388px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.75)] backdrop-blur-md" />
       <div className="absolute top-[0.51px] left-[0.39px] h-[598.994px] w-[387.605px]">
         <CardCorners />
       </div>
@@ -177,7 +204,7 @@ export function ProductsFeatureCard({
         <CardTitleLine />
       </div>
 
-      <CardImage variant={card.image} />
+      <CardImage variant={card.image} isSpread={isSpread} />
 
       {/* description */}
       <p

@@ -37,7 +37,7 @@ function ShoppingCartIcon() {
 function ProductsMegaMenu({ onNavigate }: { onNavigate: () => void }) {
   return (
     <div
-      className="relative w-[800px] border-[0.5px] border-[rgba(255,255,255,0.1)] bg-[#0f0e0e]"
+      className="relative w-[800px] border-[0.5px] border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.98)] backdrop-blur-3xl"
       data-node-id="4625:8704"
       data-name="Dropdown"
     >
@@ -150,7 +150,7 @@ function NavIconDropdown({
 
   return (
     <div
-      className="relative border-[0.5px] border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.75)]"
+      className="relative border-[0.5px] border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.98)] backdrop-blur-3xl"
       style={{ width }}
     >
       <div className="pointer-events-none absolute inset-0">

@@ -28,5 +28,7 @@ export function useFadeIn<T extends HTMLElement = any>(threshold = 0.12) {
 }
 
 export function getFadeInClass(isVisible: boolean) {
-  return isVisible ? "animate-hero-text-fade-in opacity-0" : "translate-y-[25px] opacity-0";
+  return isVisible
+    ? "min-[1024px]:animate-hero-text-fade-in min-[1024px]:opacity-0 max-[1023px]:opacity-100 max-[1023px]:translate-y-0"
+    : "min-[1024px]:translate-y-[25px] min-[1024px]:opacity-0 max-[1023px]:opacity-100 max-[1023px]:translate-y-0";
 }

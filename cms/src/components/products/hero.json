@@ -32,6 +32,10 @@
       "type": "media",
       "multiple": false
     },
+    "chipset_image_mobile": {
+      "type": "media",
+      "multiple": false
+    },
     "chipset_image_alt": {
       "type": "string"
     }

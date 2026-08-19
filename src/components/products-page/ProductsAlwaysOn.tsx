@@ -319,7 +319,7 @@ function ToggleFrame({
 }) {
   return (
     <div
-      className={`bg-[rgba(0,0,0,0.1)] border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] h-[80px] overflow-clip w-[410px] ${className}`}
+      className={`bg-[rgba(0,0,0,0.1)] border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] h-[80px] overflow-clip w-[410px] max-md:w-[382px] ${className}`}
       data-name="Lower power consumption"
     >
       <GlowSwoosh top={-25.16} />
@@ -477,7 +477,7 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
         className="relative w-full overflow-hidden bg-black min-[1024px]:hidden"
         aria-label="Always on"
       >
-        <div className="flex flex-col items-center gap-[16px] px-[24px] pt-[64px]">
+        <div className="flex flex-col items-center gap-[16px] px-[24px] pt-[80px]">
           <SectionBadge />
           <div className="relative flex flex-col items-center px-[10px]">
             <h2
@@ -521,8 +521,8 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
 
         {/* Stat cards — 364px design scaled down proportionally on narrow screens */}
         <div className="mt-[24px] flex w-full flex-col items-center gap-[20px] px-[24px]">
-          <div className="relative aspect-[364/218] w-full max-w-[364px]">
-            <div className="absolute left-0 top-0 origin-top-left scale-[min(1,calc((100vw_-_48px)/364))]">
+          <div className="relative aspect-[364/218] w-full max-w-[364px]" style={{ containerType: "inline-size" }}>
+            <div className="absolute left-0 top-0 origin-top-left" style={{ transform: "scale(min(1, calc(100cqi / 364)))" }}>
               <StatCard
                 className="relative"
                 badgeLabel="power"
@@ -533,8 +533,8 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
               />
             </div>
           </div>
-          <div className="relative aspect-[364/218] w-full max-w-[364px]">
-            <div className="absolute left-0 top-0 origin-top-left scale-[min(1,calc((100vw_-_48px)/364))]">
+          <div className="relative aspect-[364/218] w-full max-w-[364px]" style={{ containerType: "inline-size" }}>
+            <div className="absolute left-0 top-0 origin-top-left" style={{ transform: "scale(min(1, calc(100cqi / 364)))" }}>
               <StatCard
                 className="relative"
                 badgeLabel="Performance"
@@ -549,15 +549,15 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
 
         {/* Toggle — 410px design scaled down proportionally on narrow screens */}
         <div className="mt-[24px] flex justify-center px-[24px]">
-          <div className="relative aspect-[410/80] w-full max-w-[410px]">
-            <div className="absolute left-0 top-0 origin-top-left scale-[min(1,calc((100vw_-_48px)/410))]">
+          <div className="relative aspect-[410/80] w-full max-w-[410px]" style={{ containerType: "inline-size" }}>
+            <div className="absolute left-0 top-0 origin-top-left" style={{ transform: "scale(min(1, calc(100cqi / 410)))" }}>
               <ToggleFrame surge={surge} onToggle={toggle} className="relative" />
             </div>
           </div>
         </div>
 
         <p
-          className={`${interRegular.className} mt-[16px] px-[24px] pb-[64px] text-center text-[12px] leading-[18px] font-normal uppercase text-[#bbbbbb] not-italic`}
+          className={`${interRegular.className} mt-[16px] px-[24px] pb-[80px] text-center text-[12px] leading-[18px] font-normal uppercase text-[#bbbbbb] not-italic`}
         >
           Return to the baseline
         </p>

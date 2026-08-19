@@ -284,7 +284,7 @@ function ProductsBenchToVolumeMobile({
       <div className="relative mx-auto w-full" style={{ maxWidth: 393 }}>
 
         {/* ── Header — 4105:7396 (top=30, centred, 350 wide, gap=10) ── */}
-        <div className="flex flex-col items-center gap-[10px] px-[21px] pt-[30px]">
+        <div className="flex flex-col items-center gap-[10px] px-[21px] pt-[80px]">
           <TagBadge
             label="From eval to production"
             width={190}
@@ -320,7 +320,7 @@ function ProductsBenchToVolumeMobile({
         </div>
 
         {/* ── Cards — 4105:7737 (355 wide, gap=12) ── */}
-        <div className="mx-auto mt-[24px] flex w-[355px] flex-col gap-[12px] pb-[30px]">
+        <div className="mx-auto mt-[24px] flex w-[355px] flex-col gap-[12px] pb-[80px]">
           {cards.map((card) => (
             <MobileBenchCard key={card.nodeId} card={card} />
           ))}

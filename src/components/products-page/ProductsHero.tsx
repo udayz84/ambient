@@ -43,6 +43,7 @@ export function ProductsHero({ data }: { data?: any }) {
     href: data?.secondary_button?.href ?? FALLBACK_SECONDARY.href,
   };
   const chipsetImage = mediaUrl(data?.chipset_image);
+  const chipsetImageMobile = mediaUrl(data?.chipset_image_mobile) || chipsetImage;
   const strapiTags = Array.isArray(data?.tags) ? data.tags : [];
   return (
     <>
@@ -92,7 +93,7 @@ export function ProductsHero({ data }: { data?: any }) {
         subtitle={subtitle}
         primary={primary}
         secondary={secondary}
-        chipsetImage={chipsetImage}
+        chipsetImage={chipsetImageMobile}
       />
     </>
   );
@@ -328,7 +329,7 @@ function ProductsHeroMobile({
       className="relative -mt-[78px] w-full bg-black min-[1024px]:hidden"
       aria-label="Products"
     >
-      <div className="relative flex w-full flex-col pt-[100px] pb-[56px]">
+      <div className="relative flex w-full flex-col pt-[120px] pb-[80px]">
         {/* Background chip image */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           {chipsetImage ? (

@@ -147,7 +147,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
       {/* MOBILE (<1024px) — stacked header + swipeable card strip */}
       <div className="relative z-10 w-full min-[1024px]:hidden">
         <SectionBackdrop />
-        <div className="relative flex flex-col items-center gap-[20px] px-[24px] pt-[56px]">
+        <div className="relative flex flex-col items-center gap-[20px] px-[24px] pt-[80px]">
           <TagBadge
             label={BADGE_TEXT}
             width={220}
@@ -175,16 +175,16 @@ export function ProductsFeatures({ data }: { data?: any }) {
           </p>
         </div>
 
-        <div className="relative mt-[40px] flex snap-x snap-mandatory gap-[24px] overflow-x-auto px-[24px] pb-[8px]">
+        <div className="relative mt-[40px] flex snap-x snap-mandatory gap-[24px] overflow-x-auto px-[24px] pb-[8px] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {featureCards.map((card) => (
-            <div key={`m-${card.nodeId}`} className="snap-center">
+            <div key={`m-${card.nodeId}`} className="snap-center shrink-0">
               <ProductsFeatureCard card={card} />
             </div>
           ))}
         </div>
 
         <p
-          className={`${interRegular.className} relative mx-auto mt-[64px] max-w-[603.549px] px-[24px] pb-[96px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
+          className={`${interRegular.className} relative mx-auto mt-[64px] max-w-[603.549px] px-[24px] pb-[80px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
         >
           {CAPTION}
         </p>

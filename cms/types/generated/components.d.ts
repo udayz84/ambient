@@ -1327,6 +1327,7 @@ export interface ProductsFeatureCard extends Struct.ComponentSchema {
   };
   attributes: {
     description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -1366,6 +1367,7 @@ export interface ProductsHero extends Struct.ComponentSchema {
   attributes: {
     chipset_image: Schema.Attribute.Media;
     chipset_image_alt: Schema.Attribute.String;
+    chipset_image_mobile: Schema.Attribute.Media;
     primary_button: Schema.Attribute.Component<'shared.button', false>;
     secondary_button: Schema.Attribute.Component<'shared.button', false>;
     subtitle: Schema.Attribute.Text;

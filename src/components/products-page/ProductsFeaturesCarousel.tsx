@@ -176,7 +176,7 @@ export function ProductsFeaturesCarousel({
                   transition: "transform 1000ms ease-out",
                 }}
               >
-                <ProductsFeatureCard card={card} />
+                <ProductsFeatureCard card={card} isSpread={index === 1} />
               </div>
             </div>
           );

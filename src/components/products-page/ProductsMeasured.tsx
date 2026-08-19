@@ -746,7 +746,7 @@ export function ProductsMeasured({ data }: { data?: any }) {
         <div className="relative mx-auto w-full" style={{ maxWidth: 393 }}>
 
           {/* ── Header — 3567:4337 (top=30, centred, 350 wide, gap=10) ── */}
-          <div className="flex flex-col items-center gap-[10px] px-[21px] pt-[30px]">
+          <div className="flex flex-col items-center gap-[10px] px-[21px] pt-[80px]">
             <TagBadge
               label={menuLabel}
               width={130}
@@ -799,7 +799,7 @@ export function ProductsMeasured({ data }: { data?: any }) {
           </div>
 
           {/* ── CTA column — 4087:9003 (240 wide, gap=14) ── */}
-          <div className="mx-auto mt-[32px] flex w-[240px] flex-col gap-[14px] pb-[32px]">
+          <div className="mx-auto mt-[32px] flex w-[240px] flex-col gap-[14px] pb-[80px]">
             {/* Primary — 240×48 */}
             <a
               href={primary.href}

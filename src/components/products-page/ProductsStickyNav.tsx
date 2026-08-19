@@ -64,7 +64,7 @@ export function ProductsStickyNav() {
 
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 z-50 flex w-full flex-col items-center justify-end px-4 pb-8 pt-24 transition-all duration-500 pointer-events-none ${
+      className={`fixed bottom-0 left-0 right-0 z-50 hidden min-[1024px]:flex w-full flex-col items-center justify-end px-4 pb-8 pt-24 transition-all duration-500 pointer-events-none ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
     >
