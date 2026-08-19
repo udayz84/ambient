@@ -27,6 +27,9 @@
     "node": ">=20.0.0",
     "npm": ">=6.0.0"
   },
+  "overrides": {
+    "@strapi/design-system": "2.2.4"
+  },
   "strapi": {
     "uuid": "ambient-cms-0000-0000-0000-000000000001"
   }

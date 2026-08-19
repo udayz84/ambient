@@ -1391,5 +1391,33 @@
     "url": "/uploads/Chip_Image_2f1669b151.png",
     "name": "Chip Image.png",
     "sourcePath": "mobile/career/Chip Image.png"
+  },
+  "ba1c87f7cb88948de1a5f9559de442718b9191ea": {
+    "id": 402,
+    "documentId": "uxuk8v4dvnqsffh1i8xgeh8r",
+    "url": "/uploads/social_linkedin_9226f0b9a0.svg",
+    "name": "social-linkedin.svg",
+    "sourcePath": "footer/social-linkedin.svg"
+  },
+  "40b25f232367508e2868d4a030a7d01a16cdde74": {
+    "id": 403,
+    "documentId": "mj7iu8zldh4anysaq669scht",
+    "url": "/uploads/social_x_789524a359.svg",
+    "name": "social-x.svg",
+    "sourcePath": "footer/social-x.svg"
+  },
+  "ef529ad5fb3bde7b1c6a6056e4cbbbe24bd4b9b2": {
+    "id": 404,
+    "documentId": "dcvwrb4p8l3gx9lhmt6w9kqp",
+    "url": "/uploads/social_youtube_93aedf8f7a.svg",
+    "name": "social-youtube.svg",
+    "sourcePath": "footer/social-youtube.svg"
+  },
+  "ddc754d81745de04d6c3775cfd014f02390af92c": {
+    "id": 405,
+    "documentId": "hgsszqi1ep5k9q9efqjbm9h8",
+    "url": "/uploads/3minds_730f2a9f80.png",
+    "name": "3minds.png",
+    "sourcePath": "footer/3minds.png"
   }
 }

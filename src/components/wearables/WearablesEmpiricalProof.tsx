@@ -351,87 +351,174 @@ function WorkloadCard({ data }: { data?: any }) {
   );
 }
 
-/* ── Bottom Row: ECG Cards ───────────────────────────────────── */
+/* ── Bottom Row: ECG Cards (Figma 4016:3927) ──────────────────── */
+
+/** Figma frames — per-card image geometry/flip/overlay (4495-series exact). */
+const ECG_FRAMES = [
+  {
+    left: 17, top: -21.34, width: 283.436, height: 283.436, flip: false,
+    overlay:
+      "linear-gradient(185.76783545534857deg, rgb(0, 0, 0) 6.3744%, rgba(0, 0, 0, 0) 20.894%)",
+  },
+  {
+    left: 99, top: 19, width: 226, height: 248, flip: false,
+    overlay:
+      "linear-gradient(182.2900546834888deg, rgba(0, 0, 0, 0) 92.004%, rgb(0, 0, 0) 97.525%), linear-gradient(186.32495523424234deg, rgb(0, 0, 0) 6.3744%, rgba(0, 0, 0, 0) 20.894%)",
+  },
+  {
+    left: 119.56, top: 49.81, width: 215.806, height: 185.59,
+    overlay: undefined,
+  },
+  {
+    left: 93, top: -1, width: 250, height: 275, flip: false,
+    overlay:
+      "linear-gradient(182.29558921819648deg, rgba(0, 0, 0, 0) 92.004%, rgb(0, 0, 0) 97.525%), linear-gradient(186.3401330835094deg, rgb(0, 0, 0) 6.3744%, rgba(0, 0, 0, 0) 20.894%)",
+  },
+];
+
+const ECG_FALLBACKS = [
+  {
+    badge: "CONTINUOUS AI", badgeWidth: 133, stat: "24/7",
+    title: "Always-on safety detection",
+    description: "Runs assault, anomaly, and motion-event detection continuously on-device, without waiting for a cloud round trip.",
+    image: "/applications/wearables/ecg-card-1.png",
+  },
+  {
+    badge: "POWER EFFICIENCY", badgeWidth: 150, stat: "<1mW",
+    title: "Microwatt-level inference",
+    description: "Keeps AI models active in the background while consuming a fraction of the power required by conventional edge processing.",
+    image: "/applications/wearables/ecg-card-2.png",
+  },
+  {
+    badge: "SMART TRANSMISSION", badgeWidth: 170, stat: "Only on event",
+    title: "BLE/LTE wakes only when needed",
+    description: "The device processes locally first, then activates communication only when a meaningful safety or health event is detected.",
+    image: "/applications/wearables/ecg-card-3.png",
+  },
+  {
+    badge: "LOCAL AI", badgeWidth: 133, stat: "100%",
+    title: "No cloud dependency",
+    description: "Sensitive health and safety signals are processed locally, improving reliability, latency, and user privacy.",
+    image: "/applications/wearables/ecg-card-4.png",
+  },
+];
+
 function EcgCard({
+  index,
   imageSrc,
+  badge,
+  badgeWidth,
   stat,
-  label,
+  title,
+  description,
 }: {
+  index: number;
   imageSrc: string;
+  badge: string;
+  badgeWidth: number;
   stat: string;
-  label: string;
+  title: string;
+  description: string;
 }) {
+  const frame = ECG_FRAMES[index];
+  const statLeft = index === 2 ? 19 : 26;
+  const statTop = index === 2 ? 219 : 216;
+  const descWidth = index === 2 || index === 3 ? 260 : 258;
+  const textBottom = index === 2 ? 14 : 21;
   return (
     <div
-      className="relative h-[292px] w-[301px] shrink-0 bg-gradient-to-b from-[#0c160b] to-[rgba(12,22,11,0)] rounded-[1px]"
+      className="relative min-h-[370px] w-[301px] shrink-0 overflow-clip rounded-[1px] bg-gradient-to-b from-[#0c160b] to-[rgba(12,22,11,0)]"
       data-name="Card"
     >
       <CardAbstractBg />
-      {/* Image */}
+      {/* Image — 4016:3933 / 4016:3954 / 4016:3975 / 4016:3997 */}
       <div
-        className="pointer-events-none absolute left-[calc(50%+35px)] -translate-x-1/2 top-[-8.26px] flex size-[250px] items-center justify-center mix-blend-lighten"
+        className="pointer-events-none absolute mix-blend-lighten"
+        style={{ left: frame.left, top: frame.top, width: frame.width, height: frame.height }}
         aria-hidden
       >
-        <div className="-scale-y-100 flex-none rotate-180">
-          <div className="relative size-[250px] scale-85" data-name="image">
-            <img alt="" src={imageSrc} className="absolute size-full max-w-none object-contain" />
-            <div className="absolute inset-0" style={{ backgroundImage: IMG_OVERLAY_1 }} />
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <img alt="" src={imageSrc} className="absolute inset-0 size-full max-w-none object-contain" />
+        </div>
+        {frame.overlay ? (
+          <div className="absolute inset-0" style={{ backgroundImage: frame.overlay }} />
+        ) : null}
+      </div>
+      {/* Accent image (card 3 only) — 4016:3991 */}
+      {index === 2 ? (
+        <div className="pointer-events-none absolute left-[43px] top-[63px] h-[70px] w-[73px]" aria-hidden>
+          <div className="pointer-events-none absolute inset-0 overflow-hidden">
+            <img
+              alt=""
+              src="/applications/wearables/ecg-card-3-accent.png"
+              className="absolute inset-0 size-full max-w-none object-cover"
+            />
           </div>
         </div>
+      ) : null}
+      {/* Badge — 4016:3934 */}
+      <div
+        className="absolute flex items-center"
+        style={{ left: 14, top: index === 0 ? 16 : 16.1 }}
+      >
+        <Badge label={badge} width={badgeWidth} />
       </div>
-      {/* Badge */}
-      <div className="absolute left-[14px] top-[16px] flex items-center">
-        <Badge label="ECG Accuracy" width={133} />
-      </div>
-      {/* Circular progress */}
-      <div className="absolute left-[16px] top-[148.15px] flex size-[40px] items-center justify-center">
+      {/* Circular progress — 4016:3947 / 4016:3948 */}
+      <div className="absolute left-[16px] top-[164px] flex size-[40px] items-center justify-center">
         <div className="-rotate-90 flex-none">
           <div className="relative size-[40px]">
             <img alt="" src="/applications/wearables/ellipse-1.svg" className="absolute inset-0 block size-full max-w-none" />
           </div>
         </div>
       </div>
-      <div className="absolute left-[16px] top-[148.15px] flex size-[40px] items-center justify-center">
+      <div className="absolute left-[16px] top-[164px] flex size-[40px] items-center justify-center">
         <div className="-rotate-90 flex-none">
           <div className="relative size-[40px]">
             <img alt="" src="/applications/wearables/ellipse-2.svg" className="absolute inset-0 block size-full max-w-none" />
           </div>
         </div>
       </div>
-      {/* Stat */}
+      {/* Stat — 4016:3946 (card 3's long stat scales down to fit the 301px card) */}
       <p
-        className={`${gilroySemiBold.className} absolute top-[200.31px] text-[40px] leading-[normal] text-white whitespace-nowrap not-italic`}
-        style={{ left: "calc(50% - 124.5px)" }}
+        className={`${gilroySemiBold.className} absolute text-white whitespace-nowrap not-italic ${
+          index === 2 ? "text-[30px]" : "text-[40px]"
+        }`}
+        style={{ left: statLeft, top: index === 2 ? 224 : statTop }}
       >
         {stat}
       </p>
-      <p
-        className={`${interRegular.className} absolute left-[17.89px] top-[252.59px] text-[14px] leading-[21px] text-[#f0f0f0] whitespace-nowrap not-italic`}
+      {/* Description — 4016:3943 (bottom-anchored: never clips, grows upward) */}
+      <div
+        className={`${interRegular.className} absolute left-[18px] flex w-[258px] flex-col items-start gap-[6px] font-normal not-italic`}
+        style={{ bottom: textBottom }}
       >
-        {label}
-      </p>
+        <p className="w-full text-[16px] leading-[24px] text-white whitespace-nowrap">{title}</p>
+        <p className="text-[12px] leading-[18px] text-[rgba(255,255,255,0.6)]" style={{ width: descWidth }}>
+          {description}
+        </p>
+      </div>
     </div>
   );
 }
 
-const IMG_187 = "/applications/wearables/img-187.png";
-const IMG_188 = "/applications/wearables/img-188.png";
-const ECG_FALLBACK_STAT = "99.7%";
-const ECG_FALLBACK_LABEL = "clinical graded";
-const ECG_IMAGES = [IMG_187, IMG_188, IMG_187, IMG_188];
-
 /* ── Mobile variants ─────────────────────────────────────────── */
 function EcgCardMobile({
   imageSrc,
+  badge,
+  badgeWidth,
   stat,
-  label,
+  title,
+  description,
 }: {
   imageSrc: string;
+  badge: string;
+  badgeWidth: number;
   stat: string;
-  label: string;
+  title: string;
+  description: string;
 }) {
   return (
-    <div className={`relative h-[240px] w-full shrink-0 ${CARD_BG}`}>
+    <div className={`relative min-h-[290px] w-full shrink-0 ${CARD_BG}`}>
       <CardAbstractBg />
       <Corners
         leftSrc="/applications/wearables/vector-47.svg"
@@ -441,24 +528,22 @@ function EcgCardMobile({
         className="pointer-events-none absolute left-1/2 top-[-12px] flex w-[220px] -translate-x-1/2 items-center justify-center mix-blend-lighten"
         aria-hidden
       >
-        <div className="-scale-y-100 flex-none rotate-180">
-          <div className="relative h-[220px] w-full scale-85">
-            <img alt="" src={imageSrc} className="absolute size-full max-w-none object-contain" />
-            <div className="absolute inset-0" style={{ backgroundImage: IMG_OVERLAY_1 }} />
-          </div>
+        <div className="relative h-[220px] w-full scale-85">
+          <img alt="" src={imageSrc} className="absolute inset-0 size-full max-w-none object-contain" />
+          <div className="absolute inset-0" style={{ backgroundImage: IMG_OVERLAY_1 }} />
         </div>
       </div>
-      <div className="absolute left-[14px] top-[14px]">
-        <Badge label="ECG Accuracy" width={133} />
+      <div className="absolute left-[14px] top-[14px] flex items-center">
+        <Badge label={badge} width={badgeWidth} />
       </div>
-      <div className="absolute left-[14px] top-[120px] flex size-[32px] items-center justify-center">
+      <div className="absolute left-[14px] top-[124px] flex size-[32px] items-center justify-center">
         <div className="-rotate-90 flex-none">
           <div className="relative size-[32px]">
             <img alt="" src="/applications/wearables/ellipse-1.svg" className="absolute inset-0 block size-full max-w-none" />
           </div>
         </div>
       </div>
-      <div className="absolute left-[14px] top-[120px] flex size-[32px] items-center justify-center">
+      <div className="absolute left-[14px] top-[124px] flex size-[32px] items-center justify-center">
         <div className="-rotate-90 flex-none">
           <div className="relative size-[32px]">
             <img alt="" src="/applications/wearables/ellipse-2.svg" className="absolute inset-0 block size-full max-w-none" />
@@ -466,15 +551,18 @@ function EcgCardMobile({
         </div>
       </div>
       <p
-        className={`${gilroySemiBold.className} absolute left-1/2 top-[168px] -translate-x-1/2 text-[32px] leading-[normal] text-white whitespace-nowrap not-italic`}
+        className={`${gilroySemiBold.className} absolute left-[56px] top-[124px] text-[28px] leading-[normal] text-white whitespace-nowrap not-italic`}
       >
         {stat}
       </p>
-      <p
-        className={`${interRegular.className} absolute left-[14px] bottom-[12px] text-[12px] leading-[18px] text-[#f0f0f0] whitespace-nowrap not-italic`}
+      <div
+        className={`${interRegular.className} absolute left-[14px] flex w-[calc(100%-28px)] flex-col items-start gap-[6px] pb-[14px] pt-[178px] font-normal not-italic`}
       >
-        {label}
-      </p>
+        <p className="w-full text-[16px] leading-[24px] text-white">{title}</p>
+        <p className="w-full text-[12px] leading-[18px] text-[rgba(255,255,255,0.6)]">
+          {description}
+        </p>
+      </div>
     </div>
   );
 }
@@ -488,10 +576,14 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
   const dataEcgCards: any[] = Array.isArray(data?.ecg_cards) ? data.ecg_cards : [];
   const ecgCards = Array.from({ length: 4 }).map((_, i) => {
     const c = dataEcgCards[i];
+    const fb = ECG_FALLBACKS[i];
     return {
-      imageSrc: mediaUrl(c?.image) || (ECG_IMAGES[i] ?? IMG_187),
-      stat: c?.stat || ECG_FALLBACK_STAT,
-      label: c?.label || ECG_FALLBACK_LABEL,
+      imageSrc: mediaUrl(c?.image) || fb.image,
+      badge: c?.badge || fb.badge,
+      badgeWidth: fb.badgeWidth,
+      stat: c?.stat || fb.stat,
+      title: c?.title || fb.title,
+      description: c?.description || fb.description,
     };
   });
 
@@ -524,7 +616,7 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
       aria-label="The Empirical Proof"
     >
       {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden w-full max-w-[1440px] min-[1024px]:block h-[1000px]">
+      <div className="relative hidden w-full max-w-[1440px] min-[1024px]:block h-[1078px]">
         {/* Top decorative SVG */}
         <div
           className="pointer-events-none absolute top-[-26.9px] left-1/2 h-[320px] w-[881.616px] -translate-x-1/2"
@@ -570,14 +662,18 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
           <WorkloadCard data={workloadData} />
         </div>
 
-        {/* Bottom row — 4 ECG cards */}
-        <div className="absolute left-1/2 top-[676.1px] flex -translate-x-1/2 gap-[20px]">
+        {/* Bottom row — 4 cards (Figma 4016:3927: 4×301 + 21/21/20 gaps) */}
+        <div className="absolute left-1/2 top-[676.1px] flex -translate-x-1/2 gap-[20.67px]">
           {ecgCards.map((card, i) => (
             <EcgCard
               key={i}
+              index={i}
               imageSrc={card.imageSrc}
+              badge={card.badge}
+              badgeWidth={card.badgeWidth}
               stat={card.stat}
-              label={card.label}
+              title={card.title}
+              description={card.description}
             />
           ))}
         </div>
@@ -715,14 +811,17 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
           </p>
         </div>
 
-        {/* ECG cards (mobile) — 2x2 grid on standard phones, single column on narrow viewports to prevent badge clipping */}
-        <div className="grid w-full grid-cols-1 gap-[12px] min-[360px]:grid-cols-2">
+        {/* ECG cards (mobile) — single column; content-rich cards need full width */}
+        <div className="flex w-full flex-col gap-[12px]">
           {ecgCards.map((card, i) => (
             <EcgCardMobile
               key={i}
               imageSrc={card.imageSrc}
+              badge={card.badge}
+              badgeWidth={card.badgeWidth}
               stat={card.stat}
-              label={card.label}
+              title={card.title}
+              description={card.description}
             />
           ))}
         </div>

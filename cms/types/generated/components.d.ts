@@ -2388,9 +2388,12 @@ export interface WearablesEcgCard extends Struct.ComponentSchema {
     displayName: 'ECG Card';
   };
   attributes: {
+    badge: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
     image: Schema.Attribute.Media<'images'>;
     label: Schema.Attribute.String;
     stat: Schema.Attribute.String;
+    title: Schema.Attribute.String;
   };
 }
 

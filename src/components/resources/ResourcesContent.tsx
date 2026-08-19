@@ -12,7 +12,6 @@ import { getResourcesExtraHeight } from "./resources-layout";
 import { ResourcesArticleCard } from "./ResourcesArticleCard";
 import { Corners } from "../shared/Corners";
 import { GreenCtaButton } from "../contact/contact-shared";
-const scrollArrowLeft = "/applications/nav-arrow-right.svg";
 const DEFAULT_INITIAL_VISIBLE = 6;
 const DEFAULT_LOAD_MORE_COUNT = 3;
 const LOAD_MORE_DELAY_MS = 800;
@@ -110,16 +109,6 @@ export function ResourcesContent({
 
   const currentIndex = categories.findIndex((c) => c.id === activeCategory);
 
-  const handlePrevCategory = () => {
-    const prevIndex = currentIndex > 0 ? currentIndex - 1 : categories.length - 1;
-    selectCategory(categories[prevIndex].id);
-  };
-
-  const handleNextCategory = () => {
-    const nextIndex = currentIndex < categories.length - 1 ? currentIndex + 1 : 0;
-    selectCategory(categories[nextIndex].id);
-  };
-
   return (
     <section
       className="absolute top-[2026px] left-1/2 flex w-[1244px] -translate-x-1/2 flex-col items-center gap-[60px]"
@@ -159,27 +148,10 @@ export function ResourcesContent({
         </div>
       </div>
       <nav
-        className="flex h-[52px] w-full items-center justify-between gap-[9.61px]"
+        className="flex h-[52px] w-full items-center justify-center gap-[9.61px]"
         aria-label="Resource categories"
         data-node-id="2379:1773"
       >
-        <button
-          type="button"
-          className="relative size-[44px] shrink-0 cursor-pointer transition-opacity hover:opacity-80 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.03)]"
-          aria-label="Previous category"
-          onClick={handlePrevCategory}
-          data-node-id="2379:1774"
-        >
-          <Corners />
-          <Image
-            src={scrollArrowLeft}
-            alt=""
-            width={44}
-            height={44}
-            className="block size-full max-w-none rotate-180"
-            aria-hidden
-          />
-        </button>
 
         {categories.map((category, index) => {
           const isActive = activeCategory === category.id;
@@ -218,24 +190,6 @@ export function ResourcesContent({
               : "normal"
           }
         />
-
-        <button
-          type="button"
-          className="relative size-[44px] shrink-0 cursor-pointer transition-opacity hover:opacity-80 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.03)]"
-          aria-label="Next category"
-          onClick={handleNextCategory}
-          data-node-id="2379:1825"
-        >
-          <Corners />
-          <Image
-            src={scrollArrowLeft}
-            alt=""
-            width={44}
-            height={44}
-            className="block size-full max-w-none"
-            aria-hidden
-          />
-        </button>
       </nav>
 
       <div className="flex w-[1236px] flex-col items-center gap-[36px]" data-node-id="2379:1832">

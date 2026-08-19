@@ -9,8 +9,6 @@ import { NewsArticleCard } from "./NewsArticleCard";
 import { type NewsArticle } from "./news-data";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
-const scrollArrowLeft = "/applications/nav-arrow-right.svg";
-
 const ROW_ONE_BG = "bg-[rgba(255,255,255,0.04)]";
 const ROW_TWO_BG = "bg-[rgba(0,0,0,0.04)]";
 
@@ -126,38 +124,12 @@ function NewsFilterBar({
     return () => cancelAnimationFrame(raf);
   }, [activeId]);
 
-  const handlePrevCategory = () => {
-    const prevIndex = currentIndex > 0 ? currentIndex - 1 : pills.length - 1;
-    onSelect(pills[prevIndex].id);
-  };
-
-  const handleNextCategory = () => {
-    const nextIndex = currentIndex < pills.length - 1 ? currentIndex + 1 : 0;
-    onSelect(pills[nextIndex].id);
-  };
-
   return (
     <nav
       ref={navRef}
-      className="flex h-[52px] w-full items-center gap-[9.61px] overflow-x-auto [&::-webkit-scrollbar]:hidden [scrollbar-width:none] min-[1024px]:justify-between min-[1024px]:overflow-visible"
+      className="flex h-[52px] w-full items-center gap-[9.61px] overflow-x-auto [&::-webkit-scrollbar]:hidden [scrollbar-width:none] min-[1024px]:justify-center min-[1024px]:overflow-visible"
       aria-label="News categories"
     >
-      <button
-        type="button"
-        className="relative size-[44px] hidden shrink-0 cursor-pointer transition-opacity hover:opacity-80 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.03)] min-[1024px]:flex"
-        aria-label="Previous category"
-        onClick={handlePrevCategory}
-      >
-        <Corners />
-        <Image
-          src={scrollArrowLeft}
-          alt=""
-          width={44}
-          height={44}
-          className="block size-full max-w-none rotate-180"
-          aria-hidden
-        />
-      </button>
 
       {pills.map((pill, index) => {
         const isActive = activeId === pill.id;
@@ -196,23 +168,6 @@ function NewsFilterBar({
             : "normal"
         }
       />
-
-      <button
-        type="button"
-        className="relative size-[44px] hidden shrink-0 cursor-pointer transition-opacity hover:opacity-80 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.03)] min-[1024px]:flex"
-        aria-label="Next category"
-        onClick={handleNextCategory}
-      >
-        <Corners />
-        <Image
-          src={scrollArrowLeft}
-          alt=""
-          width={44}
-          height={44}
-          className="block size-full max-w-none"
-          aria-hidden
-        />
-      </button>
     </nav>
   );
 }

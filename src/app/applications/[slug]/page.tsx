@@ -36,7 +36,7 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
       "hero",
       "paradigm",
       "subconscious",
-      "empirical_proof",
+      { section: "empirical_proof", nested: ["ecg_cards"] },
       { section: "lab_to_product", nested: ["cards"] },
       "footer_accent",
       "seo",

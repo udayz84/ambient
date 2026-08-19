@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
@@ -148,10 +148,20 @@ export function DeveloperPipeline({ data }: { data?: any }) {
     };
   });
 
+  const pipelineHeight = activeIndex !== -1 ? 1291 : 979;
+  const offset = pipelineHeight - 1291; // 0 when open, -312 when closed
+
+  useEffect(() => {
+    document.documentElement.style.setProperty("--developer-pipeline-offset", `${offset}px`);
+    return () => {
+      document.documentElement.style.removeProperty("--developer-pipeline-offset");
+    };
+  }, [offset]);
+
   return (
     <div
       className="absolute"
-      style={{ left: 0, top: 1582, width: 1440, height: 1291 }}
+      style={{ left: 0, top: 1582, width: 1440, height: pipelineHeight, transition: "height 300ms ease-in-out" }}
       data-node-id="4577:11008"
       data-name="Model Forge - Train"
     >

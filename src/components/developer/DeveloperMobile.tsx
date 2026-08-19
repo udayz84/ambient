@@ -543,6 +543,23 @@ function DeveloperComingSoonMobile({ data }: { data?: any }) {
     <section className="relative flex w-full flex-col items-center overflow-hidden px-[19px] pt-[30px]">
       {/* Background image — 4035:25440 (opacity-60, radial fade) */}
       <div aria-hidden className="absolute inset-0 -z-10">
+        {/* Ellipse glow for mobile */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-[50%] top-[45%] -translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
+        >
+          <div
+            style={{
+              width: "450px",
+              height: "600px",
+              transform: "rotate(90deg)",
+              borderRadius: "600px",
+              background: "var(--Colors-Neutral-1000, #000)",
+              filter: "blur(60px)",
+            }}
+          />
+        </div>
+
         <div className="absolute left-[calc(50%+24px)] top-0 h-full w-[639px] max-w-none -translate-x-1/2 opacity-60">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -555,23 +572,6 @@ function DeveloperComingSoonMobile({ data }: { data?: any }) {
             style={{
               backgroundImage:
                 "radial-gradient(ellipse at 50% 47.9%, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%)",
-            }}
-          />
-        </div>
-
-        {/* Ellipse glow for mobile */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute left-[50%] top-[45%] -translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
-        >
-          <div
-            style={{
-              width: "450px",
-              height: "600px",
-              transform: "rotate(90deg)",
-              borderRadius: "600px",
-              background: "#000",
-              filter: "blur(60px)",
             }}
           />
         </div>

@@ -179,7 +179,11 @@ export async function getNavbar<T = unknown>(): Promise<T | null> {
 /** Fetch the footer single type (footer + newsletter + contact_details + default_seo). */
 export async function getFooter<T = unknown>(): Promise<T | null> {
   const sections: PopulateSection[] = [
-    { section: "footer", fields: ["crafted_by_logo", "background_image"], nested: ["social_links"] },
+    {
+      section: "footer",
+      fields: ["crafted_by_logo", "background_image"],
+      nested: ["social_links", "nav_sections.links", "legal_links"],
+    },
     "newsletter",
     "contact_details",
     "default_seo",

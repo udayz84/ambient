@@ -34,14 +34,15 @@ export function ScaledCanvas({
   const centered = scale === 1;
 
   return (
-    <div className="relative w-full" style={{ height: height * scale }}>
+    <div className="relative w-full" style={{ height: `calc((${height}px + var(--developer-pipeline-offset, 0px)) * ${scale})`, transition: "height 300ms ease-in-out" }}>
       <div
         className={`absolute top-0 bg-black ${centered ? "left-1/2" : "left-0"}`}
         style={{
           width,
-          height,
+          height: `calc(${height}px + var(--developer-pipeline-offset, 0px))`,
           transform: centered ? "translateX(-50%)" : `scale(${scale})`,
           transformOrigin: "top left",
+          transition: "height 300ms ease-in-out",
         }}
       >
         {children}

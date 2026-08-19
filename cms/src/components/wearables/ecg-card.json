@@ -12,6 +12,15 @@
     "label": {
       "type": "string"
     },
+    "badge": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
     "image": {
       "type": "media",
       "multiple": false,
