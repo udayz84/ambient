@@ -86,7 +86,7 @@ export function CareersDna({ data }: { data?: any }) {
         </div>
 
         <div
-          className="flex w-[1204px] items-end justify-center gap-[20px]"
+          className="flex w-[1204px] items-center justify-center gap-[20px]"
           data-node-id="2379:8854"
         >
           <div className="flex w-[389.999px] flex-col gap-[40px]" data-node-id="2379:8855">
@@ -164,7 +164,7 @@ function CareersDnaChipImage({
   return (
     <div
       ref={ref}
-      className={`relative h-[400px] w-[386px] flex shrink-0 items-center justify-center ${
+      className={`relative h-[500px] w-[386px] flex shrink-0 items-center justify-center ${
         isVisible ? CHIP_FADE_IN_CLASS : "translate-y-[25px] opacity-0"
       }`}
       data-node-id="2379:8873"
@@ -175,7 +175,7 @@ function CareersDnaChipImage({
         <img
           src={chipObject}
           alt=""
-          className="w-full max-h-[449px] object-contain scale-[1.2]"
+          className="w-full h-auto max-h-[600px] object-contain"
         />
       ) : null}
     </div>

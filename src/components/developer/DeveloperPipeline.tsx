@@ -144,7 +144,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
       ...stage,
       label: tabData?.label || tabData?.title || stage.label,
       subtitle: tabData?.subtitle || tabData?.description || stage.subtitle,
-      flowImage: mediaUrl(tabData?.image) || mediaUrl(tabData?.media) || stage.flowImage,
+      flowImage: mediaUrl(tabData?.flow_image) || mediaUrl(tabData?.image) || mediaUrl(tabData?.media) || stage.flowImage,
     };
   });
 
