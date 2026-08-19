@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { mediaUrl } from "@/lib/strapi";
 
 /* =========================================================================
    CONSTANTS
@@ -143,7 +144,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
       ...stage,
       label: tabData?.label || tabData?.title || stage.label,
       subtitle: tabData?.subtitle || tabData?.description || stage.subtitle,
-      flowImage: tabData?.image?.url || tabData?.media?.url || (i === 0 ? "/Train Flow 1.png" : stage.flowImage),
+      flowImage: mediaUrl(tabData?.image) || mediaUrl(tabData?.media) || stage.flowImage,
     };
   });
 

@@ -42,8 +42,8 @@ const TOP_IMAGES = [
   { nodeId: "3510:539", left: 125.64, top: 260, w: 129, h: 123, src: "/technology/graph-chip-1.png", fit: "object-contain" },
   { nodeId: "3515:539", left: 353.5, top: 223, w: 129, h: 123, src: "/technology/graph-chip-2.png", fit: "object-contain" },
   { nodeId: "3515:541", left: 603.52, top: 193, w: 129, h: 123, src: "/technology/graph-chip-3.png", fit: "object-contain" },
-  { nodeId: "3522:530", left: 836.94, top: 185, w: 158.119, h: 90.354, src: "/technology/graph-device-1.png", fit: "object-cover" },
-  { nodeId: "3522:533", left: 1106.52, top: 171.82, w: 141.252, h: 70.626, src: "/technology/graph-device-2.png", fit: "object-cover" },
+  { nodeId: "3522:530", left: 817.17, top: 162.41, w: 197.65, h: 112.94, src: "/technology/graph-device-1.png", fit: "object-contain" },
+  { nodeId: "3522:533", left: 1050.02, top: 115.32, w: 254.25, h: 127.13, src: "/technology/graph-device-2.png", fit: "object-contain" },
 ];
 
 /** Dashed vertical guide lines — horizontal svgs rotated 90° (3031:525/571/581/591/610). */
