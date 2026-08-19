@@ -155,7 +155,7 @@ function ProductsModelForgeDesktop({
   subfeatures: any[];
 }) {
   return (
-    <div className="mx-auto flex w-full max-w-[1256px] flex-col items-center pb-[120px]">
+    <div className="mx-auto flex w-full max-w-[1256px] flex-col items-center pt-[120px] pb-[120px]">
       {/* Section title — 2917:1333 (centered, w=739) */}
       <div
         className="flex flex-col items-center gap-[24px]"
