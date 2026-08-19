@@ -1,7 +1,7 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
@@ -399,6 +399,19 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
   const [selected, setSelected] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  /* Mobile: start the 1440px canvas centered so the product (canvas x≈720)
+     is in view — the visual is authored in desktop coordinates. */
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const center = () => {
+      el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
+    };
+    center();
+    window.addEventListener("resize", center);
+    return () => window.removeEventListener("resize", center);
+  }, []);
+
   const scrollLeft = () => {
     if (scrollRef.current) scrollRef.current.scrollBy({ left: -340, behavior: "smooth" });
   };
@@ -503,8 +516,10 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
           </p>
         </div>
 
-        {/* --- Options bar (interactive) --- */}
-        <ContinuumOptionsBar selected={selected} onSelect={setSelected} />
+        {/* --- Options bar (interactive) — 1244px centered = left 98 on 1440 --- */}
+        <div className="absolute left-1/2 top-[166px] -translate-x-1/2">
+          <ContinuumOptionsBar selected={selected} onSelect={setSelected} />
+        </div>
 
         {/* --- Product visual (crossfade on switch) --- */}
         <AnimatePresence initial={false}>
@@ -624,13 +639,26 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
           </p>
         </div>
 
-        {/* Horizontal scroll for desktop visual */}
+        {/* Options bar — horizontally scrollable (1244px content) */}
+        <div
+          className="cont-m-scroll relative z-10 mt-[24px] w-full overflow-x-auto"
+          data-node-id="4032:5790"
+        >
+          <div className="w-[1244px]">
+            <ContinuumOptionsBar selected={selected} onSelect={setSelected} />
+          </div>
+        </div>
+
+        {/* Product visual — window into the 1440×808 canvas (y 166→710) */}
         <div
           ref={scrollRef}
-          className="cont-m-scroll relative h-[490px] w-full overflow-x-auto overflow-y-hidden"
+          className="cont-m-scroll relative h-[544px] w-full overflow-x-auto overflow-y-hidden"
           data-node-id="4032:11892"
         >
-          <div className="relative h-[808px] w-[1440px]">
+          <div
+            className="absolute left-0 top-0 h-[808px] w-[1440px]"
+            style={{ transform: "translateY(-166px)" }}
+          >
             <AnimatePresence initial={false}>
               <motion.div
                 key={selected}
@@ -643,38 +671,41 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
                 <Visual />
               </motion.div>
             </AnimatePresence>
-            {/* Card on mobile */}
-            <div
-              className="absolute left-1/2 top-[642px] h-[147px] w-[325px] -translate-x-1/2"
-              data-node-id="4574:7589"
-              data-name="cARD"
-            >
-              <div className="absolute left-[0.79px] top-[0.89px] h-[146.11px] w-[323.807px]">
-                <img alt="" aria-hidden src={CARD_BG} className="absolute inset-0 block size-full max-w-none" />
-              </div>
-              <AnimatePresence initial={false} mode="wait">
-                <motion.div
-                  key={selected}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2, ease: "easeInOut" }}
-                  className="absolute left-1/2 top-[calc(50%+1px)] flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-[10px] p-[12px] text-center text-white not-italic"
-                >
-                  <p className={`${gilroyMedium.className} min-w-full w-[min-content] text-[26px] font-medium leading-[29px]`}>
-                    {activeCard.title}
-                  </p>
-                  <p className={`${interRegular.className} w-[244px] text-[16px] font-normal leading-[24px] opacity-65`}>
-                    {renderBody(activeCard.body)}
-                  </p>
-                </motion.div>
-              </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Card (below the visual — always fully visible) */}
+        <div className="relative z-10 mt-[8px] flex w-full justify-center px-[21px]">
+          <div
+            className="relative h-[147px] w-[325px] shrink-0"
+            data-node-id="4574:7589"
+            data-name="cARD"
+          >
+            <div className="absolute left-[0.79px] top-[0.89px] h-[146.11px] w-[323.807px]">
+              <img alt="" aria-hidden src={CARD_BG} className="absolute inset-0 block size-full max-w-none" />
             </div>
+            <AnimatePresence initial={false} mode="wait">
+              <motion.div
+                key={selected}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2, ease: "easeInOut" }}
+                className="absolute left-1/2 top-[calc(50%+1px)] flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-[10px] p-[12px] text-center text-white not-italic"
+              >
+                <p className={`${gilroyMedium.className} min-w-full w-[min-content] text-[26px] font-medium leading-[29px]`}>
+                  {activeCard.title}
+                </p>
+                <p className={`${interRegular.className} w-[244px] text-[16px] font-normal leading-[24px] opacity-65`}>
+                  {renderBody(activeCard.body)}
+                </p>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
 
         {/* Navigation arrows */}
-        <div className="mt-[20px] flex gap-[20px]" data-node-id="4032:5855">
+        <div className="relative z-10 mt-[20px] flex gap-[20px] pb-[40px]" data-node-id="4032:5855">
           <button type="button" onClick={scrollLeft} className="relative size-[44px] shrink-0 cursor-pointer" aria-label="Previous">
             <img src={NAV_ARROW_LEFT} alt="" className="block size-full max-w-none" aria-hidden />
           </button>

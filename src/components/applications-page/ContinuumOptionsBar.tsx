@@ -62,7 +62,7 @@ export function ContinuumOptionsBar({
 }) {
   return (
     <div
-      className="absolute left-[98px] top-[166px] flex h-[52px] w-[1244px] items-center justify-between"
+      className="relative flex h-[52px] w-[1244px] items-center justify-between"
       data-node-id="4574:7552"
       data-name="Options"
       role="tablist"
