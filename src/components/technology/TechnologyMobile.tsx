@@ -82,7 +82,7 @@ export function TechnologyMobile({ data }: { data?: any }) {
 
         {/* Edge-to-Edge Image */}
         <div 
-          className="relative mt-[32px] w-full"
+          className="relative mt-[32px] w-full h-[184px]"
           style={{
             maskImage: "radial-gradient(ellipse at center, black 70%, transparent 100%)",
             WebkitMaskImage: "radial-gradient(ellipse at center, black 70%, transparent 100%)",
@@ -92,9 +92,8 @@ export function TechnologyMobile({ data }: { data?: any }) {
             <Image
               src={mediaUrl(data?.image) as string}
               alt={data?.image_alt || ""}
-              width={389}
-              height={184}
-              className="w-full h-auto object-cover"
+              fill
+              className="object-contain"
               sizes="100vw"
             />
           ) : null}

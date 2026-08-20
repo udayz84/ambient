@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
@@ -248,11 +249,15 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
           {/* background */}
           <div className="absolute left-1/2 top-1/2 h-[536.9px] w-[417.67px] -translate-x-1/2 -translate-y-1/2 overflow-hidden">
             {chipBgSrc && (
-              /* eslint-disable-next-line @next/next/no-img-element */
-              <img
+              <Image
                 src={chipBgSrc}
                 alt=""
-                className="absolute left-0 top-[5.31%] h-[89.37%] w-full max-w-none"
+                fill
+                className="object-contain"
+                sizes="418px"
+                quality={100}
+                unoptimized
+                priority
               />
             )}
           </div>
@@ -433,8 +438,16 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
           <div className="relative h-[296px] w-[286px]">
             <div className="absolute left-1/2 top-1/2 h-[333px] w-[321px] -translate-x-1/2 -translate-y-1/2 overflow-hidden">
               {chipBgSrc && (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img src={chipBgSrc} alt="" aria-hidden className="absolute left-[-10.68%] top-[-4.24%] h-[108.47%] w-[121.37%] max-w-none" />
+                <Image 
+                  src={chipBgSrc} 
+                  alt="" 
+                  fill 
+                  className="object-contain" 
+                  sizes="321px"
+                  quality={100}
+                  unoptimized
+                  priority
+                />
               )}
             </div>
           </div>

@@ -130,7 +130,7 @@ export function TechnologyVisual({ data }: { data?: any } = {}) {
               src={mediaUrl(data?.image) as string}
               alt={data?.image_alt || ""}
               fill
-              className="object-bottom"
+              className="object-contain object-bottom"
               sizes="732px"
             />
           ) : null}

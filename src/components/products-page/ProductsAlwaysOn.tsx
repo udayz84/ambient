@@ -387,17 +387,18 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
           className="bg-black h-[833px] relative mx-auto w-[1440px]"
           data-node-id="3708:462"
         >
-          {/* Chip visual — subconscious (baseline) render, always underneath */}
-          <div
-            className="-translate-x-1/2 absolute h-[810.43px] left-1/2 top-[32.55px] w-[1450px] max-w-[120vw]"
-            data-name="ChatGPT Image Jul 2, 2026, 12_54_47 PM 1"
-          >
-            <img
-              alt=""
-              className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
-              src={BG_SUBCONSCIOUS}
-            />
-          </div>
+          {/* Chip visual — subconscious (baseline) render, always underneath.
+              Calibrated via structural (edge-map) correlation of the two
+              source images: baseline maps onto the surge canvas at uniform
+              scale 0.992 with offset (-12, +120) full-res px. Derived CSS
+              from the surge layer box (1450 x 832.553 at left -5, top 0):
+              the crossfade reads as one chip changing state. */}
+          <img
+            alt=""
+            src={BG_SUBCONSCIOUS}
+            className="absolute max-w-none pointer-events-none"
+            style={{ left: "-11.04px", top: "59.95px", width: "1438.35px", height: "749.22px" }}
+          />
           {/* Chip visual — surge render, fades smoothly over the baseline */}
           <div
             className="-translate-x-1/2 absolute h-[832.553px] left-1/2 top-0 w-[1450px] max-w-[120vw] transition-opacity duration-[800ms] ease-in-out will-change-[opacity]"
@@ -503,12 +504,14 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
           <OnChip label={`HOST  CPU`} width={157} icon="cpu" active={surge} className="relative" />
         </div>
 
-        {/* Chip visual */}
+        {/* Chip visual — baseline underneath (correlation-calibrated to the
+            surge render, same transform as desktop), surge crossfades on top */}
         <div className="relative mt-[16px] aspect-[1440/832.55] w-full overflow-hidden">
           <img
             alt=""
             src={BG_SUBCONSCIOUS}
-            className="absolute inset-0 size-full object-cover"
+            className="absolute max-w-none"
+            style={{ left: "-0.42%", top: "7.2%", width: "99.2%", height: "90%" }}
           />
           <img
             alt=""

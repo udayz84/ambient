@@ -1,9 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { gilroyMedium } from "../hero/fonts";
 
-const NAV_ITEMS = [
+type NavItem = { label: string; id: string };
+
+/** Fallback when the sticky_nav component is empty/missing in Strapi. */
+const FALLBACK_ITEMS: NavItem[] = [
   { label: "Power VS Intelligences", id: "features" },
   { label: "Always On. Never asleep", id: "always-on" },
   { label: "Built for all", id: "use-cases" },
@@ -12,7 +15,15 @@ const NAV_ITEMS = [
   { label: "Full Picture", id: "full-picture" },
 ];
 
-export function ProductsStickyNav() {
+export function ProductsStickyNav({ items }: { items?: any }) {
+  const NAV_ITEMS = useMemo<NavItem[]>(() => {
+    const fromPage = Array.isArray(items)
+      ? items
+          .filter((i: any) => typeof i?.label === "string" && typeof i?.id === "string" && i.label && i.id)
+          .map((i: any) => ({ label: i.label, id: i.id }))
+      : [];
+    return fromPage.length > 0 ? fromPage : FALLBACK_ITEMS;
+  }, [items]);
   const [activeId, setActiveId] = useState<string>("");
   const [isVisible, setIsVisible] = useState(false);
 
@@ -42,15 +53,15 @@ export function ProductsStickyNav() {
           }
       }
       
-      if (!current) {
-         // Default to the first section if we are above it
-         current = NAV_ITEMS[0].id;
-      }
-      
-      setActiveId(current);
-      
-      // Determine visibility
-      if (window.scrollY > 300 && current !== "full-picture") {
+       if (!current) {
+          // Default to the first section if we are above it
+          current = NAV_ITEMS[0].id;
+       }
+
+       setActiveId(current);
+
+       // Determine visibility — hide on the last section (footer merge zone)
+       if (window.scrollY > 300 && current !== NAV_ITEMS[NAV_ITEMS.length - 1].id) {
          setIsVisible(true);
       } else {
          setIsVisible(false);
@@ -60,7 +71,7 @@ export function ProductsStickyNav() {
     window.addEventListener("scroll", handleScroll);
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [NAV_ITEMS]);
 
   return (
     <div

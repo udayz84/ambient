@@ -219,14 +219,16 @@ function LegacyCard({
   label,
   description,
   computeSrc,
+  className = "absolute left-[134px] top-[272px]",
 }: {
   label: string;
   description: string;
   computeSrc: string;
+  className?: string;
 }) {
   return (
     <div
-      className="absolute left-[134px] top-[272px] h-[380px] w-[500px] bg-[rgba(128,128,128,0.1)]"
+      className={`${className} h-[380px] w-[500px] bg-[rgba(128,128,128,0.1)]`}
       data-node-id="3322:2581"
       data-name="Frame 1984079539"
     >
@@ -333,16 +335,18 @@ function ACubeCard({
   cubeSrc,
   statValue,
   statDesc,
+  className = "absolute left-[754px] top-[272.05px]",
 }: {
   label: string;
   description: string;
   cubeSrc: string;
   statValue: string;
   statDesc: string;
+  className?: string;
 }) {
   return (
     <div
-      className="absolute left-[754px] top-[272.05px] h-[380px] w-[575px] overflow-clip border border-solid border-[rgba(255,247,247,0.16)] bg-top-left"
+      className={`${className} h-[380px] w-[575px] overflow-clip border border-solid border-[rgba(255,247,247,0.16)] bg-top-left`}
       style={{ backgroundImage: ACUBE_CARD_BG, backgroundSize: ACUBE_BG_SIZE }}
       data-node-id="3328:978"
       data-name="card"
@@ -483,10 +487,10 @@ function ChevronDecor() {
   );
 }
 
-function LegacyStatsPanel({ rows }: { rows: StatRow[] }) {
+function LegacyStatsPanel({ rows, className = "absolute top-[650px] left-[134px]" }: { rows: StatRow[]; className?: string }) {
   return (
     <div
-      className="absolute top-[650px] left-[134px] h-[170px] w-[500px] bg-[rgba(128,128,128,0.1)]"
+      className={`${className} h-[170px] w-[500px] bg-[rgba(128,128,128,0.1)]`}
       data-node-id="3329:1036"
       data-name="Frame 1984079540"
     >
@@ -503,10 +507,10 @@ function LegacyStatsPanel({ rows }: { rows: StatRow[] }) {
   );
 }
 
-function ACubeStatsPanel({ rows }: { rows: StatRow[] }) {
+function ACubeStatsPanel({ rows, className = "absolute top-[652.05px] left-[754px]" }: { rows: StatRow[]; className?: string }) {
   return (
     <div
-      className="absolute top-[652.05px] left-[754px] h-[164px] w-[575px] border border-solid border-[rgba(255,247,247,0.16)] bg-top-left"
+      className={`${className} h-[164px] w-[575px] border border-solid border-[rgba(255,247,247,0.16)] bg-top-left`}
       style={{ backgroundImage: ACUBE_PANEL_BG, backgroundSize: ACUBE_BG_SIZE }}
       data-node-id="3329:1079"
       data-name="card"
@@ -827,181 +831,29 @@ export function TechnologyPageProblem({ data }: { data?: any } = {}) {
             </div>
 
             {/* 3572:7689 — cards */}
-            <div className="flex w-full flex-col gap-[15px]" data-node-id="3572:7689">
-              {/* 3572:7690 — A-Cube group */}
-              <div className="relative h-[360px] w-full" data-node-id="3572:7690">
-                <div
-                  className="absolute top-0 left-0 h-[233.948px] w-[354px] overflow-clip border-[0.616px] border-solid border-[rgba(255,247,247,0.16)] bg-top-left"
-                  style={{ backgroundImage: MOBILE_ACUBE_CARD_BG, backgroundSize: MOBILE_ACUBE_BG_SIZE }}
-                  data-node-id="3572:7708"
-                  data-name="card"
-                >
-                  <div
-                    className="absolute bottom-[65.73px] left-[206.19px] flex h-[146.147px] w-[253.135px] items-center justify-center"
-                    data-node-id="3572:7709"
-                  >
-                    <div className="-rotate-150 -skew-x-30 flex-none scale-y-87">
-                      <div className="relative h-[167.251px] w-[125.044px]" data-name="Filler Liner">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={FILLER_LINER} alt="" className="absolute inset-0 block size-full max-w-none" />
-                      </div>
-                    </div>
-                  </div>
-                  <MobileACubeCardCorners />
-                  <div
-                    className="absolute top-[81px] left-[169px] h-[151px] w-[162px]"
-                    data-node-id="3572:7725"
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={acube.image}
-                      alt=""
-                      className="absolute inset-0 size-full max-w-none object-bottom pointer-events-none"
-                    />
-                  </div>
-                  <div
-                    className="absolute bottom-[-63px] left-[3.86px] flex h-[138.201px] w-[239.372px] items-center justify-center"
-                    data-node-id="3572:7726"
-                  >
-                    <div className="-skew-x-30 flex-none rotate-30 scale-y-87">
-                      <div className="relative h-[151.359px] w-[125.044px]" data-name="Filler Liner">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={FILLER_LINER_1} alt="" className="absolute inset-0 block size-full max-w-none" />
-                      </div>
-                    </div>
-                  </div>
-                  <p
-                    className={`${gilroySemiBold.className} absolute top-[132.86px] left-[17.85px] w-[120.052px] bg-clip-text text-[30px] leading-[1.2] font-semibold text-transparent not-italic [word-break:break-word]`}
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(147.43deg, rgb(255, 255, 255) 29.352%, rgba(115, 115, 115, 0.5) 98.158%)",
-                      WebkitBackgroundClip: "text",
-                      backgroundClip: "text",
-                    }}
-                    data-node-id="3572:7738"
-                  >
-                    {statValue}
-                  </p>
-                  <div
-                    className="absolute top-[15px] left-[18px] flex w-[313px] flex-col items-start justify-center gap-[4.925px] border-b-[0.616px] border-solid border-[rgba(255,255,255,0.1)] pb-[6.773px] not-italic"
-                    data-node-id="3572:7739"
-                  >
-                    <p
-                      className={`${gilroyMedium.className} shrink-0 text-center text-[24px] leading-[23.395px] font-medium whitespace-nowrap text-white`}
-                      data-node-id="3572:7740"
-                    >
-                      {acube.label}
-                    </p>
-                    <p
-                      className={`${interRegular.className} w-full shrink-0 text-[12px] leading-[normal] font-normal text-[#8e8e8e] [word-break:break-word]`}
-                      data-node-id="3572:7741"
-                    >
-                      {acube.description}
-                    </p>
-                  </div>
-                  <p
-                    className={`${interRegular.className} absolute top-[173px] left-[16px] w-[142px] text-[12px] leading-[15px] font-normal text-[#e2f9da] not-italic [word-break:break-word]`}
-                    data-node-id="3572:7742"
-                  >
-                    {statDesc}
-                  </p>
-                </div>
-                <div
-                  className="absolute top-[234px] left-0 h-[126px] w-[354px] border-[0.616px] border-solid border-[rgba(255,247,247,0.16)] bg-top-left"
-                  style={{ backgroundImage: MOBILE_ACUBE_PANEL_BG, backgroundSize: MOBILE_ACUBE_BG_SIZE }}
-                  data-node-id="3572:7691"
-                  data-name="card"
-                >
-                  <MobileACubePanelCorners />
-                  <MobileStatsRows rows={acubeRows} topClassName="top-[21.13px]" efficiency="acube" />
-                </div>
+            <div className="flex w-full flex-col items-center gap-[40px] pt-[20px]" data-node-id="3572:7689">
+              {/* Scaled A-Cube Card */}
+              <div className="relative w-[575px] h-[544px] scale-[0.6] sm:scale-[0.75] origin-top mb-[-218px] sm:mb-[-136px]">
+                <ACubeCard
+                  label={acube.label}
+                  description={acube.description}
+                  cubeSrc={acube.image}
+                  statValue={statValue}
+                  statDesc={statDesc}
+                  className="absolute left-0 top-0"
+                />
+                <ACubeStatsPanel rows={acubeRows} className="absolute top-[380px] left-0" />
               </div>
 
-              {/* 3572:7743 — Legacy group */}
-              <div className="relative h-[388px] w-full" data-node-id="3572:7743">
-                <div
-                  className="absolute top-[267.64px] left-0 h-[120.365px] w-[354px] bg-[rgba(128,128,128,0.1)]"
-                  data-node-id="3572:7744"
-                >
-                  <MobileLegacyPanelCorners />
-                  <MobileStatsRows rows={legacyRows} topClassName="top-[16.38px]" efficiency="legacy" />
-                </div>
-                <div
-                  className="absolute top-0 left-0 h-[269.051px] w-[354px] bg-[rgba(128,128,128,0.1)]"
-                  data-node-id="3572:7761"
-                >
-                  <div
-                    className="absolute top-[11.36px] left-[14.51px] h-[244.968px] w-[324.972px]"
-                    data-node-id="3572:7762"
-                    data-name="Stat"
-                  >
-                    <div
-                      className="absolute top-[5.66px] right-0 left-0 flex flex-col items-start gap-[5.664px] border-b-[0.708px] border-solid border-[rgba(255,255,255,0.1)] pb-[7.788px] not-italic"
-                      data-node-id="3572:7763"
-                    >
-                      <p
-                        className={`${gilroyMedium.className} w-[197.532px] shrink-0 text-[24px] leading-[23.395px] font-medium text-white [word-break:break-word]`}
-                        data-node-id="3572:7764"
-                      >
-                        {legacy.label}
-                      </p>
-                      <p
-                        className={`${interRegular.className} w-full shrink-0 text-[12px] leading-[normal] font-normal text-[#8e8e8e] [word-break:break-word]`}
-                        data-node-id="3572:7765"
-                      >
-                        {legacy.description}
-                      </p>
-                    </div>
-                    <p
-                      className={`${gilroyMedium.className} absolute top-[99.12px] left-[34.23px] text-[14px] leading-[19.824px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
-                      data-node-id="3572:7766"
-                    >
-                      Compute
-                    </p>
-                    <div
-                      className="absolute top-[124.6px] left-[4.17px] h-[113.712px] w-[115.34px]"
-                      data-node-id="3572:7767"
-                      data-name="image 208"
-                    >
-                      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={legacy.image}
-                          alt=""
-                          className="absolute left-[-13.52%] top-[-40.34%] h-[187.21%] w-[136.24%] max-w-none"
-                        />
-                      </div>
-                    </div>
-                    <div
-                      className="absolute top-[129.84px] left-[calc(50%+95.77px)] h-[103.242px] w-[130.729px] -translate-x-1/2"
-                      data-node-id="3572:7768"
-                      data-name="image 206"
-                    >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={LEGACY_MEMORY}
-                        alt=""
-                        className="absolute inset-0 size-full max-w-none object-cover pointer-events-none"
-                      />
-                    </div>
-                    <div
-                      className="absolute top-[185.12px] left-[calc(50%-4.98px)] h-0 w-[81.203px] -translate-x-1/2"
-                      data-node-id="3572:7769"
-                    >
-                      <div className="absolute inset-[-14.16px_0_0_0]">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={LINE_125} alt="" className="block size-full max-w-none" />
-                      </div>
-                    </div>
-                    <p
-                      className={`${gilroyMedium.className} absolute top-[99.12px] left-[234.54px] text-[14px] leading-[19.824px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
-                      data-node-id="3572:7770"
-                    >
-                      Memory
-                    </p>
-                  </div>
-                  <MobileLegacyCardCorners />
-                </div>
+              {/* Scaled Legacy Card */}
+              <div className="relative w-[500px] h-[550px] scale-[0.7] sm:scale-[0.8] origin-top mb-[-165px] sm:mb-[-110px]">
+                <LegacyCard
+                  label={legacy.label}
+                  description={legacy.description}
+                  computeSrc={legacy.image}
+                  className="absolute left-0 top-0"
+                />
+                <LegacyStatsPanel rows={legacyRows} className="absolute top-[380px] left-0" />
               </div>
             </div>
           </div>

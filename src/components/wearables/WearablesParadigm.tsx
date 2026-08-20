@@ -156,14 +156,16 @@ function LegacyCard({
   label,
   description,
   computeSrc,
+  className = "absolute left-[134px] top-[0px]",
 }: {
   label: string;
   description: string;
   computeSrc: string;
+  className?: string;
 }) {
   return (
     <div
-      className="absolute left-[134px] top-[0px] h-[380px] w-[500px] bg-[rgba(128,128,128,0.1)]"
+      className={`${className} h-[380px] w-[500px] bg-[rgba(128,128,128,0.1)]`}
       data-name="Frame 1984079539"
     >
       <CornerDecor />
@@ -260,16 +262,18 @@ function ACubeCard({
   cubeSrc,
   statValue,
   statDesc,
+  className = "absolute left-[754px] top-[0.05px]",
 }: {
   label: string;
   description: string;
   cubeSrc: string;
   statValue: string;
   statDesc: string;
+  className?: string;
 }) {
   return (
     <div
-      className="absolute left-[754px] top-[0.05px] h-[380px] w-[575px] overflow-clip border border-solid border-[rgba(255,247,247,0.16)] bg-top-left"
+      className={`${className} h-[380px] w-[575px] overflow-clip border border-solid border-[rgba(255,247,247,0.16)] bg-top-left`}
       style={{ backgroundImage: ACUBE_CARD_BG, backgroundSize: ACUBE_BG_SIZE }}
       data-name="card"
     >
@@ -397,10 +401,10 @@ function ChevronDecor() {
   );
 }
 
-function LegacyStatsPanel() {
+function LegacyStatsPanel({ className = "absolute top-[378px] left-[134px]" }: { className?: string }) {
   return (
     <div
-      className="absolute top-[378px] left-[134px] h-[170px] w-[500px] bg-[rgba(128,128,128,0.1)]"
+      className={`${className} h-[170px] w-[500px] bg-[rgba(128,128,128,0.1)]`}
       data-name="Frame 1984079540"
     >
       <UsageBar
@@ -416,10 +420,10 @@ function LegacyStatsPanel() {
   );
 }
 
-function ACubeStatsPanel() {
+function ACubeStatsPanel({ className = "absolute top-[380.05px] left-[754px]" }: { className?: string }) {
   return (
     <div
-      className="absolute top-[380.05px] left-[754px] h-[164px] w-[575px] border border-solid border-[rgba(255,247,247,0.16)] bg-top-left"
+      className={`${className} h-[164px] w-[575px] border border-solid border-[rgba(255,247,247,0.16)] bg-top-left`}
       style={{ backgroundImage: ACUBE_PANEL_BG, backgroundSize: ACUBE_BG_SIZE }}
       data-name="card"
     >
@@ -565,79 +569,29 @@ export function WearablesParadigm({ data }: { data?: any }) {
         </div>
 
         {/* Containers copied from the technology page paradigm shift section */}
-        <div className="flex w-full flex-col items-center gap-[32px]">
-          {/* Legacy card */}
-          <div className="relative flex w-full max-w-[500px] flex-col items-start gap-[16px] bg-[rgba(128,128,128,0.1)] px-[20px] py-[24px]">
-            <CornerDecor />
-            <div className="flex w-full flex-col items-start gap-[8px] border-b border-solid border-[rgba(255,255,255,0.1)] pb-[11px]">
-              <p className={`${gilroyMedium.className} text-[26px] leading-[32px] font-medium text-white not-italic`}>
-                {legacy.label}
-              </p>
-              <p className={`${interRegular.className} text-[13px] leading-[normal] font-normal text-[#8e8e8e] not-italic`}>
-                {legacy.description}
-              </p>
-            </div>
-            <p className={`${gilroyMedium.className} text-[18px] leading-[28px] font-medium text-white not-italic`}>
-              Compute
-            </p>
-            <div className="h-[160px] w-full overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={legacy.image} alt="" className="size-full object-contain" />
-            </div>
-            <p className={`${gilroyMedium.className} text-[18px] leading-[28px] font-medium text-white not-italic`}>
-              Memory
-            </p>
-            <div className="h-[140px] w-full overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={LEGACY_MEMORY} alt="" className="size-full object-contain" />
-            </div>
+        <div className="flex w-full flex-col items-center gap-[40px]">
+          {/* Scaled Legacy Card */}
+          <div className="relative w-[500px] h-[550px] scale-[0.7] sm:scale-[0.8] origin-top mb-[-165px] sm:mb-[-110px]">
+            <LegacyCard
+              label={legacy.label}
+              description={legacy.description}
+              computeSrc={legacy.image}
+              className="absolute left-0 top-0"
+            />
+            <LegacyStatsPanel className="absolute top-[380px] left-0" />
           </div>
 
-          {/* A-Cube card */}
-          <div
-            className="relative flex w-full max-w-[500px] flex-col items-start gap-[16px] overflow-clip border border-solid border-[rgba(255,247,247,0.16)] bg-top-left px-[20px] py-[24px]"
-            style={{ backgroundImage: ACUBE_CARD_BG, backgroundSize: ACUBE_BG_SIZE }}
-          >
-            <CornerDecor />
-            <div className="flex w-full flex-col items-start gap-[8px] border-b border-solid border-[rgba(255,255,255,0.1)] pb-[11px]">
-              <p className={`${gilroyMedium.className} text-[26px] leading-[32px] font-medium text-white not-italic`}>
-                {acube.label}
-              </p>
-              <p className={`${interRegular.className} text-[13px] leading-[normal] font-normal text-[#8e8e8e] not-italic`}>
-                {acube.description}
-              </p>
-            </div>
-            <div className="h-[220px] w-full overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={acube.image} alt="" className="size-full object-contain" />
-            </div>
-            <p
-              className={`${gilroySemiBold.className} bg-clip-text text-[40px] leading-[1.2] font-semibold text-transparent not-italic`}
-              style={{
-                backgroundImage:
-                  "linear-gradient(146.757deg, rgb(255, 255, 255) 29.352%, rgba(115, 115, 115, 0.5) 98.158%)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-              }}
-            >
-              {statValue}
-            </p>
-            <p className={`${interRegular.className} -mt-[16px] text-[13px] leading-[18px] font-normal text-[#e2f9da] not-italic`}>
-              {statDesc}
-            </p>
-          </div>
-
-          {/* Legacy stats */}
-          <div className="relative w-full max-w-[500px] bg-[rgba(128,128,128,0.1)] px-[20px] py-[24px]">
-            <MobileStatRows rows={LEGACY_ROWS} />
-          </div>
-
-          {/* A-Cube stats */}
-          <div
-            className="relative w-full max-w-[500px] border border-solid border-[rgba(255,247,247,0.16)] bg-top-left px-[20px] py-[24px]"
-            style={{ backgroundImage: ACUBE_PANEL_BG, backgroundSize: ACUBE_BG_SIZE }}
-          >
-            <MobileStatRows rows={ACUBE_ROWS} />
+          {/* Scaled A-Cube Card */}
+          <div className="relative w-[575px] h-[544px] scale-[0.6] sm:scale-[0.75] origin-top mb-[-218px] sm:mb-[-136px]">
+            <ACubeCard
+              label={acube.label}
+              description={acube.description}
+              cubeSrc={acube.image}
+              statValue={statValue}
+              statDesc={statDesc}
+              className="absolute left-0 top-0"
+            />
+            <ACubeStatsPanel className="absolute top-[380px] left-0" />
           </div>
         </div>
       </div>

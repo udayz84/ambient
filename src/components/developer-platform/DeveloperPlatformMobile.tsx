@@ -48,15 +48,15 @@ function WideCard({
 
       {imageSrc && imageVariant === "chipset" ? (
         <div
-          className="absolute top-[calc(50%-32.5px)] right-[-21px] size-[139px] -translate-y-1/2"
+          className="absolute top-[-4px] right-0 size-[115px]"
           data-name="Chipset 1"
         >
           <Image
             src={imageSrc}
             alt=""
             fill
-            className="pointer-events-none object-cover"
-            sizes="139px"
+            className="pointer-events-none object-contain"
+            sizes="115px"
           />
         </div>
       ) : null}

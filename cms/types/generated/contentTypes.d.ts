@@ -1366,6 +1366,7 @@ export interface ApiProductsPageProductsPage extends Struct.SingleTypeSchema {
       'products.start-building',
       false
     >;
+    sticky_nav: Schema.Attribute.Component<'products.sticky-nav-item', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

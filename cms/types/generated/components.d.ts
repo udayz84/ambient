@@ -1508,6 +1508,17 @@ export interface ProductsStartCard extends Struct.ComponentSchema {
   };
 }
 
+export interface ProductsStickyNavItem extends Struct.ComponentSchema {
+  collectionName: 'components_products_sticky_nav_items';
+  info: {
+    description: 'Item of the white bottom toggle on the products page. Section target is assigned automatically by page order.';
+    displayName: 'Sticky Nav Item';
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface ProductsUseCases extends Struct.ComponentSchema {
   collectionName: 'components_products_use_cases';
   info: {
@@ -2331,9 +2342,9 @@ export interface TechSilicon extends Struct.ComponentSchema {
     displayName: 'Silicon';
   };
   attributes: {
-    background_image: Schema.Attribute.Media;
-    chip_background: Schema.Attribute.Media;
-    chip_object: Schema.Attribute.Media;
+    chip_background: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     cta: Schema.Attribute.Component<'shared.button', false>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     stat_cards: Schema.Attribute.Component<'tech.silicon-stat', true>;
@@ -2706,6 +2717,7 @@ declare module '@strapi/strapi' {
       'products.spec-callout': ProductsSpecCallout;
       'products.start-building': ProductsStartBuilding;
       'products.start-card': ProductsStartCard;
+      'products.sticky-nav-item': ProductsStickyNavItem;
       'products.use-cases': ProductsUseCases;
       'products.usecase-card': ProductsUsecaseCard;
       'products.usecase-tab': ProductsUsecaseTab;

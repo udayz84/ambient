@@ -121,17 +121,16 @@ export function SiteFooter({
       <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 bg-black" />
         <div className="absolute inset-0 overflow-hidden">
-          {/* Mobile Background — single asset for every page:
-              natural proportions (100% auto), anchored to the TOP of the
-              visible zone (below the hidden overlap area). Never cropped,
-              never shifted. */}
+          {/* Mobile Background — single asset for every page, exact Figma specs:
+              fixed size 1138×973, horizontally centered, 300px below the top
+              of the visible zone (below the hidden overlap area). */}
           <div
             className="absolute inset-x-0 bottom-0 bg-no-repeat lg:hidden"
             style={{
               top: `${mobileOverlapPx}px`,
               backgroundImage: "url(/footer.png)",
-              backgroundPosition: "top center",
-              backgroundSize: "100% auto",
+              backgroundPosition: "center 300px",
+              backgroundSize: "1138px 973px",
             }}
           />
           {/* Desktop Background */}

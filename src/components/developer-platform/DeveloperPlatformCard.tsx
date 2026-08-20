@@ -51,7 +51,7 @@ export function DeveloperPlatformCard({
 
       {imageSrc && imageVariant === "chipset" ? (
         <div
-          className="absolute top-[-25.98px] left-[calc(50%+138.68px)] size-[153px] -translate-x-1/2"
+          className="absolute top-[-4px] right-0 size-[128px]"
           data-node-id="3818:500"
           data-name="Chipset 1"
         >
@@ -59,8 +59,8 @@ export function DeveloperPlatformCard({
             src={imageSrc}
             alt=""
             fill
-            className="pointer-events-none object-cover"
-            sizes="153px"
+            className="pointer-events-none object-contain"
+            sizes="128px"
           />
         </div>
       ) : null}
