@@ -571,27 +571,31 @@ export function WearablesParadigm({ data }: { data?: any }) {
         {/* Containers copied from the technology page paradigm shift section */}
         <div className="flex w-full flex-col items-center gap-[40px]">
           {/* Scaled Legacy Card */}
-          <div className="relative w-[500px] h-[550px] scale-[0.7] sm:scale-[0.8] origin-top mb-[-165px] sm:mb-[-110px]">
-            <LegacyCard
-              label={legacy.label}
-              description={legacy.description}
-              computeSrc={legacy.image}
-              className="absolute left-0 top-0"
-            />
-            <LegacyStatsPanel className="absolute top-[380px] left-0" />
+          <div className="relative w-[350px] h-[385px] sm:w-[400px] sm:h-[440px]">
+            <div className="absolute top-0 left-0 w-[500px] h-[550px] scale-[0.7] sm:scale-[0.8] origin-top-left">
+              <LegacyCard
+                label={legacy.label}
+                description={legacy.description}
+                computeSrc={legacy.image}
+                className="absolute left-0 top-0"
+              />
+              <LegacyStatsPanel className="absolute top-[380px] left-0" />
+            </div>
           </div>
 
           {/* Scaled A-Cube Card */}
-          <div className="relative w-[575px] h-[544px] scale-[0.6] sm:scale-[0.75] origin-top mb-[-218px] sm:mb-[-136px]">
-            <ACubeCard
-              label={acube.label}
-              description={acube.description}
-              cubeSrc={acube.image}
-              statValue={statValue}
-              statDesc={statDesc}
-              className="absolute left-0 top-0"
-            />
-            <ACubeStatsPanel className="absolute top-[380px] left-0" />
+          <div className="relative w-[345px] h-[326.4px] sm:w-[431.25px] sm:h-[408px]">
+            <div className="absolute top-0 left-0 w-[575px] h-[544px] scale-[0.6] sm:scale-[0.75] origin-top-left">
+              <ACubeCard
+                label={acube.label}
+                description={acube.description}
+                cubeSrc={acube.image}
+                statValue={statValue}
+                statDesc={statDesc}
+                className="absolute left-0 top-0"
+              />
+              <ACubeStatsPanel className="absolute top-[380px] left-0" />
+            </div>
           </div>
         </div>
       </div>

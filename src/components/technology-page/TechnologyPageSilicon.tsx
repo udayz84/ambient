@@ -255,8 +255,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
                 fill
                 className="object-contain"
                 sizes="418px"
-                quality={100}
-                unoptimized
+                quality={95}
                 priority
               />
             )}
@@ -444,8 +443,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
                   fill 
                   className="object-contain" 
                   sizes="321px"
-                  quality={100}
-                  unoptimized
+                  quality={95}
                   priority
                 />
               )}
