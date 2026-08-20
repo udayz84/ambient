@@ -88,7 +88,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
   ).split("\n");
   return (
     <section
-      className="relative z-30 flex w-full justify-center overflow-hidden bg-[linear-gradient(to_bottom,black_0%,black_85%,transparent_100%)] max-[1023px]:-mb-[80px]"
+      className="relative z-30 flex w-full justify-center overflow-hidden bg-[linear-gradient(to_bottom,black_0%,black_85%,transparent_100%)]"
       aria-label="Ready to deploy?"
     >
       {/* DESKTOP (>=1024px) — 1204 container, Figma absolute geometry.

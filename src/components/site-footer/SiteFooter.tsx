@@ -33,7 +33,31 @@ export function SiteFooter({
   brandData?: any;
   newsletterData?: any;
 }) {
-  const showFullBackground = showNewsletter || isCareersPage || isResourcesPage || isContactPage || isOverlapPage;
+  const isPartnersPage = pathname === "/partners";
+
+  // ---- Mobile layout system ----
+  // Each overlap page's final section pulls the footer up behind itself with a
+  // negative bottom margin. That hidden zone must contain NOTHING (pure black):
+  // no art, no content. Everything visible starts below it.
+  // Pull values (mobile): 700px = technology/products/applications/dvk,
+  // 250px = som/partners.
+  const mobileOverlapPx = !isOverlapPage
+    ? 0
+    : isPartnersPage || pathname === "/som"
+      ? 250
+      : 700;
+
+  // Mobile content top padding, measured from the top of the VISIBLE zone
+  // (i.e. below the hidden overlap zone handled by the spacer above).
+  const mobileContentPadding = isOverlapPage
+    ? isPartnersPage
+      ? "pt-[50px]"
+      : "pt-[0px]"
+    : isResourcesPage || isCareersPage || isContactPage
+      ? "pt-[376px]"
+      : showNewsletter
+        ? "pt-[100px]"
+        : "pt-[24px]";
 
   const navSections: FooterNavSection[] =
     Array.isArray(data?.nav_sections) && data.nav_sections.length > 0
@@ -97,26 +121,19 @@ export function SiteFooter({
       <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 bg-black" />
         <div className="absolute inset-0 overflow-hidden">
-          {/* Mobile Background */}
-          {showFullBackground ? (
-            <div
-              className="absolute inset-0 h-full w-full lg:hidden bg-no-repeat"
-              style={{
-                backgroundImage: "url(/mobile/footer.png)",
-                backgroundPosition: "center top",
-                backgroundSize: "100% auto",
-              }}
-            />
-          ) : (
-            <div
-              className="absolute inset-0 h-full w-full lg:hidden bg-no-repeat"
-              style={{
-                backgroundImage: "url(/mobile/footer.png)",
-                backgroundPosition: "center top -250px",
-                backgroundSize: "cover",
-              }}
-            />
-          )}
+          {/* Mobile Background — single asset for every page:
+              natural proportions (100% auto), anchored to the TOP of the
+              visible zone (below the hidden overlap area). Never cropped,
+              never shifted. */}
+          <div
+            className="absolute inset-x-0 bottom-0 bg-no-repeat lg:hidden"
+            style={{
+              top: `${mobileOverlapPx}px`,
+              backgroundImage: "url(/footer.png)",
+              backgroundPosition: "top center",
+              backgroundSize: "100% auto",
+            }}
+          />
           {/* Desktop Background */}
           <img
             alt=""
@@ -124,10 +141,21 @@ export function SiteFooter({
             className="hidden lg:block absolute left-[-0.02%] top-[-5.03%] h-[97.04%] w-full min-w-0 translate-x-0 opacity-100 max-w-none object-cover"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.4)] via-[rgba(0,0,0,0.1)] to-[rgba(0,0,0,0.6)] lg:from-black/80 lg:via-black/10 lg:to-black/10" />
+        {/* Mobile overlay — spans only the visible zone */}
+        <div
+          className="absolute inset-x-0 bottom-0 bg-gradient-to-b from-[rgba(0,0,0,0.4)] via-[rgba(0,0,0,0.1)] to-[rgba(0,0,0,0.6)] lg:hidden"
+          style={{ top: `${mobileOverlapPx}px` }}
+        />
+        {/* Desktop overlay */}
+        <div className="absolute inset-0 hidden bg-gradient-to-b from-black/80 via-black/10 to-black/10 lg:block" />
       </div>
 
-      <div className={`relative mx-auto flex h-full w-full max-w-[1440px] flex-col items-center pb-0 lg:block lg:pt-0 lg:pb-0 ${(isOverlapPage && pathname !== "/partners") ? "pt-[700px]" : (isResourcesPage || isCareersPage || isContactPage) ? "pt-[376px]" : pathname === "/partners" ? "pt-[300px]" : showNewsletter ? "pt-[100px]" : "pt-[24px]"}`}>
+      {/* Mobile hidden zone — sits behind the page's merged final section */}
+      {mobileOverlapPx > 0 && (
+        <div aria-hidden className="w-full lg:hidden" style={{ height: `${mobileOverlapPx}px` }} />
+      )}
+
+      <div className={`relative mx-auto flex h-full w-full max-w-[1440px] flex-col items-center pb-0 lg:block lg:pt-0 lg:pb-0 ${mobileContentPadding}`}>
         {showNewsletter && (
           <div className="relative z-[1] mb-[80px] flex flex-col items-center lg:mb-0 lg:pt-[120px]">
             <NewsletterSignup data={newsletterData} />

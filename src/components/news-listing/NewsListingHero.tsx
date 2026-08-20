@@ -270,10 +270,10 @@ export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
         </div>
 
         {/* Pagination indicator + Featured card */}
-        <div className="flex flex-col gap-[10px] px-[19px] pt-[15px] pb-[30px]">
+        <div className="flex flex-col-reverse gap-[16px] px-[19px] pt-[15px] pb-[30px]">
           <div className="flex justify-end">
             {/* Slider controls */}
-            <div className="flex items-center gap-[12px] w-fit mb-[16px]">
+            <div className="flex items-center gap-[12px] w-fit">
               <button 
                 onClick={handlePrev}
                 className="relative flex h-[40px] w-[40px] items-center justify-center border border-white/30 bg-white/10 transition-colors hover:bg-white/20"

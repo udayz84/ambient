@@ -248,7 +248,10 @@ function DvkIntegratedModulesMobile({
                 }}
                 aria-hidden
               >
-                {i === 0 ? (
+                {card.imageUrl ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img src={card.imageUrl} alt="" className="absolute inset-0 size-full max-w-none object-contain" />
+                ) : i === 0 ? (
                   <div className="absolute top-[1.72px] left-[58.998px] h-[196.562px] w-[213px]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img

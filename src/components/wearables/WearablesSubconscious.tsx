@@ -158,7 +158,7 @@ export function WearablesSubconscious({ data }: { data?: any }) {
       </div>
 
       {/* MOBILE (<1024px) */}
-      <div className="relative flex w-full flex-col items-center gap-[40px] px-[24px] pt-[72px] pb-[72px] min-[1024px]:hidden">
+      <div className="relative flex w-full flex-col items-center gap-[24px] px-[24px] pt-[72px] pb-[72px] min-[1024px]:hidden">
         {/* Title */}
         <div className="flex flex-col items-center gap-[20px]">
           <div className="relative flex flex-col items-center px-[10px]">

@@ -142,7 +142,7 @@ function DvkHeroMobile({ data }: { data?: any }) {
 
       {/* Text — 4059:10007 (20, 0 / 352×256, design y + 78 navbar offset) */}
       <div
-        className="absolute top-[78px] left-[20px] z-10 flex w-[352px] max-w-[calc(100%-40px)] flex-col items-center gap-[15px]"
+        className="absolute top-[138px] left-1/2 z-10 flex w-[352px] max-w-[calc(100%-40px)] -translate-x-1/2 flex-col items-center gap-[15px]"
         data-node-id="4059:10007"
       >
         {/* Title group — 4059:10008 (352×115, corner ticks) */}
@@ -152,7 +152,7 @@ function DvkHeroMobile({ data }: { data?: any }) {
         >
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h1
-            className={`${gilroyMedium.className} absolute top-[7px] left-[16px] m-0 w-[321px] max-w-[calc(100%-32px)] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} absolute top-[7px] left-1/2 m-0 w-[321px] max-w-[calc(100%-32px)] -translate-x-1/2 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
             style={{
               backgroundImage: HERO_TITLE_GRADIENT_MOBILE,
               WebkitBackgroundClip: "text",
@@ -173,7 +173,7 @@ function DvkHeroMobile({ data }: { data?: any }) {
 
       {/* Board image — 4059:10015 (0, 268 / 393×360) */}
       <div
-        className="pointer-events-none absolute top-[346px] left-1/2 h-[360px] w-[393px] -translate-x-1/2"
+        className="pointer-events-none absolute top-[386px] left-0 h-[360px] w-full"
         data-node-id="4059:10015"
         aria-hidden
       >
@@ -181,7 +181,7 @@ function DvkHeroMobile({ data }: { data?: any }) {
         <img
           alt=""
           src="/dvk/hero-bg-mobile.png"
-          className="absolute inset-0 size-full max-w-none object-cover"
+          className="absolute inset-0 size-full object-cover"
         />
         <div
           className="absolute inset-0"
@@ -339,7 +339,8 @@ function MobileSpecCard({
   card: { title: string; items: string[]; accent?: boolean };
   className?: string;
 }) {
-  const isAccent = card.accent === true;
+  // Mobile design: removed the accent/hover effect per user request
+  const isAccent = false;
   return (
     <div
       className={`relative flex w-full flex-col gap-[20px] overflow-clip border-[0.5px] border-solid px-[16px] pt-[16px] pb-[24px] ${className}`}
@@ -374,22 +375,22 @@ function MobileSpecCard({
 /** Figma 4062:10784/10795/10806 — mobile demo card illustrations (250×238). */
 const MOBILE_DEMO_MEDIA = [
   {
-    img: "/dvk/demo-voice-mobile.png",
+    img: "/dvk/demo-voice.png",
     imgOverlay: null as string | null,
     imgRight: -35,
     imgTop: -35,
     cover: true,
   },
   {
-    img: "/dvk/demo-fall-mobile.png",
+    img: "/dvk/demo-fall.png",
     imgOverlay: null as string | null,
     imgRight: -43,
     imgTop: -46,
     cover: false,
   },
   {
-    img: "/dvk/demo-fall-mobile.png",
-    imgOverlay: "/dvk/demo-vision-mobile.png" as string | null,
+    img: "/dvk/demo-fall.png",
+    imgOverlay: "/dvk/demo-vision.png" as string | null,
     imgRight: -43,
     imgTop: -36,
     cover: true,
@@ -457,29 +458,7 @@ function DvkDemosMobile({ data }: { data?: any }) {
       data-name="3rd Fold"
     >
       <div className="relative mx-auto h-[1414px] w-full max-w-[393px]">
-        {/* Background textures — 4059:10210 */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute top-0 left-1/2 h-full w-[393px] -translate-x-1/2"
-          data-node-id="4059:10210"
-        >
-          <div className="absolute top-0 left-[-525.89px] h-[260px] w-[1441px]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt=""
-              src="/dvk/demos-bg-top.png"
-              className="absolute inset-0 size-full max-w-none object-cover"
-            />
-          </div>
-          <div className="absolute top-[1340px] left-[-496px] h-[341px] w-[1441px] -scale-y-100">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt=""
-              src="/dvk/demos-bg-bottom.png"
-              className="absolute inset-0 size-full max-w-none object-cover"
-            />
-          </div>
-        </div>
+        {/* Background textures removed per user request to fix rogue lines */}
 
         {/* Header — 4059:10213 (21, 30 / 352 wide, gap 15) */}
         <div
@@ -608,6 +587,10 @@ function DvkModelForgeMobile({ data }: { data?: any }) {
       ? data.toolchain_labels.map((t: any) => t?.text).filter(Boolean)
       : ["RTOS", "DRIVERS", "COMPILER"];
 
+  const floatingTags = Array.isArray(data?.floating_tags) && data.floating_tags.length > 0
+    ? data.floating_tags.map((t: any) => t?.text).filter(Boolean)
+    : ["RTOS", "DSP", "Drivers", "Build"];
+
   return (
     <section
       className="relative w-full overflow-clip bg-black min-[1024px]:hidden"
@@ -630,29 +613,7 @@ function DvkModelForgeMobile({ data }: { data?: any }) {
           />
         </div>
 
-        {/* Background textures — 4062:10903 */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute top-0 left-1/2 h-[1681px] w-[393px] -translate-x-1/2"
-          data-node-id="4062:10903"
-        >
-          <div className="absolute top-0 left-[-525.89px] h-[260px] w-[1441px]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt=""
-              src="/dvk/demos-bg-top.png"
-              className="absolute inset-0 size-full max-w-none object-cover"
-            />
-          </div>
-          <div className="absolute top-[1340px] left-[-496px] h-[341px] w-[1441px] -scale-y-100">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt=""
-              src="/dvk/demos-bg-bottom.png"
-              className="absolute inset-0 size-full max-w-none object-cover"
-            />
-          </div>
-        </div>
+        {/* Background textures removed per user request to fix rogue lines */}
 
         {/* Header — 4062:10906 (21, 30 / 352 wide, gap 15) */}
         <div
@@ -697,7 +658,7 @@ function DvkModelForgeMobile({ data }: { data?: any }) {
             height={422}
             nodeId="4062:11131"
           />
-          <MobileForgeCanvas />
+          <MobileForgeCanvas floatingTags={floatingTags} />
           <MobileModelCard
             image="/dvk/modelforge-dvk-mobile.png"
             title={dvkBoardTitle}
@@ -799,7 +760,7 @@ function MobileModelCard({
 }
 
 /** Figma 4062:11143 — brain/chip canvas with corner tags and elbow connectors. */
-function MobileForgeCanvas() {
+function MobileForgeCanvas({ floatingTags = ["RTOS", "DSP", "Drivers", "Build"] }: { floatingTags?: string[] }) {
   return (
     <div className="relative h-[505px] w-full shrink-0" data-node-id="4062:11143">
       {/* Center image — 4062:11181 */}
@@ -911,10 +872,10 @@ function MobileForgeCanvas() {
       </div>
 
       {/* Corner tags — 4062:11184 (RTOS) / 11167 (DSP) / 11174 (Drivers) / 11160 (Build) */}
-      <MobileForgeTag label="RTOS" className="top-[17px] left-[10px]" nodeId="4062:11184" />
-      <MobileForgeTag label="DSP" className="top-[13px] right-[11px]" nodeId="4062:11167" />
-      <MobileForgeTag label="Drivers" className="bottom-[10px] left-[10px]" nodeId="4062:11174" />
-      <MobileForgeTag label="Build" className="top-[450px] right-[13px]" nodeId="4062:11160" />
+      <MobileForgeTag label={floatingTags[0] || "RTOS"} className="top-[17px] left-[10px]" nodeId="4062:11184" />
+      <MobileForgeTag label={floatingTags[1] || "DSP"} className="top-[13px] right-[11px]" nodeId="4062:11167" />
+      <MobileForgeTag label={floatingTags[2] || "Drivers"} className="bottom-[10px] left-[10px]" nodeId="4062:11174" />
+      <MobileForgeTag label={floatingTags[3] || "Build"} className="top-[450px] right-[13px]" nodeId="4062:11160" />
     </div>
   );
 }
@@ -1007,12 +968,12 @@ function MobileForgeTag({
 function MobileToolchainChip({ label }: { label: string }) {
   return (
     <div
-      className="relative h-[24px] w-[103px] shrink-0 overflow-clip"
+      className="relative flex h-[24px] w-auto min-w-[103px] shrink-0 items-center justify-center overflow-clip px-[14px]"
       style={{ backgroundColor: "rgba(115,190,91,0.12)" }}
     >
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
       <p
-        className={`${dmMono.className} absolute top-[calc(50%-4px)] left-1/2 -translate-x-1/2 text-center text-[12px] leading-[19.5px] tracking-[-0.36px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [word-break:break-word]`}
+        className={`${dmMono.className} relative z-10 text-center text-[12px] leading-[19.5px] tracking-[-0.36px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [word-break:break-word]`}
       >
         {label}
       </p>

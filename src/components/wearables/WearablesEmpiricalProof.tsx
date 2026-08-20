@@ -680,19 +680,7 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
       </div>
 
       {/* MOBILE (<1024px) */}
-      <div className="relative flex w-full flex-col items-center gap-[40px] px-[21px] pt-[30px] pb-[72px] min-[1024px]:hidden">
-        {/* Top background strip */}
-        <div className="pointer-events-none absolute left-1/2 top-0 h-[260px] w-[1441px] -translate-x-1/2 overflow-hidden" aria-hidden>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/applications/dvk-bg.png" alt="" className="size-full object-cover" />
-        </div>
-        {/* Bottom background strip */}
-        <div className="pointer-events-none absolute bottom-0 left-[calc(50%+30px)] flex h-[341px] w-[1441px] -translate-x-1/2 items-center justify-center overflow-hidden" aria-hidden>
-          <div className="-scale-y-100">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/applications/dvk-bottom.png" alt="" className="h-[341px] w-[1441px] object-cover" />
-          </div>
-        </div>
+      <div className="relative flex w-full flex-col items-center gap-[24px] px-[21px] pt-[30px] pb-[72px] min-[1024px]:hidden">
 
         {/* Title */}
         <div className="relative z-10 flex w-[350px] flex-col items-center gap-[10px]">

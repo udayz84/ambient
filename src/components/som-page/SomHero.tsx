@@ -209,7 +209,7 @@ export function SomHero({ data }: { data?: any }) {
 
       {/* MOBILE (<1024px) — Figma node 4046:7801 "Banner" 393×700 */}
       <div
-        className="relative mx-auto mt-[40px] h-[700px] w-[393px] overflow-hidden bg-black min-[1024px]:hidden"
+        className="relative mx-auto mt-[40px] h-[700px] w-full overflow-hidden bg-black min-[1024px]:hidden"
         data-node-id="4046:7801"
         data-name="Banner"
       >
@@ -224,7 +224,7 @@ export function SomHero({ data }: { data?: any }) {
             <img
               src={backgroundImage}
               alt=""
-              className="absolute inset-0 size-full object-cover"
+              className="absolute inset-0 size-full object-cover object-right"
             />
           )}
           <div
@@ -238,7 +238,7 @@ export function SomHero({ data }: { data?: any }) {
 
         {/* Text group — 4046:7802 (x20, y0, 352×193) */}
         <div
-          className="absolute left-[20px] top-0 flex w-[352px] flex-col items-center gap-[15px]"
+          className="absolute top-0 left-1/2 flex w-[352px] -translate-x-1/2 flex-col items-center gap-[15px]"
           data-node-id="4046:7802"
         >
           {/* Title group — 4046:7803 (352×115) */}

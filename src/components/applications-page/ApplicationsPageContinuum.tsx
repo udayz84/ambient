@@ -413,10 +413,10 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
   }, []);
 
   const scrollLeft = () => {
-    if (scrollRef.current) scrollRef.current.scrollBy({ left: -340, behavior: "smooth" });
+    setSelected((prev) => (prev > 0 ? prev - 1 : cards.length - 1));
   };
   const scrollRight = () => {
-    if (scrollRef.current) scrollRef.current.scrollBy({ left: 340, behavior: "smooth" });
+    setSelected((prev) => (prev < cards.length - 1 ? prev + 1 : 0));
   };
 
   const heading = data?.heading || FALLBACK_HEADING;
@@ -639,25 +639,22 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
           </p>
         </div>
 
-        {/* Options bar — horizontally scrollable (1244px content) */}
+        {/* Options bar — horizontally scrollable */}
         <div
           className="cont-m-scroll relative z-10 mt-[24px] w-full overflow-x-auto"
           data-node-id="4032:5790"
         >
-          <div className="w-[1244px]">
-            <ContinuumOptionsBar selected={selected} onSelect={setSelected} />
-          </div>
+          <ContinuumOptionsBar selected={selected} onSelect={setSelected} isMobile={true} />
         </div>
 
-        {/* Product visual — window into the 1440×808 canvas (y 166→710) */}
+        {/* Product visual — scaled down desktop canvas */}
         <div
-          ref={scrollRef}
-          className="cont-m-scroll relative h-[544px] w-full overflow-x-auto overflow-y-hidden"
+          className="relative h-[360px] w-full overflow-hidden"
           data-node-id="4032:11892"
         >
           <div
-            className="absolute left-0 top-0 h-[808px] w-[1440px]"
-            style={{ transform: "translateY(-166px)" }}
+            className="absolute top-0 h-[808px] w-full origin-top"
+            style={{ transform: "scale(0.65) translateY(-140px)" }}
           >
             <AnimatePresence initial={false}>
               <motion.div

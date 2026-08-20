@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-
+import { useEffect, useRef } from "react";
 import { interRegular } from "../hero/fonts";
 
 /* Options bar — Figma 4574:7552.
@@ -56,13 +56,37 @@ function CornerBrackets() {
 export function ContinuumOptionsBar({
   selected,
   onSelect,
+  isMobile = false,
 }: {
   selected: number;
   onSelect: (index: number) => void;
+  isMobile?: boolean;
 }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isMobile && containerRef.current) {
+      const activeBtn = containerRef.current.querySelector('[aria-selected="true"]');
+      if (activeBtn) {
+        // Scroll the parent container smoothly
+        const parent = containerRef.current.parentElement;
+        if (parent) {
+          const parentRect = parent.getBoundingClientRect();
+          const btnRect = activeBtn.getBoundingClientRect();
+          const scrollLeft = parent.scrollLeft + (btnRect.left - parentRect.left) - (parentRect.width / 2) + (btnRect.width / 2);
+          parent.scrollTo({ left: scrollLeft, behavior: "smooth" });
+        }
+      }
+    }
+  }, [selected, isMobile]);
   return (
     <div
-      className="relative flex h-[52px] w-[1244px] items-center justify-between"
+      ref={containerRef}
+      className={`relative flex items-center ${
+        isMobile
+          ? "w-max h-[40px] justify-start gap-[14px] px-[20px]"
+          : "h-[52px] w-[1244px] justify-between"
+      }`}
       data-node-id="4574:7552"
       data-name="Options"
       role="tablist"
@@ -77,22 +101,22 @@ export function ContinuumOptionsBar({
               role="tab"
               aria-selected={isSelected}
               onClick={() => onSelect(i)}
-              className={`relative flex h-[52px] shrink-0 cursor-pointer items-center justify-center transition-colors duration-200 ${
+              className={`relative flex shrink-0 cursor-pointer items-center justify-center transition-colors duration-200 ${
                 isSelected ? "bg-[#f0f0f0]" : "bg-transparent"
-              }`}
-              style={{ width: item.width }}
+              } ${isMobile ? "h-[36px] px-[16px] rounded-[4px]" : "h-[52px]"}`}
+              style={!isMobile ? { width: item.width } : {}}
               data-node-id={item.nodeId}
             >
               <span
-                className={`${interRegular.className} whitespace-nowrap text-[16px] font-normal leading-[24px] not-italic transition-colors duration-200 ${
-                  isSelected ? "text-[#0e1a0e]" : "text-[#666666]"
-                }`}
+                className={`${interRegular.className} whitespace-nowrap font-normal not-italic transition-colors duration-200 ${
+                  isMobile ? "text-[14px] leading-[20px]" : "text-[16px] leading-[24px]"
+                } ${isSelected ? "text-[#0e1a0e]" : "text-[#666666]"}`}
               >
                 {item.label}
               </span>
-              {isSelected && <CornerBrackets />}
+              {isSelected && !isMobile && <CornerBrackets />}
             </button>
-            {i < TICKS.length &&
+            {!isMobile && i < TICKS.length &&
               TICKS[i].map((h, j) => (
                 <div
                   key={`${i}-${j}`}

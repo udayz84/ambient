@@ -214,8 +214,8 @@ export function ApplicationsMobile({
             <img
               alt=""
               src={imgSrc}
-              className={`h-auto max-h-[360px] w-[130%] max-w-none object-contain drop-shadow-2xl ${
-                activeTab === "AUTOMOTIVE" ? "translate-x-[4%] scale-110" : "scale-105"
+              className={`h-auto max-h-[360px] object-contain drop-shadow-2xl ${
+                activeTab === "AUTOMOTIVE" ? "w-full scale-100" : "w-[130%] max-w-none scale-105"
               }`}
               aria-hidden
             />
