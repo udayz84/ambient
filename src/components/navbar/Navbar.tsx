@@ -281,7 +281,7 @@ function NavItem({ item }: { item: any }) {
             <NavIconDropdown
               item={item}
               onNavigate={() => setIsOpen(false)}
-              compact={["company", "application", "applications"].includes(
+              compact={["company", "application", "applications", "resources"].includes(
                 (item.label || "").toLowerCase()
               )}
             />

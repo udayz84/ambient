@@ -12,9 +12,11 @@ const STEP_NUMBER_GRADIENT =
   "linear-gradient(to bottom, rgb(255, 255, 255), rgba(255, 255, 255, 0))";
 
 function WhyCard({ step }: { step: any }) {
+  const isFullCardBg = step.number === "03";
+
   return (
     <article
-      className="relative flex w-full flex-col overflow-hidden border border-solid px-[24px] pt-[16px] pb-[24px] h-full min-h-[430px]"
+      className="group/card relative flex w-full flex-col overflow-hidden border border-solid px-[24px] pt-[16px] pb-[24px] h-full min-h-[430px]"
       style={{
         backgroundColor: WHY_CARD_BG,
         borderColor: WHY_CARD_BORDER,
@@ -38,15 +40,16 @@ function WhyCard({ step }: { step: any }) {
           <img
             alt=""
             src={step.image}
-            className="absolute inset-0 h-full w-full object-contain opacity-75 transition-opacity duration-300 group-hover/card:opacity-100"
+            className={`absolute inset-0 h-full w-full opacity-75 transition-opacity duration-300 group-hover/card:opacity-100 ${
+              isFullCardBg ? "object-cover" : "object-contain"
+            }`}
           />
         )}
         {/* Fade overlay */}
         <div
           className="absolute inset-0"
           style={{
-            background:
-              "linear-gradient(to bottom, rgba(0,0,0,0) 70%, #000000 100%)",
+            background: "linear-gradient(to bottom, rgba(0,0,0,0) 70%, #000000 100%)",
           }}
         />
       </div>

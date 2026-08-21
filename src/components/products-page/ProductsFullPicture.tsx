@@ -556,11 +556,12 @@ export function ProductsFullPicture({ data }: { data?: any }) {
   const heading = data?.heading || FALLBACK_HEADING;
   const menuLabel = data?.menu_text || FALLBACK_MENU;
 
-  const strapiCallouts: Record<string, { items: string[] }> = {};
+  const strapiCallouts: Record<string, { iconUrl: string | null; items: string[] }> = {};
   if (Array.isArray(data?.callouts)) {
     for (const c of data.callouts) {
       if (c?.label) {
         strapiCallouts[c.label] = {
+          iconUrl: mediaUrl(c?.icon) || null,
           items: splitLinesFilter(c?.items),
         };
       }
@@ -595,12 +596,7 @@ export function ProductsFullPicture({ data }: { data?: any }) {
         lines = [];
       }
     }
-    const iconMap: Record<string, string> = {
-      "Power": "/products/measured-icon-energy.svg",
-      "Control": "/products/measured-icon-speed.svg",
-      "Temperature": "/products/measured-icon-eco.svg",
-    };
-    return { ...c, items, lines, iconSrc: iconMap[c.title] || ICON_GLYPH };
+    return { ...c, items, lines, iconSrc: strapiData?.iconUrl || ICON_GLYPH };
   });
 
   return (
