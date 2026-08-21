@@ -15,9 +15,18 @@ import { dmMono, gilroyMedium, gilroySemiBold, interRegular } from "../hero/font
 /* ---- Assets (exported from Figma) ---- */
 const AURORA = "/products/fullpicture-aurora.png"; // 1024×855, used by both footer layers
 const LINE = "/products/spec-line.svg"; // same white 4% 1px rule as the design's Line assets
-const ICON_GLYPH = "/products/fp-spec-icon.svg";
 const TITLE_CORNER_L = "/products/fp-title-corner-left.svg"; // Vector 58
 const TITLE_CORNER_R = "/products/fp-title-corner-right.svg"; // Vector 55
+
+/* Per-card icons — Figma 3309:2380 (Control chip, Sensing battery, Temperature, Package, Security, Peripherals, Memory, Power) */
+const ICON_CONTROL = "/products/fullpicture/icon-control.svg";
+const ICON_SENSING = "/products/fullpicture/icon-sensing.svg";
+const ICON_TEMPERATURE = "/products/fullpicture/icon-temperature.svg";
+const ICON_PACKAGE = "/products/fullpicture/icon-package.svg";
+const ICON_SECURITY = "/products/fullpicture/icon-security.svg";
+const ICON_PERIPHERALS = "/products/fullpicture/icon-peripherals.svg";
+const ICON_MEMORY = "/products/fullpicture/icon-memory.svg";
+const ICON_POWER = "/products/fullpicture/icon-power.svg";
 
 /* ---- Tokens ---- */
 const TITLE_GRADIENT =
@@ -62,6 +71,7 @@ type SpecCard = {
   items: ItemSpec[];
   lines: LineSpec[];
   icon: { left: number; top: number };
+  iconSrc: string;
 };
 
 const item = (text: string, top: number, left?: number, plusLeft?: number): ItemSpec => ({
@@ -93,6 +103,7 @@ const CARDS: SpecCard[] = [
     items: [item("ARM Cortex-M4F (32-bit, FPU)", 57.33)],
     lines: [],
     icon: { left: 332.44, top: 5 },
+    iconSrc: ICON_CONTROL,
   },
   {
     nodeId: "3309:2381",
@@ -124,6 +135,7 @@ const CARDS: SpecCard[] = [
       { top: 174.61, left: 17.12, width: 233.885, variant: "rotate" },
     ],
     icon: { left: 330.44, top: 5 },
+    iconSrc: ICON_SENSING,
   },
   {
     nodeId: "3309:2485",
@@ -145,6 +157,7 @@ const CARDS: SpecCard[] = [
     items: [item("0–85 °C (junction)", 57.33)],
     lines: [],
     icon: { left: 331.44, top: 5 },
+    iconSrc: ICON_TEMPERATURE,
   },
   {
     nodeId: "3309:2511",
@@ -169,6 +182,7 @@ const CARDS: SpecCard[] = [
     ],
     lines: [{ top: 92.07, left: 14.5, width: 329.877 }],
     icon: { left: 330.94, top: 5 },
+    iconSrc: ICON_PACKAGE,
   },
   {
     nodeId: "3309:2498",
@@ -190,6 +204,7 @@ const CARDS: SpecCard[] = [
     items: [item("AES-128", 57.33)],
     lines: [],
     icon: { left: 331.44, top: 5 },
+    iconSrc: ICON_SECURITY,
   },
   {
     nodeId: "3309:2403",
@@ -220,6 +235,7 @@ const CARDS: SpecCard[] = [
       { top: 87.57, left: 17.62, width: 329.877 },
     ],
     icon: { left: 326.94, top: 5 },
+    iconSrc: ICON_PERIPHERALS,
   },
   {
     nodeId: "3309:2527",
@@ -252,6 +268,7 @@ const CARDS: SpecCard[] = [
       { top: 220.05, left: 17.12, width: 339.885, variant: "skew" },
     ],
     icon: { left: 330.44, top: 4.84 },
+    iconSrc: ICON_MEMORY,
   },
   {
     nodeId: "3309:2437",
@@ -280,6 +297,7 @@ const CARDS: SpecCard[] = [
       { top: 87.33, left: 17.12, width: 339.885, variant: "rotate" },
     ],
     icon: { left: 330.44, top: 5 },
+    iconSrc: ICON_POWER,
   },
 ];
 
@@ -445,7 +463,7 @@ function CardLine({ line }: { line: LineSpec }) {
   );
 }
 
-type RenderCard = SpecCard & { iconSrc: string };
+type RenderCard = SpecCard;
 
 function SpecCardView({ card }: { card: RenderCard }) {
   const { fadeRef, isVisible } = useFadeIn();
@@ -596,7 +614,7 @@ export function ProductsFullPicture({ data }: { data?: any }) {
         lines = [];
       }
     }
-    return { ...c, items, lines, iconSrc: strapiData?.iconUrl || ICON_GLYPH };
+    return { ...c, items, lines, iconSrc: strapiData?.iconUrl || c.iconSrc };
   });
 
   return (
