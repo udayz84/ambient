@@ -540,13 +540,13 @@ function DeveloperComingSoonMobile({ data }: { data?: any }) {
   const ctaHref = data?.cta_href || "#";
   const imgSrc = mediaUrl(data?.image) || COMING_DEFAULT_IMG;
   return (
-    <section className="relative flex w-full flex-col items-center overflow-hidden px-[19px] pt-[30px]">
+    <section className="relative flex w-full flex-col items-center overflow-hidden px-[19px] pt-[30px] pb-[40px]">
       {/* Background image — 4035:25440 (opacity-60, radial fade) */}
-      <div aria-hidden className="absolute inset-0 -z-10">
+      <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden">
         {/* Ellipse glow for mobile */}
         <div
           aria-hidden
-          className="pointer-events-none absolute left-[50%] top-[45%] -translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
+          className="pointer-events-none absolute left-[50%] top-[45%] flex -translate-x-1/2 -translate-y-1/2 items-center justify-center"
         >
           <div
             style={{
@@ -560,7 +560,7 @@ function DeveloperComingSoonMobile({ data }: { data?: any }) {
           />
         </div>
 
-        <div className="absolute left-[calc(50%+24px)] top-0 h-full w-[639px] max-w-none -translate-x-1/2 opacity-60">
+        <div className="absolute left-[calc(50%+24px)] top-0 h-full w-[min(639px,160%)] max-w-none -translate-x-1/2 opacity-60">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt=""
@@ -578,19 +578,19 @@ function DeveloperComingSoonMobile({ data }: { data?: any }) {
       </div>
 
       {/* Content block — 4035:25441 (title + subtitle, gap 10px) */}
-      <div className="flex w-full flex-col items-center gap-[10px]">
+      <div className="flex w-full max-w-full flex-col items-center gap-[10px]">
         {/* Title — 4035:25443 */}
-        <div className="relative flex w-full justify-center">
+        <div className="relative flex w-fit max-w-full justify-center px-[10px]">
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
-            className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} max-w-full bg-clip-text text-center text-[clamp(28px,9vw,36px)] leading-[1.05] font-medium text-transparent not-italic [overflow-wrap:anywhere]`}
             style={{
               backgroundImage:
                 "linear-gradient(107.45deg, rgb(255, 255, 255) 1.35%, rgb(212, 233, 188) 55.16%, rgb(255, 255, 255) 111.67%)",
             }}
           >
             {headingLines.map((line: string, i: number) => (
-              <span key={i} className="block leading-[36px]">
+              <span key={i} className="block">
                 {line}
               </span>
             ))}
@@ -598,7 +598,7 @@ function DeveloperComingSoonMobile({ data }: { data?: any }) {
         </div>
         {/* Subtitle — 4035:25448 */}
         <p
-          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic`}
+          className={`${interRegular.className} w-full max-w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [overflow-wrap:anywhere]`}
         >
           {subtitleLines.map((line: string, i: number) => (
             <span key={i}>
@@ -609,10 +609,10 @@ function DeveloperComingSoonMobile({ data }: { data?: any }) {
         </p>
       </div>
 
-      {/* Article card — 4035:25449 (w355, px16 pt16 pb24, gap20) */}
-      <div className="relative mt-[20px] flex w-full flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0)] px-[16px] pt-[16px] pb-[24px]">
+      {/* Article card — glass + blur; no horizontal overflow */}
+      <div className="relative mt-[20px] flex w-full max-w-full flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.04)] px-[16px] pt-[16px] pb-[24px] backdrop-blur-[12px]">
         {/* Image — 4035:25450 (140×140) */}
-        <div className="relative size-[140px] shrink-0 overflow-hidden">
+        <div className="relative size-[140px] max-w-full shrink-0 overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt=""
@@ -621,31 +621,30 @@ function DeveloperComingSoonMobile({ data }: { data?: any }) {
           />
         </div>
         {/* Text content — 4035:25451 (gap 10px) */}
-        <div className="flex w-full flex-col items-center gap-[10px] text-center">
+        <div className="flex w-full max-w-full flex-col items-center gap-[10px] text-center">
           <p
-            className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} w-full max-w-full text-[22px] leading-[28px] font-medium text-white not-italic [overflow-wrap:anywhere]`}
           >
             {cardTitle}
           </p>
           <p
-            className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-full max-w-full text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [overflow-wrap:anywhere]`}
           >
             {cardDescription}
           </p>
         </div>
 
-        {/* CTA — 4035:25454 (w-full h48; content 306px justify-between) */}
+        {/* CTA — full width; label can shrink instead of overflowing */}
         <a
           href={ctaHref}
-          className={`${gilroyMedium.className} relative flex h-[48px] w-full items-center overflow-hidden py-[10px] shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+          className={`${gilroyMedium.className} relative flex h-[48px] w-full max-w-full items-center overflow-hidden px-[12px] py-[10px] shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
         >
           <span
             aria-hidden
             className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
           />
-          {/* Inner content — 4035:25464 (w306, justify-between) */}
-          <div className="relative mx-auto flex w-[306px] items-center justify-between">
-            <span className="text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+          <div className="relative mx-auto flex w-full min-w-0 max-w-[306px] items-center justify-between gap-[8px]">
+            <span className="min-w-0 truncate text-[clamp(12px,3.5vw,16px)] leading-[28px] font-medium uppercase text-white not-italic">
               {ctaLabel}
             </span>
             <span className="size-[20px] shrink-0">
