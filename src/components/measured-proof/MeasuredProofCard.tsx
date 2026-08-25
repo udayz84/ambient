@@ -36,7 +36,7 @@ export function MeasuredProofCard({
 }: MeasuredProofCardProps) {
   return (
     <div
-      className="relative h-[600px] w-[388px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] backdrop-blur-[12px] bg-black/40"
+      className="relative h-[600px] w-[388px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] max-[1023px]:border max-[1023px]:border-white/20 backdrop-blur-[12px] bg-black/40"
       data-node-id={nodeId}
       data-name="Lower power consumption"
     >

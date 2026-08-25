@@ -473,7 +473,7 @@ function MobileMeasuredCard({ card }: { card: MeasuredCard }) {
     >
       {/* Surface */}
       <div
-        className="absolute left-0 top-0 h-[385px] w-[248.967px] border-[0.321px] border-solid border-[rgba(255,255,255,0.1)]"
+        className="absolute left-0 top-0 h-[385px] w-[248.967px] border border-solid border-white/20"
         style={{ backgroundColor: "rgba(15,14,14,0.75)" }}
       />
       {/* Corner elements */}
@@ -746,7 +746,7 @@ export function ProductsMeasured({ data }: { data?: any }) {
         <div className="relative mx-auto w-full" style={{ maxWidth: 393 }}>
 
           {/* ── Header — 3567:4337 (top=30, centred, 350 wide, gap=10) ── */}
-          <div className="flex flex-col items-center gap-[10px] px-[21px] pt-[80px]">
+          <div className="flex flex-col items-center gap-[10px] px-[21px] pt-[16px]">
             <TagBadge
               label={menuLabel}
               width={130}
@@ -799,7 +799,7 @@ export function ProductsMeasured({ data }: { data?: any }) {
           </div>
 
           {/* ── CTA column — 4087:9003 (240 wide, gap=14) ── */}
-          <div className="mx-auto mt-[32px] flex w-[240px] flex-col gap-[14px] pb-[80px]">
+          <div className="mx-auto mt-[32px] flex w-[240px] flex-col gap-[14px] pb-[16px]">
             {/* Primary — 240×48 */}
             <a
               href={primary.href}

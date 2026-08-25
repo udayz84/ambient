@@ -705,7 +705,7 @@ export function ProductsFullPicture({ data }: { data?: any }) {
 
       {/* MOBILE (<1024px) */}
       <section
-        className="relative w-full overflow-hidden bg-black px-[24px] pt-[80px] pb-[80px] min-[1024px]:hidden"
+        className="relative w-full overflow-hidden bg-black px-[24px] pt-[40px] pb-[40px] min-[1024px]:hidden"
         aria-label="The full picture"
       >
         <div className="flex flex-col items-center gap-[20px]">

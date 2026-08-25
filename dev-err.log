@@ -1,8 +1,0 @@
-⨯ Another next dev server is already running.
-
-- Local:        http://localhost:3002
-- PID:          10216
-- Dir:          C:\Users\speed\Documents\scraft\ambient
-- Log:          .next\dev\logs\next-development.log
-
-Run taskkill /PID 10216 /F to stop it.

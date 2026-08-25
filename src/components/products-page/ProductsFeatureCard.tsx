@@ -174,7 +174,7 @@ export function ProductsFeatureCard({
       data-node-id={card.nodeId}
       data-name="Lower power consumption"
     >
-      <div className="absolute top-0 left-0 h-[600px] w-[388px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.75)] backdrop-blur-md" />
+      <div className="absolute top-0 left-0 h-[600px] w-[388px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] max-[1023px]:border max-[1023px]:border-white/20 bg-[rgba(15,14,14,0.75)] backdrop-blur-md" />
       <div className="absolute top-[0.51px] left-[0.39px] h-[598.994px] w-[387.605px]">
         <CardCorners />
       </div>

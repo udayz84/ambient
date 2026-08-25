@@ -60,8 +60,14 @@ export function ApplicationsMobile({
   const ctaHref = cta.href || "";
   const dotIcon = mediaUrl(cta.dot_icon) || "/applications/cta-dot.svg";
 
-  const goNext = useCallback(() => setActiveIndex((i) => (i + 1) % features.length), [features.length]);
-  const goPrev = useCallback(() => setActiveIndex((i) => (i - 1 + features.length) % features.length), [features.length]);
+  const goNext = useCallback(() => {
+    setCategoryActiveIndex((categoryActiveIndex + 1) % tabs.length);
+    setActiveIndex(0);
+  }, [categoryActiveIndex, tabs.length, setCategoryActiveIndex]);
+  const goPrev = useCallback(() => {
+    setCategoryActiveIndex((categoryActiveIndex - 1 + tabs.length) % tabs.length);
+    setActiveIndex(0);
+  }, [categoryActiveIndex, tabs.length, setCategoryActiveIndex]);
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const activeTabRef = useRef<HTMLButtonElement>(null);
@@ -214,50 +220,36 @@ export function ApplicationsMobile({
             <img
               alt=""
               src={imgSrc}
-              className={`h-auto max-h-[360px] object-contain drop-shadow-2xl ${
-                activeTab === "AUTOMOTIVE" ? "w-full scale-100" : "w-[130%] max-w-none scale-105"
-              }`}
+              className="h-auto max-h-[360px] w-full object-contain drop-shadow-2xl"
               aria-hidden
             />
           ) : null}
         </div>
       </div>
 
-      {/* Feature Card */}
-      <div className="relative z-20 mt-[-36px] w-full max-w-[343px] border-[0.5px] border-white/20 bg-[#000000] p-[24px]">
-        {activeTab === "AUTOMOTIVE" && activeIndex === 0 && (
-          <img
-            src="/applications/indicator-vertical.svg"
-            alt=""
-            className="absolute -top-[92px] left-[18px] h-[92px] w-[22px] pointer-events-none z-20"
-            aria-hidden
-          />
-        )}
+      {/* Feature Cards */}
+      <div className="relative z-20 mt-[-36px] grid w-full max-w-[343px] grid-cols-2 gap-[12px]">
+        {features.map((feature, idx) => (
+          <div key={idx} className="relative w-full border border-white/20 bg-[#000000] p-[16px]">
+            {activeTab === "AUTOMOTIVE" && idx === 0 && (
+              <img
+                src="/applications/indicator-vertical.svg"
+                alt=""
+                className="absolute -top-[92px] left-[18px] h-[92px] w-[22px] pointer-events-none z-20"
+                aria-hidden
+              />
+            )}
 
-        <div className="absolute -top-[0.5px] -left-[0.5px] z-10 flex size-[6px] items-center justify-center">
-          <div className="-scale-y-100 flex-none">
-            <div className="relative size-[6px]">
-              <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
-            </div>
+            <Corners />
+
+            <h4 className={`${gilroyMedium.className} text-[16px] leading-[22px] text-white`}>
+              {feature.title}
+            </h4>
+            <p className={`${interRegular.className} mt-[12px] text-[12px] leading-[18px] text-[#f0f0f0] opacity-65`}>
+              {feature.description}
+            </p>
           </div>
-        </div>
-
-        <div className="absolute -bottom-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center">
-          <div className="-scale-x-100 flex-none">
-            <div className="relative size-[6px]">
-              <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
-            </div>
-          </div>
-        </div>
-
-        <div key={activeIndex} className="flex flex-col animate-slide-fade">
-          <h3 className={`${gilroyMedium.className} text-[20px] text-white leading-[28px] not-italic`}>
-            {activeFeature?.title ?? ""}
-          </h3>
-          <p className={`${interRegular.className} mt-[16px] text-[14px] text-[#f0f0f0] opacity-65 leading-[22px] not-italic`}>
-            {activeFeature?.description ?? ""}
-          </p>
-        </div>
+        ))}
       </div>
 
       {/* Navigation Arrows */}

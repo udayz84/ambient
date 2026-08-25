@@ -94,6 +94,7 @@ export function ProductsHero({ data }: { data?: any }) {
         primary={primary}
         secondary={secondary}
         chipsetImage={chipsetImageMobile}
+        strapiTags={strapiTags}
       />
     </>
   );
@@ -317,31 +318,21 @@ function ProductsHeroMobile({
   primary,
   secondary,
   chipsetImage,
+  strapiTags,
 }: {
   titleLines: string[];
   subtitle: string;
   primary: { label: string; href: string };
   secondary: { label: string; href: string };
   chipsetImage: string | null;
+  strapiTags: any[];
 }) {
   return (
     <section
       className="relative -mt-[78px] w-full bg-black min-[1024px]:hidden"
       aria-label="Products"
     >
-      <div className="relative flex w-full flex-col pt-[120px] pb-[80px]">
-        {/* Background chip image */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          {chipsetImage ? (
-            /* eslint-disable-next-line @next/next/no-img-element */
-            <img
-              alt=""
-              src={chipsetImage}
-              className="absolute inset-0 size-full object-cover object-[center_bottom] opacity-60"
-            />
-          ) : null}
-        </div>
-
+      <div className="relative flex w-full flex-col pt-[120px] pb-[40px]">
         {/* Background vertical lines connecting to Navbar */}
         <div className="pointer-events-none absolute top-0 bottom-0 left-[26px] z-0">
           <div className="absolute top-0 left-1/2 h-full w-[1px] -translate-x-1/2 overflow-hidden">
@@ -370,28 +361,66 @@ function ProductsHeroMobile({
           </div>
         </div>
 
-        {/* Text area */}
+        {/* Content wrapper */}
         <div 
-          className="relative z-10 flex flex-col gap-[15px] px-[24px] animate-hero-text-fade-in opacity-0"
+          className="relative z-10 flex flex-col items-center px-[24px] animate-hero-text-fade-in opacity-0"
           style={{ animationDelay: "200ms" }}
         >
-          <h1
-            className={`${gilroyMedium.className} w-[320px] max-w-full bg-clip-text text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
-            style={{
-              backgroundImage: HERO_TITLE_GRADIENT,
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-            }}
-          >
-            {titleLines.join(" ")}
-          </h1>
+          {/* Tag Badge */}
+          <div className="mb-[32px] flex w-full justify-center">
+            {(Array.isArray(strapiTags) && strapiTags.length > 0
+              ? strapiTags
+              : [{ text: "GPX10PRO  ·  A-CUBE ARCHITECTURE" }]
+            ).map((t: any, i: number) => (
+              <TagBadge
+                key={i}
+                label={t.text}
+                width={280}
+                centerLabel
+                labelOffsetX={0}
+                rightBarLeft={270.5}
+                nodeId={`mobile:tags-${i}`}
+              />
+            ))}
+          </div>
+
+          {/* Title Area with Corners */}
+          <div className="relative inline-flex flex-col items-center p-[16px] mb-[8px]">
+            <h1
+              className={`${gilroyMedium.className} w-[320px] max-w-full bg-clip-text text-[36px] leading-[40px] font-medium text-transparent not-italic [word-break:break-word] text-center`}
+              style={{
+                backgroundImage: HERO_TITLE_GRADIENT,
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
+            >
+              {titleLines.map((line, i) => (
+                 <span key={i} className="block">{line}</span>
+              ))}
+            </h1>
+            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+          </div>
+
           <p
-            className={`${interRegular.className} w-[332px] max-w-full text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80`}
+            className={`${interRegular.className} w-[332px] max-w-full text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 text-center`}
           >
             {subtitle}
           </p>
 
-          <div className="mt-[9px] flex w-full flex-col gap-[16px]">
+          {/* Inline Image */}
+          <div className="relative mt-[40px] mb-[40px] flex w-[calc(100%+48px)] -mx-[24px] justify-center">
+            {chipsetImage ? (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                alt=""
+                src={chipsetImage}
+                className="relative z-10 h-auto w-full max-w-none object-contain drop-shadow-2xl scale-[1.15]"
+              />
+            ) : null}
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="flex w-full flex-col gap-[16px]">
             <a
               href={primary.href}
               className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-hidden`}

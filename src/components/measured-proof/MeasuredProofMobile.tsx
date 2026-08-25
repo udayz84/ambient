@@ -28,7 +28,7 @@ const DESKTOP_CARDS: FallbackCard[] = [
     imageHeight: 350,
     imageTop: 185,
     imageClassName:
-      "absolute top-[-16.05%] left-0 h-[135.04%] w-full max-w-none",
+      "absolute top-[-16.05%] left-0 h-[135.04%] w-full max-w-none max-[1023px]:scale-[0.75] max-[1023px]:origin-top",
     imageSizes: "380px",
     statWidth: 299,
     descriptionWidth: 290,
@@ -37,7 +37,7 @@ const DESKTOP_CARDS: FallbackCard[] = [
     imageWidth: 240,
     imageHeight: 200,
     imageTop: 240,
-    imageClassName: "absolute inset-0 max-w-none object-contain",
+    imageClassName: "absolute inset-0 max-w-none object-contain max-[1023px]:scale-[1.5]",
     imageSizes: "240px",
     statWidth: 187,
     descriptionWidth: 319,

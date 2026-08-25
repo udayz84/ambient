@@ -243,7 +243,7 @@ function ProductsStartBuildingMobile({
 }) {
   return (
     <div
-      className="relative w-full px-[24px] pt-[80px] pb-[80px]"
+      className="relative w-full px-[24px] pt-[40px] pb-[40px]"
       aria-label="Start building with GPX10 Pro"
     >
       {/* Title */}

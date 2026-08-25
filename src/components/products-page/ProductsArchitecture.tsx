@@ -474,7 +474,7 @@ function ProductsArchitectureMobile({
       <div className="relative mx-auto w-full" style={{ maxWidth: 393 }}>
 
         {/* ── Header — 3568:4704 (top=30, centred, 350 wide, gap=10) ── */}
-        <div className="flex flex-col items-center gap-[10px] px-[21px] pt-[80px]">
+        <div className="flex flex-col items-center gap-[10px] px-[21px] pt-[40px]">
           <TagBadge
             label={label}
             width={120}
@@ -509,7 +509,7 @@ function ProductsArchitectureMobile({
         </div>
 
         {/* ── Article card — 3568:4713 (responsive) ── */}
-        <div className="mx-auto mt-[15px] w-full max-w-[353px] px-[20px] min-[393px]:px-0 pb-[80px]">
+        <div className="mx-auto mt-[15px] w-full max-w-[353px] px-[20px] min-[393px]:px-0 pb-[40px]">
           <div
             className="relative w-full border border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] flex flex-col pt-[14px] pb-[16px]"
             data-name="Article"
@@ -536,14 +536,14 @@ function ProductsArchitectureMobile({
             </p>
           </div>
 
-          {/* ── Stats cards — 4105:8015 (353 wide, gap=12) ── */}
-          <div className="mt-[5px] flex flex-col gap-[12px]">
+          {/* ── Stats cards ── */}
+          <div className="mt-[5px] flex flex-col items-center w-full gap-[12px]">
             {stats.map((stat) => (
               <div
                 key={stat.nodeId}
-                className="relative flex w-[353px] flex-col items-center bg-[rgba(0,0,0,0.1)] p-[20px]"
+                className="relative flex w-full flex-col items-start bg-[rgba(0,0,0,0.1)] p-[20px]"
               >
-                <div className="flex w-[324px] flex-col gap-[7px]">
+                <div className="flex w-full flex-col gap-[7px]">
                   {/* Icon + title */}
                   <div className="flex items-center gap-[8px]">
                     <div className="h-[32px] w-[32px] shrink-0">
@@ -551,7 +551,7 @@ function ProductsArchitectureMobile({
                       <img alt="" src={stat.statIcon || STAT_ICON} className="block size-full max-w-none" aria-hidden />
                     </div>
                     <h3
-                      className={`${gilroyMedium.className} whitespace-nowrap text-[24px] leading-[38px] font-medium text-white not-italic [word-break:break-word]`}
+                      className={`${gilroyMedium.className} whitespace-nowrap text-[20px] sm:text-[24px] leading-[38px] font-medium text-white not-italic [word-break:break-word]`}
                     >
                       {stat.title}
                     </h3>

@@ -577,9 +577,16 @@ function ProductsUseCasesMobile({
   primary,
   secondary,
 }: any) {
+  const handlePrev = () => {
+    onSelect((activeIdx - 1 + tabs.length) % tabs.length);
+  };
+  const handleNext = () => {
+    onSelect((activeIdx + 1) % tabs.length);
+  };
+
   return (
     <section
-      className="relative w-full overflow-hidden bg-black px-[24px] pt-[80px] pb-[80px] min-[1024px]:hidden"
+      className="relative w-full overflow-hidden bg-black px-[24px] pt-[24px] pb-[16px] min-[1024px]:hidden"
       aria-label="Use cases"
     >
       {/* Title */}
@@ -638,29 +645,64 @@ function ProductsUseCasesMobile({
         <img
           alt=""
           src={activeImage}
-          className="relative z-10 h-auto w-full max-w-[360px] object-cover"
+          className="relative z-10 h-auto max-h-[360px] w-full max-w-[360px] object-contain"
         />
       </div>
 
-      {/* Cards */}
-      <div className="mt-[32px] flex flex-col gap-[16px]">
-        {cards.map((card: any) => (
-          <UseCaseCardMobileView key={card.nodeId} card={card} />
-        ))}
+      {/* Cards & Arrows */}
+      <div className="mt-[32px] flex flex-col items-center gap-[24px]">
+        <div className="grid w-full max-w-[343px] grid-cols-2 gap-[12px]">
+          {cards.map((card: any) => (
+            <UseCaseCardMobileView key={card.nodeId} card={card} />
+          ))}
+        </div>
+
+        {tabs.length > 1 && (
+          <div className="flex items-center justify-center gap-[16px]">
+            <button
+              type="button"
+              onClick={handlePrev}
+              className="size-[44px] relative"
+              aria-label="Previous tab"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                alt=""
+                src="/platform-scale/nav-left.svg"
+                className="absolute inset-0 block size-full max-w-none"
+                aria-hidden
+              />
+            </button>
+            <button
+              type="button"
+              onClick={handleNext}
+              className="size-[44px] relative"
+              aria-label="Next tab"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                alt=""
+                src="/platform-scale/nav-right.svg"
+                className="absolute inset-0 block size-full max-w-none"
+                aria-hidden
+              />
+            </button>
+          </div>
+        )}
       </div>
 
-      {/* CTAs */}
-      <div className="mt-[32px] flex flex-col gap-[16px]">
+      {/* CTAs - side-by-side */}
+      <div className="mt-[32px] flex flex-row gap-[8px] w-full max-w-[343px] mx-auto">
         <a
           href={primary.href}
-          className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-center overflow-hidden`}
+          className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center overflow-hidden`}
         >
           <span
             aria-hidden
             className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
           />
           <AnimatedDotsBackground />
-          <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+          <span className="relative text-[10px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
             {primary.label}
           </span>
           <span
@@ -671,10 +713,10 @@ function ProductsUseCasesMobile({
         </a>
         <a
           href={secondary.href}
-          className={`${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
+          className={`${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
           style={{ backgroundColor: SECONDARY_CTA_BG }}
         >
-          <span className="relative px-[20px] py-[10px] text-[14px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+          <span className="relative px-[4px] sm:px-[12px] py-[10px] text-[10px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic text-center">
             {secondary.label}
           </span>
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
@@ -690,20 +732,21 @@ function UseCaseCardMobileView({ card }: { card: any }) {
   return (
     <div
       ref={fadeRef}
-      className={`relative flex flex-col gap-[8px] p-[20px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] ${getFadeInClass(isVisible)}`}
+      className={`relative flex flex-col p-[16px] border border-white/20 bg-[#000000] ${getFadeInClass(isVisible)}`}
       style={{ backgroundColor: card.bg }}
     >
+      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+
       <h4
-        className={`${gilroyMedium.className} text-[20px] leading-[26px] font-medium text-white not-italic`}
+        className={`${gilroyMedium.className} text-[16px] leading-[22px] font-medium text-white not-italic`}
       >
         {card.title}
       </h4>
       <p
-        className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
+        className={`${interRegular.className} mt-[12px] text-[12px] leading-[18px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
       >
         {card.description}
       </p>
-      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
     </div>
   );
 }

@@ -360,8 +360,8 @@ function ProductsModelForgeMobile({
     >
       <div className="relative mx-auto w-full" style={{ maxWidth: 393 }}>
 
-        {/* ── Header — 3568:4786 (top=30, centred, 350 wide, gap=10) ── */}
-        <div className="flex flex-col items-center gap-[10px] px-[21px] pt-[80px]">
+        {/* ── Header ── */}
+        <div className="flex flex-col items-center gap-[10px] px-[21px] pt-[40px]">
           <TagBadge
             label="Build with GPX10PRO"
             width={160}
@@ -384,7 +384,7 @@ function ProductsModelForgeMobile({
             >
               {heading}
             </h2>
-            <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
+            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           </div>
           {/* Description */}
           <p
@@ -394,45 +394,52 @@ function ProductsModelForgeMobile({
           </p>
         </div>
 
-        {/* ── Cards — 3572:8992 (354 wide, gap=14) ── */}
-        <div className="mx-auto mt-[26px] flex w-full max-w-[354px] px-[20px] min-[393px]:px-0 flex-col gap-[14px]">
+        {/* ── Cards ── */}
+        <div className="mx-auto mt-[26px] flex w-full flex-col items-center gap-[24px]">
           {steps.map((step) => (
-            <div key={step.nodeId} className="relative aspect-[354/400] w-full" style={{ containerType: "inline-size" }}>
-              <div className="absolute left-0 top-0 origin-top-left" style={{ transform: "scale(min(1, calc(100cqi / 354)))" }}>
+            <div
+              key={step.nodeId}
+              className="relative shrink-0 flex items-start justify-center"
+              style={{
+                transform: "scale(0.9)",
+                transformOrigin: "top center",
+                height: `${400 * 0.9}px`,
+                width: `${354 * 0.9}px`,
+              }}
+            >
+              <div className="absolute top-0 left-1/2 -translate-x-1/2" style={{ width: 354, height: 400 }}>
                 <MobileModelForgeCard step={step} />
               </div>
             </div>
           ))}
         </div>
 
-        {/* ── CTA row — 3572:9026 (354 wide, gap=14) ── */}
-        <div className="mx-auto mt-[30px] w-full max-w-[354px] px-[20px] min-[393px]:px-0 pb-[80px]" style={{ containerType: "inline-size" }}>
-          <div className="flex origin-top-left gap-[14px]" style={{ transform: "scale(min(1, calc(100cqi / 354)))" }}>
-            {/* Primary — 211×48 */}
-            <a
-              href={primary.href}
-              className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[211px] shrink-0 items-center justify-center overflow-hidden`}
-            >
-              <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
-              <AnimatedDotsBackground />
-              <span className="relative text-[12px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
-                {primary.label}
-              </span>
-              <span aria-hidden className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
-              <GreenCtaCorners />
-            </a>
-            {/* Secondary — 129×48 */}
-            <a
-              href={secondary.href}
-              className={`${gilroyMedium.className} relative flex h-[48px] w-[129px] shrink-0 items-center justify-center overflow-clip px-[20px] py-[10px]`}
-              style={{ backgroundColor: SECONDARY_CTA_BG }}
-            >
-              <span className="relative text-[12px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
-                {secondary.label}
-              </span>
-              <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
-            </a>
-          </div>
+        {/* ── CTA row ── */}
+        <div className="mx-auto mt-[32px] flex w-full max-w-[343px] flex-row gap-[8px] px-[12px] pb-[40px]">
+          {/* Primary */}
+          <a
+            href={primary.href}
+            className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center overflow-hidden`}
+          >
+            <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
+            <AnimatedDotsBackground />
+            <span className="relative text-[9px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+              {primary.label}
+            </span>
+            <span aria-hidden className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
+            <GreenCtaCorners />
+          </a>
+          {/* Secondary */}
+          <a
+            href={secondary.href}
+            className={`${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
+            style={{ backgroundColor: SECONDARY_CTA_BG }}
+          >
+            <span className="relative text-[9px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+              {secondary.label}
+            </span>
+            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+          </a>
         </div>
       </div>
     </section>

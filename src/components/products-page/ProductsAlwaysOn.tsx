@@ -33,8 +33,15 @@ const ON_DOT_OUTER = "/products/alwayson/on-dot-outer.svg";
 const ON_DOT_INNER = "/products/alwayson/on-dot-inner.svg";
 const ON_GLOW = "/products/alwayson/on-glow.svg";
 
+/* Mobile-only assets — Figma 3565:3127 (393×1050) */
+const CARD_CORNERS_MOBILE = "/products/alwayson/card-corners-mobile.svg";
+const BRACKET_LEFT_MOBILE = "/products/alwayson/bracket-left-mobile.svg";
+const BRACKET_RIGHT_MOBILE = "/products/alwayson/bracket-right-mobile.svg";
+
 const TITLE_GRADIENT =
   "linear-gradient(124.465deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
+const TITLE_GRADIENT_MOBILE =
+  "linear-gradient(107.4537261117953deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
 const CARD_BG =
   "linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), linear-gradient(90deg, rgba(15, 14, 14, 0.75) 0%, rgba(15, 14, 14, 0.75) 100%)";
@@ -108,7 +115,15 @@ function SectionBadge() {
 }
 
 /* ── Card badge ("power" / "Performance") ────────────────────── */
-function CardBadge({ label, width }: { label: string; width: number }) {
+function CardBadge({
+  label,
+  width,
+  labelClassName,
+}: {
+  label: string;
+  width: number;
+  labelClassName?: string;
+}) {
   return (
     <TagBadge
       label={label}
@@ -117,6 +132,7 @@ function CardBadge({ label, width }: { label: string; width: number }) {
       centerLabel
       labelOffsetX={0}
       rightBarLeft={width - 9.52}
+      labelClassName={labelClassName}
     />
   );
 }
@@ -343,6 +359,156 @@ function ToggleFrame({
   );
 }
 
+/* ── MOBILE: section badge — Figma 4081:8446 (160×27) ────────── */
+function MobileSectionBadge() {
+  return (
+    <TagBadge
+      label="The signature mode"
+      width={160}
+      height={27}
+      centerLabel
+      labelOffsetX={0}
+      leftBarLeft={5.7}
+      rightBarLeft={152.16}
+      labelClassName="text-[12px] leading-[19.5px] tracking-[-0.36px]"
+    />
+  );
+}
+
+/* ── MOBILE: stat card — Figma 3567:4035 (353×165) ───────────── */
+function MobileStatCard({
+  badgeLabel,
+  badgeWidth,
+  stat,
+  sub,
+  footerLabel,
+  className = "",
+}: {
+  badgeLabel: string;
+  badgeWidth: number;
+  stat: string;
+  sub: string;
+  footerLabel: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`h-[165px] w-[353px] overflow-clip ${className}`}
+      data-name="Lower power consumption"
+    >
+      <div
+        className="absolute left-0 top-0 h-[217.5px] w-[364px] border-[0.5px] border-[rgba(255,255,255,0.1)] border-solid"
+        style={{ backgroundImage: CARD_BG }}
+      />
+      <GlowSwoosh />
+      <div
+        className="pointer-events-none absolute left-0 top-[0.51px] h-[164.494px] w-[353px]"
+        data-name="Cornor Elements"
+        aria-hidden
+      >
+        <div className="absolute inset-[-0.3%_-0.14%]">
+          <img alt="" className="block max-w-none size-full" src={CARD_CORNERS_MOBILE} />
+        </div>
+      </div>
+      <div
+        className="absolute left-[19px] top-[21px] size-[40px] rounded-[6.667px]"
+        style={{ backgroundImage: ICON_TILE_BG }}
+        data-name="Icon"
+      >
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute h-[26.667px] left-1/2 top-1/2 w-[28.148px]">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={CARD_ICON} />
+        </div>
+      </div>
+      <div className="absolute left-[75px] top-[27.67px] flex items-center gap-[27.778px]" data-name="Logo and Menu">
+        <CardBadge
+          label={badgeLabel}
+          width={badgeWidth}
+          labelClassName="text-[12px] leading-[19.5px] tracking-[-0.36px]"
+        />
+      </div>
+      <p
+        className={`${gilroyMedium.className} [word-break:break-word] absolute left-[22.75px] leading-[38px] not-italic text-[24px] text-white top-[73.28px] whitespace-nowrap`}
+      >
+        {stat}
+      </p>
+      <p
+        className={`${gilroyMedium.className} [word-break:break-word] absolute left-[132.01px] leading-[28px] not-italic text-[14px] text-white top-[81.99px] whitespace-nowrap`}
+      >
+        {sub}
+      </p>
+      <p
+        className={`${interRegular.className} [word-break:break-word] absolute font-normal left-[43.69px] leading-[24px] not-italic text-[14px] text-white top-[127.76px] uppercase whitespace-nowrap`}
+      >
+        {footerLabel}
+      </p>
+      <div className="-translate-x-1/2 absolute h-0 left-[calc(50%-9.5px)] top-[118.48px] w-[300px]" aria-hidden>
+        <div className="absolute inset-[-1px_0_0_0]">
+          <img alt="" className="block max-w-none size-full" src={LINE_920} />
+        </div>
+      </div>
+      <div className="absolute left-[24.01px] size-[8px] top-[135.76px]" aria-hidden>
+        <div className="absolute inset-[-12.5%]">
+          <img alt="" className="block max-w-none size-full" src={DOT_GREEN} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── MOBILE: toggle strip — Figma 4087:8465 (331×69) ─────────── */
+function MobileToggleFrame({
+  surge,
+  onToggle,
+  className = "",
+}: {
+  surge: boolean;
+  onToggle: () => void;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`h-[69px] w-[331px] overflow-clip bg-[rgba(0,0,0,0.1)] ${className}`}
+      data-name="Lower power consumption"
+    >
+      <GlowSwoosh top={-25.16} />
+      <div className="-translate-x-1/2 absolute flex gap-[10px] items-center left-[calc(50%-0.33px)] top-[19px]">
+        <p
+          className={`${interBold.className} [word-break:break-word] font-bold leading-[21px] not-italic text-[16px] text-white whitespace-nowrap transition-all duration-[400ms] ease-in-out origin-right ${
+            surge ? "opacity-70 scale-[0.85]" : "opacity-100 scale-100"
+          }`}
+        >
+          Subconscious
+        </p>
+        <button
+          type="button"
+          role="switch"
+          aria-checked={surge}
+          aria-label="Toggle Reflex Surge"
+          onClick={onToggle}
+          className={`relative block h-[34px] w-[62.333px] shrink-0 cursor-pointer rounded-[100px] transition-colors duration-[400ms] ease-in-out ${
+            surge ? "bg-[#6fe047]" : "bg-[#3a3a3a]"
+          }`}
+          data-name="Switch"
+        >
+          <div
+            className="absolute bg-[#112f06] rounded-[100px] shadow-[0px_2.833px_5.667px_0px_rgba(39,39,39,0.1)] size-[28.333px] left-[2.83px] top-[2.83px] transition-transform duration-[400ms] ease-in-out will-change-transform"
+            style={{ transform: surge ? "translateX(28.34px)" : "translateX(0px)" }}
+            data-name="Switch"
+          />
+        </button>
+        <p
+          className={`${interBold.className} [word-break:break-word] font-bold leading-[21px] not-italic text-[16px] text-white whitespace-nowrap transition-all duration-[400ms] ease-in-out origin-left ${
+            surge ? "opacity-100 scale-100" : "opacity-70 scale-[0.85]"
+          }`}
+        >
+          Reflex Surge
+        </p>
+      </div>
+      <Corners leftSrc={CORNER_42} rightSrc={CORNER_43} />
+    </div>
+  );
+}
+
 /* ── Section title block ─────────────────────────────────────── */
 function SectionTitle({ heading, subtitle }: { heading: string; subtitle: string }) {
   return (
@@ -375,6 +541,10 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const [surge, setSurge] = useState(true);
   const toggle = () => setSurge((v) => !v);
+  /* Mobile defaults to the baseline (subconscious) render — matches the
+     visible picture in Figma 3565:3127. */
+  const [surgeMobile, setSurgeMobile] = useState(false);
+  const toggleMobile = () => setSurgeMobile((v) => !v);
 
   return (
     <>
@@ -473,97 +643,129 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
         </div>
       </section>
 
-      {/* MOBILE (<1024px) */}
+      {/* MOBILE (<1024px) — Figma 3565:3127 (393×1050) */}
       <section
         className="relative w-full overflow-hidden bg-black min-[1024px]:hidden"
         aria-label="Always on"
       >
-        <div className="flex flex-col items-center gap-[16px] px-[24px] pt-[80px]">
-          <SectionBadge />
-          <div className="relative flex flex-col items-center px-[10px]">
-            <h2
-              className={`${gilroyMedium.className} bg-clip-text text-center text-[30px] leading-[34px] font-medium text-transparent not-italic`}
-              style={{
-                backgroundImage: TITLE_GRADIENT,
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-              }}
+        <div className="relative mx-auto h-[1050px] w-[393px]" data-node-id="3565:3127">
+
+          {/* Header — Figma 3565:3129 (x23 y30, 350×174, gap 10) */}
+          <div
+            className="absolute left-[23px] top-[30px] flex w-[350px] flex-col items-center gap-[10px]"
+            data-node-id="3565:3129"
+          >
+            <MobileSectionBadge />
+            {/* Title group — Figma 3565:3130 (356×79, text at +3/+7, 36px/36px, 2 lines).
+                pb-[8px] extends the gradient paint box below the 72px line boxes so
+                Gilroy descenders ("p" in "asleep") aren't clipped by bg-clip-text;
+                -mb-[8px] cancels the layout shift, mb-[6px] adds breathing room
+                before the subtitle. */}
+            <div className="relative mb-[6px] h-[79px] w-[356px]" data-node-id="3565:3130">
+              <h2
+                className={`${gilroyMedium.className} absolute left-[3px] top-[7px] -mb-[8px] w-[350px] bg-clip-text pb-[8px] text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+                style={{
+                  backgroundImage: TITLE_GRADIENT_MOBILE,
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                }}
+              >
+                {heading}
+              </h2>
+              <div className="absolute inset-x-0 top-[4px] h-[70px]" aria-hidden>
+                <FrameCorners leftSrc={CORNER_58} rightSrc={CORNER_55} />
+              </div>
+            </div>
+            <p
+              className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+              data-node-id="3565:3136"
             >
-              {heading}
-            </h2>
-            <FrameCorners leftSrc={CORNER_58} rightSrc={CORNER_55} />
+              {subtitle}
+            </p>
           </div>
-          <p className={`${interRegular.className} text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}>
-            {subtitle}
+
+          {/* Chip visual — Figma 3567:4017 (924×513 centered, y136). Uses the same
+              correlation-registered desktop pair (scale 0.992, offset (-12, +120)
+              full-res px) scaled by 924/1450 into the mobile box, so the two renders
+              are pixel-registered and the crossfade doesn't jump. Baseline underneath,
+              surge crossfades on top, Figma fade overlay above both. */}
+          <div
+            className="-translate-x-1/2 absolute h-[513px] left-[calc(50%+0.5px)] top-[136px] w-[924px] overflow-clip"
+            data-node-id="3567:4017"
+            data-name="ChatGPT Image Jul 2, 2026, 12_54_47 PM 2"
+          >
+            <img
+              alt=""
+              src={BG_SUBCONSCIOUS}
+              className="absolute max-w-none pointer-events-none"
+              style={{ left: "-3.85px", top: "29.44px", width: "916.57px", height: "477.44px" }}
+            />
+            <img
+              alt=""
+              src={BG_SURGE}
+              className="absolute max-w-none pointer-events-none transition-opacity duration-[800ms] ease-in-out will-change-[opacity]"
+              style={{ left: "0px", top: "-8.77px", width: "924px", height: "530.53px", opacity: surgeMobile ? 1 : 0 }}
+              aria-hidden={!surgeMobile}
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0"
+              style={{
+                backgroundImage:
+                  "linear-gradient(180deg, rgba(0, 0, 0, 0) 85.312%, rgb(0, 0, 0) 100%), linear-gradient(180deg, rgb(0, 0, 0) 2.6875%, rgba(0, 0, 0, 0) 14.375%)",
+              }}
+            />
+          </div>
+
+          {/* ON chips — Figma 3567:4004 / 3567:4010 (y232) */}
+          <OnChip label="AI CORE" width={144} icon="ai" className="absolute left-[36px] top-[232px]" />
+          <OnChip label={`HOST  CPU`} width={157} icon="cpu" active={surgeMobile} className="absolute left-[199px] top-[232px]" />
+
+          {/* Stat cards — Figma 3567:4035 (y560) / 3567:4066 (y741) */}
+          <MobileStatCard
+            className="absolute left-[20px] top-[560px]"
+            badgeLabel="power"
+            badgeWidth={97}
+            stat="< 100 uW"
+            sub="always on AI"
+            footerLabel="Continuous pulse"
+          />
+          <MobileStatCard
+            className="absolute left-[20px] top-[741px]"
+            badgeLabel="Performance"
+            badgeWidth={116}
+            stat="512 GOPS "
+            sub="instant"
+            footerLabel="REFLEX SURGE"
+          />
+
+          {/* Toggle strip — Figma 4087:8465 (x31 y927, 331×69) */}
+          <MobileToggleFrame surge={surgeMobile} onToggle={toggleMobile} className="absolute left-[31px] top-[927px]" />
+
+          {/* Brackets — Figma 4087:8475 / 4087:8476 */}
+          <div className="absolute left-[20px] top-[973px] h-[46px] w-[132px]" data-name="Vector" aria-hidden>
+            <div className="absolute inset-[-6.28%_0_-1.09%_-0.38%]">
+              <img alt="" className="block max-w-none size-full" src={BRACKET_LEFT_MOBILE} />
+            </div>
+          </div>
+          <div className="absolute left-[241.12px] top-[973.13px] flex h-[45.63px] w-[131.965px] items-center justify-center" aria-hidden>
+            <div className="-scale-y-100 flex-none rotate-180">
+              <div className="relative h-[45.63px] w-[131.965px]" data-name="Vector">
+                <div className="absolute inset-[-5.84%_0_-1.1%_-0.38%]">
+                  <img alt="" className="block max-w-none size-full" src={BRACKET_RIGHT_MOBILE} />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Caption — Figma 4087:8464 */}
+          <p
+            className={`${interRegular.className} -translate-x-1/2 [word-break:break-word] absolute font-normal left-1/2 leading-[18px] not-italic text-[12px] text-[#bbbbbb] text-center top-[1011.39px] uppercase whitespace-nowrap`}
+            data-node-id="4087:8464"
+          >
+            Return to the baseline
           </p>
         </div>
-
-        {/* ON chips */}
-        <div className="mt-[24px] flex flex-wrap items-center justify-center gap-[12px] px-[24px]">
-          <OnChip label="AI CORE" width={144} icon="ai" className="relative" />
-          <OnChip label={`HOST  CPU`} width={157} icon="cpu" active={surge} className="relative" />
-        </div>
-
-        {/* Chip visual — baseline underneath (correlation-calibrated to the
-            surge render, same transform as desktop), surge crossfades on top */}
-        <div className="relative mt-[16px] aspect-[1440/832.55] w-full overflow-hidden">
-          <img
-            alt=""
-            src={BG_SUBCONSCIOUS}
-            className="absolute max-w-none"
-            style={{ left: "-0.42%", top: "7.2%", width: "99.2%", height: "90%" }}
-          />
-          <img
-            alt=""
-            src={BG_SURGE}
-            className="absolute inset-0 size-full object-cover transition-opacity duration-[800ms] ease-in-out will-change-[opacity]"
-            style={{ opacity: surge ? 1 : 0 }}
-            aria-hidden={!surge}
-          />
-        </div>
-
-        {/* Stat cards — 364px design scaled down proportionally on narrow screens */}
-        <div className="mt-[24px] flex w-full flex-col items-center gap-[20px] px-[24px]">
-          <div className="relative aspect-[364/218] w-full max-w-[364px]" style={{ containerType: "inline-size" }}>
-            <div className="absolute left-0 top-0 origin-top-left" style={{ transform: "scale(min(1, calc(100cqi / 364)))" }}>
-              <StatCard
-                className="relative"
-                badgeLabel="power"
-                badgeWidth={97}
-                stat="< 100 uW"
-                sub="always on AI"
-                footerLabel="Continuous pulse"
-              />
-            </div>
-          </div>
-          <div className="relative aspect-[364/218] w-full max-w-[364px]" style={{ containerType: "inline-size" }}>
-            <div className="absolute left-0 top-0 origin-top-left" style={{ transform: "scale(min(1, calc(100cqi / 364)))" }}>
-              <StatCard
-                className="relative"
-                badgeLabel="Performance"
-                badgeWidth={137}
-                stat="512 GOPS "
-                sub="instant"
-                footerLabel="REFLEX SURGE"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Toggle — 410px design scaled down proportionally on narrow screens */}
-        <div className="mt-[24px] flex justify-center px-[24px]">
-          <div className="relative aspect-[410/80] w-full max-w-[410px]" style={{ containerType: "inline-size" }}>
-            <div className="absolute left-0 top-0 origin-top-left" style={{ transform: "scale(min(1, calc(100cqi / 410)))" }}>
-              <ToggleFrame surge={surge} onToggle={toggle} className="relative" />
-            </div>
-          </div>
-        </div>
-
-        <p
-          className={`${interRegular.className} mt-[16px] px-[24px] pb-[80px] text-center text-[12px] leading-[18px] font-normal uppercase text-[#bbbbbb] not-italic`}
-        >
-          Return to the baseline
-        </p>
       </section>
     </>
   );
