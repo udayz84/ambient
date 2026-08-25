@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
+import { dmMono, gilroyMedium, interBold, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
 
@@ -24,16 +24,32 @@ const ARROW_SVG = "/developer/pipeline-card-arrow.svg";
 const ICON_TILE_BG =
   "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 65.123 64' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%25' width='100%25' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(3.7036e-14 2.3201 -4.7815 -3.0317e-15 32.561 -3.8447)'><stop stop-color='rgba(57,74,54,1)' offset='0'/><stop stop-color='rgba(43,54,41,1)' offset='0.5'/><stop stop-color='rgba(29,34,28,1)' offset='1'/></radialGradient></defs></svg>\")";
 
+/* Figma 4945:4406 — smaller icon tile used in the expanded header bar (54.949×54). */
+const ICON_TILE_BG_SMALL =
+  "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 54.949 54' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%25' width='100%25' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(3.125e-14 1.9576 -4.0345 -2.558e-15 27.474 -3.244)'><stop stop-color='rgba(57,74,54,1)' offset='0'/><stop stop-color='rgba(43,54,41,1)' offset='0.5'/><stop stop-color='rgba(29,34,28,1)' offset='1'/></radialGradient></defs></svg>\")";
+
 const DEFAULT_HEADING = "The ModelForge Pipeline";
 const DEFAULT_SUBTITLE =
   "From microwatt edge sensors running on coin cells to air-cooled high-performance compute arrays, the GPX architecture scales seamlessly across the physical world.";
 const DEFAULT_TAG = "Real-time AI at edge";
 
+/* Flow diagram geometry — image renders FULL WIDTH of the 1204 card at its
+   natural aspect (nothing cropped); the expanded card auto-sizes on load:
+   expandedHeight = FLOW_TOP + displayHeight(image). 285.79 is the minimum
+   frame height (Figma 4819:5421 scaled ×1204/1292.934). */
+const FLOW_WIDTH = 1204;
+const FLOW_FRAME_HEIGHT = 285.7912; // 306.9014 × (1204 / 1292.9336)
+const FLOW_TOP = 310.578125;
+const FLOW_BOTTOM_PAD = 0; // card ends flush at the image bottom
+const CARD_MIN_EXPANDED = 596.37; // 310.578 + 285.791
+
 /* =========================================================================
    STAGE DATA  (Figma 4577:11008)
    ========================================================================= */
 
-type Stage = {
+export type StageBullet = { title: string; description: string };
+
+export type Stage = {
   label: string;
   subtitle: string;
   subtitleNoWrap: boolean;
@@ -46,10 +62,14 @@ type Stage = {
   collapseGradient?: string;
   collapseImgClass?: string;
   flowImage: string;
+  /** side gap (px each side) for the expanded flow image — Train/Optimize only */
+  flowInset?: number;
+  /** header strip shown over the collapsed Train row (previous design) */
   expandedHeaderStrip?: string;
+  bullets?: StageBullet[];
 };
 
-const STAGES: Stage[] = [
+export const STAGES: Stage[] = [
   {
     label: "Train",
     subtitle: "Data Ingestion & Quantization",
@@ -67,7 +87,20 @@ const STAGES: Stage[] = [
       "linear-gradient(90.54deg, rgba(0,0,0,0) 82.82%, rgb(0,0,0) 99.98%), linear-gradient(90deg, rgb(0,0,0) 21.64%, rgba(0,0,0,0) 62.88%)",
     collapseImgClass: "object-contain object-center",
     flowImage: "/developer/train-flow-1.png",
+    flowInset: 60,
     expandedHeaderStrip: "/developer/train-expanded-strip.png",
+    bullets: [
+      {
+        title: "Native TFLite & BYOM",
+        description:
+          "Bring your existing model. ModelForge handles conversion, quantization, and A-Cube mapping.",
+      },
+      {
+        title: "Direct Sensor Capture",
+        description:
+          "Capture real sensor data directly from the DVK and move faster from raw signals to trained models.",
+      },
+    ],
   },
   {
     label: "Optimize",
@@ -76,7 +109,7 @@ const STAGES: Stage[] = [
     icon: "/developer/pipeline-icon-optimize.svg",
     cardImage: "/developer/pipeline-card-optimize.png",
     cardGradient:
-      "linear-gradient(250.41deg, rgba(0,0,0,0) 59.19%, rgb(0,0,0) 75.24%)",
+      "linear-gradient(250.41302079811192deg, rgba(0,0,0,0) 59.187%, rgb(0,0,0) 75.236%)",
     collapseBg: "/developer/pipeline-collapse-bg-optimize.png",
     collapseStyle: {
       left: "calc(50% - 15.44px)",
@@ -87,6 +120,19 @@ const STAGES: Stage[] = [
     collapseGradient:
       "linear-gradient(90.54deg, rgba(0,0,0,0) 82.82%, rgb(0,0,0) 99.98%), linear-gradient(90deg, rgb(0,0,0) 21.64%, rgba(0,0,0,0) 62.88%)",
     flowImage: "/developer/train-flow-2.png",
+    flowInset: 60,
+    bullets: [
+      {
+        title: "Compatibility Checking",
+        description:
+          "Know what works before you build. ModelForge flags unsupported ops and guides the fallback path.",
+      },
+      {
+        title: "Pre-Deployment Profiling",
+        description:
+          "See memory, latency, and power upfront, before the model ever reaches silicon.",
+      },
+    ],
   },
   {
     label: "Integrate",
@@ -105,6 +151,19 @@ const STAGES: Stage[] = [
     collapseGradient:
       "linear-gradient(90deg, rgba(0,0,0,0) 79.37%, rgb(0,0,0) 93.88%), linear-gradient(90deg, rgb(0,0,0) 29.99%, rgba(0,0,0,0) 48.39%)",
     flowImage: "/developer/train-flow-3.png",
+    flowInset: 30,
+    bullets: [
+      {
+        title: "The SDK Arsenal",
+        description:
+          "Use pre-built APIs, drivers, and BSPs to handle the embedded work without starting from scratch.",
+      },
+      {
+        title: "90% Portability",
+        description:
+          "Bring your C code with you. Most existing ARM logic ports directly into the GPX workflow.",
+      },
+    ],
   },
   {
     label: "Deploy",
@@ -113,7 +172,7 @@ const STAGES: Stage[] = [
     icon: "/developer/pipeline-icon-deploy.svg",
     cardImage: "/developer/pipeline-card-deploy.png",
     cardGradient:
-      "linear-gradient(169.95deg, rgba(0,0,0,0) 55.52%, rgba(0,0,0,0.95) 69.78%)",
+      "linear-gradient(169.95193210377164deg, rgba(0,0,0,0) 55.52%, rgba(0,0,0,0.95) 69.775%)",
     collapseBg: "/developer/pipeline-collapse-bg-deploy.png",
     collapseStyle: {
       left: "calc(50% - 104.62px)",
@@ -124,6 +183,19 @@ const STAGES: Stage[] = [
     collapseGradient:
       "linear-gradient(89.94deg, rgba(0,0,0,0) 79.36%, rgb(0,0,0) 98.95%), linear-gradient(90deg, rgb(0,0,0) 31.11%, rgba(0,0,0,0) 91.38%)",
     flowImage: "/developer/train-flow-4.png",
+    flowInset: 30,
+    bullets: [
+      {
+        title: "Seamless Integration",
+        description:
+          "Your AI model becomes a simple C-callable object. Drop it into the workflow and build.",
+      },
+      {
+        title: "One-Click Eclipse Execution",
+        description:
+          "One Eclipse build. ModelForge handles the ARM-to-AI-core mapping behind the scenes.",
+      },
+    ],
   },
 ];
 
@@ -133,23 +205,63 @@ const STAGES: Stage[] = [
 
 export function DeveloperPipeline({ data }: { data?: any }) {
   const [activeIndex, setActiveIndex] = useState(0); // 0 = Train expanded
+  const [flowHeights, setFlowHeights] = useState<Record<number, number>>({});
 
   const heading = data?.heading || DEFAULT_HEADING;
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
   const tagText = data?.tag?.text || DEFAULT_TAG;
 
   const mergedStages = STAGES.map((stage, i) => {
-    const tabData = data?.tabs?.[i];
+    const tabData: Record<string, unknown> | undefined = data?.tabs?.[i];
+    type MediaParam = Parameters<typeof mediaUrl>[0];
+    const rawBullets = tabData?.bullets;
+    const cmsBullets: StageBullet[] | undefined = Array.isArray(rawBullets)
+      ? (rawBullets as Record<string, unknown>[])
+          .map((b) => ({
+            title: String(b?.title ?? b?.label ?? ""),
+            description: String(b?.description ?? ""),
+          }))
+          .filter((b) => b.title && b.description)
+      : undefined;
+    const cmsFlow =
+      mediaUrl(tabData?.flow_image as MediaParam) ||
+      mediaUrl(tabData?.image as MediaParam) ||
+      mediaUrl(tabData?.media as MediaParam);
     return {
       ...stage,
-      label: tabData?.label || tabData?.title || stage.label,
-      subtitle: tabData?.subtitle || tabData?.description || stage.subtitle,
-      flowImage: mediaUrl(tabData?.flow_image) || mediaUrl(tabData?.image) || mediaUrl(tabData?.media) || stage.flowImage,
+      label: (tabData?.label as string) || (tabData?.title as string) || stage.label,
+      subtitle: (tabData?.subtitle as string) || (tabData?.description as string) || stage.subtitle,
+      flowImage: cmsFlow || stage.flowImage,
+      bullets:
+        cmsBullets && cmsBullets.length > 0
+          ? cmsBullets
+          : stage.bullets,
     };
   });
 
-  const pipelineHeight = activeIndex !== -1 ? 1291 : 979;
-  const offset = pipelineHeight - 1291; // 0 when open, -312 when closed
+  /* Measure each flow image on load → displayed height at its stage width */
+  const handleFlowLoad = (index: number, displayHeight: number) => {
+    if (!displayHeight) return;
+    setFlowHeights((prev) => {
+      const cur = prev[index];
+      if (cur !== undefined && Math.abs(cur - displayHeight) < 0.5) return prev;
+      return { ...prev, [index]: displayHeight };
+    });
+  };
+
+  const expandedHeightFor = (i: number) => {
+    const h = flowHeights[i];
+    if (h === undefined) return CARD_MIN_EXPANDED;
+    return Math.max(
+      CARD_MIN_EXPANDED,
+      Math.round(FLOW_TOP + h + FLOW_BOTTOM_PAD)
+    );
+  };
+
+  /* Closed: 475 + 4×108 + 3×24 = 979. Open: 871 + expanded card height. */
+  const pipelineHeight =
+    activeIndex === -1 ? 979 : 871 + expandedHeightFor(activeIndex);
+  const offset = pipelineHeight - 1291; // −312 closed; −245/+ when open at 665
 
   useEffect(() => {
     document.documentElement.style.setProperty("--developer-pipeline-offset", `${offset}px`);
@@ -182,7 +294,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
       {/* ── Badge "Real-time AI at edge" ───────────────────────────────── */}
       <div
         className="absolute -translate-x-1/2 overflow-clip bg-[rgba(255,255,255,0.06)]"
-        style={{ left: "calc(50% - 0.2px)", top: 48.9, width: 180, height: 26 }}
+        style={{ left: "50%", top: 50, width: 180, height: 26 }}
       >
         <Corners leftSrc={BADGE_LEFT} rightSrc={BADGE_RIGHT} />
         <p
@@ -279,8 +391,11 @@ export function DeveloperPipeline({ data }: { data?: any }) {
           <AccordionItem
             key={i}
             stage={stage}
+            index={i}
             isActive={activeIndex === i}
             onClick={() => setActiveIndex(activeIndex === i ? -1 : i)}
+            onFlowLoad={handleFlowLoad}
+            expandedHeight={expandedHeightFor(i)}
           />
         ))}
       </div>
@@ -295,7 +410,6 @@ export function DeveloperPipeline({ data }: { data?: any }) {
 function StageCard({
   stage,
   index,
-  isActive,
   onClick,
 }: {
   stage: Stage;
@@ -307,11 +421,7 @@ function StageCard({
     <button
       type="button"
       onClick={onClick}
-      className={`relative flex h-[180px] w-[220px] shrink-0 cursor-pointer flex-col items-start justify-end gap-[20px] overflow-clip border-[0.5px] border-solid px-[14px] py-[16px] text-left transition-colors duration-200 ${
-        isActive
-          ? "border-[rgba(240,240,240,0.5)] bg-black"
-          : "border-[rgba(240,240,240,0.2)] bg-black hover:border-[rgba(240,240,240,0.4)]"
-      }`}
+      className="relative flex h-[180px] w-[220px] shrink-0 cursor-pointer flex-col items-start justify-end gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black px-[14px] py-[16px] text-left transition-colors duration-200 hover:border-[rgba(240,240,240,0.4)]"
     >
       <Corners leftSrc={CARD_CORNER_LEFT} rightSrc={CARD_CORNER_RIGHT} />
 
@@ -474,30 +584,37 @@ function CardImage({ stage, index }: { stage: Stage; index: number }) {
 }
 
 /* =========================================================================
-   ACCORDION ITEM — expands to 420px (with flow diagram) / collapses to 108px
-   ========================================================================= */
+    ACCORDION ITEM — Figma 4945:4391 (Train expanded) / 4945:4427 (collapsed)
+    Expands to 335px (86px header bar + bullets & flow diagram) / 108px
+    ========================================================================= */
 
 function AccordionItem({
   stage,
+  index,
   isActive,
   onClick,
+  onFlowLoad,
+  expandedHeight,
 }: {
   stage: Stage;
+  index: number;
   isActive: boolean;
   onClick: () => void;
+  onFlowLoad: (index: number, displayHeight: number) => void;
+  expandedHeight: number;
 }) {
+  const flowWidth = FLOW_WIDTH - 2 * (stage.flowInset ?? 0);
+  const flowMinHeight = FLOW_FRAME_HEIGHT * (flowWidth / FLOW_WIDTH);
+  const flowBoxHeight = Math.max(flowMinHeight, expandedHeight - FLOW_TOP - FLOW_BOTTOM_PAD);
   return (
     <div
       className="relative w-[1204px] shrink-0 border border-solid border-[rgba(240,240,240,0.2)] bg-black"
       style={{
-        height: isActive ? 420 : 108,
+        height: isActive ? expandedHeight : 108,
         overflow: "hidden",
         transition: "height 300ms ease-in-out",
       }}
     >
-      {/* Container corners (always at outer edges) */}
-      <Corners leftSrc={BADGE_LEFT} rightSrc={BADGE_RIGHT} />
-
       {/* Collapsed background image (fades out when expanded) */}
       {stage.collapseBg && stage.collapseStyle && (
         <div
@@ -522,7 +639,7 @@ function AccordionItem({
         </div>
       )}
 
-      {/* Header strip image (shows when closed, fades out when expanded) */}
+      {/* Header strip image over the collapsed Train row (previous design) */}
       {stage.expandedHeaderStrip && (
         <div
           className="pointer-events-none absolute -translate-x-1/2 transition-opacity duration-300"
@@ -544,34 +661,73 @@ function AccordionItem({
         </div>
       )}
 
-      {/* Header separator border (visible when expanded) */}
+      {/* Header separator border at 86px (visible when expanded) */}
       <div
-        className="pointer-events-none absolute left-0 top-[108px] w-full border-b border-solid border-[rgba(240,240,240,0.2)] transition-opacity duration-300"
+        className="pointer-events-none absolute left-0 top-[86px] w-full border-b border-solid border-[rgba(240,240,240,0.2)] transition-opacity duration-300"
         style={{ opacity: isActive ? 1 : 0 }}
         aria-hidden
       />
 
-      {/* Header separator corners (at the 108px divider line) */}
+      {/* Card corners (visible when collapsed) */}
       <div
-        className="pointer-events-none absolute left-0 top-0 h-[108px] w-full transition-opacity duration-300"
+        className="pointer-events-none absolute inset-0 transition-opacity duration-300"
+        style={{ opacity: isActive ? 0 : 1 }}
+        aria-hidden
+      >
+        <Corners leftSrc={BADGE_LEFT} rightSrc={BADGE_RIGHT} />
+      </div>
+
+      {/* Header-bar corners 0–86px (visible when expanded; bottom pair marks
+          the separator line per Figma 4945:4393/4945:4396) */}
+      <div
+        className="pointer-events-none absolute left-0 top-0 h-[86px] w-full transition-opacity duration-300"
         style={{ opacity: isActive ? 1 : 0 }}
         aria-hidden
       >
         <Corners leftSrc={BADGE_LEFT} rightSrc={BADGE_RIGHT} />
       </div>
 
-      {/* Icon + Label (left side of header) */}
-      <div className="pointer-events-none absolute left-[29px] top-[54px] flex -translate-y-1/2 items-center gap-[12px]">
+      {/* Icon + Label + Subtitle — collapsed header (left 29, centered at 54) */}
+      <div
+        className="pointer-events-none absolute flex -translate-y-1/2 items-center gap-[12px] transition-opacity duration-300"
+        style={{ left: 29, top: 54, width: 201, opacity: isActive ? 0 : 1 }}
+      >
         <IconTile icon={stage.icon} />
         <p
           className={`${gilroyMedium.className} text-[22px] leading-[28px] whitespace-nowrap text-white`}
         >
           {stage.label}
         </p>
+        <p
+          className={`${interRegular.className} text-[14px] leading-[21px] whitespace-nowrap text-[#bbb]`}
+        >
+          {stage.subtitle}
+        </p>
+      </div>
+
+      {/* Icon + Label + Subtitle — expanded header bar (left 32, centered at 43) */}
+      <div
+        className="pointer-events-none absolute flex -translate-y-1/2 items-center gap-[12px] transition-opacity duration-300"
+        style={{ left: 32, top: 43, opacity: isActive ? 1 : 0 }}
+      >
+        <IconTileSmall icon={stage.icon} />
+        <p
+          className={`${gilroyMedium.className} text-[22px] leading-[28px] whitespace-nowrap text-white`}
+        >
+          {stage.label}
+        </p>
+        <p
+          className={`${interRegular.className} text-[14px] leading-[21px] whitespace-nowrap text-[#bbb]`}
+        >
+          {stage.subtitle}
+        </p>
       </div>
 
       {/* Toggle button (right side of header) */}
-      <div className="pointer-events-none absolute right-[29px] top-[54px] flex size-[35px] -translate-y-1/2 items-center justify-center overflow-clip bg-[#303030]">
+      <div
+        className="pointer-events-none absolute right-[29px] flex size-[35px] -translate-y-1/2 items-center justify-center overflow-clip bg-[#303030]"
+        style={{ top: isActive ? 43.5 : 54, transition: "top 300ms ease-in-out" }}
+      >
         <Corners leftSrc={BADGE_LEFT} rightSrc={BADGE_RIGHT} />
         <div className="relative size-[24px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -579,7 +735,7 @@ function AccordionItem({
             alt=""
             src={isActive ? REMOVE_ICON : ADD_ICON}
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-            style={isActive ? { width: 17.5, height: 1.5 } : { width: 17.5, height: 17.5 }}
+            style={isActive ? { width: 16, height: 1.5 } : { width: 16, height: 16 }}
           />
         </div>
       </div>
@@ -588,26 +744,59 @@ function AccordionItem({
       <button
         type="button"
         onClick={onClick}
-        className="absolute left-0 top-0 z-10 h-[108px] w-full cursor-pointer"
+        className="absolute left-0 top-0 z-10 w-full cursor-pointer"
+        style={{ height: isActive ? 86 : 108, transition: "height 300ms ease-in-out" }}
         aria-label={`${isActive ? "Collapse" : "Expand"} ${stage.label}`}
       />
 
-      {/* Flow diagram (fades in when expanded) */}
+      {/* Feature bullets — left column (fade in when expanded) */}
+      {(stage.bullets ?? []).map((bullet, i) => (
+        <div key={`bullet-${i}`} aria-hidden={isActive ? undefined : true}>
+          <ul
+            className={`absolute left-[29px] w-[341px] transition-opacity duration-300 ${interBold.className}`}
+            style={{ top: 112 + i * 93, opacity: isActive ? 1 : 0 }}
+          >
+            <li className="list-disc ps-[25px] text-[16px] leading-[24px] font-bold not-italic text-white">
+              {bullet.title}
+            </li>
+          </ul>
+          <p
+            className={`${interRegular.className} absolute left-[54px] w-[341px] text-[14px] leading-[21px] font-normal not-italic text-[#d2d2d2] transition-opacity duration-300`}
+            style={{ top: 139 + i * 93, opacity: isActive ? 1 : 0 }}
+          >
+            {bullet.description}
+          </p>
+        </div>
+      ))}
+
+      {/* Flow diagram — bottom, natural aspect, nothing cropped. Train &
+          Optimize are inset (flowInset) leaving a gap on both sides; the
+          card auto-sizes once the image loads. */}
       <div
-        className="pointer-events-none absolute -translate-x-1/2 overflow-hidden transition-opacity duration-300"
+        className="pointer-events-none absolute -translate-x-1/2 overflow-hidden"
         style={{
-          left: "calc(50% + 0.5px)",
-          top: 127,
-          width: 1135,
-          height: 270,
+          left: "50%",
+          top: FLOW_TOP,
+          width: flowWidth,
+          height: flowBoxHeight,
           opacity: isActive ? 1 : 0,
+          transition: "height 300ms ease-in-out, opacity 300ms ease-in-out",
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt=""
           src={stage.flowImage}
-          className={`absolute inset-0 size-full max-w-none object-contain ${stage.label === "Train" ? "p-[40px]" : ""}`}
+          onLoad={(e) => {
+            const img = e.currentTarget;
+            if (img.naturalWidth && img.naturalHeight) {
+              onFlowLoad(
+                index,
+                (flowWidth * img.naturalHeight) / img.naturalWidth
+              );
+            }
+          }}
+          className="block w-full max-w-none"
         />
       </div>
     </div>
@@ -630,6 +819,31 @@ function IconTile({ icon }: { icon: string }) {
       }}
     >
       <div className="relative size-[44.522px]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          alt=""
+          src={icon}
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        />
+      </div>
+    </div>
+  );
+}
+
+/* ── Small icon tile — Figma 4945:4406 (54.949×54, used in expanded header) ── */
+
+function IconTileSmall({ icon }: { icon: string }) {
+  return (
+    <div
+      className="flex shrink-0 items-start overflow-clip p-[8.218px]"
+      style={{
+        backgroundImage: ICON_TILE_BG_SMALL,
+        borderRadius: 14.087,
+        width: 54.949,
+        height: 54,
+      }}
+    >
+      <div className="relative size-[37.565px]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt=""

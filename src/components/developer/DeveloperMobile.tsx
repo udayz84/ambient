@@ -2,10 +2,11 @@
 
 import { Fragment, useState } from "react";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
-import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
+import { dmMono, gilroyMedium, interBold, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
+import { STAGES, type StageBullet } from "./DeveloperPipeline";
 import {
   ARTICLE_ICON_BG,
   CORNER_LEFT,
@@ -383,6 +384,27 @@ function DeveloperPipelineMobile({ data }: { data?: any }) {
         }));
   const [activeIndex, setActiveIndex] = useState(0);
 
+  /* Merge CMS tabs with the desktop STAGES fallback (bullets, images, copy) */
+  const stages = STAGES.map((stage, i) => {
+    const tab = rawTabs[i];
+    const cmsFlow =
+      mediaUrl(tab?.flow_image) || mediaUrl(tab?.image) || mediaUrl(tab?.media);
+    const cmsBullets: StageBullet[] | undefined = Array.isArray(tab?.bullets)
+      ? tab.bullets
+          .map((b: { title?: string; label?: string; description?: string }) => ({
+            title: b?.title || b?.label || "",
+            description: b?.description || "",
+          }))
+          .filter((b: { title: string; description: string }) => b.title && b.description)
+      : undefined;
+    return {
+      label: tab?.label || stage.label,
+      subtitle: tab?.subtitle || tab?.description || stage.subtitle,
+      flowImage: cmsFlow || stage.flowImage,
+      bullets: cmsBullets && cmsBullets.length > 0 ? cmsBullets : stage.bullets ?? [],
+    };
+  });
+
   return (
     <section
       className="relative w-full overflow-x-clip bg-black"
@@ -414,18 +436,7 @@ function DeveloperPipelineMobile({ data }: { data?: any }) {
           className="block size-full"
         />
       </div>
-      {/* Central pipeline illustration — 4034:25128 (353×1247, x=18, y=368) */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-[18px] top-[368px] h-[1247px] w-[353px] overflow-hidden"
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt=""
-          src="/developer/pipeline-mobile-illustration.png"
-          className="absolute left-[-37.85%] top-0 h-full w-[176.64%] max-w-none object-cover"
-        />
-      </div>
+      {/* Central illustration replaced by per-stage content (see below) */}
       {/* Bottom wave — Rectangle 1618873536 (1441×341, mirrored, bottom) */}
       <div
         aria-hidden
@@ -506,7 +517,47 @@ function DeveloperPipelineMobile({ data }: { data?: any }) {
           </div>
         </div>
         {/* Spacer matching the illustration height so the bar sticks while scrolling */}
-        <div className="relative h-[1247px]" />
+        {/* Active stage content — flow image + feature bullets (desktop parity) */}
+        <div className="relative flex flex-col gap-[24px] px-[18px] pb-[140px] pt-[24px]">
+          {/* Stage subtitle (matches desktop accordion header) */}
+          <p
+            className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[#bbb] not-italic`}
+          >
+            {stages[activeIndex].subtitle}
+          </p>
+          {/* Flow image — full width, natural aspect, nothing cropped */}
+          <div className="w-full overflow-hidden">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              alt={`${stages[activeIndex].label} flow diagram`}
+              src={stages[activeIndex].flowImage}
+              className="block w-full max-w-none"
+            />
+          </div>
+          {/* Feature bullets — same typography as desktop (16/24 bold, 14/21 #d2d2d2) */}
+          <ul className="flex flex-col gap-[16px]">
+            {(stages[activeIndex].bullets ?? []).map((bullet, i) => (
+              <li key={i} className="flex gap-[10px]">
+                <span
+                  aria-hidden
+                  className="mt-[9px] block size-[6px] shrink-0 rounded-full bg-white"
+                />
+                <div className="flex flex-col gap-[4px]">
+                  <p
+                    className={`${interBold.className} text-[16px] leading-[24px] font-bold not-italic text-white`}
+                  >
+                    {bullet.title}
+                  </p>
+                  <p
+                    className={`${interRegular.className} text-[14px] leading-[21px] font-normal not-italic text-[#d2d2d2]`}
+                  >
+                    {bullet.description}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );

@@ -1,0 +1,12 @@
+{
+  "collectionName": "components_developer_pipeline_bullets",
+  "info": {
+    "displayName": "Pipeline Bullet",
+    "description": "Developer pipeline expanded-card feature bullet"
+  },
+  "options": {},
+  "attributes": {
+    "title": { "type": "string", "required": true },
+    "description": { "type": "text" }
+  }
+}

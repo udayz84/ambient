@@ -36,7 +36,7 @@ export default async function DeveloperPage() {
     data = await getSingleType<any>("developer-page", [
       "hero",
       { section: "code", nested: ["articles"] },
-      { section: "pipeline", fields: ["tag"], nested: ["tabs"] },
+      { section: "pipeline", fields: ["tag"], nested: ["tabs.flow_image", "tabs.logo", "tabs.bullets"] },
       "coming_soon",
       { section: "modules", nested: ["modules"] },
       { section: "copilots", nested: ["copilots"] },

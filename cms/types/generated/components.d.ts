@@ -779,6 +779,18 @@ export interface DeveloperPipeline extends Struct.ComponentSchema {
   };
 }
 
+export interface DeveloperPipelineBullet extends Struct.ComponentSchema {
+  collectionName: 'components_developer_pipeline_bullets';
+  info: {
+    description: 'Developer pipeline expanded-card feature bullet';
+    displayName: 'Pipeline Bullet';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface DeveloperPipelineTab extends Struct.ComponentSchema {
   collectionName: 'components_developer_pipeline_tabs';
   info: {
@@ -786,11 +798,13 @@ export interface DeveloperPipelineTab extends Struct.ComponentSchema {
     displayName: 'Pipeline Tab';
   };
   attributes: {
+    bullets: Schema.Attribute.Component<'developer.pipeline-bullet', true>;
     flow_image: Schema.Attribute.Media;
     flow_image_alt: Schema.Attribute.String;
     label: Schema.Attribute.String & Schema.Attribute.Required;
     logo: Schema.Attribute.Media;
     logo_alt: Schema.Attribute.String;
+    subtitle: Schema.Attribute.String;
   };
 }
 
@@ -2668,6 +2682,7 @@ declare module '@strapi/strapi' {
       'developer.module': DeveloperModule;
       'developer.modules': DeveloperModules;
       'developer.pipeline': DeveloperPipeline;
+      'developer.pipeline-bullet': DeveloperPipelineBullet;
       'developer.pipeline-tab': DeveloperPipelineTab;
       'dvk.demo-card': DvkDemoCard;
       'dvk.demos': DvkDemos;

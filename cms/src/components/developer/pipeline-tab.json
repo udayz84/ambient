@@ -1,1 +1,21 @@
-{ "collectionName": "components_developer_pipeline_tabs", "info": { "displayName": "Pipeline Tab", "description": "Developer pipeline tab item" }, "options": {}, "attributes": { "label": { "type": "string", "required": true }, "flow_image": { "type": "media", "multiple": false }, "flow_image_alt": { "type": "string" }, "logo": { "type": "media", "multiple": false }, "logo_alt": { "type": "string" } } }
+{
+  "collectionName": "components_developer_pipeline_tabs",
+  "info": {
+    "displayName": "Pipeline Tab",
+    "description": "Developer pipeline tab item"
+  },
+  "options": {},
+  "attributes": {
+    "label": { "type": "string", "required": true },
+    "subtitle": { "type": "string" },
+    "flow_image": { "type": "media", "multiple": false },
+    "flow_image_alt": { "type": "string" },
+    "logo": { "type": "media", "multiple": false },
+    "logo_alt": { "type": "string" },
+    "bullets": {
+      "type": "component",
+      "repeatable": true,
+      "component": "developer.pipeline-bullet"
+    }
+  }
+}

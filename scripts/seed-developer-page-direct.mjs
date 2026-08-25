@@ -141,23 +141,75 @@ const DEVELOPER = {
     tabs: [
       {
         label: "Train",
+        subtitle: "Data Ingestion & Quantization",
         flow_image: media("developer/train-flow-1.png"),
         logo: media("developer/pipeline-logo-1.png"),
+        bullets: [
+          {
+            title: "Native TFLite & BYOM",
+            description:
+              "Bring your existing model. ModelForge handles conversion, quantization, and A-Cube mapping.",
+          },
+          {
+            title: "Direct Sensor Capture",
+            description:
+              "Capture real sensor data directly from the DVK and move faster from raw signals to trained models.",
+          },
+        ],
       },
       {
         label: "Optimize",
+        subtitle: "Hardware-Aware Validation",
         flow_image: media("developer/train-flow-2.png"),
         logo: media("developer/pipeline-logo-2.png"),
+        bullets: [
+          {
+            title: "Compatibility Checking",
+            description:
+              "Know what works before you build. ModelForge flags unsupported ops and guides the fallback path.",
+          },
+          {
+            title: "Pre-Deployment Profiling",
+            description:
+              "See memory, latency, and power upfront, before the model ever reaches silicon.",
+          },
+        ],
       },
       {
         label: "Integrate",
+        subtitle: "Embedded Application Assembly",
         flow_image: media("developer/train-flow-3.png"),
         logo: media("developer/pipeline-logo-3.png"),
+        bullets: [
+          {
+            title: "The SDK Arsenal",
+            description:
+              "Use pre-built APIs, drivers, and BSPs to handle the embedded work without starting from scratch.",
+          },
+          {
+            title: "90% Portability",
+            description:
+              "Bring your C code with you. Most existing ARM logic ports directly into the GPX workflow.",
+          },
+        ],
       },
       {
         label: "Deploy",
+        subtitle: "The Unified Build",
         flow_image: media("developer/train-flow-4.png"),
         logo: media("developer/pipeline-logo-1.png"),
+        bullets: [
+          {
+            title: "Seamless Integration",
+            description:
+              "Your AI model becomes a simple C-callable object. Drop it into the workflow and build.",
+          },
+          {
+            title: "One-Click Eclipse Execution",
+            description:
+              "One Eclipse build. ModelForge handles the ARM-to-AI-core mapping behind the scenes.",
+          },
+        ],
       },
     ],
   },
