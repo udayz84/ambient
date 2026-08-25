@@ -33,15 +33,16 @@ const DEFAULT_SUBTITLE =
   "From microwatt edge sensors running on coin cells to air-cooled high-performance compute arrays, the GPX architecture scales seamlessly across the physical world.";
 const DEFAULT_TAG = "Real-time AI at edge";
 
-/* Flow diagram geometry — image renders FULL WIDTH of the 1204 card at its
-   natural aspect (nothing cropped); the expanded card auto-sizes on load:
-   expandedHeight = FLOW_TOP + displayHeight(image). 285.79 is the minimum
-   frame height (Figma 4819:5421 scaled ×1204/1292.934). */
-const FLOW_WIDTH = 1204;
-const FLOW_FRAME_HEIGHT = 285.7912; // 306.9014 × (1204 / 1292.9336)
-const FLOW_TOP = 310.578125;
-const FLOW_BOTTOM_PAD = 0; // card ends flush at the image bottom
-const CARD_MIN_EXPANDED = 596.37; // 310.578 + 285.791
+/* Flow diagram geometry — Figma 4945:4422 (731.971×210 frame centered at
+   calc(50% + 205.5px), top 98; expanded card = 335, content left / image
+   right). Static images keep the exact Figma crop; CMS uploads render
+   full-size and auto-size the card:
+   expandedHeight = FLOW_TOP + displayHeight(image) + FLOW_BOTTOM_PAD. */
+const FLOW_WIDTH = 731.971;
+const FLOW_FRAME_HEIGHT = 210;
+const FLOW_TOP = 98;
+const FLOW_BOTTOM_PAD = 27; // 335 − 98 − 210
+const CARD_MIN_EXPANDED = 335;
 
 /* =========================================================================
    STAGE DATA  (Figma 4577:11008)
@@ -62,8 +63,10 @@ export type Stage = {
   collapseGradient?: string;
   collapseImgClass?: string;
   flowImage: string;
-  /** side gap (px each side) for the expanded flow image — Train/Optimize only */
-  flowInset?: number;
+  /** extra px added to FLOW_TOP for this stage's image (Deploy sits lower) */
+  flowTopOffset?: number;
+  /** true when flowImage comes from Strapi — full image, card auto-sizes */
+  autoFitFlow?: boolean;
   /** header strip shown over the collapsed Train row (previous design) */
   expandedHeaderStrip?: string;
   bullets?: StageBullet[];
@@ -87,7 +90,6 @@ export const STAGES: Stage[] = [
       "linear-gradient(90.54deg, rgba(0,0,0,0) 82.82%, rgb(0,0,0) 99.98%), linear-gradient(90deg, rgb(0,0,0) 21.64%, rgba(0,0,0,0) 62.88%)",
     collapseImgClass: "object-contain object-center",
     flowImage: "/developer/train-flow-1.png",
-    flowInset: 60,
     expandedHeaderStrip: "/developer/train-expanded-strip.png",
     bullets: [
       {
@@ -120,7 +122,6 @@ export const STAGES: Stage[] = [
     collapseGradient:
       "linear-gradient(90.54deg, rgba(0,0,0,0) 82.82%, rgb(0,0,0) 99.98%), linear-gradient(90deg, rgb(0,0,0) 21.64%, rgba(0,0,0,0) 62.88%)",
     flowImage: "/developer/train-flow-2.png",
-    flowInset: 60,
     bullets: [
       {
         title: "Compatibility Checking",
@@ -151,7 +152,6 @@ export const STAGES: Stage[] = [
     collapseGradient:
       "linear-gradient(90deg, rgba(0,0,0,0) 79.37%, rgb(0,0,0) 93.88%), linear-gradient(90deg, rgb(0,0,0) 29.99%, rgba(0,0,0,0) 48.39%)",
     flowImage: "/developer/train-flow-3.png",
-    flowInset: 30,
     bullets: [
       {
         title: "The SDK Arsenal",
@@ -183,7 +183,7 @@ export const STAGES: Stage[] = [
     collapseGradient:
       "linear-gradient(89.94deg, rgba(0,0,0,0) 79.36%, rgb(0,0,0) 98.95%), linear-gradient(90deg, rgb(0,0,0) 31.11%, rgba(0,0,0,0) 91.38%)",
     flowImage: "/developer/train-flow-4.png",
-    flowInset: 30,
+    flowTopOffset: 20,
     bullets: [
       {
         title: "Seamless Integration",
@@ -232,6 +232,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
       label: (tabData?.label as string) || (tabData?.title as string) || stage.label,
       subtitle: (tabData?.subtitle as string) || (tabData?.description as string) || stage.subtitle,
       flowImage: cmsFlow || stage.flowImage,
+      autoFitFlow: Boolean(cmsFlow),
       bullets:
         cmsBullets && cmsBullets.length > 0
           ? cmsBullets
@@ -250,11 +251,12 @@ export function DeveloperPipeline({ data }: { data?: any }) {
   };
 
   const expandedHeightFor = (i: number) => {
+    const top = FLOW_TOP + (mergedStages[i].flowTopOffset ?? 0);
     const h = flowHeights[i];
-    if (h === undefined) return CARD_MIN_EXPANDED;
+    if (h === undefined) return Math.max(CARD_MIN_EXPANDED, Math.round(top + FLOW_FRAME_HEIGHT + FLOW_BOTTOM_PAD));
     return Math.max(
       CARD_MIN_EXPANDED,
-      Math.round(FLOW_TOP + h + FLOW_BOTTOM_PAD)
+      Math.round(top + h + FLOW_BOTTOM_PAD)
     );
   };
 
@@ -603,9 +605,8 @@ function AccordionItem({
   onFlowLoad: (index: number, displayHeight: number) => void;
   expandedHeight: number;
 }) {
-  const flowWidth = FLOW_WIDTH - 2 * (stage.flowInset ?? 0);
-  const flowMinHeight = FLOW_FRAME_HEIGHT * (flowWidth / FLOW_WIDTH);
-  const flowBoxHeight = Math.max(flowMinHeight, expandedHeight - FLOW_TOP - FLOW_BOTTOM_PAD);
+  const flowTop = FLOW_TOP + (stage.flowTopOffset ?? 0);
+  const flowBoxHeight = Math.max(FLOW_FRAME_HEIGHT, expandedHeight - flowTop - FLOW_BOTTOM_PAD);
   return (
     <div
       className="relative w-[1204px] shrink-0 border border-solid border-[rgba(240,240,240,0.2)] bg-black"
@@ -769,35 +770,46 @@ function AccordionItem({
         </div>
       ))}
 
-      {/* Flow diagram — bottom, natural aspect, nothing cropped. Train &
-          Optimize are inset (flowInset) leaving a gap on both sides; the
-          card auto-sizes once the image loads. */}
+      {/* Flow diagram — right column per Figma 4945:4422 (731.971×210 frame
+          centered at calc(50% + 205.5px), top 98). Static images keep the
+          exact Figma crop; CMS uploads render full-size and auto-size the
+          card on load. */}
       <div
         className="pointer-events-none absolute -translate-x-1/2 overflow-hidden"
         style={{
-          left: "50%",
-          top: FLOW_TOP,
-          width: flowWidth,
+          left: "calc(50% + 205.5px)",
+          top: flowTop,
+          width: FLOW_WIDTH,
           height: flowBoxHeight,
           opacity: isActive ? 1 : 0,
           transition: "height 300ms ease-in-out, opacity 300ms ease-in-out",
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt=""
-          src={stage.flowImage}
-          onLoad={(e) => {
-            const img = e.currentTarget;
-            if (img.naturalWidth && img.naturalHeight) {
-              onFlowLoad(
-                index,
-                (flowWidth * img.naturalHeight) / img.naturalWidth
-              );
-            }
-          }}
-          className="block w-full max-w-none"
-        />
+        {stage.autoFitFlow ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            alt=""
+            src={stage.flowImage}
+            onLoad={(e) => {
+              const img = e.currentTarget;
+              if (img.naturalWidth && img.naturalHeight) {
+                onFlowLoad(
+                  index,
+                  (FLOW_WIDTH * img.naturalHeight) / img.naturalWidth
+                );
+              }
+            }}
+            className="block w-full max-w-none"
+          />
+        ) : (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            alt=""
+            src={stage.flowImage}
+            className="absolute left-0 max-w-none"
+            style={{ top: "-6.86%", width: "100%", height: "116.19%" }}
+          />
+        )}
       </div>
     </div>
   );
