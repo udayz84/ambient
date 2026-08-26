@@ -21,6 +21,8 @@ const REMOVE_ICON = "/developer/pipeline-icon-remove.svg";
 const ADD_ICON = "/developer/pipeline-icon-add.svg";
 const ARROW_SVG = "/developer/pipeline-card-arrow.svg";
 
+export { BADGE_LEFT, BADGE_RIGHT, REMOVE_ICON, ADD_ICON, ARROW_SVG };
+
 const ICON_TILE_BG =
   "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 65.123 64' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%25' width='100%25' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(3.7036e-14 2.3201 -4.7815 -3.0317e-15 32.561 -3.8447)'><stop stop-color='rgba(57,74,54,1)' offset='0'/><stop stop-color='rgba(43,54,41,1)' offset='0.5'/><stop stop-color='rgba(29,34,28,1)' offset='1'/></radialGradient></defs></svg>\")";
 
@@ -409,7 +411,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
    STAGE CARD  (220×180 — top row of preview cards)
    ========================================================================= */
 
-function StageCard({
+export function StageCard({
   stage,
   index,
   onClick,

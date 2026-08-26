@@ -23,9 +23,9 @@ const DEFAULT_SUBTITLE =
  *   1 = "A Single Line of Inference" -> ProcessTask (inference) block
  *   2 = "The End of Glue Code" -> ReadTask + LCD task-creation glue blocks
  */
-type CodeLine = { text: string; group: 0 | 1 | 2 };
+export type CodeLine = { text: string; group: 0 | 1 | 2 };
 
-const DEFAULT_CODE_LINES: CodeLine[] = [
+export const DEFAULT_CODE_LINES: CodeLine[] = [
   { text: "main.c", group: 0 },
   { text: "", group: 0 },
   { text: '#include "sys_clk.h"', group: 0 },
