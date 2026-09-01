@@ -34,13 +34,15 @@ before. `robots.txt`, `sitemap.xml`, and API routes are never touched.
 
 - All **1027 site files (350.2 MB)** + **1166 Strapi uploads (205 MB)** uploaded and
   verified (`ALL ASSETS VERIFIED`, 2193/2193 identical).
-- **New Strapi uploads**: run `npm run assets:sync-strapi -- --watch` (e.g. via
-  pm2/launchd) to auto-mirror every new picture/PDF into
-  `website-assets/strapi-uploads/`. Strapi keeps serving from its own host —
-  nothing about the CMS changes. The "native" alternative is the Strapi Azure
-  upload provider, but it needs an **account key** (connection string), which we
-  don't have — only the service principal. Ask the Azure team for the
-  connection string if you want Strapi writing to Azure directly.
+- **New Strapi uploads**: Strapi now writes uploads DIRECTLY to Azure via the
+  custom provider `cms/strapi-provider-upload-azure-sp` (service-principal
+  auth, configured in `cms/config/plugins.ts`, env in `cms/.env`). Uploaded
+  files get absolute Azure URLs — no local copy, no sync watcher needed.
+  `assets:sync-strapi -- --watch` is now only a legacy/backup tool.
+- **Legacy `/uploads/...` media rows**: `mediaUrl()` in `src/lib/strapi.ts`
+  rewrites them to `…/strapi-uploads/…` on Azure when `AZURE_ASSETS_PUBLIC_URL`
+  is set (all 1166 mirrored + md5-verified). Unset the var to serve from
+  Strapi again.
 - Container `website-assets` is **private**: the storage account has
   *"Allow Blob public access"* **disabled**, so browsers get `409 PublicAccessNotPermitted`
   on direct blob URLs. Only an account owner can change this:

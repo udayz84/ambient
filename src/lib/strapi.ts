@@ -136,6 +136,14 @@ export function mediaUrl(media: StrapiMedia | undefined | null): string | null {
   if (!media?.url) return null;
   const url = media.url;
   if (url.startsWith("http") || url.startsWith("//")) return url;
+  // Legacy media rows still carry "/uploads/<file>" URLs, but every one of
+  // them is mirrored into the Azure container under strapi-uploads/ (md5
+  // verified). When AZURE_ASSETS_PUBLIC_URL is set, serve them from Azure;
+  // otherwise fall back to the Strapi host exactly as before.
+  const azureBase = process.env.AZURE_ASSETS_PUBLIC_URL?.replace(/\/+$/, "");
+  if (azureBase && url.startsWith("/uploads/")) {
+    return `${azureBase}/strapi-uploads/${url.slice("/uploads/".length)}`;
+  }
   return `${STRAPI_URL}${url}`;
 }
 

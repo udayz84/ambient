@@ -1,0 +1,12 @@
+{
+  "name": "strapi-provider-upload-azure-sp",
+  "version": "1.0.0",
+  "description": "Strapi 5 upload provider: Azure Blob Storage via service principal (no account key required)",
+  "main": "index.js",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@azure/identity": "^4.10.2",
+    "@azure/storage-blob": "^12.27.0"
+  }
+}
