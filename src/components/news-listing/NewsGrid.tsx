@@ -113,12 +113,8 @@ function NewsFilterBar({
   useEffect(() => {
     const raf = requestAnimationFrame(() => {
       const activeEl = navRef.current?.querySelector('[data-active="true"]');
-      if (activeEl && navRef.current) {
-        const navRect = navRef.current.getBoundingClientRect();
-        const activeRect = (activeEl as HTMLElement).getBoundingClientRect();
-        const scrollLeft =
-          activeRect.left - navRect.left - (navRect.width - activeRect.width) / 2;
-        navRef.current.scrollLeft += scrollLeft;
+      if (activeEl) {
+        activeEl.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
       }
     });
     return () => cancelAnimationFrame(raf);
@@ -127,7 +123,7 @@ function NewsFilterBar({
   return (
     <nav
       ref={navRef}
-      className="flex h-[52px] w-full items-center gap-[9.61px] overflow-x-auto [&::-webkit-scrollbar]:hidden [scrollbar-width:none] min-[1024px]:justify-center min-[1024px]:overflow-visible"
+      className="-mx-[20px] px-[20px] max-w-[100vw] w-screen min-[1024px]:mx-0 min-[1024px]:px-0 min-[1024px]:max-w-none min-[1024px]:w-full flex h-[52px] items-center gap-[9.61px] overflow-x-auto snap-x snap-mandatory scroll-smooth [&::-webkit-scrollbar]:hidden [scrollbar-width:none] min-[1024px]:justify-center min-[1024px]:overflow-visible min-[1024px]:snap-none"
       aria-label="News categories"
     >
 
@@ -146,8 +142,11 @@ function NewsFilterBar({
             <button
               type="button"
               data-active={isActive}
-              onClick={() => onSelect(pill.id)}
-              className={`${interRegular.className} relative flex h-[52px] shrink-0 cursor-pointer items-center justify-center px-[20px] text-[16px] leading-[24px] font-normal whitespace-nowrap not-italic transition-colors ${
+              onClick={(e) => {
+                onSelect(pill.id);
+                e.currentTarget.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+              }}
+              className={`${interRegular.className} snap-center relative flex h-[52px] shrink-0 cursor-pointer items-center justify-center px-[20px] text-[16px] leading-[24px] font-normal whitespace-nowrap not-italic transition-colors ${
                 isActive ? "text-[#0e1a0e]" : "text-[#666] hover:text-white"
               }`}
             >

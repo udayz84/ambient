@@ -121,18 +121,18 @@ export function SiteFooter({
       <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 bg-black" />
         <div className="absolute inset-0 overflow-hidden">
-          {/* Mobile Background — exact Figma 3572:7309: box 1138×973, horizontally
-              centered, 300px below the top of the visible zone; image inside the box
-              at left -0.05% / top -6.86% / w 100.06% / h 98.73% (manual crop). */}
+          {/* Mobile Background — dedicated mobile export (393×973), horizontally
+              centered, 300px below the top of the visible zone; image fills the
+              box 1:1 with no crop. */}
           <div
-            className="absolute left-1/2 w-[1138px] -translate-x-1/2 lg:hidden"
+            className="absolute left-1/2 w-[393px] -translate-x-1/2 lg:hidden"
             style={{ top: `${mobileOverlapPx + 300}px`, height: "973px" }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt=""
-              src="/footer/footer-bg.png"
-              className="absolute left-[-0.05%] top-[-6.86%] h-[98.73%] w-[100.06%] object-fill"
+              src="/footer/footer-mobile-bg.png"
+              className="absolute inset-0 h-full w-full object-fill"
             />
           </div>
           {/* Desktop Background */}

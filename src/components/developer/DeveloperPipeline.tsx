@@ -433,7 +433,7 @@ export function StageCard({
       <CardImage stage={stage} index={index} />
 
       {/* Label + subtitle */}
-      <div className="relative flex w-full flex-col items-center gap-[6px] text-center">
+      <div className="relative z-10 flex w-full flex-col items-center gap-[6px] text-center">
         <p
           className={`${gilroyMedium.className} text-[22px] leading-[28px] text-white`}
         >

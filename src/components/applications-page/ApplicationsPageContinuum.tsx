@@ -10,6 +10,32 @@ import { ContinuumOptionsBar } from "./ContinuumOptionsBar";
 const TITLE_GRADIENT =
   "linear-gradient(119.973deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
+/* Mobile title gradient — Figma 4583:25085 */
+const MOBILE_TITLE_GRADIENT =
+  "linear-gradient(107.4537261117953deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
+
+/* Mobile product strip — Figma 4583:25091 (1662.39x420 at x=23, y=62).
+   Each existing desktop Visual (authored on a 1440x808 canvas) is scaled to
+   its Figma instance box. Native product bounds on the canvas:
+   MW (350.26,166,610.48,520) · PH (425.76,209,587.86,500) ·
+   PS (460.00,204,524.27,520) · P2 (460.07,185,524.27,520) ·
+   AC (460.07,185,524.27,520). Instance scale + resulting scaled-canvas
+   offset inside the strip (origin = section top-left):
+   x = inst_x − native_left·s · y = inst_y − 62 − native_top·s. */
+const M_STRIP: {
+  Visual: () => React.ReactElement;
+  scale: number;
+  x: number;
+  y: number;
+  center: number;
+}[] = [
+  { Visual: MicrowattVisual, scale: 0.50073, x: -152.4, y: 76.88, center: 175.84 },
+  { Visual: PhysicalVisual, scale: 0.54583, x: 96.29, y: 32.94, center: 489.16 },
+  { Visual: PersonalVisual, scale: 0.63598, x: 357.08, y: -40.54, center: 816.39 },
+  { Visual: Personal2Visual, scale: 0.65384, x: 682.31, y: -40.96, center: 1154.55 },
+  { Visual: AirCooledVisual, scale: 0.68573, x: 1010.47, y: -126.86, center: 1505.66 },
+];
+
 const SUBTITLE =
   "A unified analog architecture, scaled for your exact power and performance needs.";
 
@@ -66,10 +92,6 @@ const AC_PEDESTAL_OVERLAY = "/applications/cont3-ac-pedestal-overlay.png";
 const AC_CHIP_MASK = "/applications/cont3-ac-chip-mask.png";
 const AC_CHIP_MARK = "/applications/cont3-ac-chip-mark.svg";
 const AC_GLOW = "/applications/cont3-ac-ellipse-glow.svg";
-
-/* Mobile navigation arrows */
-const NAV_ARROW_LEFT = "/applications/nav-arrow-left.svg";
-const NAV_ARROW_RIGHT = "/applications/nav-arrow-right.svg";
 
 type ProductCard = {
   title: string;
@@ -399,18 +421,16 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
   const [selected, setSelected] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  /* Mobile: start the 1440px canvas centered so the product (canvas x≈720)
-     is in view — the visual is authored in desktop coordinates. */
+  /* Mobile: scroll the product strip so the selected product is centered
+     (clamped — GPX10PRO rests at the left edge per Figma 4583:25091). */
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
-    const center = () => {
-      el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
-    };
-    center();
-    window.addEventListener("resize", center);
-    return () => window.removeEventListener("resize", center);
-  }, []);
+    const target = M_STRIP[selected]?.center ?? 0;
+    const max = el.scrollWidth - el.clientWidth;
+    const left = Math.max(0, Math.min(max, target - el.clientWidth / 2));
+    el.scrollTo({ left, behavior: "smooth" });
+  }, [selected]);
 
   const scrollLeft = () => {
     setSelected((prev) => (prev > 0 ? prev - 1 : cards.length - 1));
@@ -594,120 +614,190 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
         </div>
       </div>
 
-      {/* ============= MOBILE (<1024px) ============= */}
+      {/* ============= MOBILE (<1024px) — Figma 4583:25080..25188 (393x700) ============= */}
       <div
-        className="relative flex w-full flex-col items-center overflow-hidden min-[1024px]:hidden"
-        data-node-id="4032:5788"
-        data-name="Frame 1984079474"
+        className="relative h-[700px] w-full overflow-hidden min-[1024px]:hidden"
+        data-node-id="4583:25080"
+        data-name="Frame 1984079471"
       >
         <style>{`.cont-m-scroll::-webkit-scrollbar{display:none}.cont-m-scroll{scrollbar-width:none;-ms-overflow-style:none}`}</style>
 
-        {/* Bottom background strip */}
+        {/* Background image + radial vignette — 4583:25074 (1285x532 centered) */}
         <div
-          className="pointer-events-none absolute bottom-0 left-[calc(50%+30px)] flex h-[341px] w-[1441px] -translate-x-1/2 items-center justify-center overflow-hidden"
           aria-hidden
+          className="pointer-events-none absolute top-[84px] left-[-446px] h-[532px] w-[1285px]"
+          data-node-id="4583:25074"
         >
-          <div className="-scale-y-100">
-            <img src="/applications/dvk-bottom.png" alt="" className="h-[341px] w-[1441px] object-cover" />
+          <div className="absolute top-0 left-[60.2px] h-[532.57px] w-[1194.55px]">
+            <img
+              alt=""
+              src={BG_IMAGE}
+              className="absolute inset-0 size-full max-w-none object-fill"
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "radial-gradient(ellipse 50% 50% at 50% 44.3%, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%)",
+              }}
+            />
+          </div>
+          {/* Polygon overlay — Group 47 (1285x484.35 at y=46.35) */}
+          <div className="absolute top-[46.35px] left-0 h-[484.35px] w-[1285px]">
+            <div className="absolute inset-[-6.41%_-17.01%]">
+              <img
+                alt=""
+                src={POLY_OVERLAY}
+                className="block size-full max-w-none"
+              />
+            </div>
           </div>
         </div>
 
-        {/* Header: title + subtitle */}
+        {/* Large ellipse — 4583:25079 (393x435 at y=133) */}
         <div
-          className="relative z-10 mt-[29px] flex w-[350px] flex-col items-center gap-[10px]"
-          data-node-id="4032:5792"
+          aria-hidden
+          className="pointer-events-none absolute top-[133px] left-0 h-[435px] w-[393px]"
+          data-node-id="4583:25079"
         >
-          <div className="relative h-[79px] w-[353px]" data-node-id="4032:5793" data-name="Group 78">
+          <div className="absolute inset-[-12.37%_-23.6%]">
+            <img
+              alt=""
+              src={ELLIPSE_BIG}
+              className="block size-full max-w-none"
+            />
+          </div>
+        </div>
+
+        {/* Top glow strip — 4583:25081 (1441x260, centered) */}
+        <div
+          className="pointer-events-none absolute top-0 left-1/2 h-[260px] w-[1441px] -translate-x-1/2"
+          aria-hidden
+          data-node-id="4583:25081"
+        >
+          <img
+            src="/technology/eff-mobile-glow-top.png"
+            alt=""
+            className="pointer-events-none absolute inset-0 size-full object-cover"
+          />
+        </div>
+
+        {/* Bottom glow strip — 4583:25082 (1441x341, flipped, +30px off-center,
+            sits 432px below the frame — clipped exactly as in Figma) */}
+        <div
+          className="pointer-events-none absolute bottom-[-432px] left-[calc(50%+30px)] flex h-[341px] w-[1441px] -translate-x-1/2 items-center justify-center overflow-hidden"
+          aria-hidden
+          data-node-id="4583:25082"
+        >
+          <div className="-scale-y-100">
+            <img src="/technology/eff-mobile-glow-bottom.png" alt="" className="h-[341px] w-[1441px] object-cover" />
+          </div>
+        </div>
+
+        {/* Product strip — 4583:25091 (horizontally scrollable) */}
+        <div
+          ref={scrollRef}
+          className="cont-m-scroll absolute top-[62px] left-0 h-[420px] w-full overflow-x-auto overflow-y-hidden"
+          data-node-id="4583:25091"
+        >
+          <div className="relative h-[420px] w-[1685.39px]">
+            {M_STRIP.map(({ Visual, scale, x, y }, i) => (
+              <div
+                key={i}
+                className="absolute overflow-visible"
+                style={{
+                  left: `${x}px`,
+                  top: `${y}px`,
+                  width: `${1440 * scale}px`,
+                  height: `${808 * scale}px`,
+                }}
+              >
+                <div
+                  className="absolute top-0 left-0 h-[808px] w-[1440px] origin-top-left"
+                  style={{ transform: `scale(${scale})` }}
+                >
+                  <Visual />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Header — 4583:25083 (350x121 at 21.5,29) */}
+        <div
+          className="absolute top-[29px] left-[21.5px] flex w-[350px] flex-col items-center justify-center gap-[10px]"
+          data-node-id="4583:25083"
+        >
+          <div className="relative h-[79px] w-[353px]" data-node-id="4583:25084" data-name="Group 78">
             <h2
               className={`${gilroyMedium.className} absolute inset-0 flex items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
-                backgroundImage: TITLE_GRADIENT,
+                backgroundImage: MOBILE_TITLE_GRADIENT,
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
               }}
-              data-node-id="4032:5794"
+              data-node-id="4583:25085"
             >
               {heading}
             </h2>
             <Corners leftSrc={CORNER_57} rightSrc={CORNER_55} />
           </div>
           <p
-            className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
-            data-node-id="4032:5799"
+            className={`${interRegular.className} w-full text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            data-node-id="4583:25090"
           >
             {subtitle}
           </p>
         </div>
 
-        {/* Options bar — horizontally scrollable */}
+        {/* Options ruler — 4583:25149 (500x36 at -31,174, scrollable) */}
         <div
-          className="cont-m-scroll relative z-10 mt-[24px] w-full overflow-x-auto"
-          data-node-id="4032:5790"
+          className="cont-m-scroll absolute top-[174px] left-0 z-10 w-full overflow-x-auto"
+          data-node-id="4583:25149"
         >
-          <ContinuumOptionsBar selected={selected} onSelect={setSelected} isMobile={true} />
-        </div>
-
-        {/* Product visual — scaled down desktop canvas */}
-        <div
-          className="relative h-[360px] w-full overflow-hidden"
-          data-node-id="4032:11892"
-        >
-          <div
-            className="absolute top-0 h-[808px] w-full origin-top"
-            style={{ transform: "scale(0.65) translateY(-140px)" }}
-          >
-            <AnimatePresence initial={false}>
-              <motion.div
-                key={selected}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.35, ease: "easeInOut" }}
-                className="pointer-events-none absolute inset-0"
-              >
-                <Visual />
-              </motion.div>
-            </AnimatePresence>
+          <div className="ml-[-31px] w-max">
+            <ContinuumOptionsBar selected={selected} onSelect={setSelected} isMobile={true} />
           </div>
         </div>
 
-        {/* Card (below the visual — always fully visible) */}
-        <div className="relative z-10 mt-[8px] flex w-full justify-center px-[21px]">
-          <div
-            className="relative h-[147px] w-[325px] shrink-0"
-            data-node-id="4574:7589"
-            data-name="cARD"
-          >
-            <div className="absolute left-[0.79px] top-[0.89px] h-[146.11px] w-[323.807px]">
-              <img alt="" aria-hidden src={CARD_BG} className="absolute inset-0 block size-full max-w-none" />
-            </div>
-            <AnimatePresence initial={false} mode="wait">
-              <motion.div
-                key={selected}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2, ease: "easeInOut" }}
-                className="absolute left-1/2 top-[calc(50%+1px)] flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-[10px] p-[12px] text-center text-white not-italic"
-              >
-                <p className={`${gilroyMedium.className} min-w-full w-[min-content] text-[26px] font-medium leading-[29px]`}>
-                  {activeCard.title}
-                </p>
-                <p className={`${interRegular.className} w-[244px] text-[16px] font-normal leading-[24px] opacity-65`}>
-                  {renderBody(activeCard.body)}
-                </p>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+        {/* Card — 4583:25180 (265x125 at 64,482) */}
+        <div
+          className="absolute top-[482px] left-1/2 z-10 h-[125px] w-[265px] -translate-x-1/2"
+          data-node-id="4583:25180"
+          data-name="cARD"
+        >
+          <img
+            alt=""
+            aria-hidden
+            src={CARD_BG}
+            className="absolute inset-0 block size-full max-w-none object-fill"
+          />
+          <AnimatePresence initial={false} mode="wait">
+            <motion.div
+              key={selected}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+              className="absolute top-[23px] left-[30px] w-[205px] text-left text-white not-italic"
+            >
+              <p className={`${gilroyMedium.className} text-[26px] leading-[28px] font-medium`}>
+                {activeCard.title}
+              </p>
+              <p className={`${interRegular.className} mt-[10px] text-[14px] leading-[21px] font-normal opacity-65`}>
+                {renderBody(activeCard.body)}
+              </p>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
-        {/* Navigation arrows */}
-        <div className="relative z-10 mt-[20px] flex gap-[20px] pb-[40px]" data-node-id="4032:5855">
+        {/* Navigation arrows — 4583:25134 (108x44 at 143,626) */}
+        <div className="absolute top-[626px] left-1/2 z-10 flex -translate-x-1/2 gap-[20px]" data-node-id="4583:25134">
           <button type="button" onClick={scrollLeft} className="relative size-[44px] shrink-0 cursor-pointer" aria-label="Previous">
-            <img src={NAV_ARROW_LEFT} alt="" className="block size-full max-w-none" aria-hidden />
+            <img src="/applications/cont-m-nav-left.svg" alt="" className="block size-full max-w-none" aria-hidden />
           </button>
           <button type="button" onClick={scrollRight} className="relative size-[44px] shrink-0 cursor-pointer" aria-label="Next">
-            <img src={NAV_ARROW_RIGHT} alt="" className="block size-full max-w-none" aria-hidden />
+            <img src="/applications/cont-m-nav-right.svg" alt="" className="block size-full max-w-none" aria-hidden />
           </button>
         </div>
       </div>

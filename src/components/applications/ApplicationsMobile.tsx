@@ -214,13 +214,13 @@ export function ApplicationsMobile({
         </p>
 
         {/* Hero Image */}
-        <div className="relative z-10 mt-[24px] flex w-full justify-center">
+        <div className="relative z-10 mt-[24px] flex w-full justify-center px-[20px]">
           {imgSrc ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               alt=""
               src={imgSrc}
-              className="h-auto max-h-[360px] w-full object-contain drop-shadow-2xl"
+              className="h-auto max-h-[360px] w-[80%] object-contain drop-shadow-2xl"
               aria-hidden
             />
           ) : null}

@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "assets:manifest": "node scripts/azure/generate-manifest.mjs",
+    "assets:upload": "node scripts/azure/upload-assets.mjs",
+    "assets:verify": "node scripts/azure/verify-assets.mjs",
+    "assets:restore": "node scripts/azure/restore-assets.mjs",
+    "assets:sync-strapi": "node scripts/azure/sync-strapi-uploads.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.42.2",
@@ -17,6 +22,8 @@
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@azure/identity": "^4.13.2",
+    "@azure/storage-blob": "^12.33.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/nodemailer": "^8.0.1",

@@ -154,7 +154,7 @@ function WinCardMobile({ label, stat, statLabel, mobileImg, body }: { label: str
     >
       {/* Background image */}
       <div className="absolute inset-0 overflow-hidden">
-        <img alt="" aria-hidden src={mobileImg} className="absolute inset-0 size-full object-cover" />
+        <img alt="" aria-hidden src={mobileImg} className="absolute inset-0 size-full object-contain p-[40px]" />
         <div className="absolute inset-0" style={{ backgroundImage: OVERLAY_2 }} />
       </div>
 

@@ -1,4 +1,4 @@
-import { gilroyMedium, interMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interLight, interMedium, interRegular } from "../hero/fonts";
 import { GradientTitle } from "../contact/contact-shared";
 import { MobileTitleCorners } from "./mobile-shared";
 
@@ -389,6 +389,368 @@ function Glow({
 
 const MOBILE_TITLE_GRADIENT_DEG = "98.934deg";
 
+/* ---- MOBILE (<1024px) — Figma 4533:2857 "6th Fold" ----
+ * 350x840 stacked panel with four 340x190 cards (4533:2873-2993). */
+
+type MobileRow = {
+  top: number;
+  offX: number;
+  offY: number;
+  statTop: number;
+  rank: string;
+  name: string;
+  sub: string;
+  highlighted: boolean;
+  chip: string;
+  blend: boolean;
+  tradeLeft: number;
+  tradeTop: number;
+  icon: RowIcon;
+  tradeLabel: string;
+  tradeLabelClass: string;
+  lineTop: number;
+  powerValue: string;
+  powerBar: number;
+  areaValue: string;
+  areaBar: number;
+};
+
+const M_ROWS: MobileRow[] = [
+  {
+    top: 61,
+    offX: 10,
+    offY: 20,
+    statTop: 100,
+    rank: "1",
+    name: "A cube",
+    sub: "Analog digital in memory",
+    highlighted: true,
+    chip: "/technology/eff-mobile-chip-acube.png",
+    blend: true,
+    tradeLeft: 273,
+    tradeTop: 36,
+    icon: "check",
+    tradeLabel: "None",
+    tradeLabelClass: "whitespace-nowrap",
+    lineTop: 86,
+    powerValue: "~30 TOPS/W",
+    powerBar: 138,
+    areaValue: "~5 TOPS/mm2",
+    areaBar: 141,
+  },
+  {
+    top: 256,
+    offX: 9.7,
+    offY: 19.7,
+    statTop: 99.7,
+    rank: "2",
+    name: "Flash",
+    sub: "Compute in memory",
+    highlighted: false,
+    chip: "/technology/eff-mobile-chip-flash.png",
+    blend: false,
+    tradeLeft: 249.7,
+    tradeTop: 27.7,
+    icon: "warning",
+    tradeLabel: "Model Lock In",
+    tradeLabelClass: "w-[51px] text-center",
+    lineTop: 85.7,
+    powerValue: "~5 TOPS/W",
+    powerBar: 56.883,
+    areaValue: "~1 TOPS/mm2",
+    areaBar: 35.014,
+  },
+  {
+    top: 451,
+    offX: 9.7,
+    offY: 19.7,
+    statTop: 99.7,
+    rank: "3",
+    name: "GPU",
+    sub: "Paralle SMO",
+    highlighted: false,
+    chip: "/technology/eff-mobile-chip-gpu.png",
+    blend: false,
+    tradeLeft: 251.7,
+    tradeTop: 35.7,
+    icon: "heat",
+    tradeLabel: "Too-hot",
+    tradeLabelClass: "whitespace-nowrap",
+    lineTop: 85.7,
+    powerValue: "~30 TOPS/W",
+    powerBar: 35.014,
+    areaValue: "~0.5 TOPS/mm2",
+    areaBar: 19.654,
+  },
+  {
+    top: 646,
+    offX: 9.7,
+    offY: 19.7,
+    statTop: 99.7,
+    rank: "4",
+    name: "MCU",
+    sub: "Analog digital in memory",
+    highlighted: false,
+    chip: "/technology/eff-mobile-chip-flash.png",
+    blend: false,
+    tradeLeft: 246.7,
+    tradeTop: 27.7,
+    icon: "x",
+    tradeLabel: "Not built for AI",
+    tradeLabelClass: "w-[57px] text-center",
+    lineTop: 85.7,
+    powerValue: "~30 TOPS/W",
+    powerBar: 11.791,
+    areaValue: "~0.1 TOPS/mm2",
+    areaBar: 14.406,
+  },
+];
+
+/* 150px-wide usage bar (Figma 4533:2902 etc.) — rotated-gradient structure
+   kept so the gradient direction matches the source exactly. */
+function MobileUsageBar({ segment, muted }: { segment: number; muted: boolean }) {
+  return (
+    <div className="flex h-[12px] w-full items-center justify-center">
+      <div className="flex-none -rotate-90 -scale-y-100">
+        <div className="relative flex h-[150px] w-[12px] flex-col items-center justify-end bg-gradient-to-b from-[#535353] to-[#313131]">
+          <div
+            className={`relative w-full shrink-0 rounded-[0.384px] bg-gradient-to-b from-[#8ce66c] to-[#1b2f14] ${muted ? "mix-blend-luminosity" : ""}`}
+            style={{ height: `${segment}px` }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* Panel corner brackets (Figma 4533:2876 "Cornor Elements"). */
+function MobilePanelCorners() {
+  return (
+    <svg
+      className="absolute top-[0.51px] left-1/2 h-[839.494px] w-[350px] -translate-x-1/2"
+      viewBox="0 0 351 840.494"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="none"
+      data-node-id="4533:2876"
+      aria-hidden
+    >
+      <path d="M350.5 834.388L350.5 839.994H346.888" stroke="white" />
+      <path d="M0.5 6.10603L0.5 0.5H4.11192" stroke="white" />
+      <path d="M350.5 6.10603L350.5 0.5H346.888" stroke="white" />
+      <path d="M0.5 834.388L0.5 839.994H4.11192" stroke="white" />
+    </svg>
+  );
+}
+
+/* Trade-off icons at mobile card scale (Figma 4533:2895 / 2924 / 2950 / 2979). */
+function MobileTradeIcon({ icon }: { icon: RowIcon }) {
+  if (icon === "check") {
+    return <CheckIcon className="size-[20px] shrink-0" />;
+  }
+  if (icon === "warning") {
+    return <WarningIcon className="h-[20px] w-[22.383px] shrink-0" />;
+  }
+  if (icon === "heat") {
+    return (
+      <div className="relative h-[20px] w-[25.833px] shrink-0">
+        <HeatWispIcon className="absolute top-0 left-[2.92px] h-[10.833px] w-[5.833px]" />
+        <HeatWispIcon className="absolute top-0 left-[11.25px] h-[10.833px] w-[5.833px]" />
+        <HeatWispIcon className="absolute top-0 left-[19.58px] h-[10.833px] w-[5.833px]" />
+        <HeatWaveIcon className="absolute top-[14.16px] left-0 h-[5.833px] w-[25.833px]" />
+      </div>
+    );
+  }
+  return <XIcon className="size-[20px] shrink-0" />;
+}
+
+/* POWER / AREA stat column (Figma 4533:2898 / 2904 etc.). */
+function MobileStatBlock({
+  left,
+  top,
+  label,
+  value,
+  segment,
+  muted,
+}: {
+  left: number;
+  top: number;
+  label: string;
+  value: string;
+  segment: number;
+  muted: boolean;
+}) {
+  return (
+    <div
+      className="absolute flex w-[150px] flex-col items-start gap-[8px]"
+      style={{ left: `${left}px`, top: `${top}px` }}
+    >
+      <p
+        className={`${interMedium.className} h-[16px] w-full text-[14px] leading-[16px] font-medium text-[#d2d2d2] uppercase not-italic`}
+      >
+        {label}
+      </p>
+      <div className="flex w-full flex-col items-start gap-[6px]">
+        <p
+          className={`${gilroyMedium.className} w-full text-[18px] leading-[28px] font-medium text-[#e2f9da] not-italic`}
+        >
+          {value}
+        </p>
+        <MobileUsageBar segment={segment} muted={muted} />
+      </div>
+    </div>
+  );
+}
+
+/** 350x840 "Lower power consumption" mobile panel (Figma 4533:2873). */
+function EfficiencyTableMobile() {
+  return (
+    <div
+      className="absolute top-[249px] left-[calc(50%+1.5px)] h-[840px] w-[350px] -translate-x-1/2"
+      data-node-id="4533:2873"
+      data-name="Lower power consumption"
+    >
+      {/* background */}
+      <div
+        className="absolute top-0 left-0 h-[840px] w-[350px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)]"
+        style={{
+          backgroundImage:
+            "linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), linear-gradient(90deg, rgba(15, 14, 14, 0.75) 0%, rgba(15, 14, 14, 0.75) 100%)",
+        }}
+        data-node-id="4533:2874"
+        data-name="background"
+      />
+      {/* header band */}
+      <div
+        className="absolute top-px left-0 h-[55px] w-[350px] bg-[rgba(51,51,51,0.1)]"
+        data-node-id="4533:2875"
+      />
+      <MobilePanelCorners />
+
+      {/* header row — Rank / The Trade - off */}
+      <div
+        className={`${interMedium.className} absolute top-0 left-0 flex h-[56px] w-[350px] items-start justify-between px-[15px] py-[20px] text-[14px] leading-[0] font-medium text-[#d2d2d2] uppercase not-italic whitespace-nowrap`}
+        data-node-id="4533:2881"
+      >
+        <div className="relative flex shrink-0 flex-col justify-center" data-node-id="4533:2882">
+          <p className="leading-[16px]">Rank</p>
+        </div>
+        <div className="relative flex shrink-0 flex-col justify-center" data-node-id="4533:2883">
+          <p className="leading-[16px]">The Trade - off</p>
+        </div>
+      </div>
+
+      {/* cards */}
+      {M_ROWS.map((row) => (
+        <div
+          key={row.rank}
+          className="absolute top-0 left-1/2 h-[190px] w-[340px] -translate-x-1/2"
+          style={{ top: `${row.top}px` }}
+        >
+          {row.highlighted ? (
+            <div
+              className="absolute top-0 left-0 h-[190px] w-[340px] border-t border-b border-solid border-[#bfe9b1] opacity-60"
+              style={{
+                backgroundImage:
+                  "linear-gradient(89.90164524435929deg, rgba(83, 216, 36, 0) 75.369%, rgba(83, 216, 36, 0.2) 99.944%), linear-gradient(90deg, rgba(83, 216, 36, 0.2) 0%, rgba(83, 216, 36, 0) 34.507%), linear-gradient(90deg, rgba(83, 216, 36, 0.1) 0%, rgba(83, 216, 36, 0.1) 100%)",
+              }}
+            />
+          ) : (
+            <div className="absolute top-0 left-0 h-[190px] w-[340px] border-[0.3px] border-solid border-[rgba(240,240,240,0.2)]" />
+          )}
+
+          {/* badge + chip + name */}
+          <div
+            className="absolute flex items-center gap-[10px]"
+            style={{ left: `${row.offX}px`, top: `${row.offY}px` }}
+          >
+            <div
+              className={`flex h-[32px] w-[33.143px] shrink-0 flex-col items-center justify-center rounded-[4px] px-[10px] ${
+                row.highlighted ? "bg-[#3a9719]" : "bg-[rgba(83,216,36,0.1)]"
+              }`}
+            >
+              <p
+                className={`${gilroyMedium.className} w-full text-center text-[16px] leading-[28px] font-medium text-[#e2f9da] not-italic`}
+              >
+                {row.rank}
+              </p>
+            </div>
+            <div className="flex shrink-0 items-center gap-[4px]">
+              <div className={`relative h-[52px] w-[54px] shrink-0 ${row.blend ? "mix-blend-lighten" : ""}`}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  alt=""
+                  src={row.chip}
+                  className="pointer-events-none absolute inset-0 size-full object-cover"
+                />
+              </div>
+              <div className="flex shrink-0 flex-col items-start not-italic whitespace-nowrap">
+                <p
+                  className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium not-italic ${
+                    row.highlighted ? "text-[#53d824]" : "text-[#e2f9da]"
+                  }`}
+                >
+                  {row.name}
+                </p>
+                <p
+                  className={`${interLight.className} text-[10px] leading-[15px] font-light text-white not-italic`}
+                >
+                  {row.sub}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* trade-off */}
+          <div
+            className="absolute flex items-center gap-[6px]"
+            style={{ left: `${row.tradeLeft}px`, top: `${row.tradeTop}px` }}
+          >
+            <MobileTradeIcon icon={row.icon} />
+            <p
+              className={`${interRegular.className} text-[12px] leading-[18px] font-normal text-[#e2f9da] not-italic ${row.tradeLabelClass}`}
+            >
+              {row.tradeLabel}
+            </p>
+          </div>
+
+          {/* separator line — Line 88: white fade left-to-right at 30% */}
+          <div
+            className="absolute h-0 w-[151.832px]"
+            style={{ left: `${row.offX}px`, top: `${row.lineTop}px` }}
+          >
+            <div
+              className="absolute inset-[-1px_0_0_0] opacity-30"
+              style={{
+                backgroundImage:
+                  "linear-gradient(90deg, #ffffff 0%, rgba(255,255,255,0) 100%)",
+              }}
+            />
+          </div>
+
+          {/* POWER / AREA */}
+          <MobileStatBlock
+            left={row.offX}
+            top={row.statTop}
+            label="Power"
+            value={row.powerValue}
+            segment={row.powerBar}
+            muted={!row.highlighted}
+          />
+          <MobileStatBlock
+            left={row.offX + 170}
+            top={row.statTop}
+            label="Area"
+            value={row.areaValue}
+            segment={row.areaBar}
+            muted={!row.highlighted}
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 /** Shared inner content for the 1166×468 "Lower power consumption" panel.
  *  Used by both desktop (absolute-positioned) and mobile (scrollable). */
 function EfficiencyTableContent() {
@@ -653,56 +1015,79 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
         </div>
       </div>
 
-      {/* MOBILE (<1024px) — Figma 3572:6805 */}
-      <div className="relative w-full overflow-hidden min-[1024px]:hidden">
-        {/* Background glows — 3572:6807 / 3572:6808 */}
+      {/* MOBILE (<1024px) — Figma 4533:2857 "6th Fold" (393x1119) */}
+      <div className="relative h-[1119px] w-full overflow-hidden min-[1024px]:hidden">
+        {/* Background glows — 4533:2859 / 4533:2860 */}
         <Glow
           top="top-[-104px]"
           height="h-[539px]"
           flipClass="-scale-y-100 rotate-180"
           fromStop="from-[15.366%]"
           toStop="to-[63.608%]"
-          nodeId="3572:6808"
+          nodeId="4533:2860"
         />
         <Glow
-          top="top-[435px]"
-          height="h-[540px]"
+          top="top-[434.99px]"
+          height="h-[540.013px]"
           flipClass="rotate-180"
           fromStop="from-[29.711%]"
           toStop="to-[42.418%]"
-          nodeId="3572:6807"
+          nodeId="4533:2859"
         />
 
-        {/* Content */}
-        <div className="relative z-10 flex flex-col items-center pb-[60px] pt-[30px]">
-          {/* Header — 3572:6813 */}
-          <div className="flex w-[350px] flex-col items-center gap-[10px]">
-            <div className="relative w-full">
-              <p
-                className={`${gilroyMedium.className} w-full bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
-                style={{
-                  backgroundImage: `linear-gradient(${MOBILE_TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                }}
-              >
-                {headingLines.join(" ")}
-              </p>
-              <MobileTitleCorners />
-            </div>
-            <p
-              className={`${interRegular.className} w-full text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
-            >
-              {subtitle}
-            </p>
-          </div>
+        {/* Top glow strip — 4533:2862 */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute top-0 left-1/2 h-[260px] w-[1441px] -translate-x-1/2"
+          data-node-id="4533:2862"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt=""
+            src="/technology/eff-mobile-glow-top.png"
+            className="pointer-events-none absolute inset-0 size-full object-cover"
+          />
+        </div>
 
-          {/* Scrollable table — 3572:8514 */}
-          <div className="mt-[40px] w-full px-[20px] overflow-x-auto overflow-y-hidden">
-            <div className="relative mx-auto h-[468px] w-[1166px] shrink-0 overflow-clip">
-              <EfficiencyTableContent />
-            </div>
+        {/* Bottom glow strip (flipped, +30px off-center, clipped by frame) — 4533:2863 */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute bottom-[-92px] left-[calc(50%+30px)] h-[341px] w-[1441px] -translate-x-1/2 -scale-y-100"
+          data-node-id="4533:2863"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt=""
+            src="/technology/eff-mobile-glow-bottom.png"
+            className="pointer-events-none absolute inset-0 size-full object-cover"
+          />
+        </div>
+
+        {/* Header — 4533:2865 */}
+        <div className="absolute top-[30px] left-[calc(50%+1.5px)] flex w-[350px] -translate-x-1/2 flex-col items-center justify-center gap-[10px]">
+          <div className="relative w-full">
+            <p
+              className={`${gilroyMedium.className} w-full bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              style={{
+                backgroundImage: `linear-gradient(${MOBILE_TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
+            >
+              {headingLines.join(" ")}
+            </p>
+            <MobileTitleCorners />
           </div>
+          <p
+            className={`${interRegular.className} w-full text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+          >
+            {subtitle}
+          </p>
+        </div>
+
+        {/* Stacked comparison panel — 4533:2873 */}
+        <div className="relative z-10">
+          <EfficiencyTableMobile />
         </div>
       </div>
     </section>

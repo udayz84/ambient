@@ -448,6 +448,29 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
           </div>
         </div>
 
+        {/* Center text (ONE CORE. ONE SOFTWARE STACK.) */}
+        <div
+          className="absolute top-[612px] left-[29px] flex h-[400px] w-[23px] -translate-y-1/2 items-center justify-center"
+          aria-hidden
+        >
+          <div className="flex-none rotate-90 whitespace-nowrap">
+            <p
+              className={`${interSemiBold.className} text-[14px] tracking-[-0.1504px] not-italic`}
+            >
+              {centerLines[0] ? (
+                <span className="font-semibold leading-[22.75px] text-white">
+                  {centerLines[0]}{" "}
+                </span>
+              ) : null}
+              {centerLines[1] ? (
+                <span className={`${interRegular.className} font-normal leading-[22.75px] text-[rgba(255,255,255,0.7)]`}>
+                  {centerLines[1]}
+                </span>
+              ) : null}
+            </p>
+          </div>
+        </div>
+
         {/* Products — left images, right images, labels */}
         {MOBILE_PRODUCTS.map((p, i) => {
           const label = labels[i];
@@ -526,16 +549,19 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
 
               {/* Product label — 3572:8368 etc */}
               <div
-                className="absolute flex flex-col items-start gap-[4px]"
-                style={{ left: p.label.left, top: p.label.top }}
+                className="absolute flex flex-col items-center gap-[4px]"
+                style={{ 
+                  left: p.right.left + p.right.w / 2 - 151.832 / 2, 
+                  top: p.label.top 
+                }}
               >
                 <p
-                  className={`${gilroyMedium.className} text-[20px] leading-[29px] font-medium whitespace-nowrap text-white not-italic`}
+                  className={`${gilroyMedium.className} text-center text-[20px] leading-[29px] font-medium whitespace-nowrap text-white not-italic`}
                 >
                   {label.name}
                 </p>
                 <p
-                  className={`${interRegular.className} text-[12px] leading-[18px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic`}
+                  className={`${interRegular.className} text-center text-[12px] leading-[18px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic`}
                 >
                   {label.cat}
                 </p>

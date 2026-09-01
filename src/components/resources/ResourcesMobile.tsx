@@ -452,9 +452,12 @@ function ResourcesContentMobile({
   const visibleArticles = filteredArticles.slice(0, visibleCount);
   const canLoadMore = visibleCount < filteredArticles.length;
 
-  const selectCategory = (id: string) => {
+  const selectCategory = (id: string, e?: React.MouseEvent<HTMLButtonElement>) => {
     setActiveCategory(id);
     setVisibleCount(initialVisible);
+    if (e) {
+      e.currentTarget.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    }
   };
 
   return (
@@ -462,7 +465,7 @@ function ResourcesContentMobile({
       className="relative flex w-full flex-col px-[24px] py-[48px]"
       aria-label="Resource library"
     >
-      <div className="mt-[5px] flex w-full items-center overflow-x-auto pb-[16px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="-mx-[24px] mt-[5px] flex w-screen max-w-[100vw] snap-x snap-mandatory scroll-smooth items-center overflow-x-auto px-[24px] pb-[16px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         <CategoryConnector isBeforeActive={activeCategory === categories[0]?.id} isAfterActive={false} />
         {categories.map((category, index) => {
           const isActive = activeCategory === category.id;
@@ -473,8 +476,8 @@ function ResourcesContentMobile({
             <React.Fragment key={`${category.id}-${index}`}>
               <button
                 type="button"
-                onClick={() => selectCategory(category.id)}
-                className={`relative flex h-[36px] shrink-0 items-center justify-center px-[20px] transition-colors ${isActive ? "bg-[#f0f0f0]" : ""
+                onClick={(e) => selectCategory(category.id, e)}
+                className={`relative flex h-[36px] shrink-0 snap-center items-center justify-center px-[20px] transition-colors ${isActive ? "bg-[#f0f0f0]" : ""
                   }`}
               >
                 {isActive && <Corners />}

@@ -233,7 +233,7 @@ function DeveloperCodeSectionMobile({ data }: { data?: any }) {
   const carouselRef = useRef<HTMLDivElement>(null);
   /** Step = 355px card + 8px gap (Figma 4666:9680). */
   const scrollCarousel = (direction: 1 | -1) => {
-    carouselRef.current?.scrollBy({ left: direction * 363 });
+    carouselRef.current?.scrollBy({ left: direction * 363, behavior: "smooth" });
   };
   return (
     <section className="relative flex w-full flex-col items-center overflow-hidden pt-[30px]">
@@ -341,13 +341,13 @@ function DeveloperCodeSectionMobile({ data }: { data?: any }) {
       {/* Articles — 4666:9680 (top 840 → mt 18 below editor; horizontal carousel, gap 8) */}
       <div
         ref={carouselRef}
-        className="relative mt-[18px] w-full max-w-[393px] overflow-x-auto no-scrollbar"
+        className="relative mt-[18px] w-full max-w-[393px] snap-x snap-mandatory overflow-x-auto scroll-smooth no-scrollbar"
       >
-        <div className="flex items-center gap-[8px] px-[19px]">
+        <div className="flex items-stretch gap-[8px] px-[19px] after:w-[11px] after:shrink-0 after:content-['']">
           {articles.map((article, i) => (
             <div
               key={article.title}
-              className="relative flex w-[355px] shrink-0 items-center gap-[16px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] p-[14px]"
+              className="relative flex w-[355px] shrink-0 snap-center items-center gap-[16px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] p-[14px]"
             >
               {/* Icon — 50×49 rounded-12 with radial gradient bg */}
               <div
@@ -368,11 +368,7 @@ function DeveloperCodeSectionMobile({ data }: { data?: any }) {
               {/* Text — gap 6px; card 2 title is 26px/29px per Figma 4666:9710 */}
               <div className="flex min-w-0 flex-1 flex-col gap-[6px]">
                 <p
-                  className={`${gilroyMedium.className} font-medium text-white not-italic [word-break:break-word] ${
-                    i === 1
-                      ? "text-[26px] leading-[29px]"
-                      : "text-[22px] leading-[28px]"
-                  }`}
+                  className={`${gilroyMedium.className} font-medium text-white not-italic [word-break:break-word] text-[22px] leading-[28px]`}
                 >
                   {article.title}
                 </p>
@@ -645,10 +641,7 @@ function PipelineAccordionItemMobile({
   onClick: () => void;
 }) {
   const strip = MOBILE_COLLAPSE[index];
-  /* Train renders the Figma portrait diagram (4502:8242); other stages use
-     the CMS flow image when provided, else the desktop fallback diagram. */
-  const isTrainPortrait = index === 0;
-  const expandedImage = isTrainPortrait ? MOBILE_TRAIN_FLOW : stage.flowImage;
+  const expandedImage = stage.flowImage;
   return (
     <div className="flex w-full flex-col">
       {/* Header — 4502:8213 (h=80, bg-black, border rgba(240,240,240,0.2)) */}
@@ -798,11 +791,7 @@ function PipelineAccordionItemMobile({
             <img
               alt={`${stage.label} flow diagram`}
               src={expandedImage}
-              className={`mx-auto block max-w-full ${
-                isTrainPortrait
-                  ? "h-[1247px] w-[353px] object-cover"
-                  : "w-[353px]"
-              }`}
+              className="mx-auto block w-[353px] max-w-full"
             />
           </div>
         </div>

@@ -162,12 +162,12 @@ function MobileStatCard({ stat }: { stat: StatCardData }) {
   );
 }
 
-function MobileIndicator({ rotateClass }: { rotateClass: string }) {
+function MobileIndicator({ rotateClass, length = 40 }: { rotateClass: string; length?: number }) {
   return (
-    <div className="flex h-[76.611px] w-[14.142px] items-center justify-center" aria-hidden>
+    <div className="flex w-[14.142px] items-center justify-center overflow-hidden" style={{ height: length }} aria-hidden>
       <div className={`flex-none ${rotateClass}`}>
-        <div className="relative h-[14.142px] w-[76.611px]">
-          <div className="absolute inset-[-28.28%_-5.22%_-28.29%_0]">
+        <div className="relative h-[14.142px]" style={{ width: length }}>
+          <div className="absolute right-[-4px] top-1/2 h-[22.142px] w-[80.611px] -translate-y-1/2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={INDICATOR_1} alt="" className="block size-full max-w-none" />
           </div>

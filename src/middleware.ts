@@ -3,6 +3,41 @@ import type { NextRequest } from 'next/server';
 
 const strapiUrlStr = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1338";
 
+// When AZURE_ASSETS_PUBLIC_URL is set, static assets (images, PDFs, fonts,
+// videos) are served from Azure Blob Storage instead of /public. Every path
+// keeps its exact URL — the middleware 308-redirects to the same blob path.
+// Leave the env var unset to keep serving everything from /public.
+const azureAssetsPublicUrl = process.env.AZURE_ASSETS_PUBLIC_URL?.replace(/\/+$/, '') || null;
+
+// Only true static-asset extensions are redirected. Deliberately excludes
+// html/json/xml/txt because the app serves real routes at those extensions
+// (robots.txt, sitemap.xml).
+const ASSET_FILE_EXTENSIONS = new Set([
+  'avif', 'bin', 'bmp', 'doc', 'docx', 'eot', 'gif', 'ico', 'jpeg', 'jpg',
+  'mid', 'mov', 'mp3', 'mp4', 'oga', 'ogg', 'ogv', 'otf', 'pdf', 'png',
+  'ppt', 'pptx', 'psd', 'svg', 'tif', 'tiff', 'ttf', 'wav', 'webm',
+  'webp', 'woff', 'woff2', 'xls', 'xlsx', 'zip',
+]);
+
+function isStaticAssetPath(pathname: string): boolean {
+  const ext = pathname.match(/\.([A-Za-z0-9]+)$/)?.[1]?.toLowerCase();
+  return !!ext && ASSET_FILE_EXTENSIONS.has(ext);
+}
+
+function toAzureAssetUrl(pathname: string): string | null {
+  try {
+    // Decode then re-encode each segment so filenames with spaces, @, ()
+    // map 1:1 onto their blob names without double-encoding.
+    const encoded = pathname
+      .split('/')
+      .map((segment) => encodeURIComponent(decodeURIComponent(segment)))
+      .join('/');
+    return `${azureAssetsPublicUrl}${encoded}`;
+  } catch {
+    return null;
+  }
+}
+
 /**
  * Extract a clean pathname from a string that could be a relative path or full URL.
  * Strips trailing slashes for consistent comparison.
@@ -26,6 +61,18 @@ export async function middleware(request: NextRequest) {
     pathname === '/favicon.ico'
   ) {
     return NextResponse.next();
+  }
+
+  // Serve /public assets from Azure Blob Storage when configured.
+  // Redirects preserve the exact path (e.g. /footer/dot-separator.svg →
+  // https://<account>.blob.core.windows.net/assets/footer/dot-separator.svg).
+  if (azureAssetsPublicUrl && isStaticAssetPath(pathname)) {
+    const target = toAzureAssetUrl(pathname);
+    if (target) {
+      const redirectResponse = NextResponse.redirect(target, 308);
+      redirectResponse.headers.set('Cache-Control', 'public, max-age=86400');
+      return redirectResponse;
+    }
   }
 
   try {

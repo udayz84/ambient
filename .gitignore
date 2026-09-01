@@ -50,3 +50,9 @@ out.json
 query*.json
 test_query*.json
 scratch.html
+
+# Azure asset migration — generated artifacts (regenerated on every run)
+scripts/azure/asset-manifest.json
+scripts/azure/upload-report.json
+scripts/azure/verify-report.json
+restored-assets/
