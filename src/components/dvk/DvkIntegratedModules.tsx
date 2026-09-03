@@ -135,7 +135,7 @@ function DvkIntegratedModulesDesktop({
             >
               {card.imageUrl && (
                 /* eslint-disable-next-line @next/next/no-img-element */
-                <img src={card.imageUrl} alt="" className="absolute inset-0 size-full max-w-none" />
+                <img src={card.imageUrl} alt="" className="max-w-[92%] max-h-[92%] object-contain" />
               )}
             </div>
             <div className="relative mt-[20px] flex items-center justify-between gap-[10px] not-italic">
@@ -250,7 +250,7 @@ function DvkIntegratedModulesMobile({
               >
                 {card.imageUrl ? (
                   /* eslint-disable-next-line @next/next/no-img-element */
-                  <img src={card.imageUrl} alt="" className="absolute inset-0 size-full max-w-none object-contain" />
+                  <img src={card.imageUrl} alt="" className={`absolute inset-0 size-full max-w-none object-contain ${i === 1 ? 'scale-[0.85]' : ''}`} />
                 ) : i === 0 ? (
                   <div className="absolute top-[1.72px] left-[58.998px] h-[196.562px] w-[213px]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}

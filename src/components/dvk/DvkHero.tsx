@@ -39,7 +39,7 @@ export function DvkHero({ data }: { data?: any }) {
         <div
           className="pointer-events-none absolute overflow-hidden"
           style={{
-            left: 329.625,
+            left: 230,
             top: 10.18359375,
             width: 1120.3746337890625,
             height: 610.349609375,
@@ -52,7 +52,7 @@ export function DvkHero({ data }: { data?: any }) {
           <img
             alt=""
             src={bg}
-            className="absolute inset-0 size-full max-w-none object-contain object-bottom"
+            className="absolute inset-0 size-full max-w-none object-contain object-right-bottom scale-[0.85] origin-bottom-right"
           />
         </div>
       )}
