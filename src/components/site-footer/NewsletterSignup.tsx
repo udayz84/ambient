@@ -34,7 +34,7 @@ export function NewsletterSignup({
       data-name="Group 90"
     >
       <div className="absolute inset-0 -z-10 w-full h-full">
-        <Image src="/home1618873545.png" alt="" fill className="object-fill" />
+        <img src="/home1618873545.png" alt="" className="absolute inset-0 h-full w-full object-fill" />
       </div>
       <div className="relative inline-grid grid-cols-[max-content] grid-rows-[max-content] place-items-center leading-[0]">
         <Corner className="absolute top-0 right-0" src={cornerRight} rotate={true} />
