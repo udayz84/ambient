@@ -1855,6 +1855,21 @@ export interface SharedLocation extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedMegaColumn extends Struct.ComponentSchema {
+  collectionName: 'components_shared_mega_columns';
+  info: {
+    description: 'Products mega-menu dropdown column (title, description, links, CTA)';
+    displayName: 'Mega Menu Column';
+  };
+  attributes: {
+    cta_href: Schema.Attribute.String;
+    cta_label: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    links: Schema.Attribute.Component<'shared.nav-sub-item', true>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SharedNavItem extends Struct.ComponentSchema {
   collectionName: 'components_shared_nav_items';
   info: {
@@ -1867,6 +1882,7 @@ export interface SharedNavItem extends Struct.ComponentSchema {
     highlight: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     href: Schema.Attribute.String & Schema.Attribute.Required;
     label: Schema.Attribute.String & Schema.Attribute.Required;
+    mega_columns: Schema.Attribute.Component<'shared.mega-column', true>;
   };
 }
 
@@ -2753,6 +2769,7 @@ declare module '@strapi/strapi' {
       'shared.leader': SharedLeader;
       'shared.link': SharedLink;
       'shared.location': SharedLocation;
+      'shared.mega-column': SharedMegaColumn;
       'shared.nav-item': SharedNavItem;
       'shared.nav-sub-item': SharedNavSubItem;
       'shared.newsletter': SharedNewsletter;

@@ -26,6 +26,11 @@
       "type": "component",
       "repeatable": true,
       "component": "shared.nav-sub-item"
+    },
+    "mega_columns": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.mega-column"
     }
   }
 }

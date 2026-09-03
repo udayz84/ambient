@@ -176,7 +176,11 @@ export async function getCollection<T = unknown>(
 export async function getNavbar<T = unknown>(): Promise<T | null> {
   const sections: PopulateSection[] = [
     "brand",
-    { section: "header", fields: ["cta_dot_icon"], nested: ["nav_items.children"] },
+    {
+      section: "header",
+      fields: ["cta_dot_icon"],
+      nested: ["nav_items.children", "nav_items.mega_columns.links"],
+    },
   ];
   const res = await fetchStrapi<StrapiResponse<T>>(
     `/api/navbar?${buildPopulate(sections)}`

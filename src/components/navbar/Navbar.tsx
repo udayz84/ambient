@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { mapStrapiNavItems } from "./nav-items";
+import { mapStrapiNavItems, type NavMegaColumn } from "./nav-items";
 import { MobileMenu } from "./MobileMenu";
 import { NavbarCta } from "./NavbarCta";
 import { mediaUrl } from "@/lib/strapi";
@@ -33,8 +33,61 @@ function ShoppingCartIcon() {
   );
 }
 
-/** Figma 4625:8704 — Products mega-menu dropdown (800×210 panel). */
-function ProductsMegaMenu({ onNavigate }: { onNavigate: () => void }) {
+/** Figma 4625:8704 — Products mega-menu dropdown (800×210 panel).
+ *  Columns come from Strapi (nav item mega_columns); icons are mapped by
+ *  column title (Strapi has no icon field). Falls back to the Figma default
+ *  content when the CMS provides no columns. */
+const MEGA_ICON_BY_TITLE: Record<string, string> = {
+  processors: "/navbar/dropdown-icon-chip.svg",
+  "system-on-modules": "/navbar/dropdown-icon-som.svg",
+  som: "/navbar/dropdown-icon-som.svg",
+  "evaluation kits": "/navbar/dropdown-icon-devkit.svg",
+  "development kits": "/navbar/dropdown-icon-devkit.svg",
+  dvk: "/navbar/dropdown-icon-devkit.svg",
+};
+
+const MEGA_ICON_FALLBACK = "/navbar/dropdown-icon-chip.svg";
+
+function megaIconFor(title?: string): string {
+  const key = (title || "").toLowerCase().trim();
+  return MEGA_ICON_BY_TITLE[key] || MEGA_ICON_FALLBACK;
+}
+
+const DEFAULT_MEGA_COLUMNS: NavMegaColumn[] = [
+  {
+    title: "Processors",
+    description: undefined,
+    links: [
+      { label: "GPX10PRO", href: "/products" },
+      { label: "GPX64", href: "/products" },
+    ],
+    ctaLabel: undefined,
+    ctaHref: undefined,
+  },
+  {
+    title: "System-on-Modules",
+    description: "Drop-in reference modules for rapid product development",
+    links: [],
+    ctaLabel: "View all SOMs",
+    ctaHref: "/SOM",
+  },
+  {
+    title: "Evaluation Kits",
+    description: "Plug-and-play boards to test your models quickly",
+    links: [],
+    ctaLabel: "View Evaluation Kits",
+    ctaHref: "/dvk",
+  },
+];
+
+function ProductsMegaMenu({
+  columns,
+  onNavigate,
+}: {
+  columns?: NavMegaColumn[];
+  onNavigate: () => void;
+}) {
+  const cols = columns?.length ? columns : DEFAULT_MEGA_COLUMNS;
   return (
     <div
       className="relative w-[800px] border-[0.5px] border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.98)] backdrop-blur-3xl"
@@ -46,59 +99,45 @@ function ProductsMegaMenu({ onNavigate }: { onNavigate: () => void }) {
         <Image src="/navbar/dropdown-corners.svg" alt="" fill className="block max-w-none" aria-hidden />
       </div>
 
-      {/* Content — 3 columns, gap 32px, padding 30px */}
+      {/* Content — columns, gap 32px, padding 30px. First column fixed 200px per Figma. */}
       <div className="relative flex items-start gap-[32px] p-[30px]">
-        {/* Column 1 — Processors (200px) */}
-        <div className="flex w-[200px] shrink-0 flex-col gap-[12px]">
-          <div className="flex shrink-0 items-center gap-[6px]">
-            <span className="relative size-[24px] shrink-0 overflow-clip">
-              <Image src="/navbar/dropdown-icon-chip.svg" alt="" fill className="object-contain" aria-hidden />
-            </span>
-            <span className={`${interRegular.className} whitespace-nowrap text-[16px] leading-[24px] font-normal text-[#f0f0f0]`}>
-              Processors
-            </span>
+        {cols.map((column, index) => (
+          <div
+            key={column.title}
+            className={index === 0 ? "flex w-[200px] shrink-0 flex-col gap-[12px]" : "flex min-w-px flex-1 flex-col gap-[12px]"}
+          >
+            <div className="flex shrink-0 items-center gap-[6px]">
+              <span className="relative size-[24px] shrink-0 overflow-clip">
+                <Image src={megaIconFor(column.title)} alt="" fill className="object-contain" aria-hidden />
+              </span>
+              <span className={`${interRegular.className} whitespace-nowrap text-[16px] leading-[24px] font-normal text-[#f0f0f0]`}>
+                {column.title}
+              </span>
+            </div>
+            {column.links.length > 0 ? (
+              <div className="flex flex-col gap-[6px]">
+                {column.links.map((link) => (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    onClick={onNavigate}
+                    className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#ccc] opacity-90 transition-opacity hover:opacity-100`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            ) : null}
+            {column.description ? (
+              <p className={`${interRegular.className} w-full text-[12px] leading-[18px] font-normal text-[#ccc] opacity-90`}>
+                {column.description}
+              </p>
+            ) : null}
+            {column.ctaLabel && column.ctaHref ? (
+              <DropdownCta href={column.ctaHref} label={column.ctaLabel} onNavigate={onNavigate} />
+            ) : null}
           </div>
-          <div className="flex flex-col gap-[6px]">
-            <Link href="/products" onClick={onNavigate} className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#ccc] opacity-90 transition-opacity hover:opacity-100`}>
-              GPX10PRO
-            </Link>
-            <Link href="/products" onClick={onNavigate} className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#ccc] opacity-90 transition-opacity hover:opacity-100`}>
-              GPX64
-            </Link>
-          </div>
-        </div>
-
-        {/* Column 2 — System-on-Modules (flex-1) */}
-        <div className="flex min-w-px flex-1 flex-col gap-[12px]">
-          <div className="flex shrink-0 items-center gap-[6px]">
-            <span className="relative size-[24px] shrink-0 overflow-clip">
-              <Image src="/navbar/dropdown-icon-som.svg" alt="" fill className="object-contain" aria-hidden />
-            </span>
-            <span className={`${interRegular.className} whitespace-nowrap text-[16px] leading-[24px] font-normal text-[#f0f0f0]`}>
-              System-on-Modules
-            </span>
-          </div>
-          <p className={`${interRegular.className} w-full text-[12px] leading-[18px] font-normal text-[#ccc] opacity-90`}>
-            Drop-in reference modules for rapid product development
-          </p>
-          <DropdownCta href="/SOM" label="View all SOMs" onNavigate={onNavigate} />
-        </div>
-
-        {/* Column 3 — Development Kits (flex-1) */}
-        <div className="flex min-w-px flex-1 flex-col gap-[12px]">
-          <div className="flex shrink-0 items-center gap-[6px]">
-            <span className="relative size-[24px] shrink-0 overflow-clip">
-              <Image src="/navbar/dropdown-icon-devkit.svg" alt="" fill className="object-contain" aria-hidden />
-            </span>
-            <span className={`${interRegular.className} whitespace-nowrap text-[16px] leading-[24px] font-normal text-[#f0f0f0]`}>
-              Development Kits
-            </span>
-          </div>
-          <p className={`${interRegular.className} w-full text-[12px] leading-[18px] font-normal text-[#ccc] opacity-90`}>
-            Plug-and-play boards to test your models quickly
-          </p>
-          <DropdownCta href="/dvk" label="View all Dev Kits" onNavigate={onNavigate} />
-        </div>
+        ))}
       </div>
     </div>
   );
@@ -276,7 +315,7 @@ function NavItem({ item }: { item: any }) {
           }`}
         >
           {isProducts ? (
-            <ProductsMegaMenu onNavigate={() => setIsOpen(false)} />
+            <ProductsMegaMenu columns={item.megaColumns} onNavigate={() => setIsOpen(false)} />
           ) : (
             <NavIconDropdown
               item={item}
