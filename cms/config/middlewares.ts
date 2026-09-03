@@ -1,3 +1,12 @@
+// Media is stored in Azure Blob Storage (strapi-provider-upload-azure-sp) and
+// served from AZURE_ASSETS_PUBLIC_URL with absolute URLs. The admin panel
+// browser blocks those images unless the origin is allowed in the CSP.
+const AZURE_ASSETS_PUBLIC_URL =
+  process.env.AZURE_ASSETS_PUBLIC_URL ||
+  'https://ambientwebasset.blob.core.windows.net/website-assets';
+
+const azureAssetsOrigin = new URL(AZURE_ASSETS_PUBLIC_URL).origin;
+
 export default [
   'strapi::logger',
   'strapi::errors',
@@ -9,8 +18,8 @@ export default [
         directives: {
           'connect-src': ["'self'", 'https:', 'https://proxy-event.ckeditor.com'],
           'script-src': ["'self'", "'unsafe-inline'", "'unsafe-eval'", 'https://cdn.ckeditor.com'],
-          'img-src': ["'self'", 'data:', 'blob:', 'market-assets.strapi.io'],
-          'media-src': ["'self'", 'data:', 'blob:'],
+          'img-src': ["'self'", 'data:', 'blob:', 'market-assets.strapi.io', azureAssetsOrigin],
+          'media-src': ["'self'", 'data:', 'blob:', azureAssetsOrigin],
           upgradeInsecureRequests: null,
         },
       },
