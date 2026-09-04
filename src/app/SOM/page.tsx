@@ -36,11 +36,9 @@ export default async function SomPage() {
     data = await getSingleType<any>("som-page", [
       { section: "hero", fields: ["image"], nested: ["primary_button", "secondary_button"] },
       { section: "features", nested: ["cards"] },
-      { section: "ecosystem", nested: ["cards"] },
-      { section: "inside_module", fields: ["image"], nested: ["specs"] },
       { section: "prototype", nested: ["cards"] },
       { section: "intelligence", nested: ["cards"] },
-      { section: "deploy_path", nested: ["cards", "primary_button", "cards.image"] },
+      { section: "deploy_path", nested: ["cards", "primary_button"] },
       "ready_to_deploy",
       "footer_merge",
       "seo",

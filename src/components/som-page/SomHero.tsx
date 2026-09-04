@@ -85,7 +85,7 @@ export function SomHero({ data }: { data?: any }) {
             <img
               src={backgroundImage}
               alt=""
-              className="absolute inset-0 size-full max-w-none object-cover"
+              className="absolute inset-y-0 right-0 w-[80%] max-w-none object-contain object-right pr-[5%] py-[2%]"
             />
           )}
           <div
