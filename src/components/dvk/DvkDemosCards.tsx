@@ -64,7 +64,7 @@ export const DEMO_CARDS: DemoCard[] = [
         aria-hidden
         className="pointer-events-none absolute block size-full max-w-none"
         style={{
-          left: 331.1142578125,
+          right: 47.11,
           top: 54,
           width: 21.771484375,
           height: 22.4573974609375,
@@ -92,7 +92,7 @@ export const DEMO_CARDS: DemoCard[] = [
         aria-hidden
         className="pointer-events-none absolute block size-full max-w-none"
         style={{
-          left: 357.1171875,
+          right: 29.11,
           top: 97.00120544433594,
           width: 13.765396118164062,
           height: 13.765396118164062,
@@ -100,6 +100,18 @@ export const DEMO_CARDS: DemoCard[] = [
         data-node-id="3211:2760"
       />
     ),
+  },
+  {
+    nodeId: "new-card-1234",
+    name: "Gesture Recognition",
+    img: "/dvk/demo-voice.png",
+    imgRight: -48.04,
+    imgTop: -39.38,
+    titleLine1: "Gesture",
+    titleLine2: "Recognition",
+    desc: "Real-time motion gestures — the same tech behind the ApplicationForge gesture game.",
+    descWidth: 324,
+    decor: null,
   },
 ];
 
@@ -124,7 +136,7 @@ export function DvkDemosCards({ data }: { data?: any }) {
         })
       : DEMO_CARDS;
   return (
-    <div className="flex items-stretch gap-[28px]">
+    <div className="flex w-full items-stretch gap-[16px] xl:gap-[28px]">
       {cards.map((card: DemoCard) => (
         <DemoCardItem key={card.nodeId} card={card} />
       ))}
@@ -135,7 +147,7 @@ export function DvkDemosCards({ data }: { data?: any }) {
 function DemoCardItem({ card }: { card: DemoCard }) {
   return (
     <div
-      className="relative flex w-[400px] flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black px-[32px] pt-[16px] pb-[24px]"
+      className="relative flex w-full max-w-[400px] flex-1 flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black px-[24px] xl:px-[32px] pt-[16px] pb-[24px]"
       data-node-id={card.nodeId}
       data-name={card.name}
     >
@@ -171,14 +183,13 @@ function DemoCardItem({ card }: { card: DemoCard }) {
       <div className="relative flex h-[367px] w-full flex-col items-start justify-end">
         <div className="flex flex-col gap-[12px]">
           <div
-            className={`${gilroyMedium.className} w-[333.991px] shrink-0 text-[32px] leading-[0] text-white not-italic whitespace-pre-wrap`}
+            className={`${gilroyMedium.className} w-full shrink-0 text-[24px] xl:text-[32px] leading-[1.2] text-white not-italic whitespace-pre-wrap`}
           >
             <p className="mb-0 leading-[38px]">{`${card.titleLine1} `}</p>
             <p className="leading-[38px]">{card.titleLine2}</p>
           </div>
           <p
-            className={`${interRegular.className} shrink-0 text-[16px] leading-[24px] font-normal text-[#99a1af] not-italic [word-break:break-word]`}
-            style={{ width: card.descWidth }}
+            className={`${interRegular.className} w-full max-w-[334px] shrink-0 text-[14px] xl:text-[16px] leading-[24px] font-normal text-[#99a1af] not-italic [word-break:break-word]`}
           >
             {card.desc}
           </p>

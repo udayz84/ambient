@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { WearablesHero } from "@/components/wearables/WearablesHero";
+import { WearablesCarousel } from "@/components/wearables/WearablesCarousel";
 import { WearablesParadigm } from "@/components/wearables/WearablesParadigm";
 import { WearablesEmpiricalProof } from "@/components/wearables/WearablesEmpiricalProof";
 import { WearablesLabToProduct } from "@/components/wearables/WearablesLabToProduct";
@@ -34,6 +35,7 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
   try {
     const query = `filters[slug][$eq]=${resolvedParams.slug}&${buildPopulate([
       "hero",
+      "carousel",
       "paradigm",
       "subconscious",
       { section: "empirical_proof", nested: ["ecg_cards"] },
@@ -57,6 +59,9 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       {data?.hero && (
         <WearablesHero data={data.hero} />
+      )}
+      {data?.carousel && (
+        <WearablesCarousel data={data.carousel} />
       )}
       {data?.paradigm && <WearablesParadigm data={data.paradigm} />}
       {data?.empirical_proof && (

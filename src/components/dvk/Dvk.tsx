@@ -2,7 +2,7 @@ import { gilroyMedium, interRegular, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { DvkHero } from "./DvkHero";
 import { DvkScrollIndicator } from "./DvkScrollIndicator";
-import { DvkHardwareStack } from "./DvkHardwareStack";
+import { SomInsideModule } from "@/components/som-page/SomInsideModule";
 import { SPEC_CARDS } from "./dvk-data";
 import { DvkDemos } from "./DvkDemos";
 import { DEMO_CARDS } from "./DvkDemosCards";
@@ -51,16 +51,14 @@ export function Dvk({ data }: { data?: any }) {
 
       {/* DESKTOP (>=1024px) — hardware stack section (2761:2905) */}
       <div id="dvk-content" className="relative mx-auto hidden w-full bg-black min-[1024px]:block">
-        <div className="mx-auto w-[1232px] pb-[60px]">
-          {data?.hardware_stack ? (
-            <DvkHardwareStack data={data.hardware_stack} />
-          ) : null}
-        </div>
+        {data?.inside_module ? (
+          <SomInsideModule data={data.inside_module} />
+        ) : null}
       </div>
 
       {/* DESKTOP (>=1024px) — demos section (2761:2791 + cards row) */}
       <div className="relative mx-auto hidden w-full bg-black min-[1024px]:block">
-        <div className="mx-auto w-[1256px] pb-[64px]">
+        <div className="mx-auto w-full max-w-[1684px] px-[32px] xl:px-[64px] pb-[64px]">
           {data?.demos ? <DvkDemos data={data.demos} /> : null}
         </div>
       </div>
@@ -77,7 +75,9 @@ export function Dvk({ data }: { data?: any }) {
 
       {/* MOBILE (<1024px) — stacked layout */}
       <DvkHeroMobile data={data?.hero} />
-      <DvkHardwareStackMobile data={data?.hardware_stack} />
+      <div className="min-[1024px]:hidden">
+        {data?.inside_module ? <SomInsideModule data={data.inside_module} /> : null}
+      </div>
       <DvkDemosMobile data={data?.demos} />
       <DvkModelForgeMobile data={data?.modelforge} />
 

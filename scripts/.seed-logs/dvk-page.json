@@ -3,40 +3,29 @@
     "title": "The physical launchpad for microwatt Edge AI.",
     "subtitle": "Validate real-time AI at microwatt power levels out of the box. The Cranium Development Kit comes fully loaded with onboard sensors, rich I/O, and pre-integrated drivers so you can stop breadboarding and start testing inferences in minutes.",
     "cta_label": "Request Evaluation Kit",
-    "background_image_1": 131,
-    "background_image_2": 132
+    "background_image": 132
   },
-  "hardware_stack": {
-    "heading": "The complete Edge AI hardware stack in a single footprint",
-    "subtitle": "An exhaustive suite of sensors, interfaces, and debug tools pre-integrated with the GPX-10 Pro AI Processor.",
+  "inside_module": {
+    "heading": "Inside the Sparsh AI Module",
+    "subtitle": "Bridge the lab and real world. The Sparsh module offers continuous, microwatt intelligence in a 21×21mm size, with a breakout board that snaps off for production.",
     "label": "The Hardware Blueprint",
-    "board_image": 133,
-    "chip_image": 134,
-    "spec_cards": [
+    "image": 158,
+    "specs": [
       {
-        "title": "Memory",
-        "items": "512KB SRAM\n8MB Flash\nExternal SPI Support",
-        "is_accent": false
+        "label": "Footprint",
+        "value": "21×21mm (Core) | 42×21mm (With Breakout)"
       },
       {
-        "title": "Wireless",
-        "items": "Bluetooth 5.0 LE\n802.15.4 Ready\nOnboard Antenna",
-        "is_accent": false
+        "label": "Power",
+        "value": "Optimized for months of inference on a CR2032 coin-cell."
       },
       {
-        "title": "Sensors",
-        "items": "I2S Digital Mic\nAnalog Mic\n3-Axis Accelerometer\nAmbient Light Sensor",
-        "is_accent": true
+        "label": "Sensors",
+        "value": "Integrated 6-axis IMU & Digital Mic"
       },
       {
-        "title": "Debug Ports",
-        "items": "USB-C Programming\n10-Pin JTAG\nUART Console\nGPIO Breakout",
-        "is_accent": false
-      },
-      {
-        "title": "Interfaces",
-        "items": "SPI, I2C, UART\nCamera Connector\nProgrammable LEDs\nButton Inputs",
-        "is_accent": false
+        "label": "Comms & I/O",
+        "value": "Onboard BLE, SPI, I2C, and UART interfaces"
       }
     ]
   },
@@ -60,17 +49,19 @@
         "title_line_1": "Vision-Based",
         "title_line_2": "Gesture Recognition",
         "description": "Route a camera feed through the dedicated connector to validate real-time spatial awareness and gesture recognition without relying on a cloud round-trip.",
-        "image": 135,
-        "image_overlay": 136
+        "image": 135
+      },
+      {
+        "title_line_1": "Gesture",
+        "title_line_2": "Recognition",
+        "description": "Real-time motion gestures — the same tech behind the ApplicationForge gesture game.",
+        "image": 65
       }
     ]
   },
   "modelforge": {
     "heading": "Powered by ModelForge.",
-    "subtitle": "Don't let software be the bottleneck. The Cranium DVK is fully supported by our unified software toolchain, designed to take you from a standard TensorFlow model to on-silicon inference in under 15 minutes.",
-    "card_glow_image": null,
-    "toolchain_labels": "RTOS\nDRIVERS\nCOMPILER",
-    "descriptions": "Your Model\nAutomated TFLite conversion &\nquantization\n\nModelForge SDK\nPre-integrated RTOS & Eclipse-based Unified Build\n\nCranium DVK\n15 minutes to on-silicon execution"
+    "subtitle": "Don't let software be the bottleneck. The Cranium DVK is fully supported by our unified software toolchain, designed to take you from a standard TensorFlow model to on-silicon inference in under 15 minutes."
   },
   "integrated_modules": {
     "heading": "From Cranium to Integrated Modules.",

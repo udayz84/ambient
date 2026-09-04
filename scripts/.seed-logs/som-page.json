@@ -11,14 +11,11 @@
       "label": "Talk to the Sales Team",
       "href": "/contact",
       "variant": "secondary"
-    },
-    "background_image": 149,
-    "title_frame": null
+    }
   },
   "features": {
     "heading": "Stop Routing. Start Shipping.",
     "subtitle": "Spinning a custom PCB with extreme space and power constraints takes months of trial and error. We solved the hardware physics so you can focus entirely on your application logic.",
-    "icon_background": null,
     "cards": [
       {
         "icon": 152,
@@ -37,70 +34,6 @@
         "tag": "Ecosystem Portability",
         "title": "1:1 Code Portability",
         "description": "The exact C-code, AI object files, and unified Eclipse build you validated on the Cranium Evaluation Kit ports directly to any of our production SOMs with zero rewrites."
-      }
-    ]
-  },
-  "ecosystem": {
-    "heading": "The Ambient SOM Ecosystem",
-    "subtitle": "Purpose-built edge modules. Validate your software on our evaluation kits today, and drop our SOMs directly into your final product tomorrow.",
-    "background_image": null,
-    "chip_image": 155,
-    "cards": [
-      {
-        "title": "Motion SOM",
-        "subtitle": "Motion & Audio",
-        "status": "Available",
-        "icon": 156,
-        "cta_label": "VIEW MORE"
-      },
-      {
-        "title": "Vision SOM",
-        "subtitle": "Motion & Audio",
-        "status": "Under-development",
-        "icon": 157,
-        "cta_label": "Coming soon"
-      },
-      {
-        "title": "Sound SOM",
-        "subtitle": "Motion & Audio",
-        "status": "Under-development",
-        "cta_label": "Coming soon"
-      },
-      {
-        "title": "Predictive & Maintenance SOM",
-        "subtitle": "Motion & Audio",
-        "status": "Under-development",
-        "cta_label": "Coming soon"
-      },
-      {
-        "title": "Pet & Livestock SOM",
-        "subtitle": "Motion & Audio",
-        "status": "Under-development",
-        "cta_label": "Coming soon"
-      }
-    ]
-  },
-  "inside_module": {
-    "heading": "Inside the Sparsh AI Module",
-    "subtitle": "Bridge the lab and real world. The Sparsh module offers continuous, microwatt intelligence in a 21×21mm size, with a breakout board that snaps off for production.",
-    "label": "The Hardware Blueprint",
-    "image": 158,
-    "specs": [
-      {
-        "label": "Footprint",
-        "value": "21×21mm (Core) | 42×21mm (With Breakout)"
-      },
-      {
-        "label": "Power",
-        "value": "Optimized for months of inference on a CR2032 coin-cell."
-      },
-      {
-        "label": "Sensors",
-        "value": "Integrated 6-axis IMU & Digital Mic"
-      },
-      {
-        "label": "Comms & I/O",
-        "value": "Onboard BLE, SPI, I2C, and UART interfaces"
       }
     ]
   },
@@ -143,16 +76,15 @@
   "ready_to_deploy": {
     "heading": "Ready to deploy?",
     "subtitle": "Start building with the Sparsh module today, or secure your place in line for our upcoming vertical-specific SOMs.",
-    "primary_title": "Get the Sparsh AI Module",
+    "primary_title": "Get the Sparsh\nAI Module",
     "primary_cta_label": "Request Sparsh Module",
     "secondary_text": "Start testing motion and audio models on the metal immediately.",
-    "image": 159
+    "image": 423
   },
   "footer_merge": {
     "heading": "Join the SOM Waitlist",
     "subtitle": "Be the first to access our upcoming Vision, Sound, and Industrial modules.",
-    "cta_label": "Join the Waitlist",
-    "image": 160
+    "cta_label": "Join the Waitlist"
   },
   "seo": {
     "meta_title": "System-on-Modules (SOM) | Ambient Scientific",

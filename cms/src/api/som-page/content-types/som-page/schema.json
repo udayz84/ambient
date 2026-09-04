@@ -22,16 +22,7 @@
       "component": "som.features",
       "repeatable": false
     },
-    "ecosystem": {
-      "type": "component",
-      "component": "som.ecosystem",
-      "repeatable": false
-    },
-    "inside_module": {
-      "type": "component",
-      "component": "som.inside-module",
-      "repeatable": false
-    },
+
     "prototype": {
       "type": "component",
       "component": "som.prototypes",
@@ -40,6 +31,11 @@
     "intelligence": {
       "type": "component",
       "component": "som.intelligence",
+      "repeatable": false
+    },
+    "deploy_path": {
+      "type": "component",
+      "component": "som.deploy-path",
       "repeatable": false
     },
     "ready_to_deploy": {

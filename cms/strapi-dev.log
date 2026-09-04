@@ -1,31 +1,336 @@
-
-> ambient-cms@0.1.0 develop
-> node scripts/develop.js
-
-- Cleaning dist dir C:/Users/Admin/Documents/scraft/ambient/cms/dist
-✔ Cleaning dist dir (102ms)
+- Cleaning dist dir /Users/udayznanam/Documents/ambient/cms/dist
+✔ Cleaning dist dir (42ms)
 - Loading Strapi
-Config file not loaded, extension must be one of .js,.json): admin.js.map
-Config file not loaded, extension must be one of .js,.json): cron.js.map
-Config file not loaded, extension must be one of .js,.json): database.js.map
-Config file not loaded, extension must be one of .js,.json): middlewares.js.map
-Config file not loaded, extension must be one of .js,.json): plugins.js.map
-Config file not loaded, extension must be one of .js,.json): server.js.map
 Auto-copying schemas to dist/ during register...
-[2026-08-17 15:08:38.257] [33mwarn[39m: The strapi::cors middleware no longer supports the `enabled` option. Using it to conditionally enable CORS might cause an insecure default. To disable strapi::cors, remove it from the exported array in config/middleware.js
-[2026-08-17 15:08:40.778] [33mwarn[39m: [email]: The "sendmail" email provider is still supported, but for most production setups that use a dedicated SMTP relay, consider switching to @strapi/provider-email-nodemailer (set `provider` to `"nodemailer"` in your email plugin config). This message is only shown in non-production environments.
+[2026-09-03 11:58:31.276] [33mwarn[39m: The strapi::cors middleware no longer supports the `enabled` option. Using it to conditionally enable CORS might cause an insecure default. To disable strapi::cors, remove it from the exported array in config/middleware.js
+[2026-09-03 11:58:33.979] [33mwarn[39m: [email]: The "sendmail" email provider is still supported, but for most production setups that use a dedicated SMTP relay, consider switching to @strapi/provider-email-nodemailer (set `provider` to `"nodemailer"` in your email plugin config). This message is only shown in non-production environments.
+(node:7447) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
 [webhook] NEXT_SITE_URL or REVALIDATE_SECRET not set in cms/.env — skipping auto-registration.
 - Building build context
-✔ Building build context (118ms)
+✔ Building build context (49ms)
 - Creating admin
 [33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
-✔ Creating admin (623ms)
-✔ Loading Strapi (9295ms)
+✔ Creating admin (260ms)
+✔ Loading Strapi (14008ms)
 - Generating types
-✔ Generating types (2397ms)
+✔ Generating types (415ms)
 - Compiling TS
-- Cleaning dist dir C:/Users/Admin/Documents/scraft/ambient/cms/dist
-✔ Cleaning dist dir (442ms)
-✔ Compiling TS (4307ms)
-[2026-08-17 15:08:50.957] [31merror[39m: The port 1338 is already used by another application.
-[2026-08-17 15:08:50.958] [32minfo[39m: Shutting down Strapi
+- Cleaning dist dir /Users/udayznanam/Documents/ambient/cms/dist
+✔ Cleaning dist dir (46ms)
+✔ Compiling TS (1559ms)
+
+ Project information
+
+[90m╭────────────────────[39m[90m┬──────────────────────────────────────────────────╮[39m
+[90m│[39m Time               [90m│[39m Thu Sep 03 2026 11:58:44 GMT+0530 (India Standa… [90m│[39m
+[90m│[39m Launched in        [90m│[39m 16219 ms                                         [90m│[39m
+[90m│[39m Environment        [90m│[39m development                                      [90m│[39m
+[90m│[39m Process PID        [90m│[39m 7447                                             [90m│[39m
+[90m│[39m Version            [90m│[39m 5.50.0 (node v24.13.0)                           [90m│[39m
+[90m│[39m Edition            [90m│[39m Community                                        [90m│[39m
+[90m│[39m Database           [90m│[39m postgres                                         [90m│[39m
+[90m│[39m Database name      [90m│[39m postgres                                         [90m│[39m
+[90m╰────────────────────[39m[90m┴──────────────────────────────────────────────────╯[39m
+
+ Actions available
+
+Welcome back!
+To access the server ⚡️, go to:
+http://localhost:1338
+
+[2026-09-03 11:58:44.764] [32minfo[39m: Strapi started successfully
+[2026-09-03 11:58:59.452] [32mhttp[39m: GET /admin/init (93 ms) 200
+[2026-09-03 11:58:59.825] [32mhttp[39m: GET /api/navbar?populate[header][populate][nav_items][populate][mega_columns][populate][links][populate]=* (360 ms) 200
+[2026-09-03 11:59:06.230] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2F&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2F&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1788416945931 (296 ms) 200
+[2026-09-03 11:59:06.632] [32mhttp[39m: GET /api/home-page?populate[seo][populate]=* (371 ms) 200
+[2026-09-03 11:59:06.862] [32mhttp[39m: GET /api/navbar?populate[brand][populate]=*&populate[header][populate][cta_dot_icon]=true&populate[header][populate][nav_items][populate][children][populate]=*&populate[header][populate][nav_items][populate][mega_columns][populate][links][populate]=* (615 ms) 200
+[2026-09-03 11:59:07.067] [32mhttp[39m: GET /api/footer?populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[footer][populate][nav_sections][populate][links][populate]=*&populate[footer][populate][legal_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (809 ms) 200
+[2026-09-03 11:59:08.217] [32mhttp[39m: GET /api/home-page?populate[hero][populate]=*&populate[measured_proof][populate][tag][populate]=*&populate[measured_proof][populate][stat_cards][populate]=*&populate[measured_proof][populate][ctas][populate]=*&populate[technology][populate][tag][populate]=*&populate[technology][populate][features][populate]=*&populate[technology][populate][image][populate]=*&populate[platform_scale][populate][products][populate]=*&populate[platform_scale][populate][cta][populate]=*&populate[applications][populate][tabs][populate]=*&populate[applications][populate][cta][populate]=*&populate[developer_platform][populate][cards][populate]=*&populate[ecosystem][populate][silicon_partners][populate]=*&populate[ecosystem][populate][development_partners][populate]=*&populate[ecosystem][populate][cta][populate]=*&populate[latest_news][populate][cards][populate]=*&populate[seo][populate]=* (1957 ms) 200
+[2026-09-03 11:59:08.483] [32mhttp[39m: GET /api/articles?filters[show_on_homepage][$eq]=true&sort[0]=display_order:asc&sort[1]=date:desc&populate[0]=featured_image&pagination[pageSize]=10 (259 ms) 200
+[2026-09-03 12:01:00.365] [32mhttp[39m: GET /admin/init (123 ms) 200
+[2026-09-03 12:01:00.680] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2F&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2F&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1788417060380 (298 ms) 200
+[2026-09-03 12:01:01.231] [32mhttp[39m: GET /api/home-page?populate[seo][populate]=* (518 ms) 200
+[2026-09-03 12:01:01.575] [32mhttp[39m: GET /api/navbar?populate[brand][populate]=*&populate[header][populate][cta_dot_icon]=true&populate[header][populate][nav_items][populate][children][populate]=*&populate[header][populate][nav_items][populate][mega_columns][populate][links][populate]=* (875 ms) 200
+[2026-09-03 12:01:01.716] [32mhttp[39m: GET /api/footer?populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[footer][populate][nav_sections][populate][links][populate]=*&populate[footer][populate][legal_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (1005 ms) 200
+[2026-09-03 12:01:03.839] [32mhttp[39m: GET /api/home-page?populate[hero][populate]=*&populate[measured_proof][populate][tag][populate]=*&populate[measured_proof][populate][stat_cards][populate]=*&populate[measured_proof][populate][ctas][populate]=*&populate[technology][populate][tag][populate]=*&populate[technology][populate][features][populate]=*&populate[technology][populate][image][populate]=*&populate[platform_scale][populate][products][populate]=*&populate[platform_scale][populate][cta][populate]=*&populate[applications][populate][tabs][populate]=*&populate[applications][populate][cta][populate]=*&populate[developer_platform][populate][cards][populate]=*&populate[ecosystem][populate][silicon_partners][populate]=*&populate[ecosystem][populate][development_partners][populate]=*&populate[ecosystem][populate][cta][populate]=*&populate[latest_news][populate][cards][populate]=*&populate[seo][populate]=* (3127 ms) 200
+[2026-09-03 12:01:04.214] [32mhttp[39m: GET /api/articles?filters[show_on_homepage][$eq]=true&sort[0]=display_order:asc&sort[1]=date:desc&populate[0]=featured_image&pagination[pageSize]=10 (369 ms) 200
+[2026-09-03 12:01:12.567] [32mhttp[39m: GET /api/navbar?populate[brand][populate]=*&populate[header][populate][cta_dot_icon]=true&populate[header][populate][nav_items][populate][children][populate]=*&populate[header][populate][nav_items][populate][mega_columns][populate][links][populate]=* (970 ms) 200
+[2026-09-03 12:01:20.557] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2F&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2F&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1788417080236 (319 ms) 200
+[2026-09-03 12:01:20.873] [32mhttp[39m: GET /api/home-page?populate[seo][populate]=* (290 ms) 200
+[2026-09-03 12:01:21.811] [32mhttp[39m: GET /api/navbar?populate[brand][populate]=*&populate[header][populate][cta_dot_icon]=true&populate[header][populate][nav_items][populate][children][populate]=*&populate[header][populate][nav_items][populate][mega_columns][populate][links][populate]=* (1240 ms) 200
+[2026-09-03 12:01:22.104] [32mhttp[39m: GET /api/footer?populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[footer][populate][nav_sections][populate][links][populate]=*&populate[footer][populate][legal_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (1524 ms) 200
+[2026-09-03 12:01:23.087] [32mhttp[39m: GET /api/home-page?populate[hero][populate]=*&populate[measured_proof][populate][tag][populate]=*&populate[measured_proof][populate][stat_cards][populate]=*&populate[measured_proof][populate][ctas][populate]=*&populate[technology][populate][tag][populate]=*&populate[technology][populate][features][populate]=*&populate[technology][populate][image][populate]=*&populate[platform_scale][populate][products][populate]=*&populate[platform_scale][populate][cta][populate]=*&populate[applications][populate][tabs][populate]=*&populate[applications][populate][cta][populate]=*&populate[developer_platform][populate][cards][populate]=*&populate[ecosystem][populate][silicon_partners][populate]=*&populate[ecosystem][populate][development_partners][populate]=*&populate[ecosystem][populate][cta][populate]=*&populate[latest_news][populate][cards][populate]=*&populate[seo][populate]=* (2506 ms) 200
+[2026-09-03 12:01:23.517] [32mhttp[39m: GET /api/articles?filters[show_on_homepage][$eq]=true&sort[0]=display_order:asc&sort[1]=date:desc&populate[0]=featured_image&pagination[pageSize]=10 (425 ms) 200
+[2026-09-03 12:01:24.015] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fproducts&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fproducts&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1788417083739 (275 ms) 200
+[2026-09-03 12:01:24.332] [32mhttp[39m: GET /api/products-page?populate[seo][populate]=* (235 ms) 200
+[2026-09-03 12:01:24.872] [32mhttp[39m: GET /api/navbar?populate[brand][populate]=*&populate[header][populate][cta_dot_icon]=true&populate[header][populate][nav_items][populate][children][populate]=*&populate[header][populate][nav_items][populate][mega_columns][populate][links][populate]=* (790 ms) 200
+[2026-09-03 12:01:25.026] [32mhttp[39m: GET /api/footer?populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[footer][populate][nav_sections][populate][links][populate]=*&populate[footer][populate][legal_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (943 ms) 200
+[2026-09-03 12:01:26.163] [32mhttp[39m: GET /api/products-page?populate[hero][populate][chipset_image]=true&populate[hero][populate][chipset_image_mobile]=true&populate[hero][populate][tags][populate]=*&populate[features][populate][feature_cards][populate]=*&populate[always_on][populate][stats][populate]=*&populate[use_cases][populate][tabs][populate]=*&populate[measured][populate][tag]=true&populate[measured][populate][primary_button]=true&populate[measured][populate][secondary_button]=true&populate[measured][populate][cards][populate]=*&populate[architecture][populate][image]=true&populate[architecture][populate][stats][populate]=*&populate[modelforge][populate][steps][populate]=*&populate[modelforge][populate][subfeatures][populate]=*&populate[bench_to_volume][populate]=*&populate[full_picture][populate][callouts][populate]=*&populate[start_building][populate]=*&populate[sticky_nav][populate]=*&populate[seo][populate]=* (2079 ms) 200
+[2026-09-03 12:01:27.461] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2FSOM&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2FSOM&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1788417087113 (347 ms) 200
+[2026-09-03 12:01:27.581] [32mhttp[39m: GET /api/som-page?populate[hero][populate][image]=true&populate[hero][populate][primary_button][populate]=*&populate[hero][populate][secondary_button][populate]=*&populate[features][populate][cards][populate]=*&populate[ecosystem][populate][cards][populate]=*&populate[inside_module][populate][image]=true&populate[inside_module][populate][specs][populate]=*&populate[prototype][populate][cards][populate]=*&populate[intelligence][populate][cards][populate]=*&populate[ready_to_deploy][populate]=*&populate[footer_merge][populate]=*&populate[seo][populate]=* (98 ms) 400
+[2026-09-03 12:01:27.801] [32mhttp[39m: GET /api/som-page?populate[seo][populate]=* (310 ms) 200
+[2026-09-03 12:01:28.659] [32mhttp[39m: GET /api/navbar?populate[brand][populate]=*&populate[header][populate][cta_dot_icon]=true&populate[header][populate][nav_items][populate][children][populate]=*&populate[header][populate][nav_items][populate][mega_columns][populate][links][populate]=* (1178 ms) 200
+[2026-09-03 12:01:28.809] [32mhttp[39m: GET /api/footer?populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[footer][populate][nav_sections][populate][links][populate]=*&populate[footer][populate][legal_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (1326 ms) 200
+[2026-09-03 12:01:42.056] [32mhttp[39m: GET /api/navbar?populate[brand][populate]=*&populate[header][populate][cta_dot_icon]=true&populate[header][populate][nav_items][populate][children][populate]=*&populate[header][populate][nav_items][populate][mega_columns][populate][links][populate]=* (1578 ms) 200
+[2026-09-03 12:02:04.036] [32mhttp[39m: PUT /api/navbar (21970 ms) 200
+[2026-09-03 12:02:25.154] [32mhttp[39m: PUT /api/navbar?status=published (21114 ms) 200
+[2026-09-03 12:02:25.914] [32mhttp[39m: GET /api/navbar?populate[header][populate][nav_items][populate][mega_columns][populate][links][populate]=* (743 ms) 200
+[2026-09-03 12:02:53.338] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2FSOM&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2FSOM&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1788417172944 (390 ms) 200
+[2026-09-03 12:02:53.425] [32mhttp[39m: GET /api/som-page?populate[hero][populate][image]=true&populate[hero][populate][primary_button][populate]=*&populate[hero][populate][secondary_button][populate]=*&populate[features][populate][cards][populate]=*&populate[ecosystem][populate][cards][populate]=*&populate[inside_module][populate][image]=true&populate[inside_module][populate][specs][populate]=*&populate[prototype][populate][cards][populate]=*&populate[intelligence][populate][cards][populate]=*&populate[ready_to_deploy][populate]=*&populate[footer_merge][populate]=*&populate[seo][populate]=* (52 ms) 400
+[2026-09-03 12:02:53.635] [32mhttp[39m: GET /api/som-page?populate[seo][populate]=* (261 ms) 200
+[2026-09-03 12:02:54.392] [32mhttp[39m: GET /api/footer?populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[footer][populate][nav_sections][populate][links][populate]=*&populate[footer][populate][legal_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (1020 ms) 200
+[2026-09-03 12:02:54.459] [32mhttp[39m: GET /api/navbar?populate[brand][populate]=*&populate[header][populate][cta_dot_icon]=true&populate[header][populate][nav_items][populate][children][populate]=*&populate[header][populate][nav_items][populate][mega_columns][populate][links][populate]=* (1101 ms) 200
+[2026-09-03 12:04:30.570] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2FSOM&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2FSOM&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1788417270016 (551 ms) 200
+[2026-09-03 12:04:30.689] [32mhttp[39m: GET /api/som-page?populate[hero][populate][image]=true&populate[hero][populate][primary_button][populate]=*&populate[hero][populate][secondary_button][populate]=*&populate[features][populate][cards][populate]=*&populate[ecosystem][populate][cards][populate]=*&populate[inside_module][populate][image]=true&populate[inside_module][populate][specs][populate]=*&populate[prototype][populate][cards][populate]=*&populate[intelligence][populate][cards][populate]=*&populate[ready_to_deploy][populate]=*&populate[footer_merge][populate]=*&populate[seo][populate]=* (78 ms) 400
+[2026-09-03 12:04:30.924] [32mhttp[39m: GET /api/som-page?populate[seo][populate]=* (312 ms) 200
+[2026-09-03 12:04:31.335] [32mhttp[39m: GET /api/footer?populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[footer][populate][nav_sections][populate][links][populate]=*&populate[footer][populate][legal_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (725 ms) 200
+[2026-09-03 12:04:31.478] [32mhttp[39m: GET /api/navbar?populate[brand][populate]=*&populate[header][populate][cta_dot_icon]=true&populate[header][populate][nav_items][populate][children][populate]=*&populate[header][populate][nav_items][populate][mega_columns][populate][links][populate]=* (880 ms) 200
+[2026-09-03 12:14:49.874] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fdvk&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fdvk&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1788417859602 (30255 ms) 401
+Connection Error: Connection ended unexpectedly
+[2026-09-03 12:14:50.483] [32mhttp[39m: GET /api/dvk-page?populate[seo][populate]=* (526 ms) 200
+[2026-09-03 12:15:20.822] [32mhttp[39m: GET /api/dvk-page?populate[hero][populate]=*&populate[inside_module][populate][image]=true&populate[inside_module][populate][specs][populate]=*&populate[demos][populate][demo_cards][populate]=*&populate[modelforge][populate]=*&populate[integrated_modules][populate][cards][populate]=*&populate[seo][populate]=* (30875 ms) 401
+Connection Error: Connection ended unexpectedly
+[2026-09-03 12:17:32.154] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fdvk&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fdvk&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1788418051678 (472 ms) 200
+[2026-09-03 12:17:32.765] [32mhttp[39m: GET /api/dvk-page?populate[seo][populate]=* (571 ms) 200
+[2026-09-03 12:17:33.055] [31merror[39m: select distinct "t1"."order", "t0".*, "t1"."entity_id" as "__strapientity_id", "t0"."id" from "components_shared_mega_columns" as "t0" left join "components_shared_nav_items_cmps" as "t1" on "t0"."id" = "t1"."cmp_id" and "t1"."field" = $1 where ("t1"."entity_id" in ($2, $3, $4, $5, $6, $7, $8)) order by "t1"."order" asc - relation "components_shared_mega_columns" does not exist
+error: select distinct "t1"."order", "t0".*, "t1"."entity_id" as "__strapientity_id", "t0"."id" from "components_shared_mega_columns" as "t0" left join "components_shared_nav_items_cmps" as "t1" on "t0"."id" = "t1"."cmp_id" and "t1"."field" = $1 where ("t1"."entity_id" in ($2, $3, $4, $5, $6, $7, $8)) order by "t1"."order" asc - relation "components_shared_mega_columns" does not exist
+    at parseErrorMessage (/Users/udayznanam/Documents/ambient/cms/node_modules/pg-protocol/dist/parser.js:305:11)
+    at Parser.handlePacket (/Users/udayznanam/Documents/ambient/cms/node_modules/pg-protocol/dist/parser.js:143:27)
+    at Parser.parse (/Users/udayznanam/Documents/ambient/cms/node_modules/pg-protocol/dist/parser.js:37:38)
+    at Socket.<anonymous> (/Users/udayznanam/Documents/ambient/cms/node_modules/pg-protocol/dist/index.js:12:42)
+    at Socket.emit (node:events:508:28)
+    at Socket.emit (node:domain:489:12)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at Readable.push (node:internal/streams/readable:390:5)
+    at TCP.onStreamRead (node:internal/stream_base_commons:189:23)
+[2026-09-03 12:17:33.057] [32mhttp[39m: GET /api/navbar?populate[brand][populate]=*&populate[header][populate][cta_dot_icon]=true&populate[header][populate][nav_items][populate][children][populate]=*&populate[header][populate][nav_items][populate][mega_columns][populate][links][populate]=* (876 ms) 500
+[2026-09-03 12:17:33.366] [32mhttp[39m: GET /api/footer?populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[footer][populate][nav_sections][populate][links][populate]=*&populate[footer][populate][legal_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (1174 ms) 200
+[2026-09-03 12:17:33.648] [32mhttp[39m: GET /api/dvk-page?populate[hero][populate]=*&populate[inside_module][populate][image]=true&populate[inside_module][populate][specs][populate]=*&populate[demos][populate][demo_cards][populate]=*&populate[modelforge][populate]=*&populate[integrated_modules][populate][cards][populate]=*&populate[seo][populate]=* (1455 ms) 200
+[2026-09-03 15:32:28.515] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fdvk&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fdvk&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1788429707459 (41030 ms) 401
+Connection Error: Connection ended unexpectedly
+[2026-09-03 15:33:14.407] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fdvk&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fdvk&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1788429763697 (30708 ms) 401
+[2026-09-03 15:35:13.791] [32mhttp[39m: GET /admin/auth/login (79 ms) 200
+[2026-09-03 15:35:14.964] [32mhttp[39m: GET /admin/project-type (2 ms) 200
+[2026-09-03 15:35:14.992] [32mhttp[39m: GET /favicon.ico (1 ms) 200
+Connection Error: Connection ended unexpectedly
+[2026-09-03 15:35:15.459] [32mhttp[39m: GET /admin/init (392 ms) 200
+3:35:21 PM [vite] page reload .strapi/client/index.html
+3:35:21 PM [vite] page reload .strapi/client/app.js
+[2026-09-03 15:35:21.822] [32mhttp[39m: GET /admin/auth/login (5 ms) 200
+[2026-09-03 15:35:22.608] [32mhttp[39m: GET /admin/project-type (2 ms) 200
+[2026-09-03 15:35:22.815] [32mhttp[39m: GET /admin/init (64 ms) 200
+[2026-09-03 15:35:23.113] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2FSOM&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2FSOM&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1788429922871 (239 ms) 200
+[2026-09-03 15:35:23.180] [32mhttp[39m: GET /api/som-page?populate[hero][populate][image]=true&populate[hero][populate][primary_button][populate]=*&populate[hero][populate][secondary_button][populate]=*&populate[features][populate][cards][populate]=*&populate[ecosystem][populate][cards][populate]=*&populate[inside_module][populate][image]=true&populate[inside_module][populate][specs][populate]=*&populate[prototype][populate][cards][populate]=*&populate[intelligence][populate][cards][populate]=*&populate[ready_to_deploy][populate]=*&populate[footer_merge][populate]=*&populate[seo][populate]=* (37 ms) 400
+[2026-09-03 15:35:23.348] [32mhttp[39m: GET /api/som-page?populate[seo][populate]=* (196 ms) 200
+[2026-09-03 15:35:53.132] [32mhttp[39m: POST /admin/login (317 ms) 200
+[2026-09-03 15:35:54.335] [32mhttp[39m: DELETE /upload/files/446 (1194 ms) 200
+[2026-09-03 15:35:55.072] [32mhttp[39m: DELETE /upload/files/443 (734 ms) 200
+[2026-09-03 15:35:55.463] [32mhttp[39m: DELETE /admin/webhooks/1 (390 ms) 200
+[2026-09-03 15:35:55.800] [32mhttp[39m: DELETE /content-manager/collection-types/api::redirect.redirect/bb7u6h3yi2foinr5b7aa0awg (335 ms) 200
+[2026-09-03 15:36:18.629] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2FSOM&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2FSOM&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1788429978424 (195 ms) 200
+[2026-09-03 15:36:18.694] [32mhttp[39m: GET /api/som-page?populate[hero][populate][image]=true&populate[hero][populate][primary_button][populate]=*&populate[hero][populate][secondary_button][populate]=*&populate[features][populate][cards][populate]=*&populate[ecosystem][populate][cards][populate]=*&populate[inside_module][populate][image]=true&populate[inside_module][populate][specs][populate]=*&populate[prototype][populate][cards][populate]=*&populate[intelligence][populate][cards][populate]=*&populate[ready_to_deploy][populate]=*&populate[footer_merge][populate]=*&populate[seo][populate]=* (42 ms) 400
+[2026-09-03 15:37:04.007] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2FSOM&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2FSOM&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1788430023795 (204 ms) 200
+[2026-09-03 15:37:04.066] [32mhttp[39m: GET /api/som-page?populate[hero][populate][image]=true&populate[hero][populate][primary_button][populate]=*&populate[hero][populate][secondary_button][populate]=*&populate[features][populate][cards][populate]=*&populate[ecosystem][populate][cards][populate]=*&populate[inside_module][populate][image]=true&populate[inside_module][populate][specs][populate]=*&populate[prototype][populate][cards][populate]=*&populate[intelligence][populate][cards][populate]=*&populate[ready_to_deploy][populate]=*&populate[footer_merge][populate]=*&populate[seo][populate]=* (37 ms) 400
+[2026-09-03 15:39:37.042] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2FSOM&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2FSOM&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1788430176807 (229 ms) 200
+[2026-09-03 15:39:37.154] [32mhttp[39m: GET /api/som-page?populate[hero][populate][image]=true&populate[hero][populate][primary_button][populate]=*&populate[hero][populate][secondary_button][populate]=*&populate[features][populate][cards][populate]=*&populate[ecosystem][populate][cards][populate]=*&populate[inside_module][populate][image]=true&populate[inside_module][populate][specs][populate]=*&populate[prototype][populate][cards][populate]=*&populate[intelligence][populate][cards][populate]=*&populate[ready_to_deploy][populate]=*&populate[footer_merge][populate]=*&populate[seo][populate]=* (43 ms) 400
+[2026-09-03 15:39:37.386] [32mhttp[39m: GET /api/som-page?populate[seo][populate]=* (274 ms) 200
+[2026-09-03 15:39:37.640] [32mhttp[39m: GET /api/navbar?populate[brand][populate]=*&populate[header][populate][cta_dot_icon]=true&populate[header][populate][nav_items][populate][children][populate]=*&populate[header][populate][nav_items][populate][mega_columns][populate][links][populate]=* (551 ms) 200
+[2026-09-03 15:39:37.681] [32mhttp[39m: GET /api/footer?populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[footer][populate][nav_sections][populate][links][populate]=*&populate[footer][populate][legal_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (571 ms) 200
+[2026-09-03 15:39:48.300] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2FSOM&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2FSOM&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1788430188078 (219 ms) 200
+[2026-09-03 15:39:48.404] [32mhttp[39m: GET /api/som-page?populate[hero][populate][image]=true&populate[hero][populate][primary_button][populate]=*&populate[hero][populate][secondary_button][populate]=*&populate[features][populate][cards][populate]=*&populate[ecosystem][populate][cards][populate]=*&populate[inside_module][populate][image]=true&populate[inside_module][populate][specs][populate]=*&populate[prototype][populate][cards][populate]=*&populate[intelligence][populate][cards][populate]=*&populate[ready_to_deploy][populate]=*&populate[footer_merge][populate]=*&populate[seo][populate]=* (65 ms) 400
+[2026-09-03 15:39:48.560] [32mhttp[39m: GET /api/som-page?populate[seo][populate]=* (219 ms) 200
+[2026-09-03 15:39:48.766] [32mhttp[39m: GET /api/navbar?populate[brand][populate]=*&populate[header][populate][cta_dot_icon]=true&populate[header][populate][nav_items][populate][children][populate]=*&populate[header][populate][nav_items][populate][mega_columns][populate][links][populate]=* (438 ms) 200
+[2026-09-03 15:39:49.047] [32mhttp[39m: GET /api/footer?populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[footer][populate][nav_sections][populate][links][populate]=*&populate[footer][populate][legal_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (708 ms) 200
+[2026-09-03 15:41:13.103] [32mhttp[39m: HEAD /admin (9 ms) 200
+[2026-09-03 15:43:03.059] [32minfo[39m: File created: /Users/udayznanam/Documents/ambient/cms/src/components/som/deploy-path-card.json
+- Cleaning dist dir /Users/udayznanam/Documents/ambient/cms/dist
+✔ Cleaning dist dir (61ms)
+[2026-09-03 15:43:04.867] [32minfo[39m: Shutting down Strapi
+[2026-09-03 15:43:04.923] [32minfo[39m: Strapi has been shut down
+- Loading Strapi
+Auto-copying schemas to dist/ during register...
+[2026-09-03 15:43:18.383] [33mwarn[39m: The strapi::cors middleware no longer supports the `enabled` option. Using it to conditionally enable CORS might cause an insecure default. To disable strapi::cors, remove it from the exported array in config/middleware.js
+[2026-09-03 15:43:20.611] [33mwarn[39m: [email]: The "sendmail" email provider is still supported, but for most production setups that use a dedicated SMTP relay, consider switching to @strapi/provider-email-nodemailer (set `provider` to `"nodemailer"` in your email plugin config). This message is only shown in non-production environments.
+(node:19159) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[webhook] NEXT_SITE_URL or REVALIDATE_SECRET not set in cms/.env — skipping auto-registration.
+- Building build context
+✔ Building build context (98ms)
+- Creating admin
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+✔ Creating admin (366ms)
+✔ Loading Strapi (18354ms)
+- Generating types
+✔ Generating types (427ms)
+- Compiling TS
+- Cleaning dist dir /Users/udayznanam/Documents/ambient/cms/dist
+✔ Cleaning dist dir (46ms)
+✔ Compiling TS (1879ms)
+
+ Project information
+
+[90m╭────────────────────[39m[90m┬──────────────────────────────────────────────────╮[39m
+[90m│[39m Time               [90m│[39m Thu Sep 03 2026 15:43:27 GMT+0530 (India Standa… [90m│[39m
+[90m│[39m Launched in        [90m│[39m 20782 ms                                         [90m│[39m
+[90m│[39m Environment        [90m│[39m development                                      [90m│[39m
+[90m│[39m Process PID        [90m│[39m 19159                                            [90m│[39m
+[90m│[39m Version            [90m│[39m 5.50.0 (node v24.13.0)                           [90m│[39m
+[90m│[39m Edition            [90m│[39m Community                                        [90m│[39m
+[90m│[39m Database           [90m│[39m postgres                                         [90m│[39m
+[90m│[39m Database name      [90m│[39m postgres                                         [90m│[39m
+[90m╰────────────────────[39m[90m┴──────────────────────────────────────────────────╯[39m
+
+ Actions available
+
+Welcome back!
+To access the server ⚡️, go to:
+http://localhost:1338
+
+[2026-09-03 15:43:27.274] [32minfo[39m: Strapi started successfully
+[2026-09-03 15:43:31.248] [32minfo[39m: File changed: /Users/udayznanam/Documents/ambient/cms/src/api/som-page/content-types/som-page/schema.json
+- Cleaning dist dir /Users/udayznanam/Documents/ambient/cms/dist
+✔ Cleaning dist dir (61ms)
+[2026-09-03 15:43:32.931] [32minfo[39m: Shutting down Strapi
+[2026-09-03 15:43:33.016] [32minfo[39m: Strapi has been shut down
+- Loading Strapi
+Auto-copying schemas to dist/ during register...
+[2026-09-03 15:43:49.355] [33mwarn[39m: The strapi::cors middleware no longer supports the `enabled` option. Using it to conditionally enable CORS might cause an insecure default. To disable strapi::cors, remove it from the exported array in config/middleware.js
+[2026-09-03 15:43:52.220] [33mwarn[39m: [email]: The "sendmail" email provider is still supported, but for most production setups that use a dedicated SMTP relay, consider switching to @strapi/provider-email-nodemailer (set `provider` to `"nodemailer"` in your email plugin config). This message is only shown in non-production environments.
+(node:19237) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[webhook] NEXT_SITE_URL or REVALIDATE_SECRET not set in cms/.env — skipping auto-registration.
+- Building build context
+✔ Building build context (64ms)
+- Creating admin
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+✔ Creating admin (393ms)
+✔ Loading Strapi (23829ms)
+- Generating types
+✔ Generating types (559ms)
+- Compiling TS
+- Cleaning dist dir /Users/udayznanam/Documents/ambient/cms/dist
+✔ Cleaning dist dir (58ms)
+✔ Compiling TS (2206ms)
+
+ Project information
+
+[90m╭────────────────────[39m[90m┬──────────────────────────────────────────────────╮[39m
+[90m│[39m Time               [90m│[39m Thu Sep 03 2026 15:44:01 GMT+0530 (India Standa… [90m│[39m
+[90m│[39m Launched in        [90m│[39m 26698 ms                                         [90m│[39m
+[90m│[39m Environment        [90m│[39m development                                      [90m│[39m
+[90m│[39m Process PID        [90m│[39m 19237                                            [90m│[39m
+[90m│[39m Version            [90m│[39m 5.50.0 (node v24.13.0)                           [90m│[39m
+[90m│[39m Edition            [90m│[39m Community                                        [90m│[39m
+[90m│[39m Database           [90m│[39m postgres                                         [90m│[39m
+[90m│[39m Database name      [90m│[39m postgres                                         [90m│[39m
+[90m╰────────────────────[39m[90m┴──────────────────────────────────────────────────╯[39m
+
+ Actions available
+
+Welcome back!
+To access the server ⚡️, go to:
+http://localhost:1338
+
+[2026-09-03 15:44:01.268] [32minfo[39m: Strapi started successfully
+[2026-09-03 15:44:04.455] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2FSOM&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2FSOM&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1788430444040 (383 ms) 200
+[2026-09-03 15:44:04.561] [32mhttp[39m: GET /api/som-page?populate[hero][populate][image]=true&populate[hero][populate][primary_button][populate]=*&populate[hero][populate][secondary_button][populate]=*&populate[features][populate][cards][populate]=*&populate[ecosystem][populate][cards][populate]=*&populate[inside_module][populate][image]=true&populate[inside_module][populate][specs][populate]=*&populate[prototype][populate][cards][populate]=*&populate[intelligence][populate][cards][populate]=*&populate[deploy_path][populate][cards][populate]=*&populate[deploy_path][populate][primary_button][populate]=*&populate[deploy_path][populate][cards][populate][image][populate]=*&populate[ready_to_deploy][populate]=*&populate[footer_merge][populate]=*&populate[seo][populate]=* (60 ms) 400
+3:44:09 PM [vite] page reload dist/build/index.html
+3:44:09 PM [vite] page reload dist/build/index.html
+[2026-09-03 15:44:16.212] [32mhttp[39m: HEAD /admin (51 ms) 200
+[2026-09-03 15:44:49.318] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2FSOM&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2FSOM&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1788430488964 (335 ms) 200
+[2026-09-03 15:44:49.520] [32mhttp[39m: GET /api/som-page?populate[hero][populate][image]=true&populate[hero][populate][primary_button][populate]=*&populate[hero][populate][secondary_button][populate]=*&populate[features][populate][cards][populate]=*&populate[ecosystem][populate][cards][populate]=*&populate[inside_module][populate][image]=true&populate[inside_module][populate][specs][populate]=*&populate[prototype][populate][cards][populate]=*&populate[intelligence][populate][cards][populate]=*&populate[deploy_path][populate][cards][populate]=*&populate[deploy_path][populate][primary_button][populate]=*&populate[deploy_path][populate][cards][populate][image][populate]=*&populate[ready_to_deploy][populate]=*&populate[footer_merge][populate]=*&populate[seo][populate]=* (66 ms) 400
+[2026-09-03 15:44:56.547] [32mhttp[39m: GET /admin/auth/login (15 ms) 200
+[2026-09-03 15:44:57.248] [32mhttp[39m: GET /admin/project-type (3 ms) 200
+[2026-09-03 15:44:57.422] [32mhttp[39m: GET /admin/init (82 ms) 200
+[2026-09-03 16:21:52.904] [32mhttp[39m: GET /admin/auth/login (10 ms) 200
+[2026-09-03 16:21:53.357] [32mhttp[39m: GET /admin/project-type (2 ms) 200
+[2026-09-03 16:37:26.390] [31merror[39m: select count("t0"."id") as "count" from "admin_users" as "t0" limit $1 - read ETIMEDOUT
+Error: read ETIMEDOUT
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2026-09-03 16:37:26.390] [32mhttp[39m: GET /admin/init (932874 ms) 500
+Connection Error: Connection ended unexpectedly
+[2026-09-03 16:38:19.359] [31merror[39m: select count("t0"."id") as "count" from "admin_users" as "t0" limit $1 - read ETIMEDOUT
+Error: read ETIMEDOUT
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2026-09-03 16:38:19.360] [32mhttp[39m: GET /admin/init (52956 ms) 500
+Connection Error: Connection ended unexpectedly
+[2026-09-03 16:38:19.601] [32mhttp[39m: GET /admin/init (186 ms) 200
+5:13:53 PM [vite] page reload dist/build/index.html
+5:13:53 PM [vite] page reload .strapi/client/index.html
+5:13:53 PM [vite] page reload .strapi/client/app.js
+[2026-09-03 17:15:54.625] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2F&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2F&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1788435931839 (22780 ms) 401
+Connection Error: Connection ended unexpectedly
+[2026-09-03 17:15:55.134] [32mhttp[39m: GET /api/home-page?populate[seo][populate]=* (450 ms) 200
+[2026-09-03 17:15:55.371] [32mhttp[39m: GET /api/navbar?populate[brand][populate]=*&populate[header][populate][cta_dot_icon]=true&populate[header][populate][nav_items][populate][children][populate]=*&populate[header][populate][nav_items][populate][mega_columns][populate][links][populate]=* (705 ms) 200
+[2026-09-03 17:15:55.519] [32mhttp[39m: GET /api/footer?populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[footer][populate][nav_sections][populate][links][populate]=*&populate[footer][populate][legal_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (836 ms) 200
+[2026-09-03 17:15:56.840] [32mhttp[39m: GET /api/home-page?populate[hero][populate]=*&populate[measured_proof][populate][tag][populate]=*&populate[measured_proof][populate][stat_cards][populate]=*&populate[measured_proof][populate][ctas][populate]=*&populate[technology][populate][tag][populate]=*&populate[technology][populate][features][populate]=*&populate[technology][populate][image][populate]=*&populate[platform_scale][populate][products][populate]=*&populate[platform_scale][populate][cta][populate]=*&populate[applications][populate][tabs][populate]=*&populate[applications][populate][cta][populate]=*&populate[developer_platform][populate][cards][populate]=*&populate[ecosystem][populate][silicon_partners][populate]=*&populate[ecosystem][populate][development_partners][populate]=*&populate[ecosystem][populate][cta][populate]=*&populate[latest_news][populate][cards][populate]=*&populate[seo][populate]=* (2157 ms) 200
+[2026-09-03 17:15:57.187] [32mhttp[39m: GET /api/articles?filters[show_on_homepage][$eq]=true&sort[0]=display_order:asc&sort[1]=date:desc&populate[0]=featured_image&pagination[pageSize]=10 (340 ms) 200
+[2026-09-03 17:16:03.063] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2FSOM&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2FSOM&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1788435962659 (401 ms) 200
+[2026-09-03 17:16:03.127] [32mhttp[39m: GET /api/som-page?populate[hero][populate][image]=true&populate[hero][populate][primary_button][populate]=*&populate[hero][populate][secondary_button][populate]=*&populate[features][populate][cards][populate]=*&populate[ecosystem][populate][cards][populate]=*&populate[inside_module][populate][image]=true&populate[inside_module][populate][specs][populate]=*&populate[prototype][populate][cards][populate]=*&populate[intelligence][populate][cards][populate]=*&populate[deploy_path][populate][cards][populate]=*&populate[deploy_path][populate][primary_button][populate]=*&populate[deploy_path][populate][cards][populate][image][populate]=*&populate[ready_to_deploy][populate]=*&populate[footer_merge][populate]=*&populate[seo][populate]=* (37 ms) 400
+[2026-09-03 17:16:03.383] [32mhttp[39m: GET /api/som-page?populate[seo][populate]=* (285 ms) 200
+[2026-09-03 17:16:17.515] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fdvk&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fdvk&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1788435977271 (242 ms) 200
+[2026-09-03 17:16:17.752] [32mhttp[39m: GET /api/dvk-page?populate[seo][populate]=* (206 ms) 200
+[2026-09-03 17:16:18.289] [32mhttp[39m: GET /api/dvk-page?populate[hero][populate]=*&populate[inside_module][populate][image]=true&populate[inside_module][populate][specs][populate]=*&populate[demos][populate][demo_cards][populate]=*&populate[modelforge][populate]=*&populate[integrated_modules][populate][cards][populate]=*&populate[seo][populate]=* (750 ms) 200
+[2026-09-03 17:17:01.855] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2Fdvk&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2Fdvk&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1788436021596 (257 ms) 200
+[2026-09-03 17:18:52.271] [32mhttp[39m: GET / (4 ms) 302
+[2026-09-03 17:18:52.283] [32mhttp[39m: GET /admin (9 ms) 200
+[2026-09-03 17:18:52.666] [32mhttp[39m: GET /admin/project-type (1 ms) 200
+[2026-09-03 17:18:52.813] [32mhttp[39m: GET /admin/init (80 ms) 200
+[2026-09-03 17:18:57.059] [32mhttp[39m: POST /admin/login (354 ms) 200
+[2026-09-03 17:18:57.422] [32mhttp[39m: GET /admin/users/me (344 ms) 200
+[2026-09-03 17:18:57.453] [32mhttp[39m: GET /admin/information (357 ms) 200
+[2026-09-03 17:18:57.454] [32mhttp[39m: GET /admin/telemetry-properties (360 ms) 200
+[2026-09-03 17:18:57.500] [32mhttp[39m: GET /admin/license-limit-information (5 ms) 200
+[2026-09-03 17:18:57.519] [32mhttp[39m: GET /admin/users/me/permissions (435 ms) 200
+[2026-09-03 17:18:57.906] [32mhttp[39m: GET /admin/homepage/layout (410 ms) 200
+[2026-09-03 17:18:57.935] [32mhttp[39m: GET /admin/guided-tour-meta (443 ms) 200
+[2026-09-03 17:18:58.142] [32mhttp[39m: GET /content-manager/homepage/count-documents (646 ms) 200
+[2026-09-03 17:18:58.443] [32mhttp[39m: GET /admin/homepage/key-statistics (946 ms) 200
+[2026-09-03 17:18:58.769] [32mhttp[39m: GET /content-manager/homepage/recent-documents?action=update (1176 ms) 200
+[2026-09-03 17:18:58.871] [32mhttp[39m: GET /content-manager/homepage/recent-documents?action=publish (1277 ms) 200
+[2026-09-03 17:18:59.663] [32mhttp[39m: GET /content-manager/init (329 ms) 200
+[2026-09-03 17:18:59.815] [32mhttp[39m: GET /content-manager/content-types-settings (479 ms) 200
+[2026-09-03 17:19:00.237] [32mhttp[39m: GET /content-manager/init (369 ms) 200
+[2026-09-03 17:19:00.311] [32mhttp[39m: GET /content-manager/content-types/api::application-page.application-page/configuration (416 ms) 200
+[2026-09-03 17:19:01.575] [32mhttp[39m: GET /content-manager/collection-types/api::application-page.application-page?page=1&pageSize=10&sort=documentId%3AASC (1252 ms) 200
+[2026-09-03 17:19:01.868] [32mhttp[39m: GET /admin/ai-feature-config (226 ms) 404
+[2026-09-03 17:19:02.028] [32mhttp[39m: GET /i18n/locales (383 ms) 200
+[2026-09-03 17:19:05.420] [32mhttp[39m: GET /content-manager/content-types/api::dvk-page.dvk-page/configuration (366 ms) 200
+[2026-09-03 17:19:06.662] [32mhttp[39m: GET /content-manager/single-types/api::dvk-page.dvk-page (1607 ms) 200
+[2026-09-03 17:19:06.956] [32mhttp[39m: GET /uploads/thumbnail_module_photo_fd64e4a53e.png?updatedAt=2026-07-06T22:35:52.573Z (4 ms) 200
+[2026-09-03 17:19:07.115] [32mhttp[39m: GET /admin/ai-feature-config (215 ms) 404
+[2026-09-03 17:19:07.185] [32mhttp[39m: GET /i18n/ai-localization-jobs/single-types/api::dvk-page.dvk-page (281 ms) 404
+[2026-09-03 17:19:07.224] [32mhttp[39m: GET /i18n/settings (322 ms) 200
+[2026-09-03 17:19:07.391] [32mhttp[39m: GET /content-manager/preview/url/api::dvk-page.dvk-page?locale=&status=published (474 ms) 200
+[2026-09-03 17:19:08.447] [32mhttp[39m: GET /content-manager/single-types/api::dvk-page.dvk-page/actions/countDraftRelations (1447 ms) 200
+[2026-09-03 17:19:34.274] [32mhttp[39m: POST /content-manager/single-types/api::dvk-page.dvk-page/actions/publish (15886 ms) 200
+[2026-09-03 17:19:34.677] [32mhttp[39m: GET /i18n/ai-localization-jobs/single-types/api::dvk-page.dvk-page (364 ms) 404
+[2026-09-03 17:19:36.056] [32mhttp[39m: GET /content-manager/single-types/api::dvk-page.dvk-page (1757 ms) 200
+[2026-09-03 17:19:37.951] [32mhttp[39m: GET /content-manager/single-types/api::dvk-page.dvk-page/actions/countDraftRelations (1795 ms) 200
+[2026-09-03 17:38:35.483] [31merror[39m: select "t0".* from "strapi_sessions" as "t0" where ("t0"."session_id" = $1) limit $2 - read ETIMEDOUT
+Error: read ETIMEDOUT
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2026-09-03 17:38:35.488] [32mhttp[39m: GET /content-manager/single-types/api::dvk-page.dvk-page/actions/countDraftRelations (59266 ms) 500
+Connection Error: Connection ended unexpectedly
+[2026-09-03 17:49:19.558] [32mhttp[39m: POST /admin/access-token (31836 ms) 401
+Connection Error: Connection ended unexpectedly
+[2026-09-03 17:49:19.829] [32mhttp[39m: GET /admin/init (202 ms) 200
+[2026-09-03 22:42:14.543] [32mhttp[39m: GET / (6 ms) 302
+[2026-09-03 22:42:14.562] [32mhttp[39m: GET /admin (13 ms) 200
+[2026-09-03 22:42:15.434] [32mhttp[39m: GET /admin/project-type (2 ms) 200
+[2026-09-03 22:42:37.865] [31merror[39m: select count("t0"."id") as "count" from "admin_users" as "t0" limit $1 - read ETIMEDOUT
+Error: read ETIMEDOUT
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2026-09-03 22:42:37.866] [32mhttp[39m: GET /admin/init (22334 ms) 500
+Connection Error: Connection ended unexpectedly
+12:17:21 AM [vite] page reload .strapi/client/index.html
+12:17:21 AM [vite] page reload .strapi/client/app.js
+[2026-09-04 00:17:34.162] [32mhttp[39m: GET /api/redirects?filters%5B%24or%5D%5B0%5D%5BoldPath%5D%5B%24eq%5D=%2F&filters%5B%24or%5D%5B1%5D%5BnewPath%5D%5B%24eq%5D=%2F&filters%5Benabled%5D%5B%24eq%5D=true&populate=*&t=1788461219661 (34479 ms) 401
+Connection Error: Connection ended unexpectedly
+[2026-09-04 00:17:34.925] [32mhttp[39m: GET /api/home-page?populate[seo][populate]=* (449 ms) 200
+[2026-09-04 00:17:35.231] [32mhttp[39m: GET /api/navbar?populate[brand][populate]=*&populate[header][populate][cta_dot_icon]=true&populate[header][populate][nav_items][populate][children][populate]=*&populate[header][populate][nav_items][populate][mega_columns][populate][links][populate]=* (866 ms) 200
+[2026-09-04 00:17:35.383] [32mhttp[39m: GET /api/footer?populate[footer][populate][crafted_by_logo]=true&populate[footer][populate][background_image]=true&populate[footer][populate][social_links][populate]=*&populate[footer][populate][nav_sections][populate][links][populate]=*&populate[footer][populate][legal_links][populate]=*&populate[newsletter][populate]=*&populate[contact_details][populate]=*&populate[default_seo][populate]=* (914 ms) 200
+[2026-09-04 00:17:36.417] [32mhttp[39m: GET /api/home-page?populate[hero][populate]=*&populate[measured_proof][populate][tag][populate]=*&populate[measured_proof][populate][stat_cards][populate]=*&populate[measured_proof][populate][ctas][populate]=*&populate[technology][populate][tag][populate]=*&populate[technology][populate][features][populate]=*&populate[technology][populate][image][populate]=*&populate[platform_scale][populate][products][populate]=*&populate[platform_scale][populate][cta][populate]=*&populate[applications][populate][tabs][populate]=*&populate[applications][populate][cta][populate]=*&populate[developer_platform][populate][cards][populate]=*&populate[ecosystem][populate][silicon_partners][populate]=*&populate[ecosystem][populate][development_partners][populate]=*&populate[ecosystem][populate][cta][populate]=*&populate[latest_news][populate][cards][populate]=*&populate[seo][populate]=* (1944 ms) 200
+[2026-09-04 00:17:36.667] [32mhttp[39m: GET /api/articles?filters[show_on_homepage][$eq]=true&sort[0]=display_order:asc&sort[1]=date:desc&populate[0]=featured_image&pagination[pageSize]=10 (242 ms) 200

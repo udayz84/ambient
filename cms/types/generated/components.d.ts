@@ -2003,6 +2003,38 @@ export interface SharedTag extends Struct.ComponentSchema {
   };
 }
 
+export interface SomDeployPath extends Struct.ComponentSchema {
+  collectionName: 'components_som_deploy_paths';
+  info: {
+    description: 'Validate on NuraSense, deploy on SOM section';
+    displayName: 'Deploy Path';
+  };
+  attributes: {
+    cards: Schema.Attribute.Component<'som.deploy-path-card', true>;
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    primary_button: Schema.Attribute.Component<'shared.button', false>;
+    secondary_button_label: Schema.Attribute.String;
+    secondary_button_link: Schema.Attribute.String;
+    subheading: Schema.Attribute.Text;
+  };
+}
+
+export interface SomDeployPathCard extends Struct.ComponentSchema {
+  collectionName: 'components_som_deploy_path_cards';
+  info: {
+    description: 'Card for the deploy path section';
+    displayName: 'Deploy Path Card';
+  };
+  attributes: {
+    badge_label: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Available'>;
+    description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images'>;
+    is_available: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SomEcosystem extends Struct.ComponentSchema {
   collectionName: 'components_som_ecosystems';
   info: {
@@ -2778,6 +2810,8 @@ declare module '@strapi/strapi' {
       'shared.stat': SharedStat;
       'shared.stat-card': SharedStatCard;
       'shared.tag': SharedTag;
+      'som.deploy-path': SomDeployPath;
+      'som.deploy-path-card': SomDeployPathCard;
       'som.ecosystem': SomEcosystem;
       'som.ecosystem-card': SomEcosystemCard;
       'som.feature-card': SomFeatureCard;

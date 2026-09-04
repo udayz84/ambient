@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { mediaUrl } from "@/lib/strapi";
-import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
+import { gilroyMedium, gilroySemiBold, interRegular, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GradientTitle } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
@@ -70,8 +70,15 @@ function ChipImage({ className, src }: { className?: string; src: string }) {
         <img
           src={src}
           alt="Sparsh AI Module"
-          className="absolute inset-0 size-full object-contain"
+          className="absolute inset-0 size-full object-contain opacity-90 brightness-75 blur-[2px]"
         />
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center border border-[#E2A740] bg-black/90 px-[16px] py-[12px] shadow-lg">
+          <span className={`${dmMono?.className || "font-mono"} flex items-center gap-[16px] whitespace-nowrap text-[14px] uppercase tracking-[0.1em] text-[#E2A740]`}>
+            <span>|</span>
+            <span>LAUNCHING SOON</span>
+            <span>|</span>
+          </span>
+        </div>
       </div>
     </div>
   );
@@ -120,10 +127,10 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
 
         {/* Body — chip top sits 28.89px below the title block; 446.196 tall */}
         <div className="relative mt-[10px] h-[446.196px] w-full">
-          {chipSrc && (
+          {(chipSrc || FALLBACK_CHIP) && (
             <ChipImage
               className="absolute left-[401.108px] top-0 h-[446.196px] w-[430.321px]"
-              src={chipSrc}
+              src={chipSrc || FALLBACK_CHIP}
             />
           )}
 
@@ -211,12 +218,21 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
               className="absolute left-1/2 top-[calc(50%+4.71px)] h-[357.417px] w-[344.7px] -translate-x-1/2 -translate-y-1/2 overflow-hidden"
               data-name="Background"
             >
-              {chipSrc && (
-                <img
-                  src={chipSrc || FALLBACK_CHIP}
-                  alt="Sparsh AI Module"
-                  className="absolute left-0 top-[10.17%] h-[79.67%] w-full max-w-none object-contain"
-                />
+              {(chipSrc || FALLBACK_CHIP) && (
+                <>
+                  <img
+                    src={chipSrc || FALLBACK_CHIP}
+                    alt="Sparsh AI Module"
+                    className="absolute left-0 top-[10.17%] h-[79.67%] w-full max-w-none object-contain opacity-90 brightness-75 blur-[2px]"
+                  />
+                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center border border-[#E2A740] bg-black/90 px-[12px] py-[10px] shadow-lg">
+                    <span className={`${dmMono?.className || "font-mono"} flex items-center gap-[12px] whitespace-nowrap text-[12px] uppercase tracking-[0.1em] text-[#E2A740]`}>
+                      <span>|</span>
+                      <span>LAUNCHING SOON</span>
+                      <span>|</span>
+                    </span>
+                  </div>
+                </>
               )}
             </div>
           </div>

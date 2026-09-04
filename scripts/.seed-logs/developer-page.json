@@ -17,7 +17,7 @@
   "code": {
     "heading": "Hello world in three lines",
     "subtitle": "We invisibly map AI cores to your host drop your model straight into your existing application.",
-    "code_snippet": "#include <ambient.h>\n#include <sensor_drivers.h>\n\nint main(void) {\n    // Initialize system\n    ambient_init();\n    sensor_config_t sensor;\n    model_t model_obj;\n\n    // Load AI model\n    ambient_load_model(&model_obj, \"fall_detect.bin\");\n\n    while(1) {\n        ambient_read_i2s_mic(&sensor);\n\n        ambient_run_fft(&sensor);\n\n        run_ai_inference(&model_obj);\n\n        if(model_obj.result > THRESHOLD) {\n            trigger_alert();\n        }\n    }\n}",
+    "code_snippet": "main.c\n\n#include \"sys_clk.h\"\n#include \"FreeRTOS.h\"\n\nvoid main()\n\n{\nAPP_Start();\n}\n\nstatic void APP_Start()\n{\n\n\txTaskCreate(application_read_task_entry,\n\t\t\t\t\"DataTask\",\n\t\t\t\t1024,\n\t\t\t\t(void *)0,\n\t\t\t\ttskIDLE_PRIORITY + 4,\n\t\t\t\tNULL );\n\n\txTaskCreate(application_process_task_entry,\n\t\t\t\t\"ProcessTask\",\n\t\t\t\t1024,\n\t\t\t\t(void *)0,\n\t\t\t\ttskIDLE_PRIORITY + 3,\n\t\t\t\tNULL );\n\n\n\txTaskCreate(application_LCD_DISPLAY_task_entry,\n\t\t\t\t\"PrintTask\",\n\t\t\t\t1024,\n\t\t\t\t(void *)0,\n\t\t\t\ttskIDLE_PRIORITY + 2,\n\t\t\t\tNULL );\n\n}",
     "articles": [
       {
         "icon": 180,
@@ -68,7 +68,9 @@
     "heading": "Test on the metal, without the metal.",
     "subtitle": "Validate your build in a virtual sandbox,\nno need to wait for hardware.",
     "card_title": "Virtual Sandbox Coming Soon",
+    "card_description": "Complete virtual validation environment for testing your builds before hardware arrives.",
     "cta_label": "Join the Virtual Sandbox Waitlist",
+    "cta_href": "#",
     "image": 124,
     "background": null
   },
@@ -79,12 +81,14 @@
       {
         "image": 126,
         "title": "GPX Evaluation Kits (DVKs)",
+        "description": "Stop fighting with breakout boards. Our fully integrated Evaluation Kits come equipped with standard interfaces, allowing you to plug in your cameras, microphones, and industrial sensors out-of-the-box for immediate physical validation.",
         "cta_label": "View Evaluation Kits",
         "cta_href": "#"
       },
       {
         "image": 127,
         "title": "Production-Ready SOMs",
+        "description": "Skip the nightmare of custom RF and power routing. Drop our high-density System-on-Modules (SOMs) directly into your custom carrier boards. They're engineered for extreme space-constrained environments, radically accelerating your time-to-market.",
         "cta_label": "View System-on-Modules",
         "cta_href": "#"
       }
@@ -95,20 +99,23 @@
     "subtitle": "A seamless toolchain is useless if hardware can't integrate. Move from software validation to deployment instantly with our modular edge ecosystem.",
     "copilots": [
       {
-        "icon": 128,
+        "icon": 417,
         "title": "Exhaustive Documentation",
+        "description": "No disorganized wikis. Access the fully searchable ModelForge deployment guide, comprehensive DSP/Pre-processing C-libraries, and lower-level hardware API references.",
         "cta_label": "Browse Developer Docs",
         "cta_href": "#"
       },
       {
-        "icon": 129,
+        "icon": 418,
         "title": "10 Minutes to Mastery",
+        "description": "Get up and running visually. Access our self-serve library of YouTube masterclasses walking you step-by-step through everything from model porting to integrated compilation.",
         "cta_label": "View Training Playlist",
         "cta_href": "#"
       },
       {
-        "icon": 130,
+        "icon": 419,
         "title": "Your Technical Copilots",
+        "description": "Skip the generic help desk. Get direct, architectural-level support from our Field Application Engineers. We will handhold your team to help optimize your specific neural network and heterogeneous build.",
         "cta_label": "Schedule Technical Consultation",
         "cta_href": "#"
       }

@@ -61,7 +61,7 @@ export function DvkIntegratedModules({ data }: { data?: any }) {
 const CARDS = [
   {
     title: "Cranium DVK",
-    description: "Validate your logic on the Cranium kit today with full debug capabilities and rich I/O."
+    description: "Validate your logic on the Cranium kit today with full debug capabilities and rich I/O. Board has been discontinued."
   },
   {
     title: "SOM Module",
@@ -142,7 +142,7 @@ function DvkIntegratedModulesDesktop({
               <h3 className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium whitespace-nowrap text-white overflow-hidden text-ellipsis`}>
                 {card.title}
               </h3>
-              <DevChip />
+              <DevChip label={i === 0 ? "Legacy Board" : "Development"} />
             </div>
             <p className={`${interRegular.className} mt-[10px] w-full text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}>
               {card.description}
@@ -279,7 +279,7 @@ function DvkIntegratedModulesMobile({
                   >
                     {card.title}
                   </h3>
-                  <DevChipMobile />
+                  <DevChipMobile label={i === 0 ? "Legacy Board" : "Development"} />
                 </div>
                 <p
                   className={`${interRegular.className} m-0 w-full text-[12px] leading-[18px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
@@ -341,10 +341,10 @@ function DvkIntegratedModulesMobile({
 }
 
 /** Figma 4062:12399 — mobile Development chip (115×24, corner ticks, side bars). */
-function DevChipMobile() {
+function DevChipMobile({ label }: { label: string }) {
   return (
     <div
-      className="relative h-[24px] w-[115px] shrink-0 overflow-clip"
+      className="relative h-[24px] w-[130px] shrink-0 overflow-clip"
       style={{ backgroundColor: DEV_CHIP_BG }}
       data-node-id="4062:12399"
       data-name="Menu"
@@ -353,7 +353,7 @@ function DevChipMobile() {
       <p
         className={`${dmMono.className} absolute top-[calc(50%-4px)] left-[calc(50%+0.5px)] -translate-x-1/2 text-[12px] leading-[19.5px] font-normal tracking-[-0.36px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]`}
       >
-        Development
+        {label}
       </p>
       <div className="absolute top-1/2 left-[7px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
       <div className="absolute top-1/2 right-[7px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
@@ -361,15 +361,15 @@ function DevChipMobile() {
   );
 }
 
-function DevChip() {
+function DevChip({ label }: { label: string }) {
   return (
     <div
-      className={`${dmMono.className} relative h-[26px] w-[153px] shrink-0 overflow-clip border-[0.5px] border-solid`}
+      className={`${dmMono.className} relative h-[26px] w-[160px] shrink-0 overflow-clip border-[0.5px] border-solid`}
       style={{ backgroundColor: DEV_CHIP_BG, borderColor: "rgba(255,255,255,0.3)" }}
     >
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
       <p className="absolute left-[calc(50%+0.5px)] top-[calc(50%-4.5px)] -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
-        Development
+        {label}
       </p>
       <div className="absolute top-1/2 left-[7px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
       <div className="absolute top-1/2 right-[7px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />

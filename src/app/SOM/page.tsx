@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { SomHero } from "@/components/som-page/SomHero";
 import { SomFeatures } from "@/components/som-page/SomFeatures";
-import { SomInsideModule } from "@/components/som-page/SomInsideModule";
+
 import { SomEcosystem } from "@/components/som-page/SomEcosystem";
 import { SomPrototypeTitle } from "@/components/som-page/SomPrototypeTitle";
 import { SomIntelligence } from "@/components/som-page/SomIntelligence";
@@ -28,6 +28,8 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
+import { SomDeployPath } from "@/components/som-page/SomDeployPath";
+
 export default async function SomPage() {
   let data: any = null;
   try {
@@ -38,6 +40,7 @@ export default async function SomPage() {
       { section: "inside_module", fields: ["image"], nested: ["specs"] },
       { section: "prototype", nested: ["cards"] },
       { section: "intelligence", nested: ["cards"] },
+      { section: "deploy_path", nested: ["cards", "primary_button", "cards.image"] },
       "ready_to_deploy",
       "footer_merge",
       "seo",
@@ -49,9 +52,10 @@ export default async function SomPage() {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       <SomHero data={data?.hero} />
+      <SomDeployPath data={data?.deploy_path} />
       <SomFeatures data={data?.features} />
-      <SomEcosystem data={data?.ecosystem} />
-      <SomInsideModule data={data?.inside_module} />
+      {/* <SomEcosystem data={data?.ecosystem} /> */}
+
       <SomPrototypeTitle data={data?.prototype} />
       <SomIntelligence data={data?.intelligence} />
       <SomReadyToDeploy data={data?.ready_to_deploy} />

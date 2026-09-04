@@ -721,48 +721,17 @@ const DVK_PAYLOAD = {
     background_image: media(ASSETS.dvk_hero_bg_2),
   },
 
-  hardware_stack: {
-    heading: "The complete Edge AI hardware stack in a single footprint",
+  inside_module: {
+    heading: "Inside the Sparsh AI Module",
     subtitle:
-      "An exhaustive suite of sensors, interfaces, and debug tools pre-integrated with the GPX-10 Pro AI Processor.",
+      "Bridge the lab and real world. The Sparsh module offers continuous, microwatt intelligence in a 21×21mm size, with a breakout board that snaps off for production.",
     label: "The Hardware Blueprint",
-    chip_image: media(ASSETS.dvk_board_chip),
-    spec_cards: [
-      {
-        title: "Memory",
-        items: "64Mb Flash\nExternal Flash connection via SPI, QPI",
-        is_accent: false,
-      },
-      {
-        title: "Wireless",
-        items: "UART-Based: Micro chip BLE",
-        is_accent: false,
-      },
-      {
-        title: "Sensors",
-        items: "I²C-Based: MC3419, MXC6655\nADC-Based: Optical, Humidity, and Temperature Sensors\nI²S-Based: Microphone (Audio Pipeline)\nADC-Based: Microphone (Audio Pipeline)\nDVP-Based: Camera",
-        is_accent: true,
-      },
-      {
-        title: "Debug Ports",
-        items: "20 Pin JTAG for debug\nUART-Based: TTL for debug prints\nGPIO-Based: LEDs",
-        is_accent: false,
-      },
-      {
-        title: "Interfaces",
-        items: "SPI0\nSPI1\nI2C Master\nI2C Slave\nDVP Interface\nI2S\nADC\nUART\nQPI",
-        is_accent: false,
-      },
-      {
-        title: "MCU",
-        items: "GPX10PRO",
-        is_accent: false,
-      },
-      {
-        title: "Booting",
-        items: "Chip_ID Switches",
-        is_accent: false,
-      },
+    image: media(ASSETS.som_module_photo),
+    specs: [
+      { label: "Footprint", value: "21×21mm (Core) | 42×21mm (With Breakout)" },
+      { label: "Power", value: "Optimized for months of inference on a CR2032 coin-cell." },
+      { label: "Sensors", value: "Integrated 6-axis IMU & Digital Mic" },
+      { label: "Comms & I/O", value: "Onboard BLE, SPI, I2C, and UART interfaces" },
     ],
   },
 
@@ -792,6 +761,13 @@ const DVK_PAYLOAD = {
           "Route a camera feed through the dedicated connector to validate real-time spatial awareness and gesture recognition without relying on a cloud round-trip.",
         image: media(ASSETS.dvk_demo_fall),
       },
+      {
+        title_line_1: "Gesture",
+        title_line_2: "Recognition",
+        description:
+          "Real-time motion gestures — the same tech behind the ApplicationForge gesture game.",
+        image: media(ASSETS.dvk_demo_voice),
+      },
     ],
   },
 
@@ -799,10 +775,6 @@ const DVK_PAYLOAD = {
     heading: "Powered by ModelForge.",
     subtitle:
       "Don't let software be the bottleneck. The Cranium DVK is fully supported by our unified software toolchain, designed to take you from a standard TensorFlow model to on-silicon inference in under 15 minutes.",
-    card_glow_image: null,
-    toolchain_labels: "RTOS\nDRIVERS\nCOMPILER",
-    descriptions:
-      "Your Model\nAutomated TFLite conversion &\nquantization\n\nModelForge SDK\nPre-integrated RTOS & Eclipse-based Unified Build\n\nCranium DVK\n15 minutes to on-silicon execution",
   },
 
   integrated_modules: {
@@ -1069,58 +1041,6 @@ const SOM_PAYLOAD = {
         description:
           "The exact C-code, AI object files, and unified Eclipse build you validated on the Cranium Evaluation Kit ports directly to any of our production SOMs with zero rewrites.",
       },
-    ],
-  },
-
-  ecosystem: {
-    heading: "The Ambient SOM Ecosystem",
-    subtitle:
-      "Purpose-built edge modules. Validate your software on our evaluation kits today, and drop our SOMs directly into your final product tomorrow.",
-    cards: [
-      {
-        title: "Motion SOM",
-        subtitle: "Motion & Audio",
-        status: "Available",
-        cta_label: "VIEW MORE",
-      },
-      {
-        title: "Vision SOM",
-        subtitle: "Motion & Audio",
-        status: "Under-development",
-        cta_label: "Coming soon",
-      },
-      {
-        title: "Sound SOM",
-        subtitle: "Motion & Audio",
-        status: "Under-development",
-        cta_label: "Coming soon",
-      },
-      {
-        title: "Predictive & Maintenance SOM",
-        subtitle: "Motion & Audio",
-        status: "Under-development",
-        cta_label: "Coming soon",
-      },
-      {
-        title: "Pet & Livestock SOM",
-        subtitle: "Motion & Audio",
-        status: "Under-development",
-        cta_label: "Coming soon",
-      },
-    ],
-  },
-
-  inside_module: {
-    heading: "Inside the Sparsh AI Module",
-    subtitle:
-      "Bridge the lab and real world. The Sparsh module offers continuous, microwatt intelligence in a 21×21mm size, with a breakout board that snaps off for production.",
-    label: "The Hardware Blueprint",
-    image: media(ASSETS.som_module_photo),
-    specs: [
-      { label: "Footprint", value: "21×21mm (Core) | 42×21mm (With Breakout)" },
-      { label: "Power", value: "Optimized for months of inference on a CR2032 coin-cell." },
-      { label: "Sensors", value: "Integrated 6-axis IMU & Digital Mic" },
-      { label: "Comms & I/O", value: "Onboard BLE, SPI, I2C, and UART interfaces" },
     ],
   },
 

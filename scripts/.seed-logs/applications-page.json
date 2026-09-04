@@ -42,22 +42,25 @@
   "continuum": {
     "heading": "The Ambient Continuum.",
     "subtitle": "A unified analog architecture, scaled for your exact power and performance needs.",
-    "image": 109,
     "cards": [
       {
-        "title": "Microwatt Edge AI",
+        "title": "GPX10PRO",
         "body": "Always-on intelliegence for wearabes, audio & battery IoT."
       },
       {
-        "title": "Physical AI",
+        "title": "GPX64",
         "body": "Real-time perception & control for robots, drones & smart machines"
       },
       {
-        "title": "Personal AI Servers",
+        "title": "GPX256",
         "body": "Private, local AI compute for creators, developers & businesses"
       },
       {
-        "title": "Air-Cooled HPC",
+        "title": "GPX2000",
+        "body": "Private, local AI compute for creators, developers & businesses"
+      },
+      {
+        "title": "GPX8000",
         "body": "Always-on intelliegence for wearabes, audio & battery IoT."
       }
     ]
@@ -168,7 +171,7 @@
       }
     ],
     "images": [
-      114,
+      416,
       115
     ]
   },

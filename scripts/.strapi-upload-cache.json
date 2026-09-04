@@ -1419,5 +1419,54 @@
     "url": "/uploads/3minds_730f2a9f80.png",
     "name": "3minds.png",
     "sourcePath": "footer/3minds.png"
+  },
+  "40f8abcfe2d5ec5699154e2123fcfb712a6eba3a": {
+    "id": 416,
+    "documentId": "qcdxurp0g8a0h9hlx8iit07u",
+    "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/som_img_a_862c72935d.png",
+    "name": "som-img-a.png",
+    "sourcePath": "applications/som-img-a.png"
+  },
+  "134946d4a371f040586a78501d89962873f4ebef": {
+    "id": 417,
+    "documentId": "jltz6fj4oexhlm1bggo9u8zt",
+    "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/copilot_icon_1_af7913458c.svg",
+    "name": "copilot-icon-1.svg",
+    "sourcePath": "developer/copilot-icon-1.svg"
+  },
+  "361ed6404127e5aeedd949358b2b247f4b565412": {
+    "id": 418,
+    "documentId": "r8259vp2stvblka82kelhkn0",
+    "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/copilot_icon_2_6cd8ace3ae.svg",
+    "name": "copilot-icon-2.svg",
+    "sourcePath": "developer/copilot-icon-2.svg"
+  },
+  "e02cb05f6e70e019b374eb1c3ca579b55ecdbe3c": {
+    "id": 419,
+    "documentId": "usk92mrydlm37fnggf68t073",
+    "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/copilot_icon_3_36ae0feadb.svg",
+    "name": "copilot-icon-3.svg",
+    "sourcePath": "developer/copilot-icon-3.svg"
+  },
+  "f0341f6c185feb3acd6d9cddc26a455411af009e": {
+    "id": 423,
+    "documentId": "d43tow8ntra2mhvjdne7tqtj",
+    "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/sparsh_chip_345038e6ac.png",
+    "name": "sparsh-chip.png",
+    "sourcePath": "som/sparsh-chip.png"
+  },
+  "fbc6d69c97982da1a5ffc5d819effdbe8a5d1d30": {
+    "id": 424,
+    "documentId": "dljt5abhcouu9i687xo6vo3q",
+    "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/hero_bg_162_1ed596b697.png",
+    "name": "hero-bg-162.png",
+    "sourcePath": "applications/wearables/hero-bg-162.png"
+  },
+  "1539e6a66b661d6e49e571c36061d1c3cb601869": {
+    "id": 425,
+    "documentId": "nmkl3y5pktneu84y87cg5h6c",
+    "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/hero_bg_163_5cc831df29.png",
+    "name": "hero-bg-163.png",
+    "sourcePath": "applications/wearables/hero-bg-163.png"
   }
 }

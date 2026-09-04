@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_som_deploy_path_cards",
+  "info": {
+    "displayName": "Deploy Path Card",
+    "description": "Card for the deploy path section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "badge_label": {
+      "type": "string",
+      "default": "Available"
+    },
+    "is_available": {
+      "type": "boolean",
+      "default": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    }
+  }
+}

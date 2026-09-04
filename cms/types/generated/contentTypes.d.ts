@@ -833,8 +833,8 @@ export interface ApiDvkPageDvkPage extends Struct.SingleTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     demos: Schema.Attribute.Component<'dvk.demos', false>;
-    hardware_stack: Schema.Attribute.Component<'dvk.hardware-stack', false>;
     hero: Schema.Attribute.Component<'dvk.hero', false>;
+    inside_module: Schema.Attribute.Component<'som.inside-module', false>;
     integrated_modules: Schema.Attribute.Component<
       'dvk.integrated-modules',
       false
@@ -1499,11 +1499,10 @@ export interface ApiSomPageSomPage extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    ecosystem: Schema.Attribute.Component<'som.ecosystem', false>;
+    deploy_path: Schema.Attribute.Component<'som.deploy-path', false>;
     features: Schema.Attribute.Component<'som.features', false>;
     footer_merge: Schema.Attribute.Component<'som.footer-merge', false>;
     hero: Schema.Attribute.Component<'som.hero', false>;
-    inside_module: Schema.Attribute.Component<'som.inside-module', false>;
     intelligence: Schema.Attribute.Component<'som.intelligence', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<

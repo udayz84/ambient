@@ -9,6 +9,9 @@ try {
 }
 
 const nextConfig: NextConfig = {
+  env: {
+    AZURE_ASSETS_PUBLIC_URL: process.env.AZURE_ASSETS_PUBLIC_URL || "",
+  },
   // Strapi redirects are now handled dynamically by src/middleware.ts
   // so they take effect immediately without needing a rebuild/restart.
   images: {
