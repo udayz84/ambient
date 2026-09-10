@@ -8,7 +8,7 @@ export function CompanyFooterBackdrop() {
       aria-hidden
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <img loading="lazy" decoding="async"
         src="/careers/footer-bg.png"
         alt=""
         className="absolute inset-0 size-full object-cover object-top"

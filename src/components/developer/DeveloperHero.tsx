@@ -16,7 +16,7 @@ import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
  *  - Content 2438:4563 @ (100, 240 / 549×248)
  */
 export function DeveloperHero({ data }: { data?: any }) {
-  const bgImg = mediaUrl(data?.background_image) || "/developer/hero-bg-3.png";
+  const bgImg = mediaUrl(data?.background_image) || "/developer/hero-bg-3.webp";
   const { fadeRef, isVisible } = useFadeIn<HTMLDivElement>(0.12);
 
   return (

@@ -12,10 +12,10 @@ import { Corners } from "../shared/Corners";
  * the baseline render and the surge render, and moves the switch.
  */
 
-const BG_SURGE = "/products/alwayson/bg-surge-new.png";
-const BG_SUBCONSCIOUS = "/products/alwayson/bg-subconscious-new.png";
-const AI_CORE_ICON = "/products/alwayson/ai-core-icon.png";
-const HOST_CPU_IMG = "/products/alwayson/host-cpu.png";
+const BG_SURGE = "/products/alwayson/bg-surge-new.webp";
+const BG_SUBCONSCIOUS = "/products/alwayson/bg-subconscious-new.webp";
+const AI_CORE_ICON = "/products/alwayson/ai-core-icon.webp";
+const HOST_CPU_IMG = "/products/alwayson/host-cpu.webp";
 const CORNER_42 = "/products/alwayson/corner-42.svg";
 const CORNER_43 = "/products/alwayson/corner-43.svg";
 const CORNER_44 = "/products/alwayson/corner-44.svg";
@@ -69,7 +69,7 @@ function FrameCorners({
         <div className="-scale-y-100 flex-none">
           <div className="relative" style={dim}>
             <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <img alt="" className="block max-w-none size-full" src={leftSrc} />
+              <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={leftSrc} />
             </div>
           </div>
         </div>
@@ -78,21 +78,21 @@ function FrameCorners({
         <div className="flex-none rotate-180">
           <div className="relative" style={dim}>
             <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <img alt="" className="block max-w-none size-full" src={rightSrc} />
+              <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={rightSrc} />
             </div>
           </div>
         </div>
       </div>
       <div className="absolute bottom-0 left-0" style={dim} aria-hidden>
         <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-          <img alt="" className="block max-w-none size-full" src={leftSrc} />
+          <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={leftSrc} />
         </div>
       </div>
       <div className="absolute bottom-0 flex items-center justify-center right-0" style={dim} aria-hidden>
         <div className="-scale-y-100 flex-none rotate-180">
           <div className="relative" style={dim}>
             <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <img alt="" className="block max-w-none size-full" src={rightSrc} />
+              <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={rightSrc} />
             </div>
           </div>
         </div>
@@ -146,7 +146,7 @@ function GlowSwoosh({ top = -25.66 }: { top?: number }) {
       aria-hidden
     >
       <div className="absolute inset-[-119.54%_-85.81%]">
-        <img alt="" className="block max-w-none size-full" src={GLOW_SWOOSH} />
+        <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={GLOW_SWOOSH} />
       </div>
     </div>
   );
@@ -184,7 +184,7 @@ function StatCard({
         aria-hidden
       >
         <div className="absolute inset-[-0.23%_-0.13%]">
-          <img alt="" className="block max-w-none size-full" src={CARD_CORNERS} />
+          <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={CARD_CORNERS} />
         </div>
       </div>
       <div
@@ -193,7 +193,7 @@ function StatCard({
         data-name="Icon"
       >
         <div className="-translate-x-1/2 -translate-y-1/2 absolute h-[26.667px] left-1/2 top-1/2 w-[28.148px]">
-          <img alt="" className="absolute block inset-0 max-w-none size-full" src={CARD_ICON} />
+          <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={CARD_ICON} />
         </div>
       </div>
       <div className="absolute flex gap-[27.778px] items-center left-[85px] top-[27.67px]" data-name="Logo and Menu">
@@ -216,12 +216,12 @@ function StatCard({
       </p>
       <div className="-translate-x-1/2 absolute h-0 left-1/2 top-[157.48px] w-[300px]" aria-hidden>
         <div className="absolute inset-[-1px_0_0_0]">
-          <img alt="" className="block max-w-none size-full" src={LINE_920} />
+          <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={LINE_920} />
         </div>
       </div>
       <div className="absolute left-[34.01px] size-[8px] top-[174.76px]" aria-hidden>
         <div className="absolute inset-[-12.5%]">
-          <img alt="" className="block max-w-none size-full" src={DOT_GREEN} />
+          <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={DOT_GREEN} />
         </div>
       </div>
     </div>
@@ -251,7 +251,7 @@ function OnChip({
       data-name="ON"
     >
       <div className="-translate-y-1/2 absolute left-[6.53px] size-[10.656px] top-1/2" aria-hidden>
-        <img alt="" className={`absolute block inset-0 max-w-none size-full transition-all duration-[400ms] ease-in-out ${active ? "grayscale-0 opacity-100" : "grayscale opacity-50"}`} src={ON_DOT_OUTER} />
+        <img loading="lazy" decoding="async" alt="" className={`absolute block inset-0 max-w-none size-full transition-all duration-[400ms] ease-in-out ${active ? "grayscale-0 opacity-100" : "grayscale opacity-50"}`} src={ON_DOT_OUTER} />
       </div>
       <div
         className={`-translate-x-1/2 pointer-events-none absolute h-[110.447px] top-[-25.66px] w-[126.547px] transition-opacity duration-[400ms] ease-in-out ${
@@ -261,12 +261,12 @@ function OnChip({
         aria-hidden
       >
         <div className="absolute inset-[-182.53%_-159.31%]">
-          <img alt="" className="block max-w-none size-full" src={ON_GLOW} />
+          <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={ON_GLOW} />
         </div>
       </div>
       {icon === "ai" ? (
         <div className={`-translate-y-1/2 absolute h-[36px] left-[24.62px] top-1/2 w-[37.756px] transition-all duration-[400ms] ease-in-out ${active ? "grayscale-0 opacity-100" : "grayscale opacity-50"}`} aria-hidden>
-          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={AI_CORE_ICON} />
+          <img loading="lazy" decoding="async" alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={AI_CORE_ICON} />
         </div>
       ) : (
         <div
@@ -276,7 +276,7 @@ function OnChip({
           data-name="image 76"
           aria-hidden
         >
-          <img alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none size-full" src={HOST_CPU_IMG} />
+          <img loading="lazy" decoding="async" alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none size-full" src={HOST_CPU_IMG} />
         </div>
       )}
       <p
@@ -288,7 +288,7 @@ function OnChip({
         {label}
       </p>
       <div className="-translate-y-1/2 absolute left-[8.29px] size-[7.129px] top-1/2" aria-hidden>
-        <img alt="" className={`absolute block inset-0 max-w-none size-full transition-all duration-[400ms] ease-in-out ${active ? "grayscale-0 opacity-100" : "grayscale opacity-50"}`} src={ON_DOT_INNER} />
+        <img loading="lazy" decoding="async" alt="" className={`absolute block inset-0 max-w-none size-full transition-all duration-[400ms] ease-in-out ${active ? "grayscale-0 opacity-100" : "grayscale opacity-50"}`} src={ON_DOT_INNER} />
       </div>
     </div>
   );
@@ -407,7 +407,7 @@ function MobileStatCard({
         aria-hidden
       >
         <div className="absolute inset-[-0.3%_-0.14%]">
-          <img alt="" className="block max-w-none size-full" src={CARD_CORNERS_MOBILE} />
+          <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={CARD_CORNERS_MOBILE} />
         </div>
       </div>
       <div
@@ -416,7 +416,7 @@ function MobileStatCard({
         data-name="Icon"
       >
         <div className="-translate-x-1/2 -translate-y-1/2 absolute h-[26.667px] left-1/2 top-1/2 w-[28.148px]">
-          <img alt="" className="absolute block inset-0 max-w-none size-full" src={CARD_ICON} />
+          <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={CARD_ICON} />
         </div>
       </div>
       <div className="absolute left-[75px] top-[27.67px] flex items-center gap-[27.778px]" data-name="Logo and Menu">
@@ -443,12 +443,12 @@ function MobileStatCard({
       </p>
       <div className="-translate-x-1/2 absolute h-0 left-[calc(50%-9.5px)] top-[118.48px] w-[300px]" aria-hidden>
         <div className="absolute inset-[-1px_0_0_0]">
-          <img alt="" className="block max-w-none size-full" src={LINE_920} />
+          <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={LINE_920} />
         </div>
       </div>
       <div className="absolute left-[24.01px] size-[8px] top-[135.76px]" aria-hidden>
         <div className="absolute inset-[-12.5%]">
-          <img alt="" className="block max-w-none size-full" src={DOT_GREEN} />
+          <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={DOT_GREEN} />
         </div>
       </div>
     </div>
@@ -563,7 +563,7 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
               scale 0.992 with offset (-12, +120) full-res px. Derived CSS
               from the surge layer box (1450 x 832.553 at left -5, top 0):
               the crossfade reads as one chip changing state. */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src={BG_SUBCONSCIOUS}
             className="absolute max-w-none pointer-events-none"
@@ -577,7 +577,7 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
             aria-hidden={!surge}
           >
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 className="absolute h-[99.93%] left-[0.02%] max-w-none top-[0.07%] w-[99.97%]"
                 src={BG_SURGE}
@@ -624,14 +624,14 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
           {/* Brackets under the cards */}
           <div className="absolute h-[52.627px] left-[491.15px] top-[724.84px] w-[164.886px]" data-name="Vector" aria-hidden>
             <div className="absolute inset-[-5.49%_0_-0.95%_-0.3%]">
-              <img alt="" className="block max-w-none size-full" src={BRACKET_LEFT} />
+              <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={BRACKET_LEFT} />
             </div>
           </div>
           <div className="absolute flex h-[52.627px] items-center justify-center left-[784.23px] top-[724.84px] w-[164.886px]" aria-hidden>
             <div className="-scale-y-100 flex-none rotate-180">
               <div className="h-[52.627px] relative w-[164.886px]" data-name="Vector">
                 <div className="absolute inset-[-5.07%_0_-0.95%_-0.3%]">
-                  <img alt="" className="block max-w-none size-full" src={BRACKET_RIGHT} />
+                  <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={BRACKET_RIGHT} />
                 </div>
               </div>
             </div>
@@ -694,13 +694,13 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
             data-node-id="3567:4017"
             data-name="ChatGPT Image Jul 2, 2026, 12_54_47 PM 2"
           >
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src={BG_SUBCONSCIOUS}
               className="absolute max-w-none pointer-events-none"
               style={{ left: "-3.85px", top: "29.44px", width: "916.57px", height: "477.44px" }}
             />
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src={BG_SURGE}
               className="absolute max-w-none pointer-events-none transition-opacity duration-[800ms] ease-in-out will-change-[opacity]"
@@ -745,14 +745,14 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
           {/* Brackets — Figma 4087:8475 / 4087:8476 */}
           <div className="absolute left-[20px] top-[973px] h-[46px] w-[132px]" data-name="Vector" aria-hidden>
             <div className="absolute inset-[-6.28%_0_-1.09%_-0.38%]">
-              <img alt="" className="block max-w-none size-full" src={BRACKET_LEFT_MOBILE} />
+              <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={BRACKET_LEFT_MOBILE} />
             </div>
           </div>
           <div className="absolute left-[241.12px] top-[973.13px] flex h-[45.63px] w-[131.965px] items-center justify-center" aria-hidden>
             <div className="-scale-y-100 flex-none rotate-180">
               <div className="relative h-[45.63px] w-[131.965px]" data-name="Vector">
                 <div className="absolute inset-[-5.84%_0_-1.1%_-0.38%]">
-                  <img alt="" className="block max-w-none size-full" src={BRACKET_RIGHT_MOBILE} />
+                  <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={BRACKET_RIGHT_MOBILE} />
                 </div>
               </div>
             </div>

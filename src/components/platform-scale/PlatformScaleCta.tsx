@@ -22,7 +22,7 @@ export function PlatformScaleCta({ data }: { data?: any }) {
         <RepelDots />
       </span>
       <p
-        className="absolute z-10 top-[calc(50%-13.91px)] left-1/2 -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]"
+        className="absolute z-10 top-[calc(50%-13.91px)] left-1/2 -translate-x-1/2 max-w-full text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]"
         data-node-id="2379:661"
       >
         {label}

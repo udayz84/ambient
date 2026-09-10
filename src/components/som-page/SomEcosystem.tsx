@@ -9,8 +9,8 @@ const TITLE_GRADIENT_DEG = "128.886deg";
 const FALLBACK_SUBTITLE =
   "Purpose-built edge modules. Validate your software on our evaluation kits today, and drop our SOMs directly into your final product tomorrow.";
 const FALLBACK_HEADING = "The Ambient SOM Ecosystem";
-const FALLBACK_CHIP_IMG = "/som/som-chip.png";
-const FALLBACK_BG = "/som/ecosystem-bg.png";
+const FALLBACK_CHIP_IMG = "/som/som-chip.webp";
+const FALLBACK_BG = "/som/ecosystem-bg.webp";
 
 const BG_IMAGE_OVERLAY =
   "linear-gradient(180deg, rgba(0, 0, 0, 0.4) 48.412%, rgb(0, 0, 0) 88.067%), linear-gradient(180deg, rgba(0, 0, 0, 0.4) 37.886%, rgb(0, 0, 0) 88.067%), linear-gradient(180deg, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 69.056%)";
@@ -38,14 +38,14 @@ function MotionImage({ chipImg }: { chipImg: string }) {
   return (
     <>
       <div className="pointer-events-none absolute left-[148.63px] top-[-55px] h-[263.699px] w-[261.827px] overflow-hidden">
-        <img
+        <img loading="lazy" decoding="async"
           src={chipImg}
           alt=""
           aria-hidden
           className="absolute left-[-21.85%] top-[-21.61%] h-[254.77%] w-[256.59%] max-w-none mix-blend-screen"
         />
       </div>
-      <img
+      <img loading="lazy" decoding="async"
         src="/som/motion-icon.svg"
         alt=""
         aria-hidden
@@ -59,14 +59,14 @@ function VisionImage({ chipImg }: { chipImg: string }) {
   return (
     <>
       <div className="pointer-events-none absolute left-[144px] top-[-47.08px] h-[237.193px] w-[262.016px] overflow-hidden">
-        <img
+        <img loading="lazy" decoding="async"
           src={chipImg}
           alt=""
           aria-hidden
           className="absolute left-[-124.32%] top-[-26.4%] h-[264.72%] w-[239.65%] max-w-none mix-blend-screen"
         />
       </div>
-      <img
+      <img loading="lazy" decoding="async"
         src="/som/vision-icon.svg"
         alt=""
         aria-hidden
@@ -80,7 +80,7 @@ function SoundImage({ chipImg }: { chipImg: string }) {
   return (
     <>
       <div className="pointer-events-none absolute left-[156.09px] top-[-35.61px] h-[238.119px] w-[252.171px] overflow-hidden">
-        <img
+        <img loading="lazy" decoding="async"
           src={chipImg}
           alt=""
           aria-hidden
@@ -96,7 +96,7 @@ function PredictiveImage({ chipImg }: { chipImg: string }) {
   return (
     <>
       <div className="pointer-events-none absolute left-[152.9px] top-[-39.61px] h-[240px] w-[259.31px] overflow-hidden">
-        <img
+        <img loading="lazy" decoding="async"
           src={chipImg}
           alt=""
           aria-hidden
@@ -113,7 +113,7 @@ function PetImage() {
   return (
     <>
       <div className="pointer-events-none absolute right-[10px] top-[-40px] h-[240px] w-[220px] overflow-hidden flex items-center justify-center">
-        <img
+        <img loading="lazy" decoding="async"
           src="/pet.png"
           alt=""
           aria-hidden
@@ -383,14 +383,14 @@ function MobileMotionOverlay({ chipImg }: { chipImg: string }) {
   return (
     <>
       <div className="pointer-events-none absolute left-[127px] top-[-48px] size-[230px] overflow-hidden">
-        <img
+        <img loading="lazy" decoding="async"
           src={chipImg}
           alt=""
           aria-hidden
           className="absolute left-[-21.85%] top-[-21.61%] h-[254.77%] w-[256.59%] max-w-none mix-blend-screen"
         />
       </div>
-      <img
+      <img loading="lazy" decoding="async"
         src="/som/motion-icon.svg"
         alt=""
         aria-hidden
@@ -404,14 +404,14 @@ function MobileVisionOverlay({ chipImg }: { chipImg: string }) {
   return (
     <>
       <div className="pointer-events-none absolute left-[128px] top-[-42px] h-[210px] w-[230px] overflow-hidden">
-        <img
+        <img loading="lazy" decoding="async"
           src={chipImg}
           alt=""
           aria-hidden
           className="absolute left-[-124.32%] top-[-26.4%] h-[264.72%] w-[239.65%] max-w-none mix-blend-screen"
         />
       </div>
-      <img
+      <img loading="lazy" decoding="async"
         src="/som/vision-icon.svg"
         alt=""
         aria-hidden
@@ -425,7 +425,7 @@ function MobileSoundOverlay({ chipImg }: { chipImg: string }) {
   return (
     <>
       <div className="pointer-events-none absolute left-[139px] top-[-32px] h-[210px] w-[224px] overflow-hidden">
-        <img
+        <img loading="lazy" decoding="async"
           src={chipImg}
           alt=""
           aria-hidden
@@ -441,7 +441,7 @@ function MobilePredictiveOverlay({ chipImg }: { chipImg: string }) {
   return (
     <>
       <div className="pointer-events-none absolute left-[136px] top-[-35px] h-[213px] w-[230px] overflow-hidden">
-        <img
+        <img loading="lazy" decoding="async"
           src={chipImg}
           alt=""
           aria-hidden
@@ -458,7 +458,7 @@ function MobilePetOverlay() {
   return (
     <>
       <div className="pointer-events-none absolute left-[100px] top-[-10px] h-[250px] w-[230px] overflow-hidden flex items-center justify-center">
-        <img
+        <img loading="lazy" decoding="async"
           src="/pet.png"
           alt=""
           aria-hidden
@@ -639,7 +639,7 @@ export function SomEcosystem({ data }: { data?: any }) {
       <div className="relative mx-auto hidden h-[1008px] w-[1440px] min-[1024px]:block">
         {/* Abstract design */}
         <div className="absolute left-1/2 top-0 h-[320px] w-[881.616px] -translate-x-1/2">
-          <img
+          <img loading="lazy" decoding="async"
             src="/som/ecosystem-abstract.svg"
             alt=""
             aria-hidden
@@ -650,7 +650,7 @@ export function SomEcosystem({ data }: { data?: any }) {
         {/* Background image 124 */}
         <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-[100vw] min-w-[1440px] opacity-40">
           <div className="absolute inset-0 overflow-hidden">
-            <img
+            <img loading="lazy" decoding="async"
               src={bgImage}
               alt=""
               aria-hidden
@@ -712,14 +712,14 @@ export function SomEcosystem({ data }: { data?: any }) {
         data-name="3rd Fold"
       >
         {/* Top background graphic (4046:7995) */}
-        <img
+        <img loading="lazy" decoding="async"
           src={MOBILE_TOP_BG}
           alt=""
           aria-hidden
           className="pointer-events-none absolute left-1/2 top-0 h-[260px] w-[1441px] max-w-none -translate-x-1/2 object-cover"
         />
         {/* Bottom decorative glow (4046:7996) */}
-        <img
+        <img loading="lazy" decoding="async"
           src={MOBILE_BOTTOM_GLOW}
           alt=""
           aria-hidden
@@ -727,7 +727,7 @@ export function SomEcosystem({ data }: { data?: any }) {
         />
         {/* Abstract design (4046:7909) */}
         <div className="pointer-events-none absolute left-1/2 top-[36px] h-[247.559px] w-[682.036px] -translate-x-1/2">
-          <img
+          <img loading="lazy" decoding="async"
             src="/som/ecosystem-abstract.svg"
             alt=""
             aria-hidden

@@ -9,7 +9,7 @@ import { Corners } from "../shared/Corners";
 import { WhiteTag } from "./WhiteTag";
 import { GreenCta } from "./GreenCta";
 
-const FALLBACK_HERO_IMAGE = "/news-listing/hero-bg.png";
+const FALLBACK_HERO_IMAGE = "/news-listing/hero-bg.webp";
 
 type NewsListingHeroProps = {
   data?: any;
@@ -129,13 +129,13 @@ export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
             <WhiteTag label={tagText} nodeId="2653:687" />
             <div className="flex w-full flex-col gap-[12px]">
               <h2
-                className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white opacity-90 not-italic [word-break:break-word]`}
+                className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white opacity-90 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
                 data-node-id="2653:695"
               >
                 {title}
               </h2>
               <p
-                className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#d2d2d2] opacity-90 not-italic [word-break:break-word]`}
+                className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#d2d2d2] opacity-90 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
                 data-node-id="2653:696"
               >
                 {subtitle}
@@ -250,13 +250,13 @@ export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
           <div className="absolute bottom-[15px] left-[20px] right-[18px] flex flex-col gap-[15px] animate-hero-text-fade-in">
             <WhiteTag label={tagText} widthClass="w-[120px]" />
             <h2
-              className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white opacity-90 not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white opacity-90 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
               data-node-id="4153:8670"
             >
               {title}
             </h2>
             <p
-              className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#d2d2d2] opacity-90 not-italic [word-break:break-word]`}
+              className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#d2d2d2] opacity-90 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
               data-node-id="4153:8674"
             >
               {subtitle}

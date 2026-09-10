@@ -8,7 +8,7 @@ import { BOX_BORDER } from "./careers-shared";
 import { Corners } from "../shared/Corners";
 
 const PANEL_BG = "/form.png";
-const SUCCESS_IMG = "/careers/apply-success.png";
+const SUCCESS_IMG = "/careers/apply-success.webp";
 const INDIA_FLAG = "/careers/india-flag.png";
 
 const GREEN_CTA_SHADOW =
@@ -647,7 +647,7 @@ function CtaCorners() {
         <div className="rotate-180 flex-none">
           <div className="relative size-[4px]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/careers/corner-apply-tr.svg" alt="" className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-apply-tr.svg" alt="" className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>
@@ -655,7 +655,7 @@ function CtaCorners() {
         <div className="-scale-y-100 flex-none">
           <div className="relative size-[4px]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/careers/corner-apply-tl.svg" alt="" className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-apply-tl.svg" alt="" className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>
@@ -663,7 +663,7 @@ function CtaCorners() {
         <div className="-scale-x-100 flex-none">
           <div className="relative size-[4px]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/careers/corner-apply-tr.svg" alt="" className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-apply-tr.svg" alt="" className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>
@@ -671,7 +671,7 @@ function CtaCorners() {
         <div className="flex-none">
           <div className="relative size-[4px]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/careers/corner-apply-tl.svg" alt="" className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-apply-tl.svg" alt="" className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>

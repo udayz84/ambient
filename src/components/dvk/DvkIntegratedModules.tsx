@@ -135,7 +135,7 @@ function DvkIntegratedModulesDesktop({
             >
               {card.imageUrl && (
                 /* eslint-disable-next-line @next/next/no-img-element */
-                <img src={card.imageUrl} alt="" className="max-w-[92%] max-h-[92%] object-contain" />
+                <img loading="lazy" decoding="async" src={card.imageUrl} alt="" className="max-w-[92%] max-h-[92%] object-contain" />
               )}
             </div>
             <div className="relative mt-[20px] flex items-center justify-between gap-[10px] not-italic">
@@ -206,7 +206,7 @@ function DvkIntegratedModulesMobile({
           <div className="relative h-[76.43px] w-full" data-node-id="4062:12364">
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             <h2
-              className={`${gilroyMedium.className} absolute top-[4px] left-1/2 m-0 w-[332px] max-w-full -translate-x-1/2 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} absolute top-[4px] left-1/2 m-0 w-[332px] max-w-full -translate-x-1/2 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
               style={{
                 backgroundImage: TITLE_GRADIENT_MOBILE,
                 WebkitBackgroundClip: "text",
@@ -250,20 +250,20 @@ function DvkIntegratedModulesMobile({
               >
                 {card.imageUrl ? (
                   /* eslint-disable-next-line @next/next/no-img-element */
-                  <img src={card.imageUrl} alt="" className={`absolute inset-0 size-full max-w-none object-contain ${i === 1 ? 'scale-[0.85]' : ''}`} />
+                  <img loading="lazy" decoding="async" src={card.imageUrl} alt="" className={`absolute inset-0 size-full max-w-none object-contain ${i === 1 ? 'scale-[0.85]' : ''}`} />
                 ) : i === 0 ? (
                   <div className="absolute top-[1.72px] left-[58.998px] h-[196.562px] w-[213px]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <img loading="lazy" decoding="async"
                       alt=""
-                      src="/dvk/integrated-dvk-mobile.png"
+                      src="/dvk/integrated-dvk-mobile.webp"
                       className="absolute inset-0 size-full max-w-none object-bottom"
                     />
                   </div>
                 ) : (
                   <div className="absolute inset-0 overflow-hidden rounded-[3.61px]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <img loading="lazy" decoding="async"
                       alt=""
                       src="/dvk/integrated-som-mobile.png"
                       className="absolute top-[-2.75%] left-[11.26%] h-[107.65%] w-[77.47%] max-w-none"

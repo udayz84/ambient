@@ -6,7 +6,7 @@ export function TechnologyGridLine() {
     >
       <div className="absolute top-[0px] left-0 h-[4.5px] w-[8px]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           src="/technology/grid-cap.svg"
           alt=""
           className="block size-full max-w-none rotate-180"
@@ -19,7 +19,7 @@ export function TechnologyGridLine() {
           <div className="relative h-[4px] w-[8px]">
             <div className="absolute inset-[0_0_-12.5%_0]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 src="/technology/grid-cap.svg"
                 alt=""
                 className="block size-full max-w-none"

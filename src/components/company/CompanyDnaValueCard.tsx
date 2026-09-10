@@ -15,12 +15,12 @@ export function CompanyDnaValueCard({
       <div className="relative flex min-h-[202px] w-full items-start bg-[rgba(0,0,0,0.8)]">
         <div className="relative flex min-h-px min-w-px flex-1 flex-col gap-[10px] p-[32px]">
           <p
-            className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
           >
             {title}
           </p>
           <p
-            className={`${interRegular.className} w-full text-[14px] leading-[1.4] font-normal text-white opacity-65 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-full text-[14px] leading-[1.4] font-normal text-white opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:4] overflow-hidden`}
           >
             {description}
           </p>

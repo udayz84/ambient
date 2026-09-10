@@ -270,7 +270,7 @@ function ChipImage({ variant }: { variant: RowImage }) {
         className="absolute top-[84.62px] left-[138px] h-[52.376px] w-[54.666px] mix-blend-lighten"
         data-node-id="3508:659"
       >
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src="/technology/eff-chip-acube.png"
           className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
@@ -284,7 +284,7 @@ function ChipImage({ variant }: { variant: RowImage }) {
         className="absolute top-[calc(50%+60.12px)] left-[calc(50%-417.67px)] h-[54.503px] w-[46.726px] -translate-x-1/2 -translate-y-1/2"
         data-node-id="3508:686"
       >
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src="/technology/eff-chip-gpu.png"
           className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
@@ -303,7 +303,7 @@ function ChipImage({ variant }: { variant: RowImage }) {
       data-node-id={nodeId}
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src="/technology/eff-chip-mcu.png"
           className="absolute top-[7.03%] left-[-9.63%] h-[85.93%] w-[120.67%] max-w-none"
@@ -371,9 +371,9 @@ function Glow({
           <div className="pointer-events-none absolute inset-0">
             <div className="absolute inset-0 bg-black" />
             <div className="absolute inset-0 overflow-hidden">
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
-                src="/footer/footer-bg.png"
+                src="/footer/footer-bg.webp"
                 className="absolute top-[-26.76%] left-[-0.02%] h-[279.02%] w-full max-w-none"
               />
             </div>
@@ -425,7 +425,7 @@ const M_ROWS: MobileRow[] = [
     name: "A cube",
     sub: "Analog digital in memory",
     highlighted: true,
-    chip: "/technology/eff-mobile-chip-acube.png",
+    chip: "/technology/eff-mobile-chip-acube.webp",
     blend: true,
     tradeLeft: 273,
     tradeTop: 36,
@@ -447,7 +447,7 @@ const M_ROWS: MobileRow[] = [
     name: "Flash",
     sub: "Compute in memory",
     highlighted: false,
-    chip: "/technology/eff-mobile-chip-flash.png",
+    chip: "/technology/eff-mobile-chip-flash.webp",
     blend: false,
     tradeLeft: 249.7,
     tradeTop: 27.7,
@@ -469,7 +469,7 @@ const M_ROWS: MobileRow[] = [
     name: "GPU",
     sub: "Paralle SMO",
     highlighted: false,
-    chip: "/technology/eff-mobile-chip-gpu.png",
+    chip: "/technology/eff-mobile-chip-gpu.webp",
     blend: false,
     tradeLeft: 251.7,
     tradeTop: 35.7,
@@ -491,7 +491,7 @@ const M_ROWS: MobileRow[] = [
     name: "MCU",
     sub: "Analog digital in memory",
     highlighted: false,
-    chip: "/technology/eff-mobile-chip-flash.png",
+    chip: "/technology/eff-mobile-chip-flash.webp",
     blend: false,
     tradeLeft: 246.7,
     tradeTop: 27.7,
@@ -678,7 +678,7 @@ function EfficiencyTableMobile() {
             <div className="flex shrink-0 items-center gap-[4px]">
               <div className={`relative h-[52px] w-[54px] shrink-0 ${row.blend ? "mix-blend-lighten" : ""}`}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <img loading="lazy" decoding="async"
                   alt=""
                   src={row.chip}
                   className="pointer-events-none absolute inset-0 size-full object-cover"
@@ -982,10 +982,10 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
           <GradientTitle
             gradientDeg={TITLE_GRADIENT_DEG}
             nodeId="3346:940"
-            className="text-center whitespace-nowrap"
+            className="text-center"
           >
             {headingLines.map((line: string, i: number) => (
-              <p key={`title-${i}`} className="leading-[49px]">
+              <p key={`title-${i}`} className="leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
                 {line}
               </p>
             ))}
@@ -1042,7 +1042,7 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
           data-node-id="4533:2862"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src="/technology/eff-mobile-glow-top.png"
             className="pointer-events-none absolute inset-0 size-full object-cover"
@@ -1056,7 +1056,7 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
           data-node-id="4533:2863"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src="/technology/eff-mobile-glow-bottom.png"
             className="pointer-events-none absolute inset-0 size-full object-cover"

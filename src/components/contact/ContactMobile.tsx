@@ -97,7 +97,7 @@ function WhiteCta({
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-40 mix-blend-plus-lighter"
-        style={{ backgroundImage: "url(/contact/cta-texture.png)", backgroundSize: "307.2px 307.2px" }}
+        style={{ backgroundImage: "url(/contact/cta-texture.webp)", backgroundSize: "307.2px 307.2px" }}
       />
       <span className="relative text-[13px] leading-[normal] font-semibold uppercase whitespace-nowrap text-[#121212] not-italic">
         {children}
@@ -173,7 +173,7 @@ function ContactHeroMobile({ data }: { data?: any }) {
           >
             <Corners />
             <h1
-              className={`${gilroyMedium.className} w-[241.258px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+              className={`${gilroyMedium.className} w-[241.258px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}
               style={{ backgroundImage: "linear-gradient(102.228deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)" }}
               data-node-id="3229:8705"
             >
@@ -182,7 +182,7 @@ function ContactHeroMobile({ data }: { data?: any }) {
             </h1>
           </div>
           <p
-            className={`${interRegular.className} w-[308px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 not-italic`}
+            className={`${interRegular.className} w-[308px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
             data-node-id="3229:7787"
           >
             {subtitle}
@@ -198,7 +198,7 @@ function ContactHeroMobile({ data }: { data?: any }) {
         >
           <Corners />
           <p
-            className={`${gilroyMedium.className} w-full text-center text-[22px] leading-[28px] font-medium text-white not-italic`}
+            className={`${gilroyMedium.className} w-full text-center text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
             data-node-id="3229:8716"
           >
             {heading}
@@ -243,10 +243,10 @@ function LocationCard({ title, address, iconPosition }: { title: string; address
       </div>
       {/* Title + address */}
       <div className={`flex flex-col items-start ${isRight ? "order-1 w-[214px]" : "order-2 w-[242px]"}`}>
-        <p className={`${gilroyMedium.className} text-[18px] leading-[26.545px] font-medium text-white not-italic`}>
+        <p className={`${gilroyMedium.className} text-[18px] leading-[26.545px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}>
           {title}
         </p>
-        <div className={`${interRegular.className} text-[14px] leading-[18px] font-normal text-[#a4a4a4] not-italic`}>
+        <div className={`${interRegular.className} text-[14px] leading-[18px] font-normal text-[#a4a4a4] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}>
           {address}
         </div>
       </div>
@@ -369,7 +369,7 @@ function ContactMapMobile({ data }: { data?: any }) {
       >
         {mapBase ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={mapBase} alt={data?.map_base_alt || ""} className="block size-full max-w-none object-cover" />
+          <img loading="lazy" decoding="async" src={mapBase} alt={data?.map_base_alt || ""} className="block size-full max-w-none object-cover" />
         ) : null}
       </div>
 
@@ -378,7 +378,7 @@ function ContactMapMobile({ data }: { data?: any }) {
           <div className="relative flex w-[350px] items-center justify-center py-[7px]">
             <Corners />
             <h2
-              className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+              className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}
               style={{
                 backgroundImage: "linear-gradient(107.454deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
                 WebkitBackgroundClip: "text",
@@ -389,7 +389,7 @@ function ContactMapMobile({ data }: { data?: any }) {
               {headingLines[1] && (<><br />{headingLines[1]}</>)}
             </h2>
           </div>
-          <p className={`${interRegular.className} w-[316px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] opacity-65 not-italic`}>
+          <p className={`${interRegular.className} w-[316px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}>
             {subtitle}
           </p>
         </div>
@@ -461,13 +461,13 @@ function ContactScheduleMobile({ data }: { data?: any }) {
         <div className="relative flex w-full items-center justify-center py-[7px]">
           <Corners />
           <h2
-            className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+            className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}
             style={{ backgroundImage: "linear-gradient(107.454deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)" }}
           >
             {heading}
           </h2>
         </div>
-        <p className={`${interRegular.className} w-[min-content] min-w-full text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] opacity-65 not-italic`}>
+        <p className={`${interRegular.className} w-[min-content] min-w-full text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}>
           {subtitle}
         </p>
       </div>
@@ -488,14 +488,14 @@ function ContactScheduleMobile({ data }: { data?: any }) {
                 {imageFinal ? (
                   isCommercial ? (
                     /* eslint-disable-next-line @next/next/no-img-element */
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={imageFinal}
                       alt=""
                       className="absolute h-[80%] left-[5%] top-[20%] w-[125%] max-w-none"
                     />
                   ) : (
                     /* eslint-disable-next-line @next/next/no-img-element */
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={imageFinal}
                       alt=""
                       className="absolute h-[151%] left-[-15.13%] top-[-10%] w-[110.37%] max-w-none"
@@ -507,7 +507,7 @@ function ContactScheduleMobile({ data }: { data?: any }) {
               <div className="flex flex-col items-start gap-[20px] w-full relative z-10 pointer-events-none">
                 <div className="relative flex h-[26px] w-[180px] items-center justify-center border-[0.5px] border-solid border-white/20 bg-[rgba(255,255,255,0.06)] pointer-events-auto">
                   <Corners />
-                  <span className={`${dmMono.className} text-[13px] leading-[19.5px] uppercase tracking-[-0.03em] text-[#ecfae5] not-italic`}>
+                  <span className={`${dmMono.className} max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[13px] leading-[19.5px] uppercase tracking-[-0.03em] text-[#ecfae5] not-italic`}>
                     {card.tag}
                   </span>
                   <div className="absolute left-[6.48px] top-1/2 h-[12px] w-px -translate-y-1/2 bg-white opacity-30" />
@@ -515,10 +515,10 @@ function ContactScheduleMobile({ data }: { data?: any }) {
                 </div>
                 
                 <div className="flex flex-col items-start gap-[10px] w-full pointer-events-auto">
-                  <h3 className={`${gilroyMedium.className} text-[16px] leading-[18px] font-medium text-white not-italic`}>
+                  <h3 className={`${gilroyMedium.className} text-[16px] leading-[18px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}>
                     {card.title}
                   </h3>
-                  <p className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic`}>
+                  <p className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}>
                     {card.description}
                   </p>
                 </div>
@@ -533,14 +533,14 @@ function ContactScheduleMobile({ data }: { data?: any }) {
                 <span
                   aria-hidden
                   className="pointer-events-none absolute inset-0 bg-[length:307.2px_307.2px] bg-top-left opacity-40 mix-blend-plus-lighter"
-                  style={{ backgroundImage: "url(/contact/cta-texture.png)" }}
+                  style={{ backgroundImage: "url(/contact/cta-texture.webp)" }}
                 />
                 <span
                   aria-hidden
                   className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(255,255,255,0.6)]"
                 />
                 <Image src="/contact/calendar-icon.svg" alt="" width={20} height={20} className="relative z-10 size-[20px] shrink-0" aria-hidden />
-                <span className={`${gilroySemiBold.className} relative z-10 text-[12px] leading-[normal] font-semibold uppercase whitespace-nowrap text-[#151515] not-italic`}>
+                <span className={`${gilroySemiBold.className} relative z-10 max-w-full overflow-hidden text-ellipsis text-[12px] leading-[normal] font-semibold uppercase whitespace-nowrap text-[#151515] not-italic`}>
                   {card.ctaLabel}
                 </span>
               </button>
@@ -710,7 +710,7 @@ function ContactFormMobile({ data }: { data?: any }) {
     <SectionWrap aria-label="Contact form" className="!pb-[20px] relative z-10 -mb-[266px]">
       <div className="flex flex-col items-center gap-[12px] relative z-10">
         <SectionTitle deg="119.522deg">{heading}</SectionTitle>
-        <p className={`${interRegular.className} max-w-[327px] text-center text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-70 not-italic`}>
+        <p className={`${interRegular.className} max-w-[327px] text-center text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-70 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}>
           {subtitle}
         </p>
       </div>
@@ -736,7 +736,7 @@ function ContactFormMobile({ data }: { data?: any }) {
               <div className="relative size-[28px] shrink-0">
                 {iconSrc ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img
+                  <img loading="lazy" decoding="async"
                     alt=""
                     src={iconSrc}
                     className={`absolute inset-0 size-full object-contain ${selected ? "opacity-100" : "opacity-70 brightness-0 invert"}`}
@@ -745,10 +745,10 @@ function ContactFormMobile({ data }: { data?: any }) {
                 ) : null}
               </div>
               <div className="flex flex-1 flex-col gap-[4px]">
-                <p className={`${gilroyMedium.className} text-[16px] leading-[20px] font-medium text-white not-italic`}>
+                <p className={`${gilroyMedium.className} text-[16px] leading-[20px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}>
                   {track.title}
                 </p>
-                <p className={`${interRegular.className} text-[12px] leading-[18px] font-normal text-[#a4a4a4] not-italic`}>
+                <p className={`${interRegular.className} text-[12px] leading-[18px] font-normal text-[#a4a4a4] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}>
                   {track.description}
                 </p>
               </div>
@@ -768,14 +768,14 @@ function ContactFormMobile({ data }: { data?: any }) {
       {/* Form */}
       <div className="relative mt-[48px] w-full overflow-clip border-[1.5px] border-solid border-[rgba(83,216,36,0.25)] bg-transparent p-[20px] z-10">
         <Corners />
-        <p className={`${gilroyMedium.className} mb-[16px] text-[20px] leading-[26px] font-medium text-white not-italic`}>
+        <p className={`${gilroyMedium.className} mb-[16px] text-[20px] leading-[26px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}>
           {messageHeading}
         </p>
 
         <div className="flex flex-col gap-[14px]">
           {mergedFields.map((field, index) => (
             <div key={`field-${index}`} className="flex flex-col gap-[6px]">
-              <label className={`${interLight.className} text-[11px] leading-[15px] font-light text-white not-italic`}>
+              <label className={`${interLight.className} text-[11px] leading-[15px] font-light text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}>
                 {field.label}
               </label>
               <input

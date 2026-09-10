@@ -4,8 +4,8 @@ import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
-const HERO_BG = "/technology/hero-bg.png";
-const HERO_OBJECT = "/technology/hero-object.png";
+const HERO_BG = "/technology/hero-bg.webp";
+const HERO_OBJECT = "/technology/hero-object.webp";
 
 const TITLE_GRADIENT_DEG = "109.122deg";
 
@@ -43,7 +43,7 @@ function ReadWhitepaperCta({
         aria-hidden
         className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
       />
-      <span className="absolute top-[calc(50%-14px)] left-1/2 flex -translate-x-1/2 items-center text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
+      <span className="absolute top-[calc(50%-14px)] left-1/2 flex max-w-full -translate-x-1/2 items-center overflow-hidden text-ellipsis text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
         {label}
       </span>
       <GreenCtaCorners />
@@ -67,7 +67,7 @@ function WatchExplainerCta({
       data-node-id="2931:1459"
       data-name="CTA - Secondary"
     >
-      <span className="relative flex h-full items-center text-[12px] min-[310px]:text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
+      <span className="relative flex h-full max-w-full items-center overflow-hidden text-ellipsis text-[12px] min-[310px]:text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
         {label}
       </span>
       <GreenCtaCorners />
@@ -182,7 +182,7 @@ export function TechnologyPageHero({ data }: { data?: any } = {}) {
               <div className="absolute inset-0 overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={mediaUrl(data?.hero_object) || "/technology/hero-object-mobile.png"}
+                  src={mediaUrl(data?.hero_object) || "/technology/hero-object-mobile.webp"}
                   alt=""
                   className="absolute top-0 left-0 h-[119.16%] w-full max-w-none"
                 />

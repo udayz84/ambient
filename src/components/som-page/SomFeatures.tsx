@@ -78,7 +78,7 @@ function FeatureCard({
       >
         <div className="absolute inset-0 flex items-center justify-center">
           {iconSrc && (
-            <img
+            <img loading="lazy" decoding="async"
               src={iconSrc}
               alt=""
               width={iconSize}
@@ -144,7 +144,7 @@ function MobileFeatureCard({
       >
         <div className="absolute inset-0 flex items-center justify-center">
           {iconSrc && (
-            <img
+            <img loading="lazy" decoding="async"
               src={iconSrc}
               alt=""
               width={iconSize}
@@ -249,7 +249,7 @@ export function SomFeatures({ data }: { data?: any }) {
       aria-label="Stop Routing. Start Shipping."
     >
       {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden w-[1203px] flex-col items-center gap-[48px] pt-[80px] pb-[80px] min-[1024px]:flex">
+      <div className="relative hidden w-[1203px] flex-col items-center gap-[48px] pt-[20px] pb-[80px] min-[1024px]:flex">
         {/* Section title */}
         <div
           className="flex w-[650px] flex-col items-center gap-[24px]"
@@ -299,7 +299,7 @@ export function SomFeatures({ data }: { data?: any }) {
         data-name="2nd Fold"
       >
         {/* Background glow — 4054:8306 (1441×341 at y1132) */}
-        <img
+        <img loading="lazy" decoding="async"
           src={MOBILE_SECTION_GLOW}
           alt=""
           aria-hidden
@@ -332,7 +332,7 @@ export function SomFeatures({ data }: { data?: any }) {
                 data-node-id="4054:8359"
               >
                 {headingLines.map((line: string, i: number) => (
-                  <span key={i} className="block">
+                  <span key={i} className="block [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
                     {line}
                   </span>
                 ))}
@@ -341,7 +341,7 @@ export function SomFeatures({ data }: { data?: any }) {
 
             {/* Subtitle — 4054:8364 (336×84) */}
             <p
-              className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word]`}
+              className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
               data-node-id="4054:8364"
             >
               {subtitle}

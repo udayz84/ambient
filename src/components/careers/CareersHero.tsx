@@ -155,7 +155,7 @@ export function CareersHero({ data }: { data?: any }) {
               {titleLines.map((line: string, i: number) => (
                 <span
                   key={i}
-                  className={i === 0 ? "block mb-0 leading-[49px]" : "block leading-[49px]"}
+                  className={`${i === 0 ? "block mb-0 leading-[49px]" : "block leading-[49px]"} [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
                 >
                   {line}
                 </span>
@@ -169,7 +169,7 @@ export function CareersHero({ data }: { data?: any }) {
             data-name="Sub"
           >
             <p
-              className={`${interRegular.className} w-[554px] shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} w-[554px] shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
               data-node-id="2379:8694"
             >
               {subtitle}
@@ -189,7 +189,7 @@ export function CareersHero({ data }: { data?: any }) {
                 <RepelDots />
               </span>
               <span
-                className="absolute z-10 top-[calc(50%-8px)] left-[47.11px] text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic"
+                className="absolute z-10 top-[calc(50%-8px)] left-[47.11px] max-w-[calc(100%-94.22px)] text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis"
                 data-node-id="2379:8696"
               >
                 {ctaLabel}
@@ -274,7 +274,7 @@ export function CareersHero({ data }: { data?: any }) {
           >
             <div className="h-[100cqw] flex-none rotate-90">
               <p
-                className="relative h-full w-[47px] text-[12px] leading-[1.4] font-normal text-[#505f4b] [word-break:break-word] not-italic"
+                className="relative h-full w-[47px] text-[12px] leading-[1.4] font-normal text-[#505f4b] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic"
                 data-node-id="2379:8709"
               >
                 {scrollText}

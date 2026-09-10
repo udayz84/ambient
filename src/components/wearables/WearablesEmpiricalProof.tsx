@@ -32,7 +32,7 @@ function CardAbstractBg() {
       <div className="flex-none rotate-[56.66deg]">
         <div className="relative h-[221.394px] w-[507.857px]">
           <div className="absolute inset-[-18.07%_-20.35%_-7.18%_-20.8%]">
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src="/applications/wearables/abstract-design-card.svg"
               className="block size-full max-w-none"
@@ -98,11 +98,11 @@ function HealthCard({ data }: { data?: any }) {
         className={`${gilroyMedium.className} absolute left-[35px] top-[87px] flex w-[477px] flex-col gap-[12px] items-start tracking-[-0.4539px] not-italic`}
         data-name="NewsSection"
       >
-        <p className="text-[24px] leading-[28.295px] text-white whitespace-nowrap">
+        <p className="w-[477px] text-[24px] leading-[28.295px] text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
           {title}
         </p>
         <p
-          className={`${interRegular.className} min-w-full w-[min-content] text-[16px] leading-[24px] text-[rgba(255,255,255,0.6)] [word-break:break-word]`}
+          className={`${interRegular.className} min-w-full w-[min-content] text-[16px] leading-[24px] text-[rgba(255,255,255,0.6)] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         >
           {body}
         </p>
@@ -118,10 +118,10 @@ function HealthCard({ data }: { data?: any }) {
           className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
         />
         <GreenCtaCorners />
-        <span className="relative z-10 whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic">
+        <span className="relative z-10 max-w-full whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic overflow-hidden text-ellipsis">
           {ctaLabel}
         </span>
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src="/applications/wearables/cta-icon.svg"
           className="relative z-10 size-[20px] max-w-none"
@@ -265,39 +265,39 @@ function WorkloadDiagram() {
       data-name="Abstract Design"
     >
       <div className="absolute inset-[48.41%_27.95%_0_27.68%]">
-        <img alt="" src="/applications/wearables/diagram-group.svg" className="absolute inset-0 block size-full max-w-none" />
+        <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-group.svg" className="absolute inset-0 block size-full max-w-none" />
       </div>
       <div className="absolute inset-[0_0.01%_16.83%_0]">
-        <img alt="" src="/applications/wearables/diagram-group1.svg" className="absolute inset-0 block size-full max-w-none" />
+        <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-group1.svg" className="absolute inset-0 block size-full max-w-none" />
       </div>
       <div className="absolute inset-[63.08%_11.92%_33.22%_87.28%]">
-        <img alt="" src="/applications/wearables/diagram-group2.svg" className="absolute inset-0 block size-full max-w-none" />
+        <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-group2.svg" className="absolute inset-0 block size-full max-w-none" />
       </div>
       <div className="absolute left-[26.51px] top-[26.52px] h-[92.489px] w-[213.78px]">
         <div className="absolute inset-[0.02%_0.01%_0_0]">
-          <img alt="" src="/applications/wearables/diagram-vector.svg" className="absolute inset-0 block size-full max-w-none" />
+          <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-vector.svg" className="absolute inset-0 block size-full max-w-none" />
         </div>
         <div className="absolute inset-[0_14.25%_35.2%_37.77%]">
-          <img alt="" src="/applications/wearables/diagram-vector1.svg" className="absolute inset-0 block size-full max-w-none" />
+          <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-vector1.svg" className="absolute inset-0 block size-full max-w-none" />
         </div>
         <div className="absolute inset-[78.59%_83.09%_0.02%_0]">
-          <img alt="" src="/applications/wearables/diagram-vector2.svg" className="absolute inset-0 block size-full max-w-none" />
+          <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-vector2.svg" className="absolute inset-0 block size-full max-w-none" />
         </div>
         <div className="absolute inset-[0.04%_50.51%_48.39%_20.63%]">
-          <img alt="" src="/applications/wearables/diagram-vector3.svg" className="absolute inset-0 block size-full max-w-none" />
+          <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-vector3.svg" className="absolute inset-0 block size-full max-w-none" />
         </div>
         <div className="absolute inset-[22.38%_2.23%_9.18%_70.27%]">
-          <img alt="" src="/applications/wearables/diagram-vector4.svg" className="absolute inset-0 block size-full max-w-none" />
+          <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-vector4.svg" className="absolute inset-0 block size-full max-w-none" />
         </div>
         <div className="absolute inset-[78.65%_0_0_83.23%]">
-          <img alt="" src="/applications/wearables/diagram-vector5.svg" className="absolute inset-0 block size-full max-w-none" />
+          <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-vector5.svg" className="absolute inset-0 block size-full max-w-none" />
         </div>
         <div className="absolute inset-[0.02%_0.01%_0_0] mix-blend-multiply">
-          <img alt="" src="/applications/wearables/diagram-vector6.svg" className="absolute inset-0 block size-full max-w-none" />
+          <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-vector6.svg" className="absolute inset-0 block size-full max-w-none" />
         </div>
       </div>
       <div className="absolute inset-[41.01%_21.89%_21.49%_21.77%]">
-        <img alt="" src="/applications/wearables/diagram-vector7.svg" className="absolute inset-0 block size-full max-w-none" />
+        <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-vector7.svg" className="absolute inset-0 block size-full max-w-none" />
       </div>
       <div
         className="absolute inset-[46.63%_26.1%_-5.24%_44.37%] flex items-center justify-center"
@@ -305,7 +305,7 @@ function WorkloadDiagram() {
       >
         <div className="flex-none rotate-[24.05deg]" style={{ height: "hypot(-35.8988cqw,73.7653cqh)", width: "hypot(64.1012cqw,26.2347cqh)" }}>
           <div className="relative size-full">
-            <img alt="" src="/applications/wearables/diagram-group3.svg" className="absolute inset-0 block size-full max-w-none" />
+            <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-group3.svg" className="absolute inset-0 block size-full max-w-none" />
           </div>
         </div>
       </div>
@@ -381,25 +381,25 @@ const ECG_FALLBACKS = [
     badge: "CONTINUOUS AI", badgeWidth: 133, stat: "24/7",
     title: "Always-on safety detection",
     description: "Runs assault, anomaly, and motion-event detection continuously on-device, without waiting for a cloud round trip.",
-    image: "/applications/wearables/ecg-card-1.png",
+    image: "/applications/wearables/ecg-card-1.webp",
   },
   {
     badge: "POWER EFFICIENCY", badgeWidth: 150, stat: "<1mW",
     title: "Microwatt-level inference",
     description: "Keeps AI models active in the background while consuming a fraction of the power required by conventional edge processing.",
-    image: "/applications/wearables/ecg-card-2.png",
+    image: "/applications/wearables/ecg-card-2.webp",
   },
   {
     badge: "SMART TRANSMISSION", badgeWidth: 170, stat: "Only on event",
     title: "BLE/LTE wakes only when needed",
     description: "The device processes locally first, then activates communication only when a meaningful safety or health event is detected.",
-    image: "/applications/wearables/ecg-card-3.png",
+    image: "/applications/wearables/ecg-card-3.webp",
   },
   {
     badge: "LOCAL AI", badgeWidth: 133, stat: "100%",
     title: "No cloud dependency",
     description: "Sensitive health and safety signals are processed locally, improving reliability, latency, and user privacy.",
-    image: "/applications/wearables/ecg-card-4.png",
+    image: "/applications/wearables/ecg-card-4.webp",
   },
 ];
 
@@ -438,7 +438,7 @@ function EcgCard({
         aria-hidden
       >
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <img alt="" src={imageSrc} className="absolute inset-0 size-full max-w-none object-contain" />
+          <img loading="lazy" decoding="async" alt="" src={imageSrc} className="absolute inset-0 size-full max-w-none object-contain" />
         </div>
         {frame.overlay ? (
           <div className="absolute inset-0" style={{ backgroundImage: frame.overlay }} />
@@ -448,9 +448,9 @@ function EcgCard({
       {index === 2 ? (
         <div className="pointer-events-none absolute left-[43px] top-[63px] h-[70px] w-[73px]" aria-hidden>
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
-              src="/applications/wearables/ecg-card-3-accent.png"
+              src="/applications/wearables/ecg-card-3-accent.webp"
               className="absolute inset-0 size-full max-w-none object-cover"
             />
           </div>
@@ -467,14 +467,14 @@ function EcgCard({
       <div className="absolute left-[16px] top-[164px] flex size-[40px] items-center justify-center">
         <div className="-rotate-90 flex-none">
           <div className="relative size-[40px]">
-            <img alt="" src="/applications/wearables/ellipse-1.svg" className="absolute inset-0 block size-full max-w-none" />
+            <img loading="lazy" decoding="async" alt="" src="/applications/wearables/ellipse-1.svg" className="absolute inset-0 block size-full max-w-none" />
           </div>
         </div>
       </div>
       <div className="absolute left-[16px] top-[164px] flex size-[40px] items-center justify-center">
         <div className="-rotate-90 flex-none">
           <div className="relative size-[40px]">
-            <img alt="" src="/applications/wearables/ellipse-2.svg" className="absolute inset-0 block size-full max-w-none" />
+            <img loading="lazy" decoding="async" alt="" src="/applications/wearables/ellipse-2.svg" className="absolute inset-0 block size-full max-w-none" />
           </div>
         </div>
       </div>
@@ -492,8 +492,8 @@ function EcgCard({
         className={`${interRegular.className} absolute left-[18px] flex w-[258px] flex-col items-start gap-[6px] font-normal not-italic`}
         style={{ bottom: textBottom }}
       >
-        <p className="w-full text-[16px] leading-[24px] text-white whitespace-nowrap">{title}</p>
-        <p className="text-[12px] leading-[18px] text-[rgba(255,255,255,0.6)]" style={{ width: descWidth }}>
+        <p className="w-full text-[16px] leading-[24px] text-white whitespace-nowrap overflow-hidden text-ellipsis">{title}</p>
+        <p className="text-[12px] leading-[18px] text-[rgba(255,255,255,0.6)] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden" style={{ width: descWidth }}>
           {description}
         </p>
       </div>
@@ -529,7 +529,7 @@ function EcgCardMobile({
         aria-hidden
       >
         <div className="relative h-[220px] w-full scale-85">
-          <img alt="" src={imageSrc} className="absolute inset-0 size-full max-w-none object-contain" />
+          <img loading="lazy" decoding="async" alt="" src={imageSrc} className="absolute inset-0 size-full max-w-none object-contain" />
           <div className="absolute inset-0" style={{ backgroundImage: IMG_OVERLAY_1 }} />
         </div>
       </div>
@@ -539,14 +539,14 @@ function EcgCardMobile({
       <div className="absolute left-[14px] top-[124px] flex size-[32px] items-center justify-center">
         <div className="-rotate-90 flex-none">
           <div className="relative size-[32px]">
-            <img alt="" src="/applications/wearables/ellipse-1.svg" className="absolute inset-0 block size-full max-w-none" />
+            <img loading="lazy" decoding="async" alt="" src="/applications/wearables/ellipse-1.svg" className="absolute inset-0 block size-full max-w-none" />
           </div>
         </div>
       </div>
       <div className="absolute left-[14px] top-[124px] flex size-[32px] items-center justify-center">
         <div className="-rotate-90 flex-none">
           <div className="relative size-[32px]">
-            <img alt="" src="/applications/wearables/ellipse-2.svg" className="absolute inset-0 block size-full max-w-none" />
+            <img loading="lazy" decoding="async" alt="" src="/applications/wearables/ellipse-2.svg" className="absolute inset-0 block size-full max-w-none" />
           </div>
         </div>
       </div>
@@ -622,7 +622,7 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
           className="pointer-events-none absolute top-[-26.9px] left-1/2 h-[320px] w-[881.616px] -translate-x-1/2"
           data-name="Abstract Design"
         >
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src="/applications/wearables/abstract-design-top.svg"
             className="absolute inset-0 block size-full max-w-none"

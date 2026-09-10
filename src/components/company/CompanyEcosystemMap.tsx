@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { mediaUrl } from "@/lib/strapi";
 
-const FALLBACK_MAP = "/company/Map.png";
+const FALLBACK_MAP = "/company/Map.webp";
 
 type CompanyEcosystemMapProps = {
   data?: any;

@@ -13,21 +13,21 @@ import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import type { ProductsFeatureCardData } from "./products-data";
 
 const CARD_IMAGES: Record<ProductsFeatureCardData["image"], string> = {
-  brain: "/products/features-card-brain.png",
-  coin: "/products/features-card-coin.png",
-  bubble: "/products/features-card-bubble.png",
-  stack: "/products/features-card-stack-back.png",
+  brain: "/products/features-card-brain.webp",
+  coin: "/products/features-card-coin.webp",
+  bubble: "/products/features-card-bubble.webp",
+  stack: "/products/features-card-stack-back.webp",
 };
 
 /* Corner ticks — Figma 3742:934 "Cornor Elements" (388.605 x 599.994).
-   Rendered as an <img> exactly like the Figma codegen: the rasterized
+   Rendered as an <img loading="lazy" decoding="async"> exactly like the Figma codegen: the rasterized
    image scales cleanly, while an inline squished SVG drops the bottom
    strokes that sit on its viewBox boundary. */
 function CardCorners() {
   return (
     <div className="absolute inset-[0_-0.13%]" aria-hidden>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <img loading="lazy" decoding="async"
         alt=""
         src="/products/features-card-corners.svg"
         className="block size-full max-w-none"
@@ -58,7 +58,7 @@ function CardImage({ variant, isSpread }: { variant: ProductsFeatureCardData["im
         className="absolute top-[177.92px] left-[calc(50%-1.8px)] h-[292.147px] w-[383.605px] -translate-x-1/2"
         aria-hidden
       >
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src={CARD_IMAGES.brain}
           className="pointer-events-none absolute inset-0 size-full max-w-none object-contain"
@@ -74,7 +74,7 @@ function CardImage({ variant, isSpread }: { variant: ProductsFeatureCardData["im
       >
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute inset-0 overflow-hidden">
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src={CARD_IMAGES.coin}
               className="absolute top-[-12.59%] left-[-0.2%] h-[128.67%] w-[100.43%] max-w-none"
@@ -98,7 +98,7 @@ function CardImage({ variant, isSpread }: { variant: ProductsFeatureCardData["im
         aria-hidden
       >
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src={CARD_IMAGES.bubble}
             className="absolute top-[-15.68%] left-0 h-[140.53%] w-[99.89%] max-w-none"
@@ -117,16 +117,16 @@ function CardImage({ variant, isSpread }: { variant: ProductsFeatureCardData["im
         <div
           className="absolute top-0 left-1/2 h-[321.949px] w-[386.268px] -translate-x-1/2 [mask-image:url(/products/features-card-mask.svg)] [mask-position:0_0] [mask-repeat:no-repeat] [mask-size:386.268px_321.949px]"
         >
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src={CARD_IMAGES.stack}
             className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
           />
         </div>
         <div className="absolute top-0 left-1/2 h-[321.949px] w-[386.268px] -translate-x-1/2">
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
-            src="/products/features-card-stack-front.png"
+            src="/products/features-card-stack-front.webp"
             className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
           />
         </div>
@@ -140,7 +140,7 @@ function CardImage({ variant, isSpread }: { variant: ProductsFeatureCardData["im
       className={`absolute left-1/2 -translate-x-1/2 flex items-center justify-center overflow-hidden ${isSpread ? "w-full top-[130px] h-[300px]" : "w-[364px] top-[110px] h-[340px]"}`}
       aria-hidden
     >
-      <img
+      <img loading="lazy" decoding="async"
         alt=""
         src={variant}
         className={`pointer-events-none size-full ${isSpread ? "object-cover" : "object-contain"}`}

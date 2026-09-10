@@ -9,9 +9,9 @@ import {
   PRIMARY_CTA_SHADOW,
 } from "./dvk-data";
 
-const BG_IMAGE = "/dvk/dvk-coming-bg.png";
+const BG_IMAGE = "/dvk/dvk-coming-bg.webp";
 const ELLIPSE_GLOW = "/dvk/dvk-coming-ellipse.svg";
-const SANDBOX_IMAGE = "/dvk/dvk-coming-sandbox.png";
+const SANDBOX_IMAGE = "/dvk/dvk-coming-sandbox.webp";
 const ARROW_ICON = "/dvk/dvk-coming-arrow.svg";
 
 const DEFAULT_HEADING_LINE_1 = "Test on the metal,";
@@ -55,7 +55,7 @@ function DvkComingSoonMobile({
         {/* Background image */}
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute left-[calc(50%+24px)] top-0 h-full w-[639px] max-w-none -translate-x-1/2 opacity-60">
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src={BG_IMAGE}
               className="absolute inset-0 size-full object-cover object-bottom"
@@ -75,7 +75,7 @@ function DvkComingSoonMobile({
           <div className="relative flex w-full justify-center">
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             <h2
-              className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
               style={{
                 backgroundImage:
                   "linear-gradient(107.45deg, rgb(255, 255, 255) 1.35%, rgb(212, 233, 188) 55.16%, rgb(255, 255, 255) 111.67%)",
@@ -84,14 +84,14 @@ function DvkComingSoonMobile({
               }}
             >
               {headingLines.map((line: string, i: number) => (
-                <span key={i} className="block leading-[36px]">
+                <span key={i} className="block leading-[36px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
                   {line}
                 </span>
               ))}
             </h2>
           </div>
           <p
-            className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic`}
+            className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
           >
             {subtitleLines.map((line: string, i: number) => (
               <span key={i}>
@@ -108,7 +108,7 @@ function DvkComingSoonMobile({
 
           {/* Image */}
           <div className="relative size-[140px] shrink-0 overflow-hidden">
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src={SANDBOX_IMAGE}
               className="absolute left-[-3.1%] top-[-0.02%] h-[106.13%] w-[103.1%] max-w-none object-cover"
@@ -118,12 +118,12 @@ function DvkComingSoonMobile({
           {/* Text */}
           <div className="flex w-full flex-col items-center gap-[10px] text-center">
             <p
-              className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
             >
               {cardTitle}
             </p>
             <p
-              className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
             >
               {cardDescription}
             </p>
@@ -143,7 +143,7 @@ function DvkComingSoonMobile({
                 {ctaLabel}
               </span>
               <span className="size-[20px] shrink-0">
-                <img
+                <img loading="lazy" decoding="async"
                   alt=""
                   src={ARROW_ICON}
                   className="size-full max-w-none object-contain"

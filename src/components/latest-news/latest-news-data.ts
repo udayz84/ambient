@@ -46,7 +46,7 @@ export const LATEST_NEWS_ARTICLES: LatestNewsArticle[] = [
     excerpt:
       "Our first-generation AI chip brings unprecedented efficiency to edge computing, enabling advanced ML models t... ",
     date: "April 02, 2026",
-    imageSrc: "/latest-news/article-gpx10.png",
+    imageSrc: "/latest-news/article-gpx10.webp",
     imageClassName: "absolute inset-0 size-full max-w-none object-cover",
     href: "/resources",
   },

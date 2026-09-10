@@ -33,7 +33,7 @@ function MobileIntelOverlay({ index }: { index: number }) {
   if (index === 0) {
     return (
       <div className="pointer-events-none absolute right-0 top-0 h-[196px] w-[217.952px] overflow-hidden mix-blend-plus-lighter">
-        <img src="/som/motion-fall.png" alt="" aria-hidden className="size-full object-cover" />
+        <img loading="lazy" decoding="async" src="/som/motion-fall.webp" alt="" aria-hidden className="size-full object-cover" />
       </div>
     );
   }
@@ -41,8 +41,8 @@ function MobileIntelOverlay({ index }: { index: number }) {
     return (
       <>
         <div className="pointer-events-none absolute left-[110.57px] top-0 h-[212.867px] w-[225.429px] overflow-hidden mix-blend-plus-lighter">
-          <img
-            src="/som/som-chip.png"
+          <img loading="lazy" decoding="async"
+            src="/som/som-chip.webp"
             alt=""
             aria-hidden
             className="absolute left-[-16.41%] top-[-131.38%] h-[254.27%] w-[240.1%] max-w-none"
@@ -55,13 +55,13 @@ function MobileIntelOverlay({ index }: { index: number }) {
   if (index === 2) {
     return (
       <div className="pointer-events-none absolute left-[39.86px] top-[-35.19px] h-[264.613px] w-[280.142px] overflow-hidden mix-blend-screen">
-        <img src="/som/acoustic-anomalies.png" alt="" aria-hidden className="size-full object-cover" />
+        <img loading="lazy" decoding="async" src="/som/acoustic-anomalies.webp" alt="" aria-hidden className="size-full object-cover" />
       </div>
     );
   }
   return (
     <div className="pointer-events-none absolute left-[71.74px] top-[-15.86px] h-[238.274px] w-[252.257px] overflow-hidden mix-blend-screen">
-      <img src="/som/intelligence-card-4.png" alt="" aria-hidden className="size-full object-cover" />
+      <img loading="lazy" decoding="async" src="/som/intelligence-card-4.webp" alt="" aria-hidden className="size-full object-cover" />
     </div>
   );
 }
@@ -108,25 +108,25 @@ const CARDS = [
     title: "Motion & Fall Detection",
     description:
       "Leverage the 6-axis IMU for microwatt-level continuous activity recognition and instant fall detection.",
-    imageUrl: "/som/motion-fall.png",
+    imageUrl: "/som/motion-fall.webp",
   },
   {
     title: "Voice Identity & Commands",
     description:
       "Run continuous wake-word and secure voice authentication locally via the Knowles digital mic.",
-    imageUrl: "/som/voice-identity.png",
+    imageUrl: "/som/voice-identity.webp",
   },
   {
     title: "Acoustic Anomalies",
     description:
       "Deploy models for health monitoring (like asthma/cough detection) or security (assault detection) entirely on-device, preserving user privacy.",
-    imageUrl: "/som/acoustic-anomalies.png",
+    imageUrl: "/som/acoustic-anomalies.webp",
   },
   {
     title: "Safety & Geofencing",
     description:
       "Utilize the onboard BLE and processing technology to trigger instant localized alerts when boundaries are breached.",
-    imageUrl: "/som/safety-geofencing.png",
+    imageUrl: "/som/safety-geofencing.webp",
   },
 ] as const;
 
@@ -150,7 +150,7 @@ function IntelligenceCard({
     >
       {imageUrl && (
         <div className="absolute right-[16px] top-[16px] h-[160px] w-[160px] mix-blend-screen pointer-events-none z-0">
-          <img
+          <img loading="lazy" decoding="async"
             src={imageUrl}
             alt={title}
             className="absolute inset-0 size-full object-cover"
@@ -210,7 +210,7 @@ export function SomIntelligence({ data }: { data?: any }) {
     return {
       title: c.title || fb.title,
       description: c.description || fb.description,
-      imageUrl: mediaUrl(c.image) || null,
+      imageUrl: mediaUrl(c.image) || fb.imageUrl,
     };
   });
   return (

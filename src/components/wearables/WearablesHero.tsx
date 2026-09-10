@@ -17,8 +17,8 @@ const FALLBACK_SUBTITLE =
   "Hospital-grade biometric tracking and voice processing directly to the ring, wrist, or lens. No cloud latency or battery compromise.";
 const FALLBACK_WATERMARK = "Wearables";
 const FALLBACK_TITLE = "Clinical precision.\nCoin-cell power.";
-const FALLBACK_BG_1 = "/applications/wearables/hero-bg-162.png";
-const FALLBACK_BG_2 = "/applications/wearables/hero-bg-163.png";
+const FALLBACK_BG_1 = "/applications/wearables/hero-bg-162.webp";
+const FALLBACK_BG_2 = "/applications/wearables/hero-bg-163.webp";
 const FALLBACK_PRIMARY_LABEL = "Talk About Your Roadmap";
 const FALLBACK_SECONDARY_LABEL = "Talk a Hardware Engineer.";
 
@@ -35,7 +35,7 @@ function PrimaryCta({ label, href }: { label: string; href: string }) {
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
       <GreenCtaCorners />
-      <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic">
+      <span className="absolute top-1/2 left-1/2 max-w-full -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic overflow-hidden text-ellipsis">
         {label}
       </span>
       <span
@@ -54,7 +54,7 @@ function SecondaryCta({ label, href }: { label: string; href: string }) {
       data-node-id="2509:400"
       data-name="CTA - Secondary"
     >
-      <span className="whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic">
+      <span className="max-w-full whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic overflow-hidden text-ellipsis">
         {label}
       </span>
       <Corners
@@ -341,7 +341,7 @@ export function WearablesHero({
           >
             <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
             <GreenCtaCorners />
-            <span className="relative whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic">
+            <span className="relative max-w-full whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic overflow-hidden text-ellipsis">
               {primaryLabel}
             </span>
             <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
@@ -354,7 +354,7 @@ export function WearablesHero({
             data-node-id="4153:9927"
             data-name="CTA - Secondary"
           >
-            <span className="relative whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic">
+            <span className="relative max-w-full whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic overflow-hidden text-ellipsis">
               {secondaryLabel}
             </span>
             <Corners

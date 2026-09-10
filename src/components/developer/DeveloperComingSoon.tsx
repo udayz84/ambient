@@ -14,7 +14,7 @@ const DEFAULT_CARD_TITLE = "Virtual Sandbox Coming Soon";
 const DEFAULT_CARD_DESCRIPTION =
   "Complete virtual validation environment for testing your builds before hardware arrives.";
 const DEFAULT_CTA_LABEL = "Join the Virtual Sandbox Waitlist";
-const DEFAULT_IMAGE = "/developer/sandbox-image.png";
+const DEFAULT_IMAGE = "/developer/sandbox-image.webp";
 
 const CORNER_47 = "/developer/coming-corner-47.svg";
 const CORNER_48 = "/developer/coming-corner-48.svg";
@@ -44,7 +44,7 @@ function CornerTick({
   const inner = (
     <div className="absolute inset-[0_0_-12.5%_-12.5%]">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img alt="" className="block size-full max-w-none" src={src} aria-hidden />
+      <img loading="lazy" decoding="async" alt="" className="block size-full max-w-none" src={src} aria-hidden />
     </div>
   );
   return (
@@ -106,9 +106,9 @@ export function DeveloperComingSoon({ data }: { data?: any }) {
         data-name="image 250"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
-          src="/developer/coming-soon-bg.png"
+          src="/developer/coming-soon-bg.webp"
           className="absolute inset-0 size-full max-w-none object-cover"
         />
         <div
@@ -136,7 +136,7 @@ export function DeveloperComingSoon({ data }: { data?: any }) {
           <div className="relative h-[1483.266px] w-[654.24px]">
             <div className="absolute inset-[-10.11%_-22.93%]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 src="/developer/coming-ellipse-top.svg"
                 className="block size-full max-w-none"
@@ -162,7 +162,7 @@ export function DeveloperComingSoon({ data }: { data?: any }) {
           <div className="relative h-[2058.171px] w-[654.24px]">
             <div className="absolute inset-[-7.29%_-22.93%]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 src="/developer/coming-ellipse-bottom.svg"
                 className="block size-full max-w-none"
@@ -200,7 +200,7 @@ export function DeveloperComingSoon({ data }: { data?: any }) {
           >
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 src={imgSrc}
                 className="absolute left-[-3.1%] top-[-0.02%] h-[106.13%] w-[103.1%] max-w-none"
@@ -215,13 +215,13 @@ export function DeveloperComingSoon({ data }: { data?: any }) {
             data-node-id="4495:3188"
           >
             <p
-              className={`${gilroyMedium.className} w-full max-w-full text-[22px] leading-[28px] font-medium text-white [overflow-wrap:anywhere]`}
+              className={`${gilroyMedium.className} w-full max-w-full text-[22px] leading-[28px] font-medium text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
               data-node-id="4495:3189"
             >
               {cardTitle}
             </p>
             <p
-              className={`${interRegular.className} w-full max-w-[406px] text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] [overflow-wrap:anywhere]`}
+              className={`${interRegular.className} w-full max-w-[406px] text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
               data-node-id="4495:3190"
             >
               {cardDescription}
@@ -246,7 +246,7 @@ export function DeveloperComingSoon({ data }: { data?: any }) {
               </span>
               <span className="relative size-[20px] shrink-0">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <img loading="lazy" decoding="async"
                   alt=""
                   src="/developer/waitlist-icon.svg"
                   className="absolute inset-0 size-full max-w-none"

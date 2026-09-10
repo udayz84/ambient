@@ -13,7 +13,7 @@ const radialOverlayStyle = {
 
 export function TechnologyVisualBackground({ data }: { data?: any }) {
   const bgSrc =
-    mediaUrl(data?.background_visual) || "/technology/bg-image-29.png";
+    mediaUrl(data?.background_visual) || "/technology/bg-image-29.webp";
   return (
     <div
       className="pointer-events-none absolute top-[60px] right-0 left-0 z-0 h-[642px] overflow-hidden"
@@ -59,7 +59,7 @@ export function TechnologyVisualBackground({ data }: { data?: any }) {
           >
             <div className="absolute inset-[-35.24%_-15.27%]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 src="/technology/ellipse-177.svg"
                 alt=""
                 className="block size-full max-w-none"
@@ -74,7 +74,7 @@ export function TechnologyVisualBackground({ data }: { data?: any }) {
           >
             <div className="absolute inset-[-17.01%_-6.41%]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 src="/technology/group-47.svg"
                 alt=""
                 className="block size-full max-w-none"
@@ -91,7 +91,7 @@ export function TechnologyVisualBackground({ data }: { data?: any }) {
         >
           <div className="absolute inset-[-23.6%_-12.37%]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               src="/technology/ellipse-16209.svg"
               alt=""
               className="block size-full max-w-none"

@@ -1,5 +1,6 @@
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
+import { STRAPI_CACHE_TAG } from "@/lib/strapi";
 
 /**
  * src/app/api/revalidate/route.ts
@@ -76,6 +77,12 @@ export async function POST(req: Request): Promise<Response> {
 
   // Always refresh the sitemap so any add/remove is reflected.
   revalidatePath("/sitemap.xml", "layout");
+
+  // Bust every cached Strapi response (see STRAPI_CACHE_TAG in lib/strapi.ts)
+  // so published CMS edits appear immediately instead of waiting for the
+  // 60s ISR window. 'max' serves the stale copy while regenerating in the
+  // background so the webhook response never blocks a page render.
+  revalidateTag(STRAPI_CACHE_TAG, "max");
 
   // Refresh the matching list page if the webhook names a known model.
   const model = typeof body.model === "string" ? body.model : undefined;

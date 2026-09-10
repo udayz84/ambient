@@ -42,13 +42,56 @@ function toAzureAssetUrl(pathname: string): string | null {
  * Extract a clean pathname from a string that could be a relative path or full URL.
  * Strips trailing slashes for consistent comparison.
  */
-function extractPathname(raw: string): string {
+function extractPathname(raw: string | undefined): string {
+  if (!raw) return '/';
   try {
     if (raw.startsWith('http://') || raw.startsWith('https://')) {
       return new URL(raw).pathname.replace(/\/+$/, '') || '/';
     }
   } catch { /* fall through */ }
   return raw.replace(/\/+$/, '') || '/';
+}
+
+/**
+ * In-memory TTL cache for redirect lookups. Without it, every page navigation
+ * blocks on a Strapi round-trip, so Strapi slowness/downtime slows the whole
+ * site. Cached per server isolate: entries live for REDIRECT_CACHE_TTL_MS,
+ * negative results (no matching redirect) are cached too, and the map is
+ * capped to keep memory bounded. Errors are NOT cached so a transient Strapi
+ * failure retries on the next request.
+ */
+const REDIRECT_CACHE_TTL_MS = 60_000;
+const REDIRECT_CACHE_MAX_ENTRIES = 1000;
+
+/** Shape of a Strapi redirect entry used below. */
+type RedirectEntry = {
+  oldPath?: string;
+  newPath?: string;
+  redirectType?: string | number;
+  enabled?: boolean;
+};
+
+type RedirectCacheValue = { at: number; entries: RedirectEntry[] | null };
+
+const redirectCache = new Map<string, RedirectCacheValue>();
+
+function readRedirectCache(key: string): RedirectCacheValue | null {
+  const hit = redirectCache.get(key);
+  if (!hit) return null;
+  if (Date.now() - hit.at > REDIRECT_CACHE_TTL_MS) {
+    redirectCache.delete(key);
+    return null;
+  }
+  return hit;
+}
+
+function writeRedirectCache(key: string, entries: RedirectEntry[] | null): void {
+  if (redirectCache.size >= REDIRECT_CACHE_MAX_ENTRIES) {
+    // Drop the oldest half to stay bounded without a full LRU implementation.
+    const keys = [...redirectCache.keys()].slice(0, Math.ceil(redirectCache.size / 2));
+    for (const k of keys) redirectCache.delete(k);
+  }
+  redirectCache.set(key, { at: Date.now(), entries });
 }
 
 export async function middleware(request: NextRequest) {
@@ -76,22 +119,31 @@ export async function middleware(request: NextRequest) {
   }
 
   try {
-    // Look up any entry where either oldPath or newPath matches the current pathname
-    const queryUrl = new URL(`${strapiUrlStr}/api/redirects`);
-    queryUrl.searchParams.set('filters[$or][0][oldPath][$eq]', pathname);
-    queryUrl.searchParams.set('filters[$or][1][newPath][$eq]', pathname);
-    queryUrl.searchParams.set('filters[enabled][$eq]', 'true');
-    queryUrl.searchParams.set('populate', '*');
-    queryUrl.searchParams.set('t', Date.now().toString());
+    const cacheKey = extractPathname(pathname);
+    const cached = readRedirectCache(cacheKey);
+    let entries: RedirectEntry[] | null;
 
-    const res = await fetch(queryUrl.toString(), {
-      cache: 'no-store',
-    });
+    if (cached) {
+      entries = cached.entries;
+    } else {
+      // Look up any entry where either oldPath or newPath matches the current pathname
+      const queryUrl = new URL(`${strapiUrlStr}/api/redirects`);
+      queryUrl.searchParams.set('filters[$or][0][oldPath][$eq]', pathname);
+      queryUrl.searchParams.set('filters[$or][1][newPath][$eq]', pathname);
+      queryUrl.searchParams.set('filters[enabled][$eq]', 'true');
+      queryUrl.searchParams.set('populate', '*');
+      queryUrl.searchParams.set('t', Date.now().toString());
 
-    if (!res.ok) return NextResponse.next();
+      const res = await fetch(queryUrl.toString(), {
+        cache: 'no-store',
+      });
 
-    const json = await res.json();
-    const entries: any[] = json?.data;
+      if (!res.ok) return NextResponse.next();
+
+      const json = await res.json();
+      entries = json?.data ?? null;
+      writeRedirectCache(cacheKey, entries);
+    }
 
     if (!entries || entries.length === 0) return NextResponse.next();
 

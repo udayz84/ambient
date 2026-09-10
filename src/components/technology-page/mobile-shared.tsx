@@ -21,7 +21,7 @@ export function MobileCornerMark({
     <div className={`relative ${sizeClassName}`}>
       <div className={`absolute ${insetClassName}`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} alt="" className="block size-full max-w-none" />
+        <img loading="lazy" decoding="async" src={src} alt="" className="block size-full max-w-none" />
       </div>
     </div>
   );

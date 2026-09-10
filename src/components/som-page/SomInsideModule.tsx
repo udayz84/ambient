@@ -12,14 +12,14 @@ const FALLBACK_SUBTITLE =
 const FALLBACK_HEADING = "Inside the Sparsh AI Module";
 const FALLBACK_LABEL = "The Hardware Blueprint";
 
-const BOARD_IMAGE = "/som/inside-module/pcba.png";
-const COLORFUL_BOARD = "/som/sparsh-chip.png";
+const BOARD_IMAGE = "/som/inside-module/pcba.webp";
+const COLORFUL_BOARD = "/som/sparsh-chip.webp";
 const POWER_V95 = "/som/inside-module/power-v95.png";
 const POWER_V96 = "/som/inside-module/power-v96.png";
 const POWER_V97 = "/som/inside-module/power-v97.png";
 const SENSORS_V95 = "/som/inside-module/sensors-v95.png";
 const SENSORS_ELLIPSE = "/som/inside-module/sensors-ellipse.png";
-const COMMS_V95 = "/som/inside-module/comms-v95.png";
+const COMMS_V95 = "/som/inside-module/comms-v95.webp";
 const COMMS_V97 = "/som/inside-module/comms-v97.png";
 const COMMS_V99 = "/som/inside-module/comms-v99.png";
 const COMMS_V100 = "/som/inside-module/comms-v100.png";
@@ -125,34 +125,34 @@ export function SomInsideModule({ data }: { data?: any }) {
               data-node-id="2438:4976"
             >
               <div className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === -1 || hoveredIndex === 0 ? "opacity-100" : "opacity-0"}`}>
-                <img
+                <img loading="lazy" decoding="async"
                   src={COLORFUL_BOARD}
                   alt=""
                   className="absolute inset-0 size-full max-w-none object-contain"
                 />
               </div>
               <div className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === 1 || hoveredIndex === 2 || hoveredIndex === 3 ? "opacity-100" : "opacity-0"}`}>
-                <img
+                <img loading="lazy" decoding="async"
                   src={BOARD_IMAGE}
                   alt=""
                   className="absolute inset-0 size-full max-w-none object-contain"
                 />
               </div>
               <div className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === 1 ? "opacity-100" : "opacity-0"}`}>
-                <img src={POWER_V95} alt="" aria-hidden className="absolute left-[183.97px] top-[364.42px] block h-[50.16px] w-[79.58px] max-w-none" />
-                <img src={POWER_V96} alt="" aria-hidden className="absolute left-[437.24px] top-[177.31px] block h-[105.68px] w-[113.99px] max-w-none" />
-                <img src={POWER_V97} alt="" aria-hidden className="absolute left-[40.44px] top-[293.91px] block h-[66.94px] w-[62.47px] max-w-none" />
+                <img loading="lazy" decoding="async" src={POWER_V95} alt="" aria-hidden className="absolute left-[183.97px] top-[364.42px] block h-[50.16px] w-[79.58px] max-w-none" />
+                <img loading="lazy" decoding="async" src={POWER_V96} alt="" aria-hidden className="absolute left-[437.24px] top-[177.31px] block h-[105.68px] w-[113.99px] max-w-none" />
+                <img loading="lazy" decoding="async" src={POWER_V97} alt="" aria-hidden className="absolute left-[40.44px] top-[293.91px] block h-[66.94px] w-[62.47px] max-w-none" />
               </div>
               <div className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === 2 ? "opacity-100" : "opacity-0"}`}>
-                <img src={SENSORS_V95} alt="" aria-hidden className="absolute left-[164.46px] top-[277.76px] block h-[72.39px] w-[61.1px] max-w-none" />
-                <img src={SENSORS_ELLIPSE} alt="" aria-hidden className="absolute left-[18.33px] top-[39.74px] block h-[53.34px] w-[53.34px] max-w-none" />
+                <img loading="lazy" decoding="async" src={SENSORS_V95} alt="" aria-hidden className="absolute left-[164.46px] top-[277.76px] block h-[72.39px] w-[61.1px] max-w-none" />
+                <img loading="lazy" decoding="async" src={SENSORS_ELLIPSE} alt="" aria-hidden className="absolute left-[18.33px] top-[39.74px] block h-[53.34px] w-[53.34px] max-w-none" />
               </div>
               <div className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === 3 ? "opacity-100" : "opacity-0"}`}>
-                <img src={COMMS_V95} alt="" aria-hidden className="absolute left-[236.81px] top-[243.82px] block h-[178.57px] w-[119.69px] max-w-none" />
-                <img src={COMMS_V97} alt="" aria-hidden className="absolute left-[36.81px] top-[291.81px] block h-[69.88px] w-[68.74px] max-w-none" />
-                <img src={COMMS_V99} alt="" aria-hidden className="absolute left-[259.81px] top-[114.81px] block h-[67.3px] w-[61.38px] max-w-none" />
-                <img src={COMMS_V100} alt="" aria-hidden className="absolute left-[425.81px] top-[134.81px] block h-[62.3px] w-[126.38px] max-w-none" />
-                <img src={COMMS_V98} alt="" aria-hidden className="absolute left-[30.31px] top-[144.31px] block h-[52.38px] w-[52.38px] max-w-none" />
+                <img loading="lazy" decoding="async" src={COMMS_V95} alt="" aria-hidden className="absolute left-[236.81px] top-[243.82px] block h-[178.57px] w-[119.69px] max-w-none" />
+                <img loading="lazy" decoding="async" src={COMMS_V97} alt="" aria-hidden className="absolute left-[36.81px] top-[291.81px] block h-[69.88px] w-[68.74px] max-w-none" />
+                <img loading="lazy" decoding="async" src={COMMS_V99} alt="" aria-hidden className="absolute left-[259.81px] top-[114.81px] block h-[67.3px] w-[61.38px] max-w-none" />
+                <img loading="lazy" decoding="async" src={COMMS_V100} alt="" aria-hidden className="absolute left-[425.81px] top-[134.81px] block h-[62.3px] w-[126.38px] max-w-none" />
+                <img loading="lazy" decoding="async" src={COMMS_V98} alt="" aria-hidden className="absolute left-[30.31px] top-[144.31px] block h-[52.38px] w-[52.38px] max-w-none" />
               </div>
             </div>
             <p
@@ -211,7 +211,7 @@ export function SomInsideModule({ data }: { data?: any }) {
           {/* Module photo card */}
           <div className="relative flex w-full flex-col items-center gap-[16px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] pt-[10px] px-[16px] pb-[20px]">
             <div className="relative h-[200px] w-full shrink-0 overflow-hidden">
-              <img
+              <img loading="lazy" decoding="async"
                 src={BOARD_IMAGE}
                 alt="Sparsh AI Module"
                 className="absolute inset-0 size-full object-cover"

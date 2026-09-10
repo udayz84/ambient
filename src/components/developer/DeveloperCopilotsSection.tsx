@@ -53,7 +53,7 @@ export function DeveloperCopilotsSection({ data }: { data?: any }) {
           >
             <div className="absolute inset-[-0.85%_0]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 src="/developer/copilot-title-frame.svg"
                 className="block size-full max-w-none"
@@ -61,7 +61,7 @@ export function DeveloperCopilotsSection({ data }: { data?: any }) {
             </div>
           </div>
           <h2
-            className={`${gilroyMedium.className} absolute left-1/2 top-[3.03px] -translate-x-1/2 bg-clip-text text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic`}
+            className={`${gilroyMedium.className} absolute left-1/2 top-[3.03px] max-w-full -translate-x-1/2 bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
             style={{ backgroundImage: COPILOT_TITLE_GRADIENT }}
           >
             {heading}
@@ -70,7 +70,7 @@ export function DeveloperCopilotsSection({ data }: { data?: any }) {
 
         {/* Description — 2438:4675 */}
         <p
-          className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65`}
+          className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         >
           {subtitle}
         </p>
@@ -121,7 +121,7 @@ function CopilotCard({
         style={{ backgroundImage: COPILOT_ICON_BG }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src={icon}
           aria-hidden
@@ -132,12 +132,12 @@ function CopilotCard({
       {/* Content — 2438:4685 (flex col, gap 12) */}
       <div className="flex w-full flex-col gap-[12px]">
         <p
-          className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white not-italic`}
+          className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
         >
           {title}
         </p>
         <p
-          className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-white not-italic opacity-65`}
+          className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-white not-italic opacity-65 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         >
           {description}
         </p>

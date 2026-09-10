@@ -33,7 +33,7 @@ export function Contact({ data }: { data?: any }) {
               <div className="relative size-[4px]" data-node-id="2379:5085">
                 <div className="absolute inset-[0_0_-12.5%_-12.5%]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <img loading="lazy" decoding="async"
                     alt=""
                     className="block size-full max-w-none"
                     src="/hero/corner-tag-2.svg"

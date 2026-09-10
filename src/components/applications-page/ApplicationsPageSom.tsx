@@ -13,8 +13,8 @@ const SUBTITLE =
 const FALLBACK_HEADING = "Don't start from scratch.";
 const FALLBACK_STATUS_PILL = "LAUNCHING SOON";
 
-const FALLBACK_IMG_A = "/applications/som-img-a.png";
-const FALLBACK_IMG_B = "/applications/som-img-b.png";
+const FALLBACK_IMG_A = "/applications/som-img-a.webp";
+const FALLBACK_IMG_B = "/applications/som-img-b.webp";
 
 type SomCardData = {
   value: string;
@@ -51,7 +51,7 @@ const FALLBACK_CARDS: SomCardData[] = [
 function Visual1({ src }: { src: string }) {
   return (
     <div className="absolute inset-0 overflow-hidden">
-      <img
+      <img loading="lazy" decoding="async"
         alt=""
         aria-hidden
         src={src}
@@ -64,7 +64,7 @@ function Visual1({ src }: { src: string }) {
 function Visual2({ src }: { src: string }) {
   return (
     <div className="absolute inset-0 overflow-hidden blur-[4px] opacity-50">
-      <img
+      <img loading="lazy" decoding="async"
         alt=""
         aria-hidden
         src={src}
@@ -77,14 +77,14 @@ function Visual2({ src }: { src: string }) {
 function Visual3({ srcA, srcB }: { srcA: string; srcB: string }) {
   return (
     <div className="absolute inset-0 overflow-hidden blur-[4px] opacity-50">
-      <img
+      <img loading="lazy" decoding="async"
         alt=""
         aria-hidden
         src={srcB}
         className="absolute inset-0 size-full max-w-none object-cover object-left"
       />
       <div className="absolute inset-0 overflow-hidden">
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           aria-hidden
           src={srcA}
@@ -99,18 +99,18 @@ function SomLabel({ value, label, sublabel }: { value: string; label: string; su
   return (
     <div className="flex flex-col items-center justify-center gap-[12px]">
       <p
-        className={`${gilroyMedium.className} text-[36px] min-[1024px]:text-[38px] leading-[45.386px] min-[1024px]:leading-[47px] font-medium whitespace-nowrap text-white not-italic`}
+        className={`${gilroyMedium.className} max-w-full text-[36px] min-[1024px]:text-[38px] leading-[45.386px] min-[1024px]:leading-[47px] font-medium whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis`}
       >
         {value}
       </p>
       <p
-        className={`${interRegular.className} text-[18px] leading-[26.073px] font-normal uppercase whitespace-nowrap text-[#f0f0f0] not-italic`}
+        className={`${interRegular.className} max-w-full text-[18px] leading-[26.073px] font-normal uppercase whitespace-nowrap text-[#f0f0f0] not-italic overflow-hidden text-ellipsis`}
       >
         {label}
       </p>
       <div className="flex items-center justify-center">
         <div className="rotate-180">
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             aria-hidden
             src="/applications/som-line.svg"
@@ -119,7 +119,7 @@ function SomLabel({ value, label, sublabel }: { value: string; label: string; su
         </div>
       </div>
       <p
-        className={`${interRegular.className} text-[16px] leading-[23.176px] min-[1024px]:leading-[24px] font-normal tracking-[-0.3018px] min-[1024px]:tracking-[-0.3125px] whitespace-nowrap text-[rgba(255,255,255,0.6)] not-italic`}
+        className={`${interRegular.className} max-w-full text-[16px] leading-[23.176px] min-[1024px]:leading-[24px] font-normal tracking-[-0.3018px] min-[1024px]:tracking-[-0.3125px] whitespace-nowrap text-[rgba(255,255,255,0.6)] not-italic overflow-hidden text-ellipsis`}
       >
         {sublabel}
       </p>
@@ -138,7 +138,7 @@ function SomCard({ visual, isUpcoming, statusPill, value, label, sublabel }: { v
           {isUpcoming && (
             <div className="absolute z-10 flex items-center justify-center border-[0.5px] border-[#cca839] bg-[rgba(0,0,0,0.8)] px-[16px] py-[6px]">
               <span className="text-[#cca839] opacity-70">|</span>
-              <span className="mx-[12px] font-mono text-[10px] uppercase tracking-[1px] text-[#cca839]">
+              <span className="mx-[12px] max-w-full overflow-hidden text-ellipsis font-mono text-[10px] uppercase tracking-[1px] text-[#cca839] whitespace-nowrap">
                 {statusPill}
               </span>
               <span className="text-[#cca839] opacity-70">|</span>
@@ -163,11 +163,11 @@ function ViewSomsCta({ label, href }: { label: string; href: string }) {
       />
       <span className="relative flex items-center gap-[9px] min-[1024px]:gap-[10px]">
         <p
-          className={`${gilroyMedium.className} text-[12px] min-[1024px]:text-[16px] leading-[16px] min-[1024px]:leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic`}
+          className={`${gilroyMedium.className} max-w-full text-[12px] min-[1024px]:text-[16px] leading-[16px] min-[1024px]:leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis`}
         >
           {label}
         </p>
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           aria-hidden
           src="/applications/som-arrow.svg"
@@ -190,7 +190,7 @@ function DiscussCta({ label, href }: { label: string; href: string }) {
       className="relative flex h-[48px] flex-1 min-[1024px]:h-auto min-[1024px]:shrink-0 items-center justify-center bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]"
     >
       <p
-        className={`${gilroyMedium.className} text-[12px] min-[1024px]:text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic`}
+        className={`${gilroyMedium.className} max-w-full text-[12px] min-[1024px]:text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis`}
       >
         {label}
       </p>
@@ -253,7 +253,7 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
         <div className="flex w-full flex-col items-center gap-[24px]">
           <div className="relative inline-block px-[14px]">
             <h2
-              className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic`}
+              className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
               style={{
                 backgroundImage: TITLE_GRADIENT,
                 WebkitBackgroundClip: "text",
@@ -266,7 +266,7 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
             <Corners />
           </div>
           <p
-            className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
             data-node-id="2438:4157"
           >
             {subtitle}
@@ -315,14 +315,16 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
               }}
               data-node-id="4062:11668"
             >
-              {heading}
+              <span className="w-full [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
+                {heading}
+              </span>
             </h2>
 
             <div className="absolute left-[353px] top-[4px] flex h-[4px] w-[2.346px] items-center justify-center">
               <div className="flex-none rotate-180">
                 <div className="relative h-[4px] w-[2.346px]">
                   <div className="absolute inset-[0_0_-12.5%_-21.31%]">
-                    <img alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
+                    <img loading="lazy" decoding="async" alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
                   </div>
                 </div>
               </div>
@@ -331,21 +333,21 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
               <div className="-scale-y-100 flex-none rotate-180">
                 <div className="relative h-[4px] w-[2.346px]">
                   <div className="absolute inset-[0_0_-12.5%_-21.31%]">
-                    <img alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
+                    <img loading="lazy" decoding="async" alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
                   </div>
                 </div>
               </div>
             </div>
             <div className="absolute left-[-3px] top-[75px] h-[4px] w-[2.346px]">
               <div className="absolute inset-[0_0_-12.5%_-21.31%]">
-                <img alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
+                <img loading="lazy" decoding="async" alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
               </div>
             </div>
             <div className="absolute left-[-3px] top-[4px] flex h-[4px] w-[2.346px] items-center justify-center">
               <div className="-scale-y-100 flex-none">
                 <div className="relative h-[4px] w-[2.346px]">
                   <div className="absolute inset-[0_0_-12.5%_-21.31%]">
-                    <img alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
+                    <img loading="lazy" decoding="async" alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
                   </div>
                 </div>
               </div>
@@ -354,7 +356,7 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
 
           {/* Subtitle */}
           <p
-            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
           >
             {subtitle}
           </p>

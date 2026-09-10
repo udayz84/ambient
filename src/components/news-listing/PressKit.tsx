@@ -28,7 +28,7 @@ function PressTitle({ heading }: { heading: string }) {
       data-node-id="2500:1663"
     >
       <h2
-        className={`${gilroyMedium.className} relative w-full bg-clip-text bg-[linear-gradient(107.4537261117953deg,rgb(255,255,255)_1.3527%,rgb(212,233,188)_55.161%,rgb(255,255,255)_111.67%)] min-[1024px]:bg-[linear-gradient(123.792deg,rgb(255,255,255)_1.3527%,rgb(212,233,188)_55.161%,rgb(255,255,255)_111.67%)] text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word] mt-[7px] min-[1024px]:mt-0 min-[1024px]:absolute min-[1024px]:left-1/2 min-[1024px]:top-[7px] min-[1024px]:-translate-x-1/2 min-[1024px]:text-[46px] min-[1024px]:leading-[49px] min-[1024px]:whitespace-nowrap`}
+        className={`${gilroyMedium.className} relative w-full bg-clip-text bg-[linear-gradient(107.4537261117953deg,rgb(255,255,255)_1.3527%,rgb(212,233,188)_55.161%,rgb(255,255,255)_111.67%)] min-[1024px]:bg-[linear-gradient(123.792deg,rgb(255,255,255)_1.3527%,rgb(212,233,188)_55.161%,rgb(255,255,255)_111.67%)] text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden min-[1024px]:[-webkit-line-clamp:1] mt-[7px] min-[1024px]:mt-0 min-[1024px]:absolute min-[1024px]:left-1/2 min-[1024px]:top-[7px] min-[1024px]:-translate-x-1/2 min-[1024px]:text-[46px] min-[1024px]:leading-[49px]`}
         style={{
           WebkitBackgroundClip: "text",
           backgroundClip: "text",
@@ -45,7 +45,7 @@ function PressTitle({ heading }: { heading: string }) {
       >
         <div className="absolute inset-[-0.81%_0]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src={PRESS_TITLE_FRAME}
             alt=""
             className="block size-full max-w-none"
@@ -75,7 +75,7 @@ function PressMenu({ label }: { label: string }) {
       />
 
       <p
-        className={`${dmMono.className} text-[12px] min-[1024px]:text-[13px] leading-[19.5px] min-[1024px]:leading-[13px] font-normal tracking-[-0.36px] min-[1024px]:tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic min-[1024px]:pt-px`}
+        className={`${dmMono.className} max-w-full text-[12px] min-[1024px]:text-[13px] leading-[19.5px] min-[1024px]:leading-[13px] font-normal tracking-[-0.36px] min-[1024px]:tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic overflow-hidden text-ellipsis min-[1024px]:pt-px`}
       >
         {label}
       </p>
@@ -99,7 +99,7 @@ function PressCta({ label, href }: { label: string; href: string }) {
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[length:307.2px_307.2px] bg-top-left opacity-40 mix-blend-plus-lighter"
-        style={{ backgroundImage: "url(/resources/news-cta-texture.png)" }}
+        style={{ backgroundImage: "url(/resources/news-cta-texture.webp)" }}
       />
       <span className="relative z-10 text-[14px] min-[1024px]:text-[16px] leading-[28px] font-medium whitespace-nowrap text-[#151515] uppercase not-italic [word-break:break-word]">
         {label}
@@ -140,7 +140,7 @@ export function PressKit({ data }: PressKitProps = {}) {
           aria-hidden
         >
           <Image
-            src="/news-listing/press-kit-graphic.png"
+            src="/news-listing/press-kit-graphic.webp"
             alt=""
             fill
             className="object-contain object-right"
@@ -203,7 +203,7 @@ export function PressKit({ data }: PressKitProps = {}) {
             <div className="-rotate-90 -scale-y-100">
               <div className="relative h-[888px] w-[500px]">
                 <Image
-                  src="/news-listing/press-kit-graphic.png"
+                  src="/news-listing/press-kit-graphic.webp"
                   alt=""
                   fill
                   className="object-cover"

@@ -39,7 +39,7 @@ function CoverageMap({ onRegionSelect }: { onRegionSelect: (region: string) => v
         {/* engineering-grid world map texture (same asset family as Contact) */}
         <div className="pointer-events-none absolute inset-0 opacity-25" aria-hidden>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src="/contact/map-base.svg"
             alt=""
             className="absolute inset-0 block size-full max-w-none object-cover object-center"
@@ -86,28 +86,28 @@ function PartnerCard({ partner }: { partner: Partner }) {
       <div className="flex w-full items-start gap-[16px]">
         <span className="relative flex size-[48px] shrink-0 items-center justify-center overflow-hidden" aria-hidden>
           {partner.icon ? (
-            <img src={partner.icon} alt="" className="h-full w-full object-cover invert opacity-90" />
+            <img loading="lazy" decoding="async" src={partner.icon} alt="" className="h-full w-full object-cover invert opacity-90" />
           ) : (
             <>
               <span className="absolute inset-0 bg-gradient-to-b from-[#53d824] to-[#2c7213]" />
-              <span className={`${gilroyMedium.className} relative text-[16px] leading-[20px] font-medium tracking-[0.5px] text-[#091804]`}>
+              <span className={`${gilroyMedium.className} relative max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[16px] leading-[20px] font-medium tracking-[0.5px] text-[#091804]`}>
                 {partner.monogram}
               </span>
             </>
           )}
         </span>
         <div className="flex min-w-0 flex-1 flex-col gap-[6px]">
-          <h3 className={`${gilroyMedium.className} w-full text-[20px] leading-[26px] font-medium text-white [word-break:break-word] not-italic`}>
+          <h3 className={`${gilroyMedium.className} w-full text-[20px] leading-[26px] font-medium text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}>
             {partner.name}
           </h3>
-          <p className={`${interRegular.className} w-full text-[13px] leading-[19.5px] font-normal text-[#a4a4a4] [word-break:break-word] not-italic`}>
+          <p className={`${interRegular.className} w-full text-[13px] leading-[19.5px] font-normal text-[#a4a4a4] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}>
             {partner.oneLiner}
           </p>
         </div>
       </div>
 
       <div className="mt-[18px] flex flex-wrap items-center gap-[6px]">
-        <span className={`${dmMono.className} inline-flex h-[20px] items-center border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] px-[8px] text-[10px] leading-[13px] tracking-[0.8px] whitespace-nowrap text-[#f0f0f0] opacity-80 uppercase not-italic`}>
+        <span className={`${dmMono.className} inline-flex h-[20px] max-w-full items-center border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] px-[8px] text-[10px] leading-[13px] tracking-[0.8px] whitespace-nowrap text-[#f0f0f0] opacity-80 uppercase not-italic overflow-hidden text-ellipsis`}>
           {partner.region}
         </span>
         {partner.badges.map((badge) => (

@@ -68,7 +68,7 @@ export function ResourcesNewsCta({ top, data }: ResourcesNewsCtaProps) {
           <span
             aria-hidden
             className="pointer-events-none absolute inset-0 bg-[length:307.2px_307.2px] bg-top-left opacity-40 mix-blend-plus-lighter"
-            style={{ backgroundImage: "url(/resources/news-cta-texture.png)" }}
+            style={{ backgroundImage: "url(/resources/news-cta-texture.webp)" }}
           />
           <span
             className="relative z-10 text-[16px] leading-[28px] font-medium whitespace-nowrap text-[#121212] uppercase not-italic [word-break:break-word]"

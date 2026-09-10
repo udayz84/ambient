@@ -42,7 +42,7 @@ export function MeasuredProofCtas({ data }: { data?: any }) {
           <RepelDots />
         </span>
         <p
-          className="absolute z-10 top-[calc(50%-12px)] left-1/2 -translate-x-1/2 text-[14px] leading-[24px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]"
+          className="absolute z-10 top-[calc(50%-12px)] left-1/2 -translate-x-1/2 max-w-full text-[14px] leading-[24px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]"
           data-node-id="2379:1487"
         >
           {primaryLabel}
@@ -62,7 +62,7 @@ export function MeasuredProofCtas({ data }: { data?: any }) {
         data-name="Menu"
       >
         <p
-          className="absolute top-[calc(50%-12px)] left-1/2 -translate-x-1/2 text-[14px] leading-[24px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]"
+          className="absolute top-[calc(50%-12px)] left-1/2 -translate-x-1/2 max-w-full text-[14px] leading-[24px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]"
           data-node-id="2379:1498"
         >
           {secondaryLabel}

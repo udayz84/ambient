@@ -384,7 +384,7 @@ function TrackCard({
       <div className="relative size-[32px] shrink-0" data-name="Frame">
         {iconSrc ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             className={`absolute inset-0 block size-full max-w-none transition-[filter,opacity] duration-200 ${
               selected ? "opacity-100" : "opacity-70 brightness-0 invert"
@@ -447,7 +447,7 @@ function ConnectorLine({ top, nodeId }: { top: number; nodeId: string }) {
     >
       <div className="absolute inset-[-1px_0_0_0]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           className="block size-full max-w-none"
           src="/contact/line-connector.svg"
@@ -494,7 +494,7 @@ function FormField({
     >
       <label
         htmlFor={fieldId}
-        className={`${interLight.className} w-full shrink-0 text-[10px] leading-[15px] font-light text-white not-italic`}
+        className={`${interLight.className} w-full shrink-0 text-[10px] leading-[15px] font-light text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
       >
         {label}
       </label>

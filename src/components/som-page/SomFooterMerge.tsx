@@ -9,7 +9,7 @@ const CORNER_RIGHT = "/hero/corner-tag-2.svg";
 const PRIMARY_CTA_SHADOW = "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
 const PRIMARY_CTA_INSET = "shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]";
 
-const FALLBACK_IMAGE = "/som/footer-merge.png";
+const FALLBACK_IMAGE = "/som/footer-merge.webp";
 const FALLBACK_HEADING = "Join the SOM Waitlist";
 const FALLBACK_SUBTITLE =
   "Be the first to access our upcoming Vision, Sound, and Industrial modules.";
@@ -27,7 +27,7 @@ export function SomFooterMerge({ data }: { data?: any }) {
     >
       <div className="relative flex h-[211px] max-[1023px]:h-auto w-full max-w-[1203px] items-center justify-center">
         {/* Desktop Background */}
-        <img
+        <img loading="lazy" decoding="async"
           src={image}
           alt=""
           className="pointer-events-none absolute inset-0 size-full brightness-[1.15] opacity-80 max-[1023px]:hidden"

@@ -8,7 +8,7 @@ function RotatedLine({ src, height }: { src: string; height: number }) {
         <div className="relative h-0" style={{ width: `${height}px` }}>
           <div className="absolute inset-[-1px_0_0_0]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt="" src={src} className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" alt="" src={src} className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>

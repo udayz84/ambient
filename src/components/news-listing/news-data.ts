@@ -5,9 +5,10 @@ export type NewsArticle = {
   titleFontSize?: number;
   excerpt: string;
   imageOverlaySrc?: string;
+  href?: string;
 };
 
-export const NEWS_ARTICLE_IMAGE_BASE = "/resources/article-image-base.png";
+export const NEWS_ARTICLE_IMAGE_BASE = "/resources/article-image-base.webp";
 
 export const NEWS_ARTICLES: NewsArticle[] = [
   {
@@ -17,7 +18,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     titleFontSize: 22,
     excerpt:
       "Our CEO discusses Ambient Scientific’s ultra low power edge AI, DigAn archi.... ",
-    imageOverlaySrc: "/resources/article-1-overlay.png",
+    imageOverlaySrc: "/resources/article-1-overlay.webp",
   },
   {
     nodeId: "2500:1906",
@@ -35,7 +36,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     titleFontSize: 21,
     excerpt:
       "This article compares PyTorch and TensorFlow from a real-world de... ",
-    imageOverlaySrc: "/resources/article-3-overlay.png",
+    imageOverlaySrc: "/resources/article-3-overlay.webp",
   },
   {
     nodeId: "2500:1945",
@@ -44,7 +45,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     titleFontSize: 21,
     excerpt:
       "In this session, Ambient Scientific explores a new approach to edge AI by a... ",
-    imageOverlaySrc: "/resources/article-4-overlay.png",
+    imageOverlaySrc: "/resources/article-4-overlay.webp",
   },
   {
     nodeId: "2500:1964",
@@ -53,7 +54,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     titleFontSize: 22,
     excerpt:
       "Ambient Scientific, in collaboration with Dimension NXG, introduces MA... ",
-    imageOverlaySrc: "/resources/article-5-overlay.png",
+    imageOverlaySrc: "/resources/article-5-overlay.webp",
   },
   {
     nodeId: "2500:1983",
@@ -62,6 +63,6 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     titleFontSize: 22,
     excerpt:
       "The recording of our webinar Boot Blink and Believe Edge AI from Prototy... ",
-    imageOverlaySrc: "/resources/article-6-overlay.png",
+    imageOverlaySrc: "/resources/article-6-overlay.webp",
   },
 ];

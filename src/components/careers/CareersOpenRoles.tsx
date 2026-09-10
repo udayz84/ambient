@@ -126,7 +126,7 @@ export function CareersOpenRoles({
         data-name="image 107"
       >
         <Image
-          src="/careers/image 107.png"
+          src="/careers/image 107.webp"
           alt=""
           fill
           className="object-cover opacity-25"
@@ -211,7 +211,7 @@ export function CareersOpenRoles({
             data-node-id="2379:8932"
           >
             <p
-              className={`${gilroyMedium.className} absolute top-[26.03px] left-[292.35px] -translate-x-1/2 bg-clip-text text-center text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} absolute top-[26.03px] left-[292.35px] max-w-[584px] -translate-x-1/2 bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
               style={{
                 backgroundImage: CTA_TITLE_GRADIENT,
                 WebkitBackgroundClip: "text",
@@ -227,7 +227,7 @@ export function CareersOpenRoles({
             >
               <div className="absolute inset-[-0.47%_0]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <img loading="lazy" decoding="async"
                   src="/careers/title-frame-roles-cta.svg"
                   alt=""
                   className="block size-full max-w-none"
@@ -242,7 +242,7 @@ export function CareersOpenRoles({
             data-node-id="2379:8939"
           >
             <p
-              className={`${interRegular.className} absolute top-0 left-0 h-[48px] w-[290.931px] text-right text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} absolute top-0 left-0 h-[48px] w-[290.931px] text-right text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
               data-node-id="2379:8940"
             >
               {generalAppSubtitle}
@@ -301,7 +301,7 @@ function OpenRolesTitle({ title }: { title: string }) {
       data-node-id="2379:8903"
     >
       <p
-        className={`${gilroyMedium.className} absolute top-0 left-[20px] bg-clip-text text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic [word-break:break-word]`}
+        className={`${gilroyMedium.className} absolute top-0 left-[20px] max-w-[249px] bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
         style={{
           backgroundImage: OPEN_ROLES_GRADIENT,
           WebkitBackgroundClip: "text",
@@ -338,7 +338,7 @@ function TitleCorner({
         <div className="relative size-[4px]">
           <div className="absolute inset-[0_0_-12.5%_-12.5%]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt="" className="block size-full max-w-none" src={src} aria-hidden />
+            <img loading="lazy" decoding="async" alt="" className="block size-full max-w-none" src={src} aria-hidden />
           </div>
         </div>
       </div>
@@ -407,7 +407,7 @@ function FilterDropdown({
         data-node-id={innerNodeId}
       >
         <span
-          className={`${interRegular.className} min-w-px flex-[1_0_0] text-[14px] leading-[1.4] font-normal text-white not-italic [word-break:break-word]`}
+          className={`${interRegular.className} min-w-px flex-[1_0_0] text-[14px] leading-[1.4] font-normal text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
         >
           {triggerLabel}
         </span>
@@ -479,12 +479,12 @@ function JobRow({
     >
       <CategoryBadge label={category} />
       <p
-        className={`${gilroyMedium.className} absolute top-[75px] left-[19px] text-[22px] leading-[28px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
+        className={`${gilroyMedium.className} absolute top-[75px] left-[19px] text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
       >
         {title}
       </p>
       <p
-        className={`${interRegular.className} absolute top-[105px] left-[19px] w-[350px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+        className={`${interRegular.className} absolute top-[105px] left-[19px] w-[350px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
       >
         {location}
       </p>
@@ -501,7 +501,7 @@ function CategoryBadge({ label }: { label: string }) {
     >
       <Corners leftSrc={cornerTitleTl} rightSrc={cornerTitleTr} />
       <p
-        className={`absolute top-[calc(50%-4.5px)] left-1/2 -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word]`}
+        className={`absolute top-[calc(50%-4.5px)] left-1/2 max-w-full -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic overflow-hidden text-ellipsis [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word]`}
       >
         {label}
       </p>
@@ -530,8 +530,8 @@ function ApplyButton({ label, onClick }: { label: string; onClick?: () => void }
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] transition-opacity duration-200 group-hover:opacity-100"
       />
-      <span className="relative z-10 flex items-center gap-[20px]">
-        {label}
+      <span className="relative z-10 flex min-w-0 max-w-full items-center gap-[20px] overflow-hidden">
+        <span className="overflow-hidden text-ellipsis whitespace-nowrap">{label}</span>
         <Image
           src="/careers/chevron-apply.svg"
           alt=""

@@ -39,7 +39,7 @@ export const DEVELOPER_PLATFORM_CARDS: DeveloperPlatformCardConfig[] = [
     lineWidth: 151.83203125,
     patternGradient:
       "linear-gradient(17.4266deg, rgba(255, 255, 255, 0) 13.463%, rgb(255, 255, 255) 71.165%)",
-    imageSrc: "/developer-platform/chipset-1.png",
+    imageSrc: "/developer-platform/chipset-1.webp",
     imageVariant: "chipset",
   },
   {
@@ -79,7 +79,7 @@ export const DEVELOPER_PLATFORM_CARDS: DeveloperPlatformCardConfig[] = [
     lineWidth: 151.83203125,
     patternGradient:
       "linear-gradient(32.9743deg, rgba(255, 255, 255, 0) 13.463%, rgb(255, 255, 255) 71.165%)",
-    imageSrc: "/developer-platform/card-image-devkits.png",
+    imageSrc: "/developer-platform/card-image-devkits.webp",
     imageVariant: "devkit",
   },
   {
@@ -102,7 +102,7 @@ export const DEVELOPER_PLATFORM_CARDS: DeveloperPlatformCardConfig[] = [
       "linear-gradient(8.69891deg, rgba(255, 255, 255, 0) 13.463%, rgb(255, 255, 255) 71.165%)",
     overlayGradient:
       "linear-gradient(154.062deg, rgba(188, 229, 174, 0) 30.174%, rgb(188, 229, 174) 76.687%)",
-    imageSrc: "/developer-platform/card-image-modules-figma.png",
+    imageSrc: "/developer-platform/card-image-modules-figma.webp",
     imageVariant: "modules",
   },
 ];

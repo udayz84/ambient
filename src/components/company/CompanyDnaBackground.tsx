@@ -15,7 +15,7 @@ export function CompanyDnaBackground({ bgImage }: { bgImage?: string | null }) {
       >
         <TechnologyVisualFadeIn className="absolute inset-0" style={{ animationDelay: '0.3s' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src={bgImage || "/company/image%20137.png"}
             className="absolute inset-0 size-full max-w-none object-cover object-center"

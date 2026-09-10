@@ -9,7 +9,7 @@ export function DeveloperPlatformBackground({ data }: { data?: any }) {
       aria-hidden
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <img loading="lazy" decoding="async"
         alt=""
         src={bgSrc}
         className="absolute inset-0 size-full object-cover"

@@ -5,8 +5,11 @@
  * to fetch single types and resolve media URLs.
  *
  * Behavior:
- *   - GET via fetch with ISR (revalidate every 60s in production; on-demand
- *     revalidation via Strapi webhook is a future enhancement).
+ *   - GET via fetch with ISR: responses are cached (tagged "strapi") and
+ *     revalidated at most every 60s. Pages therefore prerender/statically
+ *     cache instead of blocking on Strapi for every request. CMS edits show
+ *     up within 60s, or immediately via the /api/revalidate webhook route
+ *     (which calls revalidateTag("strapi")).
  *   - Reads the Strapi URL from NEXT_PUBLIC_STRAPI_URL (defaults to the local
  *     dev port 1338).
  *   - Reads an optional bearer token from STRAPI_TOKEN (server-side only).
@@ -16,6 +19,12 @@
  *     (the populate-deep plugin is NOT installed).
  * ----------------------------------------------------------------------------
  */
+
+/** Shared cache tag so the revalidate webhook can bust all Strapi data. */
+export const STRAPI_CACHE_TAG = "strapi";
+
+/** Seconds a Strapi response may be served stale before background refresh. */
+const STRAPI_REVALIDATE_SECONDS = 60;
 
 const STRAPI_URL = (
   process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1338"
@@ -33,7 +42,10 @@ export async function fetchStrapi<T = unknown>(path: string): Promise<T> {
 
   const res = await fetch(url, {
     headers,
-    cache: "no-store",
+    next: {
+      revalidate: STRAPI_REVALIDATE_SECONDS,
+      tags: [STRAPI_CACHE_TAG],
+    },
   });
 
   if (!res.ok) {

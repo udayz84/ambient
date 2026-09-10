@@ -21,10 +21,12 @@ export function ResourcesArticleCard({
   href = "#",
 }: ResourcesArticleCardProps) {
   return (
-    <article
-      className="relative flex h-full w-[388px] shrink-0 flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black px-[12px] pt-[12px] pb-[24px]"
+    <a
+      href={href}
+      className="group relative block h-full w-[388px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black px-[12px] pt-[12px] pb-[24px] hover:border-[#53d824]/50 transition-colors cursor-pointer"
       data-node-id={nodeId}
     >
+      <div className="flex flex-col items-center gap-[20px]">
       <div
         className="relative h-[259.161px] w-[356px] shrink-0 overflow-clip"
         data-name="Image"
@@ -79,7 +81,7 @@ export function ResourcesArticleCard({
               {excerpt}
             </span>
             {" "}
-            <a href={href} className="text-[#53d824] transition-opacity hover:opacity-80">read more</a>
+            <span className="text-[#53d824] transition-opacity group-hover:opacity-80">read more</span>
           </p>
         </div>
       </div>
@@ -88,7 +90,8 @@ export function ResourcesArticleCard({
       <ArticleCorner className="absolute top-0 right-0" src={frameCornerRight} rotate />
       <ArticleCorner className="absolute right-0 bottom-0" src={frameCornerRight} rotate flipY />
       <ArticleCorner className="absolute bottom-0 left-0" src={frameCornerLeft} />
-    </article>
+      </div>
+    </a>
   );
 }
 

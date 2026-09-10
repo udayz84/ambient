@@ -9,7 +9,7 @@ export function PlatformScaleNav() {
         aria-label="Previous GPX product"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src="/platform-scale/nav-left.svg"
           className="absolute inset-0 block size-full max-w-none"
@@ -24,7 +24,7 @@ export function PlatformScaleNav() {
         aria-label="Next GPX product"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src="/platform-scale/nav-right.svg"
           className="absolute inset-0 block size-full max-w-none"

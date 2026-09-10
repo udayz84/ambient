@@ -13,7 +13,7 @@ import { dmMono, gilroyMedium, gilroySemiBold, interRegular } from "../hero/font
  */
 
 /* ---- Assets (exported from Figma) ---- */
-const AURORA = "/products/fullpicture-aurora.png"; // 1024×855, used by both footer layers
+const AURORA = "/products/fullpicture-aurora.webp"; // 1024×855, used by both footer layers
 const LINE = "/products/spec-line.svg"; // same white 4% 1px rule as the design's Line assets
 const TITLE_CORNER_L = "/products/fp-title-corner-left.svg"; // Vector 58
 const TITLE_CORNER_R = "/products/fp-title-corner-right.svg"; // Vector 55
@@ -341,7 +341,7 @@ function CornerTick({
   const inner = (
     <div className="absolute inset-[0_0_-12.5%_-12.5%]">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img alt="" className="block max-w-none size-full" src={src} aria-hidden />
+      <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={src} aria-hidden />
     </div>
   );
   return (
@@ -419,7 +419,7 @@ function CardLine({ line }: { line: LineSpec }) {
   const img = (
     <div className="absolute inset-[-1px_0_0_0]">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img alt="" className="block max-w-none size-full" src={LINE} aria-hidden />
+      <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={LINE} aria-hidden />
     </div>
   );
   if (line.variant === "rotate") {
@@ -557,7 +557,7 @@ function SpecCardView({ card }: { card: RenderCard }) {
         <div className="-translate-x-1/2 -translate-y-1/2 absolute flex items-center left-1/2 size-[22px] top-1/2">
           <div className="relative shrink-0 size-[22px]" data-name="Frame">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               className="absolute block inset-0 max-w-none size-full"
               src={card.iconSrc}
@@ -636,7 +636,7 @@ export function ProductsFullPicture({ data }: { data?: any }) {
           >
             <div className="flex-none rotate-180 w-full h-full">
               <div className="h-[486px] relative w-full" data-name="footer">
-                <img
+                <img loading="lazy" decoding="async"
                   alt=""
                   className="absolute inset-0 w-full h-full pointer-events-none"
                   src={AURORA}
@@ -656,7 +656,7 @@ export function ProductsFullPicture({ data }: { data?: any }) {
               <div className="h-[463px] relative w-full" data-name="footer">
                 <div aria-hidden className="absolute inset-0 pointer-events-none">
                   <div className="absolute bg-black inset-0" />
-                  <img
+                  <img loading="lazy" decoding="async"
                     alt=""
                     className="absolute w-full h-full"
                     src={AURORA}
@@ -761,7 +761,7 @@ function SpecCardMobileView({ card: c }: { card: RenderCard }) {
           aria-hidden
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="" src={c.iconSrc} className="block size-[19px] max-w-none" />
+          <img loading="lazy" decoding="async" alt="" src={c.iconSrc} className="block size-[19px] max-w-none" />
         </div>
       </div>
       <div className="relative mt-[10px] flex flex-col gap-[10px]">

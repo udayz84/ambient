@@ -22,7 +22,7 @@ export const DEMO_CARDS: DemoCard[] = [
   {
     nodeId: "2761:2799",
     name: "Voice Based",
-    img: "/dvk/demo-voice.png",
+    img: "/dvk/demo-voice.webp",
     imgRight: -48.04,
     imgTop: -39.38,
     titleLine1: "Voice-Based",
@@ -49,7 +49,7 @@ export const DEMO_CARDS: DemoCard[] = [
   {
     nodeId: "2761:2809",
     name: "Fall Detection",
-    img: "/dvk/demo-fall.png",
+    img: "/dvk/demo-fall.webp",
     imgRight: -56.37,
     imgTop: -52.38,
     titleLine1: "IMU-Based",
@@ -58,7 +58,7 @@ export const DEMO_CARDS: DemoCard[] = [
     descWidth: 333.99,
     decor: (
       // eslint-disable-next-line @next/next/no-img-element
-      <img
+      <img loading="lazy" decoding="async"
         alt=""
         src="/dvk/decor-fall.svg"
         aria-hidden
@@ -76,8 +76,8 @@ export const DEMO_CARDS: DemoCard[] = [
   {
     nodeId: "2761:2819",
     name: "Vision Based",
-    img: "/dvk/demo-fall.png",
-    imgOverlay: "/dvk/demo-vision.png",
+    img: "/dvk/demo-fall.webp",
+    imgOverlay: "/dvk/demo-vision.webp",
     imgRight: -56.37,
     imgTop: -40.38,
     titleLine1: "Vision-Based",
@@ -86,7 +86,7 @@ export const DEMO_CARDS: DemoCard[] = [
     descWidth: 333.99,
     decor: (
       // eslint-disable-next-line @next/next/no-img-element
-      <img
+      <img loading="lazy" decoding="async"
         alt=""
         src="/dvk/decor-vision.svg"
         aria-hidden
@@ -104,7 +104,7 @@ export const DEMO_CARDS: DemoCard[] = [
   {
     nodeId: "new-card-1234",
     name: "Gesture Recognition",
-    img: "/dvk/demo-voice.png",
+    img: "/dvk/demo-voice.webp",
     imgRight: -48.04,
     imgTop: -39.38,
     titleLine1: "Gesture",
@@ -163,7 +163,7 @@ function DemoCardItem({ card }: { card: DemoCard }) {
       >
         {card.img && (
           /* eslint-disable-next-line @next/next/no-img-element */
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src={card.img}
             className="absolute inset-0 size-full max-w-none object-cover"
@@ -171,7 +171,7 @@ function DemoCardItem({ card }: { card: DemoCard }) {
         )}
         {card.imgOverlay && (
           // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src={card.imgOverlay}
             className="absolute inset-0 size-full max-w-none object-cover"
@@ -185,11 +185,11 @@ function DemoCardItem({ card }: { card: DemoCard }) {
           <div
             className={`${gilroyMedium.className} w-full shrink-0 text-[24px] xl:text-[32px] leading-[1.2] text-white not-italic whitespace-pre-wrap`}
           >
-            <p className="mb-0 leading-[38px]">{`${card.titleLine1} `}</p>
-            <p className="leading-[38px]">{card.titleLine2}</p>
+            <p className="mb-0 leading-[38px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">{`${card.titleLine1} `}</p>
+            <p className="leading-[38px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">{card.titleLine2}</p>
           </div>
           <p
-            className={`${interRegular.className} w-full max-w-[334px] shrink-0 text-[14px] xl:text-[16px] leading-[24px] font-normal text-[#99a1af] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-full max-w-[334px] shrink-0 text-[14px] xl:text-[16px] leading-[24px] font-normal text-[#99a1af] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
           >
             {card.desc}
           </p>

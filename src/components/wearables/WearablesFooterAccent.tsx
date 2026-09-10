@@ -38,13 +38,13 @@ function TitleFrameCorners() {
     <div className="pointer-events-none absolute left-px top-[1.03px] size-full">
       {/* Bottom-left */}
       <div className="absolute left-px top-[103.03px] h-[4px] w-[3.071px]">
-        <img alt="" src="/applications/wearables/vector-59.svg" className="block size-full max-w-none" />
+        <img loading="lazy" decoding="async" alt="" src="/applications/wearables/vector-59.svg" className="block size-full max-w-none" />
       </div>
       {/* Bottom-right */}
       <div className="absolute left-[446.93px] top-[103.03px] flex h-[4px] w-[3.071px] items-center justify-center">
         <div className="-scale-y-100 flex-none rotate-180">
           <div className="h-[4px] w-[3.071px]">
-            <img alt="" src="/applications/wearables/vector-60.svg" className="block size-full max-w-none" />
+            <img loading="lazy" decoding="async" alt="" src="/applications/wearables/vector-60.svg" className="block size-full max-w-none" />
           </div>
         </div>
       </div>
@@ -52,7 +52,7 @@ function TitleFrameCorners() {
       <div className="absolute left-px top-0 flex h-[4px] w-[3.071px] items-center justify-center">
         <div className="-scale-y-100 flex-none">
           <div className="h-[4px] w-[3.071px]">
-            <img alt="" src="/applications/wearables/vector-59.svg" className="block size-full max-w-none" />
+            <img loading="lazy" decoding="async" alt="" src="/applications/wearables/vector-59.svg" className="block size-full max-w-none" />
           </div>
         </div>
       </div>
@@ -60,7 +60,7 @@ function TitleFrameCorners() {
       <div className="absolute left-[446.93px] top-0 flex h-[4px] w-[3.071px] items-center justify-center">
         <div className="flex-none rotate-180">
           <div className="h-[4px] w-[3.071px]">
-            <img alt="" src="/applications/wearables/vector-60.svg" className="block size-full max-w-none" />
+            <img loading="lazy" decoding="async" alt="" src="/applications/wearables/vector-60.svg" className="block size-full max-w-none" />
           </div>
         </div>
       </div>
@@ -73,7 +73,7 @@ function CtaPanel({ data }: { data: PanelData }) {
     <div className="relative h-[320px] w-[558px] shrink-0">
       {/* Shape background */}
       <div className="pointer-events-none absolute left-[0.5px] top-[0.12px] h-[319.572px] w-[557.336px]">
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src={SHAPE}
           className="absolute inset-0 block size-full max-w-none"
@@ -165,7 +165,7 @@ export function WearablesFooterAccent({ data }: { data?: any }) {
           <div key={panel.title} className="relative w-full">
             {/* Shape background */}
             <div className="pointer-events-none absolute inset-0">
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 src={SHAPE}
                 className="absolute inset-0 block size-full max-w-none"

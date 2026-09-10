@@ -174,7 +174,7 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
       >
         <div className="absolute inset-x-0 top-0 w-full" style={{ aspectRatio: "393 / 628" }}>
           <Image
-            src="/mobile/image 69.png"
+            src="/mobile/image 69.webp"
             alt=""
             fill
             className="object-cover object-center !h-[125%] -translate-x-[13px] scale-[1.05]"
@@ -224,7 +224,7 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
             </div>
 
             <h2
-              className={`${gilroyMedium.className} relative z-10 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+              className={`${gilroyMedium.className} relative z-10 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}
               style={{
                 backgroundImage:
                   "linear-gradient(100.945deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -234,7 +234,7 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
             </h2>
           </div>
           <p
-            className={`${interRegular.className} mt-[16px] max-w-[340px] px-[20px] text-center text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
+            className={`${interRegular.className} mt-[16px] max-w-[340px] px-[20px] text-center text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
           >
             {subtitle}
           </p>
@@ -321,7 +321,7 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
                     }}
                   >
                     <p
-                      className={`${gilroyMedium.className} text-center whitespace-nowrap text-white not-italic [word-break:break-word]`}
+                      className={`${gilroyMedium.className} max-w-full text-center whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis [word-break:break-word]`}
                       style={{
                         fontSize: `${slot.labelFontSize}px`,
                         lineHeight: "21.023px",
@@ -373,12 +373,12 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
           </div>
 
           <p
-            className={`${gilroyMedium.className} text-center text-[24px] leading-[36px] font-medium tracking-[-0.24px] whitespace-nowrap text-white not-italic`}
+            className={`${gilroyMedium.className} text-center text-[24px] leading-[36px] font-medium tracking-[-0.24px] whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis [word-break:break-word]`}
           >
             {activeProduct.label}
           </p>
           <p
-            className={`${interRegular.className} text-center text-[14px] leading-[1.4] font-normal text-[#f0f0f0] opacity-65 not-italic`}
+            className={`${interRegular.className} max-w-[340px] text-center text-[14px] leading-[1.4] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
           >
             {activeProduct.description}
           </p>
@@ -392,7 +392,7 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
             className="size-[44px] relative"
             aria-label="Previous GPX product"
           >
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src="/platform-scale/nav-left.svg"
               className="absolute inset-0 block size-full max-w-none"
@@ -404,7 +404,7 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
             className="size-[44px] relative"
             aria-label="Next GPX product"
           >
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src="/platform-scale/nav-right.svg"
               className="absolute inset-0 block size-full max-w-none"
@@ -425,7 +425,7 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
             aria-hidden
             className="pointer-events-none absolute inset-0 overflow-hidden z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
           />
-          <p className="relative z-10 text-[12px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
+          <p className="relative z-10 max-w-full text-[12px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]">
             {ctaLabel}
           </p>
         <GreenCtaCorners />

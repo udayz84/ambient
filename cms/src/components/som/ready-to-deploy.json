@@ -1,1 +1,18 @@
-{ "collectionName": "components_som_ready_to_deploys", "info": { "displayName": "Ready To Deploy", "description": "SOM ready to deploy section" }, "options": {}, "attributes": { "heading": { "type": "string", "required": true }, "subtitle": { "type": "text" }, "primary_title": { "type": "string" }, "primary_cta_label": { "type": "string" }, "secondary_text": { "type": "text" }, "image": { "type": "media", "multiple": false } } }
+{
+  "collectionName": "components_som_ready_to_deploys",
+  "info": {
+    "displayName": "Ready To Deploy",
+    "description": "SOM ready to deploy section"
+  },
+  "options": {},
+  "attributes": {
+    "heading": { "type": "string", "required": true },
+    "subtitle": { "type": "text" },
+    "primary_title": { "type": "string" },
+    "primary_cta_label": { "type": "string" },
+    "secondary_text": { "type": "text" },
+    "image": { "type": "media", "multiple": false },
+    "secondary_cta_label": { "type": "string" },
+    "secondary_cta_link": { "type": "string" }
+  }
+}

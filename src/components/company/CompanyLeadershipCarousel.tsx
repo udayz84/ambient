@@ -38,7 +38,7 @@ function LeadershipCardMobile({
         aria-hidden
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           src={member.imageSrc}
           alt=""
           className="absolute inset-0 size-full object-cover object-top max-w-none"
@@ -51,7 +51,7 @@ function LeadershipCardMobile({
       {/* Border element — corner marks */}
       <div className="pointer-events-none absolute inset-[-1px] z-20" aria-hidden>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={borderSrc} alt="" className="block size-full max-w-none" />
+        <img loading="lazy" decoding="async" src={borderSrc} alt="" className="block size-full max-w-none" />
       </div>
 
       {/* Name box */}
@@ -62,7 +62,7 @@ function LeadershipCardMobile({
         <div className="flex flex-col gap-[6px]">
           <div className="flex w-full items-start justify-between">
             <p
-              className={`${gilroyMedium.className} text-[26px] leading-[29px] font-medium text-white not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} max-w-full text-[26px] leading-[29px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
             >
               {member.name}
             </p>
@@ -86,7 +86,7 @@ function LeadershipCardMobile({
           </div>
           {!isAdvisory && member.role ? (
             <p
-              className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-[#39ff14] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-[#39ff14] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
             >
               {member.role}
             </p>

@@ -23,7 +23,7 @@ function CtaCorners() {
           <div className="relative size-[4px]">
             <div className="absolute inset-[0_0_-12.5%_-12.5%]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src="/contact/success-cta-corner-tr.svg" aria-hidden />
+              <img loading="lazy" decoding="async" alt="" className="block size-full max-w-none" src="/contact/success-cta-corner-tr.svg" aria-hidden />
             </div>
           </div>
         </div>
@@ -33,7 +33,7 @@ function CtaCorners() {
           <div className="relative size-[4px]">
             <div className="absolute inset-[0_0_-12.5%_-12.5%]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src="/contact/success-cta-corner-tl.svg" aria-hidden />
+              <img loading="lazy" decoding="async" alt="" className="block size-full max-w-none" src="/contact/success-cta-corner-tl.svg" aria-hidden />
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@ function CtaCorners() {
           <div className="relative size-[4px]">
             <div className="absolute inset-[0_0_-12.5%_-12.5%]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src="/contact/success-cta-corner-tr.svg" aria-hidden />
+              <img loading="lazy" decoding="async" alt="" className="block size-full max-w-none" src="/contact/success-cta-corner-tr.svg" aria-hidden />
             </div>
           </div>
         </div>
@@ -51,7 +51,7 @@ function CtaCorners() {
       <div className="pointer-events-none absolute bottom-0 left-0 size-[4px]">
         <div className="absolute inset-[0_0_-12.5%_-12.5%]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="" className="block size-full max-w-none" src="/contact/success-cta-corner-tl.svg" aria-hidden />
+          <img loading="lazy" decoding="async" alt="" className="block size-full max-w-none" src="/contact/success-cta-corner-tl.svg" aria-hidden />
         </div>
       </div>
     </>
@@ -211,7 +211,7 @@ export function ContactBookingPopup({
             <div className="absolute inset-[20.83%]" data-node-id="I4751:4400;2:3240" data-name="elements">
               <div className="absolute inset-[-5.36%]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <img loading="lazy" decoding="async"
                   alt=""
                   className="block size-full max-w-none"
                   src="/contact/success-cancel-icon.svg"
@@ -226,7 +226,7 @@ export function ContactBookingPopup({
               <div className="flex flex-col gap-[8px]">
                 <div className="relative size-[64px] shrink-0" data-node-id="4789:4510" data-name="logo">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img alt="" className="absolute inset-0 block size-full max-w-none" src="/contact/booking-logo.png" width={64} height={64} />
+                  <img loading="lazy" decoding="async" alt="" className="absolute inset-0 block size-full max-w-none" src="/contact/booking-logo.png" width={64} height={64} />
                 </div>
                 <div className="flex flex-col" data-node-id="4789:4511" data-name="title">
                   <p className={`${interBold.className} text-[16px] leading-[1.5] text-[#94a3b8]`} data-node-id="4789:4512">
@@ -241,7 +241,7 @@ export function ContactBookingPopup({
                 <div className="flex items-center gap-[8px]" data-node-id="4789:4515" data-name="time">
                   <span className="relative size-[20px] shrink-0">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img alt="" className="absolute inset-0 block size-full max-w-none" src="/contact/booking-icon-clock.svg" aria-hidden />
+                    <img loading="lazy" decoding="async" alt="" className="absolute inset-0 block size-full max-w-none" src="/contact/booking-icon-clock.svg" aria-hidden />
                   </span>
                   <p className={`${interBold.className} flex-1 text-[16px] leading-[1.5] text-[#94a3b8]`} data-node-id="4789:4519">
                     30 min
@@ -250,7 +250,7 @@ export function ContactBookingPopup({
                 <div className="flex items-center gap-[8px]" data-name="reservation-type">
                   <span className="relative size-[20px] shrink-0">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img alt="" className="absolute inset-0 block size-full max-w-none" src="/contact/booking-icon-phone.svg" aria-hidden />
+                    <img loading="lazy" decoding="async" alt="" className="absolute inset-0 block size-full max-w-none" src="/contact/booking-icon-phone.svg" aria-hidden />
                   </span>
                   <p className={`${interRegular.className} flex-1 text-[16px] leading-[1.5] text-[#94a3b8]`}>
                     Phone call
@@ -269,7 +269,7 @@ export function ContactBookingPopup({
                 <div className="flex items-center gap-[12px]">
                   <span className="-scale-y-100">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img alt="" src="/contact/booking-icon-globe.svg" width={14} height={14} className="block size-[14px]" aria-hidden />
+                    <img loading="lazy" decoding="async" alt="" src="/contact/booking-icon-globe.svg" width={14} height={14} className="block size-[14px]" aria-hidden />
                   </span>
                   <p className={`${interRegular.className} max-w-full text-[14px] leading-[1.5] truncate text-[#cbd5e1]`}>
                     {timeZoneLabel}
@@ -277,7 +277,7 @@ export function ContactBookingPopup({
                 </div>
                 <span className="-scale-y-100">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img alt="" src="/contact/booking-icon-chevron.svg" width={8} height={8} className="block size-[8px]" aria-hidden />
+                  <img loading="lazy" decoding="async" alt="" src="/contact/booking-icon-chevron.svg" width={8} height={8} className="block size-[8px]" aria-hidden />
                 </span>
               </div>
             </div>
@@ -303,7 +303,7 @@ export function ContactBookingPopup({
                     data-name="previous"
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img alt="" className="absolute inset-0 block size-full max-w-none" src="/contact/booking-cal-prev.svg" aria-hidden />
+                    <img loading="lazy" decoding="async" alt="" className="absolute inset-0 block size-full max-w-none" src="/contact/booking-cal-prev.svg" aria-hidden />
                   </button>
                   <p className={`${interRegular.className} text-[16px] leading-[1.5] whitespace-nowrap text-white`} data-node-id="4789:4406">
                     {monthLabel}
@@ -317,7 +317,7 @@ export function ContactBookingPopup({
                     data-name="next"
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img alt="" className="absolute inset-0 block size-full max-w-none" src="/contact/booking-cal-next.svg" aria-hidden />
+                    <img loading="lazy" decoding="async" alt="" className="absolute inset-0 block size-full max-w-none" src="/contact/booking-cal-next.svg" aria-hidden />
                   </button>
                 </div>
 

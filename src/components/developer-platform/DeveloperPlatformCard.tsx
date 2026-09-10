@@ -89,7 +89,7 @@ export function DeveloperPlatformCard({
         >
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               src={imageSrc}
               alt=""
               className="absolute top-[-27.04%] left-[-29.37%] h-[156.76%] w-[129.56%] max-w-none"
@@ -99,7 +99,7 @@ export function DeveloperPlatformCard({
       ) : null}
 
       <p
-        className={`${gilroyMedium.className} absolute translate-y-full font-medium text-[#0a3315] opacity-90 not-italic [word-break:break-word]`}
+        className={`${gilroyMedium.className} absolute translate-y-full font-medium text-[#0a3315] opacity-90 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
         style={{
           left: `${bodyLeft}px`,
           bottom: `${bodyBottomOffset}px`,
@@ -112,7 +112,7 @@ export function DeveloperPlatformCard({
       </p>
 
       <p
-        className={`${interRegular.className} absolute top-[30px] font-normal text-[18px] leading-[27px] text-[#0a3315] not-italic [word-break:break-word] ${titleWidth ? "" : "whitespace-nowrap"}`}
+        className={`${interRegular.className} absolute top-[30px] max-w-full font-normal text-[18px] leading-[27px] text-[#0a3315] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden ${titleWidth ? "" : "whitespace-nowrap"}`}
         style={{ left: `${titleLeft}px`, width: titleWidth ? `${titleWidth}px` : undefined }}
       >
         {title}
@@ -124,7 +124,7 @@ export function DeveloperPlatformCard({
       >
         <div className="absolute inset-[-1px_0_0_0]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src="/developer-platform/line-88.svg"
             className="block size-full max-w-none"

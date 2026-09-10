@@ -37,25 +37,25 @@ const M_AFTER_ITEM_TICKS: number[][] = [
 function MobileCornerBrackets() {
   return (
     <>
-      <img
+      <img loading="lazy" decoding="async"
         alt=""
         aria-hidden
         src="/applications/opt-corner-1.svg"
         className="absolute left-[-0.14px] top-0 size-[4px] max-w-none -scale-y-100"
       />
-      <img
+      <img loading="lazy" decoding="async"
         alt=""
         aria-hidden
         src="/applications/opt-corner-2.svg"
         className="absolute right-[-1.19px] top-0 size-[4px] max-w-none rotate-180"
       />
-      <img
+      <img loading="lazy" decoding="async"
         alt=""
         aria-hidden
         src="/applications/opt-corner-2.svg"
         className="absolute right-[-1.19px] bottom-0 size-[4px] max-w-none -scale-y-100 rotate-180"
       />
-      <img
+      <img loading="lazy" decoding="async"
         alt=""
         aria-hidden
         src="/applications/opt-corner-1.svg"
@@ -90,25 +90,25 @@ const TICKS: number[][] = [
 function CornerBrackets() {
   return (
     <>
-      <img
+      <img loading="lazy" decoding="async"
         alt=""
         aria-hidden
         src="/applications/opt-corner-1.svg"
         className="absolute left-[0.81px] top-[5px] size-[4px] max-w-none -scale-y-100"
       />
-      <img
+      <img loading="lazy" decoding="async"
         alt=""
         aria-hidden
         src="/applications/opt-corner-2.svg"
         className="absolute left-[calc(100%-1.19px)] top-[5px] size-[4px] max-w-none rotate-180"
       />
-      <img
+      <img loading="lazy" decoding="async"
         alt=""
         aria-hidden
         src="/applications/opt-corner-2.svg"
         className="absolute bottom-[1px] left-[calc(100%-1.19px)] size-[4px] max-w-none -scale-y-100 rotate-180"
       />
-      <img
+      <img loading="lazy" decoding="async"
         alt=""
         aria-hidden
         src="/applications/opt-corner-1.svg"

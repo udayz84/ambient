@@ -15,7 +15,7 @@ function ChipVisualCorners() {
           <div className="relative size-[4px]" data-node-id="2379:1425">
             <div className="absolute inset-[0_0_-12.5%_-12.5%]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 src={cornerRight}
                 alt=""
                 className="block size-full max-w-none"
@@ -30,7 +30,7 @@ function ChipVisualCorners() {
           <div className="relative size-[4px]" data-node-id="2379:1426">
             <div className="absolute inset-[0_0_-12.5%_-12.5%]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 src={cornerLeft}
                 alt=""
                 className="block size-full max-w-none"
@@ -45,7 +45,7 @@ function ChipVisualCorners() {
           <div className="relative size-[4px]" data-node-id="2379:1427">
             <div className="absolute inset-[0_0_-12.5%_-12.5%]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 src={cornerRight}
                 alt=""
                 className="block size-full max-w-none"
@@ -60,7 +60,7 @@ function ChipVisualCorners() {
           <div className="relative size-[4px]" data-node-id="2379:1428">
             <div className="absolute inset-[0_0_-12.5%_-12.5%]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 src={cornerLeft}
                 alt=""
                 className="block size-full max-w-none"

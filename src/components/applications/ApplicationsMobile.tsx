@@ -104,7 +104,7 @@ export function ApplicationsMobile({
       <div className="relative flex w-full flex-col items-center px-[16px]">
         <div className="relative inline-grid grid-cols-[max-content] grid-rows-[max-content] place-items-start leading-[0]">
           <h2
-            className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[7px] ml-[3px] w-[300px] bg-clip-text text-center text-[32px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic whitespace-pre-wrap sm:w-[350px] sm:text-[36px]`}
+            className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[7px] ml-[3px] w-[300px] bg-clip-text text-center text-[32px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden sm:w-[350px] sm:text-[36px]`}
             style={{
               backgroundImage:
                 "linear-gradient(107.454deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -149,7 +149,7 @@ export function ApplicationsMobile({
         </div>
 
         <p
-          className={`${interRegular.className} mt-[10px] w-full max-w-[343px] text-center text-[14px] leading-[16px] font-normal text-white not-italic [word-break:break-word]`}
+          className={`${interRegular.className} mt-[10px] w-full max-w-[343px] text-center text-[14px] leading-[16px] font-normal text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         >
           {subtitle}
         </p>
@@ -217,7 +217,7 @@ export function ApplicationsMobile({
         <div className="relative z-10 mt-[24px] flex w-full justify-center px-[20px]">
           {imgSrc ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src={imgSrc}
               className="h-auto max-h-[360px] w-[80%] object-contain drop-shadow-2xl"
@@ -232,7 +232,7 @@ export function ApplicationsMobile({
         {features.map((feature, idx) => (
           <div key={idx} className="relative w-full border border-white/20 bg-[#000000] p-[16px]">
             {activeTab === "AUTOMOTIVE" && idx === 0 && (
-              <img
+              <img loading="lazy" decoding="async"
                 src="/applications/indicator-vertical.svg"
                 alt=""
                 className="absolute -top-[92px] left-[18px] h-[92px] w-[22px] pointer-events-none z-20"
@@ -242,10 +242,10 @@ export function ApplicationsMobile({
 
             <Corners />
 
-            <h4 className={`${gilroyMedium.className} text-[16px] leading-[22px] text-white`}>
+            <h4 className={`${gilroyMedium.className} text-[16px] leading-[22px] text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}>
               {feature.title}
             </h4>
-            <p className={`${interRegular.className} mt-[12px] text-[12px] leading-[18px] text-[#f0f0f0] opacity-65`}>
+            <p className={`${interRegular.className} mt-[12px] text-[12px] leading-[18px] text-[#f0f0f0] opacity-65 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}>
               {feature.description}
             </p>
           </div>
@@ -261,7 +261,7 @@ export function ApplicationsMobile({
           aria-label="Previous Feature"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src="/platform-scale/nav-left.svg"
             className="absolute inset-0 block size-full max-w-none"
@@ -275,7 +275,7 @@ export function ApplicationsMobile({
           aria-label="Next Feature"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src="/platform-scale/nav-right.svg"
             className="absolute inset-0 block size-full max-w-none"
@@ -296,10 +296,10 @@ export function ApplicationsMobile({
           aria-hidden
           className="pointer-events-none absolute inset-0 overflow-hidden z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
         />
-        <p className="relative z-10 flex items-center gap-[10px] text-[12px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
+        <p className="relative z-10 flex max-w-full items-center gap-[10px] text-[12px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden [word-break:break-word]">
           {ctaLabel}
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={dotIcon} alt="" className="size-[6px]" aria-hidden />
+          <img loading="lazy" decoding="async" src={dotIcon} alt="" className="size-[6px]" aria-hidden />
         </p>
         <GreenCtaCorners />
       </a>

@@ -34,7 +34,7 @@ function FeatureRow() {
         className="relative h-[39.31px] w-[40px] shrink-0 overflow-clip rounded-[8.276px]"
         style={{ background: TILE_BG }}
       >
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           aria-hidden
           src="/applications/wins-icon-small.svg"
@@ -50,7 +50,7 @@ function FeatureRow() {
     </div>
   );
   const line = (
-    <img
+    <img loading="lazy" decoding="async"
       alt=""
       aria-hidden
       src="/applications/wins-grid-line.svg"
@@ -74,7 +74,7 @@ function LabelTile() {
       className="relative flex size-[46px] shrink-0 items-start overflow-clip rounded-[12px] p-[7px]"
       style={{ background: TILE_BG }}
     >
-      <img
+      <img loading="lazy" decoding="async"
         alt=""
         aria-hidden
         src="/applications/wins-icon.svg"
@@ -107,7 +107,7 @@ function WinCard({ label, stat, statLabel, visual, body }: WinCardProps) {
       <div className="absolute left-[20.5px] top-[22.5px] flex items-center gap-[12px]">
         <LabelTile />
         <p
-          className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-[#f0f0f0] whitespace-nowrap`}
+          className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-[#f0f0f0] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
         >
           {label}
         </p>
@@ -127,13 +127,13 @@ function WinCard({ label, stat, statLabel, visual, body }: WinCardProps) {
             {stat}
           </p>
           <p
-            className={`${gilroyMedium.className} text-[26px] leading-[29px] uppercase text-[#c5f3b5]`}
+            className={`${gilroyMedium.className} text-[26px] leading-[29px] uppercase text-[#c5f3b5] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
           >
             {statLabel}
           </p>
         </div>
         <p
-          className={`${interRegular.className} text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)]`}
+          className={`${interRegular.className} text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         >
           {body}
         </p>
@@ -154,14 +154,14 @@ function WinCardMobile({ label, stat, statLabel, mobileImg, body }: { label: str
     >
       {/* Background image */}
       <div className="absolute inset-0 overflow-hidden">
-        <img alt="" aria-hidden src={mobileImg} className="absolute inset-0 size-full object-contain p-[40px]" />
+        <img loading="lazy" decoding="async" alt="" aria-hidden src={mobileImg} className="absolute inset-0 size-full object-contain p-[40px]" />
         <div className="absolute inset-0" style={{ backgroundImage: OVERLAY_2 }} />
       </div>
 
       {/* Label */}
       <div className="absolute left-[17.58px] top-[17.58px] z-10 flex items-center gap-[12px]">
         <LabelTile />
-        <p className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-[#f0f0f0] whitespace-nowrap`}>{label}</p>
+        <p className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-[#f0f0f0] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}>{label}</p>
       </div>
 
       {/* Stats */}
@@ -173,10 +173,10 @@ function WinCardMobile({ label, stat, statLabel, mobileImg, body }: { label: str
           >
             {stat}
           </p>
-          <p className={`${gilroyMedium.className} text-[22px] leading-[24.167px] uppercase text-[#c5f3b5]`}>{statLabel}</p>
+          <p className={`${gilroyMedium.className} text-[22px] leading-[24.167px] uppercase text-[#c5f3b5] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}>{statLabel}</p>
         </div>
         <div className="flex flex-col gap-[11.667px]">
-          <p className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-[rgba(240,240,240,0.6)]`}>{body}</p>
+          <p className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}>{body}</p>
           <FeatureRow />
         </div>
       </div>
@@ -186,12 +186,12 @@ function WinCardMobile({ label, stat, statLabel, mobileImg, body }: { label: str
   );
 }
 
-function VisualWearable({ img = "/applications/wins-img-1.png" }: { img?: string }) {
+function VisualWearable({ img = "/applications/wins-img-1.webp" }: { img?: string }) {
   return (
     <div className="absolute left-[111.3px] top-[55.5px] flex size-[342.201px] items-center justify-center mix-blend-lighten">
       <div className="-scale-y-100 rotate-180">
         <div className="relative size-[342.201px]">
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             aria-hidden
             src={img}
@@ -207,11 +207,11 @@ function VisualWearable({ img = "/applications/wins-img-1.png" }: { img?: string
   );
 }
 
-function VisualMedical({ img = "/applications/wins-img-2.png" }: { img?: string }) {
+function VisualMedical({ img = "/applications/wins-img-2.webp" }: { img?: string }) {
   return (
     <div className="absolute left-[26.82px] top-[-31.2px] size-[389.396px] mix-blend-lighten">
       <div className="absolute inset-0 overflow-hidden">
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           aria-hidden
           src={img}
@@ -223,13 +223,13 @@ function VisualMedical({ img = "/applications/wins-img-2.png" }: { img?: string 
   );
 }
 
-function VisualAr({ img = "/applications/wins-img-3.png" }: { img?: string }) {
+function VisualAr({ img = "/applications/wins-img-3.webp" }: { img?: string }) {
   return (
     <div className="absolute left-[26.82px] top-[-31.2px] flex size-[389.396px] items-center justify-center mix-blend-lighten">
       <div className="-scale-y-100 rotate-180">
         <div className="relative size-[389.396px]">
           <div className="absolute inset-0 overflow-hidden">
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               aria-hidden
               src={img}
@@ -258,34 +258,34 @@ const CARDS = [
     stat: "99%",
     statLabel: "Accurate",
     visual: WIN_VISUALS[0],
-    mobileImg: "/applications/wins-img-1.png",
+    mobileImg: "/applications/wins-img-1.webp",
   },
   {
     label: "The Medical/Safety Wins",
     stat: "6months",
     statLabel: "Battery",
     visual: WIN_VISUALS[1],
-    mobileImg: "/applications/wins-img-2.png",
+    mobileImg: "/applications/wins-img-2.webp",
   },
   {
     label: "The AR/Vision Wins",
     stat: "Zero",
     statLabel: "Latency",
     visual: WIN_VISUALS[2],
-    mobileImg: "/applications/wins-img-3.png",
+    mobileImg: "/applications/wins-img-3.webp",
   },
 ];
 
 export function ApplicationsPageWins({ data }: { data?: any }) {
   const heading = data?.heading || FALLBACK_HEADING;
   const body = data?.body || BODY;
-  const bgImg = "/applications/wins-bg.png";
+  const bgImg = "/applications/wins-bg.webp";
 
   const rawCards = Array.isArray(data?.cards) ? data.cards : [];
   const cards =
     rawCards.length > 0
       ? rawCards.map((c: any, i: number) => {
-          const mobileImg = mediaUrl(c?.image) || CARDS[i]?.mobileImg || "/applications/wins-img-1.png";
+          const mobileImg = mediaUrl(c?.image) || CARDS[i]?.mobileImg || "/applications/wins-img-1.webp";
           
           let visual;
           if (i === 0) visual = <VisualWearable img={mobileImg} key="wearable" />;
@@ -310,7 +310,7 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
     >
       {/* Full-bleed background image 124 */}
       <div className="pointer-events-none absolute inset-0 opacity-50">
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           aria-hidden
           src={bgImg}
@@ -336,7 +336,7 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
 
           <div className="relative inline-block px-[14px]">
             <h2
-              className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic`}
+              className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
               style={{
                 backgroundImage:
                   "linear-gradient(125.581deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -394,14 +394,16 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
               }}
               data-node-id="4032:14682"
             >
-              {heading}
+              <span className="w-full [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
+                {heading}
+              </span>
             </h2>
 
             <div className="absolute left-[353px] top-[4px] flex h-[2.817px] w-[2.346px] items-center justify-center">
               <div className="flex-none rotate-180">
                 <div className="relative h-[2.817px] w-[2.346px]">
                   <div className="absolute inset-[0_0_-17.75%_-21.31%]">
-                    <img alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
+                    <img loading="lazy" decoding="async" alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
                   </div>
                 </div>
               </div>
@@ -410,21 +412,21 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
               <div className="-scale-y-100 flex-none rotate-180">
                 <div className="relative h-[2.817px] w-[2.346px]">
                   <div className="absolute inset-[0_0_-17.75%_-21.31%]">
-                    <img alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
+                    <img loading="lazy" decoding="async" alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
                   </div>
                 </div>
               </div>
             </div>
             <div className="absolute left-[-3px] top-[75px] h-[2.817px] w-[2.346px]">
               <div className="absolute inset-[0_0_-17.75%_-21.31%]">
-                <img alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
+                <img loading="lazy" decoding="async" alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
               </div>
             </div>
             <div className="absolute left-[-3px] top-[4px] flex h-[2.817px] w-[2.346px] items-center justify-center">
               <div className="-scale-y-100 flex-none">
                 <div className="relative h-[2.817px] w-[2.346px]">
                   <div className="absolute inset-[0_0_-17.75%_-21.31%]">
-                    <img alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
+                    <img loading="lazy" decoding="async" alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
                   </div>
                 </div>
               </div>

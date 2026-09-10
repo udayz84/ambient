@@ -10,13 +10,13 @@ const PROTOTYPE_CARDS = [
     title: "The Lab",
     description:
       "Use the integrated breakout board for rapid prototyping. It includes a USB-C port for charging, a 10-pin JTAG connector, programmable LEDs, and headers for easy signal probing and power analysis.",
-    imageUrl: "/som/prototype-mobile-1.png",
+    imageUrl: "/som/prototype-mobile-1.webp",
   },
   {
     title: "Production-Ready SOMs",
     description:
       "Once your software is validated, simply snap off the breakout half. The remaining 21×21mm core module embeds directly into your space-constrained product with zero hardware redesign required.",
-    imageUrl: "/som/prototype-mobile-2.png",
+    imageUrl: "/som/prototype-mobile-2.webp",
   },
 ] as const;
 
@@ -24,7 +24,7 @@ const FALLBACK_HEADING = "Prototype to Product in a Snap";
 
 /* ----------------------------- Mobile (Figma 4046:8061) ----------------------------- */
 const MOBILE_TITLE_GRADIENT_DEG = "119.172deg";
-const MOBILE_PROTO_IMAGES = ["/som/prototype-mobile-1.png", "/som/prototype-mobile-2.png"];
+const MOBILE_PROTO_IMAGES = ["/som/prototype-mobile-1.webp", "/som/prototype-mobile-2.webp"];
 const MOBILE_TITLE_STYLE = {
   backgroundImage: `linear-gradient(${MOBILE_TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
   WebkitBackgroundClip: "text",
@@ -52,7 +52,7 @@ function MobilePrototypeCard({
         data-name="Container"
       >
         {imageUrl && (
-          <img
+          <img loading="lazy" decoding="async"
             src={imageUrl}
             alt={title}
             className="size-full object-cover"
@@ -105,7 +105,7 @@ function PrototypeCard({
         data-name="Container"
       >
         {imageUrl && (
-          <img
+          <img loading="lazy" decoding="async"
             src={imageUrl}
             alt={title}
             className="absolute inset-0 size-full object-cover"
@@ -132,7 +132,7 @@ function PrototypeCard({
   );
 }
 
-export function SomPrototypeTitle({ data }: { data?: any }) {
+export function usePrototypeData(data?: any) {
   const heading = data?.heading || FALLBACK_HEADING;
   const dataCards: any[] = Array.isArray(data?.cards) ? data.cards : [];
   const cards = PROTOTYPE_CARDS.map((fb, i) => {
@@ -144,14 +144,18 @@ export function SomPrototypeTitle({ data }: { data?: any }) {
       imageUrl: mediaUrl(c.image) || null,
     };
   });
+  return { heading, cards };
+}
+
+export function SomPrototypeTitleDesktop({ data }: { data?: any }) {
+  const { heading, cards } = usePrototypeData(data);
   return (
     <section
-      className="relative flex w-full justify-center overflow-hidden bg-black"
+      className="relative hidden w-full justify-center overflow-hidden bg-black min-[1024px]:flex"
       data-node-id="2438:5082"
       aria-label="Prototype to Product in a Snap"
     >
-      {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden w-[1204px] flex-col items-center gap-[36px] pt-[40px] pb-[60px] min-[1024px]:flex">
+      <div className="relative flex w-[1204px] flex-col items-center gap-[36px] pt-[40px] pb-[60px]">
         <div className="relative px-[10px]" data-name="Title">
           <h2
             className={`${gilroyMedium.className} text-center text-[46px] leading-[49px] font-medium text-white whitespace-nowrap not-italic [word-break:break-word]`}
@@ -174,11 +178,20 @@ export function SomPrototypeTitle({ data }: { data?: any }) {
           ))}
         </div>
       </div>
+    </section>
+  );
+}
 
-      {/* MOBILE (<1024px) — Figma node 4046:8061 "4th Fold" 393×800 */}
+export function SomPrototypeTitleMobile({ data }: { data?: any }) {
+  const { heading, cards } = usePrototypeData(data);
+  return (
+    <section
+      className="relative flex w-full justify-center overflow-hidden bg-black min-[1024px]:hidden"
+      data-node-id="4046:8061"
+      aria-label="Prototype to Product in a Snap"
+    >
       <div
-        className="relative mx-auto h-[800px] w-[393px] overflow-hidden bg-black min-[1024px]:hidden"
-        data-node-id="4046:8061"
+        className="relative mx-auto h-[800px] w-[393px] overflow-hidden bg-black"
         data-name="4th Fold"
       >
         {/* Title block — 4046:8064 (x19, y30, 350×78) */}

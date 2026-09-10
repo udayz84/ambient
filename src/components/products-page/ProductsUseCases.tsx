@@ -30,12 +30,12 @@ const FALLBACK_PRIMARY = { label: "Explore Applications", href: "#" };
 const FALLBACK_SECONDARY = { label: "Discuss Your Use Case", href: "#" };
 
 const USE_CASE_IMAGES: Record<string, string> = {
-  "HEARABLES": "/applications/app-hearables.png",
-  "SMART HOMES": "/applications/app-smart-home.png",
-  "INDUSTRIAL": "/applications/app-industrial.png",
-  "AUTOMOTIVE": "/applications/app-automotive.png",
-  "MEDICAL": "/applications/app-medical.png",
-  "AGRICULTURE": "/applications/app-agriculture.png",
+  "HEARABLES": "/applications/app-hearables.webp",
+  "SMART HOMES": "/applications/app-smart-home.webp",
+  "INDUSTRIAL": "/applications/app-industrial.webp",
+  "AUTOMOTIVE": "/applications/app-automotive.webp",
+  "MEDICAL": "/applications/app-medical.webp",
+  "AGRICULTURE": "/applications/app-agriculture.webp",
 };
 
 function splitLines(value: string): string[] {
@@ -86,7 +86,7 @@ export function ProductsUseCases({ data }: { data?: any }) {
             image:
               mediaUrl(t?.image) ||
               USE_CASE_IMAGES[t?.label] ||
-              "/products/use-case-image.png",
+              "/products/use-case-image.webp",
             featureCards,
           };
         })
@@ -94,14 +94,14 @@ export function ProductsUseCases({ data }: { data?: any }) {
           label: t.label,
           watermark: t.label,
           image:
-            USE_CASE_IMAGES[t.label] || "/products/use-case-image.png",
+            USE_CASE_IMAGES[t.label] || "/products/use-case-image.webp",
           featureCards: USECASE_CARDS,
         }));
 
   const [activeIdx, setActiveIdx] = useState(0);
   const [direction, setDirection] = useState(1);
   const activeTab = tabs[activeIdx] || tabs[0];
-  const activeImage = activeTab?.image || "/products/use-case-image.png";
+  const activeImage = activeTab?.image || "/products/use-case-image.webp";
   const cards = activeTab?.featureCards || USECASE_CARDS;
 
   // Scale the fixed 1448px canvas down on narrower viewports so it never clips.
@@ -311,7 +311,7 @@ function ProductsUseCasesDesktop({
               data-name="image 145"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 src={activeImage}
                 className={`absolute inset-0 size-full max-w-none ${activeTab?.label?.toUpperCase() === "AUTOMOTIVE" ? "object-contain" : "object-cover"}`}
@@ -407,7 +407,7 @@ function ArrowButton({
       aria-label="Scroll tabs"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img alt="" src={src} className="block size-full max-w-none" />
+      <img loading="lazy" decoding="async" alt="" src={src} className="block size-full max-w-none" />
     </button>
   );
 }
@@ -473,7 +473,7 @@ function Indicator({
         style={{ width: height, height: width }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img alt="" src={src} className="block size-full max-w-none" />
+        <img loading="lazy" decoding="async" alt="" src={src} className="block size-full max-w-none" />
       </div>
     </div>
   );
@@ -530,7 +530,7 @@ function PrimaryCta({
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
       <AnimatedDotsBackground />
-      <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+      <span className="relative max-w-full overflow-hidden text-ellipsis text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
         {children}
       </span>
       <span
@@ -557,7 +557,7 @@ function SecondaryCta({
       data-node-id="2901:2155"
       data-name="CTA - Secondary"
     >
-      <span className="relative px-[20px] py-[10px] text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+      <span className="relative max-w-full overflow-hidden text-ellipsis px-[20px] py-[10px] text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
         {children}
       </span>
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
@@ -642,7 +642,7 @@ function ProductsUseCasesMobile({
           {activeTab.watermark}
         </h3>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src={activeImage}
           className="relative z-10 h-auto max-h-[360px] w-full max-w-[360px] object-contain"
@@ -666,7 +666,7 @@ function ProductsUseCasesMobile({
               aria-label="Previous tab"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 src="/platform-scale/nav-left.svg"
                 className="absolute inset-0 block size-full max-w-none"
@@ -680,7 +680,7 @@ function ProductsUseCasesMobile({
               aria-label="Next tab"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 src="/platform-scale/nav-right.svg"
                 className="absolute inset-0 block size-full max-w-none"
@@ -702,7 +702,7 @@ function ProductsUseCasesMobile({
             className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
           />
           <AnimatedDotsBackground />
-          <span className="relative text-[10px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+          <span className="relative max-w-full overflow-hidden text-ellipsis text-[10px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
             {primary.label}
           </span>
           <span
@@ -716,7 +716,7 @@ function ProductsUseCasesMobile({
           className={`${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
           style={{ backgroundColor: SECONDARY_CTA_BG }}
         >
-          <span className="relative px-[4px] sm:px-[12px] py-[10px] text-[10px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic text-center">
+          <span className="relative max-w-full overflow-hidden text-ellipsis px-[4px] sm:px-[12px] py-[10px] text-[10px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic text-center">
             {secondary.label}
           </span>
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />

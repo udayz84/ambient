@@ -100,7 +100,7 @@ export function ApplicationsCategoryNav({
         aria-label="Scroll categories left"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src="/applications/nav-arrow-left.svg"
           className="absolute inset-0 block size-full max-w-none"
@@ -133,7 +133,7 @@ export function ApplicationsCategoryNav({
                   <Corners leftSrc={tabCornerTl} rightSrc={tabCornerTr} />
                 </span>
               ) : null}
-              <span className="relative">{label}</span>
+              <span className="relative max-w-full overflow-hidden text-ellipsis">{label}</span>
             </button>
           </Fragment>
         );
@@ -155,7 +155,7 @@ export function ApplicationsCategoryNav({
         aria-label="Scroll categories right"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src="/applications/nav-arrow-right.svg"
           className="absolute inset-0 block size-full max-w-none"

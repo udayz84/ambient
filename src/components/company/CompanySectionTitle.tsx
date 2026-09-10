@@ -32,10 +32,11 @@ export function CompanySectionTitle({
       data-name="Title"
     >
       <h3
-        className={`${gilroyMedium.className} relative m-0 bg-clip-text p-0 font-medium text-transparent not-italic`}
+        className={`${gilroyMedium.className} relative m-0 bg-clip-text p-0 font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] overflow-hidden`}
         style={{
           fontSize,
           lineHeight: `${lineHeight}px`,
+          WebkitLineClamp: Math.max(1, Math.floor(height / lineHeight)),
           backgroundImage: TITLE_GRADIENT,
           WebkitBackgroundClip: "text",
           backgroundClip: "text",

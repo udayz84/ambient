@@ -3,6 +3,7 @@ import { Corners } from "../shared/Corners";
 import { DvkHero } from "./DvkHero";
 import { DvkScrollIndicator } from "./DvkScrollIndicator";
 import { SomInsideModule } from "@/components/som-page/SomInsideModule";
+import { SomPrototypeTitleDesktop, SomPrototypeTitleMobile } from "@/components/som-page/SomPrototypeTitle";
 import { SPEC_CARDS } from "./dvk-data";
 import { DvkDemos } from "./DvkDemos";
 import { DEMO_CARDS } from "./DvkDemosCards";
@@ -49,6 +50,8 @@ export function Dvk({ data }: { data?: any }) {
         <DvkScrollIndicator />
       </div>
 
+      <SomPrototypeTitleDesktop data={data?.prototype} />
+
       {/* DESKTOP (>=1024px) — hardware stack section (2761:2905) */}
       <div id="dvk-content" className="relative mx-auto hidden w-full bg-black min-[1024px]:block">
         {data?.inside_module ? (
@@ -75,6 +78,7 @@ export function Dvk({ data }: { data?: any }) {
 
       {/* MOBILE (<1024px) — stacked layout */}
       <DvkHeroMobile data={data?.hero} />
+      <SomPrototypeTitleMobile data={data?.prototype} />
       <div className="min-[1024px]:hidden">
         {data?.inside_module ? <SomInsideModule data={data.inside_module} /> : null}
       </div>
@@ -117,7 +121,7 @@ function DvkHeroMobile({ data }: { data?: any }) {
         <div className="absolute top-0 left-1/2 h-full w-[1px] -translate-x-1/2 overflow-hidden">
           <div className="absolute top-0 left-0 h-full w-[821px] origin-top-left rotate-90 opacity-60">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               src="/hero/line-82.svg"
               alt=""
               className="block size-full max-w-none"
@@ -130,7 +134,7 @@ function DvkHeroMobile({ data }: { data?: any }) {
         <div className="absolute top-0 left-1/2 h-full w-[1px] -translate-x-1/2 overflow-hidden">
           <div className="absolute top-0 left-0 h-full w-[821px] origin-top-left rotate-90 opacity-60">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               src="/hero/line-83.svg"
               alt=""
               className="block size-full max-w-none"
@@ -152,7 +156,7 @@ function DvkHeroMobile({ data }: { data?: any }) {
         >
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h1
-            className={`${gilroyMedium.className} absolute top-[7px] left-1/2 m-0 w-[321px] max-w-[calc(100%-32px)] -translate-x-1/2 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} absolute top-[7px] left-1/2 m-0 w-[321px] max-w-[calc(100%-32px)] -translate-x-1/2 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
             style={{
               backgroundImage: HERO_TITLE_GRADIENT_MOBILE,
               WebkitBackgroundClip: "text",
@@ -164,7 +168,7 @@ function DvkHeroMobile({ data }: { data?: any }) {
           </h1>
         </div>
         <p
-          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
           data-node-id="4059:10014"
         >
           {subtitle}
@@ -178,9 +182,9 @@ function DvkHeroMobile({ data }: { data?: any }) {
         aria-hidden
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
-          src="/dvk/hero-bg-mobile.png"
+          src="/dvk/hero-bg-mobile.webp"
           className="absolute inset-0 size-full object-cover"
         />
         <div
@@ -259,7 +263,7 @@ function DvkHardwareStackMobile({ data }: { data?: any }) {
           <div className="relative h-[112.93px] w-full" data-node-id="4059:10042">
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             <h2
-              className={`${gilroyMedium.className} absolute top-[4.93px] left-[16px] m-0 w-[321px] max-w-[calc(100%-32px)] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} absolute top-[4.93px] left-[16px] m-0 w-[321px] max-w-[calc(100%-32px)] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
               style={{
                 backgroundImage: HERO_TITLE_GRADIENT_MOBILE,
                 WebkitBackgroundClip: "text",
@@ -271,7 +275,7 @@ function DvkHardwareStackMobile({ data }: { data?: any }) {
             </h2>
           </div>
           <p
-            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
             data-node-id="4059:10048"
           >
             {subtitle}
@@ -291,16 +295,16 @@ function DvkHardwareStackMobile({ data }: { data?: any }) {
           >
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             <p
-              className={`${gilroyMedium.className} w-full text-center text-[18px] leading-[24px] text-white not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} w-full text-center text-[18px] leading-[24px] text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
               data-node-id="4062:10674"
             >
               {label}
             </p>
             <div className="relative h-[294px] w-full" data-node-id="4062:10675">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
-                src="/dvk/board-blueprint-mobile.png"
+                src="/dvk/board-blueprint-mobile.webp"
                 className="pointer-events-none absolute inset-0 size-full max-w-none object-bottom"
               />
             </div>
@@ -375,22 +379,22 @@ function MobileSpecCard({
 /** Figma 4062:10784/10795/10806 — mobile demo card illustrations (250×238). */
 const MOBILE_DEMO_MEDIA = [
   {
-    img: "/dvk/demo-voice.png",
+    img: "/dvk/demo-voice.webp",
     imgOverlay: null as string | null,
     imgRight: -35,
     imgTop: -35,
     cover: true,
   },
   {
-    img: "/dvk/demo-fall.png",
+    img: "/dvk/demo-fall.webp",
     imgOverlay: null as string | null,
     imgRight: -43,
     imgTop: -46,
     cover: false,
   },
   {
-    img: "/dvk/demo-fall.png",
-    imgOverlay: "/dvk/demo-vision.png" as string | null,
+    img: "/dvk/demo-fall.webp",
+    imgOverlay: "/dvk/demo-vision.webp" as string | null,
     imgRight: -43,
     imgTop: -36,
     cover: true,
@@ -408,7 +412,7 @@ const MOBILE_DEMO_DECOR = [
   />,
   // Fall — ring accent
   // eslint-disable-next-line @next/next/no-img-element
-  <img
+  <img loading="lazy" decoding="async"
     key="fall"
     alt=""
     src="/dvk/demo-ellipse-1.svg"
@@ -418,7 +422,7 @@ const MOBILE_DEMO_DECOR = [
   />,
   // Vision — dot accent
   // eslint-disable-next-line @next/next/no-img-element
-  <img
+  <img loading="lazy" decoding="async"
     key="vision"
     alt=""
     src="/dvk/demo-ellipse-2.svg"
@@ -472,7 +476,7 @@ function DvkDemosMobile({ data }: { data?: any }) {
           >
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             <h2
-              className={`${gilroyMedium.className} absolute top-[4.5px] left-1/2 m-0 w-[268px] max-w-full -translate-x-1/2 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} absolute top-[4.5px] left-1/2 m-0 w-[268px] max-w-full -translate-x-1/2 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
               style={{
                 backgroundImage: DEMOS_TITLE_GRADIENT_MOBILE,
                 WebkitBackgroundClip: "text",
@@ -484,7 +488,7 @@ function DvkDemosMobile({ data }: { data?: any }) {
             </h2>
           </div>
           <p
-            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
             data-node-id="4059:10221"
           >
             {subtitle}
@@ -511,14 +515,14 @@ function DvkDemosMobile({ data }: { data?: any }) {
                   style={{ right: media.imgRight, top: media.imgTop }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <img loading="lazy" decoding="async"
                     alt=""
                     src={media.img}
                     className={`absolute inset-0 size-full max-w-none ${media.cover ? "object-cover" : ""}`}
                   />
                   {media.imgOverlay && (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img
+                    <img loading="lazy" decoding="async"
                       alt=""
                       src={media.imgOverlay}
                       className="absolute inset-0 size-full max-w-none object-cover"
@@ -606,7 +610,7 @@ function DvkModelForgeMobile({ data }: { data?: any }) {
           data-node-id="4062:10818"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src="/dvk/modelforge-abstract-mobile.svg"
             className="absolute inset-0 block size-full max-w-none"
@@ -627,7 +631,7 @@ function DvkModelForgeMobile({ data }: { data?: any }) {
           >
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             <h2
-              className={`${gilroyMedium.className} absolute top-[4.99px] left-1/2 m-0 w-[268px] max-w-full -translate-x-1/2 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} absolute top-[4.99px] left-1/2 m-0 w-[268px] max-w-full -translate-x-1/2 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
               style={{
                 backgroundImage: MODELFORGE_TITLE_GRADIENT_MOBILE,
                 WebkitBackgroundClip: "text",
@@ -639,7 +643,7 @@ function DvkModelForgeMobile({ data }: { data?: any }) {
             </h2>
           </div>
           <p
-            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
             data-node-id="4062:10914"
           >
             {subtitle}
@@ -652,7 +656,7 @@ function DvkModelForgeMobile({ data }: { data?: any }) {
           data-node-id="4062:11130"
         >
           <MobileModelCard
-            image="/dvk/modelforge-your-model-mobile.png"
+            image="/dvk/modelforge-your-model-mobile.webp"
             title={yourModelTitle}
             description={yourModelDesc}
             height={422}
@@ -660,7 +664,7 @@ function DvkModelForgeMobile({ data }: { data?: any }) {
           />
           <MobileForgeCanvas floatingTags={floatingTags} />
           <MobileModelCard
-            image="/dvk/modelforge-dvk-mobile.png"
+            image="/dvk/modelforge-dvk-mobile.webp"
             title={dvkBoardTitle}
             description={dvkBoardDesc}
             height={386}
@@ -736,7 +740,7 @@ function MobileModelCard({
       >
         <div className="relative h-full min-w-px flex-1">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src={image}
             className={`pointer-events-none absolute inset-0 size-full max-w-none object-contain ${imageRounded ? "rounded-[6px]" : ""}`}
@@ -770,9 +774,9 @@ function MobileForgeCanvas({ floatingTags = ["RTOS", "DSP", "Drivers", "Build"] 
         data-node-id="4062:11181"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
-          src="/dvk/modelforge-center-mobile.png"
+          src="/dvk/modelforge-center-mobile.webp"
           className="absolute inset-0 size-full max-w-none object-cover"
         />
       </div>
@@ -786,7 +790,7 @@ function MobileForgeCanvas({ floatingTags = ["RTOS", "DSP", "Drivers", "Build"] 
           <div className="relative h-0 w-[60px]" data-node-id="4062:11182">
             <div className="absolute inset-[-2.89px_-4.81%_-2.89px_-4.44%]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 src="/dvk/mf-line-103.svg"
                 className="block size-full max-w-none"
@@ -803,7 +807,7 @@ function MobileForgeCanvas({ floatingTags = ["RTOS", "DSP", "Drivers", "Build"] 
           <div className="relative h-0 w-[60px]" data-node-id="4062:11183">
             <div className="absolute inset-[-2.89px_-4.81%_-2.89px_-4.44%]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 src="/dvk/mf-line-104.svg"
                 className="block size-full max-w-none"
@@ -836,7 +840,7 @@ function MobileForgeCanvas({ floatingTags = ["RTOS", "DSP", "Drivers", "Build"] 
             <div className="relative size-[16.604px]">
               <div className="absolute inset-[-24.09%]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <img loading="lazy" decoding="async"
                   alt=""
                   src="/dvk/mf-rect56.svg"
                   className="block size-full max-w-none"
@@ -850,7 +854,7 @@ function MobileForgeCanvas({ floatingTags = ["RTOS", "DSP", "Drivers", "Build"] 
             <div className="relative h-[58.098px] w-[20.596px]">
               <div className="absolute inset-[-1.06%_-3.64%_0_-2.08%]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <img loading="lazy" decoding="async"
                   alt=""
                   src="/dvk/mf-vector33.svg"
                   className="block size-full max-w-none"
@@ -862,7 +866,7 @@ function MobileForgeCanvas({ floatingTags = ["RTOS", "DSP", "Drivers", "Build"] 
         <div className="absolute top-[104.86px] left-[299.92px] flex size-[7.045px] items-center justify-center">
           <div className="-rotate-135 flex-none">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src="/dvk/mf-rect57.svg"
               className="block size-[4.981px] max-w-none"
@@ -898,7 +902,7 @@ function ForgeElbow({
         <div className="relative size-[20px]">
           <div className="absolute inset-[-20%]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src="/dvk/mf-rect54.svg"
               className="block size-full max-w-none"
@@ -912,7 +916,7 @@ function ForgeElbow({
         <div className="relative h-[62px] w-[28px]">
           <div className="absolute inset-[-1.06%_-2.68%_0_-1.28%]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src="/dvk/mf-vector32.svg"
               className="block size-full max-w-none"
@@ -924,7 +928,7 @@ function ForgeElbow({
         className={`absolute flex size-[8.485px] items-center justify-center ${dotClass}`}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src="/dvk/mf-rect55.svg"
           className="block size-[6px] max-w-none"

@@ -92,7 +92,7 @@ function WhiteCta({
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-40 mix-blend-plus-lighter"
         style={{
-          backgroundImage: "url(/resources/news-cta-texture.png)",
+          backgroundImage: "url(/resources/news-cta-texture.webp)",
           backgroundSize: "307.2px 307.2px",
         }}
       />
@@ -136,7 +136,7 @@ function ResourcesHeroMobile({ data }: { data?: any } = {}) {
       </div>
 
       <h1
-        className={`${gilroyMedium.className} relative w-full bg-clip-text text-left text-[36px] leading-[40px] font-medium text-transparent [word-break:break-word] not-italic pt-[45px]`}
+        className={`${gilroyMedium.className} relative w-full bg-clip-text text-left text-[36px] leading-[40px] font-medium text-transparent [word-break:break-word] not-italic pt-[45px] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
         style={{ backgroundImage: gradient("118.129deg") }}
       >
         {titleLines.map((line, i) => (
@@ -160,7 +160,7 @@ function ResourcesHeroMobile({ data }: { data?: any } = {}) {
           type="button"
           className="relative flex w-[90px] shrink-0 items-center justify-center bg-white bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.15)_100%)] shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15),0px_10.268px_6.699px_rgba(255,255,255,0.15),0px_3.714px_2.423px_rgba(255,255,255,0.1)] transition-opacity hover:opacity-90"
         >
-          <span className={`${interSemiBold.className} text-[14px] leading-[normal] font-semibold text-[#121212] not-italic`}>
+          <span className={`${interSemiBold.className} max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[14px] leading-[normal] font-semibold text-[#121212] not-italic`}>
             {searchLabel}
           </span>
         </button>
@@ -271,10 +271,12 @@ function ResourcesFeaturedMobile({ data }: { data?: any } = {}) {
 
       <div className="flex w-full snap-x snap-mandatory gap-[10px] overflow-x-auto px-[calc(50%-124px)] pb-[32px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {cards.map((card: any, index: number) => (
-          <article
+          <a
+            href={card.pdfUrl || card.ctaHref || "#"}
             key={`featured-card-${index}`}
-            className="relative flex w-[248px] shrink-0 snap-center flex-col bg-[#191919] border-[0.5px] border-solid border-[rgba(255,255,255,0.3)] p-[10px]"
+            className="group relative block w-[248px] shrink-0 snap-center bg-[#191919] border-[0.5px] border-solid border-[rgba(255,255,255,0.3)] p-[10px] hover:border-[#53d824]/50 transition-colors cursor-pointer"
           >
+            <div className="flex flex-col">
             <Corners />
             <div className="relative flex h-[215px] w-[228px] shrink-0 flex-col items-end overflow-clip p-[12px]">
               <div aria-hidden className="pointer-events-none absolute inset-0">
@@ -317,7 +319,8 @@ function ResourcesFeaturedMobile({ data }: { data?: any } = {}) {
                 </span>
               </div>
             </div>
-          </article>
+            </div>
+          </a>
         ))}
       </div>
     </section>
@@ -378,7 +381,7 @@ function ResourcesBuildingMobile({ data }: { data?: any } = {}) {
             aria-hidden
             className="pointer-events-none absolute inset-0 opacity-40 mix-blend-plus-lighter"
             style={{
-              backgroundImage: "url(/resources/news-cta-texture.png)",
+              backgroundImage: "url(/resources/news-cta-texture.webp)",
               backgroundSize: "307.2px 307.2px",
             }}
           />
@@ -496,10 +499,12 @@ function ResourcesContentMobile({
 
       <div className="mt-[32px] flex flex-col gap-[24px]">
         {visibleArticles.map((article) => (
-          <article
+          <a
+            href={article.href || "#"}
             key={article.nodeId}
-            className="relative flex flex-col gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.1)] bg-black px-[12px] pb-[24px] pt-[9px]"
+            className="group relative block overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.1)] bg-black px-[12px] pb-[24px] pt-[9px] hover:border-[#53d824]/50 transition-colors cursor-pointer"
           >
+            <div className="flex flex-col gap-[20px]">
             <Corners />
             <div className="relative h-[244px] w-full shrink-0 overflow-hidden bg-[#151515]">
               {article.imageSrc ? (
@@ -540,11 +545,12 @@ function ResourcesContentMobile({
                 </h3>
                 <p className={`${interRegular.className} text-[14px] leading-[21px] font-normal not-italic`}>
                   <span className="text-[rgba(240,240,240,0.6)]">{article.excerpt}</span>{" "}
-                  <a href={article.href || "#"} className="text-[#53d824]">read more</a>
+                  <span className="text-[#53d824] transition-opacity group-hover:opacity-80">read more</span>
                 </p>
               </div>
             </div>
-          </article>
+            </div>
+          </a>
         ))}
       </div>
 
@@ -586,7 +592,7 @@ function ResourcesNewsCtaMobile({ data }: { data?: any } = {}) {
             aria-hidden
             className="pointer-events-none absolute inset-0 opacity-40 mix-blend-plus-lighter"
             style={{
-              backgroundImage: "url(/resources/news-cta-texture.png)",
+              backgroundImage: "url(/resources/news-cta-texture.webp)",
               backgroundSize: "307.2px 307.2px",
             }}
           />

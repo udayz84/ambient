@@ -75,7 +75,7 @@ export function PartnersHero() {
                     ))}
                   </h1>
                 </div>
-                <p className={`${interRegular.className} w-[500px] text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-80 [word-break:break-word] not-italic`}>
+                <p className={`${interRegular.className} w-[500px] text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-80 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden not-italic`}>
                   {subtitle}
                 </p>
                 <div className="mt-[12px] flex items-center gap-[20px]">
@@ -105,7 +105,7 @@ export function PartnersHero() {
           <div className="relative p-[16px] -m-[16px]">
             <Corners />
             <h1
-              className={`${gilroyMedium.className} w-[332px] max-w-full bg-clip-text text-center text-[36px] leading-[38px] font-medium text-transparent [word-break:break-word] not-italic`}
+              className={`${gilroyMedium.className} w-[332px] max-w-full bg-clip-text text-center text-[36px] leading-[38px] font-medium text-transparent [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}
               style={{
                 backgroundImage:
                   "linear-gradient(100.849deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -116,7 +116,7 @@ export function PartnersHero() {
               {title}
             </h1>
           </div>
-          <p className={`${interRegular.className} w-[332px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 not-italic`}>
+          <p className={`${interRegular.className} w-[332px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}>
             {subtitle}
           </p>
         </div>

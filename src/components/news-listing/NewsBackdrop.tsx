@@ -24,7 +24,7 @@ export function NewsBackdrop({ data }: NewsBackdropProps = {}) {
     >
       <div className="absolute inset-0 w-full h-full">
         {backdropSrc ? (
-          <img
+          <img loading="lazy" decoding="async"
             src={backdropSrc}
             alt={data?.alt || ""}
             aria-hidden

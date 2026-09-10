@@ -24,10 +24,10 @@ const DEFAULT_SUBTITLE =
   "An exhaustive suite of sensors, interfaces, and debug tools pre-integrated with the GPX-10 Pro AI Processor.";
 const DEFAULT_LABEL = "The Hardware Blueprint";
 
-const BOARD_IMAGE = "/dvk/inside-module/dvk-board.png";
-const COLORFUL_BOARD = "/dvk/board-stack.png";
-const HIGHLIGHT_FILL = "/dvk/inside-module/dvk-fill.png";
-const SENSORS_VECTOR = "/dvk/inside-module/dvk-v101.png";
+const BOARD_IMAGE = "/dvk/inside-module/dvk-board.webp";
+const COLORFUL_BOARD = "/dvk/board-stack.webp";
+const HIGHLIGHT_FILL = "/dvk/inside-module/dvk-fill.webp";
+const SENSORS_VECTOR = "/dvk/inside-module/dvk-v101.webp";
 const INTERFACES_VECTOR = "/dvk/inside-module/dvk-v102.png";
 
 const RECT_BORDER =
@@ -99,14 +99,14 @@ export function DvkHardwareStack({ data }: { data?: any }) {
           {/* Figma 4049:8277 — DVK Board 1 (605x566) */}
           <div className="relative h-[566px] w-[605px] shrink-0 overflow-hidden">
             <div className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === -1 ? "opacity-100" : "opacity-0"}`}>
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 src={COLORFUL_BOARD}
                 className="absolute inset-0 size-full max-w-none object-bottom"
               />
             </div>
             <div className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex !== -1 ? "opacity-100" : "opacity-0"}`}>
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 src={BOARD_IMAGE}
                 className="absolute inset-0 size-full max-w-none object-bottom"
@@ -121,7 +121,7 @@ export function DvkHardwareStack({ data }: { data?: any }) {
                 className={`absolute left-[62px] top-[225px] h-[58px] w-[56px] ${RECT_BORDER}`}
               >
                 <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                  <img
+                  <img loading="lazy" decoding="async"
                     alt=""
                     aria-hidden
                     src={HIGHLIGHT_FILL}
@@ -139,7 +139,7 @@ export function DvkHardwareStack({ data }: { data?: any }) {
                 className={`absolute left-[147px] top-[484px] h-[78px] w-[76px] ${RECT_BORDER}`}
               >
                 <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                  <img
+                  <img loading="lazy" decoding="async"
                     alt=""
                     aria-hidden
                     src={HIGHLIGHT_FILL}
@@ -157,7 +157,7 @@ export function DvkHardwareStack({ data }: { data?: any }) {
                 className={`absolute left-[168px] top-[95px] h-[104px] w-[65px] ${RECT_BORDER}`}
               >
                 <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                  <img
+                  <img loading="lazy" decoding="async"
                     alt=""
                     aria-hidden
                     src={HIGHLIGHT_FILL}
@@ -167,7 +167,7 @@ export function DvkHardwareStack({ data }: { data?: any }) {
               </div>
               <div className="absolute left-[268px] top-[34px] h-[249px] w-[253px]">
                 <div className="absolute inset-[-0.48%_-3.24%_-6.1%_-3.24%]">
-                  <img
+                  <img loading="lazy" decoding="async"
                     alt=""
                     aria-hidden
                     src={SENSORS_VECTOR}
@@ -185,7 +185,7 @@ export function DvkHardwareStack({ data }: { data?: any }) {
                 className={`absolute left-[543px] top-[298px] h-[185px] w-[51px] ${RECT_BORDER}`}
               >
                 <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                  <img
+                  <img loading="lazy" decoding="async"
                     alt=""
                     aria-hidden
                     src={HIGHLIGHT_FILL}
@@ -197,7 +197,7 @@ export function DvkHardwareStack({ data }: { data?: any }) {
                 className={`absolute left-[74px] top-[16px] h-[49px] w-[62px] ${RECT_BORDER}`}
               >
                 <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                  <img
+                  <img loading="lazy" decoding="async"
                     alt=""
                     aria-hidden
                     src={HIGHLIGHT_FILL}
@@ -215,7 +215,7 @@ export function DvkHardwareStack({ data }: { data?: any }) {
                 className={`absolute left-[245px] top-[493px] h-[36px] w-[68px] ${RECT_BORDER}`}
               >
                 <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                  <img
+                  <img loading="lazy" decoding="async"
                     alt=""
                     aria-hidden
                     src={HIGHLIGHT_FILL}
@@ -227,7 +227,7 @@ export function DvkHardwareStack({ data }: { data?: any }) {
                 className={`absolute left-[10px] top-[420px] h-[55px] w-[47px] ${RECT_BORDER}`}
               >
                 <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                  <img
+                  <img loading="lazy" decoding="async"
                     alt=""
                     aria-hidden
                     src={HIGHLIGHT_FILL}
@@ -237,7 +237,7 @@ export function DvkHardwareStack({ data }: { data?: any }) {
               </div>
               <div className="absolute left-[17.5px] top-[228.5px] h-[156.5px] w-[83px]">
                 <div className="absolute inset-[-0.35%_-0.66%]">
-                  <img
+                  <img loading="lazy" decoding="async"
                     alt=""
                     aria-hidden
                     src={INTERFACES_VECTOR}
@@ -255,7 +255,7 @@ export function DvkHardwareStack({ data }: { data?: any }) {
                 className={`absolute left-[218px] top-[313px] h-[72px] w-[70px] ${RECT_BORDER}`}
               >
                 <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                  <img
+                  <img loading="lazy" decoding="async"
                     alt=""
                     aria-hidden
                     src={HIGHLIGHT_FILL}
@@ -273,7 +273,7 @@ export function DvkHardwareStack({ data }: { data?: any }) {
                 className={`absolute left-[60px] top-[228px] h-[57px] w-[58px] ${RECT_BORDER}`}
               >
                 <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                  <img
+                  <img loading="lazy" decoding="async"
                     alt=""
                     aria-hidden
                     src={HIGHLIGHT_FILL}
@@ -285,7 +285,7 @@ export function DvkHardwareStack({ data }: { data?: any }) {
                 className={`absolute left-[474px] top-[311px] h-[76px] w-[60px] ${RECT_BORDER}`}
               >
                 <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                  <img
+                  <img loading="lazy" decoding="async"
                     alt=""
                     aria-hidden
                     src={HIGHLIGHT_FILL}
@@ -397,7 +397,7 @@ function SpecCard({
           >
             {card.items.map((item) => (
               <li key={item} className="ms-[24px]">
-                <span className="leading-[24px] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">{item}</span>
+                <span className="leading-[24px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">{item}</span>
               </li>
             ))}
           </ul>

@@ -13,7 +13,7 @@ import { IconBox, PillarCta, type Pillar } from "./TechnologyPageArchitecture";
  * prev/next arrows (one pillar card at a time).
  */
 
-const BRAIN_IMG = "/technology/architecture-brain.png";
+const BRAIN_IMG = "/technology/architecture-brain.webp";
 const ARROW_LEFT = "/technology/carousel-arrow-left.svg";
 const ARROW_RIGHT = "/technology/carousel-arrow-right.svg";
 const INDICATOR_LINE = "/technology/m-indicator-line.svg";
@@ -32,7 +32,7 @@ function MobileBrainVisual() {
       >
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src={BRAIN_IMG}
             alt=""
             className="absolute top-[-2659.54%] left-[-0.01%] h-[6304.38%] w-[99.97%] max-w-none"
@@ -46,7 +46,7 @@ function MobileBrainVisual() {
       >
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src={BRAIN_IMG}
             alt=""
             className="absolute top-[0.66%] left-[-0.01%] h-[235.48%] w-[99.97%] max-w-none"
@@ -60,7 +60,7 @@ function MobileBrainVisual() {
       >
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src={BRAIN_IMG}
             alt=""
             className="absolute top-[-78.64%] left-[-0.01%] h-[179.66%] w-[99.97%] max-w-none"
@@ -82,7 +82,7 @@ function MobileIndicator() {
       >
         <div className="absolute inset-[0_-0.25px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={INDICATOR_LINE} alt="" className="block size-full max-w-none" />
+          <img loading="lazy" decoding="async" src={INDICATOR_LINE} alt="" className="block size-full max-w-none" />
         </div>
       </div>
       <div
@@ -94,7 +94,7 @@ function MobileIndicator() {
           <div className="relative size-[10px]">
             <div className="absolute inset-[-40%]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={INDICATOR_DIAMOND_OUTER} alt="" className="block size-full max-w-none" />
+              <img loading="lazy" decoding="async" src={INDICATOR_DIAMOND_OUTER} alt="" className="block size-full max-w-none" />
             </div>
           </div>
         </div>
@@ -107,7 +107,7 @@ function MobileIndicator() {
         <div className="flex-none rotate-135">
           <div className="relative size-[6px]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={INDICATOR_DIAMOND_INNER} alt="" className="absolute inset-0 block size-full max-w-none" />
+            <img loading="lazy" decoding="async" src={INDICATOR_DIAMOND_INNER} alt="" className="absolute inset-0 block size-full max-w-none" />
           </div>
         </div>
       </div>
@@ -175,7 +175,7 @@ function MobilePillarStat({ pillar }: { pillar: Pillar }) {
             <p className="shrink-0 text-[14px] tracking-[-0.1504px] whitespace-nowrap text-[#3a9719] not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
               +
             </p>
-            <p className="min-w-px flex-1 text-[rgba(255,255,255,0.9)] not-italic [word-break:break-word]">
+            <p className="min-w-px flex-1 text-[rgba(255,255,255,0.9)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
               {b}
             </p>
           </div>
@@ -258,7 +258,7 @@ export function TechnologyPageArchitectureMobile({
               data-name="Menu"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={ARROW_LEFT} alt="" className="absolute inset-0 block size-full max-w-none" />
+              <img loading="lazy" decoding="async" src={ARROW_LEFT} alt="" className="absolute inset-0 block size-full max-w-none" />
             </button>
             <button
               type="button"
@@ -269,7 +269,7 @@ export function TechnologyPageArchitectureMobile({
               data-name="Menu"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={ARROW_RIGHT} alt="" className="absolute inset-0 block size-full max-w-none" />
+              <img loading="lazy" decoding="async" src={ARROW_RIGHT} alt="" className="absolute inset-0 block size-full max-w-none" />
             </button>
           </div>
         </div>

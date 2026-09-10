@@ -40,7 +40,7 @@ function SectionTitle({
 }) {
   return (
     <h2
-      className={`${gilroyMedium.className} max-w-[327px] bg-clip-text text-center text-[28px] leading-[34px] font-medium text-transparent [word-break:break-word] not-italic ${className}`}
+      className={`${gilroyMedium.className} max-w-[327px] bg-clip-text text-center text-[28px] leading-[34px] font-medium text-transparent [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic ${className}`}
       style={{ backgroundImage: gradient(deg) }}
     >
       {children}
@@ -71,7 +71,7 @@ function GreenCta({
       <span className="relative z-10 flex items-center justify-center gap-[8px] text-[13px] leading-[normal] font-semibold uppercase whitespace-nowrap text-white not-italic">
         {children}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           src="/careers/cta-dot.svg"
           alt=""
           className="size-[6px] shrink-0"
@@ -101,7 +101,7 @@ function SectionWrap({
 const FALLBACK_HERO_TITLE = "A new paradigm for efficient AI compute";
 const FALLBACK_HERO_BODY =
   "We build energy-aware, programmable, mixed-signal AI processors that unlock orders-of-magnitude improvements in performance-per-watt, enabling scalable intelligence across edge, enterprise, and cloud.";
-const FALLBACK_HERO_BG = "/mobile/company/hero.png";
+const FALLBACK_HERO_BG = "/mobile/company/hero.webp";
 
 function CompanyHeroMobile({ data }: { data?: any }) {
   const title = (data?.title as string) || FALLBACK_HERO_TITLE;
@@ -123,7 +123,7 @@ function CompanyHeroMobile({ data }: { data?: any }) {
           aria-hidden
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src={bgSrc}
             alt=""
             className="block w-full"
@@ -142,7 +142,7 @@ function CompanyHeroMobile({ data }: { data?: any }) {
 
         {/* 3244:5536 — headline (x29 y7 w321) */}
         <h1
-          className={`${gilroyMedium.className} absolute left-[29px] top-[7px] w-[321px] max-w-full bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+          className={`${gilroyMedium.className} absolute left-[29px] top-[7px] w-[321px] max-w-full bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}
           style={{ backgroundImage: gradient("100.882deg") }}
           data-node-id="3244:5536"
         >
@@ -151,7 +151,7 @@ function CompanyHeroMobile({ data }: { data?: any }) {
 
         {/* 3244:5541 — body (x28 y130 w336) */}
         <p
-          className={`${interRegular.className} absolute left-[28px] top-[130px] w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+          className={`${interRegular.className} absolute left-[28px] top-[130px] w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
           data-node-id="3244:5541"
         >
           {body}
@@ -230,11 +230,11 @@ function CompanyMissionMobile({ data }: { data?: any }) {
                 <span className={`${gilroySemiBold.className} text-[30px] leading-[34px] font-semibold text-white not-italic`}>
                   {stat.value}
                 </span>
-                <span className={`${interRegular.className} text-[15px] leading-[20px] font-normal whitespace-nowrap text-[#53d824] not-italic`}>
+                <span className={`${interRegular.className} max-w-full overflow-hidden text-ellipsis text-[15px] leading-[20px] font-normal whitespace-nowrap text-[#53d824] not-italic`}>
                   {stat.label}
                 </span>
               </div>
-              <p className={`${interRegular.className} text-[13px] leading-[19px] font-normal text-white opacity-60 not-italic`}>
+              <p className={`${interRegular.className} text-[13px] leading-[19px] font-normal text-white opacity-60 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}>
                 {stat.description}
               </p>
             </div>
@@ -317,14 +317,14 @@ function CompanyLeadershipMobile({ data }: { data?: any }) {
             <Corners />
           </div>
           <h2
-            className={`${gilroyMedium.className} absolute inset-x-0 top-[7px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+            className={`${gilroyMedium.className} absolute inset-x-0 top-[7px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}
             style={{ backgroundImage: gradient("107.454deg") }}
           >
             {heading}
           </h2>
         </div>
         <p
-          className={`${interRegular.className} mx-auto mt-[10px] w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+          className={`${interRegular.className} mx-auto mt-[10px] w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         >
           {subtitle}
         </p>
@@ -420,7 +420,7 @@ function DnaCard({
   );
 }
 
-const FALLBACK_DNA_BG = "/company/image 137.png";
+const FALLBACK_DNA_BG = "/company/image 137.webp";
 
 function CompanyDnaMobile({ data }: { data?: any }) {
   const heading = (data?.heading as string) || FALLBACK_DNA_HEADING;
@@ -456,14 +456,14 @@ function CompanyDnaMobile({ data }: { data?: any }) {
             <Corners />
           </div>
           <h2
-            className={`${gilroyMedium.className} absolute inset-x-0 top-[7px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+            className={`${gilroyMedium.className} absolute inset-x-0 top-[7px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}
             style={{ backgroundImage: gradient("107.454deg") }}
           >
             {heading}
           </h2>
         </div>
         <p
-          className={`${interRegular.className} mx-auto mt-[10px] w-[334px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+          className={`${interRegular.className} mx-auto mt-[10px] w-[334px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         >
           {subtitle}
         </p>
@@ -481,7 +481,7 @@ function CompanyDnaMobile({ data }: { data?: any }) {
             aria-hidden
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               src={bgSrc}
               alt=""
               className="size-full object-cover object-bottom"
@@ -540,7 +540,7 @@ function CompanyEcosystemMobile({ data }: { data?: any }) {
           };
         })
       : ECOSYSTEM_COLUMNS_FALLBACK;
-  const mapSrc = mediaUrl(data?.map_image) || "/company/Map.png";
+  const mapSrc = mediaUrl(data?.map_image) || "/company/Map.webp";
 
   return (
     <section
@@ -562,7 +562,7 @@ function CompanyEcosystemMobile({ data }: { data?: any }) {
             style={{ backgroundImage: gradient("105.083deg") }}
           >
             {headingLines.map((line, i) => (
-              <span key={i} className="whitespace-nowrap block">
+              <span key={i} className="block max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
                 {line}
               </span>
             ))}
@@ -571,7 +571,7 @@ function CompanyEcosystemMobile({ data }: { data?: any }) {
 
         {/* Subtitle */}
         <p
-          className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+          className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         >
           {subtitle}
         </p>
@@ -593,13 +593,13 @@ function CompanyEcosystemMobile({ data }: { data?: any }) {
                   aria-hidden
                 />
                 <p
-                  className={`${gilroyMedium.className} text-[22px] leading-[29px] font-medium text-white not-italic whitespace-nowrap`}
+                  className={`${gilroyMedium.className} max-w-full text-[22px] leading-[29px] font-medium text-white not-italic whitespace-nowrap overflow-hidden text-ellipsis`}
                 >
                   {col.title}
                 </p>
               </div>
               <p
-                className={`${interRegular.className} max-w-[309px] text-[14px] leading-[20px] font-normal text-white opacity-65 not-italic [word-break:break-word]`}
+                className={`${interRegular.className} max-w-[309px] text-[14px] leading-[20px] font-normal text-white opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
               >
                 {col.description}
               </p>
@@ -662,7 +662,7 @@ function CompanyTechnologyPartnersMobile({ data }: { data?: any }) {
       <div className="px-[20px] pt-[10px] pb-[64px]">
         {/* Title — 48px, ghosted dark gradient, opacity 90%, left aligned */}
         <p
-          className={`${gilroySemiBold.className} bg-clip-text text-left text-[48px] leading-[42px] font-semibold tracking-[-0.96px] text-transparent opacity-90 not-italic [word-break:break-word]`}
+          className={`${gilroySemiBold.className} bg-clip-text text-left text-[48px] leading-[42px] font-semibold tracking-[-0.96px] text-transparent opacity-90 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
           style={{
             backgroundImage:
               "linear-gradient(107.119deg, rgb(22, 22, 22) 9.0248%, rgb(39, 39, 39) 37.884%, rgb(18, 18, 18) 111.41%)",
@@ -793,7 +793,7 @@ function ArticleChip({
     >
       <Corners />
       <p
-        className="text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] uppercase whitespace-nowrap not-italic"
+        className="max-w-full text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] uppercase whitespace-nowrap not-italic overflow-hidden text-ellipsis"
         style={{ color: textColor }}
       >
         {label}
@@ -905,12 +905,12 @@ function CompanyArticlesMobile({ data }: { data?: any }) {
             />
             <div className="flex flex-col gap-[10px]">
               <h3
-                className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+                className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
               >
                 {featured.title}
               </h3>
               <p
-                className={`${interRegular.className} text-[14px] leading-[18px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
+                className={`${interRegular.className} text-[14px] leading-[18px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
               >
                 {featured.excerpt}
               </p>
@@ -934,7 +934,7 @@ function CompanyArticlesMobile({ data }: { data?: any }) {
               {/* Image — 570px wide, centered, bleeds beyond card (clipped). Per-article Figma crop. */}
               <div className="relative h-[152px] w-[570px] max-w-none shrink-0 overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <img loading="lazy" decoding="async"
                   src={article.imageSrc}
                   alt=""
                   className={COMPACT_IMAGE_CROPS[index] ?? COMPACT_IMAGE_CROPS[COMPACT_IMAGE_CROPS.length - 1]}
@@ -945,12 +945,12 @@ function CompanyArticlesMobile({ data }: { data?: any }) {
                 <ArticleChip label={article.category} tone="white" />
                 <div className="flex w-full flex-col gap-[10px]">
                   <h3
-                    className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+                    className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
                   >
                     {article.title}
                   </h3>
                   <p
-                    className={`${interRegular.className} text-[14px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
+                    className={`${interRegular.className} text-[14px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
                   >
                     {article.excerpt}
                   </p>
@@ -1027,10 +1027,10 @@ function CompanyEngagementMobile({
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" aria-hidden />
         </div>
         <div className="flex flex-col gap-[12px] p-[22px] pt-0">
-          <h3 className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic`}>
+          <h3 className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}>
             {joinTitleFinal}
           </h3>
-          <p className={`${interRegular.className} text-[13px] leading-[20px] font-normal text-white opacity-70 not-italic`}>
+          <p className={`${interRegular.className} text-[13px] leading-[20px] font-normal text-white opacity-70 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}>
             {joinDescriptionFinal}
           </p>
           <div className="mt-[4px]">
@@ -1053,7 +1053,7 @@ function CompanyEngagementMobile({
               aria-hidden
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 src={card.imageSrc}
                 alt=""
                 className="absolute h-[121.8%] left-[-2.54%] max-w-none top-[-21.8%] w-[105.07%]"
@@ -1068,14 +1068,14 @@ function CompanyEngagementMobile({
                 <div className="relative w-fit px-[10px]">
                   <Corners />
                   <h3
-                    className={`${gilroyMedium.className} bg-clip-text text-[24px] leading-[38px] font-medium text-transparent [word-break:break-word] not-italic`}
+                    className={`${gilroyMedium.className} bg-clip-text text-[24px] leading-[38px] font-medium text-transparent [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}
                     style={{ backgroundImage: gradient("116.349deg") }}
                   >
                     {card.titleLines.join(" ")}
                   </h3>
                 </div>
                 <p
-                  className={`${interRegular.className} text-[14px] leading-[22px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
+                  className={`${interRegular.className} text-[14px] leading-[22px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
                 >
                   {card.description}
                 </p>

@@ -34,7 +34,7 @@ export function NewsletterSignup({
       data-name="Group 90"
     >
       <div className="absolute inset-0 -z-10 w-full h-full">
-        <img src="/home1618873545.png" alt="" className="absolute inset-0 h-full w-full object-fill" />
+        <img loading="lazy" decoding="async" src="/home1618873545.png" alt="" className="absolute inset-0 h-full w-full object-fill" />
       </div>
       <div className="relative inline-grid grid-cols-[max-content] grid-rows-[max-content] place-items-center leading-[0]">
         <Corner className="absolute top-0 right-0" src={cornerRight} rotate={true} />
@@ -84,7 +84,7 @@ export function NewsletterSignup({
           <span
             aria-hidden
             className="pointer-events-none absolute inset-0 bg-[length:307.2px_307.2px] bg-top-left opacity-40 mix-blend-plus-lighter"
-            style={{ backgroundImage: "url(/contact/cta-texture.png)" }}
+            style={{ backgroundImage: "url(/contact/cta-texture.webp)" }}
           />
           <span className="relative">{buttonLabel}</span>
           <span

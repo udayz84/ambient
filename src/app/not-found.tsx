@@ -16,12 +16,12 @@ export default function NotFound() {
       <div className="relative flex flex-col items-center w-full max-w-[1440px] px-4 min-h-[500px]">
         {/* Left cable */}
         <div className="hidden lg:block -translate-x-1/2 absolute h-[317px] left-[calc(50%-420px)] mix-blend-screen top-[40px] w-[336px] overflow-hidden pointer-events-none z-10">
-          <img alt="" className="absolute h-[139.65%] left-0 max-w-none top-[-19.82%] w-[180.37%]" src="/404-cable.png" />
+          <img loading="lazy" decoding="async" alt="" className="absolute h-[139.65%] left-0 max-w-none top-[-19.82%] w-[180.37%]" src="/404-cable.webp" />
         </div>
         
         {/* Right cable */}
         <div className="hidden lg:block -translate-x-1/2 absolute h-[317px] left-[calc(50%+450px)] mix-blend-screen top-[40px] w-[336px] overflow-hidden pointer-events-none z-10">
-          <img alt="" className="absolute h-[139.65%] left-[-108.43%] max-w-none top-[-19.82%] w-[180.37%]" src="/404-cable.png" />
+          <img loading="lazy" decoding="async" alt="" className="absolute h-[139.65%] left-[-108.43%] max-w-none top-[-19.82%] w-[180.37%]" src="/404-cable.webp" />
         </div>
 
         <h1 

@@ -84,7 +84,7 @@ function WideCard({
       </div>
 
       <p
-        className={`${interRegular.className} absolute top-[12.15px] left-[12px] text-[12px] leading-[11.835px] font-normal whitespace-nowrap text-[#0a3315] not-italic [word-break:break-word]`}
+        className={`${interRegular.className} absolute top-[12.15px] left-[12px] max-w-[calc(100%-24px)] text-[12px] leading-[11.835px] font-normal whitespace-nowrap text-[#0a3315] not-italic overflow-hidden text-ellipsis [word-break:break-word]`}
       >
         {title}
       </p>
@@ -92,7 +92,7 @@ function WideCard({
       <div className="absolute top-[32.75px] left-[12px] h-0 w-[66.553px]">
         <div className="absolute inset-[-1px_0_0_0]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src="/developer-platform/line-88-mobile.svg"
             className="block size-full max-w-none"
@@ -139,14 +139,14 @@ function SmallCard({
 
       <div className="absolute top-[12px] left-[12px] flex w-[82px] flex-col items-start gap-[9px]">
         <p
-          className={`${interRegular.className} relative shrink-0 text-[12px] leading-[11.835px] font-normal text-[#0a3315] not-italic [word-break:break-word] ${titleWraps ? "w-[155px]" : "whitespace-nowrap"}`}
+           className={`${interRegular.className} relative shrink-0 text-[12px] leading-[11.835px] font-normal text-[#0a3315] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden ${titleWraps ? "w-[155px]" : "whitespace-nowrap"}`}
         >
           {title}
         </p>
         <div className="relative h-0 w-full shrink-0">
           <div className="absolute inset-[-1px_0_0_0]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src="/developer-platform/line-89.svg"
               className="block size-full max-w-none"
@@ -190,7 +190,7 @@ export function DeveloperPlatformMobile({ data }: { data?: any }) {
         aria-hidden
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src="/contact/Fractal%20Glass.png"
           className="absolute inset-0 size-full object-cover opacity-40"
@@ -202,7 +202,7 @@ export function DeveloperPlatformMobile({ data }: { data?: any }) {
       <div className="relative flex flex-col items-center py-[48px]">
         <div className="relative inline-grid grid-cols-[max-content] grid-rows-[max-content] place-items-start leading-[0]">
           <h2
-            className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[7px] ml-[3px] w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic whitespace-pre-wrap`}
+            className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[7px] ml-[3px] w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
             style={{
               backgroundImage:
                 "linear-gradient(107.454deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -246,7 +246,7 @@ export function DeveloperPlatformMobile({ data }: { data?: any }) {
         </div>
 
         <p
-          className={`${interRegular.className} mt-[10px] w-[350px] px-[12px] text-center text-[14px] leading-[16px] font-normal text-white not-italic [word-break:break-word]`}
+           className={`${interRegular.className} mt-[10px] w-[350px] px-[12px] text-center text-[14px] leading-[16px] font-normal text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         >
           {subtitle}
         </p>

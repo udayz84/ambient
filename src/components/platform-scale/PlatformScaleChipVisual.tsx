@@ -6,9 +6,9 @@ const chipGlassCropClass =
 function ChipGlassImage({ nodeId }: { nodeId: string }) {
   return (
   // eslint-disable-next-line @next/next/no-img-element
-    <img
+    <img loading="lazy" decoding="async"
       alt=""
-      src="/platform-scale/chip-glass.png"
+      src="/platform-scale/chip-glass.webp"
       className={chipGlassCropClass}
       aria-hidden
       data-node-id={nodeId}
@@ -106,7 +106,7 @@ export function PlatformScaleChipVisual() {
           data-name="Shade"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src="/platform-scale/chip-shade.svg"
             className="absolute inset-0 block size-full max-w-none"
@@ -120,9 +120,9 @@ export function PlatformScaleChipVisual() {
           data-name="image 70"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
-            src="/platform-scale/chip-hero.png"
+            src="/platform-scale/chip-hero.webp"
             className="pointer-events-none absolute inset-0 size-full max-w-none object-bottom"
             aria-hidden
           />
@@ -135,7 +135,7 @@ export function PlatformScaleChipVisual() {
         >
           <div className="absolute inset-[-0.15%]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src="/platform-scale/chip-frame.svg"
               className="block size-full max-w-none"

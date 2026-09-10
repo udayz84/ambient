@@ -172,7 +172,7 @@ function BenchCardView({ card, chipLabel }: { card: any; chipLabel: string }) {
         aria-hidden
       >
         {card.image ? (
-          <img
+          <img loading="lazy" decoding="async"
             src={card.image}
             alt=""
             className="absolute inset-0 size-full max-w-none rounded-[6px] object-contain"
@@ -346,7 +346,7 @@ function MobileBenchCard({ card }: { card: any }) {
       >
         {card.image && (
           /* eslint-disable-next-line @next/next/no-img-element */
-          <img
+          <img loading="lazy" decoding="async"
             src={card.image}
             alt=""
             className="absolute inset-0 size-full max-w-none rounded-[5.528px] object-contain"

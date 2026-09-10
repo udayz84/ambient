@@ -182,7 +182,7 @@ function LeadershipInteractivePanel({
               {bioParagraphs.map((paragraph, index) => (
                 <p
                   key={index}
-                  className={`${interRegular.className} w-full text-left font-normal not-italic [word-break:break-word] ${spec.bioTypography} ${spec.bioColor}`}
+                  className={`${interRegular.className} w-full text-left font-normal not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:6] overflow-hidden ${spec.bioTypography} ${spec.bioColor}`}
                 >
                   {paragraph}
                 </p>
@@ -338,7 +338,7 @@ export function CompanyLeadershipCard({
         aria-hidden
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src={member.imageSrc}
           className={`${
@@ -370,7 +370,7 @@ export function CompanyLeadershipCard({
 
       <div className="pointer-events-none absolute inset-[-1px] z-20" aria-hidden>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           src={spec.borderSrc}
           alt=""
           className="block size-full max-w-none"

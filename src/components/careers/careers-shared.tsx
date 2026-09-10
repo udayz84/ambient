@@ -34,7 +34,7 @@ function CornerImg({ src, className = "" }: { src: string; className?: string })
   return (
     <div className={`pointer-events-none absolute inset-[0_0_-12.5%_-12.5%] ${className}`}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img alt="" className="block size-full max-w-none" src={src} aria-hidden />
+      <img loading="lazy" decoding="async" alt="" className="block size-full max-w-none" src={src} aria-hidden />
     </div>
   );
 }
@@ -173,10 +173,10 @@ export function CareersFramedTitle({
         aria-hidden
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img alt="" className="block size-full max-w-none" src={frameSrc} />
+        <img loading="lazy" decoding="async" alt="" className="block size-full max-w-none" src={frameSrc} />
       </div>
       <p
-        className={`${gilroyMedium.className} absolute left-1/2 ${textTop} z-10 -translate-x-1/2 bg-clip-text text-center font-medium text-transparent not-italic whitespace-nowrap [word-break:break-word] ${textClassName}`}
+        className={`${gilroyMedium.className} absolute left-1/2 ${textTop} z-10 max-w-full -translate-x-1/2 bg-clip-text text-center font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden ${textClassName}`}
         style={{
           backgroundImage: `linear-gradient(${gradientDeg}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
           WebkitBackgroundClip: "text",
@@ -219,7 +219,7 @@ export function CareersGradientCard({
         <div className="relative size-[36px] shrink-0">
           {card.icon ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img alt="" className="absolute inset-0 block size-full max-w-none" src={card.icon} />
+            <img loading="lazy" decoding="async" alt="" className="absolute inset-0 block size-full max-w-none" src={card.icon} />
           ) : null}
         </div>
         <div className="flex w-full flex-col items-start gap-[10px]">
@@ -344,7 +344,7 @@ export function CareersFilterField({ label, nodeId }: { label: string; nodeId?: 
     >
       <div className="flex h-[48px] min-w-px flex-[1_0_0] items-center gap-[10px] bg-transparent px-[20px]">
         <p
-          className={`${interRegular.className} min-w-px flex-[1_0_0] text-[14px] leading-[1.4] font-normal text-white not-italic [word-break:break-word]`}
+          className={`${interRegular.className} min-w-px flex-[1_0_0] text-[14px] leading-[1.4] font-normal text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
         >
           {label}
         </p>
@@ -387,12 +387,12 @@ export function CareersRolesProfileCta({
         <RepelDots />
       </span>
       <span className="relative z-10 flex h-full w-full items-center justify-center gap-[10px]">
-        <span className="text-[14px] font-semibold leading-[normal] whitespace-nowrap text-[#FFF] uppercase not-italic">
+        <span className="max-w-full overflow-hidden text-ellipsis text-[14px] font-semibold leading-[normal] whitespace-nowrap text-[#FFF] uppercase not-italic">
           {label}
         </span>
         <span className="pointer-events-none size-[6px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src="/careers/cta-dot.svg"
             alt=""
             className="block size-full max-w-none"
@@ -409,28 +409,28 @@ export function CareersRolesProfileCta({
       <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">
         <div className="rotate-180 flex-none">
           <div className="relative size-[4px]">
-            <img src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>
       <div className="pointer-events-none absolute -top-[0.5px] left-0 z-20 flex size-[4px] items-center justify-center">
         <div className="-scale-y-100 flex-none">
           <div className="relative size-[4px]">
-            <img src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>
       <div className="pointer-events-none absolute right-0 bottom-0 z-20 flex size-[4px] items-center justify-center">
         <div className="-scale-x-100 flex-none">
           <div className="relative size-[4px]">
-            <img src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>
       <div className="pointer-events-none absolute bottom-0 left-0 z-20 flex size-[4px] items-center justify-center">
         <div className="flex-none">
           <div className="relative size-[4px]">
-            <img src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>
@@ -466,12 +466,12 @@ export function CareersGreenCta({
         <RepelDots />
       </span>
       <span className="relative z-10 flex h-full w-full items-center justify-center gap-[10px] px-6">
-        <span className="text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic">
+        <span className="max-w-full overflow-hidden text-ellipsis text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic">
           {children}
         </span>
         <span className="pointer-events-none size-[6px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src="/careers/cta-dot.svg"
             alt=""
             className="block size-full max-w-none"
@@ -488,28 +488,28 @@ export function CareersGreenCta({
       <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">
         <div className="rotate-180 flex-none">
           <div className="relative size-[4px]">
-            <img src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>
       <div className="pointer-events-none absolute -top-[0.5px] left-0 z-20 flex size-[4px] items-center justify-center">
         <div className="-scale-y-100 flex-none">
           <div className="relative size-[4px]">
-            <img src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>
       <div className="pointer-events-none absolute right-0 bottom-0 z-20 flex size-[4px] items-center justify-center">
         <div className="-scale-x-100 flex-none">
           <div className="relative size-[4px]">
-            <img src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>
       <div className="pointer-events-none absolute bottom-0 left-0 z-20 flex size-[4px] items-center justify-center">
         <div className="flex-none">
           <div className="relative size-[4px]">
-            <img src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>
@@ -540,7 +540,7 @@ export function CareersWhiteCta({
         style={{ backgroundImage: "url(/careers/white-cta-texture.png)" }}
       />
       <span className="relative z-10 flex h-full w-full items-center justify-center px-6">
-        <span className="text-[14px] leading-[normal] whitespace-nowrap text-[#121212] uppercase not-italic">
+        <span className="max-w-full overflow-hidden text-ellipsis text-[14px] leading-[normal] whitespace-nowrap text-[#121212] uppercase not-italic">
           {children}
         </span>
       </span>
@@ -549,28 +549,28 @@ export function CareersWhiteCta({
       <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">
         <div className="rotate-180 flex-none">
           <div className="relative size-[4px]">
-            <img src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>
       <div className="pointer-events-none absolute -top-[0.5px] left-0 z-20 flex size-[4px] items-center justify-center">
         <div className="-scale-y-100 flex-none">
           <div className="relative size-[4px]">
-            <img src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>
       <div className="pointer-events-none absolute right-0 bottom-0 z-20 flex size-[4px] items-center justify-center">
         <div className="-scale-x-100 flex-none">
           <div className="relative size-[4px]">
-            <img src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>
       <div className="pointer-events-none absolute bottom-0 left-0 z-20 flex size-[4px] items-center justify-center">
         <div className="flex-none">
           <div className="relative size-[4px]">
-            <img src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>

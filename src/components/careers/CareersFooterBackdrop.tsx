@@ -9,7 +9,7 @@ export function CareersFooterBackdrop({ offsetY = 0 }: { offsetY?: number }) {
     >
       <div className="absolute inset-0 overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           src="/careers/footer-bg.png"
           alt=""
           className="absolute size-full max-w-none object-cover"

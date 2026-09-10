@@ -9,7 +9,7 @@ import { MeasuredProofMobile } from "./MeasuredProofMobile";
 
 export function MeasuredProof({ data }: { data?: any }) {
   const backgroundImage =
-    mediaUrl(data?.background_image) || "/measured-proof/bg-image-90.png";
+    mediaUrl(data?.background_image) || "/measured-proof/bg-image-90.webp";
   const gradientTop =
     mediaUrl(data?.gradient_top) || "/measured-proof/gradient-top.png";
   const gradientBottom =

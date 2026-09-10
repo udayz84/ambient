@@ -25,7 +25,7 @@ export const LEADERSHIP_TEAM: LeadershipMember[] = [
       "An engineer and semiconductor innovator with 50+ chip tape-outs and 50+ patents, with deep experience across hardware and software from executive leadership to hands-on engineering.",
       "He founded Ambient Scientific in 2017 to pioneer DigAn™ technology for ultra-low-power, programmable AI processors that scale from edge devices to high-performance systems.",
     ],
-    imageSrc: "/company/leadership/gp-singh.png",
+    imageSrc: "/company/leadership/gp-singh.webp",
     imageClassName: PORTRAIT_CLASS,
     linkedInHref: "https://www.linkedin.com/in/gp-singh-340732/",
     nodeId: "2379:2288",

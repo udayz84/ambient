@@ -8,7 +8,7 @@ const HERO_BG_GRADIENT =
 const FALLBACK_TITLE = "A new paradigm for\nefficient AI compute";
 const FALLBACK_BODY =
   "We build energy-aware, programmable, mixed-signal AI processors that unlock orders-of-magnitude improvements in performance-per-watt, enabling scalable intelligence across edge, enterprise, and cloud.";
-const FALLBACK_BG = "/company/hero-bg.png";
+const FALLBACK_BG = "/company/hero-bg.webp";
 
 type CompanyHeroProps = {
   data?: any;
@@ -73,12 +73,12 @@ export function CompanyHero({ data }: CompanyHeroProps = {}) {
             >
               <GradientTitle
                 nodeId="2379:2267"
-                className="h-[98px] w-max overflow-visible [word-break:normal]"
+                className="h-[98px] max-w-[606px] [word-break:break-word]"
               >
                 {titleLines.map((line, i) => (
                   <span
                     key={i}
-                    className="block h-[49px] shrink-0 leading-[49px]"
+                    className="block h-[49px] shrink-0 leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden"
                   >
                     {line}
                   </span>
@@ -94,7 +94,7 @@ export function CompanyHero({ data }: CompanyHeroProps = {}) {
             data-name="Frame 1984079417"
           >
             <p
-              className={`${interRegular.className} w-[532px] max-w-full shrink-0 overflow-visible text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:normal]`}
+              className={`${interRegular.className} w-[532px] max-w-full shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
               data-node-id="2379:2273"
             >
               {body}

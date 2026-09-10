@@ -73,28 +73,28 @@ function GreenCta({
       <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">
         <div className="rotate-180 flex-none">
           <div className="relative size-[4px]">
-            <img src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>
       <div className="pointer-events-none absolute -top-[0.5px] left-0 z-20 flex size-[4px] items-center justify-center">
         <div className="-scale-y-100 flex-none">
           <div className="relative size-[4px]">
-            <img src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>
       <div className="pointer-events-none absolute right-0 bottom-0 z-20 flex size-[4px] items-center justify-center">
         <div className="-scale-x-100 flex-none">
           <div className="relative size-[4px]">
-            <img src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>
       <div className="pointer-events-none absolute bottom-0 left-0 z-20 flex size-[4px] items-center justify-center">
         <div className="flex-none">
           <div className="relative size-[4px]">
-            <img src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>
@@ -122,28 +122,28 @@ function WhiteCta({ children, href = "#" }: { children: React.ReactNode; href?: 
       <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">
         <div className="rotate-180 flex-none">
           <div className="relative size-[4px]">
-            <img src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>
       <div className="pointer-events-none absolute -top-[0.5px] left-0 z-20 flex size-[4px] items-center justify-center">
         <div className="-scale-y-100 flex-none">
           <div className="relative size-[4px]">
-            <img src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>
       <div className="pointer-events-none absolute right-0 bottom-0 z-20 flex size-[4px] items-center justify-center">
         <div className="-scale-x-100 flex-none">
           <div className="relative size-[4px]">
-            <img src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>
       <div className="pointer-events-none absolute bottom-0 left-0 z-20 flex size-[4px] items-center justify-center">
         <div className="flex-none">
           <div className="relative size-[4px]">
-            <img src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
           </div>
         </div>
       </div>
@@ -171,7 +171,7 @@ function CareersHeroMobile({ data }: { data?: any }) {
           <div className="pointer-events-none absolute left-[calc(50%-76px)] top-[188px] h-[290px] w-[545px] max-w-none -translate-x-1/2 overflow-hidden">
             {bgImg ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img
+              <img loading="lazy" decoding="async"
                 src={bgImg}
                 alt={data?.alt || ""}
                 className="absolute inset-0 size-full max-w-none object-cover"
@@ -254,7 +254,7 @@ function CareersBestWorkMobile({ data }: { data?: any }) {
             <div className="relative size-[36px] shrink-0">
               {card.icon ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <img loading="lazy" decoding="async"
                   alt=""
                   src={card.icon}
                   className="absolute inset-0 size-full object-contain"
@@ -285,7 +285,7 @@ function CareersBestWorkMobile({ data }: { data?: any }) {
 function CareersDnaMobile({ data }: { data?: any }) {
   const heading = data?.heading || "";
   const subtitle = data?.subtitle || "";
-  const bgImg = "/mobile/career/image 108.png";
+  const bgImg = "/mobile/career/image 108.webp";
   const chipImg = mediaUrl(data?.mobile_chip_object) || mediaUrl(data?.chip_object);
   const strapiPanels: any[] =
     data?.panels && Array.isArray(data.panels) ? data.panels : [];
@@ -305,7 +305,7 @@ function CareersDnaMobile({ data }: { data?: any }) {
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           src={bgImg}
           alt=""
           className="absolute inset-0 size-full object-cover object-bottom"
@@ -522,7 +522,7 @@ function CareersOpenRolesMobile({ data }: { data?: any }) {
           </div>
 
           <p
-            className={`${interRegular.className} relative z-10 mt-[16px] w-full max-w-[300px] text-center text-[14px] leading-[22px] font-normal text-white opacity-65 not-italic`}
+            className={`${interRegular.className} relative z-10 mt-[16px] w-full max-w-[300px] text-center text-[14px] leading-[22px] font-normal text-white opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
           >
             {generalAppSubtitle}
           </p>
@@ -533,7 +533,7 @@ function CareersOpenRolesMobile({ data }: { data?: any }) {
             style={{ boxShadow: "0px 32.385px 82.505px 0px rgba(69,196,24,0.2), 0px 19.062px 24.872px 0px rgba(83,216,36,0.15), 0px 7.918px 10.331px 0px rgba(83,216,36,0.15), 0px 2.864px 3.737px 0px rgba(83,216,36,0.1)" }}
           >
             <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_2px_rgba(217,255,240,0.6)]" />
-            <span className={`${gilroyMedium.className} relative z-10 text-[12px] leading-[24px] uppercase text-white not-italic`}>
+            <span className={`${gilroyMedium.className} relative z-10 max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[12px] leading-[24px] uppercase text-white not-italic`}>
               {generalAppCtaLabel}
             </span>
             <div className="relative z-10 size-[4px] shrink-0 rounded-full bg-white" />
@@ -644,7 +644,7 @@ function JobRowMobile({
           <div className="absolute inset-0 bg-[rgba(226,241,202,0.12)]" />
         )}
 
-        <span className={`${gilroyMedium.className} relative z-10 text-[14px] leading-[28px] uppercase text-white not-italic`}>
+        <span className={`${gilroyMedium.className} relative z-10 max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[14px] leading-[28px] uppercase text-white not-italic`}>
           {applyLabel}
         </span>
         <div className="relative z-10 flex h-[6px] w-[12px] items-center justify-center shrink-0">
@@ -702,7 +702,7 @@ function CareersBenefitsMobile({ data }: { data?: any }) {
             <div className="relative size-[36px] shrink-0">
               {card.icon ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <img loading="lazy" decoding="async"
                   alt=""
                   src={card.icon}
                   className="absolute inset-0 size-full object-contain"
@@ -767,7 +767,7 @@ function CareersBottomCtaMobile({ data }: { data?: any }) {
             >
               <div className="absolute inset-0 pointer-events-none opacity-40 mix-blend-plus-lighter" style={{ backgroundImage: "url(/careers/white-cta-texture.png)", backgroundSize: "307.2px 307.2px" }} />
               <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
-              <span className="relative z-10 text-[14px] uppercase text-[#121212] not-italic whitespace-nowrap font-semibold">
+              <span className="relative z-10 max-w-full overflow-hidden text-ellipsis text-[14px] uppercase text-[#121212] not-italic whitespace-nowrap font-semibold">
                 {btn.label}
               </span>
             </a>
@@ -780,7 +780,7 @@ function CareersBottomCtaMobile({ data }: { data?: any }) {
             >
               <GreenCtaCorners />
               <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
-              <span className="relative z-10 text-[14px] uppercase text-white not-italic font-semibold">
+              <span className="relative z-10 max-w-full overflow-hidden text-ellipsis text-[14px] uppercase text-white not-italic whitespace-nowrap font-semibold">
                 {btn.label}
               </span>
               <div className="relative z-10 size-[6px] shrink-0 rounded-full bg-white" />

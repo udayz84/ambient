@@ -77,7 +77,7 @@ export function ResourcesHero({ data }: ResourcesHeroProps = {}) {
               className="w-[810px] text-center"
             >
               {titleLines.map((line, i) => (
-                <span key={i} className="block">
+                <span key={i} className="block [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
                   {line}
                 </span>
               ))}

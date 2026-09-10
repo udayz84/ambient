@@ -32,7 +32,7 @@ const ARTICLES: Article[] = [
   {
     title: "Wearables",
     body: "Always-on biometric tracking and complex activity recognition running continuously on standard wearable batteries.",
-    image: "/applications/card-center.png",
+    image: "/applications/card-center.webp",
     imageW: 205,
     imageH: 162,
     ctaLabel: FALLBACK_CTA,
@@ -40,7 +40,7 @@ const ARTICLES: Article[] = [
   {
     title: "Hearables",
     body: "Always-on wake-word detection and real-time audio enhancement running continuously on microscopic power budgets.",
-    image: "/applications/card-right-mid.png",
+    image: "/applications/card-right-mid.webp",
     imageW: 205,
     imageH: 162,
     ctaLabel: FALLBACK_CTA,
@@ -48,7 +48,7 @@ const ARTICLES: Article[] = [
   {
     title: "Smart Home",
     body: "True on-device voice processing and presence detection without sacrificing consumer privacy to the cloud.",
-    image: "/applications/card-left-far.png",
+    image: "/applications/card-left-far.webp",
     imageW: 179,
     imageH: 162,
     ctaLabel: FALLBACK_CTA,
@@ -56,7 +56,7 @@ const ARTICLES: Article[] = [
   {
     title: "Industry 4.0",
     body: "High-frequency predictive maintenance and visual defect detection directly on the factory floor.",
-    image: "/applications/card-left-mid.png",
+    image: "/applications/card-left-mid.webp",
     imageW: 205,
     imageH: 162,
     ctaLabel: FALLBACK_CTA,
@@ -64,7 +64,7 @@ const ARTICLES: Article[] = [
   {
     title: "Medical Devices",
     body: "Clinical-grade monitoring and real-time anomaly detection deployed in miniaturized form factors.",
-    image: "/applications/app-medical.png",
+    image: "/applications/app-medical.webp",
     imageW: 205,
     imageH: 162,
     ctaLabel: FALLBACK_CTA,
@@ -72,7 +72,7 @@ const ARTICLES: Article[] = [
   {
     title: "Agriculture & Livestock",
     body: "Complex visual monitoring and behavioral tracking deployed in remote environments where cloud connectivity is impossible.",
-    image: "/applications/card-right-far.png",
+    image: "/applications/card-right-far.webp",
     imageW: 179,
     imageH: 162,
     ctaLabel: FALLBACK_CTA,
@@ -80,7 +80,7 @@ const ARTICLES: Article[] = [
   {
     title: "Drones",
     body: "High-speed object detection and autonomous navigation processed natively without sacrificing critical flight time.",
-    image: "/applications/app-drones.png",
+    image: "/applications/app-drones.webp",
     imageW: 205,
     imageH: 162,
     ctaLabel: FALLBACK_CTA,
@@ -88,7 +88,7 @@ const ARTICLES: Article[] = [
   {
     title: "Robotics",
     body: "Instantaneous multi-sensor fusion and complex kinematic control operating completely untethered from the cloud.",
-    image: "/applications/app-robotics.png",
+    image: "/applications/app-robotics.webp",
     imageW: 205,
     imageH: 162,
     ctaLabel: FALLBACK_CTA,
@@ -96,7 +96,7 @@ const ARTICLES: Article[] = [
   {
     title: "Automotive",
     body: "Ultra-low latency sensor fusion and continuous in-cabin monitoring executing natively for next-generation safety.",
-    image: "/applications/app-automotive.png",
+    image: "/applications/app-automotive.webp",
     imageW: 285,
     imageH: 258,
     objectBottom: true,
@@ -108,7 +108,7 @@ function SectionTitle({ heading }: { heading: string }) {
   return (
     <div className="relative inline-block px-[14px]">
       <h2
-        className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic`}
+        className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
         style={{
           backgroundImage: TITLE_GRADIENT,
           WebkitBackgroundClip: "text",
@@ -138,7 +138,7 @@ function ArticleCard({ article }: { article: Article }) {
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
           style={{ width: article.imageW, height: article.imageH }}
         >
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             aria-hidden
             src={article.image}
@@ -152,12 +152,12 @@ function ArticleCard({ article }: { article: Article }) {
       {/* News section */}
       <div className="flex w-full flex-col items-center gap-[10px] text-center">
         <p
-          className={`${gilroyMedium.className} text-[20.211px] leading-[28.295px] tracking-[-0.4539px] whitespace-nowrap text-white`}
+          className={`${gilroyMedium.className} w-full text-[20.211px] leading-[28.295px] tracking-[-0.4539px] text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
         >
           {article.title}
         </p>
         <p
-          className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)]`}
+          className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         >
           {article.body}
         </p>
@@ -166,7 +166,7 @@ function ArticleCard({ article }: { article: Article }) {
       {/* CTA - Secondary */}
       <Link href={article.ctaLink || "#"} className="relative mt-auto flex shrink-0 cursor-pointer items-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] px-[20px] py-[10px] transition-colors hover:bg-[rgba(240,240,240,0.1)]">
         <p
-          className={`${gilroyMedium.className} text-[16px] leading-[28px] uppercase whitespace-nowrap text-white`}
+          className={`${gilroyMedium.className} max-w-full text-[16px] leading-[28px] uppercase whitespace-nowrap text-white overflow-hidden text-ellipsis`}
         >
           {article.ctaLabel}
         </p>
@@ -242,7 +242,7 @@ export function ApplicationsPageArticles({ data }: { data?: any }) {
           aria-hidden
         >
           <div className="-scale-y-100">
-            <img src="/applications/dvk-bottom.png" alt="" className="h-[341px] w-[1441px] object-cover" />
+            <img loading="lazy" decoding="async" src="/applications/dvk-bottom.png" alt="" className="h-[341px] w-[1441px] object-cover" />
           </div>
         </div>
 
@@ -258,14 +258,16 @@ export function ApplicationsPageArticles({ data }: { data?: any }) {
             }}
             data-node-id="4032:14135"
           >
-            {heading}
+            <span className="w-full [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
+              {heading}
+            </span>
           </h2>
 
           <div className="absolute left-[351.5px] top-[4px] flex h-[4px] w-[2.346px] items-center justify-center">
             <div className="flex-none rotate-180">
               <div className="relative h-[4px] w-[2.346px]">
                 <div className="absolute inset-[0_0_-12.5%_-21.31%]">
-                  <img alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
+                  <img loading="lazy" decoding="async" alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
                 </div>
               </div>
             </div>
@@ -274,21 +276,21 @@ export function ApplicationsPageArticles({ data }: { data?: any }) {
             <div className="-scale-y-100 flex-none rotate-180">
               <div className="relative h-[4px] w-[2.346px]">
                 <div className="absolute inset-[0_0_-12.5%_-21.31%]">
-                  <img alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
+                  <img loading="lazy" decoding="async" alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
                 </div>
               </div>
             </div>
           </div>
           <div className="absolute left-[-1.5px] top-[75px] h-[4px] w-[2.346px]">
             <div className="absolute inset-[0_0_-12.5%_-21.31%]">
-              <img alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
+              <img loading="lazy" decoding="async" alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
             </div>
           </div>
           <div className="absolute left-[-1.5px] top-[4px] flex h-[4px] w-[2.346px] items-center justify-center">
             <div className="-scale-y-100 flex-none">
               <div className="relative h-[4px] w-[2.346px]">
                 <div className="absolute inset-[0_0_-12.5%_-21.31%]">
-                  <img alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
+                  <img loading="lazy" decoding="async" alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
                 </div>
               </div>
             </div>
@@ -307,10 +309,10 @@ export function ApplicationsPageArticles({ data }: { data?: any }) {
         {/* Navigation arrows (node 4032:5932) */}
         <div className="relative z-10 mt-[40px] flex gap-[20px]">
           <button type="button" onClick={scrollLeft} className="relative size-[44px] shrink-0 cursor-pointer" aria-label="Previous">
-            <img src={NAV_ARROW_LEFT} alt="" className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src={NAV_ARROW_LEFT} alt="" className="block size-full max-w-none" aria-hidden />
           </button>
           <button type="button" onClick={scrollRight} className="relative size-[44px] shrink-0 cursor-pointer" aria-label="Next">
-            <img src={NAV_ARROW_RIGHT} alt="" className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src={NAV_ARROW_RIGHT} alt="" className="block size-full max-w-none" aria-hidden />
           </button>
         </div>
       </div>

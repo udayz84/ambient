@@ -20,12 +20,12 @@ import {
  */
 
 /* ---- Assets (exported from Figma) ---- */
-const AURORA = "/products/measured-aurora.png"; // 3309:1913/1914 footer image
+const AURORA = "/products/measured-aurora.webp"; // 3309:1913/1914 footer image
 const CARD_CORNERS = "/products/measured-card-corners.svg"; // 3468:2233 "Cornor Elements"
 const CHIP_GLOW = "/products/measured-chip-glow.svg"; // 3468:2238 Vector 94
-const CHIP_GPX10 = "/products/measured-chip-gpx10.png"; // 3468:2258 image 76
-const CHIP_RISC = "/products/measured-chip-risc.png"; // 3468:2285 image 76
-const CHIP_MCU_NPU = "/products/measured-chip-mcu-npu.png"; // 3468:2312 image 77
+const CHIP_GPX10 = "/products/measured-chip-gpx10.webp"; // 3468:2258 image 76
+const CHIP_RISC = "/products/measured-chip-risc.webp"; // 3468:2285 image 76
+const CHIP_MCU_NPU = "/products/measured-chip-mcu-npu.webp"; // 3468:2312 image 77
 const ICON_SPEED = "/products/measured-icon-speed.svg"; // dashboard-speed-01 elements
 const ICON_ENERGY = "/products/measured-icon-energy.svg"; // energy-rectangle elements
 const ICON_ECO = "/products/measured-icon-eco.svg"; // eco-energy elements
@@ -224,7 +224,7 @@ function CornerTick({
   const inner = (
     <div className="absolute inset-[0_0_-12.5%_-12.5%]">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img alt="" className="block max-w-none size-full" src={src} aria-hidden />
+      <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={src} aria-hidden />
     </div>
   );
   return (
@@ -292,7 +292,7 @@ function GradientTitleBlock({ headingLines }: { headingLines: string[] }) {
         data-node-id="3309:1917"
       >
         {headingLines.map((line, i) => (
-          <span key={i} className="block leading-[49px] whitespace-pre">
+          <span key={i} className="block leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
             {line}
           </span>
         ))}
@@ -318,7 +318,7 @@ function StatRow({ stat, bordered }: { stat: MeasuredStat; bordered: boolean }) 
           <div className={`absolute ${stat.icon.boxInset}`} data-name="elements">
             <div className={`absolute ${stat.icon.imgInset}`}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block max-w-none size-full" src={stat.icon.src} aria-hidden />
+              <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={stat.icon.src} aria-hidden />
             </div>
           </div>
         </div>
@@ -365,7 +365,7 @@ function MeasuredCardView({ card }: { card: MeasuredCard }) {
       >
         <div className="absolute inset-[0_-0.13%]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="" className="block max-w-none size-full" src={CARD_CORNERS} />
+          <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={CARD_CORNERS} />
         </div>
       </div>
       {/* 3468:2238 — green glow behind the chip (GPX10 Pro only) */}
@@ -377,7 +377,7 @@ function MeasuredCardView({ card }: { card: MeasuredCard }) {
         >
           <div className="absolute inset-[-119.54%_-85.81%]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt="" className="block max-w-none size-full" src={CHIP_GLOW} />
+            <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={CHIP_GLOW} />
           </div>
         </div>
       )}
@@ -397,7 +397,7 @@ function MeasuredCardView({ card }: { card: MeasuredCard }) {
         <div className="h-0 relative shrink-0 w-[151.832px]" aria-hidden>
           <div className="absolute inset-[-1px_0_0_0]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt="" className="block max-w-none size-full" src={LINE_88} />
+            <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={LINE_88} />
           </div>
         </div>
       </div>
@@ -410,7 +410,7 @@ function MeasuredCardView({ card }: { card: MeasuredCard }) {
         {card.cropped ? (
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               className="absolute h-[85.93%] left-[18.48%] max-w-none top-[7.03%] w-[65.81%]"
               src={card.imageSrc}
@@ -418,7 +418,7 @@ function MeasuredCardView({ card }: { card: MeasuredCard }) {
           </div>
         ) : (
           /* eslint-disable-next-line @next/next/no-img-element */
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
             src={card.imageSrc}
@@ -443,7 +443,7 @@ function MobileStatRow({ stat, bordered }: { stat: MeasuredStat; bordered: boole
           <div className={`absolute ${stat.icon.boxInset}`} data-name="elements">
             <div className={`absolute ${stat.icon.imgInset}`}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src={stat.icon.src} aria-hidden />
+              <img loading="lazy" decoding="async" alt="" className="block size-full max-w-none" src={stat.icon.src} aria-hidden />
             </div>
           </div>
         </div>
@@ -483,7 +483,7 @@ function MobileMeasuredCard({ card }: { card: MeasuredCard }) {
       >
         <div className="absolute inset-[0_-0.13%]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="" className="block size-full max-w-none" src={CARD_CORNERS} />
+          <img loading="lazy" decoding="async" alt="" className="block size-full max-w-none" src={CARD_CORNERS} />
         </div>
       </div>
       {/* Glow (GPX10 Pro only) */}
@@ -494,7 +494,7 @@ function MobileMeasuredCard({ card }: { card: MeasuredCard }) {
         >
           <div className="absolute inset-[-176.84%_-160.64%]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt="" className="block size-full max-w-none" src={CHIP_GLOW} />
+            <img loading="lazy" decoding="async" alt="" className="block size-full max-w-none" src={CHIP_GLOW} />
           </div>
         </div>
       )}
@@ -508,7 +508,7 @@ function MobileMeasuredCard({ card }: { card: MeasuredCard }) {
         <div className="relative h-0 w-[151.832px]" aria-hidden>
           <div className="absolute inset-[-1px_0_0_0]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt="" className="block size-full max-w-none" src={LINE_88} />
+            <img loading="lazy" decoding="async" alt="" className="block size-full max-w-none" src={LINE_88} />
           </div>
         </div>
       </div>
@@ -518,7 +518,7 @@ function MobileMeasuredCard({ card }: { card: MeasuredCard }) {
         aria-hidden
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src={card.imageSrc}
           className="absolute inset-0 size-full object-cover"
@@ -651,7 +651,7 @@ export function ProductsMeasured({ data }: { data?: any }) {
                   <div className="absolute bg-black inset-0" />
                   <div className="absolute inset-0 overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <img loading="lazy" decoding="async"
                       alt=""
                       className="absolute h-[279.02%] left-[-0.02%] max-w-none top-[-26.76%] w-[100.04%] object-cover"
                       src={AURORA}
@@ -681,7 +681,7 @@ export function ProductsMeasured({ data }: { data?: any }) {
                   <div className="absolute bg-black inset-0" />
                   <div className="absolute inset-0 overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <img loading="lazy" decoding="async"
                       alt=""
                       className="absolute h-[279.02%] left-[-0.02%] max-w-none top-[-26.76%] w-[100.04%] object-cover"
                       src={AURORA}
@@ -807,7 +807,7 @@ export function ProductsMeasured({ data }: { data?: any }) {
             >
               <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
               <AnimatedDotsBackground />
-              <span className="relative text-[12px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+              <span className="relative max-w-full overflow-hidden text-ellipsis text-[12px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
                 {primary.label}
               </span>
               <span aria-hidden className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
@@ -822,7 +822,7 @@ export function ProductsMeasured({ data }: { data?: any }) {
               className={`${gilroyMedium.className} relative flex h-[48px] w-[240px] shrink-0 items-center justify-center overflow-clip px-[20px] py-[10px]`}
               style={{ backgroundColor: SECONDARY_CTA_BG }}
             >
-              <span className="relative text-[12px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+              <span className="relative max-w-full overflow-hidden text-ellipsis text-[12px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
                 {secondary.label}
               </span>
               <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />

@@ -105,7 +105,7 @@ function ModuleCard({
       <div className="relative h-[400px] w-[570px] shrink-0" data-node-id="2438:4599">
         <div className="pointer-events-none absolute inset-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src={image}
             className="absolute inset-0 size-full max-w-none object-contain"
@@ -166,7 +166,7 @@ function ModuleCta({
       {arrow ? (
         <span className="relative size-[6px] shrink-0" aria-hidden>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src="/developer/cta-arrow.svg"
             className="absolute inset-0 size-full max-w-none"

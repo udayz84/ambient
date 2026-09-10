@@ -10,7 +10,7 @@ const TITLE_GRADIENT_DEG = "106.158deg";
 const FALLBACK_SUBTITLE =
   "Avoid custom RF and power management. Use our pre-engineered System-on-Modules (SOMs) for your edge AI deployments.";
 const FALLBACK_TITLE = "The shortest path to\nvolume production.";
-const FALLBACK_BG = "/som/hero-bg.png";
+const FALLBACK_BG = "/som/hero-bg.webp";
 const FALLBACK_PRIMARY_LABEL = "Pre-Order / Register Interest";
 const FALLBACK_SECONDARY_LABEL = "Talk to the Sales Team";
 const TITLE_FRAME = "/som/title-frame.svg";
@@ -175,7 +175,7 @@ export function SomHero({ data }: { data?: any }) {
                   <RepelDots />
                 </span>
                 <p
-                  className="absolute left-1/2 top-[calc(50%-14px)] z-10 -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]"
+                  className="absolute left-1/2 top-[calc(50%-14px)] z-10 max-w-full -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]"
                   data-node-id="3210:1559"
                 >
                   {primaryLabel}
@@ -195,7 +195,7 @@ export function SomHero({ data }: { data?: any }) {
                 data-name="CTA - Secondary"
               >
                 <p
-                  className="absolute left-1/2 top-[calc(50%-14px)] -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]"
+                  className="absolute left-1/2 top-[calc(50%-14px)] max-w-full -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]"
                   data-node-id="3210:1571"
                 >
                   {secondaryLabel}
@@ -293,7 +293,7 @@ export function SomHero({ data }: { data?: any }) {
             <span className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
               <RepelDots />
             </span>
-            <p className="absolute left-1/2 top-[calc(50%-14px)] z-10 -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
+            <p className="absolute left-1/2 top-[calc(50%-14px)] z-10 max-w-full -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]">
               {primaryLabel}
             </p>
             <span
@@ -310,7 +310,7 @@ export function SomHero({ data }: { data?: any }) {
             data-node-id="4046:7823"
             data-name="CTA - Secondary"
           >
-            <p className="absolute left-1/2 top-[calc(50%-14px)] -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
+            <p className="absolute left-1/2 top-[calc(50%-14px)] max-w-full -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]">
               {secondaryLabel}
             </p>
             <GreenCtaCorners />

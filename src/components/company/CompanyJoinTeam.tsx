@@ -65,7 +65,7 @@ export function CompanyJoinTeam({ data }: CompanyJoinTeamProps = {}) {
       </div>
 
       <p
-        className={`${interRegular.className} absolute top-[100px] left-[810px] z-[3] w-[358px] text-[18px] leading-[27px] font-normal text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
+        className={`${interRegular.className} absolute top-[100px] left-[810px] z-[3] w-[358px] text-[18px] leading-[27px] font-normal text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         data-node-id={COMPANY_JOIN_TEAM.bodyNodeId}
       >
         {description}

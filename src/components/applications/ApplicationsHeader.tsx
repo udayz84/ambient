@@ -18,7 +18,7 @@ export function ApplicationsHeader({ data }: { data?: any }) {
         data-name="Headline frame"
       >
         <h2
-          className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[16px] ml-[22.87109375px] bg-clip-text text-center text-[46px] leading-[49px] font-medium whitespace-nowrap text-[transparent] not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[16px] ml-[22.87109375px] max-w-[584px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-[transparent] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
           style={{
             backgroundImage:
               "linear-gradient(126.324deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -91,7 +91,7 @@ export function ApplicationsHeader({ data }: { data?: any }) {
       </div>
 
       <p
-        className={`${interRegular.className} absolute top-[94px] left-1/2 w-[600px] -translate-x-1/2 text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+        className={`${interRegular.className} absolute top-[94px] left-1/2 w-[600px] -translate-x-1/2 text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         data-node-id="2379:939"
       >
         {subtitle}

@@ -27,7 +27,7 @@ export function GradientTitle({
 }) {
   return (
     <div
-      className={`${gilroyMedium.className} relative shrink-0 bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] ${className}`}
+      className={`${gilroyMedium.className} relative max-w-full shrink-0 bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden ${className}`}
       style={{
         backgroundImage: `linear-gradient(${gradientDeg}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
         WebkitBackgroundClip: "text",
@@ -79,7 +79,7 @@ export function GreenCtaButton({
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
       <RepelDots />
-      <span className={`relative flex h-full items-center justify-center gap-[10px] ${textClassName} whitespace-nowrap text-white uppercase not-italic`}>
+      <span className={`relative flex h-full max-w-full items-center justify-center gap-[10px] overflow-hidden text-ellipsis ${textClassName} whitespace-nowrap text-white uppercase not-italic`}>
         {loading ? <CtaSpinner /> : null}
         {loading ? "Loading..." : children}
       </span>
@@ -137,7 +137,7 @@ export function WhiteCtaButton({
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[length:307.2px_307.2px] bg-top-left opacity-40 mix-blend-plus-lighter"
-        style={{ backgroundImage: "url(/contact/cta-texture.png)" }}
+        style={{ backgroundImage: "url(/contact/cta-texture.webp)" }}
       />
       <span
         aria-hidden

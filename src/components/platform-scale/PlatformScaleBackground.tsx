@@ -21,9 +21,9 @@ export function PlatformScaleBackground() {
           aria-hidden
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
-            src="/platform-scale/bg-image-69.png"
+            src="/platform-scale/bg-image-69.webp"
             className="absolute size-full max-w-none object-bottom"
           />
           <div className="absolute inset-0" style={bgOverlayStyle} />

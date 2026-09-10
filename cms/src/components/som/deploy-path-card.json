@@ -26,6 +26,9 @@
       "multiple": false,
       "required": false,
       "allowedTypes": ["images"]
+    },
+    "image_overlay_label": {
+      "type": "string"
     }
   }
 }

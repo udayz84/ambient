@@ -129,16 +129,16 @@ export function SiteFooter({
             style={{ top: `${mobileOverlapPx + 300}px`, height: "973px" }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
-              src="/footer/footer-mobile-bg.png"
+              src="/footer/footer-mobile-bg.webp"
               className="absolute inset-0 h-full w-full object-fill"
             />
           </div>
           {/* Desktop Background */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
-            src="/footer/footer-bg.png"
+            src="/footer/footer-bg.webp"
             className="hidden lg:block absolute left-[-0.02%] top-[-5.03%] h-[97.04%] w-full min-w-0 translate-x-0 opacity-100 max-w-none object-cover"
           />
         </div>
@@ -191,15 +191,15 @@ export function SiteFooter({
               className="flex h-[25px] cursor-pointer items-center justify-between lg:h-auto lg:cursor-default lg:justify-center peer-checked:[&_.footer-icon-plus]:hidden peer-checked:[&_.footer-icon-minus]:block"
             >
               <p
-                className={`${interMedium.className} w-full text-[14px] leading-[1.4] font-medium tracking-[0.56px] whitespace-nowrap text-white/60 uppercase not-italic lg:text-[10px] lg:tracking-[0.4px] lg:text-center`}
+                className={`${interMedium.className} w-full text-[14px] leading-[1.4] font-medium tracking-[0.56px] whitespace-nowrap text-white/60 uppercase not-italic overflow-hidden text-ellipsis lg:text-[10px] lg:tracking-[0.4px] lg:text-center`}
               >
                 {section.title}
               </p>
               <span className="flex h-[25px] items-center justify-center lg:hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/footer/accordion-plus.svg" alt="" className="footer-icon-plus block h-[25px] w-[24px]" />
+                <img loading="lazy" decoding="async" src="/footer/accordion-plus.svg" alt="" className="footer-icon-plus block h-[25px] w-[24px]" />
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/footer/accordion-minus.svg" alt="" className="footer-icon-minus hidden h-[24px] w-[24px]" />
+                <img loading="lazy" decoding="async" src="/footer/accordion-minus.svg" alt="" className="footer-icon-minus hidden h-[24px] w-[24px]" />
               </span>
             </label>
             <ul
@@ -209,7 +209,7 @@ export function SiteFooter({
                 <li key={link.label} className="w-full text-left lg:text-center">
                   <a
                     href={link.href}
-                    className={`${interRegular.className} font-normal whitespace-nowrap text-white not-italic hover:opacity-80 lg:text-[14px]`}
+                    className={`${interRegular.className} block max-w-full font-normal whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis hover:opacity-80 lg:text-[14px]`}
                   >
                     {link.label}
                   </a>
@@ -238,7 +238,7 @@ export function SiteFooter({
               {socialLinks.map((social) => (
                 <a key={social.platform} href={social.href} aria-label={social.label} className="block size-[24px]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={social.icon} alt="" className="block size-full object-contain" />
+                  <img loading="lazy" decoding="async" src={social.icon} alt="" className="block size-full object-contain" />
                 </a>
               ))}
             </div>
@@ -265,9 +265,9 @@ export function SiteFooter({
                 <span key={link.label} className="flex items-center gap-[8px]">
                   {idx > 0 && (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src="/footer/dot-separator.svg" alt="" className="block h-[4px] w-[5px]" />
+                    <img loading="lazy" decoding="async" src="/footer/dot-separator.svg" alt="" className="block h-[4px] w-[5px]" />
                   )}
-                  <a href={link.href} className={`${interRegular.className} text-[14px] leading-[1.4] text-white hover:text-white lg:text-[#E4E4E4]`}>{link.label}</a>
+                  <a href={link.href} className={`${interRegular.className} max-w-full text-[14px] leading-[1.4] text-white hover:text-white lg:text-[#E4E4E4] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}>{link.label}</a>
                 </span>
               ))}
             </div>
@@ -276,7 +276,7 @@ export function SiteFooter({
 
         {/* Right Side */}
         <div className="flex w-full flex-row items-start justify-start gap-[22.022px] lg:w-auto lg:items-center lg:justify-start lg:gap-[48px] lg:pb-[4px]">
-          <p className={`${interRegular.className} text-[10px] leading-[1.3] text-[rgba(255,255,255,0.8)] lg:text-[12px]`}>
+          <p className={`${interRegular.className} max-w-full text-[10px] leading-[1.3] text-[rgba(255,255,255,0.8)] overflow-hidden text-ellipsis whitespace-nowrap lg:text-[12px]`}>
             {copyrightText}
           </p>
           <CraftedByAttribution text={craftedByText} logoSrc={craftedByLogoSrc} />
@@ -348,7 +348,7 @@ function ThreeMindsLogo() {
       data-name="Group"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <img loading="lazy" decoding="async"
         alt="3minds"
         className="block h-full w-full object-contain max-w-none"
         src="/footer/3minds.png"

@@ -30,7 +30,7 @@ export function GreenCta({
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
-      <span className={`relative z-10 ${textSizeClass} leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]`}>
+      <span className={`relative z-10 max-w-full ${textSizeClass} leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]`}>
         {label}
       </span>
       <GreenCtaCorners disableDots={disableDots} />

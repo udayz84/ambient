@@ -47,7 +47,7 @@ function CardCorners({
       >
         <div className="-scale-y-100 flex-none">
           <div className="relative" style={{ width: w, height: h }}>
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               aria-hidden
               src={src}
@@ -62,7 +62,7 @@ function CardCorners({
       >
         <div className="rotate-180 flex-none">
           <div className="relative" style={{ width: w, height: h }}>
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               aria-hidden
               src={src}
@@ -77,7 +77,7 @@ function CardCorners({
       >
         <div className="-scale-x-100 flex-none">
           <div className="relative" style={{ width: w, height: h }}>
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               aria-hidden
               src={src}
@@ -92,7 +92,7 @@ function CardCorners({
       >
         <div className="flex-none">
           <div className="relative" style={{ width: w, height: h }}>
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               aria-hidden
               src={src}
@@ -121,7 +121,7 @@ function MarqueeCard({
       data-node-id={nodeId}
     >
       <div className="relative h-[153.968px] w-[194.886px] shrink-0">
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           aria-hidden
           src={imageSrc}
@@ -154,7 +154,7 @@ function FeatureCard({
       >
         <div className="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center">
           <div className="relative size-[28.07px] shrink-0">
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               aria-hidden
               src={iconSrc || FEATURE_ICON}
@@ -166,7 +166,7 @@ function FeatureCard({
       <div className="relative flex w-full flex-col items-start">
         <div className="relative flex flex-col items-start gap-[12px]">
           <p
-            className={`${gilroyMedium.className} text-[26px] leading-[29px] font-medium not-italic text-white [word-break:break-word]`}
+            className={`${gilroyMedium.className} text-[26px] leading-[29px] font-medium not-italic text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
           >
             {title}
           </p>
@@ -174,7 +174,7 @@ function FeatureCard({
       </div>
       <Corners />
       <div className="absolute top-[15.21px] right-[19.5px] size-[35px]">
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           aria-hidden
           src={FEATURE_CHECK}
@@ -261,17 +261,17 @@ const MARQUEE_COLUMNS: Array<{
     cards: [
       {
         height: 219,
-        imageSrc: "/applications/dvk-m-watch.png",
+        imageSrc: "/applications/dvk-m-watch.webp",
         nodeId: "3591:1711",
       },
       {
         height: 219,
-        imageSrc: "/applications/dvk-m-robot-arm.png",
+        imageSrc: "/applications/dvk-m-robot-arm.webp",
         nodeId: "3591:1729",
       },
       {
         height: 219,
-        imageSrc: "/applications/dvk-m-humanoid.png",
+        imageSrc: "/applications/dvk-m-humanoid.webp",
         nodeId: "3591:1741",
       },
     ],
@@ -285,22 +285,22 @@ const MARQUEE_COLUMNS: Array<{
     cards: [
       {
         height: 220,
-        imageSrc: "/applications/dvk-m-watch.png",
+        imageSrc: "/applications/dvk-m-watch.webp",
         nodeId: "3591:1723",
       },
       {
         height: 220,
-        imageSrc: "/applications/dvk-m-headphones.png",
+        imageSrc: "/applications/dvk-m-headphones.webp",
         nodeId: "3591:1717",
       },
       {
         height: 221,
-        imageSrc: "/applications/dvk-m-rover.png",
+        imageSrc: "/applications/dvk-m-rover.webp",
         nodeId: "3591:1735",
       },
       {
         height: 220,
-        imageSrc: "/applications/dvk-m-surgical.png",
+        imageSrc: "/applications/dvk-m-surgical.webp",
         nodeId: "3591:1747",
       },
     ],
@@ -472,14 +472,14 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
             <GradientTitle
               gradientDeg="132.656deg"
               nodeId="3591:1758"
-              className="text-center whitespace-nowrap"
+              className="text-center"
             >
               {heading}
             </GradientTitle>
             <CornerDecor />
           </div>
           <p
-            className={`${interRegular.className} w-[718px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[718px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
             data-node-id="3591:1763"
           >
             {subtitle}
@@ -518,7 +518,7 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
           aria-hidden
         >
           <div className="-scale-y-100">
-            <img
+            <img loading="lazy" decoding="async"
               src="/applications/dvk-bottom.png"
               alt=""
               className="h-[341px] w-[1441px] object-cover"
@@ -543,7 +543,9 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
               }}
               data-node-id="4032:8656"
             >
-              {heading}
+              <span className="w-full [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
+                {heading}
+              </span>
             </div>
 
             {/* Top-right bracket (Vector 55) */}
@@ -586,7 +588,7 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
 
           {/* Subtitle (node 4032:8693) */}
           <p
-            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
             data-node-id="4032:8693"
           >
             {subtitle}

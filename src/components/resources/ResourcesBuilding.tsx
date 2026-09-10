@@ -52,7 +52,7 @@ export function ResourcesBuilding({ data }: ResourcesBuildingProps = {}) {
           >
             <div className="absolute inset-[-0.47%_0]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 src={BUILDING_TITLE_FRAME}
                 alt=""
                 className="block size-full max-w-none"

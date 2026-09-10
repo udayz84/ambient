@@ -71,7 +71,7 @@ export function MeasuredProofCard({
       </div>
 
       <p
-        className={`${interRegular.className} absolute left-[30px] text-[18px] leading-[27px] font-normal text-white opacity-90 [word-break:break-word] not-italic`}
+        className={`${interRegular.className} absolute left-[30px] text-[18px] leading-[27px] font-normal text-white opacity-90 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden not-italic`}
         style={{
           bottom: descriptionBottom,
           width: descriptionWidth,
@@ -91,14 +91,14 @@ export function MeasuredProofCard({
           {metric}
         </p>
         <p
-          className={`${interRegular.className} shrink-0 text-[18px] leading-[27px] font-normal whitespace-nowrap text-[#f0f0f0] [word-break:break-word] not-italic`}
+          className={`${interRegular.className} max-w-full shrink-0 text-[18px] leading-[27px] font-normal whitespace-nowrap text-[#f0f0f0] overflow-hidden text-ellipsis [word-break:break-word] not-italic`}
         >
           {label}
         </p>
         <div className="relative h-0 w-[151.832px] shrink-0">
           <div className="absolute inset-[-1px_0_0_0]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               src="/measured-proof/line-88.svg"
               alt=""
               className="block size-full max-w-none"

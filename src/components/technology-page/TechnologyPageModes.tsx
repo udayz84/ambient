@@ -7,10 +7,10 @@ import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { MobileCornerMark, MobileTitleCorners } from "./mobile-shared";
 
-const MODES_TOP = "/technology/modes-top-new.png";
-const MODES_BOTTOM = "/technology/modes-bottom-new.png";
-const MODES_CUBE = "/technology/modes-cube.png";
-const MODES_CUBE_GLOW = "/technology/modes-cube-glow.png";
+const MODES_TOP = "/technology/modes-top-new.webp";
+const MODES_BOTTOM = "/technology/modes-bottom-new.webp";
+const MODES_CUBE = "/technology/modes-cube.webp";
+const MODES_CUBE_GLOW = "/technology/modes-cube-glow.webp";
 const MODE_ICON = "/technology/mode-icon.svg";
 const MODES_BADGE_LEFT = "/technology/modes-badge-left.png";
 const MODES_BADGE_RIGHT = "/technology/modes-badge-right.png";
@@ -32,7 +32,7 @@ const FALLBACK_HEADING = "Two named modes.\nOne continuous loop.";
 const FALLBACK_SUBTITLE =
   "Bridge the lab and real world. The Sparsh module offers continuous, microwatt intelligence in a 21\u00d721mm size,";
 
-const MODES_LOOP_MOBILE = "/technology/modes-loop-mobile.png";
+const MODES_LOOP_MOBILE = "/technology/modes-loop-mobile.webp";
 const MOBILE_TITLE_GRADIENT_DEG = "101.838deg";
 
 const ICON_BG =
@@ -127,7 +127,7 @@ function ChevronBadge({
   return (
     <>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <img loading="lazy" decoding="async"
         src={badgeSrc}
         alt=""
         className={`absolute top-[636.76px] h-[47.24px] w-[85.54px] max-w-none ${flip ? "scale-x-[-1]" : ""}`}
@@ -141,7 +141,7 @@ function ChevronBadge({
           style={{ left: c.left, width: c.width, animationDelay: `${delays[i]}s` }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={c.src} alt="" className={`block size-full max-w-none ${flip ? "scale-x-[-1]" : ""}`} aria-hidden />
+          <img loading="lazy" decoding="async" src={c.src} alt="" className={`block size-full max-w-none ${flip ? "scale-x-[-1]" : ""}`} aria-hidden />
         </div>
       ))}
     </>
@@ -183,7 +183,7 @@ function ModeIcon() {  return (
       data-name="Icon"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <img loading="lazy" decoding="async"
         src={MODE_ICON}
         alt=""
         className="block size-[19.65px] max-w-none"
@@ -393,7 +393,7 @@ function MobileModesScene({
           <div className="relative h-[154px] w-[1163px]" data-name="image 192">
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 src={MODES_BOTTOM}
                 alt=""
                 className="absolute left-0 top-[-272.63%] h-[420.72%] w-full max-w-none"
@@ -412,7 +412,7 @@ function MobileModesScene({
           <div className="relative h-[97.969px] w-[99.49px]" data-name="image 195">
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 src={MODES_BOTTOM}
                 alt=""
                 className="absolute top-[-488.78%] left-[-333.58%] h-[661.34%] w-[1168.92%] max-w-none"
@@ -431,7 +431,7 @@ function MobileModesScene({
           <div className="relative h-[102px] w-[744px]" data-name="image 196">
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 src={MODES_LOOP_MOBILE}
                 alt=""
                 className="absolute top-[-95.79%] left-[0.16%] h-[277.89%] w-[99.82%] max-w-none"
@@ -455,7 +455,7 @@ function MobileModesScene({
           <div aria-hidden className="absolute inset-0 pointer-events-none">
             <div className="absolute inset-0 overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 src={MODES_CUBE}
                 alt=""
                 className="absolute top-[-5.59%] left-[-8.08%] h-[111.18%] w-[113.85%] max-w-none"
@@ -478,7 +478,7 @@ function MobileModesScene({
             <div className="relative h-[44.265px] w-[79.462px]" data-name="Rectangle">
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <img loading="lazy" decoding="async"
                   src={MODES_CUBE_GLOW}
                   alt=""
                   className="absolute top-[-109.44%] left-[-22.33%] h-[316.18%] w-[146.26%] max-w-none"
@@ -636,7 +636,7 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
         >
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt="" className="absolute h-[277.89%] left-[0.16%] max-w-none top-[-95.79%] w-[99.82%]" src={topImg} />
+            <img loading="lazy" decoding="async" alt="" className="absolute h-[277.89%] left-[0.16%] max-w-none top-[-95.79%] w-[99.82%]" src={topImg} />
           </div>
         </div>
 
@@ -645,7 +645,7 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
           <div className="absolute h-[299.208px] left-0 top-[10.85px] w-[322.463px]" data-name="Object">
             <div aria-hidden className="absolute inset-0 pointer-events-none">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="absolute max-w-none object-cover size-full" src={MODES_CUBE} />
+              <img loading="lazy" decoding="async" alt="" className="absolute max-w-none object-cover size-full" src={MODES_CUBE} />
               <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(180.162deg, rgba(0, 0, 0, 0) 59.958%, rgb(0, 0, 0) 88.127%)" }} />
             </div>
           </div>
@@ -654,7 +654,7 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
               <div className="h-[44.265px] relative w-[79.462px]" data-name="Rectangle">
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img alt="" className="absolute h-[316.18%] left-[-22.33%] max-w-none top-[-109.44%] w-[146.26%]" src={MODES_CUBE_GLOW} />
+                  <img loading="lazy" decoding="async" alt="" className="absolute h-[316.18%] left-[-22.33%] max-w-none top-[-109.44%] w-[146.26%]" src={MODES_CUBE_GLOW} />
                 </div>
               </div>
             </div>
@@ -669,7 +669,7 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
         >
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               src={bottomImg}
               alt=""
               className="absolute h-[284.09%] left-0 max-w-none top-[-184.09%] w-full"
@@ -702,10 +702,10 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
             data-name="Title"
           >
             <GradientTitle gradientDeg={TITLE_GRADIENT_DEG} className="text-center">
-              <span className="block h-[49px] leading-[49px] whitespace-nowrap">
+              <span className="block h-[49px] leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
                 {heading.split(". ")[0]}{heading.includes(". ") ? "." : ""}
               </span>
-              <span className="block h-[49px] leading-[49px] whitespace-nowrap">
+              <span className="block h-[49px] leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
                 {heading.split(". ")[1] || ""}
               </span>
             </GradientTitle>
@@ -713,7 +713,7 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
           </div>
 
           <p
-            className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
             style={{ opacity: SUBTITLE_OPACITY }}
             data-node-id="3003:557"
           >

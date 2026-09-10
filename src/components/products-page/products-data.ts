@@ -96,7 +96,7 @@ export const FEATURE_CARDS: FeatureCard[] = [
     title: "AI features in a new form.",
     description: FEATURE_DESCRIPTION,
     icon: "/products/icon-frame-1.svg",
-    cardImage: "/products/card-image.png",
+    cardImage: "/products/card-image.webp",
     paddingTop: 24,
   },
   {
@@ -104,7 +104,7 @@ export const FEATURE_CARDS: FeatureCard[] = [
     title: "Months on a coin cell.",
     description: FEATURE_DESCRIPTION,
     icon: "/products/icon-frame-2.svg",
-    cardImage: "/products/card-image.png",
+    cardImage: "/products/card-image.webp",
     paddingTop: 16,
   },
   {
@@ -112,7 +112,7 @@ export const FEATURE_CARDS: FeatureCard[] = [
     title: "Private by default.",
     description: FEATURE_DESCRIPTION,
     icon: "/products/icon-frame-2.svg",
-    cardImage: "/products/card-image.png",
+    cardImage: "/products/card-image.webp",
     paddingTop: 16,
   },
   {
@@ -120,7 +120,7 @@ export const FEATURE_CARDS: FeatureCard[] = [
     title: "One chip replaces the stack.",
     description: FEATURE_DESCRIPTION,
     icon: "/products/icon-frame-2.svg",
-    cardImage: "/products/card-image.png",
+    cardImage: "/products/card-image.webp",
     paddingTop: 16,
   },
 ];
@@ -532,9 +532,9 @@ export const ARCH_STATS: ArchStat[] = [
 /* ------------------------------------------------------------------ */
 
 export const ARCH_ASSETS = {
-  baseDefault: "/products/arch/base-default.png",
-  baseHover: "/products/arch/base-hover.png",
-  blockDefault: "/products/arch/block-default.png",
+  baseDefault: "/products/arch/base-default.webp",
+  baseHover: "/products/arch/base-hover.webp",
+  blockDefault: "/products/arch/block-default.webp",
   block3Hover: "/products/arch/block3-hover.png",
   block1Hover: "/products/arch/block1-hover.png",
   block2Hover: "/products/arch/block2-hover.png",
@@ -762,7 +762,7 @@ export const BENCH_CARDS: BenchCard[] = [
     description: "A complete dev kit with onboard sensors, camera, mics, and pre-loaded demos. Measure the power yourself, day one.",
     cta: "View Dev Kit",
     ctaWidth: 157,
-    image: "/products page/Container1.png",
+    image: "/products page/Container1.webp",
   },
   {
     nodeId: "2918:1518",
@@ -771,7 +771,7 @@ export const BENCH_CARDS: BenchCard[] = [
     description: "Drop our pre-engineered System-on-Module into your carrier board. Skip the RF, power, and sensor-routing nightmare.",
     cta: "View SOMs",
     ctaWidth: 158,
-    image: "/products page/Container2.png",
+    image: "/products page/Container2.webp",
   },
   {
     nodeId: "2918:1497",

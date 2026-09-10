@@ -182,7 +182,7 @@ function CarouselChipItem({
         >
           <div className="relative size-full">
             {mediaUrl(product.chip_image) ? (
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 src={mediaUrl(product.chip_image) as string}
                 className="pointer-events-none absolute inset-0 size-full max-w-none object-bottom"
@@ -211,7 +211,7 @@ function CarouselChipItem({
         >
           <div className="relative size-full">
             {mediaUrl(product.chip_image) ? (
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 src={mediaUrl(product.chip_image) as string}
                 className="pointer-events-none absolute inset-0 size-full max-w-none object-bottom"
@@ -231,7 +231,7 @@ function CarouselChipItem({
           }}
         >
           <p
-            className={`${gilroyMedium.className} text-center leading-[36px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} max-w-full text-center leading-[36px] font-medium whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis [word-break:break-word]`}
             style={{
               fontSize: `${slot.labelFontSize}px`,
               letterSpacing: tracking,
@@ -257,7 +257,7 @@ function PlatformScaleStatPanel({ product }: { product: GpxProduct }) {
         data-name="Stat"
       >
         <p
-          className={`${gilroyMedium.className} relative w-full min-w-full shrink-0 text-center text-[32px] leading-[36px] font-medium tracking-[-0.32px] whitespace-nowrap text-white not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} relative w-full min-w-full shrink-0 text-center text-[32px] leading-[36px] font-medium tracking-[-0.32px] text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
           data-node-id="2379:643"
         >
           {product.label}
@@ -268,7 +268,7 @@ function PlatformScaleStatPanel({ product }: { product: GpxProduct }) {
           data-name="Content"
         >
           <p
-            className={`${interRegular.className} relative w-full text-center text-[14px] leading-[1.4] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} relative w-full text-center text-[14px] leading-[1.4] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
             data-node-id="2379:646"
           >
             {product.description}
@@ -344,7 +344,7 @@ export function PlatformScaleCarousel({ data }: { data?: any }) {
         aria-label="Previous GPX product"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src="/platform-scale/nav-left.svg"
           className="absolute inset-0 block size-full max-w-none"
@@ -360,7 +360,7 @@ export function PlatformScaleCarousel({ data }: { data?: any }) {
         aria-label="Next GPX product"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src="/platform-scale/nav-right.svg"
           className="absolute inset-0 block size-full max-w-none"

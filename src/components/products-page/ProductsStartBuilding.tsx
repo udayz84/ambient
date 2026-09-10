@@ -154,7 +154,7 @@ function StartCardView({
     >
       {/* Card background shape — 2903:2556/2579 */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <img loading="lazy" decoding="async"
         alt=""
         src={cardBackground}
         className="pointer-events-none absolute inset-0 block size-full max-w-none"
@@ -270,7 +270,7 @@ function ProductsStartBuildingMobile({
         {cards.map((card) => (
           <div key={card.nodeId} className="relative">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src={cardBackground}
               className="pointer-events-none absolute inset-0 block size-full max-w-none"

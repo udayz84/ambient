@@ -113,7 +113,7 @@ export function CompanyMission({ data }: CompanyMissionProps = {}) {
           <div className="rotate-90 flex-none">
             <div className="relative h-[1440px] w-[810px]">
               <Image
-                src="/resources/image-107.png"
+                src="/resources/image-107.webp"
                 alt=""
                 fill
                 className="max-w-none object-cover opacity-15"
@@ -158,12 +158,12 @@ export function CompanyMission({ data }: CompanyMissionProps = {}) {
             <GradientTitle
               nodeId="2379:4755"
               gradientDeg="104.363deg"
-              className="whitespace-nowrap"
+              className="max-w-[555px]"
             >
               {headingLines.map((line, i) => (
                 <p
                   key={i}
-                  className={i === headingLines.length - 1 ? "leading-[49px]" : "mb-0 leading-[49px]"}
+                  className={`${i === headingLines.length - 1 ? "leading-[49px]" : "mb-0 leading-[49px]"} [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
                 >
                   {line}
                 </p>
@@ -176,8 +176,8 @@ export function CompanyMission({ data }: CompanyMissionProps = {}) {
             className={`${interRegular.className} w-[555px] flex flex-col gap-[24px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
             data-node-id="2379:4760"
           >
-            <p className="leading-[27px]">{body1}</p>
-            <p className="leading-[27px]">{body2}</p>
+            <p className="leading-[27px] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:4] overflow-hidden">{body1}</p>
+            <p className="leading-[27px] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:4] overflow-hidden">{body2}</p>
           </div>
         </div>
 

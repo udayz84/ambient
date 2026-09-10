@@ -16,7 +16,7 @@ const DEFAULT_TITLE = "The physical launchpad for microwatt Edge AI.";
 const DEFAULT_SUBTITLE =
   "Validate real-time AI at microwatt power levels out of the box. The Cranium Development Kit comes fully loaded with onboard sensors, rich I/O, and pre-integrated drivers so you can stop breadboarding and start testing inferences in minutes.";
 const DEFAULT_CTA_LABEL = "Request Evaluation Kit";
-const DEFAULT_BG = "/dvk/hero-bg-2.png";
+const DEFAULT_BG = "/dvk/hero-bg-2.webp";
 
 /**
  * Figma 2761:2971 — Cranium Development Kit (DVK) hero.
@@ -31,7 +31,7 @@ export function DvkHero({ data }: { data?: any }) {
   const title = data?.title || DEFAULT_TITLE;
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
   const ctaLabel = data?.cta_label || DEFAULT_CTA_LABEL;
-  const bg = mediaUrl(data?.background_image);
+  const bg = mediaUrl(data?.background_image) || DEFAULT_BG;
   return (
     <>
       {/* Hero background — image group 2761:2972 */}
@@ -156,7 +156,7 @@ export function DvkHero({ data }: { data?: any }) {
         >
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h1
-            className={`${gilroyMedium.className} absolute m-0 bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} absolute m-0 bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
             style={{
               left: 19.227,
               top: 9.192,
@@ -178,7 +178,7 @@ export function DvkHero({ data }: { data?: any }) {
           data-name="Sub"
         >
           <p
-            className={`${interRegular.className} w-[554px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[554px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
             data-node-id="2761:2986"
           >
             {subtitle}

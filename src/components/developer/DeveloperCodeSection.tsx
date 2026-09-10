@@ -112,7 +112,7 @@ export function DeveloperCodeSection({ data }: { data?: any }) {
           width: "max(1440px, 100vw)",
           height: 854 /* 45px above section + 809px section height — ends at section bottom */,
           backgroundImage:
-            "linear-gradient(to bottom, rgba(0,0,0,0) 55%, rgba(0,0,0,1) 100%), url('/developer/Gemini_Generated_Image_6dyqpp6dyqpp6dyq 5.png')",
+            "linear-gradient(to bottom, rgba(0,0,0,0) 55%, rgba(0,0,0,1) 100%), url('/developer/Gemini_Generated_Image_6dyqpp6dyqpp6dyq 5.webp')",
           backgroundSize: "100% 100%, cover",
           backgroundPosition: "0 0, center top",
           backgroundRepeat: "no-repeat, no-repeat",
@@ -131,7 +131,7 @@ export function DeveloperCodeSection({ data }: { data?: any }) {
         >
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
-            className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
             style={{ backgroundImage: SECTION_TITLE_GRADIENT }}
           >
             {heading}
@@ -178,7 +178,7 @@ export function DeveloperCodeSection({ data }: { data?: any }) {
               <div className="relative h-0 w-[24.008px]">
                 <div className="absolute inset-[-2.89px_0_-2.89px_-12.02%]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <img loading="lazy" decoding="async"
                     alt=""
                     src={CONNECTOR_LINE}
                     className="block size-full max-w-none"
@@ -196,7 +196,7 @@ export function DeveloperCodeSection({ data }: { data?: any }) {
           >
             <div className="absolute inset-[-2.89px_-3.31%_-2.89px_0]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 src={CONNECTOR_VECTOR}
                 className="block size-full max-w-none"
@@ -214,7 +214,7 @@ export function DeveloperCodeSection({ data }: { data?: any }) {
               <div className="relative h-0 w-[87.093px]">
                 <div className="absolute inset-[-2.89px_-3.31%_-2.89px_0]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <img loading="lazy" decoding="async"
                     alt=""
                     src={CONNECTOR_VECTOR}
                     className="block size-full max-w-none"
@@ -343,7 +343,7 @@ function ArticleCard({
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           aria-hidden
           src={article.icon}

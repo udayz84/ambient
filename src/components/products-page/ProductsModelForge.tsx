@@ -283,7 +283,7 @@ function ModelForgeCard({ step }: { step: any }) {
           aria-hidden
         >
           {step.image && (
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src={step.image}
               className="absolute inset-0 h-full w-full object-contain"
@@ -460,7 +460,7 @@ function MobileModelForgeCard({ step }: { step: any }) {
         {step.image && (
           <div className="absolute left-[-16px] top-0 h-[210px] w-[322px] overflow-hidden" data-name="image" aria-hidden>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt="" src={step.image} className="absolute inset-0 size-full object-cover" />
+            <img loading="lazy" decoding="async" alt="" src={step.image} className="absolute inset-0 size-full object-cover" />
             <div
               className="absolute inset-0"
               style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0) 88.146%, #000000 100%)" }}

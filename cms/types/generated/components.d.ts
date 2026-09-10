@@ -2030,6 +2030,7 @@ export interface SomDeployPathCard extends Struct.ComponentSchema {
       Schema.Attribute.DefaultTo<'Available'>;
     description: Schema.Attribute.Text;
     image: Schema.Attribute.Media<'images'>;
+    image_overlay_label: Schema.Attribute.String;
     is_available: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -2195,6 +2196,8 @@ export interface SomReadyToDeploy extends Struct.ComponentSchema {
     image: Schema.Attribute.Media;
     primary_cta_label: Schema.Attribute.String;
     primary_title: Schema.Attribute.String;
+    secondary_cta_label: Schema.Attribute.String;
+    secondary_cta_link: Schema.Attribute.String;
     secondary_text: Schema.Attribute.Text;
     subtitle: Schema.Attribute.Text;
   };

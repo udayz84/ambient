@@ -71,7 +71,7 @@ type MobileCollapse = {
 };
 const MOBILE_COLLAPSE: Record<number, MobileCollapse> = {
   1: {
-    img: "/developer/pipeline-mobile-collapse-optimize.png",
+    img: "/developer/pipeline-mobile-collapse-optimize.webp",
     left: "calc(50% + 48.5px)",
     top: 0,
     width: 574,
@@ -104,7 +104,7 @@ const ICON_TILE_BG_40 =
   "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%25' width='100%25' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(2.2748e-14 1.4501 -2.9369 -1.8948e-15 20 -2.403)'><stop stop-color='rgba(57,74,54,1)' offset='0'/><stop stop-color='rgba(43,54,41,1)' offset='0.5'/><stop stop-color='rgba(29,34,28,1)' offset='1'/></radialGradient></defs></svg>\")";
 
 /** Train expanded portrait diagram — Figma 4502:8242 (353×1247, object-cover). */
-const MOBILE_TRAIN_FLOW = "/developer/pipeline-mobile-train-expanded.png";
+const MOBILE_TRAIN_FLOW = "/developer/pipeline-mobile-train-expanded.webp";
 
 const HERO_DEFAULT_HEADING = "Model to deployment\nin 15 Minutes ";
 const HERO_DEFAULT_SUBTITLE =
@@ -124,7 +124,7 @@ function DeveloperHeroMobile({ data }: { data?: any }) {
   const primaryHref = data?.primary_button?.href || "#";
   const secondaryLabel = data?.secondary_button?.label || HERO_DEFAULT_SECONDARY;
   const secondaryHref = data?.secondary_button?.href || "#";
-  const bgImg = mediaUrl(data?.background_image) || "/developer/hero-bg-3.png";
+  const bgImg = mediaUrl(data?.background_image) || "/developer/hero-bg-3.webp";
   return (
     <section className="relative flex w-full flex-col items-center pt-[20px]">
       {/* Content block — 4032:21985 (x20 y0 w352 h193) */}
@@ -148,7 +148,7 @@ function DeveloperHeroMobile({ data }: { data?: any }) {
         </div>
         {/* Subtitle — 4032:21992 (x8 y130 w336 h63) */}
         <p
-          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic`}
+          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         >
           {subtitle}
         </p>
@@ -157,7 +157,7 @@ function DeveloperHeroMobile({ data }: { data?: any }) {
       {/* Background hero image — 4032:21994 (x-17 y208 w428 h360) */}
       <div className="relative mt-[15px] h-[360px] w-full overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src={bgImg}
           className="absolute inset-0 size-full object-cover"
@@ -241,7 +241,7 @@ function DeveloperCodeSectionMobile({ data }: { data?: any }) {
       <div aria-hidden className="absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-0 h-[260px] w-[1441px] max-w-none -translate-x-1/2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src="/developer/pipeline-mobile-wave-top.png"
             className="size-full object-cover"
@@ -250,9 +250,9 @@ function DeveloperCodeSectionMobile({ data }: { data?: any }) {
         {/* Gemini_Generated_Image_6dyqpp6dyqpp6dyq 5 — 4666:9655 (top 2, 664×1435) */}
         <div className="absolute left-1/2 top-[2px] h-[1435px] w-[664px] max-w-none -translate-x-1/2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
-            src="/developer/Gemini_Generated_Image_6dyqpp6dyqpp6dyq 5.png"
+            src="/developer/Gemini_Generated_Image_6dyqpp6dyqpp6dyq 5.webp"
             className="size-full object-cover object-bottom"
           />
           <div
@@ -286,7 +286,7 @@ function DeveloperCodeSectionMobile({ data }: { data?: any }) {
         </div>
         {/* Subtitle — 4666:9678 (w 336, Inter Regular 14/21, 75% opacity) */}
         <p
-          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic`}
+          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         >
           {subtitle}
         </p>
@@ -300,7 +300,7 @@ function DeveloperCodeSectionMobile({ data }: { data?: any }) {
         <div className="-rotate-90 -scale-y-100 flex-none">
           <div className="relative h-0 w-[87.093px]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src="/developer/connector-vector.svg"
               className="absolute inset-[-2.89px_-3.31%_-2.89px_0] block size-full max-w-none"
@@ -358,7 +358,7 @@ function DeveloperCodeSectionMobile({ data }: { data?: any }) {
                 }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <img loading="lazy" decoding="async"
                   alt=""
                   aria-hidden
                   src={article.icon}
@@ -368,12 +368,12 @@ function DeveloperCodeSectionMobile({ data }: { data?: any }) {
               {/* Text — gap 6px; card 2 title is 26px/29px per Figma 4666:9710 */}
               <div className="flex min-w-0 flex-1 flex-col gap-[6px]">
                 <p
-                  className={`${gilroyMedium.className} font-medium text-white not-italic [word-break:break-word] text-[22px] leading-[28px]`}
+                  className={`${gilroyMedium.className} font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden text-[22px] leading-[28px]`}
                 >
                   {article.title}
                 </p>
                 <p
-                  className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
+                  className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
                 >
                   {article.description}
                 </p>
@@ -393,7 +393,7 @@ function DeveloperCodeSectionMobile({ data }: { data?: any }) {
           className="relative size-[44px] shrink-0"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src="/developer/article-nav-prev.svg"
             className="absolute inset-0 size-full"
@@ -406,7 +406,7 @@ function DeveloperCodeSectionMobile({ data }: { data?: any }) {
           className="relative size-[44px] shrink-0"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src="/developer/article-nav-next.svg"
             className="absolute inset-0 size-full"
@@ -474,7 +474,7 @@ function DeveloperPipelineMobile({ data }: { data?: any }) {
         className="pointer-events-none absolute left-1/2 top-[36px] h-[247.56px] w-[682.04px] max-w-none -translate-x-1/2"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src="/developer/pipeline-mobile-abstract.svg"
           className="block size-full"
@@ -486,7 +486,7 @@ function DeveloperPipelineMobile({ data }: { data?: any }) {
         className="pointer-events-none absolute left-1/2 top-0 h-[260px] w-[1441px] max-w-none -translate-x-1/2"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src="/developer/pipeline-mobile-wave-top.png"
           className="size-full object-cover"
@@ -510,7 +510,7 @@ function DeveloperPipelineMobile({ data }: { data?: any }) {
           {/* Title — 4502:8331 (Gilroy Medium 36px, gradient 108.656°;
               mt/mb 5px reproduce the 82px title group inside the 118px block) */}
           <h2
-            className={`${gilroyMedium.className} mt-[5px] mb-[5px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} mt-[5px] mb-[5px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
             style={{ backgroundImage: PIPELINE_TITLE_GRADIENT }}
           >
             {heading}
@@ -518,7 +518,7 @@ function DeveloperPipelineMobile({ data }: { data?: any }) {
         </div>
         {/* Subtitle — 4502:8336 (Inter Regular 14px/21px, opacity 75, w=336) */}
         <p
-          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic`}
+          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         >
           {subtitle}
         </p>
@@ -552,7 +552,7 @@ function DeveloperPipelineMobile({ data }: { data?: any }) {
               aria-hidden
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 src={ARROW_SVG}
                 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
@@ -572,7 +572,7 @@ function DeveloperPipelineMobile({ data }: { data?: any }) {
           className="relative size-[44px] shrink-0"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src="/developer/article-nav-prev.svg"
             className="absolute inset-0 size-full"
@@ -585,7 +585,7 @@ function DeveloperPipelineMobile({ data }: { data?: any }) {
           className="relative size-[44px] shrink-0"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src="/developer/article-nav-next.svg"
             className="absolute inset-0 size-full"
@@ -601,7 +601,7 @@ function DeveloperPipelineMobile({ data }: { data?: any }) {
           className="pointer-events-none absolute bottom-[551px] left-1/2 h-[341px] w-[1441px] max-w-none -translate-x-1/2 -scale-y-100"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src="/developer/pipeline-mobile-wave-bottom.png"
             className="size-full object-cover"
@@ -659,7 +659,7 @@ function PipelineAccordionItemMobile({
             aria-hidden
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src={strip.img}
               className="absolute size-full max-w-none object-bottom"
@@ -684,7 +684,7 @@ function PipelineAccordionItemMobile({
               style={{ backgroundImage: ICON_TILE_BG_40 }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 aria-hidden
                 src={stage.icon}
@@ -693,7 +693,7 @@ function PipelineAccordionItemMobile({
             </div>
             {/* Label — 4502:8230 (Gilroy Medium 18px/28px, white) */}
             <p
-              className={`${gilroyMedium.className} text-[18px] leading-[28px] font-medium whitespace-nowrap text-white not-italic`}
+              className={`${gilroyMedium.className} max-w-full text-[18px] leading-[28px] font-medium whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis`}
             >
               {stage.label}
             </p>
@@ -703,7 +703,7 @@ function PipelineAccordionItemMobile({
             <Corners leftSrc={BADGE_LEFT} rightSrc={BADGE_RIGHT} />
             <div className="relative size-[24px]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 src={isActive ? REMOVE_ICON : ADD_ICON}
                 aria-hidden
@@ -732,7 +732,7 @@ function PipelineAccordionItemMobile({
             aria-hidden
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src={BADGE_LEFT}
               className="block size-full max-w-none"
@@ -745,7 +745,7 @@ function PipelineAccordionItemMobile({
           >
             <div className="-scale-x-100 flex-none">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 src={BADGE_RIGHT}
                 className="block size-full max-w-none"
@@ -756,7 +756,7 @@ function PipelineAccordionItemMobile({
           <div className="flex flex-col gap-[16px] px-[20px] pt-[20px]">
             {/* Stage subtitle — desktop accordion header copy */}
             <p
-              className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[#bbb] not-italic`}
+              className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[#bbb] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
             >
               {stage.subtitle}
             </p>
@@ -788,7 +788,7 @@ function PipelineAccordionItemMobile({
               other stages render their flow diagram at 353px wide */}
           <div className="pb-[14px] pt-[20px]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               alt={`${stage.label} flow diagram`}
               src={expandedImage}
               className="mx-auto block w-[353px] max-w-full"
@@ -808,7 +808,7 @@ const COMING_DEFAULT_CARD_TITLE = "Virtual Sandbox Coming Soon";
 const COMING_DEFAULT_CARD_DESC =
   "Complete virtual validation environment for testing your builds before hardware arrives.";
 const COMING_DEFAULT_CTA = "Join the Virtual Sandbox Waitlist";
-const COMING_DEFAULT_IMG = "/developer/sandbox-image.png";
+const COMING_DEFAULT_IMG = "/developer/sandbox-image.webp";
 
 /**
  * Figma 4035:25438 — Developer "Coming soon" section (mobile, 393×610 frame).
@@ -850,7 +850,7 @@ function DeveloperComingSoonMobile({ data }: { data?: any }) {
 
         <div className="absolute left-[calc(50%+24px)] top-0 h-full w-[min(639px,160%)] max-w-none -translate-x-1/2 opacity-60">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src="/developer/image%20250.png"
             className="absolute inset-0 size-full object-cover object-bottom"
@@ -902,7 +902,7 @@ function DeveloperComingSoonMobile({ data }: { data?: any }) {
         {/* Image — 4035:25450 (140×140) */}
         <div className="relative size-[140px] max-w-full shrink-0 overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src={imgSrc}
             className="absolute left-[-3.1%] top-[-0.02%] h-[106.13%] w-[103.1%] max-w-none object-cover"
@@ -911,12 +911,12 @@ function DeveloperComingSoonMobile({ data }: { data?: any }) {
         {/* Text content — 4035:25451 (gap 10px) */}
         <div className="flex w-full max-w-full flex-col items-center gap-[10px] text-center">
           <p
-            className={`${gilroyMedium.className} w-full max-w-full text-[22px] leading-[28px] font-medium text-white not-italic [overflow-wrap:anywhere]`}
+            className={`${gilroyMedium.className} w-full max-w-full text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
           >
             {cardTitle}
           </p>
           <p
-            className={`${interRegular.className} w-full max-w-full text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [overflow-wrap:anywhere]`}
+            className={`${interRegular.className} w-full max-w-full text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
           >
             {cardDescription}
           </p>
@@ -937,7 +937,7 @@ function DeveloperComingSoonMobile({ data }: { data?: any }) {
             </span>
             <span className="size-[20px] shrink-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 src="/developer/waitlist-icon.svg"
                 className="size-full max-w-none object-contain"
@@ -998,7 +998,7 @@ function DeveloperModulesMobile({ data }: { data?: any }) {
         </div>
         {/* Subtitle — 4035:26200 */}
         <p
-          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic`}
+          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         >
           {subtitle}
         </p>
@@ -1022,7 +1022,7 @@ function DeveloperModulesMobile({ data }: { data?: any }) {
               {/* Image — 4035:26203 (h≈240) */}
               <div className="relative h-[240px] w-full shrink-0 overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <img loading="lazy" decoding="async"
                   alt=""
                   src={image}
                   className="absolute inset-0 size-full object-contain"
@@ -1033,12 +1033,12 @@ function DeveloperModulesMobile({ data }: { data?: any }) {
                 {/* Content — title + description (gap 6px) */}
                 <div className="flex w-full flex-col gap-[6px]">
                   <p
-                    className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+                    className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
                   >
                     {title}
                   </p>
                   <p
-                    className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
+                    className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
                   >
                     {description}
                   </p>
@@ -1105,7 +1105,7 @@ function DeveloperCopilotsMobile({ data }: { data?: any }) {
         <div className="relative flex w-full justify-center">
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
-            className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
             style={{
               backgroundImage:
                 "linear-gradient(106.23deg, rgb(255, 255, 255) 1.35%, rgb(212, 233, 188) 55.16%, rgb(255, 255, 255) 111.67%)",
@@ -1116,7 +1116,7 @@ function DeveloperCopilotsMobile({ data }: { data?: any }) {
         </div>
         {/* Subtitle — 4062:11964 */}
         <p
-          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic`}
+          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         >
           {subtitle}
         </p>
@@ -1144,7 +1144,7 @@ function DeveloperCopilotsMobile({ data }: { data?: any }) {
                 style={{ backgroundImage: COPILOT_ICON_BG }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <img loading="lazy" decoding="async"
                   alt=""
                   src={icon}
                   aria-hidden
@@ -1154,12 +1154,12 @@ function DeveloperCopilotsMobile({ data }: { data?: any }) {
               {/* Content — title, description, CTA (gap 11px) */}
               <div className="flex w-full flex-col gap-[11px]">
                 <p
-                  className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+                  className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
                 >
                   {title}
                 </p>
                 <p
-                  className={`${interRegular.className} text-[14px] leading-[19.36px] font-normal text-white opacity-65 not-italic [word-break:break-word]`}
+                  className={`${interRegular.className} text-[14px] leading-[19.36px] font-normal text-white opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
                 >
                   {description}
                 </p>

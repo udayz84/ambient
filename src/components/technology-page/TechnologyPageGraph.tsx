@@ -30,18 +30,18 @@ const FALLBACK_SECONDARY_LABEL = "Watch the 3-min Explainer";
 
 /** Glowing cube renders standing above the baseline (3491:629/631/632/634/633). */
 const CUBES = [
-  { nodeId: "3491:629", left: 126, top: 510, w: 129, h: 123, src: "/technology/graph-cube-1.png" },
-  { nodeId: "3491:631", left: 334, top: 472, w: 168, h: 161, src: "/technology/graph-cube-2.png" },
-  { nodeId: "3491:632", left: 572, top: 439, w: 191, h: 183, src: "/technology/graph-cube-3.png" },
-  { nodeId: "3491:634", left: 813, top: 424, w: 207, h: 198, src: "/technology/graph-cube-4.png", innerH: "104.37%", innerTop: "-3.78%" },
-  { nodeId: "3491:633", left: 1057, top: 393, w: 240, h: 229, src: "/technology/graph-cube-5.png", innerH: "104.8%", innerTop: "-3.71%" },
+  { nodeId: "3491:629", left: 126, top: 510, w: 129, h: 123, src: "/technology/graph-cube-1.webp" },
+  { nodeId: "3491:631", left: 334, top: 472, w: 168, h: 161, src: "/technology/graph-cube-2.webp" },
+  { nodeId: "3491:632", left: 572, top: 439, w: 191, h: 183, src: "/technology/graph-cube-3.webp" },
+  { nodeId: "3491:634", left: 813, top: 424, w: 207, h: 198, src: "/technology/graph-cube-4.webp", innerH: "104.37%", innerTop: "-3.78%" },
+  { nodeId: "3491:633", left: 1057, top: 393, w: 240, h: 229, src: "/technology/graph-cube-5.webp", innerH: "104.8%", innerTop: "-3.71%" },
 ];
 
 /** Chip/device renders above each product label (3510:539 / 3515:539 / 3515:541 / 3522:530 / 3522:533). */
 const TOP_IMAGES = [
-  { nodeId: "3510:539", left: 125.64, top: 260, w: 129, h: 123, src: "/technology/graph-chip-1.png", fit: "object-contain" },
-  { nodeId: "3515:539", left: 353.5, top: 223, w: 129, h: 123, src: "/technology/graph-chip-2.png", fit: "object-contain" },
-  { nodeId: "3515:541", left: 603.52, top: 193, w: 129, h: 123, src: "/technology/graph-chip-3.png", fit: "object-contain" },
+  { nodeId: "3510:539", left: 125.64, top: 260, w: 129, h: 123, src: "/technology/graph-chip-1.webp", fit: "object-contain" },
+  { nodeId: "3515:539", left: 353.5, top: 223, w: 129, h: 123, src: "/technology/graph-chip-2.webp", fit: "object-contain" },
+  { nodeId: "3515:541", left: 603.52, top: 193, w: 129, h: 123, src: "/technology/graph-chip-3.webp", fit: "object-contain" },
   { nodeId: "3522:530", left: 817.17, top: 162.41, w: 197.65, h: 112.94, src: "/technology/graph-device-1.png", fit: "object-contain" },
   { nodeId: "3522:533", left: 1050.02, top: 115.32, w: 254.25, h: 127.13, src: "/technology/graph-device-2.png", fit: "object-contain" },
 ];
@@ -146,7 +146,7 @@ function GraphCtas({
       >
         <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
         <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
-        <span className="absolute top-[calc(50%-14px)] left-1/2 -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
+        <span className="absolute top-[calc(50%-14px)] left-1/2 flex max-w-full -translate-x-1/2 justify-center overflow-hidden text-ellipsis text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
           {primaryLabel}
         </span>
         <GreenCtaCorners />
@@ -157,7 +157,7 @@ function GraphCtas({
         data-node-id="3035:725"
         data-name="CTA - Secondary"
       >
-        <span className="relative flex h-full items-center text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
+        <span className="relative flex h-full max-w-full items-center overflow-hidden text-ellipsis text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
           {secondaryLabel}
         </span>
         <GreenCtaCorners />
@@ -241,7 +241,7 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
               data-name="Product Image"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 src={src}
                 alt=""
                 aria-hidden
@@ -271,7 +271,7 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
             </p>
             {/* label underline (line 88) */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               src={LABEL_LINE}
               alt=""
               aria-hidden
@@ -293,7 +293,7 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
               <div className="relative h-0" style={{ width: v.h }}>
                 <div className="absolute" style={{ inset: v.inset }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={v.src}
                     alt=""
                     className="block size-full max-w-none"
@@ -317,7 +317,7 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
               data-name="Product Image"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 src={src}
                 alt=""
                 aria-hidden
@@ -333,7 +333,7 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
           data-node-id="3031:521"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src={BASELINE}
             alt=""
             aria-hidden
@@ -357,7 +357,7 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
 
         {/* center footnote */}
         <p
-          className={`${interSemiBold.className} absolute top-[686.55px] text-[14px] tracking-[-0.1504px] whitespace-nowrap not-italic`}
+          className={`${interSemiBold.className} absolute top-[686.55px] max-w-[540px] text-[14px] tracking-[-0.1504px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}
           style={{ left: "calc(50% - 270px)" }}
           data-node-id="3035:711"
         >
@@ -414,7 +414,7 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
             <div className="relative h-0 w-[926px]">
               <div className="absolute inset-[-1px_0_0_0]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={BASELINE} alt="" className="block size-full max-w-none" />
+                <img loading="lazy" decoding="async" src={BASELINE} alt="" className="block size-full max-w-none" />
               </div>
             </div>
           </div>
@@ -488,7 +488,7 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
                   {p.left.overflow ? (
                     <div className="pointer-events-none absolute inset-0 overflow-hidden">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
+                      <img loading="lazy" decoding="async"
                         src={leftSrc}
                         alt=""
                         aria-hidden
@@ -503,7 +503,7 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
                     </div>
                   ) : (
                     /* eslint-disable-next-line @next/next/no-img-element */
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={leftSrc}
                       alt=""
                       aria-hidden
@@ -522,7 +522,7 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
                   {p.right.overflow ? (
                     <div className="pointer-events-none absolute inset-0 overflow-hidden">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
+                      <img loading="lazy" decoding="async"
                         src={rightSrc}
                         alt=""
                         aria-hidden
@@ -537,7 +537,7 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
                     </div>
                   ) : (
                     /* eslint-disable-next-line @next/next/no-img-element */
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={rightSrc}
                       alt=""
                       aria-hidden
@@ -566,7 +566,7 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
                   {label.cat}
                 </p>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <img loading="lazy" decoding="async"
                   src={LABEL_LINE}
                   alt=""
                   aria-hidden

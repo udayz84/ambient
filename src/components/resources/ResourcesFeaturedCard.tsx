@@ -60,7 +60,7 @@ export function ResourcesFeaturedCard({
           <div aria-hidden className="pointer-events-none absolute inset-0">
             {imageSrc ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img alt="" className={imageClassName} src={imageSrc} />
+              <img loading="lazy" decoding="async" alt="" className={imageClassName} src={imageSrc} />
             ) : null}
             <div className="absolute inset-0 bg-gradient-to-b from-[rgba(25,25,25,0)] from-[79.181%] to-[#191919]" />
           </div>

@@ -58,7 +58,7 @@ function CtaCard({
     >
       {/* card background image */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <img loading="lazy" decoding="async"
         src="/technology/cta-card-bg.png"
         alt=""
         aria-hidden
@@ -66,7 +66,7 @@ function CtaCard({
       />
       {/* card outline */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <img loading="lazy" decoding="async"
         src={outlineSrc}
         alt=""
         aria-hidden
@@ -82,10 +82,10 @@ function CtaCard({
               gradientDeg={CARD_TITLE_DEG}
               className="w-full text-center"
             >
-              <span className="block h-[49px] leading-[49px] whitespace-nowrap">
+              <span className="block h-[49px] leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
                 {card.titleLines[0]}
               </span>
-              <span className="block h-[49px] leading-[49px] whitespace-nowrap">
+              <span className="block h-[49px] leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
                 {card.titleLines[1]}
               </span>
             </GradientTitle>
@@ -95,7 +95,7 @@ function CtaCard({
           {/* body + CTA */}
           <div className="flex w-full flex-col items-start gap-[20px]">
             <p
-              className={`${interRegular.className} h-[48px] w-full text-center text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-white not-italic [word-break:break-word]`}
+              className={`${interRegular.className} h-[48px] w-full text-center text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
             >
               {card.body}
             </p>
@@ -111,7 +111,7 @@ function CtaCard({
                 aria-hidden
                 className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
               />
-              <span className="absolute top-[calc(50%-14px)] left-1/2 -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
+              <span className="absolute top-[calc(50%-14px)] left-1/2 flex max-w-full -translate-x-1/2 justify-center overflow-hidden text-ellipsis text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
                 {card.cta}
               </span>
               <GreenCtaCorners />
@@ -216,7 +216,7 @@ export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
             >
               {/* card frame */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 src={MOBILE_CARD_FRAME}
                 alt=""
                 aria-hidden
@@ -228,7 +228,7 @@ export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
                 {/* title */}
                 <div className="relative h-[68.271px] w-full">
                   <p
-                    className={`${gilroyMedium.className} absolute left-1/2 w-[299.558px] -translate-x-1/2 bg-clip-text text-center text-[30px] font-medium text-transparent not-italic`}
+                    className={`${gilroyMedium.className} absolute left-1/2 w-[299.558px] -translate-x-1/2 bg-clip-text text-center text-[30px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
                     style={{
                       backgroundImage: `linear-gradient(${CARD_TITLE_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
                       WebkitBackgroundClip: "text",
@@ -244,7 +244,7 @@ export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
                 {/* body + CTA */}
                 <div className="flex w-full flex-col gap-[14px]">
                   <p
-                    className={`${interRegular.className} h-[44px] text-center text-[12px] leading-[15.171px] font-normal tracking-[-0.1975px] text-white not-italic [word-break:break-word]`}
+                    className={`${interRegular.className} h-[44px] text-center text-[12px] leading-[15.171px] font-normal tracking-[-0.1975px] text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
                   >
                     {card.body}
                   </p>
@@ -254,7 +254,7 @@ export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
                   >
                     <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
                     <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_0.632px_11.379px_0px_rgba(217,255,240,0.6)]" />
-                    <span className="absolute top-[calc(50%-8.85px)] left-1/2 -translate-x-1/2 text-[10.114px] leading-[17.7px] font-medium whitespace-nowrap text-white uppercase not-italic">
+                    <span className="absolute top-[calc(50%-8.85px)] left-1/2 flex max-w-full -translate-x-1/2 justify-center overflow-hidden text-ellipsis text-[10.114px] leading-[17.7px] font-medium whitespace-nowrap text-white uppercase not-italic">
                       {card.cta}
                     </span>
                     <GreenCtaCorners />

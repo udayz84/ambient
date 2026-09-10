@@ -56,3 +56,6 @@ scripts/azure/asset-manifest.json
 scripts/azure/upload-report.json
 scripts/azure/verify-report.json
 restored-assets/
+
+# Database backups
+db_backup.sql

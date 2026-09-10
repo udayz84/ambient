@@ -9,7 +9,7 @@ const TITLE_GRADIENT =
 const FALLBACK_SUBTITLE =
   "Don't spend your first day writing sensor configuration code. The Cranium board comes ready to run out of the box, allowing you to instantly test physical AI models and validate performance on the metal with zero setup required.";
 const FALLBACK_HEADING = "From lab to product in months, not years.";
-const FALLBACK_IMAGE = "/applications/wearables/img-168.png";
+const FALLBACK_IMAGE = "/applications/wearables/img-168.webp";
 
 const IMG_OVERLAY =
   "linear-gradient(to bottom, rgba(0,0,0,0) 88.146%, rgb(0,0,0) 100%)";
@@ -77,7 +77,7 @@ function LabCard({ data }: { data: CardData }) {
         >
           <div className="pointer-events-none absolute inset-0">
             <div className="absolute inset-0 overflow-hidden">
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 src={image}
                 className="absolute inset-0 size-full object-contain"
@@ -117,7 +117,7 @@ function LabCard({ data }: { data: CardData }) {
           className={`${gilroyMedium.className} absolute left-0 top-[461px] flex cursor-pointer items-center border border-white/20 bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
           data-name="CTA - Secondary"
         >
-          <span className="whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic">
+          <span className="max-w-full whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic overflow-hidden text-ellipsis">
             {data.cta}
           </span>
           <Corners
@@ -233,7 +233,7 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
                 className="relative mb-[16px] h-[200px] w-full overflow-hidden"
                 aria-hidden
               >
-                <img
+                <img loading="lazy" decoding="async"
                   alt=""
                   src={card.image || FALLBACK_IMAGE}
                   className="absolute inset-0 size-full object-contain"
@@ -267,7 +267,7 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
                 href={card.ctaHref}
                 className={`${gilroyMedium.className} mt-[16px] flex h-[44px] w-full cursor-pointer items-center justify-center border border-white/20 bg-[rgba(226,241,202,0.12)]`}
               >
-                <span className="relative whitespace-nowrap text-[13px] leading-[28px] font-medium text-white uppercase not-italic">
+                <span className="relative max-w-full whitespace-nowrap text-[13px] leading-[28px] font-medium text-white uppercase not-italic overflow-hidden text-ellipsis">
                   {card.cta}
                 </span>
                 <Corners

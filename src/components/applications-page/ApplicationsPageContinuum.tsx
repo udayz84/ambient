@@ -42,7 +42,7 @@ const SUBTITLE =
 const FALLBACK_HEADING = "The Ambient Continuum.";
 
 /* --- New assets (downloaded from Figma 4574:7538) --- */
-const BG_IMAGE = "/applications/cont2-bg.png";
+const BG_IMAGE = "/applications/cont2-bg.webp";
 const POLY_OVERLAY = "/applications/cont2-poly.svg";
 const ELLIPSE_BIG = "/applications/cont2-ellipse-big.svg";
 const CARD_BG = "/applications/cont2-card-bg.svg";
@@ -52,43 +52,43 @@ const CORNER_57 = "/applications/cont2-corner-57.svg";
 
 /* GPX10PRO — Microwatt (4611:3377) */
 const MW_ICON = "/applications/cont3-mw-icon.png";
-const MW_PEDESTAL = "/applications/cont3-mw-pedestal.png";
-const MW_FLOAT = "/applications/cont3-mw-float.png";
+const MW_PEDESTAL = "/applications/cont3-mw-pedestal.webp";
+const MW_FLOAT = "/applications/cont3-mw-float.webp";
 const MW_CHIP_MASK = "/applications/cont3-mw-chip-mask.png";
 const MW_CHIP_MARK = "/applications/cont3-mw-chip-mark.svg";
 const MW_GLOW = "/applications/cont3-mw-ellipse-glow.svg";
 
 /* GPX64 — Physical (4611:3876) */
-const PH_ICON = "/applications/cont3-ph-icon.png";
-const PH_PEDESTAL = "/applications/cont3-ph-pedestal.png";
-const PH_FLOAT_A = "/applications/cont3-ph-float-a.png";
-const PH_FLOAT_B = "/applications/cont3-ph-float-b.png";
+const PH_ICON = "/applications/cont3-ph-icon.webp";
+const PH_PEDESTAL = "/applications/cont3-ph-pedestal.webp";
+const PH_FLOAT_A = "/applications/cont3-ph-float-a.webp";
+const PH_FLOAT_B = "/applications/cont3-ph-float-b.webp";
 const PH_CHIP_MASK = "/applications/cont3-ph-chip-mask.png";
 const PH_CHIP_MARK = "/applications/cont3-ph-chip-mark.svg";
 const PH_GLOW = "/applications/cont3-ph-ellipse-glow.svg";
 
 /* GPX256 — Personal (4611:4816) */
-const PS_ICON = "/applications/cont3-ps-icon.png";
-const PS_PEDESTAL = "/applications/cont3-ps-pedestal.png";
-const PS_FLOAT_A = "/applications/cont3-ps-float-a.png";
-const PS_FLOAT_B = "/applications/cont3-ps-float-b.png";
+const PS_ICON = "/applications/cont3-ps-icon.webp";
+const PS_PEDESTAL = "/applications/cont3-ps-pedestal.webp";
+const PS_FLOAT_A = "/applications/cont3-ps-float-a.webp";
+const PS_FLOAT_B = "/applications/cont3-ps-float-b.webp";
 const PS_CHIP_MASK = "/applications/cont3-ps-chip-mask.png";
 const PS_CHIP_MARK = "/applications/cont3-ps-chip-mark.svg";
 const PS_GLOW = "/applications/cont3-ps-ellipse-glow.svg";
 
 /* GPX2000 — Personal2 (4647:7641) */
-const P2_ICON = "/applications/cont3-p2-icon.png";
-const P2_PEDESTAL = "/applications/cont3-p2-pedestal.png";
-const P2_FLOAT = "/applications/cont3-p2-float.png";
+const P2_ICON = "/applications/cont3-p2-icon.webp";
+const P2_PEDESTAL = "/applications/cont3-p2-pedestal.webp";
+const P2_FLOAT = "/applications/cont3-p2-float.webp";
 const P2_CHIP_MASK = "/applications/cont3-p2-chip-mask.png";
 const P2_CHIP_MARK = "/applications/cont3-p2-chip-mark.svg";
 const P2_GLOW = "/applications/cont3-p2-ellipse-glow.svg";
 
 /* GPX8000 — AirCooled (4647:9021) */
-const AC_SERVER = "/applications/cont3-ac-server.png";
-const AC_ICON = "/applications/cont3-ac-icon.png";
-const AC_PEDESTAL = "/applications/cont3-ac-pedestal.png";
-const AC_PEDESTAL_OVERLAY = "/applications/cont3-ac-pedestal-overlay.png";
+const AC_SERVER = "/applications/cont3-ac-server.webp";
+const AC_ICON = "/applications/cont3-ac-icon.webp";
+const AC_PEDESTAL = "/applications/cont3-ac-pedestal.webp";
+const AC_PEDESTAL_OVERLAY = "/applications/cont3-ac-pedestal-overlay.webp";
 const AC_CHIP_MASK = "/applications/cont3-ac-chip-mask.png";
 const AC_CHIP_MARK = "/applications/cont3-ac-chip-mark.svg";
 const AC_GLOW = "/applications/cont3-ac-ellipse-glow.svg";
@@ -135,7 +135,7 @@ function MicrowattVisual() {
     >
       {/* Icon (Frame2147240770) */}
       <div className="pointer-events-none absolute left-[297.38px] top-[34.89px] h-[196.038px] w-[156.166px]">
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           aria-hidden
           src={MW_ICON}
@@ -146,7 +146,7 @@ function MicrowattVisual() {
       {/* Glow ellipse (Ellipse16210) */}
       <div className="absolute left-[257.51px] top-[440.93px] h-[41.534px] w-[232.588px]">
         <div className="absolute inset-[-80%_-14.29%]">
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             aria-hidden
             src={MW_GLOW}
@@ -157,7 +157,7 @@ function MicrowattVisual() {
 
       {/* Pedestal (Frame2147240764) */}
       <div className="pointer-events-none absolute left-[200px] top-[178px] h-[320px] w-[354.973px] overflow-clip">
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           aria-hidden
           src={MW_PEDESTAL}
@@ -171,7 +171,7 @@ function MicrowattVisual() {
             style={{ maskImage: `url("${MW_CHIP_MASK}")` }}
           />
           <div className="absolute left-[11.05px] top-[15.79px] h-[30px] w-[26.842px]">
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               aria-hidden
               src={MW_CHIP_MARK}
@@ -184,7 +184,7 @@ function MicrowattVisual() {
       {/* Float (Frame2147240769) */}
       <div className="pointer-events-none absolute left-0 top-[124.6px] h-[338.914px] w-[270.799px]">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             aria-hidden
             src={MW_FLOAT}
@@ -209,18 +209,18 @@ function PhysicalVisual() {
       {/* Glow ellipse (Ellipse16210) */}
       <div className="absolute left-[calc(50%+3.19px)] top-[400.48px] h-[43.131px] w-[258.786px] -translate-x-1/2">
         <div className="absolute inset-[-74.07%_-12.35%]">
-          <img alt="" aria-hidden src={PH_GLOW} className="block size-full max-w-none" />
+          <img loading="lazy" decoding="async" alt="" aria-hidden src={PH_GLOW} className="block size-full max-w-none" />
         </div>
       </div>
 
       {/* Icon (Frame2147240771) */}
       <div className="pointer-events-none absolute left-1/2 top-[4.79px] h-[188.498px] w-[150.16px] -translate-x-1/2">
-        <img alt="" aria-hidden src={PH_ICON} className="absolute inset-0 size-full max-w-none object-contain" />
+        <img loading="lazy" decoding="async" alt="" aria-hidden src={PH_ICON} className="absolute inset-0 size-full max-w-none object-contain" />
       </div>
 
       {/* Pedestal (Frame2147240773) */}
       <div className="pointer-events-none absolute left-[calc(50%-2.29px)] top-[130.36px] h-[339.286px] w-[340.417px] -translate-x-1/2 overflow-clip">
-        <img alt="" aria-hidden src={PH_PEDESTAL} className="absolute inset-0 size-full max-w-none object-contain" />
+        <img loading="lazy" decoding="async" alt="" aria-hidden src={PH_PEDESTAL} className="absolute inset-0 size-full max-w-none object-contain" />
         {/* Chip logo */}
         <div className="absolute left-[147.5px] top-[72.32px] h-[53.571px] w-[46.523px]">
           <div
@@ -229,19 +229,19 @@ function PhysicalVisual() {
             style={{ maskImage: `url("${PH_CHIP_MASK}")` }}
           />
           <div className="absolute left-[9.87px] top-[14.1px] h-[26.786px] w-[23.966px]">
-            <img alt="" aria-hidden src={PH_CHIP_MARK} className="absolute inset-0 block size-full max-w-none" />
+            <img loading="lazy" decoding="async" alt="" aria-hidden src={PH_CHIP_MARK} className="absolute inset-0 block size-full max-w-none" />
           </div>
         </div>
       </div>
 
       {/* Float A (Frame2147240770) */}
       <div className="pointer-events-none absolute left-[3.19px] top-[20.77px] h-[127.796px] w-[183.706px]">
-        <img alt="" aria-hidden src={PH_FLOAT_A} className="absolute inset-0 size-full max-w-none object-cover" />
+        <img loading="lazy" decoding="async" alt="" aria-hidden src={PH_FLOAT_A} className="absolute inset-0 size-full max-w-none object-cover" />
       </div>
 
       {/* Float B (Frame2147240772) */}
       <div className="pointer-events-none absolute right-0 top-[27.16px] h-[143.77px] w-[170.927px]">
-        <img alt="" aria-hidden src={PH_FLOAT_B} className="absolute inset-0 size-full max-w-none object-cover" />
+        <img loading="lazy" decoding="async" alt="" aria-hidden src={PH_FLOAT_B} className="absolute inset-0 size-full max-w-none object-cover" />
       </div>
     </div>
   );
@@ -260,18 +260,18 @@ function PersonalVisual() {
       {/* Glow ellipse (Ellipse16210) */}
       <div className="absolute left-[calc(50%+0.11px)] top-[405.93px] h-[41.315px] w-[236.493px] -translate-x-1/2">
         <div className="absolute inset-[-68.97%_-12.05%]">
-          <img alt="" aria-hidden src={PS_GLOW} className="block size-full max-w-none" />
+          <img loading="lazy" decoding="async" alt="" aria-hidden src={PS_GLOW} className="block size-full max-w-none" />
         </div>
       </div>
 
       {/* Icon (Frame2147240771) */}
       <div className="pointer-events-none absolute left-[calc(50%+0.47px)] top-[33.86px] h-[168.11px] w-[133.918px] -translate-x-1/2">
-        <img alt="" aria-hidden src={PS_ICON} className="absolute inset-0 size-full max-w-none object-contain" />
+        <img loading="lazy" decoding="async" alt="" aria-hidden src={PS_ICON} className="absolute inset-0 size-full max-w-none object-contain" />
       </div>
 
       {/* Pedestal (Frame2147240773) */}
       <div className="pointer-events-none absolute left-[calc(50%-1.12px)] top-[148.13px] h-[325px] w-[326.083px] -translate-x-1/2 overflow-clip">
-        <img alt="" aria-hidden src={PS_PEDESTAL} className="absolute inset-0 size-full max-w-none object-contain" />
+        <img loading="lazy" decoding="async" alt="" aria-hidden src={PS_PEDESTAL} className="absolute inset-0 size-full max-w-none object-contain" />
         {/* Chip logo */}
         <div className="absolute left-[calc(50%-0.58px)] top-[calc(50%-64.98px)] h-[45.882px] w-[39.845px] -translate-x-1/2 -translate-y-1/2">
           <div
@@ -280,7 +280,7 @@ function PersonalVisual() {
             style={{ maskImage: `url("${PS_CHIP_MASK}")` }}
           />
           <div className="absolute left-[8.45px] top-[12.07px] h-[22.941px] w-[20.526px]">
-            <img alt="" aria-hidden src={PS_CHIP_MARK} className="absolute inset-0 block size-full max-w-none" />
+            <img loading="lazy" decoding="async" alt="" aria-hidden src={PS_CHIP_MARK} className="absolute inset-0 block size-full max-w-none" />
           </div>
         </div>
       </div>
@@ -288,14 +288,14 @@ function PersonalVisual() {
       {/* Float A (Frame2147240770) */}
       <div className="pointer-events-none absolute left-[2.85px] top-[34.27px] h-[136.767px] w-[163.836px]">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <img alt="" aria-hidden src={PS_FLOAT_A} className="absolute left-0 top-[-7.81%] h-[119.79%] w-full max-w-none" />
+          <img loading="lazy" decoding="async" alt="" aria-hidden src={PS_FLOAT_A} className="absolute left-0 top-[-7.81%] h-[119.79%] w-full max-w-none" />
         </div>
       </div>
 
       {/* Float B (Frame2147240772) */}
       <div className="pointer-events-none absolute right-[4.86px] top-[44.25px] h-[115.397px] w-[136.553px]">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <img alt="" aria-hidden src={PS_FLOAT_B} className="absolute left-[-53%] top-[-0.31%] h-[176.67%] w-[222.9%] max-w-none" />
+          <img loading="lazy" decoding="async" alt="" aria-hidden src={PS_FLOAT_B} className="absolute left-[-53%] top-[-0.31%] h-[176.67%] w-[222.9%] max-w-none" />
         </div>
       </div>
     </div>
@@ -315,18 +315,18 @@ function Personal2Visual() {
       {/* Glow ellipse (Ellipse16210) */}
       <div className="absolute left-[calc(50%+3.32px)] top-[436.82px] h-[41.315px] w-[236.493px] -translate-x-1/2">
         <div className="absolute inset-[-68.97%_-12.05%]">
-          <img alt="" aria-hidden src={P2_GLOW} className="block size-full max-w-none" />
+          <img loading="lazy" decoding="async" alt="" aria-hidden src={P2_GLOW} className="block size-full max-w-none" />
         </div>
       </div>
 
       {/* Icon (Frame2147240775) */}
       <div className="pointer-events-none absolute left-[calc(50%+1.46px)] top-[59.65px] h-[161.443px] w-[128.607px] -translate-x-1/2">
-        <img alt="" aria-hidden src={P2_ICON} className="absolute inset-0 size-full max-w-none object-contain" />
+        <img loading="lazy" decoding="async" alt="" aria-hidden src={P2_ICON} className="absolute inset-0 size-full max-w-none object-contain" />
       </div>
 
       {/* Pedestal (Frame2147240766) */}
       <div className="pointer-events-none absolute left-[calc(50%+0.42px)] top-[159.06px] h-[336.471px] w-[337.592px] -translate-x-1/2 overflow-clip">
-        <img alt="" aria-hidden src={P2_PEDESTAL} className="absolute inset-0 size-full max-w-none object-contain" />
+        <img loading="lazy" decoding="async" alt="" aria-hidden src={P2_PEDESTAL} className="absolute inset-0 size-full max-w-none object-contain" />
         {/* Chip logo */}
         <div className="absolute left-[calc(50%+0.85px)] top-[calc(50%-65.24px)] h-[45.882px] w-[39.845px] -translate-x-1/2 -translate-y-1/2">
           <div
@@ -335,14 +335,14 @@ function Personal2Visual() {
             style={{ maskImage: `url("${P2_CHIP_MASK}")` }}
           />
           <div className="absolute left-[8.45px] top-[12.07px] h-[22.941px] w-[20.526px]">
-            <img alt="" aria-hidden src={P2_CHIP_MARK} className="absolute inset-0 block size-full max-w-none" />
+            <img loading="lazy" decoding="async" alt="" aria-hidden src={P2_CHIP_MARK} className="absolute inset-0 block size-full max-w-none" />
           </div>
         </div>
       </div>
 
       {/* Float (Frame2147240770) */}
       <div className="pointer-events-none absolute right-[9.22px] top-[45.33px] h-[150px] w-[179.687px]">
-        <img alt="" aria-hidden src={P2_FLOAT} className="absolute inset-0 size-full max-w-none object-cover" />
+        <img loading="lazy" decoding="async" alt="" aria-hidden src={P2_FLOAT} className="absolute inset-0 size-full max-w-none object-cover" />
       </div>
     </div>
   );
@@ -360,26 +360,26 @@ function AirCooledVisual() {
     >
       {/* Server image (Frame2147240772) */}
       <div className="pointer-events-none absolute right-[-65.8px] top-[45px] h-[267.628px] w-[317.442px]">
-        <img alt="" aria-hidden src={AC_SERVER} className="absolute inset-0 size-full max-w-none object-cover" />
+        <img loading="lazy" decoding="async" alt="" aria-hidden src={AC_SERVER} className="absolute inset-0 size-full max-w-none object-cover" />
       </div>
 
       {/* Glow ellipse (Ellipse16210) */}
       <div className="absolute left-[calc(50%+3.32px)] top-[436.82px] h-[41.315px] w-[236.493px] -translate-x-1/2">
         <div className="absolute inset-[-68.97%_-12.05%]">
-          <img alt="" aria-hidden src={AC_GLOW} className="block size-full max-w-none" />
+          <img loading="lazy" decoding="async" alt="" aria-hidden src={AC_GLOW} className="block size-full max-w-none" />
         </div>
       </div>
 
       {/* Icon (Frame2147240775) */}
       <div className="pointer-events-none absolute left-[calc(50%+1.46px)] top-[59.65px] h-[161.443px] w-[128.607px] -translate-x-1/2">
-        <img alt="" aria-hidden src={AC_ICON} className="absolute inset-0 size-full max-w-none object-contain" />
+        <img loading="lazy" decoding="async" alt="" aria-hidden src={AC_ICON} className="absolute inset-0 size-full max-w-none object-contain" />
       </div>
 
       {/* Pedestal (Frame2147240766 + Frame2147240767 overlay) */}
       <div className="pointer-events-none absolute left-[calc(50%+0.42px)] top-[159.06px] h-[336.471px] w-[337.592px] -translate-x-1/2 overflow-clip">
         <div aria-hidden className="pointer-events-none absolute inset-0">
-          <img alt="" aria-hidden src={AC_PEDESTAL} className="absolute inset-0 size-full max-w-none object-contain" />
-          <img alt="" aria-hidden src={AC_PEDESTAL_OVERLAY} className="absolute inset-0 size-full max-w-none object-contain" />
+          <img loading="lazy" decoding="async" alt="" aria-hidden src={AC_PEDESTAL} className="absolute inset-0 size-full max-w-none object-contain" />
+          <img loading="lazy" decoding="async" alt="" aria-hidden src={AC_PEDESTAL_OVERLAY} className="absolute inset-0 size-full max-w-none object-contain" />
         </div>
         {/* Chip logo */}
         <div className="absolute left-[calc(50%+0.85px)] top-[calc(50%-65.24px)] h-[45.882px] w-[39.845px] -translate-x-1/2 -translate-y-1/2">
@@ -389,7 +389,7 @@ function AirCooledVisual() {
             style={{ maskImage: `url("${AC_CHIP_MASK}")` }}
           />
           <div className="absolute left-[8.45px] top-[12.07px] h-[22.941px] w-[20.526px]">
-            <img alt="" aria-hidden src={AC_CHIP_MARK} className="absolute inset-0 block size-full max-w-none" />
+            <img loading="lazy" decoding="async" alt="" aria-hidden src={AC_CHIP_MARK} className="absolute inset-0 block size-full max-w-none" />
           </div>
         </div>
       </div>
@@ -466,7 +466,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
           className="absolute h-[646.545px] w-[1450.195px]"
           style={{ left: "50%", top: "179.73px", transform: "translateX(-50%)" }}
         >
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src={BG_IMAGE}
             className="absolute inset-0 size-full max-w-none object-bottom"
@@ -486,7 +486,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
           className="pointer-events-none absolute left-[-76px] top-[236px] h-[588px] w-[1560px]"
         >
           <div className="absolute inset-[-17.01%_-6.41%]">
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src={POLY_OVERLAY}
               className="block size-full max-w-none"
@@ -500,7 +500,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
           className="pointer-events-none absolute left-1/2 top-[calc(50%+96px)] h-[528px] w-[1007px] -translate-x-1/2 -translate-y-1/2"
         >
           <div className="absolute inset-[-23.6%_-12.37%]">
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src={ELLIPSE_BIG}
               className="block size-full max-w-none"
@@ -516,7 +516,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
         >
           <div className="relative h-[74px] w-full" data-name="Title">
             <h2
-              className={`${gilroyMedium.className} absolute left-[33.5px] top-[7px] w-[535px] bg-clip-text text-center text-[49px] font-medium leading-[60px] tracking-[-0.98px] text-transparent not-italic`}
+              className={`${gilroyMedium.className} absolute left-[33.5px] top-[7px] w-[535px] bg-clip-text text-center text-[49px] font-medium leading-[60px] tracking-[-0.98px] text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
               style={{
                 backgroundImage: TITLE_GRADIENT,
                 WebkitBackgroundClip: "text",
@@ -529,7 +529,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
             <Corners leftSrc={CORNER_57} rightSrc={CORNER_55} />
           </div>
           <p
-            className={`${interRegular.className} mt-[20px] w-[600px] text-center text-[14px] font-normal leading-[1.4] text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} mt-[20px] w-[600px] text-center text-[14px] font-normal leading-[1.4] text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
             data-node-id="4574:7550"
           >
             {subtitle}
@@ -562,7 +562,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
           data-name="cARD"
         >
           <div className="absolute left-[0.79px] top-[0.89px] h-[146.11px] w-[323.807px]">
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               aria-hidden
               src={CARD_BG}
@@ -579,13 +579,13 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
               className="absolute left-1/2 top-[calc(50%+1px)] flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-[10px] p-[12px] text-center text-white not-italic"
             >
               <p
-                className={`${gilroyMedium.className} min-w-full w-[min-content] text-[26px] font-medium leading-[29px]`}
+                className={`${gilroyMedium.className} min-w-full w-[min-content] text-[26px] font-medium leading-[29px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
                 data-node-id="4574:7592"
               >
                 {activeCard.title}
               </p>
               <p
-                className={`${interRegular.className} w-[244px] text-[16px] font-normal leading-[24px] opacity-65`}
+                className={`${interRegular.className} w-[244px] text-[16px] font-normal leading-[24px] opacity-65 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
                 data-node-id="4574:7593"
               >
                 {renderBody(activeCard.body)}
@@ -602,7 +602,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
           <div className="flex-none skew-x-[-0.76deg]">
             <div className="relative h-0 w-[347.107px]">
               <div className="absolute inset-[-4.67px_-1.34%_-4.67px_-0.58%]">
-                <img
+                <img loading="lazy" decoding="async"
                   alt=""
                   aria-hidden
                   src={LINE_109}
@@ -629,7 +629,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
           data-node-id="4583:25074"
         >
           <div className="absolute top-0 left-[60.2px] h-[532.57px] w-[1194.55px]">
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src={BG_IMAGE}
               className="absolute inset-0 size-full max-w-none object-fill"
@@ -645,7 +645,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
           {/* Polygon overlay — Group 47 (1285x484.35 at y=46.35) */}
           <div className="absolute top-[46.35px] left-0 h-[484.35px] w-[1285px]">
             <div className="absolute inset-[-6.41%_-17.01%]">
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 src={POLY_OVERLAY}
                 className="block size-full max-w-none"
@@ -661,7 +661,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
           data-node-id="4583:25079"
         >
           <div className="absolute inset-[-12.37%_-23.6%]">
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src={ELLIPSE_BIG}
               className="block size-full max-w-none"
@@ -675,7 +675,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
           aria-hidden
           data-node-id="4583:25081"
         >
-          <img
+          <img loading="lazy" decoding="async"
             src="/technology/eff-mobile-glow-top.png"
             alt=""
             className="pointer-events-none absolute inset-0 size-full object-cover"
@@ -690,7 +690,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
           data-node-id="4583:25082"
         >
           <div className="-scale-y-100">
-            <img src="/technology/eff-mobile-glow-bottom.png" alt="" className="h-[341px] w-[1441px] object-cover" />
+            <img loading="lazy" decoding="async" src="/technology/eff-mobile-glow-bottom.png" alt="" className="h-[341px] w-[1441px] object-cover" />
           </div>
         </div>
 
@@ -738,12 +738,14 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
               }}
               data-node-id="4583:25085"
             >
-              {heading}
+              <span className="w-full [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
+                {heading}
+              </span>
             </h2>
             <Corners leftSrc={CORNER_57} rightSrc={CORNER_55} />
           </div>
           <p
-            className={`${interRegular.className} w-full text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-full text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
             data-node-id="4583:25090"
           >
             {subtitle}
@@ -766,7 +768,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
           data-node-id="4583:25180"
           data-name="cARD"
         >
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             aria-hidden
             src={CARD_BG}
@@ -781,10 +783,10 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
               transition={{ duration: 0.2, ease: "easeInOut" }}
               className="absolute top-[23px] left-[30px] w-[205px] text-left text-white not-italic"
             >
-              <p className={`${gilroyMedium.className} text-[26px] leading-[28px] font-medium`}>
+              <p className={`${gilroyMedium.className} text-[26px] leading-[28px] font-medium [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}>
                 {activeCard.title}
               </p>
-              <p className={`${interRegular.className} mt-[10px] text-[14px] leading-[21px] font-normal opacity-65`}>
+              <p className={`${interRegular.className} mt-[10px] text-[14px] leading-[21px] font-normal opacity-65 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}>
                 {renderBody(activeCard.body)}
               </p>
             </motion.div>
@@ -794,10 +796,10 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
         {/* Navigation arrows — 4583:25134 (108x44 at 143,626) */}
         <div className="absolute top-[626px] left-1/2 z-10 flex -translate-x-1/2 gap-[20px]" data-node-id="4583:25134">
           <button type="button" onClick={scrollLeft} className="relative size-[44px] shrink-0 cursor-pointer" aria-label="Previous">
-            <img src="/applications/cont-m-nav-left.svg" alt="" className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/applications/cont-m-nav-left.svg" alt="" className="block size-full max-w-none" aria-hidden />
           </button>
           <button type="button" onClick={scrollRight} className="relative size-[44px] shrink-0 cursor-pointer" aria-label="Next">
-            <img src="/applications/cont-m-nav-right.svg" alt="" className="block size-full max-w-none" aria-hidden />
+            <img loading="lazy" decoding="async" src="/applications/cont-m-nav-right.svg" alt="" className="block size-full max-w-none" aria-hidden />
           </button>
         </div>
       </div>
@@ -805,7 +807,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
       {/* Preload all product images so switching is instant */}
       <div className="hidden" aria-hidden="true">
         {ALL_VISUAL_IMAGES.map((src, i) => (
-          <img key={i} src={src} alt="" />
+          <img loading="lazy" decoding="async" key={i} src={src} alt="" />
         ))}
       </div>
     </section>

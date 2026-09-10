@@ -21,7 +21,7 @@ function CtaCorners() {
           <div className="relative size-[4px]">
             <div className="absolute inset-[0_0_-12.5%_-12.5%]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src="/contact/success-cta-corner-tr.svg" aria-hidden />
+              <img loading="lazy" decoding="async" alt="" className="block size-full max-w-none" src="/contact/success-cta-corner-tr.svg" aria-hidden />
             </div>
           </div>
         </div>
@@ -31,7 +31,7 @@ function CtaCorners() {
           <div className="relative size-[4px]">
             <div className="absolute inset-[0_0_-12.5%_-12.5%]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src="/contact/success-cta-corner-tl.svg" aria-hidden />
+              <img loading="lazy" decoding="async" alt="" className="block size-full max-w-none" src="/contact/success-cta-corner-tl.svg" aria-hidden />
             </div>
           </div>
         </div>
@@ -41,7 +41,7 @@ function CtaCorners() {
           <div className="relative size-[4px]">
             <div className="absolute inset-[0_0_-12.5%_-12.5%]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" className="block size-full max-w-none" src="/contact/success-cta-corner-tr.svg" aria-hidden />
+              <img loading="lazy" decoding="async" alt="" className="block size-full max-w-none" src="/contact/success-cta-corner-tr.svg" aria-hidden />
             </div>
           </div>
         </div>
@@ -49,7 +49,7 @@ function CtaCorners() {
       <div className="pointer-events-none absolute bottom-0 left-0 size-[4px]" data-node-id="4751:4399">
         <div className="absolute inset-[0_0_-12.5%_-12.5%]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="" className="block size-full max-w-none" src="/contact/success-cta-corner-tl.svg" aria-hidden />
+          <img loading="lazy" decoding="async" alt="" className="block size-full max-w-none" src="/contact/success-cta-corner-tl.svg" aria-hidden />
         </div>
       </div>
     </>
@@ -106,7 +106,7 @@ export function ContactSuccessPopup({
           <div aria-hidden className="pointer-events-none absolute inset-0">
             <div className="absolute inset-0 overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 className="absolute top-[0.06%] left-[-0.12%] h-[104.74%] w-[100.24%] max-w-none"
                 src="/contact/success-hand.jpg"
@@ -123,7 +123,7 @@ export function ContactSuccessPopup({
         >
           <div className="relative size-[250px] shrink-0 max-[767px]:size-[200px] max-[480px]:size-[160px]" data-node-id="4751:4385">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
               src="/contact/success-icon.png"
@@ -174,7 +174,7 @@ export function ContactSuccessPopup({
           <div className="absolute inset-[20.83%]" data-node-id="I4751:4400;2:3240" data-name="elements">
             <div className="absolute inset-[-5.36%]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 className="block size-full max-w-none"
                 src="/contact/success-cancel-icon.svg"

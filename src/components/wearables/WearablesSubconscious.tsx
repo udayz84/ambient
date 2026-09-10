@@ -10,7 +10,7 @@ const FALLBACK_SUBTITLE =
   "We eliminate the Von Neumann bottleneck by computing AI within the analog memory array. The GPX architecture allows continuous inference without waking the host processor.";
 const FALLBACK_HEADING = "Continuous AI-native operations in subconscious mode";
 const FALLBACK_CARD_TITLE = "The Hardware Blueprint";
-const FALLBACK_CARD_IMAGE = "/applications/wearables/hardware-blueprint.png";
+const FALLBACK_CARD_IMAGE = "/applications/wearables/hardware-blueprint.webp";
 const FALLBACK_OVERLAY_TEXT = "Zzzz..";
 
 const CARD_BORDER =
@@ -46,12 +46,12 @@ function InfoCard({
       <div className="flex w-full flex-col items-start" data-name="NewsSection">
         <div className="flex w-full flex-col gap-[10px] items-start not-italic">
           <p
-            className={`${gilroyMedium.className} w-full shrink-0 text-[22px] leading-[28px] text-white`}
+            className={`${gilroyMedium.className} w-full shrink-0 text-[22px] leading-[28px] text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
           >
             {title}
           </p>
           <p
-            className={`${interRegular.className} w-full shrink-0 text-[16px] leading-[24px] text-[rgba(240,240,240,0.6)] [word-break:break-word]`}
+            className={`${interRegular.className} w-full shrink-0 text-[16px] leading-[24px] text-[rgba(240,240,240,0.6)] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
           >
             {body}
           </p>
@@ -108,7 +108,7 @@ export function WearablesSubconscious({ data }: { data?: any }) {
             />
           </div>
           <p
-            className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
           >
             {subtitle}
           </p>
@@ -123,7 +123,7 @@ export function WearablesSubconscious({ data }: { data?: any }) {
           >
             {/* Image */}
             <div className="relative h-[428.617px] w-[535.58px] shrink-0" data-name="image">
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 src={cardImage}
                 className="pointer-events-none absolute inset-0 size-full max-w-none object-contain"
@@ -189,7 +189,7 @@ export function WearablesSubconscious({ data }: { data?: any }) {
           className={`relative flex w-full flex-col items-center gap-[16px] bg-[rgba(0,0,0,0.5)] pt-[10px] pb-[20px] px-[12px] ${CARD_BORDER}`}
         >
           <div className="relative h-[240px] w-full shrink-0 overflow-hidden">
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src={cardImage}
               className="pointer-events-none absolute inset-0 size-full object-contain"

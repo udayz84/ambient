@@ -110,7 +110,7 @@ function ProductsMegaMenu({
               <span className="relative size-[24px] shrink-0 overflow-clip">
                 <Image src={megaIconFor(column.title)} alt="" fill className="object-contain" aria-hidden />
               </span>
-              <span className={`${interRegular.className} whitespace-nowrap text-[16px] leading-[24px] font-normal text-[#f0f0f0]`}>
+              <span className={`${interRegular.className} max-w-full whitespace-nowrap text-[16px] leading-[24px] font-normal text-[#f0f0f0] overflow-hidden text-ellipsis`}>
                 {column.title}
               </span>
             </div>
@@ -121,7 +121,7 @@ function ProductsMegaMenu({
                     key={link.label}
                     href={link.href}
                     onClick={onNavigate}
-                    className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#ccc] opacity-90 transition-opacity hover:opacity-100`}
+                    className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#ccc] opacity-90 transition-opacity [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden hover:opacity-100`}
                   >
                     {link.label}
                   </Link>
@@ -129,7 +129,7 @@ function ProductsMegaMenu({
               </div>
             ) : null}
             {column.description ? (
-              <p className={`${interRegular.className} w-full text-[12px] leading-[18px] font-normal text-[#ccc] opacity-90`}>
+              <p className={`${interRegular.className} w-full text-[12px] leading-[18px] font-normal text-[#ccc] opacity-90 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}>
                 {column.description}
               </p>
             ) : null}
@@ -215,7 +215,7 @@ function NavIconDropdown({
                   aria-hidden
                 />
                 <span
-                  className={`${interRegular.className} whitespace-nowrap font-normal text-[#f0f0f0] transition-colors group-hover:text-white`}
+                  className={`${interRegular.className} max-w-full whitespace-nowrap font-normal text-[#f0f0f0] overflow-hidden text-ellipsis transition-colors group-hover:text-white`}
                   style={{ fontSize, lineHeight: `${leading}px` }}
                 >
                   {child.label}
@@ -249,7 +249,7 @@ function DropdownCta({ href, label, onNavigate }: { href: string; label: string;
       className={`relative flex h-[48px] shrink-0 items-center justify-center bg-[rgba(226,241,202,0.12)] px-[20px] transition-opacity hover:opacity-90 ${gilroyMedium.className}`}
       style={{ width: label.length > 18 ? 180 : 160 }}
     >
-      <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white">
+      <span className="relative max-w-full text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white overflow-hidden text-ellipsis">
         {label}
       </span>
       <div className="pointer-events-none absolute right-0 top-0 flex size-[4px] items-center justify-center">
@@ -302,7 +302,7 @@ function NavItem({ item }: { item: any }) {
           }}
           className="flex items-center gap-[6px] shrink-0 text-center text-[14px] leading-[normal] font-medium tracking-[-0.42px] whitespace-nowrap text-white transition-opacity hover:opacity-80"
         >
-          {item.label}
+          <span className="max-w-full overflow-hidden text-ellipsis">{item.label}</span>
         </button>
         <div
           onClick={(e) => e.stopPropagation()}
@@ -347,7 +347,7 @@ function NavItem({ item }: { item: any }) {
           />
           <span className="relative z-10 flex items-center gap-[6px] text-white">
             <ShoppingCartIcon />
-            <span className="text-[14px] leading-[normal] font-bold uppercase tracking-[-0.42px] whitespace-nowrap">
+            <span className="max-w-full overflow-hidden text-ellipsis text-[14px] leading-[normal] font-bold uppercase tracking-[-0.42px] whitespace-nowrap">
               {item.label}
             </span>
           </span>
@@ -394,7 +394,7 @@ function NavItem({ item }: { item: any }) {
         href={item.href}
         className="flex items-center gap-[6px] shrink-0 text-center text-[14px] leading-[normal] font-medium tracking-[-0.42px] whitespace-nowrap text-white transition-opacity hover:opacity-80"
       >
-        {item.label}
+        <span className="max-w-full overflow-hidden text-ellipsis">{item.label}</span>
       </Link>
     </span>
   );

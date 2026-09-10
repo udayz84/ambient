@@ -17,7 +17,7 @@ const FALLBACK_TITLE = "Intelligence in Every\nEnvironment";
 const FALLBACK_TAG = "The Full Spectrum";
 
 export function ApplicationsPageHero({ data }: { data?: any }) {
-  const bgImg = mediaUrl(data?.background_image) || "/applications/hero-bg.png";
+  const bgImg = mediaUrl(data?.background_image) || "/applications/hero-bg.webp";
   const titleFrame = "/applications/title-frame.svg";
   const titleText = data?.title || FALLBACK_TITLE;
   const titleLines = titleText.split("\n");
@@ -99,7 +99,7 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
           >
             <GradientTitle gradientDeg="105.388deg" className="text-center">
               {titleLines.map((line: string, i: number) => (
-                <span key={i} className="block leading-[49px]">
+                <span key={i} className="block leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
                   {line}
                 </span>
               ))}
@@ -109,7 +109,7 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
 
         {/* Subtitle */}
         <p
-          className={`${interRegular.className} absolute top-[683px] left-1/2 w-[554px] -translate-x-1/2 text-center text-[18px] leading-[27px] font-normal text-[#bbb] not-italic [word-break:break-word]`}
+          className={`${interRegular.className} absolute top-[683px] left-1/2 w-[554px] -translate-x-1/2 text-center text-[18px] leading-[27px] font-normal text-[#bbb] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
           data-node-id="2438:3903"
         >
           {subtitle}
@@ -171,7 +171,7 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
               data-name="Group 78"
             >
               <div
-                className={`${gilroyMedium.className} absolute left-[56px] top-[43px] w-[241px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+                className={`${gilroyMedium.className} absolute left-[56px] top-[43px] w-[241px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
                 style={{
                   backgroundImage: MOBILE_TITLE_GRADIENT,
                   WebkitBackgroundClip: "text",
@@ -227,7 +227,7 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
 
           {/* Subtitle */}
           <p
-            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
             data-node-id="4032:5736"
           >
             {subtitle}

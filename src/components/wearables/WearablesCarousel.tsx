@@ -24,7 +24,7 @@ export function WearablesCarousel({ data }: { data?: any }) {
               key={`${img.id}-${i}`}
               className="relative flex h-[240px] md:h-[460px] shrink-0 items-center justify-center overflow-hidden rounded-[12px] border border-[rgba(240,240,240,0.1)] bg-black/40 shadow-lg p-[10px]"
             >
-              <img
+              <img loading="lazy" decoding="async"
                 src={url}
                 alt={img.alternativeText || "Wearables Carousel Image"}
                 className="h-full w-auto object-contain"

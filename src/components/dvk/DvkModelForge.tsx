@@ -72,7 +72,7 @@ export function DvkModelForge({ data }: { data?: any }) {
       {/* Abstract design (2761:2645) */}
       <div className="pointer-events-none absolute top-[32px] left-1/2 h-[320px] w-[881.616px] -translate-x-1/2">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           src={ABSTRACT_IMG}
           alt=""
           aria-hidden
@@ -83,7 +83,7 @@ export function DvkModelForge({ data }: { data?: any }) {
       {/* Center visual (2761:3008) */}
       <div className="absolute top-[330px] left-[calc(50%+3.5px)] h-[350px] w-[345px] -translate-x-1/2">
         {centerImage && (
-          <img
+          <img loading="lazy" decoding="async"
             src={centerImage}
             alt=""
             className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
@@ -96,7 +96,7 @@ export function DvkModelForge({ data }: { data?: any }) {
         <div className="relative flex w-[540px] flex-col items-center px-[10px]">
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
-            className={`${gilroyMedium.className} m-0 w-[520px] bg-clip-text text-center text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} m-0 w-[520px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
             style={{
               backgroundImage: MODELFORGE_TITLE_GRADIENT,
               WebkitBackgroundClip: "text",
@@ -107,7 +107,7 @@ export function DvkModelForge({ data }: { data?: any }) {
           </h2>
         </div>
         <p
-          className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+          className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         >
           {subtitle}
         </p>
@@ -136,7 +136,7 @@ export function DvkModelForge({ data }: { data?: any }) {
       <div className="absolute top-[533.84px] left-[420.89px] h-0 w-[109.992px]">
         <div className="absolute inset-[-2.89px_-3.36%_-2.89px_-3.1%]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={LINE_LEFT} alt="" aria-hidden className="block size-full max-w-none" />
+          <img loading="lazy" decoding="async" src={LINE_LEFT} alt="" aria-hidden className="block size-full max-w-none" />
         </div>
       </div>
 
@@ -146,7 +146,7 @@ export function DvkModelForge({ data }: { data?: any }) {
           <div className="relative h-0 w-[109.992px]">
             <div className="absolute inset-[-2.89px_-3.36%_-2.89px_-3.1%]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={LINE_RIGHT} alt="" aria-hidden className="block size-full max-w-none" />
+              <img loading="lazy" decoding="async" src={LINE_RIGHT} alt="" aria-hidden className="block size-full max-w-none" />
             </div>
           </div>
         </div>
@@ -160,7 +160,7 @@ export function DvkModelForge({ data }: { data?: any }) {
           {toolchainTitle}
         </p>
         <p
-          className={`${interRegular.className} w-[min-content] min-w-full text-center text-[14px] leading-[21px] font-normal text-[#bbbbbb] not-italic [word-break:break-word]`}
+          className={`${interRegular.className} w-[min-content] min-w-full text-center text-[14px] leading-[21px] font-normal text-[#bbbbbb] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
         >
           {toolchainSubtitle}
         </p>
@@ -217,7 +217,7 @@ function ModelCard({
         <div className={`relative h-full min-w-px flex-1 ${imageRounded ? "rounded-[6px]" : ""}`}>
           {image && (
             /* eslint-disable-next-line @next/next/no-img-element */
-            <img
+            <img loading="lazy" decoding="async"
               src={image}
               alt=""
               className={`pointer-events-none absolute inset-0 size-full max-w-none border-0 border-solid border-transparent bg-clip-padding object-contain ${imageRounded ? "rounded-[6px]" : ""}`}
@@ -229,13 +229,13 @@ function ModelCard({
         <div className="flex w-full flex-col items-start gap-[10px]">
           <div className="flex w-full items-center justify-center">
             <p
-              className={`${gilroyMedium.className} text-[22px] leading-[28px] whitespace-nowrap text-white not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} max-w-full text-[22px] leading-[28px] whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis [word-break:break-word]`}
             >
               {title}
             </p>
           </div>
           <p
-            className={`${interRegular.className} w-full text-center text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-full text-center text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
           >
             {description}
           </p>
@@ -253,7 +253,7 @@ function ToolchainChip({ label, last }: { label: string; last?: boolean }) {
     >
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
       <p
-        className={`${dmMono.className} absolute top-[calc(50%-4.5px)] -translate-x-1/2 text-center text-[13px] leading-[19.5px] tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] ${
+        className={`${dmMono.className} absolute top-[calc(50%-4.5px)] max-w-full -translate-x-1/2 text-center text-[13px] leading-[19.5px] tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic overflow-hidden text-ellipsis [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] ${
           last ? "left-[calc(50%+0.5px)]" : "left-[calc(50%+1px)]"
         }`}
       >
@@ -270,7 +270,7 @@ function Connector({ className = "", src }: { className?: string; src: string })
     <div className={`absolute h-[40.784px] w-[75.784px] ${className}`}>
       <div className="absolute inset-[-1.84%_-5.28%_-9.81%_0]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} alt="" aria-hidden className="block size-full max-w-none" />
+        <img loading="lazy" decoding="async" src={src} alt="" aria-hidden className="block size-full max-w-none" />
       </div>
     </div>
   );

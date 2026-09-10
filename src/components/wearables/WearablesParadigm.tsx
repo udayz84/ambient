@@ -8,9 +8,9 @@ const TITLE_GRADIENT =
 
 /* --- Containers copied from the technology page "paradigm shift" section --- */
 
-const LEGACY_COMPUTE = "/technology/legacy-compute-new.png";
-const LEGACY_MEMORY = "/technology/legacy-memory-new.png";
-const ACUBE_CUBE = "/technology/acube-cube.png";
+const LEGACY_COMPUTE = "/technology/legacy-compute-new.webp";
+const LEGACY_MEMORY = "/technology/legacy-memory-new.webp";
+const ACUBE_CUBE = "/technology/acube-cube.webp";
 const ACUBE_GRID = "/technology/acube-card-grid.png";
 const CONNECTOR_LINE_DIM = "/technology/stat-connector-line-dim.svg";
 const CONNECTOR_LINE_BRIGHT = "/technology/stat-connector-line-bright.svg";
@@ -79,11 +79,11 @@ function BottomCorners() {
     <>
       <div className="pointer-events-none absolute bottom-0 left-0 size-[4px]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={CORNER_LEFT} alt="" className="block size-full max-w-none" />
+        <img loading="lazy" decoding="async" src={CORNER_LEFT} alt="" className="block size-full max-w-none" />
       </div>
       <div className="pointer-events-none absolute bottom-0 right-0 size-[4px] -scale-x-100">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={CORNER_RIGHT} alt="" className="block size-full max-w-none" />
+        <img loading="lazy" decoding="async" src={CORNER_RIGHT} alt="" className="block size-full max-w-none" />
       </div>
     </>
   );
@@ -206,7 +206,7 @@ function LegacyCard({
         >
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               src={computeSrc}
               alt=""
               className="absolute left-[-13.52%] top-[-40.34%] h-[187.21%] w-[136.24%] max-w-none"
@@ -220,7 +220,7 @@ function LegacyCard({
           data-name="image 206"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src={LEGACY_MEMORY}
             alt=""
             className="absolute inset-0 size-full max-w-none object-cover pointer-events-none"
@@ -233,7 +233,7 @@ function LegacyCard({
         >
           <div className="absolute inset-[-20px_0_0_0]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               src={CONNECTOR_LINE_DIM}
               alt=""
               className="block size-full max-w-none"
@@ -243,7 +243,7 @@ function LegacyCard({
               aria-hidden
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 src={CONNECTOR_LINE_BRIGHT}
                 alt=""
                 className="block size-full max-w-none"
@@ -284,7 +284,7 @@ function ACubeCard({
         <div className="-rotate-150 -skew-x-30 flex-none scale-y-87">
           <div className="relative h-[271.67px] w-[203.11px]" data-name="Filler Liner">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               src={FILLER_LINER}
               alt=""
               className="absolute inset-0 block size-full max-w-none"
@@ -300,7 +300,7 @@ function ACubeCard({
         <div className="-skew-x-30 flex-none rotate-30 scale-y-87">
           <div className="relative h-[245.85px] w-[203.11px]" data-name="Filler Liner">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               src={FILLER_LINER_1}
               alt=""
               className="absolute inset-0 block size-full max-w-none"
@@ -346,7 +346,7 @@ function ACubeCard({
         className="absolute top-[76.95px] left-[239px] h-[277px] w-[299px]"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           src={cubeSrc}
           alt=""
           className="absolute inset-0 size-full max-w-none object-bottom pointer-events-none"
@@ -367,7 +367,7 @@ function ChevronDecor() {
       >
         <div className="absolute inset-[-12.8%_-22.81%_-12.8%_-30.55%]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={CHEVRON_LARGE} alt="" className="block size-full max-w-none" />
+          <img loading="lazy" decoding="async" src={CHEVRON_LARGE} alt="" className="block size-full max-w-none" />
         </div>
       </div>
       <div
@@ -376,7 +376,7 @@ function ChevronDecor() {
       >
         <div className="absolute inset-[-1.02%_-4.2%_-1.02%_-2.16%]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={CHEVRON_MID} alt="" className="block size-full max-w-none" />
+          <img loading="lazy" decoding="async" src={CHEVRON_MID} alt="" className="block size-full max-w-none" />
         </div>
       </div>
       <div
@@ -385,7 +385,7 @@ function ChevronDecor() {
       >
         <div className="absolute inset-[-1.46%_-6.01%_-1.46%_-3.09%]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={CHEVRON_SMALL} alt="" className="block size-full max-w-none" />
+          <img loading="lazy" decoding="async" src={CHEVRON_SMALL} alt="" className="block size-full max-w-none" />
         </div>
       </div>
       <div
@@ -394,7 +394,7 @@ function ChevronDecor() {
       >
         <div className="absolute inset-[-2.18%_-8.93%_-2.17%_-4.6%]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={CHEVRON_DOT} alt="" className="block size-full max-w-none" />
+          <img loading="lazy" decoding="async" src={CHEVRON_DOT} alt="" className="block size-full max-w-none" />
         </div>
       </div>
     </>

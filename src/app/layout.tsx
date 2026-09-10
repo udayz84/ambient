@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { gilroyRegular, gilroyMedium, gilroySemiBold, gilroyBold } from "@/components/hero/fonts";
 import { Navbar } from "@/components/navbar/Navbar";
 import { SiteFooterWrapper } from "@/components/site-footer/SiteFooterWrapper";
 import { SmoothScroll } from "@/components/SmoothScroll";
@@ -42,7 +41,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${gilroyRegular.variable} ${gilroyMedium.variable} ${gilroySemiBold.variable} ${gilroyBold.variable} h-full overflow-x-clip scroll-smooth antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full overflow-x-clip scroll-smooth antialiased`}
       data-scroll-behavior="smooth"
     >
       <body className="flex min-h-full flex-col overflow-x-clip bg-black">

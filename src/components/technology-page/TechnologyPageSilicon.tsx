@@ -90,7 +90,7 @@ function StatCard({
       <div className="absolute inset-0 border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.15)] backdrop-blur-[2px]" />
       {/* corner elements */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <img loading="lazy" decoding="async"
         src={STAT_CORNERS}
         alt=""
         aria-hidden
@@ -111,7 +111,7 @@ function StatCard({
           {label}
         </p>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           src={LABEL_LINE}
           alt=""
           aria-hidden
@@ -138,7 +138,7 @@ function MobileStatCard({ stat }: { stat: StatCardData }) {
       <div className="absolute left-0 top-[0.51px] h-[225.994px] w-[355px]">
         <div className="absolute inset-[-0.22%_-0.14%]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={STAT_CORNERS} alt="" aria-hidden className="block size-full max-w-none" />
+          <img loading="lazy" decoding="async" src={STAT_CORNERS} alt="" aria-hidden className="block size-full max-w-none" />
         </div>
       </div>
       {/* content */}
@@ -148,13 +148,13 @@ function MobileStatCard({ stat }: { stat: StatCardData }) {
             <span className="text-[68px] leading-[72px]">{stat.value} </span>
             <span className={stat.unitClass}>{stat.unit}</span>
           </p>
-          <p className={`${interRegular.className} text-[16px] leading-[27px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic`}>
+          <p className={`${interRegular.className} text-[16px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}>
             {stat.label}
           </p>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={LABEL_LINE} alt="" aria-hidden className="block h-px w-[151.832px] max-w-none" />
+          <img loading="lazy" decoding="async" src={LABEL_LINE} alt="" aria-hidden className="block h-px w-[151.832px] max-w-none" />
         </div>
-        <p className={`${interRegular.className} text-[16px] leading-[27px] font-normal text-white not-italic`} style={{ opacity: 0.9 }}>
+        <p className={`${interRegular.className} text-[16px] leading-[27px] font-normal text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`} style={{ opacity: 0.9 }}>
           {stat.description}
         </p>
       </div>
@@ -169,7 +169,7 @@ function MobileIndicator({ rotateClass, length = 40 }: { rotateClass: string; le
         <div className="relative h-[14.142px]" style={{ width: length }}>
           <div className="absolute right-[-4px] top-1/2 h-[22.142px] w-[80.611px] -translate-y-1/2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={INDICATOR_1} alt="" className="block size-full max-w-none" />
+            <img loading="lazy" decoding="async" src={INDICATOR_1} alt="" className="block size-full max-w-none" />
           </div>
         </div>
       </div>
@@ -218,7 +218,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
           <div aria-hidden className="absolute inset-0">
             {bgSrc && (
               /* eslint-disable-next-line @next/next/no-img-element */
-              <img
+              <img loading="lazy" decoding="async"
                 src={bgSrc}
                 alt=""
                 className="absolute inset-0 size-full max-w-none object-bottom"
@@ -265,7 +265,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
 
         {/* indicators */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           src={INDICATOR_1}
           alt=""
           aria-hidden
@@ -273,7 +273,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
           data-node-id="3015:487"
         />
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           src={INDICATOR_2}
           alt=""
           aria-hidden
@@ -317,10 +317,10 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
             data-name="Title"
           >
             <GradientTitle gradientDeg={TITLE_GRADIENT_DEG} className="text-center">
-              <span className="block h-[49px] leading-[49px] whitespace-nowrap">
+              <span className="block h-[49px] leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
                 {heading.split(", ")[0]}{heading.includes(", ") ? "," : ""}
               </span>
-              <span className="block h-[49px] leading-[49px] whitespace-nowrap">
+              <span className="block h-[49px] leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
                 {heading.split(", ")[1] || ""}
               </span>
             </GradientTitle>
@@ -328,7 +328,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
           </div>
 
           <p
-            className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
             style={{ opacity: SUBTITLE_OPACITY }}
             data-node-id="3015:536"
           >
@@ -384,7 +384,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
               <div className="relative h-[502px] w-[1052px]">
                 {bgSrc && (
                   /* eslint-disable-next-line @next/next/no-img-element */
-                  <img src={bgSrc} alt="" aria-hidden className="absolute inset-0 size-full max-w-none object-bottom" />
+                  <img loading="lazy" decoding="async" src={bgSrc} alt="" aria-hidden className="absolute inset-0 size-full max-w-none object-bottom" />
                 )}
                 <div className="absolute inset-0" style={{ backgroundImage: VIGNETTE }} />
               </div>

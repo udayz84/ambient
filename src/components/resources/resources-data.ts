@@ -25,14 +25,14 @@ export type ResourceArticle = {
   href?: string;
 };
 
-export const ARTICLE_IMAGE_BASE = "/resources/article-image-base.png";
+export const ARTICLE_IMAGE_BASE = "/resources/article-image-base.webp";
 
 export const FEATURED_RESOURCES: ResourceFeaturedCard[] = [
   {
     nodeId: "2379:1969",
     imageNodeId: "2379:1970",
     imageWidth: 407,
-    imageSrc: "/resources/featured-1.png",
+    imageSrc: "/resources/featured-1.webp",
     imageClassName: "absolute max-w-none object-cover size-full",
     badgeNodeId: "2379:1971",
     badgeLabel: "WHITEPAPER",
@@ -42,7 +42,7 @@ export const FEATURED_RESOURCES: ResourceFeaturedCard[] = [
     nodeId: "2379:1996",
     imageNodeId: "2379:1997",
     imageWidth: 406,
-    imageSrc: "/resources/featured-2.png",
+    imageSrc: "/resources/featured-2.webp",
     imageClassName:
       "absolute left-0 top-[-117.37%] h-[288.97%] w-full max-w-none object-cover",
     badgeNodeId: "2379:1998",
@@ -53,7 +53,7 @@ export const FEATURED_RESOURCES: ResourceFeaturedCard[] = [
     nodeId: "2379:2023",
     imageNodeId: "2379:2024",
     imageWidth: 407,
-    imageSrc: "/resources/featured-3.png",
+    imageSrc: "/resources/featured-3.webp",
     imageClassName:
       "absolute left-0 top-[-20.96%] h-[257.19%] w-full max-w-none object-cover",
     badgeNodeId: "2379:2030",
@@ -80,7 +80,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
     title: "GP Singh interviewed by SemiWiki founder Daniel Nenni",
     excerpt:
       "Our CEO discusses Ambient Scientific’s ultra low power edge AI, DigAn archit.... ",
-    imageOverlaySrc: "/resources/article-1-overlay.png",
+    imageOverlaySrc: "/resources/article-1-overlay.webp",
   },
   {
     nodeId: "2379:1853",
@@ -103,7 +103,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
     titleFontSize: 20,
     excerpt:
       "This article compares PyTorch and TensorFlow from a real-world de... ",
-    imageOverlaySrc: "/resources/article-3-overlay.png",
+    imageOverlaySrc: "/resources/article-3-overlay.webp",
   },
   {
     nodeId: "2379:1892",
@@ -115,7 +115,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
     titleFontSize: 21,
     excerpt:
       "In this session, Ambient Scientific explores a new approach to edge AI by a... ",
-    imageOverlaySrc: "/resources/article-4-overlay.png",
+    imageOverlaySrc: "/resources/article-4-overlay.webp",
   },
   {
     nodeId: "2379:1911",
@@ -126,7 +126,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
     title: "Ambient Scientific and Dimension NXG Introduce MAI",
     excerpt:
       "Ambient Scientific, in collaboration with Dimension NXG, introduces MA... ",
-    imageOverlaySrc: "/resources/article-5-overlay.png",
+    imageOverlaySrc: "/resources/article-5-overlay.webp",
   },
   {
     nodeId: "2379:1930",
@@ -137,7 +137,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
     title: "Boot Blink and Believe Edge AI from Prototype to Production",
     excerpt:
       "The recording of our webinar Boot Blink and Believe Edge AI from Prototy... ",
-    imageOverlaySrc: "/resources/article-6-overlay.png",
+    imageOverlaySrc: "/resources/article-6-overlay.webp",
   },
   {
     nodeId: "2379:1949",
@@ -149,7 +149,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
     titleFontSize: 21,
     excerpt:
       "How teams are shipping voice-first edge products with GPX silicon and Ambient tooling... ",
-    imageOverlaySrc: "/resources/article-1-overlay.png",
+    imageOverlaySrc: "/resources/article-1-overlay.webp",
   },
   {
     nodeId: "2379:1950",
@@ -172,7 +172,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
     title: "Inside Ambient ModelForge: From Training to On-Device Inference",
     excerpt:
       "See how ModelForge compresses and deploys models tuned for Ambient GPX processors... ",
-    imageOverlaySrc: "/resources/article-3-overlay.png",
+    imageOverlaySrc: "/resources/article-3-overlay.webp",
   },
   {
     nodeId: "2379:1952",
@@ -183,7 +183,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
     title: "Ambient Scientific Expands Developer Ecosystem Partnerships",
     excerpt:
       "New collaborations bring reference designs, dev kits, and production support to edge AI builders... ",
-    imageOverlaySrc: "/resources/article-4-overlay.png",
+    imageOverlaySrc: "/resources/article-4-overlay.webp",
   },
   {
     nodeId: "2379:1953",
@@ -195,7 +195,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
     titleFontSize: 21,
     excerpt:
       "Engineering leaders share lessons on power, cost, and software continuity across product lines... ",
-    imageOverlaySrc: "/resources/article-5-overlay.png",
+    imageOverlaySrc: "/resources/article-5-overlay.webp",
   },
   {
     nodeId: "2379:1954",
@@ -206,7 +206,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
     title: "The Future of Programmable AI Silicon at the Edge",
     excerpt:
       "Ambient executives discuss programmable compute density and the roadmap for GPX platforms... ",
-    imageOverlaySrc: "/resources/article-6-overlay.png",
+    imageOverlaySrc: "/resources/article-6-overlay.webp",
   },
 ];
 
@@ -299,6 +299,7 @@ type StrapiArticleRow = {
   documentId?: string;
   title?: string;
   category?: string;
+  slug?: string;
   excerpt?: string;
   external_url?: string;
   featured_image?: StrapiMedia;
@@ -329,7 +330,7 @@ export function buildArticles(strapiArticles: unknown): ResourceArticle[] {
         excerpt: (a?.excerpt as string) || "",
         imageSrc: imageUrl,
         imageOverlaySrc: imageUrl ? undefined : undefined,
-        href: (a?.external_url as string) || undefined,
+        href: (a?.external_url as string) || (a?.slug ? `/article/${a.slug}` : undefined),
       };
     }
   );

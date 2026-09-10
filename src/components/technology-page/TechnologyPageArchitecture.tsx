@@ -14,7 +14,7 @@ import { TechnologyPageArchitectureMobile } from "./TechnologyPageArchitectureMo
  * Supersedes the old architecture header (3060:1241) and pillars row.
  */
 
-const BRAIN_IMG = "/technology/architecture-brain.png";
+const BRAIN_IMG = "/technology/architecture-brain.webp";
 const CONNECTOR_LINE = "/technology/architecture-line.svg";
 
 const TITLE_GRADIENT_DEG = "113.506deg";
@@ -175,7 +175,7 @@ export function IconBox({ pillar }: { pillar: Pillar }) {
           <div className="absolute" style={{ inset: pillar.iconInnerInset }}>
             <div className="absolute" style={{ inset: pillar.iconImgInset }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 src={pillar.icon}
                 alt=""
                 className="block size-full max-w-none"
@@ -184,7 +184,7 @@ export function IconBox({ pillar }: { pillar: Pillar }) {
           </div>
         ) : (
           /* eslint-disable-next-line @next/next/no-img-element */
-          <img
+          <img loading="lazy" decoding="async"
             src={pillar.icon}
             alt=""
             className="absolute inset-0 block size-full max-w-none"
@@ -207,7 +207,7 @@ export function PillarCta({ pillar }: { pillar: Pillar }) {
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
-      <span className="absolute left-[16.5px] top-[calc(50%-14px)] text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
+      <span className="absolute left-[16.5px] top-[calc(50%-14px)] max-w-[calc(100%-33px)] text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]">
         {pillar.cta}
       </span>
       <span
@@ -286,7 +286,7 @@ function PillarStat({
             <p className="text-[14px] tracking-[-0.1504px] whitespace-nowrap text-[#3a9719] not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
               +
             </p>
-            <p className="min-w-px flex-1 whitespace-pre-line text-[13px] text-[rgba(255,255,255,0.9)] not-italic [word-break:break-word]">
+            <p className="min-w-px flex-1 whitespace-pre-line text-[13px] text-[rgba(255,255,255,0.9)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
               {b}
             </p>
           </div>
@@ -309,7 +309,7 @@ function BrainVisual() {
       >
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src={BRAIN_IMG}
             alt=""
             className="absolute top-[0.66%] left-[-0.01%] h-[235.48%] w-[99.97%] max-w-none"
@@ -323,7 +323,7 @@ function BrainVisual() {
       >
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src={BRAIN_IMG}
             alt=""
             className="absolute top-[-2659.54%] left-[-0.01%] h-[6304.38%] w-[99.97%] max-w-none"
@@ -337,7 +337,7 @@ function BrainVisual() {
       >
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src={BRAIN_IMG}
             alt=""
             className="absolute top-[-78.64%] left-[-0.01%] h-[179.66%] w-[99.97%] max-w-none"
@@ -360,7 +360,7 @@ function Connector({ left, top }: { left: number; top: number }) {
         <div className="relative h-0 w-[85px]">
           <div className="absolute inset-[-2.89px_0_-2.89px_-3.4%]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               src={CONNECTOR_LINE}
               alt=""
               className="block size-full max-w-none"
@@ -410,17 +410,17 @@ export function TechnologyPageArchitecture({
               className="text-center"
               nodeId="3330:1274"
             >
-              <span className="block h-[49px] leading-[49px] whitespace-nowrap">
+              <span className="block h-[49px] leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
                 {headingLines[0] ?? ""}
               </span>
-              <span className="block h-[49px] leading-[49px] whitespace-nowrap">
+              <span className="block h-[49px] leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
                 {headingLines[1] ?? ""}
               </span>
             </GradientTitle>
             <CornerDecor />
           </div>
           <p
-            className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65 [word-break:break-word]`}
+            className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
             data-node-id="3330:1279"
           >
             {subtitle}

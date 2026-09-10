@@ -125,7 +125,7 @@ function CornerTick({
   const inner = (
     <div className="absolute inset-[0_0_-12.5%_-12.5%]">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img alt="" className="block max-w-none size-full" src={src} aria-hidden />
+      <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={src} aria-hidden />
     </div>
   );
   return (
@@ -205,14 +205,14 @@ function ArchDiagram({ hoveredIndex }: { hoveredIndex: number }) {
         <div className="absolute left-[10px] top-[20px] h-[536px] w-[811px]">
           <div className="absolute inset-0 overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt="" aria-hidden src={ARCH_ASSETS.baseDefault} className="absolute left-[-3.08%] top-[-1.1%] h-[107.25%] w-[106.33%] max-w-none" />
+            <img loading="lazy" decoding="async" alt="" aria-hidden src={ARCH_ASSETS.baseDefault} className="absolute left-[-3.08%] top-[-1.1%] h-[107.25%] w-[106.33%] max-w-none" />
           </div>
         </div>
         {/* Blocks (default texture) */}
         {ARCH_BLOCKS.map((b, i) => (
           <div key={i} className="absolute overflow-hidden" style={{ left: b.left, top: b.top, width: b.width, height: b.height }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt="" aria-hidden src={ARCH_ASSETS.blockDefault} className="absolute max-w-none" style={{ height: b.defaultInsetImg.height, left: b.defaultInsetImg.left, top: b.defaultInsetImg.top, width: b.defaultInsetImg.width }} />
+            <img loading="lazy" decoding="async" alt="" aria-hidden src={ARCH_ASSETS.blockDefault} className="absolute max-w-none" style={{ height: b.defaultInsetImg.height, left: b.defaultInsetImg.left, top: b.defaultInsetImg.top, width: b.defaultInsetImg.width }} />
           </div>
         ))}
         {/* Lines (default) */}
@@ -226,13 +226,13 @@ function ArchDiagram({ hoveredIndex }: { hoveredIndex: number }) {
         {/* Base hover — 4444:7876 */}
         <div className="absolute left-[10px] top-[20px] h-[536px] w-[811px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="" aria-hidden src={ARCH_ASSETS.baseHover} className="absolute inset-0 size-full max-w-none object-bottom" />
+          <img loading="lazy" decoding="async" alt="" aria-hidden src={ARCH_ASSETS.baseHover} className="absolute inset-0 size-full max-w-none object-bottom" />
         </div>
         {/* Blocks (hover) */}
         {ARCH_BLOCKS.map((b, i) => (
           <div key={i} className="absolute overflow-hidden" style={{ left: b.left, top: b.top, width: b.width, height: b.height }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt="" aria-hidden src={b.hoverSrc} className="absolute inset-0 size-full max-w-none object-bottom" />
+            <img loading="lazy" decoding="async" alt="" aria-hidden src={b.hoverSrc} className="absolute inset-0 size-full max-w-none object-bottom" />
           </div>
         ))}
         {/* Lines (hover) */}
@@ -248,7 +248,7 @@ function ArchDiagram({ hoveredIndex }: { hoveredIndex: number }) {
             <div key={rectIndex} className={`absolute ${ARCH_HIGHLIGHT_RECT}`} style={{ left: rect.left, top: rect.top, width: rect.width, height: rect.height }}>
               <div className="absolute inset-0 overflow-hidden rounded-[6px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img alt="" aria-hidden src={ARCH_ASSETS.blockDefault} className="absolute max-w-none" style={{ height: rect.fillImg.height, left: rect.fillImg.left, top: rect.fillImg.top, width: rect.fillImg.width }} />
+                <img loading="lazy" decoding="async" alt="" aria-hidden src={ARCH_ASSETS.blockDefault} className="absolute max-w-none" style={{ height: rect.fillImg.height, left: rect.fillImg.left, top: rect.fillImg.top, width: rect.fillImg.width }} />
               </div>
             </div>
           ))}
@@ -266,7 +266,7 @@ function ArchLine({ line, src }: { line: (typeof ARCH_LINES)[number]; src: strin
           <div className="relative" style={{ width: line.innerWidth, height: line.innerHeight ?? 0 }}>
             <div className={`absolute ${line.inset}`}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" aria-hidden src={src} className="block size-full max-w-none" />
+              <img loading="lazy" decoding="async" alt="" aria-hidden src={src} className="block size-full max-w-none" />
             </div>
           </div>
         </div>
@@ -277,7 +277,7 @@ function ArchLine({ line, src }: { line: (typeof ARCH_LINES)[number]; src: strin
     <div className="absolute" style={{ left: line.left, top: line.top, width: line.width, height: line.height }}>
       <div className={`absolute ${line.inset}`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img alt="" aria-hidden src={src} className="block size-full max-w-none" />
+        <img loading="lazy" decoding="async" alt="" aria-hidden src={src} className="block size-full max-w-none" />
       </div>
     </div>
   );
@@ -416,7 +416,7 @@ function ArchStatView({
         data-name="Vector"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src={stat.statIcon || STAT_ICON}
           className="absolute inset-0 block size-full max-w-none"
@@ -517,9 +517,9 @@ function ProductsArchitectureMobile({
             {/* Architecture diagram — horizontal, responsive */}
             <div className="relative w-full px-[14px]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 alt="GPX10 Pro architecture"
-                src={image || "/products/architecture.png"}
+                src={image || "/products/architecture.webp"}
                 className="w-full h-auto object-contain"
               />
             </div>
@@ -548,7 +548,7 @@ function ProductsArchitectureMobile({
                   <div className="flex items-center gap-[8px]">
                     <div className="h-[32px] w-[32px] shrink-0">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img alt="" src={stat.statIcon || STAT_ICON} className="block size-full max-w-none" aria-hidden />
+                      <img loading="lazy" decoding="async" alt="" src={stat.statIcon || STAT_ICON} className="block size-full max-w-none" aria-hidden />
                     </div>
                     <h3
                       className={`${gilroyMedium.className} whitespace-nowrap text-[20px] sm:text-[24px] leading-[38px] font-medium text-white not-italic [word-break:break-word]`}

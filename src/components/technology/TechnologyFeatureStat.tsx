@@ -30,7 +30,7 @@ export function TechnologyFeatureStat({
       >
         {iconSrc ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <img loading="lazy" decoding="async"
             src={iconSrc}
             alt=""
             className="absolute inset-0 block size-full max-w-none"
@@ -39,13 +39,13 @@ export function TechnologyFeatureStat({
         ) : null}
       </div>
       <div
-        className={`${gilroyMedium.className} w-[279px] shrink-0 text-[32px] leading-[38px] font-medium text-white [word-break:break-word] not-italic`}
+        className={`${gilroyMedium.className} w-[279px] shrink-0 text-[32px] leading-[38px] font-medium text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}
       >
         {title}
       </div>
       <div className="flex w-full flex-col items-start" data-name="Content">
         <p
-          className={`${interRegular.className} w-full shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic`}
+          className={`${interRegular.className} w-full shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden not-italic`}
         >
           {description}
         </p>

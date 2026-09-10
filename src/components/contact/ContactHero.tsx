@@ -45,15 +45,15 @@ export function ContactHero({ data }: { data?: any }) {
           data-name="Title"
         >
           <GradientTitle nodeId="2379:4954" className="text-center">
-            {titleLines[0] && <p className="mb-0 leading-[49px]">{titleLines[0]}</p>}
-            {titleLines[1] && <p className="leading-[49px]">{titleLines[1]}</p>}
+            {titleLines[0] && <p className="mb-0 leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">{titleLines[0]}</p>}
+            {titleLines[1] && <p className="leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">{titleLines[1]}</p>}
           </GradientTitle>
           <CornerDecor />
         </div>
       </div>
 
       <p
-        className={`${interRegular.className} absolute top-[199px] left-[981px] z-10 w-[360px] text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+        className={`${interRegular.className} absolute top-[199px] left-[981px] z-10 w-[360px] text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         data-node-id="2379:4959"
       >
         {subtitle}

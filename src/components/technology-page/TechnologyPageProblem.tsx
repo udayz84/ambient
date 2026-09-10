@@ -4,9 +4,9 @@ import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { MobileCornerMark, MobileTitleCorners } from "./mobile-shared";
 
-const LEGACY_COMPUTE = "/technology/legacy-compute-new.png";
-const LEGACY_MEMORY = "/technology/legacy-memory-new.png";
-const ACUBE_CUBE = "/technology/acube-cube.png";
+const LEGACY_COMPUTE = "/technology/legacy-compute-new.webp";
+const LEGACY_MEMORY = "/technology/legacy-memory-new.webp";
+const ACUBE_CUBE = "/technology/acube-cube.webp";
 const ACUBE_GRID = "/technology/acube-card-grid.png";
 const CONNECTOR_LINE_DIM = "/technology/stat-connector-line-dim.svg";
 const CONNECTOR_LINE_BRIGHT = "/technology/stat-connector-line-bright.svg";
@@ -116,10 +116,10 @@ function SectionHeader({
         data-name="Title"
       >
         <GradientTitle gradientDeg={TITLE_GRADIENT_DEG} className="text-center">
-          <span className="block h-[49px] leading-[49px] whitespace-nowrap">
+          <span className="block h-[49px] leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
             {headingLines[0] ?? ""}
           </span>
-          <span className="block h-[49px] leading-[49px] whitespace-nowrap">
+          <span className="block h-[49px] leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
             {headingLines[1] ?? ""}
           </span>
         </GradientTitle>
@@ -127,7 +127,7 @@ function SectionHeader({
       </div>
 
       <p
-        className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+        className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         style={{ opacity: SUBTITLE_OPACITY }}
         data-node-id="2976:1216"
       >
@@ -142,11 +142,11 @@ function BottomCorners() {
     <>
       <div className="pointer-events-none absolute bottom-0 left-0 size-[4px]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={CORNER_LEFT} alt="" className="block size-full max-w-none" />
+        <img loading="lazy" decoding="async" src={CORNER_LEFT} alt="" className="block size-full max-w-none" />
       </div>
       <div className="pointer-events-none absolute bottom-0 right-0 size-[4px] -scale-x-100">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={CORNER_RIGHT} alt="" className="block size-full max-w-none" />
+        <img loading="lazy" decoding="async" src={CORNER_RIGHT} alt="" className="block size-full max-w-none" />
       </div>
     </>
   );
@@ -193,7 +193,7 @@ function StatRows({ rows, valueRight }: { rows: StatRow[]; valueRight: number })
       {rows.map((row) => (
         <div key={row.label}>
           <p
-            className={`${interRegular.className} absolute left-[21.81px] text-[14px] leading-[normal] font-normal whitespace-nowrap text-[#8e8e8e] uppercase not-italic [word-break:break-word]`}
+            className={`${interRegular.className} absolute left-[21.81px] max-w-full text-[14px] leading-[normal] font-normal whitespace-nowrap text-[#8e8e8e] uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]`}
             style={{ top: row.top }}
           >
             {row.label}
@@ -277,7 +277,7 @@ function LegacyCard({
         >
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               src={computeSrc}
               alt=""
               className="absolute left-[-13.52%] top-[-40.34%] h-[187.21%] w-[136.24%] max-w-none"
@@ -292,7 +292,7 @@ function LegacyCard({
           data-name="image 206"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src={LEGACY_MEMORY}
             alt=""
             className="absolute inset-0 size-full max-w-none object-cover pointer-events-none"
@@ -306,7 +306,7 @@ function LegacyCard({
         >
           <div className="absolute inset-[-20px_0_0_0]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               src={CONNECTOR_LINE_DIM}
               alt=""
               className="block size-full max-w-none"
@@ -316,7 +316,7 @@ function LegacyCard({
               aria-hidden
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 src={CONNECTOR_LINE_BRIGHT}
                 alt=""
                 className="block size-full max-w-none"
@@ -359,7 +359,7 @@ function ACubeCard({
         <div className="-rotate-150 -skew-x-30 flex-none scale-y-87">
           <div className="relative h-[271.67px] w-[203.11px]" data-name="Filler Liner">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               src={FILLER_LINER}
               alt=""
               className="absolute inset-0 block size-full max-w-none"
@@ -376,7 +376,7 @@ function ACubeCard({
         <div className="-skew-x-30 flex-none rotate-30 scale-y-87">
           <div className="relative h-[245.85px] w-[203.11px]" data-name="Filler Liner">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               src={FILLER_LINER_1}
               alt=""
               className="absolute inset-0 block size-full max-w-none"
@@ -428,7 +428,7 @@ function ACubeCard({
         data-node-id="3328:504"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           src={cubeSrc}
           alt=""
           className="absolute inset-0 size-full max-w-none object-bottom pointer-events-none"
@@ -450,7 +450,7 @@ function ChevronDecor() {
       >
         <div className="absolute inset-[-12.8%_-22.81%_-12.8%_-30.55%]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={CHEVRON_LARGE} alt="" className="block size-full max-w-none" />
+          <img loading="lazy" decoding="async" src={CHEVRON_LARGE} alt="" className="block size-full max-w-none" />
         </div>
       </div>
       <div
@@ -460,7 +460,7 @@ function ChevronDecor() {
       >
         <div className="absolute inset-[-1.02%_-4.2%_-1.02%_-2.16%]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={CHEVRON_MID} alt="" className="block size-full max-w-none" />
+          <img loading="lazy" decoding="async" src={CHEVRON_MID} alt="" className="block size-full max-w-none" />
         </div>
       </div>
       <div
@@ -470,7 +470,7 @@ function ChevronDecor() {
       >
         <div className="absolute inset-[-1.46%_-6.01%_-1.46%_-3.09%]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={CHEVRON_SMALL} alt="" className="block size-full max-w-none" />
+          <img loading="lazy" decoding="async" src={CHEVRON_SMALL} alt="" className="block size-full max-w-none" />
         </div>
       </div>
       <div
@@ -480,7 +480,7 @@ function ChevronDecor() {
       >
         <div className="absolute inset-[-2.18%_-8.93%_-2.17%_-4.6%]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={CHEVRON_DOT} alt="" className="block size-full max-w-none" />
+          <img loading="lazy" decoding="async" src={CHEVRON_DOT} alt="" className="block size-full max-w-none" />
         </div>
       </div>
     </>

@@ -37,7 +37,7 @@ function WhyCard({ step }: { step: any }) {
           aria-hidden
         />
         {step.image && (
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src={step.image}
             className={`absolute inset-0 h-full w-full opacity-75 transition-opacity duration-300 group-hover/card:opacity-100 ${

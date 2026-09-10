@@ -70,7 +70,7 @@ export function ContactSchedule({ data }: { data?: any }) {
       {sectionIcon ? (
         <div className="pointer-events-none absolute -top-[40px] left-1/2 -translate-x-1/2" aria-hidden>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={sectionIcon} alt="" className="size-[32px] object-contain" />
+          <img loading="lazy" decoding="async" src={sectionIcon} alt="" className="size-[32px] object-contain" />
         </div>
       ) : null}
       <div
@@ -190,13 +190,13 @@ function ScheduleCard({
         <TagBadge label={tag} nodeId={tagNodeId} />
         <div className="mt-[20px] flex flex-col gap-[10px] items-start not-italic [word-break:break-word]">
           <p
-            className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white`}
+            className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
             data-node-id={titleNodeId}
           >
             {title}
           </p>
           <p
-            className={`${interRegular.className} ${descriptionWidth} text-[18px] leading-[27px] font-normal text-[rgba(240,240,240,0.6)]`}
+            className={`${interRegular.className} ${descriptionWidth} text-[18px] leading-[27px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
             data-node-id={descNodeId}
           >
             {description}
@@ -212,7 +212,7 @@ function ScheduleCard({
       >
         {imageFinal ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img alt="" className={imageClassName} src={imageFinal} />
+          <img loading="lazy" decoding="async" alt="" className={imageClassName} src={imageFinal} />
         ) : null}
       </div>
 
@@ -247,7 +247,7 @@ function ScheduleCta({
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[length:307.2px_307.2px] bg-top-left opacity-[0.35]"
-        style={{ backgroundImage: "url(/contact/cta-texture.png)" }}
+        style={{ backgroundImage: "url(/contact/cta-texture.webp)" }}
       />
       <span
         aria-hidden
@@ -255,7 +255,7 @@ function ScheduleCta({
       />
       <span className="absolute top-1/2 left-[31px] flex -translate-y-1/2 items-center gap-[8px]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           src="/contact/calendar-icon.svg"
           alt=""
           width={20}
@@ -263,7 +263,7 @@ function ScheduleCta({
           className="size-[20px] shrink-0"
           aria-hidden
         />
-        <span className="text-[14px] leading-[normal] whitespace-nowrap text-[#151515] uppercase not-italic">
+        <span className="max-w-full overflow-hidden text-ellipsis text-[14px] leading-[normal] whitespace-nowrap text-[#151515] uppercase not-italic">
           {label}
         </span>
       </span>
@@ -279,7 +279,7 @@ function TagBadge({ label, nodeId }: { label: string; nodeId: string }) {
       data-name="Menu"
     >
       <p
-        className={`${dmMono.className} absolute top-[calc(50%-4.5px)] left-1/2 -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]`}
+        className={`${dmMono.className} absolute top-[calc(50%-4.5px)] left-1/2 max-w-full -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase overflow-hidden text-ellipsis [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]`}
       >
         {label}
       </p>

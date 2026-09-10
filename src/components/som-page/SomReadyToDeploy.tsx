@@ -12,7 +12,7 @@ const DEFAULT_PRIMARY_TITLE = "Get the Sparsh\nAI Module";
 const DESCRIPTION =
   "Start testing motion and audio models on the metal immediately.";
 const CTA_LABEL = "Request Sparsh Module";
-const FALLBACK_CHIP = "/som/sparsh-chip.png";
+const FALLBACK_CHIP = "/som/sparsh-chip.webp";
 const CONNECTOR_LINE = "/som/ready-connector.svg";
 
 /* ----------------------------- Mobile (Figma 4046:8112) ----------------------------- */
@@ -28,10 +28,10 @@ const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
 
 /** Green CTA — Figma 2438:5362 (262×48). */
-function RequestCta({ label }: { label: string }) {
+function RequestCta({ label, href }: { label: string; href?: string }) {
   return (
     <a
-      href="#"
+      href={href || "#"}
       className={`relative flex h-[48px] w-[262px] shrink-0 items-center justify-center ${GREEN_CTA_SHADOW}`}
       data-node-id="2438:5362"
       data-name="Cta"
@@ -54,6 +54,21 @@ function RequestCta({ label }: { label: string }) {
   );
 }
 
+function SecondaryCta({ label, href, className }: { label: string; href?: string; className?: string }) {
+  return (
+    <a
+      href={href || "#"}
+      className={`relative flex h-[48px] shrink-0 items-center justify-center border border-[#99a1af] bg-transparent hover:bg-white/10 transition-colors ${className || "w-[262px]"}`}
+    >
+      <span
+        className={`relative ${gilroyMedium.className} text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic`}
+      >
+        {label}
+      </span>
+    </a>
+  );
+}
+
 /** Chip image — Figma 2438:5330 (430.321×446.196, image vertically centered in inner rect). */
 function ChipImage({ className, src }: { className?: string; src: string }) {
   return (
@@ -67,7 +82,7 @@ function ChipImage({ className, src }: { className?: string; src: string }) {
         data-node-id="2438:5331"
         data-name="Background"
       >
-        <img
+        <img loading="lazy" decoding="async"
           src={src}
           alt="Sparsh AI Module"
           className="absolute inset-0 size-full object-contain opacity-90 brightness-75 blur-[2px]"
@@ -90,6 +105,8 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
   const ctaLabel = data?.primary_cta_label || CTA_LABEL;
   const description = data?.secondary_text || DESCRIPTION;
   const chipSrc = mediaUrl(data?.image);
+  const secondaryCtaLabel = data?.secondary_cta_label;
+  const secondaryCtaLink = data?.secondary_cta_link;
   const primaryTitleLines = (
     data?.primary_title || DEFAULT_PRIMARY_TITLE
   ).split("\n");
@@ -140,7 +157,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
             data-node-id="2438:5334"
           >
             {primaryTitleLines.map((line: string, i: number) => (
-              <p key={i} className="leading-[38px]">
+              <p key={i} className="leading-[38px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
                 {line}
               </p>
             ))}
@@ -157,7 +174,12 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
             >
               {description}
             </p>
-            <RequestCta label={ctaLabel} />
+            <div className="flex flex-col gap-[12px]">
+              <RequestCta label={ctaLabel} />
+              {secondaryCtaLabel && (
+                <SecondaryCta label={secondaryCtaLabel} href={secondaryCtaLink} />
+              )}
+            </div>
           </div>
 
           {/* Connector Line */}
@@ -167,7 +189,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
             aria-hidden
           >
             <div className="absolute inset-[-2.15%_0_-11.88%_-0.86%]">
-              <img
+              <img loading="lazy" decoding="async"
                 src={CONNECTOR_LINE}
                 alt=""
                 className="block size-full max-w-none rotate-180"
@@ -220,7 +242,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
             >
               {(chipSrc || FALLBACK_CHIP) && (
                 <>
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={chipSrc || FALLBACK_CHIP}
                     alt="Sparsh AI Module"
                     className="absolute left-0 top-[10.17%] h-[79.67%] w-full max-w-none object-contain opacity-90 brightness-75 blur-[2px]"
@@ -246,42 +268,51 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
               className={`${gilroyMedium.className} w-[200.641px] text-center text-[28px] leading-[33.725px] font-medium text-white not-italic [word-break:break-word]`}
             >
               {primaryTitleLines.map((line: string, i: number) => (
-                <span key={i} className="block">
+                <span key={i} className="block [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
                   {line}
                 </span>
               ))}
             </h3>
             <p
-              className={`${interRegular.className} w-[296.416px] text-center text-[14px] leading-[23.075px] font-normal tracking-[-0.2773px] text-[#99a1af] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} w-[296.416px] text-center text-[14px] leading-[23.075px] font-normal tracking-[-0.2773px] text-[#99a1af] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
             >
               {description}
             </p>
 
             {/* CTA — 4059:9373 (231×48) */}
-            <a
-              href="#"
-              className={`relative flex h-[48px] w-[231px] shrink-0 items-center justify-center ${GREEN_CTA_SHADOW}`}
-              data-name="Cta"
-            >
-              <span
-                aria-hidden
-                className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-              />
-              <span
-                className={`relative ${gilroySemiBold.className} text-[14px] font-medium uppercase whitespace-nowrap text-white not-italic`}
+            <div className="flex flex-col gap-[12px] items-center">
+              <a
+                href="#"
+                className={`relative flex h-[48px] w-[231px] shrink-0 items-center justify-center ${GREEN_CTA_SHADOW}`}
+                data-name="Cta"
               >
-                {ctaLabel}
-              </span>
-              <span
-                aria-hidden
-                className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
-              />
-              <GreenCtaCorners />
-            </a>
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+                />
+                <span
+                  className={`relative ${gilroySemiBold.className} text-[14px] font-medium uppercase whitespace-nowrap text-white not-italic`}
+                >
+                  {ctaLabel}
+                </span>
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
+                />
+                <GreenCtaCorners />
+              </a>
+              {secondaryCtaLabel && (
+                <SecondaryCta 
+                  label={secondaryCtaLabel} 
+                  href={secondaryCtaLink} 
+                  className="w-[231px]" 
+                />
+              )}
+            </div>
           </div>
 
           {/* Connector line — 4059:9387 (vertical, centered, y268) */}
-          <img
+          <img loading="lazy" decoding="async"
             src={MOBILE_CONNECTOR}
             alt=""
             aria-hidden

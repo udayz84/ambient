@@ -80,8 +80,8 @@ export const STAGES: Stage[] = [
     subtitle: "Data Ingestion & Quantization",
     subtitleNoWrap: true,
     icon: "/developer/pipeline-icon-train.svg",
-    cardImage: "/developer/pipeline-card-train.png",
-    collapseBg: "/developer/pipeline-card-train.png",
+    cardImage: "/developer/pipeline-card-train.webp",
+    collapseBg: "/developer/pipeline-card-train.webp",
     collapseStyle: {
       left: "calc(50% - 15.44px)",
       top: -1,
@@ -91,7 +91,7 @@ export const STAGES: Stage[] = [
     collapseGradient:
       "linear-gradient(90.54deg, rgba(0,0,0,0) 82.82%, rgb(0,0,0) 99.98%), linear-gradient(90deg, rgb(0,0,0) 21.64%, rgba(0,0,0,0) 62.88%)",
     collapseImgClass: "object-contain object-center",
-    flowImage: "/developer/train-flow-1.png",
+    flowImage: "/developer/train-flow-1.webp",
     expandedHeaderStrip: "/developer/train-expanded-strip.png",
     bullets: [
       {
@@ -111,10 +111,10 @@ export const STAGES: Stage[] = [
     subtitle: "Hardware-Aware Validation",
     subtitleNoWrap: true,
     icon: "/developer/pipeline-icon-optimize.svg",
-    cardImage: "/developer/pipeline-card-optimize.png",
+    cardImage: "/developer/pipeline-card-optimize.webp",
     cardGradient:
       "linear-gradient(250.41302079811192deg, rgba(0,0,0,0) 59.187%, rgb(0,0,0) 75.236%)",
-    collapseBg: "/developer/pipeline-collapse-bg-optimize.png",
+    collapseBg: "/developer/pipeline-collapse-bg-optimize.webp",
     collapseStyle: {
       left: "calc(50% - 15.44px)",
       top: -1,
@@ -123,7 +123,7 @@ export const STAGES: Stage[] = [
     },
     collapseGradient:
       "linear-gradient(90.54deg, rgba(0,0,0,0) 82.82%, rgb(0,0,0) 99.98%), linear-gradient(90deg, rgb(0,0,0) 21.64%, rgba(0,0,0,0) 62.88%)",
-    flowImage: "/developer/train-flow-2.png",
+    flowImage: "/developer/train-flow-2.webp",
     bullets: [
       {
         title: "Compatibility Checking",
@@ -142,8 +142,8 @@ export const STAGES: Stage[] = [
     subtitle: "Embedded Application Assembly",
     subtitleNoWrap: false,
     icon: "/developer/pipeline-icon-integrate.svg",
-    cardImage: "/developer/pipeline-card-integrate-a.png",
-    cardImage2: "/developer/pipeline-card-integrate-b.png",
+    cardImage: "/developer/pipeline-card-integrate-a.webp",
+    cardImage2: "/developer/pipeline-card-integrate-b.webp",
     collapseBg: "/developer/pipeline-collapse-bg-integrate.png",
     collapseStyle: {
       left: "calc(50% - 15.44px)",
@@ -153,7 +153,7 @@ export const STAGES: Stage[] = [
     },
     collapseGradient:
       "linear-gradient(90deg, rgba(0,0,0,0) 79.37%, rgb(0,0,0) 93.88%), linear-gradient(90deg, rgb(0,0,0) 29.99%, rgba(0,0,0,0) 48.39%)",
-    flowImage: "/developer/train-flow-3.png",
+    flowImage: "/developer/train-flow-3.webp",
     bullets: [
       {
         title: "The SDK Arsenal",
@@ -172,7 +172,7 @@ export const STAGES: Stage[] = [
     subtitle: "The Unified Build",
     subtitleNoWrap: true,
     icon: "/developer/pipeline-icon-deploy.svg",
-    cardImage: "/developer/pipeline-card-deploy.png",
+    cardImage: "/developer/pipeline-card-deploy.webp",
     cardGradient:
       "linear-gradient(169.95193210377164deg, rgba(0,0,0,0) 55.52%, rgba(0,0,0,0.95) 69.775%)",
     collapseBg: "/developer/pipeline-collapse-bg-deploy.png",
@@ -184,7 +184,7 @@ export const STAGES: Stage[] = [
     },
     collapseGradient:
       "linear-gradient(89.94deg, rgba(0,0,0,0) 79.36%, rgb(0,0,0) 98.95%), linear-gradient(90deg, rgb(0,0,0) 31.11%, rgba(0,0,0,0) 91.38%)",
-    flowImage: "/developer/train-flow-4.png",
+    flowImage: "/developer/train-flow-4.webp",
     flowTopOffset: 20,
     bullets: [
       {
@@ -288,7 +288,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
         aria-hidden
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src="/developer/pipeline-abstract.svg"
           className="absolute inset-0 block size-full max-w-none"
@@ -302,7 +302,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
       >
         <Corners leftSrc={BADGE_LEFT} rightSrc={BADGE_RIGHT} />
         <p
-          className={`${dmMono.className} absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[13px] leading-[19.5px] uppercase tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] not-italic`}
+          className={`${dmMono.className} absolute left-1/2 top-1/2 max-w-full -translate-x-1/2 -translate-y-1/2 text-[13px] leading-[19.5px] uppercase tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] not-italic overflow-hidden text-ellipsis`}
         >
           {tagText}
         </p>
@@ -323,7 +323,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
         >
           <div className="absolute inset-[-0.85%_0]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src="/developer/pipeline-title-frame.svg"
               className="block size-full max-w-none"
@@ -336,13 +336,13 @@ export function DeveloperPipeline({ data }: { data?: any }) {
           style={{ left: -0.37, top: 6, width: 650 }}
         >
           <h2
-            className={`${gilroyMedium.className} bg-clip-text text-[46px] leading-[49px] whitespace-nowrap font-medium text-transparent not-italic`}
+            className={`${gilroyMedium.className} bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
             style={{ backgroundImage: PIPELINE_TITLE_GRADIENT }}
           >
             {heading}
           </h2>
           <p
-            className={`${interRegular.className} text-[14px] leading-[21px] text-[#f0f0f0] not-italic`}
+            className={`${interRegular.className} text-[14px] leading-[21px] text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
           >
             {subtitle}
           </p>
@@ -376,7 +376,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
             aria-hidden
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src={ARROW_SVG}
               className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
@@ -435,7 +435,7 @@ export function StageCard({
       {/* Label + subtitle */}
       <div className="relative z-10 flex w-full flex-col items-center gap-[6px] text-center">
         <p
-          className={`${gilroyMedium.className} text-[22px] leading-[28px] text-white`}
+          className={`${gilroyMedium.className} text-[22px] leading-[28px] text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
         >
           {stage.label}
         </p>
@@ -465,7 +465,7 @@ function CardImage({ stage, index }: { stage: Stage; index: number }) {
         aria-hidden
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src={stage.cardImage}
           className="absolute h-full max-w-none"
@@ -486,7 +486,7 @@ function CardImage({ stage, index }: { stage: Stage; index: number }) {
         <div className="-rotate-90">
           <div className="relative" style={{ height: 194, width: 123 }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <img loading="lazy" decoding="async"
               alt=""
               src={stage.cardImage}
               className="absolute max-w-none"
@@ -530,7 +530,7 @@ function CardImage({ stage, index }: { stage: Stage; index: number }) {
           <div className="-rotate-90">
             <div className="relative" style={{ height: 229.983, width: 146.256 }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <img loading="lazy" decoding="async"
                 alt=""
                 src={stage.cardImage}
                 className="absolute inset-0 size-full max-w-none object-cover"
@@ -544,7 +544,7 @@ function CardImage({ stage, index }: { stage: Stage; index: number }) {
           style={{ left: "50%", top: -17, height: 162, width: 162 }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src={stage.cardImage2}
             className="absolute max-w-none"
@@ -570,7 +570,7 @@ function CardImage({ stage, index }: { stage: Stage; index: number }) {
       <div className="rotate-[3.84deg]">
         <div className="relative" style={{ height: 126.976, width: 213.589 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src={stage.cardImage}
             className="absolute inset-0 size-full max-w-none object-cover"
@@ -630,7 +630,7 @@ function AccordionItem({
           aria-hidden
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src={stage.collapseBg}
             className={`absolute size-full max-w-none ${stage.collapseImgClass || "object-bottom"}`}
@@ -656,7 +656,7 @@ function AccordionItem({
           aria-hidden
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src={stage.expandedHeaderStrip}
             className="absolute inset-0 size-full max-w-none object-contain object-center"
@@ -734,7 +734,7 @@ function AccordionItem({
         <Corners leftSrc={BADGE_LEFT} rightSrc={BADGE_RIGHT} />
         <div className="relative size-[24px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src={isActive ? REMOVE_ICON : ADD_ICON}
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
@@ -789,7 +789,7 @@ function AccordionItem({
       >
         {stage.autoFitFlow ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src={stage.flowImage}
             onLoad={(e) => {
@@ -805,7 +805,7 @@ function AccordionItem({
           />
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
             src={stage.flowImage}
             className="absolute left-0 max-w-none"
@@ -834,7 +834,7 @@ function IconTile({ icon }: { icon: string }) {
     >
       <div className="relative size-[44.522px]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src={icon}
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
@@ -859,7 +859,7 @@ function IconTileSmall({ icon }: { icon: string }) {
     >
       <div className="relative size-[37.565px]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           alt=""
           src={icon}
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"

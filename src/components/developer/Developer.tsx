@@ -19,7 +19,7 @@ export function Developer() {
         style={{
           height: DEV_DESKTOP_HEIGHT,
           backgroundColor: "#000",
-          backgroundImage: "url('/developer/section-bg-2.png')",
+          backgroundImage: "url('/developer/section-bg-2.webp')",
           backgroundPosition: "center 626px",
           backgroundSize: "100% 1435px",
           backgroundRepeat: "no-repeat",

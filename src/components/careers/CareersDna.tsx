@@ -42,7 +42,7 @@ export function CareersDna({ data }: { data?: any }) {
       >
         <div className="absolute inset-0 overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src={bgImg}
             alt=""
             className="absolute size-full max-w-none"
@@ -78,7 +78,7 @@ export function CareersDna({ data }: { data?: any }) {
             <CornerDecor />
           </div>
           <p
-            className={`${interRegular.className} shrink-0 text-center text-[18px] leading-[27px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} shrink-0 text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
             data-node-id="2379:8853"
           >
             {subtitle}
@@ -172,7 +172,7 @@ function CareersDnaChipImage({
     >
       {chipObject ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img
+        <img loading="lazy" decoding="async"
           src={chipObject}
           alt=""
           className="w-full h-auto max-h-[600px] object-contain"

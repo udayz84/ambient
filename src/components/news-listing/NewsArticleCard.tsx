@@ -11,15 +11,17 @@ export function NewsArticleCard({
   article: NewsArticle;
   bgClass: string;
 }) {
-  const { nodeId, category, title, titleFontSize = 22, excerpt, imageOverlaySrc } =
+  const { nodeId, category, title, titleFontSize = 22, excerpt, imageOverlaySrc, href } =
     article;
 
   return (
-    <article
-      className={`relative flex w-full min-[1024px]:w-[388px] shrink-0 flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] px-[12px] pt-[9px] min-[1024px]:pt-[12px] pb-[24px] [--tag-w:129px] min-[1024px]:[--tag-w:180px] [--tag-rb:120.48px] min-[1024px]:[--tag-rb:170.48046875px] ${bgClass}`}
+    <a
+      href={href || "#"}
+      className={`group relative block w-full min-[1024px]:w-[388px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] px-[12px] pt-[9px] min-[1024px]:pt-[12px] pb-[24px] [--tag-w:129px] min-[1024px]:[--tag-w:180px] [--tag-rb:120.48px] min-[1024px]:[--tag-rb:170.48046875px] hover:border-[#53d824]/50 transition-colors cursor-pointer ${bgClass}`}
       data-node-id={nodeId}
       data-name="Article"
     >
+      <div className="flex flex-col items-center gap-[20px]">
       <div
         className="relative h-[244px] min-[1024px]:h-[259.161px] w-full min-[1024px]:w-[356px] shrink-0 overflow-clip"
         data-name="Image"
@@ -59,14 +61,15 @@ export function NewsArticleCard({
             className={`${interRegular.className} w-full min-[1024px]:w-[346.611px] text-[14px] leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] font-normal not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
           >
             <span className="text-[rgba(240,240,240,0.6)]">{excerpt}</span>
-            <a href="#" className="text-[#53d824] transition-opacity hover:opacity-80">
+            <span className="text-[#53d824] transition-opacity group-hover:opacity-80">
               read more
-            </a>
+            </span>
           </p>
         </div>
       </div>
 
       <Corners />
-    </article>
+      </div>
+    </a>
   );
 }

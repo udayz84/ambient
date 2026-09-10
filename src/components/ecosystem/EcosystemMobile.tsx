@@ -24,7 +24,7 @@ function PartnerSectionMobile({
   return (
     <div className="flex flex-col shrink-0 w-[1204px]">
       <p
-        className={`${gilroySemiBold.className} bg-clip-text text-[40.281px] leading-[43.158px] tracking-[-0.8056px] font-semibold text-transparent opacity-90 not-italic px-[40px] whitespace-nowrap`}
+        className={`${gilroySemiBold.className} bg-clip-text text-[40.281px] leading-[43.158px] tracking-[-0.8056px] font-semibold text-transparent opacity-90 not-italic px-[40px] whitespace-nowrap overflow-hidden text-ellipsis max-w-full`}
         style={{ backgroundImage: gradient }}
       >
         {title}
@@ -86,7 +86,7 @@ export function EcosystemMobile({ data }: { data?: any }) {
         </div>
 
         <h2
-          className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic pb-[10px] -mb-[10px]`}
+          className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic pb-[10px] -mb-[10px]`}
           style={{
             backgroundImage:
               "linear-gradient(107.454deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -95,9 +95,9 @@ export function EcosystemMobile({ data }: { data?: any }) {
           {heading}
         </h2>
       </div>
-      
+
       <p
-        className={`${interRegular.className} mt-[24px] w-[356px] max-w-[calc(100vw-48px)] text-center text-[14px] leading-[22px] font-normal text-white opacity-80 not-italic`}
+        className={`${interRegular.className} mt-[24px] w-[356px] max-w-[calc(100vw-48px)] text-center text-[14px] leading-[22px] font-normal text-white opacity-80 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
       >
         {subtitle}
       </p>

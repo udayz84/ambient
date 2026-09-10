@@ -19,7 +19,7 @@ export function EcosystemGridLine({
     >
       <div className="absolute top-[0px] left-0 h-[4.5px] w-[8px]" data-node-id={capTopNodeId}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <img loading="lazy" decoding="async"
           src="/ecosystem/grid-cap.svg"
           alt=""
           className="block size-full max-w-none rotate-180"
@@ -32,7 +32,7 @@ export function EcosystemGridLine({
       <div className="absolute bottom-[0.5px] left-0 h-[4px] w-[8px]" data-node-id={capBottomNodeId}>
         <div className="absolute inset-[0_0_-12.5%_0]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src="/ecosystem/grid-cap.svg"
             alt=""
             className="block size-full max-w-none"

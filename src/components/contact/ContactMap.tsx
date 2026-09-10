@@ -103,15 +103,15 @@ export function ContactMap({ data }: { data?: any }) {
           <GradientTitle
             nodeId="2379:8407"
             gradientDeg="101.272deg"
-            className="text-center whitespace-nowrap"
+            className="text-center"
           >
-            {headingLines[0] && <p className="mb-0 leading-[49px]">{headingLines[0]}</p>}
-            {headingLines[1] && <p className="leading-[49px]">{headingLines[1]}</p>}
+            {headingLines[0] && <p className="mb-0 leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">{headingLines[0]}</p>}
+            {headingLines[1] && <p className="leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">{headingLines[1]}</p>}
           </GradientTitle>
           <CornerDecor />
         </div>
         <p
-          className={`${interRegular.className} w-[720px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+          className={`${interRegular.className} w-[720px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
           data-node-id="2379:8412"
         >
           {subtitle}
@@ -124,7 +124,7 @@ export function ContactMap({ data }: { data?: any }) {
       >
         {mapBase ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <img loading="lazy" decoding="async"
             alt={data?.map_base_alt || ""}
             className="absolute inset-0 block size-full max-w-none object-cover object-center"
             src={mapBase}
@@ -194,7 +194,7 @@ function LocationBlock({
               <div className="absolute inset-[-14.14%_0_-14.14%_-2.44%]">
                 {indicatorSrc ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img alt="" className="block size-full max-w-none" src={indicatorSrc} />
+                  <img loading="lazy" decoding="async" alt="" className="block size-full max-w-none" src={indicatorSrc} />
                 ) : null}
               </div>
             </div>
@@ -207,7 +207,7 @@ function LocationBlock({
           >
             {indicatorSrc ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img alt="" className="block size-full max-w-none" src={indicatorSrc} />
+              <img loading="lazy" decoding="async" alt="" className="block size-full max-w-none" src={indicatorSrc} />
             ) : null}
           </div>
         )}
@@ -227,12 +227,12 @@ function LocationBlock({
         </div>
         <div className="flex w-[295px] shrink-0 flex-col items-start gap-[10px] not-italic [word-break:break-word]">
           <p
-            className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white`}
+            className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
           >
             {title}
           </p>
           <div
-            className={`${interRegular.className} w-[295px] text-[16px] leading-[24px] font-normal text-[#a4a4a4]`}
+            className={`${interRegular.className} w-[295px] text-[16px] leading-[24px] font-normal text-[#a4a4a4] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
           >
             {address}
           </div>

@@ -29,9 +29,9 @@ function SectionBackdrop() {
     <div aria-hidden className="pointer-events-none absolute inset-0">
       <div className="absolute inset-0 bg-black" />
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <img loading="lazy" decoding="async"
         alt=""
-        src="/products/features-bg.png"
+        src="/products/features-bg.webp"
         className="absolute size-full max-w-none object-bottom opacity-75"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0)] from-[88.149%] to-black" />

@@ -114,7 +114,7 @@ export function MeasuredProofMobile({ data }: { data?: any }) {
 
         <div className="relative flex w-[354px] max-w-full flex-col items-center justify-center py-[7px]">
           <h2
-            className={`${gilroyMedium.className} relative z-10 w-[244px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+            className={`${gilroyMedium.className} relative z-10 w-[244px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}
             style={{
               backgroundImage:
                 "linear-gradient(102.363deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -193,7 +193,7 @@ export function MeasuredProofMobile({ data }: { data?: any }) {
             aria-hidden
             className="pointer-events-none absolute inset-0 overflow-hidden z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
           />
-          <p className="relative z-10 text-[13px] leading-[24px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
+          <p className="relative z-10 max-w-full text-[13px] leading-[24px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]">
             {primary.label || ""}
           </p>
           
@@ -203,7 +203,7 @@ export function MeasuredProofMobile({ data }: { data?: any }) {
           href={secondary.href || ""}
           className={`${gilroyMedium.className} relative flex h-[48px] w-[171px] items-center justify-center bg-[rgba(226,241,202,0.12)]`}
         >
-          <p className="relative text-[13px] leading-[24px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
+          <p className="relative max-w-full text-[13px] leading-[24px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]">
             {secondary.label || ""}
           </p>
           <GreenCtaCorners />

@@ -218,7 +218,7 @@ function ProductsHeroDesktop({
         data-name="Container"
       >
         <h1
-          className="min-w-full w-[min-content] shrink-0 bg-clip-text text-[46px] leading-[49px] font-medium text-transparent"
+          className="min-w-full w-[min-content] shrink-0 bg-clip-text text-[46px] leading-[49px] font-medium text-transparent [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden"
           style={{
             backgroundImage: HERO_TITLE_GRADIENT,
             WebkitBackgroundClip: "text",
@@ -228,11 +228,11 @@ function ProductsHeroDesktop({
           data-name="Title"
         >
           {titleLines.map((line, i) => (
-            <span key={i} className="block leading-[49px]">{line}</span>
+            <span key={i} className="block leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">{line}</span>
           ))}
         </h1>
         <p
-          className={`${interRegular.className} w-[419px] shrink-0 text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-80`}
+          className={`${interRegular.className} w-[419px] shrink-0 text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-80 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
           data-node-id="2900:465"
           data-name="Description"
         >
@@ -277,7 +277,7 @@ function PrimaryCta({
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
       <AnimatedDotsBackground />
-      <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+      <span className="relative max-w-full overflow-hidden text-ellipsis text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
         {children}
       </span>
       <span
@@ -304,7 +304,7 @@ function SecondaryCta({
       data-node-id="2900:584"
       data-name="CTA - Secondary"
     >
-      <span className="relative px-[20px] py-[10px] text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+      <span className="relative max-w-full overflow-hidden text-ellipsis px-[20px] py-[10px] text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
         {children}
       </span>
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
@@ -430,7 +430,7 @@ function ProductsHeroMobile({
                 className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
               />
               <AnimatedDotsBackground />
-              <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+              <span className="relative max-w-full overflow-hidden text-ellipsis text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
                 {primary.label}
               </span>
               <span
@@ -444,7 +444,7 @@ function ProductsHeroMobile({
               className={`${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
               style={{ backgroundColor: SECONDARY_CTA_BG }}
             >
-              <span className="relative px-[20px] py-[10px] text-[14px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+              <span className="relative max-w-full overflow-hidden text-ellipsis px-[20px] py-[10px] text-[14px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
                 {secondary.label}
               </span>
               <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
