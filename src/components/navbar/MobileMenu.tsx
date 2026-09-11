@@ -6,7 +6,11 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { interMedium } from "../hero/fonts";
-import { mapStrapiNavItems } from "./nav-items";
+import {
+  mapStrapiNavItems,
+  mergeApplicationNavItems,
+  type ApplicationPageSummary,
+} from "./nav-items";
 import { NavbarCta } from "./NavbarCta";
 import { mediaUrl } from "@/lib/strapi";
 
@@ -74,8 +78,19 @@ function ChevronDown() {
   );
 }
 
-export function MobileMenu({ data, brandData }: { data?: any; brandData?: any }) {
-  const navItems = mapStrapiNavItems(data?.nav_items);
+export function MobileMenu({
+  data,
+  brandData,
+  applicationPages,
+}: {
+  data?: any;
+  brandData?: any;
+  applicationPages?: ApplicationPageSummary[];
+}) {
+  const navItems = mergeApplicationNavItems(
+    mapStrapiNavItems(data?.nav_items),
+    applicationPages
+  );
   const logoSrc = mediaUrl(brandData?.logo);
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);

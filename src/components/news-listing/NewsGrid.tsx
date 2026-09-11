@@ -24,6 +24,7 @@ type Pill = {
 
 type NewsGridProps = {
   data?: any;
+  articles?: NewsArticle[];
 };
 
 function cardsToArticles(cards: unknown): NewsArticle[] {
@@ -44,14 +45,26 @@ function cardsToArticles(cards: unknown): NewsArticle[] {
   });
 }
 
-function buildPills(data: any): Pill[] {
+function buildPills(data: any, allArticles: NewsArticle[] = []): Pill[] {
   const raw = Array.isArray(data?.filter_pills) ? data.filter_pills : [];
   return raw.map((p: any) => {
+    const pillId = (p?.category_id as string) || "";
+    
+    // Fall back to hardcoded cards if no matching dynamic articles found
+    // (useful for a mixed content strategy where some pills are manual)
+    let matchingCards = allArticles.filter(
+      (a) => !pillId || a.categoryId === pillId
+    );
+    
+    if (matchingCards.length === 0) {
+      matchingCards = cardsToArticles(p?.cards);
+    }
+
     return {
-      id: (p?.category_id as string) || "",
+      id: pillId,
       label: (p?.label as string) || "",
       active: Boolean(p?.is_active),
-      cards: cardsToArticles(p?.cards),
+      cards: matchingCards,
     };
   });
 }
@@ -197,8 +210,8 @@ function LoadMoreCta({ label, onClick }: { label: string; onClick?: (e: React.Mo
   );
 }
 
-export function NewsGrid({ data }: NewsGridProps = {}) {
-  const pills = buildPills(data);
+export function NewsGrid({ data, articles = [] }: NewsGridProps = {}) {
+  const pills = buildPills(data, articles);
   const loadMoreLabel = (data?.load_more_label as string) || "";
 
   const initialActiveId =

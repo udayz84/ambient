@@ -3,7 +3,12 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Navbar } from "@/components/navbar/Navbar";
 import { SiteFooterWrapper } from "@/components/site-footer/SiteFooterWrapper";
 import { SmoothScroll } from "@/components/SmoothScroll";
-import { getNavbar, getFooter } from "@/lib/strapi";
+import {
+  getNavbar,
+  getFooter,
+  getApplicationPages,
+  type ApplicationPageSummary,
+} from "@/lib/strapi";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -32,12 +37,17 @@ export default async function RootLayout({
 }>) {
   let navbar: any = null;
   let footer: any = null;
-  const [navbarRes, footerRes] = await Promise.allSettled([
+  let applicationPages: ApplicationPageSummary[] | undefined = undefined;
+  const [navbarRes, footerRes, applicationPagesRes] = await Promise.allSettled([
     getNavbar<any>(),
     getFooter<any>(),
+    getApplicationPages(),
   ]);
   if (navbarRes.status === "fulfilled") navbar = navbarRes.value;
   if (footerRes.status === "fulfilled") footer = footerRes.value;
+  if (applicationPagesRes.status === "fulfilled") {
+    applicationPages = applicationPagesRes.value;
+  }
   return (
     <html
       lang="en"
@@ -46,7 +56,11 @@ export default async function RootLayout({
     >
       <body className="flex min-h-full flex-col overflow-x-clip bg-black">
         <SmoothScroll>
-          <Navbar data={navbar?.header} brandData={navbar?.brand} />
+          <Navbar
+            data={navbar?.header}
+            brandData={navbar?.brand}
+            applicationPages={applicationPages}
+          />
           {children}
           <SiteFooterWrapper data={footer?.footer} brandData={navbar?.brand} newsletterData={footer?.newsletter} />
         </SmoothScroll>

@@ -57,6 +57,7 @@ export function LatestNewsCard({
                 fill
                 className={imageClassName}
                 sizes={imageSizes}
+                unoptimized={imageSrc.startsWith("/")}
               />
             )
           ) : null}

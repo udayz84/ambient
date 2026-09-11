@@ -106,7 +106,7 @@ export function mapArticleToNewsCard(
     date: formatDisplayDate(article?.date),
     href:
       (article?.external_url as string) ||
-      (article?.slug ? `/news/${article.slug}` : "/resources"),
+      (article?.slug ? `/article/${article.slug}` : "/resources"),
     imageSrc,
   };
 }

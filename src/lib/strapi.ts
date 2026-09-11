@@ -218,4 +218,24 @@ export async function getFooter<T = unknown>(): Promise<T | null> {
   return res.data;
 }
 
+/**
+ * Fetch the slugs + optional nav icon of all published application pages
+ * (collection type "application-pages"), used to auto-build the header
+ * Applications dropdown. Only published entries are returned (Strapi default)
+ * and the result is cached/revalidated like every other Strapi request.
+ */
+export type ApplicationPageSummary = { slug: string; icon: string | null };
+
+export async function getApplicationPages(): Promise<ApplicationPageSummary[]> {
+  const res = await fetchStrapi<
+    StrapiResponse<{ slug: string | null; icon: StrapiMedia | null }[]>
+  >("/api/application-pages?fields[0]=slug&populate[icon]=true&sort[0]=slug:asc");
+  return (res.data || [])
+    .map((row) => ({
+      slug: typeof row?.slug === "string" ? row.slug : "",
+      icon: mediaUrl(row?.icon),
+    }))
+    .filter((row) => row.slug.length > 0);
+}
+
 export { STRAPI_URL };

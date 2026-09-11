@@ -464,6 +464,7 @@ export interface ApiApplicationPageApplicationPage
     >;
     footer_accent: Schema.Attribute.Component<'wearables.footer-accent', false>;
     hero: Schema.Attribute.Component<'wearables.hero', false>;
+    icon: Schema.Attribute.Media;
     lab_to_product: Schema.Attribute.Component<
       'wearables.lab-to-product',
       false
@@ -575,6 +576,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
         maxLength: 500;
       }>;
     featured_image: Schema.Attribute.Media;
+    hero_image: Schema.Attribute.Media<'images'>;
     is_featured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<

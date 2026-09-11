@@ -1,6 +1,8 @@
 export type NavSubItem = {
   label: string;
   href: string;
+  /** Optional icon URL (used by application pages uploaded in the CMS). */
+  icon?: string;
 };
 
 export type NavMegaColumn = {
@@ -101,4 +103,90 @@ export function mapStrapiNavItems(
     })
     .filter((item) => item.label.length > 0);
   return mapped;
+}
+
+/* ---------------------------------------------------------------------------
+ * Auto-generated "Applications" dropdown children.
+ *
+ * Published entries of the Strapi `application-pages` collection are turned
+ * into dropdown links automatically (label humanized from the slug, sorted
+ * alphabetically). Each entry carries its CMS-uploaded `icon` when set; the
+ * static keyword-matched icons (APPLICATION_ICON_RULES) are the fallback.
+ * ------------------------------------------------------------------------- */
+
+/** Summary of a published application page (slug + optional CMS icon URL). */
+export type ApplicationPageSummary = {
+  slug: string;
+  icon: string | null;
+};
+
+/** Labels for known slugs where the raw slug would read poorly. */
+const APPLICATION_LABEL_OVERRIDES: Record<string, string> = {
+  smarthomes: "Smart Homes",
+};
+
+/** Humanize a slug: "smart-homes" -> "Smart Homes", "wearables" -> "Wearables". */
+export function applicationLabelFor(slug: string): string {
+  const override = APPLICATION_LABEL_OVERRIDES[slug.toLowerCase()];
+  if (override) return override;
+  return slug
+    .split(/[-_]+/)
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
+/** Build dropdown children from application pages, sorted by label. */
+export function buildApplicationChildren(
+  pages: ApplicationPageSummary[]
+): NavSubItem[] {
+  return pages
+    .map(({ slug, icon }) => ({
+      slug,
+      label: applicationLabelFor(slug),
+      href: `/applications/${slug}`,
+      icon: icon ?? undefined,
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label))
+    .map(({ label, href, icon }) => ({ label, href, icon }));
+}
+
+const APPLICATION_PARENT_LABELS = new Set(["application", "applications"]);
+
+/**
+ * Replace the children of the "Application(s)" nav item with the ones derived
+ * from the collection. When no pages are available (fetch failed / empty), the
+ * manually configured Strapi children are kept as-is.
+ */
+export function mergeApplicationNavItems(
+  navItems: NavItem[],
+  applicationPages: ApplicationPageSummary[] | undefined | null,
+): NavItem[] {
+  if (!Array.isArray(navItems)) return [];
+  if (!Array.isArray(applicationPages) || applicationPages.length === 0) {
+    return navItems;
+  }
+  const children = buildApplicationChildren(applicationPages);
+  return navItems.map((item) =>
+    APPLICATION_PARENT_LABELS.has(item.label.toLowerCase())
+      ? { ...item, hasChevron: true, children }
+      : item
+  );
+}
+
+/** Keyword-matched icons for auto-generated application entries. */
+const APPLICATION_ICON_RULES: { pattern: RegExp; icon: string }[] = [
+  { pattern: /wearable|hearable|watch|ring|fitness|band/, icon: "/navbar/nav-icon-wearables.svg" },
+  { pattern: /smart[-_]?home|smarthome|home/, icon: "/navbar/nav-icon-smart-homes.svg" },
+  { pattern: /medical|health|clinic/, icon: "/navbar/nav-icon-medical.svg" },
+];
+
+/**
+ * Resolve the nav icon for an application page slug (first keyword match wins,
+ * null when no rule matches so callers can apply their fallback).
+ */
+export function applicationIconFor(slug: string): string | null {
+  const key = (slug || "").toLowerCase();
+  const rule = APPLICATION_ICON_RULES.find(({ pattern }) => pattern.test(key));
+  return rule ? rule.icon : null;
 }

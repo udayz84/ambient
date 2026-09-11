@@ -5,7 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { mapStrapiNavItems, type NavMegaColumn } from "./nav-items";
+import {
+  mapStrapiNavItems,
+  mergeApplicationNavItems,
+  applicationIconFor,
+  type ApplicationPageSummary,
+  type NavMegaColumn,
+} from "./nav-items";
 import { MobileMenu } from "./MobileMenu";
 import { NavbarCta } from "./NavbarCta";
 import { mediaUrl } from "@/lib/strapi";
@@ -163,7 +169,17 @@ const NAV_ICON_BY_LABEL: Record<string, string> = {
 
 const NAV_ICON_FALLBACK = "/navbar/nav-icon-chip.svg";
 
-function navIconFor(label?: string): string {
+function navIconFor(
+  label?: string,
+  href?: string,
+  icon?: string
+): string {
+  // 1. Icon uploaded in the CMS for this application page.
+  if (icon) return icon;
+  // 2. Application pages from the collection — static icon matched by slug.
+  if (href?.startsWith("/applications/")) {
+    return applicationIconFor(href.slice("/applications/".length)) || NAV_ICON_FALLBACK;
+  }
   const key = (label || "").toLowerCase().trim();
   return NAV_ICON_BY_LABEL[key] || NAV_ICON_FALLBACK;
 }
@@ -173,7 +189,10 @@ function NavIconDropdown({
   onNavigate,
   compact = false,
 }: {
-  item: { label?: string; children?: { label: string; href: string }[] };
+  item: {
+    label?: string;
+    children?: { label: string; href: string; icon?: string }[];
+  };
   onNavigate: () => void;
   compact?: boolean;
 }) {
@@ -208,7 +227,7 @@ function NavIconDropdown({
               <div className="flex items-center gap-[6px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={navIconFor(child.label)}
+                  src={navIconFor(child.label, child.href, child.icon)}
                   alt=""
                   className="shrink-0"
                   style={{ width: iconSize, height: iconSize }}
@@ -414,8 +433,19 @@ function NavVectorDivider() {
   );
 }
 
-export function Navbar({ data, brandData }: { data?: any; brandData?: any }) {
-  const navItems = mapStrapiNavItems(data?.nav_items);
+export function Navbar({
+  data,
+  brandData,
+  applicationPages,
+}: {
+  data?: any;
+  brandData?: any;
+  applicationPages?: ApplicationPageSummary[];
+}) {
+  const navItems = mergeApplicationNavItems(
+    mapStrapiNavItems(data?.nav_items),
+    applicationPages
+  );
   const logoSrc = mediaUrl(brandData?.logo);
   return (
     <header
@@ -525,7 +555,7 @@ export function Navbar({ data, brandData }: { data?: any; brandData?: any }) {
           </Link>
 
           <div className="absolute top-[21px] right-[16px] flex h-[36px] w-[36px] items-center justify-center">
-            <MobileMenu data={data} brandData={brandData} />
+            <MobileMenu data={data} brandData={brandData} applicationPages={applicationPages} />
           </div>
         </div>
       </div>

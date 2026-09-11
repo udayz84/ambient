@@ -1,6 +1,10 @@
+import { mediaUrl, type StrapiMedia } from "@/lib/strapi";
+import { humanizeArticleCategory, filterCategoryId } from "../resources/resources-data";
+
 export type NewsArticle = {
   nodeId: string;
   category: string;
+  categoryId?: string;
   title: string;
   titleFontSize?: number;
   excerpt: string;
@@ -66,3 +70,43 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     imageOverlaySrc: "/resources/article-6-overlay.webp",
   },
 ];
+
+type StrapiArticleRow = {
+  id?: number;
+  documentId?: string;
+  title?: string;
+  category?: string;
+  slug?: string;
+  excerpt?: string;
+  external_url?: string;
+  featured_image?: StrapiMedia;
+};
+
+export function buildNewsArticles(strapiArticles: unknown): NewsArticle[] {
+  if (!Array.isArray(strapiArticles) || strapiArticles.length === 0) {
+    return [];
+  }
+  return (strapiArticles as StrapiArticleRow[]).map(
+    (a, i): NewsArticle => {
+      const cat = String(a?.category || "");
+
+      let imageUrl = mediaUrl(a?.featured_image) || undefined;
+      if (imageUrl && imageUrl.match(/\.(mp4|webm)$/i)) {
+        imageUrl = undefined;
+      }
+
+      return {
+        nodeId:
+          (a?.documentId as string) ||
+          (a?.id != null ? String(a.id) : `news-article-${i}`),
+        category: humanizeArticleCategory(cat).toUpperCase(),
+        categoryId: filterCategoryId(cat),
+        title: (a?.title as string) || "",
+        titleFontSize: 22,
+        excerpt: (a?.excerpt as string) || "",
+        imageOverlaySrc: imageUrl,
+        href: (a?.external_url as string) || (a?.slug ? `/article/${a.slug}` : undefined),
+      };
+    }
+  );
+}

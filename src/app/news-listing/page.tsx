@@ -3,8 +3,9 @@ import { NewsListingHero } from "@/components/news-listing/NewsListingHero";
 import { PressKit } from "@/components/news-listing/PressKit";
 import { NewsGrid } from "@/components/news-listing/NewsGrid";
 import { NewsBackdrop } from "@/components/news-listing/NewsBackdrop";
-import { getSingleType } from "@/lib/strapi";
+import { getCollection, getSingleType } from "@/lib/strapi";
 import { buildMetadata, type SeoData } from "@/lib/seo";
+import { buildNewsArticles } from "@/components/news-listing/news-data";
 
 export async function generateMetadata(): Promise<Metadata> {
   let seo: SeoData | null = null;
@@ -26,6 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function NewsListingPage() {
   let data: any = null;
+  let articles: any[] = [];
   try {
     data = await getSingleType<any>("news-listing-page", [
       "hero",
@@ -41,13 +43,22 @@ export default async function NewsListingPage() {
     data = null;
   }
 
+  try {
+    articles = await getCollection<any>(
+      "articles",
+      "populate=*&sort[0]=display_order:asc&sort[1]=date:desc&pagination[pageSize]=100"
+    );
+  } catch {
+    articles = [];
+  }
+
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       <NewsListingHero data={data?.hero} />
       <div className="relative w-full">
         <NewsBackdrop data={data?.grid} />
         <PressKit data={data?.press_kit} />
-        <NewsGrid data={data?.grid} />
+        <NewsGrid data={data?.grid} articles={buildNewsArticles(articles)} />
       </div>
     </main>
   );

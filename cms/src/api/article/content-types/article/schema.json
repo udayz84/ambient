@@ -47,6 +47,11 @@
       "type": "media",
       "multiple": false
     },
+    "hero_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
     "alt": {
       "type": "string"
     },
