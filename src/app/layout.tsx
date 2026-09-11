@@ -51,7 +51,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full overflow-x-clip scroll-smooth antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full overflow-x-clip scroll-smooth antialiased bg-black`}
       data-scroll-behavior="smooth"
     >
       <body className="flex min-h-full flex-col overflow-x-clip bg-black">

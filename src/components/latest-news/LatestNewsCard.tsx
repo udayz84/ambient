@@ -21,7 +21,7 @@ export function LatestNewsCard({
 }: LatestNewsCardProps) {
   return (
     <article
-      className="relative flex h-[530px] w-[388px] shrink-0 flex-col items-center justify-between overflow-clip bg-[rgba(255,255,255,0.04)] py-px"
+      className="relative flex h-[530px] w-full max-w-[388px] shrink-0 flex-col items-center justify-between overflow-clip bg-[rgba(255,255,255,0.04)] py-px mx-auto"
       data-node-id={nodeId}
       data-name="Article"
     >
@@ -36,10 +36,10 @@ export function LatestNewsCard({
       </div>
 
       <div
-        className="relative mb-[-1.263px] h-[229.263px] w-[386px] shrink-0 overflow-clip"
+        className="relative mb-[-1.263px] h-[229.263px] w-[calc(100%-2px)] shrink-0 overflow-clip"
         data-name="NewsSection"
       >
-        <div className="absolute top-[-0.09px] left-0 h-[229px] w-[386px] overflow-hidden">
+        <div className="absolute top-[-0.09px] left-0 h-[229px] w-full overflow-hidden">
           {imageSrc ? (
             /\.(mp4|webm)$/i.test(imageSrc) ? (
               <video
@@ -63,12 +63,12 @@ export function LatestNewsCard({
           ) : null}
         </div>
         <div
-          className="absolute top-[-0.09px] left-0 h-[229px] w-[386px] bg-gradient-to-t from-[rgba(0,0,0,0.8)] to-[rgba(0,0,0,0)]"
+          className="absolute top-[-0.09px] left-0 h-[229px] w-full bg-gradient-to-t from-[rgba(0,0,0,0.8)] to-[rgba(0,0,0,0)]"
           aria-hidden
         />
       </div>
 
-      <div className="relative flex h-[300px] w-[368px] shrink-0 flex-col items-start justify-between px-[12px] py-[18px]">
+      <div className="relative flex h-[300px] w-full shrink-0 flex-col items-start justify-between px-[12px] py-[18px]">
         <TagBadge
           label={category}
           width={180}
@@ -78,13 +78,13 @@ export function LatestNewsCard({
         />
 
         <h3
-          className={`${gilroyMedium.className} w-[353.684px] shrink-0 text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+          className={`${gilroyMedium.className} w-full shrink-0 text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
         >
           {title}
         </h3>
 
         <p
-          className={`${interRegular.className} w-[346.611px] shrink-0 text-[16px] leading-[24px] font-normal not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+          className={`${interRegular.className} w-full shrink-0 text-[16px] leading-[24px] font-normal not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
         >
           <span className="text-[rgba(240,240,240,0.8)]">{excerpt}</span>{" "}
           <Link href={href} className="text-[#53d824] transition-colors hover:text-[#6ced3f]">
@@ -92,7 +92,7 @@ export function LatestNewsCard({
           </Link>
         </p>
 
-        <div className="flex h-[20.211px] w-[359.076px] shrink-0 items-center gap-[8.084px]">
+        <div className="flex h-[20.211px] w-full shrink-0 items-center gap-[8.084px]">
           <div className="relative size-[16.168px] shrink-0">
             <Image
               src="/latest-news/calendar-icon.svg"
