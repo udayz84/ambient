@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useState } from "react";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import {
@@ -182,10 +183,11 @@ function CarouselChipItem({
         >
           <div className="relative size-full">
             {mediaUrl(product.chip_image) ? (
-              <img loading="lazy" decoding="async"
+              <Image
                 alt=""
                 src={mediaUrl(product.chip_image) as string}
-                className="pointer-events-none absolute inset-0 size-full max-w-none object-bottom"
+                fill
+                className="pointer-events-none object-bottom max-w-none"
                 aria-hidden
               />
             ) : null}
@@ -211,10 +213,11 @@ function CarouselChipItem({
         >
           <div className="relative size-full">
             {mediaUrl(product.chip_image) ? (
-              <img loading="lazy" decoding="async"
+              <Image
                 alt=""
                 src={mediaUrl(product.chip_image) as string}
-                className="pointer-events-none absolute inset-0 size-full max-w-none object-bottom"
+                fill
+                className="pointer-events-none object-bottom max-w-none"
                 aria-hidden
               />
             ) : null}

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { DeveloperPlatformCardConfig } from "./developer-platform-cards";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 
@@ -9,6 +10,7 @@ export function DeveloperPlatformCard({
   width,
   height,
   title,
+  href,
   titleLeft,
   titleWidth,
   body,
@@ -99,24 +101,31 @@ export function DeveloperPlatformCard({
       ) : null}
 
       <p
-        className={`${gilroyMedium.className} absolute translate-y-full font-medium text-[#0a3315] opacity-90 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+        className={`${interRegular.className} absolute translate-y-full font-normal text-[#0a3315] opacity-90 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
         style={{
           left: `${bodyLeft}px`,
           bottom: `${bodyBottomOffset}px`,
           width: `${bodyWidth}px`,
-          fontSize: "22px",
-          lineHeight: "28px",
+          fontSize: "18px",
+          lineHeight: "27px",
         }}
       >
         {body}
       </p>
 
-      <p
-        className={`${interRegular.className} absolute top-[30px] max-w-full font-normal text-[18px] leading-[27px] text-[#0a3315] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden ${titleWidth ? "" : "whitespace-nowrap"}`}
+      <Link
+        href={href}
+        className={`group ${gilroyMedium.className} absolute top-[30px] max-w-full font-medium text-[22px] leading-[28px] text-[#0a3315] not-italic underline-offset-[6px] hover:underline [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden ${titleWidth ? "" : "whitespace-nowrap"}`}
         style={{ left: `${titleLeft}px`, width: titleWidth ? `${titleWidth}px` : undefined }}
       >
         {title}
-      </p>
+        <span
+          aria-hidden
+          className="ml-[8px] inline-block transition-transform duration-200 group-hover:translate-x-[3px]"
+        >
+          →
+        </span>
+      </Link>
 
       <div
         className="absolute h-0"

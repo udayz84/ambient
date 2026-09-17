@@ -37,8 +37,8 @@ const ANNOUNCEMENTS: Announcement[] = [
       { label: "Book a meeting", href: "/contact", primary: true },
       { label: "What we're showing", href: "/news-listing" },
     ],
-    image: "/platform-scale/chip-hero.webp",
-    imageAlt: "Ambient Scientific GPX chip",
+    image: "/som/sparsh-chip.png",
+    imageAlt: "Ambient Scientific GPX10 chip board",
   },
   {
     tag: "New release",
@@ -49,7 +49,7 @@ const ANNOUNCEMENTS: Announcement[] = [
       { label: "Shop the kit", href: "/dvk", primary: true },
       { label: "Explore the DVK", href: "/dvk" },
     ],
-    image: "/dvk/board-main.png",
+    image: "/dvk/board-stack.webp",
     imageAlt: "GPX10 PRO DevKit board",
   },
 ];

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { mediaUrl } from "@/lib/strapi";
+import Link from "next/link";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { DEVELOPER_PLATFORM_CARDS } from "./developer-platform-cards";
 
@@ -16,6 +17,7 @@ const OVERLAY_WIDE =
 function WideCard({
   nodeId,
   title,
+  href,
   body,
   bodyWidth,
   imageSrc,
@@ -23,6 +25,7 @@ function WideCard({
 }: {
   nodeId: string;
   title: string;
+  href: string;
   body: string;
   bodyWidth: number;
   imageSrc?: string;
@@ -77,17 +80,24 @@ function WideCard({
       ) : null}
 
       <div
-        className={`${gilroyMedium.className} absolute bottom-[12px] left-[12px] flex flex-col justify-end text-[14px] leading-[0] font-medium text-[#0a3315] opacity-90 not-italic [word-break:break-word]`}
+        className={`${interRegular.className} absolute bottom-[12px] left-[12px] flex flex-col justify-end text-[12px] leading-[0] font-normal text-[#0a3315] opacity-90 not-italic [word-break:break-word]`}
         style={{ width: `${bodyWidth}px` }}
       >
-        <p className="leading-[17px]">{body}</p>
+        <p className="leading-[15px]">{body}</p>
       </div>
 
-      <p
-        className={`${interRegular.className} absolute top-[12.15px] left-[12px] max-w-[calc(100%-24px)] text-[12px] leading-[11.835px] font-normal whitespace-nowrap text-[#0a3315] not-italic overflow-hidden text-ellipsis [word-break:break-word]`}
+      <Link
+        href={href}
+        className={`group ${gilroyMedium.className} absolute top-[12.15px] left-[12px] max-w-[calc(100%-24px)] text-[14px] leading-[16px] font-medium whitespace-nowrap text-[#0a3315] not-italic underline-offset-[4px] hover:underline overflow-hidden text-ellipsis [word-break:break-word]`}
       >
         {title}
-      </p>
+        <span
+          aria-hidden
+          className="ml-[5px] inline-block transition-transform duration-200 group-hover:translate-x-[2px]"
+        >
+          →
+        </span>
+      </Link>
 
       <div className="absolute top-[32.75px] left-[12px] h-0 w-[66.553px]">
         <div className="absolute inset-[-1px_0_0_0]">
@@ -107,12 +117,14 @@ function WideCard({
 function SmallCard({
   nodeId,
   title,
+  href,
   titleWraps,
   body,
   bodyWidth,
 }: {
   nodeId: string;
   title: string;
+  href: string;
   titleWraps?: boolean;
   body: string;
   bodyWidth: number;
@@ -131,18 +143,25 @@ function SmallCard({
       />
 
       <div
-        className={`${gilroyMedium.className} absolute bottom-[17px] left-[12px] flex flex-col justify-end text-[14px] leading-[0] font-medium text-[#0a3315] opacity-90 not-italic [word-break:break-word]`}
+        className={`${interRegular.className} absolute bottom-[17px] left-[12px] flex flex-col justify-end text-[12px] leading-[0] font-normal text-[#0a3315] opacity-90 not-italic [word-break:break-word]`}
         style={{ width: `${bodyWidth}px` }}
       >
-        <p className="leading-[17px]">{body}</p>
+        <p className="leading-[15px]">{body}</p>
       </div>
 
       <div className="absolute top-[12px] left-[12px] flex w-[82px] flex-col items-start gap-[9px]">
-        <p
-           className={`${interRegular.className} relative shrink-0 text-[12px] leading-[11.835px] font-normal text-[#0a3315] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden ${titleWraps ? "w-[155px]" : "whitespace-nowrap"}`}
+        <Link
+           href={href}
+           className={`group ${gilroyMedium.className} relative shrink-0 text-[14px] leading-[16px] font-medium text-[#0a3315] not-italic underline-offset-[4px] hover:underline [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden ${titleWraps ? "w-[155px]" : "whitespace-nowrap"}`}
         >
-          {title}
-        </p>
+        {title}
+        <span
+          aria-hidden
+          className="ml-[5px] inline-block transition-transform duration-200 group-hover:translate-x-[2px]"
+        >
+          →
+        </span>
+        </Link>
         <div className="relative h-0 w-full shrink-0">
           <div className="absolute inset-[-1px_0_0_0]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -179,6 +198,7 @@ export function DeveloperPlatformMobile({ data }: { data?: any }) {
       body: strapiCard.body ?? config.body,
       imageSrc: mediaUrl(strapiCard.image) || config.imageSrc,
       imageVariant: config.imageVariant,
+      href: config.href,
     };
   });
   const [explore, modelForge, evaluate, prototype] = cards;
@@ -256,6 +276,7 @@ export function DeveloperPlatformMobile({ data }: { data?: any }) {
           <WideCard
             nodeId="4164:13360"
             title={explore.title}
+            href={explore.href}
             body={explore.body}
             bodyWidth={220}
             imageSrc={explore.imageSrc}
@@ -264,12 +285,14 @@ export function DeveloperPlatformMobile({ data }: { data?: any }) {
           <SmallCard
             nodeId="4164:13372"
             title={modelForge.title}
+            href={modelForge.href}
             body={modelForge.body}
             bodyWidth={153}
           />
           <SmallCard
             nodeId="3174:49224"
             title={prototype.title}
+            href={prototype.href}
             titleWraps
             body={prototype.body}
             bodyWidth={147}
@@ -277,6 +300,7 @@ export function DeveloperPlatformMobile({ data }: { data?: any }) {
           <WideCard
             nodeId="3174:49240"
             title={evaluate.title}
+            href={evaluate.href}
             body={evaluate.body}
             bodyWidth={229}
             imageSrc={evaluate.imageSrc}

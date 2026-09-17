@@ -5,6 +5,7 @@ const BUILDING_TITLE_GRADIENT =
   "linear-gradient(122.573deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
 const BUILDING_TITLE_FRAME = "/resources/building-title-frame.svg";
+const BUILDING_BG = "/resources/building-circuit-bg.png";
 
 type ResourcesBuildingProps = {
   data?: any;
@@ -22,6 +23,17 @@ export function ResourcesBuilding({ data }: ResourcesBuildingProps = {}) {
       aria-label="Building with Ambient"
       data-node-id="2379:1606"
     >
+
+      {/* Circuit glow — right-side background, fades to black on all edges */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        loading="lazy"
+        decoding="async"
+        src={BUILDING_BG}
+        alt=""
+        aria-hidden
+        className="pointer-events-none absolute inset-0 size-full object-cover"
+      />
 
       <div
         className="absolute top-[144.54px] left-[98px] z-10 h-[154px] w-[537px]"

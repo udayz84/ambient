@@ -18,6 +18,7 @@ export type DeveloperPlatformCardConfig = {
   overlayGradient?: string;
   imageSrc?: string;
   imageVariant?: "chipset" | "devkit" | "modules";
+  href: string;
 };
 
 export const DEVELOPER_PLATFORM_CARDS: DeveloperPlatformCardConfig[] = [
@@ -28,6 +29,7 @@ export const DEVELOPER_PLATFORM_CARDS: DeveloperPlatformCardConfig[] = [
     width: 388,
     height: 290,
     title: "Explore silicon",
+    href: "/products",
     titleLeft: 20.11279296875,
     body:
       "Start with Ambient's AI-native compute products and see how platform advantages translate into real hardware",
@@ -49,6 +51,7 @@ export const DEVELOPER_PLATFORM_CARDS: DeveloperPlatformCardConfig[] = [
     width: 388,
     height: 290,
     title: "Develop with ModelForge",
+    href: "/developer",
     titleLeft: 30,
     body:
       "Train, deploy, and optimize through a development workflow designed to help teams build with Ambient without starting from scratch",
@@ -68,6 +71,7 @@ export const DEVELOPER_PLATFORM_CARDS: DeveloperPlatformCardConfig[] = [
     width: 388,
     height: 600,
     title: "Evaluate with development kits",
+    href: "/dvk",
     titleLeft: 20,
     body:
       "Get hands-on with the platform through development kits designed to accelerate validation and shorten time to first insight",
@@ -89,6 +93,7 @@ export const DEVELOPER_PLATFORM_CARDS: DeveloperPlatformCardConfig[] = [
     width: 796,
     height: 290,
     title: "Prototype with application-focused modules",
+    href: "/applications",
     titleLeft: 20,
     body:
       "Move faster with modules designed around real-world verticals and product categories",
