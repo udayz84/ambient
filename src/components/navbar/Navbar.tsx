@@ -287,6 +287,64 @@ function DropdownCta({ href, label, onNavigate }: { href: string; label: string;
   );
 }
 
+/** Shop CTA (blue gradient). Grouped with the green "Get in touch" CTA in the
+ *  top-right cluster; same 147×36 size as NavbarCta per client feedback. */
+function ShopNavButton({ item }: { item: { label: string; href: string } }) {
+  return (
+    <Link
+      href={item.href}
+      className="relative flex h-[36px] w-[134px] items-center justify-center gap-[6px] shrink-0 shadow-[0px_42px_107px_0px_rgba(0,196,255,0.2),0px_24.721px_32.257px_0px_rgba(0,196,255,0.15),0px_10.268px_13.398px_0px_rgba(0,196,255,0.15)] transition-opacity hover:opacity-90"
+    >
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#00d0ff] to-[#0055ff]"
+      />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,255,0.6)]"
+      />
+      <span className="relative z-10 flex items-center gap-[6px] text-white">
+        <ShoppingCartIcon />
+        <span className="max-w-full overflow-hidden text-ellipsis text-[14px] leading-[normal] font-bold uppercase tracking-[-0.42px] whitespace-nowrap">
+          {item.label}
+        </span>
+      </span>
+      <div className="pointer-events-none absolute right-0 top-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="-scale-x-100 -scale-y-100 flex-none">
+          <div className="relative size-[4px]">
+            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+              <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute left-0 top-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="-scale-y-100 flex-none">
+          <div className="relative size-[4px]">
+            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+              <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute bottom-0 right-0 z-20 flex size-[4px] items-center justify-center">
+        <div className="-scale-x-100 flex-none">
+          <div className="relative size-[4px]">
+            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+              <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute bottom-0 left-0 z-20 size-[4px]">
+        <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+          <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden />
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 function NavItem({ item }: { item: any }) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
@@ -303,7 +361,6 @@ function NavItem({ item }: { item: any }) {
     return () => document.removeEventListener("click", handleClickOutside);
   }, [isOpen]);
 
-  const isShop = item.label?.toLowerCase() === "shop";
   const isProducts = item.label?.toLowerCase() === "products";
 
   if (item.hasChevron || item.children?.length) {
@@ -349,64 +406,6 @@ function NavItem({ item }: { item: any }) {
     );
   }
 
-  if (isShop) {
-    return (
-      <span className="contents">
-        <Link
-          href={item.href}
-          className="relative flex h-[36px] items-center gap-[6px] shrink-0 justify-center px-[20px] shadow-[0px_42px_107px_0px_rgba(0,196,255,0.2),0px_24.721px_32.257px_0px_rgba(0,196,255,0.15),0px_10.268px_13.398px_0px_rgba(0,196,255,0.15)] transition-opacity hover:opacity-90"
-        >
-          <span
-            aria-hidden
-            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#00d0ff] to-[#0055ff]"
-          />
-          <span
-            aria-hidden
-            className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,255,0.6)]"
-          />
-          <span className="relative z-10 flex items-center gap-[6px] text-white">
-            <ShoppingCartIcon />
-            <span className="max-w-full overflow-hidden text-ellipsis text-[14px] leading-[normal] font-bold uppercase tracking-[-0.42px] whitespace-nowrap">
-              {item.label}
-            </span>
-          </span>
-          <div className="pointer-events-none absolute right-0 top-0 z-20 flex size-[4px] items-center justify-center">
-            <div className="-scale-x-100 -scale-y-100 flex-none">
-              <div className="relative size-[4px]">
-                <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-                  <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="pointer-events-none absolute left-0 top-0 z-20 flex size-[4px] items-center justify-center">
-            <div className="-scale-y-100 flex-none">
-              <div className="relative size-[4px]">
-                <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-                  <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="pointer-events-none absolute bottom-0 right-0 z-20 flex size-[4px] items-center justify-center">
-            <div className="-scale-x-100 flex-none">
-              <div className="relative size-[4px]">
-                <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-                  <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="pointer-events-none absolute bottom-0 left-0 z-20 size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden />
-            </div>
-          </div>
-        </Link>
-      </span>
-    );
-  }
-
   return (
     <span className="contents">
       <Link
@@ -446,6 +445,12 @@ export function Navbar({
     mapStrapiNavItems(data?.nav_items),
     applicationPages
   );
+  // Shop is rendered as a button in the top-right CTA cluster (next to
+  // "Get in touch"), not inside the centered nav.
+  const shopItem = navItems.find((item) => item.label?.toLowerCase() === "shop");
+  const navLinks = shopItem
+    ? navItems.filter((item) => item.label?.toLowerCase() !== "shop")
+    : navItems;
   const logoSrc = mediaUrl(brandData?.logo);
   return (
     <header
@@ -523,7 +528,7 @@ export function Navbar({
           data-node-id="2379:1575"
         >
           <NavVectorDivider />
-          {navItems.map((item, index) => (
+          {navLinks.map((item, index) => (
             <Fragment key={item.label}>
               {index > 0 && <NavVectorDivider />}
               <NavItem item={item} />
@@ -531,7 +536,11 @@ export function Navbar({
           ))}
         </nav>
 
-        <div className="absolute top-[21.158px] right-[40px] hidden lg:block min-[1440px]:right-auto min-[1440px]:left-[1191.5px]">
+        {/* Right CTA cluster: Shop + Get in touch, compact 134px buttons.
+         *  right-[101.5px] keeps the pair inside the navbar's angled right
+         *  edge (same clearance the Figma CTA had). */}
+        <div className="absolute top-[21.158px] right-[101.5px] hidden items-center gap-[10px] lg:flex">
+          {shopItem ? <ShopNavButton item={shopItem} /> : null}
           <NavbarCta data={data} />
         </div>
 

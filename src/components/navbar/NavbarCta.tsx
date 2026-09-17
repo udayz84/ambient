@@ -7,7 +7,7 @@ import { gilroySemiBold } from "../hero/fonts";
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
 
-const BUTTON_WIDTH = 147;
+const BUTTON_WIDTH = 134;
 const BUTTON_HEIGHT = 36;
 const DOT_SPACING = 8;
 const REPEL_RADIUS = 40;
@@ -130,7 +130,7 @@ export function NavbarCta({ data }: { data?: any } = {}) {
     <a
       ref={buttonRef}
       href={ctaHref}
-      className={`${gilroySemiBold.className} relative block h-[36px] w-[147px] shrink-0 ${GREEN_CTA_SHADOW}`}
+      className={`${gilroySemiBold.className} relative block h-[36px] w-[134px] shrink-0 ${GREEN_CTA_SHADOW}`}
       data-node-id="2379:1589"
       data-name="Cta"
       onPointerEnter={handlePointerEnter}
@@ -164,13 +164,13 @@ export function NavbarCta({ data }: { data?: any } = {}) {
         className="pointer-events-none absolute inset-0 z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
       />
       <span
-        className="pointer-events-none absolute top-[calc(50%-8px)] left-[20px] z-10 text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic"
+        className="pointer-events-none absolute top-[calc(50%-8px)] left-[15px] z-10 text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic"
         data-node-id="2379:1590"
       >
         {ctaLabel}
       </span>
       <span
-        className="pointer-events-none absolute top-1/2 left-[126px] z-10 size-[6px] -translate-y-1/2"
+        className="pointer-events-none absolute top-1/2 left-[113px] z-10 size-[6px] -translate-y-1/2"
         data-node-id="2379:1591"
       >
         <Image

@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Applications } from "@/components/applications/Applications";
 import { DeveloperPlatform } from "@/components/developer-platform/DeveloperPlatform";
 import { Ecosystem } from "@/components/ecosystem/Ecosystem";
-import { Hero } from "@/components/hero/Hero";
+import { EcosystemMarqueeStrip } from "@/components/ecosystem/EcosystemMarqueeStrip";
+import { HeroCarousel } from "@/components/hero/HeroCarousel";
 import { LatestNews } from "@/components/latest-news/LatestNews";
 import { MeasuredProof } from "@/components/measured-proof/MeasuredProof";
 import { PlatformScale } from "@/components/platform-scale/PlatformScale";
@@ -63,7 +64,10 @@ export default async function Home() {
 
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
-      {data?.hero && <Hero data={data.hero} />}
+      {data?.hero && <HeroCarousel data={data.hero} />}
+      {data?.ecosystem && (
+        <EcosystemMarqueeStrip partners={data.ecosystem.development_partners} />
+      )}
       {data?.measured_proof && <MeasuredProof data={data.measured_proof} />}
       {data?.technology && <Technology data={data.technology} />}
       {data?.platform_scale && <PlatformScale data={data.platform_scale} />}

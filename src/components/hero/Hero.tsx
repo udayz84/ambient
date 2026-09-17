@@ -41,7 +41,7 @@ export function Hero({ data }: { data?: any }) {
 
   return (
     <section
-      className="relative -mt-[78px] flex h-[876px] w-full justify-center overflow-hidden bg-black max-[1023px]:h-auto"
+      className="relative flex h-full w-full justify-center overflow-hidden bg-black"
       data-node-id="2379:734"
       data-name="Hero Section"
       aria-label="Hero"

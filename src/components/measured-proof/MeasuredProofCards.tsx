@@ -17,21 +17,21 @@ type FallbackCard = {
 
 const FALLBACK_CARDS: FallbackCard[] = [
   {
-    imageWidth: 360,
-    imageHeight: 280,
-    imageTop: 180,
-    imageClassName: "absolute inset-0 max-w-none object-contain",
-    imageSizes: "360px",
-    statWidth: 299,
-    descriptionWidth: 290,
-  },
-  {
     imageWidth: 380,
     imageHeight: 350,
     imageTop: 185,
     imageClassName:
       "absolute top-[-16.05%] left-0 h-[135.04%] w-full max-w-none",
     imageSizes: "380px",
+    statWidth: 299,
+    descriptionWidth: 290,
+  },
+  {
+    imageWidth: 360,
+    imageHeight: 280,
+    imageTop: 180,
+    imageClassName: "absolute inset-0 max-w-none object-contain",
+    imageSizes: "360px",
     statWidth: 187,
     descriptionWidth: 319,
     statJustifyEnd: true,
