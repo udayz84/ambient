@@ -1348,7 +1348,6 @@ export interface ApiProductsPageProductsPage extends Struct.SingleTypeSchema {
       'products.bench-to-volume',
       false
     >;
-    case_studies: Schema.Attribute.Component<'home.case-studies', false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
