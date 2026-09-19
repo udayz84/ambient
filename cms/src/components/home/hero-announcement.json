@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_home_hero_announcements",
+  "info": {
+    "displayName": "Hero Announcement",
+    "description": "Homepage hero carousel announcement slide (tag, title, subtitle, image, CTAs)"
+  },
+  "options": {},
+  "attributes": {
+    "tag": { "type": "string", "required": true },
+    "title": { "type": "string", "required": true },
+    "subtitle": { "type": "text", "required": true },
+    "image": { "type": "media", "multiple": false },
+    "image_alt": { "type": "string" },
+    "ctas": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.button"
+    }
+  }
+}

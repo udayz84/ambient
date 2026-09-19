@@ -89,7 +89,7 @@ export function DeveloperComingSoon({ data }: { data?: any }) {
       className="absolute overflow-clip bg-black"
       style={{
         left: 0,
-        top: "calc(2941px + var(--developer-pipeline-offset, 0px))",
+        top: "calc(3141px + var(--developer-pipeline-offset, 0px))",
         width: 1440,
         height: 683,
         transition: "top 300ms ease-in-out",
@@ -172,6 +172,12 @@ export function DeveloperComingSoon({ data }: { data?: any }) {
         </div>
       </div>
 
+      {/* Full-width frosted glass panel overlaying background */}
+      <div 
+        ref={fadeRef}
+        className={`absolute inset-0 border-y-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.04)] backdrop-blur-[12px] ${getFadeInClass(isVisible)}`}
+      />
+
       {/* Content — 4495:3177 (800×587 centered) */}
       <div
         className="absolute -translate-x-1/2 -translate-y-1/2"
@@ -183,10 +189,9 @@ export function DeveloperComingSoon({ data }: { data?: any }) {
         }}
         data-node-id="4495:3177"
       >
-        {/* Article card — 4495:3186 (glass panel; frames title through CTA) */}
+        {/* Article card container (no longer frosted itself) */}
         <div
-          ref={fadeRef}
-          className={`absolute overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.04)] backdrop-blur-[12px] ${getFadeInClass(isVisible)}`}
+          className="absolute overflow-clip"
           style={{ left: 146, top: -36, width: 508, height: 634 }}
           data-node-id="4495:3186"
           data-name="Article"

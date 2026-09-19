@@ -28,7 +28,9 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-const CANVAS_HEIGHT = 5047;
+import { DeveloperModelZoo } from "@/components/developer/DeveloperModelZoo";
+
+const CANVAS_HEIGHT = 6500;
 
 export default async function DeveloperPage() {
   let data: any = null;
@@ -59,6 +61,7 @@ export default async function DeveloperPage() {
               {data?.coming_soon ? (
                 <DeveloperComingSoon data={data.coming_soon} />
               ) : null}
+              <DeveloperModelZoo />
               {data?.modules ? (
                 <DeveloperModulesSection data={data.modules} />
               ) : null}

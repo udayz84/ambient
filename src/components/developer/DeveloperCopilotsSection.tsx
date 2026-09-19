@@ -33,7 +33,7 @@ export function DeveloperCopilotsSection({ data }: { data?: any }) {
   return (
     <div
       className="absolute flex flex-col items-center gap-[40px]"
-      style={{ left: 118.3046875, top: "calc(4723px + var(--developer-pipeline-offset, 0px))", width: 1204, transition: "top 300ms ease-in-out" }}
+      style={{ left: 118.3046875, top: "calc(5700px + var(--developer-pipeline-offset, 0px))", width: 1204, transition: "top 300ms ease-in-out" }}
       data-node-id="2438:4666"
     >
       {/* Header — 2438:4667 */}

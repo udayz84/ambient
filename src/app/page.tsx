@@ -32,7 +32,11 @@ export default async function Home() {
   let data: any = null;
   try {
     data = await getSingleType<any>("home-page", [
-      "hero",
+      {
+        section: "hero",
+        fields: ["video", "mobile_video"],
+        nested: ["metrics", "announcements"],
+      },
       { section: "measured_proof", nested: ["tag", "stat_cards", "ctas"] },
       { section: "technology", nested: ["tag", "features", "image"] },
       { section: "platform_scale", nested: ["products", "cta"] },

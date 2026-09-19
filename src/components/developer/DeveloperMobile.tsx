@@ -29,19 +29,23 @@ import {
   DEVELOPER_COPILOTS,
   DEVELOPER_MODULES,
 } from "./developer-data";
+import { ApplicationsPageModelZoo } from "../applications-page/ApplicationsPageModelZoo";
 
 /**
  * Mobile (<1024px) stacked adaptation of the Developer page.
  * Built responsive from the same Figma content (no dedicated mobile frame supplied).
- * Order: hero → code → pipeline → coming-soon → modules → copilots.
+ * Order: hero → code → pipeline → coming-soon → model-zoo → modules → copilots.
  */
 export function DeveloperMobile({ data }: { data?: any }) {
   return (
-    <div className="relative flex w-full flex-col overflow-x-clip">
+    <div className="flex w-full flex-col">
       <DeveloperHeroMobile data={data?.hero} />
       <DeveloperCodeSectionMobile data={data?.code} />
       <DeveloperPipelineMobile data={data?.pipeline} />
       <DeveloperComingSoonMobile data={data?.coming_soon} />
+      <div className="relative mt-12 w-full">
+        <ApplicationsPageModelZoo />
+      </div>
       <DeveloperModulesMobile data={data?.modules} />
       <DeveloperCopilotsMobile data={data?.copilots} />
     </div>

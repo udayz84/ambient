@@ -8,9 +8,9 @@ const TITLE_GRADIENT =
   "linear-gradient(123.792deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
 const SUBTITLE =
-  "Accelerate your time-to-market. Our System-on-Modules (SOMs) provide fully integrated, production-ready AI hardware that drops directly into your carrier board.";
+  "Start on an evaluation kit, scale on a production module — the same software carries across.";
 
-const FALLBACK_HEADING = "Don't start from scratch.";
+const FALLBACK_HEADING = "From first board to full production.";
 const FALLBACK_STATUS_PILL = "LAUNCHING SOON";
 
 const FALLBACK_IMG_A = "/applications/som-img-a.webp";
@@ -22,29 +22,28 @@ type SomCardData = {
   sublabel: string;
   is_upcoming: boolean;
   visual_style: "sharp" | "blurry" | "layered";
+  ctaLabel: string;
+  ctaHref: string;
 };
 
 const FALLBACK_CARDS: SomCardData[] = [
   {
-    value: "<1mW",
-    label: "GPX-Edge Micro",
-    sublabel: "Wearables & Hearables",
+    value: "Evaluate",
+    label: "NuraSense Evaluation Kit",
+    sublabel: "Run real models on real silicon, day one.",
     is_upcoming: false,
     visual_style: "sharp",
+    ctaLabel: "View Evaluation Kits",
+    ctaHref: "/evaluation-kits",
   },
   {
-    value: "<1mW",
-    label: "GPX-Edge Micro",
-    sublabel: "Wearables & Hearables",
-    is_upcoming: true,
-    visual_style: "blurry",
-  },
-  {
-    value: "<1mW",
-    label: "GPX-Edge Micro",
-    sublabel: "Wearables & Hearables",
-    is_upcoming: true,
+    value: "Scale",
+    label: "Production SOMs",
+    sublabel: "Drop a pre-engineered System-on-Module into your carrier board.",
+    is_upcoming: false,
     visual_style: "layered",
+    ctaLabel: "View SOMs",
+    ctaHref: "/products#som",
   },
 ];
 
@@ -97,14 +96,14 @@ function Visual3({ srcA, srcB }: { srcA: string; srcB: string }) {
 
 function SomLabel({ value, label, sublabel }: { value: string; label: string; sublabel: string }) {
   return (
-    <div className="flex flex-col items-center justify-center gap-[12px]">
+    <div className="flex flex-col items-center justify-center gap-[12px] text-center">
       <p
-        className={`${gilroyMedium.className} max-w-full text-[36px] min-[1024px]:text-[38px] leading-[45.386px] min-[1024px]:leading-[47px] font-medium whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis`}
+        className={`${gilroyMedium.className} max-w-full text-[36px] min-[1024px]:text-[38px] leading-[45.386px] min-[1024px]:leading-[47px] font-medium text-white not-italic overflow-hidden`}
       >
         {value}
       </p>
       <p
-        className={`${interRegular.className} max-w-full text-[18px] leading-[26.073px] font-normal uppercase whitespace-nowrap text-[#f0f0f0] not-italic overflow-hidden text-ellipsis`}
+        className={`${interRegular.className} max-w-full text-[18px] leading-[26.073px] font-normal uppercase text-[#f0f0f0] not-italic overflow-hidden`}
       >
         {label}
       </p>
@@ -119,34 +118,10 @@ function SomLabel({ value, label, sublabel }: { value: string; label: string; su
         </div>
       </div>
       <p
-        className={`${interRegular.className} max-w-full text-[16px] leading-[23.176px] min-[1024px]:leading-[24px] font-normal tracking-[-0.3018px] min-[1024px]:tracking-[-0.3125px] whitespace-nowrap text-[rgba(255,255,255,0.6)] not-italic overflow-hidden text-ellipsis`}
+        className={`${interRegular.className} max-w-[280px] min-[1024px]:max-w-[320px] text-[16px] leading-[23.176px] min-[1024px]:leading-[24px] font-normal tracking-[-0.3018px] min-[1024px]:tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic`}
       >
         {sublabel}
       </p>
-    </div>
-  );
-}
-
-function SomCard({ visual, isUpcoming, statusPill, value, label, sublabel }: { visual: React.ReactNode; isUpcoming?: boolean; statusPill: string; value: string; label: string; sublabel: string }) {
-  return (
-    <div className="flex w-[355px] min-[1024px]:w-[450px] shrink-0 flex-col items-center gap-[16px] min-[1024px]:gap-[32px]">
-      <div className="flex h-[290px] min-[1024px]:h-[320px] w-full min-[1024px]:px-[30px] items-center justify-center">
-        <div
-          className={`relative flex items-center justify-center overflow-clip transition-transform ${isUpcoming ? 'h-[260px] w-full min-[1024px]:w-[80%] scale-100 min-[1024px]:scale-95' : 'h-[320px] w-full'}`}
-        >
-          {visual}
-          {isUpcoming && (
-            <div className="absolute z-10 flex items-center justify-center border-[0.5px] border-[#cca839] bg-[rgba(0,0,0,0.8)] px-[16px] py-[6px]">
-              <span className="text-[#cca839] opacity-70">|</span>
-              <span className="mx-[12px] max-w-full overflow-hidden text-ellipsis font-mono text-[10px] uppercase tracking-[1px] text-[#cca839] whitespace-nowrap">
-                {statusPill}
-              </span>
-              <span className="text-[#cca839] opacity-70">|</span>
-            </div>
-          )}
-        </div>
-      </div>
-      <SomLabel value={value} label={label} sublabel={sublabel} />
     </div>
   );
 }
@@ -155,7 +130,7 @@ function ViewSomsCta({ label, href }: { label: string; href: string }) {
   return (
     <a
       href={href}
-      className="relative flex h-[48px] flex-1 min-[1024px]:w-[200px] min-[1024px]:shrink-0 items-center justify-center gap-[9px] min-[1024px]:gap-[10px] px-[20px] py-[10px] drop-shadow-[0px_42px_53.5px_rgba(69,196,24,0.2)]"
+      className="relative flex h-[48px] flex-1 min-[1024px]:w-[240px] min-[1024px]:shrink-0 items-center justify-center gap-[9px] min-[1024px]:gap-[10px] px-[20px] py-[10px] drop-shadow-[0px_42px_53.5px_rgba(69,196,24,0.2)]"
     >
       <span
         aria-hidden
@@ -199,14 +174,37 @@ function DiscussCta({ label, href }: { label: string; href: string }) {
   );
 }
 
+function SomCard({ visual, isUpcoming, statusPill, value, label, sublabel, ctaLabel, ctaHref }: { visual: React.ReactNode; isUpcoming?: boolean; statusPill: string; value: string; label: string; sublabel: string; ctaLabel: string; ctaHref: string }) {
+  return (
+    <div className="flex w-[355px] min-[1024px]:w-[450px] shrink-0 flex-col items-center gap-[16px] min-[1024px]:gap-[32px]">
+      <div className="flex h-[290px] min-[1024px]:h-[320px] w-full min-[1024px]:px-[30px] items-center justify-center">
+        <div
+          className={`relative flex items-center justify-center overflow-clip transition-transform ${isUpcoming ? 'h-[260px] w-full min-[1024px]:w-[80%] scale-100 min-[1024px]:scale-95' : 'h-[320px] w-full'}`}
+        >
+          {visual}
+          {isUpcoming && (
+            <div className="absolute z-10 flex items-center justify-center border-[0.5px] border-[#cca839] bg-[rgba(0,0,0,0.8)] px-[16px] py-[6px]">
+              <span className="text-[#cca839] opacity-70">|</span>
+              <span className="mx-[12px] max-w-full overflow-hidden text-ellipsis font-mono text-[10px] uppercase tracking-[1px] text-[#cca839] whitespace-nowrap">
+                {statusPill}
+              </span>
+              <span className="text-[#cca839] opacity-70">|</span>
+            </div>
+          )}
+        </div>
+      </div>
+      <SomLabel value={value} label={label} sublabel={sublabel} />
+      <div className="mt-4">
+        <ViewSomsCta label={ctaLabel} href={ctaHref} />
+      </div>
+    </div>
+  );
+}
+
 export function ApplicationsPageSom({ data }: { data?: any }) {
   const heading = data?.heading || FALLBACK_HEADING;
   const subtitle = data?.subtitle || SUBTITLE;
 
-  const primary = {
-    label: data?.primary_button?.label || "View SOMs",
-    href: data?.primary_button?.href || "#",
-  };
   const secondary = {
     label: data?.secondary_button?.label || "Discuss Your Use Case",
     href: data?.secondary_button?.href || "#",
@@ -214,7 +212,7 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
   const statusPill = data?.status_pill || FALLBACK_STATUS_PILL;
 
   const rawCards: any[] = Array.isArray(data?.cards) ? data.cards : [];
-  const cards = [0, 1, 2].map((i) => {
+  const cards = [0, 1].map((i) => {
     const c = rawCards[i] || {};
     const fb = FALLBACK_CARDS[i];
     const value = c.value || fb.value;
@@ -222,6 +220,8 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
     const sublabel = c.sublabel || fb.sublabel;
     const isUpcoming = c.is_upcoming ?? fb.is_upcoming;
     const visualStyle = c.visual_style || fb.visual_style;
+    const ctaLabel = c.primary_button?.label || fb.ctaLabel;
+    const ctaHref = c.primary_button?.href || fb.ctaHref;
     const imgA = mediaUrl(c.image_a) || FALLBACK_IMG_A;
     const imgB = mediaUrl(c.image_b) || FALLBACK_IMG_B;
     let visual: React.ReactNode;
@@ -239,6 +239,8 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
       value,
       label,
       sublabel,
+      ctaLabel,
+      ctaHref
     };
   });
 
@@ -273,8 +275,8 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
           </p>
         </div>
 
-        {/* 3 SOM cards */}
-        <div className="flex w-full items-start justify-start gap-[40px] pl-[235px] overflow-visible">
+        {/* 2 SOM cards */}
+        <div className="flex w-full items-start justify-center gap-[60px] overflow-visible">
           {cards.map((card) => (
             <SomCard
               key={card.key}
@@ -284,13 +286,14 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
               value={card.value}
               label={card.label}
               sublabel={card.sublabel}
+              ctaLabel={card.ctaLabel}
+              ctaHref={card.ctaHref}
             />
           ))}
         </div>
 
-        {/* CTA row */}
+        {/* Secondary CTA row */}
         <div className="flex items-center justify-center gap-[24px]">
-          <ViewSomsCta label={primary.label} href={primary.href} />
           <DiscussCta label={secondary.label} href={secondary.href} />
         </div>
       </div>
@@ -362,7 +365,7 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
           </p>
         </div>
 
-        {/* 3 SOM cards */}
+        {/* 2 SOM cards */}
         <div className="mt-[30px] flex w-full flex-col items-center gap-[48px]">
           {cards.map((card) => (
             <SomCard
@@ -373,13 +376,14 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
               value={card.value}
               label={card.label}
               sublabel={card.sublabel}
+              ctaLabel={card.ctaLabel}
+              ctaHref={card.ctaHref}
             />
           ))}
         </div>
 
-        {/* CTA row — side by side */}
-        <div className="mt-[47px] flex w-full items-center gap-[14px]">
-          <ViewSomsCta label={primary.label} href={primary.href} />
+        {/* Secondary CTA row */}
+        <div className="mt-[47px] flex w-full items-center justify-center gap-[14px]">
           <DiscussCta label={secondary.label} href={secondary.href} />
         </div>
       </div>
