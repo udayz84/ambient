@@ -2,6 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
+import { useFitText } from "../shared/FitText";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular, gilroyExtraBold } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
@@ -83,6 +84,11 @@ export function WearablesHero({
   const { fadeRef: desktopRef, isVisible: desktopVisible } = useFadeIn();
   const { fadeRef: mobileRef, isVisible: mobileVisible } = useFadeIn();
 
+  const fitRef = useFitText<HTMLDivElement>({});
+  const fitRef2 = useFitText<HTMLDivElement>({});
+  const fitRef3 = useFitText<HTMLParagraphElement>({ maxLines: 1 });
+  const fitRef4 = useFitText<HTMLParagraphElement>({ maxLines: 1 });
+
   return (
     <section
       className="relative -mt-[78px] flex w-full justify-center overflow-hidden bg-black"
@@ -113,6 +119,7 @@ export function WearablesHero({
           data-name="BG"
         >
           <p
+            ref={fitRef3}
             className={`${gilroyExtraBold.className} whitespace-nowrap bg-clip-text text-center text-[200px] leading-[210px] tracking-[0.5px] font-extrabold text-transparent uppercase not-italic [word-break:break-word]`}
             style={{
               backgroundImage: WEARABLES_BG_GRADIENT,
@@ -172,6 +179,7 @@ export function WearablesHero({
               />
             </div>
             <div
+              ref={fitRef}
               className={`${gilroyMedium.className} absolute top-[10px] left-1/2 w-full -translate-x-1/2 px-[10px] text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: TITLE_GRADIENT,
@@ -226,6 +234,7 @@ export function WearablesHero({
           {/* Title with corner brackets */}
           <div className="relative h-[80px] w-[352px]" data-name="Group 78">
             <div
+              ref={fitRef2}
               className={`${gilroyMedium.className} absolute inset-0 flex items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage:
@@ -303,6 +312,7 @@ export function WearablesHero({
             data-name="BG"
           >
             <p
+              ref={fitRef4}
               className={`${gilroyExtraBold.className} whitespace-nowrap bg-clip-text text-center text-[70.559px] leading-[74.087px] tracking-[0.1764px] font-extrabold text-transparent uppercase not-italic`}
               style={{
                 backgroundImage: WEARABLES_BG_GRADIENT,

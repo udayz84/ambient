@@ -163,7 +163,7 @@ export function CompanyMission({ data }: CompanyMissionProps = {}) {
               {headingLines.map((line, i) => (
                 <p
                   key={i}
-                  className={`${i === headingLines.length - 1 ? "leading-[49px]" : "mb-0 leading-[49px]"} [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+                  className={`${i === headingLines.length - 1 ? "leading-[49px]" : "mb-0 leading-[49px]"} [word-break:break-word]`}
                 >
                   {line}
                 </p>
@@ -176,8 +176,8 @@ export function CompanyMission({ data }: CompanyMissionProps = {}) {
             className={`${interRegular.className} w-[555px] flex flex-col gap-[24px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
             data-node-id="2379:4760"
           >
-            <p className="leading-[27px] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:4] overflow-hidden">{body1}</p>
-            <p className="leading-[27px] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:4] overflow-hidden">{body2}</p>
+            <p className="leading-[27px]">{body1}</p>
+            <p className="leading-[27px]">{body2}</p>
           </div>
         </div>
 

@@ -260,7 +260,7 @@ function PlatformScaleStatPanel({ product }: { product: GpxProduct }) {
         data-name="Stat"
       >
         <p
-          className={`${gilroyMedium.className} relative w-full min-w-full shrink-0 text-center text-[32px] leading-[36px] font-medium tracking-[-0.32px] text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+          className={`${gilroyMedium.className} relative w-full min-w-full shrink-0 text-center text-[32px] leading-[36px] font-medium tracking-[-0.32px] text-white not-italic [word-break:break-word]`}
           data-node-id="2379:643"
         >
           {product.label}
@@ -271,7 +271,7 @@ function PlatformScaleStatPanel({ product }: { product: GpxProduct }) {
           data-name="Content"
         >
           <p
-            className={`${interRegular.className} relative w-full text-center text-[14px] leading-[1.4] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} relative w-full text-center text-[14px] leading-[1.4] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
             data-node-id="2379:646"
           >
             {product.description}

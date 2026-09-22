@@ -1,8 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import { mediaUrl } from "@/lib/strapi";
 import Link from "next/link";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { DEVELOPER_PLATFORM_CARDS } from "./developer-platform-cards";
+import { useFitText } from "../shared/FitText";
 
 const normalize = (value: unknown) =>
   typeof value === "string" ? value.trim().toLowerCase() : "";
@@ -152,7 +155,7 @@ function SmallCard({
       <div className="absolute top-[12px] left-[12px] flex w-[82px] flex-col items-start gap-[9px]">
         <Link
            href={href}
-           className={`group ${gilroyMedium.className} relative shrink-0 text-[14px] leading-[16px] font-medium text-[#0a3315] not-italic underline-offset-[4px] hover:underline [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden ${titleWraps ? "w-[155px]" : "whitespace-nowrap"}`}
+           className={`group ${gilroyMedium.className} relative shrink-0 text-[14px] leading-[16px] font-medium text-[#0a3315] not-italic underline-offset-[4px] hover:underline [word-break:break-word] ${titleWraps ? "w-[155px]" : "whitespace-nowrap"}`}
         >
         {title}
         <span
@@ -202,6 +205,7 @@ export function DeveloperPlatformMobile({ data }: { data?: any }) {
     };
   });
   const [explore, modelForge, evaluate, prototype] = cards;
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
 
   return (
     <div className="relative w-full">
@@ -222,7 +226,8 @@ export function DeveloperPlatformMobile({ data }: { data?: any }) {
       <div className="relative flex flex-col items-center py-[48px]">
         <div className="relative inline-grid grid-cols-[max-content] grid-rows-[max-content] place-items-start leading-[0]">
           <h2
-            className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[7px] ml-[3px] w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+            ref={fitRef}
+            className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[7px] ml-[3px] w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
             style={{
               backgroundImage:
                 "linear-gradient(107.454deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -266,7 +271,7 @@ export function DeveloperPlatformMobile({ data }: { data?: any }) {
         </div>
 
         <p
-           className={`${interRegular.className} mt-[10px] w-[350px] px-[12px] text-center text-[14px] leading-[16px] font-normal text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+           className={`${interRegular.className} mt-[10px] w-[350px] px-[12px] text-center text-[14px] leading-[16px] font-normal text-white not-italic [word-break:break-word]`}
         >
           {subtitle}
         </p>

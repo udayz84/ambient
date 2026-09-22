@@ -332,7 +332,7 @@ export function SomFeatures({ data }: { data?: any }) {
                 data-node-id="4054:8359"
               >
                 {headingLines.map((line: string, i: number) => (
-                  <span key={i} className="block [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
+                  <span key={i} className="block [word-break:break-word]">
                     {line}
                   </span>
                 ))}
@@ -341,7 +341,7 @@ export function SomFeatures({ data }: { data?: any }) {
 
             {/* Subtitle — 4054:8364 (336×84) */}
             <p
-              className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+              className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word]`}
               data-node-id="4054:8364"
             >
               {subtitle}

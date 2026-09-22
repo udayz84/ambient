@@ -34,6 +34,7 @@ export default async function Home() {
     data = await getSingleType<any>("home-page", [
       "hero",
       { section: "measured_proof", nested: ["tag", "stat_cards", "ctas"] },
+      { section: "clients", nested: ["tag", "clients"] },
       { section: "technology", nested: ["tag", "features", "image"] },
       { section: "platform_scale", nested: ["products", "cta"] },
       { section: "applications", nested: ["tabs", "cta"] },
@@ -65,10 +66,8 @@ export default async function Home() {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       {data?.hero && <HeroCarousel data={data.hero} />}
-      {data?.ecosystem && (
-        <EcosystemMarqueeStrip partners={data.ecosystem.development_partners} />
-      )}
       {data?.measured_proof && <MeasuredProof data={data.measured_proof} />}
+      <EcosystemMarqueeStrip data={data?.clients} />
       {data?.technology && <Technology data={data.technology} />}
       {data?.platform_scale && <PlatformScale data={data.platform_scale} />}
       {data?.applications && <Applications data={data.applications} />}

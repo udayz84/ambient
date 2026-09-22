@@ -5,6 +5,7 @@ import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { RepelDots } from "../shared/RepelDots";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { useFitText } from "../shared/FitText";
 
 export function CornerDecor({
   className = "",
@@ -18,16 +19,20 @@ export function GradientTitle({
   children,
   className = "",
   gradientDeg = "100.689deg",
+  maxLines,
   nodeId,
 }: {
   children: React.ReactNode;
   className?: string;
   gradientDeg?: string;
+  maxLines?: number;
   nodeId?: string;
 }) {
+  const fitRef = useFitText<HTMLDivElement>({ maxLines });
   return (
     <div
-      className={`${gilroyMedium.className} relative max-w-full shrink-0 bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden ${className}`}
+      ref={fitRef}
+      className={`${gilroyMedium.className} relative max-w-full shrink-0 bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] ${className}`}
       style={{
         backgroundImage: `linear-gradient(${gradientDeg}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
         WebkitBackgroundClip: "text",

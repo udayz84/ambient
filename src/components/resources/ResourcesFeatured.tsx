@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium } from "../hero/fonts";
+import { useFitText } from "../shared/FitText";
 import { FEATURED_RESOURCES } from "./resources-data";
 import { ResourcesFeaturedCard } from "./ResourcesFeaturedCard";
 
@@ -55,6 +56,7 @@ function buildCards(data: any): MergedCard[] {
 }
 
 export function ResourcesFeatured({ data }: ResourcesFeaturedProps = {}) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 1 });
   const ref = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -90,6 +92,7 @@ export function ResourcesFeatured({ data }: ResourcesFeaturedProps = {}) {
       data-node-id="2379:1960"
     >
       <h2
+        ref={fitRef}
         className={`${gilroyMedium.className} shrink-0 text-[46px] leading-[49px] font-medium whitespace-nowrap text-white not-italic`}
         data-node-id="2379:1967"
       >

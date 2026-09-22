@@ -2,6 +2,7 @@
 
 import { mediaUrl } from "@/lib/strapi";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
+import { useFitText } from "../shared/FitText";
 import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
 import { Corners } from "../shared/Corners";
 import { TagBadge } from "../hero/TagBadge";
@@ -276,6 +277,7 @@ function MenuChip({ label }: { label: string }) {
 }
 
 function GradientTitleBlock({ headingLines }: { headingLines: string[] }) {
+  const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <div
       className="flex flex-col items-center px-[10px] relative shrink-0"
@@ -283,6 +285,7 @@ function GradientTitleBlock({ headingLines }: { headingLines: string[] }) {
       data-name="Title"
     >
       <h2
+        ref={fitRef}
         className={`${gilroyMedium.className} [word-break:break-word] bg-clip-text font-medium leading-[0] m-0 not-italic relative shrink-0 text-[46px] text-center text-transparent whitespace-nowrap`}
         style={{
           backgroundImage: MEASURED_TITLE_GRADIENT,
@@ -292,7 +295,7 @@ function GradientTitleBlock({ headingLines }: { headingLines: string[] }) {
         data-node-id="3309:1917"
       >
         {headingLines.map((line, i) => (
-          <span key={i} className="block leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
+          <span key={i} className="block leading-[49px] [word-break:break-word]">
             {line}
           </span>
         ))}
@@ -613,6 +616,7 @@ export function ProductsMeasured({ data }: { data?: any }) {
   const heading = data?.heading || FALLBACK_HEADING;
   const headingLines = splitLines(heading);
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const aurora = mediaUrl(data?.background_image) || AURORA;
   const menuLabel = data?.tag?.text || FALLBACK_MENU;
   const primary = {
     label: data?.primary_button?.label ?? FALLBACK_PRIMARY.label,
@@ -654,7 +658,7 @@ export function ProductsMeasured({ data }: { data?: any }) {
                     <img loading="lazy" decoding="async"
                       alt=""
                       className="absolute h-[279.02%] left-[-0.02%] max-w-none top-[-26.76%] w-[100.04%] object-cover"
-                      src={AURORA}
+                      src={aurora}
                     />
                   </div>
                   <div
@@ -684,7 +688,7 @@ export function ProductsMeasured({ data }: { data?: any }) {
                     <img loading="lazy" decoding="async"
                       alt=""
                       className="absolute h-[279.02%] left-[-0.02%] max-w-none top-[-26.76%] w-[100.04%] object-cover"
-                      src={AURORA}
+                      src={aurora}
                     />
                   </div>
                   <div

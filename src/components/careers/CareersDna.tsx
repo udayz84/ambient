@@ -78,7 +78,7 @@ export function CareersDna({ data }: { data?: any }) {
             <CornerDecor />
           </div>
           <p
-            className={`${interRegular.className} shrink-0 text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+            className={`${interRegular.className} shrink-0 text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
             data-node-id="2379:8853"
           >
             {subtitle}

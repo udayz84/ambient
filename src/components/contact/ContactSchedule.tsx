@@ -190,13 +190,13 @@ function ScheduleCard({
         <TagBadge label={tag} nodeId={tagNodeId} />
         <div className="mt-[20px] flex flex-col gap-[10px] items-start not-italic [word-break:break-word]">
           <p
-            className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+            className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white [word-break:break-word]`}
             data-node-id={titleNodeId}
           >
             {title}
           </p>
           <p
-            className={`${interRegular.className} ${descriptionWidth} text-[18px] leading-[27px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+            className={`${interRegular.className} ${descriptionWidth} text-[18px] leading-[27px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word]`}
             data-node-id={descNodeId}
           >
             {description}

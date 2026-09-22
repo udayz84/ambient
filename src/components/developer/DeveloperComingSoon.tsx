@@ -6,6 +6,7 @@ import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { PRIMARY_CTA_SHADOW } from "./developer-data";
 import { mediaUrl } from "@/lib/strapi";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { useFitText } from "../shared/FitText";
 
 const DEFAULT_HEADING = "Test on the metal,\nwithout the metal.";
 const DEFAULT_SUBTITLE =
@@ -83,6 +84,7 @@ export function DeveloperComingSoon({ data }: { data?: any }) {
   const ctaHref = data?.cta_href || "#";
   const imgSrc = mediaUrl(data?.image) || DEFAULT_IMAGE;
   const { fadeRef, isVisible } = useFadeIn();
+  const fitRef = useFitText<HTMLHeadingElement>({});
 
   return (
     <div
@@ -215,13 +217,13 @@ export function DeveloperComingSoon({ data }: { data?: any }) {
             data-node-id="4495:3188"
           >
             <p
-              className={`${gilroyMedium.className} w-full max-w-full text-[22px] leading-[28px] font-medium text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+              className={`${gilroyMedium.className} w-full max-w-full text-[22px] leading-[28px] font-medium text-white [word-break:break-word]`}
               data-node-id="4495:3189"
             >
               {cardTitle}
             </p>
             <p
-              className={`${interRegular.className} w-full max-w-[406px] text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+              className={`${interRegular.className} w-full max-w-[406px] text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word]`}
               data-node-id="4495:3190"
             >
               {cardDescription}
@@ -296,6 +298,7 @@ export function DeveloperComingSoon({ data }: { data?: any }) {
             data-name="Title"
           >
             <h2
+              ref={fitRef}
               className={`${gilroyMedium.className} max-w-full text-center text-[46px] font-medium text-white not-italic`}
               data-node-id="4495:3180"
             >

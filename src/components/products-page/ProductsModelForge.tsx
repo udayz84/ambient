@@ -1,6 +1,9 @@
+"use client";
+
 import { mediaUrl } from "@/lib/strapi";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { useFitText } from "../shared/FitText";
 import { TagBadge } from "../hero/TagBadge";
 import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
@@ -154,6 +157,7 @@ function ProductsModelForgeDesktop({
   secondary: { label: string; href: string };
   subfeatures: any[];
 }) {
+  const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <div className="mx-auto flex w-full max-w-[1256px] flex-col items-center pt-[120px] pb-[120px]">
       {/* Section title — 2917:1333 (centered, w=739) */}
@@ -172,6 +176,7 @@ function ProductsModelForgeDesktop({
         >
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
+            ref={fitRef}
             className={`${gilroyMedium.className} absolute m-0 w-[719px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
             style={{
               left: 10,
@@ -306,13 +311,13 @@ function ModelForgeCard({ step }: { step: any }) {
           data-name="Frame 1618875841"
         >
           <h3
-            className={`${gilroyMedium.className} w-[333.991px] shrink-0 text-[32px] leading-[38px] font-medium text-white [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+            className={`${gilroyMedium.className} w-[333.991px] shrink-0 text-[32px] leading-[38px] font-medium text-white`}
           >
             {step.title}
           </h3>
 
           <p
-            className={`${interRegular.className} w-[333.99px] shrink-0 text-[16px] leading-[26px] font-normal text-[#99a1af] tracking-[-0.3125px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-[333.99px] shrink-0 text-[16px] leading-[26px] font-normal text-[#99a1af] tracking-[-0.3125px] [word-break:break-word]`}
           >
             {step.description}
           </p>
@@ -352,6 +357,7 @@ function ProductsModelForgeMobile({
   primary: { label: string; href: string };
   secondary: { label: string; href: string };
 }) {
+  const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <section
       className="relative w-full overflow-hidden bg-black min-[1024px]:hidden"
@@ -374,6 +380,7 @@ function ProductsModelForgeMobile({
           {/* Title */}
           <div className="relative">
             <h2
+              ref={fitRef}
               className={`${gilroyMedium.className} w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage:

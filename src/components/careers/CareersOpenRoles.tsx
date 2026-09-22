@@ -9,6 +9,7 @@ import { CareersRolesProfileCta } from "./careers-shared";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { CareersApplicationModal } from "./CareersApplicationModal";
+import { useFitText } from "../shared/FitText";
 
 const cornerTitleTl = "/careers/corner-menu-tl.svg";
 const cornerTitleTr = "/careers/corner-menu-tr.svg";
@@ -40,6 +41,8 @@ export function CareersOpenRoles({
   data?: any;
   onHeightDiffChange?: (diff: number) => void;
 } = {}) {
+  const fitRef = useFitText<HTMLParagraphElement>({ maxLines: 2 });
+
   const [jobTypeFilter, setJobTypeFilter] = useState<string>("all");
   const [locationFilter, setLocationFilter] = useState<string>("all");
   const [selectedJob, setSelectedJob] = useState<any | null>(null);
@@ -211,7 +214,8 @@ export function CareersOpenRoles({
             data-node-id="2379:8932"
           >
             <p
-              className={`${gilroyMedium.className} absolute top-[26.03px] left-[292.35px] max-w-[584px] -translate-x-1/2 bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+              ref={fitRef}
+              className={`${gilroyMedium.className} absolute top-[26.03px] left-[292.35px] max-w-[584px] -translate-x-1/2 bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: CTA_TITLE_GRADIENT,
                 WebkitBackgroundClip: "text",
@@ -242,7 +246,7 @@ export function CareersOpenRoles({
             data-node-id="2379:8939"
           >
             <p
-              className={`${interRegular.className} absolute top-0 left-0 h-[48px] w-[290.931px] text-right text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+              className={`${interRegular.className} absolute top-0 left-0 h-[48px] w-[290.931px] text-right text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
               data-node-id="2379:8940"
             >
               {generalAppSubtitle}
@@ -295,13 +299,15 @@ function RolesCtaBackground() {
 }
 
 function OpenRolesTitle({ title }: { title: string }) {
+  const fitRef = useFitText<HTMLParagraphElement>({ maxLines: 2 });
   return (
     <div
       className="relative h-[60px] w-[289px] shrink-0"
       data-node-id="2379:8903"
     >
       <p
-        className={`${gilroyMedium.className} absolute top-0 left-[20px] max-w-[249px] bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+        ref={fitRef}
+        className={`${gilroyMedium.className} absolute top-0 left-[20px] max-w-[249px] bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
         style={{
           backgroundImage: OPEN_ROLES_GRADIENT,
           WebkitBackgroundClip: "text",
@@ -407,7 +413,7 @@ function FilterDropdown({
         data-node-id={innerNodeId}
       >
         <span
-          className={`${interRegular.className} min-w-px flex-[1_0_0] text-[14px] leading-[1.4] font-normal text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+          className={`${interRegular.className} min-w-px flex-[1_0_0] text-[14px] leading-[1.4] font-normal text-white not-italic [word-break:break-word]`}
         >
           {triggerLabel}
         </span>
@@ -479,12 +485,12 @@ function JobRow({
     >
       <CategoryBadge label={category} />
       <p
-        className={`${gilroyMedium.className} absolute top-[75px] left-[19px] text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+        className={`${gilroyMedium.className} absolute top-[75px] left-[19px] text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
       >
         {title}
       </p>
       <p
-        className={`${interRegular.className} absolute top-[105px] left-[19px] w-[350px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+        className={`${interRegular.className} absolute top-[105px] left-[19px] w-[350px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
       >
         {location}
       </p>

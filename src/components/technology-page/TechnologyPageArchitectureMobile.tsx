@@ -175,7 +175,7 @@ function MobilePillarStat({ pillar }: { pillar: Pillar }) {
             <p className="shrink-0 text-[14px] tracking-[-0.1504px] whitespace-nowrap text-[#3a9719] not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
               +
             </p>
-            <p className="min-w-px flex-1 text-[rgba(255,255,255,0.9)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
+            <p className="min-w-px flex-1 text-[rgba(255,255,255,0.9)] not-italic [word-break:break-word]">
               {b}
             </p>
           </div>

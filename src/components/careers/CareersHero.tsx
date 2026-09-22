@@ -155,7 +155,7 @@ export function CareersHero({ data }: { data?: any }) {
               {titleLines.map((line: string, i: number) => (
                 <span
                   key={i}
-                  className={`${i === 0 ? "block mb-0 leading-[49px]" : "block leading-[49px]"} [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+                  className={`${i === 0 ? "block mb-0 leading-[49px]" : "block leading-[49px]"} [word-break:break-word]`}
                 >
                   {line}
                 </span>
@@ -169,7 +169,7 @@ export function CareersHero({ data }: { data?: any }) {
             data-name="Sub"
           >
             <p
-              className={`${interRegular.className} w-[554px] shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+              className={`${interRegular.className} w-[554px] shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
               data-node-id="2379:8694"
             >
               {subtitle}
@@ -274,7 +274,7 @@ export function CareersHero({ data }: { data?: any }) {
           >
             <div className="h-[100cqw] flex-none rotate-90">
               <p
-                className="relative h-full w-[47px] text-[12px] leading-[1.4] font-normal text-[#505f4b] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic"
+                className="relative h-full w-[47px] text-[12px] leading-[1.4] font-normal text-[#505f4b] [word-break:break-word] not-italic"
                 data-node-id="2379:8709"
               >
                 {scrollText}

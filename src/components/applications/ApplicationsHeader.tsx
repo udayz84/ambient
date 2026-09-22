@@ -1,10 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import { gilroyMedium, interRegular } from "../hero/fonts";
+import { useFitText } from "../shared/FitText";
 
 const cornerLeft = "/hero/corner-tag-1.svg";
 const cornerRight = "/hero/corner-tag-2.svg";
 
 export function ApplicationsHeader({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const heading = data?.heading || "";
   const subtitle = data?.subtitle || "";
   return (
@@ -18,7 +22,8 @@ export function ApplicationsHeader({ data }: { data?: any }) {
         data-name="Headline frame"
       >
         <h2
-          className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[16px] ml-[22.87109375px] max-w-[584px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-[transparent] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+          ref={fitRef}
+          className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[16px] ml-[22.87109375px] max-w-[584px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-[transparent] not-italic [word-break:break-word]`}
           style={{
             backgroundImage:
               "linear-gradient(126.324deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -91,7 +96,7 @@ export function ApplicationsHeader({ data }: { data?: any }) {
       </div>
 
       <p
-        className={`${interRegular.className} absolute top-[94px] left-1/2 w-[600px] -translate-x-1/2 text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+        className={`${interRegular.className} absolute top-[94px] left-1/2 w-[600px] -translate-x-1/2 text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
         data-node-id="2379:939"
       >
         {subtitle}

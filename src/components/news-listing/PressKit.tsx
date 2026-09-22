@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { mediaUrl } from "@/lib/strapi";
 import {
@@ -7,6 +9,7 @@ import {
   interRegular,
 } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { useFitText } from "../shared/FitText";
 
 const BADGE_GRADIENT =
   "linear-gradient(135deg, rgb(229, 231, 235) 0%, rgb(209, 213, 220) 100%)";
@@ -22,13 +25,15 @@ type PressKitProps = {
 };
 
 function PressTitle({ heading }: { heading: string }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
     <div
       className="relative w-full min-[1024px]:h-[63px] min-[1024px]:w-[539px] min-[1024px]:shrink-0"
       data-node-id="2500:1663"
     >
       <h2
-        className={`${gilroyMedium.className} relative w-full bg-clip-text bg-[linear-gradient(107.4537261117953deg,rgb(255,255,255)_1.3527%,rgb(212,233,188)_55.161%,rgb(255,255,255)_111.67%)] min-[1024px]:bg-[linear-gradient(123.792deg,rgb(255,255,255)_1.3527%,rgb(212,233,188)_55.161%,rgb(255,255,255)_111.67%)] text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden min-[1024px]:[-webkit-line-clamp:1] mt-[7px] min-[1024px]:mt-0 min-[1024px]:absolute min-[1024px]:left-1/2 min-[1024px]:top-[7px] min-[1024px]:-translate-x-1/2 min-[1024px]:text-[46px] min-[1024px]:leading-[49px]`}
+        ref={fitRef}
+        className={`${gilroyMedium.className} relative w-full bg-clip-text bg-[linear-gradient(107.4537261117953deg,rgb(255,255,255)_1.3527%,rgb(212,233,188)_55.161%,rgb(255,255,255)_111.67%)] min-[1024px]:bg-[linear-gradient(123.792deg,rgb(255,255,255)_1.3527%,rgb(212,233,188)_55.161%,rgb(255,255,255)_111.67%)] text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word] mt-[7px] min-[1024px]:mt-0 min-[1024px]:absolute min-[1024px]:left-1/2 min-[1024px]:top-[7px] min-[1024px]:-translate-x-1/2 min-[1024px]:text-[46px] min-[1024px]:leading-[49px]`}
         style={{
           WebkitBackgroundClip: "text",
           backgroundClip: "text",

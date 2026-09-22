@@ -1,6 +1,9 @@
+"use client";
+
 import { mediaUrl } from "@/lib/strapi";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { useFitText } from "../shared/FitText";
 import { CORNER_LEFT, CORNER_RIGHT, PRIMARY_CTA_INSET, PRIMARY_CTA_SHADOW } from "./dvk-data";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
@@ -100,12 +103,14 @@ function DvkIntegratedModulesDesktop({
   secondaryLabel: string;
   secondaryHref: string;
 }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 1 });
   return (
     <div className="mx-auto flex w-full max-w-[1204px] flex-col items-center pb-[40px]">
       <div className="flex flex-col items-center gap-[24px]" style={{ width: 800 }}>
         <div className="relative px-[20px] py-[4px] w-fit">
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
+            ref={fitRef}
             className={`${gilroyMedium.className} relative m-0 bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic whitespace-nowrap`}
             style={{
               backgroundImage: TITLE_GRADIENT,
@@ -144,7 +149,7 @@ function DvkIntegratedModulesDesktop({
               </h3>
               <DevChip label={i === 0 ? "Legacy Board" : "Development"} />
             </div>
-            <p className={`${interRegular.className} mt-[10px] w-full text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}>
+            <p className={`${interRegular.className} mt-[10px] w-full text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word]`}>
               {card.description}
             </p>
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
@@ -189,6 +194,7 @@ function DvkIntegratedModulesMobile({
   secondaryLabel: string;
   secondaryHref: string;
 }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
     <section
       className="relative w-full bg-black min-[1024px]:hidden"
@@ -206,7 +212,8 @@ function DvkIntegratedModulesMobile({
           <div className="relative h-[76.43px] w-full" data-node-id="4062:12364">
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             <h2
-              className={`${gilroyMedium.className} absolute top-[4px] left-1/2 m-0 w-[332px] max-w-full -translate-x-1/2 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+              ref={fitRef}
+              className={`${gilroyMedium.className} absolute top-[4px] left-1/2 m-0 w-[332px] max-w-full -translate-x-1/2 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: TITLE_GRADIENT_MOBILE,
                 WebkitBackgroundClip: "text",

@@ -1,4 +1,7 @@
+"use client";
+
 import { mediaUrl } from "@/lib/strapi";
+import { useFitText } from "../shared/FitText";
 import { gilroyMedium, gilroySemiBold, interRegular } from "./fonts";
 import { HeroMetrics } from "./HeroMetrics";
 import { HeroScrollIndicator } from "./HeroScrollIndicator";
@@ -38,6 +41,9 @@ export function Hero({ data }: { data?: any }) {
   const v1 = m1.value || "";
   const v0Split = splitValue(v0);
   const v1Split = splitValue(v1);
+
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+  const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
 
   return (
     <section
@@ -116,7 +122,8 @@ export function Hero({ data }: { data?: any }) {
           data-node-id="2379:780"
         >
           <h1
-            className="min-w-full w-[min-content] shrink-0 bg-clip-text text-[46px] leading-[49px] font-medium text-transparent [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden"
+            ref={fitRef}
+            className="min-w-full w-[min-content] shrink-0 bg-clip-text text-[46px] leading-[49px] font-medium text-transparent"
             style={{
               backgroundImage:
                 "linear-gradient(101.005deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -128,7 +135,7 @@ export function Hero({ data }: { data?: any }) {
             {title}
           </h1>
           <p
-            className={`${interRegular.className} shrink-0 text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-80 w-[419px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} shrink-0 text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-80 w-[419px] [word-break:break-word]`}
             data-node-id="2379:782"
           >
             {subtitle}
@@ -165,7 +172,8 @@ export function Hero({ data }: { data?: any }) {
         {/* Text Area */}
         <div className="relative z-10 flex flex-col px-[24px] gap-[15px]">
           <h1
-            className={`${gilroyMedium.className} w-[320px] max-w-full bg-clip-text text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+            ref={fitRef2}
+            className={`${gilroyMedium.className} w-[320px] max-w-full bg-clip-text text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
             style={{
               backgroundImage:
                 "linear-gradient(100.849deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -176,7 +184,7 @@ export function Hero({ data }: { data?: any }) {
             {title}
           </h1>
           <p
-            className={`${interRegular.className} w-[332px] max-w-full text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-[332px] max-w-full text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 [word-break:break-word]`}
           >
             {subtitle}
           </p>

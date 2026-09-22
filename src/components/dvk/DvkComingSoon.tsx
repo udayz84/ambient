@@ -75,7 +75,7 @@ function DvkComingSoonMobile({
           <div className="relative flex w-full justify-center">
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             <h2
-              className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+              className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage:
                   "linear-gradient(107.45deg, rgb(255, 255, 255) 1.35%, rgb(212, 233, 188) 55.16%, rgb(255, 255, 255) 111.67%)",
@@ -84,14 +84,14 @@ function DvkComingSoonMobile({
               }}
             >
               {headingLines.map((line: string, i: number) => (
-                <span key={i} className="block leading-[36px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
+                <span key={i} className="block leading-[36px] [word-break:break-word]">
                   {line}
                 </span>
               ))}
             </h2>
           </div>
           <p
-            className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
           >
             {subtitleLines.map((line: string, i: number) => (
               <span key={i}>
@@ -118,12 +118,12 @@ function DvkComingSoonMobile({
           {/* Text */}
           <div className="flex w-full flex-col items-center gap-[10px] text-center">
             <p
-              className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+              className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
             >
               {cardTitle}
             </p>
             <p
-              className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+              className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
             >
               {cardDescription}
             </p>

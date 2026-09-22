@@ -1,7 +1,9 @@
 "use client";
 
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { mediaUrl } from "@/lib/strapi";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
+import { useFitText } from "../shared/FitText";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { TagBadge } from "../hero/TagBadge";
@@ -48,8 +50,8 @@ export function ProductsBenchToVolume({ data }: { data?: any }) {
             cta: c?.cta_label ?? fallback.cta,
             ctaHref: c?.cta_href ?? "#",
             ctaWidth: fallback.ctaWidth,
-            image: c?.image ?? fallback.image,
-            chipLabel: c?.chipLabel ?? fallback.chipLabel ?? chipLabel,
+            image: mediaUrl(c?.image) || fallback.image,
+            chipLabel: c?.chip_label ?? fallback.chipLabel ?? chipLabel,
           };
         })
       : BENCH_CARDS.map(c => ({ ...c, chipLabel: c.chipLabel || chipLabel }));
@@ -90,6 +92,7 @@ function ProductsBenchToVolumeDesktop({
   chipLabel: string;
   cards: any[];
 }) {
+  const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <div className="mx-auto flex w-full max-w-[1204px] flex-col items-center pb-0">
       {/* Section title — 2918:1467 (centered, w=800) */}
@@ -107,6 +110,7 @@ function ProductsBenchToVolumeDesktop({
         >
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
+            ref={fitRef}
             className={`${gilroyMedium.className} absolute m-0 w-[538px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
             style={{
               left: 10,
@@ -196,7 +200,7 @@ function BenchCardView({ card, chipLabel }: { card: any; chipLabel: string }) {
           {card.title}
         </h3>
         <p
-          className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+          className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word]`}
         >
           {card.description}
         </p>
@@ -275,6 +279,7 @@ function ProductsBenchToVolumeMobile({
   chipLabel: string;
   cards: any[];
 }) {
+  const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <section
       className="relative w-full overflow-hidden bg-black min-[1024px]:hidden"
@@ -297,6 +302,7 @@ function ProductsBenchToVolumeMobile({
           {/* Title */}
           <div className="relative">
             <h2
+              ref={fitRef}
               className={`${gilroyMedium.className} w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage:

@@ -494,7 +494,7 @@ function FormField({
     >
       <label
         htmlFor={fieldId}
-        className={`${interLight.className} w-full shrink-0 text-[10px] leading-[15px] font-light text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+        className={`${interLight.className} w-full shrink-0 text-[10px] leading-[15px] font-light text-white not-italic [word-break:break-word]`}
       >
         {label}
       </label>

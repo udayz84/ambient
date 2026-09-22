@@ -1,6 +1,9 @@
+"use client";
+
 import { gilroyMedium, interRegular, dmMono } from "../hero/fonts";
 import { mediaUrl } from "@/lib/strapi";
 import { Corners } from "../shared/Corners";
+import { useFitText } from "../shared/FitText";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
@@ -44,6 +47,8 @@ const MEDIA_RADIAL =
  * exactly as in Figma.
  */
 export function DvkModelForge({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+  const fitRef2 = useFitText<HTMLParagraphElement>({ maxLines: 2 });
   const heading = data?.heading || DEFAULT_HEADING;
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
   const centerImage = mediaUrl(data?.center_image);
@@ -96,7 +101,8 @@ export function DvkModelForge({ data }: { data?: any }) {
         <div className="relative flex w-[540px] flex-col items-center px-[10px]">
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
-            className={`${gilroyMedium.className} m-0 w-[520px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+            ref={fitRef}
+            className={`${gilroyMedium.className} m-0 w-[520px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
             style={{
               backgroundImage: MODELFORGE_TITLE_GRADIENT,
               WebkitBackgroundClip: "text",
@@ -107,7 +113,7 @@ export function DvkModelForge({ data }: { data?: any }) {
           </h2>
         </div>
         <p
-          className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+          className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
         >
           {subtitle}
         </p>
@@ -155,12 +161,13 @@ export function DvkModelForge({ data }: { data?: any }) {
       {/* Center bottom block (2761:3050) */}
       <div className="absolute top-[698.46px] left-1/2 flex w-[650px] -translate-x-1/2 flex-col items-center gap-[12px]">
         <p
+          ref={fitRef2}
           className={`${gilroyMedium.className} w-[min-content] min-w-full text-center text-[32px] leading-[38px] text-white not-italic [word-break:break-word]`}
         >
           {toolchainTitle}
         </p>
         <p
-          className={`${interRegular.className} w-[min-content] min-w-full text-center text-[14px] leading-[21px] font-normal text-[#bbbbbb] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+          className={`${interRegular.className} w-[min-content] min-w-full text-center text-[14px] leading-[21px] font-normal text-[#bbbbbb] not-italic [word-break:break-word]`}
         >
           {toolchainSubtitle}
         </p>
@@ -235,7 +242,7 @@ function ModelCard({
             </p>
           </div>
           <p
-            className={`${interRegular.className} w-full text-center text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-full text-center text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
           >
             {description}
           </p>

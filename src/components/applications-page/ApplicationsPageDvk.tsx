@@ -5,6 +5,7 @@ import Image from "next/image";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { Corners } from "../shared/Corners";
+import { useFitText } from "../shared/FitText";
 import { mediaUrl } from "@/lib/strapi";
 
 const MARQUEE_CARD_BG =
@@ -166,7 +167,7 @@ function FeatureCard({
       <div className="relative flex w-full flex-col items-start">
         <div className="relative flex flex-col items-start gap-[12px]">
           <p
-            className={`${gilroyMedium.className} text-[26px] leading-[29px] font-medium not-italic text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+            className={`${gilroyMedium.className} text-[26px] leading-[29px] font-medium not-italic text-white [word-break:break-word]`}
           >
             {title}
           </p>
@@ -352,6 +353,7 @@ const FALLBACK_FEATURE_ICONS = [
 ];
 
 export function ApplicationsPageDvk({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLDivElement>({ maxLines: 2 });
   const scrollRef = useRef<HTMLDivElement>(null);
   
   const scrollLeft = () => {
@@ -479,7 +481,7 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
             <CornerDecor />
           </div>
           <p
-            className={`${interRegular.className} w-[718px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-[718px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
             data-node-id="3591:1763"
           >
             {subtitle}
@@ -534,6 +536,7 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
           {/* Title with corner brackets (node 4032:8655) */}
           <div className="relative h-[79px] w-[356px]" data-node-id="4032:8655" data-name="Group 78">
             <div
+              ref={fitRef}
               className={`${gilroyMedium.className} absolute inset-0 flex items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage:
@@ -543,7 +546,7 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
               }}
               data-node-id="4032:8656"
             >
-              <span className="w-full [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
+              <span className="w-full [word-break:break-word]">
                 {heading}
               </span>
             </div>
@@ -588,7 +591,7 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
 
           {/* Subtitle (node 4032:8693) */}
           <p
-            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
             data-node-id="4032:8693"
           >
             {subtitle}

@@ -52,13 +52,13 @@ export function NewsArticleCard({
 
         <div className="flex flex-col gap-[10px]">
           <h3
-            className={`${gilroyMedium.className} w-full font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden text-[16px] leading-[18px] min-[1024px]:text-[length:var(--card-tfs)] min-[1024px]:leading-[var(--card-tlh)]`}
+            className={`${gilroyMedium.className} w-full font-medium text-white not-italic [word-break:break-word] text-[16px] leading-[18px] min-[1024px]:text-[length:var(--card-tfs)] min-[1024px]:leading-[var(--card-tlh)]`}
             style={{ "--card-tfs": `${titleFontSize}px`, "--card-tlh": "28px" } as React.CSSProperties}
           >
             {title}
           </h3>
           <p
-            className={`${interRegular.className} w-full min-[1024px]:w-[346.611px] text-[14px] leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] font-normal not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-full min-[1024px]:w-[346.611px] text-[14px] leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] font-normal not-italic [word-break:break-word]`}
           >
             <span className="text-[rgba(240,240,240,0.6)]">{excerpt}</span>
             <span className="text-[#53d824] transition-opacity group-hover:opacity-80">

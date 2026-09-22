@@ -1,10 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import { gilroyMedium, interRegular } from "../hero/fonts";
+import { useFitText } from "../shared/FitText";
 
 const cornerLeft = "/hero/corner-tag-1.svg";
 const cornerRight = "/hero/corner-tag-2.svg";
 
 export function PlatformScaleHeader({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({});
   let heading = data?.heading || "";
   heading = heading.replace(/\\n/g, "\n");
   if (!heading.includes("\n") && heading.includes(",")) {
@@ -26,7 +30,8 @@ export function PlatformScaleHeader({ data }: { data?: any }) {
           data-node-id="2379:620"
         >
           <h2
-            className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[10.6806640625px] ml-[12.87109375px] max-w-[309px] bg-clip-text text-[46px] leading-[0] font-medium text-[transparent] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}
+            ref={fitRef}
+            className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[10.6806640625px] ml-[12.87109375px] max-w-[309px] bg-clip-text text-[46px] leading-[0] font-medium text-[transparent] [word-break:break-word] not-italic`}
             style={{
               backgroundImage:
                 "linear-gradient(100.945deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -100,7 +105,7 @@ export function PlatformScaleHeader({ data }: { data?: any }) {
       </div>
 
       <p
-        className={`${interRegular.className} absolute top-[245px] left-[805.11279296875px] w-[517px] text-right text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+        className={`${interRegular.className} absolute top-[245px] left-[805.11279296875px] w-[517px] text-right text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
         data-node-id="2379:625"
       >
         {subtitle}

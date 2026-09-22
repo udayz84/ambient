@@ -905,6 +905,7 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
   };
   attributes: {
     applications: Schema.Attribute.Component<'home.applications', false>;
+    clients: Schema.Attribute.Component<'home.clients', false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

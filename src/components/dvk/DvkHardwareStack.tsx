@@ -5,6 +5,7 @@
 import { useState } from "react";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { useFitText } from "../shared/FitText";
 import {
   ACCENT_CARD_BG,
   ACCENT_CARD_BORDER,
@@ -34,6 +35,7 @@ const RECT_BORDER =
   "border-[1.09px] border-[#47b81f] border-solid shadow-[0px_7px_7.1px_0px_rgba(111,224,71,0.3)]";
 
 export function DvkHardwareStack({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const [hoveredIndex, setHoveredIndex] = useState(-1);
   const heading = data?.heading || DEFAULT_HEADING;
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
@@ -65,6 +67,7 @@ export function DvkHardwareStack({ data }: { data?: any }) {
         >
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
+            ref={fitRef}
             className={`${gilroyMedium.className} m-0 bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic`}
             style={{
               width: 709.6640625,
@@ -397,7 +400,7 @@ function SpecCard({
           >
             {card.items.map((item) => (
               <li key={item} className="ms-[24px]">
-                <span className="leading-[24px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">{item}</span>
+                <span className="leading-[24px] [word-break:break-word]">{item}</span>
               </li>
             ))}
           </ul>

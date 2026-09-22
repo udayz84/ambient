@@ -11,6 +11,7 @@ import {
   DEVELOPER_ARTICLES,
   SECTION_TITLE_GRADIENT,
 } from "./developer-data";
+import { useFitText } from "../shared/FitText";
 
 const DEFAULT_HEADING = "Hello world in three lines";
 const DEFAULT_SUBTITLE =
@@ -90,6 +91,7 @@ export function DeveloperCodeSection({ data }: { data?: any }) {
             a?.description || DEVELOPER_ARTICLES[i]?.description || "",
         }))
       : DEVELOPER_ARTICLES;
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
 
   /** Connector opacity: dim by default, bright on its card hover, faded when another card is active. */
   const connectorOpacity = (i: number) =>
@@ -131,14 +133,15 @@ export function DeveloperCodeSection({ data }: { data?: any }) {
         >
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
-            className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+            ref={fitRef}
+            className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
             style={{ backgroundImage: SECTION_TITLE_GRADIENT }}
           >
             {heading}
           </h2>
         </div>
         <p
-          className={`${interRegular.className} w-[500px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+          className={`${interRegular.className} w-[500px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65 [word-break:break-word]`}
           data-node-id="2640:1224"
         >
           {subtitle}
@@ -353,12 +356,12 @@ function ArticleCard({
       {/* Text — 3586:1385 */}
       <div className="flex min-w-px flex-[1_0_0] flex-col items-start gap-[10px]">
         <p
-          className={`${gilroyRegular.className} w-full text-[26px] leading-[29px] font-normal text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+          className={`${gilroyRegular.className} w-full text-[26px] leading-[29px] font-normal text-white not-italic [word-break:break-word]`}
         >
           {article.title}
         </p>
         <p
-          className={`${interRegular.className} w-[438.651px] text-[18px] leading-[27px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+          className={`${interRegular.className} w-[438.651px] text-[18px] leading-[27px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
         >
           {article.description}
         </p>

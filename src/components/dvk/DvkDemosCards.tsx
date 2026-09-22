@@ -185,11 +185,11 @@ function DemoCardItem({ card }: { card: DemoCard }) {
           <div
             className={`${gilroyMedium.className} w-full shrink-0 text-[24px] xl:text-[32px] leading-[1.2] text-white not-italic whitespace-pre-wrap`}
           >
-            <p className="mb-0 leading-[38px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">{`${card.titleLine1} `}</p>
-            <p className="leading-[38px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">{card.titleLine2}</p>
+            <p className="mb-0 leading-[38px] [word-break:break-word]">{`${card.titleLine1} `}</p>
+            <p className="leading-[38px] [word-break:break-word]">{card.titleLine2}</p>
           </div>
           <p
-            className={`${interRegular.className} w-full max-w-[334px] shrink-0 text-[14px] xl:text-[16px] leading-[24px] font-normal text-[#99a1af] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-full max-w-[334px] shrink-0 text-[14px] xl:text-[16px] leading-[24px] font-normal text-[#99a1af] not-italic [word-break:break-word]`}
           >
             {card.desc}
           </p>

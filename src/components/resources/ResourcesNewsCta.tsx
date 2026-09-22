@@ -1,6 +1,9 @@
+"use client";
+
 import { CornerDecor } from "../contact/contact-shared";
 import { gilroyMedium } from "../hero/fonts";
 import Image from "next/image";
+import { useFitText } from "../shared/FitText";
 
 const NEWS_CTA_TITLE_GRADIENT =
   "linear-gradient(115.045deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -17,6 +20,8 @@ type ResourcesNewsCtaProps = {
 };
 
 export function ResourcesNewsCta({ top, data }: ResourcesNewsCtaProps) {
+  const fitRef = useFitText<HTMLDivElement>({});
+
   const headingRaw = (data?.heading as string) || "";
   const headingLines = headingRaw ? headingRaw.split("\n") : [];
   const ctaLabel = (data?.cta_label as string) || "";
@@ -43,6 +48,7 @@ export function ResourcesNewsCta({ top, data }: ResourcesNewsCtaProps) {
 
       <div className="relative h-[126px] w-[728px] shrink-0">
         <div
+          ref={fitRef}
           className="absolute inset-0 flex flex-col items-center justify-center"
           data-node-id="2379:1763"
         >

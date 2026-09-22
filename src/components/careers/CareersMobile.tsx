@@ -18,6 +18,7 @@ import {
 import { mediaUrl } from "@/lib/strapi";
 import type { CareersValueCard } from "./careers-data";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { useFitText } from "../shared/FitText";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
@@ -153,6 +154,8 @@ function WhiteCta({ children, href = "#" }: { children: React.ReactNode; href?: 
 
 /* ---------------------------------- HERO ---------------------------------- */
 function CareersHeroMobile({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+
   const bgImg = mediaUrl(data?.background_image);
   const title = (data?.title || "").replace(/\n/g, " ");
   const subtitle = data?.subtitle || "";
@@ -183,6 +186,7 @@ function CareersHeroMobile({ data }: { data?: any }) {
           <div className="absolute left-[20px] top-[32px] flex w-[calc(100%-40px)] flex-col items-center gap-[15px]">
             <div className="relative inline-flex flex-col items-center justify-center px-[16px] py-[8px]">
               <h1
+                ref={fitRef}
                 className={`${gilroyMedium.className} max-w-[273px] w-full bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
                 style={{ backgroundImage: gradient("103.779deg") }}
               >
@@ -214,6 +218,8 @@ function CareersHeroMobile({ data }: { data?: any }) {
 
 /* -------------------------------- BEST WORK ------------------------------- */
 function CareersBestWorkMobile({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+
   const headingRaw = data?.heading || "";
   const heading = headingRaw.split("\n").length > 1 ? headingRaw : headingRaw;
   const cards: CareersValueCard[] = (
@@ -231,6 +237,7 @@ function CareersBestWorkMobile({ data }: { data?: any }) {
     >
       <div className="relative inline-flex flex-col items-center justify-center mb-[24px]">
         <h2
+          ref={fitRef}
           className={`${gilroyMedium.className} w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent whitespace-pre-wrap not-italic`}
           style={{ backgroundImage: gradient("107.454deg") }}
         >
@@ -283,6 +290,8 @@ function CareersBestWorkMobile({ data }: { data?: any }) {
 
 /* ----------------------------------- DNA ---------------------------------- */
 function CareersDnaMobile({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+
   const heading = data?.heading || "";
   const subtitle = data?.subtitle || "";
   const bgImg = "/mobile/career/image 108.webp";
@@ -315,6 +324,7 @@ function CareersDnaMobile({ data }: { data?: any }) {
       <div className="relative flex flex-col items-center justify-center mb-[47px] gap-[10px]">
         <div className="relative inline-flex flex-col items-center justify-center">
           <h2
+            ref={fitRef}
             className={`${gilroyMedium.className} w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent whitespace-pre-wrap not-italic`}
             style={{ backgroundImage: gradient("107.454deg") }}
           >
@@ -379,6 +389,9 @@ function GlassPanelMobile({ title, description }: { title: string; description: 
 
 /* -------------------------------- OPEN ROLES ------------------------------ */
 function CareersOpenRolesMobile({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+  const fitRef2 = useFitText<HTMLParagraphElement>({ maxLines: 2 });
+
   const [jobTypeFilter, setJobTypeFilter] = useState("all");
   const [locationFilter, setLocationFilter] = useState("all");
 
@@ -448,6 +461,7 @@ function CareersOpenRolesMobile({ data }: { data?: any }) {
       <div className="relative flex flex-col items-center gap-[15px] mb-[37px]">
         <div className="relative inline-flex items-center justify-center">
           <h2
+            ref={fitRef}
             className={`${gilroyMedium.className} w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent whitespace-pre-wrap not-italic`}
             style={{ backgroundImage: gradient("129.227deg") }}
           >
@@ -514,6 +528,7 @@ function CareersOpenRolesMobile({ data }: { data?: any }) {
           <div className="relative inline-flex flex-col items-center justify-center px-[8px] py-[8px]">
             <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
             <p
+              ref={fitRef2}
               className={`${gilroyMedium.className} w-[280px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic`}
               style={{ backgroundImage: "linear-gradient(103.604deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)" }}
             >
@@ -522,7 +537,7 @@ function CareersOpenRolesMobile({ data }: { data?: any }) {
           </div>
 
           <p
-            className={`${interRegular.className} relative z-10 mt-[16px] w-full max-w-[300px] text-center text-[14px] leading-[22px] font-normal text-white opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} relative z-10 mt-[16px] w-full max-w-[300px] text-center text-[14px] leading-[22px] font-normal text-white opacity-65 not-italic [word-break:break-word]`}
           >
             {generalAppSubtitle}
           </p>
@@ -663,6 +678,8 @@ function JobRowMobile({
 
 /* -------------------------------- BENEFITS -------------------------------- */
 function CareersBenefitsMobile({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+
   const heading = data?.heading || "";
   const cards: CareersValueCard[] = (
     Array.isArray(data?.cards) ? data.cards : []
@@ -679,6 +696,7 @@ function CareersBenefitsMobile({ data }: { data?: any }) {
     >
       <div className="relative inline-flex items-center justify-center p-[8px]">
         <h2
+          ref={fitRef}
           className={`${gilroyMedium.className} w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic`}
           style={{ backgroundImage: gradient("122.163deg") }}
         >
@@ -731,6 +749,8 @@ function CareersBenefitsMobile({ data }: { data?: any }) {
 
 /* ------------------------------- BOTTOM CTA ------------------------------- */
 function CareersBottomCtaMobile({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+
   const heading = data?.heading || "";
   const buttons: Array<{ label: string; href: string; variant: string }> =
     Array.isArray(data?.buttons)
@@ -748,6 +768,7 @@ function CareersBottomCtaMobile({ data }: { data?: any }) {
     >
       <div className="relative z-10 inline-flex items-center justify-center p-[8px]">
         <h2
+          ref={fitRef}
           className={`${gilroyMedium.className} w-[319px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
           style={{ backgroundImage: "linear-gradient(105.99deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)" }}
         >

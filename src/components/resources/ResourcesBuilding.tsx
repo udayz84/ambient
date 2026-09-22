@@ -1,5 +1,8 @@
+"use client";
+
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { WhiteCtaButton } from "../contact/contact-shared";
+import { useFitText } from "../shared/FitText";
 
 const BUILDING_TITLE_GRADIENT =
   "linear-gradient(122.573deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -12,6 +15,8 @@ type ResourcesBuildingProps = {
 };
 
 export function ResourcesBuilding({ data }: ResourcesBuildingProps = {}) {
+  const fitRef = useFitText<HTMLParagraphElement>({ maxLines: 1 });
+
   const heading = (data?.heading as string) || "";
   const subtitle = (data?.subtitle as string) || "";
   const ctaLabel = (data?.cta_label as string) || "";
@@ -46,6 +51,7 @@ export function ResourcesBuilding({ data }: ResourcesBuildingProps = {}) {
           data-name="Frame 1618875832"
         >
           <p
+            ref={fitRef}
             className={`${gilroyMedium.className} absolute top-[28.46px] left-[269px] -translate-x-1/2 bg-clip-text text-center text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic [word-break:break-word]`}
             style={{
               backgroundImage: BUILDING_TITLE_GRADIENT,

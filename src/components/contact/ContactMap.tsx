@@ -105,13 +105,13 @@ export function ContactMap({ data }: { data?: any }) {
             gradientDeg="101.272deg"
             className="text-center"
           >
-            {headingLines[0] && <p className="mb-0 leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">{headingLines[0]}</p>}
-            {headingLines[1] && <p className="leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">{headingLines[1]}</p>}
+            {headingLines[0] && <p className="mb-0 leading-[49px] [word-break:break-word]">{headingLines[0]}</p>}
+            {headingLines[1] && <p className="leading-[49px] [word-break:break-word]">{headingLines[1]}</p>}
           </GradientTitle>
           <CornerDecor />
         </div>
         <p
-          className={`${interRegular.className} w-[720px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+          className={`${interRegular.className} w-[720px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
           data-node-id="2379:8412"
         >
           {subtitle}
@@ -227,12 +227,12 @@ function LocationBlock({
         </div>
         <div className="flex w-[295px] shrink-0 flex-col items-start gap-[10px] not-italic [word-break:break-word]">
           <p
-            className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+            className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white [word-break:break-word]`}
           >
             {title}
           </p>
           <div
-            className={`${interRegular.className} w-[295px] text-[16px] leading-[24px] font-normal text-[#a4a4a4] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+            className={`${interRegular.className} w-[295px] text-[16px] leading-[24px] font-normal text-[#a4a4a4] [word-break:break-word]`}
           >
             {address}
           </div>

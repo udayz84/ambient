@@ -1,9 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { useFitText } from "../shared/FitText";
 import {
   LATEST_NEWS_ARTICLES,
   mapArticleToNewsCard,
@@ -55,6 +58,7 @@ export function LatestNewsMobile({ data }: { data?: any }) {
   const ctaLabel = data?.cta_label || "";
   const ctaHref = data?.cta_href || "";
   const articles = resolveCards(data);
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
     <div className="relative flex flex-col items-center py-[48px]">
       <div className="relative flex flex-col items-center">
@@ -89,7 +93,8 @@ export function LatestNewsMobile({ data }: { data?: any }) {
           </div>
 
           <h2
-            className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[44px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+            ref={fitRef}
+            className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[44px] font-medium text-transparent not-italic [word-break:break-word]`}
             style={{
               backgroundImage:
                 "linear-gradient(119.407deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -101,7 +106,7 @@ export function LatestNewsMobile({ data }: { data?: any }) {
       </div>
 
       <p
-        className={`${interRegular.className} mt-[16px] w-full max-w-[375px] text-center text-[14px] leading-[20px] font-normal text-white not-italic px-[8px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+        className={`${interRegular.className} mt-[16px] w-full max-w-[375px] text-center text-[14px] leading-[20px] font-normal text-white not-italic px-[8px] [word-break:break-word]`}
       >
         {subtitle}
       </p>

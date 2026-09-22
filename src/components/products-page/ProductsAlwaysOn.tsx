@@ -2,6 +2,8 @@
 "use client";
 
 import { useState } from "react";
+import { useFitText } from "../shared/FitText";
+import { mediaUrl } from "@/lib/strapi";
 import { dmMono, gilroyMedium, interBold, interRegular, interSemiBold } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { Corners } from "../shared/Corners";
@@ -235,12 +237,16 @@ function OnChip({
   icon,
   active = true,
   className = "",
+  aiCoreSrc = AI_CORE_ICON,
+  hostCpuSrc = HOST_CPU_IMG,
 }: {
   label: string;
   width: number;
   icon: "ai" | "cpu";
   active?: boolean;
   className?: string;
+  aiCoreSrc?: string;
+  hostCpuSrc?: string;
 }) {
   return (
     <div
@@ -266,7 +272,7 @@ function OnChip({
       </div>
       {icon === "ai" ? (
         <div className={`-translate-y-1/2 absolute h-[36px] left-[24.62px] top-1/2 w-[37.756px] transition-all duration-[400ms] ease-in-out ${active ? "grayscale-0 opacity-100" : "grayscale opacity-50"}`} aria-hidden>
-          <img loading="lazy" decoding="async" alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={AI_CORE_ICON} />
+          <img loading="lazy" decoding="async" alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={aiCoreSrc} />
         </div>
       ) : (
         <div
@@ -276,7 +282,7 @@ function OnChip({
           data-name="image 76"
           aria-hidden
         >
-          <img loading="lazy" decoding="async" alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none size-full" src={HOST_CPU_IMG} />
+          <img loading="lazy" decoding="async" alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none size-full" src={hostCpuSrc} />
         </div>
       )}
       <p
@@ -511,11 +517,13 @@ function MobileToggleFrame({
 
 /* ── Section title block ─────────────────────────────────────── */
 function SectionTitle({ heading, subtitle }: { heading: string; subtitle: string }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 1 });
   return (
     <>
       <SectionBadge />
       <div className="flex flex-col items-center px-[10px] relative shrink-0" data-name="Title">
         <h2
+          ref={fitRef}
           className={`${gilroyMedium.className} [word-break:break-word] bg-clip-text leading-[49px] not-italic relative shrink-0 text-[46px] text-center text-transparent whitespace-nowrap`}
           style={{
             backgroundImage: TITLE_GRADIENT,
@@ -537,8 +545,13 @@ function SectionTitle({ heading, subtitle }: { heading: string; subtitle: string
 }
 
 export function ProductsAlwaysOn({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const heading = data?.heading || FALLBACK_HEADING;
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const bgSurge = mediaUrl(data?.bg_surge_image) || BG_SURGE;
+  const bgSubconscious = mediaUrl(data?.bg_subconscious_image) || BG_SUBCONSCIOUS;
+  const aiCoreIcon = mediaUrl(data?.ai_core_icon) || AI_CORE_ICON;
+  const hostCpuImg = mediaUrl(data?.host_cpu_image) || HOST_CPU_IMG;
   const [surge, setSurge] = useState(true);
   const toggle = () => setSurge((v) => !v);
   /* Mobile defaults to the baseline (subconscious) render — matches the
@@ -565,7 +578,7 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
               the crossfade reads as one chip changing state. */}
           <img loading="lazy" decoding="async"
             alt=""
-            src={BG_SUBCONSCIOUS}
+            src={bgSubconscious}
             className="absolute max-w-none pointer-events-none"
             style={{ left: "-11.04px", top: "59.95px", width: "1438.35px", height: "749.22px" }}
           />
@@ -580,7 +593,7 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
               <img loading="lazy" decoding="async"
                 alt=""
                 className="absolute h-[99.93%] left-[0.02%] max-w-none top-[0.07%] w-[99.97%]"
-                src={BG_SURGE}
+                src={bgSurge}
               />
             </div>
           </div>
@@ -638,8 +651,8 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
           </div>
 
           {/* ON chips */}
-          <OnChip label="AI CORE" width={144} icon="ai" className="absolute left-[552px] top-[207.55px]" />
-          <OnChip label={`HOST  CPU`} width={157} icon="cpu" active={surge} className="absolute left-[715px] top-[207.55px]" />
+          <OnChip label="AI CORE" width={144} icon="ai" className="absolute left-[552px] top-[207.55px]" aiCoreSrc={aiCoreIcon} hostCpuSrc={hostCpuImg} />
+          <OnChip label={`HOST  CPU`} width={157} icon="cpu" active={surge} className="absolute left-[715px] top-[207.55px]" aiCoreSrc={aiCoreIcon} hostCpuSrc={hostCpuImg} />
         </div>
       </section>
 
@@ -663,6 +676,7 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
                 before the subtitle. */}
             <div className="relative mb-[6px] h-[79px] w-[356px]" data-node-id="3565:3130">
               <h2
+                ref={fitRef}
                 className={`${gilroyMedium.className} absolute left-[3px] top-[7px] -mb-[8px] w-[350px] bg-clip-text pb-[8px] text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
                 style={{
                   backgroundImage: TITLE_GRADIENT_MOBILE,
@@ -696,13 +710,13 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
           >
             <img loading="lazy" decoding="async"
               alt=""
-              src={BG_SUBCONSCIOUS}
+              src={bgSubconscious}
               className="absolute max-w-none pointer-events-none"
               style={{ left: "-3.85px", top: "29.44px", width: "916.57px", height: "477.44px" }}
             />
             <img loading="lazy" decoding="async"
               alt=""
-              src={BG_SURGE}
+              src={bgSurge}
               className="absolute max-w-none pointer-events-none transition-opacity duration-[800ms] ease-in-out will-change-[opacity]"
               style={{ left: "0px", top: "-8.77px", width: "924px", height: "530.53px", opacity: surgeMobile ? 1 : 0 }}
               aria-hidden={!surgeMobile}
@@ -718,8 +732,8 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
           </div>
 
           {/* ON chips — Figma 3567:4004 / 3567:4010 (y232) */}
-          <OnChip label="AI CORE" width={144} icon="ai" className="absolute left-[36px] top-[232px]" />
-          <OnChip label={`HOST  CPU`} width={157} icon="cpu" active={surgeMobile} className="absolute left-[199px] top-[232px]" />
+          <OnChip label="AI CORE" width={144} icon="ai" className="absolute left-[36px] top-[232px]" aiCoreSrc={aiCoreIcon} hostCpuSrc={hostCpuImg} />
+          <OnChip label={`HOST  CPU`} width={157} icon="cpu" active={surgeMobile} className="absolute left-[199px] top-[232px]" aiCoreSrc={aiCoreIcon} hostCpuSrc={hostCpuImg} />
 
           {/* Stat cards — Figma 3567:4035 (y560) / 3567:4066 (y741) */}
           <MobileStatCard

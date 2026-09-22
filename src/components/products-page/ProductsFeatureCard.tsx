@@ -195,7 +195,7 @@ export function ProductsFeatureCard({
           </div>
         ) : (
           <p
-            className={`${gilroyMedium.className} relative shrink-0 text-[38px] leading-[47px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+            className={`${gilroyMedium.className} relative shrink-0 text-[38px] leading-[47px] font-medium text-white not-italic [word-break:break-word]`}
             style={card.titleWidth ? { width: `${card.titleWidth}px` } : undefined}
           >
             {card.title}
@@ -208,7 +208,7 @@ export function ProductsFeatureCard({
 
       {/* description */}
       <p
-        className={`${interRegular.className} absolute bottom-[126px] left-[calc(50%-164px)] w-[328px] translate-y-full text-[16px] leading-[24px] font-normal text-white not-italic opacity-90 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+        className={`${interRegular.className} absolute bottom-[126px] left-[calc(50%-164px)] w-[328px] translate-y-full text-[16px] leading-[24px] font-normal text-white not-italic opacity-90 [word-break:break-word]`}
       >
         {card.description}
       </p>

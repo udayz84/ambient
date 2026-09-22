@@ -50,7 +50,7 @@ export function HeroScrollIndicator({ scrollText = "SCROLL" }: { scrollText?: st
       >
         <div className="h-[100cqw] flex-none rotate-90">
           <p
-            className="relative h-full w-[47px] text-[12px] leading-[1.4] font-normal text-[#505f4b] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic"
+            className="relative h-full w-[47px] text-[12px] leading-[1.4] font-normal text-[#505f4b] [word-break:break-word] not-italic"
             data-node-id="2379:779"
           >
             {scrollText}

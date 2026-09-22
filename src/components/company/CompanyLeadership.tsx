@@ -89,11 +89,12 @@ export function CompanyLeadership({ data }: CompanyLeadershipProps = {}) {
                   nodeId="2379:2280"
                   gradientDeg="105.739deg"
                   className="max-w-full"
+                  maxLines={2}
                 >
                   {headingLines.map((line, i) => (
                     <span
                       key={i}
-                      className={`block h-[49px] shrink-0 leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden${
+                      className={`block min-h-[49px] shrink-0 leading-[49px] [word-break:break-word]${
                         i === headingLines.length - 1 ? "" : " pr-[2px]"
                       }`}
                     >
@@ -105,7 +106,7 @@ export function CompanyLeadership({ data }: CompanyLeadershipProps = {}) {
               <CornerDecor />
             </div>
             <p
-              className={`${interRegular.className} mt-[24px] w-[591px] text-[18px] leading-[27px] font-normal text-[#a1a1a1] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+              className={`${interRegular.className} mt-[24px] w-[591px] text-[18px] leading-[27px] font-normal text-[#a1a1a1] not-italic [word-break:break-word]`}
               data-node-id="2379:2285"
             >
               {subtitle.split("\n").map((line, i, arr) => (

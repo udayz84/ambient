@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { useFitText } from "../shared/FitText";
 import { ContinuumOptionsBar } from "./ContinuumOptionsBar";
 
 const TITLE_GRADIENT =
@@ -418,6 +419,8 @@ const ALL_VISUAL_IMAGES = [
 /* Main component                                                     */
 /* ------------------------------------------------------------------ */
 export function ApplicationsPageContinuum({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+  const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const [selected, setSelected] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -516,7 +519,8 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
         >
           <div className="relative h-[74px] w-full" data-name="Title">
             <h2
-              className={`${gilroyMedium.className} absolute left-[33.5px] top-[7px] w-[535px] bg-clip-text text-center text-[49px] font-medium leading-[60px] tracking-[-0.98px] text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+              ref={fitRef}
+              className={`${gilroyMedium.className} absolute left-[33.5px] top-[7px] w-[535px] bg-clip-text text-center text-[49px] font-medium leading-[60px] tracking-[-0.98px] text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: TITLE_GRADIENT,
                 WebkitBackgroundClip: "text",
@@ -529,7 +533,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
             <Corners leftSrc={CORNER_57} rightSrc={CORNER_55} />
           </div>
           <p
-            className={`${interRegular.className} mt-[20px] w-[600px] text-center text-[14px] font-normal leading-[1.4] text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} mt-[20px] w-[600px] text-center text-[14px] font-normal leading-[1.4] text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
             data-node-id="4574:7550"
           >
             {subtitle}
@@ -579,13 +583,13 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
               className="absolute left-1/2 top-[calc(50%+1px)] flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-[10px] p-[12px] text-center text-white not-italic"
             >
               <p
-                className={`${gilroyMedium.className} min-w-full w-[min-content] text-[26px] font-medium leading-[29px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+                className={`${gilroyMedium.className} min-w-full w-[min-content] text-[26px] font-medium leading-[29px] [word-break:break-word]`}
                 data-node-id="4574:7592"
               >
                 {activeCard.title}
               </p>
               <p
-                className={`${interRegular.className} w-[244px] text-[16px] font-normal leading-[24px] opacity-65 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+                className={`${interRegular.className} w-[244px] text-[16px] font-normal leading-[24px] opacity-65 [word-break:break-word]`}
                 data-node-id="4574:7593"
               >
                 {renderBody(activeCard.body)}
@@ -730,6 +734,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
         >
           <div className="relative h-[79px] w-[353px]" data-node-id="4583:25084" data-name="Group 78">
             <h2
+              ref={fitRef2}
               className={`${gilroyMedium.className} absolute inset-0 flex items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: MOBILE_TITLE_GRADIENT,
@@ -738,14 +743,14 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
               }}
               data-node-id="4583:25085"
             >
-              <span className="w-full [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
+              <span className="w-full [word-break:break-word]">
                 {heading}
               </span>
             </h2>
             <Corners leftSrc={CORNER_57} rightSrc={CORNER_55} />
           </div>
           <p
-            className={`${interRegular.className} w-full text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-full text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
             data-node-id="4583:25090"
           >
             {subtitle}
@@ -783,10 +788,10 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
               transition={{ duration: 0.2, ease: "easeInOut" }}
               className="absolute top-[23px] left-[30px] w-[205px] text-left text-white not-italic"
             >
-              <p className={`${gilroyMedium.className} text-[26px] leading-[28px] font-medium [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}>
+              <p className={`${gilroyMedium.className} text-[26px] leading-[28px] font-medium [word-break:break-word]`}>
                 {activeCard.title}
               </p>
-              <p className={`${interRegular.className} mt-[10px] text-[14px] leading-[21px] font-normal opacity-65 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}>
+              <p className={`${interRegular.className} mt-[10px] text-[14px] leading-[21px] font-normal opacity-65 [word-break:break-word]`}>
                 {renderBody(activeCard.body)}
               </p>
             </motion.div>

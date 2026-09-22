@@ -1,4 +1,7 @@
+"use client";
+
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { useFitText } from "../shared/FitText";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
@@ -29,7 +32,7 @@ function splitLines(value: string): string[] {
 export function ProductsStartBuilding({ data }: { data?: any }) {
   const heading = data?.heading || FALLBACK_HEADING;
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
-  const cardBackground = "/Rectangle 1618873545.png";
+  const cardBackground = mediaUrl(data?.background_image) || "/Rectangle 1618873545.png";
   const cards =
     Array.isArray(data?.cards) && data.cards.length > 0
       ? data.cards.map((c: any, i: number) => {
@@ -83,6 +86,7 @@ function ProductsStartBuildingDesktop({
   cardBackground: string;
   cards: any[];
 }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
     <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center pb-[120px] pt-0 mt-[-60px]">
       {/* Section title — 2903:2609 (centered, w=650) */}
@@ -100,6 +104,7 @@ function ProductsStartBuildingDesktop({
         >
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
+            ref={fitRef}
             className={`${gilroyMedium.className} absolute m-0 w-[621px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
             style={{
               left: 10,
@@ -145,6 +150,7 @@ function StartCardView({
   card: any;
   cardBackground: string;
 }) {
+  const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <div
       className="relative shrink-0"
@@ -172,6 +178,7 @@ function StartCardView({
           >
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             <h3
+              ref={fitRef}
               className={`${gilroyMedium.className} absolute left-1/2 m-0 w-[473.877px] -translate-x-1/2 bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 top: 7,
@@ -188,7 +195,7 @@ function StartCardView({
           {/* Description + CTA */}
           <div className="flex w-[450px] flex-col items-center gap-[20px]">
             <p
-              className={`${interRegular.className} h-[48px] w-full text-center text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+              className={`${interRegular.className} h-[48px] w-full text-center text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-white not-italic [word-break:break-word]`}
             >
               {card.description}
             </p>
@@ -241,6 +248,7 @@ function ProductsStartBuildingMobile({
   cardBackground: string;
   cards: any[];
 }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
     <div
       className="relative w-full px-[24px] pt-[40px] pb-[40px]"
@@ -249,6 +257,7 @@ function ProductsStartBuildingMobile({
       {/* Title */}
       <div className="flex flex-col items-center gap-[16px]">
         <h2
+          ref={fitRef}
           className={`${gilroyMedium.className} max-w-full bg-clip-text text-center text-[30px] leading-[34px] font-medium text-transparent not-italic [word-break:break-word]`}
           style={{
             backgroundImage: START_TITLE_GRADIENT,

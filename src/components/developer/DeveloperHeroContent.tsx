@@ -1,6 +1,9 @@
+"use client";
+
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { useFitText } from "../shared/FitText";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
@@ -28,6 +31,7 @@ export function DeveloperHeroContent({ data }: { data?: any }) {
   const secondaryLabel =
     data?.secondary_button?.label || DEFAULT_SECONDARY_LABEL;
   const secondaryHref = data?.secondary_button?.href || "#";
+  const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <div
       className="relative flex shrink-0 flex-col items-start gap-[24px]"
@@ -45,6 +49,7 @@ export function DeveloperHeroContent({ data }: { data?: any }) {
         >
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
+            ref={fitRef}
             className={`${gilroyMedium.className} not-italic [word-break:break-word] relative bg-clip-text text-[46px] font-medium leading-[49px] text-transparent`}
             style={{ backgroundImage: HERO_TITLE_GRADIENT }}
           >
@@ -59,7 +64,7 @@ export function DeveloperHeroContent({ data }: { data?: any }) {
 
       {/* Description — 2438:4571 */}
       <p
-        className={`${interRegular.className} not-italic [word-break:break-word] relative w-[529px] shrink-0 text-[18px] font-normal leading-[27px] text-[#f0f0f0] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+        className={`${interRegular.className} not-italic [word-break:break-word] relative w-[529px] shrink-0 text-[18px] font-normal leading-[27px] text-[#f0f0f0]`}
         data-node-id="2438:4571"
       >
         {subtitle}

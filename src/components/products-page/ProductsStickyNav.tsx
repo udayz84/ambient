@@ -27,6 +27,9 @@ export function ProductsStickyNav({ items }: { items?: any }) {
   const [activeId, setActiveId] = useState<string>("");
   const [isVisible, setIsVisible] = useState(false);
 
+  // Hide this tab for now per user request
+  return null;
+
   useEffect(() => {
     const handleScroll = () => {
       let current = "";

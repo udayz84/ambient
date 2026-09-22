@@ -30,7 +30,7 @@ export function PartnersProof() {
         <Corners />
       </div>
 
-      <p className={`${interRegular.className} max-w-[720px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px]`}>
+      <p className={`${interRegular.className} max-w-[720px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px]`}>
         {PARTNERS_PROOF.subheading}
       </p>
 
@@ -40,10 +40,10 @@ export function PartnersProof() {
         {PARTNERS_PROOF.points.map((point) => (
           <div key={point.title} className="flex min-h-[220px] flex-col items-start gap-[14px] p-[28px] max-[1023px]:border-b max-[1023px]:border-solid max-[1023px]:border-[rgba(83,216,36,0.2)] max-[1023px]:last:border-b-0">
             <ProofMarker icon={(point as any).icon} />
-            <h3 className={`${gilroyMedium.className} w-full text-[20px] leading-[26px] font-medium text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic min-[1024px]:text-[22px] min-[1024px]:leading-[28px]`}>
+            <h3 className={`${gilroyMedium.className} w-full text-[20px] leading-[26px] font-medium text-white [word-break:break-word] not-italic min-[1024px]:text-[22px] min-[1024px]:leading-[28px]`}>
               {point.title}
             </h3>
-            <p className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-white opacity-65 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden not-italic`}>
+            <p className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-white opacity-65 [word-break:break-word] not-italic`}>
               {point.description}
             </p>
           </div>

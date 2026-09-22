@@ -12,6 +12,7 @@
   "attributes": {
     "hero": { "type": "component", "repeatable": false, "component": "home.hero" },
     "measured_proof": { "type": "component", "repeatable": false, "component": "home.measured-proof" },
+    "clients": { "type": "component", "repeatable": false, "component": "home.clients" },
     "technology": { "type": "component", "repeatable": false, "component": "home.technology" },
     "platform_scale": { "type": "component", "repeatable": false, "component": "home.platform-scale" },
     "applications": { "type": "component", "repeatable": false, "component": "home.applications" },

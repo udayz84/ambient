@@ -1,5 +1,8 @@
+"use client";
+
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { useFitText } from "../shared/FitText";
 import { DvkScrollIndicator } from "./DvkScrollIndicator";
 import {
   CORNER_LEFT,
@@ -28,12 +31,22 @@ const DEFAULT_BG = "/dvk/hero-bg-2.webp";
  * Scroll indicator 2761:3005 (1335.387, 616.033 / 18×75)
  */
 export function DvkHero({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const title = data?.title || DEFAULT_TITLE;
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
   const ctaLabel = data?.cta_label || DEFAULT_CTA_LABEL;
   const bg = mediaUrl(data?.background_image) || DEFAULT_BG;
   return (
     <>
+      {/* Subtle ambient green glow */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          background: "radial-gradient(circle at 75% 50%, rgba(83, 216, 36, 0.10) 0%, rgba(0,0,0,0) 50%)",
+        }}
+        aria-hidden
+      />
+
       {/* Hero background — image group 2761:2972 */}
       {bg && (
         <div
@@ -53,6 +66,10 @@ export function DvkHero({ data }: { data?: any }) {
             alt=""
             src={bg}
             className="absolute inset-0 size-full max-w-none object-contain object-right-bottom scale-[0.85] origin-bottom-right"
+          />
+          <div
+            className="absolute inset-0"
+            style={{ backgroundImage: HERO_IMAGE_OVERLAY }}
           />
         </div>
       )}
@@ -156,7 +173,8 @@ export function DvkHero({ data }: { data?: any }) {
         >
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h1
-            className={`${gilroyMedium.className} absolute m-0 bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+            ref={fitRef}
+            className={`${gilroyMedium.className} absolute m-0 bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
             style={{
               left: 19.227,
               top: 9.192,
@@ -178,7 +196,7 @@ export function DvkHero({ data }: { data?: any }) {
           data-name="Sub"
         >
           <p
-            className={`${interRegular.className} w-[554px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-[554px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
             data-node-id="2761:2986"
           >
             {subtitle}

@@ -1,5 +1,8 @@
+"use client";
+
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { useFitText } from "../shared/FitText";
 import { DvkDemosCards } from "./DvkDemosCards";
 import { CORNER_LEFT, CORNER_RIGHT, DEMOS_TITLE_GRADIENT } from "./dvk-data";
 
@@ -14,6 +17,7 @@ const DEFAULT_SUBTITLE =
  * frame bottom (y=1705) and the cards top (y=1758.5).
  */
 export function DvkDemos({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 1 });
   const heading = data?.heading || DEFAULT_HEADING;
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
   return (
@@ -33,6 +37,7 @@ export function DvkDemos({ data }: { data?: any }) {
         >
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
+            ref={fitRef}
             className={`${gilroyMedium.className} relative m-0 bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic whitespace-nowrap`}
             style={{
               width: 852,

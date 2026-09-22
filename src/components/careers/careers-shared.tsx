@@ -1,8 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import { gilroyMedium, gilroySemiBold, interMedium, interRegular, interSemiBold } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { RepelDots } from "../shared/RepelDots";
 import { Corners } from "../shared/Corners";
+import { useFitText } from "../shared/FitText";
 import type { CareersValueCard } from "./careers-data";
 
 const cornerBr = "/careers/corner-card-br.svg";
@@ -166,6 +169,7 @@ export function CareersFramedTitle({
   className?: string;
   nodeId?: string;
 }) {
+  const fitRef = useFitText<HTMLParagraphElement>({});
   return (
     <div className={`relative ${className}`} data-node-id={nodeId}>
       <div
@@ -176,7 +180,8 @@ export function CareersFramedTitle({
         <img loading="lazy" decoding="async" alt="" className="block size-full max-w-none" src={frameSrc} />
       </div>
       <p
-        className={`${gilroyMedium.className} absolute left-1/2 ${textTop} z-10 max-w-full -translate-x-1/2 bg-clip-text text-center font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden ${textClassName}`}
+        ref={fitRef}
+        className={`${gilroyMedium.className} absolute left-1/2 ${textTop} z-10 max-w-full -translate-x-1/2 bg-clip-text text-center font-medium text-transparent not-italic [word-break:break-word] ${textClassName}`}
         style={{
           backgroundImage: `linear-gradient(${gradientDeg}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
           WebkitBackgroundClip: "text",
@@ -224,12 +229,12 @@ export function CareersGradientCard({
         </div>
         <div className="flex w-full flex-col items-start gap-[10px]">
           <p
-            className={`${gilroyMedium.className} w-full font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden ${titleClass}`}
+            className={`${gilroyMedium.className} w-full font-medium text-white not-italic [word-break:break-word] ${titleClass}`}
           >
             {card.title}
           </p>
           <p
-            className={`${interRegular.className} w-full text-[14px] leading-[1.4] font-normal text-white opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-full text-[14px] leading-[1.4] font-normal text-white opacity-65 not-italic [word-break:break-word]`}
           >
             {card.description}
           </p>
@@ -265,12 +270,12 @@ export function CareersGlassPanel({
       >
         <div className="flex min-w-px flex-[1_0_0] flex-col gap-[10px] p-[32px]">
           <p
-            className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+            className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
           >
             {title}
           </p>
           <p
-            className={`${interRegular.className} w-full font-normal text-white opacity-65 not-italic [word-break:break-word] ${bodySize} [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-full font-normal text-white opacity-65 not-italic [word-break:break-word] ${bodySize}`}
           >
             {description}
           </p>
@@ -344,7 +349,7 @@ export function CareersFilterField({ label, nodeId }: { label: string; nodeId?: 
     >
       <div className="flex h-[48px] min-w-px flex-[1_0_0] items-center gap-[10px] bg-transparent px-[20px]">
         <p
-          className={`${interRegular.className} min-w-px flex-[1_0_0] text-[14px] leading-[1.4] font-normal text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+          className={`${interRegular.className} min-w-px flex-[1_0_0] text-[14px] leading-[1.4] font-normal text-white not-italic [word-break:break-word]`}
         >
           {label}
         </p>

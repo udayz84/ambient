@@ -1,7 +1,10 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element */
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { useFitText } from "../shared/FitText";
 
 const TITLE_GRADIENT =
   "linear-gradient(147.032deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -46,12 +49,12 @@ function InfoCard({
       <div className="flex w-full flex-col items-start" data-name="NewsSection">
         <div className="flex w-full flex-col gap-[10px] items-start not-italic">
           <p
-            className={`${gilroyMedium.className} w-full shrink-0 text-[22px] leading-[28px] text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+            className={`${gilroyMedium.className} w-full shrink-0 text-[22px] leading-[28px] text-white [word-break:break-word]`}
           >
             {title}
           </p>
           <p
-            className={`${interRegular.className} w-full shrink-0 text-[16px] leading-[24px] text-[rgba(240,240,240,0.6)] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-full shrink-0 text-[16px] leading-[24px] text-[rgba(240,240,240,0.6)] [word-break:break-word]`}
           >
             {body}
           </p>
@@ -66,6 +69,9 @@ function InfoCard({
 }
 
 export function WearablesSubconscious({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 1 });
+  const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const heading = data?.heading || FALLBACK_HEADING;
   const cardTitle = data?.card_title || FALLBACK_CARD_TITLE;
@@ -93,6 +99,7 @@ export function WearablesSubconscious({ data }: { data?: any }) {
         <div className="flex flex-col items-center gap-[24px]">
           <div className="relative flex flex-col items-center px-[10px]">
             <h2
+              ref={fitRef}
               className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent whitespace-nowrap not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: TITLE_GRADIENT,
@@ -108,7 +115,7 @@ export function WearablesSubconscious({ data }: { data?: any }) {
             />
           </div>
           <p
-            className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] text-[#f0f0f0] not-italic [word-break:break-word]`}
           >
             {subtitle}
           </p>
@@ -163,6 +170,7 @@ export function WearablesSubconscious({ data }: { data?: any }) {
         <div className="flex flex-col items-center gap-[20px]">
           <div className="relative flex flex-col items-center px-[10px]">
             <h2
+              ref={fitRef2}
               className={`${gilroyMedium.className} bg-clip-text text-center text-[28px] leading-[32px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: TITLE_GRADIENT,

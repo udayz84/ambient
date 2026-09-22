@@ -106,10 +106,10 @@ export function ResourceDownloadModal({
         >
           ✕
         </button>
-        <h3 className={`${gilroyMedium.className} text-2xl text-white mb-2 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}>
+        <h3 className={`${gilroyMedium.className} text-2xl text-white mb-2 [word-break:break-word]`}>
           {config?.title || "Download Resource"}
         </h3>
-        <p className={`${interRegular.className} text-[#a4a4a4] mb-6 text-sm [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}>
+        <p className={`${interRegular.className} text-[#a4a4a4] mb-6 text-sm [word-break:break-word]`}>
           {config?.description || "Please fill out the form to download this resource."}
         </p>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">

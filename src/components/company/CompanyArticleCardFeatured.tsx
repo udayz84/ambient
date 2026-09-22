@@ -51,13 +51,13 @@ export function CompanyArticleCardFeatured({
         <CompanyArticleGreenBadge label={category} />
 
         <h3
-          className={`${gilroyMedium.className} mt-[20px] w-[542px] text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+          className={`${gilroyMedium.className} mt-[20px] w-[542px] text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
         >
           {title}
         </h3>
 
         <p
-          className={`${interRegular.className} mt-[10px] w-[542px] text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+          className={`${interRegular.className} mt-[10px] w-[542px] text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
         >
           {excerpt}
         </p>

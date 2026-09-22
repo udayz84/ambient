@@ -82,10 +82,10 @@ function CtaCard({
               gradientDeg={CARD_TITLE_DEG}
               className="w-full text-center"
             >
-              <span className="block h-[49px] leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
+              <span className="block h-[49px] leading-[49px] [word-break:break-word]">
                 {card.titleLines[0]}
               </span>
-              <span className="block h-[49px] leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
+              <span className="block h-[49px] leading-[49px] [word-break:break-word]">
                 {card.titleLines[1]}
               </span>
             </GradientTitle>
@@ -95,7 +95,7 @@ function CtaCard({
           {/* body + CTA */}
           <div className="flex w-full flex-col items-start gap-[20px]">
             <p
-              className={`${interRegular.className} h-[48px] w-full text-center text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+              className={`${interRegular.className} h-[48px] w-full text-center text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-white not-italic [word-break:break-word]`}
             >
               {card.body}
             </p>
@@ -228,7 +228,7 @@ export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
                 {/* title */}
                 <div className="relative h-[68.271px] w-full">
                   <p
-                    className={`${gilroyMedium.className} absolute left-1/2 w-[299.558px] -translate-x-1/2 bg-clip-text text-center text-[30px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+                    className={`${gilroyMedium.className} absolute left-1/2 w-[299.558px] -translate-x-1/2 bg-clip-text text-center text-[30px] font-medium text-transparent not-italic [word-break:break-word]`}
                     style={{
                       backgroundImage: `linear-gradient(${CARD_TITLE_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
                       WebkitBackgroundClip: "text",
@@ -244,7 +244,7 @@ export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
                 {/* body + CTA */}
                 <div className="flex w-full flex-col gap-[14px]">
                   <p
-                    className={`${interRegular.className} h-[44px] text-center text-[12px] leading-[15.171px] font-normal tracking-[-0.1975px] text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+                    className={`${interRegular.className} h-[44px] text-center text-[12px] leading-[15.171px] font-normal tracking-[-0.1975px] text-white not-italic [word-break:break-word]`}
                   >
                     {card.body}
                   </p>

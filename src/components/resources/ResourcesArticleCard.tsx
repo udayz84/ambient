@@ -66,7 +66,7 @@ export function ResourcesArticleCard({
 
         <div className="flex flex-col gap-[10px]">
           <h3
-            className={`${gilroyMedium.className} w-full font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+            className={`${gilroyMedium.className} w-full font-medium text-white not-italic [word-break:break-word]`}
             style={{
               fontSize: titleFontSize,
               lineHeight: "28px",
@@ -75,7 +75,7 @@ export function ResourcesArticleCard({
             {title}
           </h3>
           <p
-            className={`${interRegular.className} w-[346.611px] text-[16px] leading-[24px] font-normal not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+            className={`${interRegular.className} w-[346.611px] text-[16px] leading-[24px] font-normal not-italic [word-break:break-word]`}
           >
             <span className="text-[rgba(240,240,240,0.6)]">
               {excerpt}

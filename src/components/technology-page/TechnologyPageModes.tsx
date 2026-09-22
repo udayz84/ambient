@@ -702,10 +702,10 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
             data-name="Title"
           >
             <GradientTitle gradientDeg={TITLE_GRADIENT_DEG} className="text-center">
-              <span className="block h-[49px] leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
+              <span className="block h-[49px] leading-[49px] [word-break:break-word]">
                 {heading.split(". ")[0]}{heading.includes(". ") ? "." : ""}
               </span>
-              <span className="block h-[49px] leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
+              <span className="block h-[49px] leading-[49px] [word-break:break-word]">
                 {heading.split(". ")[1] || ""}
               </span>
             </GradientTitle>
@@ -713,7 +713,7 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
           </div>
 
           <p
-            className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
             style={{ opacity: SUBTITLE_OPACITY }}
             data-node-id="3003:557"
           >

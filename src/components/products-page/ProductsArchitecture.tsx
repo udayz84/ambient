@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { mediaUrl } from "@/lib/strapi";
+import { useFitText } from "../shared/FitText";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { TagBadge } from "../hero/TagBadge";
@@ -301,6 +302,7 @@ function ProductsArchitectureDesktop({
   hoveredIndex: number;
   onHover: (i: number) => void;
 }) {
+  const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <div
       className="mx-auto flex w-full flex-col items-center gap-[49px] pb-0"
@@ -320,6 +322,7 @@ function ProductsArchitectureDesktop({
           data-name="Title"
         >
           <h2
+            ref={fitRef}
             className={`${gilroyMedium.className} m-0 bg-clip-text text-center text-[46px] leading-[0] font-medium text-transparent not-italic whitespace-nowrap`}
             style={{
               backgroundImage: ARCH_TITLE_GRADIENT,
@@ -426,7 +429,7 @@ function ArchStatView({
 
       {/* Title */}
       <h3
-        className={`${gilroyMedium.className} m-0 text-[32px] leading-[38px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+        className={`${gilroyMedium.className} m-0 text-[32px] leading-[38px] font-medium text-white not-italic [word-break:break-word]`}
         style={{ width: stat.titleWidth }}
       >
         {stat.title}
@@ -439,7 +442,7 @@ function ArchStatView({
         data-name="Content"
       >
         <p
-          className={`${interRegular.className} m-0 w-full text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+          className={`${interRegular.className} m-0 w-full text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
         >
           {stat.description}
         </p>
@@ -465,6 +468,7 @@ function ProductsArchitectureMobile({
   caption: string;
   stats: any[];
 }) {
+  const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <section
       className="relative w-full overflow-hidden bg-black min-[1024px]:hidden"
@@ -487,6 +491,7 @@ function ProductsArchitectureMobile({
           {/* Title — 3568:4705 */}
           <div className="relative">
             <h2
+              ref={fitRef}
               className={`${gilroyMedium.className} w-[350px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: FEATURES_TITLE_GRADIENT_MOBILE,

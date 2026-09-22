@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular, interSemiBold, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { useFitText } from "../shared/FitText";
 import {
   FEATURED_RESOURCES,
   filterCategoryId,
@@ -106,6 +107,8 @@ function WhiteCta({
 
 /* ---------------------------------- HERO ---------------------------------- */
 function ResourcesHeroMobile({ data }: { data?: any } = {}) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+
   const titleRaw = (data?.title as string) || "";
   const titleLines = titleRaw.split("\n");
   const placeholder = (data?.search_placeholder as string) || "";
@@ -136,7 +139,8 @@ function ResourcesHeroMobile({ data }: { data?: any } = {}) {
       </div>
 
       <h1
-        className={`${gilroyMedium.className} relative w-full bg-clip-text text-left text-[36px] leading-[40px] font-medium text-transparent [word-break:break-word] not-italic pt-[45px] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+        ref={fitRef}
+        className={`${gilroyMedium.className} relative w-full bg-clip-text text-left text-[36px] leading-[40px] font-medium text-transparent [word-break:break-word] not-italic pt-[45px]`}
         style={{ backgroundImage: gradient("118.129deg") }}
       >
         {titleLines.map((line, i) => (
@@ -242,6 +246,8 @@ function ResourcesHeroMobile({ data }: { data?: any } = {}) {
 
 /* ------------------------------- FEATURED --------------------------------- */
 function ResourcesFeaturedMobile({ data }: { data?: any } = {}) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+
   const heading = (data?.heading as string) || "";
   const strapiCards = Array.isArray(data?.cards) ? data.cards : [];
   const cards = strapiCards.map((card: any, i: number) => {
@@ -264,6 +270,7 @@ function ResourcesFeaturedMobile({ data }: { data?: any } = {}) {
       aria-label="Featured Resources"
     >
       <h2
+        ref={fitRef}
         className={`${gilroyMedium.className} px-[24px] mb-[28px] text-[36px] leading-[36px] font-medium text-white not-italic text-center`}
       >
         {heading}
@@ -330,6 +337,8 @@ function ResourcesFeaturedMobile({ data }: { data?: any } = {}) {
 
 /* ------------------------------- BUILDING --------------------------------- */
 function ResourcesBuildingMobile({ data }: { data?: any } = {}) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+
   const headingRaw = (data?.heading as string) || "";
   const headingLines = headingRaw.split("\n");
   const subtitle = (data?.subtitle as string) || "";
@@ -355,6 +364,7 @@ function ResourcesBuildingMobile({ data }: { data?: any } = {}) {
       <div className="relative inline-flex items-center justify-center p-[10px]">
         <GreenCtaCorners />
         <h2
+          ref={fitRef}
           className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[40px] font-medium text-transparent [word-break:break-word] not-italic`}
           style={{ backgroundImage: gradient("107.454deg") }}
         >
@@ -561,6 +571,8 @@ function ResourcesContentMobile({
 
 /* ------------------------------- NEWS CTA --------------------------------- */
 function ResourcesNewsCtaMobile({ data }: { data?: any } = {}) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+
   const heading = (data?.heading as string) || "";
   const ctaLabel = (data?.cta_label as string) || "";
   const ctaHref = (data?.cta_href as string) || "";
@@ -575,6 +587,7 @@ function ResourcesNewsCtaMobile({ data }: { data?: any } = {}) {
       <div className="relative inline-flex items-center justify-center p-[8px] z-10">
         <GreenCtaCorners />
         <h2
+          ref={fitRef}
           className={`${gilroyMedium.className} w-[313px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
           style={{ backgroundImage: gradient("98.0026deg") }}
         >

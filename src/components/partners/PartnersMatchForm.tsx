@@ -121,7 +121,7 @@ export function PartnersMatchForm() {
         <Corners />
       </div>
 
-      <p className={`${interRegular.className} max-w-[720px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px]`}>
+      <p className={`${interRegular.className} max-w-[720px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px]`}>
         {PARTNERS_MATCH.subheading}
       </p>
 
@@ -131,7 +131,7 @@ export function PartnersMatchForm() {
         {submitted ? (
           <div className="flex min-h-[420px] animate-hero-text-fade-in transform-gpu flex-col items-center justify-center gap-[20px] px-[32px] py-[56px] text-center">
             <AmbientPulse />
-            <p className={`${gilroyMedium.className} max-w-[420px] text-[24px] leading-[32px] font-medium text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}>
+            <p className={`${gilroyMedium.className} max-w-[420px] text-[24px] leading-[32px] font-medium text-white [word-break:break-word] not-italic`}>
               {PARTNERS_MATCH.confirmation}
             </p>
             <button
@@ -176,7 +176,7 @@ export function PartnersMatchForm() {
             </div>
 
             <div className="flex flex-col gap-[5px]">
-              <span className={`${interLight.className} w-full shrink-0 text-[10px] leading-[15px] font-light text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}>
+              <span className={`${interLight.className} w-full shrink-0 text-[10px] leading-[15px] font-light text-white not-italic [word-break:break-word]`}>
                 {PARTNERS_MATCH.fields.region}
               </span>
               <PartnersDropdown
@@ -189,7 +189,7 @@ export function PartnersMatchForm() {
             </div>
 
             <div className="flex flex-col gap-[10px]">
-              <span className={`${interLight.className} w-full shrink-0 text-[10px] leading-[15px] font-light text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}>
+              <span className={`${interLight.className} w-full shrink-0 text-[10px] leading-[15px] font-light text-white not-italic [word-break:break-word]`}>
                 {PARTNERS_MATCH.fields.helpAreas}
               </span>
               <div className="flex flex-wrap gap-[8px]">
@@ -226,7 +226,7 @@ export function PartnersMatchForm() {
                 {error}
               </p>
             ) : (
-              <p className={`${interRegular.className} text-[12px] leading-[18px] font-normal text-[#8a8a8a] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}>
+              <p className={`${interRegular.className} text-[12px] leading-[18px] font-normal text-[#8a8a8a] [word-break:break-word]`}>
                 {PARTNERS_MATCH.emailHint}
               </p>
             )}

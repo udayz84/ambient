@@ -38,7 +38,7 @@ export function TechnologyMobile({ data }: { data?: any }) {
 
           <div className="relative flex w-[354px] max-w-full flex-col items-center justify-center py-[10px] mt-[16px]">
             <h2
-              className={`${gilroyMedium.className} relative z-10 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden not-italic`}
+              className={`${gilroyMedium.className} relative z-10 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
               style={{
                 backgroundImage:
                   "linear-gradient(106.923deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -157,7 +157,7 @@ export function TechnologyMobile({ data }: { data?: any }) {
                   </p>
                   <div className="flex flex-col items-start w-full relative shrink-0">
                     <p
-                      className={`${interRegular.className} [word-break:break-word] text-[14px] leading-[22px] text-[#f0f0f0] opacity-65 not-italic w-[310px] max-w-full shrink-0 relative [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+                      className={`${interRegular.className} [word-break:break-word] text-[14px] leading-[22px] text-[#f0f0f0] opacity-65 not-italic w-[310px] max-w-full shrink-0 relative`}
                     >
                       {feature.description}
                     </p>

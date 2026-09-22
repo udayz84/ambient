@@ -148,13 +148,13 @@ function MobileStatCard({ stat }: { stat: StatCardData }) {
             <span className="text-[68px] leading-[72px]">{stat.value} </span>
             <span className={stat.unitClass}>{stat.unit}</span>
           </p>
-          <p className={`${interRegular.className} text-[16px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}>
+          <p className={`${interRegular.className} text-[16px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}>
             {stat.label}
           </p>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img loading="lazy" decoding="async" src={LABEL_LINE} alt="" aria-hidden className="block h-px w-[151.832px] max-w-none" />
         </div>
-        <p className={`${interRegular.className} text-[16px] leading-[27px] font-normal text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`} style={{ opacity: 0.9 }}>
+        <p className={`${interRegular.className} text-[16px] leading-[27px] font-normal text-white not-italic [word-break:break-word]`} style={{ opacity: 0.9 }}>
           {stat.description}
         </p>
       </div>
@@ -317,10 +317,10 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
             data-name="Title"
           >
             <GradientTitle gradientDeg={TITLE_GRADIENT_DEG} className="text-center">
-              <span className="block h-[49px] leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
+              <span className="block h-[49px] leading-[49px] [word-break:break-word]">
                 {heading.split(", ")[0]}{heading.includes(", ") ? "," : ""}
               </span>
-              <span className="block h-[49px] leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
+              <span className="block h-[49px] leading-[49px] [word-break:break-word]">
                 {heading.split(", ")[1] || ""}
               </span>
             </GradientTitle>
@@ -328,7 +328,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
           </div>
 
           <p
-            className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
             style={{ opacity: SUBTITLE_OPACITY }}
             data-node-id="3015:536"
           >

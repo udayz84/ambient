@@ -6,6 +6,7 @@ import { mediaUrl } from "@/lib/strapi";
 import { gilroyExtraBold, gilroyMedium, interRegular, interMedium } from "../hero/fonts";
 import { CategoryDivider } from "./ApplicationsCategoryNav";
 import { Corners } from "../shared/Corners";
+import { useFitText } from "../shared/FitText";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const tabCornerTl = "/applications/corners/tab-corner-tl.svg";
@@ -34,6 +35,8 @@ export function ApplicationsMobile({
   categoryActiveIndex,
   setCategoryActiveIndex,
 }: ApplicationsMobileProps) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+  const fitRef2 = useFitText<HTMLParagraphElement>({ maxLines: 1 });
   const [activeIndex, setActiveIndex] = useState(0);
   const features = featureCards.length ? featureCards : [];
   const activeFeature = features[activeIndex] || {};
@@ -104,7 +107,8 @@ export function ApplicationsMobile({
       <div className="relative flex w-full flex-col items-center px-[16px]">
         <div className="relative inline-grid grid-cols-[max-content] grid-rows-[max-content] place-items-start leading-[0]">
           <h2
-            className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[7px] ml-[3px] w-[300px] bg-clip-text text-center text-[32px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden sm:w-[350px] sm:text-[36px]`}
+            ref={fitRef}
+            className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[7px] ml-[3px] w-[300px] bg-clip-text text-center text-[32px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic sm:w-[350px] sm:text-[36px]`}
             style={{
               backgroundImage:
                 "linear-gradient(107.454deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -149,7 +153,7 @@ export function ApplicationsMobile({
         </div>
 
         <p
-          className={`${interRegular.className} mt-[10px] w-full max-w-[343px] text-center text-[14px] leading-[16px] font-normal text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+          className={`${interRegular.className} mt-[10px] w-full max-w-[343px] text-center text-[14px] leading-[16px] font-normal text-white not-italic [word-break:break-word]`}
         >
           {subtitle}
         </p>
@@ -207,6 +211,7 @@ export function ApplicationsMobile({
       <div className="relative mt-[32px] flex w-full flex-col items-center justify-start min-h-[240px] overflow-visible">
         {/* Watermark Text */}
         <p
+          ref={fitRef2}
           className={`${gilroyExtraBold.className} absolute top-0 z-0 w-full text-center text-[14.5vw] sm:text-[60px] leading-[1.1] font-extrabold tracking-[1px] whitespace-nowrap text-transparent uppercase not-italic`}
           style={{ backgroundImage: "linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0) 100%)", WebkitBackgroundClip: "text", backgroundClip: "text" }}
         >
@@ -242,10 +247,10 @@ export function ApplicationsMobile({
 
             <Corners />
 
-            <h4 className={`${gilroyMedium.className} text-[16px] leading-[22px] text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}>
+            <h4 className={`${gilroyMedium.className} text-[16px] leading-[22px] text-white [word-break:break-word]`}>
               {feature.title}
             </h4>
-            <p className={`${interRegular.className} mt-[12px] text-[12px] leading-[18px] text-[#f0f0f0] opacity-65 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}>
+            <p className={`${interRegular.className} mt-[12px] text-[12px] leading-[18px] text-[#f0f0f0] opacity-65 [word-break:break-word]`}>
               {feature.description}
             </p>
           </div>

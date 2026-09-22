@@ -286,7 +286,7 @@ function PillarStat({
             <p className="text-[14px] tracking-[-0.1504px] whitespace-nowrap text-[#3a9719] not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
               +
             </p>
-            <p className="min-w-px flex-1 whitespace-pre-line text-[13px] text-[rgba(255,255,255,0.9)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
+            <p className="min-w-px flex-1 whitespace-pre-line text-[13px] text-[rgba(255,255,255,0.9)] not-italic [word-break:break-word]">
               {b}
             </p>
           </div>
@@ -410,17 +410,17 @@ export function TechnologyPageArchitecture({
               className="text-center"
               nodeId="3330:1274"
             >
-              <span className="block h-[49px] leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
+              <span className="block h-[49px] leading-[49px] [word-break:break-word]">
                 {headingLines[0] ?? ""}
               </span>
-              <span className="block h-[49px] leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
+              <span className="block h-[49px] leading-[49px] [word-break:break-word]">
                 {headingLines[1] ?? ""}
               </span>
             </GradientTitle>
             <CornerDecor />
           </div>
           <p
-            className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65 [word-break:break-word]`}
             data-node-id="3330:1279"
           >
             {subtitle}

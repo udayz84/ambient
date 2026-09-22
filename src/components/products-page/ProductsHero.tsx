@@ -1,4 +1,7 @@
+"use client";
+
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { useFitText } from "../shared/FitText";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
@@ -113,6 +116,7 @@ function ProductsHeroDesktop({
   secondary: { label: string; href: string };
   strapiTags: any[];
 }) {
+  const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <>
       <div className="relative mt-[78px] h-[798px] w-full">
@@ -218,7 +222,8 @@ function ProductsHeroDesktop({
         data-name="Container"
       >
         <h1
-          className="min-w-full w-[min-content] shrink-0 bg-clip-text text-[46px] leading-[49px] font-medium text-transparent [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden"
+          ref={fitRef}
+          className="min-w-full w-[min-content] shrink-0 bg-clip-text text-[46px] leading-[49px] font-medium text-transparent"
           style={{
             backgroundImage: HERO_TITLE_GRADIENT,
             WebkitBackgroundClip: "text",
@@ -228,11 +233,11 @@ function ProductsHeroDesktop({
           data-name="Title"
         >
           {titleLines.map((line, i) => (
-            <span key={i} className="block leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">{line}</span>
+            <span key={i} className="block leading-[49px] [word-break:break-word]">{line}</span>
           ))}
         </h1>
         <p
-          className={`${interRegular.className} w-[419px] shrink-0 text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-80 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+          className={`${interRegular.className} w-[419px] shrink-0 text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-80 [word-break:break-word]`}
           data-node-id="2900:465"
           data-name="Description"
         >
@@ -268,7 +273,7 @@ function PrimaryCta({
   return (
     <a
       href={href}
-      className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[223px] shrink-0 items-center justify-center overflow-hidden`}
+      className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-auto min-w-[223px] px-[24px] shrink-0 items-center justify-center overflow-hidden`}
       data-node-id="2900:573"
       data-name="Cta"
     >
@@ -277,7 +282,7 @@ function PrimaryCta({
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
       <AnimatedDotsBackground />
-      <span className="relative max-w-full overflow-hidden text-ellipsis text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+      <span className="relative max-w-full text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
         {children}
       </span>
       <span
@@ -299,12 +304,12 @@ function SecondaryCta({
   return (
     <a
       href={href}
-      className={`${gilroyMedium.className} relative flex h-[48px] w-[255px] shrink-0 items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
+      className={`${gilroyMedium.className} relative flex h-[48px] w-auto min-w-[255px] shrink-0 items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
       style={{ backgroundColor: SECONDARY_CTA_BG }}
       data-node-id="2900:584"
       data-name="CTA - Secondary"
     >
-      <span className="relative max-w-full overflow-hidden text-ellipsis px-[20px] py-[10px] text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+      <span className="relative max-w-full px-[24px] py-[10px] text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
         {children}
       </span>
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
@@ -327,6 +332,7 @@ function ProductsHeroMobile({
   chipsetImage: string | null;
   strapiTags: any[];
 }) {
+  const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <section
       className="relative -mt-[78px] w-full bg-black min-[1024px]:hidden"
@@ -387,6 +393,7 @@ function ProductsHeroMobile({
           {/* Title Area with Corners */}
           <div className="relative inline-flex flex-col items-center p-[16px] mb-[8px]">
             <h1
+              ref={fitRef}
               className={`${gilroyMedium.className} w-[320px] max-w-full bg-clip-text text-[36px] leading-[40px] font-medium text-transparent not-italic [word-break:break-word] text-center`}
               style={{
                 backgroundImage: HERO_TITLE_GRADIENT,

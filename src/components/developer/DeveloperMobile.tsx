@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { useFitText } from "../shared/FitText";
 import { dmMono, gilroyMedium, interBold, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { Corners } from "../shared/Corners";
@@ -125,6 +126,7 @@ function DeveloperHeroMobile({ data }: { data?: any }) {
   const secondaryLabel = data?.secondary_button?.label || HERO_DEFAULT_SECONDARY;
   const secondaryHref = data?.secondary_button?.href || "#";
   const bgImg = mediaUrl(data?.background_image) || "/developer/hero-bg-3.webp";
+  const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <section className="relative flex w-full flex-col items-center pt-[20px]">
       {/* Content block — 4032:21985 (x20 y0 w352 h193) */}
@@ -133,6 +135,7 @@ function DeveloperHeroMobile({ data }: { data?: any }) {
         <div className="relative flex w-full justify-center">
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
+            ref={fitRef}
             className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
             style={{
               backgroundImage:
@@ -148,7 +151,7 @@ function DeveloperHeroMobile({ data }: { data?: any }) {
         </div>
         {/* Subtitle — 4032:21992 (x8 y130 w336 h63) */}
         <p
-          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
         >
           {subtitle}
         </p>
@@ -231,6 +234,7 @@ function DeveloperCodeSectionMobile({ data }: { data?: any }) {
         }))
       : DEVELOPER_ARTICLES;
   const carouselRef = useRef<HTMLDivElement>(null);
+  const fitRef = useFitText<HTMLHeadingElement>({});
   /** Step = 355px card + 8px gap (Figma 4666:9680). */
   const scrollCarousel = (direction: 1 | -1) => {
     carouselRef.current?.scrollBy({ left: direction * 363, behavior: "smooth" });
@@ -271,6 +275,7 @@ function DeveloperCodeSectionMobile({ data }: { data?: any }) {
         <div className="relative flex w-full justify-center">
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
+            ref={fitRef}
             className={`${gilroyMedium.className} mt-[7px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
             style={{
               backgroundImage:
@@ -286,7 +291,7 @@ function DeveloperCodeSectionMobile({ data }: { data?: any }) {
         </div>
         {/* Subtitle — 4666:9678 (w 336, Inter Regular 14/21, 75% opacity) */}
         <p
-          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
         >
           {subtitle}
         </p>
@@ -368,12 +373,12 @@ function DeveloperCodeSectionMobile({ data }: { data?: any }) {
               {/* Text — gap 6px; card 2 title is 26px/29px per Figma 4666:9710 */}
               <div className="flex min-w-0 flex-1 flex-col gap-[6px]">
                 <p
-                  className={`${gilroyMedium.className} font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden text-[22px] leading-[28px]`}
+                  className={`${gilroyMedium.className} font-medium text-white not-italic [word-break:break-word] text-[22px] leading-[28px]`}
                 >
                   {article.title}
                 </p>
                 <p
-                  className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+                  className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
                 >
                   {article.description}
                 </p>
@@ -432,6 +437,7 @@ function DeveloperPipelineMobile({ data }: { data?: any }) {
   const rawTabs: any[] = Array.isArray(data?.tabs) ? data.tabs : [];
   const [activeIndex, setActiveIndex] = useState(0);
   const stripRef = useRef<HTMLDivElement>(null);
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
 
   /* Merge CMS tabs with the desktop STAGES fallback (bullets, images, copy) */
   const stages: (Stage & { autoFitFlow: boolean })[] = STAGES.map((stage, i) => {
@@ -510,7 +516,8 @@ function DeveloperPipelineMobile({ data }: { data?: any }) {
           {/* Title — 4502:8331 (Gilroy Medium 36px, gradient 108.656°;
               mt/mb 5px reproduce the 82px title group inside the 118px block) */}
           <h2
-            className={`${gilroyMedium.className} mt-[5px] mb-[5px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+            ref={fitRef}
+            className={`${gilroyMedium.className} mt-[5px] mb-[5px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
             style={{ backgroundImage: PIPELINE_TITLE_GRADIENT }}
           >
             {heading}
@@ -518,7 +525,7 @@ function DeveloperPipelineMobile({ data }: { data?: any }) {
         </div>
         {/* Subtitle — 4502:8336 (Inter Regular 14px/21px, opacity 75, w=336) */}
         <p
-          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
         >
           {subtitle}
         </p>
@@ -756,7 +763,7 @@ function PipelineAccordionItemMobile({
           <div className="flex flex-col gap-[16px] px-[20px] pt-[20px]">
             {/* Stage subtitle — desktop accordion header copy */}
             <p
-              className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[#bbb] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+              className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[#bbb] not-italic [word-break:break-word]`}
             >
               {stage.subtitle}
             </p>
@@ -827,6 +834,7 @@ function DeveloperComingSoonMobile({ data }: { data?: any }) {
   const ctaLabel = data?.cta_label || COMING_DEFAULT_CTA;
   const ctaHref = data?.cta_href || "#";
   const imgSrc = mediaUrl(data?.image) || COMING_DEFAULT_IMG;
+  const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <section className="relative flex w-full flex-col items-center overflow-hidden px-[19px] pt-[30px] pb-[40px]">
       {/* Background image — 4035:25440 (opacity-60, radial fade) */}
@@ -871,6 +879,7 @@ function DeveloperComingSoonMobile({ data }: { data?: any }) {
         <div className="relative flex w-fit max-w-full justify-center px-[10px]">
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
+            ref={fitRef}
             className={`${gilroyMedium.className} max-w-full bg-clip-text text-center text-[clamp(28px,9vw,36px)] leading-[1.05] font-medium text-transparent not-italic [overflow-wrap:anywhere]`}
             style={{
               backgroundImage:
@@ -911,12 +920,12 @@ function DeveloperComingSoonMobile({ data }: { data?: any }) {
         {/* Text content — 4035:25451 (gap 10px) */}
         <div className="flex w-full max-w-full flex-col items-center gap-[10px] text-center">
           <p
-            className={`${gilroyMedium.className} w-full max-w-full text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+            className={`${gilroyMedium.className} w-full max-w-full text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
           >
             {cardTitle}
           </p>
           <p
-            className={`${interRegular.className} w-full max-w-full text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-full max-w-full text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
           >
             {cardDescription}
           </p>
@@ -975,6 +984,7 @@ function DeveloperModulesMobile({ data }: { data?: any }) {
     data?.modules && Array.isArray(data.modules) && data.modules.length > 0
       ? data.modules
       : DEVELOPER_MODULES;
+  const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <section className="relative flex w-full flex-col items-center overflow-hidden px-[19px] pt-[30px]">
       {/* Content block — 4035:26193 (title + subtitle, gap 10px) */}
@@ -983,6 +993,7 @@ function DeveloperModulesMobile({ data }: { data?: any }) {
         <div className="relative flex w-full justify-center">
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
+            ref={fitRef}
             className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
             style={{
               backgroundImage:
@@ -998,7 +1009,7 @@ function DeveloperModulesMobile({ data }: { data?: any }) {
         </div>
         {/* Subtitle — 4035:26200 */}
         <p
-          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
         >
           {subtitle}
         </p>
@@ -1033,12 +1044,12 @@ function DeveloperModulesMobile({ data }: { data?: any }) {
                 {/* Content — title + description (gap 6px) */}
                 <div className="flex w-full flex-col gap-[6px]">
                   <p
-                    className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+                    className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
                   >
                     {title}
                   </p>
                   <p
-                    className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+                    className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
                   >
                     {description}
                   </p>
@@ -1097,6 +1108,7 @@ function DeveloperCopilotsMobile({ data }: { data?: any }) {
     data?.copilots && Array.isArray(data.copilots) && data.copilots.length > 0
       ? data.copilots
       : DEVELOPER_COPILOTS;
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
     <section className="relative flex w-full flex-col items-center overflow-hidden px-[19px] pt-[30px]">
       {/* Content block — 4062:11957 (title + subtitle, gap 10px) */}
@@ -1105,7 +1117,8 @@ function DeveloperCopilotsMobile({ data }: { data?: any }) {
         <div className="relative flex w-full justify-center">
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
-            className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+            ref={fitRef}
+            className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
             style={{
               backgroundImage:
                 "linear-gradient(106.23deg, rgb(255, 255, 255) 1.35%, rgb(212, 233, 188) 55.16%, rgb(255, 255, 255) 111.67%)",
@@ -1116,7 +1129,7 @@ function DeveloperCopilotsMobile({ data }: { data?: any }) {
         </div>
         {/* Subtitle — 4062:11964 */}
         <p
-          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
         >
           {subtitle}
         </p>
@@ -1154,12 +1167,12 @@ function DeveloperCopilotsMobile({ data }: { data?: any }) {
               {/* Content — title, description, CTA (gap 11px) */}
               <div className="flex w-full flex-col gap-[11px]">
                 <p
-                  className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+                  className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
                 >
                   {title}
                 </p>
                 <p
-                  className={`${interRegular.className} text-[14px] leading-[19.36px] font-normal text-white opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+                  className={`${interRegular.className} text-[14px] leading-[19.36px] font-normal text-white opacity-65 not-italic [word-break:break-word]`}
                 >
                   {description}
                 </p>

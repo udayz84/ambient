@@ -1,5 +1,6 @@
 "use client";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { useFitText } from "../shared/FitText";
 import { useEffect, useRef, useState } from "react";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyExtraBold, gilroyMedium, interRegular } from "../hero/fonts";
@@ -226,6 +227,7 @@ function ProductsUseCasesDesktop({
   primary,
   secondary,
 }: any) {
+  const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <>
       {/* Section title — 2901:2134 */}
@@ -244,6 +246,7 @@ function ProductsUseCasesDesktop({
         >
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
+            ref={fitRef}
             className={`${gilroyMedium.className} absolute m-0 w-[492px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
             style={{
               left: 10,
@@ -580,6 +583,7 @@ function ProductsUseCasesMobile({
   const handlePrev = () => {
     onSelect((activeIdx - 1 + tabs.length) % tabs.length);
   };
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const handleNext = () => {
     onSelect((activeIdx + 1) % tabs.length);
   };
@@ -593,6 +597,7 @@ function ProductsUseCasesMobile({
       <div className="flex flex-col items-center gap-[16px]">
         <TagBadge label="BEST-FIT APPLICATIONS" width={220} centerLabel />
         <h2
+          ref={fitRef}
           className={`${gilroyMedium.className} max-w-full bg-clip-text text-center text-[30px] leading-[34px] font-medium text-transparent not-italic [word-break:break-word]`}
           style={{
             backgroundImage: USECASES_TITLE_GRADIENT,

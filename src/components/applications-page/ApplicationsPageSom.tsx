@@ -1,6 +1,9 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element */
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { useFitText } from "../shared/FitText";
 import { mediaUrl } from "@/lib/strapi";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
@@ -200,6 +203,8 @@ function DiscussCta({ label, href }: { label: string; href: string }) {
 }
 
 export function ApplicationsPageSom({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+  const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const heading = data?.heading || FALLBACK_HEADING;
   const subtitle = data?.subtitle || SUBTITLE;
 
@@ -253,7 +258,8 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
         <div className="flex w-full flex-col items-center gap-[24px]">
           <div className="relative inline-block px-[14px]">
             <h2
-              className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+              ref={fitRef}
+              className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: TITLE_GRADIENT,
                 WebkitBackgroundClip: "text",
@@ -266,7 +272,7 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
             <Corners />
           </div>
           <p
-            className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
             data-node-id="2438:4157"
           >
             {subtitle}
@@ -306,6 +312,7 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
           {/* Title with corner brackets */}
           <div className="relative h-[79px] w-[356px]" data-name="Group 78">
             <h2
+              ref={fitRef2}
               className={`${gilroyMedium.className} absolute inset-0 flex items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage:
@@ -315,7 +322,7 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
               }}
               data-node-id="4062:11668"
             >
-              <span className="w-full [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
+              <span className="w-full [word-break:break-word]">
                 {heading}
               </span>
             </h2>
@@ -356,7 +363,7 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
 
           {/* Subtitle */}
           <p
-            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
           >
             {subtitle}
           </p>

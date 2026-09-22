@@ -55,12 +55,12 @@ export function HeroStat({
           data-name="Content"
         >
           <p
-            className={`${gilroyMedium.className} min-w-full w-[min-content] shrink-0 text-[22px] leading-[28px] font-medium text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+            className={`${gilroyMedium.className} min-w-full w-[min-content] shrink-0 text-[22px] leading-[28px] font-medium text-white [word-break:break-word]`}
           >
             {title}
           </p>
           <p
-            className={`${interRegular.className} shrink-0 text-[12px] leading-[18px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} shrink-0 text-[12px] leading-[18px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word]`}
             style={descriptionWidth ? { width: descriptionWidth } : undefined}
           >
             {description}

@@ -6,6 +6,7 @@ import { TagBadge } from "../hero/TagBadge";
 import { gilroyMedium } from "../hero/fonts";
 import { MeasuredProofCard } from "./MeasuredProofCard";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { useFitText } from "../shared/FitText";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
@@ -70,6 +71,7 @@ export function MeasuredProofMobile({ data }: { data?: any }) {
   const headingLines = (data?.heading || "").split("\n");
   const headingLine1 = headingLines[0] || "";
   const headingLine2Rest = headingLines.slice(1).join("\n") || "";
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
 
   const ctas: any[] = Array.isArray(data?.ctas) ? data.ctas : [];
   const find = (variant: string) =>
@@ -114,7 +116,8 @@ export function MeasuredProofMobile({ data }: { data?: any }) {
 
         <div className="relative flex w-[354px] max-w-full flex-col items-center justify-center py-[7px]">
           <h2
-            className={`${gilroyMedium.className} relative z-10 w-[244px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}
+            ref={fitRef}
+            className={`${gilroyMedium.className} relative z-10 w-[244px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
             style={{
               backgroundImage:
                 "linear-gradient(102.363deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",

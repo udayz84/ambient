@@ -62,7 +62,7 @@ function LeadershipCardMobile({
         <div className="flex flex-col gap-[6px]">
           <div className="flex w-full items-start justify-between">
             <p
-              className={`${gilroyMedium.className} max-w-full text-[26px] leading-[29px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+              className={`${gilroyMedium.className} max-w-full text-[26px] leading-[29px] font-medium text-white not-italic [word-break:break-word]`}
             >
               {member.name}
             </p>
@@ -86,7 +86,7 @@ function LeadershipCardMobile({
           </div>
           {!isAdvisory && member.role ? (
             <p
-              className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-[#39ff14] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+              className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-[#39ff14] not-italic [word-break:break-word]`}
             >
               {member.role}
             </p>

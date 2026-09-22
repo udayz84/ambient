@@ -71,7 +71,7 @@ export function MeasuredProofCard({
       </div>
 
       <p
-        className={`${interRegular.className} absolute left-[30px] text-[18px] leading-[27px] font-normal text-white opacity-90 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden not-italic`}
+        className={`${interRegular.className} absolute left-[30px] text-[18px] leading-[27px] font-normal text-white opacity-90 [word-break:break-word] not-italic`}
         style={{
           bottom: descriptionBottom,
           width: descriptionWidth,

@@ -1,7 +1,10 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element */
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { useFitText } from "../shared/FitText";
 
 const TITLE_GRADIENT =
   "linear-gradient(138.787deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -56,6 +59,7 @@ const CARDS: CardData[] = [
 ];
 
 function LabCard({ data }: { data: CardData }) {
+  const fitRef = useFitText<HTMLParagraphElement>({ maxLines: 2 });
   const image = data.image || FALLBACK_IMAGE;
   return (
     <div
@@ -100,6 +104,7 @@ function LabCard({ data }: { data: CardData }) {
         {/* Content */}
         <div className="absolute left-0 top-[317px] flex w-[333.99px] flex-col gap-[12px] items-start not-italic">
           <p
+            ref={fitRef}
             className={`${gilroyMedium.className} w-[333.991px] shrink-0 text-[32px] leading-[38px] text-white`}
           >
             {data.title}
@@ -131,6 +136,9 @@ function LabCard({ data }: { data: CardData }) {
 }
 
 export function WearablesLabToProduct({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 1 });
+  const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const heading = data?.heading || FALLBACK_HEADING;
   const dataCards: any[] = Array.isArray(data?.cards) ? data.cards : [];
@@ -160,6 +168,7 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
         <div className="flex flex-col items-center gap-[24px]">
           <div className="relative flex flex-col items-center px-[10px]">
             <h2
+              ref={fitRef}
               className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent whitespace-nowrap not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: TITLE_GRADIENT,
@@ -196,6 +205,7 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
         <div className="relative z-10 flex w-[350px] flex-col items-center gap-[10px]">
           <div className="relative h-[79px] w-[356px]">
             <h2
+              ref={fitRef2}
               className={`${gilroyMedium.className} absolute inset-0 flex items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: "linear-gradient(107.4537261117953deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",

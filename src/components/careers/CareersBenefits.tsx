@@ -30,11 +30,11 @@ export function CareersBenefits({
       <CareersFramedTitle
         nodeId="2379:8954"
         frameSrc={titleFrame}
-        frameClassName="top-[1.1px] left-[0.84px] h-[59px] w-[374.32px]"
+        frameClassName="top-[1.1px] left-[0.84px] h-[59px] w-[460px]"
         gradientDeg="112.176deg"
-        textClassName="text-[48px] leading-[1.1] tracking-[-0.96px]"
+        textClassName="text-[48px] leading-[1.1] tracking-[-0.96px] whitespace-nowrap"
         textTop="top-[3.1px]"
-        className="h-[61px] w-[376px] shrink-0"
+        className="h-[61px] w-[462px] shrink-0"
       >
         {heading}
       </CareersFramedTitle>

@@ -1,4 +1,7 @@
+"use client";
+
 import { mediaUrl } from "@/lib/strapi";
+import { useFitText } from "../shared/FitText";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 
@@ -149,6 +152,7 @@ export function usePrototypeData(data?: any) {
 
 export function SomPrototypeTitleDesktop({ data }: { data?: any }) {
   const { heading, cards } = usePrototypeData(data);
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 1 });
   return (
     <section
       className="relative hidden w-full justify-center overflow-hidden bg-black min-[1024px]:flex"
@@ -158,6 +162,7 @@ export function SomPrototypeTitleDesktop({ data }: { data?: any }) {
       <div className="relative flex w-[1204px] flex-col items-center gap-[36px] pt-[40px] pb-[60px]">
         <div className="relative px-[10px]" data-name="Title">
           <h2
+            ref={fitRef}
             className={`${gilroyMedium.className} text-center text-[46px] leading-[49px] font-medium text-white whitespace-nowrap not-italic [word-break:break-word]`}
           >
             {heading}
@@ -184,6 +189,7 @@ export function SomPrototypeTitleDesktop({ data }: { data?: any }) {
 
 export function SomPrototypeTitleMobile({ data }: { data?: any }) {
   const { heading, cards } = usePrototypeData(data);
+  const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black min-[1024px]:hidden"
@@ -202,6 +208,7 @@ export function SomPrototypeTitleMobile({ data }: { data?: any }) {
           <div className="relative flex w-[352px] justify-center py-[3px]" data-name="Title">
             <Corners />
             <h2
+              ref={fitRef}
               className={`${gilroyMedium.className} w-[321px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={MOBILE_TITLE_STYLE}
             >

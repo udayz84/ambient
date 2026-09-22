@@ -1,7 +1,10 @@
+"use client";
+
 import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { CornerDecor } from "../contact/contact-shared";
 import { mediaUrl } from "@/lib/strapi";
+import { useFitText } from "../shared/FitText";
 
 const TITLE_GRADIENT =
   "linear-gradient(117.952deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -163,6 +166,7 @@ function LegacyCard({
   computeSrc: string;
   className?: string;
 }) {
+  const fitRef = useFitText<HTMLParagraphElement>({ maxLines: 2 });
   return (
     <div
       className={`${className} h-[380px] w-[500px] bg-[rgba(128,128,128,0.1)]`}
@@ -177,12 +181,13 @@ function LegacyCard({
           className="absolute top-[8px] right-0 left-0 flex flex-col items-start gap-[8px] border-b border-solid border-[rgba(255,255,255,0.1)] pb-[11px]"
         >
           <p
-            className={`${gilroyMedium.className} w-[279px] text-[32px] leading-[38px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+            ref={fitRef}
+            className={`${gilroyMedium.className} w-[279px] text-[32px] leading-[38px] font-medium text-white not-italic [word-break:break-word]`}
           >
             {label}
           </p>
           <p
-            className={`${interRegular.className} w-full text-[13px] leading-[normal] font-normal text-[#8e8e8e] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+            className={`${interRegular.className} w-full text-[13px] leading-[normal] font-normal text-[#8e8e8e] not-italic [word-break:break-word]`}
           >
             {description}
           </p>
@@ -271,6 +276,7 @@ function ACubeCard({
   statDesc: string;
   className?: string;
 }) {
+  const fitRef = useFitText<HTMLParagraphElement>({ maxLines: 1 });
   return (
     <div
       className={`${className} h-[380px] w-[575px] overflow-clip border border-solid border-[rgba(255,247,247,0.16)] bg-top-left`}
@@ -313,19 +319,20 @@ function ACubeCard({
         className="absolute top-[24px] left-[29px] flex w-[234px] flex-col items-start justify-center gap-[8px] border-b border-solid border-[rgba(255,255,255,0.1)] pb-[11px]"
       >
         <p
+          ref={fitRef}
           className={`${gilroyMedium.className} text-center text-[32px] leading-[38px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word] overflow-hidden text-ellipsis`}
         >
           {label}
         </p>
         <p
-          className={`${interRegular.className} w-full text-[13px] leading-[normal] font-normal text-[#8e8e8e] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+          className={`${interRegular.className} w-full text-[13px] leading-[normal] font-normal text-[#8e8e8e] not-italic [word-break:break-word]`}
         >
           {description}
         </p>
       </div>
 
       <p
-        className={`${gilroySemiBold.className} absolute top-[232.05px] left-[29px] w-[195px] bg-clip-text text-[50px] leading-[1.2] font-semibold text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+        className={`${gilroySemiBold.className} absolute top-[232.05px] left-[29px] w-[195px] bg-clip-text text-[50px] leading-[1.2] font-semibold text-transparent not-italic [word-break:break-word]`}
         style={{
           backgroundImage:
             "linear-gradient(146.757deg, rgb(255, 255, 255) 29.352%, rgba(115, 115, 115, 0.5) 98.158%)",
@@ -336,7 +343,7 @@ function ACubeCard({
         {statValue}
       </p>
       <p
-        className={`${interRegular.className} absolute top-[297.43px] left-[26.1px] w-[197.9px] text-[14px] leading-[18px] font-normal text-[#e2f9da] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+        className={`${interRegular.className} absolute top-[297.43px] left-[26.1px] w-[197.9px] text-[14px] leading-[18px] font-normal text-[#e2f9da] not-italic [word-break:break-word]`}
       >
         {statDesc}
       </p>
@@ -469,6 +476,9 @@ const FALLBACK_SUBTITLE =
   "Bridge the lab and real world. The Sparsh module offers continuous, microwatt intelligence in a 21×21mm size, with a breakout board that snaps off for production.";
 
 export function WearablesParadigm({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 1 });
+  const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const heading = data?.heading || FALLBACK_HEADING;
   const legacy = {
@@ -497,6 +507,7 @@ export function WearablesParadigm({ data }: { data?: any }) {
         <div className="flex flex-col items-center gap-[24px]">
           <div className="relative flex flex-col items-center px-[10px]">
             <h2
+              ref={fitRef}
               className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent whitespace-nowrap not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: TITLE_GRADIENT,
@@ -547,6 +558,7 @@ export function WearablesParadigm({ data }: { data?: any }) {
         <div className="relative z-10 flex flex-col items-center gap-[10px]">
           <div className="relative h-[80px] w-[356px]">
             <h2
+              ref={fitRef2}
               className={`${gilroyMedium.className} absolute inset-0 flex items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: "linear-gradient(107.4537261117953deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",

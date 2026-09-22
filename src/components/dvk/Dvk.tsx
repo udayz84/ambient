@@ -156,7 +156,7 @@ function DvkHeroMobile({ data }: { data?: any }) {
         >
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h1
-            className={`${gilroyMedium.className} absolute top-[7px] left-1/2 m-0 w-[321px] max-w-[calc(100%-32px)] -translate-x-1/2 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+            className={`${gilroyMedium.className} absolute top-[7px] left-1/2 m-0 w-[321px] max-w-[calc(100%-32px)] -translate-x-1/2 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
             style={{
               backgroundImage: HERO_TITLE_GRADIENT_MOBILE,
               WebkitBackgroundClip: "text",
@@ -168,7 +168,7 @@ function DvkHeroMobile({ data }: { data?: any }) {
           </h1>
         </div>
         <p
-          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
           data-node-id="4059:10014"
         >
           {subtitle}
@@ -263,7 +263,7 @@ function DvkHardwareStackMobile({ data }: { data?: any }) {
           <div className="relative h-[112.93px] w-full" data-node-id="4059:10042">
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             <h2
-              className={`${gilroyMedium.className} absolute top-[4.93px] left-[16px] m-0 w-[321px] max-w-[calc(100%-32px)] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+              className={`${gilroyMedium.className} absolute top-[4.93px] left-[16px] m-0 w-[321px] max-w-[calc(100%-32px)] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: HERO_TITLE_GRADIENT_MOBILE,
                 WebkitBackgroundClip: "text",
@@ -275,7 +275,7 @@ function DvkHardwareStackMobile({ data }: { data?: any }) {
             </h2>
           </div>
           <p
-            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
             data-node-id="4059:10048"
           >
             {subtitle}
@@ -295,7 +295,7 @@ function DvkHardwareStackMobile({ data }: { data?: any }) {
           >
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             <p
-              className={`${gilroyMedium.className} w-full text-center text-[18px] leading-[24px] text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+              className={`${gilroyMedium.className} w-full text-center text-[18px] leading-[24px] text-white not-italic [word-break:break-word]`}
               data-node-id="4062:10674"
             >
               {label}
@@ -476,7 +476,7 @@ function DvkDemosMobile({ data }: { data?: any }) {
           >
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             <h2
-              className={`${gilroyMedium.className} absolute top-[4.5px] left-1/2 m-0 w-[268px] max-w-full -translate-x-1/2 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+              className={`${gilroyMedium.className} absolute top-[4.5px] left-1/2 m-0 w-[268px] max-w-full -translate-x-1/2 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: DEMOS_TITLE_GRADIENT_MOBILE,
                 WebkitBackgroundClip: "text",
@@ -488,7 +488,7 @@ function DvkDemosMobile({ data }: { data?: any }) {
             </h2>
           </div>
           <p
-            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
             data-node-id="4059:10221"
           >
             {subtitle}
@@ -631,7 +631,7 @@ function DvkModelForgeMobile({ data }: { data?: any }) {
           >
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             <h2
-              className={`${gilroyMedium.className} absolute top-[4.99px] left-1/2 m-0 w-[268px] max-w-full -translate-x-1/2 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+              className={`${gilroyMedium.className} absolute top-[4.99px] left-1/2 m-0 w-[268px] max-w-full -translate-x-1/2 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: MODELFORGE_TITLE_GRADIENT_MOBILE,
                 WebkitBackgroundClip: "text",
@@ -643,7 +643,7 @@ function DvkModelForgeMobile({ data }: { data?: any }) {
             </h2>
           </div>
           <p
-            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
             data-node-id="4062:10914"
           >
             {subtitle}

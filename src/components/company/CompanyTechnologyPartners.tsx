@@ -51,7 +51,7 @@ export function CompanyTechnologyPartners({ data }: CompanyTechnologyPartnersPro
       aria-label="Technology partners"
     >
       <p
-        className={`${gilroySemiBold.className} absolute top-0 left-0 max-w-full bg-clip-text text-[56px] leading-[60px] font-semibold tracking-[-1.12px] text-transparent opacity-90 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+        className={`${gilroySemiBold.className} absolute top-0 left-0 max-w-full bg-clip-text text-[56px] leading-[60px] font-semibold tracking-[-1.12px] text-transparent opacity-90 not-italic [word-break:break-word]`}
         style={{ backgroundImage: TECHNOLOGY_PARTNERS_TITLE_GRADIENT }}
         data-node-id="2379:4670"
       >

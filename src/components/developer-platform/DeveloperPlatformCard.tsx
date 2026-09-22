@@ -101,7 +101,7 @@ export function DeveloperPlatformCard({
       ) : null}
 
       <p
-        className={`${interRegular.className} absolute translate-y-full font-normal text-[#0a3315] opacity-90 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+        className={`${interRegular.className} absolute translate-y-full font-normal text-[#0a3315] opacity-90 not-italic [word-break:break-word]`}
         style={{
           left: `${bodyLeft}px`,
           bottom: `${bodyBottomOffset}px`,
@@ -115,7 +115,7 @@ export function DeveloperPlatformCard({
 
       <Link
         href={href}
-        className={`group ${gilroyMedium.className} absolute top-[30px] max-w-full font-medium text-[22px] leading-[28px] text-[#0a3315] not-italic underline-offset-[6px] hover:underline [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden ${titleWidth ? "" : "whitespace-nowrap"}`}
+        className={`group ${gilroyMedium.className} absolute top-[30px] max-w-full font-medium text-[22px] leading-[28px] text-[#0a3315] not-italic underline-offset-[6px] hover:underline [word-break:break-word] ${titleWidth ? "" : "whitespace-nowrap"}`}
         style={{ left: `${titleLeft}px`, width: titleWidth ? `${titleWidth}px` : undefined }}
       >
         {title}

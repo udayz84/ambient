@@ -2,6 +2,7 @@
 
 import { Fragment } from "react";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
+import { useFitText } from "../shared/FitText";
 import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
 import { dmMono, gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
@@ -390,6 +391,7 @@ function MenuChip({ label }: { label: string }) {
 }
 
 function GradientTitleBlock({ heading }: { heading: string }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
     <div
       className="flex flex-col items-center px-[10px] relative shrink-0"
@@ -397,6 +399,7 @@ function GradientTitleBlock({ heading }: { heading: string }) {
       data-name="Title"
     >
       <h2
+        ref={fitRef}
         className={`${gilroyMedium.className} [word-break:break-word] bg-clip-text m-0 leading-[49px] not-italic relative shrink-0 text-[46px] text-center text-transparent whitespace-nowrap`}
         style={{
           backgroundImage: TITLE_GRADIENT,
@@ -573,6 +576,7 @@ function SpecCardView({ card }: { card: RenderCard }) {
 export function ProductsFullPicture({ data }: { data?: any }) {
   const heading = data?.heading || FALLBACK_HEADING;
   const menuLabel = data?.menu_text || FALLBACK_MENU;
+  const aurora = mediaUrl(data?.background_image) || AURORA;
 
   const strapiCallouts: Record<string, { iconUrl: string | null; items: string[] }> = {};
   if (Array.isArray(data?.callouts)) {
@@ -639,7 +643,7 @@ export function ProductsFullPicture({ data }: { data?: any }) {
                 <img loading="lazy" decoding="async"
                   alt=""
                   className="absolute inset-0 w-full h-full pointer-events-none"
-                  src={AURORA}
+                  src={aurora}
                   style={{ objectFit: "fill" }}
                   aria-hidden
                 />
@@ -659,7 +663,7 @@ export function ProductsFullPicture({ data }: { data?: any }) {
                   <img loading="lazy" decoding="async"
                     alt=""
                     className="absolute w-full h-full"
-                    src={AURORA}
+                    src={aurora}
                     style={{ objectFit: "fill" }}
                     aria-hidden
                   />

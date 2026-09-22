@@ -985,7 +985,7 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
             className="text-center"
           >
             {headingLines.map((line: string, i: number) => (
-              <p key={`title-${i}`} className="leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
+              <p key={`title-${i}`} className="leading-[49px] [word-break:break-word]">
                 {line}
               </p>
             ))}

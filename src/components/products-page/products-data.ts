@@ -756,15 +756,6 @@ export type BenchCard = {
 
 export const BENCH_CARDS: BenchCard[] = [
   {
-    nodeId: "2918:1477",
-    chipLabel: "Evaluate",
-    title: "Cranium DVK",
-    description: "A complete dev kit with onboard sensors, camera, mics, and pre-loaded demos. Measure the power yourself, day one.",
-    cta: "View Dev Kit",
-    ctaWidth: 157,
-    image: "/products page/Container1.webp",
-  },
-  {
     nodeId: "2918:1518",
     chipLabel: "Integrate",
     title: "Sparsh SOM",
@@ -772,6 +763,15 @@ export const BENCH_CARDS: BenchCard[] = [
     cta: "View SOMs",
     ctaWidth: 158,
     image: "/products page/Container2.webp",
+  },
+  {
+    nodeId: "2918:1477",
+    chipLabel: "Evaluate",
+    title: "Cranium DVK",
+    description: "A complete dev kit with onboard sensors, camera, mics, and pre-loaded demos. Measure the power yourself, day one.",
+    cta: "View Dev Kit",
+    ctaWidth: 157,
+    image: "/products page/Container1.webp",
   },
   {
     nodeId: "2918:1497",

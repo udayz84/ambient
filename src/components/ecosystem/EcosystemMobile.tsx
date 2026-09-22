@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { useFitText } from "../shared/FitText";
 
 import { EcosystemPartnerRow, DEV_LOGO_STAT_NODES } from "./EcosystemPartnerRow";
 import { SILICON_PARTNER_ROW, DEVELOPMENT_PARTNER_ROW } from "./ecosystem-data";
@@ -53,6 +56,7 @@ export function EcosystemMobile({ data }: { data?: any }) {
   const cta = data?.cta || {};
   const ctaLabel = cta.label || "";
   const ctaHref = cta.href || "";
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
     <div className="relative flex flex-col items-center py-[48px]">
       <div className="relative inline-flex flex-col items-center justify-center w-fit max-w-[350px] px-[16px] py-[12px]">
@@ -86,7 +90,8 @@ export function EcosystemMobile({ data }: { data?: any }) {
         </div>
 
         <h2
-          className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic pb-[10px] -mb-[10px]`}
+          ref={fitRef}
+          className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic pb-[10px] -mb-[10px]`}
           style={{
             backgroundImage:
               "linear-gradient(107.454deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -97,7 +102,7 @@ export function EcosystemMobile({ data }: { data?: any }) {
       </div>
 
       <p
-        className={`${interRegular.className} mt-[24px] w-[356px] max-w-[calc(100vw-48px)] text-center text-[14px] leading-[22px] font-normal text-white opacity-80 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+        className={`${interRegular.className} mt-[24px] w-[356px] max-w-[calc(100vw-48px)] text-center text-[14px] leading-[22px] font-normal text-white opacity-80 not-italic [word-break:break-word]`}
       >
         {subtitle}
       </p>

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { dmMono, gilroyMedium, interBold, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
+import { useFitText } from "../shared/FitText";
 
 /* =========================================================================
    CONSTANTS
@@ -212,6 +213,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
   const heading = data?.heading || DEFAULT_HEADING;
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
   const tagText = data?.tag?.text || DEFAULT_TAG;
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
 
   const mergedStages = STAGES.map((stage, i) => {
     const tabData: Record<string, unknown> | undefined = data?.tabs?.[i];
@@ -336,13 +338,14 @@ export function DeveloperPipeline({ data }: { data?: any }) {
           style={{ left: -0.37, top: 6, width: 650 }}
         >
           <h2
-            className={`${gilroyMedium.className} bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+            ref={fitRef}
+            className={`${gilroyMedium.className} bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
             style={{ backgroundImage: PIPELINE_TITLE_GRADIENT }}
           >
             {heading}
           </h2>
           <p
-            className={`${interRegular.className} text-[14px] leading-[21px] text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} text-[14px] leading-[21px] text-[#f0f0f0] not-italic [word-break:break-word]`}
           >
             {subtitle}
           </p>
@@ -435,7 +438,7 @@ export function StageCard({
       {/* Label + subtitle */}
       <div className="relative z-10 flex w-full flex-col items-center gap-[6px] text-center">
         <p
-          className={`${gilroyMedium.className} text-[22px] leading-[28px] text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+          className={`${gilroyMedium.className} text-[22px] leading-[28px] text-white [word-break:break-word]`}
         >
           {stage.label}
         </p>

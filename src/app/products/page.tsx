@@ -51,18 +51,22 @@ export default async function ProductsPage() {
   try {
     data = await getSingleType<any>("products-page", [
       { section: "hero", fields: ["chipset_image", "chipset_image_mobile"], nested: ["tags"] },
-      { section: "features", nested: ["feature_cards"] },
-      { section: "always_on", nested: ["stats"] },
+      { section: "features", fields: ["background_image"], nested: ["feature_cards"] },
+      {
+        section: "always_on",
+        fields: ["bg_surge_image", "bg_subconscious_image", "ai_core_icon", "host_cpu_image"],
+        nested: ["stats"],
+      },
       { section: "use_cases", nested: ["tabs"] },
       {
         section: "measured",
-        fields: ["tag", "primary_button", "secondary_button"],
+        fields: ["tag", "background_image", "primary_button", "secondary_button"],
         nested: ["cards"],
       },
       { section: "architecture", fields: ["image"], nested: ["stats"] },
       { section: "modelforge", nested: ["steps", "subfeatures"] },
-      "bench_to_volume",
-      { section: "full_picture", nested: ["callouts"] },
+      { section: "bench_to_volume", nested: ["cards"] },
+      { section: "full_picture", fields: ["background_image"], nested: ["callouts"] },
       "start_building",
       "sticky_nav",
       "seo",

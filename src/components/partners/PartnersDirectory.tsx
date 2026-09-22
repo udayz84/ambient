@@ -97,10 +97,10 @@ function PartnerCard({ partner }: { partner: Partner }) {
           )}
         </span>
         <div className="flex min-w-0 flex-1 flex-col gap-[6px]">
-          <h3 className={`${gilroyMedium.className} w-full text-[20px] leading-[26px] font-medium text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}>
+          <h3 className={`${gilroyMedium.className} w-full text-[20px] leading-[26px] font-medium text-white [word-break:break-word] not-italic`}>
             {partner.name}
           </h3>
-          <p className={`${interRegular.className} w-full text-[13px] leading-[19.5px] font-normal text-[#a4a4a4] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}>
+          <p className={`${interRegular.className} w-full text-[13px] leading-[19.5px] font-normal text-[#a4a4a4] [word-break:break-word] not-italic`}>
             {partner.oneLiner}
           </p>
         </div>

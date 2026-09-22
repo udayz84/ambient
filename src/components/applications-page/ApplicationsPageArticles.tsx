@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { useFitText } from "../shared/FitText";
 import { mediaUrl } from "@/lib/strapi";
 
 const TITLE_GRADIENT =
@@ -105,10 +106,12 @@ const ARTICLES: Article[] = [
 ];
 
 function SectionTitle({ heading }: { heading: string }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
     <div className="relative inline-block px-[14px]">
       <h2
-        className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+        ref={fitRef}
+        className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
         style={{
           backgroundImage: TITLE_GRADIENT,
           WebkitBackgroundClip: "text",
@@ -152,12 +155,12 @@ function ArticleCard({ article }: { article: Article }) {
       {/* News section */}
       <div className="flex w-full flex-col items-center gap-[10px] text-center">
         <p
-          className={`${gilroyMedium.className} w-full text-[20.211px] leading-[28.295px] tracking-[-0.4539px] text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+          className={`${gilroyMedium.className} w-full text-[20.211px] leading-[28.295px] tracking-[-0.4539px] text-white [word-break:break-word]`}
         >
           {article.title}
         </p>
         <p
-          className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+          className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word]`}
         >
           {article.body}
         </p>
@@ -180,6 +183,7 @@ function ArticleCard({ article }: { article: Article }) {
 }
 
 export function ApplicationsPageArticles({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const scrollRef = useRef<HTMLDivElement>(null);
   
   const scrollLeft = () => {
@@ -249,6 +253,7 @@ export function ApplicationsPageArticles({ data }: { data?: any }) {
         {/* Title with corner brackets (node 4032:14134) */}
         <div className="relative z-10 mt-[36.5px] h-[79px] w-[353px]" data-name="Group 78">
           <h2
+            ref={fitRef}
             className={`${gilroyMedium.className} absolute inset-0 flex items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
             style={{
               backgroundImage:
@@ -258,7 +263,7 @@ export function ApplicationsPageArticles({ data }: { data?: any }) {
             }}
             data-node-id="4032:14135"
           >
-            <span className="w-full [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
+            <span className="w-full [word-break:break-word]">
               {heading}
             </span>
           </h2>

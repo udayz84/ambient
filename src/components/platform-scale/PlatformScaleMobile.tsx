@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interMedium, interRegular } from "../hero/fonts";
+import { useFitText } from "../shared/FitText";
 import {
   DEFAULT_GPX_INDEX,
   type GpxProduct,
@@ -130,6 +131,7 @@ const MOBILE_SLOT: Record<-2 | -1 | 0 | 1 | 2, MobileSlot> = {
 };
 
 export function PlatformScaleMobile({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const products: GpxProduct[] =
     Array.isArray(data?.products)
       ? data.products.map((p: any) => ({
@@ -224,7 +226,8 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
             </div>
 
             <h2
-              className={`${gilroyMedium.className} relative z-10 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}
+              ref={fitRef}
+              className={`${gilroyMedium.className} relative z-10 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
               style={{
                 backgroundImage:
                   "linear-gradient(100.945deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -234,7 +237,7 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
             </h2>
           </div>
           <p
-            className={`${interRegular.className} mt-[16px] max-w-[340px] px-[20px] text-center text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} mt-[16px] max-w-[340px] px-[20px] text-center text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
           >
             {subtitle}
           </p>
@@ -378,7 +381,7 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
             {activeProduct.label}
           </p>
           <p
-            className={`${interRegular.className} max-w-[340px] text-center text-[14px] leading-[1.4] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} max-w-[340px] text-center text-[14px] leading-[1.4] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
           >
             {activeProduct.description}
           </p>

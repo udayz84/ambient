@@ -6,6 +6,7 @@ import { mediaUrl } from "@/lib/strapi";
 import { dmMono, gilroyMedium, gilroySemiBold, interLight, interRegular, interSemiBold } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { useFitText } from "../shared/FitText";
 import { ContactBookingPopup } from "./ContactBookingPopup";
 import { ContactSuccessPopup } from "./ContactSuccessPopup";
 
@@ -25,8 +26,10 @@ function SectionTitle({
   deg: string;
   className?: string;
 }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
     <h2
+      ref={fitRef}
       className={`${gilroyMedium.className} max-w-[327px] bg-clip-text text-center text-[28px] leading-[34px] font-medium text-transparent [word-break:break-word] not-italic ${className}`}
       style={{ backgroundImage: gradient(deg) }}
     >
@@ -123,6 +126,8 @@ function SectionWrap({
 
 /* ---------------------------------- HERO ---------------------------------- */
 function ContactHeroMobile({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({});
+
   const heroData = data?.hero;
   const resourcesData = data?.resources;
   const bg = mediaUrl(heroData?.mobile_background_image) || mediaUrl(heroData?.background_image);
@@ -173,7 +178,8 @@ function ContactHeroMobile({ data }: { data?: any }) {
           >
             <Corners />
             <h1
-              className={`${gilroyMedium.className} w-[241.258px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}
+              ref={fitRef}
+              className={`${gilroyMedium.className} w-[241.258px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
               style={{ backgroundImage: "linear-gradient(102.228deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)" }}
               data-node-id="3229:8705"
             >
@@ -182,7 +188,7 @@ function ContactHeroMobile({ data }: { data?: any }) {
             </h1>
           </div>
           <p
-            className={`${interRegular.className} w-[308px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} w-[308px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 not-italic [word-break:break-word]`}
             data-node-id="3229:7787"
           >
             {subtitle}
@@ -198,7 +204,7 @@ function ContactHeroMobile({ data }: { data?: any }) {
         >
           <Corners />
           <p
-            className={`${gilroyMedium.className} w-full text-center text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+            className={`${gilroyMedium.className} w-full text-center text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
             data-node-id="3229:8716"
           >
             {heading}
@@ -243,10 +249,10 @@ function LocationCard({ title, address, iconPosition }: { title: string; address
       </div>
       {/* Title + address */}
       <div className={`flex flex-col items-start ${isRight ? "order-1 w-[214px]" : "order-2 w-[242px]"}`}>
-        <p className={`${gilroyMedium.className} text-[18px] leading-[26.545px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}>
+        <p className={`${gilroyMedium.className} text-[18px] leading-[26.545px] font-medium text-white not-italic [word-break:break-word]`}>
           {title}
         </p>
-        <div className={`${interRegular.className} text-[14px] leading-[18px] font-normal text-[#a4a4a4] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}>
+        <div className={`${interRegular.className} text-[14px] leading-[18px] font-normal text-[#a4a4a4] not-italic [word-break:break-word]`}>
           {address}
         </div>
       </div>
@@ -323,6 +329,8 @@ const MAP_LOCATIONS = [
 ];
 
 function ContactMapMobile({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+
   const globeImage = mediaUrl(data?.globe_image);
   const mapBase = mediaUrl(data?.map_base);
   const headingText = data?.heading || "";
@@ -378,7 +386,8 @@ function ContactMapMobile({ data }: { data?: any }) {
           <div className="relative flex w-[350px] items-center justify-center py-[7px]">
             <Corners />
             <h2
-              className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}
+              ref={fitRef}
+              className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
               style={{
                 backgroundImage: "linear-gradient(107.454deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
                 WebkitBackgroundClip: "text",
@@ -389,7 +398,7 @@ function ContactMapMobile({ data }: { data?: any }) {
               {headingLines[1] && (<><br />{headingLines[1]}</>)}
             </h2>
           </div>
-          <p className={`${interRegular.className} w-[316px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}>
+          <p className={`${interRegular.className} w-[316px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
             {subtitle}
           </p>
         </div>
@@ -433,6 +442,8 @@ const SCHEDULE_CARDS = [
 ];
 
 function ContactScheduleMobile({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+
   const [bookingCard, setBookingCard] = useState<number | null>(null);
   const [bookedLabel, setBookedLabel] = useState("");
   const heading = data?.heading || "";
@@ -461,13 +472,14 @@ function ContactScheduleMobile({ data }: { data?: any }) {
         <div className="relative flex w-full items-center justify-center py-[7px]">
           <Corners />
           <h2
-            className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}
+            ref={fitRef}
+            className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
             style={{ backgroundImage: "linear-gradient(107.454deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)" }}
           >
             {heading}
           </h2>
         </div>
-        <p className={`${interRegular.className} w-[min-content] min-w-full text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}>
+        <p className={`${interRegular.className} w-[min-content] min-w-full text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
           {subtitle}
         </p>
       </div>
@@ -515,10 +527,10 @@ function ContactScheduleMobile({ data }: { data?: any }) {
                 </div>
                 
                 <div className="flex flex-col items-start gap-[10px] w-full pointer-events-auto">
-                  <h3 className={`${gilroyMedium.className} text-[16px] leading-[18px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}>
+                  <h3 className={`${gilroyMedium.className} text-[16px] leading-[18px] font-medium text-white not-italic [word-break:break-word]`}>
                     {card.title}
                   </h3>
-                  <p className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}>
+                  <p className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}>
                     {card.description}
                   </p>
                 </div>
@@ -710,7 +722,7 @@ function ContactFormMobile({ data }: { data?: any }) {
     <SectionWrap aria-label="Contact form" className="!pb-[20px] relative z-10 -mb-[266px]">
       <div className="flex flex-col items-center gap-[12px] relative z-10">
         <SectionTitle deg="119.522deg">{heading}</SectionTitle>
-        <p className={`${interRegular.className} max-w-[327px] text-center text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-70 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}>
+        <p className={`${interRegular.className} max-w-[327px] text-center text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-70 not-italic [word-break:break-word]`}>
           {subtitle}
         </p>
       </div>
@@ -745,10 +757,10 @@ function ContactFormMobile({ data }: { data?: any }) {
                 ) : null}
               </div>
               <div className="flex flex-1 flex-col gap-[4px]">
-                <p className={`${gilroyMedium.className} text-[16px] leading-[20px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}>
+                <p className={`${gilroyMedium.className} text-[16px] leading-[20px] font-medium text-white not-italic [word-break:break-word]`}>
                   {track.title}
                 </p>
-                <p className={`${interRegular.className} text-[12px] leading-[18px] font-normal text-[#a4a4a4] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}>
+                <p className={`${interRegular.className} text-[12px] leading-[18px] font-normal text-[#a4a4a4] not-italic [word-break:break-word]`}>
                   {track.description}
                 </p>
               </div>
@@ -768,14 +780,14 @@ function ContactFormMobile({ data }: { data?: any }) {
       {/* Form */}
       <div className="relative mt-[48px] w-full overflow-clip border-[1.5px] border-solid border-[rgba(83,216,36,0.25)] bg-transparent p-[20px] z-10">
         <Corners />
-        <p className={`${gilroyMedium.className} mb-[16px] text-[20px] leading-[26px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}>
+        <p className={`${gilroyMedium.className} mb-[16px] text-[20px] leading-[26px] font-medium text-white not-italic [word-break:break-word]`}>
           {messageHeading}
         </p>
 
         <div className="flex flex-col gap-[14px]">
           {mergedFields.map((field, index) => (
             <div key={`field-${index}`} className="flex flex-col gap-[6px]">
-              <label className={`${interLight.className} text-[11px] leading-[15px] font-light text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}>
+              <label className={`${interLight.className} text-[11px] leading-[15px] font-light text-white not-italic [word-break:break-word]`}>
                 {field.label}
               </label>
               <input

@@ -127,7 +127,7 @@ function ProductsMegaMenu({
                     key={link.label}
                     href={link.href}
                     onClick={onNavigate}
-                    className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#ccc] opacity-90 transition-opacity [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden hover:opacity-100`}
+                    className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#ccc] opacity-90 transition-opacity [word-break:break-word] hover:opacity-100`}
                   >
                     {link.label}
                   </Link>
@@ -135,7 +135,7 @@ function ProductsMegaMenu({
               </div>
             ) : null}
             {column.description ? (
-              <p className={`${interRegular.className} w-full text-[12px] leading-[18px] font-normal text-[#ccc] opacity-90 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}>
+              <p className={`${interRegular.className} w-full text-[12px] leading-[18px] font-normal text-[#ccc] opacity-90 [word-break:break-word]`}>
                 {column.description}
               </p>
             ) : null}

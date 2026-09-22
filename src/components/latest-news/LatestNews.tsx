@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
@@ -11,6 +13,7 @@ import {
   type LatestNewsArticle,
 } from "./latest-news-data";
 import { LatestNewsMobile } from "./LatestNewsMobile";
+import { useFitText } from "../shared/FitText";
 
 const cornerLeft = "/hero/corner-tag-1.svg";
 const cornerRight = "/hero/corner-tag-2.svg";
@@ -64,6 +67,7 @@ export function LatestNews({ data }: { data?: any }) {
   const ctaLabel = data?.cta_label || "";
   const ctaHref = data?.cta_href || "";
   const cards = resolveCards(data);
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
     <section
       className="relative mt-[150px] flex w-full justify-center overflow-x-clip bg-black max-[1023px]:mt-[24px]"
@@ -79,7 +83,8 @@ export function LatestNews({ data }: { data?: any }) {
           >
             <div className="relative inline-grid grid-cols-[max-content] grid-rows-[max-content] place-items-start leading-[0]">
               <h2
-                className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[14.5px] ml-[86.11px] max-w-[486px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-[transparent] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+                ref={fitRef}
+                className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[14.5px] ml-[86.11px] max-w-[486px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-[transparent] not-italic [word-break:break-word]`}
                 style={{
                   backgroundImage:
                     "linear-gradient(119.407deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -117,7 +122,7 @@ export function LatestNews({ data }: { data?: any }) {
               />
 
               <p
-                className={`${interRegular.className} relative col-start-1 row-start-1 mt-[94px] ml-0 w-[600px] text-center text-[18px] leading-[27px] font-normal text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+                className={`${interRegular.className} relative col-start-1 row-start-1 mt-[94px] ml-0 w-[600px] text-center text-[18px] leading-[27px] font-normal text-white not-italic [word-break:break-word]`}
                 data-node-id="2379:1290"
               >
                 {subtitle}

@@ -157,7 +157,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
             data-node-id="2438:5334"
           >
             {primaryTitleLines.map((line: string, i: number) => (
-              <p key={i} className="leading-[38px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
+              <p key={i} className="leading-[38px] [word-break:break-word]">
                 {line}
               </p>
             ))}
@@ -268,13 +268,13 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
               className={`${gilroyMedium.className} w-[200.641px] text-center text-[28px] leading-[33.725px] font-medium text-white not-italic [word-break:break-word]`}
             >
               {primaryTitleLines.map((line: string, i: number) => (
-                <span key={i} className="block [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
+                <span key={i} className="block [word-break:break-word]">
                   {line}
                 </span>
               ))}
             </h3>
             <p
-              className={`${interRegular.className} w-[296.416px] text-center text-[14px] leading-[23.075px] font-normal tracking-[-0.2773px] text-[#99a1af] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+              className={`${interRegular.className} w-[296.416px] text-center text-[14px] leading-[23.075px] font-normal tracking-[-0.2773px] text-[#99a1af] not-italic [word-break:break-word]`}
             >
               {description}
             </p>

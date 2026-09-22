@@ -73,7 +73,7 @@ function LeadershipNameRow({
     >
       <div className="flex w-full items-start justify-between">
         <p
-          className={`${gilroyMedium.className} min-w-0 font-medium not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden ${spec.nameSize} ${spec.nameColor}`}
+          className={`${gilroyMedium.className} min-w-0 font-medium not-italic [word-break:break-word] ${spec.nameSize} ${spec.nameColor}`}
           data-node-id={nameNodeId}
         >
           {name}
@@ -100,7 +100,7 @@ function LeadershipNameRow({
       </div>
       {showRole && role ? (
         <p
-          className={`${interRegular.className} text-[18px] leading-[27px] font-normal not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden ${spec.roleColor}`}
+          className={`${interRegular.className} text-[18px] leading-[27px] font-normal not-italic [word-break:break-word] ${spec.roleColor}`}
           data-node-id="2280:12313"
         >
           {role}
@@ -182,7 +182,7 @@ function LeadershipInteractivePanel({
               {bioParagraphs.map((paragraph, index) => (
                 <p
                   key={index}
-                  className={`${interRegular.className} w-full text-left font-normal not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:6] overflow-hidden ${spec.bioTypography} ${spec.bioColor}`}
+                  className={`${interRegular.className} w-full text-left font-normal not-italic [word-break:break-word] ${spec.bioTypography} ${spec.bioColor}`}
                 >
                   {paragraph}
                 </p>
@@ -262,14 +262,14 @@ function PersonFooter({
         className={`min-w-0 flex-1 ${spec.showRole && role ? "flex flex-col gap-[2px]" : ""}`}
       >
         <p
-          className={`${gilroyMedium.className} font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden ${spec.nameSize}`}
+          className={`${gilroyMedium.className} font-medium text-white not-italic [word-break:break-word] ${spec.nameSize}`}
           data-node-id={nameNodeId}
         >
           {name}
         </p>
         {spec.showRole && role ? (
           <p
-            className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+            className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
           >
             {role}
           </p>

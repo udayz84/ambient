@@ -12,6 +12,7 @@ import {
 } from "./developer-data";
 import { mediaUrl } from "@/lib/strapi";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { useFitText } from "../shared/FitText";
 
 const DEFAULT_HEADING = "From bench validation\nto volume production.";
 const DEFAULT_SUBTITLE =
@@ -32,6 +33,7 @@ export function DeveloperModulesSection({ data }: { data?: any }) {
     data?.modules && Array.isArray(data.modules) && data.modules.length > 0
       ? data.modules
       : DEVELOPER_MODULES;
+  const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <div
       className="absolute flex flex-col items-center gap-[36px]"
@@ -46,6 +48,7 @@ export function DeveloperModulesSection({ data }: { data?: any }) {
         <div className="relative px-[10px]" data-node-id="2438:4590">
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
+            ref={fitRef}
             className={`${gilroyMedium.className} text-center text-[46px] leading-[49px] font-medium text-white not-italic`}
           >
             {headingLines.map((line: string, i: number) => (
@@ -57,7 +60,7 @@ export function DeveloperModulesSection({ data }: { data?: any }) {
         </div>
         {/* Description — 2438:4590 (subtitle) */}
         <p
-          className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+          className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65 [word-break:break-word]`}
         >
           {subtitle}
         </p>
@@ -117,12 +120,12 @@ function ModuleCard({
       <div className="flex w-full flex-col items-start gap-[20px]">
         <div className="flex w-full flex-col gap-[10px]">
           <p
-            className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}
+            className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
           >
             {title}
           </p>
           <p
-            className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:4] overflow-hidden`}
+            className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
           >
             {description}
           </p>
@@ -163,16 +166,6 @@ function ModuleCta({
       <span className="relative not-italic text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white">
         {children}
       </span>
-      {arrow ? (
-        <span className="relative size-[6px] shrink-0" aria-hidden>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img loading="lazy" decoding="async"
-            alt=""
-            src="/developer/cta-arrow.svg"
-            className="absolute inset-0 size-full max-w-none"
-          />
-        </span>
-      ) : null}
       <GreenCtaCorners />
     </a>
   );

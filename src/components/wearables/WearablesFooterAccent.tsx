@@ -1,7 +1,10 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element */
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { useFitText } from "../shared/FitText";
 
 const SHAPE = "/Rectangle 1618873545.png";
 
@@ -69,6 +72,7 @@ function TitleFrameCorners() {
 }
 
 function CtaPanel({ data }: { data: PanelData }) {
+  const fitRef = useFitText<HTMLParagraphElement>({ maxLines: 2 });
   return (
     <div className="relative h-[320px] w-[558px] shrink-0">
       {/* Shape background */}
@@ -86,6 +90,7 @@ function CtaPanel({ data }: { data: PanelData }) {
           {/* Title with frame */}
           <div className="relative h-[108px] w-full">
             <p
+              ref={fitRef}
               className={`${gilroyMedium.className} absolute top-[7.03px] left-1/2 w-[473.877px] -translate-x-1/2 bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: TITLE_GRADIENT,

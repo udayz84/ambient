@@ -4,6 +4,7 @@
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { gilroyBold, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { useFitText } from "../shared/FitText";
 import { TagBadge } from "../hero/TagBadge";
 import { mediaUrl } from "@/lib/strapi";
 
@@ -107,7 +108,7 @@ function WinCard({ label, stat, statLabel, visual, body }: WinCardProps) {
       <div className="absolute left-[20.5px] top-[22.5px] flex items-center gap-[12px]">
         <LabelTile />
         <p
-          className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-[#f0f0f0] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+          className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-[#f0f0f0] [word-break:break-word]`}
         >
           {label}
         </p>
@@ -127,13 +128,13 @@ function WinCard({ label, stat, statLabel, visual, body }: WinCardProps) {
             {stat}
           </p>
           <p
-            className={`${gilroyMedium.className} text-[26px] leading-[29px] uppercase text-[#c5f3b5] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+            className={`${gilroyMedium.className} text-[26px] leading-[29px] uppercase text-[#c5f3b5] [word-break:break-word]`}
           >
             {statLabel}
           </p>
         </div>
         <p
-          className={`${interRegular.className} text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+          className={`${interRegular.className} text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word]`}
         >
           {body}
         </p>
@@ -161,7 +162,7 @@ function WinCardMobile({ label, stat, statLabel, mobileImg, body }: { label: str
       {/* Label */}
       <div className="absolute left-[17.58px] top-[17.58px] z-10 flex items-center gap-[12px]">
         <LabelTile />
-        <p className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-[#f0f0f0] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}>{label}</p>
+        <p className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-[#f0f0f0] [word-break:break-word]`}>{label}</p>
       </div>
 
       {/* Stats */}
@@ -173,10 +174,10 @@ function WinCardMobile({ label, stat, statLabel, mobileImg, body }: { label: str
           >
             {stat}
           </p>
-          <p className={`${gilroyMedium.className} text-[22px] leading-[24.167px] uppercase text-[#c5f3b5] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}>{statLabel}</p>
+          <p className={`${gilroyMedium.className} text-[22px] leading-[24.167px] uppercase text-[#c5f3b5] [word-break:break-word]`}>{statLabel}</p>
         </div>
         <div className="flex flex-col gap-[11.667px]">
-          <p className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}>{body}</p>
+          <p className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word]`}>{body}</p>
           <FeatureRow />
         </div>
       </div>
@@ -277,6 +278,8 @@ const CARDS = [
 ];
 
 export function ApplicationsPageWins({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+  const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const heading = data?.heading || FALLBACK_HEADING;
   const body = data?.body || BODY;
   const bgImg = "/applications/wins-bg.webp";
@@ -336,7 +339,8 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
 
           <div className="relative inline-block px-[14px]">
             <h2
-              className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}
+              ref={fitRef}
+              className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage:
                   "linear-gradient(125.581deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -385,6 +389,7 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
           {/* Title with corner brackets (node 4032:14681) */}
           <div className="relative h-[81px] w-[356px]" data-name="Group 78">
             <h2
+              ref={fitRef2}
               className={`${gilroyMedium.className} absolute inset-0 flex items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage:
@@ -394,7 +399,7 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
               }}
               data-node-id="4032:14682"
             >
-              <span className="w-full [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
+              <span className="w-full [word-break:break-word]">
                 {heading}
               </span>
             </h2>

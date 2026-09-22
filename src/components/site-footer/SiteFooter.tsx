@@ -267,7 +267,7 @@ export function SiteFooter({
                     // eslint-disable-next-line @next/next/no-img-element
                     <img loading="lazy" decoding="async" src="/footer/dot-separator.svg" alt="" className="block h-[4px] w-[5px]" />
                   )}
-                  <a href={link.href} className={`${interRegular.className} max-w-full text-[14px] leading-[1.4] text-white hover:text-white lg:text-[#E4E4E4] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}>{link.label}</a>
+                  <a href={link.href} className={`${interRegular.className} max-w-full text-[14px] leading-[1.4] text-white hover:text-white lg:text-[#E4E4E4] [word-break:break-word]`}>{link.label}</a>
                 </span>
               ))}
             </div>

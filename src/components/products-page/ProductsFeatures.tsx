@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { mediaUrl } from "@/lib/strapi";
+import { useFitText } from "../shared/FitText";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { TagBadge } from "../hero/TagBadge";
@@ -24,14 +26,14 @@ const CAPTION =
 
 
 /* Full-bleed section background — Figma 3286:1931 backdrop. */
-function SectionBackdrop() {
+function SectionBackdrop({ src }: { src: string }) {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0">
       <div className="absolute inset-0 bg-black" />
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img loading="lazy" decoding="async"
         alt=""
-        src="/products/features-bg.webp"
+        src={src}
         className="absolute size-full max-w-none object-bottom opacity-75"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0)] from-[88.149%] to-black" />
@@ -47,8 +49,11 @@ function SectionBackdrop() {
  */
 export function ProductsFeatures({ data }: { data?: any }) {
   const [needsScroll, setNeedsScroll] = useState(true);
+  const fitRef = useFitText<HTMLDivElement>({});
+  const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
 
   const heading = data?.heading || FALLBACK_HEADING;
+  const bgImage = mediaUrl(data?.background_image) || "/products/features-bg.webp";
   // The design mandates a two-line title. Strapi stores the same copy as a
   // single line, so when the text matches (whitespace-insensitive) fall back
   // to the design's canonical line break.
@@ -80,7 +85,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
     >
       {/* DESKTOP (>=1024px) — sticky stage */}
       <div className="sticky top-[78px] hidden h-[calc(100vh-78px)] w-full overflow-hidden min-[1024px]:block">
-        <SectionBackdrop />
+        <SectionBackdrop src={bgImage} />
 
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="relative mx-auto h-[1000px] w-full max-w-[1440px] transition-all duration-300 [@media(max-height:1000px)]:[zoom:0.85] [@media(max-height:850px)]:[zoom:0.75] [@media(max-height:750px)]:[zoom:0.65]">
@@ -103,6 +108,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
               data-name="Title"
             >
               <div
+                ref={fitRef}
                 className={`${gilroyMedium.className} relative shrink-0 bg-clip-text text-center text-[46px] leading-[0] font-medium whitespace-nowrap text-transparent not-italic [word-break:break-word]`}
                 style={{
                   backgroundImage: SECTION_TITLE_GRADIENT,
@@ -146,7 +152,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
 
       {/* MOBILE (<1024px) — stacked header + swipeable card strip */}
       <div className="relative z-10 w-full min-[1024px]:hidden">
-        <SectionBackdrop />
+        <SectionBackdrop src={bgImage} />
         <div className="relative flex flex-col items-center gap-[20px] px-[24px] pt-[40px]">
           <TagBadge
             label={BADGE_TEXT}
@@ -157,6 +163,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
           />
           <div className="relative px-[10px]" data-name="Title">
             <h2
+              ref={fitRef2}
               className={`${gilroyMedium.className} bg-clip-text text-center text-[30px] leading-[34px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: SECTION_TITLE_GRADIENT,

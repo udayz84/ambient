@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { RepelDots } from "../shared/RepelDots";
+import { useFitText } from "../shared/FitText";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const GREEN_CTA_SHADOW =
@@ -478,8 +479,10 @@ export function PartnersSectionHeading({
   className?: string;
   deg?: string;
 }) {
+  const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <h2
+      ref={fitRef}
       className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent [word-break:break-word] not-italic min-[1024px]:whitespace-nowrap max-[1023px]:text-[28px] max-[1023px]:leading-[34px] ${className}`}
       style={{
         backgroundImage: `linear-gradient(${deg}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,

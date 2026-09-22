@@ -151,7 +151,7 @@ export function PartnersBecome() {
           >
             {PARTNERS_BECOME.heading}
           </h2>
-          <p className={`${interRegular.className} max-w-[660px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px]`}>
+          <p className={`${interRegular.className} max-w-[660px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px]`}>
             {PARTNERS_BECOME.subheading}
           </p>
         </div>
@@ -168,10 +168,10 @@ export function PartnersBecome() {
                 <WireframeIcon name={benefit.icon} className="size-[34px]" />
               </div>
               <div className="mt-[24px] flex w-full flex-col gap-[10px]">
-                <h3 className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}>
+                <h3 className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white [word-break:break-word] not-italic`}>
                   {benefit.title}
                 </h3>
-                <p className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-white opacity-65 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden not-italic`}>
+                <p className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-white opacity-65 [word-break:break-word] not-italic`}>
                   {benefit.description}
                 </p>
               </div>
@@ -182,7 +182,7 @@ export function PartnersBecome() {
         {/* ---------- who we're looking for ---------- */}
         <div className="relative flex w-full max-w-[900px] flex-col items-center gap-[18px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(21,21,21,0.3)] px-[32px] py-[28px] text-center backdrop-blur-[8px]">
           <Corners />
-          <h3 className={`${gilroyMedium.className} text-[20px] leading-[26px] font-medium text-white not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden`}>
+          <h3 className={`${gilroyMedium.className} text-[20px] leading-[26px] font-medium text-white not-italic [word-break:break-word]`}>
             {PARTNERS_BECOME.lookingFor.title}
           </h3>
           <div className="flex flex-wrap items-center justify-center gap-[8px]">
@@ -196,7 +196,7 @@ export function PartnersBecome() {
               </span>
             ))}
           </div>
-          <p className={`${interRegular.className} max-w-[720px] text-[13px] leading-[19.5px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden not-italic`}>
+          <p className={`${interRegular.className} max-w-[720px] text-[13px] leading-[19.5px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic`}>
             {PARTNERS_BECOME.lookingFor.description}
           </p>
         </div>
@@ -206,7 +206,7 @@ export function PartnersBecome() {
           {/* pitch panel */}
           <div className="relative flex flex-col gap-[20px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(21,21,21,0.3)] p-[32px] backdrop-blur-[8px] min-[1024px]:sticky min-[1024px]:top-[110px]">
             <Corners />
-            <h3 className={`${gilroyMedium.className} text-[26px] leading-[34px] font-medium text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden not-italic`}>
+            <h3 className={`${gilroyMedium.className} text-[26px] leading-[34px] font-medium text-white [word-break:break-word] not-italic`}>
               {PARTNERS_BECOME.form.title}
             </h3>
             <p className={`${interRegular.className} text-[15px] leading-[24px] font-normal text-[#f0f0f0] opacity-75 [word-break:break-word] not-italic`}>

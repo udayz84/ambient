@@ -993,6 +993,20 @@ export interface HomeApplications extends Struct.ComponentSchema {
   };
 }
 
+export interface HomeClients extends Struct.ComponentSchema {
+  collectionName: 'components_home_clients';
+  info: {
+    description: 'Homepage clients section';
+    displayName: 'Clients';
+  };
+  attributes: {
+    clients: Schema.Attribute.Component<'home.partner', true>;
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    subheading: Schema.Attribute.Text;
+    tag: Schema.Attribute.Component<'shared.tag', false>;
+  };
+}
+
 export interface HomeDevCard extends Struct.ComponentSchema {
   collectionName: 'components_home_dev_cards';
   info: {
@@ -1266,8 +1280,12 @@ export interface ProductsAlwaysOn extends Struct.ComponentSchema {
     displayName: 'Always On';
   };
   attributes: {
+    ai_core_icon: Schema.Attribute.Media;
     alt: Schema.Attribute.String;
+    bg_subconscious_image: Schema.Attribute.Media;
+    bg_surge_image: Schema.Attribute.Media;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
+    host_cpu_image: Schema.Attribute.Media;
     stats: Schema.Attribute.Component<'products.alwayson-stat', true>;
     subtitle: Schema.Attribute.Text;
   };
@@ -1312,9 +1330,11 @@ export interface ProductsBenchCard extends Struct.ComponentSchema {
     displayName: 'Bench Card';
   };
   attributes: {
+    chip_label: Schema.Attribute.String;
     cta_href: Schema.Attribute.String;
     cta_label: Schema.Attribute.String;
     description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -1353,6 +1373,7 @@ export interface ProductsFeatures extends Struct.ComponentSchema {
     displayName: 'Features';
   };
   attributes: {
+    background_image: Schema.Attribute.Media;
     feature_cards: Schema.Attribute.Component<'products.feature-card', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     subtitle: Schema.Attribute.Text;
@@ -1366,6 +1387,7 @@ export interface ProductsFullPicture extends Struct.ComponentSchema {
     displayName: 'Full Picture';
   };
   attributes: {
+    background_image: Schema.Attribute.Media;
     callouts: Schema.Attribute.Component<'products.spec-callout', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     subtitle: Schema.Attribute.Text;
@@ -1397,6 +1419,7 @@ export interface ProductsMeasured extends Struct.ComponentSchema {
     displayName: 'Measured';
   };
   attributes: {
+    background_image: Schema.Attribute.Media;
     cards: Schema.Attribute.Component<'products.measured-card', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     primary_button: Schema.Attribute.Component<'shared.button', false>;
@@ -1489,6 +1512,7 @@ export interface ProductsSpecCallout extends Struct.ComponentSchema {
     displayName: 'Spec Callout';
   };
   attributes: {
+    icon: Schema.Attribute.Media;
     items: Schema.Attribute.Text;
     label: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -1502,6 +1526,7 @@ export interface ProductsStartBuilding extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
+    background_image: Schema.Attribute.Media;
     cards: Schema.Attribute.Component<'products.start-card', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     subtitle: Schema.Attribute.Text;
@@ -2747,6 +2772,7 @@ declare module '@strapi/strapi' {
       'home.app-feature-card': HomeAppFeatureCard;
       'home.app-tab': HomeAppTab;
       'home.applications': HomeApplications;
+      'home.clients': HomeClients;
       'home.dev-card': HomeDevCard;
       'home.developer-platform': HomeDeveloperPlatform;
       'home.ecosystem': HomeEcosystem;

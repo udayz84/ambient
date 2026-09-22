@@ -1,4 +1,7 @@
+"use client";
+
 import { gilroyMedium } from "../hero/fonts";
+import { useFitText } from "../shared/FitText";
 import { CornerDecor } from "./company-corners";
 
 const TITLE_GRADIENT =
@@ -24,6 +27,8 @@ export function CompanySectionTitle({
   lineHeight = 38,
 }: CompanySectionTitleProps) {
   const titleLines = lines ?? (children ? [children] : []);
+  const maxLines = Math.round(height / lineHeight);
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines });
 
   return (
     <div
@@ -32,11 +37,11 @@ export function CompanySectionTitle({
       data-name="Title"
     >
       <h3
-        className={`${gilroyMedium.className} relative m-0 bg-clip-text p-0 font-medium text-transparent not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] overflow-hidden`}
+        ref={fitRef}
+        className={`${gilroyMedium.className} relative m-0 bg-clip-text p-0 font-medium text-transparent not-italic [word-break:break-word]`}
         style={{
           fontSize,
           lineHeight: `${lineHeight}px`,
-          WebkitLineClamp: Math.max(1, Math.floor(height / lineHeight)),
           backgroundImage: TITLE_GRADIENT,
           WebkitBackgroundClip: "text",
           backgroundClip: "text",

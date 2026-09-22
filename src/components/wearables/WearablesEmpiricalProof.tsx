@@ -1,8 +1,11 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element */
 import { dmMono, gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { mediaUrl } from "@/lib/strapi";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { useFitText } from "../shared/FitText";
 
 const TITLE_GRADIENT =
   "linear-gradient(118.011deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -98,11 +101,11 @@ function HealthCard({ data }: { data?: any }) {
         className={`${gilroyMedium.className} absolute left-[35px] top-[87px] flex w-[477px] flex-col gap-[12px] items-start tracking-[-0.4539px] not-italic`}
         data-name="NewsSection"
       >
-        <p className="w-[477px] text-[24px] leading-[28.295px] text-white [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden">
+        <p className="w-[477px] text-[24px] leading-[28.295px] text-white [word-break:break-word]">
           {title}
         </p>
         <p
-          className={`${interRegular.className} min-w-full w-[min-content] text-[16px] leading-[24px] text-[rgba(255,255,255,0.6)] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+          className={`${interRegular.className} min-w-full w-[min-content] text-[16px] leading-[24px] text-[rgba(255,255,255,0.6)] [word-break:break-word]`}
         >
           {body}
         </p>
@@ -493,7 +496,7 @@ function EcgCard({
         style={{ bottom: textBottom }}
       >
         <p className="w-full text-[16px] leading-[24px] text-white whitespace-nowrap overflow-hidden text-ellipsis">{title}</p>
-        <p className="text-[12px] leading-[18px] text-[rgba(255,255,255,0.6)] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden" style={{ width: descWidth }}>
+        <p className="text-[12px] leading-[18px] text-[rgba(255,255,255,0.6)] [word-break:break-word]" style={{ width: descWidth }}>
           {description}
         </p>
       </div>
@@ -568,6 +571,9 @@ function EcgCardMobile({
 }
 
 export function WearablesEmpiricalProof({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 1 });
+  const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const heading = data?.heading || FALLBACK_HEADING;
   const healthData = data?.health_card;
@@ -634,6 +640,7 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
         <div className="absolute left-1/2 top-[103.1px] -translate-x-1/2 flex flex-col items-center justify-center gap-[24px]">
           <div className="relative flex flex-col items-center px-[10px]" data-name="Title">
             <h2
+              ref={fitRef}
               className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent whitespace-nowrap not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: TITLE_GRADIENT,
@@ -686,6 +693,7 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
         <div className="relative z-10 flex w-[350px] flex-col items-center gap-[10px]">
           <div className="relative h-[82px] w-[356px]">
             <h2
+              ref={fitRef2}
               className={`${gilroyMedium.className} absolute inset-0 flex items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: "linear-gradient(107.4537261117953deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",

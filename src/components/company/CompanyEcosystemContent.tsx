@@ -125,6 +125,7 @@ export function CompanyEcosystemContent({ data }: CompanyEcosystemContentProps =
                   nodeId="2379:4642"
                   gradientDeg="105.739deg"
                   className="w-[463px]"
+                  maxLines={2}
                 >
                   {headingLines.map((line, i) => (
                     <p
@@ -144,7 +145,7 @@ export function CompanyEcosystemContent({ data }: CompanyEcosystemContentProps =
             </div>
           </div>
           <p
-            className={`${interRegular.className} absolute top-[8.5px] left-[680px] h-[81px] w-[444px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+            className={`${interRegular.className} absolute top-[8.5px] left-[680px] h-[81px] w-[444px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
             data-node-id="2379:4647"
           >
             {subtitle}
@@ -183,7 +184,7 @@ export function CompanyEcosystemContent({ data }: CompanyEcosystemContentProps =
                 </p>
               </div>
               <p
-                className={`${interRegular.className} absolute top-[44px] left-0 h-[72px] ${col.descWidth} text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+                className={`${interRegular.className} absolute top-[44px] left-0 h-[72px] ${col.descWidth} text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
                 data-node-id={col.descNodeId}
               >
                 {col.description}

@@ -78,7 +78,7 @@ export function CompanyHero({ data }: CompanyHeroProps = {}) {
                 {titleLines.map((line, i) => (
                   <span
                     key={i}
-                    className="block h-[49px] shrink-0 leading-[49px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden"
+                    className="block h-[49px] shrink-0 leading-[49px] [word-break:break-word]"
                   >
                     {line}
                   </span>
@@ -94,7 +94,7 @@ export function CompanyHero({ data }: CompanyHeroProps = {}) {
             data-name="Frame 1984079417"
           >
             <p
-              className={`${interRegular.className} w-[532px] max-w-full shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}
+              className={`${interRegular.className} w-[532px] max-w-full shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
               data-node-id="2379:2273"
             >
               {body}

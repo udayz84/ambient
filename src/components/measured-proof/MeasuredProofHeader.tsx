@@ -1,10 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import { TagBadge } from "../hero/TagBadge";
 import { gilroyMedium } from "../hero/fonts";
+import { useFitText } from "../shared/FitText";
 
 export function MeasuredProofHeader({ data }: { data?: any }) {
   const tagText = data?.tag?.text || "";
   const heading = data?.heading || "";
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
     <div
       className="absolute top-[30px] left-1/2 flex w-[748px] -translate-x-1/2 flex-col content-stretch items-center gap-[16px]"
@@ -23,7 +27,8 @@ export function MeasuredProofHeader({ data }: { data?: any }) {
         data-name="Group 78"
       >
         <h2
-          className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[7px] ml-[39.5px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-[transparent] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] overflow-hidden not-italic`}
+          ref={fitRef}
+          className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[7px] ml-[39.5px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-[transparent] [word-break:break-word] not-italic`}
           style={{
             backgroundImage:
               "linear-gradient(124.568deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",

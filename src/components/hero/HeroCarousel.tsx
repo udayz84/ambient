@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Hero } from "./Hero";
 import { TagBadge } from "./TagBadge";
 import { Corners } from "../shared/Corners";
+import { useFitText } from "../shared/FitText";
 import { gilroyMedium, gilroySemiBold, interRegular } from "./fonts";
 
 /* ---------------------------------------------------------------------------
@@ -85,6 +86,8 @@ function AnnouncementCtaButton({ cta }: { cta: AnnouncementCta }) {
 }
 
 function AnnouncementSlide({ announcement }: { announcement: Announcement }) {
+  const fitRef = useFitText<HTMLHeadingElement>({});
+  const fitRef2 = useFitText<HTMLHeadingElement>({});
   return (
     <div
       className="absolute inset-0 flex flex-col justify-center overflow-hidden bg-black"
@@ -109,6 +112,7 @@ function AnnouncementSlide({ announcement }: { announcement: Announcement }) {
         <div className="absolute top-[300px] left-[95px] flex w-[560px] flex-col items-start gap-[15px]">
           <TagBadge label={announcement.tag} width={150} centerLabel />
           <h1
+            ref={fitRef}
             className={`${gilroyMedium.className} bg-clip-text text-[46px] leading-[49px] font-medium text-transparent [word-break:break-word] not-italic`}
             style={{
               backgroundImage:
@@ -146,6 +150,7 @@ function AnnouncementSlide({ announcement }: { announcement: Announcement }) {
       <div className="relative flex w-full flex-col items-start gap-[15px] px-[24px] pt-[180px] pb-[120px] min-[1024px]:hidden">
         <TagBadge label={announcement.tag} width={150} centerLabel />
         <h1
+          ref={fitRef2}
           className={`${gilroyMedium.className} w-[320px] max-w-full bg-clip-text text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
           style={{
             backgroundImage:

@@ -64,7 +64,7 @@ export function SomDeployPath({ data }: { data?: any }) {
             </GradientTitle>
             <Corners />
           </div>
-          <p className={`${interRegular.className} max-w-[800px] text-[16px] md:text-[18px] text-[#f0f0f0]/65 [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}>
+          <p className={`${interRegular.className} max-w-[800px] text-[16px] md:text-[18px] text-[#f0f0f0]/65 [word-break:break-word]`}>
             {subheading}
           </p>
         </div>
@@ -89,10 +89,10 @@ export function SomDeployPath({ data }: { data?: any }) {
                 </div>
                 <div className="flex w-full flex-col items-start gap-[10px] flex-grow">
                   <SomTag label={card.badge_label || "Available"} available={card.is_available ?? true} widthClass={card.is_available ? "w-[134px]" : "w-[150px]"} />
-                  <h3 className={`${gilroyMedium.className} text-[20px] leading-[26px] font-medium text-white min-[1024px]:text-[22px] min-[1024px]:leading-[28px] mt-[4px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden`}>
+                  <h3 className={`${gilroyMedium.className} text-[20px] leading-[26px] font-medium text-white min-[1024px]:text-[22px] min-[1024px]:leading-[28px] mt-[4px] [word-break:break-word]`}>
                     {card.title}
                   </h3>
-                  <p className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] [word-break:break-word] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden`}>
+                  <p className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] [word-break:break-word]`}>
                     {card.description}
                   </p>
                 </div>
