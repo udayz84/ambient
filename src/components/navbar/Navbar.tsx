@@ -370,16 +370,19 @@ function NavItem({ item }: { item: any }) {
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
       >
-        <button
-          type="button"
+        <Link
+          href={item.href !== "#" ? item.href : "#"}
           onClick={(e) => {
-            e.stopPropagation();
-            setIsOpen(!isOpen);
+            if (item.href === "#") {
+              e.preventDefault();
+              e.stopPropagation();
+              setIsOpen(!isOpen);
+            }
           }}
           className="flex items-center gap-[6px] shrink-0 text-center text-[14px] leading-[normal] font-medium tracking-[-0.42px] whitespace-nowrap text-white transition-opacity hover:opacity-80"
         >
           <span className="max-w-full overflow-hidden text-ellipsis">{item.label}</span>
-        </button>
+        </Link>
         <div
           onClick={(e) => e.stopPropagation()}
           className={`absolute top-full z-30 pt-[24px] transition-all duration-200 ${
