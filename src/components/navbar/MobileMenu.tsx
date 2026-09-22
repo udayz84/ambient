@@ -213,28 +213,41 @@ export function MobileMenu({
                         key={item.label}
                         className="border-b border-white/[0.06]"
                       >
-                        <button
-                          type="button"
-                          aria-label={`Toggle ${item.label} submenu`}
-                          aria-expanded={isExpanded}
-                          onClick={() => setExpanded(isExpanded ? null : item.label)}
-                          className="flex w-full items-center justify-between py-[16px] text-left"
-                        >
-                          <span
-                            className={`text-[16px] leading-[normal] tracking-[-0.42px] ${
-                              active ? "text-[#6ced3f]" : "text-white"
-                            }`}
-                          >
-                            {item.label}
-                          </span>
-                          <span
+                        <div className="flex w-full items-center justify-between py-[16px] text-left">
+                          {item.href && item.href !== "#" ? (
+                            <Link
+                              href={item.href}
+                              onClick={close}
+                              className={`text-[16px] leading-[normal] tracking-[-0.42px] ${
+                                active ? "text-[#6ced3f]" : "text-white"
+                              }`}
+                            >
+                              {item.label}
+                            </Link>
+                          ) : (
+                            <span
+                              className={`text-[16px] leading-[normal] tracking-[-0.42px] ${
+                                active ? "text-[#6ced3f]" : "text-white"
+                              }`}
+                            >
+                              {item.label}
+                            </span>
+                          )}
+                          <button
+                            type="button"
+                            aria-label={`Toggle ${item.label} submenu`}
+                            aria-expanded={isExpanded}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setExpanded(isExpanded ? null : item.label);
+                            }}
                             className={`flex h-[24px] w-[24px] items-center justify-center transition-transform duration-200 ${
                               isExpanded ? "rotate-180" : ""
                             }`}
                           >
                             <ChevronDown />
-                          </span>
-                        </button>
+                          </button>
+                        </div>
                         <div
                           className={`overflow-hidden transition-[max-height] duration-300 ease-out ${
                             isExpanded ? "max-h-[400px]" : "max-h-0"
