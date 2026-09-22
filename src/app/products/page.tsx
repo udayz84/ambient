@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { ProductsHero } from "@/components/products-page/ProductsHero";
-import { CaseStudies } from "@/components/case-studies/CaseStudies";
 import { ProductsFeatures } from "@/components/products-page/ProductsFeatures";
 import { ProductsAlwaysOn } from "@/components/products-page/ProductsAlwaysOn";
 import { ProductsUseCases } from "@/components/products-page/ProductsUseCases";
@@ -112,7 +111,6 @@ export default async function ProductsPage() {
       <ProductsStickyNav items={stickyItems} />
       <div id="features"><ProductsFeatures data={data?.features} /></div>
       <div id="always-on"><ProductsAlwaysOn data={data?.always_on} /></div>
-      {caseStudiesData && <CaseStudies data={caseStudiesData} />}
       <div id="use-cases"><ProductsUseCases data={data?.use_cases} /></div>
       <div id="metrics"><ProductsMeasured data={data?.measured} /></div>
       <div id="architecture"><ProductsArchitecture data={data?.architecture} /></div>
