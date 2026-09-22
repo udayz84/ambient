@@ -369,7 +369,7 @@ function ChevronDecor() {
   return (
     <>
       <div
-        className="animate-technology-chevron-flow absolute top-[212.42px] left-[688.88px] h-[97.26px] w-[47.33px]"
+        className="animate-technology-chevron-flow absolute top-[212.42px] left-[703.88px] h-[97.26px] w-[47.33px]"
         style={{ animationDelay: "0s" }}
       >
         <div className="absolute inset-[-12.8%_-22.81%_-12.8%_-30.55%]">
@@ -378,7 +378,7 @@ function ChevronDecor() {
         </div>
       </div>
       <div
-        className="animate-technology-chevron-flow absolute top-[243.96px] left-[697.23px] h-[34.17px] w-[16.63px]"
+        className="animate-technology-chevron-flow absolute top-[243.96px] left-[712.23px] h-[34.17px] w-[16.63px]"
         style={{ animationDelay: "-0.25s" }}
       >
         <div className="absolute inset-[-1.02%_-4.2%_-1.02%_-2.16%]">
@@ -387,7 +387,7 @@ function ChevronDecor() {
         </div>
       </div>
       <div
-        className="animate-technology-chevron-flow absolute top-[250.66px] left-[680.08px] h-[23.88px] w-[11.62px]"
+        className="animate-technology-chevron-flow absolute top-[250.66px] left-[695.08px] h-[23.88px] w-[11.62px]"
         style={{ animationDelay: "-0.5s" }}
       >
         <div className="absolute inset-[-1.46%_-6.01%_-1.46%_-3.09%]">
@@ -396,7 +396,7 @@ function ChevronDecor() {
         </div>
       </div>
       <div
-        className="animate-technology-chevron-flow absolute top-[254.56px] left-[666.14px] h-[16.06px] w-[7.82px] mix-blend-luminosity"
+        className="animate-technology-chevron-flow absolute top-[254.56px] left-[681.14px] h-[16.06px] w-[7.82px] mix-blend-luminosity"
         style={{ animationDelay: "-0.75s" }}
       >
         <div className="absolute inset-[-2.18%_-8.93%_-2.17%_-4.6%]">
@@ -481,19 +481,6 @@ export function WearablesParadigm({ data }: { data?: any }) {
 
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const heading = data?.heading || FALLBACK_HEADING;
-  const legacy = {
-    label: data?.cards?.[0]?.title || FALLBACK_CARDS[0].label,
-    description: data?.cards?.[0]?.body || FALLBACK_CARDS[0].description,
-    image: mediaUrl(data?.cards?.[0]?.background_image) || FALLBACK_CARDS[0].image,
-  };
-  const acube = {
-    label: data?.cards?.[1]?.title || FALLBACK_CARDS[1].label,
-    description: data?.cards?.[1]?.body || FALLBACK_CARDS[1].description,
-    image: mediaUrl(data?.cards?.[1]?.background_image) || FALLBACK_CARDS[1].image,
-  };
-
-  const statValue = data?.cards?.[1]?.stat_value || FALLBACK_STAT_VALUE;
-  const statDesc = data?.cards?.[1]?.stat_desc || FALLBACK_STAT_DESC;
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -531,23 +518,15 @@ export function WearablesParadigm({ data }: { data?: any }) {
           </p>
         </div>
 
-        {/* Containers copied from the technology page paradigm shift section */}
+        {/* Replaced with direct image inserts */}
         <div className="relative h-[548px] w-full">
-          <LegacyCard
-            label={legacy.label}
-            description={legacy.description}
-            computeSrc={legacy.image}
-          />
-          <ACubeCard
-            label={acube.label}
-            description={acube.description}
-            cubeSrc={acube.image}
-            statValue={statValue}
-            statDesc={statDesc}
-          />
+          <div className="absolute left-[111px] top-[0px] w-[575px] h-[548px] flex items-center justify-center">
+            <img src="/applications/wearables/legacy-way-box.jpg" alt="The Legacy Way" className="w-full h-full object-contain rounded-[16px]" />
+          </div>
           <ChevronDecor />
-          <LegacyStatsPanel />
-          <ACubeStatsPanel />
+          <div className="absolute left-[754px] top-[0px] w-[575px] h-[548px] flex items-center justify-center">
+            <img src="/applications/wearables/ambient-way-box.jpg" alt="The Ambient Way" className="w-full h-full object-contain rounded-[16px]" />
+          </div>
         </div>
       </div>
 
@@ -580,34 +559,13 @@ export function WearablesParadigm({ data }: { data?: any }) {
           </p>
         </div>
 
-        {/* Containers copied from the technology page paradigm shift section */}
+        {/* Replaced with direct image inserts */}
         <div className="flex w-full flex-col items-center gap-[40px]">
-          {/* Scaled Legacy Card */}
-          <div className="relative w-[350px] h-[385px] sm:w-[400px] sm:h-[440px]">
-            <div className="absolute top-0 left-0 w-[500px] h-[550px] scale-[0.7] sm:scale-[0.8] origin-top-left">
-              <LegacyCard
-                label={legacy.label}
-                description={legacy.description}
-                computeSrc={legacy.image}
-                className="absolute left-0 top-0"
-              />
-              <LegacyStatsPanel className="absolute top-[380px] left-0" />
-            </div>
+          <div className="w-full max-w-[575px]">
+            <img src="/applications/wearables/legacy-way-box.jpg" alt="The Legacy Way" className="w-full h-auto object-contain rounded-[16px]" />
           </div>
-
-          {/* Scaled A-Cube Card */}
-          <div className="relative w-[345px] h-[326.4px] sm:w-[431.25px] sm:h-[408px]">
-            <div className="absolute top-0 left-0 w-[575px] h-[544px] scale-[0.6] sm:scale-[0.75] origin-top-left">
-              <ACubeCard
-                label={acube.label}
-                description={acube.description}
-                cubeSrc={acube.image}
-                statValue={statValue}
-                statDesc={statDesc}
-                className="absolute left-0 top-0"
-              />
-              <ACubeStatsPanel className="absolute top-[380px] left-0" />
-            </div>
+          <div className="w-full max-w-[575px]">
+            <img src="/applications/wearables/ambient-way-box.jpg" alt="The Ambient Way" className="w-full h-auto object-contain rounded-[16px]" />
           </div>
         </div>
       </div>

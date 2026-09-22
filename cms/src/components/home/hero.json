@@ -14,6 +14,11 @@
     "title": { "type": "string", "required": true },
     "subtitle": { "type": "text", "required": true },
     "scroll_text": { "type": "string", "default": "SCROLL" },
-    "metrics": { "type": "component", "repeatable": true, "component": "home.hero-metric" }
+    "metrics": { "type": "component", "repeatable": true, "component": "home.hero-metric" },
+    "announcements": {
+      "type": "component",
+      "repeatable": true,
+      "component": "home.hero-announcement"
+    }
   }
 }

@@ -6,13 +6,15 @@ import { TagBadge } from "./TagBadge";
 import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
 import { gilroyMedium, gilroySemiBold, interRegular } from "./fonts";
+import { mediaUrl } from "@/lib/strapi";
 
 /* ---------------------------------------------------------------------------
  * Hero carousel — slide 1 is the existing Hero; slides 2+ are announcement
  * slides (CES / event type, per client feedback) with a couple of CTAs.
  *
- * Announcement content below is PLACEHOLDER — swap titles/subtitles/CTAs per
- * announcement. Wired to CMS later if needed.
+ * Announcement content below is the FALLBACK used when the CMS
+ * hero.announcements component is empty (env not seeded yet). Editors manage
+ * slides in Strapi: Home Page → Hero → Announcements.
  * ------------------------------------------------------------------------- */
 
 const AUTOPLAY_MS = 7000;
@@ -38,8 +40,8 @@ const ANNOUNCEMENTS: Announcement[] = [
       { label: "Book a meeting", href: "/contact", primary: true },
       { label: "What we're showing", href: "/news-listing" },
     ],
-    image: "/som/sparsh-chip.png",
-    imageAlt: "Ambient Scientific GPX10 chip board",
+    image: "/resources/article-image-base.webp",
+    imageAlt: "Ambient Scientific circuit board close-up",
   },
   {
     tag: "New release",
@@ -50,12 +52,44 @@ const ANNOUNCEMENTS: Announcement[] = [
       { label: "Shop the kit", href: "/dvk", primary: true },
       { label: "Explore the DVK", href: "/dvk" },
     ],
-    image: "/dvk/board-stack.webp",
-    imageAlt: "GPX10 PRO DevKit board",
+    image: "/resources/article-2-overlay.png",
+    imageAlt: "Ambient Scientific chip industry artwork",
   },
 ];
 
-const SLIDE_COUNT = 1 + ANNOUNCEMENTS.length;
+/** Shape of a Strapi home.hero-announcement entry (media populated). */
+type AnnouncementCms = {
+  tag?: string | null;
+  title?: string | null;
+  subtitle?: string | null;
+  image?: Parameters<typeof mediaUrl>[0];
+  image_alt?: string | null;
+  ctas?: { label?: string | null; href?: string | null; variant?: string | null }[] | null;
+};
+
+/** Map Strapi home.hero-announcement entries to the slide shape above. */
+function cmsAnnouncements(
+  data: { announcements?: AnnouncementCms[] | null } | null | undefined,
+): Announcement[] {
+  return (data?.announcements ?? [])
+    .filter((a) => a?.title)
+    .map((a, index) => ({
+      tag: a.tag ?? "Announcement",
+      title: a.title ?? "",
+      subtitle: a.subtitle ?? "",
+      ctas: (a.ctas ?? [])
+        .filter((cta) => cta?.label)
+        .map((cta) => ({
+          label: cta.label ?? "",
+          href: cta.href ?? "#",
+          primary: (cta.variant ?? "primary") === "primary",
+        })),
+      // Static imagery by default — an uploaded Strapi image overrides it.
+      image: mediaUrl(a.image) ?? ANNOUNCEMENTS[index % ANNOUNCEMENTS.length].image,
+      imageAlt: a.image_alt || a.image?.alternativeText || "",
+    }))
+    .filter((a) => a.ctas.length > 0);
+}
 
 function AnnouncementCtaButton({ cta }: { cta: AnnouncementCta }) {
   return (
@@ -93,13 +127,34 @@ function AnnouncementSlide({ announcement }: { announcement: Announcement }) {
       className="absolute inset-0 flex flex-col justify-center overflow-hidden bg-black"
       aria-hidden={false}
     >
-      {/* Ambient glows */}
+      {/* Full-bleed background image — Strapi upload wins, static news-card
+          imagery is the fallback */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        loading="lazy"
+        decoding="async"
+        src={announcement.image}
+        alt={announcement.imageAlt}
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+
+      {/* Blackish gradient so the left-side content stays readable over the
+          image (stronger under the text, slight on the image side) */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 hidden min-[1024px]:block"
         style={{
           background:
-            "radial-gradient(720px 480px at 78% 38%, rgba(83,216,36,0.16), transparent 70%), radial-gradient(560px 400px at 8% 80%, rgba(0,196,255,0.08), transparent 70%)",
+            "linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.45) 48%, rgba(0,0,0,0.12) 100%)",
+        }}
+      />
+      {/* Mobile: content stacks over the image — scrim top and bottom */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 min-[1024px]:hidden"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(0,0,0,0.60) 0%, rgba(0,0,0,0.25) 45%, rgba(0,0,0,0.80) 100%)",
         }}
       />
       <div
@@ -131,18 +186,6 @@ function AnnouncementSlide({ announcement }: { announcement: Announcement }) {
               <AnnouncementCtaButton key={cta.label} cta={cta} />
             ))}
           </div>
-        </div>
-
-        {/* Right visual — sits in the free right half, clear of the 560px text column */}
-        <div className="pointer-events-none absolute top-1/2 right-[95px] w-[520px] -translate-y-1/2">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            loading="lazy"
-            decoding="async"
-            src={announcement.image}
-            alt={announcement.imageAlt}
-            className="block w-full max-w-none"
-          />
         </div>
       </div>
 
@@ -178,6 +221,10 @@ export function HeroCarousel({ data }: { data?: any }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
 
+  const cmsSlides = cmsAnnouncements(data);
+  const announcements = cmsSlides.length > 0 ? cmsSlides : ANNOUNCEMENTS;
+  const slideCount = 1 + announcements.length;
+
   const reducedMotion =
     typeof window !== "undefined" &&
     window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
@@ -186,11 +233,11 @@ export function HeroCarousel({ data }: { data?: any }) {
   useEffect(() => {
     if (reducedMotion || paused) return;
     const timer = setInterval(
-      () => setActive((current) => (current + 1) % SLIDE_COUNT),
+      () => setActive((current) => (current + 1) % slideCount),
       AUTOPLAY_MS,
     );
     return () => clearInterval(timer);
-  }, [reducedMotion, paused, active]);
+  }, [reducedMotion, paused, active, slideCount]);
 
   const goTo = useCallback((index: number) => setActive(index), []);
 
@@ -214,7 +261,7 @@ export function HeroCarousel({ data }: { data?: any }) {
       </div>
 
       {/* Slides 2+ — announcements */}
-      {ANNOUNCEMENTS.map((announcement, index) => {
+      {announcements.map((announcement, index) => {
         const slideIndex = index + 1;
         return (
           <div
@@ -229,7 +276,7 @@ export function HeroCarousel({ data }: { data?: any }) {
 
       {/* Slide indicators */}
       <div className="absolute bottom-[36px] left-1/2 z-20 flex -translate-x-1/2 items-center gap-[8px] max-[1023px]:bottom-[24px]">
-        {Array.from({ length: SLIDE_COUNT }, (_, index) => (
+        {Array.from({ length: slideCount }, (_, index) => (
           <button
             key={index}
             type="button"

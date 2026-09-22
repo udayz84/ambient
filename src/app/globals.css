@@ -21,6 +21,7 @@
   --animate-ecosystem-slide-from-right: ecosystem-slide-from-right 12s linear both;
   --animate-platform-scale-stat-fade: platform-scale-stat-fade 1000ms ease-in-out both;
   --animate-ecosystem-scroll-mobile: ecosystem-scroll-mobile 15s linear infinite;
+  --animate-technology-marquee: technology-marquee 30s linear infinite;
   --animate-dvk-marquee-up: dvk-marquee-up 36s linear infinite;
   --animate-dvk-marquee-down: dvk-marquee-down 26s linear infinite;
   --animate-dvk-marquee-left: dvk-marquee-left 26s linear infinite;
@@ -155,6 +156,15 @@
   }
 
   @keyframes ecosystem-scroll-mobile {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes technology-marquee {
     from {
       transform: translateX(0);
     }

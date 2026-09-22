@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ProductsHero } from "@/components/products-page/ProductsHero";
+import { CaseStudies } from "@/components/case-studies/CaseStudies";
 import { ProductsFeatures } from "@/components/products-page/ProductsFeatures";
 import { ProductsAlwaysOn } from "@/components/products-page/ProductsAlwaysOn";
 import { ProductsUseCases } from "@/components/products-page/ProductsUseCases";
@@ -76,6 +77,19 @@ export default async function ProductsPage() {
     console.error("Failed to fetch products page data:", error);
   }
 
+  // Case Studies fetched separately (same rationale as the home page): until
+  // every environment's CMS has the case_studies schema, a populate error
+  // here must not fail the main fetch above.
+  let caseStudiesData: any = null;
+  try {
+    const productsExtras = await getSingleType<any>("products-page", [
+      { section: "case_studies", nested: ["cards", "logos"] },
+    ]);
+    caseStudiesData = productsExtras?.case_studies ?? null;
+  } catch {
+    caseStudiesData = null;
+  }
+
   // Labels come from Strapi (label only); targets are auto-assigned by order.
   const stickyLabels: string[] = Array.isArray(data?.sticky_nav)
     ? data.sticky_nav
@@ -98,6 +112,7 @@ export default async function ProductsPage() {
       <ProductsStickyNav items={stickyItems} />
       <div id="features"><ProductsFeatures data={data?.features} /></div>
       <div id="always-on"><ProductsAlwaysOn data={data?.always_on} /></div>
+      {caseStudiesData && <CaseStudies data={caseStudiesData} />}
       <div id="use-cases"><ProductsUseCases data={data?.use_cases} /></div>
       <div id="metrics"><ProductsMeasured data={data?.measured} /></div>
       <div id="architecture"><ProductsArchitecture data={data?.architecture} /></div>

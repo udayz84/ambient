@@ -1071,6 +1071,7 @@ export interface HomeHero extends Struct.ComponentSchema {
     displayName: 'Hero';
   };
   attributes: {
+    announcements: Schema.Attribute.Component<'home.hero-announcement', true>;
     metrics: Schema.Attribute.Component<'home.hero-metric', true>;
     mobile_video: Schema.Attribute.Media;
     mobile_video_alt: Schema.Attribute.String;
@@ -1079,6 +1080,22 @@ export interface HomeHero extends Struct.ComponentSchema {
     title: Schema.Attribute.String & Schema.Attribute.Required;
     video: Schema.Attribute.Media;
     video_alt: Schema.Attribute.String;
+  };
+}
+
+export interface HomeHeroAnnouncement extends Struct.ComponentSchema {
+  collectionName: 'components_home_hero_announcements';
+  info: {
+    description: 'Homepage hero carousel announcement slide (tag, title, subtitle, image, CTAs)';
+    displayName: 'Hero Announcement';
+  };
+  attributes: {
+    ctas: Schema.Attribute.Component<'shared.button', true>;
+    image: Schema.Attribute.Media;
+    image_alt: Schema.Attribute.String;
+    subtitle: Schema.Attribute.Text & Schema.Attribute.Required;
+    tag: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -2778,6 +2795,7 @@ declare module '@strapi/strapi' {
       'home.ecosystem': HomeEcosystem;
       'home.gpx-product': HomeGpxProduct;
       'home.hero': HomeHero;
+      'home.hero-announcement': HomeHeroAnnouncement;
       'home.hero-metric': HomeHeroMetric;
       'home.latest-news': HomeLatestNews;
       'home.measured-proof': HomeMeasuredProof;

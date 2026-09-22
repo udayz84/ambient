@@ -5,6 +5,7 @@ import { ApplicationsPageContinuum } from "@/components/applications-page/Applic
 import { ApplicationsPageArticles } from "@/components/applications-page/ApplicationsPageArticles";
 import { ApplicationsPageWins } from "@/components/applications-page/ApplicationsPageWins";
 import { ApplicationsPageSom } from "@/components/applications-page/ApplicationsPageSom";
+import { ApplicationsPageModelZoo } from "@/components/applications-page/ApplicationsPageModelZoo";
 import { getSingleType } from "@/lib/strapi";
 import { buildMetadata, type SeoData } from "@/lib/seo";
 
@@ -51,6 +52,7 @@ export default async function ApplicationsPage() {
       {data?.continuum && <ApplicationsPageContinuum data={data.continuum} />}
       {data?.articles && <ApplicationsPageArticles data={data.articles} />}
       {data?.wins && <ApplicationsPageWins data={data.wins} />}
+      <ApplicationsPageModelZoo />
       {data?.som && <ApplicationsPageSom data={data.som} />}
     </main>
   );
