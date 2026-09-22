@@ -32,8 +32,8 @@ function CornerTick({ src, placement, className = "" }: { src: string; placement
 }
 
 export function DeveloperPlatformHeader({ data }: { data?: any }) {
-  const heading = data?.heading || "";
-  const subtitle = data?.subtitle || "";
+  const heading = typeof data?.heading === "string" ? data.heading.trim() : "";
+  const subtitle = typeof data?.subtitle === "string" ? data.subtitle.trim() : "";
   return (
     <div className="absolute top-0 left-1/2 z-10 flex w-[604px] -translate-x-1/2 flex-col items-center justify-start gap-[24px]">
       <div className="relative flex w-fit max-w-full shrink-0 flex-col items-center px-[20px] py-[4px]">

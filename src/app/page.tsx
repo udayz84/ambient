@@ -69,10 +69,8 @@ export default async function Home() {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       {data?.hero && <HeroCarousel data={data.hero} />}
-      {data?.ecosystem && (
-        <EcosystemMarqueeStrip partners={data.ecosystem.development_partners} />
-      )}
       {data?.measured_proof && <MeasuredProof data={data.measured_proof} />}
+      <EcosystemMarqueeStrip />
       {data?.technology && <Technology data={data.technology} />}
       {data?.platform_scale && <PlatformScale data={data.platform_scale} />}
       {data?.applications && <Applications data={data.applications} />}
