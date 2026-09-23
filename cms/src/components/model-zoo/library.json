@@ -1,0 +1,43 @@
+{
+  "collectionName": "components_model_zoo_libraries",
+  "info": {
+    "displayName": "Library",
+    "description": "Model Zoo library section with filterable model cards"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "models": {
+      "type": "component",
+      "repeatable": true,
+      "component": "model-zoo.model-card"
+    },
+    "strip_title": {
+      "type": "string"
+    },
+    "strip_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "strip_image_alt": {
+      "type": "string"
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.cta"
+    }
+  }
+}

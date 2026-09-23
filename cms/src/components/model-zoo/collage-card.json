@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_model_zoo_collage_cards",
+  "info": {
+    "displayName": "Collage Card",
+    "description": "Hero decorative model-preview card"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

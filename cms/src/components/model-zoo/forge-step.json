@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_model_zoo_forge_steps",
+  "info": {
+    "displayName": "Forge Step",
+    "description": "ApplicationForge preview list item"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "collectionName": "components_model_zoo_model_cards",
+  "info": {
+    "displayName": "Model Card",
+    "description": "Model Zoo library model card"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "modality": {
+      "type": "enumeration",
+      "enum": [
+        "audio",
+        "vision",
+        "motion"
+      ],
+      "default": "audio",
+      "required": true
+    },
+    "model_type": {
+      "type": "enumeration",
+      "enum": [
+        "open-source",
+        "ambient-built"
+      ],
+      "default": "open-source",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "image_alt": {
+      "type": "string"
+    },
+    "watch_cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.cta"
+    },
+    "doc_cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.cta"
+    },
+    "specs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "model-zoo.model-spec"
+    }
+  }
+}

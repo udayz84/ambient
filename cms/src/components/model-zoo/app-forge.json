@@ -1,0 +1,72 @@
+{
+  "collectionName": "components_model_zoo_app_forges",
+  "info": {
+    "displayName": "App Forge",
+    "description": "ApplicationForge phone-control section"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "forge_title": {
+      "type": "string"
+    },
+    "steps": {
+      "type": "component",
+      "repeatable": true,
+      "component": "model-zoo.forge-step"
+    },
+    "toggle_text": {
+      "type": "string"
+    },
+    "card_badge": {
+      "type": "string"
+    },
+    "card_title": {
+      "type": "string"
+    },
+    "card_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "card_image_alt": {
+      "type": "string"
+    },
+    "app_store_badge": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "play_store_badge": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.cta"
+    }
+  }
+}

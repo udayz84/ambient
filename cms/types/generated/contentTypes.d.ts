@@ -1139,6 +1139,42 @@ export interface ApiMailSettingMailSetting extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiModelZooPageModelZooPage extends Struct.SingleTypeSchema {
+  collectionName: 'model_zoo_pages';
+  info: {
+    description: 'Model Zoo page';
+    displayName: 'Model Zoo Page';
+    pluralName: 'model-zoo-pages';
+    singularName: 'model-zoo-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    app_forge: Schema.Attribute.Component<'model-zoo.app-forge', false>;
+    build_it: Schema.Attribute.Component<'model-zoo.build-it', false>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    hero: Schema.Attribute.Component<'model-zoo.hero', false>;
+    kits: Schema.Attribute.Component<'model-zoo.kits', false>;
+    library: Schema.Attribute.Component<'model-zoo.library', false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::model-zoo-page.model-zoo-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'shared.seo', false>;
+    steps: Schema.Attribute.Component<'model-zoo.steps', false>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    watch_it_run: Schema.Attribute.Component<'model-zoo.watch-it-run', false>;
+  };
+}
+
 export interface ApiNavbarNavbar extends Struct.SingleTypeSchema {
   collectionName: 'navbar';
   info: {
@@ -2094,6 +2130,7 @@ declare module '@strapi/strapi' {
       'api::job-location.job-location': ApiJobLocationJobLocation;
       'api::job.job': ApiJobJob;
       'api::mail-setting.mail-setting': ApiMailSettingMailSetting;
+      'api::model-zoo-page.model-zoo-page': ApiModelZooPageModelZooPage;
       'api::navbar.navbar': ApiNavbarNavbar;
       'api::news-listing-page.news-listing-page': ApiNewsListingPageNewsListingPage;
       'api::partner-application.partner-application': ApiPartnerApplicationPartnerApplication;

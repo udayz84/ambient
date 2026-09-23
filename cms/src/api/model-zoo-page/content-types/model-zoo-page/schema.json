@@ -1,0 +1,56 @@
+{
+  "kind": "singleType",
+  "collectionName": "model_zoo_pages",
+  "info": {
+    "singularName": "model-zoo-page",
+    "pluralName": "model-zoo-pages",
+    "displayName": "Model Zoo Page",
+    "description": "Model Zoo page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hero": {
+      "type": "component",
+      "repeatable": false,
+      "component": "model-zoo.hero"
+    },
+    "watch_it_run": {
+      "type": "component",
+      "repeatable": false,
+      "component": "model-zoo.watch-it-run"
+    },
+    "library": {
+      "type": "component",
+      "repeatable": false,
+      "component": "model-zoo.library"
+    },
+    "app_forge": {
+      "type": "component",
+      "repeatable": false,
+      "component": "model-zoo.app-forge"
+    },
+    "steps": {
+      "type": "component",
+      "repeatable": false,
+      "component": "model-zoo.steps"
+    },
+    "build_it": {
+      "type": "component",
+      "repeatable": false,
+      "component": "model-zoo.build-it"
+    },
+    "kits": {
+      "type": "component",
+      "repeatable": false,
+      "component": "model-zoo.kits"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

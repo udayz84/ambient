@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_model_zoo_model_specs",
+  "info": {
+    "displayName": "Model Spec",
+    "description": "Model card spec cell (label + value)"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "value": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

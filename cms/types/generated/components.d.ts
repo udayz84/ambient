@@ -1244,6 +1244,260 @@ export interface HomeTechnology extends Struct.ComponentSchema {
   };
 }
 
+export interface ModelZooAppForge extends Struct.ComponentSchema {
+  collectionName: 'components_model_zoo_app_forges';
+  info: {
+    description: 'ApplicationForge phone-control section';
+    displayName: 'App Forge';
+  };
+  attributes: {
+    app_store_badge: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    card_badge: Schema.Attribute.String;
+    card_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    card_image_alt: Schema.Attribute.String;
+    card_title: Schema.Attribute.String;
+    cta: Schema.Attribute.Component<'shared.cta', false>;
+    forge_title: Schema.Attribute.String;
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    play_store_badge: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    steps: Schema.Attribute.Component<'model-zoo.forge-step', true>;
+    subtitle: Schema.Attribute.Text;
+    toggle_text: Schema.Attribute.String;
+  };
+}
+
+export interface ModelZooBuildCard extends Struct.ComponentSchema {
+  collectionName: 'components_model_zoo_build_cards';
+  info: {
+    description: 'Build It feature card with icon tile';
+    displayName: 'Build Card';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ModelZooBuildIt extends Struct.ComponentSchema {
+  collectionName: 'components_model_zoo_build_its';
+  info: {
+    description: "Don't see it? Build it. section";
+    displayName: 'Build It';
+  };
+  attributes: {
+    cards: Schema.Attribute.Component<'model-zoo.build-card', true>;
+    cta_primary: Schema.Attribute.Component<'shared.cta', false>;
+    cta_secondary: Schema.Attribute.Component<'shared.cta', false>;
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    subtitle: Schema.Attribute.Text;
+  };
+}
+
+export interface ModelZooCollageCard extends Struct.ComponentSchema {
+  collectionName: 'components_model_zoo_collage_cards';
+  info: {
+    description: 'Hero decorative model-preview card';
+    displayName: 'Collage Card';
+  };
+  attributes: {
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ModelZooFeaturePanel extends Struct.ComponentSchema {
+  collectionName: 'components_model_zoo_feature_panels';
+  info: {
+    description: 'Small gradient feature panel with icon';
+    displayName: 'Feature Panel';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    text: Schema.Attribute.Text & Schema.Attribute.Required;
+  };
+}
+
+export interface ModelZooForgeStep extends Struct.ComponentSchema {
+  collectionName: 'components_model_zoo_forge_steps';
+  info: {
+    description: 'ApplicationForge preview list item';
+    displayName: 'Forge Step';
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ModelZooHero extends Struct.ComponentSchema {
+  collectionName: 'components_model_zoo_heroes';
+  info: {
+    description: 'Model Zoo hero section';
+    displayName: 'Hero';
+  };
+  attributes: {
+    background_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    > &
+      Schema.Attribute.Required;
+    background_image_2: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    collage_row_1: Schema.Attribute.Component<'model-zoo.collage-card', true>;
+    collage_row_2: Schema.Attribute.Component<'model-zoo.collage-card', true>;
+    cta_primary: Schema.Attribute.Component<'shared.cta', false>;
+    cta_secondary: Schema.Attribute.Component<'shared.cta', false>;
+    subtitle: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ModelZooKitCard extends Struct.ComponentSchema {
+  collectionName: 'components_model_zoo_kit_cards';
+  info: {
+    description: 'Closing card with image, copy and CTA';
+    displayName: 'Kit Card';
+  };
+  attributes: {
+    cta: Schema.Attribute.Component<'shared.cta', false>;
+    description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    image_alt: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ModelZooKits extends Struct.ComponentSchema {
+  collectionName: 'components_model_zoo_kits';
+  info: {
+    description: 'Closing eval-kit / app / GitHub cards section';
+    displayName: 'Kits';
+  };
+  attributes: {
+    cards: Schema.Attribute.Component<'model-zoo.kit-card', true>;
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ModelZooLibrary extends Struct.ComponentSchema {
+  collectionName: 'components_model_zoo_libraries';
+  info: {
+    description: 'Model Zoo library section with filterable model cards';
+    displayName: 'Library';
+  };
+  attributes: {
+    cta: Schema.Attribute.Component<'shared.cta', false>;
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    models: Schema.Attribute.Component<'model-zoo.model-card', true>;
+    strip_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    strip_image_alt: Schema.Attribute.String;
+    strip_title: Schema.Attribute.String;
+    subtitle: Schema.Attribute.Text;
+  };
+}
+
+export interface ModelZooModelCard extends Struct.ComponentSchema {
+  collectionName: 'components_model_zoo_model_cards';
+  info: {
+    description: 'Model Zoo library model card';
+    displayName: 'Model Card';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    doc_cta: Schema.Attribute.Component<'shared.cta', false>;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    image_alt: Schema.Attribute.String;
+    modality: Schema.Attribute.Enumeration<['audio', 'vision', 'motion']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'audio'>;
+    model_type: Schema.Attribute.Enumeration<['open-source', 'ambient-built']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'open-source'>;
+    specs: Schema.Attribute.Component<'model-zoo.model-spec', true>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    watch_cta: Schema.Attribute.Component<'shared.cta', false>;
+  };
+}
+
+export interface ModelZooModelSpec extends Struct.ComponentSchema {
+  collectionName: 'components_model_zoo_model_specs';
+  info: {
+    description: 'Model card spec cell (label + value)';
+    displayName: 'Model Spec';
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    value: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ModelZooStepCard extends Struct.ComponentSchema {
+  collectionName: 'components_model_zoo_step_cards';
+  info: {
+    description: 'Numbered Pick / Compile / Run card';
+    displayName: 'Step Card';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    number: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ModelZooSteps extends Struct.ComponentSchema {
+  collectionName: 'components_model_zoo_steps';
+  info: {
+    description: 'Pick / Compile / Run section';
+    displayName: 'Steps';
+  };
+  attributes: {
+    cta_primary: Schema.Attribute.Component<'shared.cta', false>;
+    cta_secondary: Schema.Attribute.Component<'shared.cta', false>;
+    feature_panels: Schema.Attribute.Component<'model-zoo.feature-panel', true>;
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    step_cards: Schema.Attribute.Component<'model-zoo.step-card', true>;
+    subtitle: Schema.Attribute.Text;
+  };
+}
+
+export interface ModelZooWatchCard extends Struct.ComponentSchema {
+  collectionName: 'components_model_zoo_watch_cards';
+  info: {
+    description: 'Watch It Run proof card';
+    displayName: 'Watch Card';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    image_alt: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ModelZooWatchItRun extends Struct.ComponentSchema {
+  collectionName: 'components_model_zoo_watch_it_runs';
+  info: {
+    description: 'Model Zoo proof-cards section';
+    displayName: 'Watch It Run';
+  };
+  attributes: {
+    caption: Schema.Attribute.String;
+    cards: Schema.Attribute.Component<'model-zoo.watch-card', true>;
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    subtitle: Schema.Attribute.Text;
+  };
+}
+
 export interface NewsCard extends Struct.ComponentSchema {
   collectionName: 'components_news_cards';
   info: {
@@ -2914,6 +3168,22 @@ declare module '@strapi/strapi' {
       'home.platform-scale': HomePlatformScale;
       'home.tech-feature': HomeTechFeature;
       'home.technology': HomeTechnology;
+      'model-zoo.app-forge': ModelZooAppForge;
+      'model-zoo.build-card': ModelZooBuildCard;
+      'model-zoo.build-it': ModelZooBuildIt;
+      'model-zoo.collage-card': ModelZooCollageCard;
+      'model-zoo.feature-panel': ModelZooFeaturePanel;
+      'model-zoo.forge-step': ModelZooForgeStep;
+      'model-zoo.hero': ModelZooHero;
+      'model-zoo.kit-card': ModelZooKitCard;
+      'model-zoo.kits': ModelZooKits;
+      'model-zoo.library': ModelZooLibrary;
+      'model-zoo.model-card': ModelZooModelCard;
+      'model-zoo.model-spec': ModelZooModelSpec;
+      'model-zoo.step-card': ModelZooStepCard;
+      'model-zoo.steps': ModelZooSteps;
+      'model-zoo.watch-card': ModelZooWatchCard;
+      'model-zoo.watch-it-run': ModelZooWatchItRun;
       'news.card': NewsCard;
       'news.filter-pill': NewsFilterPill;
       'news.grid': NewsGrid;

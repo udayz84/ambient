@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_model_zoo_build_cards",
+  "info": {
+    "displayName": "Build Card",
+    "description": "Build It feature card with icon tile"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

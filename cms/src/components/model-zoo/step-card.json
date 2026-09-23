@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_model_zoo_step_cards",
+  "info": {
+    "displayName": "Step Card",
+    "description": "Numbered Pick / Compile / Run card"
+  },
+  "options": {},
+  "attributes": {
+    "number": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}
