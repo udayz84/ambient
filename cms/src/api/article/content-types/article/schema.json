@@ -7,7 +7,9 @@
     "displayName": "Article",
     "description": "News, resources, blog posts, press releases, and events unified collection"
   },
-  "options": { "draftAndPublish": true },
+  "options": {
+    "draftAndPublish": true
+  },
   "pluginOptions": {},
   "attributes": {
     "title": {
@@ -22,13 +24,28 @@
     },
     "type": {
       "type": "enumeration",
-      "enum": ["news", "resource"],
+      "enum": [
+        "news",
+        "resource"
+      ],
       "default": "news",
       "required": true
     },
     "category": {
       "type": "enumeration",
-      "enum": ["blog", "press_release", "product_update", "event", "webinar", "whitepaper", "case_study", "video", "podcast", "technical_insight", "partnership"],
+      "enum": [
+        "blog",
+        "press_release",
+        "product_update",
+        "event",
+        "webinar",
+        "whitepaper",
+        "case_study",
+        "video",
+        "podcast",
+        "technical_insight",
+        "partnership"
+      ],
       "required": true
     },
     "excerpt": {
@@ -49,8 +66,7 @@
     },
     "hero_image": {
       "type": "media",
-      "multiple": false,
-      "allowedTypes": ["images"]
+      "multiple": false
     },
     "alt": {
       "type": "string"

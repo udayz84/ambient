@@ -7,7 +7,10 @@ import { mediaUrl } from "@/lib/strapi";
 
 export function CareersHero({ data }: { data?: any }) {
   const bgImg = mediaUrl(data?.background_image);
-  const titleText = data?.title || "";
+  let titleText = data?.title || "";
+  if (!titleText.includes("\n") && titleText.includes("the physics of AI")) {
+    titleText = titleText.replace("the physics of AI", "\nthe physics of AI").trim();
+  }
   const titleLines = titleText.split("\n");
   const subtitle = data?.subtitle || "";
   const ctaLabel = data?.cta_label || "";

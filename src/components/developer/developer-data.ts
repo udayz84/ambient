@@ -53,6 +53,7 @@ export type DeveloperModule = {
   description: string;
   ctaLabel: string;
   ctaArrow?: boolean;
+  tagLabel?: string;
 };
 
 export const DEVELOPER_MODULES: DeveloperModule[] = [
@@ -70,6 +71,7 @@ export const DEVELOPER_MODULES: DeveloperModule[] = [
     description:
       "Skip the nightmare of custom RF and power routing. Drop our high-density System-on-Modules (SOMs) directly into your custom carrier boards. They're engineered for extreme space-constrained environments, radically accelerating your time-to-market.",
     ctaLabel: "View System-on-Modules",
+    tagLabel: "Coming Soon",
   },
 ];
 

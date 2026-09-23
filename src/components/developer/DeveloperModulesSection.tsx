@@ -1,6 +1,6 @@
 "use client";
 
-import { gilroyMedium, interRegular } from "../hero/fonts";
+import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { Corners } from "../shared/Corners";
 import {
@@ -37,7 +37,7 @@ export function DeveloperModulesSection({ data }: { data?: any }) {
   return (
     <div
       className="absolute flex flex-col items-center gap-[36px]"
-      style={{ left: 118.3046875, top: "calc(3709px + var(--developer-pipeline-offset, 0px))", width: 1204, transition: "top 300ms ease-in-out" }}
+      style={{ left: 118.3046875, top: "calc(4550px + var(--developer-pipeline-offset, 0px))", width: 1204, transition: "top 300ms ease-in-out" }}
       data-node-id="2438:4587"
     >
       {/* Header — 2438:4588 (800 wide, centered) */}
@@ -111,9 +111,12 @@ function ModuleCard({
           <img loading="lazy" decoding="async"
             alt=""
             src={image}
-            className="absolute inset-0 size-full max-w-none object-contain"
+            className={`absolute inset-0 size-full max-w-none object-contain ${module?.tagLabel || fallback.tagLabel ? "opacity-90 blur-[1px]" : ""}`}
           />
         </div>
+        {module?.tagLabel || fallback.tagLabel ? (
+          <ModuleTag label={module?.tagLabel || fallback.tagLabel} />
+        ) : null}
       </div>
 
       {/* News section — 2438:4600 */}
@@ -168,5 +171,17 @@ function ModuleCta({
       </span>
       <GreenCtaCorners />
     </a>
+  );
+}
+
+function ModuleTag({ label }: { label: string }) {
+  return (
+    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center border border-[#E2A740] bg-black/90 px-[16px] py-[12px] shadow-lg z-10">
+      <span className={`${dmMono.className} flex items-center gap-[16px] whitespace-nowrap text-[14px] uppercase tracking-[0.1em] text-[#E2A740]`}>
+        <span>|</span>
+        <span>{label.toUpperCase()}</span>
+        <span>|</span>
+      </span>
+    </div>
   );
 }

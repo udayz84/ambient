@@ -35,7 +35,7 @@ export function DeveloperCopilotsSection({ data }: { data?: any }) {
   return (
     <div
       className="absolute flex flex-col items-center gap-[40px]"
-      style={{ left: 118.3046875, top: "calc(5700px + var(--developer-pipeline-offset, 0px))", width: 1204, transition: "top 300ms ease-in-out" }}
+      style={{ left: 118.3046875, top: "calc(5500px + var(--developer-pipeline-offset, 0px))", width: 1204, transition: "top 300ms ease-in-out" }}
       data-node-id="2438:4666"
     >
       {/* Header — 2438:4667 */}
@@ -64,7 +64,7 @@ export function DeveloperCopilotsSection({ data }: { data?: any }) {
           </div>
           <h2
             ref={fitRef}
-            className={`${gilroyMedium.className} absolute left-1/2 top-[3.03px] max-w-full -translate-x-1/2 bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} absolute left-1/2 top-[3.03px] max-w-full -translate-x-1/2 bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic whitespace-nowrap`}
             style={{ backgroundImage: COPILOT_TITLE_GRADIENT }}
           >
             {heading}

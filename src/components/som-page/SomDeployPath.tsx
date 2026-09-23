@@ -78,14 +78,16 @@ export function SomDeployPath({ data }: { data?: any }) {
             return (
               <div key={i} className="relative flex flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[20px] pt-[20px] pb-[32px] w-[590px] max-w-full z-10 flex-1">
                 <div className="relative flex w-full shrink-0 items-center justify-center rounded-[6px] border border-solid border-[rgba(0,255,0,0.3)] overflow-hidden h-[327px] bg-[rgba(12,22,11,0.5)]">
-                  <img loading="lazy" decoding="async" src={imageUrl} alt={card.title} className="max-w-[90%] max-h-[90%] object-contain opacity-90 blur-[1px]" />
-                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center border border-[#E2A740] bg-black/90 px-[16px] py-[12px] shadow-lg">
-                    <span className={`${dmMono?.className || "font-mono"} flex items-center gap-[16px] whitespace-nowrap text-[14px] uppercase tracking-[0.1em] text-[#E2A740]`}>
-                      <span>|</span>
-                      <span>{card.image_overlay_label?.toUpperCase() || (card.is_available ? "AVAILABLE" : "COMING SOON")}</span>
-                      <span>|</span>
-                    </span>
-                  </div>
+                  <img loading="lazy" decoding="async" src={imageUrl} alt={card.title} className={`max-w-[90%] max-h-[90%] object-contain opacity-90 ${!card.is_available ? "blur-[1px]" : ""}`} />
+                  {!card.is_available && (
+                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center border border-[#E2A740] bg-black/90 px-[16px] py-[12px] shadow-lg">
+                      <span className={`${dmMono?.className || "font-mono"} flex items-center gap-[16px] whitespace-nowrap text-[14px] uppercase tracking-[0.1em] text-[#E2A740]`}>
+                        <span>|</span>
+                        <span>{card.image_overlay_label?.toUpperCase() || "COMING SOON"}</span>
+                        <span>|</span>
+                      </span>
+                    </div>
+                  )}
                 </div>
                 <div className="flex w-full flex-col items-start gap-[10px] flex-grow">
                   <SomTag label={card.badge_label || "Available"} available={card.is_available ?? true} widthClass={card.is_available ? "w-[134px]" : "w-[150px]"} />

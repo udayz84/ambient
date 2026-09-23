@@ -215,7 +215,7 @@ export function CareersOpenRoles({
           >
             <p
               ref={fitRef}
-              className={`${gilroyMedium.className} absolute top-[26.03px] left-[292.35px] max-w-[584px] -translate-x-1/2 bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} absolute top-[26.03px] left-[292.35px] max-w-[584px] -translate-x-1/2 bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic whitespace-nowrap`}
               style={{
                 backgroundImage: CTA_TITLE_GRADIENT,
                 WebkitBackgroundClip: "text",

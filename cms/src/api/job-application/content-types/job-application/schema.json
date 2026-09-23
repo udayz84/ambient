@@ -7,7 +7,9 @@
     "displayName": "Job Applications",
     "description": "Applications submitted via the careers Apply Now form"
   },
-  "options": { "draftAndPublish": false },
+  "options": {
+    "draftAndPublish": false
+  },
   "pluginOptions": {},
   "attributes": {
     "full_name": {
@@ -34,7 +36,6 @@
     },
     "resume": {
       "type": "media",
-      "allowedTypes": ["files"],
       "multiple": false
     },
     "cover_letter": {

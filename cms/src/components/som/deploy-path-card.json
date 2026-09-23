@@ -24,8 +24,7 @@
     "image": {
       "type": "media",
       "multiple": false,
-      "required": false,
-      "allowedTypes": ["images"]
+      "required": false
     },
     "image_overlay_label": {
       "type": "string"

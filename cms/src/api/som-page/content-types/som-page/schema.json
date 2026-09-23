@@ -22,7 +22,6 @@
       "component": "som.features",
       "repeatable": false
     },
-
     "prototype": {
       "type": "component",
       "component": "som.prototypes",
@@ -55,13 +54,7 @@
     },
     "bg_image": {
       "type": "media",
-      "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "multiple": false
     }
   }
 }

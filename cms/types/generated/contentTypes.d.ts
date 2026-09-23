@@ -576,7 +576,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
         maxLength: 500;
       }>;
     featured_image: Schema.Attribute.Media;
-    hero_image: Schema.Attribute.Media<'images'>;
+    hero_image: Schema.Attribute.Media;
     is_featured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -973,7 +973,7 @@ export interface ApiJobApplicationJobApplication
         maxLength: 30;
       }>;
     publishedAt: Schema.Attribute.DateTime;
-    resume: Schema.Attribute.Media<'files'>;
+    resume: Schema.Attribute.Media;
     role: Schema.Attribute.String &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 200;
@@ -1498,7 +1498,7 @@ export interface ApiSomPageSomPage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    bg_image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    bg_image: Schema.Attribute.Media;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

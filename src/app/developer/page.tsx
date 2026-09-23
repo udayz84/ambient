@@ -30,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 import { DeveloperModelZoo } from "@/components/developer/DeveloperModelZoo";
 
-const CANVAS_HEIGHT = 6500;
+const CANVAS_HEIGHT = 6188;
 
 export default async function DeveloperPage() {
   let data: any = null;

@@ -116,9 +116,9 @@ export interface AppsSomCard extends Struct.ComponentSchema {
     displayName: 'SOM Card';
   };
   attributes: {
-    image_a: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    image_a: Schema.Attribute.Media;
     image_a_alt: Schema.Attribute.String;
-    image_b: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    image_b: Schema.Attribute.Media;
     image_b_alt: Schema.Attribute.String;
     is_upcoming: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     label: Schema.Attribute.String & Schema.Attribute.Required;
@@ -912,7 +912,7 @@ export interface DvkModuleCard extends Struct.ComponentSchema {
   };
   attributes: {
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media<'images'>;
+    image: Schema.Attribute.Media;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -1252,7 +1252,7 @@ export interface NewsHero extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
-    background_image: Schema.Attribute.Media<'images'>;
+    background_image: Schema.Attribute.Media;
     cta_label: Schema.Attribute.String;
     pagination_text: Schema.Attribute.String;
     subtitle: Schema.Attribute.Text;
@@ -1268,7 +1268,7 @@ export interface NewsPressKit extends Struct.ComponentSchema {
     displayName: 'Press Kit';
   };
   attributes: {
-    cta_file: Schema.Attribute.Media<'files'>;
+    cta_file: Schema.Attribute.Media;
     cta_file_alt: Schema.Attribute.String;
     cta_label: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Download Press Kit (.ZIP)'>;
@@ -1506,7 +1506,7 @@ export interface ProductsModelforgeStep extends Struct.ComponentSchema {
   };
   attributes: {
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media<'images'>;
+    image: Schema.Attribute.Media;
     step: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -1692,7 +1692,7 @@ export interface ResourcesFeaturedCard extends Struct.ComponentSchema {
       Schema.Attribute.DefaultTo<false>;
     image: Schema.Attribute.Media;
     image_alt: Schema.Attribute.String;
-    pdf_file: Schema.Attribute.Media<'files'>;
+    pdf_file: Schema.Attribute.Media;
     pdf_file_alt: Schema.Attribute.String;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -2071,7 +2071,7 @@ export interface SomDeployPathCard extends Struct.ComponentSchema {
     badge_label: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Available'>;
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media<'images'>;
+    image: Schema.Attribute.Media;
     image_overlay_label: Schema.Attribute.String;
     is_available: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
@@ -2152,7 +2152,7 @@ export interface SomHero extends Struct.ComponentSchema {
     displayName: 'Hero';
   };
   attributes: {
-    image: Schema.Attribute.Media<'images'>;
+    image: Schema.Attribute.Media;
     primary_button: Schema.Attribute.Component<'shared.button', false>;
     secondary_button: Schema.Attribute.Component<'shared.button', false>;
     subtitle: Schema.Attribute.Text;
@@ -2197,7 +2197,7 @@ export interface SomIntelligenceCard extends Struct.ComponentSchema {
   };
   attributes: {
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media<'images'>;
+    image: Schema.Attribute.Media;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -2210,7 +2210,7 @@ export interface SomPrototypeCard extends Struct.ComponentSchema {
   };
   attributes: {
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media<'images'>;
+    image: Schema.Attribute.Media;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -2319,10 +2319,10 @@ export interface TechGraphLabel extends Struct.ComponentSchema {
     displayName: 'Graph Label';
   };
   attributes: {
-    bottom_image: Schema.Attribute.Media<'images'>;
+    bottom_image: Schema.Attribute.Media;
     label: Schema.Attribute.String & Schema.Attribute.Required;
     sub_label: Schema.Attribute.String;
-    top_image: Schema.Attribute.Media<'images'>;
+    top_image: Schema.Attribute.Media;
   };
 }
 
@@ -2449,9 +2449,7 @@ export interface TechSilicon extends Struct.ComponentSchema {
     displayName: 'Silicon';
   };
   attributes: {
-    chip_background: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
+    chip_background: Schema.Attribute.Media;
     cta: Schema.Attribute.Component<'shared.button', false>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     stat_cards: Schema.Attribute.Component<'tech.silicon-stat', true>;
@@ -2508,7 +2506,7 @@ export interface WearablesEcgCard extends Struct.ComponentSchema {
   attributes: {
     badge: Schema.Attribute.String;
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media<'images'>;
+    image: Schema.Attribute.Media;
     label: Schema.Attribute.String;
     stat: Schema.Attribute.String;
     title: Schema.Attribute.String;
@@ -2641,7 +2639,7 @@ export interface WearablesParadigmCard extends Struct.ComponentSchema {
     displayName: 'Paradigm Card';
   };
   attributes: {
-    background_image: Schema.Attribute.Media<'images'>;
+    background_image: Schema.Attribute.Media;
     body: Schema.Attribute.Text;
     stat_desc: Schema.Attribute.Text;
     stat_value: Schema.Attribute.String;
