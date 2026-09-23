@@ -15,14 +15,26 @@
     "logo": {
       "type": "media",
       "multiple": false,
-      "required": true
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "logo_alt": {
       "type": "string"
     },
     "logo_mobile": {
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "logo_mobile_alt": {
       "type": "string"
@@ -30,7 +42,13 @@
     "favicon": {
       "type": "media",
       "multiple": false,
-      "required": true
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "favicon_alt": {
       "type": "string"

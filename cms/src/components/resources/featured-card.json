@@ -8,7 +8,13 @@
   "attributes": {
     "image": {
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "image_alt": {
       "type": "string"
@@ -41,7 +47,13 @@
     },
     "pdf_file": {
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "pdf_file_alt": {
       "type": "string"

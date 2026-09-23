@@ -1,1 +1,35 @@
-{ "collectionName": "components_company_dnas", "info": { "displayName": "DNA", "description": "Company DNA section" }, "options": {}, "attributes": { "heading": { "type": "string", "required": true }, "subtitle": { "type": "text" }, "background_image": { "type": "media", "multiple": false }, "alt": { "type": "string" }, "value_cards": { "type": "component", "repeatable": true, "component": "company.dna-value" } } }
+{
+  "collectionName": "components_company_dnas",
+  "info": {
+    "displayName": "DNA",
+    "description": "Company DNA section"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "background_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "alt": {
+      "type": "string"
+    },
+    "value_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "company.dna-value"
+    }
+  }
+}

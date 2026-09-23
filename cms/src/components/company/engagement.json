@@ -1,1 +1,33 @@
-{ "collectionName": "components_company_engagements", "info": { "displayName": "Engagement", "description": "Company engagement section" }, "options": {}, "attributes": { "background_image": { "type": "media", "multiple": false }, "alt": { "type": "string" }, "join_team": { "type": "component", "repeatable": false, "component": "company.join-team" }, "cards": { "type": "component", "repeatable": true, "component": "company.engagement-card" } } }
+{
+  "collectionName": "components_company_engagements",
+  "info": {
+    "displayName": "Engagement",
+    "description": "Company engagement section"
+  },
+  "options": {},
+  "attributes": {
+    "background_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "alt": {
+      "type": "string"
+    },
+    "join_team": {
+      "type": "component",
+      "repeatable": false,
+      "component": "company.join-team"
+    },
+    "cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "company.engagement-card"
+    }
+  }
+}

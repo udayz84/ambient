@@ -1,1 +1,35 @@
-{ "collectionName": "components_apps_heroes", "info": { "displayName": "Hero", "description": "Applications hero section" }, "options": {}, "attributes": { "tag": { "type": "component", "repeatable": false, "component": "shared.tag" }, "title": { "type": "string", "required": true }, "subtitle": { "type": "text" }, "background_image": { "type": "media", "multiple": false }, "alt": { "type": "string" } } }
+{
+  "collectionName": "components_apps_heroes",
+  "info": {
+    "displayName": "Hero",
+    "description": "Applications hero section"
+  },
+  "options": {},
+  "attributes": {
+    "tag": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.tag"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "background_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "alt": {
+      "type": "string"
+    }
+  }
+}

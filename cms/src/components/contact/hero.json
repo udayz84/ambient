@@ -1,1 +1,43 @@
-{ "collectionName": "components_contact_heroes", "info": { "displayName": "Hero", "description": "Contact hero section" }, "options": {}, "attributes": { "title": { "type": "string", "required": true }, "subtitle": { "type": "text" }, "background_image": { "type": "media", "multiple": false }, "background_image_alt": { "type": "string" }, "mobile_background_image": { "type": "media", "multiple": false }, "mobile_background_image_alt": { "type": "string" } } }
+{
+  "collectionName": "components_contact_heroes",
+  "info": {
+    "displayName": "Hero",
+    "description": "Contact hero section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "background_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "background_image_alt": {
+      "type": "string"
+    },
+    "mobile_background_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "mobile_background_image_alt": {
+      "type": "string"
+    }
+  }
+}

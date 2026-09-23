@@ -1,1 +1,43 @@
-{ "collectionName": "components_products_architectures", "info": { "displayName": "Architecture", "description": "Products architecture section — Figma 3713:1965" }, "options": {}, "attributes": { "label": { "type": "string", "default": "Architecture" }, "heading": { "type": "string", "required": true }, "subtitle": { "type": "text" }, "image": { "type": "media", "multiple": false }, "alt": { "type": "string" }, "caption": { "type": "string", "default": "The Hardware Blueprint" }, "stats": { "type": "component", "repeatable": true, "component": "shared.stat" } } }
+{
+  "collectionName": "components_products_architectures",
+  "info": {
+    "displayName": "Architecture",
+    "description": "Products architecture section — Figma 3713:1965"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "default": "Architecture"
+    },
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "alt": {
+      "type": "string"
+    },
+    "caption": {
+      "type": "string",
+      "default": "The Hardware Blueprint"
+    },
+    "stats": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.stat"
+    }
+  }
+}

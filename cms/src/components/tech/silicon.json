@@ -21,7 +21,13 @@
     "chip_background": {
       "type": "media",
       "multiple": false,
-      "required": false
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "stat_cards": {
       "type": "component",

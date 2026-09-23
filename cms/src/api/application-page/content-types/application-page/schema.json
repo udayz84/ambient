@@ -1,1 +1,70 @@
-{ "kind": "collectionType", "collectionName": "application_pages", "info": { "singularName": "application-page", "pluralName": "application-pages", "displayName": "Application Page", "description": "Application page" }, "options": { "draftAndPublish": true }, "pluginOptions": {}, "attributes": { "slug": { "type": "uid" }, "icon": { "type": "media", "multiple": false, "required": false }, "hero": { "type": "component", "repeatable": false, "component": "wearables.hero" }, "carousel": { "type": "component", "repeatable": false, "component": "wearables.carousel" }, "paradigm": { "type": "component", "repeatable": false, "component": "wearables.paradigm" }, "subconscious": { "type": "component", "repeatable": false, "component": "wearables.subconscious" }, "empirical_proof": { "type": "component", "repeatable": false, "component": "wearables.empirical-proof" }, "lab_to_product": { "type": "component", "repeatable": false, "component": "wearables.lab-to-product" }, "footer_accent": { "type": "component", "repeatable": false, "component": "wearables.footer-accent" }, "seo": { "type": "component", "repeatable": false, "component": "shared.seo" } } }
+{
+  "kind": "collectionType",
+  "collectionName": "application_pages",
+  "info": {
+    "singularName": "application-page",
+    "pluralName": "application-pages",
+    "displayName": "Application Page",
+    "description": "Application page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "slug": {
+      "type": "uid"
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "hero": {
+      "type": "component",
+      "repeatable": false,
+      "component": "wearables.hero"
+    },
+    "carousel": {
+      "type": "component",
+      "repeatable": false,
+      "component": "wearables.carousel"
+    },
+    "paradigm": {
+      "type": "component",
+      "repeatable": false,
+      "component": "wearables.paradigm"
+    },
+    "subconscious": {
+      "type": "component",
+      "repeatable": false,
+      "component": "wearables.subconscious"
+    },
+    "empirical_proof": {
+      "type": "component",
+      "repeatable": false,
+      "component": "wearables.empirical-proof"
+    },
+    "lab_to_product": {
+      "type": "component",
+      "repeatable": false,
+      "component": "wearables.lab-to-product"
+    },
+    "footer_accent": {
+      "type": "component",
+      "repeatable": false,
+      "component": "wearables.footer-accent"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

@@ -11,7 +11,7 @@ export interface AppsArticleCard extends Struct.ComponentSchema {
     body: Schema.Attribute.Text;
     cta_href: Schema.Attribute.String;
     cta_label: Schema.Attribute.String;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -60,7 +60,10 @@ export interface AppsDeathOfHardwareTradeoffs extends Struct.ComponentSchema {
     displayName: 'Death Of Hardware Tradeoffs';
   };
   attributes: {
-    carousel_images: Schema.Attribute.Media<undefined, true>;
+    carousel_images: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
     features: Schema.Attribute.Component<'apps.feature', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     subtitle: Schema.Attribute.Text;
@@ -86,7 +89,9 @@ export interface AppsHero extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
-    background_image: Schema.Attribute.Media;
+    background_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     subtitle: Schema.Attribute.Text;
     tag: Schema.Attribute.Component<'shared.tag', false>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
@@ -116,9 +121,9 @@ export interface AppsSomCard extends Struct.ComponentSchema {
     displayName: 'SOM Card';
   };
   attributes: {
-    image_a: Schema.Attribute.Media;
+    image_a: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     image_a_alt: Schema.Attribute.String;
-    image_b: Schema.Attribute.Media;
+    image_b: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     image_b_alt: Schema.Attribute.String;
     is_upcoming: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     label: Schema.Attribute.String & Schema.Attribute.Required;
@@ -151,7 +156,7 @@ export interface AppsWinCard extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     label: Schema.Attribute.String & Schema.Attribute.Required;
     stat: Schema.Attribute.String;
     stat_label: Schema.Attribute.String;
@@ -180,7 +185,7 @@ export interface CareersBenefitCard extends Struct.ComponentSchema {
   attributes: {
     alt: Schema.Attribute.String;
     description: Schema.Attribute.Text;
-    icon: Schema.Attribute.Media;
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -229,10 +234,14 @@ export interface CareersDna extends Struct.ComponentSchema {
     displayName: 'DNA';
   };
   attributes: {
-    chip_object: Schema.Attribute.Media;
+    chip_object: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     chip_object_alt: Schema.Attribute.String;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
-    mobile_chip_object: Schema.Attribute.Media;
+    mobile_chip_object: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     mobile_chip_object_alt: Schema.Attribute.String;
     panels: Schema.Attribute.Component<'careers.dna-panel', true>;
     subtitle: Schema.Attribute.Text;
@@ -259,7 +268,9 @@ export interface CareersHero extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
-    background_image: Schema.Attribute.Media;
+    background_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     cta_href: Schema.Attribute.String;
     cta_label: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'VIEW OPEN ROLES'>;
@@ -295,7 +306,7 @@ export interface CareersWorkCard extends Struct.ComponentSchema {
   attributes: {
     alt: Schema.Attribute.String;
     description: Schema.Attribute.Text;
-    icon: Schema.Attribute.Media;
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -326,7 +337,7 @@ export interface CompanyCompactArticle extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -339,7 +350,9 @@ export interface CompanyDna extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
-    background_image: Schema.Attribute.Media;
+    background_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     subtitle: Schema.Attribute.Text;
     value_cards: Schema.Attribute.Component<'company.dna-value', true>;
@@ -368,7 +381,7 @@ export interface CompanyEcosystem extends Struct.ComponentSchema {
     alt: Schema.Attribute.String;
     columns: Schema.Attribute.Component<'company.ecosystem-column', true>;
     heading: Schema.Attribute.String;
-    map_image: Schema.Attribute.Media;
+    map_image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     subtitle: Schema.Attribute.Text;
   };
 }
@@ -382,7 +395,7 @@ export interface CompanyEcosystemColumn extends Struct.ComponentSchema {
   attributes: {
     alt: Schema.Attribute.String;
     description: Schema.Attribute.Text;
-    icon: Schema.Attribute.Media;
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -395,7 +408,9 @@ export interface CompanyEngagement extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
-    background_image: Schema.Attribute.Media;
+    background_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     cards: Schema.Attribute.Component<'company.engagement-card', true>;
     join_team: Schema.Attribute.Component<'company.join-team', false>;
   };
@@ -412,7 +427,7 @@ export interface CompanyEngagementCard extends Struct.ComponentSchema {
     cta_href: Schema.Attribute.String;
     cta_label: Schema.Attribute.String;
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -428,7 +443,7 @@ export interface CompanyFeaturedArticle extends Struct.ComponentSchema {
     category: Schema.Attribute.String;
     date: Schema.Attribute.String;
     excerpt: Schema.Attribute.Text;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     metadata: Schema.Attribute.Text;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -441,10 +456,14 @@ export interface CompanyHero extends Struct.ComponentSchema {
     displayName: 'Hero';
   };
   attributes: {
-    background_image: Schema.Attribute.Media;
+    background_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     background_image_alt: Schema.Attribute.String;
     body: Schema.Attribute.Text;
-    mobile_background_image: Schema.Attribute.Media;
+    mobile_background_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     mobile_background_image_alt: Schema.Attribute.String;
     title: Schema.Attribute.Text & Schema.Attribute.Required;
   };
@@ -461,7 +480,7 @@ export interface CompanyJoinTeam extends Struct.ComponentSchema {
     cta_href: Schema.Attribute.String;
     cta_label: Schema.Attribute.String;
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -502,7 +521,7 @@ export interface CompanyPartner extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
-    logo: Schema.Attribute.Media;
+    logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     name: Schema.Attribute.String;
   };
 }
@@ -564,7 +583,7 @@ export interface ContactFormTrack extends Struct.ComponentSchema {
     alt: Schema.Attribute.String;
     description: Schema.Attribute.Text;
     form: Schema.Attribute.Component<'contact.form-field', true>;
-    icon: Schema.Attribute.Media;
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     label: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -576,9 +595,13 @@ export interface ContactHero extends Struct.ComponentSchema {
     displayName: 'Hero';
   };
   attributes: {
-    background_image: Schema.Attribute.Media;
+    background_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     background_image_alt: Schema.Attribute.String;
-    mobile_background_image: Schema.Attribute.Media;
+    mobile_background_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     mobile_background_image_alt: Schema.Attribute.String;
     subtitle: Schema.Attribute.Text;
     title: Schema.Attribute.String & Schema.Attribute.Required;
@@ -592,11 +615,13 @@ export interface ContactMap extends Struct.ComponentSchema {
     displayName: 'Map';
   };
   attributes: {
-    globe_image: Schema.Attribute.Media;
+    globe_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     globe_image_alt: Schema.Attribute.String;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     locations: Schema.Attribute.Component<'shared.location', true>;
-    map_base: Schema.Attribute.Media;
+    map_base: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     map_base_alt: Schema.Attribute.String;
     subtitle: Schema.Attribute.Text;
   };
@@ -624,7 +649,7 @@ export interface ContactSchedule extends Struct.ComponentSchema {
     alt: Schema.Attribute.String;
     cards: Schema.Attribute.Component<'contact.schedule-card', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
-    icon: Schema.Attribute.Media;
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     subtitle: Schema.Attribute.Text;
   };
 }
@@ -640,7 +665,7 @@ export interface ContactScheduleCard extends Struct.ComponentSchema {
     cta_href: Schema.Attribute.String;
     cta_label: Schema.Attribute.String;
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     tag: Schema.Attribute.String;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -669,7 +694,7 @@ export interface DeveloperCodeArticle extends Struct.ComponentSchema {
   attributes: {
     alt: Schema.Attribute.String;
     description: Schema.Attribute.Text;
-    icon: Schema.Attribute.Media;
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -686,7 +711,7 @@ export interface DeveloperComingSoon extends Struct.ComponentSchema {
     cta_href: Schema.Attribute.String;
     cta_label: Schema.Attribute.String;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     image_alt: Schema.Attribute.String;
     subtitle: Schema.Attribute.Text;
   };
@@ -703,7 +728,7 @@ export interface DeveloperCopilot extends Struct.ComponentSchema {
     cta_href: Schema.Attribute.String;
     cta_label: Schema.Attribute.String;
     description: Schema.Attribute.Text;
-    icon: Schema.Attribute.Media;
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -729,7 +754,9 @@ export interface DeveloperHero extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
-    background_image: Schema.Attribute.Media;
+    background_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     primary_button: Schema.Attribute.Component<'shared.button', false>;
     secondary_button: Schema.Attribute.Component<'shared.button', false>;
@@ -748,7 +775,7 @@ export interface DeveloperModule extends Struct.ComponentSchema {
     cta_href: Schema.Attribute.String;
     cta_label: Schema.Attribute.String;
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -799,10 +826,12 @@ export interface DeveloperPipelineTab extends Struct.ComponentSchema {
   };
   attributes: {
     bullets: Schema.Attribute.Component<'developer.pipeline-bullet', true>;
-    flow_image: Schema.Attribute.Media;
+    flow_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     flow_image_alt: Schema.Attribute.String;
     label: Schema.Attribute.String & Schema.Attribute.Required;
-    logo: Schema.Attribute.Media;
+    logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     logo_alt: Schema.Attribute.String;
     subtitle: Schema.Attribute.String;
   };
@@ -817,7 +846,7 @@ export interface DvkDemoCard extends Struct.ComponentSchema {
   attributes: {
     alt: Schema.Attribute.String;
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title_line_1: Schema.Attribute.String;
     title_line_2: Schema.Attribute.String;
   };
@@ -858,7 +887,9 @@ export interface DvkHero extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
-    background_image: Schema.Attribute.Media;
+    background_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     cta_label: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Request Evaluation Kit'>;
     subtitle: Schema.Attribute.Text;
@@ -888,9 +919,13 @@ export interface DvkModelforge extends Struct.ComponentSchema {
     displayName: 'ModelForge';
   };
   attributes: {
-    center_image: Schema.Attribute.Media;
+    center_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     dvk_board_description: Schema.Attribute.Text;
-    dvk_board_image: Schema.Attribute.Media;
+    dvk_board_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     dvk_board_title: Schema.Attribute.String;
     floating_tags: Schema.Attribute.Component<'shared.tag', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
@@ -899,7 +934,9 @@ export interface DvkModelforge extends Struct.ComponentSchema {
     toolchain_subtitle: Schema.Attribute.String;
     toolchain_title: Schema.Attribute.String;
     your_model_description: Schema.Attribute.Text;
-    your_model_image: Schema.Attribute.Media;
+    your_model_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     your_model_title: Schema.Attribute.String;
   };
 }
@@ -912,7 +949,7 @@ export interface DvkModuleCard extends Struct.ComponentSchema {
   };
   attributes: {
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -970,10 +1007,14 @@ export interface HomeAppTab extends Struct.ComponentSchema {
   };
   attributes: {
     feature_cards: Schema.Attribute.Component<'home.app-feature-card', true>;
-    hero_image: Schema.Attribute.Media;
+    hero_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     hero_image_alt: Schema.Attribute.String;
     label: Schema.Attribute.String & Schema.Attribute.Required;
-    mobile_hero_image: Schema.Attribute.Media;
+    mobile_hero_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     mobile_hero_image_alt: Schema.Attribute.String;
     watermark_text: Schema.Attribute.String;
   };
@@ -1016,7 +1057,7 @@ export interface HomeDevCard extends Struct.ComponentSchema {
   attributes: {
     alt: Schema.Attribute.String;
     body: Schema.Attribute.Text;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -1057,7 +1098,9 @@ export interface HomeGpxProduct extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
-    chip_image: Schema.Attribute.Media;
+    chip_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     description: Schema.Attribute.Text;
     label: Schema.Attribute.String & Schema.Attribute.Required;
     product_id: Schema.Attribute.String;
@@ -1073,12 +1116,14 @@ export interface HomeHero extends Struct.ComponentSchema {
   attributes: {
     announcements: Schema.Attribute.Component<'home.hero-announcement', true>;
     metrics: Schema.Attribute.Component<'home.hero-metric', true>;
-    mobile_video: Schema.Attribute.Media;
+    mobile_video: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     mobile_video_alt: Schema.Attribute.String;
     scroll_text: Schema.Attribute.String & Schema.Attribute.DefaultTo<'SCROLL'>;
     subtitle: Schema.Attribute.Text & Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
-    video: Schema.Attribute.Media;
+    video: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     video_alt: Schema.Attribute.String;
   };
 }
@@ -1091,7 +1136,7 @@ export interface HomeHeroAnnouncement extends Struct.ComponentSchema {
   };
   attributes: {
     ctas: Schema.Attribute.Component<'shared.button', true>;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     image_alt: Schema.Attribute.String;
     subtitle: Schema.Attribute.Text & Schema.Attribute.Required;
     tag: Schema.Attribute.String & Schema.Attribute.Required;
@@ -1150,7 +1195,7 @@ export interface HomePartner extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
-    logo: Schema.Attribute.Media;
+    logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     name: Schema.Attribute.String;
   };
 }
@@ -1179,7 +1224,7 @@ export interface HomeTechFeature extends Struct.ComponentSchema {
   attributes: {
     alt: Schema.Attribute.String;
     description: Schema.Attribute.Text;
-    icon: Schema.Attribute.Media;
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -1193,7 +1238,7 @@ export interface HomeTechnology extends Struct.ComponentSchema {
   attributes: {
     features: Schema.Attribute.Component<'home.tech-feature', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     image_alt: Schema.Attribute.String;
     tag: Schema.Attribute.Component<'shared.tag', false>;
   };
@@ -1209,7 +1254,9 @@ export interface NewsCard extends Struct.ComponentSchema {
     alt: Schema.Attribute.String;
     category: Schema.Attribute.String & Schema.Attribute.Required;
     excerpt: Schema.Attribute.Text;
-    image_overlay: Schema.Attribute.Media;
+    image_overlay: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     title_font_size: Schema.Attribute.Integer;
   };
@@ -1237,7 +1284,9 @@ export interface NewsGrid extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
-    backdrop_image: Schema.Attribute.Media;
+    backdrop_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     filter_pills: Schema.Attribute.Component<'news.filter-pill', true>;
     load_more_label: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Load More Resources'>;
@@ -1252,7 +1301,9 @@ export interface NewsHero extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
-    background_image: Schema.Attribute.Media;
+    background_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     cta_label: Schema.Attribute.String;
     pagination_text: Schema.Attribute.String;
     subtitle: Schema.Attribute.Text;
@@ -1268,7 +1319,7 @@ export interface NewsPressKit extends Struct.ComponentSchema {
     displayName: 'Press Kit';
   };
   attributes: {
-    cta_file: Schema.Attribute.Media;
+    cta_file: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     cta_file_alt: Schema.Attribute.String;
     cta_label: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Download Press Kit (.ZIP)'>;
@@ -1297,12 +1348,20 @@ export interface ProductsAlwaysOn extends Struct.ComponentSchema {
     displayName: 'Always On';
   };
   attributes: {
-    ai_core_icon: Schema.Attribute.Media;
+    ai_core_icon: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     alt: Schema.Attribute.String;
-    bg_subconscious_image: Schema.Attribute.Media;
-    bg_surge_image: Schema.Attribute.Media;
+    bg_subconscious_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    bg_surge_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
-    host_cpu_image: Schema.Attribute.Media;
+    host_cpu_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     stats: Schema.Attribute.Component<'products.alwayson-stat', true>;
     subtitle: Schema.Attribute.Text;
   };
@@ -1317,7 +1376,7 @@ export interface ProductsAlwaysonStat extends Struct.ComponentSchema {
   attributes: {
     alt: Schema.Attribute.String;
     badge: Schema.Attribute.String;
-    stat_icon: Schema.Attribute.Media;
+    stat_icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title_lines: Schema.Attribute.Text & Schema.Attribute.Required;
   };
 }
@@ -1333,7 +1392,7 @@ export interface ProductsArchitecture extends Struct.ComponentSchema {
     caption: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'The Hardware Blueprint'>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     label: Schema.Attribute.String & Schema.Attribute.DefaultTo<'Architecture'>;
     stats: Schema.Attribute.Component<'shared.stat', true>;
     subtitle: Schema.Attribute.Text;
@@ -1351,7 +1410,7 @@ export interface ProductsBenchCard extends Struct.ComponentSchema {
     cta_href: Schema.Attribute.String;
     cta_label: Schema.Attribute.String;
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -1378,7 +1437,7 @@ export interface ProductsFeatureCard extends Struct.ComponentSchema {
   };
   attributes: {
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -1390,7 +1449,9 @@ export interface ProductsFeatures extends Struct.ComponentSchema {
     displayName: 'Features';
   };
   attributes: {
-    background_image: Schema.Attribute.Media;
+    background_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     feature_cards: Schema.Attribute.Component<'products.feature-card', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     subtitle: Schema.Attribute.Text;
@@ -1404,7 +1465,9 @@ export interface ProductsFullPicture extends Struct.ComponentSchema {
     displayName: 'Full Picture';
   };
   attributes: {
-    background_image: Schema.Attribute.Media;
+    background_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     callouts: Schema.Attribute.Component<'products.spec-callout', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     subtitle: Schema.Attribute.Text;
@@ -1418,9 +1481,13 @@ export interface ProductsHero extends Struct.ComponentSchema {
     displayName: 'Hero';
   };
   attributes: {
-    chipset_image: Schema.Attribute.Media;
+    chipset_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     chipset_image_alt: Schema.Attribute.String;
-    chipset_image_mobile: Schema.Attribute.Media;
+    chipset_image_mobile: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     primary_button: Schema.Attribute.Component<'shared.button', false>;
     secondary_button: Schema.Attribute.Component<'shared.button', false>;
     subtitle: Schema.Attribute.Text;
@@ -1436,7 +1503,9 @@ export interface ProductsMeasured extends Struct.ComponentSchema {
     displayName: 'Measured';
   };
   attributes: {
-    background_image: Schema.Attribute.Media;
+    background_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     cards: Schema.Attribute.Component<'products.measured-card', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     primary_button: Schema.Attribute.Component<'shared.button', false>;
@@ -1453,7 +1522,9 @@ export interface ProductsMeasuredCard extends Struct.ComponentSchema {
     displayName: 'Measured Card';
   };
   attributes: {
-    chip_image: Schema.Attribute.Media;
+    chip_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     stats: Schema.Attribute.Component<'products.measured-stat', true>;
     variant: Schema.Attribute.Enumeration<['gpx10', 'risc_mcu', 'mcu_npu']> &
@@ -1506,7 +1577,7 @@ export interface ProductsModelforgeStep extends Struct.ComponentSchema {
   };
   attributes: {
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     step: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -1529,7 +1600,7 @@ export interface ProductsSpecCallout extends Struct.ComponentSchema {
     displayName: 'Spec Callout';
   };
   attributes: {
-    icon: Schema.Attribute.Media;
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     items: Schema.Attribute.Text;
     label: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -1543,7 +1614,9 @@ export interface ProductsStartBuilding extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
-    background_image: Schema.Attribute.Media;
+    background_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     cards: Schema.Attribute.Component<'products.start-card', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     subtitle: Schema.Attribute.Text;
@@ -1611,7 +1684,7 @@ export interface ProductsUsecaseTab extends Struct.ComponentSchema {
   attributes: {
     alt: Schema.Attribute.String;
     feature_cards: Schema.Attribute.Component<'products.usecase-card', true>;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     label: Schema.Attribute.String & Schema.Attribute.Required;
     watermark_text: Schema.Attribute.String;
   };
@@ -1690,9 +1763,9 @@ export interface ResourcesFeaturedCard extends Struct.ComponentSchema {
     description: Schema.Attribute.Text;
     enable_download_popup: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     image_alt: Schema.Attribute.String;
-    pdf_file: Schema.Attribute.Media;
+    pdf_file: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     pdf_file_alt: Schema.Attribute.String;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -1705,11 +1778,15 @@ export interface ResourcesHero extends Struct.ComponentSchema {
     displayName: 'Hero';
   };
   attributes: {
-    background_image: Schema.Attribute.Media;
+    background_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     background_image_alt: Schema.Attribute.String;
     contact_link_href: Schema.Attribute.String;
     contact_link_text: Schema.Attribute.String;
-    mobile_background_image: Schema.Attribute.Media;
+    mobile_background_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     mobile_background_image_alt: Schema.Attribute.String;
     search_button_label: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Search'>;
@@ -1740,11 +1817,15 @@ export interface SharedBrand extends Struct.ComponentSchema {
     displayName: 'Brand';
   };
   attributes: {
-    favicon: Schema.Attribute.Media & Schema.Attribute.Required;
+    favicon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
     favicon_alt: Schema.Attribute.String;
-    logo: Schema.Attribute.Media & Schema.Attribute.Required;
+    logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
     logo_alt: Schema.Attribute.String;
-    logo_mobile: Schema.Attribute.Media;
+    logo_mobile: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     logo_mobile_alt: Schema.Attribute.String;
     site_name: Schema.Attribute.String &
       Schema.Attribute.Required &
@@ -1802,12 +1883,16 @@ export interface SharedFooter extends Struct.ComponentSchema {
     displayName: 'Footer';
   };
   attributes: {
-    background_image: Schema.Attribute.Media;
+    background_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     background_image_alt: Schema.Attribute.String;
     copyright_text: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'\u00A9 2026 Ambient AI. All rights reserved.'>;
-    crafted_by_logo: Schema.Attribute.Media;
+    crafted_by_logo: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     crafted_by_logo_alt: Schema.Attribute.String;
     crafted_by_text: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Carefully crafted by'>;
@@ -1837,7 +1922,9 @@ export interface SharedHeader extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
-    cta_dot_icon: Schema.Attribute.Media;
+    cta_dot_icon: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     cta_href: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'/contact'>;
@@ -1866,7 +1953,8 @@ export interface SharedLeader extends Struct.ComponentSchema {
     bio_paragraphs: Schema.Attribute.Text;
     linkedin_url: Schema.Attribute.String;
     name: Schema.Attribute.String & Schema.Attribute.Required;
-    photo: Schema.Attribute.Media & Schema.Attribute.Required;
+    photo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -1892,7 +1980,9 @@ export interface SharedLocation extends Struct.ComponentSchema {
   attributes: {
     address: Schema.Attribute.Text & Schema.Attribute.Required;
     alt: Schema.Attribute.String;
-    indicator_icon: Schema.Attribute.Media;
+    indicator_icon: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -1961,7 +2051,9 @@ export interface SharedNewsletter extends Struct.ComponentSchema {
     subtitle: Schema.Attribute.Text &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'Sign up to receive regular updates.'>;
-    texture_image: Schema.Attribute.Media;
+    texture_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
   };
 }
 
@@ -1995,7 +2087,7 @@ export interface SharedSocialLink extends Struct.ComponentSchema {
   attributes: {
     alt: Schema.Attribute.String;
     href: Schema.Attribute.String & Schema.Attribute.Required;
-    icon: Schema.Attribute.Media;
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     platform: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -2010,7 +2102,7 @@ export interface SharedStat extends Struct.ComponentSchema {
     alt: Schema.Attribute.String;
     description: Schema.Attribute.Text;
     label: Schema.Attribute.String & Schema.Attribute.Required;
-    stat_icon: Schema.Attribute.Media;
+    stat_icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     value: Schema.Attribute.String;
   };
 }
@@ -2024,7 +2116,7 @@ export interface SharedStatCard extends Struct.ComponentSchema {
   attributes: {
     alt: Schema.Attribute.String;
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     label: Schema.Attribute.String & Schema.Attribute.Required;
     metric: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -2071,7 +2163,7 @@ export interface SomDeployPathCard extends Struct.ComponentSchema {
     badge_label: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Available'>;
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     image_overlay_label: Schema.Attribute.String;
     is_available: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
@@ -2113,7 +2205,7 @@ export interface SomFeatureCard extends Struct.ComponentSchema {
   };
   attributes: {
     description: Schema.Attribute.Text;
-    icon: Schema.Attribute.Media;
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     tag: Schema.Attribute.String;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -2152,7 +2244,7 @@ export interface SomHero extends Struct.ComponentSchema {
     displayName: 'Hero';
   };
   attributes: {
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     primary_button: Schema.Attribute.Component<'shared.button', false>;
     secondary_button: Schema.Attribute.Component<'shared.button', false>;
     subtitle: Schema.Attribute.Text;
@@ -2168,7 +2260,7 @@ export interface SomInsideModule extends Struct.ComponentSchema {
   };
   attributes: {
     heading: Schema.Attribute.String & Schema.Attribute.Required;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     label: Schema.Attribute.String;
     specs: Schema.Attribute.Component<'som.spec', true>;
     subtitle: Schema.Attribute.Text;
@@ -2197,7 +2289,7 @@ export interface SomIntelligenceCard extends Struct.ComponentSchema {
   };
   attributes: {
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -2210,7 +2302,7 @@ export interface SomPrototypeCard extends Struct.ComponentSchema {
   };
   attributes: {
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -2235,7 +2327,7 @@ export interface SomReadyToDeploy extends Struct.ComponentSchema {
   };
   attributes: {
     heading: Schema.Attribute.String & Schema.Attribute.Required;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     primary_cta_label: Schema.Attribute.String;
     primary_title: Schema.Attribute.String;
     secondary_cta_label: Schema.Attribute.String;
@@ -2319,10 +2411,12 @@ export interface TechGraphLabel extends Struct.ComponentSchema {
     displayName: 'Graph Label';
   };
   attributes: {
-    bottom_image: Schema.Attribute.Media;
+    bottom_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     label: Schema.Attribute.String & Schema.Attribute.Required;
     sub_label: Schema.Attribute.String;
-    top_image: Schema.Attribute.Media;
+    top_image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
   };
 }
 
@@ -2333,7 +2427,9 @@ export interface TechHero extends Struct.ComponentSchema {
     displayName: 'Hero';
   };
   attributes: {
-    hero_object: Schema.Attribute.Media;
+    hero_object: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     primary_button: Schema.Attribute.Component<'shared.button', false>;
     secondary_button: Schema.Attribute.Component<'shared.button', false>;
     subtitle: Schema.Attribute.Text;
@@ -2374,13 +2470,15 @@ export interface TechModes extends Struct.ComponentSchema {
     displayName: 'Modes';
   };
   attributes: {
-    bottom_image: Schema.Attribute.Media;
+    bottom_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     mode_cards: Schema.Attribute.Component<'tech.mode-card', true>;
     mode_labels: Schema.Attribute.Component<'tech.mode-label', true>;
     subtitle: Schema.Attribute.Text;
     tag: Schema.Attribute.Component<'shared.tag', false>;
-    top_image: Schema.Attribute.Media;
+    top_image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
   };
 }
 
@@ -2437,7 +2535,7 @@ export interface TechProblemCard extends Struct.ComponentSchema {
   };
   attributes: {
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     label: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -2449,7 +2547,9 @@ export interface TechSilicon extends Struct.ComponentSchema {
     displayName: 'Silicon';
   };
   attributes: {
-    chip_background: Schema.Attribute.Media;
+    chip_background: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     cta: Schema.Attribute.Component<'shared.button', false>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     stat_cards: Schema.Attribute.Component<'tech.silicon-stat', true>;
@@ -2493,7 +2593,10 @@ export interface WearablesCarousel extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
-    images: Schema.Attribute.Media<undefined, true>;
+    images: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
   };
 }
 
@@ -2506,7 +2609,7 @@ export interface WearablesEcgCard extends Struct.ComponentSchema {
   attributes: {
     badge: Schema.Attribute.String;
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     label: Schema.Attribute.String;
     stat: Schema.Attribute.String;
     title: Schema.Attribute.String;
@@ -2537,7 +2640,9 @@ export interface WearablesFooterAccent extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
-    divider_shape: Schema.Attribute.Media;
+    divider_shape: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     panels: Schema.Attribute.Component<'wearables.footer-panel', true>;
   };
 }
@@ -2577,9 +2682,13 @@ export interface WearablesHero extends Struct.ComponentSchema {
     displayName: 'Hero';
   };
   attributes: {
-    background_image_1: Schema.Attribute.Media;
+    background_image_1: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     background_image_1_alt: Schema.Attribute.String;
-    background_image_2: Schema.Attribute.Media;
+    background_image_2: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     background_image_2_alt: Schema.Attribute.String;
     primary_button: Schema.Attribute.Component<'shared.button', false>;
     secondary_button: Schema.Attribute.Component<'shared.button', false>;
@@ -2599,7 +2708,7 @@ export interface WearablesLabCard extends Struct.ComponentSchema {
     cta_href: Schema.Attribute.String;
     cta_label: Schema.Attribute.String;
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     step: Schema.Attribute.String & Schema.Attribute.Required;
     title: Schema.Attribute.String;
   };
@@ -2639,7 +2748,9 @@ export interface WearablesParadigmCard extends Struct.ComponentSchema {
     displayName: 'Paradigm Card';
   };
   attributes: {
-    background_image: Schema.Attribute.Media;
+    background_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     body: Schema.Attribute.Text;
     stat_desc: Schema.Attribute.Text;
     stat_value: Schema.Attribute.String;
@@ -2680,7 +2791,9 @@ export interface WearablesSubconscious extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
-    card_image: Schema.Attribute.Media;
+    card_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     card_title: Schema.Attribute.String;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     overlay_text: Schema.Attribute.String;

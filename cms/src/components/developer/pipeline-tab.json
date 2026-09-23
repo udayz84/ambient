@@ -6,12 +6,39 @@
   },
   "options": {},
   "attributes": {
-    "label": { "type": "string", "required": true },
-    "subtitle": { "type": "string" },
-    "flow_image": { "type": "media", "multiple": false },
-    "flow_image_alt": { "type": "string" },
-    "logo": { "type": "media", "multiple": false },
-    "logo_alt": { "type": "string" },
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "flow_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "flow_image_alt": {
+      "type": "string"
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "logo_alt": {
+      "type": "string"
+    },
     "bullets": {
       "type": "component",
       "repeatable": true,

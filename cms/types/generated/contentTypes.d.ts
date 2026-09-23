@@ -464,7 +464,7 @@ export interface ApiApplicationPageApplicationPage
     >;
     footer_accent: Schema.Attribute.Component<'wearables.footer-accent', false>;
     hero: Schema.Attribute.Component<'wearables.hero', false>;
-    icon: Schema.Attribute.Media;
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     lab_to_product: Schema.Attribute.Component<
       'wearables.lab-to-product',
       false
@@ -575,8 +575,12 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 500;
       }>;
-    featured_image: Schema.Attribute.Media;
-    hero_image: Schema.Attribute.Media;
+    featured_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    hero_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     is_featured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -973,7 +977,7 @@ export interface ApiJobApplicationJobApplication
         maxLength: 30;
       }>;
     publishedAt: Schema.Attribute.DateTime;
-    resume: Schema.Attribute.Media;
+    resume: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     role: Schema.Attribute.String &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 200;
@@ -1498,7 +1502,7 @@ export interface ApiSomPageSomPage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    bg_image: Schema.Attribute.Media;
+    bg_image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

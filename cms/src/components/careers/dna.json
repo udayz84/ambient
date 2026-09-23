@@ -13,17 +13,28 @@
     "subtitle": {
       "type": "text"
     },
-
     "chip_object": {
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "chip_object_alt": {
       "type": "string"
     },
     "mobile_chip_object": {
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "mobile_chip_object_alt": {
       "type": "string"

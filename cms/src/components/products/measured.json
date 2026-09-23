@@ -1,1 +1,47 @@
-{ "collectionName": "components_products_measureds", "info": { "displayName": "Measured", "description": "Products measured section — three spec cards + CTAs" }, "options": {}, "attributes": { "tag": { "type": "component", "repeatable": false, "component": "shared.tag" }, "heading": { "type": "string", "required": true }, "subtitle": { "type": "text" }, "background_image": { "type": "media", "multiple": false }, "cards": { "type": "component", "repeatable": true, "component": "products.measured-card" }, "primary_button": { "type": "component", "repeatable": false, "component": "shared.button" }, "secondary_button": { "type": "component", "repeatable": false, "component": "shared.button" } } }
+{
+  "collectionName": "components_products_measureds",
+  "info": {
+    "displayName": "Measured",
+    "description": "Products measured section — three spec cards + CTAs"
+  },
+  "options": {},
+  "attributes": {
+    "tag": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.tag"
+    },
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "background_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "products.measured-card"
+    },
+    "primary_button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.button"
+    },
+    "secondary_button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.button"
+    }
+  }
+}

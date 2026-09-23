@@ -1,1 +1,23 @@
-{ "collectionName": "components_wearables_carousels", "info": { "displayName": "Carousel", "description": "Wearables marquee carousel" }, "options": {}, "attributes": { "images": { "type": "media", "multiple": true }, "alt": { "type": "string" } } }
+{
+  "collectionName": "components_wearables_carousels",
+  "info": {
+    "displayName": "Carousel",
+    "description": "Wearables marquee carousel"
+  },
+  "options": {},
+  "attributes": {
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "alt": {
+      "type": "string"
+    }
+  }
+}

@@ -1,2 +1,52 @@
-{ "collectionName": "components_tech_modes", "info": { "displayName": "Modes", "description": "Technology modes section" }, "options": {}, "attributes": { "tag": { "type": "component", "repeatable": false, "component": "shared.tag" }, "heading": { "type": "string", "required": true }, "subtitle": { "type": "text" },     "top_image": { "type": "media", "multiple": false },
-    "bottom_image": { "type": "media", "multiple": false }, "mode_cards": { "type": "component", "repeatable": true, "component": "tech.mode-card" }, "mode_labels": { "type": "component", "repeatable": true, "component": "tech.mode-label" } } }
+{
+  "collectionName": "components_tech_modes",
+  "info": {
+    "displayName": "Modes",
+    "description": "Technology modes section"
+  },
+  "options": {},
+  "attributes": {
+    "tag": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.tag"
+    },
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "top_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "bottom_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "mode_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "tech.mode-card"
+    },
+    "mode_labels": {
+      "type": "component",
+      "repeatable": true,
+      "component": "tech.mode-label"
+    }
+  }
+}

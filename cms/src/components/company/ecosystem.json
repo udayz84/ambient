@@ -1,1 +1,34 @@
-{ "collectionName": "components_company_ecosystems", "info": { "displayName": "Ecosystem", "description": "Company ecosystem section" }, "options": {}, "attributes": { "heading": { "type": "string" }, "subtitle": { "type": "text" }, "map_image": { "type": "media", "multiple": false }, "alt": { "type": "string" }, "columns": { "type": "component", "repeatable": true, "component": "company.ecosystem-column" } } }
+{
+  "collectionName": "components_company_ecosystems",
+  "info": {
+    "displayName": "Ecosystem",
+    "description": "Company ecosystem section"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "map_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "alt": {
+      "type": "string"
+    },
+    "columns": {
+      "type": "component",
+      "repeatable": true,
+      "component": "company.ecosystem-column"
+    }
+  }
+}

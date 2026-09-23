@@ -6,11 +6,31 @@
   },
   "options": {},
   "attributes": {
-    "tag": { "type": "string", "required": true },
-    "title": { "type": "string", "required": true },
-    "subtitle": { "type": "text", "required": true },
-    "image": { "type": "media", "multiple": false },
-    "image_alt": { "type": "string" },
+    "tag": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "image_alt": {
+      "type": "string"
+    },
     "ctas": {
       "type": "component",
       "repeatable": true,

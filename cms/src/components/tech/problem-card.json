@@ -1,1 +1,27 @@
-{ "collectionName": "components_tech_problem_cards", "info": { "displayName": "Problem Card", "description": "Legacy vs A-Cube comparison card" }, "options": {}, "attributes": { "label": { "type": "string", "required": true }, "description": { "type": "text" }, "image": { "type": "media", "multiple": false } } }
+{
+  "collectionName": "components_tech_problem_cards",
+  "info": {
+    "displayName": "Problem Card",
+    "description": "Legacy vs A-Cube comparison card"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

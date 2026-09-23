@@ -36,7 +36,13 @@
     },
     "resume": {
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "cover_letter": {
       "type": "text"

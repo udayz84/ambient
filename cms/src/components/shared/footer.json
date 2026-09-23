@@ -32,14 +32,26 @@
     },
     "crafted_by_logo": {
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "crafted_by_logo_alt": {
       "type": "string"
     },
     "background_image": {
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "background_image_alt": {
       "type": "string"

@@ -1,18 +1,48 @@
 {
   "collectionName": "components_home_app_tabs",
-  "info": { "displayName": "App Tab", "description": "Application tab" },
+  "info": {
+    "displayName": "App Tab",
+    "description": "Application tab"
+  },
   "options": {},
   "attributes": {
-    "label": { "type": "string", "required": true },
-    "hero_image": { "type": "media", "multiple": false },
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "hero_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
     "hero_image_alt": {
       "type": "string"
     },
-    "mobile_hero_image": { "type": "media", "multiple": false },
+    "mobile_hero_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
     "mobile_hero_image_alt": {
       "type": "string"
     },
-    "watermark_text": { "type": "string" },
-    "feature_cards": { "type": "component", "repeatable": true, "component": "home.app-feature-card" }
+    "watermark_text": {
+      "type": "string"
+    },
+    "feature_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "home.app-feature-card"
+    }
   }
 }

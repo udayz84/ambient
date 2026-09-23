@@ -1,1 +1,33 @@
-{ "collectionName": "components_apps_win_cards", "info": { "displayName": "Win Card", "description": "Empirical advantage win card" }, "options": {}, "attributes": { "label": { "type": "string", "required": true }, "stat": { "type": "string" }, "stat_label": { "type": "string" }, "image": { "type": "media", "multiple": false }, "alt": { "type": "string" } } }
+{
+  "collectionName": "components_apps_win_cards",
+  "info": {
+    "displayName": "Win Card",
+    "description": "Empirical advantage win card"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "stat": {
+      "type": "string"
+    },
+    "stat_label": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "alt": {
+      "type": "string"
+    }
+  }
+}

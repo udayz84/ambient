@@ -1,1 +1,48 @@
-{ "collectionName": "components_contact_maps", "info": { "displayName": "Map", "description": "Contact map section" }, "options": {}, "attributes": { "heading": { "type": "string", "required": true }, "subtitle": { "type": "text" }, "globe_image": { "type": "media", "multiple": false }, "globe_image_alt": { "type": "string" }, "map_base": { "type": "media", "multiple": false }, "map_base_alt": { "type": "string" }, "locations": { "type": "component", "repeatable": true, "component": "shared.location" } } }
+{
+  "collectionName": "components_contact_maps",
+  "info": {
+    "displayName": "Map",
+    "description": "Contact map section"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "globe_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "globe_image_alt": {
+      "type": "string"
+    },
+    "map_base": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "map_base_alt": {
+      "type": "string"
+    },
+    "locations": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.location"
+    }
+  }
+}

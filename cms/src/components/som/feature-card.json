@@ -1,1 +1,30 @@
-{ "collectionName": "components_som_feature_cards", "info": { "displayName": "Feature Card", "description": "SOM feature card" }, "options": {}, "attributes": { "icon": { "type": "media", "multiple": false }, "tag": { "type": "string" }, "title": { "type": "string", "required": true }, "description": { "type": "text" } } }
+{
+  "collectionName": "components_som_feature_cards",
+  "info": {
+    "displayName": "Feature Card",
+    "description": "SOM feature card"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "tag": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

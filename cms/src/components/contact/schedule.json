@@ -1,1 +1,35 @@
-{ "collectionName": "components_contact_schedules", "info": { "displayName": "Schedule", "description": "Contact schedule section" }, "options": {}, "attributes": { "heading": { "type": "string", "required": true }, "subtitle": { "type": "text" }, "icon": { "type": "media", "multiple": false }, "alt": { "type": "string" }, "cards": { "type": "component", "repeatable": true, "component": "contact.schedule-card" } } }
+{
+  "collectionName": "components_contact_schedules",
+  "info": {
+    "displayName": "Schedule",
+    "description": "Contact schedule section"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "alt": {
+      "type": "string"
+    },
+    "cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "contact.schedule-card"
+    }
+  }
+}

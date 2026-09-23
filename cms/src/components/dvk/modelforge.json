@@ -1,1 +1,75 @@
-{ "collectionName": "components_dvk_modelforges", "info": { "displayName": "ModelForge", "description": "DVK ModelForge section" }, "options": {}, "attributes": { "heading": { "type": "string", "required": true }, "subtitle": { "type": "text" }, "center_image": { "type": "media", "multiple": false }, "your_model_title": { "type": "string" }, "your_model_description": { "type": "text" }, "your_model_image": { "type": "media", "multiple": false }, "dvk_board_title": { "type": "string" }, "dvk_board_description": { "type": "text" }, "dvk_board_image": { "type": "media", "multiple": false }, "toolchain_title": { "type": "string" }, "toolchain_subtitle": { "type": "string" }, "toolchain_labels": { "type": "component", "repeatable": true, "component": "shared.tag" }, "floating_tags": { "type": "component", "repeatable": true, "component": "shared.tag" } } }
+{
+  "collectionName": "components_dvk_modelforges",
+  "info": {
+    "displayName": "ModelForge",
+    "description": "DVK ModelForge section"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "center_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "your_model_title": {
+      "type": "string"
+    },
+    "your_model_description": {
+      "type": "text"
+    },
+    "your_model_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "dvk_board_title": {
+      "type": "string"
+    },
+    "dvk_board_description": {
+      "type": "text"
+    },
+    "dvk_board_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "toolchain_title": {
+      "type": "string"
+    },
+    "toolchain_subtitle": {
+      "type": "string"
+    },
+    "toolchain_labels": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.tag"
+    },
+    "floating_tags": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.tag"
+    }
+  }
+}

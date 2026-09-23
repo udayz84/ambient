@@ -24,7 +24,13 @@
     },
     "cta_file": {
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "cta_file_alt": {
       "type": "string"
