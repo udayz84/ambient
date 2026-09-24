@@ -30,9 +30,9 @@ const STEP_ARTICLE: Record<ForgeStep, string> = {
 };
 /** Active-row heights per variant (578×185.5 / 578×212.5). */
 const STEP_ACTIVE_HEIGHT: Record<ForgeStep, string> = {
-  pair: "min-[1024px]:h-[185.5px]",
-  flash: "min-[1024px]:h-[212.5px]",
-  results: "min-[1024px]:h-[185.5px]",
+  pair: "h-[320px] min-[1024px]:h-[185.5px]",
+  flash: "h-[320px] min-[1024px]:h-[212.5px]",
+  results: "h-[320px] min-[1024px]:h-[185.5px]",
 };
 
 /**
@@ -160,21 +160,31 @@ export function ModelZooAppForge() {
                     type="button"
                     key={step}
                     aria-pressed={isActive}
-                    onClick={() => setActiveStep(key)}
+                    onClick={() => setActiveStep(isActive ? null : key)}
                     className={`relative block h-[84px] w-full shrink-0 cursor-pointer bg-[rgba(0,0,0,0.1)] text-left transition-[height,opacity] duration-300 motion-reduce:transition-none ${isActive ? STEP_ACTIVE_HEIGHT[key] : ""} ${
                       isActive ? "opacity-100" : activeStep ? "opacity-40" : "opacity-20 hover:opacity-50"
                     }`}
                     data-node-id={`5241:57${52 - i * 6}`}
                   >
                     {isActive && (
-                      /* Stat content baked @2x from the variant (corners included) */
-                      <img
-                        alt=""
-                        src={STEP_STAT[key]}
-                        className="pointer-events-none absolute inset-0 hidden size-full object-cover min-[1024px]:block"
-                        loading="lazy"
-                        decoding="async"
-                      />
+                      <>
+                        {/* Stat content baked @2x from the variant (desktop only) */}
+                        <img
+                          alt=""
+                          src={STEP_STAT[key]}
+                          className="pointer-events-none absolute inset-0 hidden size-full object-cover min-[1024px]:block"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                        {/* Mobile preview image shown inside the accordion */}
+                        <img
+                          alt=""
+                          src={STEP_ARTICLE[key]}
+                          className="pointer-events-none absolute top-[70px] left-[20px] h-[calc(100%-90px)] w-[calc(100%-40px)] object-contain rounded-[6px] min-[1024px]:hidden"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </>
                     )}
                     <p
                       className={`${gilroyMedium.className} absolute top-[28px] left-[20px] text-[22px] leading-[28px] whitespace-nowrap text-left text-white not-italic ${isActive ? "min-[1024px]:hidden" : ""}`}

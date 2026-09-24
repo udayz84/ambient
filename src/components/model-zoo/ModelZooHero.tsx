@@ -54,6 +54,24 @@ export function ModelZooHero() {
         >
           The Ambient Model Zoo is a growing library of ready-to-run AI models — plug one into your dev or eval kit and watch it work in seconds. Open-source and Ambient-built, every model is tuned to run on GPX at microwatt power.
         </p>
+        {/* Mobile Collage Rows */}
+        <div className="relative z-10 mt-[12px] flex w-[100vw] flex-col gap-[16px] overflow-hidden ml-[-20px] mr-[-20px]">
+          <CollageRow
+            cards={COLLAGE_ROW_1}
+            nodeId="mobile-r1"
+            direction="left"
+            duration={32}
+            className="relative w-full"
+          />
+          <CollageRow
+            cards={COLLAGE_ROW_2}
+            nodeId="mobile-r2"
+            direction="right"
+            duration={26}
+            className="relative w-full"
+          />
+        </div>
+        
         <div className="animate-hero-text-fade-in relative z-10 mt-[12px] flex w-full max-w-[352px] flex-col items-stretch gap-[12px]" style={{ animationDelay: "150ms", animationFillMode: "both" }}>
           <CtaPrimary label="Browse the Model Zoo" />
           <CtaSecondary label="Get the ApplicationForge App" />
@@ -220,7 +238,6 @@ const COLLAGE_ROW_1 = [
   { label: "Human Activity Recognition", img: "/model-zoo/collage-r1-c3.webp" },
   { label: "Fall Detection", img: "/model-zoo/collage-r1-c4.webp" },
   { label: "IMU Gesture Recognition", img: "/model-zoo/collage-r1-c5.webp" },
-  { label: "IMU Gesture Recognition", img: "/model-zoo/collage-r1-c6.webp" },
 ];
 
 /** Figma 5422:7060–7106 — row 2 cards. */
@@ -228,9 +245,6 @@ const COLLAGE_ROW_2 = [
   { label: "Person / No-Person", img: "/model-zoo/collage-r2-c1.webp" },
   { label: "Presence Detection", img: "/model-zoo/collage-r2-c2.webp" },
   { label: "Voice Activity Detection", img: "/model-zoo/collage-r2-c3.webp" },
-  { label: "Fall Detection", img: "/model-zoo/collage-r2-c4.webp" },
-  { label: "IMU Gesture Recognition", img: "/model-zoo/collage-r2-c5.webp" },
-  { label: "IMU Gesture Recognition", img: "/model-zoo/collage-r2-c6.webp" },
 ];
 
 function CollageRow({
@@ -241,20 +255,22 @@ function CollageRow({
   nodeId,
   direction = "left",
   duration = 30,
+  className,
 }: {
-  left: number;
-  top: number;
-  width: number;
+  left?: number;
+  top?: number;
+  width?: number;
   cards: { label: string; img: string }[];
   nodeId: string;
   direction?: "left" | "right";
   duration?: number;
+  className?: string;
 }) {
   // marquee track: the card set duplicated so the -50% loop is seamless
   const track = [...cards, ...cards];
   return (
     <div
-      className="pointer-events-none absolute overflow-clip"
+      className={className || "pointer-events-none absolute overflow-clip"}
       style={{ left, top, width, height: 182 }}
       data-node-id={nodeId}
       aria-hidden

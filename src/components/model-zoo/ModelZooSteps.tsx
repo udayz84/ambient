@@ -80,7 +80,7 @@ function StepCard({ step }: { step: (typeof STEPS)[number] }) {
   return (
     <div
       ref={fadeRef}
-      className={`group relative flex h-[469px] w-full max-w-[400px] shrink flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] px-[32px] pt-[16px] pb-[24px] transition-colors duration-300 hover:border-[#a8ed90] min-[1024px]:w-[400px] min-[1024px]:shrink-0 ${getFadeInClass(isVisible)}`}
+      className={`group relative snap-center flex h-[320px] w-[280px] shrink-0 flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] px-[24px] pt-[16px] pb-[24px] transition-colors duration-300 hover:border-[#a8ed90] min-[1024px]:h-[469px] min-[1024px]:w-[400px] min-[1024px]:px-[32px] ${getFadeInClass(isVisible)}`}
       data-node-id={step.nodeId}
       data-name="Article"
     >
@@ -89,7 +89,7 @@ function StepCard({ step }: { step: (typeof STEPS)[number] }) {
         alt=""
         src={step.img}
         aria-hidden
-        className="pointer-events-none absolute max-w-none"
+        className="pointer-events-none absolute max-w-none origin-top scale-[0.75] min-[1024px]:scale-100"
         style={step.imgStyle}
         loading="lazy"
         decoding="async"
@@ -97,7 +97,7 @@ function StepCard({ step }: { step: (typeof STEPS)[number] }) {
       {/* green tint overlay — covers image and card bg on hover */}
       <div className="pointer-events-none absolute inset-0 bg-[rgba(68,120,7,0.2)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       {/* text — at card-rel (32, 333) */}
-      <div className="absolute top-[333px] left-[32px] flex w-[calc(100%-64px)] max-w-[333.99px] flex-col items-start gap-[12px]">
+      <div className="absolute top-[200px] left-[24px] flex w-[calc(100%-48px)] max-w-[333.99px] flex-col items-start gap-[8px] min-[1024px]:top-[333px] min-[1024px]:left-[32px] min-[1024px]:w-[calc(100%-64px)] min-[1024px]:gap-[12px]">
         <p className={`${gilroyMedium.className} w-full text-[32px] leading-[38px] text-white not-italic`}>
           {step.title}
         </p>
@@ -107,7 +107,7 @@ function StepCard({ step }: { step: (typeof STEPS)[number] }) {
       </div>
       {/* big number — 70px white→transparent gradient at the exact Figma slot */}
       <p
-        className={`${gilroyMedium.className} absolute top-[257px] bg-gradient-to-b from-white to-[rgba(255,255,255,0)] bg-clip-text text-[70px] leading-[64px] font-medium text-transparent opacity-50 whitespace-nowrap text-center not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]`}
+        className={`${gilroyMedium.className} absolute top-[150px] min-[1024px]:top-[257px] bg-gradient-to-b from-white to-[rgba(255,255,255,0)] bg-clip-text text-[60px] min-[1024px]:text-[70px] leading-[64px] font-medium text-transparent opacity-50 whitespace-nowrap text-center not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]`}
         style={{ left: step.numberLeft, width: step.numberWidth }}
         aria-hidden
       >
@@ -153,7 +153,7 @@ export function ModelZooSteps() {
         {/* Cards — 5131:10599 (gap 42 outer, 28 between rows) */}
         <div className="mt-[24px] flex w-full flex-col items-start gap-[28px] min-[1024px]:mt-[42px]" data-node-id="5131:10599">
           {/* Step cards row — 5131:10600 */}
-          <div className="flex w-full flex-col items-stretch gap-[16px] min-[1024px]:flex-row min-[1024px]:items-center min-[1024px]:gap-[28px]" data-node-id="5131:10600">
+          <div className="flex w-[calc(100%+32px)] snap-x snap-mandatory overflow-x-auto pb-[16px] gap-[16px] min-[1024px]:overflow-x-visible min-[1024px]:pb-0 min-[1024px]:flex-row min-[1024px]:items-center min-[1024px]:gap-[28px] mx-[-16px] px-[16px] min-[1024px]:mx-0 min-[1024px]:px-0 min-[1024px]:w-full after:content-[''] after:w-[1px] after:shrink-0 after:min-[1024px]:hidden" data-node-id="5131:10600">
             {STEPS.map((step) => (
               <StepCard key={step.nodeId} step={step} />
             ))}

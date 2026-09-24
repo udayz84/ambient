@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import { dmMono, gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { getFadeInClass, useFadeIn } from "../shared/useFadeIn";
@@ -105,7 +105,7 @@ function ModelCard({ model }: { model: Model }) {
   return (
     <article
       ref={fadeRef}
-      className={`relative flex h-auto w-full flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.04)] px-[12px] pt-[12px] pb-[24px] transition-colors duration-300 hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] min-[1024px]:h-[677.161px] ${getFadeInClass(isVisible)}`}
+      className={`relative flex snap-center shrink-0 w-[280px] h-auto flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.04)] px-[12px] pt-[12px] pb-[24px] transition-colors duration-300 hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] min-[1024px]:w-full min-[1024px]:shrink min-[1024px]:h-[677.161px] ${getFadeInClass(isVisible)}`}
       data-name="Article"
     >
       <div className="h-[259.161px] w-full shrink-0 overflow-clip">
@@ -138,17 +138,17 @@ function ModelCard({ model }: { model: Model }) {
       </div>
 
       {/* CTAs — 5131:9788 */}
-      <div className="flex w-full flex-wrap items-center gap-[12px]">
+      <div className="flex w-full flex-row items-center gap-[8px] min-[1024px]:gap-[12px]">
         {/* watch — green, flex-1, play icon at left 88 */}
         <a
           href="#"
-          className={`${PRIMARY_CTA_SHADOW} relative flex h-[48px] min-w-px flex-1 items-center justify-center`}
+          className={`${PRIMARY_CTA_SHADOW} relative flex h-[48px] min-w-0 flex-1 items-center justify-center`}
           data-name="Cta"
           aria-label={`Watch ${model.title} demo`}
         >
           <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
-          <span className="relative flex items-center gap-[10px]">
-            <span className={`${gilroyMedium.className} text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic`}>
+          <span className="relative flex items-center gap-[6px] min-[1024px]:gap-[10px] overflow-hidden px-[8px]">
+            <span className={`${gilroyMedium.className} truncate text-[14px] min-[1024px]:text-[16px] leading-[28px] font-medium uppercase text-white not-italic`}>
               watch
             </span>
             <img alt="" src="/model-zoo/icon-play.svg" className="block h-[13.75px] w-[12.92px] shrink-0" />
@@ -159,13 +159,13 @@ function ModelCard({ model }: { model: Model }) {
         {/* download the doc — 5131:11246 (232×48) */}
         <a
           href="#"
-          className="relative flex h-[48px] w-full max-w-[232px] shrink items-center justify-center gap-[10px] overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] min-[1024px]:w-[232px] min-[1024px]:shrink-0"
+          className="relative flex h-[48px] min-w-0 flex-1 items-center justify-center gap-[6px] min-[1024px]:gap-[10px] overflow-clip bg-[rgba(226,241,202,0.12)] px-[8px] min-[1024px]:px-[20px] py-[10px]"
           data-name="CTA - Primary"
         >
-          <span className={`${gilroyMedium.className} text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic`}>
-            download the doc
+          <span className={`${gilroyMedium.className} truncate text-[13px] min-[1024px]:text-[16px] leading-[28px] font-medium uppercase text-white not-italic`}>
+            download doc
           </span>
-          <img alt="" src="/model-zoo/icon-download.svg" className="size-[18px] shrink-0" />
+          <img alt="" src="/model-zoo/icon-download.svg" className="size-[16px] min-[1024px]:size-[18px] shrink-0" />
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
         </a>
       </div>
@@ -185,21 +185,38 @@ function FilterSelect({
   options: string[];
   onChange: (v: string) => void;
 }) {
+  const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <div className="group relative h-[48px] w-full min-[1024px]:w-[200px] min-[1024px]:shrink-0">
+    <div ref={containerRef} className="relative h-[48px] w-full flex-1 min-[1024px]:w-[200px] min-[1024px]:flex-none min-[1024px]:shrink-0">
       <button
         type="button"
-        className={`${interRegular.className} relative flex h-full w-full items-center gap-[10px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] px-[20px] text-left text-[14px] leading-[1.4] text-white not-italic hover:border-[rgba(240,240,240,0.4)]`}
+        onClick={() => setOpen(!open)}
+        className={`${interRegular.className} relative flex h-full w-full items-center gap-[10px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] px-[12px] text-left text-[14px] leading-[1.4] text-white not-italic hover:border-[rgba(240,240,240,0.4)] min-[1024px]:px-[20px]`}
       >
-        {label}
-        <img alt="" src="/model-zoo/filter-chevron.svg" className="absolute right-[20px] size-[24px]" aria-hidden />
+        <span className="truncate flex-1">{label}</span>
+        <img alt="" src="/model-zoo/filter-chevron.svg" className={`size-[24px] shrink-0 transition-transform ${open ? "rotate-180" : ""}`} aria-hidden />
       </button>
-      <ul className="invisible absolute top-[52px] left-0 z-30 w-full border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black group-focus-within:visible group-hover:invisible">
+      <ul className={`${open ? "block" : "hidden"} absolute top-[52px] left-0 z-30 w-full border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black`}>
         {options.map((opt) => (
           <li key={opt}>
             <button
               type="button"
-              onClick={() => onChange(opt)}
+              onClick={() => {
+                onChange(opt);
+                setOpen(false);
+              }}
               className={`${interRegular.className} block w-full px-[20px] py-[10px] text-left text-[14px] text-white not-italic hover:bg-[rgba(255,255,255,0.08)]`}
             >
               {opt === "all" ? "All" : opt.replace(/\b\w/g, (c) => c.toUpperCase())}
@@ -258,13 +275,13 @@ export function ModelZooLibrary() {
         </div>
 
         {/* Filter bar — 5286:7530 */}
-        <div className="mt-[24px] flex w-full flex-wrap items-center justify-between gap-x-[20px] gap-y-[12px] min-[1024px]:mt-[48px] min-[1024px]:flex-nowrap" data-node-id="5286:7530">
-          <div className="flex w-full flex-col gap-[20px] min-[1024px]:w-auto min-[1024px]:flex-row min-[1024px]:items-center" data-node-id="5286:7503">
+        <div className="mt-[24px] flex w-full flex-col min-[1024px]:mt-[48px] min-[1024px]:flex-row min-[1024px]:items-center min-[1024px]:justify-between min-[1024px]:flex-nowrap" data-node-id="5286:7530">
+          <div className="order-2 mt-[16px] flex w-full flex-row gap-[12px] min-[1024px]:mt-0 min-[1024px]:order-1 min-[1024px]:w-auto min-[1024px]:gap-[20px] min-[1024px]:items-center" data-node-id="5286:7503">
             <FilterSelect label="Filter By Modality" options={MODALITIES} onChange={setModality} />
             <FilterSelect label="Filter By Type" options={TYPES} onChange={setType} />
           </div>
-          <div className="flex w-full flex-wrap items-center gap-x-[20px] gap-y-[12px] min-[1024px]:w-auto" data-node-id="5286:7521">
-            <div className="flex w-full items-center min-[1024px]:w-[400px]" data-node-id="5286:7522">
+          <div className="contents min-[1024px]:order-2 min-[1024px]:flex min-[1024px]:w-auto min-[1024px]:flex-row min-[1024px]:items-center min-[1024px]:gap-[20px]" data-node-id="5286:7521">
+            <div className="order-1 flex w-full items-center min-[1024px]:order-none min-[1024px]:w-[400px]" data-node-id="5286:7522">
               <div className="relative h-[48px] min-w-px flex-1 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.3)] px-[20px]">
                 <input
                   type="text"
@@ -284,25 +301,27 @@ export function ModelZooLibrary() {
                 Search
               </button>
             </div>
-            <button
-              type="button"
-              onClick={() => {
-                setModality("all");
-                setType("all");
-                setQuery("");
-              }}
-              className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#53d824] not-italic hover:underline`}
-              data-node-id="5286:7528"
-            >
-              Reset Filters
-            </button>
+            <div className="order-3 mt-[16px] flex w-full justify-end min-[1024px]:order-none min-[1024px]:mt-0 min-[1024px]:w-auto min-[1024px]:justify-start">
+              <button
+                type="button"
+                onClick={() => {
+                  setModality("all");
+                  setType("all");
+                  setQuery("");
+                }}
+                className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#53d824] not-italic hover:underline`}
+                data-node-id="5286:7528"
+              >
+                Reset Filters
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Card grid — 5131:11386 (2 rows × 3, gap 20) */}
         <div className="mt-[24px] min-[1024px]:mt-[40px]" data-node-id="5131:11386">
           {filtered.length > 0 ? (
-            <div className="grid grid-cols-1 gap-[16px] min-[1024px]:grid-cols-3 min-[1024px]:gap-[20px]">
+            <div className="flex w-[calc(100%+32px)] snap-x snap-mandatory overflow-x-auto gap-[16px] mx-[-16px] px-[16px] pb-[16px] after:content-[''] after:w-[1px] after:shrink-0 min-[1024px]:w-full min-[1024px]:grid min-[1024px]:grid-cols-3 min-[1024px]:gap-[20px] min-[1024px]:overflow-visible min-[1024px]:mx-0 min-[1024px]:px-0 min-[1024px]:pb-0 min-[1024px]:after:hidden">
               {filtered.map((model) => (
                 <ModelCard key={model.title} model={model} />
               ))}

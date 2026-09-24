@@ -178,13 +178,13 @@ export function ModelZooWatchItRun() {
         <p className={`${interRegular.className} w-full max-w-[352px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word]`}>
           Purpose-built edge modules. Validate your software on our evaluation kits today, and drop our SOMs directly into your final product tomorrow.
         </p>
-        <div className="flex w-full max-w-[355px] flex-col gap-[12px]">
+        <div className="flex w-[calc(100%+38px)] snap-x snap-mandatory overflow-x-auto pb-[16px] gap-[16px] mx-[-19px] px-[19px] after:content-[''] after:w-[1px] after:shrink-0">
           {CARDS.map((card) => (
             <div
               key={`m-${card.nodeId}`}
-              className="relative flex min-h-[356px] w-full flex-col justify-end overflow-clip border-[0.444px] border-solid border-[rgba(240,240,240,0.2)] bg-black p-[20px]"
+              className="relative flex snap-center shrink-0 min-h-[356px] w-[280px] flex-col justify-end overflow-clip border-[0.444px] border-solid border-[rgba(240,240,240,0.2)] bg-black p-[20px]"
             >
-              <img alt="" src={card.img} className="pointer-events-none absolute top-[-40px] right-[-40px] h-[268px] w-[290px] max-w-none object-cover" />
+              <img alt="" src={card.img} className="pointer-events-none absolute top-[-40px] right-[-40px] h-[268px] w-[290px] max-w-none object-cover origin-top-right scale-[0.8]" />
               <div className="relative flex flex-col items-start gap-[12px]">
                 <p className={`${gilroyMedium.className} text-[22px] leading-[28px] text-white not-italic`}>{card.title}</p>
                 <p className={`${interRegular.className} text-[14px] leading-[21.3px] font-normal text-[#99a1af] not-italic [word-break:break-word]`}>{card.desc}</p>
