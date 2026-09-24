@@ -80,7 +80,7 @@ function StepCard({ step }: { step: (typeof STEPS)[number] }) {
   return (
     <div
       ref={fadeRef}
-      className={`relative flex h-[469px] w-full max-w-[400px] shrink flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] px-[32px] pt-[16px] pb-[24px] transition-colors duration-300 hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] min-[1024px]:w-[400px] min-[1024px]:shrink-0 ${getFadeInClass(isVisible)}`}
+      className={`group relative flex h-[469px] w-full max-w-[400px] shrink flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] px-[32px] pt-[16px] pb-[24px] transition-colors duration-300 hover:border-[#a8ed90] min-[1024px]:w-[400px] min-[1024px]:shrink-0 ${getFadeInClass(isVisible)}`}
       data-node-id={step.nodeId}
       data-name="Article"
     >
@@ -94,12 +94,14 @@ function StepCard({ step }: { step: (typeof STEPS)[number] }) {
         loading="lazy"
         decoding="async"
       />
+      {/* green tint overlay — covers image and card bg on hover */}
+      <div className="pointer-events-none absolute inset-0 bg-[rgba(68,120,7,0.2)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       {/* text — at card-rel (32, 333) */}
       <div className="absolute top-[333px] left-[32px] flex w-[calc(100%-64px)] max-w-[333.99px] flex-col items-start gap-[12px]">
-        <p className={`${gilroyMedium.className} w-[333.991px] text-[32px] leading-[38px] text-white not-italic`}>
+        <p className={`${gilroyMedium.className} w-full text-[32px] leading-[38px] text-white not-italic`}>
           {step.title}
         </p>
-        <p className={`${interRegular.className} w-[333.99px] text-[16px] leading-[26px] font-normal tracking-[-0.3125px] text-[#99a1af] not-italic [word-break:break-word]`}>
+        <p className={`${interRegular.className} w-full text-[16px] leading-[26px] font-normal tracking-[-0.3125px] text-[#99a1af] not-italic [word-break:break-word]`}>
           {step.desc}
         </p>
       </div>
@@ -123,10 +125,13 @@ function StepCard({ step }: { step: (typeof STEPS)[number] }) {
 export function ModelZooSteps() {
   return (
     <section
-      className="relative mt-[84px] w-full bg-black"
+      className="relative mt-[84px] w-full"
       data-node-id="5131:10582"
       aria-label="Pick a model. Push a button. It's running."
     >
+      {/* No bg-black here on purpose: the AppForge section's second glow strip
+          (5131:10575) bleeds down through this section's upper area behind the
+          title and cards; the page's black comes from the <main> wrapper. */}
       <div className="relative mx-auto w-full max-w-[1256px] px-[16px] min-[1024px]:px-0">
         {/* Header — 5131:10583 */}
         <div className="flex w-full flex-col items-center justify-center gap-[24px]" data-node-id="5131:10583" data-name="Section Title">

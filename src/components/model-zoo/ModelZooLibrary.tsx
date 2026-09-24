@@ -186,7 +186,7 @@ function FilterSelect({
   onChange: (v: string) => void;
 }) {
   return (
-    <div className="group relative h-[48px] w-[200px] shrink-0">
+    <div className="group relative h-[48px] w-full min-[1024px]:w-[200px] min-[1024px]:shrink-0">
       <button
         type="button"
         className={`${interRegular.className} relative flex h-full w-full items-center gap-[10px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] px-[20px] text-left text-[14px] leading-[1.4] text-white not-italic hover:border-[rgba(240,240,240,0.4)]`}
@@ -194,7 +194,7 @@ function FilterSelect({
         {label}
         <img alt="" src="/model-zoo/filter-chevron.svg" className="absolute right-[20px] size-[24px]" aria-hidden />
       </button>
-      <ul className="invisible absolute top-[52px] left-0 z-30 w-[200px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black group-focus-within:visible group-hover:invisible">
+      <ul className="invisible absolute top-[52px] left-0 z-30 w-full border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black group-focus-within:visible group-hover:invisible">
         {options.map((opt) => (
           <li key={opt}>
             <button
@@ -244,7 +244,7 @@ export function ModelZooLibrary() {
         <div className="flex w-full flex-col items-center gap-[24px]" data-node-id="5130:8357">
           <div className="relative px-[10px]" data-node-id="5130:8359" data-name="Title">
             <h2
-              className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium whitespace-nowrap text-transparent not-italic`}
+              className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic min-[1024px]:text-[46px] min-[1024px]:leading-[49px] min-[1024px]:whitespace-nowrap`}
               style={{ backgroundImage: TITLE_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
               data-node-id="5130:8360"
             >
@@ -259,12 +259,12 @@ export function ModelZooLibrary() {
 
         {/* Filter bar — 5286:7530 */}
         <div className="mt-[24px] flex w-full flex-wrap items-center justify-between gap-x-[20px] gap-y-[12px] min-[1024px]:mt-[48px] min-[1024px]:flex-nowrap" data-node-id="5286:7530">
-          <div className="flex items-center gap-[20px]" data-node-id="5286:7503">
+          <div className="flex w-full flex-col gap-[20px] min-[1024px]:w-auto min-[1024px]:flex-row min-[1024px]:items-center" data-node-id="5286:7503">
             <FilterSelect label="Filter By Modality" options={MODALITIES} onChange={setModality} />
             <FilterSelect label="Filter By Type" options={TYPES} onChange={setType} />
           </div>
-          <div className="flex items-center gap-[20px]" data-node-id="5286:7521">
-            <div className="flex w-full max-w-[400px] items-center min-[1024px]:w-[400px]" data-node-id="5286:7522">
+          <div className="flex w-full flex-wrap items-center gap-x-[20px] gap-y-[12px] min-[1024px]:w-auto" data-node-id="5286:7521">
+            <div className="flex w-full items-center min-[1024px]:w-[400px]" data-node-id="5286:7522">
               <div className="relative h-[48px] min-w-px flex-1 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.3)] px-[20px]">
                 <input
                   type="text"

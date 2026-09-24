@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { getFadeInClass, useFadeIn } from "../shared/useFadeIn";
 import { Corners } from "../shared/Corners";
@@ -13,6 +13,28 @@ const TITLE_GRADIENT = sectionTitleGradient(111.766);
 /** Figma 5241:5752…5751 — dimmed preview list buttons (84px, opacity 20). */
 const FORGE_STEPS = ["Pair over BLE", "Flash a demo instantly", "See results live"];
 
+/** Figma component-set 5241:5968 variants — clicking a row swaps to that variant:
+ * active row expands to its Stat content, siblings dim to 40%, the Article panel
+ * shows that variant's collage, and the switch turns on. */
+const STEP_KEYS = ["pair", "flash", "results"] as const;
+type ForgeStep = (typeof STEP_KEYS)[number];
+const STEP_STAT: Record<ForgeStep, string> = {
+  pair: "/model-zoo/af-stat-pair.webp",
+  flash: "/model-zoo/af-stat-flash.webp",
+  results: "/model-zoo/af-stat-results.webp",
+};
+const STEP_ARTICLE: Record<ForgeStep, string> = {
+  pair: "/model-zoo/af-article-pair.webp",
+  flash: "/model-zoo/af-article-flash.webp",
+  results: "/model-zoo/af-article-results.webp",
+};
+/** Active-row heights per variant (578×185.5 / 578×212.5). */
+const STEP_ACTIVE_HEIGHT: Record<ForgeStep, string> = {
+  pair: "min-[1024px]:h-[185.5px]",
+  flash: "min-[1024px]:h-[212.5px]",
+  results: "min-[1024px]:h-[185.5px]",
+};
+
 /**
  * Figma 5131:10421 — "Your eval kit, controlled from your phone." section
  * (1440×1433 canvas; 1192.5-wide content at x=124). The two off-canvas
@@ -21,13 +43,43 @@ const FORGE_STEPS = ["Pair over BLE", "Flash a demo instantly", "See results liv
 export function ModelZooAppForge() {
   const { fadeRef: articleRef, isVisible: articleVisible } = useFadeIn<HTMLDivElement>();
   const { fadeRef: forgeRef, isVisible: forgeVisible } = useFadeIn<HTMLDivElement>();
-  const [magicOn, setMagicOn] = useState(false);
+  const [activeStep, setActiveStep] = useState<ForgeStep | null>(null);
+  const magicOn = activeStep !== null;
+  const videoRef = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    // prefers-reduced-motion: keep the Article panel's ambient video paused
+    if (videoRef.current && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      videoRef.current.pause();
+    }
+  }, []);
   return (
     <section
       className="relative w-full bg-black"
       data-node-id="5131:10421"
       aria-label="Your eval kit, controlled from your phone"
     >
+      {/* Figma 5131:10576 — full-bleed ambient glow strip behind the showcase
+          and the wide article card (top 519, h 552 in the 1440 canvas). */}
+      <img
+        alt=""
+        src="/model-zoo/af-bg-1.webp"
+        aria-hidden
+        className="pointer-events-none absolute top-[519px] left-0 hidden h-[552px] w-full object-cover min-[1024px]:block"
+        loading="lazy"
+        decoding="async"
+      />
+      {/* Figma 5131:10575 — second glow strip, butted against the first
+          (top 1071 = 519 + 552) so the light runs continuously down through
+          the article card, CTA and into the next section (Steps paints no
+          background of its own there, so this shows through). */}
+      <img
+        alt=""
+        src="/model-zoo/af-bg-2.webp"
+        aria-hidden
+        className="pointer-events-none absolute top-[1071px] left-0 hidden h-[553px] w-full object-cover min-[1024px]:block"
+        loading="lazy"
+        decoding="async"
+      />
       <div className="relative mx-auto w-full max-w-[1192.5px] px-[16px] min-[1024px]:px-0">
         {/* Header — 5131:10258 (title + sub, gap 24) */}
         <div className="flex w-full flex-col items-center gap-[24px] pt-[49px]" data-node-id="5131:10258">
@@ -61,7 +113,30 @@ export function ModelZooAppForge() {
             data-name="Article"
             aria-hidden
           >
-            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+            {activeStep ? (
+              /* Variant collage baked @2x from Figma (corners included) */
+              <img
+                alt=""
+                src={STEP_ARTICLE[activeStep]}
+                className="pointer-events-none absolute inset-0 size-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <>
+                {/* Figma 5241:5677 — VIDEO fill (scaleMode FILL) playing on the canvas */}
+                <video
+                  ref={videoRef}
+                  className="pointer-events-none absolute inset-0 size-full object-cover"
+                  src="/model-zoo/af-video.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
+                <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+              </>
+            )}
           </div>
 
           {/* Right column — 5241:5702 */}
@@ -74,21 +149,42 @@ export function ModelZooAppForge() {
               Application Forge
             </p>
 
-            {/* eval kit list — 5241:5728 */}
+            {/* eval kit list — 5241:5728. Click activates the Figma variant for
+                that step: row expands to its Stat content, siblings dim to 40%. */}
             <div className="flex w-full flex-col items-start gap-[10px] min-[1024px]:w-[578px]" data-node-id="5241:5728" data-name="eval kit">
-              {FORGE_STEPS.map((step, i) => (
-                <div
-                  key={step}
-                  className={`relative block h-[84px] w-full shrink-0 bg-[rgba(0,0,0,0.1)] opacity-20 transition-opacity duration-300 hover:opacity-50 ${forgeVisible ? "motion-safe:animate-hero-text-fade-in" : "min-[1024px]:opacity-0"}`}
-                  style={{ animationDelay: `${200 + i * 90}ms`, animationFillMode: "both" }}
-                  data-node-id={`5241:57${52 - i * 6}`}
-                >
-                  <p className={`${gilroyMedium.className} absolute top-[28px] left-[20px] text-[22px] leading-[28px] whitespace-nowrap text-left text-white not-italic`}>
-                    {step}
-                  </p>
-                  <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-                </div>
-              ))}
+              {FORGE_STEPS.map((step, i) => {
+                const key = STEP_KEYS[i];
+                const isActive = activeStep === key;
+                return (
+                  <button
+                    type="button"
+                    key={step}
+                    aria-pressed={isActive}
+                    onClick={() => setActiveStep(key)}
+                    className={`relative block h-[84px] w-full shrink-0 cursor-pointer bg-[rgba(0,0,0,0.1)] text-left transition-[height,opacity] duration-300 motion-reduce:transition-none ${isActive ? STEP_ACTIVE_HEIGHT[key] : ""} ${
+                      isActive ? "opacity-100" : activeStep ? "opacity-40" : "opacity-20 hover:opacity-50"
+                    }`}
+                    data-node-id={`5241:57${52 - i * 6}`}
+                  >
+                    {isActive && (
+                      /* Stat content baked @2x from the variant (corners included) */
+                      <img
+                        alt=""
+                        src={STEP_STAT[key]}
+                        className="pointer-events-none absolute inset-0 hidden size-full object-cover min-[1024px]:block"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    )}
+                    <p
+                      className={`${gilroyMedium.className} absolute top-[28px] left-[20px] text-[22px] leading-[28px] whitespace-nowrap text-left text-white not-italic ${isActive ? "min-[1024px]:hidden" : ""}`}
+                    >
+                      {step}
+                    </p>
+                    <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} className={isActive ? "min-[1024px]:hidden" : ""} />
+                  </button>
+                );
+              })}
             </div>
 
             {/* Toggle — 5360:5004 (404×80). The arc glow deliberately overflows
@@ -98,7 +194,7 @@ export function ModelZooAppForge() {
               type="button"
               role="switch"
               aria-checked={magicOn}
-              onClick={() => setMagicOn((v) => !v)}
+              onClick={() => setActiveStep((s) => (s === null ? "pair" : null))}
               className={`relative h-[80px] w-full max-w-[404px] shrink-0 cursor-pointer bg-[rgba(0,0,0,0.1)] text-left transition-colors duration-300 hover:bg-[rgba(50,80,40,0.25)] ${forgeVisible ? "motion-safe:animate-hero-text-fade-in" : "min-[1024px]:opacity-0"}`}
               style={{ animationDelay: "470ms", animationFillMode: "both" }}
               data-node-id="5360:5004"
@@ -113,7 +209,7 @@ export function ModelZooAppForge() {
               </div>
               <div
                 className="absolute top-[19px] left-[calc(50%+140.17px)] h-[40px] w-[73.333px] -translate-x-1/2 rounded-[100px] transition-colors duration-300"
-                style={{ backgroundColor: magicOn ? "#8ce66c" : "#cecbc9" }}
+                style={{ backgroundColor: magicOn ? "#6fe047" : "#cecbc9" }}
                 data-node-id="5360:5006"
                 data-name="Switch"
               >
@@ -137,21 +233,6 @@ export function ModelZooAppForge() {
           data-node-id="5131:10513"
           data-name="Article"
         >
-          {/* Green haze above the card — full-bleed ambient glow. In the
-              reference canvas this light runs edge-to-edge (x=0…1439) with a
-              soft top ramp and gentle horizontal undulation, so it escapes the
-              card box instead of stopping at the card edges. */}
-          <div
-            className="pointer-events-none absolute top-[-52px] left-1/2 h-[52px] w-screen max-w-none -translate-x-1/2"
-            style={{
-              backgroundImage:
-                "radial-gradient(ellipse 55% 100% at 43% 100%, rgba(116,175,84,0.25) 0%, rgba(116,175,84,0) 75%), linear-gradient(180deg, rgba(47,80,38,0) 0%, rgb(47,80,38) 14%, rgb(60,99,49) 100%)",
-              maskImage: "linear-gradient(90deg, rgba(0,0,0,0.6) 0%, #000 9%, #000 91%, rgba(0,0,0,0.6) 100%)",
-              WebkitMaskImage: "linear-gradient(90deg, rgba(0,0,0,0.6) 0%, #000 9%, #000 91%, rgba(0,0,0,0.6) 100%)",
-            }}
-            aria-hidden
-          />
-
           {/* Surface — 5131:10580 */}
           <div
             className="absolute inset-0 border-[0.5px] border-solid border-[rgba(255,255,255,0.1)]"

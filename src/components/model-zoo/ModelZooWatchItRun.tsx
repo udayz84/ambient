@@ -182,7 +182,7 @@ export function ModelZooWatchItRun() {
           {CARDS.map((card) => (
             <div
               key={`m-${card.nodeId}`}
-              className="relative flex min-h-[356px] w-full flex-col justify-end overflow-clip border-[0.444px] border-solid border-[rgba(240,240,240,0.2)] bg-black p-[20px] transition-colors duration-300 hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)]"
+              className="relative flex min-h-[356px] w-full flex-col justify-end overflow-clip border-[0.444px] border-solid border-[rgba(240,240,240,0.2)] bg-black p-[20px]"
             >
               <img alt="" src={card.img} className="pointer-events-none absolute top-[-40px] right-[-40px] h-[268px] w-[290px] max-w-none object-cover" />
               <div className="relative flex flex-col items-start gap-[12px]">
@@ -283,7 +283,7 @@ function WatchCardItem({ card }: { card: WatchCard }) {
   return (
     <div
       ref={fadeRef}
-      className={`relative flex w-[315px] shrink-0 flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black px-[24px] pt-[16px] pb-[24px] transition-colors duration-300 hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] ${getFadeInClass(isVisible)}`}
+      className={`relative flex w-[315px] shrink-0 flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black px-[24px] pt-[16px] pb-[24px] ${getFadeInClass(isVisible)}`}
       data-node-id={card.nodeId}
       data-name={card.name}
     >
