@@ -44,7 +44,7 @@ export function ModelZooAppForge() {
   const { fadeRef: articleRef, isVisible: articleVisible } = useFadeIn<HTMLDivElement>();
   const { fadeRef: forgeRef, isVisible: forgeVisible } = useFadeIn<HTMLDivElement>();
   const [activeStep, setActiveStep] = useState<ForgeStep | null>(null);
-  const magicOn = activeStep !== null;
+  const [magicOn, setMagicOn] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
     // prefers-reduced-motion: keep the Article panel's ambient video paused
@@ -142,7 +142,7 @@ export function ModelZooAppForge() {
           {/* Right column — 5241:5702 */}
           <div className="relative flex min-w-px flex-1 flex-col items-center justify-center gap-[25px]" data-node-id="5241:5702">
             <p
-              className={`${gilroyMedium.className} text-[22px] leading-[28px] text-white not-italic ${forgeVisible ? "motion-safe:animate-hero-text-fade-in" : "min-[1024px]:opacity-0"}`}
+              className={`${gilroyMedium.className} w-full text-left min-[1024px]:w-[578px] text-[22px] leading-[28px] text-white not-italic ${forgeVisible ? "motion-safe:animate-hero-text-fade-in" : "min-[1024px]:opacity-0"}`}
               style={{ animationDelay: "140ms", animationFillMode: "both" }}
               data-node-id="5241:5703"
             >
@@ -160,9 +160,12 @@ export function ModelZooAppForge() {
                     type="button"
                     key={step}
                     aria-pressed={isActive}
-                    onClick={() => setActiveStep(isActive ? null : key)}
+                    onClick={() => {
+                      setActiveStep(isActive ? null : key);
+                      setMagicOn(true);
+                    }}
                     className={`relative block h-[84px] w-full shrink-0 cursor-pointer bg-[rgba(0,0,0,0.1)] text-left transition-[height,opacity] duration-300 motion-reduce:transition-none ${isActive ? STEP_ACTIVE_HEIGHT[key] : ""} ${
-                      isActive ? "opacity-100" : activeStep ? "opacity-40" : "opacity-20 hover:opacity-50"
+                      isActive ? "opacity-100" : activeStep ? "opacity-40" : magicOn ? "opacity-100" : "opacity-20 hover:opacity-50"
                     }`}
                     data-node-id={`5241:57${52 - i * 6}`}
                   >
@@ -204,7 +207,15 @@ export function ModelZooAppForge() {
               type="button"
               role="switch"
               aria-checked={magicOn}
-              onClick={() => setActiveStep((s) => (s === null ? "pair" : null))}
+              onClick={() => {
+                if (magicOn) {
+                  setMagicOn(false);
+                  setActiveStep(null);
+                } else {
+                  setMagicOn(true);
+                  setActiveStep(null);
+                }
+              }}
               className={`relative h-[80px] w-full max-w-[404px] shrink-0 cursor-pointer bg-[rgba(0,0,0,0.1)] text-left transition-colors duration-300 hover:bg-[rgba(50,80,40,0.25)] ${forgeVisible ? "motion-safe:animate-hero-text-fade-in" : "min-[1024px]:opacity-0"}`}
               style={{ animationDelay: "470ms", animationFillMode: "both" }}
               data-node-id="5360:5004"

@@ -26,7 +26,7 @@ function PrimaryCta({ label, href }: { label: string; href: string }) {
   return (
     <a
       href={href}
-      className="relative flex h-[48px] min-[1024px]:w-[240px] shrink-0 items-center justify-center gap-[10px] px-[20px] py-[10px] drop-shadow-[0px_42px_53.5px_rgba(69,196,24,0.2)]"
+      className="relative flex h-[48px] w-full min-[1024px]:w-auto shrink-0 items-center justify-center gap-[10px] px-[24px] py-[10px] drop-shadow-[0px_42px_53.5px_rgba(69,196,24,0.2)]"
     >
       <span
         aria-hidden
@@ -53,7 +53,7 @@ function SecondaryCta({ label, href }: { label: string; href: string }) {
   return (
     <a
       href={href}
-      className="relative flex h-[48px] shrink-0 items-center justify-center bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]"
+      className="relative flex h-[48px] w-full min-[1024px]:w-auto shrink-0 items-center justify-center bg-[rgba(226,241,202,0.12)] px-[24px] py-[10px]"
     >
       <p
         className={`${gilroyMedium.className} text-[14px] min-[1024px]:text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic`}
@@ -94,7 +94,7 @@ export function ApplicationsPageModelZoo({ data }: { data?: any }) {
         </p>
 
         {/* CTA Row */}
-        <div className="mt-[16px] flex flex-col min-[1024px]:flex-row items-center justify-center gap-[16px]">
+        <div className="mt-[16px] flex w-full min-[1024px]:w-auto flex-col min-[1024px]:flex-row items-center justify-center gap-[16px]">
           <PrimaryCta label={PRIMARY_CTA.label} href={PRIMARY_CTA.href} />
           <SecondaryCta label={SECONDARY_CTA.label} href={SECONDARY_CTA.href} />
         </div>
