@@ -1,6 +1,12 @@
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
-import { CORNER_LEFT, CORNER_RIGHT } from "./dvk-data";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import {
+  CORNER_LEFT,
+  CORNER_RIGHT,
+  PRIMARY_CTA_INSET,
+  PRIMARY_CTA_SHADOW,
+} from "./dvk-data";
 import { mediaUrl } from "@/lib/strapi";
 
 type DemoCard = {
@@ -101,30 +107,19 @@ export const DEMO_CARDS: DemoCard[] = [
       />
     ),
   },
-  {
-    nodeId: "new-card-1234",
-    name: "Gesture Recognition",
-    img: "/dvk/demo-voice.webp",
-    imgRight: -48.04,
-    imgTop: -39.38,
-    titleLine1: "Gesture",
-    titleLine2: "Recognition",
-    desc: "Real-time motion gestures — the same tech behind the ApplicationForge gesture game.",
-    descWidth: 324,
-    decor: null,
-  },
 ];
 
 /**
- * Figma row — three demo cards laid out with gap-[28px].
- * Each card is 400 wide; the decorative header image is clipped to the card.
+ * Figma row 4022:2671 — three demo cards + the phone/CTA card (5212:6941),
+ * laid out with gap-[28px]. Each card is 400 wide; the decorative header
+ * image is clipped to the card.
  */
 export function DvkDemosCards({ data }: { data?: any }) {
   const cards =
     data?.demo_cards &&
     Array.isArray(data.demo_cards) &&
     data.demo_cards.length > 0
-      ? data.demo_cards.map((c: any, i: number) => {
+      ? data.demo_cards.slice(0, 3).map((c: any, i: number) => {
           const fallback = DEMO_CARDS[i] || DEMO_CARDS[0];
           return {
             ...fallback,
@@ -140,6 +135,108 @@ export function DvkDemosCards({ data }: { data?: any }) {
       {cards.map((card: DemoCard) => (
         <DemoCardItem key={card.nodeId} card={card} />
       ))}
+      <DvkPhoneCard data={data?.phone_card} />
+    </div>
+  );
+}
+
+/**
+ * Figma 5212:6941 — "Control it from your phone" card (4th in the demos row).
+ * Tinted surface (rgba(15,14,14,0.75) panel over black) + two stacked CTAs:
+ * green primary "Get the ApplicationForge App" (arrow icon 5212:6961) and
+ * translucent secondary "Browse the Model Zoo".
+ */
+export const PHONE_CARD_FALLBACK = {
+  title: "Flash demos from your phone.",
+  description:
+    "Pair the Cranium kit with the ApplicationForge app over Bluetooth, push any demo to the board, and watch results live — including the gesture-controlled game.",
+  primary_cta_label: "Get the ApplicationForge App",
+  primary_cta_href: "#",
+  secondary_cta_label: "Browse the Model Zoo",
+  secondary_cta_href: "/model-zoo",
+};
+
+function DvkPhoneCard({ data }: { data?: any }) {
+  const card = {
+    ...PHONE_CARD_FALLBACK,
+    ...(data || {}),
+  };
+  return (
+    <div
+      className="relative flex w-full max-w-[400px] flex-1 flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black px-[24px] xl:px-[32px] pt-[16px] pb-[24px]"
+      data-node-id="5212:6941"
+      data-name="Control it from your phone"
+    >
+      {/* Tinted inner panel — 5212:6942 (400×600, centered, clipped to card) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute top-[calc(50%+0.5px)] left-1/2 h-[600px] w-[400px] -translate-x-1/2 -translate-y-1/2 border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.75)]"
+        data-node-id="5212:6942"
+      />
+
+      <div className="relative flex h-[367px] w-full flex-col items-start justify-end gap-[20px]">
+        <div className="flex w-full flex-col gap-[12px]">
+          <h3
+            className={`${gilroyMedium.className} m-0 w-full max-w-[334px] text-[24px] leading-[38px] font-medium text-white not-italic [word-break:break-word] xl:text-[32px]`}
+            data-node-id="5212:6946"
+          >
+            {card.title}
+          </h3>
+          <p
+            className={`${interRegular.className} m-0 w-full max-w-[334px] shrink-0 text-[14px] leading-[24px] font-normal text-[#99a1af] not-italic [word-break:break-word] xl:text-[16px]`}
+            data-node-id="5212:6947"
+          >
+            {card.description}
+          </p>
+        </div>
+
+        <div className="flex w-full flex-col gap-[12px]">
+          {/* Cta — 5212:6949 (48 tall, label + arrow 5212:6961, gap 11) */}
+          <a
+            href={card.primary_cta_href}
+            className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center gap-[11px]`}
+            data-node-id="5212:6949"
+            data-name="Cta"
+          >
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+            />
+            <span className="relative text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
+              {card.primary_cta_label}
+            </span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img loading="lazy" decoding="async"
+              alt=""
+              src="/dvk/phone-cta-arrow.svg"
+              aria-hidden
+              className="relative block size-[18px] max-w-none"
+              data-node-id="5212:6961"
+              data-name="Frame"
+            />
+            <span
+              aria-hidden
+              className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`}
+            />
+            <GreenCtaCorners disableDots />
+          </a>
+
+          {/* CTA - Secondary — 5212:6964 */}
+          <a
+            href={card.secondary_cta_href}
+            className={`${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+            data-node-id="5212:6964"
+            data-name="CTA - Primary"
+          >
+            <p className="relative text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
+              {card.secondary_cta_label}
+            </p>
+            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+          </a>
+        </div>
+      </div>
+
+      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
     </div>
   );
 }

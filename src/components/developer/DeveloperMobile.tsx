@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useFitText } from "../shared/FitText";
 import { dmMono, gilroyMedium, interBold, interRegular } from "../hero/fonts";
@@ -30,12 +30,15 @@ import {
   DEVELOPER_COPILOTS,
   DEVELOPER_MODULES,
 } from "./developer-data";
-import { ApplicationsPageModelZoo } from "../applications-page/ApplicationsPageModelZoo";
+import {
+  MODEL_ZOO_TITLE_GRADIENT,
+  resolveModelZooContent,
+} from "./DeveloperModelZoo";
 
 /**
  * Mobile (<1024px) stacked adaptation of the Developer page.
  * Built responsive from the same Figma content (no dedicated mobile frame supplied).
- * Order: hero → code → pipeline → coming-soon → model-zoo → modules → copilots.
+ * Order: hero → code → pipeline → model-zoo → coming-soon → modules → copilots.
  */
 export function DeveloperMobile({ data }: { data?: any }) {
   return (
@@ -43,10 +46,8 @@ export function DeveloperMobile({ data }: { data?: any }) {
       <DeveloperHeroMobile data={data?.hero} />
       <DeveloperCodeSectionMobile data={data?.code} />
       <DeveloperPipelineMobile data={data?.pipeline} />
+      <DeveloperModelZooMobile data={data?.model_zoo} />
       <DeveloperComingSoonMobile data={data?.coming_soon} />
-      <div className="relative mt-12 w-full">
-        <ApplicationsPageModelZoo />
-      </div>
       <DeveloperModulesMobile data={data?.modules} />
       <DeveloperCopilotsMobile data={data?.copilots} />
     </div>
@@ -825,6 +826,92 @@ const COMING_DEFAULT_IMG = "/developer/sandbox-image.webp";
  * Figma 4035:25438 — Developer "Coming soon" section (mobile, 393×610 frame).
  * Layout: title+subtitle (gap 10px) → article card (image, text, CTA).
  */
+/**
+ * Model zoo section (mobile) — responsive adaptation of desktop Figma 5212:6804.
+ * Title/subtitle → stacked stats with 1px dividers → full-width primary CTA.
+ */
+function DeveloperModelZooMobile({ data }: { data?: any }) {
+  const { heading: cmsHeading, subtitle, ctaLabel, ctaHref, stats } =
+    resolveModelZooContent(data);
+  let heading = cmsHeading;
+  if (!heading.includes("\n")) {
+    heading = heading.replace(" that works.", "\nthat works.");
+  }
+  const headingLines = heading.split("\n");
+  const fitRef = useFitText<HTMLHeadingElement>({});
+  return (
+    <section className="relative flex w-full flex-col items-center overflow-hidden bg-black px-[19px] pt-[40px] pb-[40px]">
+      {/* Green glow — mobile adaptation of Ellipse 177 (5212:6805) */}
+      <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="pointer-events-none absolute left-1/2 top-[240px] h-[420px] w-[560px] max-w-none -translate-x-1/2 -translate-y-1/2 rounded-[50%] bg-[#53D824] opacity-[0.09] blur-[80px]" />
+      </div>
+
+      {/* Header — title + subtitle (gap 10px) */}
+      <div className="flex w-full flex-col items-center gap-[10px]">
+        <div className="relative flex w-fit max-w-full justify-center px-[10px]">
+          <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+          <h2
+            ref={fitRef}
+            className={`${gilroyMedium.className} max-w-full bg-clip-text text-center text-[clamp(28px,9vw,36px)] leading-[1.1] font-medium text-transparent not-italic [overflow-wrap:anywhere]`}
+            style={{ backgroundImage: MODEL_ZOO_TITLE_GRADIENT }}
+          >
+            {headingLines.map((line: string, i: number) => (
+              <span key={i} className="block">
+                {line}
+              </span>
+            ))}
+          </h2>
+        </div>
+        <p
+          className={`${interRegular.className} w-full max-w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [overflow-wrap:anywhere]`}
+        >
+          {subtitle}
+        </p>
+      </div>
+
+      {/* Stats — stacked with 1px dividers (Line 87 mobile adaptation) */}
+      <div className="relative mt-[24px] flex w-full flex-col bg-[rgba(0,0,0,0.1)]">
+        {stats.map((stat, i) => (
+          <Fragment key={i}>
+            <div className="flex w-full flex-col gap-[14px] px-[2px] py-[18px]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img loading="lazy" decoding="async" alt="" src={stat.icon} className="h-[42px] w-[42px] max-w-none" />
+              <p
+                className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-white opacity-90 not-italic [word-break:break-word]`}
+              >
+                {stat.text}
+              </p>
+            </div>
+            {i < stats.length - 1 ? (
+              <div className="h-px w-full bg-white/10" />
+            ) : null}
+          </Fragment>
+        ))}
+        <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+      </div>
+
+      {/* CTA — full width */}
+      <a
+        href={ctaHref}
+        className={`${gilroyMedium.className} relative mt-[24px] flex h-[48px] w-full max-w-full items-center overflow-hidden px-[12px] py-[10px] shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+      >
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+        />
+        <span className="relative mx-auto truncate text-[clamp(12px,3.5vw,16px)] leading-[28px] font-medium uppercase text-white not-italic">
+          {ctaLabel}
+        </span>
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
+        />
+        <GreenCtaCorners />
+      </a>
+    </section>
+  );
+}
+
 function DeveloperComingSoonMobile({ data }: { data?: any }) {
   let heading = data?.heading || `${COMING_DEFAULT_HEADING_LINE_1}\n${COMING_DEFAULT_HEADING_LINE_2}`;
   if (!heading.includes("\n")) {

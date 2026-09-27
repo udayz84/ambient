@@ -6,7 +6,7 @@ import { SomInsideModule } from "@/components/som-page/SomInsideModule";
 import { SomPrototypeTitleDesktop, SomPrototypeTitleMobile } from "@/components/som-page/SomPrototypeTitle";
 import { SPEC_CARDS } from "./dvk-data";
 import { DvkDemos } from "./DvkDemos";
-import { DEMO_CARDS } from "./DvkDemosCards";
+import { DEMO_CARDS, PHONE_CARD_FALLBACK } from "./DvkDemosCards";
 import { DvkModelForge } from "./DvkModelForge";
 import { DvkComingSoon } from "./DvkComingSoon";
 import { DvkIntegratedModules } from "./DvkIntegratedModules";
@@ -433,9 +433,10 @@ const MOBILE_DEMO_DECOR = [
 ];
 
 /**
- * Figma 4059:10124 — mobile demos ("3rd Fold", 393×1414 canvas).
+ * Figma 4059:10124 — mobile demos ("3rd Fold", 393 canvas).
  * Header 4059:10213 (21, 30 / 352 wide), cards 4062:10782 (19, 292 / 355 wide,
- * gap 12, three 355×356 cards). Background textures 4059:10210.
+ * gap 12, three 355×356 demo cards + the phone/CTA card from desktop 5212:6941,
+ * adapted to the mobile card conventions). Background textures 4059:10210.
  */
 function DvkDemosMobile({ data }: { data?: any }) {
   const heading = data?.heading || "Pre-loaded demos. Instant AI validation.";
@@ -461,7 +462,7 @@ function DvkDemosMobile({ data }: { data?: any }) {
       data-node-id="4059:10124"
       data-name="3rd Fold"
     >
-      <div className="relative mx-auto h-[1414px] w-full max-w-[393px]">
+      <div className="relative mx-auto h-[1782px] w-full max-w-[393px]">
         {/* Background textures removed per user request to fix rogue lines */}
 
         {/* Header — 4059:10213 (21, 30 / 352 wide, gap 15) */}
@@ -552,9 +553,93 @@ function DvkDemosMobile({ data }: { data?: any }) {
               </div>
             );
           })}
+
+          {/* Phone/CTA card — desktop 5212:6941 adapted to mobile card specs (355×356) */}
+          <DvkPhoneCardMobile data={data?.phone_card} />
         </div>
       </div>
     </section>
+  );
+}
+
+/**
+ * Mobile variant of the desktop phone card (5212:6941). No mobile frame exists
+ * in Figma yet — built on the 3rd Fold card conventions: 355 wide, px-[20px]
+ * pt-[14px] pb-[22px], 22px/28 title, 14px/21.3 body, corner ticks. Text block
+ * pinned to the card bottom like the sibling NewsSections; CTAs full width.
+ */
+function DvkPhoneCardMobile({ data }: { data?: any }) {
+  const card = {
+    ...PHONE_CARD_FALLBACK,
+    ...(data || {}),
+  };
+  return (
+    <div
+      className="relative flex h-[356px] w-full flex-col overflow-clip border-[0.444px] border-solid border-[rgba(240,240,240,0.2)] bg-black px-[20px] pt-[14px] pb-[22px]"
+      data-name="Control it from your phone"
+    >
+      {/* Tinted inner panel — mirrors desktop 5212:6942 */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 border-[0.444px] border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.75)]"
+      />
+
+      <div className="relative flex h-full w-full flex-col items-start justify-end gap-[20px]">
+        <div className="flex w-full flex-col gap-[10px]">
+          <h3
+            className={`${gilroyMedium.className} m-0 w-[296.417px] max-w-full text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+          >
+            {card.title}
+          </h3>
+          <p
+            className={`${interRegular.className} m-0 w-[296.417px] max-w-full text-[14px] leading-[21.3px] font-normal text-[#99a1af] not-italic [word-break:break-word]`}
+          >
+            Pair the Cranium kit with the ApplicationForge app over Bluetooth,
+            push any demo to the board, and watch results live — including the
+            gesture-controlled game.
+          </p>
+        </div>
+
+        <div className="flex w-full flex-col gap-[12px]">
+          {/* Green primary CTA — label + 18px arrow, gap 11 */}
+          <a
+            href={card.primary_cta_href}
+            className={`${PRIMARY_CTA_SHADOW} ${PRIMARY_CTA_INSET} ${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center gap-[11px]`}
+            data-name="Cta"
+          >
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+            />
+            <span className="relative text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
+              {card.primary_cta_label}
+            </span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img loading="lazy" decoding="async"
+              alt=""
+              src="/dvk/phone-cta-arrow.svg"
+              aria-hidden
+              className="relative block size-[18px] max-w-none"
+            />
+            <GreenCtaCorners disableDots />
+          </a>
+
+          {/* Translucent secondary CTA */}
+          <a
+            href={card.secondary_cta_href}
+            className={`${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+            data-name="CTA - Secondary"
+          >
+            <p className="relative text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
+              {card.secondary_cta_label}
+            </p>
+            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+          </a>
+        </div>
+      </div>
+
+      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+    </div>
   );
 }
 

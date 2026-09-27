@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_developer_model_zoo_stats",
+  "info": {
+    "displayName": "Model Zoo Stat",
+    "description": "Developer model zoo stat item"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "text": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

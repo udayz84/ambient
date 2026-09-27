@@ -664,16 +664,8 @@ export const MODELFORGE_CARD_BORDER = "rgba(240,240,240,0.2)";
 
 export const MODELFORGE_CARD = {
   width: 400,
-  height: 469,
+  height: 500,
   gap: 28,
-};
-
-/** Image box (Figma 2917:1343) — relative to the NewsSection. */
-export const MODELFORGE_IMAGE_BOX = {
-  left: -50.451171875,
-  top: -3.0537109375,
-  width: 427.8506774902344,
-  height: 231.5015869140625,
 };
 
 export type ModelForgeStep = {
@@ -681,9 +673,15 @@ export type ModelForgeStep = {
   number: string;
   title: string;
   description: string;
-  /** Image crop offset (percent of the image box). */
-  imgLeft: number;
-  imgTop: number;
+  /** Image box — relative to the NewsSection (Figma 2917:1343/1360/1378). */
+  imageBox: { left: number; top: number; width: number; height: number };
+  /** Step watermark position — relative to the card. */
+  numberLeft: number;
+  numberTop: number;
+  /** Text block top — relative to the NewsSection. */
+  textTop: number;
+  /** Optional in-card CTA (Figma 5212:6997 — card 01 only). */
+  cta?: { label: string; href: string };
 };
 
 export const MODELFORGE_STEPS: ModelForgeStep[] = [
@@ -691,25 +689,33 @@ export const MODELFORGE_STEPS: ModelForgeStep[] = [
     nodeId: "2917:1341",
     number: "01",
     title: "TRAIN",
-    description: "Bring your TensorFlow, Keras, or ONNX model. Or start from our pre-trained library.",
-    imgLeft: -9.04,
-    imgTop: -49.04,
+    description:
+      "Bring your TensorFlow, Keras, or ONNX model. Or start from the Model Zoo — pre-trained models that run on GPX10 out of the box.",
+    imageBox: { left: -28, top: 0, width: 395, height: 232 },
+    numberLeft: 32,
+    numberTop: 221,
+    textTop: 267,
+    cta: { label: "Browse the Model Zoo", href: "/model-zoo" },
   },
   {
     nodeId: "2917:1359",
     number: "02",
     title: "COMPILE",
     description: "Push-button: ModelForge quantizes and maps it onto A-Cube. No manual translation.",
-    imgLeft: -114.69,
-    imgTop: -45.83,
+    imageBox: { left: -29.18, top: -10.05, width: 395, height: 242 },
+    numberLeft: 29,
+    numberTop: 287,
+    textTop: 346.95,
   },
   {
     nodeId: "2917:1377",
     number: "03",
     title: "DEPLOY",
     description: "One unified build in standard Eclipse. Up to 90% of your existing C code ports over.",
-    imgLeft: -116.48,
-    imgTop: -162.44,
+    imageBox: { left: -19, top: -3, width: 372.86, height: 228.45 },
+    numberLeft: 26,
+    numberTop: 287,
+    textTop: 340.45,
   },
 ];
 

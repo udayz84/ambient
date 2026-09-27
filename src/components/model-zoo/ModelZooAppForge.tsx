@@ -297,21 +297,11 @@ export function ModelZooAppForge() {
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
         </div>
 
-        {/* Request CTA — 5131:10555 (293×48, centered). The reference's ambient
-            glow is stronger than the standard CTA shadow, so it is boosted here. */}
+        {/* Request CTA — 5131:10555 (293×48, centered). */}
         <div className="relative mt-[30px] flex justify-center pb-[63px]">
-          {/* bright glow band just above the button (present in the reference) */}
-          <div
-            className="pointer-events-none absolute top-[-24px] left-1/2 hidden h-[96px] w-[700px] -translate-x-1/2 min-[1024px]:block"
-            style={{
-              background:
-                "radial-gradient(ellipse 50% 50% at 50% 100%, rgba(83,216,36,0.5) 0%, rgba(83,216,36,0.25) 45%, rgba(83,216,36,0) 75%)",
-            }}
-            aria-hidden
-          />
           <a
             href="#"
-            className="shadow-[0px_42px_107px_0px_rgba(83,216,36,0.45),0px_24.721px_32.257px_0px_rgba(83,216,36,0.35),0px_10.268px_13.398px_0px_rgba(83,216,36,0.35),0px_3.714px_4.846px_0px_rgba(83,216,36,0.2)] relative flex h-[48px] w-[293px] shrink-0 items-center justify-center"
+            className="shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] relative flex h-[48px] w-[293px] shrink-0 items-center justify-center"
             data-node-id="5131:10556"
             data-name="Cta"
           >

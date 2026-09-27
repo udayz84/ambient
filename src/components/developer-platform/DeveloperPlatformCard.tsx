@@ -21,7 +21,9 @@ export function DeveloperPlatformCard({
   lineTop,
   lineWidth,
   patternGradient,
+  patternClass,
   overlayGradient,
+  buttonLabel,
   imageSrc,
   imageVariant,
 }: DeveloperPlatformCardConfig) {
@@ -38,14 +40,14 @@ export function DeveloperPlatformCard({
 
       {overlayGradient ? (
         <div
-          className={`absolute -translate-x-1/2 left-1/2 top-[-0.15px] ${height === 600 ? "h-[600.147px] w-[388px]" : "h-[290.295px] w-[796px]"}`}
+          className="absolute -translate-x-1/2 left-1/2 top-[-0.15px] h-[290.295px] w-[796px]"
           style={{ backgroundImage: overlayGradient }}
           aria-hidden
         />
       ) : null}
 
       <div
-        className={`absolute -translate-y-1/2 top-1/2 right-0 opacity-[0.24] ${height === 600 ? "h-[600px] w-[388px]" : height === 290 && width === 796 ? "h-[290.295px] w-[796px]" : "h-[290.295px] w-[388px]"}`}
+        className={`absolute -translate-y-1/2 top-1/2 opacity-[0.24] ${patternClass ?? (width === 796 ? "right-0 h-[290.295px] w-[796px]" : "right-0 h-[290.295px] w-[388px]")}`}
         style={{ backgroundImage: patternGradient }}
         data-name="Pattern"
         aria-hidden
@@ -63,22 +65,6 @@ export function DeveloperPlatformCard({
             fill
             className="pointer-events-none object-contain"
             sizes="128px"
-          />
-        </div>
-      ) : null}
-
-      {imageSrc && imageVariant === "devkit" ? (
-        <div
-          className="absolute top-[calc(50%-61.48px)] left-[calc(50%+70.18px)] h-[315px] w-[388px] -translate-x-1/2 -translate-y-1/2"
-          data-node-id="4054:8291"
-          data-name="image 249"
-        >
-          <Image
-            src={imageSrc}
-            alt=""
-            fill
-            className="pointer-events-none object-cover"
-            sizes="388px"
           />
         </div>
       ) : null}
@@ -141,6 +127,73 @@ export function DeveloperPlatformCard({
           />
         </div>
       </div>
+
+      {buttonLabel ? (
+        <Link
+          href={href}
+          className="group absolute top-[226px] left-[24px] h-[48px] w-[280px] overflow-clip bg-[rgba(0,0,0,0.2)]"
+          data-node-id="5212:9597"
+          data-name="Menu"
+        >
+          <span
+            className={`${gilroyMedium.className} absolute top-[10.5px] left-[12px] w-[255px] text-[16px] leading-[28px] font-medium text-black uppercase whitespace-nowrap not-italic`}
+          >
+            {buttonLabel}
+          </span>
+          <span className="absolute top-0 left-0 flex size-[4px] items-center justify-center" aria-hidden>
+            <span className="-scale-y-100 flex-none">
+              <span className="relative block size-[4px]">
+                <span className="absolute inset-[0_0_-12.5%_-12.5%]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    alt=""
+                    src="/developer-platform/corner-tag-black.svg"
+                    className="block size-full max-w-none"
+                  />
+                </span>
+              </span>
+            </span>
+          </span>
+          <span className="absolute top-0 right-0 flex size-[4px] items-center justify-center" aria-hidden>
+            <span className="flex-none rotate-180">
+              <span className="relative block size-[4px]">
+                <span className="absolute inset-[0_0_-12.5%_-12.5%]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    alt=""
+                    src="/developer-platform/corner-tag-black.svg"
+                    className="block size-full max-w-none"
+                  />
+                </span>
+              </span>
+            </span>
+          </span>
+          <span className="absolute bottom-0 left-0 block size-[4px]" aria-hidden>
+            <span className="absolute inset-[0_0_-12.5%_-12.5%]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                alt=""
+                src="/developer-platform/corner-tag-black.svg"
+                className="block size-full max-w-none"
+              />
+            </span>
+          </span>
+          <span className="absolute right-0 bottom-0 flex size-[4px] items-center justify-center" aria-hidden>
+            <span className="-scale-y-100 flex-none rotate-180">
+              <span className="relative block size-[4px]">
+                <span className="absolute inset-[0_0_-12.5%_-12.5%]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    alt=""
+                    src="/developer-platform/corner-tag-black.svg"
+                    className="block size-full max-w-none"
+                  />
+                </span>
+              </span>
+            </span>
+          </span>
+        </Link>
+      ) : null}
     </div>
   );
 }

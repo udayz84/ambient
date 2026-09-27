@@ -97,7 +97,7 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
             className="absolute top-[10px] left-1/2 h-[98px] w-[417px] -translate-x-1/2 text-center"
             data-node-id="2438:3918"
           >
-            <GradientTitle gradientDeg="105.388deg" className="text-center">
+            <GradientTitle gradientDeg="105.388deg" className="text-center" maxLines={2}>
               {titleLines.map((line: string, i: number) => (
                 <span key={i} className="block leading-[49px] [word-break:break-word]">
                   {line}

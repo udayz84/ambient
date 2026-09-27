@@ -25,6 +25,11 @@
     },
     "alt": {
       "type": "string"
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.cta"
     }
   }
 }

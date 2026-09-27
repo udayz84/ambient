@@ -764,6 +764,33 @@ export interface DeveloperHero extends Struct.ComponentSchema {
   };
 }
 
+export interface DeveloperModelZoo extends Struct.ComponentSchema {
+  collectionName: 'components_developer_model_zoos';
+  info: {
+    description: 'Developer model zoo section';
+    displayName: 'Model Zoo';
+  };
+  attributes: {
+    cta_href: Schema.Attribute.String;
+    cta_label: Schema.Attribute.String;
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    stats: Schema.Attribute.Component<'developer.model-zoo-stat', true>;
+    subtitle: Schema.Attribute.Text;
+  };
+}
+
+export interface DeveloperModelZooStat extends Struct.ComponentSchema {
+  collectionName: 'components_developer_model_zoo_stats';
+  info: {
+    description: 'Developer model zoo stat item';
+    displayName: 'Model Zoo Stat';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    text: Schema.Attribute.Text & Schema.Attribute.Required;
+  };
+}
+
 export interface DeveloperModule extends Struct.ComponentSchema {
   collectionName: 'components_developer_modules';
   info: {
@@ -861,6 +888,7 @@ export interface DvkDemos extends Struct.ComponentSchema {
   attributes: {
     demo_cards: Schema.Attribute.Component<'dvk.demo-card', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
+    phone_card: Schema.Attribute.Component<'dvk.phone-card', false>;
     subtitle: Schema.Attribute.Text;
   };
 }
@@ -950,6 +978,22 @@ export interface DvkModuleCard extends Struct.ComponentSchema {
   attributes: {
     description: Schema.Attribute.Text;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface DvkPhoneCard extends Struct.ComponentSchema {
+  collectionName: 'components_dvk_phone_cards';
+  info: {
+    description: 'DVK demos phone/CTA card (Figma 5212:6941)';
+    displayName: 'Phone Card';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    primary_cta_href: Schema.Attribute.String;
+    primary_cta_label: Schema.Attribute.String;
+    secondary_cta_href: Schema.Attribute.String;
+    secondary_cta_label: Schema.Attribute.String;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -1057,6 +1101,7 @@ export interface HomeDevCard extends Struct.ComponentSchema {
   attributes: {
     alt: Schema.Attribute.String;
     body: Schema.Attribute.Text;
+    cta: Schema.Attribute.Component<'shared.cta', false>;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -1830,6 +1875,8 @@ export interface ProductsModelforgeStep extends Struct.ComponentSchema {
     displayName: 'ModelForge Step';
   };
   attributes: {
+    cta_href: Schema.Attribute.String;
+    cta_label: Schema.Attribute.String;
     description: Schema.Attribute.Text;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     step: Schema.Attribute.String & Schema.Attribute.Required;
@@ -3137,6 +3184,8 @@ declare module '@strapi/strapi' {
       'developer.copilot': DeveloperCopilot;
       'developer.copilots': DeveloperCopilots;
       'developer.hero': DeveloperHero;
+      'developer.model-zoo': DeveloperModelZoo;
+      'developer.model-zoo-stat': DeveloperModelZooStat;
       'developer.module': DeveloperModule;
       'developer.modules': DeveloperModules;
       'developer.pipeline': DeveloperPipeline;
@@ -3149,6 +3198,7 @@ declare module '@strapi/strapi' {
       'dvk.integrated-modules': DvkIntegratedModules;
       'dvk.modelforge': DvkModelforge;
       'dvk.module-card': DvkModuleCard;
+      'dvk.phone-card': DvkPhoneCard;
       'dvk.spec-card': DvkSpecCard;
       'form.field': FormField;
       'home.app-feature-card': HomeAppFeatureCard;

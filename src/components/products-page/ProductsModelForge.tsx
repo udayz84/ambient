@@ -13,7 +13,6 @@ import {
   MODELFORGE_CARD,
   MODELFORGE_CARD_BG,
   MODELFORGE_CARD_BORDER,
-  MODELFORGE_IMAGE_BOX,
   MODELFORGE_STEPS,
   MODELFORGE_TITLE_GRADIENT,
   STEP_NUMBER_GRADIENT,
@@ -96,8 +95,13 @@ export function ProductsModelForge({ data }: { data?: any }) {
             title: fallback.title,
             description: s?.description ?? fallback.description,
             image: mediaUrl(s?.image),
-            imgLeft: fallback.imgLeft,
-            imgTop: fallback.imgTop,
+            imageBox: fallback.imageBox,
+            numberLeft: fallback.numberLeft,
+            numberTop: fallback.numberTop,
+            textTop: fallback.textTop,
+            cta: s?.cta_label
+              ? { label: s.cta_label, href: s.cta_href || fallback.cta?.href || "#" }
+              : fallback.cta,
           };
         })
       : MODELFORGE_STEPS;
@@ -275,14 +279,14 @@ function ModelForgeCard({ step }: { step: any }) {
     >
       {/* NewsSection (content area) */}
       <div className="relative w-full flex-1" data-name="NewsSection">
-        {/* Image box */}
+        {/* Image box — per-step (Figma 2917:1343/1360/1378) */}
         <div
           className="absolute overflow-hidden"
           style={{
-            left: MODELFORGE_IMAGE_BOX.left,
-            top: MODELFORGE_IMAGE_BOX.top,
-            width: MODELFORGE_IMAGE_BOX.width,
-            height: MODELFORGE_IMAGE_BOX.height,
+            left: step.imageBox.left,
+            top: step.imageBox.top,
+            width: step.imageBox.width,
+            height: step.imageBox.height,
           }}
           data-name="image 168"
           aria-hidden
@@ -304,10 +308,10 @@ function ModelForgeCard({ step }: { step: any }) {
           />
         </div>
 
-        {/* Title + description */}
+        {/* Title + description (+ CTA on card 01 — Figma 5212:6997) */}
         <div
           className="absolute left-0 flex flex-col items-start gap-[12px] not-italic [word-break:break-word]"
-          style={{ top: 317 }}
+          style={{ top: step.textTop }}
           data-name="Frame 1618875841"
         >
           <h3
@@ -321,15 +325,29 @@ function ModelForgeCard({ step }: { step: any }) {
           >
             {step.description}
           </p>
+
+          {step.cta ? (
+            <a
+              href={step.cta.href}
+              className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative mt-[2px] flex h-[48px] w-[251px] shrink-0 items-center justify-center overflow-hidden text-[16px] leading-[28px] text-white uppercase not-italic`}
+              data-node-id="5212:6997"
+              data-name="Cta"
+            >
+              <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612] pointer-events-none" />
+              <span className="relative whitespace-nowrap">{step.cta.label}</span>
+              <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+              <div className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
+            </a>
+          ) : null}
         </div>
       </div>
 
-      {/* Step number — card-relative, left-aligned with content */}
+      {/* Step number — per-step position (Figma) */}
       <span
         className={`${gilroyMedium.className} pointer-events-none absolute bg-clip-text text-[70px] leading-[70px] font-medium text-transparent opacity-50 not-italic whitespace-nowrap`}
         style={{
-          left: 32,
-          top: 257,
+          left: step.numberLeft,
+          top: step.numberTop,
           backgroundImage: STEP_NUMBER_GRADIENT,
           WebkitBackgroundClip: "text",
           backgroundClip: "text",
@@ -410,11 +428,14 @@ function ProductsModelForgeMobile({
               style={{
                 transform: "scale(0.9)",
                 transformOrigin: "top center",
-                height: `${400 * 0.9}px`,
+                height: `${(step.cta ? 480 : 400) * 0.9}px`,
                 width: `${354 * 0.9}px`,
               }}
             >
-              <div className="absolute top-0 left-1/2 -translate-x-1/2" style={{ width: 354, height: 400 }}>
+              <div
+                className="absolute top-0 left-1/2 -translate-x-1/2"
+                style={{ width: 354, height: step.cta ? 480 : 400 }}
+              >
                 <MobileModelForgeCard step={step} />
               </div>
             </div>
@@ -453,16 +474,17 @@ function ProductsModelForgeMobile({
   );
 }
 
-/* ── Mobile ModelForge card — Figma 3572:8993 (354×400) ── */
+/* ── Mobile ModelForge card — Figma 3572:8993 (354×400; card 01 grows to 480 for the CTA) ── */
 function MobileModelForgeCard({ step }: { step: any }) {
   return (
     <article
-      className="relative h-[400px] w-[354px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)]"
+      className="relative w-[354px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)]"
+      style={{ height: step.cta ? 480 : 400 }}
       data-node-id={step.nodeId}
       data-name="Article"
     >
       {/* NewsSection — content area at (32, 16) */}
-      <div className="absolute left-[32px] top-[16px] h-[359px] w-[290px]" data-name="NewsSection">
+      <div className="absolute left-[32px] top-[16px] w-[290px]" data-name="NewsSection">
         {/* Image */}
         {step.image && (
           <div className="absolute left-[-16px] top-0 h-[210px] w-[322px] overflow-hidden" data-name="image" aria-hidden>
@@ -486,7 +508,7 @@ function MobileModelForgeCard({ step }: { step: any }) {
         >
           {step.number.split(" ")[0]}
         </span>
-        {/* Title + description */}
+        {/* Title + description (+ CTA on card 01) */}
         <div className="absolute left-[-16px] top-[259px] flex w-[322px] flex-col gap-[5px]">
           <h3
             className={`${gilroyMedium.className} text-[24px] leading-[38px] font-medium text-white not-italic [word-break:break-word]`}
@@ -498,6 +520,19 @@ function MobileModelForgeCard({ step }: { step: any }) {
           >
             {step.description}
           </p>
+          {step.cta ? (
+            <a
+              href={step.cta.href}
+              className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative mt-[7px] flex h-[48px] w-[251px] shrink-0 items-center justify-center overflow-hidden text-[16px] leading-[28px] text-white uppercase not-italic`}
+              data-node-id="5212:6997"
+              data-name="Cta"
+            >
+              <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
+              <span className="relative whitespace-nowrap">{step.cta.label}</span>
+              <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+              <span aria-hidden className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
+            </a>
+          ) : null}
         </div>
       </div>
       {/* Corner ticks */}

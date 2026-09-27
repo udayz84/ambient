@@ -15,7 +15,9 @@ export type DeveloperPlatformCardConfig = {
   lineTop: number;
   lineWidth: number;
   patternGradient: string;
+  patternClass?: string;
   overlayGradient?: string;
+  buttonLabel?: string;
   imageSrc?: string;
   imageVariant?: "chipset" | "devkit" | "modules";
   href: string;
@@ -45,9 +47,10 @@ export const DEVELOPER_PLATFORM_CARDS: DeveloperPlatformCardConfig[] = [
     imageVariant: "chipset",
   },
   {
-    nodeId: "2379:987",
-    left: 408,
-    top: 0,
+    // Figma 5212:9613 — moved to the right column, top half.
+    nodeId: "5212:9613",
+    left: 816.177,
+    top: 0.02,
     width: 388,
     height: 290,
     title: "Develop with ModelForge",
@@ -65,24 +68,27 @@ export const DEVELOPER_PLATFORM_CARDS: DeveloperPlatformCardConfig[] = [
       "linear-gradient(17.4266deg, rgba(255, 255, 255, 0) 13.463%, rgb(255, 255, 255) 71.165%)",
   },
   {
-    nodeId: "2379:994",
-    left: 816,
+    // Figma 5212:9621 — halved from 600px to 290px and moved to the middle
+    // column; the dev-kit photo is hidden in the updated design (mobile only).
+    nodeId: "5212:9621",
+    left: 408,
     top: 0,
     width: 388,
-    height: 600,
+    height: 290,
     title: "Evaluate with development kits",
     href: "/dvk",
-    titleLeft: 20,
+    titleLeft: 19.822998046875,
     body:
       "Get hands-on with the platform through development kits designed to accelerate validation and shorten time to first insight",
-    bodyLeft: 20,
+    bodyLeft: 19.822998046875,
     bodyWidth: 290,
-    bodyBottomOffset: 187.98,
-    lineLeft: 21.27734375,
-    lineTop: 77.34765625,
+    bodyBottomOffset: 157,
+    lineLeft: 21.100341796875,
+    lineTop: 77.326171875,
     lineWidth: 151.83203125,
     patternGradient:
-      "linear-gradient(32.9743deg, rgba(255, 255, 255, 0) 13.463%, rgb(255, 255, 255) 71.165%)",
+      "linear-gradient(8.69891deg, rgba(255, 255, 255, 0) 13.463%, rgb(255, 255, 255) 71.165%)",
+    patternClass: "left-1/2 -translate-x-1/2 h-[290.295px] w-[796px]",
     imageSrc: "/developer-platform/card-image-devkits.webp",
     imageVariant: "devkit",
   },
@@ -109,5 +115,30 @@ export const DEVELOPER_PLATFORM_CARDS: DeveloperPlatformCardConfig[] = [
       "linear-gradient(154.062deg, rgba(188, 229, 174, 0) 30.174%, rgb(188, 229, 174) 76.687%)",
     imageSrc: "/developer-platform/card-image-modules-figma.webp",
     imageVariant: "modules",
+  },
+  {
+    // Figma 5212:9564 — new card filling the bottom-right slot created by
+    // halving the right column. "Menu" annotation reads "Routes to the
+    // Model Zoo page" → href /model-zoo.
+    nodeId: "5212:9564",
+    left: 816.177,
+    top: 310.02,
+    width: 388,
+    height: 290,
+    title: "Deploy from the Model Zoo",
+    href: "/model-zoo",
+    titleLeft: 30,
+    body:
+      "Skip the blank page. Flash a ready-made, GPX-tuned model to your kit and see it run in one click.",
+    bodyLeft: 23.5570068359375,
+    bodyWidth: 340.88604736328125,
+    bodyBottomOffset: 187,
+    lineLeft: 31.27734375,
+    lineTop: 77.34765625,
+    lineWidth: 151.83203125,
+    patternGradient:
+      "linear-gradient(17.4266deg, rgba(255, 255, 255, 0) 13.463%, rgb(255, 255, 255) 71.165%)",
+    // Bracketed CTA button, Figma 5212:9597 ("Menu", 280×48 at 24,226).
+    buttonLabel: "Routes to the Model Zoo page",
   },
 ];

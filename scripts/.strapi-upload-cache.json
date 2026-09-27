@@ -1468,5 +1468,19 @@
     "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/hero_bg_163_5cc831df29.png",
     "name": "hero-bg-163.png",
     "sourcePath": "applications/wearables/hero-bg-163.png"
+  },
+  "0d2743279dc50f935a424b37b36a9b32f4fe873d": {
+    "id": 475,
+    "documentId": "amt3gm5vvcevvqzqh3odbzrh",
+    "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/demo_voice_220ac666b8.webp",
+    "name": "demo-voice.webp",
+    "sourcePath": "dvk/demo-voice.webp"
+  },
+  "bf2c68e61594408d2be21e4172934e8c002d60ab": {
+    "id": 476,
+    "documentId": "ruefv8t25kpfnlwfr04tr3xv",
+    "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/demo_fall_93febbaeea.webp",
+    "name": "demo-fall.webp",
+    "sourcePath": "dvk/demo-fall.webp"
   }
 }

@@ -20,7 +20,13 @@ export function DeveloperPlatformBentoGrid({ data }: { data?: any }) {
     const title = strapiCard.title ?? config.title;
     const body = strapiCard.body ?? config.body;
     const imageSrc = mediaUrl(strapiCard.image) || config.imageSrc;
-    return { ...config, title, body, imageSrc };
+    const href = strapiCard?.cta?.href || config.href;
+    // Button exists only where the design has one (config.buttonLabel);
+    // the CMS cta label overrides its text.
+    const buttonLabel = config.buttonLabel
+      ? strapiCard?.cta?.label || config.buttonLabel
+      : undefined;
+    return { ...config, title, body, imageSrc, href, buttonLabel };
   });
 
   return (

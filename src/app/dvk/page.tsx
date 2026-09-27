@@ -27,7 +27,7 @@ export default async function DvkPage() {
     data = await getSingleType<any>("dvk-page", [
       "hero",
       { section: "inside_module", fields: ["image"], nested: ["specs"] },
-      { section: "demos", nested: ["demo_cards"] },
+      { section: "demos", nested: ["demo_cards"], fields: ["phone_card"] },
       "modelforge",
       { section: "integrated_modules", nested: ["cards"] },
       "seo",

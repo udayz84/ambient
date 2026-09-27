@@ -201,10 +201,10 @@ export function DeveloperPlatformMobile({ data }: { data?: any }) {
       body: strapiCard.body ?? config.body,
       imageSrc: mediaUrl(strapiCard.image) || config.imageSrc,
       imageVariant: config.imageVariant,
-      href: config.href,
+      href: strapiCard?.cta?.href || config.href,
     };
   });
-  const [explore, modelForge, evaluate, prototype] = cards;
+  const [explore, modelForge, evaluate, prototype, modelZoo] = cards;
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
 
   return (
@@ -310,6 +310,15 @@ export function DeveloperPlatformMobile({ data }: { data?: any }) {
             bodyWidth={229}
             imageSrc={evaluate.imageSrc}
             imageVariant="devkit"
+          />
+          {/* New bottom-right desktop card (Figma 5212:9564), stacked last here */}
+          <SmallCard
+            nodeId="5212:9564"
+            title={modelZoo.title}
+            href={modelZoo.href}
+            titleWraps
+            body={modelZoo.body}
+            bodyWidth={155}
           />
         </div>
       </div>
