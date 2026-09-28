@@ -118,7 +118,7 @@ export function ModelZooAppForge() {
                  object-contain so the native aspect is kept (letterboxed). */
               <video
                 className="pointer-events-none absolute inset-0 size-full object-contain"
-                src="/model-zoo/af-results.mp4"
+                src="https://ambientwebasset.blob.core.windows.net/website-assets/model-zoo/af-results.mp4"
                 autoPlay
                 muted
                 loop
@@ -139,7 +139,7 @@ export function ModelZooAppForge() {
                 <video
                   ref={videoRef}
                   className="pointer-events-none absolute inset-0 size-full object-contain"
-                  src="/model-zoo/af-video.mp4"
+                  src="https://ambientwebasset.blob.core.windows.net/website-assets/model-zoo/af-video.mp4"
                   autoPlay
                   muted
                   loop
@@ -171,12 +171,12 @@ export function ModelZooAppForge() {
                     type="button"
                     key={step}
                     aria-pressed={isActive}
+                    disabled={!magicOn}
                     onClick={() => {
                       setActiveStep(isActive ? null : key);
-                      setMagicOn(true);
                     }}
-                    className={`relative block h-[84px] w-full shrink-0 cursor-pointer bg-[rgba(0,0,0,0.1)] text-left transition-[height,opacity] duration-300 motion-reduce:transition-none ${isActive ? STEP_ACTIVE_HEIGHT[key] : ""} ${
-                      isActive ? "opacity-100" : activeStep ? "opacity-40" : magicOn ? "opacity-100" : "opacity-20 hover:opacity-50"
+                    className={`relative block h-[84px] w-full shrink-0 ${magicOn ? 'cursor-pointer' : 'cursor-default'} bg-[rgba(0,0,0,0.1)] text-left transition-[height,opacity] duration-300 motion-reduce:transition-none ${isActive ? STEP_ACTIVE_HEIGHT[key] : ""} ${
+                      isActive ? "opacity-100" : activeStep ? "opacity-40" : magicOn ? "opacity-100" : "opacity-20"
                     }`}
                     data-node-id={`5241:57${52 - i * 6}`}
                   >
