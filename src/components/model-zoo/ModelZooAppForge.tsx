@@ -113,7 +113,18 @@ export function ModelZooAppForge() {
             data-name="Article"
             aria-hidden
           >
-            {activeStep ? (
+            {activeStep === "results" ? (
+              /* "See results live" — real screen recording (portrait 1080×1920),
+                 object-contain so the native aspect is kept (letterboxed). */
+              <video
+                className="pointer-events-none absolute inset-0 size-full object-contain"
+                src="/model-zoo/af-results.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
+            ) : activeStep ? (
               /* Variant collage baked @2x from Figma (corners included) */
               <img
                 alt=""
