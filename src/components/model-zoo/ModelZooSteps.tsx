@@ -145,7 +145,7 @@ export function ModelZooSteps() {
             </h2>
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           </div>
-          <p className={`${interRegular.className} w-full max-w-[552px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`} data-node-id="5131:10598">
+          <p className={`${interRegular.className} w-full max-w-[552px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`} data-node-id="5131:10598">
             No manual porting, no glue code. ModelForge compiles any zoo model onto GPX and flashes your kit in a single step.
           </p>
         </div>
@@ -171,7 +171,7 @@ export function ModelZooSteps() {
               >
                 <div className="flex flex-col items-start gap-[20px]">
                   <img alt="" src={panel.icon} className="size-[36px] shrink-0" loading="lazy" decoding="async" />
-                  <p className={`${interRegular.className} w-full text-[18px] leading-[27px] font-normal text-white not-italic [word-break:break-word]`}>
+                  <p className={`${interRegular.className} w-full text-[18px] leading-[27px] font-normal text-white not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
                     {panel.text}
                   </p>
                 </div>

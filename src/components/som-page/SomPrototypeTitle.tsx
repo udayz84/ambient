@@ -136,7 +136,9 @@ function PrototypeCard({
 }
 
 export function usePrototypeData(data?: any) {
+  console.log("Prototype data received:", JSON.stringify(data, null, 2));
   const heading = data?.heading || FALLBACK_HEADING;
+  const subtitle = data?.subtitle || "";
   const dataCards: any[] = Array.isArray(data?.cards) ? data.cards : [];
   const cards = PROTOTYPE_CARDS.map((fb, i) => {
     const c = dataCards[i];
@@ -147,11 +149,11 @@ export function usePrototypeData(data?: any) {
       imageUrl: mediaUrl(c.image) || null,
     };
   });
-  return { heading, cards };
+  return { heading, subtitle, cards };
 }
 
 export function SomPrototypeTitleDesktop({ data }: { data?: any }) {
-  const { heading, cards } = usePrototypeData(data);
+  const { heading, subtitle, cards } = usePrototypeData(data);
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 1 });
   return (
     <section
@@ -160,14 +162,21 @@ export function SomPrototypeTitleDesktop({ data }: { data?: any }) {
       aria-label="Prototype to Product in a Snap"
     >
       <div className="relative flex w-[1204px] flex-col items-center gap-[36px] pt-[40px] pb-[60px]">
-        <div className="relative px-[10px]" data-name="Title">
-          <h2
-            ref={fitRef}
-            className={`${gilroyMedium.className} text-center text-[46px] leading-[49px] font-medium text-white whitespace-nowrap not-italic [word-break:break-word]`}
-          >
-            {heading}
-          </h2>
-          <Corners />
+        <div className="flex flex-col items-center gap-[24px] text-center">
+          <div className="relative px-[10px]" data-name="Title">
+            <h2
+              ref={fitRef}
+              className={`${gilroyMedium.className} text-center text-[46px] leading-[49px] font-medium text-white whitespace-nowrap not-italic [word-break:break-word]`}
+            >
+              {heading}
+            </h2>
+            <Corners />
+          </div>
+          {subtitle && (
+            <p className={`${interRegular.className} max-w-[800px] text-[16px] md:text-[16px] text-[#f0f0f0]/65 [word-break:break-word] px-4`}>
+              {subtitle}
+            </p>
+          )}
         </div>
         <div className="flex w-full items-center gap-[24px]">
           {cards.map((card) => (
@@ -188,38 +197,43 @@ export function SomPrototypeTitleDesktop({ data }: { data?: any }) {
 }
 
 export function SomPrototypeTitleMobile({ data }: { data?: any }) {
-  const { heading, cards } = usePrototypeData(data);
+  const { heading, subtitle, cards } = usePrototypeData(data);
   const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <section
-      className="relative flex w-full justify-center overflow-hidden bg-black min-[1024px]:hidden"
+      className="relative flex w-full justify-center overflow-hidden bg-black min-[1024px]:hidden pt-[30px] pb-[40px]"
       data-node-id="4046:8061"
       aria-label="Prototype to Product in a Snap"
     >
       <div
-        className="relative mx-auto h-[800px] w-[393px] overflow-hidden bg-black"
+        className="relative mx-auto flex w-[393px] max-w-full flex-col items-center gap-[30px] overflow-hidden bg-black px-[19px]"
         data-name="4th Fold"
       >
-        {/* Title block — 4046:8064 (x19, y30, 350×78) */}
+        {/* Title block */}
         <div
-          className="absolute left-1/2 top-[30px] flex w-[350px] -translate-x-1/2 flex-col items-center justify-center"
+          className="flex w-full max-w-[350px] flex-col items-center justify-center gap-[15px]"
           data-node-id="4046:8064"
         >
-          <div className="relative flex w-[352px] justify-center py-[3px]" data-name="Title">
+          <div className="relative flex w-full justify-center py-[3px]" data-name="Title">
             <Corners />
             <h2
               ref={fitRef}
-              className={`${gilroyMedium.className} w-[321px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} w-[321px] max-w-full bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={MOBILE_TITLE_STYLE}
             >
               {heading}
             </h2>
           </div>
+          {subtitle && (
+            <p className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
+              {subtitle}
+            </p>
+          )}
         </div>
 
-        {/* Cards container — 4059:9110 (x19, y138, 355×632, gap 12) */}
+        {/* Cards container */}
         <div
-          className="absolute left-1/2 top-[138px] flex w-[355px] -translate-x-1/2 flex-col gap-[12px]"
+          className="flex w-full max-w-[355px] flex-col gap-[12px]"
           data-node-id="4059:9110"
         >
           {cards.map((card, i) => (

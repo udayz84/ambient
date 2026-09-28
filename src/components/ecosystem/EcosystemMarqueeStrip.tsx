@@ -51,7 +51,7 @@ export function EcosystemMarqueeStrip({ data }: { data?: ClientsSection | null }
           {data?.heading || "Built on Ambient, Deployed Everywhere"}
         </h2>
         <p
-          className={`${interRegular.className} max-w-[640px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px]`}
+          className={`${interRegular.className} max-w-[640px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
           {data?.subheading ||
             "From always-on edge devices to the hyperscaler cloud, product teams trust Ambient silicon to power real-world intelligence."}

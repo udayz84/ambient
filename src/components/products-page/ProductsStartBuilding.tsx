@@ -119,7 +119,7 @@ function ProductsStartBuildingDesktop({
           </h2>
         </div>
         <p
-          className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+          className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           data-node-id="2903:2616"
         >
           {subtitle}
@@ -195,7 +195,7 @@ function StartCardView({
           {/* Description + CTA */}
           <div className="flex w-[450px] flex-col items-center gap-[20px]">
             <p
-              className={`${interRegular.className} h-[48px] w-full text-center text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-white not-italic [word-break:break-word]`}
+              className={`${interRegular.className} h-[48px] w-full text-center text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-white not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             >
               {card.description}
             </p>
@@ -268,7 +268,7 @@ function ProductsStartBuildingMobile({
           {heading}
         </h2>
         <p
-          className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]`}
+          className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
           {subtitle}
         </p>
@@ -297,7 +297,7 @@ function ProductsStartBuildingMobile({
                 {card.titleLines[0]} {card.titleLines[1]}
               </h3>
               <p
-                className={`${interRegular.className} text-center text-[14px] leading-[21px] font-normal text-white opacity-90`}
+                className={`${interRegular.className} text-center text-[14px] leading-[21px] font-normal text-white opacity-90 min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
               >
                 {card.description}
               </p>

@@ -53,7 +53,7 @@ export function ContactHero({ data }: { data?: any }) {
       </div>
 
       <p
-        className={`${interRegular.className} absolute top-[199px] left-[981px] z-10 w-[360px] text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+        className={`${interRegular.className} absolute top-[199px] left-[981px] z-10 w-[360px] text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         data-node-id="2379:4959"
       >
         {subtitle}

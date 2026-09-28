@@ -115,7 +115,7 @@ export function PartnersWhy() {
       </div>
 
       <p
-        className={`${interRegular.className} max-w-[860px] px-[24px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px]`}
+        className={`${interRegular.className} max-w-[860px] px-[24px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
       >
         {PARTNERS_WHY.subheading}
       </p>

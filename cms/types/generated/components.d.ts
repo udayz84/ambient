@@ -864,6 +864,18 @@ export interface DeveloperPipelineTab extends Struct.ComponentSchema {
   };
 }
 
+export interface DvkAppForge extends Struct.ComponentSchema {
+  collectionName: 'components_dvk_app_forges';
+  info: {
+    description: 'ApplicationForge phone-control section \u2014 heading and subheading only; steps, toggle, videos and cards stay hardcoded in the frontend';
+    displayName: 'App Forge';
+  };
+  attributes: {
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    subheading: Schema.Attribute.Text;
+  };
+}
+
 export interface DvkDemoCard extends Struct.ComponentSchema {
   collectionName: 'components_dvk_demo_cards';
   info: {
@@ -2498,6 +2510,48 @@ export interface SomEcosystemCard extends Struct.ComponentSchema {
   };
 }
 
+export interface SomFamily extends Struct.ComponentSchema {
+  collectionName: 'components_som_families';
+  info: {
+    description: 'GPX10 PRO SOM FAMILY section';
+    displayName: 'Family Section';
+  };
+  attributes: {
+    cards: Schema.Attribute.Component<'som.family-card', true>;
+    subtitle: Schema.Attribute.Text;
+    tag: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SomFamilyCard extends Struct.ComponentSchema {
+  collectionName: 'components_som_family_cards';
+  info: {
+    description: 'Card for the GPX10 PRO SOM FAMILY section';
+    displayName: 'Family Card';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    features: Schema.Attribute.Component<'som.family-feature', true>;
+    footerText: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    tag: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SomFamilyFeature extends Struct.ComponentSchema {
+  collectionName: 'components_som_family_features';
+  info: {
+    description: 'Feature item for family card';
+    displayName: 'Family Feature';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    text: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SomFeatureCard extends Struct.ComponentSchema {
   collectionName: 'components_som_feature_cards';
   info: {
@@ -2617,6 +2671,7 @@ export interface SomPrototypes extends Struct.ComponentSchema {
   attributes: {
     cards: Schema.Attribute.Component<'som.prototype-card', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
+    subtitle: Schema.Attribute.Text;
   };
 }
 
@@ -3191,6 +3246,7 @@ declare module '@strapi/strapi' {
       'developer.pipeline': DeveloperPipeline;
       'developer.pipeline-bullet': DeveloperPipelineBullet;
       'developer.pipeline-tab': DeveloperPipelineTab;
+      'dvk.app-forge': DvkAppForge;
       'dvk.demo-card': DvkDemoCard;
       'dvk.demos': DvkDemos;
       'dvk.hardware-stack': DvkHardwareStack;
@@ -3292,6 +3348,9 @@ declare module '@strapi/strapi' {
       'som.deploy-path-card': SomDeployPathCard;
       'som.ecosystem': SomEcosystem;
       'som.ecosystem-card': SomEcosystemCard;
+      'som.family': SomFamily;
+      'som.family-card': SomFamilyCard;
+      'som.family-feature': SomFamilyFeature;
       'som.feature-card': SomFeatureCard;
       'som.features': SomFeatures;
       'som.footer-merge': SomFooterMerge;

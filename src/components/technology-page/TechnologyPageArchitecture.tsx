@@ -420,7 +420,7 @@ export function TechnologyPageArchitecture({
             <CornerDecor />
           </div>
           <p
-            className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65 [word-break:break-word]`}
+            className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65 [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             data-node-id="3330:1279"
           >
             {subtitle}

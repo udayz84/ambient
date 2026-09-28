@@ -115,7 +115,7 @@ export function ResourcesHero({ data }: ResourcesHeroProps = {}) {
               autoComplete="off"
               placeholder={placeholder}
               aria-label="Search resources"
-              className={`${interRegular.className} h-full w-full border-0 bg-transparent p-0 text-[14px] leading-[21px] font-normal text-white not-italic outline-none placeholder:text-white/70 focus:outline-none`}
+              className={`${interRegular.className} h-full w-full border-0 bg-transparent p-0 text-[14px] leading-[21px] font-normal text-white not-italic outline-none placeholder:text-white/70 focus:outline-none min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             />
           </div>
           <a
@@ -131,7 +131,7 @@ export function ResourcesHero({ data }: ResourcesHeroProps = {}) {
         </div>
 
         <div
-          className={`${interRegular.className} absolute top-[212.17px] left-[calc(16.67%+119px)] flex w-[722px] justify-center items-center gap-[6px] text-[14px] leading-[21px] font-normal whitespace-nowrap not-italic`}
+          className={`${interRegular.className} absolute top-[212.17px] left-[calc(16.67%+119px)] flex w-[722px] justify-center items-center gap-[6px] text-[14px] leading-[21px] font-normal whitespace-nowrap not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           data-node-id="2379:1634"
         >
           <span className="text-white opacity-75" data-node-id="2379:1635">

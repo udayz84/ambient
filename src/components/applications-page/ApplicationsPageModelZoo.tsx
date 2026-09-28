@@ -16,10 +16,13 @@ const SECONDARY_CTA = { label: "See it live in ApplicationForge", href: "/applic
 
 // Placeholders for looping thumbnails. You can swap these with real model screenshots later.
 const PLACEHOLDER_MODELS = [
-  "/applications/wearables/legacy-way-box.jpg",
-  "/applications/wearables/ambient-way-box.jpg",
-  "/applications/som-img-a.webp",
-  "/applications/som-img-b.webp",
+  "/applications/app-wearables.png",
+  "/applications/app-smart-home.png",
+  "/applications/app-industrial.png",
+  "/applications/app-medical.png",
+  "/applications/app-agriculture.png",
+  "/applications/app-drones.png",
+  "/applications/app-hearables.png",
 ];
 
 function PrimaryCta({ label, href }: { label: string; href: string }) {
@@ -89,7 +92,7 @@ export function ApplicationsPageModelZoo({ data }: { data?: any }) {
           <Corners />
         </div>
 
-        <p className={`${interRegular.className} max-w-[800px] text-[16px] min-[1024px]:text-[18px] leading-[24px] min-[1024px]:leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic`}>
+        <p className={`${interRegular.className} max-w-[800px] text-[16px] min-[1024px]:text-[16px] leading-[24px] min-[1024px]:leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic`}>
           {SUBTITLE}
         </p>
 
@@ -106,17 +109,16 @@ export function ApplicationsPageModelZoo({ data }: { data?: any }) {
         <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-[100px] bg-gradient-to-r from-black to-transparent" />
         <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-[100px] bg-gradient-to-l from-black to-transparent" />
 
-        <div className="animate-technology-marquee flex items-center gap-[24px] will-change-transform group-hover:[animation-play-state:paused]">
+        <div className="animate-technology-marquee flex items-center gap-[60px] will-change-transform group-hover:[animation-play-state:paused] pr-[60px]">
           {marqueeItems.map((src, i) => (
-            <div key={i} className="relative h-[200px] w-[350px] shrink-0 overflow-hidden rounded-[8px] border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.05)]">
-              <img
-                src={src}
-                alt="Model demo"
-                loading="lazy"
-                decoding="async"
-                className="absolute inset-0 size-full object-cover opacity-80 mix-blend-screen"
-              />
-            </div>
+            <img
+              key={i}
+              src={src}
+              alt="Model demo"
+              loading="lazy"
+              decoding="async"
+              className="h-[250px] w-auto shrink-0 max-w-none object-contain"
+            />
           ))}
         </div>
       </div>

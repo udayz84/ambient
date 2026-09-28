@@ -233,7 +233,7 @@ export function TechnologyPageHero({ data }: { data?: any } = {}) {
               {titleText}
             </div>
             <p
-              className={`${interRegular.className} min-w-full shrink-0 text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 not-italic [word-break:break-word]`}
+              className={`${interRegular.className} min-w-full shrink-0 text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
               data-node-id="3572:6477"
             >
               {descText}

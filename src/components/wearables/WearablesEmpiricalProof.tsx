@@ -137,7 +137,7 @@ function HealthCard({ data }: { data?: any }) {
       </a>
       {/* Footer text */}
       <p
-        className={`${interRegular.className} absolute left-[35px] top-[315.12px] w-[458.152px] text-[14px] leading-[21px] text-[#a4a4a4] not-italic [word-break:break-word]`}
+        className={`${interRegular.className} absolute left-[35px] top-[315.12px] w-[458.152px] text-[14px] leading-[21px] text-[#a4a4a4] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
       >
         {footer}
       </p>
@@ -341,7 +341,7 @@ function WorkloadCard({ data }: { data?: any }) {
         {stat}
       </p>
       <p
-        className={`${interRegular.className} absolute left-1/2 top-[295.69px] -translate-x-1/2 text-[14px] leading-[21px] text-[#f0f0f0] whitespace-nowrap not-italic`}
+        className={`${interRegular.className} absolute left-1/2 top-[295.69px] -translate-x-1/2 text-[14px] leading-[21px] text-[#f0f0f0] whitespace-nowrap not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
       >
         {label}
       </p>
@@ -656,7 +656,7 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
             />
           </div>
           <p
-            className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {subtitle}
           </p>
@@ -709,7 +709,7 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
             />
           </div>
           <p
-            className={`${interRegular.className} w-[352px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic`}
+            className={`${interRegular.className} w-[352px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {subtitle}
           </p>
@@ -727,7 +727,7 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
             <p className={`${gilroyMedium.className} text-[20px] leading-[26px] text-white not-italic`}>
               {healthTitle}
             </p>
-            <p className={`${interRegular.className} text-[14px] leading-[21px] text-[rgba(255,255,255,0.6)] not-italic`}>
+            <p className={`${interRegular.className} text-[14px] leading-[21px] text-[rgba(255,255,255,0.6)] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
               {healthBody}
             </p>
             <p className={`${interRegular.className} text-[13px] leading-[20px] text-[#a4a4a4] not-italic`}>

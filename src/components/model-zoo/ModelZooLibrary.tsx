@@ -91,7 +91,7 @@ function SpecCell({ spec }: { spec: Spec }) {
   return (
     <div className="relative flex h-[70px] flex-1 flex-col overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] p-[12px]" data-name="Article">
       <div className="flex w-full flex-col items-start gap-[10px]">
-        <p className={`${interRegular.className} w-full text-[14px] leading-[17px] uppercase text-[#8e8e8e] not-italic`}>{spec.label}</p>
+        <p className={`${interRegular.className} w-full text-[14px] leading-[17px] uppercase text-[#8e8e8e] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>{spec.label}</p>
         <p className={`${interRegular.className} w-full text-[16px] leading-[19px] whitespace-nowrap text-white not-italic`}>{spec.value}</p>
       </div>
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
@@ -217,7 +217,7 @@ function FilterSelect({
                 onChange(opt);
                 setOpen(false);
               }}
-              className={`${interRegular.className} block w-full px-[20px] py-[10px] text-left text-[14px] text-white not-italic hover:bg-[rgba(255,255,255,0.08)]`}
+              className={`${interRegular.className} block w-full px-[20px] py-[10px] text-left text-[14px] text-white not-italic hover:bg-[rgba(255,255,255,0.08)] min-[1024px]:text-[16px]`}
             >
               {opt === "all" ? "All" : opt.replace(/\b\w/g, (c) => c.toUpperCase())}
             </button>
@@ -269,7 +269,7 @@ export function ModelZooLibrary() {
             </h2>
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           </div>
-          <p className={`${interRegular.className} w-full max-w-[800px] text-center text-[14px] leading-[21px] min-[1024px]:text-[18px] min-[1024px]:leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
+          <p className={`${interRegular.className} w-full max-w-[800px] text-center text-[14px] leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
             Explore open-source and Ambient-built models across Audio, Vision, and Motion.
           </p>
         </div>
@@ -289,7 +289,7 @@ export function ModelZooLibrary() {
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search by model or use case…"
                   aria-label="Search by model or use case"
-                  className={`${interRegular.className} h-full w-full border-0 bg-transparent text-[14px] leading-[21px] text-white not-italic outline-none placeholder:text-white`}
+                  className={`${interRegular.className} h-full w-full border-0 bg-transparent text-[14px] leading-[21px] text-white not-italic outline-none placeholder:text-white min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
                 />
               </div>
               <button
@@ -309,7 +309,7 @@ export function ModelZooLibrary() {
                   setType("all");
                   setQuery("");
                 }}
-                className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#53d824] not-italic hover:underline`}
+                className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#53d824] not-italic hover:underline min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
                 data-node-id="5286:7528"
               >
                 Reset Filters

@@ -1,1 +1,61 @@
-{ "kind": "singleType", "collectionName": "dvk_pages", "info": { "singularName": "dvk-page", "pluralName": "dvk-pages", "displayName": "DVK Page", "description": "Cranium Development Kit page" }, "options": { "draftAndPublish": true }, "pluginOptions": {}, "attributes": { "hero": { "type": "component", "repeatable": false, "component": "dvk.hero" }, "inside_module": { "type": "component", "repeatable": false, "component": "som.inside-module" }, "demos": { "type": "component", "repeatable": false, "component": "dvk.demos" }, "modelforge": { "type": "component", "repeatable": false, "component": "dvk.modelforge" }, "integrated_modules": { "type": "component", "repeatable": false, "component": "dvk.integrated-modules" }, "seo": { "type": "component", "repeatable": false, "component": "shared.seo" } } }
+{
+  "kind": "singleType",
+  "collectionName": "dvk_pages",
+  "info": {
+    "singularName": "dvk-page",
+    "pluralName": "dvk-pages",
+    "displayName": "DVK Page",
+    "description": "Cranium Development Kit page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hero": {
+      "type": "component",
+      "repeatable": false,
+      "component": "dvk.hero"
+    },
+    "inside_module": {
+      "type": "component",
+      "repeatable": false,
+      "component": "som.inside-module"
+    },
+    "prototype": {
+      "type": "component",
+      "repeatable": false,
+      "component": "som.prototypes"
+    },
+    "intelligence": {
+      "type": "component",
+      "component": "som.intelligence",
+      "repeatable": false
+    },
+    "appforge": {
+      "type": "component",
+      "component": "dvk.app-forge",
+      "repeatable": false
+    },
+    "demos": {
+      "type": "component",
+      "repeatable": false,
+      "component": "dvk.demos"
+    },
+    "modelforge": {
+      "type": "component",
+      "repeatable": false,
+      "component": "dvk.modelforge"
+    },
+    "integrated_modules": {
+      "type": "component",
+      "repeatable": false,
+      "component": "dvk.integrated-modules"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

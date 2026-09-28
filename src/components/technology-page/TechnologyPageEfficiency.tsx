@@ -998,7 +998,7 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
             flip="-scale-y-100 rotate-180"
           />
           <p
-            className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic`}
+            className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             data-node-id="3346:945"
           >
             {subtitle}
@@ -1079,7 +1079,7 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
             <MobileTitleCorners />
           </div>
           <p
-            className={`${interRegular.className} w-full text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-full text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {subtitle}
           </p>

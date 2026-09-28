@@ -135,7 +135,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
             <GreenCtaCorners />
           </div>
           <p
-            className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             data-node-id="2438:5202"
           >
             {subtitle}
@@ -169,7 +169,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
             data-node-id="2438:5360"
           >
             <p
-              className={`${interRegular.className} h-[48px] w-full text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} h-[48px] w-full text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
               data-node-id="2438:5361"
             >
               {description}
@@ -222,7 +222,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
             </h2>
           </div>
           <p
-            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {subtitle}
           </p>
@@ -274,7 +274,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
               ))}
             </h3>
             <p
-              className={`${interRegular.className} w-[296.416px] text-center text-[14px] leading-[23.075px] font-normal tracking-[-0.2773px] text-[#99a1af] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} w-[296.416px] text-center text-[14px] leading-[23.075px] font-normal tracking-[-0.2773px] text-[#99a1af] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             >
               {description}
             </p>

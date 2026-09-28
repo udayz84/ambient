@@ -96,7 +96,7 @@ export function ApplicationsHeader({ data }: { data?: any }) {
       </div>
 
       <p
-        className={`${interRegular.className} absolute top-[94px] left-1/2 w-[600px] -translate-x-1/2 text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+        className={`${interRegular.className} absolute top-[94px] left-1/2 w-[600px] -translate-x-1/2 text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         data-node-id="2379:939"
       >
         {subtitle}

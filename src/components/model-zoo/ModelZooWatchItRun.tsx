@@ -175,7 +175,7 @@ export function ModelZooWatchItRun() {
             Don’t take our word for it. Watch it run.
           </h2>
         </div>
-        <p className={`${interRegular.className} w-full max-w-[352px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word]`}>
+        <p className={`${interRegular.className} w-full max-w-[352px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
           Purpose-built edge modules. Validate your software on our evaluation kits today, and drop our SOMs directly into your final product tomorrow.
         </p>
         <div className="flex w-[calc(100%+38px)] snap-x snap-mandatory overflow-x-auto pb-[16px] gap-[16px] mx-[-19px] px-[19px] after:content-[''] after:w-[1px] after:shrink-0">
@@ -187,13 +187,13 @@ export function ModelZooWatchItRun() {
               <img alt="" src={card.img} className="pointer-events-none absolute top-[-40px] right-[-40px] h-[268px] w-[290px] max-w-none object-cover origin-top-right scale-[0.8]" />
               <div className="relative flex flex-col items-start gap-[12px]">
                 <p className={`${gilroyMedium.className} text-[22px] leading-[28px] text-white not-italic`}>{card.title}</p>
-                <p className={`${interRegular.className} text-[14px] leading-[21.3px] font-normal text-[#99a1af] not-italic [word-break:break-word]`}>{card.desc}</p>
+                <p className={`${interRegular.className} text-[14px] leading-[21.3px] font-normal text-[#99a1af] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>{card.desc}</p>
               </div>
               <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             </div>
           ))}
         </div>
-        <p className={`${interRegular.className} w-full max-w-[352px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}>
+        <p className={`${interRegular.className} w-full max-w-[352px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
           Proof you can hold in your hand, in the time it takes to read this page.
         </p>
       </div>
@@ -244,7 +244,7 @@ export function ModelZooWatchItRun() {
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           </div>
           <p
-            className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             data-node-id="5130:8461"
           >
             Purpose-built edge modules. Validate your software on our evaluation
@@ -268,7 +268,7 @@ export function ModelZooWatchItRun() {
 
         {/* Caption — 5343:5017 (top 691, centered) */}
         <p
-          className={`${interRegular.className} absolute top-[691px] left-[calc(50%+0.5px)] w-[591px] -translate-x-1/2 text-center text-[18px] leading-[27px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic`}
+          className={`${interRegular.className} absolute top-[691px] left-[calc(50%+0.5px)] w-[591px] -translate-x-1/2 text-center text-[18px] leading-[27px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           data-node-id="5343:5017"
         >
           Proof you can hold in your hand, in the time it takes to read this page.

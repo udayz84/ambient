@@ -60,7 +60,7 @@ function BuildItCard({ card }: { card: (typeof CARDS)[number] }) {
         <p className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] not-italic [word-break:break-word]`}>
           {card.title}
         </p>
-        <p className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal opacity-65 not-italic [word-break:break-word]`}>
+        <p className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
           {card.desc}
         </p>
       </div>
@@ -101,7 +101,7 @@ export function ModelZooBuildIt() {
                 <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
               </div>
             </div>
-            <p className={`${interRegular.className} w-full max-w-[583px] text-center text-[14px] leading-[21px] min-[1024px]:text-[18px] min-[1024px]:leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`} data-node-id="5131:10849">
+            <p className={`${interRegular.className} w-full max-w-[583px] text-center text-[14px] leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`} data-node-id="5131:10849">
               The zoo is a starting point, not a ceiling. Bring your own TensorFlow, Keras, or ONNX model and compile it to GPX with ModelForge.
             </p>
           </div>

@@ -60,7 +60,7 @@
             "href": "/products"
           },
           {
-            "label": "Development Kits",
+            "label": "Evaluation Kits",
             "href": "/dvk"
           },
           {
@@ -137,17 +137,17 @@
       {
         "platform": "LinkedIn",
         "href": "#",
-        "icon": 166
+        "icon": 402
       },
       {
         "platform": "YouTube",
         "href": "#",
-        "icon": 167
+        "icon": 404
       },
       {
         "platform": "X",
         "href": "#",
-        "icon": 168
+        "icon": 403
       }
     ],
     "legal_links": [
@@ -162,7 +162,7 @@
     ],
     "copyright_text": "© 2026 Ambient AI. All rights reserved.",
     "crafted_by_text": "Carefully crafted by",
-    "crafted_by_logo": 169,
+    "crafted_by_logo": 494,
     "background_image": null
   },
   "newsletter": {

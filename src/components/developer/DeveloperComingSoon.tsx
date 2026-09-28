@@ -325,7 +325,7 @@ export function DeveloperComingSoon({ data }: { data?: any }) {
 
         {/* Subtitle — 4495:3185 */}
         <p
-          className={`${interRegular.className} absolute left-1/2 w-[406px] max-w-[calc(100%-40px)] -translate-x-1/2 text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-85 [overflow-wrap:anywhere]`}
+          className={`${interRegular.className} absolute left-1/2 w-[406px] max-w-[calc(100%-40px)] -translate-x-1/2 text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-85 [overflow-wrap:anywhere] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           style={{ top: 135 }}
           data-node-id="4495:3185"
         >

@@ -577,9 +577,9 @@ const HOME_PAYLOAD = {
           "Start with Ambient's AI-native compute products and see how platform advantages translate into real hardware",
       },
       {
-        title: "Evaluate with development kits",
+        title: "Evaluate with evaluation kits",
         body:
-          "Get hands-on with the platform through development kits designed to accelerate validation and shorten time to first insight",
+          "Get hands-on with the platform through evaluation kits designed to accelerate validation and shorten time to first insight",
       },
       {
         title: "Develop with ModelForge",

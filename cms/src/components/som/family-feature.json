@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_som_family_features",
+  "info": {
+    "displayName": "Family Feature",
+    "description": "Feature item for family card"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images", "files", "videos", "audios"]
+    },
+    "text": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

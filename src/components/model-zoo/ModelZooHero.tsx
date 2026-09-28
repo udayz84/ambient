@@ -50,7 +50,7 @@ export function ModelZooHero() {
           </h1>
         </div>
         <p
-          className={`animate-hero-text-fade-in relative z-10 ${interRegular.className} w-full max-w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+          className={`animate-hero-text-fade-in relative z-10 ${interRegular.className} w-full max-w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
           The Ambient Model Zoo is a growing library of ready-to-run AI models — plug one into your dev or eval kit and watch it work in seconds. Open-source and Ambient-built, every model is tuned to run on GPX at microwatt power.
         </p>
@@ -176,7 +176,7 @@ export function ModelZooHero() {
             data-name="Sub"
           >
             <p
-              className={`${interRegular.className} animate-hero-text-fade-in w-[554px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} animate-hero-text-fade-in w-[554px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
               style={{ animationDelay: "150ms", animationFillMode: "both" }}
               data-node-id="5387:7842"
             >

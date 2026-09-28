@@ -195,7 +195,7 @@ function ProductsModelForgeDesktop({
           </h2>
         </div>
         <p
-          className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+          className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           data-node-id="2917:1340"
         >
           {subtitle}
@@ -230,7 +230,7 @@ function ProductsModelForgeDesktop({
             <div className="text-[#d4e9bc] mb-[16px]">
               {feat.icon}
             </div>
-            <p className={`${interRegular.className} text-[14px] leading-[21px] text-[#f0f0f0]`}>{feat.text}</p>
+            <p className={`${interRegular.className} text-[14px] leading-[21px] text-[#f0f0f0] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>{feat.text}</p>
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           </div>
         ))}
@@ -413,7 +413,7 @@ function ProductsModelForgeMobile({
           </div>
           {/* Description */}
           <p
-            className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {subtitle}
           </p>
@@ -516,7 +516,7 @@ function MobileModelForgeCard({ step }: { step: any }) {
             {step.title}
           </h3>
           <p
-            className={`${interRegular.className} text-[14px] leading-[22px] font-normal tracking-[-0.3125px] text-[#99a1af] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} text-[14px] leading-[22px] font-normal tracking-[-0.3125px] text-[#99a1af] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {step.description}
           </p>

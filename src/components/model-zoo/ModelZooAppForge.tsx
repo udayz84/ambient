@@ -40,7 +40,11 @@ const STEP_ACTIVE_HEIGHT: Record<ForgeStep, string> = {
  * (1440×1433 canvas; 1192.5-wide content at x=124). The two off-canvas
  * "footer" frames at x≈1477 in Figma are ignored (invisible).
  */
-export function ModelZooAppForge() {
+export function ModelZooAppForge({ data }: { data?: any }) {
+  const heading = data?.heading || "Your eval kit, controlled from your phone.";
+  const subheading =
+    data?.subheading ||
+    "Download ApplicationForge, pair with your kit over Bluetooth, and flash live demos in seconds — no laptop, no code.";
   const { fadeRef: articleRef, isVisible: articleVisible } = useFadeIn<HTMLDivElement>();
   const { fadeRef: forgeRef, isVisible: forgeVisible } = useFadeIn<HTMLDivElement>();
   const [activeStep, setActiveStep] = useState<ForgeStep | null>(null);
@@ -89,12 +93,12 @@ export function ModelZooAppForge() {
               style={{ backgroundImage: TITLE_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
               data-node-id="5131:10261"
             >
-              Your eval kit, controlled from your phone.
+              {heading}
             </h2>
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           </div>
-          <p className={`${interRegular.className} w-full max-w-[679.389px] text-center text-[14px] leading-[21px] min-[1024px]:text-[18px] min-[1024px]:leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
-            Download ApplicationForge, pair with your kit over Bluetooth, and flash live demos in seconds — no laptop, no code.
+          <p className={`${interRegular.className} w-full max-w-[679.389px] text-center text-[14px] leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
+            {subheading}
           </p>
         </div>
 
@@ -172,10 +176,14 @@ export function ModelZooAppForge() {
                     key={step}
                     aria-pressed={isActive}
                     disabled={!magicOn}
-                    onClick={() => {
+                    onClick={(e) => {
+                      if (!magicOn) {
+                        e.preventDefault();
+                        return;
+                      }
                       setActiveStep(isActive ? null : key);
                     }}
-                    className={`relative block h-[84px] w-full shrink-0 ${magicOn ? 'cursor-pointer' : 'cursor-default'} bg-[rgba(0,0,0,0.1)] text-left transition-[height,opacity] duration-300 motion-reduce:transition-none ${isActive ? STEP_ACTIVE_HEIGHT[key] : ""} ${
+                    className={`relative block h-[84px] w-full shrink-0 ${magicOn ? 'cursor-pointer' : 'cursor-default pointer-events-none'} bg-[rgba(0,0,0,0.1)] text-left transition-[height,opacity] duration-300 motion-reduce:transition-none ${isActive ? STEP_ACTIVE_HEIGHT[key] : ""} ${
                       isActive ? "opacity-100" : activeStep ? "opacity-40" : magicOn ? "opacity-100" : "opacity-20"
                     }`}
                     data-node-id={`5241:57${52 - i * 6}`}

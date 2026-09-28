@@ -43,7 +43,7 @@ function FeatureRow() {
         />
       </div>
       <div
-        className={`${interRegular.className} text-center text-[14px] leading-[18px] text-[rgba(240,240,240,0.6)] whitespace-nowrap`}
+        className={`${interRegular.className} text-center text-[14px] leading-[18px] text-[rgba(240,240,240,0.6)] whitespace-nowrap min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
       >
         <p className="leading-[18px]">Always on</p>
         <p className="leading-[18px]">protection</p>
@@ -108,14 +108,14 @@ function WinCard({ label, stat, statLabel, visual, body }: WinCardProps) {
       <div className="absolute left-[20.5px] top-[22.5px] flex items-center gap-[12px]">
         <LabelTile />
         <p
-          className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-[#f0f0f0] [word-break:break-word]`}
+          className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-[#f0f0f0] [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
           {label}
         </p>
       </div>
 
       {/* Stat + body + features */}
-      <div className="absolute left-[20px] top-[279.5px] flex w-[386px] flex-col gap-[15px]">
+      <div className="absolute left-[20px] top-[317px] flex w-[386px] flex-col gap-[15px]">
         <div className="flex flex-col">
           <p
             className={`${gilroyBold.className} bg-clip-text text-[82px] leading-[100px] tracking-[-1.64px] text-transparent`}
@@ -138,7 +138,6 @@ function WinCard({ label, stat, statLabel, visual, body }: WinCardProps) {
         >
           {body}
         </p>
-        <FeatureRow />
       </div>
     </div>
   );
@@ -162,11 +161,11 @@ function WinCardMobile({ label, stat, statLabel, mobileImg, body }: { label: str
       {/* Label */}
       <div className="absolute left-[17.58px] top-[17.58px] z-10 flex items-center gap-[12px]">
         <LabelTile />
-        <p className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-[#f0f0f0] [word-break:break-word]`}>{label}</p>
+        <p className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-[#f0f0f0] [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>{label}</p>
       </div>
 
       {/* Stats */}
-      <div className="absolute left-[16px] top-[232.92px] z-10 flex w-[319px] flex-col gap-[12.5px]">
+      <div className="absolute left-[16px] top-[265px] z-10 flex w-[319px] flex-col gap-[12.5px]">
         <div className="flex flex-col">
           <p
             className={`${gilroyBold.className} bg-clip-text text-[52px] leading-[83.333px] tracking-[-1.04px] text-transparent`}
@@ -177,8 +176,7 @@ function WinCardMobile({ label, stat, statLabel, mobileImg, body }: { label: str
           <p className={`${gilroyMedium.className} text-[22px] leading-[24.167px] uppercase text-[#c5f3b5] [word-break:break-word]`}>{statLabel}</p>
         </div>
         <div className="flex flex-col gap-[11.667px]">
-          <p className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word]`}>{body}</p>
-          <FeatureRow />
+          <p className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>{body}</p>
         </div>
       </div>
 

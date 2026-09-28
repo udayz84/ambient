@@ -105,7 +105,7 @@ export function PlatformScaleHeader({ data }: { data?: any }) {
       </div>
 
       <p
-        className={`${interRegular.className} absolute top-[245px] left-[805.11279296875px] w-[517px] text-right text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+        className={`${interRegular.className} absolute top-[245px] left-[805.11279296875px] w-[517px] text-right text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         data-node-id="2379:625"
       >
         {subtitle}

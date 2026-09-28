@@ -338,7 +338,7 @@ function ProductsArchitectureDesktop({
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
         </div>
         <p
-          className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+          className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           data-node-id="2903:2171"
         >
           {subtitle}
@@ -442,7 +442,7 @@ function ArchStatView({
         data-name="Content"
       >
         <p
-          className={`${interRegular.className} m-0 w-full text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+          className={`${interRegular.className} m-0 w-full text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
           {stat.description}
         </p>
@@ -507,7 +507,7 @@ function ProductsArchitectureMobile({
           </div>
           {/* Description */}
           <p
-            className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {subtitle}
           </p>
@@ -563,7 +563,7 @@ function ProductsArchitectureMobile({
                   </div>
                   {/* Description */}
                   <p
-                    className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+                    className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
                   >
                     {stat.description}
                   </p>

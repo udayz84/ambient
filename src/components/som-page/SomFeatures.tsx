@@ -100,7 +100,7 @@ function FeatureCard({
             {title}
           </h3>
           <p
-            className={`${interRegular.className} text-[14px] leading-[21px] font-normal tracking-[-0.3158px] text-[rgba(240,240,240,0.6)] not-italic min-[1024px]:text-[16.168px] min-[1024px]:leading-[26.274px]`}
+            className={`${interRegular.className} text-[14px] leading-[21px] font-normal tracking-[-0.3158px] text-[rgba(240,240,240,0.6)] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {body}
           </p>
@@ -183,7 +183,7 @@ function MobileFeatureCard({
               {title}
             </h3>
             <p
-              className={`${interRegular.className} text-[14px] leading-[24.601px] tracking-[-0.2957px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} text-[14px] leading-[24.601px] tracking-[-0.2957px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             >
               {body}
             </p>
@@ -228,19 +228,19 @@ export function SomFeatures({ data }: { data?: any }) {
     ? "Stop Routing.\nStart Shipping."
     : rawHeading;
   const headingLines = processedHeading.split("\n");
-  const cards: FeatureCardProps[] = Array.isArray(data?.cards) && data.cards.length > 0
-    ? data.cards.map((c: any, i: number) => {
-        const fb = CARDS[i] || CARDS[0];
-        return {
-          iconSrc: mediaUrl(c?.icon) || null,
-          iconSize: fb.iconSize,
-          tag: c?.tag || fb.tag,
-          title: c?.title || fb.title,
-          body: c?.description || fb.body,
-          glowPosition: fb.glowPosition,
-        };
-      })
-    : CARDS;
+  const dataCards: any[] = Array.isArray(data?.cards) ? data.cards : [];
+  const cards: FeatureCardProps[] = CARDS.map((fb, i) => {
+    const c = dataCards[i];
+    if (!c) return fb;
+    return {
+      iconSrc: mediaUrl(c?.icon) || fb.iconSrc,
+      iconSize: fb.iconSize,
+      tag: c?.tag || fb.tag,
+      title: c?.title || fb.title,
+      body: c?.description || fb.body,
+      glowPosition: fb.glowPosition,
+    };
+  });
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -274,7 +274,7 @@ export function SomFeatures({ data }: { data?: any }) {
             <Corners />
           </div>
           <p
-            className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             data-node-id="2438:4886"
           >
             {subtitle}
@@ -341,7 +341,7 @@ export function SomFeatures({ data }: { data?: any }) {
 
             {/* Subtitle — 4054:8364 (336×84) */}
             <p
-              className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word]`}
+              className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
               data-node-id="4054:8364"
             >
               {subtitle}

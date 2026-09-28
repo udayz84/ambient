@@ -199,7 +199,7 @@ const GLOBAL_PAYLOAD = {
         links: [
           { label: "GPX10", href: "/products" },
           { label: "GPX64", href: "/products" },
-          { label: "Development Kits", href: "/dvk" },
+          { label: "Evaluation Kits", href: "/dvk" },
           { label: "ModelForge", href: "/developer" },
         ],
       },

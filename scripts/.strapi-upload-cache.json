@@ -1482,5 +1482,82 @@
     "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/demo_fall_93febbaeea.webp",
     "name": "demo-fall.webp",
     "sourcePath": "dvk/demo-fall.webp"
+  },
+  "16d08756ca1358e8dde9d9407acc3eb93866aacd": {
+    "id": 477,
+    "documentId": "dqiwiq61xw53wk4lc0ipp5z9",
+    "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/sparsh_chip_7ca1d96dd6.webp",
+    "name": "sparsh-chip.webp",
+    "sourcePath": "som/sparsh-chip.webp"
+  },
+  "de7cc9bbd6202cebbfc8f32d7cb90c83e3646984": {
+    "id": 478,
+    "documentId": "fzsf9y1t2p2hzja6l4pon7yd",
+    "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/som_chip_a3debab967.webp",
+    "name": "som-chip.webp",
+    "sourcePath": "som/som-chip.webp"
+  },
+  "6afedf4191e8bc921870c1b3a25fc5e614f8cb9f": {
+    "id": 486,
+    "documentId": "aghmhysxh22b3j2yyeu2pfdl",
+    "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/map_base_bff9ee71fe.svg",
+    "name": "map-base.svg",
+    "sourcePath": "contact/map-base.svg"
+  },
+  "69c3e69ed003b92e635575f86a7fdbb8f1d11987": {
+    "id": 487,
+    "documentId": "inx133jqvv9alxj34v3qa5e3",
+    "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/map_indicator_us_3c8a89be16.svg",
+    "name": "map-indicator-us.svg",
+    "sourcePath": "contact/map-indicator-us.svg"
+  },
+  "d38f3555c6ce07090ee193bd068a7697b295d6a6": {
+    "id": 488,
+    "documentId": "ll2jvxr6ab0gp193tcfzhg40",
+    "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/map_indicator_sg_e04de20b59.svg",
+    "name": "map-indicator-sg.svg",
+    "sourcePath": "contact/map-indicator-sg.svg"
+  },
+  "ea25f6377ec442fee68c30e9e7853020d71e668b": {
+    "id": 489,
+    "documentId": "b30npz1k6dbqtcygyjqtw5t0",
+    "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/map_indicator_in_f4e4fd0fea.svg",
+    "name": "map-indicator-in.svg",
+    "sourcePath": "contact/map-indicator-in.svg"
+  },
+  "ce18465d0ab0e7076b35ce6468f4a1806a590122": {
+    "id": 490,
+    "documentId": "sbbvbw2dtvbuockb1fnzjquq",
+    "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/calendar_icon_c589aa4426.svg",
+    "name": "calendar-icon.svg",
+    "sourcePath": "contact/calendar-icon.svg"
+  },
+  "77fe9a7f27db026497dcbd7c374157b6fa3199e8": {
+    "id": 491,
+    "documentId": "mfpojbbu6l6pm0fymwzusper",
+    "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/track_sales_399d4fd4ff.svg",
+    "name": "track-sales.svg",
+    "sourcePath": "contact/track-sales.svg"
+  },
+  "7fb80bc6c5e0e05b01281896427a3f3e4d8f141c": {
+    "id": 492,
+    "documentId": "f9y07z68y0qjnwm02rangns7",
+    "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/track_developer_aebe6505bf.svg",
+    "name": "track-developer.svg",
+    "sourcePath": "contact/track-developer.svg"
+  },
+  "5a25cb9774543a536c362fc854b44507e5157fa6": {
+    "id": 493,
+    "documentId": "rtms84bv7mbhk0la2smfnka9",
+    "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/track_media_c52466746e.svg",
+    "name": "track-media.svg",
+    "sourcePath": "contact/track-media.svg"
+  },
+  "2050e9cc7cf2fc5e689943c11954c0ceaff44ff7": {
+    "id": 494,
+    "documentId": "ye7ed13tdyogwh7rerrs4npa",
+    "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/crafted_by_c8f227c3d1.svg",
+    "name": "crafted-by.svg",
+    "sourcePath": "footer/crafted-by.svg"
   }
 }

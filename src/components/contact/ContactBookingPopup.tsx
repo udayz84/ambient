@@ -271,7 +271,7 @@ export function ContactBookingPopup({
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img loading="lazy" decoding="async" alt="" src="/contact/booking-icon-globe.svg" width={14} height={14} className="block size-[14px]" aria-hidden />
                   </span>
-                  <p className={`${interRegular.className} max-w-full text-[14px] leading-[1.5] truncate text-[#cbd5e1]`}>
+                  <p className={`${interRegular.className} max-w-full text-[14px] leading-[1.5] truncate text-[#cbd5e1] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
                     {timeZoneLabel}
                   </p>
                 </div>

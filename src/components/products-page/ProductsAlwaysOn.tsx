@@ -212,7 +212,7 @@ function StatCard({
         {sub}
       </p>
       <p
-        className={`${interRegular.className} [word-break:break-word] absolute font-normal leading-[24px] left-[53.69px] not-italic text-[14px] text-white top-[166.76px] uppercase whitespace-nowrap`}
+        className={`${interRegular.className} [word-break:break-word] absolute font-normal leading-[24px] left-[53.69px] not-italic text-[14px] text-white top-[166.76px] uppercase whitespace-nowrap min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
       >
         {footerLabel}
       </p>
@@ -443,7 +443,7 @@ function MobileStatCard({
         {sub}
       </p>
       <p
-        className={`${interRegular.className} [word-break:break-word] absolute font-normal left-[43.69px] leading-[24px] not-italic text-[14px] text-white top-[127.76px] uppercase whitespace-nowrap`}
+        className={`${interRegular.className} [word-break:break-word] absolute font-normal left-[43.69px] leading-[24px] not-italic text-[14px] text-white top-[127.76px] uppercase whitespace-nowrap min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
       >
         {footerLabel}
       </p>
@@ -536,7 +536,7 @@ function SectionTitle({ heading, subtitle }: { heading: string; subtitle: string
         <FrameCorners leftSrc={CORNER_58} rightSrc={CORNER_55} />
       </div>
       <p
-        className={`${interRegular.className} [word-break:break-word] font-normal leading-[21px] not-italic relative shrink-0 text-[14px] text-[#f0f0f0] text-center w-[540px]`}
+        className={`${interRegular.className} [word-break:break-word] font-normal leading-[21px] not-italic relative shrink-0 text-[14px] text-[#f0f0f0] text-center w-[540px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
       >
         {subtitle}
       </p>
@@ -691,7 +691,7 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
               </div>
             </div>
             <p
-              className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
               data-node-id="3565:3136"
             >
               {subtitle}

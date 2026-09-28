@@ -115,7 +115,7 @@ export function WearablesSubconscious({ data }: { data?: any }) {
             />
           </div>
           <p
-            className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {subtitle}
           </p>
@@ -139,7 +139,7 @@ export function WearablesSubconscious({ data }: { data?: any }) {
             </div>
             {/* "Zzzz.." overlay on image */}
             <p
-              className={`${interRegular.className} absolute left-[143.79px] top-[161.5px] -translate-x-1/2 whitespace-nowrap text-center text-[14px] leading-[20px] tracking-[-0.1504px] text-white not-italic`}
+              className={`${interRegular.className} absolute left-[143.79px] top-[161.5px] -translate-x-1/2 whitespace-nowrap text-center text-[14px] leading-[20px] tracking-[-0.1504px] text-white not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             >
               {overlayText}
             </p>

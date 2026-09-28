@@ -60,7 +60,7 @@ const HERO_BG_ASSET = "dvk/hero-bg-2.png";
 const DEFAULT_HERO = {
   title: "The physical launchpad for microwatt Edge AI.",
   subtitle:
-    "Validate real-time AI at microwatt power levels out of the box. The Cranium Development Kit comes fully loaded with onboard sensors, rich I/O, and pre-integrated drivers so you can stop breadboarding and start testing inferences in minutes.",
+    "Validate real-time AI at microwatt power levels out of the box. The Cranium Evaluation Kit comes fully loaded with onboard sensors, rich I/O, and pre-integrated drivers so you can stop breadboarding and start testing inferences in minutes.",
   cta_label: "Request Evaluation Kit",
 };
 

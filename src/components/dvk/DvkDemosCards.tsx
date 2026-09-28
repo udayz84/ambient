@@ -183,7 +183,7 @@ function DvkPhoneCard({ data }: { data?: any }) {
             {card.title}
           </h3>
           <p
-            className={`${interRegular.className} m-0 w-full max-w-[334px] shrink-0 text-[14px] leading-[24px] font-normal text-[#99a1af] not-italic [word-break:break-word] xl:text-[16px]`}
+            className={`${interRegular.className} m-0 w-full max-w-[334px] shrink-0 text-[14px] leading-[24px] font-normal text-[#99a1af] not-italic [word-break:break-word] xl:text-[16px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             data-node-id="5212:6947"
           >
             {card.description}
@@ -286,7 +286,7 @@ function DemoCardItem({ card }: { card: DemoCard }) {
             <p className="leading-[38px] [word-break:break-word]">{card.titleLine2}</p>
           </div>
           <p
-            className={`${interRegular.className} w-full max-w-[334px] shrink-0 text-[14px] xl:text-[16px] leading-[24px] font-normal text-[#99a1af] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-full max-w-[334px] shrink-0 text-[14px] xl:text-[16px] leading-[24px] font-normal text-[#99a1af] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {card.desc}
           </p>

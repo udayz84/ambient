@@ -94,7 +94,7 @@ function MobileIntelligenceCard({
           {title}
         </h3>
         <p
-          className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-white opacity-65 not-italic [word-break:break-word]`}
+          className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-white opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
           {description}
         </p>
@@ -164,7 +164,7 @@ function IntelligenceCard({
           {title}
         </h3>
         <p
-          className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-white opacity-65 not-italic [word-break:break-word]`}
+          className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-white opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
           {description}
         </p>
@@ -235,7 +235,7 @@ export function SomIntelligence({ data }: { data?: any }) {
             <GreenCtaCorners />
           </div>
           <p
-            className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {subtitle}
           </p>
@@ -277,7 +277,7 @@ export function SomIntelligence({ data }: { data?: any }) {
             </h2>
           </div>
           <p
-            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {subtitle}
           </p>

@@ -17,12 +17,12 @@ import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const DEFAULT_TITLE = "The physical launchpad for microwatt Edge AI.";
 const DEFAULT_SUBTITLE =
-  "Validate real-time AI at microwatt power levels out of the box. The Cranium Development Kit comes fully loaded with onboard sensors, rich I/O, and pre-integrated drivers so you can stop breadboarding and start testing inferences in minutes.";
+  "Validate real-time AI at microwatt power levels out of the box. The Cranium Evaluation Kit comes fully loaded with onboard sensors, rich I/O, and pre-integrated drivers so you can stop breadboarding and start testing inferences in minutes.";
 const DEFAULT_CTA_LABEL = "Request Evaluation Kit";
 const DEFAULT_BG = "/dvk/hero-bg-2.webp";
 
 /**
- * Figma 2761:2971 — Cranium Development Kit (DVK) hero.
+ * Figma 2761:2971 — Cranium Evaluation Kit (DVK) hero.
  * Desktop canvas is 1442 wide. All children are absolutely positioned.
  *
  * Background image group 2761:2972 (329.625, 10.184 / 1120.375×610.35)
@@ -196,7 +196,7 @@ export function DvkHero({ data }: { data?: any }) {
           data-name="Sub"
         >
           <p
-            className={`${interRegular.className} w-[554px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[554px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             data-node-id="2761:2986"
           >
             {subtitle}

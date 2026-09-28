@@ -60,7 +60,7 @@ export function DeveloperModulesSection({ data }: { data?: any }) {
         </div>
         {/* Description — 2438:4590 (subtitle) */}
         <p
-          className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65 [word-break:break-word]`}
+          className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65 [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
           {subtitle}
         </p>

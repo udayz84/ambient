@@ -716,7 +716,7 @@ const DVK_PAYLOAD = {
   hero: {
     title: "The physical launchpad for microwatt Edge AI.",
     subtitle:
-      "Validate real-time AI at microwatt power levels out of the box. The Cranium Development Kit comes fully loaded with onboard sensors, rich I/O, and pre-integrated drivers so you can stop breadboarding and start testing inferences in minutes.",
+      "Validate real-time AI at microwatt power levels out of the box. The Cranium Evaluation Kit comes fully loaded with onboard sensors, rich I/O, and pre-integrated drivers so you can stop breadboarding and start testing inferences in minutes.",
     cta_label: "Request Evaluation Kit",
     background_image: media(ASSETS.dvk_hero_bg_2),
   },
@@ -802,10 +802,10 @@ const DVK_PAYLOAD = {
   },
 
   seo: {
-    meta_title: "Cranium Development Kit | Ambient Scientific",
+    meta_title: "Cranium Evaluation Kit | Ambient Scientific",
     meta_description:
-      "Validate real-time AI at microwatt power out of the box. The Cranium Development Kit comes fully loaded with sensors, rich I/O, and pre-integrated drivers.",
-    keywords: "Cranium DVK, development kit, edge AI evaluation, GPX-10 Pro, sensors, JTAG",
+      "Validate real-time AI at microwatt power out of the box. The Cranium Evaluation Kit comes fully loaded with sensors, rich I/O, and pre-integrated drivers.",
+    keywords: "Cranium DVK, evaluation kit, edge AI evaluation, GPX-10 Pro, sensors, JTAG",
     noindex: false,
     canonical_url: "/dvk",
   },

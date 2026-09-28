@@ -22,14 +22,14 @@
       "component": "som.features",
       "repeatable": false
     },
+    "family": {
+      "type": "component",
+      "component": "som.family",
+      "repeatable": false
+    },
     "prototype": {
       "type": "component",
       "component": "som.prototypes",
-      "repeatable": false
-    },
-    "intelligence": {
-      "type": "component",
-      "component": "som.intelligence",
       "repeatable": false
     },
     "deploy_path": {

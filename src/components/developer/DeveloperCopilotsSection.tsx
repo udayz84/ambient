@@ -73,7 +73,7 @@ export function DeveloperCopilotsSection({ data }: { data?: any }) {
 
         {/* Description — 2438:4675 */}
         <p
-          className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65 [word-break:break-word]`}
+          className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65 [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
           {subtitle}
         </p>
@@ -140,7 +140,7 @@ function CopilotCard({
           {title}
         </p>
         <p
-          className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-white not-italic opacity-65 [word-break:break-word]`}
+          className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-white not-italic opacity-65 [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
           {description}
         </p>

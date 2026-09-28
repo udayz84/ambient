@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_som_family_cards",
+  "info": {
+    "displayName": "Family Card",
+    "description": "Card for the GPX10 PRO SOM FAMILY section"
+  },
+  "options": {},
+  "attributes": {
+    "tag": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "features": {
+      "type": "component",
+      "repeatable": true,
+      "component": "som.family-feature"
+    },
+    "footerText": {
+      "type": "text"
+    }
+  }
+}

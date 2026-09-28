@@ -15,9 +15,9 @@ export async function generateMetadata(): Promise<Metadata> {
     seo = null;
   }
   return buildMetadata(seo, {
-    title: "Cranium Development Kit | Ambient Scientific",
+    title: "Cranium Evaluation Kit | Ambient Scientific",
     description:
-      "Validate real-time AI at microwatt power levels out of the box. The Cranium Development Kit comes fully loaded with onboard sensors, rich I/O, and pre-integrated drivers.",
+      "Validate real-time AI at microwatt power levels out of the box. The Cranium Evaluation Kit comes fully loaded with onboard sensors, rich I/O, and pre-integrated drivers.",
   });
 }
 
@@ -27,6 +27,9 @@ export default async function DvkPage() {
     data = await getSingleType<any>("dvk-page", [
       "hero",
       { section: "inside_module", fields: ["image"], nested: ["specs"] },
+      { section: "prototype", nested: ["cards"] },
+      { section: "intelligence", nested: ["cards"] },
+      "appforge",
       { section: "demos", nested: ["demo_cards"], fields: ["phone_card"] },
       "modelforge",
       { section: "integrated_modules", nested: ["cards"] },

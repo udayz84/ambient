@@ -133,13 +133,13 @@ function StatRows({ rows, valueRight }: { rows: StatRow[]; valueRight: number })
       {rows.map((row) => (
         <div key={row.label}>
           <p
-            className={`${interRegular.className} absolute left-[21.81px] text-[14px] leading-[normal] font-normal whitespace-nowrap text-[#8e8e8e] uppercase not-italic [word-break:break-word]`}
+            className={`${interRegular.className} absolute left-[21.81px] text-[14px] leading-[normal] font-normal whitespace-nowrap text-[#8e8e8e] uppercase not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             style={{ top: row.top }}
           >
             {row.label}
           </p>
           <p
-            className={`${interRegular.className} absolute -translate-x-full text-right text-[14px] leading-[normal] font-normal whitespace-nowrap not-italic [word-break:break-word]`}
+            className={`${interRegular.className} absolute -translate-x-full text-right text-[14px] leading-[normal] font-normal whitespace-nowrap not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             style={{
               left: valueRight,
               top: row.valueTop ?? row.top,
@@ -343,7 +343,7 @@ function ACubeCard({
         {statValue}
       </p>
       <p
-        className={`${interRegular.className} absolute top-[297.43px] left-[26.1px] w-[197.9px] text-[14px] leading-[18px] font-normal text-[#e2f9da] not-italic [word-break:break-word]`}
+        className={`${interRegular.className} absolute top-[297.43px] left-[26.1px] w-[197.9px] text-[14px] leading-[18px] font-normal text-[#e2f9da] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
       >
         {statDesc}
       </p>
@@ -511,7 +511,7 @@ export function WearablesParadigm({ data }: { data?: any }) {
             />
           </div>
           <p
-            className={`${interRegular.className} w-[679.389px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[679.389px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             data-node-id="2509:477"
           >
             {subtitle}
@@ -553,7 +553,7 @@ export function WearablesParadigm({ data }: { data?: any }) {
             />
           </div>
           <p
-            className={`${interRegular.className} w-[324px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic`}
+            className={`${interRegular.className} w-[324px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {subtitle}
           </p>

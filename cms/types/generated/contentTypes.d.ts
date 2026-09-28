@@ -836,6 +836,7 @@ export interface ApiDvkPageDvkPage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    appforge: Schema.Attribute.Component<'dvk.app-forge', false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -846,6 +847,7 @@ export interface ApiDvkPageDvkPage extends Struct.SingleTypeSchema {
       'dvk.integrated-modules',
       false
     >;
+    intelligence: Schema.Attribute.Component<'som.intelligence', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -853,6 +855,7 @@ export interface ApiDvkPageDvkPage extends Struct.SingleTypeSchema {
     > &
       Schema.Attribute.Private;
     modelforge: Schema.Attribute.Component<'dvk.modelforge', false>;
+    prototype: Schema.Attribute.Component<'som.prototypes', false>;
     publishedAt: Schema.Attribute.DateTime;
     seo: Schema.Attribute.Component<'shared.seo', false>;
     updatedAt: Schema.Attribute.DateTime;
@@ -1544,10 +1547,10 @@ export interface ApiSomPageSomPage extends Struct.SingleTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     deploy_path: Schema.Attribute.Component<'som.deploy-path', false>;
+    family: Schema.Attribute.Component<'som.family', false>;
     features: Schema.Attribute.Component<'som.features', false>;
     footer_merge: Schema.Attribute.Component<'som.footer-merge', false>;
     hero: Schema.Attribute.Component<'som.hero', false>;
-    intelligence: Schema.Attribute.Component<'som.intelligence', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

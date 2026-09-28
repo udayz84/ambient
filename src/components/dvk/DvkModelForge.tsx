@@ -113,7 +113,7 @@ export function DvkModelForge({ data }: { data?: any }) {
           </h2>
         </div>
         <p
-          className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+          className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
           {subtitle}
         </p>
@@ -167,7 +167,7 @@ export function DvkModelForge({ data }: { data?: any }) {
           {toolchainTitle}
         </p>
         <p
-          className={`${interRegular.className} w-[min-content] min-w-full text-center text-[14px] leading-[21px] font-normal text-[#bbbbbb] not-italic [word-break:break-word]`}
+          className={`${interRegular.className} w-[min-content] min-w-full text-center text-[14px] leading-[21px] font-normal text-[#bbbbbb] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
           {toolchainSubtitle}
         </p>
@@ -292,7 +292,7 @@ function Tag({ label, className = "" }: { label: string; className?: string }) {
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
       <div className="flex flex-col items-start">
         <p
-          className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-white not-italic [word-break:break-word]`}
+          className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-white not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
           {label}
         </p>

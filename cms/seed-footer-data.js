@@ -93,7 +93,7 @@ async function main() {
           links: [
             { label: 'GPX10', href: '#' },
             { label: 'GPX64', href: '#' },
-            { label: 'Development Kits', href: '#' },
+            { label: 'Evaluation Kits', href: '#' },
             { label: 'ModelForge', href: '#' },
           ],
         },

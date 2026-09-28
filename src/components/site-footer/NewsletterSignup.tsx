@@ -55,7 +55,7 @@ export function NewsletterSignup({
       </div>
 
       <p
-        className={`${interRegular.className} relative ${isCompact ? "mt-[8px]" : "mt-[16px] md:mt-[24px]"} w-full text-center ${isCompact ? "text-[14px] sm:text-[16px]" : "text-[16px] sm:text-[18px]"} leading-[1.5] font-normal text-white not-italic [word-break:break-word]`}
+        className={`${interRegular.className} relative ${isCompact ? "mt-[8px]" : "mt-[16px] md:mt-[24px]"} w-full text-center ${isCompact ? "text-[14px] sm:text-[16px]" : "text-[16px] sm:text-[18px]"} leading-[1.5] font-normal text-white not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
       >
         {subtitle}
       </p>
@@ -73,7 +73,7 @@ export function NewsletterSignup({
             id="newsletter-email"
             type="email"
             placeholder={placeholder}
-            className={`${interRegular.className} w-full border-0 bg-transparent text-[14px] leading-[1.4] text-white outline-none placeholder:text-white`}
+            className={`${interRegular.className} w-full border-0 bg-transparent text-[14px] leading-[1.4] text-white outline-none placeholder:text-white min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           />
         </div>
         <button

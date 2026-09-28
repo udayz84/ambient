@@ -276,7 +276,7 @@ export function PartnersDropdown({
             : `border-[rgba(240,240,240,0.2)] bg-[rgba(21,21,21,0.3)] backdrop-blur-[8px] hover:border-[rgba(83,216,36,0.4)] ${open ? "border-[rgba(83,216,36,0.4)]" : ""}`
         } ${buttonClassName}`}
       >
-        <span className={`${interRegular.className} truncate text-[14px] leading-[21px] font-normal ${value ? (isLight ? "text-[#151515]" : "text-white") : isLight ? "text-[#8a9083]" : "text-[#8a8a8a]"}`}>
+        <span className={` min-[1024px]:text-[16px] min-[1024px]:leading-[24px]${interRegular.className} truncate text-[14px] leading-[21px] font-normal ${value ? (isLight ? "text-[#151515]" : "text-white") : isLight ? "text-[#8a9083]" : "text-[#8a8a8a]"} min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
           {value || label}
         </span>
         <ChevronDownIcon className={isLight ? "text-[#151515]/70" : "text-white/60"} />

@@ -179,7 +179,7 @@ export function CareersOpenRoles({
         {filteredJobs.length === 0 ? (
           <div className="flex h-[153px] w-full items-center justify-center">
             <p
-              className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-white opacity-60 not-italic`}
+              className={` min-[1024px]:text-[16px] min-[1024px]:leading-[24px]${interRegular.className} text-[18px] leading-[27px] font-normal text-white opacity-60 not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             >
               No jobs found
             </p>
@@ -246,7 +246,7 @@ export function CareersOpenRoles({
             data-node-id="2379:8939"
           >
             <p
-              className={`${interRegular.className} absolute top-0 left-0 h-[48px] w-[290.931px] text-right text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} absolute top-0 left-0 h-[48px] w-[290.931px] text-right text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
               data-node-id="2379:8940"
             >
               {generalAppSubtitle}
@@ -413,7 +413,7 @@ function FilterDropdown({
         data-node-id={innerNodeId}
       >
         <span
-          className={`${interRegular.className} min-w-px flex-[1_0_0] text-[14px] leading-[1.4] font-normal text-white not-italic [word-break:break-word]`}
+          className={`${interRegular.className} min-w-px flex-[1_0_0] text-[14px] leading-[1.4] font-normal text-white not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
           {triggerLabel}
         </span>
@@ -490,7 +490,7 @@ function JobRow({
         {title}
       </p>
       <p
-        className={`${interRegular.className} absolute top-[105px] left-[19px] w-[350px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+        className={`${interRegular.className} absolute top-[105px] left-[19px] w-[350px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
       >
         {location}
       </p>

@@ -136,7 +136,7 @@ export function ContactSuccessPopup({
             Thanks for reaching out!
           </p>
           <p
-            className={`${interRegular.className} relative h-[36px] w-[540px] shrink-0 text-center text-[18px] leading-[27px] font-normal text-[#a4a4a4] not-italic [word-break:break-word] max-[767px]:h-auto max-[767px]:w-full max-[767px]:text-[15px] max-[767px]:leading-[22px]`}
+            className={`${interRegular.className} relative h-[36px] w-[540px] shrink-0 text-center text-[18px] leading-[27px] font-normal text-[#a4a4a4] not-italic [word-break:break-word] max-[767px]:h-auto max-[767px]:w-full max-[767px]:text-[15px] max-[767px]:leading-[22px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             data-node-id="4751:4387"
           >
             {`We’re looking forward to connecting with you on ${dateLabel}`}

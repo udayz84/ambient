@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_dvk_app_forges",
+  "info": {
+    "displayName": "App Forge",
+    "description": "ApplicationForge phone-control section — heading and subheading only; steps, toggle, videos and cards stay hardcoded in the frontend"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subheading": {
+      "type": "text"
+    }
+  }
+}

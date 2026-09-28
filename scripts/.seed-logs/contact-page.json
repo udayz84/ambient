@@ -28,29 +28,29 @@
     "heading": "Global scale. Local support.",
     "subtitle": "From our research labs to your production line, we maintain direct engineering presence across three continents to ensure rapid deployment and ongoing support.",
     "globe_image": 52,
-    "map_base": 53,
+    "map_base": 486,
     "locations": [
       {
         "title": "USA Headquarters",
         "address": "Ambient Scientific Inc. 4633 Old Ironsides Drive Santa Clara California 95054. USA",
-        "indicator_icon": 54
+        "indicator_icon": 487
       },
       {
         "title": "Singapore Headquarters",
         "address": "137 Telok Ayer Street, #05-02, Singapore 068602",
-        "indicator_icon": 55
+        "indicator_icon": 488
       },
       {
         "title": "India Headquarters",
         "address": "Ramky House, 1st Cross, Raghavendra Nagar, Kalyan Nagar, Bengaluru Karnataka, 560043, India",
-        "indicator_icon": 56
+        "indicator_icon": 489
       }
     ]
   },
   "schedule": {
     "heading": "Schedule a Consultation",
     "subtitle": "Book a direct meeting with our engineering or commercial teams.",
-    "icon": 57,
+    "icon": 490,
     "cards": [
       {
         "tag": "Technical",
@@ -81,7 +81,7 @@
       {
         "label": "Sales & Enterprise",
         "description": "Request a quote, discuss volume licensing, or inquire about custom ASIC development.",
-        "icon": 60,
+        "icon": 491,
         "form": [
           {
             "label": "First Name",
@@ -123,7 +123,7 @@
       {
         "label": "Developer Support",
         "description": "Report a bug, request documentation, or get help compiling your model via the Nebula SDK.",
-        "icon": 61,
+        "icon": 492,
         "form": [
           {
             "label": "First Name",
@@ -165,7 +165,7 @@
       {
         "label": "Media & Press",
         "description": "Request an interview with our leadership team, access press materials, or coordinate coverage.",
-        "icon": 62,
+        "icon": 493,
         "form": [
           {
             "label": "First Name",

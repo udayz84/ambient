@@ -172,7 +172,7 @@ export function ContinuumOptionsBar({
                 style={{ width: isSelected ? item.width : undefined }}
               >
                 <span
-                  className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap not-italic transition-colors duration-200 ${
+                  className={` min-[1024px]:text-[16px] min-[1024px]:leading-[24px]${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap not-italic transition-colors duration-200 ${
                     isSelected ? "text-[#0e1a0e]" : "text-[#666666]"
                   }`}
                 >

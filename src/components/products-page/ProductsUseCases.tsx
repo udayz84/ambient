@@ -263,7 +263,7 @@ function ProductsUseCasesDesktop({
           </h2>
         </div>
         <p
-          className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+          className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           data-node-id="2901:2141"
         >
           {subtitle}
@@ -608,7 +608,7 @@ function ProductsUseCasesMobile({
           {headingLines.join(" ").trim()}
         </h2>
         <p
-          className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]`}
+          className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
           {subtitle}
         </p>

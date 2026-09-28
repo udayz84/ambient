@@ -168,7 +168,7 @@ export function PressKit({ data }: PressKitProps = {}) {
             >
               <PressTitle heading={heading} />
               <p
-                className={`${interRegular.className} absolute left-[21px] top-[75px] h-[48px] w-[484px] text-[18px] leading-[27px] font-normal text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
+                className={`${interRegular.className} absolute left-[21px] top-[75px] h-[48px] w-[484px] text-[18px] leading-[27px] font-normal text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
                 data-node-id="2500:1670"
               >
                 {subtitle}
@@ -191,7 +191,7 @@ export function PressKit({ data }: PressKitProps = {}) {
           >
             <PressCta label={ctaLabel} href={ctaHref} />
             <p
-              className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#e8e8e8] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#e8e8e8] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
               data-node-id="2517:1675"
             >
               {fileInfo}
@@ -232,7 +232,7 @@ export function PressKit({ data }: PressKitProps = {}) {
           <div className="flex w-full flex-col items-center gap-[10px]">
             <PressTitle heading={heading} />
             <p
-              className={`${interRegular.className} w-full text-center text-[14px] leading-[19px] font-normal text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} w-full text-center text-[14px] leading-[19px] font-normal text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
               data-node-id="4153:8321"
             >
               {subtitle}

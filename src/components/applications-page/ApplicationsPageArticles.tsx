@@ -160,7 +160,7 @@ function ArticleCard({ article }: { article: Article }) {
           {article.title}
         </p>
         <p
-          className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word]`}
+          className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
           {article.body}
         </p>

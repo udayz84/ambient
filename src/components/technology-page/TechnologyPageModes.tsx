@@ -713,7 +713,7 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
           </div>
 
           <p
-            className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             style={{ opacity: SUBTITLE_OPACITY }}
             data-node-id="3003:557"
           >
@@ -785,7 +785,7 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
               <MobileTitleCorners />
             </div>
             <p
-              className={`${interRegular.className} w-[324px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+              className={`${interRegular.className} w-[324px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
               data-node-id="3572:8012"
             >
               {subtitle}

@@ -712,7 +712,7 @@ export function ProductsMeasured({ data }: { data?: any }) {
             <MenuChip label={menuLabel} />
             <GradientTitleBlock headingLines={headingLines} />
             <p
-              className={`${interRegular.className} [word-break:break-word] font-normal leading-[21px] not-italic relative shrink-0 text-[14px] text-center whitespace-nowrap`}
+              className={`${interRegular.className} [word-break:break-word] font-normal leading-[21px] not-italic relative shrink-0 text-[14px] text-center whitespace-nowrap min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
               style={{ color: GREY }}
               data-node-id="3309:1922"
             >
@@ -782,7 +782,7 @@ export function ProductsMeasured({ data }: { data?: any }) {
             </div>
             {/* Description — 3567:4344 */}
             <p
-              className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             >
               {subtitle}
             </p>

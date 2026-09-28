@@ -106,7 +106,7 @@ function StatCard({
           <span className={unitClass}>{unit}</span>
         </p>
         <p
-          className={`${interRegular.className} text-[18px] leading-[27px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic`}
+          className={`${interRegular.className} text-[18px] leading-[27px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
           {label}
         </p>
@@ -121,7 +121,7 @@ function StatCard({
 
       {/* description */}
       <p
-        className={`${interRegular.className} absolute top-[175.34px] left-[30px] w-[327.508px] text-[18px] leading-[27px] font-normal text-white not-italic [word-break:break-word]`}
+        className={`${interRegular.className} absolute top-[175.34px] left-[30px] w-[327.508px] text-[18px] leading-[27px] font-normal text-white not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         style={{ opacity: 0.9 }}
       >
         {description}
@@ -328,7 +328,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
           </div>
 
           <p
-            className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             style={{ opacity: SUBTITLE_OPACITY }}
             data-node-id="3015:536"
           >
@@ -418,7 +418,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
             <MobileTitleCorners />
           </div>
           <p
-            className={`${interRegular.className} w-[324px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[324px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             style={{ opacity: SUBTITLE_OPACITY }}
           >
             {subtitle}
@@ -460,7 +460,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
         {/* CTA — 3572:8990 */}
         <div className="relative z-10 mx-auto flex w-[377px] flex-col items-center gap-[17px] pt-[30px] pb-[40px]">
           <p
-            className={`${interRegular.className} w-[335px] text-center text-[14px] leading-[20px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[335px] text-center text-[14px] leading-[20px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             style={{ opacity: 0.8 }}
           >
             {FALLBACK_DESC}

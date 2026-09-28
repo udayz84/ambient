@@ -104,7 +104,7 @@ export function LatestNewsCard({
             />
           </div>
           <p
-            className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#99a1af] not-italic overflow-hidden text-ellipsis`}
+            className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#99a1af] not-italic overflow-hidden text-ellipsis min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {date}
           </p>

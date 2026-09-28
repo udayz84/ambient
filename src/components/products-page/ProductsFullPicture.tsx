@@ -529,13 +529,13 @@ function SpecCardView({ card }: { card: RenderCard }) {
       {card.items.map((it, i) => (
         <Fragment key={i}>
           <p
-            className={`${interRegular.className} [word-break:break-word] absolute font-normal leading-[normal] not-italic text-[14px] text-black tracking-[-0.1504px] whitespace-nowrap`}
+            className={`${interRegular.className} [word-break:break-word] absolute font-normal leading-[normal] not-italic text-[14px] text-black tracking-[-0.1504px] whitespace-nowrap min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             style={{ left: it.left ?? card.itemsLeft, top: it.top }}
           >
             {it.text}
           </p>
           <p
-            className={`${interRegular.className} [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] absolute font-normal leading-[normal] not-italic text-[14px] tracking-[-0.1504px] whitespace-nowrap`}
+            className={`${interRegular.className} [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] absolute font-normal leading-[normal] not-italic text-[14px] tracking-[-0.1504px] whitespace-nowrap min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             style={{ left: it.plusLeft ?? card.plusLeft, top: it.plusTop, color: card.plusColor }}
           >
             +
@@ -772,7 +772,7 @@ function SpecCardMobileView({ card: c }: { card: RenderCard }) {
         {c.items.map((it, i) => (
           <p
             key={i}
-            className={`${interRegular.className} text-[14px] font-normal leading-[normal] tracking-[-0.1504px] text-black not-italic`}
+            className={`${interRegular.className} text-[14px] font-normal leading-[normal] tracking-[-0.1504px] text-black not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             <span className="mr-[6px]" style={{ color: c.plusColor }}>
               +

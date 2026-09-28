@@ -75,11 +75,11 @@ export const DEVELOPER_PLATFORM_CARDS: DeveloperPlatformCardConfig[] = [
     top: 0,
     width: 388,
     height: 290,
-    title: "Evaluate with development kits",
+    title: "Evaluate with evaluation kits",
     href: "/dvk",
     titleLeft: 19.822998046875,
     body:
-      "Get hands-on with the platform through development kits designed to accelerate validation and shorten time to first insight",
+      "Get hands-on with the platform through evaluation kits designed to accelerate validation and shorten time to first insight",
     bodyLeft: 19.822998046875,
     bodyWidth: 290,
     bodyBottomOffset: 157,

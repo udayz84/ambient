@@ -81,7 +81,7 @@ export function ArticleDetail({ data }: { data: any }) {
                 <span className="w-[4px] h-[4px] rounded-full bg-[#53d824]/50" />
               )}
               {formattedDate && (
-                <span className={`${interRegular.className} text-[14px] text-white/60 tracking-widest uppercase`}>
+                <span className={`${interRegular.className} text-[14px] text-white/60 tracking-widest uppercase min-[1024px]:text-[16px]`}>
                   {formattedDate}
                 </span>
               )}
@@ -100,7 +100,7 @@ export function ArticleDetail({ data }: { data: any }) {
           <div className="w-full max-w-[900px] text-white">
             {hasContent ? (
               <article
-                className={`${interRegular.className} text-[16px] min-[1024px]:text-[20px] leading-[1.8] font-light text-[#d4d4d4] 
+                className={`${interRegular.className} text-[16px] min-[1024px]:text-[16px] leading-[1.8] font-light text-[#d4d4d4] 
                 [&>h1]:text-white [&>h1]:text-[28px] min-[1024px]:[&>h1]:text-[36px] [&>h1]:leading-[1.2] [&>h1]:font-medium [&>h1]:mb-[24px] [&>h1]:mt-[48px] [&>h1]:tracking-tight 
                 [&>h2]:text-white [&>h2]:text-[24px] min-[1024px]:[&>h2]:text-[28px] [&>h2]:leading-[1.3] [&>h2]:font-medium [&>h2]:mb-[20px] [&>h2]:mt-[40px] [&>h2]:tracking-tight 
                 [&>h3]:text-white [&>h3]:text-[20px] min-[1024px]:[&>h3]:text-[22px] [&>h3]:leading-[1.4] [&>h3]:font-medium [&>h3]:mb-[16px] [&>h3]:mt-[32px] 

@@ -106,7 +106,7 @@ export function CompanyLeadership({ data }: CompanyLeadershipProps = {}) {
               <CornerDecor />
             </div>
             <p
-              className={`${interRegular.className} mt-[24px] w-[591px] text-[18px] leading-[27px] font-normal text-[#a1a1a1] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} mt-[24px] w-[591px] text-[18px] leading-[27px] font-normal text-[#a1a1a1] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
               data-node-id="2379:2285"
             >
               {subtitle.split("\n").map((line, i, arr) => (

@@ -20,7 +20,7 @@ export function CompanyDnaValueCard({
             {title}
           </p>
           <p
-            className={`${interRegular.className} w-full text-[14px] leading-[1.4] font-normal text-white opacity-65 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-full text-[14px] leading-[1.4] font-normal text-white opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {description}
           </p>

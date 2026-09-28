@@ -64,7 +64,7 @@ export function DeveloperHeroContent({ data }: { data?: any }) {
 
       {/* Description — 2438:4571 */}
       <p
-        className={`${interRegular.className} not-italic [word-break:break-word] relative w-[529px] shrink-0 text-[18px] font-normal leading-[27px] text-[#f0f0f0]`}
+        className={`${interRegular.className} not-italic [word-break:break-word] relative w-[529px] shrink-0 text-[18px] font-normal leading-[27px] text-[#f0f0f0] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         data-node-id="2438:4571"
       >
         {subtitle}

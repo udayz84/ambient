@@ -108,7 +108,7 @@ export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
                 {title}
               </h2>
               <p
-                className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#d2d2d2] opacity-90 not-italic [word-break:break-word]`}
+                className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#d2d2d2] opacity-90 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
                 data-node-id="2653:696"
               >
                 {subtitle}
@@ -127,7 +127,7 @@ export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
               <Corners />
             </button>
-            <span className={`${interRegular.className} text-[14px] leading-[18px] font-normal text-[#D2D2D2]`}>
+            <span className={`${interRegular.className} text-[14px] leading-[18px] font-normal text-[#D2D2D2] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
               {paginationText}
             </span>
             <button 
@@ -177,7 +177,7 @@ export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
               {title}
             </h2>
             <p
-              className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#d2d2d2] opacity-90 not-italic [word-break:break-word]`}
+              className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#d2d2d2] opacity-90 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
               data-node-id="4153:8674"
             >
               {subtitle}

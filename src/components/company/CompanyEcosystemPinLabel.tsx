@@ -23,7 +23,7 @@ export function CompanyEcosystemPinLabel({
     >
       <CompanyStandardCorners />
       <p
-        className={`${interRegular.className} absolute top-[16.431px] max-w-[calc(100%-16px)] text-[18px] leading-[27px] font-normal whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis ${textClassName}`}
+        className={`${interRegular.className} absolute top-[16.431px] max-w-[calc(100%-16px)] text-[18px] leading-[27px] font-normal whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis ${textClassName} min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         data-node-id={textNodeId}
       >
         {label}

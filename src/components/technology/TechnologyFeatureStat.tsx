@@ -45,7 +45,7 @@ export function TechnologyFeatureStat({
       </div>
       <div className="flex w-full flex-col items-start" data-name="Content">
         <p
-          className={`${interRegular.className} w-full shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic`}
+          className={`${interRegular.className} w-full shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
           {description}
         </p>

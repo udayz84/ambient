@@ -4,6 +4,8 @@ import { DvkHero } from "./DvkHero";
 import { DvkScrollIndicator } from "./DvkScrollIndicator";
 import { SomInsideModule } from "@/components/som-page/SomInsideModule";
 import { SomPrototypeTitleDesktop, SomPrototypeTitleMobile } from "@/components/som-page/SomPrototypeTitle";
+import { SomIntelligence } from "@/components/som-page/SomIntelligence";
+import { ModelZooAppForge } from "@/components/model-zoo/ModelZooAppForge";
 import { SPEC_CARDS } from "./dvk-data";
 import { DvkDemos } from "./DvkDemos";
 import { DEMO_CARDS, PHONE_CARD_FALLBACK } from "./DvkDemosCards";
@@ -27,7 +29,7 @@ import {
 } from "./dvk-data";
 
 /**
- * Figma 2761:2971 — Cranium Development Kit (DVK) page.
+ * Figma 2761:2971 — Cranium Evaluation Kit (DVK) page.
  * Desktop hero canvas is 1442 wide / 658 tall; hardware stack frame is 1232 wide.
  */
 const DVK_DESKTOP_HEIGHT = 658;
@@ -50,8 +52,6 @@ export function Dvk({ data }: { data?: any }) {
         <DvkScrollIndicator />
       </div>
 
-      <SomPrototypeTitleDesktop data={data?.prototype} />
-
       {/* DESKTOP (>=1024px) — hardware stack section (2761:2905) */}
       <div id="dvk-content" className="relative mx-auto hidden w-full bg-black min-[1024px]:block">
         {data?.inside_module ? (
@@ -59,11 +59,16 @@ export function Dvk({ data }: { data?: any }) {
         ) : null}
       </div>
 
-      {/* DESKTOP (>=1024px) — demos section (2761:2791 + cards row) */}
-      <div className="relative mx-auto hidden w-full bg-black min-[1024px]:block">
-        <div className="mx-auto w-full max-w-[1684px] px-[32px] xl:px-[64px] pb-[64px]">
-          {data?.demos ? <DvkDemos data={data.demos} /> : null}
-        </div>
+      <SomPrototypeTitleDesktop data={data?.prototype} />
+
+      {/* DESKTOP (>=1024px) — intelligence section (moved from /SOM) */}
+      <div className="hidden w-full bg-black min-[1024px]:block">
+        <SomIntelligence data={data?.intelligence} />
+      </div>
+
+      {/* DESKTOP (>=1024px) — Application Forge section (copied from /model-zoo) */}
+      <div className="hidden w-full bg-black min-[1024px]:block">
+        <ModelZooAppForge data={data?.appforge} />
       </div>
 
       {/* DESKTOP (>=1024px) — ModelForge section (3773:685, 1440×873 canvas) */}
@@ -76,14 +81,27 @@ export function Dvk({ data }: { data?: any }) {
       {/* Coming Soon section — "Test on the metal, without the metal" (4497:2938) */}
       <DvkComingSoon data={data?.coming_soon} />
 
+      {/* DESKTOP (>=1024px) — demos section (2761:2791 + cards row) */}
+      <div className="relative mx-auto hidden w-full bg-black min-[1024px]:block">
+        <div className="mx-auto w-full max-w-[1684px] px-[32px] xl:px-[64px] pt-[80px] pb-[64px]">
+          {data?.demos ? <DvkDemos data={data.demos} /> : null}
+        </div>
+      </div>
+
       {/* MOBILE (<1024px) — stacked layout */}
       <DvkHeroMobile data={data?.hero} />
-      <SomPrototypeTitleMobile data={data?.prototype} />
       <div className="min-[1024px]:hidden">
         {data?.inside_module ? <SomInsideModule data={data.inside_module} /> : null}
       </div>
-      <DvkDemosMobile data={data?.demos} />
+      <SomPrototypeTitleMobile data={data?.prototype} />
+      <div className="w-full bg-black min-[1024px]:hidden">
+        <SomIntelligence data={data?.intelligence} />
+      </div>
+      <div className="w-full bg-black min-[1024px]:hidden">
+        <ModelZooAppForge data={data?.appforge} />
+      </div>
       <DvkModelForgeMobile data={data?.modelforge} />
+      <DvkDemosMobile data={data?.demos} />
 
       {/* Shared Section (Desktop & Mobile) */}
       {data?.integrated_modules ? (
@@ -107,12 +125,12 @@ function DvkHeroMobile({ data }: { data?: any }) {
     data?.title || "The physical launchpad for microwatt Edge AI.";
   const subtitle =
     data?.subtitle ||
-    "Validate real-time AI at microwatt power levels out of the box. The Cranium Development Kit comes fully loaded with onboard sensors, rich I/O, and pre-integrated drivers so you can stop breadboarding and start testing inferences in minutes.";
+    "Validate real-time AI at microwatt power levels out of the box. The Cranium Evaluation Kit comes fully loaded with onboard sensors, rich I/O, and pre-integrated drivers so you can stop breadboarding and start testing inferences in minutes.";
   const ctaLabel = data?.cta_label || "Request Evaluation Kit";
   return (
     <section
       className="relative -mt-[78px] h-[778px] w-full overflow-clip bg-black min-[1024px]:hidden"
-      aria-label="Cranium Development Kit"
+      aria-label="Cranium Evaluation Kit"
       data-node-id="4059:10006"
       data-name="Banner"
     >
@@ -168,7 +186,7 @@ function DvkHeroMobile({ data }: { data?: any }) {
           </h1>
         </div>
         <p
-          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           data-node-id="4059:10014"
         >
           {subtitle}
@@ -275,7 +293,7 @@ function DvkHardwareStackMobile({ data }: { data?: any }) {
             </h2>
           </div>
           <p
-            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             data-node-id="4059:10048"
           >
             {subtitle}
@@ -489,7 +507,7 @@ function DvkDemosMobile({ data }: { data?: any }) {
             </h2>
           </div>
           <p
-            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             data-node-id="4059:10221"
           >
             {subtitle}
@@ -541,7 +559,7 @@ function DvkDemosMobile({ data }: { data?: any }) {
                       <p className="m-0 leading-[28px]">{card.titleLine2}</p>
                     </h3>
                     <p
-                      className={`${interRegular.className} m-0 w-[296.417px] max-w-full text-[14px] leading-[21.3px] font-normal text-[#99a1af] not-italic [word-break:break-word]`}
+                      className={`${interRegular.className} m-0 w-[296.417px] max-w-full text-[14px] leading-[21.3px] font-normal text-[#99a1af] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
                     >
                       {card.desc}
                     </p>
@@ -592,7 +610,7 @@ function DvkPhoneCardMobile({ data }: { data?: any }) {
             {card.title}
           </h3>
           <p
-            className={`${interRegular.className} m-0 w-[296.417px] max-w-full text-[14px] leading-[21.3px] font-normal text-[#99a1af] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} m-0 w-[296.417px] max-w-full text-[14px] leading-[21.3px] font-normal text-[#99a1af] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             Pair the Cranium kit with the ApplicationForge app over Bluetooth,
             push any demo to the board, and watch results live — including the
@@ -728,7 +746,7 @@ function DvkModelForgeMobile({ data }: { data?: any }) {
             </h2>
           </div>
           <p
-            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             data-node-id="4062:10914"
           >
             {subtitle}
@@ -839,7 +857,7 @@ function MobileModelCard({
           {title}
         </p>
         <p
-          className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
+          className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
           {description}
         </p>
@@ -1044,7 +1062,7 @@ function MobileForgeTag({
       data-name="Article"
     >
       <p
-        className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-white not-italic`}
+        className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-white not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
       >
         {label}
       </p>

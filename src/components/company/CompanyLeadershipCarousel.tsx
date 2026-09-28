@@ -86,7 +86,7 @@ function LeadershipCardMobile({
           </div>
           {!isAdvisory && member.role ? (
             <p
-              className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-[#39ff14] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-[#39ff14] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             >
               {member.role}
             </p>
@@ -94,7 +94,7 @@ function LeadershipCardMobile({
         </div>
         {!isAdvisory ? (
           <p
-            className={`${interRegular.className} mt-[11px] text-[14px] leading-[21px] font-normal text-white not-italic [word-break:break-word]`}
+            className={`${interRegular.className} mt-[11px] text-[14px] leading-[21px] font-normal text-white not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             Read more +
           </p>

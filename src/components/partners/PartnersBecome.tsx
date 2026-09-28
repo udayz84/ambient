@@ -151,7 +151,7 @@ export function PartnersBecome() {
           >
             {PARTNERS_BECOME.heading}
           </h2>
-          <p className={`${interRegular.className} max-w-[660px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px]`}>
+          <p className={`${interRegular.className} max-w-[660px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
             {PARTNERS_BECOME.subheading}
           </p>
         </div>
@@ -171,7 +171,7 @@ export function PartnersBecome() {
                 <h3 className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white [word-break:break-word] not-italic`}>
                   {benefit.title}
                 </h3>
-                <p className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-white opacity-65 [word-break:break-word] not-italic`}>
+                <p className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-white opacity-65 [word-break:break-word] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
                   {benefit.description}
                 </p>
               </div>
@@ -209,7 +209,7 @@ export function PartnersBecome() {
             <h3 className={`${gilroyMedium.className} text-[26px] leading-[34px] font-medium text-white [word-break:break-word] not-italic`}>
               {PARTNERS_BECOME.form.title}
             </h3>
-            <p className={`${interRegular.className} text-[15px] leading-[24px] font-normal text-[#f0f0f0] opacity-75 [word-break:break-word] not-italic`}>
+            <p className={`${interRegular.className} text-[15px] leading-[24px] font-normal text-[#f0f0f0] opacity-75 [word-break:break-word] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
               Frictionless by design — share a few details and our partnerships
               team will take it from there.
             </p>

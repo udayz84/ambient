@@ -150,7 +150,7 @@ export function SomHero({ data }: { data?: any }) {
             data-name="Sub"
           >
             <p
-              className={`${interRegular.className} w-[554px] shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} w-[554px] shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
               data-node-id="3210:1556"
             >
               {subtitle}
@@ -267,7 +267,7 @@ export function SomHero({ data }: { data?: any }) {
 
           {/* Subtitle — 4046:7809 (336×63) */}
           <p
-            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             data-node-id="4046:7809"
           >
             {subtitle}

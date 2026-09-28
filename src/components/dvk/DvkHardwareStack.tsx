@@ -81,7 +81,7 @@ export function DvkHardwareStack({ data }: { data?: any }) {
         </div>
 
         <p
-          className={`${interRegular.className} text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic`}
+          className={`${interRegular.className} text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           style={{ width: 618.2734375, opacity: 0.65 }}
         >
           {subtitle}

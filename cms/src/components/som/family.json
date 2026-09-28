@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_som_families",
+  "info": {
+    "displayName": "Family Section",
+    "description": "GPX10 PRO SOM FAMILY section"
+  },
+  "options": {},
+  "attributes": {
+    "tag": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "som.family-card"
+    }
+  }
+}

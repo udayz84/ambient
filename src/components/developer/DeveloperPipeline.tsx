@@ -345,7 +345,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
             {heading}
           </h2>
           <p
-            className={`${interRegular.className} text-[14px] leading-[21px] text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} text-[14px] leading-[21px] text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {subtitle}
           </p>
@@ -705,7 +705,7 @@ function AccordionItem({
           {stage.label}
         </p>
         <p
-          className={`${interRegular.className} text-[14px] leading-[21px] whitespace-nowrap text-[#bbb]`}
+          className={`${interRegular.className} text-[14px] leading-[21px] whitespace-nowrap text-[#bbb] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
           {stage.subtitle}
         </p>
@@ -723,7 +723,7 @@ function AccordionItem({
           {stage.label}
         </p>
         <p
-          className={`${interRegular.className} text-[14px] leading-[21px] whitespace-nowrap text-[#bbb]`}
+          className={`${interRegular.className} text-[14px] leading-[21px] whitespace-nowrap text-[#bbb] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
           {stage.subtitle}
         </p>
@@ -767,7 +767,7 @@ function AccordionItem({
             </li>
           </ul>
           <p
-            className={`${interRegular.className} absolute left-[54px] w-[341px] text-[14px] leading-[21px] font-normal not-italic text-[#d2d2d2] transition-opacity duration-300`}
+            className={`${interRegular.className} absolute left-[54px] w-[341px] text-[14px] leading-[21px] font-normal not-italic text-[#d2d2d2] transition-opacity duration-300 min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             style={{ top: 139 + i * 93, opacity: isActive ? 1 : 0 }}
           >
             {bullet.description}

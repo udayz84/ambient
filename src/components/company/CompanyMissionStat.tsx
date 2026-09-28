@@ -43,14 +43,14 @@ export function CompanyMissionStat({
             suffixAtTarget={suffixAtTarget}
           />
           <p
-            className={`${interRegular.className} max-w-[200px] shrink-0 overflow-hidden text-ellipsis text-[18px] leading-[27px] font-normal whitespace-nowrap text-[#53d824] not-italic`}
+            className={`${interRegular.className} max-w-[200px] shrink-0 overflow-hidden text-ellipsis text-[18px] leading-[27px] font-normal whitespace-nowrap text-[#53d824] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             data-node-id={labelNodeId}
           >
             {label}
           </p>
         </div>
         <p
-          className={`${interRegular.className} ${descriptionWidth} text-[18px] leading-[27px] font-normal text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
+          className={`${interRegular.className} ${descriptionWidth} text-[18px] leading-[27px] font-normal text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           data-node-id={descriptionNodeId}
         >
           {description}

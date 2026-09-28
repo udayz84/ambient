@@ -53,7 +53,7 @@ export function SomFooterMerge({ data }: { data?: any }) {
 
           {/* Right Side */}
           <div className="flex flex-col items-end gap-[20px] w-[291px]">
-            <p className={`${interRegular.className} text-[14px] leading-[24px] text-right text-white tracking-[-0.3px]`}>
+            <p className={`${interRegular.className} text-[14px] leading-[24px] text-right text-white tracking-[-0.3px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
               {subtitle}
             </p>
             <a

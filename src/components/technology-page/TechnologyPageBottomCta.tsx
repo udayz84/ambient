@@ -95,7 +95,7 @@ function CtaCard({
           {/* body + CTA */}
           <div className="flex w-full flex-col items-start gap-[20px]">
             <p
-              className={`${interRegular.className} h-[48px] w-full text-center text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-white not-italic [word-break:break-word]`}
+              className={`${interRegular.className} h-[48px] w-full text-center text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-white not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             >
               {card.body}
             </p>
@@ -169,7 +169,7 @@ export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
             <GreenCtaCorners />
           </div>
           <p
-            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {sectionSubtitle}
           </p>
@@ -201,7 +201,7 @@ export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
             <MobileTitleCorners />
           </div>
           <p
-            className={`${interRegular.className} text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {sectionSubtitle}
           </p>

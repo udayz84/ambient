@@ -121,7 +121,7 @@ function DvkIntegratedModulesDesktop({
             {heading}
           </h2>
         </div>
-        <p className={`${interRegular.className} w-[800px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}>
+        <p className={`${interRegular.className} w-[800px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
           {subtitle}
         </p>
       </div>
@@ -157,7 +157,7 @@ function DvkIntegratedModulesDesktop({
         ))}
       </div>
 
-      <p className={`${interRegular.className} mt-[45px] w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}>
+      <p className={`${interRegular.className} mt-[45px] w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
         {footer}
       </p>
 
@@ -225,7 +225,7 @@ function DvkIntegratedModulesMobile({
             </h2>
           </div>
           <p
-            className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             data-node-id="4062:12370"
           >
             {subtitle}
@@ -300,7 +300,7 @@ function DvkIntegratedModulesMobile({
 
         {/* Footer — 4062:12371 (29, 897 / 336 wide) */}
         <p
-          className={`${interRegular.className} absolute top-[897px] left-[calc(50%+0.5px)] m-0 w-[336px] max-w-[calc(100%-56px)] -translate-x-1/2 text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+          className={`${interRegular.className} absolute top-[897px] left-[calc(50%+0.5px)] m-0 w-[336px] max-w-[calc(100%-56px)] -translate-x-1/2 text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           data-node-id="4062:12371"
         >
           {footer}

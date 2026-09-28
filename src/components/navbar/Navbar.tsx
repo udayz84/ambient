@@ -48,7 +48,6 @@ const MEGA_ICON_BY_TITLE: Record<string, string> = {
   "system-on-modules": "/navbar/dropdown-icon-som.svg",
   som: "/navbar/dropdown-icon-som.svg",
   "evaluation kits": "/navbar/dropdown-icon-devkit.svg",
-  "development kits": "/navbar/dropdown-icon-devkit.svg",
   dvk: "/navbar/dropdown-icon-devkit.svg",
 };
 
@@ -127,7 +126,7 @@ function ProductsMegaMenu({
                     key={link.label}
                     href={link.href}
                     onClick={onNavigate}
-                    className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#ccc] opacity-90 transition-opacity [word-break:break-word] hover:opacity-100`}
+                    className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#ccc] opacity-90 transition-opacity [word-break:break-word] hover:opacity-100 min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
                   >
                     {link.label}
                   </Link>

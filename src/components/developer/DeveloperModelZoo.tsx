@@ -218,7 +218,7 @@ export function DeveloperModelZoo({ data }: { data?: any }) {
             </div>
           </div>
           <p
-            className={`${interRegular.className} w-[552px] text-center text-[18px] font-normal not-italic leading-[27px] text-[#f0f0f0] opacity-65 [word-break:break-word]`}
+            className={`${interRegular.className} w-[552px] text-center text-[18px] font-normal not-italic leading-[27px] text-[#f0f0f0] opacity-65 [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             data-node-id="5212:6822"
           >
             {subtitle}
@@ -247,7 +247,7 @@ export function DeveloperModelZoo({ data }: { data?: any }) {
                   <img loading="lazy" decoding="async" alt="" src={stat.icon} className="absolute inset-0 block size-full max-w-none" />
                 </div>
                 <p
-                  className={`${interRegular.className} w-full text-[18px] font-normal not-italic leading-[27px] text-white opacity-90 [word-break:break-word]`}
+                  className={`${interRegular.className} w-full text-[18px] font-normal not-italic leading-[27px] text-white opacity-90 [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
                 >
                   {stat.text}
                 </p>

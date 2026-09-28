@@ -237,7 +237,7 @@ function EcoCard({
             {title}
           </h3>
           <p
-            className={`${interRegular.className} text-[16px] leading-[24px] font-normal uppercase text-[#8ce66c] not-italic whitespace-nowrap [word-break:break-word] min-[1024px]:text-[18px] min-[1024px]:leading-[27px]`}
+            className={`${interRegular.className} text-[16px] leading-[24px] font-normal uppercase text-[#8ce66c] not-italic whitespace-nowrap [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {subtitle}
           </p>
@@ -594,7 +594,7 @@ function MobileEcoCard({
             {subtitle}
           </p>
           <p
-            className={`${interRegular.className} text-[14px] leading-[23.075px] font-normal tracking-[-0.2773px] text-[#99a1af] not-italic [word-break:break-word] ${meta.descWidth}`}
+            className={`${interRegular.className} text-[14px] leading-[23.075px] font-normal tracking-[-0.2773px] text-[#99a1af] not-italic [word-break:break-word] ${meta.descWidth} min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {description}
           </p>
@@ -675,7 +675,7 @@ export function SomEcosystem({ data }: { data?: any }) {
             <Corners />
           </div>
           <p
-            className={`${interRegular.className} text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {subtitle}
           </p>
@@ -753,7 +753,7 @@ export function SomEcosystem({ data }: { data?: any }) {
             </h2>
           </div>
           <p
-            className={`${interRegular.className} w-[352px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[352px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {subtitle}
           </p>

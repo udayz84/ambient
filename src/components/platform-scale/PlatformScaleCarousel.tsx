@@ -271,7 +271,7 @@ function PlatformScaleStatPanel({ product }: { product: GpxProduct }) {
           data-name="Content"
         >
           <p
-            className={`${interRegular.className} relative w-full text-center text-[14px] leading-[1.4] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} relative w-full text-center text-[14px] leading-[1.4] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             data-node-id="2379:646"
           >
             {product.description}

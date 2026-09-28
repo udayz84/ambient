@@ -129,7 +129,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
               <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             </div>
             <p
-              className={`${interRegular.className} w-[650px] shrink-0 text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} w-[650px] shrink-0 text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
               data-node-id="3286:2112"
             >
               {subtitle}
@@ -141,7 +141,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
           {/* 3710:1634 — caption (Figma top 917 of the 1057 canvas; rises on
               shorter stages so it never overlaps the 600px cards) */}
           <p
-            className={`${interRegular.className} absolute bottom-[clamp(40px,calc(100vh-960px),98px)] left-1/2 w-[603.549px] -translate-x-1/2 text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+            className={`${interRegular.className} absolute bottom-[clamp(40px,calc(100vh-960px),98px)] left-1/2 w-[603.549px] -translate-x-1/2 text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             data-node-id="3710:1634"
           >
             {CAPTION}
@@ -176,7 +176,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           </div>
           <p
-            className={`${interRegular.className} max-w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
+            className={`${interRegular.className} max-w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {subtitle}
           </p>
@@ -200,7 +200,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
         </div>
 
         <p
-          className={`${interRegular.className} relative mx-auto mt-[64px] max-w-[603.549px] px-[24px] pb-[40px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic`}
+          className={`${interRegular.className} relative mx-auto mt-[64px] max-w-[603.549px] px-[24px] pb-[40px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
           {CAPTION}
         </p>

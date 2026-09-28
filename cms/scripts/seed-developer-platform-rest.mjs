@@ -88,9 +88,9 @@ const developer_platform = {
         'Train, deploy, and optimize through a development workflow designed to help teams build with Ambient without starting from scratch',
     },
     {
-      title: 'Evaluate with development kits',
+      title: 'Evaluate with evaluation kits',
       body:
-        'Get hands-on with the platform through development kits designed to accelerate validation and shorten time to first insight',
+        'Get hands-on with the platform through evaluation kits designed to accelerate validation and shorten time to first insight',
       image: imageIds['card-image-devkits.png'],
     },
     {
