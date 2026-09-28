@@ -62,3 +62,4 @@ db_backup.sql
 
 # Figma QA reference screenshots (local scratch)
 .figma-ref/
+public/model-zoo/*.mp4

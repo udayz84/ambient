@@ -138,7 +138,7 @@ export function ModelZooAppForge() {
                 {/* Figma 5241:5677 — VIDEO fill (scaleMode FILL) playing on the canvas */}
                 <video
                   ref={videoRef}
-                  className="pointer-events-none absolute inset-0 size-full object-cover"
+                  className="pointer-events-none absolute inset-0 size-full object-contain"
                   src="/model-zoo/af-video.mp4"
                   autoPlay
                   muted
