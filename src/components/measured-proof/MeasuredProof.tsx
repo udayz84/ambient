@@ -6,16 +6,20 @@ import { MeasuredProofCards } from "./MeasuredProofCards";
 import { MeasuredProofCtas } from "./MeasuredProofCtas";
 import { MeasuredProofHeader } from "./MeasuredProofHeader";
 import { MeasuredProofMobile } from "./MeasuredProofMobile";
+import bgImageFallback from "../../../../public/measured-proof/bg-image-90.webp";
+import gradientTopFallback from "../../../../public/measured-proof/gradient-top.png";
+import gradientBottomFallback from "../../../../public/measured-proof/gradient-bottom.png";
+import mobileBgFallback from "../../../../public/mobile/image 90.png";
 
 export function MeasuredProof({ data }: { data?: any }) {
   const backgroundImage =
-    mediaUrl(data?.background_image) || "/measured-proof/bg-image-90.webp";
+    mediaUrl(data?.background_image) || bgImageFallback;
   const gradientTop =
-    mediaUrl(data?.gradient_top) || "/measured-proof/gradient-top.png";
+    mediaUrl(data?.gradient_top) || gradientTopFallback;
   const gradientBottom =
-    mediaUrl(data?.gradient_bottom) || "/measured-proof/gradient-bottom.png";
+    mediaUrl(data?.gradient_bottom) || gradientBottomFallback;
   const mobileBackgroundImage =
-    mediaUrl(data?.background_image) || "/mobile/image 90.png";
+    mediaUrl(data?.background_image) || mobileBgFallback;
 
   return (
     <section
