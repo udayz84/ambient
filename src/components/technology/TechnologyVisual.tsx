@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { mediaUrl } from "@/lib/strapi";
 import { TechnologyVisualFadeIn } from "./TechnologyVisualFadeIn";
-import bgImageFallback from "../../../../public/technology/bg-image-29.webp";
+import bgImageFallback from "../../../public/technology/bg-image-29.webp";
 
 const edgeFadeMaskStyle = {
   maskImage: "radial-gradient(ellipse at center, black 60%, transparent 100%)",

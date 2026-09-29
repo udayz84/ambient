@@ -6,10 +6,10 @@ import { MeasuredProofCards } from "./MeasuredProofCards";
 import { MeasuredProofCtas } from "./MeasuredProofCtas";
 import { MeasuredProofHeader } from "./MeasuredProofHeader";
 import { MeasuredProofMobile } from "./MeasuredProofMobile";
-import bgImageFallback from "../../../../public/measured-proof/bg-image-90.webp";
-import gradientTopFallback from "../../../../public/measured-proof/gradient-top.png";
-import gradientBottomFallback from "../../../../public/measured-proof/gradient-bottom.png";
-import mobileBgFallback from "../../../../public/mobile/image 90.png";
+import bgImageFallback from "../../../public/measured-proof/bg-image-90.webp";
+import gradientTopFallback from "../../../public/measured-proof/gradient-top.png";
+import gradientBottomFallback from "../../../public/measured-proof/gradient-bottom.png";
+import mobileBgFallback from "../../../public/mobile/image 90.png";
 
 export function MeasuredProof({ data }: { data?: any }) {
   const backgroundImage =
