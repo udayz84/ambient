@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { mediaUrl } from "@/lib/strapi";
 import { TechnologyVisualFadeIn } from "./TechnologyVisualFadeIn";
+import bgImageFallback from "../../../../public/technology/bg-image-29.webp";
 
 const edgeFadeMaskStyle = {
   maskImage: "radial-gradient(ellipse at center, black 60%, transparent 100%)",
@@ -13,7 +14,7 @@ const radialOverlayStyle = {
 
 export function TechnologyVisualBackground({ data }: { data?: any }) {
   const bgSrc =
-    mediaUrl(data?.background_visual) || "/technology/bg-image-29.webp";
+    mediaUrl(data?.background_visual) || bgImageFallback;
   return (
     <div
       className="pointer-events-none absolute top-[60px] right-0 left-0 z-0 h-[642px] overflow-hidden"
