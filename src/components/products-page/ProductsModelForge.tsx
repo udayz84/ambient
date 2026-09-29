@@ -548,7 +548,7 @@ function MenuChip({ label }: { label: string }) {
       data-name="Menu"
     >
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-      <p className="[text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] leading-[20px] not-italic relative shrink-0 text-[#ecfae5] text-[13px] tracking-[-0.4px] uppercase whitespace-nowrap">
+      <p className="[text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] leading-[24px] not-italic relative shrink-0 text-[#ecfae5] text-[16px] tracking-[-0.4px] uppercase whitespace-nowrap">
         {label}
       </p>
       <div

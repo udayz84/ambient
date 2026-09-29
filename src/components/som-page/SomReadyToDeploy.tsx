@@ -88,7 +88,7 @@ function ChipImage({ className, src }: { className?: string; src: string }) {
           className="absolute inset-0 size-full object-contain opacity-90 brightness-75 blur-[2px]"
         />
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center border border-[#E2A740] bg-black/90 px-[16px] py-[12px] shadow-lg">
-          <span className={`${dmMono?.className || "font-mono"} flex items-center gap-[16px] whitespace-nowrap text-[14px] uppercase tracking-[0.1em] text-[#E2A740]`}>
+          <span className={`${dmMono?.className || "font-mono"} flex items-center gap-[16px] whitespace-nowrap text-[16px] uppercase tracking-[0.1em] text-[#E2A740]`}>
             <span>|</span>
             <span>LAUNCHING SOON</span>
             <span>|</span>

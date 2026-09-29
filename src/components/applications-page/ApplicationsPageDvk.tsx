@@ -167,7 +167,7 @@ function FeatureCard({
       <div className="relative flex w-full flex-col items-start">
         <div className="relative flex flex-col items-start gap-[12px]">
           <p
-            className={`${gilroyMedium.className} text-[26px] leading-[29px] font-medium not-italic text-white [word-break:break-word]`}
+            className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium not-italic text-white [word-break:break-word]`}
           >
             {title}
           </p>

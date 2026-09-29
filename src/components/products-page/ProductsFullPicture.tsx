@@ -371,7 +371,7 @@ function MenuChip({ label }: { label: string }) {
     >
       <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
       <p
-        className="[text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] leading-[20.149px] not-italic relative shrink-0 text-[#ecfae5] text-[13.433px] tracking-[-0.403px] uppercase whitespace-nowrap"
+        className="[text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] leading-[20.149px] not-italic relative shrink-0 text-[#ecfae5] text-[13.433px] tracking-[-0.403px] uppercase whitespace-nowrap min-[1024px]:text-[16px] min-[1024px]:leading-[24px]"
         data-node-id="3710:1911"
       >
         {label}
@@ -519,7 +519,7 @@ function SpecCardView({ card }: { card: RenderCard }) {
         data-name="Container"
       >
         <p
-          className={`${gilroySemiBold.className} [word-break:break-word] leading-[16px] not-italic relative shrink-0 text-[18px] tracking-[0.6px] uppercase whitespace-nowrap`}
+          className={`${gilroySemiBold.className} [word-break:break-word] leading-[28px] not-italic relative shrink-0 text-[22px] tracking-[0.6px] uppercase whitespace-nowrap`}
           style={{ color: HEADER_COLOR }}
         >
           {card.title}

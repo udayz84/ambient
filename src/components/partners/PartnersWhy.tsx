@@ -72,13 +72,13 @@ function WhyCard({ step }: { step: any }) {
       {/* Title + description */}
       <div className="relative z-10 flex w-full flex-col items-start gap-[12px] not-italic [word-break:break-word] mt-[24px] flex-1">
         <h3
-          className={`${gilroyMedium.className} w-full shrink-0 text-[18px] leading-[24px] font-medium text-white min-[1280px]:text-[20px] min-[1280px]:leading-[26px]`}
+          className={`${gilroyMedium.className} w-full shrink-0 text-[18px] leading-[24px] font-medium text-white min-[1280px]:text-[22px] min-[1280px]:leading-[28px]`}
         >
           {step.title}
         </h3>
 
         <p
-          className={`${interRegular.className} w-full text-[13px] leading-[20px] font-normal text-[#99a1af] tracking-[-0.3px] [word-break:break-word] min-[1280px]:text-[14px] min-[1280px]:leading-[21px]`}
+          className={`${interRegular.className} w-full text-[13px] leading-[20px] font-normal text-[#99a1af] tracking-[-0.3px] [word-break:break-word] min-[1280px]:text-[16px] min-[1280px]:leading-[24px]`}
         >
           {step.description}
         </p>

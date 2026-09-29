@@ -356,7 +356,7 @@ function ArticleCard({
       {/* Text — 3586:1385 */}
       <div className="flex min-w-px flex-[1_0_0] flex-col items-start gap-[10px]">
         <p
-          className={`${gilroyRegular.className} w-full text-[26px] leading-[29px] font-normal text-white not-italic [word-break:break-word]`}
+          className={`${gilroyRegular.className} w-full text-[22px] leading-[28px] font-normal text-white not-italic [word-break:break-word]`}
         >
           {article.title}
         </p>

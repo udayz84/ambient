@@ -15,7 +15,7 @@ function SomTag({ label, available, widthClass }: { label: string; available: bo
       className={`relative flex items-center justify-center h-[26px] shrink-0 overflow-clip ${available ? "bg-[rgba(115,190,91,0.8)]" : "bg-[rgba(115,190,91,0.12)] border-[0.5px] border-solid border-[rgba(240,240,240,0.4)]"} ${widthClass}`}
     >
       <Corners />
-      <p className={`${dmMono.className} relative z-10 max-w-full text-[13px] leading-none font-normal tracking-[-0.39px] text-[#ecfae5] uppercase whitespace-nowrap not-italic overflow-hidden text-ellipsis mt-[1px]`}>
+      <p className={`${dmMono.className} relative z-10 max-w-full text-[13px] leading-none font-normal tracking-[-0.39px] text-[#ecfae5] uppercase whitespace-nowrap not-italic overflow-hidden text-ellipsis mt-[1px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
         {label}
       </p>
       <div className="absolute top-1/2 left-[7px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60 z-10" />
@@ -81,7 +81,7 @@ export function SomDeployPath({ data }: { data?: any }) {
                   <img loading="lazy" decoding="async" src={imageUrl} alt={card.title} className={`max-w-[90%] max-h-[90%] object-contain opacity-90 ${!card.is_available ? "blur-[2px] brightness-[0.4]" : ""}`} />
                   {!card.is_available && (
                     <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center border border-[#E2A740] bg-black/90 px-[16px] py-[12px] shadow-lg">
-                      <span className={`${dmMono?.className || "font-mono"} flex items-center gap-[16px] whitespace-nowrap text-[14px] uppercase tracking-[0.1em] text-[#E2A740]`}>
+                      <span className={`${dmMono?.className || "font-mono"} flex items-center gap-[16px] whitespace-nowrap text-[14px] uppercase tracking-[0.1em] text-[#E2A740] min-[1024px]:text-[16px]`}>
                         <span>|</span>
                         <span>{card.image_overlay_label?.toUpperCase() || "COMING SOON"}</span>
                         <span>|</span>

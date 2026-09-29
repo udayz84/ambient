@@ -128,7 +128,7 @@ function WinCard({ label, stat, statLabel, visual, body }: WinCardProps) {
             {stat}
           </p>
           <p
-            className={`${gilroyMedium.className} text-[26px] leading-[29px] uppercase text-[#c5f3b5] [word-break:break-word]`}
+            className={`${gilroyMedium.className} text-[22px] leading-[28px] uppercase text-[#c5f3b5] [word-break:break-word]`}
           >
             {statLabel}
           </p>

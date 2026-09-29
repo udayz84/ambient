@@ -37,7 +37,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     nodeId: "2500:1925",
     category: "Press Release",
     title: "PyTorch vs TensorFlow for Production and Edge AI Deployment",
-    titleFontSize: 21,
+    titleFontSize: 22,
     excerpt:
       "This article compares PyTorch and TensorFlow from a real-world de... ",
     imageOverlaySrc: "/resources/article-3-overlay.webp",
@@ -46,7 +46,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     nodeId: "2500:1945",
     category: "EVENT",
     title: "Breaking the Von Neumann Bottleneck Coin Cell AI at the Edge",
-    titleFontSize: 21,
+    titleFontSize: 22,
     excerpt:
       "In this session, Ambient Scientific explores a new approach to edge AI by a... ",
     imageOverlaySrc: "/resources/article-4-overlay.webp",

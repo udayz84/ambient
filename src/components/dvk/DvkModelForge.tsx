@@ -260,7 +260,7 @@ function ToolchainChip({ label, last }: { label: string; last?: boolean }) {
     >
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
       <p
-        className={`${dmMono.className} absolute top-[calc(50%-4.5px)] max-w-full -translate-x-1/2 text-center text-[13px] leading-[19.5px] tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic overflow-hidden text-ellipsis [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] ${
+        className={`${dmMono.className} absolute top-[calc(50%-4.5px)] max-w-full -translate-x-1/2 text-center text-[16px] leading-[24px] tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic overflow-hidden text-ellipsis [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] ${
           last ? "left-[calc(50%+0.5px)]" : "left-[calc(50%+1px)]"
         }`}
       >

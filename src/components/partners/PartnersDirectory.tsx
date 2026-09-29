@@ -97,10 +97,10 @@ function PartnerCard({ partner }: { partner: Partner }) {
           )}
         </span>
         <div className="flex min-w-0 flex-1 flex-col gap-[6px]">
-          <h3 className={`${gilroyMedium.className} w-full text-[20px] leading-[26px] font-medium text-white [word-break:break-word] not-italic`}>
+          <h3 className={`${gilroyMedium.className} w-full text-[20px] leading-[26px] font-medium text-white [word-break:break-word] not-italic min-[1024px]:text-[22px] min-[1024px]:leading-[28px]`}>
             {partner.name}
           </h3>
-          <p className={`${interRegular.className} w-full text-[13px] leading-[19.5px] font-normal text-[#a4a4a4] [word-break:break-word] not-italic`}>
+          <p className={`${interRegular.className} w-full text-[13px] leading-[19.5px] font-normal text-[#a4a4a4] [word-break:break-word] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
             {partner.oneLiner}
           </p>
         </div>
@@ -161,7 +161,7 @@ function ExpandingTile() {
       <h3 className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium text-[#f0f0f0] not-italic`}>
         {PARTNERS_DIRECTORY.expanding.title}
       </h3>
-      <p className={`${interRegular.className} max-w-[260px] text-[13px] leading-[19.5px] font-normal text-[#8a8a8a] not-italic`}>
+      <p className={`${interRegular.className} max-w-[260px] text-[13px] leading-[19.5px] font-normal text-[#8a8a8a] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
         {PARTNERS_DIRECTORY.expanding.description}
       </p>
     </div>

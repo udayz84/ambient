@@ -52,8 +52,12 @@ export function ModelZooAppForge({ data }: { data?: any }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
     // prefers-reduced-motion: keep the Article panel's ambient video paused
-    if (videoRef.current && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      videoRef.current.pause();
+    if (videoRef.current) {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play().catch(() => {});
+      }
     }
   }, []);
   return (
@@ -121,7 +125,7 @@ export function ModelZooAppForge({ data }: { data?: any }) {
               /* "See results live" — real screen recording (portrait 1080×1920),
                  object-contain so the native aspect is kept (letterboxed). */
               <video
-                className="pointer-events-none absolute inset-0 size-full object-contain"
+                className="pointer-events-none absolute inset-0 size-full object-contain scale-[0.9]"
                 src="https://ambientwebasset.blob.core.windows.net/website-assets/model-zoo/af-results.mp4"
                 autoPlay
                 muted
@@ -142,7 +146,7 @@ export function ModelZooAppForge({ data }: { data?: any }) {
                 {/* Figma 5241:5677 — VIDEO fill (scaleMode FILL) playing on the canvas */}
                 <video
                   ref={videoRef}
-                  className="pointer-events-none absolute inset-0 size-full object-contain"
+                  className="pointer-events-none absolute inset-0 size-full object-contain scale-[0.9]"
                   src="https://ambientwebasset.blob.core.windows.net/website-assets/model-zoo/af-video.mp4"
                   autoPlay
                   muted
@@ -258,7 +262,7 @@ export function ModelZooAppForge({ data }: { data?: any }) {
                   style={{ left: 3.33, transform: magicOn ? "translateX(33.33px)" : "translateX(0)" }}
                 />
               </div>
-              <p className={`${gilroyMedium.className} absolute top-[calc(50%-14px)] left-[calc(50%-47px)] -translate-x-1/2 text-center text-[26px] leading-[29px] whitespace-nowrap text-white not-italic`} data-node-id="5360:5007">
+              <p className={`${gilroyMedium.className} absolute top-[calc(50%-14px)] left-[calc(50%-47px)] -translate-x-1/2 text-center text-[26px] leading-[29px] whitespace-nowrap text-white not-italic min-[1024px]:text-[22px] min-[1024px]:leading-[28px]`} data-node-id="5360:5007">
                 Experience the magic
               </p>
               <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
@@ -297,7 +301,7 @@ export function ModelZooAppForge({ data }: { data?: any }) {
           {/* NewsSection — 5131:10514 */}
           <div className="relative flex w-full min-w-px flex-1 flex-col items-start self-stretch gap-[40px]" data-node-id="5131:10514" data-name="NewsSection">
             <div className="relative h-[26px] w-[180px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)]" data-node-id="5131:10515" data-name="Menu">
-              <p className={`${dmMono.className} absolute top-[calc(50%-4.5px)] left-[calc(50%-0.26px)] -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]`}>
+              <p className={`${dmMono.className} absolute top-[calc(50%-4.5px)] left-[calc(50%-0.26px)] -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
                 super easy process
               </p>
               <div className="absolute top-1/2 left-[6.48px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />

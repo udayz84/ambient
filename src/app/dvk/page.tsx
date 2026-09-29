@@ -28,7 +28,6 @@ export default async function DvkPage() {
       "hero",
       { section: "inside_module", fields: ["image"], nested: ["specs"] },
       { section: "prototype", nested: ["cards"] },
-      { section: "intelligence", nested: ["cards"] },
       "appforge",
       { section: "demos", nested: ["demo_cards"], fields: ["phone_card"] },
       "modelforge",

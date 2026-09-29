@@ -867,7 +867,7 @@ function EfficiencyTableContent() {
 
       {/* header row */}
       <div
-        className={`${interMedium.className} absolute top-[6px] left-[-0.45px] flex h-[56px] w-[1166px] flex-wrap items-start gap-0 px-[32px] py-[20px] text-[14px] leading-[0] font-medium text-[#d2d2d2] uppercase not-italic`}
+        className={`${interMedium.className} absolute top-[6px] left-[-0.45px] flex h-[56px] w-[1166px] flex-wrap items-start gap-0 px-[32px] py-[20px] text-[16px] leading-[0] font-medium text-[#d2d2d2] uppercase not-italic`}
         data-node-id="3508:649"
       >
         {HEADERS.map((h, i) => (
@@ -877,7 +877,7 @@ function EfficiencyTableContent() {
               i === 0 ? "w-[117.695px]" : "min-w-px flex-[1_0_0]"
             }`}
           >
-            <p className="leading-[16px]">{h}</p>
+            <p className="leading-[24px]">{h}</p>
           </div>
         ))}
       </div>

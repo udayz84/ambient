@@ -128,7 +128,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
               <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             </div>
             <p
-              className={`${interRegular.className} w-[800px] max-w-[90vw] shrink-0 text-center text-[18px] leading-[28px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[24px] min-[1024px]:leading-[36px] mt-[16px] mb-[24px]`}
+              className={`${interRegular.className} w-[800px] max-w-[90vw] shrink-0 text-center text-[18px] leading-[28px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] mt-[16px] mb-[24px]`}
               data-node-id="3286:2112"
             >
               {subtitle}
@@ -139,7 +139,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
 
           {/* 3710:1634 — caption */}
           <p
-            className={`${interRegular.className} absolute top-[980px] left-1/2 w-[800px] max-w-[90vw] -translate-x-1/2 text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[20px] min-[1024px]:leading-[30px]`}
+            className={`${interRegular.className} absolute top-[980px] left-1/2 w-[800px] max-w-[90vw] -translate-x-1/2 text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             data-node-id="3710:1634"
           >
             {CAPTION}

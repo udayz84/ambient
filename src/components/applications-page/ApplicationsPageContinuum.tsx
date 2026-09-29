@@ -583,7 +583,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
               className="absolute left-1/2 top-[calc(50%+1px)] flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-[10px] p-[12px] text-center text-white not-italic"
             >
               <p
-                className={`${gilroyMedium.className} min-w-full w-[min-content] text-[26px] font-medium leading-[29px] [word-break:break-word]`}
+                className={`${gilroyMedium.className} min-w-full w-[min-content] text-[22px] font-medium leading-[28px] [word-break:break-word]`}
                 data-node-id="4574:7592"
               >
                 {activeCard.title}

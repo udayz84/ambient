@@ -294,7 +294,7 @@ function ModeLabel({
   if (variant === "title") {
     return (
       <p
-        className={`${interRegular.className} absolute ${left} ${top} z-30 text-[13px] leading-[normal] font-normal whitespace-nowrap text-[rgba(255,255,255,0.9)] uppercase not-italic`}
+        className={`${interRegular.className} absolute ${left} ${top} z-30 text-[16px] leading-[24px] font-normal whitespace-nowrap text-[rgba(255,255,255,0.9)] uppercase not-italic`}
       >
         {children}
       </p>

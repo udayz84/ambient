@@ -155,7 +155,7 @@ function ArticleCard({ article }: { article: Article }) {
       {/* News section */}
       <div className="flex w-full flex-col items-center gap-[10px] text-center">
         <p
-          className={`${gilroyMedium.className} w-full text-[20.211px] leading-[28.295px] tracking-[-0.4539px] text-white [word-break:break-word]`}
+          className={`${gilroyMedium.className} w-full text-[20.211px] leading-[28.295px] tracking-[-0.4539px] text-white [word-break:break-word] min-[1024px]:text-[22px] min-[1024px]:leading-[28px]`}
         >
           {article.title}
         </p>

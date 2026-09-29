@@ -7,6 +7,7 @@ import { SomEcosystem } from "@/components/som-page/SomEcosystem";
 
 import { SomReadyToDeploy } from "@/components/som-page/SomReadyToDeploy";
 import { SomFooterMerge } from "@/components/som-page/SomFooterMerge";
+import { SomIntelligence } from "@/components/som-page/SomIntelligence";
 import { getSingleType } from "@/lib/strapi";
 import { buildMetadata, type SeoData } from "@/lib/seo";
 
@@ -37,6 +38,7 @@ export default async function SomPage() {
       { section: "hero", fields: ["image"], nested: ["primary_button", "secondary_button"] },
       { section: "features", nested: ["cards"] },
       { section: "family", nested: ["cards.features", "cards.image"] },
+      { section: "intelligence", nested: ["cards"] },
 
       { section: "deploy_path", nested: ["cards", "primary_button"] },
       "ready_to_deploy",
@@ -55,7 +57,7 @@ export default async function SomPage() {
       <SomDeployPath data={data?.deploy_path} />
       {/* <SomEcosystem data={data?.ecosystem} /> */}
 
-
+      <SomIntelligence data={data?.intelligence} />
       <SomReadyToDeploy data={data?.ready_to_deploy} />
       <SomFooterMerge data={data?.footer_merge} />
     </main>

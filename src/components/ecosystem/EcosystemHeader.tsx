@@ -41,7 +41,7 @@ export function EcosystemHeader({ data }: { data?: any }) {
       </div>
 
       <p
-        className={`${interRegular.className} mt-[20px] max-md:mt-[16px] w-full max-w-[803px] text-center text-[18px] max-md:text-[16px] leading-[27px] font-normal text-white not-italic [word-break:break-word]`}
+        className={`${interRegular.className} mt-[20px] max-md:mt-[16px] w-full max-w-[803px] text-center text-[16px] leading-[24px] font-normal text-white not-italic [word-break:break-word]`}
         data-node-id="2379:1034"
       >
         {subtitle}

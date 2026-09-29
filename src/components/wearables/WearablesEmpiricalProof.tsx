@@ -163,7 +163,7 @@ function SidePanel({
       data-name="Side Panel"
     >
       <p
-        className={`${gilroyMedium.className} min-w-full w-[min-content] text-center text-[20.211px] leading-[28.295px] tracking-[-0.4539px] text-white whitespace-nowrap not-italic`}
+        className={`${gilroyMedium.className} min-w-full w-[min-content] text-center text-[22px] leading-[28px] tracking-[-0.4539px] text-white whitespace-nowrap not-italic`}
       >
         {title}
       </p>

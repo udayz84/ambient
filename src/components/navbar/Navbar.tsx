@@ -64,7 +64,7 @@ const DEFAULT_MEGA_COLUMNS: NavMegaColumn[] = [
     description: undefined,
     links: [
       { label: "GPX10PRO", href: "/products" },
-      { label: "GPX64", href: "/products" },
+      { label: "GPX40", href: "#" },
     ],
     ctaLabel: undefined,
     ctaHref: undefined,
@@ -99,7 +99,16 @@ function ProductsMegaMenu({
   columns?: NavMegaColumn[];
   onNavigate: () => void;
 }) {
-  const cols = columns?.length ? columns : DEFAULT_MEGA_COLUMNS;
+  let cols = columns?.length ? [...columns] : [...DEFAULT_MEGA_COLUMNS];
+  if (!cols.some(c => c.title.toLowerCase().includes("model"))) {
+    cols.push({
+      title: "Model Zoo",
+      description: "Pre-trained models ready for deployment on Ambient AI processors.",
+      links: [],
+      ctaLabel: "View Model Zoo",
+      ctaHref: "/model-zoo",
+    });
+  }
   return (
     <div
       className="relative w-max min-w-[800px] max-w-[1200px] border-[0.5px] border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.98)] backdrop-blur-3xl"
@@ -129,20 +138,29 @@ function ProductsMegaMenu({
             {column.links.length > 0 ? (
               <div className="flex flex-col gap-[6px]">
                 {column.links.map((link) => {
-                  const isGPX64 = link.label === "GPX64";
+                  const isGPX40 = link.label === "GPX40" || link.label === "GPX64"; // handle both for safety if Strapi sends GPX64
+                  const labelToDisplay = link.label === "GPX64" ? "GPX40" : link.label;
+                  
+                  if (isGPX40) {
+                    return (
+                      <span
+                        key={link.label}
+                        className={`${interRegular.className} w-full flex items-center gap-[6px] text-[14px] leading-[21px] font-normal transition-opacity [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] text-white/40 cursor-default`}
+                      >
+                        {labelToDisplay}
+                        <span className="text-[12px] opacity-70">(Coming soon)</span>
+                      </span>
+                    );
+                  }
+
                   return (
                     <Link
                       key={link.label}
                       href={link.href}
                       onClick={onNavigate}
-                      className={`${interRegular.className} w-full flex items-center gap-[6px] text-[14px] leading-[21px] font-normal transition-opacity [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] ${
-                        isGPX64 ? "text-white/40 hover:opacity-80" : "text-[#ccc] opacity-90 hover:opacity-100"
-                      }`}
+                      className={`${interRegular.className} w-full flex items-center gap-[6px] text-[14px] leading-[21px] font-normal transition-opacity [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] text-[#ccc] opacity-90 hover:opacity-100`}
                     >
-                      {link.label}
-                      {isGPX64 && (
-                        <span className="text-[12px] opacity-70">(Coming soon)</span>
-                      )}
+                      {labelToDisplay}
                     </Link>
                   );
                 })}

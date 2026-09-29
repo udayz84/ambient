@@ -304,7 +304,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
       >
         <Corners leftSrc={BADGE_LEFT} rightSrc={BADGE_RIGHT} />
         <p
-          className={`${dmMono.className} absolute left-1/2 top-1/2 max-w-full -translate-x-1/2 -translate-y-1/2 text-[13px] leading-[19.5px] uppercase tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] not-italic overflow-hidden text-ellipsis`}
+          className={`${dmMono.className} absolute left-1/2 top-1/2 max-w-full -translate-x-1/2 -translate-y-1/2 text-[16px] leading-[24px] uppercase tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] not-italic overflow-hidden text-ellipsis`}
         >
           {tagText}
         </p>

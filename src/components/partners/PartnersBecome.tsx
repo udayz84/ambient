@@ -182,7 +182,7 @@ export function PartnersBecome() {
         {/* ---------- who we're looking for ---------- */}
         <div className="relative flex w-full max-w-[900px] flex-col items-center gap-[18px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(21,21,21,0.3)] px-[32px] py-[28px] text-center backdrop-blur-[8px]">
           <Corners />
-          <h3 className={`${gilroyMedium.className} text-[20px] leading-[26px] font-medium text-white not-italic [word-break:break-word]`}>
+          <h3 className={`${gilroyMedium.className} text-[20px] leading-[26px] font-medium text-white not-italic [word-break:break-word] min-[1024px]:text-[22px] min-[1024px]:leading-[28px]`}>
             {PARTNERS_BECOME.lookingFor.title}
           </h3>
           <div className="flex flex-wrap items-center justify-center gap-[8px]">
@@ -196,7 +196,7 @@ export function PartnersBecome() {
               </span>
             ))}
           </div>
-          <p className={`${interRegular.className} max-w-[720px] text-[13px] leading-[19.5px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic`}>
+          <p className={`${interRegular.className} max-w-[720px] text-[13px] leading-[19.5px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
             {PARTNERS_BECOME.lookingFor.description}
           </p>
         </div>
@@ -223,7 +223,7 @@ export function PartnersBecome() {
                   <span className={`${dmMono.className} mt-[2px] shrink-0 text-[12px] leading-[18px] tracking-[1px] text-[#53d824]`}>
                     {s.step}
                   </span>
-                  <p className={`${interRegular.className} text-[13px] leading-[19.5px] font-normal text-[#f0f0f0] opacity-75`}>
+                  <p className={`${interRegular.className} text-[13px] leading-[19.5px] font-normal text-[#f0f0f0] opacity-75 min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
                     {s.text}
                   </p>
                 </div>
@@ -250,7 +250,7 @@ export function PartnersBecome() {
                     setForm(INITIAL_APPLY);
                     setCapabilities([]);
                   }}
-                  className={`${interRegular.className} cursor-pointer border-b border-[rgba(169,226,140,0.5)] text-[13px] leading-[21px] font-normal text-[#a9e28c] transition-colors duration-200 hover:text-[#53d824]`}
+                  className={`${interRegular.className} cursor-pointer border-b border-[rgba(169,226,140,0.5)] text-[13px] leading-[21px] font-normal text-[#a9e28c] transition-colors duration-200 hover:text-[#53d824] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
                 >
                   Submit another application
                 </button>

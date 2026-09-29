@@ -308,7 +308,7 @@ function WatchCardItem({ card }: { card: WatchCard }) {
         data-name="NewsSection"
       >
         <div className="flex w-full flex-col items-start gap-[12px]">
-          <p className={`${gilroyMedium.className} w-full text-[26px] leading-[29px] text-white not-italic [word-break:break-word]`}>
+          <p className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] text-white not-italic [word-break:break-word]`}>
             {card.title}
           </p>
           <p className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal whitespace-pre-wrap text-[#99a1af] not-italic [word-break:break-word]`}>

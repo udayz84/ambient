@@ -4,7 +4,7 @@ import { DvkHero } from "./DvkHero";
 import { DvkScrollIndicator } from "./DvkScrollIndicator";
 import { SomInsideModule } from "@/components/som-page/SomInsideModule";
 import { SomPrototypeTitleDesktop, SomPrototypeTitleMobile } from "@/components/som-page/SomPrototypeTitle";
-import { SomIntelligence } from "@/components/som-page/SomIntelligence";
+
 import { ModelZooAppForge } from "@/components/model-zoo/ModelZooAppForge";
 import { SPEC_CARDS } from "./dvk-data";
 import { DvkDemos } from "./DvkDemos";
@@ -61,11 +61,13 @@ export function Dvk({ data }: { data?: any }) {
 
       <SomPrototypeTitleDesktop data={data?.prototype} />
 
-      {/* DESKTOP (>=1024px) — intelligence section (moved from /SOM) */}
-      <div className="hidden w-full bg-black min-[1024px]:block">
-        <SomIntelligence data={data?.intelligence} />
+      {/* DESKTOP (>=1024px) — demos section (2761:2791 + cards row) */}
+      <div className="relative mx-auto hidden w-full bg-black min-[1024px]:block">
+        <div className="mx-auto w-full max-w-[1684px] px-[32px] xl:px-[64px] pt-[80px] pb-[64px]">
+          {data?.demos ? <DvkDemos data={data.demos} /> : null}
+        </div>
       </div>
-
+      
       {/* DESKTOP (>=1024px) — Application Forge section (copied from /model-zoo) */}
       <div className="hidden w-full bg-black min-[1024px]:block">
         <ModelZooAppForge data={data?.appforge} />
@@ -81,12 +83,7 @@ export function Dvk({ data }: { data?: any }) {
       {/* Coming Soon section — "Test on the metal, without the metal" (4497:2938) */}
       <DvkComingSoon data={data?.coming_soon} />
 
-      {/* DESKTOP (>=1024px) — demos section (2761:2791 + cards row) */}
-      <div className="relative mx-auto hidden w-full bg-black min-[1024px]:block">
-        <div className="mx-auto w-full max-w-[1684px] px-[32px] xl:px-[64px] pt-[80px] pb-[64px]">
-          {data?.demos ? <DvkDemos data={data.demos} /> : null}
-        </div>
-      </div>
+
 
       {/* MOBILE (<1024px) — stacked layout */}
       <DvkHeroMobile data={data?.hero} />
@@ -94,14 +91,12 @@ export function Dvk({ data }: { data?: any }) {
         {data?.inside_module ? <SomInsideModule data={data.inside_module} /> : null}
       </div>
       <SomPrototypeTitleMobile data={data?.prototype} />
-      <div className="w-full bg-black min-[1024px]:hidden">
-        <SomIntelligence data={data?.intelligence} />
-      </div>
+      <DvkDemosMobile data={data?.demos} />
       <div className="w-full bg-black min-[1024px]:hidden">
         <ModelZooAppForge data={data?.appforge} />
       </div>
       <DvkModelForgeMobile data={data?.modelforge} />
-      <DvkDemosMobile data={data?.demos} />
+
 
       {/* Shared Section (Desktop & Mobile) */}
       {data?.integrated_modules ? (

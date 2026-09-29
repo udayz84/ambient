@@ -113,7 +113,7 @@ function FamilyCard({ data }: { data: typeof CARD_BLE }) {
               {data.footerText}
             </p>
           )}
-          <h4 className={`${gilroyMedium.className} text-[14px] text-white`}>What&apos;s inside</h4>
+          <h4 className={`${gilroyMedium.className} text-[14px] text-white min-[1024px]:text-[16px]`}>What&apos;s inside</h4>
           <div className="grid grid-cols-2 min-[1024px]:flex min-[1024px]:items-start gap-y-4 gap-x-2 min-[1024px]:gap-0">
             {data.features.map((feat, i) => (
               <div key={i} className="flex items-center gap-2 min-[1024px]:gap-3 min-[1024px]:px-4 pl-0 min-[1024px]:border-l border-[rgba(240,240,240,0.15)] first:border-0 min-[1024px]:h-full">

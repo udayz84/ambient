@@ -266,12 +266,12 @@ function PillarStat({
           {pillar.title}
         </p>
         <p
-          className={`${interRegular.className} text-[13px] leading-[normal] font-normal text-[#6fe047] not-italic`}
+          className={`${interRegular.className} text-[16px] leading-[24px] font-normal text-[#6fe047] not-italic`}
         >
           {pillar.subtitle}
         </p>
         <p
-          className={`${interRegular.className} w-full text-[13px] leading-[normal] font-normal text-[#8e8e8e] not-italic [word-break:break-word]`}
+          className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-[#8e8e8e] not-italic [word-break:break-word]`}
         >
           {pillar.desc}
         </p>
@@ -283,10 +283,10 @@ function PillarStat({
       >
         {pillar.bullets.map((b, i) => (
           <div key={i} className="flex w-full items-start gap-[5px]">
-            <p className="text-[14px] tracking-[-0.1504px] whitespace-nowrap text-[#3a9719] not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
+            <p className="text-[16px] tracking-[-0.1504px] whitespace-nowrap text-[#3a9719] not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
               +
             </p>
-            <p className="min-w-px flex-1 whitespace-pre-line text-[13px] text-[rgba(255,255,255,0.9)] not-italic [word-break:break-word]">
+            <p className="min-w-px flex-1 whitespace-pre-line text-[16px] leading-[24px] text-[rgba(255,255,255,0.9)] not-italic [word-break:break-word]">
               {b}
             </p>
           </div>

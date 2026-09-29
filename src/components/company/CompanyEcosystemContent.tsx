@@ -177,7 +177,7 @@ export function CompanyEcosystemContent({ data }: CompanyEcosystemContentProps =
                   nodeId={col.iconNodeId}
                 />
                 <p
-                  className={`${gilroyMedium.className} absolute top-[1.5px] ${col.left} h-[29px] ${col.titleWidth} text-[26px] leading-[28px] font-medium whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis`}
+                  className={`${gilroyMedium.className} absolute top-[1.5px] ${col.left} h-[29px] ${col.titleWidth} text-[22px] leading-[28px] font-medium whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis`}
                   data-node-id={col.titleNodeId}
                 >
                   {col.title}

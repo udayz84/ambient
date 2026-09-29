@@ -257,7 +257,7 @@ function MenuChip({ label }: { label: string }) {
     >
       <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
       <p
-        className="[text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] leading-[20.149px] not-italic relative shrink-0 text-[#ecfae5] text-[13.433px] tracking-[-0.403px] uppercase whitespace-nowrap"
+        className="[text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] leading-[24px] not-italic relative shrink-0 text-[#ecfae5] text-[16px] tracking-[-0.403px] uppercase whitespace-nowrap"
         data-node-id="3710:1911"
       >
         {label}

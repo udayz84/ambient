@@ -36,12 +36,12 @@ type FeatureCardProps = {
 function CardTag({ label }: { label: string }) {
   return (
     <div
-      className="relative h-[26px] w-full min-[1024px]:w-[255px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.06)] backdrop-blur-[10px]"
+      className="relative h-[26px] w-full shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.06)] backdrop-blur-[10px]"
       data-name="Menu"
     >
       <Corners />
       <p
-        className={`${dmMono.className} absolute left-1/2 top-[calc(50%-4.5px)] -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word]`}
+        className={`${dmMono.className} absolute left-1/2 top-[calc(50%-4.5px)] -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
       >
         {label}
       </p>
@@ -95,7 +95,7 @@ function FeatureCard({
         <CardTag label={tag} />
         <div className="flex flex-col gap-[10px]">
           <h3
-            className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium text-white not-italic min-[1024px]:text-[20.211px] min-[1024px]:leading-[28.295px] min-[1024px]:tracking-[-0.4539px]`}
+            className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium text-white not-italic min-[1024px]:text-[22px] min-[1024px]:leading-[28px] min-[1024px]:tracking-[-0.4539px]`}
           >
             {title}
           </h3>

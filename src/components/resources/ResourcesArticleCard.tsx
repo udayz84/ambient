@@ -66,11 +66,13 @@ export function ResourcesArticleCard({
 
         <div className="flex flex-col gap-[10px]">
           <h3
-            className={`${gilroyMedium.className} w-full font-medium text-white not-italic [word-break:break-word]`}
-            style={{
-              fontSize: titleFontSize,
-              lineHeight: "28px",
-            }}
+            className={`${gilroyMedium.className} w-full font-medium text-white not-italic [word-break:break-word] text-[length:var(--card-tfs)] min-[1024px]:text-[22px]`}
+            style={
+              {
+                "--card-tfs": `${titleFontSize}px`,
+                lineHeight: "28px",
+              } as React.CSSProperties
+            }
           >
             {title}
           </h3>

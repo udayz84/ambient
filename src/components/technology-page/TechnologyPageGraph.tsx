@@ -357,17 +357,17 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
 
         {/* center footnote */}
         <p
-          className={`${interSemiBold.className} absolute top-[686.55px] max-w-[540px] text-[14px] tracking-[-0.1504px] [word-break:break-word] not-italic`}
+          className={`${interSemiBold.className} absolute top-[686.55px] max-w-[540px] text-[16px] tracking-[-0.1504px] [word-break:break-word] not-italic`}
           style={{ left: "calc(50% - 270px)" }}
           data-node-id="3035:711"
         >
           {centerLines[0] ? (
-            <span className="font-semibold leading-[22.75px] text-white">
+            <span className="font-semibold leading-[24px] text-white">
               {centerLines[0]}
             </span>
           ) : null}
           {centerLines[1] ? (
-            <span className={`${interRegular.className} font-normal leading-[22.75px] text-[rgba(255,255,255,0.7)]`}>
+            <span className={`${interRegular.className} font-normal leading-[24px] text-[rgba(255,255,255,0.7)]`}>
               {centerLines[1]}
             </span>
           ) : null}
