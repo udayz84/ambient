@@ -29,8 +29,8 @@ export function Hero({ data }: { data?: any }) {
   const title = data?.title || "";
   const subtitle = data?.subtitle || "";
   const scrollText = data?.scroll_text || "";
-  const videoSrc = "/hero/ambient-hero.mp4";
-  const mobileVideoSrc = "/hero/ambient-hero.mp4";
+  const videoSrc = "/hero/ambient-hero-v2.mp4";
+  const mobileVideoSrc = "/hero/ambient-hero-v2.mp4";
   const metrics: HeroMetric[] = Array.isArray(data?.metrics)
     ? data.metrics
     : [];

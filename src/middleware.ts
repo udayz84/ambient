@@ -21,7 +21,7 @@ const ASSET_FILE_EXTENSIONS = new Set([
 
 function isStaticAssetPath(pathname: string): boolean {
   // Exclude the hardcoded hero video from being redirected to Azure
-  if (pathname === '/hero/ambient-hero.mp4') {
+  if (pathname === '/hero/ambient-hero-v2.mp4') {
     return false;
   }
   const ext = pathname.match(/\.([A-Za-z0-9]+)$/)?.[1]?.toLowerCase();
