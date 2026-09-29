@@ -33,7 +33,7 @@ export function HeroVisualMedia({
   }
 
   // Check for common video extensions, ignoring any query parameters
-  const isVideo = /\.(mp4|webm|mov|m4v)(\?.*)?$/i.test(src);
+  const isVideo = /\.(mp4|webm|mov|m4v|avi|wmv|flv|mkv|ogg|ogv)(\?.*)?$/i.test(src);
   const isWebM = /\.webm(\?.*)?$/i.test(src);
   const isMov = /\.mov(\?.*)?$/i.test(src);
   const type = isWebM ? "video/webm" : isMov ? "video/quicktime" : "video/mp4";
