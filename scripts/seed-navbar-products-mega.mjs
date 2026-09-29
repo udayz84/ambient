@@ -68,6 +68,12 @@ const MEGA_COLUMNS = [
     cta_label: "View Evaluation Kits",
     cta_href: "/dvk",
   },
+  {
+    title: "Model Zoo",
+    description: "Pre-trained models ready for deployment on Ambient AI processors.",
+    cta_label: "View Model Zoo",
+    cta_href: "/model-zoo",
+  }
 ];
 
 // ---------------------------------------------------------------------------

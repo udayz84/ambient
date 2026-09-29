@@ -608,7 +608,7 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
 
           {/* Caption */}
           <p
-            className={`${interRegular.className} -translate-x-1/2 [word-break:break-word] absolute font-normal leading-[18px] left-1/2 not-italic text-[12px] text-[#bbbbbb] text-center top-[768.96px] uppercase w-[540px]`}
+            className={`${interRegular.className} -translate-x-1/2 [word-break:break-word] absolute font-normal leading-[24px] left-1/2 not-italic text-[16px] text-[#bbbbbb] text-center top-[768.96px] uppercase w-[540px]`}
           >
             Return to the baseline
           </p>
@@ -774,7 +774,7 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
 
           {/* Caption — Figma 4087:8464 */}
           <p
-            className={`${interRegular.className} -translate-x-1/2 [word-break:break-word] absolute font-normal left-1/2 leading-[18px] not-italic text-[12px] text-[#bbbbbb] text-center top-[1011.39px] uppercase whitespace-nowrap`}
+            className={`${interRegular.className} -translate-x-1/2 [word-break:break-word] absolute font-normal left-1/2 leading-[24px] not-italic text-[16px] text-[#bbbbbb] text-center top-[1011.39px] uppercase whitespace-nowrap`}
             data-node-id="4087:8464"
           >
             Return to the baseline

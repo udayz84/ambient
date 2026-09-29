@@ -83,6 +83,13 @@ const DEFAULT_MEGA_COLUMNS: NavMegaColumn[] = [
     ctaLabel: "View Evaluation Kits",
     ctaHref: "/dvk",
   },
+  {
+    title: "Model Zoo",
+    description: "Pre-trained models ready for deployment on Ambient AI processors.",
+    links: [],
+    ctaLabel: "View Model Zoo",
+    ctaHref: "/model-zoo",
+  },
 ];
 
 function ProductsMegaMenu({
@@ -95,7 +102,7 @@ function ProductsMegaMenu({
   const cols = columns?.length ? columns : DEFAULT_MEGA_COLUMNS;
   return (
     <div
-      className="relative w-[800px] border-[0.5px] border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.98)] backdrop-blur-3xl"
+      className="relative w-max min-w-[800px] max-w-[1200px] border-[0.5px] border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.98)] backdrop-blur-3xl"
       data-node-id="4625:8704"
       data-name="Dropdown"
     >
@@ -104,12 +111,12 @@ function ProductsMegaMenu({
         <Image src="/navbar/dropdown-corners.svg" alt="" fill className="block max-w-none" aria-hidden />
       </div>
 
-      {/* Content — columns, gap 32px, padding 30px. First column fixed 200px per Figma. */}
-      <div className="relative flex items-start gap-[32px] p-[30px]">
+      {/* Content — columns, 2x2 grid, gap 32px, padding 30px. */}
+      <div className="relative grid grid-cols-2 gap-[32px] p-[30px]">
         {cols.map((column, index) => (
           <div
             key={column.title}
-            className={index === 0 ? "flex w-[200px] shrink-0 flex-col gap-[12px]" : "flex min-w-px flex-1 flex-col gap-[12px]"}
+            className="flex flex-col gap-[12px]"
           >
             <div className="flex shrink-0 items-center gap-[6px]">
               <span className="relative size-[24px] shrink-0 overflow-clip">
@@ -121,16 +128,24 @@ function ProductsMegaMenu({
             </div>
             {column.links.length > 0 ? (
               <div className="flex flex-col gap-[6px]">
-                {column.links.map((link) => (
-                  <Link
-                    key={link.label}
-                    href={link.href}
-                    onClick={onNavigate}
-                    className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#ccc] opacity-90 transition-opacity [word-break:break-word] hover:opacity-100 min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+                {column.links.map((link) => {
+                  const isGPX64 = link.label === "GPX64";
+                  return (
+                    <Link
+                      key={link.label}
+                      href={link.href}
+                      onClick={onNavigate}
+                      className={`${interRegular.className} w-full flex items-center gap-[6px] text-[14px] leading-[21px] font-normal transition-opacity [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] ${
+                        isGPX64 ? "text-white/40 hover:opacity-80" : "text-[#ccc] opacity-90 hover:opacity-100"
+                      }`}
+                    >
+                      {link.label}
+                      {isGPX64 && (
+                        <span className="text-[12px] opacity-70">(Coming soon)</span>
+                      )}
+                    </Link>
+                  );
+                })}
               </div>
             ) : null}
             {column.description ? (
@@ -139,7 +154,9 @@ function ProductsMegaMenu({
               </p>
             ) : null}
             {column.ctaLabel && column.ctaHref ? (
-              <DropdownCta href={column.ctaHref} label={column.ctaLabel} onNavigate={onNavigate} />
+              <div className="mt-auto pt-[4px]">
+                <DropdownCta href={column.ctaHref} label={column.ctaLabel} onNavigate={onNavigate} />
+              </div>
             ) : null}
           </div>
         ))}
@@ -264,8 +281,7 @@ function DropdownCta({ href, label, onNavigate }: { href: string; label: string;
     <Link
       href={href}
       onClick={onNavigate}
-      className={`relative flex h-[48px] shrink-0 items-center justify-center bg-[rgba(226,241,202,0.12)] px-[20px] transition-opacity hover:opacity-90 ${gilroyMedium.className}`}
-      style={{ width: label.length > 18 ? 180 : 160 }}
+      className={`relative flex h-[48px] shrink-0 items-center justify-center bg-[rgba(226,241,202,0.12)] px-[20px] transition-opacity hover:opacity-90 ${gilroyMedium.className} w-max max-w-full`}
     >
       <span className="relative max-w-full text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white overflow-hidden text-ellipsis">
         {label}
@@ -370,9 +386,9 @@ function NavItem({ item }: { item: any }) {
         onMouseLeave={() => setIsOpen(false)}
       >
         <Link
-          href={item.href !== "#" ? item.href : "#"}
+          href={item.href !== "#" && !isProducts ? item.href : "#"}
           onClick={(e) => {
-            if (item.href === "#") {
+            if (item.href === "#" || isProducts) {
               e.preventDefault();
               e.stopPropagation();
               setIsOpen(!isOpen);

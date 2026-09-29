@@ -60,7 +60,7 @@ export function HeroStat({
             {title}
           </p>
           <p
-            className={`${interRegular.className} shrink-0 text-[12px] leading-[18px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word]`}
+            className={`${interRegular.className} shrink-0 text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word]`}
             style={descriptionWidth ? { width: descriptionWidth } : undefined}
           >
             {description}

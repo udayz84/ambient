@@ -86,9 +86,8 @@ export function ProductsFeatures({ data }: { data?: any }) {
       {/* DESKTOP (>=1024px) — sticky stage */}
       <div className="sticky top-[78px] hidden h-[calc(100vh-78px)] w-full overflow-hidden min-[1024px]:block">
         <SectionBackdrop src={bgImage} />
-
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="relative mx-auto h-[1000px] w-full max-w-[1440px] transition-all duration-300 [@media(max-height:1000px)]:[zoom:0.85] [@media(max-height:850px)]:[zoom:0.75] [@media(max-height:750px)]:[zoom:0.65]">
+        <div className="absolute inset-0 flex items-start justify-center pt-[60px]">
+          <div className="relative mx-auto h-[1100px] w-full max-w-[1440px] transition-all duration-300 [@media(max-height:1000px)]:[zoom:0.85] [@media(max-height:850px)]:[zoom:0.75] [@media(max-height:750px)]:[zoom:0.65]">
           {/* 3286:2105 — Section Title */}
           <div
             className="absolute top-[22.5px] left-1/2 flex -translate-x-1/2 flex-col items-center justify-center gap-[24px]"
@@ -129,7 +128,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
               <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             </div>
             <p
-              className={`${interRegular.className} w-[650px] shrink-0 text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+              className={`${interRegular.className} w-[800px] max-w-[90vw] shrink-0 text-center text-[18px] leading-[28px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[24px] min-[1024px]:leading-[36px] mt-[16px] mb-[24px]`}
               data-node-id="3286:2112"
             >
               {subtitle}
@@ -138,10 +137,9 @@ export function ProductsFeatures({ data }: { data?: any }) {
 
           <ProductsFeaturesCarousel cards={featureCards} onScrollChange={setNeedsScroll} />
 
-          {/* 3710:1634 — caption (Figma top 917 of the 1057 canvas; rises on
-              shorter stages so it never overlaps the 600px cards) */}
+          {/* 3710:1634 — caption */}
           <p
-            className={`${interRegular.className} absolute bottom-[clamp(40px,calc(100vh-960px),98px)] left-1/2 w-[603.549px] -translate-x-1/2 text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} absolute top-[980px] left-1/2 w-[800px] max-w-[90vw] -translate-x-1/2 text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[20px] min-[1024px]:leading-[30px]`}
             data-node-id="3710:1634"
           >
             {CAPTION}
@@ -176,7 +174,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           </div>
           <p
-            className={`${interRegular.className} max-w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} max-w-[800px] w-[90vw] text-center text-[18px] leading-[28px] font-normal text-[#f0f0f0] not-italic min-[1024px]:text-[24px] min-[1024px]:leading-[36px] mt-[16px] mb-[24px]`}
           >
             {subtitle}
           </p>
