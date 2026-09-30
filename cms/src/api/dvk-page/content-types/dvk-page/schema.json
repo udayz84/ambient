@@ -27,20 +27,15 @@
       "repeatable": false,
       "component": "som.prototypes"
     },
-    "intelligence": {
+    "demos": {
       "type": "component",
-      "component": "som.intelligence",
-      "repeatable": false
+      "repeatable": false,
+      "component": "dvk.demos"
     },
     "appforge": {
       "type": "component",
       "component": "dvk.app-forge",
       "repeatable": false
-    },
-    "demos": {
-      "type": "component",
-      "repeatable": false,
-      "component": "dvk.demos"
     },
     "modelforge": {
       "type": "component",

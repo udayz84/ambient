@@ -847,7 +847,6 @@ export interface ApiDvkPageDvkPage extends Struct.SingleTypeSchema {
       'dvk.integrated-modules',
       false
     >;
-    intelligence: Schema.Attribute.Component<'som.intelligence', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
