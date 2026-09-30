@@ -24,6 +24,14 @@ function isStaticAssetPath(pathname: string): boolean {
   if (pathname === '/hero/ambient-hero-v2.mp4') {
     return false;
   }
+  // CSS mask-image is fetched in CORS mode and Azure Blob sends no
+  // Access-Control-Allow-Origin header, so a redirected mask fails to load
+  // and everything under it paints nothing. Mask assets must stay
+  // same-origin — never redirect them to Azure.
+  const basename = pathname.split('/').pop() ?? '';
+  if (/(^|[-_])mask[._-]/.test(basename)) {
+    return false;
+  }
   const ext = pathname.match(/\.([A-Za-z0-9]+)$/)?.[1]?.toLowerCase();
   return !!ext && ASSET_FILE_EXTENSIONS.has(ext);
 }
