@@ -48,7 +48,7 @@ export function ModelZooAppForge({ data }: { data?: any }) {
   const { fadeRef: articleRef, isVisible: articleVisible } = useFadeIn<HTMLDivElement>();
   const { fadeRef: forgeRef, isVisible: forgeVisible } = useFadeIn<HTMLDivElement>();
   const [activeStep, setActiveStep] = useState<ForgeStep | null>(null);
-  const [magicOn, setMagicOn] = useState(false);
+
   const videoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
     // prefers-reduced-motion: keep the Article panel's ambient video paused
@@ -114,48 +114,52 @@ export function ModelZooAppForge({ data }: { data?: any }) {
           data-node-id="5241:5967"
         >
           {/* Left canvas card — 5241:5677 (empty bordered frame in the design) */}
-          <div
-            className={`relative hidden h-full w-[590.509px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] px-[16px] pt-[10px] pb-[20px] transition-colors duration-300 hover:border-[#a8ed90] min-[1024px]:block ${forgeVisible ? "motion-safe:animate-hero-text-fade-in" : "min-[1024px]:opacity-0"}`}
-            style={{ animationDelay: "80ms", animationFillMode: "both" }}
-            data-node-id="5241:5677"
-            data-name="Article"
-            aria-hidden
-          >
-            {activeStep === "results" ? (
-              /* "See results live" — real screen recording (portrait 1080×1920),
-                 object-contain so the native aspect is kept (letterboxed). */
-              <video
-                className="pointer-events-none absolute inset-0 size-full object-contain scale-[0.9]"
-                src="https://ambientwebasset.blob.core.windows.net/website-assets/model-zoo/af-results.mp4"
-                autoPlay
-                muted
-                loop
-                playsInline
-              />
-            ) : activeStep ? (
-              /* Variant collage baked @2x from Figma (corners included) */
-              <img
-                alt=""
-                src={STEP_ARTICLE[activeStep]}
-                className="pointer-events-none absolute inset-0 size-full object-cover"
-                loading="lazy"
-                decoding="async"
-              />
-            ) : (
-              <>
-                {/* Figma 5241:5677 — VIDEO fill (scaleMode FILL) playing on the canvas */}
+          <div className="hidden min-[1024px]:flex h-full w-[590.509px] shrink-0 items-center justify-center">
+            <div
+              className={`relative h-full ${!activeStep ? "w-[590.509px]" : "w-fit"} overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] transition-colors duration-300 hover:border-[#a8ed90] ${forgeVisible ? "motion-safe:animate-hero-text-fade-in" : "opacity-0"}`}
+              style={{ animationDelay: "80ms", animationFillMode: "both" }}
+              data-node-id="5241:5677"
+              data-name="Article"
+              aria-hidden
+            >
+              {activeStep === "results" ? (
+                /* "See results live" — real screen recording (portrait 1080×1920),
+                   object-contain so the native aspect is kept (letterboxed). */
                 <video
-                  ref={videoRef}
-                  className="pointer-events-none absolute inset-0 size-full object-contain scale-[0.9]"
-                  src="https://ambientwebasset.blob.core.windows.net/website-assets/model-zoo/af-video.mp4"
+                  className="pointer-events-none block h-full w-auto object-contain"
+                  src="https://ambientwebasset.blob.core.windows.net/website-assets/model-zoo/af-results.mp4"
                   autoPlay
                   muted
                   loop
                   playsInline
+                  preload="auto"
                 />
-                <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-              </>
-            )}
+              ) : activeStep ? (
+                /* Variant collage baked @2x from Figma (corners included) */
+                <img
+                  alt=""
+                  src={STEP_ARTICLE[activeStep]}
+                  className="pointer-events-none block h-full w-auto object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <>
+                  {/* Figma 5241:5677 — VIDEO fill (scaleMode FILL) playing on the canvas */}
+                  <video
+                    ref={videoRef}
+                    className="pointer-events-none absolute inset-0 size-full object-cover"
+                    src="https://ambientwebasset.blob.core.windows.net/website-assets/model-zoo/af-video.mp4"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="auto"
+                  />
+                  <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+                </>
+              )}
+            </div>
           </div>
 
           {/* Right column — 5241:5702 */}
@@ -179,16 +183,9 @@ export function ModelZooAppForge({ data }: { data?: any }) {
                     type="button"
                     key={step}
                     aria-pressed={isActive}
-                    disabled={!magicOn}
-                    onClick={(e) => {
-                      if (!magicOn) {
-                        e.preventDefault();
-                        return;
-                      }
-                      setActiveStep(isActive ? null : key);
-                    }}
-                    className={`relative block h-[84px] w-full shrink-0 ${magicOn ? 'cursor-pointer' : 'cursor-default pointer-events-none'} bg-[rgba(0,0,0,0.1)] text-left transition-[height,opacity] duration-300 motion-reduce:transition-none ${isActive ? STEP_ACTIVE_HEIGHT[key] : ""} ${
-                      isActive ? "opacity-100" : activeStep ? "opacity-40" : magicOn ? "opacity-100" : "opacity-20"
+                    onClick={() => setActiveStep(isActive ? null : key)}
+                    className={`relative block h-[84px] w-full shrink-0 cursor-pointer bg-[rgba(0,0,0,0.1)] text-left transition-[height,opacity] duration-300 motion-reduce:transition-none ${isActive ? STEP_ACTIVE_HEIGHT[key] : ""} ${
+                      isActive ? "opacity-100" : activeStep ? "opacity-40" : "opacity-100"
                     }`}
                     data-node-id={`5241:57${52 - i * 6}`}
                   >
@@ -223,50 +220,7 @@ export function ModelZooAppForge({ data }: { data?: any }) {
               })}
             </div>
 
-            {/* Toggle — 5360:5004 (404×80). The arc glow deliberately overflows
-                the frame (no clip) so it spills into the gap below, matching the
-                reference canvas. Click flips the switch. */}
-            <button
-              type="button"
-              role="switch"
-              aria-checked={magicOn}
-              onClick={() => {
-                if (magicOn) {
-                  setMagicOn(false);
-                  setActiveStep(null);
-                } else {
-                  setMagicOn(true);
-                  setActiveStep(null);
-                }
-              }}
-              className={`relative h-[80px] w-full max-w-[404px] shrink-0 cursor-pointer bg-[rgba(0,0,0,0.1)] text-left transition-colors duration-300 hover:bg-[rgba(50,80,40,0.25)] ${forgeVisible ? "motion-safe:animate-hero-text-fade-in" : "min-[1024px]:opacity-0"}`}
-              style={{ animationDelay: "470ms", animationFillMode: "both" }}
-              data-node-id="5360:5004"
-              data-name="Toggle"
-              aria-label="Experience the magic"
-            >
-              {/* decorative arc — 5360:5005 */}
-              <div className="pointer-events-none absolute top-[-25.16px] left-[89.5px] h-[168.649px] w-[234.951px]" aria-hidden>
-                <div className="absolute inset-[-119.54%_-85.81%]">
-                  <img alt="" src="/model-zoo/af-arc.svg" className="block size-full max-w-none" />
-                </div>
-              </div>
-              <div
-                className="absolute top-[19px] left-[calc(50%+140.17px)] h-[40px] w-[73.333px] -translate-x-1/2 rounded-[100px] transition-colors duration-300"
-                style={{ backgroundColor: magicOn ? "#6fe047" : "#cecbc9" }}
-                data-node-id="5360:5006"
-                data-name="Switch"
-              >
-                <div
-                  className="absolute top-[3.33px] size-[33.333px] rounded-[100px] bg-[#112f06] shadow-[0px_3.333px_6.667px_0px_rgba(39,39,39,0.1)] transition-transform duration-300"
-                  style={{ left: 3.33, transform: magicOn ? "translateX(33.33px)" : "translateX(0)" }}
-                />
-              </div>
-              <p className={`${gilroyMedium.className} absolute top-[calc(50%-14px)] left-[calc(50%-47px)] -translate-x-1/2 text-center text-[26px] leading-[29px] whitespace-nowrap text-white not-italic min-[1024px]:text-[22px] min-[1024px]:leading-[28px]`} data-node-id="5360:5007">
-                Experience the magic
-              </p>
-              <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-            </button>
+
           </div>
         </div>
 
