@@ -72,8 +72,8 @@ export function MeasuredProof({ data }: { data?: any }) {
           </div>
         </div>
 
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="relative mx-auto h-[945px] w-full transition-all duration-300 [@media(max-height:945px)]:[zoom:0.85] [@media(max-height:800px)]:[zoom:0.75] [@media(max-height:700px)]:[zoom:0.65]">
+        <div className="absolute inset-0 flex flex-col overflow-hidden">
+          <div className="relative mx-auto my-auto shrink-0 h-[945px] w-full transition-all duration-300 [@media(max-height:945px)]:[zoom:0.85] [@media(max-height:800px)]:[zoom:0.75] [@media(max-height:700px)]:[zoom:0.65] [@media(max-height:630px)]:[zoom:0.55] [@media(max-height:550px)]:[zoom:0.45]">
             <MeasuredProofHeader data={data} />
             <MeasuredProofCards data={data} />
             <MeasuredProofCtas data={data} />

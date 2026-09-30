@@ -72,6 +72,7 @@ export default async function ProductsPage() {
       { section: "bench_to_volume", nested: ["cards"] },
       { section: "som_family", nested: ["cards.features", "cards.image"] },
       { section: "full_picture", fields: ["background_image"], nested: ["callouts"] },
+      { section: "app_forge", nested: ["steps", "cta", "app_store_badge", "play_store_badge", "card_image"] },
       "start_building",
       "sticky_nav",
       "seo",
@@ -119,7 +120,7 @@ export default async function ProductsPage() {
       <div id="metrics"><ProductsMeasured data={data?.measured} /></div>
       <div id="use-cases"><ProductsUseCases data={data?.use_cases} /></div>
       <ProductsCaseStudies data={caseStudiesData} />
-      <ProductsAppForge />
+      <ProductsAppForge data={data?.app_forge} />
       <div id="architecture"><ProductsArchitecture data={data?.architecture} /></div>
       <ProductsModelForge data={data?.modelforge} />
       <ProductsBenchToVolume data={data?.bench_to_volume} />

@@ -40,7 +40,7 @@ const STEP_ACTIVE_HEIGHT: Record<ForgeStep, string> = {
  * (1440×1433 canvas; 1192.5-wide content at x=124). The two off-canvas
  * "footer" frames at x≈1477 in Figma are ignored (invisible).
  */
-export function ProductsAppForge({ data }: { data?: any }) {
+export function HomeAppForge({ data }: { data?: any }) {
   const heading = data?.heading || "Your eval kit, controlled from your phone.";
   const subheading =
     data?.subheading ||

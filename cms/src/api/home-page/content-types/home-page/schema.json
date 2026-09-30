@@ -16,6 +16,7 @@
     "technology": { "type": "component", "repeatable": false, "component": "home.technology" },
     "platform_scale": { "type": "component", "repeatable": false, "component": "home.platform-scale" },
     "applications": { "type": "component", "repeatable": false, "component": "home.applications" },
+    "app_forge": { "type": "component", "repeatable": false, "component": "home.app-forge" },
     "developer_platform": { "type": "component", "repeatable": false, "component": "home.developer-platform" },
     "ecosystem": { "type": "component", "repeatable": false, "component": "home.ecosystem" },
     "latest_news": { "type": "component", "repeatable": false, "component": "home.latest-news" },

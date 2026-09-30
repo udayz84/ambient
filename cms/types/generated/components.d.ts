@@ -1055,6 +1055,34 @@ export interface HomeAppFeatureCard extends Struct.ComponentSchema {
   };
 }
 
+export interface HomeAppForge extends Struct.ComponentSchema {
+  collectionName: 'components_home_app_forges';
+  info: {
+    description: 'ApplicationForge phone-control section';
+    displayName: 'App Forge';
+  };
+  attributes: {
+    app_store_badge: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    card_badge: Schema.Attribute.String;
+    card_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    card_image_alt: Schema.Attribute.String;
+    card_title: Schema.Attribute.String;
+    cta: Schema.Attribute.Component<'shared.cta', false>;
+    forge_title: Schema.Attribute.String;
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    play_store_badge: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    steps: Schema.Attribute.Component<'model-zoo.forge-step', true>;
+    subtitle: Schema.Attribute.Text;
+    toggle_text: Schema.Attribute.String;
+  };
+}
+
 export interface HomeAppTab extends Struct.ComponentSchema {
   collectionName: 'components_home_app_tabs';
   info: {
@@ -3290,6 +3318,7 @@ declare module '@strapi/strapi' {
       'dvk.spec-card': DvkSpecCard;
       'form.field': FormField;
       'home.app-feature-card': HomeAppFeatureCard;
+      'home.app-forge': HomeAppForge;
       'home.app-tab': HomeAppTab;
       'home.applications': HomeApplications;
       'home.clients': HomeClients;

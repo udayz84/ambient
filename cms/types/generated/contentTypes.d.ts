@@ -911,6 +911,7 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    app_forge: Schema.Attribute.Component<'home.app-forge', false>;
     applications: Schema.Attribute.Component<'home.applications', false>;
     clients: Schema.Attribute.Component<'home.clients', false>;
     createdAt: Schema.Attribute.DateTime;
@@ -1387,6 +1388,7 @@ export interface ApiProductsPageProductsPage extends Struct.SingleTypeSchema {
   };
   attributes: {
     always_on: Schema.Attribute.Component<'products.always-on', false>;
+    app_forge: Schema.Attribute.Component<'home.app-forge', false>;
     architecture: Schema.Attribute.Component<'products.architecture', false>;
     bench_to_volume: Schema.Attribute.Component<
       'products.bench-to-volume',

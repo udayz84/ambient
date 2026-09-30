@@ -23,7 +23,7 @@ export function DeveloperPlatformHeader({ data }: { data?: any }) {
       >
         <h2
           ref={fitRef}
-          className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[18px] w-[604px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-[transparent] not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[18px] justify-self-center bg-clip-text text-center text-[46px] leading-[49px] font-medium text-[transparent] not-italic [word-break:break-word]`}
           style={{
             backgroundImage:
               "linear-gradient(126.324deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
