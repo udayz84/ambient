@@ -3,10 +3,10 @@
 import { gilroyMedium } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFadeIn } from "../shared/useFadeIn";
-import { PARTNERS_FOOTER_CTAS } from "./partners-data";
+import type { FooterCtasContent } from "./partners-content";
 import { GhostGreenCta, PartnersGreenCta } from "./partners-shared";
 
-export function PartnersFooterCtas() {
+export function PartnersFooterCtas({ content }: { content: FooterCtasContent }) {
   const { fadeRef, isVisible } = useFadeIn<HTMLElement>();
   const fadeCls = isVisible ? "animate-hero-text-fade-in opacity-0" : "translate-y-[25px] opacity-0";
 
@@ -26,7 +26,7 @@ export function PartnersFooterCtas() {
             backgroundClip: "text",
           }}
         >
-          {PARTNERS_FOOTER_CTAS.heading.split('. ').map((part, i, arr) => (
+          {content.heading.split('. ').map((part, i, arr) => (
             <span key={i} className="block">
               {part}{i < arr.length - 1 ? "." : ""}
             </span>
@@ -36,11 +36,11 @@ export function PartnersFooterCtas() {
       </div>
 
       <div className="flex flex-col items-center gap-[12px] min-[560px]:flex-row min-[560px]:gap-[20px]">
-        <PartnersGreenCta width="204px" href={PARTNERS_FOOTER_CTAS.primary.href}>
-          {PARTNERS_FOOTER_CTAS.primary.label}
+        <PartnersGreenCta width="204px" href={content.primary.href}>
+          {content.primary.label}
         </PartnersGreenCta>
-        <GhostGreenCta width="204px" href={PARTNERS_FOOTER_CTAS.secondary.href}>
-          {PARTNERS_FOOTER_CTAS.secondary.label}
+        <GhostGreenCta width="204px" href={content.secondary.href}>
+          {content.secondary.label}
         </GhostGreenCta>
       </div>
     </section>

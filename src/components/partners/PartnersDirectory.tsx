@@ -4,13 +4,11 @@ import { useMemo, useState } from "react";
 import { dmMono, gilroyMedium, interMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFadeIn } from "../shared/useFadeIn";
-import {
-  PARTNERS,
-  PARTNER_CAPABILITIES,
-  PARTNER_REGIONS,
-  PARTNERS_DIRECTORY,
-  type Partner,
-} from "./partners-data";
+import type {
+  Capability,
+  DirectoryContent,
+  PartnerEntry,
+} from "./partners-content";
 import {
   PartnersDropdown,
   PartnersGreenCta,
@@ -18,8 +16,6 @@ import {
   PartnersBridgeBox,
   scrollToPartnerSection,
 } from "./partners-shared";
-
-const ALL = "All";
 
 /* ------------------------------------------------------------------ */
 /* Global coverage node map                                            */
@@ -79,7 +75,15 @@ function CoverageMap({ onRegionSelect }: { onRegionSelect: (region: string) => v
 /* Partner card                                                        */
 /* ------------------------------------------------------------------ */
 
-function PartnerCard({ partner }: { partner: Partner }) {
+function PartnerCard({
+  partner,
+  capabilities,
+  connectLabel,
+}: {
+  partner: PartnerEntry;
+  capabilities: Capability[];
+  connectLabel: string;
+}) {
   return (
     <article className="group/card relative flex flex-col border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(21,21,21,0.3)] p-[24px] backdrop-blur-[8px] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-[3px] hover:border-[rgba(83,216,36,0.5)] hover:shadow-[0px_20px_48px_0px_rgba(83,216,36,0.15)]">
       <Corners />
@@ -124,8 +128,8 @@ function PartnerCard({ partner }: { partner: Partner }) {
       <div className="mt-[18px] flex items-end justify-between border-t-[0.5px] border-solid border-[rgba(240,240,240,0.15)] pt-[16px]">
         <p className={`${dmMono.className} text-[10px] leading-[15px] tracking-[0.8px] text-[#8a8a8a] uppercase not-italic`}>
           {
-            PARTNER_CAPABILITIES.find((cap) => cap.id === partner.capability)
-              ?.short
+            capabilities.find((cap) => cap.id === partner.capability)
+              ?.short ?? partner.capability
           }
         </p>
         <a
@@ -136,7 +140,7 @@ function PartnerCard({ partner }: { partner: Partner }) {
           }}
           className={`${interMedium.className} group/connect flex cursor-pointer items-center gap-[8px] text-[12px] leading-[18px] font-medium tracking-[0.36px] whitespace-nowrap text-[#a9e28c] uppercase transition-colors duration-200 hover:text-[#53d824] not-italic`}
         >
-          {PARTNERS_DIRECTORY.connect}
+          {connectLabel}
           <svg
             viewBox="0 0 14 8"
             className="h-[8px] w-[14px] shrink-0 transition-transform duration-200 group-hover/connect:translate-x-[4px]"
@@ -151,7 +155,7 @@ function PartnerCard({ partner }: { partner: Partner }) {
   );
 }
 
-function ExpandingTile() {
+function ExpandingTile({ expanding }: { expanding: DirectoryContent["expanding"] }) {
   return (
     <div className="relative flex min-h-[240px] flex-col items-center justify-center gap-[12px] border-[0.5px] border-dashed border-[rgba(240,240,240,0.25)] bg-[rgba(21,21,21,0.2)] p-[24px] text-center opacity-70 backdrop-blur-[8px]">
       <span className="relative size-[10px]" aria-hidden>
@@ -159,10 +163,10 @@ function ExpandingTile() {
         <span className="absolute inset-[3px] rounded-full bg-[#53d824]" />
       </span>
       <h3 className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium text-[#f0f0f0] not-italic`}>
-        {PARTNERS_DIRECTORY.expanding.title}
+        {expanding.title}
       </h3>
       <p className={`${interRegular.className} max-w-[260px] text-[13px] leading-[19.5px] font-normal text-[#8a8a8a] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
-        {PARTNERS_DIRECTORY.expanding.description}
+        {expanding.description}
       </p>
     </div>
   );
@@ -172,26 +176,35 @@ function ExpandingTile() {
 /* Directory section                                                   */
 /* ------------------------------------------------------------------ */
 
-export function PartnersDirectory() {
+export function PartnersDirectory({
+  content,
+  capabilities,
+  regions,
+}: {
+  content: DirectoryContent;
+  capabilities: Capability[];
+  regions: string[];
+}) {
   const { fadeRef, isVisible } = useFadeIn<HTMLElement>();
   const fadeCls = isVisible ? "animate-hero-text-fade-in opacity-0" : "translate-y-[25px] opacity-0";
+  const ALL = content.filters.all;
   const [capabilityFilter, setCapabilityFilter] = useState(ALL);
   const [regionFilter, setRegionFilter] = useState(ALL);
 
-  const capabilityOptions = [ALL, ...PARTNER_CAPABILITIES.map((c) => c.short)];
-  const regionOptions = [ALL, ...PARTNER_REGIONS];
+  const capabilityOptions = [ALL, ...capabilities.map((c) => c.short)];
+  const regionOptions = [ALL, ...regions];
 
   const filtered = useMemo(
     () =>
-      PARTNERS.filter((p) => {
+      content.partners.filter((p) => {
         const capMatch =
           capabilityFilter === ALL ||
-          PARTNER_CAPABILITIES.find((c) => c.id === p.capability)?.short ===
-            capabilityFilter;
+          (capabilities.find((c) => c.id === p.capability)?.short ??
+            p.capability) === capabilityFilter;
         const regionMatch = regionFilter === ALL || p.region === regionFilter;
         return capMatch && regionMatch;
       }),
-    [capabilityFilter, regionFilter],
+    [capabilityFilter, regionFilter, content.partners, capabilities, ALL],
   );
 
   return (
@@ -202,12 +215,12 @@ export function PartnersDirectory() {
       aria-label="Partner directory and global coverage"
     >
       <div className="relative flex flex-col items-center gap-[16px] px-[10px]">
-        <PartnersSectionHeading deg="101.272deg">{PARTNERS_DIRECTORY.heading}</PartnersSectionHeading>
+        <PartnersSectionHeading deg="101.272deg">{content.heading}</PartnersSectionHeading>
         <Corners />
       </div>
 
       <p className={`${interRegular.className} max-w-[720px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
-        {PARTNERS_DIRECTORY.subheading}
+        {content.subheading}
       </p>
 
       <CoverageMap
@@ -217,14 +230,14 @@ export function PartnersDirectory() {
       {/* filters */}
       <div className="flex w-full flex-col gap-[12px] min-[1024px]:flex-row min-[1024px]:gap-[20px]">
         <PartnersDropdown
-          label={PARTNERS_DIRECTORY.filters.capability}
+          label={content.filters.capability}
           options={capabilityOptions}
           value={capabilityFilter === ALL ? "" : capabilityFilter}
           onChange={(v) => setCapabilityFilter(v || ALL)}
           className="min-[1024px]:w-[300px]"
         />
         <PartnersDropdown
-          label={PARTNERS_DIRECTORY.filters.region}
+          label={content.filters.region}
           options={regionOptions}
           value={regionFilter === ALL ? "" : regionFilter}
           onChange={(v) => setRegionFilter(v || ALL)}
@@ -232,7 +245,7 @@ export function PartnersDirectory() {
         />
         <div className="flex flex-1 items-center justify-start min-[1024px]:justify-end">
           <p className={`${dmMono.className} text-[11px] leading-[16px] tracking-[1px] text-[#8a8a8a] uppercase not-italic`}>
-            {filtered.length} of {PARTNERS.length} partners
+            {filtered.length} of {content.partners.length} partners
           </p>
         </div>
       </div>
@@ -240,30 +253,35 @@ export function PartnersDirectory() {
       {/* grid */}
       <div id="partner-grid" className="grid w-full scroll-mt-[160px] grid-cols-1 gap-[20px] min-[700px]:grid-cols-2 min-[1024px]:grid-cols-3">
         {filtered.map((partner) => (
-          <PartnerCard key={partner.name} partner={partner} />
+          <PartnerCard
+            key={partner.name}
+            partner={partner}
+            capabilities={capabilities}
+            connectLabel={content.connect}
+          />
         ))}
 
         {filtered.length === 0 ? (
           <div className="relative col-span-full flex flex-col items-center gap-[20px] border-[0.5px] border-dashed border-[rgba(240,240,240,0.25)] bg-[rgba(21,21,21,0.2)] px-[24px] py-[56px] text-center backdrop-blur-[8px]">
             <p className={`${gilroyMedium.className} max-w-[480px] text-[20px] leading-[28px] font-medium text-[#f0f0f0] [word-break:break-word] not-italic min-[1024px]:text-[22px]`}>
-              {PARTNERS_DIRECTORY.noMatch.message}
+              {content.noMatch.message}
             </p>
             <PartnersGreenCta
               width="220px"
-              href="#get-matched"
+              href={content.noMatch.cta.href}
               onClick={() => scrollToPartnerSection("get-matched")}
             >
-              {PARTNERS_DIRECTORY.noMatch.cta.label}
+              {content.noMatch.cta.label}
             </PartnersGreenCta>
           </div>
         ) : (
-          <ExpandingTile />
+          <ExpandingTile expanding={content.expanding} />
         )}
       </div>
 
       {/* bridge line */}
       <PartnersBridgeBox className="mt-[16px]">
-        {PARTNERS_DIRECTORY.bridge}
+        {content.bridge}
       </PartnersBridgeBox>
     </section>
   );

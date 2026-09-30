@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_partners_become_benefits",
+  "info": {
+    "displayName": "Become Benefit",
+    "description": "Partners “Become a Partner” benefit — icon stays hardcoded in the frontend"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

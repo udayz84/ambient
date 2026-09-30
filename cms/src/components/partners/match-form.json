@@ -1,0 +1,53 @@
+{
+  "collectionName": "components_partners_match_forms",
+  "info": {
+    "displayName": "Match Form",
+    "description": "Partners “Get Matched” section"
+  },
+  "options": {},
+  "attributes": {
+    "tag": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.tag"
+    },
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subheading": {
+      "type": "text"
+    },
+    "submit_label": {
+      "type": "string",
+      "required": true
+    },
+    "confirmation": {
+      "type": "string"
+    },
+    "email_hint": {
+      "type": "text"
+    },
+    "first_name_label": {
+      "type": "string"
+    },
+    "last_name_label": {
+      "type": "string"
+    },
+    "company_label": {
+      "type": "string"
+    },
+    "email_label": {
+      "type": "string"
+    },
+    "region_label": {
+      "type": "string"
+    },
+    "help_areas_label": {
+      "type": "string"
+    },
+    "message_label": {
+      "type": "string"
+    }
+  }
+}

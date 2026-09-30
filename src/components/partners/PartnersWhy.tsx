@@ -3,7 +3,7 @@
 import { interRegular, gilroyMedium } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFadeIn } from "../shared/useFadeIn";
-import { PARTNERS_WHY } from "./partners-data";
+import type { WhyContent } from "./partners-content";
 import { PartnersSectionHeading } from "./partners-shared";
 
 const WHY_CARD_BG = "rgba(0,0,0,0.2)";
@@ -89,13 +89,13 @@ function WhyCard({ step }: { step: any }) {
   );
 }
 
-export function PartnersWhy() {
+export function PartnersWhy({ content }: { content: WhyContent }) {
   const { fadeRef, isVisible } = useFadeIn<HTMLElement>();
   const fadeCls = isVisible
     ? "animate-hero-text-fade-in opacity-0"
     : "translate-y-[25px] opacity-0";
 
-  const journey = PARTNERS_WHY.journey;
+  const journey = content.journey;
 
   return (
     <section
@@ -104,6 +104,8 @@ export function PartnersWhy() {
       aria-label="A production AI product is a full-stack challenge"
     >
       <div className="relative flex flex-col items-center gap-[16px] px-[24px]">
+        {/* Heading kept hardcoded: the two-line split is part of the design
+            (the CMS string field cannot carry the line break). */}
         <PartnersSectionHeading
           deg="124.568deg"
           className="flex flex-col items-center !whitespace-normal"
@@ -117,7 +119,7 @@ export function PartnersWhy() {
       <p
         className={`${interRegular.className} max-w-[860px] px-[24px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
       >
-        {PARTNERS_WHY.subheading}
+        {content.subheading}
       </p>
 
       {/* Cards container — 5 in a row on desktop */}
@@ -137,7 +139,7 @@ export function PartnersWhy() {
       <p
         className={`${interRegular.className} max-w-[980px] px-[24px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px]`}
       >
-        {PARTNERS_WHY.body}
+        {content.body}
       </p>
     </section>
   );

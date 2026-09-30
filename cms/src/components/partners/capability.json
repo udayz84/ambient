@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_partners_capability_cards",
+  "info": {
+    "displayName": "Capability",
+    "description": "Partner capability category — short is the join key used by directory partners, filters and forms"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "short": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

@@ -4,12 +4,8 @@ import { useState } from "react";
 import { interLight, interRegular, gilroyMedium } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFadeIn } from "../shared/useFadeIn";
-import {
-  PARTNER_CAPABILITIES,
-  PARTNER_REGIONS,
-  PARTNERS_MATCH,
-  isCasualEmailDomain,
-} from "./partners-data";
+import { isCasualEmailDomain } from "./partners-data";
+import type { Capability, MatchFormContent } from "./partners-content";
 import {
   AmbientPulse,
   PartnersDropdown,
@@ -48,7 +44,15 @@ function FieldLabel({ children, htmlFor }: { children: React.ReactNode; htmlFor:
   );
 }
 
-export function PartnersMatchForm() {
+export function PartnersMatchForm({
+  content,
+  capabilities,
+  regions,
+}: {
+  content: MatchFormContent;
+  capabilities: Capability[];
+  regions: string[];
+}) {
   const { fadeRef, isVisible } = useFadeIn<HTMLElement>();
   const fadeCls = isVisible ? "animate-hero-text-fade-in opacity-0" : "translate-y-[25px] opacity-0";
 
@@ -70,7 +74,7 @@ export function PartnersMatchForm() {
     if (!form.firstName.trim() || !form.lastName.trim()) return "Please enter your first and last name.";
     if (!form.company.trim()) return "Please enter your company.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) return "Please enter a valid email address.";
-    if (isCasualEmailDomain(form.email.trim())) return PARTNERS_MATCH.emailHint;
+    if (isCasualEmailDomain(form.email.trim())) return content.emailHint;
     if (!form.region) return "Please select your region.";
     return "";
   };
@@ -117,12 +121,12 @@ export function PartnersMatchForm() {
       aria-label="Get matched with a partner"
     >
       <div className="relative flex flex-col items-center gap-[16px] px-[10px]">
-        <PartnersSectionHeading deg="119.522deg">{PARTNERS_MATCH.heading}</PartnersSectionHeading>
+        <PartnersSectionHeading deg="119.522deg">{content.heading}</PartnersSectionHeading>
         <Corners />
       </div>
 
       <p className={`${interRegular.className} max-w-[720px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
-        {PARTNERS_MATCH.subheading}
+        {content.subheading}
       </p>
 
       <div className="relative w-full max-w-[760px] bg-[rgba(46,119,20,0.14)] backdrop-blur-[8px]">
@@ -132,7 +136,7 @@ export function PartnersMatchForm() {
           <div className="flex min-h-[420px] animate-hero-text-fade-in transform-gpu flex-col items-center justify-center gap-[20px] px-[32px] py-[56px] text-center">
             <AmbientPulse />
             <p className={`${gilroyMedium.className} max-w-[420px] text-[24px] leading-[32px] font-medium text-white [word-break:break-word] not-italic`}>
-              {PARTNERS_MATCH.confirmation}
+              {content.confirmation}
             </p>
             <button
               type="button"
@@ -150,25 +154,25 @@ export function PartnersMatchForm() {
           <div className="flex flex-col gap-[24px] p-[32px] min-[1024px]:p-[40px]">
             <div className="grid grid-cols-1 gap-[20px] min-[560px]:grid-cols-2">
               <div className="flex flex-col gap-[5px]">
-                <FieldLabel htmlFor="pm-first-name">{PARTNERS_MATCH.fields.firstName}</FieldLabel>
+                <FieldLabel htmlFor="pm-first-name">{content.fields.firstName}</FieldLabel>
                 <div className={inputBoxClass}>
                   <input id="pm-first-name" className={inputClass} value={form.firstName} onChange={(e) => set("firstName")(e.target.value)} autoComplete="given-name" />
                 </div>
               </div>
               <div className="flex flex-col gap-[5px]">
-                <FieldLabel htmlFor="pm-last-name">{PARTNERS_MATCH.fields.lastName}</FieldLabel>
+                <FieldLabel htmlFor="pm-last-name">{content.fields.lastName}</FieldLabel>
                 <div className={inputBoxClass}>
                   <input id="pm-last-name" className={inputClass} value={form.lastName} onChange={(e) => set("lastName")(e.target.value)} autoComplete="family-name" />
                 </div>
               </div>
               <div className="flex flex-col gap-[5px]">
-                <FieldLabel htmlFor="pm-company">{PARTNERS_MATCH.fields.company}</FieldLabel>
+                <FieldLabel htmlFor="pm-company">{content.fields.company}</FieldLabel>
                 <div className={inputBoxClass}>
                   <input id="pm-company" className={inputClass} value={form.company} onChange={(e) => set("company")(e.target.value)} autoComplete="organization" />
                 </div>
               </div>
               <div className="flex flex-col gap-[5px]">
-                <FieldLabel htmlFor="pm-email">{PARTNERS_MATCH.fields.email}</FieldLabel>
+                <FieldLabel htmlFor="pm-email">{content.fields.email}</FieldLabel>
                 <div className={inputBoxClass}>
                   <input id="pm-email" type="email" className={inputClass} value={form.email} onChange={(e) => set("email")(e.target.value)} autoComplete="email" />
                 </div>
@@ -177,11 +181,11 @@ export function PartnersMatchForm() {
 
             <div className="flex flex-col gap-[5px]">
               <span className={`${interLight.className} w-full shrink-0 text-[10px] leading-[15px] font-light text-white not-italic [word-break:break-word]`}>
-                {PARTNERS_MATCH.fields.region}
+                {content.fields.region}
               </span>
               <PartnersDropdown
-                label={PARTNERS_MATCH.fields.region}
-                options={[...PARTNER_REGIONS]}
+                label={content.fields.region}
+                options={[...regions]}
                 value={form.region}
                 onChange={set("region")}
                 id="pm-region"
@@ -190,10 +194,10 @@ export function PartnersMatchForm() {
 
             <div className="flex flex-col gap-[10px]">
               <span className={`${interLight.className} w-full shrink-0 text-[10px] leading-[15px] font-light text-white not-italic [word-break:break-word]`}>
-                {PARTNERS_MATCH.fields.helpAreas}
+                {content.fields.helpAreas}
               </span>
               <div className="flex flex-wrap gap-[8px]">
-                {PARTNER_CAPABILITIES.map((cap) => {
+                {capabilities.map((cap) => {
                   const active = helpAreas.includes(cap.short);
                   return (
                     <button
@@ -215,7 +219,7 @@ export function PartnersMatchForm() {
             </div>
 
             <div className="flex flex-col gap-[5px]">
-              <FieldLabel htmlFor="pm-message">{PARTNERS_MATCH.fields.message}</FieldLabel>
+              <FieldLabel htmlFor="pm-message">{content.fields.message}</FieldLabel>
               <div className={`${inputBoxClass} min-h-[120px]`}>
                 <textarea id="pm-message" className={`${inputClass} h-full resize-none`} rows={4} value={form.message} onChange={(e) => set("message")(e.target.value)} />
               </div>
@@ -227,12 +231,12 @@ export function PartnersMatchForm() {
               </p>
             ) : (
               <p className={`${interRegular.className} text-[12px] leading-[18px] font-normal text-[#8a8a8a] [word-break:break-word]`}>
-                {PARTNERS_MATCH.emailHint}
+                {content.emailHint}
               </p>
             )}
 
             <PartnersGreenCta onClick={onSubmit} loading={loading} className="w-full">
-              {PARTNERS_MATCH.submitLabel}
+              {content.submitLabel}
             </PartnersGreenCta>
           </div>
         )}

@@ -3,10 +3,10 @@
 import { interRegular, gilroyMedium } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFadeIn } from "../shared/useFadeIn";
-import { PARTNERS_PROOF } from "./partners-data";
+import type { ProofContent } from "./partners-content";
 import { GhostGreenCta, PartnersGreenCta, PartnersSectionHeading } from "./partners-shared";
 
-function ProofMarker({ icon }: { icon: string }) {
+function ProofMarker({ icon }: { icon?: string }) {
   return (
     <span className="relative flex size-[32px] shrink-0 items-center justify-center" aria-hidden>
       <span className="absolute inset-0 border-[0.5px] border-solid border-[rgba(83,216,36,0.6)] bg-[rgba(83,216,36,0.1)]" />
@@ -15,7 +15,7 @@ function ProofMarker({ icon }: { icon: string }) {
   );
 }
 
-export function PartnersProof() {
+export function PartnersProof({ content }: { content: ProofContent }) {
   const { fadeRef, isVisible } = useFadeIn<HTMLElement>();
   const fadeCls = isVisible ? "animate-hero-text-fade-in opacity-0" : "translate-y-[25px] opacity-0";
 
@@ -26,20 +26,20 @@ export function PartnersProof() {
       aria-label="GPX-native proof"
     >
       <div className="relative flex flex-col items-center gap-[16px] px-[10px]">
-        <PartnersSectionHeading deg="119.522deg">{PARTNERS_PROOF.heading}</PartnersSectionHeading>
+        <PartnersSectionHeading deg="119.522deg">{content.heading}</PartnersSectionHeading>
         <Corners />
       </div>
 
       <p className={`${interRegular.className} max-w-[720px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
-        {PARTNERS_PROOF.subheading}
+        {content.subheading}
       </p>
 
       {/* proof band */}
       <div className="relative grid w-full grid-cols-1 border-[0.5px] border-solid border-[rgba(83,216,36,0.25)] bg-[rgba(46,119,20,0.08)] backdrop-blur-[8px] min-[1024px]:grid-cols-4 min-[1024px]:divide-x min-[1024px]:divide-[rgba(83,216,36,0.2)]">
         <Corners />
-        {PARTNERS_PROOF.points.map((point) => (
+        {content.points.map((point) => (
           <div key={point.title} className="flex min-h-[220px] flex-col items-start gap-[14px] p-[28px] max-[1023px]:border-b max-[1023px]:border-solid max-[1023px]:border-[rgba(83,216,36,0.2)] max-[1023px]:last:border-b-0">
-            <ProofMarker icon={(point as any).icon} />
+            <ProofMarker icon={point.icon} />
             <h3 className={`${gilroyMedium.className} w-full text-[20px] leading-[26px] font-medium text-white [word-break:break-word] not-italic min-[1024px]:text-[22px] min-[1024px]:leading-[28px]`}>
               {point.title}
             </h3>
@@ -51,11 +51,11 @@ export function PartnersProof() {
       </div>
 
       <div className="flex flex-wrap items-center justify-center gap-[16px]">
-        <PartnersGreenCta href={PARTNERS_PROOF.links[0].href}>
-          {PARTNERS_PROOF.links[0].label}
+        <PartnersGreenCta href={content.links[0].href}>
+          {content.links[0].label}
         </PartnersGreenCta>
-        <GhostGreenCta href={PARTNERS_PROOF.links[1].href}>
-          {PARTNERS_PROOF.links[1].label}
+        <GhostGreenCta href={content.links[1].href}>
+          {content.links[1].label}
         </GhostGreenCta>
       </div>
     </section>

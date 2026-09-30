@@ -4,16 +4,24 @@ import Image from "next/image";
 import { TagBadge } from "../hero/TagBadge";
 import { Corners } from "../shared/Corners";
 import { gilroyMedium, interRegular } from "../hero/fonts";
-import { PARTNERS_HERO } from "./partners-data";
+import type { HeroContent } from "./partners-content";
 import { GhostGreenCta, PartnersGreenCta } from "./partners-shared";
 
 /**
  * Ecosystem constellation visual (static image, 4:3 — 1700x1275 source).
+ * Served from Strapi when the hero image is set there; otherwise the local
+ * hardcoded asset (visually identical upload).
  */
-function Constellation({ className = "" }: { className?: string }) {
+function Constellation({
+  src,
+  className = "",
+}: {
+  src: string;
+  className?: string;
+}) {
   return (
     <Image
-      src="/partners/hero-constellation.png"
+      src={src}
       alt="GPX partner ecosystem constellation — AI, firmware, hardware, ODM, EMS and SI partners connected to the central CubicCore chip"
       width={1480}
       height={1110}
@@ -24,8 +32,9 @@ function Constellation({ className = "" }: { className?: string }) {
   );
 }
 
-export function PartnersHero() {
-  const { tag, title, subtitle, primaryCta, secondaryCta } = PARTNERS_HERO;
+export function PartnersHero({ content }: { content: HeroContent }) {
+  const { tag, title, subtitle, primaryCta, secondaryCta, image } = content;
+  const constellationSrc = image ?? "/partners/hero-constellation.png";
 
   return (
     <section
@@ -91,7 +100,7 @@ export function PartnersHero() {
 
             <div className="pointer-events-none absolute top-1/2 right-[24px] w-[640px] -translate-y-1/2">
               <div className="animate-hero-text-fade-in transform-gpu [animation-delay:0.15s]">
-                <Constellation className="h-auto w-full" />
+                <Constellation src={constellationSrc} className="h-auto w-full" />
               </div>
             </div>
           </div>
@@ -123,7 +132,7 @@ export function PartnersHero() {
 
         <div className="pointer-events-none relative z-0 mt-[8px] w-full animate-hero-text-fade-in transform-gpu [animation-delay:0.15s]">
           <div className="mx-auto w-full max-w-[520px]">
-            <Constellation />
+            <Constellation src={constellationSrc} />
           </div>
         </div>
 

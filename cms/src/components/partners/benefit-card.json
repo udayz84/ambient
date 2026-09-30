@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_partners_benefit_cards",
+  "info": {
+    "displayName": "Benefit Card",
+    "description": "Partners benefit card — icon stays hardcoded in the frontend"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

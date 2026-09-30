@@ -5,12 +5,8 @@ import { dmMono, interLight, interRegular, gilroyMedium } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { TagBadge } from "../hero/TagBadge";
 import { useFadeIn } from "../shared/useFadeIn";
-import {
-  PARTNER_CAPABILITIES,
-  PARTNER_REGIONS,
-  PARTNERS_BECOME,
-  isCasualEmailDomain,
-} from "./partners-data";
+import { isCasualEmailDomain } from "./partners-data";
+import type { BecomeContent, Capability } from "./partners-content";
 import {
   AmbientPulse,
   GhostGreenCta,
@@ -50,12 +46,20 @@ function FieldLabel({ children, htmlFor }: { children: React.ReactNode; htmlFor:
   );
 }
 
-export function PartnersBecome() {
+export function PartnersBecome({
+  content,
+  capabilities,
+  regions,
+}: {
+  content: BecomeContent;
+  capabilities: Capability[];
+  regions: string[];
+}) {
   const { fadeRef, isVisible } = useFadeIn<HTMLDivElement>();
   const fadeCls = isVisible ? "animate-hero-text-fade-in opacity-0" : "translate-y-[25px] opacity-0";
 
   const [form, setForm] = useState<ApplyState>(INITIAL_APPLY);
-  const [capabilities, setCapabilities] = useState<string[]>([]);
+  const [selectedCapabilities, setSelectedCapabilities] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -64,7 +68,7 @@ export function PartnersBecome() {
     setForm((prev) => ({ ...prev, [key]: value }));
 
   const toggleCapability = (short: string) =>
-    setCapabilities((prev) =>
+    setSelectedCapabilities((prev) =>
       prev.includes(short) ? prev.filter((s) => s !== short) : [...prev, short],
     );
 
@@ -74,7 +78,7 @@ export function PartnersBecome() {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) return setError("Please enter a valid work email address.");
     if (isCasualEmailDomain(form.email.trim())) return setError("Please use your work email — personal email domains are blocked.");
     if (!form.region) return setError("Please select your region.");
-    if (capabilities.length === 0) return setError("Please select at least one capability area.");
+    if (selectedCapabilities.length === 0) return setError("Please select at least one capability area.");
     setError("");
     setLoading(true);
     try {
@@ -87,7 +91,7 @@ export function PartnersBecome() {
           website: form.website.trim(),
           email: form.email.trim(),
           region: form.region,
-          capabilities,
+          capabilities: selectedCapabilities,
           experience: form.experience.trim(),
         }),
       });
@@ -139,7 +143,7 @@ export function PartnersBecome() {
       >
         {/* ---------- header ---------- */}
         <div className="flex flex-col items-center gap-[24px]">
-          <TagBadge label={PARTNERS_BECOME.tag} width={176} labelOffsetX={0} rightBarLeft={167} centerLabel />
+          <TagBadge label={content.tag} width={176} labelOffsetX={0} rightBarLeft={167} centerLabel />
           <h2
             className={`${gilroyMedium.className} max-w-[760px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent [word-break:break-word] not-italic max-[1023px]:text-[28px] max-[1023px]:leading-[34px]`}
             style={{
@@ -149,16 +153,16 @@ export function PartnersBecome() {
               backgroundClip: "text",
             }}
           >
-            {PARTNERS_BECOME.heading}
+            {content.heading}
           </h2>
           <p className={`${interRegular.className} max-w-[660px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
-            {PARTNERS_BECOME.subheading}
+            {content.subheading}
           </p>
         </div>
 
         {/* ---------- what partners get ---------- */}
         <div className="grid w-full grid-cols-1 gap-[20px] min-[1024px]:grid-cols-3">
-          {PARTNERS_BECOME.benefits.map((benefit) => (
+          {content.benefits.map((benefit) => (
             <article
               key={benefit.title}
               className="group relative flex min-h-[250px] flex-col items-start justify-between border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(21,21,21,0.3)] p-[28px] backdrop-blur-[8px] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-[4px] hover:border-[rgba(83,216,36,0.5)] hover:shadow-[0px_20px_48px_0px_rgba(83,216,36,0.15)]"
@@ -183,10 +187,10 @@ export function PartnersBecome() {
         <div className="relative flex w-full max-w-[900px] flex-col items-center gap-[18px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(21,21,21,0.3)] px-[32px] py-[28px] text-center backdrop-blur-[8px]">
           <Corners />
           <h3 className={`${gilroyMedium.className} text-[20px] leading-[26px] font-medium text-white not-italic [word-break:break-word] min-[1024px]:text-[22px] min-[1024px]:leading-[28px]`}>
-            {PARTNERS_BECOME.lookingFor.title}
+            {content.lookingFor.title}
           </h3>
           <div className="flex flex-wrap items-center justify-center gap-[8px]">
-            {PARTNERS_BECOME.lookingFor.chips.map((chip) => (
+            {content.lookingFor.chips.map((chip) => (
               <span
                 key={chip}
                 className={`${dmMono.className} inline-flex h-[26px] items-center gap-[7px] border-[0.5px] border-solid border-[rgba(83,216,36,0.35)] bg-[rgba(83,216,36,0.08)] px-[10px] text-[11px] leading-[16px] tracking-[0.44px] whitespace-nowrap text-[#a9e28c] uppercase not-italic`}
@@ -197,7 +201,7 @@ export function PartnersBecome() {
             ))}
           </div>
           <p className={`${interRegular.className} max-w-[720px] text-[13px] leading-[19.5px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
-            {PARTNERS_BECOME.lookingFor.description}
+            {content.lookingFor.description}
           </p>
         </div>
 
@@ -207,7 +211,7 @@ export function PartnersBecome() {
           <div className="relative flex flex-col gap-[20px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(21,21,21,0.3)] p-[32px] backdrop-blur-[8px] min-[1024px]:sticky min-[1024px]:top-[110px]">
             <Corners />
             <h3 className={`${gilroyMedium.className} text-[26px] leading-[34px] font-medium text-white [word-break:break-word] not-italic`}>
-              {PARTNERS_BECOME.form.title}
+              {content.form.title}
             </h3>
             <p className={`${interRegular.className} text-[15px] leading-[24px] font-normal text-[#f0f0f0] opacity-75 [word-break:break-word] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
               Frictionless by design — share a few details and our partnerships
@@ -229,8 +233,8 @@ export function PartnersBecome() {
                 </div>
               ))}
             </div>
-            <GhostGreenCta href={PARTNERS_BECOME.secondaryCta.href} className="w-full">
-              {PARTNERS_BECOME.secondaryCta.label}
+            <GhostGreenCta href={content.secondaryCta.href} className="w-full">
+              {content.secondaryCta.label}
             </GhostGreenCta>
           </div>
 
@@ -241,14 +245,14 @@ export function PartnersBecome() {
               <div className="flex min-h-[420px] animate-hero-text-fade-in transform-gpu flex-col items-center justify-center gap-[20px] px-[32px] py-[56px] text-center">
                 <AmbientPulse />
                 <p className={`${gilroyMedium.className} max-w-[420px] text-[24px] leading-[32px] font-medium text-white [word-break:break-word] not-italic`}>
-                  {PARTNERS_BECOME.form.confirmation}
+                  {content.form.confirmation}
                 </p>
                 <button
                   type="button"
                   onClick={() => {
                     setSubmitted(false);
                     setForm(INITIAL_APPLY);
-                    setCapabilities([]);
+                    setSelectedCapabilities([]);
                   }}
                   className={`${interRegular.className} cursor-pointer border-b border-[rgba(169,226,140,0.5)] text-[13px] leading-[21px] font-normal text-[#a9e28c] transition-colors duration-200 hover:text-[#53d824] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
                 >
@@ -259,25 +263,25 @@ export function PartnersBecome() {
               <div className="flex flex-col gap-[24px] p-[32px] min-[1024px]:p-[40px]">
                 <div className="grid grid-cols-1 gap-[20px] min-[560px]:grid-cols-2">
                   <div className="flex flex-col gap-[5px]">
-                    <FieldLabel htmlFor="pa-name">{PARTNERS_BECOME.form.name}</FieldLabel>
+                    <FieldLabel htmlFor="pa-name">{content.form.name}</FieldLabel>
                     <div className={inputBox}>
                       <input id="pa-name" className={inputCls} value={form.name} onChange={(e) => set("name")(e.target.value)} autoComplete="name" />
                     </div>
                   </div>
                   <div className="flex flex-col gap-[5px]">
-                    <FieldLabel htmlFor="pa-company">{PARTNERS_BECOME.form.company}</FieldLabel>
+                    <FieldLabel htmlFor="pa-company">{content.form.company}</FieldLabel>
                     <div className={inputBox}>
                       <input id="pa-company" className={inputCls} value={form.company} onChange={(e) => set("company")(e.target.value)} autoComplete="organization" />
                     </div>
                   </div>
                   <div className="flex flex-col gap-[5px]">
-                    <FieldLabel htmlFor="pa-website">{PARTNERS_BECOME.form.website}</FieldLabel>
+                    <FieldLabel htmlFor="pa-website">{content.form.website}</FieldLabel>
                     <div className={inputBox}>
                       <input id="pa-website" type="url" placeholder="https://" className={inputCls} value={form.website} onChange={(e) => set("website")(e.target.value)} />
                     </div>
                   </div>
                   <div className="flex flex-col gap-[5px]">
-                    <FieldLabel htmlFor="pa-email">{PARTNERS_BECOME.form.email}</FieldLabel>
+                    <FieldLabel htmlFor="pa-email">{content.form.email}</FieldLabel>
                     <div className={inputBox}>
                       <input id="pa-email" type="email" className={inputCls} value={form.email} onChange={(e) => set("email")(e.target.value)} autoComplete="email" />
                     </div>
@@ -286,11 +290,11 @@ export function PartnersBecome() {
 
                 <div className="flex flex-col gap-[5px]">
                   <span className={`${interLight.className} w-full shrink-0 text-[10px] leading-[15px] font-light text-white not-italic`}>
-                    {PARTNERS_BECOME.form.region}
+                    {content.form.region}
                   </span>
                   <PartnersDropdown
-                    label={PARTNERS_BECOME.form.region}
-                    options={[...PARTNER_REGIONS]}
+                    label={content.form.region}
+                    options={[...regions]}
                     value={form.region}
                     onChange={set("region")}
                     id="pa-region"
@@ -299,11 +303,11 @@ export function PartnersBecome() {
 
                 <div className="flex flex-col gap-[10px]">
                   <span className={`${interLight.className} w-full shrink-0 text-[10px] leading-[15px] font-light text-white not-italic`}>
-                    {PARTNERS_BECOME.form.capabilities}
+                    {content.form.capabilities}
                   </span>
                   <div className="flex flex-wrap gap-[8px]">
-                    {PARTNER_CAPABILITIES.map((cap) => {
-                      const active = capabilities.includes(cap.short);
+                    {capabilities.map((cap) => {
+                      const active = selectedCapabilities.includes(cap.short);
                       return (
                         <button
                           key={cap.id}
@@ -324,7 +328,7 @@ export function PartnersBecome() {
                 </div>
 
                 <div className="flex flex-col gap-[5px]">
-                  <FieldLabel htmlFor="pa-experience">{PARTNERS_BECOME.form.experience}</FieldLabel>
+                  <FieldLabel htmlFor="pa-experience">{content.form.experience}</FieldLabel>
                   <div className={`${inputBox} min-h-[120px]`}>
                     <textarea id="pa-experience" className={`${inputCls} h-full resize-none`} rows={4} value={form.experience} onChange={(e) => set("experience")(e.target.value)} />
                   </div>
@@ -337,7 +341,7 @@ export function PartnersBecome() {
                 ) : null}
 
                 <PartnersGreenCta onClick={onSubmit} loading={loading} className="w-full min-[560px]:w-[280px]">
-                  {PARTNERS_BECOME.form.submit}
+                  {content.form.submit}
                 </PartnersGreenCta>
               </div>
             )}

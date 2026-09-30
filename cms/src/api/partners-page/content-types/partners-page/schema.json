@@ -1,0 +1,66 @@
+{
+  "kind": "singleType",
+  "collectionName": "partners_pages",
+  "info": {
+    "singularName": "partners-page",
+    "pluralName": "partners-pages",
+    "displayName": "Partners Page",
+    "description": "Partners ecosystem page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hero": {
+      "type": "component",
+      "component": "partners.hero",
+      "repeatable": false
+    },
+    "why": {
+      "type": "component",
+      "component": "partners.why",
+      "repeatable": false
+    },
+    "benefits": {
+      "type": "component",
+      "component": "partners.benefits",
+      "repeatable": false
+    },
+    "capabilities": {
+      "type": "component",
+      "component": "partners.capabilities",
+      "repeatable": false
+    },
+    "proof": {
+      "type": "component",
+      "component": "partners.proof",
+      "repeatable": false
+    },
+    "directory": {
+      "type": "component",
+      "component": "partners.directory",
+      "repeatable": false
+    },
+    "match_form": {
+      "type": "component",
+      "component": "partners.match-form",
+      "repeatable": false
+    },
+    "become": {
+      "type": "component",
+      "component": "partners.become",
+      "repeatable": false
+    },
+    "footer_ctas": {
+      "type": "component",
+      "component": "partners.footer-ctas",
+      "repeatable": false
+    },
+    "seo": {
+      "type": "component",
+      "component": "shared.seo",
+      "repeatable": false
+    }
+  }
+}

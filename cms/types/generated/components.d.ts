@@ -1680,6 +1680,256 @@ export interface NewsPressMenu extends Struct.ComponentSchema {
   };
 }
 
+export interface PartnersBecome extends Struct.ComponentSchema {
+  collectionName: 'components_partners_becomes';
+  info: {
+    description: 'Partners \u201CBecome a Partner\u201D section';
+    displayName: 'Become';
+  };
+  attributes: {
+    benefits: Schema.Attribute.Component<'partners.become-benefit', true>;
+    form_capabilities_label: Schema.Attribute.String;
+    form_company_label: Schema.Attribute.String;
+    form_confirmation: Schema.Attribute.String;
+    form_email_label: Schema.Attribute.String;
+    form_experience_label: Schema.Attribute.String;
+    form_name_label: Schema.Attribute.String;
+    form_region_label: Schema.Attribute.String;
+    form_submit_label: Schema.Attribute.String;
+    form_title: Schema.Attribute.String;
+    form_website_label: Schema.Attribute.String;
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    looking_for_chips: Schema.Attribute.Component<'shared.tag', true>;
+    looking_for_description: Schema.Attribute.Text;
+    looking_for_title: Schema.Attribute.String;
+    secondary_cta: Schema.Attribute.Component<'shared.button', false>;
+    subheading: Schema.Attribute.Text;
+    tag: Schema.Attribute.Component<'shared.tag', false>;
+  };
+}
+
+export interface PartnersBecomeBenefit extends Struct.ComponentSchema {
+  collectionName: 'components_partners_become_benefits';
+  info: {
+    description: 'Partners \u201CBecome a Partner\u201D benefit \u2014 icon stays hardcoded in the frontend';
+    displayName: 'Become Benefit';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface PartnersBenefitCard extends Struct.ComponentSchema {
+  collectionName: 'components_partners_benefit_cards';
+  info: {
+    description: 'Partners benefit card \u2014 icon stays hardcoded in the frontend';
+    displayName: 'Benefit Card';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface PartnersBenefits extends Struct.ComponentSchema {
+  collectionName: 'components_partners_benefits';
+  info: {
+    description: 'Partners \u201CThe Payoff\u201D section';
+    displayName: 'Benefits';
+  };
+  attributes: {
+    bridge: Schema.Attribute.String;
+    cards: Schema.Attribute.Component<'partners.benefit-card', true>;
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    subheading: Schema.Attribute.Text;
+    tag: Schema.Attribute.Component<'shared.tag', false>;
+  };
+}
+
+export interface PartnersCapabilities extends Struct.ComponentSchema {
+  collectionName: 'components_partners_capabilities';
+  info: {
+    description: 'Partners \u201CThe Ecosystem\u201D section';
+    displayName: 'Capabilities';
+  };
+  attributes: {
+    bridge: Schema.Attribute.String;
+    cards: Schema.Attribute.Component<'partners.capability', true>;
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    subheading: Schema.Attribute.Text;
+    tag: Schema.Attribute.Component<'shared.tag', false>;
+  };
+}
+
+export interface PartnersCapability extends Struct.ComponentSchema {
+  collectionName: 'components_partners_capability_cards';
+  info: {
+    description: 'Partner capability category \u2014 short is the join key used by directory partners, filters and forms';
+    displayName: 'Capability';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    short: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface PartnersDirectory extends Struct.ComponentSchema {
+  collectionName: 'components_partners_directories';
+  info: {
+    description: 'Partners directory section';
+    displayName: 'Directory';
+  };
+  attributes: {
+    bridge: Schema.Attribute.String;
+    connect_label: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Connect'>;
+    expanding_description: Schema.Attribute.Text;
+    expanding_title: Schema.Attribute.String;
+    filter_all_label: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'All'>;
+    filter_capability_label: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Filter by Capability'>;
+    filter_region_label: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Filter by Region'>;
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    no_match_cta: Schema.Attribute.Component<'shared.button', false>;
+    no_match_message: Schema.Attribute.Text;
+    partners: Schema.Attribute.Component<'partners.partner', true>;
+    subheading: Schema.Attribute.Text;
+    tag: Schema.Attribute.Component<'shared.tag', false>;
+  };
+}
+
+export interface PartnersFooterCtas extends Struct.ComponentSchema {
+  collectionName: 'components_partners_footer_ctas';
+  info: {
+    description: 'Partners footer call-to-action banner';
+    displayName: 'Footer CTAs';
+  };
+  attributes: {
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    primary_cta: Schema.Attribute.Component<'shared.button', false>;
+    secondary_cta: Schema.Attribute.Component<'shared.button', false>;
+  };
+}
+
+export interface PartnersHero extends Struct.ComponentSchema {
+  collectionName: 'components_partners_heroes';
+  info: {
+    description: 'Partners hero section';
+    displayName: 'Hero';
+  };
+  attributes: {
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    primary_cta: Schema.Attribute.Component<'shared.button', false>;
+    secondary_cta: Schema.Attribute.Component<'shared.button', false>;
+    subtitle: Schema.Attribute.Text;
+    tag: Schema.Attribute.Component<'shared.tag', false>;
+    title: Schema.Attribute.Text & Schema.Attribute.Required;
+  };
+}
+
+export interface PartnersJourneyStep extends Struct.ComponentSchema {
+  collectionName: 'components_partners_journey_steps';
+  info: {
+    description: 'Partners journey step \u2014 icon stays hardcoded in the frontend';
+    displayName: 'Journey Step';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    number: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface PartnersMatchForm extends Struct.ComponentSchema {
+  collectionName: 'components_partners_match_forms';
+  info: {
+    description: 'Partners \u201CGet Matched\u201D section';
+    displayName: 'Match Form';
+  };
+  attributes: {
+    company_label: Schema.Attribute.String;
+    confirmation: Schema.Attribute.String;
+    email_hint: Schema.Attribute.Text;
+    email_label: Schema.Attribute.String;
+    first_name_label: Schema.Attribute.String;
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    help_areas_label: Schema.Attribute.String;
+    last_name_label: Schema.Attribute.String;
+    message_label: Schema.Attribute.String;
+    region_label: Schema.Attribute.String;
+    subheading: Schema.Attribute.Text;
+    submit_label: Schema.Attribute.String & Schema.Attribute.Required;
+    tag: Schema.Attribute.Component<'shared.tag', false>;
+  };
+}
+
+export interface PartnersPartner extends Struct.ComponentSchema {
+  collectionName: 'components_partners_partners';
+  info: {
+    description: 'Directory partner entry \u2014 logo/icon stays hardcoded in the frontend';
+    displayName: 'Partner';
+  };
+  attributes: {
+    badges: Schema.Attribute.Component<'shared.tag', true>;
+    capability: Schema.Attribute.String & Schema.Attribute.Required;
+    monogram: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 4;
+      }>;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    one_liner: Schema.Attribute.Text;
+    region: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface PartnersProof extends Struct.ComponentSchema {
+  collectionName: 'components_partners_proofs';
+  info: {
+    description: 'Partners \u201CGPX-Native Proof\u201D section';
+    displayName: 'Proof';
+  };
+  attributes: {
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    links: Schema.Attribute.Component<'shared.link', true>;
+    points: Schema.Attribute.Component<'partners.proof-point', true>;
+    subheading: Schema.Attribute.Text;
+    tag: Schema.Attribute.Component<'shared.tag', false>;
+  };
+}
+
+export interface PartnersProofPoint extends Struct.ComponentSchema {
+  collectionName: 'components_partners_proof_points';
+  info: {
+    description: 'Partners proof point \u2014 icon stays hardcoded in the frontend';
+    displayName: 'Proof Point';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface PartnersWhy extends Struct.ComponentSchema {
+  collectionName: 'components_partners_whies';
+  info: {
+    description: 'Partners \u201CThe Why\u201D section';
+    displayName: 'Why';
+  };
+  attributes: {
+    body: Schema.Attribute.Text;
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    journey: Schema.Attribute.Component<'partners.journey-step', true>;
+    legend_gap: Schema.Attribute.String;
+    legend_strong: Schema.Attribute.String;
+    subheading: Schema.Attribute.Text;
+    tag: Schema.Attribute.Component<'shared.tag', false>;
+  };
+}
+
 export interface ProductsAlwaysOn extends Struct.ComponentSchema {
   collectionName: 'components_products_always_ons';
   info: {
@@ -3357,6 +3607,21 @@ declare module '@strapi/strapi' {
       'news.hero': NewsHero;
       'news.press-kit': NewsPressKit;
       'news.press-menu': NewsPressMenu;
+      'partners.become': PartnersBecome;
+      'partners.become-benefit': PartnersBecomeBenefit;
+      'partners.benefit-card': PartnersBenefitCard;
+      'partners.benefits': PartnersBenefits;
+      'partners.capabilities': PartnersCapabilities;
+      'partners.capability': PartnersCapability;
+      'partners.directory': PartnersDirectory;
+      'partners.footer-ctas': PartnersFooterCtas;
+      'partners.hero': PartnersHero;
+      'partners.journey-step': PartnersJourneyStep;
+      'partners.match-form': PartnersMatchForm;
+      'partners.partner': PartnersPartner;
+      'partners.proof': PartnersProof;
+      'partners.proof-point': PartnersProofPoint;
+      'partners.why': PartnersWhy;
       'products.always-on': ProductsAlwaysOn;
       'products.alwayson-stat': ProductsAlwaysonStat;
       'products.architecture': ProductsArchitecture;

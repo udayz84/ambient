@@ -37,3 +37,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 # ambient
 
 *Note: This is the frontend repository for Ambient Scientific.*
+Ran command: `cat /Users/udayznanam/Documents/ambient/src/app/products/page.tsx`
+Ran command: `cat /Users/udayznanam/Documents/ambient/src/app/som/page.tsx`
+

@@ -1345,6 +1345,44 @@ export interface ApiPartnerInquiryPartnerInquiry
   };
 }
 
+export interface ApiPartnersPagePartnersPage extends Struct.SingleTypeSchema {
+  collectionName: 'partners_pages';
+  info: {
+    description: 'Partners ecosystem page';
+    displayName: 'Partners Page';
+    pluralName: 'partners-pages';
+    singularName: 'partners-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    become: Schema.Attribute.Component<'partners.become', false>;
+    benefits: Schema.Attribute.Component<'partners.benefits', false>;
+    capabilities: Schema.Attribute.Component<'partners.capabilities', false>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    directory: Schema.Attribute.Component<'partners.directory', false>;
+    footer_ctas: Schema.Attribute.Component<'partners.footer-ctas', false>;
+    hero: Schema.Attribute.Component<'partners.hero', false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::partners-page.partners-page'
+    > &
+      Schema.Attribute.Private;
+    match_form: Schema.Attribute.Component<'partners.match-form', false>;
+    proof: Schema.Attribute.Component<'partners.proof', false>;
+    publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'shared.seo', false>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    why: Schema.Attribute.Component<'partners.why', false>;
+  };
+}
+
 export interface ApiPopupPopup extends Struct.CollectionTypeSchema {
   collectionName: 'popups';
   info: {
@@ -2142,6 +2180,7 @@ declare module '@strapi/strapi' {
       'api::news-listing-page.news-listing-page': ApiNewsListingPageNewsListingPage;
       'api::partner-application.partner-application': ApiPartnerApplicationPartnerApplication;
       'api::partner-inquiry.partner-inquiry': ApiPartnerInquiryPartnerInquiry;
+      'api::partners-page.partners-page': ApiPartnersPagePartnersPage;
       'api::popup.popup': ApiPopupPopup;
       'api::products-page.products-page': ApiProductsPageProductsPage;
       'api::redirect.redirect': ApiRedirectRedirect;

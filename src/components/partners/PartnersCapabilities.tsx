@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { interRegular, gilroyMedium } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFadeIn } from "../shared/useFadeIn";
-import { PARTNER_CAPABILITIES, PARTNERS_ECOSYSTEM } from "./partners-data";
+import type { Capability, EcosystemContent } from "./partners-content";
 import { JourneyIcon, PartnersSectionHeading, PartnersBridgeBox } from "./partners-shared";
 
 function CapabilityRow({
@@ -83,7 +83,13 @@ function CapabilityRow({
   );
 }
 
-export function PartnersCapabilities() {
+export function PartnersCapabilities({
+  ecosystem,
+  capabilities,
+}: {
+  ecosystem: EcosystemContent;
+  capabilities: Capability[];
+}) {
   const { fadeRef, isVisible } = useFadeIn<HTMLElement>();
   const fadeCls = isVisible ? "animate-hero-text-fade-in opacity-0" : "translate-y-[25px] opacity-0";
   const [hoverIndex, setHoverIndex] = useState(0);
@@ -105,16 +111,16 @@ export function PartnersCapabilities() {
       aria-label="The ecosystem, by capability"
     >
       <div className="relative flex flex-col items-center gap-[16px] px-[10px]">
-        <PartnersSectionHeading deg="101.272deg">{PARTNERS_ECOSYSTEM.heading}</PartnersSectionHeading>
+        <PartnersSectionHeading deg="101.272deg">{ecosystem.heading}</PartnersSectionHeading>
         <Corners />
       </div>
 
       <p className={`${interRegular.className} max-w-[720px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
-        {PARTNERS_ECOSYSTEM.subheading}
+        {ecosystem.subheading}
       </p>
 
       <div className="flex w-full flex-col gap-[12px]">
-        {PARTNER_CAPABILITIES.map((cap, i) => (
+        {capabilities.map((cap, i) => (
           <CapabilityRow
             key={cap.id}
             index={i}
@@ -131,7 +137,7 @@ export function PartnersCapabilities() {
 
       {/* bridge line */}
       <PartnersBridgeBox className="mt-[16px]">
-        {PARTNERS_ECOSYSTEM.bridge}
+        {ecosystem.bridge}
       </PartnersBridgeBox>
     </section>
   );

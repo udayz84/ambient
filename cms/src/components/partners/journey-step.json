@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_partners_journey_steps",
+  "info": {
+    "displayName": "Journey Step",
+    "description": "Partners journey step — icon stays hardcoded in the frontend"
+  },
+  "options": {},
+  "attributes": {
+    "number": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

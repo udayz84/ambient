@@ -231,14 +231,14 @@ function NavIconDropdown({
   compact?: boolean;
 }) {
   const children = Array.isArray(item?.children) ? item.children : [];
-  const width = compact ? 190 : 212;
+  const width = compact ? 220 : 242;
   const pad = compact ? 24 : 30;
   const gap = compact ? 20 : 24;
   const iconSize = compact ? 20 : 24;
   const fontSize = compact ? 14 : 16;
   const leading = compact ? 21 : 24;
   const itemGap = compact ? 8 : 10;
-  const dividerWidth = compact ? 142 : 151.832;
+  const dividerWidth = compact ? 172 : 182;
 
   return (
     <div

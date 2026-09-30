@@ -1,0 +1,73 @@
+{
+  "collectionName": "components_partners_becomes",
+  "info": {
+    "displayName": "Become",
+    "description": "Partners “Become a Partner” section"
+  },
+  "options": {},
+  "attributes": {
+    "tag": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.tag"
+    },
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subheading": {
+      "type": "text"
+    },
+    "benefits": {
+      "type": "component",
+      "repeatable": true,
+      "component": "partners.become-benefit"
+    },
+    "looking_for_title": {
+      "type": "string"
+    },
+    "looking_for_description": {
+      "type": "text"
+    },
+    "looking_for_chips": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.tag"
+    },
+    "form_title": {
+      "type": "string"
+    },
+    "form_name_label": {
+      "type": "string"
+    },
+    "form_company_label": {
+      "type": "string"
+    },
+    "form_website_label": {
+      "type": "string"
+    },
+    "form_email_label": {
+      "type": "string"
+    },
+    "form_region_label": {
+      "type": "string"
+    },
+    "form_capabilities_label": {
+      "type": "string"
+    },
+    "form_experience_label": {
+      "type": "string"
+    },
+    "form_submit_label": {
+      "type": "string"
+    },
+    "form_confirmation": {
+      "type": "string"
+    },
+    "secondary_cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.button"
+    }
+  }
+}

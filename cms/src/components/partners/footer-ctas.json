@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_partners_footer_ctas",
+  "info": {
+    "displayName": "Footer CTAs",
+    "description": "Partners footer call-to-action banner"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "primary_cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.button"
+    },
+    "secondary_cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.button"
+    }
+  }
+}

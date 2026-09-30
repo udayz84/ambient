@@ -1,0 +1,60 @@
+{
+  "collectionName": "components_partners_directories",
+  "info": {
+    "displayName": "Directory",
+    "description": "Partners directory section"
+  },
+  "options": {},
+  "attributes": {
+    "tag": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.tag"
+    },
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subheading": {
+      "type": "text"
+    },
+    "filter_capability_label": {
+      "type": "string",
+      "default": "Filter by Capability"
+    },
+    "filter_region_label": {
+      "type": "string",
+      "default": "Filter by Region"
+    },
+    "filter_all_label": {
+      "type": "string",
+      "default": "All"
+    },
+    "expanding_title": {
+      "type": "string"
+    },
+    "expanding_description": {
+      "type": "text"
+    },
+    "no_match_message": {
+      "type": "text"
+    },
+    "no_match_cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.button"
+    },
+    "connect_label": {
+      "type": "string",
+      "default": "Connect"
+    },
+    "bridge": {
+      "type": "string"
+    },
+    "partners": {
+      "type": "component",
+      "repeatable": true,
+      "component": "partners.partner"
+    }
+  }
+}

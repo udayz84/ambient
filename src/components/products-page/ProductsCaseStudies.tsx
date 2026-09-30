@@ -88,7 +88,7 @@ export function ProductsCaseStudies({ data }: { data?: any }) {
               : "grid w-full grid-cols-1 gap-[24px] md:grid-cols-3"
           }
         >
-          {cards.map((study) => {
+          {cards.map((study: any) => {
             const CardElement = study.ctaHref ? "a" : "button";
             const elementProps = study.ctaHref
               ? { href: study.ctaHref }
