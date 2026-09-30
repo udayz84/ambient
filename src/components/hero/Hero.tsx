@@ -215,9 +215,12 @@ export function Hero({ data }: { data?: any }) {
           <div className="flex flex-col gap-[24px]">
             <HeroStat
               tag={m0.tag || ""}
-              tagWidth={180}
-              labelOffsetX={74.5}
-              rightBarLeft={170.48}
+              tagWidth={230}
+              labelOffsetX={0}
+              centerLabel
+              rightBarLeft={221}
+              height={32}
+              labelClassName="text-[15px] leading-[22px] tracking-[-0.45px]"
               tagNodeId="mobile:744"
               statNodeId="mobile:743"
               width="100%"

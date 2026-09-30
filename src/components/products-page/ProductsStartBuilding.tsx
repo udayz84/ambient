@@ -169,7 +169,7 @@ function StartCardView({
 
       {/* Content — vertically centered */}
       <div className="absolute inset-0 flex flex-col items-center justify-center px-[54px]">
-        <div className="flex w-[450px] flex-col items-center gap-[36px]">
+        <div className="flex w-[450px] flex-col items-center gap-[36px] mb-[40px]">
           {/* Card title with bracket frame */}
           <div
             className="relative"

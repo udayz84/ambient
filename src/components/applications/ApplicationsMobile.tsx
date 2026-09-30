@@ -220,8 +220,28 @@ export function ApplicationsMobile({
 
         {/* Hero Image */}
         <div className="relative z-10 mt-[24px] flex w-full justify-center px-[20px]">
-          {imgSrc ? (
-            // eslint-disable-next-line @next/next/no-img-element
+          {activeTabData?.isBuild ? (
+            <div className="relative z-10 flex h-[200px] mt-[50px] w-full items-center justify-center">
+              <a
+                href="/model-zoo"
+                className={`${GREEN_CTA_SHADOW} ${gilroyMedium.className} pointer-events-auto relative flex h-[48px] w-[223px] shrink-0 items-center justify-center overflow-hidden`}
+              >
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+                />
+                <span className="relative max-w-full overflow-hidden text-ellipsis text-[14px] sm:text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+                  Explore Model Zoo
+                </span>
+                <span
+                  aria-hidden
+                  className={`pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]`}
+                />
+                <GreenCtaCorners />
+              </a>
+            </div>
+          ) : imgSrc ? (
+            /* eslint-disable-next-line @next/next/no-img-element */
             <img loading="lazy" decoding="async"
               alt=""
               src={imgSrc}
@@ -232,8 +252,10 @@ export function ApplicationsMobile({
         </div>
       </div>
 
-      {/* Feature Cards */}
-      <div className="relative z-20 mt-[-36px] grid w-full max-w-[343px] grid-cols-2 gap-[12px]">
+      {!activeTabData?.isBuild && (
+        <>
+          {/* Feature Cards */}
+          <div className="relative z-20 mt-[-36px] grid w-full max-w-[343px] grid-cols-2 gap-[12px]">
         {features.map((feature, idx) => (
           <div key={idx} className="relative w-full border border-white/20 bg-[#000000] p-[16px]">
             {activeTab === "AUTOMOTIVE" && idx === 0 && (
@@ -308,6 +330,8 @@ export function ApplicationsMobile({
         </p>
         <GreenCtaCorners />
       </a>
+      </>
+      )}
     </div>
   );
 }

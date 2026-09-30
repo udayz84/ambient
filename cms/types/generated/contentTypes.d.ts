@@ -1393,6 +1393,7 @@ export interface ApiProductsPageProductsPage extends Struct.SingleTypeSchema {
       'products.bench-to-volume',
       false
     >;
+    case_studies: Schema.Attribute.Component<'products.case-studies', false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1409,6 +1410,7 @@ export interface ApiProductsPageProductsPage extends Struct.SingleTypeSchema {
     modelforge: Schema.Attribute.Component<'products.modelforge', false>;
     publishedAt: Schema.Attribute.DateTime;
     seo: Schema.Attribute.Component<'shared.seo', false>;
+    som_family: Schema.Attribute.Component<'som.family', false>;
     start_building: Schema.Attribute.Component<
       'products.start-building',
       false

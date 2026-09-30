@@ -3,6 +3,13 @@
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyExtraBold, gilroySemiBold } from "../hero/fonts";
 import { motion, AnimatePresence } from "framer-motion";
+import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+
+const PRIMARY_CTA_SHADOW =
+  "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
+const PRIMARY_CTA_INSET =
+  "shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]";
 
 const watermarkGradient =
   "linear-gradient(259.734deg, rgba(255, 255, 255, 0.12) 0.12143%, rgba(255, 255, 255, 0.6) 44.084%, rgba(255, 255, 255, 0) 113.37%)";
@@ -553,6 +560,56 @@ export function ApplicationsHeroVisual({
             </div>
           </div>
         </>
+      );
+    }
+
+    if (activeTab === "BUILD") {
+      return (
+        <div className="absolute inset-0 flex flex-col items-center justify-start pt-[200px] pointer-events-none z-10 w-full h-full">
+          <h3
+            className={`${gilroySemiBold.className} m-0 flex flex-col justify-center text-center uppercase tracking-[0.5px] bg-clip-text text-[transparent] [word-break:break-word] not-italic text-[120px] leading-[110px] whitespace-normal`}
+            style={{ backgroundImage: watermarkGradient, WebkitBackgroundClip: "text", backgroundClip: "text" }}
+            aria-hidden
+          >
+            BUILD YOUR
+          </h3>
+          
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img loading="lazy" decoding="async"
+            alt="Build Custom Application"
+            src="/products/build-custom-cube.jpg"
+            className="my-[10px] h-auto max-h-[220px] w-auto object-contain pointer-events-none drop-shadow-2xl mix-blend-screen"
+          />
+
+          <h3
+            className={`${gilroySemiBold.className} m-0 flex flex-col justify-center text-center uppercase tracking-[0.5px] bg-clip-text text-[transparent] [word-break:break-word] not-italic text-[120px] leading-[110px] whitespace-normal`}
+            style={{ backgroundImage: watermarkGradient, WebkitBackgroundClip: "text", backgroundClip: "text" }}
+            aria-hidden
+          >
+            APPLICATION
+          </h3>
+          
+          <div className="mt-[24px] pointer-events-auto">
+            <a
+              href="/model-zoo"
+              className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} pointer-events-auto relative flex h-[48px] w-[223px] shrink-0 items-center justify-center overflow-hidden`}
+            >
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+              />
+              <AnimatedDotsBackground />
+              <span className="relative max-w-full overflow-hidden text-ellipsis text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+                Explore Model Zoo
+              </span>
+              <span
+                aria-hidden
+                className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`}
+              />
+              <GreenCtaCorners />
+            </a>
+          </div>
+        </div>
       );
     }
 

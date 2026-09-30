@@ -16,6 +16,9 @@ type HeroStatProps = {
   descriptionWidth?: string;
   pl?: number;
   layout?: "col" | "row";
+  centerLabel?: boolean;
+  height?: number;
+  labelClassName?: string;
 };
 
 export function HeroStat({
@@ -33,6 +36,9 @@ export function HeroStat({
   descriptionWidth,
   pl = 0,
   layout = "col",
+  centerLabel = false,
+  height,
+  labelClassName,
 }: HeroStatProps) {
   return (
     <div
@@ -47,6 +53,9 @@ export function HeroStat({
         labelOffsetX={labelOffsetX}
         rightBarLeft={rightBarLeft}
         nodeId={tagNodeId}
+        centerLabel={centerLabel}
+        height={height}
+        labelClassName={labelClassName}
       />
       <div className={`flex w-full content-stretch gap-[24px] not-italic ${layout === "row" ? "flex-row items-center" : "flex-col items-start"}`}>
         {value}

@@ -87,7 +87,7 @@ function KitCard({ card }: { card: (typeof CARDS)[number] }) {
 export function ModelZooKits() {
   return (
     <section
-      className="relative mt-[100px] w-full bg-transparent"
+      className="relative z-20 mt-[100px] mb-[-700px] min-[1024px]:mb-[-400px] w-full bg-transparent"
       data-node-id="5131:10997"
       aria-label="Start with a model that already works"
     >

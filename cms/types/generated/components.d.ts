@@ -1740,6 +1740,38 @@ export interface ProductsBenchToVolume extends Struct.ComponentSchema {
   };
 }
 
+export interface ProductsCaseStudies extends Struct.ComponentSchema {
+  collectionName: 'components_products_case_studies';
+  info: {
+    description: '';
+    displayName: 'Case Studies';
+    icon: 'layer';
+  };
+  attributes: {
+    cards: Schema.Attribute.Component<'products.case-study-card', true>;
+    subtitle: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface ProductsCaseStudyCard extends Struct.ComponentSchema {
+  collectionName: 'components_products_case_study_cards';
+  info: {
+    description: 'A single case study card to display on the Products page';
+    displayName: 'Case Study Card';
+    icon: 'layer';
+  };
+  attributes: {
+    context: Schema.Attribute.Text & Schema.Attribute.Required;
+    cta_href: Schema.Attribute.String;
+    cta_label: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
+    oversizedResult: Schema.Attribute.String & Schema.Attribute.Required;
+    tag: Schema.Attribute.String;
+  };
+}
+
 export interface ProductsFeatureCard extends Struct.ComponentSchema {
   collectionName: 'components_products_feature_cards';
   info: {
@@ -1909,8 +1941,8 @@ export interface ProductsModelforgeSubfeature extends Struct.ComponentSchema {
 export interface ProductsSpecCallout extends Struct.ComponentSchema {
   collectionName: 'components_products_spec_callouts';
   info: {
-    description: 'Full picture spec callout';
-    displayName: 'Spec Callout';
+    description: 'A card containing a list of spec bullet points for the Full Picture section';
+    displayName: 'Full Picture Spec Card';
   };
   attributes: {
     icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
@@ -2513,8 +2545,8 @@ export interface SomEcosystemCard extends Struct.ComponentSchema {
 export interface SomFamily extends Struct.ComponentSchema {
   collectionName: 'components_som_families';
   info: {
-    description: 'GPX10 PRO SOM FAMILY section';
-    displayName: 'Family Section';
+    description: 'GPX10 PRO SOM FAMILY section (One core. Two ways to connect.)';
+    displayName: 'SOM Family Section';
   };
   attributes: {
     cards: Schema.Attribute.Component<'som.family-card', true>;
@@ -2527,8 +2559,8 @@ export interface SomFamily extends Struct.ComponentSchema {
 export interface SomFamilyCard extends Struct.ComponentSchema {
   collectionName: 'components_som_family_cards';
   info: {
-    description: 'Card for the GPX10 PRO SOM FAMILY section';
-    displayName: 'Family Card';
+    description: 'Individual SOM product card (e.g. SOM BLE)';
+    displayName: 'SOM Family Card';
   };
   attributes: {
     description: Schema.Attribute.Text;
@@ -2543,8 +2575,8 @@ export interface SomFamilyCard extends Struct.ComponentSchema {
 export interface SomFamilyFeature extends Struct.ComponentSchema {
   collectionName: 'components_som_family_features';
   info: {
-    description: 'Feature item for family card';
-    displayName: 'Family Feature';
+    description: "Small feature item for the 'What's inside' section";
+    displayName: 'SOM Family Feature';
   };
   attributes: {
     icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
@@ -2671,7 +2703,7 @@ export interface SomPrototypes extends Struct.ComponentSchema {
   attributes: {
     cards: Schema.Attribute.Component<'som.prototype-card', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
-    subtitle: Schema.Attribute.Text;
+    subheading: Schema.Attribute.Text;
   };
 }
 
@@ -3301,6 +3333,8 @@ declare module '@strapi/strapi' {
       'products.architecture': ProductsArchitecture;
       'products.bench-card': ProductsBenchCard;
       'products.bench-to-volume': ProductsBenchToVolume;
+      'products.case-studies': ProductsCaseStudies;
+      'products.case-study-card': ProductsCaseStudyCard;
       'products.feature-card': ProductsFeatureCard;
       'products.features': ProductsFeatures;
       'products.full-picture': ProductsFullPicture;

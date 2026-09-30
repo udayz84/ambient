@@ -1,25 +1,29 @@
 {
   "collectionName": "components_som_families",
   "info": {
-    "displayName": "Family Section",
-    "description": "GPX10 PRO SOM FAMILY section"
+    "displayName": "SOM Family Section",
+    "description": "GPX10 PRO SOM FAMILY section (One core. Two ways to connect.)"
   },
   "options": {},
   "attributes": {
     "tag": {
-      "type": "string"
+      "type": "string",
+      "description": "Small top eyebrow tag (e.g. 'THE GPX10 PRO SOM FAMILY')"
     },
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "description": "Main heading (e.g. 'One core. Two ways to connect.')"
     },
     "subtitle": {
-      "type": "text"
+      "type": "text",
+      "description": "Text describing the family shown in the top right."
     },
     "cards": {
       "type": "component",
       "repeatable": true,
-      "component": "som.family-card"
+      "component": "som.family-card",
+      "description": "The product cards (e.g. SOM BLE and SOM LTE)"
     }
   }
 }

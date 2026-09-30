@@ -1,19 +1,21 @@
 {
   "collectionName": "components_som_family_features",
   "info": {
-    "displayName": "Family Feature",
-    "description": "Feature item for family card"
+    "displayName": "SOM Family Feature",
+    "description": "Small feature item for the 'What's inside' section"
   },
   "options": {},
   "attributes": {
     "icon": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": ["images", "files", "videos", "audios"]
+      "allowedTypes": ["images", "files", "videos", "audios"],
+      "description": "Small icon for the feature (e.g. 6-axis IMU icon)"
     },
     "text": {
       "type": "string",
-      "required": true
+      "required": true,
+      "description": "Text describing the feature (e.g. '6-axis IMU')"
     }
   }
 }

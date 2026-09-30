@@ -99,9 +99,20 @@ export function ProductsUseCases({ data }: { data?: any }) {
           featureCards: USECASE_CARDS,
         }));
 
+  const allTabs = [
+    ...tabs,
+    {
+      label: "BUILD",
+      watermark: "BUILD YOUR OWN APPLICATION",
+      image: "",
+      featureCards: [],
+      isBuild: true,
+    }
+  ];
+
   const [activeIdx, setActiveIdx] = useState(0);
   const [direction, setDirection] = useState(1);
-  const activeTab = tabs[activeIdx] || tabs[0];
+  const activeTab = allTabs[activeIdx] || allTabs[0];
   const activeImage = activeTab?.image || "/products/use-case-image.webp";
   const cards = activeTab?.featureCards || USECASE_CARDS;
 
@@ -127,12 +138,12 @@ export function ProductsUseCases({ data }: { data?: any }) {
 
   const nextTab = () => {
     setDirection(1);
-    setActiveIdx((i) => (i + 1) % tabs.length);
+    setActiveIdx((i) => (i + 1) % allTabs.length);
   };
 
   const prevTab = () => {
     setDirection(-1);
-    setActiveIdx((i) => (i - 1 + tabs.length) % tabs.length);
+    setActiveIdx((i) => (i - 1 + allTabs.length) % allTabs.length);
   };
   return (
     <>
@@ -169,7 +180,7 @@ export function ProductsUseCases({ data }: { data?: any }) {
               onSelect={handleSelect}
               activeIdx={activeIdx}
               direction={direction}
-              tabs={tabs}
+              tabs={allTabs}
               cards={cards}
               primary={primary}
               secondary={secondary}
@@ -186,7 +197,7 @@ export function ProductsUseCases({ data }: { data?: any }) {
         activeImage={activeImage}
         onSelect={setActiveIdx}
         activeIdx={activeIdx}
-        tabs={tabs}
+        tabs={allTabs}
         cards={cards}
         primary={primary}
         secondary={secondary}
@@ -288,55 +299,93 @@ function ProductsUseCasesDesktop({
             }}
             className="absolute inset-0 pointer-events-auto"
           >
-            {/* Giant watermark — 2901:2103 */}
-            <h3
-              className={`${gilroyExtraBold.className} absolute m-0 text-center text-[200px] uppercase whitespace-nowrap tracking-[0.5px] leading-[210px] bg-clip-text text-transparent [word-break:break-word] not-italic`}
-              style={{
-                left: 0,
-                top: 345,
-                width: USECASES_CANVAS_WIDTH,
-                height: 210,
-                backgroundImage: WATERMARK_GRADIENT,
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-              }}
-              data-node-id="2901:2103"
-              aria-hidden
-            >
-              {activeTab.watermark}
-            </h3>
+            {/* BUILD Tab Custom Layout vs Standard Layout */}
+            {activeTab.isBuild ? (
+              <div className="absolute inset-0 flex flex-col items-center justify-start pt-[280px] pointer-events-none z-10">
+                <h3
+                  className={`${gilroyExtraBold.className} m-0 flex flex-col justify-center text-center uppercase tracking-[0.5px] bg-clip-text text-transparent [word-break:break-word] not-italic text-[120px] leading-[110px] whitespace-normal`}
+                  style={{ backgroundImage: WATERMARK_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
+                  aria-hidden
+                >
+                  BUILD YOUR
+                </h3>
+                
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img loading="lazy" decoding="async"
+                  alt="Build Custom Application"
+                  src="/products/build-custom-cube.jpg"
+                  className="my-[10px] h-auto max-h-[220px] w-auto object-contain pointer-events-none drop-shadow-2xl mix-blend-screen"
+                />
 
-            {/* Central image — 2901:2104 */}
-            <div
-              className="absolute overflow-hidden"
-              style={{ left: 407.759765625, top: 305.032958984375, width: 632.8800659179688, height: 500 }}
-              data-node-id="2901:2104"
-              data-name="image 145"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img loading="lazy" decoding="async"
-                alt=""
-                src={activeImage}
-                className={`absolute inset-0 size-full max-w-none ${activeTab?.label?.toUpperCase() === "AUTOMOTIVE" ? "object-contain" : "object-cover"}`}
-              />
-            </div>
+                <h3
+                  className={`${gilroyExtraBold.className} m-0 flex flex-col justify-center text-center uppercase tracking-[0.5px] bg-clip-text text-transparent [word-break:break-word] not-italic text-[120px] leading-[110px] whitespace-normal`}
+                  style={{ backgroundImage: WATERMARK_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
+                  aria-hidden
+                >
+                  APPLICATION
+                </h3>
+                
+                <div className="mt-[24px] pointer-events-auto">
+                  <PrimaryCta href="/model-zoo">Explore Model Zoo</PrimaryCta>
+                </div>
+              </div>
+            ) : (
+              <>
+                {/* Giant watermark — 2901:2103 */}
+                <h3
+                  className={`${gilroyExtraBold.className} absolute m-0 text-center text-[200px] uppercase whitespace-nowrap tracking-[0.5px] leading-[210px] bg-clip-text text-transparent [word-break:break-word] not-italic`}
+                  style={{
+                    left: 0,
+                    top: 345,
+                    width: USECASES_CANVAS_WIDTH,
+                    height: 210,
+                    backgroundImage: WATERMARK_GRADIENT,
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                  }}
+                  data-node-id="2901:2103"
+                  aria-hidden
+                >
+                  {activeTab.watermark}
+                </h3>
+
+                {/* Central image — 2901:2104 */}
+                <div
+                  className="absolute overflow-hidden"
+                  style={{ left: 407.759765625, top: 305.032958984375, width: 632.8800659179688, height: 500 }}
+                  data-node-id="2901:2104"
+                  data-name="image 145"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img loading="lazy" decoding="async"
+                    alt=""
+                    src={activeImage}
+                    className={`absolute inset-0 size-full max-w-none ${activeTab?.label?.toUpperCase() === "AUTOMOTIVE" ? "object-contain" : "object-cover"}`}
+                  />
+                </div>
+              </>
+            )}
 
             {/* Connector indicators — 2901:2121 / 2901:2127 */}
-            <Indicator
-              src="/products/indicator-1.svg"
-              left={490.24}
-              top={653.06}
-              width={88.18}
-              height={14.14}
-              flipY
-            />
-            <Indicator
-              src="/products/indicator-2.svg"
-              left={843.43}
-              top={618.8}
-              width={87.659}
-              height={76.623}
-            />
+            {!activeTab.isBuild && (
+              <>
+                <Indicator
+                  src="/products/indicator-1.svg"
+                  left={490.24}
+                  top={653.06}
+                  width={88.18}
+                  height={14.14}
+                  flipY
+                />
+                <Indicator
+                  src="/products/indicator-2.svg"
+                  left={843.43}
+                  top={618.8}
+                  width={87.659}
+                  height={76.623}
+                />
+              </>
+            )}
 
             {/* Content cards */}
             {cards.map((card: any, i: number) => (
@@ -555,12 +604,12 @@ function SecondaryCta({
   return (
     <a
       href={href}
-      className={`${gilroyMedium.className} relative flex h-[48px] shrink-0 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
-      style={{ backgroundColor: SECONDARY_CTA_BG, width: 227 }}
+      className={`${gilroyMedium.className} relative flex h-[48px] shrink-0 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] min-w-[227px] w-max px-[32px]`}
+      style={{ backgroundColor: SECONDARY_CTA_BG }}
       data-node-id="2901:2155"
       data-name="CTA - Secondary"
     >
-      <span className="relative max-w-full overflow-hidden text-ellipsis px-[20px] py-[10px] text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+      <span className="relative max-w-full overflow-hidden text-ellipsis text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
         {children}
       </span>
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
@@ -635,23 +684,57 @@ function ProductsUseCasesMobile({
 
       {/* Image */}
       <div className="relative mt-[24px] flex justify-center">
-        <h3
-          className={`${gilroyExtraBold.className} absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[64px] uppercase tracking-[0.5px] leading-[64px] bg-clip-text text-transparent not-italic`}
-          style={{
-            backgroundImage: WATERMARK_GRADIENT,
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-          }}
-          aria-hidden
-        >
-          {activeTab.watermark}
-        </h3>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img loading="lazy" decoding="async"
-          alt=""
-          src={activeImage}
-          className="relative z-10 h-auto max-h-[360px] w-full max-w-[360px] object-contain"
-        />
+        {activeTab.isBuild ? (
+          <div className="relative flex flex-col w-full items-center justify-center px-[16px]">
+            <h3
+              className={`${gilroyExtraBold.className} m-0 w-full text-center uppercase tracking-[0.5px] bg-clip-text text-transparent not-italic text-[48px] min-[400px]:text-[56px] leading-[52px] whitespace-normal`}
+              style={{ backgroundImage: WATERMARK_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
+              aria-hidden
+            >
+              BUILD YOUR
+            </h3>
+            
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img loading="lazy" decoding="async"
+              alt="Build Custom Application"
+              src="/products/build-custom-cube.jpg"
+              className="my-[16px] h-auto max-h-[220px] w-auto object-contain pointer-events-none drop-shadow-2xl mix-blend-screen"
+            />
+
+            <h3
+              className={`${gilroyExtraBold.className} m-0 w-full text-center uppercase tracking-[0.5px] bg-clip-text text-transparent not-italic text-[48px] min-[400px]:text-[56px] leading-[52px] whitespace-normal`}
+              style={{ backgroundImage: WATERMARK_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
+              aria-hidden
+            >
+              APPLICATION
+            </h3>
+            
+            <div className="mt-[32px] mb-[24px]">
+              <PrimaryCta href="/model-zoo">Explore Model Zoo</PrimaryCta>
+            </div>
+          </div>
+        ) : (
+          <>
+            <h3
+              className={`${gilroyExtraBold.className} absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-[16px] text-center uppercase tracking-[0.5px] bg-clip-text text-transparent not-italic whitespace-nowrap text-[48px] min-[400px]:text-[64px] leading-[64px]`}
+              style={{
+                backgroundImage: WATERMARK_GRADIENT,
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
+              aria-hidden
+            >
+              {activeTab.watermark}
+            </h3>
+            
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img loading="lazy" decoding="async"
+              alt=""
+              src={activeImage}
+              className="relative z-10 h-auto max-h-[360px] w-full max-w-[360px] object-contain"
+            />
+          </>
+        )}
       </div>
 
       {/* Cards & Arrows */}
@@ -697,36 +780,38 @@ function ProductsUseCasesMobile({
       </div>
 
       {/* CTAs - side-by-side */}
-      <div className="mt-[32px] flex flex-row gap-[8px] w-full max-w-[343px] mx-auto">
-        <a
-          href={primary.href}
-          className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center overflow-hidden`}
-        >
-          <span
-            aria-hidden
-            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-          />
-          <AnimatedDotsBackground />
-          <span className="relative max-w-full overflow-hidden text-ellipsis text-[10px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
-            {primary.label}
-          </span>
-          <span
-            aria-hidden
-            className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`}
-          />
-          <GreenCtaCorners />
-        </a>
-        <a
-          href={secondary.href}
-          className={`${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
-          style={{ backgroundColor: SECONDARY_CTA_BG }}
-        >
-          <span className="relative max-w-full overflow-hidden text-ellipsis px-[4px] sm:px-[12px] py-[10px] text-[10px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic text-center">
-            {secondary.label}
-          </span>
-          <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-        </a>
-      </div>
+      {!activeTab.isBuild && (
+        <div className="mt-[32px] flex flex-row gap-[8px] w-full max-w-[343px] mx-auto">
+          <a
+            href={primary.href}
+            className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center overflow-hidden`}
+          >
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+            />
+            <AnimatedDotsBackground />
+            <span className="relative max-w-full overflow-hidden text-ellipsis text-[10px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+              {primary.label}
+            </span>
+            <span
+              aria-hidden
+              className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`}
+            />
+            <GreenCtaCorners />
+          </a>
+          <a
+            href={secondary.href}
+            className={`${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
+            style={{ backgroundColor: SECONDARY_CTA_BG }}
+          >
+            <span className="relative max-w-full overflow-hidden text-ellipsis px-[4px] sm:px-[12px] py-[10px] text-[10px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic text-center">
+              {secondary.label}
+            </span>
+            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+          </a>
+        </div>
+      )}
     </section>
   );
 }

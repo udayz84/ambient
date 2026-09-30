@@ -1,17 +1,19 @@
 {
   "collectionName": "components_products_spec_callouts",
   "info": {
-    "displayName": "Spec Callout",
-    "description": "Full picture spec callout"
+    "displayName": "Full Picture Spec Card",
+    "description": "A card containing a list of spec bullet points for the Full Picture section"
   },
   "options": {},
   "attributes": {
     "label": {
       "type": "string",
-      "required": true
+      "required": true,
+      "description": "Card Title (e.g. 'CONTROL', 'PACKAGE', 'POWER')"
     },
     "items": {
-      "type": "text"
+      "type": "text",
+      "description": "List of bullet points. Enter each point on a new line."
     },
     "icon": {
       "type": "media",
@@ -21,7 +23,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Small dark square icon in the top right corner of the card."
     }
   }
 }

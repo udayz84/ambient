@@ -138,7 +138,7 @@ function PrototypeCard({
 export function usePrototypeData(data?: any) {
   console.log("Prototype data received:", JSON.stringify(data, null, 2));
   const heading = data?.heading || FALLBACK_HEADING;
-  const subtitle = data?.subtitle || "";
+  const subtitle = data?.subheading || data?.subtitle || "";
   const dataCards: any[] = Array.isArray(data?.cards) ? data.cards : [];
   const cards = PROTOTYPE_CARDS.map((fb, i) => {
     const c = dataCards[i];

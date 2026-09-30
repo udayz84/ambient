@@ -4,11 +4,15 @@ import { ProductsFeatures } from "@/components/products-page/ProductsFeatures";
 import { ProductsAlwaysOn } from "@/components/products-page/ProductsAlwaysOn";
 import { ProductsUseCases } from "@/components/products-page/ProductsUseCases";
 import { ProductsMeasured } from "@/components/products-page/ProductsMeasured";
+import { ProductsCaseStudies } from "@/components/products-page/ProductsCaseStudies";
+import { ProductsAppForge } from "@/components/products-page/ProductsAppForge";
 export const dynamic = "force-dynamic";
+
 
 import { ProductsArchitecture } from "@/components/products-page/ProductsArchitecture";
 import { ProductsModelForge } from "@/components/products-page/ProductsModelForge";
 import { ProductsBenchToVolume } from "@/components/products-page/ProductsBenchToVolume";
+import { SomFamily } from "@/components/som-page/SomFamily";
 import { ProductsFullPicture } from "@/components/products-page/ProductsFullPicture";
 import { ProductsStartBuilding } from "@/components/products-page/ProductsStartBuilding";
 import { ProductsStickyNav } from "@/components/products-page/ProductsStickyNav";
@@ -40,8 +44,8 @@ export async function generateMetadata(): Promise<Metadata> {
 const STICKY_SECTION_IDS = [
   "features",
   "always-on",
-  "use-cases",
   "metrics",
+  "use-cases",
   "architecture",
   "full-picture",
 ];
@@ -66,6 +70,7 @@ export default async function ProductsPage() {
       { section: "architecture", fields: ["image"], nested: ["stats"] },
       { section: "modelforge", nested: ["steps", "subfeatures"] },
       { section: "bench_to_volume", nested: ["cards"] },
+      { section: "som_family", nested: ["cards.features", "cards.image"] },
       { section: "full_picture", fields: ["background_image"], nested: ["callouts"] },
       "start_building",
       "sticky_nav",
@@ -111,11 +116,14 @@ export default async function ProductsPage() {
       <ProductsStickyNav items={stickyItems} />
       <div id="features"><ProductsFeatures data={data?.features} /></div>
       <div id="always-on"><ProductsAlwaysOn data={data?.always_on} /></div>
-      <div id="use-cases"><ProductsUseCases data={data?.use_cases} /></div>
       <div id="metrics"><ProductsMeasured data={data?.measured} /></div>
+      <div id="use-cases"><ProductsUseCases data={data?.use_cases} /></div>
+      <ProductsCaseStudies data={caseStudiesData} />
+      <ProductsAppForge />
       <div id="architecture"><ProductsArchitecture data={data?.architecture} /></div>
       <ProductsModelForge data={data?.modelforge} />
       <ProductsBenchToVolume data={data?.bench_to_volume} />
+      <SomFamily data={data?.som_family} />
       <div id="full-picture"><ProductsFullPicture data={data?.full_picture} /></div>
       <ProductsStartBuilding data={data?.start_building} />
     </main>

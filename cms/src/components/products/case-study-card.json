@@ -1,0 +1,44 @@
+{
+  "collectionName": "components_products_case_study_cards",
+  "info": {
+    "displayName": "Case Study Card",
+    "icon": "layer",
+    "description": "A single case study card to display on the Products page"
+  },
+  "options": {},
+  "attributes": {
+    "tag": {
+      "type": "string",
+      "required": false,
+      "description": "Text tag (e.g., 'Leading telco provider'). Shown if no Logo is provided."
+    },
+
+    "oversizedResult": {
+      "type": "string",
+      "required": true,
+      "description": "The huge headline stat (e.g., '10x', '< 50µW', 'Zero')."
+    },
+    "context": {
+      "type": "text",
+      "required": true,
+      "description": "The context text shown below the oversized stat."
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images", "files", "videos", "audios"],
+      "description": "The background image for the top half of the case study card."
+    },
+    "cta_label": {
+      "type": "string",
+      "required": false,
+      "description": "Label for the CTA link (e.g., 'Read Full Study'). Defaults to 'Read Full Study' if left blank."
+    },
+    "cta_href": {
+      "type": "string",
+      "required": false,
+      "description": "The URL to redirect to when the user clicks the case study card."
+    }
+  }
+}

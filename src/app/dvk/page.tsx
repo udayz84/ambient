@@ -3,6 +3,8 @@ import { Dvk } from "@/components/dvk/Dvk";
 import { getSingleType } from "@/lib/strapi";
 import { buildMetadata, type SeoData } from "@/lib/seo";
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata(): Promise<Metadata> {
   let seo: SeoData | null = null;
   try {

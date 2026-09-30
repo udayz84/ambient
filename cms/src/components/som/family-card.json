@@ -1,20 +1,23 @@
 {
   "collectionName": "components_som_family_cards",
   "info": {
-    "displayName": "Family Card",
-    "description": "Card for the GPX10 PRO SOM FAMILY section"
+    "displayName": "SOM Family Card",
+    "description": "Individual SOM product card (e.g. SOM BLE)"
   },
   "options": {},
   "attributes": {
     "tag": {
-      "type": "string"
+      "type": "string",
+      "description": "Eyebrow tag on the card (e.g. '[ COMING SOON ]')"
     },
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "description": "Card title (e.g. 'SOM (BLE)')"
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "description": "Short description of the product"
     },
     "image": {
       "type": "media",
@@ -24,15 +27,18 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Product image shown on the top right of the card"
     },
     "features": {
       "type": "component",
       "repeatable": true,
-      "component": "som.family-feature"
+      "component": "som.family-feature",
+      "description": "The 'What's inside' features grid at the bottom of the card."
     },
     "footerText": {
-      "type": "text"
+      "type": "text",
+      "description": "Optional footer text describing RF or antenna info."
     }
   }
 }

@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_products_case_studies",
+  "info": {
+    "displayName": "Case Studies",
+    "icon": "layer",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": false
+    },
+    "subtitle": {
+      "type": "string",
+      "required": false
+    },
+    "cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "products.case-study-card"
+    }
+  }
+}

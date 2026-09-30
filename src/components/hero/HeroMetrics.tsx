@@ -36,9 +36,10 @@ export function HeroMetrics({ metrics = [] }: { metrics?: HeroMetric[] }) {
     >
       <HeroStat
         tag={m0.tag || ""}
-        tagWidth={180}
-        labelOffsetX={74.5}
-        rightBarLeft={170.48}
+        tagWidth={230}
+        labelOffsetX={0}
+        centerLabel
+        rightBarLeft={221}
         tagNodeId="2379:744"
         statNodeId="2379:743"
         width={195}

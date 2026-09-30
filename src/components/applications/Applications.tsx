@@ -11,7 +11,17 @@ import { ApplicationsMobile } from "./ApplicationsMobile";
 const INITIAL_ACTIVE_INDEX = 3;
 
 export function Applications({ data }: { data?: any }) {
-  const tabs: any[] = Array.isArray(data?.tabs) ? data.tabs : [];
+  const baseTabs: any[] = Array.isArray(data?.tabs) ? data.tabs : [];
+  const tabs = [
+    ...baseTabs,
+    {
+      label: "BUILD",
+      watermark_text: "BUILD YOUR OWN APPLICATION",
+      isBuild: true,
+      feature_cards: [],
+      hero_image: null,
+    }
+  ];
 
   // NOTE: `active_tab` is NOT a field in the Strapi `home.applications` schema,
   // so it is intentionally ignored here. The initial tab falls back to the

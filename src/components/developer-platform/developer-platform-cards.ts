@@ -132,13 +132,11 @@ export const DEVELOPER_PLATFORM_CARDS: DeveloperPlatformCardConfig[] = [
       "Skip the blank page. Flash a ready-made, GPX-tuned model to your kit and see it run in one click.",
     bodyLeft: 23.5570068359375,
     bodyWidth: 340.88604736328125,
-    bodyBottomOffset: 187,
+    bodyBottomOffset: 157,
     lineLeft: 31.27734375,
     lineTop: 77.34765625,
     lineWidth: 151.83203125,
     patternGradient:
       "linear-gradient(17.4266deg, rgba(255, 255, 255, 0) 13.463%, rgb(255, 255, 255) 71.165%)",
-    // Bracketed CTA button, Figma 5212:9597 ("Menu", 280×48 at 24,226).
-    buttonLabel: "Routes to the Model Zoo page",
   },
 ];

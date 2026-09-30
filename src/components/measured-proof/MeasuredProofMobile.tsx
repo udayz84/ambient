@@ -108,10 +108,12 @@ export function MeasuredProofMobile({ data }: { data?: any }) {
       <div className="flex flex-col items-center gap-[16px]">
         <TagBadge
           label={tagText}
-          width={210}
-          labelOffsetX={89.5}
-          rightBarLeft={200.48}
+          width={230}
+          labelOffsetX={0}
+          rightBarLeft={221}
           centerLabel={true}
+          height={32}
+          labelClassName="text-[15px] leading-[22px] tracking-[-0.45px]"
         />
 
         <div className="relative flex w-[354px] max-w-full flex-col items-center justify-center py-[7px]">

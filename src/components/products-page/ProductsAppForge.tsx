@@ -6,7 +6,7 @@ import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { getFadeInClass, useFadeIn } from "../shared/useFadeIn";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
-import { CORNER_LEFT, CORNER_RIGHT, sectionTitleGradient } from "./model-zoo-data";
+import { CORNER_LEFT, CORNER_RIGHT, sectionTitleGradient } from "../model-zoo/model-zoo-data";
 
 const TITLE_GRADIENT = sectionTitleGradient(111.766);
 
@@ -40,7 +40,7 @@ const STEP_ACTIVE_HEIGHT: Record<ForgeStep, string> = {
  * (1440×1433 canvas; 1192.5-wide content at x=124). The two off-canvas
  * "footer" frames at x≈1477 in Figma are ignored (invisible).
  */
-export function ModelZooAppForge({ data }: { data?: any }) {
+export function ProductsAppForge({ data }: { data?: any }) {
   const heading = data?.heading || "Your eval kit, controlled from your phone.";
   const subheading =
     data?.subheading ||

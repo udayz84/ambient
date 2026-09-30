@@ -529,8 +529,12 @@ function SpecCardView({ card }: { card: RenderCard }) {
       {card.items.map((it, i) => (
         <Fragment key={i}>
           <p
-            className={`${interRegular.className} [word-break:break-word] absolute font-normal leading-[normal] not-italic text-[14px] text-black tracking-[-0.1504px] whitespace-nowrap min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
-            style={{ left: it.left ?? card.itemsLeft, top: it.top }}
+            className={`${interRegular.className} [word-break:break-word] absolute font-normal leading-[1.2] not-italic text-[14px] text-black tracking-[-0.1504px] min-[1024px]:text-[16px] min-[1024px]:leading-[1.2] pr-[15px]`}
+            style={{ 
+              left: it.left ?? card.itemsLeft, 
+              top: it.top,
+              width: `calc(100% - ${it.left ?? card.itemsLeft}px)`
+            }}
           >
             {it.text}
           </p>
@@ -582,7 +586,7 @@ export function ProductsFullPicture({ data }: { data?: any }) {
   if (Array.isArray(data?.callouts)) {
     for (const c of data.callouts) {
       if (c?.label) {
-        strapiCallouts[c.label] = {
+        strapiCallouts[c.label.toLowerCase().trim()] = {
           iconUrl: mediaUrl(c?.icon) || null,
           items: splitLinesFilter(c?.items),
         };
@@ -593,29 +597,58 @@ export function ProductsFullPicture({ data }: { data?: any }) {
   const cards: RenderCard[] = CARDS.map((c) => {
     let items = c.items;
     let lines = c.lines;
-    const strapiData = strapiCallouts[c.title];
+    const strapiData = strapiCallouts[c.title.toLowerCase().trim()];
     if (strapiData && strapiData.items.length > 0) {
-      items = strapiData.items.map((text, i) => {
-        if (i < c.items.length) {
-          return { ...c.items[i], text };
-        }
-        // Generate new top coordinate dynamically
-        const lastBaseTop = c.items.length > 0 ? c.items[c.items.length - 1].top : 14;
-        const newTop = lastBaseTop + (i - c.items.length + 1) * 43.64;
-        return { text, top: newTop, plusTop: +(newTop + 3.5).toFixed(2) };
-      });
-      
-      // Also adjust lines to match the number of items - 1
-      if (items.length > 1) {
-        const numLinesNeeded = items.length - 1;
-        lines = Array.from({ length: numLinesNeeded }).map((_, i) => {
-          if (i < c.lines.length) return c.lines[i];
-          const lastLine = c.lines[c.lines.length - 1] || { top: 40, left: 17, width: 233 };
-          const newLineTop = lastLine.top + (i - c.lines.length + 1) * 43.64;
-          return { ...lastLine, top: newLineTop };
+      if (c.title === "Peripherals") {
+        items = strapiData.items.map((text, i) => {
+          const col = i % 3;
+          const row = Math.floor(i / 3);
+          const top = 57.33 + row * 34; // Reduced row gap
+          let left = 33.5, plusLeft = 15.5;
+          if (col === 1) { left = 145.5; plusLeft = 127.5; }
+          else if (col === 2) { left = 265.5; plusLeft = 247.5; }
+          return { text, top, plusTop: +(top + 3.5).toFixed(2), left, plusLeft };
         });
+        
+        // Adjust lines to match number of rows - 1
+        const numRows = Math.ceil(items.length / 3);
+        if (numRows > 1) {
+          const numLinesNeeded = numRows - 1;
+          lines = Array.from({ length: numLinesNeeded }).map((_, i) => {
+            const baseLine = c.lines[0] || { top: 87.57, left: 17.62, width: 329.877 };
+            return { ...baseLine, top: 74.33 + i * 34 };
+          });
+        } else {
+          lines = [];
+        }
+      } else if (c.title === "Package") {
+        items = strapiData.items.map((text, i) => {
+          const top = 57.33 + i * 34; // Reduced row gap
+          return { text, top, plusTop: +(top + 3.5).toFixed(2), left: 32.5, plusLeft: 14.5 };
+        });
+        
+        if (items.length > 1) {
+          lines = Array.from({ length: items.length - 1 }).map((_, i) => {
+            return { top: 74.33 + i * 34, left: 14.5, width: 329.877 };
+          });
+        } else {
+          lines = [];
+        }
       } else {
-        lines = [];
+        items = strapiData.items.map((text, i) => {
+          const baseItem = c.items[0] || { left: 33, plusLeft: 15, top: 57.33 };
+          const top = baseItem.top + i * 43.64;
+          return { ...baseItem, text, top, plusTop: +(top + 3.5).toFixed(2) };
+        });
+        
+        if (items.length > 1) {
+          lines = Array.from({ length: items.length - 1 }).map((_, i) => {
+            const baseLine = c.lines[0] || { top: 87.33, left: 17.12, width: 339.885 };
+            return { ...baseLine, top: baseLine.top + i * 43.64 };
+          });
+        } else {
+          lines = [];
+        }
       }
     }
     return { ...c, items, lines, iconSrc: strapiData?.iconUrl || c.iconSrc };

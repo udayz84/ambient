@@ -1,1 +1,87 @@
-{ "kind": "singleType", "collectionName": "products_pages", "info": { "singularName": "products-page", "pluralName": "products-pages", "displayName": "Products Page", "description": "Products page" }, "options": { "draftAndPublish": true }, "pluginOptions": {}, "attributes": { "hero": { "type": "component", "repeatable": false, "component": "products.hero" }, "features": { "type": "component", "repeatable": false, "component": "products.features" }, "always_on": { "type": "component", "repeatable": false, "component": "products.always-on" }, "use_cases": { "type": "component", "repeatable": false, "component": "products.use-cases" }, "measured": { "type": "component", "repeatable": false, "component": "products.measured" }, "architecture": { "type": "component", "repeatable": false, "component": "products.architecture" }, "modelforge": { "type": "component", "repeatable": false, "component": "products.modelforge" }, "bench_to_volume": { "type": "component", "repeatable": false, "component": "products.bench-to-volume" }, "full_picture": { "type": "component", "repeatable": false, "component": "products.full-picture" }, "start_building": { "type": "component", "repeatable": false, "component": "products.start-building" }, "sticky_nav": { "type": "component", "repeatable": true, "component": "products.sticky-nav-item", "description": "White bottom toggle items (label + section anchor)" }, "seo": { "type": "component", "repeatable": false, "component": "shared.seo" } } }
+{
+  "kind": "singleType",
+  "collectionName": "products_pages",
+  "info": {
+    "singularName": "products-page",
+    "pluralName": "products-pages",
+    "displayName": "Products Page",
+    "description": "Products page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hero": {
+      "type": "component",
+      "repeatable": false,
+      "component": "products.hero"
+    },
+    "features": {
+      "type": "component",
+      "repeatable": false,
+      "component": "products.features"
+    },
+    "always_on": {
+      "type": "component",
+      "repeatable": false,
+      "component": "products.always-on"
+    },
+    "use_cases": {
+      "type": "component",
+      "repeatable": false,
+      "component": "products.use-cases"
+    },
+    "case_studies": {
+      "type": "component",
+      "repeatable": false,
+      "component": "products.case-studies"
+    },
+    "measured": {
+      "type": "component",
+      "repeatable": false,
+      "component": "products.measured"
+    },
+    "architecture": {
+      "type": "component",
+      "repeatable": false,
+      "component": "products.architecture"
+    },
+    "modelforge": {
+      "type": "component",
+      "repeatable": false,
+      "component": "products.modelforge"
+    },
+    "bench_to_volume": {
+      "type": "component",
+      "repeatable": false,
+      "component": "products.bench-to-volume"
+    },
+    "full_picture": {
+      "type": "component",
+      "repeatable": false,
+      "component": "products.full-picture"
+    },
+    "start_building": {
+      "type": "component",
+      "repeatable": false,
+      "component": "products.start-building"
+    },
+    "sticky_nav": {
+      "type": "component",
+      "repeatable": true,
+      "component": "products.sticky-nav-item",
+      "description": "White bottom toggle items (label + section anchor)"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    },
+    "som_family": {
+      "type": "component",
+      "repeatable": false,
+      "component": "som.family"
+    }
+  }
+}
