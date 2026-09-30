@@ -206,9 +206,8 @@ export function ProductsFeatureCard({
 
       <CardImage variant={card.image} isSpread={isSpread} />
 
-      {/* description */}
       <p
-        className={`${interRegular.className} absolute bottom-[126px] left-[calc(50%-164px)] w-[328px] translate-y-full text-[18px] leading-[27px] font-normal text-white not-italic opacity-90 [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+        className={`${interRegular.className} absolute bottom-[126px] left-[calc(50%-164px)] w-[328px] translate-y-full text-[18px] leading-[27px] font-normal text-white not-italic opacity-90 [word-break:break-word]`}
       >
         {card.description}
       </p>

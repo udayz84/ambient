@@ -155,7 +155,6 @@ export function ModelZooAppForge({ data }: { data?: any }) {
                   <video
                     ref={videoRef}
                     className="pointer-events-none absolute inset-0 size-full object-contain"
-                    src="/videos/electronica-tv-01-v03.mp4"
                     poster="/videos/electronica-tv-01-v03-poster.jpg"
                     autoPlay
                     muted
@@ -167,7 +166,11 @@ export function ModelZooAppForge({ data }: { data?: any }) {
                         e.currentTarget.play().catch(() => {});
                       }
                     }}
-                  />
+                  >
+                    {/* Alpha-channel WebM (from the ProRes 4444 original); MP4 fallback has black bg */}
+                    <source src="/videos/electronica-tv-01-v03.webm" type="video/webm" />
+                    <source src="/videos/electronica-tv-01-v03.mp4" type="video/mp4" />
+                  </video>
                 </>
               )}
             </div>
