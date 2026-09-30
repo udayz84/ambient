@@ -133,6 +133,7 @@ export function ModelZooAppForge({ data }: { data?: any }) {
                   loop
                   playsInline
                   preload="auto"
+                  onLoadedMetadata={(e) => { e.currentTarget.playbackRate = 2.0; }}
                 />
               ) : activeStep ? (
                 /* Variant collage baked @2x from Figma (corners included) */
