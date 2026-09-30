@@ -71,6 +71,7 @@ export function ProductsAppForge({ data }: { data?: any }) {
         <img src={STEP_ARTICLE.pair} alt="" loading="eager" />
         <img src={STEP_ARTICLE.flash} alt="" loading="eager" />
         <link rel="preload" as="video" href="https://ambientwebasset.blob.core.windows.net/website-assets/model-zoo/af-results.mp4" />
+        <link rel="preload" as="image" href="/videos/electronica-tv-01-v03-poster.jpg" />
       </div>
       {/* Figma 5131:10576 — full-bleed ambient glow strip behind the showcase
           and the wide article card (top 519, h 552 in the 1440 canvas). */}
@@ -154,7 +155,8 @@ export function ProductsAppForge({ data }: { data?: any }) {
                   <video
                     ref={videoRef}
                     className="pointer-events-none absolute inset-0 size-full object-contain"
-                    src="https://ambientwebasset.blob.core.windows.net/website-assets/model-zoo/af-video.mp4"
+                    src="/videos/electronica-tv-01-v03.mp4"
+                    poster="/videos/electronica-tv-01-v03-poster.jpg"
                     autoPlay
                     muted
                     loop

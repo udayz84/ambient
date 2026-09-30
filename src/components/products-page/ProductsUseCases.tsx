@@ -103,8 +103,8 @@ export function ProductsUseCases({ data }: { data?: any }) {
     ...tabs,
     {
       label: "BUILD",
-      watermark: "BUILD YOUR OWN APPLICATION",
-      image: "",
+      watermark: "BUILD YOUR OWN",
+      image: "/products/build-custom-cube.jpg",
       featureCards: [],
       isBuild: true,
     }
@@ -301,34 +301,42 @@ function ProductsUseCasesDesktop({
           >
             {/* BUILD Tab Custom Layout vs Standard Layout */}
             {activeTab.isBuild ? (
-              <div className="absolute inset-0 flex flex-col items-center justify-start pt-[280px] pointer-events-none z-10">
+              <>
+                {/* Background Watermark for BUILD */}
                 <h3
-                  className={`${gilroyExtraBold.className} m-0 flex flex-col justify-center text-center uppercase tracking-[0.5px] bg-clip-text text-transparent [word-break:break-word] not-italic text-[120px] leading-[110px] whitespace-normal`}
-                  style={{ backgroundImage: WATERMARK_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
+                  className={`${gilroyExtraBold.className} absolute m-0 flex flex-col justify-center text-center uppercase tracking-[0.5px] bg-clip-text text-transparent [word-break:break-word] not-italic text-[160px] leading-[150px] whitespace-nowrap`}
+                  style={{
+                    left: 0,
+                    top: 360,
+                    width: USECASES_CANVAS_WIDTH,
+                    backgroundImage: WATERMARK_GRADIENT,
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                  }}
                   aria-hidden
                 >
-                  BUILD YOUR
+                  BUILD YOUR OWN<br/>APPLICATION
                 </h3>
                 
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img loading="lazy" decoding="async"
-                  alt="Build Custom Application"
-                  src="/products/build-custom-cube.jpg"
-                  className="my-[10px] h-auto max-h-[220px] w-auto object-contain pointer-events-none drop-shadow-2xl mix-blend-screen"
-                />
-
-                <h3
-                  className={`${gilroyExtraBold.className} m-0 flex flex-col justify-center text-center uppercase tracking-[0.5px] bg-clip-text text-transparent [word-break:break-word] not-italic text-[120px] leading-[110px] whitespace-normal`}
-                  style={{ backgroundImage: WATERMARK_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
-                  aria-hidden
+                {/* Central image for BUILD */}
+                <div
+                  className="absolute overflow-hidden flex flex-col items-center justify-center pointer-events-none"
+                  style={{ left: 407.759765625, top: 350, width: 632.8800659179688, height: 500 }}
                 >
-                  APPLICATION
-                </h3>
-                
-                <div className="mt-[24px] pointer-events-auto">
-                  <PrimaryCta href="/model-zoo">Explore Model Zoo</PrimaryCta>
+                  <div className="relative flex items-center justify-center">
+                    <div className="absolute inset-[40px] bg-black rounded-full blur-[20px] z-0" />
+                    <img loading="lazy" decoding="async"
+                      alt="Build Custom Application"
+                      src="/products/build-custom-cube.jpg"
+                      className="relative z-10 h-full w-auto max-h-[360px] object-contain drop-shadow-2xl mix-blend-screen pointer-events-none"
+                    />
+                  </div>
+                  
+                  <div className="mt-[40px] pointer-events-auto">
+                    <PrimaryCta href="/model-zoo">Explore Model Zoo</PrimaryCta>
+                  </div>
                 </div>
-              </div>
+              </>
             ) : (
               <>
                 {/* Giant watermark — 2901:2103 */}
@@ -685,31 +693,27 @@ function ProductsUseCasesMobile({
       {/* Image */}
       <div className="relative mt-[24px] flex justify-center">
         {activeTab.isBuild ? (
-          <div className="relative flex flex-col w-full items-center justify-center px-[16px]">
+          <div className="relative flex flex-col w-full items-center justify-center px-[16px] min-h-[360px]">
             <h3
-              className={`${gilroyExtraBold.className} m-0 w-full text-center uppercase tracking-[0.5px] bg-clip-text text-transparent not-italic text-[48px] min-[400px]:text-[56px] leading-[52px] whitespace-normal`}
+              className={`${gilroyExtraBold.className} absolute left-1/2 top-[40%] -translate-x-1/2 -translate-y-1/2 w-full px-[16px] text-center uppercase tracking-[0.5px] bg-clip-text text-transparent not-italic text-[44px] min-[400px]:text-[52px] leading-[48px] flex flex-col justify-center items-center`}
               style={{ backgroundImage: WATERMARK_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
               aria-hidden
             >
-              BUILD YOUR
+              <span>BUILD YOUR OWN</span>
+              <span>APPLICATION</span>
             </h3>
             
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img loading="lazy" decoding="async"
-              alt="Build Custom Application"
-              src="/products/build-custom-cube.jpg"
-              className="my-[16px] h-auto max-h-[220px] w-auto object-contain pointer-events-none drop-shadow-2xl mix-blend-screen"
-            />
+            <div className="relative flex items-center justify-center mt-[32px] mb-[16px]">
+              <div className="absolute inset-[30px] bg-black rounded-full blur-[15px] z-0" />
+              <img loading="lazy" decoding="async"
+                alt="Build Custom Application"
+                src="/products/build-custom-cube.jpg"
+                className="relative z-10 h-auto max-h-[280px] w-auto object-contain drop-shadow-2xl mix-blend-screen"
+              />
+            </div>
 
-            <h3
-              className={`${gilroyExtraBold.className} m-0 w-full text-center uppercase tracking-[0.5px] bg-clip-text text-transparent not-italic text-[48px] min-[400px]:text-[56px] leading-[52px] whitespace-normal`}
-              style={{ backgroundImage: WATERMARK_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
-              aria-hidden
-            >
-              APPLICATION
-            </h3>
-            
-            <div className="mt-[32px] mb-[24px]">
+            <div className="relative z-20 mt-[16px] mb-[24px]">
               <PrimaryCta href="/model-zoo">Explore Model Zoo</PrimaryCta>
             </div>
           </div>

@@ -13,14 +13,24 @@ export function CtaPrimary({
   label,
   href = "#",
   width,
+  onClick,
 }: {
   label: string;
   href?: string;
   width?: number;
+  onClick?: () => void;
 }) {
   return (
     <a
       href={href}
+      onClick={
+        onClick
+          ? (e) => {
+              e.preventDefault();
+              onClick();
+            }
+          : undefined
+      }
       className={`shadow-[0px_42px_107px_0px_rgba(83,216,36,0.45),0px_24.721px_32.257px_0px_rgba(83,216,36,0.35),0px_10.268px_13.398px_0px_rgba(83,216,36,0.35),0px_3.714px_4.846px_0px_rgba(83,216,36,0.2)] ${gilroyMedium.className} relative flex h-[48px] shrink-0 items-center justify-center px-[20px]`}
       style={width ? { width } : undefined}
       data-name="Cta"

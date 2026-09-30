@@ -155,7 +155,7 @@ export function ProductsFeaturesCarousel({
   return (
     <div
       ref={viewportRef}
-      className="absolute top-[350px] left-1/2 -translate-x-1/2 overflow-hidden touch-none select-none w-[100vw] [@media(max-height:1000px)]:w-[117.64vw] [@media(max-height:850px)]:w-[133.33vw] [@media(max-height:750px)]:w-[153.84vw]"
+      className="absolute top-[200px] left-1/2 -translate-x-1/2 overflow-hidden touch-none select-none w-[100vw] [@media(max-height:850px)]:w-[117.64vw] [@media(max-height:750px)]:w-[133.33vw]"
       data-node-id="3742:931"
       data-name="Measured proof in silicon"
       aria-label="Product capability cards"

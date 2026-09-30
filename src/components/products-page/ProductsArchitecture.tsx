@@ -69,7 +69,7 @@ export function ProductsArchitecture({ data }: { data?: any }) {
     <>
       {/* DESKTOP (>=1024px) */}
       <section
-        className="relative mx-auto hidden w-full bg-black min-[1024px]:block"
+        className="relative mx-auto hidden w-full bg-black min-[1024px]:block pt-[120px]"
         aria-label="Architecture"
       >
         <ProductsArchitectureDesktop
@@ -471,7 +471,7 @@ function ProductsArchitectureMobile({
   const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <section
-      className="relative w-full overflow-hidden bg-black min-[1024px]:hidden"
+      className="relative w-full overflow-hidden bg-black min-[1024px]:hidden pt-[80px]"
       aria-label="Architecture"
       data-node-id="3568:4644"
     >

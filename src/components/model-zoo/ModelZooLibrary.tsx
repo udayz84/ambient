@@ -7,6 +7,7 @@ import { Corners } from "../shared/Corners";
 import { getFadeInClass, useFadeIn } from "../shared/useFadeIn";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { CtaPrimary } from "./ModelZooCtas";
+import { ModelZooRequestForm } from "./ModelZooRequestForm";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
@@ -239,6 +240,7 @@ export function ModelZooLibrary() {
   const [modality, setModality] = useState("all");
   const [type, setType] = useState("all");
   const [query, setQuery] = useState("");
+  const [requestOpen, setRequestOpen] = useState(false);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -383,9 +385,11 @@ export function ModelZooLibrary() {
 
         {/* Request CTA — 5131:5191 (225×48, centered) */}
         <div className="mt-[36px] flex justify-center pb-[40px] min-[1024px]:pb-[81px]">
-          <CtaPrimary label="Request Model Zoo" width={225} />
+          <CtaPrimary label="Request Model Zoo" width={225} onClick={() => setRequestOpen(true)} />
         </div>
       </div>
+
+      {requestOpen ? <ModelZooRequestForm onClose={() => setRequestOpen(false)} /> : null}
     </section>
   );
 }

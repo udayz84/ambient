@@ -141,15 +141,15 @@ function ProductsBenchToVolumeDesktop({
         data-node-id="2918:1476"
         data-name="Frame 1984079440"
       >
-        {cards.map((card) => (
-          <BenchCardView key={card.nodeId} card={card} chipLabel={card.chipLabel || chipLabel} />
+        {cards.map((card, index) => (
+          <BenchCardView key={card.nodeId} card={card} chipLabel={card.chipLabel || chipLabel} isCenter={index === 1} />
         ))}
       </div>
     </div>
   );
 }
 
-function BenchCardView({ card, chipLabel }: { card: any; chipLabel: string }) {
+function BenchCardView({ card, chipLabel, isCenter }: { card: any; chipLabel: string; isCenter?: boolean }) {
   const { fadeRef, isVisible } = useFadeIn();
 
   return (
@@ -176,11 +176,22 @@ function BenchCardView({ card, chipLabel }: { card: any; chipLabel: string }) {
         aria-hidden
       >
         {card.image ? (
-          <img loading="lazy" decoding="async"
-            src={card.image}
-            alt=""
-            className="absolute inset-0 size-full max-w-none rounded-[6px] object-contain"
-          />
+          <>
+            <img loading="lazy" decoding="async"
+              src={card.image}
+              alt=""
+              className={`absolute inset-0 size-full max-w-none rounded-[6px] object-contain ${isCenter ? "blur-[2px] brightness-[0.4] opacity-90" : ""}`}
+            />
+            {isCenter && (
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center border border-[#E2A740] bg-black/90 px-[16px] py-[12px] shadow-lg z-10">
+                <span className={`${dmMono?.className || "font-mono"} flex items-center gap-[16px] whitespace-nowrap text-[14px] uppercase tracking-[0.1em] text-[#E2A740] min-[1024px]:text-[16px]`}>
+                  <span>|</span>
+                  <span>COMING SOON</span>
+                  <span>|</span>
+                </span>
+              </div>
+            )}
+          </>
         ) : (
           <div
             style={{
@@ -327,8 +338,8 @@ function ProductsBenchToVolumeMobile({
 
         {/* ── Cards — 4105:7737 (355 wide, gap=12) ── */}
         <div className="mx-auto mt-[24px] flex w-[355px] flex-col gap-[12px] pb-[40px]">
-          {cards.map((card) => (
-            <MobileBenchCard key={card.nodeId} card={card} />
+          {cards.map((card, index) => (
+            <MobileBenchCard key={card.nodeId} card={card} isCenter={index === 1} />
           ))}
         </div>
       </div>
@@ -337,7 +348,7 @@ function ProductsBenchToVolumeMobile({
 }
 
 /* ── Mobile bench card — Figma 4105:7738 (355 wide) ── */
-function MobileBenchCard({ card }: { card: any }) {
+function MobileBenchCard({ card, isCenter }: { card: any; isCenter?: boolean }) {
   return (
     <article
       className="relative flex w-[355px] flex-col gap-[16px] overflow-clip border-[0.461px] border-solid border-[rgba(240,240,240,0.2)] bg-black px-[18px] pb-[30px] pt-[18px]"
@@ -351,12 +362,22 @@ function MobileBenchCard({ card }: { card: any }) {
         aria-hidden
       >
         {card.image && (
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img loading="lazy" decoding="async"
-            src={card.image}
-            alt=""
-            className="absolute inset-0 size-full max-w-none rounded-[5.528px] object-contain"
-          />
+          <>
+            <img loading="lazy" decoding="async"
+              src={card.image}
+              alt=""
+              className={`absolute inset-0 size-full max-w-none rounded-[5.528px] object-contain ${isCenter ? "blur-[2px] brightness-[0.4] opacity-90" : ""}`}
+            />
+            {isCenter && (
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center border border-[#E2A740] bg-black/90 px-[16px] py-[12px] shadow-lg z-10 scale-90">
+                <span className={`${dmMono?.className || "font-mono"} flex items-center gap-[16px] whitespace-nowrap text-[14px] uppercase tracking-[0.1em] text-[#E2A740]`}>
+                  <span>|</span>
+                  <span>COMING SOON</span>
+                  <span>|</span>
+                </span>
+              </div>
+            )}
+          </>
         )}
       </div>
 

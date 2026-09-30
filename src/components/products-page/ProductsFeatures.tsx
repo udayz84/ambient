@@ -78,28 +78,30 @@ export function ProductsFeatures({ data }: { data?: any }) {
   return (
     <section
       id="products-features"
-      className={`relative left-1/2 w-screen max-w-none -translate-x-1/2 bg-black max-[1023px]:h-auto ${needsScroll ? "min-[1024px]:h-[200vh]" : "min-[1024px]:h-[100vh]"}`}
+      className="relative left-1/2 w-screen max-w-none -translate-x-1/2 bg-black min-[1024px]:py-[120px]"
       data-node-id="3286:1931"
       data-name="Section 6"
       aria-label="Product capabilities"
     >
-      {/* DESKTOP (>=1024px) — sticky stage */}
-      <div className="sticky top-[78px] hidden h-[calc(100vh-78px)] w-full overflow-hidden min-[1024px]:block">
+      {/* DESKTOP (>=1024px) */}
+      <div className="hidden w-full min-[1024px]:block">
         <SectionBackdrop src={bgImage} />
-        <div className="absolute inset-0 flex items-start justify-center pt-[60px]">
-          <div className="relative mx-auto h-[1100px] w-full max-w-[1440px] transition-all duration-300 [@media(max-height:1000px)]:[zoom:0.85] [@media(max-height:850px)]:[zoom:0.75] [@media(max-height:750px)]:[zoom:0.65]">
+        <div className="relative mx-auto flex w-full max-w-[1440px] flex-col items-center px-[64px]">
           {/* 3286:2105 — Section Title */}
           <div
-            className="absolute top-[22.5px] left-1/2 flex -translate-x-1/2 flex-col items-center justify-center gap-[24px]"
+            className="flex flex-col items-center justify-center gap-[20px]"
             data-node-id="3286:2105"
             data-name="Section Title"
           >
             <TagBadge
               label={BADGE_TEXT}
-              width={220}
+              width={240}
+              height={30}
               centerLabel
               labelOffsetX={0}
-              rightBarLeft={210}
+              leftBarLeft={10}
+              rightBarLeft={230}
+              labelClassName="text-[13px]"
             />
             <div
               className="relative flex shrink-0 flex-col items-center px-[10px]"
@@ -108,7 +110,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
             >
               <div
                 ref={fitRef}
-                className={`${gilroyMedium.className} relative shrink-0 bg-clip-text text-center text-[46px] leading-[0] font-medium whitespace-nowrap text-transparent not-italic [word-break:break-word]`}
+                className={`${gilroyMedium.className} relative shrink-0 bg-clip-text text-center text-[50px] leading-[0] font-medium whitespace-nowrap text-transparent not-italic [word-break:break-word]`}
                 style={{
                   backgroundImage: SECTION_TITLE_GRADIENT,
                   WebkitBackgroundClip: "text",
@@ -119,7 +121,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
                 {headingLines.map((line, i) => (
                   <p
                     key={`title-${i}`}
-                    className={`leading-[49px] whitespace-pre ${i === 0 ? "mb-0" : ""}`}
+                    className={`leading-[54px] whitespace-pre ${i === 0 ? "mb-0" : ""}`}
                   >
                     {line}
                   </p>
@@ -128,23 +130,31 @@ export function ProductsFeatures({ data }: { data?: any }) {
               <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             </div>
             <p
-              className={`${interRegular.className} w-[800px] max-w-[90vw] shrink-0 text-center text-[18px] leading-[28px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] mt-[16px] mb-[24px]`}
+              className={`${interRegular.className} w-[900px] max-w-[90vw] shrink-0 text-center text-[18px] leading-[26px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] mt-[16px] mb-[32px]`}
               data-node-id="3286:2112"
             >
               {subtitle}
             </p>
           </div>
 
-          <ProductsFeaturesCarousel cards={featureCards} onScrollChange={setNeedsScroll} />
+          {/* CARDS NATIVE SCROLL */}
+          <div className="flex w-full justify-center transform scale-[0.8] origin-top max-[1300px]:scale-[0.75] max-[1150px]:scale-[0.65]">
+            <div className="flex gap-[24px]">
+              {featureCards.map((card, index) => (
+                <div key={card.nodeId} className="shrink-0">
+                  <ProductsFeatureCard card={card} isSpread={index === 1} />
+                </div>
+              ))}
+            </div>
+          </div>
 
           {/* 3710:1634 — caption */}
           <p
-            className={`${interRegular.className} absolute top-[980px] left-1/2 w-[800px] max-w-[90vw] -translate-x-1/2 text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} -mt-[60px] w-[800px] max-w-[90vw] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-80 not-italic [word-break:break-word]`}
             data-node-id="3710:1634"
           >
             {CAPTION}
           </p>
-        </div>
         </div>
       </div>
 
