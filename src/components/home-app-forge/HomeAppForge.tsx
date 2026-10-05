@@ -72,7 +72,7 @@ export function HomeAppForge({ data }: { data?: any }) {
         <img src={STEP_ARTICLE.flash} alt="" loading="eager" />
         <link rel="preload prefetch" as="video" href="/model-zoo/af-results.mp4" />
         <link rel="preload" as="image" href="/videos/electronica-tv-01-v03-poster.jpg" />
-      </div>
+        </div>
       {/* Figma 5131:10576 — full-bleed ambient glow strip behind the showcase
           and the wide article card (top 519, h 552 in the 1440 canvas). */}
       <img
@@ -166,9 +166,7 @@ export function HomeAppForge({ data }: { data?: any }) {
                       }
                     }}
                   >
-                    {/* Alpha-channel WebM (from the ProRes 4444 original); MP4 fallback has black bg */}
-                    <source src="/videos/electronica-tv-01-v03.webm" type="video/webm" />
-                    <source src="/videos/electronica-tv-01-v03.mp4" type="video/mp4" />
+                    <source src="/videos/electronica-tv-01-v03.alpha2.webm" type="video/webm" />
                   </video>
                 </>
               )}
