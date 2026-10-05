@@ -167,6 +167,8 @@ export function ModelZooAppForge({ data }: { data?: any }) {
                     }}
                   >
                     <source src="/videos/electronica-tv-01-v03.alpha2.webm" type="video/webm" />
+                    {/* Fallback for Safari which doesn't support WebM alpha, or if prod deployment drops large files */}
+                    <source src="https://ambientwebasset.blob.core.windows.net/website-assets/model-zoo/af-video.mp4" type="video/mp4" />
                   </video>
                 </>
               )}

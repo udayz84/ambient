@@ -22,12 +22,12 @@ export function PlatformScaleHeader({ data }: { data?: any }) {
       data-name="Group 87"
     >
       <div
-        className="relative inline-grid grid-cols-[max-content] grid-rows-[max-content] place-items-start leading-[0] w-full"
+        className="relative inline-grid grid-cols-[607px] grid-rows-[max-content] place-items-start leading-[0] w-[607px]"
         data-name="Headline frame"
       >
         <h2
           ref={fitRef}
-          className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[16px] justify-self-center bg-clip-text text-center text-[46px] leading-[49px] font-medium text-[transparent] not-italic [word-break:break-word] w-full max-w-[580px]`}
+          className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[16px] justify-self-center bg-clip-text text-center text-[46px] leading-[49px] font-medium text-[transparent] not-italic [word-break:break-word] w-full px-[20px]`}
           style={{
             backgroundImage:
               "linear-gradient(100.945deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
