@@ -8,9 +8,9 @@ import { GhostGreenCta, PartnersGreenCta, PartnersSectionHeading } from "./partn
 
 function ProofMarker({ icon }: { icon?: string }) {
   return (
-    <span className="relative flex size-[32px] shrink-0 items-center justify-center" aria-hidden>
+    <span className="relative flex size-[40px] shrink-0 items-center justify-center" aria-hidden>
       <span className="absolute inset-0 border-[0.5px] border-solid border-[rgba(83,216,36,0.6)] bg-[rgba(83,216,36,0.1)]" />
-      <img loading="lazy" decoding="async" src={icon} alt="" className="size-[16px] object-contain" />
+      <img loading="lazy" decoding="async" src={icon} alt="" className="size-[22px] object-contain" />
     </span>
   );
 }
