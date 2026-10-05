@@ -128,7 +128,7 @@ const CARDS: WatchCard[] = [
     imgH: 254,
     title: "Yours to shape.",
     desc: "Retrain any model using your own data, or bring your own model. The zoo is a starting point, not a limitation.",
-    textH: 367,
+    textH: 345,
     decor: (
       <>
         <Dec src="/model-zoo/dec-ellipse-4.svg" left={190} top={185} w={4} h={4} inset="-25%" />
