@@ -12,6 +12,21 @@ const nextConfig: NextConfig = {
   env: {
     AZURE_ASSETS_PUBLIC_URL: process.env.AZURE_ASSETS_PUBLIC_URL || "",
   },
+  // Heavy media (AppForge videos, model-zoo imagery) is served from /public
+  // with versioned filenames — cache immutably so repeat visits play from
+  // disk instead of re-downloading 13–18MB.
+  async headers() {
+    return [
+      {
+        source: "/videos/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+      {
+        source: "/model-zoo/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+    ];
+  },
   // Strapi redirects are now handled dynamically by src/middleware.ts
   // so they take effect immediately without needing a rebuild/restart.
   images: {

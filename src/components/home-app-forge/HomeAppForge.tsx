@@ -70,7 +70,7 @@ export function HomeAppForge({ data }: { data?: any }) {
       <div className="hidden" aria-hidden="true">
         <img src={STEP_ARTICLE.pair} alt="" loading="eager" />
         <img src={STEP_ARTICLE.flash} alt="" loading="eager" />
-        <link rel="preload" as="video" href="https://ambientwebasset.blob.core.windows.net/website-assets/model-zoo/af-results.mp4" />
+        <link rel="preload prefetch" as="video" href="/model-zoo/af-results.mp4" />
         <link rel="preload" as="image" href="/videos/electronica-tv-01-v03-poster.jpg" />
       </div>
       {/* Figma 5131:10576 — full-bleed ambient glow strip behind the showcase
@@ -134,13 +134,12 @@ export function HomeAppForge({ data }: { data?: any }) {
                    object-contain so the native aspect is kept (letterboxed). */
                 <video
                   className="pointer-events-none block h-full w-auto object-contain"
-                  src="https://ambientwebasset.blob.core.windows.net/website-assets/model-zoo/af-results.mp4"
+                  src="/model-zoo/af-results.mp4"
                   autoPlay
                   muted
                   loop
                   playsInline
                   preload="auto"
-                  onLoadedMetadata={(e) => { e.currentTarget.playbackRate = 2.0; }}
                 />
               ) : activeStep ? (
                 /* Variant collage baked @2x from Figma (corners included) */
