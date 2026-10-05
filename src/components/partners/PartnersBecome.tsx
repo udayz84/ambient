@@ -169,7 +169,11 @@ export function PartnersBecome({
             >
               <Corners />
               <div className="relative flex size-[56px] shrink-0 items-center justify-center border-[0.5px] border-solid border-[rgba(83,216,36,0.4)] bg-[rgba(83,216,36,0.08)]">
-                <WireframeIcon name={benefit.icon} className="size-[34px]" />
+                {benefit.icon.endsWith(".svg") ? (
+                  <img src={benefit.icon} alt="" className="size-[34px]" aria-hidden />
+                ) : (
+                  <WireframeIcon name={benefit.icon} className="size-[34px]" />
+                )}
               </div>
               <div className="mt-[24px] flex w-full flex-col gap-[10px]">
                 <h3 className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white [word-break:break-word] not-italic`}>

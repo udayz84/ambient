@@ -8,6 +8,7 @@ import { SomEcosystem } from "@/components/som-page/SomEcosystem";
 import { SomReadyToDeploy } from "@/components/som-page/SomReadyToDeploy";
 import { SomFooterMerge } from "@/components/som-page/SomFooterMerge";
 import { SomIntelligence } from "@/components/som-page/SomIntelligence";
+import { SomProvenCore } from "@/components/som-page/SomProvenCore";
 import { getSingleType } from "@/lib/strapi";
 import { buildMetadata, type SeoData } from "@/lib/seo";
 
@@ -60,6 +61,7 @@ export default async function SomPage() {
       {/* <SomEcosystem data={data?.ecosystem} /> */}
 
       <SomIntelligence data={data?.intelligence} />
+      <SomProvenCore />
       <SomReadyToDeploy data={data?.ready_to_deploy} />
       <SomFooterMerge data={data?.footer_merge} />
     </main>

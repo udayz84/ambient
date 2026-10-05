@@ -156,53 +156,7 @@ export function SomHero({ data }: { data?: any }) {
               {subtitle}
             </p>
 
-            <div
-              className="flex shrink-0 items-start gap-[24px]"
-              data-node-id="3210:1557"
-            >
-              {/* Primary CTA */}
-              <a
-                href={primaryHref}
-                className={`${gilroyMedium.className} relative h-[48px] w-[281px] shrink-0 ${PRIMARY_CTA_SHADOW}`}
-                data-node-id="3210:1558"
-                data-name="Cta"
-              >
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-                />
-                <span className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
-                  <RepelDots />
-                </span>
-                <p
-                  className="absolute left-1/2 top-[calc(50%-14px)] z-10 max-w-full -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]"
-                  data-node-id="3210:1559"
-                >
-                  {primaryLabel}
-                </p>
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
-                />
-                <PrimaryCtaCorners />
-              </a>
 
-              {/* Secondary CTA */}
-              <a
-                href={secondaryHref}
-                className={`${gilroyMedium.className} relative h-[48px] w-[226px] shrink-0 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
-                data-node-id="3210:1569"
-                data-name="CTA - Secondary"
-              >
-                <p
-                  className="absolute left-1/2 top-[calc(50%-14px)] max-w-full -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]"
-                  data-node-id="3210:1571"
-                >
-                  {secondaryLabel}
-                </p>
-                <GreenCtaCorners />
-              </a>
-            </div>
           </div>
         </div>
       </div>
@@ -274,48 +228,7 @@ export function SomHero({ data }: { data?: any }) {
           </p>
         </div>
 
-        {/* CTA group — 4046:7811 (x57, y588, 280×112) */}
-        <div
-          className="absolute bottom-0 left-1/2 flex w-[280px] -translate-x-1/2 flex-col gap-[16px]"
-          data-node-id="4046:7811"
-        >
-          {/* Primary CTA — 4046:7812 */}
-          <a
-            href={primaryHref}
-            className={`${gilroyMedium.className} relative block h-[48px] w-full ${PRIMARY_CTA_SHADOW}`}
-            data-node-id="4046:7812"
-            data-name="Cta"
-          >
-            <span
-              aria-hidden
-              className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-            />
-            <span className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
-              <RepelDots />
-            </span>
-            <p className="absolute left-1/2 top-[calc(50%-14px)] z-10 max-w-full -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]">
-              {primaryLabel}
-            </p>
-            <span
-              aria-hidden
-              className="pointer-events-none absolute inset-0 z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
-            />
-            <PrimaryCtaCorners />
-          </a>
 
-          {/* Secondary CTA — 4046:7823 */}
-          <a
-            href={secondaryHref}
-            className={`${gilroyMedium.className} relative block h-[48px] w-full border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
-            data-node-id="4046:7823"
-            data-name="CTA - Secondary"
-          >
-            <p className="absolute left-1/2 top-[calc(50%-14px)] max-w-full -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]">
-              {secondaryLabel}
-            </p>
-            <GreenCtaCorners />
-          </a>
-        </div>
       </div>
     </section>
   );

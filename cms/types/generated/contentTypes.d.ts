@@ -1592,6 +1592,7 @@ export interface ApiSomPageSomPage extends Struct.SingleTypeSchema {
     features: Schema.Attribute.Component<'som.features', false>;
     footer_merge: Schema.Attribute.Component<'som.footer-merge', false>;
     hero: Schema.Attribute.Component<'som.hero', false>;
+    intelligence: Schema.Attribute.Component<'som.intelligence', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

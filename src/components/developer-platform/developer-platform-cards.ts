@@ -99,7 +99,7 @@ export const DEVELOPER_PLATFORM_CARDS: DeveloperPlatformCardConfig[] = [
     width: 796,
     height: 290,
     title: "Prototype with application-focused modules",
-    href: "/applications",
+    href: "/SOM",
     titleLeft: 20,
     body:
       "Move faster with modules designed around real-world verticals and product categories",

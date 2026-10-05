@@ -39,13 +39,18 @@ const JOURNEY_IMAGES = [
   "/partners/svg 2/10.svg",
   "/partners/svg 2/11.svg",
 ];
-const BENEFIT_ICONS = ["speed", "target", "shield", "focus"] as const;
+const BENEFIT_ICONS = [
+  "/partners/icons_benefits/timer-02.svg",
+  "/partners/icons_benefits/auto-conversations.svg",
+  "/partners/icons_benefits/chart-line-data-03.svg",
+  "/partners/icons_benefits/center-focus.svg",
+] as const;
 const CAPABILITY_ICONS = ["model", "firmware", "hardware", "product", "manufacturing"];
 const PROOF_ICONS = [
-  "/applications/dvk-icon-1.svg",
-  "/developer/pipeline-icon-train.svg",
-  "/navbar/nav-icon-chip.svg",
-  "/company/ecosystem-icon-footprint.svg",
+  "/partners/icons_proof/web-design-02.svg",
+  "/partners/icons_proof/cube.svg",
+  "/partners/icons_proof/chip.svg",
+  "/partners/icons_proof/global.svg",
 ];
 const PARTNER_ICONS = [
   "/partners/icons_partners/1.svg",
@@ -55,7 +60,11 @@ const PARTNER_ICONS = [
   "/partners/icons_partners/5.svg",
   "/partners/icons_partners/6.svg",
 ];
-const BECOME_BENEFIT_ICONS = ["signal", "chip", "showcase"] as const;
+const BECOME_BENEFIT_ICONS = [
+  "/partners/icons_become/internet.svg",
+  "/partners/icons_become/access.svg",
+  "/partners/icons_become/rss.svg",
+] as const;
 
 export type HeroContent = {
   tag: string;

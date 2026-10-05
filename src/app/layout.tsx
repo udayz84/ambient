@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Navbar } from "@/components/navbar/Navbar";
 import { SiteFooterWrapper } from "@/components/site-footer/SiteFooterWrapper";
+import { NewsletterPopup } from "@/components/newsletter-popup/NewsletterPopup";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import {
   getNavbar,
@@ -64,6 +65,7 @@ export default async function RootLayout({
           {children}
           <SiteFooterWrapper data={footer?.footer} brandData={navbar?.brand} newsletterData={footer?.newsletter} />
         </SmoothScroll>
+        <NewsletterPopup />
       </body>
     </html>
   );

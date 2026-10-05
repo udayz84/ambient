@@ -205,25 +205,25 @@ export const PARTNERS_BENEFITS = {
       title: "Faster to market",
       description:
         "Skip the slow ramp. With GPX-ready partners already in motion, you move from concept to production much faster.",
-      icon: "speed" as const,
+      icon: "/partners/icons_benefits/timer-02.svg" as const,
     },
     {
       title: "Higher success rate",
       description:
         "Cut the false starts. Proven designs and real platform experience help you avoid re-spins, delays, and expensive surprises.",
-      icon: "target" as const,
+      icon: "/partners/icons_benefits/auto-conversations.svg" as const,
     },
     {
       title: "Lower development risk",
       description:
         "De-risk the hard parts. From analog-aware tuning to manufacturing realities, expert partners help keep your roadmap intact.",
-      icon: "shield" as const,
+      icon: "/partners/icons_benefits/chart-line-data-03.svg" as const,
     },
     {
       title: "Focus on your edge",
       description:
         "Own the part that matters. You build the differentiation. Our partners take care of the surrounding stack that gets you there.",
-      icon: "focus" as const,
+      icon: "/partners/icons_benefits/center-focus.svg" as const,
     },
   ],
   bridge: "One ecosystem, engineered to get you to market — not to slow you down.",
@@ -248,25 +248,25 @@ export const PARTNERS_PROOF = {
       title: "Reference designs, not blank pages.",
       description:
         "GPX10 reference designs from partners your team can rely on instead of starting from scratch.",
-      icon: "/applications/dvk-icon-1.svg",
+      icon: "/partners/icons_proof/web-design-02.svg",
     },
     {
       title: "Models proven on A-Cube.",
       description:
         "Partner-built models ship in the Ambient Model Zoo — real, deployable networks, already running on the architecture.",
-      icon: "/developer/pipeline-icon-train.svg",
+      icon: "/partners/icons_proof/cube.svg",
     },
     {
       title: "Hardware built for the silicon.",
       description:
         "Partners have designed production hardware around GPX10 — boards engineered for its exact power and space envelope.",
-      icon: "/navbar/nav-icon-chip.svg",
+      icon: "/partners/icons_proof/chip.svg",
     },
     {
       title: "Proven at volume.",
       description:
         "That hardware has gone into volume manufacturing — GPX-based products built at scale, not just prototyped.",
-      icon: "/company/ecosystem-icon-footprint.svg",
+      icon: "/partners/icons_proof/global.svg",
     },
   ],
   links: [
@@ -327,19 +327,19 @@ export const PARTNERS_BECOME = {
       title: "Reach the right customers.",
       description:
         "Get discovered by teams building on GPX who need exactly what you do.",
-      icon: "signal" as const,
+      icon: "/partners/icons_become/internet.svg" as const,
     },
     {
       title: "Early access & enablement.",
       description:
         "Get early access to Ambient silicon, tools, and hands-on technical enablement.",
-      icon: "chip" as const,
+      icon: "/partners/icons_become/access.svg" as const,
     },
     {
       title: "Showcase your work.",
       description:
         "Co-develop reference designs and Model Zoo contributions that put your expertise on display.",
-      icon: "showcase" as const,
+      icon: "/partners/icons_become/rss.svg" as const,
     },
   ],
   lookingFor: {

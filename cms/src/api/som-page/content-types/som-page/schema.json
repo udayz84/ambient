@@ -27,6 +27,11 @@
       "component": "som.family",
       "repeatable": false
     },
+    "intelligence": {
+      "type": "component",
+      "component": "som.intelligence",
+      "repeatable": false
+    },
     "prototype": {
       "type": "component",
       "component": "som.prototypes",

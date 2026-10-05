@@ -35,7 +35,11 @@ export function PartnersBenefits({ content }: { content: BenefitsContent }) {
           >
             <Corners />
             <div className="flex w-full items-start justify-between">
-              <WireframeIcon name={card.icon} className="size-[52px]" />
+              {card.icon.endsWith(".svg") ? (
+                <img src={card.icon} alt="" className="size-[52px]" aria-hidden />
+              ) : (
+                <WireframeIcon name={card.icon} className="size-[52px]" />
+              )}
               <span className={`${dmMono.className} text-[11px] leading-[16px] tracking-[1.6px] text-[#53d824] opacity-70`}>
                 0{i + 1}
               </span>

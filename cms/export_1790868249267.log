@@ -1,0 +1,68 @@
+[2026-10-01 20:54:09.272] info: [export] Diagnostic log file: /Users/udayznanam/Documents/ambient/cms/export_1790868249267.log (info-level messages are written here even without --verbose)
+[2026-10-01 20:54:09.273] info: [file-destination-provider] creating gzip
+
+[2026-10-01 20:54:09.275] info: [local-source-provider] getting metadata
+
+[2026-10-01 20:54:09.275] info: [local-source-provider] getting metadata
+
+[2026-10-01 20:54:09.275] info: [local-source-provider] getting schemas
+
+[2026-10-01 20:54:09.285] info: [local-source-provider] getting schemas
+
+[2026-10-01 20:54:09.291] info: [file-destination-provider] creating schemas write stream
+
+[2026-10-01 20:54:09.306] info: [local-source-provider] creating entities read stream
+
+[2026-10-01 20:54:09.307] info: [file-destination-provider] creating entities write stream
+
+[2026-10-01 20:54:18.639] info: [local-source-provider] creating assets read stream
+
+[2026-10-01 20:54:18.640] info: [file-destination-provider] creating assets write stream
+
+[2026-10-01 20:54:20.024] warn: (local-source-provider) [Data transfer] Media item 212 (hash: Ambient_Hero_Dummy_Video_7ba2625e64) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/Ambient_Hero_Dummy_Video_7ba2625e64.webm
+[2026-10-01 20:54:24.060] warn: (local-source-provider) [Data transfer] Media item 213 (hash: card_power_c8ed965efe) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/card_power_c8ed965efe.png
+[2026-10-01 20:54:24.061] warn: (local-source-provider) [Data transfer] Media item 216 (hash: card_programmable_37dfaf01bf) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/card_programmable_37dfaf01bf.png
+[2026-10-01 20:54:24.061] warn: (local-source-provider) [Data transfer] Media item 217 (hash: icon_speak_ai_fd02ebff03) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/icon_speak_ai_fd02ebff03.svg
+[2026-10-01 20:54:24.061] warn: (local-source-provider) [Data transfer] Media item 218 (hash: icon_compute_ee850c7e22) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/icon_compute_ee850c7e22.svg
+[2026-10-01 20:54:24.061] warn: (local-source-provider) [Data transfer] Media item 221 (hash: app_wearables_33123ab04e) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/app_wearables_33123ab04e.png
+[2026-10-01 20:54:24.061] warn: (local-source-provider) [Data transfer] Media item 224 (hash: car_hero_4dfa16932d) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/car_hero_4dfa16932d.png
+[2026-10-01 20:54:24.061] warn: (local-source-provider) [Data transfer] Media item 230 (hash: card_image_modules_811bb60c6f) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/card_image_modules_811bb60c6f.png
+[2026-10-01 20:54:24.061] warn: (local-source-provider) [Data transfer] Media item 232 (hash: logo_partner_2_0b45653c65) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/logo_partner_2_0b45653c65.svg
+[2026-10-01 20:54:24.061] warn: (local-source-provider) [Data transfer] Media item 234 (hash: logo_partner_4_0fe547cfb6) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/logo_partner_4_0fe547cfb6.svg
+[2026-10-01 20:54:24.062] warn: (local-source-provider) [Data transfer] Media item 214 (hash: card_ai_60d5c45684) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/card_ai_60d5c45684.png
+[2026-10-01 20:54:24.062] warn: (local-source-provider) [Data transfer] Media item 219 (hash: icon_tools_cb4b4599c8) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/icon_tools_cb4b4599c8.svg
+[2026-10-01 20:54:24.062] warn: (local-source-provider) [Data transfer] Media item 222 (hash: app_smart_home_104991912f) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/app_smart_home_104991912f.png
+[2026-10-01 20:54:24.062] warn: (local-source-provider) [Data transfer] Media item 226 (hash: app_agriculture_c31aa0887b) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/app_agriculture_c31aa0887b.png
+[2026-10-01 20:54:24.062] warn: (local-source-provider) [Data transfer] Media item 228 (hash: app_hearables_bedd375bf3) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/app_hearables_bedd375bf3.png
+[2026-10-01 20:54:24.062] warn: (local-source-provider) [Data transfer] Media item 229 (hash: card_image_model_forge_b5f426072c) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/card_image_model_forge_b5f426072c.png
+[2026-10-01 20:54:24.062] warn: (local-source-provider) [Data transfer] Media item 215 (hash: card_density_01ecb3506f) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/card_density_01ecb3506f.png
+[2026-10-01 20:54:24.062] warn: (local-source-provider) [Data transfer] Media item 220 (hash: chip_hero_55b9f19b50) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/chip_hero_55b9f19b50.png
+[2026-10-01 20:54:24.062] warn: (local-source-provider) [Data transfer] Media item 223 (hash: app_industrial_1bdcd53041) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/app_industrial_1bdcd53041.png
+[2026-10-01 20:54:24.062] warn: (local-source-provider) [Data transfer] Media item 225 (hash: app_medical_8bf7c3ee82) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/app_medical_8bf7c3ee82.png
+[2026-10-01 20:54:24.063] warn: (local-source-provider) [Data transfer] Media item 227 (hash: app_drones_21ee02bd71) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/app_drones_21ee02bd71.png
+[2026-10-01 20:54:24.063] warn: (local-source-provider) [Data transfer] Media item 231 (hash: logo_partner_1_d6547d45d8) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/logo_partner_1_d6547d45d8.svg
+[2026-10-01 20:54:24.063] warn: (local-source-provider) [Data transfer] Media item 233 (hash: logo_partner_3_8c949f44d0) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/logo_partner_3_8c949f44d0.svg
+[2026-10-01 20:54:24.063] warn: (local-source-provider) [Data transfer] Media item 235 (hash: logo_octane_56b40d20d1) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/logo_octane_56b40d20d1.svg
+[2026-10-01 20:54:24.126] warn: (local-source-provider) [Data transfer] Media item 236 (hash: article_partnership_2a9d3595d9) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/article_partnership_2a9d3595d9.png
+[2026-10-01 20:54:24.126] warn: (local-source-provider) [Data transfer] Media item 238 (hash: article_gpx10_509525e27f) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/article_gpx10_509525e27f.png
+[2026-10-01 20:54:24.186] warn: (local-source-provider) [Data transfer] Media item 237 (hash: article_physics_b19a495669) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/article_physics_b19a495669.png
+[2026-10-01 20:54:24.266] warn: (local-source-provider) [Data transfer] Media item 239 (hash: wins_img_1_ceadf36b00) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/wins_img_1_ceadf36b00.png
+[2026-10-01 20:54:24.346] warn: (local-source-provider) [Data transfer] Media item 240 (hash: wins_img_1_54e8c2a916) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/wins_img_1_54e8c2a916.png
+[2026-10-01 20:54:24.449] warn: (local-source-provider) [Data transfer] Media item 241 (hash: wins_img_1_e2ae83d8c5) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/wins_img_1_e2ae83d8c5.png
+[2026-10-01 20:54:28.460] warn: (local-source-provider) [Data transfer] Media item 371 (hash: unnamed_1_1_746aa9bfa6) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/unnamed_1_1_746aa9bfa6.png
+[2026-10-01 20:54:28.477] warn: (local-source-provider) [Data transfer] Media item 372 (hash: unnamed_1_1_788192be82) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/unnamed_1_1_788192be82.png
+[2026-10-01 20:54:28.478] warn: (local-source-provider) [Data transfer] Media item 373 (hash: unnamed_1_1_d198357e12) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/unnamed_1_1_d198357e12.png
+[2026-10-01 20:54:28.478] warn: (local-source-provider) [Data transfer] Media item 374 (hash: image_137_d11d857b77) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/image_137_d11d857b77.png
+[2026-10-01 20:54:28.732] warn: (local-source-provider) [Data transfer] Media item 390 (hash: Whats_App_Image_2026_08_19_at_12_39_45_PM_4587d1e8b3) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/Whats_App_Image_2026_08_19_at_12_39_45_PM_4587d1e8b3.jpeg
+[2026-10-01 20:54:36.082] warn: (local-source-provider) [Data transfer] Media item 392 (hash: Container_1_4e83712c4f) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/Container_1_4e83712c4f.png
+[2026-10-01 20:54:38.634] warn: (local-source-provider) [Data transfer] Media item 393 (hash: Train_Flow_1_58888ac02d) exists in database but no corresponding file was found to transfer. Path: /Users/udayznanam/Documents/ambient/cms/public/uploads/Train_Flow_1_58888ac02d.png
+[2026-10-01 20:55:59.646] info: [local-source-provider] creating links read stream
+
+[2026-10-01 20:55:59.647] info: [file-destination-provider] creating links write stream
+
+[2026-10-01 20:56:11.942] info: [local-source-provider] creating configuration read stream
+
+[2026-10-01 20:56:11.943] info: [file-destination-provider] creating configuration write stream
+
+[2026-10-01 20:56:13.308] info: [file-destination-provider] writing metadata
+
