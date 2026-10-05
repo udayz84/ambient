@@ -574,8 +574,8 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 1 });
   const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
 
-  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
-  const heading = data?.heading || FALLBACK_HEADING;
+  const subtitle = data?.subtitle || "";
+  const heading = data?.heading || "";
   const healthData = data?.health_card;
   const powerData = data?.power_card;
   const workloadData = data?.workload_card;

@@ -72,11 +72,11 @@ export function WearablesSubconscious({ data }: { data?: any }) {
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 1 });
   const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
 
-  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
-  const heading = data?.heading || FALLBACK_HEADING;
-  const cardTitle = data?.card_title || FALLBACK_CARD_TITLE;
-  const cardImage = mediaUrl(data?.card_image) || FALLBACK_CARD_IMAGE;
-  const overlayText = data?.overlay_text || FALLBACK_OVERLAY_TEXT;
+  const subtitle = data?.subtitle || "";
+  const heading = data?.heading || "";
+  const cardTitle = data?.card_title || "";
+  const cardImage = mediaUrl(data?.card_image) || "";
+  const overlayText = data?.overlay_text || "";
   const dataCards: any[] = Array.isArray(data?.right_cards) ? data.right_cards : [];
   const rightCards = RIGHT_CARDS.map((fb, i) => {
     const c = dataCards[i];

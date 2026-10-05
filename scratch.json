@@ -1,0 +1,582 @@
+{
+  "data": [
+    {
+      "id": 12,
+      "documentId": "ja3xwkvd2otss7g91axemrnu",
+      "slug": "smarthomes",
+      "createdAt": "2026-07-27T07:02:19.549Z",
+      "updatedAt": "2026-07-31T02:19:52.542Z",
+      "publishedAt": "2026-07-31T02:19:53.364Z",
+      "carousel": {
+        "id": 21,
+        "alt": null
+      },
+      "paradigm": {
+        "id": 21,
+        "heading": "The Paradigm Shift",
+        "subtitle": "Bridge the lab and real world. The Sparsh module offers continuous, microwatt intelligence in a 21×21mm size, with a breakout board that snaps off for production.",
+        "chip_label": "Development"
+      },
+      "subconscious": {
+        "id": 21,
+        "heading": "Continuous AI-native operations in subconscious mode",
+        "subtitle": "We eliminate the Von Neumann bottleneck by computing AI within the analog memory array. The GPX architecture allows continuous inference without waking the host processor.",
+        "card_title": "The Hardware Blueprint",
+        "overlay_text": "Zzzz..",
+        "alt": null
+      },
+      "empirical_proof": {
+        "id": 21,
+        "heading": "The Empirical Proof",
+        "subtitle": "Don't spend your first day writing sensor configuration code. The Cranium board comes ready to run out of the box, allowing you to instantly test physical AI models and validate performance on the metal with zero setup required."
+      },
+      "lab_to_product": {
+        "id": 21,
+        "heading": "From lab to product in months, not years.",
+        "subtitle": "Don't spend your first day writing sensor configuration code. The Cranium board comes ready to run out of the box, allowing you to instantly test physical AI models and validate performance on the metal with zero setup required."
+      },
+      "footer_accent": {
+        "id": 21,
+        "alt": null
+      },
+      "hero": {
+        "id": 22,
+        "title": "Clinical precision. Coin-cell power.",
+        "subtitle": "Hospital-grade biometric tracking and voice processing directly to the ring, wrist, or lens. No cloud latency or battery compromise",
+        "watermark": "Smart Homes",
+        "background_image_1_alt": null,
+        "background_image_2_alt": null,
+        "background_image_2": {
+          "id": 162,
+          "documentId": "mklf0q38hr27ieezo4hydghn",
+          "name": "hero-bg-163.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 1536,
+          "height": 989,
+          "formats": {
+            "large": {
+              "ext": ".png",
+              "url": "/uploads/large_hero_bg_163_8796d07f45.png",
+              "hash": "large_hero_bg_163_8796d07f45",
+              "mime": "image/png",
+              "name": "large_hero-bg-163.png",
+              "path": null,
+              "size": 186.7,
+              "width": 1000,
+              "height": 644,
+              "sizeInBytes": 186704
+            },
+            "small": {
+              "ext": ".png",
+              "url": "/uploads/small_hero_bg_163_8796d07f45.png",
+              "hash": "small_hero_bg_163_8796d07f45",
+              "mime": "image/png",
+              "name": "small_hero-bg-163.png",
+              "path": null,
+              "size": 58.31,
+              "width": 500,
+              "height": 322,
+              "sizeInBytes": 58307
+            },
+            "medium": {
+              "ext": ".png",
+              "url": "/uploads/medium_hero_bg_163_8796d07f45.png",
+              "hash": "medium_hero_bg_163_8796d07f45",
+              "mime": "image/png",
+              "name": "medium_hero-bg-163.png",
+              "path": null,
+              "size": 114.88,
+              "width": 750,
+              "height": 483,
+              "sizeInBytes": 114881
+            },
+            "thumbnail": {
+              "ext": ".png",
+              "url": "/uploads/thumbnail_hero_bg_163_8796d07f45.png",
+              "hash": "thumbnail_hero_bg_163_8796d07f45",
+              "mime": "image/png",
+              "name": "thumbnail_hero-bg-163.png",
+              "path": null,
+              "size": 18.83,
+              "width": 242,
+              "height": 156,
+              "sizeInBytes": 18831
+            }
+          },
+          "hash": "hero_bg_163_8796d07f45",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 89.72,
+          "url": "/uploads/hero_bg_163_8796d07f45.png",
+          "previewUrl": null,
+          "provider": "local",
+          "provider_metadata": null,
+          "createdAt": "2026-07-06T22:35:54.643Z",
+          "updatedAt": "2026-07-31T02:16:20.168Z",
+          "publishedAt": "2026-07-06T22:35:54.643Z"
+        },
+        "background_image_1": {
+          "id": 161,
+          "documentId": "zzh0luk0oeuqnn19rbw59zi5",
+          "name": "hero-bg-162.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 1694,
+          "height": 929,
+          "formats": {
+            "large": {
+              "ext": ".png",
+              "url": "/uploads/large_hero_bg_162_68b973f04b.png",
+              "hash": "large_hero_bg_162_68b973f04b",
+              "mime": "image/png",
+              "name": "large_hero-bg-162.png",
+              "path": null,
+              "size": 535.5,
+              "width": 1000,
+              "height": 548,
+              "sizeInBytes": 535495
+            },
+            "small": {
+              "ext": ".png",
+              "url": "/uploads/small_hero_bg_162_68b973f04b.png",
+              "hash": "small_hero_bg_162_68b973f04b",
+              "mime": "image/png",
+              "name": "small_hero-bg-162.png",
+              "path": null,
+              "size": 138.32,
+              "width": 500,
+              "height": 274,
+              "sizeInBytes": 138317
+            },
+            "medium": {
+              "ext": ".png",
+              "url": "/uploads/medium_hero_bg_162_68b973f04b.png",
+              "hash": "medium_hero_bg_162_68b973f04b",
+              "mime": "image/png",
+              "name": "medium_hero-bg-162.png",
+              "path": null,
+              "size": 303.35,
+              "width": 750,
+              "height": 411,
+              "sizeInBytes": 303352
+            },
+            "thumbnail": {
+              "ext": ".png",
+              "url": "/uploads/thumbnail_hero_bg_162_68b973f04b.png",
+              "hash": "thumbnail_hero_bg_162_68b973f04b",
+              "mime": "image/png",
+              "name": "thumbnail_hero-bg-162.png",
+              "path": null,
+              "size": 38.43,
+              "width": 245,
+              "height": 134,
+              "sizeInBytes": 38430
+            }
+          },
+          "hash": "hero_bg_162_68b973f04b",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 284.86,
+          "url": "/uploads/hero_bg_162_68b973f04b.png",
+          "previewUrl": null,
+          "provider": "local",
+          "provider_metadata": null,
+          "createdAt": "2026-07-06T22:35:53.958Z",
+          "updatedAt": "2026-07-31T01:47:48.989Z",
+          "publishedAt": "2026-07-06T22:35:53.958Z"
+        }
+      }
+    },
+    {
+      "id": 32,
+      "documentId": "jzxeluyjc3h07znyls59k9hh",
+      "slug": "smarthomes-2",
+      "createdAt": "2026-09-30T14:33:44.389Z",
+      "updatedAt": "2026-09-30T14:34:17.384Z",
+      "publishedAt": "2026-09-30T14:34:17.560Z",
+      "carousel": {
+        "id": 39,
+        "alt": null
+      },
+      "paradigm": {
+        "id": 39,
+        "heading": "The end of the cloud round-trip. ",
+        "subtitle": "Variables shouldn't have to phone home to think. GPX runs the AI on the device. ",
+        "chip_label": "Development"
+      },
+      "subconscious": {
+        "id": 39,
+        "heading": "The host sleeps. The AI never does.",
+        "subtitle": "GPX runs continuous inference in its always-on island while the host processor stays in deep sleep — no wake events, no interrupts, no battery drain.\n\n\n",
+        "card_title": null,
+        "overlay_text": null,
+        "alt": null
+      },
+      "empirical_proof": {
+        "id": 42,
+        "heading": "The Empirical Proof",
+        "subtitle": "Don't spend your first day writing sensor configuration code. The Cranium board comes ready to run out of the box, allowing you to instantly test physical AI models and validate performance on the metal with zero setup required."
+      },
+      "lab_to_product": {
+        "id": 39,
+        "heading": "From lab to product in months, not years.",
+        "subtitle": "Don't spend your first day writing sensor configuration code. The Cranium board comes ready to run out of the box, allowing you to instantly test physical AI models and validate performance on the metal with zero setup required."
+      },
+      "footer_accent": {
+        "id": 39,
+        "alt": null
+      },
+      "hero": {
+        "id": 42,
+        "title": "Clinical precision. Coin-cell power.",
+        "subtitle": "Hospital-grade biometric tracking and voice processing directly to the ring, wrist, or lens. No cloud latency or battery compromise.",
+        "watermark": "Smart Homes",
+        "background_image_1_alt": null,
+        "background_image_2_alt": null,
+        "background_image_2": {
+          "id": 269,
+          "documentId": "yj105ltuvdva82uu0ltw3umt",
+          "name": "hero-bg-163.png",
+          "alternativeText": "hero-bg-163.png",
+          "caption": "",
+          "focalPoint": null,
+          "width": 1672,
+          "height": 941,
+          "formats": {
+            "large": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/large_hero_bg_163_d4861192c7.png",
+              "hash": "large_hero_bg_163_d4861192c7",
+              "mime": "image/png",
+              "name": "large_hero-bg-163.png",
+              "path": null,
+              "size": 404.39,
+              "width": 1000,
+              "height": 563,
+              "sizeInBytes": 404393
+            },
+            "small": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/small_hero_bg_163_d4861192c7.png",
+              "hash": "small_hero_bg_163_d4861192c7",
+              "mime": "image/png",
+              "name": "small_hero-bg-163.png",
+              "path": null,
+              "size": 114.6,
+              "width": 500,
+              "height": 281,
+              "sizeInBytes": 114603
+            },
+            "medium": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/medium_hero_bg_163_d4861192c7.png",
+              "hash": "medium_hero_bg_163_d4861192c7",
+              "mime": "image/png",
+              "name": "medium_hero-bg-163.png",
+              "path": null,
+              "size": 238.15,
+              "width": 750,
+              "height": 422,
+              "sizeInBytes": 238145
+            },
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_hero_bg_163_d4861192c7.png",
+              "hash": "thumbnail_hero_bg_163_d4861192c7",
+              "mime": "image/png",
+              "name": "thumbnail_hero-bg-163.png",
+              "path": null,
+              "size": 33.57,
+              "width": 245,
+              "height": 138,
+              "sizeInBytes": 33565
+            }
+          },
+          "hash": "hero_bg_163_d4861192c7",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 326.61,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/hero_bg_163_d4861192c7.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-07-27T18:11:06.577Z",
+          "updatedAt": "2026-09-30T14:33:37.348Z",
+          "publishedAt": "2026-07-27T18:11:06.577Z"
+        },
+        "background_image_1": {
+          "id": 278,
+          "documentId": "uzvqro5d47sktkssiutyqtx3",
+          "name": "ChatGPT Image Jul 28, 2026, 01_14_13 PM (1).png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 1774,
+          "height": 887,
+          "formats": {
+            "large": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/large_Chat_GPT_Image_Jul_28_2026_01_14_13_PM_1_0dbe0c0d3d.png",
+              "hash": "large_Chat_GPT_Image_Jul_28_2026_01_14_13_PM_1_0dbe0c0d3d",
+              "mime": "image/png",
+              "name": "large_ChatGPT Image Jul 28, 2026, 01_14_13 PM (1).png",
+              "path": null,
+              "size": 610.87,
+              "width": 1000,
+              "height": 500,
+              "sizeInBytes": 610873
+            },
+            "small": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/small_Chat_GPT_Image_Jul_28_2026_01_14_13_PM_1_0dbe0c0d3d.png",
+              "hash": "small_Chat_GPT_Image_Jul_28_2026_01_14_13_PM_1_0dbe0c0d3d",
+              "mime": "image/png",
+              "name": "small_ChatGPT Image Jul 28, 2026, 01_14_13 PM (1).png",
+              "path": null,
+              "size": 169.56,
+              "width": 500,
+              "height": 250,
+              "sizeInBytes": 169562
+            },
+            "medium": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/medium_Chat_GPT_Image_Jul_28_2026_01_14_13_PM_1_0dbe0c0d3d.png",
+              "hash": "medium_Chat_GPT_Image_Jul_28_2026_01_14_13_PM_1_0dbe0c0d3d",
+              "mime": "image/png",
+              "name": "medium_ChatGPT Image Jul 28, 2026, 01_14_13 PM (1).png",
+              "path": null,
+              "size": 357.94,
+              "width": 750,
+              "height": 375,
+              "sizeInBytes": 357935
+            },
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_Chat_GPT_Image_Jul_28_2026_01_14_13_PM_1_0dbe0c0d3d.png",
+              "hash": "thumbnail_Chat_GPT_Image_Jul_28_2026_01_14_13_PM_1_0dbe0c0d3d",
+              "mime": "image/png",
+              "name": "thumbnail_ChatGPT Image Jul 28, 2026, 01_14_13 PM (1).png",
+              "path": null,
+              "size": 46.94,
+              "width": 245,
+              "height": 123,
+              "sizeInBytes": 46935
+            }
+          },
+          "hash": "Chat_GPT_Image_Jul_28_2026_01_14_13_PM_1_0dbe0c0d3d",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 383.74,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/Chat_GPT_Image_Jul_28_2026_01_14_13_PM_1_0dbe0c0d3d.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-07-27T21:35:02.637Z",
+          "updatedAt": "2026-09-30T14:32:53.371Z",
+          "publishedAt": "2026-07-27T21:35:02.637Z"
+        }
+      }
+    },
+    {
+      "id": 33,
+      "documentId": "jom9lpymftjgrg8rjrj41u2s",
+      "slug": "wearables",
+      "createdAt": "2026-07-21T22:08:30.535Z",
+      "updatedAt": "2026-10-05T10:45:18.334Z",
+      "publishedAt": "2026-10-05T10:45:27.969Z",
+      "carousel": {
+        "id": 40,
+        "alt": null
+      },
+      "paradigm": {
+        "id": 40,
+        "heading": "The end of the cloud round-trip. ",
+        "subtitle": "Variables shouldn't have to phone home to think. GPX runs the AI on the device. ",
+        "chip_label": "Development"
+      },
+      "subconscious": {
+        "id": 40,
+        "heading": "The host sleeps. The AI never does.",
+        "subtitle": "GPX runs continuous inference in its always-on island while the host processor stays in deep sleep — no wake events, no interrupts, no battery drain.\n\n\n",
+        "card_title": null,
+        "overlay_text": null,
+        "alt": null
+      },
+      "empirical_proof": {
+        "id": 43,
+        "heading": "The Empirical Proof",
+        "subtitle": "Don't spend your first day writing sensor configuration code. The Cranium board comes ready to run out of the box, allowing you to instantly test physical AI models and validate performance on the metal with zero setup required."
+      },
+      "lab_to_product": {
+        "id": 40,
+        "heading": "From lab to product in months, not years.",
+        "subtitle": "Don't spend your first day writing sensor configuration code. The Cranium board comes ready to run out of the box, allowing you to instantly test physical AI models and validate performance on the metal with zero setup required."
+      },
+      "footer_accent": {
+        "id": 40,
+        "alt": null
+      },
+      "hero": {
+        "id": 43,
+        "title": "Clinical precision. Coin-cell power.test",
+        "subtitle": "Hospital-grade biometric tracking and voice processing directly to the ring, wrist, or lens. No cloud latency or battery compromise.",
+        "watermark": "Wearables",
+        "background_image_1_alt": null,
+        "background_image_2_alt": null,
+        "background_image_2": {
+          "id": 269,
+          "documentId": "yj105ltuvdva82uu0ltw3umt",
+          "name": "hero-bg-163.png",
+          "alternativeText": "hero-bg-163.png",
+          "caption": "",
+          "focalPoint": null,
+          "width": 1672,
+          "height": 941,
+          "formats": {
+            "large": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/large_hero_bg_163_d4861192c7.png",
+              "hash": "large_hero_bg_163_d4861192c7",
+              "mime": "image/png",
+              "name": "large_hero-bg-163.png",
+              "path": null,
+              "size": 404.39,
+              "width": 1000,
+              "height": 563,
+              "sizeInBytes": 404393
+            },
+            "small": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/small_hero_bg_163_d4861192c7.png",
+              "hash": "small_hero_bg_163_d4861192c7",
+              "mime": "image/png",
+              "name": "small_hero-bg-163.png",
+              "path": null,
+              "size": 114.6,
+              "width": 500,
+              "height": 281,
+              "sizeInBytes": 114603
+            },
+            "medium": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/medium_hero_bg_163_d4861192c7.png",
+              "hash": "medium_hero_bg_163_d4861192c7",
+              "mime": "image/png",
+              "name": "medium_hero-bg-163.png",
+              "path": null,
+              "size": 238.15,
+              "width": 750,
+              "height": 422,
+              "sizeInBytes": 238145
+            },
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_hero_bg_163_d4861192c7.png",
+              "hash": "thumbnail_hero_bg_163_d4861192c7",
+              "mime": "image/png",
+              "name": "thumbnail_hero-bg-163.png",
+              "path": null,
+              "size": 33.57,
+              "width": 245,
+              "height": 138,
+              "sizeInBytes": 33565
+            }
+          },
+          "hash": "hero_bg_163_d4861192c7",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 326.61,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/hero_bg_163_d4861192c7.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-07-27T18:11:06.577Z",
+          "updatedAt": "2026-09-30T14:33:37.348Z",
+          "publishedAt": "2026-07-27T18:11:06.577Z"
+        },
+        "background_image_1": {
+          "id": 278,
+          "documentId": "uzvqro5d47sktkssiutyqtx3",
+          "name": "ChatGPT Image Jul 28, 2026, 01_14_13 PM (1).png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 1774,
+          "height": 887,
+          "formats": {
+            "large": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/large_Chat_GPT_Image_Jul_28_2026_01_14_13_PM_1_0dbe0c0d3d.png",
+              "hash": "large_Chat_GPT_Image_Jul_28_2026_01_14_13_PM_1_0dbe0c0d3d",
+              "mime": "image/png",
+              "name": "large_ChatGPT Image Jul 28, 2026, 01_14_13 PM (1).png",
+              "path": null,
+              "size": 610.87,
+              "width": 1000,
+              "height": 500,
+              "sizeInBytes": 610873
+            },
+            "small": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/small_Chat_GPT_Image_Jul_28_2026_01_14_13_PM_1_0dbe0c0d3d.png",
+              "hash": "small_Chat_GPT_Image_Jul_28_2026_01_14_13_PM_1_0dbe0c0d3d",
+              "mime": "image/png",
+              "name": "small_ChatGPT Image Jul 28, 2026, 01_14_13 PM (1).png",
+              "path": null,
+              "size": 169.56,
+              "width": 500,
+              "height": 250,
+              "sizeInBytes": 169562
+            },
+            "medium": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/medium_Chat_GPT_Image_Jul_28_2026_01_14_13_PM_1_0dbe0c0d3d.png",
+              "hash": "medium_Chat_GPT_Image_Jul_28_2026_01_14_13_PM_1_0dbe0c0d3d",
+              "mime": "image/png",
+              "name": "medium_ChatGPT Image Jul 28, 2026, 01_14_13 PM (1).png",
+              "path": null,
+              "size": 357.94,
+              "width": 750,
+              "height": 375,
+              "sizeInBytes": 357935
+            },
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_Chat_GPT_Image_Jul_28_2026_01_14_13_PM_1_0dbe0c0d3d.png",
+              "hash": "thumbnail_Chat_GPT_Image_Jul_28_2026_01_14_13_PM_1_0dbe0c0d3d",
+              "mime": "image/png",
+              "name": "thumbnail_ChatGPT Image Jul 28, 2026, 01_14_13 PM (1).png",
+              "path": null,
+              "size": 46.94,
+              "width": 245,
+              "height": 123,
+              "sizeInBytes": 46935
+            }
+          },
+          "hash": "Chat_GPT_Image_Jul_28_2026_01_14_13_PM_1_0dbe0c0d3d",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 383.74,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/Chat_GPT_Image_Jul_28_2026_01_14_13_PM_1_0dbe0c0d3d.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-07-27T21:35:02.637Z",
+          "updatedAt": "2026-09-30T14:32:53.371Z",
+          "publishedAt": "2026-07-27T21:35:02.637Z"
+        }
+      }
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "page": 1,
+      "pageSize": 25,
+      "pageCount": 1,
+      "total": 3
+    }
+  }
+}

@@ -60,7 +60,7 @@ const CARDS: CardData[] = [
 
 function LabCard({ data }: { data: CardData }) {
   const fitRef = useFitText<HTMLParagraphElement>({ maxLines: 2 });
-  const image = data.image || FALLBACK_IMAGE;
+  const image = data.image || "";
   return (
     <div
       className="relative flex h-[549px] flex-1 flex-col border border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] pt-[16px] pb-[24px] px-[32px]"
@@ -139,8 +139,8 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 1 });
   const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
 
-  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
-  const heading = data?.heading || FALLBACK_HEADING;
+  const subtitle = data?.subtitle || "";
+  const heading = data?.heading || "";
   const dataCards: any[] = Array.isArray(data?.cards) ? data.cards : [];
   const cards = CARDS.map((fb, i) => {
     const c = dataCards[i];
@@ -152,7 +152,7 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
       body: c.description || fb.body,
       cta: c.cta_label || fb.cta,
       ctaHref: c.cta_href || fb.ctaHref,
-      image: mediaUrl(c.image) || FALLBACK_IMAGE,
+      image: mediaUrl(c.image) || "",
     };
   });
   return (
@@ -245,7 +245,7 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
               >
                 <img loading="lazy" decoding="async"
                   alt=""
-                  src={card.image || FALLBACK_IMAGE}
+                  src={card.image || ""}
                   className="absolute inset-0 size-full object-contain"
                 />
                 <div

@@ -71,14 +71,14 @@ export function WearablesHero({
 }: {
   data?: any;
 }) {
-  const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
-  const watermark = data?.watermark || FALLBACK_WATERMARK;
-  const titleLines = (data?.title || FALLBACK_TITLE).split("\n");
-  const bg1 = mediaUrl(data?.background_image_1) || FALLBACK_BG_1;
-  const bg2 = mediaUrl(data?.background_image_2) || FALLBACK_BG_2;
-  const primaryLabel = data?.primary_button?.label || FALLBACK_PRIMARY_LABEL;
+  const subtitle = data?.subtitle || "";
+  const watermark = data?.watermark || "";
+  const titleLines = (data?.title || "").split("\n");
+  const bg1 = mediaUrl(data?.background_image_1) || "";
+  const bg2 = mediaUrl(data?.background_image_2) || "";
+  const primaryLabel = data?.primary_button?.label || "";
   const primaryHref = data?.primary_button?.href || "#";
-  const secondaryLabel = data?.secondary_button?.label || FALLBACK_SECONDARY_LABEL;
+  const secondaryLabel = data?.secondary_button?.label || "";
   const secondaryHref = data?.secondary_button?.href || "#";
   
   const { fadeRef: desktopRef, isVisible: desktopVisible } = useFadeIn();
