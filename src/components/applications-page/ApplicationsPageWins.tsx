@@ -232,7 +232,7 @@ function VisualAr({ img = "/applications/wins-img-3.webp" }: { img?: string }) {
               alt=""
               aria-hidden
               src={img}
-              className="absolute inset-0 size-full object-contain scale-[1.35]"
+              className="absolute inset-0 size-full object-contain scale-[0.85]"
             />
           </div>
           <div
@@ -300,6 +300,7 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
             statLabel: c?.stat_label || CARDS[i]?.statLabel || "",
             visual,
             mobileImg,
+            body: c?.body || body,
           };
         })
       : CARDS;
@@ -360,7 +361,7 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
               stat={card.stat}
               statLabel={card.statLabel}
               visual={card.visual}
-              body={body}
+              body={card.body || body}
             />
           ))}
         </div>
@@ -446,7 +447,7 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
               stat={card.stat}
               statLabel={card.statLabel}
               mobileImg={card.mobileImg}
-              body={body}
+              body={card.body || body}
             />
           ))}
         </div>

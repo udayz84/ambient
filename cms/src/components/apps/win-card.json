@@ -28,6 +28,9 @@
     },
     "alt": {
       "type": "string"
+    },
+    "body": {
+      "type": "text"
     }
   }
 }
