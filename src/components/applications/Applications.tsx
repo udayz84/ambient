@@ -48,6 +48,7 @@ export function Applications({ data }: { data?: any }) {
   };
 
   const activeTab = tabs[activeIndex]?.label || "";
+  const isBuild = activeTab === "BUILD";
 
   // feature_cards are nested INSIDE each tab in the schema (home.app-tab).
   const activeTabData = tabs[activeIndex];
@@ -82,25 +83,29 @@ export function Applications({ data }: { data?: any }) {
               direction={direction}
             />
           </div>
-          <ApplicationsFeatureCard
-            wrapperNodeId="2379:925"
-            contentNodeId="2379:926"
-            title={leftCard?.title ?? ""}
-            description={leftCard?.description ?? ""}
-            background="rgba(0, 0, 0, 0.1)"
-            height={198}
-            position="left"
-          />
-          <ApplicationsFeatureCard
-            wrapperNodeId="2379:917"
-            contentNodeId="2379:918"
-            title={rightCard?.title ?? ""}
-            description={rightCard?.description ?? ""}
-            background="rgba(21, 21, 21, 0.1)"
-            height={174}
-            position="right"
-          />
-          <ApplicationsCta data={data} />
+          {!isBuild && (
+            <>
+              <ApplicationsFeatureCard
+                wrapperNodeId="2379:925"
+                contentNodeId="2379:926"
+                title={leftCard?.title ?? ""}
+                description={leftCard?.description ?? ""}
+                background="rgba(0, 0, 0, 0.1)"
+                height={198}
+                position="left"
+              />
+              <ApplicationsFeatureCard
+                wrapperNodeId="2379:917"
+                contentNodeId="2379:918"
+                title={rightCard?.title ?? ""}
+                description={rightCard?.description ?? ""}
+                background="rgba(21, 21, 21, 0.1)"
+                height={174}
+                position="right"
+              />
+              <ApplicationsCta data={data} />
+            </>
+          )}
         </div>
       </div>
 

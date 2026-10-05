@@ -565,31 +565,58 @@ export function ApplicationsHeroVisual({
 
     if (activeTab === "BUILD") {
       return (
-        <div className="absolute inset-0 flex flex-col items-center justify-start pt-[200px] pointer-events-none z-10 w-full h-full">
+        <div className="absolute inset-0 pointer-events-none z-10 w-full h-full">
+          <div className="absolute inset-0 pointer-events-none z-[-1] opacity-40 translate-y-[80px]">
+            <img loading="lazy" decoding="async" src="/products/build-bg.png" alt="" className="size-full object-cover" />
+          </div>
+
           <h3
-            className={`${gilroySemiBold.className} m-0 flex flex-col justify-center text-center uppercase tracking-[0.5px] bg-clip-text text-[transparent] [word-break:break-word] not-italic text-[120px] leading-[110px] whitespace-normal`}
-            style={{ backgroundImage: watermarkGradient, WebkitBackgroundClip: "text", backgroundClip: "text" }}
+            className={`${gilroyExtraBold.className} absolute m-0 text-center text-[160px] uppercase whitespace-nowrap tracking-[0.5px] leading-[150px] bg-clip-text text-transparent [word-break:break-word] not-italic z-0`}
+            style={{
+              left: 0,
+              top: 280,
+              width: 1321,
+              height: 150,
+              backgroundImage: watermarkGradient,
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+            }}
             aria-hidden
           >
             BUILD YOUR
           </h3>
-          
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img loading="lazy" decoding="async"
-            alt="Build Custom Application"
-            src="/products/build-custom-cube.jpg"
-            className="my-[10px] h-auto max-h-[220px] w-auto object-contain pointer-events-none drop-shadow-2xl mix-blend-screen"
-          />
 
           <h3
-            className={`${gilroySemiBold.className} m-0 flex flex-col justify-center text-center uppercase tracking-[0.5px] bg-clip-text text-[transparent] [word-break:break-word] not-italic text-[120px] leading-[110px] whitespace-normal`}
-            style={{ backgroundImage: watermarkGradient, WebkitBackgroundClip: "text", backgroundClip: "text" }}
+            className={`${gilroyExtraBold.className} absolute m-0 text-center text-[160px] uppercase whitespace-nowrap tracking-[0.5px] leading-[150px] bg-clip-text text-transparent [word-break:break-word] not-italic z-0`}
+            style={{
+              left: 0,
+              top: 660,
+              width: 1321,
+              height: 150,
+              backgroundImage: watermarkGradient,
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+            }}
             aria-hidden
           >
             APPLICATION
           </h3>
           
-          <div className="mt-[24px] pointer-events-auto">
+          <div
+            className="absolute overflow-hidden flex items-center justify-center pointer-events-none z-10"
+            style={{ left: (1321 - 597) / 2, top: 290, width: 597, height: 500 }}
+          >
+            <img loading="lazy" decoding="async"
+              alt="Build Custom Application"
+              src="/products/build-custom-cube.png"
+              className="absolute inset-0 size-full object-contain pointer-events-none"
+            />
+          </div>
+          
+          <div 
+            className="absolute left-1/2 -translate-x-1/2 pointer-events-auto z-20"
+            style={{ top: 819 }}
+          >
             <a
               href="/model-zoo"
               className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} pointer-events-auto relative flex h-[48px] w-[223px] shrink-0 items-center justify-center overflow-hidden`}

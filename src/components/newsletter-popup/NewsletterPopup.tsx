@@ -15,6 +15,7 @@ const SUBSCRIBED_KEY = "newsletter-popup-subscribed";
 
 export function NewsletterPopup() {
   const [open, setOpen] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     // Shows immediately on page open; stays dismissed for the rest of the
@@ -48,8 +49,15 @@ export function NewsletterPopup() {
     // message for invalid input.
     if (!e.currentTarget.reportValidity()) return;
     localStorage.setItem(SUBSCRIBED_KEY, "1");
-    close();
+    // Show the thank-you note, then auto-dismiss.
+    setSubmitted(true);
   };
+
+  useEffect(() => {
+    if (!submitted) return;
+    const timer = window.setTimeout(() => close(), 4000);
+    return () => window.clearTimeout(timer);
+  }, [submitted]);
 
   if (!open) return null;
   if (typeof document === "undefined") return null;
@@ -66,6 +74,28 @@ export function NewsletterPopup() {
         data-node-id="5558:8501"
         data-name="Frame 2147240901"
       >
+        {submitted ? (
+          <div className="flex w-full flex-col items-start gap-[12px]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/contact/success-icon.png"
+              alt=""
+              aria-hidden
+              className="block h-[48px] w-[48px] object-contain"
+            />
+            <p
+              className={`${gilroySemiBold.className} w-full text-[24px] leading-[36px] text-white not-italic`}
+            >
+              Thank you for subscribing
+            </p>
+            <p
+              className={`${interRegular.className} w-full text-[12px] leading-[18px] font-normal text-[#a4a4a4] not-italic [word-break:break-word]`}
+            >
+              {`We'll let you know when there's news worth sharing.`}
+            </p>
+          </div>
+        ) : (
+        <>
         <div
           className="flex w-[315px] max-w-full flex-col items-start"
           data-node-id="5558:8500"
@@ -152,6 +182,8 @@ export function NewsletterPopup() {
           </a>
           {`.`}
         </p>
+        </>
+        )}
       </div>
 
       {/* cancel */}

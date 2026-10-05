@@ -103,8 +103,8 @@ export function ProductsUseCases({ data }: { data?: any }) {
     ...tabs,
     {
       label: "BUILD",
-      watermark: "BUILD YOUR OWN",
-      image: "/products/build-custom-cube.jpg",
+      watermark: "BUILD YOUR",
+      image: "/products/build-custom-cube.png",
       featureCards: [],
       isBuild: true,
     }
@@ -302,39 +302,60 @@ function ProductsUseCasesDesktop({
             {/* BUILD Tab Custom Layout vs Standard Layout */}
             {activeTab.isBuild ? (
               <>
+                <div className="absolute inset-0 pointer-events-none z-[-1] opacity-40 translate-y-[80px]">
+                  <img loading="lazy" decoding="async" src="/products/build-bg.png" alt="" className="size-full object-cover" />
+                </div>
+
                 {/* Background Watermark for BUILD */}
                 <h3
-                  className={`${gilroyExtraBold.className} absolute m-0 flex flex-col justify-center text-center uppercase tracking-[0.5px] bg-clip-text text-transparent [word-break:break-word] not-italic text-[160px] leading-[150px] whitespace-nowrap`}
+                  className={`${gilroyExtraBold.className} absolute m-0 text-center text-[160px] uppercase whitespace-nowrap tracking-[0.5px] leading-[150px] bg-clip-text text-transparent [word-break:break-word] not-italic z-0`}
                   style={{
                     left: 0,
-                    top: 360,
+                    top: 280,
                     width: USECASES_CANVAS_WIDTH,
+                    height: 150,
                     backgroundImage: WATERMARK_GRADIENT,
                     WebkitBackgroundClip: "text",
                     backgroundClip: "text",
                   }}
                   aria-hidden
                 >
-                  BUILD YOUR OWN<br/>APPLICATION
+                  BUILD YOUR
+                </h3>
+
+                <h3
+                  className={`${gilroyExtraBold.className} absolute m-0 text-center text-[160px] uppercase whitespace-nowrap tracking-[0.5px] leading-[150px] bg-clip-text text-transparent [word-break:break-word] not-italic z-0`}
+                  style={{
+                    left: 0,
+                    top: 660,
+                    width: USECASES_CANVAS_WIDTH,
+                    height: 150,
+                    backgroundImage: WATERMARK_GRADIENT,
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                  }}
+                  aria-hidden
+                >
+                  APPLICATION
                 </h3>
                 
                 {/* Central image for BUILD */}
                 <div
-                  className="absolute overflow-hidden flex flex-col items-center justify-center pointer-events-none"
-                  style={{ left: 407.759765625, top: 350, width: 632.8800659179688, height: 500 }}
+                  className="absolute overflow-hidden flex items-center justify-center pointer-events-none z-10"
+                  style={{ left: 425.5, top: 290, width: 597, height: 500 }}
                 >
-                  <div className="relative flex items-center justify-center">
-                    <div className="absolute inset-[40px] bg-black rounded-full blur-[20px] z-0" />
-                    <img loading="lazy" decoding="async"
-                      alt="Build Custom Application"
-                      src="/products/build-custom-cube.jpg"
-                      className="relative z-10 h-full w-auto max-h-[360px] object-contain drop-shadow-2xl mix-blend-screen pointer-events-none"
-                    />
-                  </div>
-                  
-                  <div className="mt-[40px] pointer-events-auto">
-                    <PrimaryCta href="/model-zoo">Explore Model Zoo</PrimaryCta>
-                  </div>
+                  <img loading="lazy" decoding="async"
+                    alt="Build Custom Application"
+                    src="/products/build-custom-cube.png"
+                    className="absolute inset-0 size-full object-contain pointer-events-none"
+                  />
+                </div>
+                
+                <div 
+                  className="absolute left-1/2 -translate-x-1/2 pointer-events-auto z-20"
+                  style={{ top: 840 }}
+                >
+                  <PrimaryCta href="/model-zoo">Explore Model Zoo</PrimaryCta>
                 </div>
               </>
             ) : (
@@ -404,15 +425,17 @@ function ProductsUseCasesDesktop({
       </div>
 
       {/* CTA row — 2901:2143 */}
-      <div
-        className="absolute flex items-start gap-[24px]"
-        style={{ left: 487, top: 873 }}
-        data-node-id="2901:2143"
-        data-name="Frame 1984079464"
-      >
-        <PrimaryCta href={primary.href}>{primary.label}</PrimaryCta>
-        <SecondaryCta href={secondary.href}>{secondary.label}</SecondaryCta>
-      </div>
+      {!activeTab.isBuild && (
+        <div
+          className="absolute flex items-start gap-[24px]"
+          style={{ left: 487, top: 873 }}
+          data-node-id="2901:2143"
+          data-name="Frame 1984079464"
+        >
+          <PrimaryCta href={primary.href}>{primary.label}</PrimaryCta>
+          <SecondaryCta href={secondary.href}>{secondary.label}</SecondaryCta>
+        </div>
+      )}
     </>
   );
 }
@@ -694,26 +717,36 @@ function ProductsUseCasesMobile({
       <div className="relative mt-[24px] flex justify-center">
         {activeTab.isBuild ? (
           <div className="relative flex flex-col w-full items-center justify-center px-[16px] min-h-[360px]">
+            <div className="absolute inset-0 pointer-events-none z-[-1] opacity-40 translate-y-[40px]">
+              <img loading="lazy" decoding="async" src="/products/build-bg.png" alt="" className="size-full object-cover" />
+            </div>
+
             <h3
-              className={`${gilroyExtraBold.className} absolute left-1/2 top-[40%] -translate-x-1/2 -translate-y-1/2 w-full px-[16px] text-center uppercase tracking-[0.5px] bg-clip-text text-transparent not-italic text-[44px] min-[400px]:text-[52px] leading-[48px] flex flex-col justify-center items-center`}
+              className={`${gilroyExtraBold.className} absolute left-1/2 top-[10%] -translate-x-1/2 w-full px-[16px] text-center uppercase tracking-[0.5px] bg-clip-text text-transparent not-italic text-[13vw] sm:text-[60px] leading-[1.1] z-0 whitespace-nowrap`}
               style={{ backgroundImage: WATERMARK_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
               aria-hidden
             >
-              <span>BUILD YOUR OWN</span>
-              <span>APPLICATION</span>
+              BUILD YOUR
             </h3>
             
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <div className="relative flex items-center justify-center mt-[32px] mb-[16px]">
-              <div className="absolute inset-[30px] bg-black rounded-full blur-[15px] z-0" />
+            <div className="relative flex items-center justify-center mt-[40px] mb-[40px] w-full z-10">
               <img loading="lazy" decoding="async"
                 alt="Build Custom Application"
-                src="/products/build-custom-cube.jpg"
-                className="relative z-10 h-auto max-h-[280px] w-auto object-contain drop-shadow-2xl mix-blend-screen"
+                src="/products/build-custom-cube.png"
+                className="relative z-10 h-auto w-full max-w-[360px] object-contain"
               />
             </div>
 
-            <div className="relative z-20 mt-[16px] mb-[24px]">
+            <h3
+              className={`${gilroyExtraBold.className} absolute left-1/2 bottom-[20%] -translate-x-1/2 w-full px-[16px] text-center uppercase tracking-[0.5px] bg-clip-text text-transparent not-italic text-[13vw] sm:text-[60px] leading-[1.1] z-0 whitespace-nowrap`}
+              style={{ backgroundImage: WATERMARK_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
+              aria-hidden
+            >
+              APPLICATION
+            </h3>
+
+            <div className="relative z-20 mt-[32px] mb-[24px]">
               <PrimaryCta href="/model-zoo">Explore Model Zoo</PrimaryCta>
             </div>
           </div>

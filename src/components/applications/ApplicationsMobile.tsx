@@ -209,19 +209,38 @@ export function ApplicationsMobile({
 
       {/* Hero Section (Watermark + Image) */}
       <div className="relative mt-[32px] flex w-full flex-col items-center justify-start min-h-[240px] overflow-visible">
-        {/* Watermark Text */}
-        <p
-          ref={fitRef2}
-          className={`${gilroyExtraBold.className} absolute top-0 z-0 w-full text-center text-[14.5vw] sm:text-[60px] leading-[1.1] font-extrabold tracking-[1px] whitespace-nowrap text-transparent uppercase not-italic`}
-          style={{ backgroundImage: "linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0) 100%)", WebkitBackgroundClip: "text", backgroundClip: "text" }}
-        >
-          {watermarkText}
-        </p>
+        {activeTabData?.isBuild ? (
+          <div className="relative flex flex-col w-full items-center justify-center px-[16px] min-h-[360px]">
+            <div className="absolute inset-0 pointer-events-none z-[-1] opacity-40 translate-y-[40px]">
+              <img loading="lazy" decoding="async" src="/products/build-bg.png" alt="" className="size-full object-cover" />
+            </div>
 
-        {/* Hero Image */}
-        <div className="relative z-10 mt-[24px] flex w-full justify-center px-[20px]">
-          {activeTabData?.isBuild ? (
-            <div className="relative z-10 flex h-[200px] mt-[50px] w-full items-center justify-center">
+            <h3
+              className={`${gilroyExtraBold.className} absolute left-1/2 top-[10%] -translate-x-1/2 w-full px-[16px] text-center uppercase tracking-[0.5px] bg-clip-text text-transparent not-italic text-[13vw] sm:text-[60px] leading-[1.1] z-0 whitespace-nowrap`}
+              style={{ backgroundImage: "linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0) 100%)", WebkitBackgroundClip: "text", backgroundClip: "text" }}
+              aria-hidden
+            >
+              BUILD YOUR
+            </h3>
+            
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <div className="relative flex items-center justify-center mt-[40px] mb-[40px] w-full z-10">
+              <img loading="lazy" decoding="async"
+                alt="Build Custom Application"
+                src="/products/build-custom-cube.png"
+                className="relative z-10 h-auto w-full max-w-[360px] object-contain"
+              />
+            </div>
+
+            <h3
+              className={`${gilroyExtraBold.className} absolute left-1/2 bottom-[20%] -translate-x-1/2 w-full px-[16px] text-center uppercase tracking-[0.5px] bg-clip-text text-transparent not-italic text-[13vw] sm:text-[60px] leading-[1.1] z-0 whitespace-nowrap`}
+              style={{ backgroundImage: "linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0) 100%)", WebkitBackgroundClip: "text", backgroundClip: "text" }}
+              aria-hidden
+            >
+              APPLICATION
+            </h3>
+
+            <div className="relative z-20 mt-[32px] mb-[24px]">
               <a
                 href="/model-zoo"
                 className={`${GREEN_CTA_SHADOW} ${gilroyMedium.className} pointer-events-auto relative flex h-[48px] w-[223px] shrink-0 items-center justify-center overflow-hidden`}
@@ -240,16 +259,32 @@ export function ApplicationsMobile({
                 <GreenCtaCorners />
               </a>
             </div>
-          ) : imgSrc ? (
-            /* eslint-disable-next-line @next/next/no-img-element */
-            <img loading="lazy" decoding="async"
-              alt=""
-              src={imgSrc}
-              className="h-auto max-h-[360px] w-[80%] object-contain drop-shadow-2xl"
-              aria-hidden
-            />
-          ) : null}
-        </div>
+          </div>
+        ) : (
+          <>
+            {/* Watermark Text */}
+            <p
+              ref={fitRef2}
+              className={`${gilroyExtraBold.className} absolute top-0 z-0 w-full text-center text-[14.5vw] sm:text-[60px] leading-[1.1] font-extrabold tracking-[1px] whitespace-nowrap text-transparent uppercase not-italic`}
+              style={{ backgroundImage: "linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0) 100%)", WebkitBackgroundClip: "text", backgroundClip: "text" }}
+            >
+              {watermarkText}
+            </p>
+
+            {/* Hero Image */}
+            <div className="relative z-10 mt-[24px] flex w-full justify-center px-[20px]">
+              {imgSrc ? (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img loading="lazy" decoding="async"
+                  alt=""
+                  src={imgSrc}
+                  className="h-auto max-h-[360px] w-[80%] object-contain drop-shadow-2xl"
+                  aria-hidden
+                />
+              ) : null}
+            </div>
+          </>
+        )}
       </div>
 
       {!activeTabData?.isBuild && (
