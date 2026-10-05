@@ -49,6 +49,8 @@ export interface AppsContinuumCard extends Struct.ComponentSchema {
   };
   attributes: {
     body: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images'>;
+    image_alt: Schema.Attribute.String;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }

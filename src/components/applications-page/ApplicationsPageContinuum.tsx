@@ -7,6 +7,7 @@ import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
 import { ContinuumOptionsBar } from "./ContinuumOptionsBar";
+import { mediaUrl } from "@/lib/strapi";
 
 const TITLE_GRADIENT =
   "linear-gradient(119.973deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -97,14 +98,32 @@ const AC_GLOW = "/applications/cont3-ac-ellipse-glow.svg";
 type ProductCard = {
   title: string;
   body: string;
+  image: string | null;
+  imageAlt: string;
 };
 
+/** CMS-uploaded product visual — replaces the hardcoded Figma composite when
+ * a card has an image. Paints a 610.48×520 box centered on the canvas
+ * (left 414.76 = 720 − 305.24) like every native visual (all centered at
+ * x=720), so any uploaded aspect sits dead-center via object-contain. */
+function CmsImageVisual({ src, alt }: { src: string; alt?: string }) {
+  return (
+    <div className="pointer-events-none absolute left-[414.76px] top-[166px] h-[520px] w-[610.48px]">
+      <img loading="lazy" decoding="async"
+        src={src}
+        alt={alt ?? ""}
+        className="absolute inset-0 size-full max-w-none object-contain"
+      />
+    </div>
+  );
+}
+
 const FALLBACK_CARDS: ProductCard[] = [
-  { title: "GPX10PRO", body: "Always-on intelliegence for wearabes, audio & battery IoT." },
-  { title: "GPX64", body: "Real-time perception & control for robots, drones & smart machines" },
-  { title: "GPX256", body: "Private, local AI compute for creators, developers & businesses" },
-  { title: "GPX2000", body: "Private, local AI compute for creators, developers & businesses" },
-  { title: "GPX8000", body: "Always-on intelliegence for wearabes, audio & battery IoT." },
+  { title: "GPX10PRO", body: "Always-on intelliegence for wearabes, audio & battery IoT.", image: null, imageAlt: "" },
+  { title: "GPX64", body: "Real-time perception & control for robots, drones & smart machines", image: null, imageAlt: "" },
+  { title: "GPX256", body: "Private, local AI compute for creators, developers & businesses", image: null, imageAlt: "" },
+  { title: "GPX2000", body: "Private, local AI compute for creators, developers & businesses", image: null, imageAlt: "" },
+  { title: "GPX8000", body: "Always-on intelliegence for wearabes, audio & battery IoT.", image: null, imageAlt: "" },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -448,10 +467,16 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
   const rawCards = Array.isArray(data?.cards) ? data.cards : [];
   const cards: ProductCard[] =
     rawCards.length > 0
-      ? rawCards.map((c: any) => ({ title: c?.title || "", body: c?.body || "" }))
+      ? rawCards.map((c: any) => ({
+          title: c?.title || "",
+          body: c?.body || "",
+          image: mediaUrl(c?.image),
+          imageAlt: c?.image_alt || c?.image?.alternativeText || "",
+        }))
       : FALLBACK_CARDS;
 
   const activeCard = cards[selected] || FALLBACK_CARDS[selected];
+  const cmsImages = cards.map((c) => c.image).filter(Boolean) as string[];
   const Visual = VISUALS[selected] || MicrowattVisual;
 
   return (
@@ -542,7 +567,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
 
         {/* --- Options bar (interactive) — 1244px centered = left 98 on 1440 --- */}
         <div className="absolute left-1/2 top-[166px] -translate-x-1/2">
-          <ContinuumOptionsBar selected={selected} onSelect={setSelected} />
+          <ContinuumOptionsBar selected={selected} onSelect={setSelected} labels={cards.map((c) => c.title)} />
         </div>
 
         {/* --- Product visual (crossfade on switch) --- */}
@@ -555,7 +580,11 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
             transition={{ duration: 0.35, ease: "easeInOut" }}
             className="pointer-events-none absolute inset-0"
           >
-            <Visual />
+            {activeCard.image ? (
+              <CmsImageVisual src={activeCard.image} alt={activeCard.imageAlt} />
+            ) : (
+              <Visual />
+            )}
           </motion.div>
         </AnimatePresence>
 
@@ -705,7 +734,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
           data-node-id="4583:25091"
         >
           <div className="relative h-[420px] w-[1685.39px]">
-            {M_STRIP.map(({ Visual, scale, x, y }, i) => (
+            {M_STRIP.slice(0, cards.length).map(({ Visual, scale, x, y }, i) => (
               <div
                 key={i}
                 className="absolute overflow-visible"
@@ -720,7 +749,11 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
                   className="absolute top-0 left-0 h-[808px] w-[1440px] origin-top-left"
                   style={{ transform: `scale(${scale})` }}
                 >
-                  <Visual />
+                  {cards[i]?.image ? (
+                    <CmsImageVisual src={cards[i].image!} alt={cards[i].imageAlt} />
+                  ) : (
+                    <Visual />
+                  )}
                 </div>
               </div>
             ))}
@@ -763,7 +796,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
           data-node-id="4583:25149"
         >
           <div className="ml-[-31px] w-max">
-            <ContinuumOptionsBar selected={selected} onSelect={setSelected} isMobile={true} />
+            <ContinuumOptionsBar selected={selected} onSelect={setSelected} isMobile={true} labels={cards.map((c) => c.title)} />
           </div>
         </div>
 
@@ -813,6 +846,9 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
       <div className="hidden" aria-hidden="true">
         {ALL_VISUAL_IMAGES.map((src, i) => (
           <img loading="lazy" decoding="async" key={i} src={src} alt="" />
+        ))}
+        {cmsImages.map((src, i) => (
+          <img loading="lazy" decoding="async" key={`cms-${i}`} src={src} alt="" />
         ))}
       </div>
     </section>

@@ -33,7 +33,7 @@ export default async function ApplicationsPage() {
     data = await getSingleType<any>("applications-page", [
       "hero",
       { section: "death_of_hardware_tradeoffs", fields: ["carousel_images"], nested: ["features"] },
-      "continuum",
+      { section: "continuum", nested: ["cards"] },
       { section: "articles", nested: ["articles"] },
       { section: "wins", nested: ["cards"] },
       { section: "som", fields: ["primary_button", "secondary_button"], nested: ["cards"] },

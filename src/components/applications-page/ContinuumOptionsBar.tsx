@@ -5,25 +5,13 @@ import { interRegular } from "../hero/fonts";
 
 /* Options bar — Figma 4574:7552 (desktop) / 4583:25149 (mobile ruler).
    Selected item: #f0f0f0 box + green corner brackets + #0e1a0e label.
-   Box widths are fixed per item (as in Figma) so ticks never reflow. */
-const ITEMS = [
-  { label: "GPX10PRO", width: 107, nodeId: "4574:7553" },
-  { label: "GPX64", width: 93, nodeId: "4574:7564" },
-  { label: "GPX256", width: 102, nodeId: "4574:7571" },
-  { label: "GPX2000", width: 112, nodeId: "4574:7578" },
-  { label: "GPX8000", width: 113, nodeId: "4574:7585" },
-];
-
-/* Mobile ruler — Figma 4583:25149: exact chip widths + tick heights.
-   Layout rhythm: flex gap-[11.18px], ticks inside groups gap-[10.18px],
-   which reproduces the design x-positions exactly (Cta 55.9, GPX64 220,
-   GPX256 361). */
-const M_ITEMS = [
-  { label: "GPX10PRO", width: 97 },
-  { label: "GPX64", width: 74 },
-  { label: "GPX256", width: 83 },
-  { label: "GPX2000", width: 98 },
-  { label: "GPX8000", width: 99 },
+   Labels come from the Strapi continuum cards (defaults below when the CMS
+   has none). Buttons auto-size to their label so any product name fits. */
+const DEFAULT_ITEMS = [
+  { label: "GPX10PRO", nodeId: "4574:7553" },
+  { label: "GPX64", nodeId: "4574:7564" },
+  { label: "GPX256", nodeId: "4574:7571" },
+  { label: "GPX2000", nodeId: "4574:7578" },
 ];
 const M_LEADING_TICKS = [4, 5, 6, 7, 8];
 const M_TRAILING_TICKS = [8, 8, 8, 8, 8];
@@ -122,11 +110,16 @@ export function ContinuumOptionsBar({
   selected,
   onSelect,
   isMobile = false,
+  labels,
 }: {
   selected: number;
   onSelect: (index: number) => void;
   isMobile?: boolean;
+  labels?: string[];
 }) {
+  const items = (labels?.length ? labels : DEFAULT_ITEMS.map((i) => i.label)).map(
+    (label, i) => ({ label, nodeId: DEFAULT_ITEMS[i]?.nodeId ?? `item-${i}` })
+  );
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -157,7 +150,7 @@ export function ContinuumOptionsBar({
         aria-label="Continuum options"
       >
         <TickGroup heights={M_LEADING_TICKS} />
-        {M_ITEMS.map((item, i) => {
+        {items.map((item, i) => {
           const isSelected = i === selected;
           return (
             <div key={item.label} className="contents">
@@ -166,10 +159,9 @@ export function ContinuumOptionsBar({
                 role="tab"
                 aria-selected={isSelected}
                 onClick={() => onSelect(i)}
-                className={`relative flex h-[36px] shrink-0 cursor-pointer items-center justify-center transition-colors duration-200 ${
-                  isSelected ? "bg-[#f0f0f0]" : "bg-transparent px-[14px]"
+                className={`relative flex h-[36px] shrink-0 cursor-pointer items-center justify-center px-[14px] transition-colors duration-200 ${
+                  isSelected ? "bg-[#f0f0f0]" : "bg-transparent"
                 }`}
-                style={{ width: isSelected ? item.width : undefined }}
               >
                 <span
                   className={` min-[1024px]:text-[16px] min-[1024px]:leading-[24px]${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap not-italic transition-colors duration-200 ${
@@ -180,7 +172,9 @@ export function ContinuumOptionsBar({
                 </span>
                 {isSelected && <MobileCornerBrackets />}
               </button>
-              {i < M_AFTER_ITEM_TICKS.length && <TickGroup heights={M_AFTER_ITEM_TICKS[i]} />}
+              {i < M_AFTER_ITEM_TICKS.length && i < items.length - 1 && (
+                <TickGroup heights={M_AFTER_ITEM_TICKS[i]} />
+              )}
             </div>
           );
         })}
@@ -202,7 +196,7 @@ export function ContinuumOptionsBar({
       role="tablist"
       aria-label="Continuum options"
     >
-      {ITEMS.map((item, i) => {
+      {items.map((item, i) => {
         const isSelected = i === selected;
         return (
           <div key={item.nodeId} className="contents">
@@ -211,10 +205,9 @@ export function ContinuumOptionsBar({
               role="tab"
               aria-selected={isSelected}
               onClick={() => onSelect(i)}
-              className={`relative flex shrink-0 cursor-pointer items-center justify-center transition-colors duration-200 ${
+              className={`relative flex h-[52px] shrink-0 cursor-pointer items-center justify-center px-[24px] transition-colors duration-200 ${
                 isSelected ? "bg-[#f0f0f0]" : "bg-transparent"
-              } ${isMobile ? "h-[36px] px-[16px] rounded-[4px]" : "h-[52px]"}`}
-              style={!isMobile ? { width: item.width } : {}}
+              }`}
               data-node-id={item.nodeId}
             >
               <span
@@ -226,7 +219,7 @@ export function ContinuumOptionsBar({
               </span>
               {isSelected && !isMobile && <CornerBrackets />}
             </button>
-            {!isMobile && i < TICKS.length &&
+            {!isMobile && i < TICKS.length && i < items.length - 1 &&
               TICKS[i].map((h, j) => (
                 <div
                   key={`${i}-${j}`}
