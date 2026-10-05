@@ -104,12 +104,12 @@ export function WearablesHero({
           data-node-id="2509:373"
           data-name="image 162"
         >
-          <img
+          {bg1 && <img
             src={bg1}
             alt=""
             className="absolute inset-0 size-full max-w-none object-cover"
             aria-hidden
-          />
+          />}
         </div>
 
         {/* "Wearables" oversized background text */}
@@ -140,11 +140,11 @@ export function WearablesHero({
           data-name="image 163"
           aria-hidden
         >
-          <img
+          {bg2 && <img
             src={bg2}
             alt=""
             className="absolute inset-0 size-full max-w-none object-cover"
-          />
+          />}
           <div className="absolute inset-0 bg-gradient-to-b from-transparent from-60% to-black/90" />
         </div>
 
@@ -299,12 +299,12 @@ export function WearablesHero({
         >
           {/* Image 162 — base product photo */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          {bg1 && <img
             src={bg1}
             alt=""
             className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
             aria-hidden
-          />
+          />}
 
           {/* Watermark text */}
           <div
@@ -330,11 +330,11 @@ export function WearablesHero({
             <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0)] from-[69.488%] to-black to-[96.665%]" />
             <div className="absolute inset-0 overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              {bg2 && <img
                 src={bg2}
                 alt=""
                 className="absolute left-0 top-[-6.07%] h-[109.08%] w-full max-w-none object-cover"
-              />
+              />}
             </div>
             <div className="absolute inset-0 bg-gradient-to-b from-black from-[4.128%] to-[rgba(0,0,0,0)] to-[24.636%]" />
           </div>

@@ -81,11 +81,11 @@ function LabCard({ data }: { data: CardData }) {
         >
           <div className="pointer-events-none absolute inset-0">
             <div className="absolute inset-0 overflow-hidden">
-              <img loading="lazy" decoding="async"
+              {image && <img loading="lazy" decoding="async"
                 alt=""
                 src={image}
                 className="absolute inset-0 size-full object-contain"
-              />
+              />}
             </div>
             <div
               className="absolute inset-0"
@@ -243,11 +243,7 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
                 className="relative mb-[16px] h-[200px] w-full overflow-hidden"
                 aria-hidden
               >
-                <img loading="lazy" decoding="async"
-                  alt=""
-                  src={card.image || ""}
-                  className="absolute inset-0 size-full object-contain"
-                />
+                {card.image && <img src={card.image} alt="" className="block size-full object-contain" />}
                 <div
                   className="absolute inset-0"
                   style={{ backgroundImage: IMG_OVERLAY }}

@@ -130,12 +130,12 @@ export function WearablesSubconscious({ data }: { data?: any }) {
           >
             {/* Image */}
             <div className="relative h-[428.617px] w-[535.58px] shrink-0" data-name="image">
-              <img loading="lazy" decoding="async"
+              {cardImage && <img loading="lazy" decoding="async"
                 alt=""
                 src={cardImage}
                 className="pointer-events-none absolute inset-0 size-full max-w-none object-contain"
                 aria-hidden
-              />
+              />}
             </div>
             {/* "Zzzz.." overlay on image */}
             <p
@@ -197,12 +197,12 @@ export function WearablesSubconscious({ data }: { data?: any }) {
           className={`relative flex w-full flex-col items-center gap-[16px] bg-[rgba(0,0,0,0.5)] pt-[10px] pb-[20px] px-[12px] ${CARD_BORDER}`}
         >
           <div className="relative h-[240px] w-full shrink-0 overflow-hidden">
-            <img loading="lazy" decoding="async"
+            {cardImage && <img loading="lazy" decoding="async"
               alt=""
               src={cardImage}
               className="pointer-events-none absolute inset-0 size-full object-contain"
               aria-hidden
-            />
+            />}
           </div>
           <p
             className={`${gilroyMedium.className} w-full shrink-0 text-[20px] leading-[26px] text-white not-italic`}
