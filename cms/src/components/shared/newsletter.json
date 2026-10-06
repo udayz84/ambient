@@ -37,7 +37,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site (texture is hardcoded)."
     },
     "alt": {
       "type": "string"

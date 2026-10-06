@@ -12,7 +12,6 @@
       "required": false,
       "description": "Text tag (e.g., 'Leading telco provider'). Shown if no Logo is provided."
     },
-
     "oversizedResult": {
       "type": "string",
       "required": true,
@@ -27,8 +26,13 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["images", "files", "videos", "audios"],
-      "description": "The background image for the top half of the case study card."
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Thumbnail shown at ~380×220, cover. Recommended: 760×440 px WebP/JPG."
     },
     "cta_label": {
       "type": "string",

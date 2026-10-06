@@ -31,7 +31,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Shown at 687×578, cover (mobile 390×360). Recommended: 1400×1180 px WebP."
     },
     "alt": {
       "type": "string"

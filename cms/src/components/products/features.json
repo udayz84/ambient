@@ -21,7 +21,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Full-bleed section backdrop (≥1440 wide). Recommended: 2880×1600 px WebP."
     },
     "feature_cards": {
       "type": "component",

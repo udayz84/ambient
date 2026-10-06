@@ -26,7 +26,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Portrait ~4:5 shown at 377×471, top crop. Recommended: 760×950 px JPG/WebP."
     },
     "alt": {
       "type": "string"

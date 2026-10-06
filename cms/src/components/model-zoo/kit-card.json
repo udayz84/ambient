@@ -21,7 +21,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site. If wired: 700×660 px WebP (shown at 345×327)."
     },
     "image_alt": {
       "type": "string"

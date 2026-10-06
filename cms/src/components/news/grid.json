@@ -23,7 +23,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Full-bleed backdrop 1440×810, cover. Recommended: 2880×1620 px WebP/JPG (16:9)."
     },
     "alt": {
       "type": "string"

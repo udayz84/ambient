@@ -21,7 +21,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Stretched into ≥1440×486 (~3:1) — keep exact ratio to avoid distortion. Recommended: 2880×972 px WebP."
     },
     "callouts": {
       "type": "component",

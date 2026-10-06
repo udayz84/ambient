@@ -24,7 +24,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Card frame 558×320 (mobile stretches full-width). Recommended: 1120×640 px WebP."
     },
     "cards": {
       "type": "component",

@@ -21,7 +21,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site — stat cards use a hardcoded icon."
     },
     "alt": {
       "type": "string"

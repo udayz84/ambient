@@ -21,7 +21,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Chipset card: 128×128 icon. Modules card: ~436×187. Recommended: SVG (chipset) or 1130×600 px WebP (modules)."
     },
     "alt": {
       "type": "string"

@@ -1,1 +1,28 @@
-﻿{ "collectionName": "components_apps_continuum_cards", "info": { "displayName": "Continuum Card", "description": "Ambient continuum card" }, "options": {}, "attributes": { "title": { "type": "string", "required": true }, "body": { "type": "text" }, "image": { "type": "media", "multiple": false, "allowedTypes": ["images"] }, "image_alt": { "type": "string" } } }
+{
+  "collectionName": "components_apps_continuum_cards",
+  "info": {
+    "displayName": "Continuum Card",
+    "description": "Ambient continuum card"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "body": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ],
+      "description": "Shown at 610×520, object-contain. Recommended: 1220×1040 px WebP/PNG."
+    },
+    "image_alt": {
+      "type": "string"
+    }
+  }
+}

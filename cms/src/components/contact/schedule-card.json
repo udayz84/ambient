@@ -30,7 +30,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Cover-clipped into a ~230×230 tile (scales to ~389×347). Recommended: 800×700 px WebP/JPG."
     },
     "alt": {
       "type": "string"

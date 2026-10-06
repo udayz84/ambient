@@ -22,7 +22,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Desktop 1154×675 contain, mobile 393×360 cover. Recommended: 2400×1400 px WebP."
     },
     "primary_button": {
       "type": "component",

@@ -24,7 +24,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Phone shot shown at 536×429, contain. Recommended: 1080×860 px WebP/PNG with transparency."
     },
     "alt": {
       "type": "string"

@@ -31,7 +31,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Mobile-only portrait hero background. Recommended: 1440×2048 px WebP/JPG, key content top-centred."
     },
     "mobile_background_image_alt": {
       "type": "string"
@@ -44,7 +45,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Upload PORTRAIT 1650×3300 px WebP/JPG — the site rotates it 90° into a landscape 1442×825 backdrop."
     },
     "background_image_alt": {
       "type": "string"

@@ -26,7 +26,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Aurora background, drawn ~1515×1543 (desktop only). Recommended: 3040×3100 px WebP."
     },
     "cards": {
       "type": "component",

@@ -65,7 +65,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site — no component reads this field."
     }
   }
 }

@@ -21,7 +21,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Cover-cropped into a fixed slot (largest 285×258). Recommended: 570×516 px WebP/JPG."
     },
     "alt": {
       "type": "string"

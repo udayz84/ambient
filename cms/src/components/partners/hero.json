@@ -27,7 +27,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Ecosystem diagram shown at 640×480 (4:3), detailed. Recommended: 1480×1110 px PNG/WebP."
     },
     "primary_cta": {
       "type": "component",

@@ -32,7 +32,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Hero background 1440×638, cover. Recommended: 2880×1280 px WebP/JPG."
     },
     "alt": {
       "type": "string"

@@ -22,7 +22,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Tall map pin ~28×165. Recommended: SVG (or 72×340 px PNG), keep exact aspect."
     },
     "alt": {
       "type": "string"

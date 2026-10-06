@@ -28,7 +28,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Chip render shown at 401×255, cover. Recommended: 800×510 px WebP/PNG."
     },
     "stats": {
       "type": "component",

@@ -25,7 +25,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Shown at 1120×610, contain (desktop only). Recommended: 2240×1220 px WebP."
     },
     "alt": {
       "type": "string"

@@ -21,7 +21,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Chip/cube render up to 299×301. Recommended: 600×600 px WebP/PNG."
     }
   }
 }

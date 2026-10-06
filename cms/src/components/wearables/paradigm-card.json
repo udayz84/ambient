@@ -21,7 +21,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site (card images are hardcoded at 575×548)."
     },
     "stat_value": {
       "type": "string"

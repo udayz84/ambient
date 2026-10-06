@@ -21,7 +21,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Marquee slides shown at 195×154 each. Recommended: 400×320 px WebP/JPG per image."
     },
     "features": {
       "type": "component",

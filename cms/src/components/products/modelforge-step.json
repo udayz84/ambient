@@ -22,7 +22,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Shown at 395×242, contain. Recommended: 800×480 px WebP."
     },
     "cta_label": {
       "type": "string"

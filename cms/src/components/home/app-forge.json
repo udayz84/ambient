@@ -38,7 +38,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site (App Forge cards use a hardcoded asset). If wired: 1140×660 px WebP."
     },
     "card_image_alt": {
       "type": "string"
@@ -51,7 +52,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site (badges are hardcoded at 177×59). If wired: SVG or 360×120 px PNG."
     },
     "play_store_badge": {
       "type": "media",
@@ -61,7 +63,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site (badges are hardcoded at 177×59). If wired: SVG or 360×120 px PNG."
     },
     "cta": {
       "type": "component",

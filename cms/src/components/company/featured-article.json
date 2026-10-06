@@ -30,7 +30,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Featured article photo 570×400, cover. Recommended: 1140×800 px WebP/JPG."
     },
     "alt": {
       "type": "string"

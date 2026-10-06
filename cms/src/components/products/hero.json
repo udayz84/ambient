@@ -36,7 +36,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Hero render 1442×876, cover. Recommended: 2880×1752 px WebP."
     },
     "chipset_image_mobile": {
       "type": "media",
@@ -46,7 +47,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Mobile-only hero render, full width contain. Recommended: 900 px wide WebP, native aspect."
     },
     "chipset_image_alt": {
       "type": "string"

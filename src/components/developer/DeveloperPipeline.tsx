@@ -299,17 +299,17 @@ export function DeveloperPipeline({ data }: { data?: any }) {
 
       {/* ── Badge "Real-time AI at edge" ───────────────────────────────── */}
       <div
-        className="absolute -translate-x-1/2 overflow-clip bg-[rgba(255,255,255,0.06)]"
-        style={{ left: "50%", top: 50, width: 180, height: 26 }}
+        className="absolute -translate-x-1/2 overflow-clip bg-[rgba(255,255,255,0.06)] px-[24px] flex items-center justify-center"
+        style={{ left: "50%", top: 50, height: 26, minWidth: 220 }}
       >
         <Corners leftSrc={BADGE_LEFT} rightSrc={BADGE_RIGHT} />
         <p
-          className={`${dmMono.className} absolute left-1/2 top-1/2 max-w-full -translate-x-1/2 -translate-y-1/2 text-[16px] leading-[24px] uppercase tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] not-italic overflow-hidden text-ellipsis`}
+          className={`${dmMono.className} relative text-[16px] leading-[24px] uppercase tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] not-italic`}
         >
           {tagText}
         </p>
         <div className="absolute left-[6.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
-        <div className="absolute left-[170.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+        <div className="absolute right-[6.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
       </div>
 
       {/* ── Title + subtitle ───────────────────────────────────────────── */}

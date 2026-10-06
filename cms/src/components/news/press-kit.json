@@ -30,7 +30,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Press kit download file (ZIP or PDF) — not an image."
     },
     "cta_file_alt": {
       "type": "string"

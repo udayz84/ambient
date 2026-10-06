@@ -33,7 +33,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Square tile ~180×184 desktop, 140×140 mobile. Recommended: 400×400 px WebP/PNG."
     },
     "image_alt": {
       "type": "string"

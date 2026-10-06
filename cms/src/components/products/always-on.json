@@ -24,7 +24,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Section background 1450×833, cover. Recommended: 2900×1666 px WebP."
     },
     "bg_subconscious_image": {
       "type": "media",
@@ -34,7 +35,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Section background 1438×749, cover. Recommended: 2880×1500 px WebP."
     },
     "ai_core_icon": {
       "type": "media",
@@ -44,7 +46,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "On-chip icon shown at 38×36. Recommended: SVG (or 76×72 px PNG)."
     },
     "host_cpu_image": {
       "type": "media",
@@ -54,7 +57,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "On-chip chip crop shown at 63×40. Recommended: 128×80 px PNG."
     },
     "stats": {
       "type": "component",

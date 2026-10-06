@@ -34,7 +34,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Full-bleed hero layer 1440×825, cover. Recommended: 2880×1650 px WebP/JPG."
     },
     "background_image_1_alt": {
       "type": "string"
@@ -47,7 +48,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Full-bleed hero overlay 1440×876, cover. Recommended: 2880×1752 px WebP/JPG."
     },
     "background_image_2_alt": {
       "type": "string"

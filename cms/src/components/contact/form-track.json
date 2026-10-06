@@ -21,7 +21,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Shown at 32×32 with a color-invert filter — needs a light, simple glyph. Recommended: single-color SVG (or 64×64 px PNG)."
     },
     "alt": {
       "type": "string"

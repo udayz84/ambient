@@ -17,7 +17,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Partner logo fit into max 120×40. Recommended: SVG (or PNG ≤240×80), transparent background."
     },
     "alt": {
       "type": "string"

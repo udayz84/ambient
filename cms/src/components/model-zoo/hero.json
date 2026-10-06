@@ -32,7 +32,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site. If wired: 2880×1460 px WebP (1440×729 cover)."
     },
     "background_image_2": {
       "type": "media",
@@ -42,7 +43,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site. If wired: 2880×2020 px WebP (overlay layer)."
     },
     "collage_row_1": {
       "type": "component",

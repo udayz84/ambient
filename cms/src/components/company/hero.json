@@ -21,7 +21,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site (hero uses a hardcoded asset). If wired: 2608×1536 px WebP."
     },
     "background_image_alt": {
       "type": "string"
@@ -34,7 +35,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site (mobile hero uses a hardcoded asset). If wired: ~860×740 px WebP."
     },
     "mobile_background_image_alt": {
       "type": "string"

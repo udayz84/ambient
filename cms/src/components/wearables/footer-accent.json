@@ -19,7 +19,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site — the shape is hardcoded."
     },
     "alt": {
       "type": "string"

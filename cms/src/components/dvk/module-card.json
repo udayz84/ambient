@@ -22,7 +22,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Shown at ~506×301 desktop / 331×200 mobile, contain. Recommended: 1020×600 px WebP/PNG."
     }
   }
 }

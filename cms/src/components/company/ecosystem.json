@@ -20,7 +20,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Glow map stretched into 1340×765 — upload exact 1.75:1 to avoid distortion. Recommended: 2680×1530 px."
     },
     "alt": {
       "type": "string"

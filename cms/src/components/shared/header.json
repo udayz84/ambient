@@ -31,7 +31,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site (CTA dot is hardcoded). If wired: SVG, ~6×6 dot."
     },
     "alt": {
       "type": "string"

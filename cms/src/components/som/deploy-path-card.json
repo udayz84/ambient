@@ -30,7 +30,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Shown at ~495×294 inside the card, contain. Recommended: 1000×600 px WebP/PNG."
     },
     "image_overlay_label": {
       "type": "string"

@@ -30,7 +30,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Shown at ~327×232, contain. Recommended: 700×470 px WebP/PNG."
     }
   }
 }

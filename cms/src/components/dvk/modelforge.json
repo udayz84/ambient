@@ -21,7 +21,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Shown at 345×350, cover. Recommended: 690×700 px WebP."
     },
     "your_model_title": {
       "type": "string"
@@ -37,7 +38,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Shown at 250×268, contain. Recommended: 500×536 px WebP."
     },
     "dvk_board_title": {
       "type": "string"
@@ -53,7 +55,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Shown at 250×228, contain. Recommended: 500×456 px WebP (or SVG blueprint line-art)."
     },
     "toolchain_title": {
       "type": "string"

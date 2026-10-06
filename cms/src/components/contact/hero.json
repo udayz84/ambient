@@ -21,7 +21,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Full-bleed hero 1440×733, cover. Recommended: 2880×1470 px WebP/JPG."
     },
     "background_image_alt": {
       "type": "string"
@@ -34,7 +35,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Mobile-only portrait hero (~430×518 visible). Recommended: 900×1040 px WebP/JPG."
     },
     "mobile_background_image_alt": {
       "type": "string"

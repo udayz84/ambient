@@ -25,7 +25,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Card visual up to ~440×472. Recommended: 900×950 px WebP/PNG."
     },
     "alt": {
       "type": "string"

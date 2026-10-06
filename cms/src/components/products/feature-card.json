@@ -21,7 +21,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Shown at up to 388×340. Recommended: 780×680 px WebP."
     }
   }
 }

@@ -9,8 +9,13 @@
     "icon": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": ["images", "files", "videos", "audios"],
-      "description": "Small icon for the feature (e.g. 6-axis IMU icon)"
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Shown at 20×20. Recommended: SVG (or 40×40 px PNG)."
     },
     "text": {
       "type": "string",

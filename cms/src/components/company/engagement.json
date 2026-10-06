@@ -14,7 +14,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Full-bleed background ~1440×1102, cover. Recommended: 2880×2200 px WebP/JPG."
     },
     "alt": {
       "type": "string"

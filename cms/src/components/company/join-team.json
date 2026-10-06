@@ -27,7 +27,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Photo shown at 780×340, cover. Recommended: 1560×680 px WebP/JPG."
     },
     "alt": {
       "type": "string"

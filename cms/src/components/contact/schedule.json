@@ -21,7 +21,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Shown at 32×32. Recommended: SVG (or 64×64 px PNG)."
     },
     "alt": {
       "type": "string"

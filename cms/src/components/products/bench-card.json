@@ -21,7 +21,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Shown at 345×327, contain. Recommended: 700×660 px WebP/PNG."
     },
     "chip_label": {
       "type": "string"

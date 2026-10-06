@@ -14,7 +14,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site. If wired: SVG (or 72×72 px PNG, shown at 36×36)."
     },
     "text": {
       "type": "text",

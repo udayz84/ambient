@@ -21,7 +21,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Navbar logo shown at 135×38. Recommended: SVG (or 280×80 px PNG)."
     },
     "logo_alt": {
       "type": "string"
@@ -34,7 +35,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site — mobile menus reuse the main logo."
     },
     "logo_mobile_alt": {
       "type": "string"
@@ -48,7 +50,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not wired to the site yet. Recommended: 32×32 px PNG/ICO (16/32/48 sizes)."
     },
     "favicon_alt": {
       "type": "string"

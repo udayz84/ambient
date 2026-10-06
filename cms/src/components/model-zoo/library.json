@@ -29,7 +29,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site. If wired: 2370×400 px WebP — exact 1185:200 ratio so it tiles seamlessly."
     },
     "strip_image_alt": {
       "type": "string"

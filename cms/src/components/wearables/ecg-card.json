@@ -30,7 +30,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Square shown at 283×283, contain. Recommended: 570×570 px WebP/PNG."
     }
   }
 }

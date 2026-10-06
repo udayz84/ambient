@@ -28,7 +28,7 @@
         "videos",
         "audios"
       ],
-      "description": "Product image shown on the top right of the card"
+      "description": "Shown at 280×200, contain. Recommended: 560×400 px WebP/PNG."
     },
     "features": {
       "type": "component",

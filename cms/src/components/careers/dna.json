@@ -21,7 +21,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Product shot, max 386 wide × 600, contain. Recommended: 800 px wide PNG/WebP with transparency."
     },
     "chip_object_alt": {
       "type": "string"
@@ -34,7 +35,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Mobile-only shot in a 336×349 box, contain. Recommended: 700×720 px PNG/WebP with transparency."
     },
     "mobile_chip_object_alt": {
       "type": "string"

@@ -24,7 +24,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Square-ish product shot, max 389×389 (mobile 275×470). Recommended: 780×780 px WebP/PNG."
     },
     "alt": {
       "type": "string"

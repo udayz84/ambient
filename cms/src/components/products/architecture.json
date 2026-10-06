@@ -25,7 +25,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Diagram shown only on mobile (~325 px wide, contain; desktop is hardcoded). Recommended: 700 px wide WebP."
     },
     "alt": {
       "type": "string"

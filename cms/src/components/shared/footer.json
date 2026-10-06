@@ -38,7 +38,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site (attribution logo is hardcoded). If wired: SVG (or 108×24 px PNG)."
     },
     "crafted_by_logo_alt": {
       "type": "string"
@@ -51,7 +52,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site (footer background is hardcoded). If wired: 2880×2430 px WebP."
     },
     "background_image_alt": {
       "type": "string"

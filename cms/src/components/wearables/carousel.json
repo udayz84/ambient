@@ -14,7 +14,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Carousel art, ~460 px tall desktop / 240 mobile, contain. Recommended: ≥920 px on the long edge WebP/PNG."
     },
     "alt": {
       "type": "string"

@@ -14,7 +14,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Shown at 570×400, contain (mobile 358×240). Recommended: 1140×800 px WebP/PNG."
     },
     "alt": {
       "type": "string"

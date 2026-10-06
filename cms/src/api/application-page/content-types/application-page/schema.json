@@ -24,7 +24,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Shown in the navbar Applications dropdown at 20×20. Recommended: SVG (or 40×40 px PNG)."
     },
     "hero": {
       "type": "component",

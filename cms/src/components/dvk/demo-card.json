@@ -23,7 +23,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Shown at 290×268, cover (desktop only). Recommended: 580×536 px WebP/JPG."
     },
     "alt": {
       "type": "string"

@@ -21,7 +21,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Full-bleed 1440×1002, cover. Recommended: 2880×2010 px PNG/WebP."
     },
     "globe_image_alt": {
       "type": "string"
@@ -34,7 +35,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Dotted-map texture shown at 1204×392 (20% opacity), cover. Recommended: 2410×790 px PNG with transparency."
     },
     "map_base_alt": {
       "type": "string"

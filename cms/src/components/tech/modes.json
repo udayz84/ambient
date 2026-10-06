@@ -26,7 +26,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site — mode icons are hardcoded."
     },
     "bottom_image": {
       "type": "media",
@@ -36,7 +37,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site — mode icons are hardcoded."
     },
     "mode_cards": {
       "type": "component",

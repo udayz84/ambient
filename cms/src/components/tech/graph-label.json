@@ -22,7 +22,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Graph chip render, largest slot 254×127, contain. Recommended: 512×256 px WebP/PNG."
     },
     "bottom_image": {
       "type": "media",
@@ -33,7 +34,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Graph cube render, largest slot 240×229, contain. Recommended: 512×490 px WebP/PNG."
     }
   }
 }

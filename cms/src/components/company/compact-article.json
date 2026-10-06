@@ -18,7 +18,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Wide strip shown at 570×160, cover. Recommended: 1140×320 px WebP/JPG."
     },
     "alt": {
       "type": "string"

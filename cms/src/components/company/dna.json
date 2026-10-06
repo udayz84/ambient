@@ -21,7 +21,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Section background 1545×932, cover. Recommended: 3100×1870 px WebP/JPG."
     },
     "alt": {
       "type": "string"

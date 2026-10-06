@@ -22,7 +22,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Social icon shown at 24×24. Recommended: SVG (or 48×48 px PNG)."
     },
     "alt": {
       "type": "string"

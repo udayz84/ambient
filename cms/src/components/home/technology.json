@@ -28,7 +28,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Shown at 732×341 (~2.15:1). Recommended: 1464×682 px WebP."
     },
     "image_alt": {
       "type": "string"

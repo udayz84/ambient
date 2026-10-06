@@ -42,7 +42,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Candidate resume file (PDF/DOC) submitted via the careers form. Not an image."
     },
     "cover_letter": {
       "type": "text"

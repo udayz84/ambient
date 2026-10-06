@@ -68,7 +68,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Card thumbnail, shown at 410×285 (cover crop). Recommended: 820×570 px WebP/JPG."
     },
     "hero_image": {
       "type": "media",
@@ -78,7 +79,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Article hero banner, full-width 21:9. Recommended: 2880×1234 px WebP/JPG."
     },
     "alt": {
       "type": "string"

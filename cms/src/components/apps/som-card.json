@@ -41,7 +41,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Card visual shown at 390×320, contain. Recommended: 780×640 px WebP/PNG."
     },
     "image_a_alt": {
       "type": "string"
@@ -55,7 +56,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Card visual shown at 390×320, cover. Recommended: 780×640 px WebP/JPG."
     },
     "image_b_alt": {
       "type": "string"

@@ -14,7 +14,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site (hero video is hardcoded). If wired: ~1226×682 px MP4 H.264, muted, loop."
     },
     "video_alt": {
       "type": "string"
@@ -27,7 +28,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site (hero video is hardcoded). If wired: ~609×339 px MP4 H.264, muted, loop."
     },
     "mobile_video_alt": {
       "type": "string"

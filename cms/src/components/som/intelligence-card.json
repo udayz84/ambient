@@ -22,7 +22,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Square shown at 160×160, cover (desktop only). Recommended: 320×320 px WebP."
     }
   }
 }

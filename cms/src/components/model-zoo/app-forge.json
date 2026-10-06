@@ -38,7 +38,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site (page is hardcoded). If wired: 1140×660 px WebP."
     },
     "card_image_alt": {
       "type": "string"
@@ -51,7 +52,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site. If wired: SVG or 360×120 px PNG (badge box 177×59)."
     },
     "play_store_badge": {
       "type": "media",
@@ -61,7 +63,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site. If wired: SVG or 360×120 px PNG (badge box 177×59)."
     },
     "cta": {
       "type": "component",

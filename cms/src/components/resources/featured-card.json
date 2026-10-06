@@ -14,7 +14,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Shown at 407×281, cover. Recommended: 820×560 px WebP/JPG."
     },
     "image_alt": {
       "type": "string"
@@ -53,7 +54,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Whitepaper PDF served by the Download button — not an image."
     },
     "pdf_file_alt": {
       "type": "string"

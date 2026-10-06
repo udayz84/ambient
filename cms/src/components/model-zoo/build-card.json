@@ -21,7 +21,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site. If wired: SVG (or 96×96 px PNG, shown at ~45×45)."
     }
   }
 }

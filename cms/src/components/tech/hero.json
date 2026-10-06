@@ -36,7 +36,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Full-bleed hero 1440×765, cover. Recommended: 2880×1530 px WebP/JPG."
     }
   }
 }

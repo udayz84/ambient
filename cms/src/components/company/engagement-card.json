@@ -27,7 +27,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Card art up to 375×369, contain. Recommended: 750×740 px PNG with transparency."
     },
     "alt": {
       "type": "string"

@@ -28,7 +28,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Artwork shown at 356×259, contain. Recommended: 720×520 px PNG/WebP with transparency."
     },
     "alt": {
       "type": "string"

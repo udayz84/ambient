@@ -18,7 +18,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Per-tab hero, largest box 764×603, cover. Recommended: 1536×1216 px WebP/JPG."
     },
     "hero_image_alt": {
       "type": "string"
@@ -31,7 +32,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Mobile-only product shot ~312×360, contain. Recommended: 640×720 px WebP/PNG with transparency."
     },
     "mobile_hero_image_alt": {
       "type": "string"

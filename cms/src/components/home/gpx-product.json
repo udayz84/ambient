@@ -24,7 +24,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Square chip render shown in a 322×321 box. Recommended: 644×644 px PNG with transparency."
     },
     "alt": {
       "type": "string"

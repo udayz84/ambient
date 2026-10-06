@@ -24,7 +24,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Not yet shown on the site (board images are hardcoded). If wired: 1120×930 px WebP."
     },
     "specs": {
       "type": "component",

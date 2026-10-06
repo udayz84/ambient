@@ -17,7 +17,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Ecosystem partner logo, slots up to 120×22. Recommended: SVG (or PNG ≥240×44), white on transparent."
     },
     "alt": {
       "type": "string"

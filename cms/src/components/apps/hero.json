@@ -26,7 +26,8 @@
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "description": "Wide hero, shown at 1828×718. Recommended: 3660×1440 px WebP/JPG."
     },
     "alt": {
       "type": "string"

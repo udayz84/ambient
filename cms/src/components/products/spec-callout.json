@@ -24,7 +24,7 @@
         "videos",
         "audios"
       ],
-      "description": "Small dark square icon in the top right corner of the card."
+      "description": "Shown at 22×22. Recommended: SVG (or 44×44 px PNG)."
     }
   }
 }
