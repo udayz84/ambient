@@ -204,7 +204,7 @@ export function ModelZooAppForge({ data }: { data?: any }) {
                     aria-pressed={isActive}
                     onClick={() => setActiveStep(isActive ? null : key)}
                     className={`relative block h-[84px] w-full shrink-0 cursor-pointer bg-[rgba(0,0,0,0.1)] text-left transition-[height,opacity] duration-300 motion-reduce:transition-none ${isActive ? STEP_ACTIVE_HEIGHT[key] : ""} ${
-                      isActive ? "opacity-100" : activeStep ? "opacity-40" : "opacity-100"
+                      isActive ? "opacity-100" : "opacity-40"
                     }`}
                     data-node-id={`5241:57${52 - i * 6}`}
                   >
