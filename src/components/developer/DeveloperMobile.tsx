@@ -1162,7 +1162,7 @@ function DeveloperModulesMobile({ data }: { data?: any }) {
                       aria-hidden
                       className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
                     />
-                    <GreenCtaCorners />
+                    <GreenCtaCorners disableDots />
                   </a>
                 ) : (
                   <a
@@ -1283,7 +1283,7 @@ function DeveloperCopilotsMobile({ data }: { data?: any }) {
                       aria-hidden
                       className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
                     />
-                    <GreenCtaCorners />
+                    <GreenCtaCorners disableDots />
                   </a>
                 ) : (
                   <a

@@ -169,7 +169,7 @@ function ModuleCta({
       <span className="relative not-italic text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white">
         {children}
       </span>
-      <GreenCtaCorners />
+      <GreenCtaCorners disableDots />
     </a>
   );
 }

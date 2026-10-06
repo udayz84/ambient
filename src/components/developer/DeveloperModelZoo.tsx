@@ -227,7 +227,7 @@ export function DeveloperModelZoo({ data }: { data?: any }) {
 
         {/* Stats row — 5212:6823 */}
         <div
-          className="absolute left-[calc(50%-13.68px)] flex -translate-x-1/2 items-start justify-center gap-[32px] bg-[rgba(0,0,0,0.1)] px-[20px]"
+          className="absolute left-[calc(50%-13.68px)] flex -translate-x-1/2 items-start justify-center gap-[32px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.1)] px-[20px]"
           style={{ top: 286 }}
           data-node-id="5212:6823"
         >

@@ -177,7 +177,7 @@ export function DeveloperComingSoon({ data }: { data?: any }) {
       {/* Full-width frosted glass panel overlaying background */}
       <div 
         ref={fadeRef}
-        className={`absolute inset-0 border-y-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.04)] backdrop-blur-[12px] ${getFadeInClass(isVisible)}`}
+        className={`absolute inset-0 bg-[rgba(0,0,0,0.04)] backdrop-blur-[12px] ${getFadeInClass(isVisible)}`}
       />
 
       {/* Content — 4495:3177 (800×587 centered) */}

@@ -183,7 +183,7 @@ function CopilotCta({
       >
         {children}
       </span>
-      <GreenCtaCorners />
+      <GreenCtaCorners disableDots />
     </a>
   );
 }
