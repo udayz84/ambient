@@ -26,6 +26,12 @@
     "alt": {
       "type": "string"
     },
+    "tag": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string"
+    },
     "cta_label": {
       "type": "string"
     },

@@ -174,10 +174,10 @@ function IntelligenceCard({
   );
 }
 
-function DownloadCta({ label }: { label: string }) {
+function DownloadCta({ label, href = "#" }: { label: string; href?: string }) {
   return (
     <a
-      href="#"
+      href={href}
       className={`relative flex h-[48px] w-[281px] max-w-full shrink-0 items-center justify-center ${GREEN_CTA_SHADOW}`}
       data-name="Cta"
     >
@@ -203,6 +203,7 @@ export function SomIntelligence({ data }: { data?: any }) {
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const heading = data?.heading || FALLBACK_HEADING;
   const ctaLabel = data?.cta_label || FALLBACK_CTA_LABEL;
+  const ctaHref = data?.cta_href || "#";
   const dataCards: any[] = Array.isArray(data?.cards) ? data.cards : [];
   const cards = CARDS.map((fb, i) => {
     const c = dataCards[i];
@@ -253,7 +254,7 @@ export function SomIntelligence({ data }: { data?: any }) {
             />
           ))}
         </div>
-        <DownloadCta label={ctaLabel} />
+        <DownloadCta label={ctaLabel} href={ctaHref} />
       </div>
 
       {/* MOBILE (<1024px) — Figma node 4059:9285 "5th Fold" 393×1770 */}
@@ -301,7 +302,7 @@ export function SomIntelligence({ data }: { data?: any }) {
 
         {/* CTA — 4059:9286 (y1680, w280) */}
         <div className="absolute left-1/2 top-[1680px] -translate-x-1/2">
-          <DownloadCta label={ctaLabel} />
+          <DownloadCta label={ctaLabel} href={ctaHref} />
         </div>
       </div>
     </section>

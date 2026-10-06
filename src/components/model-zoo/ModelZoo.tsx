@@ -21,8 +21,8 @@ export function ModelZoo() {
       <div id="model-zoo-content" className="mt-[36px]" />
       <ModelZooWatchItRun />
       <ModelZooLibrary />
-      <ModelZooAppForge />
       <ModelZooSteps />
+      <ModelZooAppForge />
       <ModelZooBuildIt />
       <ModelZooKits />
 

@@ -38,10 +38,10 @@ function resolveCards(data: any): LatestNewsArticle[] {
         nodeId: `cms-news-card-mobile-${index}`,
         title: c.title || "",
         excerpt: c.body || "",
-        category: fallback.category,
+        category: c.tag || fallback.category,
         categoryOffsetX: fallback.categoryOffsetX,
-        date: fallback.date,
-        href: fallback.href,
+        date: c.date || fallback.date,
+        href: c.cta_href || fallback.href,
         imageSrc:
           mediaUrl(c.image)
             ? mediaUrl(c.image)

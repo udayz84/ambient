@@ -19,6 +19,9 @@
     "primary_cta_label": {
       "type": "string"
     },
+    "primary_cta_link": {
+      "type": "string"
+    },
     "secondary_text": {
       "type": "text"
     },

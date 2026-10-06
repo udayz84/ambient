@@ -20,6 +20,8 @@ export function DvkDemos({ data }: { data?: any }) {
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 1 });
   const heading = data?.heading || DEFAULT_HEADING;
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
+  const ctaLabel = data?.cta_label || "EXPLORE TARGET APPLICATIONS →";
+  const ctaHref = data?.cta_href || "/applications";
   return (
     <div className="relative flex w-full flex-col items-center gap-[53px]">
       {/* Section title — 2761:2791 (872×136) */}
@@ -66,11 +68,11 @@ export function DvkDemos({ data }: { data?: any }) {
 
       {/* Explore CTA */}
       <a
-        href="/applications"
+        href={ctaHref}
         className={`${interRegular.className} relative mt-[11px] flex h-[48px] items-center justify-center border border-solid border-[rgba(255,255,255,0.15)] bg-[#1a1a1a] px-[24px] text-[13px] tracking-[0.02em] text-white transition-colors hover:bg-[#2a2a2a]`}
       >
         <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-        EXPLORE TARGET APPLICATIONS &rarr;
+        {ctaLabel}
       </a>
     </div>
   );

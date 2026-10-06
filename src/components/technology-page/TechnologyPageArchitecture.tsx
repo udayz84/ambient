@@ -86,7 +86,7 @@ const PILLARS: Pillar[] = [
   {
     nodeId: "3346:600",
     left: 115,
-    top: 794,
+    top: 930,
     cardWidth: 389,
     statWidth: 340,
     statGap: 40,
@@ -111,7 +111,7 @@ const PILLARS: Pillar[] = [
   {
     nodeId: "3346:507",
     left: 112.5,
-    top: 1305,
+    top: 1530,
     cardWidth: 396,
     statWidth: 356,
     statGap: 32,
@@ -199,7 +199,7 @@ export function PillarCta({ pillar }: { pillar: Pillar }) {
   return (
     <a
       href={pillar.ctaHref || "/developer"}
-      className={`${gilroyMedium.className} relative block h-[48px] w-[250px] max-[1023px]:w-full shrink-0 ${CTA_SHADOW}`}
+      className={`${gilroyMedium.className} relative flex min-h-[48px] w-[250px] max-[1023px]:w-full shrink-0 items-center justify-center py-[8px] px-[16px] ${CTA_SHADOW}`}
       data-node-id="3919:515"
       data-name="Cta"
     >
@@ -207,7 +207,7 @@ export function PillarCta({ pillar }: { pillar: Pillar }) {
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
-      <span className="absolute left-[16.5px] top-[calc(50%-14px)] max-w-[calc(100%-33px)] text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]">
+      <span className="relative text-[13px] sm:text-[14px] xl:text-[15px] leading-[1.3] font-medium text-white uppercase not-italic text-center">
         {pillar.cta}
       </span>
       <span
@@ -392,7 +392,7 @@ export function TechnologyPageArchitecture({
       aria-label="One architecture that thinks, senses, & speaks you language"
     >
       {/* DESKTOP (>=1024px) — 1440×1833 canvas */}
-      <div className="relative hidden h-[1833px] w-[1440px] shrink-0 min-[1024px]:block">
+      <div className="relative hidden h-[2300px] w-[1440px] shrink-0 min-[1024px]:block">
         <BrainVisual />
 
         {/* Header — 3330:1262 (800 wide, x=352 y=71) */}
@@ -446,8 +446,8 @@ export function TechnologyPageArchitecture({
 
         {/* Connectors — card → brain */}
         <Connector left={547} top={493} />
-        <Connector left={547} top={933} />
-        <Connector left={549} top={1493} />
+        <Connector left={547} top={1069} />
+        <Connector left={549} top={1718} />
       </div>
 
       {/* MOBILE (<1024px) — pixel-perfect from Figma node 3572:6674 (3rd Fold, 393x966) */}

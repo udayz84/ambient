@@ -103,6 +103,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
   const subtitle = data?.subtitle || SUBTITLE;
   const heading = data?.heading || "Ready to deploy?";
   const ctaLabel = data?.primary_cta_label || CTA_LABEL;
+  const ctaHref = data?.primary_cta_link;
   const description = data?.secondary_text || DESCRIPTION;
   const chipSrc = mediaUrl(data?.image);
   const secondaryCtaLabel = data?.secondary_cta_label;
@@ -175,7 +176,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
               {description}
             </p>
             <div className="flex flex-col gap-[12px]">
-              <RequestCta label={ctaLabel} />
+              <RequestCta label={ctaLabel} href={ctaHref} />
               {secondaryCtaLabel && (
                 <SecondaryCta label={secondaryCtaLabel} href={secondaryCtaLink} />
               )}
@@ -282,7 +283,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
             {/* CTA — 4059:9373 (231×48) */}
             <div className="flex flex-col gap-[12px] items-center">
               <a
-                href="#"
+                href={ctaHref || "#"}
                 className={`relative flex h-[48px] w-[231px] shrink-0 items-center justify-center ${GREEN_CTA_SHADOW}`}
                 data-name="Cta"
               >

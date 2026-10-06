@@ -177,13 +177,19 @@ export function ModelZooAppForge({ data }: { data?: any }) {
 
           {/* Right column — 5241:5702 */}
           <div className="relative flex min-w-px flex-1 flex-col items-center justify-center gap-[25px]" data-node-id="5241:5702">
-            <p
-              className={`${gilroyMedium.className} w-full text-left min-[1024px]:w-[578px] text-[22px] leading-[28px] text-white not-italic ${forgeVisible ? "motion-safe:animate-hero-text-fade-in" : "min-[1024px]:opacity-0"}`}
+            <div
+              className={`w-full min-[1024px]:w-[578px] ${forgeVisible ? "motion-safe:animate-hero-text-fade-in" : "min-[1024px]:opacity-0"}`}
               style={{ animationDelay: "140ms", animationFillMode: "both" }}
-              data-node-id="5241:5703"
             >
-              Application Forge
-            </p>
+              <button
+                onClick={() => setActiveStep(null)}
+                type="button"
+                className={`${gilroyMedium.className} w-full text-left text-[22px] leading-[28px] text-white not-italic cursor-pointer transition-opacity duration-300 ${activeStep !== null ? "opacity-40 hover:opacity-100" : "opacity-100"}`}
+                data-node-id="5241:5703"
+              >
+                Application Forge
+              </button>
+            </div>
 
             {/* eval kit list — 5241:5728. Click activates the Figma variant for
                 that step: row expands to its Stat content, siblings dim to 40%. */}
@@ -250,7 +256,7 @@ export function ModelZooAppForge({ data }: { data?: any }) {
           <div className="relative h-[327px] w-full min-w-px min-[1024px]:flex-1" data-node-id="5131:10537" data-name="Container">
             <img
               alt="ApplicationForge phone app preview on an eval kit"
-              src="/model-zoo/af-container.webp"
+              src="/container.png"
               className="pointer-events-none size-full rounded-[6px] object-cover"
               loading="lazy"
               decoding="async"
@@ -259,20 +265,20 @@ export function ModelZooAppForge({ data }: { data?: any }) {
 
           {/* NewsSection — 5131:10514 */}
           <div className="relative flex w-full min-w-px flex-1 flex-col items-start self-stretch gap-[40px]" data-node-id="5131:10514" data-name="NewsSection">
-            <div className="relative h-[26px] w-[180px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)]" data-node-id="5131:10515" data-name="Menu">
+            <div className="relative h-[26px] w-[220px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)]" data-node-id="5131:10515" data-name="Menu">
               <p className={`${dmMono.className} absolute top-[calc(50%-4.5px)] left-[calc(50%-0.26px)] -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
                 super easy process
               </p>
               <div className="absolute top-1/2 left-[6.48px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
-              <div className="absolute top-1/2 left-[173.48px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+              <div className="absolute top-1/2 right-[6.48px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
               <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             </div>
             <p className={`${gilroyMedium.className} w-full text-[32px] leading-[38px] text-white not-italic [word-break:break-word]`} data-node-id="5131:10523">
               Download the app and get it working with Sparsh module
             </p>
             <div className="flex flex-wrap items-center gap-[19.667px]" data-node-id="5203:5767">
-              <img alt="Download on the App Store" src="/model-zoo/af-badge-1.webp" className="h-[59px] w-[177px] shrink-0" loading="lazy" decoding="async" data-node-id="5203:5768" />
-              <img alt="Get it on Google Play" src="/model-zoo/af-badge-2.webp" className="h-[59px] w-[177px] shrink-0" loading="lazy" decoding="async" data-node-id="5203:5769" />
+              <img alt="Download on the App Store" src="/model-zoo/af-badge-1.webp" className="h-[59px] w-[177px] shrink-0 rounded-[8px]" loading="lazy" decoding="async" data-node-id="5203:5768" />
+              <img alt="Get it on Google Play" src="/model-zoo/af-badge-2.webp" className="h-[59px] w-[177px] shrink-0 rounded-[8px]" loading="lazy" decoding="async" data-node-id="5203:5769" />
             </div>
           </div>
 

@@ -11,7 +11,9 @@ export interface AppsArticleCard extends Struct.ComponentSchema {
     body: Schema.Attribute.Text;
     cta_href: Schema.Attribute.String;
     cta_label: Schema.Attribute.String;
+    date: Schema.Attribute.String;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    tag: Schema.Attribute.String;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -158,6 +160,7 @@ export interface AppsWinCard extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
+    body: Schema.Attribute.Text;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     label: Schema.Attribute.String & Schema.Attribute.Required;
     stat: Schema.Attribute.String;
@@ -900,6 +903,8 @@ export interface DvkDemos extends Struct.ComponentSchema {
     displayName: 'Demos';
   };
   attributes: {
+    cta_href: Schema.Attribute.String;
+    cta_label: Schema.Attribute.String;
     demo_cards: Schema.Attribute.Component<'dvk.demo-card', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     phone_card: Schema.Attribute.Component<'dvk.phone-card', false>;
@@ -2942,6 +2947,7 @@ export interface SomIntelligence extends Struct.ComponentSchema {
   };
   attributes: {
     cards: Schema.Attribute.Component<'som.intelligence-card', true>;
+    cta_href: Schema.Attribute.String;
     cta_label: Schema.Attribute.String;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     subtitle: Schema.Attribute.Text;
@@ -2997,6 +3003,7 @@ export interface SomReadyToDeploy extends Struct.ComponentSchema {
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     primary_cta_label: Schema.Attribute.String;
+    primary_cta_link: Schema.Attribute.String;
     primary_title: Schema.Attribute.String;
     secondary_cta_label: Schema.Attribute.String;
     secondary_cta_link: Schema.Attribute.String;

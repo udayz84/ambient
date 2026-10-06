@@ -194,7 +194,7 @@ function DvkPhoneCard({ data }: { data?: any }) {
           {/* Cta — 5212:6949 (48 tall, label + arrow 5212:6961, gap 11) */}
           <a
             href={card.primary_cta_href}
-            className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center gap-[11px]`}
+            className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex min-h-[48px] py-[8px] px-[16px] w-full shrink-0 items-center justify-center gap-[11px]`}
             data-node-id="5212:6949"
             data-name="Cta"
           >
@@ -202,7 +202,7 @@ function DvkPhoneCard({ data }: { data?: any }) {
               aria-hidden
               className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
             />
-            <span className="relative text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
+            <span className="relative text-[13px] sm:text-[14px] xl:text-[15px] leading-[1.3] font-medium text-white uppercase not-italic text-center">
               {card.primary_cta_label}
             </span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -210,7 +210,7 @@ function DvkPhoneCard({ data }: { data?: any }) {
               alt=""
               src="/dvk/phone-cta-arrow.svg"
               aria-hidden
-              className="relative block size-[18px] max-w-none"
+              className="relative block size-[18px] max-w-none shrink-0"
               data-node-id="5212:6961"
               data-name="Frame"
             />
