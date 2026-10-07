@@ -37,7 +37,7 @@ export function DeveloperModulesSection({ data }: { data?: any }) {
   return (
     <div
       className="absolute flex flex-col items-center gap-[36px]"
-      style={{ left: 118.3046875, top: "calc(4352px + var(--developer-pipeline-offset, 0px))", width: 1204, transition: "top 300ms ease-in-out" }}
+      style={{ left: 118.3046875, top: "calc(5234px + var(--developer-pipeline-offset, 0px))", width: 1204, transition: "top 300ms ease-in-out" }}
       data-node-id="2438:4587"
     >
       {/* Header — 2438:4588 (800 wide, centered) */}

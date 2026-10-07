@@ -814,6 +814,7 @@ export interface ApiDeveloperPageDeveloperPage extends Struct.SingleTypeSchema {
     > &
       Schema.Attribute.Private;
     model_zoo: Schema.Attribute.Component<'developer.model-zoo', false>;
+    model_zoo_kits: Schema.Attribute.Component<'home.model-zoo-kits', false>;
     modules: Schema.Attribute.Component<'developer.modules', false>;
     pipeline: Schema.Attribute.Component<'developer.pipeline', false>;
     publishedAt: Schema.Attribute.DateTime;
