@@ -95,7 +95,7 @@ function CtaCard({
           {/* body + CTA */}
           <div className="flex w-full flex-col items-start gap-[20px]">
             <p
-              className={`${interRegular.className} h-[48px] w-full text-center text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-white not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+              className={`${interRegular.className} min-h-[48px] w-full text-center text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-white not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             >
               {card.body}
             </p>
@@ -244,7 +244,7 @@ export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
                 {/* body + CTA */}
                 <div className="flex w-full flex-col gap-[14px]">
                   <p
-                    className={`${interRegular.className} h-[44px] text-center text-[12px] leading-[15.171px] font-normal tracking-[-0.1975px] text-white not-italic [word-break:break-word]`}
+                    className={`${interRegular.className} min-h-[44px] text-center text-[12px] leading-[15.171px] font-normal tracking-[-0.1975px] text-white not-italic [word-break:break-word]`}
                   >
                     {card.body}
                   </p>

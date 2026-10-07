@@ -52,7 +52,7 @@ function KitCard({ card }: { card: (typeof CARDS)[number] }) {
   return (
     <div
       ref={fadeRef}
-      className={`relative flex h-auto min-w-px flex-1 flex-col gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.7)] px-[20px] pt-[20px] pb-[32px] transition-colors duration-300 hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] min-[1024px]:h-[553px] ${getFadeInClass(isVisible)}`}
+      className={`relative flex h-auto min-w-px w-full min-[1024px]:w-[385px] flex-col gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.7)] px-[20px] pt-[20px] pb-[32px] transition-colors duration-300 hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] min-[1024px]:h-[553px] ${getFadeInClass(isVisible)}`}
       data-node-id={card.nodeId || "card"}
       data-name="Article"
     >
@@ -124,7 +124,7 @@ export function HomeModelZooKits({ data }: { data?: any }) {
           </div>
         </div>
 
-        <div className="mt-[24px] flex flex-col items-stretch gap-[16px] px-0 min-[1024px]:mt-[60px] min-[1024px]:flex-row min-[1024px]:items-center min-[1024px]:gap-[24px] min-[1024px]:px-[26px]" data-node-id="5246:6363" data-name="Frame 1984079440">
+        <div className="mt-[24px] flex flex-col items-stretch gap-[16px] px-0 min-[1024px]:mt-[60px] min-[1024px]:flex-row min-[1024px]:justify-center min-[1024px]:items-center min-[1024px]:gap-[24px] min-[1024px]:px-[26px]" data-node-id="5246:6363" data-name="Frame 1984079440">
           {cardsData.map((card: any) => (
             <KitCard key={card.nodeId} card={card} />
           ))}
