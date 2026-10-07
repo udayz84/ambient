@@ -57,7 +57,7 @@ export function ProductsCaseStudies({ data }: { data?: any }) {
   const subtitle = data?.subtitle || "";
 
   return (
-    <section className="relative w-full bg-black py-[48px] px-[24px] min-[1024px]:py-[96px] overflow-hidden">
+    <section className="relative w-full bg-black pt-[48px] pb-[24px] px-[24px] min-[1024px]:pt-[96px] min-[1024px]:pb-[32px] overflow-hidden">
       
       <div className="relative z-10 mx-auto w-full max-w-[1192px] flex flex-col items-center">
         {/* Header */}
@@ -146,9 +146,11 @@ export function ProductsCaseStudies({ data }: { data?: any }) {
                 </p>
 
                 {/* CTA */}
-                <div className="mt-[32px] flex items-center gap-[8px] text-[#a8ed90] transition-transform duration-300 group-hover:translate-x-2">
-                  <span className={`${gilroyMedium.className} text-[15px]`}>{study.ctaLabel}</span>
-                  <span className="text-[18px]">&rarr;</span>
+                <div className="mt-[32px] relative flex h-[48px] shrink-0 items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] bg-[rgba(226,241,202,0.12)] px-[24px] transition-all duration-300 group-hover:bg-[#45c418] group-hover:border-[#45c418] group-hover:shadow-[0px_0px_15px_rgba(69,196,24,0.4)]">
+                  <span className={`${gilroyMedium.className} relative text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic`}>
+                    {study.ctaLabel}
+                  </span>
+                  <Corners />
                 </div>
               </div>
               </CardElement>

@@ -60,7 +60,7 @@ function KitCard({ card }: { card: (typeof CARDS)[number] }) {
         <img alt={card.alt} src={card.img} className="pointer-events-none size-full rounded-[6px] object-cover" loading="lazy" decoding="async" />
       </div>
 
-      <div className="flex w-full flex-col items-start gap-[10px]">
+      <div className="flex w-full flex-col items-start gap-[10px] flex-grow">
         <p className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] text-white not-italic min-[1024px]:whitespace-nowrap`}>
           {card.title}
         </p>
@@ -69,7 +69,9 @@ function KitCard({ card }: { card: (typeof CARDS)[number] }) {
         </p>
       </div>
 
-      <CtaPrimary label={card.cta} width={card.ctaWidth || 240} />
+      <div className="mt-auto">
+        <CtaPrimary label={card.cta} width={card.ctaWidth || 240} reducedShine />
+      </div>
 
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
     </div>

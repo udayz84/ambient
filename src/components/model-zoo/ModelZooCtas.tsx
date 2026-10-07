@@ -14,12 +14,18 @@ export function CtaPrimary({
   href = "#",
   width,
   onClick,
+  reducedShine = false,
 }: {
   label: string;
   href?: string;
   width?: number;
   onClick?: () => void;
+  reducedShine?: boolean;
 }) {
+  const shadowClass = reducedShine
+    ? "shadow-[0px_42px_107px_0px_rgba(83,216,36,0.15),0px_24.721px_32.257px_0px_rgba(83,216,36,0.10),0px_10.268px_13.398px_0px_rgba(83,216,36,0.10),0px_3.714px_4.846px_0px_rgba(83,216,36,0.05)]"
+    : "shadow-[0px_42px_107px_0px_rgba(83,216,36,0.45),0px_24.721px_32.257px_0px_rgba(83,216,36,0.35),0px_10.268px_13.398px_0px_rgba(83,216,36,0.35),0px_3.714px_4.846px_0px_rgba(83,216,36,0.2)]";
+
   return (
     <a
       href={href}
@@ -31,7 +37,7 @@ export function CtaPrimary({
             }
           : undefined
       }
-      className={`shadow-[0px_42px_107px_0px_rgba(83,216,36,0.45),0px_24.721px_32.257px_0px_rgba(83,216,36,0.35),0px_10.268px_13.398px_0px_rgba(83,216,36,0.35),0px_3.714px_4.846px_0px_rgba(83,216,36,0.2)] ${gilroyMedium.className} relative flex h-[48px] shrink-0 items-center justify-center px-[20px]`}
+      className={`${shadowClass} ${gilroyMedium.className} relative flex h-[48px] shrink-0 items-center justify-center px-[20px]`}
       style={width ? { width } : undefined}
       data-name="Cta"
     >

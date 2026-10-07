@@ -44,14 +44,15 @@ function PrimaryButton({ label }: { label: string }) {
   return (
     <a
       href="#"
-      className="relative flex h-[48px] w-full flex-1 items-center justify-center shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15)] transition-transform hover:-translate-y-1"
+      className="relative flex h-[48px] w-full min-[1024px]:w-auto items-center justify-center px-[24px] shadow-[0px_42px_107px_0px_rgba(83,216,36,0.15),0px_24.721px_32.257px_0px_rgba(83,216,36,0.10),0px_10.268px_13.398px_0px_rgba(83,216,36,0.10),0px_3.714px_4.846px_0px_rgba(83,216,36,0.05)] transition-transform hover:-translate-y-1"
     >
       <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
-      <span className={`${gilroyMedium.className} relative flex items-center gap-2 text-[14px] font-medium text-[#000] not-italic`}>
+      <span className={`${gilroyMedium.className} relative flex items-center gap-[8px] text-[15px] leading-[28px] font-medium uppercase text-white whitespace-nowrap not-italic`}>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
         {label}
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
       </span>
+      <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
       <GreenCtaCorners />
     </a>
   );
@@ -61,9 +62,9 @@ function SecondaryButton({ label }: { label: string }) {
   return (
     <a
       href="#"
-      className="relative flex h-[48px] w-full flex-1 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.06)] backdrop-blur-[10px] transition-colors hover:bg-[rgba(255,255,255,0.1)]"
+      className="relative flex h-[48px] w-full min-[1024px]:w-auto items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[24px] py-[10px] transition-colors hover:bg-[rgba(226,241,202,0.2)]"
     >
-      <span className={`${gilroyMedium.className} flex items-center gap-2 text-[14px] font-medium text-white not-italic`}>
+      <span className={`${gilroyMedium.className} relative flex items-center gap-[8px] text-[15px] leading-[28px] font-medium uppercase text-white whitespace-nowrap not-italic`}>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
         {label}
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>

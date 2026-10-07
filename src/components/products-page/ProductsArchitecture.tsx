@@ -69,7 +69,7 @@ export function ProductsArchitecture({ data }: { data?: any }) {
     <>
       {/* DESKTOP (>=1024px) */}
       <section
-        className="relative mx-auto hidden w-full bg-black min-[1024px]:block pt-[120px]"
+        className="relative mx-auto hidden w-full bg-black min-[1024px]:block pt-[32px]"
         aria-label="Architecture"
       >
         <ProductsArchitectureDesktop
