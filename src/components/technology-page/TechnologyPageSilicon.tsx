@@ -4,6 +4,7 @@ import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { Corners } from "../shared/Corners";
 import { MobileTitleCorners } from "./mobile-shared";
 
 const SILICON_BG = "/technology/silicon-bg.png";
@@ -374,12 +375,12 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
           {secondaryCtaLabel && (
             <a
               href={secondaryCtaHref || "#"}
-              className={`${gilroyMedium.className} relative flex h-[48px] min-w-[223px] w-auto px-[24px] shrink-0 items-center justify-center border border-[#6ced3f] bg-transparent text-[#6ced3f] hover:bg-[#6ced3f]/10 transition-colors duration-200`}
+              className={`${gilroyMedium.className} relative flex h-[48px] min-w-[223px] w-auto px-[24px] shrink-0 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] text-white hover:bg-[rgba(226,241,202,0.2)] transition-colors duration-200`}
             >
               <span className="text-[16px] leading-[28px] font-medium whitespace-nowrap uppercase not-italic">
                 {secondaryCtaLabel}
               </span>
-              <GreenCtaCorners />
+              <Corners leftSrc="/hero/corner-left.svg" rightSrc="/hero/corner-right.svg" />
             </a>
           )}
         </div>
@@ -493,12 +494,12 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
             {secondaryCtaLabel && (
               <a
                 href={secondaryCtaHref || "#"}
-                className={`${gilroyMedium.className} relative flex h-[48px] min-w-[223px] w-auto px-[24px] shrink-0 items-center justify-center border border-[#6ced3f] bg-transparent text-[#6ced3f] hover:bg-[#6ced3f]/10 transition-colors duration-200`}
+                className={`${gilroyMedium.className} relative flex h-[48px] min-w-[223px] w-auto px-[24px] shrink-0 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] text-white hover:bg-[rgba(226,241,202,0.2)] transition-colors duration-200`}
               >
                 <span className="text-[16px] leading-[28px] font-medium whitespace-nowrap uppercase not-italic">
                   {secondaryCtaLabel}
                 </span>
-                <GreenCtaCorners />
+                <Corners leftSrc="/hero/corner-left.svg" rightSrc="/hero/corner-right.svg" />
               </a>
             )}
           </div>
