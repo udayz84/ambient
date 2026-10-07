@@ -161,6 +161,7 @@ export interface AppsWinCard extends Struct.ComponentSchema {
   attributes: {
     alt: Schema.Attribute.String;
     body: Schema.Attribute.Text;
+    buttons: Schema.Attribute.Component<'shared.cta', true>;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     label: Schema.Attribute.String & Schema.Attribute.Required;
     stat: Schema.Attribute.String;

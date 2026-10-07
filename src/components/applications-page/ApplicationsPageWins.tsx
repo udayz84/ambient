@@ -92,9 +92,10 @@ type WinCardProps = {
   statLabel: string;
   visual: React.ReactNode;
   body: string;
+  buttons?: { label: string; href: string }[];
 };
 
-function WinCard({ label, stat, statLabel, visual, body }: WinCardProps) {
+function WinCard({ label, stat, statLabel, visual, body, buttons }: WinCardProps) {
   const { fadeRef, isVisible } = useFadeIn();
 
   return (
@@ -139,12 +140,25 @@ function WinCard({ label, stat, statLabel, visual, body }: WinCardProps) {
         >
           {body}
         </p>
+        {buttons && buttons.length > 0 && (
+          <div className="flex flex-wrap gap-[8px] mt-[10px]">
+            {buttons.map((btn: any, i: number) => (
+              <a
+                key={i}
+                href={btn.href || "#"}
+                className={`${gilroyMedium.className} flex items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[12px] py-[6px] text-[12px] uppercase text-white hover:bg-[rgba(226,241,202,0.2)] transition-colors`}
+              >
+                {btn.label}
+              </a>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
-function WinCardMobile({ label, stat, statLabel, mobileImg, body }: { label: string; stat: string; statLabel: string; mobileImg: string; body: string }) {
+function WinCardMobile({ label, stat, statLabel, mobileImg, body, buttons }: { label: string; stat: string; statLabel: string; mobileImg: string; body: string; buttons?: any[] }) {
   const { fadeRef, isVisible } = useFadeIn();
 
   return (
@@ -179,6 +193,19 @@ function WinCardMobile({ label, stat, statLabel, mobileImg, body }: { label: str
         <div className="flex flex-col gap-[11.667px]">
           <p className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>{body}</p>
         </div>
+        {buttons && buttons.length > 0 && (
+          <div className="flex flex-wrap gap-[8px] mt-[5px]">
+            {buttons.map((btn: any, i: number) => (
+              <a
+                key={i}
+                href={btn.href || "#"}
+                className={`${gilroyMedium.className} flex items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[12px] py-[6px] text-[12px] uppercase text-white hover:bg-[rgba(226,241,202,0.2)] transition-colors`}
+              >
+                {btn.label}
+              </a>
+            ))}
+          </div>
+        )}
       </div>
 
       <Corners />
@@ -304,6 +331,7 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
             visual,
             mobileImg,
             body: c?.body || body,
+            buttons: Array.isArray(c?.buttons) ? c.buttons : [],
           };
         })
       : CARDS;
@@ -365,6 +393,7 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
               statLabel={card.statLabel}
               visual={card.visual}
               body={card.body || body}
+              buttons={card.buttons}
             />
           ))}
         </div>
@@ -466,6 +495,7 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
               statLabel={card.statLabel}
               mobileImg={card.mobileImg}
               body={card.body || body}
+              buttons={card.buttons}
             />
           ))}
         </div>
