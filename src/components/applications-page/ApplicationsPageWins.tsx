@@ -162,7 +162,7 @@ function SecondaryCta({ label, href }: { label: string; href?: string }) {
   return (
     <a
       href={href || "#"}
-      className={`${gilroyMedium.className} relative flex h-[48px] w-auto min-w-[223px] shrink-0 cursor-pointer items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] bg-[rgba(226,241,202,0.12)] px-[24px] transition-colors duration-200 hover:bg-[rgba(226,241,202,0.2)]`}
+      className={`${gilroyMedium.className} relative flex h-[48px] w-auto min-w-[223px] shrink-0 cursor-pointer items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] bg-[rgba(226,241,202,0.12)] px-[24px] transition-colors duration-300 hover:bg-[#45c418] hover:border-[#45c418] hover:shadow-[0px_0px_15px_rgba(69,196,24,0.4)]`}
     >
       <span className="relative text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
         {label}
