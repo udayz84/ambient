@@ -85,7 +85,7 @@ function LeadershipNameRow({
       style={{ gap: spec.nameRoleGap }}
       data-name="Name & Position"
     >
-      <div className="flex w-full items-start justify-between">
+      <div className="flex w-full items-end justify-between">
         <p
           className={`${gilroyMedium.className} min-w-0 font-medium not-italic [word-break:break-word] ${spec.nameSize} ${spec.nameColor}`}
           data-node-id={nameNodeId}
@@ -263,7 +263,7 @@ function PersonFooter({
 
   return (
     <div
-      className="absolute z-40 flex items-start justify-between"
+      className="absolute z-40 flex items-end justify-between"
       style={{
         bottom: (spec as typeof ADVISORY_SPEC).footerBottom,
         left: (spec as typeof ADVISORY_SPEC).footerLeft,
