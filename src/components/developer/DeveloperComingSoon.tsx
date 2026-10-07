@@ -91,7 +91,7 @@ export function DeveloperComingSoon({ data }: { data?: any }) {
       className="absolute overflow-clip bg-black"
       style={{
         left: 0,
-        top: "calc(4551px + var(--developer-pipeline-offset, 0px))",
+        top: "calc(5102px + var(--developer-pipeline-offset, 0px))",
         width: 1440,
         height: 683,
         transition: "top 300ms ease-in-out",

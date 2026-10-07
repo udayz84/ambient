@@ -34,7 +34,7 @@ import {
   MODEL_ZOO_TITLE_GRADIENT,
   resolveModelZooContent,
 } from "./DeveloperModelZoo";
-import { HomeModelZooKits } from "../home-model-zoo-kits/HomeModelZooKits";
+import { ModelZooAppForge } from "../model-zoo/ModelZooAppForge";
 
 /**
  * Mobile (<1024px) stacked adaptation of the Developer page.
@@ -48,7 +48,7 @@ export function DeveloperMobile({ data }: { data?: any }) {
       <DeveloperCodeSectionMobile data={data?.code} />
       <DeveloperPipelineMobile data={data?.pipeline} />
       <DeveloperModelZooMobile data={data?.model_zoo} />
-      <HomeModelZooKits data={data?.model_zoo_kits} />
+      <ModelZooAppForge data={data?.app_forge} />
       <DeveloperComingSoonMobile data={data?.coming_soon} />
       <DeveloperModulesMobile data={data?.modules} />
       <DeveloperCopilotsMobile data={data?.copilots} />

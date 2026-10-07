@@ -1,8 +1,8 @@
 "use client";
 
-import { HomeModelZooKits } from "../home-model-zoo-kits/HomeModelZooKits";
+import { ModelZooAppForge } from "../model-zoo/ModelZooAppForge";
 
-export function DeveloperModelZooKits({ data }: { data?: any }) {
+export function DeveloperAppForge({ data }: { data?: any }) {
   return (
     <div
       className="absolute w-[1440px] bg-transparent"
@@ -12,7 +12,7 @@ export function DeveloperModelZooKits({ data }: { data?: any }) {
         transition: "top 300ms ease-in-out",
       }}
     >
-      <HomeModelZooKits data={data} />
+      <ModelZooAppForge data={data} />
     </div>
   );
 }
