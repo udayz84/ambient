@@ -398,20 +398,7 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
           ))}
         </div>
 
-        {/* CTA */}
-        <div className="relative mt-[50px] flex justify-center">
-          <a
-            href={ctaHref}
-            className="shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] relative flex h-[48px] px-[24px] shrink-0 items-center justify-center"
-          >
-            <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
-            <span className={`${gilroyMedium.className} relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic`}>
-              {ctaLabel}
-            </span>
-            <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
-            <GreenCtaCorners />
-          </a>
-        </div>
+
       </div>
 
       {/* MOBILE (<1024px) — node 4032:5947 */}
@@ -500,20 +487,7 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
           ))}
         </div>
 
-        {/* CTA Mobile */}
-        <div className="relative z-10 mt-[40px] flex w-full justify-center">
-          <a
-            href={ctaHref}
-            className="shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] relative flex h-[48px] px-[24px] w-full shrink-0 items-center justify-center"
-          >
-            <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
-            <span className={`${gilroyMedium.className} relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic`}>
-              {ctaLabel}
-            </span>
-            <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
-            <GreenCtaCorners />
-          </a>
-        </div>
+
       </div>
     </section>
   );

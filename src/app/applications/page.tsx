@@ -35,7 +35,7 @@ export default async function ApplicationsPage() {
       { section: "death_of_hardware_tradeoffs", fields: ["carousel_images"], nested: ["features"] },
       { section: "continuum", nested: ["cards"] },
       { section: "articles", nested: ["articles"] },
-      { section: "wins", nested: ["cards"] },
+      { section: "wins", fields: ["cards.image"], nested: ["cards.buttons"] },
       { section: "som", fields: ["primary_button", "secondary_button"], nested: ["cards"] },
       "seo",
     ]);
