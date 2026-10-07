@@ -54,21 +54,6 @@ export function MeasuredProofCtas({ data }: { data?: any }) {
 
         <GreenCtaCorners />
       </a>
-
-      <a
-        href={secondaryHref}
-        className={`${gilroyMedium.className} relative h-[48px] w-[204px] shrink-0 bg-[rgba(226,241,202,0.12)]`}
-        data-node-id="2379:1497"
-        data-name="Menu"
-      >
-        <p
-          className="absolute top-[calc(50%-12px)] left-1/2 -translate-x-1/2 max-w-full text-[14px] leading-[24px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]"
-          data-node-id="2379:1498"
-        >
-          {secondaryLabel}
-        </p>
-        <GreenCtaCorners />
-      </a>
     </div>
   );
 }

@@ -911,7 +911,6 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    app_forge: Schema.Attribute.Component<'home.app-forge', false>;
     applications: Schema.Attribute.Component<'home.applications', false>;
     clients: Schema.Attribute.Component<'home.clients', false>;
     createdAt: Schema.Attribute.DateTime;
@@ -931,6 +930,7 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
     > &
       Schema.Attribute.Private;
     measured_proof: Schema.Attribute.Component<'home.measured-proof', false>;
+    model_zoo_kits: Schema.Attribute.Component<'home.model-zoo-kits', false>;
     platform_scale: Schema.Attribute.Component<'home.platform-scale', false>;
     publishedAt: Schema.Attribute.DateTime;
     seo: Schema.Attribute.Component<'shared.seo', false>;
@@ -1426,7 +1426,6 @@ export interface ApiProductsPageProductsPage extends Struct.SingleTypeSchema {
   };
   attributes: {
     always_on: Schema.Attribute.Component<'products.always-on', false>;
-    app_forge: Schema.Attribute.Component<'home.app-forge', false>;
     architecture: Schema.Attribute.Component<'products.architecture', false>;
     bench_to_volume: Schema.Attribute.Component<
       'products.bench-to-volume',

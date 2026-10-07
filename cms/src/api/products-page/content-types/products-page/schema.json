@@ -78,11 +78,6 @@
       "repeatable": false,
       "component": "shared.seo"
     },
-    "app_forge": {
-      "type": "component",
-      "repeatable": false,
-      "component": "home.app-forge"
-    },
     "som_family": {
       "type": "component",
       "repeatable": false,

@@ -256,7 +256,7 @@ export function ProductsAppForge({ data }: { data?: any }) {
           <div className="relative h-[327px] w-full min-w-px min-[1024px]:flex-1" data-node-id="5131:10537" data-name="Container">
             <img
               alt="ApplicationForge phone app preview on an eval kit"
-              src="/container.png"
+              src="https://ambientwebasset.blob.core.windows.net/website-assets/container.png"
               className="pointer-events-none size-full rounded-[6px] object-cover"
               loading="lazy"
               decoding="async"

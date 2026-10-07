@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_home_model_zoo_kit_cards",
+  "info": {
+    "displayName": "Model Zoo Kit Card",
+    "description": "Card for the Start with a model that already works section"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "alt": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "desc": {
+      "type": "text",
+      "required": true
+    },
+    "cta": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

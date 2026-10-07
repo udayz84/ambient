@@ -204,15 +204,6 @@ export function MeasuredProofMobile({ data }: { data?: any }) {
           
           <GreenCtaCorners />
         </a>
-        <a
-          href={secondary.href || ""}
-          className={`${gilroyMedium.className} relative flex h-[48px] w-[171px] items-center justify-center bg-[rgba(226,241,202,0.12)]`}
-        >
-          <p className="relative max-w-full text-[13px] leading-[24px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]">
-            {secondary.label || ""}
-          </p>
-          <GreenCtaCorners />
-        </a>
       </div>
     </div>
   );

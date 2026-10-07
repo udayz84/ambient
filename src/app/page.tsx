@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Applications } from "@/components/applications/Applications";
-import { HomeAppForge } from "@/components/home-app-forge/HomeAppForge";
+import { HomeModelZooKits } from "@/components/home-model-zoo-kits/HomeModelZooKits";
 import { DeveloperPlatform } from "@/components/developer-platform/DeveloperPlatform";
 import { Ecosystem } from "@/components/ecosystem/Ecosystem";
 import { EcosystemMarqueeStrip } from "@/components/ecosystem/EcosystemMarqueeStrip";
@@ -39,7 +39,7 @@ export default async function Home() {
       { section: "technology", nested: ["tag", "features", "image"] },
       { section: "platform_scale", nested: ["products", "cta"] },
       { section: "applications", nested: ["tabs", "cta"] },
-      { section: "app_forge", nested: ["steps", "cta"] },
+      { section: "model_zoo_kits", nested: ["cards"] },
       { section: "developer_platform", nested: ["cards"] },
       { section: "ecosystem", nested: ["silicon_partners", "development_partners", "cta"] },
       { section: "latest_news", nested: ["cards"] },
@@ -73,7 +73,7 @@ export default async function Home() {
       {data?.technology && <Technology data={data.technology} />}
       {data?.platform_scale && <PlatformScale data={data.platform_scale} />}
       {data?.applications && <Applications data={data.applications} />}
-      <HomeAppForge data={data?.app_forge} />
+      <HomeModelZooKits data={data?.model_zoo_kits} />
       {data?.developer_platform && (
         <DeveloperPlatform data={data.developer_platform} />
       )}

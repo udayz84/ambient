@@ -57,8 +57,8 @@ export type Pillar = {
 const PILLARS: Pillar[] = [
   {
     nodeId: "3037:480",
-    left: 122,
-    top: 275.35,
+    left: 115,
+    top: 275,
     cardWidth: 380,
     statWidth: 340,
     statGap: 40,
@@ -87,7 +87,7 @@ const PILLARS: Pillar[] = [
     nodeId: "3346:600",
     left: 115,
     top: 930,
-    cardWidth: 389,
+    cardWidth: 380,
     statWidth: 340,
     statGap: 40,
     statPadBottom: 12,
@@ -110,10 +110,10 @@ const PILLARS: Pillar[] = [
   },
   {
     nodeId: "3346:507",
-    left: 112.5,
+    left: 115,
     top: 1530,
-    cardWidth: 396,
-    statWidth: 356,
+    cardWidth: 380,
+    statWidth: 340,
     statGap: 32,
     statPadBottom: 20,
     icon: "/technology/icon-modelforge.svg",

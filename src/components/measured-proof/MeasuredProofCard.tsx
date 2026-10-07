@@ -91,7 +91,7 @@ export function MeasuredProofCard({
           {metric}
         </p>
         <p
-          className={`${interRegular.className} max-w-full shrink-0 text-[18px] leading-[27px] font-normal whitespace-nowrap text-[#f0f0f0] overflow-hidden text-ellipsis [word-break:break-word] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} shrink-0 text-[18px] leading-[27px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
           {label}
         </p>

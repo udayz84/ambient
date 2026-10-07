@@ -17,7 +17,7 @@ export function NewsArticleCard({
   return (
     <a
       href={href || "#"}
-      className={`group relative block w-full min-[1024px]:w-[388px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] px-[12px] pt-[9px] min-[1024px]:pt-[12px] pb-[24px] [--tag-w:129px] min-[1024px]:[--tag-w:180px] [--tag-rb:120.48px] min-[1024px]:[--tag-rb:170.48046875px] hover:border-[#53d824]/50 transition-colors cursor-pointer ${bgClass}`}
+      className={`group relative block w-full min-[1024px]:w-[388px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] px-[12px] pt-[9px] min-[1024px]:pt-[12px] pb-[24px] [--tag-w:129px] min-[1024px]:[--tag-w:180px] [--tag-rb:120.48px] min-[1024px]:[--tag-rb:170.48046875px] transition-colors duration-300 hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] cursor-pointer ${bgClass}`}
       data-node-id={nodeId}
       data-name="Article"
     >

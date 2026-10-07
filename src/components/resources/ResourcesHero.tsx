@@ -75,6 +75,7 @@ export function ResourcesHero({ data }: ResourcesHeroProps = {}) {
               nodeId="2379:1628"
               gradientDeg="118.129deg"
               className="w-[810px] text-center"
+              maxLines={2}
             >
               {titleLines.map((line, i) => (
                 <span key={i} className="block [word-break:break-word]">

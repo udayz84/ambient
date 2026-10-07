@@ -31,28 +31,25 @@ const FALLBACK_SECONDARY_LABEL = "Watch the 3-min Explainer";
 /** Glowing cube renders standing above the baseline (3491:629/631/632/634/633). */
 const CUBES = [
   { nodeId: "3491:629", left: 126, top: 510, w: 129, h: 123, src: "/technology/graph-cube-1.webp" },
-  { nodeId: "3491:631", left: 334, top: 472, w: 168, h: 161, src: "/technology/graph-cube-2.webp" },
-  { nodeId: "3491:632", left: 572, top: 439, w: 191, h: 183, src: "/technology/graph-cube-3.webp" },
-  { nodeId: "3491:634", left: 813, top: 424, w: 207, h: 198, src: "/technology/graph-cube-4.webp", innerH: "104.37%", innerTop: "-3.78%" },
-  { nodeId: "3491:633", left: 1057, top: 393, w: 240, h: 229, src: "/technology/graph-cube-5.webp", innerH: "104.8%", innerTop: "-3.71%" },
+  { nodeId: "3491:631", left: 435, top: 472, w: 168, h: 161, src: "/technology/graph-cube-2.webp" },
+  { nodeId: "3491:632", left: 752, top: 439, w: 191, h: 183, src: "/technology/graph-cube-3.webp" },
+  { nodeId: "3491:634", left: 1074, top: 424, w: 207, h: 198, src: "/technology/graph-cube-4.webp", innerH: "104.37%", innerTop: "-3.78%" },
 ];
 
 /** Chip/device renders above each product label (3510:539 / 3515:539 / 3515:541 / 3522:530 / 3522:533). */
 const TOP_IMAGES = [
   { nodeId: "3510:539", left: 125.64, top: 260, w: 129, h: 123, src: "/technology/graph-chip-1.webp", fit: "object-contain" },
-  { nodeId: "3515:539", left: 353.5, top: 223, w: 129, h: 123, src: "/technology/graph-chip-2.webp", fit: "object-contain" },
-  { nodeId: "3515:541", left: 603.52, top: 193, w: 129, h: 123, src: "/technology/graph-chip-3.webp", fit: "object-contain" },
-  { nodeId: "3522:530", left: 817.17, top: 162.41, w: 197.65, h: 112.94, src: "/technology/graph-device-1.png", fit: "object-contain" },
-  { nodeId: "3522:533", left: 1050.02, top: 115.32, w: 254.25, h: 127.13, src: "/technology/graph-device-2.png", fit: "object-contain" },
+  { nodeId: "3515:539", left: 454.5, top: 223, w: 129, h: 123, src: "/technology/graph-chip-2.webp", fit: "object-contain" },
+  { nodeId: "3515:541", left: 783.52, top: 193, w: 129, h: 123, src: "/technology/graph-chip-3.webp", fit: "object-contain" },
+  { nodeId: "3522:530", left: 1078.17, top: 162.41, w: 197.65, h: 112.94, src: "/technology/graph-device-1.png", fit: "object-contain" },
 ];
 
 /** Dashed vertical guide lines — horizontal svgs rotated 90° (3031:525/571/581/591/610). */
 const VLINES = [
   { left: 190.14, top: 476, h: 196, w: 0.37, deg: "rotate-[90.11deg]", src: "/technology/graph-vline-new-1.svg", inset: "-1.73px -0.17% -1.73px -0.88%" },
-  { left: 418, top: 440, h: 232.06, w: 0, deg: "rotate-90", src: "/technology/graph-vline-new-2.svg", inset: "-1.73px -0.14% -1.73px -0.75%" },
-  { left: 668.02, top: 408, h: 264.559, w: 0, deg: "rotate-90", src: "/technology/graph-vline-new-3.svg", inset: "-1.73px -0.12% -1.73px -0.66%" },
-  { left: 916, top: 378, h: 294, w: 0, deg: "rotate-90", src: "/technology/graph-vline-new-4.svg", inset: "-1.73px -0.11% -1.73px -0.59%" },
-  { left: 1177.15, top: 348, h: 324, w: 0, deg: "rotate-90", src: "/technology/graph-vline-new-5.svg", inset: "-1.73px -0.1% -1.73px -0.53%" },
+  { left: 519, top: 440, h: 232.06, w: 0, deg: "rotate-90", src: "/technology/graph-vline-new-2.svg", inset: "-1.73px -0.14% -1.73px -0.75%" },
+  { left: 848, top: 408, h: 264.559, w: 0, deg: "rotate-90", src: "/technology/graph-vline-new-3.svg", inset: "-1.73px -0.12% -1.73px -0.66%" },
+  { left: 1177, top: 378, h: 294, w: 0, deg: "rotate-90", src: "/technology/graph-vline-new-4.svg", inset: "-1.73px -0.11% -1.73px -0.59%" },
 ];
 
 const MOBILE_TITLE_GRADIENT_DEG = "98.934deg";
@@ -98,11 +95,6 @@ const MOBILE_PRODUCTS: MobileProduct[] = [
     right: { left: 246, top: 780, w: 116.176, h: 100, overflow: true, innerH: "127.3%", innerLeft: "-4.95%", innerTop: "-16.9%", innerW: "109.5%" },
     label: { left: 244, top: 883.72 },
   },
-  {
-    left: { left: 67, top: 931, w: 161, h: 153, overflow: true, innerH: "104.8%", innerTop: "-3.71%", innerW: "100%" },
-    right: { left: 246, top: 959, w: 116.176, h: 100, fit: "object-contain" },
-    label: { left: 244, top: 1063.31 },
-  },
 ];
 
 type LabelConfig = {
@@ -116,10 +108,9 @@ type LabelConfig = {
 
 const LABEL_CONFIG: LabelConfig[] = [
   { left: 114.22, top: 385, name: "GPX10", cat: "EDGE SENSOR" },
-  { left: 342.08, top: 349, name: "GPX10 Pro", cat: "EDGE AI SOC" },
-  { left: 592.1, top: 317, name: "GPX Vision", cat: "ON - DEVICE VISION" },
-  { left: 840.08, top: 287, name: "GPX Compute", cat: "ON - DEVICE VISION" },
-  { left: 1101.23, top: 257, name: "GPX Compute", cat: "ON - DEVICE VISION" },
+  { left: 443.08, top: 349, name: "GPX10 Pro", cat: "EDGE AI SOC" },
+  { left: 772.1, top: 317, name: "GPX Vision", cat: "ON - DEVICE VISION" },
+  { left: 1101.08, top: 287, name: "GPX Compute", cat: "ON - DEVICE VISION" },
 ];
 
 const GREEN_CTA_SHADOW =
@@ -381,8 +372,8 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
         />
       </div>
 
-      {/* MOBILE (<1024px) — Figma 3572:6588 (393×1325) vertical graph */}
-      <div className="relative mx-auto h-[1325px] w-full max-w-[393px] overflow-hidden min-[1024px]:hidden">
+      {/* MOBILE (<1024px) */}
+      <div className="relative mx-auto h-[1145px] w-full max-w-[393px] overflow-hidden min-[1024px]:hidden">
         {/* Header — 3572:6666 */}
         <div className="absolute top-[9px] left-1/2 flex w-[350px] -translate-x-1/2 flex-col items-center gap-[10px]">
           <div className="relative w-full">
@@ -405,13 +396,13 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
           </p>
         </div>
 
-        {/* Vertical center line — 3572:8365 (line 118 rotated 90°) */}
+        {/* Vertical center line */}
         <div
-          className="absolute top-[220px] left-[calc(50%-139.5px)] flex h-[926px] w-0 -translate-x-1/2 items-center justify-center"
+          className="absolute top-[220px] left-[calc(50%-139.5px)] flex h-[746px] w-0 -translate-x-1/2 items-center justify-center"
           aria-hidden
         >
           <div className="flex-none rotate-90">
-            <div className="relative h-0 w-[926px]">
+            <div className="relative h-0 w-[746px]">
               <div className="absolute inset-[-1px_0_0_0]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img loading="lazy" decoding="async" src={BASELINE} alt="" className="block size-full max-w-none" />
@@ -436,7 +427,7 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
 
         {/* Axis label — bottom (HYPERSCALE CLOUD) */}
         <div
-          className="absolute top-[1004px] left-[52.47px] flex h-[142px] w-[23px] -translate-x-full items-center justify-center"
+          className="absolute top-[824px] left-[52.47px] flex h-[142px] w-[23px] -translate-x-full items-center justify-center"
           aria-hidden
         >
           <div className="flex-none rotate-90">
@@ -450,7 +441,7 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
 
         {/* Center text (ONE CORE. ONE SOFTWARE STACK.) */}
         <div
-          className="absolute top-[612px] left-[29px] flex h-[400px] w-[23px] -translate-y-1/2 items-center justify-center"
+          className="absolute top-[522px] left-[29px] flex h-[400px] w-[23px] -translate-y-1/2 items-center justify-center"
           aria-hidden
         >
           <div className="flex-none rotate-90 whitespace-nowrap">

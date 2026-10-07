@@ -1062,34 +1062,6 @@ export interface HomeAppFeatureCard extends Struct.ComponentSchema {
   };
 }
 
-export interface HomeAppForge extends Struct.ComponentSchema {
-  collectionName: 'components_home_app_forges';
-  info: {
-    description: 'ApplicationForge phone-control section';
-    displayName: 'App Forge';
-  };
-  attributes: {
-    app_store_badge: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    card_badge: Schema.Attribute.String;
-    card_image: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    card_image_alt: Schema.Attribute.String;
-    card_title: Schema.Attribute.String;
-    cta: Schema.Attribute.Component<'shared.cta', false>;
-    forge_title: Schema.Attribute.String;
-    heading: Schema.Attribute.String & Schema.Attribute.Required;
-    play_store_badge: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    steps: Schema.Attribute.Component<'model-zoo.forge-step', true>;
-    subtitle: Schema.Attribute.Text;
-    toggle_text: Schema.Attribute.String;
-  };
-}
-
 export interface HomeAppTab extends Struct.ComponentSchema {
   collectionName: 'components_home_app_tabs';
   info: {
@@ -1276,6 +1248,35 @@ export interface HomeMeasuredProof extends Struct.ComponentSchema {
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     stat_cards: Schema.Attribute.Component<'shared.stat-card', true>;
     tag: Schema.Attribute.Component<'shared.tag', false>;
+  };
+}
+
+export interface HomeModelZooKitCard extends Struct.ComponentSchema {
+  collectionName: 'components_home_model_zoo_kit_cards';
+  info: {
+    description: 'Card for the Start with a model that already works section';
+    displayName: 'Model Zoo Kit Card';
+  };
+  attributes: {
+    alt: Schema.Attribute.String;
+    cta: Schema.Attribute.String & Schema.Attribute.Required;
+    desc: Schema.Attribute.Text & Schema.Attribute.Required;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface HomeModelZooKits extends Struct.ComponentSchema {
+  collectionName: 'components_home_model_zoo_kits';
+  info: {
+    description: 'Start with a model that already works section';
+    displayName: 'Model Zoo Kits';
+  };
+  attributes: {
+    cards: Schema.Attribute.Component<'home.model-zoo-kit-card', true>;
+    heading: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Start with a model that already works.'>;
   };
 }
 
@@ -3577,7 +3578,6 @@ declare module '@strapi/strapi' {
       'dvk.spec-card': DvkSpecCard;
       'form.field': FormField;
       'home.app-feature-card': HomeAppFeatureCard;
-      'home.app-forge': HomeAppForge;
       'home.app-tab': HomeAppTab;
       'home.applications': HomeApplications;
       'home.clients': HomeClients;
@@ -3590,6 +3590,8 @@ declare module '@strapi/strapi' {
       'home.hero-metric': HomeHeroMetric;
       'home.latest-news': HomeLatestNews;
       'home.measured-proof': HomeMeasuredProof;
+      'home.model-zoo-kit-card': HomeModelZooKitCard;
+      'home.model-zoo-kits': HomeModelZooKits;
       'home.partner': HomePartner;
       'home.platform-scale': HomePlatformScale;
       'home.tech-feature': HomeTechFeature;

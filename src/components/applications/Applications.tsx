@@ -8,7 +8,7 @@ import { ApplicationsHeader } from "./ApplicationsHeader";
 import { ApplicationsHeroVisual } from "./ApplicationsHeroVisual";
 import { ApplicationsMobile } from "./ApplicationsMobile";
 
-const INITIAL_ACTIVE_INDEX = 3;
+const INITIAL_ACTIVE_INDEX = 0;
 
 export function Applications({ data }: { data?: any }) {
   const baseTabs: any[] = Array.isArray(data?.tabs) ? data.tabs : [];

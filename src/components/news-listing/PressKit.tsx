@@ -150,6 +150,7 @@ export function PressKit({ data }: PressKitProps = {}) {
             fill
             className="object-contain object-right"
             sizes="1440px"
+            unoptimized
           />
         </div>
 
@@ -213,6 +214,7 @@ export function PressKit({ data }: PressKitProps = {}) {
                   fill
                   className="object-cover"
                   sizes="500px"
+                  unoptimized
                 />
                 <div
                   className="absolute inset-0"
