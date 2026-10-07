@@ -158,6 +158,20 @@ function WinCard({ label, stat, statLabel, visual, body, buttons }: WinCardProps
   );
 }
 
+function SecondaryCta({ label, href }: { label: string; href?: string }) {
+  return (
+    <a
+      href={href || "#"}
+      className={`${gilroyMedium.className} relative flex h-[48px] w-auto min-w-[223px] shrink-0 cursor-pointer items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] bg-[rgba(226,241,202,0.12)] px-[24px] transition-colors duration-200 hover:bg-[rgba(226,241,202,0.2)]`}
+    >
+      <span className="relative text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
+        {label}
+      </span>
+      <Corners />
+    </a>
+  );
+}
+
 function WinCardMobile({ label, stat, statLabel, mobileImg, body, buttons }: { label: string; stat: string; statLabel: string; mobileImg: string; body: string; buttons?: any[] }) {
   const { fadeRef, isVisible } = useFadeIn();
 
@@ -193,19 +207,6 @@ function WinCardMobile({ label, stat, statLabel, mobileImg, body, buttons }: { l
         <div className="flex flex-col gap-[11.667px]">
           <p className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>{body}</p>
         </div>
-        {buttons && buttons.length > 0 && (
-          <div className="flex flex-wrap gap-[8px] mt-[5px]">
-            {buttons.map((btn: any, i: number) => (
-              <a
-                key={i}
-                href={btn.href || "#"}
-                className={`${gilroyMedium.className} flex items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[12px] py-[6px] text-[12px] uppercase text-white hover:bg-[rgba(226,241,202,0.2)] transition-colors`}
-              >
-                {btn.label}
-              </a>
-            ))}
-          </div>
-        )}
       </div>
 
       <Corners />
@@ -386,15 +387,22 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
 
         <div className="flex gap-[14px] mt-[80px]">
           {cards.map((card: any) => (
-            <WinCard
-              key={card.label}
-              label={card.label}
-              stat={card.stat}
-              statLabel={card.statLabel}
-              visual={card.visual}
-              body={card.body || body}
-              buttons={card.buttons}
-            />
+            <div key={card.label} className="flex flex-col items-center gap-[24px]">
+              <WinCard
+                label={card.label}
+                stat={card.stat}
+                statLabel={card.statLabel}
+                visual={card.visual}
+                body={card.body || body}
+              />
+              {card.buttons && card.buttons.length > 0 && (
+                <div className="flex flex-col gap-[8px] items-center">
+                  {card.buttons.map((btn: any, i: number) => (
+                    <SecondaryCta key={i} label={btn.label} href={btn.href} />
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
         </div>
 
@@ -473,17 +481,24 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
         </div>
 
         {/* Cards (node 4032:5958) */}
-        <div className="relative z-10 mt-[35px] flex w-full flex-col items-center gap-[14px]">
+        <div className="relative z-10 mt-[35px] flex w-full flex-col items-center gap-[24px]">
           {cards.map((card: any) => (
-            <WinCardMobile
-              key={card.label}
-              label={card.label}
-              stat={card.stat}
-              statLabel={card.statLabel}
-              mobileImg={card.mobileImg}
-              body={card.body || body}
-              buttons={card.buttons}
-            />
+            <div key={card.label} className="flex flex-col items-center gap-[24px] w-full">
+              <WinCardMobile
+                label={card.label}
+                stat={card.stat}
+                statLabel={card.statLabel}
+                mobileImg={card.mobileImg}
+                body={card.body || body}
+              />
+              {card.buttons && card.buttons.length > 0 && (
+                <div className="flex flex-col gap-[8px] items-center w-full px-[19px]">
+                  {card.buttons.map((btn: any, i: number) => (
+                    <SecondaryCta key={i} label={btn.label} href={btn.href} />
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
         </div>
 
