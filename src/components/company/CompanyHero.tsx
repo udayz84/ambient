@@ -43,15 +43,9 @@ export function CompanyHero({ data }: CompanyHeroProps = {}) {
               <img
                 src={bgSrc}
                 alt=""
-                className="absolute top-0 left-0 h-full w-[99.97%] max-w-none object-cover brightness-[2]"
+                className="absolute top-0 left-0 h-full w-full max-w-none object-cover"
               />
             </div>
-            <div
-              className="absolute inset-0"
-              style={{ backgroundImage: HERO_BG_GRADIENT }}
-            />
-            {/* Fade out the right edge into the black background on ultrawide screens */}
-            <div className="absolute inset-y-0 right-0 w-[300px] bg-gradient-to-l from-black to-transparent hidden min-[1441px]:block" />
           </div>
         </div>
 
