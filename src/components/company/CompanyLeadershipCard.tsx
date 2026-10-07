@@ -42,10 +42,24 @@ const ADVISORY_SPEC = {
   footerBottom: 22.4,
   footerWidth: 241,
   footerHeight: 28,
-  linkedInMarginTop: 2,
+  contentBoxLeft: 27,
+  contentBoxTop: 280,
+  contentBoxWidth: 241,
+  contentPaddingX: 27,
+  contentPaddingTop: 20,
+  contentPaddingBottom: 20,
+  contentGap: 12,
+  nameRoleGap: 6,
+  roleBioGap: 16,
+  bioParagraphGap: 12,
+  linkedInMarginTop: 0,
   nameSize: "text-[22px] leading-[28px]",
+  nameColor: "text-[#ffffff]",
+  roleColor: "text-[#39ff14]",
+  bioColor: "text-[#d1d5db]",
+  bioTypography: "text-[14px] leading-[21px]",
   showRole: false,
-  showReadMore: false,
+  showReadMore: true,
 } as const;
 
 function LeadershipNameRow({
@@ -158,7 +172,7 @@ function LeadershipInteractivePanel({
           nameNodeId={nameNodeId}
           spec={spec}
           linkedInIconSrc={linkedInIconSrc}
-          showRole
+          showRole={spec.showRole}
         />
 
         <div
@@ -344,28 +358,20 @@ export function CompanyLeadershipCard({
           className={`${
             member.imageClassName ??
             "absolute inset-0 size-full max-w-none object-cover object-top"
-          } ${!isAdvisory ? `transition-[filter] ${LEADERSHIP_EXPAND_TRANSITION_CLASS} ${isExpanded ? "brightness-[0.35]" : "brightness-90"}` : "brightness-90"}`}
+          } transition-[filter] ${LEADERSHIP_EXPAND_TRANSITION_CLASS} ${isExpanded ? "brightness-[0.35]" : "brightness-90"}`}
         />
-        {!isAdvisory ? (
-          <>
-            <div
-              className={`absolute inset-0 bg-gradient-to-b transition-opacity ${LEADERSHIP_EXPAND_TRANSITION_CLASS} ${
-                isExpanded ? "opacity-0" : "opacity-100"
-              } from-[rgba(25,25,25,0)] from-[55%] via-[rgba(0,0,0,0.45)] via-[75%] to-[#191919]`}
-              aria-hidden
-            />
-            <div
-              className={`absolute inset-0 bg-[rgba(0,0,0,0.72)] transition-opacity ${LEADERSHIP_EXPAND_TRANSITION_CLASS} ${
-                isExpanded ? "opacity-100" : "opacity-0"
-              }`}
-              aria-hidden
-            />
-          </>
-        ) : (
-          <div
-            className="absolute inset-0 bg-gradient-to-b from-[rgba(25,25,25,0)] from-[55%] via-[rgba(0,0,0,0.45)] via-[75%] to-black"
-          />
-        )}
+        <div
+          className={`absolute inset-0 bg-gradient-to-b transition-opacity ${LEADERSHIP_EXPAND_TRANSITION_CLASS} ${
+            isExpanded ? "opacity-0" : "opacity-100"
+          } from-[rgba(25,25,25,0)] from-[55%] via-[rgba(0,0,0,0.45)] via-[75%] ${isAdvisory ? "to-black" : "to-[#191919]"}`}
+          aria-hidden
+        />
+        <div
+          className={`absolute inset-0 bg-[rgba(0,0,0,0.72)] transition-opacity ${LEADERSHIP_EXPAND_TRANSITION_CLASS} ${
+            isExpanded ? "opacity-100" : "opacity-0"
+          }`}
+          aria-hidden
+        />
       </div>
 
       <div className="pointer-events-none absolute inset-[-1px] z-20" aria-hidden>

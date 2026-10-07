@@ -35,6 +35,7 @@ type CompanyAdvisoryBoardProps = {
 
 export function CompanyAdvisoryBoard({ data }: CompanyAdvisoryBoardProps = {}) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const strapiAdvisors = Array.isArray(data) ? data : null;
   const members: LeadershipMember[] =
@@ -82,6 +83,10 @@ export function CompanyAdvisoryBoard({ data }: CompanyAdvisoryBoardProps = {}) {
                   key={member.nodeId}
                   member={member}
                   variant="advisory"
+                  isExpanded={expandedId === member.nodeId}
+                  onReadMoreToggle={() =>
+                    setExpandedId(expandedId === member.nodeId ? null : member.nodeId)
+                  }
                 />
               ))}
             </div>
