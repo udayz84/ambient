@@ -7,6 +7,7 @@ import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
 import { TagBadge } from "../hero/TagBadge";
 import { mediaUrl } from "@/lib/strapi";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const TILE_BG =
   "radial-gradient(circle at 50% 50%, #394a36, #2b3629 50%, #1d221c)";
@@ -280,6 +281,8 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
   const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const heading = data?.heading || FALLBACK_HEADING;
   const body = data?.body || BODY;
+  const ctaLabel = data?.cta?.label || "Explore Applications";
+  const ctaHref = data?.cta?.href || "#";
   const bgImg = "/applications/wins-bg.webp";
 
   const rawCards = Array.isArray(data?.cards) ? data.cards : [];
@@ -364,6 +367,21 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
               body={card.body || body}
             />
           ))}
+        </div>
+
+        {/* CTA */}
+        <div className="relative mt-[50px] flex justify-center">
+          <a
+            href={ctaHref}
+            className="shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] relative flex h-[48px] px-[24px] shrink-0 items-center justify-center"
+          >
+            <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
+            <span className={`${gilroyMedium.className} relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic`}>
+              {ctaLabel}
+            </span>
+            <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
+            <GreenCtaCorners />
+          </a>
         </div>
       </div>
 
@@ -450,6 +468,21 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
               body={card.body || body}
             />
           ))}
+        </div>
+
+        {/* CTA Mobile */}
+        <div className="relative z-10 mt-[40px] flex w-full justify-center">
+          <a
+            href={ctaHref}
+            className="shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] relative flex h-[48px] px-[24px] w-full shrink-0 items-center justify-center"
+          >
+            <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
+            <span className={`${gilroyMedium.className} relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic`}>
+              {ctaLabel}
+            </span>
+            <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
+            <GreenCtaCorners />
+          </a>
         </div>
       </div>
     </section>

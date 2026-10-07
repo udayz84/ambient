@@ -177,6 +177,7 @@ export interface AppsWins extends Struct.ComponentSchema {
   attributes: {
     body: Schema.Attribute.Text;
     cards: Schema.Attribute.Component<'apps.win-card', true>;
+    cta: Schema.Attribute.Component<'shared.cta', false>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }

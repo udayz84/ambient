@@ -800,6 +800,7 @@ export interface ApiDeveloperPageDeveloperPage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    app_forge: Schema.Attribute.Component<'model-zoo.app-forge', false>;
     code: Schema.Attribute.Component<'developer.code', false>;
     coming_soon: Schema.Attribute.Component<'developer.coming-soon', false>;
     copilots: Schema.Attribute.Component<'developer.copilots', false>;
@@ -814,7 +815,6 @@ export interface ApiDeveloperPageDeveloperPage extends Struct.SingleTypeSchema {
     > &
       Schema.Attribute.Private;
     model_zoo: Schema.Attribute.Component<'developer.model-zoo', false>;
-    model_zoo_kits: Schema.Attribute.Component<'home.model-zoo-kits', false>;
     modules: Schema.Attribute.Component<'developer.modules', false>;
     pipeline: Schema.Attribute.Component<'developer.pipeline', false>;
     publishedAt: Schema.Attribute.DateTime;
