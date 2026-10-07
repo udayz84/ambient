@@ -106,7 +106,7 @@ const FALLBACK_HERO_BG = "/mobile/company/hero.webp";
 function CompanyHeroMobile({ data }: { data?: any }) {
   const title = (data?.title as string) || FALLBACK_HERO_TITLE;
   const body = (data?.body as string) || FALLBACK_HERO_BODY;
-  const bgSrc = FALLBACK_HERO_BG;
+  const bgSrc = mediaUrl(data?.mobile_background_image) || FALLBACK_HERO_BG;
   return (
     <section
       className="relative w-full overflow-hidden bg-black pt-[108px]"

@@ -1,6 +1,7 @@
 import { interRegular } from "../hero/fonts";
 import { GradientTitle } from "../contact/contact-shared";
 import { CornerDecor } from "./company-corners";
+import { mediaUrl } from "@/lib/strapi";
 
 const HERO_BG_GRADIENT =
   "linear-gradient(132.873deg, rgb(0, 0, 0) 31.15%, rgba(0, 0, 0, 0) 76.987%), linear-gradient(187.824deg, rgba(0, 0, 0, 0) 49.061%, rgb(0, 0, 0) 90.541%)";
@@ -20,7 +21,7 @@ export function CompanyHero({ data }: CompanyHeroProps = {}) {
     title = "A new paradigm for\nefficient AI compute";
   }
   const body = (data?.body as string) || FALLBACK_BODY;
-  const bgSrc = FALLBACK_BG;
+  const bgSrc = mediaUrl(data?.background_image) || FALLBACK_BG;
   const titleLines = title.split("\n");
 
   return (
@@ -39,13 +40,18 @@ export function CompanyHero({ data }: CompanyHeroProps = {}) {
         >
           <div aria-hidden className="absolute inset-0 pointer-events-none">
             <div className="absolute inset-0 overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={bgSrc}
                 alt=""
-                className="absolute top-0 left-0 h-full w-full max-w-none object-cover"
+                className="absolute top-0 left-0 h-full w-[99.97%] max-w-none object-cover brightness-[2]"
               />
             </div>
+            <div
+              className="absolute inset-0"
+              style={{ backgroundImage: HERO_BG_GRADIENT }}
+            />
+            {/* Fade out the right edge into the black background on ultrawide screens */}
+            <div className="absolute inset-y-0 right-0 w-[300px] bg-gradient-to-l from-black to-transparent hidden min-[1441px]:block" />
           </div>
         </div>
 
