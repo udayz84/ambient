@@ -12,7 +12,7 @@ const LEADERSHIP_SPEC = {
   cardHeight: 471.25,
   borderSrc: "/company/user-image-border-leadership.svg",
   contentBoxLeft: 38.5,
-  contentBoxTop: 342,
+  contentBoxBottom: 24,
   contentBoxWidth: 300,
   contentPaddingX: 38.5,
   contentPaddingTop: 24,
@@ -43,7 +43,7 @@ const ADVISORY_SPEC = {
   footerWidth: 241,
   footerHeight: 28,
   contentBoxLeft: 27,
-  contentBoxTop: 280,
+  contentBoxBottom: 20,
   contentBoxWidth: 241,
   contentPaddingX: 27,
   contentPaddingTop: 20,
@@ -155,8 +155,8 @@ function LeadershipInteractivePanel({
       style={{
         left: spec.contentBoxLeft,
         width: spec.contentBoxWidth,
-        top: isExpanded ? spec.contentPaddingTop : spec.contentBoxTop,
-        bottom: isExpanded ? spec.contentPaddingBottom : undefined,
+        top: isExpanded ? spec.contentPaddingTop : undefined,
+        bottom: isExpanded ? spec.contentPaddingBottom : (spec as any).contentBoxBottom,
         gap: isExpanded ? undefined : spec.contentGap,
       }}
       data-name={isExpanded ? "box-expanded" : "box"}
