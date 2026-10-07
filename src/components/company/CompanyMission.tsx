@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { GradientTitle } from "../contact/contact-shared";
-import { interRegular } from "../hero/fonts";
+import { interRegular, gilroyMedium } from "../hero/fonts";
 import {
   CompanyMissionFrameCorners,
   CornerDecor,
@@ -173,11 +173,15 @@ export function CompanyMission({ data }: CompanyMissionProps = {}) {
           </div>
 
           <div
-            className={`${interRegular.className} w-[555px] flex flex-col gap-[24px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`w-[555px] flex flex-col gap-[24px] not-italic [word-break:break-word]`}
             data-node-id="2379:4760"
           >
-            <p className="leading-[27px]">{body1}</p>
-            <p className="leading-[27px]">{body2}</p>
+            <p className={`${gilroyMedium.className} text-[20px] leading-[30px] min-[1024px]:text-[24px] min-[1024px]:leading-[34px] text-[#53d824]`}>
+              {body1}
+            </p>
+            <p className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
+              {body2}
+            </p>
           </div>
         </div>
 

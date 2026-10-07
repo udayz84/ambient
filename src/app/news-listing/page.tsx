@@ -3,6 +3,7 @@ import { NewsListingHero } from "@/components/news-listing/NewsListingHero";
 import { PressKit } from "@/components/news-listing/PressKit";
 import { NewsGrid } from "@/components/news-listing/NewsGrid";
 import { NewsBackdrop } from "@/components/news-listing/NewsBackdrop";
+import { NewsletterSignup } from "@/components/site-footer/NewsletterSignup";
 import { getCollection, getSingleType } from "@/lib/strapi";
 import { buildMetadata, type SeoData } from "@/lib/seo";
 import { buildNewsArticles } from "@/components/news-listing/news-data";
@@ -59,6 +60,9 @@ export default async function NewsListingPage() {
         <NewsBackdrop data={data?.grid} />
         <PressKit data={data?.press_kit} />
         <NewsGrid data={data?.grid} articles={buildNewsArticles(articles)} />
+        <div className="relative z-10 w-full flex justify-center pb-[100px] pt-[20px]">
+          <NewsletterSignup />
+        </div>
       </div>
     </main>
   );

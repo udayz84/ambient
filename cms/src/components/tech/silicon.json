@@ -39,6 +39,11 @@
       "type": "component",
       "component": "shared.button",
       "repeatable": false
+    },
+    "secondary_cta": {
+      "type": "component",
+      "component": "shared.button",
+      "repeatable": false
     }
   }
 }

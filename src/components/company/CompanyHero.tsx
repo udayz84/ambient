@@ -43,7 +43,7 @@ export function CompanyHero({ data }: CompanyHeroProps = {}) {
               <img
                 src={bgSrc}
                 alt=""
-                className="absolute top-0 left-0 h-full w-[99.97%] max-w-none object-cover"
+                className="absolute top-0 left-0 h-full w-[99.97%] max-w-none object-cover brightness-[2]"
               />
             </div>
             <div

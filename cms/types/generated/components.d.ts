@@ -3228,6 +3228,7 @@ export interface TechSilicon extends Struct.ComponentSchema {
     >;
     cta: Schema.Attribute.Component<'shared.button', false>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
+    secondary_cta: Schema.Attribute.Component<'shared.button', false>;
     stat_cards: Schema.Attribute.Component<'tech.silicon-stat', true>;
     subtitle: Schema.Attribute.Text;
     tag: Schema.Attribute.Component<'shared.tag', false>;
