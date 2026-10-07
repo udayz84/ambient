@@ -380,7 +380,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
               <span className="text-[16px] leading-[28px] font-medium whitespace-nowrap uppercase not-italic">
                 {secondaryCtaLabel}
               </span>
-              <Corners leftSrc="/hero/corner-left.svg" rightSrc="/hero/corner-right.svg" />
+              <Corners leftSrc="/developer/corner-58.svg" rightSrc="/developer/corner-55.svg" />
             </a>
           )}
         </div>
@@ -499,7 +499,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
                 <span className="text-[16px] leading-[28px] font-medium whitespace-nowrap uppercase not-italic">
                   {secondaryCtaLabel}
                 </span>
-                <Corners leftSrc="/hero/corner-left.svg" rightSrc="/hero/corner-right.svg" />
+                <Corners leftSrc="/developer/corner-58.svg" rightSrc="/developer/corner-55.svg" />
               </a>
             )}
           </div>
