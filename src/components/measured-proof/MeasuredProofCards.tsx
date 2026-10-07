@@ -84,7 +84,7 @@ export function MeasuredProofCards({ data }: { data?: any }) {
 
   return (
     <div
-      className="absolute top-1/2 right-0 left-0 -translate-y-1/2 overflow-x-auto"
+      className="absolute top-[calc(50%+40px)] right-0 left-0 -translate-y-1/2 overflow-x-auto"
       data-node-id="2379:1503"
       data-name="Measured proof in silicon"
       aria-label="Measured proof cards"

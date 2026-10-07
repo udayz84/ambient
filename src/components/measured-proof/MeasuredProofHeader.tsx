@@ -11,7 +11,7 @@ export function MeasuredProofHeader({ data }: { data?: any }) {
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
     <div
-      className="absolute top-[30px] left-1/2 flex w-[748px] -translate-x-1/2 flex-col content-stretch items-center gap-[16px]"
+      className="absolute top-[15px] left-1/2 flex w-[748px] -translate-x-1/2 flex-col content-stretch items-center gap-[16px]"
       data-node-id="2379:1470"
     >
       <TagBadge
