@@ -354,7 +354,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
         >
           <a
             href={ctaHref}
-            className={`${gilroyMedium.className} ${GREEN_CTA_SHADOW} relative block h-[48px] w-[223px] shrink-0`}
+            className={`${gilroyMedium.className} ${GREEN_CTA_SHADOW} relative flex h-[48px] min-w-[223px] w-fit px-[24px] shrink-0 items-center justify-center`}
             data-node-id="3015:606"
             data-name="Cta"
           >
@@ -366,7 +366,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
               aria-hidden
               className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
             />
-            <span className="absolute top-[calc(50%-14px)] left-1/2 -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
+            <span className="relative text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
               {ctaLabel}
             </span>
             <GreenCtaCorners />
@@ -374,7 +374,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
           {secondaryCtaLabel && (
             <a
               href={secondaryCtaHref || "#"}
-              className={`${gilroyMedium.className} relative flex h-[48px] w-[223px] shrink-0 items-center justify-center border border-[#6ced3f] bg-transparent text-[#6ced3f] hover:bg-[#6ced3f]/10 transition-colors duration-200`}
+              className={`${gilroyMedium.className} relative flex h-[48px] min-w-[223px] w-fit px-[24px] shrink-0 items-center justify-center border border-[#6ced3f] bg-transparent text-[#6ced3f] hover:bg-[#6ced3f]/10 transition-colors duration-200`}
             >
               <span className="text-[16px] leading-[28px] font-medium whitespace-nowrap uppercase not-italic">
                 {secondaryCtaLabel}
@@ -481,11 +481,11 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
           <div className="flex flex-col items-center gap-[12px] w-full">
             <a
               href={ctaHref}
-              className={`${gilroyMedium.className} ${GREEN_CTA_SHADOW} relative block h-[48px] w-[223px] shrink-0`}
+              className={`${gilroyMedium.className} ${GREEN_CTA_SHADOW} relative flex h-[48px] min-w-[223px] w-fit px-[24px] shrink-0 items-center justify-center`}
             >
               <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
               <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
-              <span className="absolute top-[calc(50%-14px)] left-1/2 -translate-x-1/2 text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
+              <span className="relative text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
                 {ctaLabel}
               </span>
               <GreenCtaCorners />
@@ -493,7 +493,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
             {secondaryCtaLabel && (
               <a
                 href={secondaryCtaHref || "#"}
-                className={`${gilroyMedium.className} relative flex h-[48px] w-[223px] shrink-0 items-center justify-center border border-[#6ced3f] bg-transparent text-[#6ced3f] hover:bg-[#6ced3f]/10 transition-colors duration-200`}
+                className={`${gilroyMedium.className} relative flex h-[48px] min-w-[223px] w-fit px-[24px] shrink-0 items-center justify-center border border-[#6ced3f] bg-transparent text-[#6ced3f] hover:bg-[#6ced3f]/10 transition-colors duration-200`}
               >
                 <span className="text-[16px] leading-[28px] font-medium whitespace-nowrap uppercase not-italic">
                   {secondaryCtaLabel}
