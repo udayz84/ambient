@@ -178,20 +178,15 @@ export function SomFamily({ data }: { data?: any }) {
       <div className="flex w-full max-w-[1200px] flex-col gap-[40px] min-[1024px]:gap-[60px] px-[16px] min-[1024px]:px-0">
         
         {/* Header Section */}
-        <div className="flex flex-col min-[1024px]:flex-row justify-between items-start gap-6 min-[1024px]:gap-8 px-[10px] min-[1024px]:px-0">
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-4">
-              <div className="h-[1px] w-[40px] bg-[#6ced3f]"></div>
-              <span className={`${interRegular.className} text-[12px] uppercase tracking-widest text-[#a8ed90]`}>
-                {tag}
-              </span>
-            </div>
-            <h2 className={`${gilroyMedium.className} text-[36px] min-[1024px]:text-[48px] leading-[1.1] text-white whitespace-pre-line`}>
-              {title}
+        <div className="flex flex-col items-center gap-[24px] text-center px-[10px] min-[1024px]:px-0 mb-[16px] min-[1024px]:mb-[24px]">
+          <div className="relative inline-block px-[24px]">
+            <h2 className={`${gilroyMedium.className} text-[36px] min-[1024px]:text-[48px] leading-[1.1] text-[#ecfae5] whitespace-pre-line`}>
+              {title.replace(/\n/g, ' ')}
             </h2>
+            <Corners />
           </div>
-          <p className={`${interRegular.className} max-w-[480px] text-[14px] min-[1024px]:text-[16px] leading-[22px] min-[1024px]:leading-[26px] text-[rgba(255,255,255,0.6)] whitespace-pre-line min-[1024px]:pt-[32px]`}>
-            {subtitle}
+          <p className={`${interRegular.className} max-w-[700px] text-[14px] min-[1024px]:text-[16px] leading-[22px] min-[1024px]:leading-[26px] text-[rgba(255,255,255,0.6)] whitespace-pre-line`}>
+            {subtitle.replace(/\n/g, ' ')}
           </p>
         </div>
 

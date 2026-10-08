@@ -191,6 +191,9 @@ export function SomPrototypeTitleDesktop({ data }: { data?: any }) {
             />
           ))}
         </div>
+        <p className={`${interRegular.className} max-w-[800px] text-center text-[16px] md:text-[18px] text-[#f0f0f0]/65 [word-break:break-word] px-4`}>
+          When you're ready for volume, the software you validate here ports 1:1 to the GPX10 Pro SOMs.
+        </p>
       </div>
     </section>
   );
@@ -245,6 +248,9 @@ export function SomPrototypeTitleMobile({ data }: { data?: any }) {
             />
           ))}
         </div>
+        <p className={`${interRegular.className} w-full max-w-[355px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}>
+          When you're ready for volume, the software you validate here ports 1:1 to the GPX10 Pro SOMs.
+        </p>
       </div>
     </section>
   );

@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_apps_model_zoos",
+  "info": {
+    "displayName": "Model Zoo CTA",
+    "description": "Model Zoo section on the Applications page"
+  },
+  "options": {},
+  "attributes": {
+    "eyebrow": {
+      "type": "string",
+      "default": "READY TO RUN"
+    },
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "primary_cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.cta"
+    },
+    "secondary_cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.cta"
+    },
+    "collage_row_1": {
+      "type": "component",
+      "repeatable": true,
+      "component": "model-zoo.collage-card"
+    },
+    "collage_row_2": {
+      "type": "component",
+      "repeatable": true,
+      "component": "model-zoo.collage-card"
+    }
+  }
+}

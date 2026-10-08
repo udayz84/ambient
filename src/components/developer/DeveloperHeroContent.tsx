@@ -31,7 +31,7 @@ export function DeveloperHeroContent({ data }: { data?: any }) {
   const secondaryLabel =
     data?.secondary_button?.label || DEFAULT_SECONDARY_LABEL;
   const secondaryHref = data?.secondary_button?.href || "#";
-  const fitRef = useFitText<HTMLHeadingElement>({});
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
     <div
       className="relative flex shrink-0 flex-col items-start gap-[24px]"

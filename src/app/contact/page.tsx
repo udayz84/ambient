@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Contact } from "@/components/contact/Contact";
 import { getSingleType } from "@/lib/strapi";
 import { buildMetadata, type SeoData } from "@/lib/seo";
-import { NewsletterSignup } from "@/components/site-footer/NewsletterSignup";
 
 export async function generateMetadata(): Promise<Metadata> {
   let seo: SeoData | null = null;
@@ -35,12 +34,5 @@ export default async function ContactPage() {
   } catch {
     data = null;
   }
-  return (
-    <main className="flex w-full flex-col overflow-x-clip bg-black">
-      <Contact data={data} />
-      <div className="relative z-10 w-full flex justify-center pb-[100px] pt-[20px] min-[1024px]:pt-0">
-        <NewsletterSignup />
-      </div>
-    </main>
-  );
+  return <Contact data={data} />;
 }

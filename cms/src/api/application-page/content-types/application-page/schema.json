@@ -66,6 +66,16 @@
       "type": "component",
       "repeatable": false,
       "component": "shared.seo"
+    },
+    "wins": {
+      "type": "component",
+      "repeatable": false,
+      "component": "apps.wins"
+    },
+    "model_zoo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "apps.model-zoo"
     }
   }
 }

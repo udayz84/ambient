@@ -360,13 +360,13 @@ function ProductsArchitectureDesktop({
           <CornerTick src={CORNER_RIGHT} placement="tr" nodeId="3529:619" style={{ right: -40.5, top: -0.5 }} />
           <CornerTick src={CORNER_RIGHT} placement="br" nodeId="3529:620" style={{ right: -40.5, bottom: -19.5 }} />
           <CornerTick src={CORNER_LEFT} placement="bl" nodeId="3529:621" style={{ left: -0.5, bottom: -19.5 }} />
-          <p
+          {/* <p
             className={`${gilroyMedium.className} absolute m-0 text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
             style={{ left: ARCH_CAPTION.left, top: ARCH_CAPTION.top, right: -24.5 }}
             data-node-id="3529:622"
           >
             {caption}
-          </p>
+          </p> */}
         </div>
 
         {/* Stats column — 3529:623 */}
@@ -534,11 +534,11 @@ function ProductsArchitectureMobile({
             <CornerTick src="/hero/vector-55.svg" placement="br" style={{ right: -1, bottom: -1 }} size={3} />
             <CornerTick src="/hero/vector-57.svg" placement="bl" style={{ left: -1, bottom: -1 }} />
             {/* Caption */}
-            <p
+            {/* <p
               className={`${gilroyMedium.className} mt-[16px] px-[14px] whitespace-nowrap text-[14px] leading-[28px] font-medium text-white not-italic`}
             >
               {caption}
-            </p>
+            </p> */}
           </div>
 
           {/* ── Stats cards ── */}

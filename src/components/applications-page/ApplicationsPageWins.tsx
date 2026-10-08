@@ -207,6 +207,19 @@ function WinCardMobile({ label, stat, statLabel, mobileImg, body, buttons }: { l
         <div className="flex flex-col gap-[11.667px]">
           <p className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>{body}</p>
         </div>
+        {buttons && buttons.length > 0 && (
+          <div className="flex flex-wrap gap-[8px] mt-[6px]">
+            {buttons.map((btn: any, i: number) => (
+              <a
+                key={i}
+                href={btn.href || "#"}
+                className={`${gilroyMedium.className} flex items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[12px] py-[6px] text-[12px] uppercase text-white hover:bg-[rgba(226,241,202,0.2)] transition-colors`}
+              >
+                {btn.label}
+              </a>
+            ))}
+          </div>
+        )}
       </div>
 
       <Corners />
@@ -287,6 +300,7 @@ const CARDS = [
     statLabel: "Accurate",
     visual: WIN_VISUALS[0],
     mobileImg: "/applications/wins-img-1.webp",
+    buttons: [{ label: "READ CASE STUDY", href: "#" }],
   },
   {
     label: "The Medical/Safety Wins",
@@ -294,13 +308,15 @@ const CARDS = [
     statLabel: "Battery",
     visual: WIN_VISUALS[1],
     mobileImg: "/applications/wins-img-2.webp",
+    buttons: [{ label: "READ CASE STUDY", href: "#" }],
   },
   {
-    label: "The AR/Vision Wins",
-    stat: "Zero",
-    statLabel: "Latency",
+    label: "The Industrial Wins",
+    stat: "24/7",
+    statLabel: "Monitoring",
     visual: WIN_VISUALS[2],
     mobileImg: "/applications/wins-img-3.webp",
+    buttons: [{ label: "READ CASE STUDY", href: "#" }],
   },
 ];
 
@@ -332,7 +348,7 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
             visual,
             mobileImg,
             body: c?.body || body,
-            buttons: Array.isArray(c?.buttons) ? c.buttons : [],
+            buttons: (Array.isArray(c?.buttons) && c.buttons.length > 0) ? c.buttons : (CARDS[i]?.buttons || []),
           };
         })
       : CARDS;

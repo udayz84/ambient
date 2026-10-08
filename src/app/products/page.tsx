@@ -15,6 +15,7 @@ import { SomFamily } from "@/components/som-page/SomFamily";
 import { ProductsFullPicture } from "@/components/products-page/ProductsFullPicture";
 import { ProductsStartBuilding } from "@/components/products-page/ProductsStartBuilding";
 import { ProductsStickyNav } from "@/components/products-page/ProductsStickyNav";
+import { ModelZooAppForge } from "@/components/model-zoo/ModelZooAppForge";
 import { getSingleType } from "@/lib/strapi";
 import { buildMetadata, type SeoData } from "@/lib/seo";
 
@@ -116,12 +117,13 @@ export default async function ProductsPage() {
       <div id="features"><ProductsFeatures data={data?.features} /></div>
       <div id="always-on"><ProductsAlwaysOn data={data?.always_on} /></div>
       <div id="metrics"><ProductsMeasured data={data?.measured} /></div>
-      <div id="use-cases"><ProductsUseCases data={data?.use_cases} /></div>
       <ProductsCaseStudies data={caseStudiesData} />
-      <div id="architecture"><ProductsArchitecture data={data?.architecture} /></div>
+      <div id="use-cases"><ProductsUseCases data={data?.use_cases} /></div>
+      <ModelZooAppForge data={data?.appforge} />
       <ProductsModelForge data={data?.modelforge} />
       <ProductsBenchToVolume data={data?.bench_to_volume} />
-      <SomFamily data={data?.som_family} />
+      <div id="architecture"><ProductsArchitecture data={data?.architecture} /></div>
+      {/* <SomFamily data={data?.som_family} /> */}
       <div id="full-picture"><ProductsFullPicture data={data?.full_picture} /></div>
       <ProductsStartBuilding data={data?.start_building} />
     </main>

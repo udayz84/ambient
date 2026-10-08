@@ -49,7 +49,7 @@ function SpecCard({
         isActive
           ? "border-[#a8ed90] bg-[rgba(68,120,7,0.2)]"
           : "border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] hover:bg-[rgba(255,255,255,0.03)]"
-      } px-[16px] pt-[16px] pb-[20px] min-[1024px]:h-[102px] min-[1024px]:pb-[24px] cursor-default`}
+      } px-[16px] pt-[16px] pb-[20px] min-[1024px]:min-h-[102px] min-[1024px]:pb-[24px] cursor-default`}
       onMouseEnter={onHover}
       data-name="Article"
     >

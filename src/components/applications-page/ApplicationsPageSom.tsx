@@ -121,7 +121,7 @@ function SomLabel({ value, label, sublabel }: { value: string; label: string; su
         </div>
       </div>
       <p
-        className={`${interRegular.className} max-w-[280px] min-[1024px]:max-w-[320px] text-[16px] leading-[23.176px] min-[1024px]:leading-[24px] font-normal tracking-[-0.3018px] min-[1024px]:tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic`}
+        className={`${interRegular.className} max-w-[280px] min-[1024px]:max-w-[320px] text-[16px] leading-[23.176px] min-[1024px]:leading-[24px] font-normal tracking-[-0.3018px] min-[1024px]:tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic min-[1024px]:min-h-[48px] flex items-center`}
       >
         {sublabel}
       </p>
@@ -145,12 +145,6 @@ function ViewSomsCta({ label, href }: { label: string; href: string }) {
         >
           {label}
         </p>
-        <img loading="lazy" decoding="async"
-          alt=""
-          aria-hidden
-          src="/applications/som-arrow.svg"
-          className="size-[18px]"
-        />
       </span>
       <GreenCtaCorners />
       <span

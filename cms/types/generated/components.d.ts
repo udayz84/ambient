@@ -102,6 +102,24 @@ export interface AppsHero extends Struct.ComponentSchema {
   };
 }
 
+export interface AppsModelZoo extends Struct.ComponentSchema {
+  collectionName: 'components_apps_model_zoos';
+  info: {
+    description: 'Model Zoo section on the Applications page';
+    displayName: 'Model Zoo CTA';
+  };
+  attributes: {
+    collage_row_1: Schema.Attribute.Component<'model-zoo.collage-card', true>;
+    collage_row_2: Schema.Attribute.Component<'model-zoo.collage-card', true>;
+    eyebrow: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'READY TO RUN'>;
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    primary_cta: Schema.Attribute.Component<'shared.cta', false>;
+    secondary_cta: Schema.Attribute.Component<'shared.cta', false>;
+    subtitle: Schema.Attribute.Text;
+  };
+}
+
 export interface AppsSom extends Struct.ComponentSchema {
   collectionName: 'components_apps_soms';
   info: {
@@ -3529,6 +3547,7 @@ declare module '@strapi/strapi' {
       'apps.death-of-hardware-tradeoffs': AppsDeathOfHardwareTradeoffs;
       'apps.feature': AppsFeature;
       'apps.hero': AppsHero;
+      'apps.model-zoo': AppsModelZoo;
       'apps.som': AppsSom;
       'apps.som-card': AppsSomCard;
       'apps.som-data-label': AppsSomDataLabel;

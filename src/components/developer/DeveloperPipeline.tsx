@@ -1,10 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { dmMono, gilroyMedium, interBold, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
 import { useFitText } from "../shared/FitText";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { PRIMARY_CTA_SHADOW } from "./developer-data";
 
 /* =========================================================================
    CONSTANTS
@@ -209,6 +212,12 @@ export const STAGES: Stage[] = [
 export function DeveloperPipeline({ data }: { data?: any }) {
   const [activeIndex, setActiveIndex] = useState(0); // 0 = Train expanded
   const [flowHeights, setFlowHeights] = useState<Record<number, number>>({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const heading = data?.heading || DEFAULT_HEADING;
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
@@ -266,7 +275,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
 
   /* Closed: 475 + 4×108 + 3×24 = 979. Open: 871 + expanded card height. */
   const pipelineHeight =
-    activeIndex === -1 ? 979 : 871 + expandedHeightFor(activeIndex);
+    activeIndex === -1 ? 979 + 120 : 871 + 120 + expandedHeightFor(activeIndex);
   const offset = pipelineHeight - 1291; // −312 closed; −245/+ when open at 665
 
   useEffect(() => {
@@ -405,7 +414,55 @@ export function DeveloperPipeline({ data }: { data?: any }) {
             expandedHeight={expandedHeightFor(i)}
           />
         ))}
+
+        <div className="mt-[48px] self-center">
+          <button
+            type="button"
+            onClick={() => setIsModalOpen(true)}
+            className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-auto min-w-[420px] shrink-0 items-center justify-center overflow-hidden px-[32px] py-[10px] cursor-pointer`}
+          >
+            <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
+            <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
+            <span className="absolute top-[calc(50%-14px)] left-1/2 flex max-w-full -translate-x-1/2 justify-center overflow-hidden text-ellipsis text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
+              View full Software Toolchain Architecture
+            </span>
+            <GreenCtaCorners />
+          </button>
+        </div>
       </div>
+
+      {/* Architecture Modal */}
+      {mounted && isModalOpen && createPortal(
+        <div 
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-[24px]"
+          onClick={() => setIsModalOpen(false)}
+        >
+          <div 
+            className="relative flex flex-col items-center max-w-[900px] w-full max-h-[90vh] overflow-y-auto bg-[#0a0a0a] border-[1px] border-[rgba(255,255,255,0.1)] rounded-[16px] p-[24px] shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              className="absolute top-[20px] right-[20px] text-[rgba(255,255,255,0.5)] transition-colors hover:text-white"
+              onClick={() => setIsModalOpen(false)}
+              aria-label="Close modal"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <h3 className={`${gilroyMedium.className} text-[28px] leading-[36px] text-white mb-[20px]`}>
+              ModelForge Toolchain Stack.
+            </h3>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img 
+              loading="lazy" 
+              decoding="async"
+              src="/developer/toolchain-architecture.jpeg" 
+              alt="ModelForge Toolchain Stack" 
+              className="w-full max-h-[65vh] object-contain rounded-[8px]"
+            />
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 }

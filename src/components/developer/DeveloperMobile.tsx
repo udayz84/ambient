@@ -133,7 +133,7 @@ function DeveloperHeroMobile({ data }: { data?: any }) {
   const secondaryLabel = data?.secondary_button?.label || HERO_DEFAULT_SECONDARY;
   const secondaryHref = data?.secondary_button?.href || "#";
   const bgImg = mediaUrl(data?.background_image) || "/developer/hero-bg-3.webp";
-  const fitRef = useFitText<HTMLHeadingElement>({});
+  const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
     <section className="relative flex w-full flex-col items-center pt-[20px]">
       {/* Content block — 4032:21985 (x20 y0 w352 h193) */}

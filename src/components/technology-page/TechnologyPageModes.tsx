@@ -7,7 +7,7 @@ import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { MobileCornerMark, MobileTitleCorners } from "./mobile-shared";
 
-const MODES_TOP = "/technology/modes-top-new.webp";
+const MODES_TOP = "/bg.png";
 const MODES_BOTTOM = "/technology/modes-bottom-new.webp";
 const MODES_CUBE = "/technology/modes-cube.webp";
 const MODES_CUBE_GLOW = "/technology/modes-cube-glow.webp";
@@ -622,7 +622,8 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
 
   return (
     <section
-      className="relative flex w-full justify-center overflow-hidden bg-black"
+      className="relative flex w-full justify-center overflow-hidden bg-black bg-center bg-no-repeat bg-cover"
+      style={{ backgroundImage: 'url(/image-108.png)' }}
       data-node-id="3003:497"
       data-name="Hero Section"
       aria-label="Two named modes, one continuous loop"

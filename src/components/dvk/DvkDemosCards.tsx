@@ -131,11 +131,10 @@ export function DvkDemosCards({ data }: { data?: any }) {
         })
       : DEMO_CARDS;
   return (
-    <div className="flex w-full items-stretch gap-[16px] xl:gap-[28px]">
+    <div className="flex w-full justify-center items-stretch gap-[16px] xl:gap-[28px]">
       {cards.map((card: DemoCard) => (
         <DemoCardItem key={card.nodeId} card={card} />
       ))}
-      <DvkPhoneCard data={data?.phone_card} />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
-import { gilroyMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interRegular, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { mediaUrl } from "@/lib/strapi";
@@ -52,7 +52,6 @@ function PrimaryCta({ label, href }: { label: string; href: string }) {
         >
           {label}
         </p>
-        <img loading="lazy" decoding="async" alt="" aria-hidden src="/applications/som-arrow.svg" className="size-[18px]" />
       </span>
       <GreenCtaCorners />
       <span
@@ -169,9 +168,19 @@ export function ApplicationsPageModelZoo({ data }: { data?: any }) {
       {/* Header Info */}
       <div className="flex w-full max-w-[1024px] flex-col items-center gap-[24px] px-[24px] z-10 text-center">
         
-        <p className={`${gilroyMedium.className} text-[#cca839] uppercase tracking-[1px] text-[12px] font-mono border-[0.5px] border-[#cca839] px-[12px] py-[4px] bg-[rgba(0,0,0,0.8)]`}>
-          {EYEBROW}
-        </p>
+        <div
+          className="relative overflow-clip bg-[rgba(255,255,255,0.06)] px-[24px] flex items-center justify-center inline-flex"
+          style={{ height: 26 }}
+        >
+          <Corners leftSrc="/developer/pipeline-corner-42.svg" rightSrc="/developer/pipeline-corner-43.svg" />
+          <p
+            className={`${dmMono.className} relative text-[16px] leading-[24px] uppercase tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] not-italic`}
+          >
+            {EYEBROW}
+          </p>
+          <div className="absolute left-[6.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+          <div className="absolute right-[6.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+        </div>
 
         <div className="relative inline-block px-[14px]">
           <h2

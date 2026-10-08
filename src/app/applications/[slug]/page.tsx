@@ -7,6 +7,8 @@ import { WearablesEmpiricalProof } from "@/components/wearables/WearablesEmpiric
 import { WearablesLabToProduct } from "@/components/wearables/WearablesLabToProduct";
 import { WearablesSubconscious } from "@/components/wearables/WearablesSubconscious";
 import { WearablesFooterAccent } from "@/components/wearables/WearablesFooterAccent";
+import { ApplicationsPageModelZoo } from "@/components/applications-page/ApplicationsPageModelZoo";
+import { ApplicationsPageWins } from "@/components/applications-page/ApplicationsPageWins";
 import { getCollection, buildPopulate } from "@/lib/strapi";
 import { buildMetadata, type SeoData } from "@/lib/seo";
 
@@ -42,6 +44,8 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
       { section: "lab_to_product", nested: ["cards"] },
       "footer_accent",
       "seo",
+      { section: "wins", nested: ["cards", "cards.buttons"] },
+      { section: "model_zoo", nested: ["primary_cta", "secondary_cta", "collage_row_1", "collage_row_2"] },
     ])}`;
     
     const results = await getCollection<any>("application-pages", query);
@@ -64,6 +68,8 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
         <WearablesCarousel data={data.carousel} />
       )}
       {data?.paradigm && <WearablesParadigm data={data.paradigm} />}
+      <ApplicationsPageWins data={data?.wins} />
+      <ApplicationsPageModelZoo data={data?.model_zoo} />
       {data?.empirical_proof && (
         <WearablesEmpiricalProof data={data.empirical_proof} />
       )}

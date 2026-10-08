@@ -105,7 +105,7 @@ function CtaPanel({ data }: { data: PanelData }) {
           {/* Body + CTA */}
           <div className="flex w-full flex-col gap-[20px]">
             <p
-              className={`${interRegular.className} w-full text-center text-[14px] leading-[24px] tracking-[-0.3125px] text-white not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+              className={`${interRegular.className} w-full h-[72px] flex items-center justify-center text-center text-[14px] leading-[24px] tracking-[-0.3125px] text-white not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
             >
               {data.body}
             </p>
