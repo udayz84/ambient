@@ -593,6 +593,9 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     show_on_homepage: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    slug_hero_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{

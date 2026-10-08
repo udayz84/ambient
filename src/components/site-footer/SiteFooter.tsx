@@ -53,11 +53,13 @@ export function SiteFooter({
     ? isPartnersPage
       ? "pt-[50px]"
       : "pt-[0px]"
-    : isResourcesPage || isCareersPage || isContactPage
-      ? "pt-[376px]"
-      : showNewsletter
-        ? "pt-[100px]"
-        : "pt-[24px]";
+    : isResourcesPage
+      ? "pt-[160px]"
+      : isCareersPage || isContactPage
+        ? "pt-[376px]"
+        : showNewsletter
+          ? "pt-[100px]"
+          : "pt-[24px]";
 
   const navSections: FooterNavSection[] =
     Array.isArray(data?.nav_sections) && data.nav_sections.length > 0

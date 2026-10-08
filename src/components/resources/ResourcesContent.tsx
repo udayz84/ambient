@@ -44,12 +44,14 @@ type ResourcesContentProps = {
   data?: any;
   articles?: ResourceArticle[];
   onExtraHeightChange?: (height: number) => void;
+  searchQuery?: string;
 };
 
 export function ResourcesContent({
   data,
   articles,
   onExtraHeightChange,
+  searchQuery = "",
 }: ResourcesContentProps = {}) {
   const categories = buildCategories(data);
   const initialVisible =
@@ -73,9 +75,25 @@ export function ResourcesContent({
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   const activeCanon = filterCategoryId(activeCategory);
-  const filteredArticles = allArticles.filter(
-    (a) => Boolean(a.categoryId) && a.categoryId === activeCanon
-  );
+
+  // When a search query is active, search across ALL articles regardless of category
+  const normalizedQuery = searchQuery.trim().toLowerCase();
+  const isSearching = normalizedQuery.length > 0;
+
+  const filteredArticles = isSearching
+    ? allArticles.filter((a) => {
+        const haystack = [
+          a.title,
+          a.excerpt,
+          a.category,
+          a.categoryId,
+        ].join(" ").toLowerCase();
+        return haystack.includes(normalizedQuery);
+      })
+    : allArticles.filter(
+        (a) => Boolean(a.categoryId) && a.categoryId === activeCanon
+      );
+
   const visibleArticles = filteredArticles.slice(0, visibleCount);
   const canLoadMore = visibleCount < filteredArticles.length;
 
@@ -193,17 +211,23 @@ export function ResourcesContent({
       </nav>
 
       <div className="flex w-[1236px] flex-col items-center gap-[36px]" data-node-id="2379:1832">
-        {articleRows.map((row, rowIndex) => (
-          <div
-            key={`resource-row-${rowIndex}`}
-            className="flex w-full gap-[36px]"
-            data-node-id={rowIndex === 0 ? "2379:1833" : "2379:1891"}
-          >
-            {row.map((article) => (
-              <ResourcesArticleCard key={article.nodeId} {...article} />
-            ))}
+        {articleRows.length === 0 && isSearching ? (
+          <div className={`${interRegular.className} flex w-full items-center justify-center py-[60px] text-[16px] text-white/50`}>
+            No results found for &ldquo;{searchQuery}&rdquo;
           </div>
-        ))}
+        ) : (
+          articleRows.map((row, rowIndex) => (
+            <div
+              key={`resource-row-${rowIndex}`}
+              className="flex w-full gap-[36px]"
+              data-node-id={rowIndex === 0 ? "2379:1833" : "2379:1891"}
+            >
+              {row.map((article) => (
+                <ResourcesArticleCard key={article.nodeId} {...article} />
+              ))}
+            </div>
+          ))
+        )}
         {canLoadMore ? (
           <div className="mt-[28px] mb-[20px]">
             <GreenCtaButton

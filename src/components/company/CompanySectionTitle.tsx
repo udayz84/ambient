@@ -10,11 +10,12 @@ const TITLE_GRADIENT =
 type CompanySectionTitleProps = {
   children?: string;
   lines?: readonly string[];
-  width: number;
+  width: number | string;
   height: number;
   nodeId?: string;
   fontSize?: number;
   lineHeight?: number;
+  textCenter?: boolean;
 };
 
 export function CompanySectionTitle({
@@ -25,6 +26,7 @@ export function CompanySectionTitle({
   nodeId,
   fontSize = 32,
   lineHeight = 38,
+  textCenter = false,
 }: CompanySectionTitleProps) {
   const titleLines = lines ?? (children ? [children] : []);
   const maxLines = Math.round(height / lineHeight);
@@ -38,7 +40,7 @@ export function CompanySectionTitle({
     >
       <h3
         ref={fitRef}
-        className={`${gilroyMedium.className} relative m-0 bg-clip-text p-0 font-medium text-transparent not-italic [word-break:break-word]`}
+        className={`${gilroyMedium.className} relative m-0 bg-clip-text p-0 font-medium text-transparent not-italic [word-break:break-word] ${textCenter ? "text-center" : ""}`}
         style={{
           fontSize,
           lineHeight: `${lineHeight}px`,

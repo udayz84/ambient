@@ -345,6 +345,7 @@ export interface CompanyCompactArticle extends Struct.ComponentSchema {
   attributes: {
     alt: Schema.Attribute.String;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    link: Schema.Attribute.String;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -451,6 +452,7 @@ export interface CompanyFeaturedArticle extends Struct.ComponentSchema {
     date: Schema.Attribute.String;
     excerpt: Schema.Attribute.Text;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    link: Schema.Attribute.String;
     metadata: Schema.Attribute.Text;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -513,8 +515,8 @@ export interface CompanyMission extends Struct.ComponentSchema {
     displayName: 'Mission';
   };
   attributes: {
-    body_paragraph_1: Schema.Attribute.Text;
-    body_paragraph_2: Schema.Attribute.Text;
+    body_paragraph_1: Schema.Attribute.RichText;
+    body_paragraph_2: Schema.Attribute.RichText;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     stats: Schema.Attribute.Component<'shared.stat', true>;
   };
@@ -1275,10 +1277,16 @@ export interface HomeModelZooKits extends Struct.ComponentSchema {
     displayName: 'Model Zoo Kits';
   };
   attributes: {
+    bottom_cta_1_label: Schema.Attribute.String;
+    bottom_cta_1_link: Schema.Attribute.String;
+    bottom_cta_2_label: Schema.Attribute.String;
+    bottom_cta_2_link: Schema.Attribute.String;
+    bottom_subheading: Schema.Attribute.Text;
     cards: Schema.Attribute.Component<'home.model-zoo-kit-card', true>;
     heading: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'Start with a model that already works.'>;
+    subheading: Schema.Attribute.Text;
   };
 }
 
@@ -1639,6 +1647,8 @@ export interface NewsGrid extends Struct.ComponentSchema {
     filter_pills: Schema.Attribute.Component<'news.filter-pill', true>;
     load_more_label: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Load More Resources'>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Latest Scoop from Ambient'>;
   };
 }
 

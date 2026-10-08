@@ -1,3 +1,5 @@
+import { CompanySectionTitle } from "./CompanySectionTitle";
+import { interRegular } from "../hero/fonts";
 import { CompanyEngagementCard } from "./CompanyEngagementCard";
 import { CompanyJoinTeam } from "./CompanyJoinTeam";
 import { COMPANY_ENGAGEMENT_CARDS } from "./company-engagement-data";
@@ -29,19 +31,29 @@ export function CompanyEngagement({ data, joinTeam }: CompanyEngagementProps) {
 
   return (
     <div
-      className="absolute top-[5991px] left-[120px] z-[9] flex h-[746px] w-[1200px] flex-col gap-[20px]"
+      className="absolute top-[5991px] left-[120px] z-[9] flex h-auto w-[1200px] flex-col gap-[48px]"
       data-node-id="2379:4834"
       data-name="Frame 1984079463"
       role="region"
       aria-label="Join our team and partnerships"
     >
-      <CompanyJoinTeam data={joinTeamData} />
+      <div className="flex flex-col items-center text-center gap-[16px] max-w-[800px] mx-auto">
+        <CompanySectionTitle width="max-content" height={50} fontSize={46} lineHeight={50} textCenter={true}>
+          Get Involved
+        </CompanySectionTitle>
+        <p className={`${interRegular.className} text-[18px] text-white/70 leading-[27px] px-[10px]`}>
+          Join our ecosystem of researchers, engineers, and partners shaping the future of physical AI compute.
+        </p>
+      </div>
 
-      <div
-        className="flex h-[386px] w-full shrink-0 gap-[20px]"
-        data-node-id="2379:4861"
-        data-name="Frame 1984079468"
-      >
+      <div className="flex flex-col w-full gap-[20px]">
+        <CompanyJoinTeam data={joinTeamData} />
+
+        <div
+          className="flex h-[386px] w-full shrink-0 gap-[20px]"
+          data-node-id="2379:4861"
+          data-name="Frame 1984079468"
+        >
         {cards.map((card: any) => (
           <CompanyEngagementCard
             key={card.nodeId}
@@ -63,6 +75,7 @@ export function CompanyEngagement({ data, joinTeam }: CompanyEngagementProps) {
             strapi={card.strapi}
           />
         ))}
+      </div>
       </div>
     </div>
   );

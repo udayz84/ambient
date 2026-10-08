@@ -14,6 +14,7 @@ export type CompanyFeaturedArticle = {
   imageSrc: string;
   imageHeight: number;
   imageClassName?: string;
+  link?: string;
 };
 
 export type CompanyCompactArticle = {
@@ -30,6 +31,7 @@ export type CompanyCompactArticle = {
   excerptWidth: number;
   imageSrc: string;
   imageClassName?: string;
+  link?: string;
 };
 
 export const COMPANY_FEATURED_ARTICLE: CompanyFeaturedArticle = {

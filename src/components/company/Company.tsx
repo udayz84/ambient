@@ -24,9 +24,9 @@ import { CompanyMission } from "./CompanyMission";
 
 /** Figma 2379:2087 — engagement ends ~6737px; footer from 6572px; canvas 7824px */
 
-const COMPANY_PAGE_HEIGHT_PX = 6737;
+const COMPANY_PAGE_HEIGHT_PX = 7100;
 
-const COMPANY_FOOTER_TOP_PX = 6737;
+const COMPANY_FOOTER_TOP_PX = 7100;
 
 
 

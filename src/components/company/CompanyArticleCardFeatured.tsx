@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { CompanyArticleCorners } from "./CompanyArticleCorners";
 import type { CompanyFeaturedArticle } from "./company-articles-data";
@@ -18,10 +19,12 @@ export function CompanyArticleCardFeatured({
   imageSrc,
   imageHeight,
   imageClassName = "absolute inset-0 size-full max-w-none object-cover",
+  link,
 }: CompanyArticleCardFeaturedProps) {
   return (
-    <article
-      className="relative h-[692px] w-[590px] shrink-0 overflow-visible border-[0.5px] border-solid border-[rgba(240,240,240,0.3)] bg-[rgba(0,0,0,0.5)]"
+    <Link
+      href={link || "#"}
+      className="block relative h-[692px] w-[590px] shrink-0 overflow-visible border-[0.5px] border-solid border-[rgba(240,240,240,0.3)] bg-[rgba(0,0,0,0.5)] transition-transform hover:scale-[1.01] cursor-pointer"
       data-node-id={nodeId}
       data-name="Article"
     >
@@ -70,7 +73,7 @@ export function CompanyArticleCardFeatured({
       </div>
 
       <CompanyArticleCorners />
-    </article>
+    </Link>
   );
 }
 

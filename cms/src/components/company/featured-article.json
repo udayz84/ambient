@@ -35,6 +35,9 @@
     },
     "alt": {
       "type": "string"
+    },
+    "link": {
+      "type": "string"
     }
   }
 }

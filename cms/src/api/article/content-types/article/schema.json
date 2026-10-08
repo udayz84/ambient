@@ -82,6 +82,17 @@
       ],
       "description": "Article hero banner, full-width 21:9. Recommended: 2880×1234 px WebP/JPG."
     },
+    "slug_hero_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Specific hero image for the article slug page (takes precedence over hero_image)."
+    },
     "alt": {
       "type": "string"
     },

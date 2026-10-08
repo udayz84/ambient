@@ -11,10 +11,28 @@
       "required": true,
       "default": "Start with a model that already works."
     },
+    "subheading": {
+      "type": "text"
+    },
     "cards": {
       "type": "component",
       "repeatable": true,
       "component": "home.model-zoo-kit-card"
+    },
+    "bottom_subheading": {
+      "type": "text"
+    },
+    "bottom_cta_1_label": {
+      "type": "string"
+    },
+    "bottom_cta_1_link": {
+      "type": "string"
+    },
+    "bottom_cta_2_label": {
+      "type": "string"
+    },
+    "bottom_cta_2_link": {
+      "type": "string"
     }
   }
 }

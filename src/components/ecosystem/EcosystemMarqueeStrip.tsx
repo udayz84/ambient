@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { TagBadge } from "../hero/TagBadge";
+import { Corners } from "../shared/Corners";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { type EcosystemPartner, type PartnerLogo, resolvePartners } from "./ecosystem-data";
 import { useFitText } from "../shared/FitText";
@@ -40,16 +41,19 @@ export function EcosystemMarqueeStrip({ data }: { data?: ClientsSection | null }
     >
       <div className="mb-[24px] flex flex-col items-center gap-[16px] px-[24px] md:mb-[32px]">
         <TagBadge label={data?.tag?.text || "Clients"} width={140} centerLabel rightBarLeft={130.48} />
-        <h2
-          ref={fitRef}
-          className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent [word-break:break-word] not-italic max-[1023px]:text-[28px] max-[1023px]:leading-[34px]`}
-          style={{
-            backgroundImage:
-              "linear-gradient(124.568deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
-          }}
-        >
-          {data?.heading || "Built on Ambient, Deployed Everywhere"}
-        </h2>
+        <div className="relative px-[12px] py-[4px]">
+          <Corners />
+          <h2
+            ref={fitRef}
+            className={`${gilroyMedium.className} relative m-0 bg-clip-text p-0 text-center text-[46px] leading-[49px] font-medium text-transparent [word-break:break-word] not-italic max-[1023px]:text-[28px] max-[1023px]:leading-[34px]`}
+            style={{
+              backgroundImage:
+                "linear-gradient(124.568deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
+            }}
+          >
+            {data?.heading || "Built on Ambient, Deployed Everywhere"}
+          </h2>
+        </div>
         <p
           className={`${interRegular.className} max-w-[640px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >

@@ -3,7 +3,7 @@ import { TagBadge } from "./TagBadge";
 
 type HeroStatProps = {
   tag: string;
-  tagWidth: number;
+  tagWidth: number | string;
   labelOffsetX: number;
   rightBarLeft: number;
   tagNodeId: string;

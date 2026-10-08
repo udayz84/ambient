@@ -6,6 +6,11 @@
   },
   "options": {},
   "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Latest Scoop from Ambient",
+      "description": "Section heading above the filter bar."
+    },
     "filter_pills": {
       "type": "component",
       "repeatable": true,

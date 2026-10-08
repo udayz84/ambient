@@ -110,7 +110,7 @@ export function PartnersBecome({
   return (
     <section
       id="become-a-partner"
-      className="relative w-full scroll-mt-[78px] overflow-clip bg-black"
+      className="relative w-full scroll-mt-[78px] overflow-clip bg-transparent"
       aria-label="Become a partner"
     >
       {/* dark backdrop: engineering grid + green glows + side rules */}

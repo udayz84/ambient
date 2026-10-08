@@ -8,6 +8,7 @@ import { mediaUrl } from "@/lib/strapi";
 import { NewsArticleCard } from "./NewsArticleCard";
 import { type NewsArticle } from "./news-data";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { CompanySectionTitle } from "../company/CompanySectionTitle";
 
 const ROW_ONE_BG = "bg-[rgba(255,255,255,0.04)]";
 const ROW_TWO_BG = "bg-[rgba(0,0,0,0.04)]";
@@ -213,6 +214,7 @@ function LoadMoreCta({ label, onClick }: { label: string; onClick?: (e: React.Mo
 export function NewsGrid({ data, articles = [] }: NewsGridProps = {}) {
   const pills = buildPills(data, articles);
   const loadMoreLabel = (data?.load_more_label as string) || "";
+  const gridTitle = (data?.title as string) || "Latest Scoop from Ambient";
 
   const initialActiveId =
     pills.find((p) => p.active)?.id || pills[0]?.id || "";
@@ -244,6 +246,18 @@ export function NewsGrid({ data, articles = [] }: NewsGridProps = {}) {
       data-node-id="2500:1825"
     >
       <div className="flex w-full min-[1024px]:w-[1236px] flex-col items-center gap-[24px] px-[20px] pt-[27px] pb-[30px] min-[1024px]:gap-[60px] min-[1024px]:px-0 min-[1024px]:pt-[64px] min-[1024px]:pb-[64px]">
+        {/* Section title */}
+        <div className="flex w-full justify-center">
+          <CompanySectionTitle
+            width="max-content"
+            height={50}
+            fontSize={46}
+            lineHeight={50}
+            textCenter
+          >
+            {gridTitle}
+          </CompanySectionTitle>
+        </div>
         <NewsFilterBar pills={pills} activeId={activeId} onSelect={setActiveId} />
 
         <div className="relative z-10 flex w-full flex-col items-center gap-[19px] bg-transparent min-[1024px]:gap-[36px]">

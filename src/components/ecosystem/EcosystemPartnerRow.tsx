@@ -32,7 +32,7 @@ function PartnerLogoStat({
     >
       {src ? (
         <div
-          className="relative shrink-0 overflow-clip flex flex-row items-center gap-[10px]"
+          className="relative shrink-0 overflow-visible flex flex-row items-center justify-center gap-[10px]"
           data-name="Icon"
         >
           <Image
@@ -40,9 +40,16 @@ function PartnerLogoStat({
             alt=""
             width={width}
             height={height}
-            className="block max-w-none object-contain"
+            className="block max-w-none object-contain blur-[3px] brightness-[0.3] opacity-80"
             style={{ width: `${width}px`, height: `${height}px` }}
           />
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center border border-[#E2A740] bg-black/90 px-[12px] py-[6px] shadow-lg z-10 pointer-events-none">
+            <span className={`font-mono flex items-center gap-[6px] whitespace-nowrap text-[10px] uppercase tracking-[0.05em] text-[#E2A740]`}>
+              <span>|</span>
+              <span>REVEALING SOON</span>
+              <span>|</span>
+            </span>
+          </div>
         </div>
       ) : null}
     </div>

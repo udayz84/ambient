@@ -104,7 +104,6 @@ export function Technology({ data }: { data?: any }) {
 
         <TechnologyHeadline data={data} />
 
-        <ChipVisualCorners />
         <TechnologyFeatures data={data} />
       </div>
 

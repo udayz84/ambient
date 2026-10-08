@@ -80,6 +80,12 @@ function KitCard({ card }: { card: (typeof CARDS)[number] }) {
 
 export function HomeModelZooKits({ data }: { data?: any }) {
   const heading = data?.heading || "Start with a model that already works.";
+  const subheading = data?.subheading;
+  const bottomSubheading = data?.bottom_subheading || "Open-source and Ambient-built models, all running at microwatts on GPX.";
+  const bottomCta1Label = data?.bottom_cta_1_label || "Browse the Model Zoo";
+  const bottomCta1Link = data?.bottom_cta_1_link || "#";
+  const bottomCta2Label = data?.bottom_cta_2_label || "Explore the Developer Hub";
+  const bottomCta2Link = data?.bottom_cta_2_link || "#";
   
   const cardsData = Array.isArray(data?.cards) && data.cards.length > 0
     ? data.cards.map((c: any, i: number) => ({
@@ -113,7 +119,7 @@ export function HomeModelZooKits({ data }: { data?: any }) {
       ))}
 
       <div className="relative mx-auto w-full max-w-[1256px] px-[16px] min-[1024px]:px-0">
-        <div className="flex justify-center" data-node-id="5131:11088" data-name="Section Title">
+        <div className="flex w-full flex-col items-center gap-[24px]" data-node-id="5131:11088" data-name="Section Title">
           <div className="relative px-[10px]" data-node-id="5131:11089" data-name="Title">
             <h2
               className={`${gilroyMedium.className} w-full max-w-[605px] bg-clip-text text-center text-[36px] leading-[36px] min-[1024px]:text-[46px] min-[1024px]:leading-[49px] font-medium text-transparent not-italic`}
@@ -124,12 +130,27 @@ export function HomeModelZooKits({ data }: { data?: any }) {
             </h2>
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           </div>
+          {subheading && (
+            <p className={`${interRegular.className} w-full max-w-[679.389px] text-center text-[14px] leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
+              {subheading}
+            </p>
+          )}
         </div>
 
         <div className="mt-[24px] flex flex-col items-stretch gap-[16px] px-0 min-[1024px]:mt-[60px] min-[1024px]:flex-row min-[1024px]:justify-center min-[1024px]:items-center min-[1024px]:gap-[24px] min-[1024px]:px-[26px]" data-node-id="5246:6363" data-name="Frame 1984079440">
           {cardsData.map((card: any) => (
             <KitCard key={card.nodeId} card={card} />
           ))}
+        </div>
+
+        <div className="mt-[60px] flex w-full flex-col items-center gap-[24px] px-[16px] min-[1024px]:px-0">
+          <p className={`${interRegular.className} w-full max-w-[679.389px] text-center text-[14px] leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
+            {bottomSubheading}
+          </p>
+          <div className="flex w-full flex-col items-center justify-center gap-[16px] sm:flex-row">
+            <CtaPrimary label={bottomCta1Label} href={bottomCta1Link} width={240} />
+            <CtaPrimary label={bottomCta2Label} href={bottomCta2Link} width={251} />
+          </div>
         </div>
       </div>
     </section>

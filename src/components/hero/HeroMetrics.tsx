@@ -36,7 +36,7 @@ export function HeroMetrics({ metrics = [] }: { metrics?: HeroMetric[] }) {
     >
       <HeroStat
         tag={m0.tag || ""}
-        tagWidth={230}
+        tagWidth="max-content"
         labelOffsetX={0}
         centerLabel
         rightBarLeft={221}
@@ -83,7 +83,7 @@ export function HeroMetrics({ metrics = [] }: { metrics?: HeroMetric[] }) {
       </div>
       <HeroStat
         tag={m1.tag || ""}
-        tagWidth={129}
+        tagWidth="max-content"
         labelOffsetX={49}
         rightBarLeft={121.48}
         tagNodeId="2379:763"

@@ -23,10 +23,10 @@ export function ResourcesArticleCard({
   return (
     <a
       href={href}
-      className="group relative block h-full w-[388px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black px-[12px] pt-[12px] pb-[24px] transition-colors duration-300 hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] cursor-pointer"
+      className="group relative flex flex-col w-[388px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black px-[12px] pt-[12px] pb-[24px] transition-colors duration-300 hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] cursor-pointer"
       data-node-id={nodeId}
     >
-      <div className="flex flex-col items-center gap-[20px]">
+      <div className="flex flex-1 flex-col items-center gap-[20px]">
       <div
         className="relative h-[259.161px] w-[356px] shrink-0 overflow-clip"
         data-name="Image"

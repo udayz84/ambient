@@ -12,7 +12,7 @@ export function ArticleDetail({ data }: { data: any }) {
     ? humanizeArticleCategory(data.category).toUpperCase()
     : "";
   const body = data?.body || "";
-  const imageUrl = mediaUrl(data?.hero_image) || mediaUrl(data?.featured_image);
+  const imageUrl = mediaUrl(data?.slug_hero_image) || mediaUrl(data?.hero_image) || mediaUrl(data?.featured_image);
 
   const hasContent = body && body.trim().length > 0;
 
@@ -56,8 +56,8 @@ export function ArticleDetail({ data }: { data: any }) {
 
         {/* Hero Image */}
         {imageUrl && (
-          <section className="relative w-full mb-[40px] min-[1024px]:mb-[60px]">
-            <div className="relative w-full aspect-[16/9] min-[1024px]:aspect-[21/9] overflow-hidden border-b border-white/10 bg-white/5">
+          <section className="relative w-full mb-[40px] min-[1024px]:mb-[60px] px-[20px] max-w-[1240px] mx-auto">
+            <div className="relative w-full aspect-[16/9] min-[1024px]:aspect-[21/9] overflow-hidden rounded-[16px] border border-white/10 bg-white/5">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img loading="lazy" decoding="async" src={imageUrl} alt="" className="w-full h-full object-cover" />
               {/* Optional subtle gradient at the bottom of the image to blend it into the page */}

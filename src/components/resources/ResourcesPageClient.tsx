@@ -20,6 +20,7 @@ export function ResourcesPageClient({
   articles,
 }: ResourcesPageClientProps = {}) {
   const [extraHeight, setExtraHeight] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <>
@@ -31,13 +32,14 @@ export function ResourcesPageClient({
         data-name="Resources - Option 8"
       >
         <div className="relative mx-auto h-full w-full max-w-[1440px]">
-          <ResourcesHero data={data?.hero} />
+          <ResourcesHero data={data?.hero} onSearch={setSearchQuery} articles={articles} />
           <ResourcesFeatured data={data?.featured} />
           <ResourcesBuilding data={data?.building} />
           <ResourcesContent
             data={data?.content}
             articles={articles}
             onExtraHeightChange={setExtraHeight}
+            searchQuery={searchQuery}
           />
           <ResourcesNewsCta top={RESOURCES_NEWS_TOP + extraHeight} data={data?.news_cta} />
         </div>
