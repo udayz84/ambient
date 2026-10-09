@@ -165,18 +165,27 @@ export function SomInsideModule({ data }: { data?: any }) {
                 <img loading="lazy" decoding="async" src={COMMS_V98} alt="" aria-hidden className="absolute left-[30.31px] top-[144.31px] block h-[52.38px] w-[52.38px] max-w-none" />
               </div>
               <div className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === 4 ? "opacity-100" : "opacity-0"}`}>
-                {/* 5720:6344 (Memory) */}
-                <div className="absolute left-[267.5px] top-[245.23px] h-[78px] w-[44px] border-[1.5px] border-[#a8ed90] bg-[rgba(68,120,7,0.3)] shadow-[0px_0px_10px_rgba(168,237,144,0.5)] rounded-[2px]" />
+                <div className="absolute left-[267.5px] top-[245.23px] h-[78px] w-[44px]">
+                  <img loading="lazy" decoding="async" alt="" aria-hidden src="/dvk/memory.png" className="absolute left-[-8.18px] top-[-1.19px] h-[94.4px] w-[60.4px] max-w-none" />
+                </div>
               </div>
               <div className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out ${hoveredIndex === 5 ? "opacity-100" : "opacity-0"}`}>
                 {/* 5720:6518 */}
-                <div className="absolute left-[444.5px] top-[135.04px] h-[133px] w-[99px] border-[1.5px] border-[#a8ed90] bg-[rgba(68,120,7,0.3)] shadow-[0px_0px_10px_rgba(168,237,144,0.5)] rounded-[2px]" />
+                <div className="absolute left-[444.5px] top-[135.04px] h-[133px] w-[99px]">
+                  <img loading="lazy" decoding="async" alt="" aria-hidden src="/dvk/debug-1.png" className="absolute left-[-8.2px] top-[-1.18px] w-[115.4px] h-[149.4px] max-w-none" />
+                </div>
                 {/* 5720:6435 */}
-                <div className="absolute left-[129.5px] top-[369.04px] h-[30px] w-[26px] border-[1.5px] border-[#a8ed90] bg-[rgba(68,120,7,0.3)] shadow-[0px_0px_10px_rgba(168,237,144,0.5)] rounded-[2px]" />
+                <div className="absolute left-[129.5px] top-[369.04px] h-[30px] w-[26px]">
+                  <img loading="lazy" decoding="async" alt="" aria-hidden src="/dvk/debug-2.png" className="absolute left-[-8.19px] top-[-1.19px] w-[42.4px] h-[46.4px] max-w-none" />
+                </div>
                 {/* 5720:6516 */}
-                <div className="absolute left-[377.5px] top-[41.04px] h-[71px] w-[163px] border-[1.5px] border-[#a8ed90] bg-[rgba(68,120,7,0.3)] shadow-[0px_0px_10px_rgba(168,237,144,0.5)] rounded-[2px]" />
+                <div className="absolute left-[377.5px] top-[41.04px] h-[71px] w-[163px]">
+                  <img loading="lazy" decoding="async" alt="" aria-hidden src="/dvk/debug-3.png" className="absolute left-[-8.18px] top-[-1.19px] w-[179.4px] h-[87.4px] max-w-none" />
+                </div>
                 {/* 5720:6517 */}
-                <div className="absolute left-[377.5px] top-[323.04px] h-[85px] w-[163px] border-[1.5px] border-[#a8ed90] bg-[rgba(68,120,7,0.3)] shadow-[0px_0px_10px_rgba(168,237,144,0.5)] rounded-[2px]" />
+                <div className="absolute left-[377.5px] top-[323.04px] h-[85px] w-[163px]">
+                  <img loading="lazy" decoding="async" alt="" aria-hidden src="/dvk/debug-4.png" className="absolute left-[-8.18px] top-[-1.19px] w-[179.4px] h-[101.4px] max-w-none" />
+                </div>
               </div>
             </div>
             <Corners />
