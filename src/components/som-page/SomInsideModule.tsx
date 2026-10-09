@@ -1,7 +1,7 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GradientTitle } from "../contact/contact-shared";
@@ -94,6 +94,31 @@ export function SomInsideModule({ data }: { data?: any }) {
   if (!specs.find((s) => s.title.toLowerCase().includes("debug"))) {
     specs.push({ title: "Debug", body: "Get it done." });
   }
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [thumbHeight, setThumbHeight] = useState(100);
+
+  const handleScroll = () => {
+    if (scrollRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
+      const progress = scrollTop / (scrollHeight - clientHeight);
+      setScrollProgress(isNaN(progress) ? 0 : progress);
+    }
+  };
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      const { scrollHeight, clientHeight } = scrollRef.current;
+      // If there's no overflow, scrollHeight equals clientHeight.
+      // We still want to show a visible "slider" thumb.
+      const ratio = clientHeight / scrollHeight;
+      const calculatedHeight = Math.max(ratio * clientHeight, 40);
+      // Cap the thumb height at 150px so it always looks like a slider!
+      setThumbHeight(Math.min(calculatedHeight, 150));
+    }
+  }, [specs.length]);
+
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -191,21 +216,37 @@ export function SomInsideModule({ data }: { data?: any }) {
             <Corners />
           </div>
 
-          {/* Right: spec cards column */}
-          <div
-            className="flex w-[578px] shrink-0 flex-col gap-[16px] h-[542.191px] overflow-y-auto pr-[8px] [&::-webkit-scrollbar]:w-[4px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[rgba(255,255,255,0.2)] [&::-webkit-scrollbar-thumb]:rounded-full"
-            data-node-id="2438:4984"
-            data-lenis-prevent="true"
-            onMouseLeave={() => setHoveredIndex(-1)}
-          >
-            {specs.map((spec, index) => (
-              <SpecCard 
-                key={spec.title} 
-                {...spec} 
-                isActive={hoveredIndex === index}
-                onHover={() => setHoveredIndex(index)}
+          {/* Right: spec cards column with custom scrollbar */}
+          <div className="relative flex w-[578px] shrink-0 h-[542.191px]">
+            {/* Scrollable container */}
+            <div
+              ref={scrollRef}
+              onScroll={handleScroll}
+              className="flex w-full flex-col gap-[16px] h-full overflow-y-auto pr-[16px] no-scrollbar"
+              data-node-id="2438:4984"
+              data-lenis-prevent="true"
+              onMouseLeave={() => setHoveredIndex(-1)}
+            >
+              {specs.map((spec, index) => (
+                <SpecCard 
+                  key={spec.title} 
+                  {...spec} 
+                  isActive={hoveredIndex === index}
+                  onHover={() => setHoveredIndex(index)}
+                />
+              ))}
+            </div>
+
+            {/* Custom Always-Visible Scrollbar */}
+            <div className="absolute right-0 top-0 bottom-0 w-[4px] bg-[rgba(255,255,255,0.05)] rounded-full overflow-hidden pointer-events-none">
+              <div 
+                className="w-full bg-[#6ced3f] rounded-full transition-transform duration-75 ease-out"
+                style={{ 
+                  height: `${thumbHeight}px`,
+                  transform: `translateY(${scrollProgress * (542.191 - thumbHeight)}px)`
+                }}
               />
-            ))}
+            </div>
           </div>
         </div>
       </div>

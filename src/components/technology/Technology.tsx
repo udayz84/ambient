@@ -78,7 +78,7 @@ export function Technology({ data }: { data?: any }) {
   const tagText = data?.tag?.text || "";
   return (
     <section
-      className="relative left-1/2 h-[930px] w-screen max-w-none -translate-x-1/2 overflow-hidden bg-black max-[1023px]:h-auto"
+      className="relative left-1/2 h-[930px] w-screen max-w-none -translate-x-1/2 overflow-hidden bg-black max-[1023px]:h-auto min-[1024px]:mt-[120px] mt-[60px]"
       data-node-id="2388:317"
       aria-label="Technology"
     >

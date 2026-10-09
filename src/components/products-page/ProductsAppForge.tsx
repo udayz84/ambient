@@ -24,6 +24,16 @@ const STEP_STAT: Record<ForgeStep, string> = {
   flash: "/model-zoo/af-stat-flash.webp",
   results: "/model-zoo/af-stat-results.webp",
 };
+const STEP_ICONS: Record<ForgeStep, string> = {
+  pair: "/contact/booking-icon-phone.svg",
+  flash: "/developer/pipeline-icon-deploy.svg",
+  results: "/model-zoo/icon-play.svg",
+};
+const STEP_SUBTEXTS: Record<ForgeStep, string> = {
+  pair: "Connect the app to your eval board in a tap.",
+  flash: "Push VAD, gesture recognition, fall detection, and more to the board.",
+  results: "Watch AI inference results stream to your phone in real time.",
+};
 const STEP_ARTICLE: Record<ForgeStep, string> = {
   pair: "/model-zoo/af-article-pair.webp",
   flash: "/model-zoo/af-article-flash.webp",
@@ -162,13 +172,19 @@ export function ProductsAppForge({ data }: { data?: any }) {
                     className="relative block w-full h-auto shrink-0 border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] backdrop-blur-[12px] bg-[rgba(0,0,0,0.2)] text-left"
                     data-node-id={`5241:57${52 - i * 6}`}
                   >
-                    <img
-                      alt={step}
-                      src={STEP_STAT[key]}
-                      className="pointer-events-none block w-full h-auto"
-                      loading="lazy"
-                      decoding="async"
-                    />
+                    <div className="flex flex-col items-start gap-[12px] p-[24px]">
+                      <div className="relative size-[32px] flex items-center justify-center opacity-80">
+                        <img src={STEP_ICONS[key]} alt="" className="max-w-[100%] max-h-[100%] object-contain" />
+                      </div>
+                      <div className="flex flex-col gap-[6px]">
+                        <h3 className={`${gilroyMedium.className} text-[20px] leading-[24px] text-white`}>
+                          {step}
+                        </h3>
+                        <p className={`${interRegular.className} text-[15px] leading-[22px] text-[rgba(255,255,255,0.65)]`}>
+                          {STEP_SUBTEXTS[key]}
+                        </p>
+                      </div>
+                    </div>
                     <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
                   </div>
                 );
@@ -190,7 +206,7 @@ export function ProductsAppForge({ data }: { data?: any }) {
           <div className="relative h-[327px] w-full min-w-px min-[1024px]:flex-1" data-node-id="5131:10537" data-name="Container">
             <img
               alt="ApplicationForge phone app preview on an eval kit"
-              src={data?.phone_mockup_image ? mediaUrl(data.phone_mockup_image) : "/model-zoo/phone-mockup-new.png"}
+              src={(data?.phone_mockup_image ? mediaUrl(data.phone_mockup_image) : "/model-zoo/phone-mockup-new.png") || undefined}
               className="pointer-events-none size-full object-contain object-center"
               loading="lazy"
               decoding="async"

@@ -143,15 +143,22 @@ function DvkIntegratedModulesDesktop({
                 <img loading="lazy" decoding="async" src={card.imageUrl} alt="" className="max-w-[92%] max-h-[92%] object-contain" />
               )}
             </div>
-            <div className="relative mt-[20px] flex items-center justify-between gap-[10px] not-italic">
-              <h3 className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium whitespace-nowrap text-white overflow-hidden text-ellipsis`}>
-                {card.title}
-              </h3>
-              <DevChip label={i === 0 ? "Legacy Board" : "Development"} />
+            <div className="flex flex-1 flex-col mt-[20px]">
+              <div className="relative flex items-center justify-between gap-[10px] not-italic">
+                <h3 className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium whitespace-nowrap text-white overflow-hidden text-ellipsis`}>
+                  {card.title}
+                </h3>
+                <DevChip label={i === 0 ? "Legacy Board" : "Development"} />
+              </div>
+              <p className={`${interRegular.className} mt-[10px] w-full text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word]`}>
+                {card.description}
+              </p>
+              {i === 0 && (
+                <div className="mt-auto pt-[32px]">
+                  <GreenCta width={157} href="#">Shop now</GreenCta>
+                </div>
+              )}
             </div>
-            <p className={`${interRegular.className} mt-[10px] w-full text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word]`}>
-              {card.description}
-            </p>
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           </article>
         ))}
@@ -202,7 +209,7 @@ function DvkIntegratedModulesMobile({
       data-node-id="4062:12362"
       data-name="5th Fold"
     >
-      <div className="relative mx-auto h-[1123px] w-full max-w-[393px]">
+      <div className="relative mx-auto h-[1263px] w-full max-w-[393px]">
         {/* Header — 4062:12363 (19, 30 / 350 wide, gap 10) */}
         <div
           className="absolute top-[30px] left-[19px] flex w-[350px] max-w-[calc(100%-38px)] flex-col items-center gap-[10px]"
@@ -240,7 +247,7 @@ function DvkIntegratedModulesMobile({
           {cards.slice(0, 2).map((card, i) => (
             <article
               key={i}
-              className="relative flex w-full flex-col gap-[12px] overflow-clip border-[0.301px] border-solid px-[12px] pt-[12px] pb-[20px]"
+              className="relative flex w-full flex-col gap-[12px] overflow-clip border-[0.301px] border-solid px-[12px] pt-[12px] pb-[20px] h-[365px]"
               style={{ backgroundColor: CARD_BG, borderColor: CARD_BORDER }}
               data-node-id={i === 0 ? "4062:12392" : "4062:12412"}
               data-name="Article"
@@ -279,8 +286,8 @@ function DvkIntegratedModulesMobile({
                 )}
               </div>
               {/* NewsSection — 4062:12395 / 12415 */}
-              <div className="flex w-full flex-col gap-[6px]">
-                <div className="flex w-full items-center justify-between">
+              <div className="flex w-full flex-1 flex-col">
+                <div className="flex w-full items-center justify-between gap-[6px] mb-[6px]">
                   <h3
                     className={`${gilroyMedium.className} m-0 text-[18px] leading-[28px] font-medium whitespace-nowrap text-white not-italic`}
                   >
@@ -293,6 +300,19 @@ function DvkIntegratedModulesMobile({
                 >
                   {card.description}
                 </p>
+                {i === 0 && (
+                  <div className="mt-auto pt-[16px]">
+                    <a
+                      href="#"
+                      className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[36px] w-[140px] shrink-0 items-center justify-center`}
+                    >
+                      <span className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
+                      <span className="relative text-[14px] leading-[24px] font-medium uppercase whitespace-nowrap text-white not-italic">Shop now</span>
+                      <span className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
+                      <GreenCtaCorners />
+                    </a>
+                  </div>
+                )}
               </div>
             </article>
           ))}
@@ -300,7 +320,7 @@ function DvkIntegratedModulesMobile({
 
         {/* Footer — 4062:12371 (29, 897 / 336 wide) */}
         <p
-          className={`${interRegular.className} absolute top-[897px] left-[calc(50%+0.5px)] m-0 w-[336px] max-w-[calc(100%-56px)] -translate-x-1/2 text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} absolute top-[1037px] left-[calc(50%+0.5px)] m-0 w-[336px] max-w-[calc(100%-56px)] -translate-x-1/2 text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           data-node-id="4062:12371"
         >
           {footer}
@@ -308,7 +328,7 @@ function DvkIntegratedModulesMobile({
 
         {/* CTA stack — 4062:12372 (42, 1011 / 310 wide, gap 16) */}
         <div
-          className="absolute bottom-0 left-[calc(50%+0.5px)] flex w-[310px] max-w-[calc(100%-82px)] -translate-x-1/2 flex-col gap-[16px]"
+          className="absolute bottom-[20px] left-[calc(50%+0.5px)] flex w-[310px] max-w-[calc(100%-82px)] -translate-x-1/2 flex-col gap-[16px]"
           data-node-id="4062:12372"
         >
           <a

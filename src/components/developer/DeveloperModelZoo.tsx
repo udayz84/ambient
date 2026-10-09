@@ -155,7 +155,7 @@ export function DeveloperModelZoo({ data }: { data?: any }) {
         left: 0,
         top: "calc(3013px + var(--developer-pipeline-offset, 0px))",
         width: 1440,
-        height: 656,
+        height: 856,
         transition: "top 300ms ease-in-out",
       }}
       data-node-id="5212:6804"

@@ -18,7 +18,7 @@ const CARD_BLE = {
   features: [
     { icon: "/partners/icons_proof/chip.svg", text: "GPX10 Pro\ncompute core" },
     { icon: "/partners/icons_proof/cube.svg", text: "6-axis\nIMU" },
-    { icon: "/technology/icon-compute.svg", text: "NOR\nflash" },
+    { icon: "/technology/icon-compute-green.svg", text: "NOR\nflash" },
     { icon: "/partners/icons_become/rss.svg", text: "Bluetooth LE\n(Nordic nRF54)" },
   ],
   footerText: "RF is available on a u.FL connector and on an LGA RF pad, so you can use an external antenna or design one into your PCB.",
@@ -32,7 +32,7 @@ const CARD_LTE = {
   features: [
     { icon: "/partners/icons_proof/chip.svg", text: "GPX10 Pro\ncompute core" },
     { icon: "/partners/icons_proof/cube.svg", text: "6-axis\nIMU" },
-    { icon: "/technology/icon-compute.svg", text: "NOR\nflash" },
+    { icon: "/technology/icon-compute-green.svg", text: "NOR\nflash" },
     { icon: "/partners/icons_proof/global.svg", text: "LTE\ncellular modem" },
   ],
   footerText: "",
@@ -118,7 +118,7 @@ function FamilyCard({ data }: { data: typeof CARD_BLE }) {
           <div className="grid grid-cols-2 min-[1024px]:flex min-[1024px]:items-start gap-y-4 gap-x-2 min-[1024px]:gap-0">
             {data.features.map((feat, i) => (
               <div key={i} className="flex items-center gap-2 min-[1024px]:gap-3 min-[1024px]:px-4 pl-0 min-[1024px]:border-l border-[rgba(240,240,240,0.15)] first:border-0 min-[1024px]:h-full">
-                <span className="text-[18px] min-[1024px]:text-[20px] opacity-70 grayscale shrink-0">
+                <span className="text-[18px] min-[1024px]:text-[20px] shrink-0 drop-shadow-[0_0_8px_rgba(83,216,36,0.6)]">
                   {feat.icon.startsWith("http") || feat.icon.startsWith("/") ? (
                     <img src={feat.icon} alt="" className="w-[20px] h-[20px] object-contain" />
                   ) : (

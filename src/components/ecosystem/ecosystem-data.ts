@@ -124,7 +124,7 @@ export function resolvePartners(
     }));
   }
 
-  return partners.map((p, i) => {
+  const result = partners.map((p, i) => {
     const slot = SLOT_DIMENSIONS[i % SLOT_DIMENSIONS.length] ?? DEFAULT_SLOT;
     const url = mediaUrl(p?.logo);
     return {
@@ -134,4 +134,17 @@ export function resolvePartners(
       name: p?.name || null,
     };
   });
+
+  // Pad to at least 5 slots to maintain the grid design
+  while (result.length < 5) {
+    const slot = SLOT_DIMENSIONS[result.length];
+    result.push({
+      src: "",
+      width: slot.width,
+      height: slot.height,
+      name: null,
+    });
+  }
+
+  return result;
 }

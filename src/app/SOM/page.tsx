@@ -61,7 +61,7 @@ export default async function SomPage() {
       {/* <SomEcosystem data={data?.ecosystem} /> */}
 
       <SomIntelligence data={data?.intelligence} />
-      <SomProvenCore />
+      {/* <SomProvenCore /> */}
       <SomReadyToDeploy data={data?.ready_to_deploy} />
       <SomFooterMerge data={data?.footer_merge} />
     </main>

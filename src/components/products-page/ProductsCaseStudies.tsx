@@ -2,6 +2,7 @@
 
 import { gilroyMedium, gilroyBold, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useState } from "react";
 import { mediaUrl } from "@/lib/strapi";
 
@@ -153,11 +154,13 @@ export function ProductsCaseStudies({ data }: { data?: any }) {
                 </p>
 
                 {/* CTA */}
-                <div className="mt-[32px] relative flex h-[48px] shrink-0 items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] bg-[rgba(226,241,202,0.12)] px-[24px] transition-all duration-300 group-hover:bg-[#45c418] group-hover:border-[#45c418] group-hover:shadow-[0px_0px_15px_rgba(69,196,24,0.4)]">
+                <div className="mt-[32px] relative flex h-[48px] shrink-0 items-center justify-center shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] transition-all duration-300 group-hover:scale-[1.02]">
+                  <span className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
                   <span className={`${gilroyMedium.className} relative text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic`}>
                     {study.ctaLabel}
                   </span>
-                  <Corners />
+                  <span className={`pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]`} />
+                  <GreenCtaCorners />
                 </div>
               </div>
 
