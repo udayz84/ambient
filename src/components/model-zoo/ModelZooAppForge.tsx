@@ -8,7 +8,6 @@ import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { CORNER_LEFT, CORNER_RIGHT, sectionTitleGradient } from "./model-zoo-data";
 import { mediaUrl } from "@/lib/strapi";
-import fallbackImg from "@/../public/model-zoo/phone-mockup-new.png";
 
 const TITLE_GRADIENT = sectionTitleGradient(111.766);
 
@@ -207,11 +206,11 @@ export function ModelZooAppForge({ data }: { data?: any }) {
           <div className="relative h-[327px] w-full min-w-px min-[1024px]:flex-1" data-node-id="5131:10537" data-name="Container">
             <img
               alt="ApplicationForge phone app preview on an eval kit"
-              src={(data?.phone_mockup_image && mediaUrl(data.phone_mockup_image)) || fallbackImg.src}
+              src={(data?.phone_mockup_image && mediaUrl(data.phone_mockup_image)) || "/model-zoo/phone-mockup-new.png"}
               onError={(e) => {
                 const target = e.currentTarget;
-                if (!target.src.includes(fallbackImg.src)) {
-                  target.src = fallbackImg.src;
+                if (!target.src.includes("/model-zoo/phone-mockup-new.png")) {
+                  target.src = "/model-zoo/phone-mockup-new.png";
                 }
               }}
               className="pointer-events-none size-full object-contain object-center"
