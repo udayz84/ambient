@@ -207,6 +207,10 @@ export function ModelZooAppForge({ data }: { data?: any }) {
             <img
               alt="ApplicationForge phone app preview on an eval kit"
               src={(data?.phone_mockup_image && mediaUrl(data.phone_mockup_image)) || "/model-zoo/phone-mockup-new.png"}
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = "/model-zoo/phone-mockup-new.png";
+              }}
               className="pointer-events-none size-full object-contain object-center"
               loading="lazy"
               decoding="async"
