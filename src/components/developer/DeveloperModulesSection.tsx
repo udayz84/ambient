@@ -111,7 +111,7 @@ function ModuleCard({
           <img loading="lazy" decoding="async"
             alt=""
             src={image}
-            className={`absolute inset-0 size-full max-w-none object-contain ${module?.tagLabel || fallback.tagLabel ? "opacity-90 blur-[1px]" : ""}`}
+            className={`absolute inset-0 size-full max-w-none object-contain ${module?.tagLabel || fallback.tagLabel ? "opacity-90 blur-[2px] brightness-[0.3]" : ""}`}
           />
         </div>
         {module?.tagLabel || fallback.tagLabel ? (

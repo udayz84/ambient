@@ -131,10 +131,10 @@ export function EcosystemMobile({ data }: { data?: any }) {
 
       <div className="mt-[24px] flex w-full overflow-hidden">
         <div className="flex w-max gap-[32px] animate-[ecosystem-scroll-mobile_25s_linear_infinite]">
-          <PartnerSectionMobile title="SILICON PARTNERS" isSilicon={true} siliconPartners={data?.silicon_partners} developmentPartners={data?.development_partners} />
-          <PartnerSectionMobile title="DEVELOPMENT PARTNERS" isSilicon={false} siliconPartners={data?.silicon_partners} developmentPartners={data?.development_partners} />
-          <PartnerSectionMobile title="SILICON PARTNERS" isSilicon={true} siliconPartners={data?.silicon_partners} developmentPartners={data?.development_partners} />
-          <PartnerSectionMobile title="DEVELOPMENT PARTNERS" isSilicon={false} siliconPartners={data?.silicon_partners} developmentPartners={data?.development_partners} />
+          <PartnerSectionMobile title="PARTNERS" isSilicon={true} siliconPartners={data?.silicon_partners} developmentPartners={data?.development_partners} />
+          <PartnerSectionMobile title="PARTNERS" isSilicon={false} siliconPartners={data?.silicon_partners} developmentPartners={data?.development_partners} />
+          <PartnerSectionMobile title="PARTNERS" isSilicon={true} siliconPartners={data?.silicon_partners} developmentPartners={data?.development_partners} />
+          <PartnerSectionMobile title="PARTNERS" isSilicon={false} siliconPartners={data?.silicon_partners} developmentPartners={data?.development_partners} />
         </div>
       </div>
     </div>

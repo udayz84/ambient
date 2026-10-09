@@ -6,6 +6,7 @@ import { gilroyMedium, interRegular } from "../hero/fonts";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { PRIMARY_CTA_SHADOW } from "./developer-data";
 import { mediaUrl } from "@/lib/strapi";
+import { CollageRow, COLLAGE_ROW_1, COLLAGE_ROW_2, PrimaryCta, SecondaryCta } from "../applications-page/ApplicationsPageModelZoo";
 
 /**
  * Figma 5212:6804 — "model zoo" section (1440×656).
@@ -194,7 +195,7 @@ export function DeveloperModelZoo({ data }: { data?: any }) {
         {/* Header — 5212:6814 */}
         <div
           className="absolute left-1/2 flex w-[800px] -translate-x-1/2 flex-col items-center gap-[24px]"
-          style={{ top: 60 }}
+          style={{ top: 20 }}
           data-node-id="5212:6814"
         >
           {/* Section Title — 5212:6815/6816 */}
@@ -225,66 +226,30 @@ export function DeveloperModelZoo({ data }: { data?: any }) {
           </p>
         </div>
 
-        {/* Stats row — 5212:6823 */}
-        <div
-          className="absolute left-[calc(50%-13.68px)] flex -translate-x-1/2 items-start justify-center gap-[32px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.1)] px-[20px]"
-          style={{ top: 286 }}
-          data-node-id="5212:6823"
-        >
-          {stats.map((stat, i) => (
-            <Fragment key={i}>
-              <div
-                className="flex h-[203px] w-[340px] flex-col items-start gap-[40px] py-[20px]"
-                data-node-id={i === 0 ? "5212:6824" : i === 1 ? "5212:6834" : "5212:6844"}
-                data-name="Stat"
-              >
-                <div
-                  className="relative h-[42px] shrink-0"
-                  style={{ width: stat.iconWidth }}
-                  data-name="Vector"
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img loading="lazy" decoding="async" alt="" src={stat.icon} className="absolute inset-0 block size-full max-w-none" />
-                </div>
-                <p
-                  className={`${interRegular.className} w-full text-[18px] font-normal not-italic leading-[27px] text-white opacity-90 [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
-                >
-                  {stat.text}
-                </p>
-              </div>
-              {i < STATS.length - 1 ? <GridLine /> : null}
-            </Fragment>
-          ))}
-          <CornerTick placement="tl" className="left-[0.51px] top-[0.51px]" />
-          <CornerTick placement="tr" className="right-[0.52px] top-[0.49px]" />
-          <CornerTick placement="bl" className="bottom-[0.5px] left-[0.51px]" />
-          <CornerTick placement="br" className="bottom-[0.53px] right-[0.52px]" />
-        </div>
+        {/* Interactive rows & CTAs replacing the old static cards */}
+        <div className="absolute left-1/2 flex w-full -translate-x-1/2 flex-col items-center" style={{ top: 240 }}>
+          {/* CTA Row */}
+          <div className="flex w-full min-[1024px]:w-auto flex-col min-[1024px]:flex-row items-center justify-center gap-[16px]">
+            <PrimaryCta label="Explore the Model Zoo" href="/model-zoo" />
+            <SecondaryCta label="See it live in ApplicationForge" href="/application-forge" />
+          </div>
 
-        {/* CTA - Primary — 5212:6854 */}
-        <a
-          href={ctaHref}
-          className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} absolute flex h-[48px] w-[250px] items-center justify-center gap-[10px] overflow-hidden px-[20px] py-[10px]`}
-          style={{ left: "50%", top: 539, transform: "translateX(-50%)" }}
-          data-node-id="5212:6854"
-          data-name="CTA - Primary"
-        >
-          <span
-            aria-hidden
-            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-          />
-          <span className="relative whitespace-nowrap text-[16px] font-medium uppercase not-italic leading-[28px] text-white">
-            {ctaLabel}
-          </span>
-          <span
-            aria-hidden
-            className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
-          />
-          <CornerTick placement="tl" className="left-0 top-0" />
-          <CornerTick placement="tr" className="right-[0.5px] top-0" />
-          <CornerTick placement="bl" className="bottom-0 left-[-0.5px]" />
-          <CornerTick placement="br" className="bottom-0 right-[0.5px]" />
-        </a>
+          {/* Two-row collage carousel */}
+          <div className="relative z-10 mt-[60px] flex w-full flex-col gap-[16px] overflow-hidden">
+            <CollageRow
+              cards={COLLAGE_ROW_1}
+              nodeId="dev-mz-r1"
+              direction="left"
+              duration={32}
+            />
+            <CollageRow
+              cards={COLLAGE_ROW_2}
+              nodeId="dev-mz-r2"
+              direction="right"
+              duration={26}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

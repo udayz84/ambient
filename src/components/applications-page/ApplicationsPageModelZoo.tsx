@@ -21,7 +21,7 @@ const COLLAGE_LEFT_FADE =
   "linear-gradient(262.733deg, rgba(0, 0, 0, 0) 15.711%, rgb(0, 0, 0) 72.391%)";
 
 /** Row 1 cards — duplicated from ModelZooHero. */
-const COLLAGE_ROW_1 = [
+export const COLLAGE_ROW_1 = [
   { label: "Anomaly Detection", img: "/model-zoo/collage-r1-c1.webp" },
   { label: "Keyword Spotting", img: "/model-zoo/collage-r1-c2.webp" },
   { label: "Human Activity Recognition", img: "/model-zoo/collage-r1-c3.webp" },
@@ -30,13 +30,13 @@ const COLLAGE_ROW_1 = [
 ];
 
 /** Row 2 cards — duplicated from ModelZooHero. */
-const COLLAGE_ROW_2 = [
+export const COLLAGE_ROW_2 = [
   { label: "Person / No-Person", img: "/model-zoo/collage-r2-c1.webp" },
   { label: "Presence Detection", img: "/model-zoo/collage-r2-c2.webp" },
   { label: "Voice Activity Detection", img: "/model-zoo/collage-r2-c3.webp" },
 ];
 
-function PrimaryCta({ label, href }: { label: string; href: string }) {
+export function PrimaryCta({ label, href }: { label: string; href: string }) {
   return (
     <a
       href={href}
@@ -62,7 +62,7 @@ function PrimaryCta({ label, href }: { label: string; href: string }) {
   );
 }
 
-function SecondaryCta({ label, href }: { label: string; href: string }) {
+export function SecondaryCta({ label, href }: { label: string; href: string }) {
   return (
     <a
       href={href}
@@ -82,7 +82,7 @@ function SecondaryCta({ label, href }: { label: string; href: string }) {
 /* Collage rows — duplicated from ModelZooHero                         */
 /* ------------------------------------------------------------------ */
 
-function CollageRow({
+export function CollageRow({
   cards,
   nodeId,
   direction = "left",

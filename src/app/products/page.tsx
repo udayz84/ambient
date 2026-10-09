@@ -87,7 +87,7 @@ export default async function ProductsPage() {
   let caseStudiesData: any = null;
   try {
     const productsExtras = await getSingleType<any>("products-page", [
-      { section: "case_studies", nested: ["cards", "logos"] },
+      { section: "case_studies", nested: ["cards"] },
     ]);
     caseStudiesData = productsExtras?.case_studies ?? null;
   } catch {

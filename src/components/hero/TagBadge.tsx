@@ -3,7 +3,7 @@ import { Corners } from "../shared/Corners";
 
 type TagBadgeProps = {
   label: string;
-  width: number | string;
+  width?: number | string;
   labelOffsetX?: number;
   rightBarLeft?: number;
   nodeId?: string;
@@ -24,44 +24,37 @@ export function TagBadge({
   leftBarLeft = 6.48,
   labelClassName = "text-[13px] leading-[19.5px] tracking-[-0.39px]",
 }: TagBadgeProps) {
-  const isAuto = width === "auto" || width === "max-content" || width === "fit-content";
+  // We force all tags to automatically size to their content length
+  const isAuto = true;
+  const finalWidth = "max-content";
 
   return (
     <div
       className={`${dmMono.className} relative shrink-0 overflow-hidden border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] bg-[rgba(255,255,255,0.06)]`}
       style={{ 
-        width: isAuto ? width : `var(--tag-w, ${width}px)`, 
+        width: finalWidth, 
         height, 
-        padding: isAuto ? `0 ${leftBarLeft + 8}px` : 0 
+        padding: `0 ${leftBarLeft + 8}px`
       }}
       data-node-id={nodeId}
       data-name="Menu"
     >
       <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
-      {isAuto ? (
-        <div className="flex h-full items-center justify-center">
-          <p
-            className={`font-normal whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] ${labelClassName}`}
-          >
-            {label}
-          </p>
-        </div>
-      ) : (
+      <div className="flex h-full items-center justify-center">
         <p
-          className={`absolute top-[calc(50%-4.5px)] max-w-[calc(100%-16px)] overflow-hidden text-ellipsis font-normal whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] ${labelClassName} ${centerLabel ? "left-1/2 -translate-x-1/2" : ""}`}
-          style={centerLabel ? undefined : { left: `calc(50% - ${labelOffsetX}px)` }}
+          className={`font-normal whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] ${labelClassName}`}
         >
           {label}
         </p>
-      )}
+      </div>
       
       <div
         className="absolute top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60"
-        style={isAuto ? { left: `${leftBarLeft}px` } : { left: `var(--tag-lb, ${leftBarLeft}px)` }}
+        style={{ left: `${leftBarLeft}px` }}
       />
       <div
         className="absolute top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60"
-        style={isAuto ? { right: `${leftBarLeft}px` } : { left: `var(--tag-rb, ${rightBarLeft}px)` }}
+        style={{ right: `${leftBarLeft}px` }}
       />
     </div>
   );

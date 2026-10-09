@@ -16,10 +16,10 @@ const CARD_BLE = {
   description: "For products that connect over short range — to a phone, hub, or gateway.",
   imageUrl: "/som/som-chip.webp",
   features: [
-    { icon: "🔲", text: "GPX10 Pro\ncompute core" },
-    { icon: "🧊", text: "6-axis\nIMU" },
-    { icon: "💽", text: "NOR\nflash" },
-    { icon: "📶", text: "Bluetooth LE\n(Nordic nRF54)" },
+    { icon: "/partners/icons_proof/chip.svg", text: "GPX10 Pro\ncompute core" },
+    { icon: "/partners/icons_proof/cube.svg", text: "6-axis\nIMU" },
+    { icon: "/technology/icon-compute.svg", text: "NOR\nflash" },
+    { icon: "/partners/icons_become/rss.svg", text: "Bluetooth LE\n(Nordic nRF54)" },
   ],
   footerText: "RF is available on a u.FL connector and on an LGA RF pad, so you can use an external antenna or design one into your PCB.",
 };
@@ -30,10 +30,10 @@ const CARD_LTE = {
   description: "For products that need to connect anywhere, with no local gateway — remote, mobile, or wide-area deployments.",
   imageUrl: "/som/sparsh-chip.webp",
   features: [
-    { icon: "🔲", text: "GPX10 Pro\ncompute core" },
-    { icon: "🧊", text: "6-axis\nIMU" },
-    { icon: "💽", text: "NOR\nflash" },
-    { icon: "📡", text: "LTE\ncellular modem" },
+    { icon: "/partners/icons_proof/chip.svg", text: "GPX10 Pro\ncompute core" },
+    { icon: "/partners/icons_proof/cube.svg", text: "6-axis\nIMU" },
+    { icon: "/technology/icon-compute.svg", text: "NOR\nflash" },
+    { icon: "/partners/icons_proof/global.svg", text: "LTE\ncellular modem" },
   ],
   footerText: "",
 };
@@ -135,7 +135,7 @@ function FamilyCard({ data }: { data: typeof CARD_BLE }) {
       </div>
 
       {/* Buttons outside the card */}
-      <div className="flex flex-col min-[1024px]:flex-row items-stretch min-[1024px]:items-center gap-4 mt-2">
+      <div className="flex flex-col min-[1024px]:flex-row items-stretch min-[1024px]:items-center min-[1024px]:justify-center gap-4 mt-2">
         <PrimaryButton label="Notify Me When Available" />
         <SecondaryButton label="Talk to Sales" />
       </div>

@@ -7,6 +7,7 @@ import { getFadeInClass, useFadeIn } from "../shared/useFadeIn";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { CORNER_LEFT, CORNER_RIGHT, sectionTitleGradient } from "../model-zoo/model-zoo-data";
+import { mediaUrl } from "@/lib/strapi";
 
 const TITLE_GRADIENT = sectionTitleGradient(111.766);
 
@@ -120,126 +121,59 @@ export function ProductsAppForge({ data }: { data?: any }) {
           className={`mt-[24px] flex flex-col items-stretch gap-[24px] min-[1024px]:mt-[48px] min-[1024px]:h-[578px] min-[1024px]:flex-row min-[1024px]:items-center ${getFadeInClass(forgeVisible)}`}
           data-node-id="5241:5967"
         >
-          {/* Left canvas card — 5241:5677 (empty bordered frame in the design) */}
-          <div className="hidden min-[1024px]:flex h-full w-[590.509px] shrink-0 items-stretch justify-center">
+          {/* Left canvas card — 5241:5677 */}
+          <div className="flex h-[320px] w-full shrink-0 items-stretch justify-center min-[1024px]:h-full min-[1024px]:w-[590.509px]">
             <div
-              className={`relative h-full ${!activeStep ? "w-full" : "w-fit"} overflow-clip transition-colors duration-300 ${forgeVisible ? "motion-safe:animate-hero-text-fade-in" : "opacity-0"}`}
+              className={`relative h-full w-full overflow-clip rounded-[12px] min-[1024px]:rounded-none transition-colors duration-300 ${forgeVisible ? "motion-safe:animate-hero-text-fade-in" : "opacity-0"}`}
               style={{ animationDelay: "80ms", animationFillMode: "both" }}
               data-node-id="5241:5677"
               data-name="Article"
               aria-hidden
             >
-              {activeStep === "results" ? (
-                /* "See results live" — real screen recording (portrait 1080×1920),
-                   object-contain so the native aspect is kept (letterboxed). */
-                <video
-                  className="pointer-events-none block h-full w-auto object-contain"
-                  src="/model-zoo/af-results.mp4"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="auto"
-                />
-              ) : activeStep ? (
-                /* Variant collage baked @2x from Figma (corners included) */
-                <img
-                  alt=""
-                  src={STEP_ARTICLE[activeStep]}
-                  className="pointer-events-none block h-full w-auto object-contain"
-                />
-              ) : (
-                <>
-                  {/* Figma 5241:5677 — VIDEO fill (scaleMode FILL) playing on the canvas */}
-                  <video
-                    ref={videoRef}
-                    className="pointer-events-none absolute inset-0 size-full object-contain"
-                    poster="/videos/electronica-tv-01-v03-poster.jpg"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="auto"
-                    onLoadedMetadata={(e) => {
-                      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-                        e.currentTarget.play().catch(() => {});
-                      }
-                    }}
-                  >
-                    <source src="/videos/electronica-tv-01-v03.webm" type="video/webm" />
-                    {/* Fallback for Safari which doesn't support WebM alpha, or if prod deployment drops large files */}
-                    <source src="https://ambientwebasset.blob.core.windows.net/website-assets/model-zoo/af-video.mp4" type="video/mp4" />
-                  </video>
-                </>
-              )}
+              <video
+                ref={videoRef}
+                className="pointer-events-none absolute inset-0 size-full object-contain"
+                poster="/videos/electronica-tv-01-v03-poster.jpg"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                onLoadedMetadata={(e) => {
+                  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                    e.currentTarget.play().catch(() => {});
+                  }
+                }}
+              >
+                <source src="/videos/electronica-tv-01-v03.webm" type="video/webm" />
+                <source src="https://ambientwebasset.blob.core.windows.net/website-assets/model-zoo/af-video.mp4" type="video/mp4" />
+              </video>
             </div>
           </div>
 
           {/* Right column — 5241:5702 */}
-          <div className="relative flex min-w-px flex-1 flex-col items-center justify-center gap-[25px]" data-node-id="5241:5702">
-            <div
-              className={`w-full min-[1024px]:w-[578px] ${forgeVisible ? "motion-safe:animate-hero-text-fade-in" : "min-[1024px]:opacity-0"}`}
-              style={{ animationDelay: "140ms", animationFillMode: "both" }}
-            >
-              <button
-                onClick={() => setActiveStep(null)}
-                type="button"
-                className={`${gilroyMedium.className} w-full text-left text-[22px] leading-[28px] text-white not-italic cursor-pointer transition-opacity duration-300 ${activeStep !== null ? "opacity-40 hover:opacity-100" : "opacity-100"}`}
-                data-node-id="5241:5703"
-              >
-                {data?.forge_title || "Application Forge"}
-              </button>
-            </div>
-
-            {/* eval kit list — 5241:5728. Click activates the Figma variant for
-                that step: row expands to its Stat content, siblings dim to 40%. */}
-            <div className="flex w-full flex-col items-start gap-[10px] min-[1024px]:w-[578px]" data-node-id="5241:5728" data-name="eval kit">
+          <div className="relative flex min-w-px flex-1 flex-col items-center justify-center gap-[25px] min-[1024px]:items-end min-[1024px]:pr-[20px]" data-node-id="5241:5702">
+            <div className={`flex w-[95%] max-w-[420px] mx-auto flex-col items-center gap-[12px] min-[1024px]:w-[520px] min-[1024px]:max-w-none min-[1024px]:mx-0 ${forgeVisible ? "motion-safe:animate-hero-text-fade-in" : "min-[1024px]:opacity-0"}`} style={{ animationDelay: "140ms", animationFillMode: "both" }} data-node-id="5241:5728" data-name="eval kit">
               {(Array.isArray(data?.steps) && data.steps.length === 3 ? data.steps.map((s: any) => s.title || "") : FORGE_STEPS).map((step: string, i: number) => {
                 const key = STEP_KEYS[i];
-                const isActive = activeStep === key;
                 return (
-                  <button
-                    type="button"
+                  <div
                     key={step}
-                    aria-pressed={isActive}
-                    onClick={() => setActiveStep(isActive ? null : key)}
-                    className={`relative block h-[84px] w-full shrink-0 cursor-pointer bg-[rgba(0,0,0,0.1)] text-left transition-[height,opacity] duration-300 motion-reduce:transition-none ${isActive ? STEP_ACTIVE_HEIGHT[key] : ""} ${
-                      isActive ? "opacity-100" : "opacity-40"
-                    }`}
+                    className="relative block w-full h-auto shrink-0 border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] backdrop-blur-[12px] bg-[rgba(0,0,0,0.2)] text-left"
                     data-node-id={`5241:57${52 - i * 6}`}
                   >
-                    {isActive && (
-                      <>
-                        {/* Stat content baked @2x from the variant (desktop only) */}
-                        <img
-                          alt=""
-                          src={STEP_STAT[key]}
-                          className="pointer-events-none absolute inset-0 hidden size-full object-cover min-[1024px]:block"
-                          loading="lazy"
-                          decoding="async"
-                        />
-                        {/* Mobile preview image shown inside the accordion */}
-                        <img
-                          alt=""
-                          src={STEP_ARTICLE[key]}
-                          className="pointer-events-none absolute top-[70px] left-[20px] h-[calc(100%-90px)] w-[calc(100%-40px)] object-contain rounded-[6px] min-[1024px]:hidden"
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      </>
-                    )}
-                    <p
-                      className={`${gilroyMedium.className} absolute top-[28px] left-[20px] text-[22px] leading-[28px] whitespace-nowrap text-left text-white not-italic ${isActive ? "min-[1024px]:hidden" : ""}`}
-                    >
-                      {step}
-                    </p>
-                    <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} className={isActive ? "min-[1024px]:hidden" : ""} />
-                  </button>
+                    <img
+                      alt={step}
+                      src={STEP_STAT[key]}
+                      className="pointer-events-none block w-full h-auto"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+                  </div>
                 );
               })}
             </div>
-
-
           </div>
         </div>
 
@@ -252,12 +186,12 @@ export function ProductsAppForge({ data }: { data?: any }) {
         >
 
 
-          {/* Phone showcase — 5131:10537 (baked @2x export incl. iPhone mockup) */}
+          {/* Phone showcase — 5131:10537 */}
           <div className="relative h-[327px] w-full min-w-px min-[1024px]:flex-1" data-node-id="5131:10537" data-name="Container">
             <img
               alt="ApplicationForge phone app preview on an eval kit"
-              src="/model-zoo/phone-mockup-new.png"
-              className="pointer-events-none size-full object-contain object-center scale-90 min-[1024px]:scale-[0.85]"
+              src={data?.phone_mockup_image ? mediaUrl(data.phone_mockup_image) : "/model-zoo/phone-mockup-new.png"}
+              className="pointer-events-none size-full object-contain object-center"
               loading="lazy"
               decoding="async"
             />
@@ -277,8 +211,13 @@ export function ProductsAppForge({ data }: { data?: any }) {
               {data?.card_title || "Download the app and get it working with Sparsh module"}
             </p>
             <div className="flex flex-wrap items-center gap-[19.667px]" data-node-id="5203:5767">
-              <img alt="Download on the App Store" src="/model-zoo/af-badge-1.webp" className="h-[59px] w-[177px] shrink-0 rounded-[8px]" loading="lazy" decoding="async" data-node-id="5203:5768" />
               <img alt="Get it on Google Play" src="/model-zoo/af-badge-2.webp" className="h-[59px] w-[177px] shrink-0 rounded-[8px]" loading="lazy" decoding="async" data-node-id="5203:5769" />
+              <div className="group relative h-[59px] w-[177px] shrink-0 rounded-[8px] cursor-not-allowed overflow-hidden">
+                <img alt="Download on the App Store" src="/model-zoo/af-badge-1.webp" className="h-full w-full object-cover transition-all duration-300 group-hover:blur-[2px] group-hover:brightness-50" loading="lazy" decoding="async" data-node-id="5203:5768" />
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <span className={`${gilroyMedium.className} text-[14px] text-white text-center font-semibold leading-tight`}>Available soon<br/>on iOS</span>
+                </div>
+              </div>
             </div>
           </div>
 

@@ -198,7 +198,7 @@ export function EcosystemPartners({ data }: { data?: any }) {
         data-node-id="2379:1051"
       >
         <PartnerSection
-          title="SILICON PARTNERS"
+          title="PARTNERS"
           titleNodeId="2379:1048"
           gradient={TITLE_GRADIENT_SILICON}
           cardsNodeId="2379:1051-silicon"
@@ -211,7 +211,7 @@ export function EcosystemPartners({ data }: { data?: any }) {
         </PartnerSection>
 
         <PartnerSection
-          title="DEVELOPMENT PARTNERS"
+          title="PARTNERS"
           titleNodeId="2379:1049"
           gradient={TITLE_GRADIENT_DEVELOPMENT}
           cardsNodeId="2379:1051-dev"
@@ -225,7 +225,7 @@ export function EcosystemPartners({ data }: { data?: any }) {
         </PartnerSection>
 
         <PartnerSection
-          title="SILICON PARTNERS"
+          title="PARTNERS"
           titleNodeId="2379:1048"
           gradient={TITLE_GRADIENT_SILICON}
           cardsNodeId="2379:1051-silicon-2"
@@ -238,7 +238,7 @@ export function EcosystemPartners({ data }: { data?: any }) {
         </PartnerSection>
 
         <PartnerSection
-          title="DEVELOPMENT PARTNERS"
+          title="PARTNERS"
           titleNodeId="2379:1049"
           gradient={TITLE_GRADIENT_DEVELOPMENT}
           cardsNodeId="2379:1051-dev-2"

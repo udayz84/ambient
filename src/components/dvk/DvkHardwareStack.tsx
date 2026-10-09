@@ -23,7 +23,6 @@ const DEFAULT_HEADING =
   "The complete Edge AI hardware stack in a single footprint";
 const DEFAULT_SUBTITLE =
   "An exhaustive suite of sensors, interfaces, and debug tools pre-integrated with the GPX-10 Pro AI Processor.";
-const DEFAULT_LABEL = "The Hardware Blueprint";
 
 const BOARD_IMAGE = "/dvk/inside-module/dvk-board.webp";
 const COLORFUL_BOARD = "/dvk/board-stack.webp";
@@ -39,7 +38,6 @@ export function DvkHardwareStack({ data }: { data?: any }) {
   const [hoveredIndex, setHoveredIndex] = useState(-1);
   const heading = data?.heading || DEFAULT_HEADING;
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
-  const label = data?.label || DEFAULT_LABEL;
   const source: any[] = Array.isArray(data?.spec_cards) ? data.spec_cards : [];
   const cards: SpecCardType[] = SPEC_CARDS.map((def, i) => {
     const c = source[i];
@@ -298,12 +296,6 @@ export function DvkHardwareStack({ data }: { data?: any }) {
               </div>
             </div>
           </div>
-
-          <p
-            className={`${gilroyMedium.className} min-w-full w-[min-content] shrink-0 text-center text-[22px] leading-[28px] text-white not-italic`}
-          >
-            {label}
-          </p>
         </div>
 
         {/* Spec cards column */}

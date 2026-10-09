@@ -73,7 +73,7 @@ function CardImage({ variant, isSpread }: { variant: ProductsFeatureCardData["im
         aria-hidden
       >
         <div className="pointer-events-none absolute inset-0">
-          <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute inset-0">
             <img loading="lazy" decoding="async"
               alt=""
               src={CARD_IMAGES.coin}
@@ -81,7 +81,7 @@ function CardImage({ variant, isSpread }: { variant: ProductsFeatureCardData["im
             />
           </div>
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 pointer-events-none"
             style={{
               backgroundImage:
                 "linear-gradient(184.715deg, rgb(11, 10, 10) 4.6657%, rgba(0, 0, 0, 0) 17.536%), linear-gradient(180deg, rgba(0, 0, 0, 0) 88.146%, rgb(11, 10, 10) 100%)",
@@ -97,7 +97,7 @@ function CardImage({ variant, isSpread }: { variant: ProductsFeatureCardData["im
         className="absolute top-[138.4px] left-[calc(50%-0.05px)] h-[321.949px] w-[386.268px] -translate-x-1/2"
         aria-hidden
       >
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="pointer-events-none absolute inset-0">
           <img loading="lazy" decoding="async"
             alt=""
             src={CARD_IMAGES.bubble}
@@ -181,7 +181,7 @@ export function ProductsFeatureCard({
 
       {/* title + underline */}
       <div
-        className="absolute top-[30px] flex w-[299px] flex-col items-start gap-[12px]"
+        className="absolute z-10 top-[30px] flex w-[299px] flex-col items-start gap-[12px]"
         style={{ left: `${card.titleLeft}px` }}
       >
         {card.titleLines ? (

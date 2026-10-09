@@ -438,7 +438,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
           onClick={() => setIsModalOpen(false)}
         >
           <div 
-            className="relative flex flex-col items-center max-w-[900px] w-full max-h-[90vh] overflow-y-auto bg-[#0a0a0a] border-[1px] border-[rgba(255,255,255,0.1)] rounded-[16px] p-[24px] shadow-2xl"
+            className="relative flex flex-col items-center max-w-[700px] w-full max-h-[90vh] overflow-y-auto bg-[#0a0a0a] border-[1px] border-[rgba(255,255,255,0.1)] rounded-[16px] p-[24px] shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <button 
@@ -455,7 +455,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
             <img 
               loading="lazy" 
               decoding="async"
-              src="/developer/toolchain-architecture.jpeg" 
+              src="/developer/main.jpeg" 
               alt="ModelForge Toolchain Stack" 
               className="w-full max-h-[65vh] object-contain rounded-[8px]"
             />

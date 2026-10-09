@@ -40,6 +40,7 @@ const TRUSTED_LOGOS: string[] = []; // Less than 6, so ticker won't render
 export function ProductsCaseStudies({ data }: { data?: any }) {
   const [showForm, setShowForm] = useState(false);
 
+  console.log("ProductsCaseStudies data:", JSON.stringify(data, null, 2));
   const strapiCards = Array.isArray(data?.cards) && data.cards.length > 0 ? data.cards : null;
   const cards = strapiCards
     ? strapiCards.map((c: any, idx: number) => ({
@@ -84,8 +85,8 @@ export function ProductsCaseStudies({ data }: { data?: any }) {
         <div
           className={
             cards.length > 3
-              ? "flex w-full snap-x snap-mandatory gap-[24px] overflow-x-auto pb-[24px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-              : "grid w-full grid-cols-1 gap-[24px] md:grid-cols-3"
+              ? "flex w-full snap-x snap-mandatory gap-[24px] overflow-x-auto pb-[24px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden items-stretch"
+              : "grid w-full grid-cols-1 gap-[24px] md:grid-cols-3 items-stretch"
           }
         >
           {cards.map((study: any) => {
@@ -100,13 +101,19 @@ export function ProductsCaseStudies({ data }: { data?: any }) {
                 };
 
             return (
-              <CardElement
+              <div
                 key={study.id}
-                {...elementProps}
-                className={`group relative flex h-full min-h-[500px] flex-col overflow-clip rounded-[16px] border-[0.5px] border-solid border-[rgba(255,255,255,0.15)] bg-[rgba(255,255,255,0.02)] backdrop-blur-md text-left transition-all duration-300 hover:border-[#a8ed90] ${
+                className={`group relative flex h-full min-h-[500px] flex-col border border-solid border-[rgba(255,255,255,0.15)] bg-[rgba(0,0,0,0.2)] backdrop-blur-[12px] text-left transition-all duration-300 hover:border-[#a8ed90] ${
                   cards.length > 3 ? "w-[320px] shrink-0 snap-center md:w-[380px]" : "w-full"
                 }`}
               >
+                <CardElement
+                  {...elementProps}
+                  className="absolute inset-0 z-20 block w-full h-full appearance-none border-none bg-transparent cursor-pointer outline-none"
+                  aria-label={study.ctaLabel}
+                >
+                  <span className="sr-only">{study.ctaLabel}</span>
+                </CardElement>
               {/* Thumbnail Background */}
               <div className="absolute inset-x-0 top-0 h-[220px] w-full border-b border-[rgba(255,255,255,0.05)] overflow-hidden bg-black">
                 <img
@@ -153,7 +160,9 @@ export function ProductsCaseStudies({ data }: { data?: any }) {
                   <Corners />
                 </div>
               </div>
-              </CardElement>
+
+              <Corners className="z-30" leftSrc="/products/fp-title-corner-left.svg" rightSrc="/products/fp-title-corner-right.svg" />
+              </div>
           )})}
         </div>
       </div>

@@ -75,19 +75,21 @@ function CtaCard({
 
       {/* content */}
       <div className="absolute top-[calc(50%-6px)] left-[52px] w-[450px] -translate-y-1/2">
-        <div className="flex flex-col items-start gap-[36px]">
+        <div className="flex flex-col items-start gap-[16px]">
           {/* title */}
-          <div className="relative h-[108px] w-full">
+          <div className="relative w-full py-[5px]">
             <GradientTitle
               gradientDeg={CARD_TITLE_DEG}
               className="w-full text-center"
             >
-              <span className="block h-[49px] leading-[49px] [word-break:break-word]">
+              <span className="block leading-[49px] [word-break:break-word]">
                 {card.titleLines[0]}
               </span>
-              <span className="block h-[49px] leading-[49px] [word-break:break-word]">
-                {card.titleLines[1]}
-              </span>
+              {card.titleLines[1] && card.titleLines[1].trim() !== "" && (
+                <span className="block leading-[49px] [word-break:break-word]">
+                  {card.titleLines[1]}
+                </span>
+              )}
             </GradientTitle>
             <CornerDecor />
           </div>
@@ -226,9 +228,9 @@ export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
               {/* content */}
               <div className="absolute left-[32.87px] top-1/2 flex w-[284.464px] -translate-y-1/2 flex-col gap-[11px]">
                 {/* title */}
-                <div className="relative h-[68.271px] w-full">
+                <div className="relative w-full py-[3px]">
                   <p
-                    className={`${gilroyMedium.className} absolute left-1/2 w-[299.558px] -translate-x-1/2 bg-clip-text text-center text-[30px] font-medium text-transparent not-italic [word-break:break-word]`}
+                    className={`${gilroyMedium.className} mx-auto w-[299.558px] bg-clip-text text-center text-[30px] font-medium text-transparent not-italic [word-break:break-word]`}
                     style={{
                       backgroundImage: `linear-gradient(${CARD_TITLE_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
                       WebkitBackgroundClip: "text",
@@ -236,7 +238,9 @@ export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
                     }}
                   >
                     <span className="block leading-[30.975px]">{card.titleLines[0]}</span>
-                    <span className="block leading-[30.975px]">{card.titleLines[1]}</span>
+                    {card.titleLines[1] && card.titleLines[1].trim() !== "" && (
+                      <span className="block leading-[30.975px]">{card.titleLines[1]}</span>
+                    )}
                   </p>
                   <CornerDecor />
                 </div>

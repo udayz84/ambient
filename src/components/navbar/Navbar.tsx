@@ -542,16 +542,16 @@ export function Navbar({
         {/* Desktop (>=1024px): absolute positions from Figma, adapted for smaller viewports */}
         <Link
           href="/"
-          className="absolute top-[19.158px] left-[40px] hidden h-[38px] w-[135.443px] min-[1440px]:left-[110px] lg:block"
+          className="absolute z-20 top-[19.158px] left-[40px] hidden h-[38px] w-max min-[1440px]:left-[110px] lg:block"
           data-node-id="2379:1574"
         >
           {logoSrc ? (
             <Image
               src={logoSrc}
               alt="Ambient Scientific"
-              width={135}
+              width={250}
               height={38}
-              className="h-[38px] w-[135.443px] object-cover object-left"
+              className="h-[38px] w-auto object-contain object-left"
               priority
               unoptimized
             />
@@ -575,7 +575,7 @@ export function Navbar({
         {/* Right CTA cluster: Shop + Get in touch, compact 134px buttons.
          *  right-[101.5px] keeps the pair inside the navbar's angled right
          *  edge (same clearance the Figma CTA had). */}
-        <div className="absolute top-[21.158px] right-[101.5px] hidden items-center gap-[10px] lg:flex">
+        <div className="absolute top-[21.158px] right-[101.5px] hidden items-center gap-[10px] lg:flex z-20">
           {shopItem ? <ShopNavButton item={shopItem} /> : null}
           <NavbarCta data={data} />
         </div>
@@ -584,13 +584,13 @@ export function Navbar({
         <div className="absolute inset-0 block lg:hidden">
           <Link
             href="/"
-            className="absolute top-[20px] left-[16px] flex h-[38px] w-[135px] items-center overflow-hidden"
+            className="absolute z-20 top-[20px] left-[16px] flex h-[38px] w-max items-center"
           >
             {logoSrc ? (
               <Image
                 src={logoSrc}
                 alt="Ambient Scientific"
-                width={135}
+                width={250}
                 height={38}
                 className="h-[38px] w-auto object-contain object-left"
                 priority

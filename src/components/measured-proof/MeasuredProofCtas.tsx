@@ -25,7 +25,7 @@ export function MeasuredProofCtas({ data }: { data?: any }) {
 
   return (
     <div
-      className="absolute top-[812.5px] left-1/2 flex -translate-x-1/2 gap-[20px] items-center"
+      className="absolute top-[852.5px] left-1/2 flex -translate-x-1/2 gap-[20px] items-center"
       data-node-id="2379:1485"
     >
       <a

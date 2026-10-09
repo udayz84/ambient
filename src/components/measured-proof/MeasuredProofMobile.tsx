@@ -61,7 +61,6 @@ const DESKTOP_CARDS: FallbackCard[] = [
     imageSizes: "384px",
     statWidth: 271,
     descriptionWidth: 320,
-    descriptionBottom: 137.5,
     statJustifyEnd: true,
   },
 ];

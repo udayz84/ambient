@@ -37,7 +37,7 @@ export default async function Home() {
       { section: "measured_proof", nested: ["tag", "stat_cards", "ctas"] },
       { section: "clients", nested: ["tag", "clients"] },
       { section: "technology", nested: ["tag", "features", "image"] },
-      { section: "platform_scale", nested: ["products", "cta"] },
+      { section: "platform_scale", nested: ["products", "cta", "secondary_cta"] },
       { section: "applications", nested: ["tabs", "cta"] },
       { section: "model_zoo_kits", nested: ["cards"] },
       { section: "developer_platform", nested: ["cards"] },
@@ -69,7 +69,7 @@ export default async function Home() {
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       {data?.hero && <HeroCarousel data={data.hero} />}
       {data?.measured_proof && <MeasuredProof data={data.measured_proof} />}
-      <EcosystemMarqueeStrip data={data?.clients} />
+      {/* <EcosystemMarqueeStrip data={data?.clients} /> */}
       {data?.technology && <Technology data={data.technology} />}
       {data?.platform_scale && <PlatformScale data={data.platform_scale} />}
       {data?.applications && <Applications data={data.applications} />}

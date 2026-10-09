@@ -432,9 +432,9 @@ function MobileModesScene({
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img loading="lazy" decoding="async"
-                src={MODES_LOOP_MOBILE}
+                src="/technology/modes-wavy-lines-transparent.png"
                 alt=""
-                className="absolute top-[-95.79%] left-[0.16%] h-[277.89%] w-[99.82%] max-w-none"
+                className="absolute inset-0 size-full max-w-none"
               />
             </div>
           </div>
@@ -637,7 +637,7 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
         >
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img loading="lazy" decoding="async" alt="" className="absolute h-[277.89%] left-[0.16%] max-w-none top-[-95.79%] w-[99.82%]" src={topImg} />
+            <img loading="lazy" decoding="async" alt="" className="absolute inset-0 size-full max-w-none" src="/technology/modes-wavy-lines-transparent.png" />
           </div>
         </div>
 

@@ -82,7 +82,7 @@ export function SomProvenCore() {
         </div>
 
         {/* Right Side: Detail Tables */}
-        <div className="flex w-full min-[1024px]:w-[520px] shrink-0 flex-col gap-[24px]">
+        <div className="flex w-full min-[1024px]:w-[520px] shrink-0 flex-col gap-[24px] justify-between">
           
           {/* Shared Core Table */}
           <div className="relative overflow-hidden border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] p-[24px] min-[1024px]:p-[32px]">
@@ -140,21 +140,7 @@ export function SomProvenCore() {
             </div>
           </div>
 
-          {/* Preliminary Note */}
-          <div className="relative overflow-hidden border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] p-[24px]">
-            <Corners />
-            <div className="flex items-start gap-[16px]">
-              <span className="flex mt-[2px] size-[20px] shrink-0 items-center justify-center text-[#53d824]">
-                📄
-              </span>
-              <div className="flex flex-col gap-[8px]">
-                <h4 className={`${gilroyMedium.className} text-[16px] text-white`}>Preliminary Note</h4>
-                <p className={`${interRegular.className} text-[13px] leading-[20px] text-[#f0f0f0] opacity-60`}>
-                  Specs are preliminary and may change as the GPX10 Pro CSP-50 package is finalized. The BLE variant follows the partner design proposal; the LTE variant is a newer plan — the LTE modem and RF details are still to be defined.
-                </p>
-              </div>
-            </div>
-          </div>
+
 
         </div>
       </div>

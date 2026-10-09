@@ -169,26 +169,27 @@ function StartCardView({
 
       {/* Content — vertically centered */}
       <div className="absolute inset-0 flex flex-col items-center justify-center px-[54px]">
-        <div className="flex w-[450px] flex-col items-center gap-[36px] mb-[40px]">
+        <div className="flex w-[450px] flex-col items-center gap-[16px]">
           {/* Card title with bracket frame */}
           <div
-            className="relative"
-            style={{ width: 450, height: 108 }}
+            className="relative py-[7px]"
+            style={{ width: 450 }}
             data-name="Frame 1618875832"
           >
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             <h3
               ref={fitRef}
-              className={`${gilroyMedium.className} absolute left-1/2 m-0 w-[473.877px] -translate-x-1/2 bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} relative mx-auto m-0 w-[473.877px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
-                top: 7,
                 backgroundImage: START_CARD_TITLE_GRADIENT,
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
               }}
             >
-              <span className="block overflow-hidden text-ellipsis leading-[49px]">{card.titleLines[0]}{` `}</span>
-              <span className="block overflow-hidden text-ellipsis leading-[49px]">{card.titleLines[1]}</span>
+              <span className="block overflow-hidden text-ellipsis leading-[49px]">{card.titleLines[0]}</span>
+              {card.titleLines[1] && card.titleLines[1].trim() !== "" && (
+                <span className="block overflow-hidden text-ellipsis leading-[49px]">{card.titleLines[1]}</span>
+              )}
             </h3>
           </div>
 

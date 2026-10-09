@@ -205,10 +205,8 @@ function ProductsHeroDesktop({
           <TagBadge
             key={i}
             label={t.text}
-            width={300}
+            width="max-content"
             centerLabel
-            labelOffsetX={0}
-            rightBarLeft={290.5}
             nodeId="2900:545"
           />
         ))}
@@ -381,10 +379,8 @@ function ProductsHeroMobile({
               <TagBadge
                 key={i}
                 label={t.text}
-                width={280}
+                width="max-content"
                 centerLabel
-                labelOffsetX={0}
-                rightBarLeft={270.5}
                 nodeId={`mobile:tags-${i}`}
               />
             ))}

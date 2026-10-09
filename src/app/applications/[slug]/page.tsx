@@ -44,7 +44,7 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
       { section: "lab_to_product", nested: ["cards"] },
       "footer_accent",
       "seo",
-      { section: "wins", nested: ["cards", "cards.buttons"] },
+      { section: "wins", nested: ["cards.buttons"] },
       { section: "model_zoo", nested: ["primary_cta", "secondary_cta", "collage_row_1", "collage_row_2"] },
     ])}`;
     

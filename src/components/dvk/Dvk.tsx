@@ -245,7 +245,6 @@ function DvkHardwareStackMobile({ data }: { data?: any }) {
   const subtitle =
     data?.subtitle ||
     "An exhaustive suite of sensors, interfaces, and debug tools pre-integrated with the GPX-10 Pro AI Processor.";
-  const label = data?.label || "The Hardware Blueprint";
   const cards =
     data?.spec_cards && Array.isArray(data?.spec_cards) && data.spec_cards.length > 0
       ? data.spec_cards.map((c: any, i: number) => ({
@@ -307,12 +306,6 @@ function DvkHardwareStackMobile({ data }: { data?: any }) {
             data-node-id="4062:10673"
           >
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-            <p
-              className={`${gilroyMedium.className} w-full text-center text-[18px] leading-[24px] text-white not-italic [word-break:break-word]`}
-              data-node-id="4062:10674"
-            >
-              {label}
-            </p>
             <div className="relative h-[294px] w-full" data-node-id="4062:10675">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img loading="lazy" decoding="async"

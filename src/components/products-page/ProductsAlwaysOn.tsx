@@ -552,7 +552,7 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
   const bgSubconscious = mediaUrl(data?.bg_subconscious_image) || BG_SUBCONSCIOUS;
   const aiCoreIcon = mediaUrl(data?.ai_core_icon) || AI_CORE_ICON;
   const hostCpuImg = mediaUrl(data?.host_cpu_image) || HOST_CPU_IMG;
-  const [surge, setSurge] = useState(true);
+  const [surge, setSurge] = useState(false);
   const toggle = () => setSurge((v) => !v);
   /* Mobile defaults to the baseline (subconscious) render — matches the
      visible picture in Figma 3565:3127. */

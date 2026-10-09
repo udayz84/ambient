@@ -475,6 +475,7 @@ export interface ApiApplicationPageApplicationPage
       'api::application-page.application-page'
     > &
       Schema.Attribute.Private;
+    model_zoo: Schema.Attribute.Component<'apps.model-zoo', false>;
     paradigm: Schema.Attribute.Component<'wearables.paradigm', false>;
     publishedAt: Schema.Attribute.DateTime;
     seo: Schema.Attribute.Component<'shared.seo', false>;
@@ -483,6 +484,7 @@ export interface ApiApplicationPageApplicationPage
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    wins: Schema.Attribute.Component<'apps.wins', false>;
   };
 }
 

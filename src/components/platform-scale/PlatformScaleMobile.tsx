@@ -10,6 +10,7 @@ import {
 } from "./platform-scale-data";
 import { useState, useCallback } from "react";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { Corners } from "../shared/Corners";
 
 const EMPTY_PRODUCT: GpxProduct = {
   id: "",
@@ -416,23 +417,39 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
         </div>
 
         {/* CTA */}
-        <a
-          href={ctaHref}
-          className={`${interMedium.className} relative mt-[31px] flex h-[48px] w-[237px] items-center justify-center shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
-        >
-          <span
-            aria-hidden
-            className="pointer-events-none absolute inset-0 rounded-[inherit] bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-          />
-          <span
-            aria-hidden
-            className="pointer-events-none absolute inset-0 overflow-hidden z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
-          />
-          <p className="relative z-10 max-w-full text-[12px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]">
-            {ctaLabel}
-          </p>
-        <GreenCtaCorners />
-        </a>
+        <div className="relative mt-[31px] flex flex-col items-center gap-[12px] w-full max-w-[340px]">
+          {ctaLabel ? (
+            <a
+              href={ctaHref}
+              className={`${interMedium.className} relative flex h-[48px] w-full min-w-[237px] items-center justify-center shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+            >
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 rounded-[inherit] bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+              />
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 overflow-hidden z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
+              />
+              <p className="relative z-10 max-w-full text-[12px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]">
+                {ctaLabel}
+              </p>
+              <GreenCtaCorners />
+            </a>
+          ) : null}
+
+          {data?.secondary_cta?.label ? (
+            <a
+              href={data.secondary_cta.href || "#"}
+              className={`${interMedium.className} relative flex h-[48px] w-full min-w-[237px] shrink-0 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] text-white hover:bg-[rgba(226,241,202,0.2)] transition-colors duration-200`}
+            >
+              <span className="text-[12px] leading-[28px] font-medium whitespace-nowrap uppercase not-italic">
+                {data.secondary_cta.label}
+              </span>
+              <Corners leftSrc="/developer/corner-58.svg" rightSrc="/developer/corner-55.svg" />
+            </a>
+          ) : null}
+        </div>
       </div>
     </div>
   );
