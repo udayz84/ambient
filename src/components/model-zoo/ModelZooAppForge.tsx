@@ -206,7 +206,7 @@ export function ModelZooAppForge({ data }: { data?: any }) {
           <div className="relative h-[327px] w-full min-w-px min-[1024px]:flex-1" data-node-id="5131:10537" data-name="Container">
             <img
               alt="ApplicationForge phone app preview on an eval kit"
-              src={(data?.phone_mockup_image ? mediaUrl(data.phone_mockup_image) : "/model-zoo/phone-mockup-new.png") || undefined}
+              src={(data?.phone_mockup_image && mediaUrl(data.phone_mockup_image)) || "/model-zoo/phone-mockup-new.png"}
               className="pointer-events-none size-full object-contain object-center"
               loading="lazy"
               decoding="async"
