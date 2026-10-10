@@ -7,7 +7,7 @@
     "displayName": "Footer",
     "description": "Site footer, newsletter, contact details, and default SEO"
   },
-  "options": { "draftAndPublish": false },
+  "options": { "draftAndPublish": true },
   "pluginOptions": {},
   "attributes": {
     "footer": { "type": "component", "repeatable": false, "component": "shared.footer" },
