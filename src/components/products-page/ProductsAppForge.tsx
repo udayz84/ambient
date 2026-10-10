@@ -26,9 +26,9 @@ const STEP_STAT: Record<ForgeStep, string> = {
   results: "/model-zoo/af-stat-results.webp",
 };
 const STEP_ICONS: Record<ForgeStep, string> = {
-  pair: "/contact/booking-icon-phone.svg",
+  pair: "/contact/booking-icon-phone-green.svg",
   flash: "/developer/pipeline-icon-deploy.svg",
-  results: "/model-zoo/icon-play.svg",
+  results: "/model-zoo/icon-play-green.svg",
 };
 const STEP_SUBTEXTS: Record<ForgeStep, string> = {
   pair: "Connect the app to your eval board in a tap.",
@@ -175,7 +175,11 @@ export function ProductsAppForge({ data }: { data?: any }) {
                   >
                     <div className="flex flex-col items-start gap-[12px] p-[24px]">
                       <div className="relative size-[32px] flex items-center justify-center opacity-80">
-                        <img src={STEP_ICONS[key]} alt="" className="max-w-[100%] max-h-[100%] object-contain" />
+                        <img 
+                          src={STEP_ICONS[key]} 
+                          alt="" 
+                          className={`max-w-[100%] max-h-[100%] object-contain ${key === 'pair' ? 'scale-125' : key === 'results' ? 'scale-150' : ''}`} 
+                        />
                       </div>
                       <div className="flex flex-col gap-[6px]">
                         <h3 className={`${gilroyMedium.className} text-[20px] leading-[24px] text-white`}>
