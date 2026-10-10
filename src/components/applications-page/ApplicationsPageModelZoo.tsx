@@ -204,6 +204,7 @@ export function ApplicationsPageModelZoo({ data }: { data?: any }) {
       </div>
 
       {/* Two-row collage carousel — identical to Model Zoo hero */}
+      {false && (
       <div className="relative z-10 mt-[60px] flex w-full flex-col gap-[16px] overflow-hidden">
         <CollageRow
           cards={COLLAGE_ROW_1}
@@ -218,6 +219,7 @@ export function ApplicationsPageModelZoo({ data }: { data?: any }) {
           duration={26}
         />
       </div>
+      )}
     </section>
   );
 }
