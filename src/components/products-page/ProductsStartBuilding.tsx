@@ -1,5 +1,8 @@
 "use client";
 
+import { useState } from "react";
+import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
+import { ProductBriefModal } from "./ProductBriefModal";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useFitText } from "../shared/FitText";
 import { mediaUrl } from "@/lib/strapi";
@@ -43,10 +46,25 @@ export function ProductsStartBuilding({ data }: { data?: any }) {
             titleLines: [titleLines[0] || "", titleLines[1] || ""],
             description: c?.description ?? fallback.description,
             cta: c?.cta_label ?? fallback.cta,
-            ctaHref: c?.cta_href ?? "#",
+            ctaHref: (c?.cta_href && c.cta_href !== "#") ? c.cta_href : (fallback.ctaHref ?? "#"),
           };
         })
       : START_CARDS;
+
+  const [modalContext, setModalContext] = useState<"evalkit" | "waitlist" | null>(null);
+
+  const handleCardClick = (ctaText: string) => {
+    const text = ctaText.toLowerCase();
+    if (text.includes("eval")) {
+      setModalContext("evalkit");
+      return true;
+    } else if (text.includes("waitlist") || text.includes("whitelist")) {
+      setModalContext("waitlist");
+      return true;
+    }
+    return false;
+  };
+
   return (
     <section className="relative z-20 mb-[-700px] min-[1024px]:mb-[-520px] w-full bg-transparent">
       {/* DESKTOP (>=1024px) */}
@@ -59,6 +77,7 @@ export function ProductsStartBuilding({ data }: { data?: any }) {
           subtitle={subtitle}
           cardBackground={cardBackground}
           cards={cards}
+          onCardClick={handleCardClick}
         />
       </div>
 
@@ -69,8 +88,20 @@ export function ProductsStartBuilding({ data }: { data?: any }) {
           subtitle={subtitle}
           cardBackground={cardBackground}
           cards={cards}
+          onCardClick={handleCardClick}
         />
       </div>
+
+      <UpcomingProductsModal
+        isOpen={modalContext === "evalkit"}
+        onClose={() => setModalContext(null)}
+        formContext="evalkit"
+      />
+      <ProductBriefModal
+        isOpen={modalContext === "waitlist"}
+        onClose={() => setModalContext(null)}
+        title="Join the Waitlist"
+      />
     </section>
   );
 }
@@ -80,11 +111,13 @@ function ProductsStartBuildingDesktop({
   subtitle,
   cardBackground,
   cards,
+  onCardClick,
 }: {
   heading: string;
   subtitle: string;
   cardBackground: string;
   cards: any[];
+  onCardClick: (cta: string) => boolean;
 }) {
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
@@ -136,6 +169,7 @@ function ProductsStartBuildingDesktop({
             key={card.nodeId}
             card={card}
             cardBackground={cardBackground}
+            onCardClick={() => onCardClick(card.cta)}
           />
         ))}
       </div>
@@ -146,9 +180,11 @@ function ProductsStartBuildingDesktop({
 function StartCardView({
   card,
   cardBackground,
+  onCardClick,
 }: {
   card: any;
   cardBackground: string;
+  onCardClick: () => boolean;
 }) {
   const fitRef = useFitText<HTMLHeadingElement>({});
   return (
@@ -200,7 +236,7 @@ function StartCardView({
             >
               {card.description}
             </p>
-            <StartCta href={card.ctaHref}>{card.cta}</StartCta>
+            <StartCta href={card.ctaHref} onClick={onCardClick}>{card.cta}</StartCta>
           </div>
         </div>
       </div>
@@ -211,13 +247,21 @@ function StartCardView({
 function StartCta({
   children,
   href,
+  onClick,
 }: {
   children: React.ReactNode;
   href: string;
+  onClick?: () => boolean;
 }) {
   return (
     <a
       href={href}
+      onClick={(e) => {
+        if (onClick) {
+          const handled = onClick();
+          if (handled) e.preventDefault();
+        }
+      }}
       className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-center overflow-hidden`}
       data-name="Cta"
     >
@@ -242,11 +286,13 @@ function ProductsStartBuildingMobile({
   subtitle,
   cardBackground,
   cards,
+  onCardClick,
 }: {
   heading: string;
   subtitle: string;
   cardBackground: string;
   cards: any[];
+  onCardClick: (cta: string) => boolean;
 }) {
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
@@ -301,7 +347,7 @@ function ProductsStartBuildingMobile({
               >
                 {card.description}
               </p>
-              <StartCta href={card.ctaHref}>{card.cta}</StartCta>
+              <StartCta href={card.ctaHref} onClick={() => onCardClick(card.cta)}>{card.cta}</StartCta>
             </div>
           </div>
         ))}

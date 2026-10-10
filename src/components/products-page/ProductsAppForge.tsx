@@ -9,6 +9,7 @@ import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { CORNER_LEFT, CORNER_RIGHT, sectionTitleGradient } from "../model-zoo/model-zoo-data";
 import { mediaUrl } from "@/lib/strapi";
 import fallbackImg from "@/../public/model-zoo/phone-mockup-new.png";
+import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 
 const TITLE_GRADIENT = sectionTitleGradient(111.766);
 
@@ -60,6 +61,7 @@ export function ProductsAppForge({ data }: { data?: any }) {
   const { fadeRef: articleRef, isVisible: articleVisible } = useFadeIn<HTMLDivElement>();
   const { fadeRef: forgeRef, isVisible: forgeVisible } = useFadeIn<HTMLDivElement>();
   const [activeStep, setActiveStep] = useState<ForgeStep | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
@@ -252,10 +254,11 @@ export function ProductsAppForge({ data }: { data?: any }) {
         </div>
 
         {/* Request CTA — 5131:10555 (293×48, centered). */}
-        <div className="relative mt-[30px] flex justify-center pb-[63px]">
+        <div className="relative mt-[30px] flex justify-center pb-[63px] z-50 pointer-events-auto">
           <a
             href={data?.cta?.href || "#"}
-            className="shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] relative flex h-[48px] min-w-[293px] px-[24px] shrink-0 items-center justify-center"
+            onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }}
+            className="shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] relative flex h-[48px] min-w-[293px] px-[24px] shrink-0 items-center justify-center cursor-pointer"
             data-node-id="5131:10556"
             data-name="Cta"
           >
@@ -268,6 +271,12 @@ export function ProductsAppForge({ data }: { data?: any }) {
           </a>
         </div>
       </div>
+
+      <UpcomingProductsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        formContext="evalkit"
+      />
     </section>
   );
 }

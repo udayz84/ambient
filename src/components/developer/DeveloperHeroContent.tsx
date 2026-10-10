@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import { ProductBriefModal } from "../products-page/ProductBriefModal";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
@@ -32,8 +34,10 @@ export function DeveloperHeroContent({ data }: { data?: any }) {
     data?.secondary_button?.label || DEFAULT_SECONDARY_LABEL;
   const secondaryHref = data?.secondary_button?.href || "#";
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+  const [isDocumentationOpen, setIsDocumentationOpen] = useState(false);
   return (
-    <div
+    <>
+      <div
       className="relative flex shrink-0 flex-col items-start gap-[24px]"
       data-node-id="2438:4563"
     >
@@ -76,9 +80,16 @@ export function DeveloperHeroContent({ data }: { data?: any }) {
         data-node-id="2438:4572"
       >
         <PrimaryCta href={primaryHref}>{primaryLabel}</PrimaryCta>
-        <SecondaryCta href={secondaryHref}>{secondaryLabel}</SecondaryCta>
+        <SecondaryCta href={secondaryHref} onClick={() => setIsDocumentationOpen(true)}>{secondaryLabel}</SecondaryCta>
       </div>
     </div>
+    
+    <ProductBriefModal
+      isOpen={isDocumentationOpen}
+      onClose={() => setIsDocumentationOpen(false)}
+      title="Read the Documentation"
+    />
+    </>
   );
 }
 
@@ -116,13 +127,21 @@ function PrimaryCta({
 function SecondaryCta({
   children,
   href,
+  onClick,
 }: {
   children: React.ReactNode;
   href: string;
+  onClick?: () => void;
 }) {
   return (
     <a
       href={href}
+      onClick={(e) => {
+        if (onClick) {
+          e.preventDefault();
+          onClick();
+        }
+      }}
       className={`${gilroyMedium.className} relative flex h-[48px] w-[249px] shrink-0 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
       data-node-id="2438:4580"
     >

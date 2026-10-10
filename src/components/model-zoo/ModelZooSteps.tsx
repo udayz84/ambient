@@ -6,6 +6,8 @@ import { getFadeInClass, useFadeIn } from "../shared/useFadeIn";
 import { Corners } from "../shared/Corners";
 import { CtaPrimary, CtaSecondary } from "./ModelZooCtas";
 import { CORNER_LEFT, CORNER_RIGHT, sectionTitleGradient } from "./model-zoo-data";
+import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
+import { useState } from "react";
 
 const TITLE_GRADIENT = sectionTitleGradient(111.766);
 
@@ -123,6 +125,8 @@ function StepCard({ step }: { step: (typeof STEPS)[number] }) {
  * (1256-wide content at page x=92; y=5203, h=943).
  */
 export function ModelZooSteps() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <section
       className="relative mt-[84px] w-full"
@@ -186,11 +190,17 @@ export function ModelZooSteps() {
         </div>
 
         {/* CTAs — 5131:10665 (centered: 251+24+174 = 449 wide in the 1256 container) */}
-        <div className="mt-[24px] flex flex-wrap items-start justify-center gap-[24px] min-[1024px]:mt-[42px]" data-node-id="5131:10665">
+        <div className="mt-[24px] flex flex-wrap items-start justify-center gap-[24px] min-[1024px]:mt-[42px] z-50 pointer-events-auto" data-node-id="5131:10665">
           <CtaPrimary label="Explore the Developer Hub" width={251} />
-          <CtaSecondary label="Request the SDK" width={174} />
+          <CtaSecondary label="Request the SDK" width={174} onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }} />
         </div>
       </div>
+
+      <UpcomingProductsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        formContext="sdk"
+      />
     </section>
   );
 }

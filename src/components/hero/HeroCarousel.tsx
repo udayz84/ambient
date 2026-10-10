@@ -7,6 +7,7 @@ import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
 import { gilroyMedium, gilroySemiBold, interRegular } from "./fonts";
 import { mediaUrl } from "@/lib/strapi";
+import { UpcomingProductsModal } from "./UpcomingProductsModal";
 
 /* ---------------------------------------------------------------------------
  * Hero carousel — slide 1 is the existing Hero; slides 2+ are announcement
@@ -91,10 +92,11 @@ function cmsAnnouncements(
     .filter((a) => a.ctas.length > 0);
 }
 
-function AnnouncementCtaButton({ cta }: { cta: AnnouncementCta }) {
+function AnnouncementCtaButton({ cta, onClick }: { cta: AnnouncementCta; onClick: (href: string, e: React.MouseEvent) => void }) {
   return (
     <a
       href={cta.href}
+      onClick={(e) => onClick(cta.href, e)}
       className={`${cta.primary ? gilroySemiBold.className : interRegular.className} relative flex h-[42px] shrink-0 items-center justify-center px-[24px] text-[14px] leading-[normal] font-medium uppercase tracking-[-0.42px] whitespace-nowrap transition-opacity hover:opacity-90 ${
         cta.primary
           ? "text-white shadow-[0px_42px_107px_0px_rgba(83,216,36,0.2),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15)]"
@@ -182,8 +184,15 @@ function AnnouncementSlide({ announcement }: { announcement: Announcement }) {
             {announcement.subtitle}
           </p>
           <div className="mt-[15px] flex items-center gap-[16px]">
-            {announcement.ctas.map((cta) => (
-              <AnnouncementCtaButton key={cta.label} cta={cta} />
+            {announcement.ctas.map((cta, i) => (
+              <AnnouncementCtaButton key={cta.label} cta={cta} onClick={(href, e) => {
+                const text = cta.label.toUpperCase();
+                if (text.includes("UPCOMING") || text.includes("SIGN UP") || text.includes("SIGNUP") || (i === 1 && !cta.primary && !text.includes("SHOWING") && !text.includes("EXPLORE"))) {
+                  e.preventDefault();
+                  const event = new CustomEvent('open-upcoming-products-modal');
+                  window.dispatchEvent(event);
+                }
+              }} />
             ))}
           </div>
         </div>
@@ -208,8 +217,15 @@ function AnnouncementSlide({ announcement }: { announcement: Announcement }) {
           {announcement.subtitle}
         </p>
         <div className="mt-[15px] flex flex-col items-start gap-[12px]">
-          {announcement.ctas.map((cta) => (
-            <AnnouncementCtaButton key={cta.label} cta={cta} />
+          {announcement.ctas.map((cta, i) => (
+            <AnnouncementCtaButton key={cta.label} cta={cta} onClick={(href, e) => {
+              const text = cta.label.toUpperCase();
+              if (text.includes("UPCOMING") || text.includes("SIGN UP") || text.includes("SIGNUP") || (i === 1 && !cta.primary && !text.includes("SHOWING") && !text.includes("EXPLORE"))) {
+                e.preventDefault();
+                const event = new CustomEvent('open-upcoming-products-modal');
+                window.dispatchEvent(event);
+              }
+            }} />
           ))}
         </div>
       </div>
@@ -220,6 +236,13 @@ function AnnouncementSlide({ announcement }: { announcement: Announcement }) {
 export function HeroCarousel({ data }: { data?: any }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    const handleOpenModal = () => setIsModalOpen(true);
+    window.addEventListener('open-upcoming-products-modal', handleOpenModal);
+    return () => window.removeEventListener('open-upcoming-products-modal', handleOpenModal);
+  }, []);
 
   const cmsSlides = cmsAnnouncements(data);
   const announcements = cmsSlides.length > 0 ? cmsSlides : ANNOUNCEMENTS;
@@ -291,6 +314,11 @@ export function HeroCarousel({ data }: { data?: any }) {
           />
         ))}
       </div>
+
+      <UpcomingProductsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   );
 }

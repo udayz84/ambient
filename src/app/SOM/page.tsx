@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { SomHero } from "@/components/som-page/SomHero";
 import { SomFeatures } from "@/components/som-page/SomFeatures";
 import { SomFamily } from "@/components/som-page/SomFamily";
+import { SomOneModule } from "@/components/som-page/SomOneModule";
 
 import { SomEcosystem } from "@/components/som-page/SomEcosystem";
 
@@ -57,6 +58,7 @@ export default async function SomPage() {
       <SomHero data={data?.hero} />
       <SomFeatures data={data?.features} />
       <SomFamily data={data?.family} />
+      <SomOneModule data={data?.one_module} />
       <SomDeployPath data={data?.deploy_path} />
       {/* <SomEcosystem data={data?.ecosystem} /> */}
 

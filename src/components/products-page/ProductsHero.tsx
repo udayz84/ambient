@@ -8,6 +8,8 @@ import { Corners } from "../shared/Corners";
 import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
 import { TagBadge } from "../hero/TagBadge";
 import { ProductsScrollIndicator } from "./ProductsScrollIndicator";
+import { ProductBriefModal } from "./ProductBriefModal";
+import { useState } from "react";
 import {
   COIN_BG,
   COIN_FG,
@@ -48,6 +50,8 @@ export function ProductsHero({ data }: { data?: any }) {
   const chipsetImage = mediaUrl(data?.chipset_image);
   const chipsetImageMobile = mediaUrl(data?.chipset_image_mobile) || chipsetImage;
   const strapiTags = Array.isArray(data?.tags) ? data.tags : [];
+  const [briefModalTitle, setBriefModalTitle] = useState("");
+
   return (
     <>
       {/* DESKTOP (>=1024px) — hero canvas, source of truth (Figma 2900:418) */}
@@ -76,6 +80,10 @@ export function ProductsHero({ data }: { data?: any }) {
             primary={primary}
             secondary={secondary}
             strapiTags={strapiTags}
+            onCtaClick={(e, label) => {
+              e.preventDefault();
+              setBriefModalTitle(label);
+            }}
           />
         </div>
         {/* Blend the coin image's bright right edge into black on screens
@@ -98,6 +106,16 @@ export function ProductsHero({ data }: { data?: any }) {
         secondary={secondary}
         chipsetImage={chipsetImageMobile}
         strapiTags={strapiTags}
+        onCtaClick={(e, label) => {
+          e.preventDefault();
+          setBriefModalTitle(label);
+        }}
+      />
+
+      <ProductBriefModal
+        isOpen={!!briefModalTitle}
+        title={briefModalTitle}
+        onClose={() => setBriefModalTitle("")}
       />
     </>
   );
@@ -109,12 +127,14 @@ function ProductsHeroDesktop({
   primary,
   secondary,
   strapiTags,
+  onCtaClick,
 }: {
   titleLines: string[];
   subtitle: string;
   primary: { label: string; href: string };
   secondary: { label: string; href: string };
   strapiTags: any[];
+  onCtaClick: (e: React.MouseEvent, label: string) => void;
 }) {
   const fitRef = useFitText<HTMLHeadingElement>({});
   return (
@@ -250,8 +270,8 @@ function ProductsHeroDesktop({
         data-node-id="2900:572"
         data-name="Frame 1984079464"
       >
-        <PrimaryCta href={primary.href}>{primary.label}</PrimaryCta>
-        <SecondaryCta href={secondary.href}>{secondary.label}</SecondaryCta>
+        <PrimaryCta href={primary.href} label={primary.label} onClick={onCtaClick}>{primary.label}</PrimaryCta>
+        <SecondaryCta href={secondary.href} label={secondary.label} onClick={onCtaClick}>{secondary.label}</SecondaryCta>
       </div>
 
       {/* Scroll indicator — 2900:460 (left=1335.5, top=696) */}
@@ -264,13 +284,18 @@ function ProductsHeroDesktop({
 function PrimaryCta({
   children,
   href,
+  label,
+  onClick,
 }: {
   children: React.ReactNode;
   href: string;
+  label: string;
+  onClick?: (e: React.MouseEvent, label: string) => void;
 }) {
   return (
     <a
       href={href}
+      onClick={onClick ? (e) => onClick(e, label) : undefined}
       className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-auto min-w-[223px] px-[24px] shrink-0 items-center justify-center overflow-hidden`}
       data-node-id="2900:573"
       data-name="Cta"
@@ -295,13 +320,18 @@ function PrimaryCta({
 function SecondaryCta({
   children,
   href,
+  label,
+  onClick,
 }: {
   children: React.ReactNode;
   href: string;
+  label: string;
+  onClick?: (e: React.MouseEvent, label: string) => void;
 }) {
   return (
     <a
       href={href}
+      onClick={onClick ? (e) => onClick(e, label) : undefined}
       className={`${gilroyMedium.className} relative flex h-[48px] w-auto min-w-[255px] shrink-0 items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
       style={{ backgroundColor: SECONDARY_CTA_BG }}
       data-node-id="2900:584"
@@ -322,6 +352,7 @@ function ProductsHeroMobile({
   secondary,
   chipsetImage,
   strapiTags,
+  onCtaClick,
 }: {
   titleLines: string[];
   subtitle: string;
@@ -329,6 +360,7 @@ function ProductsHeroMobile({
   secondary: { label: string; href: string };
   chipsetImage: string | null;
   strapiTags: any[];
+  onCtaClick: (e: React.MouseEvent, label: string) => void;
 }) {
   const fitRef = useFitText<HTMLHeadingElement>({});
   return (
@@ -426,6 +458,7 @@ function ProductsHeroMobile({
           <div className="flex w-full flex-col gap-[16px]">
             <a
               href={primary.href}
+              onClick={(e) => onCtaClick(e, primary.label)}
               className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-hidden`}
             >
               <span
@@ -444,6 +477,7 @@ function ProductsHeroMobile({
             </a>
             <a
               href={secondary.href}
+              onClick={(e) => onCtaClick(e, secondary.label)}
               className={`${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
               style={{ backgroundColor: SECONDARY_CTA_BG }}
             >

@@ -48,7 +48,7 @@ export function ProductsBenchToVolume({ data }: { data?: any }) {
             title: c?.title ?? fallback.title,
             description: c?.description ?? fallback.description,
             cta: c?.cta_label ?? fallback.cta,
-            ctaHref: c?.cta_href ?? "#",
+            ctaHref: (c?.cta_href && c.cta_href !== "#") ? c.cta_href : (fallback.ctaHref ?? "#"),
             ctaWidth: fallback.ctaWidth,
             image: mediaUrl(c?.image) || fallback.image,
             chipLabel: c?.chip_label ?? fallback.chipLabel ?? chipLabel,

@@ -1,5 +1,9 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element */
 
+import { useState } from "react";
+import { ProductBriefModal } from "../products-page/ProductBriefModal";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
@@ -16,6 +20,7 @@ const FALLBACK_SUBTITLE =
 const FALLBACK_CTA_LABEL = "Join the Waitlist";
 
 export function SomFooterMerge({ data }: { data?: any }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const image = FALLBACK_IMAGE;
   const heading = data?.heading || FALLBACK_HEADING;
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
@@ -58,6 +63,10 @@ export function SomFooterMerge({ data }: { data?: any }) {
             </p>
             <a
               href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsModalOpen(true);
+              }}
               className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[231px] shrink-0 items-center justify-center`}
             >
               <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
@@ -90,6 +99,10 @@ export function SomFooterMerge({ data }: { data?: any }) {
           </p>
           <a
             href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              setIsModalOpen(true);
+            }}
             className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center`}
           >
             <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
@@ -101,6 +114,12 @@ export function SomFooterMerge({ data }: { data?: any }) {
           </a>
         </div>
       </div>
+      
+      <ProductBriefModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Join the Waitlist"
+      />
     </div>
   );
 }

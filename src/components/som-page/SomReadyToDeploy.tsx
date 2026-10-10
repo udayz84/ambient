@@ -1,4 +1,8 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element */
+import { useState } from "react";
+import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, gilroySemiBold, interRegular, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
@@ -28,10 +32,16 @@ const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
 
 /** Green CTA — Figma 2438:5362 (262×48). */
-function RequestCta({ label, href }: { label: string; href?: string }) {
+function RequestCta({ label, href, onClick }: { label: string; href?: string; onClick?: () => void }) {
   return (
     <a
       href={href || "#"}
+      onClick={(e) => {
+        if (onClick) {
+          e.preventDefault();
+          onClick();
+        }
+      }}
       className={`relative flex h-[48px] w-[262px] shrink-0 items-center justify-center ${GREEN_CTA_SHADOW}`}
       data-node-id="2438:5362"
       data-name="Cta"
@@ -100,6 +110,8 @@ function ChipImage({ className, src }: { className?: string; src: string }) {
 }
 
 export function SomReadyToDeploy({ data }: { data?: any }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const subtitle = data?.subtitle || SUBTITLE;
   const heading = data?.heading || "Ready to deploy?";
   const ctaLabel = data?.primary_cta_label || CTA_LABEL;
@@ -176,7 +188,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
               {description}
             </p>
             <div className="flex flex-col gap-[12px]">
-              <RequestCta label={ctaLabel} href={ctaHref} />
+              <RequestCta label={ctaLabel} href={ctaHref} onClick={() => setIsModalOpen(true)} />
               {secondaryCtaLabel && (
                 <SecondaryCta label={secondaryCtaLabel} href={secondaryCtaLink} />
               )}
@@ -284,6 +296,10 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
             <div className="flex flex-col gap-[12px] items-center">
               <a
                 href={ctaHref || "#"}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsModalOpen(true);
+                }}
                 className={`relative flex h-[48px] w-[231px] shrink-0 items-center justify-center ${GREEN_CTA_SHADOW}`}
                 data-name="Cta"
               >
@@ -321,6 +337,11 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
           />
         </div>
       </div>
+      <UpcomingProductsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        formContext="som"
+      />
     </section>
   );
 }

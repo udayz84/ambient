@@ -64,14 +64,17 @@ export function CtaSecondary({
   label,
   href = "#",
   width,
+  onClick,
 }: {
   label: string;
   href?: string;
   width?: number;
+  onClick?: (e: React.MouseEvent) => void;
 }) {
   return (
     <a
       href={href}
+      onClick={onClick}
       className={`${gilroyMedium.className} relative flex h-[48px] shrink-0 items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] transition-colors hover:bg-[rgba(226,241,202,0.2)]`}
       style={width ? { width } : undefined}
       data-name="CTA - Secondary"

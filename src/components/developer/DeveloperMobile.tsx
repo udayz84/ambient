@@ -6,6 +6,7 @@ import { useFitText } from "../shared/FitText";
 import { dmMono, gilroyMedium, interBold, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { Corners } from "../shared/Corners";
+import { ProductBriefModal } from "../products-page/ProductBriefModal";
 import { mediaUrl } from "@/lib/strapi";
 import {
   ADD_ICON,
@@ -134,6 +135,7 @@ function DeveloperHeroMobile({ data }: { data?: any }) {
   const secondaryHref = data?.secondary_button?.href || "#";
   const bgImg = mediaUrl(data?.background_image) || "/developer/hero-bg-3.webp";
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+  const [isDocumentationOpen, setIsDocumentationOpen] = useState(false);
   return (
     <section className="relative flex w-full flex-col items-center pt-[20px]">
       {/* Content block — 4032:21985 (x20 y0 w352 h193) */}
@@ -206,6 +208,10 @@ function DeveloperHeroMobile({ data }: { data?: any }) {
         {/* Secondary CTA — 4032:22008 (w263 h48) */}
         <a
           href={secondaryHref}
+          onClick={(e) => {
+            e.preventDefault();
+            setIsDocumentationOpen(true);
+          }}
           className={`${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
         >
           <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
@@ -214,6 +220,12 @@ function DeveloperHeroMobile({ data }: { data?: any }) {
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
         </a>
       </div>
+      
+      <ProductBriefModal
+        isOpen={isDocumentationOpen}
+        onClose={() => setIsDocumentationOpen(false)}
+        title="Read the Documentation"
+      />
     </section>
   );
 }

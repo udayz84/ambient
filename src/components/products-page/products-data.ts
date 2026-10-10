@@ -758,6 +758,7 @@ export type BenchCard = {
   cta: string;
   ctaWidth: number;
   image?: string;
+  ctaHref?: string;
 };
 
 export const BENCH_CARDS: BenchCard[] = [
@@ -785,6 +786,7 @@ export const BENCH_CARDS: BenchCard[] = [
     title: "GPX10 Pro Silicon",
     description: "The raw SoC for high-volume production.",
     cta: "Talk to Sales",
+    ctaHref: "/contact#sales-form",
     ctaWidth: 177,
     image: "/products page/3.png",
   },
@@ -815,6 +817,7 @@ export type StartCard = {
   titleLines: [string, string];
   description: string;
   cta: string;
+  ctaHref?: string;
 };
 
 export const START_CARDS: StartCard[] = [
@@ -831,5 +834,6 @@ export const START_CARDS: StartCard[] = [
     description:
       "Be the first to access our upcoming Vision, Sound, and Industrial modules.",
     cta: "Talk to Sales",
+    ctaHref: "/contact#sales-form",
   },
 ];

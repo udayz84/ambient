@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
 import { DvkScrollIndicator } from "./DvkScrollIndicator";
+import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
@@ -31,6 +33,7 @@ const DEFAULT_BG = "/dvk/hero-bg-2.webp";
  * Scroll indicator 2761:3005 (1335.387, 616.033 / 18×75)
  */
 export function DvkHero({ data }: { data?: any }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const title = data?.title || DEFAULT_TITLE;
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
@@ -207,19 +210,30 @@ export function DvkHero({ data }: { data?: any }) {
             data-node-id="2761:2987"
             data-name="Frame 1984079464"
           >
-            <PrimaryCta>{ctaLabel}</PrimaryCta>
+            <PrimaryCta onClick={() => setIsModalOpen(true)}>{ctaLabel}</PrimaryCta>
           </div>
         </div>
       </div>
-
+      
+      <UpcomingProductsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        formContext="evalkit"
+      />
     </>
   );
 }
 
-function PrimaryCta({ children }: { children: React.ReactNode }) {
+function PrimaryCta({ children, onClick }: { children: React.ReactNode; onClick?: () => void }) {
   return (
     <a
       href="#"
+      onClick={(e) => {
+        if (onClick) {
+          e.preventDefault();
+          onClick();
+        }
+      }}
       className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[229px] shrink-0 items-center justify-center`}
       data-node-id="2761:2988"
       data-name="Cta"

@@ -441,6 +441,13 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
           {data?.secondary_cta?.label ? (
             <a
               href={data.secondary_cta.href || "#"}
+              onClick={(e) => {
+                const text = data.secondary_cta.label.toUpperCase();
+                if (text.includes("UPCOMING") || text.includes("SIGN UP") || text.includes("SIGNUP")) {
+                  e.preventDefault();
+                  window.dispatchEvent(new CustomEvent('open-upcoming-products-modal'));
+                }
+              }}
               className={`${interMedium.className} relative flex h-[48px] w-full min-w-[237px] shrink-0 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] text-white hover:bg-[rgba(226,241,202,0.2)] transition-colors duration-200`}
             >
               <span className="text-[12px] leading-[28px] font-medium whitespace-nowrap uppercase not-italic">

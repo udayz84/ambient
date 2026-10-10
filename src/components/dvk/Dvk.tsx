@@ -1,9 +1,13 @@
+"use client";
+
+import { useState } from "react";
 import { gilroyMedium, interRegular, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { DvkHero } from "./DvkHero";
 import { DvkScrollIndicator } from "./DvkScrollIndicator";
 import { SomInsideModule } from "@/components/som-page/SomInsideModule";
 import { SomPrototypeTitleDesktop, SomPrototypeTitleMobile } from "@/components/som-page/SomPrototypeTitle";
+import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 
 import { ModelZooAppForge } from "@/components/model-zoo/ModelZooAppForge";
 import { SPEC_CARDS } from "./dvk-data";
@@ -116,6 +120,7 @@ export function Dvk({ data }: { data?: any }) {
  * CTA 4059:10016 (72, 652 / 250×48)
  */
 function DvkHeroMobile({ data }: { data?: any }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const title =
     data?.title || "The physical launchpad for microwatt Edge AI.";
   const subtitle =
@@ -210,6 +215,10 @@ function DvkHeroMobile({ data }: { data?: any }) {
       <div className="absolute bottom-0 left-[calc(50%+0.5px)] z-10 w-[250px] -translate-x-1/2">
         <a
           href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            setIsModalOpen(true);
+          }}
           className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[250px] shrink-0 items-center justify-center`}
           data-node-id="4059:10017"
           data-name="Cta"
@@ -228,6 +237,12 @@ function DvkHeroMobile({ data }: { data?: any }) {
           <GreenCtaCorners />
         </a>
       </div>
+      
+      <UpcomingProductsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        formContext="evalkit"
+      />
     </section>
   );
 }

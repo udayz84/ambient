@@ -1,3 +1,5 @@
+"use client";
+
 import { interMedium } from "../hero/fonts";
 import { RepelDots } from "../shared/RepelDots";
 import { Corners } from "../shared/Corners";
@@ -44,6 +46,13 @@ export function PlatformScaleCta({ data }: { data?: any }) {
       {secLabel ? (
         <a
           href={secHref}
+          onClick={(e) => {
+            const text = secLabel.toUpperCase();
+            if (text.includes("UPCOMING") || text.includes("SIGN UP") || text.includes("SIGNUP")) {
+              e.preventDefault();
+              window.dispatchEvent(new CustomEvent('open-upcoming-products-modal'));
+            }
+          }}
           className={`${interMedium.className} relative flex h-[60px] min-w-[320px] w-auto px-[32px] shrink-0 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] text-white hover:bg-[rgba(226,241,202,0.2)] transition-colors duration-200`}
         >
           <span className="text-[18px] leading-[32px] tracking-[0.04em] font-medium whitespace-nowrap uppercase not-italic">

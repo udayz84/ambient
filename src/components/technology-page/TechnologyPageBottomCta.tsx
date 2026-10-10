@@ -1,5 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
+import { ProductBriefModal } from "../products-page/ProductBriefModal";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { MobileTitleCorners } from "./mobile-shared";
@@ -25,6 +29,7 @@ type CardData = {
   body: string;
   cta: string;
   ctaHref: string;
+  onClick?: () => void;
 };
 
 const FALLBACK_CARDS: CardData[] = [
@@ -33,14 +38,14 @@ const FALLBACK_CARDS: CardData[] = [
     titleLines: ["Get an", "Evaluation Kit."],
     body: "Explore how Ambient AI can unlock new capabilities in your wearable product. Strategic planning session with our applications team.",
     cta: "Request Eval Kit",
-    ctaHref: "/contact",
+    ctaHref: "/dvk",
   },
   {
     nodeId: "2995:1275",
     titleLines: ["Scale to increase", "the volume."],
     body: "Be the first to access our upcoming Vision, Sound, and Industrial modules.",
     cta: "Talk to Sales",
-    ctaHref: "/contact",
+    ctaHref: "/contact#sales-form",
   },
 ];
 
@@ -103,6 +108,12 @@ function CtaCard({
             </p>
             <a
               href={card.ctaHref}
+              onClick={(e) => {
+                if (card.onClick) {
+                  e.preventDefault();
+                  card.onClick();
+                }
+              }}
               className={`${gilroyMedium.className} ${GREEN_CTA_SHADOW} relative block h-[48px] w-full shrink-0`}
             >
               <span
@@ -126,6 +137,7 @@ function CtaCard({
 }
 
 export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
+  const [isEvalModalOpen, setIsEvalModalOpen] = useState(false);
   const sectionTitle = data?.heading || FALLBACK_SECTION_TITLE;
   const sectionSubtitle = data?.subtitle || FALLBACK_SECTION_SUBTITLE;
   const outlineSrc = mediaUrl(data?.card_outline) || CARD_OUTLINE;
@@ -146,10 +158,14 @@ export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
             ],
             body: (c?.description as string) || fb.body,
             cta: (c?.cta_label as string) || fb.cta,
-            ctaHref: (c?.cta_href as string) || fb.ctaHref,
+            ctaHref: i === 0 ? "#" : (i === 1 ? "/contact#sales-form" : fb.ctaHref),
+            onClick: i === 0 ? () => setIsEvalModalOpen(true) : undefined,
           };
         })
-      : FALLBACK_CARDS;
+      : FALLBACK_CARDS.map((fb, i) => ({
+          ...fb,
+          onClick: i === 0 ? () => setIsEvalModalOpen(true) : undefined,
+        }));
 
   return (
     <section
@@ -254,6 +270,12 @@ export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
                   </p>
                   <a
                     href={card.ctaHref}
+                    onClick={(e) => {
+                      if (card.onClick) {
+                        e.preventDefault();
+                        card.onClick();
+                      }
+                    }}
                     className={`${gilroyMedium.className} ${MOBILE_CTA_SHADOW} relative block h-[30.343px] w-full shrink-0`}
                   >
                     <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
@@ -269,6 +291,12 @@ export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
           ))}
         </div>
       </div>
+      
+      <ProductBriefModal
+        isOpen={isEvalModalOpen}
+        onClose={() => setIsEvalModalOpen(false)}
+        title="Get an Evaluation Kit"
+      />
     </section>
   );
 }

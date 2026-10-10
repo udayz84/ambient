@@ -1,4 +1,8 @@
+"use client";
+
+import { useState } from "react";
 import { mediaUrl } from "@/lib/strapi";
+import { ProductBriefModal } from "../products-page/ProductBriefModal";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
@@ -23,14 +27,22 @@ function ReadWhitepaperCta({
   fullWidth = false,
   label,
   href = "#",
+  onClick,
 }: {
   fullWidth?: boolean;
   label: string;
   href?: string;
+  onClick?: () => void;
 }) {
   return (
     <a
       href={href}
+      onClick={(e) => {
+        if (onClick) {
+          e.preventDefault();
+          onClick();
+        }
+      }}
       className={`${gilroyMedium.className} ${GREEN_CTA_SHADOW} relative block h-[48px] ${fullWidth ? "w-full" : "w-[223px]"} shrink-0`}
       data-node-id="2931:1448"
       data-name="Cta"
@@ -55,14 +67,22 @@ function WatchExplainerCta({
   fullWidth = false,
   label,
   href = "#",
+  onClick,
 }: {
   fullWidth?: boolean;
   label: string;
   href?: string;
+  onClick?: () => void;
 }) {
   return (
     <a
       href={href}
+      onClick={(e) => {
+        if (onClick) {
+          e.preventDefault();
+          onClick();
+        }
+      }}
       className={`${gilroyMedium.className} relative block h-[48px] ${fullWidth ? "w-full" : "w-[263px]"} shrink-0 border border-white/20 bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
       data-node-id="2931:1459"
       data-name="CTA - Secondary"
@@ -76,6 +96,8 @@ function WatchExplainerCta({
 }
 
 export function TechnologyPageHero({ data }: { data?: any } = {}) {
+  const [isWhitepaperOpen, setIsWhitepaperOpen] = useState(false);
+  const [isExplainerOpen, setIsExplainerOpen] = useState(false);
   const tagText = data?.tag?.text || FALLBACK_TAG;
   const titleText = data?.title || FALLBACK_TITLE;
   const descText = data?.subtitle || FALLBACK_DESCRIPTION;
@@ -162,8 +184,8 @@ export function TechnologyPageHero({ data }: { data?: any } = {}) {
             data-node-id="2931:1447"
             data-name="Frame 1984079464"
           >
-            <ReadWhitepaperCta label={primaryLabel} href={primaryHref} />
-            <WatchExplainerCta label={secondaryLabel} href={secondaryHref} />
+            <ReadWhitepaperCta label={primaryLabel} href={primaryHref} onClick={() => setIsWhitepaperOpen(true)} />
+            <WatchExplainerCta label={secondaryLabel} href={secondaryHref} onClick={() => setIsExplainerOpen(true)} />
           </div>
         </div>
         </div>
@@ -250,15 +272,28 @@ export function TechnologyPageHero({ data }: { data?: any } = {}) {
               fullWidth
               label={primaryLabel}
               href={primaryHref}
+              onClick={() => setIsWhitepaperOpen(true)}
             />
             <WatchExplainerCta
               fullWidth
               label={secondaryLabel}
               href={secondaryHref}
+              onClick={() => setIsExplainerOpen(true)}
             />
           </div>
         </div>
       </div>
+      
+      <ProductBriefModal 
+        isOpen={isWhitepaperOpen}
+        onClose={() => setIsWhitepaperOpen(false)}
+        title="Read the Whitepaper"
+      />
+      <ProductBriefModal 
+        isOpen={isExplainerOpen}
+        onClose={() => setIsExplainerOpen(false)}
+        title="Watch the 3-min Explainer"
+      />
     </section>
   );
 }

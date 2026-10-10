@@ -8,6 +8,7 @@ import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { TagBadge } from "../hero/TagBadge";
 import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
 import { Corners } from "../shared/Corners";
+import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   CORNER_LEFT,
@@ -112,6 +113,7 @@ export function ProductsUseCases({ data }: { data?: any }) {
 
   const [activeIdx, setActiveIdx] = useState(0);
   const [direction, setDirection] = useState(1);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const activeTab = allTabs[activeIdx] || allTabs[0];
   const activeImage = activeTab?.image || "/products/use-case-image.webp";
   const cards = activeTab?.featureCards || USECASE_CARDS;
@@ -184,6 +186,7 @@ export function ProductsUseCases({ data }: { data?: any }) {
               cards={cards}
               primary={primary}
               secondary={secondary}
+              onSecondaryCtaClick={() => setIsModalOpen(true)}
             />
           </div>
         </div>
@@ -201,6 +204,13 @@ export function ProductsUseCases({ data }: { data?: any }) {
         cards={cards}
         primary={primary}
         secondary={secondary}
+        onSecondaryCtaClick={() => setIsModalOpen(true)}
+      />
+
+      <UpcomingProductsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        formContext="usecase"
       />
     </>
   );
@@ -237,6 +247,7 @@ function ProductsUseCasesDesktop({
   cards,
   primary,
   secondary,
+  onSecondaryCtaClick,
 }: any) {
   const fitRef = useFitText<HTMLHeadingElement>({});
   return (
@@ -427,13 +438,13 @@ function ProductsUseCasesDesktop({
       {/* CTA row — 2901:2143 */}
       {!activeTab.isBuild && (
         <div
-          className="absolute flex items-start gap-[24px]"
+          className="absolute flex items-start gap-[24px] z-50 pointer-events-auto"
           style={{ left: 487, top: 873 }}
           data-node-id="2901:2143"
           data-name="Frame 1984079464"
         >
           <PrimaryCta href={primary.href}>{primary.label}</PrimaryCta>
-          <SecondaryCta href={secondary.href}>{secondary.label}</SecondaryCta>
+          <SecondaryCta href={secondary.href} onClick={(e) => { e.preventDefault(); onSecondaryCtaClick(); }}>{secondary.label}</SecondaryCta>
         </div>
       )}
     </>
@@ -628,13 +639,16 @@ function PrimaryCta({
 function SecondaryCta({
   children,
   href,
+  onClick,
 }: {
   children: React.ReactNode;
   href: string;
+  onClick?: (e: React.MouseEvent) => void;
 }) {
   return (
     <a
       href={href}
+      onClick={onClick}
       className={`${gilroyMedium.className} relative flex h-[48px] shrink-0 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] min-w-[227px] w-max px-[32px]`}
       style={{ backgroundColor: SECONDARY_CTA_BG }}
       data-node-id="2901:2155"
@@ -659,6 +673,7 @@ function ProductsUseCasesMobile({
   cards,
   primary,
   secondary,
+  onSecondaryCtaClick,
 }: any) {
   const handlePrev = () => {
     onSelect((activeIdx - 1 + tabs.length) % tabs.length);
@@ -818,7 +833,7 @@ function ProductsUseCasesMobile({
 
       {/* CTAs - side-by-side */}
       {!activeTab.isBuild && (
-        <div className="mt-[32px] flex flex-row gap-[8px] w-full max-w-[343px] mx-auto">
+        <div className="mt-[32px] flex flex-row gap-[8px] w-full max-w-[343px] mx-auto relative z-50 pointer-events-auto">
           <a
             href={primary.href}
             className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center overflow-hidden`}
@@ -839,6 +854,7 @@ function ProductsUseCasesMobile({
           </a>
           <a
             href={secondary.href}
+            onClick={(e) => { e.preventDefault(); onSecondaryCtaClick(); }}
             className={`${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
             style={{ backgroundColor: SECONDARY_CTA_BG }}
           >

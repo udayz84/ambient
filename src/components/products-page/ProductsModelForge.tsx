@@ -7,6 +7,8 @@ import { useFitText } from "../shared/FitText";
 import { TagBadge } from "../hero/TagBadge";
 import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
+import { useState } from "react";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
@@ -84,6 +86,7 @@ export function ProductsModelForge({ data }: { data?: any }) {
     label: data?.secondary_button?.label ?? FALLBACK_SECONDARY.label,
     href: data?.secondary_button?.href ?? FALLBACK_SECONDARY.href,
   };
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const steps =
     Array.isArray(data?.steps) && data.steps.length > 0
       ? data.steps.map((s: any, i: number) => {
@@ -131,6 +134,7 @@ export function ProductsModelForge({ data }: { data?: any }) {
           primary={primary}
           secondary={secondary}
           subfeatures={subfeatures}
+          onSecondaryClick={() => setIsModalOpen(true)}
         />
       </section>
 
@@ -141,6 +145,13 @@ export function ProductsModelForge({ data }: { data?: any }) {
         steps={steps}
         primary={primary}
         secondary={secondary}
+        onSecondaryClick={() => setIsModalOpen(true)}
+      />
+
+      <UpcomingProductsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        formContext="sdk"
       />
     </>
   );
@@ -153,6 +164,7 @@ function ProductsModelForgeDesktop({
   primary,
   secondary,
   subfeatures,
+  onSecondaryClick,
 }: {
   heading: string;
   subtitle: string;
@@ -160,6 +172,7 @@ function ProductsModelForgeDesktop({
   primary: { label: string; href: string };
   secondary: { label: string; href: string };
   subfeatures: any[];
+  onSecondaryClick: () => void;
 }) {
   const fitRef = useFitText<HTMLHeadingElement>({});
   return (
@@ -253,7 +266,8 @@ function ProductsModelForgeDesktop({
         {/* Secondary CTA */}
         <a
           href={secondary.href}
-          className={`${gilroyMedium.className} relative flex h-[48px] w-[174px] shrink-0 items-center justify-center overflow-hidden uppercase bg-[rgba(226,241,202,0.12)] border-0 cursor-pointer text-white text-[16px] leading-[28px]`}
+          onClick={(e) => { e.preventDefault(); onSecondaryClick(); }}
+          className={`${gilroyMedium.className} relative flex h-[48px] w-[174px] shrink-0 items-center justify-center overflow-hidden uppercase bg-[rgba(226,241,202,0.12)] border-0 cursor-pointer text-white text-[16px] leading-[28px] hover:bg-[rgba(226,241,202,0.2)] transition-colors z-50 pointer-events-auto`}
         >
           <span className="relative z-10">{secondary.label}</span>
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
@@ -368,12 +382,14 @@ function ProductsModelForgeMobile({
   steps,
   primary,
   secondary,
+  onSecondaryClick,
 }: {
   heading: string;
   subtitle: string;
   steps: any[];
   primary: { label: string; href: string };
   secondary: { label: string; href: string };
+  onSecondaryClick: () => void;
 }) {
   const fitRef = useFitText<HTMLHeadingElement>({});
   return (
@@ -460,7 +476,8 @@ function ProductsModelForgeMobile({
           {/* Secondary */}
           <a
             href={secondary.href}
-            className={`${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
+            onClick={(e) => { e.preventDefault(); onSecondaryClick(); }}
+            className={`${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] pointer-events-auto z-50`}
             style={{ backgroundColor: SECONDARY_CTA_BG }}
           >
             <span className="relative text-[9px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">

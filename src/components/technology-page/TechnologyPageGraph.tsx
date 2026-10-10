@@ -1,4 +1,7 @@
-import { Fragment } from "react";
+"use client";
+
+import { Fragment, useState } from "react";
+import { ProductBriefModal } from "../products-page/ProductBriefModal";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular, interSemiBold } from "../hero/fonts";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
@@ -125,7 +128,9 @@ function GraphCtas({
   primaryLabel: string;
   primaryHref: string;
   secondaryLabel: string;
+  secondaryLabel: string;
   secondaryHref: string;
+  onSecondaryClick?: () => void;
 }) {
   return (
     <div className="absolute top-[754.55px] left-1/2 flex -translate-x-1/2 items-start gap-[24px]" data-node-id="3035:713">
@@ -144,6 +149,12 @@ function GraphCtas({
       </a>
       <a
         href={secondaryHref}
+        onClick={(e) => {
+          if (onSecondaryClick) {
+            e.preventDefault();
+            onSecondaryClick();
+          }
+        }}
         className={`${gilroyMedium.className} relative block h-[48px] w-[263px] shrink-0 bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
         data-node-id="3035:725"
         data-name="CTA - Secondary"
@@ -158,6 +169,7 @@ function GraphCtas({
 }
 
 export function TechnologyPageGraph({ data }: { data?: any } = {}) {
+  const [isExplainerOpen, setIsExplainerOpen] = useState(false);
   const heading = data?.heading || FALLBACK_HEADING;
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const axisLeft = data?.axis_label_left || FALLBACK_AXIS_LEFT;
@@ -369,6 +381,7 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
           primaryHref={primaryHref}
           secondaryLabel={secondaryLabel}
           secondaryHref={secondaryHref}
+          onSecondaryClick={() => setIsExplainerOpen(true)}
         />
       </div>
 
@@ -584,6 +597,10 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
           </a>
           <a
             href={secondaryHref}
+            onClick={(e) => {
+              e.preventDefault();
+              setIsExplainerOpen(true);
+            }}
             className={`${gilroyMedium.className} relative block shrink-0 bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
           >
             <span className="relative flex items-center text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
@@ -593,6 +610,12 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
           </a>
         </div>
       </div>
+      
+      <ProductBriefModal
+        isOpen={isExplainerOpen}
+        onClose={() => setIsExplainerOpen(false)}
+        title="Watch the 3-min Explainer"
+      />
     </section>
   );
 }

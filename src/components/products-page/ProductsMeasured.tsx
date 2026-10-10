@@ -6,6 +6,8 @@ import { useFitText } from "../shared/FitText";
 import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
 import { Corners } from "../shared/Corners";
 import { TagBadge } from "../hero/TagBadge";
+import { ProductBriefModal } from "./ProductBriefModal";
+import { useState } from "react";
 import { dmMono, gilroyBold, gilroyMedium, interRegular } from "../hero/fonts";
 import {
   MEASURED_TITLE_GRADIENT,
@@ -541,14 +543,17 @@ function PrimaryCta({
   label,
   href,
   centered = false,
+  onClick,
 }: {
   label: string;
   href: string;
   centered?: boolean;
+  onClick?: (e: React.MouseEvent, label: string) => void;
 }) {
   return (
     <a
       href={href}
+      onClick={onClick ? (e) => onClick(e, label) : undefined}
       className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] shrink-0 overflow-hidden ${
         centered ? "w-full max-w-[293px] items-center justify-center" : "w-[293px]"
       }`}
@@ -584,14 +589,17 @@ function SecondaryCta({
   label,
   href,
   centered = false,
+  onClick,
 }: {
   label: string;
   href: string;
   centered?: boolean;
+  onClick?: (e: React.MouseEvent, label: string) => void;
 }) {
   return (
     <a
       href={href}
+      onClick={onClick ? (e) => onClick(e, label) : undefined}
       className={`${gilroyMedium.className} relative flex h-[48px] shrink-0 overflow-clip px-[20px] py-[10px] border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] ${
         centered ? "w-full max-w-[331px] items-center justify-center" : "w-[331px] items-start"
       }`}
@@ -630,6 +638,12 @@ export function ProductsMeasured({ data }: { data?: any }) {
     Array.isArray(data?.cards) && data.cards.length > 0
       ? data.cards.map(strapiCardToView)
       : CARD_ORDER.map((v) => FALLBACK_CARDS[v]);
+
+  const [briefModalTitle, setBriefModalTitle] = useState("");
+  const handleCtaClick = (e: React.MouseEvent, label: string) => {
+    e.preventDefault();
+    setBriefModalTitle(label);
+  };
 
   return (
     <>
@@ -735,8 +749,8 @@ export function ProductsMeasured({ data }: { data?: any }) {
             className="-translate-x-1/2 absolute bottom-[104px] flex gap-[24px] items-start left-[calc(50%+4px)]"
             data-node-id="3712:1921"
           >
-            <PrimaryCta label={primary.label} href={primary.href} />
-            <SecondaryCta label={secondary.label} href={secondary.href} />
+            <PrimaryCta label={primary.label} href={primary.href} onClick={handleCtaClick} />
+            <SecondaryCta label={secondary.label} href={secondary.href} onClick={handleCtaClick} />
           </div>
         </div>
       </section>
@@ -807,6 +821,7 @@ export function ProductsMeasured({ data }: { data?: any }) {
             {/* Primary — 240×48 */}
             <a
               href={primary.href}
+              onClick={(e) => handleCtaClick(e, primary.label)}
               className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[240px] shrink-0 items-center justify-center overflow-hidden`}
             >
               <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
@@ -823,6 +838,7 @@ export function ProductsMeasured({ data }: { data?: any }) {
             {/* Secondary — 240×48 */}
             <a
               href={secondary.href}
+              onClick={(e) => handleCtaClick(e, secondary.label)}
               className={`${gilroyMedium.className} relative flex h-[48px] w-[240px] shrink-0 items-center justify-center overflow-clip px-[20px] py-[10px]`}
               style={{ backgroundColor: SECONDARY_CTA_BG }}
             >
@@ -834,6 +850,12 @@ export function ProductsMeasured({ data }: { data?: any }) {
           </div>
         </div>
       </section>
+
+      <ProductBriefModal
+        isOpen={!!briefModalTitle}
+        title={briefModalTitle}
+        onClose={() => setBriefModalTitle("")}
+      />
     </>
   );
 }

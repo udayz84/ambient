@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GradientTitle, GreenCtaButton } from "../contact/contact-shared";
@@ -27,6 +31,8 @@ function SomTag({ label, available, widthClass }: { label: string; available: bo
 import { mediaUrl } from "@/lib/strapi";
 
 export function SomDeployPath({ data }: { data?: any }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const heading = data?.heading || HEADING;
   const subheading = data?.subheading || SUBHEADING;
   
@@ -119,6 +125,10 @@ export function SomDeployPath({ data }: { data?: any }) {
           <GreenCtaButton width="280px" href={primaryHref}>{primaryLabel}</GreenCtaButton>
           <a
             href={secondaryHref}
+            onClick={(e) => {
+              e.preventDefault();
+              setIsModalOpen(true);
+            }}
             className="relative flex h-[48px] w-full sm:w-[280px] shrink-0 items-center justify-center border border-white/20 bg-black/50 hover:bg-white/5 transition-colors"
           >
             <span className={`${gilroyMedium.className} text-[14px] font-medium uppercase whitespace-nowrap text-white`}>
@@ -129,6 +139,11 @@ export function SomDeployPath({ data }: { data?: any }) {
         </div>
 
       </div>
+      <UpcomingProductsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        formContext="som"
+      />
     </section>
   );
 }
