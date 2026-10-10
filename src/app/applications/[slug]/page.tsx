@@ -64,9 +64,9 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
       {data?.hero && (
         <WearablesHero data={data.hero} />
       )}
-      {data?.carousel && (
+      {/* data?.carousel && (
         <WearablesCarousel data={data.carousel} />
-      )}
+      ) */}
       {data?.paradigm && <WearablesParadigm data={data.paradigm} />}
       <ApplicationsPageWins data={data?.wins} />
       <ApplicationsPageModelZoo data={data?.model_zoo} />

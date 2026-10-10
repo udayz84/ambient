@@ -103,12 +103,9 @@ export function CareersApplicationModal({
         className={`relative h-full w-full md:h-[800px] md:w-[700px] shrink-0 overflow-hidden transition-all duration-300 ease-out ${isAnimating ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"}`}
       >
         {/* Background — Rectangle 1618873545 */}
-        <Image
+        <img loading="lazy" decoding="async"
           src={PANEL_BG}
           alt=""
-          fill
-          priority
-          sizes="700px"
           className="pointer-events-none absolute inset-0 h-full w-full object-cover"
           aria-hidden
         />
@@ -335,7 +332,7 @@ function FormStep({
           <Field label="Phone Number*" className="min-w-0 flex-1">
             <div className="flex h-[42px] w-full items-center gap-[6px] border-[0.5px] border-solid border-[#4a4a4a] bg-transparent px-[12px] focus-within:border-[rgba(255,255,255,0.5)]">
               <div className="flex shrink-0 items-center gap-[2px]">
-                <Image
+                <img loading="lazy" decoding="async"
                   src="/careers/chevron-down.svg"
                   alt=""
                   width={24}
@@ -343,7 +340,7 @@ function FormStep({
                   className="size-[24px] shrink-0"
                   aria-hidden
                 />
-                <Image
+                <img loading="lazy" decoding="async"
                   src={INDIA_FLAG}
                   alt=""
                   width={23}
@@ -380,7 +377,7 @@ function FormStep({
                   </option>
                 ))}
               </select>
-              <Image
+              <img loading="lazy" decoding="async"
                 src="/careers/chevron-down.svg"
                 alt=""
                 width={24}
@@ -508,12 +505,10 @@ function ConfirmationStep({ onClose }: { onClose: () => void }) {
       <div className="absolute left-1/2 top-[calc(50%-27.5px)] flex w-full px-[20px] md:px-0 md:w-[620px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[24px]">
         {/* Success illustration */}
         <div className="relative size-[250px] shrink-0">
-          <Image
+          <img loading="lazy" decoding="async"
             src={SUCCESS_IMG}
             alt=""
-            fill
-            sizes="250px"
-            className="pointer-events-none object-cover"
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover"
             aria-hidden
           />
         </div>

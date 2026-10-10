@@ -663,11 +663,13 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
         </div>
 
         {/* Top row — 3 cards */}
+        {false && (
         <div className="absolute left-1/2 top-[288.75px] flex -translate-x-1/2 items-center gap-[20px]">
           <HealthCard data={healthData} />
           <PowerCard data={powerData} />
           <WorkloadCard data={workloadData} />
         </div>
+        )}
 
         {/* Bottom row — 4 cards (Figma 4016:3927: 4×301 + 21/21/20 gaps) */}
         <div className="absolute left-1/2 top-[676.1px] flex -translate-x-1/2 gap-[20.67px]">
@@ -715,6 +717,8 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
           </p>
         </div>
 
+        {false && (
+          <>
         {/* Health card (mobile) */}
         <div className={`relative w-full shrink-0 ${CARD_BG} p-[20px]`}>
           <CardAbstractBg />
@@ -806,6 +810,8 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
             {workloadDescription}
           </p>
         </div>
+          </>
+        )}
 
         {/* ECG cards (mobile) — single column; content-rich cards need full width */}
         <div className="flex w-full flex-col gap-[12px]">
