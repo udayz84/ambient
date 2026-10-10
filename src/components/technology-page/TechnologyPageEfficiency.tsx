@@ -266,15 +266,14 @@ function UsageBar({
 function ChipImage({ variant }: { variant: RowImage }) {
   if (variant === "acube") {
     return (
-      <div
-        className="absolute top-[84.62px] left-[138px] h-[52.376px] w-[54.666px] mix-blend-lighten"
-        data-node-id="3508:659"
-      >
-        <img loading="lazy" decoding="async"
-          alt=""
-          src="/technology/eff-chip-acube.png"
-          className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
-        />
+      <div className="absolute top-[84.62px] left-[138px] h-[52.376px] w-[54.666px]">
+        <div className="mix-blend-screen relative size-full" data-node-id="3508:659">
+          <img loading="lazy" decoding="async"
+            alt=""
+            src="/technology/eff-chip-acube.png"
+            className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+          />
+        </div>
       </div>
     );
   }
@@ -676,13 +675,15 @@ function EfficiencyTableMobile() {
               </p>
             </div>
             <div className="flex shrink-0 items-center gap-[4px]">
-              <div className={`relative h-[52px] w-[54px] shrink-0 ${row.blend ? "mix-blend-lighten" : ""}`}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img loading="lazy" decoding="async"
-                  alt=""
-                  src={row.chip}
-                  className="pointer-events-none absolute inset-0 size-full object-cover"
-                />
+              <div className="relative h-[52px] w-[54px] shrink-0">
+                <div className={`relative size-full ${row.blend ? "mix-blend-screen" : ""}`}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img loading="lazy" decoding="async"
+                    alt=""
+                    src={row.chip}
+                    className="pointer-events-none absolute inset-0 size-full object-cover"
+                  />
+                </div>
               </div>
               <div className="flex shrink-0 flex-col items-start not-italic whitespace-nowrap">
                 <p

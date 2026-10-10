@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
 import { DeveloperModelZoo } from "@/components/developer/DeveloperModelZoo";
 import { DeveloperAppForge } from "@/components/developer/DeveloperAppForge";
 
-const CANVAS_HEIGHT = 7633;
+const CANVAS_HEIGHT = 6733;
 
 export default async function DeveloperPage() {
   let data: any = null;
@@ -64,10 +64,10 @@ export default async function DeveloperPage() {
               <DeveloperModelZoo data={data?.model_zoo} />
               <DeveloperAppForge data={data?.app_forge} />
               <div style={{ transform: "translateY(350px)" }}>
-                {data?.coming_soon ? (
+                {/* {data?.coming_soon ? (
                   <DeveloperComingSoon data={data.coming_soon} />
-                ) : null}
-                <div style={{ transform: "translateY(150px)" }}>
+                ) : null} */}
+                <div style={{ transform: "translateY(-750px)" }}>
                   {data?.modules ? (
                     <DeveloperModulesSection data={data.modules} />
                   ) : null}

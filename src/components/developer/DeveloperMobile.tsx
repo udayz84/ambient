@@ -49,7 +49,7 @@ export function DeveloperMobile({ data }: { data?: any }) {
       <DeveloperPipelineMobile data={data?.pipeline} />
       <DeveloperModelZooMobile data={data?.model_zoo} />
       <ModelZooAppForge data={data?.app_forge} />
-      <DeveloperComingSoonMobile data={data?.coming_soon} />
+      {/* <DeveloperComingSoonMobile data={data?.coming_soon} /> */}
       <DeveloperModulesMobile data={data?.modules} />
       <DeveloperCopilotsMobile data={data?.copilots} />
     </div>

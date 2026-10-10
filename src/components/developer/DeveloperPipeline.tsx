@@ -455,7 +455,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
             <img 
               loading="lazy" 
               decoding="async"
-              src="/developer/main.jpeg" 
+              src="/developer/toolchain-architecture.jpeg" 
               alt="ModelForge Toolchain Stack" 
               className="w-full max-h-[65vh] object-contain rounded-[8px]"
             />
@@ -813,24 +813,26 @@ function AccordionItem({
       />
 
       {/* Feature bullets — left column (fade in when expanded) */}
-      {(stage.bullets ?? []).map((bullet, i) => (
-        <div key={`bullet-${i}`} aria-hidden={isActive ? undefined : true}>
-          <ul
-            className={`absolute left-[29px] w-[341px] transition-opacity duration-300 ${interBold.className}`}
-            style={{ top: 112 + i * 93, opacity: isActive ? 1 : 0 }}
-          >
-            <li className="list-disc ps-[25px] text-[16px] leading-[24px] font-bold not-italic text-white">
-              {bullet.title}
-            </li>
-          </ul>
-          <p
-            className={`${interRegular.className} absolute left-[54px] w-[341px] text-[14px] leading-[21px] font-normal not-italic text-[#d2d2d2] transition-opacity duration-300 min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
-            style={{ top: 139 + i * 93, opacity: isActive ? 1 : 0 }}
-          >
-            {bullet.description}
-          </p>
-        </div>
-      ))}
+      <div 
+        className="absolute left-[29px] top-[112px] w-[341px] flex flex-col gap-[12px] transition-opacity duration-300"
+        style={{ opacity: isActive ? 1 : 0 }}
+        aria-hidden={isActive ? undefined : true}
+      >
+        {(stage.bullets ?? []).map((bullet, i) => (
+          <div key={`bullet-${i}`} className="flex flex-col">
+            <ul className={`${interBold.className} ml-[16px]`}>
+              <li className="list-disc pl-[9px] text-[16px] leading-[24px] font-bold not-italic text-white">
+                {bullet.title}
+              </li>
+            </ul>
+            <p
+              className={`${interRegular.className} pl-[25px] mt-[3px] text-[14px] leading-[21px] font-normal not-italic text-[#d2d2d2] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            >
+              {bullet.description}
+            </p>
+          </div>
+        ))}
+      </div>
 
       {/* Flow diagram — right column per Figma 4945:4422 (731.971×210 frame
           centered at calc(50% + 205.5px), top 98). Static images keep the

@@ -1110,6 +1110,48 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiLegalPageLegalPage extends Struct.SingleTypeSchema {
+  collectionName: 'legal_pages';
+  info: {
+    description: 'Content for Privacy Policy and Terms & Conditions';
+    displayName: 'Legal Pages';
+    pluralName: 'legal-pages';
+    singularName: 'legal-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::legal-page.legal-page'
+    > &
+      Schema.Attribute.Private;
+    privacy_policy_content: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
+    publishedAt: Schema.Attribute.DateTime;
+    terms_conditions_content: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiMailSettingMailSetting extends Struct.SingleTypeSchema {
   collectionName: 'mail_settings';
   info: {
@@ -2180,6 +2222,7 @@ declare module '@strapi/strapi' {
       'api::job-category.job-category': ApiJobCategoryJobCategory;
       'api::job-location.job-location': ApiJobLocationJobLocation;
       'api::job.job': ApiJobJob;
+      'api::legal-page.legal-page': ApiLegalPageLegalPage;
       'api::mail-setting.mail-setting': ApiMailSettingMailSetting;
       'api::model-zoo-page.model-zoo-page': ApiModelZooPageModelZooPage;
       'api::navbar.navbar': ApiNavbarNavbar;

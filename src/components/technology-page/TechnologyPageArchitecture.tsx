@@ -57,7 +57,7 @@ export type Pillar = {
 const PILLARS: Pillar[] = [
   {
     nodeId: "3037:480",
-    left: 115,
+    left: 162,
     top: 275,
     cardWidth: 380,
     statWidth: 340,
@@ -85,8 +85,8 @@ const PILLARS: Pillar[] = [
   },
   {
     nodeId: "3346:600",
-    left: 115,
-    top: 930,
+    left: 160,
+    top: 794,
     cardWidth: 380,
     statWidth: 340,
     statGap: 40,
@@ -110,8 +110,8 @@ const PILLARS: Pillar[] = [
   },
   {
     nodeId: "3346:507",
-    left: 115,
-    top: 1530,
+    left: 161,
+    top: 1305,
     cardWidth: 380,
     statWidth: 340,
     statGap: 32,
@@ -207,7 +207,7 @@ export function PillarCta({ pillar }: { pillar: Pillar }) {
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
-      <span className="relative text-[13px] sm:text-[14px] xl:text-[15px] leading-[1.3] font-medium text-white uppercase not-italic text-center">
+      <span className="relative text-[16px] leading-[28px] font-medium text-white uppercase not-italic text-center whitespace-nowrap">
         {pillar.cta}
       </span>
       <span
@@ -266,12 +266,12 @@ function PillarStat({
           {pillar.title}
         </p>
         <p
-          className={`${interRegular.className} text-[16px] leading-[24px] font-normal text-[#6fe047] not-italic`}
+          className={`${interRegular.className} text-[13px] leading-[normal] font-normal text-[#6fe047] not-italic`}
         >
           {pillar.subtitle}
         </p>
         <p
-          className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-[#8e8e8e] not-italic [word-break:break-word]`}
+          className={`${interRegular.className} w-full text-[13px] leading-[normal] font-normal text-[#8e8e8e] not-italic [word-break:break-word]`}
         >
           {pillar.desc}
         </p>
@@ -283,10 +283,10 @@ function PillarStat({
       >
         {pillar.bullets.map((b, i) => (
           <div key={i} className="flex w-full items-start gap-[5px]">
-            <p className="text-[16px] tracking-[-0.1504px] whitespace-nowrap text-[#3a9719] not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
+            <p className="text-[14px] tracking-[-0.1504px] whitespace-nowrap text-[#3a9719] not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
               +
             </p>
-            <p className="min-w-px flex-1 whitespace-pre-line text-[16px] leading-[24px] text-[rgba(255,255,255,0.9)] not-italic [word-break:break-word]">
+            <p className="min-w-px flex-1 whitespace-pre-line text-[13px] leading-[normal] text-[rgba(255,255,255,0.9)] not-italic [word-break:break-word]">
               {b}
             </p>
           </div>
@@ -392,7 +392,7 @@ export function TechnologyPageArchitecture({
       aria-label="One architecture that thinks, senses, & speaks you language"
     >
       {/* DESKTOP (>=1024px) — 1440×1833 canvas */}
-      <div className="relative hidden h-[2300px] w-[1440px] shrink-0 min-[1024px]:block">
+      <div className="relative hidden h-[1833px] w-[1440px] shrink-0 min-[1024px]:block">
         <BrainVisual />
 
         {/* Header — 3330:1262 (800 wide, x=352 y=71) */}
@@ -445,9 +445,9 @@ export function TechnologyPageArchitecture({
         ))}
 
         {/* Connectors — card → brain */}
-        <Connector left={547} top={493} />
-        <Connector left={547} top={1069} />
-        <Connector left={549} top={1718} />
+        <Connector left={542} top={493} />
+        <Connector left={542} top={933} />
+        <Connector left={544} top={1493} />
       </div>
 
       {/* MOBILE (<1024px) — pixel-perfect from Figma node 3572:6674 (3rd Fold, 393x966) */}
