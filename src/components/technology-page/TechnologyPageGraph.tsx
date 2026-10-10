@@ -124,10 +124,10 @@ function GraphCtas({
   primaryHref,
   secondaryLabel,
   secondaryHref,
+  onSecondaryClick,
 }: {
   primaryLabel: string;
   primaryHref: string;
-  secondaryLabel: string;
   secondaryLabel: string;
   secondaryHref: string;
   onSecondaryClick?: () => void;
