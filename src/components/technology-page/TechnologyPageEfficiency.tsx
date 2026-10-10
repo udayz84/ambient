@@ -424,7 +424,7 @@ const M_ROWS: MobileRow[] = [
     name: "A cube",
     sub: "Analog digital in memory",
     highlighted: true,
-    chip: "/technology/eff-mobile-chip-acube.webp",
+    chip: "/technology/eff-chip-acube.png",
     blend: true,
     tradeLeft: 273,
     tradeTop: 36,
@@ -677,7 +677,6 @@ function EfficiencyTableMobile() {
             <div className="flex shrink-0 items-center gap-[4px]">
               <div className="relative h-[52px] w-[54px] shrink-0">
                 <div className={`relative size-full ${row.blend ? "mix-blend-screen" : ""}`}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img loading="lazy" decoding="async"
                     alt=""
                     src={row.chip}
