@@ -622,7 +622,7 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
       aria-label="The Empirical Proof"
     >
       {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden w-full max-w-[1440px] min-[1024px]:block h-[1078px]">
+      <div className="relative hidden w-full max-w-[1440px] min-[1024px]:block h-[700px]">
         {/* Top decorative SVG */}
         <div
           className="pointer-events-none absolute top-[-26.9px] left-1/2 h-[320px] w-[881.616px] -translate-x-1/2"
@@ -672,7 +672,7 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
         )}
 
         {/* Bottom row — 4 cards (Figma 4016:3927: 4×301 + 21/21/20 gaps) */}
-        <div className="absolute left-1/2 top-[676.1px] flex -translate-x-1/2 gap-[20.67px]">
+        <div className="absolute left-1/2 top-[288.75px] flex -translate-x-1/2 gap-[20.67px]">
           {ecgCards.map((card, i) => (
             <EcgCard
               key={i}
