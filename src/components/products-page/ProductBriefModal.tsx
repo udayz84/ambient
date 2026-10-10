@@ -118,13 +118,20 @@ function FormStep({ title, onClose, onSuccess }: { title?: string; onClose: () =
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, formKey: "product-brief" }),
+      }).catch(() => { /* Mailchimp sync failure is non-blocking */ });
+
       onSuccess();
-    }, 1000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

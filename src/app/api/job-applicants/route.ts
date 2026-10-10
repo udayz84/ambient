@@ -1,5 +1,6 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import { sendSubmissionMail, type MailAttachment } from "@/lib/notify-mail";
+import { addContactAndTag } from "@/lib/mailchimp";
 
 /**
  * src/app/api/job-applicants/route.ts
@@ -129,6 +130,15 @@ export async function POST(req: Request): Promise<Response> {
   }
 
   await sendSubmissionMail(await mailPayload());
+
+  // Sync to Mailchimp (transactional — consent is for data processing, not marketing)
+  after(() => {
+    addContactAndTag(
+      { email, firstName: fullName, phone },
+      "job-application",
+      false,
+    ).catch(() => { /* logged inside addContactAndTag */ });
+  });
 
   if (!strapiSaved) {
     return NextResponse.json(

@@ -1,5 +1,6 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import { sendSubmissionMail } from "@/lib/notify-mail";
+import { addContactAndTag } from "@/lib/mailchimp";
 
 /**
  * src/app/api/partner-applications/route.ts
@@ -117,10 +118,30 @@ export async function POST(req: Request): Promise<Response> {
     }
 
     await sendSubmissionMail(mailPayload());
+
+    // Sync to Mailchimp (transactional — no marketing consent)
+    after(() => {
+      addContactAndTag(
+        { email, firstName: name, company },
+        "partner-application",
+        false,
+      ).catch(() => { /* logged inside addContactAndTag */ });
+    });
+
     return NextResponse.json({ ok: true });
   } catch {
     console.log("[partner-application] Strapi unreachable — logged submission:", JSON.stringify(data));
     await sendSubmissionMail(mailPayload());
+
+    // Sync to Mailchimp (transactional — no marketing consent)
+    after(() => {
+      addContactAndTag(
+        { email, firstName: name, company },
+        "partner-application",
+        false,
+      ).catch(() => { /* logged inside addContactAndTag */ });
+    });
+
     return NextResponse.json({ ok: true });
   }
 }

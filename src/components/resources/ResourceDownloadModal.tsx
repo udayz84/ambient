@@ -72,9 +72,21 @@ export function ResourceDownloadModal({
     setLoading(true);
 
     try {
-      // If you are using a 3rd party tool (like HubSpot or Mailchimp) for form submissions, 
-      // you can implement the POST request here in the future.
-      // For now, it just downloads the PDF directly.
+      // Sync to Mailchimp via server-side API (resource-download = transactional)
+      const emailValue = formData["email"] || formData["Email"] || "";
+      if (emailValue) {
+        fetch("/api/newsletter", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: emailValue,
+            formKey: "resource-download",
+            firstName: formData["first_name"] || formData["firstName"] || formData["name"] || undefined,
+            lastName: formData["last_name"] || formData["lastName"] || undefined,
+            company: formData["company"] || formData["Company"] || undefined,
+          }),
+        }).catch(() => { /* Mailchimp sync failure is non-blocking */ });
+      }
 
       // Download PDF programmatically
       const a = document.createElement("a");

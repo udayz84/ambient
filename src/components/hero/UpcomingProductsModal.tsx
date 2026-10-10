@@ -116,13 +116,37 @@ function FormStep({ onClose, onSuccess, formContext }: { onClose: () => void; on
   const [chip, setChip] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      // Map formContext to Mailchimp form key
+      const formKeyMap: Record<string, string> = {
+        upcoming: "upcoming-products",
+        usecase: "upcoming-usecase",
+        evalkit: "upcoming-evalkit",
+        sdk: "upcoming-sdk",
+        som: "upcoming-som",
+        waitlist: "upcoming-waitlist",
+      };
+      const formKey = formKeyMap[formContext] || "upcoming-products";
+
+      await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          formKey,
+          firstName: firstName || undefined,
+          lastName: lastName || undefined,
+          company: company || undefined,
+        }),
+      }).catch(() => { /* Mailchimp sync failure is non-blocking */ });
+
       onSuccess();
-    }, 1000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

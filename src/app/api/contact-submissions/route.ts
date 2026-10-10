@@ -1,5 +1,6 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import { sendSubmissionMail } from "@/lib/notify-mail";
+import { addContactAndTag } from "@/lib/mailchimp";
 
 /**
  * src/app/api/contact-submissions/route.ts
@@ -10,6 +11,7 @@ import { sendSubmissionMail } from "@/lib/notify-mail";
  * Flow:
  *   ContactForm / ContactMobile  --json-->  this route
  *   this route                   --json-->  Strapi POST /api/contact-form-details/submit
+ *   this route                   -------->  Mailchimp (add contact + tag)
  *
  * Mirrors src/app/api/partner-inquiries/route.ts: input is validated here so
  * Strapi never receives junk, and the Strapi submit route has auth: false
@@ -66,6 +68,14 @@ export async function POST(req: Request): Promise<Response> {
     subscribed,
   };
 
+  // Determine Mailchimp form key from track and source field
+  const isModelZoo = fields.Source === "Model Zoo request";
+  const mailchimpFormKey = isModelZoo ? "model-zoo-request" : `contact-${track}`;
+  const firstName = (fields["First Name"] || fields["First name"] || fields["Name"] || "").trim() || undefined;
+  const lastName = (fields["Last Name"] || fields["Last name"] || "").trim() || undefined;
+  const company = (fields["Company"] || fields["Company Name"] || "").trim() || undefined;
+  const phone = (fields["Phone"] || fields["Phone Number"] || fields["Phone number"] || "").trim() || undefined;
+
   try {
     const res = await fetch(`${STRAPI_URL}/api/contact-form-details/submit`, {
       method: "POST",
@@ -91,6 +101,15 @@ export async function POST(req: Request): Promise<Response> {
       ],
     });
 
+    // Sync to Mailchimp (fire-and-forget — never blocks the response)
+    after(() => {
+      addContactAndTag(
+        { email, firstName, lastName, company, phone },
+        mailchimpFormKey,
+        subscribed,
+      ).catch(() => { /* logged inside addContactAndTag */ });
+    });
+
     return NextResponse.json({ ok: true });
   } catch {
     console.log("[contact-submission] Strapi unreachable — logged submission:", JSON.stringify(data));
@@ -107,6 +126,15 @@ export async function POST(req: Request): Promise<Response> {
       meta: [
         { label: "Subscribed to updates", value: subscribed ? "Yes" : "No" },
       ],
+    });
+
+    // Sync to Mailchimp (fire-and-forget — never blocks the response)
+    after(() => {
+      addContactAndTag(
+        { email, firstName, lastName, company, phone },
+        mailchimpFormKey,
+        subscribed,
+      ).catch(() => { /* logged inside addContactAndTag */ });
     });
 
     return NextResponse.json({ ok: true });

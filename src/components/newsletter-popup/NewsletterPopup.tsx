@@ -48,9 +48,20 @@ export function NewsletterPopup() {
     // Native email/required validation — blocks submit + shows the browser
     // message for invalid input.
     if (!e.currentTarget.reportValidity()) return;
+    const formData = new FormData(e.currentTarget);
+    const email = String(formData.get("email") ?? "").trim();
+    if (!email) return;
+
     localStorage.setItem(SUBSCRIBED_KEY, "1");
     // Show the thank-you note, then auto-dismiss.
     setSubmitted(true);
+
+    // Sync to Mailchimp via server-side API (fire-and-forget)
+    fetch("/api/newsletter", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, formKey: "newsletter" }),
+    }).catch(() => { /* silently ignore — submission is already shown as successful */ });
   };
 
   useEffect(() => {
