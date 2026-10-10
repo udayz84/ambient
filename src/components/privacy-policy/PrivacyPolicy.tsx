@@ -5,8 +5,20 @@ import { CORNER_LEFT, CORNER_RIGHT } from "@/components/developer/developer-data
 
 export function PrivacyPolicy({ data }: { data?: any }) {
   let content = data?.privacy_policy_content || "";
-  // Strip any inline styles and classes that get pasted from the rich text editor
+  
+  // 1. Strip any inline styles and classes that get pasted from the rich text editor
   content = content.replace(/\s*(style|class)=["'][^"']*["']/gi, "");
+  
+  // 2. Automatically link email addresses (if they aren't already linked)
+  // We use a replace function to ensure we don't double-wrap emails that are already inside an <a href="..."> tag
+  content = content.replace(/([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/gi, (match, email, offset, str) => {
+    const precedingText = str.substring(Math.max(0, offset - 10), offset);
+    // If it's already inside a mailto: link or an HTML attribute, leave it alone
+    if (precedingText.includes('mailto:') || precedingText.includes('href="') || precedingText.includes("href='")) {
+      return match;
+    }
+    return `<a href="mailto:${email}">${email}</a>`;
+  });
 
   return (
     <div className="relative mx-auto flex w-full max-w-[800px] flex-col px-[20px] pb-0 pt-[100px] md:pt-[120px]">

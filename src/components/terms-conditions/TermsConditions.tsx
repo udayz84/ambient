@@ -3,8 +3,18 @@ import { gilroyMedium, interRegular, interBold } from "@/components/hero/fonts";
 
 export function TermsConditions({ data }: { data?: any }) {
   let content = data?.terms_conditions_content || "";
-  // Strip any inline styles and classes that get pasted from the rich text editor
+  
+  // 1. Strip any inline styles and classes that get pasted from the rich text editor
   content = content.replace(/\s*(style|class)=["'][^"']*["']/gi, "");
+  
+  // 2. Automatically link email addresses (if they aren't already linked)
+  content = content.replace(/([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/gi, (match, email, offset, str) => {
+    const precedingText = str.substring(Math.max(0, offset - 10), offset);
+    if (precedingText.includes('mailto:') || precedingText.includes('href="') || precedingText.includes("href='")) {
+      return match;
+    }
+    return `<a href="mailto:${email}">${email}</a>`;
+  });
 
   return (
     <div className="relative mx-auto flex w-full max-w-[800px] flex-col px-[20px] pb-0 pt-[100px] md:pt-[120px]">
