@@ -11,7 +11,7 @@ export function PrivacyPolicy({ data }: { data?: any }) {
   
   // 2. Automatically link email addresses (if they aren't already linked)
   // We use a replace function to ensure we don't double-wrap emails that are already inside an <a href="..."> tag
-  content = content.replace(/([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/gi, (match, email, offset, str) => {
+  content = content.replace(/([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/gi, (match: string, email: string, offset: number, str: string) => {
     const precedingText = str.substring(Math.max(0, offset - 10), offset);
     // If it's already inside a mailto: link or an HTML attribute, leave it alone
     if (precedingText.includes('mailto:') || precedingText.includes('href="') || precedingText.includes("href='")) {

@@ -8,7 +8,7 @@ export function TermsConditions({ data }: { data?: any }) {
   content = content.replace(/\s*(style|class)=["'][^"']*["']/gi, "");
   
   // 2. Automatically link email addresses (if they aren't already linked)
-  content = content.replace(/([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/gi, (match, email, offset, str) => {
+  content = content.replace(/([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/gi, (match: string, email: string, offset: number, str: string) => {
     const precedingText = str.substring(Math.max(0, offset - 10), offset);
     if (precedingText.includes('mailto:') || precedingText.includes('href="') || precedingText.includes("href='")) {
       return match;
