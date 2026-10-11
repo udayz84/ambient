@@ -34,7 +34,7 @@ export function DeveloperPlatformHeader({ data }: { data?: any }) {
       </div>
 
       <p
-        className={`${interRegular.className} mt-[30px] w-full text-center text-[18px] leading-[27px] font-normal text-white not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+        className={`${interRegular.className} mt-0 w-full text-center text-[18px] leading-[27px] font-normal text-white not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         data-node-id="2379:1025"
       >
         {subtitle}

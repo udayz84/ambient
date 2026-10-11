@@ -21,7 +21,7 @@ export function PlatformScaleCta({ data }: { data?: any }) {
       {label ? (
         <a
           href={href}
-          className={`${interMedium.className} relative flex h-[60px] min-w-[320px] px-[32px] items-center justify-center shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+          className={`${interMedium.className} relative flex h-[48px] min-w-[204px] w-auto px-[24px] items-center justify-center shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
         >
           <span
             aria-hidden
@@ -31,7 +31,7 @@ export function PlatformScaleCta({ data }: { data?: any }) {
             <RepelDots />
           </span>
           <p
-            className="relative z-10 max-w-full text-[18px] leading-[32px] tracking-[0.04em] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]"
+            className="relative z-10 max-w-full text-[14px] leading-[24px] tracking-[0.02em] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]"
           >
             {label}
           </p>
@@ -53,9 +53,9 @@ export function PlatformScaleCta({ data }: { data?: any }) {
               window.dispatchEvent(new CustomEvent('open-upcoming-products-modal'));
             }
           }}
-          className={`${interMedium.className} relative flex h-[60px] min-w-[320px] w-auto px-[32px] shrink-0 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] text-white hover:bg-[rgba(226,241,202,0.2)] transition-colors duration-200`}
+          className={`${interMedium.className} relative flex h-[48px] min-w-[204px] w-auto px-[24px] shrink-0 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] text-white hover:bg-[rgba(226,241,202,0.2)] transition-colors duration-200`}
         >
-          <span className="text-[18px] leading-[32px] tracking-[0.04em] font-medium whitespace-nowrap uppercase not-italic">
+          <span className="text-[14px] leading-[24px] tracking-[0.02em] font-medium whitespace-nowrap uppercase not-italic">
             {secLabel}
           </span>
           <Corners leftSrc="/developer/corner-58.svg" rightSrc="/developer/corner-55.svg" />
