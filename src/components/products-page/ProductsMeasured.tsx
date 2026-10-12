@@ -133,13 +133,13 @@ const FALLBACK_CARDS: Record<MeasuredVariant, MeasuredCard> = {
       "left-[calc(50%-10.58px)] top-[calc(50%-60px)] h-[255.188px] w-[401.15px]",
     stats: [
       stat(ICONS.speed, "Peak Compute (GOPS)", "512", { green: true }),
-      stat(ICONS.energy, "Active Power", "40 - 120 µW", { green: true }),
-      stat(ICONS.eco, "Efficiency (TOPS/W)", "7.3", { green: true }),
+      stat(ICONS.energy, "Lowest Active AI power", "200 µW", { green: true }),
+      stat(ICONS.eco, "Measured AI Efficiency", "7.3", { green: true }),
     ],
   },
   risc_mcu: {
     nodeId: "3468:2259",
-    name: "RISC MCU",
+    name: "Typical MCU",
     imageSrc: CHIP_RISC,
     imageBoxClass:
       "left-[calc(50%-10.58px)] top-[calc(50%-60px)] h-[255.188px] w-[401.15px]",
@@ -147,8 +147,8 @@ const FALLBACK_CARDS: Record<MeasuredVariant, MeasuredCard> = {
     cropped: true,
     stats: [
       stat(ICONS.speed, "Peak Compute (GOPS)", "0.02"),
-      stat(ICONS.energy, "Active Power", "600 mW"),
-      stat(ICONS.eco, "Efficiency (TOPS/W)", "0.02"),
+      stat(ICONS.energy, "Lowest Active AI power", "20 mW"),
+      stat(ICONS.eco, "Measured AI Efficiency", "0.02"),
     ],
   },
   mcu_npu: {
@@ -160,8 +160,8 @@ const FALLBACK_CARDS: Record<MeasuredVariant, MeasuredCard> = {
     luminosity: true,
     stats: [
       stat(ICONS.speed, "Peak Compute (GOPS)", "100", { medium: true }),
-      stat(ICONS.energy, "Active Power", "200 mW"),
-      stat(ICONS.eco, "Efficiency (TOPS/W)", "1.2"),
+      stat(ICONS.energy, "Lowest Active AI power", "1 mW"),
+      stat(ICONS.eco, "Measured AI Efficiency", "1.2"),
     ],
   },
 };

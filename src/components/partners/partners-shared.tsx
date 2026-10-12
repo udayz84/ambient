@@ -508,7 +508,6 @@ export function PartnersBridgeBox({
 }) {
   return (
     <div className={`relative inline-flex items-center justify-center bg-[rgba(83,216,36,0.05)] px-[32px] py-[16px] backdrop-blur-[8px] ${className}`}>
-      <Corners />
       <p className={`${gilroyMedium.className} text-center text-[18px] leading-[27px] font-medium text-white not-italic [word-break:break-word] max-[1023px]:text-[14px] max-[1023px]:leading-[21px]`}>
         {children}
       </p>

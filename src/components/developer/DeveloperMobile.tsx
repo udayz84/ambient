@@ -36,6 +36,7 @@ import {
   resolveModelZooContent,
 } from "./DeveloperModelZoo";
 import { ModelZooAppForge } from "../model-zoo/ModelZooAppForge";
+import { DEV_APP_FORGE_PROPS } from "./DeveloperAppForge";
 
 /**
  * Mobile (<1024px) stacked adaptation of the Developer page.
@@ -49,7 +50,7 @@ export function DeveloperMobile({ data }: { data?: any }) {
       <DeveloperCodeSectionMobile data={data?.code} />
       <DeveloperPipelineMobile data={data?.pipeline} />
       <DeveloperModelZooMobile data={data?.model_zoo} />
-      <ModelZooAppForge data={data?.app_forge} />
+      <ModelZooAppForge data={data?.app_forge} {...DEV_APP_FORGE_PROPS} />
       {/* <DeveloperComingSoonMobile data={data?.coming_soon} /> */}
       <DeveloperModulesMobile data={data?.modules} />
       <DeveloperCopilotsMobile data={data?.copilots} />

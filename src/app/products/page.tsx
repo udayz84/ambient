@@ -3,6 +3,7 @@ import { ProductsHero } from "@/components/products-page/ProductsHero";
 import { ProductsFeatures } from "@/components/products-page/ProductsFeatures";
 import { ProductsAlwaysOn } from "@/components/products-page/ProductsAlwaysOn";
 import { ProductsUseCases } from "@/components/products-page/ProductsUseCases";
+import { ProductsReadyToRun } from "@/components/products-page/ProductsReadyToRun";
 import { ProductsMeasured } from "@/components/products-page/ProductsMeasured";
 import { ProductsCaseStudies } from "@/components/products-page/ProductsCaseStudies";
 export const dynamic = "force-dynamic";
@@ -124,6 +125,7 @@ export default async function ProductsPage() {
       <div id="metrics"><ProductsMeasured data={data?.measured} /></div>
       <ProductsCaseStudies data={caseStudiesData} />
       <div id="use-cases"><ProductsUseCases data={data?.use_cases} /></div>
+      <ProductsReadyToRun />
       <ProductsAppForge data={data?.appforge} />
       <ProductsModelForge data={data?.modelforge} />
       <ProductsBenchToVolume data={data?.bench_to_volume} />

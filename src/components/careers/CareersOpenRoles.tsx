@@ -130,12 +130,13 @@ export function CareersOpenRoles({
         style={{ height: 'calc(100% + 400px)' }}
         data-name="image 107"
       >
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          loading="lazy"
+          decoding="async"
           src="/careers/image 107.webp"
           alt=""
-          fill
-          className="object-cover opacity-25"
-          sizes="1440px"
+          className="absolute inset-0 size-full object-cover opacity-25"
         />
         <div
           className="absolute inset-0"
@@ -290,12 +291,13 @@ function RolesCtaBackground() {
       data-node-id="2379:8930"
       aria-hidden
     >
-      <Image
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        loading="lazy"
+        decoding="async"
         src="/careers/Rectangle 1618873545.png"
         alt=""
-        fill
-        className="object-cover"
-        sizes="1203px"
+        className="block size-full object-cover"
       />
     </div>
   );

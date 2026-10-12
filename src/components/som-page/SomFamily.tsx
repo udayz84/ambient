@@ -18,12 +18,12 @@ const CARD_BLE = {
   description: "For products that connect over short range — to a phone, hub, or gateway.",
   imageUrl: "/som/som-chip.webp",
   features: [
-    { icon: "/partners/icons_proof/chip.svg", text: "GPX10 Pro\ncompute core" },
+    { icon: "/partners/icons_proof/chip.svg", text: "GPX10 Pro" },
     { icon: "/partners/icons_proof/cube.svg", text: "6-axis\nIMU" },
-    { icon: "/technology/icon-compute-green.svg", text: "NOR\nflash" },
-    { icon: "/partners/icons_become/rss.svg", text: "Bluetooth LE\n(Nordic nRF54)" },
+    { icon: "/technology/icon-compute-green.svg", text: "Digital\nmicrophone" },
+    { icon: "/partners/icons_become/rss.svg", text: "Bluetooth LE" },
   ],
-  footerText: "RF is available on a u.FL connector and on an LGA RF pad, so you can use an external antenna or design one into your PCB.",
+  footerText: "",
 };
 
 const CARD_LTE = {
@@ -32,9 +32,9 @@ const CARD_LTE = {
   description: "For products that need to connect anywhere, with no local gateway — remote, mobile, or wide-area deployments.",
   imageUrl: "/som/sparsh-chip.webp",
   features: [
-    { icon: "/partners/icons_proof/chip.svg", text: "GPX10 Pro\ncompute core" },
+    { icon: "/partners/icons_proof/chip.svg", text: "GPX10 Pro" },
     { icon: "/partners/icons_proof/cube.svg", text: "6-axis\nIMU" },
-    { icon: "/technology/icon-compute-green.svg", text: "NOR\nflash" },
+    { icon: "/technology/icon-compute-green.svg", text: "Digital\nmicrophone" },
     { icon: "/partners/icons_proof/global.svg", text: "LTE\ncellular modem" },
   ],
   footerText: "",
@@ -86,7 +86,7 @@ function FamilyCard({ data, onNotifyClick }: { data: typeof CARD_BLE; onNotifyCl
       {/* The main card */}
       <div className="relative flex w-full flex-col flex-1 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.4)]">
         <Corners />
-        
+
         {/* Top section with content and image */}
         <div className="relative p-6 min-[1024px]:p-8 flex flex-col min-[1024px]:block flex-1">
           <div className="flex w-full flex-col gap-6 relative z-10">
@@ -102,13 +102,13 @@ function FamilyCard({ data, onNotifyClick }: { data: typeof CARD_BLE; onNotifyCl
               </p>
             </div>
           </div>
-          
+
           {/* The image is absolutely positioned to the right on desktop, static below on mobile */}
           <div className="relative mt-8 min-[1024px]:mt-0 min-[1024px]:absolute min-[1024px]:right-[-20px] min-[1024px]:top-[40px] w-full min-[1024px]:w-[280px] h-[180px] min-[1024px]:h-[200px] pointer-events-none z-0">
-            <img 
-              src={data.imageUrl} 
-              alt={data.title} 
-              className={`w-full h-full object-contain opacity-90 ${data.tag?.toUpperCase() === "COMING SOON" || data.tag?.toUpperCase() === "UNDER-DEVELOPMENT" ? "blur-[2px] brightness-[0.3]" : ""}`} 
+            <img
+              src={data.imageUrl}
+              alt={data.title}
+              className={`w-full h-full object-contain opacity-90 ${data.tag?.toUpperCase() === "COMING SOON" || data.tag?.toUpperCase() === "UNDER-DEVELOPMENT" ? "blur-[2px] brightness-[0.3]" : ""}`}
             />
           </div>
         </div>
@@ -155,28 +155,19 @@ export function SomFamily({ data }: { data?: any }) {
   const tag = data?.tag || FALLBACK_TAG;
   const title = data?.title || FALLBACK_TITLE;
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
-  
+
   const dataCards: any[] = Array.isArray(data?.cards) ? data.cards : [];
   const cards = FALLBACK_CARDS.map((fb, i) => {
     const c = dataCards[i];
     if (!c) return fb;
-    
-    const cFeatures = Array.isArray(c.features) ? c.features : [];
-    const mappedFeatures = fb.features.map((fbf, fi) => {
-      const cf = cFeatures[fi];
-      if (!cf) return fbf;
-      return {
-        icon: mediaUrl(cf.icon) || cf.icon || fbf.icon,
-        text: cf.text || fbf.text,
-      };
-    });
 
     return {
       tag: c.tag !== undefined ? c.tag : fb.tag,
       title: c.title || fb.title,
       description: c.description || fb.description,
       imageUrl: mediaUrl(c.image) || fb.imageUrl,
-      features: mappedFeatures,
+      // "What's inside" chips are hardcoded by design (see CARD_BLE/CARD_LTE).
+      features: fb.features,
       footerText: c.footerText !== undefined ? c.footerText : fb.footerText,
     };
   });
@@ -184,7 +175,7 @@ export function SomFamily({ data }: { data?: any }) {
   return (
     <section className="relative flex w-full justify-center overflow-hidden bg-black py-[40px] min-[1024px]:py-[80px]">
       <div className="flex w-full max-w-[1200px] flex-col gap-[40px] min-[1024px]:gap-[60px] px-[16px] min-[1024px]:px-0">
-        
+
         {/* Header Section */}
         <div className="flex flex-col items-center gap-[24px] text-center px-[10px] min-[1024px]:px-0 mb-[16px] min-[1024px]:mb-[24px]">
           <div className="relative inline-block px-[24px]">

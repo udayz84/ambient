@@ -23,12 +23,12 @@ const CARDS = [
   {
     nodeId: "5246:6386",
     img: "/model-zoo/kit-2.webp",
-    alt: "ApplicationForge phone app",
+    alt: "NuraSync phone app",
     title: "Experience it now.",
-    desc: "Download ApplicationForge and drive live demos from your phone.",
-    cta: "Get the ApplicationForge App",
+    desc: "Download NuraSync and drive live demos from your phone.",
+    cta: "Get NuraSync App",
     href: "/application-forge",
-    ctaWidth: 290,
+    ctaWidth: 220,
   },
   {
     nodeId: "5246:6416",
@@ -36,9 +36,9 @@ const CARDS = [
     alt: "Model cards and code on GitHub",
     title: "Go deeper.",
     desc: "Browse the code and model cards on GitHub.",
-    cta: "Browse the Model Zoo",
+    cta: "GitHub Coming Soon",
     href: "/model-zoo",
-    ctaWidth: 240,
+    ctaWidth: 220,
   },
 ];
 

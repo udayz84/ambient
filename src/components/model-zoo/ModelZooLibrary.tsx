@@ -337,8 +337,25 @@ export function ModelZooLibrary({ requestForm }: { requestForm?: any }) {
           {/* AI models strip — 5348:6505. The Figma frame is a static snapshot of
               what is designed as a continuous edge-to-edge carousel (like the
               home page rows): the exported row runs in a seamless marquee. */}
-          <div className="mt-[20px]" data-node-id="5348:6505">
-            <div className="relative h-[100px]">
+          <div className="mt-[48px] min-[1024px]:mt-[64px]" data-node-id="5348:6505">
+            {/* Whole Model Zoo — strip heading */}
+            <div className="flex w-full flex-col items-center gap-[12px] text-center mb-[20px] min-[1024px]:mb-[28px]">
+              <h3
+                className={`${gilroyMedium.className} m-0 bg-clip-text text-[28px] leading-[32px] min-[1024px]:text-[36px] min-[1024px]:leading-[40px] font-medium text-transparent not-italic`}
+                style={{
+                  backgroundImage: TITLE_GRADIENT,
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                }}
+              >
+                The whole Model Zoo
+              </h3>
+              <p className={`${interRegular.className} text-[14px] leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] max-w-[640px]`}>
+                Every open-source and Ambient-built model across audio, vision, and motion - 30+ and growing.
+              </p>
+            </div>
+
+            <div className="relative h-[80px]">
               <p
                 className={`${gilroySemiBold.className} absolute top-[20.32px] left-0 bg-clip-text text-[56px] leading-[60px] font-semibold tracking-[-1.12px] whitespace-nowrap text-transparent opacity-90 not-italic`}
                 style={{

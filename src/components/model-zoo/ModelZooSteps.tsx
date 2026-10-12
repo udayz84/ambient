@@ -129,7 +129,7 @@ export function ModelZooSteps({ formConfig }: { formConfig?: any }) {
 
   return (
     <section
-      className="relative mt-[84px] w-full"
+      className="relative mt-[120px] min-[1024px]:mt-[160px] w-full"
       data-node-id="5131:10582"
       aria-label="Pick a model. Push a button. It's running."
     >

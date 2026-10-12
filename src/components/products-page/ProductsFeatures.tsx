@@ -78,7 +78,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
   return (
     <section
       id="products-features"
-      className="relative left-1/2 w-screen max-w-none -translate-x-1/2 bg-black min-[1024px]:py-[120px]"
+      className="relative left-1/2 w-screen max-w-none -translate-x-1/2 bg-black min-[1024px]:pt-[120px] min-[1024px]:pb-0"
       data-node-id="3286:1931"
       data-name="Section 6"
       aria-label="Product capabilities"
@@ -138,7 +138,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
           </div>
 
           {/* CARDS NATIVE SCROLL */}
-          <div className="flex w-full justify-center transform scale-[0.8] origin-top max-[1300px]:scale-[0.75] max-[1150px]:scale-[0.65]">
+          <div className="flex w-full justify-center transform scale-[0.8] origin-top max-[1300px]:scale-[0.75] max-[1150px]:scale-[0.65] -mb-[80px] max-[1300px]:-mb-[100px] max-[1150px]:-mb-[140px]">
             <div className="flex gap-[24px]">
               {featureCards.map((card, index) => (
                 <div key={card.nodeId} className="shrink-0">
@@ -148,13 +148,13 @@ export function ProductsFeatures({ data }: { data?: any }) {
             </div>
           </div>
 
-          {/* 3710:1634 — caption */}
-          <p
+          {/* 3710:1634 — caption (hidden per request) */}
+          {/* <p
             className={`${interRegular.className} -mt-[60px] w-[800px] max-w-[90vw] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-80 not-italic [word-break:break-word]`}
             data-node-id="3710:1634"
           >
             {CAPTION}
-          </p>
+          </p> */}
         </div>
       </div>
 
@@ -190,7 +190,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
           </p>
         </div>
 
-        <div className="relative mt-[40px] flex snap-x snap-mandatory gap-[16px] overflow-x-auto px-[24px] pb-[8px] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        <div className="relative mt-[40px] flex snap-x snap-mandatory gap-[16px] overflow-x-auto px-[24px] pb-[40px] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {featureCards.map((card) => (
             <div key={`m-${card.nodeId}`} className="snap-center shrink-0">
               <div
@@ -206,12 +206,6 @@ export function ProductsFeatures({ data }: { data?: any }) {
             </div>
           ))}
         </div>
-
-        <p
-          className={`${interRegular.className} relative mx-auto mt-[64px] max-w-[603.549px] px-[24px] pb-[40px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
-        >
-          {CAPTION}
-        </p>
       </div>
     </section>
   );

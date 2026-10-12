@@ -499,7 +499,7 @@ export function ApplicationsPageModelZoo({
 
       {variant === "strip" ? (
         /* Two-row collage carousel strip for the main Applications page */
-        <div className="relative z-10 mt-[60px] flex w-full flex-col gap-[16px] overflow-hidden">
+        <div className="relative z-10 mt-[100px] flex w-full flex-col gap-[16px] overflow-hidden">
           <CollageRow
             cards={COLLAGE_ROW_1}
             nodeId="app-mz-r1"
@@ -513,35 +513,46 @@ export function ApplicationsPageModelZoo({
             duration={26}
           />
         </div>
-      ) : features ? (
-        /* Hardcoded feature cards for Wearables & Smart Homes */
-        <div className="relative z-10 mt-[60px] w-full py-[24px] px-[24px] min-[1024px]:px-[64px] min-[1024px]:py-[32px] max-w-[1440px]">
-          <div className="flex w-full flex-wrap min-[1024px]:flex-nowrap justify-center gap-[16px] sm:gap-[24px]">
-            {features.map((item) => (
-              <div
-                key={item.title}
-                className="w-full sm:w-[calc(50%-12px)] min-[1024px]:w-[calc(20%-19.2px)] max-w-[400px] min-[1024px]:max-w-none"
-              >
-                <FeatureCard item={item} />
-              </div>
-            ))}
-          </div>
+      ) : null}
+
+      {/* CTA underneath the carousel (strip variant only) */}
+      {variant === "strip" ? (
+        <div className="relative z-10 mt-[48px] flex w-full min-[1024px]:w-auto flex-col min-[1024px]:flex-row items-center justify-center gap-[16px]">
+          <PrimaryCta label={primaryCta.label} href={primaryCta.href} />
         </div>
-      ) : (
-        /* Partner cards on other application slug pages */
-        <div className="relative z-10 mt-[60px] w-full py-[24px] px-[24px] min-[1024px]:px-[64px] min-[1024px]:py-[32px] max-w-[1440px]">
-          <div className="flex w-full flex-wrap min-[1024px]:flex-nowrap justify-center gap-[16px] sm:gap-[24px]">
-            {PARTNERS_WHY.journey.map((step) => (
-              <div
-                key={step.title}
-                className="w-full sm:w-[calc(50%-12px)] min-[1024px]:w-[calc(20%-19.2px)] max-w-[400px] min-[1024px]:max-w-none"
-              >
-                <WhyCard step={step} />
-              </div>
-            ))}
+      ) : null}
+
+      {variant !== "strip" ? (
+        features ? (
+          /* Hardcoded feature cards for Wearables & Smart Homes */
+          <div className="relative z-10 mt-[60px] w-full py-[24px] px-[24px] min-[1024px]:px-[64px] min-[1024px]:py-[32px] max-w-[1440px]">
+            <div className="flex w-full flex-wrap min-[1024px]:flex-nowrap justify-center gap-[16px] sm:gap-[24px]">
+              {features.map((item) => (
+                <div
+                  key={item.title}
+                  className="w-full sm:w-[calc(50%-12px)] min-[1024px]:w-[calc(20%-19.2px)] max-w-[400px] min-[1024px]:max-w-none"
+                >
+                  <FeatureCard item={item} />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        ) : (
+          /* Partner cards on other application slug pages */
+          <div className="relative z-10 mt-[60px] w-full py-[24px] px-[24px] min-[1024px]:px-[64px] min-[1024px]:py-[32px] max-w-[1440px]">
+            <div className="flex w-full flex-wrap min-[1024px]:flex-nowrap justify-center gap-[16px] sm:gap-[24px]">
+              {PARTNERS_WHY.journey.map((step) => (
+                <div
+                  key={step.title}
+                  className="w-full sm:w-[calc(50%-12px)] min-[1024px]:w-[calc(20%-19.2px)] max-w-[400px] min-[1024px]:max-w-none"
+                >
+                  <WhyCard step={step} />
+                </div>
+              ))}
+            </div>
+          </div>
+        )
+      ) : null}
     </section>
   );
 }

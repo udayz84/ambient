@@ -12,6 +12,19 @@ import { ModelZooKits } from "./ModelZooKits";
  * 78px navbar like the other pages. Desktop sections stack with the exact
  * Figma vertical gaps.
  */
+const MODEL_ZOO_APP_FORGE_STEPS = [
+  { title: "Pair over BLE", description: "Connect the app to your eval board in a tap." },
+  { title: "Flash a demo instantly", description: "Push VAD, gesture recognition, fall detection, and more to the board." },
+  { title: "See it live", description: "Watch inference results stream to your phone in real time." },
+];
+
+const MODEL_ZOO_APP_FORGE_PROPS = {
+  steps: MODEL_ZOO_APP_FORGE_STEPS,
+  hideArticleCard: true,
+  storeButtonsUnderSteps: true,
+  bothStoresComingSoon: true,
+};
+
 export function ModelZoo({ forms }: { forms?: any }) {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
@@ -21,8 +34,8 @@ export function ModelZoo({ forms }: { forms?: any }) {
       <div id="model-zoo-content" className="mt-[36px]" />
       <ModelZooWatchItRun />
       <ModelZooLibrary requestForm={forms?.request} />
+      <ModelZooAppForge formConfig={forms?.evalkit} {...MODEL_ZOO_APP_FORGE_PROPS} />
       <ModelZooSteps formConfig={forms?.sdk} />
-      <ModelZooAppForge formConfig={forms?.evalkit} />
       <ModelZooBuildIt />
       <ModelZooKits />
 

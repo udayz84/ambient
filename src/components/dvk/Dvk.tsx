@@ -40,6 +40,19 @@ const DVK_DESKTOP_HEIGHT = 658;
 
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
+const DVK_APP_FORGE_STEPS = [
+  { title: "Pair over BLE", description: "Connect the app to your eval board in a tap." },
+  { title: "Flash a demo instantly", description: "Push VAD, gesture recognition, fall detection, and more to the board." },
+  { title: "See it live", description: "Watch AI inference results stream to your phone in real time." },
+];
+
+const DVK_APP_FORGE_PROPS = {
+  steps: DVK_APP_FORGE_STEPS,
+  hideArticleCard: true,
+  storeButtonsUnderSteps: true,
+  bothStoresComingSoon: true,
+};
+
 export function Dvk({ data, formConfig }: { data?: any; formConfig?: any }) {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
@@ -59,7 +72,10 @@ export function Dvk({ data, formConfig }: { data?: any; formConfig?: any }) {
       {/* DESKTOP (>=1024px) — hardware stack section (2761:2905) */}
       <div id="dvk-content" className="relative mx-auto hidden w-full bg-black min-[1024px]:block">
         {data?.inside_module ? (
-          <SomInsideModule data={data.inside_module} />
+          <SomInsideModule
+            data={data.inside_module}
+            bridgeCta={{ label: "Explore SOMs", href: "/SOM" }}
+          />
         ) : null}
       </div>
 
@@ -74,7 +90,7 @@ export function Dvk({ data, formConfig }: { data?: any; formConfig?: any }) {
       
       {/* DESKTOP (>=1024px) — Application Forge section (copied from /model-zoo) */}
       <div className="hidden w-full bg-black min-[1024px]:block">
-        <ModelZooAppForge data={data?.appforge} formConfig={formConfig} />
+        <ModelZooAppForge data={data?.appforge} formConfig={formConfig} {...DVK_APP_FORGE_PROPS} />
       </div>
 
       {/* DESKTOP (>=1024px) — ModelForge section (3773:685, 1440×873 canvas) */}
@@ -92,12 +108,17 @@ export function Dvk({ data, formConfig }: { data?: any; formConfig?: any }) {
       {/* MOBILE (<1024px) — stacked layout */}
       <DvkHeroMobile data={data?.hero} formConfig={formConfig} />
       <div className="min-[1024px]:hidden">
-        {data?.inside_module ? <SomInsideModule data={data.inside_module} /> : null}
+        {data?.inside_module ? (
+          <SomInsideModule
+            data={data.inside_module}
+            bridgeCta={{ label: "Explore SOMs", href: "/SOM" }}
+          />
+        ) : null}
       </div>
       <SomPrototypeTitleMobile data={data?.prototype} />
       <DvkDemosMobile data={data?.demos} />
       <div className="w-full bg-black min-[1024px]:hidden">
-        <ModelZooAppForge data={data?.appforge} formConfig={formConfig} />
+        <ModelZooAppForge data={data?.appforge} formConfig={formConfig} {...DVK_APP_FORGE_PROPS} />
       </div>
       <DvkModelForgeMobile data={data?.modelforge} />
 
@@ -462,9 +483,13 @@ const MOBILE_DEMO_DECOR = [
  */
 function DvkDemosMobile({ data }: { data?: any }) {
   const heading = data?.heading || "Pre-loaded demos. Instant AI validation.";
-  const subtitle =
+  const rawSubtitle =
     data?.subtitle ||
-    "Don't spend your first day writing sensor configuration code. The Cranium board comes ready to run out of the box, allowing you to instantly test physical AI models and validate performance on the metal with zero setup required.";
+    "A curated set of AI models you can push to the NuraSense kit and see working in seconds";
+  const subtitle = rawSubtitle.replace(
+    /The Cranium( board)? comes ready to run out of the box/g,
+    "The NuraSense board comes ready to run out of the box",
+  );
   const cards =
     data?.demo_cards && Array.isArray(data?.demo_cards) && data.demo_cards.length > 0
       ? data.demo_cards.map((c: any, i: number) => ({
@@ -492,6 +517,9 @@ function DvkDemosMobile({ data }: { data?: any }) {
           className="absolute top-[30px] left-[calc(50%+0.5px)] flex w-[352px] max-w-[calc(100%-40px)] -translate-x-1/2 flex-col items-center gap-[15px]"
           data-node-id="4059:10213"
         >
+          <p className={`${dmMono.className} m-0 text-[12px] leading-[19.5px] font-normal tracking-[-0.36px] whitespace-nowrap text-[#a9e28c] uppercase not-italic`}>
+            Demo Ready
+          </p>
           {/* Title frame — 4059:10214 (350×112, corner ticks) */}
           <div
             className="relative h-[112px] w-[350px] max-w-full"
@@ -676,10 +704,10 @@ const MOBILE_MODEL_CARD_RADIAL =
  * toolchain block 4062:11241 (19, 1623).
  */
 function DvkModelForgeMobile({ data }: { data?: any }) {
-  const heading = data?.heading || "Powered by ModelForge.";
+  const heading = data?.heading || "Have your own model? Meet ModelForge.";
   const subtitle =
     data?.subtitle ||
-    "Don't let software be the bottleneck. The Cranium DVK is fully supported by our unified software toolchain, designed to take you from a standard TensorFlow model to on-silicon inference in under 15 minutes.";
+    "ApplicationForge flashes the ready-made demos with zero code. When you want to run your own model — or need deeper, full-toolchain control — ModelForge takes a standard TensorFlow model to on-silicon inference in 15 minutes.";
 
   const yourModelTitle = data?.your_model_title || "Your Model";
   const yourModelDesc =
@@ -731,6 +759,9 @@ function DvkModelForgeMobile({ data }: { data?: any }) {
           className="absolute top-[30px] left-[calc(50%+0.5px)] flex w-[352px] max-w-[calc(100%-40px)] -translate-x-1/2 flex-col items-center gap-[15px]"
           data-node-id="4062:10906"
         >
+          <p className={`${dmMono.className} m-0 text-[12px] leading-[19.5px] font-normal tracking-[-0.36px] whitespace-nowrap text-[#a9e28c] uppercase not-italic`}>
+            Build Your Own
+          </p>
           {/* Title frame — 4062:10907 (350×82, corner ticks) */}
           <div
             className="relative h-[82px] w-[350px] max-w-full"

@@ -28,9 +28,9 @@ const MODES_CHEV_RIGHT = [
 const TITLE_GRADIENT_DEG = "106.506deg";
 const SUBTITLE_OPACITY = 0.65;
 const FALLBACK_TAG = "Inside Sensemesh";
-const FALLBACK_HEADING = "Two named modes.\nOne continuous loop.";
+const FALLBACK_HEADING = "Always aware, Instantly Awake";
 const FALLBACK_SUBTITLE =
-  "Bridge the lab and real world. The Sparsh module offers continuous, microwatt intelligence in a 21\u00d721mm size,";
+  "Always-on inference at microwatts. Full power the moment it's needed. Then straight back to idle, no reset, no wake-up.";
 
 const MODES_LOOP_MOBILE = "/technology/modes-loop-mobile.webp";
 const MOBILE_TITLE_GRADIENT_DEG = "101.838deg";
@@ -60,7 +60,7 @@ const MODE_CARD_CONFIG: ModeCardConfig[] = [
     height: "h-[235px]",
     title: "Subconscious AI",
     bullet:
-      "Legacy chips switch off. A-Cube sleeps like you: the brain stays aware. Our island runs AI at microwatts while the ARM core is powered down. Always processing, never draining.",
+      "Legacy chips switch off. A-Cube sleeps like you: the brain stays aware. A-cube runs AI at microwatts while the host controller is powered down. Always processing, never draining.",
     caption: "Always processing, never draining.",
   },
   {
@@ -69,7 +69,7 @@ const MODE_CARD_CONFIG: ModeCardConfig[] = [
     top: "top-[333px]",
     width: "w-[254px]",
     height: "h-[235px]",
-    title: "Turboboost mode",
+    title: "ReflexSurge mode",
     bullet:
       "When something matters, the brain wakes instantly. The moment SenseMesh flags a real event, runtime DVFS ramps the chip from subconscious idle to full performance",
     caption: "live, no reset \u2014 settles back down.",
@@ -98,7 +98,7 @@ type ModeLabelConfig = {
 const MODE_LABEL_CONFIG: ModeLabelConfig[] = [
   { left: "left-[434.57px]", top: "top-[519.48px]", variant: "title", label: "SUBCONSCIOUS MODE" },
   { left: "left-[419.57px]", top: "top-[542.48px]", variant: "descriptor", label: "Always on. Ultra low power" },
-  { left: "left-[876.5px]", top: "top-[515.33px]", variant: "title", label: "Turboboost mode" },
+  { left: "left-[876.5px]", top: "top-[515.33px]", variant: "title", label: "ReflexSurge mode" },
   { left: "left-[848px]", top: "top-[538.33px]", variant: "descriptor", label: "on-demand. high performance" },
 ];
 

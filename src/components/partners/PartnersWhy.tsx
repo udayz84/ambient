@@ -103,6 +103,28 @@ export function PartnersWhy({ content }: { content: WhyContent }) {
       className={`relative mx-auto flex w-full max-w-[1440px] flex-col items-center gap-[36px] pb-[40px] pt-0 -mt-[20px] min-[1024px]:pb-[64px] min-[1024px]:pt-0 min-[1024px]:-mt-[60px] ${fadeCls} transform-gpu overflow-hidden`}
       aria-label="A production AI product is a full-stack challenge"
     >
+      {/* Background visual — concentric wave rings */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+        aria-hidden
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/image-108.png"
+          alt=""
+          className="absolute inset-0 size-full object-cover object-center opacity-80"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 15%, rgba(0,0,0,0) 85%, rgba(0,0,0,0.6) 100%)",
+          }}
+        />
+      </div>
+
       <div className="relative flex flex-col items-center gap-[16px] px-[24px]">
         {/* Heading kept hardcoded: the two-line split is part of the design
             (the CMS string field cannot carry the line break). */}

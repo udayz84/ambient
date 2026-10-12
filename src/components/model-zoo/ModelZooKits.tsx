@@ -23,11 +23,11 @@ const CARDS = [
   {
     nodeId: "5246:6386",
     img: "/model-zoo/kit-2.webp",
-    alt: "ApplicationForge phone app",
+    alt: "NuraSync phone app",
     title: "Experience it now.",
-    desc: "Download ApplicationForge and drive live demos from your phone.",
-    cta: "Get the ApplicationForge App",
-    ctaWidth: 290,
+    desc: "Download NuraSync and drive live demos from your phone.",
+    cta: "Get NuraSync App",
+    ctaWidth: 220,
   },
   {
     nodeId: "5246:6416",
@@ -35,8 +35,8 @@ const CARDS = [
     alt: "Model cards and code on GitHub",
     title: "Go deeper.",
     desc: "Browse the code and model cards on GitHub.",
-    cta: "Browse the Model Zoo",
-    ctaWidth: 240,
+    cta: "GitHub Coming Soon",
+    ctaWidth: 220,
   },
 ];
 
@@ -64,7 +64,7 @@ function KitCard({ card }: { card: (typeof CARDS)[number] }) {
       </div>
 
       {/* content */}
-      <div className="flex w-full flex-col items-start gap-[10px]">
+      <div className="flex w-full flex-1 flex-col items-start gap-[10px]">
         <p className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] text-white not-italic min-[1024px]:whitespace-nowrap`}>
           {card.title}
         </p>
@@ -73,7 +73,9 @@ function KitCard({ card }: { card: (typeof CARDS)[number] }) {
         </p>
       </div>
 
-      <CtaPrimary label={card.cta} width={card.ctaWidth} />
+      <div className="mt-auto">
+        <CtaPrimary label={card.cta} width={card.ctaWidth} />
+      </div>
 
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
     </div>
@@ -89,7 +91,7 @@ export function ModelZooKits() {
     <section
       className="relative z-20 mt-[100px] mb-[-700px] min-[1024px]:mb-[-400px] w-full bg-transparent"
       data-node-id="5131:10997"
-      aria-label="Start with a model that already works"
+      aria-label="Stop reading. Start running."
     >
       {/* decorative arcs (page x=92 container coords, negative tops reach
           up under the previous section like in the Figma canvas) */}
@@ -108,17 +110,20 @@ export function ModelZooKits() {
 
       <div className="relative mx-auto w-full max-w-[1256px] px-[16px] min-[1024px]:px-0">
         {/* Title — 5131:11088 */}
-        <div className="flex justify-center" data-node-id="5131:11088" data-name="Section Title">
+        <div className="flex w-full flex-col items-center gap-[24px]" data-node-id="5131:11088" data-name="Section Title">
           <div className="relative px-[10px]" data-node-id="5131:11089" data-name="Title">
             <h2
               className={`${gilroyMedium.className} w-full max-w-[605px] bg-clip-text text-center text-[36px] leading-[36px] min-[1024px]:text-[46px] min-[1024px]:leading-[49px] font-medium text-transparent not-italic`}
               style={{ backgroundImage: TITLE_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
               data-node-id="5131:11090"
             >
-              Start with a model that already works.
+              Stop reading. Start running.
             </h2>
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           </div>
+          <p className={`${interRegular.className} w-full max-w-[679.389px] text-center text-[14px] leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
+            Request a kit and run any model from day one — or try it free from your phone right now.
+          </p>
         </div>
 
         {/* Cards — 5246:6363 (26px inset, gap 24, h 553) */}

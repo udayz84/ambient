@@ -121,9 +121,35 @@ export function PartnersMatchForm({
     <section
       id="get-matched"
       ref={fadeRef}
-      className={`relative mx-auto flex w-full max-w-[1204px] scroll-mt-[78px] flex-col items-center gap-[40px] px-[24px] py-[40px] min-[1024px]:py-[64px] ${fadeCls} transform-gpu`}
+      className={`relative mx-auto flex w-full max-w-[1204px] scroll-mt-[78px] flex-col items-center gap-[40px] px-[24px] py-[40px] min-[1024px]:py-[64px] ${fadeCls} transform-gpu overflow-hidden`}
       aria-label="Get matched with a partner"
     >
+      {/* Background visual — Company image-124 matrix texture */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden mix-blend-screen opacity-[0.25]"
+        style={{
+          maskImage: "linear-gradient(to bottom, black 0%, black 75%, transparent 95%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 75%, transparent 95%)",
+        }}
+        aria-hidden
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/company/image-124.webp"
+          alt=""
+          className="absolute inset-0 size-full object-cover object-left-top"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.6) 75%, rgb(0,0,0) 92%)",
+          }}
+        />
+      </div>
+
       <div className="relative flex flex-col items-center gap-[16px] px-[10px]">
         <PartnersSectionHeading deg="119.522deg">{content.heading}</PartnersSectionHeading>
         <Corners />
@@ -133,7 +159,7 @@ export function PartnersMatchForm({
         {content.subheading}
       </p>
 
-      <div className="relative w-full max-w-[760px] bg-[rgba(46,119,20,0.14)] backdrop-blur-[8px]">
+      <div className="relative w-full max-w-[760px] border-[1.5px] border-solid border-[rgba(83,216,36,0.2)] bg-black backdrop-blur-[8px]">
         <Corners />
 
         {submitted ? (

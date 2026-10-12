@@ -10,7 +10,7 @@ import { useFitText } from "../shared/FitText";
 const TITLE_GRADIENT =
   "linear-gradient(118.011deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
-const FALLBACK_HEADING = "The Empirical Proof";
+const SECTION_HEADING = "Run any model. Keep all four advantages";
 const FALLBACK_SUBTITLE =
   "Don't spend your first day writing sensor configuration code. The Cranium board comes ready to run out of the box, allowing you to instantly test physical AI models and validate performance on the metal with zero setup required.";
 
@@ -379,8 +379,9 @@ const ECG_FRAMES = [
   },
 ];
 
-const SMART_HOME_EYEBROW = "MEASURED, NOT PROJECTED";
-const SMART_HOME_HEADING = "The difference between a plugged-in hub and a battery device.";
+const SECTION_EYEBROW = "The on-device advantage";
+const INDUSTRIAL_EYEBROW = "Measured, Not Projected";
+const INDUSTRIAL_HEADING = "The difference between a low-power DSP and low-power AI.";
 const SMART_HOME_SUBTITLE =
   "Take one always-on workload — continuous wake-word + presence detection — and look at what it costs to run. This is why Ambient devices can go cordless.";
 
@@ -583,6 +584,7 @@ function EcgCard({
   title,
   description,
   isSmartHome,
+  isIndustrial,
   tags,
 }: {
   index: number;
@@ -593,6 +595,7 @@ function EcgCard({
   title: string;
   description: string;
   isSmartHome?: boolean;
+  isIndustrial?: boolean;
   tags?: { icon: string; label: string }[];
 }) {
   const frame = ECG_FRAMES[index];
@@ -607,20 +610,28 @@ function EcgCard({
     >
       <CardAbstractBg />
       {/* Image — 4016:3933 / 4016:3954 / 4016:3975 / 4016:3997 */}
-      <div
-        className="pointer-events-none absolute mix-blend-lighten"
-        style={{ left: frame.left, top: frame.top, width: frame.width, height: frame.height }}
-        aria-hidden
-      >
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <img loading="lazy" decoding="async" alt="" src={imageSrc} className="absolute inset-0 size-full max-w-none object-contain" />
+      {isIndustrial ? (
+        /* Full-width photo (CMS photos are 4:3 renders, not framed chips) */
+        <div className="pointer-events-none absolute left-0 top-0 h-[185px] w-full overflow-hidden" aria-hidden>
+          <img loading="lazy" decoding="async" alt="" src={imageSrc} className="absolute inset-0 size-full max-w-none object-cover object-center" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#091208] via-transparent to-transparent" />
         </div>
-        {frame.overlay ? (
-          <div className="absolute inset-0" style={{ backgroundImage: frame.overlay }} />
-        ) : null}
-      </div>
+      ) : (
+        <div
+          className="pointer-events-none absolute mix-blend-lighten"
+          style={{ left: frame.left, top: frame.top, width: frame.width, height: frame.height }}
+          aria-hidden
+        >
+          <div className="pointer-events-none absolute inset-0 overflow-hidden">
+            <img loading="lazy" decoding="async" alt="" src={imageSrc} className="absolute inset-0 size-full max-w-none object-contain" />
+          </div>
+          {frame.overlay ? (
+            <div className="absolute inset-0" style={{ backgroundImage: frame.overlay }} />
+          ) : null}
+        </div>
+      )}
       {/* Accent image (card 3 only) — 4016:3991 */}
-      {!isSmartHome && index === 2 ? (
+      {!isSmartHome && !isIndustrial && index === 2 ? (
         <div className="pointer-events-none absolute left-[43px] top-[63px] h-[70px] w-[73px]" aria-hidden>
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
             <img loading="lazy" decoding="async"
@@ -691,6 +702,7 @@ function EcgCardMobile({
   title,
   description,
   isSmartHome,
+  isIndustrial,
 }: {
   imageSrc: string;
   badge: string;
@@ -699,6 +711,7 @@ function EcgCardMobile({
   title: string;
   description: string;
   isSmartHome?: boolean;
+  isIndustrial?: boolean;
 }) {
   return (
     <div className={`relative min-h-[290px] w-full shrink-0 ${CARD_BG}`}>
@@ -707,15 +720,23 @@ function EcgCardMobile({
         leftSrc="/applications/wearables/vector-47.svg"
         rightSrc="/applications/wearables/vector-46.svg"
       />
-      <div
-        className="pointer-events-none absolute left-1/2 top-[-12px] flex w-[220px] -translate-x-1/2 items-center justify-center mix-blend-lighten"
-        aria-hidden
-      >
-        <div className="relative h-[220px] w-full scale-85">
-          <img loading="lazy" decoding="async" alt="" src={imageSrc} className="absolute inset-0 size-full max-w-none object-contain" />
-          <div className="absolute inset-0" style={{ backgroundImage: IMG_OVERLAY_1 }} />
+      {isIndustrial ? (
+        /* Full-width photo for CMS-rendered 4:3 images */
+        <div className="pointer-events-none absolute left-0 top-0 h-[150px] w-full overflow-hidden" aria-hidden>
+          <img loading="lazy" decoding="async" alt="" src={imageSrc} className="absolute inset-0 size-full max-w-none object-cover object-center" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0c160b] via-transparent to-transparent" />
         </div>
-      </div>
+      ) : (
+        <div
+          className="pointer-events-none absolute left-1/2 top-[-12px] flex w-[220px] -translate-x-1/2 items-center justify-center mix-blend-lighten"
+          aria-hidden
+        >
+          <div className="relative h-[220px] w-full scale-85">
+            <img loading="lazy" decoding="async" alt="" src={imageSrc} className="absolute inset-0 size-full max-w-none object-contain" />
+            <div className="absolute inset-0" style={{ backgroundImage: IMG_OVERLAY_1 }} />
+          </div>
+        </div>
+      )}
       <div className="absolute left-[14px] top-[14px] flex items-center">
         <Badge label={badge} width={badgeWidth} />
       </div>
@@ -759,11 +780,15 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
     (slug && (slug === "smarthomes" || slug === "smart-homes" || slug.includes("home"))) ||
     data?.heading?.includes("plugged-in")
   );
+  const isIndustrial = Boolean(
+    slug && (slug === "industrial_iot" || slug === "industrial-iot" || slug.includes("industrial"))
+  );
+  const eyebrow = isIndustrial ? INDUSTRIAL_EYEBROW : SECTION_EYEBROW;
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 1 });
   const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
 
+  const heading = isIndustrial ? INDUSTRIAL_HEADING : SECTION_HEADING;
   const subtitle = isSmartHome ? SMART_HOME_SUBTITLE : (data?.subtitle || FALLBACK_SUBTITLE);
-  const heading = isSmartHome ? SMART_HOME_HEADING : (data?.heading || FALLBACK_HEADING);
   const healthData = data?.health_card;
   const powerData = data?.power_card;
   const workloadData = data?.workload_card;
@@ -833,7 +858,7 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
                 rightSrc="/applications/wearables/vector-46.svg"
               />
               <p className={`${dmMono.className} text-[13px] leading-none font-normal tracking-[-0.39px] text-[#ecfae5] uppercase whitespace-nowrap not-italic`}>
-                {SMART_HOME_EYEBROW}
+                {eyebrow}
               </p>
               <div className="absolute top-1/2 left-[6.48px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
               <div className="absolute top-1/2 right-[7.52px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
@@ -848,9 +873,7 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
                   backgroundClip: "text",
                 }}
               >
-                The difference between a plugged-in hub
-                <br />
-                and a battery device.
+                {heading}
               </h2>
               <Corners
                 leftSrc="/applications/wearables/vector-42.svg"
@@ -881,7 +904,7 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
           </div>
         </div>
       ) : (
-        <div className="relative hidden w-full max-w-[1440px] min-[1024px]:block h-[700px]">
+        <div className="relative hidden w-full max-w-[1440px] min-[1024px]:block h-[790px]">
           {/* Top decorative SVG */}
           <div
             className="pointer-events-none absolute top-[-26.9px] left-1/2 h-[320px] w-[881.616px] -translate-x-1/2"
@@ -897,6 +920,18 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
 
           {/* Section title */}
           <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center justify-center gap-[20px] top-[103.1px]">
+            {/* Eyebrow */}
+            <div className="relative flex items-center justify-center h-[26px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)] border-[0.5px] border-[rgba(255,255,255,0.2)] px-[18px]">
+              <Corners
+                leftSrc="/applications/wearables/vector-47.svg"
+                rightSrc="/applications/wearables/vector-46.svg"
+              />
+              <p className={`${dmMono.className} text-[13px] leading-none font-normal tracking-[-0.39px] text-[#ecfae5] uppercase whitespace-nowrap not-italic`}>
+                {eyebrow}
+              </p>
+              <div className="absolute top-1/2 left-[6.48px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+              <div className="absolute top-1/2 right-[7.52px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+            </div>
             <div className="relative flex flex-col items-center px-[10px]" data-name="Title">
               <h2
                 ref={fitRef}
@@ -922,7 +957,7 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
           </div>
 
           {/* Bottom row — 4 cards */}
-          <div className="absolute left-1/2 flex -translate-x-1/2 gap-[20.67px] top-[288.75px]">
+          <div className="absolute left-1/2 flex -translate-x-1/2 gap-[20.67px] top-[345px]">
             {ecgCards.map((card, i) => (
               <EcgCard
                 key={i}
@@ -934,9 +969,39 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
                 title={card.title}
                 description={card.description}
                 isSmartHome={false}
+                isIndustrial={isIndustrial}
               />
             ))}
           </div>
+
+          {/* Industrial CTAs */}
+          {isIndustrial && (
+            <div className="absolute left-1/2 top-[742px] z-10 flex -translate-x-1/2 items-center gap-[16px]">
+              <a
+                href="#"
+                className={`${gilroyMedium.className} relative flex h-[44px] items-center justify-center px-[20px] cursor-pointer overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+              >
+                <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
+                <GreenCtaCorners />
+                <span className="relative z-10 whitespace-nowrap text-[13px] leading-[28px] font-medium text-white uppercase not-italic">
+                  Download the Power Benchmark
+                </span>
+                <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
+              </a>
+              <a
+                href="#"
+                className={`${gilroyMedium.className} relative flex h-[44px] items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[20px]`}
+              >
+                <span className="relative z-10 whitespace-nowrap text-[13px] leading-[28px] font-medium text-white uppercase not-italic">
+                  How A-Cube Works
+                </span>
+                <Corners
+                  leftSrc="/applications/wearables/vector-47.svg"
+                  rightSrc="/applications/wearables/vector-46.svg"
+                />
+              </a>
+            </div>
+          )}
         </div>
       )}
 
@@ -945,19 +1010,17 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
 
         {/* Title */}
         <div className="relative z-10 flex w-full max-w-[420px] flex-col items-center gap-[12px]">
-          {isSmartHome && (
-            <div className="relative flex items-center justify-center h-[26px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)] border-[0.5px] border-[rgba(255,255,255,0.2)] px-[18px]">
-              <Corners
-                leftSrc="/applications/wearables/vector-47.svg"
-                rightSrc="/applications/wearables/vector-46.svg"
-              />
-              <p className={`${dmMono.className} text-[13px] leading-none font-normal tracking-[-0.39px] text-[#ecfae5] uppercase whitespace-nowrap not-italic`}>
-                {SMART_HOME_EYEBROW}
-              </p>
-              <div className="absolute top-1/2 left-[6.48px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
-              <div className="absolute top-1/2 right-[7.52px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
-            </div>
-          )}
+          <div className="relative flex items-center justify-center h-[26px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)] border-[0.5px] border-[rgba(255,255,255,0.2)] px-[18px]">
+            <Corners
+              leftSrc="/applications/wearables/vector-47.svg"
+              rightSrc="/applications/wearables/vector-46.svg"
+            />
+            <p className={`${dmMono.className} text-[13px] leading-none font-normal tracking-[-0.39px] text-[#ecfae5] uppercase whitespace-nowrap not-italic`}>
+              {eyebrow}
+            </p>
+            <div className="absolute top-1/2 left-[6.48px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+            <div className="absolute top-1/2 right-[7.52px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+          </div>
           <div className="relative w-fit px-[12px] py-[6px]">
             <h2
               {...(!isSmartHome ? { ref: fitRef2 } : {})}
@@ -968,15 +1031,7 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
                 backgroundClip: "text",
               }}
             >
-              {isSmartHome ? (
-                <>
-                  The difference between a plugged-in hub
-                  <br />
-                  and a battery device.
-                </>
-              ) : (
-                heading
-              )}
+              {heading}
             </h2>
             <Corners
               leftSrc="/applications/wearables/vector-42.svg"
@@ -1015,9 +1070,39 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
                   title={card.title}
                   description={card.description}
                   isSmartHome={false}
+                  isIndustrial={isIndustrial}
                 />
               ))}
         </div>
+
+        {/* Industrial CTAs */}
+        {isIndustrial && (
+          <div className="relative z-10 flex w-full max-w-[352px] flex-col items-center gap-[12px]">
+            <a
+              href="#"
+              className={`${gilroyMedium.className} relative flex h-[44px] w-full items-center justify-center cursor-pointer overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+            >
+              <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
+              <GreenCtaCorners />
+              <span className="relative z-10 whitespace-nowrap text-[13px] leading-[28px] font-medium text-white uppercase not-italic">
+                Download the Power Benchmark
+              </span>
+              <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
+            </a>
+            <a
+              href="#"
+              className={`${gilroyMedium.className} relative flex h-[44px] w-full items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[20px]`}
+            >
+              <span className="relative z-10 whitespace-nowrap text-[13px] leading-[28px] font-medium text-white uppercase not-italic">
+                How A-Cube Works
+              </span>
+              <Corners
+                leftSrc="/applications/wearables/vector-47.svg"
+                rightSrc="/applications/wearables/vector-46.svg"
+              />
+            </a>
+          </div>
+        )}
       </div>
     </section>
   );

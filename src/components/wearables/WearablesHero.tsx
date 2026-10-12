@@ -85,8 +85,8 @@ export function WearablesHero({
   const { fadeRef: desktopRef, isVisible: desktopVisible } = useFadeIn();
   const { fadeRef: mobileRef, isVisible: mobileVisible } = useFadeIn();
 
-  const fitRef = useFitText<HTMLDivElement>({ maxLines: 2 });
-  const fitRef2 = useFitText<HTMLDivElement>({ maxLines: 2 });
+  const fitRef = useFitText<HTMLDivElement>({ maxLines: 2, floor: 32 });
+  const fitRef2 = useFitText<HTMLDivElement>({ maxLines: 2, floor: 22 });
   const fitRef3 = useFitText<HTMLParagraphElement>({ maxLines: 1 });
   const fitRef4 = useFitText<HTMLParagraphElement>({ maxLines: 1 });
 
@@ -163,12 +163,12 @@ export function WearablesHero({
           data-name="Content"
         >
           <div
-            className="relative h-[118px] w-[411px] shrink-0"
+            className="relative flex min-h-[118px] w-fit min-w-[411px] max-w-[620px] shrink-0 items-center justify-center px-[28px] py-[10px]"
             data-node-id="2509:379"
             data-name="Title"
           >
             <div
-              className="absolute top-[0.81px] left-[0.82px] h-[116px] w-[409.266px]"
+              className="pointer-events-none absolute inset-0 size-full"
               data-node-id="2509:380"
               data-name="Frame"
             >
@@ -181,7 +181,7 @@ export function WearablesHero({
             </div>
             <div
               ref={fitRef}
-              className={`${gilroyMedium.className} absolute top-[10px] left-1/2 w-full -translate-x-1/2 px-[10px] text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} relative w-full text-center text-[46px] leading-[49px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: TITLE_GRADIENT,
                 WebkitBackgroundClip: "text",

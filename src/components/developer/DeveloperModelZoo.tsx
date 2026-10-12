@@ -6,7 +6,7 @@ import { gilroyMedium, interRegular } from "../hero/fonts";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { PRIMARY_CTA_SHADOW } from "./developer-data";
 import { mediaUrl } from "@/lib/strapi";
-import { CollageRow, COLLAGE_ROW_1, COLLAGE_ROW_2, PrimaryCta, SecondaryCta } from "../applications-page/ApplicationsPageModelZoo";
+import { CollageRow, COLLAGE_ROW_1, COLLAGE_ROW_2, PrimaryCta } from "../applications-page/ApplicationsPageModelZoo";
 
 /**
  * Figma 5212:6804 — "model zoo" section (1440×656).
@@ -227,15 +227,9 @@ export function DeveloperModelZoo({ data }: { data?: any }) {
         </div>
 
         {/* Interactive rows & CTAs replacing the old static cards */}
-        <div className="absolute left-1/2 flex w-full -translate-x-1/2 flex-col items-center" style={{ top: 240 }}>
-          {/* CTA Row */}
-          <div className="flex w-full min-[1024px]:w-auto flex-col min-[1024px]:flex-row items-center justify-center gap-[16px]">
-            <PrimaryCta label="Explore the Model Zoo" href="/model-zoo" />
-            <SecondaryCta label="See it live in ApplicationForge" href="/application-forge" />
-          </div>
-
+        <div className="absolute left-1/2 flex w-full -translate-x-1/2 flex-col items-center" style={{ top: 290 }}>
           {/* Two-row collage carousel */}
-          <div className="relative z-10 mt-[60px] flex w-full flex-col gap-[16px] overflow-hidden">
+          <div className="relative z-10 flex w-full flex-col gap-[16px] overflow-hidden">
             <CollageRow
               cards={COLLAGE_ROW_1}
               nodeId="dev-mz-r1"
@@ -248,6 +242,11 @@ export function DeveloperModelZoo({ data }: { data?: any }) {
               direction="right"
               duration={26}
             />
+          </div>
+
+          {/* CTA Row — under the carousel */}
+          <div className="mt-[60px] flex w-full min-[1024px]:w-auto flex-col min-[1024px]:flex-row items-center justify-center gap-[16px]">
+            <PrimaryCta label="Explore the Model Zoo" href="/model-zoo" />
           </div>
         </div>
       </div>

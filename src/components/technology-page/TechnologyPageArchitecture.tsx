@@ -395,6 +395,14 @@ export function TechnologyPageArchitecture({
       <div className="relative hidden h-[1833px] w-[1440px] shrink-0 min-[1024px]:block">
         <BrainVisual />
 
+        {/* Eyebrow above the section title — hardcoded */}
+        <div
+          className="absolute top-[38px] left-1/2 -translate-x-1/2"
+          data-name="Menu Container"
+        >
+          <TagBadge label="Introducing A-Cube Architecture" centerLabel />
+        </div>
+
         {/* Header — 3330:1262 (800 wide, x=352 y=71) */}
         <div
           className="absolute top-[71px] left-[352px] flex w-[800px] flex-col items-center gap-[24px]"

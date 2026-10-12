@@ -1,5 +1,6 @@
 import { gilroyMedium, interLight, interMedium, interRegular } from "../hero/fonts";
 import { GradientTitle } from "../contact/contact-shared";
+import { CompanyEngagementCta } from "../company/CompanyEngagementCta";
 import { MobileTitleCorners } from "./mobile-shared";
 
 const TITLE_GRADIENT_DEG = "114.359deg";
@@ -8,7 +9,7 @@ const FALLBACK_SUBTITLE =
 const FALLBACK_HEADING =
   "The efficiency gap isn’t a few\npercent. It’s a different category.";
 
-const HEADERS = ["Rank", "Architecture", "Power", "Area", "The Trade - off"];
+const HEADERS = ["Rank", "Architecture", "Power efficiency", "Compute density", "The Trade - off"];
 
 type RowIcon = "check" | "warning" | "heat" | "x";
 type RowImage = "acube" | "flash" | "gpu" | "mcu";
@@ -59,11 +60,11 @@ const ROWS: RankRow[] = [
     name: "GPU",
     highlighted: false,
     sub: "Paralle SMO",
-    power: "~30 TOPS/W",
-    powerBar: 35.014,
+    power: "1 TOPS/W",
+    powerBar: 5.7,
     area: "~0.5 TOPS/mm",
     areaBar: 19.654,
-    tradeoff: "Too-hot",
+    tradeoff: "Too hot & power hungry",
     icon: "heat",
     image: "gpu",
   },
@@ -71,9 +72,9 @@ const ROWS: RankRow[] = [
     rank: "4",
     name: "MCU",
     highlighted: false,
-    sub: "Analog digital in memory",
-    power: "~30 TOPS/W",
-    powerBar: 11.791,
+    sub: "Von-Neumann",
+    power: "0.1 TOPS/W",
+    powerBar: 0.6,
     area: "~0.1 TOPS/mm",
     areaBar: 14.406,
     tradeoff: "Not built for AI",
@@ -470,14 +471,14 @@ const M_ROWS: MobileRow[] = [
     highlighted: false,
     chip: "/technology/eff-mobile-chip-gpu.webp",
     blend: false,
-    tradeLeft: 251.7,
+    tradeLeft: 242.7,
     tradeTop: 35.7,
     icon: "heat",
-    tradeLabel: "Too-hot",
-    tradeLabelClass: "whitespace-nowrap",
+    tradeLabel: "Too hot & power hungry",
+    tradeLabelClass: "w-[88px] text-right",
     lineTop: 85.7,
-    powerValue: "~30 TOPS/W",
-    powerBar: 35.014,
+    powerValue: "1 TOPS/W",
+    powerBar: 4.6,
     areaValue: "~0.5 TOPS/mm2",
     areaBar: 19.654,
   },
@@ -488,7 +489,7 @@ const M_ROWS: MobileRow[] = [
     statTop: 99.7,
     rank: "4",
     name: "MCU",
-    sub: "Analog digital in memory",
+    sub: "Von-Neumann",
     highlighted: false,
     chip: "/technology/eff-mobile-chip-flash.webp",
     blend: false,
@@ -498,8 +499,8 @@ const M_ROWS: MobileRow[] = [
     tradeLabel: "Not built for AI",
     tradeLabelClass: "w-[57px] text-center",
     lineTop: 85.7,
-    powerValue: "~30 TOPS/W",
-    powerBar: 11.791,
+    powerValue: "0.1 TOPS/W",
+    powerBar: 0.5,
     areaValue: "~0.1 TOPS/mm2",
     areaBar: 14.406,
   },
@@ -732,7 +733,7 @@ function EfficiencyTableMobile() {
           <MobileStatBlock
             left={row.offX}
             top={row.statTop}
-            label="Power"
+            label="Power efficiency"
             value={row.powerValue}
             segment={row.powerBar}
             muted={!row.highlighted}
@@ -740,7 +741,7 @@ function EfficiencyTableMobile() {
           <MobileStatBlock
             left={row.offX + 170}
             top={row.statTop}
-            label="Area"
+            label="Compute density"
             value={row.areaValue}
             segment={row.areaBar}
             muted={!row.highlighted}
@@ -1013,10 +1014,17 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
         >
           <EfficiencyTableContent />
         </div>
+
+        {/* Whitepaper CTA below the table */}
+        <div className="absolute top-[702px] left-1/2 -translate-x-1/2">
+          <CompanyEngagementCta href="#" className="w-auto px-[20px]">
+            Download Architecture Whitepaper
+          </CompanyEngagementCta>
+        </div>
       </div>
 
-      {/* MOBILE (<1024px) — Figma 4533:2857 "6th Fold" (393x1119) */}
-      <div className="relative h-[1119px] w-full overflow-hidden min-[1024px]:hidden">
+      {/* MOBILE (<1024px) — Figma 4533:2857 "6th Fold" (393x1119 + whitepaper CTA) */}
+      <div className="relative h-[1199px] w-full overflow-hidden min-[1024px]:hidden">
         {/* Background glows — 4533:2859 / 4533:2860 */}
         <Glow
           top="top-[-104px]"
@@ -1088,6 +1096,13 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
         {/* Stacked comparison panel — 4533:2873 */}
         <div className="relative z-10">
           <EfficiencyTableMobile />
+        </div>
+
+        {/* Whitepaper CTA below the panel */}
+        <div className="absolute top-[1106px] left-1/2 z-10 -translate-x-1/2">
+          <CompanyEngagementCta href="#" className="w-[280px]">
+            Download Architecture Whitepaper
+          </CompanyEngagementCta>
         </div>
       </div>
     </section>

@@ -19,45 +19,82 @@ export function CareersBottomCta({
         }))
       : [];
 
+  const formattedHeading = (() => {
+    if (!heading) return null;
+    if (heading.includes("\n")) {
+      return heading.split("\n").map((line: string, i: number) => (
+        <span key={i} className="block">
+          {line}
+        </span>
+      ));
+    }
+    if (heading.includes("future of compute?")) {
+      const parts = heading.split("future of compute?");
+      return (
+        <>
+          <span className="block">{parts[0]}future of</span>
+          <span className="block">compute?</span>
+        </>
+      );
+    }
+    return heading;
+  })();
+
   return (
     <section
-      className="absolute top-[5097px] left-1/2 z-20 flex w-[728px] flex-col items-center transition-transform duration-300 ease-out"
+      className="absolute top-[5097px] left-1/2 z-20 flex w-[580px] flex-col items-center transition-transform duration-300 ease-out"
       style={{ transform: `translate(-50%, ${-offsetY}px)` }}
       data-node-id="2379:8821"
       aria-label="Ready to build the future of compute"
     >
-      <div className="relative h-[126px] w-[708px] shrink-0">
-        <h2
-          className={`${gilroyMedium.className} absolute top-[7.47px] left-1/2 w-[708px] -translate-x-1/2 bg-clip-text text-center text-[49px] leading-[60px] font-medium tracking-[-0.98px] text-transparent not-italic [word-break:break-word]`}
-          style={{
-            backgroundImage:
-              "linear-gradient(110.887deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-          }}
-          data-node-id="2379:8822"
-        >
-          {heading}
-        </h2>
-        <CornerDecor />
-      </div>
+      <div
+        className="relative flex h-[320px] w-[580px] flex-col items-center justify-center gap-[22px] px-[36px] pt-[26px] pb-[34px]"
+        data-name="Card Container"
+      >
+        <div className="absolute inset-0 -z-10 h-full w-full">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/home1618873545.png"
+            alt=""
+            className="absolute inset-0 h-full w-full object-fill"
+          />
+        </div>
 
-      <div className="mt-[39px] flex items-center gap-[30px]">
-        {buttons.map((btn, i) =>
-          btn.variant === "secondary" || btn.variant === "ghost" ? (
-            <CareersWhiteCta key={i} href={btn.href} width="w-auto px-6">
-              {btn.label}
-            </CareersWhiteCta>
-          ) : (
-            <CareersGreenCta
-              key={i}
-              href={btn.href}
-              width="w-auto"
-            >
-              {btn.label}
-            </CareersGreenCta>
-          ),
-        )}
+        <div className="relative flex w-max max-w-full flex-col items-center px-[20px] py-[10px]">
+          <h2
+            className={`${gilroyMedium.className} max-w-[480px] text-center text-[34px] leading-[42px] font-medium tracking-[-0.68px] text-transparent not-italic [word-break:break-word] sm:text-[38px] sm:leading-[46px] sm:tracking-[-0.76px]`}
+            style={{
+              backgroundImage:
+                "linear-gradient(110.887deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+            }}
+            data-node-id="2379:8822"
+          >
+            {formattedHeading}
+          </h2>
+          <CornerDecor />
+        </div>
+
+        <div className="mt-[6px] flex items-center gap-[18px]">
+          {buttons.map((btn, i) =>
+            btn.variant === "secondary" || btn.variant === "ghost" ? (
+              <CareersWhiteCta key={i} href={btn.href} width="w-auto px-5">
+                {btn.label}
+              </CareersWhiteCta>
+            ) : (
+              <CareersGreenCta
+                key={i}
+                href={btn.href}
+                width="w-auto px-5"
+              >
+                {btn.label}
+              </CareersGreenCta>
+            ),
+          )}
+        </div>
       </div>
     </section>
   );

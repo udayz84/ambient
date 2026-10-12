@@ -4,6 +4,7 @@
 import { useState, useRef, useEffect } from "react";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { GradientTitle } from "../contact/contact-shared";
 
 const TITLE_GRADIENT_DEG = "127.627deg";
@@ -35,7 +36,26 @@ const SPECS: { title: string; body: string }[] = [
   { title: "Comms & I/O", body: "Onboard BLE, SPI, I2C, and UART interfaces" },
 ];
 
-function SpecCard({ 
+/** Green CTA below the bridge line — same construction as DvkHero's PrimaryCta. */
+function BridgeCta({ cta }: { cta: { label: string; href: string } }) {
+  return (
+    <a
+      href={cta.href}
+      className={`${gilroyMedium.className} relative flex h-[48px] shrink-0 items-center justify-center px-[32px]`}
+    >
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+      />
+      <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+        {cta.label}
+      </span>
+      <GreenCtaCorners />
+    </a>
+  );
+}
+
+function SpecCard({
   title, 
   body,
   isActive,
@@ -73,7 +93,14 @@ function SpecCard({
   );
 }
 
-export function SomInsideModule({ data }: { data?: any }) {
+export function SomInsideModule({
+  data,
+  bridgeCta,
+}: {
+  data?: any;
+  /** Optional CTA rendered below the bridge/subtitle line (used on /dvk). */
+  bridgeCta?: { label: string; href: string };
+}) {
   const [hoveredIndex, setHoveredIndex] = useState(-1);
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const heading = data?.heading || FALLBACK_HEADING;
@@ -145,6 +172,7 @@ export function SomInsideModule({ data }: { data?: any }) {
           >
             {subtitle}
           </p>
+          {bridgeCta ? <BridgeCta cta={bridgeCta} /> : null}
         </div>
 
         {/* Body */}
@@ -273,6 +301,7 @@ export function SomInsideModule({ data }: { data?: any }) {
           >
             {subtitle}
           </p>
+          {bridgeCta ? <BridgeCta cta={bridgeCta} /> : null}
         </div>
 
         {/* Body */}

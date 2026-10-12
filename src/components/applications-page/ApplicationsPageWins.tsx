@@ -295,39 +295,40 @@ const WIN_VISUALS = [
 
 const CARDS = [
   {
-    label: "The Wearable Wins",
-    stat: "99%",
-    statLabel: "Accurate",
+    label: "The Safety Win",
+    stat: "90 Days",
+    statLabel: "on a single charge",
+    body: "A pendant that watches over you, running fall detection and SOS voice recognition continuously, on-device, for 90 days on a single charge. No phone to carry, no cloud to depend on. Protection that never goes dark.",
     visual: WIN_VISUALS[0],
     mobileImg: "/applications/wins-img-1.webp",
     buttons: [{ label: "READ CASE STUDY", href: "#" }],
   },
   {
-    label: "The Medical/Safety Wins",
-    stat: "6months",
-    statLabel: "Battery",
+    label: "The Women’s-Health Win",
+    stat: ">98%",
+    statLabel: "fall & assault recognition",
+    body: "In DimensionNXG’s MAI wearable, GPX10 Pro recognizes falls and assault patterns on-device at >98% accuracy and still runs 14 days on a 200 mAh cell. Detection stays local and private; the radio fires only when there’s a real event to report.",
     visual: WIN_VISUALS[1],
     mobileImg: "/applications/wins-img-2.webp",
     buttons: [{ label: "READ CASE STUDY", href: "#" }],
   },
   {
-    label: "The Industrial Wins",
-    stat: "24/7",
-    statLabel: "Monitoring",
+    label: "The Industrial Win",
+    stat: "2+ Years",
+    statLabel: "on one cell",
+    body: "Predictive maintenance that lives on the machine, continuously analyzing vibration and sound to catch anomalies before it breaks, entirely at the edge. A retrofittable, battery-powered node that runs 2+ years on a single cell, sending alerts, not raw data.",
     visual: WIN_VISUALS[2],
     mobileImg: "/applications/wins-img-3.webp",
     buttons: [{ label: "READ CASE STUDY", href: "#" }],
   },
 ];
 
-export function ApplicationsPageWins({ data, slug }: { data?: any; slug?: string }) {
-  const isIndustrial = Boolean(
-    slug && (slug === "industrial_iot" || slug === "industrial-iot" || slug.includes("industrial") || slug.includes("iot"))
-  );
-  const eyebrow = isIndustrial ? "PROVEN ACROSS FORM FACTORS" : (data?.eyebrow || "Real-time AI at edge");
+export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
+  const eyebrow = data?.eyebrow || "Proven in production";
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const heading = data?.heading || FALLBACK_HEADING;
+  const subheading = (data?.subheading as string) || "";
   const body = data?.body || BODY;
   const ctaLabel = data?.cta?.label || "Explore Applications";
   const ctaHref = data?.cta?.href || "#";
@@ -406,6 +407,13 @@ export function ApplicationsPageWins({ data, slug }: { data?: any; slug?: string
             </h2>
             <Corners />
           </div>
+          {subheading ? (
+            <p
+              className={`${interRegular.className} max-w-[679px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            >
+              {subheading}
+            </p>
+          ) : null}
         </div>
 
         <div className="flex gap-[14px] mt-[80px]">
@@ -503,6 +511,13 @@ export function ApplicationsPageWins({ data, slug }: { data?: any; slug?: string
               </div>
             </div>
           </div>
+          {subheading ? (
+            <p
+              className={`${interRegular.className} w-full max-w-[324px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            >
+              {subheading}
+            </p>
+          ) : null}
         </div>
 
         {/* Cards (node 4032:5958) */}

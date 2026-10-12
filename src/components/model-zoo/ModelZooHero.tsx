@@ -54,9 +54,9 @@ export function ModelZooHero() {
         >
           The Ambient Model Zoo is a growing library of ready-to-run AI models — plug one into your dev or eval kit and watch it work in seconds. Open-source and Ambient-built, every model is tuned to run on GPX at microwatt power.
         </p>
+
         {/* Mobile Collage Rows */}
-        <div className="relative z-10 mt-[12px] flex w-[100vw] flex-col gap-[16px] overflow-hidden ml-[-20px] mr-[-20px]">
-          <CollageRow
+        <div className="relative z-10 mt-[12px] flex w-[100vw] flex-col gap-[16px] overflow-hidden ml-[-20px] mr-[-20px]">          <CollageRow
             cards={COLLAGE_ROW_1}
             nodeId="mobile-r1"
             direction="left"
@@ -74,7 +74,7 @@ export function ModelZooHero() {
         
         <div className="animate-hero-text-fade-in relative z-10 mt-[12px] flex w-full max-w-[352px] flex-col items-stretch gap-[12px]" style={{ animationDelay: "150ms", animationFillMode: "both" }}>
           <CtaPrimary label="Browse the Model Zoo" />
-          <CtaSecondary label="Get the ApplicationForge App" />
+          <CtaSecondary label="Request Evaluation Kit" href="/dvk" />
         </div>
       </div>
 
@@ -187,7 +187,7 @@ export function ModelZooHero() {
             </p>
             <div className="animate-hero-text-fade-in flex items-start gap-[24px]" style={{ animationDelay: "300ms", animationFillMode: "both" }} data-node-id="5387:7843" data-name="Frame 1984079464">
               <CtaPrimary label="Browse the Model Zoo" href="#model-zoo-content" width={250} />
-              <CtaSecondary label="Get the ApplicationForge App" width={289} />
+              <CtaSecondary label="Request Evaluation Kit" href="/dvk" width={289} />
             </div>
           </div>
         </div>
@@ -217,6 +217,7 @@ export function ModelZooHero() {
         <div className="pointer-events-none absolute top-[343px] left-[1015px] size-[80px]" data-node-id="5448:6903" data-name="mouse 1">
           <img alt="" src="/model-zoo/hero-mouse.webp" className="absolute inset-0 size-full max-w-none object-cover" />
         </div>
+
 
         <ModelZooScrollIndicator />
       </div>

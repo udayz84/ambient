@@ -1,14 +1,21 @@
 "use client";
 
-import { gilroyMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interRegular, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useFitText } from "../shared/FitText";
 import { DvkDemosCards } from "./DvkDemosCards";
-import { CORNER_LEFT, CORNER_RIGHT, DEMOS_TITLE_GRADIENT } from "./dvk-data";
+import {
+  CORNER_LEFT,
+  CORNER_RIGHT,
+  DEMOS_TITLE_GRADIENT,
+  PRIMARY_CTA_INSET,
+  PRIMARY_CTA_SHADOW,
+} from "./dvk-data";
 
 const DEFAULT_HEADING = "Pre-loaded demos. Instant AI validation.";
 const DEFAULT_SUBTITLE =
-  "Don't spend your first day writing sensor configuration code. The Cranium board comes ready to run out of the box, allowing you to instantly test physical AI models and validate performance on the metal with zero setup required.";
+  "A curated set of AI models you can push to the NuraSense kit and see working in seconds";
 
 /**
  * Figma 2761:2791 (+ 2799/2809/2819) — demos section.
@@ -19,7 +26,11 @@ const DEFAULT_SUBTITLE =
 export function DvkDemos({ data }: { data?: any }) {
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 1 });
   const heading = data?.heading || DEFAULT_HEADING;
-  const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
+  const rawSubtitle = data?.subtitle || DEFAULT_SUBTITLE;
+  const subtitle = rawSubtitle.replace(
+    /The Cranium( board)? comes ready to run out of the box/g,
+    "The NuraSense board comes ready to run out of the box",
+  );
   const ctaLabel = data?.cta_label || "EXPLORE TARGET APPLICATIONS →";
   const ctaHref = data?.cta_href || "/applications";
   return (
@@ -30,6 +41,9 @@ export function DvkDemos({ data }: { data?: any }) {
         data-node-id="2761:2791"
         data-name="Section Title"
       >
+        <p className={`${dmMono.className} m-0 text-[12px] leading-[19.5px] font-normal tracking-[-0.36px] whitespace-nowrap text-[#a9e28c] uppercase not-italic`}>
+          Demo Ready
+        </p>
         {/* Title — 2761:2792 (872×49, px-10 corners frame) */}
         <div
           className="relative px-[10px]"
@@ -69,10 +83,20 @@ export function DvkDemos({ data }: { data?: any }) {
       {/* Explore CTA */}
       <a
         href={ctaHref}
-        className={`${interRegular.className} relative mt-[11px] flex h-[48px] items-center justify-center border border-solid border-[rgba(255,255,255,0.15)] bg-[#1a1a1a] px-[24px] text-[13px] tracking-[0.02em] text-white transition-colors hover:bg-[#2a2a2a]`}
+        className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative mt-[11px] flex h-[48px] shrink-0 items-center justify-center px-[32px]`}
       >
-        <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-        {ctaLabel}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+        />
+        <span className="relative text-[15px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+          {ctaLabel}
+        </span>
+        <span
+          aria-hidden
+          className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`}
+        />
+        <GreenCtaCorners />
       </a>
     </div>
   );

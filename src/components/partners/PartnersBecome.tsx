@@ -117,6 +117,32 @@ export function PartnersBecome({
       className="relative w-full scroll-mt-[78px] overflow-clip bg-transparent"
       aria-label="Become a partner"
     >
+      {/* Background visual — Company image-124 matrix texture */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden mix-blend-screen opacity-[0.25]"
+        style={{
+          maskImage: "linear-gradient(to bottom, black 0%, black 75%, transparent 95%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 75%, transparent 95%)",
+        }}
+        aria-hidden
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/company/image-124.webp"
+          alt=""
+          className="absolute inset-0 size-full object-cover object-left-top"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.6) 75%, rgb(0,0,0) 92%)",
+          }}
+        />
+      </div>
+
       {/* dark backdrop: engineering grid + green glows + side rules */}
       <div
         className="pointer-events-none absolute inset-0"
@@ -169,7 +195,7 @@ export function PartnersBecome({
           {content.benefits.map((benefit) => (
             <article
               key={benefit.title}
-              className="group relative flex min-h-[250px] flex-col items-start justify-between border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(21,21,21,0.3)] p-[28px] backdrop-blur-[8px] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-[4px] hover:border-[rgba(83,216,36,0.5)] hover:shadow-[0px_20px_48px_0px_rgba(83,216,36,0.15)]"
+              className="group relative flex min-h-[250px] flex-col items-start justify-between border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black/75 p-[28px] backdrop-blur-[24px] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-[4px] hover:border-[rgba(83,216,36,0.5)] hover:shadow-[0px_20px_48px_0px_rgba(83,216,36,0.15)]"
             >
               <Corners />
               <div className="relative flex size-[56px] shrink-0 items-center justify-center border-[0.5px] border-solid border-[rgba(83,216,36,0.4)] bg-[rgba(83,216,36,0.08)]">
@@ -192,7 +218,7 @@ export function PartnersBecome({
         </div>
 
         {/* ---------- who we're looking for ---------- */}
-        <div className="relative flex w-full max-w-[900px] flex-col items-center gap-[18px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(21,21,21,0.3)] px-[32px] py-[28px] text-center backdrop-blur-[8px]">
+        <div className="relative flex w-full max-w-[900px] flex-col items-center gap-[18px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black/75 px-[32px] py-[28px] text-center backdrop-blur-[24px]">
           <Corners />
           <h3 className={`${gilroyMedium.className} text-[20px] leading-[26px] font-medium text-white not-italic [word-break:break-word] min-[1024px]:text-[22px] min-[1024px]:leading-[28px]`}>
             {content.lookingFor.title}
@@ -216,7 +242,7 @@ export function PartnersBecome({
         {/* ---------- application: pitch + form ---------- */}
         <div className="grid w-full grid-cols-1 gap-[28px] min-[1024px]:grid-cols-[400px_1fr] min-[1024px]:items-start min-[1024px]:gap-[40px]">
           {/* pitch panel */}
-          <div className="relative flex flex-col gap-[20px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(21,21,21,0.3)] p-[32px] backdrop-blur-[8px] min-[1024px]:sticky min-[1024px]:top-[110px]">
+          <div className="relative flex flex-col gap-[20px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black/75 p-[32px] backdrop-blur-[24px] min-[1024px]:sticky min-[1024px]:top-[110px]">
             <Corners />
             <h3 className={`${gilroyMedium.className} text-[26px] leading-[34px] font-medium text-white [word-break:break-word] not-italic`}>
               {content.form.title}
@@ -247,7 +273,7 @@ export function PartnersBecome({
           </div>
 
           {/* form panel */}
-          <div className="relative w-full border-[1.5px] border-solid border-[rgba(83,216,36,0.2)] bg-[rgba(46,119,20,0.14)] backdrop-blur-[8px]">
+          <div className="relative w-full border-[1.5px] border-solid border-[rgba(83,216,36,0.2)] bg-black backdrop-blur-[8px]">
             <Corners />
             {submitted ? (
               <div className="flex min-h-[420px] animate-hero-text-fade-in transform-gpu flex-col items-center justify-center gap-[20px] px-[32px] py-[56px] text-center">

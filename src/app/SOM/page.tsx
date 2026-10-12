@@ -62,10 +62,10 @@ export default async function SomPage() {
       <SomFeatures data={data?.features} />
       <SomFamily data={data?.family} />
       <SomOneModule data={data?.one_module} />
-      <SomDeployPath data={data?.deploy_path} />
       {/* <SomEcosystem data={data?.ecosystem} /> */}
 
       <SomIntelligence data={data?.intelligence} />
+      <SomDeployPath data={data?.deploy_path} />
       {/* <SomProvenCore /> */}
       <SomReadyToDeploy data={data?.ready_to_deploy} />
       <SomFooterMerge data={data?.footer_merge} />

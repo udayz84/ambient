@@ -5,31 +5,38 @@ import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useState } from "react";
 import { mediaUrl } from "@/lib/strapi";
+import { TagBadge } from "../hero/TagBadge";
 
 const CASE_STUDIES = [
   {
-    id: "tower",
-    tag: "Leading telco infrastructure provider",
-    oversizedResult: "10x",
-    context: "efficiency gain in tower deployment context.",
+    id: "safety",
+    tag: "The Safety Win",
+    oversizedResult: "90 Days",
+    metricLabel: "on a single charge",
+    context:
+      "A pendant that watches over you, running fall detection and SOS voice recognition continuously, on-device, for 90 days on a single charge. No phone to carry, no cloud to depend on. Protection that never goes dark.",
     image: "/latest-news/article-partnership.png",
     ctaLabel: "Read Full Study",
     ctaHref: "",
   },
   {
-    id: "coffee",
-    tag: "Global beverage brand",
-    oversizedResult: "< 50µW",
-    context: "always-on wake word detection during operations.",
+    id: "mai",
+    tag: "The Women’s-Health Win",
+    oversizedResult: ">98%",
+    metricLabel: "fall & assault recognition",
+    context:
+      "In DimensionNXG’s MAI wearable, GPX10 Pro recognizes falls and assault patterns on-device at >98% accuracy and still runs 14 days on a 200 mAh cell. Detection stays local and private; the radio fires only when there’s a real event to report.",
     image: "/latest-news/article-physics.png",
     ctaLabel: "Read Full Study",
     ctaHref: "",
   },
   {
-    id: "capital",
-    tag: "Top-tier financial institution",
-    oversizedResult: "Zero",
-    context: "cloud dependency for extreme-edge financial models.",
+    id: "industrial",
+    tag: "The Industrial Win",
+    oversizedResult: "2+ Years",
+    metricLabel: "on one cell",
+    context:
+      "Predictive maintenance that lives on the machine, continuously analyzing vibration and sound to catch anomalies before it breaks, entirely at the edge. A retrofittable, battery-powered node that runs 2+ years on a single cell, sending alerts, not raw data.",
     image: "/latest-news/article-gpx10.webp",
     ctaLabel: "Read Full Study",
     ctaHref: "",
@@ -48,6 +55,7 @@ export function ProductsCaseStudies({ data }: { data?: any }) {
         id: c.id || String(idx),
         tag: c.tag || "",
         oversizedResult: c.oversizedResult || "",
+        metricLabel: c.metric_label || "",
         context: c.context || "",
         image: mediaUrl(c.image) || "/latest-news/article-partnership.png",
         ctaLabel: c.cta_label || "Read Full Study",
@@ -57,26 +65,30 @@ export function ProductsCaseStudies({ data }: { data?: any }) {
 
   const title = data?.title || "Case Studies";
   const subtitle = data?.subtitle || "";
+  const eyebrow = data?.eyebrow || "Proven in production";
 
   return (
     <section className="relative w-full bg-black pt-[48px] pb-[24px] px-[24px] min-[1024px]:pt-[96px] min-[1024px]:pb-[32px] overflow-hidden">
       
       <div className="relative z-10 mx-auto w-full max-w-[1192px] flex flex-col items-center">
         {/* Header */}
-        <div className="relative mb-[48px] flex flex-col items-center justify-center px-[20px] min-[1024px]:mb-[64px]">
-          <Corners leftSrc="/products/fp-title-corner-left.svg" rightSrc="/products/fp-title-corner-right.svg" />
-          <h2
-            className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[42px] font-medium text-transparent not-italic min-[1024px]:text-[46px] min-[1024px]:leading-[49px]`}
-            style={{
-              backgroundImage: "linear-gradient(to bottom, #ffffff 40%, rgba(255, 255, 255, 0.2) 100%)",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-            }}
-          >
-            {title}
-          </h2>
+        <div className="relative mb-[48px] flex flex-col items-center justify-center gap-[20px] px-[20px] min-[1024px]:mb-[64px]">
+          <TagBadge label={eyebrow} />
+          <div className="relative px-[14px]">
+            <Corners leftSrc="/products/fp-title-corner-left.svg" rightSrc="/products/fp-title-corner-right.svg" />
+            <h2
+              className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[42px] font-medium text-transparent not-italic min-[1024px]:text-[46px] min-[1024px]:leading-[49px]`}
+              style={{
+                backgroundImage: "linear-gradient(to bottom, #ffffff 40%, rgba(255, 255, 255, 0.2) 100%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
+            >
+              {title}
+            </h2>
+          </div>
           {subtitle && (
-            <p className={`${interRegular.className} mt-[16px] max-w-[600px] text-center text-[16px] leading-[24px] text-[rgba(240,240,240,0.6)]`}>
+            <p className={`${interRegular.className} max-w-[600px] text-center text-[16px] leading-[24px] text-[rgba(240,240,240,0.6)]`}>
               {subtitle}
             </p>
           )}
@@ -147,7 +159,14 @@ export function ProductsCaseStudies({ data }: { data?: any }) {
                 >
                   {study.oversizedResult}
                 </h3>
-                
+
+                {/* Metric qualifier */}
+                {study.metricLabel && (
+                  <p className={`${interRegular.className} -mt-[4px] mb-[8px] text-[14px] leading-[20px] text-[#a8ed90]`}>
+                    · {study.metricLabel}
+                  </p>
+                )}
+
                 {/* Context */}
                 <p className={`${interRegular.className} text-[16px] leading-[24px] text-[rgba(240,240,240,0.6)] flex-1`}>
                   {study.context}

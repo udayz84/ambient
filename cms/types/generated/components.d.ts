@@ -197,7 +197,9 @@ export interface AppsWins extends Struct.ComponentSchema {
     body: Schema.Attribute.Text;
     cards: Schema.Attribute.Component<'apps.win-card', true>;
     cta: Schema.Attribute.Component<'shared.cta', false>;
+    eyebrow: Schema.Attribute.String;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
+    subheading: Schema.Attribute.Text;
   };
 }
 
@@ -2090,6 +2092,7 @@ export interface ProductsCaseStudyCard extends Struct.ComponentSchema {
     cta_label: Schema.Attribute.String;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
       Schema.Attribute.Required;
+    metric_label: Schema.Attribute.String;
     oversizedResult: Schema.Attribute.String & Schema.Attribute.Required;
     tag: Schema.Attribute.String;
   };

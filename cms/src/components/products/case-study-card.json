@@ -15,7 +15,12 @@
     "oversizedResult": {
       "type": "string",
       "required": true,
-      "description": "The huge headline stat (e.g., '10x', '< 50µW', 'Zero')."
+      "description": "The huge headline stat (e.g., '90 Days', '>98%', '2+ Years')."
+    },
+    "metric_label": {
+      "type": "string",
+      "required": false,
+      "description": "Small qualifier under the oversized stat (e.g., 'on a single charge')."
     },
     "context": {
       "type": "text",

@@ -13,9 +13,35 @@ export function PartnersBenefits({ content }: { content: BenefitsContent }) {
   return (
     <section
       ref={fadeRef}
-      className={`relative mx-auto flex w-full max-w-[1204px] flex-col items-center gap-[40px] px-[24px] py-[40px] min-[1024px]:py-[64px] ${fadeCls} transform-gpu`}
+      className={`relative mx-auto flex w-full max-w-[1204px] flex-col items-center gap-[40px] px-[24px] py-[40px] min-[1024px]:py-[64px] ${fadeCls} transform-gpu overflow-hidden`}
       aria-label="Why build with a partner"
     >
+      {/* Background visual — Company image-124 matrix texture */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden mix-blend-screen opacity-[0.25]"
+        style={{
+          maskImage: "linear-gradient(to bottom, black 0%, black 75%, transparent 95%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 75%, transparent 95%)",
+        }}
+        aria-hidden
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/company/image-124.webp"
+          alt=""
+          className="absolute inset-0 size-full object-cover object-left-top"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.6) 75%, rgb(0,0,0) 92%)",
+          }}
+        />
+      </div>
+
       <div className="relative flex flex-col items-center gap-[16px] px-[10px]">
         <PartnersSectionHeading deg="112.176deg" className="min-[1024px]:!whitespace-normal min-[1024px]:max-w-[720px]">
           {content.heading}
@@ -31,7 +57,7 @@ export function PartnersBenefits({ content }: { content: BenefitsContent }) {
         {content.cards.map((card, i) => (
           <article
             key={card.title}
-            className="group relative flex min-h-[300px] w-[75vw] shrink-0 snap-center flex-col items-start justify-between border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(21,21,21,0.3)] p-[28px] backdrop-blur-[8px] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-[4px] hover:border-[rgba(83,216,36,0.5)] hover:shadow-[0px_20px_48px_0px_rgba(83,216,36,0.15)] min-[500px]:w-[320px] min-[1024px]:w-auto"
+            className="group relative flex min-h-[300px] w-[75vw] shrink-0 snap-center flex-col items-start justify-between border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black/75 p-[28px] backdrop-blur-[24px] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-[4px] hover:border-[rgba(83,216,36,0.5)] hover:shadow-[0px_20px_48px_0px_rgba(83,216,36,0.15)] min-[500px]:w-[320px] min-[1024px]:w-auto"
           >
             <Corners />
             <div className="flex w-full items-start justify-between">

@@ -10,9 +10,9 @@ import {
   MODELFORGE_TITLE_GRADIENT,
 } from "./dvk-data";
 
-const DEFAULT_HEADING = "Powered by ModelForge.";
+const DEFAULT_HEADING = "Have your own model? Meet ModelForge.";
 const DEFAULT_SUBTITLE =
-  "Don't let software be the bottleneck. The Cranium DVK is fully supported by our unified software toolchain, designed to take you from a standard TensorFlow model to on-silicon inference in under 15 minutes.";
+  "ApplicationForge flashes the ready-made demos with zero code. When you want to run your own model — or need deeper, full-toolchain control — ModelForge takes a standard TensorFlow model to on-silicon inference in 15 minutes.";
 const DEFAULT_TOOLCHAIN_TITLE = "ModelForge SDK";
 const DEFAULT_TOOLCHAIN_SUBTITLE = "Pre-integrated RTOS & Eclipse-based Unified Build";
 const DEFAULT_TOOLCHAIN_LABELS = "RTOS\nDRIVERS\nCOMPILER";
@@ -98,6 +98,9 @@ export function DvkModelForge({ data }: { data?: any }) {
 
       {/* Section title (2761:3009) */}
       <div className="absolute top-[127px] left-1/2 flex w-[650px] -translate-x-1/2 flex-col items-center justify-center gap-[24px]">
+        <p className={`${dmMono.className} m-0 text-[12px] leading-[19.5px] font-normal tracking-[-0.36px] whitespace-nowrap text-[#a9e28c] uppercase not-italic`}>
+          Build Your Own
+        </p>
         <div className="relative flex w-[540px] flex-col items-center px-[10px]">
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
