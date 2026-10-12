@@ -64,10 +64,13 @@ export function ContactBookingPopup({
   meetingDescription,
   onClose,
   onBooked,
+  config,
 }: {
   open: boolean;
   meetingTitle: string;
   meetingDescription: string;
+  /** Popup entry (contact-page booking_form): confirm label + recipients. */
+  config?: any;
   onClose: () => void;
   onBooked: (dateLabel: string) => void;
 }) {
@@ -170,6 +173,7 @@ export function ContactBookingPopup({
           bookingDate: `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, "0")}-${String(selectedDate.getDate()).padStart(2, "0")}`,
           timeSlot: selectedTime,
           timeZone: timeZoneLabel,
+          popupId: config?.documentId,
         }),
       }).catch(() => null);
     } finally {
@@ -415,7 +419,7 @@ export function ContactBookingPopup({
               >
                 <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
                 <span className={`${gilroyMedium.className} absolute top-[calc(50%-9px)] left-1/2 -translate-x-1/2 text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic`} data-node-id="4789:4540">
-                  {confirming ? "Confirming..." : "Confirm Your Slot"}
+                  {confirming ? "Confirming..." : config?.cta_label || "Confirm Your Slot"}
                 </span>
                 <CtaCorners />
                 <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />

@@ -2,9 +2,11 @@ import Image from "next/image";
 import { mediaUrl } from "@/lib/strapi";
 import { TagBadge } from "../hero/TagBadge";
 import { gilroyMedium, interRegular } from "../hero/fonts";
+import { TechnologyCta } from "./TechnologyCta";
 
 export function TechnologyMobile({ data }: { data?: any }) {
   const tagText = data?.tag?.text || "";
+  const subheading = data?.subheading || data?.subtitle || "";
   let heading = data?.heading || "";
   const headingLines = heading.split("\n");
   while (headingLines.length < 3) headingLines.push("");
@@ -25,7 +27,7 @@ export function TechnologyMobile({ data }: { data?: any }) {
         aria-hidden
       />
 
-      <div className="relative flex flex-col items-center pt-[48px] pb-[48px] z-10 w-full">
+      <div className="relative flex flex-col items-center pt-[48px] pb-[64px] z-10 w-full">
 
         {/* Top Content with Padding */}
         <div className="flex flex-col items-center px-[24px] w-full">
@@ -78,6 +80,14 @@ export function TechnologyMobile({ data }: { data?: any }) {
               </div>
             </div>
           </div>
+
+          {subheading && (
+            <p
+              className={`${interRegular.className} mt-[14px] px-[16px] text-center text-[15px] leading-[22px] text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+            >
+              {subheading}
+            </p>
+          )}
         </div>
 
         {/* Edge-to-Edge Image */}
@@ -166,6 +176,11 @@ export function TechnologyMobile({ data }: { data?: any }) {
               </div>
             ))}
           </div>
+
+          <TechnologyCta
+            data={data}
+            className="mt-[36px] flex justify-center w-full px-[24px]"
+          />
         </div>
       </div>
     </div>

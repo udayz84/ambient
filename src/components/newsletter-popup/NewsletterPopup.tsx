@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { gilroySemiBold, interLight, interRegular } from "../hero/fonts";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
-import { popupField, usePopupConfig } from "../shared/usePopupConfig";
+import { popupField, type PopupConfig } from "@/lib/popup";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
@@ -14,11 +14,10 @@ const DISMISSED_KEY = "newsletter-popup-dismissed";
 // Close (X/Esc) only suppresses it for the current session.
 const SUBSCRIBED_KEY = "newsletter-popup-subscribed";
 
-export function NewsletterPopup() {
+export function NewsletterPopup({ config }: { config?: PopupConfig }) {
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  // CMS-editable copy (Strapi popup entry "newsletter-popup"); null = hardcoded fallbacks.
-  const config = usePopupConfig("newsletter-popup");
+  // CMS copy from the footer relation; null = hardcoded fallbacks.
 
   useEffect(() => {
     // Shows immediately on page open; stays dismissed for the rest of the
@@ -63,7 +62,7 @@ export function NewsletterPopup() {
     fetch("/api/newsletter", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, formKey: "newsletter" }),
+      body: JSON.stringify({ email, formKey: "newsletter", popupId: config?.documentId }),
     }).catch(() => { /* silently ignore — submission is already shown as successful */ });
   };
 

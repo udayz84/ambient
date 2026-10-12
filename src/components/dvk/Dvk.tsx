@@ -40,7 +40,7 @@ const DVK_DESKTOP_HEIGHT = 658;
 
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
-export function Dvk({ data }: { data?: any }) {
+export function Dvk({ data, formConfig }: { data?: any; formConfig?: any }) {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       {/* DESKTOP (>=1024px) — hero canvas, source of truth */}
@@ -51,7 +51,7 @@ export function Dvk({ data }: { data?: any }) {
         data-name="Hero Section"
       >
         <div className="relative mx-auto h-full w-[1442px]">
-          {data?.hero ? <DvkHero data={data.hero} /> : null}
+          {data?.hero ? <DvkHero data={data.hero} formConfig={formConfig} /> : null}
         </div>
         <DvkScrollIndicator />
       </div>
@@ -74,7 +74,7 @@ export function Dvk({ data }: { data?: any }) {
       
       {/* DESKTOP (>=1024px) — Application Forge section (copied from /model-zoo) */}
       <div className="hidden w-full bg-black min-[1024px]:block">
-        <ModelZooAppForge data={data?.appforge} />
+        <ModelZooAppForge data={data?.appforge} formConfig={formConfig} />
       </div>
 
       {/* DESKTOP (>=1024px) — ModelForge section (3773:685, 1440×873 canvas) */}
@@ -97,7 +97,7 @@ export function Dvk({ data }: { data?: any }) {
       <SomPrototypeTitleMobile data={data?.prototype} />
       <DvkDemosMobile data={data?.demos} />
       <div className="w-full bg-black min-[1024px]:hidden">
-        <ModelZooAppForge data={data?.appforge} />
+        <ModelZooAppForge data={data?.appforge} formConfig={formConfig} />
       </div>
       <DvkModelForgeMobile data={data?.modelforge} />
 
@@ -242,6 +242,7 @@ function DvkHeroMobile({ data }: { data?: any }) {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         formContext="evalkit"
+        config={formConfig}
       />
     </section>
   );

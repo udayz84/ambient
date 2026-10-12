@@ -225,6 +225,7 @@ function DeveloperHeroMobile({ data }: { data?: any }) {
         isOpen={isDocumentationOpen}
         onClose={() => setIsDocumentationOpen(false)}
         title="Read the Documentation"
+        config={data?.brief_form}
       />
     </section>
   );

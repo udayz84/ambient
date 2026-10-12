@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { gilroyMedium } from "../hero/fonts";
+import { gilroyMedium, interRegular } from "../hero/fonts";
 import { useFitText } from "../shared/FitText";
 
 export function TechnologyHeadline({ data }: { data?: any }) {
@@ -13,6 +13,7 @@ export function TechnologyHeadline({ data }: { data?: any }) {
   const line1 = lines[0];
   const line2 = lines.slice(1).join("\n");
   const fitRef = useFitText<HTMLHeadingElement>({});
+  const subheading = data?.subheading || data?.subtitle || "";
   return (
     <div
       className="absolute top-[48.5px] left-[468.88720703125px] z-20 h-[126px] w-[497px]"
@@ -99,6 +100,14 @@ export function TechnologyHeadline({ data }: { data?: any }) {
           </div>
         </div>
       </div>
+
+      {subheading && (
+        <p
+          className={`${interRegular.className} absolute top-[138px] left-1/2 w-[580px] -translate-x-1/2 text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+        >
+          {subheading}
+        </p>
+      )}
     </div>
   );
 }

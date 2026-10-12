@@ -29,10 +29,11 @@ export default async function ContactPage() {
       { section: "resources", nested: ["ctas"] },
       { section: "map", fields: ["globe_image", "map_base"], nested: ["locations"] },
       { section: "schedule", fields: ["icon"], nested: ["cards"] },
-      { section: "form", fields: ["tracks.icon"], nested: ["tracks.form"] },
+      { section: "form", fields: ["tracks.icon", "tracks.track_form"], nested: ["tracks.form"] },
+      "booking_form",
     ]);
   } catch {
     data = null;
   }
-  return <Contact data={data} />;
+  return <Contact data={data} bookingForm={data?.booking_form ?? null} />;
 }

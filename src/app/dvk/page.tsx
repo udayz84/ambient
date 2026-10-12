@@ -28,6 +28,7 @@ export default async function DvkPage() {
   try {
     data = await getSingleType<any>("dvk-page", [
       "hero",
+      "evalkit_form",
       { section: "inside_module", fields: ["image"], nested: ["specs"] },
       { section: "prototype", nested: ["cards"] },
       "appforge",
@@ -39,5 +40,5 @@ export default async function DvkPage() {
   } catch {
     data = null;
   }
-  return <Dvk data={data} />;
+  return <Dvk data={data} formConfig={data?.evalkit_form} />;
 }

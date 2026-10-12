@@ -1284,6 +1284,7 @@ export interface HomeModelZooKitCard extends Struct.ComponentSchema {
   attributes: {
     alt: Schema.Attribute.String;
     cta: Schema.Attribute.String & Schema.Attribute.Required;
+    cta_href: Schema.Attribute.String;
     desc: Schema.Attribute.Text & Schema.Attribute.Required;
     image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
@@ -1360,10 +1361,13 @@ export interface HomeTechnology extends Struct.ComponentSchema {
     displayName: 'Technology';
   };
   attributes: {
+    cta: Schema.Attribute.Component<'shared.button', false>;
     features: Schema.Attribute.Component<'home.tech-feature', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     image_alt: Schema.Attribute.String;
+    subheading: Schema.Attribute.Text;
+    subtitle: Schema.Attribute.Text;
     tag: Schema.Attribute.Component<'shared.tag', false>;
   };
 }

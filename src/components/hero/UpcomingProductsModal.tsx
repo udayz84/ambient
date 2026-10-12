@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { BOX_BORDER } from "../careers/careers-shared";
-import { popupField, usePopupConfig } from "../shared/usePopupConfig";
+import { popupField, type PopupConfig } from "@/lib/popup";
 
 const PANEL_BG = "/form.png";
 const SUCCESS_IMG = "/careers/apply-success.webp";
@@ -21,10 +21,13 @@ export function UpcomingProductsModal({
   isOpen,
   onClose,
   formContext = "upcoming",
+  config,
 }: {
   isOpen: boolean;
   onClose: () => void;
   formContext?: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "waitlist";
+  /** CMS form entry (page relation). Null = hardcoded fallback copy. */
+  config?: PopupConfig;
 }) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -101,23 +104,22 @@ export function UpcomingProductsModal({
           />
         </div>
 
-        {step === "form" && <FormStep onClose={onClose} onSuccess={() => setStep("confirmation")} formContext={formContext} />}
-        {step === "confirmation" && <ConfirmationStep onClose={onClose} formContext={formContext} />}
+        {step === "form" && <FormStep onClose={onClose} onSuccess={() => setStep("confirmation")} formContext={formContext} config={config} />}
+        {step === "confirmation" && <ConfirmationStep onClose={onClose} config={config} />}
       </div>
     </div>,
     document.body
   );
 }
 
-function FormStep({ onClose, onSuccess, formContext }: { onClose: () => void; onSuccess: () => void; formContext: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "waitlist" }) {
+function FormStep({ onClose, onSuccess, formContext, config }: { onClose: () => void; onSuccess: () => void; formContext: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "waitlist"; config?: PopupConfig }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
   const [chip, setChip] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  // CMS-editable copy (Strapi popup entry keyed by context); null = hardcoded fallbacks below.
-  const config = usePopupConfig(formContext);
+  // CMS-editable copy from the page relation; null = hardcoded fallbacks below.
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -144,6 +146,7 @@ function FormStep({ onClose, onSuccess, formContext }: { onClose: () => void; on
           lastName: lastName || undefined,
           company: company || undefined,
           details: chip || undefined,
+          popupId: config?.documentId,
         }),
       }).catch(() => { /* Mailchimp sync failure is non-blocking */ });
 
@@ -267,8 +270,7 @@ function FormStep({ onClose, onSuccess, formContext }: { onClose: () => void; on
   );
 }
 
-function ConfirmationStep({ onClose, formContext }: { onClose: () => void; formContext?: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "waitlist" }) {
-  const config = usePopupConfig(formContext ?? "upcoming");
+function ConfirmationStep({ onClose, config }: { onClose: () => void; config?: PopupConfig }) {
   return (
     <>
       <button

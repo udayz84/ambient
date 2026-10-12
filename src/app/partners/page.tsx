@@ -34,11 +34,13 @@ export default async function PartnersPage() {
       { section: "directory", nested: ["partners.badges"] },
       "match_form",
       "become",
+      "application_form",
+      "inquiry_form",
       "footer_ctas",
       "seo",
     ]);
   } catch {
     // Strapi unavailable — the mapper falls back to the hardcoded copy.
   }
-  return <Partners content={mapPartnersPage(data)} />;
+  return <Partners content={mapPartnersPage(data)} applicationForm={data?.application_form ?? null} inquiryForm={data?.inquiry_form ?? null} />;
 }

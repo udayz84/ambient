@@ -124,7 +124,7 @@ function StepCard({ step }: { step: (typeof STEPS)[number] }) {
  * Figma 5131:10582 — "Pick a model. Push a button. It's running." section
  * (1256-wide content at page x=92; y=5203, h=943).
  */
-export function ModelZooSteps() {
+export function ModelZooSteps({ formConfig }: { formConfig?: any }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -200,6 +200,7 @@ export function ModelZooSteps() {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         formContext="sdk"
+        config={formConfig}
       />
     </section>
   );

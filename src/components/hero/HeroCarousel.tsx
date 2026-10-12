@@ -233,7 +233,7 @@ function AnnouncementSlide({ announcement }: { announcement: Announcement }) {
   );
 }
 
-export function HeroCarousel({ data }: { data?: any }) {
+export function HeroCarousel({ data, formConfig }: { data?: any; formConfig?: any }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -318,6 +318,7 @@ export function HeroCarousel({ data }: { data?: any }) {
       <UpcomingProductsModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        config={formConfig}
       />
     </section>
   );

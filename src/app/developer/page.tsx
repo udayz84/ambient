@@ -45,6 +45,7 @@ export default async function DeveloperPage() {
       "coming_soon",
       { section: "modules", nested: ["modules"] },
       { section: "copilots", nested: ["copilots"] },
+      "brief_form",
       "seo",
     ]);
   } catch {
@@ -57,7 +58,7 @@ export default async function DeveloperPage() {
       <div className="hidden min-[1024px]:block">
         <div className="-mt-[78px]">
           <ScaledCanvas width={1440} height={CANVAS_HEIGHT}>
-            {data?.hero ? <DeveloperHero data={data.hero} /> : null}
+            {data?.hero ? <DeveloperHero data={data.hero} briefForm={data?.brief_form ?? null} /> : null}
             <div style={{ transform: "translateY(100px)" }}>
               {data?.code ? <DeveloperCodeSection data={data.code} /> : null}
               {data?.pipeline ? <DeveloperPipeline data={data.pipeline} /> : null}

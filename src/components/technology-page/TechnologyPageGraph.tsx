@@ -168,7 +168,13 @@ function GraphCtas({
   );
 }
 
-export function TechnologyPageGraph({ data }: { data?: any } = {}) {
+export function TechnologyPageGraph({
+  data,
+  config,
+}: {
+  data?: any;
+  config?: any;
+} = {}) {
   const [isExplainerOpen, setIsExplainerOpen] = useState(false);
   const heading = data?.heading || FALLBACK_HEADING;
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
@@ -615,6 +621,7 @@ export function TechnologyPageGraph({ data }: { data?: any } = {}) {
         isOpen={isExplainerOpen}
         onClose={() => setIsExplainerOpen(false)}
         title="Watch the 3-min Explainer"
+        config={config}
       />
     </section>
   );

@@ -32,7 +32,7 @@ const DEFAULT_BG = "/dvk/hero-bg-2.webp";
  * Content frame 2761:2977 (100, 192 / 576×318)
  * Scroll indicator 2761:3005 (1335.387, 616.033 / 18×75)
  */
-export function DvkHero({ data }: { data?: any }) {
+export function DvkHero({ data, formConfig }: { data?: any; formConfig?: any }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const title = data?.title || DEFAULT_TITLE;
@@ -219,6 +219,7 @@ export function DvkHero({ data }: { data?: any }) {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         formContext="evalkit"
+        config={formConfig}
       />
     </>
   );

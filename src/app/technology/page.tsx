@@ -42,13 +42,14 @@ export default async function TechnologyPage() {
       "efficiency",
       "bottom_cta",
       "seo",
+      "brief_form",
     ]);
   } catch {
     data = null;
   }
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
-      {data?.hero && <TechnologyPageHero data={data.hero} />}
+      {data?.hero && <TechnologyPageHero data={data.hero} config={data.brief_form} />}
       {data?.problem && <TechnologyPageProblem data={data.problem} />}
       {data?.architecture && (
         <TechnologyPageArchitecture
@@ -57,10 +58,10 @@ export default async function TechnologyPage() {
         />
       )}
       {data?.modes && <TechnologyPageModes data={data.modes} />}
-      {data?.graph && <TechnologyPageGraph data={data.graph} />}
+      {data?.graph && <TechnologyPageGraph data={data.graph} config={data.brief_form} />}
       {data?.efficiency && <TechnologyPageEfficiency data={data.efficiency} />}
       {data?.silicon && <TechnologyPageSilicon data={data.silicon} />}
-      {data?.bottom_cta && <TechnologyPageBottomCta data={data.bottom_cta} />}
+      {data?.bottom_cta && <TechnologyPageBottomCta data={data.bottom_cta} config={data.brief_form} />}
     </main>
   );
 }

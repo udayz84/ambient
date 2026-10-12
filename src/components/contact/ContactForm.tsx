@@ -87,13 +87,14 @@ export function ContactForm({ data }: { data?: any }) {
     : [];
   const mergedTracks = tracks.map((track, index) => {
     const remote = strapiTracks[index];
-    if (!remote) return { ...track, title: "", description: "", remoteIcon: null, strapiFields: [] };
+    if (!remote) return { ...track, title: "", description: "", remoteIcon: null, strapiFields: [], trackForm: null };
     return {
       ...track,
       title: remote.label || "",
       description: remote.description || "",
       remoteIcon: mediaUrl(remote.icon),
       strapiFields: Array.isArray(remote.form) ? remote.form : [],
+      trackForm: remote.track_form ?? null,
     };
   });
 
@@ -160,6 +161,7 @@ export function ContactForm({ data }: { data?: any }) {
           fields: values,
           message: message.trim(),
           subscribed,
+          popupId: activeMergedTrack?.trackForm?.documentId,
         }),
       });
       const json = await res.json().catch(() => null);

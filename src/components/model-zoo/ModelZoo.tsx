@@ -12,7 +12,7 @@ import { ModelZooKits } from "./ModelZooKits";
  * 78px navbar like the other pages. Desktop sections stack with the exact
  * Figma vertical gaps.
  */
-export function ModelZoo() {
+export function ModelZoo({ forms }: { forms?: any }) {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       {/* DESKTOP (>=1024px) */}
@@ -20,9 +20,9 @@ export function ModelZoo() {
       {/* hero (743) → watch-it-run (779): 36px gap */}
       <div id="model-zoo-content" className="mt-[36px]" />
       <ModelZooWatchItRun />
-      <ModelZooLibrary />
-      <ModelZooSteps />
-      <ModelZooAppForge />
+      <ModelZooLibrary requestForm={forms?.request} />
+      <ModelZooSteps formConfig={forms?.sdk} />
+      <ModelZooAppForge formConfig={forms?.evalkit} />
       <ModelZooBuildIt />
       <ModelZooKits />
 

@@ -28,6 +28,9 @@
     "cta": {
       "type": "string",
       "required": true
+    },
+    "cta_href": {
+      "type": "string"
     }
   }
 }

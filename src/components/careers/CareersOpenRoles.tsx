@@ -36,9 +36,11 @@ const JOB_ROW_NODE_IDS = [
 
 export function CareersOpenRoles({
   data,
+  applicationForm,
   onHeightDiffChange,
 }: {
   data?: any;
+  applicationForm?: any;
   onHeightDiffChange?: (diff: number) => void;
 } = {}) {
   const fitRef = useFitText<HTMLParagraphElement>({ maxLines: 2 });
@@ -259,6 +261,7 @@ export function CareersOpenRoles({
       <CareersApplicationModal
         isOpen={!!selectedJob}
         onClose={() => setSelectedJob(null)}
+        config={applicationForm}
         jobTitle={selectedJob?.title || undefined}
         roles={jobs.map((j: any) => j.title).filter(Boolean)}
         jobDescription={selectedJob ? {

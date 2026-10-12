@@ -564,6 +564,7 @@ function ContactScheduleMobile({ data }: { data?: any }) {
       <ContactBookingPopup
         key={bookingCard === null ? "closed" : `booking-${bookingCard}`}
         open={bookingCard !== null}
+        config={bookingForm}
         meetingTitle={bookingCard !== null ? mergedCards[bookingCard]?.title || "Product Demo" : "Product Demo"}
         meetingDescription={
           bookingCard !== null
@@ -859,7 +860,7 @@ function ContactFormMobile({ data }: { data?: any }) {
 }
 
 /* --------------------------------- PAGE ----------------------------------- */
-export function ContactMobile({ data }: { data?: any }) {
+export function ContactMobile({ data, bookingForm }: { data?: any; bookingForm?: any }) {
   return (
     <div className="flex w-full flex-col">
       <ContactHeroMobile data={data} />

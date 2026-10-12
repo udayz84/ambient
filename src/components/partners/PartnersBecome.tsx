@@ -50,10 +50,13 @@ export function PartnersBecome({
   content,
   capabilities,
   regions,
+  config,
 }: {
   content: BecomeContent;
   capabilities: Capability[];
   regions: string[];
+  /** Popup entry (recipients). Copy here already comes from the partners-page sections. */
+  config?: any;
 }) {
   const { fadeRef, isVisible } = useFadeIn<HTMLDivElement>();
   const fadeCls = isVisible ? "animate-hero-text-fade-in opacity-0" : "translate-y-[25px] opacity-0";
@@ -93,6 +96,7 @@ export function PartnersBecome({
           region: form.region,
           capabilities: selectedCapabilities,
           experience: form.experience.trim(),
+          popupId: config?.documentId,
         }),
       });
       const json = await res.json().catch(() => null);

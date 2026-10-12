@@ -22,11 +22,14 @@ export function CareersApplicationModal({
   jobTitle,
   roles,
   jobDescription,
+  config,
 }: {
   isOpen: boolean;
   onClose: () => void;
   jobTitle?: string;
   roles?: string[];
+  /** Popup entry (careers-page application_form): success copy + recipients. */
+  config?: any;
   jobDescription?: {
     about_role?: string;
     responsibilities?: string;
@@ -128,7 +131,7 @@ export function CareersApplicationModal({
           />
         )}
 
-        {step === "confirmation" && <ConfirmationStep onClose={handleClose} />}
+        {step === "confirmation" && <ConfirmationStep onClose={handleClose} config={config} />}
       </div>
     </div>,
     document.body
@@ -281,6 +284,7 @@ function FormStep({
     formData.append("coverLetter", coverLetter);
     formData.append("consent", String(consent));
     if (resumeFile) formData.append("resume", resumeFile);
+    if (config?.documentId) formData.append("popupId", String(config.documentId));
 
     try {
       const res = await fetch("/api/job-applicants", { method: "POST", body: formData });
@@ -486,7 +490,7 @@ function FormStep({
 
 /* ----------------------------- Confirmation ---------------------------- */
 
-function ConfirmationStep({ onClose }: { onClose: () => void }) {
+function ConfirmationStep({ onClose, config }: { onClose: () => void; config?: any }) {
   return (
     <>
       {/* Close (X) — top right */}
@@ -514,11 +518,11 @@ function ConfirmationStep({ onClose }: { onClose: () => void }) {
         </div>
 
         <h2 className={`${gilroyMedium.className} text-center text-[30px] md:text-[38px] leading-[40px] md:leading-[47px] font-medium whitespace-nowrap text-white not-italic`}>
-          Thank you for applying!
+          {config?.success_title ?? "Thank you for applying!"}
         </h2>
 
         <p className={`${interRegular.className} w-full md:w-[540px] text-center text-[12px] leading-[18px] font-normal text-[#a4a4a4] not-italic`}>
-          We&apos;ve received your application and truly appreciate your interest in this opportunity. Our team will review your profile and get in touch if your experience aligns with our requirements.
+          {config?.success_text ?? "We've received your application and truly appreciate your interest in this opportunity. Our team will review your profile and get in touch if your experience aligns with our requirements."}
         </p>
 
         <p className={`${gilroyMedium.className} w-full md:w-[540px] text-center text-[22px] leading-[28px] font-medium text-white not-italic`}>

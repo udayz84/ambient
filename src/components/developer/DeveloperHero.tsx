@@ -15,7 +15,7 @@ import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
  *    · 247.952° gradient overlay
  *  - Content 2438:4563 @ (100, 240 / 549×248)
  */
-export function DeveloperHero({ data }: { data?: any }) {
+export function DeveloperHero({ data, briefForm }: { data?: any; briefForm?: any }) {
   const bgImg = mediaUrl(data?.background_image) || "/developer/hero-bg-3.webp";
   const { fadeRef, isVisible } = useFadeIn<HTMLDivElement>(0.12);
 
@@ -60,7 +60,7 @@ export function DeveloperHero({ data }: { data?: any }) {
         style={{ left: 100, top: 240, width: 549, height: 248 }}
         data-node-id="2438:4563"
       >
-        <DeveloperHeroContent data={data} />
+        <DeveloperHeroContent data={data} briefForm={briefForm} />
       </div>
     </>
   );

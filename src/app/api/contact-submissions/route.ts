@@ -72,8 +72,9 @@ export async function POST(req: Request): Promise<Response> {
   // Determine Mailchimp form key from track and source field
   const isModelZoo = fields.Source === "Model Zoo request";
   const mailchimpFormKey = isModelZoo ? "model-zoo-request" : `contact-${track}`;
+  const popupId = String(body.popupId ?? "").trim() || undefined;
   // Per-form recipients from the popup entry (empty → global Mail Setting / MAIL_TO)
-  const formRecipients = await getFormRecipients(mailchimpFormKey);
+  const formRecipients = await getFormRecipients(popupId);
   const firstName = (fields["First Name"] || fields["First name"] || fields["Name"] || "").trim() || undefined;
   const lastName = (fields["Last Name"] || fields["Last name"] || "").trim() || undefined;
   const company = (fields["Company"] || fields["Company Name"] || "").trim() || undefined;

@@ -3,6 +3,7 @@ import { TechnologyFeatures } from "./TechnologyFeatures";
 import { TechnologyHeadline } from "./TechnologyHeadline";
 import { TechnologyMobile } from "./TechnologyMobile";
 import { TechnologyVisual, TechnologyVisualBackground } from "./TechnologyVisual";
+import { TechnologyCta } from "./TechnologyCta";
 
 const cornerLeft = "/hero/corner-tag-1.svg";
 const cornerRight = "/hero/corner-tag-2.svg";
@@ -78,7 +79,7 @@ export function Technology({ data }: { data?: any }) {
   const tagText = data?.tag?.text || "";
   return (
     <section
-      className="relative left-1/2 h-[930px] w-screen max-w-none -translate-x-1/2 overflow-hidden bg-black max-[1023px]:h-auto min-[1024px]:mt-[120px] mt-[60px]"
+      className="relative left-1/2 h-[1048px] w-screen max-w-none -translate-x-1/2 overflow-hidden bg-black max-[1023px]:h-auto min-[1024px]:mt-[120px] mt-[60px] min-[1024px]:mb-[40px] mb-[20px]"
       data-node-id="2388:317"
       aria-label="Technology"
     >
@@ -105,6 +106,8 @@ export function Technology({ data }: { data?: any }) {
         <TechnologyHeadline data={data} />
 
         <TechnologyFeatures data={data} />
+
+        <TechnologyCta data={data} />
       </div>
 
       {/* MOBILE (<1024px) — dedicated layout, desktop is untouched above */}

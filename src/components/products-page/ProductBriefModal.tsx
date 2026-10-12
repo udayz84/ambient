@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { BOX_BORDER } from "../careers/careers-shared";
-import { popupField, usePopupConfig } from "../shared/usePopupConfig";
+import { popupField, type PopupConfig } from "@/lib/popup";
 
 const SUCCESS_IMG = "/careers/apply-success.webp";
 
@@ -18,10 +18,13 @@ export function ProductBriefModal({
   isOpen,
   title,
   onClose,
+  config,
 }: {
   isOpen: boolean;
   title?: string;
   onClose: () => void;
+  /** CMS form entry (page relation). Null = hardcoded fallback copy. */
+  config?: PopupConfig;
 }) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -106,8 +109,8 @@ export function ProductBriefModal({
         </button>
 
         <div className="relative z-10 p-[40px] pt-[48px] flex flex-col">
-          {step === "form" && <FormStep title={title} onClose={onClose} onSuccess={() => setStep("confirmation")} />}
-          {step === "confirmation" && <ConfirmationStep onClose={onClose} />}
+          {step === "form" && <FormStep title={title} onClose={onClose} onSuccess={() => setStep("confirmation")} config={config} />}
+          {step === "confirmation" && <ConfirmationStep onClose={onClose} config={config} />}
         </div>
       </div>
     </div>,
@@ -115,11 +118,11 @@ export function ProductBriefModal({
   );
 }
 
-function FormStep({ title, onClose, onSuccess }: { title?: string; onClose: () => void; onSuccess: () => void }) {
+function FormStep({ title, onClose, onSuccess, config }: { title?: string; onClose: () => void; onSuccess: () => void; config?: PopupConfig }) {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  // CMS-editable copy (title stays caller-provided — it differs per CTA).
-  const config = usePopupConfig("product-brief");
+  // CMS copy from the page relation; entry title (if set) wins over the
+  // caller's title prop, which stays as fallback.
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -128,7 +131,7 @@ function FormStep({ title, onClose, onSuccess }: { title?: string; onClose: () =
       await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, formKey: "product-brief" }),
+        body: JSON.stringify({ email, formKey: "product-brief", popupId: config?.documentId }),
       }).catch(() => { /* Mailchimp sync failure is non-blocking */ });
 
       onSuccess();
@@ -141,7 +144,7 @@ function FormStep({ title, onClose, onSuccess }: { title?: string; onClose: () =
     <div className="flex flex-col">
       <div className="relative flex items-center justify-center mb-[24px]">
         <h2 className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic text-center uppercase tracking-wide`}>
-          {title || "Request Information"}
+          {config?.title || title || "Request Information"}
         </h2>
       </div>
 
@@ -179,8 +182,7 @@ function FormStep({ title, onClose, onSuccess }: { title?: string; onClose: () =
   );
 }
 
-function ConfirmationStep({ onClose }: { onClose: () => void }) {
-  const config = usePopupConfig("product-brief");
+function ConfirmationStep({ onClose, config }: { onClose: () => void; config?: PopupConfig }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose();

@@ -37,8 +37,8 @@ export function CtaPrimary({
             }
           : undefined
       }
-      className={`${shadowClass} ${gilroyMedium.className} relative flex h-[48px] shrink-0 items-center justify-center px-[20px]`}
-      style={width ? { width } : undefined}
+      className={`${shadowClass} ${gilroyMedium.className} relative inline-flex h-[48px] shrink-0 items-center justify-center px-[20px]`}
+      style={width ? { minWidth: `${width}px`, width: "fit-content" } : { width: "fit-content" }}
       data-name="Cta"
     >
       <span

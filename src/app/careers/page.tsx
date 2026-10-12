@@ -31,6 +31,7 @@ export default async function CareersPage() {
       { section: "best_work", nested: ["cards"] },
       "dna",
       { section: "open_roles" },
+      "application_form",
       { section: "benefits", nested: ["cards"] },
       "bottom_cta",
       "seo",
@@ -56,5 +57,5 @@ export default async function CareersPage() {
     console.error("Error fetching careers data:", err);
   }
   
-  return <Careers data={data} />;
+  return <Careers data={data} applicationForm={data?.application_form ?? null} />;
 }

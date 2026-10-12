@@ -37,7 +37,7 @@ const cards = [
   },
 ] as const;
 
-export function ContactSchedule({ data }: { data?: any }) {
+export function ContactSchedule({ data, bookingForm }: { data?: any; bookingForm?: any }) {
   const [bookingCard, setBookingCard] = useState<number | null>(null);
   const [bookedLabel, setBookedLabel] = useState("");
   const heading = data?.heading || "";
@@ -120,6 +120,7 @@ export function ContactSchedule({ data }: { data?: any }) {
       <ContactBookingPopup
         key={bookingCard === null ? "closed" : `booking-${bookingCard}`}
         open={bookingCard !== null}
+        config={bookingForm}
         meetingTitle={bookingCard !== null ? mergedCards[bookingCard]?.title || "Product Demo" : "Product Demo"}
         meetingDescription={
           bookingCard !== null

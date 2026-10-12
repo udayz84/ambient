@@ -10,7 +10,7 @@ import { PartnersFooterCtas } from "./PartnersFooterCtas";
 import type { PartnersContent } from "./partners-content";
 import Image from "next/image";
 
-export function Partners({ content }: { content: PartnersContent }) {
+export function Partners({ content, applicationForm, inquiryForm }: { content: PartnersContent; applicationForm?: any; inquiryForm?: any }) {
   return (
     <main className="relative z-10 flex w-full flex-col overflow-x-clip bg-black">
 
@@ -32,11 +32,13 @@ export function Partners({ content }: { content: PartnersContent }) {
         content={content.matchForm}
         capabilities={content.capabilities}
         regions={content.regions}
+        config={inquiryForm}
       />
         <PartnersBecome
           content={content.become}
           capabilities={content.capabilities}
           regions={content.regions}
+          config={applicationForm}
         />
         <PartnersFooterCtas content={content.footerCtas} />
       </div>

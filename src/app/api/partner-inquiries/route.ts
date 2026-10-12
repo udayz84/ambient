@@ -93,8 +93,9 @@ export async function POST(req: Request): Promise<Response> {
     message,
   };
 
+  const popupId = String(body.popupId ?? "").trim() || undefined;
   // Per-form recipients from the popup entry (empty → global Mail Setting / MAIL_TO)
-  const formRecipients = await getFormRecipients("partner-inquiry");
+  const formRecipients = await getFormRecipients(popupId);
 
   const mailPayload = () => ({
     formName: "Partner Inquiry (Get Matched)",

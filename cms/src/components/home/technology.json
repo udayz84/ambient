@@ -10,6 +10,17 @@
       "type": "string",
       "required": true
     },
+    "subheading": {
+      "type": "text"
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.button"
+    },
     "tag": {
       "type": "component",
       "repeatable": false,

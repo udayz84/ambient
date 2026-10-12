@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { PRIMARY_CTA_INSET, PRIMARY_CTA_SHADOW } from "./model-zoo-data";
+import { popupField, type PopupConfig } from "@/lib/popup";
 
 /**
  * Figma 5428:8536 — "Model zoo form" (700×800 panel), opened by the
@@ -41,7 +42,7 @@ function Field({
   );
 }
 
-export function ModelZooRequestForm({ onClose }: { onClose: () => void }) {
+export function ModelZooRequestForm({ onClose, config }: { onClose: () => void; /** CMS form entry (model-zoo-page request_form relation). Null = hardcoded fallback copy. */ config?: PopupConfig }) {
   const [values, setValues] = useState({
     fullName: "",
     email: "",
@@ -75,6 +76,7 @@ export function ModelZooRequestForm({ onClose }: { onClose: () => void }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           track: "sales",
+          popupId: config?.documentId,
           email: values.email,
           message: values.notes,
           subscribed: consent,
@@ -151,32 +153,32 @@ export function ModelZooRequestForm({ onClose }: { onClose: () => void }) {
             data-node-id="5428:8547"
           >
             {/* Full name — 5428:8548 */}
-            <Field label="Full name*" htmlFor="mz-full-name">
+            <Field label={popupField(config, "full_name")?.label ?? "Full name*"} htmlFor="mz-full-name">
               <input
                 id="mz-full-name"
                 type="text"
                 required
                 value={values.fullName}
                 onChange={set("fullName")}
-                placeholder="Enter Your Full Name"
+                placeholder={popupField(config, "full_name")?.placeholder ?? "Enter Your Full Name"}
                 className={`${INPUT_CLS} ${interRegular.className} h-[42px] w-full text-[14px] leading-[21px] text-white outline-none placeholder:text-[#4a4a4a] not-italic`}
               />
             </Field>
 
             {/* Email + Phone — 5428:8549 */}
             <div className="flex w-full flex-col gap-[24px] min-[560px]:flex-row min-[560px]:gap-[18px]">
-              <Field label="Email ID*" htmlFor="mz-email" className="min-[560px]:flex-1">
+              <Field label={popupField(config, "email")?.label ?? "Email ID*"} htmlFor="mz-email" className="min-[560px]:flex-1">
                 <input
                   id="mz-email"
                   type="email"
                   required
                   value={values.email}
                   onChange={set("email")}
-                  placeholder="Enter Your Email ID"
+                  placeholder={popupField(config, "email")?.placeholder ?? "Enter Your Email ID"}
                   className={`${INPUT_CLS} ${interRegular.className} h-[42px] w-full text-[14px] leading-[21px] text-white outline-none placeholder:text-[#4a4a4a] not-italic`}
                 />
               </Field>
-              <Field label="Phone Number*" htmlFor="mz-phone" className="min-[560px]:flex-1">
+              <Field label={popupField(config, "phone")?.label ?? "Phone Number*"} htmlFor="mz-phone" className="min-[560px]:flex-1">
                 <div className={`${INPUT_CLS} flex h-[42px] min-h-0 w-full items-center gap-[6px]`}>
                   <span className="flex shrink-0 items-center gap-[2px]" data-node-id="5428:8554">
                     <img alt="" src="/model-zoo/form-chevron-down.svg" className="block h-[7.81px] w-[14.12px]" aria-hidden />
@@ -190,7 +192,7 @@ export function ModelZooRequestForm({ onClose }: { onClose: () => void }) {
                     required
                     value={values.phone}
                     onChange={set("phone")}
-                    placeholder="Enter Your Phone Number"
+                    placeholder={popupField(config, "phone")?.placeholder ?? "Enter Your Phone Number"}
                     className={`${interRegular.className} h-full w-full min-w-0 flex-1 bg-transparent text-[14px] leading-[21px] text-white outline-none placeholder:text-[#4a4a4a] not-italic`}
                   />
                 </div>
@@ -199,7 +201,7 @@ export function ModelZooRequestForm({ onClose }: { onClose: () => void }) {
 
             {/* Purpose + Upload — 5428:8617 */}
             <div className="flex w-full flex-col gap-[24px] min-[560px]:flex-row min-[560px]:gap-[18px]">
-              <Field label="Purpose*" htmlFor="mz-purpose" className="min-[560px]:flex-1">
+              <Field label={popupField(config, "purpose")?.label ?? "Purpose*"} htmlFor="mz-purpose" className="min-[560px]:flex-1">
                 <div className="relative w-full">
                   <select
                     id="mz-purpose"
@@ -217,7 +219,7 @@ export function ModelZooRequestForm({ onClose }: { onClose: () => void }) {
                   <img alt="" src="/model-zoo/form-chevron-down.svg" className="pointer-events-none absolute top-1/2 right-[12px] h-[7.81px] w-[14.12px] -translate-y-1/2" aria-hidden />
                 </div>
               </Field>
-              <Field label="Upload Ideas*" htmlFor="mz-upload" className="min-[560px]:flex-1">
+              <Field label={popupField(config, "upload")?.label ?? "Upload Ideas*"} htmlFor="mz-upload" className="min-[560px]:flex-1">
                 <label
                   htmlFor="mz-upload"
                   className={`${INPUT_CLS} flex h-[42px] w-full cursor-pointer items-center justify-between gap-[12px]`}
@@ -239,13 +241,13 @@ export function ModelZooRequestForm({ onClose }: { onClose: () => void }) {
             </div>
 
             {/* Notes — 5428:8634 */}
-            <Field label="Notes" htmlFor="mz-notes">
+            <Field label={popupField(config, "notes")?.label ?? "Notes"} htmlFor="mz-notes">
               <textarea
                 id="mz-notes"
                 rows={3}
                 value={values.notes}
                 onChange={set("notes")}
-                placeholder="Enter your notes (if any)"
+                placeholder={popupField(config, "notes")?.placeholder ?? "Enter your notes (if any)"}
                 className={`${INPUT_CLS} ${interRegular.className} h-[90px] w-full resize-none text-[14px] leading-[21px] text-white outline-none placeholder:text-[#4a4a4a] not-italic`}
               />
             </Field>
@@ -288,7 +290,7 @@ export function ModelZooRequestForm({ onClose }: { onClose: () => void }) {
               >
                 <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
                 <span className="absolute inset-0 flex items-center justify-center text-[14px] leading-[normal] font-semibold text-white uppercase not-italic whitespace-nowrap" data-node-id="5428:8643">
-                  {loading ? "Submitting…" : "submit"}
+                  {loading ? "Submitting…" : config?.cta_label ?? "submit"}
                 </span>
                 <span aria-hidden className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
                 <GreenCtaCorners disableDots />

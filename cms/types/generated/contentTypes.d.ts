@@ -1529,6 +1529,7 @@ export interface ApiProductsPageProductsPage extends Struct.SingleTypeSchema {
       Schema.Attribute.Private;
     use_cases: Schema.Attribute.Component<'products.use-cases', false>;
     usecase_form: Schema.Attribute.Relation<'oneToOne', 'api::popup.popup'>;
+    waitlist_form: Schema.Attribute.Relation<'oneToOne', 'api::popup.popup'>;
   };
 }
 

@@ -236,7 +236,7 @@ function FilterSelect({
  * 1244-wide container at page x=98: header, filter bar, 3×2 card grid,
  * "AI models" thumbnail strip (bleeds right, clipped), Request CTA.
  */
-export function ModelZooLibrary() {
+export function ModelZooLibrary({ requestForm }: { requestForm?: any }) {
   const [modality, setModality] = useState("all");
   const [type, setType] = useState("all");
   const [query, setQuery] = useState("");
@@ -389,7 +389,7 @@ export function ModelZooLibrary() {
         </div>
       </div>
 
-      {requestOpen ? <ModelZooRequestForm onClose={() => setRequestOpen(false)} /> : null}
+      {requestOpen ? <ModelZooRequestForm onClose={() => setRequestOpen(false)} config={requestForm} /> : null}
     </section>
   );
 }

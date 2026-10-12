@@ -61,6 +61,7 @@ export async function POST(req: Request): Promise<Response> {
   const company = String(body.company ?? "").trim() || undefined;
   const phone = String(body.phone ?? "").trim() || undefined;
   const details = String(body.details ?? "").trim() || undefined;
+  const popupId = String(body.popupId ?? "").trim() || undefined;
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return bad("Please enter a valid email address.");
@@ -83,7 +84,7 @@ export async function POST(req: Request): Promise<Response> {
   ];
 
   after(() => {
-    getFormRecipients(formKey)
+    getFormRecipients(popupId)
       .then((to) =>
         sendSubmissionMail({
           formName: FORM_NAME_MAP[formKey] ?? formKey,

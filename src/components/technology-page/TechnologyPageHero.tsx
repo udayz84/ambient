@@ -95,7 +95,13 @@ function WatchExplainerCta({
   );
 }
 
-export function TechnologyPageHero({ data }: { data?: any } = {}) {
+export function TechnologyPageHero({
+  data,
+  config,
+}: {
+  data?: any;
+  config?: any;
+} = {}) {
   const [isWhitepaperOpen, setIsWhitepaperOpen] = useState(false);
   const [isExplainerOpen, setIsExplainerOpen] = useState(false);
   const tagText = data?.tag?.text || FALLBACK_TAG;
@@ -288,11 +294,13 @@ export function TechnologyPageHero({ data }: { data?: any } = {}) {
         isOpen={isWhitepaperOpen}
         onClose={() => setIsWhitepaperOpen(false)}
         title="Read the Whitepaper"
+        config={config}
       />
       <ProductBriefModal 
         isOpen={isExplainerOpen}
         onClose={() => setIsExplainerOpen(false)}
         title="Watch the 3-min Explainer"
+        config={config}
       />
     </section>
   );

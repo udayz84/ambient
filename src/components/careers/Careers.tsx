@@ -12,7 +12,7 @@ import { CareersOpenRoles } from "./CareersOpenRoles";
 
 const CAREERS_PAGE_HEIGHT_PX = 4977;
 
-export function Careers({ data }: { data?: any }) {
+export function Careers({ data, applicationForm }: { data?: any; applicationForm?: any }) {
   const [rolesHeightDiff, setRolesHeightDiff] = useState(0);
 
   return (
@@ -30,6 +30,7 @@ export function Careers({ data }: { data?: any }) {
         {data?.open_roles ? (
           <CareersOpenRoles
             data={data.open_roles}
+            applicationForm={applicationForm}
             onHeightDiffChange={setRolesHeightDiff}
           />
         ) : null}

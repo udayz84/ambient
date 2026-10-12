@@ -75,6 +75,11 @@ export default async function ProductsPage() {
       "start_building",
       "sticky_nav",
       "seo",
+      "usecase_form",
+      "evalkit_form",
+      "sdk_form",
+      "brief_form",
+      "waitlist_form",
     ]);
   } catch (error) {
     // Strapi unavailable — render with no data; sections will fall back to defaults
@@ -112,20 +117,20 @@ export default async function ProductsPage() {
 
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
-      <ProductsHero data={data?.hero} />
+      <ProductsHero data={data?.hero} config={data?.brief_form} />
       <ProductsStickyNav items={stickyItems} />
       <div id="features"><ProductsFeatures data={data?.features} /></div>
       <div id="always-on"><ProductsAlwaysOn data={data?.always_on} /></div>
-      <div id="metrics"><ProductsMeasured data={data?.measured} /></div>
+      <div id="metrics"><ProductsMeasured data={data?.measured} config={data?.brief_form} /></div>
       <ProductsCaseStudies data={caseStudiesData} />
-      <div id="use-cases"><ProductsUseCases data={data?.use_cases} /></div>
-      <ProductsAppForge data={data?.appforge} />
-      <ProductsModelForge data={data?.modelforge} />
+      <div id="use-cases"><ProductsUseCases data={data?.use_cases} config={data?.usecase_form} /></div>
+      <ProductsAppForge data={data?.appforge} config={data?.evalkit_form} />
+      <ProductsModelForge data={data?.modelforge} config={data?.sdk_form} />
       <ProductsBenchToVolume data={data?.bench_to_volume} />
       <div id="architecture"><ProductsArchitecture data={data?.architecture} /></div>
       {/* <SomFamily data={data?.som_family} /> */}
       <div id="full-picture"><ProductsFullPicture data={data?.full_picture} /></div>
-      <ProductsStartBuilding data={data?.start_building} />
+      <ProductsStartBuilding data={data?.start_building} evalkitConfig={data?.evalkit_form} waitlistConfig={data?.waitlist_form} />
     </main>
   );
 }

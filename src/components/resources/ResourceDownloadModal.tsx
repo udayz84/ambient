@@ -1,19 +1,19 @@
 import { useState } from "react";
 import { gilroyMedium, interRegular } from "../hero/fonts";
-import { usePopupConfig, type PopupField } from "../shared/usePopupConfig";
+import { type PopupConfig, type PopupField } from "@/lib/popup";
 
 export function ResourceDownloadModal({
   isOpen,
   onClose,
   pdfUrl,
+  config,
 }: {
   isOpen: boolean;
   onClose: () => void;
   pdfUrl: string;
+  /** CMS form entry (resources-page download_form relation). Null = generic fallback copy. */
+  config?: PopupConfig;
 }) {
-  // CMS-editable copy, proxied through /api/popup-config (direct browser
-  // fetches to Strapi 401/500). Falls back to generic copy when unset.
-  const config = usePopupConfig("resource-download");
   const [formData, setFormData] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -50,6 +50,7 @@ export function ResourceDownloadModal({
                 .filter(([k, v]) => v && k !== "email" && !["first_name", "firstName", "name", "last_name", "lastName", "company", "Company"].includes(k))
                 .map(([k, v]) => `${k}: ${v}`)
                 .join("\n") || undefined,
+            popupId: config?.documentId,
           }),
         }).catch(() => { /* Mailchimp sync failure is non-blocking */ });
       }

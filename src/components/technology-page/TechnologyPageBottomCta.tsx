@@ -136,7 +136,13 @@ function CtaCard({
   );
 }
 
-export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
+export function TechnologyPageBottomCta({
+  data,
+  config,
+}: {
+  data?: any;
+  config?: any;
+} = {}) {
   const [isEvalModalOpen, setIsEvalModalOpen] = useState(false);
   const sectionTitle = data?.heading || FALLBACK_SECTION_TITLE;
   const sectionSubtitle = data?.subtitle || FALLBACK_SECTION_SUBTITLE;
@@ -296,6 +302,7 @@ export function TechnologyPageBottomCta({ data }: { data?: any } = {}) {
         isOpen={isEvalModalOpen}
         onClose={() => setIsEvalModalOpen(false)}
         title="Get an Evaluation Kit"
+        config={config}
       />
     </section>
   );

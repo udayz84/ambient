@@ -17,6 +17,7 @@ const CARDS = [
     title: "Try it on your bench.",
     desc: "Request an eval kit and run any model from day one.",
     cta: "Request Eval Kit",
+    href: "/dvk",
     ctaWidth: 200,
   },
   {
@@ -26,6 +27,7 @@ const CARDS = [
     title: "Experience it now.",
     desc: "Download ApplicationForge and drive live demos from your phone.",
     cta: "Get the ApplicationForge App",
+    href: "/application-forge",
     ctaWidth: 290,
   },
   {
@@ -35,6 +37,7 @@ const CARDS = [
     title: "Go deeper.",
     desc: "Browse the code and model cards on GitHub.",
     cta: "Browse the Model Zoo",
+    href: "/model-zoo",
     ctaWidth: 240,
   },
 ];
@@ -47,12 +50,23 @@ const ARCS = [
 
 import { mediaUrl } from "@/lib/strapi";
 
-function KitCard({ card }: { card: (typeof CARDS)[number] }) {
+type KitCardData = {
+  nodeId?: string;
+  img: string;
+  alt: string;
+  title: string;
+  desc: string;
+  cta: string;
+  href?: string;
+  ctaWidth?: number;
+};
+
+function KitCard({ card }: { card: KitCardData }) {
   const { fadeRef, isVisible } = useFadeIn<HTMLDivElement>();
   return (
     <div
       ref={fadeRef}
-      className={`relative flex h-auto min-w-px w-full min-[1024px]:w-[385px] flex-col gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.7)] px-[20px] pt-[20px] pb-[32px] transition-colors duration-300 hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] min-[1024px]:h-[553px] ${getFadeInClass(isVisible)}`}
+      className={`relative flex h-auto min-w-px w-full min-[1024px]:w-[385px] flex-col gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.7)] px-[20px] pt-[20px] pb-[32px] transition-colors duration-300 hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] min-[1024px]:min-h-[600px] ${getFadeInClass(isVisible)}`}
       data-node-id={card.nodeId || "card"}
       data-name="Article"
     >
@@ -61,7 +75,7 @@ function KitCard({ card }: { card: (typeof CARDS)[number] }) {
       </div>
 
       <div className="flex w-full flex-col items-start gap-[10px] flex-grow">
-        <p className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] text-white not-italic min-[1024px]:whitespace-nowrap`}>
+        <p className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] text-white not-italic`}>
           {card.title}
         </p>
         <p className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}>
@@ -70,7 +84,12 @@ function KitCard({ card }: { card: (typeof CARDS)[number] }) {
       </div>
 
       <div className="mt-auto">
-        <CtaPrimary label={card.cta} width={card.ctaWidth || 240} reducedShine />
+        <CtaPrimary
+          label={card.cta}
+          href={card.href || "#"}
+          width={card.ctaWidth || 240}
+          reducedShine
+        />
       </div>
 
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
@@ -87,7 +106,7 @@ export function HomeModelZooKits({ data }: { data?: any }) {
   const bottomCta2Label = data?.bottom_cta_2_label || "Explore the Developer Hub";
   const bottomCta2Link = data?.bottom_cta_2_link || "#";
   
-  const cardsData = Array.isArray(data?.cards) && data.cards.length > 0
+  const cardsData: KitCardData[] = Array.isArray(data?.cards) && data.cards.length > 0
     ? data.cards.map((c: any, i: number) => ({
         nodeId: `strapi-${i}`,
         img: mediaUrl(c.image) || CARDS[i]?.img || "",
@@ -95,7 +114,8 @@ export function HomeModelZooKits({ data }: { data?: any }) {
         title: c.title || "",
         desc: c.desc || "",
         cta: c.cta || "",
-        ctaWidth: CARDS[i]?.ctaWidth || 240,
+        href: c.cta_href || c.cta_link || c.href || CARDS[i]?.href || "#",
+        ctaWidth: c.cta_width || CARDS[i]?.ctaWidth || 240,
       }))
     : CARDS;
 
@@ -137,7 +157,7 @@ export function HomeModelZooKits({ data }: { data?: any }) {
           )}
         </div>
 
-        <div className="mt-[24px] flex flex-col items-stretch gap-[16px] px-0 min-[1024px]:mt-[60px] min-[1024px]:flex-row min-[1024px]:justify-center min-[1024px]:items-center min-[1024px]:gap-[24px] min-[1024px]:px-[26px]" data-node-id="5246:6363" data-name="Frame 1984079440">
+        <div className="mt-[24px] flex flex-col items-stretch gap-[16px] px-0 min-[1024px]:mt-[60px] min-[1024px]:flex-row min-[1024px]:justify-center min-[1024px]:items-stretch min-[1024px]:gap-[24px] min-[1024px]:px-[26px]" data-node-id="5246:6363" data-name="Frame 1984079440">
           {cardsData.map((card: any) => (
             <KitCard key={card.nodeId} card={card} />
           ))}

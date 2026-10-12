@@ -84,8 +84,9 @@ export async function POST(req: Request): Promise<Response> {
     duplex: "half",
   };
 
+  const popupId = String(incoming.get("popupId") ?? "").trim() || undefined;
   // Per-form recipients from the popup entry (empty → global Mail Setting / MAIL_TO)
-  const formRecipients = await getFormRecipients("job-application");
+  const formRecipients = await getFormRecipients(popupId);
 
   const mailPayload = async () => {
     let attachments: MailAttachment[] = [];

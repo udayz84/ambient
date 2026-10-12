@@ -57,8 +57,9 @@ export async function POST(req: Request): Promise<Response> {
     status: "confirmed",
   };
 
+  const popupId = String(body.popupId ?? "").trim() || undefined;
   // Per-form recipients from the popup entry (empty → global Mail Setting / MAIL_TO)
-  const formRecipients = await getFormRecipients("calendar-booking");
+  const formRecipients = await getFormRecipients(popupId);
 
   const mailPayload = () => {
     const prettyDate = new Date(`${bookingDate}T00:00:00`).toLocaleDateString("en-GB", {
