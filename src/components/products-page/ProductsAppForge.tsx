@@ -186,10 +186,10 @@ export function ProductsAppForge({ data }: { data?: any }) {
 
       {/* Bottom Container */}
       <div className="relative mx-auto w-full max-w-[1192.5px] px-[16px] min-[1024px]:px-0">
-        {/* Wide article card — bottom */}
+        {/* Wide article card — bottom (hidden in UI) */}
         <div
           ref={articleRef}
-          className={`relative mt-[24px] flex h-auto flex-col items-stretch justify-center gap-[20px] px-[20px] py-[32px] transition-colors duration-300 min-[1024px]:mt-[41px] min-[1024px]:h-[391px] min-[1024px]:flex-row min-[1024px]:items-start ${getFadeInClass(articleVisible)}`}
+          className="hidden"
           data-node-id="5131:10513"
           data-name="Article"
         >
@@ -238,7 +238,7 @@ export function ProductsAppForge({ data }: { data?: any }) {
         </div>
 
         {/* Request CTA */}
-        <div className="relative mt-[30px] flex justify-center pb-[63px] z-50 pointer-events-auto">
+        <div className="relative mt-[36px] min-[1024px]:mt-[48px] flex justify-center pb-[63px] z-50 pointer-events-auto">
           <a
             href={data?.cta?.href || "#"}
             onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }}
