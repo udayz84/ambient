@@ -3,6 +3,7 @@ import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle } from "../contact/contact-shared";
 import { mediaUrl } from "@/lib/strapi";
+import { splitTitleIntoTwoLines } from "@/lib/title-utils";
 
 const MOBILE_TITLE_GRADIENT =
   "linear-gradient(98.22145329235457deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -20,7 +21,7 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
   const bgImg = mediaUrl(data?.background_image) || "/applications/hero-bg.webp";
   const titleFrame = "/applications/title-frame.svg";
   const titleText = data?.title || FALLBACK_TITLE;
-  const titleLines = titleText.split("\n");
+  const titleLines = splitTitleIntoTwoLines(titleText);
   const subtitle = data?.subtitle || SUBTITLE;
   const tagText = data?.tag?.text || FALLBACK_TAG;
 
@@ -99,7 +100,7 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
           >
             <GradientTitle gradientDeg="105.388deg" className="text-center" maxLines={2}>
               {titleLines.map((line: string, i: number) => (
-                <span key={i} className="block leading-[49px] [word-break:break-word]">
+                <span key={i} className="block leading-[49px] whitespace-nowrap [word-break:break-word]">
                   {line}
                 </span>
               ))}
@@ -171,7 +172,7 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
               data-name="Group 78"
             >
               <div
-                className={`${gilroyMedium.className} absolute left-[56px] top-[43px] w-[241px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+                className={`${gilroyMedium.className} absolute left-[56px] top-[43px] w-[241px] flex flex-col items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
                 style={{
                   backgroundImage: MOBILE_TITLE_GRADIENT,
                   WebkitBackgroundClip: "text",
@@ -180,7 +181,7 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
                 data-node-id="4032:8627"
               >
                 {titleLines.map((line: string, i: number) => (
-                  <span key={i} className="block leading-[36px]">
+                  <span key={i} className="block leading-[36px] whitespace-nowrap">
                     {line}
                   </span>
                 ))}

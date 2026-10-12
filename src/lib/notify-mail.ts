@@ -107,13 +107,17 @@ export async function sendSubmissionMail(options: {
   replyTo?: string;
   attachments?: MailAttachment[];
   meta?: MailField[];
+  /** Per-form recipients (e.g. from a popup entry). Overrides the global Mail Setting / MAIL_TO. */
+  to?: string[];
 }): Promise<void> {
-  const { formName, fields, replyTo, attachments, meta = [] } = options;
+  const { formName, fields, replyTo, attachments, meta = [], to: toOverride } = options;
 
   const recipients = await getStrapiRecipients();
 
-  // Strapi Mail Setting takes priority; MAIL_TO env is the fallback.
-  const to = recipients?.enabled && recipients.to.length
+  // Per-form recipients take priority, then Strapi Mail Setting, then MAIL_TO.
+  const to = toOverride?.length
+    ? toOverride.join(", ")
+    : recipients?.enabled && recipients.to.length
     ? recipients.to.join(", ")
     : process.env.MAIL_TO;
 

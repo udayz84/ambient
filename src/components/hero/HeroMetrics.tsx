@@ -30,7 +30,7 @@ export function HeroMetrics({ metrics = [] }: { metrics?: HeroMetric[] }) {
 
   return (
     <div
-      className="absolute top-[554px] left-[120px] flex h-[244px] w-[468px] content-stretch items-start justify-center gap-[24px] py-[30px]"
+      className="absolute top-[515px] left-[120px] flex w-max content-stretch items-start justify-start gap-[24px]"
       data-node-id="2379:742"
       data-name="Mesarable Proof Metrics"
     >
@@ -89,9 +89,9 @@ export function HeroMetrics({ metrics = [] }: { metrics?: HeroMetric[] }) {
         rightBarLeft={121.48}
         tagNodeId="2379:763"
         statNodeId="2379:762"
-        width={217}
-        contentClassName="w-[217px]"
-        descriptionWidth="217px"
+        width={235}
+        contentClassName="w-[235px]"
+        descriptionWidth="235px"
         value={
           <p
             className={`${gilroySemiBold.className} min-w-full w-[min-content] shrink-0 bg-clip-text text-[40px] leading-[1.2] text-transparent`}

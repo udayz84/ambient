@@ -81,3 +81,5 @@ export function useFitText<T extends HTMLElement>({
 
   return ref;
 }
+
+export { splitTitleIntoTwoLines } from "@/lib/title-utils";

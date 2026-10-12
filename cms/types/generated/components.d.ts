@@ -612,6 +612,7 @@ export interface ContactFormTrack extends Struct.ComponentSchema {
     form: Schema.Attribute.Component<'contact.form-field', true>;
     icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     label: Schema.Attribute.String & Schema.Attribute.Required;
+    track_form: Schema.Attribute.Relation<'oneToOne', 'api::popup.popup'>;
   };
 }
 

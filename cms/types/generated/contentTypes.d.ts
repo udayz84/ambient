@@ -663,6 +663,7 @@ export interface ApiCareersPageCareersPage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    application_form: Schema.Attribute.Relation<'oneToOne', 'api::popup.popup'>;
     benefits: Schema.Attribute.Component<'careers.benefits', false>;
     best_work: Schema.Attribute.Component<'careers.best-work', false>;
     bottom_cta: Schema.Attribute.Component<'careers.bottom-cta', false>;
@@ -771,6 +772,7 @@ export interface ApiContactPageContactPage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    booking_form: Schema.Attribute.Relation<'oneToOne', 'api::popup.popup'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -806,12 +808,14 @@ export interface ApiDeveloperPageDeveloperPage extends Struct.SingleTypeSchema {
   };
   attributes: {
     app_forge: Schema.Attribute.Component<'model-zoo.app-forge', false>;
+    brief_form: Schema.Attribute.Relation<'oneToOne', 'api::popup.popup'>;
     code: Schema.Attribute.Component<'developer.code', false>;
     coming_soon: Schema.Attribute.Component<'developer.coming-soon', false>;
     copilots: Schema.Attribute.Component<'developer.copilots', false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    cta_form: Schema.Attribute.Relation<'oneToOne', 'api::popup.popup'>;
     hero: Schema.Attribute.Component<'developer.hero', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -846,6 +850,7 @@ export interface ApiDvkPageDvkPage extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    cta_form: Schema.Attribute.Relation<'oneToOne', 'api::popup.popup'>;
     demos: Schema.Attribute.Component<'dvk.demos', false>;
     hero: Schema.Attribute.Component<'dvk.hero', false>;
     inside_module: Schema.Attribute.Component<'som.inside-module', false>;
@@ -898,6 +903,7 @@ export interface ApiFooterFooter extends Struct.SingleTypeSchema {
     > &
       Schema.Attribute.Private;
     newsletter: Schema.Attribute.Component<'shared.newsletter', false>;
+    newsletter_form: Schema.Attribute.Relation<'oneToOne', 'api::popup.popup'>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -923,6 +929,7 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    cta_form: Schema.Attribute.Relation<'oneToOne', 'api::popup.popup'>;
     developer_platform: Schema.Attribute.Component<
       'home.developer-platform',
       false
@@ -1209,6 +1216,7 @@ export interface ApiModelZooPageModelZooPage extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    cta_form: Schema.Attribute.Relation<'oneToOne', 'api::popup.popup'>;
     hero: Schema.Attribute.Component<'model-zoo.hero', false>;
     kits: Schema.Attribute.Component<'model-zoo.kits', false>;
     library: Schema.Attribute.Component<'model-zoo.library', false>;
@@ -1219,6 +1227,7 @@ export interface ApiModelZooPageModelZooPage extends Struct.SingleTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    request_form: Schema.Attribute.Relation<'oneToOne', 'api::popup.popup'>;
     seo: Schema.Attribute.Component<'shared.seo', false>;
     steps: Schema.Attribute.Component<'model-zoo.steps', false>;
     updatedAt: Schema.Attribute.DateTime;
@@ -1406,6 +1415,7 @@ export interface ApiPartnersPagePartnersPage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    application_form: Schema.Attribute.Relation<'oneToOne', 'api::popup.popup'>;
     become: Schema.Attribute.Component<'partners.become', false>;
     benefits: Schema.Attribute.Component<'partners.benefits', false>;
     capabilities: Schema.Attribute.Component<'partners.capabilities', false>;
@@ -1415,6 +1425,7 @@ export interface ApiPartnersPagePartnersPage extends Struct.SingleTypeSchema {
     directory: Schema.Attribute.Component<'partners.directory', false>;
     footer_ctas: Schema.Attribute.Component<'partners.footer-ctas', false>;
     hero: Schema.Attribute.Component<'partners.hero', false>;
+    inquiry_form: Schema.Attribute.Relation<'oneToOne', 'api::popup.popup'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1451,23 +1462,15 @@ export interface ApiPopupPopup extends Struct.CollectionTypeSchema {
       Schema.Attribute.DefaultTo<'Submit & Download'>;
     description: Schema.Attribute.Text;
     fields: Schema.Attribute.Component<'form.field', true>;
-    key: Schema.Attribute.Enumeration<
-      [
-        'upcoming',
-        'usecase',
-        'evalkit',
-        'sdk',
-        'som',
-        'waitlist',
-        'product-brief',
-        'resource-download',
-        'newsletter-popup',
-      ]
-    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::popup.popup'> &
       Schema.Attribute.Private;
+    page: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    recipient_emails: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 2000;
+      }>;
     success_text: Schema.Attribute.Text;
     success_title: Schema.Attribute.String;
     title: Schema.Attribute.String & Schema.Attribute.Required;
@@ -1495,10 +1498,12 @@ export interface ApiProductsPageProductsPage extends Struct.SingleTypeSchema {
       'products.bench-to-volume',
       false
     >;
+    brief_form: Schema.Attribute.Relation<'oneToOne', 'api::popup.popup'>;
     case_studies: Schema.Attribute.Component<'products.case-studies', false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    cta_form: Schema.Attribute.Relation<'oneToOne', 'api::popup.popup'>;
     features: Schema.Attribute.Component<'products.features', false>;
     full_picture: Schema.Attribute.Component<'products.full-picture', false>;
     hero: Schema.Attribute.Component<'products.hero', false>;
@@ -1582,6 +1587,7 @@ export interface ApiResourcesPageResourcesPage extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    download_form: Schema.Attribute.Relation<'oneToOne', 'api::popup.popup'>;
     featured: Schema.Attribute.Component<'resources.featured', false>;
     hero: Schema.Attribute.Component<'resources.hero', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -1647,9 +1653,11 @@ export interface ApiSomPageSomPage extends Struct.SingleTypeSchema {
   };
   attributes: {
     bg_image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    brief_form: Schema.Attribute.Relation<'oneToOne', 'api::popup.popup'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    cta_form: Schema.Attribute.Relation<'oneToOne', 'api::popup.popup'>;
     deploy_path: Schema.Attribute.Component<'som.deploy-path', false>;
     family: Schema.Attribute.Component<'som.family', false>;
     features: Schema.Attribute.Component<'som.features', false>;
@@ -1687,6 +1695,7 @@ export interface ApiTechnologyPageTechnologyPage
   attributes: {
     architecture: Schema.Attribute.Component<'tech.architecture', false>;
     bottom_cta: Schema.Attribute.Component<'tech.bottom-cta', false>;
+    brief_form: Schema.Attribute.Relation<'oneToOne', 'api::popup.popup'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

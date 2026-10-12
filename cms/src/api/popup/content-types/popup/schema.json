@@ -12,23 +12,13 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "key": {
-      "type": "enumeration",
-      "enum": [
-        "upcoming",
-        "usecase",
-        "evalkit",
-        "sdk",
-        "som",
-        "waitlist",
-        "product-brief",
-        "resource-download",
-        "newsletter-popup"
-      ]
-    },
     "title": {
       "type": "string",
       "required": true
+    },
+    "page": {
+      "type": "string",
+      "description": "Where this form appears on the site (shown in the list), e.g. \"Home page — hero CTA\""
     },
     "description": {
       "type": "text"
@@ -47,6 +37,11 @@
     },
     "success_text": {
       "type": "text"
+    },
+    "recipient_emails": {
+      "type": "text",
+      "maxLength": 2000,
+      "description": "Comma-separated email addresses that receive this form's submission notifications. Leave empty to use the global Mail Setting / MAIL_TO."
     }
   }
 }

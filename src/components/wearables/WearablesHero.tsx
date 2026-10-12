@@ -2,7 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
-import { useFitText } from "../shared/FitText";
+import { useFitText, splitTitleIntoTwoLines } from "../shared/FitText";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular, gilroyExtraBold } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
@@ -73,7 +73,8 @@ export function WearablesHero({
 }) {
   const subtitle = data?.subtitle || "";
   const watermark = data?.watermark || "";
-  const titleLines = (data?.title || "").split("\n");
+  const rawTitle = data?.title || FALLBACK_TITLE;
+  const titleLines = splitTitleIntoTwoLines(rawTitle);
   const bg1 = mediaUrl(data?.background_image_1) || "";
   const bg2 = mediaUrl(data?.background_image_2) || "";
   const primaryLabel = data?.primary_button?.label || "";
@@ -84,8 +85,8 @@ export function WearablesHero({
   const { fadeRef: desktopRef, isVisible: desktopVisible } = useFadeIn();
   const { fadeRef: mobileRef, isVisible: mobileVisible } = useFadeIn();
 
-  const fitRef = useFitText<HTMLDivElement>({});
-  const fitRef2 = useFitText<HTMLDivElement>({});
+  const fitRef = useFitText<HTMLDivElement>({ maxLines: 2 });
+  const fitRef2 = useFitText<HTMLDivElement>({ maxLines: 2 });
   const fitRef3 = useFitText<HTMLParagraphElement>({ maxLines: 1 });
   const fitRef4 = useFitText<HTMLParagraphElement>({ maxLines: 1 });
 
@@ -191,7 +192,7 @@ export function WearablesHero({
               {titleLines.map((line: string, i: number) => (
                 <span
                   key={i}
-                  className="block leading-[49px]"
+                  className="block leading-[49px] whitespace-nowrap"
                 >
                   {line}
                 </span>
@@ -235,7 +236,7 @@ export function WearablesHero({
           <div className="relative h-[80px] w-[352px]" data-name="Group 78">
             <div
               ref={fitRef2}
-              className={`${gilroyMedium.className} absolute inset-0 flex items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} absolute inset-0 flex flex-col items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage:
                   "linear-gradient(112.51485485760136deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -245,7 +246,7 @@ export function WearablesHero({
               data-node-id="4153:10653"
             >
               {titleLines.map((line: string, i: number) => (
-                <span key={i} className="block leading-[36px]">{line}</span>
+                <span key={i} className="block leading-[36px] whitespace-nowrap">{line}</span>
               ))}
             </div>
 

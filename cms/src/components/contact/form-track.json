@@ -22,7 +22,7 @@
         "videos",
         "audios"
       ],
-      "description": "Shown at 32×32 with a color-invert filter — needs a light, simple glyph. Recommended: single-color SVG (or 64×64 px PNG)."
+      "description": "Shown at 32\u00d732 with a color-invert filter \u2014 needs a light, simple glyph. Recommended: single-color SVG (or 64\u00d764 px PNG)."
     },
     "alt": {
       "type": "string"
@@ -31,6 +31,11 @@
       "type": "component",
       "repeatable": true,
       "component": "contact.form-field"
+    },
+    "track_form": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::popup.popup"
     }
   }
 }

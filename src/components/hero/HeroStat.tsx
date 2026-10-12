@@ -57,7 +57,7 @@ export function HeroStat({
         height={height}
         labelClassName={labelClassName}
       />
-      <div className={`flex w-full content-stretch gap-[24px] not-italic ${layout === "row" ? "flex-row items-center" : "flex-col items-start"}`}>
+      <div className={`flex w-full content-stretch gap-[16px] not-italic ${layout === "row" ? "flex-row items-center" : "flex-col items-start"}`}>
         {value}
         <div
           className={`flex flex-col content-stretch items-start gap-[10px] ${contentClassName}`}

@@ -1,6 +1,7 @@
 import { NextResponse, after } from "next/server";
 import { addContactAndTag } from "@/lib/mailchimp";
 import { sendSubmissionMail, type MailField } from "@/lib/notify-mail";
+import { getFormRecipients } from "@/lib/form-recipients";
 
 /**
  * src/app/api/newsletter/route.ts
@@ -82,11 +83,16 @@ export async function POST(req: Request): Promise<Response> {
   ];
 
   after(() => {
-    sendSubmissionMail({
-      formName: FORM_NAME_MAP[formKey] ?? formKey,
-      fields,
-      replyTo: email,
-    }).catch(() => { /* logged inside sendSubmissionMail */ });
+    getFormRecipients(formKey)
+      .then((to) =>
+        sendSubmissionMail({
+          formName: FORM_NAME_MAP[formKey] ?? formKey,
+          fields,
+          replyTo: email,
+          to: to.length ? to : undefined,
+        }),
+      )
+      .catch(() => { /* logged inside sendSubmissionMail */ });
     addContactAndTag(
       { email, firstName, lastName, company, phone },
       formKey,

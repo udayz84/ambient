@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { sendSubmissionMail } from "@/lib/notify-mail";
+import { getFormRecipients } from "@/lib/form-recipients";
 
 /**
  * src/app/api/calendar-bookings/route.ts
@@ -56,6 +57,9 @@ export async function POST(req: Request): Promise<Response> {
     status: "confirmed",
   };
 
+  // Per-form recipients from the popup entry (empty → global Mail Setting / MAIL_TO)
+  const formRecipients = await getFormRecipients("calendar-booking");
+
   const mailPayload = () => {
     const prettyDate = new Date(`${bookingDate}T00:00:00`).toLocaleDateString("en-GB", {
       weekday: "long",
@@ -65,6 +69,7 @@ export async function POST(req: Request): Promise<Response> {
     });
     return {
       formName: "Calendar Booking",
+      to: formRecipients,
       fields: [
         { label: "Meeting", value: meetingTitle },
         { label: "Date", value: prettyDate },

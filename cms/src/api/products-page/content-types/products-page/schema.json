@@ -82,6 +82,26 @@
       "type": "component",
       "repeatable": false,
       "component": "som.family"
+    },
+    "brief_form": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::popup.popup"
+    },
+    "usecase_form": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::popup.popup"
+    },
+    "evalkit_form": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::popup.popup"
+    },
+    "sdk_form": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::popup.popup"
     }
   }
 }
