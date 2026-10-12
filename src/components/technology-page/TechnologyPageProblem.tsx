@@ -239,7 +239,7 @@ function LegacyCard({
         data-name="Stat"
       >
         <div
-          className="absolute top-[8px] right-0 left-0 flex flex-col items-start gap-[8px] border-b border-solid border-[rgba(255,255,255,0.1)] pb-[11px]"
+          className="absolute top-[0px] right-0 left-0 flex flex-col items-start gap-[6px]"
           data-node-id="3322:2583"
         >
           <p
@@ -257,13 +257,13 @@ function LegacyCard({
         </div>
 
         <p
-          className={`${gilroyMedium.className} absolute left-[48.35px] top-[128.7px] text-[18px] leading-[28px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} absolute left-[48.35px] top-[142px] text-[18px] leading-[28px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
           data-node-id="3322:2587"
         >
           Compute
         </p>
         <p
-          className={`${gilroyMedium.className} absolute left-[331.26px] top-[128.7px] text-[18px] leading-[28px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} absolute left-[331.26px] top-[142px] text-[18px] leading-[28px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
           data-node-id="3322:2592"
         >
           Memory
@@ -271,7 +271,7 @@ function LegacyCard({
 
         {/* image 208 — compute chip */}
         <div
-          className="absolute left-[5.89px] top-[164.7px] h-[160.61px] w-[162.91px]"
+          className="absolute left-[5.89px] top-[176px] h-[160.61px] w-[162.91px]"
           data-node-id="3322:2589"
           data-name="image 208"
         >
@@ -287,7 +287,7 @@ function LegacyCard({
 
         {/* image 206 — memory chip */}
         <div
-          className="absolute left-[272.44px] top-[172.09px] h-[145.82px] w-[184.65px]"
+          className="absolute left-[272.44px] top-[182px] h-[145.82px] w-[184.65px]"
           data-node-id="3322:2590"
           data-name="image 206"
         >
@@ -301,7 +301,7 @@ function LegacyCard({
 
         {/* connector line — bright pulse flows left to right */}
         <div
-          className="absolute left-[165.12px] top-[250.17px] h-0 w-[114.69px]"
+          className="absolute left-[165.12px] top-[260px] h-0 w-[114.69px]"
           data-node-id="3322:2591"
         >
           <div className="absolute inset-[-20px_0_0_0]">

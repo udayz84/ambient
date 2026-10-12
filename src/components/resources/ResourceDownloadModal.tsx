@@ -1,23 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { gilroyMedium, interRegular } from "../hero/fonts";
-
-type FormField = {
-  id: number;
-  name: string;
-  label: string;
-  type: string;
-  placeholder?: string;
-  required: boolean;
-};
-
-type PopupConfig = {
-  id: number;
-  title: string;
-  description: string;
-  cta_label: string;
-  cta_link: string;
-  fields: FormField[];
-};
+import { usePopupConfig, type PopupField } from "../shared/usePopupConfig";
 
 export function ResourceDownloadModal({
   isOpen,
@@ -28,43 +11,20 @@ export function ResourceDownloadModal({
   onClose: () => void;
   pdfUrl: string;
 }) {
-  const [config, setConfig] = useState<PopupConfig | null>(null);
+  // CMS-editable copy, proxied through /api/popup-config (direct browser
+  // fetches to Strapi 401/500). Falls back to generic copy when unset.
+  const config = usePopupConfig("resource-download");
   const [formData, setFormData] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1338";
 
-  useEffect(() => {
-    if (!config) {
-      // Fetch popup config immediately so it's ready when opened
-      fetch(`${strapiUrl}/api/popups?populate=fields`)
-        .then(async (res) => {
-          if (!res.ok) {
-            return null;
-          }
-          return res.json();
-        })
-        .then((res) => {
-          if (res && res.data && res.data.length > 0) {
-            const popup = res.data[0];
-            setConfig({
-              id: popup.id,
-              title: popup.title,
-              description: popup.description,
-              cta_label: popup.cta_label,
-              cta_link: popup.cta_link,
-              fields: popup.fields,
-            });
-          }
-        })
-        .catch((err) => {
-          console.warn("Could not fetch popup config", err);
-        });
-    }
-  }, [config, strapiUrl, isOpen]);
+  const fields: PopupField[] = config?.fields?.length
+    ? config.fields
+    : [
+        { id: 0, name: "email", label: "Email", type: "email", placeholder: "enter your email", required: true },
+      ];
 
   if (!isOpen) return null;
-  if (!config) return null; // Don't show modal until config is loaded
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -84,6 +44,12 @@ export function ResourceDownloadModal({
             firstName: formData["first_name"] || formData["firstName"] || formData["name"] || undefined,
             lastName: formData["last_name"] || formData["lastName"] || undefined,
             company: formData["company"] || formData["Company"] || undefined,
+            // Any extra CMS-defined fields, as "name: value" lines.
+            details:
+              Object.entries(formData)
+                .filter(([k, v]) => v && k !== "email" && !["first_name", "firstName", "name", "last_name", "lastName", "company", "Company"].includes(k))
+                .map(([k, v]) => `${k}: ${v}`)
+                .join("\n") || undefined,
           }),
         }).catch(() => { /* Mailchimp sync failure is non-blocking */ });
       }
@@ -98,8 +64,8 @@ export function ResourceDownloadModal({
       document.body.removeChild(a);
       
       onClose();
-    } catch (err: any) {
-      setError(err.message || "An error occurred");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An error occurred");
     } finally {
       setLoading(false);
     }
@@ -125,7 +91,7 @@ export function ResourceDownloadModal({
           {config?.description || "Please fill out the form to download this resource."}
         </p>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          {config?.fields?.map((field) => (
+          {fields.map((field) => (
             <div key={field.id}>
               {field.label && (
                 <label className="block text-sm text-white/80 mb-1">

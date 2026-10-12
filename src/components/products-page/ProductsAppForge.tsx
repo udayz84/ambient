@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { useState } from "react";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { getFadeInClass, useFadeIn } from "../shared/useFadeIn";
 import { Corners } from "../shared/Corners";
@@ -13,46 +14,105 @@ import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 
 const TITLE_GRADIENT = sectionTitleGradient(111.766);
 
-/** Figma 5241:5752…5751 — dimmed preview list buttons (84px, opacity 20). */
-const FORGE_STEPS = ["Pair over BLE", "Flash a demo instantly", "See results live"];
+/** Decorative model cards for the two-row collage carousel */
+const COLLAGE_ROW_1 = [
+  { label: "Anomaly Detection", img: "/model-zoo/collage-r1-c1.webp" },
+  { label: "Keyword Spotting", img: "/model-zoo/collage-r1-c2.webp" },
+  { label: "Human Activity Recognition", img: "/model-zoo/collage-r1-c3.webp" },
+  { label: "Fall Detection", img: "/model-zoo/collage-r1-c4.webp" },
+  { label: "IMU Gesture Recognition", img: "/model-zoo/collage-r1-c5.webp" },
+];
 
-/** Figma component-set 5241:5968 variants — clicking a row swaps to that variant:
- * active row expands to its Stat content, siblings dim to 40%, the Article panel
- * shows that variant's collage, and the switch turns on. */
-const STEP_KEYS = ["pair", "flash", "results"] as const;
-type ForgeStep = (typeof STEP_KEYS)[number];
-const STEP_STAT: Record<ForgeStep, string> = {
-  pair: "/model-zoo/af-stat-pair.webp",
-  flash: "/model-zoo/af-stat-flash.webp",
-  results: "/model-zoo/af-stat-results.webp",
-};
-const STEP_ICONS: Record<ForgeStep, string> = {
-  pair: "/contact/booking-icon-phone-green.svg",
-  flash: "/developer/pipeline-icon-deploy.svg",
-  results: "/model-zoo/icon-play-green.svg",
-};
-const STEP_SUBTEXTS: Record<ForgeStep, string> = {
-  pair: "Connect the app to your eval board in a tap.",
-  flash: "Push VAD, gesture recognition, fall detection, and more to the board.",
-  results: "Watch AI inference results stream to your phone in real time.",
-};
-const STEP_ARTICLE: Record<ForgeStep, string> = {
-  pair: "/model-zoo/af-article-pair.webp",
-  flash: "/model-zoo/af-article-flash.webp",
-  results: "/model-zoo/af-article-results.webp",
-};
-/** Active-row heights per variant (578×185.5 / 578×212.5). */
-const STEP_ACTIVE_HEIGHT: Record<ForgeStep, string> = {
-  pair: "h-[320px] min-[1024px]:h-[185.5px]",
-  flash: "h-[320px] min-[1024px]:h-[212.5px]",
-  results: "h-[320px] min-[1024px]:h-[185.5px]",
-};
+const COLLAGE_ROW_2 = [
+  { label: "Person / No-Person", img: "/model-zoo/collage-r2-c1.webp" },
+  { label: "Presence Detection", img: "/model-zoo/collage-r2-c2.webp" },
+  { label: "Voice Activity Detection", img: "/model-zoo/collage-r2-c3.webp" },
+];
 
-/**
- * Figma 5131:10421 — "Your eval kit, controlled from your phone." section
- * (1440×1433 canvas; 1192.5-wide content at x=124). The two off-canvas
- * "footer" frames at x≈1477 in Figma are ignored (invisible).
- */
+/** 1.96px corner ticks on the collage mini cards */
+function MiniCorners() {
+  return (
+    <>
+      {(
+        [
+          ["top-0 left-0", "/hero/corner-tag-1.svg", "-scale-y-100"],
+          ["top-0 right-0", "/hero/corner-tag-2.svg", "rotate-180"],
+          ["bottom-0 right-0", "/hero/corner-tag-2.svg", "-scale-x-100"],
+          ["bottom-0 left-0", "/hero/corner-tag-1.svg", ""],
+        ] as const
+      ).map(([pos, src, transform], i) => (
+        <div key={i} className={`pointer-events-none absolute size-[1.96px] ${pos}`}>
+          <div className={`flex-none ${transform}`}>
+            <Image src={src} alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
+          </div>
+        </div>
+      ))}
+    </>
+  );
+}
+
+/** Left fade over the collage rows */
+const COLLAGE_LEFT_FADE =
+  "linear-gradient(262.733deg, rgba(0, 0, 0, 0) 15.711%, rgb(0, 0, 0) 72.391%)";
+const COLLAGE_RIGHT_FADE =
+  "linear-gradient(97.267deg, rgba(0, 0, 0, 0) 15.711%, rgb(0, 0, 0) 72.391%)";
+
+function CollageRow({
+  cards,
+  nodeId,
+  direction = "left",
+  duration = 30,
+}: {
+  cards: { label: string; img: string }[];
+  nodeId: string;
+  direction?: "left" | "right";
+  duration?: number;
+}) {
+  const track = [...cards, ...cards, ...cards, ...cards];
+  return (
+    <div
+      className="relative w-full overflow-clip"
+      style={{ height: 182 }}
+      data-node-id={nodeId}
+      aria-hidden
+    >
+      <div
+        className={`flex w-max items-center gap-[10px] ${direction === "left" ? "animate-dvk-marquee-left" : "animate-dvk-marquee-right"}`}
+        style={{ animationDuration: `${duration}s` }}
+      >
+        {track.map((card, i) => (
+          <div
+            key={i}
+            className="relative flex w-[198px] shrink-0 flex-col items-center gap-[10px] overflow-clip border-[0.245px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.95)] px-[8px] pt-[8px] pb-[14px]"
+            data-node-id={`${nodeId}:${i}`}
+            data-name="Article"
+          >
+            <div className="relative h-[126px] w-[182px] shrink-0 overflow-clip">
+              <img alt="" src={card.img} className="pointer-events-none absolute inset-0 size-full object-cover" />
+            </div>
+            <p
+              className={`${gilroyMedium.className} w-full text-[13.688px] leading-[23.954px] text-white not-italic`}
+            >
+              {card.label}
+            </p>
+            <MiniCorners />
+          </div>
+        ))}
+      </div>
+      {/* Left fade */}
+      <div
+        className="pointer-events-none absolute top-1/2 left-0 h-[200px] w-[133px] -translate-y-1/2 z-20"
+        style={{ backgroundImage: COLLAGE_LEFT_FADE }}
+      />
+      {/* Right fade */}
+      <div
+        className="pointer-events-none absolute top-1/2 right-0 h-[200px] w-[133px] -translate-y-1/2 z-20"
+        style={{ backgroundImage: COLLAGE_RIGHT_FADE }}
+      />
+    </div>
+  );
+}
+
 export function ProductsAppForge({ data }: { data?: any }) {
   const heading = data?.heading || "Your eval kit, controlled from your phone.";
   const subheading =
@@ -60,35 +120,15 @@ export function ProductsAppForge({ data }: { data?: any }) {
     "Download ApplicationForge, pair with your kit over Bluetooth, and flash live demos in seconds — no laptop, no code.";
   const { fadeRef: articleRef, isVisible: articleVisible } = useFadeIn<HTMLDivElement>();
   const { fadeRef: forgeRef, isVisible: forgeVisible } = useFadeIn<HTMLDivElement>();
-  const [activeStep, setActiveStep] = useState<ForgeStep | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const videoRef = useRef<HTMLVideoElement>(null);
-  useEffect(() => {
-    // prefers-reduced-motion: keep the Article panel's ambient video paused
-    if (videoRef.current) {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play().catch(() => {});
-      }
-    }
-  }, []);
   return (
     <section
-      className="relative w-full bg-black"
+      className="relative w-full overflow-hidden bg-black"
       data-node-id="5131:10421"
       aria-label="Your eval kit, controlled from your phone"
     >
-      {/* Preload assets so steps load instantly without flashing */}
-      <div className="hidden" aria-hidden="true">
-        <img src={STEP_ARTICLE.pair} alt="" loading="eager" />
-        <img src={STEP_ARTICLE.flash} alt="" loading="eager" />
-        <link rel="preload prefetch" as="video" href="/model-zoo/af-results.mp4" />
-        <link rel="preload" as="image" href="/videos/electronica-tv-01-v03-poster.jpg" />
-        </div>
-      {/* Figma 5131:10576 — full-bleed ambient glow strip behind the showcase
-          and the wide article card (top 519, h 552 in the 1440 canvas). */}
+      {/* Background glow strips */}
       <img
         alt=""
         src="/model-zoo/af-bg-1.webp"
@@ -97,10 +137,6 @@ export function ProductsAppForge({ data }: { data?: any }) {
         loading="lazy"
         decoding="async"
       />
-      {/* Figma 5131:10575 — second glow strip, butted against the first
-          (top 1071 = 519 + 552) so the light runs continuously down through
-          the article card, CTA and into the next section (Steps paints no
-          background of its own there, so this shows through). */}
       <img
         alt=""
         src="/model-zoo/af-bg-2.webp"
@@ -109,8 +145,9 @@ export function ProductsAppForge({ data }: { data?: any }) {
         loading="lazy"
         decoding="async"
       />
+
+      {/* Header Container */}
       <div className="relative mx-auto w-full max-w-[1192.5px] px-[16px] min-[1024px]:px-0">
-        {/* Header — 5131:10258 (title + sub, gap 24) */}
         <div className="flex w-full flex-col items-center gap-[24px] pt-[49px]" data-node-id="5131:10258">
           <div className="relative px-[10px]" data-node-id="5131:10260" data-name="Title">
             <h2
@@ -126,90 +163,37 @@ export function ProductsAppForge({ data }: { data?: any }) {
             {subheading}
           </p>
         </div>
+      </div>
 
-        {/* Application Forge showcase — 5241:5967 (gap 24, h 578).
-            Entrance: the row fades in on scroll, inner elements stagger. */}
-        <div
-          ref={forgeRef}
-          className={`mt-[24px] flex flex-col items-stretch gap-[24px] min-[1024px]:mt-[48px] min-[1024px]:h-[578px] min-[1024px]:flex-row min-[1024px]:items-center ${getFadeInClass(forgeVisible)}`}
-          data-node-id="5241:5967"
-        >
-          {/* Left canvas card — 5241:5677 */}
-          <div className="flex h-[320px] w-full shrink-0 items-stretch justify-center min-[1024px]:h-full min-[1024px]:w-[590.509px]">
-            <div
-              className={`relative h-full w-full overflow-clip rounded-[12px] min-[1024px]:rounded-none transition-colors duration-300 ${forgeVisible ? "motion-safe:animate-hero-text-fade-in" : "opacity-0"}`}
-              style={{ animationDelay: "80ms", animationFillMode: "both" }}
-              data-node-id="5241:5677"
-              data-name="Article"
-              aria-hidden
-            >
-              <video
-                ref={videoRef}
-                className="pointer-events-none absolute inset-0 size-full object-contain"
-                poster="/videos/electronica-tv-01-v03-poster.jpg"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                onLoadedMetadata={(e) => {
-                  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-                    e.currentTarget.play().catch(() => {});
-                  }
-                }}
-              >
-                <source src="/videos/electronica-tv-01-v03.webm" type="video/webm" />
-                <source src="https://ambientwebasset.blob.core.windows.net/website-assets/model-zoo/af-video.mp4" type="video/mp4" />
-              </video>
-            </div>
-          </div>
+      {/* Cloned Model Zoo Carousel Strip — Whole Width Edge-to-Edge */}
+      <div
+        ref={forgeRef}
+        className={`relative z-10 mt-[36px] min-[1024px]:mt-[48px] flex w-full flex-col gap-[16px] overflow-hidden ${getFadeInClass(forgeVisible)}`}
+      >
+        <CollageRow
+          cards={COLLAGE_ROW_1}
+          nodeId="products-af-r1"
+          direction="left"
+          duration={32}
+        />
+        <CollageRow
+          cards={COLLAGE_ROW_2}
+          nodeId="products-af-r2"
+          direction="right"
+          duration={26}
+        />
+      </div>
 
-          {/* Right column — 5241:5702 */}
-          <div className="relative flex min-w-px flex-1 flex-col items-center justify-center gap-[25px] min-[1024px]:items-end min-[1024px]:pr-[20px]" data-node-id="5241:5702">
-            <div className={`flex w-[95%] max-w-[420px] mx-auto flex-col items-center gap-[12px] min-[1024px]:w-[520px] min-[1024px]:max-w-none min-[1024px]:mx-0 ${forgeVisible ? "motion-safe:animate-hero-text-fade-in" : "min-[1024px]:opacity-0"}`} style={{ animationDelay: "140ms", animationFillMode: "both" }} data-node-id="5241:5728" data-name="eval kit">
-              {(Array.isArray(data?.steps) && data.steps.length === 3 ? data.steps.map((s: any) => s.title || "") : FORGE_STEPS).map((step: string, i: number) => {
-                const key = STEP_KEYS[i];
-                return (
-                  <div
-                    key={step}
-                    className="relative block w-full h-auto shrink-0 border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] backdrop-blur-[12px] bg-[rgba(0,0,0,0.2)] text-left"
-                    data-node-id={`5241:57${52 - i * 6}`}
-                  >
-                    <div className="flex flex-col items-start gap-[12px] p-[24px]">
-                      <div className="relative size-[32px] flex items-center justify-center opacity-80">
-                        <img 
-                          src={STEP_ICONS[key]} 
-                          alt="" 
-                          className={`max-w-[100%] max-h-[100%] object-contain ${key === 'pair' ? 'scale-125' : key === 'results' ? 'scale-150' : ''}`} 
-                        />
-                      </div>
-                      <div className="flex flex-col gap-[6px]">
-                        <h3 className={`${gilroyMedium.className} text-[20px] leading-[24px] text-white`}>
-                          {step}
-                        </h3>
-                        <p className={`${interRegular.className} text-[15px] leading-[22px] text-[rgba(255,255,255,0.65)]`}>
-                          {STEP_SUBTEXTS[key]}
-                        </p>
-                      </div>
-                    </div>
-                    <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-
-        {/* Wide article card — 5131:10513 (1192.5×391) */}
+      {/* Bottom Container */}
+      <div className="relative mx-auto w-full max-w-[1192.5px] px-[16px] min-[1024px]:px-0">
+        {/* Wide article card — bottom */}
         <div
           ref={articleRef}
           className={`relative mt-[24px] flex h-auto flex-col items-stretch justify-center gap-[20px] px-[20px] py-[32px] transition-colors duration-300 min-[1024px]:mt-[41px] min-[1024px]:h-[391px] min-[1024px]:flex-row min-[1024px]:items-start ${getFadeInClass(articleVisible)}`}
           data-node-id="5131:10513"
           data-name="Article"
         >
-
-
-          {/* Phone showcase — 5131:10537 */}
+          {/* Phone showcase */}
           <div className="relative h-[327px] w-full min-w-px min-[1024px]:flex-1" data-node-id="5131:10537" data-name="Container">
             <img
               alt="ApplicationForge phone app preview on an eval kit"
@@ -226,7 +210,7 @@ export function ProductsAppForge({ data }: { data?: any }) {
             />
           </div>
 
-          {/* NewsSection — 5131:10514 */}
+          {/* NewsSection */}
           <div className="relative flex w-full min-w-px flex-1 flex-col items-start self-stretch gap-[40px]" data-node-id="5131:10514" data-name="NewsSection">
             <div className="relative h-[26px] w-[220px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)]" data-node-id="5131:10515" data-name="Menu">
               <p className={`${dmMono.className} absolute top-[calc(50%-4.5px)] left-[calc(50%-0.26px)] -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
@@ -253,7 +237,7 @@ export function ProductsAppForge({ data }: { data?: any }) {
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
         </div>
 
-        {/* Request CTA — 5131:10555 (293×48, centered). */}
+        {/* Request CTA */}
         <div className="relative mt-[30px] flex justify-center pb-[63px] z-50 pointer-events-auto">
           <a
             href={data?.cta?.href || "#"}

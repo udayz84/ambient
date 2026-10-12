@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { BOX_BORDER } from "../careers/careers-shared";
+import { popupField, usePopupConfig } from "../shared/usePopupConfig";
 
 const SUCCESS_IMG = "/careers/apply-success.webp";
 
@@ -117,6 +118,8 @@ export function ProductBriefModal({
 function FormStep({ title, onClose, onSuccess }: { title?: string; onClose: () => void; onSuccess: () => void }) {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // CMS-editable copy (title stays caller-provided — it differs per CTA).
+  const config = usePopupConfig("product-brief");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -147,12 +150,12 @@ function FormStep({ title, onClose, onSuccess }: { title?: string; onClose: () =
       <form onSubmit={handleSubmit} className={`${interRegular.className} flex flex-col gap-[24px] font-normal not-italic`}>
         <div className="flex flex-col items-start gap-[8px]">
           <label className="text-[14px] leading-[21px] text-[#a4a4a4]">
-            Please provide your email to receive the requested information.
+            {popupField(config, "email")?.label ?? "Please provide your email to receive the requested information."}
           </label>
           <input
             type="email"
             className={FIELD_BOX}
-            placeholder="Enter Your Email ID"
+            placeholder={popupField(config, "email")?.placeholder ?? "Enter Your Email ID"}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -167,7 +170,7 @@ function FormStep({ title, onClose, onSuccess }: { title?: string; onClose: () =
           >
             <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
             <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
-            <span className="relative z-10">{isSubmitting ? "Submitting..." : "Submit"}</span>
+            <span className="relative z-10">{isSubmitting ? "Submitting..." : config?.cta_label ?? "Submit"}</span>
             <Corners leftSrc="/hero/corner-tag-1.svg" rightSrc="/hero/corner-tag-2.svg" className="z-20" />
           </button>
         </div>
@@ -177,6 +180,7 @@ function FormStep({ title, onClose, onSuccess }: { title?: string; onClose: () =
 }
 
 function ConfirmationStep({ onClose }: { onClose: () => void }) {
+  const config = usePopupConfig("product-brief");
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose();
@@ -196,11 +200,11 @@ function ConfirmationStep({ onClose }: { onClose: () => void }) {
       </div>
 
       <h2 className={`${gilroyMedium.className} text-[28px] leading-[36px] font-medium whitespace-nowrap text-white not-italic`}>
-        Thank you!
+        {config?.success_title ?? "Thank you!"}
       </h2>
 
       <p className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[#a4a4a4] not-italic`}>
-        We've received your request. The information has been sent to your email.
+        {config?.success_text ?? "We've received your request. The information has been sent to your email."}
       </p>
     </div>
   );

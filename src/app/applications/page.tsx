@@ -52,7 +52,7 @@ export default async function ApplicationsPage() {
       {data?.continuum && <ApplicationsPageContinuum data={data.continuum} />}
       {data?.articles && <ApplicationsPageArticles data={data.articles} />}
       {data?.wins && <ApplicationsPageWins data={data.wins} />}
-      <ApplicationsPageModelZoo />
+      <ApplicationsPageModelZoo variant="strip" />
       {data?.som && <ApplicationsPageSom data={data.som} />}
     </main>
   );

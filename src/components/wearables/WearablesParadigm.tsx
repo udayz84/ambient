@@ -178,7 +178,7 @@ function LegacyCard({
         data-name="Stat"
       >
         <div
-          className="absolute top-[8px] right-0 left-0 flex flex-col items-start gap-[8px] border-b border-solid border-[rgba(255,255,255,0.1)] pb-[11px]"
+          className="absolute top-[0px] right-0 left-0 flex flex-col items-start gap-[6px]"
         >
           <p
             ref={fitRef}
@@ -194,19 +194,19 @@ function LegacyCard({
         </div>
 
         <p
-          className={`${gilroyMedium.className} absolute left-[48.35px] top-[128.7px] text-[18px] leading-[28px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} absolute left-[48.35px] top-[142px] text-[18px] leading-[28px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
         >
           Compute
         </p>
         <p
-          className={`${gilroyMedium.className} absolute left-[331.26px] top-[128.7px] text-[18px] leading-[28px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} absolute left-[331.26px] top-[142px] text-[18px] leading-[28px] font-medium whitespace-nowrap text-white not-italic [word-break:break-word]`}
         >
           Memory
         </p>
 
         {/* image 208 — compute chip */}
         <div
-          className="absolute left-[5.89px] top-[164.7px] h-[160.61px] w-[162.91px]"
+          className="absolute left-[5.89px] top-[176px] h-[160.61px] w-[162.91px]"
           data-name="image 208"
         >
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -221,7 +221,7 @@ function LegacyCard({
 
         {/* image 206 — memory chip */}
         <div
-          className="absolute left-[272.44px] top-[172.09px] h-[145.82px] w-[184.65px]"
+          className="absolute left-[272.44px] top-[182px] h-[145.82px] w-[184.65px]"
           data-name="image 206"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -234,7 +234,7 @@ function LegacyCard({
 
         {/* connector line — bright pulse flows left to right */}
         <div
-          className="absolute left-[165.12px] top-[250.17px] h-0 w-[114.69px]"
+          className="absolute left-[165.12px] top-[260px] h-0 w-[114.69px]"
         >
           <div className="absolute inset-[-20px_0_0_0]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -481,6 +481,11 @@ export function WearablesParadigm({ data }: { data?: any }) {
 
   const subtitle = data?.subtitle || "";
   const heading = data?.heading || "";
+  const leftImage = mediaUrl(data?.left_image) || "/applications/wearables/legacy-way-box.jpg";
+  const rightImage = mediaUrl(data?.right_image) || "/applications/wearables/ambient-way-box.jpg";
+  const leftAlt = data?.left_image?.alternativeText || "The Legacy Way";
+  const rightAlt = data?.right_image?.alternativeText || "The Ambient Way";
+
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"
@@ -521,11 +526,11 @@ export function WearablesParadigm({ data }: { data?: any }) {
         {/* Replaced with direct image inserts */}
         <div className="relative h-[548px] w-full">
           <div className="absolute left-[111px] top-[0px] w-[575px] h-[548px] flex items-center justify-center">
-            <img src="/applications/wearables/legacy-way-box.jpg" alt="The Legacy Way" className="w-full h-full object-contain rounded-[16px]" />
+            <img src={leftImage} alt={leftAlt} className="w-full h-full object-contain rounded-[16px]" />
           </div>
           <ChevronDecor />
           <div className="absolute left-[754px] top-[0px] w-[575px] h-[548px] flex items-center justify-center">
-            <img src="/applications/wearables/ambient-way-box.jpg" alt="The Ambient Way" className="w-full h-full object-contain rounded-[16px]" />
+            <img src={rightImage} alt={rightAlt} className="w-full h-full object-contain rounded-[16px]" />
           </div>
         </div>
       </div>
@@ -562,10 +567,10 @@ export function WearablesParadigm({ data }: { data?: any }) {
         {/* Replaced with direct image inserts */}
         <div className="flex w-full flex-col items-center gap-[40px]">
           <div className="w-full max-w-[575px]">
-            <img src="/applications/wearables/legacy-way-box.jpg" alt="The Legacy Way" className="w-full h-auto object-contain rounded-[16px]" />
+            <img src={leftImage} alt={leftAlt} className="w-full h-auto object-contain rounded-[16px]" />
           </div>
           <div className="w-full max-w-[575px]">
-            <img src="/applications/wearables/ambient-way-box.jpg" alt="The Ambient Way" className="w-full h-auto object-contain rounded-[16px]" />
+            <img src={rightImage} alt={rightAlt} className="w-full h-auto object-contain rounded-[16px]" />
           </div>
         </div>
       </div>

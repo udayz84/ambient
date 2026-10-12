@@ -1,1 +1,44 @@
-{ "collectionName": "components_wearables_paradigms", "info": { "displayName": "Paradigm", "description": "Wearables paradigm shift section" }, "options": {}, "attributes": { "heading": { "type": "string", "required": true }, "subtitle": { "type": "text" }, "chip_label": { "type": "string" }, "cards": { "type": "component", "repeatable": true, "component": "wearables.paradigm-card" } } }
+{
+  "collectionName": "components_wearables_paradigms",
+  "info": {
+    "displayName": "Paradigm",
+    "description": "Wearables paradigm shift section"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "chip_label": {
+      "type": "string"
+    },
+    "left_image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Left image (Legacy Way) shown at 575×548. Recommended: 1150×1096 px WebP/PNG/JPG."
+    },
+    "right_image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Right image (Ambient Way) shown at 575×548. Recommended: 1150×1096 px WebP/PNG/JPG."
+    }
+  }
+}

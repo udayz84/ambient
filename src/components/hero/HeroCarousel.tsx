@@ -18,7 +18,7 @@ import { UpcomingProductsModal } from "./UpcomingProductsModal";
  * slides in Strapi: Home Page → Hero → Announcements.
  * ------------------------------------------------------------------------- */
 
-const AUTOPLAY_MS = 7000;
+const AUTOPLAY_MS = 3000;
 
 type AnnouncementCta = { label: string; href: string; primary?: boolean };
 

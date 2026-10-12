@@ -9,8 +9,24 @@ import { WearablesSubconscious } from "@/components/wearables/WearablesSubconsci
 import { WearablesFooterAccent } from "@/components/wearables/WearablesFooterAccent";
 import { ApplicationsPageModelZoo } from "@/components/applications-page/ApplicationsPageModelZoo";
 import { ApplicationsPageWins } from "@/components/applications-page/ApplicationsPageWins";
-import { getCollection, buildPopulate } from "@/lib/strapi";
+import { getCollection, buildPopulate, getApplicationPages } from "@/lib/strapi";
 import { buildMetadata, type SeoData } from "@/lib/seo";
+
+export async function generateStaticParams() {
+  try {
+    const pages = await getApplicationPages();
+    if (pages.length > 0) {
+      return pages.map((p) => ({ slug: p.slug }));
+    }
+  } catch {
+    // fallback
+  }
+  return [
+    { slug: "wearables" },
+    { slug: "smarthomes" },
+    { slug: "industrial_iot" },
+  ];
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
@@ -56,7 +72,20 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
   }
 
   if (!data) {
-    notFound();
+    if (resolvedParams.slug === "wearables") {
+      data = {
+        hero: {},
+        paradigm: {},
+        subconscious: {},
+        empirical_proof: {},
+        lab_to_product: {},
+        footer_accent: {},
+        wins: {},
+        model_zoo: {},
+      };
+    } else {
+      notFound();
+    }
   }
 
   return (
@@ -69,7 +98,7 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
       ) */}
       {data?.paradigm && <WearablesParadigm data={data.paradigm} />}
       <ApplicationsPageWins data={data?.wins} />
-      <ApplicationsPageModelZoo data={data?.model_zoo} />
+      <ApplicationsPageModelZoo data={data?.model_zoo} variant="cards" />
       {data?.empirical_proof && (
         <WearablesEmpiricalProof data={data.empirical_proof} />
       )}

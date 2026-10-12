@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { BOX_BORDER } from "../careers/careers-shared";
+import { popupField, usePopupConfig } from "../shared/usePopupConfig";
 
 const PANEL_BG = "/form.png";
 const SUCCESS_IMG = "/careers/apply-success.webp";
@@ -101,7 +102,7 @@ export function UpcomingProductsModal({
         </div>
 
         {step === "form" && <FormStep onClose={onClose} onSuccess={() => setStep("confirmation")} formContext={formContext} />}
-        {step === "confirmation" && <ConfirmationStep onClose={onClose} />}
+        {step === "confirmation" && <ConfirmationStep onClose={onClose} formContext={formContext} />}
       </div>
     </div>,
     document.body
@@ -115,6 +116,8 @@ function FormStep({ onClose, onSuccess, formContext }: { onClose: () => void; on
   const [company, setCompany] = useState("");
   const [chip, setChip] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // CMS-editable copy (Strapi popup entry keyed by context); null = hardcoded fallbacks below.
+  const config = usePopupConfig(formContext);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -140,6 +143,7 @@ function FormStep({ onClose, onSuccess, formContext }: { onClose: () => void; on
           firstName: firstName || undefined,
           lastName: lastName || undefined,
           company: company || undefined,
+          details: chip || undefined,
         }),
       }).catch(() => { /* Mailchimp sync failure is non-blocking */ });
 
@@ -165,7 +169,7 @@ function FormStep({ onClose, onSuccess, formContext }: { onClose: () => void; on
           <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
         </button>
         <h2 className={`${gilroyMedium.className} text-[16px] md:text-[22px] leading-[normal] font-medium text-white not-italic`}>
-          {formContext === "usecase" ? "Discuss Your Use Case" : formContext === "evalkit" ? "Request An Eval Kit" : formContext === "sdk" ? "Request The SDK" : formContext === "som" ? "Register SOM Interest" : formContext === "waitlist" ? "Join The Waitlist" : "Sign Up For Upcoming Products"}
+          {config?.title ?? (formContext === "usecase" ? "Discuss Your Use Case" : formContext === "evalkit" ? "Request An Eval Kit" : formContext === "sdk" ? "Request The SDK" : formContext === "som" ? "Register SOM Interest" : formContext === "waitlist" ? "Join The Waitlist" : "Sign Up For Upcoming Products")}
         </h2>
       </div>
 
@@ -177,19 +181,19 @@ function FormStep({ onClose, onSuccess, formContext }: { onClose: () => void; on
       >
         {formContext !== "waitlist" && (
           <div className="flex flex-col md:flex-row gap-[18px]">
-            <Field label="First Name*" className="min-w-0 flex-1">
+            <Field label={popupField(config, "first_name")?.label ?? "First Name*"} className="min-w-0 flex-1">
               <input
                 className={FIELD_BOX}
-                placeholder="Enter First Name"
+                placeholder={popupField(config, "first_name")?.placeholder ?? "Enter First Name"}
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 required
               />
             </Field>
-            <Field label="Last Name*" className="min-w-0 flex-1">
+            <Field label={popupField(config, "last_name")?.label ?? "Last Name*"} className="min-w-0 flex-1">
               <input
                 className={FIELD_BOX}
-                placeholder="Enter Last Name"
+                placeholder={popupField(config, "last_name")?.placeholder ?? "Enter Last Name"}
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 required
@@ -199,21 +203,21 @@ function FormStep({ onClose, onSuccess, formContext }: { onClose: () => void; on
         )}
 
         <div className="flex flex-col md:flex-row gap-[18px]">
-          <Field label="Email ID*" className="min-w-0 flex-1">
+          <Field label={popupField(config, "email")?.label ?? "Email ID*"} className="min-w-0 flex-1">
             <input
               type="email"
               className={FIELD_BOX}
-              placeholder="Enter Your Email ID"
+              placeholder={popupField(config, "email")?.placeholder ?? "Enter Your Email ID"}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </Field>
           {formContext !== "waitlist" && (
-            <Field label="Company*" className="min-w-0 flex-1">
+            <Field label={popupField(config, "company")?.label ?? "Company*"} className="min-w-0 flex-1">
               <input
                 className={FIELD_BOX}
-                placeholder="Enter Company Name"
+                placeholder={popupField(config, "company")?.placeholder ?? "Enter Company Name"}
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
                 required
@@ -223,21 +227,22 @@ function FormStep({ onClose, onSuccess, formContext }: { onClose: () => void; on
         </div>
 
         {formContext !== "waitlist" && (
-          <Field label={formContext === "usecase" ? "Please briefly describe your use case*" : (formContext === "evalkit" || formContext === "sdk" || formContext === "som") ? "Please describe your intended application*" : "Which chip are you looking for?*"}>
+          <Field label={popupField(config, "details")?.label ?? (formContext === "usecase" ? "Please briefly describe your use case*" : (formContext === "evalkit" || formContext === "sdk" || formContext === "som") ? "Please describe your intended application*" : "Which chip are you looking for?*")}>
             <p className="text-[12px] leading-[18px] text-[#a4a4a4] mb-[8px]">
-              {formContext === "usecase"
-                ? "Explain your use case and our team will get in touch with you."
-                : formContext === "evalkit"
-                ? "Tell us a bit about your project or use case for the evaluation kit."
-                : formContext === "sdk"
-                ? "Tell us about the project you're building with our SDK."
-                : formContext === "som"
-                ? "Tell us about the project you're building with our SOM."
-                : "These are the upcoming chips we are providing. We just want to know which chip you are looking for."}
+              {popupField(config, "details")?.helper_text ??
+                (formContext === "usecase"
+                  ? "Explain your use case and our team will get in touch with you."
+                  : formContext === "evalkit"
+                  ? "Tell us a bit about your project or use case for the evaluation kit."
+                  : formContext === "sdk"
+                  ? "Tell us about the project you're building with our SDK."
+                  : formContext === "som"
+                  ? "Tell us about the project you're building with our SOM."
+                  : "These are the upcoming chips we are providing. We just want to know which chip you are looking for.")}
             </p>
             <input
               className={FIELD_BOX}
-              placeholder={formContext === "usecase" ? "Enter your use case" : (formContext === "evalkit" || formContext === "sdk" || formContext === "som") ? "Describe your intended application" : "Enter chip name"}
+              placeholder={popupField(config, "details")?.placeholder ?? (formContext === "usecase" ? "Enter your use case" : (formContext === "evalkit" || formContext === "sdk" || formContext === "som") ? "Describe your intended application" : "Enter chip name")}
               value={chip}
               onChange={(e) => setChip(e.target.value)}
               required
@@ -253,7 +258,7 @@ function FormStep({ onClose, onSuccess, formContext }: { onClose: () => void; on
           >
             <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
             <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
-            <span className="relative z-10">{isSubmitting ? "Submitting..." : "Submit"}</span>
+            <span className="relative z-10">{isSubmitting ? "Submitting..." : config?.cta_label ?? "Submit"}</span>
             <Corners leftSrc="/hero/corner-tag-1.svg" rightSrc="/hero/corner-tag-2.svg" className="z-20" />
           </button>
         </div>
@@ -262,7 +267,8 @@ function FormStep({ onClose, onSuccess, formContext }: { onClose: () => void; on
   );
 }
 
-function ConfirmationStep({ onClose }: { onClose: () => void }) {
+function ConfirmationStep({ onClose, formContext }: { onClose: () => void; formContext?: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "waitlist" }) {
+  const config = usePopupConfig(formContext ?? "upcoming");
   return (
     <>
       <button
@@ -288,11 +294,11 @@ function ConfirmationStep({ onClose }: { onClose: () => void }) {
         </div>
 
         <h2 className={`${gilroyMedium.className} text-center text-[30px] md:text-[38px] leading-[40px] md:leading-[47px] font-medium whitespace-nowrap text-white not-italic`}>
-          Thank you for signing up!
+          {config?.success_title ?? "Thank you for signing up!"}
         </h2>
 
         <p className={`${interRegular.className} w-full md:w-[540px] text-center text-[12px] leading-[18px] font-normal text-[#a4a4a4] not-italic`}>
-          We&apos;ve received your interest. Our team will keep you updated on the latest news and availability for our upcoming products.
+          {config?.success_text ?? "We’ve received your interest. Our team will keep you updated on the latest news and availability for our upcoming products."}
         </p>
 
         <p className={`${gilroyMedium.className} w-full md:w-[540px] text-center text-[22px] leading-[28px] font-medium text-white not-italic`}>

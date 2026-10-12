@@ -1060,6 +1060,7 @@ export interface FormField extends Struct.ComponentSchema {
     icon: 'align-justify';
   };
   attributes: {
+    helper_text: Schema.Attribute.Text;
     label: Schema.Attribute.String;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     placeholder: Schema.Attribute.String;
@@ -3442,9 +3443,14 @@ export interface WearablesParadigm extends Struct.ComponentSchema {
     displayName: 'Paradigm';
   };
   attributes: {
-    cards: Schema.Attribute.Component<'wearables.paradigm-card', true>;
     chip_label: Schema.Attribute.String;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
+    left_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    right_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     subtitle: Schema.Attribute.Text;
   };
 }

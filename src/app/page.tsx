@@ -9,6 +9,7 @@ import { LatestNews } from "@/components/latest-news/LatestNews";
 import { MeasuredProof } from "@/components/measured-proof/MeasuredProof";
 import { PlatformScale } from "@/components/platform-scale/PlatformScale";
 import { Technology } from "@/components/technology/Technology";
+import { ProductsCaseStudies } from "@/components/products-page/ProductsCaseStudies";
 import { getCollection, getSingleType } from "@/lib/strapi";
 import { buildMetadata, type SeoData } from "@/lib/seo";
 
@@ -49,6 +50,20 @@ export default async function Home() {
     data = null;
   }
 
+  // Case Studies: homepage has its own case_studies section on the
+  // home-page single type (seeded from the products page's content, edited
+  // independently). Separate try/catch (same rationale as the products
+  // page) — a missing case_studies schema must not fail the main fetch.
+  let caseStudiesData: any = null;
+  try {
+    const homeExtras = await getSingleType<any>("home-page", [
+      { section: "case_studies", nested: ["cards"] },
+    ]);
+    caseStudiesData = homeExtras?.case_studies ?? null;
+  } catch {
+    caseStudiesData = null;
+  }
+
   // Pull articles flagged for homepage display. These take precedence over
   // the embedded `latest_news.cards` components on the homepage — editors
   // manage article content once in the `articles` collection and toggle
@@ -69,6 +84,7 @@ export default async function Home() {
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       {data?.hero && <HeroCarousel data={data.hero} />}
       {data?.measured_proof && <MeasuredProof data={data.measured_proof} />}
+      <ProductsCaseStudies data={caseStudiesData} />
       {/* <EcosystemMarqueeStrip data={data?.clients} /> */}
       {data?.technology && <Technology data={data.technology} />}
       {data?.platform_scale && <PlatformScale data={data.platform_scale} />}

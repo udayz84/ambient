@@ -918,6 +918,7 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
   };
   attributes: {
     applications: Schema.Attribute.Component<'home.applications', false>;
+    case_studies: Schema.Attribute.Component<'products.case-studies', false>;
     clients: Schema.Attribute.Component<'home.clients', false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1450,10 +1451,25 @@ export interface ApiPopupPopup extends Struct.CollectionTypeSchema {
       Schema.Attribute.DefaultTo<'Submit & Download'>;
     description: Schema.Attribute.Text;
     fields: Schema.Attribute.Component<'form.field', true>;
+    key: Schema.Attribute.Enumeration<
+      [
+        'upcoming',
+        'usecase',
+        'evalkit',
+        'sdk',
+        'som',
+        'waitlist',
+        'product-brief',
+        'resource-download',
+        'newsletter-popup',
+      ]
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::popup.popup'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    success_text: Schema.Attribute.Text;
+    success_title: Schema.Attribute.String;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

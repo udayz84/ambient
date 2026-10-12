@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { gilroySemiBold, interLight, interRegular } from "../hero/fonts";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { popupField, usePopupConfig } from "../shared/usePopupConfig";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
@@ -16,6 +17,8 @@ const SUBSCRIBED_KEY = "newsletter-popup-subscribed";
 export function NewsletterPopup() {
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  // CMS-editable copy (Strapi popup entry "newsletter-popup"); null = hardcoded fallbacks.
+  const config = usePopupConfig("newsletter-popup");
 
   useEffect(() => {
     // Shows immediately on page open; stays dismissed for the rest of the
@@ -97,12 +100,12 @@ export function NewsletterPopup() {
             <p
               className={`${gilroySemiBold.className} w-full text-[24px] leading-[36px] text-white not-italic`}
             >
-              Thank you for subscribing
+              {config?.success_title ?? "Thank you for subscribing"}
             </p>
             <p
               className={`${interRegular.className} w-full text-[12px] leading-[18px] font-normal text-[#a4a4a4] not-italic [word-break:break-word]`}
             >
-              {`We'll let you know when there's news worth sharing.`}
+              {config?.success_text ?? `We'll let you know when there's news worth sharing.`}
             </p>
           </div>
         ) : (
@@ -116,13 +119,13 @@ export function NewsletterPopup() {
             className={`${gilroySemiBold.className} w-full text-[24px] leading-[36px] text-white not-italic`}
             data-node-id="5558:8446"
           >
-            Stay in the loop
+            {config?.title ?? "Stay in the loop"}
           </p>
           <p
             className={`${interRegular.className} w-full text-[12px] leading-[18px] font-normal text-[#a4a4a4] not-italic [word-break:break-word]`}
             data-node-id="5558:8498"
           >
-            {`Get the latest in Edge AI, intelligent silicon & innovation.`}
+            {config?.description ?? `Get the latest in Edge AI, intelligent silicon & innovation.`}
           </p>
         </div>
 
@@ -145,7 +148,7 @@ export function NewsletterPopup() {
               name="email"
               type="email"
               required
-              placeholder="Enter Your Email ID"
+              placeholder={popupField(config, "email")?.placeholder ?? "Enter Your Email ID"}
               className={`${interRegular.className} w-full border-0 bg-transparent text-[14px] leading-[21px] text-white outline-none placeholder:text-[#4a4a4a]`}
             />
           </div>

@@ -15,7 +15,7 @@ import { SomFamily } from "@/components/som-page/SomFamily";
 import { ProductsFullPicture } from "@/components/products-page/ProductsFullPicture";
 import { ProductsStartBuilding } from "@/components/products-page/ProductsStartBuilding";
 import { ProductsStickyNav } from "@/components/products-page/ProductsStickyNav";
-import { ModelZooAppForge } from "@/components/model-zoo/ModelZooAppForge";
+import { ProductsAppForge } from "@/components/products-page/ProductsAppForge";
 import { getSingleType } from "@/lib/strapi";
 import { buildMetadata, type SeoData } from "@/lib/seo";
 
@@ -119,7 +119,7 @@ export default async function ProductsPage() {
       <div id="metrics"><ProductsMeasured data={data?.measured} /></div>
       <ProductsCaseStudies data={caseStudiesData} />
       <div id="use-cases"><ProductsUseCases data={data?.use_cases} /></div>
-      <ModelZooAppForge data={data?.appforge} />
+      <ProductsAppForge data={data?.appforge} />
       <ProductsModelForge data={data?.modelforge} />
       <ProductsBenchToVolume data={data?.bench_to_volume} />
       <div id="architecture"><ProductsArchitecture data={data?.architecture} /></div>

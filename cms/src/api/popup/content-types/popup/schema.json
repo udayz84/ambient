@@ -12,6 +12,20 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "key": {
+      "type": "enumeration",
+      "enum": [
+        "upcoming",
+        "usecase",
+        "evalkit",
+        "sdk",
+        "som",
+        "waitlist",
+        "product-brief",
+        "resource-download",
+        "newsletter-popup"
+      ]
+    },
     "title": {
       "type": "string",
       "required": true
@@ -27,6 +41,12 @@
     "cta_label": {
       "type": "string",
       "default": "Submit & Download"
+    },
+    "success_title": {
+      "type": "string"
+    },
+    "success_text": {
+      "type": "text"
     }
   }
 }

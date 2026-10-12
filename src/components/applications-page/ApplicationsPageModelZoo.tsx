@@ -245,7 +245,13 @@ function WhyCard({ step }: { step: any }) {
   );
 }
 
-export function ApplicationsPageModelZoo({ data }: { data?: any }) {
+export function ApplicationsPageModelZoo({
+  data,
+  variant = "cards",
+}: {
+  data?: any;
+  variant?: "strip" | "cards";
+}) {
   return (
     <section className="relative flex w-full flex-col items-center overflow-hidden bg-black pt-[100px] pb-[80px]">
       
@@ -287,19 +293,37 @@ export function ApplicationsPageModelZoo({ data }: { data?: any }) {
         </div>
       </div>
 
-      {/* Partner cards replacing the carousels */}
-      <div className="relative z-10 mt-[60px] w-full py-[24px] px-[24px] min-[1024px]:px-[64px] min-[1024px]:py-[32px] max-w-[1440px]">
-        <div className="flex w-full flex-wrap min-[1024px]:flex-nowrap justify-center gap-[16px] sm:gap-[24px]">
-          {PARTNERS_WHY.journey.map((step) => (
-            <div
-              key={step.title}
-              className="w-full sm:w-[calc(50%-12px)] min-[1024px]:w-[calc(20%-19.2px)] max-w-[400px] min-[1024px]:max-w-none"
-            >
-              <WhyCard step={step} />
-            </div>
-          ))}
+      {variant === "strip" ? (
+        /* Two-row collage carousel strip for the main Applications page */
+        <div className="relative z-10 mt-[60px] flex w-full flex-col gap-[16px] overflow-hidden">
+          <CollageRow
+            cards={COLLAGE_ROW_1}
+            nodeId="app-mz-r1"
+            direction="left"
+            duration={32}
+          />
+          <CollageRow
+            cards={COLLAGE_ROW_2}
+            nodeId="app-mz-r2"
+            direction="right"
+            duration={26}
+          />
         </div>
-      </div>
+      ) : (
+        /* Partner cards on the application slug pages */
+        <div className="relative z-10 mt-[60px] w-full py-[24px] px-[24px] min-[1024px]:px-[64px] min-[1024px]:py-[32px] max-w-[1440px]">
+          <div className="flex w-full flex-wrap min-[1024px]:flex-nowrap justify-center gap-[16px] sm:gap-[24px]">
+            {PARTNERS_WHY.journey.map((step) => (
+              <div
+                key={step.title}
+                className="w-full sm:w-[calc(50%-12px)] min-[1024px]:w-[calc(20%-19.2px)] max-w-[400px] min-[1024px]:max-w-none"
+              >
+                <WhyCard step={step} />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </section>
   );
 }
