@@ -117,20 +117,20 @@ export default async function ProductsPage() {
 
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
-      <ProductsHero data={data?.hero} config={data?.brief_form} />
+      <ProductsHero data={data?.hero} />
       <ProductsStickyNav items={stickyItems} />
       <div id="features"><ProductsFeatures data={data?.features} /></div>
       <div id="always-on"><ProductsAlwaysOn data={data?.always_on} /></div>
-      <div id="metrics"><ProductsMeasured data={data?.measured} config={data?.brief_form} /></div>
+      <div id="metrics"><ProductsMeasured data={data?.measured} /></div>
       <ProductsCaseStudies data={caseStudiesData} />
-      <div id="use-cases"><ProductsUseCases data={data?.use_cases} config={data?.usecase_form} /></div>
-      <ProductsAppForge data={data?.appforge} config={data?.evalkit_form} />
-      <ProductsModelForge data={data?.modelforge} config={data?.sdk_form} />
+      <div id="use-cases"><ProductsUseCases data={data?.use_cases} /></div>
+      <ProductsAppForge data={data?.appforge} />
+      <ProductsModelForge data={data?.modelforge} />
       <ProductsBenchToVolume data={data?.bench_to_volume} />
       <div id="architecture"><ProductsArchitecture data={data?.architecture} /></div>
       {/* <SomFamily data={data?.som_family} /> */}
       <div id="full-picture"><ProductsFullPicture data={data?.full_picture} /></div>
-      <ProductsStartBuilding data={data?.start_building} evalkitConfig={data?.evalkit_form} waitlistConfig={data?.waitlist_form} />
+      <ProductsStartBuilding data={data?.start_building} />
     </main>
   );
 }

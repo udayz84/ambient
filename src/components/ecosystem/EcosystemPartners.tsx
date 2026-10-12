@@ -86,8 +86,7 @@ function PartnerSection({
 }
 
 export function EcosystemPartners({ data }: { data?: any }) {
-  const siliconPartners = data?.silicon_partners;
-  const developmentPartners = data?.development_partners;
+  void data;
   const ref = useRef<HTMLDivElement>(null);
   const isInViewRef = useRef(false);
   const loopActiveRef = useRef(false);
@@ -205,7 +204,6 @@ export function EcosystemPartners({ data }: { data?: any }) {
         >
           <EcosystemPartnerRow
             config={SILICON_PARTNER_ROW}
-            partners={siliconPartners}
             isDevelopment={false}
           />
         </PartnerSection>
@@ -219,7 +217,6 @@ export function EcosystemPartners({ data }: { data?: any }) {
           <EcosystemPartnerRow
             config={DEVELOPMENT_PARTNER_ROW}
             logoStatNodeIds={DEV_LOGO_STAT_NODES}
-            partners={developmentPartners}
             isDevelopment={true}
           />
         </PartnerSection>
@@ -232,7 +229,6 @@ export function EcosystemPartners({ data }: { data?: any }) {
         >
           <EcosystemPartnerRow
             config={SILICON_PARTNER_ROW}
-            partners={siliconPartners}
             isDevelopment={false}
           />
         </PartnerSection>
@@ -246,7 +242,6 @@ export function EcosystemPartners({ data }: { data?: any }) {
           <EcosystemPartnerRow
             config={DEVELOPMENT_PARTNER_ROW}
             logoStatNodeIds={DEV_LOGO_STAT_NODES}
-            partners={developmentPartners}
             isDevelopment={true}
           />
         </PartnerSection>

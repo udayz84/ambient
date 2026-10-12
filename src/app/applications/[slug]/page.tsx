@@ -12,11 +12,25 @@ import { ApplicationsPageWins } from "@/components/applications-page/Application
 import { getCollection, buildPopulate, getApplicationPages } from "@/lib/strapi";
 import { buildMetadata, type SeoData } from "@/lib/seo";
 
+function normalizeSlug(slug: string): string {
+  if (slug === "smart-homes" || slug === "smarthome" || slug === "smart_homes") {
+    return "smarthomes";
+  }
+  if (slug === "industrial-iot" || slug === "industrialiot") {
+    return "industrial_iot";
+  }
+  return slug;
+}
+
 export async function generateStaticParams() {
   try {
     const pages = await getApplicationPages();
     if (pages.length > 0) {
-      return pages.map((p) => ({ slug: p.slug }));
+      const slugs = new Set(pages.map((p) => p.slug));
+      slugs.add("smart-homes");
+      slugs.add("smarthome");
+      slugs.add("industrial-iot");
+      return Array.from(slugs).map((slug) => ({ slug }));
     }
   } catch {
     // fallback
@@ -24,15 +38,19 @@ export async function generateStaticParams() {
   return [
     { slug: "wearables" },
     { slug: "smarthomes" },
+    { slug: "smart-homes" },
+    { slug: "smarthome" },
     { slug: "industrial_iot" },
+    { slug: "industrial-iot" },
   ];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
+  const strapiSlug = normalizeSlug(resolvedParams.slug);
   let seo: SeoData | null = null;
   try {
-    const query = `filters[slug][$eq]=${resolvedParams.slug}&${buildPopulate(["seo"])}`;
+    const query = `filters[slug][$eq]=${strapiSlug}&${buildPopulate(["seo"])}`;
     const results = await getCollection<{ seo: SeoData | null }>(
       "application-pages",
       query
@@ -49,9 +67,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ApplicationPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
+  const strapiSlug = normalizeSlug(resolvedParams.slug);
   let data: any = null;
   try {
-    const query = `filters[slug][$eq]=${resolvedParams.slug}&${buildPopulate([
+    const query = `filters[slug][$eq]=${strapiSlug}&${buildPopulate([
       "hero",
       "carousel",
       "paradigm",
@@ -72,7 +91,11 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
   }
 
   if (!data) {
-    if (resolvedParams.slug === "wearables") {
+    if (
+      strapiSlug === "wearables" ||
+      strapiSlug === "smarthomes" ||
+      strapiSlug === "industrial_iot"
+    ) {
       data = {
         hero: {},
         paradigm: {},
@@ -97,10 +120,10 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
         <WearablesCarousel data={data.carousel} />
       ) */}
       {data?.paradigm && <WearablesParadigm data={data.paradigm} />}
-      <ApplicationsPageWins data={data?.wins} />
-      <ApplicationsPageModelZoo data={data?.model_zoo} variant="cards" />
+      <ApplicationsPageWins data={data?.wins} slug={strapiSlug} />
+      <ApplicationsPageModelZoo data={data?.model_zoo} variant="cards" slug={resolvedParams.slug} />
       {data?.empirical_proof && (
-        <WearablesEmpiricalProof data={data.empirical_proof} />
+        <WearablesEmpiricalProof data={data.empirical_proof} slug={strapiSlug} />
       )}
       {data?.subconscious && <WearablesSubconscious data={data.subconscious} />}
       {data?.lab_to_product && (

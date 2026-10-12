@@ -37,6 +37,7 @@ const CARDS: CardData[] = [
     ctaHref: "#",
     imgLeft: "-9.04%",
     imgTop: "-49.04%",
+    image: "/applications/lab-to-product/1.png",
   },
   {
     number: "02",
@@ -46,6 +47,7 @@ const CARDS: CardData[] = [
     ctaHref: "#",
     imgLeft: "-114.69%",
     imgTop: "-45.83%",
+    image: "/applications/lab-to-product/2.png",
   },
   {
     number: "03",
@@ -55,6 +57,7 @@ const CARDS: CardData[] = [
     ctaHref: "#",
     imgLeft: "-116.48%",
     imgTop: "-162.44%",
+    image: "/applications/lab-to-product/3.png",
   },
 ];
 
@@ -144,7 +147,8 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
   const dataCards: any[] = Array.isArray(data?.cards) ? data.cards : [];
   const cards = CARDS.map((fb, i) => {
     const c = dataCards[i];
-    if (!c) return { ...fb, image: FALLBACK_IMAGE };
+    if (!c) return fb;
+    const strapiImg = c.image ? mediaUrl(c.image) : "";
     return {
       ...fb,
       number: c.step || fb.number,
@@ -152,7 +156,7 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
       body: c.description || fb.body,
       cta: c.cta_label || fb.cta,
       ctaHref: c.cta_href || fb.ctaHref,
-      image: mediaUrl(c.image) || "",
+      image: strapiImg || fb.image || FALLBACK_IMAGE,
     };
   });
   return (

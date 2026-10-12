@@ -2,7 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
-import { gilroyBold, gilroyMedium, interRegular } from "../hero/fonts";
+import { gilroyBold, gilroyMedium, interRegular, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
 import { TagBadge } from "../hero/TagBadge";
@@ -320,7 +320,11 @@ const CARDS = [
   },
 ];
 
-export function ApplicationsPageWins({ data }: { data?: any }) {
+export function ApplicationsPageWins({ data, slug }: { data?: any; slug?: string }) {
+  const isIndustrial = Boolean(
+    slug && (slug === "industrial_iot" || slug === "industrial-iot" || slug.includes("industrial") || slug.includes("iot"))
+  );
+  const eyebrow = isIndustrial ? "PROVEN ACROSS FORM FACTORS" : (data?.eyebrow || "Real-time AI at edge");
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const heading = data?.heading || FALLBACK_HEADING;
@@ -375,13 +379,16 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
       {/* DESKTOP (>=1024px) */}
       <div className="relative hidden w-full max-w-[1440px] flex-col items-center min-[1024px]:flex pt-[64px] pb-[64px]">
         <div className="flex flex-col items-center gap-[20px]">
-          <div className="relative flex items-center justify-center bg-[rgba(255,255,255,0.06)] px-[20px] py-[8px]">
-            <div className="absolute left-[6px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
-            <span className="font-mono text-[13px] uppercase tracking-[-0.39px] text-[#ecfae5]">
-              Real-time AI at edge
-            </span>
-            <div className="absolute right-[6px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
-            <Corners />
+          <div className="relative flex items-center justify-center h-[26px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)] border-[0.5px] border-[rgba(255,255,255,0.2)] px-[18px]">
+            <Corners
+              leftSrc="/applications/wearables/vector-47.svg"
+              rightSrc="/applications/wearables/vector-46.svg"
+            />
+            <p className={`${dmMono.className} text-[13px] leading-none font-normal tracking-[-0.39px] text-[#ecfae5] uppercase whitespace-nowrap not-italic`}>
+              {eyebrow}
+            </p>
+            <div className="absolute top-1/2 left-[6.48px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+            <div className="absolute top-1/2 right-[7.52px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
           </div>
 
           <div className="relative inline-block px-[14px]">
@@ -433,15 +440,17 @@ export function ApplicationsPageWins({ data }: { data?: any }) {
       >
         {/* Header: tag badge + title (node 4032:14671) */}
         <div className="relative z-10 flex w-[350px] flex-col items-center gap-[10px]">
-          <TagBadge
-            label="Real-time AI at edge"
-            width={190}
-            rightBarLeft={181.48}
-            leftBarLeft={6.48}
-            centerLabel
-            nodeId="4032:14673"
-            labelClassName="text-[13px] leading-[19.5px] tracking-[-0.39px]"
-          />
+          <div className="relative flex items-center justify-center h-[26px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)] border-[0.5px] border-[rgba(255,255,255,0.2)] px-[18px]">
+            <Corners
+              leftSrc="/applications/wearables/vector-47.svg"
+              rightSrc="/applications/wearables/vector-46.svg"
+            />
+            <p className={`${dmMono.className} text-[13px] leading-none font-normal tracking-[-0.39px] text-[#ecfae5] uppercase whitespace-nowrap not-italic`}>
+              {eyebrow}
+            </p>
+            <div className="absolute top-1/2 left-[6.48px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+            <div className="absolute top-1/2 right-[7.52px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+          </div>
 
           {/* Title with corner brackets (node 4032:14681) */}
           <div className="relative h-[81px] w-[356px]" data-name="Group 78">

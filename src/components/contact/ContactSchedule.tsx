@@ -128,6 +128,13 @@ export function ContactSchedule({ data, bookingForm }: { data?: any; bookingForm
               "This is an example of a meeting you would have with a potential customer to demonstrate your product."
             : ""
         }
+        recipientEmail={
+          bookingCard === null
+            ? undefined
+            : bookingCard % 2 === 1
+              ? "chandra@ambientscientific.ai"
+              : "saharsh@ambientscientific.ai"
+        }
         onClose={() => setBookingCard(null)}
         onBooked={(label) => {
           setBookedLabel(label);

@@ -379,6 +379,46 @@ const ECG_FRAMES = [
   },
 ];
 
+const SMART_HOME_EYEBROW = "MEASURED, NOT PROJECTED";
+const SMART_HOME_HEADING = "The difference between a plugged-in hub and a battery device.";
+const SMART_HOME_SUBTITLE =
+  "Take one always-on workload — continuous wake-word + presence detection — and look at what it costs to run. This is why Ambient devices can go cordless.";
+
+const SMART_HOME_ECG_CARDS = [
+  {
+    badge: "THE WORKLOAD",
+    badgeWidth: 140,
+    stat: "24/7",
+    title: "Wake-word + presence",
+    description: "Continuous, local wake-word detection + on-device presence running nonstop.",
+    image: "/applications/smart-homes/empirical-card-1.jpg",
+  },
+  {
+    badge: "AMBIENT (GPX)",
+    badgeWidth: 145,
+    stat: "<1mW",
+    title: "Battery-powered AI",
+    description: "Runs the full workload locally, enabling unplugged smart-home devices.",
+    image: "/applications/smart-homes/empirical-card-2.jpg",
+  },
+  {
+    badge: "LEGACY APP PROCESSOR",
+    badgeWidth: 195,
+    stat: "PLUGGED-IN",
+    title: "Must stay powered",
+    description: "Continuous audio and vision keep the processor awake, driving mains-powered designs.",
+    image: "/applications/smart-homes/empirical-card-3.jpg",
+  },
+  {
+    badge: "100% LOCAL",
+    badgeWidth: 120,
+    stat: "NO CLOUD",
+    title: "Private, event-gated",
+    description: "Data stays in the room. The Wi-Fi SoC wakes only on a verified command.",
+    image: "/applications/smart-homes/empirical-card-4.jpg",
+  },
+];
+
 const ECG_FALLBACKS = [
   {
     badge: "CONTINUOUS AI", badgeWidth: 133, stat: "24/7",
@@ -406,6 +446,134 @@ const ECG_FALLBACKS = [
   },
 ];
 
+function SmartHomeCard({
+  index,
+  badge,
+  badgeWidth,
+  stat,
+  title,
+  description,
+  imageSrc,
+}: {
+  index: number;
+  badge: string;
+  badgeWidth: number;
+  stat: string;
+  title: string;
+  description: string;
+  imageSrc: string;
+}) {
+  return (
+    <div
+      className="relative flex flex-col h-[370px] w-[301px] shrink-0 rounded-[2px] overflow-hidden border border-[rgba(255,255,255,0.08)] bg-gradient-to-b from-[#0c160b] to-[#040804]"
+      data-name="Card"
+    >
+      <CardAbstractBg />
+
+      {/* Top Image */}
+      <div className="relative w-full h-[185px] shrink-0 overflow-hidden bg-black">
+        <img
+          loading="lazy"
+          decoding="async"
+          alt={title}
+          src={imageSrc}
+          className="size-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#091208] via-transparent to-transparent pointer-events-none" />
+      </div>
+
+      {/* Badge overlaid top left */}
+      <div className="absolute left-[14px] top-[14px] z-10 flex items-center">
+        <Badge label={badge} width={badgeWidth} />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-1 flex-col items-start px-[20px] pt-[24px] pb-[18px]">
+        <p
+          className={`${gilroySemiBold.className} ${
+            index === 2 ? "text-[26px] leading-[32px]" : index === 3 ? "text-[28px] leading-[34px]" : "text-[36px] leading-[40px]"
+          } tracking-[-0.5px] text-white not-italic`}
+        >
+          {stat}
+        </p>
+
+        <p
+          className={`${gilroyMedium.className} text-[17px] leading-[22px] text-white not-italic mt-[8px]`}
+        >
+          {title}
+        </p>
+
+        <p
+          className={`${interRegular.className} text-[12.5px] leading-[18px] text-[#a1a89f] not-italic mt-[6px] [word-break:break-word]`}
+        >
+          {description}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function SmartHomeCardMobile({
+  index,
+  badge,
+  badgeWidth,
+  stat,
+  title,
+  description,
+  imageSrc,
+}: {
+  index: number;
+  badge: string;
+  badgeWidth: number;
+  stat: string;
+  title: string;
+  description: string;
+  imageSrc: string;
+}) {
+  return (
+    <div
+      className="relative flex flex-col w-full shrink-0 rounded-[2px] overflow-hidden border border-[rgba(255,255,255,0.08)] bg-gradient-to-b from-[#0c160b] to-[#040804] pb-[18px]"
+      data-name="Card"
+    >
+      <CardAbstractBg />
+
+      {/* Top Image */}
+      <div className="relative w-full h-[190px] shrink-0 overflow-hidden bg-black">
+        <img
+          loading="lazy"
+          decoding="async"
+          alt={title}
+          src={imageSrc}
+          className="size-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#091208] via-transparent to-transparent pointer-events-none" />
+      </div>
+
+      {/* Badge overlaid top left */}
+      <div className="absolute left-[14px] top-[14px] z-10 flex items-center">
+        <Badge label={badge} width={badgeWidth} />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-start px-[18px] pt-[20px]">
+        <p
+          className={`${gilroySemiBold.className} ${
+            index === 2 ? "text-[26px] leading-[32px]" : index === 3 ? "text-[28px] leading-[34px]" : "text-[34px] leading-[40px]"
+          } text-white`}
+        >
+          {stat}
+        </p>
+        <p className={`${gilroyMedium.className} text-[17px] leading-[22px] text-white mt-[8px]`}>
+          {title}
+        </p>
+        <p className={`${interRegular.className} text-[12.5px] leading-[18px] text-[#a1a89f] mt-[6px]`}>
+          {description}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 function EcgCard({
   index,
   imageSrc,
@@ -414,6 +582,8 @@ function EcgCard({
   stat,
   title,
   description,
+  isSmartHome,
+  tags,
 }: {
   index: number;
   imageSrc: string;
@@ -422,12 +592,14 @@ function EcgCard({
   stat: string;
   title: string;
   description: string;
+  isSmartHome?: boolean;
+  tags?: { icon: string; label: string }[];
 }) {
   const frame = ECG_FRAMES[index];
-  const statLeft = index === 2 ? 19 : 26;
-  const statTop = index === 2 ? 219 : 216;
-  const descWidth = index === 2 || index === 3 ? 260 : 258;
-  const textBottom = index === 2 ? 14 : 21;
+  const statLeft = isSmartHome ? 18 : (index === 2 ? 19 : 26);
+  const statTop = isSmartHome ? 180 : (index === 2 ? 219 : 216);
+  const descWidth = isSmartHome ? 265 : (index === 2 || index === 3 ? 260 : 258);
+  const textBottom = isSmartHome ? 16 : (index === 2 ? 14 : 21);
   return (
     <div
       className="relative min-h-[370px] w-[301px] shrink-0 overflow-clip rounded-[1px] bg-gradient-to-b from-[#0c160b] to-[rgba(12,22,11,0)]"
@@ -448,7 +620,7 @@ function EcgCard({
         ) : null}
       </div>
       {/* Accent image (card 3 only) — 4016:3991 */}
-      {index === 2 ? (
+      {!isSmartHome && index === 2 ? (
         <div className="pointer-events-none absolute left-[43px] top-[63px] h-[70px] w-[73px]" aria-hidden>
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
             <img loading="lazy" decoding="async"
@@ -466,33 +638,39 @@ function EcgCard({
       >
         <Badge label={badge} width={badgeWidth} />
       </div>
-      {/* Circular progress — 4016:3947 / 4016:3948 */}
-      <div className="absolute left-[16px] top-[164px] flex size-[40px] items-center justify-center">
-        <div className="-rotate-90 flex-none">
-          <div className="relative size-[40px]">
-            <img loading="lazy" decoding="async" alt="" src="/applications/wearables/ellipse-1.svg" className="absolute inset-0 block size-full max-w-none" />
+      {/* Circular progress — only for wearables */}
+      {!isSmartHome && (
+        <>
+          <div className="absolute left-[16px] top-[164px] flex size-[40px] items-center justify-center">
+            <div className="-rotate-90 flex-none">
+              <div className="relative size-[40px]">
+                <img loading="lazy" decoding="async" alt="" src="/applications/wearables/ellipse-1.svg" className="absolute inset-0 block size-full max-w-none" />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div className="absolute left-[16px] top-[164px] flex size-[40px] items-center justify-center">
-        <div className="-rotate-90 flex-none">
-          <div className="relative size-[40px]">
-            <img loading="lazy" decoding="async" alt="" src="/applications/wearables/ellipse-2.svg" className="absolute inset-0 block size-full max-w-none" />
+          <div className="absolute left-[16px] top-[164px] flex size-[40px] items-center justify-center">
+            <div className="-rotate-90 flex-none">
+              <div className="relative size-[40px]">
+                <img loading="lazy" decoding="async" alt="" src="/applications/wearables/ellipse-2.svg" className="absolute inset-0 block size-full max-w-none" />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      {/* Stat — 4016:3946 (card 3's long stat scales down to fit the 301px card) */}
+        </>
+      )}
+      {/* Stat — 4016:3946 */}
       <p
         className={`${gilroySemiBold.className} absolute text-white whitespace-nowrap not-italic ${
-          index === 2 ? "text-[30px]" : "text-[40px]"
+          isSmartHome
+            ? (index === 2 ? "text-[26px]" : index === 3 ? "text-[30px]" : "text-[38px]")
+            : (index === 2 ? "text-[30px]" : "text-[40px]")
         }`}
-        style={{ left: statLeft, top: index === 2 ? 224 : statTop }}
+        style={{ left: statLeft, top: statTop }}
       >
         {stat}
       </p>
-      {/* Description — 4016:3943 (bottom-anchored: never clips, grows upward) */}
+      {/* Description — 4016:3943 */}
       <div
-        className={`${interRegular.className} absolute left-[18px] flex w-[258px] flex-col items-start gap-[6px] font-normal not-italic`}
+        className={`${interRegular.className} absolute left-[18px] flex w-[265px] flex-col items-start gap-[6px] font-normal not-italic`}
         style={{ bottom: textBottom }}
       >
         <p className="w-full text-[16px] leading-[24px] text-white whitespace-nowrap overflow-hidden text-ellipsis">{title}</p>
@@ -512,6 +690,7 @@ function EcgCardMobile({
   stat,
   title,
   description,
+  isSmartHome,
 }: {
   imageSrc: string;
   badge: string;
@@ -519,6 +698,7 @@ function EcgCardMobile({
   stat: string;
   title: string;
   description: string;
+  isSmartHome?: boolean;
 }) {
   return (
     <div className={`relative min-h-[290px] w-full shrink-0 ${CARD_BG}`}>
@@ -539,27 +719,31 @@ function EcgCardMobile({
       <div className="absolute left-[14px] top-[14px] flex items-center">
         <Badge label={badge} width={badgeWidth} />
       </div>
-      <div className="absolute left-[14px] top-[124px] flex size-[32px] items-center justify-center">
-        <div className="-rotate-90 flex-none">
-          <div className="relative size-[32px]">
-            <img loading="lazy" decoding="async" alt="" src="/applications/wearables/ellipse-1.svg" className="absolute inset-0 block size-full max-w-none" />
+      {!isSmartHome && (
+        <>
+          <div className="absolute left-[14px] top-[124px] flex size-[32px] items-center justify-center">
+            <div className="-rotate-90 flex-none">
+              <div className="relative size-[32px]">
+                <img loading="lazy" decoding="async" alt="" src="/applications/wearables/ellipse-1.svg" className="absolute inset-0 block size-full max-w-none" />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div className="absolute left-[14px] top-[124px] flex size-[32px] items-center justify-center">
-        <div className="-rotate-90 flex-none">
-          <div className="relative size-[32px]">
-            <img loading="lazy" decoding="async" alt="" src="/applications/wearables/ellipse-2.svg" className="absolute inset-0 block size-full max-w-none" />
+          <div className="absolute left-[14px] top-[124px] flex size-[32px] items-center justify-center">
+            <div className="-rotate-90 flex-none">
+              <div className="relative size-[32px]">
+                <img loading="lazy" decoding="async" alt="" src="/applications/wearables/ellipse-2.svg" className="absolute inset-0 block size-full max-w-none" />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
       <p
-        className={`${gilroySemiBold.className} absolute left-[56px] top-[124px] text-[28px] leading-[normal] text-white whitespace-nowrap not-italic`}
+        className={`${gilroySemiBold.className} absolute left-[14px] top-[124px] text-[28px] leading-[normal] text-white whitespace-nowrap not-italic`}
       >
         {stat}
       </p>
       <div
-        className={`${interRegular.className} absolute left-[14px] flex w-[calc(100%-28px)] flex-col items-start gap-[6px] pb-[14px] pt-[178px] font-normal not-italic`}
+        className={`${interRegular.className} absolute left-[14px] flex w-[calc(100%-28px)] flex-col items-start gap-[6px] pb-[14px] pt-[170px] font-normal not-italic`}
       >
         <p className="w-full text-[16px] leading-[24px] text-white">{title}</p>
         <p className="w-full text-[12px] leading-[18px] text-[rgba(255,255,255,0.6)]">
@@ -570,12 +754,16 @@ function EcgCardMobile({
   );
 }
 
-export function WearablesEmpiricalProof({ data }: { data?: any }) {
+export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: string }) {
+  const isSmartHome = Boolean(
+    (slug && (slug === "smarthomes" || slug === "smart-homes" || slug.includes("home"))) ||
+    data?.heading?.includes("plugged-in")
+  );
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 1 });
   const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
 
-  const subtitle = data?.subtitle || "";
-  const heading = data?.heading || "";
+  const subtitle = isSmartHome ? SMART_HOME_SUBTITLE : (data?.subtitle || FALLBACK_SUBTITLE);
+  const heading = isSmartHome ? SMART_HOME_HEADING : (data?.heading || FALLBACK_HEADING);
   const healthData = data?.health_card;
   const powerData = data?.power_card;
   const workloadData = data?.workload_card;
@@ -622,88 +810,173 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
       aria-label="The Empirical Proof"
     >
       {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden w-full max-w-[1440px] min-[1024px]:block h-[700px]">
-        {/* Top decorative SVG */}
-        <div
-          className="pointer-events-none absolute top-[-26.9px] left-1/2 h-[320px] w-[881.616px] -translate-x-1/2"
-          data-name="Abstract Design"
-        >
-          <img loading="lazy" decoding="async"
-            alt=""
-            src="/applications/wearables/abstract-design-top.svg"
-            className="absolute inset-0 block size-full max-w-none"
-            aria-hidden
-          />
-        </div>
-
-        {/* Section title */}
-        <div className="absolute left-1/2 top-[103.1px] -translate-x-1/2 flex flex-col items-center justify-center gap-[24px]">
-          <div className="relative flex flex-col items-center px-[10px]" data-name="Title">
-            <h2
-              ref={fitRef}
-              className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent whitespace-nowrap not-italic [word-break:break-word]`}
-              style={{
-                backgroundImage: TITLE_GRADIENT,
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-              }}
-            >
-              {heading}
-            </h2>
-            <Corners
-              leftSrc="/applications/wearables/vector-42.svg"
-              rightSrc="/applications/wearables/vector-43.svg"
+      {isSmartHome ? (
+        <div className="relative hidden w-full max-w-[1440px] flex-col items-center pt-[44px] pb-[56px] min-[1024px]:flex">
+          {/* Top decorative SVG */}
+          <div
+            className="pointer-events-none absolute top-[-26.9px] left-1/2 h-[320px] w-[881.616px] -translate-x-1/2"
+            data-name="Abstract Design"
+          >
+            <img loading="lazy" decoding="async"
+              alt=""
+              src="/applications/wearables/abstract-design-top.svg"
+              className="absolute inset-0 block size-full max-w-none"
+              aria-hidden
             />
           </div>
-          <p
-            className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+
+          {/* Section title */}
+          <div className="flex flex-col items-center justify-center gap-[16px] w-full max-w-[1100px] px-[20px] z-10">
+            <div className="relative flex items-center justify-center h-[26px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)] border-[0.5px] border-[rgba(255,255,255,0.2)] px-[18px]">
+              <Corners
+                leftSrc="/applications/wearables/vector-47.svg"
+                rightSrc="/applications/wearables/vector-46.svg"
+              />
+              <p className={`${dmMono.className} text-[13px] leading-none font-normal tracking-[-0.39px] text-[#ecfae5] uppercase whitespace-nowrap not-italic`}>
+                {SMART_HOME_EYEBROW}
+              </p>
+              <div className="absolute top-1/2 left-[6.48px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+              <div className="absolute top-1/2 right-[7.52px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+            </div>
+
+            <div className="relative flex flex-col items-center px-[16px] py-[6px] w-fit" data-name="Title">
+              <h2
+                className={`${gilroyMedium.className} bg-clip-text text-center font-medium text-transparent not-italic [word-break:break-word] text-[34px] min-[1280px]:text-[42px] leading-[1.25]`}
+                style={{
+                  backgroundImage: TITLE_GRADIENT,
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                }}
+              >
+                The difference between a plugged-in hub
+                <br />
+                and a battery device.
+              </h2>
+              <Corners
+                leftSrc="/applications/wearables/vector-42.svg"
+                rightSrc="/applications/wearables/vector-43.svg"
+              />
+            </div>
+            <p
+              className={`${interRegular.className} text-center text-[15px] leading-[24px] text-[#c5cdc3] not-italic [word-break:break-word] max-w-[760px]`}
+            >
+              {subtitle}
+            </p>
+          </div>
+
+          {/* Bottom row — 4 cards */}
+          <div className="flex gap-[20px] mt-[36px] z-10">
+            {SMART_HOME_ECG_CARDS.map((card, i) => (
+              <SmartHomeCard
+                key={i}
+                index={i}
+                badge={card.badge}
+                badgeWidth={card.badgeWidth}
+                stat={card.stat}
+                title={card.title}
+                description={card.description}
+                imageSrc={card.image}
+              />
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="relative hidden w-full max-w-[1440px] min-[1024px]:block h-[700px]">
+          {/* Top decorative SVG */}
+          <div
+            className="pointer-events-none absolute top-[-26.9px] left-1/2 h-[320px] w-[881.616px] -translate-x-1/2"
+            data-name="Abstract Design"
           >
-            {subtitle}
-          </p>
-        </div>
-
-        {/* Top row — 3 cards */}
-        {false && (
-        <div className="absolute left-1/2 top-[288.75px] flex -translate-x-1/2 items-center gap-[20px]">
-          <HealthCard data={healthData} />
-          <PowerCard data={powerData} />
-          <WorkloadCard data={workloadData} />
-        </div>
-        )}
-
-        {/* Bottom row — 4 cards (Figma 4016:3927: 4×301 + 21/21/20 gaps) */}
-        <div className="absolute left-1/2 top-[288.75px] flex -translate-x-1/2 gap-[20.67px]">
-          {ecgCards.map((card, i) => (
-            <EcgCard
-              key={i}
-              index={i}
-              imageSrc={card.imageSrc}
-              badge={card.badge}
-              badgeWidth={card.badgeWidth}
-              stat={card.stat}
-              title={card.title}
-              description={card.description}
+            <img loading="lazy" decoding="async"
+              alt=""
+              src="/applications/wearables/abstract-design-top.svg"
+              className="absolute inset-0 block size-full max-w-none"
+              aria-hidden
             />
-          ))}
+          </div>
+
+          {/* Section title */}
+          <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center justify-center gap-[20px] top-[103.1px]">
+            <div className="relative flex flex-col items-center px-[10px]" data-name="Title">
+              <h2
+                ref={fitRef}
+                className={`${gilroyMedium.className} bg-clip-text text-center font-medium text-transparent not-italic [word-break:break-word] text-[46px] leading-[49px] whitespace-nowrap`}
+                style={{
+                  backgroundImage: TITLE_GRADIENT,
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                }}
+              >
+                {heading}
+              </h2>
+              <Corners
+                leftSrc="/applications/wearables/vector-42.svg"
+                rightSrc="/applications/wearables/vector-43.svg"
+              />
+            </div>
+            <p
+              className={`${interRegular.className} text-center text-[14px] leading-[22px] text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] w-[650px]`}
+            >
+              {subtitle}
+            </p>
+          </div>
+
+          {/* Bottom row — 4 cards */}
+          <div className="absolute left-1/2 flex -translate-x-1/2 gap-[20.67px] top-[288.75px]">
+            {ecgCards.map((card, i) => (
+              <EcgCard
+                key={i}
+                index={i}
+                imageSrc={card.imageSrc}
+                badge={card.badge}
+                badgeWidth={card.badgeWidth}
+                stat={card.stat}
+                title={card.title}
+                description={card.description}
+                isSmartHome={false}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* MOBILE (<1024px) */}
-      <div className="relative flex w-full flex-col items-center gap-[24px] px-[21px] pt-[30px] pb-[72px] min-[1024px]:hidden">
+      <div className={`relative flex w-full flex-col items-center gap-[24px] px-[21px] pt-[30px] ${isSmartHome ? "pb-[36px]" : "pb-[72px]"} min-[1024px]:hidden`}>
 
         {/* Title */}
-        <div className="relative z-10 flex w-[350px] flex-col items-center gap-[10px]">
-          <div className="relative h-[82px] w-[356px]">
+        <div className="relative z-10 flex w-full max-w-[420px] flex-col items-center gap-[12px]">
+          {isSmartHome && (
+            <div className="relative flex items-center justify-center h-[26px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)] border-[0.5px] border-[rgba(255,255,255,0.2)] px-[18px]">
+              <Corners
+                leftSrc="/applications/wearables/vector-47.svg"
+                rightSrc="/applications/wearables/vector-46.svg"
+              />
+              <p className={`${dmMono.className} text-[13px] leading-none font-normal tracking-[-0.39px] text-[#ecfae5] uppercase whitespace-nowrap not-italic`}>
+                {SMART_HOME_EYEBROW}
+              </p>
+              <div className="absolute top-1/2 left-[6.48px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+              <div className="absolute top-1/2 right-[7.52px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+            </div>
+          )}
+          <div className="relative w-fit px-[12px] py-[6px]">
             <h2
-              ref={fitRef2}
-              className={`${gilroyMedium.className} absolute inset-0 flex items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              {...(!isSmartHome ? { ref: fitRef2 } : {})}
+              className={`${gilroyMedium.className} flex items-center justify-center bg-clip-text text-center text-[26px] sm:text-[30px] leading-[34px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: "linear-gradient(107.4537261117953deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
               }}
             >
-              {heading}
+              {isSmartHome ? (
+                <>
+                  The difference between a plugged-in hub
+                  <br />
+                  and a battery device.
+                </>
+              ) : (
+                heading
+              )}
             </h2>
             <Corners
               leftSrc="/applications/wearables/vector-42.svg"
@@ -711,121 +984,39 @@ export function WearablesEmpiricalProof({ data }: { data?: any }) {
             />
           </div>
           <p
-            className={`${interRegular.className} w-[352px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
             {subtitle}
           </p>
         </div>
 
-        {false && (
-          <>
-        {/* Health card (mobile) */}
-        <div className={`relative w-full shrink-0 ${CARD_BG} p-[20px]`}>
-          <CardAbstractBg />
-          <Corners
-            leftSrc="/applications/wearables/vector-47.svg"
-            rightSrc="/applications/wearables/vector-46.svg"
-          />
-          <div className="relative flex flex-col gap-[12px]">
-            <Badge label={healthBadge} width={137} />
-            <p className={`${gilroyMedium.className} text-[20px] leading-[26px] text-white not-italic`}>
-              {healthTitle}
-            </p>
-            <p className={`${interRegular.className} text-[14px] leading-[21px] text-[rgba(255,255,255,0.6)] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
-              {healthBody}
-            </p>
-            <p className={`${interRegular.className} text-[13px] leading-[20px] text-[#a4a4a4] not-italic`}>
-              {healthFooter}
-            </p>
-            <a
-              href="#"
-              className={`${gilroyMedium.className} relative mt-[4px] flex h-[48px] w-full items-center justify-center overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
-            >
-              <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
-              <GreenCtaCorners />
-              <span className="relative whitespace-nowrap text-[14px] leading-[28px] font-medium text-white uppercase not-italic">
-                {healthCta}
-              </span>
-              <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
-            </a>
-          </div>
-        </div>
-
-        {/* Power card (mobile) */}
-        <div className={`relative w-full shrink-0 ${CARD_BG} pt-[24px] pb-[20px]`}>
-          <CardAbstractBg />
-          <Corners
-            leftSrc="/applications/wearables/vector-47.svg"
-            rightSrc="/applications/wearables/vector-46.svg"
-          />
-          <div className="relative flex flex-col items-center gap-[16px]">
-            <Badge label={powerBadge} width={176} />
-            <div className="flex w-full justify-around">
-              <div className="flex flex-col items-center gap-[10px]">
-                <p className={`${gilroyMedium.className} text-[16px] leading-[20px] text-white not-italic`}>{ambientPanel.label}</p>
-                <div className="flex w-[40px] flex-col gap-[4px]">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <div key={i} className="h-[12px] w-[40px] rounded-[1px] bg-gradient-to-b from-[rgba(140,230,108,0.5)] to-[rgba(27,47,20,0.5)] mix-blend-luminosity" />
-                  ))}
-                  <div className="h-[24px] w-[40px] rounded-[1px] bg-gradient-to-b from-[#a8ed90] to-[#357120]" />
-                </div>
-                <p className={`${gilroySemiBold.className} text-[24px] text-white`}>{ambientPanel.value}</p>
-                <p className={`${interRegular.className} text-[11px] leading-[16px] text-[#f0f0f0]`}>{ambientPanel.description}</p>
-              </div>
-              <div className="flex flex-col items-center gap-[10px]">
-                <p className={`${gilroyMedium.className} text-[16px] leading-[20px] text-white not-italic`}>{legacyPanel.label}</p>
-                <div className="flex w-[40px] flex-col gap-[4px]">
-                  <div className="h-[12px] w-[40px] rounded-[1px] bg-gradient-to-b from-[rgba(140,230,108,0.5)] to-[rgba(27,47,20,0.5)] mix-blend-luminosity" />
-                  <div className="h-[12px] w-[40px] rounded-[1px] bg-gradient-to-b from-[#e66c6c] from-[42.377%] to-[#3a131e] to-[150.73%]" />
-                  {Array.from({ length: 3 }).map((_, i) => (
-                    <div key={i} className="h-[12px] w-[40px] rounded-[1px]" style={{ backgroundImage: RED_DUAL }} />
-                  ))}
-                  <div className="h-[24px] w-[40px] rounded-[1px] bg-gradient-to-b from-[#e66c6c] from-[42.377%] to-[#3a131e] to-[150.73%]" />
-                </div>
-                <p className={`${gilroySemiBold.className} text-[24px] text-white`}>{legacyPanel.value}</p>
-                <p className={`${interRegular.className} text-[11px] leading-[16px] text-[#f0f0f0]`}>{legacyPanel.description}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Workload card (mobile) */}
-        <div className={`relative h-[280px] w-full shrink-0 ${CARD_BG}`}>
-          <CardAbstractBg />
-          <Corners
-            leftSrc="/applications/wearables/vector-47.svg"
-            rightSrc="/applications/wearables/vector-46.svg"
-          />
-          <div className="absolute left-1/2 top-[18px] -translate-x-1/2">
-            <Badge label={workloadBadge} width={137} />
-          </div>
-          <WorkloadDiagram />
-          <p className={`${gilroySemiBold.className} absolute left-1/2 top-[170px] -translate-x-1/2 text-[36px] leading-[normal] text-white whitespace-nowrap not-italic`}>
-            {workloadStat}
-          </p>
-          <p className={`${interRegular.className} absolute left-1/2 top-[216px] -translate-x-1/2 text-[13px] leading-[20px] text-[#f0f0f0] whitespace-nowrap not-italic`}>
-            {workloadLabel}
-          </p>
-          <p className={`${interRegular.className} absolute left-1/2 top-[238px] -translate-x-1/2 text-[11px] leading-[16px] text-white whitespace-nowrap not-italic`}>
-            {workloadDescription}
-          </p>
-        </div>
-          </>
-        )}
-
-        {/* ECG cards (mobile) — single column; content-rich cards need full width */}
-        <div className="flex w-full flex-col gap-[12px]">
-          {ecgCards.map((card, i) => (
-            <EcgCardMobile
-              key={i}
-              imageSrc={card.imageSrc}
-              badge={card.badge}
-              badgeWidth={card.badgeWidth}
-              stat={card.stat}
-              title={card.title}
-              description={card.description}
-            />
-          ))}
+        {/* Cards (mobile) */}
+        <div className="flex w-full flex-col gap-[16px]">
+          {isSmartHome
+            ? SMART_HOME_ECG_CARDS.map((card, i) => (
+                <SmartHomeCardMobile
+                  key={i}
+                  index={i}
+                  badge={card.badge}
+                  badgeWidth={card.badgeWidth}
+                  stat={card.stat}
+                  title={card.title}
+                  description={card.description}
+                  imageSrc={card.image}
+                />
+              ))
+            : ecgCards.map((card, i) => (
+                <EcgCardMobile
+                  key={i}
+                  imageSrc={card.imageSrc}
+                  badge={card.badge}
+                  badgeWidth={card.badgeWidth}
+                  stat={card.stat}
+                  title={card.title}
+                  description={card.description}
+                  isSmartHome={false}
+                />
+              ))}
         </div>
       </div>
     </section>

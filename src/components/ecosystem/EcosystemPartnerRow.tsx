@@ -4,58 +4,64 @@ import { gilroySemiBold } from "../hero/fonts";
 import {
   type PartnerRowConfig,
   type EcosystemPartner,
+  type CarouselSlot,
   resolvePartners,
+  CAROUSEL_1_SLOTS,
+  CAROUSEL_2_SLOTS,
 } from "./ecosystem-data";
 import { EcosystemGridLine } from "./EcosystemGridLine";
 import { Corners } from "../shared/Corners";
 
 function PartnerLogoStat({
   nodeId,
-  src,
-  width,
-  height,
-  name,
-  textNodeId,
+  slot,
 }: {
   nodeId: string;
-  src: string;
-  width: number;
-  height: number;
-  name?: string | null;
-  textNodeId?: string;
+  slot: CarouselSlot;
 }) {
+  if (!slot.isRevealed || !slot.src) {
+    return (
+      <div
+        className="relative flex w-full shrink-0 flex-col items-center justify-center gap-[12px] py-[20px]"
+        data-node-id={nodeId}
+        data-name="Stat"
+      >
+        <div className="flex items-center justify-center border border-[#E2A740] bg-black/90 px-[14px] py-[7px] shadow-lg pointer-events-none">
+          <span className="font-mono flex items-center gap-[6px] whitespace-nowrap text-[11px] uppercase tracking-[0.06em] text-[#E2A740]">
+            <span>|</span>
+            <span>REVEALING SOON</span>
+            <span>|</span>
+          </span>
+        </div>
+      </div>
+    );
+  }
+
+  const isEdgeAi = slot.src.includes("edgeai");
+
   return (
     <div
-      className="relative flex w-[150px] shrink-0 flex-col items-center justify-center gap-[12px] py-[20px]"
+      className="relative flex w-full shrink-0 flex-col items-center justify-center gap-[12px] py-[20px]"
       data-node-id={nodeId}
       data-name="Stat"
     >
-      {src ? (
+      <div
+        className="relative shrink-0 overflow-visible flex flex-row items-center justify-center"
+        data-name="Icon"
+      >
         <div
-          className="relative shrink-0 overflow-visible flex flex-row items-center justify-center gap-[10px]"
-          data-name="Icon"
+          className={`relative flex h-[82px] w-[198px] max-w-[92%] items-center justify-center rounded-[8px] p-[8px] shadow-[0_4px_24px_rgba(0,0,0,0.4)] transition-transform duration-200 hover:scale-105 ${
+            isEdgeAi ? "bg-[#014C52]" : "bg-white"
+          }`}
         >
-          <Image
-            src={src}
-            alt=""
-            width={width}
-            height={height}
-            className="block max-w-none object-contain blur-[3px] brightness-[0.3] opacity-80"
-            style={{ width: `${width}px`, height: `${height}px` }}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={slot.src}
+            alt={slot.name || "Partner"}
+            className="block max-h-full max-w-full object-contain"
           />
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center border border-[#E2A740] bg-black/90 px-[12px] py-[6px] shadow-lg z-10 pointer-events-none">
-            <span className={`font-mono flex items-center gap-[6px] whitespace-nowrap text-[10px] uppercase tracking-[0.05em] text-[#E2A740]`}>
-              <span>|</span>
-              <span>REVEALING SOON</span>
-              <span>|</span>
-            </span>
-          </div>
         </div>
-      ) : (
-        <span className={`${gilroySemiBold.className} text-[16px] leading-[24px] tracking-[0.02em] uppercase text-[rgba(255,255,255,0.4)]`}>
-          Revealing soon
-        </span>
-      )}
+      </div>
     </div>
   );
 }
@@ -73,15 +79,9 @@ type EcosystemPartnerRowProps = {
 export function EcosystemPartnerRow({
   config,
   logoStatNodeIds = LOGO_STAT_NODES,
-  partners,
-  isDevelopment,
+  isDevelopment = false,
 }: EcosystemPartnerRowProps) {
-  void isDevelopment;
-  const resolved = resolvePartners(partners);
-
-  // Build (logo, gridLine) pairs by interleaving. The last logo has no
-  // trailing grid line. Grid-line configs cycle for counts beyond the 4
-  // hardcoded Figma entries.
+  const slots = isDevelopment ? CAROUSEL_2_SLOTS : CAROUSEL_1_SLOTS;
   const gridLines = config.gridLines;
 
   return (
@@ -99,35 +99,24 @@ export function EcosystemPartnerRow({
         />
       </div>
 
-      {resolved.map((logo, i) => {
-        // Pick a stable nodeId — prefer the configured Figma ids for the
-        // first three slots, then the tezos/octane ids for slots 4/5, then
-        // a synthesised id beyond that.
+      {slots.map((slot, i) => {
         const configuredNodeId =
           (i < 3 && logoStatNodeIds[i]) ||
           (i === 3 && config.tezos.statNodeId) ||
           (i === 4 && config.octane.statNodeId) ||
           null;
         const nodeId = configuredNodeId ?? `${config.rowNodeId}-slot-${i}`;
-        const textNodeId =
-          i === 3
-            ? config.tezos.textNodeId
-            : i === 4
-              ? config.octane.textNodeId
-              : undefined;
         const gridLine = gridLines[i % gridLines.length];
 
         return (
           <Fragment key={nodeId}>
-            <PartnerLogoStat
-              nodeId={nodeId}
-              textNodeId={textNodeId}
-              src={logo.src}
-              width={logo.width}
-              height={logo.height}
-              name={logo.name}
-            />
-            {i < resolved.length - 1 ? (
+            <div className="flex flex-1 h-full items-center justify-center">
+              <PartnerLogoStat
+                nodeId={nodeId}
+                slot={slot}
+              />
+            </div>
+            {i < slots.length - 1 ? (
               <EcosystemGridLine {...gridLine} />
             ) : null}
           </Fragment>

@@ -245,13 +245,215 @@ function WhyCard({ step }: { step: any }) {
   );
 }
 
+const SMART_HOME_EYEBROW = "MULTI-MODAL, FULLY ON-DEVICE";
+const SMART_HOME_HEADING = "One chip. Every smart-home AI feature.";
+const SMART_HOME_SUBTITLE =
+  "The GPX architecture isn't an ASIC — it's a fully programmable AI engine. Here's what you run natively, privately, on the device.";
+
+const SMART_HOME_FEATURES = [
+  {
+    number: "01",
+    title: "Localized FaceID & Presence",
+    description:
+      "Wake appliances or adjust the environment on visual recognition — no images ever leave the device.",
+    image: "/applications/smart-homes/faceid-presence.jpg",
+  },
+  {
+    number: "02",
+    title: "Glass-Break & Intrusion Audio",
+    description:
+      "Monitor continuous acoustic data for security events while the Wi-Fi SoC sleeps.",
+    image: "/applications/smart-homes/glass-break.jpg",
+  },
+  {
+    number: "03",
+    title: "Unplugged Natural Language",
+    description:
+      "Run complex voice commands for thermostats and locks completely offline.",
+    image: "/applications/smart-homes/voice-nlp.jpg",
+  },
+  {
+    number: "04",
+    title: "Radar & Fall Detection",
+    description:
+      "Monitor the elderly in a privacy-safe way using mmWave radar + motion AI.",
+    image: "/applications/smart-homes/radar-fall.jpg",
+  },
+  {
+    number: "05",
+    title: "Bring Your Own Model",
+    description:
+      "Proprietary vision or NLP model? Compile it to GPX with ModelForge.",
+    image: "/applications/smart-homes/byom-cube.jpg",
+  },
+];
+
+const WEARABLES_EYEBROW = "A PROGRAMMABLE CANVAS FOR THE WRIST, RING & LENS";
+const WEARABLES_HEADING = "One chip. Every wearable AI feature.";
+const WEARABLES_SUBTITLE =
+  "The GPX architecture isn't an ASIC — it's a fully programmable AI engine. Here's what you run natively.";
+
+const WEARABLES_FEATURES = [
+  {
+    number: "01",
+    title: "Complex Activity Classification",
+    description:
+      "Beyond step-counting — gym exercises, swim strokes, PT movements.",
+    image: "/partners/svg 2/7.svg",
+  },
+  {
+    number: "02",
+    title: "Continuous Biomarker Tracking",
+    description:
+      "1D-CNNs for ECG and early anomaly detection without killing the coin cell.",
+    image: "/partners/svg 2/8.svg",
+  },
+  {
+    number: "03",
+    title: "Always-On Safety Monitoring",
+    description:
+      "Fall detection and acoustic safety, always in the background.",
+    image: "/partners/svg 2/9.svg",
+  },
+  {
+    number: "04",
+    title: "Gesture Recognition",
+    description:
+      "Micro-gestures for AR rings and glasses, zero cloud latency.",
+    image: "/partners/svg 2/10.svg",
+  },
+  {
+    number: "05",
+    title: "Bring Your Own Model",
+    description:
+      "Proprietary model? Compile it to GPX with ModelForge.",
+    image: "/partners/svg 2/11.svg",
+  },
+];
+
+type FeatureCardItem = {
+  number: string;
+  title: string;
+  description: string;
+  image: string;
+};
+
+function FeatureCard({ item }: { item: FeatureCardItem }) {
+  return (
+    <article
+      className="group/card relative flex w-full flex-col overflow-hidden border border-solid px-[24px] pt-[16px] pb-[24px] h-full min-h-[430px] transition-all duration-300 hover:border-[#45c418] hover:shadow-[0_0_24px_rgba(69,196,24,0.2)]"
+      style={{
+        backgroundColor: WHY_CARD_BG,
+        borderColor: WHY_CARD_BORDER,
+      }}
+      data-name="Article"
+    >
+      {/* Image box */}
+      <div
+        className="relative w-[140%] -ml-[20%] h-[180px] shrink-0 overflow-hidden"
+        aria-hidden
+      >
+        {/* Soft grey radial gradient backlight */}
+        <div 
+          className="absolute inset-0" 
+          style={{
+            background: "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 65%)"
+          }}
+          aria-hidden
+        />
+        {item.image && (
+          <img
+            loading="lazy"
+            decoding="async"
+            alt=""
+            src={item.image}
+            className={`absolute inset-0 h-full w-full opacity-75 transition-opacity duration-300 group-hover/card:opacity-100 ${
+              item.image.endsWith(".svg") ? "object-contain" : "object-cover object-center"
+            }`}
+          />
+        )}
+        {/* Fade overlay */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(to bottom, rgba(0,0,0,0) 70%, #000000 100%)",
+          }}
+        />
+      </div>
+
+      {/* Step number — positioned overlapping the image bottom */}
+      <span
+        className={`${gilroyMedium.className} pointer-events-none absolute bg-clip-text text-[50px] leading-[50px] font-medium text-transparent opacity-50 not-italic whitespace-nowrap min-[1280px]:text-[60px] min-[1280px]:leading-[60px]`}
+        style={{
+          left: 16,
+          top: 155,
+          backgroundImage: STEP_NUMBER_GRADIENT,
+          WebkitBackgroundClip: "text",
+          backgroundClip: "text",
+        }}
+        aria-hidden
+      >
+        {item.number}
+      </span>
+
+      {/* Title + description */}
+      <div className="relative z-10 flex w-full flex-col items-start gap-[12px] not-italic [word-break:break-word] mt-[24px] flex-1">
+        <h3
+          className={`${gilroyMedium.className} w-full shrink-0 text-[18px] leading-[24px] font-medium text-white min-[1280px]:text-[22px] min-[1280px]:leading-[28px]`}
+        >
+          {item.title}
+        </h3>
+
+        <p
+          className={`${interRegular.className} w-full text-[13px] leading-[20px] font-normal text-[#99a1af] tracking-[-0.3px] [word-break:break-word] min-[1280px]:text-[16px] min-[1280px]:leading-[24px]`}
+        >
+          {item.description}
+        </p>
+      </div>
+
+      <Corners />
+    </article>
+  );
+}
+
 export function ApplicationsPageModelZoo({
   data,
   variant = "cards",
+  slug,
 }: {
   data?: any;
   variant?: "strip" | "cards";
+  slug?: string;
 }) {
+  const isSmartHome = Boolean(
+    slug && (slug === "smarthomes" || slug === "smart-homes" || slug.includes("home"))
+  );
+  const isWearables = Boolean(
+    !slug || slug === "wearables" || slug.includes("wearable")
+  );
+
+  const eyebrow = isSmartHome
+    ? SMART_HOME_EYEBROW
+    : isWearables
+      ? WEARABLES_EYEBROW
+      : EYEBROW;
+  const heading = isSmartHome
+    ? SMART_HOME_HEADING
+    : isWearables
+      ? WEARABLES_HEADING
+      : HEADING;
+  const subtitle = isSmartHome
+    ? SMART_HOME_SUBTITLE
+    : isWearables
+      ? WEARABLES_SUBTITLE
+      : SUBTITLE;
+  const primaryCta = { label: "Explore the Model Zoo →", href: "/model-zoo" };
+  const features = isSmartHome
+    ? SMART_HOME_FEATURES
+    : isWearables
+      ? WEARABLES_FEATURES
+      : null;
+
   return (
     <section className="relative flex w-full flex-col items-center overflow-hidden bg-black pt-[100px] pb-[80px]">
       
@@ -266,7 +468,7 @@ export function ApplicationsPageModelZoo({
           <p
             className={`${dmMono.className} relative text-[16px] leading-[24px] uppercase tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] not-italic`}
           >
-            {EYEBROW}
+            {eyebrow}
           </p>
           <div className="absolute left-[6.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
           <div className="absolute right-[6.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
@@ -277,20 +479,22 @@ export function ApplicationsPageModelZoo({
             className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] min-[1024px]:text-[46px] leading-[1.2] font-medium text-transparent not-italic`}
             style={{ backgroundImage: TITLE_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
           >
-            {HEADING}
+            {heading}
           </h2>
           <Corners />
         </div>
 
         <p className={`${interRegular.className} max-w-[800px] text-[16px] min-[1024px]:text-[16px] leading-[24px] min-[1024px]:leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic`}>
-          {SUBTITLE}
+          {subtitle}
         </p>
 
         {/* CTA Row */}
-        <div className="mt-[16px] flex w-full min-[1024px]:w-auto flex-col min-[1024px]:flex-row items-center justify-center gap-[16px]">
-          <PrimaryCta label={PRIMARY_CTA.label} href={PRIMARY_CTA.href} />
-          <SecondaryCta label={SECONDARY_CTA.label} href={SECONDARY_CTA.href} />
-        </div>
+        {!isSmartHome && !isWearables && (
+          <div className="mt-[16px] flex w-full min-[1024px]:w-auto flex-col min-[1024px]:flex-row items-center justify-center gap-[16px]">
+            <PrimaryCta label={primaryCta.label} href={primaryCta.href} />
+            <SecondaryCta label={SECONDARY_CTA.label} href={SECONDARY_CTA.href} />
+          </div>
+        )}
       </div>
 
       {variant === "strip" ? (
@@ -309,8 +513,22 @@ export function ApplicationsPageModelZoo({
             duration={26}
           />
         </div>
+      ) : features ? (
+        /* Hardcoded feature cards for Wearables & Smart Homes */
+        <div className="relative z-10 mt-[60px] w-full py-[24px] px-[24px] min-[1024px]:px-[64px] min-[1024px]:py-[32px] max-w-[1440px]">
+          <div className="flex w-full flex-wrap min-[1024px]:flex-nowrap justify-center gap-[16px] sm:gap-[24px]">
+            {features.map((item) => (
+              <div
+                key={item.title}
+                className="w-full sm:w-[calc(50%-12px)] min-[1024px]:w-[calc(20%-19.2px)] max-w-[400px] min-[1024px]:max-w-none"
+              >
+                <FeatureCard item={item} />
+              </div>
+            ))}
+          </div>
+        </div>
       ) : (
-        /* Partner cards on the application slug pages */
+        /* Partner cards on other application slug pages */
         <div className="relative z-10 mt-[60px] w-full py-[24px] px-[24px] min-[1024px]:px-[64px] min-[1024px]:py-[32px] max-w-[1440px]">
           <div className="flex w-full flex-wrap min-[1024px]:flex-nowrap justify-center gap-[16px] sm:gap-[24px]">
             {PARTNERS_WHY.journey.map((step) => (

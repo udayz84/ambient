@@ -62,6 +62,7 @@ export function ContactBookingPopup({
   open,
   meetingTitle,
   meetingDescription,
+  recipientEmail,
   onClose,
   onBooked,
   config,
@@ -69,6 +70,7 @@ export function ContactBookingPopup({
   open: boolean;
   meetingTitle: string;
   meetingDescription: string;
+  recipientEmail?: string;
   /** Popup entry (contact-page booking_form): confirm label + recipients. */
   config?: any;
   onClose: () => void;
@@ -173,6 +175,7 @@ export function ContactBookingPopup({
           bookingDate: `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, "0")}-${String(selectedDate.getDate()).padStart(2, "0")}`,
           timeSlot: selectedTime,
           timeZone: timeZoneLabel,
+          recipientEmail,
           popupId: config?.documentId,
         }),
       }).catch(() => null);

@@ -17,8 +17,8 @@ import { getFormRecipients } from "@/lib/form-recipients";
 const STRAPI_URL = (
   process.env.STRAPI_URL ||
   process.env.NEXT_PUBLIC_STRAPI_URL ||
-  "http://localhost:1338"
-).replace(/\/$/, "");
+  "http://127.0.0.1:1338"
+).replace(/\/$/, "").replace("localhost", "127.0.0.1");
 
 function bad(error: string, status = 422) {
   return NextResponse.json({ ok: false, error }, { status });
@@ -37,6 +37,7 @@ export async function POST(req: Request): Promise<Response> {
   const bookingDate = String(body.bookingDate ?? "").trim();
   const timeSlot = String(body.timeSlot ?? "").trim().slice(0, 50);
   const timeZone = String(body.timeZone ?? "").trim().slice(0, 120);
+  const requestedRecipient = String(body.recipientEmail ?? "").trim();
 
   if (!meetingTitle) {
     return bad("Meeting title is required.");
@@ -61,6 +62,17 @@ export async function POST(req: Request): Promise<Response> {
   // Per-form recipients from the popup entry (empty → global Mail Setting / MAIL_TO)
   const formRecipients = await getFormRecipients(popupId);
 
+  // Left card (Technical / FAE) -> saharsh@ambientscientific.ai
+  // Right card (Commercial) -> chandra@ambientscientific.ai
+  const titleLower = meetingTitle.toLowerCase();
+  const defaultRecipient = titleLower.includes("commercial")
+    ? "chandra@ambientscientific.ai"
+    : "saharsh@ambientscientific.ai";
+
+  const resolvedRecipient = requestedRecipient || defaultRecipient;
+  const toList = formRecipients.length > 0 ? formRecipients : [resolvedRecipient];
+  const ccList = ["udayznanam@gmail.com"];
+
   const mailPayload = () => {
     const prettyDate = new Date(`${bookingDate}T00:00:00`).toLocaleDateString("en-GB", {
       weekday: "long",
@@ -70,7 +82,8 @@ export async function POST(req: Request): Promise<Response> {
     });
     return {
       formName: "Calendar Booking",
-      to: formRecipients,
+      to: toList,
+      cc: ccList,
       fields: [
         { label: "Meeting", value: meetingTitle },
         { label: "Date", value: prettyDate },
@@ -86,6 +99,7 @@ export async function POST(req: Request): Promise<Response> {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ data }),
+      signal: AbortSignal.timeout(4000),
     });
 
     if (!res.ok) {

@@ -111,7 +111,7 @@ function ProductsMegaMenu({
   }
   return (
     <div
-      className="relative w-max min-w-[800px] max-w-[1200px] border-[0.5px] border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.98)] backdrop-blur-3xl"
+      className="relative w-max min-w-[800px] max-w-[1200px] border-[0.5px] border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.98)]"
       data-node-id="4625:8704"
       data-name="Dropdown"
     >
@@ -193,6 +193,11 @@ const NAV_ICON_BY_LABEL: Record<string, string> = {
   wearables: "/navbar/nav-icon-wearables.svg",
   "smart homes": "/navbar/nav-icon-smart-homes.svg",
   "medical devices": "/navbar/nav-icon-medical.svg",
+  medical: "/navbar/nav-icon-medical.svg",
+  drones: "/navbar/nav-icon-chip.svg",
+  robotics: "/navbar/nav-icon-chip.svg",
+  automotives: "/navbar/nav-icon-chip.svg",
+  automotive: "/navbar/nav-icon-chip.svg",
   "resources centre": "/navbar/nav-icon-chip.svg",
   "resources center": "/navbar/nav-icon-chip.svg",
   resources: "/navbar/nav-icon-chip.svg",
@@ -225,24 +230,23 @@ function NavIconDropdown({
 }: {
   item: {
     label?: string;
-    children?: { label: string; href: string; icon?: string }[];
+    children?: { label: string; href: string; icon?: string; disabled?: boolean; comingSoon?: boolean }[];
   };
   onNavigate: () => void;
   compact?: boolean;
 }) {
   const children = Array.isArray(item?.children) ? item.children : [];
-  const width = compact ? 220 : 242;
+  const width = compact ? 240 : 252;
   const pad = compact ? 24 : 30;
   const gap = compact ? 20 : 24;
   const iconSize = compact ? 20 : 24;
   const fontSize = compact ? 14 : 16;
   const leading = compact ? 21 : 24;
   const itemGap = compact ? 8 : 10;
-  const dividerWidth = compact ? 172 : 182;
 
   return (
     <div
-      className="relative border-[0.5px] border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.98)] backdrop-blur-3xl"
+      className="relative border-[0.5px] border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.98)]"
       style={{ width }}
     >
       <div className="pointer-events-none absolute inset-0">
@@ -250,41 +254,87 @@ function NavIconDropdown({
       </div>
       <div className="relative flex flex-col" style={{ padding: pad, gap }}>
         {children.length > 0 ? (
-          children.map((child) => (
-            <Link
-              key={child.label}
-              href={child.href}
-              onClick={onNavigate}
-              className="group flex flex-col"
-              style={{ gap: itemGap }}
-            >
-              <div className="flex items-center gap-[6px]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={navIconFor(child.label, child.href, child.icon)}
-                  alt=""
-                  className="shrink-0"
-                  style={{ width: iconSize, height: iconSize }}
-                  aria-hidden
-                />
-                <span
-                  className={`${interRegular.className} max-w-full whitespace-nowrap font-normal text-[#f0f0f0] overflow-hidden text-ellipsis transition-colors group-hover:text-white`}
-                  style={{ fontSize, lineHeight: `${leading}px` }}
+          children.map((child) => {
+            const isDisabled = child.disabled || child.comingSoon;
+
+            if (isDisabled) {
+              return (
+                <div
+                  key={child.label}
+                  className="relative flex flex-col cursor-not-allowed select-none opacity-50"
+                  style={{ gap: itemGap }}
+                  aria-disabled="true"
                 >
-                  {child.label}
-                </span>
-              </div>
-              <div style={{ width: dividerWidth }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/navbar/nav-divider.svg"
-                  alt=""
-                  className="block h-[1px] w-full"
-                  aria-hidden
-                />
-              </div>
-            </Link>
-          ))
+                  <div className="flex items-center justify-between w-full">
+                    <div className="flex items-center gap-[6px]">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={navIconFor(child.label, child.href, child.icon)}
+                        alt=""
+                        className="shrink-0 grayscale opacity-80"
+                        style={{ width: iconSize, height: iconSize }}
+                        aria-hidden
+                      />
+                      <span
+                        className={`${interRegular.className} max-w-full whitespace-nowrap font-normal text-[#f0f0f0]`}
+                        style={{ fontSize, lineHeight: `${leading}px` }}
+                      >
+                        {child.label}
+                      </span>
+                    </div>
+                    <span className="text-[10px] leading-[14px] font-medium tracking-wide text-[#a8ed90] bg-[#a8ed90]/10 border border-[#a8ed90]/25 rounded-[3px] px-[6px] py-[1px] uppercase whitespace-nowrap">
+                      Coming soon
+                    </span>
+                  </div>
+                  <div className="w-full">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/navbar/nav-divider.svg"
+                      alt=""
+                      className="block h-[1px] w-full"
+                      aria-hidden
+                    />
+                  </div>
+                </div>
+              );
+            }
+
+            return (
+              <Link
+                key={child.label}
+                href={child.href}
+                onClick={onNavigate}
+                className="group flex flex-col"
+                style={{ gap: itemGap }}
+              >
+                <div className="flex items-center gap-[6px]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={navIconFor(child.label, child.href, child.icon)}
+                    alt=""
+                    className="shrink-0"
+                    style={{ width: iconSize, height: iconSize }}
+                    aria-hidden
+                  />
+                  <span
+                    className={`${interRegular.className} max-w-full whitespace-nowrap font-normal text-[#f0f0f0] overflow-hidden text-ellipsis transition-colors group-hover:text-white`}
+                    style={{ fontSize, lineHeight: `${leading}px` }}
+                  >
+                    {child.label}
+                  </span>
+                </div>
+                <div className="w-full">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/navbar/nav-divider.svg"
+                    alt=""
+                    className="block h-[1px] w-full"
+                    aria-hidden
+                  />
+                </div>
+              </Link>
+            );
+          })
         ) : (
           <div className="text-[14px] text-white/50 italic">Coming soon</div>
         )}

@@ -3,6 +3,8 @@ export type NavSubItem = {
   href: string;
   /** Optional icon URL (used by application pages uploaded in the CMS). */
   icon?: string;
+  disabled?: boolean;
+  comingSoon?: boolean;
 };
 
 export type NavMegaColumn = {
@@ -151,27 +153,50 @@ export function buildApplicationChildren(
     .map(({ label, href, icon }) => ({ label, href, icon }));
 }
 
+export const HARDCODED_COMING_SOON_APPLICATIONS: NavSubItem[] = [
+  { label: "Drones", href: "#", disabled: true, comingSoon: true },
+  { label: "Robotics", href: "#", disabled: true, comingSoon: true },
+  { label: "Automotives", href: "#", disabled: true, comingSoon: true },
+  { label: "Medical", href: "#", disabled: true, comingSoon: true },
+];
+
 const APPLICATION_PARENT_LABELS = new Set(["application", "applications"]);
 
 /**
  * Replace the children of the "Application(s)" nav item with the ones derived
- * from the collection. When no pages are available (fetch failed / empty), the
- * manually configured Strapi children are kept as-is.
+ * from the collection, and append hardcoded Coming Soon items under them.
  */
 export function mergeApplicationNavItems(
   navItems: NavItem[],
   applicationPages: ApplicationPageSummary[] | undefined | null,
 ): NavItem[] {
   if (!Array.isArray(navItems)) return [];
-  if (!Array.isArray(applicationPages) || applicationPages.length === 0) {
-    return navItems;
-  }
-  const children = buildApplicationChildren(applicationPages);
-  return navItems.map((item) =>
-    APPLICATION_PARENT_LABELS.has(item.label.toLowerCase())
-      ? { ...item, hasChevron: true, children }
-      : item
-  );
+
+  const baseChildren =
+    Array.isArray(applicationPages) && applicationPages.length > 0
+      ? buildApplicationChildren(applicationPages)
+      : undefined;
+
+  return navItems.map((item) => {
+    if (!APPLICATION_PARENT_LABELS.has(item.label.toLowerCase().trim())) {
+      return item;
+    }
+    const strapiChildren = baseChildren ?? item.children ?? [];
+    const existingLabels = new Set(
+      strapiChildren.map((c) => c.label.toLowerCase().trim())
+    );
+    const comingSoonToAdd = HARDCODED_COMING_SOON_APPLICATIONS.filter(
+      (cs) => !existingLabels.has(cs.label.toLowerCase().trim())
+    );
+
+    const children = [...strapiChildren, ...comingSoonToAdd];
+
+    return {
+      ...item,
+      hasChevron: true,
+      children,
+    };
+  });
 }
 
 /** Keyword-matched icons for auto-generated application entries. */

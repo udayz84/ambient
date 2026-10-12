@@ -90,7 +90,7 @@ export function Dvk({ data, formConfig }: { data?: any; formConfig?: any }) {
 
 
       {/* MOBILE (<1024px) — stacked layout */}
-      <DvkHeroMobile data={data?.hero} />
+      <DvkHeroMobile data={data?.hero} formConfig={formConfig} />
       <div className="min-[1024px]:hidden">
         {data?.inside_module ? <SomInsideModule data={data.inside_module} /> : null}
       </div>
@@ -119,7 +119,7 @@ export function Dvk({ data, formConfig }: { data?: any; formConfig?: any }) {
  * Board image 4059:10015 (0, 268 / 393×360)
  * CTA 4059:10016 (72, 652 / 250×48)
  */
-function DvkHeroMobile({ data }: { data?: any }) {
+function DvkHeroMobile({ data, formConfig }: { data?: any; formConfig?: any }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const title =
     data?.title || "The physical launchpad for microwatt Edge AI.";

@@ -128,6 +128,7 @@ export function CareersApplicationModal({
             roles={roles}
             onClose={handleClose}
             onSubmit={() => setStep("confirmation")}
+            config={config}
           />
         )}
 
@@ -250,11 +251,13 @@ function FormStep({
   roles,
   onClose,
   onSubmit,
+  config,
 }: {
   jobTitle?: string;
   roles?: string[];
   onClose: () => void;
   onSubmit: () => void;
+  config?: any;
 }) {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");

@@ -60,15 +60,15 @@ export default async function SomPage() {
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       <SomHero data={data?.hero} />
       <SomFeatures data={data?.features} />
-      <SomFamily data={data?.family} config={data?.upcoming_form} />
+      <SomFamily data={data?.family} />
       <SomOneModule data={data?.one_module} />
-      <SomDeployPath data={data?.deploy_path} config={data?.som_form} />
+      <SomDeployPath data={data?.deploy_path} />
       {/* <SomEcosystem data={data?.ecosystem} /> */}
 
       <SomIntelligence data={data?.intelligence} />
       {/* <SomProvenCore /> */}
-      <SomReadyToDeploy data={data?.ready_to_deploy} config={data?.som_form} />
-      <SomFooterMerge data={data?.footer_merge} config={data?.brief_form} />
+      <SomReadyToDeploy data={data?.ready_to_deploy} />
+      <SomFooterMerge data={data?.footer_merge} />
     </main>
   );
 }

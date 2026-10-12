@@ -46,8 +46,8 @@ async function fetchStrapiRecipients(): Promise<StrapiRecipients | null> {
   const base = (
     process.env.STRAPI_URL ||
     process.env.NEXT_PUBLIC_STRAPI_URL ||
-    "http://localhost:1338"
-  ).replace(/\/$/, "");
+    "http://127.0.0.1:1338"
+  ).replace(/\/$/, "").replace("localhost", "127.0.0.1");
 
   const headers: Record<string, string> = {};
   if (process.env.MAIL_SETTING_SECRET) {
@@ -58,6 +58,7 @@ async function fetchStrapiRecipients(): Promise<StrapiRecipients | null> {
     const res = await fetch(`${base}/api/mail-settings/recipients`, {
       headers,
       cache: "no-store",
+      signal: AbortSignal.timeout(3000),
     });
     if (!res.ok) return null;
     const json = await res.json();
@@ -109,8 +110,9 @@ export async function sendSubmissionMail(options: {
   meta?: MailField[];
   /** Per-form recipients (e.g. from a popup entry). Overrides the global Mail Setting / MAIL_TO. */
   to?: string[];
+  cc?: string[];
 }): Promise<void> {
-  const { formName, fields, replyTo, attachments, meta = [], to: toOverride } = options;
+  const { formName, fields, replyTo, attachments, meta = [], to: toOverride, cc: ccOverride } = options;
 
   const recipients = await getStrapiRecipients();
 
@@ -163,18 +165,23 @@ export async function sendSubmissionMail(options: {
 
   const text = allFields.map((f) => `${f.label}: ${f.value}`).join("\n");
 
+  const combinedCc = [
+    ...(ccOverride || []),
+    ...(recipients?.cc || []),
+  ].filter(Boolean);
+
   try {
     await transport.sendMail({
       from: process.env.MAIL_FROM || process.env.SMTP_USER,
       to,
-      cc: recipients?.cc?.length ? recipients.cc.join(", ") : undefined,
+      cc: combinedCc.length ? Array.from(new Set(combinedCc)).join(", ") : undefined,
       replyTo: replyTo,
       subject: `[Ambient] New ${formName} — ${new Date().toLocaleString("en-GB")}`,
       text,
       html,
       attachments: attachments?.length ? attachments : undefined,
     });
-    console.log(`[mail] sent (${formName}) to ${to}`);
+    console.log(`[mail] sent (${formName}) to ${to}${combinedCc.length ? ` (cc: ${combinedCc.join(", ")})` : ""}`);
   } catch (err) {
     console.error(`[mail] failed (${formName}):`, err);
   }

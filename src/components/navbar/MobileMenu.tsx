@@ -154,7 +154,7 @@ export function MobileMenu({
           >
             <div
               onClick={close}
-              className={`absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-300 ${
+              className={`absolute inset-0 bg-black/75 transition-opacity duration-300 ${
                 open ? "pointer-events-auto opacity-100" : "opacity-0"
               }`}
             />
@@ -250,11 +250,26 @@ export function MobileMenu({
                         </div>
                         <div
                           className={`overflow-hidden transition-[max-height] duration-300 ease-out ${
-                            isExpanded ? "max-h-[400px]" : "max-h-0"
+                            isExpanded ? "max-h-[600px]" : "max-h-0"
                           }`}
                         >
                           <ul className="pb-[8px] pl-[16px]">
                             {item.children.map((child) => {
+                              if (child.comingSoon || child.disabled) {
+                                return (
+                                  <li key={child.label}>
+                                    <div className="flex items-center justify-between py-[10px] pr-[16px] text-[14px] leading-[normal] tracking-[-0.42px] opacity-50 cursor-not-allowed select-none">
+                                      <span className="text-white/60">
+                                        {child.label}
+                                      </span>
+                                      <span className="text-[10px] leading-[14px] font-medium tracking-wide text-[#a8ed90] bg-[#a8ed90]/10 border border-[#a8ed90]/25 rounded-[3px] px-[6px] py-[1px] uppercase">
+                                        Coming soon
+                                      </span>
+                                    </div>
+                                  </li>
+                                );
+                              }
+
                               const childActive =
                                 child.href !== "#" && pathname === child.href;
                               return (

@@ -37,25 +37,51 @@ export type PartnerRowConfig = {
   };
 };
 
-export const SILICON_PARTNERS: readonly PartnerLogo[] = [
-  { src: "/ecosystem/logo-partner-1.svg", width: 86, height: 23 },
-  { src: "/ecosystem/logo-partner-2.svg", width: 120, height: 22 },
-  { src: "/ecosystem/logo-partner-3.svg", width: 81, height: 19 },
+export type PartnerItem = {
+  name: string;
+  src: string;
+  width: number;
+  height: number;
+};
+
+export type CarouselSlot = {
+  isRevealed: boolean;
+  name?: string;
+  src?: string;
+  width?: number;
+  height?: number;
+};
+
+export const CAROUSEL_1_PARTNERS: readonly PartnerItem[] = [
+  { name: "TSMC", src: "/ecosystem/partners/tsmc.jpeg", width: 500, height: 376 },
+  { name: "CELUS", src: "/ecosystem/partners/celus.jpeg", width: 632, height: 316 },
+  { name: "EdgeAI Foundation", src: "/ecosystem/partners/edgeai.jpeg", width: 225, height: 225 },
 ];
 
-export const SILICON_PARTNERS_FALLBACK: readonly PartnerLogo[] = [
-  ...SILICON_PARTNERS,
-  { src: "/ecosystem/logo-partner-4.svg", width: 35, height: 35 },
-  { src: "/ecosystem/logo-octane.svg", width: 35, height: 35 },
+export const CAROUSEL_2_PARTNERS: readonly PartnerItem[] = [
+  { name: "GRINN", src: "/ecosystem/partners/grinn.jpeg", width: 220, height: 124 },
+  { name: "ZALMOTEK", src: "/ecosystem/partners/zalmotek.jpeg", width: 280, height: 280 },
 ];
 
-export const DEVELOPMENT_PARTNERS_FALLBACK: readonly PartnerLogo[] = [
-  { src: "/ecosystem/logo-partner-4.svg", width: 35, height: 35 },
-  { src: "/ecosystem/logo-octane.svg", width: 35, height: 35 },
-  { src: "/ecosystem/logo-partner-1.svg", width: 86, height: 23 },
-  { src: "/ecosystem/logo-partner-2.svg", width: 120, height: 22 },
-  { src: "/ecosystem/logo-partner-3.svg", width: 81, height: 19 },
+export const CAROUSEL_1_SLOTS: readonly CarouselSlot[] = [
+  { isRevealed: true, name: "TSMC", src: "/ecosystem/partners/tsmc.jpeg", width: 500, height: 376 },
+  { isRevealed: true, name: "CELUS", src: "/ecosystem/partners/celus.jpeg", width: 632, height: 316 },
+  { isRevealed: true, name: "EdgeAI Foundation", src: "/ecosystem/partners/edgeai.jpeg", width: 225, height: 225 },
+  { isRevealed: false },
+  { isRevealed: false },
 ];
+
+export const CAROUSEL_2_SLOTS: readonly CarouselSlot[] = [
+  { isRevealed: true, name: "GRINN", src: "/ecosystem/partners/grinn.jpeg", width: 220, height: 124 },
+  { isRevealed: true, name: "ZALMOTEK", src: "/ecosystem/partners/zalmotek.jpeg", width: 280, height: 280 },
+  { isRevealed: false },
+  { isRevealed: false },
+  { isRevealed: false },
+];
+
+export const SILICON_PARTNERS: readonly PartnerLogo[] = CAROUSEL_1_PARTNERS;
+export const SILICON_PARTNERS_FALLBACK: readonly PartnerLogo[] = CAROUSEL_1_PARTNERS;
+export const DEVELOPMENT_PARTNERS_FALLBACK: readonly PartnerLogo[] = CAROUSEL_2_PARTNERS;
 
 export const SILICON_PARTNER_ROW: PartnerRowConfig = {
   rowNodeId: "2379:1052",
@@ -113,38 +139,33 @@ export function resolvePartners(
   partners: readonly EcosystemPartner[] | undefined | null,
   fallbackLogos?: readonly PartnerLogo[]
 ): ResolvedPartner[] {
-  void fallbackLogos;
+  if (Array.isArray(partners) && partners.length > 0) {
+    const result = partners.map((p, i) => {
+      const slot = fallbackLogos?.[i % fallbackLogos.length] ?? SLOT_DIMENSIONS[i % SLOT_DIMENSIONS.length] ?? DEFAULT_SLOT;
+      const url = mediaUrl(p?.logo);
+      return {
+        src: url || "",
+        width: p?.logo?.width || slot.width,
+        height: p?.logo?.height || slot.height,
+        name: p?.name || null,
+      };
+    });
+    return result;
+  }
 
-  if (!partners || partners.length === 0) {
-    return SLOT_DIMENSIONS.map((slot) => ({
-      src: slot.src,
-      width: slot.width,
-      height: slot.height,
+  if (fallbackLogos && fallbackLogos.length > 0) {
+    return fallbackLogos.map((logo) => ({
+      src: logo.src,
+      width: logo.width,
+      height: logo.height,
       name: null,
     }));
   }
 
-  const result = partners.map((p, i) => {
-    const slot = SLOT_DIMENSIONS[i % SLOT_DIMENSIONS.length] ?? DEFAULT_SLOT;
-    const url = mediaUrl(p?.logo);
-    return {
-      src: url || "",
-      width: p?.logo?.width || slot.width,
-      height: p?.logo?.height || slot.height,
-      name: p?.name || null,
-    };
-  });
-
-  // Pad to at least 5 slots to maintain the grid design
-  while (result.length < 5) {
-    const slot = SLOT_DIMENSIONS[result.length];
-    result.push({
-      src: "",
-      width: slot.width,
-      height: slot.height,
-      name: null,
-    });
-  }
-
-  return result;
+  return SLOT_DIMENSIONS.map((slot) => ({
+    src: slot.src,
+    width: slot.width,
+    height: slot.height,
+    name: null,
+  }));
 }

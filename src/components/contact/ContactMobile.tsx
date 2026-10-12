@@ -441,7 +441,7 @@ const SCHEDULE_CARDS = [
   },
 ];
 
-function ContactScheduleMobile({ data }: { data?: any }) {
+function ContactScheduleMobile({ data, bookingForm }: { data?: any; bookingForm?: any }) {
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
 
   const [bookingCard, setBookingCard] = useState<number | null>(null);
@@ -571,6 +571,13 @@ function ContactScheduleMobile({ data }: { data?: any }) {
             ? mergedCards[bookingCard]?.description ||
               "This is an example of a meeting you would have with a potential customer to demonstrate your product."
             : ""
+        }
+        recipientEmail={
+          bookingCard === null
+            ? undefined
+            : bookingCard % 2 === 1
+              ? "chandra@ambientscientific.ai"
+              : "saharsh@ambientscientific.ai"
         }
         onClose={() => setBookingCard(null)}
         onBooked={(label) => {
@@ -864,7 +871,7 @@ export function ContactMobile({ data, bookingForm }: { data?: any; bookingForm?:
   return (
     <div className="flex w-full flex-col">
       <ContactHeroMobile data={data} />
-      <ContactScheduleMobile data={data?.schedule} />
+      <ContactScheduleMobile data={data?.schedule} bookingForm={bookingForm} />
       <ContactMapMobile data={data?.map} />
       <ContactFormMobile data={data?.form} />
     </div>
