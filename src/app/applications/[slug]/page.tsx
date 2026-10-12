@@ -125,7 +125,9 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
       {data?.empirical_proof && (
         <WearablesEmpiricalProof data={data.empirical_proof} slug={strapiSlug} />
       )}
-      {data?.subconscious && <WearablesSubconscious data={data.subconscious} />}
+      {data?.subconscious && (
+        <WearablesSubconscious data={data.subconscious} slug={strapiSlug} />
+      )}
       {data?.lab_to_product && (
         <WearablesLabToProduct data={data.lab_to_product} />
       )}

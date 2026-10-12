@@ -19,6 +19,25 @@ const FALLBACK_OVERLAY_TEXT = "Zzzz..";
 const CARD_BORDER =
   "border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] overflow-clip";
 
+const INDUSTRIAL_HEADING = "The gateway sleeps. The machine is always watched.";
+const INDUSTRIAL_SUBTITLE =
+  "GPX processes thousands of sensor samples per second inside its always-on island, waking the industrial gateway only when a physical fault is classified.";
+
+const INDUSTRIAL_RIGHT_CARDS = [
+  {
+    title: "The Sleeping Gateway",
+    body: "The LoRaWAN / Wi-Fi gateway stays asleep; the Ambient engine handles real-time analysis.",
+  },
+  {
+    title: "Continuous Sensing",
+    body: "High-frequency vibration and thermal streams flow straight into the compute array, processed at the source.",
+  },
+  {
+    title: "Microwatt AI",
+    body: "Live telemetry proves heavy industrial compute running on a battery node.",
+  },
+];
+
 const RIGHT_CARDS = [
   {
     title: "The Sleeping Host",
@@ -68,17 +87,28 @@ function InfoCard({
   );
 }
 
-export function WearablesSubconscious({ data }: { data?: any }) {
+export function WearablesSubconscious({ data, slug }: { data?: any; slug?: string }) {
+  const isIndustrial = Boolean(
+    (slug && (slug === "industrial_iot" || slug === "industrial-iot" || slug.includes("industrial"))) ||
+    data?.heading?.includes("gateway sleeps") ||
+    data?.subtitle?.includes("industrial gateway")
+  );
+
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 1 });
   const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
 
-  const subtitle = data?.subtitle || "";
-  const heading = data?.heading || "";
-  const cardTitle = data?.card_title || "";
-  const cardImage = mediaUrl(data?.card_image) || "";
-  const overlayText = data?.overlay_text || "";
+  const heading = isIndustrial ? INDUSTRIAL_HEADING : (data?.heading || FALLBACK_HEADING);
+  const subtitle = isIndustrial ? INDUSTRIAL_SUBTITLE : (data?.subtitle || FALLBACK_SUBTITLE);
+  const cardTitle = isIndustrial ? "" : (data?.card_title || FALLBACK_CARD_TITLE);
+  const cardImage = isIndustrial
+    ? "/applications/industrial-iot/subconscious-diagram.jpg"
+    : (mediaUrl(data?.card_image) || FALLBACK_CARD_IMAGE);
+  const overlayText = isIndustrial ? "" : (data?.overlay_text || FALLBACK_OVERLAY_TEXT);
+
+  const fallbackCards = isIndustrial ? INDUSTRIAL_RIGHT_CARDS : RIGHT_CARDS;
   const dataCards: any[] = Array.isArray(data?.right_cards) ? data.right_cards : [];
-  const rightCards = RIGHT_CARDS.map((fb, i) => {
+  const rightCards = fallbackCards.map((fb, i) => {
+    if (isIndustrial) return fb;
     const c = dataCards[i];
     if (!c) return fb;
     return {
@@ -125,11 +155,11 @@ export function WearablesSubconscious({ data }: { data?: any }) {
         <div className="flex items-stretch justify-center gap-[24px]">
           {/* Left: Hardware Blueprint image card */}
           <div
-            className={`relative flex w-[567.58px] shrink-0 flex-col items-center gap-[20px] bg-[rgba(0,0,0,0.5)] pt-[10px] pb-[20px] px-[16px] ${CARD_BORDER}`}
+            className={`relative flex w-[567.58px] shrink-0 flex-col items-center justify-center gap-[20px] bg-[rgba(0,0,0,0.5)] pt-[10px] pb-[20px] px-[16px] ${CARD_BORDER}`}
             data-name="Article"
           >
             {/* Image */}
-            <div className="relative h-[428.617px] w-[535.58px] shrink-0" data-name="image">
+            <div className={`relative ${isIndustrial ? "h-[450px]" : "h-[428.617px]"} w-[535.58px] shrink-0`} data-name="image">
               {cardImage && <img loading="lazy" decoding="async"
                 alt=""
                 src={cardImage}
@@ -138,17 +168,21 @@ export function WearablesSubconscious({ data }: { data?: any }) {
               />}
             </div>
             {/* "Zzzz.." overlay on image */}
-            <p
-              className={`${interRegular.className} absolute left-[143.79px] top-[161.5px] -translate-x-1/2 whitespace-nowrap text-center text-[14px] leading-[20px] tracking-[-0.1504px] text-white not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
-            >
-              {overlayText}
-            </p>
+            {!isIndustrial && overlayText ? (
+              <p
+                className={`${interRegular.className} absolute left-[143.79px] top-[161.5px] -translate-x-1/2 whitespace-nowrap text-center text-[14px] leading-[20px] tracking-[-0.1504px] text-white not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+              >
+                {overlayText}
+              </p>
+            ) : null}
             {/* Title */}
-            <p
-              className={`${gilroyMedium.className} min-w-full w-[min-content] shrink-0 text-[22px] leading-[28px] text-white not-italic`}
-            >
-              {cardTitle}
-            </p>
+            {cardTitle ? (
+              <p
+                className={`${gilroyMedium.className} min-w-full w-[min-content] shrink-0 text-[22px] leading-[28px] text-white not-italic`}
+              >
+                {cardTitle}
+              </p>
+            ) : null}
             <Corners
               leftSrc="/applications/wearables/vector-42.svg"
               rightSrc="/applications/wearables/vector-43.svg"
@@ -204,11 +238,13 @@ export function WearablesSubconscious({ data }: { data?: any }) {
               aria-hidden
             />}
           </div>
-          <p
-            className={`${gilroyMedium.className} w-full shrink-0 text-[20px] leading-[26px] text-white not-italic`}
-          >
-            {cardTitle}
-          </p>
+          {cardTitle ? (
+            <p
+              className={`${gilroyMedium.className} w-full shrink-0 text-[20px] leading-[26px] text-white not-italic`}
+            >
+              {cardTitle}
+            </p>
+          ) : null}
           <Corners
             leftSrc="/applications/wearables/vector-42.svg"
             rightSrc="/applications/wearables/vector-43.svg"

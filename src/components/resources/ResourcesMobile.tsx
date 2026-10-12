@@ -292,11 +292,12 @@ function ResourcesFeaturedMobile({ data }: { data?: any } = {}) {
                     src={card.imageSrc}
                     alt=""
                     fill
-                    className={card.imageClassName || "object-cover"}
+                    className={`${card.imageClassName || "object-cover"} grayscale brightness-[0.22] contrast-[175%]`}
                     sizes="228px"
                   />
                 ) : null}
-                <div className="absolute inset-0 bg-gradient-to-b from-[rgba(25,25,25,0)] from-[79.181%] to-[#191919]" />
+                <div className="absolute inset-0 bg-black/40" />
+                <div className="absolute inset-0 bg-gradient-to-b from-[rgba(25,25,25,0)] from-[70%] to-[#191919]" />
               </div>
 
               <div className="relative flex h-[26px] w-[87px] shrink-0 items-center justify-center overflow-clip bg-white">
@@ -305,6 +306,17 @@ function ResourcesFeaturedMobile({ data }: { data?: any } = {}) {
                   {card.badgeLabel}
                 </span>
               </div>
+
+              {/* Center Silhouette "Revealing Soon" Badge */}
+              <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+                <div className="relative flex items-center justify-center border border-[#53d824]/40 bg-black/85 px-[12px] py-[6px] shadow-[0_0_20px_rgba(83,216,36,0.18)] backdrop-blur-md">
+                  <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
+                  <span className={`${dmMono.className} flex items-center gap-[6px] text-[10px] uppercase tracking-[0.1em] text-[#53d824]`}>
+                    <span className="size-[5px] rounded-full bg-[#53d824] animate-pulse" />
+                    <span>REVEALING SOON</span>
+                  </span>
+                </div>
+              </div>
             </div>
 
             <div className="flex w-full flex-col items-start gap-[24px] p-[16px]">
@@ -312,17 +324,16 @@ function ResourcesFeaturedMobile({ data }: { data?: any } = {}) {
                 <h3 className={`${gilroyMedium.className} w-[195px] text-[16px] leading-[21px] text-white opacity-90`}>
                   {card.title}
                 </h3>
-                <p className={`${interRegular.className} w-[195px] text-[12px] font-normal leading-[15px] text-[#a4a4a4] opacity-90`}>
+                <p className={`${interRegular.className} w-[195px] text-[12px] font-normal leading-[15px] text-[#a4a4a4] opacity-75`}>
                   {card.description}
                 </p>
               </div>
 
-              <div className="relative flex h-[48px] w-full shrink-0 items-center justify-center shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]">
-                <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
-                <div className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
+              <div className="relative flex h-[48px] w-full shrink-0 items-center justify-center border border-[#53d824]/30 bg-[#53d824]/10 shadow-[0_0_20px_rgba(83,216,36,0.12)]">
                 <GreenCtaCorners />
-                <span className={`${gilroyMedium.className} relative text-[12px] uppercase leading-[28px] text-white`}>
-                  {card.ctaLabel}
+                <span className={`${gilroyMedium.className} relative flex items-center gap-[6px] text-[12px] font-medium uppercase tracking-[0.08em] text-[#53d824]`}>
+                  <span className="size-[5px] rounded-full bg-[#53d824] animate-pulse" />
+                  REVEALING SOON
                 </span>
               </div>
             </div>
