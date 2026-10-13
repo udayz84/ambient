@@ -1,11 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import { useState } from "react";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { getFadeInClass, useFadeIn } from "../shared/useFadeIn";
 import { CtaPrimary, CtaSecondary } from "./ModelZooCtas";
 import { CORNER_LEFT, CORNER_RIGHT, sectionTitleGradient } from "./model-zoo-data";
+import { ProductBriefModal } from "../products-page/ProductBriefModal";
 
 const TITLE_GRADIENT = sectionTitleGradient(119.522);
 
@@ -78,7 +80,9 @@ function BuildItCard({ card }: { card: (typeof CARDS)[number] }) {
  * Figma 5131:10720 — "Don't see it? Build it." section
  * (1256-wide content at page x=92; y=6246, h=502).
  */
-export function ModelZooBuildIt() {
+export function ModelZooBuildIt({ formConfig }: { formConfig?: any }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <section
       className="relative mt-[100px] w-full bg-black"
@@ -116,10 +120,26 @@ export function ModelZooBuildIt() {
           {/* CTAs — 5131:10820 (437 wide, centered) */}
           <div className="flex flex-wrap items-start justify-center gap-[24px]" data-node-id="5131:10820">
             <CtaPrimary href="/developer" label="Explore the Developer Hub" width={251} />
-            <CtaSecondary label="Read the Docs" width={162} />
+            <CtaSecondary
+              label="Read the Docs"
+              width={162}
+              onClick={(e) => {
+                e.preventDefault();
+                setIsModalOpen(true);
+              }}
+            />
           </div>
         </div>
       </div>
+
+      <ProductBriefModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Technical Documentation"
+        pdfUrl="/Technical-Documents-Ambient-Scientific.zip"
+        pdfName="technical_document Ambient Scientific.zip"
+        config={formConfig}
+      />
     </section>
   );
 }

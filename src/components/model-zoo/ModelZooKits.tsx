@@ -19,6 +19,8 @@ const CARDS = [
     desc: "Request an eval kit and run any model from day one.",
     cta: "Request Eval Kit",
     ctaWidth: 200,
+    href: "/dvk",
+    isComingSoon: false,
   },
   {
     nodeId: "5246:6386",
@@ -28,6 +30,7 @@ const CARDS = [
     desc: "Download NuraSync and drive live demos from your phone.",
     cta: "Get NuraSync App",
     ctaWidth: 220,
+    isComingSoon: true,
   },
   {
     nodeId: "5246:6416",
@@ -35,8 +38,9 @@ const CARDS = [
     alt: "Model cards and code on GitHub",
     title: "Go deeper.",
     desc: "Browse the code and model cards on GitHub.",
-    cta: "GitHub Coming Soon",
-    ctaWidth: 220,
+    cta: "GitHub",
+    ctaWidth: 200,
+    isComingSoon: true,
   },
 ];
 
@@ -74,7 +78,25 @@ function KitCard({ card }: { card: (typeof CARDS)[number] }) {
       </div>
 
       <div className="mt-auto">
-        <CtaPrimary label={card.cta} width={card.ctaWidth} />
+        {card.isComingSoon ? (
+          <div
+            className="group/soon relative inline-flex cursor-not-allowed items-center justify-center overflow-hidden"
+            aria-disabled="true"
+          >
+            <div className="pointer-events-none transition-all duration-300 group-hover/soon:blur-[3px] group-hover/soon:opacity-25">
+              <CtaPrimary label={card.cta} width={card.ctaWidth} />
+            </div>
+            <div className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover/soon:opacity-100">
+              <span
+                className={`${gilroyMedium.className} text-[15px] font-medium uppercase tracking-[0.05em] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]`}
+              >
+                Coming Soon
+              </span>
+            </div>
+          </div>
+        ) : (
+          <CtaPrimary href={card.href} label={card.cta} width={card.ctaWidth} />
+        )}
       </div>
 
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />

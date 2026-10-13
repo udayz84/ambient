@@ -36,7 +36,7 @@ export function ModelZoo({ forms }: { forms?: any }) {
       <ModelZooLibrary requestForm={forms?.request} />
       <ModelZooAppForge formConfig={forms?.evalkit} {...MODEL_ZOO_APP_FORGE_PROPS} />
       <ModelZooSteps formConfig={forms?.sdk} />
-      <ModelZooBuildIt />
+      <ModelZooBuildIt formConfig={forms?.request} />
       <ModelZooKits />
 
       {/* MOBILE (<1024px) */}
