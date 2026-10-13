@@ -1334,7 +1334,7 @@ export interface HomePlatformScale extends Struct.ComponentSchema {
   };
   attributes: {
     cta: Schema.Attribute.Component<'shared.button', false>;
-    default_index: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<2>;
+    default_index: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     products: Schema.Attribute.Component<'home.gpx-product', true>;
     secondary_cta: Schema.Attribute.Component<'shared.button', false>;

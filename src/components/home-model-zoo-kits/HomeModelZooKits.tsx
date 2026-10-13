@@ -66,7 +66,7 @@ function KitCard({ card }: { card: KitCardData }) {
   return (
     <div
       ref={fadeRef}
-      className={`relative flex h-auto min-w-px w-full min-[1024px]:w-[385px] flex-col gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.7)] px-[20px] pt-[20px] pb-[32px] transition-colors duration-300 hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] min-[1024px]:min-h-[600px] ${getFadeInClass(isVisible)}`}
+      className={`relative flex h-auto min-w-px w-full min-[1024px]:w-[385px] flex-col gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.7)] px-[20px] pt-[20px] pb-[24px] transition-colors duration-300 hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] ${getFadeInClass(isVisible)}`}
       data-node-id={card.nodeId || "card"}
       data-name="Article"
     >
@@ -83,14 +83,7 @@ function KitCard({ card }: { card: KitCardData }) {
         </p>
       </div>
 
-      <div className="mt-auto">
-        <CtaPrimary
-          label={card.cta}
-          href={card.href || "#"}
-          width={card.ctaWidth || 240}
-          reducedShine
-        />
-      </div>
+
 
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
     </div>

@@ -93,13 +93,26 @@ export function WearablesSubconscious({ data, slug }: { data?: any; slug?: strin
     data?.heading?.includes("gateway sleeps") ||
     data?.subtitle?.includes("industrial gateway")
   );
+  const isHearables = Boolean(
+    (slug && (slug === "hearables" || slug.includes("hearable"))) ||
+    data?.heading?.includes("SoC sleeps") ||
+    data?.subtitle?.includes("Bluetooth/Audio SoC")
+  );
+  const isWearables = Boolean(
+    (slug && (slug === "wearables" || slug.includes("wearable"))) ||
+    data?.heading?.includes("host sleeps") ||
+    data?.subtitle?.includes("host processor")
+  );
 
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 1 });
   const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
 
   const heading = isIndustrial ? INDUSTRIAL_HEADING : (data?.heading || FALLBACK_HEADING);
   const subtitle = isIndustrial ? INDUSTRIAL_SUBTITLE : (data?.subtitle || FALLBACK_SUBTITLE);
-  const cardTitle = isIndustrial ? "" : (data?.card_title || FALLBACK_CARD_TITLE);
+  const cardTitle =
+    isIndustrial || isHearables || isWearables
+      ? (data?.card_title && data.card_title !== FALLBACK_CARD_TITLE ? data.card_title : "")
+      : (data?.card_title && data.card_title !== FALLBACK_CARD_TITLE ? data.card_title : "");
   const cardImage = isIndustrial
     ? "/applications/industrial-iot/subconscious-diagram.jpg"
     : (mediaUrl(data?.card_image) || FALLBACK_CARD_IMAGE);

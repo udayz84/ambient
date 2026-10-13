@@ -5,6 +5,7 @@ import { useMemo, useState, useEffect, useRef } from "react";
 import { dmMono, gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { getFadeInClass, useFadeIn } from "../shared/useFadeIn";
+import { TagBadge } from "../hero/TagBadge";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { CtaPrimary } from "./ModelZooCtas";
 import { ModelZooRequestForm } from "./ModelZooRequestForm";
@@ -20,48 +21,70 @@ const TITLE_GRADIENT = sectionTitleGradient(123.948);
 
 /* ------------------------------ model data ------------------------------ */
 
-type Spec = { label: string; value: string };
-
 type Model = {
   title: string;
   modality: string; // tag 1
   type: string; // tag 2
   img: string;
-  specs: Spec[];
+  desc: string;
+  videoId?: string; // YouTube id for the demo popup
+  comingSoon?: boolean;
 };
 
-const DEFAULT_SPECS: Spec[] = [
-  { label: "MEMORY", value: "64 KB" },
-  { label: "LATENCY / GPX10", value: "14 ms" },
-  { label: "ACTIVE POWER", value: "84 µW" },
-  { label: "ENERGY / INF.", value: "1.2 µJ" },
-];
-
-const CARD_DESC = "Recognize predefined keywords and voice commands using an always-on...";
-
-/** Figma 5131:9722 … 5422:6620 — six model cards. */
+/** Figma 5131:9722 — model cards. */
 const MODELS: Model[] = [
-  { title: "Anomaly Detection", modality: "audio", type: "open-source", img: "/model-zoo/grid-c1.webp", specs: DEFAULT_SPECS },
   {
-    title: "Keyword Spotting",
-    modality: "vision",
-    type: "open-source",
-    img: "/model-zoo/grid-c2.webp",
-    specs: [
-      { label: "MEMORY", value: "176 KB" },
-      { label: "LATENCY / GPX10", value: "28 ms" },
-      { label: "ACTIVE POWER", value: "210 µW" },
-      { label: "ENERGY / INF.", value: "5.8 µJ" },
-    ],
+    title: "Fall Detection",
+    modality: "motion",
+    type: "in-house",
+    img: "/model-zoo/fall-detection.webp",
+    videoId: "9HM7szuyXOs",
+    desc: "Detect falls and sudden posture changes from motion data for always-on safety monitoring and rapid incident detection.",
   },
-  { title: "Person / No-Person", modality: "audio", type: "open-source", img: "/model-zoo/grid-c3.webp", specs: DEFAULT_SPECS },
-  { title: "Voice Activity Detection", modality: "audio", type: "open-source", img: "/model-zoo/grid-c4.webp", specs: DEFAULT_SPECS },
-  { title: "Presence Detection", modality: "audio", type: "open-source", img: "/model-zoo/grid-c5.webp", specs: DEFAULT_SPECS },
-  { title: "Voice Signature Detection", modality: "audio", type: "open-source", img: "/model-zoo/grid-c6.webp", specs: DEFAULT_SPECS },
+  {
+    title: "Gesture Glider",
+    modality: "motion",
+    type: "in-house",
+    img: "/model-zoo/gesture-glider.webp",
+    videoId: "6Pn0PM5een4",
+    desc: "Control gameplay through natural wrist gestures, demonstrating responsive, real-time motion inference running entirely on-device.",
+  },
+  {
+    title: "Voice Activity Detection and Transcription",
+    modality: "audio",
+    type: "in-house",
+    img: "/model-zoo/voice-activity-detection.webp",
+    videoId: "N7GbCh7WCMM",
+    desc: "Detect when speech begins and transcribe spoken audio in real time for efficient, responsive voice applications.",
+  },
+  {
+    title: "Glass Break Detection",
+    modality: "audio",
+    type: "in-house",
+    img: "/model-zoo/glass-break-detection.webp",
+    videoId: "HV1rKxovOug",
+    desc: "Detect the distinctive acoustic signature of breaking glass for continuous, low-power home and security monitoring.",
+  },
+  {
+    title: "Daily Activity Recognition",
+    modality: "motion",
+    type: "in-house",
+    img: "/model-zoo/daily-activity-recognition.webp",
+    desc: "Classify everyday activities such as walking, sitting, standing, and movement patterns from continuous motion data.",
+    comingSoon: true,
+  },
+  {
+    title: "Wake Word Detection",
+    modality: "audio",
+    type: "in-house",
+    img: "/model-zoo/wake-word-detection.webp",
+    desc: "Detect a predefined wake phrase continuously at ultra-low power to activate downstream voice experiences only when needed.",
+    comingSoon: true,
+  },
 ];
 
-const MODALITIES = ["all", "audio", "vision", "motion"];
-const TYPES = ["all", "open-source", "ambient-built"];
+const MODALITIES = ["all", "audio", "motion"];
+const TYPES = ["all", "in-house"];
 
 /** Figma 5348:6508…6562 — "AI models" strip thumbnails (rendered as one row export). */
 
@@ -87,92 +110,130 @@ function Tag({ label, width }: { label: string; width: number }) {
   );
 }
 
-/** Figma 5131:9751 — spec cell (label + value in a bordered box). */
-function SpecCell({ spec }: { spec: Spec }) {
-  return (
-    <div className="relative flex h-[70px] flex-1 flex-col overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] p-[12px]" data-name="Article">
-      <div className="flex w-full flex-col items-start gap-[10px]">
-        <p className={`${interRegular.className} w-full text-[14px] leading-[17px] uppercase text-[#8e8e8e] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>{spec.label}</p>
-        <p className={`${interRegular.className} w-full text-[16px] leading-[19px] whitespace-nowrap text-white not-italic`}>{spec.value}</p>
-      </div>
-      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-    </div>
-  );
-}
-
-/** Figma 5131:9722 — model card (401.33×677). */
-function ModelCard({ model }: { model: Model }) {
+/** Figma 5131:9722 — model card. */
+function ModelCard({ model, onWatch }: { model: Model; onWatch: () => void }) {
   const { fadeRef, isVisible } = useFadeIn<HTMLElement>();
   return (
     <article
       ref={fadeRef}
-      className={`relative flex snap-center shrink-0 w-[280px] h-auto flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.04)] px-[12px] pt-[12px] pb-[24px] transition-colors duration-300 hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] min-[1024px]:w-full min-[1024px]:shrink min-[1024px]:h-[677.161px] ${getFadeInClass(isVisible)}`}
+      className={`relative flex snap-center shrink-0 w-[280px] h-auto flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(255,255,255,0.04)] px-[12px] pt-[12px] pb-[24px] transition-colors duration-300 hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] min-[1024px]:w-full min-[1024px]:shrink ${getFadeInClass(isVisible)}`}
       data-name="Article"
     >
-      <div className="h-[259.161px] w-full shrink-0 overflow-clip">
-        <img alt={model.title} src={model.img} className="pointer-events-none size-full object-cover" loading="lazy" decoding="async" />
+      <div className="relative h-[259.161px] w-full shrink-0 overflow-clip">
+        <img
+          alt={model.title}
+          src={model.img}
+          className="pointer-events-none size-full object-cover"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
 
       <div className="flex w-full flex-col items-start gap-[12px]">
-        <h3 className={`${gilroyMedium.className} h-[28px] w-[353.684px] max-w-full overflow-clip text-[22px] leading-[28px] text-white not-italic [word-break:break-word]`}>
+        <h3 className={`${gilroyMedium.className} w-[353.684px] max-w-full text-[22px] leading-[28px] text-white not-italic [word-break:break-word]`}>
           {model.title}
         </h3>
         <div className="flex w-full items-start gap-[20px]">
           <Tag label={model.modality} width={120} />
-          <Tag label={model.type} width={150} />
+          <Tag label={model.type} width={160} />
         </div>
         <p className={`${interRegular.className} w-[346.611px] max-w-full text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}>
-          {CARD_DESC} <span className="text-[#53d824]">read more</span>
+          {model.desc}
         </p>
       </div>
 
-      {/* Specs — 2×2 */}
-      <div className="flex w-full flex-col gap-[8px]">
-        <div className="flex w-full gap-[8px]">
-          <SpecCell spec={model.specs[0]} />
-          <SpecCell spec={model.specs[1]} />
-        </div>
-        <div className="flex w-full gap-[8px]">
-          <SpecCell spec={model.specs[2]} />
-          <SpecCell spec={model.specs[3]} />
-        </div>
-      </div>
-
-      {/* CTAs — 5131:9788 */}
-      <div className="flex w-full flex-row items-center gap-[8px] min-[1024px]:gap-[12px]">
-        {/* watch — green, flex-1, play icon at left 88 */}
-        <a
-          href="#"
-          className={`${PRIMARY_CTA_SHADOW} relative flex h-[48px] min-w-0 flex-1 items-center justify-center`}
-          data-name="Cta"
-          aria-label={`Watch ${model.title} demo`}
-        >
-          <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
-          <span className="relative flex items-center gap-[6px] min-[1024px]:gap-[10px] overflow-hidden px-[8px]">
-            <span className={`${gilroyMedium.className} truncate text-[14px] min-[1024px]:text-[16px] leading-[28px] font-medium uppercase text-white not-italic`}>
-              watch
+      {/* CTA — 5131:9788 */}
+      <div className="mt-auto flex w-full flex-row items-center justify-center gap-[8px] min-[1024px]:gap-[12px]">
+        {model.comingSoon ? (
+          <div
+            className={`relative flex h-[48px] items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] px-[24px] opacity-50`}
+            aria-label={`${model.title} demo coming soon`}
+          >
+            <span className={`${gilroyMedium.className} text-[14px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic min-[1024px]:text-[16px]`}>
+              Coming Soon
             </span>
-            <img alt="" src="/model-zoo/icon-play.svg" className="block h-[13.75px] w-[12.92px] shrink-0" />
-          </span>
-          <span aria-hidden className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
-          <GreenCtaCorners />
-        </a>
-        {/* download the doc — 5131:11246 (232×48) */}
-        <a
-          href="#"
-          className="relative flex h-[48px] min-w-0 flex-1 items-center justify-center gap-[6px] min-[1024px]:gap-[10px] overflow-clip bg-[rgba(226,241,202,0.12)] px-[8px] min-[1024px]:px-[20px] py-[10px]"
-          data-name="CTA - Primary"
-        >
-          <span className={`${gilroyMedium.className} truncate text-[13px] min-[1024px]:text-[16px] leading-[28px] font-medium uppercase text-white not-italic`}>
-            download doc
-          </span>
-          <img alt="" src="/model-zoo/icon-download.svg" className="size-[16px] min-[1024px]:size-[18px] shrink-0" />
-          <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-        </a>
+            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+          </div>
+        ) : (
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              onWatch();
+            }}
+            className={`${PRIMARY_CTA_SHADOW} relative flex h-[48px] items-center justify-center px-[24px]`}
+            data-name="Cta"
+            aria-label={`Watch ${model.title} demo`}
+          >
+            <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
+            <span className="relative flex items-center gap-[6px] min-[1024px]:gap-[10px] overflow-hidden px-[8px]">
+              <span className={`${gilroyMedium.className} truncate text-[14px] min-[1024px]:text-[16px] leading-[28px] font-medium uppercase text-white not-italic`}>
+                watch demo
+              </span>
+              <img alt="" src="/model-zoo/icon-play.svg" className="block h-[13.75px] w-[12.92px] shrink-0" />
+            </span>
+            <span aria-hidden className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
+            <GreenCtaCorners />
+          </a>
+        )}
       </div>
 
       <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
     </article>
+  );
+}
+
+/** Placeholder demo video — swap for per-model demos when they arrive. */
+const DEMO_VIDEO_ID = "aqz-KE-bpKQ";
+
+/** YouTube demo popup — same overlay pattern as the request form. */
+function VideoModal({ title, videoId, onClose }: { title: string; videoId?: string; onClose: () => void }) {
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") onClose();
+    }
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex animate-popup-backdrop-in items-center justify-center overflow-y-auto bg-black/80 p-[16px]"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${title} demo video`}
+    >
+      <div
+        className="relative my-auto flex max-h-full w-full max-w-[960px] flex-col gap-[16px] border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] bg-[#141414] p-[16px]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between gap-[16px]">
+          <h3 className={`${gilroyMedium.className} m-0 text-[22px] leading-[28px] text-white not-italic`}>{title}</h3>
+          <button
+            type="button"
+            onClick={onClose}
+            className={`${interRegular.className} relative flex h-[36px] shrink-0 items-center border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] bg-[rgba(226,241,202,0.12)] px-[16px] text-[13px] uppercase text-white hover:bg-[rgba(226,241,202,0.2)]`}
+          >
+            Close
+          </button>
+        </div>
+        <div className="relative aspect-video w-full overflow-clip">
+          <iframe
+            className="absolute inset-0 size-full"
+            src={`https://www.youtube-nocookie.com/embed/${videoId || DEMO_VIDEO_ID}?autoplay=1&rel=0`}
+            title={`${title} demo`}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+        <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+      </div>
+    </div>
   );
 }
 
@@ -241,6 +302,7 @@ export function ModelZooLibrary({ requestForm }: { requestForm?: any }) {
   const [type, setType] = useState("all");
   const [query, setQuery] = useState("");
   const [requestOpen, setRequestOpen] = useState(false);
+  const [video, setVideo] = useState<Model | null>(null);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -261,6 +323,7 @@ export function ModelZooLibrary({ requestForm }: { requestForm?: any }) {
       <div className="relative mx-auto w-full max-w-[1244px] px-[16px] min-[1024px]:px-0">
         {/* Header — 5130:8357 */}
         <div className="flex w-full flex-col items-center gap-[24px]" data-node-id="5130:8357">
+          <TagBadge label="Demo Ready" />
           <div className="relative px-[10px]" data-node-id="5130:8359" data-name="Title">
             <h2
               className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic min-[1024px]:text-[46px] min-[1024px]:leading-[49px] min-[1024px]:whitespace-nowrap`}
@@ -284,14 +347,14 @@ export function ModelZooLibrary({ requestForm }: { requestForm?: any }) {
           </div>
           <div className="contents min-[1024px]:order-2 min-[1024px]:flex min-[1024px]:w-auto min-[1024px]:flex-row min-[1024px]:items-center min-[1024px]:gap-[20px]" data-node-id="5286:7521">
             <div className="order-1 flex w-full items-center min-[1024px]:order-none min-[1024px]:w-[400px]" data-node-id="5286:7522">
-              <div className="relative h-[48px] min-w-px flex-1 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.3)] px-[20px]">
+              <div className="relative h-[48px] min-w-px flex-1 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.3)] px-[12px] min-[1024px]:px-[20px]">
                 <input
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search by model or use case…"
                   aria-label="Search by model or use case"
-                  className={`${interRegular.className} h-full w-full border-0 bg-transparent text-[14px] leading-[21px] text-white not-italic outline-none placeholder:text-white min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+                  className={`${interRegular.className} h-full w-full border-0 bg-transparent text-[14px] leading-[21px] text-white not-italic outline-none placeholder:text-[12px] placeholder:text-[#8e8e8e] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] min-[1024px]:placeholder:text-[13px]`}
                 />
               </div>
               <button
@@ -325,7 +388,7 @@ export function ModelZooLibrary({ requestForm }: { requestForm?: any }) {
           {filtered.length > 0 ? (
             <div className="flex w-[calc(100%+32px)] snap-x snap-mandatory overflow-x-auto gap-[16px] mx-[-16px] px-[16px] pb-[16px] after:content-[''] after:w-[1px] after:shrink-0 min-[1024px]:w-full min-[1024px]:grid min-[1024px]:grid-cols-3 min-[1024px]:gap-[20px] min-[1024px]:overflow-visible min-[1024px]:mx-0 min-[1024px]:px-0 min-[1024px]:pb-0 min-[1024px]:after:hidden">
               {filtered.map((model) => (
-                <ModelCard key={model.title} model={model} />
+                <ModelCard key={model.title} model={model} onWatch={() => setVideo(model)} />
               ))}
             </div>
           ) : (
@@ -339,18 +402,21 @@ export function ModelZooLibrary({ requestForm }: { requestForm?: any }) {
               home page rows): the exported row runs in a seamless marquee. */}
           <div className="mt-[48px] min-[1024px]:mt-[64px]" data-node-id="5348:6505">
             {/* Whole Model Zoo — strip heading */}
-            <div className="flex w-full flex-col items-center gap-[12px] text-center mb-[20px] min-[1024px]:mb-[28px]">
-              <h3
-                className={`${gilroyMedium.className} m-0 bg-clip-text text-[28px] leading-[32px] min-[1024px]:text-[36px] min-[1024px]:leading-[40px] font-medium text-transparent not-italic`}
-                style={{
-                  backgroundImage: TITLE_GRADIENT,
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                }}
-              >
-                The whole Model Zoo
-              </h3>
-              <p className={`${interRegular.className} text-[14px] leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] max-w-[640px]`}>
+            <div className="flex w-full flex-col items-center gap-[24px] pt-[32px] text-center mb-[20px] min-[1024px]:pt-[48px] min-[1024px]:mb-[28px]">
+              <div className="relative px-[10px]">
+                <h3
+                  className={`${gilroyMedium.className} m-0 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic min-[1024px]:text-[46px] min-[1024px]:leading-[49px]`}
+                  style={{
+                    backgroundImage: TITLE_GRADIENT,
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                  }}
+                >
+                  The whole Model Zoo
+                </h3>
+                <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+              </div>
+              <p className={`${interRegular.className} w-full max-w-[800px] text-center text-[14px] leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
                 Every open-source and Ambient-built model across audio, vision, and motion - 30+ and growing.
               </p>
             </div>
@@ -407,6 +473,7 @@ export function ModelZooLibrary({ requestForm }: { requestForm?: any }) {
       </div>
 
       {requestOpen ? <ModelZooRequestForm onClose={() => setRequestOpen(false)} config={requestForm} /> : null}
+      {video ? <VideoModal title={video.title} videoId={video.videoId} onClose={() => setVideo(null)} /> : null}
     </section>
   );
 }

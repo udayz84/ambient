@@ -4,6 +4,7 @@ import { mediaUrl } from "@/lib/strapi";
 import { useFitText } from "../shared/FitText";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const IMAGE_GRADIENT_DESKTOP =
   "radial-gradient(683.75px 163.5px at 50% 50%, rgba(26,26,26,1) 0%, rgba(13,13,13,1) 25%, rgba(7,7,7,1) 37.5%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%)";
@@ -194,6 +195,20 @@ export function SomPrototypeTitleDesktop({ data }: { data?: any }) {
         <p className={`${interRegular.className} max-w-[800px] text-center text-[16px] md:text-[18px] text-[#f0f0f0]/65 [word-break:break-word] px-4`}>
           When you're ready for volume, the software you validate here ports 1:1 to the GPX10 Pro SOMs.
         </p>
+        <a
+          href="/SOM"
+          className={`${gilroyMedium.className} relative flex h-[48px] shrink-0 items-center justify-center px-[32px] shadow-[0px_42px_107px_0px_rgba(83,216,36,0.15),0px_24.721px_32.257px_0px_rgba(83,216,36,0.10),0px_10.268px_13.398px_0px_rgba(83,216,36,0.10),0px_3.714px_4.846px_0px_rgba(83,216,36,0.05)] transition-transform hover:-translate-y-1`}
+        >
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+          />
+          <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+            Explore SOMs
+          </span>
+          <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
+          <GreenCtaCorners />
+        </a>
       </div>
     </section>
   );
@@ -251,6 +266,20 @@ export function SomPrototypeTitleMobile({ data }: { data?: any }) {
         <p className={`${interRegular.className} w-full max-w-[355px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}>
           When you're ready for volume, the software you validate here ports 1:1 to the GPX10 Pro SOMs.
         </p>
+        <a
+          href="/SOM"
+          className={`${gilroyMedium.className} relative flex h-[48px] w-full max-w-[320px] shrink-0 items-center justify-center px-[32px] shadow-[0px_42px_107px_0px_rgba(83,216,36,0.15),0px_24.721px_32.257px_0px_rgba(83,216,36,0.10),0px_10.268px_13.398px_0px_rgba(83,216,36,0.10),0px_3.714px_4.846px_0px_rgba(83,216,36,0.05)] transition-transform hover:-translate-y-1`}
+        >
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+          />
+          <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+            Explore SOMs
+          </span>
+          <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
+          <GreenCtaCorners />
+        </a>
       </div>
     </section>
   );

@@ -51,13 +51,14 @@ type LineSpec = {
   width: number;
   variant?: "rotate" | "skew";
 };
-type ItemSpec = { text: string; top: number; plusTop: number; left?: number; plusLeft?: number };
+type ItemSpec = { text: string; top: number; plusTop: number; left?: number; plusLeft?: number; width?: number };
 type SpecCard = {
   nodeId: string;
   title: string;
   left: number;
   top: number;
   height: number;
+  width?: number;
   borderColor: string;
   face: { height: number; left: number; top: number };
   pattern: {
@@ -75,12 +76,13 @@ type SpecCard = {
   iconSrc: string;
 };
 
-const item = (text: string, top: number, left?: number, plusLeft?: number): ItemSpec => ({
+const item = (text: string, top: number, left?: number, plusLeft?: number, width?: number): ItemSpec => ({
   text,
   top,
   plusTop: +(top + 3.5).toFixed(2),
   ...(left !== undefined ? { left } : {}),
   ...(plusLeft !== undefined ? { plusLeft } : {}),
+  ...(width !== undefined ? { width } : {}),
 });
 
 const CARDS: SpecCard[] = [
@@ -88,7 +90,7 @@ const CARDS: SpecCard[] = [
     nodeId: "3309:2459",
     title: "Control",
     left: 0,
-    top: 0.84,
+    top: 131.84,
     height: 99,
     borderColor: BORDER_DARK,
     face: { height: 99, left: -1, top: -0.84 },
@@ -110,7 +112,7 @@ const CARDS: SpecCard[] = [
     nodeId: "3309:2381",
     title: "Sensing & Analog",
     left: 0,
-    top: 120.84,
+    top: 251.84,
     height: 231,
     borderColor: BORDER_LIGHT,
     face: { height: 230.757, left: -1, top: -0.87 },
@@ -142,7 +144,7 @@ const CARDS: SpecCard[] = [
     nodeId: "3309:2485",
     title: "Temperature",
     left: 0,
-    top: 372.84,
+    top: 503.84,
     height: 99,
     borderColor: BORDER_DARK,
     face: { height: 98.899, left: -1, top: -1 },
@@ -164,7 +166,7 @@ const CARDS: SpecCard[] = [
     nodeId: "3309:2511",
     title: "Package",
     left: 422,
-    top: 0.84,
+    top: 131.84,
     height: 167,
     borderColor: BORDER_DARK,
     face: { height: 167, left: -0.5, top: -1 },
@@ -189,7 +191,7 @@ const CARDS: SpecCard[] = [
     nodeId: "3309:2498",
     title: "Security",
     left: 422,
-    top: 188.84,
+    top: 319.84,
     height: 99,
     borderColor: BORDER_DARK,
     face: { height: 98.899, left: -0.5, top: -0.84 },
@@ -211,7 +213,7 @@ const CARDS: SpecCard[] = [
     nodeId: "3309:2403",
     title: "Peripherals",
     left: 422,
-    top: 308.84,
+    top: 439.84,
     height: 162.84,
     borderColor: BORDER_DARK,
     face: { height: 162.84, left: -1, top: -0.84 },
@@ -242,7 +244,7 @@ const CARDS: SpecCard[] = [
     nodeId: "3309:2527",
     title: "Memory",
     left: 844,
-    top: 1,
+    top: 132,
     height: 290,
     borderColor: BORDER_LIGHT,
     face: { height: 289.72, left: -1, top: -1 },
@@ -257,16 +259,16 @@ const CARDS: SpecCard[] = [
     plusColor: PLUS_GREEN,
     items: [
       item("120 KB L0 cache", 57.18),
-      item("2048 KB unified L1 SRAM", 125.82),
-      item("Video + multi-bank sensor buffers", 169.29),
-      item("Boot ROM", 212.93),
-      item("External SRAM/Flash via QSPI/SPI", 258.28),
+      item("2048 KB unified L1 SRAM", 100.82),
+      item("Video + multi-bank sensor buffers", 144.46),
+      item("Boot ROM", 188.1),
+      item("External SRAM/Flash via QSPI/SPI", 231.74),
     ],
     lines: [
-      { top: 112.42, left: 17.12, width: 339.885, variant: "skew" },
-      { top: 156.05, left: 17.12, width: 339.885, variant: "skew" },
-      { top: 199.69, left: 17.12, width: 339.885, variant: "skew" },
-      { top: 245.05, left: 17.12, width: 339.885, variant: "skew" },
+      { top: 87.18, left: 17.12, width: 339.885, variant: "skew" },
+      { top: 130.82, left: 17.12, width: 339.885, variant: "skew" },
+      { top: 174.46, left: 17.12, width: 339.885, variant: "skew" },
+      { top: 218.1, left: 17.12, width: 339.885, variant: "skew" },
     ],
     icon: { left: 330.44, top: 4.84 },
     iconSrc: ICON_MEMORY,
@@ -275,7 +277,7 @@ const CARDS: SpecCard[] = [
     nodeId: "3309:2437",
     title: "Power",
     left: 844,
-    top: 312,
+    top: 443,
     height: 159.84,
     borderColor: BORDER_DARK,
     face: { height: 159.84, left: -1, top: -0.84 },
@@ -299,6 +301,35 @@ const CARDS: SpecCard[] = [
     ],
     icon: { left: 330.44, top: 5 },
     iconSrc: ICON_POWER,
+  },
+  {
+    // AI Cores — full-width strip under the three columns; the three
+    // points sit in one horizontal row (each wraps within its column).
+    nodeId: "3309:ai-cores",
+    title: "AI Cores",
+    left: 0,
+    top: 0.84,
+    height: 110,
+    width: 1222,
+    borderColor: BORDER_DARK,
+    face: { height: 110, left: -1, top: -1 },
+    pattern: {
+      height: 110,
+      gradient: patternGreen(140.837),
+      style: { left: "50%", top: -1, transform: "translateX(-50%)" },
+    },
+    header: { left: 15, top: 14.16, width: 1140 },
+    itemsLeft: 33,
+    plusLeft: 15,
+    plusColor: PLUS_GREEN,
+    items: [
+      item("5x Always ON AI cores", 57.33, 33, 15, 360),
+      item("5x AI Cores in Non Always ON domain for additional workload", 57.33, 445, 427, 370),
+      item("Dedicated Preprocessing stages - FFT (256 point), Square, Shift and log", 57.33, 845, 827, 362),
+    ],
+    lines: [],
+    icon: { left: 1174, top: 5 },
+    iconSrc: ICON_CONTROL,
   },
 ];
 
@@ -479,7 +510,7 @@ function SpecCardView({ card }: { card: RenderCard }) {
         left: card.left,
         top: card.top,
         height: card.height,
-        width: 378,
+        width: card.width ?? 378,
         borderColor: card.borderColor,
       }}
       data-node-id={card.nodeId}
@@ -492,14 +523,15 @@ function SpecCardView({ card }: { card: RenderCard }) {
           height: card.face.height,
           left: card.face.left,
           top: card.face.top,
-          width: 378,
+          width: card.width ?? 378,
         }}
         aria-hidden
       />
       {/* Pattern gradient overlay */}
       <div
-        className="absolute w-[378px]"
+        className="absolute"
         style={{
+          width: card.width ?? 378,
           height: card.pattern.height,
           backgroundImage: card.pattern.gradient,
           ...card.pattern.style,
@@ -509,7 +541,7 @@ function SpecCardView({ card }: { card: RenderCard }) {
       />
       {/* Header */}
       <div
-        className="absolute border-b border-solid flex flex-col items-start pb-[13px]"
+        className="absolute border-b border-solid flex flex-col items-start pb-[6px]"
         style={{
           left: card.header.left,
           top: card.header.top,
@@ -530,10 +562,10 @@ function SpecCardView({ card }: { card: RenderCard }) {
         <Fragment key={i}>
           <p
             className={`${interRegular.className} [word-break:break-word] absolute font-normal leading-[1.2] not-italic text-[14px] text-black tracking-[-0.1504px] min-[1024px]:text-[16px] min-[1024px]:leading-[1.2] pr-[15px]`}
-            style={{ 
-              left: it.left ?? card.itemsLeft, 
+            style={{
+              left: it.left ?? card.itemsLeft,
               top: it.top,
-              width: `calc(100% - ${it.left ?? card.itemsLeft}px)`
+              width: it.width !== undefined ? `${it.width}px` : `calc(100% - ${it.left ?? card.itemsLeft}px)`
             }}
           >
             {it.text}
@@ -635,15 +667,44 @@ export function ProductsFullPicture({ data }: { data?: any }) {
           lines = [];
         }
       } else {
-        items = strapiData.items.map((text, i) => {
-          const baseItem = c.items[0] || { left: 33, plusLeft: 15, top: 57.33 };
-          const top = baseItem.top + i * 43.64;
-          return { ...baseItem, text, top, plusTop: +(top + 3.5).toFixed(2) };
-        });
-        
+        const baseItem = c.items[0] || { left: 33, plusLeft: 15, top: 57.33 };
+        // Memory only: rows advance by estimated rendered height so the
+        // wrapped first item keeps a clear gap to the next row. All other
+        // cards keep the exact 43.64px Figma rhythm.
+        const wrapAware = c.title.toLowerCase().trim() === "memory";
+        let tops: number[];
+        if (wrapAware) {
+          const GAP = 24.44; // single-line rows: 19.2px line + 24.44px gap = 43.64px
+          const rowHeight = (text: string) =>
+            Math.max(1, Math.ceil((text.length * 8.1) / 345)) * 19.2;
+          let cursor = baseItem.top;
+          tops = strapiData.items.map((text: string) => {
+            const t = cursor;
+            cursor += rowHeight(text) + GAP;
+            return t;
+          });
+        } else {
+          tops = strapiData.items.map((_, i) => baseItem.top + i * 43.64);
+        }
+        items = strapiData.items.map((text: string, i: number) => ({
+          ...baseItem,
+          text,
+          top: tops[i],
+          plusTop: +(tops[i] + 3.5).toFixed(2),
+        }));
+
         if (items.length > 1) {
           lines = Array.from({ length: items.length - 1 }).map((_, i) => {
             const baseLine = c.lines[0] || { top: 87.33, left: 17.12, width: 339.885 };
+            if (wrapAware) {
+              const GAP = 24.44;
+              const rowHeight = (text: string) =>
+                Math.max(1, Math.ceil((text.length * 8.1) / 345)) * 19.2;
+              return {
+                ...baseLine,
+                top: +(tops[i] + rowHeight(strapiData.items[i]) + GAP / 2).toFixed(2),
+              };
+            }
             return { ...baseLine, top: baseLine.top + i * 43.64 };
           });
         } else {

@@ -69,7 +69,7 @@ export function GreenCtaButton({
   className?: string;
   width?: string;
   href?: string;
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler<any>;
   disabled?: boolean;
   loading?: boolean;
   download?: boolean | string;

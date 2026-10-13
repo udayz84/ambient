@@ -3,6 +3,7 @@
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { Corners } from "../shared/Corners";
+import { GreenCtaButton } from "../contact/contact-shared";
 import {
   CollageRow,
   COLLAGE_ROW_1,
@@ -55,6 +56,13 @@ export function ProductsReadyToRun() {
           direction="right"
           duration={26}
         />
+      </div>
+
+      {/* CTA — browse the Model Zoo */}
+      <div className="relative z-10 mt-[48px] flex justify-center">
+        <GreenCtaButton width="280px" href="/model-zoo">
+          Browse Model Zoo
+        </GreenCtaButton>
       </div>
     </section>
   );

@@ -46,7 +46,7 @@ function PartnerLogoStat({
       data-name="Stat"
     >
       <div
-        className="relative shrink-0 overflow-visible flex flex-row items-center justify-center"
+        className="relative flex h-full w-full shrink-0 flex-row items-center justify-center"
         data-name="Icon"
       >
         <div
@@ -73,20 +73,22 @@ type EcosystemPartnerRowProps = {
   config: PartnerRowConfig;
   logoStatNodeIds?: readonly [string, string, string];
   partners?: readonly EcosystemPartner[];
+  slotsOverride?: readonly CarouselSlot[];
   isDevelopment?: boolean;
 };
 
 export function EcosystemPartnerRow({
   config,
   logoStatNodeIds = LOGO_STAT_NODES,
+  slotsOverride,
   isDevelopment = false,
 }: EcosystemPartnerRowProps) {
-  const slots = isDevelopment ? CAROUSEL_2_SLOTS : CAROUSEL_1_SLOTS;
+  const slots = slotsOverride ?? (isDevelopment ? CAROUSEL_2_SLOTS : CAROUSEL_1_SLOTS);
   const gridLines = config.gridLines;
 
   return (
     <div
-      className="relative flex h-[225px] w-[1204px] shrink-0 items-center justify-between bg-[rgba(255,255,255,0.04)] px-[40px]"
+      className="relative flex h-[225px] w-[1204px] shrink-0 items-center justify-between bg-[rgba(255,255,255,0.04)] pl-[72px] pr-[36px]"
       data-node-id={config.rowNodeId}
     >
       <div className="pointer-events-none absolute inset-0 z-[2]" aria-hidden>

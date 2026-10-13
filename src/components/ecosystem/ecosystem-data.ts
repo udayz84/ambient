@@ -53,30 +53,36 @@ export type CarouselSlot = {
 };
 
 export const CAROUSEL_1_PARTNERS: readonly PartnerItem[] = [
-  { name: "TSMC", src: "/ecosystem/partners/tsmc.jpeg", width: 500, height: 376 },
-  { name: "CELUS", src: "/ecosystem/partners/celus.jpeg", width: 632, height: 316 },
-  { name: "EdgeAI Foundation", src: "/ecosystem/partners/edgeai.jpeg", width: 225, height: 225 },
+  { name: "TSMC", src: "/ecosystem/partners/tsmc.svg", width: 500, height: 376 },
+  { name: "CELUS", src: "/ecosystem/partners/celus.svg", width: 632, height: 316 },
+  { name: "EdgeAI Foundation", src: "/ecosystem/partners/edgeai.svg", width: 225, height: 225 },
 ];
 
 export const CAROUSEL_2_PARTNERS: readonly PartnerItem[] = [
-  { name: "GRINN", src: "/ecosystem/partners/grinn.jpeg", width: 220, height: 124 },
-  { name: "ZALMOTEK", src: "/ecosystem/partners/zalmotek.jpeg", width: 280, height: 280 },
+  { name: "GRINN", src: "/ecosystem/partners/grinn.svg", width: 220, height: 124 },
+  { name: "ZALMOTEK", src: "/ecosystem/partners/zalmotek.svg", width: 280, height: 280 },
 ];
 
 export const CAROUSEL_1_SLOTS: readonly CarouselSlot[] = [
-  { isRevealed: true, name: "TSMC", src: "/ecosystem/partners/tsmc.jpeg", width: 500, height: 376 },
-  { isRevealed: true, name: "CELUS", src: "/ecosystem/partners/celus.jpeg", width: 632, height: 316 },
-  { isRevealed: true, name: "EdgeAI Foundation", src: "/ecosystem/partners/edgeai.jpeg", width: 225, height: 225 },
-  { isRevealed: false },
-  { isRevealed: false },
+  { isRevealed: true, name: "TSMC", src: "/ecosystem/partners/tsmc.svg", width: 500, height: 376 },
+  { isRevealed: true, name: "CELUS", src: "/ecosystem/partners/celus.svg", width: 632, height: 316 },
+  { isRevealed: true, name: "EdgeAI Foundation", src: "/ecosystem/partners/edgeai.svg", width: 225, height: 225 },
+  { isRevealed: true, name: "DTDS Technology", src: "/ecosystem/partners/dtds.jpg", width: 309, height: 309 },
+  { isRevealed: true, name: "Astute Electronics", src: "/ecosystem/partners/astute.png", width: 1024, height: 602 },
 ];
 
 export const CAROUSEL_2_SLOTS: readonly CarouselSlot[] = [
-  { isRevealed: true, name: "GRINN", src: "/ecosystem/partners/grinn.jpeg", width: 220, height: 124 },
-  { isRevealed: true, name: "ZALMOTEK", src: "/ecosystem/partners/zalmotek.jpeg", width: 280, height: 280 },
-  { isRevealed: false },
-  { isRevealed: false },
-  { isRevealed: false },
+  { isRevealed: true, name: "FAE Technology", src: "/ecosystem/partners/fae.png", width: 515, height: 388 },
+  { isRevealed: true, name: "GRINN", src: "/ecosystem/partners/grinn.svg", width: 220, height: 124 },
+  { isRevealed: true, name: "ZALMOTEK", src: "/ecosystem/partners/zalmotek.svg", width: 280, height: 280 },
+  { isRevealed: true, name: "Glyn Australia", src: "/ecosystem/partners/glyn.jpeg", width: 1000, height: 303 },
+  { isRevealed: true, name: "Cidev Group", src: "/ecosystem/partners/cidev.jpeg", width: 200, height: 200 },
+];
+
+/** Single combined row — every revealed logo from both carousels, no hidden slots. */
+export const CAROUSEL_ALL_SLOTS: readonly CarouselSlot[] = [
+  ...CAROUSEL_1_SLOTS,
+  ...CAROUSEL_2_SLOTS,
 ];
 
 export const SILICON_PARTNERS: readonly PartnerLogo[] = CAROUSEL_1_PARTNERS;

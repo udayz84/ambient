@@ -3,7 +3,6 @@ import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { GreenCtaButton } from "../contact/contact-shared";
 import type { ResourceFeaturedCard } from "./resources-data";
 import { Corners } from "../shared/Corners";
-import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { ResourceDownloadModal } from "./ResourceDownloadModal";
 
 const badgeCornerTl = "/resources/badge-corner-tl.svg";
@@ -65,12 +64,10 @@ export function ResourcesFeaturedCard({
                 loading="lazy"
                 decoding="async"
                 alt=""
-                className={`${imageClassName} grayscale brightness-[0.22] contrast-[175%] transition-all duration-700 group-hover:brightness-[0.4]`}
+                className={imageClassName}
                 src={imageSrc}
               />
             ) : null}
-            <div className="absolute inset-0 bg-black/40" />
-            <div className="absolute inset-0 bg-gradient-to-b from-[rgba(25,25,25,0)] from-[70%] to-[#191919]" />
           </div>
 
           <WhitepaperBadge
@@ -78,17 +75,6 @@ export function ResourcesFeaturedCard({
             label={badgeLabel}
             variant={badgeVariant}
           />
-
-          {/* Center Silhouette "Revealing Soon" Badge */}
-          <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
-            <div className="relative flex items-center justify-center border border-[#53d824]/40 bg-black/85 px-[16px] py-[8px] shadow-[0_0_24px_rgba(83,216,36,0.18)] backdrop-blur-md">
-              <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
-              <span className={`${dmMono.className} flex items-center gap-[8px] text-[11px] uppercase tracking-[0.12em] text-[#53d824]`}>
-                <span className="size-[6px] rounded-full bg-[#53d824] animate-pulse" />
-                <span>REVEALING SOON</span>
-              </span>
-            </div>
-          </div>
         </div>
 
         <div className="flex w-full flex-col gap-[24px] p-[16px]">
@@ -104,15 +90,13 @@ export function ResourcesFeaturedCard({
               {description}
             </p>
           </div>
-          <div onClick={handleCtaClick} className="cursor-pointer">
-            <div className="relative flex h-[48px] w-[231px] items-center justify-center overflow-hidden border border-[#53d824]/30 bg-[#53d824]/10 shadow-[0_0_20px_rgba(83,216,36,0.12)] transition-colors group-hover:border-[#53d824]/50 group-hover:bg-[#53d824]/15">
-              <GreenCtaCorners />
-              <span className={`${gilroyMedium.className} flex items-center gap-[8px] text-[14px] font-medium uppercase tracking-[0.08em] text-[#53d824]`}>
-                <span className="size-[6px] rounded-full bg-[#53d824] animate-pulse" />
-                REVEALING SOON
-              </span>
-            </div>
-          </div>
+          <GreenCtaButton
+            width="231px"
+            href={targetUrl}
+            onClick={handleCtaClick}
+          >
+            {ctaLabel}
+          </GreenCtaButton>
         </div>
 
         <Corners leftSrc={cardCornerLeft} rightSrc={cardCornerRight} />

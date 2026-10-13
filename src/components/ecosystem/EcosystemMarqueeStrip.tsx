@@ -62,7 +62,7 @@ export function EcosystemMarqueeStrip({ data }: { data?: ClientsSection | null }
         </p>
       </div>
 
-      <div className="relative w-full overflow-hidden border-y border-white/20 bg-[rgba(255,255,255,0.04)]">
+      <div className="relative mx-[16px] w-[calc(100%-32px)] overflow-hidden border-y border-white/20 bg-[rgba(255,255,255,0.04)] md:mx-[40px] md:w-[calc(100%-80px)]">
         <div
           className="flex w-max animate-dvk-marquee-left items-center"
           style={{ animationDuration: `${MARQUEE_DURATION_S}s` }}
@@ -70,15 +70,14 @@ export function EcosystemMarqueeStrip({ data }: { data?: ClientsSection | null }
           {sets.map((_, s) =>
             logos.map((logo, i) => (
               <div key={`${s}-${i}`} className="flex shrink-0 items-center">
-                <div className="flex h-[120px] w-[120px] shrink-0 items-center justify-center md:h-[225px] md:w-[225px]">
+                <div className="flex h-[120px] w-[120px] shrink-0 items-center justify-center overflow-hidden md:h-[225px] md:w-[225px]">
                   {logo.src ? (
                     <Image
                       src={logo.src}
                       alt=""
                       width={logo.width}
                       height={logo.height}
-                      className="block max-h-full max-w-full object-contain"
-                      style={{ width: logo.width, height: logo.height }}
+                      className="block h-full w-full object-fill"
                     />
                   ) : null}
                 </div>

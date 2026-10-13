@@ -133,15 +133,86 @@ export function ModelZooAppForge({
 
   const videoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
     // prefers-reduced-motion: keep the Article panel's ambient video paused
-    if (videoRef.current) {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play().catch(() => {});
-      }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      video.pause();
+      return;
     }
+    // WebKit/Safari: play() before the <source> settles can stall silently;
+    // retry on immediate call and on every readiness event until it starts.
+    const tryPlay = () => { video.play().catch(() => {}); };
+    tryPlay();
+    video.addEventListener("loadeddata", tryPlay);
+    video.addEventListener("canplay", tryPlay);
+    return () => {
+      video.removeEventListener("loadeddata", tryPlay);
+      video.removeEventListener("canplay", tryPlay);
+    };
   }, []);
+
+  const renderCtaButtons = () => {
+    if (ctas) {
+      return (
+        <div className="flex flex-col items-center justify-center gap-[16px] w-full">
+          {ctasCaption ? (
+            <p className={`${interRegular.className} text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
+              {ctasCaption}
+            </p>
+          ) : null}
+          <div className="flex flex-wrap items-center justify-center gap-[24px]">
+            {ctas.map((cta, i) =>
+              cta.variant === "secondary" ? (
+                <a
+                  key={`cta-${i}`}
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }}
+                  className={`${gilroyMedium.className} relative flex h-[48px] w-auto shrink-0 items-center justify-center border border-white/20 bg-[rgba(226,241,202,0.12)] px-[24px] py-[10px] cursor-pointer`}
+                >
+                  <span className="relative flex h-full w-auto items-center justify-center text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
+                    {cta.label}
+                  </span>
+                </a>
+              ) : (
+                <a
+                  key={`cta-${i}`}
+                  href="#"
+                  className="shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] relative flex h-[48px] w-auto shrink-0 items-center justify-center px-[32px] py-[10px] cursor-pointer"
+                  data-node-id="5131:10556"
+                  data-name="Cta"
+                >
+                  <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
+                  <span className={`${gilroyMedium.className} relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic`}>
+                    {cta.label}
+                  </span>
+                  <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
+                  <GreenCtaCorners />
+                </a>
+              ),
+            )}
+          </div>
+        </div>
+      );
+    }
+    return (
+      <a
+        href="#"
+        onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }}
+        className="shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] relative flex h-[48px] w-[293px] shrink-0 items-center justify-center cursor-pointer"
+        data-node-id="5131:10556"
+        data-name="Cta"
+      >
+        <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
+        <span className={`${gilroyMedium.className} relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic`}>
+          Request an Eval Kit
+        </span>
+        <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
+        <GreenCtaCorners />
+      </a>
+    );
+  };
+
   return (
     <section
       className="relative w-full bg-black"
@@ -179,7 +250,7 @@ export function ModelZooAppForge({
           decoding="async"
         />
       )}
-      <div className="relative mx-auto w-full max-w-[1192.5px] px-[16px] min-[1024px]:px-0">
+      <div className={`relative mx-auto w-full max-w-[1192.5px] px-[16px] min-[1024px]:px-0 ${storeButtonsUnderSteps ? "pb-[64px]" : ""}`}>
         {/* Header — 5131:10258 (title + sub, gap 24) */}
         <div className="flex w-full flex-col items-center gap-[24px] pt-[49px]" data-node-id="5131:10258">
           <div className="relative px-[10px]" data-node-id="5131:10260" data-name="Title">
@@ -201,11 +272,11 @@ export function ModelZooAppForge({
             Entrance: the row fades in on scroll, inner elements stagger. */}
         <div
           ref={forgeRef}
-          className={`mt-[24px] flex flex-col items-stretch gap-[24px] min-[1024px]:mt-[48px] min-[1024px]:h-[578px] min-[1024px]:flex-row min-[1024px]:items-center ${getFadeInClass(forgeVisible)}`}
+          className={`mt-[24px] flex flex-col items-stretch gap-[24px] min-[1024px]:mt-[48px] min-[1024px]:min-h-[578px] min-[1024px]:h-auto min-[1024px]:flex-row min-[1024px]:items-center ${getFadeInClass(forgeVisible)}`}
           data-node-id="5241:5967"
         >
           {/* Left canvas card — 5241:5677 */}
-          <div className="flex h-[320px] w-full shrink-0 items-stretch justify-center min-[1024px]:h-full min-[1024px]:w-[590.509px]">
+          <div className="flex h-[320px] w-full shrink-0 items-stretch justify-center min-[1024px]:h-[578px] min-[1024px]:w-[590.509px]">
             <div
               className={`relative h-full w-full overflow-clip rounded-[12px] min-[1024px]:rounded-none transition-colors duration-300 ${forgeVisible ? "motion-safe:animate-hero-text-fade-in" : "opacity-0"}`}
               style={{ animationDelay: "80ms", animationFillMode: "both" }}
@@ -229,7 +300,7 @@ export function ModelZooAppForge({
                 }}
               >
                 <source src="/videos/electronica-tv-01-v03.webm" type="video/webm" />
-                <source src="https://ambientwebasset.blob.core.windows.net/website-assets/model-zoo/af-video.mp4" type="video/mp4" />
+                <source src="/videos/electronica-tv-01-v03.mp4" type="video/mp4" />
               </video>
             </div>
           </div>
@@ -269,8 +340,9 @@ export function ModelZooAppForge({
                 );
               })}
               {storeButtonsUnderSteps && (
-                <div className="w-full pt-[4px] flex items-center justify-start">
-                  <StoreBadges bothStoresComingSoon={bothStoresComingSoon} />
+                <div className="w-full pt-[4px] flex flex-col items-center justify-center gap-[16px]">
+                  <StoreBadges className="justify-center" bothStoresComingSoon={bothStoresComingSoon} />
+                  {renderCtaButtons()}
                 </div>
               )}
             </div>
@@ -325,63 +397,11 @@ export function ModelZooAppForge({
         )}
 
         {/* Request CTA — 5131:10555 (293×48, centered). */}
-        <div className="relative mt-[30px] flex flex-col items-center justify-center gap-[24px] pb-[63px] z-50 pointer-events-auto">
-          {ctas ? (
-            <>
-              {ctasCaption ? (
-                <p className={`${interRegular.className} text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
-                  {ctasCaption}
-                </p>
-              ) : null}
-              <div className="flex flex-wrap items-center justify-center gap-[24px]">
-                {ctas.map((cta, i) =>
-                  cta.variant === "secondary" ? (
-                    <a
-                      key={`cta-${i}`}
-                      href="#"
-                      onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }}
-                      className={`${gilroyMedium.className} relative flex h-[48px] w-auto shrink-0 items-center justify-center border border-white/20 bg-[rgba(226,241,202,0.12)] px-[24px] py-[10px] cursor-pointer`}
-                    >
-                      <span className="relative flex h-full w-auto items-center justify-center text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
-                        {cta.label}
-                      </span>
-                    </a>
-                  ) : (
-                    <a
-                      key={`cta-${i}`}
-                      href="#"
-                      className="shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] relative flex h-[48px] w-auto shrink-0 items-center justify-center px-[32px] py-[10px] cursor-pointer"
-                      data-node-id="5131:10556"
-                      data-name="Cta"
-                    >
-                      <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
-                      <span className={`${gilroyMedium.className} relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic`}>
-                        {cta.label}
-                      </span>
-                      <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
-                      <GreenCtaCorners />
-                    </a>
-                  ),
-                )}
-              </div>
-            </>
-          ) : (
-            <a
-              href="#"
-              onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }}
-              className="shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] relative flex h-[48px] w-[293px] shrink-0 items-center justify-center cursor-pointer"
-              data-node-id="5131:10556"
-              data-name="Cta"
-            >
-              <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
-              <span className={`${gilroyMedium.className} relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic`}>
-                Request an Eval Kit
-              </span>
-              <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
-              <GreenCtaCorners />
-            </a>
-          )}
-        </div>
+        {!storeButtonsUnderSteps && (
+          <div className="relative mt-[30px] flex flex-col items-center justify-center gap-[24px] pb-[63px] z-50 pointer-events-auto">
+            {renderCtaButtons()}
+          </div>
+        )}
       </div>
 
       <UpcomingProductsModal

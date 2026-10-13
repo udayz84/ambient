@@ -31,32 +31,7 @@ type Announcement = {
   imageAlt: string;
 };
 
-const ANNOUNCEMENTS: Announcement[] = [
-  {
-    tag: "Announcement",
-    title: "Meet us at CES 2026",
-    subtitle:
-      "See live demos of the GPX10 PRO running always-on AI at microwatt power. Las Vegas, January 6–9.",
-    ctas: [
-      { label: "Book a meeting", href: "/contact", primary: true },
-      { label: "What we're showing", href: "/news-listing" },
-    ],
-    image: "/resources/article-image-base.webp",
-    imageAlt: "Ambient Scientific circuit board close-up",
-  },
-  {
-    tag: "New release",
-    title: "GPX10 PRO DevKit is shipping",
-    subtitle:
-      "Plug-and-play evaluation kits to prototype always-on AI — from wake-word to sensor fusion — in days, not months.",
-    ctas: [
-      { label: "Shop the kit", href: "/dvk", primary: true },
-      { label: "Explore the DVK", href: "/dvk" },
-    ],
-    image: "/resources/article-2-overlay.png",
-    imageAlt: "Ambient Scientific chip industry artwork",
-  },
-];
+
 
 /** Shape of a Strapi home.hero-announcement entry (media populated). */
 type AnnouncementCms = {
@@ -74,7 +49,7 @@ function cmsAnnouncements(
 ): Announcement[] {
   return (data?.announcements ?? [])
     .filter((a) => a?.title)
-    .map((a, index) => ({
+    .map((a) => ({
       tag: a.tag ?? "Announcement",
       title: a.title ?? "",
       subtitle: a.subtitle ?? "",
@@ -85,8 +60,8 @@ function cmsAnnouncements(
           href: cta.href ?? "#",
           primary: (cta.variant ?? "primary") === "primary",
         })),
-      // Static imagery by default — an uploaded Strapi image overrides it.
-      image: mediaUrl(a.image) ?? ANNOUNCEMENTS[index % ANNOUNCEMENTS.length].image,
+      // Strapi uploaded image or fallback to article base image
+      image: mediaUrl(a.image) ?? "/resources/article-image-base.webp",
       imageAlt: a.image_alt || a.image?.alternativeText || "",
     }))
     .filter((a) => a.ctas.length > 0);
@@ -244,8 +219,7 @@ export function HeroCarousel({ data, formConfig }: { data?: any; formConfig?: an
     return () => window.removeEventListener('open-upcoming-products-modal', handleOpenModal);
   }, []);
 
-  const cmsSlides = cmsAnnouncements(data);
-  const announcements = cmsSlides.length > 0 ? cmsSlides : ANNOUNCEMENTS;
+  const announcements = cmsAnnouncements(data);
   const slideCount = 1 + announcements.length;
 
   const reducedMotion =
@@ -254,7 +228,7 @@ export function HeroCarousel({ data, formConfig }: { data?: any; formConfig?: an
 
   // Auto-advance; timer resets on manual change (active dep) and pauses on hover.
   useEffect(() => {
-    if (reducedMotion || paused) return;
+    if (reducedMotion || paused || slideCount <= 1) return;
     const timer = setInterval(
       () => setActive((current) => (current + 1) % slideCount),
       AUTOPLAY_MS,
@@ -298,22 +272,24 @@ export function HeroCarousel({ data, formConfig }: { data?: any; formConfig?: an
       })}
 
       {/* Slide indicators */}
-      <div className="absolute bottom-[36px] left-1/2 z-20 flex -translate-x-1/2 items-center gap-[8px] max-[1023px]:bottom-[24px]">
-        {Array.from({ length: slideCount }, (_, index) => (
-          <button
-            key={index}
-            type="button"
-            onClick={() => goTo(index)}
-            aria-label={`Go to slide ${index + 1}`}
-            aria-current={index === active}
-            className={`h-[3px] w-[36px] cursor-pointer border-0 p-0 transition-colors ${
-              index === active
-                ? "bg-[#53d824]"
-                : "bg-white/30 hover:bg-white/60"
-            }`}
-          />
-        ))}
-      </div>
+      {slideCount > 1 && (
+        <div className="absolute bottom-[36px] left-1/2 z-20 flex -translate-x-1/2 items-center gap-[8px] max-[1023px]:bottom-[24px]">
+          {Array.from({ length: slideCount }, (_, index) => (
+            <button
+              key={index}
+              type="button"
+              onClick={() => goTo(index)}
+              aria-label={`Go to slide ${index + 1}`}
+              aria-current={index === active}
+              className={`h-[3px] w-[36px] cursor-pointer border-0 p-0 transition-colors ${
+                index === active
+                  ? "bg-[#53d824]"
+                  : "bg-white/30 hover:bg-white/60"
+              }`}
+            />
+          ))}
+        </div>
+      )}
 
       <UpcomingProductsModal
         isOpen={isModalOpen}

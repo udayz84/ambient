@@ -27,7 +27,7 @@ function PrimaryCta({ label, href }: { label: string; href: string }) {
   return (
     <a
       href={href}
-      className={`${gilroyMedium.className} relative block h-[48px] w-[251px] shrink-0 cursor-pointer overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+      className={`${gilroyMedium.className} relative flex h-[48px] min-w-[251px] w-auto shrink-0 cursor-pointer items-center justify-center px-[24px] overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
       data-node-id="2509:389"
       data-name="Cta"
     >
@@ -36,7 +36,7 @@ function PrimaryCta({ label, href }: { label: string; href: string }) {
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
       <GreenCtaCorners />
-      <span className="absolute top-1/2 left-1/2 max-w-full -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic overflow-hidden text-ellipsis">
+      <span className="relative z-10 whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic">
         {label}
       </span>
       <span
@@ -51,11 +51,11 @@ function SecondaryCta({ label, href }: { label: string; href: string }) {
   return (
     <a
       href={href}
-      className={`${gilroyMedium.className} relative flex shrink-0 cursor-pointer items-center border border-white/20 bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+      className={`${gilroyMedium.className} relative flex h-[48px] shrink-0 cursor-pointer items-center border border-white/20 bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
       data-node-id="2509:400"
       data-name="CTA - Secondary"
     >
-      <span className="max-w-full whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic overflow-hidden text-ellipsis">
+      <span className="whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic">
         {label}
       </span>
       <Corners
@@ -342,17 +342,17 @@ export function WearablesHero({
         </div>
 
         {/* CTAs (node 4153:9915 at top-508) */}
-        <div className="absolute left-1/2 top-[508px] z-10 flex w-[263px] -translate-x-1/2 flex-col items-start gap-[16px]">
+        <div className="absolute left-1/2 top-[508px] z-10 flex -translate-x-1/2 flex-col items-center gap-[16px]">
           {/* Primary CTA */}
           <a
             href={primaryHref}
-            className={`${gilroyMedium.className} relative flex h-[48px] w-[263px] shrink-0 cursor-pointer items-center justify-center shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+            className={`${gilroyMedium.className} relative flex h-[48px] min-w-[263px] w-auto max-w-[calc(100vw-32px)] px-[20px] shrink-0 cursor-pointer items-center justify-center overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
             data-node-id="4153:9916"
             data-name="Cta"
           >
             <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
             <GreenCtaCorners />
-            <span className="relative max-w-full whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic overflow-hidden text-ellipsis">
+            <span className="relative z-10 whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic">
               {primaryLabel}
             </span>
             <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
@@ -365,7 +365,7 @@ export function WearablesHero({
             data-node-id="4153:9927"
             data-name="CTA - Secondary"
           >
-            <span className="relative max-w-full whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic overflow-hidden text-ellipsis">
+            <span className="relative whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic">
               {secondaryLabel}
             </span>
             <Corners

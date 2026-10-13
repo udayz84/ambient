@@ -4,6 +4,7 @@ import { gilroyMedium, interRegular, dmMono } from "../hero/fonts";
 import { mediaUrl } from "@/lib/strapi";
 import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
+import { TagBadge } from "../hero/TagBadge";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
@@ -97,10 +98,8 @@ export function DvkModelForge({ data }: { data?: any }) {
       </div>
 
       {/* Section title (2761:3009) */}
-      <div className="absolute top-[127px] left-1/2 flex w-[650px] -translate-x-1/2 flex-col items-center justify-center gap-[24px]">
-        <p className={`${dmMono.className} m-0 text-[12px] leading-[19.5px] font-normal tracking-[-0.36px] whitespace-nowrap text-[#a9e28c] uppercase not-italic`}>
-          Build Your Own
-        </p>
+      <div className="absolute top-[87px] left-1/2 flex w-[650px] -translate-x-1/2 flex-col items-center justify-center gap-[24px]">
+        <TagBadge label="Build Your Own" />
         <div className="relative flex w-[540px] flex-col items-center px-[10px]">
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2

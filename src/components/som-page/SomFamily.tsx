@@ -16,7 +16,7 @@ const CARD_BLE = {
   tag: "COMING SOON",
   title: "SOM (BLE)",
   description: "For products that connect over short range — to a phone, hub, or gateway.",
-  imageUrl: "/som/som-chip.webp",
+  imageUrl: "/som/left.png",
   features: [
     { icon: "/partners/icons_proof/chip.svg", text: "GPX10 Pro" },
     { icon: "/partners/icons_proof/cube.svg", text: "6-axis\nIMU" },
@@ -30,7 +30,7 @@ const CARD_LTE = {
   tag: "COMING SOON",
   title: "SOM (LTE)",
   description: "For products that need to connect anywhere, with no local gateway — remote, mobile, or wide-area deployments.",
-  imageUrl: "/som/sparsh-chip.webp",
+  imageUrl: "/som/right.png",
   features: [
     { icon: "/partners/icons_proof/chip.svg", text: "GPX10 Pro" },
     { icon: "/partners/icons_proof/cube.svg", text: "6-axis\nIMU" },
@@ -88,8 +88,8 @@ function FamilyCard({ data, onNotifyClick }: { data: typeof CARD_BLE; onNotifyCl
         <Corners />
 
         {/* Top section with content and image */}
-        <div className="relative p-6 min-[1024px]:p-8 flex flex-col min-[1024px]:block flex-1">
-          <div className="flex w-full flex-col gap-6 relative z-10">
+        <div className="relative p-6 min-[1024px]:p-8 flex flex-col min-[1024px]:block flex-1 min-[1024px]:min-h-[220px]">
+          <div className="flex w-full flex-col gap-6 relative z-10 max-w-[280px]">
             <div className="flex flex-col gap-2">
               {data.tag && (
                 <span className={`${interRegular.className} text-[12px] uppercase tracking-widest text-[#a8ed90]`}>
@@ -97,18 +97,18 @@ function FamilyCard({ data, onNotifyClick }: { data: typeof CARD_BLE; onNotifyCl
                 </span>
               )}
               <h3 className={`${gilroyMedium.className} text-[28px] min-[1024px]:text-[32px] text-white`}>{data.title}</h3>
-              <p className={`${interRegular.className} text-[14px] min-[1024px]:text-[16px] leading-[22px] min-[1024px]:leading-[24px] text-[rgba(255,255,255,0.7)] max-w-[280px]`}>
+              <p className={`${interRegular.className} text-[14px] min-[1024px]:text-[16px] leading-[22px] min-[1024px]:leading-[24px] text-[rgba(255,255,255,0.7)]`}>
                 {data.description}
               </p>
             </div>
           </div>
 
           {/* The image is absolutely positioned to the right on desktop, static below on mobile */}
-          <div className="relative mt-8 min-[1024px]:mt-0 min-[1024px]:absolute min-[1024px]:right-[-20px] min-[1024px]:top-[40px] w-full min-[1024px]:w-[280px] h-[180px] min-[1024px]:h-[200px] pointer-events-none z-0">
+          <div className="relative mt-8 min-[1024px]:mt-0 min-[1024px]:absolute min-[1024px]:right-[16px] min-[1024px]:top-[24px] w-full min-[1024px]:w-[240px] h-[180px] min-[1024px]:h-[190px] flex items-center justify-center pointer-events-none z-10">
             <img
               src={data.imageUrl}
               alt={data.title}
-              className={`w-full h-full object-contain opacity-90 ${data.tag?.toUpperCase() === "COMING SOON" || data.tag?.toUpperCase() === "UNDER-DEVELOPMENT" ? "blur-[2px] brightness-[0.3]" : ""}`}
+              className="w-full h-full object-contain"
             />
           </div>
         </div>
@@ -159,16 +159,15 @@ export function SomFamily({ data }: { data?: any }) {
   const dataCards: any[] = Array.isArray(data?.cards) ? data.cards : [];
   const cards = FALLBACK_CARDS.map((fb, i) => {
     const c = dataCards[i];
-    if (!c) return fb;
 
     return {
-      tag: c.tag !== undefined ? c.tag : fb.tag,
-      title: c.title || fb.title,
-      description: c.description || fb.description,
-      imageUrl: mediaUrl(c.image) || fb.imageUrl,
+      tag: c?.tag !== undefined ? c.tag : fb.tag,
+      title: c?.title || fb.title,
+      description: c?.description || fb.description,
+      imageUrl: i === 0 ? "/som/left.png" : "/som/right.png",
       // "What's inside" chips are hardcoded by design (see CARD_BLE/CARD_LTE).
       features: fb.features,
-      footerText: c.footerText !== undefined ? c.footerText : fb.footerText,
+      footerText: c?.footerText !== undefined ? c.footerText : fb.footerText,
     };
   });
 

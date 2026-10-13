@@ -8,6 +8,7 @@ import { DvkScrollIndicator } from "./DvkScrollIndicator";
 import { SomInsideModule } from "@/components/som-page/SomInsideModule";
 import { SomPrototypeTitleDesktop, SomPrototypeTitleMobile } from "@/components/som-page/SomPrototypeTitle";
 import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
+import { TagBadge } from "../hero/TagBadge";
 
 import { ModelZooAppForge } from "@/components/model-zoo/ModelZooAppForge";
 import { SPEC_CARDS } from "./dvk-data";
@@ -74,7 +75,6 @@ export function Dvk({ data, formConfig }: { data?: any; formConfig?: any }) {
         {data?.inside_module ? (
           <SomInsideModule
             data={data.inside_module}
-            bridgeCta={{ label: "Explore SOMs", href: "/SOM" }}
           />
         ) : null}
       </div>
@@ -111,7 +111,6 @@ export function Dvk({ data, formConfig }: { data?: any; formConfig?: any }) {
         {data?.inside_module ? (
           <SomInsideModule
             data={data.inside_module}
-            bridgeCta={{ label: "Explore SOMs", href: "/SOM" }}
           />
         ) : null}
       </div>
@@ -517,9 +516,7 @@ function DvkDemosMobile({ data }: { data?: any }) {
           className="absolute top-[30px] left-[calc(50%+0.5px)] flex w-[352px] max-w-[calc(100%-40px)] -translate-x-1/2 flex-col items-center gap-[15px]"
           data-node-id="4059:10213"
         >
-          <p className={`${dmMono.className} m-0 text-[12px] leading-[19.5px] font-normal tracking-[-0.36px] whitespace-nowrap text-[#a9e28c] uppercase not-italic`}>
-            Demo Ready
-          </p>
+          <TagBadge label="Demo Ready" />
           {/* Title frame — 4059:10214 (350×112, corner ticks) */}
           <div
             className="relative h-[112px] w-[350px] max-w-full"

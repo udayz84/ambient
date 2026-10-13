@@ -5,6 +5,7 @@ import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useFitText } from "../shared/FitText";
 import { DvkDemosCards } from "./DvkDemosCards";
+import { TagBadge } from "../hero/TagBadge";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
@@ -41,9 +42,7 @@ export function DvkDemos({ data }: { data?: any }) {
         data-node-id="2761:2791"
         data-name="Section Title"
       >
-        <p className={`${dmMono.className} m-0 text-[12px] leading-[19.5px] font-normal tracking-[-0.36px] whitespace-nowrap text-[#a9e28c] uppercase not-italic`}>
-          Demo Ready
-        </p>
+        <TagBadge label="Demo Ready" />
         {/* Title — 2761:2792 (872×49, px-10 corners frame) */}
         <div
           className="relative px-[10px]"

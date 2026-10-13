@@ -144,8 +144,15 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
       : [];
 
   const TOTAL = products.length || 1;
+  const gpx10Index = products.findIndex((p) =>
+    /gpx\s*10/i.test(p.label || p.id)
+  );
   const defaultIndex =
-    typeof data?.default_index === "number" ? data.default_index : DEFAULT_GPX_INDEX;
+    gpx10Index !== -1
+      ? gpx10Index
+      : typeof data?.default_index === "number"
+      ? data.default_index
+      : DEFAULT_GPX_INDEX;
 
   const heading = data?.heading || "";
   const headingLines = heading.split("\n");

@@ -64,7 +64,7 @@ const DEFAULT_MEGA_COLUMNS: NavMegaColumn[] = [
     description: undefined,
     links: [
       { label: "GPX10PRO", href: "/products" },
-      { label: "GPX40", href: "#" },
+      { label: "GPX40", href: "#", disabled: true, comingSoon: true },
     ],
     ctaLabel: undefined,
     ctaHref: undefined,
@@ -143,13 +143,19 @@ function ProductsMegaMenu({
                   
                   if (isGPX40) {
                     return (
-                      <span
+                      <div
                         key={link.label}
-                        className={`${interRegular.className} w-full flex items-center gap-[6px] text-[14px] leading-[21px] font-normal transition-opacity [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] text-white/40 cursor-default`}
+                        className="flex items-center gap-[8px] w-fit opacity-50 cursor-not-allowed select-none py-[2px]"
                       >
-                        {labelToDisplay}
-                        <span className="text-[12px] opacity-70">(Coming soon)</span>
-                      </span>
+                        <span
+                          className={`${interRegular.className} text-[14px] leading-[21px] font-normal min-[1024px]:text-[16px] min-[1024px]:leading-[24px] text-[#f0f0f0]`}
+                        >
+                          {labelToDisplay}
+                        </span>
+                        <span className="text-[10px] leading-[14px] font-medium tracking-wide text-[#a8ed90] bg-[#a8ed90]/10 border border-[#a8ed90]/25 rounded-[3px] px-[6px] py-[1px] uppercase whitespace-nowrap">
+                          Coming soon
+                        </span>
+                      </div>
                     );
                   }
 
@@ -540,7 +546,7 @@ export function Navbar({
   const logoSrc = mediaUrl(brandData?.logo);
   return (
     <header
-      className={`${interMedium.className} sticky top-0 z-50 h-[78px] w-full overflow-x-clip drop-shadow-[0px_6px_12px_rgba(83,216,36,0.12)]`}
+      className={`${interMedium.className} sticky top-0 z-50 h-[78px] w-full drop-shadow-[0px_6px_12px_rgba(83,216,36,0.12)]`}
       data-node-id="2379:1569"
     >
       <div

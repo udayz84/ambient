@@ -5,7 +5,7 @@ import { ProductsAlwaysOn } from "@/components/products-page/ProductsAlwaysOn";
 import { ProductsUseCases } from "@/components/products-page/ProductsUseCases";
 import { ProductsReadyToRun } from "@/components/products-page/ProductsReadyToRun";
 import { ProductsMeasured } from "@/components/products-page/ProductsMeasured";
-import { ProductsCaseStudies } from "@/components/products-page/ProductsCaseStudies";
+import { ApplicationsPageWins } from "@/components/applications-page/ApplicationsPageWins";
 export const dynamic = "force-dynamic";
 
 
@@ -87,18 +87,8 @@ export default async function ProductsPage() {
     console.error("Failed to fetch products page data:", error);
   }
 
-  // Case Studies fetched separately (same rationale as the home page): until
-  // every environment's CMS has the case_studies schema, a populate error
-  // here must not fail the main fetch above.
-  let caseStudiesData: any = null;
-  try {
-    const productsExtras = await getSingleType<any>("products-page", [
-      { section: "case_studies", nested: ["cards"] },
-    ]);
-    caseStudiesData = productsExtras?.case_studies ?? null;
-  } catch {
-    caseStudiesData = null;
-  }
+  // Case Studies: hardcoded ApplicationsPageWins (applications-page design)
+  // — no CMS fetch for now.
 
   // Labels come from Strapi (label only); targets are auto-assigned by order.
   const stickyLabels: string[] = Array.isArray(data?.sticky_nav)
@@ -123,10 +113,10 @@ export default async function ProductsPage() {
       <div id="features"><ProductsFeatures data={data?.features} /></div>
       <div id="always-on"><ProductsAlwaysOn data={data?.always_on} /></div>
       <div id="metrics"><ProductsMeasured data={data?.measured} /></div>
-      <ProductsCaseStudies data={caseStudiesData} />
+      <ApplicationsPageWins />
       <div id="use-cases"><ProductsUseCases data={data?.use_cases} /></div>
       <ProductsReadyToRun />
-      <ProductsAppForge data={data?.appforge} />
+      {/* <ProductsAppForge data={data?.appforge} /> */}
       <ProductsModelForge data={data?.modelforge} />
       <ProductsBenchToVolume data={data?.bench_to_volume} />
       <div id="architecture"><ProductsArchitecture data={data?.architecture} /></div>

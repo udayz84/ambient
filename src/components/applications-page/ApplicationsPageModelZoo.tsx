@@ -6,6 +6,25 @@ import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { mediaUrl } from "@/lib/strapi";
 import { PARTNERS_WHY } from "../partners/partners-data";
 
+/* Hearables slug pages swap the shared partner-journey card art for
+   hearables imagery. Slot 3 keeps its existing image until hear-3 lands. */
+const HEARABLES_CARD_IMAGES: Record<number, string> = {
+  0: "/applications/hearables/hear-1.webp",
+  1: "/applications/hearables/hear-2.webp",
+  2: "/applications/hearables/hear-3.webp",
+  3: "/applications/hearables/hear-4.webp",
+  4: "/applications/hearables/hear-5.webp",
+};
+
+/* Industrial IoT slug pages use their own card art. */
+const IIOT_CARD_IMAGES: Record<number, string> = {
+  0: "/applications/industrial-iot/iiot-one.webp",
+  1: "/applications/industrial-iot/iiot-two.webp",
+  2: "/applications/industrial-iot/iiot-three.webp",
+  3: "/applications/industrial-iot/iiot-four.webp",
+  4: "/applications/industrial-iot/iiot-five.webp",
+};
+
 const TITLE_GRADIENT =
   "linear-gradient(123.792deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
@@ -168,11 +187,9 @@ const STEP_NUMBER_GRADIENT =
   "linear-gradient(to bottom, rgb(255, 255, 255), rgba(255, 255, 255, 0))";
 
 function WhyCard({ step }: { step: any }) {
-  const isFullCardBg = step.number === "03";
-
   return (
     <article
-      className="group/card relative flex w-full flex-col overflow-hidden border border-solid px-[24px] pt-[16px] pb-[24px] h-full min-h-[430px]"
+      className="group/card relative flex w-full flex-col overflow-hidden border border-solid px-[24px] pt-0 pb-[24px] h-full min-h-[430px]"
       style={{
         backgroundColor: WHY_CARD_BG,
         borderColor: WHY_CARD_BORDER,
@@ -185,8 +202,8 @@ function WhyCard({ step }: { step: any }) {
         aria-hidden
       >
         {/* Soft grey radial gradient backlight for dark images */}
-        <div 
-          className="absolute inset-0" 
+        <div
+          className="absolute inset-0"
           style={{
             background: "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 65%)"
           }}
@@ -196,9 +213,7 @@ function WhyCard({ step }: { step: any }) {
           <img loading="lazy" decoding="async"
             alt=""
             src={step.image}
-            className={`absolute inset-0 h-full w-full opacity-75 transition-opacity duration-300 group-hover/card:opacity-100 ${
-              isFullCardBg ? "object-cover" : "object-contain"
-            }`}
+            className="absolute inset-0 h-full w-full object-cover opacity-75 transition-opacity duration-300 group-hover/card:opacity-100"
           />
         )}
         {/* Fade overlay */}
@@ -288,10 +303,16 @@ const SMART_HOME_FEATURES = [
   },
 ];
 
-const WEARABLES_EYEBROW = "A PROGRAMMABLE CANVAS FOR THE WRIST, RING & LENS";
+const WEARABLES_EYEBROW = "AI MODEL ZOO";
 const WEARABLES_HEADING = "One chip. Every wearable AI feature.";
 const WEARABLES_SUBTITLE =
   "The GPX architecture isn't an ASIC — it's a fully programmable AI engine. Here's what you run natively.";
+
+/* Main /applications page (strip variant) — Model Zoo copy instead of the
+   wearables-page copy. */
+const STRIP_HEADING = "Every application here runs on real, ready models";
+const STRIP_SUBTITLE =
+  "Browse a growing library of open-source and Ambient-built models, tuned for GPX, deployable in one click. Don't build from scratch, start from something that works.";
 
 const WEARABLES_FEATURES = [
   {
@@ -299,35 +320,35 @@ const WEARABLES_FEATURES = [
     title: "Complex Activity Classification",
     description:
       "Beyond step-counting — gym exercises, swim strokes, PT movements.",
-    image: "/partners/svg 2/7.svg",
+    image: "/applications/wearables/feature-card-1.jpeg",
   },
   {
     number: "02",
     title: "Continuous Biomarker Tracking",
     description:
       "1D-CNNs for ECG and early anomaly detection without killing the coin cell.",
-    image: "/partners/svg 2/8.svg",
+    image: "/applications/wearables/feature-card-2.jpeg",
   },
   {
     number: "03",
     title: "Always-On Safety Monitoring",
     description:
       "Fall detection and acoustic safety, always in the background.",
-    image: "/partners/svg 2/9.svg",
+    image: "/applications/wearables/feature-card-3.jpeg",
   },
   {
     number: "04",
     title: "Gesture Recognition",
     description:
       "Micro-gestures for AR rings and glasses, zero cloud latency.",
-    image: "/partners/svg 2/10.svg",
+    image: "/applications/wearables/feature-card-4.jpeg",
   },
   {
     number: "05",
     title: "Bring Your Own Model",
     description:
       "Proprietary model? Compile it to GPX with ModelForge.",
-    image: "/partners/svg 2/11.svg",
+    image: "/applications/wearables/feature-card-5.jpeg",
   },
 ];
 
@@ -428,6 +449,8 @@ export function ApplicationsPageModelZoo({
   const isSmartHome = Boolean(
     slug && (slug === "smarthomes" || slug === "smart-homes" || slug.includes("home"))
   );
+  const isHearables = Boolean(slug && slug.includes("hearable"));
+  const isIiot = Boolean(slug && slug.includes("industrial"));
   const isWearables = Boolean(
     !slug || slug === "wearables" || slug.includes("wearable")
   );
@@ -437,16 +460,20 @@ export function ApplicationsPageModelZoo({
     : isWearables
       ? WEARABLES_EYEBROW
       : EYEBROW;
-  const heading = isSmartHome
-    ? SMART_HOME_HEADING
-    : isWearables
-      ? WEARABLES_HEADING
-      : HEADING;
-  const subtitle = isSmartHome
-    ? SMART_HOME_SUBTITLE
-    : isWearables
-      ? WEARABLES_SUBTITLE
-      : SUBTITLE;
+  const heading = variant === "strip"
+    ? STRIP_HEADING
+    : isSmartHome
+      ? SMART_HOME_HEADING
+      : isWearables
+        ? WEARABLES_HEADING
+        : HEADING;
+  const subtitle = variant === "strip"
+    ? STRIP_SUBTITLE
+    : isSmartHome
+      ? SMART_HOME_SUBTITLE
+      : isWearables
+        ? WEARABLES_SUBTITLE
+        : SUBTITLE;
   const primaryCta = { label: "Explore the Model Zoo →", href: "/model-zoo" };
   const features = isSmartHome
     ? SMART_HOME_FEATURES
@@ -541,12 +568,20 @@ export function ApplicationsPageModelZoo({
           /* Partner cards on other application slug pages */
           <div className="relative z-10 mt-[60px] w-full py-[24px] px-[24px] min-[1024px]:px-[64px] min-[1024px]:py-[32px] max-w-[1440px]">
             <div className="flex w-full flex-wrap min-[1024px]:flex-nowrap justify-center gap-[16px] sm:gap-[24px]">
-              {PARTNERS_WHY.journey.map((step) => (
+              {PARTNERS_WHY.journey.map((step, i) => (
                 <div
                   key={step.title}
                   className="w-full sm:w-[calc(50%-12px)] min-[1024px]:w-[calc(20%-19.2px)] max-w-[400px] min-[1024px]:max-w-none"
                 >
-                  <WhyCard step={step} />
+                  <WhyCard
+                    step={{
+                      ...step,
+                      image:
+                        (isHearables && HEARABLES_CARD_IMAGES[i]) ||
+                        (isIiot && IIOT_CARD_IMAGES[i]) ||
+                        step.image,
+                    }}
+                  />
                 </div>
               ))}
             </div>

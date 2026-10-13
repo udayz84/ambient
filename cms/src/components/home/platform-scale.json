@@ -5,7 +5,7 @@
   "attributes": {
     "heading": { "type": "string", "required": true },
     "subtitle": { "type": "text" },
-    "default_index": { "type": "integer", "default": 2 },
+    "default_index": { "type": "integer", "default": 0 },
     "products": { "type": "component", "repeatable": true, "component": "home.gpx-product" },
     "cta": { "type": "component", "repeatable": false, "component": "shared.button" },
     "secondary_cta": { "type": "component", "repeatable": false, "component": "shared.button" }

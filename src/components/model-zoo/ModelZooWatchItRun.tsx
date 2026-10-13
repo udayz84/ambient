@@ -57,7 +57,7 @@ const CARDS: WatchCard[] = [
   {
     nodeId: "5130:8726",
     name: "Voice Based",
-    img: "/model-zoo/watch-card-1.webp",
+    img: "/model-zoo/one.png",
     imgLeft: 81.04,
     imgTop: -39.38,
     imgW: 290,
@@ -65,23 +65,12 @@ const CARDS: WatchCard[] = [
     title: "Ready to run.",
     desc: "Pre-trained models deploy to your kit as-is — no data collection or training run required to get started.",
     textH: 345,
-    decor: (
-      <>
-        <Dec src="/model-zoo/dec-ellipse-6a.svg" left={192} top={73} w={6} h={6} inset="-66.67%" />
-        <Dec src="/model-zoo/dec-ellipse-6a.svg" left={192} top={60} w={6} h={6} inset="-66.67%" />
-        <Dec src="/model-zoo/dec-ellipse-6a.svg" left={210} top={67} w={6} h={6} inset="-66.67%" />
-        <Dec src="/model-zoo/dec-ring-13.svg" left={255.5} top={118} w={13} h={17.81} inset="-22.46% -30.76%" />
-        <Dec src="/model-zoo/dec-ellipse-6a.svg" left={210} top={79.5} w={6} h={6} inset="-66.67%" />
-        <Dec src="/model-zoo/dec-ellipse-6a.svg" left={192} top={85} w={6} h={6} inset="-66.67%" />
-        <Dec src="/model-zoo/dec-ellipse-6a.svg" left={174.5} top={79.5} w={6} h={6} inset="-66.67%" />
-        <Dec src="/model-zoo/dec-ellipse-6a.svg" left={175} top={67} w={6} h={6} inset="-66.67%" />
-      </>
-    ),
+    decor: null,
   },
   {
     nodeId: "5130:8738",
     name: "Fall Detection",
-    img: "/model-zoo/watch-card-2.webp",
+    img: "/model-zoo/two.png",
     imgRight: -60.37,
     imgTop: -52.38,
     imgW: 290,
@@ -89,12 +78,12 @@ const CARDS: WatchCard[] = [
     title: "One click to hardware.",
     desc: "Flash a model to your board in a single click and see live results immediately.",
     textH: 345,
-    decor: <Dec src="/model-zoo/dec-ring-22.svg" left={211.49} top={110.29} w={22} h={12} inset="-33.33% -18.18%" />,
+    decor: null,
   },
   {
     nodeId: "5130:8749",
     name: "Vision Based",
-    img: "/model-zoo/watch-card-3.webp",
+    img: "/model-zoo/three.png",
     imgRight: -46.37,
     imgTop: -30.38,
     imgW: 290,
@@ -102,26 +91,12 @@ const CARDS: WatchCard[] = [
     title: "Runs at microwatts.",
     desc: "Every model is tuned for the A-Cube architecture — full inference inside a coin-cell power budget.",
     textH: 345,
-    decor: (
-      <>
-        <Dec src="/model-zoo/dec-ellipse-5.svg" left={215} top={50} w={5} h={5} inset="-40%" />
-        <Dec src="/model-zoo/dec-ellipse-5.svg" left={181} top={68} w={5} h={5} inset="-40%" />
-        <Dec src="/model-zoo/dec-ellipse-5.svg" left={247} top={67} w={5} h={5} inset="-40%" />
-        <Dec src="/model-zoo/dec-ellipse-5.svg" left={281} top={49} w={5} h={5} inset="-40%" />
-        <Dec src="/model-zoo/dec-ellipse-5.svg" left={247} top={32} w={5} h={5} inset="-40%" />
-        <Dec src="/model-zoo/dec-ellipse-5.svg" left={215} top={15} w={5} h={5} inset="-40%" />
-        <Dec src="/model-zoo/dec-ellipse-5.svg" left={182} top={32} w={5} h={5} inset="-40%" />
-        <Dec src="/model-zoo/dec-ellipse-5.svg" left={149} top={49} w={5} h={5} inset="-40%" />
-        <Dec src="/model-zoo/dec-vector-115.svg" left={194.5} top={68} w={46} h={25.5} inset="-62.75% -34.78%" />
-        <Dec src="/model-zoo/dec-vector-116.svg" left={180.28} top={74.5} w={46.44} h={54.89} inset="-57.66% -33.72%" />
-        <Dec src="/model-zoo/dec-vector-117.svg" left={207.26} top={76.39} w={46.49} h={54.78} inset="-57.34% -33.87%" />
-      </>
-    ),
+    decor: null,
   },
   {
     nodeId: "5130:8771",
     name: "Vision Based 2",
-    img: "/model-zoo/watch-card-4.webp",
+    img: "/model-zoo/four.png",
     imgRight: -41,
     imgTop: -21,
     imgW: 275,
@@ -129,25 +104,7 @@ const CARDS: WatchCard[] = [
     title: "Yours to shape.",
     desc: "Retrain any model using your own data, or bring your own model. The zoo is a starting point, not a limitation.",
     textH: 345,
-    decor: (
-      <>
-        <Dec src="/model-zoo/dec-ellipse-4.svg" left={190} top={185} w={4} h={4} inset="-25%" />
-        <Dec src="/model-zoo/dec-ellipse-4.svg" left={184} top={182} w={4} h={4} inset="-25%" />
-        <Dec src="/model-zoo/dec-ellipse-4.svg" left={179} top={179} w={4} h={4} inset="-25%" />
-        <Dec src="/model-zoo/dec-ellipse-6c.svg" left={219} top={93} w={6} h={6} inset="0" />
-        <Dec src="/model-zoo/dec-ellipse-6c.svg" left={233} top={89} w={6} h={6} inset="0" />
-        <Dec src="/model-zoo/dec-ellipse-6c.svg" left={219} top={77.5} w={6} h={6} inset="0" />
-        <Dec src="/model-zoo/dec-ellipse-6c.svg" left={206} top={88.5} w={6} h={6} inset="0" />
-        <Dec src="/model-zoo/dec-ellipse-6c.svg" left={206} top={102} w={6} h={6} inset="0" />
-        <Dec src="/model-zoo/dec-ellipse-6c.svg" left={219} top={111.5} w={6} h={6} inset="0" />
-        <Dec src="/model-zoo/dec-ellipse-6c.svg" left={233} top={102} w={6} h={6} inset="0" />
-        <Dec src="/model-zoo/dec-ellipse-4b.svg" left={229.5} top={97} w={4} h={4} inset="0" />
-        <Dec src="/model-zoo/dec-ellipse-6d.svg" left={229} top={97} w={5} h={5} inset="-80%" />
-        <Dec src="/model-zoo/dec-ellipse-5b.svg" left={218.5} top={111} w={7} h={7} inset="-57.14%" />
-        <Dec src="/model-zoo/dec-ellipse-5b.svg" left={205} top={101.5} w={7} h={7} inset="-57.14%" />
-        <Dec src="/model-zoo/dec-ellipse-65.svg" left={205.5} top={88.5} w={6.5} h={6} inset="-66.67% -61.54%" />
-      </>
-    ),
+    decor: null,
   },
 ];
 

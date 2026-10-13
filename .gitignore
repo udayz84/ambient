@@ -59,6 +59,7 @@ restored-assets/
 
 # Database backups
 db_backup.sql
+files-table-backup*.json
 
 # Figma QA reference screenshots (local scratch)
 .figma-ref/

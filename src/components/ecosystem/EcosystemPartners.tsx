@@ -1,10 +1,15 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import Image from "next/image";
 import { gilroySemiBold } from "../hero/fonts";
 import {
+  CAROUSEL_1_SLOTS,
+  CAROUSEL_2_SLOTS,
   DEVELOPMENT_PARTNER_ROW,
   SILICON_PARTNER_ROW,
+  type CarouselSlot,
+  type PartnerRowConfig,
 } from "./ecosystem-data";
 import { DEV_LOGO_STAT_NODES, EcosystemPartnerRow } from "./EcosystemPartnerRow";
 
@@ -14,22 +19,11 @@ const TITLE_GRADIENT_SILICON =
 const TITLE_GRADIENT_DEVELOPMENT =
   "linear-gradient(127.267deg, rgb(22, 22, 22) 9.0248%, rgb(39, 39, 39) 37.884%, rgb(18, 18, 18) 111.41%)";
 
-const CONTENT_WIDTH_PX = 1204;
-const SECTION_GAP_PX = 20;
-const SLIDE_MS = 12000;
-
-const PAN_TO_DEV_PX = -(CONTENT_WIDTH_PX + SECTION_GAP_PX);
-const PAN_TO_SILICON_AGAIN_PX = -(CONTENT_WIDTH_PX * 2 + SECTION_GAP_PX * 2);
-const PAN_TO_DEV_AGAIN_PX = -(CONTENT_WIDTH_PX * 3 + SECTION_GAP_PX * 3);
-
-const TRACK_TRANSITION = `transform ${SLIDE_MS}ms linear`;
-
-type SequencePhase =
-  | "idle"
-  | "track-pan-dev"
-  | "track-pan-silicon-again"
-  | "track-pan-dev-again"
-  | "reset";
+const FRAME_WIDTH_PX = 1204;
+const FRAME_GAP_PX = 24;
+const STRIDE_PX = FRAME_WIDTH_PX + FRAME_GAP_PX;
+const AUTOPLAY_MS = 5000;
+const TRANSITION_DURATION_MS = 700;
 
 function PartnerCategoryTitle({
   children,
@@ -56,18 +50,24 @@ function PartnerSection({
   titleNodeId,
   gradient,
   cardsNodeId,
-  children,
+  config,
+  slots,
+  logoStatNodeIds,
+  isDevelopment,
 }: {
   title: string;
   titleNodeId: string;
   gradient: string;
   cardsNodeId: string;
-  children: ReactNode;
+  config: PartnerRowConfig;
+  slots: readonly CarouselSlot[];
+  logoStatNodeIds?: readonly [string, string, string];
+  isDevelopment?: boolean;
 }) {
   return (
     <div
-      className="relative h-[285px] shrink-0 overflow-hidden"
-      style={{ width: CONTENT_WIDTH_PX }}
+      className="relative h-[285px] w-[1204px] shrink-0 overflow-hidden"
+      style={{ width: FRAME_WIDTH_PX }}
     >
       <div
         className="relative flex h-full w-full flex-col items-start"
@@ -77,8 +77,13 @@ function PartnerSection({
           {title}
         </PartnerCategoryTitle>
 
-        <div className="relative h-[225px] w-full shrink-0 overflow-hidden">
-          {children}
+        <div className="relative mt-[0px] h-[225px] w-full shrink-0 overflow-hidden">
+          <EcosystemPartnerRow
+            config={config}
+            slotsOverride={slots}
+            logoStatNodeIds={logoStatNodeIds}
+            isDevelopment={isDevelopment}
+          />
         </div>
       </div>
     </div>
@@ -87,164 +92,172 @@ function PartnerSection({
 
 export function EcosystemPartners({ data }: { data?: any }) {
   void data;
-  const ref = useRef<HTMLDivElement>(null);
-  const isInViewRef = useRef(false);
-  const loopActiveRef = useRef(false);
-  const [phase, setPhase] = useState<SequencePhase>("idle");
-  const [trackOffset, setTrackOffset] = useState(0);
-  const [transitionsEnabled, setTransitionsEnabled] = useState(true);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(true);
+  const [paused, setPaused] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isTransitioningRef = useRef(isTransitioning);
+  isTransitioningRef.current = isTransitioning;
 
-  const beginLoopCycle = useCallback(() => {
-    loopActiveRef.current = true;
-    setTransitionsEnabled(false);
-    setTrackOffset(0);
-    setPhase("track-pan-dev");
+  const totalOriginalSlides = 2;
 
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        setTransitionsEnabled(true);
-        setTrackOffset(PAN_TO_DEV_PX);
-      });
-    });
+  const nextSlide = useCallback(() => {
+    setIsTransitioning(true);
+    setCurrentSlide((prev) => prev + 1);
   }, []);
 
-  const resetAndContinueLoop = useCallback(() => {
-    setTransitionsEnabled(false);
-    setTrackOffset(PAN_TO_DEV_AGAIN_PX);
-    setPhase("reset");
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        if (isInViewRef.current) {
-          beginLoopCycle();
-        } else {
-          loopActiveRef.current = false;
-          setPhase("idle");
-          setTransitionsEnabled(true);
-        }
-      });
-    });
-  }, [beginLoopCycle]);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isInViewRef.current = entry.isIntersecting;
-
-        if (entry.isIntersecting && !loopActiveRef.current) {
-          beginLoopCycle();
-        }
-
-        if (!entry.isIntersecting) {
-          loopActiveRef.current = false;
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [beginLoopCycle]);
-
-  useEffect(() => {
-    if (phase === "track-pan-dev") {
-      const timer = window.setTimeout(() => setPhase("track-pan-silicon-again"), SLIDE_MS);
-      return () => window.clearTimeout(timer);
-    }
-
-    if (phase === "track-pan-silicon-again") {
-      setTransitionsEnabled(true);
+  const prevSlide = useCallback(() => {
+    if (currentSlide === 0) {
+      // Snap to clone (index 2) without transition, then transition to index 1
+      setIsTransitioning(false);
+      setCurrentSlide(totalOriginalSlides);
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          setTrackOffset(PAN_TO_SILICON_AGAIN_PX);
+          setIsTransitioning(true);
+          setCurrentSlide(totalOriginalSlides - 1);
         });
       });
-      const timer = window.setTimeout(() => setPhase("track-pan-dev-again"), SLIDE_MS);
-      return () => window.clearTimeout(timer);
+    } else {
+      setIsTransitioning(true);
+      setCurrentSlide((prev) => prev - 1);
     }
+  }, [currentSlide]);
 
-    if (phase === "track-pan-dev-again") {
-      setTransitionsEnabled(true);
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setTrackOffset(PAN_TO_DEV_AGAIN_PX);
-        });
-      });
-      const timer = window.setTimeout(() => resetAndContinueLoop(), SLIDE_MS);
-      return () => window.clearTimeout(timer);
+  const goToSlide = useCallback((index: number) => {
+    setIsTransitioning(true);
+    setCurrentSlide(index);
+  }, []);
+
+  // Handle seamless loop after forward transition to clone
+  const handleTransitionEnd = useCallback(() => {
+    if (currentSlide >= totalOriginalSlides) {
+      setIsTransitioning(false);
+      setCurrentSlide(0);
     }
-  }, [phase, resetAndContinueLoop]);
+  }, [currentSlide]);
 
-  const trackTransition = transitionsEnabled ? TRACK_TRANSITION : "none";
+  // Autoplay timer
+  useEffect(() => {
+    if (paused) return;
+    const timer = setInterval(() => {
+      nextSlide();
+    }, AUTOPLAY_MS);
+    return () => clearInterval(timer);
+  }, [paused, nextSlide]);
+
+  const activeIndex = currentSlide % totalOriginalSlides;
 
   return (
     <div
-      ref={ref}
-      className="relative h-[285px] w-full overflow-hidden"
+      ref={containerRef}
+      className="relative mx-auto h-[285px] w-full max-w-[1204px] overflow-hidden select-none"
       data-node-id="2379:1047"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
     >
+      {/* Top right carousel controls */}
+      <div className="absolute top-[16px] right-0 z-30 flex items-center gap-[12px]">
+        {/* Prev Button */}
+        <button
+          type="button"
+          onClick={prevSlide}
+          aria-label="Previous partner slide"
+          className="flex size-[28px] items-center justify-center rounded-full border border-white/20 bg-black/60 text-white/70 transition-all hover:border-white/50 hover:bg-white/10 hover:text-white"
+        >
+          <svg
+            className="size-[14px]"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        {/* Indicators */}
+        <div className="flex items-center gap-[6px]">
+          {Array.from({ length: totalOriginalSlides }).map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => goToSlide(i)}
+              className={`h-[4px] rounded-full transition-all duration-300 ${
+                i === activeIndex
+                  ? "w-[24px] bg-[#39ff14]"
+                  : "w-[10px] bg-white/30 hover:bg-white/60"
+              }`}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
+        </div>
+
+        {/* Next Button */}
+        <button
+          type="button"
+          onClick={nextSlide}
+          aria-label="Next partner slide"
+          className="flex size-[28px] items-center justify-center rounded-full border border-white/20 bg-black/60 text-white/70 transition-all hover:border-white/50 hover:bg-white/10 hover:text-white"
+        >
+          <svg
+            className="size-[14px]"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Frame track */}
       <div
-        className="flex h-full shrink-0 will-change-transform"
+        className="flex h-full will-change-transform"
         style={{
-          width: CONTENT_WIDTH_PX * 4 + SECTION_GAP_PX * 3,
-          gap: SECTION_GAP_PX,
-          transform: `translateX(${trackOffset}px)`,
-          transition: trackTransition,
+          width: FRAME_WIDTH_PX * 3 + FRAME_GAP_PX * 2,
+          gap: FRAME_GAP_PX,
+          transform: `translateX(-${currentSlide * STRIDE_PX}px)`,
+          transition: isTransitioning
+            ? `transform ${TRANSITION_DURATION_MS}ms cubic-bezier(0.4, 0, 0.2, 1)`
+            : "none",
         }}
+        onTransitionEnd={handleTransitionEnd}
         data-node-id="2379:1051"
       >
+        {/* Slide 0: Silicon Partners */}
         <PartnerSection
           title="PARTNERS"
           titleNodeId="2379:1048"
           gradient={TITLE_GRADIENT_SILICON}
           cardsNodeId="2379:1051-silicon"
-        >
-          <EcosystemPartnerRow
-            config={SILICON_PARTNER_ROW}
-            isDevelopment={false}
-          />
-        </PartnerSection>
+          config={SILICON_PARTNER_ROW}
+          slots={CAROUSEL_1_SLOTS}
+          isDevelopment={false}
+        />
 
+        {/* Slide 1: Development Partners */}
         <PartnerSection
           title="PARTNERS"
           titleNodeId="2379:1049"
           gradient={TITLE_GRADIENT_DEVELOPMENT}
           cardsNodeId="2379:1051-dev"
-        >
-          <EcosystemPartnerRow
-            config={DEVELOPMENT_PARTNER_ROW}
-            logoStatNodeIds={DEV_LOGO_STAT_NODES}
-            isDevelopment={true}
-          />
-        </PartnerSection>
+          config={DEVELOPMENT_PARTNER_ROW}
+          slots={CAROUSEL_2_SLOTS}
+          logoStatNodeIds={DEV_LOGO_STAT_NODES}
+          isDevelopment={true}
+        />
 
+        {/* Slide 2: Clone of Slide 0 for seamless forward looping */}
         <PartnerSection
           title="PARTNERS"
-          titleNodeId="2379:1048"
+          titleNodeId="2379:1048-clone"
           gradient={TITLE_GRADIENT_SILICON}
-          cardsNodeId="2379:1051-silicon-2"
-        >
-          <EcosystemPartnerRow
-            config={SILICON_PARTNER_ROW}
-            isDevelopment={false}
-          />
-        </PartnerSection>
-
-        <PartnerSection
-          title="PARTNERS"
-          titleNodeId="2379:1049"
-          gradient={TITLE_GRADIENT_DEVELOPMENT}
-          cardsNodeId="2379:1051-dev-2"
-        >
-          <EcosystemPartnerRow
-            config={DEVELOPMENT_PARTNER_ROW}
-            logoStatNodeIds={DEV_LOGO_STAT_NODES}
-            isDevelopment={true}
-          />
-        </PartnerSection>
+          cardsNodeId="2379:1051-silicon-clone"
+          config={SILICON_PARTNER_ROW}
+          slots={CAROUSEL_1_SLOTS}
+          isDevelopment={false}
+        />
       </div>
     </div>
   );

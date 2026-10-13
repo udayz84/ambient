@@ -14,6 +14,8 @@ const DEFAULT_FOOTER =
   "Validate your logic on the Cranium kit today. When you are ready for extreme space constraints, drop our high-density SOM directly into your product without rewriting your application software.";
 const DEFAULT_PRIMARY_LABEL = "Explore SOMs";
 const DEFAULT_SECONDARY_LABEL = "Schedule Technical Consultation";
+const DIGIKEY_CRANIUM_DVK_URL =
+  "https://www.digikey.com/en/products/detail/ambient-scientific/CRT6P1GPX10S11/28771118";
 
 export function DvkIntegratedModules({ data }: { data?: any }) {
   const heading = data?.heading || DEFAULT_HEADING;
@@ -155,7 +157,14 @@ function DvkIntegratedModulesDesktop({
               </p>
               {i === 0 && (
                 <div className="mt-auto pt-[32px]">
-                  <GreenCta width={157} href="#">Shop now</GreenCta>
+                  <GreenCta
+                    width={157}
+                    href={DIGIKEY_CRANIUM_DVK_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Shop now
+                  </GreenCta>
                 </div>
               )}
             </div>
@@ -303,7 +312,9 @@ function DvkIntegratedModulesMobile({
                 {i === 0 && (
                   <div className="mt-auto pt-[16px]">
                     <a
-                      href="#"
+                      href={DIGIKEY_CRANIUM_DVK_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[36px] w-[140px] shrink-0 items-center justify-center`}
                     >
                       <span className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
@@ -404,10 +415,26 @@ function DevChip({ label }: { label: string }) {
   );
 }
 
-function GreenCta({ children, width, fullWidth = false, href = "#" }: { children: React.ReactNode; width: number; fullWidth?: boolean; href?: string }) {
+function GreenCta({
+  children,
+  width,
+  fullWidth = false,
+  href = "#",
+  target,
+  rel,
+}: {
+  children: React.ReactNode;
+  width: number;
+  fullWidth?: boolean;
+  href?: string;
+  target?: string;
+  rel?: string;
+}) {
   return (
     <a
       href={href}
+      target={target}
+      rel={rel}
       className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[52px] ${fullWidth ? "w-full" : "shrink-0"} items-center justify-center`}
       style={fullWidth ? undefined : { width }}
     >

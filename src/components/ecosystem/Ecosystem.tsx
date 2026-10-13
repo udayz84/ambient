@@ -12,7 +12,7 @@ export function Ecosystem({ data }: { data?: any }) {
       <div className="mx-auto hidden w-full max-w-[1204px] flex-col gap-[48px] min-[1024px]:flex">
         <EcosystemHeader data={data} />
       </div>
-      <div className="mt-[24px] hidden w-full min-[1024px]:block">
+      <div className="mx-auto mt-[24px] hidden w-full max-w-[1204px] min-[1024px]:block">
         <EcosystemPartners data={data} />
       </div>
 

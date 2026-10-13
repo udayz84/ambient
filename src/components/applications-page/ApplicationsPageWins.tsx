@@ -28,6 +28,8 @@ const STAT_GRADIENT =
   "linear-gradient(to bottom, rgb(255, 255, 255) 37.312%, rgba(255, 255, 255, 0))";
 
 const FALLBACK_HEADING = "The empirical advantage.";
+const FALLBACK_SUBHEADING =
+  "Real products, real numbers, with the AI running the whole time.";
 
 function FeatureRow() {
   const tile = (
@@ -328,7 +330,7 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const heading = data?.heading || FALLBACK_HEADING;
-  const subheading = (data?.subheading as string) || "";
+  const subheading = (data?.subheading as string) || FALLBACK_SUBHEADING;
   const body = data?.body || BODY;
   const ctaLabel = data?.cta?.label || "Explore Applications";
   const ctaHref = data?.cta?.href || "#";

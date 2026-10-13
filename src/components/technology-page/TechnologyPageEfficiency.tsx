@@ -972,7 +972,7 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
       </div>
 
       {/* DESKTOP (>=1024px) */}
-      <div className="relative z-10 hidden h-[770px] w-full max-w-[1440px] min-[1024px]:block">
+      <div className="relative z-10 hidden h-[810px] w-full max-w-[1440px] min-[1024px]:block">
 
         {/* 3346:938 — Section Title */}
         <div
@@ -1024,7 +1024,7 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
       </div>
 
       {/* MOBILE (<1024px) — Figma 4533:2857 "6th Fold" (393x1119 + whitepaper CTA) */}
-      <div className="relative h-[1199px] w-full overflow-hidden min-[1024px]:hidden">
+      <div className="relative h-[1230px] w-full overflow-hidden min-[1024px]:hidden">
         {/* Background glows — 4533:2859 / 4533:2860 */}
         <Glow
           top="top-[-104px]"

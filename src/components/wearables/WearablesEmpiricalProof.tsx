@@ -380,8 +380,6 @@ const ECG_FRAMES = [
 ];
 
 const SECTION_EYEBROW = "The on-device advantage";
-const INDUSTRIAL_EYEBROW = "Measured, Not Projected";
-const INDUSTRIAL_HEADING = "The difference between a low-power DSP and low-power AI.";
 const SMART_HOME_SUBTITLE =
   "Take one always-on workload — continuous wake-word + presence detection — and look at what it costs to run. This is why Ambient devices can go cordless.";
 
@@ -585,6 +583,7 @@ function EcgCard({
   description,
   isSmartHome,
   isIndustrial,
+  isHearables,
   tags,
 }: {
   index: number;
@@ -596,6 +595,7 @@ function EcgCard({
   description: string;
   isSmartHome?: boolean;
   isIndustrial?: boolean;
+  isHearables?: boolean;
   tags?: { icon: string; label: string }[];
 }) {
   const frame = ECG_FRAMES[index];
@@ -610,8 +610,8 @@ function EcgCard({
     >
       <CardAbstractBg />
       {/* Image — 4016:3933 / 4016:3954 / 4016:3975 / 4016:3997 */}
-      {isIndustrial ? (
-        /* Full-width photo (CMS photos are 4:3 renders, not framed chips) */
+      {isIndustrial || isHearables ? (
+        /* Full-width photo */
         <div className="pointer-events-none absolute left-0 top-0 h-[185px] w-full overflow-hidden" aria-hidden>
           <img loading="lazy" decoding="async" alt="" src={imageSrc} className="absolute inset-0 size-full max-w-none object-cover object-center" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#091208] via-transparent to-transparent" />
@@ -631,7 +631,7 @@ function EcgCard({
         </div>
       )}
       {/* Accent image (card 3 only) — 4016:3991 */}
-      {!isSmartHome && !isIndustrial && index === 2 ? (
+      {!isSmartHome && !isIndustrial && !isHearables && index === 2 ? (
         <div className="pointer-events-none absolute left-[43px] top-[63px] h-[70px] w-[73px]" aria-hidden>
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
             <img loading="lazy" decoding="async"
@@ -703,6 +703,7 @@ function EcgCardMobile({
   description,
   isSmartHome,
   isIndustrial,
+  isHearables,
 }: {
   imageSrc: string;
   badge: string;
@@ -712,6 +713,7 @@ function EcgCardMobile({
   description: string;
   isSmartHome?: boolean;
   isIndustrial?: boolean;
+  isHearables?: boolean;
 }) {
   return (
     <div className={`relative min-h-[290px] w-full shrink-0 ${CARD_BG}`}>
@@ -720,7 +722,7 @@ function EcgCardMobile({
         leftSrc="/applications/wearables/vector-47.svg"
         rightSrc="/applications/wearables/vector-46.svg"
       />
-      {isIndustrial ? (
+      {isIndustrial || isHearables ? (
         /* Full-width photo for CMS-rendered 4:3 images */
         <div className="pointer-events-none absolute left-0 top-0 h-[150px] w-full overflow-hidden" aria-hidden>
           <img loading="lazy" decoding="async" alt="" src={imageSrc} className="absolute inset-0 size-full max-w-none object-cover object-center" />
@@ -775,6 +777,13 @@ function EcgCardMobile({
   );
 }
 
+const HEARABLES_CARD_IMAGES = [
+  "/applications/hearables/1.jpeg",
+  "/applications/hearables/2.jpeg",
+  "/applications/hearables/3.jpeg",
+  "/applications/hearables/4.jpeg",
+];
+
 export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: string }) {
   const isSmartHome = Boolean(
     (slug && (slug === "smarthomes" || slug === "smart-homes" || slug.includes("home"))) ||
@@ -783,11 +792,17 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
   const isIndustrial = Boolean(
     slug && (slug === "industrial_iot" || slug === "industrial-iot" || slug.includes("industrial"))
   );
-  const eyebrow = isIndustrial ? INDUSTRIAL_EYEBROW : SECTION_EYEBROW;
+  const isHearables = Boolean(
+    (slug && (slug === "hearables" || slug.includes("hearable"))) ||
+    data?.heading?.includes("audio") ||
+    data?.subtitle?.includes("audio")
+  );
+  const isWearablesOnly = !isSmartHome && !isIndustrial && !isHearables;
+  const eyebrow = SECTION_EYEBROW;
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 1 });
   const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
 
-  const heading = isIndustrial ? INDUSTRIAL_HEADING : SECTION_HEADING;
+  const heading = SECTION_HEADING;
   const subtitle = isSmartHome ? SMART_HOME_SUBTITLE : (data?.subtitle || FALLBACK_SUBTITLE);
   const healthData = data?.health_card;
   const powerData = data?.power_card;
@@ -797,7 +812,7 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
     const c = dataEcgCards[i];
     const fb = ECG_FALLBACKS[i];
     return {
-      imageSrc: mediaUrl(c?.image) || fb.image,
+      imageSrc: isHearables ? HEARABLES_CARD_IMAGES[i] : (mediaUrl(c?.image) || fb.image),
       badge: c?.badge || fb.badge,
       badgeWidth: fb.badgeWidth,
       stat: c?.stat || fb.stat,
@@ -904,7 +919,7 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
           </div>
         </div>
       ) : (
-        <div className="relative hidden w-full max-w-[1440px] min-[1024px]:block h-[790px]">
+        <div className={`relative hidden w-full max-w-[1440px] min-[1024px]:block ${isWearablesOnly ? "h-[675px]" : "h-[790px]"}`}>
           {/* Top decorative SVG */}
           <div
             className="pointer-events-none absolute top-[-26.9px] left-1/2 h-[320px] w-[881.616px] -translate-x-1/2"
@@ -949,15 +964,17 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
                 rightSrc="/applications/wearables/vector-43.svg"
               />
             </div>
-            <p
-              className={`${interRegular.className} text-center text-[14px] leading-[22px] text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] w-[650px]`}
-            >
-              {subtitle}
-            </p>
+            {!isWearablesOnly && (
+              <p
+                className={`${interRegular.className} text-center text-[14px] leading-[22px] text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] w-[650px]`}
+              >
+                {subtitle}
+              </p>
+            )}
           </div>
 
           {/* Bottom row — 4 cards */}
-          <div className="absolute left-1/2 flex -translate-x-1/2 gap-[20.67px] top-[345px]">
+          <div className={`absolute left-1/2 flex -translate-x-1/2 gap-[20.67px] ${isWearablesOnly ? "top-[230px]" : "top-[345px]"}`}>
             {ecgCards.map((card, i) => (
               <EcgCard
                 key={i}
@@ -970,6 +987,7 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
                 description={card.description}
                 isSmartHome={false}
                 isIndustrial={isIndustrial}
+                isHearables={isHearables}
               />
             ))}
           </div>
@@ -1038,11 +1056,13 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
               rightSrc="/applications/wearables/vector-43.svg"
             />
           </div>
-          <p
-            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
-          >
-            {subtitle}
-          </p>
+          {!isWearablesOnly && (
+            <p
+              className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            >
+              {subtitle}
+            </p>
+          )}
         </div>
 
         {/* Cards (mobile) */}
@@ -1071,6 +1091,7 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
                   description={card.description}
                   isSmartHome={false}
                   isIndustrial={isIndustrial}
+                  isHearables={isHearables}
                 />
               ))}
         </div>

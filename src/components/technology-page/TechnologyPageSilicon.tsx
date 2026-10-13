@@ -205,7 +205,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
 
   return (
     <section
-      className="relative flex w-full justify-center overflow-hidden bg-black"
+      className="relative flex w-full justify-center overflow-hidden bg-black pt-[40px] min-[1024px]:pt-[60px]"
       data-node-id="3018:489"
       data-name="Proven In Silicon"
       aria-label="Proven in silicon, shipping today"

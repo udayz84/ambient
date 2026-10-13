@@ -6,8 +6,8 @@ import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useFitText } from "../shared/FitText";
 
-import { EcosystemPartnerRow, DEV_LOGO_STAT_NODES } from "./EcosystemPartnerRow";
-import { SILICON_PARTNER_ROW, DEVELOPMENT_PARTNER_ROW } from "./ecosystem-data";
+import { EcosystemPartnerRow } from "./EcosystemPartnerRow";
+import { CAROUSEL_ALL_SLOTS, SILICON_PARTNER_ROW } from "./ecosystem-data";
 
 function PartnerSectionMobile({
   title,
@@ -16,9 +16,8 @@ function PartnerSectionMobile({
   title: string;
   isSilicon: boolean;
 }) {
-  const gradient = isSilicon
-    ? "linear-gradient(119.414deg, rgb(22, 22, 22) 9.0248%, rgb(39, 39, 39) 37.884%, rgb(18, 18, 18) 111.41%)"
-    : "linear-gradient(126.723deg, rgb(22, 22, 22) 9.0248%, rgb(39, 39, 39) 37.884%, rgb(18, 18, 18) 111.41%)";
+  const gradient =
+    "linear-gradient(119.414deg, rgb(22, 22, 22) 9.0248%, rgb(39, 39, 39) 37.884%, rgb(18, 18, 18) 111.41%)";
 
   return (
     <div className="flex flex-col shrink-0 w-[1204px]">
@@ -35,8 +34,7 @@ function PartnerSectionMobile({
         />
       ) : (
         <EcosystemPartnerRow
-          config={DEVELOPMENT_PARTNER_ROW}
-          logoStatNodeIds={DEV_LOGO_STAT_NODES}
+          config={SILICON_PARTNER_ROW}
           isDevelopment={true}
         />
       )}
@@ -123,7 +121,7 @@ export function EcosystemMobile({ data }: { data?: any }) {
         <GreenCtaCorners />
       </a>
 
-      <div className="mt-[24px] flex w-full overflow-hidden">
+      <div className="mx-[16px] mt-[24px] flex w-[calc(100%-32px)] overflow-hidden">
         <div className="flex w-max gap-[32px] animate-[ecosystem-scroll-mobile_25s_linear_infinite]">
           <PartnerSectionMobile title="PARTNERS" isSilicon={true} />
           <PartnerSectionMobile title="PARTNERS" isSilicon={false} />

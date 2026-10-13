@@ -8,20 +8,20 @@ const GREEN_CTA_SHADOW =
 
 const APPLICATIONS = [
   {
-    label: "WEARABLE",
-    image: "/applications/app-wearables.png",
+    label: "SMART-HOME SENSOR",
+    image: "/som/first.png",
   },
   {
     label: "HEARABLE",
-    image: "/applications/app-hearables.png",
+    image: "/som/second.png",
   },
   {
-    label: "SMART-HOME SENSOR",
-    image: "/applications/app-smart-home.png",
+    label: "WEARABLE",
+    image: "/som/third.png",
   },
   {
     label: "INDUSTRIAL NODE",
-    image: "/applications/app-industrial.png",
+    image: "/som/fourth.png",
   },
 ];
 
@@ -49,7 +49,33 @@ export function SomOneModule({ data }: { data?: any } = {}) {
             </span>
           </h2>
         </div>
+      </div>
 
+      {/* Carousel / Grid of Applications */}
+      <div className="relative z-10 mx-auto mt-[40px] flex w-full max-w-[1440px] flex-col items-center justify-center gap-[32px] min-[1024px]:mt-[60px] min-[1024px]:flex-row min-[1024px]:gap-[40px]">
+        {APPLICATIONS.map((app, i) => (
+          <div key={i} className="flex flex-col items-center gap-[24px] shrink-0">
+            <div className="relative h-[220px] w-[220px] min-[1024px]:h-[300px] min-[1024px]:w-[300px]">
+              {/* Green glow behind image */}
+              <div className="absolute left-1/2 top-1/2 h-[140px] w-[140px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#38a612] opacity-20 blur-[40px]" />
+              <img
+                src={app.image}
+                alt={app.label}
+                className="relative h-full w-full object-contain"
+              />
+            </div>
+            <div className="flex flex-col items-center gap-[8px]">
+              <p className={`${gilroyMedium.className} text-[14px] uppercase tracking-[0.1em] text-white`}>
+                {app.label}
+              </p>
+              <div className="h-[2px] w-[24px] bg-[#38a612]" />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Description & CTA placed under images */}
+      <div className="relative z-10 mt-[40px] flex w-full max-w-[1000px] flex-col items-center gap-[20px] min-[1024px]:mt-[60px]">
         {/* Description */}
         <p className={`${interRegular.className} max-w-[800px] text-center text-[16px] leading-[24px] text-[#f0f0f0] opacity-80 min-[1024px]:text-[18px] min-[1024px]:leading-[28px]`}>
           {description}
@@ -58,7 +84,7 @@ export function SomOneModule({ data }: { data?: any } = {}) {
         {/* CTA */}
         <a
           href={ctaHref}
-          className={`${GREEN_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[263px] shrink-0 items-center justify-center overflow-hidden px-[20px] py-[10px] mt-[16px]`}
+          className={`${GREEN_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[263px] shrink-0 items-center justify-center overflow-hidden px-[20px] py-[10px] mt-[8px]`}
         >
           <span
             aria-hidden
@@ -75,29 +101,6 @@ export function SomOneModule({ data }: { data?: any } = {}) {
         </a>
       </div>
 
-      {/* Carousel / Grid of Applications */}
-      <div className="relative z-10 mx-auto mt-[40px] flex w-full max-w-[1440px] flex-col items-center justify-center gap-[32px] min-[1024px]:mt-[80px] min-[1024px]:flex-row min-[1024px]:gap-[40px]">
-        {APPLICATIONS.map((app, i) => (
-          <div key={i} className="flex flex-col items-center gap-[24px] shrink-0">
-              <div className="relative h-[220px] w-[220px] min-[1024px]:h-[300px] min-[1024px]:w-[300px]">
-                {/* Green glow behind image */}
-                <div className="absolute left-1/2 top-1/2 h-[140px] w-[140px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#38a612] opacity-20 blur-[40px]" />
-                <img
-                  src={app.image}
-                  alt={app.label}
-                  className="relative h-full w-full object-contain"
-                />
-              </div>
-              <div className="flex flex-col items-center gap-[8px]">
-                <p className={`${gilroyMedium.className} text-[14px] uppercase tracking-[0.1em] text-white`}>
-                  {app.label}
-                </p>
-                <div className="h-[2px] w-[24px] bg-[#38a612]" />
-              </div>
-            </div>
-          ))}
-      </div>
-      
       {/* Background grid/dots similar to the image */}
       <div className="pointer-events-none absolute inset-0 z-0 opacity-20" style={{
         backgroundImage: "radial-gradient(circle at 50% 50%, rgba(56,166,18,0.2) 0%, transparent 70%)"

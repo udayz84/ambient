@@ -16,7 +16,6 @@ const SUBTITLE =
 const FALLBACK_HEADING = "From first board to full production.";
 const FALLBACK_STATUS_PILL = "LAUNCHING SOON";
 
-const FALLBACK_IMG_A = "/applications/som-img-a.webp";
 const FALLBACK_IMG_B = "/applications/som-img-b.webp";
 
 type SomCardData = {
@@ -25,6 +24,7 @@ type SomCardData = {
   sublabel: string;
   is_upcoming: boolean;
   visual_style: "sharp" | "blurry" | "layered";
+  imgA: string;
   ctaLabel: string;
   ctaHref: string;
 };
@@ -36,6 +36,7 @@ const FALLBACK_CARDS: SomCardData[] = [
     sublabel: "Run real models on real silicon, day one.",
     is_upcoming: false,
     visual_style: "sharp",
+    imgA: "/applications/som-img-a.webp",
     ctaLabel: "View Evaluation Kits",
     ctaHref: "/evaluation-kits",
   },
@@ -45,6 +46,7 @@ const FALLBACK_CARDS: SomCardData[] = [
     sublabel: "Drop a pre-engineered System-on-Module into your carrier board.",
     is_upcoming: false,
     visual_style: "layered",
+    imgA: "/applications/left.png",
     ctaLabel: "View SOMs",
     ctaHref: "/products#som",
   },
@@ -76,23 +78,15 @@ function Visual2({ src }: { src: string }) {
   );
 }
 
-function Visual3({ srcA, srcB }: { srcA: string; srcB: string }) {
+function Visual3({ srcA }: { srcA: string }) {
   return (
-    <div className="absolute inset-0 overflow-hidden blur-[4px] opacity-50">
+    <div className="absolute inset-0 overflow-hidden">
       <img loading="lazy" decoding="async"
         alt=""
         aria-hidden
-        src={srcB}
-        className="absolute inset-0 size-full max-w-none object-cover object-left"
+        src={srcA}
+        className="absolute inset-0 size-full max-w-none object-contain scale-[1.15]"
       />
-      <div className="absolute inset-0 overflow-hidden">
-        <img loading="lazy" decoding="async"
-          alt=""
-          aria-hidden
-          src={srcA}
-          className="absolute inset-0 size-full max-w-none object-contain"
-        />
-      </div>
     </div>
   );
 }
@@ -221,13 +215,13 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
     const visualStyle = c.visual_style || fb.visual_style;
     const ctaLabel = c.primary_button?.label || fb.ctaLabel;
     const ctaHref = c.primary_button?.href || fb.ctaHref;
-    const imgA = mediaUrl(c.image_a) || FALLBACK_IMG_A;
+    const imgA = mediaUrl(c.image_a) || fb.imgA;
     const imgB = mediaUrl(c.image_b) || FALLBACK_IMG_B;
     let visual: React.ReactNode;
     if (visualStyle === "blurry") {
       visual = <Visual2 src={imgB} />;
     } else if (visualStyle === "layered") {
-      visual = <Visual3 srcA={imgA} srcB={imgB} />;
+      visual = <Visual3 srcA={imgA} />;
     } else {
       visual = <Visual1 src={imgA} />;
     }
