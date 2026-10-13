@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { sendSubmissionMail } from "@/lib/notify-mail";
-import { getFormRecipients } from "@/lib/form-recipients";
 
 /**
  * src/app/api/calendar-bookings/route.ts
@@ -37,7 +36,6 @@ export async function POST(req: Request): Promise<Response> {
   const bookingDate = String(body.bookingDate ?? "").trim();
   const timeSlot = String(body.timeSlot ?? "").trim().slice(0, 50);
   const timeZone = String(body.timeZone ?? "").trim().slice(0, 120);
-  const requestedRecipient = String(body.recipientEmail ?? "").trim();
 
   if (!meetingTitle) {
     return bad("Meeting title is required.");
@@ -58,20 +56,6 @@ export async function POST(req: Request): Promise<Response> {
     status: "confirmed",
   };
 
-  const popupId = String(body.popupId ?? "").trim() || undefined;
-  // Per-form recipients from the popup entry (empty → global Mail Setting / MAIL_TO)
-  const formRecipients = await getFormRecipients(popupId);
-
-  // Left card (Technical / FAE) -> saharsh@ambientscientific.ai
-  // Right card (Commercial) -> chandra@ambientscientific.ai
-  const titleLower = meetingTitle.toLowerCase();
-  const defaultRecipient = titleLower.includes("commercial")
-    ? "chandra@ambientscientific.ai"
-    : "saharsh@ambientscientific.ai";
-
-  const resolvedRecipient = requestedRecipient || defaultRecipient;
-  const toList = formRecipients.length > 0 ? formRecipients : [resolvedRecipient];
-  const ccList = ["udayznanam@gmail.com"];
 
   const mailPayload = () => {
     const prettyDate = new Date(`${bookingDate}T00:00:00`).toLocaleDateString("en-GB", {
@@ -82,8 +66,6 @@ export async function POST(req: Request): Promise<Response> {
     });
     return {
       formName: "Calendar Booking",
-      to: toList,
-      cc: ccList,
       fields: [
         { label: "Meeting", value: meetingTitle },
         { label: "Date", value: prettyDate },

@@ -76,11 +76,14 @@ export function CareersApplicationModal({
 
     document.addEventListener("keydown", handleEscape);
     document.addEventListener("mousedown", handleClickOutside);
+    // Lock <html> as well: iOS Safari ignores body-level overflow:hidden for touch panning.
+    document.documentElement.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
 
     return () => {
       document.removeEventListener("keydown", handleEscape);
       document.removeEventListener("mousedown", handleClickOutside);
+      document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
     };
   }, [isOpen, onClose]);

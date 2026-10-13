@@ -1,6 +1,5 @@
 import { NextResponse, after } from "next/server";
 import { sendSubmissionMail, type MailAttachment } from "@/lib/notify-mail";
-import { getFormRecipients } from "@/lib/form-recipients";
 import { addContactAndTag } from "@/lib/mailchimp";
 
 /**
@@ -84,9 +83,6 @@ export async function POST(req: Request): Promise<Response> {
     duplex: "half",
   };
 
-  const popupId = String(incoming.get("popupId") ?? "").trim() || undefined;
-  // Per-form recipients from the popup entry (empty → global Mail Setting / MAIL_TO)
-  const formRecipients = await getFormRecipients(popupId);
 
   const mailPayload = async () => {
     let attachments: MailAttachment[] = [];
@@ -105,7 +101,6 @@ export async function POST(req: Request): Promise<Response> {
     return {
       formName: "Job Application",
       replyTo: email,
-      to: formRecipients,
       fields: [
         { label: "Full name", value: fullName },
         { label: "Email", value: email },

@@ -22,7 +22,8 @@ export const DEV_APP_FORGE_PROPS = {
   hideProcessChip: true,
   articleHeading: "Later, push your own builds over the air",
   bothStoresComingSoon: true,
-  ctasCaption: "Everything from model to silicon, in one place — free to start.",
+  hideArticleCard: true,
+  storeButtonsUnderSteps: true,
   ctas: [
     { label: "Download the ModelForge SDK", variant: "primary" },
     { label: "Request an Eval Kit", variant: "secondary" },

@@ -22,12 +22,20 @@ export function UpcomingProductsModal({
   onClose,
   formContext = "upcoming",
   config,
+  pdfUrl,
+  pdfName,
+  closeLabel,
 }: {
   isOpen: boolean;
   onClose: () => void;
-  formContext?: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "waitlist";
+  formContext?: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "waitlist" | "case-study";
   /** CMS form entry (page relation). Null = hardcoded fallback copy. */
   config?: PopupConfig;
+  /** Optional PDF to download on successful submit. */
+  pdfUrl?: string;
+  pdfName?: string;
+  /** Confirmation close-button label (defaults to "Back to Homepage"). */
+  closeLabel?: string;
 }) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -69,11 +77,14 @@ export function UpcomingProductsModal({
 
     document.addEventListener("keydown", handleEscape);
     document.addEventListener("mousedown", handleClickOutside);
+    // Lock <html> as well: iOS Safari ignores body-level overflow:hidden for touch panning.
+    document.documentElement.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
 
     return () => {
       document.removeEventListener("keydown", handleEscape);
       document.removeEventListener("mousedown", handleClickOutside);
+      document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
     };
   }, [isOpen, onClose]);
@@ -104,15 +115,15 @@ export function UpcomingProductsModal({
           />
         </div>
 
-        {step === "form" && <FormStep onClose={onClose} onSuccess={() => setStep("confirmation")} formContext={formContext} config={config} />}
-        {step === "confirmation" && <ConfirmationStep onClose={onClose} config={config} />}
+        {step === "form" && <FormStep onClose={onClose} onSuccess={() => setStep("confirmation")} formContext={formContext} config={config} pdfUrl={pdfUrl} pdfName={pdfName} />}
+        {step === "confirmation" && <ConfirmationStep onClose={onClose} config={config} downloadStarted={Boolean(pdfUrl)} closeLabel={closeLabel} />}
       </div>
     </div>,
     document.body
   );
 }
 
-function FormStep({ onClose, onSuccess, formContext, config }: { onClose: () => void; onSuccess: () => void; formContext: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "waitlist"; config?: PopupConfig }) {
+function FormStep({ onClose, onSuccess, formContext, config, pdfUrl, pdfName }: { onClose: () => void; onSuccess: () => void; formContext: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "waitlist" | "case-study"; config?: PopupConfig; pdfUrl?: string; pdfName?: string }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -133,6 +144,7 @@ function FormStep({ onClose, onSuccess, formContext, config }: { onClose: () => 
         sdk: "upcoming-sdk",
         som: "upcoming-som",
         waitlist: "upcoming-waitlist",
+        "case-study": "case-study",
       };
       const formKey = formKeyMap[formContext] || "upcoming-products";
 
@@ -149,6 +161,15 @@ function FormStep({ onClose, onSuccess, formContext, config }: { onClose: () => 
           popupId: config?.documentId,
         }),
       }).catch(() => { /* Mailchimp sync failure is non-blocking */ });
+
+      if (pdfUrl) {
+        const a = document.createElement("a");
+        a.href = pdfUrl;
+        a.download = pdfName ?? "";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }
 
       onSuccess();
     } finally {
@@ -172,7 +193,7 @@ function FormStep({ onClose, onSuccess, formContext, config }: { onClose: () => 
           <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
         </button>
         <h2 className={`${gilroyMedium.className} text-[16px] md:text-[22px] leading-[normal] font-medium text-white not-italic`}>
-          {config?.title ?? (formContext === "usecase" ? "Discuss Your Use Case" : formContext === "evalkit" ? "Request An Eval Kit" : formContext === "sdk" ? "Request The SDK" : formContext === "som" ? "Register SOM Interest" : formContext === "waitlist" ? "Join The Waitlist" : "Sign Up For Upcoming Products")}
+          {config?.title ?? (formContext === "usecase" ? "Discuss Your Use Case" : formContext === "evalkit" ? "Request An Eval Kit" : formContext === "sdk" ? "Request The SDK" : formContext === "som" ? "Register SOM Interest" : formContext === "waitlist" ? "Join The Waitlist" : formContext === "case-study" ? "Read The Case Study" : "Sign Up For Upcoming Products")}
         </h2>
       </div>
 
@@ -230,7 +251,7 @@ function FormStep({ onClose, onSuccess, formContext, config }: { onClose: () => 
         </div>
 
         {formContext !== "waitlist" && (
-          <Field label={popupField(config, "details")?.label ?? (formContext === "usecase" ? "Please briefly describe your use case*" : (formContext === "evalkit" || formContext === "sdk" || formContext === "som") ? "Please describe your intended application*" : "Which chip are you looking for?*")}>
+          <Field label={popupField(config, "details")?.label ?? (formContext === "usecase" ? "Please briefly describe your use case*" : (formContext === "evalkit" || formContext === "sdk" || formContext === "som") ? "Please describe your intended application*" : formContext === "case-study" ? "Please describe your use case*" : "Which chip are you looking for?*")}>
             <p className="text-[12px] leading-[18px] text-[#a4a4a4] mb-[8px]">
               {popupField(config, "details")?.helper_text ??
                 (formContext === "usecase"
@@ -241,11 +262,13 @@ function FormStep({ onClose, onSuccess, formContext, config }: { onClose: () => 
                   ? "Tell us about the project you're building with our SDK."
                   : formContext === "som"
                   ? "Tell us about the project you're building with our SOM."
+                  : formContext === "case-study"
+                  ? "Tell us what you're building — the full case study PDF downloads right after you submit."
                   : "These are the upcoming chips we are providing. We just want to know which chip you are looking for.")}
             </p>
             <input
               className={FIELD_BOX}
-              placeholder={popupField(config, "details")?.placeholder ?? (formContext === "usecase" ? "Enter your use case" : (formContext === "evalkit" || formContext === "sdk" || formContext === "som") ? "Describe your intended application" : "Enter chip name")}
+              placeholder={popupField(config, "details")?.placeholder ?? (formContext === "usecase" ? "Enter your use case" : (formContext === "evalkit" || formContext === "sdk" || formContext === "som") ? "Describe your intended application" : formContext === "case-study" ? "Describe your use case" : "Enter chip name")}
               value={chip}
               onChange={(e) => setChip(e.target.value)}
               required
@@ -270,7 +293,7 @@ function FormStep({ onClose, onSuccess, formContext, config }: { onClose: () => 
   );
 }
 
-function ConfirmationStep({ onClose, config }: { onClose: () => void; config?: PopupConfig }) {
+function ConfirmationStep({ onClose, config, downloadStarted, closeLabel }: { onClose: () => void; config?: PopupConfig; downloadStarted?: boolean; closeLabel?: string }) {
   return (
     <>
       <button
@@ -300,11 +323,13 @@ function ConfirmationStep({ onClose, config }: { onClose: () => void; config?: P
         </h2>
 
         <p className={`${interRegular.className} w-full md:w-[540px] text-center text-[12px] leading-[18px] font-normal text-[#a4a4a4] not-italic`}>
-          {config?.success_text ?? "We’ve received your interest. Our team will keep you updated on the latest news and availability for our upcoming products."}
+          {config?.success_text ?? (downloadStarted
+            ? "Your download has started. The case study PDF is on its way to your device."
+            : "We’ve received your interest. Our team will keep you updated on the latest news and availability for our upcoming products.")}
         </p>
 
         <p className={`${gilroyMedium.className} w-full md:w-[540px] text-center text-[22px] leading-[28px] font-medium text-white not-italic`}>
-          Stay tuned!
+          {downloadStarted ? "Enjoy the read!" : "Stay tuned!"}
         </p>
 
         <button
@@ -314,7 +339,7 @@ function ConfirmationStep({ onClose, config }: { onClose: () => void; config?: P
         >
           <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
           <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
-          <span className="relative z-10">Back to Homepage</span>
+          <span className="relative z-10">{closeLabel ?? "Back to Homepage"}</span>
           <Corners leftSrc="/hero/corner-tag-1.svg" rightSrc="/hero/corner-tag-2.svg" className="z-20" />
         </button>
       </div>

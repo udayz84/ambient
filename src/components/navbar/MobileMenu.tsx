@@ -112,9 +112,15 @@ export function MobileMenu({
 
   useEffect(() => {
     if (!open) return;
+    // Lock <html> as well: iOS Safari ignores body-level overflow:hidden for
+    // touch panning, letting the page scroll behind the open menu.
+    const root = document.documentElement;
+    const prevRoot = root.style.overflow;
     const prev = document.body.style.overflow;
+    root.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
     return () => {
+      root.style.overflow = prevRoot;
       document.body.style.overflow = prev;
     };
   }, [open]);

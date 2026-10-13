@@ -2,8 +2,9 @@
 
 import { Fragment } from "react";
 import type { CSSProperties } from "react";
-import { gilroyMedium, interRegular } from "../hero/fonts";
+import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
+import { Corners } from "../shared/Corners";
 import { PRIMARY_CTA_SHADOW } from "./developer-data";
 import { mediaUrl } from "@/lib/strapi";
 import { CollageRow, COLLAGE_ROW_1, COLLAGE_ROW_2, PrimaryCta } from "../applications-page/ApplicationsPageModelZoo";
@@ -198,6 +199,19 @@ export function DeveloperModelZoo({ data }: { data?: any }) {
           style={{ top: 20 }}
           data-node-id="5212:6814"
         >
+          {/* Eyebrow — same chip style as ApplicationsPageModelZoo */}
+          <div
+            className="relative flex inline-flex items-center justify-center overflow-clip bg-[rgba(255,255,255,0.06)] px-[24px]"
+            style={{ height: 26 }}
+          >
+            <Corners leftSrc="/developer/pipeline-corner-42.svg" rightSrc="/developer/pipeline-corner-43.svg" />
+            <p className={`${dmMono.className} relative text-[16px] leading-[24px] uppercase tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] not-italic`}>
+              AI MODEL ZOO
+            </p>
+            <div className="absolute left-[6.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+            <div className="absolute right-[6.48px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+          </div>
+
           {/* Section Title — 5212:6815/6816 */}
           <div className="flex flex-col items-center justify-center" data-node-id="5212:6815">
             <div

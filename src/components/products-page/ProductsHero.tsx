@@ -271,7 +271,13 @@ function ProductsHeroDesktop({
         data-name="Frame 1984079464"
       >
         <PrimaryCta href={primary.href} label={primary.label} onClick={onCtaClick}>{primary.label}</PrimaryCta>
-        <SecondaryCta href={secondary.href} label={secondary.label} onClick={onCtaClick}>{secondary.label}</SecondaryCta>
+        <SecondaryCta
+          href="/GPX10-Pro-Product-Brief.pdf"
+          download="GPX10-Pro-Product-Brief.pdf"
+          label={secondary.label}
+        >
+          {secondary.label}
+        </SecondaryCta>
       </div>
 
       {/* Scroll indicator — 2900:460 (left=1335.5, top=696) */}
@@ -322,15 +328,18 @@ function SecondaryCta({
   href,
   label,
   onClick,
+  download,
 }: {
   children: React.ReactNode;
   href: string;
   label: string;
   onClick?: (e: React.MouseEvent, label: string) => void;
+  download?: boolean | string;
 }) {
   return (
     <a
       href={href}
+      download={download}
       onClick={onClick ? (e) => onClick(e, label) : undefined}
       className={`${gilroyMedium.className} relative flex h-[48px] w-auto min-w-[255px] shrink-0 items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
       style={{ backgroundColor: SECONDARY_CTA_BG }}
@@ -476,8 +485,8 @@ function ProductsHeroMobile({
               <GreenCtaCorners />
             </a>
             <a
-              href={secondary.href}
-              onClick={(e) => onCtaClick(e, secondary.label)}
+              href="/GPX10-Pro-Product-Brief.pdf"
+              download="GPX10-Pro-Product-Brief.pdf"
               className={`${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
               style={{ backgroundColor: SECONDARY_CTA_BG }}
             >

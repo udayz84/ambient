@@ -18,7 +18,6 @@ const FALLBACK_TITLE = "Meet A-Cube. AI-native, from the metal up.";
 const FALLBACK_DESCRIPTION =
   "A new architecture for AI, energy-aware at every layer, scaling from coin cell to cloud.";
 const FALLBACK_PRIMARY_LABEL = "Read the Whitepaper";
-const FALLBACK_SECONDARY_LABEL = "Watch the 3-min Explainer";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
@@ -63,38 +62,6 @@ function ReadWhitepaperCta({
   );
 }
 
-function WatchExplainerCta({
-  fullWidth = false,
-  label,
-  href = "#",
-  onClick,
-}: {
-  fullWidth?: boolean;
-  label: string;
-  href?: string;
-  onClick?: () => void;
-}) {
-  return (
-    <a
-      href={href}
-      onClick={(e) => {
-        if (onClick) {
-          e.preventDefault();
-          onClick();
-        }
-      }}
-      className={`${gilroyMedium.className} relative block h-[48px] ${fullWidth ? "w-full" : "w-[263px]"} shrink-0 border border-white/20 bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
-      data-node-id="2931:1459"
-      data-name="CTA - Secondary"
-    >
-      <span className="relative flex h-full max-w-full items-center overflow-hidden text-ellipsis text-[12px] min-[310px]:text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
-        {label}
-      </span>
-      <GreenCtaCorners />
-    </a>
-  );
-}
-
 export function TechnologyPageHero({
   data,
   config,
@@ -103,15 +70,11 @@ export function TechnologyPageHero({
   config?: any;
 } = {}) {
   const [isWhitepaperOpen, setIsWhitepaperOpen] = useState(false);
-  const [isExplainerOpen, setIsExplainerOpen] = useState(false);
   const tagText = data?.tag?.text || FALLBACK_TAG;
   const titleText = data?.title || FALLBACK_TITLE;
   const descText = data?.subtitle || FALLBACK_DESCRIPTION;
   const primaryLabel = data?.primary_button?.label || FALLBACK_PRIMARY_LABEL;
   const primaryHref = data?.primary_button?.href || "#";
-  const secondaryLabel =
-    data?.secondary_button?.label || FALLBACK_SECONDARY_LABEL;
-  const secondaryHref = data?.secondary_button?.href || "#";
   const bgSrc = mediaUrl(data?.background_image);
   const objectSrc = mediaUrl(data?.hero_object);
 
@@ -191,7 +154,6 @@ export function TechnologyPageHero({
             data-name="Frame 1984079464"
           >
             <ReadWhitepaperCta label={primaryLabel} href={primaryHref} onClick={() => setIsWhitepaperOpen(true)} />
-            <WatchExplainerCta label={secondaryLabel} href={secondaryHref} onClick={() => setIsExplainerOpen(true)} />
           </div>
         </div>
         </div>
@@ -280,27 +242,17 @@ export function TechnologyPageHero({
               href={primaryHref}
               onClick={() => setIsWhitepaperOpen(true)}
             />
-            <WatchExplainerCta
-              fullWidth
-              label={secondaryLabel}
-              href={secondaryHref}
-              onClick={() => setIsExplainerOpen(true)}
-            />
           </div>
         </div>
       </div>
-      
-      <ProductBriefModal 
+
+      <ProductBriefModal
         isOpen={isWhitepaperOpen}
         onClose={() => setIsWhitepaperOpen(false)}
         title="Read the Whitepaper"
         config={config}
-      />
-      <ProductBriefModal 
-        isOpen={isExplainerOpen}
-        onClose={() => setIsExplainerOpen(false)}
-        title="Watch the 3-min Explainer"
-        config={config}
+        pdfUrl="/whitepapers/Ambient-UniqueArchitecture-Whitepaper.pdf"
+        pdfName="Ambient-UniqueArchitecture-Whitepaper.pdf"
       />
     </section>
   );

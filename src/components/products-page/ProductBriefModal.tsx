@@ -19,12 +19,17 @@ export function ProductBriefModal({
   title,
   onClose,
   config,
+  pdfUrl,
+  pdfName,
 }: {
   isOpen: boolean;
   title?: string;
   onClose: () => void;
   /** CMS form entry (page relation). Null = hardcoded fallback copy. */
   config?: PopupConfig;
+  /** Optional PDF to download on successful submit. */
+  pdfUrl?: string;
+  pdfName?: string;
 }) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -66,11 +71,14 @@ export function ProductBriefModal({
 
     document.addEventListener("keydown", handleEscape);
     document.addEventListener("mousedown", handleClickOutside);
+    // Lock <html> as well: iOS Safari ignores body-level overflow:hidden for touch panning.
+    document.documentElement.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
 
     return () => {
       document.removeEventListener("keydown", handleEscape);
       document.removeEventListener("mousedown", handleClickOutside);
+      document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
     };
   }, [isOpen, onClose]);
@@ -109,8 +117,8 @@ export function ProductBriefModal({
         </button>
 
         <div className="relative z-10 p-[40px] pt-[48px] flex flex-col">
-          {step === "form" && <FormStep title={title} onClose={onClose} onSuccess={() => setStep("confirmation")} config={config} />}
-          {step === "confirmation" && <ConfirmationStep onClose={onClose} config={config} />}
+          {step === "form" && <FormStep title={title} onClose={onClose} onSuccess={() => setStep("confirmation")} config={config} pdfUrl={pdfUrl} pdfName={pdfName} />}
+          {step === "confirmation" && <ConfirmationStep onClose={onClose} config={config} downloadStarted={Boolean(pdfUrl)} />}
         </div>
       </div>
     </div>,
@@ -118,7 +126,7 @@ export function ProductBriefModal({
   );
 }
 
-function FormStep({ title, onClose, onSuccess, config }: { title?: string; onClose: () => void; onSuccess: () => void; config?: PopupConfig }) {
+function FormStep({ title, onClose, onSuccess, config, pdfUrl, pdfName }: { title?: string; onClose: () => void; onSuccess: () => void; config?: PopupConfig; pdfUrl?: string; pdfName?: string }) {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   // CMS copy from the page relation; entry title (if set) wins over the
@@ -133,6 +141,15 @@ function FormStep({ title, onClose, onSuccess, config }: { title?: string; onClo
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, formKey: "product-brief", popupId: config?.documentId }),
       }).catch(() => { /* Mailchimp sync failure is non-blocking */ });
+
+      if (pdfUrl) {
+        const a = document.createElement("a");
+        a.href = pdfUrl;
+        a.download = pdfName ?? "";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }
 
       onSuccess();
     } finally {
@@ -182,7 +199,7 @@ function FormStep({ title, onClose, onSuccess, config }: { title?: string; onClo
   );
 }
 
-function ConfirmationStep({ onClose, config }: { onClose: () => void; config?: PopupConfig }) {
+function ConfirmationStep({ onClose, config, downloadStarted }: { onClose: () => void; config?: PopupConfig; downloadStarted?: boolean }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose();
@@ -206,7 +223,7 @@ function ConfirmationStep({ onClose, config }: { onClose: () => void; config?: P
       </h2>
 
       <p className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[#a4a4a4] not-italic`}>
-        {config?.success_text ?? "We've received your request. The information has been sent to your email."}
+        {config?.success_text ?? (downloadStarted ? "Your download has started." : "We've received your request. The information has been sent to your email.")}
       </p>
     </div>
   );

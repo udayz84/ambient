@@ -188,17 +188,41 @@ const DEMO_VIDEO_ID = "aqz-KE-bpKQ";
 
 /** YouTube demo popup — same overlay pattern as the request form. */
 function VideoModal({ title, videoId, onClose }: { title: string; videoId?: string; onClose: () => void }) {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key === "Escape") onClose();
     }
     document.addEventListener("keydown", onKey);
+    // Lock <html> as well: iOS Safari ignores body-level overflow:hidden for touch panning.
+    document.documentElement.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
+      document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
     };
   }, [onClose]);
+
+  useEffect(() => {
+    // Safari doesn't propagate the modal-opening click into the cross-origin
+    // YouTube iframe, so autoplay=1 alone leaves the player paused with a
+    // play button. Command the player (muted, so autoplay policy allows it)
+    // until it starts. Viewer unmutes via the player controls.
+    let tries = 0;
+    const timer = setInterval(() => {
+      const win = iframeRef.current?.contentWindow;
+      if (win) {
+        win.postMessage(
+          JSON.stringify({ event: "command", func: "playVideo", args: [] }),
+          "*"
+        );
+      }
+      if (++tries > 10) clearInterval(timer);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <div
@@ -224,8 +248,9 @@ function VideoModal({ title, videoId, onClose }: { title: string; videoId?: stri
         </div>
         <div className="relative aspect-video w-full overflow-clip">
           <iframe
+            ref={iframeRef}
             className="absolute inset-0 size-full"
-            src={`https://www.youtube-nocookie.com/embed/${videoId || DEMO_VIDEO_ID}?autoplay=1&rel=0`}
+            src={`https://www.youtube-nocookie.com/embed/${videoId || DEMO_VIDEO_ID}?autoplay=1&mute=1&playsinline=1&enablejsapi=1&rel=0`}
             title={`${title} demo`}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen

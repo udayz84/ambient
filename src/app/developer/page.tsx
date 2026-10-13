@@ -30,8 +30,12 @@ export async function generateMetadata(): Promise<Metadata> {
 
 import { DeveloperModelZoo } from "@/components/developer/DeveloperModelZoo";
 import { DeveloperAppForge } from "@/components/developer/DeveloperAppForge";
+import { DeveloperStartBuilding } from "@/components/developer/DeveloperStartBuilding";
 
-const CANVAS_HEIGHT = 6733;
+// 6631 = copilots section bottom (top 6735 − 300 wrapper translate + ~588
+// height incl. offset var) — sized so the canvas fully contains it and the
+// StartBuilding card flows after it, not under it.
+const CANVAS_HEIGHT = 6631;
 
 export default async function DeveloperPage() {
   let data: any = null;
@@ -53,7 +57,7 @@ export default async function DeveloperPage() {
   }
 
   return (
-    <main className="relative z-10 w-full overflow-x-clip bg-black">
+    <main className="flex w-full flex-col overflow-x-clip bg-black">
       {/* DESKTOP (>=1024px) — ScaledCanvas with exact Figma coordinates */}
       <div className="hidden min-[1024px]:block">
         <div className="-mt-[78px]">
@@ -68,7 +72,7 @@ export default async function DeveloperPage() {
                 {/* {data?.coming_soon ? (
                   <DeveloperComingSoon data={data.coming_soon} />
                 ) : null} */}
-                <div style={{ transform: "translateY(-750px)" }}>
+                <div style={{ transform: "translateY(-1140px)" }}>
                   {data?.modules ? (
                     <DeveloperModulesSection data={data.modules} />
                   ) : null}
@@ -86,6 +90,8 @@ export default async function DeveloperPage() {
       <div className="block min-[1024px]:hidden">
         <DeveloperMobile data={data} />
       </div>
+
+      <DeveloperStartBuilding />
     </main>
   );
 }

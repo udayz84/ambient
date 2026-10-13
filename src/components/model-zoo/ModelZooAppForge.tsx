@@ -146,7 +146,20 @@ export function ModelZooAppForge({
     tryPlay();
     video.addEventListener("loadeddata", tryPlay);
     video.addEventListener("canplay", tryPlay);
+    // WebKit can reject every early play() (autoplay policy / readiness
+    // timing) while a later call succeeds — keep retrying briefly until
+    // playback actually starts. Capped so hard-blocked autoplay (e.g. Low
+    // Power Mode) doesn't retry forever.
+    let tries = 0;
+    const retryTimer = setInterval(() => {
+      if (!video.paused || ++tries > 10) {
+        clearInterval(retryTimer);
+        return;
+      }
+      tryPlay();
+    }, 1000);
     return () => {
+      clearInterval(retryTimer);
       video.removeEventListener("loadeddata", tryPlay);
       video.removeEventListener("canplay", tryPlay);
     };
@@ -156,11 +169,6 @@ export function ModelZooAppForge({
     if (ctas) {
       return (
         <div className="flex flex-col items-center justify-center gap-[16px] w-full">
-          {ctasCaption ? (
-            <p className={`${interRegular.className} text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
-              {ctasCaption}
-            </p>
-          ) : null}
           <div className="flex flex-wrap items-center justify-center gap-[24px]">
             {ctas.map((cta, i) =>
               cta.variant === "secondary" ? (
@@ -192,6 +200,11 @@ export function ModelZooAppForge({
               ),
             )}
           </div>
+          {ctasCaption ? (
+            <p className={`${interRegular.className} text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
+              {ctasCaption}
+            </p>
+          ) : null}
         </div>
       );
     }

@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { ProductBriefModal } from "../products-page/ProductBriefModal";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
@@ -34,10 +32,8 @@ export function DeveloperHeroContent({ data, briefForm }: { data?: any; briefFor
     data?.secondary_button?.label || DEFAULT_SECONDARY_LABEL;
   const secondaryHref = data?.secondary_button?.href || "#";
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
-  const [isDocumentationOpen, setIsDocumentationOpen] = useState(false);
   return (
-    <>
-      <div
+    <div
       className="relative flex shrink-0 flex-col items-start gap-[24px]"
       data-node-id="2438:4563"
     >
@@ -80,17 +76,14 @@ export function DeveloperHeroContent({ data, briefForm }: { data?: any; briefFor
         data-node-id="2438:4572"
       >
         <PrimaryCta href={primaryHref}>{primaryLabel}</PrimaryCta>
-        <SecondaryCta href={secondaryHref} onClick={() => setIsDocumentationOpen(true)}>{secondaryLabel}</SecondaryCta>
+        <SecondaryCta
+          href="/Technical-Documents-Ambient-Scientific.zip"
+          download="Technical-Documents-Ambient-Scientific.zip"
+        >
+          {secondaryLabel}
+        </SecondaryCta>
       </div>
     </div>
-    
-    <ProductBriefModal
-      isOpen={isDocumentationOpen}
-      onClose={() => setIsDocumentationOpen(false)}
-      title="Read the Documentation"
-      config={briefForm}
-    />
-    </>
   );
 }
 
@@ -129,14 +122,17 @@ function SecondaryCta({
   children,
   href,
   onClick,
+  download,
 }: {
   children: React.ReactNode;
   href: string;
   onClick?: () => void;
+  download?: boolean | string;
 }) {
   return (
     <a
       href={href}
+      download={download}
       onClick={(e) => {
         if (onClick) {
           e.preventDefault();

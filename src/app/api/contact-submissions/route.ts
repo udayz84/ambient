@@ -1,6 +1,5 @@
 import { NextResponse, after } from "next/server";
 import { sendSubmissionMail } from "@/lib/notify-mail";
-import { getFormRecipients } from "@/lib/form-recipients";
 import { addContactAndTag } from "@/lib/mailchimp";
 
 /**
@@ -72,9 +71,6 @@ export async function POST(req: Request): Promise<Response> {
   // Determine Mailchimp form key from track and source field
   const isModelZoo = fields.Source === "Model Zoo request";
   const mailchimpFormKey = isModelZoo ? "model-zoo-request" : `contact-${track}`;
-  const popupId = String(body.popupId ?? "").trim() || undefined;
-  // Per-form recipients from the popup entry (empty → global Mail Setting / MAIL_TO)
-  const formRecipients = await getFormRecipients(popupId);
   const firstName = (fields["First Name"] || fields["First name"] || fields["Name"] || "").trim() || undefined;
   const lastName = (fields["Last Name"] || fields["Last name"] || "").trim() || undefined;
   const company = (fields["Company"] || fields["Company Name"] || "").trim() || undefined;
@@ -94,7 +90,6 @@ export async function POST(req: Request): Promise<Response> {
     await sendSubmissionMail({
       formName: "Contact Form Submission",
       replyTo: email,
-      to: formRecipients,
       fields: [
         { label: "Track", value: track },
         { label: "Email", value: email },
@@ -122,7 +117,6 @@ export async function POST(req: Request): Promise<Response> {
     await sendSubmissionMail({
       formName: "Contact Form Submission",
       replyTo: email,
-      to: formRecipients,
       fields: [
         { label: "Track", value: track },
         { label: "Email", value: email },

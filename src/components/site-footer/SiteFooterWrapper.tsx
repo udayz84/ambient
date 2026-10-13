@@ -22,7 +22,7 @@ export function SiteFooterWrapper({
       isContactPage={normalizedPathname === "/contact"}
       isCareersPage={normalizedPathname === "/careers"}
       isResourcesPage={normalizedPathname === "/resources"}
-      isOverlapPage={["/technology", "/products", "/applications", "/dvk", "/som", "/partners", "/model-zoo"].includes(normalizedPathname)}
+      isOverlapPage={["/technology", "/products", "/applications", "/dvk", "/som", "/partners", "/model-zoo", "/developer"].includes(normalizedPathname)}
       pathname={normalizedPathname}
       data={data}
       brandData={brandData}

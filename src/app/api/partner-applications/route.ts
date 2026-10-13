@@ -1,6 +1,5 @@
 import { NextResponse, after } from "next/server";
 import { sendSubmissionMail } from "@/lib/notify-mail";
-import { getFormRecipients } from "@/lib/form-recipients";
 import { addContactAndTag } from "@/lib/mailchimp";
 
 /**
@@ -93,14 +92,10 @@ export async function POST(req: Request): Promise<Response> {
     experience,
   };
 
-  const popupId = String(body.popupId ?? "").trim() || undefined;
-  // Per-form recipients from the popup entry (empty → global Mail Setting / MAIL_TO)
-  const formRecipients = await getFormRecipients(popupId);
 
   const mailPayload = () => ({
     formName: "Partner Application (Become a Partner)",
     replyTo: email,
-    to: formRecipients,
     fields: [
       { label: "Name", value: name },
       { label: "Company", value: company },

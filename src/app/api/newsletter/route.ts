@@ -1,7 +1,6 @@
 import { NextResponse, after } from "next/server";
 import { addContactAndTag } from "@/lib/mailchimp";
 import { sendSubmissionMail, type MailField } from "@/lib/notify-mail";
-import { getFormRecipients } from "@/lib/form-recipients";
 
 /**
  * src/app/api/newsletter/route.ts
@@ -44,6 +43,8 @@ const FORM_NAME_MAP: Record<string, string> = {
   "upcoming-waitlist": "Waitlist Signup",
   "product-brief": "Product Brief Request",
   "resource-download": "Resource Download",
+  "case-study": "Case Study Download",
+  "whitepaper": "Whitepaper Download",
 };
 
 export async function POST(req: Request): Promise<Response> {
@@ -61,7 +62,6 @@ export async function POST(req: Request): Promise<Response> {
   const company = String(body.company ?? "").trim() || undefined;
   const phone = String(body.phone ?? "").trim() || undefined;
   const details = String(body.details ?? "").trim() || undefined;
-  const popupId = String(body.popupId ?? "").trim() || undefined;
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return bad("Please enter a valid email address.");
@@ -84,16 +84,11 @@ export async function POST(req: Request): Promise<Response> {
   ];
 
   after(() => {
-    getFormRecipients(popupId)
-      .then((to) =>
-        sendSubmissionMail({
-          formName: FORM_NAME_MAP[formKey] ?? formKey,
-          fields,
-          replyTo: email,
-          to: to.length ? to : undefined,
-        }),
-      )
-      .catch(() => { /* logged inside sendSubmissionMail */ });
+    sendSubmissionMail({
+      formName: FORM_NAME_MAP[formKey] ?? formKey,
+      fields,
+      replyTo: email,
+    }).catch(() => { /* logged inside sendSubmissionMail */ });
     addContactAndTag(
       { email, firstName, lastName, company, phone },
       formKey,

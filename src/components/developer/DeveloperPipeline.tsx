@@ -7,6 +7,7 @@ import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
 import { useFitText } from "../shared/FitText";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 import { PRIMARY_CTA_SHADOW } from "./developer-data";
 
 /* =========================================================================
@@ -213,6 +214,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
   const [activeIndex, setActiveIndex] = useState(0); // 0 = Train expanded
   const [flowHeights, setFlowHeights] = useState<Record<number, number>>({});
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSdkModalOpen, setIsSdkModalOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -415,18 +417,28 @@ export function DeveloperPipeline({ data }: { data?: any }) {
           />
         ))}
 
-        <div className="mt-[48px] self-center">
+        <div className="mt-[48px] self-center flex items-center justify-center gap-[24px]">
           <button
             type="button"
             onClick={() => setIsModalOpen(true)}
-            className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-auto min-w-[420px] shrink-0 items-center justify-center overflow-hidden px-[32px] py-[10px] cursor-pointer`}
+            className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-auto shrink-0 items-center justify-center overflow-hidden px-[32px] py-[10px] cursor-pointer`}
           >
             <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
             <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
-            <span className="absolute top-[calc(50%-14px)] left-1/2 flex max-w-full -translate-x-1/2 justify-center overflow-hidden text-ellipsis text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
-              View full Software Toolchain Architecture
+            <span className="relative text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
+              View full Software Toolchain
             </span>
             <GreenCtaCorners />
+          </button>
+          <button
+            type="button"
+            onClick={() => setIsSdkModalOpen(true)}
+            className={`${gilroyMedium.className} relative flex h-[48px] w-auto shrink-0 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[32px] py-[10px] cursor-pointer`}
+          >
+            <span className="relative text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
+              Request A SDK
+            </span>
+            <GreenCtaCorners disableDots />
           </button>
         </div>
       </div>
@@ -455,14 +467,21 @@ export function DeveloperPipeline({ data }: { data?: any }) {
             <img 
               loading="lazy" 
               decoding="async"
-              src="/developer/toolchain-architecture.jpeg" 
-              alt="ModelForge Toolchain Stack" 
+              src="/developer/ambient.jpg"
+              alt="ModelForge Toolchain Stack"
               className="w-full max-h-[65vh] object-contain rounded-[8px]"
             />
           </div>
         </div>,
         document.body
       )}
+
+      {/* Request SDK Modal — same pattern as ModelZooSteps "Request the SDK" */}
+      <UpcomingProductsModal
+        isOpen={isSdkModalOpen}
+        onClose={() => setIsSdkModalOpen(false)}
+        formContext="sdk"
+      />
     </div>
   );
 }

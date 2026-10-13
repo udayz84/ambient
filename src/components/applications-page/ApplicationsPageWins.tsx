@@ -1,7 +1,9 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
+import { useState } from "react";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
+import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 import { gilroyBold, gilroyMedium, interRegular, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
@@ -97,7 +99,7 @@ type WinCardProps = {
   buttons?: { label: string; href: string }[];
 };
 
-function WinCard({ label, stat, statLabel, visual, body, buttons }: WinCardProps) {
+function WinCard({ label, stat, statLabel, visual, body, buttons, muted }: WinCardProps & { muted?: boolean }) {
   const { fadeRef, isVisible } = useFadeIn();
 
   return (
@@ -138,21 +140,24 @@ function WinCard({ label, stat, statLabel, visual, body, buttons }: WinCardProps
           </p>
         </div>
         <p
-          className={`${interRegular.className} text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word]`}
+          className={`${interRegular.className} text-[16px] leading-[24px] font-normal ${muted ? "text-[#8a8a8a]" : "text-[rgba(240,240,240,0.6)]"} [word-break:break-word]`}
         >
           {body}
         </p>
         {buttons && buttons.length > 0 && (
           <div className="flex flex-wrap gap-[8px] mt-[10px]">
-            {buttons.map((btn: any, i: number) => (
-              <a
-                key={i}
-                href={btn.href || "#"}
-                className={`${gilroyMedium.className} flex items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[12px] py-[6px] text-[12px] uppercase text-white hover:bg-[rgba(226,241,202,0.2)] transition-colors`}
-              >
-                {btn.label}
-              </a>
-            ))}
+            {buttons.map((btn: any, i: number) => {
+              const soon = (btn.label ?? "").trim().toLowerCase() === "coming soon";
+              return (
+                <a
+                  key={i}
+                  href={btn.href || "#"}
+                  className={`${gilroyMedium.className} flex items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[12px] py-[6px] text-[12px] uppercase transition-colors ${soon ? "text-[#a4a4a4]" : "text-white hover:bg-[rgba(226,241,202,0.2)]"}`}
+                >
+                  {btn.label}
+                </a>
+              );
+            })}
           </div>
         )}
       </div>
@@ -160,10 +165,11 @@ function WinCard({ label, stat, statLabel, visual, body, buttons }: WinCardProps
   );
 }
 
-function SecondaryCta({ label, href }: { label: string; href?: string }) {
+function SecondaryCta({ label, href, onClick }: { label: string; href?: string; onClick?: (e: React.MouseEvent) => void }) {
   return (
     <a
       href={href || "#"}
+      onClick={onClick}
       className={`${gilroyMedium.className} relative flex h-[48px] w-auto min-w-[223px] shrink-0 cursor-pointer items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] bg-[rgba(226,241,202,0.12)] px-[24px] transition-colors duration-300 hover:bg-[#45c418] hover:border-[#45c418] hover:shadow-[0px_0px_15px_rgba(69,196,24,0.4)]`}
     >
       <span className="relative text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
@@ -174,7 +180,7 @@ function SecondaryCta({ label, href }: { label: string; href?: string }) {
   );
 }
 
-function WinCardMobile({ label, stat, statLabel, mobileImg, body, buttons }: { label: string; stat: string; statLabel: string; mobileImg: string; body: string; buttons?: any[] }) {
+function WinCardMobile({ label, stat, statLabel, mobileImg, body, buttons, muted }: { label: string; stat: string; statLabel: string; mobileImg: string; body: string; buttons?: any[]; muted?: boolean }) {
   const { fadeRef, isVisible } = useFadeIn();
 
   return (
@@ -207,19 +213,22 @@ function WinCardMobile({ label, stat, statLabel, mobileImg, body, buttons }: { l
           <p className={`${gilroyMedium.className} text-[22px] leading-[24.167px] uppercase text-[#c5f3b5] [word-break:break-word]`}>{statLabel}</p>
         </div>
         <div className="flex flex-col gap-[11.667px]">
-          <p className={`${interRegular.className} text-[14px] leading-[20px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>{body}</p>
+          <p className={`${interRegular.className} text-[14px] leading-[20px] font-normal ${muted ? "text-[#8a8a8a]" : "text-[rgba(240,240,240,0.6)]"} [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>{body}</p>
         </div>
         {buttons && buttons.length > 0 && (
           <div className="flex flex-wrap gap-[8px] mt-[6px]">
-            {buttons.map((btn: any, i: number) => (
-              <a
-                key={i}
-                href={btn.href || "#"}
-                className={`${gilroyMedium.className} flex items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[12px] py-[6px] text-[12px] uppercase text-white hover:bg-[rgba(226,241,202,0.2)] transition-colors`}
-              >
-                {btn.label}
-              </a>
-            ))}
+            {buttons.map((btn: any, i: number) => {
+              const soon = (btn.label ?? "").trim().toLowerCase() === "coming soon";
+              return (
+                <a
+                  key={i}
+                  href={btn.href || "#"}
+                  className={`${gilroyMedium.className} flex items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[12px] py-[6px] text-[12px] uppercase transition-colors ${soon ? "text-[#a4a4a4]" : "text-white hover:bg-[rgba(226,241,202,0.2)]"}`}
+                >
+                  {btn.label}
+                </a>
+              );
+            })}
           </div>
         )}
       </div>
@@ -303,7 +312,7 @@ const CARDS = [
     body: "A pendant that watches over you, running fall detection and SOS voice recognition continuously, on-device, for 90 days on a single charge. No phone to carry, no cloud to depend on. Protection that never goes dark.",
     visual: WIN_VISUALS[0],
     mobileImg: "/applications/wins-img-1.webp",
-    buttons: [{ label: "READ CASE STUDY", href: "#" }],
+    buttons: [{ label: "Coming Soon", href: "#" }],
   },
   {
     label: "The Women’s-Health Win",
@@ -321,11 +330,12 @@ const CARDS = [
     body: "Predictive maintenance that lives on the machine, continuously analyzing vibration and sound to catch anomalies before it breaks, entirely at the edge. A retrofittable, battery-powered node that runs 2+ years on a single cell, sending alerts, not raw data.",
     visual: WIN_VISUALS[2],
     mobileImg: "/applications/wins-img-3.webp",
-    buttons: [{ label: "READ CASE STUDY", href: "#" }],
+    buttons: [{ label: "Coming Soon", href: "#" }],
   },
 ];
 
 export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
+  const [caseStudyOpen, setCaseStudyOpen] = useState(false);
   const eyebrow = data?.eyebrow || "Proven in production";
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
@@ -427,11 +437,24 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
                 statLabel={card.statLabel}
                 visual={card.visual}
                 body={card.body || body}
+                muted={(card.buttons ?? []).some((b: any) => (b.label ?? "").trim().toLowerCase() === "coming soon")}
               />
               {card.buttons && card.buttons.length > 0 && (
                 <div className="flex flex-col gap-[8px] items-center">
                   {card.buttons.map((btn: any, i: number) => (
-                    <SecondaryCta key={i} label={btn.label} href={btn.href} />
+                    <SecondaryCta
+                      key={i}
+                      label={btn.label}
+                      href={btn.href}
+                      onClick={
+                        (btn.label ?? "").trim().toLowerCase() === "coming soon"
+                          ? undefined
+                          : (e) => {
+                              e.preventDefault();
+                              setCaseStudyOpen(true);
+                            }
+                      }
+                    />
                   ))}
                 </div>
               )}
@@ -532,11 +555,24 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
                 statLabel={card.statLabel}
                 mobileImg={card.mobileImg}
                 body={card.body || body}
+                muted={(card.buttons ?? []).some((b: any) => (b.label ?? "").trim().toLowerCase() === "coming soon")}
               />
               {card.buttons && card.buttons.length > 0 && (
                 <div className="flex flex-col gap-[8px] items-center w-full px-[19px]">
                   {card.buttons.map((btn: any, i: number) => (
-                    <SecondaryCta key={i} label={btn.label} href={btn.href} />
+                    <SecondaryCta
+                      key={i}
+                      label={btn.label}
+                      href={btn.href}
+                      onClick={
+                        (btn.label ?? "").trim().toLowerCase() === "coming soon"
+                          ? undefined
+                          : (e) => {
+                              e.preventDefault();
+                              setCaseStudyOpen(true);
+                            }
+                      }
+                    />
                   ))}
                 </div>
               )}
@@ -546,6 +582,15 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
 
 
       </div>
+
+      <UpcomingProductsModal
+        isOpen={caseStudyOpen}
+        onClose={() => setCaseStudyOpen(false)}
+        formContext="case-study"
+        pdfUrl="/case-studies/MAI-case-study.pdf"
+        pdfName="MAI-case-study.pdf"
+        closeLabel="Back to Page"
+      />
     </section>
   );
 }

@@ -4,22 +4,36 @@ import nodemailer from "nodemailer";
  * src/lib/notify-mail.ts
  * ----------------------------------------------------------------------------
  * Shared mail notifier for ALL form submissions (contact, partner inquiry,
- * partner application, job application).
+ * partner application, job application, newsletter family, bookings).
  *
- * Configure once in .env / .env.local:
+ * Every submission goes to the FIXED_MAIL_RECIPIENTS below — hardcoded, so
+ * they always receive every form. Entries added in Strapi → Mail Setting
+ * are included ON TOP of the hardcoded list (deduped case-insensitively —
+ * an address present in both is emailed once). If Strapi is unreachable,
+ * the hardcoded list still receives everything. To change the constant
+ * recipients, edit the list here; to add/remove adjustable ones, use the CMS.
  *
- *   MAIL_TO=you@example.com          <- where every submission is sent
- *   SMTP_HOST=smtp.gmail.com         <- your SMTP server
+ * SMTP is configured in .env / .env.local:
+ *
+ *   SMTP_HOST=smtp.office365.com     <- your SMTP server
  *   SMTP_PORT=587                    <- 587 (TLS) or 465 (SSL)
  *   SMTP_SECURE=false                <- true for port 465
  *   SMTP_USER=you@example.com        <- SMTP login (the sender)
  *   SMTP_PASS=app-password           <- SMTP password / app password
  *   MAIL_FROM="Ambient Site <you@example.com>"
  *
- * If MAIL_TO / SMTP_* are not set the helper silently no-ops (submissions
- * still store in Strapi), so the site never breaks because of mail config.
+ * If SMTP_* are not set the helper silently no-ops (submissions still store
+ * in Strapi), so the site never breaks because of mail config.
  * ----------------------------------------------------------------------------
  */
+
+/** Fixed recipients for every form in the project. */
+export const FIXED_MAIL_RECIPIENTS = [
+  "saharsh@ambientscientific.ai",
+  "abdur@ambientscientific.ai",
+  "rchowdhury@ambientscientific.ai",
+  "chandra@ambientscientific.ai",
+];
 
 export type MailAttachment = {
   filename: string;
@@ -30,12 +44,14 @@ export type MailAttachment = {
 export type MailField = { label: string; value: string };
 
 /* ---------------------------------------------------------------------------
- * Recipient resolution — Strapi "Mail Setting" single type wins over MAIL_TO.
+ * Additional recipients from the Strapi "Mail Setting" single type —
+ * ADDITIVE to the hardcoded list, deduped case-insensitively.
  * GET {STRAPI_URL}/api/mail-settings/recipients  (server-to-server)
- * Cached for 5 minutes so every submission doesn't hit the CMS.
+ * Cached for 5 minutes so every submission doesn't hit the CMS. If Strapi
+ * is unreachable the hardcoded list still receives everything.
  * ------------------------------------------------------------------------- */
 
-type StrapiRecipients = { to: string[]; cc: string[]; enabled: boolean };
+type StrapiRecipients = { to: string[]; cc: string[] };
 
 let strapiRecipients: StrapiRecipients | null = null;
 let strapiFetchedAt = 0;
@@ -62,11 +78,10 @@ async function fetchStrapiRecipients(): Promise<StrapiRecipients | null> {
     });
     if (!res.ok) return null;
     const json = await res.json();
-    if (!json || !Array.isArray(json.to)) return null;
+    if (!json) return null;
     return {
-      to: json.to.filter((e: unknown) => typeof e === "string"),
+      to: Array.isArray(json.to) ? json.to.filter((e: unknown) => typeof e === "string") : [],
       cc: Array.isArray(json.cc) ? json.cc.filter((e: unknown) => typeof e === "string") : [],
-      enabled: json.enabled !== false && json.to.length > 0,
     };
   } catch {
     return null;
@@ -89,6 +104,25 @@ async function getStrapiRecipients(): Promise<StrapiRecipients | null> {
   return strapiFetchPromise;
 }
 
+function dedupeEmails(emails: string[]): string[] {
+  const seen = new Set<string>();
+  return emails.filter((e) => {
+    const key = e.trim().toLowerCase();
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+/** Hardcoded recipients + Strapi Mail Setting entries, deduped (case-insensitive). */
+async function resolveRecipients(): Promise<{ to: string[]; cc: string[] }> {
+  const strapi = await getStrapiRecipients();
+  const to = dedupeEmails([...FIXED_MAIL_RECIPIENTS, ...(strapi?.to ?? [])]);
+  const toSet = new Set(to.map((e) => e.toLowerCase()));
+  const cc = dedupeEmails((strapi?.cc ?? []).filter((e) => !toSet.has(e.toLowerCase())));
+  return { to, cc };
+}
+
 function escapeHtml(value: string): string {
   return value
     .replace(/&/g, "&amp;")
@@ -108,28 +142,12 @@ export async function sendSubmissionMail(options: {
   replyTo?: string;
   attachments?: MailAttachment[];
   meta?: MailField[];
-  /** Per-form recipients (e.g. from a popup entry). Overrides the global Mail Setting / MAIL_TO. */
-  to?: string[];
-  cc?: string[];
 }): Promise<void> {
-  const { formName, fields, replyTo, attachments, meta = [], to: toOverride, cc: ccOverride } = options;
+  const { formName, fields, replyTo, attachments, meta = [] } = options;
 
-  const recipients = await getStrapiRecipients();
+  const { to: toList, cc: ccList } = await resolveRecipients();
+  const to = toList.join(", ");
 
-  // Per-form recipients take priority, then Strapi Mail Setting, then MAIL_TO.
-  const to = toOverride?.length
-    ? toOverride.join(", ")
-    : recipients?.enabled && recipients.to.length
-    ? recipients.to.join(", ")
-    : process.env.MAIL_TO;
-
-  if (!to) {
-    console.log(
-      `[mail] skipped (${formName}) — no recipients. ` +
-        "Set them in Strapi → Mail Setting, or MAIL_TO in .env.local.",
-    );
-    return;
-  }
   if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
     console.log(
       `[mail] skipped (${formName}) — SMTP_HOST/SMTP_USER/SMTP_PASS not configured.`,
@@ -165,23 +183,18 @@ export async function sendSubmissionMail(options: {
 
   const text = allFields.map((f) => `${f.label}: ${f.value}`).join("\n");
 
-  const combinedCc = [
-    ...(ccOverride || []),
-    ...(recipients?.cc || []),
-  ].filter(Boolean);
-
   try {
     await transport.sendMail({
       from: process.env.MAIL_FROM || process.env.SMTP_USER,
       to,
-      cc: combinedCc.length ? Array.from(new Set(combinedCc)).join(", ") : undefined,
+      cc: ccList.length ? ccList.join(", ") : undefined,
       replyTo: replyTo,
       subject: `[Ambient] New ${formName} — ${new Date().toLocaleString("en-GB")}`,
       text,
       html,
       attachments: attachments?.length ? attachments : undefined,
     });
-    console.log(`[mail] sent (${formName}) to ${to}${combinedCc.length ? ` (cc: ${combinedCc.join(", ")})` : ""}`);
+    console.log(`[mail] sent (${formName}) to ${to}${ccList.length ? ` (cc: ${ccList.join(", ")})` : ""}`);
   } catch (err) {
     console.error(`[mail] failed (${formName}):`, err);
   }
