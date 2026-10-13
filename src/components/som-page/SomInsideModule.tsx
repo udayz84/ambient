@@ -126,13 +126,28 @@ export function SomInsideModule({
   const [scrollProgress, setScrollProgress] = useState(0);
   const [thumbHeight, setThumbHeight] = useState(100);
 
+  const rafRef = useRef<number | null>(null);
+
+  // Coalesce scroll-progress updates to one per frame — re-rendering this
+  // section on every wheel/scroll event makes scrolling janky.
   const handleScroll = () => {
-    if (scrollRef.current) {
-      const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
+    if (rafRef.current != null) return;
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = null;
+      const el = scrollRef.current;
+      if (!el) return;
+      const { scrollTop, scrollHeight, clientHeight } = el;
       const progress = scrollTop / (scrollHeight - clientHeight);
-      setScrollProgress(isNaN(progress) ? 0 : progress);
-    }
+      const next = isNaN(progress) ? 0 : progress;
+      setScrollProgress((prev) => (prev === next ? prev : next));
+    });
   };
+
+  useEffect(() => {
+    return () => {
+      if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -145,6 +160,26 @@ export function SomInsideModule({
       setThumbHeight(Math.min(calculatedHeight, 150));
     }
   }, [specs.length]);
+
+  // Scroll chaining — when the card list hits its top/bottom boundary,
+  // hand the wheel delta to the page instead of trapping it, so the user
+  // never has to move the cursor out of the section to keep scrolling.
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      const atTop = el.scrollTop <= 0;
+      const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1;
+      const chainingDown = e.deltaY > 0 && atBottom;
+      const chainingUp = e.deltaY < 0 && atTop;
+      if (chainingDown || chainingUp) {
+        e.preventDefault();
+        window.scrollBy(0, e.deltaY);
+      }
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, []);
 
   return (
     <section

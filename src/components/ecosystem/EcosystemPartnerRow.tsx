@@ -5,10 +5,10 @@ import {
   type PartnerRowConfig,
   type EcosystemPartner,
   type CarouselSlot,
-  resolvePartners,
   CAROUSEL_1_SLOTS,
   CAROUSEL_2_SLOTS,
 } from "./ecosystem-data";
+import { mediaUrl } from "@/lib/strapi";
 import { EcosystemGridLine } from "./EcosystemGridLine";
 import { Corners } from "../shared/Corners";
 
@@ -80,15 +80,33 @@ type EcosystemPartnerRowProps = {
 export function EcosystemPartnerRow({
   config,
   logoStatNodeIds = LOGO_STAT_NODES,
+  partners,
   slotsOverride,
   isDevelopment = false,
 }: EcosystemPartnerRowProps) {
-  const slots = slotsOverride ?? (isDevelopment ? CAROUSEL_2_SLOTS : CAROUSEL_1_SLOTS);
+  const fallback = slotsOverride ?? (isDevelopment ? CAROUSEL_2_SLOTS : CAROUSEL_1_SLOTS);
+  // Strapi partners drive the row; entries whose logo is missing fall back
+  // to the designed slot for that position so no card renders empty.
+  const slots = partners?.length
+    ? partners.map((p, i) => {
+        const url = mediaUrl(p?.logo);
+        if (url) {
+          return {
+            isRevealed: true,
+            name: p?.name ?? undefined,
+            src: url,
+            width: p?.logo?.width,
+            height: p?.logo?.height,
+          };
+        }
+        return fallback[i % fallback.length];
+      })
+    : fallback;
   const gridLines = config.gridLines;
 
   return (
     <div
-      className="relative flex h-[225px] w-[1204px] shrink-0 items-center justify-between bg-[rgba(255,255,255,0.04)] pl-[72px] pr-[36px]"
+      className="relative flex h-[225px] w-[1204px] shrink-0 items-center justify-between bg-[rgba(255,255,255,0.04)] px-[36px]"
       data-node-id={config.rowNodeId}
     >
       <div className="pointer-events-none absolute inset-0 z-[2]" aria-hidden>

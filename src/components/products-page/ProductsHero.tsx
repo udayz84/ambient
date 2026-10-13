@@ -8,7 +8,7 @@ import { Corners } from "../shared/Corners";
 import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
 import { TagBadge } from "../hero/TagBadge";
 import { ProductsScrollIndicator } from "./ProductsScrollIndicator";
-import { ProductBriefModal } from "./ProductBriefModal";
+import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 import { useState } from "react";
 import {
   COIN_BG,
@@ -35,7 +35,7 @@ function splitLines(value: string): string[] {
   return value.split("\n");
 }
 
-export function ProductsHero({ data }: { data?: any }) {
+export function ProductsHero({ data, evalkitForm }: { data?: any; evalkitForm?: any }) {
   const title = data?.title || FALLBACK_TITLE;
   const titleLines = splitLines(title);
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
@@ -50,7 +50,7 @@ export function ProductsHero({ data }: { data?: any }) {
   const chipsetImage = mediaUrl(data?.chipset_image);
   const chipsetImageMobile = mediaUrl(data?.chipset_image_mobile) || chipsetImage;
   const strapiTags = Array.isArray(data?.tags) ? data.tags : [];
-  const [briefModalTitle, setBriefModalTitle] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
@@ -80,9 +80,9 @@ export function ProductsHero({ data }: { data?: any }) {
             primary={primary}
             secondary={secondary}
             strapiTags={strapiTags}
-            onCtaClick={(e, label) => {
+            onCtaClick={(e) => {
               e.preventDefault();
-              setBriefModalTitle(label);
+              setIsModalOpen(true);
             }}
           />
         </div>
@@ -106,16 +106,18 @@ export function ProductsHero({ data }: { data?: any }) {
         secondary={secondary}
         chipsetImage={chipsetImageMobile}
         strapiTags={strapiTags}
-        onCtaClick={(e, label) => {
+        onCtaClick={(e) => {
           e.preventDefault();
-          setBriefModalTitle(label);
+          setIsModalOpen(true);
         }}
       />
 
-      <ProductBriefModal
-        isOpen={!!briefModalTitle}
-        title={briefModalTitle}
-        onClose={() => setBriefModalTitle("")}
+      <UpcomingProductsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        formContext="evalkit"
+        config={evalkitForm || data?.evalkit_form}
+        closeLabel="Back to Products"
       />
     </>
   );

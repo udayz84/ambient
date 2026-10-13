@@ -3,7 +3,7 @@
 import { interMedium, interRegular, gilroyMedium } from "../hero/fonts";
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState, useEffect, useLayoutEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import {
   mapStrapiNavItems,
@@ -382,7 +382,7 @@ function ShopNavButton({ item }: { item: { label: string; href: string } }) {
   return (
     <Link
       href={item.href}
-      className="relative flex h-[36px] w-[134px] items-center justify-center gap-[6px] shrink-0 shadow-[0px_42px_107px_0px_rgba(0,196,255,0.2),0px_24.721px_32.257px_0px_rgba(0,196,255,0.15),0px_10.268px_13.398px_0px_rgba(0,196,255,0.15)] transition-opacity hover:opacity-90"
+      className="relative flex h-[36px] w-[134px] items-center justify-center gap-[6px] shrink-0 max-[1359px]:hidden shadow-[0px_42px_107px_0px_rgba(0,196,255,0.2),0px_24.721px_32.257px_0px_rgba(0,196,255,0.15),0px_10.268px_13.398px_0px_rgba(0,196,255,0.15)] transition-opacity hover:opacity-90"
     >
       <span
         aria-hidden
@@ -437,6 +437,7 @@ function ShopNavButton({ item }: { item: { label: string; href: string } }) {
 function NavItem({ item }: { item: any }) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsOpen(false);
@@ -451,6 +452,24 @@ function NavItem({ item }: { item: any }) {
   }, [isOpen]);
 
   const isProducts = item.label?.toLowerCase() === "products";
+
+  // Mega menu is left-anchored to the Products item; below ~1180px viewports
+  // its fixed max-content width crosses the viewport edge and gets clipped.
+  // Clamp it to the viewport so the columns narrow instead of being cut off.
+  // Wide viewports are untouched (clamp only applies on overflow).
+  useLayoutEffect(() => {
+    const wrap = dropdownRef.current;
+    const panel = wrap?.firstElementChild as HTMLElement | null;
+    if (!wrap || !panel) return;
+    panel.style.minWidth = "";
+    panel.style.maxWidth = "";
+    if (!isOpen) return;
+    const overflow = panel.getBoundingClientRect().right - (window.innerWidth - 16);
+    if (overflow > 0) {
+      panel.style.minWidth = "0px";
+      panel.style.maxWidth = `${Math.max(320, Math.round(panel.offsetWidth - overflow))}px`;
+    }
+  }, [isOpen]);
 
   if (item.hasChevron || item.children?.length) {
     return (
@@ -473,6 +492,7 @@ function NavItem({ item }: { item: any }) {
           <span className="max-w-full overflow-hidden text-ellipsis">{item.label}</span>
         </Link>
         <div
+          ref={dropdownRef}
           onClick={(e) => e.stopPropagation()}
           className={`absolute top-full z-30 pt-[24px] transition-all duration-200 ${
             isProducts ? "left-0" : "left-1/2 -translate-x-1/2"

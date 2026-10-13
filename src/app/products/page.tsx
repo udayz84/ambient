@@ -108,12 +108,12 @@ export default async function ProductsPage() {
 
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
-      <ProductsHero data={data?.hero} />
+      <ProductsHero data={data?.hero} evalkitForm={data?.evalkit_form} />
       <ProductsStickyNav items={stickyItems} />
       <div id="features"><ProductsFeatures data={data?.features} /></div>
       <div id="always-on"><ProductsAlwaysOn data={data?.always_on} /></div>
       <div id="metrics"><ProductsMeasured data={data?.measured} /></div>
-      <ApplicationsPageWins />
+      <div id="case-studies"><ApplicationsPageWins /></div>
       <div id="use-cases"><ProductsUseCases data={data?.use_cases} /></div>
       <ProductsReadyToRun />
       {/* <ProductsAppForge data={data?.appforge} /> */}

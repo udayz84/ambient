@@ -1,5 +1,4 @@
-"use client";
-
+import Link from "next/link";
 import { mediaUrl } from "@/lib/strapi";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
@@ -14,6 +13,8 @@ const DEFAULT_FOOTER =
   "Validate your logic on the Cranium kit today. When you are ready for extreme space constraints, drop our high-density SOM directly into your product without rewriting your application software.";
 const DEFAULT_PRIMARY_LABEL = "Explore SOMs";
 const DEFAULT_SECONDARY_LABEL = "Schedule Technical Consultation";
+const DEFAULT_PRIMARY_HREF = "/SOM";
+const DEFAULT_SECONDARY_HREF = "/contact";
 const DIGIKEY_CRANIUM_DVK_URL =
   "https://www.digikey.com/en/products/detail/ambient-scientific/CRT6P1GPX10S11/28771118";
 
@@ -23,10 +24,10 @@ export function DvkIntegratedModules({ data }: { data?: any }) {
   const footer = DEFAULT_FOOTER;
   const primaryLabel =
     data?.primary_button?.label || DEFAULT_PRIMARY_LABEL;
-  const primaryHref = data?.primary_button?.href || "#";
+  const primaryHref = data?.primary_button?.href || DEFAULT_PRIMARY_HREF;
   const secondaryLabel =
     data?.secondary_button?.label || DEFAULT_SECONDARY_LABEL;
-  const secondaryHref = data?.secondary_button?.href || "#";
+  const secondaryHref = data?.secondary_button?.href || DEFAULT_SECONDARY_HREF;
   const cards =
     data?.cards && Array.isArray(data.cards) && data.cards.length > 0
       ? data.cards.map((c: any, i: number) => ({
@@ -342,7 +343,7 @@ function DvkIntegratedModulesMobile({
           className="absolute bottom-[20px] left-[calc(50%+0.5px)] flex w-[310px] max-w-[calc(100%-82px)] -translate-x-1/2 flex-col gap-[16px]"
           data-node-id="4062:12372"
         >
-          <a
+          <Link
             href={primaryHref}
             className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center`}
             data-node-id="4062:12373"
@@ -360,8 +361,8 @@ function DvkIntegratedModulesMobile({
               className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`}
             />
             <GreenCtaCorners />
-          </a>
-          <a
+          </Link>
+          <Link
             href={secondaryHref}
             className={`${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
             data-node-id="4062:12384"
@@ -371,7 +372,7 @@ function DvkIntegratedModulesMobile({
               {secondaryLabel}
             </span>
             <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>
@@ -431,7 +432,7 @@ function GreenCta({
   rel?: string;
 }) {
   return (
-    <a
+    <Link
       href={href}
       target={target}
       rel={rel}
@@ -444,13 +445,13 @@ function GreenCta({
       </span>
       <span aria-hidden className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
       <GreenCtaCorners />
-    </a>
+    </Link>
   );
 }
 
 function SecondaryCta({ children, width, fullWidth = false, href = "#" }: { children: React.ReactNode; width?: number | string; fullWidth?: boolean; href?: string }) {
   return (
-    <a
+    <Link
       href={href}
       className={`${gilroyMedium.className} relative flex h-[52px] ${fullWidth ? "w-full" : "shrink-0"} items-center justify-center bg-[rgba(226,241,202,0.12)] px-[24px]`}
       style={fullWidth ? undefined : { width: width || "max-content" }}
@@ -459,6 +460,6 @@ function SecondaryCta({ children, width, fullWidth = false, href = "#" }: { chil
         {children}
       </span>
       <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
-    </a>
+    </Link>
   );
 }

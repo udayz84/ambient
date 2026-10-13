@@ -34,7 +34,7 @@ export default async function DvkPage() {
       "appforge",
       { section: "demos", nested: ["demo_cards"], fields: ["phone_card"] },
       "modelforge",
-      { section: "integrated_modules", nested: ["cards"] },
+      { section: "integrated_modules", nested: ["cards", "primary_button", "secondary_button"] },
       "seo",
     ]);
   } catch {

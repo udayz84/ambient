@@ -115,7 +115,7 @@ export function ModelZooBuildIt() {
 
           {/* CTAs — 5131:10820 (437 wide, centered) */}
           <div className="flex flex-wrap items-start justify-center gap-[24px]" data-node-id="5131:10820">
-            <CtaPrimary label="Explore the Developer Hub" width={251} />
+            <CtaPrimary href="/developer" label="Explore the Developer Hub" width={251} />
             <CtaSecondary label="Read the Docs" width={162} />
           </div>
         </div>

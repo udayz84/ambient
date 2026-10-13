@@ -188,7 +188,12 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
   const ctaLabel = data?.cta?.label || FALLBACK_CTA_LABEL;
   const ctaHref = data?.cta?.href || "#";
   const secondaryCtaLabel = data?.secondary_cta?.label;
-  const secondaryCtaHref = data?.secondary_cta?.href;
+  // CMS label "Explore customer success." — default its "#" href to the
+  // products-page case-studies section (ApplicationsPageWins).
+  const secondaryCtaHref =
+    data?.secondary_cta?.href && data.secondary_cta.href !== "#"
+      ? data.secondary_cta.href
+      : "/products#case-studies";
 
   const strapiStats = Array.isArray(data?.stat_cards) ? data.stat_cards : [];
   const statCards: StatCardData[] = STAT_CARD_CONFIG.map((cfg, i) => {

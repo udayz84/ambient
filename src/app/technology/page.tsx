@@ -58,7 +58,7 @@ export default async function TechnologyPage() {
         />
       )}
       {data?.modes && <TechnologyPageModes data={data.modes} />}
-      {data?.graph && <TechnologyPageGraph data={data.graph} config={data.brief_form} />}
+      {data?.graph && <TechnologyPageGraph data={data.graph} />}
       {data?.efficiency && <TechnologyPageEfficiency data={data.efficiency} />}
       {data?.silicon && <TechnologyPageSilicon data={data.silicon} />}
       {data?.bottom_cta && <TechnologyPageBottomCta data={data.bottom_cta} config={data.brief_form} />}

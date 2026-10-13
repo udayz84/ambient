@@ -250,7 +250,7 @@ function VideoModal({ title, videoId, onClose }: { title: string; videoId?: stri
           <iframe
             ref={iframeRef}
             className="absolute inset-0 size-full"
-            src={`https://www.youtube-nocookie.com/embed/${videoId || DEMO_VIDEO_ID}?autoplay=1&mute=1&playsinline=1&enablejsapi=1&rel=0`}
+            src={`https://www.youtube-nocookie.com/embed/${videoId || DEMO_VIDEO_ID}?autoplay=1&mute=1&playsinline=1&enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}&rel=0`}
             title={`${title} demo`}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen

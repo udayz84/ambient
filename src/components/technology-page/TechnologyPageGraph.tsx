@@ -1,7 +1,6 @@
 "use client";
 
-import { Fragment, useState } from "react";
-import { ProductBriefModal } from "../products-page/ProductBriefModal";
+import { Fragment } from "react";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular, interSemiBold } from "../hero/fonts";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
@@ -29,7 +28,6 @@ const FALLBACK_AXIS_RIGHT = "HYPERSCALE CLOUD";
 const FALLBACK_CENTER_TEXT =
   "ONE CORE. ONE SOFTWARE STACK. \nFrom the smallest sensor to largest serve";
 const FALLBACK_PRIMARY_LABEL = "Read the Whitepaper";
-const FALLBACK_SECONDARY_LABEL = "Watch the 3-min Explainer";
 
 /** Glowing cube renders standing above the baseline (3491:629/631/632/634/633). */
 const CUBES = [
@@ -122,15 +120,9 @@ const GREEN_CTA_SHADOW =
 function GraphCtas({
   primaryLabel,
   primaryHref,
-  secondaryLabel,
-  secondaryHref,
-  onSecondaryClick,
 }: {
   primaryLabel: string;
   primaryHref: string;
-  secondaryLabel: string;
-  secondaryHref: string;
-  onSecondaryClick?: () => void;
 }) {
   return (
     <div className="absolute top-[754.55px] left-1/2 flex -translate-x-1/2 items-start gap-[24px]" data-node-id="3035:713">
@@ -147,35 +139,15 @@ function GraphCtas({
         </span>
         <GreenCtaCorners />
       </a>
-      <a
-        href={secondaryHref}
-        onClick={(e) => {
-          if (onSecondaryClick) {
-            e.preventDefault();
-            onSecondaryClick();
-          }
-        }}
-        className={`${gilroyMedium.className} relative block h-[48px] w-[263px] shrink-0 bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
-        data-node-id="3035:725"
-        data-name="CTA - Secondary"
-      >
-        <span className="relative flex h-full max-w-full items-center overflow-hidden text-ellipsis text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
-          {secondaryLabel}
-        </span>
-        <GreenCtaCorners />
-      </a>
     </div>
   );
 }
 
 export function TechnologyPageGraph({
   data,
-  config,
 }: {
   data?: any;
-  config?: any;
 } = {}) {
-  const [isExplainerOpen, setIsExplainerOpen] = useState(false);
   const heading = data?.heading || FALLBACK_HEADING;
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const axisLeft = data?.axis_label_left || FALLBACK_AXIS_LEFT;
@@ -184,9 +156,6 @@ export function TechnologyPageGraph({
   const centerLines = centerText.split("\n");
   const primaryLabel = data?.primary_button?.label || FALLBACK_PRIMARY_LABEL;
   const primaryHref = data?.primary_button?.href || "#";
-  const secondaryLabel =
-    data?.secondary_button?.label || FALLBACK_SECONDARY_LABEL;
-  const secondaryHref = data?.secondary_button?.href || "#";
 
   const strapiLabels = Array.isArray(data?.labels) ? data.labels : [];
   const labels: LabelConfig[] = LABEL_CONFIG.map((cfg, i) => {
@@ -385,9 +354,6 @@ export function TechnologyPageGraph({
         <GraphCtas
           primaryLabel={primaryLabel}
           primaryHref={primaryHref}
-          secondaryLabel={secondaryLabel}
-          secondaryHref={secondaryHref}
-          onSecondaryClick={() => setIsExplainerOpen(true)}
         />
       </div>
 
@@ -589,7 +555,7 @@ export function TechnologyPageGraph({
         })}
 
         {/* CTA buttons — 4129:8251 */}
-        <div className="absolute bottom-[30px] left-1/2 flex -translate-x-1/2 flex-col items-start gap-[24px]">
+        <div className="absolute bottom-[30px] left-1/2 flex -translate-x-1/2 flex-col items-center gap-[24px]">
           <a
             href={primaryHref}
             className={`${gilroyMedium.className} ${GREEN_CTA_SHADOW} relative block h-[48px] w-[263px] shrink-0`}
@@ -601,28 +567,8 @@ export function TechnologyPageGraph({
             </span>
             <GreenCtaCorners />
           </a>
-          <a
-            href={secondaryHref}
-            onClick={(e) => {
-              e.preventDefault();
-              setIsExplainerOpen(true);
-            }}
-            className={`${gilroyMedium.className} relative block shrink-0 bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
-          >
-            <span className="relative flex items-center text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
-              {secondaryLabel}
-            </span>
-            <GreenCtaCorners />
-          </a>
         </div>
       </div>
-      
-      <ProductBriefModal
-        isOpen={isExplainerOpen}
-        onClose={() => setIsExplainerOpen(false)}
-        title="Watch the 3-min Explainer"
-        config={config}
-      />
     </section>
   );
 }

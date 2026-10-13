@@ -191,8 +191,8 @@ export function ModelZooSteps({ formConfig }: { formConfig?: any }) {
 
         {/* CTAs — 5131:10665 (centered: 251+24+174 = 449 wide in the 1256 container) */}
         <div className="mt-[24px] flex flex-wrap items-start justify-center gap-[24px] min-[1024px]:mt-[42px] z-50 pointer-events-auto" data-node-id="5131:10665">
-          <CtaPrimary label="Explore the Developer Hub" width={251} />
-          <CtaSecondary label="Request the SDK" width={174} onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }} />
+          <CtaPrimary href="/developer" label="Explore the Developer Hub" width={251} />
+          <CtaSecondary href="/SOM" label="Request the SDK" width={174} />
         </div>
       </div>
 

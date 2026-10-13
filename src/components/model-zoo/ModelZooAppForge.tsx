@@ -158,8 +158,15 @@ export function ModelZooAppForge({
       }
       tryPlay();
     }, 1000);
+    // The retry window can expire before the user scrolls down to this
+    // below-the-fold section — play again whenever it becomes visible.
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((en) => en.isIntersecting)) tryPlay();
+    });
+    io.observe(video);
     return () => {
       clearInterval(retryTimer);
+      io.disconnect();
       video.removeEventListener("loadeddata", tryPlay);
       video.removeEventListener("canplay", tryPlay);
     };
