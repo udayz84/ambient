@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_products_spec_callouts",
+  "info": {
+    "displayName": "Full Picture Spec Card",
+    "description": "A card containing a list of spec bullet points for the Full Picture section"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "description": "Card Title (e.g. 'CONTROL', 'PACKAGE', 'POWER')"
+    },
+    "items": {
+      "type": "text",
+      "description": "List of bullet points. Enter each point on a new line."
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Shown at 22×22. Recommended: SVG (or 44×44 px PNG)."
+    }
+  }
+}

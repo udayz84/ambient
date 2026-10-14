@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_shared_mega_columns",
+  "info": {
+    "displayName": "Mega Menu Column",
+    "description": "Products mega-menu dropdown column (title, description, links, CTA)"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.nav-sub-item"
+    },
+    "cta_label": {
+      "type": "string"
+    },
+    "cta_href": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "collectionName": "components_dvk_modelforges",
+  "info": {
+    "displayName": "ModelForge",
+    "description": "DVK ModelForge section"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "center_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Shown at 345×350, cover. Recommended: 690×700 px WebP."
+    },
+    "your_model_title": {
+      "type": "string"
+    },
+    "your_model_description": {
+      "type": "text"
+    },
+    "your_model_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Shown at 250×268, contain. Recommended: 500×536 px WebP."
+    },
+    "dvk_board_title": {
+      "type": "string"
+    },
+    "dvk_board_description": {
+      "type": "text"
+    },
+    "dvk_board_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Shown at 250×228, contain. Recommended: 500×456 px WebP (or SVG blueprint line-art)."
+    },
+    "toolchain_title": {
+      "type": "string"
+    },
+    "toolchain_subtitle": {
+      "type": "string"
+    },
+    "toolchain_labels": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.tag"
+    },
+    "floating_tags": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.tag"
+    }
+  }
+}

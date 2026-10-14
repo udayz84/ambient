@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_wearables_workload_cards", "info": { "displayName": "Workload Card", "description": "Workload stat card" }, "options": {}, "attributes": { "stat": { "type": "string" }, "label": { "type": "string" }, "description": { "type": "text" } } }

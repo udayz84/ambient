@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "jobs",
+  "info": {
+    "singularName": "job",
+    "pluralName": "jobs",
+    "displayName": "Job",
+    "description": "Career open role listing"
+  },
+  "options": { "draftAndPublish": true },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::job-category.job-category"
+    },
+    "location": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::job-location.job-location"
+    },
+    "employment_type": {
+      "type": "enumeration",
+      "enum": ["full_time", "part_time", "contract"],
+      "default": "full_time"
+    },
+    "about_role": {
+      "type": "text"
+    },
+    "responsibilities": {
+      "type": "text",
+      "description": "Enter each responsibility on a new line"
+    },
+    "perks_benefits": {
+      "type": "text",
+      "description": "Enter each perk or benefit on a new line"
+    },
+    "apply_url": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

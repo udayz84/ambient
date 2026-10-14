@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_company_tech_partners", "info": { "displayName": "Tech Partners", "description": "Company technology partners section" }, "options": {}, "attributes": { "title": { "type": "string", "default": "TECHNOLOGY PARTNERS" }, "partners": { "type": "component", "repeatable": true, "component": "company.partner" } } }

@@ -1,0 +1,39 @@
+{
+  "collectionName": "components_som_heroes",
+  "info": {
+    "displayName": "Hero",
+    "description": "SOM hero section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Desktop 1154×675 contain, mobile 393×360 cover. Recommended: 2400×1400 px WebP."
+    },
+    "primary_button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.button"
+    },
+    "secondary_button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.button"
+    }
+  }
+}

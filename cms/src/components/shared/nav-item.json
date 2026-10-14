@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_shared_nav_items",
+  "info": {
+    "displayName": "Nav Item",
+    "description": "Navigation link"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "href": {
+      "type": "string",
+      "required": true
+    },
+    "has_dropdown": {
+      "type": "boolean",
+      "default": false
+    },
+    "highlight": {
+      "type": "boolean",
+      "default": false
+    },
+    "children": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.nav-sub-item"
+    },
+    "mega_columns": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.mega-column"
+    }
+  }
+}

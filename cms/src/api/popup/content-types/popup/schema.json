@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "popups",
+  "info": {
+    "singularName": "popup",
+    "pluralName": "popups",
+    "displayName": "Popup",
+    "description": "Popup configuration"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "page": {
+      "type": "string",
+      "description": "Where this form appears on the site (shown in the list), e.g. \"Home page — hero CTA\""
+    },
+    "description": {
+      "type": "text"
+    },
+    "fields": {
+      "type": "component",
+      "repeatable": true,
+      "component": "form.field"
+    },
+    "cta_label": {
+      "type": "string",
+      "default": "Submit & Download"
+    },
+    "success_title": {
+      "type": "string"
+    },
+    "success_text": {
+      "type": "text"
+    },
+    "recipient_emails": {
+      "type": "text",
+      "maxLength": 2000,
+      "description": "Comma-separated email addresses that receive this form's submission notifications. Leave empty to use the global Mail Setting / MAIL_TO."
+    }
+  }
+}

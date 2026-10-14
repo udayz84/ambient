@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_som_family_features",
+  "info": {
+    "displayName": "SOM Family Feature",
+    "description": "Small feature item for the 'What's inside' section"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Shown at 20×20. Recommended: SVG (or 40×40 px PNG)."
+    },
+    "text": {
+      "type": "string",
+      "required": true,
+      "description": "Text describing the feature (e.g. '6-axis IMU')"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_som_intelligence_cards",
+  "info": {
+    "displayName": "Intelligence Card",
+    "description": "SOM intelligence card"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Square shown at 160×160, cover (desktop only). Recommended: 320×320 px WebP."
+    }
+  }
+}

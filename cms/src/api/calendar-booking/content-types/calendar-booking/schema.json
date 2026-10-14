@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "calendar_bookings",
+  "info": {
+    "singularName": "calendar-booking",
+    "pluralName": "calendar-bookings",
+    "displayName": "Calendar Bookings",
+    "description": "Meeting slot bookings from the Contact page calendar popup"
+  },
+  "options": { "draftAndPublish": false },
+  "pluginOptions": {},
+  "attributes": {
+    "meetingTitle": {
+      "type": "string",
+      "required": true
+    },
+    "meetingDescription": {
+      "type": "text"
+    },
+    "bookingDate": {
+      "type": "date",
+      "required": true
+    },
+    "timeSlot": {
+      "type": "string",
+      "required": true
+    },
+    "timeZone": {
+      "type": "string"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["pending", "confirmed", "cancelled"],
+      "default": "confirmed",
+      "required": true
+    }
+  }
+}

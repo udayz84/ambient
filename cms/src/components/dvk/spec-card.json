@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_dvk_spec_cards", "info": { "displayName": "Spec Card", "description": "Hardware stack spec card" }, "options": {}, "attributes": { "title": { "type": "string", "required": true }, "items": { "type": "text" }, "is_accent": { "type": "boolean", "default": false } } }

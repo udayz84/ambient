@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_news_grids",
+  "info": {
+    "displayName": "Grid",
+    "description": "News grid section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Latest Scoop from Ambient",
+      "description": "Section heading above the filter bar."
+    },
+    "filter_pills": {
+      "type": "component",
+      "repeatable": true,
+      "component": "news.filter-pill"
+    },
+    "load_more_label": {
+      "type": "string",
+      "default": "Load More Resources"
+    },
+    "backdrop_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Full-bleed backdrop 1440×810, cover. Recommended: 2880×1620 px WebP/JPG (16:9)."
+    },
+    "alt": {
+      "type": "string"
+    }
+  }
+}

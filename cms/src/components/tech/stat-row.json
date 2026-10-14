@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_tech_stat_rows",
+  "info": {
+    "displayName": "Stat Row",
+    "description": "A single statistic row"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "value": {
+      "type": "string",
+      "required": true
+    },
+    "valueColor": {
+      "type": "string",
+      "default": "#ffffff"
+    }
+  }
+}

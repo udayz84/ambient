@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_partners_proof_points",
+  "info": {
+    "displayName": "Proof Point",
+    "description": "Partners proof point — icon stays hardcoded in the frontend"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

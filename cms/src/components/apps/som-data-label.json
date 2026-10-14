@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_apps_som_data_labels", "info": { "displayName": "SOM Data Label", "description": "SOM data label" }, "options": {}, "attributes": { "value": { "type": "string" }, "label": { "type": "string" }, "sublabel": { "type": "string" } } }

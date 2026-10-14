@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "seo_settings",
+  "info": {
+    "singularName": "seo-setting",
+    "pluralName": "seo-settings",
+    "displayName": "SEO Settings",
+    "description": "Global SEO Settings including robots.txt"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "robotsEnabled": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "robotsContent": {
+      "type": "text",
+      "required": true,
+      "default": "User-agent: *\nAllow: /"
+    },
+    "sitemapUrl": {
+      "type": "string",
+      "required": false
+    }
+  }
+}

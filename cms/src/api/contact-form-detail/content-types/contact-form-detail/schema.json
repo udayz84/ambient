@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contact_form_details",
+  "info": {
+    "singularName": "contact-form-detail",
+    "pluralName": "contact-form-details",
+    "displayName": "Contact Form Details",
+    "description": "Submissions from the Contact page form"
+  },
+  "options": { "draftAndPublish": false },
+  "pluginOptions": {},
+  "attributes": {
+    "track": {
+      "type": "enumeration",
+      "enum": ["sales", "developer", "media"],
+      "default": "sales",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "fields": {
+      "type": "json"
+    },
+    "message": {
+      "type": "text"
+    },
+    "subscribed": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

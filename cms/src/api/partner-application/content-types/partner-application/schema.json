@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "partner_applications",
+  "info": {
+    "singularName": "partner-application",
+    "pluralName": "partner-applications",
+    "displayName": "Partner Applications",
+    "description": "Partner-side \u201cBecome a Partner\u201d applications from the Partners page"
+  },
+  "options": { "draftAndPublish": false },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    },
+    "company": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    },
+    "website": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "region": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "capabilities": {
+      "type": "json"
+    },
+    "experience": {
+      "type": "text"
+    }
+  }
+}

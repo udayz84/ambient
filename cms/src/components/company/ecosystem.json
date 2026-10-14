@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_company_ecosystems",
+  "info": {
+    "displayName": "Ecosystem",
+    "description": "Company ecosystem section"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "map_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Glow map stretched into 1340×765 — upload exact 1.75:1 to avoid distortion. Recommended: 2680×1530 px."
+    },
+    "alt": {
+      "type": "string"
+    },
+    "columns": {
+      "type": "component",
+      "repeatable": true,
+      "component": "company.ecosystem-column"
+    }
+  }
+}

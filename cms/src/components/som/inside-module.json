@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_som_inside_modules",
+  "info": {
+    "displayName": "Inside Module",
+    "description": "SOM inside module section"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "label": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Not yet shown on the site (board images are hardcoded). If wired: 1120×930 px WebP."
+    },
+    "specs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "som.spec"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "partner_inquiries",
+  "info": {
+    "singularName": "partner-inquiry",
+    "pluralName": "partner-inquiries",
+    "displayName": "Partner Inquiries",
+    "description": "Customer-side \u201cGet Matched\u201d submissions from the Partners page"
+  },
+  "options": { "draftAndPublish": false },
+  "pluginOptions": {},
+  "attributes": {
+    "first_name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    },
+    "last_name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    },
+    "company": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "region": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "help_areas": {
+      "type": "json"
+    },
+    "message": {
+      "type": "text"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_dvk_heroes",
+  "info": {
+    "displayName": "Hero",
+    "description": "DVK hero section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "cta_label": {
+      "type": "string",
+      "default": "Request Evaluation Kit"
+    },
+    "background_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Shown at 1120×610, contain (desktop only). Recommended: 2240×1220 px WebP."
+    },
+    "alt": {
+      "type": "string"
+    }
+  }
+}

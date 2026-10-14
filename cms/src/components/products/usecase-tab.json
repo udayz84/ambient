@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_products_usecase_tabs",
+  "info": {
+    "displayName": "Use Case Tab",
+    "description": "Products use case tab"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Shown at 633×500, cover (mobile ≤360×360 contain). Recommended: 1280×1000 px WebP."
+    },
+    "alt": {
+      "type": "string"
+    },
+    "watermark_text": {
+      "type": "string"
+    },
+    "feature_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "products.usecase-card"
+    }
+  }
+}

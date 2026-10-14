@@ -1,0 +1,49 @@
+{
+  "collectionName": "components_home_technologies",
+  "info": {
+    "displayName": "Technology",
+    "description": "Homepage technology section"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subheading": {
+      "type": "text"
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.button"
+    },
+    "tag": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.tag"
+    },
+    "features": {
+      "type": "component",
+      "repeatable": true,
+      "component": "home.tech-feature"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Shown at 732×341 (~2.15:1). Recommended: 1464×682 px WebP."
+    },
+    "image_alt": {
+      "type": "string"
+    }
+  }
+}

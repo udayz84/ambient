@@ -1,0 +1,11 @@
+node_modules
+dist
+.cache
+.tmp
+.tmp/data.db*
+.env
+
+*.log
+*.err
+db_backup.sql
+node-v20.11.1-win-x64/

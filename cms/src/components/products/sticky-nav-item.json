@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_products_sticky_nav_items",
+  "info": {
+    "displayName": "Sticky Nav Item",
+    "description": "Item of the white bottom toggle on the products page. Section target is assigned automatically by page order."
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

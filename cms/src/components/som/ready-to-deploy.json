@@ -1,0 +1,46 @@
+{
+  "collectionName": "components_som_ready_to_deploys",
+  "info": {
+    "displayName": "Ready To Deploy",
+    "description": "SOM ready to deploy section"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "primary_title": {
+      "type": "string"
+    },
+    "primary_cta_label": {
+      "type": "string"
+    },
+    "primary_cta_link": {
+      "type": "string"
+    },
+    "secondary_text": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Shown at ~418×433, contain (blurred backdrop). Recommended: 850×870 px WebP."
+    },
+    "secondary_cta_label": {
+      "type": "string"
+    },
+    "secondary_cta_link": {
+      "type": "string"
+    }
+  }
+}

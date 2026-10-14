@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_wearables_footer_panels", "info": { "displayName": "Footer Panel", "description": "Wearables footer accent panel" }, "options": {}, "attributes": { "title": { "type": "string", "required": true }, "body": { "type": "text" }, "cta_label": { "type": "string" } } }

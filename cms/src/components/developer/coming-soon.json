@@ -1,0 +1,43 @@
+{
+  "collectionName": "components_developer_coming_soons",
+  "info": {
+    "displayName": "Coming Soon",
+    "description": "Developer coming soon section"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "card_title": {
+      "type": "string"
+    },
+    "card_description": {
+      "type": "text"
+    },
+    "cta_label": {
+      "type": "string"
+    },
+    "cta_href": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Square tile ~180×184 desktop, 140×140 mobile. Recommended: 400×400 px WebP/PNG."
+    },
+    "image_alt": {
+      "type": "string"
+    }
+  }
+}

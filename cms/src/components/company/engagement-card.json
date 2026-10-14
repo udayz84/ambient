@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_company_engagement_cards",
+  "info": {
+    "displayName": "Engagement Card",
+    "description": "Company engagement card"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "cta_label": {
+      "type": "string"
+    },
+    "cta_href": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Card art up to 375×369, contain. Recommended: 750×740 px PNG with transparency."
+    },
+    "alt": {
+      "type": "string"
+    }
+  }
+}

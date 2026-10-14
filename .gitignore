@@ -63,4 +63,4 @@ files-table-backup*.json
 
 # Figma QA reference screenshots (local scratch)
 .figma-ref/
-cms/
+cms/.git/

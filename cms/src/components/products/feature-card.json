@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_products_feature_cards",
+  "info": {
+    "displayName": "Feature Card",
+    "description": "Products feature card"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Shown at up to 388×340. Recommended: 780×680 px WebP."
+    }
+  }
+}

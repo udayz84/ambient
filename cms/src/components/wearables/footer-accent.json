@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_wearables_footer_accents",
+  "info": {
+    "displayName": "Footer Accent",
+    "description": "Wearables footer accent section"
+  },
+  "options": {},
+  "attributes": {
+    "panels": {
+      "type": "component",
+      "repeatable": true,
+      "component": "wearables.footer-panel"
+    },
+    "divider_shape": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Not yet shown on the site — the shape is hardcoded."
+    },
+    "alt": {
+      "type": "string"
+    }
+  }
+}

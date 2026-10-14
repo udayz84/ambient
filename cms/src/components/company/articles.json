@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_company_articles", "info": { "displayName": "Articles", "description": "Company articles section" }, "options": {}, "attributes": { "featured_article": { "type": "component", "repeatable": false, "component": "company.featured-article" }, "compact_articles": { "type": "component", "repeatable": true, "component": "company.compact-article" } } }

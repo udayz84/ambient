@@ -1,0 +1,60 @@
+{
+  "collectionName": "components_model_zoo_heroes",
+  "info": {
+    "displayName": "Hero",
+    "description": "Model Zoo hero section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "cta_primary": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.cta"
+    },
+    "cta_secondary": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.cta"
+    },
+    "background_image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Not yet shown on the site. If wired: 2880×1460 px WebP (1440×729 cover)."
+    },
+    "background_image_2": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Not yet shown on the site. If wired: 2880×2020 px WebP (overlay layer)."
+    },
+    "collage_row_1": {
+      "type": "component",
+      "repeatable": true,
+      "component": "model-zoo.collage-card"
+    },
+    "collage_row_2": {
+      "type": "component",
+      "repeatable": true,
+      "component": "model-zoo.collage-card"
+    }
+  }
+}

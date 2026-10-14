@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_developer_model_zoos",
+  "info": {
+    "displayName": "Model Zoo",
+    "description": "Developer model zoo section"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "stats": {
+      "type": "component",
+      "repeatable": true,
+      "component": "developer.model-zoo-stat"
+    },
+    "cta_label": {
+      "type": "string"
+    },
+    "cta_href": {
+      "type": "string"
+    }
+  }
+}

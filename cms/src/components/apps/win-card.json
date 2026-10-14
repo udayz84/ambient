@@ -1,0 +1,42 @@
+{
+  "collectionName": "components_apps_win_cards",
+  "info": {
+    "displayName": "Win Card",
+    "description": "Empirical advantage win card"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "stat": {
+      "type": "string"
+    },
+    "stat_label": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Square-ish product shot, max 389×389 (mobile 275×470). Recommended: 780×780 px WebP/PNG."
+    },
+    "alt": {
+      "type": "string"
+    },
+    "body": {
+      "type": "text"
+    },
+    "buttons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.cta"
+    }
+  }
+}

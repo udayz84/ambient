@@ -1,0 +1,137 @@
+
+> ambient-cms@0.1.0 develop
+> node scripts/develop.js
+
+- Cleaning dist dir /Users/udayznanam/Documents/ambient/cms/dist
+✔ Cleaning dist dir (47ms)
+- Loading Strapi
+Auto-copying schemas to dist/ during register...
+[2026-09-27 23:10:07.188] [33mwarn[39m: The strapi::cors middleware no longer supports the `enabled` option. Using it to conditionally enable CORS might cause an insecure default. To disable strapi::cors, remove it from the exported array in config/middleware.js
+[2026-09-27 23:10:11.799] [33mwarn[39m: [email]: The "sendmail" email provider is still supported, but for most production setups that use a dedicated SMTP relay, consider switching to @strapi/provider-email-nodemailer (set `provider` to `"nodemailer"` in your email plugin config). This message is only shown in non-production environments.
+(node:10175) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[webhook] NEXT_SITE_URL or REVALIDATE_SECRET not set in cms/.env — skipping auto-registration.
+- Building build context
+✔ Building build context (95ms)
+- Creating admin
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+✔ Creating admin (318ms)
+✔ Loading Strapi (42161ms)
+- Generating types
+✔ Generating types (453ms)
+- Compiling TS
+- Cleaning dist dir /Users/udayznanam/Documents/ambient/cms/dist
+✔ Cleaning dist dir (49ms)
+✔ Compiling TS (1714ms)
+
+ Project information
+
+[90m╭────────────────────[39m[90m┬──────────────────────────────────────────────────╮[39m
+[90m│[39m Time               [90m│[39m Sun Sep 27 2026 23:10:25 GMT+0530 (India Standa… [90m│[39m
+[90m│[39m Launched in        [90m│[39m 44451 ms                                         [90m│[39m
+[90m│[39m Environment        [90m│[39m development                                      [90m│[39m
+[90m│[39m Process PID        [90m│[39m 10175                                            [90m│[39m
+[90m│[39m Version            [90m│[39m 5.50.0 (node v24.13.0)                           [90m│[39m
+[90m│[39m Edition            [90m│[39m Community                                        [90m│[39m
+[90m│[39m Database           [90m│[39m postgres                                         [90m│[39m
+[90m│[39m Database name      [90m│[39m postgres                                         [90m│[39m
+[90m╰────────────────────[39m[90m┴──────────────────────────────────────────────────╯[39m
+
+ Actions available
+
+Welcome back!
+To access the server ⚡️, go to:
+http://localhost:1338
+
+[2026-09-27 23:10:25.863] [32minfo[39m: Strapi started successfully
+[2026-09-27 23:10:26.644] [32mhttp[39m: GET /_health (9 ms) 204
+[2026-09-27 23:10:27.120] [32mhttp[39m: GET /api/developer-page?populate%5Bmodel_zoo%5D%5Bpopulate%5D=* (456 ms) 200
+[2026-09-27 23:10:48.612] [32minfo[39m: File created: /Users/udayznanam/Documents/ambient/cms/seed-developer-model-zoo.js
+- Cleaning dist dir /Users/udayznanam/Documents/ambient/cms/dist
+✔ Cleaning dist dir (49ms)
+[2026-09-27 23:10:50.040] [32minfo[39m: Shutting down Strapi
+[2026-09-27 23:10:50.154] [32minfo[39m: Strapi has been shut down
+- Loading Strapi
+Auto-copying schemas to dist/ during register...
+[2026-09-27 23:10:55.900] [33mwarn[39m: The strapi::cors middleware no longer supports the `enabled` option. Using it to conditionally enable CORS might cause an insecure default. To disable strapi::cors, remove it from the exported array in config/middleware.js
+[2026-09-27 23:11:02.058] [33mwarn[39m: [email]: The "sendmail" email provider is still supported, but for most production setups that use a dedicated SMTP relay, consider switching to @strapi/provider-email-nodemailer (set `provider` to `"nodemailer"` in your email plugin config). This message is only shown in non-production environments.
+(node:10358) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[webhook] NEXT_SITE_URL or REVALIDATE_SECRET not set in cms/.env — skipping auto-registration.
+- Building build context
+✔ Building build context (64ms)
+- Creating admin
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+✔ Creating admin (315ms)
+✔ Loading Strapi (20770ms)
+- Generating types
+✔ Generating types (453ms)
+- Compiling TS
+- Cleaning dist dir /Users/udayznanam/Documents/ambient/cms/dist
+✔ Cleaning dist dir (52ms)
+✔ Compiling TS (1528ms)
+[2026-09-27 23:11:14.458] [32mhttp[39m: GET /_health (9 ms) 204
+[2026-09-27 23:11:14.485] [32mhttp[39m: GET /_health (4 ms) 204
+
+ Project information
+
+[90m╭────────────────────[39m[90m┬──────────────────────────────────────────────────╮[39m
+[90m│[39m Time               [90m│[39m Sun Sep 27 2026 23:11:14 GMT+0530 (India Standa… [90m│[39m
+[90m│[39m Launched in        [90m│[39m 22994 ms                                         [90m│[39m
+[90m│[39m Environment        [90m│[39m development                                      [90m│[39m
+[90m│[39m Process PID        [90m│[39m 10358                                            [90m│[39m
+[90m│[39m Version            [90m│[39m 5.50.0 (node v24.13.0)                           [90m│[39m
+[90m│[39m Edition            [90m│[39m Community                                        [90m│[39m
+[90m│[39m Database           [90m│[39m postgres                                         [90m│[39m
+[90m│[39m Database name      [90m│[39m postgres                                         [90m│[39m
+[90m╰────────────────────[39m[90m┴──────────────────────────────────────────────────╯[39m
+
+ Actions available
+
+Welcome back!
+To access the server ⚡️, go to:
+http://localhost:1338
+
+[2026-09-27 23:11:14.637] [32minfo[39m: Strapi started successfully
+[2026-09-27 23:11:26.180] [32mhttp[39m: GET /_health (1 ms) 204
+[2026-09-27 23:11:26.195] [32mhttp[39m: GET /_health (0 ms) 204
+[2026-09-27 23:11:26.235] [32mhttp[39m: GET /api/dvk-page (38 ms) 401
+[2026-09-27 23:11:39.729] [33mwarn[39m: No upload security configuration found. Consider configuring plugin.upload.security for enhanced file validation.
+[2026-09-27 23:11:42.408] [32mhttp[39m: POST /api/upload (3395 ms) 201
+[2026-09-27 23:11:42.685] [33mwarn[39m: No upload security configuration found. Consider configuring plugin.upload.security for enhanced file validation.
+[2026-09-27 23:11:43.532] [32mhttp[39m: POST /api/upload (1091 ms) 201
+[2026-09-27 23:11:43.903] [33mwarn[39m: No upload security configuration found. Consider configuring plugin.upload.security for enhanced file validation.
+[2026-09-27 23:11:45.035] [32mhttp[39m: POST /api/upload (1470 ms) 201
+[2026-09-27 23:11:49.983] [32mhttp[39m: POST /api/upload (57 ms) 403
+[2026-09-27 23:11:50.208] [32mhttp[39m: POST /api/upload (210 ms) 401
+[2026-09-27 23:12:12.033] [32mhttp[39m: GET /api/dvk-page?populate%5Bdemos%5D%5Bpopulate%5D=* (822 ms) 200
+[2026-09-27 23:12:21.343] [32mhttp[39m: PUT /api/developer-page (24117 ms) 200
+[2026-09-27 23:12:21.376] [32mhttp[39m: POST /api/developer-page/actions/publish (2 ms) 405
+[2026-09-27 23:12:23.506] [33mwarn[39m: No upload security configuration found. Consider configuring plugin.upload.security for enhanced file validation.
+[2026-09-27 23:12:25.699] [32mhttp[39m: POST /api/upload (2493 ms) 201
+[2026-09-27 23:12:25.898] [33mwarn[39m: No upload security configuration found. Consider configuring plugin.upload.security for enhanced file validation.
+[2026-09-27 23:12:27.522] [32mhttp[39m: POST /api/upload (1783 ms) 201
+[2026-09-27 23:12:28.658] [32mhttp[39m: GET /api/dvk-page?populate[demos][populate]=* (1107 ms) 200
+[2026-09-27 23:12:32.325] [32mhttp[39m: GET /api/developer-page?populate%5Bmodel_zoo%5D%5Bpopulate%5D%5Bstats%5D%5Bpopulate%5D=* (617 ms) 200
+[2026-09-27 23:12:47.250] [32mhttp[39m: PUT /api/dvk-page (18586 ms) 200
+[2026-09-27 23:12:52.092] [32minfo[39m: File changed: /Users/udayznanam/Documents/ambient/cms/seed-developer-model-zoo.js
+- Cleaning dist dir /Users/udayznanam/Documents/ambient/cms/dist
+✔ Cleaning dist dir (47ms)
+[2026-09-27 23:12:53.731] [32minfo[39m: Shutting down Strapi
+[2026-09-27 23:13:06.926] [32mhttp[39m: PUT /api/dvk-page?status=published (19668 ms) 200
+/Users/udayznanam/Documents/ambient/cms/node_modules/tarn/dist/PendingOperation.js:29
+        this.reject(new Error('aborted'));
+                    ^
+
+Error: aborted
+    at PendingOperation.abort (/Users/udayznanam/Documents/ambient/cms/node_modules/tarn/dist/PendingOperation.js:29:21)
+    at /Users/udayznanam/Documents/ambient/cms/node_modules/tarn/dist/Pool.js:213:25
+    at Array.map (<anonymous>)
+    at /Users/udayznanam/Documents/ambient/cms/node_modules/tarn/dist/Pool.js:212:53
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Client_PG.destroy (/Users/udayznanam/Documents/ambient/cms/node_modules/knex/lib/client.js:358:9)
+    at async Database.destroy (/Users/udayznanam/Documents/ambient/cms/node_modules/@strapi/database/dist/index.js:137:9)
+    at async Strapi.destroy (/Users/udayznanam/Documents/ambient/cms/node_modules/@strapi/core/dist/Strapi.js:433:9)
+    at async process.<anonymous> (/Users/udayznanam/Documents/ambient/cms/node_modules/@strapi/strapi/dist/src/node/develop.js:342:21)
+
+Node.js v24.13.0

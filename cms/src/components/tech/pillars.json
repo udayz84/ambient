@@ -1,0 +1,1 @@
+﻿{ "collectionName": "components_tech_pillars_groups", "info": { "displayName": "Pillars", "description": "Technology pillars section" }, "options": {}, "attributes": { "pillars": { "type": "component", "repeatable": true, "component": "tech.pillar" } } }

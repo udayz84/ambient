@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_model_zoo_build_its",
+  "info": {
+    "displayName": "Build It",
+    "description": "Don't see it? Build it. section"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "model-zoo.build-card"
+    },
+    "cta_primary": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.cta"
+    },
+    "cta_secondary": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.cta"
+    }
+  }
+}

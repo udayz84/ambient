@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_som_deploy_paths",
+  "info": {
+    "displayName": "Deploy Path",
+    "description": "Validate on NuraSense, deploy on SOM section"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subheading": {
+      "type": "text"
+    },
+    "primary_button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.button"
+    },
+    "secondary_button_label": {
+      "type": "string"
+    },
+    "secondary_button_link": {
+      "type": "string"
+    },
+    "cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "som.deploy-path-card"
+    }
+  }
+}

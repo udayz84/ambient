@@ -1,0 +1,44 @@
+{
+  "collectionName": "components_som_family_cards",
+  "info": {
+    "displayName": "SOM Family Card",
+    "description": "Individual SOM product card (e.g. SOM BLE)"
+  },
+  "options": {},
+  "attributes": {
+    "tag": {
+      "type": "string",
+      "description": "Eyebrow tag on the card (e.g. '[ COMING SOON ]')"
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "description": "Card title (e.g. 'SOM (BLE)')"
+    },
+    "description": {
+      "type": "text",
+      "description": "Short description of the product"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Shown at 280×200, contain. Recommended: 560×400 px WebP/PNG."
+    },
+    "features": {
+      "type": "component",
+      "repeatable": true,
+      "component": "som.family-feature",
+      "description": "The 'What's inside' features grid at the bottom of the card."
+    },
+    "footerText": {
+      "type": "text",
+      "description": "Optional footer text describing RF or antenna info."
+    }
+  }
+}

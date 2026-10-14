@@ -1,0 +1,49 @@
+{
+  "collectionName": "components_tech_silicons",
+  "info": {
+    "displayName": "Silicon",
+    "description": "Technology silicon section"
+  },
+  "options": {},
+  "attributes": {
+    "tag": {
+      "type": "component",
+      "component": "shared.tag",
+      "repeatable": false
+    },
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "chip_background": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Chip render shown at 418×537, contain. Recommended: 840×1080 px WebP/PNG."
+    },
+    "stat_cards": {
+      "type": "component",
+      "component": "tech.silicon-stat",
+      "repeatable": true
+    },
+    "cta": {
+      "type": "component",
+      "component": "shared.button",
+      "repeatable": false
+    },
+    "secondary_cta": {
+      "type": "component",
+      "component": "shared.button",
+      "repeatable": false
+    }
+  }
+}

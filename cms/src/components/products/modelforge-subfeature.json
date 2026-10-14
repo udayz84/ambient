@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_products_modelforge_subfeatures",
+  "info": {
+    "displayName": "ModelForge Subfeature",
+    "description": "Subfeature for the ModelForge section"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

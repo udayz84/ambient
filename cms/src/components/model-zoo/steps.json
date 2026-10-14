@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_model_zoo_steps",
+  "info": {
+    "displayName": "Steps",
+    "description": "Pick / Compile / Run section"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "step_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "model-zoo.step-card"
+    },
+    "feature_panels": {
+      "type": "component",
+      "repeatable": true,
+      "component": "model-zoo.feature-panel"
+    },
+    "cta_primary": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.cta"
+    },
+    "cta_secondary": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.cta"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "collectionName": "components_home_clients",
+  "info": { "displayName": "Clients", "description": "Homepage clients section" },
+  "options": {},
+  "attributes": {
+    "tag": { "type": "component", "repeatable": false, "component": "shared.tag" },
+    "heading": { "type": "string", "required": true },
+    "subheading": { "type": "text" },
+    "clients": { "type": "component", "repeatable": true, "component": "home.partner" }
+  }
+}

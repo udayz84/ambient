@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_home_partners",
+  "info": {
+    "displayName": "Partner",
+    "description": "Ecosystem partner"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Ecosystem partner logo, slots up to 120×22. Recommended: SVG (or PNG ≥240×44), white on transparent."
+    },
+    "alt": {
+      "type": "string"
+    }
+  }
+}

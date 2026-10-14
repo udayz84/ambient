@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_products_features",
+  "info": {
+    "displayName": "Features",
+    "description": "Products features section"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "background_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Full-bleed section backdrop (≥1440 wide). Recommended: 2880×1600 px WebP."
+    },
+    "feature_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "products.feature-card"
+    }
+  }
+}

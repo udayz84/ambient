@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_careers_work_cards",
+  "info": {
+    "displayName": "Work Card",
+    "description": "Best work card"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Shown at 36×36. Recommended: SVG (or 72×72 px PNG)."
+    },
+    "alt": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

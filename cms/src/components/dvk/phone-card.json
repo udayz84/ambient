@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_dvk_phone_cards",
+  "info": {
+    "displayName": "Phone Card",
+    "description": "DVK demos phone/CTA card (Figma 5212:6941)"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "primary_cta_label": {
+      "type": "string"
+    },
+    "primary_cta_href": {
+      "type": "string"
+    },
+    "secondary_cta_label": {
+      "type": "string"
+    },
+    "secondary_cta_href": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_news_cards",
+  "info": {
+    "displayName": "News Card",
+    "description": "News article card"
+  },
+  "options": {},
+  "attributes": {
+    "category": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "title_font_size": {
+      "type": "integer"
+    },
+    "excerpt": {
+      "type": "text"
+    },
+    "image_overlay": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Artwork shown at 356×259, contain. Recommended: 720×520 px PNG/WebP with transparency."
+    },
+    "alt": {
+      "type": "string"
+    }
+  }
+}

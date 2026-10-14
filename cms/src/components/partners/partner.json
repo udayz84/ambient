@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_partners_partners",
+  "info": {
+    "displayName": "Partner",
+    "description": "Directory partner entry — logo/icon stays hardcoded in the frontend"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "monogram": {
+      "type": "string",
+      "maxLength": 4
+    },
+    "capability": {
+      "type": "string",
+      "required": true,
+      "description": "Must match the short name of a capability card (e.g. 'AI & Algorithms')"
+    },
+    "region": {
+      "type": "string",
+      "required": true
+    },
+    "badges": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.tag"
+    },
+    "one_liner": {
+      "type": "text"
+    }
+  }
+}

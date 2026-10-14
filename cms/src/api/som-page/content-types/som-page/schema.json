@@ -1,0 +1,87 @@
+{
+  "kind": "singleType",
+  "collectionName": "som_pages",
+  "info": {
+    "singularName": "som-page",
+    "pluralName": "som-pages",
+    "displayName": "SOM Page",
+    "description": "System-on-Module page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hero": {
+      "type": "component",
+      "component": "som.hero",
+      "repeatable": false
+    },
+    "features": {
+      "type": "component",
+      "component": "som.features",
+      "repeatable": false
+    },
+    "family": {
+      "type": "component",
+      "component": "som.family",
+      "repeatable": false
+    },
+    "intelligence": {
+      "type": "component",
+      "component": "som.intelligence",
+      "repeatable": false
+    },
+    "prototype": {
+      "type": "component",
+      "component": "som.prototypes",
+      "repeatable": false
+    },
+    "deploy_path": {
+      "type": "component",
+      "component": "som.deploy-path",
+      "repeatable": false
+    },
+    "ready_to_deploy": {
+      "type": "component",
+      "component": "som.ready-to-deploy",
+      "repeatable": false
+    },
+    "footer_merge": {
+      "type": "component",
+      "component": "som.footer-merge",
+      "repeatable": false
+    },
+    "seo": {
+      "type": "component",
+      "component": "shared.seo",
+      "repeatable": false
+    },
+    "bg_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "description": "Not yet shown on the site \u2014 no component reads this field."
+    },
+    "brief_form": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::popup.popup"
+    },
+    "som_form": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::popup.popup"
+    },
+    "upcoming_form": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::popup.popup"
+    }
+  }
+}

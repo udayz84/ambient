@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_partners_whies",
+  "info": {
+    "displayName": "Why",
+    "description": "Partners “The Why” section"
+  },
+  "options": {},
+  "attributes": {
+    "tag": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.tag"
+    },
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subheading": {
+      "type": "text"
+    },
+    "body": {
+      "type": "text"
+    },
+    "journey": {
+      "type": "component",
+      "repeatable": true,
+      "component": "partners.journey-step"
+    },
+    "legend_strong": {
+      "type": "string"
+    },
+    "legend_gap": {
+      "type": "string"
+    }
+  }
+}
