@@ -11,12 +11,8 @@ import { ProductsScrollIndicator } from "./ProductsScrollIndicator";
 import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 import { useState } from "react";
 import {
-  COIN_BG,
-  COIN_FG,
-  COIN_GROUP,
   CORNER_LEFT,
   CORNER_RIGHT,
-  HERO_IMAGE_OVERLAY,
   HERO_TITLE_GRADIENT,
   PRIMARY_CTA_INSET,
   PRIMARY_CTA_SHADOW,

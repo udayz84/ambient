@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { mediaUrl } from "@/lib/strapi";
 import { useFitText } from "../shared/FitText";
-import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
+import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { TagBadge } from "../hero/TagBadge";
 import {
@@ -14,15 +13,12 @@ import {
 } from "./products-data";
 import type { ProductsFeatureCardData } from "./products-data";
 import { ProductsFeatureCard } from "./ProductsFeatureCard";
-import { ProductsFeaturesCarousel } from "./ProductsFeaturesCarousel";
 
 const FALLBACK_HEADING =
   "The chip that ends the \npower-vs-intelligence tradeoff.";
 const FALLBACK_SUBTITLE =
   "For a decade, product makers chose: a dumb MCU that lasts months, or a smart NPU that dies by lunch. GPX10 Pro is the first that refuses to choose.";
 const BADGE_TEXT = "What GPX10 Pro unlocks";
-const CAPTION =
-  "One chip replaces the MCU + AI accelerator + sensor hub + memory you’re juggling today — and it stays aware while it sleeps.";
 
 
 /* Full-bleed section background — Figma 3286:1931 backdrop. */
@@ -48,7 +44,6 @@ function SectionBackdrop({ src }: { src: string }) {
  * scroll pans the card strip horizontally (see ProductsFeaturesCarousel).
  */
 export function ProductsFeatures({ data }: { data?: any }) {
-  const [needsScroll, setNeedsScroll] = useState(true);
   const fitRef = useFitText<HTMLDivElement>({});
   const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
 

@@ -13,7 +13,6 @@ export function WaitlistPopup({
   onClose,
   title = "Join the Waitlist",
   subtitle = "Be the first to access our upcoming Vision, Sound, and Industrial modules.",
-  successTitle = "Thank you for subscribing",
   successSubtitle = "We'll let you know when the modules are available."
 }: { 
   isOpen: boolean; 

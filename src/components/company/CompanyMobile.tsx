@@ -499,8 +499,6 @@ function CompanyDnaMobile({ data }: { data?: any }) {
 }
 
 /* ------------------------------- ECOSYSTEM -------------------------------- */
-const FALLBACK_ECOSYSTEM_HEADING_LINE_1 = "A globally resilient";
-const FALLBACK_ECOSYSTEM_HEADING_LINE_2 = "ecosystem";
 const FALLBACK_ECOSYSTEM_SUBTITLE =
   "Backed by Tier-1 foundries and integrated with the world's leading technology distributors and platforms.";
 

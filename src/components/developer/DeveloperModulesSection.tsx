@@ -8,7 +8,6 @@ import {
   CORNER_RIGHT,
   CTA_HOVER_GLOW,
   DEVELOPER_MODULES,
-  MODULE_IMAGE_OVERLAY,
 } from "./developer-data";
 import { mediaUrl } from "@/lib/strapi";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
@@ -145,7 +144,6 @@ function ModuleCard({
 /** CTA - glass that transitions to green gradient when the CARD is hovered. */
 function ModuleCta({
   children,
-  arrow = false,
   href,
 }: {
   children: React.ReactNode;

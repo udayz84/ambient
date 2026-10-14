@@ -4,7 +4,6 @@ import { useState } from "react";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
-import { DvkScrollIndicator } from "./DvkScrollIndicator";
 import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 import {
   CORNER_LEFT,

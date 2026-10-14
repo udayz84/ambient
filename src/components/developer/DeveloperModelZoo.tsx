@@ -1,11 +1,9 @@
 "use client";
 
-import { Fragment } from "react";
 import type { CSSProperties } from "react";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { Corners } from "../shared/Corners";
-import { PRIMARY_CTA_SHADOW } from "./developer-data";
 import { mediaUrl } from "@/lib/strapi";
 import { CollageRow, COLLAGE_ROW_1, COLLAGE_ROW_2, PrimaryCta } from "../applications-page/ApplicationsPageModelZoo";
 
@@ -25,7 +23,6 @@ const TITLE_GRADIENT =
   "linear-gradient(106.33242104960644deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
 const CORNER = "/developer/corner-58.svg";
-const GRID_CAP = "/developer/model-zoo-grid-cap.svg";
 
 const STATS = [
   {
@@ -93,33 +90,6 @@ function CornerTick({
   );
 }
 
-/** Vertical grid divider with T-caps — Figma 5212:6830/6840 "Grid Line'". */
-function GridLine() {
-  return (
-    <div className="relative w-[8px] shrink-0 self-stretch overflow-clip">
-      {/* Line 87 — 1px white/10, clipped to divider height */}
-      <div className="absolute left-[3.5px] top-[4px] h-[259px] w-px bg-white/10" />
-      {/* Vector 43 caps */}
-      <div className="absolute left-0 top-[0.46px] flex h-[4px] w-[8px] items-center justify-center">
-        <div className="-scale-y-100 flex-none">
-          <div className="relative h-[4px] w-[8px]">
-            <div className="absolute inset-[0_0_-12.5%_0]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img loading="lazy" decoding="async" alt="" className="block size-full max-w-none" src={GRID_CAP} aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="absolute bottom-[0.5px] left-0 h-[4px] w-[8px]">
-        <div className="absolute inset-[0_0_-12.5%_0]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img loading="lazy" decoding="async" alt="" className="block size-full max-w-none" src={GRID_CAP} aria-hidden />
-        </div>
-      </div>
-    </div>
-  );
-}
-
 /** Merge CMS (developer.model-zoo) data over the hardcoded Figma defaults. */
 export function resolveModelZooContent(data: any): {
   heading: string;
@@ -147,7 +117,7 @@ export function resolveModelZooContent(data: any): {
 
 export function DeveloperModelZoo({ data }: { data?: any }) {
   const { fadeRef, isVisible } = useFadeIn();
-  const { heading, subtitle, ctaLabel, ctaHref, stats } = resolveModelZooContent(data);
+  const { heading, subtitle } = resolveModelZooContent(data);
 
   return (
     <div

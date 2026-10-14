@@ -15,17 +15,12 @@ type TagBadgeProps = {
 
 export function TagBadge({
   label,
-  width,
-  labelOffsetX = 0,
-  rightBarLeft = 0,
   nodeId,
-  centerLabel = false,
   height = 26,
   leftBarLeft = 6.48,
   labelClassName = "text-[13px] leading-[19.5px] tracking-[-0.39px]",
 }: TagBadgeProps) {
   // We force all tags to automatically size to their content length
-  const isAuto = true;
   const finalWidth = "max-content";
 
   return (

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { DeveloperHero } from "@/components/developer/DeveloperHero";
 import { DeveloperCodeSection } from "@/components/developer/DeveloperCodeSection";
 import { DeveloperPipeline } from "@/components/developer/DeveloperPipeline";
-import { DeveloperComingSoon } from "@/components/developer/DeveloperComingSoon";
 import { DeveloperModulesSection } from "@/components/developer/DeveloperModulesSection";
 import { DeveloperCopilotsSection } from "@/components/developer/DeveloperCopilotsSection";
 import { ScaledCanvas } from "@/components/developer/ScaledCanvas";

@@ -13,9 +13,6 @@ import {
   type LatestNewsArticle,
 } from "./latest-news-data";
 
-const GREEN_CTA_SHADOW =
-  "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
-
 /** Mobile carousel shows up to 6 cards (2 × visible-by-3 swipe). */
 const VISIBLE_CARD_COUNT = 6;
 

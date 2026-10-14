@@ -36,8 +36,6 @@ const LINE_88 = "/products/measured-line-88.svg"; // 3468:2257 Line 88
 const CTA_CORNER_L = "/products/measured-cta-corner-left.svg"; // 3712:1929/1932 Vector 47
 const CTA_CORNER_R = "/products/measured-cta-corner-right.svg"; // 3712:1928/1931 Vector 46
 /* Identical to the FullPicture section's exports (verified byte-for-byte). */
-const MENU_CORNER_L = "/products/fp-menu-corner-left.svg"; // 3710:1912/1913 Vector 42
-const MENU_CORNER_R = "/products/fp-menu-corner-right.svg"; // 3710:1916/1917 Vector 43
 const TITLE_CORNER_L = "/products/fp-title-corner-left.svg"; // 3309:1918/1920 Vector 58
 const TITLE_CORNER_R = "/products/fp-title-corner-right.svg"; // 3309:1919/1921 Vector 55
 

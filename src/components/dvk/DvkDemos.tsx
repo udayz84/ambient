@@ -1,6 +1,6 @@
 "use client";
 
-import { gilroyMedium, interRegular, dmMono } from "../hero/fonts";
+import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useFitText } from "../shared/FitText";

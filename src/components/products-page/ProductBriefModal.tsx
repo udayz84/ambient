@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
-import { BOX_BORDER } from "../careers/careers-shared";
 import { popupField, type PopupConfig } from "@/lib/popup";
 
 const SUCCESS_IMG = "/careers/apply-success.webp";
@@ -126,7 +125,7 @@ export function ProductBriefModal({
   );
 }
 
-function FormStep({ title, onClose, onSuccess, config, pdfUrl, pdfName }: { title?: string; onClose: () => void; onSuccess: () => void; config?: PopupConfig; pdfUrl?: string; pdfName?: string }) {
+function FormStep({ title, onSuccess, config, pdfUrl, pdfName }: { title?: string; onClose: () => void; onSuccess: () => void; config?: PopupConfig; pdfUrl?: string; pdfName?: string }) {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   // CMS copy from the page relation; entry title (if set) wins over the

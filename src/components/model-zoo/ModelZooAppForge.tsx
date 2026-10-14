@@ -21,11 +21,6 @@ const FORGE_STEPS = ["Pair over BLE", "Flash a demo instantly", "See results liv
  * shows that variant's collage, and the switch turns on. */
 const STEP_KEYS = ["pair", "flash", "results"] as const;
 type ForgeStep = (typeof STEP_KEYS)[number];
-const STEP_STAT: Record<ForgeStep, string> = {
-  pair: "/model-zoo/af-stat-pair.webp",
-  flash: "/model-zoo/af-stat-flash.webp",
-  results: "/model-zoo/af-stat-results.webp",
-};
 const STEP_ICONS: Record<ForgeStep, string> = {
   pair: "/contact/booking-icon-phone-green.svg",
   flash: "/developer/pipeline-icon-deploy.svg",
@@ -40,12 +35,6 @@ const STEP_ARTICLE: Record<ForgeStep, string> = {
   pair: "/model-zoo/af-article-pair.webp",
   flash: "/model-zoo/af-article-flash.webp",
   results: "/model-zoo/af-article-results.webp",
-};
-/** Active-row heights per variant (578×185.5 / 578×212.5). */
-const STEP_ACTIVE_HEIGHT: Record<ForgeStep, string> = {
-  pair: "h-[320px] min-[1024px]:h-[185.5px]",
-  flash: "h-[320px] min-[1024px]:h-[212.5px]",
-  results: "h-[320px] min-[1024px]:h-[185.5px]",
 };
 
 /** Reusable store badges component for App Store and Google Play */
@@ -128,7 +117,6 @@ export function ModelZooAppForge({
     "Download ApplicationForge, pair with your kit over Bluetooth, and flash live demos in seconds — no laptop, no code.";
   const { fadeRef: articleRef, isVisible: articleVisible } = useFadeIn<HTMLDivElement>();
   const { fadeRef: forgeRef, isVisible: forgeVisible } = useFadeIn<HTMLDivElement>();
-  const [activeStep, setActiveStep] = useState<ForgeStep | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);

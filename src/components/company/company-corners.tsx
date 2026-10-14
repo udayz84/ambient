@@ -106,7 +106,6 @@ export function CompanyMissionFrameCorners() {
 
 /** Large cards (articles, engagement) — bottom Y from Figma */
 export function CompanyCardCorners({
-  cornerBottom,
 }: {
   cornerBottom?: number; // Make it optional since we no longer strictly need it
 }) {

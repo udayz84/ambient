@@ -1,70 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
 import { gilroyMedium, interRegular } from "../hero/fonts";
-import { RepelDots } from "../shared/RepelDots";
-import { Corners } from "../shared/Corners";
 import { GradientTitle } from "../contact/contact-shared";
-import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { mediaUrl } from "@/lib/strapi";
 
 const TITLE_GRADIENT_DEG = "106.158deg";
 const FALLBACK_SUBTITLE =
   "Avoid custom RF and power management. Use our pre-engineered System-on-Modules (SOMs) for your edge AI deployments.";
 const FALLBACK_TITLE = "The shortest path to\nvolume production.";
-const FALLBACK_BG = "/som/hero-bg.webp";
-const FALLBACK_PRIMARY_LABEL = "Pre-Order / Register Interest";
-const FALLBACK_SECONDARY_LABEL = "Talk to the Sales Team";
 const TITLE_FRAME = "/som/title-frame.svg";
-
-const PRIMARY_CTA_SHADOW =
-  "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
-
-function PrimaryCtaCorners() {
-  const wrap = "pointer-events-none absolute z-20 flex size-[4px] items-center justify-center";
-  return (
-    <>
-      <div className={`${wrap} -top-[0.5px] left-0`}>
-        <div className="-scale-y-100 flex-none">
-          <div className="relative size-[4px]">
-            <img src="/hero/corner-tag-1.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
-          </div>
-        </div>
-      </div>
-      <div className={`${wrap} -top-[0.5px] right-0`}>
-        <div className="rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <img src="/hero/corner-tag-2.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
-          </div>
-        </div>
-      </div>
-      <div className={`${wrap} bottom-0 left-0`}>
-        <div className="flex-none">
-          <div className="relative size-[4px]">
-            <img src="/hero/corner-tag-1.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
-          </div>
-        </div>
-      </div>
-      <div className={`${wrap} bottom-0 right-0`}>
-        <div className="-scale-x-100 flex-none">
-          <div className="relative size-[4px]">
-            <img src="/hero/corner-tag-2.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
 
 export function SomHero({ data }: { data?: any }) {
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const backgroundImage = mediaUrl(data?.image);
   const rawTitle = data?.title || FALLBACK_TITLE;
   const titleLines = (rawTitle === "The shortest path to volume production." ? "The shortest path to\nvolume production." : rawTitle).split("\n");
-  const primaryLabel =
-    data?.primary_button?.label || FALLBACK_PRIMARY_LABEL;
-  const primaryHref = data?.primary_button?.href || "#";
-  const secondaryLabel =
-    data?.secondary_button?.label || FALLBACK_SECONDARY_LABEL;
-  const secondaryHref = data?.secondary_button?.href || "#";
   return (
     <section
       className="relative flex w-full justify-center overflow-hidden bg-black"

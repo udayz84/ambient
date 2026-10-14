@@ -4,7 +4,6 @@ import Image from "next/image";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { RepelDots } from "../shared/RepelDots";
-import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { LatestNewsCard } from "./LatestNewsCard";
 import {

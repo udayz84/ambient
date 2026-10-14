@@ -1,5 +1,5 @@
 import React from "react";
-import { gilroyMedium, interRegular, interBold } from "@/components/hero/fonts";
+import { interRegular } from "@/components/hero/fonts";
 
 export function TermsConditions({ data }: { data?: any }) {
   let content = data?.terms_conditions_content || "";

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { gilroyMedium, interRegular, gilroySemiBold } from "../hero/fonts";
+import { gilroyMedium, interRegular } from "../hero/fonts";
 import {
   FALLBACK_NEWSLETTER_HEADING_TOP,
   FALLBACK_NEWSLETTER_HEADING_BOTTOM,

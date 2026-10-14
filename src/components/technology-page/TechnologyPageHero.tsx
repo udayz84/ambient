@@ -5,11 +5,8 @@ import { mediaUrl } from "@/lib/strapi";
 import { ProductBriefModal } from "../products-page/ProductBriefModal";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
-import { GradientTitle, CornerDecor } from "../contact/contact-shared";
+import { GradientTitle } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
-
-const HERO_BG = "/technology/hero-bg.webp";
-const HERO_OBJECT = "/technology/hero-object.webp";
 
 const TITLE_GRADIENT_DEG = "109.122deg";
 

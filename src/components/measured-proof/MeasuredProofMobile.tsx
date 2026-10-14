@@ -76,7 +76,6 @@ export function MeasuredProofMobile({ data }: { data?: any }) {
   const find = (variant: string) =>
     ctas.find((c) => (c?.variant || "").toLowerCase() === variant);
   const primary = find("primary") || { variant: "primary" };
-  const secondary = find("secondary") || { variant: "secondary" };
 
   const cards = (Array.isArray(data?.stat_cards) ? data.stat_cards : []).map((card: any, index: number) => {
     const fallback: FallbackCard = DESKTOP_CARDS[index] || ({} as FallbackCard);

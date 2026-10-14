@@ -3,7 +3,6 @@ import { Applications } from "@/components/applications/Applications";
 import { HomeModelZooKits } from "@/components/home-model-zoo-kits/HomeModelZooKits";
 import { DeveloperPlatform } from "@/components/developer-platform/DeveloperPlatform";
 import { Ecosystem } from "@/components/ecosystem/Ecosystem";
-import { EcosystemMarqueeStrip } from "@/components/ecosystem/EcosystemMarqueeStrip";
 import { HeroCarousel } from "@/components/hero/HeroCarousel";
 import { LatestNews } from "@/components/latest-news/LatestNews";
 import { MeasuredProof } from "@/components/measured-proof/MeasuredProof";

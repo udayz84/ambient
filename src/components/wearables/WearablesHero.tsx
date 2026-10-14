@@ -14,14 +14,7 @@ const WEARABLES_BG_GRADIENT =
 const TITLE_GRADIENT =
   "linear-gradient(104.008deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
-const FALLBACK_SUBTITLE =
-  "Hospital-grade biometric tracking and voice processing directly to the ring, wrist, or lens. No cloud latency or battery compromise.";
-const FALLBACK_WATERMARK = "Wearables";
 const FALLBACK_TITLE = "Clinical precision.\nCoin-cell power.";
-const FALLBACK_BG_1 = "/applications/wearables/hero-bg-162.webp";
-const FALLBACK_BG_2 = "/applications/wearables/hero-bg-163.webp";
-const FALLBACK_PRIMARY_LABEL = "Talk About Your Roadmap";
-const FALLBACK_SECONDARY_LABEL = "Talk a Hardware Engineer.";
 
 function PrimaryCta({ label, href }: { label: string; href: string }) {
   return (
@@ -83,7 +76,7 @@ export function WearablesHero({
   const secondaryHref = data?.secondary_button?.href || "#";
   
   const { fadeRef: desktopRef, isVisible: desktopVisible } = useFadeIn();
-  const { fadeRef: mobileRef, isVisible: mobileVisible } = useFadeIn();
+  useFadeIn();
 
   const fitRef = useFitText<HTMLDivElement>({ maxLines: 2, floor: 32 });
   const fitRef2 = useFitText<HTMLDivElement>({ maxLines: 2, floor: 22 });
@@ -299,7 +292,7 @@ export function WearablesHero({
           data-node-id="4153:10666"
         >
           {/* Image 162 — base product photo */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
+          { }
           {bg1 && <img
             src={bg1}
             alt=""
@@ -330,7 +323,7 @@ export function WearablesHero({
           <div className="pointer-events-none absolute inset-0">
             <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0)] from-[69.488%] to-black to-[96.665%]" />
             <div className="absolute inset-0 overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
+              { }
               {bg2 && <img
                 src={bg2}
                 alt=""

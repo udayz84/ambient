@@ -10,7 +10,6 @@ import {
   ARCH_ARTICLE,
   ARCH_ASSETS,
   ARCH_BLOCKS,
-  ARCH_CAPTION,
   ARCH_FRAME,
   ARCH_FRAME_WIDTH,
   ARCH_HIGHLIGHTS,
@@ -27,7 +26,6 @@ import {
   FEATURES_TITLE_GRADIENT_MOBILE,
 } from "./products-data";
 
-const GRID_LINE = "/products/arch-grid-line.svg"; // Figma 3529:630 / 3529:640
 const STAT_ICON = "/products/arch-stat-icon.svg";
 
 const FALLBACK_LABEL = "Architecture";
@@ -288,7 +286,6 @@ function ProductsArchitectureDesktop({
   label,
   headingLines,
   subtitle,
-  caption,
   stats,
   hoveredIndex,
   onHover,
@@ -458,7 +455,6 @@ function ProductsArchitectureMobile({
   headingLines,
   subtitle,
   image,
-  caption,
   stats,
 }: {
   label: string;

@@ -20,7 +20,6 @@ export function SiteFooter({
   isOverlapPage = false,
   pathname = "",
   data,
-  brandData,
   newsletterData,
 }: {
   showNewsletter?: boolean;

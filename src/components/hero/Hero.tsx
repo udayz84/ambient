@@ -1,6 +1,5 @@
 "use client";
 
-import { mediaUrl } from "@/lib/strapi";
 import { useFitText } from "../shared/FitText";
 import { gilroyMedium, gilroySemiBold, interRegular } from "./fonts";
 import { HeroMetrics } from "./HeroMetrics";

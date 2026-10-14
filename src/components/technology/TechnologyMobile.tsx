@@ -7,7 +7,7 @@ import { TechnologyCta } from "./TechnologyCta";
 export function TechnologyMobile({ data }: { data?: any }) {
   const tagText = data?.tag?.text || "";
   const subheading = data?.subheading || data?.subtitle || "";
-  let heading = data?.heading || "";
+  const heading = data?.heading || "";
   const headingLines = heading.split("\n");
   while (headingLines.length < 3) headingLines.push("");
 

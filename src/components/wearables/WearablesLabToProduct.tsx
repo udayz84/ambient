@@ -9,9 +9,6 @@ import { useFitText } from "../shared/FitText";
 const TITLE_GRADIENT =
   "linear-gradient(138.787deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
-const FALLBACK_SUBTITLE =
-  "Don't spend your first day writing sensor configuration code. The Cranium board comes ready to run out of the box, allowing you to instantly test physical AI models and validate performance on the metal with zero setup required.";
-const FALLBACK_HEADING = "From lab to product in months, not years.";
 const FALLBACK_IMAGE = "/applications/wearables/img-168.webp";
 
 const IMG_OVERLAY =

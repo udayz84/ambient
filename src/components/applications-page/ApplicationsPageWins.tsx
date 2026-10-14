@@ -7,9 +7,7 @@ import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 import { gilroyBold, gilroyMedium, interRegular, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
-import { TagBadge } from "../hero/TagBadge";
 import { mediaUrl } from "@/lib/strapi";
-import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const TILE_BG =
   "radial-gradient(circle at 50% 50%, #394a36, #2b3629 50%, #1d221c)";
@@ -32,47 +30,6 @@ const STAT_GRADIENT =
 const FALLBACK_HEADING = "The empirical advantage.";
 const FALLBACK_SUBHEADING =
   "Real products, real numbers, with the AI running the whole time.";
-
-function FeatureRow() {
-  const tile = (
-    <div className="flex flex-col items-center justify-center gap-[8px]">
-      <div
-        className="relative h-[39.31px] w-[40px] shrink-0 overflow-clip rounded-[8.276px]"
-        style={{ background: TILE_BG }}
-      >
-        <img loading="lazy" decoding="async"
-          alt=""
-          aria-hidden
-          src="/applications/wins-icon-small.svg"
-          className="absolute left-1/2 top-1/2 size-[27.586px] -translate-x-1/2 -translate-y-1/2"
-        />
-      </div>
-      <div
-        className={`${interRegular.className} text-center text-[14px] leading-[18px] text-[rgba(240,240,240,0.6)] whitespace-nowrap min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
-      >
-        <p className="leading-[18px]">Always on</p>
-        <p className="leading-[18px]">protection</p>
-      </div>
-    </div>
-  );
-  const line = (
-    <img loading="lazy" decoding="async"
-      alt=""
-      aria-hidden
-      src="/applications/wins-grid-line.svg"
-      className="h-[39px] w-[8px] shrink-0"
-    />
-  );
-  return (
-    <div className="flex w-full items-center justify-between">
-      {tile}
-      {line}
-      {tile}
-      {line}
-      {tile}
-    </div>
-  );
-}
 
 function LabelTile() {
   return (
@@ -342,8 +299,6 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
   const heading = data?.heading || FALLBACK_HEADING;
   const subheading = (data?.subheading as string) || FALLBACK_SUBHEADING;
   const body = data?.body || BODY;
-  const ctaLabel = data?.cta?.label || "Explore Applications";
-  const ctaHref = data?.cta?.href || "#";
   const bgImg = "/applications/wins-bg.webp";
 
   const rawCards = Array.isArray(data?.cards) ? data.cards : [];

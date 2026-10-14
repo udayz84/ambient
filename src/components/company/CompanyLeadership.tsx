@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { mediaUrl } from "@/lib/strapi";
 import { GradientTitle } from "../contact/contact-shared";
 import { interRegular } from "../hero/fonts";
 import { CompanyAdvisoryBoard } from "./CompanyAdvisoryBoard";
@@ -12,8 +11,6 @@ const IMAGE_107_OVERLAY =
 const FALLBACK_HEADING = "Our minds powering\nthe revolution";
 const FALLBACK_SUBTITLE =
   "We're building programmable AI processors that deliver\nbreakthrough performance and power efficiency from edge to cloud.";
-const FALLBACK_PREV_ARROW = "/applications/nav-arrow-left.svg";
-const FALLBACK_NEXT_ARROW = "/applications/nav-arrow-right.svg";
 
 function LeadershipBackground() {
   return (
@@ -39,8 +36,6 @@ function LeadershipBackground() {
   );
 }
 
-import { LEADERSHIP_TEAM } from "./company-leadership-data";
-
 type CompanyLeadershipProps = {
   data?: any;
 };
@@ -49,11 +44,7 @@ export function CompanyLeadership({ data }: CompanyLeadershipProps = {}) {
   const heading = (data?.heading as string) || FALLBACK_HEADING;
   const subtitle = (data?.subtitle as string) || FALLBACK_SUBTITLE;
   const headingLines = heading.split("\n");
-  const prevArrowSrc = FALLBACK_PREV_ARROW;
-  const nextArrowSrc = FALLBACK_NEXT_ARROW;
   const team = Array.isArray(data?.team) ? data.team : null;
-  const membersCount = team && team.length > 0 ? team.length : LEADERSHIP_TEAM.length;
-  const showArrows = membersCount > 3;
 
   return (
     <section

@@ -1,5 +1,4 @@
 import { gilroyMedium } from "../hero/fonts";
-import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 type GreenCtaProps = {

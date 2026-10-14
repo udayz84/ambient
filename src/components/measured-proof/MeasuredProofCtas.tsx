@@ -1,6 +1,5 @@
 import { gilroyMedium } from "../hero/fonts";
 import { RepelDots } from "../shared/RepelDots";
-import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 type CtaItem = {
@@ -16,12 +15,9 @@ export function MeasuredProofCtas({ data }: { data?: any }) {
     ctas.find((c) => (c?.variant || "").toLowerCase() === variant);
 
   const primary = find("primary") || { variant: "primary" };
-  const secondary = find("secondary") || { variant: "secondary" };
 
   const primaryLabel = primary.label || "";
   const primaryHref = primary.href || "";
-  const secondaryLabel = secondary.label || "";
-  const secondaryHref = secondary.href || "";
 
   return (
     <div

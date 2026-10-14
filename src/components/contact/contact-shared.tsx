@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
+import { gilroyMedium, gilroySemiBold } from "../hero/fonts";
 import { RepelDots } from "../shared/RepelDots";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { gilroyBold, gilroyMedium, interRegular } from "@/components/hero/fonts";
 import { GreenCtaButton } from "@/components/contact/contact-shared";
 import { Metadata } from "next";

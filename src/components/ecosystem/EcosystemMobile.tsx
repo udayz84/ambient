@@ -2,12 +2,11 @@
 
 import Image from "next/image";
 import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
-import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useFitText } from "../shared/FitText";
 
 import { EcosystemPartnerRow } from "./EcosystemPartnerRow";
-import { CAROUSEL_ALL_SLOTS, SILICON_PARTNER_ROW } from "./ecosystem-data";
+import { SILICON_PARTNER_ROW } from "./ecosystem-data";
 
 function PartnerSectionMobile({
   title,

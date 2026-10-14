@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Fragment } from "react";
-import { gilroySemiBold } from "../hero/fonts";
 import {
   type PartnerRowConfig,
   type EcosystemPartner,

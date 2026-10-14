@@ -4,7 +4,6 @@ import Image from "next/image";
 import { gilroyMedium, gilroySemiBold, interMedium, interRegular, interSemiBold } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { RepelDots } from "../shared/RepelDots";
-import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
 import type { CareersValueCard } from "./careers-data";
 
@@ -15,8 +14,6 @@ const cornerTlGlass = "/careers/corner-tl-glass.svg";
 const cornerBrGlass = "/hero/vector-55.svg";
 const cornerTrGradient = "/careers/corner-card-tr.svg";
 const cornerTlGradient = "/careers/corner-card-tl.svg";
-const cornerCtaLeft = "/careers/corner-menu-tl.svg";
-const cornerCtaRight = "/careers/corner-menu-tr.svg";
 const cornerMenuLeft = "/hero/vector-57.svg";
 const cornerMenuRight = "/hero/vector-55.svg";
 
@@ -447,8 +444,6 @@ export function CareersGreenCta({
   children,
   href = "#",
   width = "w-[231px]",
-  textLeft = "left-[47.11px]",
-  dotLeft = "left-[177.5px]",
   className = "",
 }: {
   children: React.ReactNode;

@@ -33,9 +33,6 @@ const locations = [
   },
 ] as const;
 
-const CONTACT_VIEWPORT_SCALE =
-  "translateX(-50%) scaleX(max(1, calc(100vw / 1440px)))";
-
 export function ContactMap({ data }: { data?: any }) {
   const globeImage = mediaUrl(data?.globe_image) ?? "";
   const mapBase = mediaUrl(data?.map_base) ?? "";

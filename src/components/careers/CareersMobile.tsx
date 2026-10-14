@@ -6,13 +6,11 @@ import {
   dmMono,
   gilroyMedium,
   gilroySemiBold,
-  interMedium,
   interRegular,
   interSemiBold,
 } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import {
-  CARD_GRADIENT_BG,
   GLASS_PANEL_VISIBLE_BORDER_CLASS,
 } from "./careers-shared";
 import { mediaUrl } from "@/lib/strapi";
@@ -27,24 +25,6 @@ function gradient(deg: string) {
   return `linear-gradient(${deg}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`;
 }
 
-function SectionTitle({
-  children,
-  deg,
-  className = "",
-}: {
-  children: React.ReactNode;
-  deg: string;
-  className?: string;
-}) {
-  return (
-    <h2
-      className={`${gilroyMedium.className} max-w-[327px] bg-clip-text text-center text-[28px] leading-[34px] font-medium text-transparent [word-break:break-word] not-italic ${className}`}
-      style={{ backgroundImage: gradient(deg) }}
-    >
-      {children}
-    </h2>
-  );
-}
 
 function GreenCta({
   children,
@@ -103,54 +83,6 @@ function GreenCta({
   );
 }
 
-function WhiteCta({ children, href = "#" }: { children: React.ReactNode; href?: string }) {
-  return (
-    <a
-      href={href}
-      className={`${interSemiBold.className} relative flex h-[48px] w-full items-center justify-center shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15)]`}
-    >
-      <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-40 mix-blend-plus-lighter"
-        style={{ backgroundImage: "url(/careers/white-cta-texture.png)", backgroundSize: "307.2px 307.2px" }}
-      />
-      <span className="relative z-10 text-[14px] leading-[normal] font-semibold uppercase whitespace-nowrap text-[#121212] not-italic">
-        {children}
-      </span>
-      
-      {/* Custom Corners that pop out slightly to avoid the inset shadow */}
-      <div className="pointer-events-none absolute -top-[0.5px] right-0 z-20 flex size-[4px] items-center justify-center">
-        <div className="rotate-180 flex-none">
-          <div className="relative size-[4px]">
-            <img loading="lazy" decoding="async" src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute -top-[0.5px] left-0 z-20 flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 flex-none">
-          <div className="relative size-[4px]">
-            <img loading="lazy" decoding="async" src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute right-0 bottom-0 z-20 flex size-[4px] items-center justify-center">
-        <div className="-scale-x-100 flex-none">
-          <div className="relative size-[4px]">
-            <img loading="lazy" decoding="async" src="/careers/corner-menu-tr.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute bottom-0 left-0 z-20 flex size-[4px] items-center justify-center">
-        <div className="flex-none">
-          <div className="relative size-[4px]">
-            <img loading="lazy" decoding="async" src="/careers/corner-menu-tl.svg" alt="" width={4} height={4} className="block size-full max-w-none" aria-hidden />
-          </div>
-        </div>
-      </div>
-    </a>
-  );
-}
 
 /* ---------------------------------- HERO ---------------------------------- */
 function CareersHeroMobile({ data }: { data?: any }) {

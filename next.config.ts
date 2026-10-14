@@ -4,7 +4,7 @@ const strapiUrlStr = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:133
 let strapiUrl: URL;
 try {
   strapiUrl = new URL(strapiUrlStr);
-} catch (e) {
+} catch {
   strapiUrl = new URL("http://localhost:1338");
 }
 

@@ -3,7 +3,6 @@ import Image from "next/image";
 import { gilroyMedium, interRegular, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
-import { mediaUrl } from "@/lib/strapi";
 import { PARTNERS_WHY } from "../partners/partners-data";
 
 /* Hearables slug pages swap the shared partner-journey card art for
@@ -33,7 +32,6 @@ const HEADING = "Every application here runs on real, ready models.";
 const SUBTITLE =
   "Browse a growing library of open-source and Ambient-built models — tuned for GPX, deployable in one click. Don't build from scratch; start from something that works.";
 
-const PRIMARY_CTA = { label: "Explore the Model Zoo", href: "/model-zoo" };
 const SECONDARY_CTA = { label: "See it live in ApplicationForge", href: "/application-forge" };
 
 /** Left fade over the collage rows. */
@@ -438,7 +436,6 @@ function FeatureCard({ item }: { item: FeatureCardItem }) {
 }
 
 export function ApplicationsPageModelZoo({
-  data,
   variant = "cards",
   slug,
 }: {

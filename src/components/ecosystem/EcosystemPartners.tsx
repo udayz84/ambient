@@ -23,6 +23,7 @@ const MARQUEE_DURATION_S = 40;
  * ("Partner 1–5", generic white SVGs) are intentionally NOT used.
  */
 function resolveSlots(_data: any): readonly CarouselSlot[] {
+  void _data; // intentionally unused: CMS placeholders not rendered
   return CAROUSEL_ALL_SLOTS;
 }
 

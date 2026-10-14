@@ -5,19 +5,14 @@ import { mediaUrl } from "@/lib/strapi";
 import {
   dmMono,
   gilroyMedium,
-  interBold,
   interRegular,
 } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
 
-const BADGE_GRADIENT =
-  "linear-gradient(135deg, rgb(229, 231, 235) 0%, rgb(209, 213, 220) 100%)";
-
 const GREEN_GLOW_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
 
-const FALLBACK_ICON = "/news-listing/press-icon.svg";
 const PRESS_TITLE_FRAME = "/news-listing/press-title-frame.svg";
 
 type PressKitProps = {

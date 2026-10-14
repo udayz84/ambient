@@ -1,13 +1,11 @@
 "use client";
 
-import { mediaUrl } from "@/lib/strapi";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { gilroyMedium, gilroySemiBold, interRegular, interSemiBold } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { MobileCornerMark, MobileTitleCorners } from "./mobile-shared";
 
-const MODES_TOP = "/bg.png";
 const MODES_BOTTOM = "/technology/modes-bottom-new.webp";
 const MODES_CUBE = "/technology/modes-cube.webp";
 const MODES_CUBE_GLOW = "/technology/modes-cube-glow.webp";
@@ -32,7 +30,6 @@ const FALLBACK_HEADING = "Always aware, Instantly Awake";
 const FALLBACK_SUBTITLE =
   "Always-on inference at microwatts. Full power the moment it's needed. Then straight back to idle, no reset, no wake-up.";
 
-const MODES_LOOP_MOBILE = "/technology/modes-loop-mobile.webp";
 const MOBILE_TITLE_GRADIENT_DEG = "101.838deg";
 
 const ICON_BG =
@@ -586,7 +583,6 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
   const heading = data?.heading || FALLBACK_HEADING;
   const headingLines = heading.split("\n");
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
-  const topImg = MODES_TOP;
   const bottomImg = MODES_BOTTOM;
 
   // Mobile title reflows the first desktop line's last word onto the second

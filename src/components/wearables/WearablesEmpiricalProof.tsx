@@ -17,14 +17,7 @@ const FALLBACK_SUBTITLE =
 const IMG_OVERLAY_1 =
   "linear-gradient(185.768deg, rgb(0, 0, 0) 6.3744%, rgba(0, 0, 0, 0) 20.894%)";
 
-const CARD_BORDER = "";
 const CARD_BG = `bg-gradient-to-b from-[#0c160b] to-[rgba(12,22,11,0)] rounded-[1px] overflow-clip`;
-
-const GREEN_BAR_SMALL =
-  "bg-gradient-to-b from-[42.377%] from-[rgba(140,230,108,0.5)] to-[150.73%] to-[rgba(27,47,20,0.5)] mix-blend-luminosity";
-
-const RED_DUAL =
-  "linear-gradient(180deg, rgb(230, 108, 108) 42.377%, rgb(58, 19, 30) 150.73%), linear-gradient(180deg, rgb(230, 108, 141) 42.377%, rgb(58, 19, 30) 150.73%)";
 
 function CardAbstractBg() {
   return (
@@ -76,284 +69,9 @@ function Badge({
 }
 
 /* ── Top Card 1: Health Monitoring ───────────────────────────── */
-function HealthCard({ data }: { data?: any }) {
-  const badge = data?.badge || "The Workload";
-  const title = data?.title || "Health Monitoring Solutions";
-  const body =
-    data?.body ||
-    "Continuous, on-device assault detection and biomarker analysis for early onset predictions for PCOD/PCOS to enable 24/7 women health and safety";
-  const ctaLabel = data?.cta_label || "Download Case Study";
-  const footer =
-    data?.footer || "Up to 2 weeks of continuous tracking with on-device AI.";
-  return (
-    <div
-      className={`relative h-[364px] w-[575px] shrink-0 ${CARD_BG}`}
-      data-node-id="2701:3885"
-      data-name="Card"
-    >
-      <CardAbstractBg />
-      {/* Badge */}
-      <div className="absolute left-[35px] top-[33.74px] flex items-center gap-[27.778px]">
-        <Badge label={badge} width={137} />
-      </div>
-      {/* Title + body */}
-      <div
-        className={`${gilroyMedium.className} absolute left-[35px] top-[87px] flex w-[477px] flex-col gap-[12px] items-start tracking-[-0.4539px] not-italic`}
-        data-name="NewsSection"
-      >
-        <p className="w-[477px] text-[24px] leading-[28.295px] text-white [word-break:break-word]">
-          {title}
-        </p>
-        <p
-          className={`${interRegular.className} min-w-full w-[min-content] text-[16px] leading-[24px] text-[rgba(255,255,255,0.6)] [word-break:break-word]`}
-        >
-          {body}
-        </p>
-      </div>
-      {/* CTA */}
-      <a
-        href="#"
-        className={`${gilroyMedium.className} absolute left-[35px] top-[238.74px] flex h-[48px] w-[251px] items-center justify-center gap-[8px] cursor-pointer overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
-        data-name="Cta"
-      >
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-        />
-        <GreenCtaCorners />
-        <span className="relative z-10 max-w-full whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic overflow-hidden text-ellipsis">
-          {ctaLabel}
-        </span>
-        <img loading="lazy" decoding="async"
-          alt=""
-          src="/applications/wearables/cta-icon.svg"
-          className="relative z-10 size-[20px] max-w-none"
-          aria-hidden
-        />
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
-        />
-      </a>
-      {/* Footer text */}
-      <p
-        className={`${interRegular.className} absolute left-[35px] top-[315.12px] w-[458.152px] text-[14px] leading-[21px] text-[#a4a4a4] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
-      >
-        {footer}
-      </p>
-    </div>
-  );
-}
-
 /* ── Usage Bar Segment ───────────────────────────────────────── */
-function SidePanel({
-  title,
-  segments,
-  statValue,
-  statLabel,
-}: {
-  title: string;
-  segments: { h: number; variant: "green" | "red" | "redDual" }[];
-  statValue: string;
-  statLabel: string;
-}) {
-  return (
-    <div
-      className="absolute flex w-[115px] flex-col items-center justify-center gap-[15px]"
-      data-name="Side Panel"
-    >
-      <p
-        className={`${gilroyMedium.className} min-w-full w-[min-content] text-center text-[22px] leading-[28px] tracking-[-0.4539px] text-white whitespace-nowrap not-italic`}
-      >
-        {title}
-      </p>
-      <div className="flex w-[52.119px] flex-col gap-[6px] items-start" data-name="Usage Bar">
-        {segments.map((seg, i) => {
-          let cls = "rounded-[1px] w-[52px]";
-          let style: React.CSSProperties | undefined;
-          if (seg.variant === "green") {
-            cls += ` ${GREEN_BAR_SMALL} mix-blend-luminosity`;
-          } else if (seg.variant === "red") {
-            cls += " bg-gradient-to-b from-[#e66c6c] from-[42.377%] to-[#3a131e] to-[150.73%]";
-          } else {
-            style = { backgroundImage: RED_DUAL };
-          }
-          return (
-            <div
-              key={i}
-              className={`${cls} relative shrink-0`}
-              style={{ height: seg.h, ...style }}
-              data-name="Progress Segment"
-            />
-          );
-        })}
-      </div>
-      <div
-        className="flex w-full flex-col items-center justify-center gap-[8px] whitespace-nowrap not-italic"
-        data-name="Energy Info"
-      >
-        <p className={`${gilroySemiBold.className} text-[30px] leading-[normal] text-white`}>
-          {statValue}
-        </p>
-        <p
-          className={`${interRegular.className} text-[12px] leading-[18px] text-[#f0f0f0]`}
-        >
-          {statLabel}
-        </p>
-      </div>
-    </div>
-  );
-}
-
 /* ── Top Card 2: Power Consumption ───────────────────────────── */
-function PowerCard({ data }: { data?: any }) {
-  const badge = data?.badge || "Power Consumption";
-  const dataPanels: any[] = Array.isArray(data?.panels) ? data.panels : [];
-  const ambient =
-    dataPanels[0] || { label: "Ambient", value: "<1mW", description: "Lower energy usage" };
-  const legacy =
-    dataPanels[1] || { label: "Legacy", value: "10mW", description: "Higher energy usage" };
-  return (
-    <div
-      className={`relative h-[364px] w-[341px] shrink-0 ${CARD_BG}`}
-      data-node-id="2701:3923"
-      data-name="Card"
-    >
-      <CardAbstractBg />
-      {/* Badge centered */}
-      <div className="absolute left-1/2 top-[26.75px] -translate-x-1/2">
-        <Badge label={badge} width={176} />
-      </div>
-      {/* Ambient side panel */}
-      <div className="absolute left-[27.36px] top-[82.62px]">
-        <SidePanel
-          title={ambient.label}
-          segments={[
-            { h: 15, variant: "green" },
-            { h: 15, variant: "green" },
-            { h: 15, variant: "green" },
-            { h: 15, variant: "green" },
-            { h: 15, variant: "green" },
-            { h: 30, variant: "green" },
-          ]}
-          statValue={ambient.value}
-          statLabel={ambient.description}
-        />
-      </div>
-      {/* Legacy side panel */}
-      <div className="absolute left-[204.36px] top-[82.62px]">
-        <SidePanel
-          title={legacy.label}
-          segments={[
-            { h: 15, variant: "green" },
-            { h: 15, variant: "red" },
-            { h: 15, variant: "redDual" },
-            { h: 15, variant: "redDual" },
-            { h: 15, variant: "redDual" },
-            { h: 30, variant: "red" },
-          ]}
-          statValue={legacy.value}
-          statLabel={legacy.description}
-        />
-      </div>
-    </div>
-  );
-}
-
 /* ── Top Card 3: Workload Diagram ────────────────────────────── */
-function WorkloadDiagram() {
-  return (
-    <div
-      className="absolute left-1/2 top-[calc(50%-28.72px)] h-[146.551px] w-[266.798px] -translate-x-1/2 -translate-y-1/2 overflow-clip"
-      data-name="Abstract Design"
-    >
-      <div className="absolute inset-[48.41%_27.95%_0_27.68%]">
-        <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-group.svg" className="absolute inset-0 block size-full max-w-none" />
-      </div>
-      <div className="absolute inset-[0_0.01%_16.83%_0]">
-        <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-group1.svg" className="absolute inset-0 block size-full max-w-none" />
-      </div>
-      <div className="absolute inset-[63.08%_11.92%_33.22%_87.28%]">
-        <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-group2.svg" className="absolute inset-0 block size-full max-w-none" />
-      </div>
-      <div className="absolute left-[26.51px] top-[26.52px] h-[92.489px] w-[213.78px]">
-        <div className="absolute inset-[0.02%_0.01%_0_0]">
-          <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-vector.svg" className="absolute inset-0 block size-full max-w-none" />
-        </div>
-        <div className="absolute inset-[0_14.25%_35.2%_37.77%]">
-          <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-vector1.svg" className="absolute inset-0 block size-full max-w-none" />
-        </div>
-        <div className="absolute inset-[78.59%_83.09%_0.02%_0]">
-          <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-vector2.svg" className="absolute inset-0 block size-full max-w-none" />
-        </div>
-        <div className="absolute inset-[0.04%_50.51%_48.39%_20.63%]">
-          <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-vector3.svg" className="absolute inset-0 block size-full max-w-none" />
-        </div>
-        <div className="absolute inset-[22.38%_2.23%_9.18%_70.27%]">
-          <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-vector4.svg" className="absolute inset-0 block size-full max-w-none" />
-        </div>
-        <div className="absolute inset-[78.65%_0_0_83.23%]">
-          <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-vector5.svg" className="absolute inset-0 block size-full max-w-none" />
-        </div>
-        <div className="absolute inset-[0.02%_0.01%_0_0] mix-blend-multiply">
-          <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-vector6.svg" className="absolute inset-0 block size-full max-w-none" />
-        </div>
-      </div>
-      <div className="absolute inset-[41.01%_21.89%_21.49%_21.77%]">
-        <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-vector7.svg" className="absolute inset-0 block size-full max-w-none" />
-      </div>
-      <div
-        className="absolute inset-[46.63%_26.1%_-5.24%_44.37%] flex items-center justify-center"
-        style={{ containerType: "size" }}
-      >
-        <div className="flex-none rotate-[24.05deg]" style={{ height: "hypot(-35.8988cqw,73.7653cqh)", width: "hypot(64.1012cqw,26.2347cqh)" }}>
-          <div className="relative size-full">
-            <img loading="lazy" decoding="async" alt="" src="/applications/wearables/diagram-group3.svg" className="absolute inset-0 block size-full max-w-none" />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function WorkloadCard({ data }: { data?: any }) {
-  const badge = data?.badge || "The Workload";
-  const stat = data?.stat || "100%";
-  const label = data?.label || "On-device";
-  const description = data?.description || "No cloud dependency";
-  return (
-    <div
-      className={`relative h-[364px] w-[311px] shrink-0 ${CARD_BG}`}
-      data-node-id="2701:3961"
-      data-name="Card"
-    >
-      <CardAbstractBg />
-      {/* Badge centered */}
-      <div className="absolute left-1/2 top-[26.75px] -translate-x-1/2">
-        <Badge label={badge} width={137} />
-      </div>
-      {/* Diagram */}
-      <WorkloadDiagram />
-      {/* Stats */}
-      <p
-        className={`${gilroySemiBold.className} absolute left-1/2 top-[240.34px] -translate-x-1/2 text-[40px] leading-[normal] text-white whitespace-nowrap not-italic`}
-      >
-        {stat}
-      </p>
-      <p
-        className={`${interRegular.className} absolute left-1/2 top-[295.69px] -translate-x-1/2 text-[14px] leading-[21px] text-[#f0f0f0] whitespace-nowrap not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
-      >
-        {label}
-      </p>
-      <p
-        className={`${interRegular.className} absolute left-1/2 top-[317.69px] -translate-x-1/2 text-[12px] leading-[18px] text-white whitespace-nowrap not-italic`}
-      >
-        {description}
-      </p>
-    </div>
-  );
-}
-
 /* ── Bottom Row: ECG Cards (Figma 4016:3927) ──────────────────── */
 
 /** Figma frames — per-card image geometry/flip/overlay (4495-series exact). */
@@ -584,7 +302,6 @@ function EcgCard({
   isSmartHome,
   isIndustrial,
   isHearables,
-  tags,
 }: {
   index: number;
   imageSrc: string;
@@ -804,9 +521,6 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
 
   const heading = SECTION_HEADING;
   const subtitle = isSmartHome ? SMART_HOME_SUBTITLE : (data?.subtitle || FALLBACK_SUBTITLE);
-  const healthData = data?.health_card;
-  const powerData = data?.power_card;
-  const workloadData = data?.workload_card;
   const dataEcgCards: any[] = Array.isArray(data?.ecg_cards) ? data.ecg_cards : [];
   const ecgCards = Array.from({ length: 4 }).map((_, i) => {
     const c = dataEcgCards[i];
@@ -820,27 +534,6 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
       description: c?.description || fb.description,
     };
   });
-
-  const healthBadge = healthData?.badge || "The Workload";
-  const healthTitle = healthData?.title || "Health Monitoring Solutions";
-  const healthBody =
-    healthData?.body ||
-    "Continuous, on-device assault detection and biomarker analysis for early onset predictions for PCOD/PCOS to enable 24/7 women health and safety";
-  const healthCta = healthData?.cta_label || "Download Case Study";
-  const healthFooter =
-    healthData?.footer || "Up to 2 weeks of continuous tracking with on-device AI.";
-
-  const powerBadge = powerData?.badge || "Power Consumption";
-  const powerPanels: any[] = Array.isArray(powerData?.panels) ? powerData.panels : [];
-  const ambientPanel =
-    powerPanels[0] || { label: "Ambient", value: "<1mW", description: "Lower energy usage" };
-  const legacyPanel =
-    powerPanels[1] || { label: "Legacy", value: "10mW", description: "Higher energy usage" };
-
-  const workloadBadge = workloadData?.badge || "The Workload";
-  const workloadStat = workloadData?.stat || "100%";
-  const workloadLabel = workloadData?.label || "On-device";
-  const workloadDescription = workloadData?.description || "No cloud dependency";
 
   return (
     <section

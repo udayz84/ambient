@@ -16,19 +16,6 @@ import { MobileMenu } from "./MobileMenu";
 import { NavbarCta } from "./NavbarCta";
 import { mediaUrl } from "@/lib/strapi";
 
-function NavChevron({ className = "" }: { className?: string }) {
-  return (
-    <Image
-      src="/navbar/chevron.svg"
-      alt=""
-      width={5}
-      height={4}
-      className={`h-[4px] w-[5px] shrink-0 ${className}`}
-      aria-hidden
-    />
-  );
-}
-
 function ShoppingCartIcon() {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -99,7 +86,7 @@ function ProductsMegaMenu({
   columns?: NavMegaColumn[];
   onNavigate: () => void;
 }) {
-  let cols = columns?.length ? [...columns] : [...DEFAULT_MEGA_COLUMNS];
+  const cols = columns?.length ? [...columns] : [...DEFAULT_MEGA_COLUMNS];
   if (!cols.some(c => c.title.toLowerCase().includes("model"))) {
     cols.push({
       title: "Model Zoo",
@@ -122,7 +109,7 @@ function ProductsMegaMenu({
 
       {/* Content — columns, 2x2 grid, gap 32px, padding 30px. */}
       <div className="relative grid grid-cols-2 gap-[32px] p-[30px]">
-        {cols.map((column, index) => (
+        {cols.map((column) => (
           <div
             key={column.title}
             className="flex flex-col gap-[12px]"

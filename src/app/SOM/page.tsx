@@ -4,12 +4,10 @@ import { SomFeatures } from "@/components/som-page/SomFeatures";
 import { SomFamily } from "@/components/som-page/SomFamily";
 import { SomOneModule } from "@/components/som-page/SomOneModule";
 
-import { SomEcosystem } from "@/components/som-page/SomEcosystem";
 
 import { SomReadyToDeploy } from "@/components/som-page/SomReadyToDeploy";
 import { SomFooterMerge } from "@/components/som-page/SomFooterMerge";
 import { SomIntelligence } from "@/components/som-page/SomIntelligence";
-import { SomProvenCore } from "@/components/som-page/SomProvenCore";
 import { getSingleType } from "@/lib/strapi";
 import { buildMetadata, type SeoData } from "@/lib/seo";
 

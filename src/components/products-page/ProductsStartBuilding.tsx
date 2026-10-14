@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 import { ProductBriefModal } from "./ProductBriefModal";
-import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useFitText } from "../shared/FitText";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";

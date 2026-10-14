@@ -6,7 +6,6 @@ import { ContactResources } from "./ContactResources";
 import { ContactSchedule } from "./ContactSchedule";
 
 const CONTACT_PAGE_HEIGHT_PX = 2674;
-const CONTACT_FOOTER_TOP_PX = 2674;
 
 export function Contact({ data, bookingForm }: { data?: any; bookingForm?: any }) {
   return (

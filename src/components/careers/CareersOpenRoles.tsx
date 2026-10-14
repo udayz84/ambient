@@ -3,11 +3,9 @@
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { gilroyMedium, interMedium, interRegular } from "../hero/fonts";
-import { CompanyCardCorners } from "../company/company-corners";
 import { dmMono } from "../hero/fonts";
 import { CareersRolesProfileCta } from "./careers-shared";
 import { Corners } from "../shared/Corners";
-import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { CareersApplicationModal } from "./CareersApplicationModal";
 import { useFitText } from "../shared/FitText";
 
@@ -20,8 +18,6 @@ const OPEN_ROLES_GRADIENT =
 const CTA_TITLE_GRADIENT =
   "linear-gradient(125.631deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
-const IMAGE_107_GRADIENT =
-  "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 810 1440' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%25' width='100%25' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-46.009 0.0000020111 -0.000003897 -89.152 363.86 720)'><stop stop-color='rgba(0,0,0,0.6)' offset='0'/><stop stop-color='rgba(0,0,0,1)' offset='1'/></radialGradient></defs></svg>\")";
 
 const JOB_ROW_NODE_IDS = [
   "2379:8921",
@@ -274,15 +270,6 @@ export function CareersOpenRoles({
     </section>
   );
 }
-
-const ROLES_CTA_MASK_STYLE = {
-  maskImage: "url(/careers/roles-cta-mask.svg)",
-  WebkitMaskImage: "url(/careers/roles-cta-mask.svg)",
-  maskSize: "100% 100%",
-  WebkitMaskSize: "100% 100%",
-  maskRepeat: "no-repeat",
-  WebkitMaskRepeat: "no-repeat",
-} as const;
 
 function RolesCtaBackground() {
   return (

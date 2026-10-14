@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { gilroyMedium, interRegular } from "../hero/fonts";
-import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
 import { humanizeArticleCategory } from "../resources/resources-data";
 import { LatestNewsCard } from "../latest-news/LatestNewsCard";

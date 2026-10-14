@@ -282,7 +282,6 @@ function GreenCta({
 function ProductsBenchToVolumeMobile({
   headingLines,
   subtitle,
-  chipLabel,
   cards,
 }: {
   headingLines: string[];

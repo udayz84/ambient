@@ -1,5 +1,4 @@
 import { gilroyMedium, interRegular } from "../hero/fonts";
-import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { TagBadge } from "../hero/TagBadge";
 
@@ -27,7 +26,6 @@ const APPLICATIONS = [
 
 export function SomOneModule({ data }: { data?: any } = {}) {
   const subtitle = data?.subtitle || "ONE MODULE, MANY PRODUCTS";
-  const title = data?.title || "Buy it once. Build your whole line on it.";
   const description =
     data?.description ||
     "The same module drops into a wearable, a hearable, a smart-home sensor, or an industrial node — you add only what each product needs. One qualification, one supply chain, many products.";

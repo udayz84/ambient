@@ -24,10 +24,6 @@ const COMMS_V97 = "/som/inside-module/comms-v97.png";
 const COMMS_V99 = "/som/inside-module/comms-v99.png";
 const COMMS_V100 = "/som/inside-module/comms-v100.png";
 const COMMS_V98 = "/som/inside-module/comms-v98.png";
-const HIGHLIGHT_FILL = "/dvk/inside-module/dvk-fill.webp";
-
-const RECT_BORDER =
-  "border-[1.09px] border-[#47b81f] border-solid shadow-[0px_7px_7.1px_0px_rgba(111,224,71,0.3)]";
 
 const SPECS: { title: string; body: string }[] = [
   { title: "Footprint", body: "21×21mm (Core) | 42×21mm (With Breakout)" },

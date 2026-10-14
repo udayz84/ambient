@@ -8,7 +8,6 @@ type EcosystemGridLineProps = {
 export function EcosystemGridLine({
   nodeId,
   capTopNodeId,
-  lineNodeId,
   capBottomNodeId,
 }: EcosystemGridLineProps) {
   return (

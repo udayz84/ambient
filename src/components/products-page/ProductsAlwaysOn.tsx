@@ -4,7 +4,7 @@
 import { useState } from "react";
 import { useFitText } from "../shared/FitText";
 import { mediaUrl } from "@/lib/strapi";
-import { dmMono, gilroyMedium, interBold, interRegular, interSemiBold } from "../hero/fonts";
+import { gilroyMedium, interBold, interRegular, interSemiBold } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { Corners } from "../shared/Corners";
 
@@ -20,8 +20,6 @@ const AI_CORE_ICON = "/products/alwayson/ai-core-icon.webp";
 const HOST_CPU_IMG = "/products/alwayson/host-cpu.webp";
 const CORNER_42 = "/products/alwayson/corner-42.svg";
 const CORNER_43 = "/products/alwayson/corner-43.svg";
-const CORNER_44 = "/products/alwayson/corner-44.svg";
-const CORNER_45 = "/products/alwayson/corner-45.svg";
 const CORNER_55 = "/products/alwayson/corner-55.svg";
 const CORNER_58 = "/products/alwayson/corner-58.svg";
 const GLOW_SWOOSH = "/products/alwayson/glow-swoosh.svg";

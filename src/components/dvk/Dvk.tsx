@@ -11,21 +11,15 @@ import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 import { TagBadge } from "../hero/TagBadge";
 
 import { ModelZooAppForge } from "@/components/model-zoo/ModelZooAppForge";
-import { SPEC_CARDS } from "./dvk-data";
 import { DvkDemos } from "./DvkDemos";
 import { DEMO_CARDS, PHONE_CARD_FALLBACK } from "./DvkDemosCards";
 import { DvkModelForge } from "./DvkModelForge";
 import { DvkComingSoon } from "./DvkComingSoon";
 import { DvkIntegratedModules } from "./DvkIntegratedModules";
 import {
-  ACCENT_CARD_BG,
-  ACCENT_CARD_BORDER,
-  CARD_BG,
-  CARD_BORDER,
   CORNER_LEFT,
   CORNER_RIGHT,
   DEMOS_TITLE_GRADIENT_MOBILE,
-  FEATURE_CARD_BG,
   HERO_IMAGE_OVERLAY_MOBILE,
   HERO_TITLE_GRADIENT_MOBILE,
   MODELFORGE_TITLE_GRADIENT_MOBILE,
@@ -265,156 +259,6 @@ function DvkHeroMobile({ data, formConfig }: { data?: any; formConfig?: any }) {
         config={formConfig}
       />
     </section>
-  );
-}
-
-/**
- * Figma 4059:10040 — mobile hardware stack (353 wide at x=20 of the 393 canvas).
- * Header 4059:10041 (352 wide, right-aligned) + cards 4059:10049 (355 wide,
- * right-aligned, 24px below header). Bottom row splits Interfaces (left) and
- * MCU/Booting (right column).
- */
-function DvkHardwareStackMobile({ data }: { data?: any }) {
-  const heading =
-    data?.heading ||
-    "The complete Edge AI hardware stack in a single footprint";
-  const subtitle =
-    data?.subtitle ||
-    "An exhaustive suite of sensors, interfaces, and debug tools pre-integrated with the GPX-10 Pro AI Processor.";
-  const cards =
-    data?.spec_cards && Array.isArray(data?.spec_cards) && data.spec_cards.length > 0
-      ? data.spec_cards.map((c: any, i: number) => ({
-          title: c?.title || SPEC_CARDS[i]?.title || "",
-          items: c?.items
-            ? c.items.split("\n").filter(Boolean)
-            : SPEC_CARDS[i]?.items || [],
-          accent: c?.is_accent === true,
-        }))
-      : SPEC_CARDS;
-  const fullCards = cards.slice(0, 4);
-  const interfacesCard = cards[4];
-  const mcuCard = cards[5];
-  const bootingCard = cards[6];
-  return (
-    <section
-      className="relative w-full bg-black min-[1024px]:hidden"
-      aria-label="Edge AI hardware stack"
-      data-node-id="4059:10040"
-    >
-      <div className="relative mx-auto flex w-full max-w-[393px] flex-col items-end gap-[24px] px-[20px] pt-[30px] pb-[90px]">
-        {/* Header — 4059:10041 (352 wide, gap 15) */}
-        <div
-          className="flex w-[352px] max-w-full flex-col items-center gap-[15px]"
-          data-node-id="4059:10041"
-        >
-          {/* Title group — 4059:10042 (352×112.93, corner ticks) */}
-          <div className="relative h-[112.93px] w-full" data-node-id="4059:10042">
-            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-            <h2
-              className={`${gilroyMedium.className} absolute top-[4.93px] left-[16px] m-0 w-[321px] max-w-[calc(100%-32px)] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
-              style={{
-                backgroundImage: HERO_TITLE_GRADIENT_MOBILE,
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-              }}
-              data-node-id="4059:10043"
-            >
-              {heading}
-            </h2>
-          </div>
-          <p
-            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
-            data-node-id="4059:10048"
-          >
-            {subtitle}
-          </p>
-        </div>
-
-        {/* Cards — 4059:10049 (355 wide, gap 12) */}
-        <div
-          className="flex w-[355px] max-w-full flex-col gap-[12px]"
-          data-node-id="4059:10049"
-        >
-          {/* Feature card — 4062:10673 */}
-          <div
-            className="relative flex w-full flex-col items-center justify-center gap-[12px] overflow-clip border-[0.279px] border-solid px-[10px] py-[12px]"
-            style={{ backgroundColor: FEATURE_CARD_BG, borderColor: CARD_BORDER }}
-            data-node-id="4062:10673"
-          >
-            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-            <div className="relative h-[294px] w-full" data-node-id="4062:10675">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img loading="lazy" decoding="async"
-                alt=""
-                src="/dvk/board-blueprint-mobile.webp"
-                className="pointer-events-none absolute inset-0 size-full max-w-none object-bottom"
-              />
-            </div>
-          </div>
-
-          {/* Spec cards — 4062:10681 (gap 8) */}
-          <div className="flex w-full flex-col gap-[8px]" data-node-id="4062:10681">
-            {fullCards.map((card: any, idx: number) => (
-              <MobileSpecCard key={card.title || idx} card={card} />
-            ))}
-
-            {/* Bottom row — 4062:10718: Interfaces + MCU/Booting column */}
-            <div className="flex w-full items-stretch gap-[8px]" data-node-id="4062:10718">
-              {interfacesCard && (
-                <MobileSpecCard card={interfacesCard} className="min-w-0 flex-1" />
-              )}
-              <div className="flex min-w-0 flex-1 flex-col gap-[8px]">
-                {mcuCard && <MobileSpecCard card={mcuCard} className="flex-1" />}
-                {bootingCard && (
-                  <MobileSpecCard card={bootingCard} className="flex-1" />
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/** Figma 4062:10682 — mobile spec card (default + accent variants). */
-function MobileSpecCard({
-  card,
-  className = "",
-}: {
-  card: { title: string; items: string[]; accent?: boolean };
-  className?: string;
-}) {
-  // Mobile design: removed the accent/hover effect per user request
-  const isAccent = false;
-  return (
-    <div
-      className={`relative flex w-full flex-col gap-[20px] overflow-clip border-[0.5px] border-solid px-[16px] pt-[16px] pb-[24px] ${className}`}
-      style={{
-        backgroundColor: isAccent ? ACCENT_CARD_BG : CARD_BG,
-        borderColor: isAccent ? ACCENT_CARD_BORDER : CARD_BORDER,
-      }}
-    >
-      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-      <div className="flex w-full flex-col gap-[10px]">
-        <p
-          className={`${gilroyMedium.className} w-full text-[18px] leading-[28px] text-white not-italic`}
-        >
-          {card.title}
-        </p>
-        <ul
-          className={`${interRegular.className} list-disc text-[12px] leading-[0] font-normal text-[rgba(240,240,240,0.6)] ${
-            isAccent ? "w-[258px] max-w-full" : "w-full"
-          }`}
-        >
-          {card.items.map((item: string) => (
-            <li key={item} className="ms-[18px]">
-              <span className="leading-[18px]">{item}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
   );
 }
 

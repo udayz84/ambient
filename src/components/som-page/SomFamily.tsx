@@ -4,11 +4,9 @@ import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
-import { mediaUrl } from "@/lib/strapi";
 import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 import { useState } from "react";
 
-const FALLBACK_TAG = "THE GPX10 PRO SOM FAMILY";
 const FALLBACK_TITLE = "One core.\nTwo ways to connect.";
 const FALLBACK_SUBTITLE = "Both modules share the same GPX10 Pro compute core and software.\nThe difference is the radio — short-range Bluetooth LE or wide-area LTE.";
 
@@ -152,7 +150,6 @@ function FamilyCard({ data, onNotifyClick }: { data: typeof CARD_BLE; onNotifyCl
 export function SomFamily({ data }: { data?: any }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const tag = data?.tag || FALLBACK_TAG;
   const title = data?.title || FALLBACK_TITLE;
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
 

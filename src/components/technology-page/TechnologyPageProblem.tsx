@@ -2,7 +2,7 @@ import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
-import { MobileCornerMark, MobileTitleCorners } from "./mobile-shared";
+import { MobileTitleCorners } from "./mobile-shared";
 
 const LEGACY_COMPUTE = "/technology/legacy-compute-new.webp";
 const LEGACY_MEMORY = "/technology/legacy-memory-new.webp";
@@ -27,14 +27,8 @@ const ACUBE_CARD_BG = `linear-gradient(90deg, rgba(63, 160, 43, 0.04) 0%, rgba(6
 const ACUBE_PANEL_BG = `linear-gradient(90deg, rgba(63, 160, 43, 0.04) 0%, rgba(63, 160, 43, 0.04) 100%), linear-gradient(177.72deg, rgb(14, 15, 17) 75.004%, rgba(14, 15, 17, 0) 183.08%), url("${ACUBE_GRID}"), linear-gradient(90deg, rgb(19, 47, 13) 0%, rgb(19, 47, 13) 100%)`;
 const ACUBE_BG_SIZE = "auto, auto, 12.6px 12.6px, auto";
 
-const M_CORNER_CARD = "/technology/m-corner-card.svg";
-const M_CORNER_PANEL = "/technology/m-corner-panel.svg";
-const LINE_125 = "/technology/line-125.svg";
 
 const MOBILE_TITLE_GRADIENT_DEG = "101.838deg";
-const MOBILE_ACUBE_CARD_BG = `linear-gradient(90deg, rgba(63, 160, 43, 0.04) 0%, rgba(63, 160, 43, 0.04) 100%), linear-gradient(142.2deg, rgba(14, 15, 17, 0) 0.8302%, rgb(14, 15, 17) 56.9%), url("${ACUBE_GRID}"), linear-gradient(90deg, rgb(19, 47, 13) 0%, rgb(19, 47, 13) 100%)`;
-const MOBILE_ACUBE_PANEL_BG = `linear-gradient(90deg, rgba(63, 160, 43, 0.04) 0%, rgba(63, 160, 43, 0.04) 100%), linear-gradient(177.156deg, rgb(14, 15, 17) 75.004%, rgba(14, 15, 17, 0) 183.08%), url("${ACUBE_GRID}"), linear-gradient(90deg, rgb(19, 47, 13) 0%, rgb(19, 47, 13) 100%)`;
-const MOBILE_ACUBE_BG_SIZE = "auto, auto, 7.757px 7.757px, auto";
 
 const FALLBACK_TAG = "The PROBLEM";
 const FALLBACK_HEADING = "AI isn't a math problem.\nIt's a memory problem.";
@@ -524,178 +518,6 @@ function ACubeStatsPanel({ rows, className = "absolute top-[652.05px] left-[754p
       />
       <BottomCorners />
       <StatRows rows={rows} valueRight={540.81} />
-    </div>
-  );
-}
-
-function MobileACubeCardCorners() {
-  const size = "h-[2.463px] w-[3.091px]";
-  const inset = "inset-[0_0_-12.5%_-9.96%]";
-  return (
-    <>
-      <MobileCornerMark src={M_CORNER_CARD} sizeClassName={size} insetClassName={inset} positionClassName="top-[-0.12px] right-0" flipClassName="rotate-180" />
-      <MobileCornerMark src={M_CORNER_CARD} sizeClassName={size} insetClassName={inset} positionClassName="right-0 bottom-[0.19px]" flipClassName="-scale-y-100 rotate-180" />
-      <MobileCornerMark src={M_CORNER_CARD} sizeClassName={size} insetClassName={inset} positionClassName="top-[-0.12px] left-0" flipClassName="-scale-y-100" />
-      <MobileCornerMark src={M_CORNER_CARD} sizeClassName={size} insetClassName={inset} positionClassName="bottom-[0.19px] left-0" />
-    </>
-  );
-}
-
-function MobileACubePanelCorners() {
-  const size = "h-[2.463px] w-[3.091px]";
-  const inset = "inset-[0_0_-12.5%_-9.96%]";
-  return (
-    <>
-      <MobileCornerMark src={M_CORNER_CARD} sizeClassName={size} insetClassName={inset} positionClassName="bottom-[-0.46px] left-0" />
-      <MobileCornerMark src={M_CORNER_CARD} sizeClassName={size} insetClassName={inset} positionClassName="right-0 bottom-[-0.46px]" flipClassName="-scale-y-100 rotate-180" />
-    </>
-  );
-}
-
-function MobileLegacyCardCorners() {
-  const size = "size-[2.832px]";
-  const inset = "inset-[0_0_-12.5%_-12.5%]";
-  return (
-    <>
-      <MobileCornerMark src={M_CORNER_PANEL} sizeClassName={size} insetClassName={inset} positionClassName="top-[0.07px] right-[0.37px]" flipClassName="rotate-180" />
-      <MobileCornerMark src={M_CORNER_PANEL} sizeClassName={size} insetClassName={inset} positionClassName="right-[0.37px] bottom-[0.01px]" flipClassName="-scale-y-100 rotate-180" />
-      <MobileCornerMark src={M_CORNER_PANEL} sizeClassName={size} insetClassName={inset} positionClassName="top-[0.08px] left-[0.36px]" flipClassName="-scale-y-100" />
-      <MobileCornerMark src={M_CORNER_PANEL} sizeClassName={size} insetClassName={inset} positionClassName="bottom-[0.01px] left-[0.36px]" />
-    </>
-  );
-}
-
-function MobileLegacyPanelCorners() {
-  const size = "size-[2.832px]";
-  const inset = "inset-[0_0_-12.5%_-12.5%]";
-  return (
-    <>
-      <MobileCornerMark src={M_CORNER_PANEL} sizeClassName={size} insetClassName={inset} positionClassName="bottom-0 left-0" />
-      <MobileCornerMark src={M_CORNER_PANEL} sizeClassName={size} insetClassName={inset} positionClassName="right-0 bottom-0" flipClassName="-scale-y-100 rotate-180" />
-    </>
-  );
-}
-
-function MobileUsageBar({
-  length,
-  thickness,
-  progressHeight,
-  progressGradient,
-  roundedClassName,
-  nodeId,
-}: {
-  length: number;
-  thickness: number;
-  progressHeight: number;
-  progressGradient: string;
-  roundedClassName: string;
-  nodeId?: string;
-}) {
-  return (
-    <div
-      className="flex shrink-0 items-center justify-center"
-      style={{ width: length, height: thickness }}
-      data-node-id={nodeId}
-    >
-      <div className="-rotate-90 -scale-y-100 flex-none">
-        <div
-          className="flex flex-col items-center justify-end bg-gradient-to-b from-[#535353] to-[#313131]"
-          style={{ width: thickness, height: length }}
-          data-name="Usage Bar"
-        >
-          <div
-            className={`w-full shrink-0 ${roundedClassName}`}
-            style={{ height: progressHeight, backgroundImage: progressGradient }}
-            data-name="Progress Segment"
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function MobileStatsRows({
-  rows,
-  topClassName,
-  efficiency,
-}: {
-  rows: StatRow[];
-  topClassName: string;
-  efficiency: "acube" | "legacy";
-}) {
-  const bar =
-    efficiency === "acube"
-      ? {
-          length: 58.487,
-          thickness: 7.388,
-          progressHeight: 54.94,
-          progressGradient: "linear-gradient(#8ce66c, #1b2f14)",
-          roundedClassName: "rounded-[0.236px]",
-          nodeId: "3572:7705",
-        }
-      : {
-          length: 67.26,
-          thickness: 8.496,
-          progressHeight: 16.657,
-          progressGradient:
-            "linear-gradient(rgb(255, 77, 0) 42.377%, rgb(58, 19, 30) 121.45%)",
-          roundedClassName: "rounded-[0.272px]",
-          nodeId: "3572:7758",
-        };
-  return (
-    <div
-      className={`absolute left-[calc(50%+0.06px)] flex w-[320.125px] -translate-x-1/2 items-center justify-between ${topClassName}`}
-    >
-      <div
-        className={`${interRegular.className} flex w-[204px] flex-col gap-[9px] text-[12px] leading-[normal] font-normal text-[#8e8e8e] uppercase not-italic`}
-      >
-        {rows.map((row) => (
-          <p key={row.label} className="w-full shrink-0 whitespace-nowrap [word-break:break-word]">
-            {row.label}
-          </p>
-        ))}
-      </div>
-      <div className="flex w-[94.797px] flex-col items-end gap-[9px]">
-        {rows.map((row, i) => {
-          if (i < rows.length - 1) {
-            return (
-              <p
-                key={row.label}
-                className={`${interRegular.className} w-full shrink-0 text-right text-[12px] leading-[normal] font-normal not-italic [word-break:break-word]`}
-                style={{ color: row.valueColor }}
-              >
-                {row.value}
-              </p>
-            );
-          }
-          if (efficiency === "acube") {
-            return (
-              <div key={row.label} className="flex w-full items-center gap-[8px]">
-                <MobileUsageBar {...bar} />
-                <p
-                  className={`${interRegular.className} shrink-0 text-right text-[12px] leading-[normal] font-normal whitespace-nowrap not-italic [word-break:break-word]`}
-                  style={{ color: row.valueColor }}
-                >
-                  {row.value}
-                </p>
-              </div>
-            );
-          }
-          return (
-            <div key={row.label} className="relative h-[15px] w-full">
-              <div className="absolute top-[calc(50%-0.75px)] right-[34.15px] -translate-y-1/2">
-                <MobileUsageBar {...bar} />
-              </div>
-              <p
-                className={`${interRegular.className} absolute top-0 left-[92.64px] -translate-x-full text-right text-[12px] leading-[normal] font-normal whitespace-nowrap not-italic [word-break:break-word]`}
-                style={{ color: row.valueColor }}
-              >
-                {row.value}
-              </p>
-            </div>
-          );
-        })}
-      </div>
     </div>
   );
 }

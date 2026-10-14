@@ -21,7 +21,7 @@ const DEFAULT_SECONDARY_LABEL = "Read the Documentation";
  * Figma 2438:4563 — Developer hero text content.
  * Vertical stack (gap 24px): Section Title · Description · CTA row.
  */
-export function DeveloperHeroContent({ data, briefForm }: { data?: any; briefForm?: any }) {
+export function DeveloperHeroContent({ data }: { data?: any; briefForm?: any }) {
   const heading = data?.heading || DEFAULT_HEADING;
   const headingLines = heading.split("\n");
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
@@ -30,7 +30,6 @@ export function DeveloperHeroContent({ data, briefForm }: { data?: any; briefFor
   const primaryHref = data?.primary_button?.href || "#";
   const secondaryLabel =
     data?.secondary_button?.label || DEFAULT_SECONDARY_LABEL;
-  const secondaryHref = data?.secondary_button?.href || "#";
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
     <div

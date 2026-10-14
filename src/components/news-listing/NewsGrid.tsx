@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { Fragment, useState, useRef, useEffect } from "react";
 import { interRegular, gilroyMedium } from "../hero/fonts";
 import { Corners } from "../shared/Corners";

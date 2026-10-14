@@ -89,8 +89,6 @@ export function mapArticleToNewsCard(
   index: number,
   opts: { nodeIdPrefix?: string } = {},
 ): LatestNewsArticle {
-  const fallback =
-    LATEST_NEWS_ARTICLES[index % LATEST_NEWS_ARTICLES.length];
   const prefix = opts.nodeIdPrefix ?? "cms-news-card";
   const image = mediaUrl(article?.featured_image);
   const imageSrc = image ? image : "";

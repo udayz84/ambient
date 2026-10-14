@@ -1,11 +1,8 @@
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
-import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
-  PRIMARY_CTA_INSET,
-  PRIMARY_CTA_SHADOW,
 } from "./dvk-data";
 import { mediaUrl } from "@/lib/strapi";
 
@@ -154,91 +151,6 @@ export const PHONE_CARD_FALLBACK = {
   secondary_cta_label: "Browse the Model Zoo",
   secondary_cta_href: "/model-zoo",
 };
-
-function DvkPhoneCard({ data }: { data?: any }) {
-  const card = {
-    ...PHONE_CARD_FALLBACK,
-    ...(data || {}),
-  };
-  return (
-    <div
-      className="relative flex w-full max-w-[400px] flex-1 flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black px-[24px] xl:px-[32px] pt-[16px] pb-[24px]"
-      data-node-id="5212:6941"
-      data-name="Control it from your phone"
-    >
-      {/* Tinted inner panel — 5212:6942 (400×600, centered, clipped to card) */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute top-[calc(50%+0.5px)] left-1/2 h-[600px] w-[400px] -translate-x-1/2 -translate-y-1/2 border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.75)]"
-        data-node-id="5212:6942"
-      />
-
-      <div className="relative flex h-[367px] w-full flex-col items-start justify-end gap-[20px]">
-        <div className="flex w-full flex-col gap-[12px]">
-          <h3
-            className={`${gilroyMedium.className} m-0 w-full max-w-[334px] text-[24px] leading-[38px] font-medium text-white not-italic [word-break:break-word] xl:text-[32px]`}
-            data-node-id="5212:6946"
-          >
-            {card.title}
-          </h3>
-          <p
-            className={`${interRegular.className} m-0 w-full max-w-[334px] shrink-0 text-[14px] leading-[24px] font-normal text-[#99a1af] not-italic [word-break:break-word] xl:text-[16px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
-            data-node-id="5212:6947"
-          >
-            {card.description}
-          </p>
-        </div>
-
-        <div className="flex w-full flex-col gap-[12px]">
-          {/* Cta — 5212:6949 (48 tall, label + arrow 5212:6961, gap 11) */}
-          <a
-            href={card.primary_cta_href}
-            className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex min-h-[48px] py-[8px] px-[16px] w-full shrink-0 items-center justify-center gap-[11px]`}
-            data-node-id="5212:6949"
-            data-name="Cta"
-          >
-            <span
-              aria-hidden
-              className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-            />
-            <span className="relative text-[13px] sm:text-[14px] xl:text-[15px] leading-[1.3] font-medium text-white uppercase not-italic text-center">
-              {card.primary_cta_label}
-            </span>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img loading="lazy" decoding="async"
-              alt=""
-              src="/dvk/phone-cta-arrow.svg"
-              aria-hidden
-              className="relative block size-[18px] max-w-none shrink-0"
-              data-node-id="5212:6961"
-              data-name="Frame"
-            />
-            <span
-              aria-hidden
-              className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`}
-            />
-            <GreenCtaCorners disableDots />
-          </a>
-
-          {/* CTA - Secondary — 5212:6964 */}
-          <a
-            href={card.secondary_cta_href}
-            className={`${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
-            data-node-id="5212:6964"
-            data-name="CTA - Primary"
-          >
-            <p className="relative text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic [word-break:break-word]">
-              {card.secondary_cta_label}
-            </p>
-            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-          </a>
-        </div>
-      </div>
-
-      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-    </div>
-  );
-}
 
 function DemoCardItem({ card }: { card: DemoCard }) {
   return (

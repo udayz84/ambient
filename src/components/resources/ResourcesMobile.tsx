@@ -48,63 +48,6 @@ function ResourceTagBadge({
   );
 }
 
-function GreenCta({
-  children,
-  href = "#",
-}: {
-  children: React.ReactNode;
-  href?: string;
-}) {
-  return (
-    <a
-      href={href}
-      className={`${interSemiBold.className} relative flex h-[48px] w-full items-center justify-center overflow-hidden ${GREEN_CTA_SHADOW}`}
-    >
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-      />
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
-      />
-      <span className="relative text-[13px] leading-[normal] font-semibold uppercase whitespace-nowrap text-white not-italic">
-        {children}
-      </span>
-      <GreenCtaCorners />
-    </a>
-  );
-}
-
-function WhiteCta({
-  children,
-  href = "#",
-}: {
-  children: React.ReactNode;
-  href?: string;
-}) {
-  return (
-    <a
-      href={href}
-      className={`${interSemiBold.className} relative flex h-[48px] w-full items-center justify-center overflow-hidden shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15)]`}
-    >
-      <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-40 mix-blend-plus-lighter"
-        style={{
-          backgroundImage: "url(/resources/news-cta-texture.webp)",
-          backgroundSize: "307.2px 307.2px",
-        }}
-      />
-      <span className="relative text-[13px] leading-[normal] font-semibold uppercase whitespace-nowrap text-[#121212] not-italic">
-        {children}
-      </span>
-      <GreenCtaCorners />
-    </a>
-  );
-}
-
 /* ---------------------------------- HERO ---------------------------------- */
 function ResourcesHeroMobile({ data }: { data?: any } = {}) {
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
@@ -448,7 +391,6 @@ function ResourcesContentMobile({
     typeof data?.load_more_count === "number"
       ? data.load_more_count
       : LOAD_MORE_COUNT;
-  const loadMoreLabel = (data?.load_more_label as string) || "";
   void loadMoreCount;
 
   const allArticles = Array.isArray(articles) ? articles : [];
@@ -461,7 +403,6 @@ function ResourcesContentMobile({
     (a) => Boolean(a.categoryId) && a.categoryId === activeCanon
   );
   const visibleArticles = filteredArticles.slice(0, visibleCount);
-  const canLoadMore = visibleCount < filteredArticles.length;
 
   const selectCategory = (id: string, e?: React.MouseEvent<HTMLButtonElement>) => {
     setActiveCategory(id);

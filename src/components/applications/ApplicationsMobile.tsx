@@ -17,9 +17,6 @@ const GREEN_CTA_SHADOW =
 
 const MOBILE_HERO_IMAGES: Record<string, string> = {};
 
-const mobileWatermarkGradient =
-  "linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%)";
-
 type ApplicationsMobileProps = {
   tabs?: any[];
   featureCards?: any[];
@@ -37,9 +34,8 @@ export function ApplicationsMobile({
 }: ApplicationsMobileProps) {
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const fitRef2 = useFitText<HTMLParagraphElement>({ maxLines: 1 });
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [, setActiveIndex] = useState(0);
   const features = featureCards.length ? featureCards : [];
-  const activeFeature = features[activeIndex] || {};
 
   const activeTab = tabs[categoryActiveIndex]?.label || "";
   const activeTabData = tabs.find(
@@ -223,7 +219,7 @@ export function ApplicationsMobile({
               BUILD YOUR
             </h3>
             
-            {/* eslint-disable-next-line @next/next/no-img-element */}
+            { }
             <div className="relative flex items-center justify-center mt-[40px] mb-[40px] w-full z-10">
               <img loading="lazy" decoding="async"
                 alt="Build Custom Application"

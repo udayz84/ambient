@@ -1,7 +1,6 @@
 import { mediaUrl } from "@/lib/strapi";
 import { gilroySemiBold } from "../hero/fonts";
 import { RepelDots } from "../shared/RepelDots";
-import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 export function ApplicationsCta({ data }: { data?: any }) {

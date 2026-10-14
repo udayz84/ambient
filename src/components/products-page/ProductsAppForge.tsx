@@ -118,7 +118,7 @@ export function ProductsAppForge({ data }: { data?: any }) {
   const subheading =
     data?.subheading ||
     "Download ApplicationForge, pair with your kit over Bluetooth, and flash live demos in seconds — no laptop, no code.";
-  const { fadeRef: articleRef, isVisible: articleVisible } = useFadeIn<HTMLDivElement>();
+  const { fadeRef: articleRef } = useFadeIn<HTMLDivElement>();
   const { fadeRef: forgeRef, isVisible: forgeVisible } = useFadeIn<HTMLDivElement>();
   const [isModalOpen, setIsModalOpen] = useState(false);
 

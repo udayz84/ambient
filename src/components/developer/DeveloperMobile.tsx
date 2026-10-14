@@ -6,7 +6,6 @@ import { useFitText } from "../shared/FitText";
 import { dmMono, gilroyMedium, interBold, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { Corners } from "../shared/Corners";
-import { ProductBriefModal } from "../products-page/ProductBriefModal";
 import { mediaUrl } from "@/lib/strapi";
 import {
   ADD_ICON,
@@ -113,9 +112,6 @@ const MOBILE_COLLAPSE: Record<number, MobileCollapse> = {
 const ICON_TILE_BG_40 =
   "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%25' width='100%25' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(2.2748e-14 1.4501 -2.9369 -1.8948e-15 20 -2.403)'><stop stop-color='rgba(57,74,54,1)' offset='0'/><stop stop-color='rgba(43,54,41,1)' offset='0.5'/><stop stop-color='rgba(29,34,28,1)' offset='1'/></radialGradient></defs></svg>\")";
 
-/** Train expanded portrait diagram — Figma 4502:8242 (353×1247, object-cover). */
-const MOBILE_TRAIN_FLOW = "/developer/pipeline-mobile-train-expanded.webp";
-
 const HERO_DEFAULT_HEADING = "Model to deployment\nin 15 Minutes ";
 const HERO_DEFAULT_SUBTITLE =
   "ModelForge bridges training and deployment. Quantize, compile, and merge neural networks with your firmware.";
@@ -133,7 +129,6 @@ function DeveloperHeroMobile({ data }: { data?: any }) {
   const primaryLabel = data?.primary_button?.label || HERO_DEFAULT_PRIMARY;
   const primaryHref = data?.primary_button?.href || "#";
   const secondaryLabel = data?.secondary_button?.label || HERO_DEFAULT_SECONDARY;
-  const secondaryHref = data?.secondary_button?.href || "#";
   const bgImg = mediaUrl(data?.background_image) || "/developer/hero-bg-3.webp";
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
@@ -359,7 +354,7 @@ function DeveloperCodeSectionMobile({ data }: { data?: any }) {
         className="relative mt-[18px] w-full max-w-[393px] snap-x snap-mandatory overflow-x-auto scroll-smooth no-scrollbar"
       >
         <div className="flex items-stretch gap-[8px] px-[19px] after:w-[11px] after:shrink-0 after:content-['']">
-          {articles.map((article, i) => (
+          {articles.map((article) => (
             <div
               key={article.title}
               className="relative flex w-[355px] shrink-0 snap-center items-center gap-[16px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] p-[14px]"
@@ -817,20 +812,6 @@ function PipelineAccordionItemMobile({
   );
 }
 
-const COMING_DEFAULT_HEADING_LINE_1 = "Test on the metal,";
-const COMING_DEFAULT_HEADING_LINE_2 = "without the metal.";
-const COMING_DEFAULT_SUBTITLE =
-  "Validate your build in a virtual sandbox,\nno need to wait for hardware.";
-const COMING_DEFAULT_CARD_TITLE = "Virtual Sandbox Coming Soon";
-const COMING_DEFAULT_CARD_DESC =
-  "Complete virtual validation environment for testing your builds before hardware arrives.";
-const COMING_DEFAULT_CTA = "Join the Virtual Sandbox Waitlist";
-const COMING_DEFAULT_IMG = "/developer/sandbox-image.webp";
-
-/**
- * Figma 4035:25438 — Developer "Coming soon" section (mobile, 393×610 frame).
- * Layout: title+subtitle (gap 10px) → article card (image, text, CTA).
- */
 /**
  * Model zoo section (mobile) — responsive adaptation of desktop Figma 5212:6804.
  * Title/subtitle → stacked stats with 1px dividers → full-width primary CTA.
@@ -917,156 +898,6 @@ function DeveloperModelZooMobile({ data }: { data?: any }) {
   );
 }
 
-function DeveloperComingSoonMobile({ data }: { data?: any }) {
-  let heading = data?.heading || `${COMING_DEFAULT_HEADING_LINE_1}\n${COMING_DEFAULT_HEADING_LINE_2}`;
-  if (!heading.includes("\n")) {
-    heading = heading.replace(" to volume", "\nto volume").replace(", without", ",\nwithout");
-  }
-  const headingLines = heading.split("\n");
-  const subtitle = data?.subtitle || COMING_DEFAULT_SUBTITLE;
-  const subtitleLines = subtitle.split("\n");
-  const cardTitle = data?.card_title || COMING_DEFAULT_CARD_TITLE;
-  const cardDescription = data?.card_description || COMING_DEFAULT_CARD_DESC;
-  const ctaLabel = data?.cta_label || COMING_DEFAULT_CTA;
-  const ctaHref = data?.cta_href || "#";
-  const imgSrc = mediaUrl(data?.image) || COMING_DEFAULT_IMG;
-  const fitRef = useFitText<HTMLHeadingElement>({});
-  return (
-    <section className="relative flex w-full flex-col items-center overflow-hidden px-[19px] pt-[30px] pb-[40px]">
-      {/* Background image — 4035:25440 (opacity-60, radial fade) */}
-      <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden">
-        {/* Ellipse glow for mobile */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute left-[50%] top-[45%] flex -translate-x-1/2 -translate-y-1/2 items-center justify-center"
-        >
-          <div
-            style={{
-              width: "450px",
-              height: "600px",
-              transform: "rotate(90deg)",
-              borderRadius: "600px",
-              background: "var(--Colors-Neutral-1000, #000)",
-              filter: "blur(60px)",
-            }}
-          />
-        </div>
-
-        <div className="absolute left-[calc(50%+24px)] top-0 h-full w-[min(639px,160%)] max-w-none -translate-x-1/2 opacity-60">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img loading="lazy" decoding="async"
-            alt=""
-            src="/developer/image%20250.png"
-            className="absolute inset-0 size-full object-cover object-bottom"
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage:
-                "radial-gradient(ellipse at 50% 47.9%, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%)",
-            }}
-          />
-        </div>
-      </div>
-
-      {/* Content block — 4035:25441 (title + subtitle, gap 10px) */}
-      <div className="flex w-full max-w-full flex-col items-center gap-[10px]">
-        {/* Title — 4035:25443 */}
-        <div className="relative flex w-fit max-w-full justify-center px-[10px]">
-          <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-          <h2
-            ref={fitRef}
-            className={`${gilroyMedium.className} max-w-full bg-clip-text text-center text-[clamp(28px,9vw,36px)] leading-[1.05] font-medium text-transparent not-italic [overflow-wrap:anywhere]`}
-            style={{
-              backgroundImage:
-                "linear-gradient(107.45deg, rgb(255, 255, 255) 1.35%, rgb(212, 233, 188) 55.16%, rgb(255, 255, 255) 111.67%)",
-            }}
-          >
-            {headingLines.map((line: string, i: number) => (
-              <span key={i} className="block">
-                {line}
-              </span>
-            ))}
-          </h2>
-        </div>
-        {/* Subtitle — 4035:25448 */}
-        <p
-          className={`${interRegular.className} w-full max-w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [overflow-wrap:anywhere]`}
-        >
-          {subtitleLines.map((line: string, i: number) => (
-            <span key={i}>
-              {i > 0 ? <br aria-hidden /> : null}
-              {line}
-            </span>
-          ))}
-        </p>
-      </div>
-
-      {/* Article card — glass + blur; no horizontal overflow */}
-      <div className="relative mt-[20px] flex w-full max-w-full flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.04)] px-[16px] pt-[16px] pb-[24px] backdrop-blur-[12px]">
-        {/* Image — 4035:25450 (140×140) */}
-        <div className="relative size-[140px] max-w-full shrink-0 overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img loading="lazy" decoding="async"
-            alt=""
-            src={imgSrc}
-            className="absolute left-[-3.1%] top-[-0.02%] h-[106.13%] w-[103.1%] max-w-none object-cover"
-          />
-        </div>
-        {/* Text content — 4035:25451 (gap 10px) */}
-        <div className="flex w-full max-w-full flex-col items-center gap-[10px] text-center">
-          <p
-            className={`${gilroyMedium.className} w-full max-w-full text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
-          >
-            {cardTitle}
-          </p>
-          <p
-            className={`${interRegular.className} w-full max-w-full text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
-          >
-            {cardDescription}
-          </p>
-        </div>
-
-        {/* CTA — full width; label can shrink instead of overflowing */}
-        <a
-          href={ctaHref}
-          className={`${gilroyMedium.className} relative flex h-[48px] w-full max-w-full items-center overflow-hidden px-[12px] py-[10px] shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
-        >
-          <span
-            aria-hidden
-            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-          />
-          <div className="relative mx-auto flex w-full min-w-0 max-w-[306px] items-center justify-between gap-[8px]">
-            <span className="min-w-0 truncate text-[clamp(12px,3.5vw,16px)] leading-[28px] font-medium uppercase text-white not-italic">
-              {ctaLabel}
-            </span>
-            <span className="size-[20px] shrink-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img loading="lazy" decoding="async"
-                alt=""
-                src="/developer/waitlist-icon.svg"
-                className="size-full max-w-none object-contain"
-              />
-            </span>
-          </div>
-          <span
-            aria-hidden
-            className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
-          />
-          <GreenCtaCorners />
-        </a>
-
-        <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-      </div>
-    </section>
-  );
-}
-
-/**
- * Figma 4035:26190 — Developer modules section (mobile, 393×1350 frame).
- * Layout: title+subtitle (gap 10px) → 2 article cards (gap 12px) with images.
- * Card 1 uses primary green CTA; card 2 uses secondary glass CTA.
- */
 function DeveloperModulesMobile({ data }: { data?: any }) {
   let heading = data?.heading || "From bench validation\nto volume production.";
   if (!heading.includes("\n")) {

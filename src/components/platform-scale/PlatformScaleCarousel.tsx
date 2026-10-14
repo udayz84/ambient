@@ -10,9 +10,6 @@ import {
 import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
 
-const chipGlassCropClass =
-  "absolute top-[-79.23%] left-[-39.91%] h-[258.46%] w-[179.82%] max-w-none";
-
 const SECTION_CENTER_X = 720;
 const HERO_CHIP_WIDTH = 321.7456359863281;
 const HERO_CHIP_HEIGHT = 321.382080078125;

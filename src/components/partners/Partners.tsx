@@ -8,7 +8,6 @@ import { PartnersMatchForm } from "./PartnersMatchForm";
 import { PartnersBecome } from "./PartnersBecome";
 import { PartnersFooterCtas } from "./PartnersFooterCtas";
 import type { PartnersContent } from "./partners-content";
-import Image from "next/image";
 
 export function Partners({ content, applicationForm, inquiryForm }: { content: PartnersContent; applicationForm?: any; inquiryForm?: any }) {
   return (

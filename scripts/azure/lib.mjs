@@ -111,7 +111,7 @@ export const ROOTS = [
   { root: "public", sourceDir: path.resolve("public"), blobPrefix: "" },
   {
     root: "strapi-uploads",
-    sourceDir: path.resolve("cms/public/uploads"),
+    sourceDir: path.resolve("..", "cms", "public", "uploads"),
     blobPrefix: "strapi-uploads/",
   },
 ];

@@ -25,9 +25,6 @@ const DEFAULT_DVK_BOARD_TITLE = "Cranium DVK";
 const DEFAULT_DVK_BOARD_DESC = "15 minutes to on-silicon execution";
 
 const ABSTRACT_IMG = "/dvk/modelforge-abstract.svg";
-const CENTER_IMG = "/dvk/modelforge-center.webp";
-const YOUR_MODEL_IMG = "/dvk/modelforge-your-model.webp";
-const DVK_BOARD_IMG = "/dvk/board-blueprint.webp";
 const LINE_LEFT = "/dvk/modelforge-line-left.svg";
 const LINE_RIGHT = "/dvk/modelforge-line-right.svg";
 const CONN_LT = "/dvk/modelforge-conn-lt.svg";
