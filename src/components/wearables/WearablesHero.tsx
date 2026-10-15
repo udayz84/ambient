@@ -292,7 +292,6 @@ export function WearablesHero({
           data-node-id="4153:10666"
         >
           {/* Image 162 — base product photo */}
-          { }
           {bg1 && <img
             src={bg1}
             alt=""
@@ -323,7 +322,6 @@ export function WearablesHero({
           <div className="pointer-events-none absolute inset-0">
             <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0)] from-[69.488%] to-black to-[96.665%]" />
             <div className="absolute inset-0 overflow-hidden">
-              { }
               {bg2 && <img
                 src={bg2}
                 alt=""

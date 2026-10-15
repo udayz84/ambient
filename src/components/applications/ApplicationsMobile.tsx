@@ -219,7 +219,6 @@ export function ApplicationsMobile({
               BUILD YOUR
             </h3>
             
-            { }
             <div className="relative flex items-center justify-center mt-[40px] mb-[40px] w-full z-10">
               <img loading="lazy" decoding="async"
                 alt="Build Custom Application"
