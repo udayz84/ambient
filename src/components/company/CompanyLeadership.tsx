@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { mediaUrl } from "@/lib/strapi";
 import { GradientTitle } from "../contact/contact-shared";
 import { interRegular } from "../hero/fonts";
 import { CompanyAdvisoryBoard } from "./CompanyAdvisoryBoard";

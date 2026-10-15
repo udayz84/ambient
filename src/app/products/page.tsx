@@ -12,11 +12,9 @@ export const dynamic = "force-dynamic";
 import { ProductsArchitecture } from "@/components/products-page/ProductsArchitecture";
 import { ProductsModelForge } from "@/components/products-page/ProductsModelForge";
 import { ProductsBenchToVolume } from "@/components/products-page/ProductsBenchToVolume";
-import { SomFamily } from "@/components/som-page/SomFamily";
 import { ProductsFullPicture } from "@/components/products-page/ProductsFullPicture";
 import { ProductsStartBuilding } from "@/components/products-page/ProductsStartBuilding";
 import { ProductsStickyNav } from "@/components/products-page/ProductsStickyNav";
-import { ProductsAppForge } from "@/components/products-page/ProductsAppForge";
 import { getSingleType } from "@/lib/strapi";
 import { buildMetadata, type SeoData } from "@/lib/seo";
 

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { mediaUrl } from "@/lib/strapi";
 import { interRegular, gilroyMedium } from "../hero/fonts";
-import { GradientTitle, WhiteCtaButton } from "../contact/contact-shared";
+import { GradientTitle } from "../contact/contact-shared";
 import type { ResourceArticle } from "./resources-data";
 
 const IMAGE_102_GRADIENT =

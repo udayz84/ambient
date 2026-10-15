@@ -4,7 +4,6 @@ import Image from "next/image";
 import { gilroyMedium, gilroySemiBold, interMedium, interRegular, interSemiBold } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { RepelDots } from "../shared/RepelDots";
-import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
 import type { CareersValueCard } from "./careers-data";
 

@@ -8,7 +8,6 @@ import {
   CORNER_RIGHT,
   CTA_HOVER_GLOW,
   DEVELOPER_MODULES,
-  MODULE_IMAGE_OVERLAY,
 } from "./developer-data";
 import { mediaUrl } from "@/lib/strapi";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";

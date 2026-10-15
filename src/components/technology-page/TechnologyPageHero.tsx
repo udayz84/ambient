@@ -5,7 +5,7 @@ import { mediaUrl } from "@/lib/strapi";
 import { ProductBriefModal } from "../products-page/ProductBriefModal";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
-import { GradientTitle, CornerDecor } from "../contact/contact-shared";
+import { GradientTitle } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const HERO_BG = "/technology/hero-bg.webp";

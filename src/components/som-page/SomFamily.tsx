@@ -4,7 +4,6 @@ import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
-import { mediaUrl } from "@/lib/strapi";
 import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 import { useState } from "react";
 

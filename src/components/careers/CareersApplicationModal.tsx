@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import Image from "next/image";
 import { gilroyMedium, gilroySemiBold, interLight, interRegular } from "../hero/fonts";
 import { BOX_BORDER } from "./careers-shared";
 import { Corners } from "../shared/Corners";

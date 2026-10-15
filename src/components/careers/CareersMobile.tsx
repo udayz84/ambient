@@ -12,7 +12,6 @@ import {
 } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import {
-  CARD_GRADIENT_BG,
   GLASS_PANEL_VISIBLE_BORDER_CLASS,
 } from "./careers-shared";
 import { mediaUrl } from "@/lib/strapi";

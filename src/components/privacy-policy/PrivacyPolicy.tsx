@@ -1,7 +1,5 @@
 import React from "react";
 import { gilroyMedium, interRegular, interBold } from "@/components/hero/fonts";
-import { Corners } from "@/components/shared/Corners";
-import { CORNER_LEFT, CORNER_RIGHT } from "@/components/developer/developer-data";
 
 export function PrivacyPolicy({ data }: { data?: any }) {
   let content = data?.privacy_policy_content || "";

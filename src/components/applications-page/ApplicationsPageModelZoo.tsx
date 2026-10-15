@@ -3,7 +3,6 @@ import Image from "next/image";
 import { gilroyMedium, interRegular, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
-import { mediaUrl } from "@/lib/strapi";
 import { PARTNERS_WHY } from "../partners/partners-data";
 
 /* Hearables slug pages swap the shared partner-journey card art for

@@ -2,7 +2,6 @@ import { CompanyDna } from "./CompanyDna";
 
 import { CompanyEcosystem } from "./CompanyEcosystem";
 
-import { CompanyEndSection } from "./CompanyEndSection";
 
 import { CompanyArticles } from "./CompanyArticles";
 

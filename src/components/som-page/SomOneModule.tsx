@@ -1,5 +1,4 @@
 import { gilroyMedium, interRegular } from "../hero/fonts";
-import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { TagBadge } from "../hero/TagBadge";
 

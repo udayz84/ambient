@@ -3,11 +3,9 @@
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { gilroyMedium, interMedium, interRegular } from "../hero/fonts";
-import { CompanyCardCorners } from "../company/company-corners";
 import { dmMono } from "../hero/fonts";
 import { CareersRolesProfileCta } from "./careers-shared";
 import { Corners } from "../shared/Corners";
-import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { CareersApplicationModal } from "./CareersApplicationModal";
 import { useFitText } from "../shared/FitText";
 

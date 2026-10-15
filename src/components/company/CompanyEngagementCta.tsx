@@ -1,6 +1,5 @@
 import { gilroySemiBold } from "../hero/fonts";
 import { RepelDots } from "../shared/RepelDots";
-import { CompanyStandardCorners } from "./company-corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const GREEN_CTA_SHADOW =

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { WearablesHero } from "@/components/wearables/WearablesHero";
-import { WearablesCarousel } from "@/components/wearables/WearablesCarousel";
 import { WearablesParadigm } from "@/components/wearables/WearablesParadigm";
 import { WearablesEmpiricalProof } from "@/components/wearables/WearablesEmpiricalProof";
 import { WearablesLabToProduct } from "@/components/wearables/WearablesLabToProduct";

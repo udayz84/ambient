@@ -1,9 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { gilroyMedium, interRegular } from "../hero/fonts";
-import { RepelDots } from "../shared/RepelDots";
-import { Corners } from "../shared/Corners";
 import { GradientTitle } from "../contact/contact-shared";
-import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { mediaUrl } from "@/lib/strapi";
 
 const TITLE_GRADIENT_DEG = "106.158deg";

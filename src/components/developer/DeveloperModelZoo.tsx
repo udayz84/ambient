@@ -1,11 +1,9 @@
 "use client";
 
-import { Fragment } from "react";
 import type { CSSProperties } from "react";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { Corners } from "../shared/Corners";
-import { PRIMARY_CTA_SHADOW } from "./developer-data";
 import { mediaUrl } from "@/lib/strapi";
 import { CollageRow, COLLAGE_ROW_1, COLLAGE_ROW_2, PrimaryCta } from "../applications-page/ApplicationsPageModelZoo";
 

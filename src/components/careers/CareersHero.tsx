@@ -2,7 +2,6 @@ import Image from "next/image";
 import { gilroySemiBold, interRegular } from "../hero/fonts";
 import { GradientTitle } from "../contact/contact-shared";
 import { RepelDots } from "../shared/RepelDots";
-import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
 
 export function CareersHero({ data }: { data?: any }) {

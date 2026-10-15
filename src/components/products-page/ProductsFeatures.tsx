@@ -14,7 +14,6 @@ import {
 } from "./products-data";
 import type { ProductsFeatureCardData } from "./products-data";
 import { ProductsFeatureCard } from "./ProductsFeatureCard";
-import { ProductsFeaturesCarousel } from "./ProductsFeaturesCarousel";
 
 const FALLBACK_HEADING =
   "The chip that ends the \npower-vs-intelligence tradeoff.";

@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
-import { BOX_BORDER } from "../careers/careers-shared";
 import { popupField, type PopupConfig } from "@/lib/popup";
 
 const SUCCESS_IMG = "/careers/apply-success.webp";

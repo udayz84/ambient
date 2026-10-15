@@ -6,7 +6,6 @@ import { useFitText } from "../shared/FitText";
 import { dmMono, gilroyMedium, interBold, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { Corners } from "../shared/Corners";
-import { ProductBriefModal } from "../products-page/ProductBriefModal";
 import { mediaUrl } from "@/lib/strapi";
 import {
   ADD_ICON,

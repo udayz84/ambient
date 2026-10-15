@@ -7,9 +7,7 @@ import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 import { gilroyBold, gilroyMedium, interRegular, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
-import { TagBadge } from "../hero/TagBadge";
 import { mediaUrl } from "@/lib/strapi";
-import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 const TILE_BG =
   "radial-gradient(circle at 50% 50%, #394a36, #2b3629 50%, #1d221c)";

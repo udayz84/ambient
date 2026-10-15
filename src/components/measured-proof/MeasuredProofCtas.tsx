@@ -1,6 +1,5 @@
 import { gilroyMedium } from "../hero/fonts";
 import { RepelDots } from "../shared/RepelDots";
-import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 
 type CtaItem = {
