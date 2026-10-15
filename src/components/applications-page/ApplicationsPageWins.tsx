@@ -295,7 +295,6 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
   const [caseStudyOpen, setCaseStudyOpen] = useState(false);
   const eyebrow = data?.eyebrow || "Proven in production";
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
-  const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const heading = data?.heading || FALLBACK_HEADING;
   const subheading = (data?.subheading as string) || FALLBACK_SUBHEADING;
   const body = data?.body || BODY;
@@ -443,7 +442,6 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
           {/* Title with corner brackets (node 4032:14681) */}
           <div className="relative h-[81px] w-[356px]" data-name="Group 78">
             <h2
-              ref={fitRef2}
               className={`${gilroyMedium.className} absolute inset-0 flex items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage:

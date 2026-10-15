@@ -94,15 +94,10 @@ export function ContactBookingPopup({
     };
     document.addEventListener("keydown", onEsc);
     // Lock page scroll while the popup is open so it stays fixed/centered.
-    // Lock <html> as well: iOS Safari ignores body-level overflow:hidden for touch panning.
-    const root = document.documentElement;
-    const prevRootOverflow = root.style.overflow;
     const prevOverflow = document.body.style.overflow;
-    root.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onEsc);
-      root.style.overflow = prevRootOverflow;
       document.body.style.overflow = prevOverflow;
     };
   }, [open, onClose]);
