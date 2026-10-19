@@ -12,7 +12,6 @@ import {
   type ApplicationPageSummary,
 } from "./nav-items";
 import { NavbarCta } from "./NavbarCta";
-import { mediaUrl } from "@/lib/strapi";
 
 const emptySubscribe = () => () => {};
 const getClientSnapshot = () => true;
@@ -80,7 +79,6 @@ function ChevronDown() {
 
 export function MobileMenu({
   data,
-  brandData,
   applicationPages,
 }: {
   data?: any;
@@ -91,7 +89,8 @@ export function MobileMenu({
     mapStrapiNavItems(data?.nav_items),
     applicationPages
   );
-  const logoSrc = mediaUrl(brandData?.logo) || "/navbar/logo.png";
+  // Keep the menu header in sync with the high-resolution navbar logo.
+  const logoSrc = "/navbar/logo.png";
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);

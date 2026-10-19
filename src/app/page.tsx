@@ -19,6 +19,12 @@ export async function generateMetadata(): Promise<Metadata> {
       "seo",
     ]);
     seo = data?.seo ?? null;
+    if (seo?.meta_title) {
+      seo = {
+        ...seo,
+        meta_title: seo.meta_title.replace(/\s*[—-]\s*Limitless AI\b/i, "").trim(),
+      };
+    }
   } catch {
     seo = null;
   }

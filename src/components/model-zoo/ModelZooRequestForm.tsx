@@ -54,6 +54,9 @@ export function ModelZooRequestForm({ onClose, config }: { onClose: () => void; 
   const [consent, setConsent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const uploadLabel = (popupField(config, "upload")?.label ?? "Upload Ideas")
+    .replace(/\*+\s*$/, "")
+    .trim();
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -219,7 +222,7 @@ export function ModelZooRequestForm({ onClose, config }: { onClose: () => void; 
                   <img alt="" src="/model-zoo/form-chevron-down.svg" className="pointer-events-none absolute top-1/2 right-[12px] h-[7.81px] w-[14.12px] -translate-y-1/2" aria-hidden />
                 </div>
               </Field>
-              <Field label={popupField(config, "upload")?.label ?? "Upload Ideas*"} htmlFor="mz-upload" className="min-[560px]:flex-1">
+              <Field label={uploadLabel} htmlFor="mz-upload" className="min-[560px]:flex-1">
                 <label
                   htmlFor="mz-upload"
                   className={`${INPUT_CLS} flex h-[42px] w-full cursor-pointer items-center justify-between gap-[12px]`}
@@ -233,7 +236,6 @@ export function ModelZooRequestForm({ onClose, config }: { onClose: () => void; 
                 <input
                   id="mz-upload"
                   type="file"
-                  required
                   className="sr-only"
                   onChange={(e) => setFileName(e.target.files?.[0]?.name ?? "")}
                 />
