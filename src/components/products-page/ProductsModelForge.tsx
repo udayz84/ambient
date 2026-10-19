@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { mediaUrl } from "@/lib/strapi";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
@@ -78,13 +79,20 @@ const SUB_FEATURES = [
 export function ProductsModelForge({ data }: { data?: any }) {
   const heading = data?.heading || FALLBACK_HEADING;
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const cleanPrimaryHref = (() => {
+    const raw = (data?.primary_button?.href ?? FALLBACK_PRIMARY.href).trim();
+    if (!raw || raw === "#") return "#";
+    if (raw === "/developers" || raw === "/developers/") return "/developer";
+    return raw;
+  })();
+
   const primary = {
-    label: data?.primary_button?.label ?? FALLBACK_PRIMARY.label,
-    href: data?.primary_button?.href ?? FALLBACK_PRIMARY.href,
+    label: (data?.primary_button?.label ?? FALLBACK_PRIMARY.label).trim(),
+    href: cleanPrimaryHref,
   };
   const secondary = {
-    label: data?.secondary_button?.label ?? FALLBACK_SECONDARY.label,
-    href: data?.secondary_button?.href ?? FALLBACK_SECONDARY.href,
+    label: (data?.secondary_button?.label ?? FALLBACK_SECONDARY.label).trim(),
+    href: (data?.secondary_button?.href ?? FALLBACK_SECONDARY.href).trim(),
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
   const steps =
@@ -252,7 +260,7 @@ function ProductsModelForgeDesktop({
       {/* CTAs row — 2917:1396 */}
       <div className="mt-[64px] flex items-center justify-center gap-[24px]">
         {/* Primary CTA */}
-        <a
+        <Link
           href={primary.href}
           className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[251px] shrink-0 items-center justify-center overflow-hidden uppercase bg-transparent border-0 cursor-pointer text-white text-[16px] leading-[28px]`}
         >
@@ -261,7 +269,7 @@ function ProductsModelForgeDesktop({
           <span className="relative z-10">{primary.label}</span>
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <div className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
-        </a>
+        </Link>
 
         {/* Secondary CTA */}
         <a
@@ -461,7 +469,7 @@ function ProductsModelForgeMobile({
         {/* ── CTA row ── */}
         <div className="mx-auto mt-[32px] flex w-full max-w-[343px] flex-row gap-[8px] px-[12px] pb-[40px]">
           {/* Primary */}
-          <a
+          <Link
             href={primary.href}
             className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center overflow-hidden`}
           >
@@ -472,7 +480,7 @@ function ProductsModelForgeMobile({
             </span>
             <span aria-hidden className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`} />
             <GreenCtaCorners />
-          </a>
+          </Link>
           {/* Secondary */}
           <a
             href={secondary.href}

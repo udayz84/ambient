@@ -36,7 +36,7 @@ export function LatestNewsCard({
       </div>
 
       <div
-        className="relative mb-[-1.263px] h-[229.263px] w-[calc(100%-2px)] shrink-0 overflow-clip"
+        className="relative mb-[-1.263px] h-[229.263px] w-[calc(100%-2px)] shrink-0 overflow-clip bg-black"
         data-name="NewsSection"
       >
         <div className="absolute top-[-0.09px] left-0 h-[229px] w-full overflow-hidden">
@@ -62,10 +62,6 @@ export function LatestNewsCard({
             )
           ) : null}
         </div>
-        <div
-          className="absolute top-[-0.09px] left-0 h-[229px] w-full bg-gradient-to-t from-[rgba(0,0,0,0.8)] to-[rgba(0,0,0,0)]"
-          aria-hidden
-        />
       </div>
 
       <div className="relative flex h-[300px] w-full shrink-0 flex-col items-start justify-between px-[12px] py-[18px]">
@@ -115,4 +111,3 @@ export function LatestNewsCard({
     </article>
   );
 }
-

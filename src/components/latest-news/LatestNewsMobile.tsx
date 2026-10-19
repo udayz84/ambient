@@ -57,7 +57,7 @@ export function LatestNewsMobile({ data }: { data?: any }) {
   const articles = resolveCards(data);
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
-    <div className="relative flex flex-col items-center py-[48px]">
+    <div className="relative flex w-full flex-col items-center px-[20px] py-[48px]">
       <div className="relative flex flex-col items-center">
         <div className="relative px-[16px] py-[4px]">
           <div className="absolute top-0 right-0 flex size-[4px] items-center justify-center">
@@ -108,13 +108,13 @@ export function LatestNewsMobile({ data }: { data?: any }) {
         {subtitle}
       </p>
 
-      <div className="mt-[28px] flex w-full snap-x snap-mandatory gap-[14px] overflow-x-auto pb-[8px] px-[24px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="mt-[28px] flex w-[calc(100%+40px)] -mx-[20px] snap-x snap-mandatory gap-[16px] overflow-x-auto px-[20px] pb-[8px] scroll-pl-[20px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {articles.map((article: any) => (
           <article
             key={article.nodeId}
-            className="relative flex w-[327px] shrink-0 snap-start flex-col overflow-clip bg-[rgba(255,255,255,0.04)]"
+            className="relative flex w-[300px] max-w-[82vw] shrink-0 snap-start flex-col overflow-clip bg-[rgba(255,255,255,0.04)]"
           >
-            <div className="relative h-[184px] w-full shrink-0 overflow-hidden">
+            <div className="relative h-[184px] w-full shrink-0 overflow-hidden bg-black">
               {article.imageSrc ? (
                 /\.(mp4|webm)$/i.test(article.imageSrc) ? (
                   <video
@@ -131,14 +131,10 @@ export function LatestNewsMobile({ data }: { data?: any }) {
                     alt=""
                     fill
                     className="object-cover"
-                    sizes="327px"
+                    sizes="(max-width: 768px) 85vw, 320px"
                   />
                 )
               ) : null}
-              <div
-                className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"
-                aria-hidden
-              />
             </div>
 
             <div className="flex flex-1 flex-col items-start gap-[14px] p-[18px]">
@@ -201,14 +197,6 @@ export function LatestNewsMobile({ data }: { data?: any }) {
         <p className={`${interRegular.className} relative z-10 shrink-0 whitespace-nowrap text-[14px] font-semibold text-white uppercase not-italic tracking-[0.05em]`}>
           {ctaLabel}
         </p>
-        <Image
-          src="/navbar/cta-dot.svg"
-          alt=""
-          width={6}
-          height={6}
-          className="relative z-10 size-[6px] shrink-0"
-          aria-hidden
-        />
         <span
           aria-hidden
           className="pointer-events-none absolute inset-0 overflow-hidden z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"

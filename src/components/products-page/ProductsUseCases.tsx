@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useFitText } from "../shared/FitText";
 import { useEffect, useRef, useState } from "react";
@@ -53,12 +54,12 @@ export function ProductsUseCases({ data }: { data?: any }) {
   const headingLines = splitLines(heading);
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const primary = {
-    label: data?.primary_button?.label ?? FALLBACK_PRIMARY.label,
-    href: data?.primary_button?.href ?? FALLBACK_PRIMARY.href,
+    label: (data?.primary_button?.label ?? FALLBACK_PRIMARY.label).trim(),
+    href: (data?.primary_button?.href ?? FALLBACK_PRIMARY.href).trim(),
   };
   const secondary = {
-    label: data?.secondary_button?.label ?? FALLBACK_SECONDARY.label,
-    href: data?.secondary_button?.href ?? FALLBACK_SECONDARY.href,
+    label: (data?.secondary_button?.label ?? FALLBACK_SECONDARY.label).trim(),
+    href: (data?.secondary_button?.href ?? FALLBACK_SECONDARY.href).trim(),
   };
   const tabs =
     Array.isArray(data?.tabs) && data.tabs.length > 0
@@ -613,8 +614,8 @@ function PrimaryCta({
   href: string;
 }) {
   return (
-    <a
-      href={href}
+    <Link
+      href={href?.trim() || "#"}
       className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[223px] shrink-0 items-center justify-center overflow-hidden`}
       data-node-id="2901:2144"
       data-name="Cta"
@@ -632,7 +633,7 @@ function PrimaryCta({
         className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`}
       />
       <GreenCtaCorners />
-    </a>
+    </Link>
   );
 }
 
@@ -833,8 +834,8 @@ function ProductsUseCasesMobile({
       {/* CTAs - side-by-side */}
       {!activeTab.isBuild && (
         <div className="mt-[32px] flex flex-row gap-[8px] w-full max-w-[343px] mx-auto relative z-50 pointer-events-auto">
-          <a
-            href={primary.href}
+          <Link
+            href={primary.href?.trim() || "#"}
             className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center overflow-hidden`}
           >
             <span
@@ -850,7 +851,7 @@ function ProductsUseCasesMobile({
               className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`}
             />
             <GreenCtaCorners />
-          </a>
+          </Link>
           <a
             href={secondary.href}
             onClick={(e) => { e.preventDefault(); onSecondaryCtaClick(); }}

@@ -550,7 +550,7 @@ export function Navbar({
   const navLinks = shopItem
     ? navItems.filter((item) => item.label?.toLowerCase() !== "shop")
     : navItems;
-  const logoSrc = mediaUrl(brandData?.logo);
+  const logoSrc = mediaUrl(brandData?.logo) || "/navbar/logo.png";
   return (
     <header
       className={`${interMedium.className} sticky top-0 z-50 h-[78px] w-full drop-shadow-[0px_6px_12px_rgba(83,216,36,0.12)]`}
@@ -605,7 +605,7 @@ export function Navbar({
         {/* Desktop (>=1024px): absolute positions from Figma, adapted for smaller viewports */}
         <Link
           href="/"
-          className="absolute z-20 top-[19.158px] left-[40px] hidden h-[38px] w-max min-[1440px]:left-[110px] lg:block"
+          className="absolute z-20 top-1/2 -translate-y-1/2 left-[40px] hidden h-[52px] w-max min-[1440px]:left-[110px] lg:flex items-center"
           data-node-id="2379:1574"
         >
           {logoSrc ? (
@@ -613,8 +613,8 @@ export function Navbar({
               src={logoSrc}
               alt="Ambient Scientific"
               width={250}
-              height={38}
-              className="h-[38px] w-auto object-contain object-left"
+              height={52}
+              className="h-[52px] w-auto object-contain object-left"
               priority
               unoptimized
             />
@@ -647,15 +647,15 @@ export function Navbar({
         <div className="absolute inset-0 block lg:hidden">
           <Link
             href="/"
-            className="absolute z-20 top-[20px] left-[16px] flex h-[38px] w-max items-center"
+            className="absolute z-20 top-1/2 -translate-y-1/2 left-[16px] flex h-[46px] w-max items-center"
           >
             {logoSrc ? (
               <Image
                 src={logoSrc}
                 alt="Ambient Scientific"
                 width={250}
-                height={38}
-                className="h-[38px] w-auto object-contain object-left"
+                height={46}
+                className="h-[46px] w-auto object-contain object-left"
                 priority
                 unoptimized
               />

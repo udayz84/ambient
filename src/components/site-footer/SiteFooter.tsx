@@ -12,6 +12,26 @@ import {
 import { NewsletterSignup } from "./NewsletterSignup";
 import { mediaUrl } from "@/lib/strapi";
 
+function normalizeFooterUrl(rawHref: unknown, fallback: string = "#"): string {
+  if (typeof rawHref !== "string") return fallback;
+  let href = rawHref.trim();
+  if (!href || href === "#") return fallback;
+
+  // Strip hardcoded staging domain or localhost from redirection URLs
+  href = href.replace(/^https?:\/\/slpgtae2b5emmhjak56tc7j6\.178\.236\.185\.20\.sslip\.io/i, "");
+  href = href.replace(/^https?:\/\/localhost(:\d+)?/i, "");
+  href = href.replace(/^https?:\/\/127\.0\.0\.1(:\d+)?/i, "");
+
+  if (!href) return "/";
+
+  // If it is a relative path without leading slash, ensure it starts with /
+  if (!/^(https?:|\/\/|mailto:|tel:|#)/i.test(href) && !href.startsWith("/")) {
+    href = `/${href}`;
+  }
+
+  return href;
+}
+
 export function SiteFooter({
   showNewsletter = false,
   isContactPage = false,
@@ -72,8 +92,8 @@ export function SiteFooter({
             links: Array.isArray(section?.links)
               ? section.links
                   .map((link: any) => ({
-                    label: typeof link?.label === "string" ? link.label : "",
-                    href: typeof link?.href === "string" && link.href ? link.href : "#",
+                    label: typeof link?.label === "string" ? link.label.trim() : "",
+                    href: normalizeFooterUrl(link?.href),
                   }))
                   .filter((link: any) => link.label)
               : fallback?.links ?? [],
@@ -90,7 +110,7 @@ export function SiteFooter({
             const match = FALLBACK_FOOTER_SOCIAL_LINKS.find((s) => s.platform === platform);
             return {
               platform,
-              href: typeof raw?.href === "string" && raw.href ? raw.href : fallback?.href || "#",
+              href: normalizeFooterUrl(raw?.href, fallback?.href || "#"),
               icon: mediaUrl(raw?.icon) || match?.icon || fallback?.icon || "/footer/social-linkedin.svg",
               label: match?.label || fallback?.label || platform,
             };
@@ -102,8 +122,8 @@ export function SiteFooter({
     Array.isArray(data?.legal_links) && data.legal_links.length > 0
       ? data.legal_links
           .map((raw: any) => ({
-            label: typeof raw?.label === "string" ? raw.label : "",
-            href: typeof raw?.href === "string" && raw.href ? raw.href : "#",
+            label: typeof raw?.label === "string" ? raw.label.trim() : "",
+            href: normalizeFooterUrl(raw?.href),
           }))
           .filter((link: any) => link.label)
       : FALLBACK_FOOTER_LEGAL_LINKS;

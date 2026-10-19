@@ -392,15 +392,6 @@ export function CareersRolesProfileCta({
         <span className="max-w-full overflow-hidden text-ellipsis text-[14px] font-semibold leading-[normal] whitespace-nowrap text-[#FFF] uppercase not-italic">
           {label}
         </span>
-        <span className="pointer-events-none size-[6px]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img loading="lazy" decoding="async"
-            src="/careers/cta-dot.svg"
-            alt=""
-            className="block size-full max-w-none"
-            aria-hidden
-          />
-        </span>
       </span>
       <span
         aria-hidden
@@ -468,15 +459,6 @@ export function CareersGreenCta({
       <span className="relative z-10 flex h-full w-full items-center justify-center gap-[10px] px-6">
         <span className="max-w-full overflow-hidden text-ellipsis text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic">
           {children}
-        </span>
-        <span className="pointer-events-none size-[6px]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img loading="lazy" decoding="async"
-            src="/careers/cta-dot.svg"
-            alt=""
-            className="block size-full max-w-none"
-            aria-hidden
-          />
         </span>
       </span>
       <span

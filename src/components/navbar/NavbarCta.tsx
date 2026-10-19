@@ -169,20 +169,6 @@ export function NavbarCta({ data }: { data?: any } = {}) {
       >
         {ctaLabel}
       </span>
-      <span
-        className="pointer-events-none absolute top-1/2 left-[113px] z-10 size-[6px] -translate-y-1/2"
-        data-node-id="2379:1591"
-      >
-        <Image
-          src="/navbar/cta-dot.svg"
-          alt=""
-          width={6}
-          height={6}
-          className="block size-full max-w-none"
-          aria-hidden
-        />
-      </span>
-      
       {/* Corner brackets */}
       <div className="pointer-events-none absolute right-0 top-0 z-20 flex size-[4px] items-center justify-center">
         <div className="-scale-x-100 -scale-y-100 flex-none">

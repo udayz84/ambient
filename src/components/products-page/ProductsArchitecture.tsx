@@ -67,7 +67,7 @@ export function ProductsArchitecture({ data }: { data?: any }) {
     <>
       {/* DESKTOP (>=1024px) */}
       <section
-        className="relative mx-auto hidden w-full bg-black min-[1024px]:block pt-[32px]"
+        className="relative mx-auto hidden w-full bg-black min-[1024px]:block pt-[60px]"
         aria-label="Architecture"
       >
         <ProductsArchitectureDesktop
@@ -302,7 +302,7 @@ function ProductsArchitectureDesktop({
   const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <div
-      className="mx-auto flex w-full flex-col items-center gap-[49px] pb-0"
+      className="mx-auto flex w-full flex-col items-center gap-[49px] pb-[80px]"
       style={{ maxWidth: ARCH_FRAME_WIDTH }}
       data-node-id="3713:1965"
     >

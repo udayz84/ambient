@@ -19,6 +19,16 @@ const ASSET_FILE_EXTENSIONS = new Set([
   'webp', 'woff', 'woff2', 'xls', 'xlsx', 'zip',
 ]);
 
+/**
+ * True when the pathname points at a static file (image/font/video/pdf/…).
+ * Independent of the Azure-serve exclusions in isStaticAssetPath — used to
+ * skip the CMS redirect lookup for anything that can never be a redirect target.
+ */
+function hasAssetExtension(pathname: string): boolean {
+  const ext = pathname.match(/\.([A-Za-z0-9]+)$/)?.[1]?.toLowerCase();
+  return !!ext && ASSET_FILE_EXTENSIONS.has(ext);
+}
+
 function isStaticAssetPath(pathname: string): boolean {
   // Exclude the hardcoded hero video from being redirected to Azure
   if (pathname === '/hero/ambient-hero-v2.mp4') {
@@ -128,6 +138,13 @@ export async function middleware(request: NextRequest) {
       redirectResponse.headers.set('Cache-Control', 'public, max-age=86400');
       return redirectResponse;
     }
+  }
+
+  // Static assets are never CMS redirect targets. Skip the Strapi lookup so
+  // media/font/image requests are served immediately — prompt delivery matters
+  // for video autoplay (Safari abandons autoplay if the file is slow to load).
+  if (hasAssetExtension(pathname)) {
+    return NextResponse.next();
   }
 
   try {

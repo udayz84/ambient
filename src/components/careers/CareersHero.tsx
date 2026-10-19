@@ -196,12 +196,6 @@ export function CareersHero({ data }: { data?: any }) {
               >
                 {ctaLabel}
               </span>
-              <img
-                src="/careers/cta-dot.svg"
-                alt=""
-                className="pointer-events-none absolute z-10 top-1/2 left-[177.5px] size-[6px] -translate-y-1/2"
-                aria-hidden
-              />
               <span
                 aria-hidden
                 className="pointer-events-none absolute inset-0 z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"

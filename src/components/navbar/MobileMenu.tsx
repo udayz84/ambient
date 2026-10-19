@@ -91,7 +91,7 @@ export function MobileMenu({
     mapStrapiNavItems(data?.nav_items),
     applicationPages
   );
-  const logoSrc = mediaUrl(brandData?.logo);
+  const logoSrc = mediaUrl(brandData?.logo) || "/navbar/logo.png";
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -174,15 +174,15 @@ export function MobileMenu({
               <Link
                 href="/"
                 onClick={close}
-                className="absolute top-[20px] left-[16px] flex h-[38px] w-[135px] items-center overflow-hidden"
+                className="absolute top-1/2 -translate-y-1/2 left-[16px] flex h-[46px] w-max items-center"
               >
                 {logoSrc ? (
                   <Image
                     src={logoSrc}
                     alt="Ambient Scientific"
-                    width={135}
-                    height={38}
-                    className="h-[38px] w-auto object-contain object-left"
+                    width={200}
+                    height={46}
+                    className="h-[46px] w-auto object-contain object-left"
                     unoptimized
                   />
                 ) : null}

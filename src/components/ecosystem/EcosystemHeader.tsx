@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { RepelDots } from "../shared/RepelDots";
 import { Corners } from "../shared/Corners";
@@ -8,8 +7,6 @@ import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useFitText } from "../shared/FitText";
 
 const ctaTextClass = `${interRegular.className} text-[16px] leading-[normal] font-normal`;
-
-const ctaDot = "/navbar/cta-dot.svg";
 
 export function EcosystemHeader({ data }: { data?: any }) {
   const heading = data?.heading || "";
@@ -66,14 +63,6 @@ export function EcosystemHeader({ data }: { data?: any }) {
         >
           {ctaLabel}
         </p>
-        <Image
-          src={ctaDot}
-          alt=""
-          width={6}
-          height={6}
-          className="relative z-10 size-[6px] shrink-0"
-          aria-hidden
-        />
         <span
           aria-hidden
           className="pointer-events-none absolute inset-0 z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"

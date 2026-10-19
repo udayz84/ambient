@@ -30,13 +30,6 @@ export function CompanyEngagementCta({
       </span>
       <span className="relative z-10 flex h-full items-center justify-center gap-[8px] px-[12px] text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic">
         {children}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img loading="lazy" decoding="async"
-          src="/careers/cta-dot.svg"
-          alt=""
-          className="size-[6px] shrink-0"
-          aria-hidden
-        />
       </span>
       <span
         aria-hidden

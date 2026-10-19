@@ -368,4 +368,23 @@ html, body {
     scrollbar-width: thin;
     scrollbar-color: #6ced3f rgba(108, 237, 63, 0.1);
   }
+
+  /* Safari / WebKit Video Autoplay & Play Button suppression */
+  video::-webkit-media-controls {
+    display: none !important;
+    -webkit-appearance: none !important;
+    opacity: 0 !important;
+  }
+
+  video::-webkit-media-controls-start-playback-button,
+  video::-webkit-media-controls-play-button,
+  video::-webkit-media-controls-panel,
+  video::-webkit-media-controls-overlay-play-button {
+    display: none !important;
+    -webkit-appearance: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
 }
+

@@ -57,7 +57,6 @@ export function ApplicationsMobile({
   const cta = data?.cta || {};
   const ctaLabel = cta.label || "";
   const ctaHref = cta.href || "";
-  const dotIcon = mediaUrl(cta.dot_icon) || "/applications/cta-dot.svg";
 
   const goNext = useCallback(() => {
     setCategoryActiveIndex((categoryActiveIndex + 1) % tabs.length);
@@ -355,8 +354,6 @@ export function ApplicationsMobile({
         />
         <p className="relative z-10 flex max-w-full items-center gap-[10px] text-[12px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden [word-break:break-word]">
           {ctaLabel}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img loading="lazy" decoding="async" src={dotIcon} alt="" className="size-[6px]" aria-hidden />
         </p>
         <GreenCtaCorners />
       </a>

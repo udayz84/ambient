@@ -59,7 +59,7 @@ export function ProductsBenchToVolume({ data }: { data?: any }) {
     <>
       {/* DESKTOP (>=1024px) */}
       <section
-        className="relative mx-auto hidden w-full bg-black min-[1024px]:block"
+        className="relative mx-auto hidden w-full bg-black min-[1024px]:block pb-[120px]"
         aria-label="From bench to volume"
       >
         <ProductsBenchToVolumeDesktop

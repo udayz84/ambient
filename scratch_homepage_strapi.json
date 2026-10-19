@@ -1,0 +1,12 @@
+{
+  "data": null,
+  "error": {
+    "status": 400,
+    "name": "ValidationError",
+    "message": "Invalid key video at hero.video",
+    "details": {
+      "key": "video",
+      "path": "hero.video"
+    }
+  }
+}

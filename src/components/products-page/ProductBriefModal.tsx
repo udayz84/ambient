@@ -20,6 +20,7 @@ export function ProductBriefModal({
   config,
   pdfUrl,
   pdfName,
+  formKey,
 }: {
   isOpen: boolean;
   title?: string;
@@ -29,6 +30,7 @@ export function ProductBriefModal({
   /** Optional PDF to download on successful submit. */
   pdfUrl?: string;
   pdfName?: string;
+  formKey?: string;
 }) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -116,7 +118,17 @@ export function ProductBriefModal({
         </button>
 
         <div className="relative z-10 p-[40px] pt-[48px] flex flex-col">
-          {step === "form" && <FormStep title={title} onClose={onClose} onSuccess={() => setStep("confirmation")} config={config} pdfUrl={pdfUrl} pdfName={pdfName} />}
+          {step === "form" && (
+            <FormStep
+              title={title}
+              onClose={onClose}
+              onSuccess={() => setStep("confirmation")}
+              config={config}
+              pdfUrl={pdfUrl}
+              pdfName={pdfName}
+              formKey={formKey}
+            />
+          )}
           {step === "confirmation" && <ConfirmationStep onClose={onClose} config={config} downloadStarted={Boolean(pdfUrl)} />}
         </div>
       </div>
@@ -125,11 +137,25 @@ export function ProductBriefModal({
   );
 }
 
-function FormStep({ title, onSuccess, config, pdfUrl, pdfName }: { title?: string; onClose: () => void; onSuccess: () => void; config?: PopupConfig; pdfUrl?: string; pdfName?: string }) {
+function FormStep({
+  title,
+  onSuccess,
+  config,
+  pdfUrl,
+  pdfName,
+  formKey,
+}: {
+  title?: string;
+  onClose: () => void;
+  onSuccess: () => void;
+  config?: PopupConfig;
+  pdfUrl?: string;
+  pdfName?: string;
+  formKey?: string;
+}) {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  // CMS copy from the page relation; entry title (if set) wins over the
-  // caller's title prop, which stays as fallback.
+  const determinedFormKey = formKey || (pdfName?.toLowerCase().includes("whitepaper") ? "whitepaper" : "product-brief");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -138,8 +164,8 @@ function FormStep({ title, onSuccess, config, pdfUrl, pdfName }: { title?: strin
       await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, formKey: "product-brief", popupId: config?.documentId }),
-      }).catch(() => { /* Mailchimp sync failure is non-blocking */ });
+        body: JSON.stringify({ email, formKey: determinedFormKey, popupId: config?.documentId }),
+      }).catch(() => { /* Mailchimp/mail sync failure is non-blocking */ });
 
       if (pdfUrl) {
         const a = document.createElement("a");

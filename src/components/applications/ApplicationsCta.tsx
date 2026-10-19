@@ -1,4 +1,3 @@
-import { mediaUrl } from "@/lib/strapi";
 import { gilroySemiBold } from "../hero/fonts";
 import { RepelDots } from "../shared/RepelDots";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
@@ -7,7 +6,6 @@ export function ApplicationsCta({ data }: { data?: any }) {
   const cta = data?.cta || {};
   const label = cta.label || "";
   const href = cta.href || "";
-  const dotIcon = mediaUrl(cta.dot_icon) || "/applications/cta-dot.svg";
   return (
     <a
       href={href}
@@ -28,13 +26,6 @@ export function ApplicationsCta({ data }: { data?: any }) {
       >
         {label}
       </p>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img loading="lazy" decoding="async"
-        alt=""
-        src={dotIcon}
-        className="absolute z-10 top-1/2 left-[178px] size-[6px] -translate-y-1/2"
-        aria-hidden
-      />
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"

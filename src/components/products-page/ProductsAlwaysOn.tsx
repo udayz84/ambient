@@ -25,6 +25,8 @@ const CORNER_58 = "/products/alwayson/corner-58.svg";
 const GLOW_SWOOSH = "/products/alwayson/glow-swoosh.svg";
 const CARD_CORNERS = "/products/alwayson/card-corners.svg";
 const CARD_ICON = "/products/alwayson/card-icon.svg";
+const ICON_POWER = "/products/alwayson/icon-power.svg";
+const ICON_PERFORMANCE = "/products/alwayson/icon-performance.svg";
 const LINE_920 = "/products/alwayson/line-920.svg";
 const DOT_GREEN = "/products/alwayson/dot-green.svg";
 const BRACKET_LEFT = "/products/alwayson/bracket-left.svg";
@@ -159,6 +161,7 @@ function StatCard({
   stat,
   sub,
   footerLabel,
+  iconSrc,
   className = "",
 }: {
   badgeLabel: string;
@@ -166,6 +169,7 @@ function StatCard({
   stat: string;
   sub: string;
   footerLabel: string;
+  iconSrc?: string;
   className?: string;
 }) {
   return (
@@ -193,7 +197,7 @@ function StatCard({
         data-name="Icon"
       >
         <div className="-translate-x-1/2 -translate-y-1/2 absolute h-[26.667px] left-1/2 top-1/2 w-[28.148px]">
-          <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={CARD_ICON} />
+          <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={iconSrc || CARD_ICON} />
         </div>
       </div>
       <div className="absolute flex gap-[27.778px] items-center left-[85px] top-[27.67px]" data-name="Logo and Menu">
@@ -386,6 +390,7 @@ function MobileStatCard({
   stat,
   sub,
   footerLabel,
+  iconSrc,
   className = "",
 }: {
   badgeLabel: string;
@@ -393,6 +398,7 @@ function MobileStatCard({
   stat: string;
   sub: string;
   footerLabel: string;
+  iconSrc?: string;
   className?: string;
 }) {
   return (
@@ -420,7 +426,7 @@ function MobileStatCard({
         data-name="Icon"
       >
         <div className="-translate-x-1/2 -translate-y-1/2 absolute h-[26.667px] left-1/2 top-1/2 w-[28.148px]">
-          <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={CARD_ICON} />
+          <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={iconSrc || CARD_ICON} />
         </div>
       </div>
       <div className="absolute left-[75px] top-[27.67px] flex items-center gap-[27.778px]" data-name="Logo and Menu">
@@ -619,6 +625,7 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
             stat="512 GOPS "
             sub="instant"
             footerLabel="REFLEX SURGE"
+            iconSrc={ICON_PERFORMANCE}
           />
           <StatCard
             className="absolute left-[86px] top-[535.55px]"
@@ -627,6 +634,7 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
             stat="< 100 uW"
             sub="always on AI"
             footerLabel="Continuous pulse"
+            iconSrc={ICON_POWER}
           />
 
           {/* Toggle */}
@@ -741,6 +749,7 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
             stat="< 100 uW"
             sub="always on AI"
             footerLabel="Continuous pulse"
+            iconSrc={ICON_POWER}
           />
           <MobileStatCard
             className="absolute left-[20px] top-[741px]"
@@ -749,6 +758,7 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
             stat="512 GOPS "
             sub="instant"
             footerLabel="REFLEX SURGE"
+            iconSrc={ICON_PERFORMANCE}
           />
 
           {/* Toggle strip — Figma 4087:8465 (x31 y927, 331×69) */}

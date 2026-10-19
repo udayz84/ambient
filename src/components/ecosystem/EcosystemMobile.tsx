@@ -1,45 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
+import { gilroyMedium, interRegular } from "../hero/fonts";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useFitText } from "../shared/FitText";
-
-import { EcosystemPartnerRow } from "./EcosystemPartnerRow";
-import { SILICON_PARTNER_ROW } from "./ecosystem-data";
-
-function PartnerSectionMobile({
-  title,
-  isSilicon,
-}: {
-  title: string;
-  isSilicon: boolean;
-}) {
-  const gradient =
-    "linear-gradient(119.414deg, rgb(22, 22, 22) 9.0248%, rgb(39, 39, 39) 37.884%, rgb(18, 18, 18) 111.41%)";
-
-  return (
-    <div className="flex flex-col shrink-0 w-[1204px]">
-      <p
-        className={`${gilroySemiBold.className} bg-clip-text text-[40.281px] leading-[43.158px] tracking-[-0.8056px] font-semibold text-transparent opacity-90 not-italic px-[40px] whitespace-nowrap overflow-hidden text-ellipsis max-w-full`}
-        style={{ backgroundImage: gradient }}
-      >
-        {title}
-      </p>
-      {isSilicon ? (
-        <EcosystemPartnerRow
-          config={SILICON_PARTNER_ROW}
-          isDevelopment={false}
-        />
-      ) : (
-        <EcosystemPartnerRow
-          config={SILICON_PARTNER_ROW}
-          isDevelopment={true}
-        />
-      )}
-    </div>
-  );
-}
+import { EcosystemPartners } from "./EcosystemPartners";
 
 export function EcosystemMobile({ data }: { data?: any }) {
   const heading = data?.heading || "";
@@ -109,24 +74,12 @@ export function EcosystemMobile({ data }: { data?: any }) {
         <p className={`${interRegular.className} relative z-10 shrink-0 whitespace-nowrap text-[14px] font-medium text-white uppercase not-italic tracking-wider`}>
           {ctaLabel}
         </p>
-        <Image
-          src="/navbar/cta-dot.svg"
-          alt=""
-          width={6}
-          height={6}
-          className="relative z-10 size-[6px]"
-          aria-hidden
-        />
         <GreenCtaCorners />
       </a>
 
-      <div className="mx-[16px] mt-[24px] flex w-[calc(100%-32px)] overflow-hidden">
-        <div className="flex w-max gap-[32px] animate-[ecosystem-scroll-mobile_25s_linear_infinite]">
-          <PartnerSectionMobile title="PARTNERS" isSilicon={true} />
-          <PartnerSectionMobile title="PARTNERS" isSilicon={false} />
-          <PartnerSectionMobile title="PARTNERS" isSilicon={true} />
-          <PartnerSectionMobile title="PARTNERS" isSilicon={false} />
-        </div>
+      {/* MOBILE PARTNERS CAROUSEL — matches desktop structure & styling */}
+      <div className="mt-[32px] w-full">
+        <EcosystemPartners data={data} />
       </div>
     </div>
   );

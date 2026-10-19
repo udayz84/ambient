@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import { mediaUrl } from "@/lib/strapi";
 import { TagBadge } from "../hero/TagBadge";
@@ -184,9 +185,9 @@ export function MeasuredProofMobile({ data }: { data?: any }) {
       </div>
 
       <div className="mt-[28px] flex w-full flex-row justify-center gap-[9px]">
-        <a
-          href={primary.href || ""}
-          className={`${gilroyMedium.className} relative flex h-[48px] w-[171px] items-center justify-center ${GREEN_CTA_SHADOW}`}
+        <Link
+          href={(primary.href || "#").trim()}
+          className={`${gilroyMedium.className} relative flex h-[48px] min-w-[200px] w-auto px-[24px] items-center justify-center ${GREEN_CTA_SHADOW}`}
         >
           <span
             aria-hidden
@@ -196,12 +197,12 @@ export function MeasuredProofMobile({ data }: { data?: any }) {
             aria-hidden
             className="pointer-events-none absolute inset-0 overflow-hidden z-[2] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)] rounded-[inherit]"
           />
-          <p className="relative z-10 max-w-full text-[13px] leading-[24px] font-medium whitespace-nowrap text-white uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]">
-            {primary.label || ""}
-          </p>
+          <span className="relative z-10 max-w-full text-[14px] leading-[24px] font-medium whitespace-nowrap text-white uppercase not-italic">
+            {(primary.label || "").trim()}
+          </span>
           
           <GreenCtaCorners />
-        </a>
+        </Link>
       </div>
     </div>
   );

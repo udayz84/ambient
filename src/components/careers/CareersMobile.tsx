@@ -138,7 +138,6 @@ function CareersHeroMobile({ data }: { data?: any }) {
             <GreenCta href={ctaHref}>
               <span className="flex items-center gap-[8px]">
                 <span className="text-[12px]">{ctaLabel}</span>
-                <span className="block size-[6px] rounded-full bg-white" />
               </span>
             </GreenCta>
           </div>
@@ -483,7 +482,6 @@ function CareersOpenRolesMobile({ data }: { data?: any }) {
             <span className={`${gilroyMedium.className} relative z-10 max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[12px] leading-[24px] uppercase text-white not-italic`}>
               {generalAppCtaLabel}
             </span>
-            <div className="relative z-10 size-[4px] shrink-0 rounded-full bg-white" />
           </a>
         </div>
       </div>
@@ -736,7 +734,6 @@ function CareersBottomCtaMobile({ data }: { data?: any }) {
               <span className="relative z-10 max-w-full overflow-hidden text-ellipsis text-[14px] uppercase text-white not-italic whitespace-nowrap font-semibold">
                 {btn.label}
               </span>
-              <div className="relative z-10 size-[6px] shrink-0 rounded-full bg-white" />
             </a>
           ),
         )}

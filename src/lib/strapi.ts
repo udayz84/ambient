@@ -6,10 +6,12 @@
  *
  * Behavior:
  *   - GET via fetch with ISR: responses are cached (tagged "strapi") and
- *     revalidated at most every 60s. Pages therefore prerender/statically
- *     cache instead of blocking on Strapi for every request. CMS edits show
- *     up within 60s, or immediately via the /api/revalidate webhook route
- *     (which calls revalidateTag("strapi")).
+ *     revalidated at most every 60s in production, or 0s (instant) in dev.
+ *     Pages therefore prerender/statically cache instead of blocking on Strapi
+ *     for every request. CMS edits show up immediately in dev, or within 60s
+ *     (or via /api/revalidate webhook route) in prod.
+ *   - Resolves localhost to 127.0.0.1 on Node server-side to prevent IPv6
+ *     connection timeouts on macOS.
  *   - Reads the Strapi URL from NEXT_PUBLIC_STRAPI_URL (defaults to the local
  *     dev port 1338).
  *   - Reads an optional bearer token from STRAPI_TOKEN (server-side only).
@@ -27,7 +29,7 @@ export const STRAPI_CACHE_TAG = "strapi";
 const STRAPI_REVALIDATE_SECONDS = 60;
 
 const STRAPI_URL = (
-  process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1338"
+  process.env.NEXT_PUBLIC_STRAPI_URL || "http://127.0.0.1:1338"
 ).replace(/\/$/, "");
 
 // NOTE: public role has read access on this Strapi, so no Authorization header
@@ -37,13 +39,17 @@ const STRAPI_URL = (
 
 /** Raw fetch to Strapi. Returns parsed JSON or throws. */
 export async function fetchStrapi<T = unknown>(path: string): Promise<T> {
-  const url = path.startsWith("http") ? path : `${STRAPI_URL}${path}`;
+  let url = path.startsWith("http") ? path : `${STRAPI_URL}${path}`;
+  // On Node.js server-side, replace localhost with 127.0.0.1 to avoid macOS IPv6 (::1) lookup hangs against Strapi
+  if (typeof window === "undefined") {
+    url = url.replace("//localhost:", "//127.0.0.1:");
+  }
   const headers: Record<string, string> = {};
 
   const res = await fetch(url, {
     headers,
     next: {
-      revalidate: STRAPI_REVALIDATE_SECONDS,
+      revalidate: process.env.NODE_ENV === "development" ? 0 : STRAPI_REVALIDATE_SECONDS,
       tags: [STRAPI_CACHE_TAG],
     },
   });

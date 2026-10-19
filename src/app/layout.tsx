@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Navbar } from "@/components/navbar/Navbar";
 import { SiteFooterWrapper } from "@/components/site-footer/SiteFooterWrapper";
 import { NewsletterPopup } from "@/components/newsletter-popup/NewsletterPopup";
+import { CookieConsent } from "@/components/cookie-consent/CookieConsent";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import {
   getNavbar,
@@ -11,6 +12,9 @@ import {
   type ApplicationPageSummary,
 } from "@/lib/strapi";
 import "./globals.css";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -66,6 +70,7 @@ export default async function RootLayout({
           <SiteFooterWrapper data={footer?.footer} brandData={navbar?.brand} newsletterData={footer?.newsletter} />
         </SmoothScroll>
         <NewsletterPopup />
+        <CookieConsent />
       </body>
     </html>
   );

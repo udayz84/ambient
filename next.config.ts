@@ -27,6 +27,20 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: "/developers",
+        destination: "/developer",
+        permanent: true,
+      },
+      {
+        source: "/developers/:path*",
+        destination: "/developer/:path*",
+        permanent: true,
+      },
+    ];
+  },
   // Strapi redirects are now handled dynamically by src/middleware.ts
   // so they take effect immediately without needing a rebuild/restart.
   images: {

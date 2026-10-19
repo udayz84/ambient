@@ -60,14 +60,22 @@ export default async function ProductsPage() {
         fields: ["bg_surge_image", "bg_subconscious_image", "ai_core_icon", "host_cpu_image"],
         nested: ["stats"],
       },
-      { section: "use_cases", nested: ["tabs"] },
+      {
+        section: "use_cases",
+        fields: ["primary_button", "secondary_button"],
+        nested: ["tabs"],
+      },
       {
         section: "measured",
         fields: ["tag", "background_image", "primary_button", "secondary_button"],
         nested: ["cards"],
       },
       { section: "architecture", fields: ["image"], nested: ["stats"] },
-      { section: "modelforge", nested: ["steps", "subfeatures"] },
+      {
+        section: "modelforge",
+        fields: ["primary_button", "secondary_button"],
+        nested: ["steps", "subfeatures"],
+      },
       { section: "bench_to_volume", nested: ["cards"] },
       { section: "som_family", nested: ["cards.features", "cards.image"] },
       { section: "full_picture", fields: ["background_image"], nested: ["callouts"] },
@@ -110,7 +118,7 @@ export default async function ProductsPage() {
       <ProductsStickyNav items={stickyItems} />
       <div id="features"><ProductsFeatures data={data?.features} /></div>
       <div id="always-on"><ProductsAlwaysOn data={data?.always_on} /></div>
-      <div id="metrics"><ProductsMeasured data={data?.measured} /></div>
+      <div id="metrics"><ProductsMeasured data={data?.measured} formConfig={data?.brief_form} /></div>
       <div id="case-studies"><ApplicationsPageWins /></div>
       <div id="use-cases"><ProductsUseCases data={data?.use_cases} /></div>
       <ProductsReadyToRun />

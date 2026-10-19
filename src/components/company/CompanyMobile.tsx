@@ -70,13 +70,6 @@ function GreenCta({
       />
       <span className="relative z-10 flex items-center justify-center gap-[8px] text-[13px] leading-[normal] font-semibold uppercase whitespace-nowrap text-white not-italic">
         {children}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img loading="lazy" decoding="async"
-          src="/careers/cta-dot.svg"
-          alt=""
-          className="size-[6px] shrink-0"
-          aria-hidden
-        />
       </span>
       <GreenCtaCorners />
     </a>

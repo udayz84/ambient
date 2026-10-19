@@ -1,0 +1,2250 @@
+{
+  "id": 141,
+  "documentId": "ct6o46f62wtjfagv8blesaiu",
+  "createdAt": "2026-07-06T22:30:13.990Z",
+  "updatedAt": "2026-10-16T05:02:16.703Z",
+  "publishedAt": "2026-10-16T05:02:20.709Z",
+  "clients": null,
+  "seo": {
+    "id": 727,
+    "meta_title": "Ambient Scientific — Limitless AI",
+    "meta_description": "A new class of AI chips unlocking richer intelligence from microwatt to hyperscaler cloud — engineered for orders-of-magnitude gains in performance-per-watt.",
+    "keywords": "AI processor, edge AI, analog compute, in-memory compute, GPX10, low-power AI, Ambient Scientific",
+    "noindex": false,
+    "canonical_url": "/"
+  },
+  "hero": {
+    "id": 160,
+    "title": "Limitless AI, reimagined with Ambient Efficiency",
+    "subtitle": "A new class of AI chips that unlocks richer intelligence across every edge device, from microwatt sensors to real-time perception, once constrained by power, space, and legacy design tradeoffs",
+    "scroll_text": "SCROLL",
+    "video_alt": "Ambient Scientific hero video",
+    "mobile_video_alt": "Ambient Scientific hero video (mobile)",
+    "video": {
+      "id": 493,
+      "documentId": "dnd9iprleeoz3e4dwawb296i",
+      "name": "Ambient Hero Dummy Video.mp4",
+      "alternativeText": null,
+      "caption": null,
+      "focalPoint": null,
+      "width": null,
+      "height": null,
+      "formats": null,
+      "hash": "Ambient_Hero_Dummy_Video_874d97fc22",
+      "ext": ".mp4",
+      "mime": "video/mp4",
+      "size": 1827.86,
+      "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/Ambient_Hero_Dummy_Video_874d97fc22.mp4",
+      "previewUrl": null,
+      "provider": "strapi-provider-upload-azure-sp",
+      "provider_metadata": null,
+      "createdAt": "2026-09-29T19:39:06.884Z",
+      "updatedAt": "2026-09-29T19:39:06.884Z",
+      "publishedAt": "2026-09-29T19:39:06.885Z"
+    },
+    "mobile_video": {
+      "id": 466,
+      "documentId": "mgvqtexzxtj1t328o6ucum15",
+      "name": "Keep_camera_angle_202604021718.mp4",
+      "alternativeText": "Keep_camera_angle_202604021718.mp4",
+      "caption": "",
+      "focalPoint": null,
+      "width": null,
+      "height": null,
+      "formats": null,
+      "hash": "Keep_camera_angle_202604021718_09f2f3d943",
+      "ext": ".mp4",
+      "mime": "video/mp4",
+      "size": 4803.03,
+      "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/Keep_camera_angle_202604021718_09f2f3d943.mp4",
+      "previewUrl": null,
+      "provider": "strapi-provider-upload-azure-sp",
+      "provider_metadata": null,
+      "createdAt": "2026-09-19T08:51:37.232Z",
+      "updatedAt": "2026-09-19T08:51:37.232Z",
+      "publishedAt": "2026-09-19T08:51:37.233Z"
+    },
+    "metrics": [
+      {
+        "id": 317,
+        "tag": "Always-On, Microwatt Power",
+        "value": "100X",
+        "title": "AI Efficiency",
+        "description": "Run real AI for months on a coin cell, where silicon could never go before."
+      },
+      {
+        "id": 318,
+        "tag": "REAL AI, ON-DEVICE",
+        "value": "Zero Cloud",
+        "title": "Dependency",
+        "description": "Full neural networks running on the device, no rule-based shortcuts, no round-trips."
+      }
+    ],
+    "announcements": []
+  },
+  "hero_form": {
+    "id": 3,
+    "documentId": "kratr2anhvvbkqvhf7fndlmf",
+    "title": "Sign Up For Upcoming Products",
+    "description": null,
+    "cta_label": "Submit",
+    "createdAt": "2026-10-12T06:04:05.003Z",
+    "updatedAt": "2026-10-12T08:50:20.377Z",
+    "publishedAt": "2026-10-12T08:50:18.695Z",
+    "success_title": "Thank you for signing up!",
+    "success_text": "We've received your interest. Our team will keep you updated on the latest news and availability for our upcoming products.",
+    "recipient_emails": "udayznanam@gmail.com,rchowdhury@ambientscientific.ai\n",
+    "page": "Home hero + SOM family section",
+    "fields": [
+      {
+        "id": 2,
+        "name": "first_name",
+        "label": "First Name*",
+        "type": "text",
+        "placeholder": "Enter First Name",
+        "required": true,
+        "helper_text": null
+      },
+      {
+        "id": 3,
+        "name": "last_name",
+        "label": "Last Name*",
+        "type": "text",
+        "placeholder": "Enter Last Name",
+        "required": true,
+        "helper_text": null
+      },
+      {
+        "id": 4,
+        "name": "email",
+        "label": "Email ID*",
+        "type": "email",
+        "placeholder": "Enter Your Email ID",
+        "required": true,
+        "helper_text": null
+      },
+      {
+        "id": 5,
+        "name": "company",
+        "label": "Company*",
+        "type": "text",
+        "placeholder": "Enter Company Name",
+        "required": true,
+        "helper_text": null
+      },
+      {
+        "id": 6,
+        "name": "details",
+        "label": "Which chip are you looking for?*",
+        "type": "text",
+        "placeholder": "Enter chip name",
+        "required": true,
+        "helper_text": "These are the upcoming chips we are providing. We just want to know which chip you are looking for."
+      }
+    ]
+  },
+  "measured_proof": {
+    "id": 149,
+    "heading": "Measured proof in silicon",
+    "tag": {
+      "id": 1082,
+      "text": "Real-time AI at edge"
+    },
+    "ctas": [
+      {
+        "id": 2285,
+        "label": "SEE THE PROOF IN ACTION",
+        "href": "/applications ",
+        "variant": "primary"
+      },
+      {
+        "id": 2286,
+        "label": "Explore ambient store",
+        "href": "/technology",
+        "variant": "secondary"
+      }
+    ],
+    "stat_cards": [
+      {
+        "id": 608,
+        "metric": "25x",
+        "label": "AI PERFORMANCE",
+        "description": "Unlock richer models, faster local inference, and more capable intelligence in constrained systems",
+        "alt": null,
+        "image": {
+          "id": 324,
+          "documentId": "oihmr2xou2p5eagbk3gzvhg5",
+          "name": "2.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 388,
+          "height": 392,
+          "formats": {
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_2_07682d00ef.png",
+              "hash": "thumbnail_2_07682d00ef",
+              "mime": "image/png",
+              "name": "thumbnail_2.png",
+              "path": null,
+              "size": 27.66,
+              "width": 154,
+              "height": 156,
+              "sizeInBytes": 27664
+            }
+          },
+          "hash": "2_07682d00ef",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 33.75,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/2_07682d00ef.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-08-05T12:10:17.678Z",
+          "updatedAt": "2026-09-09T06:59:08.993Z",
+          "publishedAt": "2026-08-05T12:10:17.678Z"
+        }
+      },
+      {
+        "id": 609,
+        "metric": "100x",
+        "label": "LOWER POWER CONSUMPTION",
+        "description": "Extend battery life at the edge and slash the power budget of always-on devices.",
+        "alt": null,
+        "image": {
+          "id": 323,
+          "documentId": "smwmbe6s1fil9decwkgro4ro",
+          "name": "image 85.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 310,
+          "height": 286,
+          "formats": {
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_image_85_f68e6f76bc.png",
+              "hash": "thumbnail_image_85_f68e6f76bc",
+              "mime": "image/png",
+              "name": "thumbnail_image 85.png",
+              "path": null,
+              "size": 39.27,
+              "width": 169,
+              "height": 156,
+              "sizeInBytes": 39272
+            }
+          },
+          "hash": "image_85_f68e6f76bc",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 24.03,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/image_85_f68e6f76bc.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-08-05T12:09:49.616Z",
+          "updatedAt": "2026-09-09T06:59:18.277Z",
+          "publishedAt": "2026-08-05T12:09:49.616Z"
+        }
+      },
+      {
+        "id": 610,
+        "metric": "10x",
+        "label": "COMPUTE DENSITY",
+        "description": "Pack more intelligence into the same footprint without scaling power and system complexity the old way",
+        "alt": null,
+        "image": {
+          "id": 325,
+          "documentId": "yuri6fuo0tck9r2z2xcr6z4p",
+          "name": "3.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 388,
+          "height": 392,
+          "formats": {
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_3_5444e76bea.png",
+              "hash": "thumbnail_3_5444e76bea",
+              "mime": "image/png",
+              "name": "thumbnail_3.png",
+              "path": null,
+              "size": 28.98,
+              "width": 154,
+              "height": 156,
+              "sizeInBytes": 28978
+            }
+          },
+          "hash": "3_5444e76bea",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 46.24,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/3_5444e76bea.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-08-05T12:11:17.773Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-08-05T12:11:17.773Z"
+        }
+      },
+      {
+        "id": 611,
+        "metric": "100%",
+        "label": "PROGRAMMABLE DESIGN",
+        "description": "Preserve the freedom to build differentiated AI systems without locking into rigid fixed-function tradeoffs",
+        "alt": null,
+        "image": {
+          "id": 326,
+          "documentId": "tut9ymccyeg948e3mfrp7cqs",
+          "name": "4.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 388,
+          "height": 381,
+          "formats": {
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_4_63e90581a2.png",
+              "hash": "thumbnail_4_63e90581a2",
+              "mime": "image/png",
+              "name": "thumbnail_4.png",
+              "path": null,
+              "size": 27.55,
+              "width": 159,
+              "height": 156,
+              "sizeInBytes": 27548
+            }
+          },
+          "hash": "4_63e90581a2",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 36.9,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/4_63e90581a2.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-08-05T12:11:28.972Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-08-05T12:11:28.972Z"
+        }
+      }
+    ]
+  },
+  "platform_scale": {
+    "id": 149,
+    "heading": "One platform, infinite scale",
+    "subtitle": "A modular compute fabric for your entire product roadmap, from a microwatt always-on sensor to real-time edge perception, without ever changing your software.\n",
+    "default_index": 0,
+    "cta": {
+      "id": 2288,
+      "label": "Explore GPX10 Pro",
+      "href": "/products",
+      "variant": "primary"
+    },
+    "secondary_cta": {
+      "id": 2289,
+      "label": "Sign Up for Upcoming Products.",
+      "href": "/products",
+      "variant": "primary"
+    },
+    "products": [
+      {
+        "id": 695,
+        "product_id": "GPX10 pro",
+        "label": "GPX10 PRO",
+        "description": "GPX10 Pro brings fully programmable, always-on AI to wearables, hearables, smart sensors, and other power-constrained edge devices.",
+        "alt": null,
+        "chip_image": {
+          "id": 360,
+          "documentId": "xey4pobzo9zdbyjxlmztu76v",
+          "name": "GPX10pro.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 326,
+          "height": 336,
+          "formats": {
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_GPX_10pro_5d70ff2196.png",
+              "hash": "thumbnail_GPX_10pro_5d70ff2196",
+              "mime": "image/png",
+              "name": "thumbnail_GPX10pro.png",
+              "path": null,
+              "size": 48.08,
+              "width": 151,
+              "height": 156,
+              "sizeInBytes": 48076
+            }
+          },
+          "hash": "GPX_10pro_5d70ff2196",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 54.99,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/GPX_10pro_5d70ff2196.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-08-06T17:05:15.118Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-08-06T17:05:15.118Z"
+        }
+      },
+      {
+        "id": 696,
+        "product_id": "GPX40",
+        "label": "GPX40",
+        "description": "GPX40 combines sustained vision with integrated wireless connectivity for camera-first smart glasses, safety helmets, and wearable cameras.",
+        "alt": null,
+        "chip_image": {
+          "id": 503,
+          "documentId": "cs9tbnspgcwyd4k9gd63vr57",
+          "name": "40.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 304,
+          "height": 314,
+          "formats": {
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_40_ba78291c6c.png",
+              "hash": "thumbnail_40_ba78291c6c",
+              "mime": "image/png",
+              "name": "thumbnail_40.png",
+              "path": null,
+              "size": 54.78,
+              "width": 151,
+              "height": 156,
+              "sizeInBytes": 54775
+            }
+          },
+          "hash": "40_ba78291c6c",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 55.73,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/40_ba78291c6c.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-10-05T03:34:02.579Z",
+          "updatedAt": "2026-10-05T03:34:02.579Z",
+          "publishedAt": "2026-10-05T03:34:02.582Z"
+        }
+      },
+      {
+        "id": 697,
+        "product_id": "GPX80",
+        "label": "GPX80",
+        "description": "GPX80 delivers advanced perception and control for microdrones, compact robots, automated inspection, and in-cabin intelligence.",
+        "alt": null,
+        "chip_image": {
+          "id": 501,
+          "documentId": "qpldhzaw7kijdzlo2e6ov4k0",
+          "name": "80.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 320,
+          "height": 325,
+          "formats": {
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_80_664663658d.png",
+              "hash": "thumbnail_80_664663658d",
+              "mime": "image/png",
+              "name": "thumbnail_80.png",
+              "path": null,
+              "size": 54.51,
+              "width": 154,
+              "height": 156,
+              "sizeInBytes": 54510
+            }
+          },
+          "hash": "80_664663658d",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 62.48,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/80_664663658d.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-10-05T03:32:45.822Z",
+          "updatedAt": "2026-10-05T03:32:45.822Z",
+          "publishedAt": "2026-10-05T03:32:45.823Z"
+        }
+      },
+      {
+        "id": 698,
+        "product_id": "GPX Ultra",
+        "label": "GPX Ultra",
+        "description": "GPX Ultra provides Linux-class AI performance for autonomous drones, AMRs, and advanced robots requiring real-time vision, navigation, and multimodal sensor fusion.",
+        "alt": null,
+        "chip_image": {
+          "id": 504,
+          "documentId": "r5pvytqxn0acrnfbpzug7rwk",
+          "name": "ultra.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 302,
+          "height": 314,
+          "formats": {
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_ultra_79aa897014.png",
+              "hash": "thumbnail_ultra_79aa897014",
+              "mime": "image/png",
+              "name": "thumbnail_ultra.png",
+              "path": null,
+              "size": 64.35,
+              "width": 150,
+              "height": 156,
+              "sizeInBytes": 64350
+            }
+          },
+          "hash": "ultra_79aa897014",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 53.18,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/ultra_79aa897014.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-10-05T03:34:22.986Z",
+          "updatedAt": "2026-10-05T03:34:22.986Z",
+          "publishedAt": "2026-10-05T03:34:22.986Z"
+        }
+      }
+    ]
+  },
+  "applications": {
+    "id": 149,
+    "heading": "  Build the impossible. Today",
+    "subtitle": "Don't let legacy design tradeoffs limit your roadmap. Discover the market-differentiating features of GPX10 Pro and what's coming next.",
+    "cta": {
+      "id": 324,
+      "label": "EXPLORE APPLICATIONS",
+      "href": "/applications"
+    },
+    "tabs": [
+      {
+        "id": 1185,
+        "label": "WEARABLES",
+        "watermark_text": "Wearables",
+        "hero_image_alt": null,
+        "mobile_hero_image_alt": null,
+        "hero_image": {
+          "id": 16,
+          "documentId": "chdtez60bs7bvezv8pjax8bi",
+          "name": "app-wearables.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 1024,
+          "height": 809,
+          "formats": {
+            "large": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/large_app_wearables_51be1eab6e.png",
+              "hash": "large_app_wearables_51be1eab6e",
+              "mime": "image/png",
+              "name": "large_app-wearables.png",
+              "path": null,
+              "size": 156,
+              "width": 1000,
+              "height": 790,
+              "sizeInBytes": 156004
+            },
+            "small": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/small_app_wearables_51be1eab6e.png",
+              "hash": "small_app_wearables_51be1eab6e",
+              "mime": "image/png",
+              "name": "small_app-wearables.png",
+              "path": null,
+              "size": 48.61,
+              "width": 500,
+              "height": 395,
+              "sizeInBytes": 48607
+            },
+            "medium": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/medium_app_wearables_51be1eab6e.png",
+              "hash": "medium_app_wearables_51be1eab6e",
+              "mime": "image/png",
+              "name": "medium_app-wearables.png",
+              "path": null,
+              "size": 99.46,
+              "width": 750,
+              "height": 593,
+              "sizeInBytes": 99457
+            },
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_app_wearables_51be1eab6e.png",
+              "hash": "thumbnail_app_wearables_51be1eab6e",
+              "mime": "image/png",
+              "name": "thumbnail_app-wearables.png",
+              "path": null,
+              "size": 10.69,
+              "width": 197,
+              "height": 156,
+              "sizeInBytes": 10693
+            }
+          },
+          "hash": "app_wearables_51be1eab6e",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 44.71,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/app_wearables_51be1eab6e.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-07-06T22:32:18.155Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-07-06T22:32:18.156Z"
+        },
+        "mobile_hero_image": null,
+        "feature_cards": [
+          {
+            "id": 1537,
+            "title": "Continuous Biomarker Tracking",
+            "description": "Run ECG, glucose, and health-signal intelligence directly on the device for early anomaly detection without draining the coin cell.\n"
+          },
+          {
+            "id": 1538,
+            "title": "Always-On Safety Monitoring",
+            "description": "Enable fall detection, acoustic assault monitoring, and activity intelligence that runs quietly in the background with zero cloud latency.\n\n"
+          }
+        ]
+      },
+      {
+        "id": 1186,
+        "label": "SMART HOMES",
+        "watermark_text": "Smart Home",
+        "hero_image_alt": null,
+        "mobile_hero_image_alt": null,
+        "hero_image": {
+          "id": 17,
+          "documentId": "rwrn7yyjsmj7cecu2xzkmjee",
+          "name": "app-smart-home.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 3000,
+          "height": 3000,
+          "formats": {
+            "large": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/large_app_smart_home_83faf58ce2.png",
+              "hash": "large_app_smart_home_83faf58ce2",
+              "mime": "image/png",
+              "name": "large_app-smart-home.png",
+              "path": null,
+              "size": 215.16,
+              "width": 1000,
+              "height": 1000,
+              "sizeInBytes": 215156
+            },
+            "small": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/small_app_smart_home_83faf58ce2.png",
+              "hash": "small_app_smart_home_83faf58ce2",
+              "mime": "image/png",
+              "name": "small_app-smart-home.png",
+              "path": null,
+              "size": 71.96,
+              "width": 500,
+              "height": 500,
+              "sizeInBytes": 71960
+            },
+            "medium": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/medium_app_smart_home_83faf58ce2.png",
+              "hash": "medium_app_smart_home_83faf58ce2",
+              "mime": "image/png",
+              "name": "medium_app-smart-home.png",
+              "path": null,
+              "size": 127.8,
+              "width": 750,
+              "height": 750,
+              "sizeInBytes": 127799
+            },
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_app_smart_home_83faf58ce2.png",
+              "hash": "thumbnail_app_smart_home_83faf58ce2",
+              "mime": "image/png",
+              "name": "thumbnail_app-smart-home.png",
+              "path": null,
+              "size": 11.1,
+              "width": 156,
+              "height": 156,
+              "sizeInBytes": 11099
+            }
+          },
+          "hash": "app_smart_home_83faf58ce2",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 304.71,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/app_smart_home_83faf58ce2.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-07-06T22:32:19.455Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-07-06T22:32:19.456Z"
+        },
+        "mobile_hero_image": null,
+        "feature_cards": [
+          {
+            "id": 1539,
+            "title": "Local FaceID & Presence",
+            "description": "Recognize users and trigger appliances locally, without sending visual data to third-party cloud servers.\n"
+          },
+          {
+            "id": 1540,
+            "title": "Offline Voice Control",
+            "description": "Execute natural language commands for locks, thermostats, and home devices even without internet dependency.\n\n"
+          }
+        ]
+      },
+      {
+        "id": 1187,
+        "label": "INDUSTRIAL",
+        "watermark_text": "Industry 4.0",
+        "hero_image_alt": null,
+        "mobile_hero_image_alt": null,
+        "hero_image": {
+          "id": 18,
+          "documentId": "hadwsrvoqqrq3nxab2kdbz4a",
+          "name": "app-industrial.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 1024,
+          "height": 810,
+          "formats": {
+            "large": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/large_app_industrial_ee83802d1d.png",
+              "hash": "large_app_industrial_ee83802d1d",
+              "mime": "image/png",
+              "name": "large_app-industrial.png",
+              "path": null,
+              "size": 464.36,
+              "width": 1000,
+              "height": 791,
+              "sizeInBytes": 464362
+            },
+            "small": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/small_app_industrial_ee83802d1d.png",
+              "hash": "small_app_industrial_ee83802d1d",
+              "mime": "image/png",
+              "name": "small_app-industrial.png",
+              "path": null,
+              "size": 143.2,
+              "width": 500,
+              "height": 396,
+              "sizeInBytes": 143196
+            },
+            "medium": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/medium_app_industrial_ee83802d1d.png",
+              "hash": "medium_app_industrial_ee83802d1d",
+              "mime": "image/png",
+              "name": "medium_app-industrial.png",
+              "path": null,
+              "size": 289.43,
+              "width": 750,
+              "height": 593,
+              "sizeInBytes": 289431
+            },
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_app_industrial_ee83802d1d.png",
+              "hash": "thumbnail_app_industrial_ee83802d1d",
+              "mime": "image/png",
+              "name": "thumbnail_app-industrial.png",
+              "path": null,
+              "size": 30.24,
+              "width": 197,
+              "height": 156,
+              "sizeInBytes": 30239
+            }
+          },
+          "hash": "app_industrial_ee83802d1d",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 142.4,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/app_industrial_ee83802d1d.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-07-06T22:32:19.880Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-07-06T22:32:19.880Z"
+        },
+        "mobile_hero_image": null,
+        "feature_cards": [
+          {
+            "id": 1541,
+            "title": "Predictive Maintenance",
+            "description": "Process vibration and acoustic telemetry directly at the machine edge to detect faults before downtime begins.\n\n"
+          },
+          {
+            "id": 1542,
+            "title": "Visual Defect Detection",
+            "description": "Run continuous inspection on factory-floor camera nodes without flooding networks with raw image data.\n\n"
+          }
+        ]
+      },
+      {
+        "id": 1188,
+        "label": "AUTOMOTIVE",
+        "watermark_text": "AUTOMOTIVE",
+        "hero_image_alt": null,
+        "mobile_hero_image_alt": null,
+        "hero_image": {
+          "id": 376,
+          "documentId": "soa8x103pn70yqbnzebe07nj",
+          "name": "unnamed-(1) 1.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 985,
+          "height": 436,
+          "formats": {
+            "small": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/small_unnamed_1_1_db7d3cb823.png",
+              "hash": "small_unnamed_1_1_db7d3cb823",
+              "mime": "image/png",
+              "name": "small_unnamed-(1) 1.png",
+              "path": null,
+              "size": 92.17,
+              "width": 500,
+              "height": 221,
+              "sizeInBytes": 92174
+            },
+            "medium": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/medium_unnamed_1_1_db7d3cb823.png",
+              "hash": "medium_unnamed_1_1_db7d3cb823",
+              "mime": "image/png",
+              "name": "medium_unnamed-(1) 1.png",
+              "path": null,
+              "size": 180.06,
+              "width": 750,
+              "height": 332,
+              "sizeInBytes": 180057
+            },
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_unnamed_1_1_db7d3cb823.png",
+              "hash": "thumbnail_unnamed_1_1_db7d3cb823",
+              "mime": "image/png",
+              "name": "thumbnail_unnamed-(1) 1.png",
+              "path": null,
+              "size": 29.44,
+              "width": 245,
+              "height": 108,
+              "sizeInBytes": 29442
+            }
+          },
+          "hash": "unnamed_1_1_db7d3cb823",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 68.5,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/unnamed_1_1_db7d3cb823.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-08-09T23:19:45.821Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-08-09T23:19:45.821Z"
+        },
+        "mobile_hero_image": null,
+        "feature_cards": [
+          {
+            "id": 1543,
+            "title": "Tire Pressure Monitoring",
+            "description": "On-device air pressure and temperature sensors provide real-time alerts for tire health to prevent accidents and optimize maintenance and fuel expenses"
+          },
+          {
+            "id": 1544,
+            "title": "Battery Management",
+            "description": "Monitoring of cell utilization, charging patterns, heat generation, etc. in electric vehicle batteries to prevent mishaps and optimize battery life"
+          }
+        ]
+      },
+      {
+        "id": 1189,
+        "label": "MEDICAL",
+        "watermark_text": "MEDICAL",
+        "hero_image_alt": null,
+        "mobile_hero_image_alt": null,
+        "hero_image": {
+          "id": 20,
+          "documentId": "scj3cdg04fnc5zsgl5p2rlqr",
+          "name": "app-medical.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 1024,
+          "height": 810,
+          "formats": {
+            "large": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/large_app_medical_b81a9fc9e4.png",
+              "hash": "large_app_medical_b81a9fc9e4",
+              "mime": "image/png",
+              "name": "large_app-medical.png",
+              "path": null,
+              "size": 576.46,
+              "width": 1000,
+              "height": 791,
+              "sizeInBytes": 576459
+            },
+            "small": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/small_app_medical_b81a9fc9e4.png",
+              "hash": "small_app_medical_b81a9fc9e4",
+              "mime": "image/png",
+              "name": "small_app-medical.png",
+              "path": null,
+              "size": 169.75,
+              "width": 500,
+              "height": 396,
+              "sizeInBytes": 169745
+            },
+            "medium": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/medium_app_medical_b81a9fc9e4.png",
+              "hash": "medium_app_medical_b81a9fc9e4",
+              "mime": "image/png",
+              "name": "medium_app-medical.png",
+              "path": null,
+              "size": 350.91,
+              "width": 750,
+              "height": 593,
+              "sizeInBytes": 350912
+            },
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_app_medical_b81a9fc9e4.png",
+              "hash": "thumbnail_app_medical_b81a9fc9e4",
+              "mime": "image/png",
+              "name": "thumbnail_app-medical.png",
+              "path": null,
+              "size": 34.61,
+              "width": 197,
+              "height": 156,
+              "sizeInBytes": 34607
+            }
+          },
+          "hash": "app_medical_b81a9fc9e4",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 193.29,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/app_medical_b81a9fc9e4.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-07-06T22:32:20.787Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-07-06T22:32:20.787Z"
+        },
+        "mobile_hero_image": null,
+        "feature_cards": [
+          {
+            "id": 1545,
+            "title": "Real-Time Anomaly Detection",
+            "description": "Continuous biometric signals can be processed locally to detect irregular patterns faster, without depending on cloud connectivity.\n\n"
+          },
+          {
+            "id": 1546,
+            "title": "Miniaturized Monitoring Devices",
+            "description": "Run clinical-style monitoring in compact form factors where battery life, privacy, and instant response matter most.\n\n"
+          }
+        ]
+      },
+      {
+        "id": 1190,
+        "label": "AGRICULTURE",
+        "watermark_text": "Agriculture",
+        "hero_image_alt": null,
+        "mobile_hero_image_alt": null,
+        "hero_image": {
+          "id": 21,
+          "documentId": "ij1oh3t4c1mi6k7a6s4g3rel",
+          "name": "app-agriculture.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 1025,
+          "height": 927,
+          "formats": {
+            "large": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/large_app_agriculture_f40693fb35.png",
+              "hash": "large_app_agriculture_f40693fb35",
+              "mime": "image/png",
+              "name": "large_app-agriculture.png",
+              "path": null,
+              "size": 682.51,
+              "width": 1000,
+              "height": 904,
+              "sizeInBytes": 682506
+            },
+            "small": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/small_app_agriculture_f40693fb35.png",
+              "hash": "small_app_agriculture_f40693fb35",
+              "mime": "image/png",
+              "name": "small_app-agriculture.png",
+              "path": null,
+              "size": 195.61,
+              "width": 500,
+              "height": 452,
+              "sizeInBytes": 195609
+            },
+            "medium": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/medium_app_agriculture_f40693fb35.png",
+              "hash": "medium_app_agriculture_f40693fb35",
+              "mime": "image/png",
+              "name": "medium_app-agriculture.png",
+              "path": null,
+              "size": 412.06,
+              "width": 750,
+              "height": 678,
+              "sizeInBytes": 412064
+            },
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_app_agriculture_f40693fb35.png",
+              "hash": "thumbnail_app_agriculture_f40693fb35",
+              "mime": "image/png",
+              "name": "thumbnail_app-agriculture.png",
+              "path": null,
+              "size": 30.84,
+              "width": 172,
+              "height": 156,
+              "sizeInBytes": 30835
+            }
+          },
+          "hash": "app_agriculture_f40693fb35",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 212.31,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/app_agriculture_f40693fb35.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-07-06T22:32:21.476Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-07-06T22:32:21.477Z"
+        },
+        "mobile_hero_image": null,
+        "feature_cards": [
+          {
+            "id": 1547,
+            "title": "Remote Visual Monitoring",
+            "description": "Deploy low-power vision intelligence in fields, farms, and remote environments where cloud access is unreliable.\n\n"
+          },
+          {
+            "id": 1548,
+            "title": "Behavioral Tracking",
+            "description": "Track livestock movement and behavior locally to detect health, safety, or activity changes without constant data transmission.\n\n"
+          }
+        ]
+      },
+      {
+        "id": 1191,
+        "label": "DRONES",
+        "watermark_text": "Drones",
+        "hero_image_alt": null,
+        "mobile_hero_image_alt": null,
+        "hero_image": {
+          "id": 22,
+          "documentId": "k196y0lcgkvsdd450d1mo2sw",
+          "name": "app-drones.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 1024,
+          "height": 810,
+          "formats": {
+            "large": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/large_app_drones_5a0544e92e.png",
+              "hash": "large_app_drones_5a0544e92e",
+              "mime": "image/png",
+              "name": "large_app-drones.png",
+              "path": null,
+              "size": 531.77,
+              "width": 1000,
+              "height": 791,
+              "sizeInBytes": 531767
+            },
+            "small": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/small_app_drones_5a0544e92e.png",
+              "hash": "small_app_drones_5a0544e92e",
+              "mime": "image/png",
+              "name": "small_app-drones.png",
+              "path": null,
+              "size": 160.1,
+              "width": 500,
+              "height": 396,
+              "sizeInBytes": 160105
+            },
+            "medium": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/medium_app_drones_5a0544e92e.png",
+              "hash": "medium_app_drones_5a0544e92e",
+              "mime": "image/png",
+              "name": "medium_app-drones.png",
+              "path": null,
+              "size": 327.88,
+              "width": 750,
+              "height": 593,
+              "sizeInBytes": 327876
+            },
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_app_drones_5a0544e92e.png",
+              "hash": "thumbnail_app_drones_5a0544e92e",
+              "mime": "image/png",
+              "name": "thumbnail_app-drones.png",
+              "path": null,
+              "size": 33.86,
+              "width": 197,
+              "height": 156,
+              "sizeInBytes": 33863
+            }
+          },
+          "hash": "app_drones_5a0544e92e",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 149.89,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/app_drones_5a0544e92e.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-07-06T22:32:21.921Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-07-06T22:32:21.921Z"
+        },
+        "mobile_hero_image": null,
+        "feature_cards": [
+          {
+            "id": 1549,
+            "title": "Autonomous Navigation",
+            "description": "Process object detection and movement awareness directly onboard to support faster, more responsive flight decisions.\n"
+          },
+          {
+            "id": 1550,
+            "title": "Flight-Time Efficient AI",
+            "description": "Run local intelligence without sacrificing critical battery life, keeping drones airborne longer while reducing cloud dependence.\n\n"
+          }
+        ]
+      },
+      {
+        "id": 1192,
+        "label": "HEARABLES",
+        "watermark_text": "Hearables",
+        "hero_image_alt": null,
+        "mobile_hero_image_alt": null,
+        "hero_image": {
+          "id": 23,
+          "documentId": "yebb48aioamjekbrcm5dcvkr",
+          "name": "app-hearables.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 1024,
+          "height": 809,
+          "formats": {
+            "large": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/large_app_hearables_0ef700ef6e.png",
+              "hash": "large_app_hearables_0ef700ef6e",
+              "mime": "image/png",
+              "name": "large_app-hearables.png",
+              "path": null,
+              "size": 121.11,
+              "width": 1000,
+              "height": 790,
+              "sizeInBytes": 121108
+            },
+            "small": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/small_app_hearables_0ef700ef6e.png",
+              "hash": "small_app_hearables_0ef700ef6e",
+              "mime": "image/png",
+              "name": "small_app-hearables.png",
+              "path": null,
+              "size": 41.22,
+              "width": 500,
+              "height": 395,
+              "sizeInBytes": 41222
+            },
+            "medium": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/medium_app_hearables_0ef700ef6e.png",
+              "hash": "medium_app_hearables_0ef700ef6e",
+              "mime": "image/png",
+              "name": "medium_app-hearables.png",
+              "path": null,
+              "size": 79.5,
+              "width": 750,
+              "height": 593,
+              "sizeInBytes": 79499
+            },
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_app_hearables_0ef700ef6e.png",
+              "hash": "thumbnail_app_hearables_0ef700ef6e",
+              "mime": "image/png",
+              "name": "thumbnail_app-hearables.png",
+              "path": null,
+              "size": 9.42,
+              "width": 197,
+              "height": 156,
+              "sizeInBytes": 9421
+            }
+          },
+          "hash": "app_hearables_0ef700ef6e",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 30.02,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/app_hearables_0ef700ef6e.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-07-06T22:32:22.367Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-07-06T22:32:22.367Z"
+        },
+        "mobile_hero_image": null,
+        "feature_cards": [
+          {
+            "id": 1551,
+            "title": "Always-On Wake Words",
+            "description": "Run continuous wake-word detection and voice commands locally inside earbuds without draining the tiny audio battery.\n"
+          },
+          {
+            "id": 1552,
+            "title": "Adaptive Voice Isolation",
+            "description": "Separate the user’s voice from noisy surroundings in real time, directly on-device, without relying on phone or cloud processing.\n\n"
+          }
+        ]
+      }
+    ]
+  },
+  "model_zoo_kits": {
+    "id": 42,
+    "heading": "The fastest path from model to running AI.",
+    "subheading": "Bring your own model or start from a pre-built one, compile in minutes with ModelForge, and watch it run live on real silicon - even from your phone.",
+    "bottom_subheading": null,
+    "bottom_cta_1_label": "BROWSE THE MODEL ZOO",
+    "bottom_cta_1_link": "http://slpgtae2b5emmhjak56tc7j6.178.236.185.20.sslip.io/model-zoo",
+    "bottom_cta_2_label": "EXPLORE THE DEVELOPERS HUB",
+    "bottom_cta_2_link": "http://slpgtae2b5emmhjak56tc7j6.178.236.185.20.sslip.io/developer",
+    "cards": [
+      {
+        "id": 52,
+        "alt": null,
+        "title": "ModelForge - Your model, compiled in minutes.",
+        "desc": "Bring TensorFlow, Keras, or ONNX. Push-button compile onto A-Cube no rewrites, no proprietary toolchain.",
+        "cta": "Explore the Developer Hub",
+        "cta_href": "/developer",
+        "image": {
+          "id": 540,
+          "documentId": "xjz1jjc11639bywg4c9jgt4h",
+          "name": "brain.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 1402,
+          "height": 1122,
+          "formats": {
+            "large": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/large_brain_033bfc0a27.png",
+              "hash": "large_brain_033bfc0a27",
+              "mime": "image/png",
+              "name": "large_brain.png",
+              "path": null,
+              "size": 936.19,
+              "width": 1000,
+              "height": 800,
+              "sizeInBytes": 936187
+            },
+            "small": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/small_brain_033bfc0a27.png",
+              "hash": "small_brain_033bfc0a27",
+              "mime": "image/png",
+              "name": "small_brain.png",
+              "path": null,
+              "size": 251.53,
+              "width": 500,
+              "height": 400,
+              "sizeInBytes": 251533
+            },
+            "medium": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/medium_brain_033bfc0a27.png",
+              "hash": "medium_brain_033bfc0a27",
+              "mime": "image/png",
+              "name": "medium_brain.png",
+              "path": null,
+              "size": 544.75,
+              "width": 750,
+              "height": 600,
+              "sizeInBytes": 544747
+            },
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_brain_033bfc0a27.png",
+              "hash": "thumbnail_brain_033bfc0a27",
+              "mime": "image/png",
+              "name": "thumbnail_brain.png",
+              "path": null,
+              "size": 44.45,
+              "width": 195,
+              "height": 156,
+              "sizeInBytes": 44454
+            }
+          },
+          "hash": "brain_033bfc0a27",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 380.89,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/brain_033bfc0a27.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-10-12T14:49:34.534Z",
+          "updatedAt": "2026-10-12T14:49:34.534Z",
+          "publishedAt": "2026-10-12T14:49:34.535Z"
+        }
+      },
+      {
+        "id": 53,
+        "alt": null,
+        "title": "The Model Zoo - Skip the blank page. ",
+        "desc": "Deploy a pre-built, GPX-tuned model to your dev or eval kit in one click, and see it work in seconds.",
+        "cta": "Browse the Model Zoo",
+        "cta_href": "/model-zoo",
+        "image": {
+          "id": 541,
+          "documentId": "olz9djovwmk4a1maqvwtohwi",
+          "name": "center.jpeg",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 1254,
+          "height": 1254,
+          "formats": {
+            "large": {
+              "ext": ".jpeg",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/large_center_5372abbf06.jpeg",
+              "hash": "large_center_5372abbf06",
+              "mime": "image/jpeg",
+              "name": "large_center.jpeg",
+              "path": null,
+              "size": 188.64,
+              "width": 1000,
+              "height": 1000,
+              "sizeInBytes": 188636
+            },
+            "small": {
+              "ext": ".jpeg",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/small_center_5372abbf06.jpeg",
+              "hash": "small_center_5372abbf06",
+              "mime": "image/jpeg",
+              "name": "small_center.jpeg",
+              "path": null,
+              "size": 59.38,
+              "width": 500,
+              "height": 500,
+              "sizeInBytes": 59379
+            },
+            "medium": {
+              "ext": ".jpeg",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/medium_center_5372abbf06.jpeg",
+              "hash": "medium_center_5372abbf06",
+              "mime": "image/jpeg",
+              "name": "medium_center.jpeg",
+              "path": null,
+              "size": 119.19,
+              "width": 750,
+              "height": 750,
+              "sizeInBytes": 119186
+            },
+            "thumbnail": {
+              "ext": ".jpeg",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_center_5372abbf06.jpeg",
+              "hash": "thumbnail_center_5372abbf06",
+              "mime": "image/jpeg",
+              "name": "thumbnail_center.jpeg",
+              "path": null,
+              "size": 6.74,
+              "width": 156,
+              "height": 156,
+              "sizeInBytes": 6744
+            }
+          },
+          "hash": "center_5372abbf06",
+          "ext": ".jpeg",
+          "mime": "image/jpeg",
+          "size": 264.9,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/center_5372abbf06.jpeg",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-10-12T14:53:02.173Z",
+          "updatedAt": "2026-10-12T14:53:02.173Z",
+          "publishedAt": "2026-10-12T14:53:02.174Z"
+        }
+      },
+      {
+        "id": 54,
+        "alt": null,
+        "title": "ApplicationForge - See it live, from your phone. ",
+        "desc": "Pair with an eval kit over Bluetooth and watch AI run in real time. ",
+        "cta": " Download the App",
+        "cta_href": null,
+        "image": {
+          "id": 531,
+          "documentId": "hgbt7z9i3afgov1mlhyzy1v0",
+          "name": "kit-2.webp",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 691,
+          "height": 654,
+          "formats": {
+            "small": {
+              "ext": ".webp",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/small_kit_2_16c88c1f19.webp",
+              "hash": "small_kit_2_16c88c1f19",
+              "mime": "image/webp",
+              "name": "small_kit-2.webp",
+              "path": null,
+              "size": 9.9,
+              "width": 500,
+              "height": 473,
+              "sizeInBytes": 9898
+            },
+            "thumbnail": {
+              "ext": ".webp",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_kit_2_16c88c1f19.webp",
+              "hash": "thumbnail_kit_2_16c88c1f19",
+              "mime": "image/webp",
+              "name": "thumbnail_kit-2.webp",
+              "path": null,
+              "size": 2.37,
+              "width": 165,
+              "height": 156,
+              "sizeInBytes": 2370
+            }
+          },
+          "hash": "kit_2_16c88c1f19",
+          "ext": ".webp",
+          "mime": "image/webp",
+          "size": 15.25,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/kit_2_16c88c1f19.webp",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-10-12T09:15:05.966Z",
+          "updatedAt": "2026-10-12T09:15:05.966Z",
+          "publishedAt": "2026-10-12T09:15:05.967Z"
+        }
+      }
+    ]
+  },
+  "developer_platform": {
+    "id": 151,
+    "heading": "Build with Ambient",
+    "subtitle": "Turn prototypes into real products through a connected platform of silicon, kits, modules, and software, designed to accelerate the path to deployment",
+    "cards": [
+      {
+        "id": 601,
+        "title": "Explore silicon",
+        "body": "Start with Ambient's AI-native compute products and see how platform advantages translate into real hardware",
+        "alt": null,
+        "image": {
+          "id": 407,
+          "documentId": "du69ay31rfud9wi8i7brj71o",
+          "name": "Chipset 1.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 528,
+          "height": 509,
+          "formats": {
+            "small": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/small_Chipset_1_43958c7899.png",
+              "hash": "small_Chipset_1_43958c7899",
+              "mime": "image/png",
+              "name": "small_Chipset 1.png",
+              "path": null,
+              "size": 238.82,
+              "width": 500,
+              "height": 482,
+              "sizeInBytes": 238815
+            },
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_Chipset_1_43958c7899.png",
+              "hash": "thumbnail_Chipset_1_43958c7899",
+              "mime": "image/png",
+              "name": "thumbnail_Chipset 1.png",
+              "path": null,
+              "size": 29.86,
+              "width": 162,
+              "height": 156,
+              "sizeInBytes": 29864
+            }
+          },
+          "hash": "Chipset_1_43958c7899",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 96.29,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/Chipset_1_43958c7899.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-08-20T07:26:16.399Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-08-20T07:26:16.399Z"
+        },
+        "cta": null
+      },
+      {
+        "id": 602,
+        "title": "Develop with ModelForge",
+        "body": "Train, deploy, and optimize through a development workflow designed to help teams build with Ambient without starting from scratch",
+        "alt": null,
+        "image": null,
+        "cta": null
+      },
+      {
+        "id": 603,
+        "title": "Evaluate with Evaluation kits",
+        "body": "Get hands-on with the platform through development kits designed to accelerate validation and shorten time to first insight",
+        "alt": null,
+        "image": {
+          "id": 468,
+          "documentId": "q53ux90j3sty870j7joklo8w",
+          "name": "card-image-modules-figma (1).png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 207,
+          "height": 183,
+          "formats": {
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_card_image_modules_figma_1_b3ef4c836e.png",
+              "hash": "thumbnail_card_image_modules_figma_1_b3ef4c836e",
+              "mime": "image/png",
+              "name": "thumbnail_card-image-modules-figma (1).png",
+              "path": null,
+              "size": 46.6,
+              "width": 176,
+              "height": 156,
+              "sizeInBytes": 46598
+            }
+          },
+          "hash": "card_image_modules_figma_1_b3ef4c836e",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 16.2,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/card_image_modules_figma_1_b3ef4c836e.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-09-19T08:21:46.992Z",
+          "updatedAt": "2026-09-19T08:21:46.992Z",
+          "publishedAt": "2026-09-19T08:21:46.993Z"
+        },
+        "cta": null
+      },
+      {
+        "id": 604,
+        "title": "Prototype with application-focused modules",
+        "body": "Move faster with modules designed around real-world verticals and product categories",
+        "alt": null,
+        "image": {
+          "id": 558,
+          "documentId": "pjf2qhc1l6hxgcdnzml43m2h",
+          "name": "1c35dc66170a256d427dc4f92fa4d173ec12c0f6.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 1915,
+          "height": 821,
+          "formats": {
+            "large": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/large_1c35dc66170a256d427dc4f92fa4d173ec12c0f6_1cade4ec77.png",
+              "hash": "large_1c35dc66170a256d427dc4f92fa4d173ec12c0f6_1cade4ec77",
+              "mime": "image/png",
+              "name": "large_1c35dc66170a256d427dc4f92fa4d173ec12c0f6.png",
+              "path": null,
+              "size": 258.37,
+              "width": 1000,
+              "height": 429,
+              "sizeInBytes": 258365
+            },
+            "small": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/small_1c35dc66170a256d427dc4f92fa4d173ec12c0f6_1cade4ec77.png",
+              "hash": "small_1c35dc66170a256d427dc4f92fa4d173ec12c0f6_1cade4ec77",
+              "mime": "image/png",
+              "name": "small_1c35dc66170a256d427dc4f92fa4d173ec12c0f6.png",
+              "path": null,
+              "size": 71.72,
+              "width": 500,
+              "height": 214,
+              "sizeInBytes": 71717
+            },
+            "medium": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/medium_1c35dc66170a256d427dc4f92fa4d173ec12c0f6_1cade4ec77.png",
+              "hash": "medium_1c35dc66170a256d427dc4f92fa4d173ec12c0f6_1cade4ec77",
+              "mime": "image/png",
+              "name": "medium_1c35dc66170a256d427dc4f92fa4d173ec12c0f6.png",
+              "path": null,
+              "size": 151.77,
+              "width": 750,
+              "height": 322,
+              "sizeInBytes": 151774
+            },
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_1c35dc66170a256d427dc4f92fa4d173ec12c0f6_1cade4ec77.png",
+              "hash": "thumbnail_1c35dc66170a256d427dc4f92fa4d173ec12c0f6_1cade4ec77",
+              "mime": "image/png",
+              "name": "thumbnail_1c35dc66170a256d427dc4f92fa4d173ec12c0f6.png",
+              "path": null,
+              "size": 20.09,
+              "width": 245,
+              "height": 105,
+              "sizeInBytes": 20089
+            }
+          },
+          "hash": "1c35dc66170a256d427dc4f92fa4d173ec12c0f6_1cade4ec77",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 248.24,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/1c35dc66170a256d427dc4f92fa4d173ec12c0f6_1cade4ec77.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-10-16T05:01:56.861Z",
+          "updatedAt": "2026-10-16T05:01:56.861Z",
+          "publishedAt": "2026-10-16T05:01:56.862Z"
+        },
+        "cta": null
+      }
+    ]
+  },
+  "ecosystem": {
+    "id": 149,
+    "heading": "Supported by a growing ecosystem",
+    "subtitle": "Ambient works with partners across silicon, development, distribution, and system integration, helping teams move from evaluation to deployment with confidence",
+    "cta": {
+      "id": 325,
+      "label": "WORK WITH US",
+      "href": "/partners"
+    },
+    "silicon_partners": [
+      {
+        "id": 1366,
+        "name": "Partner 1",
+        "alt": null,
+        "logo": {
+          "id": 28,
+          "documentId": "her95v4sdffw3cx8b2of2o4n",
+          "name": "logo-partner-1.svg",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 86,
+          "height": 23,
+          "formats": null,
+          "hash": "logo_partner_1_e64de3512e",
+          "ext": ".svg",
+          "mime": "image/svg+xml",
+          "size": 8.39,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/logo_partner_1_e64de3512e.svg",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-07-06T22:32:23.963Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-07-06T22:32:23.963Z"
+        }
+      },
+      {
+        "id": 1367,
+        "name": "Partner 2",
+        "alt": null,
+        "logo": {
+          "id": 29,
+          "documentId": "e6uvda8d0hr6rd7q6xngqu5w",
+          "name": "logo-partner-2.svg",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 120,
+          "height": 22,
+          "formats": null,
+          "hash": "logo_partner_2_54b17428e8",
+          "ext": ".svg",
+          "mime": "image/svg+xml",
+          "size": 10.62,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/logo_partner_2_54b17428e8.svg",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-07-06T22:32:24.043Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-07-06T22:32:24.044Z"
+        }
+      },
+      {
+        "id": 1368,
+        "name": "Partner 3",
+        "alt": null,
+        "logo": {
+          "id": 30,
+          "documentId": "hcizsuzge7uboo1605iumsd7",
+          "name": "logo-partner-3.svg",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 81,
+          "height": 19,
+          "formats": null,
+          "hash": "logo_partner_3_ad3f448d8a",
+          "ext": ".svg",
+          "mime": "image/svg+xml",
+          "size": 9.27,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/logo_partner_3_ad3f448d8a.svg",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-07-06T22:32:24.133Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-07-06T22:32:24.133Z"
+        }
+      },
+      {
+        "id": 1369,
+        "name": "Partner 4",
+        "alt": null,
+        "logo": {
+          "id": 315,
+          "documentId": "uernnvw82out3oz35t9itkyh",
+          "name": "4.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 89,
+          "height": 35,
+          "formats": null,
+          "hash": "4_ce6a34361e",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 0.68,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/4_ce6a34361e.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-08-02T17:38:45.428Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-08-02T17:38:45.428Z"
+        }
+      },
+      {
+        "id": 1370,
+        "name": "Partner 5",
+        "alt": null,
+        "logo": {
+          "id": 316,
+          "documentId": "n1gyrqpaw6mm1jsahnt3jlu0",
+          "name": "5.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 150,
+          "height": 35,
+          "formats": null,
+          "hash": "5_31ce87c696",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 0.76,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/5_31ce87c696.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-08-02T17:38:55.436Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-08-02T17:38:55.436Z"
+        }
+      }
+    ],
+    "development_partners": [
+      {
+        "id": 1371,
+        "name": "Tezos",
+        "alt": null,
+        "logo": {
+          "id": 31,
+          "documentId": "atucdwttwnjrl51y08pbzu9j",
+          "name": "logo-partner-4.svg",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 35,
+          "height": 35,
+          "formats": null,
+          "hash": "logo_partner_4_dbddb58513",
+          "ext": ".svg",
+          "mime": "image/svg+xml",
+          "size": 5.22,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/logo_partner_4_dbddb58513.svg",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-07-06T22:32:24.211Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-07-06T22:32:24.212Z"
+        }
+      },
+      {
+        "id": 1372,
+        "name": "Octane",
+        "alt": null,
+        "logo": {
+          "id": 32,
+          "documentId": "ucb27wintz6racx9dxx1af7u",
+          "name": "logo-octane.svg",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 35,
+          "height": 35,
+          "formats": null,
+          "hash": "logo_octane_59661e6327",
+          "ext": ".svg",
+          "mime": "image/svg+xml",
+          "size": 1.52,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/logo_octane_59661e6327.svg",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-07-06T22:32:24.291Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-07-06T22:32:24.291Z"
+        }
+      },
+      {
+        "id": 1373,
+        "name": "Dev Partner 3",
+        "alt": null,
+        "logo": {
+          "id": 319,
+          "documentId": "ikcn998yz7w5fqp6gnu6j8k0",
+          "name": "logo_partner_3_ad3f448d8a.svg",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 81,
+          "height": 19,
+          "formats": null,
+          "hash": "logo_partner_3_ad3f448d8a_73734a9e40",
+          "ext": ".svg",
+          "mime": "image/svg+xml",
+          "size": 9.27,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/logo_partner_3_ad3f448d8a_73734a9e40.svg",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-08-02T17:39:33.995Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-08-02T17:39:33.995Z"
+        }
+      },
+      {
+        "id": 1374,
+        "name": "Dev Partner 4",
+        "alt": null,
+        "logo": {
+          "id": 317,
+          "documentId": "ej28ts3p2st4yvddatxuby3b",
+          "name": "4.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 89,
+          "height": 35,
+          "formats": null,
+          "hash": "4_3acb9589f4",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 0.68,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/4_3acb9589f4.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-08-02T17:39:06.815Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-08-02T17:39:06.815Z"
+        }
+      },
+      {
+        "id": 1375,
+        "name": "Dev Partner 5",
+        "alt": null,
+        "logo": {
+          "id": 318,
+          "documentId": "jm01taesmph0bxeolx16xz5z",
+          "name": "5.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 150,
+          "height": 35,
+          "formats": null,
+          "hash": "5_7870697fcc",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 0.76,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/5_7870697fcc.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-08-02T17:39:20.195Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-08-02T17:39:20.195Z"
+        }
+      }
+    ]
+  },
+  "latest_news": {
+    "id": 149,
+    "heading": "Latest from Ambient",
+    "subtitle": "Follow the latest from Ambient, from product milestones and technical insights to partnerships, events, and the ideas shaping the future of AI compute.",
+    "cta_label": "Explore more",
+    "cta_href": "/resources",
+    "cards": [
+      {
+        "id": 646,
+        "title": "IoT Insider Highlights Ambient Scientific’s AI Roadmap",
+        "body": "IoT Insider explores Ambient Scientific’s roadmap for scaling its energy-efficient AI architecture from edge devices toward laptops, servers, robotics, and network infrastructure.",
+        "cta_label": "read more",
+        "alt": null,
+        "cta_href": null,
+        "tag": null,
+        "date": null,
+        "image": {
+          "id": 342,
+          "documentId": "mtilo22jpeb9tv9sfb5h4mc4",
+          "name": "thumbnail_1_ef912122a5.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 386,
+          "height": 229,
+          "formats": {
+            "thumbnail": {
+              "ext": ".png",
+              "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_thumbnail_1_ef912122a5_be9252a571.png",
+              "hash": "thumbnail_thumbnail_1_ef912122a5_be9252a571",
+              "mime": "image/jpeg",
+              "name": "thumbnail_thumbnail_1_ef912122a5.png",
+              "path": null,
+              "size": 8.95,
+              "width": 245,
+              "height": 145,
+              "sizeInBytes": 8954
+            }
+          },
+          "hash": "thumbnail_1_ef912122a5_be9252a571",
+          "ext": ".png",
+          "mime": "image/jpeg",
+          "size": 17.6,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_1_ef912122a5_be9252a571.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-08-05T16:56:11.411Z",
+          "updatedAt": "2026-10-06T05:17:02.054Z",
+          "publishedAt": "2026-08-05T16:56:11.412Z"
+        }
+      },
+      {
+        "id": 647,
+        "title": "The Physics of Compute-in-Memory Architecture",
+        "body": "Deep dive into how Ambient's analog processing eliminates the memory bottleneck that has plagued digital AI accelerators for years.",
+        "cta_label": "read more",
+        "alt": null,
+        "cta_href": null,
+        "tag": null,
+        "date": null,
+        "image": {
+          "id": 343,
+          "documentId": "h3wlzb7kthabcr54a9dl40mc",
+          "name": "thumbnail_2_4b0fe07d19.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 245,
+          "height": 145,
+          "formats": null,
+          "hash": "thumbnail_2_4b0fe07d19_74423a1918",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 33.03,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_2_4b0fe07d19_74423a1918.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-08-05T16:56:32.766Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-08-05T16:56:32.766Z"
+        }
+      },
+      {
+        "id": 648,
+        "title": "Introducing GPX10: Ultra-Low Power AI at the Edge",
+        "body": "Our first-generation AI chip brings unprecedented efficiency to edge computing, enabling advanced ML models to run on a fraction of the power.",
+        "cta_label": "read more",
+        "alt": null,
+        "cta_href": null,
+        "tag": null,
+        "date": null,
+        "image": {
+          "id": 344,
+          "documentId": "c1hdiyvmbffojhm9dsrzvzc7",
+          "name": "thumbnail_3_4d0d19501b.png",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 245,
+          "height": 145,
+          "formats": null,
+          "hash": "thumbnail_3_4d0d19501b_9a1cff01ee",
+          "ext": ".png",
+          "mime": "image/png",
+          "size": 16,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_3_4d0d19501b_9a1cff01ee.png",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-08-05T16:56:47.911Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-08-05T16:56:47.912Z"
+        }
+      }
+    ]
+  },
+  "technology": {
+    "id": 149,
+    "heading": "Re-architecting the physics of AI compute",
+    "image_alt": null,
+    "subheading": null,
+    "subtitle": null,
+    "tag": {
+      "id": 1083,
+      "text": "The Breakthrough"
+    },
+    "cta": {
+      "id": 2287,
+      "label": "Explore Technology",
+      "href": "/technology",
+      "variant": "primary"
+    },
+    "features": [
+      {
+        "id": 445,
+        "title": "Speak AI natively",
+        "description": "Standard chips waste time translating AI workloads. Our architecture processes matrix math natively for high-density performance.",
+        "alt": null,
+        "icon": {
+          "id": 11,
+          "documentId": "b8jshkpz0kthr2ub8u2hrfjq",
+          "name": "icon-speak-ai.svg",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 42,
+          "height": 42,
+          "formats": null,
+          "hash": "icon_speak_ai_efef7670a9",
+          "ext": ".svg",
+          "mime": "image/svg+xml",
+          "size": 11.13,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/icon_speak_ai_efef7670a9.svg",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-07-06T22:32:16.597Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-07-06T22:32:16.597Z"
+        }
+      },
+      {
+        "id": 446,
+        "title": "Compute where the data lives",
+        "description": "We built our analog processing engine in memory. Processing in place eliminates data commute, saving battery life.",
+        "alt": null,
+        "icon": {
+          "id": 12,
+          "documentId": "khmyh89vy8fvo870e8j7lerl",
+          "name": "icon-compute.svg",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 42,
+          "height": 42,
+          "formats": null,
+          "hash": "icon_compute_406035f24c",
+          "ext": ".svg",
+          "mime": "image/svg+xml",
+          "size": 10.51,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/icon_compute_406035f24c.svg",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-07-06T22:32:16.690Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-07-06T22:32:16.690Z"
+        }
+      },
+      {
+        "id": 447,
+        "title": "Standard tools. Zero friction",
+        "description": "Our platform adapts to your software. Compile your PyTorch or TensorFlow models in minutes, no coding needed.",
+        "alt": null,
+        "icon": {
+          "id": 13,
+          "documentId": "c9ott8b8usl79jroyoj2c790",
+          "name": "icon-tools.svg",
+          "alternativeText": null,
+          "caption": null,
+          "focalPoint": null,
+          "width": 42,
+          "height": 42,
+          "formats": null,
+          "hash": "icon_tools_3bcae3c455",
+          "ext": ".svg",
+          "mime": "image/svg+xml",
+          "size": 3.16,
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/icon_tools_3bcae3c455.svg",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-azure-sp",
+          "provider_metadata": null,
+          "createdAt": "2026-07-06T22:32:16.763Z",
+          "updatedAt": "2026-10-13T04:35:17.317Z",
+          "publishedAt": "2026-07-06T22:32:16.763Z"
+        }
+      }
+    ],
+    "image": {
+      "id": 377,
+      "documentId": "wigv871lizvhrzc6zzf67mwa",
+      "name": "Frame 2147240800.png",
+      "alternativeText": null,
+      "caption": null,
+      "focalPoint": null,
+      "width": 800,
+      "height": 434,
+      "formats": {
+        "small": {
+          "ext": ".png",
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/small_Frame_2147240800_34b3d1b6cb.png",
+          "hash": "small_Frame_2147240800_34b3d1b6cb",
+          "mime": "image/png",
+          "name": "small_Frame 2147240800.png",
+          "path": null,
+          "size": 165.42,
+          "width": 500,
+          "height": 271,
+          "sizeInBytes": 165422
+        },
+        "medium": {
+          "ext": ".png",
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/medium_Frame_2147240800_34b3d1b6cb.png",
+          "hash": "medium_Frame_2147240800_34b3d1b6cb",
+          "mime": "image/png",
+          "name": "medium_Frame 2147240800.png",
+          "path": null,
+          "size": 340.05,
+          "width": 750,
+          "height": 407,
+          "sizeInBytes": 340047
+        },
+        "thumbnail": {
+          "ext": ".png",
+          "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/thumbnail_Frame_2147240800_34b3d1b6cb.png",
+          "hash": "thumbnail_Frame_2147240800_34b3d1b6cb",
+          "mime": "image/png",
+          "name": "thumbnail_Frame 2147240800.png",
+          "path": null,
+          "size": 46.51,
+          "width": 245,
+          "height": 133,
+          "sizeInBytes": 46510
+        }
+      },
+      "hash": "Frame_2147240800_34b3d1b6cb",
+      "ext": ".png",
+      "mime": "image/png",
+      "size": 99.46,
+      "url": "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/Frame_2147240800_34b3d1b6cb.png",
+      "previewUrl": null,
+      "provider": "strapi-provider-upload-azure-sp",
+      "provider_metadata": null,
+      "createdAt": "2026-08-09T23:24:12.094Z",
+      "updatedAt": "2026-10-13T04:35:17.317Z",
+      "publishedAt": "2026-08-09T23:24:12.095Z",
+      "related": [
+        {
+          "id": 35,
+          "heading": "Re-architecting the physics of AI compute",
+          "image_alt": null,
+          "subheading": null,
+          "subtitle": null,
+          "__type": "home.technology"
+        },
+        {
+          "id": 149,
+          "heading": "Re-architecting the physics of AI compute",
+          "image_alt": null,
+          "subheading": null,
+          "subtitle": null,
+          "__type": "home.technology"
+        }
+      ]
+    }
+  }
+}

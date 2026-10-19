@@ -120,7 +120,7 @@ function ProductsStartBuildingDesktop({
 }) {
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
-    <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center pb-[120px] pt-0 mt-[-60px]">
+    <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center pb-[120px] pt-[100px]">
       {/* Section title — 2903:2609 (centered, w=650) */}
       <div
         className="flex flex-col items-center gap-[24px]"
@@ -296,7 +296,7 @@ function ProductsStartBuildingMobile({
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
     <div
-      className="relative w-full px-[24px] pt-[40px] pb-[40px]"
+      className="relative w-full px-[24px] pt-[60px] pb-[40px]"
       aria-label="Start building with GPX10 Pro"
     >
       {/* Title */}

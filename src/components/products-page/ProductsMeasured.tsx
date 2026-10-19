@@ -542,15 +542,18 @@ function PrimaryCta({
   href,
   centered = false,
   onClick,
+  download,
 }: {
   label: string;
   href: string;
   centered?: boolean;
   onClick?: (e: React.MouseEvent, label: string) => void;
+  download?: boolean | string;
 }) {
   return (
     <a
       href={href}
+      download={download}
       onClick={onClick ? (e) => onClick(e, label) : undefined}
       className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] shrink-0 overflow-hidden ${
         centered ? "w-full max-w-[293px] items-center justify-center" : "w-[293px]"
@@ -621,7 +624,13 @@ function SecondaryCta({
 
 /* ---- Section ---- */
 
-export function ProductsMeasured({ data }: { data?: any }) {
+export function ProductsMeasured({
+  data,
+  formConfig,
+}: {
+  data?: any;
+  formConfig?: any;
+}) {
   const heading = data?.heading || FALLBACK_HEADING;
   const headingLines = splitLines(heading);
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
@@ -750,11 +759,15 @@ export function ProductsMeasured({ data }: { data?: any }) {
             className="-translate-x-1/2 absolute bottom-[104px] flex gap-[24px] items-start left-[calc(50%+4px)]"
             data-node-id="3712:1921"
           >
-            <PrimaryCta label={primary.label} href={primary.href} onClick={handleCtaClick} />
+            <PrimaryCta
+              label={primary.label}
+              href={primary.href && primary.href !== "#" ? primary.href : "/GPX10-Pro-Product-Brief.pdf"}
+              download={primary.href && primary.href.endsWith(".pdf") ? primary.href.split("/").pop() : "GPX10-Pro-Product-Brief.pdf"}
+            />
             <SecondaryCta
               label={secondary.label}
-              href="/Ambient-Subconscious-AI-On-GPX10-Pro.pdf"
-              download="Ambient-Subconscious-AI-On-GPX10-Pro.pdf"
+              href={secondary.href || "#"}
+              onClick={(e) => handleCtaClick(e, secondary.label)}
             />
           </div>
         </div>
@@ -825,8 +838,8 @@ export function ProductsMeasured({ data }: { data?: any }) {
           <div className="mx-auto mt-[32px] flex w-[240px] flex-col gap-[14px] pb-[16px]">
             {/* Primary — 240×48 */}
             <a
-              href={primary.href}
-              onClick={(e) => handleCtaClick(e, primary.label)}
+              href={primary.href && primary.href !== "#" ? primary.href : "/GPX10-Pro-Product-Brief.pdf"}
+              download={primary.href && primary.href.endsWith(".pdf") ? primary.href.split("/").pop() : "GPX10-Pro-Product-Brief.pdf"}
               className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[240px] shrink-0 items-center justify-center overflow-hidden`}
             >
               <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
@@ -842,8 +855,8 @@ export function ProductsMeasured({ data }: { data?: any }) {
             </a>
             {/* Secondary — 240×48 */}
             <a
-              href="/Ambient-Subconscious-AI-On-GPX10-Pro.pdf"
-              download="Ambient-Subconscious-AI-On-GPX10-Pro.pdf"
+              href={secondary.href || "#"}
+              onClick={(e) => handleCtaClick(e, secondary.label)}
               className={`${gilroyMedium.className} relative flex h-[48px] w-[240px] shrink-0 items-center justify-center overflow-clip px-[20px] py-[10px]`}
               style={{ backgroundColor: SECONDARY_CTA_BG }}
             >
@@ -860,6 +873,10 @@ export function ProductsMeasured({ data }: { data?: any }) {
         isOpen={!!briefModalTitle}
         title={briefModalTitle}
         onClose={() => setBriefModalTitle("")}
+        config={formConfig}
+        pdfUrl="/Ambient-Subconscious-AI-On-GPX10-Pro.pdf"
+        pdfName="Ambient-Subconscious-AI-On-GPX10-Pro.pdf"
+        formKey="whitepaper"
       />
     </>
   );

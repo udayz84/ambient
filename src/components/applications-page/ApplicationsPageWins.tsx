@@ -143,7 +143,7 @@ function WinCardMobile({ label, stat, statLabel, mobileImg, body, buttons, muted
   return (
     <div
       ref={fadeRef}
-      className={`relative h-[550px] w-[355px] shrink-0 overflow-clip border-[0.417px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] ${getFadeInClass(isVisible)}`}
+      className={`relative h-[550px] w-full max-w-[355px] shrink-0 overflow-clip border-[0.417px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] ${getFadeInClass(isVisible)}`}
       data-name="Container"
     >
       {/* Background image */}
@@ -421,7 +421,7 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
 
       {/* MOBILE (<1024px) — node 4032:5947 */}
       <div
-        className="relative flex w-full flex-col items-center px-[19px] pt-[30px] pb-[73px] min-[1024px]:hidden"
+        className="relative flex w-full flex-col items-center px-[19px] pt-[30px] pb-[32px] min-[1024px]:hidden"
         data-node-id="4032:5947"
         data-name="4th Fold"
       >
@@ -498,10 +498,12 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
           ) : null}
         </div>
 
-        {/* Cards (node 4032:5958) */}
-        <div className="relative z-10 mt-[35px] flex w-full flex-col items-center gap-[24px]">
+        {/* Cards Carousel (node 4032:5958) */}
+        <div
+          className="relative z-10 mt-[35px] flex w-[calc(100%+38px)] -mx-[19px] snap-x snap-mandatory gap-[16px] overflow-x-auto px-[19px] pb-[8px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
           {cards.map((card: any) => (
-            <div key={card.label} className="flex flex-col items-center gap-[24px] w-full">
+            <div key={card.label} className="flex w-[355px] max-w-[85vw] shrink-0 snap-center flex-col items-center gap-[20px]">
               <WinCardMobile
                 label={card.label}
                 stat={card.stat}
@@ -511,7 +513,7 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
                 muted={(card.buttons ?? []).some((b: any) => (b.label ?? "").trim().toLowerCase() === "coming soon")}
               />
               {card.buttons && card.buttons.length > 0 && (
-                <div className="flex flex-col gap-[8px] items-center w-full px-[19px]">
+                <div className="flex flex-col gap-[8px] items-center w-full px-[8px]">
                   {card.buttons.map((btn: any, i: number) => (
                     <SecondaryCta
                       key={i}
