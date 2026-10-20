@@ -27,7 +27,7 @@ export function TechnologyFeatures({ data }: { data?: any }) {
 
   return (
     <div
-      className="absolute top-[612.5px] left-1/2 z-10 flex min-h-[290px] w-[960px] min-[1180px]:w-[1100px] xl:w-[1204px] -translate-x-1/2 content-stretch items-start justify-center gap-[16px] min-[1180px]:gap-[24px] xl:gap-[32px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(0,0,0,0.1)] px-[12px] min-[1180px]:px-[16px] xl:px-[20px]"
+      className="absolute top-[612.5px] left-1/2 z-10 flex min-h-[290px] w-[960px] min-[1180px]:w-[1100px] xl:w-[1204px] -translate-x-1/2 content-stretch items-start justify-between gap-[16px] min-[1180px]:gap-[24px] xl:gap-[32px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] bg-[rgba(0,0,0,0.1)] px-[16px] min-[1180px]:px-[20px] xl:px-[24px]"
       data-node-id="2379:1432"
       data-name="Frame 1000003873"
     >

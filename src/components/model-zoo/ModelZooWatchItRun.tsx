@@ -57,7 +57,7 @@ const CARDS: WatchCard[] = [
   {
     nodeId: "5130:8726",
     name: "Voice Based",
-    img: "/model-zoo/one.png",
+    img: "/model-zoo/ready-main.png",
     imgLeft: 81.04,
     imgTop: -39.38,
     imgW: 290,

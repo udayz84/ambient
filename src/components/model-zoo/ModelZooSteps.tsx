@@ -7,6 +7,7 @@ import { Corners } from "../shared/Corners";
 import { CtaPrimary, CtaSecondary } from "./ModelZooCtas";
 import { CORNER_LEFT, CORNER_RIGHT, sectionTitleGradient } from "./model-zoo-data";
 import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
+import type { PopupConfig } from "@/lib/popup";
 import { useState } from "react";
 
 const TITLE_GRADIENT = sectionTitleGradient(111.766);
@@ -56,20 +57,14 @@ const FEATURE_PANELS = [
   {
     icon: "/model-zoo/icon-panel-1.png",
     text: "Works inside the standard Eclipse-based unified build.",
-    tl: "/model-zoo/tick-tl.svg",
-    tr: "/model-zoo/tick-tr.svg",
   },
   {
     icon: "/model-zoo/icon-panel-2.png",
     text: "Pre-integrated RTOS, drivers, and DSP libraries - no boilerplate.",
-    tl: "/model-zoo/tick-tl.svg",
-    tr: "/model-zoo/tick-tr.svg",
   },
   {
     icon: "/model-zoo/icon-panel-3.png",
     text: "Up to 90% of existing C code ports over.",
-    tl: "/model-zoo/tick-tl2.svg",
-    tr: "/model-zoo/tick-tr2.svg",
   },
 ];
 
@@ -124,7 +119,7 @@ function StepCard({ step }: { step: (typeof STEPS)[number] }) {
  * Figma 5131:10582 — "Pick a model. Push a button. It's running." section
  * (1256-wide content at page x=92; y=5203, h=943).
  */
-export function ModelZooSteps({ formConfig }: { formConfig?: any }) {
+export function ModelZooSteps({ formConfig }: { formConfig?: PopupConfig }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -179,11 +174,7 @@ export function ModelZooSteps({ formConfig }: { formConfig?: any }) {
                     {panel.text}
                   </p>
                 </div>
-                {/* corner marks: small ticks top, standard bottom */}
-                <img alt="" src={panel.tl} className="absolute top-0 left-0 h-[2.858px] w-[3.81px]" aria-hidden />
-                <img alt="" src={panel.tr} className="absolute top-0 right-0 h-[2.858px] w-[3.81px]" aria-hidden />
-                <img alt="" src="/model-zoo/tick-bl.svg" className="absolute bottom-0 left-0 size-[4px]" aria-hidden />
-                <img alt="" src={CORNER_RIGHT} className="absolute right-0 bottom-0 size-[4px] -scale-x-100" aria-hidden />
+                <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
               </div>
             ))}
           </div>

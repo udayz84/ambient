@@ -1,6 +1,6 @@
 "use client";
 
-import { interMedium, interRegular, gilroyMedium } from "../hero/fonts";
+import { interMedium, interRegular } from "../hero/fonts";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useState, useEffect, useLayoutEffect, useRef } from "react";
@@ -8,75 +8,17 @@ import { usePathname } from "next/navigation";
 import {
   mapStrapiNavItems,
   mergeApplicationNavItems,
-  applicationIconFor,
+  getProductsColumns,
+  megaIconFor,
+  navIconFor,
+  DEFAULT_SHOP_ITEM,
   type ApplicationPageSummary,
   type NavMegaColumn,
 } from "./nav-items";
 import { MobileMenu } from "./MobileMenu";
 import { NavbarCta } from "./NavbarCta";
-
-function ShoppingCartIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <circle cx="9" cy="21" r="1"></circle>
-      <circle cx="20" cy="21" r="1"></circle>
-      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-    </svg>
-  );
-}
-
-/** Figma 4625:8704 — Products mega-menu dropdown (800×210 panel).
- *  Columns come from Strapi (nav item mega_columns); icons are mapped by
- *  column title (Strapi has no icon field). Falls back to the Figma default
- *  content when the CMS provides no columns. */
-const MEGA_ICON_BY_TITLE: Record<string, string> = {
-  processors: "/navbar/dropdown-icon-chip.svg",
-  "system-on-modules": "/navbar/dropdown-icon-som.svg",
-  som: "/navbar/dropdown-icon-som.svg",
-  "evaluation kits": "/navbar/dropdown-icon-devkit.svg",
-  dvk: "/navbar/dropdown-icon-devkit.svg",
-};
-
-const MEGA_ICON_FALLBACK = "/navbar/dropdown-icon-chip.svg";
-
-function megaIconFor(title?: string): string {
-  const key = (title || "").toLowerCase().trim();
-  return MEGA_ICON_BY_TITLE[key] || MEGA_ICON_FALLBACK;
-}
-
-const DEFAULT_MEGA_COLUMNS: NavMegaColumn[] = [
-  {
-    title: "Processors",
-    description: undefined,
-    links: [
-      { label: "GPX10PRO", href: "/products" },
-      { label: "GPX40", href: "#", disabled: true, comingSoon: true },
-    ],
-    ctaLabel: undefined,
-    ctaHref: undefined,
-  },
-  {
-    title: "System-on-Modules",
-    description: "Drop-in reference modules for rapid product development",
-    links: [],
-    ctaLabel: "View all SOMs",
-    ctaHref: "/SOM",
-  },
-  {
-    title: "Evaluation Kits",
-    description: "Plug-and-play boards to test your models quickly",
-    links: [],
-    ctaLabel: "View Evaluation Kits",
-    ctaHref: "/dvk",
-  },
-  {
-    title: "Model Zoo",
-    description: "Pre-trained models ready for deployment on Ambient AI processors.",
-    links: [],
-    ctaLabel: "View Model Zoo",
-    ctaHref: "/model-zoo",
-  },
-];
+import { ShopNavButton } from "./ShopNavButton";
+import { DropdownCta } from "./DropdownCta";
 
 function ProductsMegaMenu({
   columns,
@@ -85,16 +27,7 @@ function ProductsMegaMenu({
   columns?: NavMegaColumn[];
   onNavigate: () => void;
 }) {
-  const cols = columns?.length ? [...columns] : [...DEFAULT_MEGA_COLUMNS];
-  if (!cols.some(c => c.title.toLowerCase().includes("model"))) {
-    cols.push({
-      title: "Model Zoo",
-      description: "Pre-trained models ready for deployment on Ambient AI processors.",
-      links: [],
-      ctaLabel: "View Model Zoo",
-      ctaHref: "/model-zoo",
-    });
-  }
+  const cols = getProductsColumns(columns);
   return (
     <div
       className="relative w-max min-w-[800px] max-w-[1200px] border-[0.5px] border-[rgba(255,255,255,0.1)] bg-[rgba(15,14,14,0.98)]"
@@ -173,46 +106,6 @@ function ProductsMegaMenu({
       </div>
     </div>
   );
-}
-
-/** Figma 4674:10315 / 4691:10527 / 4691:10636 — icon + label dropdown panel (212px wide).
- *  Items come from Strapi nav sub-items; icons are mapped by label (Strapi has no icon field). */
-const NAV_ICON_BY_LABEL: Record<string, string> = {
-  company: "/navbar/nav-icon-company.svg",
-  careers: "/navbar/nav-icon-careers.svg",
-  application: "/navbar/nav-icon-chip.svg",
-  applications: "/navbar/nav-icon-chip.svg",
-  wearables: "/navbar/nav-icon-wearables.svg",
-  "smart homes": "/navbar/nav-icon-smart-homes.svg",
-  "medical devices": "/navbar/nav-icon-medical.svg",
-  medical: "/navbar/nav-icon-medical.svg",
-  drones: "/navbar/nav-icon-chip.svg",
-  robotics: "/navbar/nav-icon-chip.svg",
-  automotives: "/navbar/nav-icon-chip.svg",
-  automotive: "/navbar/nav-icon-chip.svg",
-  "resources centre": "/navbar/nav-icon-chip.svg",
-  "resources center": "/navbar/nav-icon-chip.svg",
-  resources: "/navbar/nav-icon-chip.svg",
-  blogs: "/navbar/nav-icon-blog.svg",
-  "news & media": "/navbar/nav-icon-blog.svg",
-  "news and media": "/navbar/nav-icon-blog.svg",
-};
-
-const NAV_ICON_FALLBACK = "/navbar/nav-icon-chip.svg";
-
-function navIconFor(
-  label?: string,
-  href?: string,
-  icon?: string
-): string {
-  // 1. Icon uploaded in the CMS for this application page.
-  if (icon) return icon;
-  // 2. Application pages from the collection — static icon matched by slug.
-  if (href?.startsWith("/applications/")) {
-    return applicationIconFor(href.slice("/applications/".length)) || NAV_ICON_FALLBACK;
-  }
-  const key = (label || "").toLowerCase().trim();
-  return NAV_ICON_BY_LABEL[key] || NAV_ICON_FALLBACK;
 }
 
 function NavIconDropdown({
@@ -335,90 +228,6 @@ function NavIconDropdown({
   );
 }
 
-/** Figma 4625:8736 — dropdown CTA button with corner brackets. */
-function DropdownCta({ href, label, onNavigate }: { href: string; label: string; onNavigate: () => void }) {
-  return (
-    <Link
-      href={href}
-      onClick={onNavigate}
-      className={`relative flex h-[48px] shrink-0 items-center justify-center bg-[rgba(226,241,202,0.12)] px-[20px] transition-opacity hover:opacity-90 ${gilroyMedium.className} w-max max-w-full`}
-    >
-      <span className="relative max-w-full text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white overflow-hidden text-ellipsis">
-        {label}
-      </span>
-      <div className="pointer-events-none absolute right-0 top-0 flex size-[4px] items-center justify-center">
-        <div className="rotate-180 flex-none"><div className="relative size-[4px]"><div className="absolute inset-[0_0_-12.5%_-12.5%]"><Image src="/hero/corner-tag-2.svg" alt="" fill className="block max-w-none" aria-hidden /></div></div></div>
-      </div>
-      <div className="pointer-events-none absolute top-0 left-0 flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 flex-none"><div className="relative size-[4px]"><div className="absolute inset-[0_0_-12.5%_-12.5%]"><Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden /></div></div></div>
-      </div>
-      <div className="pointer-events-none absolute right-0 bottom-0 flex size-[4px] items-center justify-center">
-        <div className="-scale-x-100 flex-none"><div className="relative size-[4px]"><div className="absolute inset-[0_0_-12.5%_-12.5%]"><Image src="/hero/corner-tag-2.svg" alt="" fill className="block max-w-none" aria-hidden /></div></div></div>
-      </div>
-      <div className="pointer-events-none absolute bottom-0 left-0 size-[4px]">
-        <div className="absolute inset-[0_0_-12.5%_-12.5%]"><Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden /></div>
-      </div>
-    </Link>
-  );
-}
-
-/** Shop CTA (blue gradient). Grouped with the green "Get in touch" CTA in the
- *  top-right cluster; same 147×36 size as NavbarCta per client feedback. */
-function ShopNavButton({ item }: { item: { label: string; href: string } }) {
-  return (
-    <Link
-      href={item.href}
-      className="relative flex h-[36px] w-[134px] items-center justify-center gap-[6px] shrink-0 max-[1359px]:hidden shadow-[0px_42px_107px_0px_rgba(0,196,255,0.2),0px_24.721px_32.257px_0px_rgba(0,196,255,0.15),0px_10.268px_13.398px_0px_rgba(0,196,255,0.15)] transition-opacity hover:opacity-90"
-    >
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#00d0ff] to-[#0055ff]"
-      />
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,255,0.6)]"
-      />
-      <span className="relative z-10 flex items-center gap-[6px] text-white">
-        <ShoppingCartIcon />
-        <span className="max-w-full overflow-hidden text-ellipsis text-[14px] leading-[normal] font-bold uppercase tracking-[-0.42px] whitespace-nowrap">
-          {item.label}
-        </span>
-      </span>
-      <div className="pointer-events-none absolute right-0 top-0 z-20 flex size-[4px] items-center justify-center">
-        <div className="-scale-x-100 -scale-y-100 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute left-0 top-0 z-20 flex size-[4px] items-center justify-center">
-        <div className="-scale-y-100 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute bottom-0 right-0 z-20 flex size-[4px] items-center justify-center">
-        <div className="-scale-x-100 flex-none">
-          <div className="relative size-[4px]">
-            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-              <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute bottom-0 left-0 z-20 size-[4px]">
-        <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-          <Image src="/hero/corner-tag-1.svg" alt="" fill className="block max-w-none" aria-hidden />
-        </div>
-      </div>
-    </Link>
-  );
-}
 
 function NavItem({ item }: { item: any }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -545,10 +354,12 @@ export function Navbar({
   );
   // Shop is rendered as a button in the top-right CTA cluster (next to
   // "Get in touch"), not inside the centered nav.
-  const shopItem = navItems.find((item) => item.label?.toLowerCase() === "shop");
-  const navLinks = shopItem
-    ? navItems.filter((item) => item.label?.toLowerCase() !== "shop")
-    : navItems;
+  const shopItem =
+    navItems.find((item) => item.label?.toLowerCase() === "shop") ??
+    DEFAULT_SHOP_ITEM;
+  const navLinks = navItems.filter(
+    (item) => item.label?.toLowerCase() !== "shop"
+  );
   // The CMS logo is a lower-quality asset. Use the high-resolution
   // brand asset so the 46px mobile mark remains crisp on high-DPR screens.
   const logoSrc = "/navbar/logo.png";
@@ -645,10 +456,10 @@ export function Navbar({
         </div>
 
         {/* Mobile & Tablet (<1280px): Absolute positioning to guarantee placement */}
-        <div className="absolute inset-0 block xl:hidden">
+        <div className="absolute inset-0 block xl:hidden pointer-events-none">
           <Link
             href="/"
-            className="absolute z-20 top-1/2 -translate-y-1/2 left-[16px] md:left-[32px] min-[1024px]:left-[40px] flex h-[46px] w-max items-center"
+            className="absolute z-20 top-1/2 -translate-y-1/2 left-[16px] md:left-[32px] min-[1024px]:left-[40px] flex h-[46px] w-max items-center pointer-events-auto"
           >
             {logoSrc ? (
               <Image
@@ -663,8 +474,20 @@ export function Navbar({
             ) : null}
           </Link>
 
-          <div className="absolute top-[21px] right-[16px] md:right-[32px] min-[1024px]:right-[40px] flex h-[36px] w-[36px] items-center justify-center">
-            <MobileMenu data={data} brandData={brandData} applicationPages={applicationPages} />
+          <div className="absolute top-[21px] right-[16px] md:right-[32px] min-[1024px]:right-[40px] flex items-center gap-[12px] z-30 pointer-events-auto">
+            {shopItem ? (
+              <div className="hidden md:block">
+                <ShopNavButton item={shopItem} />
+              </div>
+            ) : null}
+            <div className="flex h-[36px] w-[36px] items-center justify-center">
+              <MobileMenu
+                data={data}
+                brandData={brandData}
+                applicationPages={applicationPages}
+                shopItem={shopItem}
+              />
+            </div>
           </div>
         </div>
       </div>

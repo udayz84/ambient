@@ -215,3 +215,113 @@ export function applicationIconFor(slug: string): string | null {
   const rule = APPLICATION_ICON_RULES.find(({ pattern }) => pattern.test(key));
   return rule ? rule.icon : null;
 }
+
+export const MEGA_ICON_BY_TITLE: Record<string, string> = {
+  processors: "/navbar/dropdown-icon-chip.svg",
+  "system-on-modules": "/navbar/dropdown-icon-som.svg",
+  som: "/navbar/dropdown-icon-som.svg",
+  "evaluation kits": "/navbar/dropdown-icon-devkit.svg",
+  dvk: "/navbar/dropdown-icon-devkit.svg",
+  "model zoo": "/navbar/dropdown-icon-chip.svg",
+};
+
+export const MEGA_ICON_FALLBACK = "/navbar/dropdown-icon-chip.svg";
+
+export function megaIconFor(title?: string): string {
+  const key = (title || "").toLowerCase().trim();
+  return MEGA_ICON_BY_TITLE[key] || MEGA_ICON_FALLBACK;
+}
+
+export const DEFAULT_MEGA_COLUMNS: NavMegaColumn[] = [
+  {
+    title: "Processors",
+    description: undefined,
+    links: [
+      { label: "GPX10PRO", href: "/products" },
+      { label: "GPX40", href: "#", disabled: true, comingSoon: true },
+    ],
+    ctaLabel: undefined,
+    ctaHref: undefined,
+  },
+  {
+    title: "System-on-Modules",
+    description: "Drop-in reference modules for rapid product development",
+    links: [],
+    ctaLabel: "View all SOMs",
+    ctaHref: "/SOM",
+  },
+  {
+    title: "Evaluation Kits",
+    description: "Plug-and-play boards to test your models quickly",
+    links: [],
+    ctaLabel: "View Evaluation Kits",
+    ctaHref: "/dvk",
+  },
+  {
+    title: "Model Zoo",
+    description: "Pre-trained models ready for deployment on Ambient AI processors.",
+    links: [],
+    ctaLabel: "View Model Zoo",
+    ctaHref: "/model-zoo",
+  },
+];
+
+export function getProductsColumns(columns?: NavMegaColumn[]): NavMegaColumn[] {
+  const cols = columns?.length ? [...columns] : [...DEFAULT_MEGA_COLUMNS];
+  if (!cols.some((c) => c.title.toLowerCase().includes("model"))) {
+    cols.push({
+      title: "Model Zoo",
+      description: "Pre-trained models ready for deployment on Ambient AI processors.",
+      links: [],
+      ctaLabel: "View Model Zoo",
+      ctaHref: "/model-zoo",
+    });
+  }
+  return cols;
+}
+
+export const NAV_ICON_BY_LABEL: Record<string, string> = {
+  company: "/navbar/nav-icon-company.svg",
+  careers: "/navbar/nav-icon-careers.svg",
+  application: "/navbar/nav-icon-chip.svg",
+  applications: "/navbar/nav-icon-chip.svg",
+  wearables: "/navbar/nav-icon-wearables.svg",
+  "smart homes": "/navbar/nav-icon-smart-homes.svg",
+  "medical devices": "/navbar/nav-icon-medical.svg",
+  medical: "/navbar/nav-icon-medical.svg",
+  drones: "/navbar/nav-icon-chip.svg",
+  robotics: "/navbar/nav-icon-chip.svg",
+  automotives: "/navbar/nav-icon-chip.svg",
+  automotive: "/navbar/nav-icon-chip.svg",
+  "resources centre": "/navbar/nav-icon-chip.svg",
+  "resources center": "/navbar/nav-icon-chip.svg",
+  resources: "/navbar/nav-icon-chip.svg",
+  blogs: "/navbar/nav-icon-blog.svg",
+  "news & media": "/navbar/nav-icon-blog.svg",
+  "news and media": "/navbar/nav-icon-blog.svg",
+  partners: "/navbar/nav-icon-company.svg",
+  partner: "/navbar/nav-icon-company.svg",
+};
+
+export const NAV_ICON_FALLBACK = "/navbar/nav-icon-chip.svg";
+
+export function navIconFor(
+  label?: string,
+  href?: string,
+  icon?: string
+): string {
+  // 1. Icon uploaded in the CMS for this application page.
+  if (icon) return icon;
+  // 2. Application pages from the collection — static icon matched by slug.
+  if (href?.startsWith("/applications/")) {
+    return applicationIconFor(href.slice("/applications/".length)) || NAV_ICON_FALLBACK;
+  }
+  const key = (label || "").toLowerCase().trim();
+  return NAV_ICON_BY_LABEL[key] || NAV_ICON_FALLBACK;
+}
+
+export const DEFAULT_SHOP_ITEM: NavSubItem = {
+  label: "Shop",
+  href: "https://www.digikey.com/en/supplier-centers/ambient-scientific",
+};
+

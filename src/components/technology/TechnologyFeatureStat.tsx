@@ -19,7 +19,7 @@ export function TechnologyFeatureStat({
 }: TechnologyFeatureStatProps) {
   return (
     <div
-      className="relative flex w-[340px] shrink-0 flex-col items-start gap-[12px] py-[20px]"
+      className="relative flex flex-1 min-w-0 max-w-[340px] flex-col items-start gap-[12px] py-[20px]"
       data-node-id={nodeId}
       data-name="Stat"
     >
@@ -39,13 +39,13 @@ export function TechnologyFeatureStat({
         ) : null}
       </div>
       <div
-        className={`${gilroyMedium.className} w-[279px] shrink-0 text-[32px] leading-[38px] font-medium text-white [word-break:break-word] not-italic`}
+        className={`${gilroyMedium.className} w-full max-w-[279px] text-[24px] leading-[30px] min-[1180px]:text-[28px] min-[1180px]:leading-[34px] xl:text-[32px] xl:leading-[38px] font-medium text-white [word-break:break-word] not-italic`}
       >
         {title}
       </div>
       <div className="flex w-full flex-col items-start" data-name="Content">
         <p
-          className={`${interRegular.className} w-full shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} w-full text-[14px] leading-[21px] min-[1180px]:text-[15px] min-[1180px]:leading-[23px] xl:text-[16px] xl:leading-[24px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic`}
         >
           {description}
         </p>

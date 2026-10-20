@@ -9,6 +9,7 @@ import { TagBadge } from "../hero/TagBadge";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { CtaPrimary } from "./ModelZooCtas";
 import { ModelZooRequestForm } from "./ModelZooRequestForm";
+import type { PopupConfig } from "@/lib/popup";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
@@ -322,7 +323,7 @@ function FilterSelect({
  * 1244-wide container at page x=98: header, filter bar, 3×2 card grid,
  * "AI models" thumbnail strip (bleeds right, clipped), Request CTA.
  */
-export function ModelZooLibrary({ requestForm }: { requestForm?: any }) {
+export function ModelZooLibrary({ requestForm }: { requestForm?: PopupConfig }) {
   const [modality, setModality] = useState("all");
   const [type, setType] = useState("all");
   const [query, setQuery] = useState("");
@@ -446,9 +447,9 @@ export function ModelZooLibrary({ requestForm }: { requestForm?: any }) {
               </p>
             </div>
 
-            <div className="relative h-[80px]">
+            <div className="relative h-[110px] min-[1024px]:h-[120px]">
               <p
-                className={`${gilroySemiBold.className} absolute top-[20.32px] left-0 bg-clip-text text-[56px] leading-[60px] font-semibold tracking-[-1.12px] whitespace-nowrap text-transparent opacity-90 not-italic`}
+                className={`${gilroySemiBold.className} absolute top-[20.32px] left-0 flex items-baseline bg-clip-text text-[56px] leading-[60px] font-semibold tracking-[-1.12px] whitespace-nowrap text-transparent opacity-90 not-italic`}
                 style={{
                   backgroundImage:
                     "linear-gradient(106.249deg, rgb(22, 22, 22) 9.025%, rgb(39, 39, 39) 37.884%, rgb(18, 18, 18) 111.41%)",
@@ -457,7 +458,17 @@ export function ModelZooLibrary({ requestForm }: { requestForm?: any }) {
                 }}
                 data-node-id="5348:6506"
               >
-                AI models
+                <span
+                  className="pt-[12px] text-[76px] leading-[60px] tracking-[-1.52px]"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(106.249deg, rgb(42, 42, 42) 9.025%, rgb(64, 64, 64) 37.884%, rgb(36, 36, 36) 111.41%)",
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                  }}
+                >
+                  30+
+                </span>&nbsp;AI Models
               </p>
             </div>
             {/* Full-bleed marquee — viewport-wide clip. strip-loop.webp is the

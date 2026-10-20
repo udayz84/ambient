@@ -8,6 +8,7 @@ import { getFadeInClass, useFadeIn } from "../shared/useFadeIn";
 import { CtaPrimary, CtaSecondary } from "./ModelZooCtas";
 import { CORNER_LEFT, CORNER_RIGHT, sectionTitleGradient } from "./model-zoo-data";
 import { ProductBriefModal } from "../products-page/ProductBriefModal";
+import type { PopupConfig } from "@/lib/popup";
 
 const TITLE_GRADIENT = sectionTitleGradient(119.522);
 
@@ -67,11 +68,7 @@ function BuildItCard({ card }: { card: (typeof CARDS)[number] }) {
         </p>
       </div>
 
-      {/* corner marks: small top ticks + standard bottom */}
-      <img alt="" src="/model-zoo/tick-tl.svg" className="absolute top-0 left-0 h-[3.639px] w-[3.81px]" aria-hidden />
-      <img alt="" src="/model-zoo/tick-tr.svg" className="absolute top-0 right-0 h-[3.639px] w-[3.81px]" aria-hidden />
-      <img alt="" src="/model-zoo/tick-bl.svg" className="absolute bottom-0 left-0 size-[4px]" aria-hidden />
-      <img alt="" src={CORNER_RIGHT} className="absolute right-0 bottom-0 size-[4px] -scale-x-100" aria-hidden />
+      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
     </div>
   );
 }
@@ -80,7 +77,7 @@ function BuildItCard({ card }: { card: (typeof CARDS)[number] }) {
  * Figma 5131:10720 — "Don't see it? Build it." section
  * (1256-wide content at page x=92; y=6246, h=502).
  */
-export function ModelZooBuildIt({ formConfig }: { formConfig?: any }) {
+export function ModelZooBuildIt({ formConfig }: { formConfig?: PopupConfig }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
