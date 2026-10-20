@@ -46,15 +46,16 @@ export function Hero({ data }: { data?: any }) {
 
   return (
     <section
-      className="relative flex h-full w-full justify-center overflow-hidden bg-black"
+      className="relative flex flex-col items-center h-full w-full justify-center overflow-hidden bg-black"
       data-node-id="2379:734"
       data-name="Hero Section"
       aria-label="Hero"
     >
-      <div className="relative hidden h-full w-full max-w-[1442px] min-[1024px]:block">
+      {/* DESKTOP & LARGE TABLET (>=1024px) — compact desktop on large tablet, exact Figma on desktop >=1280px */}
+      <div className="relative hidden min-[1024px]:block h-full w-full max-w-[1442px]">
         <HeroVisual videoSrc={videoSrc} />
 
-        <div className="pointer-events-none absolute top-[79px] left-[95px] flex h-[821px] w-0 items-center justify-center">
+        <div className="pointer-events-none absolute top-[79px] left-[32px] min-[1180px]:left-[48px] xl:left-[95px] flex h-[821px] w-0 items-center justify-center">
           <div className="flex-none rotate-90">
             <div className="relative h-0 w-[821px]" data-node-id="2379:738" data-name="Line 82">
               <div className="absolute inset-[-1px_0_0_0]">
@@ -70,7 +71,7 @@ export function Hero({ data }: { data?: any }) {
           </div>
         </div>
         <div
-          className="pointer-events-none absolute top-[77.634765625px] left-[93px] h-[4px] w-[5px]"
+          className="pointer-events-none absolute top-[77.634765625px] left-[30px] min-[1180px]:left-[46px] xl:left-[93px] h-[4px] w-[5px]"
           data-node-id="2379:739"
           data-name="Vector"
         >
@@ -83,7 +84,7 @@ export function Hero({ data }: { data?: any }) {
           />
         </div>
 
-        <div className="pointer-events-none absolute top-[79px] right-[95px] flex h-[597px] w-0 items-center justify-center">
+        <div className="pointer-events-none absolute top-[79px] right-[32px] min-[1180px]:right-[48px] xl:right-[95px] flex h-[597px] w-0 items-center justify-center">
           <div className="flex-none rotate-90">
             <div className="relative h-0 w-[597px]" data-node-id="2379:740" data-name="Line 83">
               <div className="absolute inset-[-0.5px_0]">
@@ -99,7 +100,7 @@ export function Hero({ data }: { data?: any }) {
           </div>
         </div>
         <div
-          className="pointer-events-none absolute top-[77.634765625px] left-[1344.5px] h-[4px] w-[5px]"
+          className="pointer-events-none absolute top-[77.634765625px] right-[30px] min-[1180px]:right-[46px] xl:right-auto xl:left-[1344.5px] h-[4px] w-[5px]"
           data-node-id="2379:741"
           data-name="Vector"
         >
@@ -114,65 +115,71 @@ export function Hero({ data }: { data?: any }) {
 
         {/* Foreground Content Wrapper */}
         <div className="relative mt-[78px] h-[798px] w-full">
-
-        <div
-          className={`${gilroyMedium.className} absolute top-[130px] left-[936px] flex w-[442px] flex-col items-start gap-[15px] [word-break:break-word] not-italic animate-hero-text-fade-in transform-gpu`}
-          style={{ animationDelay: '0.3s', animationDuration: '1000ms' }}
-          data-node-id="2379:780"
-        >
-          <h1
-            ref={fitRef}
-            className="min-w-full w-[min-content] shrink-0 bg-clip-text text-[46px] leading-[49px] font-medium text-transparent"
-            style={{
-              backgroundImage:
-                "linear-gradient(101.005deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-            }}
-            data-node-id="2379:781"
+          <div
+            className={`${gilroyMedium.className} absolute top-[130px] right-[40px] min-[1180px]:right-[56px] xl:right-auto xl:left-[936px] flex w-[370px] min-[1180px]:w-[420px] xl:w-[442px] flex-col items-start gap-[15px] [word-break:break-word] not-italic animate-hero-text-fade-in transform-gpu`}
+            style={{ animationDelay: '0.3s', animationDuration: '1000ms' }}
+            data-node-id="2379:780"
           >
-            {title}
-          </h1>
-          <p
-            className={`${interRegular.className} shrink-0 text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-80 w-[419px] [word-break:break-word]`}
-            data-node-id="2379:782"
-          >
-            {subtitle}
-          </p>
-        </div>
+            <h1
+              ref={fitRef}
+              className="min-w-full w-[min-content] shrink-0 bg-clip-text text-[34px] leading-[38px] min-[1100px]:text-[38px] min-[1100px]:leading-[42px] min-[1180px]:text-[42px] min-[1180px]:leading-[46px] xl:text-[46px] xl:leading-[49px] font-medium text-transparent"
+              style={{
+                backgroundImage:
+                  "linear-gradient(101.005deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
+              data-node-id="2379:781"
+            >
+              {title}
+            </h1>
+            <p
+              className={`${interRegular.className} shrink-0 text-[14px] leading-[20px] min-[1180px]:text-[15px] min-[1180px]:leading-[22px] xl:text-[16px] xl:leading-[24px] font-normal text-[#f0f0f0] opacity-80 w-full max-w-[419px] [word-break:break-word]`}
+              data-node-id="2379:782"
+            >
+              {subtitle}
+            </p>
+          </div>
 
-        <HeroMetrics metrics={metrics} />
-        <HeroScrollIndicator scrollText={scrollText} />
+          <HeroMetrics
+            metrics={metrics}
+            className="absolute top-[515px] left-[36px] min-[1180px]:left-[60px] xl:left-[120px] flex w-max content-stretch items-start justify-start gap-[16px] min-[1180px]:gap-[24px]"
+          />
+          <HeroScrollIndicator
+            scrollText={scrollText}
+            className="absolute top-[696px] right-[28px] min-[1180px]:right-[44px] xl:right-auto xl:left-[1335.5px] flex h-[75px] w-[18px] flex-col content-stretch items-center gap-[10px] cursor-pointer border-0 bg-transparent p-0"
+          />
         </div>
       </div>
 
-      {/* MOBILE (<1024px) — dedicated layout, desktop is untouched above */}
-      <div className="relative flex w-full flex-col min-[1024px]:hidden pt-[100px] pb-[56px]">
-        {/* Background Vertical Lines connecting to Navbar */}
+      {/* MOBILE & SMALL TABLET (<1024px) — dedicated layout, desktop is untouched above */}
+      <div className="relative flex min-[1024px]:hidden w-full flex-col items-center pt-[100px] pb-[56px] px-[24px] md:px-[32px] overflow-hidden">
         {/* Background Vertical Lines connecting to Navbar */}
         {/* Left Line */}
-        <div className="pointer-events-none absolute top-[78px] bottom-0 left-[26px] z-0">
+        <div className="pointer-events-none absolute top-[78px] bottom-0 left-[26px] md:left-[36px] z-0">
           <div className="absolute top-0 left-1/2 h-full w-[1px] -translate-x-1/2 overflow-hidden">
             <div className="absolute top-0 left-0 h-full w-[821px] origin-top-left rotate-90 opacity-60">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/hero/line-82.svg" alt="" className="block size-full max-w-none" aria-hidden />
             </div>
           </div>
         </div>
 
         {/* Right Line */}
-        <div className="pointer-events-none absolute top-[78px] bottom-0 right-[26px] z-0">
+        <div className="pointer-events-none absolute top-[78px] bottom-0 right-[26px] md:right-[36px] z-0">
           <div className="absolute top-0 left-1/2 h-full w-[1px] -translate-x-1/2 overflow-hidden">
             <div className="absolute top-0 left-0 h-full w-[821px] origin-top-left rotate-90 opacity-60">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/hero/line-83.svg" alt="" className="block size-full max-w-none" aria-hidden />
             </div>
           </div>
         </div>
 
         {/* Text Area */}
-        <div className="relative z-10 flex flex-col px-[24px] gap-[15px]">
+        <div className="relative z-10 flex flex-col items-start md:items-center md:text-center px-[4px] md:px-[24px] gap-[15px] w-full max-w-[680px]">
           <h1
             ref={fitRef2}
-            className={`${gilroyMedium.className} w-[320px] max-w-full bg-clip-text text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+            className={`${gilroyMedium.className} w-[320px] max-w-full md:w-auto md:max-w-[640px] bg-clip-text text-[36px] leading-[36px] md:text-[44px] md:leading-[48px] font-medium text-transparent [word-break:break-word] not-italic`}
             style={{
               backgroundImage:
                 "linear-gradient(100.849deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -183,15 +190,15 @@ export function Hero({ data }: { data?: any }) {
             {title}
           </h1>
           <p
-            className={`${interRegular.className} w-[332px] max-w-full text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[332px] max-w-full md:w-auto md:max-w-[580px] text-[14px] leading-[21px] md:text-[16px] md:leading-[24px] font-normal text-[#f0f0f0] opacity-80 [word-break:break-word]`}
           >
             {subtitle}
           </p>
         </div>
 
-        {/* Video Area - Absolute to overlap stats as per Figma (3174:48788) */}
+        {/* Video Area */}
         <div
-          className="pointer-events-none absolute top-[242px] left-[50%] h-[398.341px] w-[716.22px] -translate-x-1/2 overflow-hidden scale-[0.85] origin-top"
+          className="pointer-events-none absolute top-[242px] md:top-[250px] left-[50%] h-[398.341px] w-[716.22px] -translate-x-1/2 overflow-hidden scale-[0.85] md:scale-[0.98] origin-top"
           style={{
             maskImage: "url(/hero/mask-shape.svg)",
             WebkitMaskImage: "url(/hero/mask-shape.svg)",
@@ -207,10 +214,10 @@ export function Hero({ data }: { data?: any }) {
         </div>
 
         {/* Spacer to push stats down */}
-        <div className="h-[280px] w-full shrink-0" />
+        <div className="h-[280px] md:h-[340px] w-full shrink-0" />
 
-        {/* Stats Area */}
-        <div className="relative z-10 px-[24px]">
+        {/* Mobile Stats Area (<768px): Vertical stacked with bracket divider */}
+        <div className="relative z-10 w-full px-[4px] md:hidden">
           <div className="flex flex-col gap-[24px]">
             <HeroStat
               tag={m0.tag || ""}
@@ -249,13 +256,10 @@ export function Hero({ data }: { data?: any }) {
             />
 
             <div className="relative h-[1px] w-[calc(100%-8px)] ml-[4px] bg-white/20">
-               {/* Left Bracket */}
-               <div className="absolute top-[-4px] left-0 h-[9px] w-[1px] bg-white" />
-               <div className="absolute top-0 left-0 h-[1px] w-[5px] bg-white" />
-               
-               {/* Right Bracket */}
-               <div className="absolute top-[-4px] right-0 h-[9px] w-[1px] bg-white" />
-               <div className="absolute top-0 right-0 h-[1px] w-[5px] bg-white" />
+              <div className="absolute top-[-4px] left-0 h-[9px] w-[1px] bg-white" />
+              <div className="absolute top-0 left-0 h-[1px] w-[5px] bg-white" />
+              <div className="absolute top-[-4px] right-0 h-[9px] w-[1px] bg-white" />
+              <div className="absolute top-0 right-0 h-[1px] w-[5px] bg-white" />
             </div>
 
             <HeroStat
@@ -291,6 +295,22 @@ export function Hero({ data }: { data?: any }) {
               description={m1.description || ""}
             />
           </div>
+        </div>
+
+        {/* Small Tablet Stats Area (768px – 1023px): Side-by-side metrics */}
+        <div className="relative z-10 hidden md:flex w-full justify-center px-[10px]">
+          <HeroMetrics
+            metrics={metrics}
+            className="relative flex items-start justify-center gap-[24px] min-[900px]:gap-[40px] flex-nowrap"
+          />
+        </div>
+
+        {/* Scroll Indicator on Small Tablet */}
+        <div className="relative z-10 hidden md:flex justify-center mt-[36px]">
+          <HeroScrollIndicator
+            scrollText={scrollText}
+            className="relative flex h-[75px] w-[18px] flex-col content-stretch items-center gap-[10px] cursor-pointer border-0 bg-transparent p-0"
+          />
         </div>
       </div>
     </section>

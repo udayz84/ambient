@@ -5,7 +5,13 @@ import { interRegular } from "./fonts";
 
 const NEXT_SECTION_ID = "measured-proof";
 
-export function HeroScrollIndicator({ scrollText = "SCROLL" }: { scrollText?: string }) {
+export function HeroScrollIndicator({
+  scrollText = "SCROLL",
+  className = "absolute top-[696px] left-[1335.5px] flex h-[75px] w-[18px] flex-col content-stretch items-center gap-[10px] cursor-pointer border-0 bg-transparent p-0",
+}: {
+  scrollText?: string;
+  className?: string;
+}) {
   const handleScroll = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
@@ -19,7 +25,7 @@ export function HeroScrollIndicator({ scrollText = "SCROLL" }: { scrollText?: st
     <button
       type="button"
       onClick={handleScroll}
-      className={`${interRegular.className} absolute top-[696px] left-[1335.5px] flex h-[75px] w-[18px] flex-col content-stretch items-center gap-[10px] cursor-pointer border-0 bg-transparent p-0`}
+      className={`${interRegular.className} ${className}`}
       data-node-id="2379:777"
       data-name="Frame 1000003871"
       aria-label="Scroll to next section"

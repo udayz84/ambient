@@ -29,7 +29,7 @@ export function MeasuredProof({ data }: { data?: any }) {
       data-name="Section 6"
       aria-label="Measured proof in silicon"
     >
-      {/* DESKTOP (>=1024px) Sticky Container */}
+      {/* DESKTOP & LARGE TABLET (>=1024px) Sticky Container */}
       <div className="sticky top-0 hidden h-[100vh] w-full overflow-hidden min-[1024px]:block">
         <div
           className="pointer-events-none absolute top-[calc(50%-15.5px)] right-0 left-0 h-[880px] -translate-y-1/2"
@@ -81,7 +81,7 @@ export function MeasuredProof({ data }: { data?: any }) {
         </div>
       </div>
 
-      {/* MOBILE (<1024px) — dedicated layout, desktop is untouched above */}
+      {/* MOBILE & SMALL TABLET (<1024px) — dedicated layout, desktop is untouched above */}
       <div className="relative w-full min-[1024px]:hidden overflow-hidden">
         {/* Background elements for mobile (matching desktop) */}
         <div className="pointer-events-none absolute top-[45%] right-0 left-0 h-[600px] -translate-y-1/2">

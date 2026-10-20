@@ -558,7 +558,7 @@ export function Navbar({
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute top-[0.158px] left-1/2 h-[77.5px] w-[calc((50%_-_16px)*2.42787)] lg:w-full lg:min-w-[1511px] -translate-x-1/2"
+        className="pointer-events-none absolute top-[0.158px] left-1/2 h-[77.5px] w-[calc((50%_-_16px)*2.42787)] md:w-full xl:min-w-[1511px] -translate-x-1/2"
         data-node-id="2379:1570"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -570,42 +570,42 @@ export function Navbar({
       </div>
       <div
         aria-hidden
-        className="pointer-events-none absolute top-[35.158px] left-1/2 h-[43px] w-[calc((50%_-_16px)*2.42787)] lg:w-full lg:min-w-[1511px] -translate-x-1/2"
+        className="pointer-events-none absolute top-[35.158px] left-1/2 h-[43px] w-[calc((50%_-_16px)*2.42787)] md:w-full xl:min-w-[1511px] -translate-x-1/2"
         data-node-id="2379:1573"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/navbar/vector-36.svg"
           alt=""
-          className="hidden lg:block size-full max-w-none"
+          className="hidden xl:block size-full max-w-none"
         />
         <img
           src="/mobile/Vector 36.png"
           alt=""
-          className="block lg:hidden size-full max-w-none"
+          className="block xl:hidden size-full max-w-none"
         />
       </div>
 
       {/* Left Connecting Vector */}
       <div 
-        className="absolute z-20 flex size-[5px] items-center justify-center lg:hidden"
+        className="absolute z-20 flex size-[5px] items-center justify-center md:hidden"
         style={{ left: "16px", bottom: "-2.5px", transform: "translateX(-50%)" }}
       >
         <img src="/hero/line-cap-left.svg" alt="" className="block size-full" />
       </div>
       {/* Right Connecting Vector */}
       <div 
-        className="absolute z-20 flex size-[5px] items-center justify-center lg:hidden"
+        className="absolute z-20 flex size-[5px] items-center justify-center md:hidden"
         style={{ right: "16px", bottom: "-2.5px", transform: "translateX(50%)" }}
       >
         <img src="/hero/line-cap-right.svg" alt="" className="block size-full" />
       </div>
 
       <div className="relative z-10 mx-auto h-[78px] w-full max-w-[1442px]">
-        {/* Desktop (>=1024px): absolute positions from Figma, adapted for smaller viewports */}
+        {/* Desktop (>=1280px): absolute positions from Figma, adapted for smaller viewports */}
         <Link
           href="/"
-          className="absolute z-20 top-1/2 -translate-y-1/2 left-[40px] hidden h-[52px] w-max min-[1440px]:left-[110px] lg:flex items-center"
+          className="absolute z-20 top-1/2 -translate-y-1/2 left-[40px] hidden h-[52px] w-max min-[1440px]:left-[110px] xl:flex items-center"
           data-node-id="2379:1574"
         >
           {logoSrc ? (
@@ -622,7 +622,7 @@ export function Navbar({
         </Link>
 
         <nav
-          className="absolute top-[19.158px] left-[185px] right-[185px] hidden h-[37px] items-center justify-center gap-[10px] p-[10px] lg:flex min-[1440px]:left-[200px] min-[1440px]:right-[200px] min-[1440px]:gap-[12px]"
+          className="absolute top-[19.158px] left-[185px] right-[185px] hidden h-[37px] items-center justify-center gap-[10px] p-[10px] xl:flex min-[1440px]:left-[200px] min-[1440px]:right-[200px] min-[1440px]:gap-[12px]"
           aria-label="Main"
           data-node-id="2379:1575"
         >
@@ -638,16 +638,16 @@ export function Navbar({
         {/* Right CTA cluster: Shop + Get in touch, compact 134px buttons.
          *  right-[101.5px] keeps the pair inside the navbar's angled right
          *  edge (same clearance the Figma CTA had). */}
-        <div className="absolute top-[21.158px] right-[101.5px] hidden items-center gap-[10px] lg:flex z-20">
+        <div className="absolute top-[21.158px] right-[101.5px] hidden items-center gap-[10px] xl:flex z-20">
           {shopItem ? <ShopNavButton item={shopItem} /> : null}
           <NavbarCta data={data} />
         </div>
 
-        {/* Mobile (<1024px): Absolute positioning to guarantee placement */}
-        <div className="absolute inset-0 block lg:hidden">
+        {/* Mobile & Tablet (<1280px): Absolute positioning to guarantee placement */}
+        <div className="absolute inset-0 block xl:hidden">
           <Link
             href="/"
-            className="absolute z-20 top-1/2 -translate-y-1/2 left-[16px] flex h-[46px] w-max items-center"
+            className="absolute z-20 top-1/2 -translate-y-1/2 left-[16px] md:left-[32px] min-[1024px]:left-[40px] flex h-[46px] w-max items-center"
           >
             {logoSrc ? (
               <Image
@@ -662,7 +662,7 @@ export function Navbar({
             ) : null}
           </Link>
 
-          <div className="absolute top-[21px] right-[16px] flex h-[36px] w-[36px] items-center justify-center">
+          <div className="absolute top-[21px] right-[16px] md:right-[32px] min-[1024px]:right-[40px] flex h-[36px] w-[36px] items-center justify-center">
             <MobileMenu data={data} brandData={brandData} applicationPages={applicationPages} />
           </div>
         </div>

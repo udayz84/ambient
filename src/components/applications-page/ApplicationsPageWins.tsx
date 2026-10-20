@@ -62,7 +62,7 @@ function WinCard({ label, stat, statLabel, visual, body, buttons, muted }: WinCa
   return (
     <div
       ref={fadeRef}
-      className={`relative h-[640px] w-[426px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black ${getFadeInClass(isVisible)}`}
+      className={`relative h-[640px] w-[310px] min-[1180px]:w-[360px] xl:w-[426px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black ${getFadeInClass(isVisible)}`}
       data-name="Container"
     >
       {visual}
@@ -71,17 +71,17 @@ function WinCard({ label, stat, statLabel, visual, body, buttons, muted }: WinCa
       <div className="absolute left-[20.5px] top-[22.5px] flex items-center gap-[12px]">
         <LabelTile />
         <p
-          className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-[#f0f0f0] [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} text-[16px] leading-[24px] font-normal text-[#f0f0f0] [word-break:break-word]`}
         >
           {label}
         </p>
       </div>
 
       {/* Stat + body + features */}
-      <div className="absolute left-[20px] top-[317px] flex w-[386px] flex-col gap-[15px]">
+      <div className="absolute left-[20px] top-[317px] flex w-[calc(100%-40px)] flex-col gap-[15px]">
         <div className="flex flex-col">
           <p
-            className={`${gilroyBold.className} bg-clip-text text-[82px] leading-[100px] tracking-[-1.64px] text-transparent`}
+            className={`${gilroyBold.className} bg-clip-text text-[60px] leading-[68px] min-[1180px]:text-[72px] min-[1180px]:leading-[84px] xl:text-[82px] xl:leading-[100px] tracking-[-1.64px] text-transparent`}
             style={{
               backgroundImage: STAT_GRADIENT,
               WebkitBackgroundClip: "text",
@@ -91,13 +91,13 @@ function WinCard({ label, stat, statLabel, visual, body, buttons, muted }: WinCa
             {stat}
           </p>
           <p
-            className={`${gilroyMedium.className} text-[22px] leading-[28px] uppercase text-[#c5f3b5] [word-break:break-word]`}
+            className={`${gilroyMedium.className} text-[20px] min-[1180px]:text-[22px] leading-[26px] min-[1180px]:leading-[28px] uppercase text-[#c5f3b5] [word-break:break-word]`}
           >
             {statLabel}
           </p>
         </div>
         <p
-          className={`${interRegular.className} text-[16px] leading-[24px] font-normal ${muted ? "text-[#8a8a8a]" : "text-[rgba(240,240,240,0.6)]"} [word-break:break-word]`}
+          className={`${interRegular.className} text-[15px] xl:text-[16px] leading-[22px] xl:leading-[24px] font-normal ${muted ? "text-[#8a8a8a]" : "text-[rgba(240,240,240,0.6)]"} [word-break:break-word]`}
         >
           {body}
         </p>
@@ -343,7 +343,7 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
         />
       </div>
 
-      {/* DESKTOP (>=1024px) */}
+      {/* DESKTOP & LARGE TABLET (>=1024px) */}
       <div className="relative hidden w-full max-w-[1440px] flex-col items-center min-[1024px]:flex pt-[64px] pb-[64px]">
         <div className="flex flex-col items-center gap-[20px]">
           <div className="relative flex items-center justify-center h-[26px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)] border-[0.5px] border-[rgba(255,255,255,0.2)] px-[18px]">
@@ -382,7 +382,7 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
           ) : null}
         </div>
 
-        <div className="flex gap-[14px] mt-[80px]">
+        <div className="flex gap-[12px] min-[1180px]:gap-[14px] mt-[60px] xl:mt-[80px] px-[16px] xl:px-0 justify-center">
           {cards.map((card: any) => (
             <div key={card.label} className="flex flex-col items-center gap-[24px]">
               <WinCard
@@ -419,14 +419,14 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
 
       </div>
 
-      {/* MOBILE (<1024px) — node 4032:5947 */}
+      {/* MOBILE & SMALL TABLET (<1024px) — node 4032:5947 */}
       <div
-        className="relative flex w-full flex-col items-center px-[19px] pt-[30px] pb-[32px] min-[1024px]:hidden"
+        className="relative flex w-full flex-col items-center px-[19px] md:px-[32px] pt-[30px] md:pt-[60px] pb-[32px] md:pb-[60px] min-[1024px]:hidden"
         data-node-id="4032:5947"
         data-name="4th Fold"
       >
         {/* Header: tag badge + title (node 4032:14671) */}
-        <div className="relative z-10 flex w-[350px] flex-col items-center gap-[10px]">
+        <div className="relative z-10 flex w-[350px] md:w-[600px] flex-col items-center gap-[10px] md:gap-[16px]">
           <div className="relative flex items-center justify-center h-[26px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)] border-[0.5px] border-[rgba(255,255,255,0.2)] px-[18px]">
             <Corners
               leftSrc="/applications/wearables/vector-47.svg"
@@ -491,7 +491,7 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
           </div>
           {subheading ? (
             <p
-              className={`${interRegular.className} w-full max-w-[324px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+              className={`${interRegular.className} w-full max-w-[324px] md:max-w-[560px] text-center text-[14px] leading-[21px] md:text-[16px] md:leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
             >
               {subheading}
             </p>
@@ -500,10 +500,10 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
 
         {/* Cards Carousel (node 4032:5958) */}
         <div
-          className="relative z-10 mt-[35px] flex w-[calc(100%+38px)] -mx-[19px] snap-x snap-mandatory gap-[16px] overflow-x-auto px-[19px] pb-[8px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="relative z-10 mt-[35px] md:mt-[48px] flex w-[calc(100%+38px)] md:w-full -mx-[19px] md:mx-0 snap-x snap-mandatory gap-[16px] md:gap-[24px] overflow-x-auto px-[19px] md:px-[24px] pb-[8px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {cards.map((card: any) => (
-            <div key={card.label} className="flex w-[355px] max-w-[85vw] shrink-0 snap-center flex-col items-center gap-[20px]">
+            <div key={card.label} className="flex w-[355px] md:w-[380px] max-w-[85vw] shrink-0 snap-center flex-col items-center gap-[20px]">
               <WinCardMobile
                 label={card.label}
                 stat={card.stat}

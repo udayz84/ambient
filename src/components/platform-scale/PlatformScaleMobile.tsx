@@ -235,7 +235,7 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
 
             <h2
               ref={fitRef}
-              className={`${gilroyMedium.className} relative z-10 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+              className={`${gilroyMedium.className} relative z-10 bg-clip-text text-center text-[36px] md:text-[44px] leading-[36px] md:leading-[48px] font-medium text-transparent [word-break:break-word] not-italic`}
               style={{
                 backgroundImage:
                   "linear-gradient(100.945deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -245,7 +245,7 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
             </h2>
           </div>
           <p
-            className={`${interRegular.className} mt-[16px] max-w-[340px] px-[20px] text-center text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} mt-[16px] max-w-[340px] md:max-w-[580px] px-[20px] text-center text-[14px] md:text-[16px] leading-[22px] md:leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
           >
             {subtitle}
           </p>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Navbar } from "@/components/navbar/Navbar";
 import { SiteFooterWrapper } from "@/components/site-footer/SiteFooterWrapper";
@@ -15,6 +16,8 @@ import "./globals.css";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
+
+const GA4_MEASUREMENT_ID = "G-R9CNVQ4SYG";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -71,6 +74,16 @@ export default async function RootLayout({
         </SmoothScroll>
         <NewsletterPopup />
         <CookieConsent />
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga4" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA4_MEASUREMENT_ID}');`}
+        </Script>
       </body>
     </html>
   );

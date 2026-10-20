@@ -284,9 +284,9 @@ export function ApplicationsMobile({
       {!activeTabData?.isBuild && (
         <>
           {/* Feature Cards */}
-          <div className="relative z-20 mt-[-36px] grid w-full max-w-[343px] grid-cols-2 gap-[12px]">
+          <div className="relative z-20 mt-[-36px] grid w-full max-w-[343px] md:max-w-[620px] grid-cols-2 gap-[12px] md:gap-[20px]">
         {features.map((feature, idx) => (
-          <div key={idx} className="relative w-full border border-white/20 bg-[#000000] p-[16px]">
+          <div key={idx} className="relative w-full border border-white/20 bg-[#000000] p-[16px] md:p-[24px]">
             {activeTab === "AUTOMOTIVE" && idx === 0 && (
               <img loading="lazy" decoding="async"
                 src="/applications/indicator-vertical.svg"
@@ -298,10 +298,10 @@ export function ApplicationsMobile({
 
             <Corners />
 
-            <h4 className={`${gilroyMedium.className} text-[16px] leading-[22px] text-white [word-break:break-word]`}>
+            <h4 className={`${gilroyMedium.className} text-[16px] md:text-[20px] leading-[22px] md:leading-[26px] text-white [word-break:break-word]`}>
               {feature.title}
             </h4>
-            <p className={`${interRegular.className} mt-[12px] text-[12px] leading-[18px] text-[#f0f0f0] opacity-65 [word-break:break-word]`}>
+            <p className={`${interRegular.className} mt-[12px] text-[12px] md:text-[14px] leading-[18px] md:leading-[22px] text-[#f0f0f0] opacity-65 [word-break:break-word]`}>
               {feature.description}
             </p>
           </div>

@@ -18,7 +18,13 @@ function splitValue(value: string) {
   return { num: match[1], unit: match[2] };
 }
 
-export function HeroMetrics({ metrics = [] }: { metrics?: HeroMetric[] }) {
+export function HeroMetrics({
+  metrics = [],
+  className = "absolute top-[515px] left-[120px] flex w-max content-stretch items-start justify-start gap-[24px]",
+}: {
+  metrics?: HeroMetric[];
+  className?: string;
+}) {
   const m0 = metrics[0] || {};
   const m1 = metrics[1] || {};
 
@@ -30,7 +36,7 @@ export function HeroMetrics({ metrics = [] }: { metrics?: HeroMetric[] }) {
 
   return (
     <div
-      className="absolute top-[515px] left-[120px] flex w-max content-stretch items-start justify-start gap-[24px]"
+      className={className}
       data-node-id="2379:742"
       data-name="Mesarable Proof Metrics"
     >

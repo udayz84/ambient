@@ -16,7 +16,7 @@ export function TechnologyHeadline({ data }: { data?: any }) {
   const subheading = data?.subheading || data?.subtitle || "";
   return (
     <div
-      className="absolute top-[48.5px] left-[468.88720703125px] z-20 h-[126px] w-[497px]"
+      className="absolute top-[48.5px] left-1/2 -translate-x-1/2 z-20 h-[126px] w-[497px]"
       data-name="Headline frame"
     >
       <div

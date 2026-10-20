@@ -60,12 +60,12 @@ export function Applications({ data }: { data?: any }) {
 
   return (
     <section
-      className="relative flex w-full justify-center overflow-hidden bg-black"
+      className="relative flex w-full justify-center overflow-hidden bg-black max-[1023px]:h-auto min-[1024px]:h-[868px]"
       aria-label="Build the impossible today"
     >
       <div className="relative mx-auto hidden h-[868px] w-full max-w-[1440px] min-[1024px]:block">
         <div
-          className="absolute top-0 left-1/2 h-[868px] w-[1321px] -translate-x-1/2"
+          className="absolute top-0 left-1/2 h-[868px] w-[1024px] min-[1180px]:w-[1180px] xl:w-[1321px] -translate-x-1/2"
           data-node-id="2379:844"
           data-name="Build the impoosible"
         >
@@ -109,7 +109,7 @@ export function Applications({ data }: { data?: any }) {
         </div>
       </div>
 
-      {/* MOBILE (<1024px) — dedicated layout, desktop is untouched above */}
+      {/* MOBILE & SMALL TABLET (<1024px) — dedicated layout, desktop is untouched above */}
       <div className="relative w-full min-[1024px]:hidden">
         <ApplicationsMobile
           tabs={tabs}
@@ -117,7 +117,8 @@ export function Applications({ data }: { data?: any }) {
           data={data}
           categoryActiveIndex={activeIndex}
           setCategoryActiveIndex={setActiveIndex}
-        />      </div>
+        />
+      </div>
     </section>
   );
 }

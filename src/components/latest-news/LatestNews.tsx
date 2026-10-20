@@ -68,12 +68,12 @@ export function LatestNews({ data }: { data?: any }) {
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
     <section
-      className="relative mt-[150px] flex w-full justify-center overflow-x-clip bg-black max-[1023px]:mt-[24px]"
+      className="relative mt-[40px] md:mt-[60px] min-[1024px]:mt-[150px] flex w-full justify-center overflow-x-clip bg-black"
       aria-label="Latest from Ambient"
       data-node-id="2379:1283"
     >
       <div className="relative mx-auto hidden w-full max-w-[1440px] justify-center min-[1024px]:flex">
-        <div className="mx-auto flex w-[1204px] flex-col items-center gap-[48px]">
+        <div className="mx-auto flex w-[960px] min-[1180px]:w-[1100px] xl:w-[1204px] flex-col items-center gap-[40px] xl:gap-[48px] px-[16px] xl:px-0">
           <div
             className="relative w-[600px] shrink-0"
             data-node-id="2379:1284"
@@ -129,7 +129,7 @@ export function LatestNews({ data }: { data?: any }) {
           </div>
 
           <div
-            className="flex w-full shrink-0 items-center gap-[20px]"
+            className="flex w-full shrink-0 items-center justify-center gap-[16px] min-[1180px]:gap-[20px]"
             data-node-id="2379:1291"
           >
             {cards.map((article: LatestNewsArticle) => (
@@ -165,7 +165,7 @@ export function LatestNews({ data }: { data?: any }) {
         </div>
       </div>
 
-      {/* MOBILE (<1024px) — dedicated layout, desktop is untouched above */}
+      {/* MOBILE & SMALL TABLET (<1024px) — dedicated layout, desktop is untouched above */}
       <div className="relative w-full min-[1024px]:hidden">
         <LatestNewsMobile data={data} />
       </div>

@@ -103,8 +103,8 @@ export function MeasuredProofMobile({ data }: { data?: any }) {
   const scaledHeight = 600 * scale;
 
   return (
-    <div className="relative flex flex-col items-center px-[24px] py-[40px]">
-      <div className="flex flex-col items-center gap-[16px]">
+    <div className="relative flex flex-col items-center px-[24px] md:px-[40px] py-[40px] md:py-[64px]">
+      <div className="flex flex-col items-center gap-[16px] md:gap-[20px]">
         <TagBadge
           label={tagText}
           width={230}
@@ -115,10 +115,10 @@ export function MeasuredProofMobile({ data }: { data?: any }) {
           labelClassName="text-[15px] leading-[22px] tracking-[-0.45px]"
         />
 
-        <div className="relative flex w-[354px] max-w-full flex-col items-center justify-center py-[7px]">
+        <div className="relative flex w-[354px] md:w-[560px] max-w-full flex-col items-center justify-center py-[7px]">
           <h2
             ref={fitRef}
-            className={`${gilroyMedium.className} relative z-10 w-[244px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+            className={`${gilroyMedium.className} relative z-10 w-[244px] md:w-[480px] bg-clip-text text-center text-[36px] leading-[36px] md:text-[44px] md:leading-[48px] font-medium text-transparent [word-break:break-word] not-italic`}
             style={{
               backgroundImage:
                 "linear-gradient(102.363deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -158,25 +158,18 @@ export function MeasuredProofMobile({ data }: { data?: any }) {
         </div>
       </div>
 
-      <div className="mt-[28px] flex w-[calc(100%+48px)] -mx-[24px] px-[calc(50vw-132px)] snap-x snap-mandatory gap-[14px] overflow-x-auto pb-[8px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="mt-[28px] md:mt-[44px] flex w-[calc(100%+48px)] md:w-full -mx-[24px] md:mx-0 px-[calc(50vw-132px)] md:px-[24px] snap-x snap-mandatory gap-[14px] md:gap-[24px] overflow-x-auto pb-[8px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {cards.map((card: any, index: number) => (
           <div
             key={card.nodeId}
-            className="animate-hero-text-fade-in shrink-0 snap-center"
+            className="animate-hero-text-fade-in shrink-0 snap-center w-[264px] md:w-[326px] h-[408px] md:h-[504px]"
             style={{
               animationDelay: `${index * 100}ms`,
               animationDuration: "800ms",
-              width: scaledWidth,
-              height: scaledHeight,
             }}
           >
             <div
-              style={{
-                transform: `scale(${scale})`,
-                transformOrigin: "top left",
-                width: 388,
-                height: 600,
-              }}
+              className="origin-top-left scale-[0.68] md:scale-[0.84] w-[388px] h-[600px]"
             >
               <MeasuredProofCard {...card} />
             </div>

@@ -228,7 +228,7 @@ export function DeveloperPlatformMobile({ data }: { data?: any }) {
         <div className="relative px-[12px]" data-name="Headline frame">
           <h2
             ref={fitRef}
-            className={`${gilroyMedium.className} w-[350px] max-w-[calc(100vw-32px)] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+            className={`${gilroyMedium.className} w-[350px] md:w-[600px] max-w-[calc(100vw-32px)] bg-clip-text text-center text-[36px] md:text-[44px] leading-[36px] md:leading-[48px] font-medium text-transparent [word-break:break-word] not-italic`}
             style={{
               backgroundImage:
                 "linear-gradient(107.454deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -240,13 +240,13 @@ export function DeveloperPlatformMobile({ data }: { data?: any }) {
         </div>
 
         <p
-          className={`${interRegular.className} mt-0 w-[350px] max-w-[calc(100vw-32px)] px-[12px] text-center text-[14px] leading-[18px] font-normal text-white not-italic [word-break:break-word]`}
+          className={`${interRegular.className} mt-0 w-[350px] md:w-[600px] max-w-[calc(100vw-32px)] px-[12px] text-center text-[14px] md:text-[16px] leading-[18px] md:leading-[24px] font-normal text-white not-italic [word-break:break-word]`}
         >
           {subtitle}
         </p>
 
         {/* Bento cards — Figma 3174:49214 */}
-        <div className="mt-[28px] flex w-[calc(100%-24px)] max-w-[400px] flex-wrap content-start items-start gap-[5px]">
+        <div className="mt-[28px] md:mt-[36px] flex w-[calc(100%-24px)] max-w-[400px] md:max-w-[640px] flex-wrap content-start items-start gap-[5px] md:gap-[10px]">
           <WideCard
             nodeId="4164:13360"
             title={explore.title}

@@ -38,9 +38,9 @@ export function TechnologyMobile({ data }: { data?: any }) {
             rightBarLeft={170.48046875}
           />
 
-          <div className="relative flex w-[354px] max-w-full flex-col items-center justify-center py-[10px] mt-[16px]">
+          <div className="relative flex w-[354px] md:w-[600px] max-w-full flex-col items-center justify-center py-[10px] mt-[16px]">
             <h2
-              className={`${gilroyMedium.className} relative z-10 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+              className={`${gilroyMedium.className} relative z-10 bg-clip-text text-center text-[36px] leading-[36px] md:text-[44px] md:leading-[48px] font-medium text-transparent [word-break:break-word] not-italic`}
               style={{
                 backgroundImage:
                   "linear-gradient(106.923deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -83,7 +83,7 @@ export function TechnologyMobile({ data }: { data?: any }) {
 
           {subheading && (
             <p
-              className={`${interRegular.className} mt-[14px] px-[16px] text-center text-[15px] leading-[22px] text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+              className={`${interRegular.className} mt-[14px] px-[16px] text-center text-[15px] leading-[22px] md:text-[16px] md:leading-[24px] text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] md:max-w-[600px]`}
             >
               {subheading}
             </p>
@@ -92,7 +92,7 @@ export function TechnologyMobile({ data }: { data?: any }) {
 
         {/* Edge-to-Edge Image */}
         <div 
-          className="relative mt-[32px] w-full h-[184px]"
+          className="relative mt-[32px] w-full h-[184px] md:h-[280px] md:max-w-[700px] md:mx-auto"
           style={{
             maskImage: "radial-gradient(ellipse at center, black 70%, transparent 100%)",
             WebkitMaskImage: "radial-gradient(ellipse at center, black 70%, transparent 100%)",
@@ -111,9 +111,9 @@ export function TechnologyMobile({ data }: { data?: any }) {
 
         {/* Features Content with Padding */}
         <div className="flex flex-col items-center px-[24px] w-full">
-          <div className="relative mt-[32px] flex w-full flex-col max-w-[350px]">
+          <div className="relative mt-[32px] flex w-full flex-col max-w-[350px] md:max-w-[640px]">
             {features.map((feature: any, index: number) => (
-              <div key={index} className="relative w-full flex flex-col items-start px-[20px] border-[0.5px] border-solid border-white/20 bg-[rgba(0,0,0,0.1)] backdrop-blur-[12px] mb-[-0.5px]">
+              <div key={index} className="relative w-full flex flex-col items-start px-[20px] md:px-[28px] border-[0.5px] border-solid border-white/20 bg-[rgba(0,0,0,0.1)] backdrop-blur-[12px] mb-[-0.5px]">
                 {/* Top Right Bracket */}
                 <div className="absolute -top-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center">
                   <div className="rotate-180 flex-none">
@@ -149,7 +149,7 @@ export function TechnologyMobile({ data }: { data?: any }) {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-[3px] items-start py-[20px] relative w-full">
+                <div className="flex flex-col gap-[3px] items-start py-[20px] md:py-[24px] relative w-full">
                   <div className="relative size-[33px] shrink-0">
                     {feature.iconSrc ? (
                       <img loading="lazy" decoding="async"
@@ -167,7 +167,7 @@ export function TechnologyMobile({ data }: { data?: any }) {
                   </p>
                   <div className="flex flex-col items-start w-full relative shrink-0">
                     <p
-                      className={`${interRegular.className} [word-break:break-word] text-[14px] leading-[22px] text-[#f0f0f0] opacity-65 not-italic w-[310px] max-w-full shrink-0 relative`}
+                      className={`${interRegular.className} [word-break:break-word] text-[14px] md:text-[15px] leading-[22px] md:leading-[24px] text-[#f0f0f0] opacity-65 not-italic w-[310px] md:w-full max-w-full shrink-0 relative`}
                     >
                       {feature.description}
                     </p>

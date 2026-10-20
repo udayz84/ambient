@@ -57,7 +57,7 @@ export function LatestNewsMobile({ data }: { data?: any }) {
   const articles = resolveCards(data);
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
-    <div className="relative flex w-full flex-col items-center px-[20px] py-[48px]">
+    <div className="relative flex w-full flex-col items-center px-[20px] md:px-[32px] py-[48px] md:py-[64px]">
       <div className="relative flex flex-col items-center">
         <div className="relative px-[16px] py-[4px]">
           <div className="absolute top-0 right-0 flex size-[4px] items-center justify-center">
@@ -91,7 +91,7 @@ export function LatestNewsMobile({ data }: { data?: any }) {
 
           <h2
             ref={fitRef}
-            className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[44px] font-medium text-transparent not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] md:text-[44px] leading-[44px] md:leading-[50px] font-medium text-transparent not-italic [word-break:break-word]`}
             style={{
               backgroundImage:
                 "linear-gradient(119.407deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -103,18 +103,18 @@ export function LatestNewsMobile({ data }: { data?: any }) {
       </div>
 
       <p
-        className={`${interRegular.className} mt-[16px] w-full max-w-[375px] text-center text-[14px] leading-[20px] font-normal text-white not-italic px-[8px] [word-break:break-word]`}
+        className={`${interRegular.className} mt-[16px] w-full max-w-[375px] md:max-w-[600px] text-center text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] font-normal text-white not-italic px-[8px] [word-break:break-word]`}
       >
         {subtitle}
       </p>
 
-      <div className="mt-[28px] flex w-[calc(100%+40px)] -mx-[20px] snap-x snap-mandatory gap-[16px] overflow-x-auto px-[20px] pb-[8px] scroll-pl-[20px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="mt-[28px] md:mt-[40px] flex w-[calc(100%+40px)] md:w-full -mx-[20px] md:mx-0 snap-x snap-mandatory gap-[16px] md:gap-[24px] overflow-x-auto px-[20px] md:px-[24px] pb-[8px] scroll-pl-[20px] md:scroll-pl-[24px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {articles.map((article: any) => (
           <article
             key={article.nodeId}
-            className="relative flex w-[300px] max-w-[82vw] shrink-0 snap-start flex-col overflow-clip bg-[rgba(255,255,255,0.04)]"
+            className="relative flex w-[300px] md:w-[350px] max-w-[82vw] shrink-0 snap-start flex-col overflow-clip bg-[rgba(255,255,255,0.04)]"
           >
-            <div className="relative h-[184px] w-full shrink-0 overflow-hidden bg-black">
+            <div className="relative h-[184px] md:h-[210px] w-full shrink-0 overflow-hidden bg-black">
               {article.imageSrc ? (
                 /\.(mp4|webm)$/i.test(article.imageSrc) ? (
                   <video

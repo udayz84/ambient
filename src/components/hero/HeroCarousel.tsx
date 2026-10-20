@@ -119,7 +119,7 @@ function AnnouncementSlide({ announcement }: { announcement: Announcement }) {
           image (stronger under the text, slight on the image side) */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 hidden min-[1024px]:block"
+        className="pointer-events-none absolute inset-0 hidden md:block"
         style={{
           background:
             "linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.45) 48%, rgba(0,0,0,0.12) 100%)",
@@ -128,7 +128,7 @@ function AnnouncementSlide({ announcement }: { announcement: Announcement }) {
       {/* Mobile: content stacks over the image — scrim top and bottom */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 min-[1024px]:hidden"
+        className="pointer-events-none absolute inset-0 md:hidden"
         style={{
           background:
             "linear-gradient(to bottom, rgba(0,0,0,0.60) 0%, rgba(0,0,0,0.25) 45%, rgba(0,0,0,0.80) 100%)",
@@ -136,16 +136,16 @@ function AnnouncementSlide({ announcement }: { announcement: Announcement }) {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute top-[118px] left-[95px] hidden w-[560px] border-t border-white/10 min-[1024px]:block"
+        className="pointer-events-none absolute top-[118px] left-[95px] hidden w-[560px] border-t border-white/10 md:block"
       />
 
-      {/* Desktop content — left column */}
-      <div className="relative hidden h-full w-full max-w-[1442px] min-[1024px]:block">
-        <div className="absolute top-[300px] left-[95px] flex w-[560px] flex-col items-start gap-[15px]">
+      {/* Desktop & Large Tablet content (>=1024px) */}
+      <div className="relative hidden min-[1024px]:block h-full w-full max-w-[1442px]">
+        <div className="absolute top-[300px] left-[48px] xl:left-[95px] flex w-[calc(100%-96px)] max-w-[560px] flex-col items-start gap-[15px]">
           <TagBadge label={announcement.tag} width={150} centerLabel />
           <h1
             ref={fitRef}
-            className={`${gilroyMedium.className} bg-clip-text text-[46px] leading-[49px] font-medium text-transparent [word-break:break-word] not-italic`}
+            className={`${gilroyMedium.className} bg-clip-text text-[38px] leading-[42px] xl:text-[46px] xl:leading-[49px] font-medium text-transparent [word-break:break-word] not-italic`}
             style={{
               backgroundImage:
                 "linear-gradient(101.005deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -155,7 +155,7 @@ function AnnouncementSlide({ announcement }: { announcement: Announcement }) {
           >
             {announcement.title}
           </h1>
-          <p className={`${interRegular.className} w-[419px] text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-80 [word-break:break-word]`}>
+          <p className={`${interRegular.className} w-[419px] max-w-full text-[15px] xl:text-[16px] leading-[22px] xl:leading-[24px] font-normal text-[#f0f0f0] opacity-80 [word-break:break-word]`}>
             {announcement.subtitle}
           </p>
           <div className="mt-[15px] flex items-center gap-[16px]">
@@ -173,12 +173,12 @@ function AnnouncementSlide({ announcement }: { announcement: Announcement }) {
         </div>
       </div>
 
-      {/* Mobile content */}
-      <div className="relative flex w-full flex-col items-start gap-[15px] px-[24px] pt-[180px] pb-[120px] min-[1024px]:hidden">
+      {/* Mobile & Small Tablet content (<1024px) */}
+      <div className="relative flex min-[1024px]:hidden w-full flex-col items-start gap-[15px] px-[24px] md:px-[40px] pt-[180px] md:pt-[140px] pb-[120px] md:pb-[80px]">
         <TagBadge label={announcement.tag} width={150} centerLabel />
         <h1
           ref={fitRef2}
-          className={`${gilroyMedium.className} w-[320px] max-w-full bg-clip-text text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+          className={`${gilroyMedium.className} w-[320px] max-w-full md:w-auto md:max-w-[620px] bg-clip-text text-[36px] leading-[36px] md:text-[44px] md:leading-[48px] font-medium text-transparent [word-break:break-word] not-italic`}
           style={{
             backgroundImage:
               "linear-gradient(100.849deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -188,10 +188,10 @@ function AnnouncementSlide({ announcement }: { announcement: Announcement }) {
         >
           {announcement.title}
         </h1>
-        <p className={`${interRegular.className} w-[332px] max-w-full text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
+        <p className={`${interRegular.className} w-[332px] max-w-full md:w-auto md:max-w-[500px] text-[14px] leading-[21px] md:text-[16px] md:leading-[24px] font-normal text-[#f0f0f0] opacity-80 [word-break:break-word]`}>
           {announcement.subtitle}
         </p>
-        <div className="mt-[15px] flex flex-col items-start gap-[12px]">
+        <div className="mt-[15px] flex flex-col md:flex-row items-start md:items-center gap-[12px] md:gap-[16px]">
           {announcement.ctas.map((cta, i) => (
             <AnnouncementCtaButton key={cta.label} cta={cta} onClick={(href, e) => {
               const text = cta.label.toUpperCase();
@@ -247,7 +247,7 @@ export function HeroCarousel({ data, formConfig }: { data?: any; formConfig?: an
 
   return (
     <section
-      className="relative -mt-[78px] flex h-[876px] w-full justify-center overflow-hidden bg-black max-[1023px]:h-auto"
+      className="relative -mt-[78px] flex flex-col items-center min-h-[876px] w-full justify-center overflow-hidden bg-black max-[1023px]:h-auto min-[1024px]:h-[876px]"
       aria-label="Featured"
       onPointerEnter={() => setPaused(true)}
       onPointerLeave={() => setPaused(false)}
