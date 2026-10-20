@@ -36,6 +36,11 @@ export const metadata: Metadata = {
   },
   description:
     "Ambient Scientific builds energy-aware, programmable, mixed-signal AI processors that deliver orders-of-magnitude improvements in performance-per-watt — from microwatt edge devices to hyperscaler cloud.",
+  // Fresh URLs bypass previously cached redirects to missing Blob Storage files.
+  icons: {
+    icon: [{ url: "/icon.png?v=20261019", type: "image/png", sizes: "512x512" }],
+    apple: [{ url: "/apple-icon.png?v=20261019", type: "image/png", sizes: "180x180" }],
+  },
 };
 
 export default async function RootLayout({

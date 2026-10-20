@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "node scripts/azure/clear-icon-route-cache.mjs && next start",
     "lint": "eslint",
     "assets:manifest": "node scripts/azure/generate-manifest.mjs",
     "assets:upload": "node scripts/azure/upload-assets.mjs",

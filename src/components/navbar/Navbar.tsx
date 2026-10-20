@@ -14,7 +14,6 @@ import {
 } from "./nav-items";
 import { MobileMenu } from "./MobileMenu";
 import { NavbarCta } from "./NavbarCta";
-import { mediaUrl } from "@/lib/strapi";
 
 function ShoppingCartIcon() {
   return (
@@ -550,7 +549,9 @@ export function Navbar({
   const navLinks = shopItem
     ? navItems.filter((item) => item.label?.toLowerCase() !== "shop")
     : navItems;
-  const logoSrc = mediaUrl(brandData?.logo) || "/navbar/logo.png";
+  // The CMS logo is a lower-quality asset. Use the high-resolution
+  // brand asset so the 46px mobile mark remains crisp on high-DPR screens.
+  const logoSrc = "/navbar/logo.png";
   return (
     <header
       className={`${interMedium.className} sticky top-0 z-50 h-[78px] w-full drop-shadow-[0px_6px_12px_rgba(83,216,36,0.12)]`}
