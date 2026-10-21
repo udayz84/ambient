@@ -161,8 +161,8 @@ export function SiteFooter({
               className="absolute inset-0 h-full w-full object-cover object-top"
             />
           </div>
-          {/* Tablet & Desktop Background (>=600px) */}
-          <div className="hidden min-[600px]:block absolute inset-0">
+          {/* Tablet Background (600px to 1023px) */}
+          <div className="hidden min-[600px]:block lg:hidden absolute inset-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img loading="lazy" decoding="async"
               alt=""
@@ -170,6 +170,13 @@ export function SiteFooter({
               className="absolute left-1/2 top-0 h-full min-h-[900px] w-full min-w-[1024px] -translate-x-1/2 object-cover object-top"
             />
           </div>
+          {/* Desktop Background (>=1024px) - EXACT FIGMA MATCH */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt=""
+            src="/footer.png"
+            className="hidden lg:block absolute left-[-0.02%] top-[-5.03%] h-[97.04%] w-full min-w-0 translate-x-0 opacity-100 max-w-none object-cover"
+          />
         </div>
         {/* Mobile overlay */}
         <div
@@ -179,8 +186,10 @@ export function SiteFooter({
             bottom: 0,
           }}
         />
-        {/* Tablet & Desktop top gradient overlay for smooth blend with overlap */}
-        <div className="absolute inset-0 hidden min-[600px]:block bg-gradient-to-b from-black/90 via-black/20 to-black/40 pointer-events-none" />
+        {/* Tablet overlay (600px to 1023px) */}
+        <div className="absolute inset-0 hidden min-[600px]:block lg:hidden bg-gradient-to-b from-black/90 via-black/20 to-black/40 pointer-events-none" />
+        {/* Desktop overlay (>=1024px) - EXACT FIGMA MATCH */}
+        <div className="absolute inset-0 hidden bg-gradient-to-b from-black/80 via-black/10 to-black/10 lg:block" />
       </div>
 
       {/* Hidden overlap spacer — sits behind the page's merged final section */}
@@ -209,18 +218,18 @@ export function SiteFooter({
         )}
 
       <nav
-        className="relative z-[1] flex w-full max-w-[960px] flex-col px-[20px] text-white min-[600px]:grid min-[600px]:grid-cols-2 min-[600px]:gap-x-[56px] min-[600px]:gap-y-[36px] min-[600px]:px-[40px] min-[900px]:grid-cols-4 min-[900px]:gap-x-[32px] lg:absolute lg:top-[626px] lg:left-1/2 lg:-translate-x-1/2 lg:flex lg:flex-row lg:items-start lg:justify-between lg:px-0 lg:gap-0"
+        className="relative z-[1] flex w-full max-w-[897px] flex-col px-[20px] text-white min-[600px]:grid min-[600px]:grid-cols-2 min-[600px]:gap-x-[56px] min-[600px]:gap-y-[36px] min-[600px]:px-[40px] min-[900px]:grid-cols-4 min-[900px]:gap-x-[32px] min-[900px]:max-w-[960px] lg:absolute lg:top-[626px] lg:left-1/2 lg:-translate-x-1/2 lg:flex lg:flex-row lg:items-start lg:justify-between lg:px-0 lg:gap-0 lg:max-w-[897px]"
         aria-label="Footer"
         data-node-id="3572:7314"
       >
         {navSections.map((section, sectionIndex) => (
           <div
             key={section.title}
-            className={`group flex w-full flex-col min-[600px]:mt-0 lg:w-[158px] lg:shrink-0 ${
+            className={`group flex w-full flex-col min-[600px]:mt-0 lg:w-[158px] lg:shrink-0 lg:mt-0 ${
               sectionIndex > 0 ? "mt-[10px] min-[600px]:mt-0" : ""
             } ${
               sectionIndex < navSections.length - 1
-                ? "border-b border-white/20 pb-[10px] min-[600px]:border-none min-[600px]:pb-0"
+                ? "border-b border-white/20 pb-[10px] min-[600px]:border-none min-[600px]:pb-0 lg:border-none lg:pb-0"
                 : ""
             }`}
           >
@@ -232,7 +241,7 @@ export function SiteFooter({
             />
             <label
               htmlFor={`footer-nav-${section.title}`}
-              className="flex h-[25px] cursor-pointer items-center justify-between min-[600px]:h-auto min-[600px]:cursor-default min-[600px]:justify-start lg:justify-center peer-checked:[&_.footer-icon-plus]:hidden peer-checked:[&_.footer-icon-minus]:block"
+              className="flex h-[25px] cursor-pointer items-center justify-between min-[600px]:h-auto min-[600px]:cursor-default min-[600px]:justify-start lg:h-auto lg:cursor-default lg:justify-center peer-checked:[&_.footer-icon-plus]:hidden peer-checked:[&_.footer-icon-minus]:block"
             >
               <p
                 className={`${interMedium.className} w-full text-[14px] leading-[1.4] font-medium tracking-[0.56px] whitespace-nowrap text-white/60 uppercase not-italic overflow-hidden text-ellipsis min-[600px]:text-[12px] min-[600px]:tracking-[0.48px] min-[600px]:text-left lg:text-[10px] lg:tracking-[0.4px] lg:text-center`}
@@ -247,13 +256,13 @@ export function SiteFooter({
               </span>
             </label>
             <ul
-              className={`hidden flex-col items-start gap-[12px] text-[16px] leading-[1.4] mt-[9px] peer-checked:flex min-[600px]:!flex min-[600px]:mt-[16px] min-[600px]:gap-[10px] lg:mt-[24px] lg:mb-0 lg:text-[14px] lg:${section.listAlign === "center" ? "items-center" : "items-start"} ${sectionIndex < navSections.length - 1 ? "peer-checked:mb-[-2px] min-[600px]:mb-0" : ""}`}
+              className={`hidden flex-col items-start gap-[12px] text-[16px] leading-[1.4] mt-[9px] peer-checked:flex min-[600px]:!flex min-[600px]:mt-[16px] min-[600px]:gap-[10px] lg:!flex lg:mt-[24px] lg:mb-0 lg:text-[14px] lg:${section.listAlign === "center" ? "items-center" : "items-start"} ${sectionIndex < navSections.length - 1 ? "peer-checked:mb-[-2px] min-[600px]:mb-0" : ""}`}
             >
               {section.links.map((link) => (
                 <li key={link.label} className="w-full text-left lg:text-center">
                   <a
                     href={link.href}
-                    className={`${interRegular.className} block max-w-full font-normal whitespace-nowrap text-white/90 hover:text-white not-italic overflow-hidden text-ellipsis transition-colors text-[14px]`}
+                    className={`${interRegular.className} block max-w-full font-normal whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis hover:opacity-80 lg:text-[14px]`}
                   >
                     {link.label}
                   </a>
@@ -265,12 +274,12 @@ export function SiteFooter({
       </nav>
 
       {/* Bottom Section */}
-      <div className="relative z-[1] mt-[44px] flex w-full max-w-[1240px] flex-col items-start justify-center gap-[24px] px-[20px] min-[600px]:mt-[56px] min-[600px]:px-[40px] min-[900px]:flex-row min-[900px]:items-end min-[900px]:justify-between min-[900px]:gap-[32px] lg:absolute lg:top-[932px] lg:left-0 lg:mt-0 lg:px-[130px]">
+      <div className="relative z-[1] mt-[44px] flex w-full max-w-[1240px] flex-col items-start justify-center gap-[24px] px-[20px] min-[600px]:mt-[56px] min-[600px]:px-[40px] min-[900px]:flex-row min-[900px]:items-end min-[900px]:justify-between min-[900px]:gap-[32px] lg:absolute lg:top-[932px] lg:left-0 lg:mt-0 lg:flex-row lg:items-end lg:justify-between lg:gap-0 lg:px-[130px] lg:max-w-none">
 
         {/* Left Side */}
-        <div className="flex w-full flex-col items-start gap-[20px] min-[600px]:flex-row min-[600px]:items-center min-[600px]:gap-[28px] min-[900px]:w-auto min-[900px]:items-end lg:gap-[22px]">
+        <div className="flex w-full flex-col items-start gap-[20px] min-[600px]:flex-row min-[600px]:items-center min-[600px]:gap-[28px] min-[900px]:w-auto min-[900px]:items-end lg:w-auto lg:flex-row lg:items-end lg:gap-[22px]">
           {/* Socials Block */}
-          <div className="flex w-full flex-row items-center justify-start gap-[14px] min-[600px]:w-auto min-[600px]:flex-col min-[600px]:items-start min-[600px]:gap-[12px] lg:gap-[22px]">
+          <div className="flex w-full flex-row items-center justify-start gap-[14px] min-[600px]:w-auto min-[600px]:flex-col min-[600px]:items-start min-[600px]:gap-[12px] lg:w-auto lg:flex-col lg:items-start lg:gap-[22px]">
             {/* Mobile: Inter Medium 12px / Desktop: Gilroy Medium 10px (Figma 3572:7338) */}
             <p className={`${interMedium.className} text-[12px] leading-[1.4] font-medium tracking-[0.48px] uppercase text-white/60 not-italic min-[600px]:hidden`}>
               CONNECT WITH US
@@ -280,7 +289,7 @@ export function SiteFooter({
             </p>
             <div className="flex items-center justify-start gap-[20px] pt-px min-[600px]:gap-[24px] lg:gap-[32px] lg:pt-0">
               {socialLinks.map((social) => (
-                <a key={social.platform} href={social.href} aria-label={social.label} className="block size-[24px] transition-opacity hover:opacity-80">
+                <a key={social.platform} href={social.href} aria-label={social.label} className="block size-[24px]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img loading="lazy" decoding="async" src={social.icon} alt="" className="block size-full object-contain" />
                 </a>
@@ -292,10 +301,10 @@ export function SiteFooter({
           <div aria-hidden className="h-0 w-full border-t border-white/20 min-[600px]:hidden" />
 
           {/* Separator */}
-          <div className="hidden h-[25px] w-px bg-white/20 min-[600px]:mb-[4px] min-[600px]:block" />
+          <div className="hidden h-[25px] w-px bg-white/20 min-[600px]:mb-[4px] min-[600px]:block lg:mb-[4px] lg:block" />
 
           {/* Legal Links Block */}
-          <div className="flex w-full flex-col items-start min-[600px]:w-auto min-[600px]:gap-[12px] lg:gap-[22px]">
+          <div className="flex w-full flex-col items-start min-[600px]:w-auto min-[600px]:gap-[12px] lg:w-auto lg:gap-[22px]">
             {/* Mobile: Inter Medium 12px / Desktop: Gilroy Medium 10px (Figma 3572:7348) */}
             <p className={`${interMedium.className} text-[12px] leading-[1.4] font-medium tracking-[0.48px] uppercase text-white/60 not-italic min-[600px]:hidden`}>
               LEGAL PAGES
@@ -304,14 +313,14 @@ export function SiteFooter({
               LEGAL PAGES
             </p>
             {/* Figma grid: links 27px below label top (label 16.8px tall) */}
-            <div className="mt-[10.2px] flex flex-row flex-wrap items-center justify-start gap-[8px] min-[600px]:mt-0 lg:pb-[4px]">
+            <div className="mt-[10.2px] flex flex-row flex-wrap items-center justify-start gap-[8px] min-[600px]:mt-0 lg:mt-0 lg:pb-[4px]">
               {legalLinks.map((link, idx) => (
                 <span key={link.label} className="flex items-center gap-[8px]">
                   {idx > 0 && (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img loading="lazy" decoding="async" src="/footer/dot-separator.svg" alt="" className="block h-[4px] w-[5px]" />
                   )}
-                  <a href={link.href} className={`${interRegular.className} max-w-full text-[14px] leading-[1.4] text-white/90 hover:text-white lg:text-[#E4E4E4] transition-colors [word-break:break-word]`}>{link.label}</a>
+                  <a href={link.href} className={`${interRegular.className} max-w-full text-[14px] leading-[1.4] text-white hover:text-white lg:text-[#E4E4E4] [word-break:break-word]`}>{link.label}</a>
                 </span>
               ))}
             </div>
@@ -319,8 +328,8 @@ export function SiteFooter({
         </div>
 
         {/* Right Side */}
-        <div className="flex w-full flex-row items-center justify-between gap-[22px] min-[900px]:w-auto min-[900px]:justify-start min-[900px]:gap-[48px] lg:pb-[4px]">
-          <p className={`${interRegular.className} text-[10px] leading-[1.3] text-[rgba(255,255,255,0.8)] overflow-hidden text-ellipsis whitespace-nowrap min-[600px]:text-[12px]`}>
+        <div className="flex w-full flex-row items-start justify-start gap-[22.022px] min-[600px]:items-center min-[600px]:justify-between min-[600px]:gap-[22px] min-[900px]:w-auto min-[900px]:justify-start min-[900px]:gap-[48px] lg:w-auto lg:items-center lg:justify-start lg:gap-[48px] lg:pb-[4px]">
+          <p className={`${interRegular.className} max-w-full text-[10px] leading-[1.3] text-[rgba(255,255,255,0.8)] overflow-hidden text-ellipsis whitespace-nowrap min-[600px]:text-[12px] lg:text-[12px]`}>
             {copyrightText}
           </p>
           <CraftedByAttribution text={craftedByText} logoSrc={craftedByLogoSrc} />
@@ -343,7 +352,7 @@ export function SiteFooter({
 
       <p
         aria-hidden
-        className={`${gilroyBold.className} pointer-events-none absolute bottom-[-15px] left-1/2 -translate-x-1/2 bg-clip-text text-[110px] leading-none font-bold tracking-[-2px] whitespace-nowrap text-[transparent] opacity-[0.15] hidden lg:block lg:top-[1040px] lg:bottom-auto lg:left-[calc(50%-568px)] lg:translate-x-0 lg:text-[300px] lg:tracking-[-6px] lg:opacity-30 not-italic select-none`}
+        className={`${gilroyBold.className} pointer-events-none absolute bottom-[-15px] left-1/2 -translate-x-1/2 bg-clip-text text-[110px] leading-none font-bold tracking-[-2px] whitespace-nowrap text-[transparent] opacity-[0.15] hidden lg:block lg:top-[1040px] lg:bottom-auto lg:left-[calc(50%-568px)] lg:translate-x-0 lg:text-[300px] lg:tracking-[-6px] lg:opacity-30 not-italic`}
         style={{
           backgroundImage:
             "linear-gradient(to right, rgba(46,76,38,0.4), #ddf5d3 50%, rgba(46,76,38,0.4))",
