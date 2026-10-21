@@ -7,6 +7,7 @@ import { TechnologyPageGraph } from "@/components/technology-page/TechnologyPage
 import { TechnologyPageSilicon } from "@/components/technology-page/TechnologyPageSilicon";
 import { TechnologyPageEfficiency } from "@/components/technology-page/TechnologyPageEfficiency";
 import { TechnologyPageBottomCta } from "@/components/technology-page/TechnologyPageBottomCta";
+import { TabletScaleInit } from "@/components/shared/TabletScaleInit";
 import { getSingleType } from "@/lib/strapi";
 import { buildMetadata, type SeoData } from "@/lib/seo";
 
@@ -49,6 +50,7 @@ export default async function TechnologyPage() {
   }
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
+      <TabletScaleInit />
       {data?.hero && <TechnologyPageHero data={data.hero} config={data.brief_form} />}
       {data?.problem && <TechnologyPageProblem data={data.problem} />}
       {data?.architecture && (

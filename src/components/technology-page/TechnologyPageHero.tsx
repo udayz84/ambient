@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useState } from "react";
 import { mediaUrl } from "@/lib/strapi";
@@ -7,6 +8,7 @@ import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const TITLE_GRADIENT_DEG = "109.122deg";
 
@@ -82,7 +84,7 @@ export function TechnologyPageHero({
       aria-label="Technology hero"
     >
       {/* Full-bleed desktop background */}
-      <div className="pointer-events-none absolute inset-0 hidden min-[1024px]:block" aria-hidden>
+      <div className="pointer-events-none absolute inset-0 hidden min-[600px]:block" aria-hidden>
         {(bgSrc || objectSrc) && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -98,8 +100,8 @@ export function TechnologyPageHero({
         <div className="absolute inset-y-0 right-0 hidden w-[300px] bg-gradient-to-l from-black to-transparent min-[1441px]:block" />
       </div>
 
-      {/* DESKTOP (>=1024px) — pixel-perfect from Figma node 2921:2682 (hero region) */}
-      <div className="relative hidden h-[765px] w-full max-w-[1440px] min-[1024px]:block">
+      {/* DESKTOP (>=600px) — pixel-perfect from Figma node 2921:2682 (hero region) */}
+      <TabletScaleCanvas className="relative hidden h-[765px] w-[1440px] shrink-0 min-[600px]:block">
         {/* Foreground Content Wrapper */}
         <div className="relative mt-[78px] h-[687px] w-full">
 
@@ -154,10 +156,10 @@ export function TechnologyPageHero({
           </div>
         </div>
         </div>
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE (<1024px) — pixel-perfect from Figma node 3572:6456 (Banner, 393x676) */}
-      <div className="relative w-full overflow-hidden min-[1024px]:hidden pt-[78px]">
+      {/* MOBILE (<600px) — pixel-perfect from Figma node 3572:6456 (Banner, 393x676) */}
+      <div className="relative w-full overflow-hidden min-[600px]:hidden pt-[78px]">
         <div className="relative mx-auto h-[676px] w-full max-w-[393px]">
           {/* 3572:7530 — hero object image */}
           <div
@@ -220,7 +222,7 @@ export function TechnologyPageHero({
               {titleText}
             </div>
             <p
-              className={`${interRegular.className} min-w-full shrink-0 text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+              className={`${interRegular.className} min-w-full shrink-0 text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 not-italic [word-break:break-word]`}
               data-node-id="3572:6477"
             >
               {descText}

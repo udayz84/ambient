@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { gilroyMedium, interLight, interMedium, interRegular } from "../hero/fonts";
 import { GradientTitle } from "../contact/contact-shared";
 import { CompanyEngagementCta } from "../company/CompanyEngagementCta";
 import { MobileTitleCorners } from "./mobile-shared";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const TITLE_GRADIENT_DEG = "114.359deg";
 const FALLBACK_SUBTITLE =
@@ -403,7 +405,8 @@ type MobileRow = {
   highlighted: boolean;
   chip: string;
   blend: boolean;
-  tradeLeft: number;
+  tradeLeft?: number;
+  tradeRight?: number;
   tradeTop: number;
   icon: RowIcon;
   tradeLabel: string;
@@ -471,7 +474,8 @@ const M_ROWS: MobileRow[] = [
     highlighted: false,
     chip: "/technology/eff-mobile-chip-gpu.webp",
     blend: false,
-    tradeLeft: 242.7,
+    tradeLeft: 210,
+    tradeRight: 10,
     tradeTop: 35.7,
     icon: "heat",
     tradeLabel: "Too hot & power hungry",
@@ -705,7 +709,12 @@ function EfficiencyTableMobile() {
           {/* trade-off */}
           <div
             className="absolute flex items-center gap-[6px]"
-            style={{ left: `${row.tradeLeft}px`, top: `${row.tradeTop}px` }}
+            style={{
+              ...(row.tradeRight !== undefined
+                ? { right: `${row.tradeRight}px` }
+                : { left: `${row.tradeLeft}px` }),
+              top: `${row.tradeTop}px`,
+            }}
           >
             <MobileTradeIcon icon={row.icon} />
             <p
@@ -951,8 +960,8 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
       data-name="Desktop - 15"
       aria-label="The efficiency gap is a different category"
     >
-      {/* Full-bleed Glows for DESKTOP (>=1024px) */}
-      <div className="absolute inset-0 z-0 hidden w-full min-[1024px]:block">
+      {/* Full-bleed Glows for DESKTOP (>=600px) */}
+      <div className="absolute inset-0 z-0 hidden w-full min-[600px]:block">
         <Glow
           top="top-[350px]"
           height="h-[591px]"
@@ -971,8 +980,8 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
         />
       </div>
 
-      {/* DESKTOP (>=1024px) */}
-      <div className="relative z-10 hidden h-[810px] w-full max-w-[1440px] min-[1024px]:block">
+      {/* DESKTOP (>=600px) */}
+      <TabletScaleCanvas className="relative z-10 hidden h-[810px] w-[1440px] shrink-0 min-[600px]:block">
 
         {/* 3346:938 — Section Title */}
         <div
@@ -999,7 +1008,7 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
             flip="-scale-y-100 rotate-180"
           />
           <p
-            className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} text-[16px] leading-[24px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic`}
             data-node-id="3346:945"
           >
             {subtitle}
@@ -1021,10 +1030,10 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
             Download Architecture Whitepaper
           </CompanyEngagementCta>
         </div>
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE (<1024px) — Figma 4533:2857 "6th Fold" (393x1119 + whitepaper CTA) */}
-      <div className="relative h-[1230px] w-full overflow-hidden min-[1024px]:hidden">
+      {/* MOBILE (<600px) — Figma 4533:2857 "6th Fold" (393x1119 + whitepaper CTA) */}
+      <div className="relative h-[1230px] w-full overflow-hidden min-[600px]:hidden">
         {/* Background glows — 4533:2859 / 4533:2860 */}
         <Glow
           top="top-[-104px]"
@@ -1087,7 +1096,7 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
             <MobileTitleCorners />
           </div>
           <p
-            className={`${interRegular.className} w-full text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-full text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           >
             {subtitle}
           </p>

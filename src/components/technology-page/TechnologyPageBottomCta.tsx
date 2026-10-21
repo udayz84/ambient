@@ -8,6 +8,7 @@ import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { MobileTitleCorners } from "./mobile-shared";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const CARD_OUTLINE = "/technology/cta-card-outline.svg";
 const MOBILE_CARD_FRAME = "/technology/bottom-cta-card-frame.svg";
@@ -103,7 +104,7 @@ function CtaCard({
           {/* body + CTA */}
           <div className="flex w-full flex-col items-start gap-[20px]">
             <p
-              className={`${interRegular.className} min-h-[72px] w-full text-center text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-white not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+              className={`${interRegular.className} min-h-[72px] w-full text-center text-[16px] leading-[24px] font-normal tracking-[-0.3125px] text-white not-italic [word-break:break-word]`}
             >
               {card.body}
             </p>
@@ -176,11 +177,11 @@ export function TechnologyPageBottomCta({
 
   return (
     <section
-      className="relative z-20 mb-[-700px] min-[1024px]:mb-[-409px] w-full bg-transparent"
+      className="relative z-20 mb-[-700px] min-[600px]:[margin-bottom:calc(-409px*var(--tablet-zoom,1))] flex w-full justify-center bg-transparent"
       aria-label="Put A-Cube to work"
     >
-      {/* DESKTOP (>=1024px) */}
-      <div className="hidden flex-col items-center min-[1024px]:flex min-[1024px]:pt-[80px]">
+      {/* DESKTOP (>=600px) */}
+      <TabletScaleCanvas className="hidden w-[1440px] shrink-0 flex-col items-center min-[600px]:flex min-[600px]:pt-[80px]">
         {/* section title */}
         <div
           className="flex w-[492.93px] flex-col items-center gap-[24px]"
@@ -194,7 +195,7 @@ export function TechnologyPageBottomCta({
             <GreenCtaCorners />
           </div>
           <p
-            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-full text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           >
             {sectionSubtitle}
           </p>
@@ -206,10 +207,10 @@ export function TechnologyPageBottomCta({
             <CtaCard key={card.nodeId} card={card} outlineSrc={outlineSrc} />
           ))}
         </div>
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE (<1024px) — Figma 3572:7372 */}
-      <div className="flex flex-col items-center gap-[16px] px-[20px] pt-[41px] min-[1024px]:hidden">
+      {/* MOBILE (<600px) — Figma 3572:7372 */}
+      <div className="flex flex-col items-center gap-[16px] px-[20px] pt-[41px] min-[600px]:hidden">
         {/* Section heading */}
         <div className="flex w-full flex-col items-center gap-[10px]">
           <div className="relative w-[350px]">
@@ -226,7 +227,7 @@ export function TechnologyPageBottomCta({
             <MobileTitleCorners />
           </div>
           <p
-            className={`${interRegular.className} text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           >
             {sectionSubtitle}
           </p>

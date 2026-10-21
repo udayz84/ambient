@@ -476,7 +476,7 @@ export function Navbar({
 
           <div className="absolute top-[21px] right-[16px] md:right-[32px] min-[1024px]:right-[40px] flex items-center gap-[12px] z-30 pointer-events-auto">
             {shopItem ? (
-              <div className="hidden md:block">
+              <div className="hidden min-[600px]:block">
                 <ShopNavButton item={shopItem} />
               </div>
             ) : null}

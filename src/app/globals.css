@@ -387,3 +387,21 @@ html, body {
     pointer-events: none !important;
   }
 }
+
+/* Tablet proportional scaling (600px - 1439.98px) */
+@media (min-width: 600px) and (max-width: 1439.98px) {
+  .tablet-scale-canvas {
+    zoom: var(--tablet-zoom, 0.41667);
+  }
+}
+
+@supports not (zoom: 1) {
+  @media (min-width: 600px) and (max-width: 1439.98px) {
+    .tablet-scale-canvas {
+      transform: scale(var(--tablet-zoom, 0.41667));
+      transform-origin: top center;
+    }
+  }
+}
+
+

@@ -501,7 +501,7 @@ export function ApplicationsPageModelZoo({
 
         <div className="relative inline-block px-[14px]">
           <h2
-            className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] min-[1024px]:text-[46px] leading-[1.2] font-medium text-transparent not-italic`}
+            className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] min-[600px]:text-[46px] leading-[1.2] font-medium text-transparent not-italic`}
             style={{ backgroundImage: TITLE_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
           >
             {heading}
@@ -509,13 +509,13 @@ export function ApplicationsPageModelZoo({
           <Corners />
         </div>
 
-        <p className={`${interRegular.className} max-w-[800px] text-[16px] min-[1024px]:text-[16px] leading-[24px] min-[1024px]:leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic`}>
+        <p className={`${interRegular.className} max-w-[800px] text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic`}>
           {subtitle}
         </p>
 
         {/* CTA Row */}
         {!isSmartHome && !isWearables && (
-          <div className="mt-[16px] flex w-full flex-col min-[1024px]:flex-row items-center justify-center gap-[16px] px-[20px]">
+          <div className="mt-[16px] flex w-full flex-col min-[600px]:flex-row items-center justify-center gap-[16px] px-[20px]">
             <PrimaryCta label={primaryCta.label} href={primaryCta.href} />
             <SecondaryCta label={SECONDARY_CTA.label} href={SECONDARY_CTA.href} />
           </div>
@@ -542,7 +542,7 @@ export function ApplicationsPageModelZoo({
 
       {/* CTA underneath the carousel (strip variant only) */}
       {variant === "strip" ? (
-        <div className="relative z-10 mt-[48px] flex w-full flex-col min-[1024px]:flex-row items-center justify-center gap-[16px] px-[20px]">
+        <div className="relative z-10 mt-[48px] flex w-full flex-col min-[600px]:flex-row items-center justify-center gap-[16px] px-[20px]">
           <PrimaryCta label={primaryCta.label} href={primaryCta.href} />
         </div>
       ) : null}

@@ -8,6 +8,7 @@ import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
 import { ContinuumOptionsBar } from "./ContinuumOptionsBar";
 import { mediaUrl } from "@/lib/strapi";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const TITLE_GRADIENT =
   "linear-gradient(119.973deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -477,8 +478,8 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
       data-name="Desktop - 12"
       aria-label="The Ambient Continuum"
     >
-      {/* ============= DESKTOP (>=1024px) ============= */}
-      <div className="relative hidden h-[808px] w-full max-w-[1440px] min-[1024px]:block">
+      {/* ============= DESKTOP (>=600px) ============= */}
+      <TabletScaleCanvas className="relative hidden h-[808px] w-[1440px] shrink-0 min-[600px]:block">
         {/* --- Background image + radial gradient (image 29) --- */}
         <div
           aria-hidden
@@ -636,11 +637,11 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
             </div>
           </div>
         </div>
-      </div>
+      </TabletScaleCanvas>
 
-      {/* ============= MOBILE (<1024px) — Figma 4583:25080..25188 (393x700) ============= */}
+      {/* ============= MOBILE (<600px) — Figma 4583:25080..25188 (393x700) ============= */}
       <div
-        className="relative h-[700px] w-full overflow-hidden min-[1024px]:hidden"
+        className="relative h-[700px] w-full overflow-hidden min-[600px]:hidden"
         data-node-id="4583:25080"
         data-name="Frame 1984079471"
         onTouchStart={handleTouchStart}

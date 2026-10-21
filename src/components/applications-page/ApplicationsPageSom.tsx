@@ -1,11 +1,13 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
 import { mediaUrl } from "@/lib/strapi";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const TITLE_GRADIENT =
   "linear-gradient(123.792deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -239,11 +241,11 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
 
   return (
     <section
-      className="relative z-20 mb-[-700px] min-[1024px]:mb-[-409px] flex w-full justify-center overflow-hidden bg-transparent"
+      className="relative z-20 mb-[-700px] min-[600px]:[margin-bottom:calc(-409px*var(--tablet-zoom,1))] flex w-full justify-center overflow-hidden bg-transparent"
       aria-label="Don't start from scratch"
     >
-      {/* DESKTOP (>=1024px) */}
-      <div className="hidden w-full max-w-[1440px] flex-col items-center gap-[72px] pt-[64px] pb-[64px] min-[1024px]:flex">
+      {/* DESKTOP (>=600px) */}
+      <TabletScaleCanvas className="hidden w-[1440px] shrink-0 flex-col items-center gap-[72px] pt-[64px] pb-[64px] min-[600px]:flex">
         {/* Header */}
         <div className="flex w-full flex-col items-center gap-[24px]">
           <div className="relative inline-block px-[14px]">
@@ -290,11 +292,11 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
         <div className="flex items-center justify-center gap-[24px]">
           <DiscussCta label={secondary.label} href={secondary.href} />
         </div>
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE (<1024px) — node 4062:11663 */}
+      {/* MOBILE (<600px) — node 4062:11663 */}
       <div
-        className="flex w-full flex-col items-center px-[19px] pt-[30px] pb-[32px] min-[1024px]:hidden"
+        className="flex w-full flex-col items-center px-[19px] pt-[30px] pb-[32px] min-[600px]:hidden"
         data-node-id="4062:11663"
         data-name="5th Fold"
       >

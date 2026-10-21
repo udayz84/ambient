@@ -1,6 +1,7 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRef } from "react";
 import Link from "next/link";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
@@ -8,6 +9,7 @@ import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
 import { mediaUrl } from "@/lib/strapi";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const TITLE_GRADIENT =
   "linear-gradient(131.785deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -222,19 +224,19 @@ export function ApplicationsPageArticles({ data }: { data?: any }) {
       data-name="Frame 1618875840"
       aria-label="Intelligence without boundaries"
     >
-      {/* DESKTOP (>=1024px) */}
-      <div className="hidden w-full max-w-[1440px] flex-col items-center gap-[40px] pt-[96px] pb-[64px] min-[1024px]:flex">
+      {/* DESKTOP (>=600px) */}
+      <TabletScaleCanvas className="hidden w-[1440px] shrink-0 flex-col items-center gap-[40px] pt-[96px] pb-[64px] min-[600px]:flex">
         <SectionTitle heading={heading} />
         <div className="grid grid-cols-[repeat(3,377px)] gap-[36px]">
           {articles.map((article) => (
             <ArticleCard key={article.title} article={article} />
           ))}
         </div>
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE (<1024px) — horizontal carousel per Figma 4032:5870 */}
+      {/* MOBILE (<600px) — horizontal carousel per Figma 4032:5870 */}
       <div
-        className="relative flex w-full flex-col items-center overflow-hidden pb-[30px] min-[1024px]:hidden"
+        className="relative flex w-full flex-col items-center overflow-hidden pb-[30px] min-[600px]:hidden"
         data-node-id="4032:5870"
       >
         <style>{`.art-m-scroll::-webkit-scrollbar{display:none}.art-m-scroll{scrollbar-width:none;-ms-overflow-style:none}`}</style>

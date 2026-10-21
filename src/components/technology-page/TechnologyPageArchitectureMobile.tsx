@@ -201,7 +201,7 @@ export function TechnologyPageArchitectureMobile({
   const pillar = pillars[index] ?? pillars[0];
 
   return (
-    <div className="relative w-full overflow-hidden min-[1024px]:hidden">
+    <div className="relative w-full overflow-hidden min-[600px]:hidden">
       <div className="relative mx-auto min-h-[966px] pb-[60px] w-full max-w-[393px]">
         <MobileBrainVisual />
 

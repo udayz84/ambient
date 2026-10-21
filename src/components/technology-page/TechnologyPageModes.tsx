@@ -1,10 +1,12 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { gilroyMedium, gilroySemiBold, interRegular, interSemiBold } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { MobileCornerMark, MobileTitleCorners } from "./mobile-shared";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const MODES_BOTTOM = "/technology/modes-bottom-new.webp";
 const MODES_CUBE = "/technology/modes-cube.webp";
@@ -621,11 +623,10 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
       className="relative flex w-full justify-center overflow-hidden bg-black bg-center bg-no-repeat bg-cover"
       style={{ backgroundImage: 'url(/image-108.png)' }}
       data-node-id="3003:497"
-      data-name="Hero Section"
       aria-label="Two named modes, one continuous loop"
     >
-      {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden h-[787px] w-full max-w-[1440px] min-[1024px]:block">
+      {/* DESKTOP (>=600px) */}
+      <TabletScaleCanvas className="relative hidden h-[787px] w-[1440px] shrink-0 min-[600px]:block">
         {/* Top wavy lines (image 196 in Figma) */}
         <div
           className="-translate-x-1/2 absolute h-[114.649px] left-[calc(50%+9.1px)] top-[313px] w-[838.264px] pointer-events-none z-0"
@@ -710,7 +711,7 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
           </div>
 
           <p
-            className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[679.39px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
             style={{ opacity: SUBTITLE_OPACITY }}
             data-node-id="3003:557"
           >
@@ -746,10 +747,10 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
             {l.label}
           </ModeLabel>
         ))}
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE (<1024px) — pixel-perfect from Figma node 3572:7989 (4th Fold, 393x1366) */}
-      <div className="relative w-full overflow-hidden min-[1024px]:hidden">
+      {/* MOBILE (<600px) — pixel-perfect from Figma node 3572:7989 (4th Fold, 393x1366) */}
+      <div className="relative w-full overflow-hidden min-[600px]:hidden">
         <div className="relative mx-auto h-[1366px] w-full max-w-[393px]">
           {/* 3572:7996 — header */}
           <div
@@ -782,7 +783,7 @@ export function TechnologyPageModes({ data }: { data?: any } = {}) {
               <MobileTitleCorners />
             </div>
             <p
-              className={`${interRegular.className} w-[324px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+              className={`${interRegular.className} w-[324px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
               data-node-id="3572:8012"
             >
               {subtitle}

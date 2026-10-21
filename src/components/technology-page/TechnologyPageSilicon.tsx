@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from "next/image";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
@@ -6,6 +7,7 @@ import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { Corners } from "../shared/Corners";
 import { MobileTitleCorners } from "./mobile-shared";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const SILICON_BG = "/technology/silicon-bg.png";
 const INDICATOR_1 = "/technology/silicon-indicator-1.svg";
@@ -107,7 +109,7 @@ function StatCard({
           <span className={unitClass}>{unit}</span>
         </p>
         <p
-          className={`${interRegular.className} text-[18px] leading-[27px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} text-[16px] leading-[24px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic`}
         >
           {label}
         </p>
@@ -122,7 +124,7 @@ function StatCard({
 
       {/* description */}
       <p
-        className={`${interRegular.className} absolute top-[175.34px] left-[30px] w-[327.508px] text-[18px] leading-[27px] font-normal text-white not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+        className={`${interRegular.className} absolute top-[175.34px] left-[30px] w-[327.508px] text-[16px] leading-[24px] font-normal text-white not-italic [word-break:break-word]`}
         style={{ opacity: 0.9 }}
       >
         {description}
@@ -210,13 +212,13 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
 
   return (
     <section
-      className="relative flex w-full justify-center overflow-hidden bg-black pt-[40px] min-[1024px]:pt-[60px]"
+      className="relative flex w-full justify-center overflow-hidden bg-black pt-[40px] min-[600px]:pt-[60px]"
       data-node-id="3018:489"
       data-name="Proven In Silicon"
       aria-label="Proven in silicon, shipping today"
     >
-      {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden h-[901px] w-full max-w-[1440px] min-[1024px]:block">
+      {/* DESKTOP (>=600px) */}
+      <TabletScaleCanvas className="relative hidden h-[901px] w-[1440px] shrink-0 min-[600px]:block">
         {/* 3016:485 — image 108 (background visual + vignette) */}
         <div
           className="pointer-events-none absolute top-[145.85px] left-0 z-0 h-[689.27px] w-[1444.4px] overflow-hidden"
@@ -336,7 +338,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
           </div>
 
           <p
-            className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[679.39px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
             style={{ opacity: SUBTITLE_OPACITY }}
             data-node-id="3015:536"
           >
@@ -389,10 +391,10 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
             </a>
           )}
         </div>
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE (<1024px) — Figma 3572:8893 (393×~1330) */}
-      <div className="relative mx-auto w-full max-w-[393px] overflow-hidden min-[1024px]:hidden">
+      {/* MOBILE (<600px) — Figma 3572:8893 (393×~1330) */}
+      <div className="relative mx-auto w-full max-w-[393px] overflow-hidden min-[600px]:hidden">
         {/* Background visual — 3572:8896 (image 108 rotated 90° + vignette) */}
         <div
           className="pointer-events-none absolute top-[218px] left-1/2 z-0 overflow-hidden"
@@ -437,7 +439,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
             <MobileTitleCorners />
           </div>
           <p
-            className={`${interRegular.className} w-[324px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[324px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
             style={{ opacity: SUBTITLE_OPACITY }}
           >
             {subtitle}
@@ -479,7 +481,7 @@ export function TechnologyPageSilicon({ data }: { data?: any } = {}) {
         {/* CTA — 3572:8990 */}
         <div className="relative z-10 mx-auto flex w-[377px] flex-col items-center gap-[17px] pt-[30px] pb-[40px]">
           <p
-            className={`${interRegular.className} w-[335px] text-center text-[14px] leading-[20px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[335px] text-center text-[14px] leading-[20px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
             style={{ opacity: 0.8 }}
           >
             {FALLBACK_DESC}

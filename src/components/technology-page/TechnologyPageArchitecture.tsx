@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { TechnologyPageArchitectureMobile } from "./TechnologyPageArchitectureMobile";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 /**
  * Figma 3330:1261 ("Desktop - 17") — "One architecture that thinks,
@@ -391,8 +393,8 @@ export function TechnologyPageArchitecture({
       data-name="Desktop - 17"
       aria-label="One architecture that thinks, senses, & speaks you language"
     >
-      {/* DESKTOP (>=1024px) — 1440×1833 canvas */}
-      <div className="relative hidden h-[1833px] w-[1440px] shrink-0 min-[1024px]:block">
+      {/* DESKTOP (>=600px) — 1440×1833 canvas */}
+      <TabletScaleCanvas className="relative hidden h-[1833px] w-[1440px] shrink-0 min-[600px]:block">
         <BrainVisual />
 
         {/* Eyebrow above the section title — hardcoded */}
@@ -428,7 +430,7 @@ export function TechnologyPageArchitecture({
             <CornerDecor />
           </div>
           <p
-            className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65 [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[679.39px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic opacity-65 [word-break:break-word]`}
             data-node-id="3330:1279"
           >
             {subtitle}
@@ -456,7 +458,7 @@ export function TechnologyPageArchitecture({
         <Connector left={542} top={493} />
         <Connector left={542} top={933} />
         <Connector left={544} top={1493} />
-      </div>
+      </TabletScaleCanvas>
 
       {/* MOBILE (<1024px) — pixel-perfect from Figma node 3572:6674 (3rd Fold, 393x966) */}
       <TechnologyPageArchitectureMobile

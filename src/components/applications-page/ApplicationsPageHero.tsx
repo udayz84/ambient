@@ -7,6 +7,7 @@ import { GradientTitle } from "../contact/contact-shared";
 import { useFitText } from "../shared/FitText";
 import { mediaUrl } from "@/lib/strapi";
 import { splitTitleIntoTwoLines } from "@/lib/title-utils";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const MOBILE_TITLE_GRADIENT =
   "linear-gradient(98.22145329235457deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -36,8 +37,8 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
       data-name="Desktop - 6"
       aria-label="Intelligence in Every Environment"
     >
-      {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden h-[804px] w-full max-w-[1440px] min-[1024px]:block">
+      {/* DESKTOP (>=600px) */}
+      <TabletScaleCanvas className="relative hidden h-[804px] w-[1440px] shrink-0 min-[600px]:block">
         {/* Background image 158 */}
         <div
           className="pointer-events-none absolute top-[86.27px] left-[-214.08px] h-[717.73px] w-[1828.16px]"
@@ -119,11 +120,11 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
         >
           {subtitle}
         </p>
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE (<1024px) — node 4032:5727, desktop above is untouched */}
+      {/* MOBILE (<600px) — node 4032:5727, desktop above is untouched */}
       <div
-        className="relative min-h-[800px] w-full overflow-hidden min-[1024px]:hidden pt-[78px] pb-[40px]"
+        className="relative min-h-[800px] w-full overflow-hidden min-[600px]:hidden pt-[78px] pb-[40px]"
         data-node-id="4032:5727"
         data-name="Banner"
       >

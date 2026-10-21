@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Fragment } from "react";
 import { mediaUrl } from "@/lib/strapi";
@@ -6,6 +7,7 @@ import { gilroyMedium, interRegular, interSemiBold } from "../hero/fonts";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { MobileTitleCorners } from "./mobile-shared";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 /**
  * Figma 3031:508 ("Graph") — "A unified architecture for seamless adoption
@@ -176,8 +178,8 @@ export function TechnologyPageGraph({
       data-name="Graph"
       aria-label="A unified architecture for seamless adoption and scalability"
     >
-      {/* DESKTOP (>=1024px) — 1440×849 canvas */}
-      <div className="relative hidden h-[849px] w-full max-w-[1440px] min-[1024px]:block">
+      {/* DESKTOP (>=600px) — 1440×849 canvas */}
+      <TabletScaleCanvas className="relative hidden h-[849px] w-[1440px] shrink-0 min-[600px]:block">
         {/* 3031:512 — header (left-aligned) */}
         <div
           className="absolute top-[42px] left-[80px] z-10 flex flex-col items-start gap-[24px]"
@@ -199,7 +201,7 @@ export function TechnologyPageGraph({
             <CornerDecor />
           </div>
           <p
-            className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} text-[16px] leading-[24px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic`}
             data-node-id="3031:519"
           >
             {subtitle}
@@ -321,13 +323,13 @@ export function TechnologyPageGraph({
 
         {/* axis footnotes */}
         <p
-          className={`${interRegular.className} absolute top-[686.55px] left-[90px] text-[14px] leading-[22.75px] font-normal tracking-[-0.1504px] whitespace-nowrap text-[rgba(255,255,255,0.4)] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} absolute top-[686.55px] left-[90px] text-[16px] leading-[24px] font-normal tracking-[-0.1504px] whitespace-nowrap text-[rgba(255,255,255,0.4)] not-italic`}
           data-node-id="3031:522"
         >
           {axisLeft}
         </p>
         <p
-          className={`${interRegular.className} absolute top-[686.55px] left-[1350px] -translate-x-full text-right text-[14px] leading-[22.75px] font-normal tracking-[-0.1504px] whitespace-nowrap text-[rgba(255,255,255,0.4)] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} absolute top-[686.55px] left-[1350px] -translate-x-full text-right text-[16px] leading-[24px] font-normal tracking-[-0.1504px] whitespace-nowrap text-[rgba(255,255,255,0.4)] not-italic`}
           data-node-id="3031:524"
         >
           {axisRight}
@@ -355,10 +357,10 @@ export function TechnologyPageGraph({
           primaryLabel={primaryLabel}
           primaryHref={primaryHref}
         />
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE (<1024px) */}
-      <div className="relative mx-auto h-[1145px] w-full max-w-[393px] overflow-hidden min-[1024px]:hidden">
+      {/* MOBILE (<600px) */}
+      <div className="relative mx-auto h-[1145px] w-full max-w-[393px] overflow-hidden min-[600px]:hidden">
         {/* Header — 3572:6666 */}
         <div className="absolute top-[9px] left-1/2 flex w-[350px] -translate-x-1/2 flex-col items-center gap-[10px]">
           <div className="relative w-full">
@@ -375,7 +377,7 @@ export function TechnologyPageGraph({
             <MobileTitleCorners />
           </div>
           <p
-            className={`${interRegular.className} w-[334px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[334px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           >
             {subtitle}
           </p>
@@ -403,7 +405,7 @@ export function TechnologyPageGraph({
         >
           <div className="flex-none rotate-90">
             <p
-              className={`${interRegular.className} text-[14px] leading-[22.75px] font-normal tracking-[-0.1504px] whitespace-nowrap text-[rgba(255,255,255,0.4)] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+              className={`${interRegular.className} text-[14px] leading-[22.75px] font-normal tracking-[-0.1504px] whitespace-nowrap text-[rgba(255,255,255,0.4)] not-italic`}
             >
               {axisLeft}
             </p>
@@ -417,7 +419,7 @@ export function TechnologyPageGraph({
         >
           <div className="flex-none rotate-90">
             <p
-              className={`${interRegular.className} text-right text-[14px] leading-[22.75px] font-normal tracking-[-0.1504px] whitespace-nowrap text-[rgba(255,255,255,0.4)] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+              className={`${interRegular.className} text-right text-[14px] leading-[22.75px] font-normal tracking-[-0.1504px] whitespace-nowrap text-[rgba(255,255,255,0.4)] not-italic`}
             >
               {axisRight}
             </p>

@@ -1,6 +1,7 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
@@ -8,6 +9,7 @@ import { gilroyBold, gilroyMedium, interRegular, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
 import { mediaUrl } from "@/lib/strapi";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const TILE_BG =
   "radial-gradient(circle at 50% 50%, #394a36, #2b3629 50%, #1d221c)";
@@ -62,7 +64,7 @@ function WinCard({ label, stat, statLabel, visual, body, buttons, muted }: WinCa
   return (
     <div
       ref={fadeRef}
-      className={`relative h-[640px] w-[310px] min-[1180px]:w-[360px] xl:w-[426px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black ${getFadeInClass(isVisible)}`}
+      className={`relative h-[640px] w-[426px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black ${getFadeInClass(isVisible)}`}
       data-name="Container"
     >
       {visual}
@@ -343,8 +345,8 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
         />
       </div>
 
-      {/* DESKTOP & LARGE TABLET (>=1024px) */}
-      <div className="relative hidden w-full max-w-[1440px] flex-col items-center min-[1024px]:flex pt-[64px] pb-[64px]">
+      {/* DESKTOP & LARGE TABLET (>=600px) */}
+      <TabletScaleCanvas className="relative hidden w-[1440px] shrink-0 flex-col items-center min-[600px]:flex pt-[64px] pb-[64px]">
         <div className="flex flex-col items-center gap-[20px]">
           <div className="relative flex items-center justify-center h-[26px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)] border-[0.5px] border-[rgba(255,255,255,0.2)] px-[18px]">
             <Corners
@@ -382,7 +384,7 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
           ) : null}
         </div>
 
-        <div className="flex gap-[12px] min-[1180px]:gap-[14px] mt-[60px] xl:mt-[80px] px-[16px] xl:px-0 justify-center">
+        <div className="flex gap-[14px] mt-[80px] justify-center">
           {cards.map((card: any) => (
             <div key={card.label} className="flex flex-col items-center gap-[24px]">
               <WinCard
@@ -415,13 +417,11 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
             </div>
           ))}
         </div>
+      </TabletScaleCanvas>
 
-
-      </div>
-
-      {/* MOBILE & SMALL TABLET (<1024px) — node 4032:5947 */}
+      {/* MOBILE & SMALL TABLET (<600px) — node 4032:5947 */}
       <div
-        className="relative flex w-full flex-col items-center px-[19px] md:px-[32px] pt-[30px] md:pt-[60px] pb-[32px] md:pb-[60px] min-[1024px]:hidden"
+        className="relative flex w-full flex-col items-center px-[19px] md:px-[32px] pt-[30px] md:pt-[60px] pb-[32px] md:pb-[60px] min-[600px]:hidden"
         data-node-id="4032:5947"
         data-name="4th Fold"
       >

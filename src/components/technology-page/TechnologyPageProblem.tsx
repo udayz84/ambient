@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { MobileTitleCorners } from "./mobile-shared";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const LEGACY_COMPUTE = "/technology/legacy-compute-new.webp";
 const LEGACY_MEMORY = "/technology/legacy-memory-new.webp";
@@ -121,7 +123,7 @@ function SectionHeader({
       </div>
 
       <p
-        className={`${interRegular.className} w-[679.39px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+        className={`${interRegular.className} w-[679.39px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
         style={{ opacity: SUBTITLE_OPACITY }}
         data-node-id="2976:1216"
       >
@@ -187,13 +189,13 @@ function StatRows({ rows, valueRight }: { rows: StatRow[]; valueRight: number })
       {rows.map((row) => (
         <div key={row.label}>
           <p
-            className={`${interRegular.className} absolute left-[21.81px] max-w-full text-[14px] leading-[normal] font-normal whitespace-nowrap text-[#8e8e8e] uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} absolute left-[21.81px] max-w-full text-[16px] leading-[24px] font-normal whitespace-nowrap text-[#8e8e8e] uppercase not-italic overflow-hidden text-ellipsis [word-break:break-word]`}
             style={{ top: row.top }}
           >
             {row.label}
           </p>
           <p
-            className={`${interRegular.className} absolute -translate-x-full text-right text-[14px] leading-[normal] font-normal whitespace-nowrap not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} absolute -translate-x-full text-right text-[16px] leading-[24px] font-normal whitespace-nowrap not-italic [word-break:break-word]`}
             style={{
               left: valueRight,
               top: row.valueTop ?? row.top,
@@ -243,7 +245,7 @@ function LegacyCard({
             {label}
           </p>
           <p
-            className={`${interRegular.className} w-full text-[13px] leading-[normal] font-normal text-[#8e8e8e] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-[#8e8e8e] not-italic [word-break:break-word]`}
             data-node-id="3322:2585"
           >
             {description}
@@ -390,7 +392,7 @@ function ACubeCard({
           {label}
         </p>
         <p
-          className={`${interRegular.className} w-full text-[13px] leading-[normal] font-normal text-[#8e8e8e] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-[#8e8e8e] not-italic [word-break:break-word]`}
           data-node-id="3064:1516"
         >
           {description}
@@ -410,7 +412,7 @@ function ACubeCard({
         {statValue}
       </p>
       <p
-        className={`${interRegular.className} absolute top-[297.43px] left-[26.1px] w-[197.9px] text-[14px] leading-[18px] font-normal text-[#e2f9da] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+        className={`${interRegular.className} absolute top-[297.43px] left-[26.1px] w-[197.9px] text-[16px] leading-[24px] font-normal text-[#e2f9da] not-italic [word-break:break-word]`}
         data-node-id="3328:1024"
       >
         {statDesc}
@@ -584,8 +586,8 @@ export function TechnologyPageProblem({ data }: { data?: any } = {}) {
       data-name="Frame 1984079539"
       aria-label="The problem: AI is a memory problem"
     >
-      {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden h-[939px] w-full max-w-[1440px] min-[1024px]:block">
+      {/* DESKTOP (>=600px) */}
+      <TabletScaleCanvas className="relative hidden h-[939px] w-[1440px] shrink-0 min-[600px]:block">
         <SectionHeader
           tagText={tagText}
           headingLines={headingLines}
@@ -606,10 +608,10 @@ export function TechnologyPageProblem({ data }: { data?: any } = {}) {
         <ChevronDecor />
         <LegacyStatsPanel rows={legacyRows} />
         <ACubeStatsPanel rows={acubeRows} />
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE (<1024px) — pixel-perfect from Figma node 3572:6497 (1st Fold, 393x1066) */}
-      <div className="relative w-full overflow-hidden min-[1024px]:hidden">
+      {/* MOBILE (<600px) — pixel-perfect from Figma node 3572:6497 (1st Fold, 393x1066) */}
+      <div className="relative w-full overflow-hidden min-[600px]:hidden">
         <div className="relative mx-auto h-[1066px] w-full max-w-[393px]">
           <div
             className="absolute top-[48px] left-[20px] flex w-[354px] flex-col items-center gap-[34px]"
@@ -645,7 +647,7 @@ export function TechnologyPageProblem({ data }: { data?: any } = {}) {
                 <MobileTitleCorners />
               </div>
               <p
-                className={`${interRegular.className} w-[324px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+                className={`${interRegular.className} w-[324px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
                 data-node-id="3572:6511"
               >
                 {subtitle}

@@ -6,6 +6,7 @@ import { ApplicationsPageArticles } from "@/components/applications-page/Applica
 import { ApplicationsPageWins } from "@/components/applications-page/ApplicationsPageWins";
 import { ApplicationsPageSom } from "@/components/applications-page/ApplicationsPageSom";
 import { ApplicationsPageModelZoo } from "@/components/applications-page/ApplicationsPageModelZoo";
+import { TabletScaleInit } from "@/components/shared/TabletScaleInit";
 import { getSingleType } from "@/lib/strapi";
 import { buildMetadata, type SeoData } from "@/lib/seo";
 
@@ -45,6 +46,7 @@ export default async function ApplicationsPage() {
 
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
+      <TabletScaleInit />
       {data?.hero && <ApplicationsPageHero data={data.hero} />}
       {data?.death_of_hardware_tradeoffs && (
         <ApplicationsPageDvk data={data.death_of_hardware_tradeoffs} />

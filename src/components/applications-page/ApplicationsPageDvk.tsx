@@ -8,6 +8,7 @@ import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
 import { mediaUrl } from "@/lib/strapi";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const MARQUEE_CARD_BG =
   "radial-gradient(120% 120% at 50% 50%, rgba(0,0,0,0.30) 0%, rgba(5,14,2,0.30) 8%, rgba(10,27,5,0.30) 14%, rgba(21,54,9,0.30) 28%, rgba(31,81,14,0.30) 40%, rgba(42,108,18,0.30) 52%, rgba(62,162,27,0.30) 76%, rgba(83,216,36,0.30) 100%), linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2))";
@@ -435,8 +436,8 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
       data-name="Desktop - 9"
       aria-label="The death of hardware tradeoffs"
     >
-      {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden h-[825px] w-full max-w-[1440px] min-[1024px]:block">
+      {/* DESKTOP (>=600px) */}
+      <TabletScaleCanvas className="relative hidden h-[825px] w-[1440px] shrink-0 min-[600px]:block">
         {/* Marquee columns (opposite directions) */}
         {columns.map((col, colIdx) => (
           <MarqueeColumn
@@ -503,11 +504,11 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
             />
           ))}
         </div>
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE (<1024px) — node 4032:8633, desktop above is untouched */}
+      {/* MOBILE (<600px) — node 4032:8633, desktop above is untouched */}
       <div
-        className="relative flex w-full flex-col items-center overflow-hidden pb-[30px] min-[1024px]:hidden"
+        className="relative flex w-full flex-col items-center overflow-hidden pb-[30px] min-[600px]:hidden"
         data-node-id="4032:8633"
         data-name="2nd Fold"
       >
