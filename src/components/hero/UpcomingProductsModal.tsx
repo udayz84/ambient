@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @next/next/no-img-element */
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -46,6 +47,7 @@ export function UpcomingProductsModal({
   const [shouldRender, setShouldRender] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [step, setStep] = useState<Step>("form");
+  const [submittedVariant, setSubmittedVariant] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -57,6 +59,7 @@ export function UpcomingProductsModal({
     if (isOpen) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setStep("form");
+      setSubmittedVariant(undefined);
       setShouldRender(true);
       timeoutId = setTimeout(() => setIsAnimating(true), 50);
     } else {
@@ -122,7 +125,10 @@ export function UpcomingProductsModal({
         {step === "form" && (
           <FormStep
             onClose={onClose}
-            onSuccess={() => setStep("confirmation")}
+            onSuccess={(variant) => {
+              if (variant) setSubmittedVariant(variant);
+              setStep("confirmation");
+            }}
             formContext={formContext}
             config={config}
             pdfUrl={pdfUrl}
@@ -138,7 +144,7 @@ export function UpcomingProductsModal({
             downloadStarted={Boolean(pdfUrl)}
             closeLabel={closeLabel}
             formContext={formContext}
-            productVariant={productVariant}
+            productVariant={submittedVariant ?? productVariant}
           />
         )}
       </div>
@@ -158,7 +164,7 @@ function FormStep({
   productVariant,
 }: {
   onClose: () => void;
-  onSuccess: () => void;
+  onSuccess: (variant?: string) => void;
   formContext: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "som-ble" | "som-lte" | "waitlist" | "case-study";
   config?: PopupConfig;
   pdfUrl?: string;
@@ -172,11 +178,15 @@ function FormStep({
   const [company, setCompany] = useState("");
   const [chip, setChip] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  // CMS-editable copy from the page relation; null = hardcoded fallbacks below.
 
-  const resolvedVariant =
-    productVariant ??
-    (formContext === "som-ble" ? "SOM (BLE)" : formContext === "som-lte" ? "SOM (LTE)" : undefined);
+  const isSom = formContext === "som" || formContext === "som-ble" || formContext === "som-lte";
+  const initialSomVariant: "BLE" | "LTE" =
+    productVariant?.includes("LTE") || formContext === "som-lte" ? "LTE" : "BLE";
+  const [somVariant, setSomVariant] = useState<"BLE" | "LTE">(initialSomVariant);
+
+  const resolvedVariant = isSom
+    ? (somVariant === "LTE" ? "SOM (LTE)" : "SOM (BLE)")
+    : productVariant;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -194,7 +204,10 @@ function FormStep({
         waitlist: "upcoming-waitlist",
         "case-study": "case-study",
       };
-      const formKey = formKeyMap[formContext] || "upcoming-products";
+      let formKey = formKeyMap[formContext] || "upcoming-products";
+      if (isSom) {
+        formKey = somVariant === "LTE" ? "upcoming-som-lte" : "upcoming-som-ble";
+      }
 
       await fetch("/api/newsletter", {
         method: "POST",
@@ -207,6 +220,7 @@ function FormStep({
           company: company || undefined,
           details: chip || undefined,
           product: resolvedVariant,
+          variant: isSom ? somVariant : undefined,
           popupId: config?.documentId,
         }),
       }).catch(() => { /* Mailchimp sync failure is non-blocking */ });
@@ -220,7 +234,7 @@ function FormStep({
         a.remove();
       }
 
-      onSuccess();
+      onSuccess(resolvedVariant);
     } finally {
       setIsSubmitting(false);
     }
@@ -325,13 +339,43 @@ function FormStep({
           )}
         </div>
 
+        {isSom && (
+          <Field label="Module Variant*" className="w-full">
+            <div className="relative h-[42px] w-full border-[0.5px] border-solid border-[#4a4a4a] bg-transparent focus-within:border-[rgba(255,255,255,0.5)]">
+              <select
+                className={`${interRegular.className} h-full w-full appearance-none bg-transparent px-[12px] pr-[40px] text-[14px] leading-[21px] font-normal text-white outline-none not-italic cursor-pointer`}
+                value={somVariant}
+                onChange={(e) => setSomVariant(e.target.value as "BLE" | "LTE")}
+                required
+              >
+                <option value="BLE" className="bg-[#121212] text-white">
+                  BLE
+                </option>
+                <option value="LTE" className="bg-[#121212] text-white">
+                  LTE
+                </option>
+              </select>
+              <img
+                loading="lazy"
+                decoding="async"
+                src="/careers/chevron-down.svg"
+                alt=""
+                width={24}
+                height={24}
+                className="pointer-events-none absolute right-[9px] top-1/2 size-[24px] -translate-y-1/2"
+                aria-hidden
+              />
+            </div>
+          </Field>
+        )}
+
         {formContext !== "waitlist" && (
           <Field
             label={
               popupField(config, "details")?.label ??
               (formContext === "usecase"
                 ? "Please briefly describe your use case*"
-                : formContext === "evalkit" || formContext === "sdk" || formContext === "som" || formContext === "som-ble" || formContext === "som-lte"
+                : isSom
                 ? "Please describe your intended application*"
                 : formContext === "case-study"
                 ? "Please describe your use case*"
@@ -346,12 +390,8 @@ function FormStep({
                   ? "Tell us a bit about your project or use case for the evaluation kit."
                   : formContext === "sdk"
                   ? "Tell us about the project you're building with our SDK."
-                  : formContext === "som-ble"
-                  ? "Tell us about the project you're building with our SOM (BLE)."
-                  : formContext === "som-lte"
-                  ? "Tell us about the project you're building with our SOM (LTE)."
-                  : formContext === "som"
-                  ? "Tell us about the project you're building with our SOM."
+                  : isSom
+                  ? `Tell us about the project you're building with our SOM (${somVariant}).`
                   : formContext === "case-study"
                   ? "Tell us what you're building — the full case study PDF downloads right after you submit."
                   : "These are the upcoming chips we are providing. We just want to know which chip you are looking for.")}
@@ -362,7 +402,7 @@ function FormStep({
                 popupField(config, "details")?.placeholder ??
                 (formContext === "usecase"
                   ? "Enter your use case"
-                  : formContext === "evalkit" || formContext === "sdk" || formContext === "som" || formContext === "som-ble" || formContext === "som-lte"
+                  : isSom
                   ? "Describe your intended application"
                   : formContext === "case-study"
                   ? "Describe your use case"

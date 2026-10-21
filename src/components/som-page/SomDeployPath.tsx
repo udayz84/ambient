@@ -1,4 +1,6 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
 
 import { useState } from "react";
 import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
