@@ -170,11 +170,11 @@ export function SiteFooter({
               className="absolute left-1/2 top-0 h-full min-h-[900px] w-full min-w-[1024px] -translate-x-1/2 object-cover object-top"
             />
           </div>
-          {/* Desktop Background (>=1024px) - EXACT FIGMA MATCH */}
+          {/* Desktop Background (>=1024px) — exact from previous commit */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             alt=""
-            src="/footer.png"
+            src="/footer/footer-bg.webp"
             className="hidden lg:block absolute left-[-0.02%] top-[-5.03%] h-[97.04%] w-full min-w-0 translate-x-0 opacity-100 max-w-none object-cover"
           />
         </div>
