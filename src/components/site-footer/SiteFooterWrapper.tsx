@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { usePathname } from "next/navigation";
 import { SiteFooter } from "./SiteFooter";
@@ -22,7 +23,10 @@ export function SiteFooterWrapper({
       isContactPage={normalizedPathname === "/contact"}
       isCareersPage={normalizedPathname === "/careers"}
       isResourcesPage={normalizedPathname === "/resources"}
-      isOverlapPage={["/technology", "/products", "/applications", "/dvk", "/som", "/partners", "/model-zoo", "/developer"].includes(normalizedPathname)}
+      isOverlapPage={
+        ["/technology", "/products", "/applications", "/dvk", "/som", "/partners", "/model-zoo", "/developer"].includes(normalizedPathname) ||
+        normalizedPathname.startsWith("/applications/")
+      }
       pathname={normalizedPathname}
       data={data}
       brandData={brandData}

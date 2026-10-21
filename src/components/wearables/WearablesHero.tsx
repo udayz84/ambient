@@ -1,12 +1,14 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { useFitText, splitTitleIntoTwoLines } from "../shared/FitText";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular, gilroyExtraBold } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const WEARABLES_BG_GRADIENT =
   "linear-gradient(260.505deg, rgba(255, 255, 255, 0.12) 0.12143%, rgba(255, 255, 255, 0.6) 44.084%, rgba(255, 255, 255, 0) 113.37%)";
@@ -90,8 +92,8 @@ export function WearablesHero({
       data-name="Hero Section"
       aria-label="Wearables hero"
     >
-      {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden h-[878px] w-full max-w-[1440px] min-[1024px]:block">
+      {/* DESKTOP (>=600px) */}
+      <TabletScaleCanvas className="relative hidden h-[878px] w-[1440px] shrink-0 min-[600px]:block">
         {/* Background image 162 */}
         <div
           className="pointer-events-none absolute top-[-37px] left-0 h-[824.693px] w-[1440px]"
@@ -215,11 +217,11 @@ export function WearablesHero({
           </div>
           </div>
         </div>
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE (<1024px) — node 4153:9901, frame 393×630 */}
+      {/* MOBILE (<600px) — node 4153:9901, frame 393×630 */}
       <div
-        className="relative h-[630px] w-full overflow-hidden min-[1024px]:hidden"
+        className="relative h-[630px] w-full overflow-hidden min-[600px]:hidden"
         data-node-id="4153:9901"
         data-name="Banner"
       >

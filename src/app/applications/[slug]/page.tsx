@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { WearablesHero } from "@/components/wearables/WearablesHero";
@@ -8,6 +9,7 @@ import { WearablesSubconscious } from "@/components/wearables/WearablesSubconsci
 import { WearablesFooterAccent } from "@/components/wearables/WearablesFooterAccent";
 import { ApplicationsPageModelZoo } from "@/components/applications-page/ApplicationsPageModelZoo";
 import { ApplicationsPageWins } from "@/components/applications-page/ApplicationsPageWins";
+import { TabletScaleInit } from "@/components/shared/TabletScaleInit";
 import { getCollection, buildPopulate, getApplicationPages } from "@/lib/strapi";
 import { buildMetadata, type SeoData } from "@/lib/seo";
 
@@ -112,6 +114,7 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
 
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
+      <TabletScaleInit />
       {data?.hero && (
         <WearablesHero data={data.hero} />
       )}

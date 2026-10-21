@@ -1,10 +1,12 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useFitText } from "../shared/FitText";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const SHAPE = "/Rectangle 1618873545.png";
 
@@ -151,21 +153,21 @@ export function WearablesFooterAccent({ data }: { data?: any }) {
   });
   return (
     <section
-      className="relative z-20 mb-0 min-[1024px]:mb-[-409px] flex w-full justify-center overflow-x-clip bg-transparent"
+      className="relative z-20 mb-0 min-[600px]:[margin-bottom:calc(-409px*var(--tablet-zoom,1))] flex w-full justify-center overflow-x-clip bg-transparent"
       data-name="Footer CTA"
       aria-label="Contact options"
     >
-      {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden w-full max-w-[1440px] min-[1024px]:block">
+      {/* DESKTOP (>=600px) */}
+      <TabletScaleCanvas className="relative hidden w-[1440px] shrink-0 min-[600px]:block">
         <div className="flex w-full justify-center gap-[84px] pt-[89.5px]">
           {panels.map((panel) => (
             <CtaPanel key={panel.title} data={panel} />
           ))}
         </div>
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE (<1024px) */}
-      <div className="relative flex w-full flex-col items-center gap-[14px] px-[20px] pt-[43px] pb-[40px] min-[1024px]:hidden">
+      {/* MOBILE (<600px) */}
+      <div className="relative flex w-full flex-col items-center gap-[14px] px-[20px] pt-[43px] pb-[40px] min-[600px]:hidden">
         {panels.map((panel) => (
           <div key={panel.title} className="relative w-full">
             {/* Shape background */}

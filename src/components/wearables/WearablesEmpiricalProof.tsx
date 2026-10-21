@@ -1,11 +1,13 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
 import { dmMono, gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { mediaUrl } from "@/lib/strapi";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useFitText } from "../shared/FitText";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const TITLE_GRADIENT =
   "linear-gradient(118.011deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -542,9 +544,9 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
       data-name="The Empirical Proof"
       aria-label="The Empirical Proof"
     >
-      {/* DESKTOP (>=1024px) */}
+      {/* DESKTOP (>=600px) */}
       {isSmartHome ? (
-        <div className="relative hidden w-full max-w-[1440px] flex-col items-center pt-[44px] pb-[56px] min-[1024px]:flex">
+        <TabletScaleCanvas className="relative hidden w-[1440px] shrink-0 flex-col items-center pt-[44px] pb-[56px] min-[600px]:flex">
           {/* Top decorative SVG */}
           <div
             className="pointer-events-none absolute top-[-26.9px] left-1/2 h-[320px] w-[881.616px] -translate-x-1/2"
@@ -610,9 +612,9 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
               />
             ))}
           </div>
-        </div>
+        </TabletScaleCanvas>
       ) : (
-        <div className={`relative hidden w-full max-w-[1440px] min-[1024px]:block ${isWearablesOnly ? "h-[675px]" : "h-[790px]"}`}>
+        <TabletScaleCanvas className={`relative hidden w-[1440px] shrink-0 min-[600px]:block ${isWearablesOnly ? "h-[675px]" : "h-[790px]"}`}>
           {/* Top decorative SVG */}
           <div
             className="pointer-events-none absolute top-[-26.9px] left-1/2 h-[320px] w-[881.616px] -translate-x-1/2"
@@ -713,11 +715,11 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
               </a>
             </div>
           )}
-        </div>
+        </TabletScaleCanvas>
       )}
 
-      {/* MOBILE (<1024px) */}
-      <div className={`relative flex w-full flex-col items-center gap-[24px] px-[21px] pt-[30px] ${isSmartHome ? "pb-[36px]" : "pb-[72px]"} min-[1024px]:hidden`}>
+      {/* MOBILE (<600px) */}
+      <div className={`relative flex w-full flex-col items-center gap-[24px] px-[21px] pt-[30px] ${isSmartHome ? "pb-[36px]" : "pb-[72px]"} min-[600px]:hidden`}>
 
         {/* Title */}
         <div className="relative z-10 flex w-full max-w-[420px] flex-col items-center gap-[12px]">

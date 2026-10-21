@@ -1,9 +1,12 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
 import { useFitText } from "../shared/FitText";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const TITLE_GRADIENT =
   "linear-gradient(117.952deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -26,7 +29,6 @@ function ChevronDecor() {
         style={{ animationDelay: "0s" }}
       >
         <div className="absolute inset-[-12.8%_-22.81%_-12.8%_-30.55%]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img loading="lazy" decoding="async" src={CHEVRON_LARGE} alt="" className="block size-full max-w-none" />
         </div>
       </div>
@@ -35,7 +37,6 @@ function ChevronDecor() {
         style={{ animationDelay: "-0.25s" }}
       >
         <div className="absolute inset-[-1.02%_-4.2%_-1.02%_-2.16%]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img loading="lazy" decoding="async" src={CHEVRON_MID} alt="" className="block size-full max-w-none" />
         </div>
       </div>
@@ -44,7 +45,6 @@ function ChevronDecor() {
         style={{ animationDelay: "-0.5s" }}
       >
         <div className="absolute inset-[-1.46%_-6.01%_-1.46%_-3.09%]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img loading="lazy" decoding="async" src={CHEVRON_SMALL} alt="" className="block size-full max-w-none" />
         </div>
       </div>
@@ -53,7 +53,6 @@ function ChevronDecor() {
         style={{ animationDelay: "-0.75s" }}
       >
         <div className="absolute inset-[-2.18%_-8.93%_-2.17%_-4.6%]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img loading="lazy" decoding="async" src={CHEVRON_DOT} alt="" className="block size-full max-w-none" />
         </div>
       </div>
@@ -81,8 +80,8 @@ export function WearablesParadigm({ data }: { data?: any }) {
       data-name="The Paradigm Shift"
       aria-label="The Paradigm Shift"
     >
-      {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden w-full max-w-[1440px] flex-col items-center gap-[48px] pt-[20px] pb-[100px] min-[1024px]:flex">
+      {/* DESKTOP (>=600px) scaled */}
+      <TabletScaleCanvas className="relative hidden w-[1440px] shrink-0 flex-col items-center gap-[48px] pt-[20px] pb-[100px] min-[600px]:flex">
         {/* Headings */}
         <div className="flex flex-col items-center gap-[24px]">
           <div className="relative flex flex-col items-center px-[10px]">
@@ -121,10 +120,10 @@ export function WearablesParadigm({ data }: { data?: any }) {
             <img src={rightImage} alt={rightAlt} className="w-full h-full object-contain rounded-[16px]" />
           </div>
         </div>
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE (<1024px) */}
-      <div className="relative flex w-full flex-col items-center gap-[24px] px-[20px] pt-[30px] pb-[72px] min-[1024px]:hidden">
+      {/* MOBILE (<600px) */}
+      <div className="relative flex w-full flex-col items-center gap-[24px] px-[20px] pt-[30px] pb-[72px] min-[600px]:hidden">
 
         {/* Headings */}
         <div className="relative z-10 flex flex-col items-center gap-[10px]">

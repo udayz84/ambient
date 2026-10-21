@@ -1,10 +1,12 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const TITLE_GRADIENT =
   "linear-gradient(138.787deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
@@ -163,8 +165,8 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
       data-name="From lab to product"
       aria-label="From lab to product in months, not years"
     >
-      {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden w-full max-w-[1440px] flex-col items-center gap-[48px] pt-[40px] pb-[60px] px-[24px] min-[1024px]:flex">
+      {/* DESKTOP (>=600px) */}
+      <TabletScaleCanvas className="relative hidden w-[1440px] shrink-0 flex-col items-center gap-[48px] pt-[40px] pb-[60px] px-[24px] min-[600px]:flex">
         {/* Title */}
         <div className="flex flex-col items-center gap-[24px]">
           <div className="relative flex flex-col items-center px-[10px]">
@@ -197,10 +199,10 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
             <LabCard key={c.number} data={c} />
           ))}
         </div>
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE (<1024px) */}
-      <div className="relative flex w-full flex-col items-center gap-[24px] px-[23px] pt-[30px] pb-[48px] min-[1024px]:hidden">
+      {/* MOBILE (<600px) */}
+      <div className="relative flex w-full flex-col items-center gap-[24px] px-[23px] pt-[30px] pb-[48px] min-[600px]:hidden">
 
         {/* Title */}
         <div className="relative z-10 flex w-[350px] flex-col items-center gap-[10px]">
