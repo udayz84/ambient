@@ -1,0 +1,139 @@
+name: Deploy website from cms
+
+on:
+  push:
+    branches: [cms]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: asi-prod-web-production
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Validate website
+    if: github.repository == 'udayz84/ambient' && github.ref == 'refs/heads/cms'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    permissions:
+      contents: read
+      actions: read
+    env:
+      NEXT_PUBLIC_STRAPI_URL: https://asi-prod-cms-e3gxdbaefaayc4hs.centralindia-01.azurewebsites.net
+      NEXT_PUBLIC_SITE_URL: https://ambientscientific.ai
+      AZURE_ASSETS_PUBLIC_URL: https://ambientwebasset.blob.core.windows.net/website-assets
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24.x'
+          cache: npm
+      - name: Install build dependencies
+        run: npm ci --include=dev
+      - name: Test deployment safeguards
+        run: |
+          node --test scripts/azure/deployment.test.mjs
+          python3 scripts/azure/test_package_web.py
+      - name: Build website
+        run: npm run build
+      - name: Report existing lint baseline
+        id: lint
+        continue-on-error: true
+        run: npm run lint -- src
+      - name: Note lint failures
+        if: steps.lint.outcome == 'failure'
+        run: echo '::warning::Repository-wide lint has an existing failing baseline. Production build and deployment safeguard tests remain required.'
+      - name: Find the last successful website deployment
+        id: previous
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          previous=''
+          runs=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/deploy-web.yml/runs?branch=cms&status=success&per_page=30" --jq '.workflow_runs[] | [.id, .head_sha] | @tsv')
+          while read -r run_id sha; do
+            [ -z "$run_id" ] && continue
+            deployed=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run_id/jobs?per_page=100" --jq '[.jobs[] | select(.name == "Deploy website" and .conclusion == "success")] | length')
+            if [ "$deployed" -gt 0 ]; then previous="$sha"; break; fi
+          done <<< "$runs"
+          if [ -z "$previous" ]; then
+            previous=$(node -p "JSON.parse(require('fs').readFileSync('scripts/azure/deployment-config.json')).bootstrapCommit")
+          fi
+          git fetch --no-tags --depth=1 origin "$previous"
+          echo "ref=$previous" >> "$GITHUB_OUTPUT"
+      - name: Package committed source and rollback source
+        env:
+          PREVIOUS_REF: ${{ steps.previous.outputs.ref }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/website-release/tools"
+          python3 scripts/azure/package-web.py --ref "$GITHUB_SHA" --base "$PREVIOUS_REF" --output "$RUNNER_TEMP/website-release/web-source.zip" --manifest "$RUNNER_TEMP/website-release/release-manifest.json"
+          python3 scripts/azure/package-web.py --ref "$PREVIOUS_REF" --base "$PREVIOUS_REF" --output "$RUNNER_TEMP/website-release/rollback-source.zip" --manifest "$RUNNER_TEMP/website-release/rollback-manifest.json"
+          cp scripts/azure/deploy-web.mjs scripts/azure/check-web-release.mjs scripts/azure/deployment-config.json "$RUNNER_TEMP/website-release/tools/"
+      - name: Verify changed Blob assets before touching production
+        run: node scripts/azure/check-web-release.mjs assets "$RUNNER_TEMP/website-release/release-manifest.json"
+      - name: Retain release and rollback packages
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: website-release-${{ github.sha }}
+          path: ${{ runner.temp }}/website-release/
+          compression-level: 0
+          retention-days: 3
+          if-no-files-found: error
+
+  deploy:
+    name: Deploy website
+    needs: build
+    if: github.repository == 'udayz84/ambient' && github.ref == 'refs/heads/cms'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    permissions:
+      contents: read
+      actions: read
+      id-token: write
+    steps:
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24.x'
+      - name: Download this run's verified packages
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh run download "$GITHUB_RUN_ID" --name "website-release-$GITHUB_SHA" --dir release
+      - name: Log in to Azure using branch-scoped OpenID Connect
+        uses: Azure/login@a641126d1b8aa4d1fa005f4f92df94a3a4c4c906 # v3.1.0
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      - name: Deploy website source with Azure build automation
+        id: deploy
+        continue-on-error: true
+        run: node release/tools/deploy-web.mjs release/web-source.zip release/release-manifest.json
+      - name: Verify the new production build, pages, and icons
+        id: health
+        if: steps.deploy.outcome == 'success'
+        continue-on-error: true
+        run: node release/tools/check-web-release.mjs live release/release-manifest.json
+      - name: Restore the previous source after a completed but failed release
+        id: rollback
+        if: ${{ !cancelled() && steps.deploy.outputs.terminal == 'true' && (steps.deploy.outcome == 'failure' || steps.health.outcome == 'failure') }}
+        run: |
+          node release/tools/deploy-web.mjs release/rollback-source.zip release/rollback-manifest.json
+          node release/tools/check-web-release.mjs live release/rollback-manifest.json
+      - name: Record release result
+        if: ${{ !cancelled() && steps.deploy.outcome != '' }}
+        env:
+          DEPLOY_RESULT: ${{ steps.deploy.outcome }}
+          HEALTH_RESULT: ${{ steps.health.outcome }}
+          ROLLBACK_RESULT: ${{ steps.rollback.outcome }}
+        run: |
+          echo "Website commit: $GITHUB_SHA" >> "$GITHUB_STEP_SUMMARY"
+          echo "Deploy: $DEPLOY_RESULT; health checks: $HEALTH_RESULT; rollback: $ROLLBACK_RESULT" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$DEPLOY_RESULT" != success ] || [ "$HEALTH_RESULT" != success ]; then
+            echo '::error::The new release did not pass. Review the deployment/rollback results before retrying.'
+            exit 1
+          fi

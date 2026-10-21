@@ -1,0 +1,16 @@
+{
+  "repository": "udayz84/ambient",
+  "branch": "cms",
+  "appName": "asi-prod-web",
+  "resourceGroup": "ASI-PROD-RG",
+  "subscriptionId": "50c43ea5-4166-4ba3-a682-ce7c8a9b0fd9",
+  "tenantId": "fef9d5a1-f8fe-45c9-8d14-368b753dde14",
+  "kuduOrigin": "https://asi-prod-web-hredggfcdcf8cqc0.scm.centralindia-01.azurewebsites.net",
+  "siteOrigin": "https://ambientscientific.ai",
+  "assetsOrigin": "https://ambientwebasset.blob.core.windows.net/website-assets",
+  "bootstrapCommit": "9fab3245aecdb008bfb11d8858c80b90ce324404",
+  "markerPath": "/_next/static/ambient-release.json",
+  "pages": ["/", "/products", "/applications", "/company", "/contact", "/model-zoo", "/developer"],
+  "icons": ["favicon.ico", "icon.png", "apple-icon.png"],
+  "packagePaths": ["package.json", "package-lock.json", "next.config.ts", "tsconfig.json", "postcss.config.mjs", "eslint.config.mjs", "src", "public", "scripts"]
+}

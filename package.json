@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "node scripts/azure/write-release-marker.mjs",
     "start": "node scripts/azure/clear-icon-route-cache.mjs && next start",
     "lint": "eslint",
     "assets:manifest": "node scripts/azure/generate-manifest.mjs",

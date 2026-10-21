@@ -39,6 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.ambient-release.json
 
 # Figma and tmp files
 .tmp-figma/
