@@ -1,9 +1,10 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useState } from "react";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
-import { ProductBriefModal } from "../products-page/ProductBriefModal";
+import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { MobileTitleCorners } from "./mobile-shared";
@@ -298,9 +299,10 @@ export function TechnologyPageBottomCta({
         </div>
       </div>
       
-      <ProductBriefModal
+      <UpcomingProductsModal
         isOpen={isEvalModalOpen}
         onClose={() => setIsEvalModalOpen(false)}
+        formContext="evalkit"
         title="Get an Evaluation Kit"
         config={config}
       />

@@ -1,8 +1,8 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useState } from "react";
 import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
-import { ProductBriefModal } from "./ProductBriefModal";
 import { useFitText } from "../shared/FitText";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
@@ -96,9 +96,10 @@ export function ProductsStartBuilding({ data }: { data?: any }) {
         onClose={() => setModalContext(null)}
         formContext="evalkit"
       />
-      <ProductBriefModal
+      <UpcomingProductsModal
         isOpen={modalContext === "waitlist"}
         onClose={() => setModalContext(null)}
+        formContext="waitlist"
         title="Join the Waitlist"
       />
     </section>

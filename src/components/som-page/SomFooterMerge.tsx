@@ -1,9 +1,10 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useState } from "react";
-import { ProductBriefModal } from "../products-page/ProductBriefModal";
+import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
@@ -115,10 +116,11 @@ export function SomFooterMerge({ data }: { data?: any }) {
         </div>
       </div>
       
-      <ProductBriefModal
+      <UpcomingProductsModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        title="Join the Waitlist"
+        formContext="som-waitlist"
+        title={heading || "Join the SOM Waitlist"}
       />
     </div>
   );

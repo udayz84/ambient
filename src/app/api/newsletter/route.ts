@@ -29,6 +29,18 @@ function bad(error: string, status = 422) {
 /** Form keys that grant explicit marketing consent on submission. */
 const MARKETING_CONSENT_KEYS = new Set([
   "newsletter",
+  "waitlist",
+  "upcoming-products",
+  "upcoming-usecase",
+  "upcoming-evalkit",
+  "upcoming-sdk",
+  "upcoming-som",
+  "upcoming-som-ble",
+  "upcoming-som-lte",
+  "upcoming-som-waitlist",
+  "upcoming-som-waitlist-ble",
+  "upcoming-som-waitlist-lte",
+  "upcoming-waitlist",
 ]);
 
 /** Display names for the team notification email, per form key. */
@@ -42,6 +54,9 @@ const FORM_NAME_MAP: Record<string, string> = {
   "upcoming-som": "SOM Interest",
   "upcoming-som-ble": "SOM (BLE) Interest",
   "upcoming-som-lte": "SOM (LTE) Interest",
+  "upcoming-som-waitlist": "SOM Waitlist",
+  "upcoming-som-waitlist-ble": "SOM (BLE) Waitlist",
+  "upcoming-som-waitlist-lte": "SOM (LTE) Waitlist",
   "upcoming-waitlist": "Waitlist Signup",
   "product-brief": "Product Brief Request",
   "resource-download": "Resource Download",

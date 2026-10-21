@@ -31,7 +31,7 @@ export function UpcomingProductsModal({
 }: {
   isOpen: boolean;
   onClose: () => void;
-  formContext?: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "som-ble" | "som-lte" | "waitlist" | "case-study";
+  formContext?: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "som-ble" | "som-lte" | "som-waitlist" | "waitlist" | "case-study";
   /** CMS form entry (page relation). Null = hardcoded fallback copy. */
   config?: PopupConfig;
   /** Optional PDF to download on successful submit. */
@@ -165,7 +165,7 @@ function FormStep({
 }: {
   onClose: () => void;
   onSuccess: (variant?: string) => void;
-  formContext: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "som-ble" | "som-lte" | "waitlist" | "case-study";
+  formContext: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "som-ble" | "som-lte" | "som-waitlist" | "waitlist" | "case-study";
   config?: PopupConfig;
   pdfUrl?: string;
   pdfName?: string;
@@ -179,7 +179,11 @@ function FormStep({
   const [chip, setChip] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const isSom = formContext === "som" || formContext === "som-ble" || formContext === "som-lte";
+  const isSom =
+    formContext === "som" ||
+    formContext === "som-ble" ||
+    formContext === "som-lte" ||
+    formContext === "som-waitlist";
   const initialSomVariant: "BLE" | "LTE" =
     productVariant?.includes("LTE") || formContext === "som-lte" ? "LTE" : "BLE";
   const [somVariant, setSomVariant] = useState<"BLE" | "LTE">(initialSomVariant);
@@ -201,12 +205,17 @@ function FormStep({
         som: "upcoming-som",
         "som-ble": "upcoming-som-ble",
         "som-lte": "upcoming-som-lte",
+        "som-waitlist": "upcoming-som-waitlist",
         waitlist: "upcoming-waitlist",
         "case-study": "case-study",
       };
       let formKey = formKeyMap[formContext] || "upcoming-products";
       if (isSom) {
-        formKey = somVariant === "LTE" ? "upcoming-som-lte" : "upcoming-som-ble";
+        if (formContext === "som-waitlist") {
+          formKey = somVariant === "LTE" ? "upcoming-som-waitlist-lte" : "upcoming-som-waitlist-ble";
+        } else {
+          formKey = somVariant === "LTE" ? "upcoming-som-lte" : "upcoming-som-ble";
+        }
       }
 
       await fetch("/api/newsletter", {
@@ -269,6 +278,8 @@ function FormStep({
               ? "Register SOM (BLE) Interest"
               : formContext === "som-lte"
               ? "Register SOM (LTE) Interest"
+              : formContext === "som-waitlist"
+              ? "Join the SOM Waitlist"
               : formContext === "waitlist"
               ? "Join The Waitlist"
               : formContext === "case-study"
@@ -292,28 +303,26 @@ function FormStep({
           </div>
         )}
 
-        {formContext !== "waitlist" && (
-          <div className="flex flex-col md:flex-row gap-[18px]">
-            <Field label={popupField(config, "first_name")?.label ?? "First Name*"} className="min-w-0 flex-1">
-              <input
-                className={FIELD_BOX}
-                placeholder={popupField(config, "first_name")?.placeholder ?? "Enter First Name"}
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                required
-              />
-            </Field>
-            <Field label={popupField(config, "last_name")?.label ?? "Last Name*"} className="min-w-0 flex-1">
-              <input
-                className={FIELD_BOX}
-                placeholder={popupField(config, "last_name")?.placeholder ?? "Enter Last Name"}
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                required
-              />
-            </Field>
-          </div>
-        )}
+        <div className="flex flex-col md:flex-row gap-[18px]">
+          <Field label={popupField(config, "first_name")?.label ?? "First Name*"} className="min-w-0 flex-1">
+            <input
+              className={FIELD_BOX}
+              placeholder={popupField(config, "first_name")?.placeholder ?? "Enter First Name"}
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+            />
+          </Field>
+          <Field label={popupField(config, "last_name")?.label ?? "Last Name*"} className="min-w-0 flex-1">
+            <input
+              className={FIELD_BOX}
+              placeholder={popupField(config, "last_name")?.placeholder ?? "Enter Last Name"}
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
+          </Field>
+        </div>
 
         <div className="flex flex-col md:flex-row gap-[18px]">
           <Field label={popupField(config, "email")?.label ?? "Email ID*"} className="min-w-0 flex-1">
@@ -326,17 +335,15 @@ function FormStep({
               required
             />
           </Field>
-          {formContext !== "waitlist" && (
-            <Field label={popupField(config, "company")?.label ?? "Company*"} className="min-w-0 flex-1">
-              <input
-                className={FIELD_BOX}
-                placeholder={popupField(config, "company")?.placeholder ?? "Enter Company Name"}
-                value={company}
-                onChange={(e) => setCompany(e.target.value)}
-                required
-              />
-            </Field>
-          )}
+          <Field label={popupField(config, "company")?.label ?? "Company*"} className="min-w-0 flex-1">
+            <input
+              className={FIELD_BOX}
+              placeholder={popupField(config, "company")?.placeholder ?? "Enter Company Name"}
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+              required
+            />
+          </Field>
         </div>
 
         {isSom && (
@@ -369,51 +376,55 @@ function FormStep({
           </Field>
         )}
 
-        {formContext !== "waitlist" && (
-          <Field
-            label={
-              popupField(config, "details")?.label ??
+        <Field
+          label={
+            popupField(config, "details")?.label ??
+            (formContext === "usecase"
+              ? "Please briefly describe your use case*"
+              : isSom
+              ? "Please describe your intended application*"
+              : formContext === "case-study"
+              ? "Please describe your use case*"
+              : formContext === "waitlist"
+              ? "Tell Us About Your Project Or Interest*"
+              : "Which chip are you looking for?*")
+          }
+        >
+          <p className="text-[12px] leading-[18px] text-[#a4a4a4] mb-[8px]">
+            {popupField(config, "details")?.helper_text ??
               (formContext === "usecase"
-                ? "Please briefly describe your use case*"
+                ? "Explain your use case and our team will get in touch with you."
+                : formContext === "evalkit"
+                ? "Tell us a bit about your project or use case for the evaluation kit."
+                : formContext === "sdk"
+                ? "Tell us about the project you're building with our SDK."
                 : isSom
-                ? "Please describe your intended application*"
+                ? `Tell us about the project you're building with our SOM (${somVariant}).`
                 : formContext === "case-study"
-                ? "Please describe your use case*"
-                : "Which chip are you looking for?*")
+                ? "Tell us what you're building — the full case study PDF downloads right after you submit."
+                : formContext === "waitlist"
+                ? "Share a few details about what you're building or hoping to deploy."
+                : "These are the upcoming chips we are providing. We just want to know which chip you are looking for.")}
+          </p>
+          <input
+            className={FIELD_BOX}
+            placeholder={
+              popupField(config, "details")?.placeholder ??
+              (formContext === "usecase"
+                ? "Enter your use case"
+                : isSom
+                ? "Describe your intended application"
+                : formContext === "case-study"
+                ? "Describe your use case"
+                : formContext === "waitlist"
+                ? "Describe your project or use case"
+                : "Enter chip name")
             }
-          >
-            <p className="text-[12px] leading-[18px] text-[#a4a4a4] mb-[8px]">
-              {popupField(config, "details")?.helper_text ??
-                (formContext === "usecase"
-                  ? "Explain your use case and our team will get in touch with you."
-                  : formContext === "evalkit"
-                  ? "Tell us a bit about your project or use case for the evaluation kit."
-                  : formContext === "sdk"
-                  ? "Tell us about the project you're building with our SDK."
-                  : isSom
-                  ? `Tell us about the project you're building with our SOM (${somVariant}).`
-                  : formContext === "case-study"
-                  ? "Tell us what you're building — the full case study PDF downloads right after you submit."
-                  : "These are the upcoming chips we are providing. We just want to know which chip you are looking for.")}
-            </p>
-            <input
-              className={FIELD_BOX}
-              placeholder={
-                popupField(config, "details")?.placeholder ??
-                (formContext === "usecase"
-                  ? "Enter your use case"
-                  : isSom
-                  ? "Describe your intended application"
-                  : formContext === "case-study"
-                  ? "Describe your use case"
-                  : "Enter chip name")
-              }
-              value={chip}
-              onChange={(e) => setChip(e.target.value)}
-              required
-            />
-          </Field>
-        )}
+            value={chip}
+            onChange={(e) => setChip(e.target.value)}
+            required
+          />
+        </Field>
 
         <div className="pt-[8px]">
           <button

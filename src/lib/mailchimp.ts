@@ -129,7 +129,12 @@ export const FORM_TAG_MAP: Record<string, string[]> = {
   "upcoming-som": ["upcoming-products", "som-interest"],
   "upcoming-som-ble": ["upcoming-products", "som-interest", "som-ble"],
   "upcoming-som-lte": ["upcoming-products", "som-interest", "som-lte"],
+  "upcoming-som-waitlist": ["upcoming-products", "som-interest", "som-waitlist", "waitlist"],
+  "upcoming-som-waitlist-ble": ["upcoming-products", "som-interest", "som-waitlist", "som-ble", "waitlist"],
+  "upcoming-som-waitlist-lte": ["upcoming-products", "som-interest", "som-waitlist", "som-lte", "waitlist"],
   "upcoming-waitlist": ["waitlist"],
+  "case-study": ["case-study", "resource-download"],
+  whitepaper: ["whitepaper", "resource-download"],
 };
 
 /* -------------------------------------------------------------------------- */
@@ -169,11 +174,7 @@ export async function addContactAndTag(
     return { success: false, message: "Invalid email address." };
   }
 
-  const tags = FORM_TAG_MAP[formKey];
-  if (!tags || tags.length === 0) {
-    console.log(`[mailchimp] no tags defined for form key "${formKey}".`);
-    return { success: false, message: `No tags for form "${formKey}".` };
-  }
+  const tags = FORM_TAG_MAP[formKey] ?? [formKey];
 
   const hash = subscriberHash(email);
   const url = `${baseUrl(config.serverPrefix)}/lists/${config.audienceId}/members/${hash}`;
