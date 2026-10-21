@@ -9,7 +9,7 @@ import { GhostGreenCta, PartnersGreenCta } from "./partners-shared";
 import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 export function PartnersFooterCtas({ content }: { content: FooterCtasContent }) {
-  const { fadeRef, isVisible } = useFadeIn<HTMLElement>();
+  const { fadeRef, isVisible } = useFadeIn<HTMLElement>(0.05);
   const fadeCls = isVisible ? "animate-hero-text-fade-in opacity-0" : "translate-y-[25px] opacity-0";
 
   return (

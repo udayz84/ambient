@@ -1,5 +1,8 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
+
 import { useState } from "react";
 import { dmMono, interLight, interRegular, gilroyMedium } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
@@ -60,7 +63,7 @@ export function PartnersBecome({
   /** Popup entry (recipients). Copy here already comes from the partners-page sections. */
   config?: any;
 }) {
-  const { fadeRef, isVisible } = useFadeIn<HTMLDivElement>();
+  const { fadeRef, isVisible } = useFadeIn<HTMLElement>(0.05);
   const fadeCls = isVisible ? "animate-hero-text-fade-in opacity-0" : "translate-y-[25px] opacity-0";
 
   const [form, setForm] = useState<ApplyState>(INITIAL_APPLY);
@@ -227,7 +230,8 @@ export function PartnersBecome({
   return (
     <section
       id="become-a-partner"
-      className="relative w-full scroll-mt-[78px] overflow-clip bg-transparent"
+      ref={fadeRef}
+      className={`relative w-full scroll-mt-[78px] overflow-clip bg-transparent ${fadeCls} transform-gpu`}
       aria-label="Become a partner"
     >
       {/* Background visual — Company image-124 matrix texture */}
@@ -239,7 +243,6 @@ export function PartnersBecome({
         }}
         aria-hidden
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           loading="lazy"
           decoding="async"
@@ -283,7 +286,7 @@ export function PartnersBecome({
       {/* DESKTOP & TABLET (>=600px) — 1440px design canvas with proportional tablet scaling */}
       <div className="relative mx-auto hidden w-full justify-center min-[600px]:flex">
         <TabletScaleCanvas
-          className={`relative flex w-[1440px] shrink-0 flex-col items-center gap-[48px] px-[24px] py-[64px] ${fadeCls} transform-gpu`}
+          className="relative flex w-[1440px] shrink-0 flex-col items-center gap-[48px] px-[24px] py-[64px]"
         >
           {/* ---------- header ---------- */}
           <div className="flex flex-col items-center gap-[24px]">
@@ -396,7 +399,7 @@ export function PartnersBecome({
       </div>
 
       {/* MOBILE (<600px) */}
-      <div className={`relative mx-auto flex w-full flex-col items-center gap-[36px] px-[20px] py-[40px] min-[600px]:hidden ${fadeCls} transform-gpu`}>
+      <div className="relative mx-auto flex w-full flex-col items-center gap-[36px] px-[20px] py-[40px] min-[600px]:hidden">
         {/* header */}
         <div className="flex flex-col items-center gap-[18px] text-center">
           <TagBadge label={content.tag} width={176} labelOffsetX={0} rightBarLeft={167} centerLabel />

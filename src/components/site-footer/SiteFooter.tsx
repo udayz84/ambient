@@ -193,6 +193,14 @@ export function SiteFooter({
         />
       )}
 
+      {/* Tablet spacer for CTA / card-hang pages (Careers, Contact, Resources) */}
+      {(isCareersPage || isContactPage || isResourcesPage) && (
+        <div
+          aria-hidden
+          className="w-full hidden min-[600px]:block lg:hidden min-[600px]:h-[calc(550px*var(--tablet-zoom,0.5333))]"
+        />
+      )}
+
       <div className={`relative mx-auto flex h-full w-full max-w-[1440px] flex-col items-center pb-0 pt-[24px] min-[600px]:pt-[40px] lg:block lg:pt-0 lg:pb-0 ${mobileContentPadding}`}>
         {showNewsletter && (
           <div className="relative z-[1] mb-[80px] flex flex-col items-center lg:mb-0 lg:pt-[120px]">

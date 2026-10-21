@@ -30,23 +30,17 @@ export function Careers({ data, applicationForm }: { data?: any; applicationForm
           className="relative w-[1440px] shrink-0 min-[600px]:block"
           style={{ height: CAREERS_PAGE_HEIGHT_PX - rolesHeightDiff }}
         >
-          {data?.hero ? <CareersHero data={data.hero} /> : null}
-          {data?.best_work ? <CareersBestWork data={data.best_work} /> : null}
-          {data?.dna ? <CareersDna data={data.dna} /> : null}
-          {data?.open_roles ? (
-            <CareersOpenRoles
-              data={data.open_roles}
-              applicationForm={applicationForm}
-              onHeightDiffChange={setRolesHeightDiff}
-            />
-          ) : null}
-          {data?.benefits ? (
-            <CareersBenefits data={data.benefits} offsetY={rolesHeightDiff} />
-          ) : null}
+          <CareersHero data={data?.hero} />
+          <CareersBestWork data={data?.best_work} />
+          <CareersDna data={data?.dna} />
+          <CareersOpenRoles
+            data={data?.open_roles}
+            applicationForm={applicationForm}
+            onHeightDiffChange={setRolesHeightDiff}
+          />
+          <CareersBenefits data={data?.benefits} offsetY={rolesHeightDiff} />
           <CareersFooterBackdrop offsetY={rolesHeightDiff} />
-          {data?.bottom_cta ? (
-            <CareersBottomCta data={data.bottom_cta} offsetY={rolesHeightDiff} />
-          ) : null}
+          <CareersBottomCta data={data?.bottom_cta} offsetY={rolesHeightDiff} />
         </TabletScaleCanvas>
       </div>
 

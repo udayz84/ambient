@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { CornerDecor, GradientTitle } from "../contact/contact-shared";
 import { CareersGradientCard } from "./careers-shared";
 import { mediaUrl } from "@/lib/strapi";
-import type { CareersValueCard } from "./careers-data";
+import { CAREERS_WORK_CARDS, type CareersValueCard } from "./careers-data";
 
 const FADE_IN_CLASS = "animate-hero-text-fade-in opacity-0";
 
@@ -12,14 +12,18 @@ export function CareersBestWork({ data }: { data?: any }) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
-  const heading = data?.heading || "";
+  const heading = data?.heading || "Do The Best Work Of Your Life";
+  const rawCards = Array.isArray(data?.cards) ? data.cards : [];
   const cards: CareersValueCard[] = (
-    Array.isArray(data?.cards) ? data.cards : []
-  ).map((c: any) => ({
-    icon: mediaUrl(c?.icon) || "",
-    title: c?.title || "",
-    description: c?.description || "",
-  }));
+    rawCards.length > 0 ? rawCards : CAREERS_WORK_CARDS
+  ).map((c: any, i: number) => {
+    const fb = CAREERS_WORK_CARDS[i % CAREERS_WORK_CARDS.length];
+    return {
+      icon: mediaUrl(c?.icon) || fb.icon,
+      title: c?.title || fb.title,
+      description: c?.description || fb.description,
+    };
+  });
 
   useEffect(() => {
     const node = ref.current;

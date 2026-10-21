@@ -1,6 +1,6 @@
 import { CareersFramedTitle, CareersGradientCard } from "./careers-shared";
 import { mediaUrl } from "@/lib/strapi";
-import type { CareersValueCard } from "./careers-data";
+import { CAREERS_BENEFITS_CARDS, type CareersValueCard } from "./careers-data";
 
 export function CareersBenefits({
   data,
@@ -9,16 +9,20 @@ export function CareersBenefits({
   data?: any;
   offsetY?: number;
 }) {
-  const heading = data?.heading || "";
+  const heading = data?.heading || "Why Join Ambient?";
   const titleFrame = "/careers/title-frame-benefits.svg";
+  const rawCards = Array.isArray(data?.cards) ? data.cards : [];
   const cards: CareersValueCard[] = (
-    Array.isArray(data?.cards) ? data.cards : []
-  ).map((c: any) => ({
-    icon: mediaUrl(c?.icon) || "",
-    title: c?.title || "",
-    description: c?.description || "",
-    titleSize: "lg" as const,
-  }));
+    rawCards.length > 0 ? rawCards : CAREERS_BENEFITS_CARDS.slice(0, 6)
+  ).map((c: any, i: number) => {
+    const fb = CAREERS_BENEFITS_CARDS[i % CAREERS_BENEFITS_CARDS.length];
+    return {
+      icon: mediaUrl(c?.icon) || fb.icon,
+      title: c?.title || fb.title,
+      description: c?.description || fb.description,
+      titleSize: "lg" as const,
+    };
+  });
 
   return (
     <section
