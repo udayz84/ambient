@@ -284,7 +284,7 @@ export function SomFeatures({ data }: { data?: any }) {
 
         {/* Cards row */}
         <div
-          className="flex w-full items-center gap-[36px] pt-[30px]"
+          className="flex w-full items-center justify-center gap-[36px] pt-[30px]"
           data-node-id="2438:4887"
         >
           {cards.map((card, i) => (
