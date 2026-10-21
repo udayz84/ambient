@@ -35,7 +35,7 @@ def blob_asset(path):
 
 def package(ref, base, output, manifest_path):
     ref, base = commit(ref), commit(base)
-    changed = git("diff", "--name-only", "--diff-filter=AM", "-z", base, ref, "--", "public").decode().split("\0")
+    changed = git("diff", "--no-renames", "--name-only", "--diff-filter=AM", "-z", base, ref, "--", "public").decode().split("\0")
     assets = []
     for path in filter(None, changed):
         if blob_asset(path):

@@ -64,6 +64,16 @@ class PackageTests(unittest.TestCase):
         data = json.loads(manifest.read_text())
         self.assertEqual(data["assets"], [{"path": "/image.webp", "sha256": hashlib.sha256(b"after").hexdigest()}])
 
+    def test_renamed_assets_require_verification_at_the_new_url(self):
+        self.git("mv", "public/image.webp", "public/renamed image.webp")
+        self.git("commit", "--quiet", "-m", "rename asset")
+        ref = self.git("rev-parse", "HEAD").strip()
+        manifest = self.root / "rename.json"
+        module.package(ref, self.base, self.root / "rename.zip", manifest)
+        self.assertEqual(json.loads(manifest.read_text())["assets"], [
+            {"path": "/renamed image.webp", "sha256": hashlib.sha256(b"before").hexdigest()}
+        ])
+
     def test_rejects_nested_tracked_secrets_and_inexact_refs(self):
         self.write("src/.env.local", "must never ship")
         self.git("add", ".")
