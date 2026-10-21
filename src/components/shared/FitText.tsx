@@ -54,8 +54,9 @@ export function useFitText<T extends HTMLElement>({
       const allowed = lines * designLH;
 
       let size = designSize;
+      const maxAllowedHeight = Math.max(allowed, el.clientHeight);
       const overflows = () =>
-        el.scrollHeight > allowed + 1 || el.scrollWidth > el.clientWidth + 1;
+        el.scrollHeight > maxAllowedHeight + 1 || el.scrollWidth > el.clientWidth + 1;
       while (size > floor && overflows()) {
         size -= 0.5;
         el.style.fontSize = `${size}px`;

@@ -127,6 +127,8 @@ export const FORM_TAG_MAP: Record<string, string[]> = {
   "upcoming-evalkit": ["upcoming-products", "eval-kit-request"],
   "upcoming-sdk": ["upcoming-products", "sdk-request"],
   "upcoming-som": ["upcoming-products", "som-interest"],
+  "upcoming-som-ble": ["upcoming-products", "som-interest", "som-ble"],
+  "upcoming-som-lte": ["upcoming-products", "som-interest", "som-lte"],
   "upcoming-waitlist": ["waitlist"],
 };
 

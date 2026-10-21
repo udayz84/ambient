@@ -1,7 +1,7 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
@@ -16,27 +16,8 @@ const TITLE_GRADIENT =
 const MOBILE_TITLE_GRADIENT =
   "linear-gradient(107.4537261117953deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
-/* Mobile product strip — Figma 4583:25091 (1662.39x420 at x=23, y=62).
-   Each existing desktop Visual (authored on a 1440x808 canvas) is scaled to
-   its Figma instance box. Native product bounds on the canvas:
-   MW (350.26,166,610.48,520) · PH (425.76,209,587.86,500) ·
-   PS (460.00,204,524.27,520) · P2 (460.07,185,524.27,520) ·
-   AC (460.07,185,524.27,520). Instance scale + resulting scaled-canvas
-   offset inside the strip (origin = section top-left):
-   x = inst_x − native_left·s · y = inst_y − 62 − native_top·s. */
-const M_STRIP: {
-  Visual: () => React.ReactElement;
-  scale: number;
-  x: number;
-  y: number;
-  center: number;
-}[] = [
-  { Visual: MicrowattVisual, scale: 0.50073, x: -152.4, y: 76.88, center: 175.84 },
-  { Visual: PhysicalVisual, scale: 0.54583, x: 96.29, y: 32.94, center: 489.16 },
-  { Visual: PersonalVisual, scale: 0.63598, x: 357.08, y: -40.54, center: 816.39 },
-  { Visual: Personal2Visual, scale: 0.65384, x: 682.31, y: -40.96, center: 1154.55 },
-  { Visual: AirCooledVisual, scale: 0.68573, x: 1010.47, y: -126.86, center: 1505.66 },
-];
+/* Mobile visual scale per product — centered individually to eliminate overlaps */
+const MOBILE_SCALES = [0.50, 0.50, 0.50, 0.50, 0.50];
 
 const SUBTITLE =
   "A unified analog architecture, scaled for your exact power and performance needs.";
@@ -441,24 +422,34 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const [selected, setSelected] = useState(0);
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  /* Mobile: scroll the product strip so the selected product is centered
-     (clamped — GPX10PRO rests at the left edge per Figma 4583:25091). */
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const target = M_STRIP[selected]?.center ?? 0;
-    const max = el.scrollWidth - el.clientWidth;
-    const left = Math.max(0, Math.min(max, target - el.clientWidth / 2));
-    el.scrollTo({ left, behavior: "smooth" });
-  }, [selected]);
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
 
   const scrollLeft = () => {
     setSelected((prev) => (prev > 0 ? prev - 1 : cards.length - 1));
   };
   const scrollRight = () => {
     setSelected((prev) => (prev < cards.length - 1 ? prev + 1 : 0));
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    const deltaY = e.changedTouches[0].clientY - touchStartY.current;
+    if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY)) {
+      if (deltaX < 0) {
+        scrollRight();
+      } else {
+        scrollLeft();
+      }
+    }
+    touchStartX.current = null;
+    touchStartY.current = null;
   };
 
   const heading = data?.heading || FALLBACK_HEADING;
@@ -652,6 +643,8 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
         className="relative h-[700px] w-full overflow-hidden min-[1024px]:hidden"
         data-node-id="4583:25080"
         data-name="Frame 1984079471"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
         <style>{`.cont-m-scroll::-webkit-scrollbar{display:none}.cont-m-scroll{scrollbar-width:none;-ms-overflow-style:none}`}</style>
 
@@ -727,37 +720,34 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
           </div>
         </div>
 
-        {/* Product strip — 4583:25091 (horizontally scrollable) */}
+        {/* Product visual — isolated active visual centered with crossfade */}
         <div
-          ref={scrollRef}
-          className="cont-m-scroll absolute top-[62px] left-0 h-[420px] w-full overflow-x-auto overflow-y-hidden"
+          className="pointer-events-none absolute top-[62px] left-0 h-[420px] w-full overflow-hidden"
           data-node-id="4583:25091"
         >
-          <div className="relative h-[420px] w-[1685.39px]">
-            {M_STRIP.slice(0, cards.length).map(({ Visual, scale, x, y }, i) => (
+          <AnimatePresence initial={false} mode="wait">
+            <motion.div
+              key={selected}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
+              className="absolute inset-0"
+            >
               <div
-                key={i}
-                className="absolute overflow-visible"
+                className="absolute left-1/2 top-[56px] h-[808px] w-[1440px] origin-top"
                 style={{
-                  left: `${x}px`,
-                  top: `${y}px`,
-                  width: `${1440 * scale}px`,
-                  height: `${808 * scale}px`,
+                  transform: `translateX(-50%) scale(${MOBILE_SCALES[selected] ?? 0.50})`,
                 }}
               >
-                <div
-                  className="absolute top-0 left-0 h-[808px] w-[1440px] origin-top-left"
-                  style={{ transform: `scale(${scale})` }}
-                >
-                  {cards[i]?.image ? (
-                    <CmsImageVisual src={cards[i].image!} alt={cards[i].imageAlt} />
-                  ) : (
-                    <Visual />
-                  )}
-                </div>
+                {activeCard.image ? (
+                  <CmsImageVisual src={activeCard.image} alt={activeCard.imageAlt} />
+                ) : (
+                  <Visual />
+                )}
               </div>
-            ))}
-          </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         {/* Header — 4583:25083 (350x121 at 21.5,29) */}

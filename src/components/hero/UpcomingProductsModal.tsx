@@ -25,10 +25,12 @@ export function UpcomingProductsModal({
   pdfUrl,
   pdfName,
   closeLabel,
+  title,
+  productVariant,
 }: {
   isOpen: boolean;
   onClose: () => void;
-  formContext?: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "waitlist" | "case-study";
+  formContext?: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "som-ble" | "som-lte" | "waitlist" | "case-study";
   /** CMS form entry (page relation). Null = hardcoded fallback copy. */
   config?: PopupConfig;
   /** Optional PDF to download on successful submit. */
@@ -36,6 +38,8 @@ export function UpcomingProductsModal({
   pdfName?: string;
   /** Confirmation close-button label (defaults to "Back to Homepage"). */
   closeLabel?: string;
+  title?: string;
+  productVariant?: string;
 }) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -115,15 +119,53 @@ export function UpcomingProductsModal({
           />
         </div>
 
-        {step === "form" && <FormStep onClose={onClose} onSuccess={() => setStep("confirmation")} formContext={formContext} config={config} pdfUrl={pdfUrl} pdfName={pdfName} />}
-        {step === "confirmation" && <ConfirmationStep onClose={onClose} config={config} downloadStarted={Boolean(pdfUrl)} closeLabel={closeLabel} />}
+        {step === "form" && (
+          <FormStep
+            onClose={onClose}
+            onSuccess={() => setStep("confirmation")}
+            formContext={formContext}
+            config={config}
+            pdfUrl={pdfUrl}
+            pdfName={pdfName}
+            title={title}
+            productVariant={productVariant}
+          />
+        )}
+        {step === "confirmation" && (
+          <ConfirmationStep
+            onClose={onClose}
+            config={config}
+            downloadStarted={Boolean(pdfUrl)}
+            closeLabel={closeLabel}
+            formContext={formContext}
+            productVariant={productVariant}
+          />
+        )}
       </div>
     </div>,
     document.body
   );
 }
 
-function FormStep({ onClose, onSuccess, formContext, config, pdfUrl, pdfName }: { onClose: () => void; onSuccess: () => void; formContext: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "waitlist" | "case-study"; config?: PopupConfig; pdfUrl?: string; pdfName?: string }) {
+function FormStep({
+  onClose,
+  onSuccess,
+  formContext,
+  config,
+  pdfUrl,
+  pdfName,
+  title,
+  productVariant,
+}: {
+  onClose: () => void;
+  onSuccess: () => void;
+  formContext: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "som-ble" | "som-lte" | "waitlist" | "case-study";
+  config?: PopupConfig;
+  pdfUrl?: string;
+  pdfName?: string;
+  title?: string;
+  productVariant?: string;
+}) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -131,6 +173,10 @@ function FormStep({ onClose, onSuccess, formContext, config, pdfUrl, pdfName }: 
   const [chip, setChip] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   // CMS-editable copy from the page relation; null = hardcoded fallbacks below.
+
+  const resolvedVariant =
+    productVariant ??
+    (formContext === "som-ble" ? "SOM (BLE)" : formContext === "som-lte" ? "SOM (LTE)" : undefined);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -143,6 +189,8 @@ function FormStep({ onClose, onSuccess, formContext, config, pdfUrl, pdfName }: 
         evalkit: "upcoming-evalkit",
         sdk: "upcoming-sdk",
         som: "upcoming-som",
+        "som-ble": "upcoming-som-ble",
+        "som-lte": "upcoming-som-lte",
         waitlist: "upcoming-waitlist",
         "case-study": "case-study",
       };
@@ -158,6 +206,7 @@ function FormStep({ onClose, onSuccess, formContext, config, pdfUrl, pdfName }: 
           lastName: lastName || undefined,
           company: company || undefined,
           details: chip || undefined,
+          product: resolvedVariant,
           popupId: config?.documentId,
         }),
       }).catch(() => { /* Mailchimp sync failure is non-blocking */ });
@@ -193,7 +242,25 @@ function FormStep({ onClose, onSuccess, formContext, config, pdfUrl, pdfName }: 
           <Corners leftSrc="/careers/corner-menu-tl.svg" rightSrc="/careers/corner-menu-tr.svg" />
         </button>
         <h2 className={`${gilroyMedium.className} text-[16px] md:text-[22px] leading-[normal] font-medium text-white not-italic`}>
-          {config?.title ?? (formContext === "usecase" ? "Discuss Your Use Case" : formContext === "evalkit" ? "Request An Eval Kit" : formContext === "sdk" ? "Request The SDK" : formContext === "som" ? "Register SOM Interest" : formContext === "waitlist" ? "Join The Waitlist" : formContext === "case-study" ? "Read The Case Study" : "Sign Up For Upcoming Products")}
+          {title ?? config?.title ?? (
+            formContext === "usecase"
+              ? "Discuss Your Use Case"
+              : formContext === "evalkit"
+              ? "Request An Eval Kit"
+              : formContext === "sdk"
+              ? "Request The SDK"
+              : formContext === "som"
+              ? "Register SOM Interest"
+              : formContext === "som-ble"
+              ? "Register SOM (BLE) Interest"
+              : formContext === "som-lte"
+              ? "Register SOM (LTE) Interest"
+              : formContext === "waitlist"
+              ? "Join The Waitlist"
+              : formContext === "case-study"
+              ? "Read The Case Study"
+              : "Sign Up For Upcoming Products"
+          )}
         </h2>
       </div>
 
@@ -203,6 +270,14 @@ function FormStep({ onClose, onSuccess, formContext, config, pdfUrl, pdfName }: 
         onSubmit={handleSubmit}
         className={`${interRegular.className} absolute bottom-[40px] left-[20px] right-[20px] top-[100px] md:bottom-[40px] md:left-[40px] md:right-[40px] md:top-[138px] flex flex-col gap-[24px] overflow-y-auto pr-[8px] font-normal not-italic`}
       >
+        {resolvedVariant && (
+          <div className="flex items-center gap-2">
+            <span className="text-[12px] uppercase tracking-wider text-[#a8ed90]">
+              [ Module: {resolvedVariant} ]
+            </span>
+          </div>
+        )}
+
         {formContext !== "waitlist" && (
           <div className="flex flex-col md:flex-row gap-[18px]">
             <Field label={popupField(config, "first_name")?.label ?? "First Name*"} className="min-w-0 flex-1">
@@ -251,7 +326,18 @@ function FormStep({ onClose, onSuccess, formContext, config, pdfUrl, pdfName }: 
         </div>
 
         {formContext !== "waitlist" && (
-          <Field label={popupField(config, "details")?.label ?? (formContext === "usecase" ? "Please briefly describe your use case*" : (formContext === "evalkit" || formContext === "sdk" || formContext === "som") ? "Please describe your intended application*" : formContext === "case-study" ? "Please describe your use case*" : "Which chip are you looking for?*")}>
+          <Field
+            label={
+              popupField(config, "details")?.label ??
+              (formContext === "usecase"
+                ? "Please briefly describe your use case*"
+                : formContext === "evalkit" || formContext === "sdk" || formContext === "som" || formContext === "som-ble" || formContext === "som-lte"
+                ? "Please describe your intended application*"
+                : formContext === "case-study"
+                ? "Please describe your use case*"
+                : "Which chip are you looking for?*")
+            }
+          >
             <p className="text-[12px] leading-[18px] text-[#a4a4a4] mb-[8px]">
               {popupField(config, "details")?.helper_text ??
                 (formContext === "usecase"
@@ -260,6 +346,10 @@ function FormStep({ onClose, onSuccess, formContext, config, pdfUrl, pdfName }: 
                   ? "Tell us a bit about your project or use case for the evaluation kit."
                   : formContext === "sdk"
                   ? "Tell us about the project you're building with our SDK."
+                  : formContext === "som-ble"
+                  ? "Tell us about the project you're building with our SOM (BLE)."
+                  : formContext === "som-lte"
+                  ? "Tell us about the project you're building with our SOM (LTE)."
                   : formContext === "som"
                   ? "Tell us about the project you're building with our SOM."
                   : formContext === "case-study"
@@ -268,7 +358,16 @@ function FormStep({ onClose, onSuccess, formContext, config, pdfUrl, pdfName }: 
             </p>
             <input
               className={FIELD_BOX}
-              placeholder={popupField(config, "details")?.placeholder ?? (formContext === "usecase" ? "Enter your use case" : (formContext === "evalkit" || formContext === "sdk" || formContext === "som") ? "Describe your intended application" : formContext === "case-study" ? "Describe your use case" : "Enter chip name")}
+              placeholder={
+                popupField(config, "details")?.placeholder ??
+                (formContext === "usecase"
+                  ? "Enter your use case"
+                  : formContext === "evalkit" || formContext === "sdk" || formContext === "som" || formContext === "som-ble" || formContext === "som-lte"
+                  ? "Describe your intended application"
+                  : formContext === "case-study"
+                  ? "Describe your use case"
+                  : "Enter chip name")
+              }
               value={chip}
               onChange={(e) => setChip(e.target.value)}
               required
@@ -293,7 +392,25 @@ function FormStep({ onClose, onSuccess, formContext, config, pdfUrl, pdfName }: 
   );
 }
 
-function ConfirmationStep({ onClose, config, downloadStarted, closeLabel }: { onClose: () => void; config?: PopupConfig; downloadStarted?: boolean; closeLabel?: string }) {
+function ConfirmationStep({
+  onClose,
+  config,
+  downloadStarted,
+  closeLabel,
+  formContext,
+  productVariant,
+}: {
+  onClose: () => void;
+  config?: PopupConfig;
+  downloadStarted?: boolean;
+  closeLabel?: string;
+  formContext?: string;
+  productVariant?: string;
+}) {
+  const resolvedVariant =
+    productVariant ??
+    (formContext === "som-ble" ? "SOM (BLE)" : formContext === "som-lte" ? "SOM (LTE)" : undefined);
+
   return (
     <>
       <button
@@ -325,6 +442,8 @@ function ConfirmationStep({ onClose, config, downloadStarted, closeLabel }: { on
         <p className={`${interRegular.className} w-full md:w-[540px] text-center text-[12px] leading-[18px] font-normal text-[#a4a4a4] not-italic`}>
           {config?.success_text ?? (downloadStarted
             ? "Your download has started. The case study PDF is on its way to your device."
+            : resolvedVariant
+            ? `We’ve received your interest in ${resolvedVariant}. Our team will keep you updated on availability and news.`
             : "We’ve received your interest. Our team will keep you updated on the latest news and availability for our upcoming products.")}
         </p>
 

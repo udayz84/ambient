@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from "next/image";
 import { gilroyMedium, interRegular, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
@@ -58,7 +59,7 @@ export function PrimaryCta({ label, href }: { label: string; href: string }) {
   return (
     <a
       href={href}
-      className="relative flex h-[48px] w-full min-[1024px]:w-auto shrink-0 items-center justify-center gap-[10px] px-[24px] py-[10px] drop-shadow-[0px_42px_53.5px_rgba(69,196,24,0.2)]"
+      className="relative flex h-[48px] w-auto shrink-0 items-center justify-center gap-[10px] px-[24px] py-[10px] drop-shadow-[0px_42px_53.5px_rgba(69,196,24,0.2)]"
     >
       <span
         aria-hidden
@@ -84,7 +85,7 @@ export function SecondaryCta({ label, href }: { label: string; href: string }) {
   return (
     <a
       href={href}
-      className="relative flex h-[48px] w-full min-[1024px]:w-auto shrink-0 items-center justify-center bg-[rgba(226,241,202,0.12)] px-[24px] py-[10px]"
+      className="relative flex h-[48px] w-auto shrink-0 items-center justify-center bg-[rgba(226,241,202,0.12)] px-[24px] py-[10px]"
     >
       <p
         className={`${gilroyMedium.className} text-[14px] min-[1024px]:text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic`}
@@ -514,7 +515,7 @@ export function ApplicationsPageModelZoo({
 
         {/* CTA Row */}
         {!isSmartHome && !isWearables && (
-          <div className="mt-[16px] flex w-full min-[1024px]:w-auto flex-col min-[1024px]:flex-row items-center justify-center gap-[16px]">
+          <div className="mt-[16px] flex w-full flex-col min-[1024px]:flex-row items-center justify-center gap-[16px] px-[20px]">
             <PrimaryCta label={primaryCta.label} href={primaryCta.href} />
             <SecondaryCta label={SECONDARY_CTA.label} href={SECONDARY_CTA.href} />
           </div>
@@ -541,7 +542,7 @@ export function ApplicationsPageModelZoo({
 
       {/* CTA underneath the carousel (strip variant only) */}
       {variant === "strip" ? (
-        <div className="relative z-10 mt-[48px] flex w-full min-[1024px]:w-auto flex-col min-[1024px]:flex-row items-center justify-center gap-[16px]">
+        <div className="relative z-10 mt-[48px] flex w-full flex-col min-[1024px]:flex-row items-center justify-center gap-[16px] px-[20px]">
           <PrimaryCta label={primaryCta.label} href={primaryCta.href} />
         </div>
       ) : null}

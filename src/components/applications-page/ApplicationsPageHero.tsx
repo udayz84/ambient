@@ -1,7 +1,10 @@
+"use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from "next/image";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle } from "../contact/contact-shared";
+import { useFitText } from "../shared/FitText";
 import { mediaUrl } from "@/lib/strapi";
 import { splitTitleIntoTwoLines } from "@/lib/title-utils";
 
@@ -18,6 +21,7 @@ const FALLBACK_TITLE = "Intelligence in Every\nEnvironment";
 const FALLBACK_TAG = "The Full Spectrum";
 
 export function ApplicationsPageHero({ data }: { data?: any }) {
+  const fitRef = useFitText<HTMLDivElement>({ maxLines: 2, floor: 20 });
   const bgImg = mediaUrl(data?.background_image) || "/applications/hero-bg.webp";
   const titleFrame = "/applications/title-frame.svg";
   const titleText = data?.title || FALLBACK_TITLE;
@@ -172,7 +176,8 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
               data-name="Group 78"
             >
               <div
-                className={`${gilroyMedium.className} absolute left-[56px] top-[43px] w-[241px] flex flex-col items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+                ref={fitRef}
+                className={`${gilroyMedium.className} absolute inset-x-0 top-[40px] px-[14px] flex flex-col items-center justify-center bg-clip-text text-center text-[28px] min-[375px]:text-[30px] leading-[34px] min-[375px]:leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
                 style={{
                   backgroundImage: MOBILE_TITLE_GRADIENT,
                   WebkitBackgroundClip: "text",
@@ -181,7 +186,7 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
                 data-node-id="4032:8627"
               >
                 {titleLines.map((line: string, i: number) => (
-                  <span key={i} className="block leading-[36px] whitespace-nowrap">
+                  <span key={i} className="block leading-[34px] min-[375px]:leading-[36px] whitespace-nowrap">
                     {line}
                   </span>
                 ))}

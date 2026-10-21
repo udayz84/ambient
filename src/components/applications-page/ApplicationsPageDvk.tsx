@@ -1,5 +1,6 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRef } from "react";
 import Image from "next/image";
 import { gilroyMedium, interRegular } from "../hero/fonts";
@@ -353,7 +354,7 @@ const FALLBACK_FEATURE_ICONS = [
 ];
 
 export function ApplicationsPageDvk({ data }: { data?: any }) {
-  const fitRef = useFitText<HTMLDivElement>({ maxLines: 2 });
+  const fitRef = useFitText<HTMLDivElement>({ maxLines: 2, floor: 20 });
   const scrollRef = useRef<HTMLDivElement>(null);
   
   const scrollLeft = () => {
@@ -537,7 +538,7 @@ export function ApplicationsPageDvk({ data }: { data?: any }) {
           <div className="relative h-[79px] w-[356px]" data-node-id="4032:8655" data-name="Group 78">
             <div
               ref={fitRef}
-              className={`${gilroyMedium.className} absolute inset-0 flex items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} absolute inset-0 flex items-center justify-center px-[16px] bg-clip-text text-center text-[26px] min-[375px]:text-[28px] leading-[32px] min-[375px]:leading-[34px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage:
                   "linear-gradient(107.453deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",

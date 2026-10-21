@@ -40,6 +40,8 @@ const FORM_NAME_MAP: Record<string, string> = {
   "upcoming-evalkit": "Eval Kit Request",
   "upcoming-sdk": "SDK Request",
   "upcoming-som": "SOM Interest",
+  "upcoming-som-ble": "SOM (BLE) Interest",
+  "upcoming-som-lte": "SOM (LTE) Interest",
   "upcoming-waitlist": "Waitlist Signup",
   "product-brief": "Product Brief Request",
   "resource-download": "Resource Download",
@@ -62,6 +64,7 @@ export async function POST(req: Request): Promise<Response> {
   const company = String(body.company ?? "").trim() || undefined;
   const phone = String(body.phone ?? "").trim() || undefined;
   const details = String(body.details ?? "").trim() || undefined;
+  const product = String(body.product ?? "").trim() || undefined;
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return bad("Please enter a valid email address.");
@@ -80,6 +83,7 @@ export async function POST(req: Request): Promise<Response> {
     ...(lastName ? [{ label: "Last Name", value: lastName }] : []),
     ...(company ? [{ label: "Company", value: company }] : []),
     ...(phone ? [{ label: "Phone", value: phone }] : []),
+    ...(product ? [{ label: "Product / Module", value: product }] : []),
     ...(details ? [{ label: "Details", value: details }] : []),
   ];
 

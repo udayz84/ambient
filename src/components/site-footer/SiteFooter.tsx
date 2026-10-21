@@ -48,9 +48,9 @@ export function SiteFooter({
   isResourcesPage?: boolean;
   isOverlapPage?: boolean;
   pathname?: string;
-  data?: any;
-  brandData?: any;
-  newsletterData?: any;
+  data?: Record<string, unknown>;
+  brandData?: Record<string, unknown>;
+  newsletterData?: Record<string, unknown>;
 }) {
   const isPartnersPage = pathname === "/partners";
 
@@ -80,57 +80,61 @@ export function SiteFooter({
           ? "pt-[100px]"
           : "pt-[24px]";
 
+  const rawNavSections = (data?.nav_sections as Record<string, unknown>[] | undefined) ?? [];
   const navSections: FooterNavSection[] =
-    Array.isArray(data?.nav_sections) && data.nav_sections.length > 0
-      ? data.nav_sections.map((section: any, index: number) => {
+    Array.isArray(rawNavSections) && rawNavSections.length > 0
+      ? rawNavSections.map((section, index) => {
           const fallback = FALLBACK_FOOTER_NAV_SECTIONS[index];
+          const rawLinks = (section?.links as Record<string, unknown>[] | undefined) ?? [];
           return {
-            title: section?.title || fallback?.title || "",
+            title: typeof section?.title === "string" ? section.title : fallback?.title || "",
             width: fallback?.width ?? 158,
             listWidth: fallback?.listWidth ?? 158,
             listAlign: fallback?.listAlign ?? "start",
-            links: Array.isArray(section?.links)
-              ? section.links
-                  .map((link: any) => ({
+            links: Array.isArray(rawLinks)
+              ? rawLinks
+                  .map((link) => ({
                     label: typeof link?.label === "string" ? link.label.trim() : "",
                     href: normalizeFooterUrl(link?.href),
                   }))
-                  .filter((link: any) => link.label)
+                  .filter((link) => link.label)
               : fallback?.links ?? [],
           };
         })
       : FALLBACK_FOOTER_NAV_SECTIONS;
 
+  const rawSocialLinks = (data?.social_links as Record<string, unknown>[] | undefined) ?? [];
   const socialLinks: FooterSocialLink[] =
-    Array.isArray(data?.social_links) && data.social_links.length > 0
-      ? data.social_links
-          .map((raw: any, index: number) => {
+    Array.isArray(rawSocialLinks) && rawSocialLinks.length > 0
+      ? rawSocialLinks
+          .map((raw, index) => {
             const fallback = FALLBACK_FOOTER_SOCIAL_LINKS[index];
             const platform = String(raw?.platform || fallback?.platform || "social").toLowerCase();
             const match = FALLBACK_FOOTER_SOCIAL_LINKS.find((s) => s.platform === platform);
             return {
               platform,
               href: normalizeFooterUrl(raw?.href, fallback?.href || "#"),
-              icon: mediaUrl(raw?.icon) || match?.icon || fallback?.icon || "/footer/social-linkedin.svg",
+              icon: mediaUrl(raw?.icon as Parameters<typeof mediaUrl>[0]) || match?.icon || fallback?.icon || "/footer/social-linkedin.svg",
               label: match?.label || fallback?.label || platform,
             };
           })
-          .filter((s: any) => s)
+          .filter((s): s is FooterSocialLink => Boolean(s))
       : FALLBACK_FOOTER_SOCIAL_LINKS;
 
+  const rawLegalLinks = (data?.legal_links as Record<string, unknown>[] | undefined) ?? [];
   const legalLinks: FooterLegalLink[] =
-    Array.isArray(data?.legal_links) && data.legal_links.length > 0
-      ? data.legal_links
-          .map((raw: any) => ({
+    Array.isArray(rawLegalLinks) && rawLegalLinks.length > 0
+      ? rawLegalLinks
+          .map((raw) => ({
             label: typeof raw?.label === "string" ? raw.label.trim() : "",
             href: normalizeFooterUrl(raw?.href),
           }))
-          .filter((link: any) => link.label)
+          .filter((link): link is FooterLegalLink => Boolean(link.label))
       : FALLBACK_FOOTER_LEGAL_LINKS;
 
-  const copyrightText = data?.copyright_text || FALLBACK_FOOTER_COPYRIGHT;
-  const craftedByText = data?.crafted_by_text || FALLBACK_FOOTER_CRAFTED_BY_TEXT;
-  const craftedByLogoSrc = mediaUrl(data?.crafted_by_logo) || null;
+  const copyrightText = (typeof data?.copyright_text === "string" ? data.copyright_text : null) || FALLBACK_FOOTER_COPYRIGHT;
+  const craftedByText = (typeof data?.crafted_by_text === "string" ? data.crafted_by_text : null) || FALLBACK_FOOTER_CRAFTED_BY_TEXT;
+  const craftedByLogoSrc = mediaUrl(data?.crafted_by_logo as Parameters<typeof mediaUrl>[0]) || null;
   const siteName = "ambient";
 
   return (
@@ -142,18 +146,16 @@ export function SiteFooter({
       <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 bg-black" />
         <div className="absolute inset-0 overflow-hidden">
-          {/* Mobile Background — dedicated mobile export (393×973), horizontally
-              centered, 300px below the top of the visible zone; image fills the
-              box 1:1 with no crop. */}
+          {/* Mobile Background — fills full viewport width, anchored to bottom */}
           <div
-            className="absolute left-1/2 w-[393px] -translate-x-1/2 lg:hidden"
-            style={{ top: `${mobileOverlapPx + 300}px`, height: "973px" }}
+            className="absolute inset-x-0 w-full lg:hidden"
+            style={{ top: `${mobileOverlapPx + 300}px`, bottom: 0 }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img loading="lazy" decoding="async"
               alt=""
               src="/footer/footer-mobile-bg.webp"
-              className="absolute inset-0 h-full w-full object-fill"
+              className="absolute inset-0 h-full w-full object-cover object-top"
             />
           </div>
           {/* Desktop Background */}
@@ -163,11 +165,10 @@ export function SiteFooter({
             className="hidden lg:block absolute left-[-0.02%] top-[-5.03%] h-[97.04%] w-full min-w-0 translate-x-0 opacity-100 max-w-none object-cover"
           />
         </div>
-        {/* Mobile overlay — spans only the background image box (300px below the
-            hidden overlap area, 973px tall), top-only 20% fade per Figma 3572:7309 */}
+        {/* Mobile overlay */}
         <div
-          className="absolute inset-x-0 h-[973px] bg-gradient-to-b from-[rgba(0,0,0,0.2)] to-transparent lg:hidden"
-          style={{ top: `${mobileOverlapPx + 300}px` }}
+          className="absolute inset-x-0 bg-gradient-to-b from-[rgba(0,0,0,0.2)] to-transparent lg:hidden"
+          style={{ top: `${mobileOverlapPx + 300}px`, bottom: 0 }}
         />
         {/* Desktop overlay */}
         <div className="absolute inset-0 hidden bg-gradient-to-b from-black/80 via-black/10 to-black/10 lg:block" />
@@ -304,7 +305,7 @@ export function SiteFooter({
         </div>
       </div>
 
-      <div className="relative z-[1] mt-[14px] flex w-full justify-center pb-0 lg:hidden">
+      <div className="relative z-[1] mt-[14px] flex w-full justify-center pb-[24px] lg:hidden">
         <p
           aria-hidden
           data-node-id="3572:7371"

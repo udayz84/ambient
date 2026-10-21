@@ -147,13 +147,21 @@ function FamilyCard({ data, onNotifyClick }: { data: typeof CARD_BLE; onNotifyCl
   );
 }
 
-export function SomFamily({ data }: { data?: any }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+export function SomFamily({
+  data,
+}: {
+  data?: {
+    title?: string;
+    subtitle?: string;
+    cards?: Array<{ tag?: string; title?: string; description?: string; footerText?: string }>;
+  };
+}) {
+  const [selectedVariant, setSelectedVariant] = useState<"ble" | "lte" | null>(null);
 
   const title = data?.title || FALLBACK_TITLE;
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
 
-  const dataCards: any[] = Array.isArray(data?.cards) ? data.cards : [];
+  const dataCards = Array.isArray(data?.cards) ? data.cards : [];
   const cards = FALLBACK_CARDS.map((fb, i) => {
     const c = dataCards[i];
 
@@ -165,6 +173,7 @@ export function SomFamily({ data }: { data?: any }) {
       // "What's inside" chips are hardcoded by design (see CARD_BLE/CARD_LTE).
       features: fb.features,
       footerText: c?.footerText !== undefined ? c.footerText : fb.footerText,
+      variant: (i === 1 || (c?.title || fb.title).toUpperCase().includes("LTE")) ? ("lte" as const) : ("ble" as const),
     };
   });
 
@@ -188,15 +197,20 @@ export function SomFamily({ data }: { data?: any }) {
         {/* Cards Row */}
         <div className="flex flex-col min-[1024px]:flex-row gap-[24px] min-[1024px]:gap-[40px] justify-between items-stretch">
           {cards.map((cardData, idx) => (
-            <FamilyCard key={idx} data={cardData} onNotifyClick={() => setIsModalOpen(true)} />
+            <FamilyCard
+              key={idx}
+              data={cardData}
+              onNotifyClick={() => setSelectedVariant(cardData.variant)}
+            />
           ))}
         </div>
       </div>
 
       <UpcomingProductsModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        formContext="upcoming"
+        isOpen={Boolean(selectedVariant)}
+        onClose={() => setSelectedVariant(null)}
+        formContext={selectedVariant === "lte" ? "som-lte" : "som-ble"}
+        productVariant={selectedVariant === "lte" ? "SOM (LTE)" : "SOM (BLE)"}
       />
     </section>
   );
