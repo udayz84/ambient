@@ -72,12 +72,11 @@ export function CompanyLeadershipRow({ team }: CompanyLeadershipRowProps = {}) {
       data-node-id="2379:2287"
       data-name="Frame 1984079466"
     >
-      <div className="absolute top-0 bottom-0 overflow-hidden" style={{ left: 'calc((1203px - 100vw) / 2)', right: 'calc((1203px - 100vw) / 2)' }}>
-        <div className="absolute inset-y-0 w-[1203px]" style={{ left: 'calc((100vw - 1203px) / 2)' }}>
-          <div
-            className="relative h-full w-full transition-transform duration-500 ease-in-out"
-            style={{ transform: `translateX(-${activeIndex * 413}px)` }}
-          >
+      <div className="absolute inset-0 overflow-hidden">
+        <div
+          className="relative h-full w-full transition-transform duration-500 ease-in-out"
+          style={{ transform: `translateX(-${activeIndex * 413}px)` }}
+        >
           {members.map((member, index) => (
             <CompanyLeadershipCard
               key={member.nodeId}
@@ -101,7 +100,6 @@ export function CompanyLeadershipRow({ team }: CompanyLeadershipRowProps = {}) {
           ))}
           </div>
         </div>
-      </div>
 
       {showArrows && (
         <>

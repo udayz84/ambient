@@ -35,26 +35,18 @@ export function Company({ data }: CompanyProps = {}) {
       >
         <TabletScaleCanvas className="relative h-[7100px] w-[1440px] shrink-0 min-[600px]:block">
           <div className="relative mx-auto h-full w-[1440px]">
-            {data?.hero ? <CompanyHero data={data.hero} /> : null}
-            {data?.mission ? <CompanyMission data={data.mission} /> : null}
-            {data?.leadership ? (
-              <CompanyLeadership data={data.leadership} />
-            ) : null}
-            {data?.dna ? <CompanyDna data={data.dna} /> : null}
-            {data?.ecosystem ? <CompanyEcosystem data={data.ecosystem} /> : null}
-            {data?.tech_partners ? (
-              <CompanyTechnologyPartners data={data.tech_partners} />
-            ) : null}
-            {data?.articles ? <CompanyArticles data={data.articles} /> : null}
-            {data?.engagement ? (
-              <CompanyImage124Background data={data.engagement} />
-            ) : null}
-            {data?.engagement ? (
-              <CompanyEngagement
-                data={data?.engagement}
-                joinTeam={data?.engagement?.join_team}
-              />
-            ) : null}
+            <CompanyHero data={data?.hero} />
+            <CompanyMission data={data?.mission} />
+            <CompanyLeadership data={data?.leadership} />
+            <CompanyDna data={data?.dna} />
+            <CompanyEcosystem data={data?.ecosystem} />
+            <CompanyTechnologyPartners data={data?.tech_partners} />
+            <CompanyArticles data={data?.articles} />
+            <CompanyImage124Background data={data?.engagement} />
+            <CompanyEngagement
+              data={data?.engagement}
+              joinTeam={data?.engagement?.join_team}
+            />
           </div>
         </TabletScaleCanvas>
       </div>

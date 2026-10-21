@@ -242,7 +242,7 @@ export function NewsGrid({ data, articles = [] }: NewsGridProps = {}) {
 
   return (
     <section
-      className="relative z-20 mb-0 min-[600px]:[margin-bottom:calc(-409px*var(--tablet-zoom,1))] flex w-full justify-center overflow-hidden bg-transparent"
+      className="relative z-20 mb-0 min-[1024px]:mb-[-409px] flex w-full justify-center overflow-hidden bg-transparent"
       aria-label="News articles"
       data-node-id="2500:1825"
     >

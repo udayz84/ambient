@@ -65,7 +65,7 @@ export default async function NewsListingPage() {
         <NewsGrid data={data?.grid} articles={buildNewsArticles(articles)} />
       </div>
       {/* Newsletter placed outside the NewsGrid wrapper to avoid overlap from mb-[-409px] */}
-      <div className="relative z-10 w-full flex justify-center pb-[20px] min-[600px]:[margin-bottom:calc(-500px*var(--tablet-zoom,1))] pt-[300px] min-[600px]:pt-[420px]">
+      <div className="relative z-10 w-full flex justify-center pb-[20px] min-[1024px]:mb-[-500px] pt-[300px] min-[1024px]:pt-[420px]">
         <NewsletterSignup />
       </div>
     </main>

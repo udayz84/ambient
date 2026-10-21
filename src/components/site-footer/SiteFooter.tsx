@@ -187,10 +187,8 @@ export function SiteFooter({
       {mobileOverlapPx > 0 && (
         <div
           aria-hidden
-          className={`w-full lg:hidden ${
-            isPartnersPage || pathname === "/som"
-              ? "h-[250px] min-[600px]:h-[calc(250px*var(--tablet-zoom,0.5333))]"
-              : "h-[700px] min-[600px]:h-[calc(409px*var(--tablet-zoom,0.5333))]"
+          className={`w-full lg:hidden min-[600px]:h-[calc(600px*var(--tablet-zoom,0.5333))] ${
+            isPartnersPage || pathname === "/som" ? "h-[250px]" : "h-[700px]"
           }`}
         />
       )}

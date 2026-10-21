@@ -140,27 +140,54 @@ const SMART_HOME_ECG_CARDS = [
 
 const ECG_FALLBACKS = [
   {
-    badge: "CONTINUOUS AI", badgeWidth: 133, stat: "24/7",
-    title: "Always-on safety detection",
-    description: "Runs assault, anomaly, and motion-event detection continuously on-device, without waiting for a cloud round trip.",
+    badge: "CONTINUOUS SENSING", badgeWidth: 172, stat: "24/7",
+    title: "Always-on activity recognition",
+    description: "Detect steps, workouts, swim strokes and daily movements continuously on-device, with no cloud dependency.",
     image: "/applications/wearables/ecg-card-1.webp",
   },
   {
-    badge: "POWER EFFICIENCY", badgeWidth: 150, stat: "<1mW",
-    title: "Microwatt-level inference",
-    description: "Keeps AI models active in the background while consuming a fraction of the power required by conventional edge processing.",
+    badge: "ULTRA-LOW POWER", badgeWidth: 152, stat: "<1mW",
+    title: "Multi-sensor inference",
+    description: "Run advanced models for heart rate, SpO2 and temperature while keeping power consumption ultra-low for longer battery life.",
     image: "/applications/wearables/ecg-card-2.webp",
   },
   {
-    badge: "SMART TRANSMISSION", badgeWidth: 170, stat: "Only on event",
-    title: "BLE/LTE wakes only when needed",
-    description: "The device processes locally first, then activates communication only when a meaningful safety or health event is detected.",
+    badge: "EVENT-DRIVEN AI", badgeWidth: 152, stat: "Only on event",
+    title: "Smart wake and alert",
+    description: "The device stays in low-power mode and activates AI only when a meaningful activity, fall or health event is detected.",
+    image: "/applications/wearables/ecg-card-3.webp",
+  },
+  {
+    badge: "LOCAL & PRIVATE", badgeWidth: 152, stat: "100%",
+    title: "No cloud dependency",
+    description: "Your data stays on your wrist. Sensitive health and activity data is processed locally, ensuring complete privacy and low latency.",
+    image: "/applications/wearables/ecg-card-4.webp",
+  },
+];
+
+const INDUSTRIAL_FALLBACKS = [
+  {
+    badge: "CONTINUOUS AI", badgeWidth: 133, stat: "24/7",
+    title: "Always-on fault detection",
+    description: "Runs bearing, vibration, and anomaly detection continuously on-node, without waiting for a cloud round trip.",
+    image: "/applications/wearables/ecg-card-1.webp",
+  },
+  {
+    badge: "POWER EFFICIENCY", badgeWidth: 150, stat: "<80 µW",
+    title: "Microwatt-level inference",
+    description: "Keeps industrial AI models active in the background while using a fraction of the power required by conventional edge processing.",
+    image: "/applications/wearables/ecg-card-2.webp",
+  },
+  {
+    badge: "SMART TRANSMISSION", badgeWidth: 170, stat: "Only on fault",
+    title: "Event-gated radio",
+    description: "The gateway wakes only when a verified anomaly is detected, reducing bandwidth, infrastructure load, and wasted transmissions.",
     image: "/applications/wearables/ecg-card-3.webp",
   },
   {
     badge: "LOCAL AI", badgeWidth: 133, stat: "100%",
-    title: "No cloud dependency",
-    description: "Sensitive health and safety signals are processed locally, improving reliability, latency, and user privacy.",
+    title: "No telemetry flood",
+    description: "Raw vibration, acoustic, and thermal data stay local. Only classified faults are transmitted for action.",
     image: "/applications/wearables/ecg-card-4.webp",
   },
 ];
@@ -524,9 +551,10 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
   const heading = SECTION_HEADING;
   const subtitle = isSmartHome ? SMART_HOME_SUBTITLE : (data?.subtitle || FALLBACK_SUBTITLE);
   const dataEcgCards: any[] = Array.isArray(data?.ecg_cards) ? data.ecg_cards : [];
+  const fallbackList = isIndustrial ? INDUSTRIAL_FALLBACKS : ECG_FALLBACKS;
   const ecgCards = Array.from({ length: 4 }).map((_, i) => {
     const c = dataEcgCards[i];
-    const fb = ECG_FALLBACKS[i];
+    const fb = fallbackList[i];
     return {
       imageSrc: isHearables ? HEARABLES_CARD_IMAGES[i] : (mediaUrl(c?.image) || fb.image),
       badge: c?.badge || fb.badge,
