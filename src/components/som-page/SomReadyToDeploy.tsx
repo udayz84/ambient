@@ -1,5 +1,5 @@
 "use client";
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
 import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
@@ -8,6 +8,7 @@ import { gilroyMedium, gilroySemiBold, interRegular, dmMono } from "../hero/font
 import { Corners } from "../shared/Corners";
 import { GradientTitle } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const TITLE_GRADIENT_DEG = "116.213deg";
 const SUBTITLE =
@@ -88,7 +89,7 @@ function ChipImage({ className, src }: { className?: string; src: string }) {
       data-name="Chip Image"
     >
       <div
-        className="absolute left-[13.448px] top-[13.159px] h-[433.25px] w-[417.835px] max-[1023px]:left-0 max-[1023px]:top-0 max-[1023px]:h-full max-[1023px]:w-full overflow-hidden"
+        className="absolute left-[13.448px] top-[13.159px] h-[433.25px] w-[417.835px] overflow-hidden"
         data-node-id="2438:5331"
         data-name="Background"
       >
@@ -128,95 +129,97 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
       className="relative z-30 flex w-full justify-center overflow-hidden bg-[linear-gradient(to_bottom,black_0%,black_85%,transparent_100%)]"
       aria-label="Ready to deploy?"
     >
-      {/* DESKTOP (>=1024px) — 1204 container, Figma absolute geometry.
-          Bottom padding 145.2px: SomFooterMerge's -mb-[400px] pulls the opaque
-          site footer 189px up over this section; this keeps all content clear. */}
-      <div className="relative hidden w-[1204px] flex-col items-center pt-[80px] pb-[60px] min-[1024px]:flex">
-        {/* Title block — 2438:5194 (800 wide, gap 24) */}
-        <div
-          className="flex w-[800px] flex-col items-center gap-[24px]"
-          data-node-id="2438:5194"
-        >
-          <div className="relative px-[10px]" data-node-id="2438:5196">
-            <GradientTitle
-              gradientDeg={TITLE_GRADIENT_DEG}
-              className="text-center whitespace-nowrap"
-              nodeId="2438:5197"
+      {/* DESKTOP & TABLET (>=600px) */}
+      <div className="relative hidden w-full justify-center overflow-x-clip min-[600px]:flex">
+        <TabletScaleCanvas className="relative flex w-[1440px] max-w-[1440px] shrink-0 justify-center">
+          <div className="relative flex w-[1204px] flex-col items-center pt-[80px] pb-[60px]">
+            {/* Title block — 2438:5194 (800 wide, gap 24) */}
+            <div
+              className="flex w-[800px] flex-col items-center gap-[24px]"
+              data-node-id="2438:5194"
             >
-              {heading}
-            </GradientTitle>
-            <GreenCtaCorners />
-          </div>
-          <p
-            className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
-            data-node-id="2438:5202"
-          >
-            {subtitle}
-          </p>
-        </div>
-
-        {/* Body — chip top sits 28.89px below the title block; 446.196 tall */}
-        <div className="relative mt-[10px] h-[446.196px] w-full">
-          {(chipSrc || FALLBACK_CHIP) && (
-            <ChipImage
-              className="absolute left-[401.108px] top-0 h-[446.196px] w-[430.321px]"
-              src={chipSrc || FALLBACK_CHIP}
-            />
-          )}
-
-          {/* Heading — 2438:5334 (left 75.44, top 140.41 rel. to body) */}
-          <h3
-            className={`${gilroyMedium.className} absolute left-[75.44px] top-[140.41px] w-[222px] text-[32px] leading-[38px] font-medium text-white not-italic [word-break:break-word]`}
-            data-node-id="2438:5334"
-          >
-            {primaryTitleLines.map((line: string, i: number) => (
-              <p key={i} className="leading-[38px] [word-break:break-word]">
-                {line}
+              <div className="relative px-[10px]" data-node-id="2438:5196">
+                <GradientTitle
+                  gradientDeg={TITLE_GRADIENT_DEG}
+                  className="text-center whitespace-nowrap"
+                  nodeId="2438:5197"
+                >
+                  {heading}
+                </GradientTitle>
+                <GreenCtaCorners />
+              </div>
+              <p
+                className={`${interRegular.className} w-[800px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+                data-node-id="2438:5202"
+              >
+                {subtitle}
               </p>
-            ))}
-          </h3>
+            </div>
 
-          {/* Description + CTA column — 2438:5360 (left 76, top 249.11, gap 20) */}
-          <div
-            className="absolute left-[76px] top-[249.11px] flex w-[290.93px] flex-col items-start gap-[20px]"
-            data-node-id="2438:5360"
-          >
-            <p
-              className={`${interRegular.className} h-[48px] w-full text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
-              data-node-id="2438:5361"
-            >
-              {description}
-            </p>
-            <div className="flex flex-col gap-[12px]">
-              <RequestCta label={ctaLabel} href={ctaHref} onClick={() => setIsModalOpen(true)} />
-              {secondaryCtaLabel && (
-                <SecondaryCta label={secondaryCtaLabel} href={secondaryCtaLink} />
+            {/* Body — chip top sits 28.89px below the title block; 446.196 tall */}
+            <div className="relative mt-[10px] h-[446.196px] w-full">
+              {(chipSrc || FALLBACK_CHIP) && (
+                <ChipImage
+                  className="absolute left-[401.108px] top-0 h-[446.196px] w-[430.321px]"
+                  src={chipSrc || FALLBACK_CHIP}
+                />
               )}
-            </div>
-          </div>
 
-          {/* Connector Line */}
-          <div
-            className="pointer-events-none absolute left-[80px] top-[215px] h-[23.24px] w-[320.82px]"
-            data-node-id="2438:5333"
-            aria-hidden
-          >
-            <div className="absolute inset-[-2.15%_0_-11.88%_-0.86%]">
-              <img loading="lazy" decoding="async"
-                src={CONNECTOR_LINE}
-                alt=""
-                className="block size-full max-w-none rotate-180"
+              {/* Heading — 2438:5334 (left 75.44, top 140.41 rel. to body) */}
+              <h3
+                className={`${gilroyMedium.className} absolute left-[75.44px] top-[140.41px] w-[222px] text-[32px] leading-[38px] font-medium text-white not-italic [word-break:break-word]`}
+                data-node-id="2438:5334"
+              >
+                {primaryTitleLines.map((line: string, i: number) => (
+                  <p key={i} className="leading-[38px] [word-break:break-word]">
+                    {line}
+                  </p>
+                ))}
+              </h3>
+
+              {/* Description + CTA column — 2438:5360 (left 76, top 249.11, gap 20) */}
+              <div
+                className="absolute left-[76px] top-[249.11px] flex w-[290.93px] flex-col items-start gap-[20px]"
+                data-node-id="2438:5360"
+              >
+                <p
+                  className={`${interRegular.className} h-[48px] w-full text-[16px] leading-[24px] font-normal tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
+                  data-node-id="2438:5361"
+                >
+                  {description}
+                </p>
+                <div className="flex flex-col gap-[12px]">
+                  <RequestCta label={ctaLabel} href={ctaHref} onClick={() => setIsModalOpen(true)} />
+                  {secondaryCtaLabel && (
+                    <SecondaryCta label={secondaryCtaLabel} href={secondaryCtaLink} />
+                  )}
+                </div>
+              </div>
+
+              {/* Connector Line */}
+              <div
+                className="pointer-events-none absolute left-[80px] top-[215px] h-[23.24px] w-[320.82px]"
+                data-node-id="2438:5333"
                 aria-hidden
-              />
+              >
+                <div className="absolute inset-[-2.15%_0_-11.88%_-0.86%]">
+                  <img loading="lazy" decoding="async"
+                    src={CONNECTOR_LINE}
+                    alt=""
+                    className="block size-full max-w-none rotate-180"
+                    aria-hidden
+                  />
+                </div>
+              </div>
+
             </div>
           </div>
-
-        </div>
+        </TabletScaleCanvas>
       </div>
 
-      {/* MOBILE (<1024px) — Figma node 4046:8112 "6th Fold" 393×750 */}
+      {/* MOBILE (<600px) — Figma node 4046:8112 "6th Fold" 393×750 */}
       <div
-        className="relative mx-auto h-[750px] w-[393px] overflow-hidden min-[1024px]:hidden"
+        className="relative mx-auto h-[750px] w-[393px] overflow-hidden min-[600px]:hidden"
         data-node-id="4046:8112"
         data-name="6th Fold"
       >
@@ -235,7 +238,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
             </h2>
           </div>
           <p
-            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word]`}
           >
             {subtitle}
           </p>
@@ -287,7 +290,7 @@ export function SomReadyToDeploy({ data }: { data?: any }) {
               ))}
             </h3>
             <p
-              className={`${interRegular.className} w-[296.416px] text-center text-[14px] leading-[23.075px] font-normal tracking-[-0.2773px] text-[#99a1af] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+              className={`${interRegular.className} w-[296.416px] text-center text-[14px] leading-[23.075px] font-normal tracking-[-0.2773px] text-[#99a1af] not-italic [word-break:break-word]`}
             >
               {description}
             </p>

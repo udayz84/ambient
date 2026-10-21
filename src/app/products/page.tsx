@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Metadata } from "next";
 import { ProductsHero } from "@/components/products-page/ProductsHero";
 import { ProductsFeatures } from "@/components/products-page/ProductsFeatures";
@@ -17,6 +18,7 @@ import { ProductsStartBuilding } from "@/components/products-page/ProductsStartB
 import { ProductsStickyNav } from "@/components/products-page/ProductsStickyNav";
 import { getSingleType } from "@/lib/strapi";
 import { buildMetadata, type SeoData } from "@/lib/seo";
+import { TabletScaleInit } from "@/components/shared/TabletScaleInit";
 
 export async function generateMetadata(): Promise<Metadata> {
   let seo: SeoData | null = null;
@@ -114,6 +116,7 @@ export default async function ProductsPage() {
 
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
+      <TabletScaleInit />
       <ProductsHero data={data?.hero} evalkitForm={data?.evalkit_form} />
       <ProductsStickyNav items={stickyItems} />
       <div id="features"><ProductsFeatures data={data?.features} /></div>

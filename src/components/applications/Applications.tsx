@@ -7,6 +7,7 @@ import { ApplicationsFeatureCard } from "./ApplicationsFeatureCard";
 import { ApplicationsHeader } from "./ApplicationsHeader";
 import { ApplicationsHeroVisual } from "./ApplicationsHeroVisual";
 import { ApplicationsMobile } from "./ApplicationsMobile";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const INITIAL_ACTIVE_INDEX = 0;
 
@@ -60,12 +61,12 @@ export function Applications({ data }: { data?: any }) {
 
   return (
     <section
-      className="relative flex w-full justify-center overflow-hidden bg-black max-[1023px]:h-auto min-[1024px]:h-[868px]"
+      className="relative flex w-full justify-center overflow-hidden bg-black"
       aria-label="Build the impossible today"
     >
-      <div className="relative mx-auto hidden h-[868px] w-full max-w-[1440px] min-[1024px]:block">
+      <TabletScaleCanvas className="relative mx-auto hidden h-[868px] w-[1440px] shrink-0 min-[600px]:block">
         <div
-          className="absolute top-0 left-1/2 h-[868px] w-[1024px] min-[1180px]:w-[1180px] xl:w-[1321px] -translate-x-1/2"
+          className="absolute top-0 left-1/2 h-[868px] w-[1321px] -translate-x-1/2"
           data-node-id="2379:844"
           data-name="Build the impoosible"
         >
@@ -107,10 +108,10 @@ export function Applications({ data }: { data?: any }) {
             </>
           )}
         </div>
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE & SMALL TABLET (<1024px) — dedicated layout, desktop is untouched above */}
-      <div className="relative w-full min-[1024px]:hidden">
+      {/* MOBILE (<600px) */}
+      <div className="relative w-full min-[600px]:hidden">
         <ApplicationsMobile
           tabs={tabs}
           featureCards={strapiFeatureCards}

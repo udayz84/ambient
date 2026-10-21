@@ -12,8 +12,8 @@ import {
   HERO_IMAGE_OVERLAY,
   HERO_TITLE_GRADIENT,
 } from "./model-zoo-data";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
-const HERO_DESKTOP_HEIGHT = 743;
 const NEXT_SECTION_ID = "model-zoo-content";
 
 /**
@@ -28,9 +28,8 @@ export function ModelZooHero() {
       data-node-id="5387:7822"
       data-name="Hero Section"
     >
-      {/* MOBILE (<1024px) — stacked, centered layout following the site's
-          mobile hero conventions (393 canvas, 36/36 title, 14/21 sub) */}
-      <div className="relative flex min-[1024px]:hidden flex-col items-center gap-[15px] px-[20px] pt-[178px] pb-[48px]">
+      {/* MOBILE (<600px) */}
+      <div className="relative flex min-[600px]:hidden flex-col items-center gap-[15px] px-[20px] pt-[178px] pb-[48px]">
         {/* background image + fade, full-bleed under the text */}
         <div className="pointer-events-none absolute inset-0 overflow-clip" aria-hidden>
           <img alt="" src="/model-zoo/hero-bg-1.webp" className="absolute inset-0 size-full object-cover" />
@@ -78,12 +77,10 @@ export function ModelZooHero() {
         </div>
       </div>
 
-      {/* DESKTOP (>=1024px) */}
-      <div
-        className="relative mx-auto hidden w-full overflow-x-clip min-[1024px]:block"
-        style={{ height: HERO_DESKTOP_HEIGHT }}
+      {/* DESKTOP (>=600px) */}
+      <TabletScaleCanvas
+        className="relative mx-auto hidden h-[743px] w-[1440px] shrink-0 min-[600px]:block"
       >
-      <div className="relative mx-auto h-full w-[1442px]">
         {/* Background image stack — 5422:6884 */}
         <div
           className="pointer-events-none absolute left-1/2 top-0 h-[729px] w-[1440px] -translate-x-1/2"
@@ -220,8 +217,7 @@ export function ModelZooHero() {
 
 
         <ModelZooScrollIndicator />
-      </div>
-      </div>
+      </TabletScaleCanvas>
     </div>
   );
 }

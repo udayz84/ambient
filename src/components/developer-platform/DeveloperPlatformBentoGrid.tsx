@@ -31,7 +31,7 @@ export function DeveloperPlatformBentoGrid({ data }: { data?: any }) {
 
   return (
     <div
-      className="absolute top-[198.98px] left-1/2 z-10 h-[600px] w-[1204px] -translate-x-1/2 origin-top scale-[0.8] min-[1180px]:scale-[0.92] xl:scale-100"
+      className="absolute top-[198.98px] left-1/2 z-10 h-[600px] w-[1204px] -translate-x-1/2 origin-top scale-100"
       data-node-id="2379:986"
     >
       {cards.map((card) => (

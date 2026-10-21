@@ -13,6 +13,7 @@ import {
 } from "./latest-news-data";
 import { LatestNewsMobile } from "./LatestNewsMobile";
 import { useFitText } from "../shared/FitText";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const cornerLeft = "/hero/corner-tag-1.svg";
 const cornerRight = "/hero/corner-tag-2.svg";
@@ -68,12 +69,12 @@ export function LatestNews({ data }: { data?: any }) {
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
     <section
-      className="relative mt-[40px] md:mt-[60px] min-[1024px]:mt-[150px] flex w-full justify-center overflow-x-clip bg-black"
+      className="relative mt-[40px] min-[600px]:mt-[150px] flex w-full justify-center overflow-x-clip bg-black"
       aria-label="Latest from Ambient"
       data-node-id="2379:1283"
     >
-      <div className="relative mx-auto hidden w-full max-w-[1440px] justify-center min-[1024px]:flex">
-        <div className="mx-auto flex w-[960px] min-[1180px]:w-[1100px] xl:w-[1204px] flex-col items-center gap-[40px] xl:gap-[48px] px-[16px] xl:px-0">
+      <TabletScaleCanvas className="relative mx-auto hidden w-[1440px] shrink-0 justify-center min-[600px]:flex">
+        <div className="mx-auto flex w-[1204px] flex-col items-center gap-[48px]">
           <div
             className="relative w-[600px] shrink-0"
             data-node-id="2379:1284"
@@ -120,7 +121,7 @@ export function LatestNews({ data }: { data?: any }) {
               />
 
               <p
-                className={`${interRegular.className} relative col-start-1 row-start-1 mt-[94px] ml-0 w-[600px] text-center text-[18px] leading-[27px] font-normal text-white not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+                className={`${interRegular.className} relative col-start-1 row-start-1 mt-[94px] ml-0 w-[600px] text-center text-[16px] leading-[24px] font-normal text-white not-italic [word-break:break-word]`}
                 data-node-id="2379:1290"
               >
                 {subtitle}
@@ -129,7 +130,7 @@ export function LatestNews({ data }: { data?: any }) {
           </div>
 
           <div
-            className="flex w-full shrink-0 items-center justify-center gap-[16px] min-[1180px]:gap-[20px]"
+            className="flex w-full shrink-0 items-center justify-center gap-[20px]"
             data-node-id="2379:1291"
           >
             {cards.map((article: LatestNewsArticle) => (
@@ -163,10 +164,10 @@ export function LatestNews({ data }: { data?: any }) {
             <GreenCtaCorners />
           </a>
         </div>
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE & SMALL TABLET (<1024px) — dedicated layout, desktop is untouched above */}
-      <div className="relative w-full min-[1024px]:hidden">
+      {/* MOBILE (<600px) */}
+      <div className="relative w-full min-[600px]:hidden">
         <LatestNewsMobile data={data} />
       </div>
     </section>

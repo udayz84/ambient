@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
@@ -68,7 +69,7 @@ export function DvkDemos({ data }: { data?: any }) {
 
         {/* Description — 2761:2798 (650 wide) */}
         <p
-          className={`${interRegular.className} text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           style={{ width: 650 }}
           data-node-id="2761:2798"
         >

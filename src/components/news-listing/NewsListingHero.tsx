@@ -8,6 +8,8 @@ import { Corners } from "../shared/Corners";
 import { WhiteTag } from "./WhiteTag";
 import { GreenCta } from "./GreenCta";
 
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
+
 const FALLBACK_HERO_IMAGE = "/news-listing/hero-bg.webp";
 
 type NewsListingHeroProps = {
@@ -48,8 +50,6 @@ export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
     setCurrentSlideIndex((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
   };
 
-
-
   return (
     <section
       className="relative -mt-[78px] flex w-full justify-center overflow-hidden bg-[#040404]"
@@ -57,8 +57,8 @@ export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
       data-name="Desktop - 8"
       aria-label="News listing hero"
     >
-      {/* DESKTOP (>=1024px) — exact Figma layout */}
-      <div className="relative hidden h-[667px] w-full min-[1024px]:block">
+      {/* DESKTOP (>=600px) — exact Figma layout */}
+      <TabletScaleCanvas className="relative hidden h-[667px] w-[1440px] shrink-0 min-[600px]:block mx-auto">
         {/* Image frame: 1440x638 at top-[29px], horizontally centered */}
         <div
           className="absolute left-1/2 top-[29px] h-[638px] w-[1440px] -translate-x-1/2 overflow-clip transition-opacity duration-500"
@@ -139,13 +139,11 @@ export function NewsListingHero({ data }: NewsListingHeroProps = {}) {
               <Corners />
             </button>
           </div>
-
-
         </div>
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE (<1024px) — exact Figma mobile layout (393×690 frame) */}
-      <div className="relative w-full min-[1024px]:hidden">
+      {/* MOBILE (<600px) — exact Figma mobile layout (393×690 frame) */}
+      <div className="relative w-full min-[600px]:hidden">
         {/* Image area: full-bleed background with gradient overlay */}
         <div className="relative h-[487px] w-full overflow-hidden" data-name="Image">
           {mainBackgroundImage ? (

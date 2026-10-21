@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { GradientTitle } from "../contact/contact-shared";
 import { mediaUrl } from "@/lib/strapi";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const TITLE_GRADIENT_DEG = "106.158deg";
 const FALLBACK_SUBTITLE =
@@ -21,8 +23,8 @@ export function SomHero({ data }: { data?: any }) {
       data-name="Hero Section"
       aria-label="The shortest path to volume production"
     >
-      {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden h-[703px] w-full max-w-[1442px] min-[1024px]:block">
+      {/* DESKTOP (>=600px) */}
+      <TabletScaleCanvas className="relative hidden h-[703px] w-[1440px] shrink-0 min-[600px]:block">
         {/* Background image "DVK 1" */}
         <div
           className="pointer-events-none absolute inset-0 size-full"
@@ -99,7 +101,7 @@ export function SomHero({ data }: { data?: any }) {
             data-name="Sub"
           >
             <p
-              className={`${interRegular.className} w-[554px] shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+              className={`${interRegular.className} w-[554px] shrink-0 text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
               data-node-id="3210:1556"
             >
               {subtitle}
@@ -108,11 +110,11 @@ export function SomHero({ data }: { data?: any }) {
 
           </div>
         </div>
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE (<1024px) — Figma node 4046:7801 "Banner" 393×700 */}
+      {/* MOBILE (<600px) — Figma node 4046:7801 "Banner" 393×700 */}
       <div
-        className="relative mx-auto mt-[40px] h-[700px] w-full overflow-hidden bg-black min-[1024px]:hidden"
+        className="relative mx-auto mt-[40px] h-[700px] w-full overflow-hidden bg-black min-[600px]:hidden"
         data-node-id="4046:7801"
         data-name="Banner"
       >
@@ -170,7 +172,7 @@ export function SomHero({ data }: { data?: any }) {
 
           {/* Subtitle — 4046:7809 (336×63) */}
           <p
-            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word]`}
             data-node-id="4046:7809"
           >
             {subtitle}

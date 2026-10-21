@@ -7,6 +7,8 @@ import { useFadeIn } from "../shared/useFadeIn";
 import type { Capability, EcosystemContent } from "./partners-content";
 import { JourneyIcon, PartnersSectionHeading, PartnersBridgeBox } from "./partners-shared";
 
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
+
 function CapabilityRow({
   index,
   title,
@@ -16,6 +18,7 @@ function CapabilityRow({
   active,
   onHover,
   onToggle,
+  isMobile,
 }: {
   index: number;
   title: string;
@@ -25,6 +28,7 @@ function CapabilityRow({
   active: boolean;
   onHover: () => void;
   onToggle: () => void;
+  isMobile?: boolean;
 }) {
   return (
     <button
@@ -40,14 +44,16 @@ function CapabilityRow({
       }`}
     >
       <Corners />
-      <div className="flex w-full items-center gap-[20px] px-[28px] py-[22px] min-[1024px]:px-[32px]">
-        <span
-          className={`${interRegular.className} hidden w-[32px] shrink-0 text-[12px] leading-[18px] tracking-[1.2px] transition-colors duration-300 min-[1024px]:block ${
-            active ? "text-[#53d824]" : "text-[#8a8a8a]"
-          }`}
-        >
-          0{index + 1}
-        </span>
+      <div className={`flex w-full items-center gap-[20px] ${isMobile ? "px-[20px] py-[18px]" : "px-[32px] py-[22px]"}`}>
+        {!isMobile && (
+          <span
+            className={`${interRegular.className} w-[32px] shrink-0 text-[12px] leading-[18px] tracking-[1.2px] transition-colors duration-300 ${
+              active ? "text-[#53d824]" : "text-[#8a8a8a]"
+            }`}
+          >
+            0{index + 1}
+          </span>
+        )}
         <span
           className={`flex size-[40px] shrink-0 items-center justify-center border-[0.5px] border-solid transition-colors duration-300 ${
             active
@@ -58,7 +64,7 @@ function CapabilityRow({
           <JourneyIcon name={journeyIcon} className="size-[22px]" />
         </span>
         <span className="flex min-w-0 flex-1 flex-col gap-[2px]">
-          <span className={`${gilroyMedium.className} truncate text-[20px] leading-[26px] font-medium text-white not-italic min-[1024px]:text-[22px] min-[1024px]:leading-[28px]`}>
+          <span className={`${gilroyMedium.className} truncate ${isMobile ? "text-[18px] leading-[24px]" : "text-[22px] leading-[28px]"} font-medium text-white not-italic`}>
             {title}
           </span>
           <span className="text-[11px] leading-[16px] tracking-[1px] text-[#8a8a8a] uppercase">
@@ -74,7 +80,7 @@ function CapabilityRow({
         }`}
       >
         <div className="overflow-hidden">
-          <p className={`${interRegular.className} w-full px-[28px] pb-[26px] text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-75 [word-break:break-word] not-italic min-[1024px]:pl-[100px] min-[1024px]:pr-[48px] max-[1023px]:text-[14px] max-[1023px]:leading-[21px]`}>
+          <p className={`${interRegular.className} w-full ${isMobile ? "px-[20px] pb-[20px] text-[14px] leading-[21px]" : "pl-[100px] pr-[48px] pb-[26px] text-[16px] leading-[24px]"} font-normal text-[#f0f0f0] opacity-75 [word-break:break-word] not-italic`}>
             {description}
           </p>
         </div>
@@ -107,38 +113,75 @@ export function PartnersCapabilities({
   return (
     <section
       ref={fadeRef}
-      className={`relative mx-auto flex w-full max-w-[1204px] flex-col items-center gap-[40px] px-[24px] py-[40px] min-[1024px]:py-[64px] ${fadeCls} transform-gpu`}
+      className={`relative mx-auto flex w-full justify-center ${fadeCls} transform-gpu`}
       aria-label="The ecosystem, by capability"
     >
-      <div className="relative flex flex-col items-center gap-[16px] px-[10px]">
-        <PartnersSectionHeading deg="101.272deg">{ecosystem.heading}</PartnersSectionHeading>
-        <Corners />
+      {/* DESKTOP & TABLET (>=600px) — 1440px design canvas with proportional tablet scaling */}
+      <TabletScaleCanvas className="relative hidden w-[1440px] shrink-0 flex-col items-center gap-[40px] px-[24px] py-[64px] min-[600px]:flex">
+        <div className="relative flex flex-col items-center gap-[16px] px-[10px]">
+          <PartnersSectionHeading deg="101.272deg">{ecosystem.heading}</PartnersSectionHeading>
+          <Corners />
+        </div>
+
+        <p className={`${interRegular.className} max-w-[720px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic`}>
+          {ecosystem.subheading}
+        </p>
+
+        <div className="flex w-full max-w-[1204px] flex-col gap-[12px]">
+          {capabilities.map((cap, i) => (
+            <CapabilityRow
+              key={cap.id}
+              index={i}
+              title={cap.title}
+              short={cap.short}
+              description={cap.description}
+              journeyIcon={cap.journeyIcon}
+              active={isTouch ? touchIndex === i : hoverIndex === i}
+              onHover={() => setHoverIndex(i)}
+              onToggle={() => setTouchIndex((prev) => (prev === i ? -1 : i))}
+            />
+          ))}
+        </div>
+
+        {/* bridge line */}
+        <PartnersBridgeBox className="mt-[16px]">
+          {ecosystem.bridge}
+        </PartnersBridgeBox>
+      </TabletScaleCanvas>
+
+      {/* MOBILE (<600px) */}
+      <div className="relative flex w-full flex-col items-center gap-[32px] px-[20px] py-[40px] min-[600px]:hidden">
+        <div className="relative flex flex-col items-center gap-[16px] px-[10px]">
+          <PartnersSectionHeading deg="101.272deg">{ecosystem.heading}</PartnersSectionHeading>
+          <Corners />
+        </div>
+
+        <p className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic`}>
+          {ecosystem.subheading}
+        </p>
+
+        <div className="flex w-full flex-col gap-[12px]">
+          {capabilities.map((cap, i) => (
+            <CapabilityRow
+              key={cap.id}
+              index={i}
+              title={cap.title}
+              short={cap.short}
+              description={cap.description}
+              journeyIcon={cap.journeyIcon}
+              active={touchIndex === i}
+              onHover={() => setHoverIndex(i)}
+              onToggle={() => setTouchIndex((prev) => (prev === i ? -1 : i))}
+              isMobile
+            />
+          ))}
+        </div>
+
+        {/* bridge line */}
+        <PartnersBridgeBox className="mt-[12px]">
+          {ecosystem.bridge}
+        </PartnersBridgeBox>
       </div>
-
-      <p className={`${interRegular.className} max-w-[720px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
-        {ecosystem.subheading}
-      </p>
-
-      <div className="flex w-full flex-col gap-[12px]">
-        {capabilities.map((cap, i) => (
-          <CapabilityRow
-            key={cap.id}
-            index={i}
-            title={cap.title}
-            short={cap.short}
-            description={cap.description}
-            journeyIcon={cap.journeyIcon}
-            active={isTouch ? touchIndex === i : hoverIndex === i}
-            onHover={() => setHoverIndex(i)}
-            onToggle={() => setTouchIndex((prev) => (prev === i ? -1 : i))}
-          />
-        ))}
-      </div>
-
-      {/* bridge line */}
-      <PartnersBridgeBox className="mt-[16px]">
-        {ecosystem.bridge}
-      </PartnersBridgeBox>
     </section>
   );
 }

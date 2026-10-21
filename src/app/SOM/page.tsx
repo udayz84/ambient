@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Metadata } from "next";
 import { SomHero } from "@/components/som-page/SomHero";
 import { SomFeatures } from "@/components/som-page/SomFeatures";
 import { SomFamily } from "@/components/som-page/SomFamily";
 import { SomOneModule } from "@/components/som-page/SomOneModule";
+import { TabletScaleInit } from "@/components/shared/TabletScaleInit";
 
 
 import { SomReadyToDeploy } from "@/components/som-page/SomReadyToDeploy";
@@ -56,6 +58,7 @@ export default async function SomPage() {
 
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
+      <TabletScaleInit />
       <SomHero data={data?.hero} />
       <SomFeatures data={data?.features} />
       <SomFamily data={data?.family} />

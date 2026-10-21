@@ -176,10 +176,10 @@ export function CompanyMission({ data }: CompanyMissionProps = {}) {
             className={`w-[555px] flex flex-col gap-[24px] not-italic [word-break:break-word]`}
             data-node-id="2379:4760"
           >
-            <p className={`${gilroyMedium.className} text-[20px] leading-[30px] min-[1024px]:text-[24px] min-[1024px]:leading-[34px] text-[#53d824]`}>
+            <p className={`${gilroyMedium.className} text-[24px] leading-[34px] text-[#53d824]`}>
               {body1}
             </p>
-            <p className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
+            <p className={`${interRegular.className} text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65`}>
               {body2}
             </p>
           </div>

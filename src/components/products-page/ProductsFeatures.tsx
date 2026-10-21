@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { mediaUrl } from "@/lib/strapi";
 import { useFitText } from "../shared/FitText";
@@ -13,6 +14,7 @@ import {
 } from "./products-data";
 import type { ProductsFeatureCardData } from "./products-data";
 import { ProductsFeatureCard } from "./ProductsFeatureCard";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const FALLBACK_HEADING =
   "The chip that ends the \npower-vs-intelligence tradeoff.";
@@ -73,15 +75,15 @@ export function ProductsFeatures({ data }: { data?: any }) {
   return (
     <section
       id="products-features"
-      className="relative left-1/2 w-screen max-w-none -translate-x-1/2 bg-black min-[1024px]:pt-[120px] min-[1024px]:pb-0"
+      className="relative flex w-full justify-center overflow-x-clip bg-black min-[600px]:pt-[120px] min-[600px]:pb-0"
       data-node-id="3286:1931"
       data-name="Section 6"
       aria-label="Product capabilities"
     >
-      {/* DESKTOP (>=1024px) */}
-      <div className="hidden w-full min-[1024px]:block">
+      {/* DESKTOP (>=600px) */}
+      <div className="hidden w-full justify-center min-[600px]:flex">
         <SectionBackdrop src={bgImage} />
-        <div className="relative mx-auto flex w-full max-w-[1440px] flex-col items-center px-[64px]">
+        <TabletScaleCanvas className="relative hidden w-[1440px] shrink-0 flex-col items-center px-[64px] min-[600px]:flex">
           {/* 3286:2105 — Section Title */}
           <div
             className="flex flex-col items-center justify-center gap-[20px]"
@@ -125,7 +127,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
               <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             </div>
             <p
-              className={`${interRegular.className} w-[900px] max-w-[90vw] shrink-0 text-center text-[18px] leading-[26px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] mt-[16px] mb-[32px]`}
+              className={`${interRegular.className} w-[900px] shrink-0 text-center text-[18px] leading-[26px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] mt-[16px] mb-[32px]`}
               data-node-id="3286:2112"
             >
               {subtitle}
@@ -133,7 +135,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
           </div>
 
           {/* CARDS NATIVE SCROLL */}
-          <div className="flex w-full justify-center transform scale-[0.8] origin-top max-[1300px]:scale-[0.75] max-[1150px]:scale-[0.65] -mb-[80px] max-[1300px]:-mb-[100px] max-[1150px]:-mb-[140px]">
+          <div className="flex w-full justify-center transform scale-[0.8] origin-top -mb-[80px]">
             <div className="flex gap-[24px]">
               {featureCards.map((card, index) => (
                 <div key={card.nodeId} className="shrink-0">
@@ -150,11 +152,11 @@ export function ProductsFeatures({ data }: { data?: any }) {
           >
             {CAPTION}
           </p> */}
-        </div>
+        </TabletScaleCanvas>
       </div>
 
-      {/* MOBILE (<1024px) — stacked header + swipeable card strip */}
-      <div className="relative z-10 w-full min-[1024px]:hidden">
+      {/* MOBILE (<600px) — stacked header + swipeable card strip */}
+      <div className="relative z-10 w-full min-[600px]:hidden">
         <SectionBackdrop src={bgImage} />
         <div className="relative flex flex-col items-center gap-[20px] px-[24px] pt-[40px]">
           <TagBadge
@@ -179,7 +181,7 @@ export function ProductsFeatures({ data }: { data?: any }) {
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           </div>
           <p
-            className={`${interRegular.className} max-w-[800px] w-[90vw] text-center text-[18px] leading-[28px] font-normal text-[#f0f0f0] not-italic min-[1024px]:text-[24px] min-[1024px]:leading-[36px] mt-[16px] mb-[24px]`}
+            className={`${interRegular.className} max-w-[800px] w-[90vw] text-center text-[18px] leading-[28px] font-normal text-[#f0f0f0] not-italic mt-[16px] mb-[24px]`}
           >
             {subtitle}
           </p>

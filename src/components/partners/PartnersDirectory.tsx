@@ -176,6 +176,8 @@ function ExpandingTile({ expanding }: { expanding: DirectoryContent["expanding"]
 /* Directory section                                                   */
 /* ------------------------------------------------------------------ */
 
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
+
 export function PartnersDirectory({
   content,
   capabilities,
@@ -211,78 +213,156 @@ export function PartnersDirectory({
     <section
       id="directory"
       ref={fadeRef}
-      className={`relative mx-auto flex w-full max-w-[1204px] scroll-mt-[78px] flex-col items-center gap-[40px] px-[24px] py-[40px] min-[1024px]:py-[64px] ${fadeCls} transform-gpu`}
+      className={`relative mx-auto flex w-full justify-center scroll-mt-[78px] ${fadeCls} transform-gpu`}
       aria-label="Partner directory and global coverage"
     >
-      <div className="relative flex flex-col items-center gap-[16px] px-[10px]">
-        <PartnersSectionHeading deg="101.272deg">{content.heading}</PartnersSectionHeading>
-        <Corners />
-      </div>
-
-      <p className={`${interRegular.className} max-w-[720px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
-        {content.subheading}
-      </p>
-
-      <CoverageMap
-        onRegionSelect={(region) => setRegionFilter(region)}
-      />
-
-      {/* filters */}
-      <div className="flex w-full flex-col gap-[12px] min-[1024px]:flex-row min-[1024px]:gap-[20px]">
-        <PartnersDropdown
-          label={content.filters.capability}
-          options={capabilityOptions}
-          value={capabilityFilter === ALL ? "" : capabilityFilter}
-          onChange={(v) => setCapabilityFilter(v || ALL)}
-          className="min-[1024px]:w-[300px]"
-        />
-        <PartnersDropdown
-          label={content.filters.region}
-          options={regionOptions}
-          value={regionFilter === ALL ? "" : regionFilter}
-          onChange={(v) => setRegionFilter(v || ALL)}
-          className="min-[1024px]:w-[300px]"
-        />
-        <div className="flex flex-1 items-center justify-start min-[1024px]:justify-end">
-          <p className={`${dmMono.className} text-[11px] leading-[16px] tracking-[1px] text-[#8a8a8a] uppercase not-italic`}>
-            {filtered.length} of {content.partners.length} partners
-          </p>
+      {/* DESKTOP & TABLET (>=600px) — 1440px design canvas with proportional tablet scaling */}
+      <TabletScaleCanvas className="relative hidden w-[1440px] shrink-0 flex-col items-center gap-[40px] px-[24px] py-[64px] min-[600px]:flex">
+        <div className="relative flex flex-col items-center gap-[16px] px-[10px]">
+          <PartnersSectionHeading deg="101.272deg">{content.heading}</PartnersSectionHeading>
+          <Corners />
         </div>
-      </div>
 
-      {/* grid */}
-      <div id="partner-grid" className="grid w-full scroll-mt-[160px] grid-cols-1 gap-[20px] min-[700px]:grid-cols-2 min-[1024px]:grid-cols-3">
-        {filtered.map((partner) => (
-          <PartnerCard
-            key={partner.name}
-            partner={partner}
-            capabilities={capabilities}
-            connectLabel={content.connect}
+        <p className={`${interRegular.className} max-w-[720px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic`}>
+          {content.subheading}
+        </p>
+
+        <div className="w-full max-w-[1204px]">
+          <CoverageMap
+            onRegionSelect={(region) => setRegionFilter(region)}
           />
-        ))}
+        </div>
 
-        {filtered.length === 0 ? (
-          <div className="relative col-span-full flex flex-col items-center gap-[20px] border-[0.5px] border-dashed border-[rgba(240,240,240,0.25)] bg-[rgba(21,21,21,0.2)] px-[24px] py-[56px] text-center backdrop-blur-[8px]">
-            <p className={`${gilroyMedium.className} max-w-[480px] text-[20px] leading-[28px] font-medium text-[#f0f0f0] [word-break:break-word] not-italic min-[1024px]:text-[22px]`}>
-              {content.noMatch.message}
+        {/* filters */}
+        <div className="flex w-full max-w-[1204px] flex-row items-center gap-[20px]">
+          <PartnersDropdown
+            label={content.filters.capability}
+            options={capabilityOptions}
+            value={capabilityFilter === ALL ? "" : capabilityFilter}
+            onChange={(v) => setCapabilityFilter(v || ALL)}
+            className="w-[300px]"
+          />
+          <PartnersDropdown
+            label={content.filters.region}
+            options={regionOptions}
+            value={regionFilter === ALL ? "" : regionFilter}
+            onChange={(v) => setRegionFilter(v || ALL)}
+            className="w-[300px]"
+          />
+          <div className="flex flex-1 items-center justify-end">
+            <p className={`${dmMono.className} text-[11px] leading-[16px] tracking-[1px] text-[#8a8a8a] uppercase not-italic`}>
+              {filtered.length} of {content.partners.length} partners
             </p>
-            <PartnersGreenCta
-              width="220px"
-              href={content.noMatch.cta.href}
-              onClick={() => scrollToPartnerSection("get-matched")}
-            >
-              {content.noMatch.cta.label}
-            </PartnersGreenCta>
           </div>
-        ) : (
-          <ExpandingTile expanding={content.expanding} />
-        )}
-      </div>
+        </div>
 
-      {/* bridge line */}
-      <PartnersBridgeBox className="mt-[16px]">
-        {content.bridge}
-      </PartnersBridgeBox>
+        {/* grid */}
+        <div id="partner-grid" className="grid w-full max-w-[1204px] scroll-mt-[160px] grid-cols-3 gap-[20px]">
+          {filtered.map((partner) => (
+            <PartnerCard
+              key={partner.name}
+              partner={partner}
+              capabilities={capabilities}
+              connectLabel={content.connect}
+            />
+          ))}
+
+          {filtered.length === 0 ? (
+            <div className="relative col-span-full flex flex-col items-center gap-[20px] border-[0.5px] border-dashed border-[rgba(240,240,240,0.25)] bg-[rgba(21,21,21,0.2)] px-[24px] py-[56px] text-center backdrop-blur-[8px]">
+              <p className={`${gilroyMedium.className} max-w-[480px] text-[22px] leading-[28px] font-medium text-[#f0f0f0] [word-break:break-word] not-italic`}>
+                {content.noMatch.message}
+              </p>
+              <PartnersGreenCta
+                width="220px"
+                href={content.noMatch.cta.href}
+                onClick={() => scrollToPartnerSection("get-matched")}
+              >
+                {content.noMatch.cta.label}
+              </PartnersGreenCta>
+            </div>
+          ) : (
+            <ExpandingTile expanding={content.expanding} />
+          )}
+        </div>
+
+        {/* bridge line */}
+        <PartnersBridgeBox className="mt-[16px]">
+          {content.bridge}
+        </PartnersBridgeBox>
+      </TabletScaleCanvas>
+
+      {/* MOBILE (<600px) */}
+      <div className="relative flex w-full flex-col items-center gap-[32px] px-[20px] py-[40px] min-[600px]:hidden">
+        <div className="relative flex flex-col items-center gap-[16px] px-[10px]">
+          <PartnersSectionHeading deg="101.272deg">{content.heading}</PartnersSectionHeading>
+          <Corners />
+        </div>
+
+        <p className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic`}>
+          {content.subheading}
+        </p>
+
+        <CoverageMap
+          onRegionSelect={(region) => setRegionFilter(region)}
+        />
+
+        {/* filters */}
+        <div className="flex w-full flex-col gap-[12px]">
+          <PartnersDropdown
+            label={content.filters.capability}
+            options={capabilityOptions}
+            value={capabilityFilter === ALL ? "" : capabilityFilter}
+            onChange={(v) => setCapabilityFilter(v || ALL)}
+            className="w-full"
+          />
+          <PartnersDropdown
+            label={content.filters.region}
+            options={regionOptions}
+            value={regionFilter === ALL ? "" : regionFilter}
+            onChange={(v) => setRegionFilter(v || ALL)}
+            className="w-full"
+          />
+          <div className="flex items-center justify-start">
+            <p className={`${dmMono.className} text-[11px] leading-[16px] tracking-[1px] text-[#8a8a8a] uppercase not-italic`}>
+              {filtered.length} of {content.partners.length} partners
+            </p>
+          </div>
+        </div>
+
+        {/* grid */}
+        <div id="partner-grid-mobile" className="grid w-full scroll-mt-[160px] grid-cols-1 gap-[16px]">
+          {filtered.map((partner) => (
+            <PartnerCard
+              key={partner.name}
+              partner={partner}
+              capabilities={capabilities}
+              connectLabel={content.connect}
+            />
+          ))}
+
+          {filtered.length === 0 ? (
+            <div className="relative col-span-full flex flex-col items-center gap-[20px] border-[0.5px] border-dashed border-[rgba(240,240,240,0.25)] bg-[rgba(21,21,21,0.2)] px-[20px] py-[40px] text-center backdrop-blur-[8px]">
+              <p className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium text-[#f0f0f0] [word-break:break-word] not-italic`}>
+                {content.noMatch.message}
+              </p>
+              <PartnersGreenCta
+                width="220px"
+                href={content.noMatch.cta.href}
+                onClick={() => scrollToPartnerSection("get-matched")}
+              >
+                {content.noMatch.cta.label}
+              </PartnersGreenCta>
+            </div>
+          ) : (
+            <ExpandingTile expanding={content.expanding} />
+          )}
+        </div>
+
+        {/* bridge line */}
+        <PartnersBridgeBox className="mt-[12px]">
+          {content.bridge}
+        </PartnersBridgeBox>
+      </div>
     </section>
   );
 }

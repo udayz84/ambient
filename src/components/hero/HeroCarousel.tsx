@@ -8,6 +8,7 @@ import { useFitText } from "../shared/FitText";
 import { gilroyMedium, gilroySemiBold, interRegular } from "./fonts";
 import { mediaUrl } from "@/lib/strapi";
 import { UpcomingProductsModal } from "./UpcomingProductsModal";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 /* ---------------------------------------------------------------------------
  * Hero carousel — slide 1 is the existing Hero; slides 2+ are announcement
@@ -139,13 +140,13 @@ function AnnouncementSlide({ announcement }: { announcement: Announcement }) {
         className="pointer-events-none absolute top-[118px] left-[95px] hidden w-[560px] border-t border-white/10 md:block"
       />
 
-      {/* Desktop & Large Tablet content (>=1024px) */}
-      <div className="relative hidden min-[1024px]:block h-full w-full max-w-[1442px]">
-        <div className="absolute top-[300px] left-[48px] xl:left-[95px] flex w-[calc(100%-96px)] max-w-[560px] flex-col items-start gap-[15px]">
+      {/* Desktop (>=600px) */}
+      <TabletScaleCanvas className="relative hidden min-[600px]:block h-[876px] w-[1440px] shrink-0">
+        <div className="absolute top-[300px] left-[95px] flex w-[560px] flex-col items-start gap-[15px]">
           <TagBadge label={announcement.tag} width={150} centerLabel />
           <h1
             ref={fitRef}
-            className={`${gilroyMedium.className} bg-clip-text text-[38px] leading-[42px] xl:text-[46px] xl:leading-[49px] font-medium text-transparent [word-break:break-word] not-italic`}
+            className={`${gilroyMedium.className} bg-clip-text text-[46px] leading-[49px] font-medium text-transparent [word-break:break-word] not-italic`}
             style={{
               backgroundImage:
                 "linear-gradient(101.005deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -155,7 +156,7 @@ function AnnouncementSlide({ announcement }: { announcement: Announcement }) {
           >
             {announcement.title}
           </h1>
-          <p className={`${interRegular.className} w-[419px] max-w-full text-[15px] xl:text-[16px] leading-[22px] xl:leading-[24px] font-normal text-[#f0f0f0] opacity-80 [word-break:break-word]`}>
+          <p className={`${interRegular.className} w-[419px] max-w-full text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-80 [word-break:break-word]`}>
             {announcement.subtitle}
           </p>
           <div className="mt-[15px] flex items-center gap-[16px]">
@@ -171,10 +172,10 @@ function AnnouncementSlide({ announcement }: { announcement: Announcement }) {
             ))}
           </div>
         </div>
-      </div>
+      </TabletScaleCanvas>
 
-      {/* Mobile & Small Tablet content (<1024px) */}
-      <div className="relative flex min-[1024px]:hidden w-full flex-col items-start gap-[15px] px-[24px] md:px-[40px] pt-[180px] md:pt-[140px] pb-[120px] md:pb-[80px]">
+      {/* Mobile (<600px) */}
+      <div className="relative flex min-[600px]:hidden w-full flex-col items-start gap-[15px] px-[24px] pt-[180px] pb-[120px]">
         <TagBadge label={announcement.tag} width={150} centerLabel />
         <h1
           ref={fitRef2}
@@ -247,7 +248,7 @@ export function HeroCarousel({ data, formConfig }: { data?: any; formConfig?: an
 
   return (
     <section
-      className="relative -mt-[78px] flex flex-col items-center min-h-[876px] w-full justify-center overflow-hidden bg-black max-[1023px]:h-auto min-[1024px]:h-[876px]"
+      className="relative -mt-[78px] flex flex-col items-center w-full justify-center overflow-hidden bg-black"
       aria-label="Featured"
       onPointerEnter={() => setPaused(true)}
       onPointerLeave={() => setPaused(false)}

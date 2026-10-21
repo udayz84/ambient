@@ -8,10 +8,12 @@ import { PartnersMatchForm } from "./PartnersMatchForm";
 import { PartnersBecome } from "./PartnersBecome";
 import { PartnersFooterCtas } from "./PartnersFooterCtas";
 import type { PartnersContent } from "./partners-content";
+import { TabletScaleInit } from "../shared/TabletScaleInit";
 
 export function Partners({ content, applicationForm, inquiryForm }: { content: PartnersContent; applicationForm?: any; inquiryForm?: any }) {
   return (
     <main className="relative z-10 flex w-full flex-col overflow-x-clip bg-black">
+      <TabletScaleInit />
 
       <div className="relative z-10">
         <PartnersHero content={content.hero} />

@@ -7,6 +7,8 @@ import { gilroyMedium, interRegular } from "../hero/fonts";
 import type { HeroContent } from "./partners-content";
 import { GhostGreenCta, PartnersGreenCta } from "./partners-shared";
 
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
+
 /**
  * Ecosystem constellation visual (static image, 4:3 — 1700x1275 source).
  * Served from Strapi when the hero image is set there; otherwise the local
@@ -43,7 +45,7 @@ export function PartnersHero({ content }: { content: HeroContent }) {
     >
       {/* ambient glow backdrop */}
       <div
-        className="pointer-events-none absolute top-[150px] left-1/2 -translate-x-1/2 h-[720px] w-[920px] opacity-70 min-[1024px]:top-[-120px] min-[1024px]:left-auto min-[1024px]:right-[-160px] min-[1024px]:translate-x-0"
+        className="pointer-events-none absolute top-[150px] left-1/2 -translate-x-1/2 h-[720px] w-[920px] opacity-70 min-[600px]:top-[-120px] min-[600px]:left-auto min-[600px]:right-[-160px] min-[600px]:translate-x-0"
         style={{
           background:
             "radial-gradient(closest-side, rgba(83,216,36,0.10), rgba(83,216,36,0.03) 55%, transparent 75%)",
@@ -51,17 +53,9 @@ export function PartnersHero({ content }: { content: HeroContent }) {
         aria-hidden
       />
 
-      {/* DESKTOP — 1442px design canvas, scaled down proportionally on
-          1024–1442px viewports (same approach as the Contact map). */}
-      <div className="relative hidden w-full min-[1024px]:block">
-        <div className="relative h-[820px] w-full">
-          <div
-            className="absolute top-0 left-1/2 h-[820px] w-[1442px] origin-top"
-            style={{
-              transform:
-                "translateX(-50%) scale(min(1, calc((100vw - 40px) / 1442px)))",
-            }}
-          >
+      {/* DESKTOP & TABLET (>=600px) — 1440px design canvas with proportional tablet scaling */}
+      <TabletScaleCanvas className="relative hidden h-[820px] w-[1440px] shrink-0 min-[600px]:block">
+        <div className="relative h-[820px] w-[1440px]">
 
             <div className="absolute z-10 top-1/2 left-[100px] w-[620px] -translate-y-1/2">
               <div className="flex animate-hero-text-fade-in transform-gpu flex-col items-start gap-[24px]">
@@ -104,11 +98,10 @@ export function PartnersHero({ content }: { content: HeroContent }) {
               </div>
             </div>
           </div>
-        </div>
-      </div>
+      </TabletScaleCanvas>
 
       {/* MOBILE */}
-      <div className="relative flex w-full flex-col px-[24px] pt-[100px] pb-[48px] min-[1024px]:hidden">
+      <div className="relative flex w-full flex-col px-[24px] pt-[100px] pb-[48px] min-[600px]:hidden">
         <div className="relative z-10 flex animate-hero-text-fade-in transform-gpu flex-col items-center gap-[15px]">
           <TagBadge label={tag} width={196} labelOffsetX={0} rightBarLeft={187} centerLabel />
           <div className="relative p-[16px] -m-[16px]">
@@ -125,7 +118,7 @@ export function PartnersHero({ content }: { content: HeroContent }) {
               {title}
             </h1>
           </div>
-          <p className={`${interRegular.className} w-[332px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
+          <p className={`${interRegular.className} w-[332px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 not-italic [word-break:break-word]`}>
             {subtitle}
           </p>
         </div>

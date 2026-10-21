@@ -95,6 +95,8 @@ function KitCard({ card }: { card: KitCardData }) {
   );
 }
 
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
+
 export function HomeModelZooKits({ data }: { data?: any }) {
   const heading = data?.heading || "The fastest path from model to running AI.";
   const subheading = data?.subheading || "Bring your own model or start from a pre-built one, compile in minutes with ModelForge, and watch it run live on real silicon - even from your phone.";
@@ -119,28 +121,77 @@ export function HomeModelZooKits({ data }: { data?: any }) {
 
   return (
     <section
-      className="relative z-20 w-full bg-transparent pb-[100px] pt-[60px] md:pt-[120px]"
+      className="relative z-20 w-full bg-transparent pb-[60px] min-[600px]:pb-[100px] pt-[60px] min-[600px]:pt-[120px]"
       data-node-id="5131:10997"
       aria-label="Start with a model that already works"
     >
-      {ARCS.map((arc, i) => (
-        <img
-          key={i}
-          alt=""
-          src={arc.src}
-          aria-hidden
-          className="pointer-events-none absolute hidden h-[379px] w-[520px] md:block"
-          style={{ left: arc.cx - 260, top: arc.cy - 189.5 }}
-          loading="lazy"
-          decoding="async"
-        />
-      ))}
+      {/* DESKTOP & TABLET (>=600px) */}
+      <TabletScaleCanvas className="relative hidden w-[1440px] shrink-0 flex-col items-center min-[600px]:flex mx-auto">
+        {ARCS.map((arc, i) => (
+          <img
+            key={i}
+            alt=""
+            src={arc.src}
+            aria-hidden
+            className="pointer-events-none absolute hidden h-[379px] w-[520px] md:block"
+            style={{ left: arc.cx - 260, top: arc.cy - 189.5 }}
+            loading="lazy"
+            decoding="async"
+          />
+        ))}
 
-      <div className="relative mx-auto w-full max-w-[1256px] px-[16px] xl:px-0">
+        <div className="relative mx-auto w-full max-w-[1256px]">
+          <div className="flex w-full flex-col items-center gap-[24px]" data-node-id="5131:11088" data-name="Section Title">
+            <div className="relative px-[10px]" data-node-id="5131:11089" data-name="Title">
+              <h2
+                className={`${gilroyMedium.className} w-full max-w-[605px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic`}
+                style={{ backgroundImage: TITLE_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
+                data-node-id="5131:11090"
+              >
+                {heading}
+              </h2>
+              <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+            </div>
+            {subheading && (
+              <p className={`${interRegular.className} w-full max-w-[679.389px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
+                {subheading}
+              </p>
+            )}
+          </div>
+
+          <div
+            className="mt-[60px] flex w-full flex-row justify-center items-stretch gap-[24px] px-[26px]"
+            data-node-id="5246:6363"
+            data-name="Frame 1984079440"
+          >
+            {cardsData.map((card: KitCardData) => (
+              <div
+                key={card.nodeId}
+                className="w-[385px] shrink-0 flex"
+              >
+                <KitCard card={card} />
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-[60px] flex w-full flex-col items-center gap-[24px]">
+            <p className={`${interRegular.className} w-full max-w-[679.389px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
+              {bottomSubheading}
+            </p>
+            <div className="flex w-full flex-row items-center justify-center gap-[16px]">
+              <CtaPrimary label={bottomCta1Label} href={bottomCta1Link} width={240} />
+              <CtaPrimary label={bottomCta2Label} href={bottomCta2Link} width={251} />
+            </div>
+          </div>
+        </div>
+      </TabletScaleCanvas>
+
+      {/* MOBILE (<600px) */}
+      <div className="relative mx-auto flex w-full flex-col items-center min-[600px]:hidden px-[16px]">
         <div className="flex w-full flex-col items-center gap-[24px]" data-node-id="5131:11088" data-name="Section Title">
           <div className="relative px-[10px]" data-node-id="5131:11089" data-name="Title">
             <h2
-              className={`${gilroyMedium.className} w-full max-w-[605px] bg-clip-text text-center text-[36px] leading-[36px] md:text-[46px] md:leading-[49px] font-medium text-transparent not-italic`}
+              className={`${gilroyMedium.className} w-full max-w-[605px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic`}
               style={{ backgroundImage: TITLE_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
               data-node-id="5131:11090"
             >
@@ -149,32 +200,32 @@ export function HomeModelZooKits({ data }: { data?: any }) {
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           </div>
           {subheading && (
-            <p className={`${interRegular.className} w-full max-w-[679.389px] text-center text-[14px] leading-[21px] md:text-[16px] md:leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
+            <p className={`${interRegular.className} w-full max-w-[679.389px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
               {subheading}
             </p>
           )}
         </div>
 
         <div
-          className="mt-[24px] flex w-[calc(100%+32px)] -mx-[16px] snap-x snap-mandatory gap-[16px] md:gap-[20px] overflow-x-auto px-[16px] pb-[8px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden min-[1024px]:mx-0 min-[1024px]:w-full min-[1024px]:mt-[60px] min-[1024px]:flex-row min-[1024px]:justify-center min-[1024px]:items-stretch min-[1024px]:gap-[16px] min-[1180px]:gap-[20px] xl:gap-[24px] min-[1024px]:px-[16px] xl:px-[26px] min-[1024px]:overflow-visible min-[1024px]:pb-0"
+          className="mt-[24px] flex w-[calc(100%+32px)] -mx-[16px] snap-x snap-mandatory gap-[16px] overflow-x-auto px-[16px] pb-[8px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           data-node-id="5246:6363"
           data-name="Frame 1984079440"
         >
           {cardsData.map((card: KitCardData) => (
             <div
               key={card.nodeId}
-              className="w-[320px] sm:w-[350px] md:w-[370px] max-w-[85vw] shrink-0 snap-center min-[1024px]:w-[310px] min-[1180px]:w-[360px] xl:w-[385px] min-[1024px]:max-w-none min-[1024px]:shrink flex"
+              className="w-[320px] max-w-[85vw] shrink-0 snap-center flex"
             >
               <KitCard card={card} />
             </div>
           ))}
         </div>
 
-        <div className="mt-[60px] flex w-full flex-col items-center gap-[24px] px-[16px] md:px-0">
-          <p className={`${interRegular.className} w-full max-w-[679.389px] text-center text-[14px] leading-[21px] md:text-[16px] md:leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
+        <div className="mt-[40px] flex w-full flex-col items-center gap-[24px] px-[16px]">
+          <p className={`${interRegular.className} w-full max-w-[679.389px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
             {bottomSubheading}
           </p>
-          <div className="flex w-full flex-col items-center justify-center gap-[16px] sm:flex-row">
+          <div className="flex w-full flex-col items-center justify-center gap-[16px]">
             <CtaPrimary label={bottomCta1Label} href={bottomCta1Link} width={240} />
             <CtaPrimary label={bottomCta2Label} href={bottomCta2Link} width={251} />
           </div>

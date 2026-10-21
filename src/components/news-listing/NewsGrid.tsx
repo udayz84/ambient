@@ -8,6 +8,7 @@ import { NewsArticleCard } from "./NewsArticleCard";
 import { type NewsArticle } from "./news-data";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { CompanySectionTitle } from "../company/CompanySectionTitle";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const ROW_ONE_BG = "bg-[rgba(255,255,255,0.04)]";
 const ROW_TWO_BG = "bg-[rgba(0,0,0,0.04)]";
@@ -220,9 +221,10 @@ export function NewsGrid({ data, articles = [] }: NewsGridProps = {}) {
   const [activeId, setActiveId] = useState(initialActiveId);
   const [visibleCount, setVisibleCount] = useState(6);
 
-  useEffect(() => {
+  const handleSelectPill = (id: string) => {
+    setActiveId(id);
     setVisibleCount(6);
-  }, [activeId]);
+  };
 
   const activePill = pills.find((p) => p.id === activeId) || pills[0];
   const activeCards: NewsArticle[] = activePill?.cards || [];
@@ -240,28 +242,29 @@ export function NewsGrid({ data, articles = [] }: NewsGridProps = {}) {
 
   return (
     <section
-      className="relative z-20 mb-0 min-[1024px]:mb-[-409px] flex w-full justify-center overflow-hidden bg-transparent"
+      className="relative z-20 mb-0 min-[600px]:[margin-bottom:calc(-409px*var(--tablet-zoom,1))] flex w-full justify-center overflow-hidden bg-transparent"
       aria-label="News articles"
       data-node-id="2500:1825"
     >
-      <div className="flex w-full min-[1024px]:w-[1236px] flex-col items-center gap-[24px] px-[20px] pt-[27px] pb-[30px] min-[1024px]:gap-[60px] min-[1024px]:px-0 min-[1024px]:pt-[64px] min-[1024px]:pb-[64px]">
+      {/* MOBILE (<600px) */}
+      <div className="flex w-full flex-col items-center gap-[24px] px-[20px] pt-[27px] pb-[30px] min-[600px]:hidden">
         {/* Section title */}
         <div className="flex w-full justify-center">
           <CompanySectionTitle
             width="max-content"
             height={50}
-            fontSize={46}
-            lineHeight={50}
+            fontSize={36}
+            lineHeight={36}
             textCenter
           >
             {gridTitle}
           </CompanySectionTitle>
         </div>
-        <NewsFilterBar pills={pills} activeId={activeId} onSelect={setActiveId} />
+        <NewsFilterBar pills={pills} activeId={activeId} onSelect={handleSelectPill} />
 
-        <div className="relative z-10 flex w-full flex-col items-center gap-[19px] bg-transparent min-[1024px]:gap-[36px]">
+        <div className="relative z-10 flex w-full flex-col items-center gap-[19px] bg-transparent">
           {chunkedCards.map((chunk, chunkIndex) => (
-            <div key={chunkIndex} className="grid w-full grid-cols-1 gap-[19px] min-[1024px]:grid-cols-3 min-[1024px]:gap-[36px]">
+            <div key={chunkIndex} className="grid w-full grid-cols-1 gap-[19px]">
               {chunk.map((article, i) => (
                 <NewsArticleCard
                   key={`${article.nodeId}-${i}`}
@@ -273,12 +276,51 @@ export function NewsGrid({ data, articles = [] }: NewsGridProps = {}) {
           ))}
 
           {activeCards.length > visibleCount && (
-            <div className="mt-[11px] flex justify-center min-[1024px]:mt-0">
+            <div className="mt-[11px] flex justify-center">
               <LoadMoreCta label={loadMoreLabel} onClick={handleLoadMore} />
             </div>
           )}
         </div>
       </div>
+
+      {/* DESKTOP (>=600px) */}
+      <TabletScaleCanvas className="relative hidden w-[1440px] shrink-0 flex-col items-center min-[600px]:flex mx-auto">
+        <div className="flex w-[1236px] flex-col items-center gap-[60px] px-0 pt-[64px] pb-[64px]">
+          {/* Section title */}
+          <div className="flex w-full justify-center">
+            <CompanySectionTitle
+              width="max-content"
+              height={50}
+              fontSize={46}
+              lineHeight={50}
+              textCenter
+            >
+              {gridTitle}
+            </CompanySectionTitle>
+          </div>
+          <NewsFilterBar pills={pills} activeId={activeId} onSelect={handleSelectPill} />
+
+          <div className="relative z-10 flex w-full flex-col items-center gap-[36px] bg-transparent">
+            {chunkedCards.map((chunk, chunkIndex) => (
+              <div key={chunkIndex} className="grid w-full grid-cols-3 gap-[36px]">
+                {chunk.map((article, i) => (
+                  <NewsArticleCard
+                    key={`${article.nodeId}-${i}`}
+                    article={article}
+                    bgClass={chunkIndex % 2 === 0 ? ROW_ONE_BG : ROW_TWO_BG}
+                  />
+                ))}
+              </div>
+            ))}
+
+            {activeCards.length > visibleCount && (
+              <div className="mt-0 flex justify-center">
+                <LoadMoreCta label={loadMoreLabel} onClick={handleLoadMore} />
+              </div>
+            )}
+          </div>
+        </div>
+      </TabletScaleCanvas>
     </section>
   );
 }

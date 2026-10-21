@@ -1,9 +1,10 @@
 "use client";
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const TITLE_GRADIENT_DEG = "128.886deg";
 const FALLBACK_SUBTITLE =
@@ -230,19 +231,19 @@ function EcoCard({
       <div className="relative flex w-full flex-1 flex-col items-start justify-between">
         {overlay}
         <EcoTag label={tagLabel} available={tagAvailable} widthClass={tagWidthClass} />
-        <div className="relative mt-[24px] flex flex-col items-start gap-[12px] min-[1024px]:mt-0">
+        <div className="relative mt-0 flex flex-col items-start gap-[12px]">
           <h3
-            className={`${gilroyMedium.className} text-[26px] leading-[32px] font-medium text-white not-italic [word-break:break-word] min-[1024px]:text-[32px] min-[1024px]:leading-[38px] ${titleWidthClass}`}
+            className={`${gilroyMedium.className} text-[32px] leading-[38px] font-medium text-white not-italic [word-break:break-word] ${titleWidthClass}`}
           >
             {title}
           </h3>
           <p
-            className={`${interRegular.className} text-[16px] leading-[24px] font-normal uppercase text-[#8ce66c] not-italic whitespace-nowrap [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} text-[16px] leading-[24px] font-normal uppercase text-[#8ce66c] not-italic whitespace-nowrap [word-break:break-word]`}
           >
             {subtitle}
           </p>
           <p
-            className={`${interRegular.className} text-[14px] leading-[21px] font-normal tracking-[-0.3125px] text-[#99a1af] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[26px] ${descWidthClass}`}
+            className={`${interRegular.className} text-[16px] leading-[26px] font-normal tracking-[-0.3125px] text-[#99a1af] not-italic [word-break:break-word] ${descWidthClass}`}
           >
             {description}
           </p>
@@ -287,10 +288,10 @@ const CARDS: CardData[] = [
     tagAvailable: true,
     tagWidthClass: "w-[134px]",
     title: "Motion SOM",
-    titleWidthClass: "min-[1024px]:w-[333.991px]",
+    titleWidthClass: "w-[333.991px]",
     subtitle: "Motion & Audio",
     description: "Voice and gesture intelligence on a micro battery.",
-    descWidthClass: "min-[1024px]:w-[226.079px]",
+    descWidthClass: "w-[226.079px]",
     ctaLabel: "VIEW MORE",
     ctaSoon: false,
     ctaWidthClass: "w-[161px]",
@@ -306,10 +307,10 @@ const CARDS: CardData[] = [
     tagAvailable: false,
     tagWidthClass: "w-[160px]",
     title: "Vision SOM",
-    titleWidthClass: "min-[1024px]:w-[333.991px]",
+    titleWidthClass: "w-[333.991px]",
     subtitle: "Motion & Audio",
     description: "Voice and gesture intelligence on a micro battery.",
-    descWidthClass: "min-[1024px]:w-[232.792px]",
+    descWidthClass: "w-[232.792px]",
     ctaLabel: "Coming soon",
     ctaSoon: true,
     ctaWidthClass: "w-[155px]",
@@ -325,10 +326,10 @@ const CARDS: CardData[] = [
     tagAvailable: false,
     tagWidthClass: "w-[160px]",
     title: "Sound SOM",
-    titleWidthClass: "min-[1024px]:w-[333.991px]",
+    titleWidthClass: "w-[333.991px]",
     subtitle: "Motion & Audio",
     description: "Voice and gesture intelligence on a micro battery.",
-    descWidthClass: "min-[1024px]:w-[232.792px]",
+    descWidthClass: "w-[232.792px]",
     ctaLabel: "Coming soon",
     ctaSoon: true,
     ctaWidthClass: "w-[155px]",
@@ -344,10 +345,10 @@ const CARDS: CardData[] = [
     tagAvailable: false,
     tagWidthClass: "w-[160px]",
     title: "Predictive & Maintenance SOM",
-    titleWidthClass: "min-[1024px]:w-[226.074px]",
+    titleWidthClass: "w-[226.074px]",
     subtitle: "Motion & Audio",
     description: "Voice and gesture intelligence on a battery.",
-    descWidthClass: "min-[1024px]:w-[333.99px]",
+    descWidthClass: "w-[333.99px]",
     ctaLabel: "Coming soon",
     ctaSoon: true,
     ctaWidthClass: "w-[155px]",
@@ -363,11 +364,11 @@ const CARDS: CardData[] = [
     tagAvailable: false,
     tagWidthClass: "w-[170px]",
     title: "Pet & Livestock SOM",
-    titleWidthClass: "min-[1024px]:w-[235px]",
+    titleWidthClass: "w-[235px]",
     subtitle: "Motion & Audio",
     description:
       "Continuous voice and gesture intelligence running for months on a micro battery.",
-    descWidthClass: "min-[1024px]:w-[324px]",
+    descWidthClass: "w-[324px]",
     ctaLabel: "Coming soon",
     ctaSoon: true,
     ctaWidthClass: "w-[155px]",
@@ -594,7 +595,7 @@ function MobileEcoCard({
             {subtitle}
           </p>
           <p
-            className={`${interRegular.className} text-[14px] leading-[23.075px] font-normal tracking-[-0.2773px] text-[#99a1af] not-italic [word-break:break-word] ${meta.descWidth} min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} text-[14px] leading-[23.075px] font-normal tracking-[-0.2773px] text-[#99a1af] not-italic [word-break:break-word] ${meta.descWidth}`}
           >
             {description}
           </p>
@@ -635,8 +636,9 @@ export function SomEcosystem({ data }: { data?: any }) {
       data-name="SOM Ecosystem"
       aria-label="The Ambient SOM Ecosystem"
     >
-      {/* ============================ DESKTOP (>=1024px) ============================ */}
-      <div className="relative mx-auto hidden h-[1008px] w-[1440px] min-[1024px]:block">
+      {/* ============================ DESKTOP & TABLET (>=600px) ============================ */}
+      <div className="hidden min-[600px]:flex w-full justify-center overflow-x-clip">
+        <TabletScaleCanvas className="relative hidden h-[1008px] w-[1440px] shrink-0 min-[600px]:block">
         {/* Abstract design */}
         <div className="absolute left-1/2 top-0 h-[320px] w-[881.616px] -translate-x-1/2">
           <img loading="lazy" decoding="async"
@@ -675,7 +677,7 @@ export function SomEcosystem({ data }: { data?: any }) {
             <Corners />
           </div>
           <p
-            className={`${interRegular.className} text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           >
             {subtitle}
           </p>
@@ -703,11 +705,12 @@ export function SomEcosystem({ data }: { data?: any }) {
             dataName={card.dataName}
           />
         ))}
+        </TabletScaleCanvas>
       </div>
 
-      {/* ============================= MOBILE (<1024px) — Figma 4046:7908 "3rd Fold" 393×1946 ============================= */}
+      {/* ============================= MOBILE (<600px) — Figma 4046:7908 "3rd Fold" 393×1946 ============================= */}
       <div
-        className="relative mx-auto h-[1946px] w-[393px] overflow-hidden bg-black min-[1024px]:hidden"
+        className="relative mx-auto h-[1946px] w-[393px] overflow-hidden bg-black min-[600px]:hidden"
         data-node-id="4046:7908"
         data-name="3rd Fold"
       >
@@ -753,7 +756,7 @@ export function SomEcosystem({ data }: { data?: any }) {
             </h2>
           </div>
           <p
-            className={`${interRegular.className} w-[352px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[352px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word]`}
           >
             {subtitle}
           </p>

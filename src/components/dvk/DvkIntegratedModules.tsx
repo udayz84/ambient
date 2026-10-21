@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { mediaUrl } from "@/lib/strapi";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
@@ -5,6 +7,7 @@ import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
 import { CORNER_LEFT, CORNER_RIGHT, PRIMARY_CTA_INSET, PRIMARY_CTA_SHADOW } from "./dvk-data";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const DEFAULT_HEADING = "From Cranium to Integrated Modules.";
 const DEFAULT_SUBTITLE =
@@ -37,9 +40,23 @@ export function DvkIntegratedModules({ data }: { data?: any }) {
         }))
       : CARDS;
   return (
-    <div className="relative z-20 mb-[-700px] min-[1024px]:mb-[-409px] w-full bg-transparent">
-      <section className="relative mx-auto hidden w-full bg-transparent min-[1024px]:block" aria-label="From Cranium to Integrated Modules">
-        <DvkIntegratedModulesDesktop
+    <div className="relative z-20 mb-[-700px] min-[600px]:[margin-bottom:calc(-409px*var(--tablet-zoom,1))] w-full bg-transparent">
+      <section className="relative mx-auto hidden w-full justify-center overflow-x-clip bg-transparent min-[600px]:flex" aria-label="From Cranium to Integrated Modules">
+        <TabletScaleCanvas className="relative flex w-[1440px] max-w-[1440px] shrink-0 justify-center">
+          <DvkIntegratedModulesDesktop
+            heading={heading}
+            subtitle={subtitle}
+            footer={footer}
+            cards={cards}
+            primaryLabel={primaryLabel}
+            primaryHref={primaryHref}
+            secondaryLabel={secondaryLabel}
+            secondaryHref={secondaryHref}
+          />
+        </TabletScaleCanvas>
+      </section>
+      <div className="min-[600px]:hidden">
+        <DvkIntegratedModulesMobile
           heading={heading}
           subtitle={subtitle}
           footer={footer}
@@ -49,17 +66,7 @@ export function DvkIntegratedModules({ data }: { data?: any }) {
           secondaryLabel={secondaryLabel}
           secondaryHref={secondaryHref}
         />
-      </section>
-      <DvkIntegratedModulesMobile
-        heading={heading}
-        subtitle={subtitle}
-        footer={footer}
-        cards={cards}
-        primaryLabel={primaryLabel}
-        primaryHref={primaryHref}
-        secondaryLabel={secondaryLabel}
-        secondaryHref={secondaryHref}
-      />
+      </div>
     </div>
   );
 }
@@ -124,7 +131,7 @@ function DvkIntegratedModulesDesktop({
             {heading}
           </h2>
         </div>
-        <p className={`${interRegular.className} w-[800px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
+        <p className={`${interRegular.className} w-[800px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}>
           {subtitle}
         </p>
       </div>
@@ -174,7 +181,7 @@ function DvkIntegratedModulesDesktop({
         ))}
       </div>
 
-      <p className={`${interRegular.className} mt-[45px] w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
+      <p className={`${interRegular.className} mt-[45px] w-[650px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}>
         {footer}
       </p>
 
@@ -214,7 +221,7 @@ function DvkIntegratedModulesMobile({
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
     <section
-      className="relative w-full bg-black min-[1024px]:hidden"
+      className="relative w-full bg-black"
       aria-label="From Cranium to Integrated Modules"
       data-node-id="4062:12362"
       data-name="5th Fold"
@@ -242,7 +249,7 @@ function DvkIntegratedModulesMobile({
             </h2>
           </div>
           <p
-            className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
             data-node-id="4062:12370"
           >
             {subtitle}
@@ -332,7 +339,7 @@ function DvkIntegratedModulesMobile({
 
         {/* Footer — 4062:12371 (29, 897 / 336 wide) */}
         <p
-          className={`${interRegular.className} absolute top-[1037px] left-[calc(50%+0.5px)] m-0 w-[336px] max-w-[calc(100%-56px)] -translate-x-1/2 text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} absolute top-[1037px] left-[calc(50%+0.5px)] m-0 w-[336px] max-w-[calc(100%-56px)] -translate-x-1/2 text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
           data-node-id="4062:12371"
         >
           {footer}

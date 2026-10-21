@@ -550,7 +550,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
             <Corners leftSrc={CORNER_57} rightSrc={CORNER_55} />
           </div>
           <p
-            className={`${interRegular.className} mt-[20px] w-[600px] text-center text-[14px] font-normal leading-[1.4] text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} mt-[20px] w-[600px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
             data-node-id="4574:7550"
           >
             {subtitle}
@@ -774,7 +774,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
             <Corners leftSrc={CORNER_57} rightSrc={CORNER_55} />
           </div>
           <p
-            className={`${interRegular.className} w-full text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-full text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
             data-node-id="4583:25090"
           >
             {subtitle}
@@ -815,7 +815,7 @@ export function ApplicationsPageContinuum({ data }: { data?: any }) {
               <p className={`${gilroyMedium.className} text-[26px] leading-[28px] font-medium [word-break:break-word]`}>
                 {activeCard.title}
               </p>
-              <p className={`${interRegular.className} mt-[10px] text-[14px] leading-[21px] font-normal opacity-65 [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
+              <p className={`${interRegular.className} mt-[10px] text-[14px] leading-[21px] font-normal opacity-65 [word-break:break-word]`}>
                 {renderBody(activeCard.body)}
               </p>
             </motion.div>

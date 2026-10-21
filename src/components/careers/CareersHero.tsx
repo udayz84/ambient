@@ -171,7 +171,7 @@ export function CareersHero({ data }: { data?: any }) {
             data-name="Sub"
           >
             <p
-              className={`${interRegular.className} w-[554px] shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+              className={`${interRegular.className} w-[554px] shrink-0 text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
               data-node-id="2379:8694"
             >
               {subtitle}

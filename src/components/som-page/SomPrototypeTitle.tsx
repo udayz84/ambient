@@ -1,10 +1,13 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
 
 import { mediaUrl } from "@/lib/strapi";
 import { useFitText } from "../shared/FitText";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const IMAGE_GRADIENT_DESKTOP =
   "radial-gradient(683.75px 163.5px at 50% 50%, rgba(26,26,26,1) 0%, rgba(13,13,13,1) 25%, rgba(7,7,7,1) 37.5%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%)";
@@ -121,12 +124,12 @@ function PrototypeCard({
         data-name="NewsSection"
       >
         <h3
-          className={`${gilroyMedium.className} text-[20px] leading-[26px] font-medium text-white not-italic [word-break:break-word] min-[1024px]:text-[22px] min-[1024px]:leading-[28px]`}
+          className={`${gilroyMedium.className} text-[20px] leading-[26px] font-medium text-white not-italic [word-break:break-word] min-[600px]:text-[22px] min-[600px]:leading-[28px]`}
         >
           {title}
         </h3>
         <p
-          className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] min-[600px]:text-[16px] min-[600px]:leading-[24px]`}
         >
           {description}
         </p>
@@ -158,58 +161,60 @@ export function SomPrototypeTitleDesktop({ data }: { data?: any }) {
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 1 });
   return (
     <section
-      className="relative hidden w-full justify-center overflow-hidden bg-black min-[1024px]:flex"
+      className="relative hidden w-full justify-center overflow-x-clip bg-black min-[600px]:flex"
       data-node-id="2438:5082"
       aria-label="Prototype to Product in a Snap"
     >
-      <div className="relative flex w-[1204px] flex-col items-center gap-[36px] pt-[40px] pb-[60px]">
-        <div className="flex flex-col items-center gap-[24px] text-center">
-          <div className="relative px-[10px]" data-name="Title">
-            <h2
-              ref={fitRef}
-              className={`${gilroyMedium.className} text-center text-[46px] leading-[49px] font-medium text-white whitespace-nowrap not-italic [word-break:break-word]`}
-            >
-              {heading}
-            </h2>
-            <Corners />
+      <TabletScaleCanvas className="relative flex w-[1440px] max-w-[1440px] shrink-0 justify-center">
+        <div className="relative flex w-[1204px] flex-col items-center gap-[36px] pt-[40px] pb-[60px]">
+          <div className="flex flex-col items-center gap-[24px] text-center">
+            <div className="relative px-[10px]" data-name="Title">
+              <h2
+                ref={fitRef}
+                className={`${gilroyMedium.className} text-center text-[46px] leading-[49px] font-medium text-white whitespace-nowrap not-italic [word-break:break-word]`}
+              >
+                {heading}
+              </h2>
+              <Corners />
+            </div>
+            {subtitle && (
+              <p className={`${interRegular.className} max-w-[800px] text-[16px] text-[#f0f0f0]/65 [word-break:break-word] px-4`}>
+                {subtitle}
+              </p>
+            )}
           </div>
-          {subtitle && (
-            <p className={`${interRegular.className} max-w-[800px] text-[16px] md:text-[16px] text-[#f0f0f0]/65 [word-break:break-word] px-4`}>
-              {subtitle}
-            </p>
-          )}
-        </div>
-        <div className="flex w-full items-center gap-[24px]">
-          {cards.map((card) => (
-            <PrototypeCard
-              key={card.title}
-              title={card.title}
-              description={card.description}
-              widthClass="w-[590px]"
-              imageHeightClass="h-[327px]"
-              imageGradient={IMAGE_GRADIENT_DESKTOP}
-              imageUrl={card.imageUrl}
+          <div className="flex w-full items-center gap-[24px]">
+            {cards.map((card) => (
+              <PrototypeCard
+                key={card.title}
+                title={card.title}
+                description={card.description}
+                widthClass="w-[590px]"
+                imageHeightClass="h-[327px]"
+                imageGradient={IMAGE_GRADIENT_DESKTOP}
+                imageUrl={card.imageUrl}
+              />
+            ))}
+          </div>
+          <p className={`${interRegular.className} max-w-[800px] text-center text-[18px] text-[#f0f0f0]/65 [word-break:break-word] px-4`}>
+            When you&apos;re ready for volume, the software you validate here ports 1:1 to the GPX10 Pro SOMs.
+          </p>
+          <a
+            href="/SOM"
+            className={`${gilroyMedium.className} relative flex h-[48px] shrink-0 items-center justify-center px-[32px] shadow-[0px_42px_107px_0px_rgba(83,216,36,0.15),0px_24.721px_32.257px_0px_rgba(83,216,36,0.10),0px_10.268px_13.398px_0px_rgba(83,216,36,0.10),0px_3.714px_4.846px_0px_rgba(83,216,36,0.05)] transition-transform hover:-translate-y-1`}
+          >
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
             />
-          ))}
+            <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+              Explore SOMs
+            </span>
+            <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
+            <GreenCtaCorners />
+          </a>
         </div>
-        <p className={`${interRegular.className} max-w-[800px] text-center text-[16px] md:text-[18px] text-[#f0f0f0]/65 [word-break:break-word] px-4`}>
-          When you're ready for volume, the software you validate here ports 1:1 to the GPX10 Pro SOMs.
-        </p>
-        <a
-          href="/SOM"
-          className={`${gilroyMedium.className} relative flex h-[48px] shrink-0 items-center justify-center px-[32px] shadow-[0px_42px_107px_0px_rgba(83,216,36,0.15),0px_24.721px_32.257px_0px_rgba(83,216,36,0.10),0px_10.268px_13.398px_0px_rgba(83,216,36,0.10),0px_3.714px_4.846px_0px_rgba(83,216,36,0.05)] transition-transform hover:-translate-y-1`}
-        >
-          <span
-            aria-hidden
-            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-          />
-          <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
-            Explore SOMs
-          </span>
-          <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
-          <GreenCtaCorners />
-        </a>
-      </div>
+      </TabletScaleCanvas>
     </section>
   );
 }
@@ -219,7 +224,7 @@ export function SomPrototypeTitleMobile({ data }: { data?: any }) {
   const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <section
-      className="relative flex w-full justify-center overflow-hidden bg-black min-[1024px]:hidden pt-[30px] pb-[40px]"
+      className="relative flex w-full justify-center overflow-hidden bg-black min-[600px]:hidden pt-[30px] pb-[40px]"
       data-node-id="4046:8061"
       aria-label="Prototype to Product in a Snap"
     >
@@ -243,7 +248,7 @@ export function SomPrototypeTitleMobile({ data }: { data?: any }) {
             </h2>
           </div>
           {subtitle && (
-            <p className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
+            <p className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}>
               {subtitle}
             </p>
           )}
@@ -264,7 +269,7 @@ export function SomPrototypeTitleMobile({ data }: { data?: any }) {
           ))}
         </div>
         <p className={`${interRegular.className} w-full max-w-[355px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}>
-          When you're ready for volume, the software you validate here ports 1:1 to the GPX10 Pro SOMs.
+          When you&apos;re ready for volume, the software you validate here ports 1:1 to the GPX10 Pro SOMs.
         </p>
         <a
           href="/SOM"

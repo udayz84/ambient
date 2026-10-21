@@ -157,7 +157,7 @@ function WinCardMobile({ label, stat, statLabel, mobileImg, body, buttons, muted
       {/* Label */}
       <div className="absolute left-[17.58px] top-[17.58px] z-10 flex items-center gap-[12px]">
         <LabelTile />
-        <p className={`${interRegular.className} text-[18px] leading-[27px] font-normal text-[#f0f0f0] [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>{label}</p>
+        <p className={`${interRegular.className} text-[16px] leading-[24px] font-normal text-[#f0f0f0] [word-break:break-word]`}>{label}</p>
       </div>
 
       {/* Stats */}
@@ -172,7 +172,7 @@ function WinCardMobile({ label, stat, statLabel, mobileImg, body, buttons, muted
           <p className={`${gilroyMedium.className} text-[22px] leading-[24.167px] uppercase text-[#c5f3b5] [word-break:break-word]`}>{statLabel}</p>
         </div>
         <div className="flex flex-col gap-[11.667px]">
-          <p className={`${interRegular.className} text-[14px] leading-[20px] font-normal ${muted ? "text-[#8a8a8a]" : "text-[rgba(240,240,240,0.6)]"} [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>{body}</p>
+          <p className={`${interRegular.className} text-[16px] leading-[24px] font-normal ${muted ? "text-[#8a8a8a]" : "text-[rgba(240,240,240,0.6)]"} [word-break:break-word]`}>{body}</p>
         </div>
         {buttons && buttons.length > 0 && (
           <div className="flex flex-wrap gap-[8px] mt-[6px]">
@@ -377,7 +377,7 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
           </div>
           {subheading ? (
             <p
-              className={`${interRegular.className} max-w-[679px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+              className={`${interRegular.className} max-w-[679px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
             >
               {subheading}
             </p>

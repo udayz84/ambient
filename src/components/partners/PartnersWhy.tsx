@@ -6,6 +6,8 @@ import { useFadeIn } from "../shared/useFadeIn";
 import type { WhyContent } from "./partners-content";
 import { PartnersSectionHeading } from "./partners-shared";
 
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
+
 const WHY_CARD_BG = "rgba(0,0,0,0.2)";
 const WHY_CARD_BORDER = "rgba(240,240,240,0.2)";
 const STEP_NUMBER_GRADIENT =
@@ -56,7 +58,7 @@ function WhyCard({ step }: { step: any }) {
 
       {/* Step number — positioned overlapping the image bottom */}
       <span
-        className={`${gilroyMedium.className} pointer-events-none absolute bg-clip-text text-[50px] leading-[50px] font-medium text-transparent opacity-50 not-italic whitespace-nowrap min-[1280px]:text-[60px] min-[1280px]:leading-[60px]`}
+        className={`${gilroyMedium.className} pointer-events-none absolute bg-clip-text text-[60px] leading-[60px] font-medium text-transparent opacity-50 not-italic whitespace-nowrap`}
         style={{
           left: 16,
           top: 155,
@@ -72,13 +74,13 @@ function WhyCard({ step }: { step: any }) {
       {/* Title + description */}
       <div className="relative z-10 flex w-full flex-col items-start gap-[12px] not-italic [word-break:break-word] mt-[24px] flex-1">
         <h3
-          className={`${gilroyMedium.className} w-full shrink-0 text-[18px] leading-[24px] font-medium text-white min-[1280px]:text-[22px] min-[1280px]:leading-[28px]`}
+          className={`${gilroyMedium.className} w-full shrink-0 text-[22px] leading-[28px] font-medium text-white`}
         >
           {step.title}
         </h3>
 
         <p
-          className={`${interRegular.className} w-full text-[13px] leading-[20px] font-normal text-[#99a1af] tracking-[-0.3px] [word-break:break-word] min-[1280px]:text-[16px] min-[1280px]:leading-[24px]`}
+          className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-[#99a1af] tracking-[-0.3px] [word-break:break-word]`}
         >
           {step.description}
         </p>
@@ -100,7 +102,7 @@ export function PartnersWhy({ content }: { content: WhyContent }) {
   return (
     <section
       ref={fadeRef}
-      className={`relative mx-auto flex w-full max-w-[1440px] flex-col items-center gap-[36px] pb-[40px] pt-0 -mt-[20px] min-[1024px]:pb-[64px] min-[1024px]:pt-0 min-[1024px]:-mt-[60px] ${fadeCls} transform-gpu overflow-hidden`}
+      className={`relative mx-auto flex w-full justify-center ${fadeCls} transform-gpu overflow-hidden`}
       aria-label="A production AI product is a full-stack challenge"
     >
       {/* Background visual — concentric wave rings */}
@@ -125,44 +127,79 @@ export function PartnersWhy({ content }: { content: WhyContent }) {
         />
       </div>
 
-      <div className="relative flex flex-col items-center gap-[16px] px-[24px]">
-        {/* Heading kept hardcoded: the two-line split is part of the design
-            (the CMS string field cannot carry the line break). */}
-        <PartnersSectionHeading
-          deg="124.568deg"
-          className="flex flex-col items-center !whitespace-normal"
+      {/* DESKTOP & TABLET (>=600px) — 1440px design canvas with proportional tablet scaling */}
+      <TabletScaleCanvas className="relative hidden w-[1440px] shrink-0 flex-col items-center gap-[36px] pb-[64px] pt-0 -mt-[60px] min-[600px]:flex">
+        <div className="relative flex flex-col items-center gap-[16px] px-[24px]">
+          <PartnersSectionHeading
+            deg="124.568deg"
+            className="flex flex-col items-center !whitespace-normal"
+          >
+            <span className="block">A breakthrough processor is the start,</span>
+            <span className="block">not the finish.</span>
+          </PartnersSectionHeading>
+          <Corners />
+        </div>
+
+        <p
+          className={`${interRegular.className} max-w-[860px] px-[24px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic`}
         >
-          <span className="block">A breakthrough processor is the start,</span>
-          <span className="block">not the finish.</span>
-        </PartnersSectionHeading>
-        <Corners />
-      </div>
+          {content.subheading}
+        </p>
 
-      <p
-        className={`${interRegular.className} max-w-[860px] px-[24px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
-      >
-        {content.subheading}
-      </p>
+        {/* Cards container — 5 in a row on desktop & tablet */}
+        <div className="relative w-full py-[32px] px-[64px]">
+          <div className="flex w-full flex-nowrap justify-center gap-[24px]">
+            {journey.map((step) => (
+              <div
+                key={step.title}
+                className="w-[calc(20%-19.2px)] max-w-none"
+              >
+                <WhyCard step={step} />
+              </div>
+            ))}
+          </div>
+        </div>
 
-      {/* Cards container — 5 in a row on desktop */}
-      <div className="relative w-full py-[24px] px-[24px] min-[1024px]:px-[64px] min-[1024px]:py-[32px]">
-        <div className="flex w-full flex-wrap min-[1024px]:flex-nowrap justify-center gap-[16px] sm:gap-[24px]">
+        <p
+          className={`${interRegular.className} max-w-[980px] px-[24px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic`}
+        >
+          {content.body}
+        </p>
+      </TabletScaleCanvas>
+
+      {/* MOBILE (<600px) */}
+      <div className="relative flex w-full flex-col items-center gap-[28px] pb-[40px] pt-0 -mt-[20px] px-[20px] min-[600px]:hidden">
+        <div className="relative flex flex-col items-center gap-[16px]">
+          <PartnersSectionHeading
+            deg="124.568deg"
+            className="flex flex-col items-center !whitespace-normal text-center"
+          >
+            <span className="block">A breakthrough processor is the start,</span>
+            <span className="block">not the finish.</span>
+          </PartnersSectionHeading>
+          <Corners />
+        </div>
+
+        <p
+          className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic`}
+        >
+          {content.subheading}
+        </p>
+
+        <div className="flex w-full flex-col gap-[16px] items-center">
           {journey.map((step) => (
-            <div
-              key={step.title}
-              className="w-full sm:w-[calc(50%-12px)] min-[1024px]:w-[calc(20%-19.2px)] max-w-[400px] min-[1024px]:max-w-none"
-            >
+            <div key={step.title} className="w-full max-w-[360px]">
               <WhyCard step={step} />
             </div>
           ))}
         </div>
-      </div>
 
-      <p
-        className={`${interRegular.className} max-w-[980px] px-[24px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px]`}
-      >
-        {content.body}
-      </p>
+        <p
+          className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic`}
+        >
+          {content.body}
+        </p>
+      </div>
     </section>
   );
 }

@@ -231,7 +231,7 @@ export function CareersGradientCard({
             {card.title}
           </p>
           <p
-            className={`${interRegular.className} w-full text-[14px] leading-[1.4] font-normal text-white opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-white opacity-65 not-italic [word-break:break-word]`}
           >
             {card.description}
           </p>
@@ -311,7 +311,7 @@ export function CareersJobCard({
         {title}
       </p>
       <p
-        className={`${interRegular.className} absolute top-[105px] left-[19px] w-[350px] overflow-hidden text-ellipsis text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+        className={`${interRegular.className} absolute top-[105px] left-[19px] w-[350px] overflow-hidden text-ellipsis text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
       >
         {location}
       </p>
@@ -346,7 +346,7 @@ export function CareersFilterField({ label, nodeId }: { label: string; nodeId?: 
     >
       <div className="flex h-[48px] min-w-px flex-[1_0_0] items-center gap-[10px] bg-transparent px-[20px]">
         <p
-          className={`${interRegular.className} min-w-px flex-[1_0_0] text-[14px] leading-[1.4] font-normal text-white not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} min-w-px flex-[1_0_0] text-[16px] leading-[24px] font-normal text-white not-italic [word-break:break-word]`}
         >
           {label}
         </p>

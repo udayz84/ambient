@@ -1,11 +1,12 @@
 "use client";
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
 import { useState, useRef, useEffect } from "react";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { GradientTitle } from "../contact/contact-shared";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const TITLE_GRADIENT_DEG = "127.627deg";
 const FALLBACK_SUBTITLE =
@@ -68,18 +69,18 @@ function SpecCard({
         isActive
           ? "border-[#a8ed90] bg-[rgba(68,120,7,0.2)]"
           : "border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] hover:bg-[rgba(255,255,255,0.03)]"
-      } px-[16px] pt-[16px] pb-[20px] min-[1024px]:min-h-[102px] min-[1024px]:pb-[24px] cursor-pointer`}
+      } px-[16px] pt-[16px] pb-[20px] min-[600px]:min-h-[102px] min-[600px]:pb-[24px] cursor-pointer`}
       onMouseEnter={onHover}
       data-name="Article"
     >
       <div className="flex w-full flex-col items-start gap-[10px]">
         <h3
-          className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium text-white not-italic min-[1024px]:text-[22px] min-[1024px]:leading-[28px]`}
+          className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium text-white not-italic min-[600px]:text-[22px] min-[600px]:leading-[28px]`}
         >
           {title}
         </h3>
         <p
-          className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic min-[600px]:text-[16px] min-[600px]:leading-[24px]`}
         >
           {body}
         </p>
@@ -184,24 +185,26 @@ export function SomInsideModule({
       data-name="Inside the Sparsh AI Module"
       aria-label="Inside the Sparsh AI Module"
     >
-      {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden w-[1192.509px] flex-col items-center gap-[48px] pt-[80px] pb-[40px] min-[1024px]:flex">
-        {/* Header */}
-        <div
-          className="flex w-[800px] flex-col items-center gap-[24px]"
-          data-node-id="2438:4965"
-        >
-          <div className="relative px-[10px]" data-node-id="2438:4967" data-name="Title">
-            <GradientTitle gradientDeg={TITLE_GRADIENT_DEG} className="text-center">
-              {heading}
-            </GradientTitle>
-            <Corners />
-          </div>
-          <p
-            className={`${interRegular.className} w-[679.389px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
-            data-node-id="2438:4973"
-          >
-            {subtitle}
+      {/* DESKTOP & TABLET (>=600px) */}
+      <div className="relative hidden w-full justify-center overflow-x-clip min-[600px]:flex">
+        <TabletScaleCanvas className="relative flex w-[1440px] max-w-[1440px] shrink-0 justify-center">
+          <div className="relative flex w-[1192.509px] flex-col items-center gap-[48px] pt-[80px] pb-[40px]">
+            {/* Header */}
+            <div
+              className="flex w-[800px] flex-col items-center gap-[24px]"
+              data-node-id="2438:4965"
+            >
+              <div className="relative px-[10px]" data-node-id="2438:4967" data-name="Title">
+                <GradientTitle gradientDeg={TITLE_GRADIENT_DEG} className="text-center">
+                  {heading}
+                </GradientTitle>
+                <Corners />
+              </div>
+              <p
+                className={`${interRegular.className} w-[679.389px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+                data-node-id="2438:4973"
+              >
+                {subtitle}
           </p>
           {bridgeCta ? <BridgeCta cta={bridgeCta} /> : null}
         </div>
@@ -309,9 +312,11 @@ export function SomInsideModule({
           </div>
         </div>
       </div>
+    </TabletScaleCanvas>
+  </div>
 
-      {/* MOBILE (<1024px) */}
-      <div className="relative flex w-full flex-col items-center gap-[40px] px-[24px] pt-[64px] pb-[64px] min-[1024px]:hidden">
+      {/* MOBILE (<600px) */}
+      <div className="relative flex w-full flex-col items-center gap-[40px] px-[24px] pt-[64px] pb-[64px] min-[600px]:hidden">
         {/* Header */}
         <div className="flex w-full flex-col items-center gap-[20px]">
           <div className="relative px-[10px]">
@@ -328,7 +333,7 @@ export function SomInsideModule({
             <Corners />
           </div>
           <p
-            className={`${interRegular.className} max-w-[332px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/80 not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} max-w-[332px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/80 not-italic`}
           >
             {subtitle}
           </p>

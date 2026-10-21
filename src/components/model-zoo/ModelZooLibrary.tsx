@@ -17,6 +17,7 @@ import {
   PRIMARY_CTA_SHADOW,
   sectionTitleGradient,
 } from "./model-zoo-data";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const TITLE_GRADIENT = sectionTitleGradient(123.948);
 
@@ -346,13 +347,174 @@ export function ModelZooLibrary({ requestForm }: { requestForm?: PopupConfig }) 
       data-node-id="5130:8356"
       aria-label="A model for every sense"
     >
-      <div className="relative mx-auto w-full max-w-[1244px] px-[16px] min-[1024px]:px-0">
-        {/* Header — 5130:8357 */}
+      {/* DESKTOP & TABLET (>=600px) */}
+      <TabletScaleCanvas className="relative hidden w-[1440px] shrink-0 flex-col items-center min-[600px]:flex mx-auto">
+        <div className="relative mx-auto w-full max-w-[1244px]">
+          {/* Header */}
+          <div className="flex w-full flex-col items-center gap-[24px]" data-node-id="5130:8357">
+            <TagBadge label="Demo Ready" />
+            <div className="relative px-[10px]" data-node-id="5130:8359" data-name="Title">
+              <h2
+                className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic whitespace-nowrap`}
+                style={{ backgroundImage: TITLE_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
+                data-node-id="5130:8360"
+              >
+                A model for every sense.
+              </h2>
+              <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+            </div>
+            <p className={`${interRegular.className} w-full max-w-[800px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
+              Explore open-source and Ambient-built models across Audio, Vision, and Motion.
+            </p>
+          </div>
+
+          {/* Filter bar */}
+          <div className="mt-[48px] flex w-full flex-row items-center justify-between flex-nowrap" data-node-id="5286:7530">
+            <div className="flex w-auto flex-row gap-[20px] items-center" data-node-id="5286:7503">
+              <FilterSelect label="Filter By Modality" options={MODALITIES} onChange={setModality} />
+              <FilterSelect label="Filter By Type" options={TYPES} onChange={setType} />
+            </div>
+            <div className="flex w-auto flex-row items-center gap-[20px]" data-node-id="5286:7521">
+              <div className="flex w-[400px] items-center" data-node-id="5286:7522">
+                <div className="relative h-[48px] min-w-px flex-1 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.3)] px-[20px]">
+                  <input
+                    type="text"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Search by model or use case…"
+                    aria-label="Search by model or use case"
+                    className={`${interRegular.className} h-full w-full border-0 bg-transparent text-[16px] leading-[24px] text-white not-italic outline-none placeholder:text-[13px] placeholder:text-[#8e8e8e]`}
+                  />
+                </div>
+                <button
+                  type="button"
+                  className={`${interRegular.className} relative h-[48px] w-[158px] shrink-0 bg-white text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#121212] not-italic shadow-[inset_0px_1px_18px_0px_rgba(45,45,45,0.6)]`}
+                  data-node-id="5286:7526"
+                  data-name="Cta"
+                >
+                  Search
+                </button>
+              </div>
+              <div className="flex w-auto justify-start">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setModality("all");
+                    setType("all");
+                    setQuery("");
+                  }}
+                  className={`${interRegular.className} text-[16px] leading-[24px] font-normal whitespace-nowrap text-[#53d824] not-italic hover:underline`}
+                  data-node-id="5286:7528"
+                >
+                  Reset Filters
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Card grid */}
+          <div className="mt-[40px]" data-node-id="5131:11386">
+            {filtered.length > 0 ? (
+              <div className="w-full grid grid-cols-3 gap-[20px] overflow-visible">
+                {filtered.map((model) => (
+                  <ModelCard key={model.title} model={model} onWatch={() => setVideo(model)} />
+                ))}
+              </div>
+            ) : (
+              <p className={`${interRegular.className} py-[80px] text-center text-[16px] text-[#99a1af] not-italic`}>
+                No models match your filters.
+              </p>
+            )}
+
+            {/* AI models strip */}
+            <div className="mt-[64px]" data-node-id="5348:6505">
+              <div className="flex w-full flex-col items-center gap-[24px] pt-[48px] text-center mb-[28px]">
+                <div className="relative px-[10px]">
+                  <h3
+                    className={`${gilroyMedium.className} m-0 bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic`}
+                    style={{
+                      backgroundImage: TITLE_GRADIENT,
+                      WebkitBackgroundClip: "text",
+                      backgroundClip: "text",
+                    }}
+                  >
+                    The whole Model Zoo
+                  </h3>
+                  <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+                </div>
+                <p className={`${interRegular.className} w-full max-w-[800px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
+                  Every open-source and Ambient-built model across audio, vision, and motion - 30+ and growing.
+                </p>
+              </div>
+
+              <div className="relative h-[120px]">
+                <p
+                  className={`${gilroySemiBold.className} absolute top-[20.32px] left-0 flex items-baseline bg-clip-text text-[56px] leading-[60px] font-semibold tracking-[-1.12px] whitespace-nowrap text-transparent opacity-90 not-italic`}
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(106.249deg, rgb(22, 22, 22) 9.025%, rgb(39, 39, 39) 37.884%, rgb(18, 18, 18) 111.41%)",
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                  }}
+                  data-node-id="5348:6506"
+                >
+                  <span
+                    className="pt-[12px] text-[76px] leading-[60px] tracking-[-1.52px]"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(106.249deg, rgb(42, 42, 42) 9.025%, rgb(64, 64, 64) 37.884%, rgb(36, 36, 36) 111.41%)",
+                      WebkitBackgroundClip: "text",
+                      backgroundClip: "text",
+                    }}
+                  >
+                    30+
+                  </span>&nbsp;AI Models
+                </p>
+              </div>
+
+              <div
+                className="relative left-[calc(50%-50vw)] w-screen max-w-none overflow-clip"
+                data-node-id="5348:6507"
+              >
+                <div
+                  className="flex w-max animate-dvk-marquee-left items-start"
+                  style={{ animationDuration: "30s" }}
+                >
+                  <img
+                    alt="AI models: Presence Detection, Wake Word Detection, Face Locator, Fall Detection, Air Gestures"
+                    src="/model-zoo/strip-loop.webp"
+                    className="h-[200px] w-[1185px] max-w-none shrink-0 object-fill"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <img
+                    alt=""
+                    aria-hidden
+                    src="/model-zoo/strip-loop.webp"
+                    className="h-[200px] w-[1185px] max-w-none shrink-0 object-fill"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Request CTA */}
+          <div className="mt-[36px] flex justify-center pb-[81px]">
+            <CtaPrimary label="Request Model Zoo" width={225} onClick={() => setRequestOpen(true)} />
+          </div>
+        </div>
+      </TabletScaleCanvas>
+
+      {/* MOBILE (<600px) */}
+      <div className="relative mx-auto flex w-full flex-col items-center min-[600px]:hidden px-[16px]">
+        {/* Header */}
         <div className="flex w-full flex-col items-center gap-[24px]" data-node-id="5130:8357">
           <TagBadge label="Demo Ready" />
           <div className="relative px-[10px]" data-node-id="5130:8359" data-name="Title">
             <h2
-              className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic min-[1024px]:text-[46px] min-[1024px]:leading-[49px] min-[1024px]:whitespace-nowrap`}
+              className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic`}
               style={{ backgroundImage: TITLE_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
               data-node-id="5130:8360"
             >
@@ -360,27 +522,27 @@ export function ModelZooLibrary({ requestForm }: { requestForm?: PopupConfig }) 
             </h2>
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           </div>
-          <p className={`${interRegular.className} w-full max-w-[800px] text-center text-[14px] leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
+          <p className={`${interRegular.className} w-full max-w-[800px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
             Explore open-source and Ambient-built models across Audio, Vision, and Motion.
           </p>
         </div>
 
-        {/* Filter bar — 5286:7530 */}
-        <div className="mt-[24px] flex w-full flex-col min-[1024px]:mt-[48px] min-[1024px]:flex-row min-[1024px]:items-center min-[1024px]:justify-between min-[1024px]:flex-nowrap" data-node-id="5286:7530">
-          <div className="order-2 mt-[16px] flex w-full flex-row gap-[12px] min-[1024px]:mt-0 min-[1024px]:order-1 min-[1024px]:w-auto min-[1024px]:gap-[20px] min-[1024px]:items-center" data-node-id="5286:7503">
+        {/* Filter bar */}
+        <div className="mt-[24px] flex w-full flex-col" data-node-id="5286:7530">
+          <div className="order-2 mt-[16px] flex w-full flex-row gap-[12px]" data-node-id="5286:7503">
             <FilterSelect label="Filter By Modality" options={MODALITIES} onChange={setModality} />
             <FilterSelect label="Filter By Type" options={TYPES} onChange={setType} />
           </div>
-          <div className="contents min-[1024px]:order-2 min-[1024px]:flex min-[1024px]:w-auto min-[1024px]:flex-row min-[1024px]:items-center min-[1024px]:gap-[20px]" data-node-id="5286:7521">
-            <div className="order-1 flex w-full items-center min-[1024px]:order-none min-[1024px]:w-[400px]" data-node-id="5286:7522">
-              <div className="relative h-[48px] min-w-px flex-1 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.3)] px-[12px] min-[1024px]:px-[20px]">
+          <div className="contents" data-node-id="5286:7521">
+            <div className="order-1 flex w-full items-center" data-node-id="5286:7522">
+              <div className="relative h-[48px] min-w-px flex-1 border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.3)] px-[12px]">
                 <input
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search by model or use case…"
                   aria-label="Search by model or use case"
-                  className={`${interRegular.className} h-full w-full border-0 bg-transparent text-[14px] leading-[21px] text-white not-italic outline-none placeholder:text-[12px] placeholder:text-[#8e8e8e] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] min-[1024px]:placeholder:text-[13px]`}
+                  className={`${interRegular.className} h-full w-full border-0 bg-transparent text-[14px] leading-[21px] text-white not-italic outline-none placeholder:text-[12px] placeholder:text-[#8e8e8e]`}
                 />
               </div>
               <button
@@ -392,7 +554,7 @@ export function ModelZooLibrary({ requestForm }: { requestForm?: PopupConfig }) 
                 Search
               </button>
             </div>
-            <div className="order-3 mt-[16px] flex w-full justify-end min-[1024px]:order-none min-[1024px]:mt-0 min-[1024px]:w-auto min-[1024px]:justify-start">
+            <div className="order-3 mt-[16px] flex w-full justify-end">
               <button
                 type="button"
                 onClick={() => {
@@ -400,7 +562,7 @@ export function ModelZooLibrary({ requestForm }: { requestForm?: PopupConfig }) 
                   setType("all");
                   setQuery("");
                 }}
-                className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#53d824] not-italic hover:underline min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+                className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-[#53d824] not-italic hover:underline`}
                 data-node-id="5286:7528"
               >
                 Reset Filters
@@ -409,10 +571,10 @@ export function ModelZooLibrary({ requestForm }: { requestForm?: PopupConfig }) 
           </div>
         </div>
 
-        {/* Card grid — 5131:11386 (2 rows × 3, gap 20) */}
-        <div className="mt-[24px] min-[1024px]:mt-[40px]" data-node-id="5131:11386">
+        {/* Card grid */}
+        <div className="mt-[24px] w-full" data-node-id="5131:11386">
           {filtered.length > 0 ? (
-            <div className="flex w-[calc(100%+32px)] snap-x snap-mandatory overflow-x-auto gap-[16px] mx-[-16px] px-[16px] pb-[16px] after:content-[''] after:w-[1px] after:shrink-0 min-[1024px]:w-full min-[1024px]:grid min-[1024px]:grid-cols-3 min-[1024px]:gap-[20px] min-[1024px]:overflow-visible min-[1024px]:mx-0 min-[1024px]:px-0 min-[1024px]:pb-0 min-[1024px]:after:hidden">
+            <div className="flex w-[calc(100%+32px)] snap-x snap-mandatory overflow-x-auto gap-[16px] mx-[-16px] px-[16px] pb-[16px] after:content-[''] after:w-[1px] after:shrink-0">
               {filtered.map((model) => (
                 <ModelCard key={model.title} model={model} onWatch={() => setVideo(model)} />
               ))}
@@ -423,15 +585,12 @@ export function ModelZooLibrary({ requestForm }: { requestForm?: PopupConfig }) 
             </p>
           )}
 
-          {/* AI models strip — 5348:6505. The Figma frame is a static snapshot of
-              what is designed as a continuous edge-to-edge carousel (like the
-              home page rows): the exported row runs in a seamless marquee. */}
-          <div className="mt-[48px] min-[1024px]:mt-[64px]" data-node-id="5348:6505">
-            {/* Whole Model Zoo — strip heading */}
-            <div className="flex w-full flex-col items-center gap-[24px] pt-[32px] text-center mb-[20px] min-[1024px]:pt-[48px] min-[1024px]:mb-[28px]">
+          {/* AI models strip */}
+          <div className="mt-[48px]" data-node-id="5348:6505">
+            <div className="flex w-full flex-col items-center gap-[24px] pt-[32px] text-center mb-[20px]">
               <div className="relative px-[10px]">
                 <h3
-                  className={`${gilroyMedium.className} m-0 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic min-[1024px]:text-[46px] min-[1024px]:leading-[49px]`}
+                  className={`${gilroyMedium.className} m-0 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic`}
                   style={{
                     backgroundImage: TITLE_GRADIENT,
                     WebkitBackgroundClip: "text",
@@ -442,12 +601,12 @@ export function ModelZooLibrary({ requestForm }: { requestForm?: PopupConfig }) 
                 </h3>
                 <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
               </div>
-              <p className={`${interRegular.className} w-full max-w-[800px] text-center text-[14px] leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
+              <p className={`${interRegular.className} w-full max-w-[800px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
                 Every open-source and Ambient-built model across audio, vision, and motion - 30+ and growing.
               </p>
             </div>
 
-            <div className="relative h-[110px] min-[1024px]:h-[120px]">
+            <div className="relative h-[110px]">
               <p
                 className={`${gilroySemiBold.className} absolute top-[20.32px] left-0 flex items-baseline bg-clip-text text-[56px] leading-[60px] font-semibold tracking-[-1.12px] whitespace-nowrap text-transparent opacity-90 not-italic`}
                 style={{
@@ -471,9 +630,7 @@ export function ModelZooLibrary({ requestForm }: { requestForm?: PopupConfig }) 
                 </span>&nbsp;AI Models
               </p>
             </div>
-            {/* Full-bleed marquee — viewport-wide clip. strip-loop.webp is the
-                5-card period (Presence → Air Gestures) cropped with its trailing
-                gap so two flush copies tile seamlessly under the -50% keyframe. */}
+
             <div
               className="relative left-[calc(50%-50vw)] w-screen max-w-none overflow-clip"
               data-node-id="5348:6507"
@@ -502,8 +659,8 @@ export function ModelZooLibrary({ requestForm }: { requestForm?: PopupConfig }) 
           </div>
         </div>
 
-        {/* Request CTA — 5131:5191 (225×48, centered) */}
-        <div className="mt-[36px] flex justify-center pb-[40px] min-[1024px]:pb-[81px]">
+        {/* Request CTA */}
+        <div className="mt-[36px] flex justify-center pb-[40px]">
           <CtaPrimary label="Request Model Zoo" width={225} onClick={() => setRequestOpen(true)} />
         </div>
       </div>

@@ -11,6 +11,8 @@ import gradientTopFallback from "../../../public/measured-proof/gradient-top.png
 import gradientBottomFallback from "../../../public/measured-proof/gradient-bottom.png";
 import mobileBgFallback from "../../../public/mobile/image 90.png";
 
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
+
 export function MeasuredProof({ data }: { data?: any }) {
   const backgroundImage =
     mediaUrl(data?.background_image) || bgImageFallback;
@@ -24,13 +26,13 @@ export function MeasuredProof({ data }: { data?: any }) {
   return (
     <section
       id="measured-proof"
-      className="relative left-1/2 w-screen max-w-none -translate-x-1/2 bg-black max-[1023px]:h-auto min-[1024px]:h-[100vh]"
+      className="relative left-1/2 w-screen max-w-none -translate-x-1/2 bg-black min-[1200px]:h-[100vh]"
       data-node-id="2379:1464"
       data-name="Section 6"
       aria-label="Measured proof in silicon"
     >
-      {/* DESKTOP & LARGE TABLET (>=1024px) Sticky Container */}
-      <div className="sticky top-0 hidden h-[100vh] w-full overflow-hidden min-[1024px]:block">
+      {/* DESKTOP & TABLET (>=600px) */}
+      <div className="relative hidden w-full justify-center overflow-hidden min-[600px]:flex min-[1200px]:sticky min-[1200px]:top-0 min-[1200px]:h-[100vh]">
         <div
           className="pointer-events-none absolute top-[calc(50%-15.5px)] right-0 left-0 h-[880px] -translate-y-1/2"
           data-node-id="2379:1466"
@@ -72,17 +74,15 @@ export function MeasuredProof({ data }: { data?: any }) {
           </div>
         </div>
 
-        <div className="absolute inset-0 flex flex-col overflow-hidden">
-          <div className="relative mx-auto my-auto shrink-0 h-[945px] w-full transition-all duration-300 [@media(max-height:945px)]:[zoom:0.85] [@media(max-height:800px)]:[zoom:0.75] [@media(max-height:700px)]:[zoom:0.65] [@media(max-height:630px)]:[zoom:0.55] [@media(max-height:550px)]:[zoom:0.45]">
-            <MeasuredProofHeader data={data} />
-            <MeasuredProofCards data={data} />
-            <MeasuredProofCtas data={data} />
-          </div>
-        </div>
+        <TabletScaleCanvas className="relative my-auto shrink-0 h-[945px] w-[1440px]">
+          <MeasuredProofHeader data={data} />
+          <MeasuredProofCards data={data} />
+          <MeasuredProofCtas data={data} />
+        </TabletScaleCanvas>
       </div>
 
-      {/* MOBILE & SMALL TABLET (<1024px) — dedicated layout, desktop is untouched above */}
-      <div className="relative w-full min-[1024px]:hidden overflow-hidden">
+      {/* MOBILE (<600px) */}
+      <div className="relative w-full min-[600px]:hidden overflow-hidden">
         {/* Background elements for mobile (matching desktop) */}
         <div className="pointer-events-none absolute top-[45%] right-0 left-0 h-[600px] -translate-y-1/2">
           <Image

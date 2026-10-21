@@ -8,6 +8,7 @@ import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
@@ -65,12 +66,12 @@ export function ProductsStartBuilding({ data }: { data?: any }) {
   };
 
   return (
-    <section className="relative z-20 mb-[-700px] min-[1024px]:mb-[-520px] w-full bg-transparent">
-      {/* DESKTOP (>=1024px) */}
-      <div
-        className="relative mx-auto hidden w-full min-[1024px]:block"
-        aria-label="Start building with GPX10 Pro"
-      >
+    <section
+      className="relative z-20 mb-[-700px] min-[600px]:[margin-bottom:calc(-409px*var(--tablet-zoom,1))] flex w-full justify-center bg-transparent"
+      aria-label="Start building with GPX10 Pro"
+    >
+      {/* DESKTOP (>=600px) */}
+      <TabletScaleCanvas className="hidden w-[1440px] shrink-0 flex-col items-center min-[600px]:flex min-[600px]:pt-[80px]">
         <ProductsStartBuildingDesktop
           heading={heading}
           subtitle={subtitle}
@@ -78,10 +79,10 @@ export function ProductsStartBuilding({ data }: { data?: any }) {
           cards={cards}
           onCardClick={handleCardClick}
         />
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE (<1024px) */}
-      <div className="relative w-full min-[1024px]:hidden">
+      {/* MOBILE (<600px) */}
+      <div className="relative w-full min-[600px]:hidden">
         <ProductsStartBuildingMobile
           heading={heading}
           subtitle={subtitle}
@@ -152,7 +153,7 @@ function ProductsStartBuildingDesktop({
           </h2>
         </div>
         <p
-          className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} w-[650px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           data-node-id="2903:2616"
         >
           {subtitle}
@@ -232,7 +233,7 @@ function StartCardView({
           {/* Description + CTA */}
           <div className="flex w-[450px] flex-col items-center gap-[20px]">
             <p
-              className={`min-h-[72px] ${interRegular.className} w-full text-center text-[14px] leading-[24px] font-normal tracking-[-0.3125px] text-white not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+              className={`min-h-[72px] ${interRegular.className} w-full text-center text-[16px] leading-[24px] font-normal tracking-[-0.3125px] text-white not-italic [word-break:break-word]`}
             >
               {card.description}
             </p>
@@ -314,7 +315,7 @@ function ProductsStartBuildingMobile({
           {heading}
         </h2>
         <p
-          className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]`}
         >
           {subtitle}
         </p>
@@ -343,7 +344,7 @@ function ProductsStartBuildingMobile({
                 {card.titleLines[0]} {card.titleLines[1]}
               </h3>
               <p
-                className={`${interRegular.className} text-center text-[14px] leading-[21px] font-normal text-white opacity-90 min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+                className={`${interRegular.className} text-center text-[14px] leading-[21px] font-normal text-white opacity-90`}
               >
                 {card.description}
               </p>

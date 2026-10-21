@@ -5,6 +5,7 @@ import { ModelZooAppForge } from "./ModelZooAppForge";
 import { ModelZooSteps } from "./ModelZooSteps";
 import { ModelZooBuildIt } from "./ModelZooBuildIt";
 import { ModelZooKits } from "./ModelZooKits";
+import { TabletScaleInit } from "../shared/TabletScaleInit";
 
 /**
  * Figma 5130:8060 — Model Zoo page (1440×8384 desktop canvas).
@@ -28,7 +29,8 @@ const MODEL_ZOO_APP_FORGE_PROPS = {
 export function ModelZoo({ forms }: { forms?: any }) {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
-      {/* DESKTOP (>=1024px) */}
+      <TabletScaleInit />
+      {/* DESKTOP (>=600px) / MOBILE (<600px) */}
       <ModelZooHero />
       {/* hero (743) → watch-it-run (779): 36px gap */}
       <div id="model-zoo-content" className="mt-[36px]" />

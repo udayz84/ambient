@@ -9,6 +9,7 @@ import {
 } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const GREEN_GLOW_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
@@ -133,8 +134,8 @@ export function PressKit({ data }: PressKitProps = {}) {
       data-node-id="2500:1659"
       data-name="Building with Ambient"
     >
-      {/* DESKTOP (>=1024px) — exact Figma layout */}
-      <div className="relative hidden h-[489px] w-[1440px] min-[1024px]:block">
+      {/* DESKTOP (>=600px) — exact Figma layout */}
+      <TabletScaleCanvas className="relative hidden h-[489px] w-[1440px] shrink-0 min-[600px]:block mx-auto">
         <div
           className="pointer-events-none absolute left-0 top-0 h-[489px] w-[1440px]"
           aria-hidden
@@ -194,10 +195,10 @@ export function PressKit({ data }: PressKitProps = {}) {
             </p>
           </div>
         </div>
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE (<1024px) — exact Figma mobile layout (396×351 frame) */}
-      <div className="relative w-full min-[1024px]:hidden">
+      {/* MOBILE (<600px) — exact Figma mobile layout (396×351 frame) */}
+      <div className="relative w-full min-[600px]:hidden">
         {/* Background image — rotated press-kit-graphic with radial vignette */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
           <div className="absolute left-[calc(50%+225px)] top-[calc(50%+44px)] flex h-[500px] w-[888px] -translate-x-1/2 -translate-y-1/2 items-center justify-center">

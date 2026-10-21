@@ -67,7 +67,7 @@ export function PrimaryCta({ label, href }: { label: string; href: string }) {
       />
       <span className="relative flex items-center gap-[10px]">
         <p
-          className={`${gilroyMedium.className} text-[14px] min-[1024px]:text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic`}
+          className={`${gilroyMedium.className} text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic`}
         >
           {label}
         </p>
@@ -88,7 +88,7 @@ export function SecondaryCta({ label, href }: { label: string; href: string }) {
       className="relative flex h-[48px] w-auto shrink-0 items-center justify-center bg-[rgba(226,241,202,0.12)] px-[24px] py-[10px]"
     >
       <p
-        className={`${gilroyMedium.className} text-[14px] min-[1024px]:text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic`}
+        className={`${gilroyMedium.className} text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic`}
       >
         {label}
       </p>

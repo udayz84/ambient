@@ -9,6 +9,8 @@ import { CareersFooterBackdrop } from "./CareersFooterBackdrop";
 import { CareersHero } from "./CareersHero";
 import { CareersMobile } from "./CareersMobile";
 import { CareersOpenRoles } from "./CareersOpenRoles";
+import { TabletScaleInit } from "../shared/TabletScaleInit";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const CAREERS_PAGE_HEIGHT_PX = 4977;
 
@@ -17,34 +19,39 @@ export function Careers({ data, applicationForm }: { data?: any; applicationForm
 
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
-      {/* DESKTOP (>=1024px) — absolute canvas, untouched */}
+      <TabletScaleInit />
+      {/* DESKTOP & TABLET (>=600px) */}
       <div
-        className="relative mx-auto -mt-[78px] hidden w-full overflow-x-clip overflow-y-visible bg-black min-[1024px]:block"
-        style={{ height: CAREERS_PAGE_HEIGHT_PX - rolesHeightDiff }}
+        className="relative mx-auto -mt-[78px] hidden w-full justify-center overflow-x-clip bg-black min-[600px]:flex"
         data-node-id="2379:8612"
         data-name="Careers - 02"
       >
-        {data?.hero ? <CareersHero data={data.hero} /> : null}
-        {data?.best_work ? <CareersBestWork data={data.best_work} /> : null}
-        {data?.dna ? <CareersDna data={data.dna} /> : null}
-        {data?.open_roles ? (
-          <CareersOpenRoles
-            data={data.open_roles}
-            applicationForm={applicationForm}
-            onHeightDiffChange={setRolesHeightDiff}
-          />
-        ) : null}
-        {data?.benefits ? (
-          <CareersBenefits data={data.benefits} offsetY={rolesHeightDiff} />
-        ) : null}
-        <CareersFooterBackdrop offsetY={rolesHeightDiff} />
-        {data?.bottom_cta ? (
-          <CareersBottomCta data={data.bottom_cta} offsetY={rolesHeightDiff} />
-        ) : null}
+        <TabletScaleCanvas
+          className="relative w-[1440px] shrink-0 min-[600px]:block"
+          style={{ height: CAREERS_PAGE_HEIGHT_PX - rolesHeightDiff }}
+        >
+          {data?.hero ? <CareersHero data={data.hero} /> : null}
+          {data?.best_work ? <CareersBestWork data={data.best_work} /> : null}
+          {data?.dna ? <CareersDna data={data.dna} /> : null}
+          {data?.open_roles ? (
+            <CareersOpenRoles
+              data={data.open_roles}
+              applicationForm={applicationForm}
+              onHeightDiffChange={setRolesHeightDiff}
+            />
+          ) : null}
+          {data?.benefits ? (
+            <CareersBenefits data={data.benefits} offsetY={rolesHeightDiff} />
+          ) : null}
+          <CareersFooterBackdrop offsetY={rolesHeightDiff} />
+          {data?.bottom_cta ? (
+            <CareersBottomCta data={data.bottom_cta} offsetY={rolesHeightDiff} />
+          ) : null}
+        </TabletScaleCanvas>
       </div>
 
-      {/* MOBILE (<1024px) — dedicated stacked layout */}
-      <div className="relative -mt-[78px] w-full bg-black min-[1024px]:hidden">
+      {/* MOBILE (<600px) — dedicated stacked layout */}
+      <div className="relative -mt-[78px] w-full bg-black min-[600px]:hidden">
         <CareersMobile data={data} />
       </div>
     </main>

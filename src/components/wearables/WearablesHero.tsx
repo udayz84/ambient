@@ -203,7 +203,7 @@ export function WearablesHero({
           data-name="Sub"
         >
           <p
-            className={`${interRegular.className} w-[591.92px] shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[591.92px] shrink-0 text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
             data-node-id="2509:387"
           >
             {subtitle}
@@ -281,7 +281,7 @@ export function WearablesHero({
 
           {/* Subtitle */}
           <p
-            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
             data-node-id="4153:10658"
           >
             {subtitle}

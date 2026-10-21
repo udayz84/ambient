@@ -10,6 +10,8 @@ import { CORNER_LEFT, CORNER_RIGHT, sectionTitleGradient } from "./model-zoo-dat
 import { ProductBriefModal } from "../products-page/ProductBriefModal";
 import type { PopupConfig } from "@/lib/popup";
 
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
+
 const TITLE_GRADIENT = sectionTitleGradient(119.522);
 
 /** Icon tile background — radial gradient copied from the Figma node fill. */
@@ -43,7 +45,7 @@ function BuildItCard({ card }: { card: (typeof CARDS)[number] }) {
   return (
     <div
       ref={fadeRef}
-      className={`relative flex h-auto w-full max-w-[400px] shrink flex-col items-start gap-[36px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] p-[32px] transition-colors duration-300 hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] min-[1024px]:h-[245px] min-[1024px]:w-[400px] min-[1024px]:shrink-0 ${getFadeInClass(isVisible)}`}
+      className={`relative flex h-[245px] w-[400px] shrink-0 flex-col items-start gap-[36px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] p-[32px] transition-colors duration-300 hover:border-[#a8ed90] hover:bg-[rgba(68,120,7,0.2)] ${getFadeInClass(isVisible)}`}
       data-name="Content"
     >
       {/* Icon tile — 66.14×65, rounded, radial gradient + glyph */}
@@ -63,7 +65,7 @@ function BuildItCard({ card }: { card: (typeof CARDS)[number] }) {
         <p className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] not-italic [word-break:break-word]`}>
           {card.title}
         </p>
-        <p className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
+        <p className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal opacity-65 not-italic [word-break:break-word]`}>
           {card.desc}
         </p>
       </div>
@@ -86,14 +88,15 @@ export function ModelZooBuildIt({ formConfig }: { formConfig?: PopupConfig }) {
       data-node-id="5131:10720"
       aria-label="Don't see it? Build it."
     >
-      <div className="relative mx-auto w-full max-w-[1256px] px-[16px] min-[1024px]:px-0">
-        <div className="flex w-full flex-col items-center justify-center gap-[40px] min-[1024px]:gap-[48px]">
-          {/* Title — 5131:10841 */}
+      {/* MOBILE (<600px) */}
+      <div className="relative mx-auto flex w-full flex-col items-center min-[600px]:hidden px-[16px]">
+        <div className="flex w-full flex-col items-center justify-center gap-[40px]">
+          {/* Title */}
           <div className="flex w-full flex-col items-center gap-[10px]" data-node-id="5131:10841" data-name="Title Section">
             <div className="flex flex-col items-center justify-center gap-[24px]" data-node-id="5131:10842" data-name="Section Title">
               <div className="relative px-[10px]" data-node-id="5131:10843" data-name="Title">
                 <h2
-                  className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] min-[1024px]:text-[46px] min-[1024px]:leading-[49px] font-medium text-transparent not-italic min-[1024px]:whitespace-nowrap`}
+                  className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic`}
                   style={{ backgroundImage: TITLE_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
                   data-node-id="5131:10844"
                 >
@@ -102,19 +105,46 @@ export function ModelZooBuildIt({ formConfig }: { formConfig?: PopupConfig }) {
                 <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
               </div>
             </div>
-            <p className={`${interRegular.className} w-full max-w-[583px] text-center text-[14px] leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`} data-node-id="5131:10849">
+            <p className={`${interRegular.className} w-full max-w-[583px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`} data-node-id="5131:10849">
               The zoo is a starting point, not a ceiling. Bring your own TensorFlow, Keras, or ONNX model and compile it to GPX with ModelForge.
             </p>
           </div>
 
-          {/* Cards — 5203:5853 */}
-          <div className="flex w-full flex-col items-stretch gap-[16px] min-[1024px]:flex-row min-[1024px]:items-center min-[1024px]:gap-[28px]" data-node-id="5203:5853" data-name="Do the best work of your life">
+          {/* Cards mobile */}
+          <div className="flex w-full flex-col items-stretch gap-[16px]" data-node-id="5203:5853" data-name="Do the best work of your life">
             {CARDS.map((card) => (
-              <BuildItCard key={card.title} card={card} />
+              <div
+                key={`m-${card.title}`}
+                className="relative flex h-auto w-full flex-col items-start gap-[36px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] p-[32px]"
+                data-name="Content"
+              >
+                <div
+                  className="relative h-[65px] w-[66.14px] shrink-0 overflow-clip rounded-[13.684px]"
+                  style={{ backgroundImage: ICON_TILE_BG }}
+                  aria-hidden
+                >
+                  <div className="absolute top-1/2 left-[calc(50%+0.43px)] size-[45px] -translate-x-1/2 -translate-y-1/2 overflow-clip">
+                    <div className="absolute" style={{ inset: card.iconInset }}>
+                      <img alt="" src={card.icon} className="block size-[110%] max-w-none" />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex w-full flex-col items-start gap-[10px] text-white">
+                  <p className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] not-italic [word-break:break-word]`}>
+                    {card.title}
+                  </p>
+                  <p className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal opacity-65 not-italic [word-break:break-word]`}>
+                    {card.desc}
+                  </p>
+                </div>
+
+                <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+              </div>
             ))}
           </div>
 
-          {/* CTAs — 5131:10820 (437 wide, centered) */}
+          {/* CTAs mobile */}
           <div className="flex flex-wrap items-start justify-center gap-[24px]" data-node-id="5131:10820">
             <CtaPrimary href="/developer" label="Explore the Developer Hub" width={251} />
             <CtaSecondary
@@ -128,6 +158,52 @@ export function ModelZooBuildIt({ formConfig }: { formConfig?: PopupConfig }) {
           </div>
         </div>
       </div>
+
+      {/* DESKTOP (>=600px) */}
+      <TabletScaleCanvas className="relative mx-auto hidden w-[1440px] shrink-0 flex-col items-center min-[600px]:flex">
+        <div className="relative mx-auto w-[1256px] shrink-0 px-0">
+          <div className="flex w-full flex-col items-center justify-center gap-[48px]">
+            {/* Title — 5131:10841 */}
+            <div className="flex w-full flex-col items-center gap-[10px]" data-node-id="5131:10841" data-name="Title Section">
+              <div className="flex flex-col items-center justify-center gap-[24px]" data-node-id="5131:10842" data-name="Section Title">
+                <div className="relative px-[10px]" data-node-id="5131:10843" data-name="Title">
+                  <h2
+                    className={`${gilroyMedium.className} bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic whitespace-nowrap`}
+                    style={{ backgroundImage: TITLE_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
+                    data-node-id="5131:10844"
+                  >
+                    Don’t see it? Build it.
+                  </h2>
+                  <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+                </div>
+              </div>
+              <p className={`${interRegular.className} w-full max-w-[583px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`} data-node-id="5131:10849">
+                The zoo is a starting point, not a ceiling. Bring your own TensorFlow, Keras, or ONNX model and compile it to GPX with ModelForge.
+              </p>
+            </div>
+
+            {/* Cards — 5203:5853 */}
+            <div className="flex w-[1256px] flex-row items-center gap-[28px]" data-node-id="5203:5853" data-name="Do the best work of your life">
+              {CARDS.map((card) => (
+                <BuildItCard key={card.title} card={card} />
+              ))}
+            </div>
+
+            {/* CTAs — 5131:10820 */}
+            <div className="flex flex-wrap items-start justify-center gap-[24px]" data-node-id="5131:10820">
+              <CtaPrimary href="/developer" label="Explore the Developer Hub" width={251} />
+              <CtaSecondary
+                label="Read the Docs"
+                width={162}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsModalOpen(true);
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      </TabletScaleCanvas>
 
       <ProductBriefModal
         isOpen={isModalOpen}

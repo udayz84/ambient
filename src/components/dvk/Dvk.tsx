@@ -1,4 +1,6 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
 
 import { useState } from "react";
 import { gilroyMedium, interRegular, dmMono } from "../hero/fonts";
@@ -9,6 +11,8 @@ import { SomInsideModule } from "@/components/som-page/SomInsideModule";
 import { SomPrototypeTitleDesktop, SomPrototypeTitleMobile } from "@/components/som-page/SomPrototypeTitle";
 import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 import { TagBadge } from "../hero/TagBadge";
+import { TabletScaleInit } from "@/components/shared/TabletScaleInit";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 import { ModelZooAppForge } from "@/components/model-zoo/ModelZooAppForge";
 import { DvkDemos } from "./DvkDemos";
@@ -51,72 +55,80 @@ const DVK_APP_FORGE_PROPS = {
 export function Dvk({ data, formConfig }: { data?: any; formConfig?: any }) {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
-      {/* DESKTOP (>=1024px) — hero canvas, source of truth */}
+      <TabletScaleInit />
+
+      {/* Hero Section — Desktop & Tablet (>=600px) */}
       <div
-        className="relative mx-auto -mt-[78px] hidden w-full overflow-x-clip bg-black min-[1024px]:block"
-        style={{ height: DVK_DESKTOP_HEIGHT }}
+        className="relative mx-auto -mt-[78px] hidden w-full justify-center overflow-x-clip bg-black min-[600px]:flex"
         data-node-id="2761:2971"
         data-name="Hero Section"
       >
-        <div className="relative mx-auto h-full w-[1442px]">
-          {data?.hero ? <DvkHero data={data.hero} formConfig={formConfig} /> : null}
-        </div>
-        <DvkScrollIndicator />
+        <TabletScaleCanvas className="relative flex w-[1442px] max-w-[1442px] shrink-0 h-[658px]">
+          <div className="relative w-full h-full">
+            {data?.hero ? <DvkHero data={data.hero} formConfig={formConfig} /> : null}
+            <DvkScrollIndicator />
+          </div>
+        </TabletScaleCanvas>
       </div>
 
-      {/* DESKTOP (>=1024px) — hardware stack section (2761:2905) */}
-      <div id="dvk-content" className="relative mx-auto hidden w-full bg-black min-[1024px]:block">
-        {data?.inside_module ? (
-          <SomInsideModule
-            data={data.inside_module}
-          />
-        ) : null}
-      </div>
-
-      <SomPrototypeTitleDesktop data={data?.prototype} />
-
-      {/* DESKTOP (>=1024px) — demos section (2761:2791 + cards row) */}
-      <div className="relative mx-auto hidden w-full bg-black min-[1024px]:block">
-        <div className="mx-auto w-full max-w-[1684px] px-[32px] xl:px-[64px] pt-[80px] pb-[64px]">
-          {data?.demos ? <DvkDemos data={data.demos} /> : null}
-        </div>
-      </div>
-      
-      {/* DESKTOP (>=1024px) — Application Forge section (copied from /model-zoo) */}
-      <div className="hidden w-full bg-black min-[1024px]:block">
-        <ModelZooAppForge data={data?.appforge} formConfig={formConfig} {...DVK_APP_FORGE_PROPS} />
-      </div>
-
-      {/* DESKTOP (>=1024px) — ModelForge section (3773:685, 1440×873 canvas) */}
-      <div className="relative mx-auto hidden w-full bg-black min-[1024px]:block">
-        <div className="mx-auto w-[1440px] pb-[80px]">
-          {data?.modelforge ? <DvkModelForge data={data.modelforge} /> : null}
-        </div>
-      </div>
-
-      {/* Coming Soon section — "Test on the metal, without the metal" (4497:2938) */}
-      <DvkComingSoon data={data?.coming_soon} />
-
-
-
-      {/* MOBILE (<1024px) — stacked layout */}
+      {/* Hero Section — Mobile (<600px) */}
       <DvkHeroMobile data={data?.hero} formConfig={formConfig} />
-      <div className="min-[1024px]:hidden">
+
+      {/* Hardware stack / inside module (internal >=600px / <600px split) */}
+      <div id="dvk-content" className="relative mx-auto w-full bg-black">
         {data?.inside_module ? (
           <SomInsideModule
             data={data.inside_module}
           />
         ) : null}
       </div>
+
+      {/* Prototype Section (each has internal >=600px / <600px split) */}
+      <SomPrototypeTitleDesktop data={data?.prototype} />
       <SomPrototypeTitleMobile data={data?.prototype} />
+
+      {/* Demos Section — Desktop & Tablet (>=600px) */}
+      <div className="relative mx-auto hidden w-full justify-center overflow-x-clip bg-black min-[600px]:flex">
+        <TabletScaleCanvas className="relative flex w-[1440px] max-w-[1440px] shrink-0 justify-center">
+          <div className="mx-auto w-[1440px] pt-[80px] pb-[64px] flex justify-center">
+            {data?.demos ? <DvkDemos data={data.demos} /> : null}
+          </div>
+        </TabletScaleCanvas>
+      </div>
+
+      {/* Demos Section — Mobile (<600px) */}
       <DvkDemosMobile data={data?.demos} />
-      <div className="w-full bg-black min-[1024px]:hidden">
+
+      {/* Application Forge section — Desktop & Tablet (>=600px) */}
+      <div className="hidden w-full justify-center overflow-x-clip bg-black min-[600px]:flex">
+        <TabletScaleCanvas className="relative flex w-[1440px] max-w-[1440px] shrink-0 justify-center">
+          <div className="w-[1440px]">
+            <ModelZooAppForge data={data?.appforge} formConfig={formConfig} {...DVK_APP_FORGE_PROPS} />
+          </div>
+        </TabletScaleCanvas>
+      </div>
+
+      {/* Application Forge section — Mobile (<600px) */}
+      <div className="w-full bg-black min-[600px]:hidden">
         <ModelZooAppForge data={data?.appforge} formConfig={formConfig} {...DVK_APP_FORGE_PROPS} />
       </div>
+
+      {/* ModelForge section — Desktop & Tablet (>=600px) */}
+      <div className="relative mx-auto hidden w-full justify-center overflow-x-clip bg-black min-[600px]:flex">
+        <TabletScaleCanvas className="relative flex w-[1440px] max-w-[1440px] shrink-0 justify-center">
+          <div className="mx-auto w-[1440px] pb-[80px]">
+            {data?.modelforge ? <DvkModelForge data={data.modelforge} /> : null}
+          </div>
+        </TabletScaleCanvas>
+      </div>
+
+      {/* ModelForge section — Mobile (<600px) */}
       <DvkModelForgeMobile data={data?.modelforge} />
 
+      {/* Coming Soon section */}
+      <DvkComingSoon data={data?.coming_soon} />
 
-      {/* Shared Section (Desktop & Mobile) */}
+      {/* Integrated Modules Section (shared, with TabletScaleCanvas for >=600px internally) */}
       {data?.integrated_modules ? (
         <DvkIntegratedModules data={data.integrated_modules} />
       ) : null}
@@ -143,7 +155,7 @@ function DvkHeroMobile({ data, formConfig }: { data?: any; formConfig?: any }) {
   const ctaLabel = data?.cta_label || "Request Evaluation Kit";
   return (
     <section
-      className="relative -mt-[78px] h-[778px] w-full overflow-clip bg-black min-[1024px]:hidden"
+      className="relative -mt-[78px] h-[778px] w-full overflow-clip bg-black min-[600px]:hidden"
       aria-label="Cranium Evaluation Kit"
       data-node-id="4059:10006"
       data-name="Banner"
@@ -200,7 +212,7 @@ function DvkHeroMobile({ data, formConfig }: { data?: any; formConfig?: any }) {
           </h1>
         </div>
         <p
-          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
           data-node-id="4059:10014"
         >
           {subtitle}
@@ -347,7 +359,7 @@ function DvkDemosMobile({ data }: { data?: any }) {
       : DEMO_CARDS;
   return (
     <section
-      className="relative w-full overflow-clip bg-black min-[1024px]:hidden"
+      className="relative w-full overflow-clip bg-black min-[600px]:hidden"
       aria-label="Pre-loaded demos"
       data-node-id="4059:10124"
       data-name="3rd Fold"
@@ -380,7 +392,7 @@ function DvkDemosMobile({ data }: { data?: any }) {
             </h2>
           </div>
           <p
-            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
             data-node-id="4059:10221"
           >
             {subtitle}
@@ -432,7 +444,7 @@ function DvkDemosMobile({ data }: { data?: any }) {
                       <p className="m-0 leading-[28px]">{card.titleLine2}</p>
                     </h3>
                     <p
-                      className={`${interRegular.className} m-0 w-[296.417px] max-w-full text-[14px] leading-[21.3px] font-normal text-[#99a1af] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+                      className={`${interRegular.className} m-0 w-[296.417px] max-w-full text-[14px] leading-[21.3px] font-normal text-[#99a1af] not-italic [word-break:break-word]`}
                     >
                       {card.desc}
                     </p>
@@ -483,7 +495,7 @@ function DvkPhoneCardMobile({ data }: { data?: any }) {
             {card.title}
           </h3>
           <p
-            className={`${interRegular.className} m-0 w-[296.417px] max-w-full text-[14px] leading-[21.3px] font-normal text-[#99a1af] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} m-0 w-[296.417px] max-w-full text-[14px] leading-[21.3px] font-normal text-[#99a1af] not-italic [word-break:break-word]`}
           >
             Pair the Cranium kit with the ApplicationForge app over Bluetooth,
             push any demo to the board, and watch results live — including the
@@ -573,7 +585,7 @@ function DvkModelForgeMobile({ data }: { data?: any }) {
 
   return (
     <section
-      className="relative w-full overflow-clip bg-black min-[1024px]:hidden"
+      className="relative w-full overflow-clip bg-black min-[600px]:hidden"
       aria-label="Powered by ModelForge"
       data-node-id="4062:10817"
       data-name="4th Fold"
@@ -622,7 +634,7 @@ function DvkModelForgeMobile({ data }: { data?: any }) {
             </h2>
           </div>
           <p
-            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
             data-node-id="4062:10914"
           >
             {subtitle}
@@ -733,7 +745,7 @@ function MobileModelCard({
           {title}
         </p>
         <p
-          className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
         >
           {description}
         </p>
@@ -938,7 +950,7 @@ function MobileForgeTag({
       data-name="Article"
     >
       <p
-        className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-white not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+        className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-white not-italic`}
       >
         {label}
       </p>

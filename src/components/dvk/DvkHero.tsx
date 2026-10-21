@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useState } from "react";
 import { gilroyMedium, interRegular } from "../hero/fonts";
@@ -198,7 +199,7 @@ export function DvkHero({ data, formConfig }: { data?: any; formConfig?: any }) 
           data-name="Sub"
         >
           <p
-            className={`${interRegular.className} w-[554px] text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[554px] text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
             data-node-id="2761:2986"
           >
             {subtitle}

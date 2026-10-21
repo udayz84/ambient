@@ -212,7 +212,7 @@ export function ContactForm({ data }: { data?: any }) {
           </div>
         </div>
         <p
-          className={`${interRegular.className} w-[458px] shrink-0 text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} w-[458px] shrink-0 text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           data-node-id="2379:8503"
         >
           {subtitle}
@@ -225,7 +225,7 @@ export function ContactForm({ data }: { data?: any }) {
         data-name="Left Section"
       >
         <p
-          className={`${interRegular.className} absolute top-0 left-0 w-[550px] text-[18px] leading-[27px] font-normal text-white opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} absolute top-0 left-0 w-[550px] text-[16px] leading-[24px] font-normal text-white opacity-65 not-italic [word-break:break-word]`}
           data-node-id="2379:8505"
         >
           {subtitle}
@@ -314,7 +314,7 @@ export function ContactForm({ data }: { data?: any }) {
             ) : null}
           </span>
           <span
-            className={`${interRegular.className} text-[14px] leading-[21px] font-normal whitespace-nowrap text-white not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} text-[16px] leading-[24px] font-normal whitespace-nowrap text-white not-italic`}
             data-node-id="2379:8564"
           >
             {checkboxLabel}
@@ -487,7 +487,7 @@ function FormField({
   onChange?: (value: string) => void;
 }) {
   const fieldId = `field-${nodeId.replace(/:/g, "-")}`;
-  const inputClassName = `${interRegular.className} w-full border-0 bg-transparent p-0 text-[14px] leading-[21px] font-normal text-white not-italic placeholder:text-[#4a4a4a] outline-none min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`;
+  const inputClassName = `${interRegular.className} w-full border-0 bg-transparent p-0 text-[16px] leading-[24px] font-normal text-white not-italic placeholder:text-[#4a4a4a] outline-none`;
   return (
     <div
       className="absolute flex flex-col gap-[5px]"

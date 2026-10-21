@@ -36,6 +36,8 @@ import { DeveloperStartBuilding } from "@/components/developer/DeveloperStartBui
 // StartBuilding card flows after it, not under it.
 const CANVAS_HEIGHT = 6631;
 
+import { TabletScaleInit } from "@/components/shared/TabletScaleInit";
+
 export default async function DeveloperPage() {
   let data: any = null;
   try {
@@ -57,8 +59,9 @@ export default async function DeveloperPage() {
 
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
-      {/* DESKTOP (>=1024px) — ScaledCanvas with exact Figma coordinates */}
-      <div className="hidden min-[1024px]:block">
+      <TabletScaleInit />
+      {/* DESKTOP (>=600px) — ScaledCanvas with exact Figma coordinates */}
+      <div className="hidden min-[600px]:block">
         <div className="-mt-[78px]">
           <ScaledCanvas width={1440} height={CANVAS_HEIGHT}>
             {data?.hero ? <DeveloperHero data={data.hero} briefForm={data?.brief_form ?? null} /> : null}
@@ -85,8 +88,8 @@ export default async function DeveloperPage() {
         </div>
       </div>
 
-      {/* MOBILE (<1024px) — responsive stacked layout */}
-      <div className="block min-[1024px]:hidden">
+      {/* MOBILE (<600px) — responsive stacked layout */}
+      <div className="block min-[600px]:hidden">
         <DeveloperMobile data={data} />
       </div>
 

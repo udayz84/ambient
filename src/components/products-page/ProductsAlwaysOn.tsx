@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -7,6 +8,7 @@ import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interBold, interRegular, interSemiBold } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { Corners } from "../shared/Corners";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 /**
  * "Always on. Never asleep." section — Figma 3708:462 (1440×833).
@@ -214,7 +216,7 @@ function StatCard({
         {sub}
       </p>
       <p
-        className={`${interRegular.className} [word-break:break-word] absolute font-normal leading-[24px] left-[53.69px] not-italic text-[14px] text-white top-[166.76px] uppercase whitespace-nowrap min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+        className={`${interRegular.className} [word-break:break-word] absolute font-normal leading-[24px] left-[53.69px] not-italic text-[16px] text-white top-[166.76px] uppercase whitespace-nowrap`}
       >
         {footerLabel}
       </p>
@@ -447,7 +449,7 @@ function MobileStatCard({
         {sub}
       </p>
       <p
-        className={`${interRegular.className} [word-break:break-word] absolute font-normal left-[43.69px] leading-[24px] not-italic text-[14px] text-white top-[127.76px] uppercase whitespace-nowrap min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+        className={`${interRegular.className} [word-break:break-word] absolute font-normal left-[43.69px] leading-[24px] not-italic text-[16px] text-white top-[127.76px] uppercase whitespace-nowrap`}
       >
         {footerLabel}
       </p>
@@ -540,7 +542,7 @@ function SectionTitle({ heading, subtitle }: { heading: string; subtitle: string
         <FrameCorners leftSrc={CORNER_58} rightSrc={CORNER_55} />
       </div>
       <p
-        className={`${interRegular.className} [word-break:break-word] font-normal leading-[21px] not-italic relative shrink-0 text-[14px] text-[#f0f0f0] text-center w-[540px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+        className={`${interRegular.className} [word-break:break-word] font-normal leading-[24px] not-italic relative shrink-0 text-[16px] text-[#f0f0f0] text-center w-[540px]`}
       >
         {subtitle}
       </p>
@@ -565,13 +567,13 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
 
   return (
     <>
-      {/* DESKTOP (>=1024px) — Figma 3708:462, 1440×833 */}
+      {/* DESKTOP (>=600px) — Figma 3708:462, 1440×833 */}
       <section
-        className="relative mx-auto hidden w-full bg-black min-[1024px]:block overflow-hidden"
+        className="relative mx-auto hidden w-full justify-center bg-black min-[600px]:flex overflow-hidden"
         aria-label="Always on"
       >
-        <div
-          className="bg-black h-[833px] relative mx-auto w-[1440px]"
+        <TabletScaleCanvas
+          className="bg-black h-[833px] relative w-[1440px] shrink-0"
           data-node-id="3708:462"
         >
           {/* Chip visual — subconscious (baseline) render, always underneath.
@@ -588,7 +590,7 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
           />
           {/* Chip visual — surge render, fades smoothly over the baseline */}
           <div
-            className="-translate-x-1/2 absolute h-[832.553px] left-1/2 top-0 w-[1450px] max-w-[120vw] transition-opacity duration-[800ms] ease-in-out will-change-[opacity]"
+            className="-translate-x-1/2 absolute h-[832.553px] left-1/2 top-0 w-[1450px] transition-opacity duration-[800ms] ease-in-out will-change-[opacity]"
             style={{ opacity: surge ? 1 : 0 }}
             data-name="ChatGPT Image Jul 2, 2026, 12_54_47 PM 2"
             aria-hidden={!surge}
@@ -659,12 +661,12 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
           {/* ON chips */}
           <OnChip label="AI CORE" width={144} icon="ai" className="absolute left-[552px] top-[207.55px]" aiCoreSrc={aiCoreIcon} hostCpuSrc={hostCpuImg} />
           <OnChip label={`HOST  CPU`} width={157} icon="cpu" active={surge} className="absolute left-[715px] top-[207.55px]" aiCoreSrc={aiCoreIcon} hostCpuSrc={hostCpuImg} />
-        </div>
+        </TabletScaleCanvas>
       </section>
 
-      {/* MOBILE (<1024px) — Figma 3565:3127 (393×1050) */}
+      {/* MOBILE (<600px) — Figma 3565:3127 (393×1050) */}
       <section
-        className="relative w-full overflow-hidden bg-black min-[1024px]:hidden"
+        className="relative w-full overflow-hidden bg-black min-[600px]:hidden"
         aria-label="Always on"
       >
         <div className="relative mx-auto h-[1050px] w-[393px]" data-node-id="3565:3127">
@@ -697,7 +699,7 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
               </div>
             </div>
             <p
-              className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+              className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
               data-node-id="3565:3136"
             >
               {subtitle}

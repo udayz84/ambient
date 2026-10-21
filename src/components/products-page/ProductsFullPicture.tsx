@@ -1,10 +1,13 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
 
 import { Fragment } from "react";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { useFitText } from "../shared/FitText";
 import { Corners } from "../shared/Corners";
 import { mediaUrl } from "@/lib/strapi";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 import { dmMono, gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 
 /**
@@ -402,7 +405,7 @@ function MenuChip({ label }: { label: string }) {
     >
       <Corners leftSrc="/hero/vector-57.svg" rightSrc="/hero/vector-55.svg" />
       <p
-        className="[text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] leading-[20.149px] not-italic relative shrink-0 text-[#ecfae5] text-[13.433px] tracking-[-0.403px] uppercase whitespace-nowrap min-[1024px]:text-[16px] min-[1024px]:leading-[24px]"
+        className="[text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] leading-[24px] not-italic relative shrink-0 text-[#ecfae5] text-[16px] tracking-[-0.403px] uppercase whitespace-nowrap"
         data-node-id="3710:1911"
       >
         {label}
@@ -561,7 +564,7 @@ function SpecCardView({ card }: { card: RenderCard }) {
       {card.items.map((it, i) => (
         <Fragment key={i}>
           <p
-            className={`${interRegular.className} [word-break:break-word] absolute font-normal leading-[1.2] not-italic text-[14px] text-black tracking-[-0.1504px] min-[1024px]:text-[16px] min-[1024px]:leading-[1.2] pr-[15px]`}
+            className={`${interRegular.className} [word-break:break-word] absolute font-normal leading-[1.2] not-italic text-[16px] text-black tracking-[-0.1504px] pr-[15px]`}
             style={{
               left: it.left ?? card.itemsLeft,
               top: it.top,
@@ -571,7 +574,7 @@ function SpecCardView({ card }: { card: RenderCard }) {
             {it.text}
           </p>
           <p
-            className={`${interRegular.className} [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] absolute font-normal leading-[normal] not-italic text-[14px] tracking-[-0.1504px] whitespace-nowrap min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] absolute font-normal leading-[24px] not-italic text-[16px] tracking-[-0.1504px] whitespace-nowrap`}
             style={{ left: it.plusLeft ?? card.plusLeft, top: it.plusTop, color: card.plusColor }}
           >
             +
@@ -717,13 +720,13 @@ export function ProductsFullPicture({ data }: { data?: any }) {
 
   return (
     <>
-      {/* DESKTOP (>=1024px) — 3309:2368 "Desktop - 16" (1440×930) */}
+      {/* DESKTOP (>=600px) — 3309:2368 "Desktop - 16" (1440×930) */}
       <section
-        className="relative flex w-full justify-center bg-black overflow-hidden"
+        className="relative hidden w-full justify-center bg-black overflow-hidden min-[600px]:flex"
         aria-label="The full picture"
       >
-        <div
-          className="relative hidden h-[930px] w-full max-w-[1440px] min-[1024px]:block"
+        <TabletScaleCanvas
+          className="relative hidden h-[930px] w-[1440px] shrink-0 min-[600px]:block"
           data-node-id="3309:2368"
           data-name="Desktop - 16"
         >
@@ -798,12 +801,12 @@ export function ProductsFullPicture({ data }: { data?: any }) {
               ))}
             </div>
           </div>
-        </div>
+        </TabletScaleCanvas>
       </section>
 
-      {/* MOBILE (<1024px) */}
+      {/* MOBILE (<600px) */}
       <section
-        className="relative w-full overflow-hidden bg-black px-[24px] pt-[40px] pb-[40px] min-[1024px]:hidden"
+        className="relative w-full overflow-hidden bg-black px-[24px] pt-[40px] pb-[40px] min-[600px]:hidden"
         aria-label="The full picture"
       >
         <div className="flex flex-col items-center gap-[20px]">
@@ -866,7 +869,7 @@ function SpecCardMobileView({ card: c }: { card: RenderCard }) {
         {c.items.map((it, i) => (
           <p
             key={i}
-            className={`${interRegular.className} text-[14px] font-normal leading-[normal] tracking-[-0.1504px] text-black not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} text-[14px] font-normal leading-[normal] tracking-[-0.1504px] text-black not-italic`}
           >
             <span className="mr-[6px]" style={{ color: c.plusColor }}>
               +

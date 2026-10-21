@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import {
@@ -191,13 +192,13 @@ function DemoCardItem({ card }: { card: DemoCard }) {
       <div className="relative flex h-[367px] w-full flex-col items-start justify-end">
         <div className="flex flex-col gap-[12px]">
           <div
-            className={`${gilroyMedium.className} w-full shrink-0 text-[24px] xl:text-[32px] leading-[1.2] text-white not-italic whitespace-pre-wrap`}
+            className={`${gilroyMedium.className} w-full shrink-0 text-[32px] leading-[38px] text-white not-italic whitespace-pre-wrap`}
           >
             <p className="mb-0 leading-[38px] [word-break:break-word]">{`${card.titleLine1} `}</p>
             <p className="leading-[38px] [word-break:break-word]">{card.titleLine2}</p>
           </div>
           <p
-            className={`${interRegular.className} w-full max-w-[334px] shrink-0 text-[14px] xl:text-[16px] leading-[24px] font-normal text-[#99a1af] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-full max-w-[334px] shrink-0 text-[16px] leading-[24px] font-normal text-[#99a1af] not-italic [word-break:break-word]`}
           >
             {card.desc}
           </p>

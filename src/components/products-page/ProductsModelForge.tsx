@@ -1,4 +1,6 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
 
 import Link from "next/link";
 import { mediaUrl } from "@/lib/strapi";
@@ -9,6 +11,7 @@ import { TagBadge } from "../hero/TagBadge";
 import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 import { useState } from "react";
 import {
   CORNER_LEFT,
@@ -130,20 +133,22 @@ export function ProductsModelForge({ data }: { data?: any }) {
 
   return (
     <>
-      {/* DESKTOP (>=1024px) */}
+      {/* DESKTOP (>=600px) */}
       <section
-        className="relative mx-auto hidden w-full bg-black min-[1024px]:block"
+        className="relative mx-auto hidden w-full justify-center bg-black min-[600px]:flex"
         aria-label="ModelForge workflow"
       >
-        <ProductsModelForgeDesktop
-          heading={heading}
-          subtitle={subtitle}
-          steps={steps}
-          primary={primary}
-          secondary={secondary}
-          subfeatures={subfeatures}
-          onSecondaryClick={() => setIsModalOpen(true)}
-        />
+        <TabletScaleCanvas className="relative hidden w-[1440px] shrink-0 min-[600px]:block">
+          <ProductsModelForgeDesktop
+            heading={heading}
+            subtitle={subtitle}
+            steps={steps}
+            primary={primary}
+            secondary={secondary}
+            subfeatures={subfeatures}
+            onSecondaryClick={() => setIsModalOpen(true)}
+          />
+        </TabletScaleCanvas>
       </section>
 
       {/* MOBILE (<1024px) */}
@@ -216,7 +221,7 @@ function ProductsModelForgeDesktop({
           </h2>
         </div>
         <p
-          className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} w-[650px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           data-node-id="2917:1340"
         >
           {subtitle}
@@ -251,7 +256,7 @@ function ProductsModelForgeDesktop({
             <div className="text-[#d4e9bc] mb-[16px]">
               {feat.icon}
             </div>
-            <p className={`${interRegular.className} text-[14px] leading-[21px] text-[#f0f0f0] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>{feat.text}</p>
+            <p className={`${interRegular.className} text-[16px] leading-[24px] text-[#f0f0f0]`}>{feat.text}</p>
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           </div>
         ))}
@@ -402,7 +407,7 @@ function ProductsModelForgeMobile({
   const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <section
-      className="relative w-full overflow-hidden bg-black min-[1024px]:hidden"
+      className="relative w-full overflow-hidden bg-black min-[600px]:hidden"
       aria-label="ModelForge workflow"
       data-node-id="3568:4778"
     >
@@ -437,7 +442,7 @@ function ProductsModelForgeMobile({
           </div>
           {/* Description */}
           <p
-            className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           >
             {subtitle}
           </p>
@@ -541,7 +546,7 @@ function MobileModelForgeCard({ step }: { step: any }) {
             {step.title}
           </h3>
           <p
-            className={`${interRegular.className} text-[14px] leading-[22px] font-normal tracking-[-0.3125px] text-[#99a1af] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} text-[14px] leading-[22px] font-normal tracking-[-0.3125px] text-[#99a1af] not-italic [word-break:break-word]`}
           >
             {step.description}
           </p>

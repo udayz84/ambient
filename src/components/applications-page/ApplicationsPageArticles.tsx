@@ -157,12 +157,12 @@ function ArticleCard({ article }: { article: Article }) {
       {/* News section */}
       <div className="flex w-full flex-col items-center gap-[10px] text-center">
         <p
-          className={`${gilroyMedium.className} w-full text-[20.211px] leading-[28.295px] tracking-[-0.4539px] text-white [word-break:break-word] min-[1024px]:text-[22px] min-[1024px]:leading-[28px]`}
+          className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] tracking-[-0.4539px] text-white [word-break:break-word]`}
         >
           {article.title}
         </p>
         <p
-          className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] [word-break:break-word]`}
         >
           {article.body}
         </p>

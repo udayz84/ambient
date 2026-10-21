@@ -1,4 +1,6 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
 
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useFitText } from "../shared/FitText";
@@ -9,6 +11,7 @@ import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
 import { TagBadge } from "../hero/TagBadge";
 import { ProductsScrollIndicator } from "./ProductsScrollIndicator";
 import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 import { useState } from "react";
 import {
   CORNER_LEFT,
@@ -18,8 +21,6 @@ import {
   PRIMARY_CTA_SHADOW,
   SECONDARY_CTA_BG,
 } from "./products-data";
-
-const HERO_DESKTOP_HEIGHT = 876;
 
 const FALLBACK_TITLE = "Full AI inference. \nOn a coin cell.";
 const FALLBACK_SUBTITLE =
@@ -50,48 +51,48 @@ export function ProductsHero({ data, evalkitForm }: { data?: any; evalkitForm?: 
 
   return (
     <>
-      {/* DESKTOP (>=1024px) — hero canvas, source of truth (Figma 2900:418) */}
+      {/* DESKTOP (>=600px) — hero canvas, source of truth (Figma 2900:418) */}
       <div
-        className="relative mx-auto -mt-[78px] hidden w-full overflow-x-clip bg-black min-[1024px]:block"
-        style={{ height: HERO_DESKTOP_HEIGHT }}
+        className="relative mx-auto -mt-[78px] hidden w-full justify-center overflow-x-clip bg-black min-[600px]:flex"
         data-node-id="2900:418"
         data-name="Hero Section"
         aria-label="Products"
       >
-        {chipsetImage ? (
-          <div className="pointer-events-none absolute inset-0 mx-auto w-full max-w-[1442px] overflow-hidden" aria-hidden>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt=""
-              src={chipsetImage}
-              className="absolute inset-0 size-full max-w-none object-cover"
+        <TabletScaleCanvas className="relative h-[876px] w-[1440px] shrink-0 min-[600px]:block">
+          {chipsetImage ? (
+            <div className="pointer-events-none absolute inset-0 size-full overflow-hidden" aria-hidden>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                alt=""
+                src={chipsetImage}
+                className="absolute inset-0 size-full max-w-none object-cover"
+              />
+            </div>
+          ) : null}
+          <div className="relative h-full w-[1440px]">
+            <ProductsHeroDesktop
+              titleLines={titleLines}
+              subtitle={subtitle}
+              primary={primary}
+              secondary={secondary}
+              strapiTags={strapiTags}
+              onCtaClick={(e) => {
+                e.preventDefault();
+                setIsModalOpen(true);
+              }}
             />
           </div>
-        ) : null}
-      <div
-        className="relative mx-auto h-full w-[1442px]">
-          <ProductsHeroDesktop
-            titleLines={titleLines}
-            subtitle={subtitle}
-            primary={primary}
-            secondary={secondary}
-            strapiTags={strapiTags}
-            onCtaClick={(e) => {
-              e.preventDefault();
-              setIsModalOpen(true);
+          {/* Blend the coin image's bright right edge into black on screens
+              wider than the 1442 canvas. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute top-0 right-0 hidden h-full w-[360px] min-[1442px]:block"
+            style={{
+              background:
+                "linear-gradient(270deg, rgba(0,0,0,0.7) 6%, rgba(0,0,0,0.55) 22%, rgba(0,0,0,0.25) 52%, rgba(0,0,0,0) 100%)",
             }}
           />
-        </div>
-        {/* Blend the coin image's bright right edge into black on screens
-            wider than the 1442 canvas. */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute top-0 right-0 hidden h-full w-[360px] min-[1442px]:block"
-          style={{
-            background:
-              "linear-gradient(270deg, rgba(0,0,0,0.7) 6%, rgba(0,0,0,0.55) 22%, rgba(0,0,0,0.25) 52%, rgba(0,0,0,0) 100%)",
-          }}
-        />
+        </TabletScaleCanvas>
       </div>
 
       {/* MOBILE (<1024px) — basic stacked layout */}
@@ -372,7 +373,7 @@ function ProductsHeroMobile({
   const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <section
-      className="relative -mt-[78px] w-full bg-black min-[1024px]:hidden"
+      className="relative -mt-[78px] w-full bg-black min-[600px]:hidden"
       aria-label="Products"
     >
       <div className="relative flex w-full flex-col pt-[120px] pb-[40px]">
@@ -444,7 +445,7 @@ function ProductsHeroMobile({
           </div>
 
           <p
-            className={`${interRegular.className} w-[332px] max-w-full text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 text-center min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[332px] max-w-full text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 text-center`}
           >
             {subtitle}
           </p>

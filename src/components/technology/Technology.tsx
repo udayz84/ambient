@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TagBadge } from "../hero/TagBadge";
 import { TechnologyFeatures } from "./TechnologyFeatures";
 import { TechnologyHeadline } from "./TechnologyHeadline";
@@ -5,19 +6,21 @@ import { TechnologyMobile } from "./TechnologyMobile";
 import { TechnologyVisual, TechnologyVisualBackground } from "./TechnologyVisual";
 import { TechnologyCta } from "./TechnologyCta";
 
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
+
 export function Technology({ data }: { data?: any }) {
   const tagText = data?.tag?.text || "";
   return (
     <section
-      className="relative left-1/2 h-auto min-[1024px]:h-[1048px] w-screen max-w-none -translate-x-1/2 overflow-hidden bg-black min-[1024px]:mt-[120px] mt-[60px] min-[1024px]:mb-[40px] mb-[20px]"
+      className="relative left-1/2 w-screen max-w-none -translate-x-1/2 overflow-hidden bg-black mt-[60px] min-[600px]:mt-[120px] mb-[20px] min-[600px]:mb-[40px]"
       data-node-id="2388:317"
       aria-label="Technology"
     >
-      <div className="hidden min-[1024px]:block">
+      <div className="hidden min-[600px]:block">
         <TechnologyVisualBackground data={data} />
       </div>
 
-      <div className="relative mx-auto hidden h-full w-full max-w-[1441px] min-[1024px]:block">
+      <TabletScaleCanvas className="relative mx-auto hidden h-[1048px] w-[1440px] shrink-0 min-[600px]:block">
         <TechnologyVisual data={data} />
 
         <div
@@ -38,10 +41,10 @@ export function Technology({ data }: { data?: any }) {
         <TechnologyFeatures data={data} />
 
         <TechnologyCta data={data} />
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE & SMALL TABLET (<1024px) — dedicated layout, desktop is untouched above */}
-      <div className="relative w-full min-[1024px]:hidden">
+      {/* MOBILE (<600px) */}
+      <div className="relative w-full min-[600px]:hidden">
         <TechnologyMobile data={data} />
       </div>
     </section>

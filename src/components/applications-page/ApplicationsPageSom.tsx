@@ -97,12 +97,12 @@ function SomLabel({ value, label, sublabel }: { value: string; label: string; su
   return (
     <div className="flex flex-col items-center justify-center gap-[12px] text-center">
       <p
-        className={`${gilroyMedium.className} max-w-full text-[36px] min-[1024px]:text-[38px] leading-[45.386px] min-[1024px]:leading-[47px] font-medium text-white not-italic overflow-hidden`}
+        className={`${gilroyMedium.className} max-w-full text-[36px] min-[600px]:text-[38px] leading-[45.386px] min-[600px]:leading-[47px] font-medium text-white not-italic overflow-hidden`}
       >
         {value}
       </p>
       <p
-        className={`${interRegular.className} max-w-full text-[18px] leading-[26.073px] font-normal uppercase text-[#f0f0f0] not-italic overflow-hidden min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+        className={`${interRegular.className} max-w-full text-[18px] leading-[26.073px] font-normal uppercase text-[#f0f0f0] not-italic overflow-hidden min-[600px]:text-[16px] min-[600px]:leading-[24px]`}
       >
         {label}
       </p>
@@ -112,12 +112,12 @@ function SomLabel({ value, label, sublabel }: { value: string; label: string; su
             alt=""
             aria-hidden
             src="/applications/som-line.svg"
-            className="block h-[1px] w-[185.209px] min-[1024px]:w-[191.796px] max-w-none"
+            className="block h-[1px] w-[185.209px] min-[600px]:w-[191.796px] max-w-none"
           />
         </div>
       </div>
       <p
-        className={`${interRegular.className} max-w-[280px] min-[1024px]:max-w-[320px] text-[16px] leading-[23.176px] min-[1024px]:leading-[24px] font-normal tracking-[-0.3018px] min-[1024px]:tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic min-[1024px]:min-h-[48px] flex items-center`}
+        className={`${interRegular.className} max-w-[280px] min-[600px]:max-w-[320px] text-[16px] leading-[23.176px] min-[600px]:leading-[24px] font-normal tracking-[-0.3018px] min-[600px]:tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic min-[600px]:min-h-[48px] flex items-center`}
       >
         {sublabel}
       </p>
@@ -129,15 +129,15 @@ function ViewSomsCta({ label, href }: { label: string; href: string }) {
   return (
     <a
       href={href}
-      className="relative flex h-[48px] flex-1 min-[1024px]:w-[240px] min-[1024px]:shrink-0 items-center justify-center gap-[9px] min-[1024px]:gap-[10px] px-[20px] py-[10px] drop-shadow-[0px_42px_53.5px_rgba(69,196,24,0.2)]"
+      className="relative flex h-[48px] flex-1 min-[600px]:w-[240px] min-[600px]:shrink-0 items-center justify-center gap-[9px] min-[600px]:gap-[10px] px-[20px] py-[10px] drop-shadow-[0px_42px_53.5px_rgba(69,196,24,0.2)]"
     >
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
       />
-      <span className="relative flex items-center gap-[9px] min-[1024px]:gap-[10px]">
+      <span className="relative flex items-center gap-[9px] min-[600px]:gap-[10px]">
         <p
-          className={`${gilroyMedium.className} max-w-full text-[12px] min-[1024px]:text-[16px] leading-[16px] min-[1024px]:leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis`}
+          className={`${gilroyMedium.className} max-w-full text-[12px] min-[600px]:text-[16px] leading-[16px] min-[600px]:leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis`}
         >
           {label}
         </p>
@@ -155,10 +155,10 @@ function DiscussCta({ label, href }: { label: string; href: string }) {
   return (
     <a
       href={href}
-      className="relative flex h-[48px] flex-1 min-[1024px]:h-auto min-[1024px]:shrink-0 items-center justify-center bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]"
+      className="relative flex h-[48px] flex-1 min-[600px]:h-auto min-[600px]:shrink-0 items-center justify-center bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]"
     >
       <p
-        className={`${gilroyMedium.className} max-w-full text-[12px] min-[1024px]:text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis`}
+        className={`${gilroyMedium.className} max-w-full text-[12px] min-[600px]:text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis`}
       >
         {label}
       </p>
@@ -169,10 +169,10 @@ function DiscussCta({ label, href }: { label: string; href: string }) {
 
 function SomCard({ visual, isUpcoming, statusPill, value, label, sublabel, ctaLabel, ctaHref }: { visual: React.ReactNode; isUpcoming?: boolean; statusPill: string; value: string; label: string; sublabel: string; ctaLabel: string; ctaHref: string }) {
   return (
-    <div className="flex w-[355px] min-[1024px]:w-[450px] shrink-0 flex-col items-center gap-[16px] min-[1024px]:gap-[32px]">
-      <div className="flex h-[290px] min-[1024px]:h-[320px] w-full min-[1024px]:px-[30px] items-center justify-center">
+    <div className="flex w-[355px] min-[600px]:w-[450px] shrink-0 flex-col items-center gap-[16px] min-[600px]:gap-[32px]">
+      <div className="flex h-[290px] min-[600px]:h-[320px] w-full min-[600px]:px-[30px] items-center justify-center">
         <div
-          className={`relative flex items-center justify-center overflow-clip transition-transform ${isUpcoming ? 'h-[260px] w-full min-[1024px]:w-[80%] scale-100 min-[1024px]:scale-95' : 'h-[320px] w-full'}`}
+          className={`relative flex items-center justify-center overflow-clip transition-transform ${isUpcoming ? 'h-[260px] w-full min-[600px]:w-[80%] scale-100 min-[600px]:scale-95' : 'h-[320px] w-full'}`}
         >
           {visual}
           {isUpcoming && (
@@ -264,7 +264,7 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
             <Corners />
           </div>
           <p
-            className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[800px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
             data-node-id="2438:4157"
           >
             {subtitle}
@@ -356,7 +356,7 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
 
           {/* Subtitle */}
           <p
-            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
           >
             {subtitle}
           </p>

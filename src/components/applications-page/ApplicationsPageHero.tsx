@@ -115,7 +115,7 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
 
         {/* Subtitle */}
         <p
-          className={`${interRegular.className} absolute top-[683px] left-1/2 w-[554px] -translate-x-1/2 text-center text-[18px] leading-[27px] font-normal text-[#bbb] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} absolute top-[683px] left-1/2 w-[554px] -translate-x-1/2 text-center text-[16px] leading-[24px] font-normal text-[#bbb] not-italic [word-break:break-word]`}
           data-node-id="2438:3903"
         >
           {subtitle}
@@ -234,7 +234,7 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
 
           {/* Subtitle */}
           <p
-            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
             data-node-id="4032:5736"
           >
             {subtitle}

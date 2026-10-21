@@ -12,6 +12,7 @@ import {
   getApplicationPages,
   type ApplicationPageSummary,
 } from "@/lib/strapi";
+import { TabletScaleInit } from "@/components/shared/TabletScaleInit";
 import "./globals.css";
 
 export const dynamic = "force-dynamic";
@@ -68,6 +69,7 @@ export default async function RootLayout({
       data-scroll-behavior="smooth"
     >
       <body className="flex min-h-full flex-col overflow-x-clip bg-black">
+        <TabletScaleInit />
         <SmoothScroll>
           <Navbar
             data={navbar?.header}

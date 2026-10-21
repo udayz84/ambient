@@ -210,7 +210,7 @@ export function TechnologyPageGraph({
 
         {/* chip/device renders above the labels */}
         {TOP_IMAGES.map((img, i) => {
-          const src = labels[i]?.topImageSrc;
+          const src = labels[i]?.topImageSrc || img.src;
           if (!src) return null;
           return (
             <div
@@ -286,7 +286,7 @@ export function TechnologyPageGraph({
 
         {/* glowing cubes above the baseline */}
         {CUBES.map((img, i) => {
-          const src = labels[i]?.bottomImageSrc;
+          const src = labels[i]?.bottomImageSrc || img.src;
           if (!src) return null;
           return (
             <div

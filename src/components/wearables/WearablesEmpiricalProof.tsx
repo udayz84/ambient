@@ -661,7 +661,7 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
             </div>
             {!isWearablesOnly && (
               <p
-                className={`${interRegular.className} text-center text-[14px] leading-[22px] text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] w-[650px]`}
+                className={`${interRegular.className} text-center text-[16px] leading-[24px] text-[#f0f0f0] not-italic [word-break:break-word] w-[650px]`}
               >
                 {subtitle}
               </p>
@@ -753,7 +753,7 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
           </div>
           {!isWearablesOnly && (
             <p
-              className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+              className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic`}
             >
               {subtitle}
             </p>

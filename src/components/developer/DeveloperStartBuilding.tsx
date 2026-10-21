@@ -24,10 +24,10 @@ export function DeveloperStartBuilding() {
 
   return (
     <section
-      className="relative z-20 flex w-full justify-center bg-transparent px-[24px] pt-[80px] pb-0 mb-[-700px] min-[1024px]:mb-[-400px] min-[1024px]:px-0"
+      className="relative z-20 flex w-full justify-center bg-transparent px-[24px] pt-[80px] pb-0 mb-[-700px] min-[600px]:[margin-bottom:calc(-400px*var(--tablet-zoom,1))] min-[600px]:px-0"
       aria-label={HEADING}
     >
-      <div className="relative flex w-full max-w-[558px] flex-col items-center justify-center px-[54px] py-[40px] min-[1024px]:h-[320px] min-[1024px]:pb-[64px]">
+      <div className="relative flex w-full max-w-[558px] flex-col items-center justify-center px-[54px] py-[40px] min-[600px]:h-[320px] min-[600px]:pb-[64px]">
         {/* Card background shape — same asset as products StartBuilding cards */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img

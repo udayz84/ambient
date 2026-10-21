@@ -11,6 +11,8 @@ import { mediaUrl } from "@/lib/strapi";
 import fallbackImg from "@/../public/model-zoo/phone-mockup-new.png";
 import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
+
 const TITLE_GRADIENT = sectionTitleGradient(111.766);
 
 /** Figma 5241:5752…5751 — dimmed preview list buttons (84px, opacity 20). */
@@ -83,10 +85,64 @@ export function StoreBadges({
   );
 }
 
+function ForgeVideo({ className }: { className?: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      video.pause();
+      return;
+    }
+    const tryPlay = () => { video.play().catch(() => {}); };
+    tryPlay();
+    video.addEventListener("loadeddata", tryPlay);
+    video.addEventListener("canplay", tryPlay);
+    let tries = 0;
+    const retryTimer = setInterval(() => {
+      if (!video.paused || ++tries > 10) {
+        clearInterval(retryTimer);
+        return;
+      }
+      tryPlay();
+    }, 1000);
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((en) => en.isIntersecting)) tryPlay();
+    });
+    io.observe(video);
+    return () => {
+      clearInterval(retryTimer);
+      io.disconnect();
+      video.removeEventListener("loadeddata", tryPlay);
+      video.removeEventListener("canplay", tryPlay);
+    };
+  }, []);
+
+  return (
+    <video
+      ref={videoRef}
+      className={className || "pointer-events-none absolute inset-0 size-full object-contain"}
+      poster="/videos/electronica-tv-01-v03-poster.jpg"
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="auto"
+      onLoadedMetadata={(e) => {
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          e.currentTarget.play().catch(() => {});
+        }
+      }}
+    >
+      <source src="/videos/electronica-tv-01-v03.webm" type="video/webm" />
+      <source src="/videos/electronica-tv-01-v03.mp4" type="video/mp4" />
+    </video>
+  );
+}
+
 /**
  * Figma 5131:10421 — "Your eval kit, controlled from your phone." section
- * (1440×1433 canvas; 1192.5-wide content at x=124). The two off-canvas
- * "footer" frames at x≈1477 in Figma are ignored (invisible).
+ * (1440×1433 canvas; 1192.5-wide content at x=124).
  */
 export function ModelZooAppForge({
   data,
@@ -118,47 +174,6 @@ export function ModelZooAppForge({
   const { fadeRef: articleRef, isVisible: articleVisible } = useFadeIn<HTMLDivElement>();
   const { fadeRef: forgeRef, isVisible: forgeVisible } = useFadeIn<HTMLDivElement>();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const videoRef = useRef<HTMLVideoElement>(null);
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    // prefers-reduced-motion: keep the Article panel's ambient video paused
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      video.pause();
-      return;
-    }
-    // WebKit/Safari: play() before the <source> settles can stall silently;
-    // retry on immediate call and on every readiness event until it starts.
-    const tryPlay = () => { video.play().catch(() => {}); };
-    tryPlay();
-    video.addEventListener("loadeddata", tryPlay);
-    video.addEventListener("canplay", tryPlay);
-    // WebKit can reject every early play() (autoplay policy / readiness
-    // timing) while a later call succeeds — keep retrying briefly until
-    // playback actually starts. Capped so hard-blocked autoplay (e.g. Low
-    // Power Mode) doesn't retry forever.
-    let tries = 0;
-    const retryTimer = setInterval(() => {
-      if (!video.paused || ++tries > 10) {
-        clearInterval(retryTimer);
-        return;
-      }
-      tryPlay();
-    }, 1000);
-    // The retry window can expire before the user scrolls down to this
-    // below-the-fold section — play again whenever it becomes visible.
-    const io = new IntersectionObserver((entries) => {
-      if (entries.some((en) => en.isIntersecting)) tryPlay();
-    });
-    io.observe(video);
-    return () => {
-      clearInterval(retryTimer);
-      io.disconnect();
-      video.removeEventListener("loadeddata", tryPlay);
-      video.removeEventListener("canplay", tryPlay);
-    };
-  }, []);
 
   const renderCtaButtons = () => {
     if (ctas) {
@@ -233,37 +248,15 @@ export function ModelZooAppForge({
         <img src={STEP_ARTICLE.flash} alt="" loading="eager" />
         <link rel="preload prefetch" as="video" href="/model-zoo/af-results.mp4" />
         <link rel="preload" as="image" href="/videos/electronica-tv-01-v03-poster.jpg" />
-        </div>
-      {/* Figma 5131:10576 — full-bleed ambient glow strip behind the showcase
-          and the wide article card (top 519, h 552 in the 1440 canvas). */}
-      <img
-        alt=""
-        src="/model-zoo/af-bg-1.webp"
-        aria-hidden
-        className="pointer-events-none absolute top-[519px] left-0 hidden h-[552px] w-full object-cover min-[1024px]:block"
-        loading="lazy"
-        decoding="async"
-      />
-      {/* Figma 5131:10575 — second glow strip, butted against the first
-          (top 1071 = 519 + 552) so the light runs continuously down through
-          the article card, CTA and into the next section (Steps paints no
-          background of its own there, so this shows through). */}
-      {!hideArticleCard && (
-        <img
-          alt=""
-          src="/model-zoo/af-bg-2.webp"
-          aria-hidden
-          className="pointer-events-none absolute top-[1071px] left-0 hidden h-[553px] w-full object-cover min-[1024px]:block"
-          loading="lazy"
-          decoding="async"
-        />
-      )}
-      <div className={`relative mx-auto w-full max-w-[1192.5px] px-[16px] min-[1024px]:px-0 ${storeButtonsUnderSteps ? "pb-[64px]" : ""}`}>
-        {/* Header — 5131:10258 (title + sub, gap 24) */}
+      </div>
+
+      {/* MOBILE (<600px) */}
+      <div className={`relative mx-auto flex w-full flex-col items-center px-[16px] min-[600px]:hidden ${storeButtonsUnderSteps ? "pb-[64px]" : ""}`}>
+        {/* Header */}
         <div className="flex w-full flex-col items-center gap-[24px] pt-[49px]" data-node-id="5131:10258">
           <div className="relative px-[10px]" data-node-id="5131:10260" data-name="Title">
             <h2
-              className={`${gilroyMedium.className} w-full max-w-[605px] bg-clip-text text-center text-[36px] leading-[36px] min-[1024px]:text-[46px] min-[1024px]:leading-[49px] font-medium text-transparent not-italic`}
+              className={`${gilroyMedium.className} w-full max-w-[605px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic`}
               style={{ backgroundImage: TITLE_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
               data-node-id="5131:10261"
             >
@@ -271,51 +264,21 @@ export function ModelZooAppForge({
             </h2>
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           </div>
-          <p className={`${interRegular.className} w-full max-w-[679.389px] text-center text-[14px] leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
+          <p className={`${interRegular.className} w-full max-w-[679.389px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
             {subheading}
           </p>
         </div>
 
-        {/* Application Forge showcase — 5241:5967 (gap 24, h 578).
-            Entrance: the row fades in on scroll, inner elements stagger. */}
-        <div
-          ref={forgeRef}
-          className={`mt-[24px] flex flex-col items-stretch gap-[24px] min-[1024px]:mt-[48px] min-[1024px]:min-h-[578px] min-[1024px]:h-auto min-[1024px]:flex-row min-[1024px]:items-center ${getFadeInClass(forgeVisible)}`}
-          data-node-id="5241:5967"
-        >
-          {/* Left canvas card — 5241:5677 */}
-          <div className="flex h-[320px] w-full shrink-0 items-stretch justify-center min-[1024px]:h-[578px] min-[1024px]:w-[590.509px]">
-            <div
-              className={`relative h-full w-full overflow-clip rounded-[12px] min-[1024px]:rounded-none transition-colors duration-300 ${forgeVisible ? "motion-safe:animate-hero-text-fade-in" : "opacity-0"}`}
-              style={{ animationDelay: "80ms", animationFillMode: "both" }}
-              data-node-id="5241:5677"
-              data-name="Article"
-              aria-hidden
-            >
-              <video
-                ref={videoRef}
-                className="pointer-events-none absolute inset-0 size-full object-contain"
-                poster="/videos/electronica-tv-01-v03-poster.jpg"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                onLoadedMetadata={(e) => {
-                  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-                    e.currentTarget.play().catch(() => {});
-                  }
-                }}
-              >
-                <source src="/videos/electronica-tv-01-v03.webm" type="video/webm" />
-                <source src="/videos/electronica-tv-01-v03.mp4" type="video/mp4" />
-              </video>
+        {/* Application Forge showcase mobile */}
+        <div className="mt-[24px] flex w-full flex-col items-stretch gap-[24px]" data-node-id="5241:5967">
+          <div className="flex h-[320px] w-full shrink-0 items-stretch justify-center">
+            <div className="relative h-full w-full overflow-clip rounded-[12px] bg-black">
+              <ForgeVideo />
             </div>
           </div>
 
-          {/* Right column — 5241:5702 */}
-          <div className="relative flex min-w-px flex-1 flex-col items-center justify-center gap-[25px] min-[1024px]:items-end min-[1024px]:pr-[20px]" data-node-id="5241:5702">
-            <div className={`flex w-[95%] max-w-[420px] mx-auto flex-col items-center gap-[12px] min-[1024px]:w-[520px] min-[1024px]:max-w-none min-[1024px]:mx-0 ${forgeVisible ? "motion-safe:animate-hero-text-fade-in" : "min-[1024px]:opacity-0"}`} style={{ animationDelay: "140ms", animationFillMode: "both" }} data-node-id="5241:5728" data-name="eval kit">
+          <div className="relative flex w-full flex-col items-center justify-center gap-[25px]">
+            <div className="flex w-[95%] max-w-[420px] mx-auto flex-col items-center gap-[12px]">
               {FORGE_STEPS.map((step, i) => {
                 const key = STEP_KEYS[i];
                 const stepTitle = steps?.[i]?.title ?? step;
@@ -357,16 +320,14 @@ export function ModelZooAppForge({
           </div>
         </div>
 
-        {/* Wide article card — 5131:10513 (1192.5×391) */}
+        {/* Wide article card mobile */}
         {!hideArticleCard && (
           <div
-            ref={articleRef}
-            className={`relative mt-[24px] flex h-auto flex-col items-stretch justify-center gap-[20px] px-[20px] py-[32px] transition-colors duration-300 min-[1024px]:mt-[41px] min-[1024px]:h-[391px] min-[1024px]:flex-row min-[1024px]:items-start ${getFadeInClass(articleVisible)}`}
+            className="relative mt-[24px] flex h-auto w-full flex-col items-stretch justify-center gap-[20px] px-[20px] py-[32px] border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] backdrop-blur-[12px] bg-[rgba(0,0,0,0.2)]"
             data-node-id="5131:10513"
             data-name="Article"
           >
-            {/* Phone showcase — 5131:10537 */}
-            <div className="relative h-[327px] w-full min-w-px min-[1024px]:flex-1" data-node-id="5131:10537" data-name="Container">
+            <div className="relative h-[327px] w-full min-w-px" data-node-id="5131:10537" data-name="Container">
               <img
                 alt="ApplicationForge phone app preview on an eval kit"
                 src={(data?.phone_mockup_image && mediaUrl(data.phone_mockup_image)) || fallbackImg.src}
@@ -381,12 +342,10 @@ export function ModelZooAppForge({
                 decoding="async"
               />
             </div>
-
-            {/* NewsSection — 5131:10514 */}
-            <div className="relative flex w-full min-w-px flex-1 flex-col items-start self-stretch gap-[40px]" data-node-id="5131:10514" data-name="NewsSection">
+            <div className="relative flex w-full min-w-px flex-col items-start self-stretch gap-[40px]" data-node-id="5131:10514" data-name="NewsSection">
               {hideProcessChip ? null : (
                 <div className="relative h-[26px] w-[220px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)]" data-node-id="5131:10515" data-name="Menu">
-                  <p className={`${dmMono.className} absolute top-[calc(50%-4.5px)] left-[calc(50%-0.26px)] -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
+                  <p className={`${dmMono.className} absolute top-[calc(50%-4.5px)] left-[calc(50%-0.26px)] -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]`}>
                     super easy process
                   </p>
                   <div className="absolute top-1/2 left-[6.48px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
@@ -399,18 +358,171 @@ export function ModelZooAppForge({
               </p>
               <StoreBadges bothStoresComingSoon={bothStoresComingSoon} />
             </div>
-
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           </div>
         )}
 
-        {/* Request CTA — 5131:10555 (293×48, centered). */}
+        {/* Request CTA mobile */}
         {!storeButtonsUnderSteps && (
           <div className="relative mt-[30px] flex flex-col items-center justify-center gap-[24px] pb-[63px] z-50 pointer-events-auto">
             {renderCtaButtons()}
           </div>
         )}
       </div>
+
+      {/* DESKTOP (>=600px) */}
+      <TabletScaleCanvas className="relative mx-auto hidden w-[1440px] shrink-0 flex-col items-center min-[600px]:flex">
+        {/* Glow strips */}
+        <img
+          alt=""
+          src="/model-zoo/af-bg-1.webp"
+          aria-hidden
+          className="pointer-events-none absolute top-[519px] left-0 h-[552px] w-[1440px] object-cover"
+          loading="lazy"
+          decoding="async"
+        />
+        {!hideArticleCard && (
+          <img
+            alt=""
+            src="/model-zoo/af-bg-2.webp"
+            aria-hidden
+            className="pointer-events-none absolute top-[1071px] left-0 h-[553px] w-[1440px] object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+        )}
+        <div className={`relative mx-auto w-[1192.5px] shrink-0 px-0 ${storeButtonsUnderSteps ? "pb-[64px]" : ""}`}>
+          {/* Header */}
+          <div className="flex w-full flex-col items-center gap-[24px] pt-[49px]" data-node-id="5131:10258">
+            <div className="relative px-[10px]" data-node-id="5131:10260" data-name="Title">
+              <h2
+                className={`${gilroyMedium.className} w-full max-w-[605px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent not-italic`}
+                style={{ backgroundImage: TITLE_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
+                data-node-id="5131:10261"
+              >
+                {heading}
+              </h2>
+              <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+            </div>
+            <p className={`${interRegular.className} w-full max-w-[679.389px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
+              {subheading}
+            </p>
+          </div>
+
+          {/* Showcase row */}
+          <div
+            ref={forgeRef}
+            className={`mt-[48px] flex min-h-[578px] h-auto flex-row items-center gap-[24px] ${getFadeInClass(forgeVisible)}`}
+            data-node-id="5241:5967"
+          >
+            <div className="flex h-[578px] w-[590.509px] shrink-0 items-stretch justify-center">
+              <div
+                className={`relative h-full w-full overflow-clip rounded-none transition-colors duration-300 ${forgeVisible ? "motion-safe:animate-hero-text-fade-in" : "opacity-0"}`}
+                style={{ animationDelay: "80ms", animationFillMode: "both" }}
+                data-node-id="5241:5677"
+                data-name="Article"
+                aria-hidden
+              >
+                <ForgeVideo />
+              </div>
+            </div>
+
+            <div className="relative flex min-w-px flex-1 flex-col items-end justify-center gap-[25px] pr-[20px]" data-node-id="5241:5702">
+              <div className={`flex w-[520px] flex-col items-center gap-[12px] ${forgeVisible ? "motion-safe:animate-hero-text-fade-in" : "opacity-0"}`} style={{ animationDelay: "140ms", animationFillMode: "both" }} data-node-id="5241:5728" data-name="eval kit">
+                {FORGE_STEPS.map((step, i) => {
+                  const key = STEP_KEYS[i];
+                  const stepTitle = steps?.[i]?.title ?? step;
+                  const stepDescription = steps?.[i]?.description ?? STEP_SUBTEXTS[key];
+                  return (
+                    <div
+                      key={step}
+                      className="relative block w-full h-auto shrink-0 border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] backdrop-blur-[12px] bg-[rgba(0,0,0,0.2)] text-left"
+                      data-node-id={`5241:57${52 - i * 6}`}
+                    >
+                      <div className="flex flex-col items-start gap-[12px] p-[24px]">
+                        <div className="relative size-[32px] flex items-center justify-center opacity-80">
+                          <img 
+                            src={STEP_ICONS[key]} 
+                            alt="" 
+                            className={`max-w-[100%] max-h-[100%] object-contain ${key === 'pair' ? 'scale-125' : key === 'results' ? 'scale-150' : ''}`} 
+                          />
+                        </div>
+                        <div className="flex flex-col gap-[6px]">
+                          <h3 className={`${gilroyMedium.className} text-[20px] leading-[24px] text-white`}>
+                            {stepTitle}
+                          </h3>
+                          <p className={`${interRegular.className} text-[15px] leading-[22px] text-[rgba(255,255,255,0.65)]`}>
+                            {stepDescription}
+                          </p>
+                        </div>
+                      </div>
+                      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+                    </div>
+                  );
+                })}
+                {storeButtonsUnderSteps && (
+                  <div className="w-full pt-[4px] flex flex-col items-center justify-center gap-[16px]">
+                    <StoreBadges className="justify-center" bothStoresComingSoon={bothStoresComingSoon} />
+                    {renderCtaButtons()}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Wide article card */}
+          {!hideArticleCard && (
+            <div
+              ref={articleRef}
+              className={`relative mt-[41px] flex h-[391px] flex-row items-start justify-center gap-[20px] px-[20px] py-[32px] transition-colors duration-300 ${getFadeInClass(articleVisible)}`}
+              data-node-id="5131:10513"
+              data-name="Article"
+            >
+              <div className="relative h-[327px] min-w-px flex-1" data-node-id="5131:10537" data-name="Container">
+                <img
+                  alt="ApplicationForge phone app preview on an eval kit"
+                  src={(data?.phone_mockup_image && mediaUrl(data.phone_mockup_image)) || fallbackImg.src}
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (!target.src.includes(fallbackImg.src)) {
+                      target.src = fallbackImg.src;
+                    }
+                  }}
+                  className="pointer-events-none size-full object-contain object-center"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+
+              <div className="relative flex min-w-px flex-1 flex-col items-start self-stretch gap-[40px]" data-node-id="5131:10514" data-name="NewsSection">
+                {hideProcessChip ? null : (
+                  <div className="relative h-[26px] w-[220px] shrink-0 overflow-clip bg-[rgba(255,255,255,0.06)]" data-node-id="5131:10515" data-name="Menu">
+                    <p className={`${dmMono.className} absolute top-[calc(50%-4.5px)] left-[calc(50%-0.26px)] -translate-x-1/2 text-[16px] leading-[24px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]`}>
+                      super easy process
+                    </p>
+                    <div className="absolute top-1/2 left-[6.48px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+                    <div className="absolute top-1/2 right-[6.48px] h-[12px] w-[2px] -translate-y-1/2 bg-white opacity-60" />
+                    <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+                  </div>
+                )}
+                <p className={`${gilroyMedium.className} w-full text-[32px] leading-[38px] text-white not-italic [word-break:break-word]`} data-node-id="5131:10523">
+                  {articleHeading || "Download the app and get it working with Sparsh module"}
+                </p>
+                <StoreBadges bothStoresComingSoon={bothStoresComingSoon} />
+              </div>
+
+              <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+            </div>
+          )}
+
+          {/* Request CTA */}
+          {!storeButtonsUnderSteps && (
+            <div className="relative mt-[30px] flex flex-col items-center justify-center gap-[24px] pb-[63px] z-50 pointer-events-auto">
+              {renderCtaButtons()}
+            </div>
+          )}
+        </div>
+      </TabletScaleCanvas>
 
       <UpcomingProductsModal
         isOpen={isModalOpen}

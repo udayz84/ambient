@@ -1,4 +1,6 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
 
 import { mediaUrl } from "@/lib/strapi";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
@@ -6,6 +8,7 @@ import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GradientTitle } from "../contact/contact-shared";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const TITLE_GRADIENT_DEG = "128.192deg";
 const FALLBACK_SUBTITLE =
@@ -94,7 +97,7 @@ function MobileIntelligenceCard({
           {title}
         </h3>
         <p
-          className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-white opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-white opacity-65 not-italic [word-break:break-word]`}
         >
           {description}
         </p>
@@ -144,7 +147,7 @@ function IntelligenceCard({
   return (
     <div
       ref={fadeRef}
-      className={`relative flex w-full flex-col overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] p-[32px] min-[1024px]:h-[336.418px] min-[1024px]:w-[320px] min-[1024px]:shrink-0 min-[1024px]:justify-end ${getFadeInClass(isVisible)}`}
+      className={`relative flex flex-col overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] p-[32px] h-[336.418px] w-[320px] shrink-0 justify-end ${getFadeInClass(isVisible)}`}
       style={{ backgroundImage: CARD_BG }}
       data-name="Content"
     >
@@ -164,7 +167,7 @@ function IntelligenceCard({
           {title}
         </h3>
         <p
-          className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-white opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} text-[16px] leading-[24px] font-normal text-white opacity-65 not-italic [word-break:break-word]`}
         >
           {description}
         </p>
@@ -220,46 +223,48 @@ export function SomIntelligence({ data }: { data?: any }) {
       data-node-id="2438:5118"
       aria-label="Out-of-the-Box Intelligence"
     >
-      {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden flex-col items-center gap-[40px] pt-[80px] pb-[80px] min-[1024px]:flex">
-        <div
-          className="flex flex-col items-center gap-[24px]"
-          data-node-id="2438:5119"
-        >
-          <div className="relative px-[10px]" data-name="Title">
-            <GradientTitle
-              gradientDeg={TITLE_GRADIENT_DEG}
-              className="text-center whitespace-nowrap"
-            >
-              {heading}
-            </GradientTitle>
-            <GreenCtaCorners />
-          </div>
-          <p
-            className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+      {/* DESKTOP & TABLET (>=600px) */}
+      <div className="relative hidden w-full justify-center overflow-x-clip min-[600px]:flex">
+        <TabletScaleCanvas className="relative flex w-[1440px] max-w-[1440px] shrink-0 flex-col items-center gap-[40px] pt-[80px] pb-[80px]">
+          <div
+            className="flex flex-col items-center gap-[24px]"
+            data-node-id="2438:5119"
           >
-            {subtitle}
-          </p>
-        </div>
-        <div
-          className="flex items-center gap-[24px]"
-          data-name="Do the best work of your life"
-        >
-          {cards.map((card) => (
-            <IntelligenceCard
-              key={card.title}
-              title={card.title}
-              description={card.description}
-              imageUrl={card.imageUrl}
-            />
-          ))}
-        </div>
-        <DownloadCta label={ctaLabel} href={ctaHref} />
+            <div className="relative px-[10px]" data-name="Title">
+              <GradientTitle
+                gradientDeg={TITLE_GRADIENT_DEG}
+                className="text-center whitespace-nowrap"
+              >
+                {heading}
+              </GradientTitle>
+              <GreenCtaCorners />
+            </div>
+            <p
+              className={`${interRegular.className} w-[800px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+            >
+              {subtitle}
+            </p>
+          </div>
+          <div
+            className="flex items-center gap-[24px]"
+            data-name="Do the best work of your life"
+          >
+            {cards.map((card) => (
+              <IntelligenceCard
+                key={card.title}
+                title={card.title}
+                description={card.description}
+                imageUrl={card.imageUrl}
+              />
+            ))}
+          </div>
+          <DownloadCta label={ctaLabel} href={ctaHref} />
+        </TabletScaleCanvas>
       </div>
 
-      {/* MOBILE (<1024px) — Figma node 4059:9285 "5th Fold" 393×1770 */}
+      {/* MOBILE (<600px) — Figma node 4059:9285 "5th Fold" 393×1770 */}
       <div
-        className="relative mx-auto h-[1770px] w-[393px] overflow-hidden bg-black min-[1024px]:hidden"
+        className="relative mx-auto h-[1770px] w-[393px] overflow-hidden bg-black min-[600px]:hidden"
         data-node-id="4059:9285"
         data-name="5th Fold"
       >
@@ -278,7 +283,7 @@ export function SomIntelligence({ data }: { data?: any }) {
             </h2>
           </div>
           <p
-            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word]`}
           >
             {subtitle}
           </p>

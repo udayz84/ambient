@@ -1,8 +1,9 @@
 "use client";
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { mediaUrl } from "@/lib/strapi";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GradientTitle } from "../contact/contact-shared";
@@ -41,7 +42,7 @@ function CardTag({ label }: { label: string }) {
     >
       <Corners />
       <p
-        className={`${dmMono.className} absolute left-1/2 top-[calc(50%-4.5px)] -translate-x-1/2 text-[13px] leading-[19.5px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+        className={`${dmMono.className} absolute left-1/2 top-[calc(50%-4.5px)] -translate-x-1/2 text-[16px] leading-[24px] font-normal tracking-[-0.39px] whitespace-nowrap text-[#ecfae5] uppercase not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word]`}
       >
         {label}
       </p>
@@ -64,7 +65,7 @@ function FeatureCard({
   return (
     <div
       ref={fadeRef}
-      className={`relative flex w-full flex-col items-start gap-[24px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[16px] pt-[16px] pb-[24px] min-[1024px]:h-[400px] min-[1024px]:w-[377px] min-[1024px]:gap-[36px] transition-all duration-300 hover:-translate-y-[10px] hover:shadow-[0px_94px_94px_-80px_#6fe047] min-[1024px]:hover:-translate-y-[30px] ${getFadeInClass(isVisible)}`}
+      className={`relative flex h-[400px] w-[377px] flex-col items-start gap-[36px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] px-[16px] pt-[16px] pb-[24px] transition-all duration-300 hover:-translate-y-[30px] hover:shadow-[0px_94px_94px_-80px_#6fe047] ${getFadeInClass(isVisible)}`}
       style={{
         backgroundImage: `radial-gradient(circle ${glowPosition}, rgba(111,224,71,0.12) 0%, rgba(0,0,0,0) 70%)`
       }}
@@ -91,16 +92,16 @@ function FeatureCard({
       </div>
 
       {/* News section */}
-      <div className="flex w-full flex-col gap-[20px] min-[1024px]:flex-1 min-[1024px]:justify-end">
+      <div className="flex w-full flex-col gap-[20px] flex-1 justify-end">
         <CardTag label={tag} />
         <div className="flex flex-col gap-[10px]">
           <h3
-            className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium text-white not-italic min-[1024px]:text-[22px] min-[1024px]:leading-[28px] min-[1024px]:tracking-[-0.4539px]`}
+            className={`${gilroyMedium.className} text-[22px] leading-[28px] tracking-[-0.4539px] font-medium text-white not-italic`}
           >
             {title}
           </h3>
           <p
-            className={`${interRegular.className} text-[14px] leading-[21px] font-normal tracking-[-0.3158px] text-[rgba(240,240,240,0.6)] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} text-[16px] leading-[24px] font-normal tracking-[-0.3158px] text-[rgba(240,240,240,0.6)] not-italic`}
           >
             {body}
           </p>
@@ -183,7 +184,7 @@ function MobileFeatureCard({
               {title}
             </h3>
             <p
-              className={`${interRegular.className} text-[14px] leading-[24.601px] tracking-[-0.2957px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+              className={`${interRegular.className} text-[14px] leading-[24.601px] tracking-[-0.2957px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
             >
               {body}
             </p>
@@ -248,8 +249,8 @@ export function SomFeatures({ data }: { data?: any }) {
       data-name="Stop Routing. Start Shipping."
       aria-label="Stop Routing. Start Shipping."
     >
-      {/* DESKTOP (>=1024px) */}
-      <div className="relative hidden w-[1203px] flex-col items-center gap-[48px] pt-[20px] pb-[80px] min-[1024px]:flex">
+      {/* DESKTOP (>=600px) */}
+      <TabletScaleCanvas className="relative hidden w-[1440px] shrink-0 flex-col items-center gap-[48px] pt-[20px] pb-[80px] min-[600px]:flex">
         {/* Section title */}
         <div
           className="flex w-[650px] flex-col items-center gap-[24px]"
@@ -274,7 +275,7 @@ export function SomFeatures({ data }: { data?: any }) {
             <Corners />
           </div>
           <p
-            className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[650px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
             data-node-id="2438:4886"
           >
             {subtitle}
@@ -290,11 +291,11 @@ export function SomFeatures({ data }: { data?: any }) {
             <FeatureCard key={i} {...card} />
           ))}
         </div>
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE (<1024px) — Figma node 4054:8302 "2nd Fold" 393×1400 */}
+      {/* MOBILE (<600px) — Figma node 4054:8302 "2nd Fold" 393×1400 */}
       <div
-        className="relative mx-auto h-auto w-[393px] overflow-hidden bg-black pb-[60px] pt-[30px] min-[1024px]:hidden"
+        className="relative mx-auto h-auto w-[393px] overflow-hidden bg-black pb-[60px] pt-[30px] min-[600px]:hidden"
         data-node-id="4054:8302"
         data-name="2nd Fold"
       >
@@ -341,7 +342,7 @@ export function SomFeatures({ data }: { data?: any }) {
 
             {/* Subtitle — 4054:8364 (336×84) */}
             <p
-              className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+              className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word]`}
               data-node-id="4054:8364"
             >
               {subtitle}

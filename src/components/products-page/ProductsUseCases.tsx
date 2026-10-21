@@ -1,8 +1,10 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useFitText } from "../shared/FitText";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyExtraBold, gilroyMedium, interRegular } from "../hero/fonts";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
@@ -10,6 +12,7 @@ import { TagBadge } from "../hero/TagBadge";
 import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
 import { Corners } from "../shared/Corners";
 import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   CORNER_LEFT,
@@ -119,19 +122,6 @@ export function ProductsUseCases({ data }: { data?: any }) {
   const activeImage = activeTab?.image || "/products/use-case-image.webp";
   const cards = activeTab?.featureCards || USECASE_CARDS;
 
-  // Scale the fixed 1448px canvas down on narrower viewports so it never clips.
-  const wrapRef = useRef<HTMLDivElement>(null);
-  const [canvasScale, setCanvasScale] = useState(1);
-  useEffect(() => {
-    const update = () => {
-      const w = wrapRef.current?.clientWidth ?? window.innerWidth;
-      setCanvasScale(Math.min(1, w / USECASES_CANVAS_WIDTH));
-    };
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
-
   const handleSelect = (idx: number) => {
     if (idx !== activeIdx) {
       setDirection(idx > activeIdx ? 1 : -1);
@@ -150,26 +140,14 @@ export function ProductsUseCases({ data }: { data?: any }) {
   };
   return (
     <>
-      {/* DESKTOP (>=1024px) */}
+      {/* DESKTOP (>=600px) */}
       <section
-        className="relative mx-auto hidden w-full bg-black min-[1024px]:block mt-[60px]"
+        className="relative mx-auto hidden w-full justify-center bg-black min-[600px]:flex mt-[60px]"
         aria-label="Use cases"
       >
-        <div
-          ref={wrapRef}
-          className="relative mx-auto w-full overflow-hidden"
-          style={{
-            maxWidth: USECASES_CANVAS_WIDTH,
-            aspectRatio: `${USECASES_CANVAS_WIDTH} / ${USECASES_SECTION_HEIGHT}`,
-          }}
-        >
+        <TabletScaleCanvas className="relative h-[941px] w-[1448px] shrink-0 min-[600px]:block">
           <div
-            className="absolute left-0 top-0 origin-top-left"
-            style={{
-              height: USECASES_SECTION_HEIGHT,
-              width: USECASES_CANVAS_WIDTH,
-              transform: `scale(${canvasScale})`,
-            }}
+            className="absolute left-0 top-0 h-[941px] w-[1448px]"
             data-node-id="2901:2033"
             data-name="Desktop - 14"
           >
@@ -190,7 +168,7 @@ export function ProductsUseCases({ data }: { data?: any }) {
               onSecondaryCtaClick={() => setIsModalOpen(true)}
             />
           </div>
-        </div>
+        </TabletScaleCanvas>
       </section>
 
       {/* MOBILE (<1024px) */}
@@ -286,7 +264,7 @@ function ProductsUseCasesDesktop({
           </h2>
         </div>
         <p
-          className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} w-[650px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           data-node-id="2901:2141"
         >
           {subtitle}
@@ -686,7 +664,7 @@ function ProductsUseCasesMobile({
 
   return (
     <section
-      className="relative w-full overflow-hidden bg-black px-[24px] pt-[24px] pb-[16px] min-[1024px]:hidden"
+      className="relative w-full overflow-hidden bg-black px-[24px] pt-[24px] pb-[16px] min-[600px]:hidden"
       aria-label="Use cases"
     >
       {/* Title */}
@@ -704,7 +682,7 @@ function ProductsUseCasesMobile({
           {headingLines.join(" ").trim()}
         </h2>
         <p
-          className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]`}
         >
           {subtitle}
         </p>

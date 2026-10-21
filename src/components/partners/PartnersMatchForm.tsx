@@ -44,6 +44,8 @@ function FieldLabel({ children, htmlFor }: { children: React.ReactNode; htmlFor:
   );
 }
 
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
+
 export function PartnersMatchForm({
   content,
   capabilities,
@@ -117,11 +119,126 @@ export function PartnersMatchForm({
     }
   };
 
+  const renderFormContent = (idPrefix = "") => {
+    if (submitted) {
+      return (
+        <div className="flex min-h-[420px] animate-hero-text-fade-in transform-gpu flex-col items-center justify-center gap-[20px] px-[32px] py-[56px] text-center">
+          <AmbientPulse />
+          <p className={`${gilroyMedium.className} max-w-[420px] text-[24px] leading-[32px] font-medium text-white [word-break:break-word] not-italic`}>
+            {content.confirmation}
+          </p>
+          <button
+            type="button"
+            onClick={() => {
+              setSubmitted(false);
+              setForm(INITIAL_FORM);
+              setHelpAreas([]);
+            }}
+            className={`${interRegular.className} cursor-pointer border-b border-[rgba(169,226,140,0.5)] text-[14px] leading-[21px] font-normal text-[#a9e28c] transition-colors duration-200 hover:text-[#53d824]`}
+          >
+            Submit another request
+          </button>
+        </div>
+      );
+    }
+
+    return (
+      <div className="flex flex-col gap-[24px] p-[24px] sm:p-[40px]">
+        <div className="grid grid-cols-1 gap-[20px] min-[560px]:grid-cols-2">
+          <div className="flex flex-col gap-[5px]">
+            <FieldLabel htmlFor={`${idPrefix}pm-first-name`}>{content.fields.firstName}</FieldLabel>
+            <div className={inputBoxClass}>
+              <input id={`${idPrefix}pm-first-name`} className={inputClass} value={form.firstName} onChange={(e) => set("firstName")(e.target.value)} autoComplete="given-name" />
+            </div>
+          </div>
+          <div className="flex flex-col gap-[5px]">
+            <FieldLabel htmlFor={`${idPrefix}pm-last-name`}>{content.fields.lastName}</FieldLabel>
+            <div className={inputBoxClass}>
+              <input id={`${idPrefix}pm-last-name`} className={inputClass} value={form.lastName} onChange={(e) => set("lastName")(e.target.value)} autoComplete="family-name" />
+            </div>
+          </div>
+          <div className="flex flex-col gap-[5px]">
+            <FieldLabel htmlFor={`${idPrefix}pm-company`}>{content.fields.company}</FieldLabel>
+            <div className={inputBoxClass}>
+              <input id={`${idPrefix}pm-company`} className={inputClass} value={form.company} onChange={(e) => set("company")(e.target.value)} autoComplete="organization" />
+            </div>
+          </div>
+          <div className="flex flex-col gap-[5px]">
+            <FieldLabel htmlFor={`${idPrefix}pm-email`}>{content.fields.email}</FieldLabel>
+            <div className={inputBoxClass}>
+              <input id={`${idPrefix}pm-email`} type="email" className={inputClass} value={form.email} onChange={(e) => set("email")(e.target.value)} autoComplete="email" />
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-[5px]">
+          <span className={`${interLight.className} w-full shrink-0 text-[10px] leading-[15px] font-light text-white not-italic [word-break:break-word]`}>
+            {content.fields.region}
+          </span>
+          <PartnersDropdown
+            label={content.fields.region}
+            options={[...regions]}
+            value={form.region}
+            onChange={set("region")}
+            id={`${idPrefix}pm-region`}
+          />
+        </div>
+
+        <div className="flex flex-col gap-[10px]">
+          <span className={`${interLight.className} w-full shrink-0 text-[10px] leading-[15px] font-light text-white not-italic [word-break:break-word]`}>
+            {content.fields.helpAreas}
+          </span>
+          <div className="flex flex-wrap gap-[8px]">
+            {capabilities.map((cap) => {
+              const active = helpAreas.includes(cap.short);
+              return (
+                <button
+                  key={cap.id}
+                  type="button"
+                  aria-pressed={active}
+                  onClick={() => toggleHelpArea(cap.short)}
+                  className={`relative h-[36px] cursor-pointer border-[0.5px] border-solid px-[14px] text-[13px] leading-[18px] font-normal transition-[border-color,background-color,color] duration-200 ${
+                    active
+                      ? "border-[rgba(83,216,36,0.55)] bg-[rgba(46,119,20,0.3)] text-[#a9e28c]"
+                      : "border-[rgba(240,240,240,0.2)] text-[#ccc] hover:border-[rgba(83,216,36,0.35)] hover:text-white"
+                  } ${interRegular.className}`}
+                >
+                  {cap.short}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-[5px]">
+          <FieldLabel htmlFor={`${idPrefix}pm-message`}>{content.fields.message}</FieldLabel>
+          <div className={`${inputBoxClass} min-h-[120px]`}>
+            <textarea id={`${idPrefix}pm-message`} className={`${inputClass} h-full resize-none`} rows={4} value={form.message} onChange={(e) => set("message")(e.target.value)} />
+          </div>
+        </div>
+
+        {error ? (
+          <p className="text-[13px] leading-[19.5px] font-normal text-[#ff9d9d]" role="alert">
+            {error}
+          </p>
+        ) : (
+          <p className={`${interRegular.className} text-[12px] leading-[18px] font-normal text-[#8a8a8a] [word-break:break-word]`}>
+            {content.emailHint}
+          </p>
+        )}
+
+        <PartnersGreenCta onClick={onSubmit} loading={loading} className="w-full">
+          {content.submitLabel}
+        </PartnersGreenCta>
+      </div>
+    );
+  };
+
   return (
     <section
       id="get-matched"
       ref={fadeRef}
-      className={`relative mx-auto flex w-full max-w-[1204px] scroll-mt-[78px] flex-col items-center gap-[40px] px-[24px] py-[40px] min-[1024px]:py-[64px] ${fadeCls} transform-gpu overflow-hidden`}
+      className={`relative mx-auto flex w-full justify-center scroll-mt-[78px] ${fadeCls} transform-gpu overflow-hidden`}
       aria-label="Get matched with a partner"
     >
       {/* Background visual — Company image-124 matrix texture */}
@@ -150,126 +267,38 @@ export function PartnersMatchForm({
         />
       </div>
 
-      <div className="relative flex flex-col items-center gap-[16px] px-[10px]">
-        <PartnersSectionHeading deg="119.522deg">{content.heading}</PartnersSectionHeading>
-        <Corners />
-      </div>
+      {/* DESKTOP & TABLET (>=600px) — 1440px design canvas with proportional tablet scaling */}
+      <TabletScaleCanvas className="relative hidden w-[1440px] shrink-0 flex-col items-center gap-[40px] px-[24px] py-[64px] min-[600px]:flex">
+        <div className="relative flex flex-col items-center gap-[16px] px-[10px]">
+          <PartnersSectionHeading deg="119.522deg">{content.heading}</PartnersSectionHeading>
+          <Corners />
+        </div>
 
-      <p className={`${interRegular.className} max-w-[720px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
-        {content.subheading}
-      </p>
+        <p className={`${interRegular.className} max-w-[720px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic`}>
+          {content.subheading}
+        </p>
 
-      <div className="relative w-full max-w-[760px] border-[1.5px] border-solid border-[rgba(83,216,36,0.2)] bg-black backdrop-blur-[8px]">
-        <Corners />
+        <div className="relative w-full max-w-[760px] border-[1.5px] border-solid border-[rgba(83,216,36,0.2)] bg-black backdrop-blur-[8px]">
+          <Corners />
+          {renderFormContent("")}
+        </div>
+      </TabletScaleCanvas>
 
-        {submitted ? (
-          <div className="flex min-h-[420px] animate-hero-text-fade-in transform-gpu flex-col items-center justify-center gap-[20px] px-[32px] py-[56px] text-center">
-            <AmbientPulse />
-            <p className={`${gilroyMedium.className} max-w-[420px] text-[24px] leading-[32px] font-medium text-white [word-break:break-word] not-italic`}>
-              {content.confirmation}
-            </p>
-            <button
-              type="button"
-              onClick={() => {
-                setSubmitted(false);
-                setForm(INITIAL_FORM);
-                setHelpAreas([]);
-              }}
-              className={`${interRegular.className} cursor-pointer border-b border-[rgba(169,226,140,0.5)] text-[13px] leading-[21px] font-normal text-[#a9e28c] transition-colors duration-200 hover:text-[#53d824] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
-            >
-              Submit another request
-            </button>
-          </div>
-        ) : (
-          <div className="flex flex-col gap-[24px] p-[32px] min-[1024px]:p-[40px]">
-            <div className="grid grid-cols-1 gap-[20px] min-[560px]:grid-cols-2">
-              <div className="flex flex-col gap-[5px]">
-                <FieldLabel htmlFor="pm-first-name">{content.fields.firstName}</FieldLabel>
-                <div className={inputBoxClass}>
-                  <input id="pm-first-name" className={inputClass} value={form.firstName} onChange={(e) => set("firstName")(e.target.value)} autoComplete="given-name" />
-                </div>
-              </div>
-              <div className="flex flex-col gap-[5px]">
-                <FieldLabel htmlFor="pm-last-name">{content.fields.lastName}</FieldLabel>
-                <div className={inputBoxClass}>
-                  <input id="pm-last-name" className={inputClass} value={form.lastName} onChange={(e) => set("lastName")(e.target.value)} autoComplete="family-name" />
-                </div>
-              </div>
-              <div className="flex flex-col gap-[5px]">
-                <FieldLabel htmlFor="pm-company">{content.fields.company}</FieldLabel>
-                <div className={inputBoxClass}>
-                  <input id="pm-company" className={inputClass} value={form.company} onChange={(e) => set("company")(e.target.value)} autoComplete="organization" />
-                </div>
-              </div>
-              <div className="flex flex-col gap-[5px]">
-                <FieldLabel htmlFor="pm-email">{content.fields.email}</FieldLabel>
-                <div className={inputBoxClass}>
-                  <input id="pm-email" type="email" className={inputClass} value={form.email} onChange={(e) => set("email")(e.target.value)} autoComplete="email" />
-                </div>
-              </div>
-            </div>
+      {/* MOBILE (<600px) */}
+      <div className="relative flex w-full flex-col items-center gap-[32px] px-[20px] py-[40px] min-[600px]:hidden">
+        <div className="relative flex flex-col items-center gap-[16px] px-[10px]">
+          <PartnersSectionHeading deg="119.522deg">{content.heading}</PartnersSectionHeading>
+          <Corners />
+        </div>
 
-            <div className="flex flex-col gap-[5px]">
-              <span className={`${interLight.className} w-full shrink-0 text-[10px] leading-[15px] font-light text-white not-italic [word-break:break-word]`}>
-                {content.fields.region}
-              </span>
-              <PartnersDropdown
-                label={content.fields.region}
-                options={[...regions]}
-                value={form.region}
-                onChange={set("region")}
-                id="pm-region"
-              />
-            </div>
+        <p className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic`}>
+          {content.subheading}
+        </p>
 
-            <div className="flex flex-col gap-[10px]">
-              <span className={`${interLight.className} w-full shrink-0 text-[10px] leading-[15px] font-light text-white not-italic [word-break:break-word]`}>
-                {content.fields.helpAreas}
-              </span>
-              <div className="flex flex-wrap gap-[8px]">
-                {capabilities.map((cap) => {
-                  const active = helpAreas.includes(cap.short);
-                  return (
-                    <button
-                      key={cap.id}
-                      type="button"
-                      aria-pressed={active}
-                      onClick={() => toggleHelpArea(cap.short)}
-                      className={`relative h-[36px] cursor-pointer border-[0.5px] border-solid px-[14px] text-[13px] leading-[18px] font-normal transition-[border-color,background-color,color] duration-200 ${
-                        active
-                          ? "border-[rgba(83,216,36,0.55)] bg-[rgba(46,119,20,0.3)] text-[#a9e28c]"
-                          : "border-[rgba(240,240,240,0.2)] text-[#ccc] hover:border-[rgba(83,216,36,0.35)] hover:text-white"
-                      } ${interRegular.className}`}
-                    >
-                      {cap.short}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-[5px]">
-              <FieldLabel htmlFor="pm-message">{content.fields.message}</FieldLabel>
-              <div className={`${inputBoxClass} min-h-[120px]`}>
-                <textarea id="pm-message" className={`${inputClass} h-full resize-none`} rows={4} value={form.message} onChange={(e) => set("message")(e.target.value)} />
-              </div>
-            </div>
-
-            {error ? (
-              <p className="text-[13px] leading-[19.5px] font-normal text-[#ff9d9d]" role="alert">
-                {error}
-              </p>
-            ) : (
-              <p className={`${interRegular.className} text-[12px] leading-[18px] font-normal text-[#8a8a8a] [word-break:break-word]`}>
-                {content.emailHint}
-              </p>
-            )}
-
-            <PartnersGreenCta onClick={onSubmit} loading={loading} className="w-full">
-              {content.submitLabel}
-            </PartnersGreenCta>
-          </div>
-        )}
+        <div className="relative w-full border-[1.5px] border-solid border-[rgba(83,216,36,0.2)] bg-black backdrop-blur-[8px]">
+          <Corners />
+          {renderFormContent("m-")}
+        </div>
       </div>
     </section>
   );

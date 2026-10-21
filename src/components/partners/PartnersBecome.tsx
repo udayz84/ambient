@@ -46,6 +46,8 @@ function FieldLabel({ children, htmlFor }: { children: React.ReactNode; htmlFor:
   );
 }
 
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
+
 export function PartnersBecome({
   content,
   capabilities,
@@ -111,6 +113,117 @@ export function PartnersBecome({
     }
   };
 
+  const renderApplyForm = (idPrefix = "") => {
+    if (submitted) {
+      return (
+        <div className="flex min-h-[420px] animate-hero-text-fade-in transform-gpu flex-col items-center justify-center gap-[20px] px-[32px] py-[56px] text-center">
+          <AmbientPulse />
+          <p className={`${gilroyMedium.className} max-w-[420px] text-[24px] leading-[32px] font-medium text-white [word-break:break-word] not-italic`}>
+            {content.form.confirmation}
+          </p>
+          <button
+            type="button"
+            onClick={() => {
+              setSubmitted(false);
+              setForm(INITIAL_APPLY);
+              setSelectedCapabilities([]);
+            }}
+            className={`${interRegular.className} cursor-pointer border-b border-[rgba(169,226,140,0.5)] text-[14px] leading-[21px] font-normal text-[#a9e28c] transition-colors duration-200 hover:text-[#53d824]`}
+          >
+            Submit another application
+          </button>
+        </div>
+      );
+    }
+
+    return (
+      <div className="flex flex-col gap-[24px] p-[24px] sm:p-[40px]">
+        <div className="grid grid-cols-1 gap-[20px] min-[560px]:grid-cols-2">
+          <div className="flex flex-col gap-[5px]">
+            <FieldLabel htmlFor={`${idPrefix}pa-name`}>{content.form.name}</FieldLabel>
+            <div className={inputBox}>
+              <input id={`${idPrefix}pa-name`} className={inputCls} value={form.name} onChange={(e) => set("name")(e.target.value)} autoComplete="name" />
+            </div>
+          </div>
+          <div className="flex flex-col gap-[5px]">
+            <FieldLabel htmlFor={`${idPrefix}pa-company`}>{content.form.company}</FieldLabel>
+            <div className={inputBox}>
+              <input id={`${idPrefix}pa-company`} className={inputCls} value={form.company} onChange={(e) => set("company")(e.target.value)} autoComplete="organization" />
+            </div>
+          </div>
+          <div className="flex flex-col gap-[5px]">
+            <FieldLabel htmlFor={`${idPrefix}pa-website`}>{content.form.website}</FieldLabel>
+            <div className={inputBox}>
+              <input id={`${idPrefix}pa-website`} type="url" placeholder="https://" className={inputCls} value={form.website} onChange={(e) => set("website")(e.target.value)} />
+            </div>
+          </div>
+          <div className="flex flex-col gap-[5px]">
+            <FieldLabel htmlFor={`${idPrefix}pa-email`}>{content.form.email}</FieldLabel>
+            <div className={inputBox}>
+              <input id={`${idPrefix}pa-email`} type="email" className={inputCls} value={form.email} onChange={(e) => set("email")(e.target.value)} autoComplete="email" />
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-[5px]">
+          <span className={`${interLight.className} w-full shrink-0 text-[10px] leading-[15px] font-light text-white not-italic`}>
+            {content.form.region}
+          </span>
+          <PartnersDropdown
+            label={content.form.region}
+            options={[...regions]}
+            value={form.region}
+            onChange={set("region")}
+            id={`${idPrefix}pa-region`}
+          />
+        </div>
+
+        <div className="flex flex-col gap-[10px]">
+          <span className={`${interLight.className} w-full shrink-0 text-[10px] leading-[15px] font-light text-white not-italic`}>
+            {content.form.capabilities}
+          </span>
+          <div className="flex flex-wrap gap-[8px]">
+            {capabilities.map((cap) => {
+              const active = selectedCapabilities.includes(cap.short);
+              return (
+                <button
+                  key={cap.id}
+                  type="button"
+                  aria-pressed={active}
+                  onClick={() => toggleCapability(cap.short)}
+                  className={`h-[36px] cursor-pointer border-[0.5px] border-solid px-[14px] text-[13px] leading-[18px] font-normal transition-[border-color,background-color,color] duration-200 ${
+                    active
+                      ? "border-[rgba(83,216,36,0.55)] bg-[rgba(46,119,20,0.3)] text-[#a9e28c]"
+                      : "border-[rgba(240,240,240,0.2)] text-[#ccc] hover:border-[rgba(83,216,36,0.35)] hover:text-white"
+                  } ${interRegular.className}`}
+                >
+                  {cap.short}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-[5px]">
+          <FieldLabel htmlFor={`${idPrefix}pa-experience`}>{content.form.experience}</FieldLabel>
+          <div className={`${inputBox} min-h-[120px]`}>
+            <textarea id={`${idPrefix}pa-experience`} className={`${inputCls} h-full resize-none`} rows={4} value={form.experience} onChange={(e) => set("experience")(e.target.value)} />
+          </div>
+        </div>
+
+        {error ? (
+          <p className="text-[13px] leading-[19.5px] font-normal text-[#ff9d9d]" role="alert">
+            {error}
+          </p>
+        ) : null}
+
+        <PartnersGreenCta onClick={onSubmit} loading={loading} className="w-full min-[560px]:w-[280px]">
+          {content.form.submit}
+        </PartnersGreenCta>
+      </div>
+    );
+  };
+
   return (
     <section
       id="become-a-partner"
@@ -167,15 +280,128 @@ export function PartnersBecome({
       />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(83,216,36,0.35)] to-transparent" aria-hidden />
 
-      <div
-        ref={fadeRef}
-        className={`relative mx-auto flex w-full max-w-[1204px] flex-col items-center gap-[48px] px-[24px] py-[40px] min-[1024px]:py-[64px] ${fadeCls} transform-gpu`}
-      >
-        {/* ---------- header ---------- */}
-        <div className="flex flex-col items-center gap-[24px]">
+      {/* DESKTOP & TABLET (>=600px) — 1440px design canvas with proportional tablet scaling */}
+      <div className="relative mx-auto hidden w-full justify-center min-[600px]:flex">
+        <TabletScaleCanvas
+          className={`relative flex w-[1440px] shrink-0 flex-col items-center gap-[48px] px-[24px] py-[64px] ${fadeCls} transform-gpu`}
+        >
+          {/* ---------- header ---------- */}
+          <div className="flex flex-col items-center gap-[24px]">
+            <TagBadge label={content.tag} width={176} labelOffsetX={0} rightBarLeft={167} centerLabel />
+            <h2
+              className={`${gilroyMedium.className} max-w-[760px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent [word-break:break-word] not-italic`}
+              style={{
+                backgroundImage:
+                  "linear-gradient(110.887deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
+            >
+              {content.heading}
+            </h2>
+            <p className={`${interRegular.className} max-w-[660px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic`}>
+              {content.subheading}
+            </p>
+          </div>
+
+          {/* ---------- what partners get ---------- */}
+          <div className="grid w-full max-w-[1204px] grid-cols-3 gap-[20px]">
+            {content.benefits.map((benefit) => (
+              <article
+                key={benefit.title}
+                className="group relative flex min-h-[250px] flex-col items-start justify-between border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black/75 p-[28px] backdrop-blur-[24px] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-[4px] hover:border-[rgba(83,216,36,0.5)] hover:shadow-[0px_20px_48px_0px_rgba(83,216,36,0.15)]"
+              >
+                <Corners />
+                <div className="relative flex size-[56px] shrink-0 items-center justify-center border-[0.5px] border-solid border-[rgba(83,216,36,0.4)] bg-[rgba(83,216,36,0.08)]">
+                  {benefit.icon.endsWith(".svg") ? (
+                    <img src={benefit.icon} alt="" className="size-[34px]" aria-hidden />
+                  ) : (
+                    <WireframeIcon name={benefit.icon} className="size-[34px]" />
+                  )}
+                </div>
+                <div className="mt-[24px] flex w-full flex-col gap-[10px]">
+                  <h3 className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white [word-break:break-word] not-italic`}>
+                    {benefit.title}
+                  </h3>
+                  <p className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-white opacity-65 [word-break:break-word] not-italic`}>
+                    {benefit.description}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {/* ---------- who we're looking for ---------- */}
+          <div className="relative flex w-full max-w-[900px] flex-col items-center gap-[18px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black/75 px-[32px] py-[28px] text-center backdrop-blur-[24px]">
+            <Corners />
+            <h3 className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}>
+              {content.lookingFor.title}
+            </h3>
+            <div className="flex flex-wrap items-center justify-center gap-[8px]">
+              {content.lookingFor.chips.map((chip) => (
+                <span
+                  key={chip}
+                  className={`${dmMono.className} inline-flex h-[26px] items-center gap-[7px] border-[0.5px] border-solid border-[rgba(83,216,36,0.35)] bg-[rgba(83,216,36,0.08)] px-[10px] text-[11px] leading-[16px] tracking-[0.44px] whitespace-nowrap text-[#a9e28c] uppercase not-italic`}
+                >
+                  <span className="size-[3px] shrink-0 rounded-full bg-[#53d824]" aria-hidden />
+                  {chip}
+                </span>
+              ))}
+            </div>
+            <p className={`${interRegular.className} max-w-[720px] text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic`}>
+              {content.lookingFor.description}
+            </p>
+          </div>
+
+          {/* ---------- application: pitch + form ---------- */}
+          <div className="grid w-full max-w-[1204px] grid-cols-[400px_1fr] items-start gap-[40px]">
+            {/* pitch panel */}
+            <div className="relative flex flex-col gap-[20px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black/75 p-[32px] backdrop-blur-[24px] sticky top-[110px]">
+              <Corners />
+              <h3 className={`${gilroyMedium.className} text-[26px] leading-[34px] font-medium text-white [word-break:break-word] not-italic`}>
+                {content.form.title}
+              </h3>
+              <p className={`${interRegular.className} text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-75 [word-break:break-word] not-italic`}>
+                Frictionless by design — share a few details and our partnerships
+                team will take it from there.
+              </p>
+              <div className="flex flex-col gap-[14px] border-t-[0.5px] border-solid border-[rgba(240,240,240,0.15)] pt-[20px]">
+                {[
+                  { step: "01", text: "Tell us who you are and what you build." },
+                  { step: "02", text: "We review fit against the GPX roadmap." },
+                  { step: "03", text: "Enablement begins — silicon, tools, ecosystem." },
+                ].map((s) => (
+                  <div key={s.step} className="flex items-start gap-[14px]">
+                    <span className={`${dmMono.className} mt-[2px] shrink-0 text-[12px] leading-[18px] tracking-[1px] text-[#53d824]`}>
+                      {s.step}
+                    </span>
+                    <p className={`${interRegular.className} text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-75`}>
+                      {s.text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <GhostGreenCta href={content.secondaryCta.href} className="w-full">
+                {content.secondaryCta.label}
+              </GhostGreenCta>
+            </div>
+
+            {/* form panel */}
+            <div className="relative w-full border-[1.5px] border-solid border-[rgba(83,216,36,0.2)] bg-black backdrop-blur-[8px]">
+              <Corners />
+              {renderApplyForm("")}
+            </div>
+          </div>
+        </TabletScaleCanvas>
+      </div>
+
+      {/* MOBILE (<600px) */}
+      <div className={`relative mx-auto flex w-full flex-col items-center gap-[36px] px-[20px] py-[40px] min-[600px]:hidden ${fadeCls} transform-gpu`}>
+        {/* header */}
+        <div className="flex flex-col items-center gap-[18px] text-center">
           <TagBadge label={content.tag} width={176} labelOffsetX={0} rightBarLeft={167} centerLabel />
           <h2
-            className={`${gilroyMedium.className} max-w-[760px] bg-clip-text text-center text-[46px] leading-[49px] font-medium text-transparent [word-break:break-word] not-italic max-[1023px]:text-[28px] max-[1023px]:leading-[34px]`}
+            className={`${gilroyMedium.className} w-full max-w-[340px] bg-clip-text text-center text-[28px] leading-[34px] font-medium text-transparent not-italic`}
             style={{
               backgroundImage:
                 "linear-gradient(110.887deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -185,31 +411,31 @@ export function PartnersBecome({
           >
             {content.heading}
           </h2>
-          <p className={`${interRegular.className} max-w-[660px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic max-[1023px]:text-[14px] max-[1023px]:leading-[21px] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
+          <p className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic`}>
             {content.subheading}
           </p>
         </div>
 
-        {/* ---------- what partners get ---------- */}
-        <div className="grid w-full grid-cols-1 gap-[20px] min-[1024px]:grid-cols-3">
+        {/* benefits */}
+        <div className="flex w-full flex-col gap-[16px]">
           {content.benefits.map((benefit) => (
             <article
               key={benefit.title}
-              className="group relative flex min-h-[250px] flex-col items-start justify-between border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black/75 p-[28px] backdrop-blur-[24px] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-[4px] hover:border-[rgba(83,216,36,0.5)] hover:shadow-[0px_20px_48px_0px_rgba(83,216,36,0.15)]"
+              className="group relative flex min-h-[220px] flex-col items-start justify-between border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black/75 p-[24px] backdrop-blur-[24px]"
             >
               <Corners />
-              <div className="relative flex size-[56px] shrink-0 items-center justify-center border-[0.5px] border-solid border-[rgba(83,216,36,0.4)] bg-[rgba(83,216,36,0.08)]">
+              <div className="relative flex size-[48px] shrink-0 items-center justify-center border-[0.5px] border-solid border-[rgba(83,216,36,0.4)] bg-[rgba(83,216,36,0.08)]">
                 {benefit.icon.endsWith(".svg") ? (
-                  <img src={benefit.icon} alt="" className="size-[34px]" aria-hidden />
+                  <img src={benefit.icon} alt="" className="size-[28px]" aria-hidden />
                 ) : (
-                  <WireframeIcon name={benefit.icon} className="size-[34px]" />
+                  <WireframeIcon name={benefit.icon} className="size-[28px]" />
                 )}
               </div>
-              <div className="mt-[24px] flex w-full flex-col gap-[10px]">
-                <h3 className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white [word-break:break-word] not-italic`}>
+              <div className="mt-[20px] flex w-full flex-col gap-[8px]">
+                <h3 className={`${gilroyMedium.className} w-full text-[20px] leading-[26px] font-medium text-white not-italic`}>
                   {benefit.title}
                 </h3>
-                <p className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-white opacity-65 [word-break:break-word] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
+                <p className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-white opacity-65 not-italic`}>
                   {benefit.description}
                 </p>
               </div>
@@ -217,10 +443,10 @@ export function PartnersBecome({
           ))}
         </div>
 
-        {/* ---------- who we're looking for ---------- */}
-        <div className="relative flex w-full max-w-[900px] flex-col items-center gap-[18px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black/75 px-[32px] py-[28px] text-center backdrop-blur-[24px]">
+        {/* looking for */}
+        <div className="relative flex w-full flex-col items-center gap-[16px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black/75 px-[24px] py-[24px] text-center backdrop-blur-[24px]">
           <Corners />
-          <h3 className={`${gilroyMedium.className} text-[20px] leading-[26px] font-medium text-white not-italic [word-break:break-word] min-[1024px]:text-[22px] min-[1024px]:leading-[28px]`}>
+          <h3 className={`${gilroyMedium.className} text-[18px] leading-[24px] font-medium text-white not-italic`}>
             {content.lookingFor.title}
           </h3>
           <div className="flex flex-wrap items-center justify-center gap-[8px]">
@@ -234,152 +460,45 @@ export function PartnersBecome({
               </span>
             ))}
           </div>
-          <p className={`${interRegular.className} max-w-[720px] text-[13px] leading-[19.5px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
+          <p className={`${interRegular.className} text-[13px] leading-[19.5px] font-normal text-[#f0f0f0] opacity-65 not-italic`}>
             {content.lookingFor.description}
           </p>
         </div>
 
-        {/* ---------- application: pitch + form ---------- */}
-        <div className="grid w-full grid-cols-1 gap-[28px] min-[1024px]:grid-cols-[400px_1fr] min-[1024px]:items-start min-[1024px]:gap-[40px]">
-          {/* pitch panel */}
-          <div className="relative flex flex-col gap-[20px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black/75 p-[32px] backdrop-blur-[24px] min-[1024px]:sticky min-[1024px]:top-[110px]">
-            <Corners />
-            <h3 className={`${gilroyMedium.className} text-[26px] leading-[34px] font-medium text-white [word-break:break-word] not-italic`}>
-              {content.form.title}
-            </h3>
-            <p className={`${interRegular.className} text-[15px] leading-[24px] font-normal text-[#f0f0f0] opacity-75 [word-break:break-word] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
-              Frictionless by design — share a few details and our partnerships
-              team will take it from there.
-            </p>
-            <div className="flex flex-col gap-[14px] border-t-[0.5px] border-solid border-[rgba(240,240,240,0.15)] pt-[20px]">
-              {[
-                { step: "01", text: "Tell us who you are and what you build." },
-                { step: "02", text: "We review fit against the GPX roadmap." },
-                { step: "03", text: "Enablement begins — silicon, tools, ecosystem." },
-              ].map((s) => (
-                <div key={s.step} className="flex items-start gap-[14px]">
-                  <span className={`${dmMono.className} mt-[2px] shrink-0 text-[12px] leading-[18px] tracking-[1px] text-[#53d824]`}>
-                    {s.step}
-                  </span>
-                  <p className={`${interRegular.className} text-[13px] leading-[19.5px] font-normal text-[#f0f0f0] opacity-75 min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}>
-                    {s.text}
-                  </p>
-                </div>
-              ))}
-            </div>
-            <GhostGreenCta href={content.secondaryCta.href} className="w-full">
-              {content.secondaryCta.label}
-            </GhostGreenCta>
-          </div>
-
-          {/* form panel */}
-          <div className="relative w-full border-[1.5px] border-solid border-[rgba(83,216,36,0.2)] bg-black backdrop-blur-[8px]">
-            <Corners />
-            {submitted ? (
-              <div className="flex min-h-[420px] animate-hero-text-fade-in transform-gpu flex-col items-center justify-center gap-[20px] px-[32px] py-[56px] text-center">
-                <AmbientPulse />
-                <p className={`${gilroyMedium.className} max-w-[420px] text-[24px] leading-[32px] font-medium text-white [word-break:break-word] not-italic`}>
-                  {content.form.confirmation}
+        {/* pitch panel */}
+        <div className="relative flex w-full flex-col gap-[16px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-black/75 p-[24px] backdrop-blur-[24px]">
+          <Corners />
+          <h3 className={`${gilroyMedium.className} text-[22px] leading-[28px] font-medium text-white not-italic`}>
+            {content.form.title}
+          </h3>
+          <p className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic`}>
+            Frictionless by design — share a few details and our partnerships team will take it from there.
+          </p>
+          <div className="flex flex-col gap-[12px] border-t-[0.5px] border-solid border-[rgba(240,240,240,0.15)] pt-[16px]">
+            {[
+              { step: "01", text: "Tell us who you are and what you build." },
+              { step: "02", text: "We review fit against the GPX roadmap." },
+              { step: "03", text: "Enablement begins — silicon, tools, ecosystem." },
+            ].map((s) => (
+              <div key={s.step} className="flex items-start gap-[12px]">
+                <span className={`${dmMono.className} mt-[2px] shrink-0 text-[12px] leading-[18px] tracking-[1px] text-[#53d824]`}>
+                  {s.step}
+                </span>
+                <p className={`${interRegular.className} text-[13px] leading-[19.5px] font-normal text-[#f0f0f0] opacity-75`}>
+                  {s.text}
                 </p>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSubmitted(false);
-                    setForm(INITIAL_APPLY);
-                    setSelectedCapabilities([]);
-                  }}
-                  className={`${interRegular.className} cursor-pointer border-b border-[rgba(169,226,140,0.5)] text-[13px] leading-[21px] font-normal text-[#a9e28c] transition-colors duration-200 hover:text-[#53d824] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
-                >
-                  Submit another application
-                </button>
               </div>
-            ) : (
-              <div className="flex flex-col gap-[24px] p-[32px] min-[1024px]:p-[40px]">
-                <div className="grid grid-cols-1 gap-[20px] min-[560px]:grid-cols-2">
-                  <div className="flex flex-col gap-[5px]">
-                    <FieldLabel htmlFor="pa-name">{content.form.name}</FieldLabel>
-                    <div className={inputBox}>
-                      <input id="pa-name" className={inputCls} value={form.name} onChange={(e) => set("name")(e.target.value)} autoComplete="name" />
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-[5px]">
-                    <FieldLabel htmlFor="pa-company">{content.form.company}</FieldLabel>
-                    <div className={inputBox}>
-                      <input id="pa-company" className={inputCls} value={form.company} onChange={(e) => set("company")(e.target.value)} autoComplete="organization" />
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-[5px]">
-                    <FieldLabel htmlFor="pa-website">{content.form.website}</FieldLabel>
-                    <div className={inputBox}>
-                      <input id="pa-website" type="url" placeholder="https://" className={inputCls} value={form.website} onChange={(e) => set("website")(e.target.value)} />
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-[5px]">
-                    <FieldLabel htmlFor="pa-email">{content.form.email}</FieldLabel>
-                    <div className={inputBox}>
-                      <input id="pa-email" type="email" className={inputCls} value={form.email} onChange={(e) => set("email")(e.target.value)} autoComplete="email" />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex flex-col gap-[5px]">
-                  <span className={`${interLight.className} w-full shrink-0 text-[10px] leading-[15px] font-light text-white not-italic`}>
-                    {content.form.region}
-                  </span>
-                  <PartnersDropdown
-                    label={content.form.region}
-                    options={[...regions]}
-                    value={form.region}
-                    onChange={set("region")}
-                    id="pa-region"
-                  />
-                </div>
-
-                <div className="flex flex-col gap-[10px]">
-                  <span className={`${interLight.className} w-full shrink-0 text-[10px] leading-[15px] font-light text-white not-italic`}>
-                    {content.form.capabilities}
-                  </span>
-                  <div className="flex flex-wrap gap-[8px]">
-                    {capabilities.map((cap) => {
-                      const active = selectedCapabilities.includes(cap.short);
-                      return (
-                        <button
-                          key={cap.id}
-                          type="button"
-                          aria-pressed={active}
-                          onClick={() => toggleCapability(cap.short)}
-                          className={`h-[36px] cursor-pointer border-[0.5px] border-solid px-[14px] text-[13px] leading-[18px] font-normal transition-[border-color,background-color,color] duration-200 ${
-                            active
-                              ? "border-[rgba(83,216,36,0.55)] bg-[rgba(46,119,20,0.3)] text-[#a9e28c]"
-                              : "border-[rgba(240,240,240,0.2)] text-[#ccc] hover:border-[rgba(83,216,36,0.35)] hover:text-white"
-                          } ${interRegular.className}`}
-                        >
-                          {cap.short}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                <div className="flex flex-col gap-[5px]">
-                  <FieldLabel htmlFor="pa-experience">{content.form.experience}</FieldLabel>
-                  <div className={`${inputBox} min-h-[120px]`}>
-                    <textarea id="pa-experience" className={`${inputCls} h-full resize-none`} rows={4} value={form.experience} onChange={(e) => set("experience")(e.target.value)} />
-                  </div>
-                </div>
-
-                {error ? (
-                  <p className="text-[13px] leading-[19.5px] font-normal text-[#ff9d9d]" role="alert">
-                    {error}
-                  </p>
-                ) : null}
-
-                <PartnersGreenCta onClick={onSubmit} loading={loading} className="w-full min-[560px]:w-[280px]">
-                  {content.form.submit}
-                </PartnersGreenCta>
-              </div>
-            )}
+            ))}
           </div>
+          <GhostGreenCta href={content.secondaryCta.href} className="w-full">
+            {content.secondaryCta.label}
+          </GhostGreenCta>
+        </div>
+
+        {/* form panel */}
+        <div className="relative w-full border-[1.5px] border-solid border-[rgba(83,216,36,0.2)] bg-black backdrop-blur-[8px]">
+          <Corners />
+          {renderApplyForm("m-")}
         </div>
       </div>
     </section>

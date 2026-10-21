@@ -103,7 +103,7 @@ export function WearablesParadigm({ data }: { data?: any }) {
             />
           </div>
           <p
-            className={`${interRegular.className} w-[679.389px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[679.389px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
             data-node-id="2509:477"
           >
             {subtitle}
@@ -145,7 +145,7 @@ export function WearablesParadigm({ data }: { data?: any }) {
             />
           </div>
           <p
-            className={`${interRegular.className} w-[324px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[324px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic`}
           >
             {subtitle}
           </p>

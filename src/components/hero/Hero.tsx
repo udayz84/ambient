@@ -8,6 +8,8 @@ import { HeroStat } from "./HeroStat";
 import { HeroVisual } from "./HeroVisual";
 import { HeroVisualMedia } from "./HeroVisualMedia";
 
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
+
 const statValueGradient = (deg: number) =>
   `linear-gradient(${deg}deg, rgb(255, 255, 255) 29.352%, rgba(115, 115, 115, 0.5) 98.158%)`;
 
@@ -51,11 +53,11 @@ export function Hero({ data }: { data?: any }) {
       data-name="Hero Section"
       aria-label="Hero"
     >
-      {/* DESKTOP & LARGE TABLET (>=1024px) — compact desktop on large tablet, exact Figma on desktop >=1280px */}
-      <div className="relative hidden min-[1024px]:block h-full w-full max-w-[1442px]">
+      {/* DESKTOP (>=600px) */}
+      <TabletScaleCanvas className="relative hidden h-[876px] w-[1440px] shrink-0 min-[600px]:block">
         <HeroVisual videoSrc={videoSrc} />
 
-        <div className="pointer-events-none absolute top-[79px] left-[32px] min-[1180px]:left-[48px] xl:left-[95px] flex h-[821px] w-0 items-center justify-center">
+        <div className="pointer-events-none absolute top-[79px] left-[95px] flex h-[821px] w-0 items-center justify-center">
           <div className="flex-none rotate-90">
             <div className="relative h-0 w-[821px]" data-node-id="2379:738" data-name="Line 82">
               <div className="absolute inset-[-1px_0_0_0]">
@@ -71,7 +73,7 @@ export function Hero({ data }: { data?: any }) {
           </div>
         </div>
         <div
-          className="pointer-events-none absolute top-[77.634765625px] left-[30px] min-[1180px]:left-[46px] xl:left-[93px] h-[4px] w-[5px]"
+          className="pointer-events-none absolute top-[77.634765625px] left-[93px] h-[4px] w-[5px]"
           data-node-id="2379:739"
           data-name="Vector"
         >
@@ -84,7 +86,7 @@ export function Hero({ data }: { data?: any }) {
           />
         </div>
 
-        <div className="pointer-events-none absolute top-[79px] right-[32px] min-[1180px]:right-[48px] xl:right-[95px] flex h-[597px] w-0 items-center justify-center">
+        <div className="pointer-events-none absolute top-[79px] right-[95px] flex h-[597px] w-0 items-center justify-center">
           <div className="flex-none rotate-90">
             <div className="relative h-0 w-[597px]" data-node-id="2379:740" data-name="Line 83">
               <div className="absolute inset-[-0.5px_0]">
@@ -100,7 +102,7 @@ export function Hero({ data }: { data?: any }) {
           </div>
         </div>
         <div
-          className="pointer-events-none absolute top-[77.634765625px] right-[30px] min-[1180px]:right-[46px] xl:right-auto xl:left-[1344.5px] h-[4px] w-[5px]"
+          className="pointer-events-none absolute top-[77.634765625px] left-[1344.5px] h-[4px] w-[5px]"
           data-node-id="2379:741"
           data-name="Vector"
         >
@@ -116,13 +118,13 @@ export function Hero({ data }: { data?: any }) {
         {/* Foreground Content Wrapper */}
         <div className="relative mt-[78px] h-[798px] w-full">
           <div
-            className={`${gilroyMedium.className} absolute top-[130px] right-[40px] min-[1180px]:right-[56px] xl:right-auto xl:left-[936px] flex w-[370px] min-[1180px]:w-[420px] xl:w-[442px] flex-col items-start gap-[15px] [word-break:break-word] not-italic animate-hero-text-fade-in transform-gpu`}
+            className={`${gilroyMedium.className} absolute top-[130px] left-[936px] flex w-[442px] flex-col items-start gap-[15px] [word-break:break-word] not-italic animate-hero-text-fade-in transform-gpu`}
             style={{ animationDelay: '0.3s', animationDuration: '1000ms' }}
             data-node-id="2379:780"
           >
             <h1
               ref={fitRef}
-              className="min-w-full w-[min-content] shrink-0 bg-clip-text text-[34px] leading-[38px] min-[1100px]:text-[38px] min-[1100px]:leading-[42px] min-[1180px]:text-[42px] min-[1180px]:leading-[46px] xl:text-[46px] xl:leading-[49px] font-medium text-transparent"
+              className="min-w-full w-[min-content] shrink-0 bg-clip-text text-[46px] leading-[49px] font-medium text-transparent"
               style={{
                 backgroundImage:
                   "linear-gradient(101.005deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -134,7 +136,7 @@ export function Hero({ data }: { data?: any }) {
               {title}
             </h1>
             <p
-              className={`${interRegular.className} shrink-0 text-[14px] leading-[20px] min-[1180px]:text-[15px] min-[1180px]:leading-[22px] xl:text-[16px] xl:leading-[24px] font-normal text-[#f0f0f0] opacity-80 w-full max-w-[419px] [word-break:break-word]`}
+              className={`${interRegular.className} shrink-0 text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-80 w-full max-w-[419px] [word-break:break-word]`}
               data-node-id="2379:782"
             >
               {subtitle}
@@ -143,17 +145,17 @@ export function Hero({ data }: { data?: any }) {
 
           <HeroMetrics
             metrics={metrics}
-            className="absolute top-[515px] left-[36px] min-[1180px]:left-[60px] xl:left-[120px] flex w-max content-stretch items-start justify-start gap-[16px] min-[1180px]:gap-[24px]"
+            className="absolute top-[515px] left-[120px] flex w-max content-stretch items-start justify-start gap-[24px]"
           />
           <HeroScrollIndicator
             scrollText={scrollText}
-            className="absolute top-[696px] right-[28px] min-[1180px]:right-[44px] xl:right-auto xl:left-[1335.5px] flex h-[75px] w-[18px] flex-col content-stretch items-center gap-[10px] cursor-pointer border-0 bg-transparent p-0"
+            className="absolute top-[696px] left-[1335.5px] flex h-[75px] w-[18px] flex-col content-stretch items-center gap-[10px] cursor-pointer border-0 bg-transparent p-0"
           />
         </div>
-      </div>
+      </TabletScaleCanvas>
 
-      {/* MOBILE & SMALL TABLET (<1024px) — dedicated layout, desktop is untouched above */}
-      <div className="relative flex min-[1024px]:hidden w-full flex-col items-center pt-[100px] pb-[56px] px-[24px] md:px-[32px] overflow-hidden">
+      {/* MOBILE (<600px) */}
+      <div className="relative flex min-[600px]:hidden w-full flex-col items-center pt-[100px] pb-[56px] px-[24px] md:px-[32px] overflow-hidden">
         {/* Background Vertical Lines connecting to Navbar */}
         {/* Left Line */}
         <div className="pointer-events-none absolute top-[78px] bottom-0 left-[26px] md:left-[36px] z-0">

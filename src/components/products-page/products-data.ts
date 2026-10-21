@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { mediaUrl } from "@/lib/strapi";
 
 /** Figma 2900:464 — hero title text gradient. */

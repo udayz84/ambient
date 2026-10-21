@@ -5,6 +5,7 @@ import { gilroyMedium, interRegular } from "../hero/fonts";
 import { getFadeInClass, useFadeIn } from "../shared/useFadeIn";
 import { Corners } from "../shared/Corners";
 import { CORNER_LEFT, CORNER_RIGHT, sectionTitleGradient } from "./model-zoo-data";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 /** Figma 5130:8367 bg image fade overlay. */
 const BG_IMAGE_OVERLAY =
@@ -121,8 +122,8 @@ export function ModelZooWatchItRun() {
       data-name="SOM Ecosystem"
       aria-label="Don't take our word for it. Watch it run."
     >
-      {/* MOBILE (<1024px) — stacked cards */}
-      <div className="relative mx-auto flex w-full max-w-[393px] flex-col items-center gap-[24px] px-[19px] py-[30px] min-[1024px]:hidden">
+      {/* MOBILE (<600px) — stacked cards */}
+      <div className="relative mx-auto flex w-full max-w-[393px] flex-col items-center gap-[24px] px-[19px] py-[30px] min-[600px]:hidden">
         <div className="relative w-full max-w-[350px]">
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
@@ -155,8 +156,8 @@ export function ModelZooWatchItRun() {
         </p>
       </div>
 
-      {/* DESKTOP (>=1024px) */}
-      <div className="relative mx-auto hidden h-[752px] w-[1440px] min-[1024px]:block">
+      {/* DESKTOP (>=600px) */}
+      <TabletScaleCanvas className="relative mx-auto hidden h-[752px] w-[1440px] shrink-0 min-[600px]:block">
         {/* Abstract design — 5130:8368 (881.6×320, top -38) */}
         <div className="absolute top-[-38px] left-1/2 h-[320px] w-[881.616px] -translate-x-1/2" aria-hidden>
           <img
@@ -201,7 +202,7 @@ export function ModelZooWatchItRun() {
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           </div>
           <p
-            className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[650px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
             data-node-id="5130:8461"
           >
             Purpose-built edge modules. Validate your software on our evaluation
@@ -225,12 +226,12 @@ export function ModelZooWatchItRun() {
 
         {/* Caption — 5343:5017 (top 691, centered) */}
         <p
-          className={`${interRegular.className} absolute top-[691px] left-[calc(50%+0.5px)] w-[591px] -translate-x-1/2 text-center text-[18px] leading-[27px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} absolute top-[691px] left-[calc(50%+0.5px)] w-[591px] -translate-x-1/2 text-center text-[16px] leading-[24px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic`}
           data-node-id="5343:5017"
         >
           Proof you can hold in your hand, in the time it takes to read this page.
         </p>
-      </div>
+      </TabletScaleCanvas>
     </section>
   );
 }

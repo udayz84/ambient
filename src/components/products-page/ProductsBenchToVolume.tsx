@@ -1,4 +1,6 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
 
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { mediaUrl } from "@/lib/strapi";
@@ -7,6 +9,7 @@ import { useFitText } from "../shared/FitText";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { TagBadge } from "../hero/TagBadge";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
 import {
   BENCH_CARD,
@@ -57,17 +60,19 @@ export function ProductsBenchToVolume({ data }: { data?: any }) {
       : BENCH_CARDS.map(c => ({ ...c, chipLabel: c.chipLabel || chipLabel }));
   return (
     <>
-      {/* DESKTOP (>=1024px) */}
+      {/* DESKTOP (>=600px) */}
       <section
-        className="relative mx-auto hidden w-full bg-black min-[1024px]:block pb-[120px]"
+        className="relative mx-auto hidden w-full justify-center bg-black min-[600px]:flex pb-[120px]"
         aria-label="From bench to volume"
       >
-        <ProductsBenchToVolumeDesktop
-          headingLines={headingLines}
-          subtitle={subtitle}
-          chipLabel={chipLabel}
-          cards={cards}
-        />
+        <TabletScaleCanvas className="relative hidden w-[1440px] shrink-0 min-[600px]:block">
+          <ProductsBenchToVolumeDesktop
+            headingLines={headingLines}
+            subtitle={subtitle}
+            chipLabel={chipLabel}
+            cards={cards}
+          />
+        </TabletScaleCanvas>
       </section>
 
       {/* MOBILE (<1024px) */}
@@ -127,7 +132,7 @@ function ProductsBenchToVolumeDesktop({
           </h2>
         </div>
         <p
-          className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} w-[800px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
           data-node-id="2918:1475"
         >
           {subtitle}
@@ -184,7 +189,7 @@ function BenchCardView({ card, chipLabel, isCenter }: { card: any; chipLabel: st
             />
             {isCenter && (
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center border border-[#E2A740] bg-black/90 px-[16px] py-[12px] shadow-lg z-10">
-                <span className={`${dmMono?.className || "font-mono"} flex items-center gap-[16px] whitespace-nowrap text-[14px] uppercase tracking-[0.1em] text-[#E2A740] min-[1024px]:text-[16px]`}>
+                <span className={`${dmMono?.className || "font-mono"} flex items-center gap-[16px] whitespace-nowrap text-[16px] uppercase tracking-[0.1em] text-[#E2A740]`}>
                   <span>|</span>
                   <span>COMING SOON</span>
                   <span>|</span>
@@ -292,7 +297,7 @@ function ProductsBenchToVolumeMobile({
   const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <section
-      className="relative w-full overflow-hidden bg-black min-[1024px]:hidden"
+      className="relative w-full overflow-hidden bg-black min-[600px]:hidden"
       aria-label="From bench to volume"
       data-node-id="4105:7391"
     >
@@ -329,7 +334,7 @@ function ProductsBenchToVolumeMobile({
           </div>
           {/* Description */}
           <p
-            className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           >
             {subtitle}
           </p>
@@ -403,7 +408,7 @@ function MobileBenchCard({ card, isCenter }: { card: any; isCenter?: boolean }) 
         </div>
         {/* Description */}
         <p
-          className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
         >
           {card.description}
         </p>

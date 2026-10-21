@@ -14,18 +14,10 @@ import { CompanyMobile } from "./CompanyMobile";
 import { CompanyTechnologyPartners } from "./CompanyTechnologyPartners";
 
 import { CompanyHero } from "./CompanyHero";
-
 import { CompanyLeadership } from "./CompanyLeadership";
-
 import { CompanyMission } from "./CompanyMission";
-
-
-
-/** Figma 2379:2087 — engagement ends ~6737px; footer from 6572px; canvas 7824px */
-
-const COMPANY_PAGE_HEIGHT_PX = 7100;
-
-
+import { TabletScaleInit } from "../shared/TabletScaleInit";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 type CompanyProps = {
   data?: any;
@@ -34,39 +26,41 @@ type CompanyProps = {
 export function Company({ data }: CompanyProps = {}) {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
-      {/* DESKTOP (>=1024px) — absolute canvas, untouched */}
+      <TabletScaleInit />
+      {/* DESKTOP & TABLET (>=600px) */}
       <div
-        className="relative mx-auto -mt-[78px] hidden w-full overflow-x-clip overflow-y-visible bg-black min-[1024px]:block"
-        style={{ height: COMPANY_PAGE_HEIGHT_PX }}
+        className="relative mx-auto -mt-[78px] hidden w-full justify-center overflow-x-clip bg-black min-[600px]:flex"
         data-node-id="2379:2087"
         data-name="Company - 02"
       >
-        <div className="relative mx-auto h-full w-[1440px]">
-          {data?.hero ? <CompanyHero data={data.hero} /> : null}
-          {data?.mission ? <CompanyMission data={data.mission} /> : null}
-          {data?.leadership ? (
-            <CompanyLeadership data={data.leadership} />
-          ) : null}
-          {data?.dna ? <CompanyDna data={data.dna} /> : null}
-          {data?.ecosystem ? <CompanyEcosystem data={data.ecosystem} /> : null}
-          {data?.tech_partners ? (
-            <CompanyTechnologyPartners data={data.tech_partners} />
-          ) : null}
-          {data?.articles ? <CompanyArticles data={data.articles} /> : null}
-          {data?.engagement ? (
-            <CompanyImage124Background data={data.engagement} />
-          ) : null}
-          {data?.engagement ? (
-            <CompanyEngagement
-              data={data?.engagement}
-              joinTeam={data?.engagement?.join_team}
-            />
-          ) : null}
-        </div>
+        <TabletScaleCanvas className="relative h-[7100px] w-[1440px] shrink-0 min-[600px]:block">
+          <div className="relative mx-auto h-full w-[1440px]">
+            {data?.hero ? <CompanyHero data={data.hero} /> : null}
+            {data?.mission ? <CompanyMission data={data.mission} /> : null}
+            {data?.leadership ? (
+              <CompanyLeadership data={data.leadership} />
+            ) : null}
+            {data?.dna ? <CompanyDna data={data.dna} /> : null}
+            {data?.ecosystem ? <CompanyEcosystem data={data.ecosystem} /> : null}
+            {data?.tech_partners ? (
+              <CompanyTechnologyPartners data={data.tech_partners} />
+            ) : null}
+            {data?.articles ? <CompanyArticles data={data.articles} /> : null}
+            {data?.engagement ? (
+              <CompanyImage124Background data={data.engagement} />
+            ) : null}
+            {data?.engagement ? (
+              <CompanyEngagement
+                data={data?.engagement}
+                joinTeam={data?.engagement?.join_team}
+              />
+            ) : null}
+          </div>
+        </TabletScaleCanvas>
       </div>
 
-      {/* MOBILE (<1024px) — dedicated stacked layout */}
-      <div className="relative -mt-[78px] w-full bg-black min-[1024px]:hidden">
+      {/* MOBILE (<600px) — dedicated stacked layout */}
+      <div className="relative -mt-[78px] w-full bg-black min-[600px]:hidden">
         <CompanyMobile data={data} />
       </div>
     </main>

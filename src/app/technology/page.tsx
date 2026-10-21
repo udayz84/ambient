@@ -51,19 +51,17 @@ export default async function TechnologyPage() {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       <TabletScaleInit />
-      {data?.hero && <TechnologyPageHero data={data.hero} config={data.brief_form} />}
-      {data?.problem && <TechnologyPageProblem data={data.problem} />}
-      {data?.architecture && (
-        <TechnologyPageArchitecture
-          data={data.architecture}
-          pillarsData={data.pillars}
-        />
-      )}
-      {data?.modes && <TechnologyPageModes data={data.modes} />}
-      {data?.graph && <TechnologyPageGraph data={data.graph} />}
-      {data?.efficiency && <TechnologyPageEfficiency data={data.efficiency} />}
-      {data?.silicon && <TechnologyPageSilicon data={data.silicon} />}
-      {data?.bottom_cta && <TechnologyPageBottomCta data={data.bottom_cta} config={data.brief_form} />}
+      <TechnologyPageHero data={data?.hero} config={data?.brief_form} />
+      <TechnologyPageProblem data={data?.problem} />
+      <TechnologyPageArchitecture
+        data={data?.architecture}
+        pillarsData={data?.pillars}
+      />
+      <TechnologyPageModes data={data?.modes} />
+      <TechnologyPageGraph data={data?.graph} />
+      <TechnologyPageEfficiency data={data?.efficiency} />
+      <TechnologyPageSilicon data={data?.silicon} />
+      <TechnologyPageBottomCta data={data?.bottom_cta} config={data?.brief_form} />
     </main>
   );
 }

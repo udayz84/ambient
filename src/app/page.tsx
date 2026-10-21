@@ -9,6 +9,7 @@ import { MeasuredProof } from "@/components/measured-proof/MeasuredProof";
 import { PlatformScale } from "@/components/platform-scale/PlatformScale";
 import { Technology } from "@/components/technology/Technology";
 import { ApplicationsPageWins } from "@/components/applications-page/ApplicationsPageWins";
+import { TabletScaleInit } from "@/components/shared/TabletScaleInit";
 import { getCollection, getSingleType } from "@/lib/strapi";
 import { buildMetadata, type SeoData } from "@/lib/seo";
 
@@ -77,6 +78,7 @@ export default async function Home() {
 
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
+      <TabletScaleInit />
       {data?.hero && <HeroCarousel data={data.hero} formConfig={data.hero_form} />}
       {data?.measured_proof && <MeasuredProof data={data.measured_proof} />}
       <ApplicationsPageWins />

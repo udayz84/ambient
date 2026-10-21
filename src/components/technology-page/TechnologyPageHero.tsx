@@ -74,7 +74,7 @@ export function TechnologyPageHero({
   const descText = data?.subtitle || FALLBACK_DESCRIPTION;
   const primaryLabel = data?.primary_button?.label || FALLBACK_PRIMARY_LABEL;
   const primaryHref = data?.primary_button?.href || "#";
-  const bgSrc = mediaUrl(data?.background_image);
+  const bgSrc = mediaUrl(data?.background_image) || "/technology/hero-bg.webp";
   const objectSrc = mediaUrl(data?.hero_object);
 
   return (

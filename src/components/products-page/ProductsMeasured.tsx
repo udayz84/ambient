@@ -1,4 +1,6 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
 
 import { mediaUrl } from "@/lib/strapi";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
@@ -7,6 +9,7 @@ import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
 import { Corners } from "../shared/Corners";
 import { TagBadge } from "../hero/TagBadge";
 import { ProductBriefModal } from "./ProductBriefModal";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 import { useState } from "react";
 import { dmMono, gilroyBold, gilroyMedium, interRegular } from "../hero/fonts";
 import {
@@ -657,13 +660,13 @@ export function ProductsMeasured({
 
   return (
     <>
-      {/* DESKTOP (>=1024px) — 3309:1912 "Desktop - 15" (1440×1043) */}
+      {/* DESKTOP (>=600px) — 3309:1912 "Desktop - 15" (1440×1043) */}
       <section
-        className="relative flex w-full justify-center bg-black overflow-hidden mt-[60px]"
+        className="relative hidden w-full justify-center bg-black overflow-hidden mt-[60px] min-[600px]:flex"
         aria-label="Measured in silicon"
       >
-        <div
-          className="relative hidden h-[1043px] w-full max-w-[1440px] min-[1024px]:block"
+        <TabletScaleCanvas
+          className="relative hidden h-[1043px] w-[1440px] shrink-0 min-[600px]:block"
           data-node-id="3309:1912"
           data-name="Desktop - 15"
         >
@@ -736,7 +739,7 @@ export function ProductsMeasured({
             <MenuChip label={menuLabel} />
             <GradientTitleBlock headingLines={headingLines} />
             <p
-              className={`${interRegular.className} [word-break:break-word] font-normal leading-[21px] not-italic relative shrink-0 text-[14px] text-center whitespace-nowrap min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+              className={`${interRegular.className} [word-break:break-word] font-normal leading-[24px] not-italic relative shrink-0 text-[16px] text-center whitespace-nowrap`}
               style={{ color: GREY }}
               data-node-id="3309:1922"
             >
@@ -770,12 +773,12 @@ export function ProductsMeasured({
               onClick={(e) => handleCtaClick(e, secondary.label)}
             />
           </div>
-        </div>
+        </TabletScaleCanvas>
       </section>
 
-      {/* MOBILE (<1024px) — Figma 3567:4246 (393×780) */}
+      {/* MOBILE (<600px) — Figma 3567:4246 (393×780) */}
       <section
-        className="relative w-full overflow-hidden bg-black min-[1024px]:hidden"
+        className="relative w-full overflow-hidden bg-black min-[600px]:hidden"
         aria-label="Measured in silicon"
         data-node-id="3567:4246"
       >
@@ -814,7 +817,7 @@ export function ProductsMeasured({
             </div>
             {/* Description — 3567:4344 */}
             <p
-              className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+              className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
             >
               {subtitle}
             </p>

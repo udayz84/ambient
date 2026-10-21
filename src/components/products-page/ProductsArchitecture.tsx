@@ -1,4 +1,6 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
 
 import { useState } from "react";
 import { mediaUrl } from "@/lib/strapi";
@@ -6,6 +8,7 @@ import { useFitText } from "../shared/FitText";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { TagBadge } from "../hero/TagBadge";
+import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 import {
   ARCH_ARTICLE,
   ARCH_ASSETS,
@@ -65,21 +68,23 @@ export function ProductsArchitecture({ data }: { data?: any }) {
       : ARCH_STATS.map((s) => ({ ...s, statIcon: STAT_ICON }));
   return (
     <>
-      {/* DESKTOP (>=1024px) */}
+      {/* DESKTOP (>=600px) */}
       <section
-        className="relative mx-auto hidden w-full bg-black min-[1024px]:block pt-[60px]"
+        className="relative mx-auto hidden w-full justify-center bg-black min-[600px]:flex pt-[60px]"
         aria-label="Architecture"
       >
-        <ProductsArchitectureDesktop
-          label={label}
-          headingLines={headingLines}
-          subtitle={subtitle}
-          image={image}
-          caption={caption}
-          stats={stats}
-          hoveredIndex={hoveredIndex}
-          onHover={setHoveredIndex}
-        />
+        <TabletScaleCanvas className="relative hidden w-[1440px] shrink-0 min-[600px]:block">
+          <ProductsArchitectureDesktop
+            label={label}
+            headingLines={headingLines}
+            subtitle={subtitle}
+            image={image}
+            caption={caption}
+            stats={stats}
+            hoveredIndex={hoveredIndex}
+            onHover={setHoveredIndex}
+          />
+        </TabletScaleCanvas>
       </section>
 
       {/* MOBILE (<1024px) */}
@@ -335,7 +340,7 @@ function ProductsArchitectureDesktop({
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
         </div>
         <p
-          className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} w-[650px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           data-node-id="2903:2171"
         >
           {subtitle}
@@ -439,7 +444,7 @@ function ArchStatView({
         data-name="Content"
       >
         <p
-          className={`${interRegular.className} m-0 w-full text-[18px] leading-[27px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+          className={`${interRegular.className} m-0 w-full text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
         >
           {stat.description}
         </p>
@@ -467,7 +472,7 @@ function ProductsArchitectureMobile({
   const fitRef = useFitText<HTMLHeadingElement>({});
   return (
     <section
-      className="relative w-full overflow-hidden bg-black min-[1024px]:hidden pt-[80px]"
+      className="relative w-full overflow-hidden bg-black min-[600px]:hidden pt-[80px]"
       aria-label="Architecture"
       data-node-id="3568:4644"
     >
@@ -503,7 +508,7 @@ function ProductsArchitectureMobile({
           </div>
           {/* Description */}
           <p
-            className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
           >
             {subtitle}
           </p>
@@ -559,7 +564,7 @@ function ProductsArchitectureMobile({
                   </div>
                   {/* Description */}
                   <p
-                    className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+                    className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
                   >
                     {stat.description}
                   </p>

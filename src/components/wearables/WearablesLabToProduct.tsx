@@ -187,7 +187,7 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
             />
           </div>
           <p
-            className={`${interRegular.className} w-[650px] text-center text-[14px] leading-[21px] text-[#f0f0f0] not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[650px] text-center text-[16px] leading-[24px] text-[#f0f0f0] not-italic [word-break:break-word]`}
           >
             {subtitle}
           </p>
@@ -224,7 +224,7 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
             />
           </div>
           <p
-            className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic`}
           >
             {subtitle}
           </p>
@@ -266,7 +266,7 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
                   {card.title}
                 </p>
                 <p
-                  className={`${interRegular.className} text-[14px] leading-[22px] tracking-[-0.3125px] text-[#99a1af] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+                  className={`${interRegular.className} text-[14px] leading-[22px] tracking-[-0.3125px] text-[#99a1af] not-italic`}
                 >
                   {card.body}
                 </p>
