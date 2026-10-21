@@ -24,8 +24,14 @@ memory using its Azure identity. Existing SCM basic publishing authentication mu
 remain available for Kudu ZIP deployment. Do not broaden the identity's role to the
 resource group, subscription, CMS, database, or storage account.
 
-After the first successful GitHub deployment is verified, disconnect the previous
-Azure Repos source in the website's Deployment Center to prevent competing builds.
+The first push deployment was verified on 2026-10-21:
+[GitHub Actions run 39567542888](https://github.com/udayz84/ambient/actions/runs/39567542888),
+commit `4144774fb859913015e68270cde7f170540b6ddf`, including the latest website changes
+from `51ed7b5`. The previous Azure Repos source was then disconnected to prevent
+competing builds. GitHub Actions now controls automatic deployments; the portal's
+source-selection screen can remain unconfigured. Use GitHub Actions to inspect or
+rerun this workflow, and Deployment Center Logs to inspect the Azure build.
+
 Previous source: `https://AmbientScientific@dev.azure.com/AmbientScientific/website/_git/website`,
 branch `main`, App Service Build Service, Node 24 LTS.
 
