@@ -29,10 +29,7 @@ import nodemailer from "nodemailer";
 
 /** Fixed recipients for every form in the project. */
 export const FIXED_MAIL_RECIPIENTS = [
-  "saharsh@ambientscientific.ai",
-  "abdur@ambientscientific.ai",
-  "rchowdhury@ambientscientific.ai",
-  "chandra@ambientscientific.ai",
+  "marketing@ambientscientific.ai",
 ];
 
 export type MailAttachment = {

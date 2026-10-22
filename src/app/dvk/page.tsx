@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Metadata } from "next";
 import { Dvk } from "@/components/dvk/Dvk";
-import { getSingleType } from "@/lib/strapi";
+import { getSingleType, getFooter } from "@/lib/strapi";
 import { buildMetadata, type SeoData } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
@@ -26,20 +26,32 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function DvkPage() {
   let data: any = null;
+  let footerData: any = null;
   try {
-    data = await getSingleType<any>("dvk-page", [
-      "hero",
-      "evalkit_form",
-      { section: "inside_module", fields: ["image"], nested: ["specs"] },
-      { section: "prototype", nested: ["cards"] },
-      "appforge",
-      { section: "demos", nested: ["demo_cards"], fields: ["phone_card"] },
-      "modelforge",
-      { section: "integrated_modules", nested: ["cards", "primary_button", "secondary_button"] },
-      "seo",
+    const [dvkRes, footerRes] = await Promise.allSettled([
+      getSingleType<any>("dvk-page", [
+        "hero",
+        "evalkit_form",
+        { section: "inside_module", fields: ["image"], nested: ["specs"] },
+        { section: "prototype", nested: ["cards"] },
+        "appforge",
+        { section: "demos", nested: ["demo_cards"], fields: ["phone_card"] },
+        "modelforge",
+        { section: "integrated_modules", nested: ["cards", "primary_button", "secondary_button"] },
+        "seo",
+      ]),
+      getFooter<any>(),
     ]);
+    if (dvkRes.status === "fulfilled") data = dvkRes.value;
+    if (footerRes.status === "fulfilled") footerData = footerRes.value;
   } catch {
     data = null;
   }
-  return <Dvk data={data} formConfig={data?.evalkit_form} />;
+  return (
+    <Dvk
+      data={data}
+      formConfig={data?.evalkit_form}
+      newsletterData={footerData?.newsletter}
+    />
+  );
 }

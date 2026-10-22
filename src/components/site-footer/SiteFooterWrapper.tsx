@@ -24,7 +24,7 @@ export function SiteFooterWrapper({
       isCareersPage={normalizedPathname === "/careers"}
       isResourcesPage={normalizedPathname === "/resources"}
       isOverlapPage={
-        ["/technology", "/products", "/applications", "/dvk", "/som", "/partners", "/model-zoo", "/developer"].includes(normalizedPathname) ||
+        ["/technology", "/products", "/applications", "/dvk", "/evk", "/som", "/partners", "/model-zoo", "/developer"].includes(normalizedPathname) ||
         normalizedPathname.startsWith("/applications/")
       }
       pathname={normalizedPathname}

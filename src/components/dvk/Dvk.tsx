@@ -20,6 +20,7 @@ import { DEMO_CARDS, PHONE_CARD_FALLBACK } from "./DvkDemosCards";
 import { DvkModelForge } from "./DvkModelForge";
 import { DvkComingSoon } from "./DvkComingSoon";
 import { DvkIntegratedModules } from "./DvkIntegratedModules";
+import { NewsletterSignup } from "@/components/site-footer/NewsletterSignup";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
@@ -52,7 +53,15 @@ const DVK_APP_FORGE_PROPS = {
   bothStoresComingSoon: true,
 };
 
-export function Dvk({ data, formConfig }: { data?: any; formConfig?: any }) {
+export function Dvk({
+  data,
+  formConfig,
+  newsletterData,
+}: {
+  data?: any;
+  formConfig?: any;
+  newsletterData?: any;
+}) {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       <TabletScaleInit />
@@ -132,6 +141,14 @@ export function Dvk({ data, formConfig }: { data?: any; formConfig?: any }) {
       {data?.integrated_modules ? (
         <DvkIntegratedModules data={data.integrated_modules} />
       ) : null}
+
+      {/* Subscribe Newsletter Section — Single card centered, aligned, and responsive */}
+      <section
+        className="relative z-20 flex w-full justify-center bg-transparent px-[24px] pt-[80px] pb-0 mb-[-700px] min-[600px]:[margin-bottom:calc(-400px*var(--tablet-zoom,1))] min-[600px]:px-0"
+        aria-label="Subscribe to our newsletter"
+      >
+        <NewsletterSignup data={newsletterData} />
+      </section>
     </main>
   );
 }
