@@ -1,5 +1,8 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState, useRef } from "react";
 import Image from "next/image";
 import { gilroyMedium, interRegular, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
@@ -479,6 +482,33 @@ export function ApplicationsPageModelZoo({
       ? WEARABLES_FEATURES
       : null;
 
+  const [activeCard, setActiveCard] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  const totalCards = features ? features.length : PARTNERS_WHY.journey.length;
+
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const el = e.currentTarget;
+    const firstChild = el.firstElementChild as HTMLElement | null;
+    const cardWidth = firstChild ? firstChild.offsetWidth + 16 : 296;
+    const index = Math.round(el.scrollLeft / cardWidth);
+    setActiveCard(Math.max(0, Math.min(index, totalCards - 1)));
+  };
+
+  const scrollToCard = (index: number) => {
+    if (!carouselRef.current) return;
+    const card = carouselRef.current.children[index] as HTMLElement | undefined;
+    if (card) {
+      const containerLeft = carouselRef.current.getBoundingClientRect().left;
+      const cardLeft = card.getBoundingClientRect().left;
+      const targetScroll =
+        carouselRef.current.scrollLeft +
+        (cardLeft - containerLeft) -
+        (carouselRef.current.offsetWidth - card.offsetWidth) / 2;
+      carouselRef.current.scrollTo({ left: targetScroll, behavior: "smooth" });
+    }
+  };
+
   return (
     <section className="relative flex w-full flex-col items-center overflow-hidden bg-black pt-[100px] pb-[80px]">
       
@@ -548,43 +578,54 @@ export function ApplicationsPageModelZoo({
       ) : null}
 
       {variant !== "strip" ? (
-        features ? (
-          /* Hardcoded feature cards for Wearables & Smart Homes */
-          <div className="relative z-10 mt-[60px] w-full py-[24px] px-[24px] min-[1024px]:px-[64px] min-[1024px]:py-[32px] max-w-[1440px]">
-            <div className="flex w-full flex-wrap min-[1024px]:flex-nowrap justify-center gap-[16px] sm:gap-[24px]">
-              {features.map((item) => (
-                <div
-                  key={item.title}
-                  className="w-full sm:w-[calc(50%-12px)] min-[1024px]:w-[calc(20%-19.2px)] max-w-[400px] min-[1024px]:max-w-none"
-                >
-                  <FeatureCard item={item} />
-                </div>
-              ))}
-            </div>
+        <div className="relative z-10 mt-[60px] w-full py-[24px] px-[24px] min-[1024px]:px-[64px] min-[1024px]:py-[32px] max-w-[1440px]">
+          <div
+            ref={carouselRef}
+            onScroll={handleScroll}
+            className="flex w-[calc(100%+48px)] -mx-[24px] px-[24px] min-[1024px]:w-full min-[1024px]:mx-0 min-[1024px]:px-0 snap-x snap-mandatory min-[1024px]:snap-none overflow-x-auto min-[1024px]:overflow-visible flex-nowrap min-[1024px]:flex-nowrap justify-start min-[1024px]:justify-center gap-[16px] min-[1024px]:gap-[24px] pb-[16px] min-[1024px]:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {features
+              ? features.map((item) => (
+                  <div
+                    key={item.title}
+                    className="w-[280px] sm:w-[320px] max-w-[85vw] min-[1024px]:max-w-none min-[1024px]:w-[calc(20%-19.2px)] shrink-0 snap-center min-[1024px]:shrink min-[1024px]:snap-align-none"
+                  >
+                    <FeatureCard item={item} />
+                  </div>
+                ))
+              : PARTNERS_WHY.journey.map((step, i) => (
+                  <div
+                    key={step.title}
+                    className="w-[280px] sm:w-[320px] max-w-[85vw] min-[1024px]:max-w-none min-[1024px]:w-[calc(20%-19.2px)] shrink-0 snap-center min-[1024px]:shrink min-[1024px]:snap-align-none"
+                  >
+                    <WhyCard
+                      step={{
+                        ...step,
+                        image:
+                          (isHearables && HEARABLES_CARD_IMAGES[i]) ||
+                          (isIiot && IIOT_CARD_IMAGES[i]) ||
+                          step.image,
+                      }}
+                    />
+                  </div>
+                ))}
           </div>
-        ) : (
-          /* Partner cards on other application slug pages */
-          <div className="relative z-10 mt-[60px] w-full py-[24px] px-[24px] min-[1024px]:px-[64px] min-[1024px]:py-[32px] max-w-[1440px]">
-            <div className="flex w-full flex-wrap min-[1024px]:flex-nowrap justify-center gap-[16px] sm:gap-[24px]">
-              {PARTNERS_WHY.journey.map((step, i) => (
-                <div
-                  key={step.title}
-                  className="w-full sm:w-[calc(50%-12px)] min-[1024px]:w-[calc(20%-19.2px)] max-w-[400px] min-[1024px]:max-w-none"
-                >
-                  <WhyCard
-                    step={{
-                      ...step,
-                      image:
-                        (isHearables && HEARABLES_CARD_IMAGES[i]) ||
-                        (isIiot && IIOT_CARD_IMAGES[i]) ||
-                        step.image,
-                    }}
-                  />
-                </div>
-              ))}
-            </div>
+
+          {/* Mobile pagination indicator dots */}
+          <div className="flex items-center justify-center gap-[6px] mt-[16px] min-[1024px]:hidden">
+            {Array.from({ length: totalCards }).map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => scrollToCard(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                className={`h-[4px] rounded-full transition-all duration-300 ${
+                  activeCard === i ? "w-[20px] bg-[#6ced3f]" : "w-[6px] bg-white/20"
+                }`}
+              />
+            ))}
           </div>
-        )
+        </div>
       ) : null}
     </section>
   );

@@ -1,10 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
 import { mediaUrl } from "@/lib/strapi";
 import { TagBadge } from "../hero/TagBadge";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TechnologyCta } from "./TechnologyCta";
+import bgImageFallback from "../../../public/technology/bg-image-29.webp";
 
 export function TechnologyMobile({ data }: { data?: any }) {
+  const bgSrc = mediaUrl(data?.background_visual) || bgImageFallback;
   const tagText = data?.tag?.text || "";
   const subheading = data?.subheading || data?.subtitle || "";
   const heading = data?.heading || "";
@@ -90,23 +94,54 @@ export function TechnologyMobile({ data }: { data?: any }) {
           )}
         </div>
 
-        {/* Edge-to-Edge Image */}
-        <div 
-          className="relative mt-[32px] w-full h-[184px] md:h-[280px] md:max-w-[700px] md:mx-auto"
-          style={{
-            maskImage: "radial-gradient(ellipse at center, black 70%, transparent 100%)",
-            WebkitMaskImage: "radial-gradient(ellipse at center, black 70%, transparent 100%)",
-          }}
-        >
-          {mediaUrl(data?.image) ? (
-            <Image
-              src={mediaUrl(data?.image) as string}
-              alt={data?.image_alt || ""}
-              fill
-              className="object-contain"
-              sizes="100vw"
-            />
-          ) : null}
+        {/* Diagram Area with Background Visual */}
+        <div className="relative mt-[28px] w-full flex items-center justify-center">
+          {/* Background image behind picture */}
+          <div
+            className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[125%] max-w-[520px] h-[260px] sm:h-[320px] overflow-hidden"
+            aria-hidden
+          >
+            <div className="relative size-full">
+              <Image
+                src={bgSrc}
+                alt=""
+                fill
+                className="object-cover object-center"
+                sizes="(max-width: 600px) 100vw, 520px"
+              />
+              {/* Radial and edge fades blending smoothly into black */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "radial-gradient(ellipse at center, rgba(0,0,0,0) 25%, rgba(0,0,0,0.65) 65%, #000000 100%), linear-gradient(to bottom, #000000 0%, rgba(0,0,0,0) 15%, rgba(0,0,0,0) 85%, #000000 100%)",
+                }}
+              />
+              {/* Ambient green glow behind the compute matrix and hourglass */}
+              <div
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[240px] h-[130px] rounded-full blur-[45px] bg-[#6ced3f]/25"
+              />
+            </div>
+          </div>
+
+          {/* Edge-to-Edge Image */}
+          <div 
+            className="relative z-10 w-full h-[184px] md:h-[280px] md:max-w-[700px] md:mx-auto"
+            style={{
+              maskImage: "radial-gradient(ellipse at center, black 70%, transparent 100%)",
+              WebkitMaskImage: "radial-gradient(ellipse at center, black 70%, transparent 100%)",
+            }}
+          >
+            {mediaUrl(data?.image) ? (
+              <Image
+                src={mediaUrl(data?.image) as string}
+                alt={data?.image_alt || ""}
+                fill
+                className="object-contain"
+                sizes="100vw"
+              />
+            ) : null}
+          </div>
         </div>
 
         {/* Features Content with Padding */}

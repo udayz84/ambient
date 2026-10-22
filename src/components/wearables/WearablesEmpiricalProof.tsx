@@ -2,6 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
+import { useState } from "react";
 import { dmMono, gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { mediaUrl } from "@/lib/strapi";
 import { Corners } from "../shared/Corners";
@@ -285,7 +286,7 @@ function SmartHomeCardMobile({
 }) {
   return (
     <div
-      className="relative flex flex-col w-full shrink-0 rounded-[2px] overflow-hidden border border-[rgba(255,255,255,0.08)] bg-gradient-to-b from-[#0c160b] to-[#040804] pb-[18px]"
+      className="relative flex flex-col w-[290px] max-w-[85vw] shrink-0 snap-center rounded-[2px] overflow-hidden border border-[rgba(255,255,255,0.08)] bg-gradient-to-b from-[#0c160b] to-[#040804] pb-[18px]"
       data-name="Card"
     >
       <CardAbstractBg />
@@ -358,7 +359,7 @@ function EcgCard({
   const textBottom = isSmartHome ? 16 : (index === 2 ? 14 : 21);
   return (
     <div
-      className="relative min-h-[370px] w-[301px] shrink-0 overflow-clip rounded-[1px] bg-gradient-to-b from-[#0c160b] to-[rgba(12,22,11,0)]"
+      className={`relative ${isIndustrial ? "min-h-[378px]" : "min-h-[370px]"} w-[301px] shrink-0 overflow-clip rounded-[1px] bg-gradient-to-b from-[#0c160b] to-[rgba(12,22,11,0)]`}
       data-name="Card"
     >
       <CardAbstractBg />
@@ -421,27 +422,50 @@ function EcgCard({
           </div>
         </>
       )}
-      {/* Stat — 4016:3946 */}
-      <p
-        className={`${gilroySemiBold.className} absolute text-white whitespace-nowrap not-italic ${
-          isSmartHome
-            ? (index === 2 ? "text-[26px]" : index === 3 ? "text-[30px]" : "text-[38px]")
-            : (index === 2 ? "text-[30px]" : "text-[40px]")
-        }`}
-        style={{ left: statLeft, top: statTop }}
-      >
-        {stat}
-      </p>
-      {/* Description — 4016:3943 */}
-      <div
-        className={`${interRegular.className} absolute left-[18px] flex w-[265px] flex-col items-start gap-[6px] font-normal not-italic`}
-        style={{ bottom: textBottom }}
-      >
-        <p className="w-full text-[16px] leading-[24px] text-white whitespace-nowrap overflow-hidden text-ellipsis">{title}</p>
-        <p className="text-[12px] leading-[18px] text-[rgba(255,255,255,0.6)] [word-break:break-word]" style={{ width: descWidth }}>
-          {description}
-        </p>
-      </div>
+      {isIndustrial ? (
+        <div className="absolute left-[18px] top-[208px] flex w-[265px] flex-col items-start">
+          <p
+            className={`${gilroySemiBold.className} text-white whitespace-nowrap not-italic ${
+              index === 2 ? "text-[28px] leading-[34px]" : "text-[36px] leading-[40px]"
+            }`}
+          >
+            {stat}
+          </p>
+          <p className={`${gilroyMedium.className} w-full text-[16px] leading-[22px] text-white whitespace-nowrap overflow-hidden text-ellipsis mt-[6px]`}>
+            {title}
+          </p>
+          <p
+            className={`${interRegular.className} text-[12px] leading-[17px] text-[rgba(255,255,255,0.6)] [word-break:break-word] mt-[5px]`}
+            style={{ width: descWidth }}
+          >
+            {description}
+          </p>
+        </div>
+      ) : (
+        <>
+          {/* Stat — 4016:3946 */}
+          <p
+            className={`${gilroySemiBold.className} absolute text-white whitespace-nowrap not-italic ${
+              isSmartHome
+                ? (index === 2 ? "text-[26px]" : index === 3 ? "text-[30px]" : "text-[38px]")
+                : (index === 2 ? "text-[30px]" : "text-[40px]")
+            }`}
+            style={{ left: statLeft, top: statTop }}
+          >
+            {stat}
+          </p>
+          {/* Description — 4016:3943 */}
+          <div
+            className={`${interRegular.className} absolute left-[18px] flex w-[265px] flex-col items-start gap-[6px] font-normal not-italic`}
+            style={{ bottom: textBottom }}
+          >
+            <p className="w-full text-[16px] leading-[24px] text-white whitespace-nowrap overflow-hidden text-ellipsis">{title}</p>
+            <p className="text-[12px] leading-[18px] text-[rgba(255,255,255,0.6)] [word-break:break-word]" style={{ width: descWidth }}>
+              {description}
+            </p>
+          </div>
+        </>
+      )}
     </div>
   );
 }
@@ -469,7 +493,7 @@ function EcgCardMobile({
   isHearables?: boolean;
 }) {
   return (
-    <div className={`relative min-h-[290px] w-full shrink-0 ${CARD_BG}`}>
+    <div className={`relative min-h-[290px] w-[290px] max-w-[85vw] shrink-0 snap-center ${CARD_BG}`}>
       <CardAbstractBg />
       <Corners
         leftSrc="/applications/wearables/vector-47.svg"
@@ -513,19 +537,35 @@ function EcgCardMobile({
           </div>
         </>
       )}
-      <p
-        className={`${gilroySemiBold.className} absolute left-[14px] top-[124px] text-[28px] leading-[normal] text-white whitespace-nowrap not-italic`}
-      >
-        {stat}
-      </p>
-      <div
-        className={`${interRegular.className} absolute left-[14px] flex w-[calc(100%-28px)] flex-col items-start gap-[6px] pb-[14px] pt-[170px] font-normal not-italic`}
-      >
-        <p className="w-full text-[16px] leading-[24px] text-white">{title}</p>
-        <p className="w-full text-[12px] leading-[18px] text-[rgba(255,255,255,0.6)]">
-          {description}
-        </p>
-      </div>
+      {isIndustrial ? (
+        <div className="relative z-10 flex flex-col items-start px-[14px] pt-[166px] pb-[16px]">
+          <p className={`${gilroySemiBold.className} text-[28px] leading-[34px] text-white whitespace-nowrap not-italic`}>
+            {stat}
+          </p>
+          <p className={`${gilroyMedium.className} w-full text-[16px] leading-[22px] text-white mt-[6px]`}>
+            {title}
+          </p>
+          <p className={`${interRegular.className} w-full text-[12px] leading-[18px] text-[rgba(255,255,255,0.6)] mt-[6px]`}>
+            {description}
+          </p>
+        </div>
+      ) : (
+        <>
+          <p
+            className={`${gilroySemiBold.className} absolute left-[14px] top-[124px] text-[28px] leading-[normal] text-white whitespace-nowrap not-italic`}
+          >
+            {stat}
+          </p>
+          <div
+            className={`${interRegular.className} absolute left-[14px] flex w-[calc(100%-28px)] flex-col items-start gap-[6px] pb-[14px] pt-[170px] font-normal not-italic`}
+          >
+            <p className="w-full text-[16px] leading-[24px] text-white">{title}</p>
+            <p className="w-full text-[12px] leading-[18px] text-[rgba(255,255,255,0.6)]">
+              {description}
+            </p>
+          </div>
+        </>
+      )}
     </div>
   );
 }
@@ -558,6 +598,17 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
   const heading = SECTION_HEADING;
   const subtitle = isSmartHome ? SMART_HOME_SUBTITLE : isIndustrial ? "" : (data?.subtitle || FALLBACK_SUBTITLE);
   const dataEcgCards: any[] = Array.isArray(data?.ecg_cards) ? data.ecg_cards : [];
+
+  const [activeMobileCard, setActiveMobileCard] = useState(0);
+
+  const mobileCardsCount = isSmartHome ? SMART_HOME_ECG_CARDS.length : 4;
+
+  const handleMobileScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const el = e.currentTarget;
+    const cardWidth = 290 + 16;
+    const index = Math.round(el.scrollLeft / cardWidth);
+    setActiveMobileCard(Math.max(0, Math.min(index, mobileCardsCount - 1)));
+  };
   const fallbackList = isIndustrial ? INDUSTRIAL_FALLBACKS : ECG_FALLBACKS;
   const ecgCards = Array.from({ length: 4 }).map((_, i) => {
     const c = dataEcgCards[i];
@@ -805,8 +856,11 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
           )}
         </div>
 
-        {/* Cards (mobile) */}
-        <div className="flex w-full flex-col gap-[16px]">
+        {/* Cards Carousel (mobile) */}
+        <div
+          onScroll={handleMobileScroll}
+          className="relative z-10 flex w-[calc(100%+42px)] -mx-[21px] snap-x snap-mandatory gap-[16px] overflow-x-auto px-[21px] pb-[16px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
           {isSmartHome
             ? SMART_HOME_ECG_CARDS.map((card, i) => (
                 <SmartHomeCardMobile
@@ -835,6 +889,20 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
                 />
               ))}
         </div>
+
+        {/* Carousel Pagination Dots */}
+        {mobileCardsCount > 1 && (
+          <div className="flex items-center justify-center gap-[6px] -mt-[8px]">
+            {Array.from({ length: mobileCardsCount }).map((_, i) => (
+              <div
+                key={i}
+                className={`h-[4px] rounded-full transition-all duration-300 ${
+                  activeMobileCard === i ? "w-[20px] bg-[#6ced3f]" : "w-[6px] bg-white/20"
+                }`}
+              />
+            ))}
+          </div>
+        )}
 
         {/* Industrial CTAs */}
         {isIndustrial && (

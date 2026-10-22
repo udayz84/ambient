@@ -71,18 +71,18 @@ export function DeveloperPlatformCard({
 
       {imageSrc && imageVariant === "modules" ? (
         <div
-          className="absolute top-[calc(50%+12.5px)] left-[336px] h-[187px] w-[436px] -translate-y-1/2"
+          className="absolute top-[calc(50%+8px)] left-[324px] h-[224px] w-[456px] -translate-y-1/2 flex items-center justify-center pointer-events-none"
           data-node-id="2379:1008"
           data-name="image 76"
         >
-          <div className="pointer-events-none absolute inset-0 overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img loading="lazy" decoding="async"
-              src={imageSrc}
-              alt=""
-              className="absolute top-[-27.04%] left-[-29.37%] h-[156.76%] w-[129.56%] max-w-none"
-            />
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            loading="lazy"
+            decoding="async"
+            src={imageSrc}
+            alt=""
+            className="size-full object-contain object-center"
+          />
         </div>
       ) : null}
 

@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interMedium, interRegular } from "../hero/fonts";
@@ -8,7 +10,7 @@ import {
   DEFAULT_GPX_INDEX,
   type GpxProduct,
 } from "./platform-scale-data";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { Corners } from "../shared/Corners";
 
@@ -164,11 +166,103 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
   const ctaHref = cta.href || "";
 
   const [virtualIndex, setVirtualIndex] = useState(TOTAL * 10 + defaultIndex);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+  const isHorizontal = useRef<boolean | null>(null);
+  const touchStartTime = useRef<number>(0);
+
+  const mouseStartX = useRef<number | null>(null);
+  const mouseStartTime = useRef<number>(0);
 
   const activeProduct = getVirtualProduct(virtualIndex, products);
 
   const goPrevious = useCallback(() => setVirtualIndex((c: number) => c - 1), []);
   const goNext = useCallback(() => setVirtualIndex((c: number) => c + 1), []);
+
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    touchStartTime.current = Date.now();
+    isHorizontal.current = null;
+    setIsDragging(true);
+    setDragOffset(0);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+    const deltaX = currentX - touchStartX.current;
+    const deltaY = currentY - touchStartY.current;
+
+    if (isHorizontal.current === null) {
+      if (Math.abs(deltaX) > 8 || Math.abs(deltaY) > 8) {
+        isHorizontal.current = Math.abs(deltaX) > Math.abs(deltaY);
+      }
+    }
+
+    if (isHorizontal.current) {
+      const clampedOffset = Math.max(-100, Math.min(100, deltaX));
+      setDragOffset(clampedOffset);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current !== null && isHorizontal.current) {
+      const duration = Date.now() - touchStartTime.current;
+      const isQuickFlick = duration < 300 && Math.abs(dragOffset) > 25;
+      const passedThreshold = Math.abs(dragOffset) > 45;
+
+      if (passedThreshold || isQuickFlick) {
+        if (dragOffset < 0) {
+          goNext();
+        } else {
+          goPrevious();
+        }
+      }
+    }
+    touchStartX.current = null;
+    touchStartY.current = null;
+    isHorizontal.current = null;
+    setIsDragging(false);
+    setDragOffset(0);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    mouseStartX.current = e.clientX;
+    mouseStartTime.current = Date.now();
+    setIsDragging(true);
+    setDragOffset(0);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (mouseStartX.current === null) return;
+    const deltaX = e.clientX - mouseStartX.current;
+    const clampedOffset = Math.max(-100, Math.min(100, deltaX));
+    setDragOffset(clampedOffset);
+  };
+
+  const handleMouseUp = () => {
+    if (mouseStartX.current !== null) {
+      const duration = Date.now() - mouseStartTime.current;
+      const isQuickFlick = duration < 300 && Math.abs(dragOffset) > 25;
+      const passedThreshold = Math.abs(dragOffset) > 45;
+
+      if (passedThreshold || isQuickFlick) {
+        if (dragOffset < 0) {
+          goNext();
+        } else {
+          goPrevious();
+        }
+      }
+    }
+    mouseStartX.current = null;
+    setIsDragging(false);
+    setDragOffset(0);
+  };
 
   const items = ([-2, -1, 0, 1, 2] as const).map((offset) => ({
     offset,
@@ -251,148 +345,167 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
           </p>
         </div>
 
-        {/* Carousel Container */}
-        <div className="relative mt-[40px] h-[200px] w-full">
-          {items.map(({ key, product, offset }) => {
-            const slot = MOBILE_SLOT[offset];
+        {/* Draggable Swiper Area (Chips + Stat Panel) */}
+        <div
+          className="relative flex w-full flex-col items-center cursor-grab active:cursor-grabbing select-none [touch-action:pan-y]"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={handleTouchEnd}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+        >
+          {/* Carousel Container */}
+          <div className="relative mt-[40px] h-[200px] w-full">
+            {items.map(({ key, product, offset }) => {
+              const slot = MOBILE_SLOT[offset];
 
-            return (
-              <div
-                key={key}
-                className="absolute left-1/2 top-0"
-                style={{
-                  transform: `translateX(${slot.translateX}px)`,
-                  opacity: slot.opacity,
-                  zIndex: slot.zIndex,
-                  transition: MOBILE_TRANSITION,
-                }}
-                aria-hidden={!slot.isHero}
-              >
-                {/* Chip */}
+              return (
                 <div
-                  className="absolute left-0 top-0"
+                  key={key}
+                  className="absolute left-1/2 top-0"
                   style={{
-                    width: slot.width,
-                    height: slot.height,
-                    transform: `translate(-50%, ${slot.chipTop}px)`,
-                    transition: MOBILE_TRANSITION,
+                    transform: `translateX(${slot.translateX + dragOffset}px)`,
+                    opacity: slot.opacity,
+                    zIndex: slot.zIndex,
+                    transition: isDragging ? "none" : MOBILE_TRANSITION,
                   }}
+                  aria-hidden={!slot.isHero}
                 >
-                  {/* Hero layer (image 77 + frame) */}
+                  {/* Chip */}
                   <div
-                    className="absolute inset-0"
+                    className="absolute left-0 top-0"
                     style={{
-                      opacity: slot.isHero ? 1 : 0,
-                      transition: "opacity 500ms cubic-bezier(0.4,0,0.2,1)",
+                      width: slot.width,
+                      height: slot.height,
+                      transform: `translate(-50%, ${slot.chipTop}px)`,
+                      transition: isDragging ? "none" : MOBILE_TRANSITION,
                     }}
                   >
-                    <div className="relative size-full">
-                      {mediaUrl(product.chip_image) ? (
-                        <Image
-                          src={mediaUrl(product.chip_image) as string}
-                          alt=""
-                          fill
-                          className="object-bottom"
-                          sizes="188px"
-                        />
-                      ) : null}
-                    </div>
-                  </div>
-                  {/* Side layer (image 81) */}
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      opacity: slot.isHero ? 0 : 1,
-                      transition: "opacity 500ms cubic-bezier(0.4,0,0.2,1)",
-                    }}
-                  >
-                    <div className="relative size-full">
-                      {mediaUrl(product.chip_image) ? (
-                        <Image
-                          src={mediaUrl(product.chip_image) as string}
-                          alt=""
-                          fill
-                          className="object-contain object-bottom"
-                          sizes={`${slot.width}px`}
-                        />
-                      ) : null}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Label */}
-                {slot.hasLabel && (
-                  <div
-                    className="absolute left-0 top-0 flex items-center justify-center bg-[rgba(0,0,0,0.25)]"
-                    style={{
-                      transform: `translate(-50%, ${slot.labelTop}px)`,
-                      padding: `${slot.labelPaddingY}px ${slot.labelPaddingX}px`,
-                      opacity: slot.labelOpacity,
-                      transition: MOBILE_TRANSITION,
-                    }}
-                  >
-                    <p
-                      className={`${gilroyMedium.className} max-w-full text-center whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis [word-break:break-word]`}
+                    {/* Hero layer (image 77 + frame) */}
+                    <div
+                      className="absolute inset-0"
                       style={{
-                        fontSize: `${slot.labelFontSize}px`,
-                        lineHeight: "21.023px",
-                        letterSpacing: slot.labelTracking,
+                        opacity: slot.isHero ? 1 : 0,
+                        transition: "opacity 500ms cubic-bezier(0.4,0,0.2,1)",
                       }}
                     >
-                      {product.label}
-                    </p>
+                      <div className="relative size-full">
+                        {mediaUrl(product.chip_image) ? (
+                          <Image
+                            src={mediaUrl(product.chip_image) as string}
+                            alt=""
+                            fill
+                            className="object-bottom"
+                            sizes="188px"
+                          />
+                        ) : null}
+                      </div>
+                    </div>
+                    {/* Side layer (image 81) */}
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        opacity: slot.isHero ? 0 : 1,
+                        transition: "opacity 500ms cubic-bezier(0.4,0,0.2,1)",
+                      }}
+                    >
+                      <div className="relative size-full">
+                        {mediaUrl(product.chip_image) ? (
+                          <Image
+                            src={mediaUrl(product.chip_image) as string}
+                            alt=""
+                            fill
+                            className="object-contain object-bottom"
+                            sizes={`${slot.width}px`}
+                          />
+                        ) : null}
+                      </div>
+                    </div>
                   </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
 
-        {/* Stat Panel */}
-        <div className="relative mt-[58px] flex w-full max-w-[340px] flex-col items-center gap-[12px] backdrop-blur-[6px] bg-white/[0.02] border-[0.5px] border-solid border-white/15 px-[20px] py-[24px]">
-          {/* Top Right Bracket */}
-          <div className="absolute -top-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center scale-[0.6] origin-top-right">
-            <div className="rotate-180 flex-none">
-              <div className="relative size-[6px]">
-                <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
-              </div>
-            </div>
-          </div>
-          {/* Top Left Bracket */}
-          <div className="absolute -top-[0.5px] -left-[0.5px] z-10 flex size-[6px] items-center justify-center scale-[0.6] origin-top-left">
-            <div className="-scale-y-100 flex-none">
-              <div className="relative size-[6px]">
-                <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
-              </div>
-            </div>
-          </div>
-          {/* Bottom Right Bracket */}
-          <div className="absolute -bottom-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center scale-[0.6] origin-bottom-right">
-            <div className="-scale-x-100 flex-none">
-              <div className="relative size-[6px]">
-                <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
-              </div>
-            </div>
-          </div>
-          {/* Bottom Left Bracket */}
-          <div className="absolute -bottom-[0.5px] -left-[0.5px] z-10 flex size-[6px] items-center justify-center scale-[0.6] origin-bottom-left">
-            <div className="flex-none">
-              <div className="relative size-[6px]">
-                <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
-              </div>
-            </div>
+                  {/* Label */}
+                  {slot.hasLabel && (
+                    <div
+                      className="absolute left-0 top-0 flex items-center justify-center bg-[rgba(0,0,0,0.25)]"
+                      style={{
+                        transform: `translate(-50%, ${slot.labelTop}px)`,
+                        padding: `${slot.labelPaddingY}px ${slot.labelPaddingX}px`,
+                        opacity: slot.labelOpacity,
+                        transition: isDragging ? "none" : MOBILE_TRANSITION,
+                      }}
+                    >
+                      <p
+                        className={`${gilroyMedium.className} max-w-full text-center whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis [word-break:break-word]`}
+                        style={{
+                          fontSize: `${slot.labelFontSize}px`,
+                          lineHeight: "21.023px",
+                          letterSpacing: slot.labelTracking,
+                        }}
+                      >
+                        {product.label}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
 
-          <p
-            className={`${gilroyMedium.className} text-center text-[24px] leading-[36px] font-medium tracking-[-0.24px] whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis [word-break:break-word]`}
+          {/* Stat Panel */}
+          <div
+            className="relative mt-[58px] flex w-full max-w-[340px] flex-col items-center gap-[12px] backdrop-blur-[6px] bg-white/[0.02] border-[0.5px] border-solid border-white/15 px-[20px] py-[24px]"
+            style={{
+              transform: `translateX(${dragOffset * 0.25}px)`,
+              transition: isDragging ? "none" : "transform 500ms cubic-bezier(0.4,0,0.2,1)",
+            }}
           >
-            {activeProduct.label}
-          </p>
-          <p
-            className={`${interRegular.className} max-w-[340px] text-center text-[14px] leading-[1.4] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
-          >
-            {activeProduct.description}
-          </p>
+            {/* Top Right Bracket */}
+            <div className="absolute -top-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center scale-[0.6] origin-top-right">
+              <div className="rotate-180 flex-none">
+                <div className="relative size-[6px]">
+                  <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+                </div>
+              </div>
+            </div>
+            {/* Top Left Bracket */}
+            <div className="absolute -top-[0.5px] -left-[0.5px] z-10 flex size-[6px] items-center justify-center scale-[0.6] origin-top-left">
+              <div className="-scale-y-100 flex-none">
+                <div className="relative size-[6px]">
+                  <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+                </div>
+              </div>
+            </div>
+            {/* Bottom Right Bracket */}
+            <div className="absolute -bottom-[0.5px] -right-[0.5px] z-10 flex size-[6px] items-center justify-center scale-[0.6] origin-bottom-right">
+              <div className="-scale-x-100 flex-none">
+                <div className="relative size-[6px]">
+                  <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+                </div>
+              </div>
+            </div>
+            {/* Bottom Left Bracket */}
+            <div className="absolute -bottom-[0.5px] -left-[0.5px] z-10 flex size-[6px] items-center justify-center scale-[0.6] origin-bottom-left">
+              <div className="flex-none">
+                <div className="relative size-[6px]">
+                  <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+                </div>
+              </div>
+            </div>
+
+            <p
+              className={`${gilroyMedium.className} text-center text-[24px] leading-[36px] font-medium tracking-[-0.24px] whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis [word-break:break-word]`}
+            >
+              {activeProduct.label}
+            </p>
+            <p
+              className={`${interRegular.className} max-w-[340px] text-center text-[14px] leading-[1.4] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
+            >
+              {activeProduct.description}
+            </p>
+          </div>
         </div>
 
         {/* Arrows */}
