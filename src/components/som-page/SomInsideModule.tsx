@@ -93,10 +93,12 @@ function SpecCard({
 export function SomInsideModule({
   data,
   bridgeCta,
+  hideMobile = false,
 }: {
   data?: any;
   /** Optional CTA rendered below the bridge/subtitle line (used on /dvk). */
   bridgeCta?: { label: string; href: string };
+  hideMobile?: boolean;
 }) {
   const [hoveredIndex, setHoveredIndex] = useState(-1);
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
@@ -316,52 +318,54 @@ export function SomInsideModule({
   </div>
 
       {/* MOBILE (<600px) */}
-      <div className="relative flex w-full flex-col items-center gap-[40px] px-[24px] pt-[64px] pb-[64px] min-[600px]:hidden">
-        {/* Header */}
-        <div className="flex w-full flex-col items-center gap-[20px]">
-          <div className="relative px-[10px]">
-            <div
-              className={`${gilroyMedium.className} bg-clip-text text-center text-[34px] leading-[37px] font-medium text-transparent not-italic [word-break:break-word]`}
-              style={{
-                backgroundImage: `linear-gradient(${TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-              }}
+      {!hideMobile && (
+        <div className="relative flex w-full flex-col items-center gap-[40px] px-[24px] pt-[64px] pb-[64px] min-[600px]:hidden">
+          {/* Header */}
+          <div className="flex w-full flex-col items-center gap-[20px]">
+            <div className="relative px-[10px]">
+              <div
+                className={`${gilroyMedium.className} bg-clip-text text-center text-[34px] leading-[37px] font-medium text-transparent not-italic [word-break:break-word]`}
+                style={{
+                  backgroundImage: `linear-gradient(${TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                }}
+              >
+                {heading}
+              </div>
+              <Corners />
+            </div>
+            <p
+              className={`${interRegular.className} max-w-[332px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/80 not-italic`}
             >
-              {heading}
-            </div>
-            <Corners />
-          </div>
-          <p
-            className={`${interRegular.className} max-w-[332px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/80 not-italic`}
-          >
-            {subtitle}
-          </p>
-          {bridgeCta ? <BridgeCta cta={bridgeCta} /> : null}
-        </div>
-
-        {/* Body */}
-        <div className="flex w-full flex-col gap-[24px]">
-          {/* Module photo card */}
-          <div className="relative flex w-full flex-col items-center gap-[16px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] pt-[10px] px-[16px] pb-[20px]">
-            <div className="relative h-[200px] w-full shrink-0 overflow-hidden">
-              <img loading="lazy" decoding="async"
-                src={BOARD_IMAGE}
-                alt="Sparsh AI Module"
-                className="absolute inset-0 size-full object-cover"
-              />
-            </div>
-            <Corners />
+              {subtitle}
+            </p>
+            {bridgeCta ? <BridgeCta cta={bridgeCta} /> : null}
           </div>
 
-          {/* Spec cards */}
-          <div className="flex w-full flex-col gap-[16px]">
-            {specs.map((spec) => (
-              <SpecCard key={spec.title} {...spec} />
-            ))}
+          {/* Body */}
+          <div className="flex w-full flex-col gap-[24px]">
+            {/* Module photo card */}
+            <div className="relative flex w-full flex-col items-center gap-[16px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] pt-[10px] px-[16px] pb-[20px]">
+              <div className="relative h-[200px] w-full shrink-0 overflow-hidden">
+                <img loading="lazy" decoding="async"
+                  src={BOARD_IMAGE}
+                  alt="Sparsh AI Module"
+                  className="absolute inset-0 size-full object-cover"
+                />
+              </div>
+              <Corners />
+            </div>
+
+            {/* Spec cards */}
+            <div className="flex w-full flex-col gap-[16px]">
+              {specs.map((spec) => (
+                <SpecCard key={spec.title} {...spec} />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }

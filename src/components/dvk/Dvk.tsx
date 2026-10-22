@@ -21,6 +21,7 @@ import { DvkModelForge } from "./DvkModelForge";
 import { DvkComingSoon } from "./DvkComingSoon";
 import { DvkIntegratedModules } from "./DvkIntegratedModules";
 import { NewsletterSignup } from "@/components/site-footer/NewsletterSignup";
+import { mediaUrl } from "@/lib/strapi";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
@@ -83,11 +84,12 @@ export function Dvk({
       {/* Hero Section — Mobile (<600px) */}
       <DvkHeroMobile data={data?.hero} formConfig={formConfig} />
 
-      {/* Hardware stack / inside module (internal >=600px / <600px split) */}
-      <div id="dvk-content" className="relative mx-auto w-full bg-black">
+      {/* Hardware stack / inside module (hidden on mobile, visible >=600px) */}
+      <div id="dvk-content" className="relative mx-auto w-full bg-black hidden min-[600px]:block">
         {data?.inside_module ? (
           <SomInsideModule
             data={data.inside_module}
+            hideMobile
           />
         ) : null}
       </div>
@@ -170,6 +172,10 @@ function DvkHeroMobile({ data, formConfig }: { data?: any; formConfig?: any }) {
     data?.subtitle ||
     "Validate real-time AI at microwatt power levels out of the box. The Cranium Evaluation Kit comes fully loaded with onboard sensors, rich I/O, and pre-integrated drivers so you can stop breadboarding and start testing inferences in minutes.";
   const ctaLabel = data?.cta_label || "Request Evaluation Kit";
+  const bg =
+    mediaUrl(data?.mobile_background_image) ||
+    mediaUrl(data?.background_image) ||
+    "/dvk/hero-bg-2.webp";
   return (
     <section
       className="relative -mt-[78px] h-[778px] w-full overflow-clip bg-black min-[600px]:hidden"
@@ -237,22 +243,24 @@ function DvkHeroMobile({ data, formConfig }: { data?: any; formConfig?: any }) {
       </div>
 
       {/* Board image — 4059:10015 (0, 268 / 393×360) */}
-      <div
-        className="pointer-events-none absolute top-[386px] left-0 h-[360px] w-full"
-        data-node-id="4059:10015"
-        aria-hidden
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img loading="lazy" decoding="async"
-          alt=""
-          src="/dvk/hero-bg-mobile.webp"
-          className="absolute inset-0 size-full object-cover"
-        />
+      {bg && (
         <div
-          className="absolute inset-0"
-          style={{ backgroundImage: HERO_IMAGE_OVERLAY_MOBILE }}
-        />
-      </div>
+          className="pointer-events-none absolute top-[386px] left-0 h-[360px] w-full"
+          data-node-id="4059:10015"
+          aria-hidden
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img loading="lazy" decoding="async"
+            alt={data?.alt || ""}
+            src={bg}
+            className="absolute inset-0 size-full object-contain"
+          />
+          <div
+            className="absolute inset-0"
+            style={{ backgroundImage: HERO_IMAGE_OVERLAY_MOBILE }}
+          />
+        </div>
+      )}
 
       {/* CTA — 4059:10016 (72, 652 / 250×48, bottom-anchored) */}
       <div className="absolute bottom-0 left-[calc(50%+0.5px)] z-10 w-[250px] -translate-x-1/2">
