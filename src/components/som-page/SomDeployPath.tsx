@@ -184,13 +184,10 @@ export function SomDeployPath({ data }: { data?: any }) {
               </div>
             );
           })}
-          
-          {/* Mobile Connector */}
-          <div className="absolute left-1/2 top-[50%] flex h-[80px] w-[2px] shrink-0 items-center justify-center bg-[rgba(0,255,0,0.3)] z-0 -translate-x-1/2" />
         </div>
 
         {/* CTA Row */}
-        <div className="flex w-full flex-col sm:flex-row items-center justify-center gap-[20px] mt-[20px]">
+        <div className="flex w-full flex-col sm:flex-row items-center justify-center gap-[16px] mt-[20px]">
           <GreenCtaButton width="280px" href={primaryHref}>{primaryLabel}</GreenCtaButton>
           <a
             href={secondaryHref}
@@ -198,7 +195,7 @@ export function SomDeployPath({ data }: { data?: any }) {
               e.preventDefault();
               setIsModalOpen(true);
             }}
-            className="relative flex h-[48px] w-full sm:w-[280px] shrink-0 items-center justify-center border border-white/20 bg-black/50 hover:bg-white/5 transition-colors"
+            className="relative flex h-[48px] w-[280px] shrink-0 items-center justify-center border border-white/20 bg-black/50 hover:bg-white/5 transition-colors"
           >
             <span className={`${gilroyMedium.className} text-[14px] font-medium uppercase whitespace-nowrap text-white`}>
               {secondaryLabel}

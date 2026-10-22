@@ -126,7 +126,7 @@ export function ModelZooSteps({ formConfig }: { formConfig?: PopupConfig }) {
 
   return (
     <section
-      className="relative mt-[120px] min-[600px]:mt-[160px] w-full"
+      className="relative mt-[32px] min-[600px]:mt-[160px] w-full"
       data-node-id="5131:10582"
       aria-label="Pick a model. Push a button. It's running."
     >
@@ -134,9 +134,9 @@ export function ModelZooSteps({ formConfig }: { formConfig?: PopupConfig }) {
       <div className="relative mx-auto flex w-full flex-col items-center min-[600px]:hidden px-[16px]">
         {/* Header */}
         <div className="flex w-full flex-col items-center justify-center gap-[24px]" data-node-id="5131:10583" data-name="Section Title">
-          <div className="relative px-[10px]" data-node-id="5131:10703" data-name="Title">
+          <div className="relative px-[24px] pt-[16px] pb-[28px]" data-node-id="5131:10703" data-name="Title">
             <h2
-              className={`${gilroyMedium.className} w-full max-w-[605px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic`}
+              className={`${gilroyMedium.className} w-full max-w-[605px] bg-clip-text text-center text-[30px] leading-[38px] min-[400px]:text-[34px] min-[400px]:leading-[42px] font-medium text-transparent not-italic`}
               style={{ backgroundImage: TITLE_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
               data-node-id="5131:10704"
             >
@@ -154,7 +154,7 @@ export function ModelZooSteps({ formConfig }: { formConfig?: PopupConfig }) {
           {STEPS.map((step) => (
             <div
               key={`m-${step.nodeId}`}
-              className="group relative snap-center flex h-[320px] w-[280px] shrink-0 flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] px-[24px] pt-[16px] pb-[24px]"
+              className="group relative snap-center flex h-[360px] w-[280px] shrink-0 flex-col items-center gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.2)] px-[24px] pt-[16px] pb-[24px]"
               data-node-id={step.nodeId}
               data-name="Article"
             >
@@ -167,16 +167,16 @@ export function ModelZooSteps({ formConfig }: { formConfig?: PopupConfig }) {
                 loading="lazy"
                 decoding="async"
               />
-              <div className="absolute top-[200px] left-[24px] flex w-[calc(100%-48px)] max-w-[333.99px] flex-col items-start gap-[8px]">
+              <div className="absolute top-[185px] left-[24px] flex w-[calc(100%-48px)] max-w-[333.99px] flex-col items-start gap-[8px]">
                 <p className={`${gilroyMedium.className} w-full text-[32px] leading-[38px] text-white not-italic`}>
                   {step.title}
                 </p>
-                <p className={`${interRegular.className} w-full text-[16px] leading-[26px] font-normal tracking-[-0.3125px] text-[#99a1af] not-italic [word-break:break-word]`}>
+                <p className={`${interRegular.className} w-full text-[15px] leading-[24px] font-normal tracking-[-0.3125px] text-[#99a1af] not-italic [word-break:break-word]`}>
                   {step.desc}
                 </p>
               </div>
               <p
-                className={`${gilroyMedium.className} absolute top-[150px] bg-gradient-to-b from-white to-[rgba(255,255,255,0)] bg-clip-text text-[60px] leading-[64px] font-medium text-transparent opacity-50 whitespace-nowrap text-center not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]`}
+                className={`${gilroyMedium.className} absolute top-[140px] bg-gradient-to-b from-white to-[rgba(255,255,255,0)] bg-clip-text text-[60px] leading-[64px] font-medium text-transparent opacity-50 whitespace-nowrap text-center not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]`}
                 style={{ left: step.numberLeft, width: step.numberWidth }}
                 aria-hidden
               >
@@ -192,7 +192,7 @@ export function ModelZooSteps({ formConfig }: { formConfig?: PopupConfig }) {
           {FEATURE_PANELS.map((panel, i) => (
             <div
               key={`m-${i}`}
-              className="relative flex h-[150px] min-w-px w-full flex-col items-start p-[20px]"
+              className="relative flex min-h-[150px] h-auto min-w-px w-full flex-col items-start p-[20px]"
               style={{ backgroundImage: PANEL_BG }}
               data-node-id={`5131:106${35 + i * 10}`}
               data-name="Content"
@@ -209,9 +209,9 @@ export function ModelZooSteps({ formConfig }: { formConfig?: PopupConfig }) {
         </div>
 
         {/* CTAs mobile */}
-        <div className="mt-[24px] flex flex-wrap items-start justify-center gap-[24px] z-50 pointer-events-auto" data-node-id="5131:10665">
-          <CtaPrimary href="/developer" label="Explore the Developer Hub" width={251} />
-          <CtaSecondary href="/SOM" label="Request the SDK" width={174} />
+        <div className="mt-[24px] flex flex-col items-center justify-center gap-[12px] w-full z-50 pointer-events-auto" data-node-id="5131:10665">
+          <CtaPrimary href="/developer" label="Explore the Developer Hub" width={280} className="w-[280px]" />
+          <CtaSecondary href="/SOM" label="Request the SDK" width={280} className="w-[280px]" />
         </div>
       </div>
 

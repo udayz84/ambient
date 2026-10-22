@@ -113,7 +113,7 @@ function KitCard({ card }: { card: (typeof CARDS)[number] }) {
 export function ModelZooKits() {
   return (
     <section
-      className="relative z-20 mt-[100px] mb-[-700px] min-[600px]:[margin-bottom:calc(-400px*var(--tablet-zoom,1))] w-full bg-transparent"
+      className="relative z-20 mt-[48px] min-[600px]:mt-[100px] mb-0 pb-[24px] min-[600px]:pb-0 min-[600px]:[margin-bottom:calc(-400px*var(--tablet-zoom,1))] w-full overflow-hidden bg-transparent"
       data-node-id="5131:10997"
       aria-label="Stop reading. Start running."
     >
@@ -121,9 +121,9 @@ export function ModelZooKits() {
       <div className="relative mx-auto flex w-full flex-col items-center min-[600px]:hidden px-[16px]">
         {/* Title */}
         <div className="flex w-full flex-col items-center gap-[24px]" data-node-id="5131:11088" data-name="Section Title">
-          <div className="relative px-[10px]" data-node-id="5131:11089" data-name="Title">
+          <div className="relative px-[20px] py-[12px]" data-node-id="5131:11089" data-name="Title">
             <h2
-              className={`${gilroyMedium.className} w-full max-w-[605px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic`}
+              className={`${gilroyMedium.className} w-full max-w-[605px] bg-clip-text text-center text-[34px] leading-[40px] min-[400px]:text-[36px] min-[400px]:leading-[42px] font-medium text-transparent not-italic`}
               style={{ backgroundImage: TITLE_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
               data-node-id="5131:11090"
             >
@@ -136,23 +136,27 @@ export function ModelZooKits() {
           </p>
         </div>
 
-        {/* Cards mobile */}
-        <div className="mt-[24px] flex w-full flex-col items-stretch gap-[16px] px-0" data-node-id="5246:6363" data-name="Frame 1984079440">
+        {/* Cards mobile carousel */}
+        <div
+          className="mt-[24px] flex w-[calc(100%+32px)] snap-x snap-mandatory overflow-x-auto pb-[16px] gap-[16px] mx-[-16px] px-[16px] after:content-[''] after:w-[1px] after:shrink-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          data-node-id="5246:6363"
+          data-name="Frame 1984079440"
+        >
           {CARDS.map((card) => (
             <div
               key={`m-${card.nodeId}`}
-              className="relative flex h-auto w-full flex-col gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.7)] px-[20px] pt-[20px] pb-[32px]"
+              className="relative snap-center shrink-0 flex h-auto w-[280px] min-[390px]:w-[300px] flex-col gap-[20px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.7)] px-[20px] pt-[20px] pb-[32px]"
               data-node-id={card.nodeId}
               data-name="Article"
             >
-              <div className="relative h-[327px] w-full shrink-0 overflow-clip rounded-[6px]">
+              <div className="relative h-[220px] w-full shrink-0 overflow-clip rounded-[6px]">
                 <img alt={card.alt} src={card.img} className="pointer-events-none size-full rounded-[6px] object-cover" loading="lazy" decoding="async" />
               </div>
               <div className="flex w-full flex-1 flex-col items-start gap-[10px]">
                 <p className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] text-white not-italic`}>
                   {card.title}
                 </p>
-                <p className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}>
+                <p className={`${interRegular.className} w-full text-[15px] leading-[22px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}>
                   {card.desc}
                 </p>
               </div>

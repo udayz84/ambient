@@ -610,7 +610,7 @@ function MobileStatBlock({
 function EfficiencyTableMobile() {
   return (
     <div
-      className="absolute top-[249px] left-[calc(50%+1.5px)] h-[840px] w-[350px] -translate-x-1/2"
+      className="relative h-[840px] w-[350px]"
       data-node-id="4533:2873"
       data-name="Lower power consumption"
     >
@@ -1053,7 +1053,7 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
       </TabletScaleCanvas>
 
       {/* MOBILE (<600px) — Figma 4533:2857 "6th Fold" (393x1119 + whitepaper CTA) */}
-      <div className="relative h-[1230px] w-full overflow-hidden min-[600px]:hidden">
+      <div className="relative flex w-full flex-col items-center overflow-hidden min-[600px]:hidden pt-[30px] pb-[40px]">
         {/* Background glows — 4533:2859 / 4533:2860 */}
         <Glow
           top="top-[-104px]"
@@ -1101,7 +1101,7 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
         </div>
 
         {/* Header — 4533:2865 */}
-        <div className="absolute top-[30px] left-[calc(50%+1.5px)] flex w-[350px] -translate-x-1/2 flex-col items-center justify-center gap-[10px]">
+        <div className="relative z-10 flex w-[350px] flex-col items-center justify-center gap-[10px]">
           <div className="relative w-full px-[14px] py-[6px]">
             <div
               className={`${gilroyMedium.className} w-full bg-clip-text text-center text-[19px] min-[375px]:text-[21px] leading-[26px] min-[375px]:leading-[28px] font-medium text-transparent not-italic`}
@@ -1128,12 +1128,12 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
         </div>
 
         {/* Stacked comparison panel — 4533:2873 */}
-        <div className="relative z-10">
+        <div className="relative z-10 mt-[20px] flex justify-center">
           <EfficiencyTableMobile />
         </div>
 
         {/* Whitepaper CTA below the panel */}
-        <div className="absolute top-[1106px] left-1/2 z-10 -translate-x-1/2">
+        <div className="relative z-10 mt-[20px] flex justify-center">
           <CompanyEngagementCta
             href={whitepaperUrl}
             download={whitepaperName}

@@ -78,26 +78,26 @@ function MobileIntelligenceCard({
   title: string;
   description: string;
 }) {
-  const textSide = index < 2 ? { left: "22px", right: "42px" } : { left: "32px", right: "32px" };
+  const textSide = index < 2 ? { left: "22px", right: "22px" } : { left: "24px", right: "24px" };
   return (
     <div
-      className="relative h-[336.418px] w-[320px] shrink-0 overflow-clip"
+      className="relative h-[345px] w-[310px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)]"
       style={{ backgroundImage: MOBILE_CARD_BG }}
       data-name="Content"
     >
       <Corners />
       <MobileIntelOverlay index={index} />
       <div
-        className="absolute flex flex-col gap-[12px]"
-        style={{ left: textSide.left, right: textSide.right, top: "201.42px" }}
+        className="absolute flex flex-col gap-[10px]"
+        style={{ left: textSide.left, right: textSide.right, top: "185px" }}
       >
         <h3
-          className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+          className={`${gilroyMedium.className} w-full text-[20px] leading-[26px] font-medium text-white not-italic [word-break:break-word]`}
         >
           {title}
         </h3>
         <p
-          className={`${interRegular.className} w-full text-[16px] leading-[24px] font-normal text-white opacity-65 not-italic [word-break:break-word]`}
+          className={`${interRegular.className} w-full text-[14px] leading-[21px] font-normal text-white opacity-65 not-italic [word-break:break-word]`}
         >
           {description}
         </p>
@@ -262,51 +262,52 @@ export function SomIntelligence({ data }: { data?: any }) {
         </TabletScaleCanvas>
       </div>
 
-      {/* MOBILE (<600px) — Figma node 4059:9285 "5th Fold" 393×1770 */}
+      {/* MOBILE (<600px) — Out-of-the-Box Intelligence */}
       <div
-        className="relative mx-auto h-[1770px] w-[393px] overflow-hidden bg-black min-[600px]:hidden"
+        className="relative mx-auto flex w-full flex-col items-center pt-[48px] pb-[48px] bg-black min-[600px]:hidden overflow-hidden"
         data-node-id="4059:9285"
         data-name="5th Fold"
       >
-        {/* Title block — 4059:9297 (x19, y30, 350×170.4) */}
+        {/* Title block */}
         <div
-          className="absolute left-[19px] top-[30px] flex w-[350px] flex-col items-center gap-[10px]"
+          className="relative z-10 flex w-full max-w-[350px] flex-col items-center gap-[12px] px-[16px]"
           data-node-id="4059:9297"
         >
-          <div className="relative flex w-[356px] justify-center py-[4px]" data-name="Title">
+          <div className="relative flex w-full max-w-[356px] justify-center py-[4px]" data-name="Title">
             <Corners />
             <h2
-              className={`${gilroyMedium.className} w-[324px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} w-full bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={MOBILE_TITLE_STYLE}
             >
               {heading}
             </h2>
           </div>
           <p
-            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-full max-w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word]`}
           >
             {subtitle}
           </p>
         </div>
 
-        {/* Cards container — 4059:9305 (y227, w320, gap 24) */}
+        {/* Cards horizontal carousel */}
         <div
-          className="absolute left-1/2 top-[227px] flex w-[320px] -translate-x-1/2 flex-col gap-[24px]"
+          className="relative z-10 mt-[32px] flex w-full snap-x snap-mandatory gap-[16px] overflow-x-auto px-[20px] pb-[8px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           data-node-id="4059:9305"
           data-name="Do the best work of your life"
         >
           {cards.map((card, i) => (
-            <MobileIntelligenceCard
-              key={card.title}
-              index={i}
-              title={card.title}
-              description={card.description}
-            />
+            <div key={card.title} className="shrink-0 snap-center">
+              <MobileIntelligenceCard
+                index={i}
+                title={card.title}
+                description={card.description}
+              />
+            </div>
           ))}
         </div>
 
-        {/* CTA — 4059:9286 (y1680, w280) */}
-        <div className="absolute left-1/2 top-[1680px] -translate-x-1/2">
+        {/* CTA */}
+        <div className="relative z-10 mt-[32px] flex justify-center">
           <DownloadCta label={ctaLabel} href={ctaHref} />
         </div>
       </div>

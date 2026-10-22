@@ -16,16 +16,25 @@ export function CtaPrimary({
   width,
   onClick,
   reducedShine = false,
+  className = "",
 }: {
   label: string;
   href?: string;
-  width?: number;
+  width?: number | string;
   onClick?: () => void;
   reducedShine?: boolean;
+  className?: string;
 }) {
   const shadowClass = reducedShine
     ? "shadow-[0px_42px_107px_0px_rgba(83,216,36,0.15),0px_24.721px_32.257px_0px_rgba(83,216,36,0.10),0px_10.268px_13.398px_0px_rgba(83,216,36,0.10),0px_3.714px_4.846px_0px_rgba(83,216,36,0.05)]"
     : "shadow-[0px_42px_107px_0px_rgba(83,216,36,0.45),0px_24.721px_32.257px_0px_rgba(83,216,36,0.35),0px_10.268px_13.398px_0px_rgba(83,216,36,0.35),0px_3.714px_4.846px_0px_rgba(83,216,36,0.2)]";
+
+  const style = width
+    ? {
+        minWidth: typeof width === "number" ? `${width}px` : width,
+        width: typeof width === "number" ? `${width}px` : width,
+      }
+    : undefined;
 
   return (
     <Link
@@ -38,8 +47,8 @@ export function CtaPrimary({
             }
           : undefined
       }
-      className={`${shadowClass} ${gilroyMedium.className} relative inline-flex h-[48px] shrink-0 items-center justify-center px-[20px]`}
-      style={width ? { minWidth: `${width}px`, width: "fit-content" } : { width: "fit-content" }}
+      className={`${shadowClass} ${gilroyMedium.className} relative inline-flex h-[48px] shrink-0 items-center justify-center px-[20px] ${className}`}
+      style={style}
       data-name="Cta"
     >
       <span
@@ -66,18 +75,24 @@ export function CtaSecondary({
   href = "#",
   width,
   onClick,
+  className = "",
 }: {
   label: string;
   href?: string;
-  width?: number;
+  width?: number | string;
   onClick?: (e: React.MouseEvent) => void;
+  className?: string;
 }) {
+  const style = width
+    ? { width: typeof width === "number" ? `${width}px` : width }
+    : undefined;
+
   return (
     <Link
       href={href}
       onClick={onClick}
-      className={`${gilroyMedium.className} relative flex h-[48px] shrink-0 items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] transition-colors hover:bg-[rgba(226,241,202,0.2)]`}
-      style={width ? { width } : undefined}
+      className={`${gilroyMedium.className} relative flex h-[48px] shrink-0 items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] transition-colors hover:bg-[rgba(226,241,202,0.2)] ${className}`}
+      style={style}
       data-name="CTA - Secondary"
     >
       <p className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic [word-break:break-word]">

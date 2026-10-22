@@ -43,10 +43,10 @@ export function ModelZooHero() {
           <img alt="" src="/model-zoo/hero-bg-1.webp" className="absolute inset-0 size-full object-cover" />
           <div className="absolute inset-0" style={{ backgroundImage: HERO_IMAGE_OVERLAY }} />
         </div>
-        <div className="animate-hero-text-fade-in relative w-full max-w-[352px]">
+        <div className="animate-hero-text-fade-in relative w-full max-w-[352px] px-[20px] py-[12px]">
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h1
-            className={`${gilroyMedium.className} m-0 w-full bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} m-0 w-full bg-clip-text text-center text-[34px] leading-[40px] min-[400px]:text-[36px] min-[400px]:leading-[42px] font-medium text-transparent not-italic [word-break:break-word]`}
             style={{
               backgroundImage: HERO_TITLE_GRADIENT,
               WebkitBackgroundClip: "text",
@@ -79,9 +79,9 @@ export function ModelZooHero() {
           />
         </div>
         
-        <div className="animate-hero-text-fade-in relative z-10 mt-[12px] flex w-full max-w-[352px] flex-col items-stretch gap-[12px]" style={{ animationDelay: "150ms", animationFillMode: "both" }}>
-          <CtaPrimary label="Browse the Model Zoo" href={`#${APP_FORGE_SECTION_ID}`} onClick={scrollToAppForge} />
-          <CtaSecondary label="Request Evaluation Kit" href="/dvk" />
+        <div className="animate-hero-text-fade-in relative z-10 mt-[12px] flex w-full max-w-[280px] flex-col items-center gap-[12px]" style={{ animationDelay: "150ms", animationFillMode: "both" }}>
+          <CtaPrimary label="Browse the Model Zoo" href={`#${APP_FORGE_SECTION_ID}`} onClick={scrollToAppForge} width={280} className="w-[280px]" />
+          <CtaSecondary label="Request Evaluation Kit" href="/dvk" width={280} className="w-[280px]" />
         </div>
       </div>
 

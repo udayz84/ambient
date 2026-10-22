@@ -124,10 +124,10 @@ export function ModelZooWatchItRun() {
     >
       {/* MOBILE (<600px) — stacked cards */}
       <div className="relative mx-auto flex w-full max-w-[393px] flex-col items-center gap-[24px] px-[19px] py-[30px] min-[600px]:hidden">
-        <div className="relative w-full max-w-[350px]">
+        <div className="relative w-full max-w-[350px] px-[24px] pt-[16px] pb-[28px]">
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
-            className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} bg-clip-text text-center text-[30px] leading-[38px] min-[400px]:text-[34px] min-[400px]:leading-[42px] font-medium text-transparent not-italic [word-break:break-word]`}
             style={{ backgroundImage: TITLE_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
           >
             Don’t take our word for it. Watch it run.

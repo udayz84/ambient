@@ -226,18 +226,17 @@ function DvkIntegratedModulesMobile({
       data-node-id="4062:12362"
       data-name="5th Fold"
     >
-      <div className="relative mx-auto h-[1263px] w-full max-w-[393px]">
-        {/* Header — 4062:12363 (19, 30 / 350 wide, gap 10) */}
+      <div className="relative mx-auto flex w-full max-w-[393px] flex-col items-center pt-[36px] pb-[48px] gap-[24px]">
+        {/* Header — 4062:12363 */}
         <div
-          className="absolute top-[30px] left-[19px] flex w-[350px] max-w-[calc(100%-38px)] flex-col items-center gap-[10px]"
+          className="relative z-10 flex w-[350px] max-w-[calc(100%-38px)] flex-col items-center gap-[12px]"
           data-node-id="4062:12363"
         >
-          {/* Title group — 4062:12364 (356×76.43, corner ticks) */}
-          <div className="relative h-[76.43px] w-full" data-node-id="4062:12364">
+          {/* Title group — 4062:12364 */}
+          <div className="relative flex w-full max-w-[356px] items-center justify-center py-[8px] px-[12px]" data-node-id="4062:12364">
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             <h2
-              ref={fitRef}
-              className={`${gilroyMedium.className} absolute top-[4px] left-1/2 m-0 w-[332px] max-w-full -translate-x-1/2 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} m-0 w-full max-w-[332px] bg-clip-text text-center text-[34px] leading-[38px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: TITLE_GRADIENT_MOBILE,
                 WebkitBackgroundClip: "text",
@@ -256,9 +255,9 @@ function DvkIntegratedModulesMobile({
           </p>
         </div>
 
-        {/* Cards — 4062:12391 (19.5, 227 / 355 wide, gap 12) */}
+        {/* Cards — 4062:12391 */}
         <div
-          className="absolute top-[227px] left-[calc(50%+0.5px)] flex w-[355px] max-w-[calc(100%-38px)] -translate-x-1/2 flex-col gap-[12px]"
+          className="relative z-10 flex w-[355px] max-w-[calc(100%-38px)] flex-col gap-[12px]"
           data-node-id="4062:12391"
         >
           {cards.slice(0, 2).map((card, i) => (
@@ -337,17 +336,19 @@ function DvkIntegratedModulesMobile({
           ))}
         </div>
 
-        {/* Footer — 4062:12371 (29, 897 / 336 wide) */}
-        <p
-          className={`${interRegular.className} absolute top-[1037px] left-[calc(50%+0.5px)] m-0 w-[336px] max-w-[calc(100%-56px)] -translate-x-1/2 text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
-          data-node-id="4062:12371"
-        >
-          {footer}
-        </p>
+        {/* Footer — 4062:12371 */}
+        {footer && (
+          <p
+            className={`${interRegular.className} relative z-10 m-0 w-[336px] max-w-[calc(100%-56px)] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+            data-node-id="4062:12371"
+          >
+            {footer}
+          </p>
+        )}
 
-        {/* CTA stack — 4062:12372 (42, 1011 / 310 wide, gap 16) */}
+        {/* CTA stack — 4062:12372 */}
         <div
-          className="absolute bottom-[20px] left-[calc(50%+0.5px)] flex w-[310px] max-w-[calc(100%-82px)] -translate-x-1/2 flex-col gap-[16px]"
+          className="relative z-10 flex w-[310px] max-w-[calc(100%-82px)] flex-col gap-[16px] mt-[8px]"
           data-node-id="4062:12372"
         >
           <Link

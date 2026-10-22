@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
-import { GradientTitle } from "../contact/contact-shared";
+import { GradientTitle, CornerDecor } from "../contact/contact-shared";
 import { useFitText } from "../shared/FitText";
 import { mediaUrl } from "@/lib/strapi";
 import { splitTitleIntoTwoLines } from "@/lib/title-utils";
@@ -122,7 +122,7 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
         </p>
       </TabletScaleCanvas>
 
-      {/* MOBILE (<600px) — node 4032:5727, desktop above is untouched */}
+      {/* MOBILE (<600px) */}
       <div
         className="relative min-h-[800px] w-full overflow-hidden min-[600px]:hidden pt-[78px] pb-[40px]"
         data-node-id="4032:5727"
@@ -150,91 +150,49 @@ export function ApplicationsPageHero({ data }: { data?: any }) {
 
         {/* Content frame (centered column) */}
         <div
-          className="relative flex w-full flex-col items-center gap-[15px] pt-[0px]"
+          className="relative z-10 flex w-full flex-col items-center gap-[14px]"
           data-node-id="4032:5729"
         >
-          {/* Badge + Title group */}
+          {/* Menu badge */}
+          <div className="flex w-full justify-center">
+            <TagBadge
+              label={tagText}
+              width={180}
+              rightBarLeft={170.48}
+              leftBarLeft={6.48}
+              centerLabel
+              nodeId="4032:8618"
+            />
+          </div>
+
+          {/* Title with snug corner brackets */}
           <div
-            className="flex w-[350px] flex-col items-center gap-[10px]"
-            data-node-id="4032:8617"
+            className="relative inline-flex flex-col items-center px-[16px] py-[8px]"
+            data-node-id="4032:8626"
+            data-name="Title"
           >
-            {/* Menu badge */}
-            <div className="w-full flex justify-center">
-              <TagBadge
-                label={tagText}
-                width={180}
-                rightBarLeft={170.48}
-                leftBarLeft={6.48}
-                centerLabel
-                nodeId="4032:8618"
-              />
-            </div>
-
-            {/* Title with corner brackets */}
             <div
-              className="relative h-[170px] w-[352px]"
-              data-node-id="4032:8626"
-              data-name="Group 78"
+              ref={fitRef}
+              className={`${gilroyMedium.className} bg-clip-text text-center text-[28px] min-[375px]:text-[32px] leading-[34px] min-[375px]:leading-[38px] font-medium text-transparent not-italic [word-break:break-word]`}
+              style={{
+                backgroundImage: MOBILE_TITLE_GRADIENT,
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
+              data-node-id="4032:8627"
             >
-              <div
-                ref={fitRef}
-                className={`${gilroyMedium.className} absolute inset-x-0 top-[40px] px-[14px] flex flex-col items-center justify-center bg-clip-text text-center text-[28px] min-[375px]:text-[30px] leading-[34px] min-[375px]:leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
-                style={{
-                  backgroundImage: MOBILE_TITLE_GRADIENT,
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                }}
-                data-node-id="4032:8627"
-              >
-                {titleLines.map((line: string, i: number) => (
-                  <span key={i} className="block leading-[34px] min-[375px]:leading-[36px] whitespace-nowrap">
-                    {line}
-                  </span>
-                ))}
-              </div>
-
-              {/* Top-right bracket (Vector 55) */}
-              <div className="absolute left-[351px] top-[40px] flex h-[4px] w-[2.32px] items-center justify-center">
-                <div className="flex-none rotate-180">
-                  <div className="relative h-[4px] w-[2.32px]">
-                    <div className="absolute inset-[0_0_-12.5%_-21.56%]">
-                      <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* Bottom-right bracket (Vector 56) */}
-              <div className="absolute left-[351px] top-[147px] flex h-[4px] w-[2.32px] items-center justify-center">
-                <div className="-scale-y-100 flex-none rotate-180">
-                  <div className="relative h-[4px] w-[2.32px]">
-                    <div className="absolute inset-[0_0_-12.5%_-21.56%]">
-                      <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* Bottom-left bracket (Vector 57) */}
-              <div className="absolute left-[-1px] top-[147px] h-[4px] w-[2.32px]">
-                <div className="absolute inset-[0_0_-12.5%_-21.56%]">
-                  <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
-                </div>
-              </div>
-              {/* Top-left bracket (Vector 58) */}
-              <div className="absolute left-[-1px] top-[40px] flex h-[4px] w-[2.32px] items-center justify-center">
-                <div className="-scale-y-100 flex-none">
-                  <div className="relative h-[4px] w-[2.32px]">
-                    <div className="absolute inset-[0_0_-12.5%_-21.56%]">
-                      <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {titleLines.map((line: string, i: number) => (
+                <span key={i} className="block whitespace-nowrap">
+                  {line}
+                </span>
+              ))}
             </div>
+            <CornerDecor />
           </div>
 
           {/* Subtitle */}
           <p
-            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[336px] max-w-[90vw] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
             data-node-id="4032:5736"
           >
             {subtitle}

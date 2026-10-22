@@ -29,7 +29,7 @@ export function SomFooterMerge({ data }: { data?: any }) {
   const ctaLabel = data?.cta_label || FALLBACK_CTA_LABEL;
   return (
     <div
-      className="relative z-20 mb-[-250px] min-[600px]:[margin-bottom:calc(-400px*var(--tablet-zoom,1))] flex w-full justify-center px-[24px]"
+      className="relative z-20 mb-0 pb-[48px] min-[600px]:pb-0 min-[600px]:[margin-bottom:calc(-400px*var(--tablet-zoom,1))] flex w-full justify-center px-[24px]"
       data-node-id="2438:5337"
     >
       {/* DESKTOP & TABLET (>=600px) */}

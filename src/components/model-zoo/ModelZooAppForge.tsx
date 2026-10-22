@@ -223,7 +223,7 @@ export function ModelZooAppForge({
       <a
         href="#"
         onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }}
-        className="shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] relative flex h-[48px] w-[293px] shrink-0 items-center justify-center cursor-pointer"
+        className="shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] relative flex h-[48px] w-[280px] shrink-0 items-center justify-center cursor-pointer"
         data-node-id="5131:10556"
         data-name="Cta"
       >
@@ -253,12 +253,12 @@ export function ModelZooAppForge({
       </div>
 
       {/* MOBILE (<600px) */}
-      <div className={`relative mx-auto flex w-full flex-col items-center px-[16px] min-[600px]:hidden ${storeButtonsUnderSteps ? "pb-[64px]" : ""}`}>
+      <div className={`relative mx-auto flex w-full flex-col items-center px-[16px] min-[600px]:hidden ${storeButtonsUnderSteps ? "pb-[16px]" : ""}`}>
         {/* Header */}
         <div className="flex w-full flex-col items-center gap-[24px] pt-[49px]" data-node-id="5131:10258">
-          <div className="relative px-[10px]" data-node-id="5131:10260" data-name="Title">
+          <div className="relative px-[20px] py-[12px]" data-node-id="5131:10260" data-name="Title">
             <h2
-              className={`${gilroyMedium.className} w-full max-w-[605px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic`}
+              className={`${gilroyMedium.className} w-full max-w-[605px] bg-clip-text text-center text-[34px] leading-[40px] min-[400px]:text-[36px] min-[400px]:leading-[42px] font-medium text-transparent not-italic`}
               style={{ backgroundImage: TITLE_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
               data-node-id="5131:10261"
             >

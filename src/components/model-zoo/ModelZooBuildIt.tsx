@@ -84,7 +84,7 @@ export function ModelZooBuildIt({ formConfig }: { formConfig?: PopupConfig }) {
 
   return (
     <section
-      className="relative mt-[100px] w-full bg-black"
+      className="relative mt-[48px] min-[600px]:mt-[100px] w-full overflow-hidden bg-black"
       data-node-id="5131:10720"
       aria-label="Don't see it? Build it."
     >
@@ -94,9 +94,9 @@ export function ModelZooBuildIt({ formConfig }: { formConfig?: PopupConfig }) {
           {/* Title */}
           <div className="flex w-full flex-col items-center gap-[10px]" data-node-id="5131:10841" data-name="Title Section">
             <div className="flex flex-col items-center justify-center gap-[24px]" data-node-id="5131:10842" data-name="Section Title">
-              <div className="relative px-[10px]" data-node-id="5131:10843" data-name="Title">
+              <div className="relative px-[20px] py-[12px]" data-node-id="5131:10843" data-name="Title">
                 <h2
-                  className={`${gilroyMedium.className} bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic`}
+                  className={`${gilroyMedium.className} bg-clip-text text-center text-[34px] leading-[40px] min-[400px]:text-[36px] min-[400px]:leading-[42px] font-medium text-transparent not-italic`}
                   style={{ backgroundImage: TITLE_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
                   data-node-id="5131:10844"
                 >
@@ -110,12 +110,16 @@ export function ModelZooBuildIt({ formConfig }: { formConfig?: PopupConfig }) {
             </p>
           </div>
 
-          {/* Cards mobile */}
-          <div className="flex w-full flex-col items-stretch gap-[16px]" data-node-id="5203:5853" data-name="Do the best work of your life">
+          {/* Cards mobile carousel */}
+          <div
+            className="flex w-[calc(100%+32px)] snap-x snap-mandatory overflow-x-auto pb-[16px] gap-[16px] mx-[-16px] px-[16px] after:content-[''] after:w-[1px] after:shrink-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            data-node-id="5203:5853"
+            data-name="Do the best work of your life"
+          >
             {CARDS.map((card) => (
               <div
                 key={`m-${card.title}`}
-                className="relative flex h-auto w-full flex-col items-start gap-[36px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] p-[32px]"
+                className="relative snap-center shrink-0 flex h-auto w-[280px] min-[390px]:w-[300px] flex-col items-start gap-[36px] border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] p-[32px]"
                 data-name="Content"
               >
                 <div
@@ -145,11 +149,12 @@ export function ModelZooBuildIt({ formConfig }: { formConfig?: PopupConfig }) {
           </div>
 
           {/* CTAs mobile */}
-          <div className="flex flex-wrap items-start justify-center gap-[24px]" data-node-id="5131:10820">
-            <CtaPrimary href="/developer" label="Explore the Developer Hub" width={251} />
+          <div className="flex flex-col items-center justify-center gap-[12px] w-full" data-node-id="5131:10820">
+            <CtaPrimary href="/developer" label="Explore the Developer Hub" width={280} className="w-[280px]" />
             <CtaSecondary
               label="Read the Docs"
-              width={162}
+              width={280}
+              className="w-[280px]"
               onClick={(e) => {
                 e.preventDefault();
                 setIsModalOpen(true);

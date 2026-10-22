@@ -5,7 +5,7 @@ import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { gilroyMedium, gilroySemiBold, interRegular, interSemiBold } from "../hero/fonts";
 import { TagBadge } from "../hero/TagBadge";
 import { GradientTitle, CornerDecor } from "../contact/contact-shared";
-import { MobileCornerMark, MobileTitleCorners } from "./mobile-shared";
+import { MobileTitleCorners } from "./mobile-shared";
 import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const MODES_BOTTOM = "/technology/modes-bottom-new.webp";
@@ -325,7 +325,7 @@ function MobileModeCard({
 }) {
   return (
     <div
-      className={`absolute right-[119px] h-[235px] w-[254px] ${topClassName} ${bgClassName} backdrop-blur-md`}
+      className={`absolute left-[20px] h-[235px] w-[254px] ${topClassName} ${bgClassName} backdrop-blur-md border border-white/10`}
       data-node-id={nodeId}
       data-name="Content"
     >
@@ -535,45 +535,32 @@ function MobileModesScene({
           bullet={card2.bullet}
           caption={card2.caption ?? ""}
           topClassName="top-[872px]"
-          bgClassName="bg-[rgba(21,21,21,0.08)]"
+          bgClassName="bg-[rgba(21,21,21,0.59)]"
           nodeId="3572:8250"
         />
       ) : null}
 
-      {/* 3572:8269 — middle note card */}
+      {/* 3572:8269 — middle note card aligned on left side */}
       {card3 ? (
         <div
-          className="absolute top-[340px] right-[26px] h-[83px] w-[236px] bg-[rgba(21,21,21,0.08)]"
+          className="absolute top-[320px] left-[20px] min-h-[72px] w-[254px] bg-[rgba(21,21,21,0.65)] backdrop-blur-md border border-white/10 px-[14px] py-[12px]"
           data-node-id="3572:8269"
           data-name="Content"
         >
+          <CornerDecor />
           <div
-            className="absolute top-[calc(50%+1px)] left-[10px] h-[48px] w-[215.979px] -translate-y-1/2"
+            className="flex items-start gap-[8px]"
             data-name="Frame 1984079529"
           >
-            <p className="absolute top-[3.5px] left-0 text-[14px] leading-[normal] tracking-[-0.1504px] whitespace-nowrap text-[#3a9719] not-italic [text-box-edge:cap_alphabetic] [text-box-trim:trim-both]">
+            <p className="text-[14px] leading-[18px] tracking-[-0.1504px] text-[#3a9719] not-italic shrink-0 font-medium">
               +
             </p>
             <p
-              className={`${interRegular.className} absolute top-0 left-[15.08px] w-[200.9px] text-[13px] leading-[normal] font-normal whitespace-pre-wrap text-[rgba(255,255,255,0.9)] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} text-[13px] leading-[18px] font-normal text-[rgba(255,255,255,0.9)] not-italic [word-break:break-word]`}
             >
               {card3.bullet}
             </p>
           </div>
-          <MobileCornerMark
-            src="/hero/corner-tag-2.svg"
-            sizeClassName="size-[4px]"
-            insetClassName="inset-[0_0_-12.5%_-12.5%]"
-            positionClassName="top-[3px] right-[16px]"
-            flipClassName="rotate-180"
-          />
-          <MobileCornerMark
-            src="/hero/corner-tag-2.svg"
-            sizeClassName="size-[4px]"
-            insetClassName="inset-[0_0_-12.5%_-12.5%]"
-            positionClassName="right-[16px] bottom-[-3px]"
-            flipClassName="-scale-y-100 rotate-180"
-          />
         </div>
       ) : null}
     </div>

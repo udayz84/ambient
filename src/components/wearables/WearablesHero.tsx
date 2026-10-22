@@ -81,13 +81,13 @@ export function WearablesHero({
   useFadeIn();
 
   const fitRef = useFitText<HTMLDivElement>({ maxLines: 2, floor: 32 });
-  const fitRef2 = useFitText<HTMLDivElement>({ maxLines: 2, floor: 22 });
+  const fitRef2 = useFitText<HTMLDivElement>({ maxLines: 2, floor: 16 });
   const fitRef3 = useFitText<HTMLParagraphElement>({ maxLines: 1 });
   const fitRef4 = useFitText<HTMLParagraphElement>({ maxLines: 1 });
 
   return (
     <section
-      className="relative -mt-[78px] flex w-full justify-center overflow-hidden bg-black"
+      className="relative min-[600px]:-mt-[78px] mt-0 flex w-full justify-center overflow-hidden bg-black"
       data-node-id="2509:372"
       data-name="Hero Section"
       aria-label="Wearables hero"
@@ -225,13 +225,13 @@ export function WearablesHero({
         data-node-id="4153:9901"
         data-name="Banner"
       >
-        {/* Header: title + subtitle (node 4153:10651 at top-5) */}
-        <div className="absolute left-1/2 top-[5px] z-10 flex w-[352px] -translate-x-1/2 flex-col items-center gap-[15px]">
-          {/* Title with corner brackets */}
-          <div className="relative h-[80px] w-[352px]" data-name="Group 78">
+        {/* Header: title + subtitle */}
+        <div className="absolute left-1/2 top-[16px] z-10 flex w-full max-w-[calc(100vw-32px)] -translate-x-1/2 flex-col items-center gap-[12px] px-[16px]">
+          {/* Title with snug corner brackets */}
+          <div className="relative inline-flex flex-col items-center px-[16px] py-[8px]" data-name="Group 78">
             <div
               ref={fitRef2}
-              className={`${gilroyMedium.className} absolute inset-0 flex flex-col items-center justify-center bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} bg-clip-text text-center text-[26px] min-[375px]:text-[32px] leading-[32px] min-[375px]:leading-[38px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage:
                   "linear-gradient(112.51485485760136deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)",
@@ -241,63 +241,33 @@ export function WearablesHero({
               data-node-id="4153:10653"
             >
               {titleLines.map((line: string, i: number) => (
-                <span key={i} className="block leading-[36px] whitespace-nowrap">{line}</span>
+                <span key={i} className="block whitespace-normal">
+                  {line}
+                </span>
               ))}
             </div>
-
-            <div className="absolute left-[349.68px] top-0 flex h-[2.783px] w-[2.32px] items-center justify-center">
-              <div className="flex-none rotate-180">
-                <div className="relative h-[2.783px] w-[2.32px]">
-                  <div className="absolute inset-[0_0_-17.97%_-21.56%]">
-                    <img alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="absolute left-[349.68px] top-[77.22px] flex h-[2.783px] w-[2.32px] items-center justify-center">
-              <div className="-scale-y-100 flex-none rotate-180">
-                <div className="relative h-[2.783px] w-[2.32px]">
-                  <div className="absolute inset-[0_0_-17.97%_-21.56%]">
-                    <img alt="" aria-hidden src="/hero/corner-tag-2.svg" className="block size-full max-w-none" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="absolute left-0 top-[77.22px] h-[2.783px] w-[2.32px]">
-              <div className="absolute inset-[0_0_-17.97%_-21.56%]">
-                <img alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
-              </div>
-            </div>
-            <div className="absolute left-0 top-0 flex h-[2.783px] w-[2.32px] items-center justify-center">
-              <div className="-scale-y-100 flex-none">
-                <div className="relative h-[2.783px] w-[2.32px]">
-                  <div className="absolute inset-[0_0_-17.97%_-21.56%]">
-                    <img alt="" aria-hidden src="/hero/corner-tag-1.svg" className="block size-full max-w-none" />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Corners />
           </div>
 
           {/* Subtitle */}
           <p
-            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-full max-w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word]`}
             data-node-id="4153:10658"
           >
             {subtitle}
           </p>
         </div>
 
-        {/* Product image with watermark (node 4153:10666 at top-168) */}
+        {/* Product image with watermark (node 4153:10666 at top-192) */}
         <div
-          className="absolute left-1/2 top-[168px] h-[300px] w-[508px] -translate-x-1/2 overflow-hidden"
+          className="absolute left-1/2 top-[192px] h-[300px] w-full max-w-[508px] -translate-x-1/2 overflow-hidden"
           data-node-id="4153:10666"
         >
           {/* Image 162 — base product photo */}
           {bg1 && <img
             src={bg1}
             alt=""
-            className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+            className="pointer-events-none absolute inset-0 size-full object-contain"
             aria-hidden
           />}
 
@@ -327,7 +297,7 @@ export function WearablesHero({
               {bg2 && <img
                 src={bg2}
                 alt=""
-                className="absolute left-0 top-[-6.07%] h-[109.08%] w-full max-w-none object-cover"
+                className="absolute inset-0 size-full object-contain"
               />}
             </div>
             <div className="absolute inset-0 bg-gradient-to-b from-black from-[4.128%] to-[rgba(0,0,0,0)] to-[24.636%]" />
@@ -335,11 +305,11 @@ export function WearablesHero({
         </div>
 
         {/* CTAs (node 4153:9915 at top-508) */}
-        <div className="absolute left-1/2 top-[508px] z-10 flex -translate-x-1/2 flex-col items-center gap-[16px]">
+        <div className="absolute left-1/2 top-[508px] z-10 flex w-max max-w-[calc(100vw-32px)] -translate-x-1/2 flex-col items-stretch gap-[16px]">
           {/* Primary CTA */}
           <a
             href={primaryHref}
-            className={`${gilroyMedium.className} relative flex h-[48px] min-w-[263px] w-auto max-w-[calc(100vw-32px)] px-[20px] shrink-0 cursor-pointer items-center justify-center overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+            className={`${gilroyMedium.className} relative flex h-[48px] w-full min-w-[263px] shrink-0 cursor-pointer items-center justify-center overflow-hidden px-[20px] shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
             data-node-id="4153:9916"
             data-name="Cta"
           >
@@ -354,7 +324,7 @@ export function WearablesHero({
           {/* Secondary CTA */}
           <a
             href={secondaryHref}
-            className={`${gilroyMedium.className} relative flex h-[48px] shrink-0 cursor-pointer items-center justify-center bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+            className={`${gilroyMedium.className} relative flex h-[48px] w-full min-w-[263px] shrink-0 cursor-pointer items-center justify-center bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
             data-node-id="4153:9927"
             data-name="CTA - Secondary"
           >

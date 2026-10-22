@@ -146,7 +146,7 @@ export function Dvk({
 
       {/* Subscribe Newsletter Section — Single card centered, aligned, and responsive */}
       <section
-        className="relative z-20 flex w-full justify-center bg-transparent px-[24px] pt-[80px] pb-0 mb-[-700px] min-[600px]:[margin-bottom:calc(-400px*var(--tablet-zoom,1))] min-[600px]:px-0"
+        className="relative z-20 flex w-full justify-center bg-transparent px-[24px] pt-[80px] pb-[48px] mb-0 min-[600px]:pb-0 min-[600px]:[margin-bottom:calc(-400px*var(--tablet-zoom,1))] min-[600px]:px-0"
         aria-label="Subscribe to our newsletter"
       >
         <NewsletterSignup data={newsletterData} />
@@ -384,17 +384,15 @@ function DvkDemosMobile({ data }: { data?: any }) {
       : DEMO_CARDS;
   return (
     <section
-      className="relative w-full overflow-clip bg-black min-[600px]:hidden"
+      className="relative w-full overflow-clip bg-black min-[600px]:hidden pt-[36px] pb-[48px]"
       aria-label="Pre-loaded demos"
       data-node-id="4059:10124"
       data-name="3rd Fold"
     >
-      <div className="relative mx-auto h-[1782px] w-full max-w-[393px]">
-        {/* Background textures removed per user request to fix rogue lines */}
-
+      <div className="relative mx-auto flex w-full flex-col items-center">
         {/* Header — 4059:10213 (21, 30 / 352 wide, gap 15) */}
         <div
-          className="absolute top-[30px] left-[calc(50%+0.5px)] flex w-[352px] max-w-[calc(100%-40px)] -translate-x-1/2 flex-col items-center gap-[15px]"
+          className="relative z-10 flex w-full max-w-[352px] flex-col items-center gap-[15px] px-[16px]"
           data-node-id="4059:10213"
         >
           <TagBadge label="Demo Ready" />
@@ -424,9 +422,9 @@ function DvkDemosMobile({ data }: { data?: any }) {
           </p>
         </div>
 
-        {/* Cards — 4062:10782 (19, 292 / 355 wide, gap 12) */}
+        {/* Cards — Horizontal Carousel */}
         <div
-          className="absolute top-[292px] left-1/2 flex w-[355px] max-w-[calc(100%-38px)] -translate-x-1/2 flex-col gap-[12px]"
+          className="relative z-10 mt-[32px] flex w-full snap-x snap-mandatory gap-[16px] overflow-x-auto px-[20px] pb-[8px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           data-node-id="4062:10782"
         >
           {cards.slice(0, 3).map((card: any, idx: number) => {
@@ -434,7 +432,7 @@ function DvkDemosMobile({ data }: { data?: any }) {
             return (
               <div
                 key={card.nodeId || idx}
-                className="relative flex h-[356px] w-full flex-col overflow-clip border-[0.444px] border-solid border-[rgba(240,240,240,0.2)] bg-black px-[20px] pt-[14px] pb-[22px]"
+                className="relative flex h-[356px] w-[320px] shrink-0 snap-center flex-col overflow-clip border-[0.444px] border-solid border-[rgba(240,240,240,0.2)] bg-black px-[20px] pt-[14px] pb-[22px]"
                 data-name={card.name}
               >
                 {/* Illustration — 250×238, clipped to card bounds */}
@@ -463,13 +461,13 @@ function DvkDemosMobile({ data }: { data?: any }) {
                 <div className="relative flex h-full flex-col items-start justify-end">
                   <div className="flex flex-col gap-[10px]">
                     <h3
-                      className={`${gilroyMedium.className} m-0 w-[296.417px] max-w-full text-[22px] leading-[0] font-medium text-white not-italic whitespace-pre-wrap`}
+                      className={`${gilroyMedium.className} m-0 w-[280px] max-w-full text-[22px] leading-[0] font-medium text-white not-italic whitespace-pre-wrap`}
                     >
                       <p className="mb-0 leading-[28px]">{`${card.titleLine1} `}</p>
                       <p className="m-0 leading-[28px]">{card.titleLine2}</p>
                     </h3>
                     <p
-                      className={`${interRegular.className} m-0 w-[296.417px] max-w-full text-[14px] leading-[21.3px] font-normal text-[#99a1af] not-italic [word-break:break-word]`}
+                      className={`${interRegular.className} m-0 w-[280px] max-w-full text-[14px] leading-[21.3px] font-normal text-[#99a1af] not-italic [word-break:break-word]`}
                     >
                       {card.desc}
                     </p>
@@ -482,8 +480,10 @@ function DvkDemosMobile({ data }: { data?: any }) {
             );
           })}
 
-          {/* Phone/CTA card — desktop 5212:6941 adapted to mobile card specs (355×356) */}
-          <DvkPhoneCardMobile data={data?.phone_card} />
+          {/* Phone/CTA card — wrapped for snap carousel */}
+          <div className="w-[320px] shrink-0 snap-center">
+            <DvkPhoneCardMobile data={data?.phone_card} />
+          </div>
         </div>
       </div>
     </section>
@@ -615,7 +615,7 @@ function DvkModelForgeMobile({ data }: { data?: any }) {
       data-node-id="4062:10817"
       data-name="4th Fold"
     >
-      <div className="relative mx-auto h-[1748px] w-full max-w-[393px]">
+      <div className="relative mx-auto flex w-full max-w-[393px] flex-col items-center pt-[36px] pb-[48px] gap-[36px]">
         {/* Abstract Design — 4062:10818 */}
         <div
           aria-hidden
@@ -632,22 +632,22 @@ function DvkModelForgeMobile({ data }: { data?: any }) {
 
         {/* Background textures removed per user request to fix rogue lines */}
 
-        {/* Header — 4062:10906 (21, 30 / 352 wide, gap 15) */}
+        {/* Header — 4062:10906 */}
         <div
-          className="absolute top-[30px] left-[calc(50%+0.5px)] flex w-[352px] max-w-[calc(100%-40px)] -translate-x-1/2 flex-col items-center gap-[15px]"
+          className="relative z-10 flex w-[352px] max-w-[calc(100%-40px)] flex-col items-center gap-[15px]"
           data-node-id="4062:10906"
         >
           <p className={`${dmMono.className} m-0 text-[12px] leading-[19.5px] font-normal tracking-[-0.36px] whitespace-nowrap text-[#a9e28c] uppercase not-italic`}>
             Build Your Own
           </p>
-          {/* Title frame — 4062:10907 (350×82, corner ticks) */}
+          {/* Title frame — 4062:10907 */}
           <div
-            className="relative h-[82px] w-[350px] max-w-full"
+            className="relative flex w-full max-w-[350px] items-center justify-center py-[8px] px-[16px]"
             data-node-id="4062:10907"
           >
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             <h2
-              className={`${gilroyMedium.className} absolute top-[4.99px] left-1/2 m-0 w-[268px] max-w-full -translate-x-1/2 bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} m-0 w-full max-w-[280px] bg-clip-text text-center text-[34px] leading-[38px] font-medium text-transparent not-italic [word-break:break-word]`}
               style={{
                 backgroundImage: MODELFORGE_TITLE_GRADIENT_MOBILE,
                 WebkitBackgroundClip: "text",
@@ -666,9 +666,9 @@ function DvkModelForgeMobile({ data }: { data?: any }) {
           </p>
         </div>
 
-        {/* Stack — 4062:11130 (19, 262 / 355 wide, gap 10) */}
+        {/* Stack — 4062:11130 */}
         <div
-          className="absolute top-[262px] left-1/2 flex w-[355px] max-w-[calc(100%-38px)] -translate-x-1/2 flex-col items-center gap-[10px]"
+          className="relative z-10 flex w-[355px] max-w-[calc(100%-38px)] flex-col items-center gap-[10px]"
           data-node-id="4062:11130"
         >
           <MobileModelCard
@@ -689,9 +689,9 @@ function DvkModelForgeMobile({ data }: { data?: any }) {
           />
         </div>
 
-        {/* Toolchain — 4062:11241 (19, 1623 / 355 wide, gap 12) */}
+        {/* Toolchain — 4062:11241 */}
         <div
-          className="absolute top-[1623px] left-1/2 flex w-[355px] max-w-[calc(100%-38px)] -translate-x-1/2 flex-col items-center gap-[12px]"
+          className="relative z-10 flex w-[355px] max-w-[calc(100%-38px)] flex-col items-center gap-[12px]"
           data-node-id="4062:11241"
         >
           <p

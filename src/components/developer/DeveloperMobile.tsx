@@ -658,29 +658,30 @@ function PipelineAccordionItemMobile({
   return (
     <div className="flex w-full flex-col">
       {/* Header — 4502:8213 (h=80, bg-black, border rgba(240,240,240,0.2)) */}
-      <div className="relative h-[80px] w-full shrink-0 border border-solid border-[rgba(240,240,240,0.2)] bg-black">
+      <div className="relative h-[80px] w-full shrink-0 overflow-clip border border-solid border-[rgba(240,240,240,0.2)] bg-black">
         {/* Collapsed strip image (hidden when expanded) */}
         {strip && !isActive ? (
-          <div
-            className="pointer-events-none absolute -translate-x-1/2 mix-blend-plus-lighter"
-            style={{
-              left: strip.left,
-              top: strip.top,
-              width: strip.width,
-              height: strip.height,
-            }}
-            aria-hidden
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img loading="lazy" decoding="async"
-              alt=""
-              src={strip.img}
-              className="absolute size-full max-w-none object-bottom"
-            />
+          <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
             <div
-              className="absolute inset-0"
-              style={{ backgroundImage: strip.gradient }}
-            />
+              className="absolute -translate-x-1/2 mix-blend-plus-lighter"
+              style={{
+                left: strip.left,
+                top: strip.top,
+                width: strip.width,
+                height: strip.height,
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img loading="lazy" decoding="async"
+                alt=""
+                src={strip.img}
+                className="absolute size-full max-w-none object-bottom"
+              />
+              <div
+                className="absolute inset-0"
+                style={{ backgroundImage: strip.gradient }}
+              />
+            </div>
           </div>
         ) : null}
         <Corners leftSrc={BADGE_LEFT} rightSrc={BADGE_RIGHT} />
@@ -738,7 +739,7 @@ function PipelineAccordionItemMobile({
       </div>
       {/* Expanded panel — 4502:8239 (Train content card, bottom corners only) */}
       {isActive ? (
-        <div className="relative w-full border border-solid border-[rgba(240,240,240,0.2)] bg-black">
+        <div className="relative w-full overflow-clip border border-solid border-[rgba(240,240,240,0.2)] bg-black">
           {/* Bottom-left corner — 4502:8240 */}
           <div
             className="pointer-events-none absolute bottom-[-1px] left-[-0.49px] size-[4px]"

@@ -177,7 +177,7 @@ export function TechnologyPageBottomCta({
 
   return (
     <section
-      className="relative z-20 mb-[-700px] min-[600px]:[margin-bottom:calc(-409px*var(--tablet-zoom,1))] flex w-full justify-center bg-transparent"
+      className="relative z-20 mb-0 pb-[48px] min-[600px]:pb-0 min-[600px]:[margin-bottom:calc(-409px*var(--tablet-zoom,1))] flex w-full justify-center bg-transparent"
       aria-label="Put A-Cube to work"
     >
       {/* DESKTOP (>=600px) */}

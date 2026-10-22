@@ -124,7 +124,33 @@ function WinCard({ label, stat, statLabel, visual, body, buttons, muted }: WinCa
   );
 }
 
-function SecondaryCta({ label, href, onClick }: { label: string; href?: string; onClick?: (e: React.MouseEvent) => void }) {
+function SecondaryCta({
+  label,
+  href,
+  onClick,
+  disabled,
+}: {
+  label: string;
+  href?: string;
+  onClick?: (e: React.MouseEvent) => void;
+  disabled?: boolean;
+}) {
+  const isSoon = disabled || (label ?? "").trim().toLowerCase() === "coming soon";
+
+  if (isSoon) {
+    return (
+      <div
+        className={`${gilroyMedium.className} relative flex h-[48px] w-auto min-w-[223px] shrink-0 cursor-default select-none items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.15)] bg-[rgba(226,241,202,0.04)] px-[24px] opacity-40`}
+        aria-disabled="true"
+      >
+        <span className="relative text-[16px] leading-[28px] font-medium whitespace-nowrap text-[#a4a4a4] uppercase not-italic">
+          {label}
+        </span>
+        <Corners />
+      </div>
+    );
+  }
+
   return (
     <a
       href={href || "#"}
@@ -145,7 +171,7 @@ function WinCardMobile({ label, stat, statLabel, mobileImg, body, buttons, muted
   return (
     <div
       ref={fadeRef}
-      className={`relative h-[550px] w-full max-w-[355px] shrink-0 overflow-clip border-[0.417px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] ${getFadeInClass(isVisible)}`}
+      className={`relative h-[580px] w-full max-w-[355px] shrink-0 overflow-clip border-[0.417px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(0,0,0,0.5)] ${getFadeInClass(isVisible)}`}
       data-name="Container"
     >
       {/* Background image */}
@@ -161,15 +187,15 @@ function WinCardMobile({ label, stat, statLabel, mobileImg, body, buttons, muted
       </div>
 
       {/* Stats */}
-      <div className="absolute left-[16px] top-[265px] z-10 flex w-[319px] flex-col gap-[12.5px]">
+      <div className="absolute left-[16px] right-[16px] top-[252px] z-10 flex flex-col gap-[12.5px]">
         <div className="flex flex-col">
           <p
-            className={`${gilroyBold.className} bg-clip-text text-[52px] leading-[83.333px] tracking-[-1.04px] text-transparent`}
+            className={`${gilroyBold.className} bg-clip-text text-[52px] leading-[56px] tracking-[-1.04px] text-transparent`}
             style={{ backgroundImage: STAT_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
           >
             {stat}
           </p>
-          <p className={`${gilroyMedium.className} text-[22px] leading-[24.167px] uppercase text-[#c5f3b5] [word-break:break-word]`}>{statLabel}</p>
+          <p className={`${gilroyMedium.className} text-[22px] leading-[26px] uppercase text-[#c5f3b5] [word-break:break-word]`}>{statLabel}</p>
         </div>
         <div className="flex flex-col gap-[11.667px]">
           <p className={`${interRegular.className} text-[16px] leading-[24px] font-normal ${muted ? "text-[#8a8a8a]" : "text-[rgba(240,240,240,0.6)]"} [word-break:break-word]`}>{body}</p>
@@ -182,7 +208,7 @@ function WinCardMobile({ label, stat, statLabel, mobileImg, body, buttons, muted
                 <a
                   key={i}
                   href={btn.href || "#"}
-                  className={`${gilroyMedium.className} flex items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[12px] py-[6px] text-[12px] uppercase transition-colors ${soon ? "text-[#a4a4a4]" : "text-white hover:bg-[rgba(226,241,202,0.2)]"}`}
+                  className={`${gilroyMedium.className} flex items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[12px] py-[6px] text-[12px] uppercase transition-colors ${soon ? "opacity-50 text-[#a4a4a4] cursor-default pointer-events-none" : "text-white hover:bg-[rgba(226,241,202,0.2)]"}`}
                 >
                   {btn.label}
                 </a>

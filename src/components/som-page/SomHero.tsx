@@ -13,7 +13,7 @@ const TITLE_FRAME = "/som/title-frame.svg";
 
 export function SomHero({ data }: { data?: any }) {
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
-  const backgroundImage = mediaUrl(data?.image);
+  const backgroundImage = mediaUrl(data?.image) || "/som/hero-bg.webp";
   const rawTitle = data?.title || FALLBACK_TITLE;
   const titleLines = (rawTitle === "The shortest path to volume production." ? "The shortest path to\nvolume production." : rawTitle).split("\n");
   return (
@@ -112,41 +112,18 @@ export function SomHero({ data }: { data?: any }) {
         </div>
       </TabletScaleCanvas>
 
-      {/* MOBILE (<600px) — Figma node 4046:7801 "Banner" 393×700 */}
+      {/* MOBILE (<600px) — Banner */}
       <div
-        className="relative mx-auto mt-[40px] h-[700px] w-full overflow-hidden bg-black min-[600px]:hidden"
+        className="relative mx-auto flex w-full flex-col items-center pt-[32px] pb-[40px] bg-black min-[600px]:hidden overflow-hidden"
         data-node-id="4046:7801"
         data-name="Banner"
       >
-        {/* Hero image — 4046:7810 (x0, y208, 393×360) */}
+        {/* Text group — 4046:7802 */}
         <div
-          aria-hidden
-          className="pointer-events-none absolute left-0 top-[208px] h-[360px] w-full overflow-hidden"
-          data-node-id="4046:7810"
-          data-name="Gemini_Generated_Image_9x8w339x8w339x8w 1"
-        >
-          {backgroundImage && (
-            <img
-              src={backgroundImage}
-              alt=""
-              className="absolute inset-0 size-full object-cover object-right"
-            />
-          )}
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage:
-                "linear-gradient(180deg, rgb(0,0,0) 1.5278%, rgba(0,0,0,0) 19.444%), linear-gradient(185.17926217504382deg, rgba(0,0,0,0) 65.85%, rgb(0,0,0) 99.321%)",
-            }}
-          />
-        </div>
-
-        {/* Text group — 4046:7802 (x20, y0, 352×193) */}
-        <div
-          className="absolute top-0 left-1/2 flex w-[352px] -translate-x-1/2 flex-col items-center gap-[15px]"
+          className="relative z-10 flex w-full max-w-[352px] flex-col items-center gap-[15px] px-[16px]"
           data-node-id="4046:7802"
         >
-          {/* Title group — 4046:7803 (352×115) */}
+          {/* Title group — 4046:7803 */}
           <div
             className="relative h-[115px] w-[352px]"
             data-node-id="4046:7803"
@@ -170,16 +147,37 @@ export function SomHero({ data }: { data?: any }) {
             </div>
           </div>
 
-          {/* Subtitle — 4046:7809 (336×63) */}
+          {/* Subtitle — 4046:7809 */}
           <p
-            className={`${interRegular.className} w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word]`}
+            className={`${interRegular.className} w-[336px] max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]/75 not-italic [word-break:break-word]`}
             data-node-id="4046:7809"
           >
             {subtitle}
           </p>
         </div>
 
-
+        {/* Hero image — boards cluster centered and fully visible */}
+        <div
+          aria-hidden
+          className="pointer-events-none relative mt-[16px] h-[290px] w-full overflow-hidden"
+          data-node-id="4046:7810"
+          data-name="Gemini_Generated_Image_9x8w339x8w339x8w 1"
+        >
+          {backgroundImage && (
+            <img
+              src={backgroundImage}
+              alt=""
+              className="absolute left-1/2 top-1/2 w-[150%] max-w-none -translate-x-[65%] -translate-y-1/2 object-contain"
+            />
+          )}
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                "linear-gradient(180deg, rgb(0,0,0) 0%, rgba(0,0,0,0) 15%), linear-gradient(180deg, rgba(0,0,0,0) 75%, rgb(0,0,0) 100%)",
+            }}
+          />
+        </div>
       </div>
     </section>
   );

@@ -60,20 +60,41 @@ export function SiteFooter({
   // no art, no content. Everything visible starts below it.
   // Pull values (mobile): 700px = technology/products/applications/dvk,
   // 250px = som/partners.
+  const isZeroMobileOverlap =
+    pathname === "/developer" ||
+    pathname === "/model-zoo" ||
+    pathname === "/technology" ||
+    Boolean(pathname?.startsWith("/applications")) ||
+    pathname === "/products";
+
   const mobileOverlapPx = !isOverlapPage
     ? 0
-    : pathname === "/developer"
+    : isZeroMobileOverlap
       ? 0
       : isPartnersPage || pathname === "/som"
         ? 250
         : 700;
 
+  // The homepage anchors the mobile footer art to the very top of the footer.
+  // SOM must match that reference exactly: art top 0 and the same footer
+  // height as home, so the art scales identically and the glow lands the same
+  // distance above the footer nav.
+  const mobileBgTopPx = pathname === "/som" || isZeroMobileOverlap ? 0 : mobileOverlapPx;
+
   // Mobile content top padding, measured from the top of the VISIBLE zone
   // (i.e. below the hidden overlap zone handled by the spacer above).
+  // Home's mobile footer is 196px taller than SOM's because of the newsletter
+  // block (pt-100 + 290 + mb-80). SOM has no newsletter, so add that 196px as
+  // top spacing (220px = 24px base + 196px) to reproduce home's footer height,
+  // art scale, and glow/nav alignment.
   const mobileContentPadding = isOverlapPage
     ? isPartnersPage
       ? "pt-[50px]"
-      : "pt-[0px]"
+      : pathname === "/som"
+        ? "pt-[220px]"
+        : isZeroMobileOverlap
+          ? "pt-[24px]"
+          : "pt-[0px]"
     : isResourcesPage
       ? "pt-[160px]"
       : isCareersPage || isContactPage
@@ -152,7 +173,7 @@ export function SiteFooter({
           <div
             className="absolute inset-x-0 w-full min-[600px]:hidden"
             style={{
-              top: mobileOverlapPx > 0 ? `${mobileOverlapPx}px` : "0px",
+              top: mobileBgTopPx > 0 ? `${mobileBgTopPx}px` : "0px",
               bottom: 0,
             }}
           >
@@ -184,7 +205,7 @@ export function SiteFooter({
         <div
           className="absolute inset-x-0 bg-gradient-to-b from-[rgba(0,0,0,0.2)] to-transparent min-[600px]:hidden"
           style={{
-            top: mobileOverlapPx > 0 ? `${mobileOverlapPx}px` : "0px",
+            top: mobileBgTopPx > 0 ? `${mobileBgTopPx}px` : "0px",
             bottom: 0,
           }}
         />
@@ -195,11 +216,11 @@ export function SiteFooter({
       </div>
 
       {/* Hidden overlap spacer — sits behind the page's merged final section */}
-      {(mobileOverlapPx > 0 || pathname === "/developer") && (
+      {(mobileOverlapPx > 0 || isZeroMobileOverlap) && (
         <div
           aria-hidden
           className={`w-full lg:hidden min-[600px]:h-[calc(600px*var(--tablet-zoom,0.5333))] ${
-            pathname === "/developer"
+            isZeroMobileOverlap
               ? "hidden min-[600px]:block"
               : isPartnersPage || pathname === "/som"
                 ? "h-[250px]"
