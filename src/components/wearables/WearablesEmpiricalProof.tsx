@@ -165,30 +165,37 @@ const ECG_FALLBACKS = [
   },
 ];
 
+const INDUSTRIAL_CARD_IMAGES = [
+  "/applications/industrial-iot/empirical-card-1.jpg",
+  "/applications/industrial-iot/empirical-card-2.jpg",
+  "/applications/industrial-iot/empirical-card-3.jpg",
+  "/applications/industrial-iot/empirical-card-4.jpg",
+];
+
 const INDUSTRIAL_FALLBACKS = [
   {
     badge: "CONTINUOUS AI", badgeWidth: 133, stat: "24/7",
     title: "Always-on fault detection",
     description: "Runs bearing, vibration, and anomaly detection continuously on-node, without waiting for a cloud round trip.",
-    image: "/applications/wearables/ecg-card-1.webp",
+    image: "/applications/industrial-iot/empirical-card-1.jpg",
   },
   {
     badge: "POWER EFFICIENCY", badgeWidth: 150, stat: "<80 µW",
     title: "Microwatt-level inference",
     description: "Keeps industrial AI models active in the background while using a fraction of the power required by conventional edge processing.",
-    image: "/applications/wearables/ecg-card-2.webp",
+    image: "/applications/industrial-iot/empirical-card-2.jpg",
   },
   {
     badge: "SMART TRANSMISSION", badgeWidth: 170, stat: "Only on fault",
     title: "Event-gated radio",
     description: "The gateway wakes only when a verified anomaly is detected, reducing bandwidth, infrastructure load, and wasted transmissions.",
-    image: "/applications/wearables/ecg-card-3.webp",
+    image: "/applications/industrial-iot/empirical-card-3.jpg",
   },
   {
     badge: "LOCAL AI", badgeWidth: 133, stat: "100%",
     title: "No telemetry flood",
     description: "Raw vibration, acoustic, and thermal data stay local. Only classified faults are transmitted for action.",
-    image: "/applications/wearables/ecg-card-4.webp",
+    image: "/applications/industrial-iot/empirical-card-4.jpg",
   },
 ];
 
@@ -345,7 +352,7 @@ function EcgCard({
   tags?: { icon: string; label: string }[];
 }) {
   const frame = ECG_FRAMES[index];
-  const statLeft = isSmartHome ? 18 : (index === 2 ? 19 : 26);
+  const statLeft = isSmartHome ? 18 : isIndustrial ? 18 : (index === 2 ? 19 : 26);
   const statTop = isSmartHome ? 180 : (index === 2 ? 219 : 216);
   const descWidth = isSmartHome ? 265 : (index === 2 || index === 3 ? 260 : 258);
   const textBottom = isSmartHome ? 16 : (index === 2 ? 14 : 21);
@@ -549,12 +556,22 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
   const fitRef2 = useFitText<HTMLHeadingElement>({ maxLines: 2 });
 
   const heading = SECTION_HEADING;
-  const subtitle = isSmartHome ? SMART_HOME_SUBTITLE : (data?.subtitle || FALLBACK_SUBTITLE);
+  const subtitle = isSmartHome ? SMART_HOME_SUBTITLE : isIndustrial ? "" : (data?.subtitle || FALLBACK_SUBTITLE);
   const dataEcgCards: any[] = Array.isArray(data?.ecg_cards) ? data.ecg_cards : [];
   const fallbackList = isIndustrial ? INDUSTRIAL_FALLBACKS : ECG_FALLBACKS;
   const ecgCards = Array.from({ length: 4 }).map((_, i) => {
     const c = dataEcgCards[i];
     const fb = fallbackList[i];
+    if (isIndustrial) {
+      return {
+        imageSrc: INDUSTRIAL_CARD_IMAGES[i],
+        badge: fb.badge,
+        badgeWidth: fb.badgeWidth,
+        stat: fb.stat,
+        title: fb.title,
+        description: fb.description,
+      };
+    }
     return {
       imageSrc: isHearables ? HEARABLES_CARD_IMAGES[i] : (mediaUrl(c?.image) || fb.image),
       badge: c?.badge || fb.badge,
@@ -642,7 +659,7 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
           </div>
         </TabletScaleCanvas>
       ) : (
-        <TabletScaleCanvas className={`relative hidden w-[1440px] shrink-0 min-[600px]:block ${isWearablesOnly ? "h-[675px]" : "h-[790px]"}`}>
+        <TabletScaleCanvas className={`relative hidden w-[1440px] shrink-0 min-[600px]:block ${isWearablesOnly ? "h-[675px]" : isIndustrial ? "h-[715px]" : "h-[790px]"}`}>
           {/* Top decorative SVG */}
           <div
             className="pointer-events-none absolute top-[-26.9px] left-1/2 h-[320px] w-[881.616px] -translate-x-1/2"
@@ -687,7 +704,7 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
                 rightSrc="/applications/wearables/vector-43.svg"
               />
             </div>
-            {!isWearablesOnly && (
+            {!isWearablesOnly && !isIndustrial && (
               <p
                 className={`${interRegular.className} text-center text-[16px] leading-[24px] text-[#f0f0f0] not-italic [word-break:break-word] w-[650px]`}
               >
@@ -697,7 +714,7 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
           </div>
 
           {/* Bottom row — 4 cards */}
-          <div className={`absolute left-1/2 flex -translate-x-1/2 gap-[20.67px] ${isWearablesOnly ? "top-[230px]" : "top-[345px]"}`}>
+          <div className={`absolute left-1/2 flex -translate-x-1/2 gap-[20.67px] ${isWearablesOnly || isIndustrial ? "top-[230px]" : "top-[345px]"}`}>
             {ecgCards.map((card, i) => (
               <EcgCard
                 key={i}
@@ -717,7 +734,7 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
 
           {/* Industrial CTAs */}
           {isIndustrial && (
-            <div className="absolute left-1/2 top-[742px] z-10 flex -translate-x-1/2 items-center gap-[16px]">
+            <div className="absolute left-1/2 top-[632px] z-10 flex -translate-x-1/2 items-center gap-[16px]">
               <a
                 href="#"
                 className={`${gilroyMedium.className} relative flex h-[44px] items-center justify-center px-[20px] cursor-pointer overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
@@ -779,7 +796,7 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
               rightSrc="/applications/wearables/vector-43.svg"
             />
           </div>
-          {!isWearablesOnly && (
+          {!isWearablesOnly && !isIndustrial && (
             <p
               className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic`}
             >
