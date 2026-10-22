@@ -57,8 +57,16 @@ export default async function Home() {
     data = null;
   }
 
-  // Case Studies: hardcoded ApplicationsPageWins (applications-page design)
-  // — no CMS fetch for now.
+  // Case Studies: fetch applications-page wins so all pages share the same content and images
+  let winsData: any = null;
+  try {
+    const appData = await getSingleType<any>("applications-page", [
+      { section: "wins", fields: ["cards.image"], nested: ["cards.buttons"] },
+    ]);
+    winsData = appData?.wins || null;
+  } catch {
+    winsData = null;
+  }
 
   // Pull articles flagged for homepage display. These take precedence over
   // the embedded `latest_news.cards` components on the homepage — editors
@@ -81,7 +89,7 @@ export default async function Home() {
       <TabletScaleInit />
       {data?.hero && <HeroCarousel data={data.hero} formConfig={data.hero_form} />}
       {data?.measured_proof && <MeasuredProof data={data.measured_proof} />}
-      <ApplicationsPageWins />
+      <ApplicationsPageWins data={winsData} />
       {/* <EcosystemMarqueeStrip data={data?.clients} /> */}
       {data?.technology && <Technology data={data.technology} />}
       {data?.platform_scale && <PlatformScale data={data.platform_scale} />}

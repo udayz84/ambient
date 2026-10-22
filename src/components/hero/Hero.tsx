@@ -9,6 +9,15 @@ import { HeroVisual } from "./HeroVisual";
 import { HeroVisualMedia } from "./HeroVisualMedia";
 
 import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
+import { mediaUrl } from "@/lib/strapi";
+
+type HeroMediaInput = Parameters<typeof mediaUrl>[0] | string | Record<string, unknown> | null | undefined;
+
+function resolveHeroImage(media: HeroMediaInput): string | null {
+  if (!media) return null;
+  if (typeof media === "string") return media;
+  return mediaUrl(media as Parameters<typeof mediaUrl>[0]);
+}
 
 const statValueGradient = (deg: number) =>
   `linear-gradient(${deg}deg, rgb(255, 255, 255) 29.352%, rgba(115, 115, 115, 0.5) 98.158%)`;
@@ -26,12 +35,41 @@ function splitValue(value: string) {
   return { num: match[1], unit: match[2] };
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function Hero({ data }: { data?: any }) {
   const title = data?.title || "";
   const subtitle = data?.subtitle || "";
   const scrollText = data?.scroll_text || "";
-  const videoSrc = "/hero/ambient-hero-v2.mp4";
-  const mobileVideoSrc = "/hero/ambient-hero-v2.mp4";
+  const rawImage =
+    data?.image ||
+    data?.hero_image ||
+    data?.visual_media ||
+    data?.video;
+
+  const rawMobileImage =
+    data?.mobile_image ||
+    data?.mobile_hero_image ||
+    data?.mobile_visual_media ||
+    data?.mobile_video ||
+    rawImage;
+
+  const imageAlt =
+    data?.image_alt ||
+    data?.video_alt ||
+    rawImage?.alternativeText ||
+    "Ambient Scientific Hero";
+
+  const mobileImageAlt =
+    data?.mobile_image_alt ||
+    data?.mobile_video_alt ||
+    rawMobileImage?.alternativeText ||
+    imageAlt;
+
+  const defaultHeroImage =
+    "https://ambientwebasset.blob.core.windows.net/website-assets/strapi-uploads/Frame_1984079527_4bac9f0c4b.png";
+
+  const imageSrc = resolveHeroImage(rawImage) || defaultHeroImage;
+  const mobileImageSrc = resolveHeroImage(rawMobileImage) || imageSrc;
   const metrics: HeroMetric[] = Array.isArray(data?.metrics)
     ? data.metrics
     : [];
@@ -55,7 +93,7 @@ export function Hero({ data }: { data?: any }) {
     >
       {/* DESKTOP (>=600px) */}
       <TabletScaleCanvas className="relative hidden h-[876px] w-[1440px] shrink-0 min-[600px]:block">
-        <HeroVisual videoSrc={videoSrc} />
+        <HeroVisual imageSrc={imageSrc} alt={imageAlt} />
 
         <div className="pointer-events-none absolute top-[79px] left-[95px] flex h-[821px] w-0 items-center justify-center">
           <div className="flex-none rotate-90">
@@ -198,7 +236,7 @@ export function Hero({ data }: { data?: any }) {
           </p>
         </div>
 
-        {/* Video Area */}
+        {/* Visual Area */}
         <div
           className="pointer-events-none absolute top-[242px] md:top-[250px] left-[50%] h-[398.341px] w-[716.22px] -translate-x-1/2 overflow-hidden scale-[0.85] md:scale-[0.98] origin-top"
           style={{
@@ -212,7 +250,7 @@ export function Hero({ data }: { data?: any }) {
             WebkitMaskRepeat: "no-repeat",
           }}
         >
-          <HeroVisualMedia mobile videoSrc={mobileVideoSrc} />
+          <HeroVisualMedia mobile imageSrc={mobileImageSrc} alt={mobileImageAlt} />
         </div>
 
         {/* Spacer to push stats down */}

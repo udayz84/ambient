@@ -9,16 +9,28 @@ type CompanyEngagementCtaProps = {
   children: string;
   href: string;
   className?: string;
+  download?: boolean | string;
+  target?: string;
+  rel?: string;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 };
 
 export function CompanyEngagementCta({
   children,
   href,
   className = "w-[231px]",
+  download,
+  target,
+  rel,
+  onClick,
 }: CompanyEngagementCtaProps) {
   return (
     <a
       href={href}
+      download={download}
+      target={target}
+      rel={rel}
+      onClick={onClick}
       className={`${gilroySemiBold.className} relative block h-[48px] shrink-0 ${GREEN_CTA_SHADOW} ${className}`}
     >
       <span

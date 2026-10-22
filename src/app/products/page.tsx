@@ -95,8 +95,16 @@ export default async function ProductsPage() {
     console.error("Failed to fetch products page data:", error);
   }
 
-  // Case Studies: hardcoded ApplicationsPageWins (applications-page design)
-  // — no CMS fetch for now.
+  // Case Studies: fetch applications-page wins so all pages share the same content and images
+  let winsData: any = null;
+  try {
+    const appData = await getSingleType<any>("applications-page", [
+      { section: "wins", fields: ["cards.image"], nested: ["cards.buttons"] },
+    ]);
+    winsData = appData?.wins || null;
+  } catch {
+    winsData = null;
+  }
 
   // Labels come from Strapi (label only); targets are auto-assigned by order.
   const stickyLabels: string[] = Array.isArray(data?.sticky_nav)
@@ -122,7 +130,7 @@ export default async function ProductsPage() {
       <div id="features"><ProductsFeatures data={data?.features} /></div>
       <div id="always-on"><ProductsAlwaysOn data={data?.always_on} /></div>
       <div id="metrics"><ProductsMeasured data={data?.measured} formConfig={data?.brief_form} /></div>
-      <div id="case-studies"><ApplicationsPageWins /></div>
+      <div id="case-studies"><ApplicationsPageWins data={winsData} /></div>
       <div id="use-cases"><ProductsUseCases data={data?.use_cases} /></div>
       <ProductsReadyToRun />
       {/* <ProductsAppForge data={data?.appforge} /> */}

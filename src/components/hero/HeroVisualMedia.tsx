@@ -4,10 +4,14 @@ import { useEffect, useRef, useCallback } from "react";
 
 export function HeroVisualMedia({
   mobile = false,
+  imageSrc,
   videoSrc,
+  alt = "",
 }: {
   mobile?: boolean;
+  imageSrc?: string;
   videoSrc?: string;
+  alt?: string;
 }) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -110,7 +114,7 @@ export function HeroVisualMedia({
     };
   }, [videoSrc]);
 
-  const src = videoSrc;
+  const src = imageSrc || videoSrc;
 
   if (!src) {
     return null;
@@ -121,11 +125,12 @@ export function HeroVisualMedia({
 
   if (!isVideo) {
     return (
+      /* eslint-disable-next-line @next/next/no-img-element */
       <img
         src={src}
-        alt=""
+        alt={alt}
         className="absolute inset-0 size-full max-w-none object-cover object-center"
-        aria-hidden
+        aria-hidden={!alt}
       />
     );
   }

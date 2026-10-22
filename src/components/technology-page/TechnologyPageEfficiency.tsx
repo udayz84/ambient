@@ -938,20 +938,33 @@ function EfficiencyTableContent() {
   );
 }
 
+function splitTwoLines(text: string): [string, string] {
+  if (text.includes("\n")) {
+    const parts = text.split("\n");
+    return [parts[0], parts.slice(1).join(" ")];
+  }
+  const match = text.match(/^(.*?\bfew\b)\s+(.*)$/i) || text.match(/^(.*?\.)\s+(.*)$/);
+  if (match) {
+    return [match[1], match[2]];
+  }
+  const words = text.trim().split(/\s+/);
+  const mid = Math.ceil(words.length / 2);
+  return [words.slice(0, mid).join(" "), words.slice(mid).join(" ")];
+}
+
+const ARCHITECTURE_WHITEPAPER_PDF =
+  "/whitepapers/Ambient-UniqueArchitecture-Whitepaper.pdf";
+const ARCHITECTURE_WHITEPAPER_NAME =
+  "Ambient-UniqueArchitecture-Whitepaper.pdf";
+
 export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
   const heading = data?.heading || FALLBACK_HEADING;
-  // The design mandates a two-line title. Strapi stores the same copy as a
-  // single line, so when the text matches (apostrophe/whitespace-insensitive)
-  // fall back to the design's canonical line break.
-  const rawLines: string[] = heading.split("\n");
-  const normalize = (s: string) =>
-    s.replace(/[’']/g, "'").replace(/\s+/g, " ").trim();
-  const headingLines =
-    rawLines.length === 1 &&
-    normalize(rawLines[0]) === normalize(FALLBACK_HEADING.replace("\n", " "))
-      ? FALLBACK_HEADING.split("\n")
-      : rawLines;
+  const headingLines = splitTwoLines(heading);
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
+  const whitepaperUrl =
+    data?.whitepaper_pdf || data?.pdfUrl || ARCHITECTURE_WHITEPAPER_PDF;
+  const whitepaperName =
+    data?.whitepaper_name || ARCHITECTURE_WHITEPAPER_NAME;
 
   return (
     <section
@@ -989,24 +1002,27 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
           data-node-id="3346:938"
           data-name="Section Title"
         >
-          <GradientTitle
-            gradientDeg={TITLE_GRADIENT_DEG}
-            nodeId="3346:940"
-            className="text-center"
-          >
-            {headingLines.map((line: string, i: number) => (
-              <p key={`title-${i}`} className="leading-[49px] [word-break:break-word]">
-                {line}
-              </p>
-            ))}
-          </GradientTitle>
-          <TitleTick className="top-0 left-0" flip="-scale-y-100" />
-          <TitleTick className="top-0 right-0" flip="rotate-180" />
-          <TitleTick className="bottom-[45px] left-0" />
-          <TitleTick
-            className="right-0 bottom-[45px]"
-            flip="-scale-y-100 rotate-180"
-          />
+          <div className="relative flex flex-col items-center px-[28px] py-[10px]">
+            <GradientTitle
+              gradientDeg={TITLE_GRADIENT_DEG}
+              nodeId="3346:940"
+              className="text-center"
+            >
+              <span className="block whitespace-nowrap leading-[49px]">
+                {headingLines[0]}
+              </span>
+              <span className="block whitespace-nowrap leading-[49px]">
+                {headingLines[1]}
+              </span>
+            </GradientTitle>
+            <TitleTick className="top-0 left-0" flip="-scale-y-100" />
+            <TitleTick className="top-0 right-0" flip="rotate-180" />
+            <TitleTick className="bottom-0 left-0" />
+            <TitleTick
+              className="bottom-0 right-0"
+              flip="-scale-y-100 rotate-180"
+            />
+          </div>
           <p
             className={`${interRegular.className} text-[16px] leading-[24px] font-normal whitespace-nowrap text-[#f0f0f0] not-italic`}
             data-node-id="3346:945"
@@ -1026,7 +1042,11 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
 
         {/* Whitepaper CTA below the table */}
         <div className="absolute top-[702px] left-1/2 -translate-x-1/2">
-          <CompanyEngagementCta href="#" className="w-auto px-[20px]">
+          <CompanyEngagementCta
+            href={whitepaperUrl}
+            download={whitepaperName}
+            className="w-auto px-[20px]"
+          >
             Download Architecture Whitepaper
           </CompanyEngagementCta>
         </div>
@@ -1082,17 +1102,22 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
 
         {/* Header — 4533:2865 */}
         <div className="absolute top-[30px] left-[calc(50%+1.5px)] flex w-[350px] -translate-x-1/2 flex-col items-center justify-center gap-[10px]">
-          <div className="relative w-full">
-            <p
-              className={`${gilroyMedium.className} w-full bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
+          <div className="relative w-full px-[14px] py-[6px]">
+            <div
+              className={`${gilroyMedium.className} w-full bg-clip-text text-center text-[19px] min-[375px]:text-[21px] leading-[26px] min-[375px]:leading-[28px] font-medium text-transparent not-italic`}
               style={{
                 backgroundImage: `linear-gradient(${MOBILE_TITLE_GRADIENT_DEG}, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)`,
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
               }}
             >
-              {headingLines.join(" ")}
-            </p>
+              <span className="block whitespace-nowrap">
+                {headingLines[0]}
+              </span>
+              <span className="block whitespace-nowrap">
+                {headingLines[1]}
+              </span>
+            </div>
             <MobileTitleCorners />
           </div>
           <p
@@ -1109,7 +1134,11 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
 
         {/* Whitepaper CTA below the panel */}
         <div className="absolute top-[1106px] left-1/2 z-10 -translate-x-1/2">
-          <CompanyEngagementCta href="#" className="w-[280px]">
+          <CompanyEngagementCta
+            href={whitepaperUrl}
+            download={whitepaperName}
+            className="w-[280px]"
+          >
             Download Architecture Whitepaper
           </CompanyEngagementCta>
         </div>
