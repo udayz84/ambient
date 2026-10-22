@@ -400,12 +400,12 @@ export function TechnologyPageGraph({
 
         {/* Axis label — top (MICROWATT EDGE) */}
         <div
-          className="absolute top-[220px] left-[29px] flex h-[124px] w-[23px] items-center justify-center"
+          className="absolute top-[210px] left-[29px] flex h-[100px] w-[23px] items-center justify-center"
           aria-hidden
         >
           <div className="flex-none rotate-90">
             <p
-              className={`${interRegular.className} text-[14px] leading-[22.75px] font-normal tracking-[-0.1504px] whitespace-nowrap text-[rgba(255,255,255,0.4)] not-italic`}
+              className={`${interRegular.className} text-[11px] leading-[16px] font-normal tracking-[-0.1504px] whitespace-nowrap text-[rgba(255,255,255,0.4)] not-italic`}
             >
               {axisLeft}
             </p>
@@ -414,12 +414,12 @@ export function TechnologyPageGraph({
 
         {/* Axis label — bottom (HYPERSCALE CLOUD) */}
         <div
-          className="absolute top-[824px] left-[52.47px] flex h-[142px] w-[23px] -translate-x-full items-center justify-center"
+          className="absolute top-[855px] left-[52.47px] flex h-[100px] w-[23px] -translate-x-full items-center justify-center"
           aria-hidden
         >
           <div className="flex-none rotate-90">
             <p
-              className={`${interRegular.className} text-right text-[14px] leading-[22.75px] font-normal tracking-[-0.1504px] whitespace-nowrap text-[rgba(255,255,255,0.4)] not-italic`}
+              className={`${interRegular.className} text-right text-[11px] leading-[16px] font-normal tracking-[-0.1504px] whitespace-nowrap text-[rgba(255,255,255,0.4)] not-italic`}
             >
               {axisRight}
             </p>
@@ -428,20 +428,20 @@ export function TechnologyPageGraph({
 
         {/* Center text (ONE CORE. ONE SOFTWARE STACK.) */}
         <div
-          className="absolute top-[522px] left-[29px] flex h-[400px] w-[23px] -translate-y-1/2 items-center justify-center"
+          className="absolute top-[580px] left-[29px] flex h-[480px] w-[23px] -translate-y-1/2 items-center justify-center"
           aria-hidden
         >
           <div className="flex-none rotate-90 whitespace-nowrap">
             <p
-              className={`${interSemiBold.className} text-[14px] tracking-[-0.1504px] not-italic`}
+              className={`${interSemiBold.className} text-[10px] tracking-[-0.1504px] not-italic`}
             >
               {centerLines[0] ? (
-                <span className="font-semibold leading-[22.75px] text-white">
+                <span className="font-semibold leading-[16px] text-white">
                   {centerLines[0]}{" "}
                 </span>
               ) : null}
               {centerLines[1] ? (
-                <span className={`${interRegular.className} font-normal leading-[22.75px] text-[rgba(255,255,255,0.7)]`}>
+                <span className={`${interRegular.className} font-normal leading-[16px] text-[rgba(255,255,255,0.7)]`}>
                   {centerLines[1]}
                 </span>
               ) : null}

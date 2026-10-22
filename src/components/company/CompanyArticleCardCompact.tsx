@@ -25,13 +25,13 @@ export function CompanyArticleCardCompact({
   return (
     <Link
       href={link || "#"}
-      className="block relative w-[590px] shrink-0 overflow-visible border-[0.5px] border-solid border-[rgba(240,240,240,0.3)] bg-[rgba(0,0,0,0.5)] transition-transform hover:scale-[1.01] cursor-pointer"
-      style={{ height }}
+      className="relative flex flex-col w-[590px] shrink-0 border-[0.5px] border-solid border-[rgba(240,240,240,0.3)] bg-[rgba(0,0,0,0.5)] transition-transform hover:scale-[1.01] cursor-pointer p-[12px_10px_16px_10px]"
+      style={{ minHeight: height }}
       data-node-id={nodeId}
       data-name="Article"
     >
       <div
-        className="absolute top-[12px] left-[10px] w-[570px] overflow-hidden"
+        className="relative w-[570px] shrink-0 overflow-hidden"
         style={{ height: imageHeight }}
         data-name="Image 2"
       >
@@ -50,8 +50,7 @@ export function CompanyArticleCardCompact({
       </div>
 
       <div
-        className="absolute left-[24px] flex h-[132px] w-[542px] flex-col"
-        style={{ top: newsSectionTop }}
+        className="flex flex-col w-full px-[14px] pt-[18px]"
         data-name="NewsSection"
       >
         <TagBadge
@@ -62,15 +61,14 @@ export function CompanyArticleCardCompact({
           centerLabel={centerCategory}
         />
 
-        <div className="mt-[20px] flex flex-col">
+        <div className="mt-[18px] flex flex-col">
           <h3
-            className={`${gilroyMedium.className} w-[353.684px] text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+            className={`${gilroyMedium.className} w-full text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
           >
             {title}
           </h3>
           <p
-            className={`${interRegular.className} mt-[10px] text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
-            style={{ width: excerptWidth }}
+            className={`${interRegular.className} mt-[10px] w-full text-[16px] leading-[24px] font-normal text-[rgba(240,240,240,0.6)] not-italic [word-break:break-word]`}
           >
             {excerpt}
           </p>

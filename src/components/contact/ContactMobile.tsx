@@ -434,10 +434,10 @@ function ContactMapMobile({ data }: { data?: any }) {
 /* -------------------------------- SCHEDULE -------------------------------- */
 const SCHEDULE_CARDS = [
   {
-    widthClass: "w-[178px]",
+    widthClass: "w-fit px-[20px]",
   },
   {
-    widthClass: "w-[218px]",
+    widthClass: "w-fit px-[20px]",
   },
 ];
 
@@ -539,7 +539,7 @@ function ContactScheduleMobile({ data, bookingForm }: { data?: any; bookingForm?
               <button
                 type="button"
                 onClick={() => setBookingCard(index)}
-                className={`relative mt-[24px] flex cursor-pointer items-center justify-center gap-[8px] px-[31px] py-[14px] drop-shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15),0px_10.268px_6.699px_rgba(255,255,255,0.15),0px_3.714px_2.423px_rgba(255,255,255,0.1)] z-10 ${card.widthClass}`}
+                className="relative mt-[24px] flex h-[48px] w-fit cursor-pointer items-center justify-center gap-[8px] px-[20px] py-[14px] drop-shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15),0px_10.268px_6.699px_rgba(255,255,255,0.15),0px_3.714px_2.423px_rgba(255,255,255,0.1)] z-10"
               >
                 <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
                 <span
@@ -552,7 +552,7 @@ function ContactScheduleMobile({ data, bookingForm }: { data?: any; bookingForm?
                   className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(255,255,255,0.6)]"
                 />
                 <Image src="/contact/calendar-icon.svg" alt="" width={20} height={20} className="relative z-10 size-[20px] shrink-0" aria-hidden />
-                <span className={`${gilroySemiBold.className} relative z-10 max-w-full overflow-hidden text-ellipsis text-[12px] leading-[normal] font-semibold uppercase whitespace-nowrap text-[#151515] not-italic`}>
+                <span className={`${gilroySemiBold.className} relative z-10 text-[12px] leading-[normal] font-semibold uppercase whitespace-nowrap text-[#151515] not-italic`}>
                   {card.ctaLabel}
                 </span>
               </button>

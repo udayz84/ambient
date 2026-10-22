@@ -173,7 +173,7 @@ export function TechnologyPageHero({
                 <img
                   src={mediaUrl(data?.hero_object) || "/technology/hero-object-mobile.webp"}
                   alt=""
-                  className="absolute top-0 left-0 h-[119.16%] w-full max-w-none"
+                  className="size-full object-cover"
                 />
               </div>
               <div

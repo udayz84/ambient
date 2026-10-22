@@ -94,12 +94,15 @@ function SectionWrap({
 const FALLBACK_HERO_TITLE = "A new paradigm for efficient AI compute";
 const FALLBACK_HERO_BODY =
   "We build energy-aware, programmable, mixed-signal AI processors that unlock orders-of-magnitude improvements in performance-per-watt, enabling scalable intelligence across edge, enterprise, and cloud.";
-const FALLBACK_HERO_BG = "/mobile/company/hero.webp";
+const FALLBACK_HERO_BG = "/company/hero-bg.webp";
 
 function CompanyHeroMobile({ data }: { data?: any }) {
   const title = (data?.title as string) || FALLBACK_HERO_TITLE;
   const body = (data?.body as string) || FALLBACK_HERO_BODY;
-  const bgSrc = mediaUrl(data?.mobile_background_image) || FALLBACK_HERO_BG;
+  const bgSrc =
+    mediaUrl(data?.background_image) ||
+    mediaUrl(data?.mobile_background_image) ||
+    FALLBACK_HERO_BG;
   return (
     <section
       className="relative w-full overflow-hidden bg-black pt-[108px]"
@@ -110,7 +113,7 @@ function CompanyHeroMobile({ data }: { data?: any }) {
       <div className="relative mx-auto h-[557px] w-full">
         {/* 3244:6106 — hero background image */}
         <div
-          className="pointer-events-none absolute inset-x-0 top-[189px] overflow-hidden"
+          className="pointer-events-none absolute inset-x-0 top-[189px] h-[368px] overflow-hidden"
           data-node-id="3244:6106"
           data-name="image 125"
           aria-hidden
@@ -119,7 +122,14 @@ function CompanyHeroMobile({ data }: { data?: any }) {
           <img loading="lazy" decoding="async"
             src={bgSrc}
             alt=""
-            className="block w-full"
+            className="size-full object-cover object-[62%_center] brightness-[1.8]"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                "linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 70%, rgb(0, 0, 0) 100%)",
+            }}
           />
         </div>
 
@@ -672,6 +682,7 @@ function CompanyTechnologyPartnersMobile({ data }: { data?: any }) {
           {hasStrapiLogos ? (
             <div className="relative grid grid-cols-2">
               {partnerLogos.map((logo, i) => {
+                const isRevealingSoon = i >= 2;
                 const isLastOdd =
                   i === partnerLogos.length - 1 && i % 2 === 0;
                 const colSpan = isLastOdd ? "col-span-2" : "";
@@ -680,23 +691,36 @@ function CompanyTechnologyPartnersMobile({ data }: { data?: any }) {
                 return (
                   <div
                     key={i}
-                    className={`flex h-[106px] items-center justify-center ${colSpan} ${borderL} ${borderT} border-white/10`}
+                    className={`relative flex h-[106px] items-center justify-center ${colSpan} ${borderL} ${borderT} border-white/10`}
                   >
                     <Image
                       src={logo.src}
                       alt=""
                       width={logo.width}
                       height={logo.height}
-                      className="max-w-none object-contain"
+                      className={`max-w-none object-contain transition-all ${
+                        isRevealingSoon
+                          ? "brightness-0 opacity-80 drop-shadow-[0_0_8px_rgba(255,255,255,0.18)]"
+                          : ""
+                      }`}
                       unoptimized
                     />
+                    {isRevealingSoon && (
+                      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center border border-[#E2A740] bg-black/90 px-[8px] py-[4px] shadow-lg pointer-events-none z-10 whitespace-nowrap">
+                        <span className={`${dmMono.className} flex items-center gap-[4px] text-[9px] uppercase tracking-[0.06em] text-[#E2A740]`}>
+                          <span>|</span>
+                          <span>REVEALING SOON</span>
+                          <span>|</span>
+                        </span>
+                      </div>
+                    )}
                   </div>
                 );
               })}
             </div>
           ) : (
             <div className="relative grid grid-cols-2">
-              {/* Row 1 */}
+              {/* Row 1 — Visible */}
               <div className="flex h-[106px] items-center justify-center">
                 <Image
                   src={SILICON_PARTNERS[0].src}
@@ -715,44 +739,55 @@ function CompanyTechnologyPartnersMobile({ data }: { data?: any }) {
                   className="max-w-none object-contain"
                 />
               </div>
-              {/* Row 2 */}
-              <div className="flex h-[107px] items-center justify-center border-t border-white/10">
+              {/* Row 2 — Revealing Soon */}
+              <div className="relative flex h-[107px] items-center justify-center border-t border-white/10">
                 <Image
                   src={SILICON_PARTNERS[2].src}
                   alt=""
                   width={SILICON_PARTNERS[2].width}
                   height={SILICON_PARTNERS[2].height}
-                  className="max-w-none object-contain"
+                  className="max-w-none object-contain brightness-0 opacity-80 drop-shadow-[0_0_8px_rgba(255,255,255,0.18)]"
                 />
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center border border-[#E2A740] bg-black/90 px-[8px] py-[4px] shadow-lg pointer-events-none z-10 whitespace-nowrap">
+                  <span className={`${dmMono.className} flex items-center gap-[4px] text-[9px] uppercase tracking-[0.06em] text-[#E2A740]`}>
+                    <span>|</span>
+                    <span>REVEALING SOON</span>
+                    <span>|</span>
+                  </span>
+                </div>
               </div>
-              <div className="flex h-[107px] items-center justify-center gap-[5px] border-l border-t border-white/10">
+              <div className="relative flex h-[107px] items-center justify-center border-l border-t border-white/10">
                 <Image
                   src="/ecosystem/logo-partner-4.svg"
                   alt=""
                   width={26}
                   height={26}
-                  className="max-w-none"
+                  className="max-w-none brightness-0 opacity-80 drop-shadow-[0_0_8px_rgba(255,255,255,0.18)]"
                 />
-                <p
-                  className={`${gilroySemiBold.className} text-[13px] leading-[15px] font-semibold whitespace-nowrap text-white not-italic`}
-                >
-                  Tezos
-                </p>
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center border border-[#E2A740] bg-black/90 px-[8px] py-[4px] shadow-lg pointer-events-none z-10 whitespace-nowrap">
+                  <span className={`${dmMono.className} flex items-center gap-[4px] text-[9px] uppercase tracking-[0.06em] text-[#E2A740]`}>
+                    <span>|</span>
+                    <span>REVEALING SOON</span>
+                    <span>|</span>
+                  </span>
+                </div>
               </div>
-              {/* Row 3 — Octane centered, spans both columns */}
-              <div className="col-span-2 flex h-[105px] items-center justify-center gap-[10px] border-t border-white/10">
-                <p
-                  className={`${gilroySemiBold.className} text-[17px] leading-[20px] font-semibold whitespace-nowrap text-white not-italic`}
-                >
-                  Octane
-                </p>
+              {/* Row 3 — Octane Revealing Soon */}
+              <div className="col-span-2 relative flex h-[105px] items-center justify-center border-t border-white/10">
                 <Image
                   src="/ecosystem/logo-octane.svg"
                   alt=""
                   width={35}
                   height={35}
-                  className="max-w-none"
+                  className="max-w-none brightness-0 opacity-80 drop-shadow-[0_0_8px_rgba(255,255,255,0.18)]"
                 />
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center border border-[#E2A740] bg-black/90 px-[8px] py-[4px] shadow-lg pointer-events-none z-10 whitespace-nowrap">
+                  <span className={`${dmMono.className} flex items-center gap-[4px] text-[9px] uppercase tracking-[0.06em] text-[#E2A740]`}>
+                    <span>|</span>
+                    <span>REVEALING SOON</span>
+                    <span>|</span>
+                  </span>
+                </div>
               </div>
             </div>
           )}

@@ -129,7 +129,7 @@ function ViewSomsCta({ label, href }: { label: string; href: string }) {
   return (
     <a
       href={href}
-      className="relative flex h-[48px] flex-1 min-[600px]:w-[240px] min-[600px]:shrink-0 items-center justify-center gap-[9px] min-[600px]:gap-[10px] px-[20px] py-[10px] drop-shadow-[0px_42px_53.5px_rgba(69,196,24,0.2)]"
+      className="relative flex h-[48px] w-[280px] shrink-0 min-[600px]:w-[240px] items-center justify-center gap-[9px] min-[600px]:gap-[10px] px-[20px] py-[10px] drop-shadow-[0px_42px_53.5px_rgba(69,196,24,0.2)]"
     >
       <span
         aria-hidden
@@ -155,7 +155,7 @@ function DiscussCta({ label, href }: { label: string; href: string }) {
   return (
     <a
       href={href}
-      className="relative flex h-[48px] flex-1 min-[600px]:h-auto min-[600px]:shrink-0 items-center justify-center bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]"
+      className="relative flex h-[48px] w-[280px] shrink-0 min-[600px]:w-auto min-[600px]:h-auto items-center justify-center bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]"
     >
       <p
         className={`${gilroyMedium.className} max-w-full text-[12px] min-[600px]:text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis`}
@@ -187,7 +187,7 @@ function SomCard({ visual, isUpcoming, statusPill, value, label, sublabel, ctaLa
         </div>
       </div>
       <SomLabel value={value} label={label} sublabel={sublabel} />
-      <div className="mt-4">
+      <div className="mt-4 flex w-full justify-center">
         <ViewSomsCta label={ctaLabel} href={ctaHref} />
       </div>
     </div>
@@ -380,7 +380,7 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
         </div>
 
         {/* Secondary CTA row */}
-        <div className="mt-[47px] flex w-full items-center justify-center gap-[14px]">
+        <div className="mt-[16px] flex w-full items-center justify-center gap-[14px]">
           <DiscussCta label={secondary.label} href={secondary.href} />
         </div>
       </div>

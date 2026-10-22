@@ -671,48 +671,10 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
       >
         <div className="relative mx-auto h-[1050px] w-[393px]" data-node-id="3565:3127">
 
-          {/* Header — Figma 3565:3129 (x23 y30, 350×174, gap 10) */}
+          {/* Chip visual — Figma 3567:4017 (924×513 centered, y168). Placed first in DOM
+              behind Header so background gradient does not clip title or subtitle text. */}
           <div
-            className="absolute left-[23px] top-[30px] flex w-[350px] flex-col items-center gap-[10px]"
-            data-node-id="3565:3129"
-          >
-            <MobileSectionBadge />
-            {/* Title group — Figma 3565:3130 (356×79, text at +3/+7, 36px/36px, 2 lines).
-                pb-[8px] extends the gradient paint box below the 72px line boxes so
-                Gilroy descenders ("p" in "asleep") aren't clipped by bg-clip-text;
-                -mb-[8px] cancels the layout shift, mb-[6px] adds breathing room
-                before the subtitle. */}
-            <div className="relative mb-[6px] h-[79px] w-[356px]" data-node-id="3565:3130">
-              <h2
-                ref={fitRef}
-                className={`${gilroyMedium.className} absolute left-[3px] top-[7px] -mb-[8px] w-[350px] bg-clip-text pb-[8px] text-center text-[36px] leading-[36px] font-medium text-transparent not-italic [word-break:break-word]`}
-                style={{
-                  backgroundImage: TITLE_GRADIENT_MOBILE,
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                }}
-              >
-                {heading}
-              </h2>
-              <div className="absolute inset-x-0 top-[4px] h-[70px]" aria-hidden>
-                <FrameCorners leftSrc={CORNER_58} rightSrc={CORNER_55} />
-              </div>
-            </div>
-            <p
-              className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[16px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
-              data-node-id="3565:3136"
-            >
-              {subtitle}
-            </p>
-          </div>
-
-          {/* Chip visual — Figma 3567:4017 (924×513 centered, y136). Uses the same
-              correlation-registered desktop pair (scale 0.992, offset (-12, +120)
-              full-res px) scaled by 924/1450 into the mobile box, so the two renders
-              are pixel-registered and the crossfade doesn't jump. Baseline underneath,
-              surge crossfades on top, Figma fade overlay above both. */}
-          <div
-            className="-translate-x-1/2 absolute h-[513px] left-[calc(50%+0.5px)] top-[136px] w-[924px] overflow-clip"
+            className="-translate-x-1/2 absolute h-[513px] left-[calc(50%+0.5px)] top-[168px] w-[924px] overflow-clip pointer-events-none"
             data-node-id="3567:4017"
             data-name="ChatGPT Image Jul 2, 2026, 12_54_47 PM 2"
           >
@@ -739,9 +701,40 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
             />
           </div>
 
-          {/* ON chips — Figma 3567:4004 / 3567:4010 (y232) */}
-          <OnChip label="AI CORE" width={144} icon="ai" className="absolute left-[36px] top-[232px]" aiCoreSrc={aiCoreIcon} hostCpuSrc={hostCpuImg} />
-          <OnChip label={`HOST  CPU`} width={157} icon="cpu" active={surgeMobile} className="absolute left-[199px] top-[232px]" aiCoreSrc={aiCoreIcon} hostCpuSrc={hostCpuImg} />
+          {/* Header — Figma 3565:3129 (x23 y30, 350×174, gap 10) */}
+          <div
+            className="absolute left-[23px] top-[30px] z-10 flex w-[350px] flex-col items-center gap-[10px]"
+            data-node-id="3565:3129"
+          >
+            <MobileSectionBadge />
+            {/* Title group with corner brackets */}
+            <div className="relative mb-[6px] min-h-[79px] w-[356px] flex items-center justify-center px-[4px] py-[6px]" data-node-id="3565:3130">
+              <h2
+                ref={fitRef}
+                className={`${gilroyMedium.className} relative z-10 w-[350px] bg-clip-text pb-[4px] text-center text-[34px] leading-[38px] font-medium text-transparent not-italic [word-break:break-word]`}
+                style={{
+                  backgroundImage: TITLE_GRADIENT_MOBILE,
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                }}
+              >
+                {heading}
+              </h2>
+              <div className="absolute inset-x-0 inset-y-[2px]" aria-hidden>
+                <FrameCorners leftSrc={CORNER_58} rightSrc={CORNER_55} />
+              </div>
+            </div>
+            <p
+              className={`${interRegular.className} w-[350px] text-center text-[14px] leading-[20px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
+              data-node-id="3565:3136"
+            >
+              {subtitle}
+            </p>
+          </div>
+
+          {/* ON chips — Figma 3567:4004 / 3567:4010 */}
+          <OnChip label="AI CORE" width={144} icon="ai" className="absolute left-[36px] top-[264px] z-20" aiCoreSrc={aiCoreIcon} hostCpuSrc={hostCpuImg} />
+          <OnChip label={`HOST  CPU`} width={157} icon="cpu" active={surgeMobile} className="absolute left-[199px] top-[264px] z-20" aiCoreSrc={aiCoreIcon} hostCpuSrc={hostCpuImg} />
 
           {/* Stat cards — Figma 3567:4035 (y560) / 3567:4066 (y741) */}
           <MobileStatCard
@@ -784,7 +777,7 @@ export function ProductsAlwaysOn({ data }: { data?: any }) {
 
           {/* Caption — Figma 4087:8464 */}
           <p
-            className={`${interRegular.className} -translate-x-1/2 [word-break:break-word] absolute font-normal left-1/2 leading-[24px] not-italic text-[16px] text-[#bbbbbb] text-center top-[1011.39px] uppercase whitespace-nowrap`}
+            className={`${interRegular.className} -translate-x-1/2 [word-break:break-word] absolute font-normal left-1/2 leading-[18px] not-italic text-[12px] text-[#bbbbbb] text-center top-[1008px] uppercase whitespace-nowrap`}
             data-node-id="4087:8464"
           >
             Return to the baseline

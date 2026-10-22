@@ -13,6 +13,7 @@ function LeadershipCardMobile({
   member: LeadershipMember;
   variant: "leadership" | "advisory";
 }) {
+  const [isExpanded, setIsExpanded] = useState(false);
   const isAdvisory = variant === "advisory";
   const cardHeight = isAdvisory ? 366 : 425;
   const imgTop = isAdvisory ? 3 : 2;
@@ -48,21 +49,31 @@ function LeadershipCardMobile({
         />
       </div>
 
+      {/* Dim overlay when expanded */}
+      <div
+        className={`pointer-events-none absolute inset-0 z-20 bg-black/85 backdrop-blur-[2px] transition-opacity duration-300 ease-in-out ${
+          isExpanded ? "opacity-100" : "opacity-0"
+        }`}
+        aria-hidden
+      />
+
       {/* Border element — corner marks */}
       <div className="pointer-events-none absolute inset-[-1px] z-20" aria-hidden>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img loading="lazy" decoding="async" src={borderSrc} alt="" className="block size-full max-w-none" />
       </div>
 
-      {/* Name box */}
+      {/* Name and Content box */}
       <div
-        className="absolute left-[18px] z-30 flex w-[300px] flex-col"
-        style={{ top: boxTop }}
+        className={`absolute inset-x-[18px] z-30 flex flex-col transition-all duration-300 ease-in-out ${
+          isExpanded ? "top-[20px] bottom-[16px]" : ""
+        }`}
+        style={!isExpanded ? { top: boxTop } : undefined}
       >
         <div className="flex flex-col gap-[6px]">
           <div className="flex w-full items-start justify-between">
             <p
-              className={`${gilroyMedium.className} max-w-full text-[26px] leading-[29px] font-medium text-white not-italic [word-break:break-word]`}
+              className={`${gilroyMedium.className} max-w-full text-[24px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
             >
               {member.name}
             </p>
@@ -86,19 +97,36 @@ function LeadershipCardMobile({
           </div>
           {!isAdvisory && member.role ? (
             <p
-              className={`${interRegular.className} text-[16px] leading-[24px] font-normal text-[#39ff14] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} text-[15px] leading-[22px] font-normal text-[#39ff14] not-italic [word-break:break-word]`}
             >
               {member.role}
             </p>
           ) : null}
         </div>
-        {!isAdvisory ? (
-          <p
-            className={`${interRegular.className} mt-[11px] text-[16px] leading-[24px] font-normal text-white not-italic [word-break:break-word]`}
-          >
-            Read more +
-          </p>
-        ) : null}
+
+        {/* Bio text when expanded */}
+        {isExpanded && member.bioParagraphs && member.bioParagraphs.length > 0 && (
+          <div className="my-[10px] flex-1 overflow-y-auto pr-[4px] [scrollbar-width:thin] flex flex-col gap-[8px]">
+            {member.bioParagraphs.map((paragraph, index) => (
+              <p
+                key={index}
+                className={`${interRegular.className} text-[13px] leading-[19px] font-normal text-[#d1d5db] not-italic [word-break:break-word]`}
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        )}
+
+        {/* Expand/Collapse button */}
+        <button
+          type="button"
+          onClick={() => setIsExpanded((prev) => !prev)}
+          className={`${interRegular.className} ${isExpanded ? "mt-auto pt-[4px]" : "mt-[10px]"} flex cursor-pointer items-center text-left text-[15px] leading-[22px] font-normal text-white not-italic [word-break:break-word] transition-colors hover:text-[#39ff14]`}
+          aria-expanded={isExpanded}
+        >
+          {isExpanded ? "Read less -" : "Read more +"}
+        </button>
       </div>
     </article>
   );

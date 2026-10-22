@@ -518,11 +518,9 @@ function ResourcesNewsCtaMobile({ data }: { data?: any } = {}) {
 
   return (
     <section
-      className="relative z-10 flex w-full flex-col items-center gap-[21px] px-[24px] pt-[110px] overflow-visible bg-transparent -mb-[226px]"
+      className="relative z-10 flex w-full flex-col items-center gap-[28px] px-[24px] pt-[64px] pb-[80px] bg-transparent"
       aria-label="Latest news"
     >
-      {/* Background image and gradient removed to make it fully transparent */}
-
       <div className="relative inline-flex items-center justify-center p-[8px] z-10">
         <GreenCtaCorners />
         <h2
@@ -534,10 +532,10 @@ function ResourcesNewsCtaMobile({ data }: { data?: any } = {}) {
         </h2>
       </div>
 
-      <div className="relative w-[158px] z-10">
+      <div className="relative min-w-[168px] z-10">
         <a
           href={ctaHref}
-          className={`relative flex h-[48px] w-full items-center justify-center overflow-hidden ${GREEN_CTA_SHADOW}`}
+          className={`relative flex h-[48px] w-full px-[20px] items-center justify-center overflow-hidden ${GREEN_CTA_SHADOW}`}
         >
           <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
           <span

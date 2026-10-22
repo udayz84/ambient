@@ -2,9 +2,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
+import Image from "next/image";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useFitText } from "../shared/FitText";
-import { useState } from "react";
+import { useState, useCallback, useRef, useEffect, Fragment } from "react";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyExtraBold, gilroyMedium, interRegular } from "../hero/fonts";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
@@ -14,6 +15,7 @@ import { Corners } from "../shared/Corners";
 import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 import { motion, AnimatePresence } from "framer-motion";
+import { CategoryDivider } from "../applications/ApplicationsCategoryNav";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
@@ -24,10 +26,12 @@ import {
   USECASE_CARDS,
   USECASE_TABS,
   USECASES_CANVAS_WIDTH,
-  USECASES_SECTION_HEIGHT,
   USECASES_TITLE_GRADIENT,
   WATERMARK_GRADIENT,
 } from "./products-data";
+
+const tabCornerTl = "/applications/corners/tab-corner-tl.svg";
+const tabCornerTr = "/applications/corners/tab-corner-tr.svg";
 
 const FALLBACK_HEADING = "Built for always-on. \n Proven across markets.";
 const FALLBACK_SUBTITLE =
@@ -42,6 +46,9 @@ const USE_CASE_IMAGES: Record<string, string> = {
   "AUTOMOTIVE": "/applications/app-automotive.webp",
   "MEDICAL": "/applications/app-medical.webp",
   "AGRICULTURE": "/applications/app-agriculture.webp",
+  "DRONES": "/applications/app-drones.webp",
+  "WEARABLES": "/applications/app-wearables.png",
+  "ROBOTICS": "/applications/app-robotics.webp",
 };
 
 function splitLines(value: string): string[] {
@@ -654,136 +661,369 @@ function ProductsUseCasesMobile({
   secondary,
   onSecondaryCtaClick,
 }: any) {
-  const handlePrev = () => {
-    onSelect((activeIdx - 1 + tabs.length) % tabs.length);
-  };
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
-  const handleNext = () => {
+  const fitRef2 = useFitText<HTMLParagraphElement>({ maxLines: 1 });
+
+  const goNext = useCallback(() => {
     onSelect((activeIdx + 1) % tabs.length);
+  }, [activeIdx, tabs.length, onSelect]);
+
+  const goPrev = useCallback(() => {
+    onSelect((activeIdx - 1 + tabs.length) % tabs.length);
+  }, [activeIdx, tabs.length, onSelect]);
+
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+  const isHorizontal = useRef<boolean | null>(null);
+  const touchStartTime = useRef<number>(0);
+
+  const mouseStartX = useRef<number | null>(null);
+  const mouseStartTime = useRef<number>(0);
+
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    touchStartTime.current = Date.now();
+    isHorizontal.current = null;
+    setIsDragging(true);
+    setDragOffset(0);
   };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+    const deltaX = currentX - touchStartX.current;
+    const deltaY = currentY - touchStartY.current;
+
+    if (isHorizontal.current === null) {
+      if (Math.abs(deltaX) > 8 || Math.abs(deltaY) > 8) {
+        isHorizontal.current = Math.abs(deltaX) > Math.abs(deltaY);
+      }
+    }
+
+    if (isHorizontal.current) {
+      const clampedOffset = Math.max(-120, Math.min(120, deltaX));
+      setDragOffset(clampedOffset);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current !== null && isHorizontal.current) {
+      const duration = Date.now() - touchStartTime.current;
+      const isQuickFlick = duration < 300 && Math.abs(dragOffset) > 25;
+      const passedThreshold = Math.abs(dragOffset) > 40;
+
+      if (passedThreshold || isQuickFlick) {
+        if (dragOffset < 0) {
+          goNext();
+        } else {
+          goPrev();
+        }
+      }
+    }
+    touchStartX.current = null;
+    touchStartY.current = null;
+    isHorizontal.current = null;
+    setIsDragging(false);
+    setDragOffset(0);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    mouseStartX.current = e.clientX;
+    mouseStartTime.current = Date.now();
+    setIsDragging(true);
+    setDragOffset(0);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (mouseStartX.current === null) return;
+    const deltaX = e.clientX - mouseStartX.current;
+    const clampedOffset = Math.max(-120, Math.min(120, deltaX));
+    setDragOffset(clampedOffset);
+  };
+
+  const handleMouseUp = () => {
+    if (mouseStartX.current !== null) {
+      const duration = Date.now() - mouseStartTime.current;
+      const isQuickFlick = duration < 300 && Math.abs(dragOffset) > 25;
+      const passedThreshold = Math.abs(dragOffset) > 40;
+
+      if (passedThreshold || isQuickFlick) {
+        if (dragOffset < 0) {
+          goNext();
+        } else {
+          goPrev();
+        }
+      }
+    }
+    mouseStartX.current = null;
+    setIsDragging(false);
+    setDragOffset(0);
+  };
+
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const activeTabRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (activeTabRef.current && scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      const activeTabEl = activeTabRef.current;
+
+      const containerWidth = container.offsetWidth;
+      const activeTabLeft = activeTabEl.offsetLeft;
+      const activeTabWidth = activeTabEl.offsetWidth;
+
+      const scrollPosition = activeTabLeft - containerWidth / 2 + activeTabWidth / 2;
+      container.scrollTo({
+        left: scrollPosition,
+        behavior: "smooth",
+      });
+    }
+  }, [activeIdx]);
 
   return (
     <section
-      className="relative w-full overflow-hidden bg-black px-[24px] pt-[24px] pb-[16px] min-[600px]:hidden"
+      className="relative flex w-full max-w-full flex-col items-center overflow-hidden bg-black py-[48px] min-[600px]:hidden"
       aria-label="Use cases"
     >
-      {/* Title */}
-      <div className="flex flex-col items-center gap-[16px]">
+      <style>{`
+        .scrollbar-none::-webkit-scrollbar { display: none; }
+        @keyframes slideFadeIn {
+          0% { opacity: 0; transform: translateY(10px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-slide-fade { animation: slideFadeIn 0.3s ease-out forwards; }
+      `}</style>
+
+      {/* Header Block with Brackets */}
+      <div className="relative flex w-full flex-col items-center px-[16px] gap-[12px]">
         <TagBadge label="BEST-FIT APPLICATIONS" width={220} centerLabel />
-        <h2
-          ref={fitRef}
-          className={`${gilroyMedium.className} max-w-full bg-clip-text text-center text-[30px] leading-[34px] font-medium text-transparent not-italic [word-break:break-word]`}
-          style={{
-            backgroundImage: USECASES_TITLE_GRADIENT,
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-          }}
-        >
-          {headingLines.join(" ").trim()}
-        </h2>
+        <div className="relative inline-grid grid-cols-[max-content] grid-rows-[max-content] place-items-start leading-[0]">
+          <h2
+            ref={fitRef}
+            className={`${gilroyMedium.className} relative col-start-1 row-start-1 mt-[7px] ml-[3px] w-[300px] bg-clip-text text-center text-[30px] leading-[34px] font-medium text-transparent [word-break:break-word] not-italic sm:w-[350px] sm:text-[34px]`}
+            style={{
+              backgroundImage: USECASES_TITLE_GRADIENT,
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+            }}
+          >
+            {headingLines[0]} <br />
+            {headingLines[1] || ""}
+          </h2>
+
+          <div className="relative col-start-1 row-start-1 mt-0 ml-[303.65px] flex size-[4px] items-center justify-center sm:ml-[353.65px]">
+            <div className="rotate-180 flex-none">
+              <div className="relative size-[4px]">
+                <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+                  <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="relative col-start-1 row-start-1 mt-[64px] ml-[303.65px] flex size-[4px] items-center justify-center sm:mt-[70px] sm:ml-[353.65px]">
+            <div className="-scale-y-100 rotate-180 flex-none">
+              <div className="relative size-[4px]">
+                <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+                  <Image src="/hero/corner-tag-2.svg" alt="" fill className="object-contain" aria-hidden />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="relative col-start-1 row-start-1 mt-[64px] ml-0 size-[4px] sm:mt-[70px]">
+            <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+              <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+            </div>
+          </div>
+          <div className="relative col-start-1 row-start-1 mt-0 ml-0 flex size-[4px] items-center justify-center">
+            <div className="-scale-y-100 flex-none">
+              <div className="relative size-[4px]">
+                <div className="absolute inset-[0_0_-12.5%_-12.5%]">
+                  <Image src="/hero/corner-tag-1.svg" alt="" fill className="object-contain" aria-hidden />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <p
-          className={`${interRegular.className} max-w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0]`}
+          className={`${interRegular.className} mt-[6px] w-full max-w-[343px] text-center text-[14px] leading-[20px] font-normal text-[#f0f0f0] not-italic [word-break:break-word]`}
         >
           {subtitle}
         </p>
       </div>
 
-      {/* Tabs (scrollable row) */}
-      <div className="mt-[32px] -mx-[24px] flex items-center gap-[16px] overflow-x-auto px-[24px] pb-[8px]">
-        {tabs.map((tab: any, idx: number) => (
-          <span
-            key={tab.label}
-            onClick={() => onSelect(idx)}
-            role="button"
-            tabIndex={0}
-            className={`${interRegular.className} cursor-pointer shrink-0 whitespace-nowrap text-[13px] tracking-[0.02em] not-italic ${
-              idx === activeIdx
-                ? "bg-[#f0f0f0] px-[12px] py-[8px] text-black"
-                : "px-[8px] py-[8px] text-[#666]"
-            }`}
-          >
-            {tab.label}
-          </span>
-        ))}
+      {/* Category Navigation Selector (Mobile) */}
+      <div className="mt-[24px] w-full overflow-hidden flex justify-center">
+        <div
+          ref={scrollContainerRef}
+          className="flex h-[52px] w-full max-w-full items-center overflow-x-auto px-[24px] scrollbar-none"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {tabs.map((tab: any, index: number) => {
+            const label = tab?.label ?? `Tab ${index}`;
+            const isActive = index === activeIdx;
+            const dividerVariant =
+              index === activeIdx
+                ? "before-active"
+                : index === activeIdx + 1
+                ? "after-active"
+                : "normal";
+
+            return (
+              <Fragment key={label}>
+                <CategoryDivider variant={dividerVariant} />
+                <button
+                  type="button"
+                  ref={isActive ? activeTabRef : null}
+                  onClick={() => onSelect(index)}
+                  className={`${interRegular.className} relative flex h-[52px] shrink-0 cursor-pointer items-center justify-center px-[20px] text-[16px] leading-[24px] font-normal whitespace-nowrap not-italic transition-colors ${
+                    isActive ? "text-[#0e1a0e]" : "text-[#666] hover:text-[#aaa]"
+                  }`}
+                >
+                  {isActive ? (
+                    <span className="pointer-events-none absolute inset-y-[4px] inset-x-[13px] overflow-clip bg-[#f0f0f0]">
+                      <Corners leftSrc={tabCornerTl} rightSrc={tabCornerTr} />
+                    </span>
+                  ) : null}
+                  <span className="relative">{label}</span>
+                </button>
+              </Fragment>
+            );
+          })}
+          <CategoryDivider
+            variant={
+              activeIdx === tabs.length - 1
+                ? "after-active"
+                : "normal"
+            }
+          />
+        </div>
       </div>
 
-      {/* Image */}
-      <div className="relative mt-[24px] flex justify-center">
-        {activeTab.isBuild ? (
-          <div className="relative flex flex-col w-full items-center justify-center px-[16px] min-h-[360px]">
-            <div className="absolute inset-0 pointer-events-none z-[-1] opacity-40 translate-y-[40px]">
-              <img loading="lazy" decoding="async" src="/products/build-bg.png" alt="" className="size-full object-cover" />
-            </div>
+      {/* Draggable Swiper Area (Hero Visual + Feature Cards) */}
+      <div
+        className="relative w-full flex flex-col items-center cursor-grab active:cursor-grabbing select-none [touch-action:pan-y]"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onTouchCancel={handleTouchEnd}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        style={{
+          transform: `translateX(${dragOffset * 0.35}px)`,
+          transition: isDragging ? "none" : "transform 400ms cubic-bezier(0.4,0,0.2,1)",
+        }}
+      >
+        {/* Hero Section (Watermark + Image) */}
+        <div className="relative mt-[32px] flex w-full flex-col items-center justify-start min-h-[240px] overflow-visible">
+          {activeTab?.isBuild ? (
+            <div className="relative flex flex-col w-full items-center justify-center px-[16px] min-h-[360px]">
+              <div className="absolute inset-0 pointer-events-none z-[-1] opacity-40 translate-y-[40px]">
+                <img loading="lazy" decoding="async" src="/products/build-bg.png" alt="" className="size-full object-cover" />
+              </div>
 
-            <h3
-              className={`${gilroyExtraBold.className} absolute left-1/2 top-[10%] -translate-x-1/2 w-full px-[16px] text-center uppercase tracking-[0.5px] bg-clip-text text-transparent not-italic text-[13vw] sm:text-[60px] leading-[1.1] z-0 whitespace-nowrap`}
-              style={{ backgroundImage: WATERMARK_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
-              aria-hidden
-            >
-              BUILD YOUR
-            </h3>
-            
-            <div className="relative flex items-center justify-center mt-[40px] mb-[40px] w-full z-10">
-              <img loading="lazy" decoding="async"
-                alt="Build Custom Application"
-                src="/products/build-custom-cube.png"
-                className="relative z-10 h-auto w-full max-w-[360px] object-contain"
-              />
-            </div>
+              <h3
+                className={`${gilroyExtraBold.className} absolute left-1/2 top-[10%] -translate-x-1/2 w-full px-[16px] text-center uppercase tracking-[0.5px] bg-clip-text text-transparent not-italic text-[13vw] sm:text-[60px] leading-[1.1] z-0 whitespace-nowrap`}
+                style={{ backgroundImage: WATERMARK_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
+                aria-hidden
+              >
+                BUILD YOUR
+              </h3>
+              
+              <div className="relative flex items-center justify-center mt-[40px] mb-[40px] w-full z-10">
+                <img loading="lazy" decoding="async"
+                  alt="Build Custom Application"
+                  src="/products/build-custom-cube.png"
+                  className="relative z-10 h-auto w-full max-w-[360px] object-contain"
+                />
+              </div>
 
-            <h3
-              className={`${gilroyExtraBold.className} absolute left-1/2 bottom-[20%] -translate-x-1/2 w-full px-[16px] text-center uppercase tracking-[0.5px] bg-clip-text text-transparent not-italic text-[13vw] sm:text-[60px] leading-[1.1] z-0 whitespace-nowrap`}
-              style={{ backgroundImage: WATERMARK_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
-              aria-hidden
-            >
-              APPLICATION
-            </h3>
+              <h3
+                className={`${gilroyExtraBold.className} absolute left-1/2 bottom-[20%] -translate-x-1/2 w-full px-[16px] text-center uppercase tracking-[0.5px] bg-clip-text text-transparent not-italic text-[13vw] sm:text-[60px] leading-[1.1] z-0 whitespace-nowrap`}
+                style={{ backgroundImage: WATERMARK_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text" }}
+                aria-hidden
+              >
+                APPLICATION
+              </h3>
 
-            <div className="relative z-20 mt-[32px] mb-[24px]">
-              <PrimaryCta href="/model-zoo">Explore Model Zoo</PrimaryCta>
+              <div className="relative z-20 mt-[32px] mb-[24px]">
+                <PrimaryCta href="/model-zoo">Explore Model Zoo</PrimaryCta>
+              </div>
             </div>
+          ) : (
+            <>
+              {/* Watermark Text */}
+              <p
+                ref={fitRef2}
+                className={`${gilroyExtraBold.className} absolute top-0 z-0 w-full text-center text-[14.5vw] sm:text-[60px] leading-[1.1] font-extrabold tracking-[1px] whitespace-nowrap text-transparent uppercase not-italic`}
+                style={{
+                  backgroundImage: "linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0) 100%)",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                }}
+              >
+                {activeTab?.watermark || activeTab?.label || ""}
+              </p>
+
+              {/* Hero Image */}
+              <div className="relative z-10 mt-[24px] flex w-full justify-center px-[20px]">
+                {activeImage ? (
+                  <img loading="lazy" decoding="async"
+                    alt=""
+                    src={activeImage}
+                    className="h-auto max-h-[360px] w-[80%] object-contain drop-shadow-2xl"
+                    aria-hidden
+                  />
+                ) : null}
+              </div>
+            </>
+          )}
+        </div>
+
+        {!activeTab?.isBuild && (
+          /* Feature Cards */
+          <div className="relative z-20 mt-[-36px] grid w-full max-w-[343px] md:max-w-[620px] grid-cols-2 gap-[12px] md:gap-[20px]">
+            {cards.map((feature: any, idx: number) => (
+              <div key={idx} className="relative w-full border border-white/20 bg-[#000000] p-[16px] md:p-[24px]">
+                {activeTab?.label === "AUTOMOTIVE" && idx === 0 && (
+                  <img loading="lazy" decoding="async"
+                    src="/applications/indicator-vertical.svg"
+                    alt=""
+                    className="absolute -top-[92px] left-[18px] h-[92px] w-[22px] pointer-events-none z-20"
+                    aria-hidden
+                  />
+                )}
+
+                <Corners />
+
+                <h4 className={`${gilroyMedium.className} text-[16px] md:text-[20px] leading-[22px] md:leading-[26px] text-white [word-break:break-word]`}>
+                  {feature.title}
+                </h4>
+                <p className={`${interRegular.className} mt-[12px] text-[12px] md:text-[14px] leading-[18px] md:leading-[22px] text-[#f0f0f0] opacity-65 [word-break:break-word]`}>
+                  {feature.description}
+                </p>
+              </div>
+            ))}
           </div>
-        ) : (
-          <>
-            <h3
-              className={`${gilroyExtraBold.className} absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-[16px] text-center uppercase tracking-[0.5px] bg-clip-text text-transparent not-italic whitespace-nowrap text-[48px] min-[400px]:text-[64px] leading-[64px]`}
-              style={{
-                backgroundImage: WATERMARK_GRADIENT,
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-              }}
-              aria-hidden
-            >
-              {activeTab.watermark}
-            </h3>
-            
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img loading="lazy" decoding="async"
-              alt=""
-              src={activeImage}
-              className="relative z-10 h-auto max-h-[360px] w-full max-w-[360px] object-contain"
-            />
-          </>
         )}
       </div>
 
-      {/* Cards & Arrows */}
-      <div className="mt-[32px] flex flex-col items-center gap-[24px]">
-        <div className="grid w-full max-w-[343px] grid-cols-2 gap-[12px]">
-          {cards.map((card: any) => (
-            <UseCaseCardMobileView key={card.nodeId} card={card} />
-          ))}
-        </div>
-
-        {tabs.length > 1 && (
-          <div className="flex items-center justify-center gap-[16px]">
+      {!activeTab?.isBuild && (
+        <>
+          {/* Navigation Arrows */}
+          <div className="mt-[24px] flex items-center justify-center gap-[16px]">
             <button
               type="button"
-              onClick={handlePrev}
+              onClick={goPrev}
               className="size-[44px] relative"
-              aria-label="Previous tab"
+              aria-label="Previous Feature"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img loading="lazy" decoding="async"
                 alt=""
                 src="/platform-scale/nav-left.svg"
@@ -793,11 +1033,10 @@ function ProductsUseCasesMobile({
             </button>
             <button
               type="button"
-              onClick={handleNext}
+              onClick={goNext}
               className="size-[44px] relative"
-              aria-label="Next tab"
+              aria-label="Next Feature"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img loading="lazy" decoding="async"
                 alt=""
                 src="/platform-scale/nav-right.svg"
@@ -806,68 +1045,41 @@ function ProductsUseCasesMobile({
               />
             </button>
           </div>
-        )}
-      </div>
 
-      {/* CTAs - side-by-side */}
-      {!activeTab.isBuild && (
-        <div className="mt-[32px] flex flex-row gap-[8px] w-full max-w-[343px] mx-auto relative z-50 pointer-events-auto">
-          <Link
-            href={primary.href?.trim() || "#"}
-            className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center overflow-hidden`}
-          >
-            <span
-              aria-hidden
-              className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-            />
-            <AnimatedDotsBackground />
-            <span className="relative max-w-full overflow-hidden text-ellipsis text-[10px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
-              {primary.label}
-            </span>
-            <span
-              aria-hidden
-              className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`}
-            />
-            <GreenCtaCorners />
-          </Link>
-          <a
-            href={secondary.href}
-            onClick={(e) => { e.preventDefault(); onSecondaryCtaClick(); }}
-            className={`${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
-            style={{ backgroundColor: SECONDARY_CTA_BG }}
-          >
-            <span className="relative max-w-full overflow-hidden text-ellipsis px-[4px] sm:px-[12px] py-[10px] text-[10px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic text-center">
-              {secondary.label}
-            </span>
-            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-          </a>
-        </div>
+          {/* CTAs */}
+          <div className="mt-[32px] flex flex-row gap-[8px] w-full max-w-[343px] mx-auto relative z-50 pointer-events-auto">
+            <Link
+              href={primary.href?.trim() || "/applications"}
+              className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center overflow-hidden`}
+            >
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+              />
+              <AnimatedDotsBackground />
+              <span className="relative max-w-full overflow-hidden text-ellipsis text-[10px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+                {primary.label}
+              </span>
+              <span
+                aria-hidden
+                className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`}
+              />
+              <GreenCtaCorners />
+            </Link>
+            <a
+              href={secondary.href}
+              onClick={(e) => { e.preventDefault(); onSecondaryCtaClick(); }}
+              className={`${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
+              style={{ backgroundColor: SECONDARY_CTA_BG }}
+            >
+              <span className="relative max-w-full overflow-hidden text-ellipsis px-[4px] sm:px-[12px] py-[10px] text-[10px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic text-center">
+                {secondary.label}
+              </span>
+              <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+            </a>
+          </div>
+        </>
       )}
     </section>
-  );
-}
-
-function UseCaseCardMobileView({ card }: { card: any }) {
-  const { fadeRef, isVisible } = useFadeIn();
-
-  return (
-    <div
-      ref={fadeRef}
-      className={`relative flex flex-col p-[16px] border border-white/20 bg-[#000000] ${getFadeInClass(isVisible)}`}
-      style={{ backgroundColor: card.bg }}
-    >
-      <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-
-      <h4
-        className={`${gilroyMedium.className} text-[16px] leading-[22px] font-medium text-white not-italic`}
-      >
-        {card.title}
-      </h4>
-      <p
-        className={`${interRegular.className} mt-[12px] text-[12px] leading-[18px] font-normal text-[#f0f0f0] opacity-65 not-italic`}
-      >
-        {card.description}
-      </p>
-    </div>
   );
 }

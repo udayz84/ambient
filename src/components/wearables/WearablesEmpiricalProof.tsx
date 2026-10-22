@@ -339,6 +339,7 @@ function EcgCard({
   isSmartHome,
   isIndustrial,
   isHearables,
+  isWearablesOnly,
 }: {
   index: number;
   imageSrc: string;
@@ -350,6 +351,7 @@ function EcgCard({
   isSmartHome?: boolean;
   isIndustrial?: boolean;
   isHearables?: boolean;
+  isWearablesOnly?: boolean;
   tags?: { icon: string; label: string }[];
 }) {
   const frame = ECG_FRAMES[index];
@@ -364,11 +366,11 @@ function EcgCard({
     >
       <CardAbstractBg />
       {/* Image — 4016:3933 / 4016:3954 / 4016:3975 / 4016:3997 */}
-      {isIndustrial || isHearables ? (
+      {isIndustrial || isHearables || isWearablesOnly ? (
         /* Full-width photo */
         <div className="pointer-events-none absolute left-0 top-0 h-[185px] w-full overflow-hidden" aria-hidden>
           <img loading="lazy" decoding="async" alt="" src={imageSrc} className="absolute inset-0 size-full max-w-none object-cover object-center" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#091208] via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0c160b] via-transparent to-transparent" />
         </div>
       ) : (
         <div
@@ -385,7 +387,7 @@ function EcgCard({
         </div>
       )}
       {/* Accent image (card 3 only) — 4016:3991 */}
-      {!isSmartHome && !isIndustrial && !isHearables && index === 2 ? (
+      {!isSmartHome && !isIndustrial && !isHearables && !isWearablesOnly && index === 2 ? (
         <div className="pointer-events-none absolute left-[43px] top-[63px] h-[70px] w-[73px]" aria-hidden>
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
             <img loading="lazy" decoding="async"
@@ -398,13 +400,31 @@ function EcgCard({
       ) : null}
       {/* Badge — 4016:3934 */}
       <div
-        className="absolute flex items-center"
-        style={{ left: 14, top: index === 0 ? 16 : 16.1 }}
+        className="absolute flex items-center z-10"
+        style={{ left: 14, top: 16 }}
       >
         <Badge label={badge} width={badgeWidth} />
       </div>
       {/* Circular progress — only for wearables */}
-      {!isSmartHome && (
+      {isWearablesOnly && (
+        <>
+          <div className="absolute left-[18px] top-[182px] flex size-[36px] items-center justify-center">
+            <div className="-rotate-90 flex-none">
+              <div className="relative size-[36px]">
+                <img loading="lazy" decoding="async" alt="" src="/applications/wearables/ellipse-1.svg" className="absolute inset-0 block size-full max-w-none" />
+              </div>
+            </div>
+          </div>
+          <div className="absolute left-[18px] top-[182px] flex size-[36px] items-center justify-center">
+            <div className="-rotate-90 flex-none">
+              <div className="relative size-[36px]">
+                <img loading="lazy" decoding="async" alt="" src="/applications/wearables/ellipse-2.svg" className="absolute inset-0 block size-full max-w-none" />
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+      {!isSmartHome && !isWearablesOnly && (
         <>
           <div className="absolute left-[16px] top-[164px] flex size-[40px] items-center justify-center">
             <div className="-rotate-90 flex-none">
@@ -441,6 +461,28 @@ function EcgCard({
             {description}
           </p>
         </div>
+      ) : isWearablesOnly ? (
+        <>
+          {/* Stat */}
+          <p
+            className={`${gilroySemiBold.className} absolute text-white whitespace-nowrap not-italic ${
+              index === 2 ? "text-[28px] leading-[36px]" : "text-[36px] leading-[36px]"
+            }`}
+            style={{ left: 64, top: 182 }}
+          >
+            {stat}
+          </p>
+          {/* Title & Description */}
+          <div
+            className={`${interRegular.className} absolute left-[18px] flex w-[265px] flex-col items-start gap-[4px] font-normal not-italic`}
+            style={{ bottom: 16 }}
+          >
+            <p className="w-full text-[16px] leading-[22px] font-medium text-white [word-break:break-word]">{title}</p>
+            <p className="w-full text-[12px] leading-[17px] text-[rgba(255,255,255,0.6)] [word-break:break-word]">
+              {description}
+            </p>
+          </div>
+        </>
       ) : (
         <>
           {/* Stat — 4016:3946 */}
@@ -481,6 +523,7 @@ function EcgCardMobile({
   isSmartHome,
   isIndustrial,
   isHearables,
+  isWearablesOnly,
 }: {
   imageSrc: string;
   badge: string;
@@ -491,17 +534,18 @@ function EcgCardMobile({
   isSmartHome?: boolean;
   isIndustrial?: boolean;
   isHearables?: boolean;
+  isWearablesOnly?: boolean;
 }) {
   return (
-    <div className={`relative min-h-[290px] w-[290px] max-w-[85vw] shrink-0 snap-center ${CARD_BG}`}>
+    <div className={`relative min-h-[340px] w-[290px] max-w-[85vw] shrink-0 snap-center ${CARD_BG}`}>
       <CardAbstractBg />
       <Corners
         leftSrc="/applications/wearables/vector-47.svg"
         rightSrc="/applications/wearables/vector-46.svg"
       />
-      {isIndustrial || isHearables ? (
+      {isIndustrial || isHearables || isWearablesOnly ? (
         /* Full-width photo for CMS-rendered 4:3 images */
-        <div className="pointer-events-none absolute left-0 top-0 h-[150px] w-full overflow-hidden" aria-hidden>
+        <div className="pointer-events-none absolute left-0 top-0 h-[160px] w-full overflow-hidden" aria-hidden>
           <img loading="lazy" decoding="async" alt="" src={imageSrc} className="absolute inset-0 size-full max-w-none object-cover object-center" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0c160b] via-transparent to-transparent" />
         </div>
@@ -516,28 +560,40 @@ function EcgCardMobile({
           </div>
         </div>
       )}
-      <div className="absolute left-[14px] top-[14px] flex items-center">
+      <div className="absolute left-[14px] top-[14px] flex items-center z-10">
         <Badge label={badge} width={badgeWidth} />
       </div>
-      {!isSmartHome && (
+      {isWearablesOnly ? (
         <>
-          <div className="absolute left-[14px] top-[124px] flex size-[32px] items-center justify-center">
+          <div className="absolute left-[14px] top-[168px] flex size-[32px] items-center justify-center">
             <div className="-rotate-90 flex-none">
               <div className="relative size-[32px]">
                 <img loading="lazy" decoding="async" alt="" src="/applications/wearables/ellipse-1.svg" className="absolute inset-0 block size-full max-w-none" />
               </div>
             </div>
           </div>
-          <div className="absolute left-[14px] top-[124px] flex size-[32px] items-center justify-center">
+          <div className="absolute left-[14px] top-[168px] flex size-[32px] items-center justify-center">
             <div className="-rotate-90 flex-none">
               <div className="relative size-[32px]">
                 <img loading="lazy" decoding="async" alt="" src="/applications/wearables/ellipse-2.svg" className="absolute inset-0 block size-full max-w-none" />
               </div>
             </div>
           </div>
+          <p
+            className={`${gilroySemiBold.className} absolute left-[56px] top-[168px] text-[28px] leading-[32px] text-white whitespace-nowrap not-italic`}
+          >
+            {stat}
+          </p>
+          <div
+            className={`${interRegular.className} absolute left-[14px] flex w-[calc(100%-28px)] flex-col items-start gap-[6px] pb-[16px] pt-[212px] font-normal not-italic`}
+          >
+            <p className="w-full text-[16px] leading-[22px] font-medium text-white">{title}</p>
+            <p className="w-full text-[12px] leading-[18px] text-[rgba(255,255,255,0.6)]">
+              {description}
+            </p>
+          </div>
         </>
-      )}
-      {isIndustrial ? (
+      ) : isIndustrial ? (
         <div className="relative z-10 flex flex-col items-start px-[14px] pt-[166px] pb-[16px]">
           <p className={`${gilroySemiBold.className} text-[28px] leading-[34px] text-white whitespace-nowrap not-italic`}>
             {stat}
@@ -551,6 +607,24 @@ function EcgCardMobile({
         </div>
       ) : (
         <>
+          {!isSmartHome && (
+            <>
+              <div className="absolute left-[14px] top-[124px] flex size-[32px] items-center justify-center">
+                <div className="-rotate-90 flex-none">
+                  <div className="relative size-[32px]">
+                    <img loading="lazy" decoding="async" alt="" src="/applications/wearables/ellipse-1.svg" className="absolute inset-0 block size-full max-w-none" />
+                  </div>
+                </div>
+              </div>
+              <div className="absolute left-[14px] top-[124px] flex size-[32px] items-center justify-center">
+                <div className="-rotate-90 flex-none">
+                  <div className="relative size-[32px]">
+                    <img loading="lazy" decoding="async" alt="" src="/applications/wearables/ellipse-2.svg" className="absolute inset-0 block size-full max-w-none" />
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
           <p
             className={`${gilroySemiBold.className} absolute left-[14px] top-[124px] text-[28px] leading-[normal] text-white whitespace-nowrap not-italic`}
           >
@@ -575,6 +649,13 @@ const HEARABLES_CARD_IMAGES = [
   "/applications/hearables/2.jpeg",
   "/applications/hearables/3.jpeg",
   "/applications/hearables/4.jpeg",
+];
+
+const WEARABLES_CARD_IMAGES = [
+  "/applications/wearables/wearables-advantage-1.webp",
+  "/applications/wearables/wearables-advantage-2.webp",
+  "/applications/wearables/wearables-advantage-3.webp",
+  "/applications/wearables/wearables-advantage-4.webp",
 ];
 
 export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: string }) {
@@ -616,6 +697,16 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
     if (isIndustrial) {
       return {
         imageSrc: INDUSTRIAL_CARD_IMAGES[i],
+        badge: fb.badge,
+        badgeWidth: fb.badgeWidth,
+        stat: fb.stat,
+        title: fb.title,
+        description: fb.description,
+      };
+    }
+    if (isWearablesOnly) {
+      return {
+        imageSrc: WEARABLES_CARD_IMAGES[i],
         badge: fb.badge,
         badgeWidth: fb.badgeWidth,
         stat: fb.stat,
@@ -779,6 +870,7 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
                 isSmartHome={false}
                 isIndustrial={isIndustrial}
                 isHearables={isHearables}
+                isWearablesOnly={isWearablesOnly}
               />
             ))}
           </div>
@@ -886,6 +978,7 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
                   isSmartHome={false}
                   isIndustrial={isIndustrial}
                   isHearables={isHearables}
+                  isWearablesOnly={isWearablesOnly}
                 />
               ))}
         </div>

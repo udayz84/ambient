@@ -150,7 +150,7 @@ function WinCardMobile({ label, stat, statLabel, mobileImg, body, buttons, muted
     >
       {/* Background image */}
       <div className="absolute inset-0 overflow-hidden">
-        <img loading="lazy" decoding="async" alt="" aria-hidden src={mobileImg} className="absolute inset-0 size-full object-contain p-[40px]" />
+        <img loading="lazy" decoding="async" alt="" aria-hidden src={mobileImg} className="absolute inset-0 size-full object-contain p-[40px] -translate-y-[90px]" />
         <div className="absolute inset-0" style={{ backgroundImage: OVERLAY_2 }} />
       </div>
 

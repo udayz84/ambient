@@ -1,17 +1,23 @@
 import { Fragment } from "react";
 import Image from "next/image";
 import { mediaUrl } from "@/lib/strapi";
-import { gilroySemiBold } from "../hero/fonts";
-import { EcosystemPartnerRow } from "../ecosystem/EcosystemPartnerRow";
+import { dmMono, gilroySemiBold } from "../hero/fonts";
 import { EcosystemGridLine } from "../ecosystem/EcosystemGridLine";
 import { Corners } from "../shared/Corners";
 import {
   COMPANY_TECHNOLOGY_PARTNER_LOGO_NODES,
-  COMPANY_TECHNOLOGY_PARTNER_ROW,
   TECHNOLOGY_PARTNERS_TITLE_GRADIENT,
 } from "./company-technology-partners-data";
 
 const FALLBACK_TITLE = "TECHNOLOGY PARTNERS";
+
+const FALLBACK_TECH_PARTNERS = [
+  { src: "/ecosystem/partners/tsmc.svg", width: 100, height: 30 },
+  { src: "/ecosystem/partners/celus.svg", width: 100, height: 30 },
+  { src: "/ecosystem/partners/edgeai.svg", width: 50, height: 50 },
+  { src: "/ecosystem/logo-partner-4.svg", width: 35, height: 35 },
+  { src: "/ecosystem/logo-octane.svg", width: 35, height: 35 },
+];
 
 function buildPartnerLogo(p: any) {
   const logoUrl = mediaUrl(p?.logo);
@@ -41,7 +47,10 @@ export function CompanyTechnologyPartners({ data }: CompanyTechnologyPartnersPro
         .map(buildPartnerLogo)
         .filter(Boolean) as { src: string; width: number; height: number }[])
     : null;
-  const hasStrapiLogos = partnerLogos !== null && partnerLogos.length > 0;
+  const displayLogos =
+    partnerLogos && partnerLogos.length > 0
+      ? partnerLogos
+      : FALLBACK_TECH_PARTNERS;
 
   return (
     <section
@@ -62,19 +71,20 @@ export function CompanyTechnologyPartners({ data }: CompanyTechnologyPartnersPro
         className="absolute top-[60px] left-0 h-[225px] w-[1204px]"
         data-node-id="2379:4671"
       >
-        {hasStrapiLogos ? (
-          <div className="relative flex h-full w-full items-center justify-between bg-[rgba(255,255,255,0.04)] px-[40px]">
-            <div className="pointer-events-none absolute inset-0 z-[2]" aria-hidden>
-              <Image
-                src="/ecosystem/partner-frame-border.svg"
-                alt=""
-                fill
-                className="object-fill"
-                sizes="1204px"
-              />
-            </div>
+        <div className="relative flex h-full w-full items-center justify-between bg-[rgba(255,255,255,0.04)] px-[40px]">
+          <div className="pointer-events-none absolute inset-0 z-[2]" aria-hidden>
+            <Image
+              src="/ecosystem/partner-frame-border.svg"
+              alt=""
+              fill
+              className="object-fill"
+              sizes="1204px"
+            />
+          </div>
 
-            {partnerLogos.map((logo, i) => (
+          {displayLogos.map((logo, i) => {
+            const isRevealingSoon = i >= 2;
+            return (
               <Fragment key={i}>
                 <div
                   className="relative flex w-[150px] shrink-0 flex-col items-center justify-center gap-[12px] py-[20px]"
@@ -82,7 +92,7 @@ export function CompanyTechnologyPartners({ data }: CompanyTechnologyPartnersPro
                   data-name="Stat"
                 >
                   <div
-                    className="relative shrink-0 overflow-clip"
+                    className="relative shrink-0 overflow-visible flex items-center justify-center"
                     style={{ width: logo.width, height: logo.height }}
                     data-name="Icon"
                   >
@@ -91,12 +101,26 @@ export function CompanyTechnologyPartners({ data }: CompanyTechnologyPartnersPro
                       alt=""
                       width={logo.width}
                       height={logo.height}
-                      className="block size-full max-w-none object-contain"
+                      className={`block size-full max-w-none object-contain transition-all ${
+                        isRevealingSoon
+                          ? "brightness-0 opacity-80 drop-shadow-[0_0_8px_rgba(255,255,255,0.18)]"
+                          : ""
+                      }`}
                       unoptimized
                     />
                   </div>
+
+                  {isRevealingSoon && (
+                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center border border-[#E2A740] bg-black/90 px-[10px] py-[5px] shadow-lg pointer-events-none z-10 whitespace-nowrap">
+                      <span className={`${dmMono.className} flex items-center gap-[6px] text-[10px] uppercase tracking-[0.08em] text-[#E2A740]`}>
+                        <span>|</span>
+                        <span>REVEALING SOON</span>
+                        <span>|</span>
+                      </span>
+                    </div>
+                  )}
                 </div>
-                {i < partnerLogos.length - 1 ? (
+                {i < displayLogos.length - 1 ? (
                   <EcosystemGridLine
                     nodeId={`2379:tp-grid-${i}`}
                     capTopNodeId={`2379:tp-ct-${i}`}
@@ -105,20 +129,15 @@ export function CompanyTechnologyPartners({ data }: CompanyTechnologyPartnersPro
                   />
                 ) : null}
               </Fragment>
-            ))}
+            );
+          })}
 
-            <Corners
-              leftSrc="/ecosystem/corner-tl.svg"
-              rightSrc="/ecosystem/corner-tr.svg"
-              className="z-[3]"
-            />
-          </div>
-        ) : (
-          <EcosystemPartnerRow
-            config={COMPANY_TECHNOLOGY_PARTNER_ROW}
-            logoStatNodeIds={COMPANY_TECHNOLOGY_PARTNER_LOGO_NODES}
+          <Corners
+            leftSrc="/ecosystem/corner-tl.svg"
+            rightSrc="/ecosystem/corner-tr.svg"
+            className="z-[3]"
           />
-        )}
+        </div>
       </div>
     </section>
   );

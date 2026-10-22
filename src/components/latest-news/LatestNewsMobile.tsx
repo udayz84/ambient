@@ -13,8 +13,8 @@ import {
   type LatestNewsArticle,
 } from "./latest-news-data";
 
-/** Mobile carousel shows up to 6 cards (2 × visible-by-3 swipe). */
-const VISIBLE_CARD_COUNT = 6;
+/** Mobile matches desktop: exactly 3 visible cards. */
+const VISIBLE_CARD_COUNT = 3;
 
 function resolveCards(data: any): LatestNewsArticle[] {
   const collectionArticles = Array.isArray(data?.articles)

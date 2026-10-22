@@ -62,9 +62,11 @@ export function SiteFooter({
   // 250px = som/partners.
   const mobileOverlapPx = !isOverlapPage
     ? 0
-    : isPartnersPage || pathname === "/som"
-      ? 250
-      : 700;
+    : pathname === "/developer"
+      ? 0
+      : isPartnersPage || pathname === "/som"
+        ? 250
+        : 700;
 
   // Mobile content top padding, measured from the top of the VISIBLE zone
   // (i.e. below the hidden overlap zone handled by the spacer above).
@@ -193,11 +195,15 @@ export function SiteFooter({
       </div>
 
       {/* Hidden overlap spacer — sits behind the page's merged final section */}
-      {mobileOverlapPx > 0 && (
+      {(mobileOverlapPx > 0 || pathname === "/developer") && (
         <div
           aria-hidden
           className={`w-full lg:hidden min-[600px]:h-[calc(600px*var(--tablet-zoom,0.5333))] ${
-            isPartnersPage || pathname === "/som" ? "h-[250px]" : "h-[700px]"
+            pathname === "/developer"
+              ? "hidden min-[600px]:block"
+              : isPartnersPage || pathname === "/som"
+                ? "h-[250px]"
+                : "h-[700px]"
           }`}
         />
       )}

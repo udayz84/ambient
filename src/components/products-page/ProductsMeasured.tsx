@@ -546,16 +546,22 @@ function PrimaryCta({
   centered = false,
   onClick,
   download,
+  target = "_blank",
+  rel = "noopener noreferrer",
 }: {
   label: string;
   href: string;
   centered?: boolean;
   onClick?: (e: React.MouseEvent, label: string) => void;
   download?: boolean | string;
+  target?: string;
+  rel?: string;
 }) {
   return (
     <a
       href={href}
+      target={target}
+      rel={rel}
       download={download}
       onClick={onClick ? (e) => onClick(e, label) : undefined}
       className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] shrink-0 overflow-hidden ${
@@ -765,7 +771,8 @@ export function ProductsMeasured({
             <PrimaryCta
               label={primary.label}
               href={primary.href && primary.href !== "#" ? primary.href : "/GPX10-Pro-Product-Brief.pdf"}
-              download={primary.href && primary.href.endsWith(".pdf") ? primary.href.split("/").pop() : "GPX10-Pro-Product-Brief.pdf"}
+              target="_blank"
+              rel="noopener noreferrer"
             />
             <SecondaryCta
               label={secondary.label}
@@ -842,7 +849,8 @@ export function ProductsMeasured({
             {/* Primary — 240×48 */}
             <a
               href={primary.href && primary.href !== "#" ? primary.href : "/GPX10-Pro-Product-Brief.pdf"}
-              download={primary.href && primary.href.endsWith(".pdf") ? primary.href.split("/").pop() : "GPX10-Pro-Product-Brief.pdf"}
+              target="_blank"
+              rel="noopener noreferrer"
               className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[240px] shrink-0 items-center justify-center overflow-hidden`}
             >
               <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />

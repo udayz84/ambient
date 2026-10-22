@@ -1,5 +1,7 @@
 "use client";
 
+import { useCallback, useRef, useState } from "react";
+import Image from "next/image";
 import { interRegular, gilroyMedium } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFadeIn } from "../shared/useFadeIn";
@@ -91,6 +93,104 @@ function WhyCard({ step }: { step: any }) {
   );
 }
 
+function WhyCardsMobileCarousel({ journey }: { journey: any[] }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const scrollToStep = useCallback((index: number) => {
+    const container = scrollRef.current;
+    if (!container) return;
+    const clamped = Math.max(0, Math.min(index, journey.length - 1));
+    const card = container.children[clamped] as HTMLElement | undefined;
+    if (!card) return;
+    const target = card.offsetLeft - (container.clientWidth - card.offsetWidth) / 2;
+    container.scrollTo({ left: Math.max(0, target), behavior: "smooth" });
+  }, [journey.length]);
+
+  const handleScroll = useCallback(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+    const center = container.scrollLeft + container.clientWidth / 2;
+    let closest = 0;
+    let minDist = Infinity;
+    for (let i = 0; i < container.children.length; i++) {
+      const el = container.children[i] as HTMLElement;
+      const cardCenter = el.offsetLeft + el.offsetWidth / 2;
+      const dist = Math.abs(cardCenter - center);
+      if (dist < minDist) {
+        minDist = dist;
+        closest = i;
+      }
+    }
+    setActiveIndex(closest);
+  }, []);
+
+  return (
+    <div className="flex w-full flex-col items-center">
+      <div
+        ref={scrollRef}
+        onScroll={handleScroll}
+        className="flex w-[calc(100%+40px)] -mx-[20px] px-[calc((100%+40px-300px)/2)] snap-x snap-mandatory overflow-x-auto gap-[16px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pb-[8px] scroll-smooth"
+      >
+        {journey.map((step) => (
+          <div key={step.title} className="w-[300px] shrink-0 snap-center h-full">
+            <WhyCard step={step} />
+          </div>
+        ))}
+      </div>
+
+      {/* Navigation Arrows & Indicators */}
+      <div className="mt-[20px] flex items-center justify-center gap-[16px]">
+        <button
+          type="button"
+          aria-label="Previous step"
+          onClick={() => scrollToStep(activeIndex - 1)}
+          disabled={activeIndex <= 0}
+          className="relative size-[40px] transition-opacity enabled:cursor-pointer enabled:hover:opacity-80 disabled:opacity-30"
+        >
+          <Image
+            src="/applications/nav-arrow-left.svg"
+            alt=""
+            width={40}
+            height={40}
+            className="block size-full max-w-none"
+            aria-hidden
+          />
+        </button>
+        <div className="flex items-center gap-[6px]">
+          {journey.map((_, idx) => (
+            <button
+              key={idx}
+              type="button"
+              aria-label={`Go to step ${idx + 1}`}
+              onClick={() => scrollToStep(idx)}
+              className={`h-[4px] rounded-full transition-all duration-300 ${
+                activeIndex === idx ? "w-[24px] bg-[#53d824]" : "w-[8px] bg-white/20"
+              }`}
+            />
+          ))}
+        </div>
+        <button
+          type="button"
+          aria-label="Next step"
+          onClick={() => scrollToStep(activeIndex + 1)}
+          disabled={activeIndex >= journey.length - 1}
+          className="relative size-[40px] transition-opacity enabled:cursor-pointer enabled:hover:opacity-80 disabled:opacity-30"
+        >
+          <Image
+            src="/applications/nav-arrow-right.svg"
+            alt=""
+            width={40}
+            height={40}
+            className="block size-full max-w-none"
+            aria-hidden
+          />
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export function PartnersWhy({ content }: { content: WhyContent }) {
   const { fadeRef, isVisible } = useFadeIn<HTMLElement>();
   const fadeCls = isVisible
@@ -168,8 +268,8 @@ export function PartnersWhy({ content }: { content: WhyContent }) {
       </TabletScaleCanvas>
 
       {/* MOBILE (<600px) */}
-      <div className="relative flex w-full flex-col items-center gap-[28px] pb-[40px] pt-0 -mt-[20px] px-[20px] min-[600px]:hidden">
-        <div className="relative flex flex-col items-center gap-[16px]">
+      <div className="relative flex w-full flex-col items-center gap-[28px] pb-[40px] pt-[36px] px-[20px] min-[600px]:hidden">
+        <div className="relative flex flex-col items-center px-[16px] py-[8px]">
           <PartnersSectionHeading
             deg="124.568deg"
             className="flex flex-col items-center !whitespace-normal text-center"
@@ -186,13 +286,8 @@ export function PartnersWhy({ content }: { content: WhyContent }) {
           {content.subheading}
         </p>
 
-        <div className="flex w-full flex-col gap-[16px] items-center">
-          {journey.map((step) => (
-            <div key={step.title} className="w-full max-w-[360px]">
-              <WhyCard step={step} />
-            </div>
-          ))}
-        </div>
+        {/* 5 Cards horizontal carousel on mobile */}
+        <WhyCardsMobileCarousel journey={journey} />
 
         <p
           className={`${interRegular.className} w-full text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 [word-break:break-word] not-italic`}

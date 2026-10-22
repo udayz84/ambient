@@ -5,6 +5,11 @@ import { createPortal } from "react-dom";
 import { gilroySemiBold, interLight, interRegular } from "../hero/fonts";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { popupField, type PopupConfig } from "@/lib/popup";
+import {
+  getHasCookieConsentSnapshot,
+  subscribeCookieConsent,
+  COOKIE_CONSENT_OPEN_EVENT,
+} from "@/lib/cookie-consent";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
@@ -20,15 +25,48 @@ export function NewsletterPopup({ config }: { config?: PopupConfig }) {
   // CMS copy from the footer relation; null = hardcoded fallbacks.
 
   useEffect(() => {
-    // Shows immediately on page open; stays dismissed for the rest of the
+    // Shows only after cookie consent is decided; stays dismissed for the rest of the
     // session once closed or submitted.
     if (
       localStorage.getItem(SUBSCRIBED_KEY) ||
       sessionStorage.getItem(DISMISSED_KEY)
     )
       return;
-    const timer = window.setTimeout(() => setOpen(true), 0);
-    return () => window.clearTimeout(timer);
+
+    let timer: number | undefined;
+
+    const tryShow = () => {
+      if (
+        localStorage.getItem(SUBSCRIBED_KEY) ||
+        sessionStorage.getItem(DISMISSED_KEY)
+      )
+        return;
+      // Priority order: First cookie consent, then newsletter
+      if (!getHasCookieConsentSnapshot()) return;
+      timer = window.setTimeout(() => setOpen(true), 600);
+    };
+
+    if (getHasCookieConsentSnapshot()) {
+      // Cookie consent already resolved on previous visit
+      timer = window.setTimeout(() => setOpen(true), 600);
+    }
+
+    // When cookie consent is chosen (accept/reject), show newsletter
+    const unsubscribe = subscribeCookieConsent(() => {
+      tryShow();
+    });
+
+    // If cookie banner is explicitly reopened, hide newsletter to prevent overlap
+    const onCookieReopen = () => {
+      setOpen(false);
+    };
+    window.addEventListener(COOKIE_CONSENT_OPEN_EVENT, onCookieReopen);
+
+    return () => {
+      if (timer) window.clearTimeout(timer);
+      unsubscribe();
+      window.removeEventListener(COOKIE_CONSENT_OPEN_EVENT, onCookieReopen);
+    };
   }, []);
 
   const close = () => {

@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Fragment, useRef, useState } from "react";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
@@ -1075,7 +1076,7 @@ function DeveloperCopilotsMobile({ data }: { data?: any }) {
           return (
             <div
               key={title || i}
-              className="relative flex flex-col gap-[16px] overflow-clip p-[24px]"
+              className="relative flex flex-col gap-[16px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[#0A0A0A] p-[24px]"
               style={{ backgroundImage: COPILOT_CARD_BG }}
             >
               {/* Icon — 72×72 rounded-12 with radial gradient bg */}
@@ -1106,13 +1107,13 @@ function DeveloperCopilotsMobile({ data }: { data?: any }) {
                 {isPrimary ? (
                   <a
                     href={ctaHref}
-                    className={`${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-hidden px-[16px] py-[10px] shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+                    className={`${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-hidden px-[12px] py-[10px] shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
                   >
                     <span
                       aria-hidden
                       className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
                     />
-                    <span className="relative text-[12px] leading-[16px] font-medium uppercase whitespace-nowrap text-white not-italic">
+                    <span className="relative text-[11px] min-[375px]:text-[12px] leading-[16px] font-medium uppercase whitespace-nowrap text-white not-italic tracking-[-0.01em]">
                       {ctaLabel}
                     </span>
                     <span
@@ -1124,7 +1125,7 @@ function DeveloperCopilotsMobile({ data }: { data?: any }) {
                 ) : (
                   <a
                     href={ctaHref}
-                    className={`${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+                    className={`${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[16px] py-[10px]`}
                   >
                     <span className="relative text-[12px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
                       {ctaLabel}
