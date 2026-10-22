@@ -171,7 +171,7 @@ export function MeasuredProofMobile({ data }: { data?: any }) {
             <div
               className="origin-top-left scale-[0.68] md:scale-[0.84] w-[388px] h-[600px]"
             >
-              <MeasuredProofCard {...card} />
+              <MeasuredProofCard {...card} className="w-[388px]" />
             </div>
           </div>
         ))}

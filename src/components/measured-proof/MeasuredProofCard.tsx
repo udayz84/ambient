@@ -11,11 +11,12 @@ type MeasuredProofCardProps = {
   imageTop: number;
   imageClassName?: string;
   imageSizes?: string;
-  statWidth: number;
-  descriptionWidth: number;
+  statWidth?: number;
+  descriptionWidth?: number;
   descriptionBottom?: number;
   statJustifyEnd?: boolean;
   nodeId: string;
+  className?: string;
 };
 
 export function MeasuredProofCard({
@@ -33,10 +34,11 @@ export function MeasuredProofCard({
   descriptionBottom = 110.5,
   statJustifyEnd = false,
   nodeId,
+  className,
 }: MeasuredProofCardProps) {
   return (
     <div
-      className="relative h-[600px] w-[388px] shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] max-[1023px]:border max-[1023px]:border-white/20 backdrop-blur-[12px] bg-black/40"
+      className={`relative h-[600px] ${className || "w-[320px]"} shrink-0 overflow-clip border-[0.5px] border-solid border-[rgba(255,255,255,0.1)] max-[1023px]:border max-[1023px]:border-white/20 backdrop-blur-[12px] bg-black/40`}
       data-node-id={nodeId}
       data-name="Lower power consumption"
     >
@@ -48,7 +50,7 @@ export function MeasuredProofCard({
           src="/measured-proof/corner-elements.svg"
           alt=""
           fill
-          className="object-contain p-[1px]"
+          className="object-fill p-[1px]"
           aria-hidden
         />
       </div>
@@ -71,10 +73,10 @@ export function MeasuredProofCard({
       </div>
 
       <p
-        className={`${interRegular.className} absolute left-[30px] text-[18px] leading-[27px] font-normal text-white opacity-90 [word-break:break-word] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+        className={`${interRegular.className} absolute left-[24px] right-[24px] text-[18px] leading-[27px] font-normal text-white opacity-90 [word-break:break-word] not-italic min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         style={{
           bottom: descriptionBottom,
-          width: descriptionWidth,
+          ...(descriptionWidth ? { maxWidth: descriptionWidth } : {}),
           transform: "translateY(100%)",
         }}
       >
@@ -82,8 +84,8 @@ export function MeasuredProofCard({
       </p>
 
       <div
-        className={`absolute top-[30px] left-[30px] flex flex-col items-start gap-[12px] ${statJustifyEnd ? "justify-end" : ""}`}
-        style={{ width: statWidth }}
+        className={`absolute top-[30px] left-[24px] right-[24px] flex flex-col items-start gap-[12px] ${statJustifyEnd ? "justify-end" : ""}`}
+        style={statWidth ? { maxWidth: statWidth } : undefined}
       >
         <p
           className={`${gilroyMedium.className} shrink-0 text-[68px] leading-[72px] font-medium whitespace-nowrap text-white [word-break:break-word] not-italic`}

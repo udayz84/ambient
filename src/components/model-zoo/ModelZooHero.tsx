@@ -15,6 +15,14 @@ import {
 import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const NEXT_SECTION_ID = "model-zoo-content";
+const APP_FORGE_SECTION_ID = "application-forge";
+
+function scrollToAppForge() {
+  const el = document.getElementById(APP_FORGE_SECTION_ID);
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
 
 /**
  * Figma 5387:7822 — Model Zoo hero section (1442×743 canvas, full-bleed).
@@ -72,7 +80,7 @@ export function ModelZooHero() {
         </div>
         
         <div className="animate-hero-text-fade-in relative z-10 mt-[12px] flex w-full max-w-[352px] flex-col items-stretch gap-[12px]" style={{ animationDelay: "150ms", animationFillMode: "both" }}>
-          <CtaPrimary label="Browse the Model Zoo" />
+          <CtaPrimary label="Browse the Model Zoo" href={`#${APP_FORGE_SECTION_ID}`} onClick={scrollToAppForge} />
           <CtaSecondary label="Request Evaluation Kit" href="/dvk" />
         </div>
       </div>
@@ -183,7 +191,7 @@ export function ModelZooHero() {
               run on GPX at microwatt power.
             </p>
             <div className="animate-hero-text-fade-in flex items-start gap-[24px]" style={{ animationDelay: "300ms", animationFillMode: "both" }} data-node-id="5387:7843" data-name="Frame 1984079464">
-              <CtaPrimary label="Browse the Model Zoo" href="#model-zoo-content" width={250} />
+              <CtaPrimary label="Browse the Model Zoo" href={`#${APP_FORGE_SECTION_ID}`} onClick={scrollToAppForge} width={250} />
               <CtaSecondary label="Request Evaluation Kit" href="/dvk" width={289} />
             </div>
           </div>

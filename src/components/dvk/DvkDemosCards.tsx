@@ -84,7 +84,7 @@ export const DEMO_CARDS: DemoCard[] = [
     imgOverlay: "/dvk/demo-vision.webp",
     imgRight: -56.37,
     imgTop: -40.38,
-    titleLine1: "Vision-Based",
+    titleLine1: "Motion-Based",
     titleLine2: "Gesture Recognition",
     desc: "Route a camera feed through the dedicated connector to validate real-time spatial awareness and gesture recognition without relying on a cloud round-trip.",
     descWidth: 333.99,

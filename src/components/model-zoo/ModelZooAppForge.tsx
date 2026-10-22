@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -238,7 +239,8 @@ export function ModelZooAppForge({
 
   return (
     <section
-      className="relative w-full bg-black"
+      id="application-forge"
+      className="relative w-full bg-black scroll-mt-[80px]"
       data-node-id="5131:10421"
       aria-label="Your eval kit, controlled from your phone"
     >
