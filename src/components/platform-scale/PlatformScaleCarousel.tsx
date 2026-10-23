@@ -248,11 +248,11 @@ function CarouselChipItem({
 function PlatformScaleStatPanel({ product }: { product: GpxProduct }) {
   return (
     <div
-      className="absolute top-[813px] left-1/2 flex w-[500px] max-md:w-[calc(100%-32px)] -translate-x-1/2 items-center gap-[32px] backdrop-blur-[6px] bg-white/[0.02] border-[0.5px] border-solid border-[rgba(255,255,255,0.15)] px-[10px]"
+      className="absolute top-[813px] left-1/2 flex w-[500px] -translate-x-1/2 items-center gap-[32px] backdrop-blur-[6px] bg-white/[0.02] border-[0.5px] border-solid border-[rgba(255,255,255,0.15)] px-[10px]"
       data-node-id="2379:641"
     >
       <div
-        className="relative flex min-w-px flex-[1_0_0] flex-col items-center justify-center gap-[12px] max-md:gap-[4px] py-[20px] pl-[20px]"
+        className="relative flex min-w-px flex-[1_0_0] flex-col items-center justify-center gap-[12px] py-[20px] px-[20px]"
         data-node-id="2379:642"
         data-name="Stat"
       >
@@ -268,7 +268,7 @@ function PlatformScaleStatPanel({ product }: { product: GpxProduct }) {
           data-name="Content"
         >
           <p
-            className={`${interRegular.className} relative w-full text-center text-[14px] leading-[1.4] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+            className={`${interRegular.className} relative w-full text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}
             data-node-id="2379:646"
           >
             {product.description}
