@@ -18,6 +18,7 @@ import "./globals.css";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
+const GTM_ID = "GTM-TPJQQR8N";
 const GA4_MEASUREMENT_ID = "G-R9CNVQ4SYG";
 
 const geistSans = Geist({
@@ -69,6 +70,16 @@ export default async function RootLayout({
       data-scroll-behavior="smooth"
     >
       <body className="flex min-h-full flex-col overflow-x-clip bg-black">
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
+        {/* End Google Tag Manager (noscript) */}
         <TabletScaleInit />
         <SmoothScroll>
           <Navbar
@@ -81,6 +92,15 @@ export default async function RootLayout({
         </SmoothScroll>
         <NewsletterPopup />
         <CookieConsent />
+        {/* Google Tag Manager */}
+        <Script id="gtm" strategy="afterInteractive">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${GTM_ID}');`}
+        </Script>
+        {/* End Google Tag Manager */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`}
           strategy="afterInteractive"
