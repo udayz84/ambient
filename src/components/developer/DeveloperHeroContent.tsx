@@ -1,9 +1,12 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { useState } from "react";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
+import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
@@ -21,7 +24,8 @@ const DEFAULT_SECONDARY_LABEL = "Read the Documentation";
  * Figma 2438:4563 — Developer hero text content.
  * Vertical stack (gap 24px): Section Title · Description · CTA row.
  */
-export function DeveloperHeroContent({ data }: { data?: any; briefForm?: any }) {
+export function DeveloperHeroContent({ data, briefForm }: { data?: any; briefForm?: any }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const heading = data?.heading || DEFAULT_HEADING;
   const headingLines = heading.split("\n");
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
@@ -74,7 +78,12 @@ export function DeveloperHeroContent({ data }: { data?: any; briefForm?: any }) 
         className="relative flex shrink-0 items-start justify-center gap-[24px]"
         data-node-id="2438:4572"
       >
-        <PrimaryCta href={primaryHref}>{primaryLabel}</PrimaryCta>
+        <PrimaryCta
+          href={primaryHref}
+          onClick={primaryHref === "#" ? () => setIsModalOpen(true) : undefined}
+        >
+          {primaryLabel}
+        </PrimaryCta>
         <SecondaryCta
           href="/Technical-Documents-Ambient-Scientific.zip"
           download="Technical-Documents-Ambient-Scientific.zip"
@@ -82,6 +91,13 @@ export function DeveloperHeroContent({ data }: { data?: any; briefForm?: any }) 
           {secondaryLabel}
         </SecondaryCta>
       </div>
+
+      <UpcomingProductsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        formContext="sdk"
+        config={briefForm}
+      />
     </div>
   );
 }
@@ -90,14 +106,24 @@ export function DeveloperHeroContent({ data }: { data?: any; briefForm?: any }) 
 function PrimaryCta({
   children,
   href,
+  onClick,
 }: {
   children: React.ReactNode;
   href: string;
+  onClick?: () => void;
 }) {
   return (
     <a
       href={href}
-      className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[276px] shrink-0 items-center justify-center overflow-hidden px-[20px] py-[10px]`}
+      onClick={
+        onClick
+          ? (e) => {
+              e.preventDefault();
+              onClick();
+            }
+          : undefined
+      }
+      className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] w-[276px] shrink-0 items-center justify-center overflow-hidden px-[20px] py-[10px] cursor-pointer`}
       data-node-id="2438:4573"
     >
       <span

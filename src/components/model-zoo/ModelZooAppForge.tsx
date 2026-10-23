@@ -174,7 +174,7 @@ export function ModelZooAppForge({
     "Download ApplicationForge, pair with your kit over Bluetooth, and flash live demos in seconds — no laptop, no code.";
   const { fadeRef: articleRef, isVisible: articleVisible } = useFadeIn<HTMLDivElement>();
   const { fadeRef: forgeRef, isVisible: forgeVisible } = useFadeIn<HTMLDivElement>();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContext, setModalContext] = useState<"sdk" | "evalkit" | null>(null);
 
   const renderCtaButtons = () => {
     if (ctas) {
@@ -186,7 +186,7 @@ export function ModelZooAppForge({
                 <a
                   key={`cta-${i}`}
                   href="#"
-                  onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }}
+                  onClick={(e) => { e.preventDefault(); setModalContext("evalkit"); }}
                   className={`${gilroyMedium.className} relative flex h-[48px] w-auto shrink-0 items-center justify-center border border-white/20 bg-[rgba(226,241,202,0.12)] px-[24px] py-[10px] cursor-pointer`}
                 >
                   <span className="relative flex h-full w-auto items-center justify-center text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
@@ -197,6 +197,10 @@ export function ModelZooAppForge({
                 <a
                   key={`cta-${i}`}
                   href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setModalContext(cta.label.toLowerCase().includes("sdk") ? "sdk" : "evalkit");
+                  }}
                   className="shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] relative flex h-[48px] w-auto shrink-0 items-center justify-center px-[32px] py-[10px] cursor-pointer"
                   data-node-id="5131:10556"
                   data-name="Cta"
@@ -222,7 +226,7 @@ export function ModelZooAppForge({
     return (
       <a
         href="#"
-        onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }}
+        onClick={(e) => { e.preventDefault(); setModalContext("evalkit"); }}
         className="shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] relative flex h-[48px] w-[280px] shrink-0 items-center justify-center cursor-pointer"
         data-node-id="5131:10556"
         data-name="Cta"
@@ -527,9 +531,9 @@ export function ModelZooAppForge({
       </TabletScaleCanvas>
 
       <UpcomingProductsModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        formContext="evalkit"
+        isOpen={modalContext !== null}
+        onClose={() => setModalContext(null)}
+        formContext={modalContext ?? "evalkit"}
         config={formConfig}
       />
     </section>

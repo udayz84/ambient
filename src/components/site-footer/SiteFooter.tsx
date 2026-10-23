@@ -54,12 +54,11 @@ export function SiteFooter({
 }) {
   const isPartnersPage = pathname === "/partners";
 
-  // ---- Mobile layout system ----
-  // Each overlap page's final section pulls the footer up behind itself with a
-  // negative bottom margin. That hidden zone must contain NOTHING (pure black):
-  // no art, no content. Everything visible starts below it.
-  // Pull values (mobile): 700px = technology/products/applications/dvk,
-  // 250px = som/partners.
+  // ---- Mobile/tablet overlap system ----
+  // SOM is the only page with a real mobile overlap (the waitlist card pulls
+  // over the footer by 250px). Partners and dvk/evk still pull the footer up
+  // behind their final sections at tablet width, so they keep a tablet-only
+  // spacer; on mobile their final sections flow normally and the spacer is 0.
   const isZeroMobileOverlap =
     pathname === "/developer" ||
     pathname === "/model-zoo" ||
@@ -75,33 +74,27 @@ export function SiteFooter({
         ? 250
         : 700;
 
-  // The homepage anchors the mobile footer art to the very top of the footer.
-  // SOM must match that reference exactly: art top 0 and the same footer
-  // height as home, so the art scales identically and the glow lands the same
-  // distance above the footer nav.
-  const mobileBgTopPx = pathname === "/som" || isZeroMobileOverlap ? 0 : mobileOverlapPx;
+  // ---- Unified mobile footer (all pages except home/company) ----
+  // Every non-newsletter page uses the approved SOM mobile footer geometry:
+  // 80px of art (the glow) above the nav, then the footer content. Only SOM
+  // still has a real mobile overlap (its waitlist card is pulled over the
+  // footer); partners/dvk/evk only overlap at tablet width.
+  //
+  // The mobile art is shifted up 338px so the glow peak lands just above the
+  // nav for the 703px visible footer. SOM keeps its existing -90px offset.
+  const mobileBgTopPx = showNewsletter
+    ? 0
+    : pathname === "/som"
+      ? -90
+      : -338;
+  const mobileOverlayTopPx = showNewsletter
+    ? 0
+    : pathname === "/som"
+      ? -90
+      : 0;
 
-  // Mobile content top padding, measured from the top of the VISIBLE zone
-  // (i.e. below the hidden overlap zone handled by the spacer above).
-  // Home's mobile footer is 196px taller than SOM's because of the newsletter
-  // block (pt-100 + 290 + mb-80). SOM has no newsletter, so add that 196px as
-  // top spacing (220px = 24px base + 196px) to reproduce home's footer height,
-  // art scale, and glow/nav alignment.
-  const mobileContentPadding = isOverlapPage
-    ? isPartnersPage
-      ? "pt-[50px]"
-      : pathname === "/som"
-        ? "pt-[220px]"
-        : isZeroMobileOverlap
-          ? "pt-[24px]"
-          : "pt-[0px]"
-    : isResourcesPage
-      ? "pt-[160px]"
-      : isCareersPage || isContactPage
-        ? "pt-[376px]"
-        : showNewsletter
-          ? "pt-[100px]"
-          : "pt-[24px]";
+  // Mobile content top padding, measured from the top of the VISIBLE zone.
+  const mobileContentPadding = showNewsletter ? "pt-[100px]" : "pt-[80px]";
 
   const rawNavSections = (data?.nav_sections as Record<string, unknown>[] | undefined) ?? [];
   const navSections: FooterNavSection[] =
@@ -173,7 +166,7 @@ export function SiteFooter({
           <div
             className="absolute inset-x-0 w-full min-[600px]:hidden"
             style={{
-              top: mobileBgTopPx > 0 ? `${mobileBgTopPx}px` : "0px",
+              top: `${mobileBgTopPx}px`,
               bottom: 0,
             }}
           >
@@ -205,10 +198,16 @@ export function SiteFooter({
         <div
           className="absolute inset-x-0 bg-gradient-to-b from-[rgba(0,0,0,0.2)] to-transparent min-[600px]:hidden"
           style={{
-            top: mobileBgTopPx > 0 ? `${mobileBgTopPx}px` : "0px",
+            top: `${mobileOverlayTopPx}px`,
             bottom: 0,
           }}
         />
+        {!showNewsletter && pathname !== "/som" && (
+          <div
+            aria-hidden
+            className="absolute inset-x-0 top-0 h-[80px] bg-gradient-to-b from-black to-transparent min-[600px]:hidden"
+          />
+        )}
         {/* Tablet overlay (600px to 1023px) */}
         <div className="absolute inset-0 hidden min-[600px]:block lg:hidden bg-gradient-to-b from-black/90 via-black/20 to-black/40 pointer-events-none" />
         {/* Desktop overlay (>=1024px) - EXACT FIGMA MATCH */}
@@ -222,9 +221,9 @@ export function SiteFooter({
           className={`w-full lg:hidden min-[600px]:h-[calc(600px*var(--tablet-zoom,0.5333))] ${
             isZeroMobileOverlap
               ? "hidden min-[600px]:block"
-              : isPartnersPage || pathname === "/som"
+              : pathname === "/som"
                 ? "h-[250px]"
-                : "h-[700px]"
+                : "h-0"
           }`}
         />
       )}

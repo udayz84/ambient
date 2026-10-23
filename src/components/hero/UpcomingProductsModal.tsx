@@ -11,6 +11,10 @@ import { popupField, type PopupConfig } from "@/lib/popup";
 const PANEL_BG = "/form.png";
 const SUCCESS_IMG = "/careers/apply-success.webp";
 
+const MODEL_FORGE_ZIP_URL =
+  "https://ambientwebasset.blob.core.windows.net/website-assets/Model_Forge_1.0.0.zip";
+const MODEL_FORGE_ZIP_NAME = "Model_Forge_1.0.0.zip";
+
 const FIELD_BOX =
   "h-[42px] w-full border-[0.5px] border-solid border-[#4a4a4a] bg-transparent px-[12px] text-[14px] leading-[21px] text-white outline-none placeholder:text-[#4a4a4a] focus:border-[rgba(255,255,255,0.5)]";
 
@@ -48,6 +52,11 @@ export function UpcomingProductsModal({
   const [mounted, setMounted] = useState(false);
   const [step, setStep] = useState<Step>("form");
   const [submittedVariant, setSubmittedVariant] = useState<string | undefined>(undefined);
+
+  const effectiveDownloadUrl =
+    pdfUrl ?? (formContext === "sdk" ? MODEL_FORGE_ZIP_URL : undefined);
+  const effectiveDownloadName =
+    pdfName ?? (formContext === "sdk" ? MODEL_FORGE_ZIP_NAME : undefined);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -131,8 +140,8 @@ export function UpcomingProductsModal({
             }}
             formContext={formContext}
             config={config}
-            pdfUrl={pdfUrl}
-            pdfName={pdfName}
+            pdfUrl={effectiveDownloadUrl}
+            pdfName={effectiveDownloadName}
             title={title}
             productVariant={productVariant}
           />
@@ -141,7 +150,9 @@ export function UpcomingProductsModal({
           <ConfirmationStep
             onClose={onClose}
             config={config}
-            downloadStarted={Boolean(pdfUrl)}
+            downloadStarted={Boolean(effectiveDownloadUrl)}
+            downloadUrl={effectiveDownloadUrl}
+            downloadName={effectiveDownloadName}
             closeLabel={closeLabel}
             formContext={formContext}
             productVariant={submittedVariant ?? productVariant}
@@ -238,6 +249,8 @@ function FormStep({
         const a = document.createElement("a");
         a.href = pdfUrl;
         a.download = pdfName ?? "";
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
         document.body.appendChild(a);
         a.click();
         a.remove();
@@ -447,6 +460,8 @@ function ConfirmationStep({
   onClose,
   config,
   downloadStarted,
+  downloadUrl,
+  downloadName,
   closeLabel,
   formContext,
   productVariant,
@@ -454,6 +469,8 @@ function ConfirmationStep({
   onClose: () => void;
   config?: PopupConfig;
   downloadStarted?: boolean;
+  downloadUrl?: string;
+  downloadName?: string;
   closeLabel?: string;
   formContext?: string;
   productVariant?: string;
@@ -487,20 +504,32 @@ function ConfirmationStep({
         </div>
 
         <h2 className={`${gilroyMedium.className} text-center text-[30px] md:text-[38px] leading-[40px] md:leading-[47px] font-medium whitespace-nowrap text-white not-italic`}>
-          {config?.success_title ?? "Thank you for signing up!"}
+          {config?.success_title ?? (formContext === "sdk" ? "Your download is ready!" : "Thank you for signing up!")}
         </h2>
 
         <p className={`${interRegular.className} w-full md:w-[540px] text-center text-[12px] leading-[18px] font-normal text-[#a4a4a4] not-italic`}>
           {config?.success_text ?? (downloadStarted
-            ? "Your download has started. The case study PDF is on its way to your device."
+            ? (formContext === "sdk"
+                ? "Your download has started. ModelForge SDK (1.55 GB) is downloading to your device."
+                : "Your download has started. The case study PDF is on its way to your device.")
             : resolvedVariant
             ? `We’ve received your interest in ${resolvedVariant}. Our team will keep you updated on availability and news.`
             : "We’ve received your interest. Our team will keep you updated on the latest news and availability for our upcoming products.")}
         </p>
 
         <p className={`${gilroyMedium.className} w-full md:w-[540px] text-center text-[22px] leading-[28px] font-medium text-white not-italic`}>
-          {downloadStarted ? "Enjoy the read!" : "Stay tuned!"}
+          {downloadStarted ? (formContext === "sdk" ? "Happy building!" : "Enjoy the read!") : "Stay tuned!"}
         </p>
+
+        {downloadStarted && downloadUrl && (
+          <a
+            href={downloadUrl}
+            download={downloadName}
+            className="text-[13px] text-[#86efac] underline underline-offset-4 hover:text-[#bbf7d0] transition-colors cursor-pointer"
+          >
+            Click here if the download didn&apos;t start automatically
+          </a>
+        )}
 
         <button
           onClick={onClose}

@@ -37,6 +37,7 @@ import {
 } from "./DeveloperModelZoo";
 import { ModelZooAppForge } from "../model-zoo/ModelZooAppForge";
 import { DEV_APP_FORGE_PROPS } from "./DeveloperAppForge";
+import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 
 /**
  * Mobile (<1024px) stacked adaptation of the Developer page.
@@ -46,7 +47,7 @@ import { DEV_APP_FORGE_PROPS } from "./DeveloperAppForge";
 export function DeveloperMobile({ data }: { data?: any }) {
   return (
     <div className="flex w-full flex-col">
-      <DeveloperHeroMobile data={data?.hero} />
+      <DeveloperHeroMobile data={data?.hero} briefForm={data?.brief_form} />
       <DeveloperCodeSectionMobile data={data?.code} />
       <DeveloperPipelineMobile data={data?.pipeline} />
       <DeveloperModelZooMobile data={data?.model_zoo} />
@@ -123,7 +124,8 @@ const HERO_DEFAULT_SECONDARY = "Read the Documentation";
  * Figma 4032:19041 — Developer hero (mobile, 393×700 frame).
  * Layout: title+subtitle content (gap 15px) → hero image (360px) → CTAs (gap 16px).
  */
-function DeveloperHeroMobile({ data }: { data?: any }) {
+function DeveloperHeroMobile({ data, briefForm }: { data?: any; briefForm?: any }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const heading = data?.heading || HERO_DEFAULT_HEADING;
   const headingLines = heading.split("\n");
   const subtitle = data?.subtitle || HERO_DEFAULT_SUBTITLE;
@@ -186,7 +188,8 @@ function DeveloperHeroMobile({ data }: { data?: any }) {
         {/* Primary CTA — 4032:21997 (w263 h48) */}
         <a
           href={primaryHref}
-          className={`${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-center overflow-hidden px-[20px] py-[10px] shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
+          onClick={primaryHref === "#" ? (e) => { e.preventDefault(); setIsModalOpen(true); } : undefined}
+          className={`${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-center overflow-hidden px-[20px] py-[10px] cursor-pointer shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
         >
           <span
             aria-hidden
@@ -213,6 +216,13 @@ function DeveloperHeroMobile({ data }: { data?: any }) {
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
         </a>
       </div>
+
+      <UpcomingProductsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        formContext="sdk"
+        config={briefForm}
+      />
     </section>
   );
 }

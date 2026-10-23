@@ -211,7 +211,15 @@ export function ModelZooSteps({ formConfig }: { formConfig?: PopupConfig }) {
         {/* CTAs mobile */}
         <div className="mt-[24px] flex flex-col items-center justify-center gap-[12px] w-full z-50 pointer-events-auto" data-node-id="5131:10665">
           <CtaPrimary href="/developer" label="Explore the Developer Hub" width={280} className="w-[280px]" />
-          <CtaSecondary href="/SOM" label="Request the SDK" width={280} className="w-[280px]" />
+          <CtaSecondary
+            label="Request the SDK"
+            width={280}
+            className="w-[280px]"
+            onClick={(e) => {
+              e.preventDefault();
+              setIsModalOpen(true);
+            }}
+          />
         </div>
       </div>
 
@@ -269,7 +277,14 @@ export function ModelZooSteps({ formConfig }: { formConfig?: PopupConfig }) {
           {/* CTAs — 5131:10665 */}
           <div className="mt-[42px] flex items-start justify-center gap-[24px] z-50 pointer-events-auto" data-node-id="5131:10665">
             <CtaPrimary href="/developer" label="Explore the Developer Hub" width={251} />
-            <CtaSecondary href="/SOM" label="Request the SDK" width={174} />
+            <CtaSecondary
+              label="Request the SDK"
+              width={174}
+              onClick={(e) => {
+                e.preventDefault();
+                setIsModalOpen(true);
+              }}
+            />
           </div>
         </div>
       </TabletScaleCanvas>
