@@ -24,7 +24,7 @@ export function DeveloperStartBuilding() {
 
   return (
     <section
-      className="relative z-20 flex w-full justify-center bg-transparent px-[16px] sm:px-[24px] pt-[48px] pb-[48px] min-[600px]:pt-[80px] min-[600px]:pb-0 mb-0 min-[600px]:[margin-bottom:calc(-400px*var(--tablet-zoom,1))] min-[600px]:px-0"
+      className="relative z-20 flex w-full justify-center bg-transparent px-[16px] sm:px-[24px] pt-[48px] pb-[20px] min-[600px]:pt-[80px] min-[600px]:pb-0 mb-0 min-[600px]:[margin-bottom:calc(-400px*var(--tablet-zoom,1))] min-[600px]:px-0"
       aria-label={HEADING}
     >
       <div className="relative flex w-full max-w-[558px] flex-col items-center justify-center px-[20px] sm:px-[36px] min-[600px]:px-[54px] py-[40px] min-[600px]:h-[320px] min-[600px]:pb-[64px]">

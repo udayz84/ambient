@@ -241,7 +241,7 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
 
   return (
     <section
-      className="relative z-20 mb-0 pb-[48px] min-[600px]:pb-0 min-[600px]:[margin-bottom:calc(-409px*var(--tablet-zoom,1))] flex w-full justify-center overflow-hidden bg-transparent"
+      className="relative z-20 mb-0 pb-[20px] min-[600px]:pb-0 min-[600px]:[margin-bottom:calc(-409px*var(--tablet-zoom,1))] flex w-full justify-center overflow-hidden bg-transparent"
       aria-label="Don't start from scratch"
     >
       {/* DESKTOP (>=600px) */}

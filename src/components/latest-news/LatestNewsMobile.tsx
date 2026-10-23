@@ -57,7 +57,7 @@ export function LatestNewsMobile({ data }: { data?: any }) {
   const articles = resolveCards(data);
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
-    <div className="relative flex w-full flex-col items-center px-[20px] md:px-[32px] py-[48px] md:py-[64px]">
+    <div className="relative flex w-full flex-col items-center px-[20px] md:px-[32px] pt-[48px] pb-[20px] md:py-[64px]">
       <div className="relative flex flex-col items-center">
         <div className="relative px-[16px] py-[4px]">
           <div className="absolute top-0 right-0 flex size-[4px] items-center justify-center">

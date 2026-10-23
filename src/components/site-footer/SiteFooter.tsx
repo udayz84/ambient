@@ -74,27 +74,18 @@ export function SiteFooter({
         ? 250
         : 700;
 
-  // ---- Unified mobile footer (all pages except home/company) ----
-  // Every non-newsletter page uses the approved SOM mobile footer geometry:
-  // 80px of art (the glow) above the nav, then the footer content. Only SOM
-  // still has a real mobile overlap (its waitlist card is pulled over the
-  // footer); partners/dvk/evk only overlap at tablet width.
-  //
-  // The mobile art is shifted up 338px so the glow peak lands just above the
-  // nav for the 703px visible footer. SOM keeps its existing -90px offset.
-  const mobileBgTopPx = showNewsletter
-    ? 0
-    : pathname === "/som"
-      ? -90
-      : -338;
-  const mobileOverlayTopPx = showNewsletter
-    ? 0
-    : pathname === "/som"
-      ? -90
-      : 0;
+  const isSomPage = pathname === "/som";
 
-  // Mobile content top padding, measured from the top of the VISIBLE zone.
-  const mobileContentPadding = showNewsletter ? "pt-[100px]" : "pt-[80px]";
+  // Homepage mobile footer is the global source of truth across all pages.
+  // The mobile art anchors at top: 0 with the green glow shining down over
+  // the newsletter card and nav links.
+  // SOM keeps its existing -90px art offset and 80px padding to accommodate
+  // its unique 250px waitlist card overlap.
+  const mobileBgTopPx = isSomPage ? -90 : 0;
+  const mobileOverlayTopPx = isSomPage ? -90 : 0;
+
+  // Mobile content top padding (tightened to prevent oversized gaps before footer)
+  const mobileContentPadding = isSomPage ? "pt-[80px]" : "pt-[24px]";
 
   const rawNavSections = (data?.nav_sections as Record<string, unknown>[] | undefined) ?? [];
   const navSections: FooterNavSection[] =
@@ -202,12 +193,6 @@ export function SiteFooter({
             bottom: 0,
           }}
         />
-        {!showNewsletter && pathname !== "/som" && (
-          <div
-            aria-hidden
-            className="absolute inset-x-0 top-0 h-[80px] bg-gradient-to-b from-black to-transparent min-[600px]:hidden"
-          />
-        )}
         {/* Tablet overlay (600px to 1023px) */}
         <div className="absolute inset-0 hidden min-[600px]:block lg:hidden bg-gradient-to-b from-black/90 via-black/20 to-black/40 pointer-events-none" />
         {/* Desktop overlay (>=1024px) - EXACT FIGMA MATCH */}
@@ -236,9 +221,13 @@ export function SiteFooter({
         />
       )}
 
-      <div className={`relative mx-auto flex h-full w-full max-w-[1440px] flex-col items-center pb-0 pt-[24px] min-[600px]:pt-[40px] lg:block lg:pt-0 lg:pb-0 ${mobileContentPadding}`}>
-        {showNewsletter && (
-          <div className="relative z-[1] mb-[80px] flex flex-col items-center lg:mb-0 lg:pt-[120px]">
+      <div className={`relative mx-auto flex h-full w-full max-w-[1440px] flex-col items-center pb-0 ${mobileContentPadding} min-[600px]:pt-[40px] lg:block lg:pt-0 lg:pb-0`}>
+        {!isSomPage && (
+          <div
+            className={`relative z-[1] mb-[80px] flex flex-col items-center ${
+              showNewsletter ? "lg:mb-0 lg:pt-[120px]" : "lg:hidden"
+            }`}
+          >
             <NewsletterSignup data={newsletterData} />
           </div>
         )}

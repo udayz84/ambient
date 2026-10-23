@@ -146,7 +146,7 @@ export function Dvk({
 
       {/* Subscribe Newsletter Section — Single card centered, aligned, and responsive */}
       <section
-        className="relative z-20 flex w-full justify-center bg-transparent px-[24px] pt-[80px] pb-[48px] mb-0 min-[600px]:pb-0 min-[600px]:[margin-bottom:calc(-400px*var(--tablet-zoom,1))] min-[600px]:px-0"
+        className="relative z-20 hidden min-[600px]:flex w-full justify-center bg-transparent px-[24px] pt-[80px] pb-[48px] mb-0 min-[600px]:pb-0 min-[600px]:[margin-bottom:calc(-400px*var(--tablet-zoom,1))] min-[600px]:px-0"
         aria-label="Subscribe to our newsletter"
       >
         <NewsletterSignup data={newsletterData} />

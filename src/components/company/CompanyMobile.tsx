@@ -1038,7 +1038,7 @@ function CompanyEngagementMobile({
         }));
 
   return (
-    <SectionWrap aria-label="Join our team and partnerships" className="!pb-[80px]">
+    <SectionWrap aria-label="Join our team and partnerships" className="!pb-[20px]">
       {/* Join team */}
       <div className="relative flex w-full flex-col gap-[16px] overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)]">
         <Corners />

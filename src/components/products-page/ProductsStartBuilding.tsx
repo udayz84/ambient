@@ -67,7 +67,7 @@ export function ProductsStartBuilding({ data }: { data?: any }) {
 
   return (
     <section
-      className="relative z-20 mb-0 pb-[48px] min-[600px]:pb-0 min-[600px]:[margin-bottom:calc(-409px*var(--tablet-zoom,1))] flex w-full justify-center bg-transparent"
+      className="relative z-20 mb-0 pb-0 min-[600px]:pb-0 min-[600px]:[margin-bottom:calc(-409px*var(--tablet-zoom,1))] flex w-full justify-center bg-transparent"
       aria-label="Start building with GPX10 Pro"
     >
       {/* DESKTOP (>=600px) */}
@@ -298,7 +298,7 @@ function ProductsStartBuildingMobile({
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
     <div
-      className="relative w-full px-[24px] pt-[60px] pb-[40px]"
+      className="relative w-full px-[24px] pt-[60px] pb-[20px]"
       aria-label="Start building with GPX10 Pro"
     >
       {/* Title */}

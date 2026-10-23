@@ -518,7 +518,7 @@ function ResourcesNewsCtaMobile({ data }: { data?: any } = {}) {
 
   return (
     <section
-      className="relative z-10 flex w-full flex-col items-center gap-[28px] px-[24px] pt-[64px] pb-[80px] bg-transparent"
+      className="relative z-10 flex w-full flex-col items-center gap-[28px] px-[24px] pt-[64px] pb-[20px] bg-transparent"
       aria-label="Latest news"
     >
       <div className="relative inline-flex items-center justify-center p-[8px] z-10">

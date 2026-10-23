@@ -727,7 +727,7 @@ function ContactFormMobile({ data }: { data?: any }) {
   };
 
   return (
-    <SectionWrap aria-label="Contact form" className="!pb-[20px] relative z-10 -mb-[266px]">
+    <SectionWrap aria-label="Contact form" className="!pb-[20px] relative z-10 mb-0">
       <div className="flex flex-col items-center gap-[12px] relative z-10">
         <SectionTitle deg="119.522deg">{heading}</SectionTitle>
         <p className={`${interRegular.className} max-w-[327px] text-center text-[14px] leading-[22px] font-normal text-[#f0f0f0] opacity-70 not-italic [word-break:break-word]`}>

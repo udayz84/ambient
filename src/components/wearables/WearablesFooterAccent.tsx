@@ -167,7 +167,7 @@ export function WearablesFooterAccent({ data }: { data?: any }) {
       </TabletScaleCanvas>
 
       {/* MOBILE (<600px) */}
-      <div className="relative flex w-full flex-col items-center gap-[14px] px-[20px] pt-[43px] pb-[40px] min-[600px]:hidden">
+      <div className="relative flex w-full flex-col items-center gap-[14px] px-[20px] pt-[43px] pb-[20px] min-[600px]:hidden">
         {panels.map((panel) => (
           <div key={panel.title} className="relative w-full">
             {/* Shape background */}

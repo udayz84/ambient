@@ -226,7 +226,7 @@ function DvkIntegratedModulesMobile({
       data-node-id="4062:12362"
       data-name="5th Fold"
     >
-      <div className="relative mx-auto flex w-full max-w-[393px] flex-col items-center pt-[36px] pb-[48px] gap-[24px]">
+      <div className="relative mx-auto flex w-full max-w-[393px] flex-col items-center pt-[36px] pb-[20px] gap-[24px]">
         {/* Header — 4062:12363 */}
         <div
           className="relative z-10 flex w-[350px] max-w-[calc(100%-38px)] flex-col items-center gap-[12px]"

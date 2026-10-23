@@ -693,7 +693,7 @@ function CareersBottomCtaMobile({ data }: { data?: any }) {
 
   return (
     <section
-      className="relative z-10 flex w-full flex-col items-center gap-[42px] overflow-visible bg-transparent px-[17.5px] pt-[110px] -mb-[226px]"
+      className="relative z-10 flex w-full flex-col items-center gap-[42px] overflow-visible bg-transparent px-[17.5px] pt-[110px] mb-0 pb-[24px]"
       aria-label="Ready to build the future of compute"
     >
       <div className="relative z-10 inline-flex items-center justify-center p-[8px]">
