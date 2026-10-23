@@ -18,7 +18,7 @@ function LeadershipCardMobile({
   const cardHeight = isAdvisory ? 366 : 425;
   const imgTop = isAdvisory ? 3 : 2;
   const imgHeight = isAdvisory ? 355 : 380;
-  const boxTop = isAdvisory ? 311 : 310;
+  const boxTop = isAdvisory ? 276 : 310;
   const borderSrc = isAdvisory
     ? "/company/user-image-border-advisory.svg"
     : "/company/user-image-border-leadership.svg";
