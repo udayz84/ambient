@@ -13,13 +13,12 @@ import {
   type ApplicationPageSummary,
 } from "@/lib/strapi";
 import { TabletScaleInit } from "@/components/shared/TabletScaleInit";
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
+import { GA4_MEASUREMENT_ID, GTM_ID } from "@/lib/analytics";
 import "./globals.css";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
-
-const GTM_ID = "GTM-TPJQQR8N";
-const GA4_MEASUREMENT_ID = "G-R9CNVQ4SYG";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -92,6 +91,35 @@ export default async function RootLayout({
         </SmoothScroll>
         <NewsletterPopup />
         <CookieConsent />
+        {/* Google Analytics Initialization & Consent Mode v2 */}
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+var consentChoice = null;
+try {
+  var stored = localStorage.getItem('cookie-consent');
+  if (stored) {
+    var parsed = JSON.parse(stored);
+    if (parsed && (parsed.choice === 'accepted' || parsed.choice === 'rejected')) {
+      consentChoice = parsed.choice;
+    }
+  }
+} catch(e){}
+gtag('consent', 'default', {
+  'analytics_storage': consentChoice === 'rejected' ? 'denied' : 'granted',
+  'ad_storage': consentChoice === 'rejected' ? 'denied' : 'granted',
+  'ad_user_data': consentChoice === 'rejected' ? 'denied' : 'granted',
+  'ad_personalization': consentChoice === 'rejected' ? 'denied' : 'granted'
+});
+gtag('js', new Date());
+gtag('config', '${GA4_MEASUREMENT_ID}', {
+  send_page_view: false
+});`}
+        </Script>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
         {/* Google Tag Manager */}
         <Script id="gtm" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -101,16 +129,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','${GTM_ID}');`}
         </Script>
         {/* End Google Tag Manager */}
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`}
-          strategy="afterInteractive"
-        />
-        <Script id="ga4" strategy="afterInteractive">
-          {`window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', '${GA4_MEASUREMENT_ID}');`}
-        </Script>
+        {/* Real-time SPA Route Change Tracking for all pages */}
+        <GoogleAnalytics />
       </body>
     </html>
   );

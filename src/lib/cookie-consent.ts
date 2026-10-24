@@ -45,6 +45,22 @@ export function writeCookieConsent(choice: CookieConsentChoice): CookieConsentRe
     window.dispatchEvent(
       new CustomEvent(COOKIE_CONSENT_CHANGE_EVENT, { detail: record })
     );
+
+    // Sync with Google Consent Mode v2 & GTM dataLayer
+    if (typeof window.gtag === "function") {
+      window.gtag("consent", "update", {
+        analytics_storage: choice === "accepted" ? "granted" : "denied",
+        ad_storage: choice === "accepted" ? "granted" : "denied",
+        ad_user_data: choice === "accepted" ? "granted" : "denied",
+        ad_personalization: choice === "accepted" ? "granted" : "denied",
+      });
+    }
+    if (Array.isArray(window.dataLayer)) {
+      window.dataLayer.push({
+        event: "cookie_consent_update",
+        consent_choice: choice,
+      });
+    }
   }
   return record;
 }
@@ -69,4 +85,13 @@ export function clearCookieConsent(): void {
     window.localStorage.removeItem(COOKIE_CONSENT_KEY);
   } catch {}
   document.cookie = `${COOKIE_CONSENT_COOKIE}=; path=/; max-age=0; samesite=lax`;
+
+  if (typeof window.gtag === "function") {
+    window.gtag("consent", "update", {
+      analytics_storage: "denied",
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+    });
+  }
 }
