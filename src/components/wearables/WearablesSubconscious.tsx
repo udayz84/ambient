@@ -47,7 +47,7 @@ const RIGHT_CARDS = [
   },
   {
     title: "Continuous Sensing",
-    body: "ECG, motion sensors, and audio streams flow directly into the analog compute array. Raw data is processed at the source — no buffering, no transmission overhead.",
+    body: "ECG, motion sensors, and audio streams flow directly into the analog compute array. Raw data is processed at the source no buffering, no transmission overhead.",
   },
   {
     title: "Microwatt AI",

@@ -38,7 +38,7 @@ const STEPS = [
     numberLeft: 29,
     numberWidth: 81,
     title: "COMPILE",
-    desc: "One-click ModelForge compile — quantized and mapped onto A-Cube automatically.",
+    desc: "One-click ModelForge compile quantized and mapped onto A-Cube automatically.",
   },
   {
     nodeId: "5131:10623",

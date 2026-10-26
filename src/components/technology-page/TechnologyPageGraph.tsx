@@ -19,7 +19,7 @@ import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 const BASELINE = "/technology/graph-baseline.svg";
 const LABEL_LINE = "/technology/graph-label-line.svg";
 const FALLBACK_SUBTITLE =
-  "The same chip, tuned to the job — from a wrist to a factory floor.";
+  "The same chip, tuned to the job from a wrist to a factory floor.";
 
 const TITLE_GRADIENT_DEG = "115.765deg";
 

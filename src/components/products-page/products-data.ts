@@ -151,7 +151,7 @@ export const PRODUCTS_FEATURE_CARDS: ProductsFeatureCardData[] = [
     titleLeft: 23,
     titleWidth: 354.275,
     description:
-      "Run complex models in a hearing aid, a ring, a patch — no bulky battery, no redesign.",
+      "Run complex models in a hearing aid, a ring, a patch no bulky battery, no redesign.",
     image: "brain",
   },
   {
@@ -181,7 +181,7 @@ export const PRODUCTS_FEATURE_CARDS: ProductsFeatureCardData[] = [
     titleLeft: 30,
     titleWidth: 358.127,
     description:
-      "MCU + AI accelerator + sensor hub + memory you’re juggling today — and it stays aware while it sleeps.",
+      "MCU + AI accelerator + sensor hub + memory you’re juggling today and it stays aware while it sleeps.",
     image: "stack",
   },
 ];
@@ -436,7 +436,7 @@ export const COMPARISON_COLUMNS: ComparisonColumn[] = [
       "< 100 µW",
       "7.3",
       "CNN, RNN, LSTM, GRU",
-      "None — fully on-device",
+      "None fully on-device",
       "Up to 10 fused on-chip",
     ],
   },
@@ -691,7 +691,7 @@ export const MODELFORGE_STEPS: ModelForgeStep[] = [
     number: "01",
     title: "TRAIN",
     description:
-      "Bring your TensorFlow, Keras, or ONNX model. Or start from the Model Zoo — pre-trained models that run on GPX10 out of the box.",
+      "Bring your TensorFlow, Keras, or ONNX model. Or start from the Model Zoo pre-trained models that run on GPX10 out of the box.",
     imageBox: { left: -28, top: 0, width: 395, height: 232 },
     numberLeft: 32,
     numberTop: 221,

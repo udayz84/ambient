@@ -23,7 +23,7 @@ export const PARTNER_CAPABILITIES = [
     title: "AI & Algorithm Partners",
     short: "AI & Algorithms",
     description:
-      "Specialized model development and power-optimized algorithms built for the A-Cube architecture — from custom CNNs, RNNs, and LSTMs to analog-aware quantization.",
+      "Specialized model development and power-optimized algorithms built for the A-Cube architecture from custom CNNs, RNNs, and LSTMs to analog-aware quantization.",
     journeyIcon: "model",
   },
   {
@@ -39,7 +39,7 @@ export const PARTNER_CAPABILITIES = [
     title: "Hardware & Board Design Partners",
     short: "Hardware & Boards",
     description:
-      "Custom board and system design around GPX10 — power, layout, sensor integration, and signal integrity.",
+      "Custom board and system design around GPX10 power, layout, sensor integration, and signal integrity.",
     journeyIcon: "hardware",
   },
   {
@@ -148,7 +148,7 @@ export const PARTNERS_HERO = {
   tag: "Partner Ecosystem",
   title: "You bring the vision.\nOur partners help you\nbuild it.",
   subtitle:
-    "Building an AI product takes more than a breakthrough chip — it takes specialized algorithms, tuned firmware, custom hardware, and manufacturing at scale. Ambient’s partner ecosystem brings world-class expertise across the entire stack, already fluent in the GPX platform, wherever you build.",
+    "Building an AI product takes more than a breakthrough chip it takes specialized algorithms, tuned firmware, custom hardware, and manufacturing at scale. Ambient’s partner ecosystem brings world-class expertise across the entire stack, already fluent in the GPX platform, wherever you build.",
   primaryCta: { label: "Find a Partner", href: "#directory" },
   secondaryCta: { label: "Become a Partner", href: "#become-a-partner" },
 };
@@ -157,13 +157,13 @@ export const PARTNERS_WHY = {
   tag: "The Why",
   heading: "A breakthrough processor is the start, not the finish.",
   subheading:
-    "From algorithms to manufacturing, a great AI product spans the whole stack. Bring your strengths; our partners bring theirs — so every layer moves at full speed.",
+    "From algorithms to manufacturing, a great AI product spans the whole stack. Bring your strengths; our partners bring theirs so every layer moves at full speed.",
   body: "The hard part of an AI product was never just the chip. It’s the specialized model that has to run inside a microwatt budget, the firmware tuned to squeeze out every last drop of efficiency, the board designed around tight power and space constraints, and the manufacturing partner who can build it at volume without surprises. A gap in any one of these can cost a roadmap months. You shouldn’t have to master all of them to ship.",
   journey: [
     {
       number: "01",
       title: "MODEL",
-      description: "Specialized model development and power-optimized algorithms built for the A-Cube architecture — from custom CNNs, RNNs, and LSTMs to analog-aware quantization.",
+      description: "Specialized model development and power-optimized algorithms built for the A-Cube architecture from custom CNNs, RNNs, and LSTMs to analog-aware quantization.",
       image: "/partners/svg 2/7.svg",
     },
     {
@@ -175,7 +175,7 @@ export const PARTNERS_WHY = {
     {
       number: "03",
       title: "HARDWARE / BOARD",
-      description: "Custom board and system design around GPX10 — power, layout, sensor integration, and signal integrity.",
+      description: "Custom board and system design around GPX10 power, layout, sensor integration, and signal integrity.",
       image: "/partners/svg 2/9.svg",
     },
     {
@@ -226,7 +226,7 @@ export const PARTNERS_BENEFITS = {
       icon: "/partners/icons_benefits/center-focus.svg" as const,
     },
   ],
-  bridge: "One ecosystem, engineered to get you to market — not to slow you down.",
+  bridge: "One ecosystem, engineered to get you to market not to slow you down.",
 };
 
 export const PARTNERS_ECOSYSTEM = {
@@ -235,14 +235,14 @@ export const PARTNERS_ECOSYSTEM = {
   subheading:
     "Whatever piece you’re missing, there’s a partner who has already solved it on GPX.",
   bridge:
-    "Enter the ecosystem at any layer — and get the collaborative support to accelerate your roadmap.",
+    "Enter the ecosystem at any layer and get the collaborative support to accelerate your roadmap.",
 };
 
 export const PARTNERS_PROOF = {
   tag: "GPX-Native Proof",
   heading: "Not generalists. GPX-native.",
   subheading:
-    "These aren’t firms we found in a directory. They’ve already built on the Ambient platform — and the proof is live.",
+    "These aren’t firms we found in a directory. They’ve already built on the Ambient platform and the proof is live.",
   points: [
     {
       title: "Reference designs, not blank pages.",
@@ -253,19 +253,19 @@ export const PARTNERS_PROOF = {
     {
       title: "Models proven on A-Cube.",
       description:
-        "Partner-built models ship in the Ambient Model Zoo — real, deployable networks, already running on the architecture.",
+        "Partner-built models ship in the Ambient Model Zoo real, deployable networks, already running on the architecture.",
       icon: "/partners/icons_proof/cube.svg",
     },
     {
       title: "Hardware built for the silicon.",
       description:
-        "Partners have designed production hardware around GPX10 — boards engineered for its exact power and space envelope.",
+        "Partners have designed production hardware around GPX10 boards engineered for its exact power and space envelope.",
       icon: "/partners/icons_proof/chip.svg",
     },
     {
       title: "Proven at volume.",
       description:
-        "That hardware has gone into volume manufacturing — GPX-based products built at scale, not just prototyped.",
+        "That hardware has gone into volume manufacturing GPX-based products built at scale, not just prototyped.",
       icon: "/partners/icons_proof/global.svg",
     },
   ],
@@ -286,12 +286,12 @@ export const PARTNERS_DIRECTORY = {
     all: "All",
   },
   expanding: {
-    title: "Expanding — more partners joining",
+    title: "Expanding more partners joining",
     description:
       "New capability areas and regions are being added as the ecosystem grows.",
   },
   noMatch: {
-    message: "Don’t see the right fit yet? Tell us what you need — we’ll connect you.",
+    message: "Don’t see the right fit yet? Tell us what you need we’ll connect you.",
     cta: { label: "Get Matched", href: "#get-matched" },
   },
   connect: "Connect",
@@ -314,14 +314,14 @@ export const PARTNERS_MATCH = {
     helpAreas: "Where do you need help?",
     message: "Tell us about your project",
   },
-  emailHint: "Personal email domains (gmail, outlook, …) are blocked — please use your work address.",
+  emailHint: "Personal email domains (gmail, outlook, …) are blocked please use your work address.",
 };
 
 export const PARTNERS_BECOME = {
   tag: "Become a Partner",
   heading: "Build with us. Grow with the platform.",
   subheading:
-    "Join a growing ecosystem building the future of AI on Ambient — and get in front of customers actively looking for your expertise.",
+    "Join a growing ecosystem building the future of AI on Ambient and get in front of customers actively looking for your expertise.",
   benefits: [
     {
       title: "Reach the right customers.",

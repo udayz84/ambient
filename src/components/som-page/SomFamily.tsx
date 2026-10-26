@@ -10,12 +10,12 @@ import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 import { useState } from "react";
 
 const FALLBACK_TITLE = "One core.\nTwo ways to connect.";
-const FALLBACK_SUBTITLE = "Both modules share the same GPX10 Pro compute core and software.\nThe difference is the radio — short-range Bluetooth LE or wide-area LTE.";
+const FALLBACK_SUBTITLE = "Both modules share the same GPX10 Pro compute core and software.\nThe difference is the radio short-range Bluetooth LE or wide-area LTE.";
 
 const CARD_BLE = {
   tag: "COMING SOON",
   title: "SOM (BLE)",
-  description: "For products that connect over short range — to a phone, hub, or gateway.",
+  description: "For products that connect over short range to a phone, hub, or gateway.",
   imageUrl: "/som/left.png",
   features: [
     { icon: "/partners/icons_proof/chip.svg", text: "GPX10 Pro" },
@@ -29,7 +29,7 @@ const CARD_BLE = {
 const CARD_LTE = {
   tag: "COMING SOON",
   title: "SOM (LTE)",
-  description: "For products that need to connect anywhere, with no local gateway — remote, mobile, or wide-area deployments.",
+  description: "For products that need to connect anywhere, with no local gateway remote, mobile, or wide-area deployments.",
   imageUrl: "/som/right.png",
   features: [
     { icon: "/partners/icons_proof/chip.svg", text: "GPX10 Pro" },

@@ -57,7 +57,7 @@ export const COMPANY_ENGAGEMENT_CARDS: CompanyEngagementCardData[] = [
     titleWidth: 230,
     titleHeight: 76,
     description:
-      "Book a technical deep-dive with our Field Application Engineers. Get evaluation boards, characterization data, and measure real power on your workload — not simulations.",
+      "Book a technical deep-dive with our Field Application Engineers. Get evaluation boards, characterization data, and measure real power on your workload not simulations.",
     descriptionWidth: 280,
     ctaLabel: "SCHEDULE CONSULTATION",
     ctaHref: "/contact",

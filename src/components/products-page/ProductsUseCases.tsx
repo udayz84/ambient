@@ -35,7 +35,7 @@ const tabCornerTr = "/applications/corners/tab-corner-tr.svg";
 
 const FALLBACK_HEADING = "Built for always-on. \n Proven across markets.";
 const FALLBACK_SUBTITLE =
-  "The same chip, tuned to the job — from a wrist to a factory floor.";
+  "The same chip, tuned to the job from a wrist to a factory floor.";
 const FALLBACK_PRIMARY = { label: "Explore Applications", href: "#" };
 const FALLBACK_SECONDARY = { label: "Discuss Your Use Case", href: "#" };
 

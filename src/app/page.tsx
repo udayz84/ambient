@@ -32,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata(seo, {
     title: "Ambient Scientific",
     description:
-      "A new class of AI chips that unlocks richer intelligence from microwatt to hyperscaler cloud — once constrained by power, space and legacy design tradeoffs.",
+      "A new class of AI chips that unlocks richer intelligence from microwatt to hyperscaler cloud once constrained by power, space and legacy design tradeoffs.",
   });
 }
 

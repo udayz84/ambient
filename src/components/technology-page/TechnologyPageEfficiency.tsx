@@ -7,7 +7,7 @@ import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
 const TITLE_GRADIENT_DEG = "114.359deg";
 const FALLBACK_SUBTITLE =
-  "The same chip, tuned to the job — from a wrist to a factory floor.";
+  "The same chip, tuned to the job from a wrist to a factory floor.";
 const FALLBACK_HEADING =
   "The efficiency gap isn’t a few\npercent. It’s a different category.";
 

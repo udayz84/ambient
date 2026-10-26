@@ -51,7 +51,7 @@ export const LEADERSHIP_TEAM: LeadershipMember[] = [
     role: "AVP Hardware",
     bioParagraphs: [
       "AVP of Hardware Engineering overseeing silicon design, validation, board engineering, mixed-signal integration, and systems bring-up for Ambient’s AI processors.",
-      "His career spans Intel, AMD, NXP, and Western Digital—covering the full lifecycle from first power-on through high-volume manufacturing and deployed edge systems.",
+      "His career spans Intel, AMD, NXP, and Western Digital covering the full lifecycle from first power-on through high-volume manufacturing and deployed edge systems.",
     ],
     imageSrc: "/company/leadership/swapnil-sapre.jpg",
     imageClassName: PORTRAIT_CLASS,

@@ -133,7 +133,7 @@ const PILLARS: Pillar[] = [
     bullets: [
       "Drop-in support for TensorFlow, Keras, ONNX",
       "Push-button compile - concept to silicon, no rewrites",
-      "Speaks matrix math natively — none of the translation tax Arm/RISC-V pay",
+      "Speaks matrix math natively none of the translation tax Arm/RISC-V pay",
       "One workflow that ports across every A-Cube product",
     ],
     cta: "Explore the Developer Hub",

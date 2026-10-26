@@ -89,7 +89,7 @@ export function PartnersBecome({
     if (!form.name.trim()) return setError("Please enter your name.");
     if (!form.company.trim()) return setError("Please enter your company.");
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) return setError("Please enter a valid work email address.");
-    if (isCasualEmailDomain(form.email.trim())) return setError("Please use your work email — personal email domains are blocked.");
+    if (isCasualEmailDomain(form.email.trim())) return setError("Please use your work email personal email domains are blocked.");
     if (!form.region) return setError("Please select your region.");
     if (selectedCapabilities.length === 0) return setError("Please select at least one capability area.");
     if (!captchaCode || captchaCode.length !== 4) return setError("Please enter the 4-digit security code.");
@@ -385,14 +385,14 @@ export function PartnersBecome({
                 {content.form.title}
               </h3>
               <p className={`${interRegular.className} text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-75 [word-break:break-word] not-italic`}>
-                Frictionless by design — share a few details and our partnerships
+                Frictionless by design share a few details and our partnerships
                 team will take it from there.
               </p>
               <div className="flex flex-col gap-[14px] border-t-[0.5px] border-solid border-[rgba(240,240,240,0.15)] pt-[20px]">
                 {[
                   { step: "01", text: "Tell us who you are and what you build." },
                   { step: "02", text: "We review fit against the GPX roadmap." },
-                  { step: "03", text: "Enablement begins — silicon, tools, ecosystem." },
+                  { step: "03", text: "Enablement begins silicon, tools, ecosystem." },
                 ].map((s) => (
                   <div key={s.step} className="flex items-start gap-[14px]">
                     <span className={`${dmMono.className} mt-[2px] shrink-0 text-[12px] leading-[18px] tracking-[1px] text-[#53d824]`}>
@@ -495,13 +495,13 @@ export function PartnersBecome({
             {content.form.title}
           </h3>
           <p className={`${interRegular.className} text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic`}>
-            Frictionless by design — share a few details and our partnerships team will take it from there.
+            Frictionless by design share a few details and our partnerships team will take it from there.
           </p>
           <div className="flex flex-col gap-[12px] border-t-[0.5px] border-solid border-[rgba(240,240,240,0.15)] pt-[16px]">
             {[
               { step: "01", text: "Tell us who you are and what you build." },
               { step: "02", text: "We review fit against the GPX roadmap." },
-              { step: "03", text: "Enablement begins — silicon, tools, ecosystem." },
+              { step: "03", text: "Enablement begins silicon, tools, ecosystem." },
             ].map((s) => (
               <div key={s.step} className="flex items-start gap-[12px]">
                 <span className={`${dmMono.className} mt-[2px] shrink-0 text-[12px] leading-[18px] tracking-[1px] text-[#53d824]`}>

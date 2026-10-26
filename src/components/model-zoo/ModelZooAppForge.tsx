@@ -224,7 +224,7 @@ export function ModelZooAppForge({
   const heading = data?.heading || "Your eval kit, controlled from your phone.";
   const subheading =
     data?.subheading ||
-    "Download NuraSync, pair with your kit over Bluetooth, and flash live demos in seconds — no laptop, no code.";
+    "Download NuraSync, pair with your kit over Bluetooth, and flash live demos in seconds no laptop, no code.";
   const { fadeRef: articleRef, isVisible: articleVisible } = useFadeIn<HTMLDivElement>();
   const { fadeRef: forgeRef, isVisible: forgeVisible } = useFadeIn<HTMLDivElement>();
   const [modalContext, setModalContext] = useState<"sdk" | "evalkit" | null>(null);

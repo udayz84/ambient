@@ -34,7 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata(seo, {
     title: "Products | Ambient Scientific",
     description:
-      "The world's first energy-aware AI processor — running real neural networks, not rule-based shortcuts, at microwatt power. Built on the A-Cube architecture.",
+      "The world's first energy-aware AI processor running real neural networks, not rule-based shortcuts, at microwatt power. Built on the A-Cube architecture.",
   });
 }
 

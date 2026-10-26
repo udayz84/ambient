@@ -35,7 +35,7 @@ const CARDS = [
     icon: "/model-zoo/icon-ai-smartwatch.svg",
     iconInset: "8.33% 12.5%",
     title: "Architecture flexibility",
-    desc: "If you can train it — CNN, RNN, LSTM, or GRU — you can run it.",
+    desc: "If you can train it CNN, RNN, LSTM, or GRU you can run it.",
   },
 ];
 

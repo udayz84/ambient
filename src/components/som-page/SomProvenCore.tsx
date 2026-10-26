@@ -22,7 +22,7 @@ export function SomProvenCore() {
           <Corners />
         </div>
         <p className={`${interRegular.className} max-w-[800px] text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-80 min-[1024px]:text-[18px] min-[1024px]:leading-[28px]`}>
-          Everything the compute needs, pre-integrated for volume — miniature LGA modules built for mass production from the first revision.
+          Everything the compute needs, pre-integrated for volume miniature LGA modules built for mass production from the first revision.
         </p>
       </div>
 

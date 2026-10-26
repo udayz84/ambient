@@ -18,7 +18,7 @@ const MOBILE_SECTION_TITLE_DEG = "122.163deg";
 const CARD_TITLE_DEG = "107.367deg";
 const FALLBACK_SECTION_TITLE = "Put A-Cube to Work";
 const FALLBACK_SECTION_SUBTITLE =
-  "A complete edge-AI SoC — AI engine, control, sensing, memory, and security — integrated so your board doesn't have to be.";
+  "A complete edge-AI SoC AI engine, control, sensing, memory, and security integrated so your board doesn't have to be.";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";

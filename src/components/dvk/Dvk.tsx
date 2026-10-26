@@ -523,7 +523,7 @@ function DvkPhoneCardMobile({ data }: { data?: any }) {
             className={`${interRegular.className} m-0 w-[296.417px] max-w-full text-[14px] leading-[21.3px] font-normal text-[#99a1af] not-italic [word-break:break-word]`}
           >
             Pair the Cranium kit with the NuraSync app over Bluetooth,
-            push any demo to the board, and watch results live — including the
+            push any demo to the board, and watch results live including the
             gesture-controlled game.
           </p>
         </div>
@@ -585,7 +585,7 @@ function DvkModelForgeMobile({ data }: { data?: any }) {
   const heading = data?.heading || "Have your own model? Meet ModelForge.";
   const subtitle =
     data?.subtitle ||
-    "NuraSync flashes the ready-made demos with zero code. When you want to run your own model — or need deeper, full-toolchain control — ModelForge takes a standard TensorFlow model to on-silicon inference in 15 minutes.";
+    "NuraSync flashes the ready-made demos with zero code. When you want to run your own model or need deeper, full-toolchain control ModelForge takes a standard TensorFlow model to on-silicon inference in 15 minutes.";
 
   const yourModelTitle = data?.your_model_title || "Your Model";
   const yourModelDesc =

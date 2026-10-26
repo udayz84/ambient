@@ -59,7 +59,7 @@ export function ModelZooHero() {
         <p
           className={`animate-hero-text-fade-in relative z-10 ${interRegular.className} w-full max-w-[336px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-75 not-italic [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
         >
-          The Ambient Model Zoo is a growing library of ready-to-run AI models — plug one into your dev or eval kit and watch it work in seconds. Open-source and Ambient-built, every model is tuned to run on GPX at microwatt power.
+          The Ambient Model Zoo is a growing library of ready-to-run AI models plug one into your dev or eval kit and watch it work in seconds. Open-source and Ambient-built, every model is tuned to run on GPX at microwatt power.
         </p>
 
         {/* Mobile Collage Rows */}

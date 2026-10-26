@@ -102,7 +102,7 @@ const ECG_FRAMES = [
 
 const SECTION_EYEBROW = "The on-device advantage";
 const SMART_HOME_SUBTITLE =
-  "Take one always-on workload — continuous wake-word + presence detection — and look at what it costs to run. This is why Ambient devices can go cordless.";
+  "Take one always-on workload continuous wake-word + presence detection and look at what it costs to run. This is why Ambient devices can go cordless.";
 
 const SMART_HOME_ECG_CARDS = [
   {

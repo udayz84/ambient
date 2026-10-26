@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata(seo, {
     title: "Technology | Ambient Scientific",
     description:
-      "The GPX architecture — energy-aware AI processing technology from Ambient Scientific.",
+      "The GPX architecture energy-aware AI processing technology from Ambient Scientific.",
   });
 }
 

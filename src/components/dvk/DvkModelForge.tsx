@@ -14,7 +14,7 @@ import {
 
 const DEFAULT_HEADING = "Have your own model? Meet ModelForge.";
 const DEFAULT_SUBTITLE =
-  "NuraSync flashes the ready-made demos with zero code. When you want to run your own model — or need deeper, full-toolchain control — ModelForge takes a standard TensorFlow model to on-silicon inference in 15 minutes.";
+  "NuraSync flashes the ready-made demos with zero code. When you want to run your own model or need deeper, full-toolchain control ModelForge takes a standard TensorFlow model to on-silicon inference in 15 minutes.";
 const DEFAULT_TOOLCHAIN_TITLE = "ModelForge SDK";
 const DEFAULT_TOOLCHAIN_SUBTITLE = "Pre-integrated RTOS & Eclipse-based Unified Build";
 const DEFAULT_TOOLCHAIN_LABELS = "RTOS\nDRIVERS\nCOMPILER";

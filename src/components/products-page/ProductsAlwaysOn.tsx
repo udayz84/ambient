@@ -54,7 +54,7 @@ const ICON_TILE_BG = `url("data:image/svg+xml;utf8,<svg viewBox='0 0 40 40' xmln
 
 const FALLBACK_HEADING = "Always on. Never asleep.";
 const FALLBACK_SUBTITLE =
-  "GPX10 Pro runs AI around the clock at microwatts — and the instant something matters, it surges to full power. No reset. No waking up. It was never off.";
+  "GPX10 Pro runs AI around the clock at microwatts and the instant something matters, it surges to full power. No reset. No waking up. It was never off.";
 
 /* ── Four corner ticks (left pair / right pair) ──────────────── */
 function FrameCorners({

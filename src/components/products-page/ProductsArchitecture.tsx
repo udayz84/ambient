@@ -34,7 +34,7 @@ const STAT_ICON = "/products/arch-stat-icon.svg";
 const FALLBACK_LABEL = "Architecture";
 const FALLBACK_HEADING = "Everything in one chip. \nNothing wasted.";
 const FALLBACK_SUBTITLE =
-  "A complete edge-AI SoC — AI engine, control, sensing, memory, and security — integrated so your board doesn't have to be.";
+  "A complete edge-AI SoC AI engine, control, sensing, memory, and security integrated so your board doesn't have to be.";
 const FALLBACK_CAPTION = "The Hardware Blueprint";
 
 function splitLines(value: string): string[] {

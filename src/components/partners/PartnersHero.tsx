@@ -24,7 +24,7 @@ function Constellation({
   return (
     <Image
       src={src}
-      alt="GPX partner ecosystem constellation — AI, firmware, hardware, ODM, EMS and SI partners connected to the central CubicCore chip"
+      alt="GPX partner ecosystem constellation AI, firmware, hardware, ODM, EMS and SI partners connected to the central CubicCore chip"
       width={1480}
       height={1110}
       priority
@@ -41,7 +41,7 @@ export function PartnersHero({ content }: { content: HeroContent }) {
   return (
     <section
       className="relative -mt-[78px] flex w-full justify-center overflow-hidden bg-transparent"
-      aria-label="Partners — The Promise"
+      aria-label="Partners The Promise"
     >
       {/* ambient glow backdrop */}
       <div

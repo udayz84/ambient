@@ -34,7 +34,7 @@ const TITLE_GRADIENT =
 const EYEBROW = "READY TO RUN";
 const HEADING = "Every application here runs on real, ready models.";
 const SUBTITLE =
-  "Browse a growing library of open-source and Ambient-built models — tuned for GPX, deployable in one click. Don't build from scratch; start from something that works.";
+  "Browse a growing library of open-source and Ambient-built models tuned for GPX, deployable in one click. Don't build from scratch; start from something that works.";
 
 const SECONDARY_CTA = { label: "See it live in NuraSync", href: "/applications" };
 
@@ -265,14 +265,14 @@ function WhyCard({ step }: { step: any }) {
 const SMART_HOME_EYEBROW = "MULTI-MODAL, FULLY ON-DEVICE";
 const SMART_HOME_HEADING = "One chip. Every smart-home AI feature.";
 const SMART_HOME_SUBTITLE =
-  "The GPX architecture isn't an ASIC — it's a fully programmable AI engine. Here's what you run natively, privately, on the device.";
+  "The GPX architecture isn't an ASIC it's a fully programmable AI engine. Here's what you run natively, privately, on the device.";
 
 const SMART_HOME_FEATURES = [
   {
     number: "01",
     title: "Localized FaceID & Presence",
     description:
-      "Wake appliances or adjust the environment on visual recognition — no images ever leave the device.",
+      "Wake appliances or adjust the environment on visual recognition no images ever leave the device.",
     image: "/applications/smart-homes/faceid-presence.jpg",
   },
   {
@@ -308,7 +308,7 @@ const SMART_HOME_FEATURES = [
 const WEARABLES_EYEBROW = "AI MODEL ZOO";
 const WEARABLES_HEADING = "One chip. Every wearable AI feature.";
 const WEARABLES_SUBTITLE =
-  "The GPX architecture isn't an ASIC — it's a fully programmable AI engine. Here's what you run natively.";
+  "The GPX architecture isn't an ASIC it's a fully programmable AI engine. Here's what you run natively.";
 
 /* Main /applications page (strip variant) — Model Zoo copy instead of the
    wearables-page copy. */
@@ -321,7 +321,7 @@ const WEARABLES_FEATURES = [
     number: "01",
     title: "Complex Activity Classification",
     description:
-      "Beyond step-counting — gym exercises, swim strokes, PT movements.",
+      "Beyond step-counting gym exercises, swim strokes, PT movements.",
     image: "/applications/wearables/feature-card-1.jpeg",
   },
   {

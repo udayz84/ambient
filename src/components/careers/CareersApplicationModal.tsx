@@ -557,7 +557,7 @@ function ConfirmationStep({ onClose, config }: { onClose: () => void; config?: a
         </p>
 
         <p className={`${gilroyMedium.className} w-full md:w-[540px] text-center text-[22px] leading-[28px] font-medium text-white not-italic`}>
-          Stay tuned—and best of luck!
+          Stay tuned and best of luck!
         </p>
 
         <GreenCta

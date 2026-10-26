@@ -8,7 +8,7 @@ const DEV_STEPS = [
   {
     title: "Flash a model instantly",
     description:
-      "Push any Model Zoo model — VAD, gesture, fall detection, etc. straight to the board.",
+      "Push any Model Zoo model VAD, gesture, fall detection, etc. straight to the board.",
   },
   {
     title: "See results live",

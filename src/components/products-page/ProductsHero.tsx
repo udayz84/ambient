@@ -24,7 +24,7 @@ import {
 
 const FALLBACK_TITLE = "Full AI inference. \nOn a coin cell.";
 const FALLBACK_SUBTITLE =
-  "The world's first energy-aware AI processor — running real neural networks, not rule-based shortcuts, at microwatt power. Built on the A-Cube architecture.";
+  "The world's first energy-aware AI processor running real neural networks, not rule-based shortcuts, at microwatt power. Built on the A-Cube architecture.";
 const FALLBACK_PRIMARY = { label: "Request Evaluation Kit", href: "#" };
 const FALLBACK_SECONDARY = { label: "Download Product Brief", href: "#" };
 

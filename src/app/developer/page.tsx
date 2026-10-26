@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata(seo, {
     title: "Developer | Ambient Scientific",
     description:
-      "ModelForge bridges training and deployment. Quantize, compile, and merge neural networks with your firmware — model to deployment in 15 minutes.",
+      "ModelForge bridges training and deployment. Quantize, compile, and merge neural networks with your firmware model to deployment in 15 minutes.",
   });
 }
 

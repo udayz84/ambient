@@ -209,7 +209,7 @@ const CARDS: FeatureCardProps[] = [
     iconSize: 40,
     tag: "Vertical-Specific Integration",
     title: "Purpose-Built Peripherals",
-    body: "Simplify sourcing and driver integration. Each SOM is pre-integrated with the sensors and interfaces your vertical needs—vision, telemetry, or acoustics.",
+    body: "Simplify sourcing and driver integration. Each SOM is pre-integrated with the sensors and interfaces your vertical needs vision, telemetry, or acoustics.",
     glowPosition: "at 0% 40%",
   },
   {

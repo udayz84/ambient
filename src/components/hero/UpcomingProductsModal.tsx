@@ -440,7 +440,7 @@ function FormStep({
                 : isSom
                 ? `Tell us about the project you're building with our SOM (${somVariant}).`
                 : formContext === "case-study"
-                ? "Tell us what you're building — the full case study PDF downloads right after you submit."
+                ? "Tell us what you're building the full case study PDF downloads right after you submit."
                 : formContext === "waitlist"
                 ? "Share a few details about what you're building or hoping to deploy."
                 : "These are the upcoming chips we are providing. We just want to know which chip you are looking for.")}

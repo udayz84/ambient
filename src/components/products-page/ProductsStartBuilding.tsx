@@ -22,7 +22,7 @@ import {
 
 const FALLBACK_HEADING = "Start building with GPX10 Pro.";
 const FALLBACK_SUBTITLE =
-  "A complete edge-AI SoC — AI engine, control, sensing, memory, and security — integrated so your board doesn't have to be.";
+  "A complete edge-AI SoC AI engine, control, sensing, memory, and security integrated so your board doesn't have to be.";
 
 function splitLines(value: string): string[] {
   return value.split("\n");

@@ -15,7 +15,7 @@ import { START_CARD_TITLE_GRADIENT } from "../products-page/products-data";
  * Rectangle background, corner-bracketed gradient title, full-width CTAs).
  */
 const HEADING = "Start building with Ambient.";
-const SUBTITLE = "Everything from model to silicon, in one place — free to start.";
+const SUBTITLE = "Everything from model to silicon, in one place free to start.";
 const CARD_BG = "/Rectangle 1618873545.png";
 
 export function DeveloperStartBuilding() {

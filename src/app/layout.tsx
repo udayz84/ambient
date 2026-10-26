@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     template: "%s | Ambient Scientific",
   },
   description:
-    "Ambient Scientific builds energy-aware, programmable, mixed-signal AI processors that deliver orders-of-magnitude improvements in performance-per-watt — from microwatt edge devices to hyperscaler cloud.",
+    "Ambient Scientific builds energy-aware, programmable, mixed-signal AI processors that deliver orders-of-magnitude improvements in performance-per-watt from microwatt edge devices to hyperscaler cloud.",
   // Fresh URLs bypass previously cached redirects to missing Blob Storage files.
   icons: {
     icon: [{ url: "/icon.png?v=20261019", type: "image/png", sizes: "512x512" }],

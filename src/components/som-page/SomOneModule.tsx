@@ -31,7 +31,7 @@ export function SomOneModule({ data }: { data?: any } = {}) {
   const subtitle = data?.subtitle || "ONE MODULE, MANY PRODUCTS";
   const description =
     data?.description ||
-    "The same module drops into a wearable, a hearable, a smart-home sensor, or an industrial node — you add only what each product needs. One qualification, one supply chain, many products.";
+    "The same module drops into a wearable, a hearable, a smart-home sensor, or an industrial node you add only what each product needs. One qualification, one supply chain, many products.";
   const ctaLabel = data?.cta_label || "Explore Applications ->";
   const ctaHref = data?.cta_href || "/applications";
 

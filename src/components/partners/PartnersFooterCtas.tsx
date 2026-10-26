@@ -16,7 +16,7 @@ export function PartnersFooterCtas({ content }: { content: FooterCtasContent }) 
     <section
       ref={fadeRef}
       className={`relative z-20 mb-0 pb-[20px] min-[600px]:pb-0 min-[600px]:[margin-bottom:calc(-400px*var(--tablet-zoom,1))] mx-auto flex w-full justify-center ${fadeCls} transform-gpu bg-transparent`}
-      aria-label="Partners — next steps"
+      aria-label="Partners next steps"
     >
       {/* DESKTOP (>=600px) */}
       <TabletScaleCanvas className="hidden w-[1440px] shrink-0 flex-col items-center pt-[88px] pb-[40px] min-[600px]:flex">

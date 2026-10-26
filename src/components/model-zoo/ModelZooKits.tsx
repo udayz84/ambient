@@ -132,7 +132,7 @@ export function ModelZooKits() {
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           </div>
           <p className={`${interRegular.className} w-full max-w-[679.389px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
-            Request a kit and run any model from day one — or try it free from your phone right now.
+            Request a kit and run any model from day one or try it free from your phone right now.
           </p>
         </div>
 
@@ -217,7 +217,7 @@ export function ModelZooKits() {
               <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             </div>
             <p className={`${interRegular.className} w-full max-w-[679.389px] text-center text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-65 not-italic [word-break:break-word]`}>
-              Request a kit and run any model from day one — or try it free from your phone right now.
+              Request a kit and run any model from day one or try it free from your phone right now.
             </p>
           </div>
 

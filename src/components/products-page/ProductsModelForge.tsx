@@ -44,7 +44,7 @@ const SUB_FEATURES = [
         <path d="M15 3v18" />
       </svg>
     ),
-    text: "Speaks matrix math natively — none of the translation tax Arm/RISC-V pay",
+    text: "Speaks matrix math natively none of the translation tax Arm/RISC-V pay",
   },
   {
     icon: (
@@ -71,7 +71,7 @@ const SUB_FEATURES = [
         <path d="m13.5 13.5 3.5 3.5" />
       </svg>
     ),
-    text: "Simulator + profiler — validate power and accuracy before the board arrives",
+    text: "Simulator + profiler validate power and accuracy before the board arrives",
   },
 ];
 

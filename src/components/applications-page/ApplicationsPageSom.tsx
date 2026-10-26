@@ -13,7 +13,7 @@ const TITLE_GRADIENT =
   "linear-gradient(123.792deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)";
 
 const SUBTITLE =
-  "Start on an evaluation kit, scale on a production module — the same software carries across.";
+  "Start on an evaluation kit, scale on a production module the same software carries across.";
 
 const FALLBACK_HEADING = "From first board to full production.";
 const FALLBACK_STATUS_PILL = "LAUNCHING SOON";
