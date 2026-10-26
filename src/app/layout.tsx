@@ -15,6 +15,7 @@ import {
 import { TabletScaleInit } from "@/components/shared/TabletScaleInit";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { GA4_MEASUREMENT_ID, GTM_ID } from "@/lib/analytics";
+import { TURNSTILE_SITE_KEY } from "@/lib/recaptcha";
 import "./globals.css";
 
 export const dynamic = "force-dynamic";
@@ -129,6 +130,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','${GTM_ID}');`}
         </Script>
         {/* End Google Tag Manager */}
+        {/* Cloudflare Turnstile */}
+        {TURNSTILE_SITE_KEY && (
+          <Script
+            src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+            strategy="afterInteractive"
+          />
+        )}
         {/* Real-time SPA Route Change Tracking for all pages */}
         <GoogleAnalytics />
       </body>

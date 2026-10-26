@@ -40,7 +40,7 @@ export function DvkIntegratedModules({ data }: { data?: any }) {
         }))
       : CARDS;
   return (
-    <div className="relative z-20 w-full bg-transparent">
+    <div id="integrated-modules" className="relative z-20 w-full bg-transparent scroll-mt-[90px]">
       <section className="relative mx-auto hidden w-full justify-center overflow-x-clip bg-transparent min-[600px]:flex" aria-label="From Cranium to Integrated Modules">
         <TabletScaleCanvas className="relative flex w-[1440px] max-w-[1440px] shrink-0 justify-center">
           <DvkIntegratedModulesDesktop

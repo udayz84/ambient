@@ -61,7 +61,7 @@ export function SomDeployPath({ data }: { data?: any }) {
   const secondaryHref = data?.secondary_button_link || "#";
 
   return (
-    <section className="relative flex w-full justify-center overflow-hidden bg-black pb-[80px] pt-[40px]">
+    <section id="deploy-path" className="relative flex w-full justify-center overflow-hidden bg-black pb-[80px] pt-[40px] scroll-mt-[90px]">
       {/* Desktop & Tablet (>=600px) */}
       <div className="hidden min-[600px]:flex w-full justify-center overflow-x-clip">
         <TabletScaleCanvas className="relative flex w-[1440px] max-w-[1440px] shrink-0 justify-center">

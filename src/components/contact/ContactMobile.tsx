@@ -9,6 +9,9 @@ import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useFitText } from "../shared/FitText";
 import { ContactBookingPopup } from "./ContactBookingPopup";
 import { ContactSuccessPopup } from "./ContactSuccessPopup";
+import { getRecaptchaToken } from "@/lib/recaptcha-client";
+import { RECAPTCHA_ACTIONS } from "@/lib/recaptcha";
+import { NumericCaptcha } from "../shared/NumericCaptcha";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
@@ -632,6 +635,8 @@ function ContactFormMobile({ data }: { data?: any }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [captchaCode, setCaptchaCode] = useState("");
+  const [captchaToken, setCaptchaToken] = useState("");
 
   const heading = data?.heading || "";
   const subtitle = data?.subtitle || "";
@@ -700,9 +705,14 @@ function ContactFormMobile({ data }: { data?: any }) {
       setError("Please enter a valid email address.");
       return;
     }
+    if (!captchaCode || captchaCode.length !== 4) {
+      setError("Please enter the 4-digit security code.");
+      return;
+    }
     setError("");
     setLoading(true);
     try {
+      const recaptchaToken = await getRecaptchaToken(RECAPTCHA_ACTIONS.CONTACT);
       const res = await fetch("/api/contact-submissions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -712,6 +722,9 @@ function ContactFormMobile({ data }: { data?: any }) {
           fields: values,
           message: message.trim(),
           subscribed,
+          recaptchaToken,
+          captchaCode,
+          captchaToken,
         }),
       });
       const json = await res.json().catch(() => null);
@@ -819,6 +832,13 @@ function ContactFormMobile({ data }: { data?: any }) {
               className={`${interRegular.className} h-[110px] w-full resize-none border-[0.5px] border-solid border-[#4a4a4a] bg-transparent p-[12px] text-[14px] font-normal text-white outline-none placeholder:text-[#4a4a4a] not-italic`}
             />
           </div>
+
+          <NumericCaptcha
+            value={captchaCode}
+            onChange={setCaptchaCode}
+            onTokenChange={setCaptchaToken}
+            className="py-[6px]"
+          />
 
           <label className="flex cursor-pointer items-center gap-[12px] py-[4px]">
             <input

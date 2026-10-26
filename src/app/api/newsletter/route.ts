@@ -1,6 +1,9 @@
 import { NextResponse, after } from "next/server";
 import { addContactAndTag } from "@/lib/mailchimp";
 import { sendSubmissionMail, type MailField } from "@/lib/notify-mail";
+import { verifyRecaptchaToken } from "@/lib/recaptcha-server";
+import { RECAPTCHA_ACTIONS } from "@/lib/recaptcha";
+import { verifyNumericCaptcha } from "@/lib/numeric-captcha";
 
 /**
  * src/app/api/newsletter/route.ts
@@ -72,8 +75,27 @@ export async function POST(req: Request): Promise<Response> {
     return bad("Expected a JSON body.", 400);
   }
 
-  const email = String(body.email ?? "").trim();
+  const recaptchaToken =
+    typeof body.recaptchaToken === "string" ? body.recaptchaToken : undefined;
+  const recaptchaResult = await verifyRecaptchaToken(
+    recaptchaToken,
+    RECAPTCHA_ACTIONS.NEWSLETTER
+  );
+  if (!recaptchaResult.success) {
+    return bad(recaptchaResult.error || "Security verification failed.", 403);
+  }
+
   const formKey = String(body.formKey ?? "newsletter").trim();
+  const captchaCode = typeof body.captchaCode === "string" ? body.captchaCode : undefined;
+  const captchaToken = typeof body.captchaToken === "string" ? body.captchaToken : undefined;
+
+  if (formKey !== "newsletter" || captchaCode || captchaToken) {
+    if (!verifyNumericCaptcha(captchaCode, captchaToken)) {
+      return bad("Security code verification failed. Please enter the correct code.", 403);
+    }
+  }
+
+  const email = String(body.email ?? "").trim();
   const firstName = String(body.firstName ?? "").trim() || undefined;
   const lastName = String(body.lastName ?? "").trim() || undefined;
   const company = String(body.company ?? "").trim() || undefined;

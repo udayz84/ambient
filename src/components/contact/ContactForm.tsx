@@ -14,6 +14,9 @@ import {
 } from "./contact-shared";
 import { ContactSuccessPopup } from "./ContactSuccessPopup";
 import { Corners } from "../shared/Corners";
+import { getRecaptchaToken } from "@/lib/recaptcha-client";
+import { RECAPTCHA_ACTIONS } from "@/lib/recaptcha";
+import { NumericCaptcha } from "../shared/NumericCaptcha";
 
 type TrackId = "sales" | "developer" | "media";
 
@@ -74,6 +77,8 @@ export function ContactForm({ data }: { data?: any }) {
   const [submitted, setSubmitted] = useState(false);
   const [successDate, setSuccessDate] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
+  const [captchaCode, setCaptchaCode] = useState("");
+  const [captchaToken, setCaptchaToken] = useState("");
 
   const heading = data?.heading || "";
   const subtitle = data?.subtitle || "";
@@ -149,9 +154,14 @@ export function ContactForm({ data }: { data?: any }) {
       setError("Please enter a valid email address.");
       return;
     }
+    if (!captchaCode || captchaCode.length !== 4) {
+      setError("Please enter the 4-digit security code.");
+      return;
+    }
     setError("");
     setLoading(true);
     try {
+      const recaptchaToken = await getRecaptchaToken(RECAPTCHA_ACTIONS.CONTACT);
       const res = await fetch("/api/contact-submissions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -162,6 +172,9 @@ export function ContactForm({ data }: { data?: any }) {
           message: message.trim(),
           subscribed,
           popupId: activeMergedTrack?.trackForm?.documentId,
+          recaptchaToken,
+          captchaCode,
+          captchaToken,
         }),
       });
       const json = await res.json().catch(() => null);
@@ -272,15 +285,23 @@ export function ContactForm({ data }: { data?: any }) {
           left={16}
           top={350}
           width={560}
-          height={132}
+          height={76}
           multiline
           nodeId="2379:8561"
           value={message}
           onChange={setMessage}
         />
 
+        <div className="absolute top-[438px] left-[16px] w-[340px]">
+          <NumericCaptcha
+            value={captchaCode}
+            onChange={setCaptchaCode}
+            onTokenChange={setCaptchaToken}
+          />
+        </div>
+
         <label
-          className="absolute top-[506px] left-[16px] flex w-[558px] cursor-pointer items-center gap-[12px]"
+          className="absolute top-[516px] left-[16px] flex w-[558px] cursor-pointer items-center gap-[12px]"
           data-node-id="2379:8562"
           data-name="Check Box"
         >

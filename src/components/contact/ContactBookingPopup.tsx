@@ -4,6 +4,9 @@ import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { gilroyMedium, gilroySemiBold, interBold, interRegular, interSemiBold } from "../hero/fonts";
 import { ContactSuccessPopup } from "./ContactSuccessPopup";
+import { NumericCaptcha } from "../shared/NumericCaptcha";
+import { getRecaptchaToken } from "@/lib/recaptcha-client";
+import { RECAPTCHA_ACTIONS } from "@/lib/recaptcha";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
@@ -85,6 +88,9 @@ export function ContactBookingPopup({
   const [viewMonth, setViewMonth] = useState(today.getMonth());
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [captchaCode, setCaptchaCode] = useState("");
+  const [captchaToken, setCaptchaToken] = useState("");
+  const [error, setError] = useState("");
   const [confirming, setConfirming] = useState(false);
 
   useEffect(() => {
@@ -164,9 +170,17 @@ export function ContactBookingPopup({
 
   const submit = async () => {
     if (!selectedDate || !selectedTime) return;
+    if (!captchaCode || captchaCode.length !== 4) {
+      setError("Please enter the 4-digit security code.");
+      return;
+    }
+    setError("");
     setConfirming(true);
     try {
-      await fetch("/api/calendar-bookings", {
+      const recaptchaToken = await getRecaptchaToken(
+        RECAPTCHA_ACTIONS.CALENDAR_BOOKING
+      );
+      const res = await fetch("/api/calendar-bookings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -177,11 +191,21 @@ export function ContactBookingPopup({
           timeZone: timeZoneLabel,
           recipientEmail,
           popupId: config?.documentId,
+          captchaCode,
+          captchaToken,
+          recaptchaToken,
         }),
-      }).catch(() => null);
+      });
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => null);
+        throw new Error(body?.error || "Booking failed. Please check the code.");
+      }
+      onBooked(`${formattedDate}, ${selectedTime}`);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Booking failed.");
     } finally {
       setConfirming(false);
-      onBooked(`${formattedDate}, ${selectedTime}`);
     }
   };
 
@@ -411,7 +435,14 @@ export function ContactBookingPopup({
               </div>
             </div>
 
-            <div className="mt-auto">
+            <div className="mt-[20px] flex flex-col gap-[12px]">
+              <NumericCaptcha
+                value={captchaCode}
+                onChange={setCaptchaCode}
+                onTokenChange={setCaptchaToken}
+                error={error}
+              />
+
               <button
                 type="button"
                 onClick={submit}

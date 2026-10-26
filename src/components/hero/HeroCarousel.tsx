@@ -19,7 +19,7 @@ import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
  * slides in Strapi: Home Page → Hero → Announcements.
  * ------------------------------------------------------------------------- */
 
-const AUTOPLAY_MS = 3000;
+const AUTOPLAY_MS = 3500;
 
 type AnnouncementCta = { label: string; href: string; primary?: boolean };
 
@@ -32,8 +32,6 @@ type Announcement = {
   imageAlt: string;
 };
 
-
-
 /** Shape of a Strapi home.hero-announcement entry (media populated). */
 type AnnouncementCms = {
   tag?: string | null;
@@ -44,7 +42,7 @@ type AnnouncementCms = {
   ctas?: { label?: string | null; href?: string | null; variant?: string | null }[] | null;
 };
 
-/** Map Strapi home.hero-announcement entries to the slide shape above. */
+/** Map Strapi home.hero-announcement entries to the slide shape. */
 function cmsAnnouncements(
   data: { announcements?: AnnouncementCms[] | null } | null | undefined,
 ): Announcement[] {
@@ -61,17 +59,22 @@ function cmsAnnouncements(
           href: cta.href ?? "#",
           primary: (cta.variant ?? "primary") === "primary",
         })),
-      // Strapi uploaded image or fallback to article base image
-      image: mediaUrl(a.image) ?? "/resources/article-image-base.webp",
+      image: mediaUrl(a.image) || "",
       imageAlt: a.image_alt || a.image?.alternativeText || "",
-    }))
-    .filter((a) => a.ctas.length > 0);
+    }));
 }
 
 function AnnouncementCtaButton({ cta, onClick }: { cta: AnnouncementCta; onClick: (href: string, e: React.MouseEvent) => void }) {
+  const isExternal =
+    cta.href.startsWith("http://") ||
+    cta.href.startsWith("https://") ||
+    cta.href.startsWith("//");
+
   return (
     <a
       href={cta.href}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
       onClick={(e) => onClick(cta.href, e)}
       className={`${cta.primary ? gilroySemiBold.className : interRegular.className} relative flex h-[42px] shrink-0 items-center justify-center px-[24px] text-[14px] leading-[normal] font-medium uppercase tracking-[-0.42px] whitespace-nowrap transition-opacity hover:opacity-90 ${
         cta.primary
@@ -105,16 +108,17 @@ function AnnouncementSlide({ announcement }: { announcement: Announcement }) {
       className="absolute inset-0 flex flex-col justify-center overflow-hidden bg-black"
       aria-hidden={false}
     >
-      {/* Full-bleed background image — Strapi upload wins, static news-card
-          imagery is the fallback */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        loading="lazy"
-        decoding="async"
-        src={announcement.image}
-        alt={announcement.imageAlt}
-        className="absolute inset-0 h-full w-full object-cover"
-      />
+      {/* Full-bleed background image from Strapi */}
+      {announcement.image ? (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img
+          loading="lazy"
+          decoding="async"
+          src={announcement.image}
+          alt={announcement.imageAlt}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      ) : null}
 
       {/* Blackish gradient so the left-side content stays readable over the
           image (stronger under the text, slight on the image side) */}
@@ -159,18 +163,20 @@ function AnnouncementSlide({ announcement }: { announcement: Announcement }) {
           <p className={`${interRegular.className} w-[419px] max-w-full text-[16px] leading-[24px] font-normal text-[#f0f0f0] opacity-80 [word-break:break-word]`}>
             {announcement.subtitle}
           </p>
-          <div className="mt-[15px] flex items-center gap-[16px]">
-            {announcement.ctas.map((cta, i) => (
-              <AnnouncementCtaButton key={cta.label} cta={cta} onClick={(href, e) => {
-                const text = cta.label.toUpperCase();
-                if (text.includes("UPCOMING") || text.includes("SIGN UP") || text.includes("SIGNUP") || (i === 1 && !cta.primary && !text.includes("SHOWING") && !text.includes("EXPLORE"))) {
-                  e.preventDefault();
-                  const event = new CustomEvent('open-upcoming-products-modal');
-                  window.dispatchEvent(event);
-                }
-              }} />
-            ))}
-          </div>
+          {announcement.ctas.length > 0 && (
+            <div className="mt-[15px] flex items-center gap-[16px]">
+              {announcement.ctas.map((cta, i) => (
+                <AnnouncementCtaButton key={cta.label} cta={cta} onClick={(href, e) => {
+                  const text = cta.label.toUpperCase();
+                  if (text.includes("UPCOMING") || text.includes("SIGN UP") || text.includes("SIGNUP") || (i === 1 && !cta.primary && !text.includes("SHOWING") && !text.includes("EXPLORE"))) {
+                    e.preventDefault();
+                    const event = new CustomEvent('open-upcoming-products-modal');
+                    window.dispatchEvent(event);
+                  }
+                }} />
+              ))}
+            </div>
+          )}
         </div>
       </TabletScaleCanvas>
 
@@ -192,18 +198,20 @@ function AnnouncementSlide({ announcement }: { announcement: Announcement }) {
         <p className={`${interRegular.className} w-[332px] max-w-full md:w-auto md:max-w-[500px] text-[14px] leading-[21px] md:text-[16px] md:leading-[24px] font-normal text-[#f0f0f0] opacity-80 [word-break:break-word]`}>
           {announcement.subtitle}
         </p>
-        <div className="mt-[15px] flex flex-col md:flex-row items-start md:items-center gap-[12px] md:gap-[16px]">
-          {announcement.ctas.map((cta, i) => (
-            <AnnouncementCtaButton key={cta.label} cta={cta} onClick={(href, e) => {
-              const text = cta.label.toUpperCase();
-              if (text.includes("UPCOMING") || text.includes("SIGN UP") || text.includes("SIGNUP") || (i === 1 && !cta.primary && !text.includes("SHOWING") && !text.includes("EXPLORE"))) {
-                e.preventDefault();
-                const event = new CustomEvent('open-upcoming-products-modal');
-                window.dispatchEvent(event);
-              }
-            }} />
-          ))}
-        </div>
+        {announcement.ctas.length > 0 && (
+          <div className="mt-[15px] flex flex-col md:flex-row items-start md:items-center gap-[12px] md:gap-[16px]">
+            {announcement.ctas.map((cta, i) => (
+              <AnnouncementCtaButton key={cta.label} cta={cta} onClick={(href, e) => {
+                const text = cta.label.toUpperCase();
+                if (text.includes("UPCOMING") || text.includes("SIGN UP") || text.includes("SIGNUP") || (i === 1 && !cta.primary && !text.includes("SHOWING") && !text.includes("EXPLORE"))) {
+                  e.preventDefault();
+                  const event = new CustomEvent('open-upcoming-products-modal');
+                  window.dispatchEvent(event);
+                }
+              }} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

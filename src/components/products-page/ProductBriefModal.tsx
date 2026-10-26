@@ -4,7 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
+import { NumericCaptcha } from "../shared/NumericCaptcha";
 import { popupField, type PopupConfig } from "@/lib/popup";
+import { getRecaptchaToken } from "@/lib/recaptcha-client";
+import { RECAPTCHA_ACTIONS } from "@/lib/recaptcha";
 
 const SUCCESS_IMG = "/careers/apply-success.webp";
 
@@ -154,18 +157,44 @@ function FormStep({
   formKey?: string;
 }) {
   const [email, setEmail] = useState("");
+  const [captchaCode, setCaptchaCode] = useState("");
+  const [captchaToken, setCaptchaToken] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const determinedFormKey = formKey || (pdfName?.toLowerCase().includes("whitepaper") ? "whitepaper" : "product-brief");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
+    if (!captchaCode || captchaCode.length !== 4) {
+      setErrorMessage("Please enter the 4-digit security code.");
+      return;
+    }
+
+    setErrorMessage("");
     setIsSubmitting(true);
     try {
-      await fetch("/api/newsletter", {
+      const recaptchaToken = await getRecaptchaToken(
+        RECAPTCHA_ACTIONS.NEWSLETTER
+      );
+      const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, formKey: determinedFormKey, popupId: config?.documentId }),
-      }).catch(() => { /* Mailchimp/mail sync failure is non-blocking */ });
+        body: JSON.stringify({
+          email,
+          formKey: determinedFormKey,
+          popupId: config?.documentId,
+          captchaCode,
+          captchaToken,
+          recaptchaToken,
+        }),
+      });
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => null);
+        throw new Error(body?.error || "Submission failed. Please check your security code.");
+      }
 
       if (pdfUrl) {
         const a = document.createElement("a");
@@ -177,6 +206,8 @@ function FormStep({
       }
 
       onSuccess();
+    } catch (err) {
+      setErrorMessage(err instanceof Error ? err.message : "Submission failed.");
     } finally {
       setIsSubmitting(false);
     }
@@ -192,7 +223,7 @@ function FormStep({
 
       <div className="h-px w-full bg-[rgba(255,255,255,0.1)] mb-[32px]" />
 
-      <form onSubmit={handleSubmit} className={`${interRegular.className} flex flex-col gap-[24px] font-normal not-italic`}>
+      <form onSubmit={handleSubmit} className={`${interRegular.className} flex flex-col gap-[20px] font-normal not-italic`}>
         <div className="flex flex-col items-start gap-[8px]">
           <label className="text-[14px] leading-[21px] text-[#a4a4a4]">
             {popupField(config, "email")?.label ?? "Please provide your email to receive the requested information."}
@@ -206,6 +237,13 @@ function FormStep({
             required
           />
         </div>
+
+        <NumericCaptcha
+          value={captchaCode}
+          onChange={setCaptchaCode}
+          onTokenChange={setCaptchaToken}
+          error={errorMessage}
+        />
 
         <div className="pt-[16px] pb-[8px] flex justify-center">
           <button

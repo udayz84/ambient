@@ -5,6 +5,9 @@ import { createPortal } from "react-dom";
 import { gilroyMedium, gilroySemiBold, interLight, interRegular } from "../hero/fonts";
 import { BOX_BORDER } from "./careers-shared";
 import { Corners } from "../shared/Corners";
+import { NumericCaptcha } from "../shared/NumericCaptcha";
+import { getRecaptchaToken } from "@/lib/recaptcha-client";
+import { RECAPTCHA_ACTIONS } from "@/lib/recaptcha";
 
 const PANEL_BG = "/form.png";
 const SUCCESS_IMG = "/careers/apply-success.webp";
@@ -268,6 +271,8 @@ function FormStep({
   const [otherRole, setOtherRole] = useState("");
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [coverLetter, setCoverLetter] = useState("");
+  const [captchaCode, setCaptchaCode] = useState("");
+  const [captchaToken, setCaptchaToken] = useState("");
   const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -277,21 +282,35 @@ function FormStep({
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (status === "submitting") return;
+
+    if (!captchaCode || captchaCode.length !== 4) {
+      setErrorMessage("Please enter the 4-digit security code.");
+      setStatus("error");
+      return;
+    }
+
     setStatus("submitting");
     setErrorMessage("");
 
-    const formData = new FormData();
-    formData.append("fullName", fullName);
-    formData.append("email", email);
-    formData.append("phone", phone);
-    formData.append("role", role);
-    formData.append("otherRole", otherRole);
-    formData.append("coverLetter", coverLetter);
-    formData.append("consent", String(consent));
-    if (resumeFile) formData.append("resume", resumeFile);
-    if (config?.documentId) formData.append("popupId", String(config.documentId));
-
     try {
+      const recaptchaToken = await getRecaptchaToken(
+        RECAPTCHA_ACTIONS.JOB_APPLICATION
+      );
+
+      const formData = new FormData();
+      formData.append("fullName", fullName);
+      formData.append("email", email);
+      formData.append("phone", phone);
+      formData.append("role", role);
+      formData.append("otherRole", otherRole);
+      formData.append("coverLetter", coverLetter);
+      formData.append("consent", String(consent));
+      if (resumeFile) formData.append("resume", resumeFile);
+      if (config?.documentId) formData.append("popupId", String(config.documentId));
+      if (captchaCode) formData.append("captchaCode", captchaCode);
+      if (captchaToken) formData.append("captchaToken", captchaToken);
+      if (recaptchaToken) formData.append("recaptchaToken", recaptchaToken);
+
       const res = await fetch("/api/job-applicants", { method: "POST", body: formData });
       const payload = (await res.json().catch(() => ({}))) as { error?: string };
       if (!res.ok) {
@@ -448,6 +467,13 @@ function FormStep({
             onChange={(e) => setCoverLetter(e.target.value)}
           />
         </Field>
+
+        {/* Numeric Security Code */}
+        <NumericCaptcha
+          value={captchaCode}
+          onChange={setCaptchaCode}
+          onTokenChange={setCaptchaToken}
+        />
 
         {/* Consent + Submit */}
         <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-[18px] md:gap-[18px]">

@@ -4,12 +4,15 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { gilroySemiBold, interLight, interRegular } from "../hero/fonts";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { NumericCaptcha } from "../shared/NumericCaptcha";
 import { popupField, type PopupConfig } from "@/lib/popup";
 import {
   getHasCookieConsentSnapshot,
   subscribeCookieConsent,
   COOKIE_CONSENT_OPEN_EVENT,
 } from "@/lib/cookie-consent";
+import { getRecaptchaToken } from "@/lib/recaptcha-client";
+import { RECAPTCHA_ACTIONS } from "@/lib/recaptcha";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
@@ -22,6 +25,9 @@ const SUBSCRIBED_KEY = "newsletter-popup-subscribed";
 export function NewsletterPopup({ config }: { config?: PopupConfig }) {
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [captchaCode, setCaptchaCode] = useState("");
+  const [captchaToken, setCaptchaToken] = useState("");
+  const [error, setError] = useState("");
   // CMS copy from the footer relation; null = hardcoded fallbacks.
 
   useEffect(() => {
@@ -83,25 +89,37 @@ export function NewsletterPopup({ config }: { config?: PopupConfig }) {
     return () => document.removeEventListener("keydown", onEsc);
   }, [open]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Native email/required validation — blocks submit + shows the browser
-    // message for invalid input.
     if (!e.currentTarget.reportValidity()) return;
     const formData = new FormData(e.currentTarget);
     const email = String(formData.get("email") ?? "").trim();
     if (!email) return;
 
-    localStorage.setItem(SUBSCRIBED_KEY, "1");
-    // Show the thank-you note, then auto-dismiss.
-    setSubmitted(true);
+    if (!captchaCode || captchaCode.length !== 4) {
+      setError("Please enter the 4-digit security code.");
+      return;
+    }
 
-    // Sync to Mailchimp via server-side API (fire-and-forget)
-    fetch("/api/newsletter", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, formKey: "newsletter", popupId: config?.documentId }),
-    }).catch(() => { /* silently ignore — submission is already shown as successful */ });
+    setError("");
+    const recaptchaToken = await getRecaptchaToken(RECAPTCHA_ACTIONS.NEWSLETTER);
+
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, formKey: "newsletter", popupId: config?.documentId, captchaCode, captchaToken, recaptchaToken }),
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => null);
+        setError(body?.error || "Submission failed. Please check the code.");
+        return;
+      }
+      localStorage.setItem(SUBSCRIBED_KEY, "1");
+      setSubmitted(true);
+    } catch {
+      setError("Submission failed. Please try again.");
+    }
   };
 
   useEffect(() => {
@@ -116,12 +134,12 @@ export function NewsletterPopup({ config }: { config?: PopupConfig }) {
   return createPortal(
     <section
       aria-label="Newsletter signup"
-      className="fixed bottom-[24px] right-[24px] z-[100] h-[196px] w-[450px] max-w-[calc(100vw-48px)] animate-popup-rise-in border-[0.5px] border-solid border-[rgba(240,240,240,0.3)] bg-[#141414] max-[767px]:right-[16px] max-[767px]:bottom-[16px] max-[767px]:w-[calc(100vw-32px)] max-[767px]:max-w-none max-[767px]:h-auto max-[767px]:py-[20px]"
+      className="fixed bottom-[24px] right-[24px] z-[100] h-auto py-[24px] w-[450px] max-w-[calc(100vw-48px)] animate-popup-rise-in border-[0.5px] border-solid border-[rgba(240,240,240,0.3)] bg-[#141414] max-[767px]:right-[16px] max-[767px]:bottom-[16px] max-[767px]:w-[calc(100vw-32px)] max-[767px]:max-w-none"
       data-node-id="5558:8442"
       data-name="Newsletter popup"
     >
       <div
-        className="absolute top-1/2 left-1/2 flex w-[410px] -translate-x-1/2 -translate-y-1/2 flex-col items-start gap-[12px] max-[767px]:static max-[767px]:w-full max-[767px]:translate-x-0 max-[767px]:translate-y-0 max-[767px]:px-[20px]"
+        className="flex w-full flex-col items-start gap-[12px] px-[20px]"
         data-node-id="5558:8501"
         data-name="Frame 2147240901"
       >
@@ -167,31 +185,41 @@ export function NewsletterPopup({ config }: { config?: PopupConfig }) {
         </div>
 
         <form
-          className="flex h-[48px] w-[410px] max-w-full shrink-0 items-center gap-[10px] max-[767px]:w-full"
+          className="flex w-full flex-col gap-[12px]"
           data-node-id="5558:8465"
           data-name="Frame 2147240807"
           onSubmit={handleSubmit}
         >
-          <label htmlFor="newsletter-popup-email" className="sr-only">
-            Email address
-          </label>
-          <div
-            className="flex h-full min-w-0 flex-1 items-start border-[0.5px] border-solid border-[#4a4a4a] p-[12px]"
-            data-node-id="5558:8482"
-            data-name="Input Field"
-          >
-            <input
-              id="newsletter-popup-email"
-              name="email"
-              type="email"
-              required
-              placeholder={popupField(config, "email")?.placeholder ?? "Enter Your Email ID"}
-              className={`${interRegular.className} w-full border-0 bg-transparent text-[14px] leading-[21px] text-white outline-none placeholder:text-[#4a4a4a]`}
-            />
+          <div className="flex w-full items-center gap-[10px]">
+            <label htmlFor="newsletter-popup-email" className="sr-only">
+              Email address
+            </label>
+            <div
+              className="flex h-[48px] min-w-0 flex-1 items-start border-[0.5px] border-solid border-[#4a4a4a] p-[12px]"
+              data-node-id="5558:8482"
+              data-name="Input Field"
+            >
+              <input
+                id="newsletter-popup-email"
+                name="email"
+                type="email"
+                required
+                placeholder={popupField(config, "email")?.placeholder ?? "Enter Your Email ID"}
+                className={`${interRegular.className} w-full border-0 bg-transparent text-[14px] leading-[21px] text-white outline-none placeholder:text-[#4a4a4a]`}
+              />
+            </div>
           </div>
+
+          <NumericCaptcha
+            value={captchaCode}
+            onChange={setCaptchaCode}
+            onTokenChange={setCaptchaToken}
+            error={error}
+          />
+
           <button
             type="submit"
-            className={`${gilroySemiBold.className} relative block h-[48px] w-[140px] shrink-0 cursor-pointer overflow-hidden text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic ${GREEN_CTA_SHADOW}`}
+            className={`${gilroySemiBold.className} relative block h-[48px] w-full shrink-0 cursor-pointer overflow-hidden text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic ${GREEN_CTA_SHADOW}`}
             data-node-id="5558:8469"
             data-name="Cta"
           >

@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { type PopupConfig, type PopupField } from "@/lib/popup";
+import { NumericCaptcha } from "../shared/NumericCaptcha";
+import { getRecaptchaToken } from "@/lib/recaptcha-client";
+import { RECAPTCHA_ACTIONS } from "@/lib/recaptcha";
 
 export function ResourceDownloadModal({
   isOpen,
@@ -15,6 +18,8 @@ export function ResourceDownloadModal({
   config?: PopupConfig;
 }) {
   const [formData, setFormData] = useState<Record<string, string>>({});
+  const [captchaCode, setCaptchaCode] = useState("");
+  const [captchaToken, setCaptchaToken] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -28,6 +33,13 @@ export function ResourceDownloadModal({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
+
+    if (!captchaCode || captchaCode.length !== 4) {
+      setError("Please enter the 4-digit security code.");
+      return;
+    }
+
     setError("");
     setLoading(true);
 
@@ -35,7 +47,10 @@ export function ResourceDownloadModal({
       // Sync to Mailchimp via server-side API (resource-download = transactional)
       const emailValue = formData["email"] || formData["Email"] || "";
       if (emailValue) {
-        fetch("/api/newsletter", {
+        const recaptchaToken = await getRecaptchaToken(
+          RECAPTCHA_ACTIONS.NEWSLETTER
+        );
+        const res = await fetch("/api/newsletter", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -51,8 +66,16 @@ export function ResourceDownloadModal({
                 .map(([k, v]) => `${k}: ${v}`)
                 .join("\n") || undefined,
             popupId: config?.documentId,
+            captchaCode,
+            captchaToken,
+            recaptchaToken,
           }),
-        }).catch(() => { /* Mailchimp sync failure is non-blocking */ });
+        });
+
+        if (!res.ok) {
+          const body = await res.json().catch(() => null);
+          throw new Error(body?.error || "Submission failed. Please check your security code.");
+        }
       }
 
       // Download PDF programmatically
@@ -109,6 +132,11 @@ export function ResourceDownloadModal({
               />
             </div>
           ))}
+          <NumericCaptcha
+            value={captchaCode}
+            onChange={setCaptchaCode}
+            onTokenChange={setCaptchaToken}
+          />
           {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
           <button
             type="submit"
