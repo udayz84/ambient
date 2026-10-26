@@ -118,7 +118,7 @@ export function ProductsAppForge({ data }: { data?: any }) {
   const heading = data?.heading || "Your eval kit, controlled from your phone.";
   const subheading =
     data?.subheading ||
-    "Download ApplicationForge, pair with your kit over Bluetooth, and flash live demos in seconds — no laptop, no code.";
+    "Download NuraSync, pair with your kit over Bluetooth, and flash live demos in seconds — no laptop, no code.";
   const { fadeRef: articleRef } = useFadeIn<HTMLDivElement>();
   const { fadeRef: forgeRef, isVisible: forgeVisible } = useFadeIn<HTMLDivElement>();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -197,7 +197,7 @@ export function ProductsAppForge({ data }: { data?: any }) {
           {/* Phone showcase */}
           <div className="relative h-[327px] w-full min-w-px min-[1024px]:flex-1" data-node-id="5131:10537" data-name="Container">
             <img
-              alt="ApplicationForge phone app preview on an eval kit"
+              alt="NuraSync phone app preview on an eval kit"
               src={(data?.phone_mockup_image && mediaUrl(data.phone_mockup_image)) || fallbackImg.src}
               onError={(e) => {
                 const target = e.currentTarget;

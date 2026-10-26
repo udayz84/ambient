@@ -36,7 +36,7 @@ const HEADING = "Every application here runs on real, ready models.";
 const SUBTITLE =
   "Browse a growing library of open-source and Ambient-built models — tuned for GPX, deployable in one click. Don't build from scratch; start from something that works.";
 
-const SECONDARY_CTA = { label: "See it live in ApplicationForge", href: "/applications" };
+const SECONDARY_CTA = { label: "See it live in NuraSync", href: "/applications" };
 
 /** Left fade over the collage rows. */
 const COLLAGE_LEFT_FADE =

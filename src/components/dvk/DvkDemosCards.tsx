@@ -146,8 +146,8 @@ export function DvkDemosCards({ data }: { data?: any }) {
 export const PHONE_CARD_FALLBACK = {
   title: "Flash demos from your phone.",
   description:
-    "Pair the Cranium kit with the ApplicationForge app over Bluetooth, push any demo to the board, and watch results live — including the gesture-controlled game.",
-  primary_cta_label: "Get the ApplicationForge App",
+    "Pair the Cranium kit with the NuraSync app over Bluetooth, push any demo to the board, and watch results live — including the gesture-controlled game.",
+  primary_cta_label: "Get the NuraSync App",
   primary_cta_href: "#",
   secondary_cta_label: "Browse the Model Zoo",
   secondary_cta_href: "/model-zoo",

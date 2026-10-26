@@ -33,8 +33,8 @@ const CARDS = [
   {
     nodeId: "5246:6416",
     img: "/model-zoo/phone-mockup-new.png",
-    alt: "ApplicationForge - See it live, from your phone.",
-    title: "ApplicationForge - See it live, from your phone.",
+    alt: "NuraSync - See it live, from your phone.",
+    title: "NuraSync - See it live, from your phone.",
     desc: "Pair with an eval kit over Bluetooth and watch AI run in real time.",
     cta: "Learn More",
     href: "/application-forge",
