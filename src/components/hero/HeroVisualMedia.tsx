@@ -14,6 +14,8 @@ export function HeroVisualMedia({
   alt?: string;
 }) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const src = videoSrc || imageSrc;
+  const isVideo = !!src && /\.(mp4|webm|mov|m4v|avi|wmv|flv|mkv|ogg|ogv)(\?.*)?$/i.test(src);
 
   const initVideo = useCallback((video: HTMLVideoElement | null) => {
     if (!video) return;
@@ -26,102 +28,93 @@ export function HeroVisualMedia({
     video.setAttribute("muted", "");
     video.setAttribute("playsinline", "");
     video.setAttribute("webkit-playsinline", "true");
-
-    const play = () => {
-      video.defaultMuted = true;
-      video.muted = true;
-      void video.play().catch(() => {});
-    };
-
-    play();
   }, []);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || !videoSrc) return;
+    if (!video || !src || !isVideo) return;
 
     video.defaultMuted = true;
     video.muted = true;
     video.playsInline = true;
 
     const start = () => {
-      if (video) {
-        video.defaultMuted = true;
-        video.muted = true;
+      if (!video) return;
+      video.defaultMuted = true;
+      video.muted = true;
+      if (video.paused) {
         void video.play().catch(() => {});
       }
     };
 
-    start();
+    if (video.readyState >= 2) {
+      start();
+    }
 
-    video.addEventListener("loadedmetadata", start);
+    video.addEventListener("loadeddata", start);
     video.addEventListener("canplay", start);
     video.addEventListener("canplaythrough", start);
-    video.addEventListener("loadeddata", start);
 
     // Global triggers: if Safari or battery saver initially halts autoplay,
-    // resume immediately on the very first user interaction or scroll
+    // resume on first user interaction or scroll, then disconnect.
+    const removeInteractionListeners = () => {
+      window.removeEventListener("scroll", onUserInteraction);
+      window.removeEventListener("touchstart", onUserInteraction);
+      window.removeEventListener("touchend", onUserInteraction);
+      window.removeEventListener("pointerdown", onUserInteraction);
+      window.removeEventListener("click", onUserInteraction);
+      document.removeEventListener("visibilitychange", onUserInteraction);
+    };
+
     const onUserInteraction = () => {
       if (video && video.paused) {
         video.muted = true;
-        void video.play().catch(() => {});
+        void video.play().then(() => {
+          removeInteractionListeners();
+        }).catch(() => {});
+      } else if (video && !video.paused) {
+        removeInteractionListeners();
       }
     };
+
+    video.addEventListener("playing", removeInteractionListeners, { once: true });
 
     window.addEventListener("scroll", onUserInteraction, { passive: true });
     window.addEventListener("touchstart", onUserInteraction, { passive: true });
     window.addEventListener("touchend", onUserInteraction, { passive: true });
     window.addEventListener("pointerdown", onUserInteraction, { passive: true });
     window.addEventListener("click", onUserInteraction, { passive: true });
-    window.addEventListener("wheel", onUserInteraction, { passive: true });
     document.addEventListener("visibilitychange", onUserInteraction);
 
-    // WebKit can reject every early play() (autoplay policy / readiness
-    // timing) while a later call succeeds — keep retrying briefly until
-    // playback actually starts. Capped so a hard block (e.g. Low Power Mode)
-    // doesn't retry forever.
+    // Retry loop until playback actually begins
     let tries = 0;
     const retryTimer = window.setInterval(() => {
-      if (!video.paused || ++tries > 10) {
+      if (!video.paused || ++tries > 20) {
         window.clearInterval(retryTimer);
         return;
       }
       start();
-    }, 1000);
+    }, 250);
 
-    // Safari pauses autoplay when the element leaves the viewport; resume as
-    // soon as the hero is back in view.
     const io = new IntersectionObserver((entries) => {
       if (entries.some((entry) => entry.isIntersecting)) start();
     });
     io.observe(video);
 
     return () => {
-      video.removeEventListener("loadedmetadata", start);
+      video.removeEventListener("loadeddata", start);
       video.removeEventListener("canplay", start);
       video.removeEventListener("canplaythrough", start);
-      video.removeEventListener("loadeddata", start);
-
-      window.removeEventListener("scroll", onUserInteraction);
-      window.removeEventListener("touchstart", onUserInteraction);
-      window.removeEventListener("touchend", onUserInteraction);
-      window.removeEventListener("pointerdown", onUserInteraction);
-      window.removeEventListener("click", onUserInteraction);
-      window.removeEventListener("wheel", onUserInteraction);
-      document.removeEventListener("visibilitychange", onUserInteraction);
+      video.removeEventListener("playing", removeInteractionListeners);
+      removeInteractionListeners();
       window.clearInterval(retryTimer);
       io.disconnect();
     };
-  }, [videoSrc]);
-
-  const src = imageSrc || videoSrc;
+  }, [src, isVideo]);
 
   if (!src) {
     return null;
   }
-
-  // Check for common video extensions, ignoring any query parameters
-  const isVideo = /\.(mp4|webm|mov|m4v|avi|wmv|flv|mkv|ogg|ogv)(\?.*)?$/i.test(src);
 
   if (!isVideo) {
     return (
@@ -157,7 +150,7 @@ export function HeroVisualMedia({
           mobile
             ? "absolute inset-0 size-full max-w-none object-cover object-center"
             : "absolute inset-0 size-full max-w-none object-cover object-center"
-        } pointer-events-none`}
+        } pointer-events-none [&::-webkit-media-controls-start-playback-button]:!hidden [&::-webkit-media-controls]:!hidden`}
         autoPlay
         loop
         muted
@@ -168,6 +161,16 @@ export function HeroVisualMedia({
         disableRemotePlayback
         tabIndex={-1}
         aria-hidden
+        onLoadedData={(e) => {
+          const v = e.currentTarget;
+          v.muted = true;
+          void v.play().catch(() => {});
+        }}
+        onCanPlay={(e) => {
+          const v = e.currentTarget;
+          v.muted = true;
+          void v.play().catch(() => {});
+        }}
       />
     </>
   );

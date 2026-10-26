@@ -88,53 +88,107 @@ export function StoreBadges({
 
 function ForgeVideo({ className }: { className?: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       video.pause();
       return;
     }
-    const tryPlay = () => { video.play().catch(() => {}); };
+
+    // Critical for Safari / iOS WebKit autoplay
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+
+    const tryPlay = () => {
+      if (!video.paused) return;
+      video.muted = true;
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
+    };
+
     tryPlay();
     video.addEventListener("loadeddata", tryPlay);
     video.addEventListener("canplay", tryPlay);
-    let tries = 0;
-    const retryTimer = setInterval(() => {
-      if (!video.paused || ++tries > 10) {
-        clearInterval(retryTimer);
+    video.addEventListener("canplaythrough", tryPlay);
+
+    // Repeated retry loop until video starts playing
+    let attempts = 0;
+    const interval = setInterval(() => {
+      if (!video.paused || ++attempts > 25) {
+        clearInterval(interval);
         return;
       }
       tryPlay();
-    }, 1000);
-    const io = new IntersectionObserver((entries) => {
-      if (entries.some((en) => en.isIntersecting)) tryPlay();
-    });
+    }, 200);
+
+    const onUserAction = () => {
+      tryPlay();
+    };
+    window.addEventListener("touchstart", onUserAction, { passive: true });
+    window.addEventListener("scroll", onUserAction, { passive: true });
+    window.addEventListener("click", onUserAction, { passive: true });
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((en) => en.isIntersecting)) {
+          tryPlay();
+        }
+      },
+      { threshold: 0.05 }
+    );
     io.observe(video);
+
     return () => {
-      clearInterval(retryTimer);
+      clearInterval(interval);
       io.disconnect();
       video.removeEventListener("loadeddata", tryPlay);
       video.removeEventListener("canplay", tryPlay);
+      video.removeEventListener("canplaythrough", tryPlay);
+      window.removeEventListener("touchstart", onUserAction);
+      window.removeEventListener("scroll", onUserAction);
+      window.removeEventListener("click", onUserAction);
     };
   }, []);
 
   return (
     <video
       ref={videoRef}
-      className={className || "pointer-events-none absolute inset-0 size-full object-contain"}
-      poster="/videos/electronica-tv-01-v03-poster.jpg"
+      className={
+        className ||
+        "pointer-events-none absolute inset-0 size-full object-contain [&::-webkit-media-controls-start-playback-button]:!hidden [&::-webkit-media-controls]:!hidden [&::-webkit-media-controls-play-button]:!hidden"
+      }
       autoPlay
       muted
+      defaultMuted
       loop
       playsInline
       preload="auto"
-      onLoadedMetadata={(e) => {
+      controls={false}
+      {...({ "webkit-playsinline": "true" } as any)}
+      onLoadedData={(e) => {
+        const v = e.currentTarget;
+        v.muted = true;
         if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-          e.currentTarget.play().catch(() => {});
+          v.play().catch(() => {});
+        }
+      }}
+      onCanPlay={(e) => {
+        const v = e.currentTarget;
+        v.muted = true;
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          v.play().catch(() => {});
         }
       }}
     >
+      <source src="/videos/electronica-tv-01-v03-alpha.mp4" type='video/mp4; codecs="hvc1"' />
       <source src="/videos/electronica-tv-01-v03.webm" type="video/webm" />
       <source src="/videos/electronica-tv-01-v03.mp4" type="video/mp4" />
     </video>
@@ -252,8 +306,8 @@ export function ModelZooAppForge({
       <div className="hidden" aria-hidden="true">
         <img src={STEP_ARTICLE.pair} alt="" loading="eager" />
         <img src={STEP_ARTICLE.flash} alt="" loading="eager" />
-        <link rel="preload prefetch" as="video" href="/model-zoo/af-results.mp4" />
-        <link rel="preload" as="image" href="/videos/electronica-tv-01-v03-poster.jpg" />
+        <link rel="preload" as="video" href="/videos/electronica-tv-01-v03-alpha.mp4" type='video/mp4; codecs="hvc1"' />
+        <link rel="preload" as="video" href="/videos/electronica-tv-01-v03.webm" type="video/webm" />
       </div>
 
       {/* MOBILE (<600px) */}
@@ -278,7 +332,7 @@ export function ModelZooAppForge({
         {/* Application Forge showcase mobile */}
         <div className="mt-[24px] flex w-full flex-col items-stretch gap-[24px]" data-node-id="5241:5967">
           <div className="flex h-[320px] w-full shrink-0 items-stretch justify-center">
-            <div className="relative h-full w-full overflow-clip rounded-[12px] bg-black">
+            <div className="relative h-full w-full overflow-clip rounded-[12px] bg-transparent">
               <ForgeVideo />
             </div>
           </div>

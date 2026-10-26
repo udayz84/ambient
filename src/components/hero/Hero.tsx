@@ -93,7 +93,7 @@ export function Hero({ data }: { data?: any }) {
     >
       {/* DESKTOP (>=600px) */}
       <TabletScaleCanvas className="relative hidden h-[876px] w-[1440px] shrink-0 min-[600px]:block">
-        <HeroVisual imageSrc={imageSrc} alt={imageAlt} />
+        <HeroVisual imageSrc={imageSrc} videoSrc={imageSrc} alt={imageAlt} />
 
         <div className="pointer-events-none absolute top-[79px] left-[95px] flex h-[821px] w-0 items-center justify-center">
           <div className="flex-none rotate-90">
@@ -250,7 +250,7 @@ export function Hero({ data }: { data?: any }) {
             WebkitMaskRepeat: "no-repeat",
           }}
         >
-          <HeroVisualMedia mobile imageSrc={mobileImageSrc} alt={mobileImageAlt} />
+          <HeroVisualMedia mobile imageSrc={mobileImageSrc} videoSrc={mobileImageSrc} alt={mobileImageAlt} />
         </div>
 
         {/* Spacer to push stats down */}
