@@ -167,7 +167,6 @@ function ForgeVideo({ className }: { className?: string }) {
       }
       autoPlay
       muted
-      defaultMuted
       loop
       playsInline
       preload="auto"

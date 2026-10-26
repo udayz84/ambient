@@ -36,7 +36,7 @@ const HEADING = "Every application here runs on real, ready models.";
 const SUBTITLE =
   "Browse a growing library of open-source and Ambient-built models — tuned for GPX, deployable in one click. Don't build from scratch; start from something that works.";
 
-const SECONDARY_CTA = { label: "See it live in ApplicationForge", href: "/application-forge" };
+const SECONDARY_CTA = { label: "See it live in ApplicationForge", href: "/applications" };
 
 /** Left fade over the collage rows. */
 const COLLAGE_LEFT_FADE =
@@ -440,6 +440,7 @@ function FeatureCard({ item }: { item: FeatureCardItem }) {
 }
 
 export function ApplicationsPageModelZoo({
+  data,
   variant = "cards",
   slug,
 }: {
@@ -475,7 +476,17 @@ export function ApplicationsPageModelZoo({
       : isWearables
         ? WEARABLES_SUBTITLE
         : SUBTITLE;
-  const primaryCta = { label: "Explore the Model Zoo →", href: "/model-zoo" };
+  const primaryCta = {
+    label: data?.primary_cta?.label || "Explore the Model Zoo →",
+    href: data?.primary_cta?.href || "/model-zoo",
+  };
+  const secondaryCta = {
+    label: data?.secondary_cta?.label || SECONDARY_CTA.label,
+    href:
+      data?.secondary_cta?.href && data.secondary_cta.href !== "/application-forge"
+        ? data.secondary_cta.href
+        : "/applications",
+  };
   const features = isSmartHome
     ? SMART_HOME_FEATURES
     : isWearables
@@ -544,12 +555,10 @@ export function ApplicationsPageModelZoo({
         </p>
 
         {/* CTA Row */}
-        {!isSmartHome && !isWearables && (
-          <div className="mt-[16px] flex w-full flex-col min-[600px]:flex-row items-center justify-center gap-[16px] px-[20px]">
-            <PrimaryCta label={primaryCta.label} href={primaryCta.href} />
-            <SecondaryCta label={SECONDARY_CTA.label} href={SECONDARY_CTA.href} />
-          </div>
-        )}
+        <div className="mt-[16px] flex w-full flex-col min-[600px]:flex-row items-center justify-center gap-[16px] px-[20px]">
+          <PrimaryCta label={primaryCta.label} href={primaryCta.href} />
+          <SecondaryCta label={secondaryCta.label} href={secondaryCta.href} />
+        </div>
       </div>
 
       {variant === "strip" ? (

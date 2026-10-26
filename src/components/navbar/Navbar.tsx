@@ -14,6 +14,7 @@ import {
   DEFAULT_SHOP_ITEM,
   type ApplicationPageSummary,
   type NavMegaColumn,
+  type NavItem as NavItemType,
 } from "./nav-items";
 import { MobileMenu } from "./MobileMenu";
 import { NavbarCta } from "./NavbarCta";
@@ -229,24 +230,21 @@ function NavIconDropdown({
 }
 
 
-function NavItem({ item }: { item: any }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const pathname = usePathname();
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
-    const handleClickOutside = () => setIsOpen(false);
-    if (isOpen) {
-      document.addEventListener("click", handleClickOutside);
-    }
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, [isOpen]);
-
+function NavItem({
+  item,
+  isOpen,
+  onMouseEnter,
+  onMouseLeave,
+  onClose,
+}: {
+  item: NavItemType;
+  isOpen: boolean;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
+  onClose: () => void;
+}) {
   const isProducts = item.label?.toLowerCase() === "products";
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Mega menu is left-anchored to the Products item; below ~1180px viewports
   // its fixed max-content width crosses the viewport edge and gets clipped.
@@ -270,8 +268,8 @@ function NavItem({ item }: { item: any }) {
     return (
       <div 
         className="relative flex h-full items-center gap-[12px] group"
-        onMouseEnter={() => setIsOpen(true)}
-        onMouseLeave={() => setIsOpen(false)}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
       >
         <Link
           href={item.href !== "#" && !isProducts ? item.href : "#"}
@@ -279,7 +277,11 @@ function NavItem({ item }: { item: any }) {
             if (item.href === "#" || isProducts) {
               e.preventDefault();
               e.stopPropagation();
-              setIsOpen(!isOpen);
+              if (isOpen) {
+                onClose();
+              } else {
+                onMouseEnter();
+              }
             }
           }}
           className="flex items-center gap-[6px] shrink-0 text-center text-[14px] leading-[normal] font-medium tracking-[-0.42px] whitespace-nowrap text-white transition-opacity hover:opacity-80"
@@ -289,20 +291,20 @@ function NavItem({ item }: { item: any }) {
         <div
           ref={dropdownRef}
           onClick={(e) => e.stopPropagation()}
-          className={`absolute top-full z-30 pt-[24px] transition-all duration-200 ${
+          className={`absolute top-full z-40 pt-[24px] transition-all duration-200 ${
             isProducts ? "left-0" : "left-1/2 -translate-x-1/2"
           } ${
             isOpen
-              ? "visible opacity-100 translate-y-0"
-              : "invisible opacity-0 -translate-y-2"
+              ? "visible opacity-100 translate-y-0 pointer-events-auto"
+              : "invisible opacity-0 -translate-y-2 pointer-events-none"
           }`}
         >
           {isProducts ? (
-            <ProductsMegaMenu columns={item.megaColumns} onNavigate={() => setIsOpen(false)} />
+            <ProductsMegaMenu columns={item.megaColumns} onNavigate={onClose} />
           ) : (
             <NavIconDropdown
               item={item}
-              onNavigate={() => setIsOpen(false)}
+              onNavigate={onClose}
               compact={["company", "application", "applications", "resources"].includes(
                 (item.label || "").toLowerCase()
               )}
@@ -317,6 +319,7 @@ function NavItem({ item }: { item: any }) {
     <span className="contents">
       <Link
         href={item.href}
+        onMouseEnter={onMouseEnter}
         className="flex items-center gap-[6px] shrink-0 text-center text-[14px] leading-[normal] font-medium tracking-[-0.42px] whitespace-nowrap text-white transition-opacity hover:opacity-80"
       >
         <span className="max-w-full overflow-hidden text-ellipsis">{item.label}</span>
@@ -363,6 +366,55 @@ export function Navbar({
   // The CMS logo is a lower-quality asset. Use the high-resolution
   // brand asset so the 46px mobile mark remains crisp on high-DPR screens.
   const logoSrc = "/navbar/logo.png";
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const pathname = usePathname();
+  const [prevPathname, setPrevPathname] = useState(pathname);
+
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
+    setActiveDropdown(null);
+  }
+
+  useEffect(() => {
+    const handleClickOutside = () => setActiveDropdown(null);
+    if (activeDropdown) {
+      document.addEventListener("click", handleClickOutside);
+    }
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [activeDropdown]);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
+
+  const handleMouseEnter = (label: string) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setActiveDropdown(label.toLowerCase());
+  };
+
+  const handleMouseLeave = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 150);
+  };
+
+  const handleClose = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setActiveDropdown(null);
+  };
+
   return (
     <header
       className={`${interMedium.className} sticky top-0 z-50 h-[78px] w-full drop-shadow-[0px_6px_12px_rgba(83,216,36,0.12)]`}
@@ -437,14 +489,25 @@ export function Navbar({
           className="absolute top-[19.158px] left-[185px] right-[185px] hidden h-[37px] items-center justify-center gap-[10px] p-[10px] xl:flex min-[1440px]:left-[200px] min-[1440px]:right-[200px] min-[1440px]:gap-[12px]"
           aria-label="Main"
           data-node-id="2379:1575"
+          onMouseLeave={handleMouseLeave}
         >
           <NavVectorDivider />
-          {navLinks.map((item, index) => (
-            <Fragment key={item.label}>
-              {index > 0 && <NavVectorDivider />}
-              <NavItem item={item} />
-            </Fragment>
-          ))}
+          {navLinks.map((item, index) => {
+            const itemKey = (item.label || "").toLowerCase();
+            const isOpen = activeDropdown === itemKey;
+            return (
+              <Fragment key={item.label}>
+                {index > 0 && <NavVectorDivider />}
+                <NavItem
+                  item={item}
+                  isOpen={isOpen}
+                  onMouseEnter={() => handleMouseEnter(itemKey)}
+                  onMouseLeave={handleMouseLeave}
+                  onClose={handleClose}
+                />
+              </Fragment>
+            );
+          })}
         </nav>
 
         {/* Right CTA cluster: Shop + Get in touch, compact 134px buttons.
