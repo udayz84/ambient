@@ -1,5 +1,8 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
+
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyExtraBold, gilroySemiBold } from "../hero/fonts";
 import { motion, AnimatePresence } from "framer-motion";
@@ -563,11 +566,23 @@ export function ApplicationsHeroVisual({
       );
     }
 
-    if (activeTab === "BUILD") {
+    const activeTabObj = tabs.find(
+      (t) => (t?.label || "").toUpperCase() === activeTab.toUpperCase()
+    );
+
+    if (activeTab === "BUILD" || activeTabObj?.isBuild) {
+      const buildData = activeTabObj?.buildData;
+      const bgImg = mediaUrl(buildData?.background_image) || "/products/build-bg.png";
+      const line1 = buildData?.watermark_line_1 || "BUILD YOUR";
+      const line2 = buildData?.watermark_line_2 || "APPLICATION";
+      const cubeImg = mediaUrl(buildData?.cube_image) || "/products/build-custom-cube.png";
+      const ctaLabel = buildData?.cta_label || "Explore Model Zoo";
+      const ctaHref = buildData?.cta_href || "/model-zoo";
+
       return (
         <div className="absolute inset-0 pointer-events-none z-10 w-full h-full">
           <div className="absolute inset-0 pointer-events-none z-[-1] opacity-40 translate-y-[80px]">
-            <img loading="lazy" decoding="async" src="/products/build-bg.png" alt="" className="size-full object-cover" />
+            <img loading="lazy" decoding="async" src={bgImg} alt="" className="size-full object-cover" />
           </div>
 
           <h3
@@ -583,7 +598,7 @@ export function ApplicationsHeroVisual({
             }}
             aria-hidden
           >
-            BUILD YOUR
+            {line1}
           </h3>
 
           <h3
@@ -599,7 +614,7 @@ export function ApplicationsHeroVisual({
             }}
             aria-hidden
           >
-            APPLICATION
+            {line2}
           </h3>
           
           <div
@@ -608,7 +623,7 @@ export function ApplicationsHeroVisual({
           >
             <img loading="lazy" decoding="async"
               alt="Build Custom Application"
-              src="/products/build-custom-cube.png"
+              src={cubeImg}
               className="absolute inset-0 size-full object-contain pointer-events-none"
             />
           </div>
@@ -618,7 +633,7 @@ export function ApplicationsHeroVisual({
             style={{ top: 819 }}
           >
             <a
-              href="/model-zoo"
+              href={ctaHref}
               className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} pointer-events-auto relative flex h-[48px] w-[223px] shrink-0 items-center justify-center overflow-hidden`}
             >
               <span
@@ -627,7 +642,7 @@ export function ApplicationsHeroVisual({
               />
               <AnimatedDotsBackground />
               <span className="relative max-w-full overflow-hidden text-ellipsis text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
-                Explore Model Zoo
+                {ctaLabel}
               </span>
               <span
                 aria-hidden

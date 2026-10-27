@@ -1,9 +1,8 @@
 import { NextResponse, after } from "next/server";
 import { sendSubmissionMail } from "@/lib/notify-mail";
 import { addContactAndTag } from "@/lib/mailchimp";
-import { verifyRecaptchaToken } from "@/lib/recaptcha-server";
+import { verifyTurnstileToken } from "@/lib/recaptcha-server";
 import { RECAPTCHA_ACTIONS } from "@/lib/recaptcha";
-import { verifyNumericCaptcha } from "@/lib/numeric-captcha";
 
 /**
  * src/app/api/contact-submissions/route.ts
@@ -42,20 +41,20 @@ export async function POST(req: Request): Promise<Response> {
     return bad("Expected a JSON body.", 400);
   }
 
-  const captchaCode = typeof body.captchaCode === "string" ? body.captchaCode : undefined;
-  const captchaToken = typeof body.captchaToken === "string" ? body.captchaToken : undefined;
-  if (captchaToken && !verifyNumericCaptcha(captchaCode, captchaToken)) {
-    return bad("Incorrect security code. Please check the 4 digits and try again.", 403);
-  }
+  // Cloudflare Turnstile CAPTCHA verification
+  const turnstileToken =
+    (typeof body.turnstileToken === "string" ? body.turnstileToken : undefined) ||
+    (typeof body.recaptchaToken === "string" ? body.recaptchaToken : undefined);
 
-  const recaptchaToken =
-    typeof body.recaptchaToken === "string" ? body.recaptchaToken : undefined;
-  const recaptchaResult = await verifyRecaptchaToken(
-    recaptchaToken,
+  const turnstileResult = await verifyTurnstileToken(
+    turnstileToken,
     RECAPTCHA_ACTIONS.CONTACT
   );
-  if (!recaptchaResult.success) {
-    return bad(recaptchaResult.error || "Security verification failed.", 403);
+  if (!turnstileResult.success) {
+    return bad(
+      turnstileResult.error || "Security verification failed. Please try again.",
+      403
+    );
   }
 
   const track = String(body.track ?? "sales");

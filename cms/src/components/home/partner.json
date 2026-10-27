@@ -22,6 +22,16 @@
     },
     "alt": {
       "type": "string"
+    },
+    "width": {
+      "type": "integer"
+    },
+    "height": {
+      "type": "integer"
+    },
+    "is_revealed": {
+      "type": "boolean",
+      "default": true
     }
   }
 }

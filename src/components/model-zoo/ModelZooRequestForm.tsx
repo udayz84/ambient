@@ -4,11 +4,8 @@
 import { useEffect, useState } from "react";
 import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
-import { NumericCaptcha } from "../shared/NumericCaptcha";
 import { PRIMARY_CTA_INSET, PRIMARY_CTA_SHADOW } from "./model-zoo-data";
 import { popupField, type PopupConfig } from "@/lib/popup";
-import { getRecaptchaToken } from "@/lib/recaptcha-client";
-import { RECAPTCHA_ACTIONS } from "@/lib/recaptcha";
 
 /**
  * Figma 5428:8536 — "Model zoo form" (700×800 panel), opened by the
@@ -55,8 +52,6 @@ export function ModelZooRequestForm({ onClose, config }: { onClose: () => void; 
   });
   const [fileName, setFileName] = useState("");
   const [consent, setConsent] = useState(false);
-  const [captchaCode, setCaptchaCode] = useState("");
-  const [captchaToken, setCaptchaToken] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const uploadLabel = (popupField(config, "upload")?.label ?? "Upload Ideas")
@@ -76,17 +71,9 @@ export function ModelZooRequestForm({ onClose, config }: { onClose: () => void; 
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (loading) return;
-
-    if (!captchaCode || captchaCode.length !== 4) {
-      setError("Please enter the 4-digit security code.");
-      return;
-    }
-
     setError("");
     setLoading(true);
     try {
-      const recaptchaToken = await getRecaptchaToken(RECAPTCHA_ACTIONS.CONTACT);
       const res = await fetch("/api/contact-submissions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -103,9 +90,6 @@ export function ModelZooRequestForm({ onClose, config }: { onClose: () => void; 
             "Upload ideas": fileName,
             Source: "Model Zoo request",
           },
-          captchaCode,
-          captchaToken,
-          recaptchaToken,
         }),
       });
       if (!res.ok) {
@@ -269,13 +253,6 @@ export function ModelZooRequestForm({ onClose, config }: { onClose: () => void; 
                 className={`${INPUT_CLS} ${interRegular.className} h-[90px] w-full resize-none text-[14px] leading-[21px] text-white outline-none placeholder:text-[#4a4a4a] not-italic`}
               />
             </Field>
-
-            {/* Numeric Security Code */}
-            <NumericCaptcha
-              value={captchaCode}
-              onChange={setCaptchaCode}
-              onTokenChange={setCaptchaToken}
-            />
 
             {/* Consent + Submit — 5428:8638 */}
             <div className="flex w-full flex-col-reverse items-start gap-[16px] min-[560px]:flex-row min-[560px]:items-center min-[560px]:justify-between" data-node-id="5428:8638">

@@ -14,9 +14,7 @@ import {
 } from "./contact-shared";
 import { ContactSuccessPopup } from "./ContactSuccessPopup";
 import { Corners } from "../shared/Corners";
-import { getRecaptchaToken } from "@/lib/recaptcha-client";
-import { RECAPTCHA_ACTIONS } from "@/lib/recaptcha";
-import { NumericCaptcha } from "../shared/NumericCaptcha";
+import { CloudflareTurnstile } from "../shared/CloudflareTurnstile";
 
 type TrackId = "sales" | "developer" | "media";
 
@@ -77,8 +75,7 @@ export function ContactForm({ data }: { data?: any }) {
   const [submitted, setSubmitted] = useState(false);
   const [successDate, setSuccessDate] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
-  const [captchaCode, setCaptchaCode] = useState("");
-  const [captchaToken, setCaptchaToken] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   const heading = data?.heading || "";
   const subtitle = data?.subtitle || "";
@@ -154,14 +151,13 @@ export function ContactForm({ data }: { data?: any }) {
       setError("Please enter a valid email address.");
       return;
     }
-    if (!captchaCode || captchaCode.length !== 4) {
-      setError("Please enter the 4-digit security code.");
+    if (!turnstileToken) {
+      setError("Please complete the Cloudflare security verification.");
       return;
     }
     setError("");
     setLoading(true);
     try {
-      const recaptchaToken = await getRecaptchaToken(RECAPTCHA_ACTIONS.CONTACT);
       const res = await fetch("/api/contact-submissions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -172,9 +168,7 @@ export function ContactForm({ data }: { data?: any }) {
           message: message.trim(),
           subscribed,
           popupId: activeMergedTrack?.trackForm?.documentId,
-          recaptchaToken,
-          captchaCode,
-          captchaToken,
+          turnstileToken,
         }),
       });
       const json = await res.json().catch(() => null);
@@ -190,8 +184,12 @@ export function ContactForm({ data }: { data?: any }) {
         }).replace(/ (\d+)/, ", $1"),
       );
       setShowSuccess(true);
-    } catch {
-      setError("Could not submit right now. Please try again.");
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Could not submit right now. Please try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -283,7 +281,7 @@ export function ContactForm({ data }: { data?: any }) {
           label={textareaLabel}
           placeholder={textareaPlaceholder}
           left={16}
-          top={350}
+          top={336}
           width={560}
           height={76}
           multiline
@@ -292,16 +290,17 @@ export function ContactForm({ data }: { data?: any }) {
           onChange={setMessage}
         />
 
-        <div className="absolute top-[438px] left-[16px] w-[340px]">
-          <NumericCaptcha
-            value={captchaCode}
-            onChange={setCaptchaCode}
-            onTokenChange={setCaptchaToken}
+        <div className="absolute top-[424px] left-[16px] w-[340px]">
+          <CloudflareTurnstile
+            action="contact"
+            onVerify={setTurnstileToken}
+            onExpire={() => setTurnstileToken("")}
+            onError={() => setTurnstileToken("")}
           />
         </div>
 
         <label
-          className="absolute top-[516px] left-[16px] flex w-[558px] cursor-pointer items-center gap-[12px]"
+          className="absolute top-[522px] left-[16px] flex w-[558px] cursor-pointer items-center gap-[12px]"
           data-node-id="2379:8562"
           data-name="Check Box"
         >
@@ -343,7 +342,7 @@ export function ContactForm({ data }: { data?: any }) {
         </label>
 
         <GreenCtaButton
-          className="absolute top-[551px] left-[16px]"
+          className="absolute top-[560px] left-[16px]"
           width="558px"
           href={submitHref}
           onClick={submitted ? undefined : onSubmit}
@@ -355,7 +354,7 @@ export function ContactForm({ data }: { data?: any }) {
 
         {error ? (
           <p
-            className={`${interRegular.className} absolute top-[606px] left-[16px] w-[558px] text-[12px] leading-[18px] font-normal text-[#ff6b6b] not-italic`}
+            className={`${interRegular.className} absolute top-[612px] left-[16px] w-[558px] text-[11px] leading-[15px] font-normal text-[#ff6b6b] not-italic`}
             role="alert"
           >
             {error}

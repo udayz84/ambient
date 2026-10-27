@@ -1,9 +1,6 @@
 import { NextResponse, after } from "next/server";
 import { sendSubmissionMail } from "@/lib/notify-mail";
 import { addContactAndTag } from "@/lib/mailchimp";
-import { verifyRecaptchaToken } from "@/lib/recaptcha-server";
-import { RECAPTCHA_ACTIONS } from "@/lib/recaptcha";
-import { verifyNumericCaptcha } from "@/lib/numeric-captcha";
 
 /**
  * src/app/api/partner-inquiries/route.ts
@@ -59,22 +56,6 @@ export async function POST(req: Request): Promise<Response> {
     body = await req.json();
   } catch {
     return bad("Expected a JSON body.", 400);
-  }
-
-  const captchaCode = typeof body.captchaCode === "string" ? body.captchaCode : undefined;
-  const captchaToken = typeof body.captchaToken === "string" ? body.captchaToken : undefined;
-  if (captchaToken && !verifyNumericCaptcha(captchaCode, captchaToken)) {
-    return bad("Incorrect security code. Please check the 4 digits and try again.", 403);
-  }
-
-  const recaptchaToken =
-    typeof body.recaptchaToken === "string" ? body.recaptchaToken : undefined;
-  const recaptchaResult = await verifyRecaptchaToken(
-    recaptchaToken,
-    RECAPTCHA_ACTIONS.PARTNER_INQUIRY
-  );
-  if (!recaptchaResult.success) {
-    return bad(recaptchaResult.error || "Security verification failed.", 403);
   }
 
   const firstName = String(body.firstName ?? "").trim();

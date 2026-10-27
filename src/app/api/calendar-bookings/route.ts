@@ -1,8 +1,5 @@
 import { NextResponse } from "next/server";
 import { sendSubmissionMail } from "@/lib/notify-mail";
-import { verifyRecaptchaToken } from "@/lib/recaptcha-server";
-import { RECAPTCHA_ACTIONS } from "@/lib/recaptcha";
-import { verifyNumericCaptcha } from "@/lib/numeric-captcha";
 
 /**
  * src/app/api/calendar-bookings/route.ts
@@ -32,24 +29,6 @@ export async function POST(req: Request): Promise<Response> {
     body = await req.json();
   } catch {
     return bad("Expected a JSON body.", 400);
-  }
-
-  const recaptchaToken =
-    typeof body.recaptchaToken === "string" ? body.recaptchaToken : undefined;
-  const recaptchaResult = await verifyRecaptchaToken(
-    recaptchaToken,
-    RECAPTCHA_ACTIONS.CALENDAR_BOOKING
-  );
-  if (!recaptchaResult.success) {
-    return bad(recaptchaResult.error || "Security verification failed.", 403);
-  }
-
-  const captchaCode = typeof body.captchaCode === "string" ? body.captchaCode : undefined;
-  const captchaToken = typeof body.captchaToken === "string" ? body.captchaToken : undefined;
-  if (captchaCode || captchaToken) {
-    if (!verifyNumericCaptcha(captchaCode, captchaToken)) {
-      return bad("Security code verification failed. Please enter the correct code.", 403);
-    }
   }
 
   const meetingTitle = String(body.meetingTitle ?? "").trim().slice(0, 200);

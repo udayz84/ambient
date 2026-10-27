@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import { interRegular, gilroySemiBold } from "../hero/fonts";
-import { getRecaptchaToken } from "@/lib/recaptcha-client";
-import { RECAPTCHA_ACTIONS } from "@/lib/recaptcha";
 
 /**
  * Client-side form extracted from NewsletterSignup (server component).
@@ -21,7 +19,7 @@ export function NewsletterForm({
 }) {
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!e.currentTarget.reportValidity()) return;
     const formData = new FormData(e.currentTarget);
@@ -30,13 +28,11 @@ export function NewsletterForm({
 
     setSubmitted(true);
 
-    const recaptchaToken = await getRecaptchaToken(RECAPTCHA_ACTIONS.NEWSLETTER);
-
     // Sync to Mailchimp via server-side API (fire-and-forget)
     fetch("/api/newsletter", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, formKey: "newsletter", recaptchaToken }),
+      body: JSON.stringify({ email, formKey: "newsletter" }),
     }).catch(() => { /* silently ignore */ });
   };
 

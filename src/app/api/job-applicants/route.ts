@@ -1,9 +1,6 @@
 import { NextResponse, after } from "next/server";
 import { sendSubmissionMail, type MailAttachment } from "@/lib/notify-mail";
 import { addContactAndTag } from "@/lib/mailchimp";
-import { verifyRecaptchaToken } from "@/lib/recaptcha-server";
-import { RECAPTCHA_ACTIONS } from "@/lib/recaptcha";
-import { verifyNumericCaptcha } from "@/lib/numeric-captcha";
 
 /**
  * src/app/api/job-applicants/route.ts
@@ -38,27 +35,6 @@ export async function POST(req: Request): Promise<Response> {
     incoming = await req.formData();
   } catch {
     return bad("Expected multipart/form-data.", 400);
-  }
-
-  const captchaCode = incoming.get("captchaCode")
-    ? String(incoming.get("captchaCode"))
-    : undefined;
-  const captchaToken = incoming.get("captchaToken")
-    ? String(incoming.get("captchaToken"))
-    : undefined;
-  if (captchaToken && !verifyNumericCaptcha(captchaCode, captchaToken)) {
-    return bad("Incorrect security code. Please check the 4 digits and try again.", 403);
-  }
-
-  const recaptchaToken = incoming.get("recaptchaToken")
-    ? String(incoming.get("recaptchaToken"))
-    : undefined;
-  const recaptchaResult = await verifyRecaptchaToken(
-    recaptchaToken,
-    RECAPTCHA_ACTIONS.JOB_APPLICATION
-  );
-  if (!recaptchaResult.success) {
-    return bad(recaptchaResult.error || "Security verification failed.", 403);
   }
 
   const fullName = String(incoming.get("fullName") ?? "").trim();

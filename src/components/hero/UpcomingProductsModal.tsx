@@ -5,11 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
-import { NumericCaptcha } from "../shared/NumericCaptcha";
 import { BOX_BORDER } from "../careers/careers-shared";
 import { popupField, type PopupConfig } from "@/lib/popup";
-import { getRecaptchaToken } from "@/lib/recaptcha-client";
-import { RECAPTCHA_ACTIONS } from "@/lib/recaptcha";
 
 const PANEL_BG = "/form.png";
 const SUCCESS_IMG = "/careers/apply-success.webp";
@@ -191,9 +188,6 @@ function FormStep({
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
   const [chip, setChip] = useState("");
-  const [captchaCode, setCaptchaCode] = useState("");
-  const [captchaToken, setCaptchaToken] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const isSom =
@@ -213,12 +207,6 @@ function FormStep({
     e.preventDefault();
     if (isSubmitting) return;
 
-    if (!captchaCode || captchaCode.length !== 4) {
-      setErrorMessage("Please enter the 4-digit security code.");
-      return;
-    }
-
-    setErrorMessage("");
     setIsSubmitting(true);
     try {
       // Map formContext to Mailchimp form key
@@ -243,11 +231,7 @@ function FormStep({
         }
       }
 
-      const recaptchaToken = await getRecaptchaToken(
-        RECAPTCHA_ACTIONS.NEWSLETTER
-      );
-
-      const res = await fetch("/api/newsletter", {
+      await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -260,16 +244,8 @@ function FormStep({
           product: resolvedVariant,
           variant: isSom ? somVariant : undefined,
           popupId: config?.documentId,
-          captchaCode,
-          captchaToken,
-          recaptchaToken,
         }),
-      });
-
-      if (!res.ok) {
-        const body = await res.json().catch(() => null);
-        throw new Error(body?.error || "Submission failed. Please check your security code.");
-      }
+      }).catch(() => { /* Mailchimp sync failure is non-blocking */ });
 
       if (pdfUrl) {
         const a = document.createElement("a");
@@ -464,13 +440,6 @@ function FormStep({
             required
           />
         </Field>
-
-        <NumericCaptcha
-          value={captchaCode}
-          onChange={setCaptchaCode}
-          onTokenChange={setCaptchaToken}
-          error={errorMessage}
-        />
 
         <div className="pt-[8px]">
           <button

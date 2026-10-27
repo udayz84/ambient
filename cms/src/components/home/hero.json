@@ -20,6 +20,22 @@
     "video_alt": {
       "type": "string"
     },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images", "files"]
+    },
+    "image_alt": {
+      "type": "string"
+    },
+    "mobile_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images", "files"]
+    },
+    "mobile_image_alt": {
+      "type": "string"
+    },
     "mobile_video": {
       "type": "media",
       "multiple": false,

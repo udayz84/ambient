@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { useState } from "react";
 import { ApplicationsCategoryNav } from "./ApplicationsCategoryNav";
 import { ApplicationsCta } from "./ApplicationsCta";
@@ -13,15 +15,26 @@ const INITIAL_ACTIVE_INDEX = 0;
 
 export function Applications({ data }: { data?: any }) {
   const baseTabs: any[] = Array.isArray(data?.tabs) ? data.tabs : [];
+  const buildTabConfig = data?.build_tab;
+  const buildTabEnabled = buildTabConfig ? buildTabConfig.enabled !== false : true;
+
   const tabs = [
     ...baseTabs,
-    {
-      label: "BUILD",
-      watermark_text: "BUILD YOUR OWN APPLICATION",
-      isBuild: true,
-      feature_cards: [],
-      hero_image: null,
-    }
+    ...(buildTabEnabled
+      ? [
+          {
+            label: buildTabConfig?.label || "BUILD",
+            watermark_text:
+              buildTabConfig?.watermark_line_1 && buildTabConfig?.watermark_line_2
+                ? `${buildTabConfig.watermark_line_1} ${buildTabConfig.watermark_line_2}`
+                : (buildTabConfig?.watermark_line_1 || "BUILD YOUR OWN APPLICATION"),
+            isBuild: true,
+            buildData: buildTabConfig,
+            feature_cards: [],
+            hero_image: null,
+          },
+        ]
+      : []),
   ];
 
   // NOTE: `active_tab` is NOT a field in the Strapi `home.applications` schema,

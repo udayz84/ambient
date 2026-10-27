@@ -5,6 +5,22 @@
   "attributes": {
     "tag": { "type": "component", "repeatable": false, "component": "shared.tag" },
     "heading": { "type": "string", "required": true },
+    "subtitle": { "type": "text" },
+    "background_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images", "files"]
+    },
+    "gradient_top": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images", "files"]
+    },
+    "gradient_bottom": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images", "files"]
+    },
     "stat_cards": { "type": "component", "repeatable": true, "component": "shared.stat-card" },
     "ctas": { "type": "component", "repeatable": true, "component": "shared.button" }
   }

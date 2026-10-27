@@ -12,9 +12,6 @@ import {
   PartnersGreenCta,
   PartnersSectionHeading,
 } from "./partners-shared";
-import { getRecaptchaToken } from "@/lib/recaptcha-client";
-import { RECAPTCHA_ACTIONS } from "@/lib/recaptcha";
-import { NumericCaptcha } from "../shared/NumericCaptcha";
 
 type FormState = {
   firstName: string;
@@ -69,8 +66,6 @@ export function PartnersMatchForm({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const [captchaCode, setCaptchaCode] = useState("");
-  const [captchaToken, setCaptchaToken] = useState("");
 
   const set = (key: keyof FormState) => (value: string) =>
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -86,7 +81,6 @@ export function PartnersMatchForm({
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) return "Please enter a valid email address.";
     if (isCasualEmailDomain(form.email.trim())) return content.emailHint;
     if (!form.region) return "Please select your region.";
-    if (!captchaCode || captchaCode.length !== 4) return "Please enter the 4-digit security code.";
     return "";
   };
 
@@ -99,9 +93,6 @@ export function PartnersMatchForm({
     setError("");
     setLoading(true);
     try {
-      const recaptchaToken = await getRecaptchaToken(
-        RECAPTCHA_ACTIONS.PARTNER_INQUIRY
-      );
       const res = await fetch("/api/partner-inquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -114,9 +105,6 @@ export function PartnersMatchForm({
           helpAreas,
           message: form.message.trim(),
           popupId: config?.documentId,
-          recaptchaToken,
-          captchaCode,
-          captchaToken,
         }),
       });
       const json = await res.json().catch(() => null);
@@ -227,14 +215,6 @@ export function PartnersMatchForm({
           <div className={`${inputBoxClass} min-h-[120px]`}>
             <textarea id={`${idPrefix}pm-message`} className={`${inputClass} h-full resize-none`} rows={4} value={form.message} onChange={(e) => set("message")(e.target.value)} />
           </div>
-        </div>
-
-        <div className="w-full max-w-[340px] py-[4px]">
-          <NumericCaptcha
-            value={captchaCode}
-            onChange={setCaptchaCode}
-            onTokenChange={setCaptchaToken}
-          />
         </div>
 
         {error ? (

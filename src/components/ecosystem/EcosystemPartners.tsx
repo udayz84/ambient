@@ -1,6 +1,9 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { gilroySemiBold } from "../hero/fonts";
+import { mediaUrl } from "@/lib/strapi";
 import { CAROUSEL_ALL_SLOTS, type CarouselSlot } from "./ecosystem-data";
 
 /**
@@ -17,13 +20,29 @@ const TITLE_GRADIENT =
 const MARQUEE_DURATION_S = 40;
 
 /**
- * The carousel always renders the current partner set from
- * ecosystem-data.ts (CAROUSEL_ALL_SLOTS — the real, recently added partner
- * logos in /public/ecosystem/partners/). The Strapi placeholder entries
- * ("Partner 1–5", generic white SVGs) are intentionally NOT used.
+ * Renders partners from Strapi if populated with valid logos.
+ * Falls back to CAROUSEL_ALL_SLOTS from ecosystem-data.ts when empty.
  */
-function resolveSlots(_data: any): readonly CarouselSlot[] {
-  void _data; // intentionally unused: CMS placeholders not rendered
+function resolveSlots(data: any): readonly CarouselSlot[] {
+  const partners = Array.isArray(data?.partners) && data.partners.length > 0 ? data.partners : null;
+  if (partners) {
+    const cmsSlots = partners
+      .map((p: any) => {
+        const src = mediaUrl(p.logo) || (typeof p.logo === "string" ? p.logo : null);
+        if (!src) return null;
+        return {
+          name: p.name || "",
+          src,
+          width: p.width || 120,
+          height: p.height || 40,
+        };
+      })
+      .filter(Boolean) as CarouselSlot[];
+
+    if (cmsSlots.length > 0) {
+      return cmsSlots;
+    }
+  }
   return CAROUSEL_ALL_SLOTS;
 }
 

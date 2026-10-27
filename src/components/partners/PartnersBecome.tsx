@@ -17,9 +17,6 @@ import {
   PartnersGreenCta,
   WireframeIcon,
 } from "./partners-shared";
-import { getRecaptchaToken } from "@/lib/recaptcha-client";
-import { RECAPTCHA_ACTIONS } from "@/lib/recaptcha";
-import { NumericCaptcha } from "../shared/NumericCaptcha";
 
 type ApplyState = {
   name: string;
@@ -74,8 +71,6 @@ export function PartnersBecome({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const [captchaCode, setCaptchaCode] = useState("");
-  const [captchaToken, setCaptchaToken] = useState("");
 
   const set = (key: keyof ApplyState) => (value: string) =>
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -92,13 +87,9 @@ export function PartnersBecome({
     if (isCasualEmailDomain(form.email.trim())) return setError("Please use your work email personal email domains are blocked.");
     if (!form.region) return setError("Please select your region.");
     if (selectedCapabilities.length === 0) return setError("Please select at least one capability area.");
-    if (!captchaCode || captchaCode.length !== 4) return setError("Please enter the 4-digit security code.");
     setError("");
     setLoading(true);
     try {
-      const recaptchaToken = await getRecaptchaToken(
-        RECAPTCHA_ACTIONS.PARTNER_APPLICATION
-      );
       const res = await fetch("/api/partner-applications", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -111,9 +102,6 @@ export function PartnersBecome({
           capabilities: selectedCapabilities,
           experience: form.experience.trim(),
           popupId: config?.documentId,
-          recaptchaToken,
-          captchaCode,
-          captchaToken,
         }),
       });
       const json = await res.json().catch(() => null);
@@ -224,14 +212,6 @@ export function PartnersBecome({
           <div className={`${inputBox} min-h-[120px]`}>
             <textarea id={`${idPrefix}pa-experience`} className={`${inputCls} h-full resize-none`} rows={4} value={form.experience} onChange={(e) => set("experience")(e.target.value)} />
           </div>
-        </div>
-
-        <div className="max-w-[340px] py-[4px]">
-          <NumericCaptcha
-            value={captchaCode}
-            onChange={setCaptchaCode}
-            onTokenChange={setCaptchaToken}
-          />
         </div>
 
         {error ? (

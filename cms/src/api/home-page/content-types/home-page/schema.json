@@ -27,6 +27,11 @@
       "repeatable": false,
       "component": "products.case-studies"
     },
+    "wins": {
+      "type": "component",
+      "repeatable": false,
+      "component": "apps.wins"
+    },
     "clients": {
       "type": "component",
       "repeatable": false,

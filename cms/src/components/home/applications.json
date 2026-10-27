@@ -6,6 +6,7 @@
     "heading": { "type": "string", "required": true },
     "subtitle": { "type": "text" },
     "tabs": { "type": "component", "repeatable": true, "component": "home.app-tab" },
+    "build_tab": { "type": "component", "repeatable": false, "component": "home.build-tab" },
     "cta": { "type": "component", "repeatable": false, "component": "shared.cta" }
   }
 }

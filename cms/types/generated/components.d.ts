@@ -1116,10 +1116,33 @@ export interface HomeApplications extends Struct.ComponentSchema {
     displayName: 'Applications';
   };
   attributes: {
+    build_tab: Schema.Attribute.Component<'home.build-tab', false>;
     cta: Schema.Attribute.Component<'shared.cta', false>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     subtitle: Schema.Attribute.Text;
     tabs: Schema.Attribute.Component<'home.app-tab', true>;
+  };
+}
+
+export interface HomeBuildTab extends Struct.ComponentSchema {
+  collectionName: 'components_home_build_tabs';
+  info: {
+    description: 'Custom Build Application tab for the applications section';
+    displayName: 'Build Tab';
+  };
+  attributes: {
+    background_image: Schema.Attribute.Media<'images' | 'files'>;
+    cta_href: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'/model-zoo'>;
+    cta_label: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Explore Model Zoo'>;
+    cube_image: Schema.Attribute.Media<'images' | 'files'>;
+    enabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    label: Schema.Attribute.String & Schema.Attribute.DefaultTo<'BUILD'>;
+    watermark_line_1: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'BUILD YOUR'>;
+    watermark_line_2: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'APPLICATION'>;
   };
 }
 
@@ -1175,6 +1198,7 @@ export interface HomeEcosystem extends Struct.ComponentSchema {
     cta: Schema.Attribute.Component<'shared.cta', false>;
     development_partners: Schema.Attribute.Component<'home.partner', true>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
+    partners: Schema.Attribute.Component<'home.partner', true>;
     silicon_partners: Schema.Attribute.Component<'home.partner', true>;
     subtitle: Schema.Attribute.Text;
   };
@@ -1205,7 +1229,11 @@ export interface HomeHero extends Struct.ComponentSchema {
   };
   attributes: {
     announcements: Schema.Attribute.Component<'home.hero-announcement', true>;
+    image: Schema.Attribute.Media<'images' | 'files'>;
+    image_alt: Schema.Attribute.String;
     metrics: Schema.Attribute.Component<'home.hero-metric', true>;
+    mobile_image: Schema.Attribute.Media<'images' | 'files'>;
+    mobile_image_alt: Schema.Attribute.String;
     mobile_video: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
@@ -1270,9 +1298,13 @@ export interface HomeMeasuredProof extends Struct.ComponentSchema {
     displayName: 'Measured Proof';
   };
   attributes: {
+    background_image: Schema.Attribute.Media<'images' | 'files'>;
     ctas: Schema.Attribute.Component<'shared.button', true>;
+    gradient_bottom: Schema.Attribute.Media<'images' | 'files'>;
+    gradient_top: Schema.Attribute.Media<'images' | 'files'>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     stat_cards: Schema.Attribute.Component<'shared.stat-card', true>;
+    subtitle: Schema.Attribute.Text;
     tag: Schema.Attribute.Component<'shared.tag', false>;
   };
 }
@@ -1321,8 +1353,11 @@ export interface HomePartner extends Struct.ComponentSchema {
   };
   attributes: {
     alt: Schema.Attribute.String;
+    height: Schema.Attribute.Integer;
+    is_revealed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     name: Schema.Attribute.String;
+    width: Schema.Attribute.Integer;
   };
 }
 
@@ -3627,6 +3662,7 @@ declare module '@strapi/strapi' {
       'home.app-feature-card': HomeAppFeatureCard;
       'home.app-tab': HomeAppTab;
       'home.applications': HomeApplications;
+      'home.build-tab': HomeBuildTab;
       'home.clients': HomeClients;
       'home.dev-card': HomeDevCard;
       'home.developer-platform': HomeDeveloperPlatform;
