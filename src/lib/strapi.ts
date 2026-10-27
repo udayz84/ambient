@@ -106,10 +106,11 @@ export function buildPopulate(sections: PopulateSection[]): string {
           for (const s of split) {
             queryStr += `[populate][${s}]`;
           }
-          queryStr += `=true`;
+          queryStr += `[populate]=*`;
           parts.push(queryStr);
         } else {
-          parts.push(`populate[${section}][populate][${field}]=true`);
+          // Use [populate]=* for media fields — Strapi v5 rejects =true on media
+          parts.push(`populate[${section}][populate][${field}][populate]=*`);
         }
       }
       for (const n of nested) {
