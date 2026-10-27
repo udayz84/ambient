@@ -39,6 +39,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Home() {
   let data: any = null;
   try {
+    // Fetch all sections except applications (fetched separately below to isolate failures)
     data = await getSingleType<any>("home-page", [
       {
         section: "hero",
@@ -46,11 +47,14 @@ export default async function Home() {
         nested: ["metrics", "announcements.image", "announcements.ctas"],
       },
       "hero_form",
+      // NOTE: do NOT list a field in both `fields` and `nested` for the same parent —
+      // Strapi v5 treats them as conflicting populate params and returns a 500.
+      // If the parent is in `nested`, its children (including media) are already
+      // populated via [populate]=* — no need to also list sub-fields.
       { section: "measured_proof", nested: ["tag", "stat_cards", "ctas"] },
       { section: "clients", nested: ["tag", "clients"] },
       { section: "technology", nested: ["tag", "features", "image", "cta"] },
       { section: "platform_scale", nested: ["products", "cta", "secondary_cta"] },
-      { section: "applications", nested: ["tabs", "cta"] },
       { section: "model_zoo_kits", nested: ["cards"] },
       { section: "developer_platform", nested: ["cards"] },
       { section: "ecosystem", nested: ["silicon_partners", "development_partners", "cta"] },
@@ -59,6 +63,24 @@ export default async function Home() {
     ]);
   } catch {
     data = null;
+  }
+
+  // Fetch applications separately — build_tab component requires a DB migration
+  // (components_home_build_tabs table). If it doesn't exist yet, Strapi returns
+  // a 500 that would otherwise wipe all homepage data. Once Strapi is restarted
+  // with the new schema, build_tab fields can be moved back into the main fetch.
+  try {
+    // tabs are in nested — hero_image/mobile_hero_image are included via [populate]=*
+    const appsData = await getSingleType<any>("home-page", [
+      { section: "applications", nested: ["tabs", "cta"] },
+    ]);
+    if (appsData?.applications && data) {
+      data.applications = appsData.applications;
+    } else if (appsData?.applications) {
+      data = appsData;
+    }
+  } catch {
+    // applications section unavailable — section will not render
   }
 
   // Case Studies: fetch applications-page wins so all pages share the same content and images
