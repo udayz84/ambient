@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Script from "next/script";
 
 /**
  * TabletScaleInit enables pixel-perfect proportional scaling for desktop layouts
@@ -36,8 +37,9 @@ export function TabletScaleInit() {
   }, []);
 
   return (
-    <script
+    <Script
       id="tablet-scale-init"
+      strategy="afterInteractive"
       dangerouslySetInnerHTML={{
         __html: `(function(){try{var d=document.documentElement,w=d.clientWidth||window.innerWidth;if(w>=600&&w<1440){d.style.setProperty('--tablet-zoom',(w/1440).toFixed(5));}}catch(e){}})();`,
       }}

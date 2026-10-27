@@ -42,37 +42,19 @@ export default async function Home() {
     data = await getSingleType<any>("home-page", [
       {
         section: "hero",
-        fields: ["video", "mobile_video", "image", "mobile_image"],
+        fields: ["video", "mobile_video"],
         nested: ["metrics", "announcements.image", "announcements.ctas"],
       },
       "hero_form",
-      {
-        section: "measured_proof",
-        fields: ["background_image", "gradient_top", "gradient_bottom", "stat_cards.image"],
-        nested: ["tag", "stat_cards", "ctas"],
-      },
+      { section: "measured_proof", nested: ["tag", "stat_cards", "ctas"] },
       { section: "clients", nested: ["tag", "clients"] },
       { section: "technology", nested: ["tag", "features", "image", "cta"] },
       { section: "platform_scale", nested: ["products", "cta", "secondary_cta"] },
-      {
-        section: "applications",
-        fields: [
-          "tabs.hero_image",
-          "tabs.mobile_hero_image",
-          "build_tab.cube_image",
-          "build_tab.background_image",
-        ],
-        nested: ["tabs.feature_cards", "build_tab", "cta"],
-      },
+      { section: "applications", nested: ["tabs", "cta"] },
       { section: "model_zoo_kits", nested: ["cards"] },
       { section: "developer_platform", nested: ["cards"] },
-      {
-        section: "ecosystem",
-        fields: ["partners.logo", "silicon_partners.logo", "development_partners.logo"],
-        nested: ["partners", "silicon_partners", "development_partners", "cta"],
-      },
+      { section: "ecosystem", nested: ["silicon_partners", "development_partners", "cta"] },
       { section: "latest_news", nested: ["cards"] },
-      { section: "wins", fields: ["cards.image"], nested: ["cards.buttons"] },
       "seo",
     ]);
   } catch {
@@ -83,7 +65,7 @@ export default async function Home() {
   let winsData: any = null;
   try {
     const appData = await getSingleType<any>("applications-page", [
-      { section: "wins", fields: ["cards.image"], nested: ["cards.buttons"] },
+      { section: "wins", nested: ["cards"] },
     ]);
     winsData = appData?.wins || null;
   } catch {
@@ -111,7 +93,7 @@ export default async function Home() {
       <TabletScaleInit />
       {data?.hero && <HeroCarousel data={data.hero} formConfig={data.hero_form} />}
       {data?.measured_proof && <MeasuredProof data={data.measured_proof} />}
-      <ApplicationsPageWins data={data?.wins || winsData} />
+      <ApplicationsPageWins data={winsData} />
       {/* <EcosystemMarqueeStrip data={data?.clients} /> */}
       {data?.technology && <Technology data={data.technology} />}
       {data?.platform_scale && <PlatformScale data={data.platform_scale} />}
