@@ -2,9 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
-import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 import { gilroyBold, gilroyMedium, interRegular, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
@@ -107,10 +105,17 @@ function WinCard({ label, stat, statLabel, visual, body, buttons, muted }: WinCa
           <div className="flex flex-wrap gap-[8px] mt-[10px]">
             {buttons.map((btn: any, i: number) => {
               const soon = (btn.label ?? "").trim().toLowerCase() === "coming soon";
+              const isCaseStudy = /case study/i.test(btn?.label || "");
+              const href = isCaseStudy && (!btn?.href || btn?.href === "#")
+                ? "/case-studies/MAI-case-study.pdf"
+                : btn?.href || "#";
+              const isExternalOrPdf = isCaseStudy || href.endsWith(".pdf") || href.startsWith("http");
               return (
                 <a
                   key={i}
-                  href={btn.href || "#"}
+                  href={href}
+                  target={isExternalOrPdf ? "_blank" : undefined}
+                  rel={isExternalOrPdf ? "noopener noreferrer" : undefined}
                   className={`${gilroyMedium.className} flex items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[12px] py-[6px] text-[12px] uppercase transition-colors ${soon ? "text-[#a4a4a4]" : "text-white hover:bg-[rgba(226,241,202,0.2)]"}`}
                 >
                   {btn.label}
@@ -129,11 +134,15 @@ function SecondaryCta({
   href,
   onClick,
   disabled,
+  target,
+  rel,
 }: {
   label: string;
   href?: string;
   onClick?: (e: React.MouseEvent) => void;
   disabled?: boolean;
+  target?: string;
+  rel?: string;
 }) {
   const isSoon = disabled || (label ?? "").trim().toLowerCase() === "coming soon";
 
@@ -155,6 +164,8 @@ function SecondaryCta({
     <a
       href={href || "#"}
       onClick={onClick}
+      target={target}
+      rel={rel}
       className={`${gilroyMedium.className} relative flex h-[48px] w-auto min-w-[223px] shrink-0 cursor-pointer items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] bg-[rgba(226,241,202,0.12)] px-[24px] transition-colors duration-300 hover:bg-[#45c418] hover:border-[#45c418] hover:shadow-[0px_0px_15px_rgba(69,196,24,0.4)]`}
     >
       <span className="relative text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
@@ -204,10 +215,17 @@ function WinCardMobile({ label, stat, statLabel, mobileImg, body, buttons, muted
           <div className="flex flex-wrap gap-[8px] mt-[6px]">
             {buttons.map((btn: any, i: number) => {
               const soon = (btn.label ?? "").trim().toLowerCase() === "coming soon";
+              const isCaseStudy = /case study/i.test(btn?.label || "");
+              const href = isCaseStudy && (!btn?.href || btn?.href === "#")
+                ? "/case-studies/MAI-case-study.pdf"
+                : btn?.href || "#";
+              const isExternalOrPdf = isCaseStudy || href.endsWith(".pdf") || href.startsWith("http");
               return (
                 <a
                   key={i}
-                  href={btn.href || "#"}
+                  href={href}
+                  target={isExternalOrPdf ? "_blank" : undefined}
+                  rel={isExternalOrPdf ? "noopener noreferrer" : undefined}
                   className={`${gilroyMedium.className} flex items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[12px] py-[6px] text-[12px] uppercase transition-colors ${soon ? "opacity-50 text-[#a4a4a4] cursor-default pointer-events-none" : "text-white hover:bg-[rgba(226,241,202,0.2)]"}`}
                 >
                   {btn.label}
@@ -306,7 +324,7 @@ const CARDS = [
     body: "In DimensionNXG’s MAI wearable, GPX10 Pro recognizes falls and assault patterns on-device at >98% accuracy and still runs 14 days on a 200 mAh cell. Detection stays local and private; the radio fires only when there’s a real event to report.",
     visual: WIN_VISUALS[1],
     mobileImg: "/applications/wins-img-2.webp",
-    buttons: [{ label: "READ CASE STUDY", href: "#" }],
+    buttons: [{ label: "READ CASE STUDY", href: "/case-studies/MAI-case-study.pdf" }],
   },
   {
     label: "The Industrial Win",
@@ -320,7 +338,6 @@ const CARDS = [
 ];
 
 export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
-  const [caseStudyOpen, setCaseStudyOpen] = useState(false);
   const eyebrow = data?.eyebrow || "Proven in production";
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   const heading = data?.heading || FALLBACK_HEADING;
@@ -340,6 +357,19 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
           else if (i === 2) visual = <VisualAr img={mobileImg} key="ar" />;
           else visual = <VisualWearable img={mobileImg} key={`extra-${i}`} />;
 
+          const fallbackButtons = CARDS[i]?.buttons || [];
+          const rawButtons = Array.isArray(c?.buttons) && c.buttons.length > 0 ? c.buttons : fallbackButtons;
+          const buttons = rawButtons.map((btn: any) => {
+            const isCaseStudy = /case study/i.test(btn?.label || "");
+            const href = isCaseStudy && (!btn?.href || btn?.href === "#")
+              ? "/case-studies/MAI-case-study.pdf"
+              : btn?.href || "#";
+            return {
+              ...btn,
+              href,
+            };
+          });
+
           return {
             label: c?.label || CARDS[i]?.label || "",
             stat: c?.stat || CARDS[i]?.stat || "",
@@ -347,7 +377,7 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
             visual,
             mobileImg,
             body: c?.body || body,
-            buttons: (Array.isArray(c?.buttons) && c.buttons.length > 0) ? c.buttons : (CARDS[i]?.buttons || []),
+            buttons,
           };
         })
       : CARDS;
@@ -423,21 +453,22 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
               />
               {card.buttons && card.buttons.length > 0 && (
                 <div className="flex flex-col gap-[8px] items-center">
-                  {card.buttons.map((btn: any, i: number) => (
-                    <SecondaryCta
-                      key={i}
-                      label={btn.label}
-                      href={btn.href}
-                      onClick={
-                        (btn.label ?? "").trim().toLowerCase() === "coming soon"
-                          ? undefined
-                          : (e) => {
-                              e.preventDefault();
-                              setCaseStudyOpen(true);
-                            }
-                      }
-                    />
-                  ))}
+                  {card.buttons.map((btn: any, i: number) => {
+                    const isCaseStudy = /case study/i.test(btn?.label || "");
+                    const href = isCaseStudy && (!btn?.href || btn?.href === "#")
+                      ? "/case-studies/MAI-case-study.pdf"
+                      : btn?.href || "#";
+                    const isExternalOrPdf = isCaseStudy || href.endsWith(".pdf") || href.startsWith("http");
+                    return (
+                      <SecondaryCta
+                        key={i}
+                        label={btn.label}
+                        href={href}
+                        target={isExternalOrPdf ? "_blank" : undefined}
+                        rel={isExternalOrPdf ? "noopener noreferrer" : undefined}
+                      />
+                    );
+                  })}
                 </div>
               )}
             </div>
@@ -540,21 +571,22 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
               />
               {card.buttons && card.buttons.length > 0 && (
                 <div className="flex flex-col gap-[8px] items-center w-full px-[8px]">
-                  {card.buttons.map((btn: any, i: number) => (
-                    <SecondaryCta
-                      key={i}
-                      label={btn.label}
-                      href={btn.href}
-                      onClick={
-                        (btn.label ?? "").trim().toLowerCase() === "coming soon"
-                          ? undefined
-                          : (e) => {
-                              e.preventDefault();
-                              setCaseStudyOpen(true);
-                            }
-                      }
-                    />
-                  ))}
+                  {card.buttons.map((btn: any, i: number) => {
+                    const isCaseStudy = /case study/i.test(btn?.label || "");
+                    const href = isCaseStudy && (!btn?.href || btn?.href === "#")
+                      ? "/case-studies/MAI-case-study.pdf"
+                      : btn?.href || "#";
+                    const isExternalOrPdf = isCaseStudy || href.endsWith(".pdf") || href.startsWith("http");
+                    return (
+                      <SecondaryCta
+                        key={i}
+                        label={btn.label}
+                        href={href}
+                        target={isExternalOrPdf ? "_blank" : undefined}
+                        rel={isExternalOrPdf ? "noopener noreferrer" : undefined}
+                      />
+                    );
+                  })}
                 </div>
               )}
             </div>
@@ -563,15 +595,6 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
 
 
       </div>
-
-      <UpcomingProductsModal
-        isOpen={caseStudyOpen}
-        onClose={() => setCaseStudyOpen(false)}
-        formContext="case-study"
-        pdfUrl="/case-studies/MAI-case-study.pdf"
-        pdfName="MAI-case-study.pdf"
-        closeLabel="Back to Page"
-      />
     </section>
   );
 }
