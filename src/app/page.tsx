@@ -116,6 +116,7 @@ export default async function Home() {
       {data?.hero && <HeroCarousel data={data.hero} formConfig={data.hero_form} />}
       {data?.measured_proof && <MeasuredProof data={data.measured_proof} />}
       <div id="case-studies" className="scroll-mt-[90px]">
+        <div id="casestudies" className="scroll-mt-[90px]" />
         <ApplicationsPageWins data={winsData} />
       </div>
       {/* <EcosystemMarqueeStrip data={data?.clients} /> */}

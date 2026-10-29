@@ -25,15 +25,21 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
 
   // Helper to scroll to a target element smoothly via Locomotive/Lenis
   const scrollToTarget = useCallback((targetId: string, immediate = false) => {
-    const cleanId = targetId.replace(/^[#/]+/, "");
+    let cleanId = targetId.replace(/^[#/]+/, "");
     if (!cleanId) return;
 
-    const element = document.getElementById(cleanId);
+    if (cleanId === "casestudies") cleanId = "case-studies";
+
+    const element =
+      document.getElementById(cleanId) ||
+      (cleanId === "case-studies" ? document.getElementById("casestudies") : null) ||
+      (cleanId.includes("case") ? document.getElementById("case-studies") : null);
+
     if (!element) return;
 
     const scrollInstance = locomotiveRef.current || (window as unknown as { locomotiveScroll?: LocomotiveScroll }).locomotiveScroll;
     if (scrollInstance && typeof scrollInstance.scrollTo === "function") {
-      scrollInstance.scrollTo(element, { offset: -90, immediate });
+      scrollInstance.scrollTo(element, { offset: -90, immediate, force: true } as any);
     } else {
       const top = element.getBoundingClientRect().top + window.scrollY - 90;
       window.scrollTo({ top, behavior: immediate ? "auto" : "smooth" });
@@ -54,7 +60,7 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       scrollToTarget(hash, false);
 
       // Staggered retries to account for image/layout hydration and reflow
-      const timers = [100, 300, 600, 1000].map((delay) =>
+      const timers = [50, 150, 300, 600, 1000, 1500].map((delay) =>
         setTimeout(() => {
           scrollToTarget(hash, false);
         }, delay)
@@ -85,7 +91,24 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       if (!anchor) return;
       if (anchor.target === "_blank") return;
 
-      const href = anchor.getAttribute("href");
+      const href = anchor.getAttribute("href") || "";
+      const text = (anchor.textContent || "").trim();
+
+      // Case Studies special interception (by label or by href)
+      const isCaseStudies = /case\s*stud/i.test(text) || /case-?studies/i.test(href);
+      if (isCaseStudies) {
+        if (pathname === "/" || pathname === "") {
+          e.preventDefault();
+          window.history.pushState(null, "", "/#case-studies");
+          scrollToTarget("case-studies");
+          return;
+        } else {
+          e.preventDefault();
+          window.location.href = "/#case-studies";
+          return;
+        }
+      }
+
       if (!href) return;
 
       // 1. Pure in-page hash: "#case-studies"

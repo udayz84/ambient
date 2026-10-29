@@ -35,6 +35,11 @@ const nextConfig: NextConfig = {
         permanent: false,
       },
       {
+        source: "/casestudies",
+        destination: "/#case-studies",
+        permanent: false,
+      },
+      {
         source: "/developers",
         destination: "/developer",
         permanent: true,

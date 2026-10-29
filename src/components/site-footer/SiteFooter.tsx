@@ -12,20 +12,29 @@ import {
 import { NewsletterSignup } from "./NewsletterSignup";
 import { mediaUrl } from "@/lib/strapi";
 
-function normalizeFooterUrl(rawHref: unknown, fallback: string = "#"): string {
-  if (typeof rawHref !== "string") return fallback;
-  let href = rawHref.trim();
-  if (!href || href === "#") return fallback;
+function normalizeFooterUrl(rawHref: unknown, labelOrFallback?: unknown): string {
+  // If this is the Case Studies link by label, always guarantee it maps to /#case-studies
+  if (typeof labelOrFallback === "string" && /case\s*stud/i.test(labelOrFallback)) {
+    return "/#case-studies";
+  }
 
-  // Strip hardcoded staging domain or localhost from redirection URLs
-  href = href.replace(/^https?:\/\/slpgtae2b5emmhjak56tc7j6\.178\.236\.185\.20\.sslip\.io/i, "");
+  if (typeof rawHref !== "string") {
+    return typeof labelOrFallback === "string" && !labelOrFallback.startsWith("Case") ? labelOrFallback : "#";
+  }
+  let href = rawHref.trim();
+  if (!href || href === "#") {
+    return typeof labelOrFallback === "string" && labelOrFallback.startsWith("/") ? labelOrFallback : "#";
+  }
+
+  // Strip hardcoded staging domains (including sslip.io) or localhost
+  href = href.replace(/^https?:\/\/[a-z0-9.-]+\.sslip\.io/i, "");
   href = href.replace(/^https?:\/\/localhost(:\d+)?/i, "");
   href = href.replace(/^https?:\/\/127\.0\.0\.1(:\d+)?/i, "");
 
   if (!href) return "/";
 
-  // Case Studies link normalization
-  if (href === "/case-studies" || href === "case-studies" || href === "#case-studies") {
+  // Case Studies link normalization (any casing, with or without hyphen/slash/hash)
+  if (/case-?studies/i.test(href)) {
     return "/#case-studies";
   }
 
@@ -110,10 +119,13 @@ export function SiteFooter({
             listAlign: fallback?.listAlign ?? "start",
             links: Array.isArray(rawLinks)
               ? rawLinks
-                  .map((link) => ({
-                    label: typeof link?.label === "string" ? link.label.trim() : "",
-                    href: normalizeFooterUrl(link?.href),
-                  }))
+                  .map((link) => {
+                    const label = typeof link?.label === "string" ? link.label.trim() : "";
+                    return {
+                      label,
+                      href: normalizeFooterUrl(link?.href, label),
+                    };
+                  })
                   .filter((link) => link.label)
               : fallback?.links ?? [],
           };
