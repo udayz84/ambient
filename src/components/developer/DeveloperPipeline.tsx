@@ -436,7 +436,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
             className={`${gilroyMedium.className} relative flex h-[48px] w-auto shrink-0 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[32px] py-[10px] cursor-pointer`}
           >
             <span className="relative text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
-              Request A SDK
+              Request an SDK
             </span>
             <GreenCtaCorners disableDots />
           </button>
