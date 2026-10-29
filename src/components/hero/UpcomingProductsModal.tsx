@@ -208,6 +208,41 @@ function FormStep({
     if (isSubmitting) return;
 
     setIsSubmitting(true);
+
+    // If a PDF is provided, open it in a new tab immediately within the user gesture context
+    if (pdfUrl) {
+      const isZip = pdfUrl.endsWith(".zip");
+      if (isZip) {
+        const a = document.createElement("a");
+        a.href = pdfUrl;
+        a.download = pdfName ?? "";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      } else {
+        try {
+          const opened = window.open(pdfUrl, "_blank", "noopener,noreferrer");
+          if (!opened) {
+            const a = document.createElement("a");
+            a.href = pdfUrl;
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+          }
+        } catch {
+          const a = document.createElement("a");
+          a.href = pdfUrl;
+          a.target = "_blank";
+          a.rel = "noopener noreferrer";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        }
+      }
+    }
+
     try {
       // Map formContext to Mailchimp form key
       const formKeyMap: Record<string, string> = {
@@ -246,17 +281,6 @@ function FormStep({
           popupId: config?.documentId,
         }),
       }).catch(() => { /* Mailchimp sync failure is non-blocking */ });
-
-      if (pdfUrl) {
-        const a = document.createElement("a");
-        a.href = pdfUrl;
-        a.download = pdfName ?? "";
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-      }
 
       onSuccess(resolvedVariant);
     } finally {
@@ -513,7 +537,7 @@ function ConfirmationStep({
           {config?.success_text ?? (downloadStarted
             ? (formContext === "sdk"
                 ? "Your download has started. ModelForge SDK (1.55 GB) is downloading to your device."
-                : "Your download has started. The case study PDF is on its way to your device.")
+                : "Your case study PDF is opening in a new tab.")
             : resolvedVariant
             ? `We’ve received your interest in ${resolvedVariant}. Our team will keep you updated on availability and news.`
             : "We’ve received your interest. Our team will keep you updated on the latest news and availability for our upcoming products.")}
@@ -526,10 +550,14 @@ function ConfirmationStep({
         {downloadStarted && downloadUrl && (
           <a
             href={downloadUrl}
-            download={downloadName}
+            target={downloadUrl.endsWith(".pdf") ? "_blank" : undefined}
+            rel={downloadUrl.endsWith(".pdf") ? "noopener noreferrer" : undefined}
+            download={downloadUrl.endsWith(".pdf") ? undefined : downloadName}
             className="text-[13px] text-[#86efac] underline underline-offset-4 hover:text-[#bbf7d0] transition-colors cursor-pointer"
           >
-            Click here if the download didn&apos;t start automatically
+            {downloadUrl.endsWith(".pdf")
+              ? "Click here if the PDF didn't open automatically"
+              : "Click here if the download didn't start automatically"}
           </a>
         )}
 
