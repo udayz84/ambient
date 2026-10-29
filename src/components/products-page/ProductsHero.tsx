@@ -271,8 +271,9 @@ function ProductsHeroDesktop({
       >
         <PrimaryCta href={primary.href} label={primary.label} onClick={onCtaClick}>{primary.label}</PrimaryCta>
         <SecondaryCta
-          href="/GPX10-Pro-Product-Brief.pdf"
-          download="GPX10-Pro-Product-Brief.pdf"
+          href={secondary.href && secondary.href !== "#" ? secondary.href : "/GPX10-Pro-Product-Brief.pdf"}
+          target="_blank"
+          rel="noopener noreferrer"
           label={secondary.label}
         >
           {secondary.label}
@@ -328,17 +329,23 @@ function SecondaryCta({
   label,
   onClick,
   download,
+  target,
+  rel,
 }: {
   children: React.ReactNode;
   href: string;
   label: string;
   onClick?: (e: React.MouseEvent, label: string) => void;
   download?: boolean | string;
+  target?: string;
+  rel?: string;
 }) {
   return (
     <a
       href={href}
       download={download}
+      target={target}
+      rel={rel}
       onClick={onClick ? (e) => onClick(e, label) : undefined}
       className={`${gilroyMedium.className} relative flex h-[48px] w-auto min-w-[255px] shrink-0 items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
       style={{ backgroundColor: SECONDARY_CTA_BG }}
@@ -484,8 +491,9 @@ function ProductsHeroMobile({
               <GreenCtaCorners />
             </a>
             <a
-              href="/GPX10-Pro-Product-Brief.pdf"
-              download="GPX10-Pro-Product-Brief.pdf"
+              href={secondary.href && secondary.href !== "#" ? secondary.href : "/GPX10-Pro-Product-Brief.pdf"}
+              target="_blank"
+              rel="noopener noreferrer"
               className={`${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
               style={{ backgroundColor: SECONDARY_CTA_BG }}
             >
