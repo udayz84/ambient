@@ -6,7 +6,6 @@ import { useState } from "react";
 import { dmMono, gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { mediaUrl } from "@/lib/strapi";
 import { Corners } from "../shared/Corners";
-import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useFitText } from "../shared/FitText";
 import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
@@ -801,7 +800,7 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
           </div>
         </TabletScaleCanvas>
       ) : (
-        <TabletScaleCanvas className={`relative hidden w-[1440px] shrink-0 min-[600px]:block ${isWearablesOnly ? "h-[675px]" : isIndustrial ? "h-[715px]" : "h-[790px]"}`}>
+        <TabletScaleCanvas className={`relative hidden w-[1440px] shrink-0 min-[600px]:block ${(isWearablesOnly || isIndustrial) ? "h-[675px]" : "h-[790px]"}`}>
           {/* Top decorative SVG */}
           <div
             className="pointer-events-none absolute top-[-26.9px] left-1/2 h-[320px] w-[881.616px] -translate-x-1/2"
@@ -874,40 +873,11 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
               />
             ))}
           </div>
-
-          {/* Industrial CTAs */}
-          {isIndustrial && (
-            <div className="absolute left-1/2 top-[632px] z-10 flex -translate-x-1/2 items-center gap-[16px]">
-              <a
-                href="#"
-                className={`${gilroyMedium.className} relative flex h-[44px] items-center justify-center px-[20px] cursor-pointer overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
-              >
-                <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
-                <GreenCtaCorners />
-                <span className="relative z-10 whitespace-nowrap text-[13px] leading-[28px] font-medium text-white uppercase not-italic">
-                  Download the Power Benchmark
-                </span>
-                <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
-              </a>
-              <a
-                href="#"
-                className={`${gilroyMedium.className} relative flex h-[44px] items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[20px]`}
-              >
-                <span className="relative z-10 whitespace-nowrap text-[13px] leading-[28px] font-medium text-white uppercase not-italic">
-                  How A-Cube Works
-                </span>
-                <Corners
-                  leftSrc="/applications/wearables/vector-47.svg"
-                  rightSrc="/applications/wearables/vector-46.svg"
-                />
-              </a>
-            </div>
-          )}
         </TabletScaleCanvas>
       )}
 
       {/* MOBILE (<600px) */}
-      <div className={`relative flex w-full flex-col items-center gap-[24px] px-[21px] pt-[30px] ${isSmartHome ? "pb-[36px]" : "pb-[72px]"} min-[600px]:hidden`}>
+      <div className={`relative flex w-full flex-col items-center gap-[24px] px-[21px] pt-[30px] ${(isSmartHome || isIndustrial) ? "pb-[36px]" : "pb-[72px]"} min-[600px]:hidden`}>
 
         {/* Title */}
         <div className="relative z-10 flex w-full max-w-[420px] flex-col items-center gap-[12px]">
@@ -994,35 +964,6 @@ export function WearablesEmpiricalProof({ data, slug }: { data?: any; slug?: str
                 }`}
               />
             ))}
-          </div>
-        )}
-
-        {/* Industrial CTAs */}
-        {isIndustrial && (
-          <div className="relative z-10 flex w-full max-w-[352px] flex-col items-center gap-[12px]">
-            <a
-              href="#"
-              className={`${gilroyMedium.className} relative flex h-[44px] w-full items-center justify-center cursor-pointer overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
-            >
-              <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
-              <GreenCtaCorners />
-              <span className="relative z-10 whitespace-nowrap text-[13px] leading-[28px] font-medium text-white uppercase not-italic">
-                Download the Power Benchmark
-              </span>
-              <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
-            </a>
-            <a
-              href="#"
-              className={`${gilroyMedium.className} relative flex h-[44px] w-full items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[20px]`}
-            >
-              <span className="relative z-10 whitespace-nowrap text-[13px] leading-[28px] font-medium text-white uppercase not-italic">
-                How A-Cube Works
-              </span>
-              <Corners
-                leftSrc="/applications/wearables/vector-47.svg"
-                rightSrc="/applications/wearables/vector-46.svg"
-              />
-            </a>
           </div>
         )}
       </div>
