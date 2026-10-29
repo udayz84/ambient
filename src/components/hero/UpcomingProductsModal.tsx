@@ -555,7 +555,13 @@ function ConfirmationStep({
         </div>
 
         <h2 className={`${gilroyMedium.className} text-center text-[30px] md:text-[38px] leading-[40px] md:leading-[47px] font-medium whitespace-nowrap text-white not-italic`}>
-          {config?.success_title ?? (formContext === "sdk" ? "Your download is ready!" : "Thank you for signing up!")}
+          {config?.success_title ?? (
+            formContext === "sdk"
+              ? "Your download is ready!"
+              : formContext === "evalkit" || formContext === "usecase"
+              ? "Thank You for Showing your interest!"
+              : "Thank you for signing up!"
+          )}
         </h2>
 
         <p className={`${interRegular.className} w-full md:w-[540px] text-center text-[12px] leading-[18px] font-normal text-[#a4a4a4] not-italic`}>
@@ -565,6 +571,8 @@ function ConfirmationStep({
                 : "Your case study PDF is opening in a new tab.")
             : resolvedVariant
             ? `We’ve received your interest in ${resolvedVariant}. Our team will keep you updated on availability and news.`
+            : formContext === "evalkit" || formContext === "usecase"
+            ? "Someone from our team will connect with you shortly and help you with your Use case."
             : "We’ve received your interest. Our team will keep you updated on the latest news and availability for our upcoming products.")}
         </p>
 
