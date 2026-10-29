@@ -157,29 +157,43 @@ function FormStep({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const determinedFormKey = formKey || (pdfName?.toLowerCase().includes("whitepaper") ? "whitepaper" : "product-brief");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    try {
-      await fetch("/api/newsletter", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, formKey: determinedFormKey, popupId: config?.documentId }),
-      }).catch(() => { /* Mailchimp/mail sync failure is non-blocking */ });
 
-      if (pdfUrl) {
+    if (pdfUrl) {
+      try {
+        const opened = window.open(pdfUrl, "_blank", "noopener,noreferrer");
+        if (!opened) {
+          const a = document.createElement("a");
+          a.href = pdfUrl;
+          a.target = "_blank";
+          a.rel = "noopener noreferrer";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        }
+      } catch {
         const a = document.createElement("a");
         a.href = pdfUrl;
-        a.download = pdfName ?? "";
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
         document.body.appendChild(a);
         a.click();
         a.remove();
       }
-
-      onSuccess();
-    } finally {
-      setIsSubmitting(false);
     }
+
+    fetch("/api/newsletter", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, formKey: determinedFormKey, popupId: config?.documentId }),
+    })
+      .catch(() => { /* Mailchimp/mail sync failure is non-blocking */ })
+      .finally(() => {
+        setIsSubmitting(false);
+        onSuccess();
+      });
   };
 
   return (
