@@ -228,8 +228,8 @@ export function PartnersWhy({ content }: { content: WhyContent }) {
       </div>
 
       {/* DESKTOP & TABLET (>=600px) — 1440px design canvas with proportional tablet scaling */}
-      <TabletScaleCanvas className="relative hidden w-[1440px] shrink-0 flex-col items-center gap-[36px] pb-[64px] pt-0 -mt-[60px] min-[600px]:flex">
-        <div className="relative flex flex-col items-center gap-[16px] px-[24px]">
+      <TabletScaleCanvas className="relative hidden w-[1440px] shrink-0 flex-col items-center gap-[36px] py-[64px] min-[600px]:flex">
+        <div className="relative flex flex-col items-center gap-[16px] px-[24px] py-[8px]">
           <PartnersSectionHeading
             deg="124.568deg"
             className="flex flex-col items-center !whitespace-normal"
