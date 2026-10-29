@@ -32,7 +32,15 @@ function splitLines(value: string): string[] {
  * Figma 2903:2609 (title) + 2903:2578/2555 (two CTA cards).
  * "Start building with GPX10 Pro." — footer CTA section.
  */
-export function ProductsStartBuilding({ data }: { data?: any }) {
+export function ProductsStartBuilding({
+  data,
+  evalkitForm,
+  waitlistForm,
+}: {
+  data?: any;
+  evalkitForm?: any;
+  waitlistForm?: any;
+}) {
   const heading = data?.heading || FALLBACK_HEADING;
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const cardBackground = mediaUrl(data?.background_image) || "/Rectangle 1618873545.png";
@@ -96,11 +104,13 @@ export function ProductsStartBuilding({ data }: { data?: any }) {
         isOpen={modalContext === "evalkit"}
         onClose={() => setModalContext(null)}
         formContext="evalkit"
+        config={evalkitForm}
       />
       <UpcomingProductsModal
         isOpen={modalContext === "waitlist"}
         onClose={() => setModalContext(null)}
         formContext="waitlist"
+        config={waitlistForm}
         title="Join the Waitlist"
       />
     </section>

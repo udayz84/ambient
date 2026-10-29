@@ -59,7 +59,7 @@ function splitLines(value: string): string[] {
  * Figma 2901:2033 — "Built for always-on. Proven across markets."
  * Tabbed use-case showcase. Desktop canvas is 1448 wide / 941 tall.
  */
-export function ProductsUseCases({ data }: { data?: any }) {
+export function ProductsUseCases({ data, formConfig }: { data?: any; formConfig?: any }) {
   const heading = data?.heading || FALLBACK_HEADING;
   const headingLines = splitLines(heading);
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
@@ -197,6 +197,7 @@ export function ProductsUseCases({ data }: { data?: any }) {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         formContext="usecase"
+        config={formConfig}
       />
     </>
   );

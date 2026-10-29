@@ -52,6 +52,31 @@ export function UpcomingProductsModal({
   const [mounted, setMounted] = useState(false);
   const [step, setStep] = useState<Step>("form");
   const [submittedVariant, setSubmittedVariant] = useState<string | undefined>(undefined);
+  const [fetchedConfig, setFetchedConfig] = useState<PopupConfig | null>(null);
+  const activeConfig = config || fetchedConfig;
+
+  useEffect(() => {
+    if (!isOpen || config) return;
+    const strapiBase = (process.env.NEXT_PUBLIC_STRAPI_URL || "http://127.0.0.1:1338").replace(/\/+$/, "");
+    fetch(`${strapiBase}/api/popups?populate=*`)
+      .then((r) => r.json())
+      .then((res) => {
+        const list = res?.data || [];
+        const match = list.find((p: any) => {
+          const t = (p.title || "").toLowerCase();
+          if (formContext === "usecase") return t.includes("use case");
+          if (formContext === "evalkit") return t.includes("eval kit");
+          if (formContext === "sdk") return t.includes("sdk");
+          if (formContext === "waitlist" || formContext === "som-waitlist") return t.includes("waitlist");
+          if (formContext?.startsWith("som")) return t.includes("som");
+          if (formContext === "case-study") return t.includes("case study");
+          if (formContext === "upcoming") return t.includes("upcoming");
+          return false;
+        });
+        if (match) setFetchedConfig(match);
+      })
+      .catch(() => {});
+  }, [isOpen, config, formContext]);
 
   const effectiveDownloadUrl =
     pdfUrl ?? (formContext === "sdk" ? MODEL_FORGE_ZIP_URL : undefined);
@@ -139,7 +164,7 @@ export function UpcomingProductsModal({
               setStep("confirmation");
             }}
             formContext={formContext}
-            config={config}
+            config={activeConfig}
             pdfUrl={effectiveDownloadUrl}
             pdfName={effectiveDownloadName}
             title={title}
@@ -149,7 +174,7 @@ export function UpcomingProductsModal({
         {step === "confirmation" && (
           <ConfirmationStep
             onClose={onClose}
-            config={config}
+            config={activeConfig}
             downloadStarted={Boolean(effectiveDownloadUrl)}
             downloadUrl={effectiveDownloadUrl}
             downloadName={effectiveDownloadName}

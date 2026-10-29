@@ -19,6 +19,7 @@ export function CareersApplicationModal({
   isOpen,
   onClose,
   jobTitle,
+  location,
   roles,
   jobDescription,
   config,
@@ -26,6 +27,7 @@ export function CareersApplicationModal({
   isOpen: boolean;
   onClose: () => void;
   jobTitle?: string;
+  location?: string;
   roles?: string[];
   /** Popup entry (careers-page application_form): success copy + recipients. */
   config?: any;
@@ -118,6 +120,7 @@ export function CareersApplicationModal({
         {step === "description" && (
           <DescriptionStep
             jobTitle={jobTitle}
+            location={location}
             onApply={() => setStep("form")}
             onClose={handleClose}
             jobDescription={jobDescription}
@@ -127,6 +130,7 @@ export function CareersApplicationModal({
         {step === "form" && (
           <FormStep
             jobTitle={jobTitle}
+            location={location}
             roles={roles}
             onClose={handleClose}
             onSubmit={() => setStep("confirmation")}
@@ -145,11 +149,13 @@ export function CareersApplicationModal({
 
 function DescriptionStep({
   jobTitle,
+  location,
   onApply,
   onClose,
   jobDescription,
 }: {
   jobTitle?: string;
+  location?: string;
   onApply: () => void;
   onClose: () => void;
   jobDescription?: {
@@ -187,6 +193,7 @@ function DescriptionStep({
     <>
       <PanelHeader
         jobTitle={jobTitle}
+        location={location}
         onClose={onClose}
         cta={
           <GreenCta label="Apply Now" width="w-[140px]" onClick={onApply} />
@@ -250,12 +257,14 @@ function Field({
 
 function FormStep({
   jobTitle,
+  location,
   roles,
   onClose,
   onSubmit,
   config,
 }: {
   jobTitle?: string;
+  location?: string;
   roles?: string[];
   onClose: () => void;
   onSubmit: () => void;
@@ -308,7 +317,7 @@ function FormStep({
 
   return (
     <>
-      <PanelHeader jobTitle={jobTitle} onClose={onClose} />
+      <PanelHeader jobTitle={jobTitle} location={location} onClose={onClose} />
       <Divider />
 
       <form
@@ -549,10 +558,12 @@ function ConfirmationStep({ onClose, config }: { onClose: () => void; config?: a
 
 function PanelHeader({
   jobTitle,
+  location = "Bengaluru",
   onClose,
   cta,
 }: {
   jobTitle?: string;
+  location?: string;
   onClose: () => void;
   cta?: React.ReactNode;
 }) {
@@ -572,7 +583,7 @@ function PanelHeader({
             className={`${interLight.className} flex gap-[10px] md:gap-[20px] text-[10px] leading-[15px] font-light text-white not-italic`}
           >
             <span>10+ Years Experience</span>
-            <span>Mumbai</span>
+            <span>{location || "Bengaluru"}</span>
           </div>
         </div>
       </div>

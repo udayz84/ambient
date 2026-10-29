@@ -221,7 +221,7 @@ export function CareersGradientCard({
         <div className="relative size-[36px] shrink-0">
           {card.icon ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img loading="lazy" decoding="async" alt="" className="absolute inset-0 block size-full max-w-none" src={card.icon} />
+            <img loading="lazy" decoding="async" alt="" className="absolute inset-0 block size-full max-w-none brightness-0 invert" src={card.icon} />
           ) : null}
         </div>
         <div className="flex w-full flex-col items-start gap-[10px]">
@@ -370,16 +370,21 @@ const GREEN_CTA_SHADOW =
 export function CareersRolesProfileCta({
   href = "#",
   label = "SHARE YOUR PROFILE",
+  onClick,
+  className = "",
 }: {
   href?: string;
   label?: string;
+  onClick?: (e: React.MouseEvent) => void;
+  className?: string;
 } = {}) {
   return (
     <a
       href={href}
+      onClick={onClick}
       data-node-id="2379:8941"
       data-name="Cta"
-      className={`${gilroySemiBold.className} absolute top-[68px] left-[59.93px] block h-[48px] w-[248px] overflow-hidden ${GREEN_CTA_SHADOW}`}
+      className={`${gilroySemiBold.className} relative block h-[48px] w-[248px] shrink-0 overflow-hidden ${GREEN_CTA_SHADOW} ${className}`}
     >
       <span
         aria-hidden

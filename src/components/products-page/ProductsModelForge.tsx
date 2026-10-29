@@ -79,7 +79,7 @@ const SUB_FEATURES = [
  * Figma 2917:1333 (title) + 2917:1341/1359/1377 (Train/Compile/Deploy cards).
  * "Your models. Your IDE. No rewrites."
  */
-export function ProductsModelForge({ data }: { data?: any }) {
+export function ProductsModelForge({ data, formConfig }: { data?: any; formConfig?: any }) {
   const heading = data?.heading || FALLBACK_HEADING;
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const cleanPrimaryHref = (() => {
@@ -165,6 +165,7 @@ export function ProductsModelForge({ data }: { data?: any }) {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         formContext="sdk"
+        config={formConfig}
       />
     </>
   );

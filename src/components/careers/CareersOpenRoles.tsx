@@ -241,16 +241,23 @@ export function CareersOpenRoles({
           </div>
 
           <div
-            className="relative h-[116px] w-[290.931px] shrink-0 overflow-visible"
+            className="flex flex-col items-end gap-[16px] w-[340px] shrink-0"
             data-node-id="2379:8939"
           >
             <p
-              className={`${interRegular.className} absolute top-0 left-0 h-[48px] w-[290.931px] text-right text-[16px] leading-[24px] font-normal tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
+              className={`${interRegular.className} w-full text-right text-[16px] leading-[24px] font-normal tracking-[-0.3125px] text-[rgba(255,255,255,0.6)] not-italic [word-break:break-word]`}
               data-node-id="2379:8940"
             >
               {generalAppSubtitle}
             </p>
-            <CareersRolesProfileCta href="#" label={generalAppCtaLabel} />
+            <CareersRolesProfileCta
+              href="#"
+              label={generalAppCtaLabel}
+              onClick={(e) => {
+                e.preventDefault();
+                setSelectedJob({ title: "General Application" });
+              }}
+            />
           </div>
         </div>
       </div>
@@ -260,6 +267,7 @@ export function CareersOpenRoles({
         onClose={() => setSelectedJob(null)}
         config={applicationForm}
         jobTitle={selectedJob?.title || undefined}
+        location={selectedJob?.location || "Bengaluru"}
         roles={jobs.map((j: any) => j.title).filter(Boolean)}
         jobDescription={selectedJob ? {
           about_role: selectedJob.about_role,

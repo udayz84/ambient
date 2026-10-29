@@ -195,7 +195,7 @@ function CareersBestWorkMobile({ data }: { data?: any }) {
                 <img loading="lazy" decoding="async"
                   alt=""
                   src={card.icon}
-                  className="absolute inset-0 size-full object-contain"
+                  className="absolute inset-0 size-full object-contain brightness-0 invert"
                 />
               ) : null}
             </div>
@@ -653,7 +653,7 @@ function CareersBenefitsMobile({ data }: { data?: any }) {
                 <img loading="lazy" decoding="async"
                   alt=""
                   src={card.icon}
-                  className="absolute inset-0 size-full object-contain"
+                  className="absolute inset-0 size-full object-contain brightness-0 invert"
                 />
               ) : null}
             </div>
