@@ -2,6 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
+import Link from "next/link";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
@@ -20,7 +21,8 @@ type PanelData = {
   title: string;
   body: string;
   cta: string;
-  ctaLeft: string;
+  ctaLeft?: string;
+  href?: string;
 };
 
 const PANELS: PanelData[] = [
@@ -28,13 +30,13 @@ const PANELS: PanelData[] = [
     title: "Discuss Your Product Roadmap",
     body: "Explore how Ambient AI can unlock new capabilities in your wearable product. Strategic planning session with our applications team.",
     cta: "Schedule Strategy Call",
-    ctaLeft: "calc(50% - 100px)",
+    href: "/contact#calendar",
   },
   {
     title: "Talk to a Hardware Engineer",
     body: "Be the first to access our upcoming Vision, Sound, and Industrial modules.",
     cta: "Schedule Technical Review",
-    ctaLeft: "calc(50% - 114px)",
+    href: "/contact#calendar",
   },
 ];
 
@@ -112,8 +114,9 @@ function CtaPanel({ data }: { data: PanelData }) {
               {data.body}
             </p>
             {/* CTA */}
-            <div
-              className={`${gilroyMedium.className} relative h-[48px] w-full shrink-0 ${CTA_SHADOW}`}
+            <Link
+              href={data.href || "/contact#calendar"}
+              className={`${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 cursor-pointer items-center justify-center transition-opacity duration-200 hover:opacity-90 active:opacity-80 ${CTA_SHADOW}`}
               data-name="Cta"
             >
               <span
@@ -121,8 +124,7 @@ function CtaPanel({ data }: { data: PanelData }) {
                 className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
               />
               <p
-                className="absolute top-[calc(50%-14px)] whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic"
-                style={{ left: data.ctaLeft }}
+                className="relative z-10 whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic"
               >
                 {data.cta}
               </p>
@@ -131,7 +133,7 @@ function CtaPanel({ data }: { data: PanelData }) {
                 aria-hidden
                 className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
               />
-            </div>
+            </Link>
           </div>
         </div>
       </div>
@@ -149,6 +151,7 @@ export function WearablesFooterAccent({ data }: { data?: any }) {
       title: p.title || fb.title,
       body: p.body || fb.body,
       cta: p.cta_label || fb.cta,
+      href: p.cta_href || fb.href || "/contact#calendar",
     };
   });
   return (
@@ -203,14 +206,15 @@ export function WearablesFooterAccent({ data }: { data?: any }) {
                 {panel.body}
               </p>
               {/* CTA */}
-              <div
-                className={`${gilroyMedium.className} relative h-[48px] w-full shrink-0 ${CTA_SHADOW}`}
+              <Link
+                href={panel.href || "/contact#calendar"}
+                className={`${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 cursor-pointer items-center justify-center transition-opacity duration-200 hover:opacity-90 active:opacity-80 ${CTA_SHADOW}`}
               >
                 <span
                   aria-hidden
                   className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
                 />
-                <p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-[14px] leading-[28px] font-medium text-white uppercase not-italic">
+                <p className="relative z-10 whitespace-nowrap text-[14px] leading-[28px] font-medium text-white uppercase not-italic">
                   {panel.cta}
                 </p>
                 <GreenCtaCorners />
@@ -218,7 +222,7 @@ export function WearablesFooterAccent({ data }: { data?: any }) {
                   aria-hidden
                   className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
                 />
-              </div>
+              </Link>
             </div>
           </div>
         ))}

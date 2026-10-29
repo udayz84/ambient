@@ -114,12 +114,16 @@ function WhiteCta({
 function SectionWrap({
   children,
   className = "",
+  id,
+  "aria-label": ariaLabel,
 }: {
   children: React.ReactNode;
   className?: string;
+  id?: string;
+  "aria-label"?: string;
 }) {
   return (
-    <section className={`relative flex w-full flex-col items-center px-[24px] py-[56px] ${className}`}>
+    <section id={id} aria-label={ariaLabel} className={`relative flex w-full flex-col items-center px-[24px] py-[56px] ${className}`}>
       {children}
     </section>
   );
@@ -468,7 +472,8 @@ function ContactScheduleMobile({ data, bookingForm }: { data?: any; bookingForm?
   });
 
   return (
-    <SectionWrap aria-label="Schedule a Consultation">
+    <SectionWrap id="calendar" aria-label="Schedule a Consultation" className="scroll-mt-[90px]">
+      <div id="schedule" className="scroll-mt-[90px]" />
       <div className="flex flex-col items-center gap-[10px] w-[350px]">
         <div className="relative flex w-full items-center justify-center py-[7px]">
           <Corners />

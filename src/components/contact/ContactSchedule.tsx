@@ -64,9 +64,11 @@ export function ContactSchedule({ data, bookingForm }: { data?: any; bookingForm
 
   return (
     <div
-      className="absolute top-[807px] left-1/2 z-20 flex h-[468px] w-[1204px] -translate-x-1/2 flex-col items-center"
+      id="calendar"
+      className="absolute top-[807px] left-1/2 z-20 flex h-[468px] w-[1204px] -translate-x-1/2 flex-col items-center scroll-mt-[90px]"
       data-node-id="2379:8437"
     >
+      <div id="schedule" className="scroll-mt-[90px]" />
       {sectionIcon ? (
         <div className="pointer-events-none absolute -top-[40px] left-1/2 -translate-x-1/2" aria-hidden>
           {/* eslint-disable-next-line @next/next/no-img-element */}
