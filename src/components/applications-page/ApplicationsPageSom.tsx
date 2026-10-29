@@ -2,6 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import Link from "next/link";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFitText } from "../shared/FitText";
@@ -40,7 +41,7 @@ const FALLBACK_CARDS: SomCardData[] = [
     visual_style: "sharp",
     imgA: "/applications/som-img-a.webp",
     ctaLabel: "View Evaluation Kits",
-    ctaHref: "/evaluation-kits",
+    ctaHref: "/evk",
   },
   {
     value: "Scale",
@@ -50,7 +51,7 @@ const FALLBACK_CARDS: SomCardData[] = [
     visual_style: "layered",
     imgA: "/applications/left.png",
     ctaLabel: "View SOMs",
-    ctaHref: "/products#som",
+    ctaHref: "/SOM",
   },
 ];
 
@@ -127,9 +128,9 @@ function SomLabel({ value, label, sublabel }: { value: string; label: string; su
 
 function ViewSomsCta({ label, href }: { label: string; href: string }) {
   return (
-    <a
+    <Link
       href={href}
-      className="relative flex h-[48px] w-[280px] shrink-0 min-[600px]:w-[240px] items-center justify-center gap-[9px] min-[600px]:gap-[10px] px-[20px] py-[10px] drop-shadow-[0px_42px_53.5px_rgba(69,196,24,0.2)]"
+      className="relative flex h-[48px] w-[280px] shrink-0 min-[600px]:w-[240px] items-center justify-center gap-[9px] min-[600px]:gap-[10px] px-[20px] py-[10px] drop-shadow-[0px_42px_53.5px_rgba(69,196,24,0.2)] cursor-pointer transition-opacity hover:opacity-90 active:opacity-80"
     >
       <span
         aria-hidden
@@ -147,15 +148,15 @@ function ViewSomsCta({ label, href }: { label: string; href: string }) {
         aria-hidden
         className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
       />
-    </a>
+    </Link>
   );
 }
 
 function DiscussCta({ label, href }: { label: string; href: string }) {
   return (
-    <a
+    <Link
       href={href}
-      className="relative flex h-[48px] w-[280px] shrink-0 min-[600px]:w-auto min-[600px]:h-auto items-center justify-center bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]"
+      className="relative flex h-[48px] w-[280px] shrink-0 min-[600px]:w-auto min-[600px]:h-auto items-center justify-center bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] cursor-pointer transition-colors hover:bg-[rgba(226,241,202,0.2)]"
     >
       <p
         className={`${gilroyMedium.className} max-w-full text-[12px] min-[600px]:text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic overflow-hidden text-ellipsis`}
@@ -163,7 +164,7 @@ function DiscussCta({ label, href }: { label: string; href: string }) {
         {label}
       </p>
       <GreenCtaCorners />
-    </a>
+    </Link>
   );
 }
 
@@ -202,7 +203,7 @@ export function ApplicationsPageSom({ data }: { data?: any }) {
 
   const secondary = {
     label: data?.secondary_button?.label || "Discuss Your Use Case",
-    href: data?.secondary_button?.href || "#",
+    href: data?.secondary_button?.href && data.secondary_button.href !== "#" ? data.secondary_button.href : "/contact#calendar",
   };
   const statusPill = data?.status_pill || FALLBACK_STATUS_PILL;
 

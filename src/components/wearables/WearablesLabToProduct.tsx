@@ -2,6 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
+import Link from "next/link";
 import { mediaUrl } from "@/lib/strapi";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
@@ -33,7 +34,7 @@ const CARDS: CardData[] = [
     title: "VALIDATE",
     body: "Test your TensorFlow/PyTorch models on our GPX Evaluation Kits using standard I2S, I2C, SPI sensor inputs.",
     cta: "View Evaluation Kits",
-    ctaHref: "#",
+    ctaHref: "/evk",
     imgLeft: "-9.04%",
     imgTop: "-49.04%",
     image: "/applications/lab-to-product/1.png",
@@ -43,7 +44,7 @@ const CARDS: CardData[] = [
     title: "COMPILE",
     body: "Use the ModelForge SDK to seamlessly quantize and compile your models for ultra-low-power analog execution.",
     cta: "Visit Developer Hub",
-    ctaHref: "#",
+    ctaHref: "/developer",
     imgLeft: "-114.69%",
     imgTop: "-45.83%",
     image: "/applications/lab-to-product/2.png",
@@ -53,7 +54,7 @@ const CARDS: CardData[] = [
     title: "INTEGRATE",
     body: "Drop our integrated System-on-Modules (SOMs) directly into your most constrained custom carrier boards.",
     cta: "View SoMs",
-    ctaHref: "#",
+    ctaHref: "/SOM",
     imgLeft: "-116.48%",
     imgTop: "-162.44%",
     image: "/applications/lab-to-product/3.png",
@@ -119,9 +120,9 @@ function LabCard({ data }: { data: CardData }) {
         </div>
 
         {/* CTA */}
-        <a
+        <Link
           href={data.ctaHref}
-          className={`${gilroyMedium.className} absolute left-0 top-[461px] flex cursor-pointer items-center border border-white/20 bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+          className={`${gilroyMedium.className} absolute left-0 top-[461px] flex cursor-pointer items-center border border-white/20 bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] transition-colors hover:bg-[rgba(226,241,202,0.2)]`}
           data-name="CTA - Secondary"
         >
           <span className="max-w-full whitespace-nowrap text-[16px] leading-[28px] font-medium text-white uppercase not-italic overflow-hidden text-ellipsis">
@@ -131,7 +132,7 @@ function LabCard({ data }: { data: CardData }) {
             leftSrc="/applications/wearables/vector-42.svg"
             rightSrc="/applications/wearables/vector-43.svg"
           />
-        </a>
+        </Link>
       </div>
     </div>
   );
@@ -148,13 +149,26 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
     const c = dataCards[i];
     if (!c) return fb;
     const strapiImg = c.image ? mediaUrl(c.image) : "";
+    const rawHref = c.cta_href || fb.ctaHref;
+    const ctaHref =
+      rawHref && rawHref !== "#"
+        ? rawHref === "/dvk"
+          ? "/evk"
+          : rawHref === "/developers"
+            ? "/developer"
+            : rawHref
+        : i === 0
+          ? "/evk"
+          : i === 1
+            ? "/developer"
+            : "/SOM";
     return {
       ...fb,
       number: c.step || fb.number,
       title: c.title || fb.title,
       body: c.description || fb.body,
       cta: c.cta_label || fb.cta,
-      ctaHref: c.cta_href || fb.ctaHref,
+      ctaHref,
       image: strapiImg || fb.image || FALLBACK_IMAGE,
     };
   });
@@ -272,9 +286,9 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
                 </p>
               </div>
               {/* CTA */}
-              <a
+              <Link
                 href={card.ctaHref}
-                className={`${gilroyMedium.className} mt-[16px] flex h-[44px] w-full cursor-pointer items-center justify-center border border-white/20 bg-[rgba(226,241,202,0.12)]`}
+                className={`${gilroyMedium.className} mt-[16px] flex h-[44px] w-full cursor-pointer items-center justify-center border border-white/20 bg-[rgba(226,241,202,0.12)] transition-colors hover:bg-[rgba(226,241,202,0.2)]`}
               >
                 <span className="relative max-w-full whitespace-nowrap text-[13px] leading-[28px] font-medium text-white uppercase not-italic overflow-hidden text-ellipsis">
                   {card.cta}
@@ -283,7 +297,7 @@ export function WearablesLabToProduct({ data }: { data?: any }) {
                   leftSrc="/applications/wearables/vector-42.svg"
                   rightSrc="/applications/wearables/vector-43.svg"
                 />
-              </a>
+              </Link>
             </div>
           ))}
         </div>
