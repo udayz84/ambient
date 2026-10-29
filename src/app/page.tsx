@@ -115,7 +115,9 @@ export default async function Home() {
       <TabletScaleInit />
       {data?.hero && <HeroCarousel data={data.hero} formConfig={data.hero_form} />}
       {data?.measured_proof && <MeasuredProof data={data.measured_proof} />}
-      <ApplicationsPageWins data={winsData} />
+      <div id="case-studies" className="scroll-mt-[90px]">
+        <ApplicationsPageWins data={winsData} />
+      </div>
       {/* <EcosystemMarqueeStrip data={data?.clients} /> */}
       {data?.technology && <Technology data={data.technology} />}
       {data?.platform_scale && <PlatformScale data={data.platform_scale} />}
