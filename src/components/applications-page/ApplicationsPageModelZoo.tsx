@@ -4,6 +4,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { gilroyMedium, interRegular, dmMono } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
@@ -36,7 +37,7 @@ const HEADING = "Every application here runs on real, ready models.";
 const SUBTITLE =
   "Browse a growing library of open-source and Ambient-built models tuned for GPX, deployable in one click. Don't build from scratch; start from something that works.";
 
-const SECONDARY_CTA = { label: "See it live in NuraSync", href: "/applications" };
+const SECONDARY_CTA = { label: "See it live in NuraSync", href: "/model-zoo#application-forge" };
 
 /** Left fade over the collage rows. */
 const COLLAGE_LEFT_FADE =
@@ -60,7 +61,7 @@ export const COLLAGE_ROW_2 = [
 
 export function PrimaryCta({ label, href }: { label: string; href: string }) {
   return (
-    <a
+    <Link
       href={href}
       className="relative flex h-[48px] w-auto shrink-0 items-center justify-center gap-[10px] px-[24px] py-[10px] drop-shadow-[0px_42px_53.5px_rgba(69,196,24,0.2)]"
     >
@@ -80,13 +81,13 @@ export function PrimaryCta({ label, href }: { label: string; href: string }) {
         aria-hidden
         className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]"
       />
-    </a>
+    </Link>
   );
 }
 
 export function SecondaryCta({ label, href }: { label: string; href: string }) {
   return (
-    <a
+    <Link
       href={href}
       className="relative flex h-[48px] w-auto shrink-0 items-center justify-center bg-[rgba(226,241,202,0.12)] px-[24px] py-[10px]"
     >
@@ -96,7 +97,7 @@ export function SecondaryCta({ label, href }: { label: string; href: string }) {
         {label}
       </p>
       <GreenCtaCorners />
-    </a>
+    </Link>
   );
 }
 
@@ -483,9 +484,12 @@ export function ApplicationsPageModelZoo({
   const secondaryCta = {
     label: data?.secondary_cta?.label || SECONDARY_CTA.label,
     href:
-      data?.secondary_cta?.href && data.secondary_cta.href !== "/application-forge"
+      data?.secondary_cta?.href &&
+      data.secondary_cta.href !== "/applications" &&
+      data.secondary_cta.href !== "/application-forge" &&
+      data.secondary_cta.href !== "/model-zoo"
         ? data.secondary_cta.href
-        : "/applications",
+        : "/model-zoo#application-forge",
   };
   const features = isSmartHome
     ? SMART_HOME_FEATURES
@@ -554,11 +558,13 @@ export function ApplicationsPageModelZoo({
           {subtitle}
         </p>
 
-        {/* CTA Row */}
-        <div className="mt-[16px] flex w-full flex-col min-[600px]:flex-row items-center justify-center gap-[16px] px-[20px]">
-          <PrimaryCta label={primaryCta.label} href={primaryCta.href} />
-          <SecondaryCta label={secondaryCta.label} href={secondaryCta.href} />
-        </div>
+        {/* CTA Row (cards variant only) */}
+        {variant !== "strip" ? (
+          <div className="mt-[16px] flex w-full flex-col min-[600px]:flex-row items-center justify-center gap-[16px] px-[20px]">
+            <PrimaryCta label={primaryCta.label} href={primaryCta.href} />
+            <SecondaryCta label={secondaryCta.label} href={secondaryCta.href} />
+          </div>
+        ) : null}
       </div>
 
       {variant === "strip" ? (
@@ -583,6 +589,7 @@ export function ApplicationsPageModelZoo({
       {variant === "strip" ? (
         <div className="relative z-10 mt-[48px] flex w-full flex-col min-[600px]:flex-row items-center justify-center gap-[16px] px-[20px]">
           <PrimaryCta label={primaryCta.label} href={primaryCta.href} />
+          <SecondaryCta label={secondaryCta.label} href={secondaryCta.href} />
         </div>
       ) : null}
 

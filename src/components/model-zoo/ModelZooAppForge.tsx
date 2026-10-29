@@ -301,6 +301,8 @@ export function ModelZooAppForge({
       data-node-id="5131:10421"
       aria-label="Your eval kit, controlled from your phone"
     >
+      <div id="video" className="scroll-mt-[80px]" />
+      <div id="nurasync" className="scroll-mt-[80px]" />
       {/* Preload assets so steps load instantly without flashing */}
       <div className="hidden" aria-hidden="true">
         <img src={STEP_ARTICLE.pair} alt="" loading="eager" />
