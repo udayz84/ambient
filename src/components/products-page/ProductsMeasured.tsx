@@ -8,9 +8,7 @@ import { useFitText } from "../shared/FitText";
 import { AnimatedDotsBackground } from "../shared/AnimatedDotsBackground";
 import { Corners } from "../shared/Corners";
 import { TagBadge } from "../hero/TagBadge";
-import { ProductBriefModal } from "./ProductBriefModal";
 import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
-import { useState } from "react";
 import { dmMono, gilroyBold, gilroyMedium, interRegular } from "../hero/fonts";
 import {
   MEASURED_TITLE_GRADIENT,
@@ -601,16 +599,22 @@ function SecondaryCta({
   centered = false,
   onClick,
   download,
+  target = "_blank",
+  rel = "noopener noreferrer",
 }: {
   label: string;
   href: string;
   centered?: boolean;
   onClick?: (e: React.MouseEvent, label: string) => void;
   download?: boolean | string;
+  target?: string;
+  rel?: string;
 }) {
   return (
     <a
       href={href}
+      target={target}
+      rel={rel}
       download={download}
       onClick={onClick ? (e) => onClick(e, label) : undefined}
       className={`${gilroyMedium.className} relative flex h-[48px] shrink-0 overflow-clip px-[20px] py-[10px] border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] ${
@@ -635,7 +639,6 @@ function SecondaryCta({
 
 export function ProductsMeasured({
   data,
-  formConfig,
 }: {
   data?: any;
   formConfig?: any;
@@ -657,12 +660,6 @@ export function ProductsMeasured({
     Array.isArray(data?.cards) && data.cards.length > 0
       ? data.cards.map(strapiCardToView)
       : CARD_ORDER.map((v) => FALLBACK_CARDS[v]);
-
-  const [briefModalTitle, setBriefModalTitle] = useState("");
-  const handleCtaClick = (e: React.MouseEvent, label: string) => {
-    e.preventDefault();
-    setBriefModalTitle(label);
-  };
 
   return (
     <>
@@ -776,8 +773,9 @@ export function ProductsMeasured({
             />
             <SecondaryCta
               label={secondary.label}
-              href={secondary.href || "#"}
-              onClick={(e) => handleCtaClick(e, secondary.label)}
+              href={secondary.href && secondary.href !== "#" ? secondary.href : (data?.whitepaper_pdf || "/Ambient-Subconscious-AI-On-GPX10-Pro.pdf")}
+              target="_blank"
+              rel="noopener noreferrer"
             />
           </div>
         </TabletScaleCanvas>
@@ -866,8 +864,9 @@ export function ProductsMeasured({
             </a>
             {/* Secondary — 240×48 */}
             <a
-              href={secondary.href || "#"}
-              onClick={(e) => handleCtaClick(e, secondary.label)}
+              href={secondary.href && secondary.href !== "#" ? secondary.href : (data?.whitepaper_pdf || "/Ambient-Subconscious-AI-On-GPX10-Pro.pdf")}
+              target="_blank"
+              rel="noopener noreferrer"
               className={`${gilroyMedium.className} relative flex h-[48px] w-[240px] shrink-0 items-center justify-center overflow-clip px-[20px] py-[10px]`}
               style={{ backgroundColor: SECONDARY_CTA_BG }}
             >
@@ -879,16 +878,6 @@ export function ProductsMeasured({
           </div>
         </div>
       </section>
-
-      <ProductBriefModal
-        isOpen={!!briefModalTitle}
-        title={briefModalTitle}
-        onClose={() => setBriefModalTitle("")}
-        config={formConfig}
-        pdfUrl="/Ambient-Subconscious-AI-On-GPX10-Pro.pdf"
-        pdfName="Ambient-Subconscious-AI-On-GPX10-Pro.pdf"
-        formKey="whitepaper"
-      />
     </>
   );
 }
