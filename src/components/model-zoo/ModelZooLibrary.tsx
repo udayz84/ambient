@@ -477,24 +477,20 @@ export function ModelZooLibrary({ requestForm }: { requestForm?: PopupConfig }) 
                 data-node-id="5348:6507"
               >
                 <div
-                  className="flex w-max animate-dvk-marquee-left items-start"
-                  style={{ animationDuration: "30s" }}
+                  className="flex w-max animate-dvk-marquee-left items-start will-change-transform"
+                  style={{ animationDuration: "180s" }}
                 >
-                  <img
-                    alt="AI models: Presence Detection, Wake Word Detection, Face Locator, Fall Detection, Air Gestures"
-                    src="/model-zoo/strip-loop.webp"
-                    className="h-[200px] w-[1185px] max-w-none shrink-0 object-fill"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <img
-                    alt=""
-                    aria-hidden
-                    src="/model-zoo/strip-loop.webp"
-                    className="h-[200px] w-[1185px] max-w-none shrink-0 object-fill"
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  {[...Array(12)].map((_, i) => (
+                    <img
+                      key={i}
+                      alt={i === 0 ? "AI models: Presence Detection, Wake Word Detection, Face Locator, Fall Detection, Air Gestures" : ""}
+                      aria-hidden={i !== 0}
+                      src="/model-zoo/strip-loop.webp"
+                      className="h-[200px] w-[1185px] max-w-none shrink-0 object-fill"
+                      loading="eager"
+                      decoding="async"
+                    />
+                  ))}
                 </div>
               </div>
             </div>
@@ -502,7 +498,7 @@ export function ModelZooLibrary({ requestForm }: { requestForm?: PopupConfig }) 
 
           {/* Request CTA */}
           <div className="mt-[36px] flex justify-center pb-[81px]">
-            <CtaPrimary label="Request Model Zoo" width={225} onClick={() => setRequestOpen(true)} />
+            <CtaPrimary label="Download Models Zoo" width={240} onClick={() => setRequestOpen(true)} />
           </div>
         </div>
       </TabletScaleCanvas>
@@ -636,24 +632,20 @@ export function ModelZooLibrary({ requestForm }: { requestForm?: PopupConfig }) 
               data-node-id="5348:6507"
             >
               <div
-                className="flex w-max animate-dvk-marquee-left items-start"
-                style={{ animationDuration: "30s" }}
+                className="flex w-max animate-dvk-marquee-left items-start will-change-transform"
+                style={{ animationDuration: "180s" }}
               >
-                <img
-                  alt="AI models: Presence Detection, Wake Word Detection, Face Locator, Fall Detection, Air Gestures"
-                  src="/model-zoo/strip-loop.webp"
-                  className="h-[200px] w-[1185px] max-w-none shrink-0 object-fill"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <img
-                  alt=""
-                  aria-hidden
-                  src="/model-zoo/strip-loop.webp"
-                  className="h-[200px] w-[1185px] max-w-none shrink-0 object-fill"
-                  loading="lazy"
-                  decoding="async"
-                />
+                {[...Array(12)].map((_, i) => (
+                  <img
+                    key={i}
+                    alt={i === 0 ? "AI models: Presence Detection, Wake Word Detection, Face Locator, Fall Detection, Air Gestures" : ""}
+                    aria-hidden={i !== 0}
+                    src="/model-zoo/strip-loop.webp"
+                    className="h-[200px] w-[1185px] max-w-none shrink-0 object-fill"
+                    loading="eager"
+                    decoding="async"
+                  />
+                ))}
               </div>
             </div>
           </div>
@@ -661,7 +653,7 @@ export function ModelZooLibrary({ requestForm }: { requestForm?: PopupConfig }) 
 
         {/* Request CTA */}
         <div className="mt-[36px] flex justify-center pb-[40px]">
-          <CtaPrimary label="Request Model Zoo" width={225} onClick={() => setRequestOpen(true)} />
+          <CtaPrimary label="Download Models Zoo" width={240} onClick={() => setRequestOpen(true)} />
         </div>
       </div>
 
