@@ -130,16 +130,20 @@ export default async function ProductsPage() {
       <div id="features"><ProductsFeatures data={data?.features} /></div>
       <div id="always-on"><ProductsAlwaysOn data={data?.always_on} /></div>
       <div id="metrics"><ProductsMeasured data={data?.measured} formConfig={data?.brief_form} /></div>
-      <div id="case-studies"><ApplicationsPageWins data={winsData} /></div>
-      <div id="use-cases"><ProductsUseCases data={data?.use_cases} /></div>
+      <div id="case-studies" className="scroll-mt-[90px]"><ApplicationsPageWins data={winsData} /></div>
+      <div id="use-cases"><ProductsUseCases data={data?.use_cases} formConfig={data?.usecase_form} /></div>
       <ProductsReadyToRun />
       {/* <ProductsAppForge data={data?.appforge} /> */}
-      <ProductsModelForge data={data?.modelforge} />
+      <ProductsModelForge data={data?.modelforge} formConfig={data?.sdk_form} />
       <ProductsBenchToVolume data={data?.bench_to_volume} />
       <div id="architecture"><ProductsArchitecture data={data?.architecture} /></div>
       {/* <SomFamily data={data?.som_family} /> */}
       <div id="full-picture"><ProductsFullPicture data={data?.full_picture} /></div>
-      <ProductsStartBuilding data={data?.start_building} />
+      <ProductsStartBuilding
+        data={data?.start_building}
+        evalkitForm={data?.evalkit_form}
+        waitlistForm={data?.waitlist_form}
+      />
     </main>
   );
 }

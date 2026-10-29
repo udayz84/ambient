@@ -24,8 +24,18 @@ function normalizeFooterUrl(rawHref: unknown, fallback: string = "#"): string {
 
   if (!href) return "/";
 
+  // Case Studies link normalization
+  if (href === "/case-studies" || href === "case-studies" || href === "#case-studies") {
+    return "/#case-studies";
+  }
+
+  // Any in-page anchor in footer should resolve to homepage anchor across all pages
+  if (href.startsWith("#")) {
+    return `/${href}`;
+  }
+
   // If it is a relative path without leading slash, ensure it starts with /
-  if (!/^(https?:|\/\/|mailto:|tel:|#)/i.test(href) && !href.startsWith("/")) {
+  if (!/^(https?:|\/\/|mailto:|tel:)/i.test(href) && !href.startsWith("/")) {
     href = `/${href}`;
   }
 
