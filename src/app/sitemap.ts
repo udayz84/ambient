@@ -62,6 +62,7 @@ const ROUTE_OVERRIDES: Record<
   "/SOM": { priority: 0.6, changeFrequency: "monthly" },
   "/contact": { priority: 0.6, changeFrequency: "yearly" },
   "/partners": { priority: 0.8, changeFrequency: "monthly" },
+  "/electronica-munich-2026": { priority: 0.8, changeFrequency: "weekly" },
 };
 
 /** Depth-based priority for routes that don't have an explicit override. */
