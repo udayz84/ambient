@@ -94,16 +94,43 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       const href = anchor.getAttribute("href") || "";
       const text = (anchor.textContent || "").trim();
 
-      // Case Studies special interception (by label or by href)
-      const isCaseStudies = /case\s*stud/i.test(text) || /case-?studies/i.test(href);
-      if (isCaseStudies) {
-        if (pathname === "/" || pathname === "") {
+      // Never intercept action CTAs, modal triggers, or PDF downloads
+      const isActionCta =
+        anchor.getAttribute("role") === "button" ||
+        anchor.tagName.toLowerCase() === "button" ||
+        anchor.hasAttribute("download") ||
+        href === "#" ||
+        href.endsWith(".pdf") ||
+        /read|view|download/i.test(text);
+
+      if (isActionCta) return;
+
+      // Case Studies anchor navigation
+      const isCaseStudiesAnchor =
+        href === "#case-studies" ||
+        href === "#casestudies" ||
+        href === "/#case-studies" ||
+        href === "/#casestudies" ||
+        href === "/case-studies" ||
+        href === "/casestudies";
+
+      if (isCaseStudiesAnchor) {
+        // If current page has the case-studies section, scroll directly to it in-page
+        const el =
+          document.getElementById("case-studies") ||
+          document.getElementById("casestudies");
+
+        if (el) {
           e.preventDefault();
-          window.history.pushState(null, "", "/#case-studies");
+          window.history.pushState(null, "", "#case-studies");
           scrollToTarget("case-studies");
           return;
-        } else {
+        }
+
+        // Only redirect to homepage if on a page without its own case-studies section
+        if (pathname !== "/" && pathname !== "") {
           e.preventDefault();
+          // eslint-disable-next-line @next/next/no-location-assign-relative-destination
           window.location.href = "/#case-studies";
           return;
         }

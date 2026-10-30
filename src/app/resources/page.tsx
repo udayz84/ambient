@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Metadata } from "next";
 import { Resources } from "@/components/resources/Resources";
 import { buildArticles } from "@/components/resources/resources-data";
@@ -33,6 +34,7 @@ export default async function ResourcesPage() {
       "content",
       "news_cta",
       "seo",
+      "download_form",
     ]);
   } catch {
     data = null;

@@ -1,6 +1,18 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useSyncExternalStore } from "react";
+
+function useMediaMatch(query: string) {
+  return useSyncExternalStore(
+    (callback) => {
+      const mql = window.matchMedia(query);
+      mql.addEventListener("change", callback);
+      return () => mql.removeEventListener("change", callback);
+    },
+    () => window.matchMedia(query).matches,
+    () => true // Server snapshot matches to prevent hydration mismatch
+  );
+}
 
 export function HeroVisualMedia({
   mobile = false,
@@ -14,8 +26,15 @@ export function HeroVisualMedia({
   alt?: string;
 }) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const isVisibleRef = useRef<boolean>(true);
   const src = videoSrc || imageSrc;
   const isVideo = !!src && /\.(mp4|webm|mov|m4v|avi|wmv|flv|mkv|ogg|ogv)(\?.*)?$/i.test(src);
+
+  // After hydration, only mount the video matching the active viewport breakpoint.
+  // This prevents rendering and decoding duplicate heavy video streams simultaneously.
+  const isBreakpointMatch = useMediaMatch(
+    mobile ? "(max-width: 599.98px)" : "(min-width: 600px)"
+  );
 
   const initVideo = useCallback((video: HTMLVideoElement | null) => {
     if (!video) return;
@@ -39,7 +58,7 @@ export function HeroVisualMedia({
     video.playsInline = true;
 
     const start = () => {
-      if (!video) return;
+      if (!video || !isVisibleRef.current) return;
       video.defaultMuted = true;
       video.muted = true;
       if (video.paused) {
@@ -47,13 +66,21 @@ export function HeroVisualMedia({
       }
     };
 
-    if (video.readyState >= 2) {
+    if (video.readyState >= 2 && isVisibleRef.current) {
       start();
     }
 
     video.addEventListener("loadeddata", start);
     video.addEventListener("canplay", start);
     video.addEventListener("canplaythrough", start);
+
+    // Reliable looping: if native loop stalls or stutters at boundary, rewind & play
+    const handleEnded = () => {
+      if (!video) return;
+      video.currentTime = 0;
+      start();
+    };
+    video.addEventListener("ended", handleEnded);
 
     // Global triggers: if Safari or battery saver initially halts autoplay,
     // resume on first user interaction or scroll, then disconnect.
@@ -67,7 +94,7 @@ export function HeroVisualMedia({
     };
 
     const onUserInteraction = () => {
-      if (video && video.paused) {
+      if (video && video.paused && isVisibleRef.current) {
         video.muted = true;
         void video.play().then(() => {
           removeInteractionListeners();
@@ -86,25 +113,38 @@ export function HeroVisualMedia({
     window.addEventListener("click", onUserInteraction, { passive: true });
     document.addEventListener("visibilitychange", onUserInteraction);
 
-    // Retry loop until playback actually begins
+    // Retry loop until playback actually begins (only while in viewport)
     let tries = 0;
     const retryTimer = window.setInterval(() => {
-      if (!video.paused || ++tries > 20) {
-        window.clearInterval(retryTimer);
+      if (!video || !video.paused || !isVisibleRef.current || ++tries > 15) {
+        if (!video || !video.paused || tries > 15) {
+          window.clearInterval(retryTimer);
+        }
         return;
       }
       start();
-    }, 250);
+    }, 400);
 
-    const io = new IntersectionObserver((entries) => {
-      if (entries.some((entry) => entry.isIntersecting)) start();
-    });
+    // Pause playback when scrolled out of view or hidden to free GPU/CPU decoding
+    const io = new IntersectionObserver(
+      (entries) => {
+        const isVisible = entries.some((entry) => entry.isIntersecting);
+        isVisibleRef.current = isVisible;
+        if (isVisible) {
+          start();
+        } else if (video && !video.paused) {
+          video.pause();
+        }
+      },
+      { threshold: 0.05 }
+    );
     io.observe(video);
 
     return () => {
       video.removeEventListener("loadeddata", start);
       video.removeEventListener("canplay", start);
       video.removeEventListener("canplaythrough", start);
+      video.removeEventListener("ended", handleEnded);
       video.removeEventListener("playing", removeInteractionListeners);
       removeInteractionListeners();
       window.clearInterval(retryTimer);
@@ -126,6 +166,12 @@ export function HeroVisualMedia({
         aria-hidden={!alt}
       />
     );
+  }
+
+  // Once hydrated, if this component belongs to the inactive breakpoint (e.g. mobile
+  // video on desktop, or desktop video on mobile), do not mount the video element.
+  if (!isBreakpointMatch) {
+    return null;
   }
 
   return (
@@ -164,12 +210,16 @@ export function HeroVisualMedia({
         onLoadedData={(e) => {
           const v = e.currentTarget;
           v.muted = true;
-          void v.play().catch(() => {});
+          if (isVisibleRef.current) {
+            void v.play().catch(() => {});
+          }
         }}
         onCanPlay={(e) => {
           const v = e.currentTarget;
           v.muted = true;
-          void v.play().catch(() => {});
+          if (isVisibleRef.current) {
+            void v.play().catch(() => {});
+          }
         }}
       />
     </>

@@ -79,6 +79,7 @@ export default async function ProductsPage() {
         nested: ["steps", "subfeatures"],
       },
       { section: "bench_to_volume", nested: ["cards"] },
+      { section: "case_studies", nested: ["cards"] },
       { section: "som_family", nested: ["cards.features", "cards.image"] },
       { section: "full_picture", fields: ["background_image"], nested: ["callouts"] },
       "start_building",
@@ -130,7 +131,7 @@ export default async function ProductsPage() {
       <div id="features"><ProductsFeatures data={data?.features} /></div>
       <div id="always-on"><ProductsAlwaysOn data={data?.always_on} /></div>
       <div id="metrics"><ProductsMeasured data={data?.measured} formConfig={data?.brief_form} /></div>
-      <div id="case-studies" className="scroll-mt-[90px]"><ApplicationsPageWins data={winsData} /></div>
+      <div id="case-studies" className="scroll-mt-[90px]"><ApplicationsPageWins data={data?.case_studies?.cards?.length ? data.case_studies : winsData} /></div>
       <div id="use-cases"><ProductsUseCases data={data?.use_cases} formConfig={data?.usecase_form} /></div>
       <ProductsReadyToRun />
       {/* <ProductsAppForge data={data?.appforge} /> */}

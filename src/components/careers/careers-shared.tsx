@@ -441,6 +441,7 @@ export function CareersGreenCta({
   href = "#",
   width = "w-[231px]",
   className = "",
+  onClick,
 }: {
   children: React.ReactNode;
   href?: string;
@@ -448,10 +449,12 @@ export function CareersGreenCta({
   textLeft?: string;
   dotLeft?: string;
   className?: string;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }) {
   return (
     <a
       href={href}
+      onClick={onClick}
       className={`${interSemiBold.className} relative block h-[48px] shrink-0 cursor-pointer overflow-hidden ${GREEN_CTA_SHADOW} ${width} ${className}`}
     >
       <span
@@ -509,15 +512,18 @@ export function CareersWhiteCta({
   href = "#",
   width = "w-[170px]",
   className = "",
+  onClick,
 }: {
   children: React.ReactNode;
   href?: string;
   width?: string;
   className?: string;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }) {
   return (
     <a
       href={href}
+      onClick={onClick}
       className={`${interSemiBold.className} relative block h-[48px] shrink-0 cursor-pointer overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] ${width} ${className}`}
     >
       <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />

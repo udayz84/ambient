@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any, react-hooks/set-state-in-effect */
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -23,6 +24,7 @@ export function CareersApplicationModal({
   roles,
   jobDescription,
   config,
+  initialStep,
 }: {
   isOpen: boolean;
   onClose: () => void;
@@ -36,12 +38,15 @@ export function CareersApplicationModal({
     responsibilities?: string;
     perks_benefits?: string;
   };
+  initialStep?: Step;
 }) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [step, setStep] = useState<Step>("description");
+  const defaultStep: Step =
+    initialStep || (jobTitle === "General Application" ? "form" : "description");
+  const [step, setStep] = useState<Step>(defaultStep);
 
   useEffect(() => {
     setMounted(true);
@@ -51,7 +56,7 @@ export function CareersApplicationModal({
     let timeoutId: NodeJS.Timeout;
 
     if (isOpen) {
-      setStep("description");
+      setStep(defaultStep);
       setShouldRender(true);
       timeoutId = setTimeout(() => setIsAnimating(true), 50);
     } else {
@@ -60,10 +65,18 @@ export function CareersApplicationModal({
     }
 
     return () => clearTimeout(timeoutId);
-  }, [isOpen]);
+  }, [isOpen, defaultStep]);
 
   useEffect(() => {
     if (!isOpen) return;
+
+    // Pause locomotiveScroll / lenis so the background page is completely frozen
+    const ls = (window as unknown as { locomotiveScroll?: any }).locomotiveScroll;
+    if (ls && typeof ls.stop === "function") {
+      ls.stop();
+    } else if (ls?.lenisInstance && typeof ls.lenisInstance.stop === "function") {
+      ls.lenisInstance.stop();
+    }
 
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -86,6 +99,13 @@ export function CareersApplicationModal({
       document.removeEventListener("mousedown", handleClickOutside);
       document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
+
+      // Resume locomotiveScroll / lenis
+      if (ls && typeof ls.start === "function") {
+        ls.start();
+      } else if (ls?.lenisInstance && typeof ls.lenisInstance.start === "function") {
+        ls.lenisInstance.start();
+      }
     };
   }, [isOpen, onClose]);
 
@@ -96,7 +116,12 @@ export function CareersApplicationModal({
   };
 
   return createPortal(
-    <div className="fixed inset-0 z-[100] flex items-center justify-end overflow-hidden">
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-end overflow-hidden"
+      data-lenis-prevent="true"
+      onWheel={(e) => e.stopPropagation()}
+      onTouchMove={(e) => e.stopPropagation()}
+    >
       {/* Backdrop */}
       <div
         className={`absolute inset-0 transition-opacity duration-300 ${isAnimating ? "opacity-100" : "opacity-0"}`}
@@ -107,6 +132,8 @@ export function CareersApplicationModal({
       {/* Panel — 700 x 800 shaped container (form.png defines the silhouette via its alpha channel); shared across all steps, slides in from the right */}
       <div
         ref={modalRef}
+        data-lenis-prevent="true"
+        onWheel={(e) => e.stopPropagation()}
         className={`relative h-full w-full md:h-[800px] md:w-[700px] shrink-0 overflow-hidden transition-all duration-300 ease-out ${isAnimating ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"}`}
       >
         {/* Background — Rectangle 1618873545 */}
@@ -202,7 +229,9 @@ function DescriptionStep({
       <Divider />
 
       <div
-        className={`${interRegular.className} custom-scrollbar absolute bottom-[40px] left-[20px] right-[20px] top-[100px] md:bottom-[80px] md:left-[40px] md:right-[40px] md:top-[143px] flex flex-col gap-[24px] overflow-y-auto pb-[20px] pr-[8px] font-normal text-[#a4a4a4] not-italic`}
+        data-lenis-prevent="true"
+        onWheel={(e) => e.stopPropagation()}
+        className={`${interRegular.className} custom-scrollbar absolute bottom-[40px] left-[20px] right-[20px] top-[100px] md:bottom-[80px] md:left-[40px] md:right-[40px] md:top-[143px] flex flex-col gap-[24px] overflow-y-auto overscroll-contain pb-[20px] pr-[8px] font-normal text-[#a4a4a4] not-italic`}
       >
         <section className="flex flex-col gap-[10px]">
           <h3 className="text-[20px] leading-[27px] font-normal text-white">About the Role</h3>
@@ -321,8 +350,10 @@ function FormStep({
       <Divider />
 
       <form
+        data-lenis-prevent="true"
+        onWheel={(e) => e.stopPropagation()}
         onSubmit={handleSubmit}
-        className={`${interRegular.className} absolute bottom-[40px] left-[20px] right-[20px] top-[100px] md:bottom-[40px] md:left-[40px] md:right-[40px] md:top-[138px] flex flex-col gap-[24px] overflow-y-auto pr-[8px] font-normal not-italic`}
+        className={`${interRegular.className} absolute bottom-[40px] left-[20px] right-[20px] top-[100px] md:bottom-[40px] md:left-[40px] md:right-[40px] md:top-[138px] flex flex-col gap-[24px] overflow-y-auto overscroll-contain pr-[8px] font-normal not-italic`}
       >
         {/* Full name */}
         <Field label="Full name*">
@@ -582,7 +613,7 @@ function PanelHeader({
           <div
             className={`${interLight.className} flex gap-[10px] md:gap-[20px] text-[10px] leading-[15px] font-light text-white not-italic`}
           >
-            <span>10+ Years Experience</span>
+            {jobTitle !== "General Application" && <span>10+ Years Experience</span>}
             <span>{location || "Bengaluru"}</span>
           </div>
         </div>

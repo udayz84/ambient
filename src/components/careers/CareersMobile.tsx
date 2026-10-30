@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
@@ -678,18 +679,47 @@ function CareersBenefitsMobile({ data }: { data?: any }) {
 }
 
 /* ------------------------------- BOTTOM CTA ------------------------------- */
+const FALLBACK_BOTTOM_BUTTONS = [
+  { label: "APPLY NOW", href: "#open-roles", variant: "primary" },
+  { label: "REFER A CANDIDATE", href: "#open-roles", variant: "secondary" },
+];
+
 function CareersBottomCtaMobile({ data }: { data?: any }) {
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
 
   const heading = data?.heading || "";
+  const rawButtons =
+    Array.isArray(data?.buttons) && data.buttons.length > 0
+      ? data.buttons
+      : FALLBACK_BOTTOM_BUTTONS;
+
   const buttons: Array<{ label: string; href: string; variant: string }> =
-    Array.isArray(data?.buttons)
-      ? data.buttons.map((b: any) => ({
-          label: b?.label || "",
-          href: b?.href || "",
-          variant: b?.variant || "primary",
-        }))
-      : [];
+    rawButtons.map((b: any) => {
+      let href = b?.href || "#open-roles";
+      if (href === "/careers" || href === "#" || href === "") {
+        href = "#open-roles";
+      }
+      return {
+        label: b?.label || "",
+        href,
+        variant: b?.variant || "primary",
+      };
+    });
+
+  const handleScrollToJobs = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const el = document.getElementById("open-roles") || document.getElementById("jobs");
+    if (el) {
+      const ls = (window as unknown as { locomotiveScroll?: any }).locomotiveScroll;
+      if (ls && typeof ls.scrollTo === "function") {
+        ls.scrollTo(el, { offset: -90 });
+      } else {
+        const top = el.getBoundingClientRect().top + window.scrollY - 90;
+        window.scrollTo({ top, behavior: "smooth" });
+      }
+      window.history.pushState(null, "", "#open-roles");
+    }
+  };
 
   return (
     <section
@@ -713,6 +743,7 @@ function CareersBottomCtaMobile({ data }: { data?: any }) {
             <a
               key={i}
               href={btn.href}
+              onClick={btn.href === "#open-roles" ? handleScrollToJobs : undefined}
               className={`${gilroySemiBold.className} relative flex h-[48px] w-[170px] shrink-0 items-center justify-center overflow-clip bg-white`}
               style={{ boxShadow: "0px 42px 107px 0px rgba(69,196,24,0.2), 0px 24.721px 32.257px 0px rgba(83,216,36,0.15), 0px 10.268px 13.398px 0px rgba(83,216,36,0.15), 0px 3.714px 4.846px 0px rgba(83,216,36,0.1)" }}
             >
@@ -726,6 +757,7 @@ function CareersBottomCtaMobile({ data }: { data?: any }) {
             <a
               key={i}
               href={btn.href}
+              onClick={btn.href === "#open-roles" ? handleScrollToJobs : undefined}
               className={`${gilroySemiBold.className} relative flex h-[48px] w-[170px] shrink-0 items-center justify-center gap-[10px] overflow-clip bg-gradient-to-b from-[#6ced3f] to-[#38a612]`}
               style={{ boxShadow: "0px 42px 107px 0px rgba(69,196,24,0.2), 0px 24.721px 32.257px 0px rgba(83,216,36,0.15), 0px 10.268px 13.398px 0px rgba(83,216,36,0.15), 0px 3.714px 4.846px 0px rgba(83,216,36,0.1)" }}
             >

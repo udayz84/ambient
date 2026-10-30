@@ -954,8 +954,6 @@ function splitTwoLines(text: string): [string, string] {
 
 const ARCHITECTURE_WHITEPAPER_PDF =
   "/whitepapers/Ambient-UniqueArchitecture-Whitepaper.pdf";
-const ARCHITECTURE_WHITEPAPER_NAME =
-  "Ambient-UniqueArchitecture-Whitepaper.pdf";
 
 export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
   const heading = data?.heading || FALLBACK_HEADING;
@@ -963,8 +961,6 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
   const whitepaperUrl =
     data?.whitepaper_pdf || data?.pdfUrl || ARCHITECTURE_WHITEPAPER_PDF;
-  const whitepaperName =
-    data?.whitepaper_name || ARCHITECTURE_WHITEPAPER_NAME;
 
   return (
     <section
@@ -1044,7 +1040,8 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
         <div className="absolute top-[702px] left-1/2 -translate-x-1/2">
           <CompanyEngagementCta
             href={whitepaperUrl}
-            download={whitepaperName}
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-auto px-[20px]"
           >
             Download Architecture Whitepaper
@@ -1136,7 +1133,8 @@ export function TechnologyPageEfficiency({ data }: { data?: any } = {}) {
         <div className="relative z-10 mt-[20px] flex justify-center">
           <CompanyEngagementCta
             href={whitepaperUrl}
-            download={whitepaperName}
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-[280px]"
           >
             Download Architecture Whitepaper

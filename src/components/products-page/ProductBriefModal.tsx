@@ -21,6 +21,7 @@ export function ProductBriefModal({
   pdfUrl,
   pdfName,
   formKey,
+  ctaLabel,
 }: {
   isOpen: boolean;
   title?: string;
@@ -31,6 +32,7 @@ export function ProductBriefModal({
   pdfUrl?: string;
   pdfName?: string;
   formKey?: string;
+  ctaLabel?: string;
 }) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -127,6 +129,7 @@ export function ProductBriefModal({
               pdfUrl={pdfUrl}
               pdfName={pdfName}
               formKey={formKey}
+              ctaLabel={ctaLabel}
             />
           )}
           {step === "confirmation" && <ConfirmationStep onClose={onClose} config={config} downloadStarted={Boolean(pdfUrl)} />}
@@ -144,6 +147,7 @@ function FormStep({
   pdfUrl,
   pdfName,
   formKey,
+  ctaLabel,
 }: {
   title?: string;
   onClose: () => void;
@@ -152,6 +156,7 @@ function FormStep({
   pdfUrl?: string;
   pdfName?: string;
   formKey?: string;
+  ctaLabel?: string;
 }) {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -209,7 +214,7 @@ function FormStep({
       <form onSubmit={handleSubmit} className={`${interRegular.className} flex flex-col gap-[24px] font-normal not-italic`}>
         <div className="flex flex-col items-start gap-[8px]">
           <label className="text-[14px] leading-[21px] text-[#a4a4a4]">
-            {popupField(config, "email")?.label ?? "Please provide your email to receive the requested information."}
+            {popupField(config, "email")?.label ?? config?.description ?? "Please provide your email to receive the requested information."}
           </label>
           <input
             type="email"
@@ -229,7 +234,7 @@ function FormStep({
           >
             <span aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]" />
             <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0px_1px_18px_0px_rgba(217,255,240,0.6)]" />
-            <span className="relative z-10">{isSubmitting ? "Submitting..." : config?.cta_label ?? "Submit"}</span>
+            <span className="relative z-10">{isSubmitting ? "Submitting..." : config?.cta_label ?? ctaLabel ?? "Submit"}</span>
             <Corners leftSrc="/hero/corner-tag-1.svg" rightSrc="/hero/corner-tag-2.svg" className="z-20" />
           </button>
         </div>

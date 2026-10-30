@@ -56,7 +56,7 @@ type WinCardProps = {
   visual: React.ReactNode;
   body: string;
   buttons?: { label: string; href: string }[];
-  onCaseStudyClick?: () => void;
+  onCaseStudyClick?: (href?: string) => void;
 };
 
 function WinCard({ label, stat, statLabel, visual, body, buttons, muted, onCaseStudyClick }: WinCardProps & { muted?: boolean }) {
@@ -109,20 +109,26 @@ function WinCard({ label, stat, statLabel, visual, body, buttons, muted, onCaseS
             {buttons.map((btn: any, i: number) => {
               const soon = (btn.label ?? "").trim().toLowerCase() === "coming soon";
               const isCaseStudy = /case study/i.test(btn?.label || "");
+              if (isCaseStudy) {
+                return (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      onCaseStudyClick?.(btn.href);
+                    }}
+                    className={`${gilroyMedium.className} flex items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[12px] py-[6px] text-[12px] uppercase transition-colors text-white hover:bg-[rgba(226,241,202,0.2)] cursor-pointer`}
+                  >
+                    {btn.label}
+                  </button>
+                );
+              }
               return (
                 <a
                   key={i}
                   href={btn.href || "#"}
-                  onClick={
-                    soon
-                      ? undefined
-                      : isCaseStudy
-                      ? (e) => {
-                          e.preventDefault();
-                          onCaseStudyClick?.();
-                        }
-                      : undefined
-                  }
                   className={`${gilroyMedium.className} flex items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[12px] py-[6px] text-[12px] uppercase transition-colors ${soon ? "text-[#a4a4a4]" : "text-white hover:bg-[rgba(226,241,202,0.2)]"}`}
                 >
                   {btn.label}
@@ -167,6 +173,25 @@ function SecondaryCta({
     );
   }
 
+  if (onClick) {
+    return (
+      <button
+        type="button"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          onClick(e);
+        }}
+        className={`${gilroyMedium.className} relative flex h-[48px] w-auto min-w-[223px] shrink-0 cursor-pointer items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] bg-[rgba(226,241,202,0.12)] px-[24px] transition-colors duration-300 hover:bg-[#45c418] hover:border-[#45c418] hover:shadow-[0px_0px_15px_rgba(69,196,24,0.4)]`}
+      >
+        <span className="relative text-[16px] leading-[28px] font-medium whitespace-nowrap text-white uppercase not-italic">
+          {label}
+        </span>
+        <Corners />
+      </button>
+    );
+  }
+
   return (
     <a
       href={href || "#"}
@@ -200,7 +225,7 @@ function WinCardMobile({
   body: string;
   buttons?: any[];
   muted?: boolean;
-  onCaseStudyClick?: () => void;
+  onCaseStudyClick?: (href?: string) => void;
 }) {
   const { fadeRef, isVisible } = useFadeIn();
 
@@ -241,20 +266,26 @@ function WinCardMobile({
             {buttons.map((btn: any, i: number) => {
               const soon = (btn.label ?? "").trim().toLowerCase() === "coming soon";
               const isCaseStudy = /case study/i.test(btn?.label || "");
+              if (isCaseStudy) {
+                return (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      onCaseStudyClick?.(btn.href);
+                    }}
+                    className={`${gilroyMedium.className} flex items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[12px] py-[6px] text-[12px] uppercase transition-colors text-white hover:bg-[rgba(226,241,202,0.2)] cursor-pointer`}
+                  >
+                    {btn.label}
+                  </button>
+                );
+              }
               return (
                 <a
                   key={i}
                   href={btn.href || "#"}
-                  onClick={
-                    soon
-                      ? undefined
-                      : isCaseStudy
-                      ? (e) => {
-                          e.preventDefault();
-                          onCaseStudyClick?.();
-                        }
-                      : undefined
-                  }
                   className={`${gilroyMedium.className} flex items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[12px] py-[6px] text-[12px] uppercase transition-colors ${soon ? "opacity-50 text-[#a4a4a4] cursor-default pointer-events-none" : "text-white hover:bg-[rgba(226,241,202,0.2)]"}`}
                 >
                   {btn.label}
@@ -368,10 +399,21 @@ const CARDS = [
 
 export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
   const [caseStudyOpen, setCaseStudyOpen] = useState(false);
+  const [pdfUrl, setPdfUrl] = useState("/case-studies/MAI-case-study.pdf");
+  const [pdfName, setPdfName] = useState("MAI-case-study.pdf");
+
+  const openCaseStudy = (href?: string) => {
+    const url = href && href !== "#" ? href : "/case-studies/MAI-case-study.pdf";
+    const name = url.split("/").pop() || "MAI-case-study.pdf";
+    setPdfUrl(url);
+    setPdfName(name);
+    setCaseStudyOpen(true);
+  };
+
   const eyebrow = data?.eyebrow || "Proven in production";
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
-  const heading = data?.heading || FALLBACK_HEADING;
-  const subheading = (data?.subheading as string) || FALLBACK_SUBHEADING;
+  const heading = data?.heading || data?.title || FALLBACK_HEADING;
+  const subheading = (data?.subheading as string) || (data?.subtitle as string) || FALLBACK_SUBHEADING;
   const body = data?.body || BODY;
   const bgImg = "/applications/wins-bg.webp";
 
@@ -388,7 +430,12 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
           else visual = <VisualWearable img={mobileImg} key={`extra-${i}`} />;
 
           const fallbackButtons = CARDS[i]?.buttons || [];
-          const rawButtons = Array.isArray(c?.buttons) && c.buttons.length > 0 ? c.buttons : fallbackButtons;
+          const rawButtons =
+            Array.isArray(c?.buttons) && c.buttons.length > 0
+              ? c.buttons
+              : c?.cta_label
+              ? [{ label: c.cta_label, href: c?.cta_href || "#" }]
+              : fallbackButtons;
           const buttons = rawButtons.map((btn: any) => {
             const isCaseStudy = /case study/i.test(btn?.label || "");
             const href = isCaseStudy && (!btn?.href || btn?.href === "#")
@@ -401,12 +448,12 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
           });
 
           return {
-            label: c?.label || CARDS[i]?.label || "",
-            stat: c?.stat || CARDS[i]?.stat || "",
-            statLabel: c?.stat_label || CARDS[i]?.statLabel || "",
+            label: c?.label || c?.tag || CARDS[i]?.label || "",
+            stat: c?.stat || c?.oversized_result || CARDS[i]?.stat || "",
+            statLabel: c?.stat_label || c?.metric_label || CARDS[i]?.statLabel || "",
             visual,
             mobileImg,
-            body: c?.body || body,
+            body: c?.body || c?.context || body,
             buttons,
           };
         })
@@ -480,7 +527,7 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
                 visual={card.visual}
                 body={card.body || body}
                 muted={(card.buttons ?? []).some((b: any) => (b.label ?? "").trim().toLowerCase() === "coming soon")}
-                onCaseStudyClick={() => setCaseStudyOpen(true)}
+                onCaseStudyClick={(href) => openCaseStudy(href)}
               />
               {card.buttons && card.buttons.length > 0 && (
                 <div className="flex flex-col gap-[8px] items-center">
@@ -499,7 +546,7 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
                             : isCaseStudy
                             ? (e) => {
                                 e.preventDefault();
-                                setCaseStudyOpen(true);
+                                openCaseStudy(btn.href);
                               }
                             : undefined
                         }
@@ -605,7 +652,7 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
                 mobileImg={card.mobileImg}
                 body={card.body || body}
                 muted={(card.buttons ?? []).some((b: any) => (b.label ?? "").trim().toLowerCase() === "coming soon")}
-                onCaseStudyClick={() => setCaseStudyOpen(true)}
+                onCaseStudyClick={(href) => openCaseStudy(href)}
               />
               {card.buttons && card.buttons.length > 0 && (
                 <div className="flex flex-col gap-[8px] items-center w-full px-[8px]">
@@ -624,7 +671,7 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
                             : isCaseStudy
                             ? (e) => {
                                 e.preventDefault();
-                                setCaseStudyOpen(true);
+                                openCaseStudy(btn.href);
                               }
                             : undefined
                         }
@@ -644,8 +691,8 @@ export function ApplicationsPageWins({ data }: { data?: any; slug?: string }) {
         isOpen={caseStudyOpen}
         onClose={() => setCaseStudyOpen(false)}
         formContext="case-study"
-        pdfUrl="/case-studies/MAI-case-study.pdf"
-        pdfName="MAI-case-study.pdf"
+        pdfUrl={pdfUrl}
+        pdfName={pdfName}
         closeLabel="Back to Page"
       />
     </section>

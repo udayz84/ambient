@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { dmMono, gilroyMedium, interRegular } from "../hero/fonts";
 import { GreenCtaButton } from "../contact/contact-shared";
@@ -17,6 +18,7 @@ type ResourcesFeaturedCardProps = ResourceFeaturedCard & {
   ctaHref?: string;
   pdfUrl?: string;
   enableDownloadPopup?: boolean;
+  downloadForm?: any;
 };
 
 export function ResourcesFeaturedCard({
@@ -34,6 +36,7 @@ export function ResourcesFeaturedCard({
   ctaHref = "#",
   pdfUrl,
   enableDownloadPopup = false,
+  downloadForm,
 }: ResourcesFeaturedCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const targetUrl = pdfUrl || ctaHref;
@@ -107,6 +110,8 @@ export function ResourcesFeaturedCard({
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           pdfUrl={targetUrl}
+          title={title}
+          config={downloadForm}
         />
       )}
     </>

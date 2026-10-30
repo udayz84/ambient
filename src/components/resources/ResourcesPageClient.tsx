@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useState } from "react";
 import { ResourcesBuilding } from "./ResourcesBuilding";
@@ -35,7 +36,7 @@ export function ResourcesPageClient({
       >
         <div className="relative mx-auto h-full w-[1440px]">
           <ResourcesHero data={data?.hero} onSearch={setSearchQuery} articles={articles} />
-          <ResourcesFeatured data={data?.featured} />
+          <ResourcesFeatured data={data?.featured} downloadForm={data?.download_form} />
           <ResourcesBuilding data={data?.building} />
           <ResourcesContent
             data={data?.content}

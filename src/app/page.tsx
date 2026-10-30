@@ -52,6 +52,7 @@ export default async function Home() {
       // If the parent is in `nested`, its children (including media) are already
       // populated via [populate]=* — no need to also list sub-fields.
       { section: "measured_proof", nested: ["tag", "stat_cards", "ctas"] },
+      { section: "case_studies", nested: ["cards"] },
       { section: "clients", nested: ["tag", "clients"] },
       { section: "technology", nested: ["tag", "features", "image", "cta"] },
       { section: "platform_scale", nested: ["products", "cta", "secondary_cta"] },
@@ -117,7 +118,7 @@ export default async function Home() {
       {data?.measured_proof && <MeasuredProof data={data.measured_proof} />}
       <div id="case-studies" className="scroll-mt-[90px]">
         <div id="casestudies" className="scroll-mt-[90px]" />
-        <ApplicationsPageWins data={winsData} />
+        <ApplicationsPageWins data={data?.case_studies?.cards?.length ? data.case_studies : data?.wins?.cards?.length ? data.wins : winsData} />
       </div>
       {/* <EcosystemMarqueeStrip data={data?.clients} /> */}
       {data?.technology && <Technology data={data.technology} />}
