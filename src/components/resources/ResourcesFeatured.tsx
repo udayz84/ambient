@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useEffect, useRef, useState } from "react";
 import { mediaUrl } from "@/lib/strapi";
@@ -11,6 +12,7 @@ const FADE_IN_CLASS = "animate-hero-text-fade-in opacity-0";
 
 type ResourcesFeaturedProps = {
   data?: any;
+  downloadForm?: any;
 };
 
 type MergedCard = {
@@ -55,7 +57,7 @@ function buildCards(data: any): MergedCard[] {
   });
 }
 
-export function ResourcesFeatured({ data }: ResourcesFeaturedProps = {}) {
+export function ResourcesFeatured({ data, downloadForm }: ResourcesFeaturedProps = {}) {
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 1 });
   const ref = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -104,7 +106,7 @@ export function ResourcesFeatured({ data }: ResourcesFeaturedProps = {}) {
         data-node-id="2379:1968"
       >
         {cards.map((card) => (
-          <ResourcesFeaturedCard key={card.nodeId} {...card} />
+          <ResourcesFeaturedCard key={card.nodeId} {...card} downloadForm={downloadForm} />
         ))}
       </div>
     </section>

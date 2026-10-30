@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -255,7 +256,7 @@ export function CareersOpenRoles({
               label={generalAppCtaLabel}
               onClick={(e) => {
                 e.preventDefault();
-                setSelectedJob({ title: "General Application" });
+                setSelectedJob({ title: "General Application", initialStep: "form" });
               }}
             />
           </div>
@@ -269,6 +270,7 @@ export function CareersOpenRoles({
         jobTitle={selectedJob?.title || undefined}
         location={selectedJob?.location || "Bengaluru"}
         roles={jobs.map((j: any) => j.title).filter(Boolean)}
+        initialStep={selectedJob?.initialStep || (selectedJob?.title === "General Application" ? "form" : "description")}
         jobDescription={selectedJob ? {
           about_role: selectedJob.about_role,
           responsibilities: selectedJob.responsibilities,

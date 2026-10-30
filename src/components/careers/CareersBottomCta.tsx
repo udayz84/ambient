@@ -1,12 +1,22 @@
+"use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { CornerDecor } from "../contact/contact-shared";
 import { gilroyMedium } from "../hero/fonts";
 import { CareersGreenCta, CareersWhiteCta } from "./careers-shared";
 
 const FALLBACK_HEADING = "Ready to build the future of compute?";
 const FALLBACK_BUTTONS = [
-  { label: "APPLY NOW", href: "/careers", variant: "primary" },
-  { label: "REFER A CANDIDATE", href: "/careers", variant: "secondary" },
+  { label: "APPLY NOW", href: "#open-roles", variant: "primary" },
+  { label: "REFER A CANDIDATE", href: "#open-roles", variant: "secondary" },
 ];
+
+function resolveJobsHref(href?: string): string {
+  if (!href || href === "#" || href === "/careers" || href === "/careers/") {
+    return "#open-roles";
+  }
+  return href;
+}
 
 export function CareersBottomCta({
   data,
@@ -20,10 +30,25 @@ export function CareersBottomCta({
     Array.isArray(data?.buttons) && data.buttons.length > 0
       ? data.buttons.map((b: any) => ({
           label: b?.label || "",
-          href: b?.href || "",
+          href: resolveJobsHref(b?.href),
           variant: b?.variant || "primary",
         }))
       : FALLBACK_BUTTONS;
+
+  const handleScrollToJobs = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const el = document.getElementById("open-roles") || document.getElementById("jobs");
+    if (el) {
+      const ls = (window as unknown as { locomotiveScroll?: any }).locomotiveScroll;
+      if (ls && typeof ls.scrollTo === "function") {
+        ls.scrollTo(el, { offset: -90 });
+      } else {
+        const top = el.getBoundingClientRect().top + window.scrollY - 90;
+        window.scrollTo({ top, behavior: "smooth" });
+      }
+      window.history.pushState(null, "", "#open-roles");
+    }
+  };
 
   const formattedHeading = (() => {
     if (!heading) return null;
@@ -85,21 +110,28 @@ export function CareersBottomCta({
         </div>
 
         <div className="mt-[6px] flex items-center gap-[18px]">
-          {buttons.map((btn, i) =>
-            btn.variant === "secondary" || btn.variant === "ghost" ? (
-              <CareersWhiteCta key={i} href={btn.href} width="w-auto px-5">
+          {buttons.map((btn, i) => {
+            const isJobsAnchor = btn.href === "#open-roles" || btn.href === "#jobs";
+            return btn.variant === "secondary" || btn.variant === "ghost" ? (
+              <CareersWhiteCta
+                key={i}
+                href={btn.href}
+                onClick={isJobsAnchor ? handleScrollToJobs : undefined}
+                width="w-auto px-5"
+              >
                 {btn.label}
               </CareersWhiteCta>
             ) : (
               <CareersGreenCta
                 key={i}
                 href={btn.href}
+                onClick={isJobsAnchor ? handleScrollToJobs : undefined}
                 width="w-auto px-5"
               >
                 {btn.label}
               </CareersGreenCta>
-            ),
-          )}
+            );
+          })}
         </div>
       </div>
     </section>

@@ -1,5 +1,7 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { ResourceDownloadModal } from "./ResourceDownloadModal";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -188,8 +190,9 @@ function ResourcesHeroMobile({ data }: { data?: any } = {}) {
 }
 
 /* ------------------------------- FEATURED --------------------------------- */
-function ResourcesFeaturedMobile({ data }: { data?: any } = {}) {
+function ResourcesFeaturedMobile({ data, downloadForm }: { data?: any; downloadForm?: any } = {}) {
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
+  const [activeModalCard, setActiveModalCard] = useState<{ pdfUrl: string; title: string } | null>(null);
 
   const heading = (data?.heading as string) || "";
   const strapiCards = Array.isArray(data?.cards) ? data.cards : [];
@@ -204,8 +207,17 @@ function ResourcesFeaturedMobile({ data }: { data?: any } = {}) {
       ctaLabel: (card?.cta_label as string) || "",
       ctaHref: (card?.cta_href as string) || "",
       pdfUrl: mediaUrl(card?.pdf_file) || undefined,
+      enableDownloadPopup: Boolean(card?.enable_download_popup),
     };
   });
+
+  const handleCardClick = (e: React.MouseEvent, card: any) => {
+    const targetUrl = card.pdfUrl || card.ctaHref;
+    if (card.enableDownloadPopup && targetUrl) {
+      e.preventDefault();
+      setActiveModalCard({ pdfUrl: targetUrl, title: card.title });
+    }
+  };
 
   return (
     <section
@@ -223,6 +235,7 @@ function ResourcesFeaturedMobile({ data }: { data?: any } = {}) {
         {cards.map((card: any, index: number) => (
           <a
             href={card.pdfUrl || card.ctaHref || "#"}
+            onClick={(e) => handleCardClick(e, card)}
             key={`featured-card-${index}`}
             className="group relative block w-[248px] shrink-0 snap-center bg-[#191919] border-[0.5px] border-solid border-[rgba(255,255,255,0.3)] p-[10px] hover:border-[#53d824]/50 transition-colors cursor-pointer"
           >
@@ -271,6 +284,16 @@ function ResourcesFeaturedMobile({ data }: { data?: any } = {}) {
           </a>
         ))}
       </div>
+
+      {activeModalCard && (
+        <ResourceDownloadModal
+          isOpen={Boolean(activeModalCard)}
+          onClose={() => setActiveModalCard(null)}
+          pdfUrl={activeModalCard.pdfUrl}
+          title={activeModalCard.title}
+          config={downloadForm}
+        />
+      )}
     </section>
   );
 }
@@ -567,7 +590,7 @@ export function ResourcesMobile({
   return (
     <div className="flex w-full flex-col">
       <ResourcesHeroMobile data={data?.hero} />
-      <ResourcesFeaturedMobile data={data?.featured} />
+      <ResourcesFeaturedMobile data={data?.featured} downloadForm={data?.download_form} />
       <ResourcesBuildingMobile data={data?.building} />
       <ResourcesContentMobile data={data?.content} articles={articles} />
       <ResourcesNewsCtaMobile data={data?.news_cta} />
