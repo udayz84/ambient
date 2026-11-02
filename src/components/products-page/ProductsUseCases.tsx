@@ -706,16 +706,15 @@ function ProductsUseCasesMobile({
     }
 
     if (isHorizontal.current) {
-      const clampedOffset = Math.max(-120, Math.min(120, deltaX));
-      setDragOffset(clampedOffset);
+      setDragOffset(deltaX);
     }
   };
 
   const handleTouchEnd = () => {
     if (touchStartX.current !== null && isHorizontal.current) {
       const duration = Date.now() - touchStartTime.current;
-      const isQuickFlick = duration < 300 && Math.abs(dragOffset) > 25;
-      const passedThreshold = Math.abs(dragOffset) > 40;
+      const isQuickFlick = duration < 350 && Math.abs(dragOffset) > 25;
+      const passedThreshold = Math.abs(dragOffset) > 50;
 
       if (passedThreshold || isQuickFlick) {
         if (dragOffset < 0) {
@@ -742,15 +741,14 @@ function ProductsUseCasesMobile({
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (mouseStartX.current === null) return;
     const deltaX = e.clientX - mouseStartX.current;
-    const clampedOffset = Math.max(-120, Math.min(120, deltaX));
-    setDragOffset(clampedOffset);
+    setDragOffset(deltaX);
   };
 
   const handleMouseUp = () => {
     if (mouseStartX.current !== null) {
       const duration = Date.now() - mouseStartTime.current;
-      const isQuickFlick = duration < 300 && Math.abs(dragOffset) > 25;
-      const passedThreshold = Math.abs(dragOffset) > 40;
+      const isQuickFlick = duration < 350 && Math.abs(dragOffset) > 25;
+      const passedThreshold = Math.abs(dragOffset) > 50;
 
       if (passedThreshold || isQuickFlick) {
         if (dragOffset < 0) {
@@ -917,8 +915,8 @@ function ProductsUseCasesMobile({
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
         style={{
-          transform: `translateX(${dragOffset * 0.35}px)`,
-          transition: isDragging ? "none" : "transform 400ms cubic-bezier(0.4,0,0.2,1)",
+          transform: `translateX(${dragOffset}px)`,
+          transition: isDragging ? "none" : "transform 350ms cubic-bezier(0.25, 1, 0.5, 1)",
         }}
       >
         {/* Hero Section (Watermark + Image) */}
@@ -939,9 +937,10 @@ function ProductsUseCasesMobile({
               
               <div className="relative flex items-center justify-center mt-[40px] mb-[40px] w-full z-10">
                 <img loading="lazy" decoding="async"
+                  draggable={false}
                   alt="Build Custom Application"
                   src="/products/build-custom-cube.png"
-                  className="relative z-10 h-auto w-full max-w-[360px] object-contain"
+                  className="relative z-10 pointer-events-none h-auto w-full max-w-[360px] object-contain select-none"
                 />
               </div>
 
@@ -976,9 +975,10 @@ function ProductsUseCasesMobile({
               <div className="relative z-10 mt-[24px] flex w-full justify-center px-[20px]">
                 {activeImage ? (
                   <img loading="lazy" decoding="async"
+                    draggable={false}
                     alt=""
                     src={activeImage}
-                    className="h-auto max-h-[360px] w-[80%] object-contain drop-shadow-2xl"
+                    className="pointer-events-none h-auto max-h-[360px] w-[80%] object-contain drop-shadow-2xl select-none"
                     aria-hidden
                   />
                 ) : null}
@@ -989,7 +989,7 @@ function ProductsUseCasesMobile({
 
         {!activeTab?.isBuild && (
           /* Feature Cards */
-          <div className="relative z-20 mt-[-36px] grid w-full max-w-[343px] md:max-w-[620px] grid-cols-2 gap-[12px] md:gap-[20px]">
+          <div className="relative z-20 mt-[-36px] grid w-full max-w-[343px] md:max-w-[620px] grid-cols-2 gap-[12px] md:gap-[20px] pointer-events-none select-none">
             {cards.map((feature: any, idx: number) => (
               <div key={idx} className="relative w-full border border-white/20 bg-[#000000] p-[16px] md:p-[24px]">
                 {activeTab?.label === "AUTOMOTIVE" && idx === 0 && (

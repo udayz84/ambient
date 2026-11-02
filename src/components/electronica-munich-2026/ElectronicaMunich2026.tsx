@@ -14,7 +14,7 @@ import { ElectronicaClose } from "./ElectronicaClose";
 
 export function ElectronicaMunich2026() {
   return (
-    <main className="flex min-h-screen w-full flex-col overflow-x-clip bg-black text-white lg:-mb-[240px]">
+    <main className="flex min-h-screen w-full flex-col overflow-x-clip bg-black text-white">
       <TabletScaleInit />
       {/* Section 1: Hero */}
       <ElectronicaHero />
