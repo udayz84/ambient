@@ -7,6 +7,7 @@ import {
   gilroySemiBold,
   interMedium,
   interRegular,
+  dmMono,
 } from "@/components/hero/fonts";
 import { TagBadge } from "@/components/hero/TagBadge";
 import { Corners } from "@/components/shared/Corners";
@@ -134,11 +135,11 @@ export function ElectronicaWaysToBuild() {
 
           {/* Two Large Spec Cards Grid */}
           <div className="grid grid-cols-2 gap-[28px]">
-            {/* CARD 01: Grinn Drop-in SOMs */}
+            {/* CARD 01: Drop-in SOMs */}
             <div className="relative flex h-[540px] flex-col justify-between overflow-hidden border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[#0d0d0d] p-[32px] transition-colors duration-300 hover:border-[#53d824]/40">
               <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
 
-              {/* Card Top: Big Number 01 + GRINN Logo (Much Bigger) */}
+              {/* Card Top: Big Number 01 + Mystery Reveal Badge */}
               <div className="flex items-center gap-[18px]">
                 <span
                   className={`${gilroySemiBold.className} bg-clip-text text-[42px] leading-[44px] font-semibold text-transparent`}
@@ -151,11 +152,13 @@ export function ElectronicaWaysToBuild() {
                 >
                   01
                 </span>
-                <img
-                  src="/electronica/grinn-logo-v2.png"
-                  alt="GRINN"
-                  className="h-[42px] w-auto object-contain"
-                />
+                <div className="relative inline-flex items-center gap-[10px] border border-[rgba(240,240,240,0.2)] bg-[#141414] px-[14px] py-[7px]">
+                  <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+                  <span className="size-[7px] rounded-full bg-[#53d824] shadow-[0_0_8px_#53d824] animate-pulse" />
+                  <span className={`${dmMono.className} text-[12px] uppercase tracking-[0.06em] text-[#ecfae5]`}>
+                    Partner Revealing Soon
+                  </span>
+                </div>
               </div>
 
               {/* Card Middle: Text on Left, Hardware Board on Right */}
@@ -183,7 +186,7 @@ export function ElectronicaWaysToBuild() {
                 <div className="relative flex h-[255px] w-[285px] shrink-0 items-center justify-center">
                   <img
                     src="/electronica/grinn-som-board-transparent.png"
-                    alt="Grinn GPX10 Pro SOM"
+                    alt="GPX10 Pro System-on-Module"
                     className="size-full object-contain scale-[1.12] drop-shadow-[0_16px_32px_rgba(0,0,0,0.7)]"
                   />
                 </div>
@@ -244,7 +247,7 @@ export function ElectronicaWaysToBuild() {
                     className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
                   />
                   <span className="relative text-[14px] font-semibold uppercase tracking-[0.03em] text-white not-italic">
-                    Join the Grinn SOM Waitlist
+                    Join the SOM Waitlist
                   </span>
                   <span
                     aria-hidden="true"
@@ -255,11 +258,11 @@ export function ElectronicaWaysToBuild() {
               </div>
             </div>
 
-            {/* CARD 02: Celus Custom Hardware */}
+            {/* CARD 02: Custom Hardware */}
             <div className="relative flex h-[540px] flex-col justify-between overflow-hidden border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[#0d0d0d] p-[32px] transition-colors duration-300 hover:border-[#53d824]/40">
               <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
 
-              {/* Card Top: Big Number 02 + Celus Logo (Much Bigger) */}
+              {/* Card Top: Big Number 02 + Mystery Reveal Badge */}
               <div className="flex items-center gap-[18px]">
                 <span
                   className={`${gilroySemiBold.className} bg-clip-text text-[42px] leading-[44px] font-semibold text-transparent`}
@@ -272,11 +275,13 @@ export function ElectronicaWaysToBuild() {
                 >
                   02
                 </span>
-                <img
-                  src="/electronica/celus-logo-v2.png"
-                  alt="Celus"
-                  className="h-[42px] w-auto object-contain"
-                />
+                <div className="relative inline-flex items-center gap-[10px] border border-[rgba(240,240,240,0.2)] bg-[#141414] px-[14px] py-[7px]">
+                  <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+                  <span className="size-[7px] rounded-full bg-[#53d824] shadow-[0_0_8px_#53d824] animate-pulse" />
+                  <span className={`${dmMono.className} text-[12px] uppercase tracking-[0.06em] text-[#ecfae5]`}>
+                    Partner Revealing Soon
+                  </span>
+                </div>
               </div>
 
               {/* Card Middle: Text on Left, Hardware Visual on Right */}
@@ -303,7 +308,7 @@ export function ElectronicaWaysToBuild() {
                 <div className="relative flex h-[255px] w-[285px] shrink-0 items-center justify-center">
                   <img
                     src="/electronica/celus-laptop-clean.png"
-                    alt="Celus CAD Design System"
+                    alt="AI-Automated Hardware Design Platform"
                     className="size-full object-contain scale-[1.22] drop-shadow-[0_16px_32px_rgba(0,0,0,0.7)]"
                   />
                 </div>
@@ -356,7 +361,7 @@ export function ElectronicaWaysToBuild() {
 
                 {/* Global Green CTA Button */}
                 <Link
-                  href="/contact#celus-inquiry"
+                  href="/contact#hardware-design-inquiry"
                   className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-hidden transition-transform duration-200 hover:scale-[1.01]`}
                 >
                   <span
@@ -364,7 +369,7 @@ export function ElectronicaWaysToBuild() {
                     className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
                   />
                   <span className="relative text-[14px] font-semibold uppercase tracking-[0.03em] text-white not-italic">
-                    Get Celus Updates
+                    Get Hardware Design Updates
                   </span>
                   <span
                     aria-hidden="true"
@@ -425,11 +430,11 @@ export function ElectronicaWaysToBuild() {
           onScroll={handleWaysScroll}
           className="-mx-[20px] flex w-[calc(100%+40px)] snap-x snap-mandatory gap-[16px] overflow-x-auto px-[20px] pb-[8px] pt-[2px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-          {/* Card 01 Mobile: Grinn */}
+          {/* Card 01 Mobile: SOM */}
           <div className="relative flex w-[310px] shrink-0 snap-center flex-col justify-between gap-[20px] overflow-hidden border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[#0d0d0d] p-[24px]">
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
 
-            {/* Big Number 01 + GRINN Logo (Much Bigger) */}
+            {/* Big Number 01 + Mystery Reveal Badge */}
             <div className="flex items-center gap-[14px]">
               <span
                 className={`${gilroySemiBold.className} bg-clip-text text-[36px] leading-[38px] font-semibold text-transparent`}
@@ -442,11 +447,13 @@ export function ElectronicaWaysToBuild() {
               >
                 01
               </span>
-              <img
-                src="/electronica/grinn-logo-v2.png"
-                alt="GRINN"
-                className="h-[34px] w-auto object-contain"
-              />
+              <div className="relative inline-flex items-center gap-[8px] border border-[rgba(240,240,240,0.2)] bg-[#141414] px-[12px] py-[5px]">
+                <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+                <span className="size-[6px] rounded-full bg-[#53d824] shadow-[0_0_8px_#53d824] animate-pulse" />
+                <span className={`${dmMono.className} text-[11px] uppercase tracking-[0.06em] text-[#ecfae5]`}>
+                  Revealing Soon
+                </span>
+              </div>
             </div>
 
             {/* Heading & Text */}
@@ -470,7 +477,7 @@ export function ElectronicaWaysToBuild() {
             <div className="relative my-[12px] flex h-[220px] w-full items-center justify-center">
               <img
                 src="/electronica/grinn-som-board-transparent.png"
-                alt="Grinn GPX10 Pro SOM"
+                alt="GPX10 Pro System-on-Module"
                 className="h-full object-contain scale-[1.08] drop-shadow-[0_12px_24px_rgba(0,0,0,0.7)]"
               />
             </div>
@@ -522,7 +529,7 @@ export function ElectronicaWaysToBuild() {
                 className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
               />
               <span className="relative text-[13px] font-semibold uppercase tracking-[0.02em] text-white not-italic">
-                Join the Grinn SOM Waitlist
+                Join the SOM Waitlist
               </span>
               <span
                 aria-hidden="true"
@@ -532,11 +539,11 @@ export function ElectronicaWaysToBuild() {
             </Link>
           </div>
 
-          {/* Card 02 Mobile: Celus */}
+          {/* Card 02 Mobile: Hardware Design */}
           <div className="relative flex w-[310px] shrink-0 snap-center flex-col justify-between gap-[20px] overflow-hidden border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[#0d0d0d] p-[24px]">
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
 
-            {/* Big Number 02 + Celus Logo (Much Bigger) */}
+            {/* Big Number 02 + Mystery Reveal Badge */}
             <div className="flex items-center gap-[14px]">
               <span
                 className={`${gilroySemiBold.className} bg-clip-text text-[36px] leading-[38px] font-semibold text-transparent`}
@@ -549,11 +556,13 @@ export function ElectronicaWaysToBuild() {
               >
                 02
               </span>
-              <img
-                src="/electronica/celus-logo-v2.png"
-                alt="Celus"
-                className="h-[34px] w-auto object-contain"
-              />
+              <div className="relative inline-flex items-center gap-[8px] border border-[rgba(240,240,240,0.2)] bg-[#141414] px-[12px] py-[5px]">
+                <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+                <span className="size-[6px] rounded-full bg-[#53d824] shadow-[0_0_8px_#53d824] animate-pulse" />
+                <span className={`${dmMono.className} text-[11px] uppercase tracking-[0.06em] text-[#ecfae5]`}>
+                  Revealing Soon
+                </span>
+              </div>
             </div>
 
             {/* Heading & Text */}
@@ -574,7 +583,7 @@ export function ElectronicaWaysToBuild() {
             <div className="relative my-[12px] flex h-[220px] w-full items-center justify-center">
               <img
                 src="/electronica/celus-laptop-clean.png"
-                alt="Celus CAD Design System"
+                alt="AI-Automated Hardware Design Platform"
                 className="h-full object-contain scale-[1.15] drop-shadow-[0_12px_24px_rgba(0,0,0,0.7)]"
               />
             </div>
@@ -618,7 +627,7 @@ export function ElectronicaWaysToBuild() {
 
             {/* Global Green CTA Button */}
             <Link
-              href="/contact#celus-inquiry"
+              href="/contact#hardware-design-inquiry"
               className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[44px] w-full items-center justify-center overflow-hidden`}
             >
               <span
@@ -626,7 +635,7 @@ export function ElectronicaWaysToBuild() {
                 className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
               />
               <span className="relative text-[13px] font-semibold uppercase tracking-[0.02em] text-white not-italic">
-                Get Celus Updates
+                Get Hardware Design Updates
               </span>
               <span
                 aria-hidden="true"

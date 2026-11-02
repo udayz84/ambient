@@ -150,8 +150,8 @@ export function ElectronicaHero() {
           className="pointer-events-none absolute right-[20px] top-[85px] z-10 flex h-[480px] w-[750px] select-none items-start justify-center"
         >
           <img
-            src="/electronica/hero-visual-apps.jpg"
-            alt="Ambient GPX10 Pro Microwatt AI Applications: Wearables, Hearables, Smart Home, Industrial, Medical, Robotics, and Automotive"
+            src="/electronica/hero-spg-board.jpg"
+            alt="Ambient GPX10 Pro Hardware Board with <100 µW AI, 512 GOPs AI Performance, and 30+ AI Models"
             className="size-full object-contain object-top"
           />
         </div>
@@ -231,9 +231,9 @@ export function ElectronicaHero() {
           {/* Hardware Visual Mobile */}
           <div className="relative my-[28px] w-full overflow-hidden">
             <img
-              src="/electronica/hero-visual-apps.jpg"
-              alt="Ambient GPX10 Pro Microwatt AI Applications: Wearables, Hearables, Smart Home, Industrial, Medical, Robotics, and Automotive"
-              className="relative z-10 w-full object-contain mix-blend-screen"
+              src="/electronica/hero-spg-board.jpg"
+              alt="Ambient GPX10 Pro Hardware Board with <100 µW AI, 512 GOPs AI Performance, and 30+ AI Models"
+              className="relative z-10 w-full rounded-[12px] object-contain"
             />
           </div>
 

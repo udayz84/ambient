@@ -141,7 +141,7 @@ export function ElectronicaWhatChanges() {
             {PROOF_BLOCKS.map((item) => (
               <article
                 key={item.num}
-                className="group/card relative flex h-[440px] flex-col overflow-hidden border border-solid border-[rgba(240,240,240,0.18)] bg-[#0d0d0d] px-[24px] pb-[20px] pt-0 transition-all duration-300 hover:border-[#53d824]/50 hover:shadow-[0_0_30px_rgba(83,216,36,0.12)]"
+                className="relative flex h-[440px] flex-col overflow-hidden border border-solid border-[rgba(240,240,240,0.18)] bg-[#0d0d0d] px-[24px] pb-[20px] pt-0"
               >
                 {/* Top Image Box with Radial Backlight and Bottom Gradient Fade */}
                 <div
@@ -159,7 +159,7 @@ export function ElectronicaWhatChanges() {
                   <img
                     src={item.image}
                     alt={item.title}
-                    className={`absolute inset-0 size-full transition-all duration-500 group-hover/card:scale-105 group-hover/card:opacity-100 ${
+                    className={`absolute inset-0 size-full ${
                       item.spreadWidth
                         ? "object-cover object-center opacity-90"
                         : "object-contain p-[16px] opacity-90"
@@ -170,7 +170,7 @@ export function ElectronicaWhatChanges() {
                     <img
                       src={item.frontImage}
                       alt=""
-                      className={`absolute inset-0 size-full transition-all duration-500 group-hover/card:scale-105 ${
+                      className={`absolute inset-0 size-full ${
                         item.spreadWidth
                           ? "object-cover object-center"
                           : "object-contain p-[16px]"
@@ -271,7 +271,7 @@ export function ElectronicaWhatChanges() {
           {PROOF_BLOCKS.map((item) => (
             <article
               key={item.num}
-              className="group/card relative flex min-h-[400px] w-[280px] shrink-0 snap-center flex-col justify-between overflow-hidden border border-solid border-[rgba(240,240,240,0.18)] bg-[#0d0d0d] px-[20px] pb-[18px] pt-0"
+              className="relative flex min-h-[400px] w-[280px] shrink-0 snap-center flex-col justify-between overflow-hidden border border-solid border-[rgba(240,240,240,0.18)] bg-[#0d0d0d] px-[20px] pb-[18px] pt-0"
             >
               {/* Top Image Box */}
               <div

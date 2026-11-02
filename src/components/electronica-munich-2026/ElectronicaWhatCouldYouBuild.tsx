@@ -62,16 +62,16 @@ export function ElectronicaWhatCouldYouBuild({
         </div>
 
         {/* CTA to Book Meeting */}
-        <div className="mt-[24px] flex w-full justify-center">
+        <div className="mt-[24px] flex w-full justify-center px-[16px]">
           <Link
             href="/contact#calendar"
-            className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[44px] w-full max-w-[280px] sm:w-auto items-center justify-center overflow-hidden px-[32px] transition-transform duration-200 hover:scale-[1.02]`}
+            className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative inline-flex h-[48px] w-auto items-center justify-center overflow-hidden px-[32px] sm:px-[44px] transition-transform duration-200 hover:scale-[1.02]`}
           >
             <span
               aria-hidden="true"
               className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
             />
-            <span className="relative text-[13px] font-semibold uppercase tracking-[0.03em] text-white not-italic sm:text-[14px]">
+            <span className="relative whitespace-nowrap text-[13px] font-semibold uppercase tracking-[0.03em] text-white not-italic sm:text-[14px]">
               Book a Meeting to See It Live
             </span>
             <span
@@ -141,14 +141,14 @@ export function ElectronicaWhatCouldYouBuild({
           <button
             type="button"
             onClick={() => setIsModelZooOpen(true)}
-            className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[46px] w-full max-w-[280px] cursor-pointer items-center justify-center overflow-hidden px-[36px] transition-transform duration-200 hover:scale-[1.02] sm:w-auto sm:min-w-[260px]`}
+            className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative inline-flex h-[48px] w-auto cursor-pointer items-center justify-center overflow-hidden px-[36px] transition-transform duration-200 hover:scale-[1.02]`}
             aria-label="Download Model Zoo"
           >
             <span
               aria-hidden="true"
               className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
             />
-            <span className="relative text-[13px] font-semibold uppercase tracking-[0.03em] text-white not-italic sm:text-[14px]">
+            <span className="relative whitespace-nowrap text-[13px] font-semibold uppercase tracking-[0.03em] text-white not-italic sm:text-[14px]">
               Download Model Zoo
             </span>
             <span

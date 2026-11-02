@@ -20,7 +20,7 @@ import {
 
 const INTEREST_OPTIONS = [
   "I'd like to meet the Ambient team in Munich.",
-  "Keep me updated on Grinn SOM availability.",
+  "Keep me updated on SOM availability.",
   "Keep me updated on Celus GPX10 Pro support.",
 ] as const;
 

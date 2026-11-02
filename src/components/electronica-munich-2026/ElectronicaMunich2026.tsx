@@ -7,7 +7,6 @@ import { ElectronicaProof } from "./ElectronicaProof";
 import { ElectronicaWhatCouldYouBuild } from "./ElectronicaWhatCouldYouBuild";
 import { ElectronicaWaysToBuild } from "./ElectronicaWaysToBuild";
 import { ElectronicaCenterEcosystem } from "./ElectronicaCenterEcosystem";
-import { ElectronicaSeeItRun } from "./ElectronicaSeeItRun";
 import { ElectronicaMeetInPerson } from "./ElectronicaMeetInPerson";
 import { ElectronicaGiveaway } from "./ElectronicaGiveaway";
 import { ElectronicaStayUpdated } from "./ElectronicaStayUpdated";
@@ -28,8 +27,6 @@ export function ElectronicaMunich2026() {
       {/* Section 5: The Ambient Ecosystem */}
       <ElectronicaWaysToBuild />
       <ElectronicaCenterEcosystem />
-      {/* Live Hardware Demo */}
-      <ElectronicaSeeItRun />
       {/* Section 6: Electronica 2026 */}
       <ElectronicaMeetInPerson />
       {/* Section 7: Put GPX10 Pro on Your Bench (Giveaway & Lead Capture) */}
