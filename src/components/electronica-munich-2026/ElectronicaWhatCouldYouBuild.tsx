@@ -3,6 +3,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { useState } from "react";
+import Link from "next/link";
 import { ProductsUseCases } from "@/components/products-page/ProductsUseCases";
 import { Corners } from "@/components/shared/Corners";
 import { GreenCtaCorners } from "@/components/shared/GreenCtaCorners";
@@ -27,6 +28,60 @@ export function ElectronicaWhatCouldYouBuild({
   return (
     <div id="applications" className="relative scroll-mt-[90px] bg-black text-white">
       <ProductsUseCases data={data} formConfig={formConfig} />
+
+      {/* =========================================================================
+          GESTURE RECOGNITION LIVE DEMO VIDEO SHOWCASE
+          Replaces the thin payoff strip with an auto-playing YouTube video card.
+          ========================================================================= */}
+      <div className="relative z-10 mx-auto mt-[40px] flex w-full max-w-[1080px] flex-col items-center px-[20px] md:mt-[60px]">
+        {/* Eyebrow / Tag */}
+        <div className="mb-[14px] flex items-center gap-[12px]">
+          <span className={`${gilroyBold.className} rounded border border-[#53d824]/40 bg-[#53d824]/10 px-[12px] py-[5px] text-[11px] font-bold uppercase tracking-[0.08em] text-[#53d824]`}>
+            Gesture Payoff
+          </span>
+        </div>
+
+        {/* Title & Description */}
+        <p className={`${interRegular.className} mb-[24px] max-w-[760px] text-center text-[14px] leading-[22px] text-[#f0f0f0] opacity-85 sm:text-[15px]`}>
+          <strong className="font-semibold text-white">Control a live demo with a flick of your wrist.</strong>{" "}
+          See gesture recognition — and VAD, fall detection, and more — running on our silicon at Electronica.
+        </p>
+
+        {/* Video Box */}
+        <div className="relative w-full overflow-hidden border-[0.5px] border-solid border-[#53d824]/40 bg-[#0d0d0d] shadow-[0_0_32px_rgba(83,216,36,0.14)]">
+          <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+          <div className="relative aspect-video w-full overflow-hidden bg-black">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/kEq5GBnBhWc?autoplay=1&mute=1&loop=1&playlist=kEq5GBnBhWc&playsinline=1"
+              title="Ambient Silicon Gesture Recognition Demo"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="size-full border-0"
+            />
+          </div>
+        </div>
+
+        {/* CTA to Book Meeting */}
+        <div className="mt-[24px] flex w-full justify-center">
+          <Link
+            href="/contact#calendar"
+            className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[44px] w-full max-w-[280px] sm:w-auto items-center justify-center overflow-hidden px-[32px] transition-transform duration-200 hover:scale-[1.02]`}
+          >
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+            />
+            <span className="relative text-[13px] font-semibold uppercase tracking-[0.03em] text-white not-italic sm:text-[14px]">
+              Book a Meeting to See It Live
+            </span>
+            <span
+              aria-hidden="true"
+              className={`pointer-events-none absolute inset-0 ${PRIMARY_CTA_INSET}`}
+            />
+            <GreenCtaCorners />
+          </Link>
+        </div>
+      </div>
 
       {/* =========================================================================
           30+ AI MODELS MARQUEE CAROUSEL (FULL-WIDTH ACROSS ALL VIEWPORTS)

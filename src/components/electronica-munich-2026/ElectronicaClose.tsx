@@ -1,51 +1,121 @@
 "use client";
 
 import Link from "next/link";
-import {
-  gilroySemiBold,
-  interRegular,
-  interMedium,
-} from "@/components/hero/fonts";
-import { TagBadge } from "@/components/hero/TagBadge";
-import { Corners } from "@/components/shared/Corners";
-import { GreenCtaCorners } from "@/components/shared/GreenCtaCorners";
-import { TabletScaleCanvas } from "@/components/shared/TabletScaleCanvas";
-import {
-  CORNER_LEFT,
-  CORNER_RIGHT,
-  HERO_TITLE_GRADIENT,
-  PRIMARY_CTA_INSET,
-  PRIMARY_CTA_SHADOW,
-} from "@/components/products-page/products-data";
+import { gilroyMedium } from "@/components/hero/fonts";
 
 const QUICK_LINKS = [
   {
     label: "Browse the Model Zoo",
     href: "/model-zoo",
+    icon: (
+      <svg
+        className="size-[17px] shrink-0 text-[#53d824] transition-transform duration-200 group-hover:scale-110"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+      >
+        <path d="M12 2a4 4 0 0 1 4 4v1a4 4 0 0 1 4 4 4 4 0 0 1-2 3.5 4 4 0 0 1-2 5.5v1a4 4 0 0 1-4 4 4 4 0 0 1-4-4v-1a4 4 0 0 1-2-5.5 4 4 0 0 1-2-3.5 4 4 0 0 1 4-4V6a4 4 0 0 1 4-4Z" />
+        <path d="M12 2v20" opacity="0.4" />
+      </svg>
+    ),
   },
   {
     label: "Developer Hub",
     href: "/developer",
+    icon: (
+      <svg
+        className="size-[17px] shrink-0 text-[#53d824] transition-transform duration-200 group-hover:scale-110"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+      >
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+        <line x1="12" y1="2" x2="12" y2="22" opacity="0.3" />
+      </svg>
+    ),
   },
   {
     label: "Explore Applications",
     href: "/applications",
+    icon: (
+      <svg
+        className="size-[17px] shrink-0 text-[#53d824] transition-transform duration-200 group-hover:scale-110"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+      >
+        <rect x="3" y="3" width="7" height="7" rx="1.5" />
+        <rect x="14" y="3" width="7" height="7" rx="1.5" />
+        <rect x="14" y="14" width="7" height="7" rx="1.5" />
+        <rect x="3" y="14" width="7" height="7" rx="1.5" />
+      </svg>
+    ),
   },
   {
     label: "Partner Ecosystem",
     href: "/partners",
+    icon: (
+      <svg
+        className="size-[17px] shrink-0 text-[#53d824] transition-transform duration-200 group-hover:scale-110"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+      >
+        <circle cx="6" cy="6" r="3" />
+        <circle cx="18" cy="6" r="3" />
+        <circle cx="12" cy="18" r="3" />
+        <line x1="8.5" y1="7.5" x2="15.5" y2="7.5" />
+        <line x1="7.5" y1="8.5" x2="10.5" y2="15.5" />
+        <line x1="16.5" y1="8.5" x2="13.5" y2="15.5" />
+      </svg>
+    ),
   },
   {
     label: "Talk to an FAE",
     href: "/contact",
+    icon: (
+      <svg
+        className="size-[17px] shrink-0 text-[#53d824] transition-transform duration-200 group-hover:scale-110"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+      >
+        <path d="M3 11V9a9 9 0 0 1 18 0v2" />
+        <path d="M21 16a3 3 0 0 1-3 3h-2" />
+        <path d="M5 19H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h1" />
+        <path d="M19 11h1a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1" />
+        <circle cx="12" cy="19" r="1" />
+      </svg>
+    ),
   },
 ] as const;
 
 export function ElectronicaClose() {
   return (
     <section
-      aria-label="One connected path: From idea to product without starting over"
-      className="relative flex w-full justify-center overflow-hidden bg-black pt-[40px] pb-[10px] text-white min-[600px]:pt-[36px] min-[600px]:pb-0"
+      aria-label="Ambient ecosystem quick navigation"
+      className="relative flex w-full justify-center overflow-hidden bg-black pt-[36px] pb-[48px] text-white md:pt-[44px] md:pb-[64px]"
     >
       {/* Background Radial Glow */}
       <div
@@ -58,203 +128,56 @@ export function ElectronicaClose() {
       />
 
       {/* =========================================================================
-          DESKTOP & TABLET VIEWPORT (>= 600px)
-          Canvas Width: 1440px
+          DESKTOP VIEWPORT (>= 900px)
+          Horizontal unified glass capsule bar with icons, dividers, and hover glow
           ========================================================================= */}
-      <TabletScaleCanvas className="relative hidden h-[490px] w-[1440px] shrink-0 min-[600px]:block">
-        {/* Left Vertical Guide Line */}
-        <div className="pointer-events-none absolute bottom-0 left-[95px] top-0 z-10 flex w-0 items-center justify-center">
-          <div className="flex-none rotate-90">
-            <div className="relative h-0 w-[490px]">
-              <div className="absolute inset-[-1px_0_0_0]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/hero/line-82.svg"
-                  alt=""
-                  className="block size-full max-w-none opacity-40"
-                  aria-hidden="true"
-                />
-              </div>
+      <div className="relative z-10 hidden min-[900px]:inline-flex items-center rounded-full border border-white/20 bg-[#0a0e0a]/90 px-[28px] py-[12px] shadow-[0_8px_32px_rgba(0,0,0,0.8),0_0_24px_rgba(83,216,36,0.08)] backdrop-blur-xl transition-all duration-300 hover:border-[#53d824]/40 hover:shadow-[0_8px_36px_rgba(0,0,0,0.9),0_0_30px_rgba(83,216,36,0.14)]">
+        <div className="flex items-center gap-[20px]">
+          {QUICK_LINKS.map((link, idx) => (
+            <div key={link.label} className="flex items-center gap-[20px]">
+              <Link
+                href={link.href}
+                className={`${gilroyMedium.className} group flex items-center gap-[8px] text-[14px] font-medium text-white/80 transition-all duration-200 hover:text-white`}
+              >
+                {link.icon}
+                <span className="whitespace-nowrap">{link.label}</span>
+                <span className="text-[12px] text-[#53d824]/80 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#53d824]">
+                  ↗
+                </span>
+              </Link>
+              {idx < QUICK_LINKS.length - 1 && (
+                <span className="h-[14px] w-[1px] bg-white/15 select-none" />
+              )}
             </div>
-          </div>
+          ))}
         </div>
-
-        {/* Right Vertical Guide Line */}
-        <div className="pointer-events-none absolute bottom-0 right-[95px] top-0 z-10 flex w-0 items-center justify-center">
-          <div className="flex-none rotate-90">
-            <div className="relative h-0 w-[490px]">
-              <div className="absolute inset-[-0.5px_0]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/hero/line-83.svg"
-                  alt=""
-                  className="block size-full max-w-none opacity-40"
-                  aria-hidden="true"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Center Container */}
-        <div className="absolute inset-x-[100px] top-[24px] z-20 flex flex-col items-center text-center">
-          {/* Eyebrow */}
-          <div className="mb-[16px]">
-            <TagBadge label="ONE CONNECTED PATH" width="max-content" centerLabel />
-          </div>
-
-          {/* Heading */}
-          <div className="relative inline-flex flex-col items-center p-[14px] px-[28px]">
-            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-            <h2
-              className={`${gilroySemiBold.className} m-0 bg-clip-text text-[44px] font-semibold leading-[50px] tracking-[-0.01em] text-transparent not-italic`}
-              style={{
-                backgroundImage: HERO_TITLE_GRADIENT,
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-              }}
-            >
-              From idea to product,
-              <br />
-              without starting over.
-            </h2>
-          </div>
-
-          {/* Body */}
-          <p
-            className={`${interRegular.className} mt-[14px] max-w-[620px] text-[15px] font-normal leading-[23px] text-[#f0f0f0] opacity-85`}
-          >
-            Ambient is more than a processor. It&apos;s a connected path from the
-            model in your head to AI running inside a real product — Model Zoo to
-            ModelForge to silicon to the ecosystem to shipping, with the blank
-            pages removed.
-          </p>
-
-          {/* Closing Statement */}
-          <p
-            className={`${interMedium.className} mt-[10px] text-[14px] text-white/90`}
-          >
-            Less engineering drag. Fewer blank pages.{" "}
-            <span className="text-[#53d824]">«Real AI at microwatt power.»</span>{" "}
-            Welcome to the Ambient Ecosystem.
-          </p>
-
-          {/* Primary CTA Button */}
-          <div className="mt-[24px]">
-            <Link
-              href="/contact#calendar"
-              className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[48px] shrink-0 items-center justify-center overflow-hidden px-[32px] transition-transform duration-200 hover:scale-[1.01]`}
-            >
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-              />
-              <span className="relative text-[14px] font-semibold uppercase tracking-[0.02em] text-white not-italic">
-                Start Building with Ambient
-              </span>
-              <span
-                aria-hidden="true"
-                className={`pointer-events-none absolute inset-0 ${PRIMARY_CTA_INSET}`}
-              />
-              <GreenCtaCorners />
-            </Link>
-          </div>
-
-          {/* Secondary Quick Links: Clean Unified Glass Capsule Bar */}
-          <div className="mt-[22px] inline-flex items-center rounded-full border border-white/15 bg-[#0a0e0a]/85 px-[24px] py-[9px] shadow-[0_4px_25px_rgba(0,0,0,0.6)] backdrop-blur-md">
-            <div className="flex items-center gap-[18px]">
-              {QUICK_LINKS.map((link, idx) => (
-                <div key={link.label} className="flex items-center gap-[18px]">
-                  <Link
-                    href={link.href}
-                    className={`${interMedium.className} group flex items-center gap-[4px] text-[13px] font-medium text-white/75 transition-colors duration-200 hover:text-[#53d824]`}
-                  >
-                    <span>{link.label}</span>
-                    <span className="text-[11px] text-[#53d824]/70 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#53d824]">
-                      ↗
-                    </span>
-                  </Link>
-                  {idx < QUICK_LINKS.length - 1 && (
-                    <span className="text-white/20 select-none">·</span>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </TabletScaleCanvas>
+      </div>
 
       {/* =========================================================================
-          MOBILE VIEWPORT (< 600px)
+          MOBILE & TABLET VIEWPORT (< 900px)
+          Stacked touch-friendly glass card with relevant icons and smooth active state
           ========================================================================= */}
-      <div className="relative flex w-full max-w-[440px] flex-col items-center px-[20px] text-center min-[600px]:hidden">
-        {/* Eyebrow */}
-        <div className="mb-[18px]">
-          <TagBadge label="ONE CONNECTED PATH" width="max-content" centerLabel />
-        </div>
-
-        {/* Title */}
-        <div className="relative mb-[14px] inline-flex flex-col items-center p-[14px]">
-          <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-          <h2
-            className={`${gilroySemiBold.className} w-[320px] max-w-full bg-clip-text text-center text-[28px] font-semibold leading-[34px] tracking-[-0.01em] text-transparent not-italic`}
-            style={{
-              backgroundImage: HERO_TITLE_GRADIENT,
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-            }}
-          >
-            From idea to product,
-            <br />
-            without starting over.
-          </h2>
-        </div>
-
-        {/* Body */}
-        <p
-          className={`${interRegular.className} mb-[16px] text-[14px] font-normal leading-[22px] text-[#f0f0f0] opacity-85`}
-        >
-          Ambient is more than a processor. It&apos;s a connected path from the
-          model in your head to AI running inside a real product — Model Zoo to
-          ModelForge to silicon to the ecosystem to shipping, with the blank
-          pages removed.
-        </p>
-
-        {/* Closing statement */}
-        <p className={`${interMedium.className} mb-[24px] text-[13px] text-white/90`}>
-          Less engineering drag. Fewer blank pages.{" "}
-          <span className="text-[#53d824]">«Real AI at microwatt power.»</span>
-        </p>
-
-        {/* Primary CTA Button */}
-        <Link
-          href="/contact#calendar"
-          className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[48px] w-full items-center justify-center overflow-hidden`}
-        >
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-          />
-          <span className="relative text-[14px] font-semibold uppercase tracking-[0.02em] text-white not-italic">
-            Start Building with Ambient
-          </span>
-          <span
-            aria-hidden="true"
-            className={`pointer-events-none absolute inset-0 ${PRIMARY_CTA_INSET}`}
-          />
-          <GreenCtaCorners />
-        </Link>
-
-        {/* Mobile secondary links: Clean Unified Capsule */}
-        <div className="mt-[20px] inline-flex flex-wrap items-center justify-center gap-[10px] rounded-[16px] border border-white/15 bg-[#0a0e0a]/90 px-[16px] py-[10px] shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
-          {QUICK_LINKS.map((link) => (
+      <div className="relative z-10 w-full max-w-[460px] px-[16px] min-[900px]:hidden">
+        <div className="flex flex-col rounded-[20px] border border-white/20 bg-[#0a0e0a]/90 p-[6px] shadow-[0_8px_30px_rgba(0,0,0,0.7),0_0_20px_rgba(83,216,36,0.08)] backdrop-blur-xl">
+          {QUICK_LINKS.map((link, idx) => (
             <Link
               key={link.label}
               href={link.href}
-              className="flex items-center gap-[4px] px-[6px] py-[3px] text-[12px] font-medium text-white/80 transition-colors active:text-[#53d824]"
+              className={`group flex h-[48px] items-center justify-between px-[16px] rounded-[14px] transition-colors duration-150 hover:bg-white/[0.05] active:bg-[#53d824]/10 ${
+                idx < QUICK_LINKS.length - 1 ? "border-b border-white/[0.06]" : ""
+              }`}
             >
-              <span className={`${interMedium.className}`}>{link.label}</span>
-              <span className="text-[10px] text-[#53d824]">↗</span>
+              <div className="flex items-center gap-[12px]">
+                {link.icon}
+                <span
+                  className={`${gilroyMedium.className} text-[14px] font-medium text-white/85 transition-colors group-hover:text-white`}
+                >
+                  {link.label}
+                </span>
+              </div>
+              <span className="flex size-[24px] items-center justify-center rounded-full bg-white/[0.04] text-[11px] text-[#53d824] transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:bg-[#53d824]/15">
+                ↗
+              </span>
             </Link>
           ))}
         </div>
