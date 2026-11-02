@@ -1,55 +1,61 @@
 "use client";
 
 import { useState, useRef } from "react";
-import Link from "next/link";
 import {
   gilroySemiBold,
   interRegular,
 } from "@/components/hero/fonts";
 import { TagBadge } from "@/components/hero/TagBadge";
 import { Corners } from "@/components/shared/Corners";
-import { GreenCtaCorners } from "@/components/shared/GreenCtaCorners";
 import { TabletScaleCanvas } from "@/components/shared/TabletScaleCanvas";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
   HERO_TITLE_GRADIENT,
-  PRIMARY_CTA_INSET,
-  PRIMARY_CTA_SHADOW,
-  SECONDARY_CTA_BG,
 } from "@/components/products-page/products-data";
 
 const STEP_NUMBER_GRADIENT =
   "linear-gradient(to bottom, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 100%)";
 
-const PROOF_BLOCKS = [
+const PROOF_BLOCKS: readonly {
+  num: string;
+  tag: string;
+  title: string;
+  body: string;
+  image: string;
+  frontImage?: string;
+  spreadWidth?: boolean;
+}[] = [
   {
     num: "01",
     tag: "ALWAYS ON",
     title: "24/7 AI.",
     body: "Run meaningful inference continuously, instead of waking the system periodically to check.",
-    image: "/electronica/what-changes-1.jpg",
+    image: "/products/features-card-brain.webp",
   },
   {
     num: "02",
     tag: "MICROWATT POWER",
     title: "AI that fits the battery.",
     body: "Keep models running where conventional processors force you to duty-cycle, recharge, or plug in.",
-    image: "/electronica/what-changes-2.jpg",
+    image: "/products/features-card-coin.webp",
+    spreadWidth: true,
   },
   {
     num: "03",
     tag: "LOCAL FIRST",
     title: "Data stays where it belongs.",
     body: "Process sensitive audio, motion, vision, and health signals directly on the device.",
-    image: "/electronica/what-changes-3.jpg",
+    image: "/products/features-card-bubble.webp",
   },
   {
     num: "04",
     tag: "PROGRAMMABLE",
     title: "Your model. Your application.",
     body: "Start from a ready model or bring your own TensorFlow, Keras, or ONNX network.",
-    image: "/electronica/what-changes-4.jpg",
+    image: "/products/features-card-stack-back.webp",
+    frontImage: "/products/features-card-stack-front.webp",
+    spreadWidth: true,
   },
 ] as const;
 
@@ -135,11 +141,11 @@ export function ElectronicaWhatChanges() {
             {PROOF_BLOCKS.map((item) => (
               <article
                 key={item.num}
-                className="group/card relative flex h-[340px] flex-col overflow-hidden border border-solid border-[rgba(240,240,240,0.18)] bg-[#0d0d0d] px-[24px] pb-[20px] pt-0 transition-all duration-300 hover:border-[#53d824]/50 hover:shadow-[0_0_30px_rgba(83,216,36,0.12)]"
+                className="group/card relative flex h-[440px] flex-col overflow-hidden border border-solid border-[rgba(240,240,240,0.18)] bg-[#0d0d0d] px-[24px] pb-[20px] pt-0 transition-all duration-300 hover:border-[#53d824]/50 hover:shadow-[0_0_30px_rgba(83,216,36,0.12)]"
               >
                 {/* Top Image Box with Radial Backlight and Bottom Gradient Fade */}
                 <div
-                  className="relative -ml-[20%] h-[170px] w-[140%] shrink-0 overflow-hidden"
+                  className="relative -mx-[24px] h-[240px] shrink-0 overflow-hidden"
                   aria-hidden="true"
                 >
                   <div
@@ -153,13 +159,29 @@ export function ElectronicaWhatChanges() {
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="absolute inset-0 size-full object-cover opacity-80 transition-all duration-500 group-hover/card:scale-105 group-hover/card:opacity-100"
+                    className={`absolute inset-0 size-full transition-all duration-500 group-hover/card:scale-105 group-hover/card:opacity-100 ${
+                      item.spreadWidth
+                        ? "object-cover object-center opacity-90"
+                        : "object-contain p-[16px] opacity-90"
+                    }`}
                   />
+                  {item.frontImage && (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
+                      src={item.frontImage}
+                      alt=""
+                      className={`absolute inset-0 size-full transition-all duration-500 group-hover/card:scale-105 ${
+                        item.spreadWidth
+                          ? "object-cover object-center"
+                          : "object-contain p-[16px]"
+                      }`}
+                    />
+                  )}
                   <div
                     className="absolute inset-0"
                     style={{
                       background:
-                        "linear-gradient(to bottom, rgba(0,0,0,0) 55%, #0d0d0d 100%)",
+                        "linear-gradient(to bottom, rgba(13,13,13,0) 65%, #0d0d0d 100%)",
                     }}
                   />
                 </div>
@@ -169,7 +191,7 @@ export function ElectronicaWhatChanges() {
                   className={`${gilroySemiBold.className} pointer-events-none absolute bg-clip-text text-[52px] font-semibold leading-[52px] text-transparent not-italic`}
                   style={{
                     left: 20,
-                    top: 138,
+                    top: 208,
                     backgroundImage: STEP_NUMBER_GRADIENT,
                     WebkitBackgroundClip: "text",
                     backgroundClip: "text",
@@ -180,7 +202,7 @@ export function ElectronicaWhatChanges() {
                 </span>
 
                 {/* Content: Title & Description */}
-                <div className="relative z-10 mt-[18px] flex flex-1 flex-col items-start gap-[8px] [word-break:break-word]">
+                <div className="relative z-10 mt-[16px] flex flex-1 flex-col items-start gap-[8px] [word-break:break-word]">
                   <h3
                     className={`${gilroySemiBold.className} w-full text-[18px] font-semibold uppercase leading-[23px] tracking-[0.03em] text-white`}
                   >
@@ -198,44 +220,6 @@ export function ElectronicaWhatChanges() {
                 <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
               </article>
             ))}
-          </div>
-
-          {/* Primary & Secondary CTA Buttons Row — Center Aligned */}
-          <div className="mt-[24px] flex items-center justify-center gap-[18px]">
-            {/* Primary CTA: How A-Cube Works */}
-            <Link
-              href="/technology"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[48px] shrink-0 items-center justify-center overflow-hidden px-[28px] transition-transform duration-200 hover:scale-[1.01]`}
-            >
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-              />
-              <span className="relative text-[14px] font-semibold uppercase tracking-[0.02em] text-white not-italic">
-                How A-Cube Works
-              </span>
-              <span
-                aria-hidden="true"
-                className={`pointer-events-none absolute inset-0 ${PRIMARY_CTA_INSET}`}
-              />
-              <GreenCtaCorners />
-            </Link>
-
-            {/* Secondary CTA: Explore GPX10 Pro */}
-            <Link
-              href="/products"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${gilroySemiBold.className} relative flex h-[48px] shrink-0 items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] px-[28px] transition-all duration-200 hover:border-white/40 hover:bg-[rgba(226,241,202,0.18)]`}
-              style={{ backgroundColor: SECONDARY_CTA_BG }}
-            >
-              <span className="relative text-[14px] font-semibold uppercase tracking-[0.02em] text-white not-italic">
-                Explore GPX10 Pro
-              </span>
-              <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-            </Link>
           </div>
         </div>
       </TabletScaleCanvas>
@@ -287,11 +271,11 @@ export function ElectronicaWhatChanges() {
           {PROOF_BLOCKS.map((item) => (
             <article
               key={item.num}
-              className="group/card relative flex min-h-[320px] w-[280px] shrink-0 snap-center flex-col justify-between overflow-hidden border border-solid border-[rgba(240,240,240,0.18)] bg-[#0d0d0d] px-[20px] pb-[18px] pt-0"
+              className="group/card relative flex min-h-[400px] w-[280px] shrink-0 snap-center flex-col justify-between overflow-hidden border border-solid border-[rgba(240,240,240,0.18)] bg-[#0d0d0d] px-[20px] pb-[18px] pt-0"
             >
               {/* Top Image Box */}
               <div
-                className="relative -ml-[20%] h-[155px] w-[140%] shrink-0 overflow-hidden"
+                className="relative -mx-[20px] h-[210px] shrink-0 overflow-hidden"
                 aria-hidden="true"
               >
                 <div
@@ -305,13 +289,29 @@ export function ElectronicaWhatChanges() {
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="absolute inset-0 size-full object-cover opacity-80"
+                  className={`absolute inset-0 size-full transition-all duration-500 ${
+                    item.spreadWidth
+                      ? "object-cover object-center opacity-90"
+                      : "object-contain p-[12px] opacity-90"
+                  }`}
                 />
+                {item.frontImage && (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={item.frontImage}
+                    alt=""
+                    className={`absolute inset-0 size-full transition-all duration-500 ${
+                      item.spreadWidth
+                        ? "object-cover object-center"
+                        : "object-contain p-[12px]"
+                    }`}
+                  />
+                )}
                 <div
                   className="absolute inset-0"
                   style={{
                     background:
-                      "linear-gradient(to bottom, rgba(0,0,0,0) 55%, #0d0d0d 100%)",
+                      "linear-gradient(to bottom, rgba(13,13,13,0) 65%, #0d0d0d 100%)",
                   }}
                 />
               </div>
@@ -321,7 +321,7 @@ export function ElectronicaWhatChanges() {
                 className={`${gilroySemiBold.className} pointer-events-none absolute bg-clip-text text-[46px] font-semibold leading-[46px] text-transparent not-italic`}
                 style={{
                   left: 16,
-                  top: 125,
+                  top: 180,
                   backgroundImage: STEP_NUMBER_GRADIENT,
                   WebkitBackgroundClip: "text",
                   backgroundClip: "text",
@@ -365,44 +365,6 @@ export function ElectronicaWhatChanges() {
               }`}
             />
           ))}
-        </div>
-
-        {/* Mobile Primary & Secondary CTA Buttons */}
-        <div className="mt-[20px] flex w-full flex-col gap-[12px]">
-          {/* Primary CTA */}
-          <Link
-            href="/technology"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[48px] w-full items-center justify-center overflow-hidden`}
-          >
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-            />
-            <span className="relative text-[14px] font-semibold uppercase tracking-[0.02em] text-white not-italic">
-              How A-Cube Works
-            </span>
-            <span
-              aria-hidden="true"
-              className={`pointer-events-none absolute inset-0 ${PRIMARY_CTA_INSET}`}
-            />
-            <GreenCtaCorners />
-          </Link>
-
-          {/* Secondary CTA */}
-          <Link
-            href="/products"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${gilroySemiBold.className} relative flex h-[48px] w-full items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
-            style={{ backgroundColor: SECONDARY_CTA_BG }}
-          >
-            <span className="relative text-[14px] font-semibold uppercase tracking-[0.02em] text-white not-italic">
-              Explore GPX10 Pro
-            </span>
-            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-          </Link>
         </div>
       </div>
     </section>
