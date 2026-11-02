@@ -320,7 +320,8 @@ export const USECASES_CANVAS_WIDTH = 1448;
 export type UseCaseTab = { label: string; active?: boolean };
 
 export const USECASE_TABS: UseCaseTab[] = [
-  { label: "HEARABLES", active: true },
+  { label: "WEARABLES", active: true },
+  { label: "HEARABLES" },
   { label: "SMART HOMES" },
   { label: "INDUSTRIAL" },
   { label: "AUTOMOTIVE" },
@@ -336,8 +337,10 @@ export const TICK_SEGMENTS: number[][] = [
   [8, 8, 8, 8, 8],
   [8, 8, 8, 8, 8],
   [8, 8, 8, 8, 8],
+  [8, 8, 8, 8, 8],
   [4, 5, 6, 7, 8],
   [8, 7, 6, 5, 4],
+  [8, 8, 8, 8, 8],
   [8, 8, 8, 8, 8],
   [8, 8, 8, 8, 8],
 ];

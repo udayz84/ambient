@@ -152,7 +152,9 @@ export function ElectronicaSeeItRun() {
           {/* CTA Button without Arrow */}
           <div className="mt-[32px] pr-[20px] flex justify-end">
             <Link
-              href="/contact#calendar"
+              href="https://calendly.com/saharsh-ambientscientific/electronica-2026"
+              target="_blank"
+              rel="noopener noreferrer"
               className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[48px] shrink-0 items-center justify-center overflow-hidden px-[28px] transition-transform duration-200 hover:scale-[1.01]`}
             >
               <span
@@ -229,7 +231,9 @@ export function ElectronicaSeeItRun() {
 
         {/* CTA Button Mobile */}
         <Link
-          href="/contact#calendar"
+          href="https://calendly.com/saharsh-ambientscientific/electronica-2026"
+          target="_blank"
+          rel="noopener noreferrer"
           className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[48px] w-full items-center justify-center overflow-hidden`}
         >
           <span

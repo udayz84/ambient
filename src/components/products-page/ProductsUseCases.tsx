@@ -59,7 +59,15 @@ function splitLines(value: string): string[] {
  * Figma 2901:2033 — "Built for always-on. Proven across markets."
  * Tabbed use-case showcase. Desktop canvas is 1448 wide / 941 tall.
  */
-export function ProductsUseCases({ data, formConfig }: { data?: any; formConfig?: any }) {
+export function ProductsUseCases({
+  data,
+  formConfig,
+  showCtas = true,
+}: {
+  data?: any;
+  formConfig?: any;
+  showCtas?: boolean;
+}) {
   const heading = data?.heading || FALLBACK_HEADING;
   const headingLines = splitLines(heading);
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
@@ -122,7 +130,12 @@ export function ProductsUseCases({ data, formConfig }: { data?: any; formConfig?
     }
   ];
 
-  const [activeIdx, setActiveIdx] = useState(0);
+  const defaultIndex = () => {
+    const idx = allTabs.findIndex((t) => t.label?.toUpperCase() === "WEARABLES");
+    return idx >= 0 ? idx : 0;
+  };
+
+  const [activeIdx, setActiveIdx] = useState(defaultIndex);
   const [direction, setDirection] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const activeTab = allTabs[activeIdx] || allTabs[0];
@@ -172,6 +185,7 @@ export function ProductsUseCases({ data, formConfig }: { data?: any; formConfig?
               cards={cards}
               primary={primary}
               secondary={secondary}
+              showCtas={showCtas}
               onSecondaryCtaClick={() => setIsModalOpen(true)}
             />
           </div>
@@ -190,6 +204,7 @@ export function ProductsUseCases({ data, formConfig }: { data?: any; formConfig?
         cards={cards}
         primary={primary}
         secondary={secondary}
+        showCtas={showCtas}
         onSecondaryCtaClick={() => setIsModalOpen(true)}
       />
 
@@ -234,6 +249,7 @@ function ProductsUseCasesDesktop({
   cards,
   primary,
   secondary,
+  showCtas,
   onSecondaryCtaClick,
 }: any) {
   const fitRef = useFitText<HTMLHeadingElement>({});
@@ -423,7 +439,7 @@ function ProductsUseCasesDesktop({
       </div>
 
       {/* CTA row — 2901:2143 */}
-      {!activeTab.isBuild && (
+      {!activeTab.isBuild && showCtas && (
         <div
           className="absolute flex items-start gap-[24px] z-50 pointer-events-auto"
           style={{ left: 487, top: 873 }}
@@ -660,6 +676,7 @@ function ProductsUseCasesMobile({
   cards,
   primary,
   secondary,
+  showCtas,
   onSecondaryCtaClick,
 }: any) {
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
@@ -1048,37 +1065,39 @@ function ProductsUseCasesMobile({
           </div>
 
           {/* CTAs */}
-          <div className="mt-[32px] flex flex-row gap-[8px] w-full max-w-[343px] mx-auto relative z-50 pointer-events-auto">
-            <Link
-              href={primary.href?.trim() || "/applications"}
-              className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center overflow-hidden`}
-            >
-              <span
-                aria-hidden
-                className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-              />
-              <AnimatedDotsBackground />
-              <span className="relative max-w-full overflow-hidden text-ellipsis text-[10px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
-                {primary.label}
-              </span>
-              <span
-                aria-hidden
-                className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`}
-              />
-              <GreenCtaCorners />
-            </Link>
-            <a
-              href={secondary.href}
-              onClick={(e) => { e.preventDefault(); onSecondaryCtaClick(); }}
-              className={`${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
-              style={{ backgroundColor: SECONDARY_CTA_BG }}
-            >
-              <span className="relative max-w-full overflow-hidden text-ellipsis px-[4px] sm:px-[12px] py-[10px] text-[10px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic text-center">
-                {secondary.label}
-              </span>
-              <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-            </a>
-          </div>
+          {showCtas && (
+            <div className="mt-[32px] flex flex-row gap-[8px] w-full max-w-[343px] mx-auto relative z-50 pointer-events-auto">
+              <Link
+                href={primary.href?.trim() || "/applications"}
+                className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center overflow-hidden`}
+              >
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+                />
+                <AnimatedDotsBackground />
+                <span className="relative max-w-full overflow-hidden text-ellipsis text-[10px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+                  {primary.label}
+                </span>
+                <span
+                  aria-hidden
+                  className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`}
+                />
+                <GreenCtaCorners />
+              </Link>
+              <a
+                href={secondary.href}
+                onClick={(e) => { e.preventDefault(); onSecondaryCtaClick(); }}
+                className={`${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
+                style={{ backgroundColor: SECONDARY_CTA_BG }}
+              >
+                <span className="relative max-w-full overflow-hidden text-ellipsis px-[4px] sm:px-[12px] py-[10px] text-[10px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic text-center">
+                  {secondary.label}
+                </span>
+                <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+              </a>
+            </div>
+          )}
         </>
       )}
     </section>

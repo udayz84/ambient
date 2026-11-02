@@ -27,7 +27,7 @@ export function ElectronicaWhatCouldYouBuild({
 
   return (
     <div id="applications" className="relative scroll-mt-[90px] bg-black text-white">
-      <ProductsUseCases data={data} formConfig={formConfig} />
+      <ProductsUseCases data={data} formConfig={formConfig} showCtas={false} />
 
       {/* =========================================================================
           GESTURE RECOGNITION LIVE DEMO VIDEO SHOWCASE
@@ -64,7 +64,9 @@ export function ElectronicaWhatCouldYouBuild({
         {/* CTA to Book Meeting */}
         <div className="mt-[24px] flex w-full justify-center px-[16px]">
           <Link
-            href="/contact#calendar"
+            href="https://calendly.com/saharsh-ambientscientific/electronica-2026"
+            target="_blank"
+            rel="noopener noreferrer"
             className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative inline-flex h-[48px] w-auto items-center justify-center overflow-hidden px-[32px] sm:px-[44px] transition-transform duration-200 hover:scale-[1.02]`}
           >
             <span

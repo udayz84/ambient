@@ -2,7 +2,6 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { useState, useRef } from "react";
-import Link from "next/link";
 import {
   gilroySemiBold,
   interMedium,
@@ -13,6 +12,7 @@ import { TagBadge } from "@/components/hero/TagBadge";
 import { Corners } from "@/components/shared/Corners";
 import { GreenCtaCorners } from "@/components/shared/GreenCtaCorners";
 import { TabletScaleCanvas } from "@/components/shared/TabletScaleCanvas";
+import { UpcomingProductsModal } from "@/components/hero/UpcomingProductsModal";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
@@ -23,6 +23,8 @@ import {
 
 export function ElectronicaWaysToBuild() {
   const [activeWaysIndex, setActiveWaysIndex] = useState(0);
+  const [isSomModalOpen, setIsSomModalOpen] = useState(false);
+  const [isHwModalOpen, setIsHwModalOpen] = useState(false);
   const waysCarouselRef = useRef<HTMLDivElement>(null);
 
   const handleWaysScroll = () => {
@@ -238,9 +240,10 @@ export function ElectronicaWaysToBuild() {
                 </div>
 
                 {/* Global Green CTA Button */}
-                <Link
-                  href="/contact#som-inquiry"
-                  className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-hidden transition-transform duration-200 hover:scale-[1.01]`}
+                <button
+                  type="button"
+                  onClick={() => setIsSomModalOpen(true)}
+                  className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[48px] w-full shrink-0 cursor-pointer items-center justify-center overflow-hidden transition-transform duration-200 hover:scale-[1.01]`}
                 >
                   <span
                     aria-hidden="true"
@@ -254,7 +257,7 @@ export function ElectronicaWaysToBuild() {
                     className={`pointer-events-none absolute inset-0 ${PRIMARY_CTA_INSET}`}
                   />
                   <GreenCtaCorners />
-                </Link>
+                </button>
               </div>
             </div>
 
@@ -360,9 +363,10 @@ export function ElectronicaWaysToBuild() {
                 </div>
 
                 {/* Global Green CTA Button */}
-                <Link
-                  href="/contact#hardware-design-inquiry"
-                  className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-hidden transition-transform duration-200 hover:scale-[1.01]`}
+                <button
+                  type="button"
+                  onClick={() => setIsHwModalOpen(true)}
+                  className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[48px] w-full shrink-0 cursor-pointer items-center justify-center overflow-hidden transition-transform duration-200 hover:scale-[1.01]`}
                 >
                   <span
                     aria-hidden="true"
@@ -376,7 +380,7 @@ export function ElectronicaWaysToBuild() {
                     className={`pointer-events-none absolute inset-0 ${PRIMARY_CTA_INSET}`}
                   />
                   <GreenCtaCorners />
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -520,9 +524,10 @@ export function ElectronicaWaysToBuild() {
             </div>
 
             {/* Global Green CTA Button */}
-            <Link
-              href="/contact#som-inquiry"
-              className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[44px] w-full items-center justify-center overflow-hidden`}
+            <button
+              type="button"
+              onClick={() => setIsSomModalOpen(true)}
+              className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[44px] w-full cursor-pointer items-center justify-center overflow-hidden`}
             >
               <span
                 aria-hidden="true"
@@ -536,7 +541,7 @@ export function ElectronicaWaysToBuild() {
                 className={`pointer-events-none absolute inset-0 ${PRIMARY_CTA_INSET}`}
               />
               <GreenCtaCorners />
-            </Link>
+            </button>
           </div>
 
           {/* Card 02 Mobile: Hardware Design */}
@@ -626,9 +631,10 @@ export function ElectronicaWaysToBuild() {
             </div>
 
             {/* Global Green CTA Button */}
-            <Link
-              href="/contact#hardware-design-inquiry"
-              className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[44px] w-full items-center justify-center overflow-hidden`}
+            <button
+              type="button"
+              onClick={() => setIsHwModalOpen(true)}
+              className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[44px] w-full cursor-pointer items-center justify-center overflow-hidden`}
             >
               <span
                 aria-hidden="true"
@@ -642,7 +648,7 @@ export function ElectronicaWaysToBuild() {
                 className={`pointer-events-none absolute inset-0 ${PRIMARY_CTA_INSET}`}
               />
               <GreenCtaCorners />
-            </Link>
+            </button>
           </div>
         </div>
 
@@ -661,6 +667,25 @@ export function ElectronicaWaysToBuild() {
           ))}
         </div>
       </div>
+
+      <UpcomingProductsModal
+        isOpen={isSomModalOpen}
+        onClose={() => setIsSomModalOpen(false)}
+        formContext="som-waitlist"
+        title="Join the SOM Waitlist"
+        productVariant="GPX10 Pro System-on-Module"
+        hideVariantDropdown
+        closeLabel="Close"
+      />
+
+      <UpcomingProductsModal
+        isOpen={isHwModalOpen}
+        onClose={() => setIsHwModalOpen(false)}
+        formContext="hardware-design"
+        title="Get Hardware Design Updates"
+        productVariant="AI-Automated Hardware Design"
+        closeLabel="Close"
+      />
     </section>
   );
 }

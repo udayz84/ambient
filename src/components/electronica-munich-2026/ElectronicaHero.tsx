@@ -1,6 +1,7 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
+import { useState } from "react";
 import Link from "next/link";
 import {
   gilroySemiBold,
@@ -11,6 +12,7 @@ import { TagBadge } from "@/components/hero/TagBadge";
 import { Corners } from "@/components/shared/Corners";
 import { GreenCtaCorners } from "@/components/shared/GreenCtaCorners";
 import { TabletScaleCanvas } from "@/components/shared/TabletScaleCanvas";
+import { UpcomingProductsModal } from "@/components/hero/UpcomingProductsModal";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
@@ -22,6 +24,7 @@ import {
 import { ElectronicaCountdown } from "./ElectronicaCountdown";
 
 export function ElectronicaHero() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <section
       aria-label="Electronica Munich 2026 Hero"
@@ -106,7 +109,9 @@ export function ElectronicaHero() {
           <div className="mt-[28px] flex items-center gap-[20px] pl-[20px]">
             {/* Primary CTA Button */}
             <Link
-              href="/contact#calendar"
+              href="https://calendly.com/saharsh-ambientscientific/electronica-2026"
+              target="_blank"
+              rel="noopener noreferrer"
               className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[48px] shrink-0 items-center justify-center overflow-hidden px-[26px] transition-transform duration-200 hover:scale-[1.01]`}
             >
               <span
@@ -124,16 +129,17 @@ export function ElectronicaHero() {
             </Link>
 
             {/* Secondary CTA Button */}
-            <Link
-              href="/dvk#evalkit-form"
-              className={`${gilroySemiBold.className} relative flex h-[48px] shrink-0 items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] px-[24px] transition-all duration-200 hover:border-white/40 hover:bg-[rgba(226,241,202,0.18)]`}
+            <button
+              type="button"
+              onClick={() => setIsModalOpen(true)}
+              className={`${gilroySemiBold.className} relative flex h-[48px] shrink-0 cursor-pointer items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] px-[24px] transition-all duration-200 hover:border-white/40 hover:bg-[rgba(226,241,202,0.18)]`}
               style={{ backgroundColor: SECONDARY_CTA_BG }}
             >
               <span className="relative text-[14px] font-semibold uppercase tracking-[0.02em] text-white not-italic">
                 Win a Free Eval Kit
               </span>
               <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-            </Link>
+            </button>
           </div>
 
           {/* Subtext */}
@@ -240,7 +246,9 @@ export function ElectronicaHero() {
           {/* Mobile CTA Buttons */}
           <div className="flex w-full flex-col gap-[14px]">
             <Link
-              href="/contact#calendar"
+              href="https://calendly.com/saharsh-ambientscientific/electronica-2026"
+              target="_blank"
+              rel="noopener noreferrer"
               className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-hidden`}
             >
               <span
@@ -257,16 +265,17 @@ export function ElectronicaHero() {
               <GreenCtaCorners />
             </Link>
 
-            <Link
-              href="/dvk#evalkit-form"
-              className={`${gilroySemiBold.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
+            <button
+              type="button"
+              onClick={() => setIsModalOpen(true)}
+              className={`${gilroySemiBold.className} relative flex h-[48px] w-full shrink-0 cursor-pointer items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
               style={{ backgroundColor: SECONDARY_CTA_BG }}
             >
               <span className="relative text-[14px] font-semibold uppercase tracking-[0.02em] text-white not-italic">
                 Win a Free Eval Kit
               </span>
               <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-            </Link>
+            </button>
           </div>
 
           {/* Subtext Mobile */}
@@ -277,6 +286,14 @@ export function ElectronicaHero() {
           </p>
         </div>
       </div>
+
+      <UpcomingProductsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        formContext="evalkit"
+        title="Win a Free Eval Kit"
+        closeLabel="Close"
+      />
     </section>
   );
 }

@@ -5,12 +5,12 @@ import { useState } from "react";
 import {
   gilroySemiBold,
   interRegular,
-  interMedium,
   dmMono,
 } from "@/components/hero/fonts";
 import { Corners } from "@/components/shared/Corners";
 import { GreenCtaCorners } from "@/components/shared/GreenCtaCorners";
 import { TabletScaleCanvas } from "@/components/shared/TabletScaleCanvas";
+import { UpcomingProductsModal } from "@/components/hero/UpcomingProductsModal";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
@@ -19,25 +19,7 @@ import {
 } from "@/components/products-page/products-data";
 
 export function ElectronicaGiveaway() {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!email) return;
-    setSubmitted(true);
-    // Submit to newsletter / giveaway endpoint
-    fetch("/api/newsletter", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email,
-        formKey: "electronica-giveaway-2026",
-      }),
-    }).catch(() => {
-      /* silently ignore */
-    });
-  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <section
@@ -96,52 +78,26 @@ export function ElectronicaGiveaway() {
             </p>
           </div>
 
-          {/* Giveaway Submission Form */}
+          {/* Giveaway CTA */}
           <div className="mt-[28px] pl-[20px] w-full">
-            {submitted ? (
-              <div className="relative inline-flex items-center gap-[12px] border border-[#53d824]/60 bg-white/90 px-[20px] py-[14px] shadow-sm">
-                <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-                <span className={`${interMedium.className} text-[14px] text-[#1b4317] font-medium`}>
-                  ✓ You&apos;re entered! We&apos;ll notify winners during Electronica.
-                </span>
-              </div>
-            ) : (
-              <form
-                onSubmit={handleSubmit}
-                className="flex items-center gap-[12px]"
-              >
-                <div className="relative">
-                  <input
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Work email (company email only)"
-                    className={`${interRegular.className} h-[48px] w-[290px] border border-black/20 bg-white px-[18px] text-[14px] text-black outline-none placeholder:text-gray-500 focus:border-[#38a612] focus:ring-1 focus:ring-[#38a612] shadow-sm`}
-                  />
-                  <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-                </div>
-
-                {/* Primary Green CTA Button without Arrow */}
-                <button
-                  type="submit"
-                  className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[48px] shrink-0 items-center justify-center overflow-hidden px-[24px] transition-transform duration-200 hover:scale-[1.01]`}
-                >
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-                  />
-                  <span className="relative text-[14px] font-semibold uppercase tracking-[0.02em] text-white not-italic">
-                    Enter the Giveaway
-                  </span>
-                  <span
-                    aria-hidden="true"
-                    className={`pointer-events-none absolute inset-0 ${PRIMARY_CTA_INSET}`}
-                  />
-                  <GreenCtaCorners />
-                </button>
-              </form>
-            )}
+            <button
+              type="button"
+              onClick={() => setIsModalOpen(true)}
+              className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[48px] shrink-0 items-center justify-center overflow-hidden px-[28px] transition-transform duration-200 hover:scale-[1.01]`}
+            >
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+              />
+              <span className="relative text-[14px] font-semibold uppercase tracking-[0.02em] text-white not-italic">
+                Enter the Giveaway
+              </span>
+              <span
+                aria-hidden="true"
+                className={`pointer-events-none absolute inset-0 ${PRIMARY_CTA_INSET}`}
+              />
+              <GreenCtaCorners />
+            </button>
           </div>
 
           {/* Subtext & Terms */}
@@ -224,46 +180,24 @@ export function ElectronicaGiveaway() {
 
         {/* Form Mobile */}
         <div className="w-full">
-          {submitted ? (
-            <div className="relative w-full border border-[#53d824]/60 bg-white/90 p-[16px] text-center shadow-sm">
-              <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-              <span className={`${interMedium.className} text-[13px] text-[#1b4317] font-medium`}>
-                ✓ You&apos;re entered! We&apos;ll notify winners during Electronica.
-              </span>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="flex w-full flex-col gap-[12px]">
-              <div className="relative w-full">
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Work email (company email only)"
-                  className={`${interRegular.className} h-[46px] w-full border border-black/20 bg-white px-[16px] text-[14px] text-black outline-none placeholder:text-gray-500 focus:border-[#38a612] shadow-sm`}
-                />
-                <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-              </div>
-
-              <button
-                type="submit"
-                className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[46px] w-full items-center justify-center overflow-hidden`}
-              >
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-                />
-                <span className="relative text-[14px] font-semibold uppercase tracking-[0.02em] text-white not-italic">
-                  Enter the Giveaway
-                </span>
-                <span
-                  aria-hidden="true"
-                  className={`pointer-events-none absolute inset-0 ${PRIMARY_CTA_INSET}`}
-                />
-                <GreenCtaCorners />
-              </button>
-            </form>
-          )}
+          <button
+            type="button"
+            onClick={() => setIsModalOpen(true)}
+            className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[46px] w-full items-center justify-center overflow-hidden`}
+          >
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+            />
+            <span className="relative text-[14px] font-semibold uppercase tracking-[0.02em] text-white not-italic">
+              Enter the Giveaway
+            </span>
+            <span
+              aria-hidden="true"
+              className={`pointer-events-none absolute inset-0 ${PRIMARY_CTA_INSET}`}
+            />
+            <GreenCtaCorners />
+          </button>
 
           {/* Subtext & Terms Mobile */}
           <div className="mt-[16px] flex flex-col items-center gap-[4px] text-center">
@@ -279,6 +213,12 @@ export function ElectronicaGiveaway() {
           </div>
         </div>
       </div>
+
+      <UpcomingProductsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        formContext="evalkit"
+      />
     </section>
   );
 }

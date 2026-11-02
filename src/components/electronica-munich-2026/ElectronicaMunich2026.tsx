@@ -10,7 +10,7 @@ import { ElectronicaCenterEcosystem } from "./ElectronicaCenterEcosystem";
 import { ElectronicaMeetInPerson } from "./ElectronicaMeetInPerson";
 import { ElectronicaGiveaway } from "./ElectronicaGiveaway";
 import { ElectronicaStayUpdated } from "./ElectronicaStayUpdated";
-import { ElectronicaClose } from "./ElectronicaClose";
+// import { ElectronicaClose } from "./ElectronicaClose";
 
 export function ElectronicaMunich2026() {
   return (
@@ -34,8 +34,8 @@ export function ElectronicaMunich2026() {
         <ElectronicaGiveaway />
       </div>
       <ElectronicaStayUpdated />
-      {/* Section 8: Close */}
-      <ElectronicaClose />
+      {/* Section 8: Close (hidden per request) */}
+      {/* <ElectronicaClose /> */}
     </main>
   );
 }

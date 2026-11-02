@@ -141,11 +141,11 @@ export function ElectronicaWhatChanges() {
             {PROOF_BLOCKS.map((item) => (
               <article
                 key={item.num}
-                className="relative flex h-[440px] flex-col overflow-hidden border border-solid border-[rgba(240,240,240,0.18)] bg-[#0d0d0d] px-[24px] pb-[20px] pt-0"
+                className="relative flex h-[370px] flex-col overflow-hidden border border-solid border-[rgba(240,240,240,0.18)] bg-[#0d0d0d] px-[22px] pb-[18px] pt-0"
               >
                 {/* Top Image Box with Radial Backlight and Bottom Gradient Fade */}
                 <div
-                  className="relative -mx-[24px] h-[240px] shrink-0 overflow-hidden"
+                  className="relative -mx-[22px] h-[225px] shrink-0 overflow-hidden"
                   aria-hidden="true"
                 >
                   <div
@@ -191,7 +191,7 @@ export function ElectronicaWhatChanges() {
                   className={`${gilroySemiBold.className} pointer-events-none absolute bg-clip-text text-[52px] font-semibold leading-[52px] text-transparent not-italic`}
                   style={{
                     left: 20,
-                    top: 208,
+                    top: 195,
                     backgroundImage: STEP_NUMBER_GRADIENT,
                     WebkitBackgroundClip: "text",
                     backgroundClip: "text",
@@ -202,14 +202,14 @@ export function ElectronicaWhatChanges() {
                 </span>
 
                 {/* Content: Title & Description */}
-                <div className="relative z-10 mt-[16px] flex flex-1 flex-col items-start gap-[8px] [word-break:break-word]">
+                <div className="relative z-10 mt-[14px] flex flex-1 flex-col items-start gap-[6px] [word-break:break-word]">
                   <h3
                     className={`${gilroySemiBold.className} w-full text-[18px] font-semibold uppercase leading-[23px] tracking-[0.03em] text-white`}
                   >
                     {item.tag}
                   </h3>
                   <p
-                    className={`${interRegular.className} w-full text-[13px] font-normal leading-[20px] text-[#99a1af]`}
+                    className={`${interRegular.className} w-full text-[13px] font-normal leading-[19px] text-[#99a1af]`}
                   >
                     <strong className="font-medium text-white">{item.title} </strong>
                     {item.body}

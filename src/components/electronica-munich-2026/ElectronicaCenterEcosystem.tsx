@@ -72,7 +72,7 @@ export function ElectronicaCenterEcosystem() {
             />
             <img
               src="/electronica/ecosystem-workflow.jpg"
-              alt="GPX10 Pro Ecosystem Workflow: Ambient (Model) → NuraSense (Validate) → Celus (Design) → Grinn (Integrate) → Your Application (Product) + More partners"
+              alt="GPX10 Pro Ecosystem Workflow: Ambient (Model) → NuraSense (Validate) → Revealing Soon (Design) → Revealing Soon (Integrate) → Your Application (Product) + More partners"
               className="relative z-10 size-full object-contain"
             />
           </div>

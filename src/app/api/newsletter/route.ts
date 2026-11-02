@@ -41,6 +41,7 @@ const MARKETING_CONSENT_KEYS = new Set([
   "upcoming-som-waitlist-ble",
   "upcoming-som-waitlist-lte",
   "upcoming-waitlist",
+  "upcoming-hardware-design",
 ]);
 
 /** Display names for the team notification email, per form key. */
@@ -58,6 +59,7 @@ const FORM_NAME_MAP: Record<string, string> = {
   "upcoming-som-waitlist-ble": "SOM (BLE) Waitlist",
   "upcoming-som-waitlist-lte": "SOM (LTE) Waitlist",
   "upcoming-waitlist": "Waitlist Signup",
+  "upcoming-hardware-design": "Hardware Design Updates Request",
   "product-brief": "Product Brief Request",
   "resource-download": "Resource Download",
   "case-study": "Case Study Download",
@@ -104,17 +106,21 @@ export async function POST(req: Request): Promise<Response> {
     ...(details ? [{ label: "Details", value: details }] : []),
   ];
 
-  after(() => {
-    sendSubmissionMail({
+  after(async () => {
+    await sendSubmissionMail({
       formName: FORM_NAME_MAP[formKey] ?? formKey,
       fields,
       replyTo: email,
-    }).catch(() => { /* logged inside sendSubmissionMail */ });
-    addContactAndTag(
+    }).catch((err) => {
+      console.error("[newsletter-mail] error:", err);
+    });
+    await addContactAndTag(
       { email, firstName, lastName, company, phone },
       formKey,
       marketingConsent,
-    ).catch(() => { /* logged inside addContactAndTag */ });
+    ).catch((err) => {
+      console.error("[newsletter-mailchimp] error:", err);
+    });
   });
 
   // Always return success to the user — even if Mailchimp failed the form
