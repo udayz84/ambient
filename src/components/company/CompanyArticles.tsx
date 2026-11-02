@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from "next/image";
 import { mediaUrl } from "@/lib/strapi";
 import { CompanySectionTitle } from "./CompanySectionTitle";
@@ -71,7 +72,7 @@ export function CompanyArticles({ data }: CompanyArticlesProps = {}) {
         </p>
       </div>
 
-      <div className="flex w-full gap-[24px]">
+      <div className="flex w-full items-stretch gap-[24px]">
         <CompanyArticleCardFeatured {...featured} />
 
         <div

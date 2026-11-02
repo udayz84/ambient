@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Fragment } from "react";
 import Image from "next/image";
 import { mediaUrl } from "@/lib/strapi";
@@ -12,26 +13,39 @@ import {
 const FALLBACK_TITLE = "TECHNOLOGY PARTNERS";
 
 const FALLBACK_TECH_PARTNERS = [
-  { src: "/ecosystem/partners/tsmc.svg", width: 100, height: 30 },
-  { src: "/ecosystem/partners/celus.svg", width: 100, height: 30 },
+  { src: "/ecosystem/partners/tsmc.svg", width: 165, height: 48 },
+  { src: "/ecosystem/partners/celus.svg", width: 165, height: 48 },
   { src: "/ecosystem/partners/edgeai.svg", width: 50, height: 50 },
   { src: "/ecosystem/logo-partner-4.svg", width: 35, height: 35 },
   { src: "/ecosystem/logo-octane.svg", width: 35, height: 35 },
 ];
 
-function buildPartnerLogo(p: any) {
+function buildPartnerLogo(p: any, index: number) {
   const logoUrl = mediaUrl(p?.logo);
   if (!logoUrl) return null;
   const naturalW = p?.logo?.width ?? 100;
   const naturalH = p?.logo?.height ?? 30;
-  const maxW = 120;
-  const maxH = 40;
-  const scale = Math.min(maxW / naturalW, maxH / naturalH, 1);
+  const isFirstTwo = index < 2;
+  const maxW = isFirstTwo ? 165 : 120;
+  const maxH = isFirstTwo ? 52 : 40;
+  const scale = isFirstTwo
+    ? Math.min(maxW / naturalW, maxH / naturalH)
+    : Math.min(maxW / naturalW, maxH / naturalH, 1);
   return {
     src: logoUrl,
     width: Math.max(1, Math.round(naturalW * scale)),
     height: Math.max(1, Math.round(naturalH * scale)),
   };
+}
+
+function getPartnerLogoScale(src: string, index: number) {
+  if (index >= 2) return "";
+  const isStrapiAsset = src.includes("logo_partner") || src.includes("blob.core.windows.net");
+  if (isStrapiAsset) {
+    if (index === 0) return "scale-[2.2] origin-center";
+    if (index === 1) return "scale-[3.0] origin-center";
+  }
+  return "scale-[1.3] origin-center";
 }
 
 type CompanyTechnologyPartnersProps = {
@@ -44,7 +58,7 @@ export function CompanyTechnologyPartners({ data }: CompanyTechnologyPartnersPro
   const strapiPartners = Array.isArray(data?.partners) ? data.partners : null;
   const partnerLogos = strapiPartners
     ? (strapiPartners
-        .map(buildPartnerLogo)
+        .map((p: any, i: number) => buildPartnerLogo(p, i))
         .filter(Boolean) as { src: string; width: number; height: number }[])
     : null;
   const displayLogos =
@@ -84,10 +98,11 @@ export function CompanyTechnologyPartners({ data }: CompanyTechnologyPartnersPro
 
           {displayLogos.map((logo, i) => {
             const isRevealingSoon = i >= 2;
+            const logoScaleClass = getPartnerLogoScale(logo.src, i);
             return (
               <Fragment key={i}>
                 <div
-                  className="relative flex w-[150px] shrink-0 flex-col items-center justify-center gap-[12px] py-[20px]"
+                  className="relative flex w-[175px] shrink-0 flex-col items-center justify-center gap-[12px] py-[20px]"
                   data-node-id={COMPANY_TECHNOLOGY_PARTNER_LOGO_NODES[i] ?? `2379:tp-logo-${i}`}
                   data-name="Stat"
                 >
@@ -101,7 +116,7 @@ export function CompanyTechnologyPartners({ data }: CompanyTechnologyPartnersPro
                       alt=""
                       width={logo.width}
                       height={logo.height}
-                      className={`block size-full max-w-none object-contain transition-all ${
+                      className={`block size-full max-w-none object-contain transition-all ${logoScaleClass} ${
                         isRevealingSoon
                           ? "brightness-0 opacity-80 drop-shadow-[0_0_8px_rgba(255,255,255,0.18)]"
                           : ""

@@ -25,7 +25,7 @@ export function CompanyArticleCardCompact({
   return (
     <Link
       href={link || "#"}
-      className="relative flex flex-col w-[590px] shrink-0 border-[0.5px] border-solid border-[rgba(240,240,240,0.3)] bg-[rgba(0,0,0,0.5)] transition-transform hover:scale-[1.01] cursor-pointer p-[12px_10px_16px_10px]"
+      className="relative flex flex-1 flex-col w-[590px] shrink-0 border-[0.5px] border-solid border-[rgba(240,240,240,0.3)] bg-[rgba(0,0,0,0.5)] transition-transform hover:scale-[1.01] cursor-pointer p-[12px_10px_16px_10px]"
       style={{ minHeight: height }}
       data-node-id={nodeId}
       data-name="Article"

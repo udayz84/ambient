@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import Image from "next/image";
 import { mediaUrl } from "@/lib/strapi";
@@ -627,19 +628,32 @@ function CompanyEcosystemMobile({ data }: { data?: any }) {
 /* --------------------------- TECHNOLOGY PARTNERS -------------------------- */
 const FALLBACK_TECH_PARTNERS_TITLE = "TECHNOLOGY PARTNERS";
 
-function buildMobilePartnerLogo(p: any) {
+function buildMobilePartnerLogo(p: any, index: number) {
   const logoUrl = mediaUrl(p?.logo);
   if (!logoUrl) return null;
   const naturalW = p?.logo?.width ?? 80;
   const naturalH = p?.logo?.height ?? 24;
-  const maxW = 80;
-  const maxH = 24;
-  const scale = Math.min(maxW / naturalW, maxH / naturalH, 1);
+  const isFirstTwo = index < 2;
+  const maxW = isFirstTwo ? 125 : 80;
+  const maxH = isFirstTwo ? 36 : 24;
+  const scale = isFirstTwo
+    ? Math.min(maxW / naturalW, maxH / naturalH)
+    : Math.min(maxW / naturalW, maxH / naturalH, 1);
   return {
     src: logoUrl,
     width: Math.max(1, Math.round(naturalW * scale)),
     height: Math.max(1, Math.round(naturalH * scale)),
   };
+}
+
+function getMobilePartnerLogoScale(src: string, index: number) {
+  if (index >= 2) return "";
+  const isStrapiAsset = src.includes("logo_partner") || src.includes("blob.core.windows.net");
+  if (isStrapiAsset) {
+    if (index === 0) return "scale-[1.8] origin-center";
+    if (index === 1) return "scale-[2.4] origin-center";
+  }
+  return "scale-[1.2] origin-center";
 }
 
 function CompanyTechnologyPartnersMobile({ data }: { data?: any }) {
@@ -648,7 +662,7 @@ function CompanyTechnologyPartnersMobile({ data }: { data?: any }) {
   const strapiPartners = Array.isArray(data?.partners) ? data.partners : null;
   const partnerLogos = strapiPartners
     ? (strapiPartners
-        .map(buildMobilePartnerLogo)
+        .map((p: any, i: number) => buildMobilePartnerLogo(p, i))
         .filter(Boolean) as { src: string; width: number; height: number }[])
     : null;
   const hasStrapiLogos = partnerLogos !== null && partnerLogos.length > 0;
@@ -698,7 +712,7 @@ function CompanyTechnologyPartnersMobile({ data }: { data?: any }) {
                       alt=""
                       width={logo.width}
                       height={logo.height}
-                      className={`max-w-none object-contain transition-all ${
+                      className={`max-w-none object-contain transition-all ${getMobilePartnerLogoScale(logo.src, i)} ${
                         isRevealingSoon
                           ? "brightness-0 opacity-80 drop-shadow-[0_0_8px_rgba(255,255,255,0.18)]"
                           : ""
@@ -727,7 +741,7 @@ function CompanyTechnologyPartnersMobile({ data }: { data?: any }) {
                   alt=""
                   width={SILICON_PARTNERS[0].width}
                   height={SILICON_PARTNERS[0].height}
-                  className="max-w-none object-contain"
+                  className="max-w-none object-contain scale-[1.2] origin-center"
                 />
               </div>
               <div className="flex h-[106px] items-center justify-center border-l border-white/10">
@@ -736,7 +750,7 @@ function CompanyTechnologyPartnersMobile({ data }: { data?: any }) {
                   alt=""
                   width={SILICON_PARTNERS[1].width}
                   height={SILICON_PARTNERS[1].height}
-                  className="max-w-none object-contain"
+                  className="max-w-none object-contain scale-[1.2] origin-center"
                 />
               </div>
               {/* Row 2 — Revealing Soon */}
@@ -838,22 +852,6 @@ function ArticleChip({
   );
 }
 
-function ArticleMetaItem({ children }: { children: string }) {
-  return (
-    <div className="flex items-center gap-[6px]">
-      <span
-        className="h-[12px] w-[2px] shrink-0 bg-[#53d824] opacity-60"
-        aria-hidden
-      />
-      <span
-        className={`${interRegular.className} text-[14px] leading-[24px] font-normal whitespace-nowrap text-[rgba(255,255,255,0.5)] not-italic`}
-      >
-        {children}
-      </span>
-    </div>
-  );
-}
-
 function CompanyArticlesMobile({ data }: { data?: any }) {
   const rawFeatured = data?.featured_article;
   const featured = rawFeatured
@@ -940,11 +938,6 @@ function CompanyArticlesMobile({ data }: { data?: any }) {
               >
                 {featured.excerpt}
               </p>
-            </div>
-            <div className="flex flex-col gap-[4px]">
-              <ArticleMetaItem>{featured.date}</ArticleMetaItem>
-              <ArticleMetaItem>{featured.totalFunding}</ArticleMetaItem>
-              <ArticleMetaItem>{featured.fundingRounds}</ArticleMetaItem>
             </div>
           </div>
         </article>
