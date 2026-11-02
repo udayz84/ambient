@@ -41,27 +41,6 @@ export async function POST(req: Request): Promise<Response> {
     return bad("Expected a JSON body.", 400);
   }
 
-  // Cloudflare Turnstile CAPTCHA verification
-  const turnstileToken =
-    (typeof body.turnstileToken === "string" ? body.turnstileToken : undefined) ||
-    (typeof body.recaptchaToken === "string" ? body.recaptchaToken : undefined);
-
-  const turnstileResult = await verifyTurnstileToken(
-    turnstileToken,
-    RECAPTCHA_ACTIONS.CONTACT
-  );
-  if (!turnstileResult.success) {
-    return bad(
-      turnstileResult.error || "Security verification failed. Please try again.",
-      403
-    );
-  }
-
-  const track = String(body.track ?? "sales");
-  const email = String(body.email ?? "").trim();
-  const message = String(body.message ?? "").trim().slice(0, 5000);
-  const subscribed = body.subscribed === true;
-
   let fields: Record<string, string> = {};
   if (body.fields && typeof body.fields === "object" && !Array.isArray(body.fields)) {
     fields = Object.fromEntries(
@@ -70,6 +49,31 @@ export async function POST(req: Request): Promise<Response> {
         .map(([k, v]) => [String(k).slice(0, 100), String(v ?? "").slice(0, 500)])
     );
   }
+
+  const isModelZoo = fields.Source === "Model Zoo request";
+
+  // Cloudflare Turnstile CAPTCHA verification (required for contact tracks, not needed for Model Zoo)
+  if (!isModelZoo) {
+    const turnstileToken =
+      (typeof body.turnstileToken === "string" ? body.turnstileToken : undefined) ||
+      (typeof body.recaptchaToken === "string" ? body.recaptchaToken : undefined);
+
+    const turnstileResult = await verifyTurnstileToken(
+      turnstileToken,
+      RECAPTCHA_ACTIONS.CONTACT
+    );
+    if (!turnstileResult.success) {
+      return bad(
+        turnstileResult.error || "Security verification failed. Please try again.",
+        403
+      );
+    }
+  }
+
+  const track = String(body.track ?? "sales");
+  const email = String(body.email ?? "").trim();
+  const message = String(body.message ?? "").trim().slice(0, 5000);
+  const subscribed = body.subscribed === true;
 
   if (!TRACKS.has(track)) {
     return bad("Invalid contact track.");
@@ -87,7 +91,6 @@ export async function POST(req: Request): Promise<Response> {
   };
 
   // Determine Mailchimp form key from track and source field
-  const isModelZoo = fields.Source === "Model Zoo request";
   const mailchimpFormKey = isModelZoo ? "model-zoo-request" : `contact-${track}`;
   const firstName = (fields["First Name"] || fields["First name"] || fields["Name"] || "").trim() || undefined;
   const lastName = (fields["Last Name"] || fields["Last name"] || "").trim() || undefined;
@@ -99,6 +102,7 @@ export async function POST(req: Request): Promise<Response> {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ data }),
+      signal: AbortSignal.timeout(5000),
     });
 
     if (!res.ok) {
