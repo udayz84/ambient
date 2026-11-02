@@ -6,6 +6,11 @@ import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { PRIMARY_CTA_INSET, PRIMARY_CTA_SHADOW } from "./model-zoo-data";
 import { popupField, type PopupConfig } from "@/lib/popup";
+import { CloudflareTurnstile } from "../shared/CloudflareTurnstile";
+
+const MODEL_FORGE_ZIP_URL =
+  "https://ambientwebasset.blob.core.windows.net/website-assets/Model_Forge_1.0.0.zip";
+const MODEL_FORGE_ZIP_NAME = "Model_Forge_1.0.0.zip";
 
 /**
  * Figma 5428:8536 — "Model zoo form" (700×800 panel), opened by the
@@ -44,19 +49,16 @@ function Field({
 
 export function ModelZooRequestForm({ onClose, config }: { onClose: () => void; /** CMS form entry (model-zoo-page request_form relation). Null = hardcoded fallback copy. */ config?: PopupConfig }) {
   const [values, setValues] = useState({
-    fullName: "",
+    firstName: "",
+    lastName: "",
     email: "",
-    phone: "",
-    purpose: "Testing",
-    notes: "",
+    company: "",
+    applications: "",
   });
-  const [fileName, setFileName] = useState("");
   const [consent, setConsent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const uploadLabel = (popupField(config, "upload")?.label ?? "Upload Ideas")
-    .replace(/\*+\s*$/, "")
-    .trim();
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -72,22 +74,33 @@ export function ModelZooRequestForm({ onClose, config }: { onClose: () => void; 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+
+    if (!turnstileToken) {
+      setError("Please complete the Cloudflare security verification.");
+      return;
+    }
+
     setLoading(true);
     try {
+      const fullName = `${values.firstName.trim()} ${values.lastName.trim()}`.trim();
+
       const res = await fetch("/api/contact-submissions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           track: "sales",
           popupId: config?.documentId,
-          email: values.email,
-          message: values.notes,
+          email: values.email.trim(),
+          message: values.applications.trim(),
           subscribed: consent,
+          turnstileToken,
           fields: {
-            "Full name": values.fullName,
-            "Phone number": `+91 ${values.phone}`,
-            Purpose: values.purpose,
-            "Upload ideas": fileName,
+            "Full name": fullName,
+            "First name": values.firstName.trim(),
+            "Last name": values.lastName.trim(),
+            "Company Email ID": values.email.trim(),
+            Company: values.company.trim(),
+            "What are the applications are you looking for?": values.applications.trim(),
             Source: "Model Zoo request",
           },
         }),
@@ -96,6 +109,17 @@ export function ModelZooRequestForm({ onClose, config }: { onClose: () => void; 
         const body = await res.json().catch(() => null);
         throw new Error(body?.error || "Submission failed. Please try again.");
       }
+
+      // Trigger the 1.55 GB file download from blob storage upon submission
+      const a = document.createElement("a");
+      a.href = MODEL_FORGE_ZIP_URL;
+      a.download = MODEL_FORGE_ZIP_NAME;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
       onClose();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Submission failed. Please try again.");
@@ -118,7 +142,7 @@ export function ModelZooRequestForm({ onClose, config }: { onClose: () => void; 
         className="animate-popup-slide-in-right absolute inset-y-0 right-0 w-full max-w-[700px] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="relative h-full min-h-[800px]">
+        <div className="relative h-full min-h-[880px]">
         {/* Panel background — 5428:8537 (#141414, notched left edge, 0.3 stroke) */}
         <img
           alt=""
@@ -155,104 +179,80 @@ export function ModelZooRequestForm({ onClose, config }: { onClose: () => void; 
             className="pointer-events-auto flex w-full max-w-[620px] flex-col gap-[24px] -translate-y-[24px]"
             data-node-id="5428:8547"
           >
-            {/* Full name — 5428:8548 */}
-            <Field label={popupField(config, "full_name")?.label ?? "Full name*"} htmlFor="mz-full-name">
-              <input
-                id="mz-full-name"
-                type="text"
-                required
-                value={values.fullName}
-                onChange={set("fullName")}
-                placeholder={popupField(config, "full_name")?.placeholder ?? "Enter Your Full Name"}
-                className={`${INPUT_CLS} ${interRegular.className} h-[42px] w-full text-[14px] leading-[21px] text-white outline-none placeholder:text-[#4a4a4a] not-italic`}
-              />
-            </Field>
-
-            {/* Email + Phone — 5428:8549 */}
+            {/* First Name + Last Name */}
             <div className="flex w-full flex-col gap-[24px] min-[560px]:flex-row min-[560px]:gap-[18px]">
-              <Field label={popupField(config, "email")?.label ?? "Email ID*"} htmlFor="mz-email" className="min-[560px]:flex-1">
+              <Field label={popupField(config, "first_name")?.label ?? "First Name*"} htmlFor="mz-first-name" className="min-[560px]:flex-1">
+                <input
+                  id="mz-first-name"
+                  type="text"
+                  required
+                  value={values.firstName}
+                  onChange={set("firstName")}
+                  placeholder={popupField(config, "first_name")?.placeholder ?? "Enter First Name"}
+                  className={`${INPUT_CLS} ${interRegular.className} h-[42px] w-full text-[14px] leading-[21px] text-white outline-none placeholder:text-[#4a4a4a] not-italic`}
+                />
+              </Field>
+              <Field label={popupField(config, "last_name")?.label ?? "Last Name*"} htmlFor="mz-last-name" className="min-[560px]:flex-1">
+                <input
+                  id="mz-last-name"
+                  type="text"
+                  required
+                  value={values.lastName}
+                  onChange={set("lastName")}
+                  placeholder={popupField(config, "last_name")?.placeholder ?? "Enter Last Name"}
+                  className={`${INPUT_CLS} ${interRegular.className} h-[42px] w-full text-[14px] leading-[21px] text-white outline-none placeholder:text-[#4a4a4a] not-italic`}
+                />
+              </Field>
+            </div>
+
+            {/* Company Email ID + Company */}
+            <div className="flex w-full flex-col gap-[24px] min-[560px]:flex-row min-[560px]:gap-[18px]">
+              <Field label={popupField(config, "email")?.label ?? "Company Email ID*"} htmlFor="mz-email" className="min-[560px]:flex-1">
                 <input
                   id="mz-email"
                   type="email"
                   required
                   value={values.email}
                   onChange={set("email")}
-                  placeholder={popupField(config, "email")?.placeholder ?? "Enter Your Email ID"}
+                  placeholder={popupField(config, "email")?.placeholder ?? "Enter Company Email ID"}
                   className={`${INPUT_CLS} ${interRegular.className} h-[42px] w-full text-[14px] leading-[21px] text-white outline-none placeholder:text-[#4a4a4a] not-italic`}
                 />
               </Field>
-              <Field label={popupField(config, "phone")?.label ?? "Phone Number*"} htmlFor="mz-phone" className="min-[560px]:flex-1">
-                <div className={`${INPUT_CLS} flex h-[42px] min-h-0 w-full items-center gap-[6px]`}>
-                  <span className="flex shrink-0 items-center gap-[2px]" data-node-id="5428:8554">
-                    <img alt="" src="/model-zoo/form-chevron-down.svg" className="block h-[7.81px] w-[14.12px]" aria-hidden />
-                    <img alt="India" src="/model-zoo/form-flag-india.svg" className="mx-[2px] block h-[16px] w-[23px]" />
-                    <span className={`${interRegular.className} text-[14px] leading-[21px] text-white not-italic`}>+91</span>
-                  </span>
-                  <span className="h-[18px] w-px shrink-0 bg-white" aria-hidden />
-                  <input
-                    id="mz-phone"
-                    type="tel"
-                    required
-                    value={values.phone}
-                    onChange={set("phone")}
-                    placeholder={popupField(config, "phone")?.placeholder ?? "Enter Your Phone Number"}
-                    className={`${interRegular.className} h-full w-full min-w-0 flex-1 bg-transparent text-[14px] leading-[21px] text-white outline-none placeholder:text-[#4a4a4a] not-italic`}
-                  />
-                </div>
-              </Field>
-            </div>
-
-            {/* Purpose + Upload — 5428:8617 */}
-            <div className="flex w-full flex-col gap-[24px] min-[560px]:flex-row min-[560px]:gap-[18px]">
-              <Field label={popupField(config, "purpose")?.label ?? "Purpose*"} htmlFor="mz-purpose" className="min-[560px]:flex-1">
-                <div className="relative w-full">
-                  <select
-                    id="mz-purpose"
-                    required
-                    value={values.purpose}
-                    onChange={set("purpose")}
-                    className={`${INPUT_CLS} ${interRegular.className} h-[42px] w-full appearance-none text-[14px] leading-[21px] text-[#4a4a4a] outline-none not-italic`}
-                  >
-                    <option value="Testing">Testing</option>
-                    <option value="Evaluation">Evaluation</option>
-                    <option value="Development">Development</option>
-                    <option value="Research">Research</option>
-                    <option value="Other">Other</option>
-                  </select>
-                  <img alt="" src="/model-zoo/form-chevron-down.svg" className="pointer-events-none absolute top-1/2 right-[12px] h-[7.81px] w-[14.12px] -translate-y-1/2" aria-hidden />
-                </div>
-              </Field>
-              <Field label={uploadLabel} htmlFor="mz-upload" className="min-[560px]:flex-1">
-                <label
-                  htmlFor="mz-upload"
-                  className={`${INPUT_CLS} flex h-[42px] w-full cursor-pointer items-center justify-between gap-[12px]`}
-                  data-node-id="5428:8671"
-                >
-                  <span className={`${interRegular.className} truncate text-[14px] leading-[21px] ${fileName ? "text-white" : "text-[#4a4a4a]"} not-italic`} data-node-id="5428:8672">
-                    {fileName || "Upload File here"}
-                  </span>
-                  <img alt="" src="/model-zoo/form-icon-upload.svg" className="h-[16.5px] w-[17.5px] shrink-0" aria-hidden />
-                </label>
+              <Field label={popupField(config, "company")?.label ?? "Company*"} htmlFor="mz-company" className="min-[560px]:flex-1">
                 <input
-                  id="mz-upload"
-                  type="file"
-                  className="sr-only"
-                  onChange={(e) => setFileName(e.target.files?.[0]?.name ?? "")}
+                  id="mz-company"
+                  type="text"
+                  required
+                  value={values.company}
+                  onChange={set("company")}
+                  placeholder={popupField(config, "company")?.placeholder ?? "Enter Company Name"}
+                  className={`${INPUT_CLS} ${interRegular.className} h-[42px] w-full text-[14px] leading-[21px] text-white outline-none placeholder:text-[#4a4a4a] not-italic`}
                 />
               </Field>
             </div>
 
-            {/* Notes — 5428:8634 */}
-            <Field label={popupField(config, "notes")?.label ?? "Notes"} htmlFor="mz-notes">
+            {/* What are the applications are you looking for? */}
+            <Field label={popupField(config, "notes")?.label ?? "What are the applications are you looking for?*"} htmlFor="mz-applications">
               <textarea
-                id="mz-notes"
+                id="mz-applications"
                 rows={3}
-                value={values.notes}
-                onChange={set("notes")}
-                placeholder={popupField(config, "notes")?.placeholder ?? "Enter your notes (if any)"}
+                required
+                value={values.applications}
+                onChange={set("applications")}
+                placeholder={popupField(config, "notes")?.placeholder ?? "Enter the applications you are looking for"}
                 className={`${INPUT_CLS} ${interRegular.className} h-[90px] w-full resize-none text-[14px] leading-[21px] text-white outline-none placeholder:text-[#4a4a4a] not-italic`}
               />
             </Field>
+
+            {/* Cloudflare Turnstile Verification */}
+            <div className="flex w-full justify-start py-[2px]">
+              <CloudflareTurnstile
+                action="contact"
+                onVerify={setTurnstileToken}
+                onExpire={() => setTurnstileToken("")}
+                onError={() => setTurnstileToken("")}
+              />
+            </div>
 
             {/* Consent + Submit — 5428:8638 */}
             <div className="flex w-full flex-col-reverse items-start gap-[16px] min-[560px]:flex-row min-[560px]:items-center min-[560px]:justify-between" data-node-id="5428:8638">
