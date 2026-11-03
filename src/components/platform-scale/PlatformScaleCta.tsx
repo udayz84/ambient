@@ -20,6 +20,8 @@ export function PlatformScaleCta({ data }: { data?: any }) {
     >
       {label ? (
         <a
+          id="homepage_platform_overview_cta_explore_gpx10_pro"
+          data-analytics-id="homepage_platform_overview_cta_explore_gpx10_pro"
           href={href}
           className={`${interMedium.className} relative flex h-[48px] min-w-[204px] w-auto px-[24px] items-center justify-center shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
         >
@@ -45,6 +47,8 @@ export function PlatformScaleCta({ data }: { data?: any }) {
 
       {secLabel ? (
         <a
+          id="homepage_platform_overview_cta_signup_upcoming_products"
+          data-analytics-id="homepage_platform_overview_cta_signup_upcoming_products"
           href={secHref}
           onClick={(e) => {
             const text = secLabel.toUpperCase();

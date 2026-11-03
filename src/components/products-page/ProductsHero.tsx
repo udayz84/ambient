@@ -331,6 +331,7 @@ function SecondaryCta({
   download,
   target,
   rel,
+  id = "product_page_hero_cta_download_product_brief",
 }: {
   children: React.ReactNode;
   href: string;
@@ -339,9 +340,12 @@ function SecondaryCta({
   download?: boolean | string;
   target?: string;
   rel?: string;
+  id?: string;
 }) {
   return (
     <a
+      id={id}
+      data-analytics-id={id}
       href={href}
       download={download}
       target={target}
@@ -491,6 +495,8 @@ function ProductsHeroMobile({
               <GreenCtaCorners />
             </a>
             <a
+              id="product_page_hero_cta_download_product_brief"
+              data-analytics-id="product_page_hero_cta_download_product_brief"
               href={secondary.href && secondary.href !== "#" ? secondary.href : "/GPX10-Pro-Product-Brief.pdf"}
               target="_blank"
               rel="noopener noreferrer"

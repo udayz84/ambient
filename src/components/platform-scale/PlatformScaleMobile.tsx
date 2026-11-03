@@ -540,6 +540,8 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
         <div className="relative mt-[31px] flex flex-col items-center gap-[12px] w-full max-w-[340px]">
           {ctaLabel ? (
             <a
+              id="homepage_platform_overview_cta_explore_gpx10_pro"
+              data-analytics-id="homepage_platform_overview_cta_explore_gpx10_pro"
               href={ctaHref}
               className={`${interMedium.className} relative flex h-[48px] w-full min-w-[237px] items-center justify-center shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
             >
@@ -560,6 +562,8 @@ export function PlatformScaleMobile({ data }: { data?: any }) {
 
           {data?.secondary_cta?.label ? (
             <a
+              id="homepage_platform_overview_cta_signup_upcoming_products"
+              data-analytics-id="homepage_platform_overview_cta_signup_upcoming_products"
               href={data.secondary_cta.href || "#"}
               onClick={(e) => {
                 const text = data.secondary_cta.label.toUpperCase();

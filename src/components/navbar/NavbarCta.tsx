@@ -58,7 +58,15 @@ function getRepelOffset(
   };
 }
 
-export function NavbarCta({ data }: { data?: any } = {}) {
+export function NavbarCta({
+  data,
+  id = "homepage_header_cta_get_in_touch",
+  className = "",
+}: {
+  data?: any;
+  id?: string;
+  className?: string;
+} = {}) {
   const ctaLabel = data?.cta_label ?? "";
   const ctaHref = data?.cta_href ?? "#";
   const buttonRef = useRef<HTMLAnchorElement>(null);
@@ -128,9 +136,11 @@ export function NavbarCta({ data }: { data?: any } = {}) {
 
   return (
     <a
+      id={id}
+      data-analytics-id={id}
       ref={buttonRef}
       href={ctaHref}
-      className={`${gilroySemiBold.className} relative block h-[36px] w-[134px] shrink-0 ${GREEN_CTA_SHADOW}`}
+      className={`${gilroySemiBold.className} relative block h-[36px] w-[134px] shrink-0 ${GREEN_CTA_SHADOW} ${className}`}
       data-node-id="2379:1589"
       data-name="Cta"
       onPointerEnter={handlePointerEnter}

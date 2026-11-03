@@ -356,6 +356,8 @@ export function ApplicationsMobile({
 
                   <div className="relative z-20 mt-[32px] mb-[24px]">
                     <a
+                      id="homepage_applications_cta_explore_model_zoo"
+                      data-analytics-id="homepage_applications_cta_explore_model_zoo"
                       href={ctaHref}
                       className={`${GREEN_CTA_SHADOW} ${gilroyMedium.className} pointer-events-auto relative flex h-[48px] w-[223px] shrink-0 items-center justify-center overflow-hidden`}
                     >

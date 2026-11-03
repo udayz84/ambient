@@ -633,6 +633,8 @@ export function ApplicationsHeroVisual({
             style={{ top: 819 }}
           >
             <a
+              id="homepage_applications_cta_explore_model_zoo"
+              data-analytics-id="homepage_applications_cta_explore_model_zoo"
               href={ctaHref}
               className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} pointer-events-auto relative flex h-[48px] w-[223px] shrink-0 items-center justify-center overflow-hidden`}
             >

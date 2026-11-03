@@ -27,15 +27,19 @@ export function ShopNavButton({
   item,
   onClick,
   className = "",
+  id = "homepage_header_cta_shop",
 }: {
   item: { label: string; href: string };
   onClick?: () => void;
   className?: string;
+  id?: string;
 }) {
   const isExternal = item.href.startsWith("http");
 
   return (
     <Link
+      id={id}
+      data-analytics-id={id}
       href={item.href}
       onClick={onClick}
       target={isExternal ? "_blank" : undefined}
