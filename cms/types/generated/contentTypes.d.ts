@@ -873,6 +873,48 @@ export interface ApiDvkPageDvkPage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiElectronicaLeadElectronicaLead
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'electronica_leads';
+  info: {
+    description: 'Leads and signups from the Electronica Munich 2026 landing page';
+    displayName: 'Electronica Leads';
+    pluralName: 'electronica-leads';
+    singularName: 'electronica-lead';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    company: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    details: Schema.Attribute.Text;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    firstName: Schema.Attribute.String;
+    formKey: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'upcoming-electronica'>;
+    lastName: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::electronica-lead.electronica-lead'
+    > &
+      Schema.Attribute.Private;
+    phone: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    sourceUrl: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'/electronica-munich-2026'>;
+    subscribed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    tags: Schema.Attribute.JSON;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiFooterFooter extends Struct.SingleTypeSchema {
   collectionName: 'footer';
   info: {
@@ -2246,6 +2288,7 @@ declare module '@strapi/strapi' {
       'api::contact-page.contact-page': ApiContactPageContactPage;
       'api::developer-page.developer-page': ApiDeveloperPageDeveloperPage;
       'api::dvk-page.dvk-page': ApiDvkPageDvkPage;
+      'api::electronica-lead.electronica-lead': ApiElectronicaLeadElectronicaLead;
       'api::footer.footer': ApiFooterFooter;
       'api::home-page.home-page': ApiHomePageHomePage;
       'api::job-application.job-application': ApiJobApplicationJobApplication;
