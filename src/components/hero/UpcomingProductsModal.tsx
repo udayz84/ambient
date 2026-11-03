@@ -222,6 +222,18 @@ function FormStep({
 
   const isEvalKit = formContext === "evalkit";
   const isSdk = formContext === "sdk";
+  const isSom =
+    formContext === "som" ||
+    formContext === "som-ble" ||
+    formContext === "som-lte" ||
+    formContext === "som-waitlist";
+  const isSomBle = formContext === "som-ble";
+  const isSomLte = formContext === "som-lte";
+  const somPrefix = isSomBle
+    ? "som_page_som_ble_interest"
+    : isSomLte
+    ? "som_page_som_lte_interest"
+    : "som_page_som_interest";
 
   const evalKitPrefix = isTechPage
     ? "technology_page_eval_kit"
@@ -233,25 +245,35 @@ function FormStep({
     ? `${evalKitPrefix}_form_field_first_name`
     : isSdk
     ? "product_page_sdk_request_form_field_first_name"
+    : isSom
+    ? `${somPrefix}_form_field_first_name`
     : undefined;
 
   const lastNameId = isEvalKit
     ? `${evalKitPrefix}_form_field_last_name`
     : isSdk
     ? "product_page_sdk_request_form_field_last_name"
+    : isSom
+    ? `${somPrefix}_form_field_last_name`
     : undefined;
 
   const emailId = isEvalKit
     ? `${evalKitPrefix}_form_field_email`
     : isSdk
     ? "product_page_sdk_request_form_field_email"
+    : isSom
+    ? `${somPrefix}_form_field_email`
     : undefined;
 
   const companyId = isEvalKit
     ? `${evalKitPrefix}_form_field_company`
     : isSdk
     ? "product_page_sdk_request_form_field_company"
+    : isSom
+    ? `${somPrefix}_form_field_company`
     : undefined;
+
+  const variantId = isSom ? `${somPrefix}_dropdown_module_variant` : undefined;
 
   const detailsId = isEvalKit
     ? isTechPage
@@ -259,18 +281,17 @@ function FormStep({
       : `${evalKitPrefix}_form_field_intended_application`
     : isSdk
     ? "product_page_sdk_request_form_field_chip_name"
+    : isSom
+    ? `${somPrefix}_form_field_intended_application`
     : undefined;
 
   const submitId = isEvalKit
     ? `${evalKitPrefix}_form_button_submit`
     : isSdk
     ? "product_page_sdk_request_form_button_submit"
+    : isSom
+    ? `${somPrefix}_form_button_submit`
     : undefined;
-  const isSom =
-    formContext === "som" ||
-    formContext === "som-ble" ||
-    formContext === "som-lte" ||
-    formContext === "som-waitlist";
   const initialSomVariant: "BLE" | "LTE" =
     productVariant?.includes("LTE") || formContext === "som-lte" ? "LTE" : "BLE";
   const [somVariant, setSomVariant] = useState<"BLE" | "LTE">(initialSomVariant);
@@ -473,6 +494,8 @@ function FormStep({
           <Field label="Module Variant*" className="w-full">
             <div className="relative h-[42px] w-full border-[0.5px] border-solid border-[#4a4a4a] bg-transparent focus-within:border-[rgba(255,255,255,0.5)]">
               <select
+                id={variantId}
+                data-analytics-id={variantId}
                 className={`${interRegular.className} h-full w-full appearance-none bg-transparent px-[12px] pr-[40px] text-[14px] leading-[21px] font-normal text-white outline-none not-italic cursor-pointer`}
                 value={somVariant}
                 onChange={(e) => setSomVariant(e.target.value as "BLE" | "LTE")}
