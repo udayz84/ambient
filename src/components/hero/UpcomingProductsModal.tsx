@@ -67,7 +67,7 @@ export function UpcomingProductsModal({
       .then((r) => r.json())
       .then((res) => {
         const list = res?.data || [];
-        const match = list.find((p: any) => {
+        const match = list.find((p: { title?: string }) => {
           const t = (p.title || "").toLowerCase();
           if (formContext === "usecase") return t.includes("use case");
           if (formContext === "evalkit") return t.includes("eval kit");
