@@ -1,65 +1,98 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
-import { useState } from "react";
+import Link from "next/link";
 import {
   gilroySemiBold,
   interRegular,
-  dmMono,
 } from "@/components/hero/fonts";
+import { TagBadge } from "@/components/hero/TagBadge";
 import { Corners } from "@/components/shared/Corners";
 import { GreenCtaCorners } from "@/components/shared/GreenCtaCorners";
 import { TabletScaleCanvas } from "@/components/shared/TabletScaleCanvas";
-import { UpcomingProductsModal } from "@/components/hero/UpcomingProductsModal";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
+  HERO_TITLE_GRADIENT,
   PRIMARY_CTA_INSET,
   PRIMARY_CTA_SHADOW,
 } from "@/components/products-page/products-data";
 
 export function ElectronicaGiveaway() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   return (
     <section
       aria-label="Win a GPX10 Pro Evaluation Kit Giveaway"
-      className="relative flex w-full justify-center overflow-hidden"
-      style={{
-        background:
-          "linear-gradient(135deg, #f0f4f8 0%, #e9edf3 45%, #d6dde7 100%)",
-      }}
+      className="relative flex w-full justify-center overflow-hidden bg-black text-white"
     >
+      {/* Background Subtle Radial Glow */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          background:
+            "radial-gradient(circle at 25% 45%, rgba(83, 216, 36, 0.08) 0%, rgba(0, 0, 0, 0) 55%)",
+        }}
+      />
+
       {/* =========================================================================
           DESKTOP & TABLET VIEWPORT (>= 600px)
           Canvas Width: 1440px (source of truth).
           TabletScaleCanvas auto-scales down to 600px / 768px tablet with 0px deviation.
           ========================================================================= */}
       <TabletScaleCanvas className="relative hidden h-[580px] w-[1440px] shrink-0 min-[600px]:block">
+        {/* Left Vertical Guide Line (Ambient Design System Chrome) */}
+        <div className="pointer-events-none absolute bottom-0 left-[95px] top-0 z-10 flex w-0 items-center justify-center">
+          <div className="flex-none rotate-90">
+            <div className="relative h-0 w-[580px]">
+              <div className="absolute inset-[-1px_0_0_0]">
+                <img
+                  src="/hero/line-82.svg"
+                  alt=""
+                  className="block size-full max-w-none opacity-40"
+                  aria-hidden="true"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Vertical Guide Line (Ambient Design System Chrome) */}
+        <div className="pointer-events-none absolute bottom-0 right-[95px] top-0 z-10 flex w-0 items-center justify-center">
+          <div className="flex-none rotate-90">
+            <div className="relative h-0 w-[580px]">
+              <div className="absolute inset-[-0.5px_0]">
+                <img
+                  src="/hero/line-83.svg"
+                  alt=""
+                  className="block size-full max-w-none opacity-40"
+                  aria-hidden="true"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Left Column: Form & Content */}
         <div className="absolute left-[100px] top-[75px] z-20 flex w-[540px] flex-col items-start">
-          {/* Eyebrow: Light Mode Ambient TagBadge */}
+          {/* Eyebrow: Signature TagBadge */}
           <div className="mb-[20px]">
-            <div
-              className={`${dmMono.className} relative shrink-0 overflow-hidden border-[0.5px] border-solid border-black/15 bg-white/70 px-[16px] py-[4px] backdrop-blur-md`}
-              style={{ width: "max-content", height: 26 }}
-            >
-              <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-              <div className="flex h-full items-center justify-center">
-                <p className="whitespace-nowrap text-[13px] font-normal uppercase tracking-[0.04em] text-[#0f2912]">
-                  FREE GIVEAWAY
-                </p>
-              </div>
-              <div className="absolute left-[6.5px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-[#53d824]" />
-              <div className="absolute right-[6.5px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-[#53d824]" />
-            </div>
+            <TagBadge
+              label="FREE GIVEAWAY"
+              width="max-content"
+              centerLabel
+            />
           </div>
 
           {/* Title Area with Corners */}
           <div className="relative inline-flex flex-col items-start p-[16px] pl-[20px] pr-[28px]">
             <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
             <h2
-              className={`${gilroySemiBold.className} m-0 text-[44px] font-semibold leading-[48px] tracking-[-0.01em] text-[#090b0e] not-italic [word-break:break-word]`}
+              className={`${gilroySemiBold.className} m-0 bg-clip-text text-[44px] font-semibold leading-[48px] tracking-[-0.01em] text-transparent not-italic [word-break:break-word]`}
+              style={{
+                backgroundImage: HERO_TITLE_GRADIENT,
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
             >
               Win a GPX10 Pro
               <br />
@@ -70,7 +103,7 @@ export function ElectronicaGiveaway() {
           {/* Description */}
           <div className="mt-[18px] pl-[20px]">
             <p
-              className={`${interRegular.className} max-w-[480px] text-[16px] font-normal leading-[25px] text-[#374151]`}
+              className={`${interRegular.className} max-w-[480px] text-[16px] font-normal leading-[25px] text-[#f0f0f0] opacity-85`}
             >
               We&apos;re giving away [N] NuraSense Evaluation Kits to engineers
               at Electronica. Enter to win and put real GPX10 Pro silicon on your
@@ -80,10 +113,11 @@ export function ElectronicaGiveaway() {
 
           {/* Giveaway CTA */}
           <div className="mt-[28px] pl-[20px] w-full">
-            <button
-              type="button"
-              onClick={() => setIsModalOpen(true)}
-              className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[48px] shrink-0 items-center justify-center overflow-hidden px-[28px] transition-transform duration-200 hover:scale-[1.01]`}
+            <Link
+              href="https://mailchi.mp/ambientscientific/evk-registrations-electronica-2026"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[48px] w-max shrink-0 items-center justify-center overflow-hidden px-[28px] transition-transform duration-200 hover:scale-[1.01]`}
             >
               <span
                 aria-hidden="true"
@@ -97,19 +131,19 @@ export function ElectronicaGiveaway() {
                 className={`pointer-events-none absolute inset-0 ${PRIMARY_CTA_INSET}`}
               />
               <GreenCtaCorners />
-            </button>
+            </Link>
           </div>
 
           {/* Subtext & Terms */}
           <div className="mt-[18px] pl-[20px] flex flex-col gap-[4px]">
             <p
-              className={`${interRegular.className} text-[13px] font-normal leading-[18px] text-[#4b5563]`}
+              className={`${interRegular.className} text-[13px] font-normal leading-[18px] text-[#f0f0f0]/60`}
             >
               Winners drawn live during the show, Nov 10-13.
             </p>
             <a
               href="/terms-conditions"
-              className={`${interRegular.className} text-[13px] font-medium text-[#1b4317] hover:underline`}
+              className={`${interRegular.className} text-[13px] font-medium text-[#53d824] hover:underline`}
             >
               Entry terms
             </a>
@@ -121,38 +155,35 @@ export function ElectronicaGiveaway() {
           <img
             src="/electronica/nurasense-eval-kit-features.jpg"
             alt="NuraSense Evaluation Kit with GPX10 Pro Silicon"
-            className="size-full rounded-[14px] object-contain shadow-[0_16px_40px_rgba(0,0,0,0.18)]"
+            className="size-full rounded-[14px] object-contain shadow-[0_16px_40px_rgba(0,0,0,0.4)]"
           />
         </div>
       </TabletScaleCanvas>
 
       {/* =========================================================================
           MOBILE VIEWPORT (< 600px, 375px baseline)
-          Dedicated responsive mobile layout matching the light background.
+          Dedicated responsive mobile layout matching the dark background.
           ========================================================================= */}
       <div className="relative flex w-full max-w-[440px] flex-col items-center px-[20px] py-[44px] min-[600px]:hidden">
         {/* Eyebrow */}
         <div className="mb-[18px]">
-          <div
-            className={`${dmMono.className} relative shrink-0 overflow-hidden border-[0.5px] border-solid border-black/15 bg-white/70 px-[16px] py-[4px] backdrop-blur-md`}
-            style={{ width: "max-content", height: 26 }}
-          >
-            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-            <div className="flex h-full items-center justify-center">
-              <p className="whitespace-nowrap text-[12px] font-normal uppercase tracking-[0.04em] text-[#0f2912]">
-                FREE GIVEAWAY
-              </p>
-            </div>
-            <div className="absolute left-[6.5px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-[#53d824]" />
-            <div className="absolute right-[6.5px] top-1/2 h-[12px] w-[2px] -translate-y-1/2 bg-[#53d824]" />
-          </div>
+          <TagBadge
+            label="FREE GIVEAWAY"
+            width="max-content"
+            centerLabel
+          />
         </div>
 
         {/* Title Area Mobile */}
         <div className="relative mb-[16px] inline-flex flex-col items-center p-[16px]">
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <h2
-            className={`${gilroySemiBold.className} w-[320px] max-w-full text-center text-[30px] font-semibold leading-[36px] tracking-[-0.01em] text-[#090b0e] not-italic [word-break:break-word]`}
+            className={`${gilroySemiBold.className} w-[320px] max-w-full bg-clip-text text-center text-[30px] font-semibold leading-[36px] tracking-[-0.01em] text-transparent not-italic [word-break:break-word]`}
+            style={{
+              backgroundImage: HERO_TITLE_GRADIENT,
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+            }}
           >
             Win a GPX10 Pro
             <br />
@@ -162,7 +193,7 @@ export function ElectronicaGiveaway() {
 
         {/* Description Mobile */}
         <p
-          className={`${interRegular.className} mb-[24px] max-w-[340px] text-center text-[14px] font-normal leading-[22px] text-[#374151]`}
+          className={`${interRegular.className} mb-[24px] max-w-[340px] text-center text-[14px] font-normal leading-[22px] text-[#f0f0f0] opacity-85`}
         >
           We&apos;re giving away [N] NuraSense Evaluation Kits to engineers at
           Electronica. Enter to win and put real GPX10 Pro silicon on your bench
@@ -170,7 +201,7 @@ export function ElectronicaGiveaway() {
         </p>
 
         {/* Hardware Photo Mobile */}
-        <div className="relative mb-[24px] w-full overflow-hidden rounded-[12px] shadow-[0_10px_25px_rgba(0,0,0,0.15)]">
+        <div className="relative mb-[24px] w-full overflow-hidden rounded-[12px] shadow-[0_10px_25px_rgba(0,0,0,0.3)]">
           <img
             src="/electronica/nurasense-eval-kit-features.jpg"
             alt="NuraSense Evaluation Kit with GPX10 Pro Silicon"
@@ -180,9 +211,10 @@ export function ElectronicaGiveaway() {
 
         {/* Form Mobile */}
         <div className="w-full">
-          <button
-            type="button"
-            onClick={() => setIsModalOpen(true)}
+          <Link
+            href="https://mailchi.mp/ambientscientific/evk-registrations-electronica-2026"
+            target="_blank"
+            rel="noopener noreferrer"
             className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[46px] w-full items-center justify-center overflow-hidden`}
           >
             <span
@@ -197,30 +229,22 @@ export function ElectronicaGiveaway() {
               className={`pointer-events-none absolute inset-0 ${PRIMARY_CTA_INSET}`}
             />
             <GreenCtaCorners />
-          </button>
+          </Link>
 
           {/* Subtext & Terms Mobile */}
           <div className="mt-[16px] flex flex-col items-center gap-[4px] text-center">
-            <p className={`${interRegular.className} text-[12px] text-[#4b5563]`}>
+            <p className={`${interRegular.className} text-[12px] text-[#f0f0f0]/60`}>
               Winners drawn live during the show, Nov 10-13.
             </p>
             <a
               href="/terms-conditions"
-              className={`${interRegular.className} text-[12px] font-medium text-[#1b4317] hover:underline`}
+              className={`${interRegular.className} text-[12px] font-medium text-[#53d824] hover:underline`}
             >
               Entry terms
             </a>
           </div>
         </div>
       </div>
-
-      <UpcomingProductsModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        formContext="evalkit"
-        tags={["electronica-2026", "electronica-evalkit", "electronica-giveaway"]}
-      />
     </section>
   );
 }
-

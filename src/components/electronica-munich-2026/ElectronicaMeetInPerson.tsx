@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   gilroySemiBold,
   interRegular,
-  interMedium,
 } from "@/components/hero/fonts";
 import { TagBadge } from "@/components/hero/TagBadge";
 import { Corners } from "@/components/shared/Corners";
@@ -40,11 +39,11 @@ export function ElectronicaMeetInPerson() {
           Canvas Width: 1440px (source of truth).
           TabletScaleCanvas auto-scales down to 600px / 768px tablet with 0px deviation.
           ========================================================================= */}
-      <TabletScaleCanvas className="relative hidden h-[680px] w-[1440px] shrink-0 min-[600px]:block">
+      <TabletScaleCanvas className="relative hidden h-[540px] w-[1440px] shrink-0 min-[600px]:block">
         {/* Left Vertical Guide Line (Ambient Design System Chrome) */}
         <div className="pointer-events-none absolute bottom-0 left-[95px] top-0 z-10 flex w-0 items-center justify-center">
           <div className="flex-none rotate-90">
-            <div className="relative h-0 w-[680px]">
+            <div className="relative h-0 w-[540px]">
               <div className="absolute inset-[-1px_0_0_0]">
                 <img
                   src="/hero/line-82.svg"
@@ -60,7 +59,7 @@ export function ElectronicaMeetInPerson() {
         {/* Right Vertical Guide Line (Ambient Design System Chrome) */}
         <div className="pointer-events-none absolute bottom-0 right-[95px] top-0 z-10 flex w-0 items-center justify-center">
           <div className="flex-none rotate-90">
-            <div className="relative h-0 w-[680px]">
+            <div className="relative h-0 w-[540px]">
               <div className="absolute inset-[-0.5px_0]">
                 <img
                   src="/hero/line-83.svg"
@@ -144,92 +143,6 @@ export function ElectronicaMeetInPerson() {
             className="size-full object-contain"
           />
         </div>
-
-        {/* Bottom Information Strip */}
-        <div className="absolute inset-x-[100px] bottom-[25px] z-20 flex h-[64px] items-center justify-between border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[#0d0d0d] px-[28px]">
-          <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-
-          {/* Block 1: Date */}
-          <div className="flex items-center gap-[10px]">
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-white/80"
-              aria-hidden="true"
-            >
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-              <line x1="16" y1="2" x2="16" y2="6" />
-              <line x1="8" y1="2" x2="8" y2="6" />
-              <line x1="3" y1="10" x2="21" y2="10" />
-            </svg>
-            <span className={`${interMedium.className} text-[14px] font-medium tracking-[-0.01em] text-white`}>
-              Nov 10-13, 2026
-            </span>
-          </div>
-
-          <div className="h-[24px] w-[1px] bg-white/15" />
-
-          {/* Block 2: Location */}
-          <div className="flex items-center gap-[10px]">
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#53d824"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-              <circle cx="12" cy="10" r="3" />
-            </svg>
-            <span className={`${interMedium.className} text-[14px] font-medium tracking-[-0.01em] text-white`}>
-              Messe München
-            </span>
-          </div>
-
-          <div className="h-[24px] w-[1px] bg-white/15" />
-
-          {/* Block 3: Booths List */}
-          <div className="flex items-center gap-[12px]">
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-white/80"
-              aria-hidden="true"
-            >
-              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-              <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-              <line x1="12" y1="22.08" x2="12" y2="12" />
-            </svg>
-            <div className="flex items-center gap-[8px] text-[13px]">
-              <span className={`${interMedium.className} text-white/70`}>
-                Booths:
-              </span>
-              <span className={`${interRegular.className} text-white/90`}>
-                Grinn: Hall C5 · Booth 459
-              </span>
-              <span className="text-[#53d824]/40">|</span>
-              <span className={`${interRegular.className} text-white/90`}>
-                Celus: Booth [TBC]
-              </span>
-            </div>
-          </div>
-        </div>
       </TabletScaleCanvas>
 
       {/* =========================================================================
@@ -302,42 +215,6 @@ export function ElectronicaMeetInPerson() {
           />
           <GreenCtaCorners />
         </Link>
-
-        {/* Mobile Info Strip Cards */}
-        <div className="mt-[24px] flex w-full flex-col gap-[10px]">
-          {/* Date & Location Card */}
-          <div className="relative flex items-center justify-between border-[0.5px] border-white/10 bg-[#0d0d0d] px-[16px] py-[12px]">
-            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-            <div className="flex items-center gap-[8px]">
-              <span className="text-[14px]">📅</span>
-              <span className={`${interMedium.className} text-[13px] tracking-[-0.01em] text-white`}>
-                Nov 10-13, 2026
-              </span>
-            </div>
-            <div className="flex items-center gap-[8px]">
-              <span className="text-[14px]">📍</span>
-              <span className={`${interMedium.className} text-[13px] tracking-[-0.01em] text-[#53d824]`}>
-                Messe München
-              </span>
-            </div>
-          </div>
-
-          {/* Booths Card */}
-          <div className="relative flex flex-col gap-[6px] border-[0.5px] border-white/10 bg-[#0d0d0d] px-[16px] py-[12px]">
-            <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-            <span className={`${interMedium.className} text-[12px] text-white/70`}>
-              Booths:
-            </span>
-            <div className="flex flex-col gap-[3px] text-[12px]">
-              <span className={`${interRegular.className} text-white/90`}>
-                Grinn: Hall C5 · Booth 459
-              </span>
-              <span className={`${interRegular.className} text-white/90`}>
-                Celus: Booth [TBC]
-              </span>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );

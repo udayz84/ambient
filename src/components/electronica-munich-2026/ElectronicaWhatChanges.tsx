@@ -23,7 +23,6 @@ const PROOF_BLOCKS: readonly {
   title: string;
   body: string;
   image: string;
-  frontImage?: string;
   spreadWidth?: boolean;
 }[] = [
   {
@@ -31,14 +30,14 @@ const PROOF_BLOCKS: readonly {
     tag: "ALWAYS ON",
     title: "24/7 AI.",
     body: "Run meaningful inference continuously, instead of waking the system periodically to check.",
-    image: "/products/features-card-brain.webp",
+    image: "/electronica/what-changes/card-01-always-on.png",
   },
   {
     num: "02",
     tag: "MICROWATT POWER",
     title: "AI that fits the battery.",
     body: "Keep models running where conventional processors force you to duty-cycle, recharge, or plug in.",
-    image: "/products/features-card-coin.webp",
+    image: "/electronica/what-changes/card-02-microwatt.png",
     spreadWidth: true,
   },
   {
@@ -46,15 +45,14 @@ const PROOF_BLOCKS: readonly {
     tag: "LOCAL FIRST",
     title: "Data stays where it belongs.",
     body: "Process sensitive audio, motion, vision, and health signals directly on the device.",
-    image: "/products/features-card-bubble.webp",
+    image: "/electronica/what-changes/card-03-local-first.png",
   },
   {
     num: "04",
     tag: "PROGRAMMABLE",
     title: "Your model. Your application.",
     body: "Start from a ready model or bring your own TensorFlow, Keras, or ONNX network.",
-    image: "/products/features-card-stack-back.webp",
-    frontImage: "/products/features-card-stack-front.webp",
+    image: "/electronica/what-changes/card-04-programmable.png",
     spreadWidth: true,
   },
 ] as const;
@@ -143,16 +141,16 @@ export function ElectronicaWhatChanges() {
                 key={item.num}
                 className="relative flex h-[370px] flex-col overflow-hidden border border-solid border-[rgba(240,240,240,0.18)] bg-[#0d0d0d] px-[22px] pb-[18px] pt-0"
               >
-                {/* Top Image Box with Radial Backlight and Bottom Gradient Fade */}
+                {/* Top Image Box with Subtle Green Radial Backlight and Bottom Gradient Fade */}
                 <div
-                  className="relative -mx-[22px] h-[225px] shrink-0 overflow-hidden"
+                  className="relative -mx-[22px] h-[225px] shrink-0 overflow-hidden bg-black"
                   aria-hidden="true"
                 >
                   <div
-                    className="absolute inset-0"
+                    className="pointer-events-none absolute inset-0"
                     style={{
                       background:
-                        "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0) 65%)",
+                        "radial-gradient(circle at 50% 50%, rgba(83, 216, 36, 0.12) 0%, rgba(0, 0, 0, 0) 70%)",
                     }}
                   />
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -161,27 +159,15 @@ export function ElectronicaWhatChanges() {
                     alt={item.title}
                     className={`absolute inset-0 size-full ${
                       item.spreadWidth
-                        ? "object-cover object-center opacity-90"
-                        : "object-contain p-[16px] opacity-90"
+                        ? "object-cover object-center"
+                        : "object-contain p-[12px]"
                     }`}
                   />
-                  {item.frontImage && (
-                    /* eslint-disable-next-line @next/next/no-img-element */
-                    <img
-                      src={item.frontImage}
-                      alt=""
-                      className={`absolute inset-0 size-full ${
-                        item.spreadWidth
-                          ? "object-cover object-center"
-                          : "object-contain p-[16px]"
-                      }`}
-                    />
-                  )}
                   <div
-                    className="absolute inset-0"
+                    className="pointer-events-none absolute inset-0"
                     style={{
                       background:
-                        "linear-gradient(to bottom, rgba(13,13,13,0) 65%, #0d0d0d 100%)",
+                        "linear-gradient(to bottom, rgba(13,13,13,0) 70%, #0d0d0d 100%)",
                     }}
                   />
                 </div>
@@ -275,43 +261,31 @@ export function ElectronicaWhatChanges() {
             >
               {/* Top Image Box */}
               <div
-                className="relative -mx-[20px] h-[210px] shrink-0 overflow-hidden"
+                className="relative -mx-[20px] h-[210px] shrink-0 overflow-hidden bg-black"
                 aria-hidden="true"
               >
                 <div
-                  className="absolute inset-0"
+                  className="pointer-events-none absolute inset-0"
                   style={{
                     background:
-                      "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0) 65%)",
+                      "radial-gradient(circle at 50% 50%, rgba(83, 216, 36, 0.12) 0%, rgba(0, 0, 0, 0) 70%)",
                   }}
                 />
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={item.image}
                   alt={item.title}
-                  className={`absolute inset-0 size-full transition-all duration-500 ${
+                  className={`absolute inset-0 size-full transition-all duration-300 ${
                     item.spreadWidth
-                      ? "object-cover object-center opacity-90"
-                      : "object-contain p-[12px] opacity-90"
+                      ? "object-cover object-center"
+                      : "object-contain p-[10px]"
                   }`}
                 />
-                {item.frontImage && (
-                  /* eslint-disable-next-line @next/next/no-img-element */
-                  <img
-                    src={item.frontImage}
-                    alt=""
-                    className={`absolute inset-0 size-full transition-all duration-500 ${
-                      item.spreadWidth
-                        ? "object-cover object-center"
-                        : "object-contain p-[12px]"
-                    }`}
-                  />
-                )}
                 <div
-                  className="absolute inset-0"
+                  className="pointer-events-none absolute inset-0"
                   style={{
                     background:
-                      "linear-gradient(to bottom, rgba(13,13,13,0) 65%, #0d0d0d 100%)",
+                      "linear-gradient(to bottom, rgba(13,13,13,0) 70%, #0d0d0d 100%)",
                   }}
                 />
               </div>
