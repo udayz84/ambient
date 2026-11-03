@@ -1,7 +1,6 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
-import { useState } from "react";
 import Link from "next/link";
 import {
   gilroySemiBold,
@@ -12,7 +11,6 @@ import { TagBadge } from "@/components/hero/TagBadge";
 import { Corners } from "@/components/shared/Corners";
 import { GreenCtaCorners } from "@/components/shared/GreenCtaCorners";
 import { TabletScaleCanvas } from "@/components/shared/TabletScaleCanvas";
-import { UpcomingProductsModal } from "@/components/hero/UpcomingProductsModal";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
@@ -24,8 +22,6 @@ import {
 import { ElectronicaCountdown } from "./ElectronicaCountdown";
 
 export function ElectronicaHero() {
-  const [isGiveawayOpen, setIsGiveawayOpen] = useState(false);
-
   return (
     <section
       aria-label="Electronica Munich 2026 Hero"
@@ -130,17 +126,18 @@ export function ElectronicaHero() {
             </Link>
 
             {/* Secondary CTA Button */}
-            <button
-              type="button"
-              onClick={() => setIsGiveawayOpen(true)}
-              className={`${gilroySemiBold.className} relative flex h-[48px] shrink-0 cursor-pointer items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] px-[24px] transition-all duration-200 hover:border-white/40 hover:bg-[rgba(226,241,202,0.18)]`}
+            <Link
+              href="https://script.google.com/macros/s/AKfycbxL3DhYQFsvKuF6oeHlWIsUusal4zDZC0jYjAjLOOvqY9r9mISAmzMflQxr0LVhn8s/exec"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${gilroySemiBold.className} relative flex h-[48px] shrink-0 items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] px-[24px] transition-all duration-200 hover:border-white/40 hover:bg-[rgba(226,241,202,0.18)]`}
               style={{ backgroundColor: SECONDARY_CTA_BG }}
             >
               <span className="relative text-[14px] font-semibold uppercase tracking-[0.02em] text-white not-italic">
                 Win a Free Eval Kit
               </span>
               <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-            </button>
+            </Link>
           </div>
 
           {/* Subtext */}
@@ -266,17 +263,18 @@ export function ElectronicaHero() {
               <GreenCtaCorners />
             </Link>
 
-            <button
-              type="button"
-              onClick={() => setIsGiveawayOpen(true)}
-              className={`${gilroySemiBold.className} relative flex h-[48px] w-full shrink-0 cursor-pointer items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
+            <Link
+              href="https://script.google.com/macros/s/AKfycbxL3DhYQFsvKuF6oeHlWIsUusal4zDZC0jYjAjLOOvqY9r9mISAmzMflQxr0LVhn8s/exec"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${gilroySemiBold.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
               style={{ backgroundColor: SECONDARY_CTA_BG }}
             >
               <span className="relative text-[14px] font-semibold uppercase tracking-[0.02em] text-white not-italic">
                 Win a Free Eval Kit
               </span>
               <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-            </button>
+            </Link>
           </div>
 
           {/* Subtext Mobile */}
@@ -287,17 +285,6 @@ export function ElectronicaHero() {
           </p>
         </div>
       </div>
-
-      <UpcomingProductsModal
-        isOpen={isGiveawayOpen}
-        onClose={() => setIsGiveawayOpen(false)}
-        formContext="evalkit"
-        title="Win a GPX10 Pro Evaluation Kit"
-        productVariant="NuraSense GPX10 Pro Evaluation Kit"
-        hideVariantDropdown
-        closeLabel="Close"
-        tags={["electronica-2026", "electronica-giveaway", "evalkit"]}
-      />
     </section>
   );
 }
