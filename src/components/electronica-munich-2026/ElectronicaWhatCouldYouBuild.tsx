@@ -5,6 +5,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ProductsUseCases } from "@/components/products-page/ProductsUseCases";
+import { TagBadge } from "@/components/hero/TagBadge";
 import { Corners } from "@/components/shared/Corners";
 import { GreenCtaCorners } from "@/components/shared/GreenCtaCorners";
 import { gilroyBold, gilroySemiBold, interRegular } from "@/components/hero/fonts";
@@ -33,12 +34,10 @@ export function ElectronicaWhatCouldYouBuild({
           GESTURE RECOGNITION LIVE DEMO VIDEO SHOWCASE
           Replaces the thin payoff strip with an auto-playing YouTube video card.
           ========================================================================= */}
-      <div className="relative z-10 mx-auto mt-[40px] flex w-full max-w-[1080px] flex-col items-center px-[20px] md:mt-[60px]">
+      <div className="relative z-10 mx-auto mt-[16px] flex w-full max-w-[1080px] flex-col items-center px-[20px] md:mt-[24px]">
         {/* Eyebrow / Tag */}
-        <div className="mb-[14px] flex items-center gap-[12px]">
-          <span className={`${gilroyBold.className} rounded border border-[#53d824]/40 bg-[#53d824]/10 px-[12px] py-[5px] text-[11px] font-bold uppercase tracking-[0.08em] text-[#53d824]`}>
-            Gesture Payoff
-          </span>
+        <div className="mb-[16px]">
+          <TagBadge label="GESTURE PAYOFF" width="max-content" centerLabel />
         </div>
 
         {/* Title & Description */}
@@ -52,7 +51,7 @@ export function ElectronicaWhatCouldYouBuild({
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <div className="relative aspect-video w-full overflow-hidden bg-black">
             <iframe
-              src="https://www.youtube-nocookie.com/embed/kEq5GBnBhWc?autoplay=1&mute=1&loop=1&playlist=kEq5GBnBhWc&playsinline=1"
+              src="https://www.youtube-nocookie.com/embed/kEq5GBnBhWc?rel=0&playsinline=1"
               title="Ambient Silicon Gesture Recognition Demo"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen

@@ -165,9 +165,11 @@ export function ProductsUseCases({
         className="relative mx-auto hidden w-full justify-center bg-black min-[600px]:flex mt-[60px]"
         aria-label="Use cases"
       >
-        <TabletScaleCanvas className="relative h-[941px] w-[1448px] shrink-0 min-[600px]:block">
+        <TabletScaleCanvas
+          className={`relative ${showCtas ? "h-[941px]" : "h-[810px]"} w-[1448px] shrink-0 min-[600px]:block`}
+        >
           <div
-            className="absolute left-0 top-0 h-[941px] w-[1448px]"
+            className={`absolute left-0 top-0 ${showCtas ? "h-[941px]" : "h-[810px]"} w-[1448px]`}
             data-node-id="2901:2033"
             data-name="Desktop - 14"
           >
@@ -367,7 +369,7 @@ function ProductsUseCasesDesktop({
                 
                 <div 
                   className="absolute left-1/2 -translate-x-1/2 pointer-events-auto z-20"
-                  style={{ top: 840 }}
+                  style={{ top: showCtas ? 840 : 755 }}
                 >
                   <PrimaryCta href="/model-zoo">Explore Model Zoo</PrimaryCta>
                 </div>
@@ -802,7 +804,7 @@ function ProductsUseCasesMobile({
 
   return (
     <section
-      className="relative flex w-full max-w-full flex-col items-center overflow-hidden bg-black py-[48px] min-[600px]:hidden"
+      className={`relative flex w-full max-w-full flex-col items-center overflow-hidden bg-black ${showCtas ? "py-[48px]" : "pt-[48px] pb-[16px]"} min-[600px]:hidden`}
       aria-label="Use cases"
     >
       <style>{`

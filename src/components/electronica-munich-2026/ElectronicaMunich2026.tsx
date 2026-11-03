@@ -22,17 +22,17 @@ export function ElectronicaMunich2026() {
       <ElectronicaWhatChanges />
       {/* Section 3: Proof / Case Studies */}
       <ElectronicaProof />
-      {/* Section 4: What Could You Build? */}
-      <ElectronicaWhatCouldYouBuild />
-      {/* Section 5: The Ambient Ecosystem */}
-      <ElectronicaWaysToBuild />
-      <ElectronicaCenterEcosystem />
-      {/* Section 6: Electronica 2026 */}
-      <ElectronicaMeetInPerson />
-      {/* Section 7: Put GPX10 Pro on Your Bench (Giveaway & Lead Capture) */}
+      {/* Section 4: Put GPX10 Pro on Your Bench (Giveaway & Lead Capture) */}
       <div id="eval-kit-form">
         <ElectronicaGiveaway />
       </div>
+      {/* Section 5: What Could You Build? */}
+      <ElectronicaWhatCouldYouBuild />
+      {/* Section 6: The Ambient Ecosystem */}
+      <ElectronicaWaysToBuild />
+      <ElectronicaCenterEcosystem />
+      {/* Section 7: Electronica 2026 */}
+      <ElectronicaMeetInPerson />
       <ElectronicaStayUpdated />
       {/* Section 8: Close (hidden per request) */}
       {/* <ElectronicaClose /> */}

@@ -134,26 +134,20 @@ export function ElectronicaGiveaway() {
             </Link>
           </div>
 
-          {/* Subtext & Terms */}
-          <div className="mt-[18px] pl-[20px] flex flex-col gap-[4px]">
+          {/* Subtext */}
+          <div className="mt-[18px] pl-[20px]">
             <p
               className={`${interRegular.className} text-[13px] font-normal leading-[18px] text-[#f0f0f0]/60`}
             >
               Winners drawn live during the show, Nov 10-13.
             </p>
-            <a
-              href="/terms-conditions"
-              className={`${interRegular.className} text-[13px] font-medium text-[#53d824] hover:underline`}
-            >
-              Entry terms
-            </a>
           </div>
         </div>
 
         {/* Right Column: Hardware Photo with Pointers */}
         <div className="pointer-events-none absolute right-[80px] top-[40px] z-20 flex h-[500px] w-[670px] select-none items-center justify-center">
           <img
-            src="/electronica/nurasense-eval-kit-features.jpg"
+            src="/electronica/nurasense-eval-kit-hardware.jpg"
             alt="NuraSense Evaluation Kit with GPX10 Pro Silicon"
             className="size-full rounded-[14px] object-contain shadow-[0_16px_40px_rgba(0,0,0,0.4)]"
           />
@@ -203,7 +197,7 @@ export function ElectronicaGiveaway() {
         {/* Hardware Photo Mobile */}
         <div className="relative mb-[24px] w-full overflow-hidden rounded-[12px] shadow-[0_10px_25px_rgba(0,0,0,0.3)]">
           <img
-            src="/electronica/nurasense-eval-kit-features.jpg"
+            src="/electronica/nurasense-eval-kit-hardware.jpg"
             alt="NuraSense Evaluation Kit with GPX10 Pro Silicon"
             className="w-full object-contain"
           />
@@ -231,17 +225,11 @@ export function ElectronicaGiveaway() {
             <GreenCtaCorners />
           </Link>
 
-          {/* Subtext & Terms Mobile */}
-          <div className="mt-[16px] flex flex-col items-center gap-[4px] text-center">
+          {/* Subtext Mobile */}
+          <div className="mt-[16px] text-center">
             <p className={`${interRegular.className} text-[12px] text-[#f0f0f0]/60`}>
               Winners drawn live during the show, Nov 10-13.
             </p>
-            <a
-              href="/terms-conditions"
-              className={`${interRegular.className} text-[12px] font-medium text-[#53d824] hover:underline`}
-            >
-              Entry terms
-            </a>
           </div>
         </div>
       </div>
