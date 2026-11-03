@@ -15,7 +15,10 @@ export function SiteFooterWrapper({
 }) {
   const pathname = usePathname();
   const normalizedPathname = pathname.toLowerCase();
-  const showNewsletter = normalizedPathname === "/" || normalizedPathname === "/company";
+  const showNewsletter =
+    normalizedPathname === "/" ||
+    normalizedPathname === "/company" ||
+    normalizedPathname === "/electronica-munich-2026";
 
   return (
     <SiteFooter
