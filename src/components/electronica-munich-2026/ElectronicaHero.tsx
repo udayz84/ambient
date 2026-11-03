@@ -85,7 +85,7 @@ export function ElectronicaHero() {
             >
               Ambient Scientific makes fully programmable AI processors that run
               real AI on-device, at microwatt power. Now Grinn and Celus are
-              building a whole ecosystem around GPX10 Pro - making it radically
+              building a whole ecosystem around GPX10 Pro, making it radically
               easier to put that AI into your product. See it running at
               Electronica.
             </p>
@@ -146,7 +146,7 @@ export function ElectronicaHero() {
           <p
             className={`${interRegular.className} mt-[18px] pl-[20px] text-[13px] font-normal leading-[18px] text-[#f0f0f0] opacity-60`}
           >
-            Booth meeting slots are limited — book yours before the floor fills.
+            Booth meeting slots are limited. Book yours before the floor fills.
           </p>
         </div>
 
@@ -215,7 +215,7 @@ export function ElectronicaHero() {
           >
             Ambient Scientific makes fully programmable AI processors that run
             real AI on-device, at microwatt power. Now Grinn and Celus are
-            building a whole ecosystem around GPX10 Pro - making it radically
+            building a whole ecosystem around GPX10 Pro, making it radically
             easier to put that AI into your product. See it running at
             Electronica.
           </p>
@@ -282,7 +282,7 @@ export function ElectronicaHero() {
           <p
             className={`${interRegular.className} mt-[14px] text-center text-[12px] font-normal leading-[17px] text-[#f0f0f0] opacity-60`}
           >
-            Booth meeting slots are limited — book yours before the floor fills.
+            Booth meeting slots are limited. Book yours before the floor fills.
           </p>
         </div>
       </div>

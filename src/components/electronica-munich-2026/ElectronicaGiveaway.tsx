@@ -74,7 +74,7 @@ export function ElectronicaGiveaway() {
             >
               We&apos;re giving away [N] NuraSense Evaluation Kits to engineers
               at Electronica. Enter to win and put real GPX10 Pro silicon on your
-              bench — run real AI and measure the microwatt power yourself.
+              bench to run real AI and measure the microwatt power yourself.
             </p>
           </div>
 
@@ -166,7 +166,7 @@ export function ElectronicaGiveaway() {
         >
           We&apos;re giving away [N] NuraSense Evaluation Kits to engineers at
           Electronica. Enter to win and put real GPX10 Pro silicon on your bench
-          — run real AI and measure the microwatt power yourself.
+          to run real AI and measure the microwatt power yourself.
         </p>
 
         {/* Hardware Photo Mobile */}

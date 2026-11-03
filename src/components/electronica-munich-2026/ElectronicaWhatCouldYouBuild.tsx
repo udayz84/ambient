@@ -44,7 +44,7 @@ export function ElectronicaWhatCouldYouBuild({
         {/* Title & Description */}
         <p className={`${interRegular.className} mb-[24px] max-w-[760px] text-center text-[14px] leading-[22px] text-[#f0f0f0] opacity-85 sm:text-[15px]`}>
           <strong className="font-semibold text-white">Control a live demo with a flick of your wrist.</strong>{" "}
-          See gesture recognition — and VAD, fall detection, and more — running on our silicon at Electronica.
+          See gesture recognition, VAD, fall detection, and more running on our silicon at Electronica.
         </p>
 
         {/* Video Box */}
@@ -111,7 +111,7 @@ export function ElectronicaWhatCouldYouBuild({
         <p
           className={`${interRegular.className} max-w-[720px] px-[20px] text-center text-[13px] font-normal leading-[20px] text-[#f0f0f0] opacity-75 sm:text-[15px] sm:leading-[24px]`}
         >
-          Every open-source and Ambient-built model across audio, vision, and motion — 30+ and growing.
+          Every open-source and Ambient-built model across audio, vision, and motion, with 30+ and growing.
         </p>
 
         {/* Infinite Marquee Track: Full Width */}

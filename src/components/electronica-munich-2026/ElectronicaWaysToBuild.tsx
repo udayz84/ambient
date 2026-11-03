@@ -130,7 +130,7 @@ export function ElectronicaWaysToBuild() {
             >
               GPX10 Pro earned an ecosystem. Best-in-class partners are standing
               up ready-made modules, automated hardware design, and production
-              support around it — so the path from “great AI” to “shipped product”
+              support around it, so the path from “great AI” to “shipped product”
               is no longer a six-month engineering project. It’s a plug-in.
             </p>
           </div>
@@ -179,7 +179,7 @@ export function ElectronicaWaysToBuild() {
                   >
                     A European embedded-systems house with 20+ years putting
                     modules into shipping products. Skip the RF, power, memory,
-                    and sensor-routing spin — drop in a production-grade module
+                    and sensor-routing spin. Drop in a production-grade module
                     and build only the part that makes you different.
                   </p>
                 </div>
@@ -302,7 +302,7 @@ export function ElectronicaWaysToBuild() {
                     className={`${interRegular.className} text-[13.5px] font-normal leading-[21px] text-[#f0f0f0] opacity-80`}
                   >
                     From requirements to a GPX10 Pro schematic in minutes, not
-                    months — automated component selection, schematic
+                    months, with automated component selection, schematic
                     generation, and EDA handoff. The blank page is gone.
                   </p>
                 </div>
@@ -424,7 +424,7 @@ export function ElectronicaWaysToBuild() {
         >
           GPX10 Pro earned an ecosystem. Best-in-class partners are standing up
           ready-made modules, automated hardware design, and production support
-          around it — so the path from “great AI” to “shipped product” is no
+          around it, so the path from “great AI” to “shipped product” is no
           longer a six-month engineering project. It’s a plug-in.
         </p>
 
@@ -473,7 +473,7 @@ export function ElectronicaWaysToBuild() {
             >
               A European embedded-systems house with 20+ years putting modules
               into shipping products. Skip the RF, power, memory, and
-              sensor-routing spin — drop in a production-grade module and build
+              sensor-routing spin. Drop in a production-grade module and build
               only the part that makes you different.
             </p>
 
@@ -579,8 +579,8 @@ export function ElectronicaWaysToBuild() {
             <p
               className={`${interRegular.className} text-[13px] font-normal leading-[20px] text-[#f0f0f0] opacity-80`}
             >
-              From requirements to a GPX10 Pro schematic in minutes, not months
-              — automated component selection, schematic generation, and EDA
+              From requirements to a GPX10 Pro schematic in minutes, not months,
+              with automated component selection, schematic generation, and EDA
               handoff. The blank page is gone.
             </p>
 

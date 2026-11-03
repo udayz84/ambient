@@ -136,7 +136,7 @@ export function ElectronicaWhatChanges() {
             </p>
           </div>
 
-          {/* 4 Cards Grid — Modeled after Application Slug Page / WhyCard */}
+          {/* 4 Cards Grid: Modeled after Application Slug Page / WhyCard */}
           <div className="grid grid-cols-4 gap-[24px]">
             {PROOF_BLOCKS.map((item) => (
               <article

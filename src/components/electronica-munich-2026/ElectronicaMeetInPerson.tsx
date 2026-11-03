@@ -169,7 +169,7 @@ export function ElectronicaMeetInPerson() {
               <line x1="3" y1="10" x2="21" y2="10" />
             </svg>
             <span className={`${interMedium.className} text-[14px] font-medium tracking-[-0.01em] text-white`}>
-              Nov 10–13, 2026
+              Nov 10-13, 2026
             </span>
           </div>
 
@@ -311,7 +311,7 @@ export function ElectronicaMeetInPerson() {
             <div className="flex items-center gap-[8px]">
               <span className="text-[14px]">📅</span>
               <span className={`${interMedium.className} text-[13px] tracking-[-0.01em] text-white`}>
-                Nov 10–13, 2026
+                Nov 10-13, 2026
               </span>
             </div>
             <div className="flex items-center gap-[8px]">
