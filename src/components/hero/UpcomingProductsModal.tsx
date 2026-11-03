@@ -218,11 +218,16 @@ function FormStep({
 
   const pathname = usePathname();
   const isEvkPage = pathname?.startsWith("/dvk") || pathname?.startsWith("/evk");
+  const isTechPage = pathname?.startsWith("/technology");
 
   const isEvalKit = formContext === "evalkit";
   const isSdk = formContext === "sdk";
 
-  const evalKitPrefix = isEvkPage ? "evk_page_eval_kit" : "product_page_eval_kit";
+  const evalKitPrefix = isTechPage
+    ? "technology_page_eval_kit"
+    : isEvkPage
+    ? "evk_page_eval_kit"
+    : "product_page_eval_kit";
 
   const firstNameId = isEvalKit
     ? `${evalKitPrefix}_form_field_first_name`
@@ -249,7 +254,9 @@ function FormStep({
     : undefined;
 
   const detailsId = isEvalKit
-    ? `${evalKitPrefix}_form_field_intended_application`
+    ? isTechPage
+      ? "technology_page_eval_kit_form_field_chip_name"
+      : `${evalKitPrefix}_form_field_intended_application`
     : isSdk
     ? "product_page_sdk_request_form_field_chip_name"
     : undefined;
