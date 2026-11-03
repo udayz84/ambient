@@ -36,6 +36,8 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   let data: any = null;
   try {
@@ -44,7 +46,13 @@ export default async function Home() {
       {
         section: "hero",
         fields: ["video", "mobile_video"],
-        nested: ["metrics", "announcements.image", "announcements.ctas"],
+        nested: [
+          "metrics",
+          "announcements.image",
+          "announcements.ctas",
+          "announcements.cta",
+          "announcements.secondary_cta",
+        ],
       },
       "hero_form",
       // NOTE: do NOT list a field in both `fields` and `nested` for the same parent —
