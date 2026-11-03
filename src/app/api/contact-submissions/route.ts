@@ -130,6 +130,31 @@ export async function POST(req: Request): Promise<Response> {
         mailchimpFormKey,
         subscribed,
       ).catch(() => { /* logged inside addContactAndTag */ });
+
+      const referer = req.headers.get("referer") || "";
+      if (referer.includes("electronica-munich-2026") || isModelZoo) {
+        fetch(`${STRAPI_URL}/api/electronica-leads/submit`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            data: {
+              email,
+              firstName,
+              lastName,
+              company,
+              phone,
+              formKey: isModelZoo ? "upcoming-model-zoo" : `contact-${track}`,
+              details: message || fields["What are the applications are you looking for?"] || undefined,
+              tags: ["electronica-2026", isModelZoo ? "model-zoo" : `contact-${track}`],
+              sourceUrl: "/electronica-munich-2026",
+              subscribed,
+            },
+          }),
+          signal: AbortSignal.timeout(5000),
+        }).catch((err) => {
+          console.error("[contact-submission-strapi-lead] error:", err);
+        });
+      }
     });
 
     return NextResponse.json({ ok: true });
@@ -157,6 +182,31 @@ export async function POST(req: Request): Promise<Response> {
         mailchimpFormKey,
         subscribed,
       ).catch(() => { /* logged inside addContactAndTag */ });
+
+      const referer = req.headers.get("referer") || "";
+      if (referer.includes("electronica-munich-2026") || isModelZoo) {
+        fetch(`${STRAPI_URL}/api/electronica-leads/submit`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            data: {
+              email,
+              firstName,
+              lastName,
+              company,
+              phone,
+              formKey: isModelZoo ? "upcoming-model-zoo" : `contact-${track}`,
+              details: message || fields["What are the applications are you looking for?"] || undefined,
+              tags: ["electronica-2026", isModelZoo ? "model-zoo" : `contact-${track}`],
+              sourceUrl: "/electronica-munich-2026",
+              subscribed,
+            },
+          }),
+          signal: AbortSignal.timeout(5000),
+        }).catch((err) => {
+          console.error("[contact-submission-strapi-lead] error:", err);
+        });
+      }
     });
 
     return NextResponse.json({ ok: true });

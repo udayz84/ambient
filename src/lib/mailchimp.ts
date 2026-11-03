@@ -124,15 +124,53 @@ export const FORM_TAG_MAP: Record<string, string[]> = {
 
   // UpcomingProductsModal context variants
   "upcoming-usecase": ["upcoming-products", "use-case-inquiry"],
-  "upcoming-evalkit": ["upcoming-products", "eval-kit-request"],
+  "upcoming-evalkit": [
+    "upcoming-products",
+    "eval-kit-request",
+    "electronica-2026",
+    "electronica-evalkit",
+  ],
   "upcoming-sdk": ["upcoming-products", "sdk-request"],
   "upcoming-som": ["upcoming-products", "som-interest"],
   "upcoming-som-ble": ["upcoming-products", "som-interest", "som-ble"],
   "upcoming-som-lte": ["upcoming-products", "som-interest", "som-lte"],
-  "upcoming-som-waitlist": ["upcoming-products", "som-interest", "som-waitlist", "waitlist"],
-  "upcoming-som-waitlist-ble": ["upcoming-products", "som-interest", "som-waitlist", "som-ble", "waitlist"],
-  "upcoming-som-waitlist-lte": ["upcoming-products", "som-interest", "som-waitlist", "som-lte", "waitlist"],
+  "upcoming-som-waitlist": [
+    "upcoming-products",
+    "som-interest",
+    "som-waitlist",
+    "waitlist",
+    "electronica-2026",
+    "electronica-som-waitlist",
+  ],
+  "upcoming-som-waitlist-ble": [
+    "upcoming-products",
+    "som-interest",
+    "som-waitlist",
+    "som-ble",
+    "waitlist",
+    "electronica-2026",
+  ],
+  "upcoming-som-waitlist-lte": [
+    "upcoming-products",
+    "som-interest",
+    "som-waitlist",
+    "som-lte",
+    "waitlist",
+    "electronica-2026",
+  ],
   "upcoming-waitlist": ["waitlist"],
+  "upcoming-hardware-design": [
+    "electronica-2026",
+    "electronica-hardware-design",
+    "hardware-design-updates",
+    "celus-hardware-design",
+  ],
+  "upcoming-electronica": ["electronica-2026", "electronica-updates"],
+  "electronica-evalkit": [
+    "electronica-2026",
+    "electronica-evalkit",
+    "eval-kit-request",
+  ],
   "case-study": ["case-study", "resource-download"],
   whitepaper: ["whitepaper", "resource-download"],
 };
@@ -159,6 +197,7 @@ export async function addContactAndTag(
   contact: MailchimpContactFields,
   formKey: string,
   marketingConsent: boolean,
+  extraTags?: string[],
 ): Promise<MailchimpResult> {
   const config = getConfig();
   if (!config) {
@@ -174,7 +213,10 @@ export async function addContactAndTag(
     return { success: false, message: "Invalid email address." };
   }
 
-  const tags = FORM_TAG_MAP[formKey] ?? [formKey];
+  const baseTags = FORM_TAG_MAP[formKey] ?? [formKey];
+  const tags = extraTags && extraTags.length > 0
+    ? Array.from(new Set([...baseTags, ...extraTags.map((t) => t.trim().toLowerCase())]))
+    : baseTags;
 
   const hash = subscriberHash(email);
   const url = `${baseUrl(config.serverPrefix)}/lists/${config.audienceId}/members/${hash}`;

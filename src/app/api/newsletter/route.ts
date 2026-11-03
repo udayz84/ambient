@@ -22,6 +22,14 @@ import { sendSubmissionMail, type MailField } from "@/lib/notify-mail";
  * ----------------------------------------------------------------------------
  */
 
+const STRAPI_URL = (
+  process.env.STRAPI_URL ||
+  process.env.NEXT_PUBLIC_STRAPI_URL ||
+  "http://127.0.0.1:1338"
+)
+  .replace(/\/$/, "")
+  .replace("localhost", "127.0.0.1");
+
 function bad(error: string, status = 422) {
   return NextResponse.json({ ok: false, error }, { status });
 }
@@ -41,6 +49,8 @@ const MARKETING_CONSENT_KEYS = new Set([
   "upcoming-som-waitlist-ble",
   "upcoming-som-waitlist-lte",
   "upcoming-waitlist",
+  "upcoming-hardware-design",
+  "upcoming-electronica",
 ]);
 
 /** Display names for the team notification email, per form key. */
@@ -58,6 +68,8 @@ const FORM_NAME_MAP: Record<string, string> = {
   "upcoming-som-waitlist-ble": "SOM (BLE) Waitlist",
   "upcoming-som-waitlist-lte": "SOM (LTE) Waitlist",
   "upcoming-waitlist": "Waitlist Signup",
+  "upcoming-hardware-design": "Hardware Design Updates Request",
+  "upcoming-electronica": "Electronica 2026 Updates Request",
   "product-brief": "Product Brief Request",
   "resource-download": "Resource Download",
   "case-study": "Case Study Download",
@@ -81,6 +93,11 @@ export async function POST(req: Request): Promise<Response> {
   const details = String(body.details ?? "").trim() || undefined;
   const product = String(body.product ?? "").trim() || undefined;
   const variant = String(body.variant ?? "").trim() || undefined;
+  const customTags = Array.isArray(body.tags)
+    ? (body.tags as unknown[])
+        .filter((t): t is string => typeof t === "string" && Boolean(t.trim()))
+        .map((t) => t.trim().toLowerCase())
+    : undefined;
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return bad("Please enter a valid email address.");
@@ -104,17 +121,58 @@ export async function POST(req: Request): Promise<Response> {
     ...(details ? [{ label: "Details", value: details }] : []),
   ];
 
-  after(() => {
-    sendSubmissionMail({
+  after(async () => {
+    await sendSubmissionMail({
       formName: FORM_NAME_MAP[formKey] ?? formKey,
       fields,
       replyTo: email,
-    }).catch(() => { /* logged inside sendSubmissionMail */ });
-    addContactAndTag(
+    }).catch((err) => {
+      console.error("[newsletter-mail] error:", err);
+    });
+    await addContactAndTag(
       { email, firstName, lastName, company, phone },
       formKey,
       marketingConsent,
-    ).catch(() => { /* logged inside addContactAndTag */ });
+      customTags,
+    ).catch((err) => {
+      console.error("[newsletter-mailchimp] error:", err);
+    });
+
+    // If lead is from the Electronica landing page or tagged for Electronica, store in Strapi
+    const isElectronicaLead =
+      formKey.includes("electronica") ||
+      formKey.includes("evalkit") ||
+      Boolean(customTags && customTags.some((t) => t.includes("electronica")));
+
+    if (isElectronicaLead) {
+      try {
+        await fetch(`${STRAPI_URL}/api/electronica-leads/submit`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            data: {
+              email,
+              firstName,
+              lastName,
+              company,
+              phone,
+              formKey,
+              details: [
+                product ? `Product: ${product}` : "",
+                variant && variant !== product ? `Variant: ${variant}` : "",
+                details ? `Details: ${details}` : "",
+              ].filter(Boolean).join(" | ") || undefined,
+              tags: customTags ?? ["electronica-2026"],
+              sourceUrl: "/electronica-munich-2026",
+              subscribed: marketingConsent,
+            },
+          }),
+          signal: AbortSignal.timeout(5000),
+        });
+      } catch (err) {
+        console.error("[newsletter-strapi-lead] error saving electronica lead:", err);
+      }
+    }
   });
 
   // Always return success to the user — even if Mailchimp failed the form

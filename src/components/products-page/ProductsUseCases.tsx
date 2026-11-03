@@ -59,7 +59,15 @@ function splitLines(value: string): string[] {
  * Figma 2901:2033 — "Built for always-on. Proven across markets."
  * Tabbed use-case showcase. Desktop canvas is 1448 wide / 941 tall.
  */
-export function ProductsUseCases({ data, formConfig }: { data?: any; formConfig?: any }) {
+export function ProductsUseCases({
+  data,
+  formConfig,
+  showCtas = true,
+}: {
+  data?: any;
+  formConfig?: any;
+  showCtas?: boolean;
+}) {
   const heading = data?.heading || FALLBACK_HEADING;
   const headingLines = splitLines(heading);
   const subtitle = data?.subtitle || FALLBACK_SUBTITLE;
@@ -122,7 +130,12 @@ export function ProductsUseCases({ data, formConfig }: { data?: any; formConfig?
     }
   ];
 
-  const [activeIdx, setActiveIdx] = useState(0);
+  const defaultIndex = () => {
+    const idx = allTabs.findIndex((t) => t.label?.toUpperCase() === "WEARABLES");
+    return idx >= 0 ? idx : 0;
+  };
+
+  const [activeIdx, setActiveIdx] = useState(defaultIndex);
   const [direction, setDirection] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const activeTab = allTabs[activeIdx] || allTabs[0];
@@ -152,9 +165,11 @@ export function ProductsUseCases({ data, formConfig }: { data?: any; formConfig?
         className="relative mx-auto hidden w-full justify-center bg-black min-[600px]:flex mt-[60px]"
         aria-label="Use cases"
       >
-        <TabletScaleCanvas className="relative h-[941px] w-[1448px] shrink-0 min-[600px]:block">
+        <TabletScaleCanvas
+          className={`relative ${showCtas ? "h-[941px]" : "h-[810px]"} w-[1448px] shrink-0 min-[600px]:block`}
+        >
           <div
-            className="absolute left-0 top-0 h-[941px] w-[1448px]"
+            className={`absolute left-0 top-0 ${showCtas ? "h-[941px]" : "h-[810px]"} w-[1448px]`}
             data-node-id="2901:2033"
             data-name="Desktop - 14"
           >
@@ -172,6 +187,7 @@ export function ProductsUseCases({ data, formConfig }: { data?: any; formConfig?
               cards={cards}
               primary={primary}
               secondary={secondary}
+              showCtas={showCtas}
               onSecondaryCtaClick={() => setIsModalOpen(true)}
             />
           </div>
@@ -190,6 +206,7 @@ export function ProductsUseCases({ data, formConfig }: { data?: any; formConfig?
         cards={cards}
         primary={primary}
         secondary={secondary}
+        showCtas={showCtas}
         onSecondaryCtaClick={() => setIsModalOpen(true)}
       />
 
@@ -234,6 +251,7 @@ function ProductsUseCasesDesktop({
   cards,
   primary,
   secondary,
+  showCtas,
   onSecondaryCtaClick,
 }: any) {
   const fitRef = useFitText<HTMLHeadingElement>({});
@@ -351,7 +369,7 @@ function ProductsUseCasesDesktop({
                 
                 <div 
                   className="absolute left-1/2 -translate-x-1/2 pointer-events-auto z-20"
-                  style={{ top: 840 }}
+                  style={{ top: showCtas ? 840 : 755 }}
                 >
                   <PrimaryCta href="/model-zoo">Explore Model Zoo</PrimaryCta>
                 </div>
@@ -423,7 +441,7 @@ function ProductsUseCasesDesktop({
       </div>
 
       {/* CTA row — 2901:2143 */}
-      {!activeTab.isBuild && (
+      {!activeTab.isBuild && showCtas && (
         <div
           className="absolute flex items-start gap-[24px] z-50 pointer-events-auto"
           style={{ left: 487, top: 873 }}
@@ -660,6 +678,7 @@ function ProductsUseCasesMobile({
   cards,
   primary,
   secondary,
+  showCtas,
   onSecondaryCtaClick,
 }: any) {
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
@@ -706,16 +725,15 @@ function ProductsUseCasesMobile({
     }
 
     if (isHorizontal.current) {
-      const clampedOffset = Math.max(-120, Math.min(120, deltaX));
-      setDragOffset(clampedOffset);
+      setDragOffset(deltaX);
     }
   };
 
   const handleTouchEnd = () => {
     if (touchStartX.current !== null && isHorizontal.current) {
       const duration = Date.now() - touchStartTime.current;
-      const isQuickFlick = duration < 300 && Math.abs(dragOffset) > 25;
-      const passedThreshold = Math.abs(dragOffset) > 40;
+      const isQuickFlick = duration < 350 && Math.abs(dragOffset) > 25;
+      const passedThreshold = Math.abs(dragOffset) > 50;
 
       if (passedThreshold || isQuickFlick) {
         if (dragOffset < 0) {
@@ -742,15 +760,14 @@ function ProductsUseCasesMobile({
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (mouseStartX.current === null) return;
     const deltaX = e.clientX - mouseStartX.current;
-    const clampedOffset = Math.max(-120, Math.min(120, deltaX));
-    setDragOffset(clampedOffset);
+    setDragOffset(deltaX);
   };
 
   const handleMouseUp = () => {
     if (mouseStartX.current !== null) {
       const duration = Date.now() - mouseStartTime.current;
-      const isQuickFlick = duration < 300 && Math.abs(dragOffset) > 25;
-      const passedThreshold = Math.abs(dragOffset) > 40;
+      const isQuickFlick = duration < 350 && Math.abs(dragOffset) > 25;
+      const passedThreshold = Math.abs(dragOffset) > 50;
 
       if (passedThreshold || isQuickFlick) {
         if (dragOffset < 0) {
@@ -787,7 +804,7 @@ function ProductsUseCasesMobile({
 
   return (
     <section
-      className="relative flex w-full max-w-full flex-col items-center overflow-hidden bg-black py-[48px] min-[600px]:hidden"
+      className={`relative flex w-full max-w-full flex-col items-center overflow-hidden bg-black ${showCtas ? "py-[48px]" : "pt-[48px] pb-[16px]"} min-[600px]:hidden`}
       aria-label="Use cases"
     >
       <style>{`
@@ -917,8 +934,8 @@ function ProductsUseCasesMobile({
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
         style={{
-          transform: `translateX(${dragOffset * 0.35}px)`,
-          transition: isDragging ? "none" : "transform 400ms cubic-bezier(0.4,0,0.2,1)",
+          transform: `translateX(${dragOffset}px)`,
+          transition: isDragging ? "none" : "transform 350ms cubic-bezier(0.25, 1, 0.5, 1)",
         }}
       >
         {/* Hero Section (Watermark + Image) */}
@@ -939,9 +956,10 @@ function ProductsUseCasesMobile({
               
               <div className="relative flex items-center justify-center mt-[40px] mb-[40px] w-full z-10">
                 <img loading="lazy" decoding="async"
+                  draggable={false}
                   alt="Build Custom Application"
                   src="/products/build-custom-cube.png"
-                  className="relative z-10 h-auto w-full max-w-[360px] object-contain"
+                  className="relative z-10 pointer-events-none h-auto w-full max-w-[360px] object-contain select-none"
                 />
               </div>
 
@@ -976,9 +994,10 @@ function ProductsUseCasesMobile({
               <div className="relative z-10 mt-[24px] flex w-full justify-center px-[20px]">
                 {activeImage ? (
                   <img loading="lazy" decoding="async"
+                    draggable={false}
                     alt=""
                     src={activeImage}
-                    className="h-auto max-h-[360px] w-[80%] object-contain drop-shadow-2xl"
+                    className="pointer-events-none h-auto max-h-[360px] w-[80%] object-contain drop-shadow-2xl select-none"
                     aria-hidden
                   />
                 ) : null}
@@ -989,7 +1008,7 @@ function ProductsUseCasesMobile({
 
         {!activeTab?.isBuild && (
           /* Feature Cards */
-          <div className="relative z-20 mt-[-36px] grid w-full max-w-[343px] md:max-w-[620px] grid-cols-2 gap-[12px] md:gap-[20px]">
+          <div className="relative z-20 mt-[-36px] grid w-full max-w-[343px] md:max-w-[620px] grid-cols-2 gap-[12px] md:gap-[20px] pointer-events-none select-none">
             {cards.map((feature: any, idx: number) => (
               <div key={idx} className="relative w-full border border-white/20 bg-[#000000] p-[16px] md:p-[24px]">
                 {activeTab?.label === "AUTOMOTIVE" && idx === 0 && (
@@ -1048,37 +1067,39 @@ function ProductsUseCasesMobile({
           </div>
 
           {/* CTAs */}
-          <div className="mt-[32px] flex flex-row gap-[8px] w-full max-w-[343px] mx-auto relative z-50 pointer-events-auto">
-            <Link
-              href={primary.href?.trim() || "/applications"}
-              className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center overflow-hidden`}
-            >
-              <span
-                aria-hidden
-                className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
-              />
-              <AnimatedDotsBackground />
-              <span className="relative max-w-full overflow-hidden text-ellipsis text-[10px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
-                {primary.label}
-              </span>
-              <span
-                aria-hidden
-                className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`}
-              />
-              <GreenCtaCorners />
-            </Link>
-            <a
-              href={secondary.href}
-              onClick={(e) => { e.preventDefault(); onSecondaryCtaClick(); }}
-              className={`${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
-              style={{ backgroundColor: SECONDARY_CTA_BG }}
-            >
-              <span className="relative max-w-full overflow-hidden text-ellipsis px-[4px] sm:px-[12px] py-[10px] text-[10px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic text-center">
-                {secondary.label}
-              </span>
-              <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-            </a>
-          </div>
+          {showCtas && (
+            <div className="mt-[32px] flex flex-row gap-[8px] w-full max-w-[343px] mx-auto relative z-50 pointer-events-auto">
+              <Link
+                href={primary.href?.trim() || "/applications"}
+                className={`${PRIMARY_CTA_SHADOW} ${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center overflow-hidden`}
+              >
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
+                />
+                <AnimatedDotsBackground />
+                <span className="relative max-w-full overflow-hidden text-ellipsis text-[10px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
+                  {primary.label}
+                </span>
+                <span
+                  aria-hidden
+                  className={`pointer-events-none absolute inset-0 rounded-[inherit] ${PRIMARY_CTA_INSET}`}
+                />
+                <GreenCtaCorners />
+              </Link>
+              <a
+                href={secondary.href}
+                onClick={(e) => { e.preventDefault(); onSecondaryCtaClick(); }}
+                className={`${gilroyMedium.className} relative flex h-[48px] flex-1 items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
+                style={{ backgroundColor: SECONDARY_CTA_BG }}
+              >
+                <span className="relative max-w-full overflow-hidden text-ellipsis px-[4px] sm:px-[12px] py-[10px] text-[10px] sm:text-[11px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic text-center">
+                  {secondary.label}
+                </span>
+                <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
+              </a>
+            </div>
+          )}
         </>
       )}
     </section>

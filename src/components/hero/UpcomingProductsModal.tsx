@@ -33,10 +33,12 @@ export function UpcomingProductsModal({
   closeLabel,
   title,
   productVariant,
+  hideVariantDropdown,
+  tags,
 }: {
   isOpen: boolean;
   onClose: () => void;
-  formContext?: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "som-ble" | "som-lte" | "som-waitlist" | "waitlist" | "case-study";
+  formContext?: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "som-ble" | "som-lte" | "som-waitlist" | "waitlist" | "case-study" | "hardware-design";
   /** CMS form entry (page relation). Null = hardcoded fallback copy. */
   config?: PopupConfig;
   /** Optional PDF to download on successful submit. */
@@ -46,6 +48,8 @@ export function UpcomingProductsModal({
   closeLabel?: string;
   title?: string;
   productVariant?: string;
+  hideVariantDropdown?: boolean;
+  tags?: string[];
 }) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -170,6 +174,8 @@ export function UpcomingProductsModal({
             pdfName={effectiveDownloadName}
             title={title}
             productVariant={productVariant}
+            hideVariantDropdown={hideVariantDropdown}
+            tags={tags}
           />
         )}
         {step === "confirmation" && (
@@ -199,15 +205,19 @@ function FormStep({
   pdfName,
   title,
   productVariant,
+  hideVariantDropdown,
+  tags,
 }: {
   onClose: () => void;
   onSuccess: (variant?: string) => void;
-  formContext: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "som-ble" | "som-lte" | "som-waitlist" | "waitlist" | "case-study";
+  formContext: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "som-ble" | "som-lte" | "som-waitlist" | "waitlist" | "case-study" | "hardware-design";
   config?: PopupConfig;
   pdfUrl?: string;
   pdfName?: string;
   title?: string;
   productVariant?: string;
+  hideVariantDropdown?: boolean;
+  tags?: string[];
 }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -353,6 +363,7 @@ function FormStep({
         "som-waitlist": "upcoming-som-waitlist",
         waitlist: "upcoming-waitlist",
         "case-study": "case-study",
+        "hardware-design": "upcoming-hardware-design",
       };
       let formKey = formKeyMap[formContext] || "upcoming-products";
       if (isSom) {
@@ -376,6 +387,7 @@ function FormStep({
           product: resolvedVariant,
           variant: isSom ? somVariant : undefined,
           popupId: config?.documentId,
+          tags: tags?.length ? tags : undefined,
         }),
       }).catch(() => { /* Mailchimp sync failure is non-blocking */ });
 
@@ -490,7 +502,7 @@ function FormStep({
           </Field>
         </div>
 
-        {isSom && (
+        {isSom && !hideVariantDropdown && (
           <Field label="Module Variant*" className="w-full">
             <div className="relative h-[42px] w-full border-[0.5px] border-solid border-[#4a4a4a] bg-transparent focus-within:border-[rgba(255,255,255,0.5)]">
               <select
@@ -525,7 +537,7 @@ function FormStep({
         <Field
           label={
             popupField(config, "details")?.label ??
-            (formContext === "usecase"
+            (formContext === "usecase" || formContext === "evalkit" || formContext === "hardware-design"
               ? "Please briefly describe your use case*"
               : isSom
               ? "Please describe your intended application*"
@@ -542,6 +554,8 @@ function FormStep({
                 ? "Explain your use case and our team will get in touch with you."
                 : formContext === "evalkit"
                 ? "Tell us a bit about your project or use case for the evaluation kit."
+                : formContext === "hardware-design"
+                ? "Tell us about your hardware design requirements and what you're building."
                 : formContext === "sdk"
                 ? "Tell us about the project you're building with our SDK."
                 : isSom
@@ -558,8 +572,8 @@ function FormStep({
             className={FIELD_BOX}
             placeholder={
               popupField(config, "details")?.placeholder ??
-              (formContext === "usecase"
-                ? "Enter your use case"
+              (formContext === "usecase" || formContext === "evalkit" || formContext === "hardware-design"
+                ? "Describe your project or use case"
                 : isSom
                 ? "Describe your intended application"
                 : formContext === "case-study"
@@ -644,7 +658,7 @@ function ConfirmationStep({
           {config?.success_title ?? (
             formContext === "sdk"
               ? "Your download is ready!"
-              : formContext === "evalkit" || formContext === "usecase"
+              : formContext === "evalkit" || formContext === "usecase" || formContext === "hardware-design"
               ? "Thank You for Showing your interest!"
               : "Thank you for signing up!"
           )}
