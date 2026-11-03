@@ -136,14 +136,18 @@ function ReadWhitepaperCta({
   label,
   href = "#",
   onClick,
+  id,
 }: {
   fullWidth?: boolean;
   label: string;
   href?: string;
   onClick?: () => void;
+  id?: string;
 }) {
   return (
     <a
+      id={id}
+      data-analytics-id={id}
       href={href}
       onClick={(e) => {
         if (onClick) {
@@ -298,7 +302,12 @@ export function TechnologyPageHero({
             data-node-id="2931:1447"
             data-name="Frame 1984079464"
           >
-            <ReadWhitepaperCta label={primaryLabel} href={primaryHref} onClick={() => setIsWhitepaperOpen(true)} />
+            <ReadWhitepaperCta
+              id="technology_page_hero_cta_read_whitepaper"
+              label={primaryLabel}
+              href={primaryHref}
+              onClick={() => setIsWhitepaperOpen(true)}
+            />
             <WatchExplainerCta
               label={secondaryLabel}
               href={secondaryHref}
@@ -387,6 +396,7 @@ export function TechnologyPageHero({
             data-name="Frame 2147240743"
           >
             <ReadWhitepaperCta
+              id="technology_page_hero_cta_read_whitepaper"
               fullWidth
               label={primaryLabel}
               href={primaryHref}
