@@ -79,12 +79,14 @@ export function DeveloperHeroContent({ data, briefForm }: { data?: any; briefFor
         data-node-id="2438:4572"
       >
         <PrimaryCta
+          id="developer_page_hero_cta_download_modelforge_sdk"
           href={primaryHref}
           onClick={primaryHref === "#" ? () => setIsModalOpen(true) : undefined}
         >
           {primaryLabel}
         </PrimaryCta>
         <SecondaryCta
+          id="developer_page_hero_cta_read_documentation"
           href="/Technical-Documents-Ambient-Scientific.zip"
           download="Technical-Documents-Ambient-Scientific.zip"
         >
@@ -107,13 +109,17 @@ function PrimaryCta({
   children,
   href,
   onClick,
+  id,
 }: {
   children: React.ReactNode;
   href: string;
   onClick?: () => void;
+  id?: string;
 }) {
   return (
     <a
+      id={id}
+      data-analytics-id={id}
       href={href}
       onClick={
         onClick
@@ -148,14 +154,18 @@ function SecondaryCta({
   href,
   onClick,
   download,
+  id,
 }: {
   children: React.ReactNode;
   href: string;
   onClick?: () => void;
   download?: boolean | string;
+  id?: string;
 }) {
   return (
     <a
+      id={id}
+      data-analytics-id={id}
       href={href}
       download={download}
       onClick={(e) => {

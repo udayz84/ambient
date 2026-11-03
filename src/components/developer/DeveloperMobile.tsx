@@ -187,6 +187,8 @@ function DeveloperHeroMobile({ data, briefForm }: { data?: any; briefForm?: any 
       <div className="mt-[20px] flex w-[263px] flex-col gap-[16px] pb-[24px]">
         {/* Primary CTA — 4032:21997 (w263 h48) */}
         <a
+          id="developer_page_hero_cta_download_modelforge_sdk"
+          data-analytics-id="developer_page_hero_cta_download_modelforge_sdk"
           href={primaryHref}
           onClick={primaryHref === "#" ? (e) => { e.preventDefault(); setIsModalOpen(true); } : undefined}
           className={`${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-center overflow-hidden px-[20px] py-[10px] cursor-pointer shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
@@ -206,6 +208,8 @@ function DeveloperHeroMobile({ data, briefForm }: { data?: any; briefForm?: any 
         </a>
         {/* Secondary CTA — 4032:22008 (w263 h48) */}
         <a
+          id="developer_page_hero_cta_read_documentation"
+          data-analytics-id="developer_page_hero_cta_read_documentation"
           href="/Technical-Documents-Ambient-Scientific.zip"
           download="Technical-Documents-Ambient-Scientific.zip"
           className={`${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
