@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { usePathname } from "next/navigation";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { popupField, type PopupConfig } from "@/lib/popup";
@@ -22,6 +23,9 @@ export function ProductBriefModal({
   pdfName,
   formKey,
   ctaLabel,
+  emailInputId,
+  submitButtonId,
+  closeButtonId,
 }: {
   isOpen: boolean;
   title?: string;
@@ -33,12 +37,21 @@ export function ProductBriefModal({
   pdfName?: string;
   formKey?: string;
   ctaLabel?: string;
+  emailInputId?: string;
+  submitButtonId?: string;
+  closeButtonId?: string;
 }) {
   const modalRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
   const [isAnimating, setIsAnimating] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [step, setStep] = useState<Step>("form");
+
+  const isTechPage = pathname?.startsWith("/technology");
+  const finalEmailInputId =
+    emailInputId ||
+    (isTechPage ? "technology_page_request_info_modal_field_email" : undefined);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -108,6 +121,8 @@ export function ProductBriefModal({
         <Corners leftSrc="/hero/corner-tag-1.svg" rightSrc="/hero/corner-tag-2.svg" />
 
         <button
+          id={closeButtonId}
+          data-analytics-id={closeButtonId}
           type="button"
           onClick={onClose}
           aria-label="Close"
@@ -130,6 +145,8 @@ export function ProductBriefModal({
               pdfName={pdfName}
               formKey={formKey}
               ctaLabel={ctaLabel}
+              emailInputId={finalEmailInputId}
+              submitButtonId={submitButtonId}
             />
           )}
           {step === "confirmation" && <ConfirmationStep onClose={onClose} config={config} downloadStarted={Boolean(pdfUrl)} />}
@@ -148,6 +165,8 @@ function FormStep({
   pdfName,
   formKey,
   ctaLabel,
+  emailInputId,
+  submitButtonId,
 }: {
   title?: string;
   onClose: () => void;
@@ -157,6 +176,8 @@ function FormStep({
   pdfName?: string;
   formKey?: string;
   ctaLabel?: string;
+  emailInputId?: string;
+  submitButtonId?: string;
 }) {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -217,6 +238,8 @@ function FormStep({
             {popupField(config, "email")?.label ?? config?.description ?? "Please provide your email to receive the requested information."}
           </label>
           <input
+            id={emailInputId}
+            data-analytics-id={emailInputId}
             type="email"
             className={FIELD_BOX}
             placeholder={popupField(config, "email")?.placeholder ?? "Enter Your Email ID"}
@@ -228,6 +251,8 @@ function FormStep({
 
         <div className="pt-[16px] pb-[8px] flex justify-center">
           <button
+            id={submitButtonId}
+            data-analytics-id={submitButtonId}
             type="submit"
             disabled={isSubmitting}
             className={`${gilroyMedium.className} relative flex h-[48px] w-[180px] shrink-0 items-center justify-center text-[16px] leading-[28px] font-medium uppercase text-white shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] transition-opacity hover:opacity-90 disabled:opacity-70`}

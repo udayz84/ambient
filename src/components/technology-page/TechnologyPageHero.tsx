@@ -419,6 +419,7 @@ export function TechnologyPageHero({
         config={config}
         pdfUrl="/whitepapers/Ambient-UniqueArchitecture-Whitepaper.pdf"
         pdfName="Ambient-UniqueArchitecture-Whitepaper.pdf"
+        emailInputId="technology_page_request_info_modal_field_email"
       />
       {isExplainerOpen && (
         <VideoModal
