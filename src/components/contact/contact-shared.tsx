@@ -64,6 +64,7 @@ export function GreenCtaButton({
   loading = false,
   download = false,
   textClassName = "text-[14px] leading-[normal]",
+  id,
 }: {
   children: React.ReactNode;
   className?: string;
@@ -74,6 +75,7 @@ export function GreenCtaButton({
   loading?: boolean;
   download?: boolean | string;
   textClassName?: string;
+  id?: string;
 }) {
   const sharedClassName = `${gilroySemiBold.className} relative block h-[48px] shrink-0 cursor-pointer overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] disabled:cursor-not-allowed disabled:opacity-70 ${className}`;
   const sharedStyle = width ? { width } : undefined;
@@ -99,6 +101,8 @@ export function GreenCtaButton({
   if (onClick) {
     return (
       <button
+        id={id}
+        data-analytics-id={id}
         type="button"
         onClick={onClick}
         disabled={disabled || loading}
@@ -112,7 +116,14 @@ export function GreenCtaButton({
   }
 
   return (
-    <a href={href} className={sharedClassName} style={sharedStyle} download={download}>
+    <a
+      id={id}
+      data-analytics-id={id}
+      href={href}
+      className={sharedClassName}
+      style={sharedStyle}
+      download={download}
+    >
       {content}
     </a>
   );
@@ -125,6 +136,7 @@ export function WhiteCtaButton({
   lowercase = false,
   centered = false,
   textClassName = "text-[14px] leading-[normal]",
+  id,
 }: {
   children: React.ReactNode;
   className?: string;
@@ -132,9 +144,12 @@ export function WhiteCtaButton({
   lowercase?: boolean;
   centered?: boolean;
   textClassName?: string;
+  id?: string;
 }) {
   return (
     <a
+      id={id}
+      data-analytics-id={id}
       href={href}
       className={`${gilroySemiBold.className} relative block h-[48px] shrink-0 overflow-hidden shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15),0px_10.268px_6.699px_rgba(255,255,255,0.15),0px_3.714px_2.423px_rgba(255,255,255,0.1)] ${className}`}
     >

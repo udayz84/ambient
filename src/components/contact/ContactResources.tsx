@@ -13,6 +13,26 @@ const GLASS_BACKGROUND = `
   linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(10, 15, 20, 0.3) 25%, rgba(10, 15, 20, 0.4) 100%)
 `;
 
+const RESOURCE_CTA_IDS = [
+  "contact_page_immediate_resources_cta_download_datasheets_sdk",
+  "contact_page_immediate_resources_cta_download_press_kit",
+  "contact_page_immediate_resources_cta_case_studies_whitepapers",
+];
+
+function getResourceCtaId(cta: { label?: string }, index: number): string | undefined {
+  const label = (cta.label || "").toLowerCase();
+  if (label.includes("datasheet") || label.includes("sdk")) {
+    return "contact_page_immediate_resources_cta_download_datasheets_sdk";
+  }
+  if (label.includes("press")) {
+    return "contact_page_immediate_resources_cta_download_press_kit";
+  }
+  if (label.includes("case") || label.includes("whitepaper")) {
+    return "contact_page_immediate_resources_cta_case_studies_whitepapers";
+  }
+  return RESOURCE_CTA_IDS[index];
+}
+
 // Strapi shared.button variants are `primary | secondary | ghost`.
 // `primary` renders the green CTA; everything else renders the white CTA.
 function isPrimaryCta(variant: string | undefined): boolean {
@@ -50,17 +70,18 @@ export function ContactResources({ data }: { data?: any }) {
         {heading}
       </p>
       <div className="flex shrink-0 items-start gap-[20px]" data-node-id="2379:8421">
-        {ctas.map((cta, index) =>
-          isPrimaryCta(cta.variant) ? (
-            <GreenCtaButton key={index} width="270px" href={cta.href || "#"}>
+        {ctas.map((cta, index) => {
+          const ctaId = getResourceCtaId(cta, index);
+          return isPrimaryCta(cta.variant) ? (
+            <GreenCtaButton key={index} id={ctaId} width="270px" href={cta.href || "#"}>
               {cta.label}
             </GreenCtaButton>
           ) : (
-            <WhiteResourceCta key={index} href={cta.href || "#"}>
+            <WhiteResourceCta key={index} id={ctaId} href={cta.href || "#"}>
               {cta.label}
             </WhiteResourceCta>
-          )
-        )}
+          );
+        })}
       </div>
     </div>
     </>
@@ -70,12 +91,14 @@ export function ContactResources({ data }: { data?: any }) {
 function WhiteResourceCta({
   children,
   href = "#",
+  id,
 }: {
   children: ReactNode;
   href?: string;
+  id?: string;
 }) {
   return (
-    <WhiteCtaButton href={href} className="w-[270px]">
+    <WhiteCtaButton id={id} href={href} className="w-[270px]">
       {children}
     </WhiteCtaButton>
   );

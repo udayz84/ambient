@@ -3,6 +3,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { usePathname } from "next/navigation";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { BOX_BORDER } from "../careers/careers-shared";
@@ -215,7 +216,49 @@ function FormStep({
   const [chip, setChip] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const pathname = usePathname();
+  const isEvkPage = pathname?.startsWith("/dvk") || pathname?.startsWith("/evk");
+
   const isEvalKit = formContext === "evalkit";
+  const isSdk = formContext === "sdk";
+
+  const evalKitPrefix = isEvkPage ? "evk_page_eval_kit" : "product_page_eval_kit";
+
+  const firstNameId = isEvalKit
+    ? `${evalKitPrefix}_form_field_first_name`
+    : isSdk
+    ? "product_page_sdk_request_form_field_first_name"
+    : undefined;
+
+  const lastNameId = isEvalKit
+    ? `${evalKitPrefix}_form_field_last_name`
+    : isSdk
+    ? "product_page_sdk_request_form_field_last_name"
+    : undefined;
+
+  const emailId = isEvalKit
+    ? `${evalKitPrefix}_form_field_email`
+    : isSdk
+    ? "product_page_sdk_request_form_field_email"
+    : undefined;
+
+  const companyId = isEvalKit
+    ? `${evalKitPrefix}_form_field_company`
+    : isSdk
+    ? "product_page_sdk_request_form_field_company"
+    : undefined;
+
+  const detailsId = isEvalKit
+    ? `${evalKitPrefix}_form_field_intended_application`
+    : isSdk
+    ? "product_page_sdk_request_form_field_chip_name"
+    : undefined;
+
+  const submitId = isEvalKit
+    ? `${evalKitPrefix}_form_button_submit`
+    : isSdk
+    ? "product_page_sdk_request_form_button_submit"
+    : undefined;
   const isSom =
     formContext === "som" ||
     formContext === "som-ble" ||
@@ -371,8 +414,8 @@ function FormStep({
         <div className="flex flex-col md:flex-row gap-[18px]">
           <Field label={popupField(config, "first_name")?.label ?? "First Name*"} className="min-w-0 flex-1">
             <input
-              id={isEvalKit ? "product_page_eval_kit_form_field_first_name" : undefined}
-              data-analytics-id={isEvalKit ? "product_page_eval_kit_form_field_first_name" : undefined}
+              id={firstNameId}
+              data-analytics-id={firstNameId}
               className={FIELD_BOX}
               placeholder={popupField(config, "first_name")?.placeholder ?? "Enter First Name"}
               value={firstName}
@@ -382,8 +425,8 @@ function FormStep({
           </Field>
           <Field label={popupField(config, "last_name")?.label ?? "Last Name*"} className="min-w-0 flex-1">
             <input
-              id={isEvalKit ? "product_page_eval_kit_form_field_last_name" : undefined}
-              data-analytics-id={isEvalKit ? "product_page_eval_kit_form_field_last_name" : undefined}
+              id={lastNameId}
+              data-analytics-id={lastNameId}
               className={FIELD_BOX}
               placeholder={popupField(config, "last_name")?.placeholder ?? "Enter Last Name"}
               value={lastName}
@@ -396,8 +439,8 @@ function FormStep({
         <div className="flex flex-col md:flex-row gap-[18px]">
           <Field label={popupField(config, "email")?.label ?? "Email ID*"} className="min-w-0 flex-1">
             <input
-              id={isEvalKit ? "product_page_eval_kit_form_field_email" : undefined}
-              data-analytics-id={isEvalKit ? "product_page_eval_kit_form_field_email" : undefined}
+              id={emailId}
+              data-analytics-id={emailId}
               type="email"
               className={FIELD_BOX}
               placeholder={popupField(config, "email")?.placeholder ?? "Enter Your Email ID"}
@@ -408,8 +451,8 @@ function FormStep({
           </Field>
           <Field label={popupField(config, "company")?.label ?? "Company*"} className="min-w-0 flex-1">
             <input
-              id={isEvalKit ? "product_page_eval_kit_form_field_company" : undefined}
-              data-analytics-id={isEvalKit ? "product_page_eval_kit_form_field_company" : undefined}
+              id={companyId}
+              data-analytics-id={companyId}
               className={FIELD_BOX}
               placeholder={popupField(config, "company")?.placeholder ?? "Enter Company Name"}
               value={company}
@@ -480,8 +523,8 @@ function FormStep({
                 : "These are the upcoming chips we are providing. We just want to know which chip you are looking for.")}
           </p>
           <input
-            id={isEvalKit ? "product_page_eval_kit_form_field_intended_application" : undefined}
-            data-analytics-id={isEvalKit ? "product_page_eval_kit_form_field_intended_application" : undefined}
+            id={detailsId}
+            data-analytics-id={detailsId}
             className={FIELD_BOX}
             placeholder={
               popupField(config, "details")?.placeholder ??
@@ -503,8 +546,8 @@ function FormStep({
 
         <div className="pt-[8px]">
           <button
-            id={isEvalKit ? "product_page_eval_kit_form_button_submit" : undefined}
-            data-analytics-id={isEvalKit ? "product_page_eval_kit_form_button_submit" : undefined}
+            id={submitId}
+            data-analytics-id={submitId}
             type="submit"
             disabled={isSubmitting}
             className={`${gilroyMedium.className} relative flex h-[48px] w-[140px] shrink-0 items-center justify-center text-[16px] leading-[28px] font-medium uppercase text-white shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] transition-opacity hover:opacity-90 disabled:opacity-70`}

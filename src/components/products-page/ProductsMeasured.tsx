@@ -548,6 +548,7 @@ function PrimaryCta({
   download,
   target = "_blank",
   rel = "noopener noreferrer",
+  id = "product_page_specifications_cta_download_datasheet",
 }: {
   label: string;
   href: string;
@@ -556,9 +557,12 @@ function PrimaryCta({
   download?: boolean | string;
   target?: string;
   rel?: string;
+  id?: string;
 }) {
   return (
     <a
+      id={id}
+      data-analytics-id={id}
       href={href}
       target={target}
       rel={rel}
@@ -603,6 +607,7 @@ function SecondaryCta({
   download,
   target = "_blank",
   rel = "noopener noreferrer",
+  id = "product_page_specifications_cta_read_architecture_whitepaper",
 }: {
   label: string;
   href: string;
@@ -611,9 +616,12 @@ function SecondaryCta({
   download?: boolean | string;
   target?: string;
   rel?: string;
+  id?: string;
 }) {
   return (
     <a
+      id={id}
+      data-analytics-id={id}
       href={href}
       target={target}
       rel={rel}
@@ -854,6 +862,8 @@ export function ProductsMeasured({
           <div className="mx-auto mt-[32px] flex w-[240px] flex-col gap-[14px] pb-[16px]">
             {/* Primary — 240×48 */}
             <a
+              id="product_page_specifications_cta_download_datasheet"
+              data-analytics-id="product_page_specifications_cta_download_datasheet"
               href={primary.href && primary.href !== "#" ? primary.href : "/GPX10-Pro-Product-Brief.pdf"}
               target="_blank"
               rel="noopener noreferrer"
@@ -872,6 +882,8 @@ export function ProductsMeasured({
             </a>
             {/* Secondary — 240×48 */}
             <a
+              id="product_page_specifications_cta_read_architecture_whitepaper"
+              data-analytics-id="product_page_specifications_cta_read_architecture_whitepaper"
               href={secondary.href || "#"}
               onClick={(e) => handleCtaClick(e, secondary.label)}
               className={`${gilroyMedium.className} relative flex h-[48px] w-[240px] shrink-0 items-center justify-center overflow-clip px-[20px] py-[10px]`}

@@ -18,6 +18,32 @@ import { CloudflareTurnstile } from "../shared/CloudflareTurnstile";
 
 type TrackId = "sales" | "developer" | "media";
 
+const TRACK_ANALYTICS_IDS: Record<TrackId, string> = {
+  sales: "contact_page_message_track_card_sales_enterprise",
+  developer: "contact_page_message_track_card_developer_support",
+  media: "contact_page_message_track_card_media_press",
+};
+
+const CONTACT_INPUT_IDS = [
+  "contact_page_message_form_field_first_name",
+  "contact_page_message_form_field_last_name",
+  "contact_page_message_form_field_company_name",
+  "contact_page_message_form_field_job_title",
+  "contact_page_message_form_field_corporate_email",
+  "contact_page_message_form_field_phone_number",
+];
+
+function getContactFieldId(label: string, index: number): string {
+  const l = (label || "").toLowerCase();
+  if (l.includes("first")) return "contact_page_message_form_field_first_name";
+  if (l.includes("last")) return "contact_page_message_form_field_last_name";
+  if (l.includes("company")) return "contact_page_message_form_field_company_name";
+  if (l.includes("title") || l.includes("job")) return "contact_page_message_form_field_job_title";
+  if (l.includes("email") || l.includes("corporate")) return "contact_page_message_form_field_corporate_email";
+  if (l.includes("phone")) return "contact_page_message_form_field_phone_number";
+  return CONTACT_INPUT_IDS[index] || `contact_page_message_form_field_${index}`;
+}
+
 const tracks = [
   {
     id: "sales" as const,
@@ -115,13 +141,14 @@ export function ContactForm({ data }: { data?: any }) {
   // Build 6 grid-position fields from Strapi data where available
   const mergedFields = formFields.map((fallback, index) => {
     const remote = strapiInputFields[index];
-    if (!remote) return { ...fallback, label: "", placeholder: "", inputType: "text" };
+    if (!remote) return { ...fallback, label: "", placeholder: "", inputType: "text", analyticsId: CONTACT_INPUT_IDS[index] };
     return {
       ...fallback,
       label: remote.label || "",
       placeholder: remote.placeholder || "",
       inputType: mapInputType(remote.field_type),
       nodeId: `${fallback.nodeId}-${index}`,
+      analyticsId: getContactFieldId(remote.label, index),
     };
   });
 
@@ -286,6 +313,7 @@ export function ContactForm({ data }: { data?: any }) {
           height={76}
           multiline
           nodeId="2379:8561"
+          analyticsId="contact_page_message_form_field_message"
           value={message}
           onChange={setMessage}
         />
@@ -305,6 +333,8 @@ export function ContactForm({ data }: { data?: any }) {
           data-name="Check Box"
         >
           <input
+            id="contact_page_message_form_checkbox_newsletter_signup"
+            data-analytics-id="contact_page_message_form_checkbox_newsletter_signup"
             type="checkbox"
             checked={subscribed}
             onChange={(event) => setSubscribed(event.target.checked)}
@@ -342,6 +372,7 @@ export function ContactForm({ data }: { data?: any }) {
         </label>
 
         <GreenCtaButton
+          id="contact_page_message_form_button_send_message"
           className="absolute top-[560px] left-[16px]"
           width="558px"
           href={submitHref}
@@ -372,6 +403,7 @@ export function ContactForm({ data }: { data?: any }) {
 }
 
 function TrackCard({
+  id,
   title,
   description,
   remoteIcon,
@@ -389,8 +421,11 @@ function TrackCard({
   onSelect: () => void;
 }) {
   const iconSrc = remoteIcon;
+  const analyticsId = TRACK_ANALYTICS_IDS[id];
   return (
     <button
+      id={analyticsId}
+      data-analytics-id={analyticsId}
       type="button"
       onClick={onSelect}
       aria-pressed={selected}
@@ -493,6 +528,7 @@ function FormField({
   nodeId,
   value = "",
   onChange,
+  analyticsId,
 }: {
   label: string;
   placeholder: string;
@@ -505,8 +541,9 @@ function FormField({
   nodeId: string;
   value?: string;
   onChange?: (value: string) => void;
+  analyticsId?: string;
 }) {
-  const fieldId = `field-${nodeId.replace(/:/g, "-")}`;
+  const fieldId = analyticsId || `field-${nodeId.replace(/:/g, "-")}`;
   const inputClassName = `${interRegular.className} w-full border-0 bg-transparent p-0 text-[16px] leading-[24px] font-normal text-white not-italic placeholder:text-[#4a4a4a] outline-none`;
   return (
     <div
@@ -525,6 +562,7 @@ function FormField({
         {multiline ? (
           <textarea
             id={fieldId}
+            data-analytics-id={analyticsId}
             name={fieldId}
             placeholder={placeholder}
             value={value}
@@ -534,6 +572,7 @@ function FormField({
         ) : (
           <input
             id={fieldId}
+            data-analytics-id={analyticsId}
             name={fieldId}
             type={inputType}
             placeholder={placeholder}

@@ -166,6 +166,7 @@ function DvkIntegratedModulesDesktop({
               {i === 0 && (
                 <div className="mt-auto pt-[32px]">
                   <GreenCta
+                    id="evk_page_evaluation_kits_cta_shop_cranium_dvk"
                     width={157}
                     href={DIGIKEY_CRANIUM_DVK_URL}
                     target="_blank"
@@ -319,6 +320,8 @@ function DvkIntegratedModulesMobile({
                 {i === 0 && (
                   <div className="mt-auto pt-[16px]">
                     <a
+                      id="evk_page_evaluation_kits_cta_shop_cranium_dvk"
+                      data-analytics-id="evk_page_evaluation_kits_cta_shop_cranium_dvk"
                       href={DIGIKEY_CRANIUM_DVK_URL}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -431,6 +434,7 @@ function GreenCta({
   href = "#",
   target,
   rel,
+  id,
 }: {
   children: React.ReactNode;
   width: number;
@@ -438,9 +442,12 @@ function GreenCta({
   href?: string;
   target?: string;
   rel?: string;
+  id?: string;
 }) {
   return (
     <Link
+      id={id}
+      data-analytics-id={id}
       href={href}
       target={target}
       rel={rel}

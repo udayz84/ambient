@@ -45,12 +45,14 @@ function GreenCta({
   onClick,
   disabled = false,
   loading = false,
+  id,
 }: {
   children: React.ReactNode;
   href?: string;
   onClick?: () => void;
   disabled?: boolean;
   loading?: boolean;
+  id?: string;
 }) {
   const className = `${interSemiBold.className} relative flex h-[48px] w-full items-center justify-center gap-[10px] overflow-hidden ${GREEN_CTA_SHADOW} disabled:cursor-not-allowed disabled:opacity-70`;
   const content = (
@@ -72,14 +74,22 @@ function GreenCta({
 
   if (onClick) {
     return (
-      <button type="button" onClick={onClick} disabled={disabled || loading} aria-busy={loading} className={className}>
+      <button
+        id={id}
+        data-analytics-id={id}
+        type="button"
+        onClick={onClick}
+        disabled={disabled || loading}
+        aria-busy={loading}
+        className={className}
+      >
         {content}
       </button>
     );
   }
 
   return (
-    <a href={href} className={className}>
+    <a id={id} data-analytics-id={id} href={href} className={className}>
       {content}
     </a>
   );
@@ -88,12 +98,16 @@ function GreenCta({
 function WhiteCta({
   children,
   href = "#",
+  id,
 }: {
   children: React.ReactNode;
   href?: string;
+  id?: string;
 }) {
   return (
     <a
+      id={id}
+      data-analytics-id={id}
       href={href}
       className={`${interSemiBold.className} relative flex h-[48px] w-full items-center justify-center overflow-hidden shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15)]`}
     >
@@ -127,6 +141,26 @@ function SectionWrap({
       {children}
     </section>
   );
+}
+
+const RESOURCE_CTA_IDS = [
+  "contact_page_immediate_resources_cta_download_datasheets_sdk",
+  "contact_page_immediate_resources_cta_download_press_kit",
+  "contact_page_immediate_resources_cta_case_studies_whitepapers",
+];
+
+function getResourceCtaId(cta: { label?: string }, index: number): string | undefined {
+  const label = (cta.label || "").toLowerCase();
+  if (label.includes("datasheet") || label.includes("sdk")) {
+    return "contact_page_immediate_resources_cta_download_datasheets_sdk";
+  }
+  if (label.includes("press")) {
+    return "contact_page_immediate_resources_cta_download_press_kit";
+  }
+  if (label.includes("case") || label.includes("whitepaper")) {
+    return "contact_page_immediate_resources_cta_case_studies_whitepapers";
+  }
+  return RESOURCE_CTA_IDS[index];
 }
 
 /* ---------------------------------- HERO ---------------------------------- */
@@ -215,13 +249,18 @@ function ContactHeroMobile({ data }: { data?: any }) {
             {heading}
           </p>
           <div className="flex w-full flex-col gap-[20px]">
-            {ctas.map((cta, index) =>
-              cta.variant === "primary" || cta.variant === "green" ? (
-                <GreenCta key={index} href={cta.href || "#"}>{cta.label}</GreenCta>
+            {ctas.map((cta, index) => {
+              const ctaId = getResourceCtaId(cta, index);
+              return cta.variant === "primary" || cta.variant === "green" ? (
+                <GreenCta key={index} id={ctaId} href={cta.href || "#"}>
+                  {cta.label}
+                </GreenCta>
               ) : (
-                <WhiteCta key={index} href={cta.href || "#"}>{cta.label}</WhiteCta>
-              )
-            )}
+                <WhiteCta key={index} id={ctaId} href={cta.href || "#"}>
+                  {cta.label}
+                </WhiteCta>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -604,6 +643,12 @@ function ContactScheduleMobile({ data, bookingForm }: { data?: any; bookingForm?
 /* ---------------------------------- FORM ---------------------------------- */
 type TrackId = "sales" | "developer" | "media";
 
+const TRACK_ANALYTICS_IDS: Record<TrackId, string> = {
+  sales: "contact_page_message_track_card_sales_enterprise",
+  developer: "contact_page_message_track_card_developer_support",
+  media: "contact_page_message_track_card_media_press",
+};
+
 const TRACKS: { id: TrackId }[] = [
   { id: "sales" },
   { id: "developer" },
@@ -618,6 +663,26 @@ const FORM_FIELDS = [
   { type: "email" },
   { type: "tel" },
 ];
+
+const CONTACT_INPUT_IDS = [
+  "contact_page_message_form_field_first_name",
+  "contact_page_message_form_field_last_name",
+  "contact_page_message_form_field_company_name",
+  "contact_page_message_form_field_job_title",
+  "contact_page_message_form_field_corporate_email",
+  "contact_page_message_form_field_phone_number",
+];
+
+function getContactFieldId(label: string, index: number): string {
+  const l = (label || "").toLowerCase();
+  if (l.includes("first")) return "contact_page_message_form_field_first_name";
+  if (l.includes("last")) return "contact_page_message_form_field_last_name";
+  if (l.includes("company")) return "contact_page_message_form_field_company_name";
+  if (l.includes("title") || l.includes("job")) return "contact_page_message_form_field_job_title";
+  if (l.includes("email") || l.includes("corporate")) return "contact_page_message_form_field_corporate_email";
+  if (l.includes("phone")) return "contact_page_message_form_field_phone_number";
+  return CONTACT_INPUT_IDS[index] || `contact_page_message_form_field_${index}`;
+}
 
 function mapInputTypeMobile(fieldType: string | undefined | null): string {
   switch (fieldType) {
@@ -677,11 +742,12 @@ function ContactFormMobile({ data }: { data?: any }) {
   // Build input fields from Strapi data where available
   const mergedFields = FORM_FIELDS.map((fallback, index) => {
     const remote = strapiInputFields[index];
-    if (!remote) return { ...fallback, label: "", placeholder: "" };
+    if (!remote) return { ...fallback, label: "", placeholder: "", analyticsId: CONTACT_INPUT_IDS[index] };
     return {
       label: remote.label || "",
       placeholder: remote.placeholder || "",
       type: mapInputTypeMobile(remote.field_type),
+      analyticsId: getContactFieldId(remote.label, index),
     };
   });
 
@@ -759,6 +825,8 @@ function ContactFormMobile({ data }: { data?: any }) {
           return (
             <button
               key={track.id}
+              id={TRACK_ANALYTICS_IDS[track.id]}
+              data-analytics-id={TRACK_ANALYTICS_IDS[track.id]}
               type="button"
               onClick={() => setActiveTrackId(track.id)}
               aria-pressed={selected}
@@ -815,6 +883,8 @@ function ContactFormMobile({ data }: { data?: any }) {
                 {field.label}
               </label>
               <input
+                id={field.analyticsId}
+                data-analytics-id={field.analyticsId}
                 type={field.type}
                 placeholder={field.placeholder}
                 value={values[field.label] ?? ""}
@@ -829,6 +899,8 @@ function ContactFormMobile({ data }: { data?: any }) {
               {textareaLabel}
             </label>
             <textarea
+              id="contact_page_message_form_field_message"
+              data-analytics-id="contact_page_message_form_field_message"
               placeholder={textareaPlaceholder}
               value={message}
               onChange={(event) => setMessage(event.target.value)}
@@ -847,6 +919,8 @@ function ContactFormMobile({ data }: { data?: any }) {
 
           <label className="flex cursor-pointer items-center gap-[12px] py-[4px]">
             <input
+              id="contact_page_message_form_checkbox_newsletter_signup"
+              data-analytics-id="contact_page_message_form_checkbox_newsletter_signup"
               type="checkbox"
               checked={subscribed}
               onChange={(event) => setSubscribed(event.target.checked)}
@@ -869,6 +943,7 @@ function ContactFormMobile({ data }: { data?: any }) {
           </label>
 
           <GreenCta
+            id="contact_page_message_form_button_send_message"
             href={submitHref}
             onClick={submitted ? undefined : onSubmit}
             disabled={submitted}

@@ -208,6 +208,8 @@ export function ContactBookingPopup({
         <div className="flex flex-col min-[768px]:flex-row">
           {/* close X — top right corner (matches thank-you popup) */}
           <button
+            id="contact_page_fae_booking_modal_button_close"
+            data-analytics-id="contact_page_fae_booking_modal_button_close"
             type="button"
             onClick={onClose}
             aria-label="Close"
@@ -342,6 +344,8 @@ export function ContactBookingPopup({
                     return (
                       <button
                         key={key}
+                        id="contact_page_fae_booking_modal_date_picker_select_date"
+                        data-analytics-id="contact_page_fae_booking_modal_date_picker_select_date"
                         type="button"
                         disabled={past}
                         onClick={() => {
@@ -388,6 +392,8 @@ export function ContactBookingPopup({
                   return (
                     <button
                       key={slot}
+                      id="contact_page_fae_booking_modal_time_slot_select_time"
+                      data-analytics-id="contact_page_fae_booking_modal_time_slot_select_time"
                       type="button"
                       disabled={!selectedDate}
                       onClick={() => setSelectedTime(slot)}
@@ -413,6 +419,8 @@ export function ContactBookingPopup({
 
             <div className="mt-auto">
               <button
+                id="contact_page_fae_booking_modal_button_confirm_slot"
+                data-analytics-id="contact_page_fae_booking_modal_button_confirm_slot"
                 type="button"
                 onClick={submit}
                 disabled={!selectedDate || !selectedTime || confirming}
