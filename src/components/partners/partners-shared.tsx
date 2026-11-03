@@ -130,6 +130,7 @@ export function PartnersGreenCta({
   onClick,
   disabled = false,
   loading = false,
+  id,
 }: {
   children: React.ReactNode;
   href?: string;
@@ -138,6 +139,7 @@ export function PartnersGreenCta({
   onClick?: () => void;
   disabled?: boolean;
   loading?: boolean;
+  id?: string;
 }) {
   const cls = `${gilroyMedium.className} relative block h-[48px] shrink-0 cursor-pointer overflow-hidden ${GREEN_CTA_SHADOW} disabled:cursor-not-allowed disabled:opacity-70 ${className}`;
   const style = width ? { width } : undefined;
@@ -160,13 +162,29 @@ export function PartnersGreenCta({
   );
   if (onClick) {
     return (
-      <button type="button" onClick={onClick} disabled={disabled || loading} aria-busy={loading} className={cls} style={style}>
+      <button
+        type="button"
+        id={id}
+        data-analytics-id={id}
+        onClick={onClick}
+        disabled={disabled || loading}
+        aria-busy={loading}
+        className={cls}
+        style={style}
+      >
         {content}
       </button>
     );
   }
   return (
-    <a href={href} onClick={onAnchorClick} className={cls} style={style}>
+    <a
+      id={id}
+      data-analytics-id={id}
+      href={href}
+      onClick={onAnchorClick}
+      className={cls}
+      style={style}
+    >
       {content}
     </a>
   );
@@ -266,6 +284,7 @@ export function PartnersDropdown({
       <button
         type="button"
         id={id}
+        data-analytics-id={id}
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={label}

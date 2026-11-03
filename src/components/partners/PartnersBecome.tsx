@@ -143,27 +143,57 @@ export function PartnersBecome({
       <div className="flex flex-col gap-[24px] p-[24px] sm:p-[40px]">
         <div className="grid grid-cols-1 gap-[20px] min-[560px]:grid-cols-2">
           <div className="flex flex-col gap-[5px]">
-            <FieldLabel htmlFor={`${idPrefix}pa-name`}>{content.form.name}</FieldLabel>
+            <FieldLabel htmlFor="partners_page_ecosystem_application_form_field_name">{content.form.name}</FieldLabel>
             <div className={inputBox}>
-              <input id={`${idPrefix}pa-name`} className={inputCls} value={form.name} onChange={(e) => set("name")(e.target.value)} autoComplete="name" />
+              <input
+                id="partners_page_ecosystem_application_form_field_name"
+                data-analytics-id="partners_page_ecosystem_application_form_field_name"
+                className={inputCls}
+                value={form.name}
+                onChange={(e) => set("name")(e.target.value)}
+                autoComplete="name"
+              />
             </div>
           </div>
           <div className="flex flex-col gap-[5px]">
-            <FieldLabel htmlFor={`${idPrefix}pa-company`}>{content.form.company}</FieldLabel>
+            <FieldLabel htmlFor="partners_page_ecosystem_application_form_field_company">{content.form.company}</FieldLabel>
             <div className={inputBox}>
-              <input id={`${idPrefix}pa-company`} className={inputCls} value={form.company} onChange={(e) => set("company")(e.target.value)} autoComplete="organization" />
+              <input
+                id="partners_page_ecosystem_application_form_field_company"
+                data-analytics-id="partners_page_ecosystem_application_form_field_company"
+                className={inputCls}
+                value={form.company}
+                onChange={(e) => set("company")(e.target.value)}
+                autoComplete="organization"
+              />
             </div>
           </div>
           <div className="flex flex-col gap-[5px]">
-            <FieldLabel htmlFor={`${idPrefix}pa-website`}>{content.form.website}</FieldLabel>
+            <FieldLabel htmlFor="partners_page_ecosystem_application_form_field_website">{content.form.website}</FieldLabel>
             <div className={inputBox}>
-              <input id={`${idPrefix}pa-website`} type="url" placeholder="https://" className={inputCls} value={form.website} onChange={(e) => set("website")(e.target.value)} />
+              <input
+                id="partners_page_ecosystem_application_form_field_website"
+                data-analytics-id="partners_page_ecosystem_application_form_field_website"
+                type="url"
+                placeholder="https://"
+                className={inputCls}
+                value={form.website}
+                onChange={(e) => set("website")(e.target.value)}
+              />
             </div>
           </div>
           <div className="flex flex-col gap-[5px]">
-            <FieldLabel htmlFor={`${idPrefix}pa-email`}>{content.form.email}</FieldLabel>
+            <FieldLabel htmlFor="partners_page_ecosystem_application_form_field_work_email">{content.form.email}</FieldLabel>
             <div className={inputBox}>
-              <input id={`${idPrefix}pa-email`} type="email" className={inputCls} value={form.email} onChange={(e) => set("email")(e.target.value)} autoComplete="email" />
+              <input
+                id="partners_page_ecosystem_application_form_field_work_email"
+                data-analytics-id="partners_page_ecosystem_application_form_field_work_email"
+                type="email"
+                className={inputCls}
+                value={form.email}
+                onChange={(e) => set("email")(e.target.value)}
+                autoComplete="email"
+              />
             </div>
           </div>
         </div>
@@ -177,7 +207,7 @@ export function PartnersBecome({
             options={[...regions]}
             value={form.region}
             onChange={set("region")}
-            id={`${idPrefix}pa-region`}
+            id="partners_page_ecosystem_application_form_dropdown_region"
           />
         </div>
 
@@ -191,6 +221,8 @@ export function PartnersBecome({
               return (
                 <button
                   key={cap.id}
+                  id="partners_page_ecosystem_application_form_option_capability_area"
+                  data-analytics-id="partners_page_ecosystem_application_form_option_capability_area"
                   type="button"
                   aria-pressed={active}
                   onClick={() => toggleCapability(cap.short)}
@@ -208,9 +240,16 @@ export function PartnersBecome({
         </div>
 
         <div className="flex flex-col gap-[5px]">
-          <FieldLabel htmlFor={`${idPrefix}pa-experience`}>{content.form.experience}</FieldLabel>
+          <FieldLabel htmlFor="partners_page_ecosystem_application_form_field_relevant_experience">{content.form.experience}</FieldLabel>
           <div className={`${inputBox} min-h-[120px]`}>
-            <textarea id={`${idPrefix}pa-experience`} className={`${inputCls} h-full resize-none`} rows={4} value={form.experience} onChange={(e) => set("experience")(e.target.value)} />
+            <textarea
+              id="partners_page_ecosystem_application_form_field_relevant_experience"
+              data-analytics-id="partners_page_ecosystem_application_form_field_relevant_experience"
+              className={`${inputCls} h-full resize-none`}
+              rows={4}
+              value={form.experience}
+              onChange={(e) => set("experience")(e.target.value)}
+            />
           </div>
         </div>
 
@@ -220,7 +259,12 @@ export function PartnersBecome({
           </p>
         ) : null}
 
-        <PartnersGreenCta onClick={onSubmit} loading={loading} className="w-full min-[560px]:w-[280px]">
+        <PartnersGreenCta
+          id="partners_page_ecosystem_application_form_button_apply_partner"
+          onClick={onSubmit}
+          loading={loading}
+          className="w-full min-[560px]:w-[280px]"
+        >
           {content.form.submit}
         </PartnersGreenCta>
       </div>
