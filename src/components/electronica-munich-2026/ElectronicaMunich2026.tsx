@@ -33,6 +33,8 @@ export function ElectronicaMunich2026() {
       <ElectronicaCenterEcosystem />
       {/* Section 7: Electronica 2026 */}
       <ElectronicaMeetInPerson />
+      {/* Put GPX10 Pro on Your Bench (Giveaway & Lead Capture - Lower Position) */}
+      <ElectronicaGiveaway />
       <ElectronicaStayUpdated />
       {/* Section 8: Close (hidden per request) */}
       {/* <ElectronicaClose /> */}
