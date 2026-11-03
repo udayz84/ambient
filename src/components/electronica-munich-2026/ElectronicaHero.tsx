@@ -81,10 +81,10 @@ export function ElectronicaHero() {
               className={`${interRegular.className} max-w-[520px] text-[16px] font-normal leading-[25px] text-[#f0f0f0] opacity-85 [word-break:break-word]`}
             >
               Ambient Scientific makes fully programmable AI processors that run
-              real AI on-device, at microwatt power. Now Grinn and Celus are
-              building a whole ecosystem around GPX10 Pro, making it radically
-              easier to put that AI into your product. See it running at
-              Electronica.
+              real AI on-device, at microwatt power. Now Celus and ecosystem
+              partners are building a whole ecosystem around GPX10 Pro, making
+              it radically easier to put that AI into your product. See it
+              running at Electronica.
             </p>
           </div>
 
@@ -98,7 +98,7 @@ export function ElectronicaHero() {
             <span
               className={`${interRegular.className} text-[13px] font-normal text-white/80`}
             >
-              Grinn · Celus
+              Celus · Ecosystem Partners
             </span>
           </div>
 
@@ -212,10 +212,10 @@ export function ElectronicaHero() {
             className={`${interRegular.className} max-w-[340px] text-center text-[14px] font-normal leading-[22px] text-[#f0f0f0] opacity-85`}
           >
             Ambient Scientific makes fully programmable AI processors that run
-            real AI on-device, at microwatt power. Now Grinn and Celus are
-            building a whole ecosystem around GPX10 Pro, making it radically
-            easier to put that AI into your product. See it running at
-            Electronica.
+            real AI on-device, at microwatt power. Now Celus and ecosystem
+            partners are building a whole ecosystem around GPX10 Pro, making
+            it radically easier to put that AI into your product. See it
+            running at Electronica.
           </p>
 
           {/* Credibility Line Mobile */}
@@ -228,7 +228,7 @@ export function ElectronicaHero() {
             <span
               className={`${interRegular.className} text-[12px] font-normal text-white/80`}
             >
-              Grinn · Celus
+              Celus · Ecosystem Partners
             </span>
           </div>
 

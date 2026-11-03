@@ -143,9 +143,9 @@ export function ElectronicaSeeItRun() {
             <p
               className={`${interRegular.className} max-w-[480px] text-right text-[16px] font-normal leading-[25px] text-[#f0f0f0] opacity-85`}
             >
-              Watch GPX10 Pro run across Grinn, Celus, and Embedder designs with
-              real AI at microwatt power, on real silicon, from drop-in modules
-              to custom boards.
+              Watch GPX10 Pro run across partner designs with real AI at
+              microwatt power, on real silicon, from drop-in modules to custom
+              boards.
             </p>
           </div>
 
@@ -205,9 +205,8 @@ export function ElectronicaSeeItRun() {
         <p
           className={`${interRegular.className} mb-[24px] max-w-[340px] text-center text-[14px] font-normal leading-[22px] text-[#f0f0f0] opacity-85`}
         >
-          Watch GPX10 Pro run across Grinn, Celus, and Embedder designs with
-          real AI at microwatt power, on real silicon, from drop-in modules to
-          custom boards.
+          Watch GPX10 Pro run across partner designs with real AI at microwatt
+          power, on real silicon, from drop-in modules to custom boards.
         </p>
 
         {/* Video Preview Card Mobile */}

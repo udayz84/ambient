@@ -139,7 +139,7 @@ export function ElectronicaMeetInPerson() {
         <div className="pointer-events-none absolute right-[80px] top-[40px] z-20 flex h-[460px] w-[670px] select-none items-center justify-center">
           <img
             src="/electronica/booth-map-3d.jpg"
-            alt="Messe München Exhibition Floor Plan with Grinn, Celus, and Embedder Booths"
+            alt="Messe München Exhibition Floor Plan with Partner Booths"
             className="size-full object-contain"
           />
         </div>
@@ -190,7 +190,7 @@ export function ElectronicaMeetInPerson() {
           <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
           <img
             src="/electronica/booth-map-3d.jpg"
-            alt="Messe München Exhibition Floor Plan with Grinn, Celus, and Embedder Booths"
+            alt="Messe München Exhibition Floor Plan with Partner Booths"
             className="w-full object-contain"
           />
         </div>

@@ -187,7 +187,7 @@ export function ElectronicaWaysToBuild() {
                 {/* Right Hardware Visual (Much Bigger, Transparent, Well-Established) */}
                 <div className="relative flex h-[255px] w-[285px] shrink-0 items-center justify-center">
                   <img
-                    src="/electronica/grinn-som-board-transparent.png"
+                    src="/electronica/som-board-transparent.png"
                     alt="GPX10 Pro System-on-Module"
                     className="size-full object-contain scale-[1.12] drop-shadow-[0_16px_32px_rgba(0,0,0,0.7)]"
                   />
@@ -480,7 +480,7 @@ export function ElectronicaWaysToBuild() {
             {/* Hardware Visual (Much Bigger, Transparent, Well-Established) */}
             <div className="relative my-[12px] flex h-[220px] w-full items-center justify-center">
               <img
-                src="/electronica/grinn-som-board-transparent.png"
+                src="/electronica/som-board-transparent.png"
                 alt="GPX10 Pro System-on-Module"
                 className="h-full object-contain scale-[1.08] drop-shadow-[0_12px_24px_rgba(0,0,0,0.7)]"
               />
