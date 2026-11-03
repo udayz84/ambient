@@ -33,6 +33,7 @@ export function UpcomingProductsModal({
   title,
   productVariant,
   hideVariantDropdown,
+  tags,
 }: {
   isOpen: boolean;
   onClose: () => void;
@@ -47,6 +48,7 @@ export function UpcomingProductsModal({
   title?: string;
   productVariant?: string;
   hideVariantDropdown?: boolean;
+  tags?: string[];
 }) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -172,6 +174,7 @@ export function UpcomingProductsModal({
             title={title}
             productVariant={productVariant}
             hideVariantDropdown={hideVariantDropdown}
+            tags={tags}
           />
         )}
         {step === "confirmation" && (
@@ -202,6 +205,7 @@ function FormStep({
   title,
   productVariant,
   hideVariantDropdown,
+  tags,
 }: {
   onClose: () => void;
   onSuccess: (variant?: string) => void;
@@ -212,6 +216,7 @@ function FormStep({
   title?: string;
   productVariant?: string;
   hideVariantDropdown?: boolean;
+  tags?: string[];
 }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -311,6 +316,7 @@ function FormStep({
           product: resolvedVariant,
           variant: isSom ? somVariant : undefined,
           popupId: config?.documentId,
+          tags: tags?.length ? tags : undefined,
         }),
       }).catch(() => { /* Mailchimp sync failure is non-blocking */ });
 

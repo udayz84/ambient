@@ -676,6 +676,7 @@ export function ElectronicaWaysToBuild() {
         productVariant="GPX10 Pro System-on-Module"
         hideVariantDropdown
         closeLabel="Close"
+        tags={["electronica-2026", "electronica-som-waitlist"]}
       />
 
       <UpcomingProductsModal
@@ -685,6 +686,7 @@ export function ElectronicaWaysToBuild() {
         title="Get Hardware Design Updates"
         productVariant="AI-Automated Hardware Design"
         closeLabel="Close"
+        tags={["electronica-2026", "electronica-hardware-design"]}
       />
     </section>
   );

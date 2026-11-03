@@ -42,6 +42,7 @@ const MARKETING_CONSENT_KEYS = new Set([
   "upcoming-som-waitlist-lte",
   "upcoming-waitlist",
   "upcoming-hardware-design",
+  "upcoming-electronica",
 ]);
 
 /** Display names for the team notification email, per form key. */
@@ -60,6 +61,7 @@ const FORM_NAME_MAP: Record<string, string> = {
   "upcoming-som-waitlist-lte": "SOM (LTE) Waitlist",
   "upcoming-waitlist": "Waitlist Signup",
   "upcoming-hardware-design": "Hardware Design Updates Request",
+  "upcoming-electronica": "Electronica 2026 Updates Request",
   "product-brief": "Product Brief Request",
   "resource-download": "Resource Download",
   "case-study": "Case Study Download",
@@ -83,6 +85,11 @@ export async function POST(req: Request): Promise<Response> {
   const details = String(body.details ?? "").trim() || undefined;
   const product = String(body.product ?? "").trim() || undefined;
   const variant = String(body.variant ?? "").trim() || undefined;
+  const customTags = Array.isArray(body.tags)
+    ? (body.tags as unknown[])
+        .filter((t): t is string => typeof t === "string" && Boolean(t.trim()))
+        .map((t) => t.trim().toLowerCase())
+    : undefined;
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return bad("Please enter a valid email address.");
@@ -118,6 +125,7 @@ export async function POST(req: Request): Promise<Response> {
       { email, firstName, lastName, company, phone },
       formKey,
       marketingConsent,
+      customTags,
     ).catch((err) => {
       console.error("[newsletter-mailchimp] error:", err);
     });

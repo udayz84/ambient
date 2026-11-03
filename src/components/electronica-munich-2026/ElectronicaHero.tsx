@@ -293,6 +293,7 @@ export function ElectronicaHero() {
         formContext="evalkit"
         title="Win a Free Eval Kit"
         closeLabel="Close"
+        tags={["electronica-2026", "electronica-evalkit"]}
       />
     </section>
   );

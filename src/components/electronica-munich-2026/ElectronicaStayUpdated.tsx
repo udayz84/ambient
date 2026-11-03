@@ -44,13 +44,35 @@ export function ElectronicaStayUpdated() {
     );
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
+    try {
+      const detailsList = [
+        role ? `Role: ${role}` : "",
+        region ? `Region: ${region}` : "",
+        selectedInterests.length ? `Interests: ${selectedInterests.join("; ")}` : "",
+      ].filter(Boolean).join(" | ");
+
+      await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: workEmail,
+          formKey: "upcoming-electronica",
+          firstName: firstName || undefined,
+          lastName: lastName || undefined,
+          company: company || undefined,
+          details: detailsList || undefined,
+          tags: ["electronica-2026", "electronica-updates"],
+        }),
+      });
+    } catch (err) {
+      console.error("[electronica-stay-updated] submit error:", err);
+    } finally {
       setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 600);
+    }
   };
 
   return (

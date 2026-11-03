@@ -119,9 +119,9 @@ export function ElectronicaGiveaway() {
         {/* Right Column: Hardware Photo with Pointers */}
         <div className="pointer-events-none absolute right-[80px] top-[40px] z-20 flex h-[500px] w-[670px] select-none items-center justify-center">
           <img
-            src="/electronica/nurasense-kit-clean.png"
+            src="/electronica/nurasense-eval-kit-features.jpg"
             alt="NuraSense Evaluation Kit with GPX10 Pro Silicon"
-            className="size-full object-contain"
+            className="size-full rounded-[14px] object-contain shadow-[0_16px_40px_rgba(0,0,0,0.18)]"
           />
         </div>
       </TabletScaleCanvas>
@@ -170,9 +170,9 @@ export function ElectronicaGiveaway() {
         </p>
 
         {/* Hardware Photo Mobile */}
-        <div className="relative mb-[24px] w-full overflow-hidden rounded-[8px]">
+        <div className="relative mb-[24px] w-full overflow-hidden rounded-[12px] shadow-[0_10px_25px_rgba(0,0,0,0.15)]">
           <img
-            src="/electronica/nurasense-kit-clean.png"
+            src="/electronica/nurasense-eval-kit-features.jpg"
             alt="NuraSense Evaluation Kit with GPX10 Pro Silicon"
             className="w-full object-contain"
           />
@@ -218,6 +218,7 @@ export function ElectronicaGiveaway() {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         formContext="evalkit"
+        tags={["electronica-2026", "electronica-evalkit", "electronica-giveaway"]}
       />
     </section>
   );
