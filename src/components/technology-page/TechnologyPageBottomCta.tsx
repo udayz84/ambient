@@ -32,6 +32,7 @@ type CardData = {
   cta: string;
   ctaHref: string;
   onClick?: () => void;
+  analyticsId?: string;
 };
 
 const FALLBACK_CARDS: CardData[] = [
@@ -41,6 +42,7 @@ const FALLBACK_CARDS: CardData[] = [
     body: "Explore how Ambient AI can unlock new capabilities in your wearable product. Strategic planning session with our applications team.",
     cta: "Request Eval Kit",
     ctaHref: "/dvk",
+    analyticsId: "technology_page_eval_kit_promo_cta_buy_eval_kit",
   },
   {
     nodeId: "2995:1275",
@@ -109,6 +111,8 @@ function CtaCard({
               {card.body}
             </p>
             <a
+              id={card.analyticsId}
+              data-analytics-id={card.analyticsId}
               href={card.ctaHref}
               onClick={(e) => {
                 if (card.onClick) {
@@ -168,6 +172,7 @@ export function TechnologyPageBottomCta({
             cta: (c?.cta_label as string) || fb.cta,
             ctaHref: i === 0 ? "#" : (i === 1 ? "/contact#sales-form" : fb.ctaHref),
             onClick: i === 0 ? () => setIsEvalModalOpen(true) : undefined,
+            analyticsId: fb.analyticsId,
           };
         })
       : FALLBACK_CARDS.map((fb, i) => ({
@@ -277,6 +282,8 @@ export function TechnologyPageBottomCta({
                     {card.body}
                   </p>
                   <a
+                    id={card.analyticsId}
+                    data-analytics-id={card.analyticsId}
                     href={card.ctaHref}
                     onClick={(e) => {
                       if (card.onClick) {
