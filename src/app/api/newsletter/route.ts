@@ -22,6 +22,14 @@ import { sendSubmissionMail, type MailField } from "@/lib/notify-mail";
  * ----------------------------------------------------------------------------
  */
 
+const STRAPI_URL = (
+  process.env.STRAPI_URL ||
+  process.env.NEXT_PUBLIC_STRAPI_URL ||
+  "http://127.0.0.1:1338"
+)
+  .replace(/\/$/, "")
+  .replace("localhost", "127.0.0.1");
+
 function bad(error: string, status = 422) {
   return NextResponse.json({ ok: false, error }, { status });
 }
@@ -129,6 +137,41 @@ export async function POST(req: Request): Promise<Response> {
     ).catch((err) => {
       console.error("[newsletter-mailchimp] error:", err);
     });
+
+    // If lead is from the Electronica landing page or tagged for Electronica, store in Strapi
+    const isElectronicaLead =
+      formKey.includes("electronica") ||
+      Boolean(customTags && customTags.some((t) => t.includes("electronica")));
+
+    if (isElectronicaLead) {
+      try {
+        await fetch(`${STRAPI_URL}/api/electronica-leads/submit`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            data: {
+              email,
+              firstName,
+              lastName,
+              company,
+              phone,
+              formKey,
+              details: [
+                product ? `Product: ${product}` : "",
+                variant && variant !== product ? `Variant: ${variant}` : "",
+                details ? `Details: ${details}` : "",
+              ].filter(Boolean).join(" | ") || undefined,
+              tags: customTags ?? ["electronica-2026"],
+              sourceUrl: "/electronica-munich-2026",
+              subscribed: marketingConsent,
+            },
+          }),
+          signal: AbortSignal.timeout(5000),
+        });
+      } catch (err) {
+        console.error("[newsletter-strapi-lead] error saving electronica lead:", err);
+      }
+    }
   });
 
   // Always return success to the user — even if Mailchimp failed the form

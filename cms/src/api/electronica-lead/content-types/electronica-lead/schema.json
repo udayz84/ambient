@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "electronica_leads",
+  "info": {
+    "singularName": "electronica-lead",
+    "pluralName": "electronica-leads",
+    "displayName": "Electronica Leads",
+    "description": "Leads and signups from the Electronica Munich 2026 landing page"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "company": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "formKey": {
+      "type": "string",
+      "default": "upcoming-electronica",
+      "required": true
+    },
+    "details": {
+      "type": "text"
+    },
+    "tags": {
+      "type": "json"
+    },
+    "sourceUrl": {
+      "type": "string",
+      "default": "/electronica-munich-2026"
+    },
+    "subscribed": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}
