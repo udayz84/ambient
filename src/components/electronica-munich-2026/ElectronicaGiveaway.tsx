@@ -2,6 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
+import { useState } from "react";
 import {
   gilroySemiBold,
   interRegular,
@@ -10,6 +11,7 @@ import { TagBadge } from "@/components/hero/TagBadge";
 import { Corners } from "@/components/shared/Corners";
 import { GreenCtaCorners } from "@/components/shared/GreenCtaCorners";
 import { TabletScaleCanvas } from "@/components/shared/TabletScaleCanvas";
+import { UpcomingProductsModal } from "@/components/hero/UpcomingProductsModal";
 import {
   CORNER_LEFT,
   CORNER_RIGHT,
@@ -19,6 +21,8 @@ import {
 } from "@/components/products-page/products-data";
 
 export function ElectronicaGiveaway() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <section
       aria-label="Win a GPX10 Pro Evaluation Kit Giveaway"
@@ -113,11 +117,10 @@ export function ElectronicaGiveaway() {
 
           {/* Giveaway CTA */}
           <div className="mt-[28px] pl-[20px] w-full">
-            <Link
-              href="https://mailchi.mp/ambientscientific/evk-registrations-electronica-2026"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[48px] w-max shrink-0 items-center justify-center overflow-hidden px-[28px] transition-transform duration-200 hover:scale-[1.01]`}
+            <button
+              type="button"
+              onClick={() => setIsModalOpen(true)}
+              className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[48px] w-max shrink-0 cursor-pointer items-center justify-center overflow-hidden px-[28px] transition-transform duration-200 hover:scale-[1.01]`}
             >
               <span
                 aria-hidden="true"
@@ -131,7 +134,7 @@ export function ElectronicaGiveaway() {
                 className={`pointer-events-none absolute inset-0 ${PRIMARY_CTA_INSET}`}
               />
               <GreenCtaCorners />
-            </Link>
+            </button>
           </div>
 
           {/* Subtext */}
@@ -205,11 +208,10 @@ export function ElectronicaGiveaway() {
 
         {/* Form Mobile */}
         <div className="w-full">
-          <Link
-            href="https://mailchi.mp/ambientscientific/evk-registrations-electronica-2026"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[46px] w-full items-center justify-center overflow-hidden`}
+          <button
+            type="button"
+            onClick={() => setIsModalOpen(true)}
+            className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[46px] w-full cursor-pointer items-center justify-center overflow-hidden`}
           >
             <span
               aria-hidden="true"
@@ -223,7 +225,7 @@ export function ElectronicaGiveaway() {
               className={`pointer-events-none absolute inset-0 ${PRIMARY_CTA_INSET}`}
             />
             <GreenCtaCorners />
-          </Link>
+          </button>
 
           {/* Subtext Mobile */}
           <div className="mt-[16px] text-center">
@@ -233,6 +235,18 @@ export function ElectronicaGiveaway() {
           </div>
         </div>
       </div>
+
+      {/* Giveaway Lead Capture Modal */}
+      <UpcomingProductsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        formContext="evalkit"
+        title="Win a GPX10 Pro Evaluation Kit"
+        productVariant="NuraSense GPX10 Pro Evaluation Kit"
+        hideVariantDropdown
+        closeLabel="Close"
+        tags={["electronica-2026", "electronica-giveaway", "evalkit"]}
+      />
     </section>
   );
 }

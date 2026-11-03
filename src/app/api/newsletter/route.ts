@@ -141,6 +141,7 @@ export async function POST(req: Request): Promise<Response> {
     // If lead is from the Electronica landing page or tagged for Electronica, store in Strapi
     const isElectronicaLead =
       formKey.includes("electronica") ||
+      formKey.includes("evalkit") ||
       Boolean(customTags && customTags.some((t) => t.includes("electronica")));
 
     if (isElectronicaLead) {
