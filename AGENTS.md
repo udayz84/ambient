@@ -270,6 +270,34 @@ Only modify requested parts.
 
 ---
 
+# STRAPI & CMS DATA INTEGRITY RULES
+
+Strict Rules for Strapi CMS & Next.js Data Fetching:
+
+1. SCHEMA CROSS-CHECK IS MANDATORY:
+   - NEVER guess, invent, or speculate field names in populate queries.
+   - Strapi v5 throws a fatal 400 Bad Request ("Invalid key <x>") if any requested key is missing from the schema.
+   - Before adding or editing any populate param in `getSingleType` or `getCollection`, you MUST inspect the exact schema file:
+     - Component schema: `cms/src/components/<category>/<component>.json`
+     - Content-Type schema: `cms/src/api/<name>/content-types/<name>/schema.json`
+   - Every entry in `fields` or `nested` must match an existing attribute name in those schema files.
+
+2. NEVER COMBINE CONFLICTING POPULATE PARAMS:
+   - In Strapi v5, do NOT list a field in both `fields` and `nested` for the same section.
+   - If a nested component has media, using `nested: ["field"]` populates the component and its direct children via `*`.
+
+3. SECTION ISOLATION (NO WIPEOUTS):
+   - A failure in one section's query must NEVER cause the entire page or other sections to disappear.
+   - In Next.js pages, wrap queries with graceful fallbacks. `src/lib/strapi.ts` provides automatic sectional fallback to prevent whole-page wipeouts.
+
+4. MANDATORY PRE-PUSH VERIFICATION:
+   - Before pushing any commit touching Strapi queries:
+     1. Test the query against the live Strapi API (e.g. `curl -f -s "http://127.0.0.1:1338/api/<endpoint>?<query>" > /dev/null`) to ensure HTTP 200 OK.
+     2. Run `npm run build` to ensure clean build.
+     3. Verify the page renders in Next.js without missing sections or console errors.
+
+---
+
 # VALIDATION
 
 After every change verify:

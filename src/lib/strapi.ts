@@ -170,14 +170,58 @@ export function mediaUrl(media: StrapiMedia | undefined | null): string | null {
  * Fetch a single type with all sections deeply populated.
  * Pass the apiId (e.g. "home-page") and the list of top-level section names
  * from the schema (e.g. ["hero", "measured_proof", ...]).
+ *
+ * Includes automatic sectional fallback: if a combined multi-section query
+ * fails (e.g. Strapi v5 400 Bad Request on an invalid populate key), it falls
+ * back to querying sections individually so that a single broken section does
+ * not wipe out the entire page.
  */
 export async function getSingleType<T = unknown>(
   apiId: string,
   sections: PopulateSection[] = []
 ): Promise<T | null> {
   const query = sections.length ? `?${buildPopulate(sections)}` : "";
-  const res = await fetchStrapi<StrapiResponse<T>>(`/api/${apiId}${query}`);
-  return res.data;
+  try {
+    const res = await fetchStrapi<StrapiResponse<T>>(`/api/${apiId}${query}`);
+    return res.data;
+  } catch (err) {
+    if (sections.length > 1) {
+      console.warn(
+        `[Strapi] Combined query for "${apiId}" failed: ${
+          err instanceof Error ? err.message : String(err)
+        }. Falling back to section-by-section query to isolate broken sections...`
+      );
+      try {
+        const baseRes = await fetchStrapi<StrapiResponse<Record<string, any>>>(`/api/${apiId}`);
+        const data: Record<string, any> = { ...(baseRes.data || {}) };
+
+        await Promise.allSettled(
+          sections.map(async (sec) => {
+            const secName = typeof sec === "string" ? sec : sec.section;
+            try {
+              const secQuery = `?${buildPopulate([sec])}`;
+              const secRes = await fetchStrapi<StrapiResponse<Record<string, any>>>(
+                `/api/${apiId}${secQuery}`
+              );
+              if (secRes.data && secRes.data[secName] !== undefined) {
+                data[secName] = secRes.data[secName];
+              }
+            } catch (secErr) {
+              console.error(
+                `[Strapi] Section "${secName}" failed to populate on "${apiId}": ${
+                  secErr instanceof Error ? secErr.message : String(secErr)
+                }`
+              );
+            }
+          })
+        );
+        return data as T;
+      } catch (fallbackErr) {
+        console.error(`[Strapi] Sectional fallback also failed for "${apiId}":`, fallbackErr);
+      }
+    }
+    throw err;
+  }
 }
 
 /**
