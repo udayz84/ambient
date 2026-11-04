@@ -296,8 +296,8 @@ function DvkIntegratedModulesMobile({
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img loading="lazy" decoding="async"
                       alt=""
-                      src="/dvk/integrated-som-mobile.png"
-                      className="absolute top-[-2.75%] left-[11.26%] h-[107.65%] w-[77.47%] max-w-none"
+                      src="/som/som-chip.webp"
+                      className="absolute top-[-2.75%] left-[11.26%] h-[107.65%] w-[77.47%] max-w-none object-contain"
                     />
                   </div>
                 )}

@@ -204,8 +204,97 @@ for (const pageFile of pageFiles) {
 
 console.log(`✓ Audited ${queriesChecked} getSingleType calls across all routes against Strapi schema.`);
 
-// Step 2: Test Live Strapi Endpoints (if running)
-console.log("\n--- Step 2: Testing Live Strapi Server (if active) ---");
+// Helper to find all source files
+function findSourceFiles(dir, fileList = []) {
+  const files = fs.readdirSync(dir);
+  for (const file of files) {
+    const fullPath = path.join(dir, file);
+    if (fs.statSync(fullPath).isDirectory()) {
+      if (file !== "node_modules" && file !== ".next" && file !== ".git") {
+        findSourceFiles(fullPath, fileList);
+      }
+    } else if (/\.(tsx|ts|jsx|js)$/.test(file)) {
+      fileList.push(fullPath);
+    }
+  }
+  return fileList;
+}
+
+const allSourceFiles = findSourceFiles(path.join(ROOT_DIR, "src"));
+
+// Step 2: Static Assets / Broken Images Verification
+console.log("\n--- Step 2: Auditing Static Assets & Images (Zero 404s) ---");
+const publicDir = path.join(ROOT_DIR, "public");
+const assetRegex = /["`'](\/[^"`'?#\s]+\.(?:png|jpg|jpeg|webp|svg|gif|ico|pdf|zip|mp4|webm|woff2|woff|ttf))["`']/g;
+let assetsChecked = 0;
+let missingAssets = 0;
+const knownExcludedPrefixes = ["/_next", "/api/"];
+
+for (const file of allSourceFiles) {
+  // Skip lib and middleware mocks
+  if (file.includes("/src/lib/") || file.includes("middleware.ts")) continue;
+
+  const content = fs.readFileSync(file, "utf8");
+  let match;
+  while ((match = assetRegex.exec(content)) !== null) {
+    const assetPath = match[1];
+    if (knownExcludedPrefixes.some((p) => assetPath.startsWith(p))) continue;
+
+    assetsChecked++;
+    let decoded = assetPath;
+    try {
+      decoded = decodeURIComponent(assetPath);
+    } catch {}
+
+    const fullDiskPath = path.join(publicDir, decoded.replace(/^\//, ""));
+    if (!fs.existsSync(fullDiskPath)) {
+      const relPath = path.relative(ROOT_DIR, file);
+      console.error(`❌ [BROKEN ASSET] In ${relPath}:`);
+      console.error(`   👉 "${assetPath}" does not exist in public/! (404 risk)`);
+      missingAssets++;
+      errorCount++;
+    }
+  }
+}
+
+if (missingAssets === 0) {
+  console.log(`✓ Audited ${assetsChecked} static asset references in code. All exist in public/!`);
+}
+
+// Step 3: Download Attribute Guard (No HTML page downloads)
+console.log("\n--- Step 3: Auditing Download Attributes (Prevent HTML Downloads) ---");
+let downloadChecked = 0;
+let downloadHazards = 0;
+
+for (const file of allSourceFiles) {
+  const content = fs.readFileSync(file, "utf8");
+  const aTagMatches = content.match(/<a[^>]*download[^>]*>/g) || [];
+
+  for (const tag of aTagMatches) {
+    downloadChecked++;
+    const hrefMatch = tag.match(/href=["']([^"']+)["']/);
+    if (hrefMatch) {
+      const href = hrefMatch[1];
+      const isFile = /\.(zip|pdf|tar|gz|dmg|pkg|csv|png|jpg|webp)$/i.test(href);
+      if (href === "#" || (href.startsWith("/") && !isFile)) {
+        const relPath = path.relative(ROOT_DIR, file);
+        console.error(`❌ [DOWNLOAD HAZARD] In ${relPath}:`);
+        console.error(`   👉 Tag has download attribute with page route: href="${href}"`);
+        console.error(`   👉 This will cause Chrome to download an HTML file instead of navigating!`);
+        console.error(`   👉 Fix: Only pass download to actual file URLs (.zip, .pdf, etc.).`);
+        downloadHazards++;
+        errorCount++;
+      }
+    }
+  }
+}
+
+if (downloadHazards === 0) {
+  console.log(`✓ Audited all download attributes. Zero HTML page download hazards found.`);
+}
+
+// Step 4: Test Live Strapi Endpoints (if running)
+console.log("\n--- Step 4: Testing Live Strapi Server (if active) ---");
 
 function checkStrapiLive() {
   return new Promise((resolve) => {
@@ -238,8 +327,8 @@ if (isStrapiUp) {
   console.log("ℹ️  Local Strapi server not running on port 1338 (Schema JSON definitions verified in Step 1).");
 }
 
-// Step 3: Run Next.js Production Build
-console.log("\n--- Step 3: Running Next.js Production Build Verification ---");
+// Step 5: Run Next.js Production Build
+console.log("\n--- Step 5: Running Next.js Production Build Verification ---");
 try {
   execSync("npm run build", { stdio: "inherit" });
   console.log("✓ Next.js build completed successfully.");

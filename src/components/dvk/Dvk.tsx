@@ -338,7 +338,7 @@ const MOBILE_DEMO_DECOR = [
   <img loading="lazy" decoding="async"
     key="fall"
     alt=""
-    src="/dvk/demo-ellipse-1.svg"
+    src="/dvk/decor-fall.svg"
     aria-hidden
     className="pointer-events-none absolute top-[47.93px] left-[293.86px] h-[19.93px] w-[19.32px] max-w-none"
     data-node-id="4062:10804"
@@ -348,7 +348,7 @@ const MOBILE_DEMO_DECOR = [
   <img loading="lazy" decoding="async"
     key="vision"
     alt=""
-    src="/dvk/demo-ellipse-2.svg"
+    src="/dvk/decor-vision.svg"
     aria-hidden
     className="pointer-events-none absolute top-[86.09px] left-[316.94px] size-[12.22px] max-w-none"
     data-node-id="4062:10815"
