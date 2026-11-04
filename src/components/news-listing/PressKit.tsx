@@ -115,11 +115,13 @@ function PressCta({ label, href }: { label: string; href: string }) {
 
 
 
+const PRESS_KIT_ZIP_FALLBACK = "/Ambient-Press-Kit.zip";
+
 export function PressKit({ data }: PressKitProps = {}) {
   const heading = (data?.heading as string) || "";
   const subtitle = (data?.subtitle as string) || "";
   const ctaLabel = (data?.cta_label as string) || "";
-  const ctaHref = mediaUrl(data?.cta_file) || "#";
+  const ctaHref = mediaUrl(data?.cta_file) || PRESS_KIT_ZIP_FALLBACK;
   const fileInfo = (data?.file_info as string) || "";
   const menus: string[] = Array.isArray(data?.menus)
     ? data.menus

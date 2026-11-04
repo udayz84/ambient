@@ -65,6 +65,8 @@ export function GreenCtaButton({
   download = false,
   textClassName = "text-[14px] leading-[normal]",
   id,
+  target,
+  rel,
 }: {
   children: React.ReactNode;
   className?: string;
@@ -76,6 +78,8 @@ export function GreenCtaButton({
   download?: boolean | string;
   textClassName?: string;
   id?: string;
+  target?: string;
+  rel?: string;
 }) {
   const sharedClassName = `${gilroySemiBold.className} relative block h-[48px] shrink-0 cursor-pointer overflow-hidden shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)] disabled:cursor-not-allowed disabled:opacity-70 ${className}`;
   const sharedStyle = width ? { width } : undefined;
@@ -123,6 +127,8 @@ export function GreenCtaButton({
       className={sharedClassName}
       style={sharedStyle}
       download={download}
+      target={target}
+      rel={rel}
     >
       {content}
     </a>
@@ -137,6 +143,9 @@ export function WhiteCtaButton({
   centered = false,
   textClassName = "text-[14px] leading-[normal]",
   id,
+  target,
+  rel,
+  download,
 }: {
   children: React.ReactNode;
   className?: string;
@@ -145,12 +154,18 @@ export function WhiteCtaButton({
   centered?: boolean;
   textClassName?: string;
   id?: string;
+  target?: string;
+  rel?: string;
+  download?: boolean | string;
 }) {
   return (
     <a
       id={id}
       data-analytics-id={id}
       href={href}
+      target={target}
+      rel={rel}
+      download={download}
       className={`${gilroySemiBold.className} relative block h-[48px] shrink-0 overflow-hidden shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15),0px_10.268px_6.699px_rgba(255,255,255,0.15),0px_3.714px_2.423px_rgba(255,255,255,0.1)] ${className}`}
     >
       <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />

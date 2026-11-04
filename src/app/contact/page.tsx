@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Contact } from "@/components/contact/Contact";
-import { getSingleType } from "@/lib/strapi";
+import { getSingleType, mediaUrl } from "@/lib/strapi";
 import { buildMetadata, type SeoData } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -35,5 +35,21 @@ export default async function ContactPage() {
   } catch {
     data = null;
   }
-  return <Contact data={data} bookingForm={data?.booking_form ?? null} />;
+
+  // Fetch news-listing press kit file so the "Download Press Kit" CTA stays unified
+  let pressKitHref: string | null = null;
+  try {
+    const newsData = await getSingleType<any>("news-listing-page", ["press_kit"]);
+    pressKitHref = mediaUrl(newsData?.press_kit?.cta_file) || null;
+  } catch {
+    pressKitHref = null;
+  }
+
+  return (
+    <Contact
+      data={data}
+      bookingForm={data?.booking_form ?? null}
+      pressKitHref={pressKitHref}
+    />
+  );
 }

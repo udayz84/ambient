@@ -18,8 +18,17 @@ function normalizeFooterUrl(rawHref: unknown, labelOrFallback?: unknown): string
     return "/#case-studies";
   }
 
+  // If this is the Datasheet link by label, always guarantee it maps to /products#datasheet
+  if (typeof labelOrFallback === "string" && /datasheet/i.test(labelOrFallback)) {
+    return "/products#datasheet";
+  }
+
   if (typeof rawHref !== "string") {
-    return typeof labelOrFallback === "string" && !labelOrFallback.startsWith("Case") ? labelOrFallback : "#";
+    return typeof labelOrFallback === "string" &&
+      !labelOrFallback.startsWith("Case") &&
+      !labelOrFallback.toLowerCase().includes("datasheet")
+      ? labelOrFallback
+      : "#";
   }
   let href = rawHref.trim();
   if (!href || href === "#") {
@@ -36,6 +45,11 @@ function normalizeFooterUrl(rawHref: unknown, labelOrFallback?: unknown): string
   // Case Studies link normalization (any casing, with or without hyphen/slash/hash)
   if (/case-?studies/i.test(href)) {
     return "/#case-studies";
+  }
+
+  // Datasheet link normalization
+  if (/datasheet/i.test(href)) {
+    return "/products#datasheet";
   }
 
   // Any in-page anchor in footer should resolve to homepage anchor across all pages

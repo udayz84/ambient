@@ -38,6 +38,7 @@ export const FALLBACK_FOOTER_NAV_SECTIONS: FooterNavSection[] = [
     listAlign: "start",
     links: [
       { label: "Documentation", href: "#" },
+      { label: "Product Datasheet", href: "/products#datasheet" },
       { label: "Case Studies", href: "/#case-studies" },
       { label: "Technical Papers", href: "#" },
       { label: "News", href: "/news-listing" },

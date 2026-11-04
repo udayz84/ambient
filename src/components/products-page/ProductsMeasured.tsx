@@ -779,7 +779,8 @@ export function ProductsMeasured({
 
           {/* 3712:1921 — CTA row */}
           <div
-            className="-translate-x-1/2 absolute bottom-[104px] flex gap-[24px] items-start left-[calc(50%+4px)]"
+            id="datasheet-cta"
+            className="-translate-x-1/2 absolute bottom-[104px] flex gap-[24px] items-start left-[calc(50%+4px)] scroll-mt-[120px]"
             data-node-id="3712:1921"
           >
             <PrimaryCta

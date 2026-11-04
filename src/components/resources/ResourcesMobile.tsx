@@ -221,7 +221,8 @@ function ResourcesFeaturedMobile({ data, downloadForm }: { data?: any; downloadF
 
   return (
     <section
-      className="relative flex w-full flex-col py-[48px]"
+      id="whitepapers"
+      className="scroll-mt-[90px] relative flex w-full flex-col py-[48px]"
       aria-label="Featured Resources"
     >
       <h2

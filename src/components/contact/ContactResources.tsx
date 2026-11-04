@@ -33,13 +33,49 @@ function getResourceCtaId(cta: { label?: string }, index: number): string | unde
   return RESOURCE_CTA_IDS[index];
 }
 
+const MODEL_FORGE_ZIP_URL =
+  "https://ambientwebasset.blob.core.windows.net/website-assets/Model_Forge_1.0.0.zip";
+const PRESS_KIT_ZIP_FALLBACK = "/Ambient-Press-Kit.zip";
+
+function resolveResourceHref(
+  href: string | undefined,
+  label: string | undefined,
+  pressKitHref?: string | null
+): string {
+  const cleanHref = (href || "").trim();
+  const l = (label || "").toLowerCase();
+  const isPress = l.includes("press");
+  const isSdkOrDatasheet = l.includes("datasheet") || l.includes("sdk");
+
+  if (isPress) {
+    if (cleanHref && cleanHref !== "#" && !cleanHref.startsWith("/news-listing")) return cleanHref;
+    if (pressKitHref) return pressKitHref;
+    return PRESS_KIT_ZIP_FALLBACK;
+  }
+
+  if (isSdkOrDatasheet) {
+    if (cleanHref && cleanHref !== "#") return cleanHref;
+    return MODEL_FORGE_ZIP_URL;
+  }
+
+  if (cleanHref && cleanHref !== "#") return cleanHref;
+  if (l.includes("whitepaper") || l.includes("case")) return "/resources#whitepapers";
+  return cleanHref || "#";
+}
+
 // Strapi shared.button variants are `primary | secondary | ghost`.
 // `primary` renders the green CTA; everything else renders the white CTA.
 function isPrimaryCta(variant: string | undefined): boolean {
   return variant === "primary" || variant === "green";
 }
 
-export function ContactResources({ data }: { data?: any }) {
+export function ContactResources({
+  data,
+  pressKitHref,
+}: {
+  data?: any;
+  pressKitHref?: string | null;
+}) {
   const [isVisible, setIsVisible] = useState(false);
   const heading = data?.heading || "";
   const ctas: ReadonlyArray<{ label: string; href: string; variant: string }> =
@@ -72,12 +108,35 @@ export function ContactResources({ data }: { data?: any }) {
       <div className="flex shrink-0 items-start gap-[20px]" data-node-id="2379:8421">
         {ctas.map((cta, index) => {
           const ctaId = getResourceCtaId(cta, index);
+          const href = resolveResourceHref(cta.href, cta.label, pressKitHref);
+          const isDownload =
+            href.endsWith(".pdf") ||
+            href.endsWith(".zip") ||
+            href.includes(".zip") ||
+            href.includes("Model_Forge") ||
+            href.includes("Press-Kit");
+
           return isPrimaryCta(cta.variant) ? (
-            <GreenCtaButton key={index} id={ctaId} width="270px" href={cta.href || "#"}>
+            <GreenCtaButton
+              key={index}
+              id={ctaId}
+              width="270px"
+              href={href}
+              target={isDownload ? "_blank" : undefined}
+              rel={isDownload ? "noopener noreferrer" : undefined}
+              download={isDownload ? true : undefined}
+            >
               {cta.label}
             </GreenCtaButton>
           ) : (
-            <WhiteResourceCta key={index} id={ctaId} href={cta.href || "#"}>
+            <WhiteResourceCta
+              key={index}
+              id={ctaId}
+              href={href}
+              target={isDownload ? "_blank" : undefined}
+              rel={isDownload ? "noopener noreferrer" : undefined}
+              download={isDownload ? true : undefined}
+            >
               {cta.label}
             </WhiteResourceCta>
           );
@@ -92,13 +151,19 @@ function WhiteResourceCta({
   children,
   href = "#",
   id,
+  target,
+  rel,
+  download,
 }: {
   children: ReactNode;
   href?: string;
   id?: string;
+  target?: string;
+  rel?: string;
+  download?: boolean | string;
 }) {
   return (
-    <WhiteCtaButton id={id} href={href} className="w-[270px]">
+    <WhiteCtaButton id={id} href={href} className="w-[270px]" target={target} rel={rel} download={download}>
       {children}
     </WhiteCtaButton>
   );

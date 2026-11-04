@@ -29,11 +29,13 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     if (!cleanId) return;
 
     if (cleanId === "casestudies") cleanId = "case-studies";
+    if (cleanId === "datasheets" || cleanId === "product-datasheet" || cleanId === "product-datasheets") cleanId = "datasheet";
 
     const element =
       document.getElementById(cleanId) ||
       (cleanId === "case-studies" ? document.getElementById("casestudies") : null) ||
-      (cleanId.includes("case") ? document.getElementById("case-studies") : null);
+      (cleanId.includes("case") ? document.getElementById("case-studies") : null) ||
+      (cleanId.includes("datasheet") ? document.getElementById("datasheet") : null);
 
     if (!element) return;
 

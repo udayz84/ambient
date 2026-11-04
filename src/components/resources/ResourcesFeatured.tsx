@@ -85,9 +85,10 @@ export function ResourcesFeatured({ data, downloadForm }: ResourcesFeaturedProps
 
   return (
     <section
+      id="whitepapers"
       ref={ref}
       style={{ animationDelay: '0.3s' }}
-      className={`absolute top-[716px] left-1/2 flex w-[1432px] -translate-x-1/2 flex-col gap-[20px] bg-[#010101] px-[56px] py-[80px] ${
+      className={`scroll-mt-[90px] absolute top-[716px] left-1/2 flex w-[1432px] -translate-x-1/2 flex-col gap-[20px] bg-[#010101] px-[56px] py-[80px] ${
         isVisible ? FADE_IN_CLASS : "translate-y-[25px] opacity-0"
       }`}
       aria-label="Featured Resources"

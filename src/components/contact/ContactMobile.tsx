@@ -46,6 +46,9 @@ function GreenCta({
   disabled = false,
   loading = false,
   id,
+  download,
+  target,
+  rel,
 }: {
   children: React.ReactNode;
   href?: string;
@@ -53,6 +56,9 @@ function GreenCta({
   disabled?: boolean;
   loading?: boolean;
   id?: string;
+  download?: boolean | string;
+  target?: string;
+  rel?: string;
 }) {
   const className = `${interSemiBold.className} relative flex h-[48px] w-full items-center justify-center gap-[10px] overflow-hidden ${GREEN_CTA_SHADOW} disabled:cursor-not-allowed disabled:opacity-70`;
   const content = (
@@ -89,7 +95,15 @@ function GreenCta({
   }
 
   return (
-    <a id={id} data-analytics-id={id} href={href} className={className}>
+    <a
+      id={id}
+      data-analytics-id={id}
+      href={href}
+      className={className}
+      target={target}
+      rel={rel}
+      download={download}
+    >
       {content}
     </a>
   );
@@ -99,16 +113,25 @@ function WhiteCta({
   children,
   href = "#",
   id,
+  target,
+  rel,
+  download,
 }: {
   children: React.ReactNode;
   href?: string;
   id?: string;
+  target?: string;
+  rel?: string;
+  download?: boolean | string;
 }) {
   return (
     <a
       id={id}
       data-analytics-id={id}
       href={href}
+      target={target}
+      rel={rel}
+      download={download}
       className={`${interSemiBold.className} relative flex h-[48px] w-full items-center justify-center overflow-hidden shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15)]`}
     >
       <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
@@ -163,8 +186,44 @@ function getResourceCtaId(cta: { label?: string }, index: number): string | unde
   return RESOURCE_CTA_IDS[index];
 }
 
+const MODEL_FORGE_ZIP_URL =
+  "https://ambientwebasset.blob.core.windows.net/website-assets/Model_Forge_1.0.0.zip";
+const PRESS_KIT_ZIP_FALLBACK = "/Ambient-Press-Kit.zip";
+
+function resolveResourceHref(
+  href: string | undefined,
+  label: string | undefined,
+  pressKitHref?: string | null
+): string {
+  const cleanHref = (href || "").trim();
+  const l = (label || "").toLowerCase();
+  const isPress = l.includes("press");
+  const isSdkOrDatasheet = l.includes("datasheet") || l.includes("sdk");
+
+  if (isPress) {
+    if (cleanHref && cleanHref !== "#" && !cleanHref.startsWith("/news-listing")) return cleanHref;
+    if (pressKitHref) return pressKitHref;
+    return PRESS_KIT_ZIP_FALLBACK;
+  }
+
+  if (isSdkOrDatasheet) {
+    if (cleanHref && cleanHref !== "#") return cleanHref;
+    return MODEL_FORGE_ZIP_URL;
+  }
+
+  if (cleanHref && cleanHref !== "#") return cleanHref;
+  if (l.includes("whitepaper") || l.includes("case")) return "/resources#whitepapers";
+  return cleanHref || "#";
+}
+
 /* ---------------------------------- HERO ---------------------------------- */
-function ContactHeroMobile({ data }: { data?: any }) {
+function ContactHeroMobile({
+  data,
+  pressKitHref,
+}: {
+  data?: any;
+  pressKitHref?: string | null;
+}) {
   const fitRef = useFitText<HTMLHeadingElement>({});
 
   const heroData = data?.hero;
@@ -251,12 +310,34 @@ function ContactHeroMobile({ data }: { data?: any }) {
           <div className="flex w-full flex-col gap-[20px]">
             {ctas.map((cta, index) => {
               const ctaId = getResourceCtaId(cta, index);
+              const href = resolveResourceHref(cta.href, cta.label, pressKitHref);
+              const isDownload =
+                href.endsWith(".pdf") ||
+                href.endsWith(".zip") ||
+                href.includes(".zip") ||
+                href.includes("Model_Forge") ||
+                href.includes("Press-Kit");
+
               return cta.variant === "primary" || cta.variant === "green" ? (
-                <GreenCta key={index} id={ctaId} href={cta.href || "#"}>
+                <GreenCta
+                  key={index}
+                  id={ctaId}
+                  href={href}
+                  target={isDownload ? "_blank" : undefined}
+                  rel={isDownload ? "noopener noreferrer" : undefined}
+                  download={isDownload ? true : undefined}
+                >
                   {cta.label}
                 </GreenCta>
               ) : (
-                <WhiteCta key={index} id={ctaId} href={cta.href || "#"}>
+                <WhiteCta
+                  key={index}
+                  id={ctaId}
+                  href={href}
+                  target={isDownload ? "_blank" : undefined}
+                  rel={isDownload ? "noopener noreferrer" : undefined}
+                  download={isDownload ? true : undefined}
+                >
                   {cta.label}
                 </WhiteCta>
               );
@@ -570,7 +651,7 @@ function ContactScheduleMobile({ data, bookingForm }: { data?: any; bookingForm?
                   <div className="absolute left-[6.48px] top-1/2 h-[12px] w-px -translate-y-1/2 bg-white opacity-30" />
                   <div className="absolute left-[170.48px] top-1/2 h-[12px] w-px -translate-y-1/2 bg-white opacity-30" />
                 </div>
-                
+
                 <div className="flex flex-col items-start gap-[10px] w-full pointer-events-auto">
                   <h3 className={`${gilroyMedium.className} text-[16px] leading-[18px] font-medium text-white not-italic [word-break:break-word]`}>
                     {card.title}
@@ -614,7 +695,7 @@ function ContactScheduleMobile({ data, bookingForm }: { data?: any; bookingForm?
         meetingDescription={
           bookingCard !== null
             ? mergedCards[bookingCard]?.description ||
-              "This is an example of a meeting you would have with a potential customer to demonstrate your product."
+            "This is an example of a meeting you would have with a potential customer to demonstrate your product."
             : ""
         }
         recipientEmail={
@@ -830,11 +911,10 @@ function ContactFormMobile({ data }: { data?: any }) {
               type="button"
               onClick={() => setActiveTrackId(track.id)}
               aria-pressed={selected}
-              className={`relative flex items-start gap-[14px] p-[16px] text-left transition-colors ${
-                selected
+              className={`relative flex items-start gap-[14px] p-[16px] text-left transition-colors ${selected
                   ? "border-[1.5px] border-solid border-[rgba(83,216,36,0.4)] bg-transparent"
                   : "border-[0.5px] border-solid border-white/15 bg-transparent"
-              }`}
+                }`}
             >
               <Corners />
               <div className="relative size-[28px] shrink-0">
@@ -857,9 +937,8 @@ function ContactFormMobile({ data }: { data?: any }) {
                 </p>
               </div>
               <span
-                className={`relative mt-[2px] size-[18px] shrink-0 overflow-clip rounded-full ${
-                  selected ? "bg-[#53d824]" : "bg-[#e2f9da] opacity-50"
-                }`}
+                className={`relative mt-[2px] size-[18px] shrink-0 overflow-clip rounded-full ${selected ? "bg-[#53d824]" : "bg-[#e2f9da] opacity-50"
+                  }`}
                 aria-hidden
               >
                 <span className="absolute top-1/2 left-1/2 size-[8px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#091804]" />
@@ -927,9 +1006,8 @@ function ContactFormMobile({ data }: { data?: any }) {
               className="sr-only"
             />
             <span
-              className={`relative size-[20px] shrink-0 border-[0.5px] border-solid ${
-                subscribed ? "border-[#53d824] bg-[#53d824]" : "border-[#4a4a4a]"
-              }`}
+              className={`relative size-[20px] shrink-0 border-[0.5px] border-solid ${subscribed ? "border-[#53d824] bg-[#53d824]" : "border-[#4a4a4a]"
+                }`}
             >
               {subscribed ? (
                 <svg className="absolute inset-0 size-full p-[2px] text-[#091804]" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -967,10 +1045,18 @@ function ContactFormMobile({ data }: { data?: any }) {
 }
 
 /* --------------------------------- PAGE ----------------------------------- */
-export function ContactMobile({ data, bookingForm }: { data?: any; bookingForm?: any }) {
+export function ContactMobile({
+  data,
+  bookingForm,
+  pressKitHref,
+}: {
+  data?: any;
+  bookingForm?: any;
+  pressKitHref?: string | null;
+}) {
   return (
     <div className="flex w-full flex-col">
-      <ContactHeroMobile data={data} />
+      <ContactHeroMobile data={data} pressKitHref={pressKitHref} />
       <ContactScheduleMobile data={data?.schedule} bookingForm={bookingForm} />
       <ContactMapMobile data={data?.map} />
       <ContactFormMobile data={data?.form} />
