@@ -90,7 +90,7 @@ export default async function Home() {
   let winsData: any = null;
   try {
     const appData = await getSingleType<any>("applications-page", [
-      { section: "wins", nested: ["cards"] },
+      { section: "wins", fields: ["cards.image"], nested: ["cards.buttons"] },
     ]);
     winsData = appData?.wins || null;
   } catch {
@@ -120,7 +120,7 @@ export default async function Home() {
       {data?.measured_proof && <MeasuredProof data={data.measured_proof} />}
       <div id="case-studies" className="scroll-mt-[90px]">
         <div id="casestudies" className="scroll-mt-[90px]" />
-        <ApplicationsPageWins data={data?.case_studies?.cards?.length ? data.case_studies : data?.wins?.cards?.length ? data.wins : winsData} />
+        <ApplicationsPageWins data={winsData || data?.case_studies || data?.wins} />
       </div>
       {/* <EcosystemMarqueeStrip data={data?.clients} /> */}
       {data?.technology && <Technology data={data.technology} />}
