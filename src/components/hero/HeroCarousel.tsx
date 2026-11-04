@@ -40,8 +40,6 @@ type AnnouncementCms = {
   image?: Parameters<typeof mediaUrl>[0];
   image_alt?: string | null;
   ctas?: { label?: string | null; href?: string | null; variant?: string | null }[] | null;
-  cta?: { label?: string | null; href?: string | null; variant?: string | null } | null;
-  secondary_cta?: { label?: string | null; href?: string | null; variant?: string | null } | null;
 };
 
 /** Map Strapi home.hero-announcement entries to the slide shape. */
@@ -50,26 +48,20 @@ function cmsAnnouncements(
 ): Announcement[] {
   return (data?.announcements ?? [])
     .filter((a) => a?.title)
-    .map((a) => {
-      const rawCtas = Array.isArray(a.ctas) && a.ctas.length > 0
-        ? a.ctas
-        : [a.cta, a.secondary_cta].filter(Boolean);
-
-      return {
-        tag: a.tag ?? "Announcement",
-        title: a.title ?? "",
-        subtitle: a.subtitle ?? "",
-        ctas: rawCtas
-          .filter((cta): cta is NonNullable<typeof cta> => Boolean(cta && cta.label))
-          .map((cta, index) => ({
-            label: cta.label ?? "",
-            href: cta.href ?? "#",
-            primary: cta.variant ? cta.variant === "primary" : index === 0,
-          })),
-        image: mediaUrl(a.image) || "",
-        imageAlt: a.image_alt || a.image?.alternativeText || "",
-      };
-    });
+    .map((a) => ({
+      tag: a.tag ?? "Announcement",
+      title: a.title ?? "",
+      subtitle: a.subtitle ?? "",
+      ctas: (a.ctas ?? [])
+        .filter((cta): cta is NonNullable<typeof cta> => Boolean(cta && cta.label))
+        .map((cta, index) => ({
+          label: cta.label ?? "",
+          href: cta.href ?? "#",
+          primary: cta.variant ? cta.variant === "primary" : index === 0,
+        })),
+      image: mediaUrl(a.image) || "",
+      imageAlt: a.image_alt || a.image?.alternativeText || "",
+    }));
 }
 
 function AnnouncementCtaButton({ cta, onClick }: { cta: AnnouncementCta; onClick: (href: string, e: React.MouseEvent) => void }) {

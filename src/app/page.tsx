@@ -46,13 +46,7 @@ export default async function Home() {
       {
         section: "hero",
         fields: ["video", "mobile_video"],
-        nested: [
-          "metrics",
-          "announcements.image",
-          "announcements.ctas",
-          "announcements.cta",
-          "announcements.secondary_cta",
-        ],
+        nested: ["metrics", "announcements.image", "announcements.ctas"],
       },
       "hero_form",
       // NOTE: do NOT list a field in both `fields` and `nested` for the same parent —
