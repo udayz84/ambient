@@ -72,7 +72,7 @@ export function GreenCtaButton({
   className?: string;
   width?: string;
   href?: string;
-  onClick?: React.MouseEventHandler<any>;
+  onClick?: React.MouseEventHandler<HTMLElement>;
   disabled?: boolean;
   loading?: boolean;
   download?: boolean | string;
@@ -146,6 +146,7 @@ export function WhiteCtaButton({
   target,
   rel,
   download,
+  onClick,
 }: {
   children: React.ReactNode;
   className?: string;
@@ -157,17 +158,10 @@ export function WhiteCtaButton({
   target?: string;
   rel?: string;
   download?: boolean | string;
+  onClick?: React.MouseEventHandler<HTMLElement>;
 }) {
-  return (
-    <a
-      id={id}
-      data-analytics-id={id}
-      href={href}
-      target={target}
-      rel={rel}
-      download={download}
-      className={`${gilroySemiBold.className} relative block h-[48px] shrink-0 overflow-hidden shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15),0px_10.268px_6.699px_rgba(255,255,255,0.15),0px_3.714px_2.423px_rgba(255,255,255,0.1)] ${className}`}
-    >
+  const content = (
+    <>
       <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
       <span
         aria-hidden
@@ -189,6 +183,36 @@ export function WhiteCtaButton({
       >
         {children}
       </span>
+    </>
+  );
+
+  const sharedClassName = `${gilroySemiBold.className} relative block h-[48px] shrink-0 overflow-hidden shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15),0px_10.268px_6.699px_rgba(255,255,255,0.15),0px_3.714px_2.423px_rgba(255,255,255,0.1)] ${className}`;
+
+  if (onClick) {
+    return (
+      <button
+        id={id}
+        data-analytics-id={id}
+        type="button"
+        onClick={onClick}
+        className={sharedClassName}
+      >
+        {content}
+      </button>
+    );
+  }
+
+  return (
+    <a
+      id={id}
+      data-analytics-id={id}
+      href={href}
+      target={target}
+      rel={rel}
+      download={download}
+      className={sharedClassName}
+    >
+      {content}
     </a>
   );
 }

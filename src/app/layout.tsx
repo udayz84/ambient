@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -137,6 +138,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             strategy="afterInteractive"
           />
         )}
+        {/* Leadfeeder Tracking */}
+        <Script id="leadfeeder" strategy="afterInteractive">
+          {`(function(ss,ex){
+  window.ldfdr=window.ldfdr||function(){
+    (ldfdr._q=ldfdr._q||[]).push([].slice.call(arguments));
+  };
+  (function(d,s){
+    fs=d.getElementsByTagName(s)[0];
+    function ce(src){
+      var cs=d.createElement(s);
+      cs.src=src;
+      cs.async=1;
+      fs.parentNode.insertBefore(cs,fs);
+    };
+    ce('https://sc.lfeeder.com/lftracker_v1_'+ss+(ex?'_'+ex:'')+'.js');
+  })(document,'script');
+})('DzLR5a5qWwzaBoQ2');`}
+        </Script>
         {/* Real-time SPA Route Change Tracking for all pages */}
         <GoogleAnalytics />
       </body>

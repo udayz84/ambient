@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import Image from "next/image";
 import { useState } from "react";
@@ -10,6 +11,7 @@ import { useFitText } from "../shared/FitText";
 import { ContactBookingPopup } from "./ContactBookingPopup";
 import { ContactSuccessPopup } from "./ContactSuccessPopup";
 import { CloudflareTurnstile } from "../shared/CloudflareTurnstile";
+import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
@@ -116,6 +118,7 @@ function WhiteCta({
   target,
   rel,
   download,
+  onClick,
 }: {
   children: React.ReactNode;
   href?: string;
@@ -123,17 +126,11 @@ function WhiteCta({
   target?: string;
   rel?: string;
   download?: boolean | string;
+  onClick?: () => void;
 }) {
-  return (
-    <a
-      id={id}
-      data-analytics-id={id}
-      href={href}
-      target={target}
-      rel={rel}
-      download={download}
-      className={`${interSemiBold.className} relative flex h-[48px] w-full items-center justify-center overflow-hidden shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15)]`}
-    >
+  const className = `${interSemiBold.className} relative flex h-[48px] w-full items-center justify-center overflow-hidden shadow-[0px_24.721px_16.129px_rgba(255,255,255,0.15)]`;
+  const content = (
+    <>
       <span aria-hidden className="pointer-events-none absolute inset-0 bg-white" />
       <span
         aria-hidden
@@ -144,6 +141,34 @@ function WhiteCta({
         {children}
       </span>
       <GreenCtaCorners />
+    </>
+  );
+
+  if (onClick) {
+    return (
+      <button
+        id={id}
+        data-analytics-id={id}
+        type="button"
+        onClick={onClick}
+        className={className}
+      >
+        {content}
+      </button>
+    );
+  }
+
+  return (
+    <a
+      id={id}
+      data-analytics-id={id}
+      href={href}
+      target={target}
+      rel={rel}
+      download={download}
+      className={className}
+    >
+      {content}
     </a>
   );
 }
@@ -225,6 +250,7 @@ function ContactHeroMobile({
   pressKitHref?: string | null;
 }) {
   const fitRef = useFitText<HTMLHeadingElement>({});
+  const [isSdkModalOpen, setIsSdkModalOpen] = useState(false);
 
   const heroData = data?.hero;
   const resourcesData = data?.resources;
@@ -236,116 +262,147 @@ function ContactHeroMobile({
     Array.isArray(resourcesData?.ctas) ? resourcesData.ctas : [];
 
   return (
-    <section
-      className="relative w-full overflow-hidden bg-black pt-[100px]"
-      aria-label="Contact hero"
-      data-node-id="3229:7781"
-      data-name="Banner"
-    >
-      <div className="relative mx-auto w-full" style={{ height: 761 }}>
-        {/* hand image background — full width, height 518, top 60 */}
-        <div
-          className="pointer-events-none absolute left-0 right-0 overflow-hidden"
-          style={{ top: 60, height: 518 }}
-          aria-hidden
-        >
-          {bg ? (
-            <Image
-              src={bg}
-              alt={heroData?.mobile_background_image_alt || heroData?.background_image_alt || ""}
-              fill
-              className="object-cover"
-              sizes="100vw"
-              priority
+    <>
+      <section
+        className="relative w-full overflow-hidden bg-black pt-[100px]"
+        aria-label="Contact hero"
+        data-node-id="3229:7781"
+        data-name="Banner"
+      >
+        <div className="relative mx-auto w-full" style={{ height: 761 }}>
+          {/* hand image background — full width, height 518, top 60 */}
+          <div
+            className="pointer-events-none absolute left-0 right-0 overflow-hidden"
+            style={{ top: 60, height: 518 }}
+            aria-hidden
+          >
+            {bg ? (
+              <Image
+                src={bg}
+                alt={heroData?.mobile_background_image_alt || heroData?.background_image_alt || ""}
+                fill
+                className="object-cover"
+                sizes="100vw"
+                priority
+              />
+            ) : null}
+            <div
+              className="absolute inset-0"
+              style={{ backgroundImage: "linear-gradient(177.572deg, rgba(0, 0, 0, 0) 74.733%, rgb(0, 0, 0) 100.97%)" }}
             />
-          ) : null}
-          <div
-            className="absolute inset-0"
-            style={{ backgroundImage: "linear-gradient(177.572deg, rgba(0, 0, 0, 0) 74.733%, rgb(0, 0, 0) 100.97%)" }}
-          />
-        </div>
+          </div>
 
-        {/* section title — top 0, left/right 20, title + subtitle */}
-        <div
-          className="absolute left-[20px] right-[20px] top-0 flex flex-col items-center justify-center gap-[15px]"
-          data-node-id="3229:7785"
-        >
+          {/* section title — top 0, left/right 20, title + subtitle */}
           <div
-            className="relative flex w-full items-center justify-center py-[7px]"
-            data-node-id="3229:8704"
+            className="absolute left-[20px] right-[20px] top-0 flex flex-col items-center justify-center gap-[15px]"
+            data-node-id="3229:7785"
+          >
+            <div
+              className="relative flex w-full items-center justify-center py-[7px]"
+              data-node-id="3229:8704"
+            >
+              <Corners />
+              <h1
+                ref={fitRef}
+                className={`${gilroyMedium.className} w-[241.258px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
+                style={{ backgroundImage: "linear-gradient(102.228deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)" }}
+                data-node-id="3229:8705"
+              >
+                {titleLines[0] && <span className="block leading-[36px]">{titleLines[0]}</span>}
+                {titleLines[1] && <span className="block leading-[36px]">{titleLines[1]}</span>}
+              </h1>
+            </div>
+            <p
+              className={`${interRegular.className} w-[308px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 not-italic [word-break:break-word]`}
+              data-node-id="3229:7787"
+            >
+              {subtitle}
+            </p>
+          </div>
+
+          {/* resources article — top 449, overlaps lower part of hand image */}
+          <div
+            className="absolute left-[20px] right-[20px] flex flex-col gap-[20px] overflow-clip border-[0.5px] border-solid border-white/20 bg-transparent p-[24px]"
+            style={{ top: 449 }}
+            data-node-id="3229:8713"
+            data-name="Article"
           >
             <Corners />
-            <h1
-              ref={fitRef}
-              className={`${gilroyMedium.className} w-[241.258px] bg-clip-text text-center text-[36px] leading-[36px] font-medium text-transparent [word-break:break-word] not-italic`}
-              style={{ backgroundImage: "linear-gradient(102.228deg, rgb(255, 255, 255) 1.3527%, rgb(212, 233, 188) 55.161%, rgb(255, 255, 255) 111.67%)" }}
-              data-node-id="3229:8705"
+            <p
+              className={`${gilroyMedium.className} w-full text-center text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+              data-node-id="3229:8716"
             >
-              {titleLines[0] && <span className="block leading-[36px]">{titleLines[0]}</span>}
-              {titleLines[1] && <span className="block leading-[36px]">{titleLines[1]}</span>}
-            </h1>
-          </div>
-          <p
-            className={`${interRegular.className} w-[308px] text-center text-[14px] leading-[21px] font-normal text-[#f0f0f0] opacity-80 not-italic [word-break:break-word]`}
-            data-node-id="3229:7787"
-          >
-            {subtitle}
-          </p>
-        </div>
+              {heading}
+            </p>
+            <div className="flex w-full flex-col gap-[20px]">
+              {ctas.map((cta, index) => {
+                const ctaId = getResourceCtaId(cta, index);
+                const labelLower = (cta.label || "").toLowerCase();
+                const isSdk = labelLower.includes("datasheet") || labelLower.includes("sdk") || index === 0;
 
-        {/* resources article — top 449, overlaps lower part of hand image */}
-        <div
-          className="absolute left-[20px] right-[20px] flex flex-col gap-[20px] overflow-clip border-[0.5px] border-solid border-white/20 bg-transparent p-[24px]"
-          style={{ top: 449 }}
-          data-node-id="3229:8713"
-          data-name="Article"
-        >
-          <Corners />
-          <p
-            className={`${gilroyMedium.className} w-full text-center text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
-            data-node-id="3229:8716"
-          >
-            {heading}
-          </p>
-          <div className="flex w-full flex-col gap-[20px]">
-            {ctas.map((cta, index) => {
-              const ctaId = getResourceCtaId(cta, index);
-              const href = resolveResourceHref(cta.href, cta.label, pressKitHref);
-              const isDownload =
-                href.endsWith(".pdf") ||
-                href.endsWith(".zip") ||
-                href.includes(".zip") ||
-                href.includes("Model_Forge") ||
-                href.includes("Press-Kit");
+                if (isSdk) {
+                  return cta.variant === "primary" || cta.variant === "green" ? (
+                    <GreenCta
+                      key={index}
+                      id={ctaId}
+                      onClick={() => setIsSdkModalOpen(true)}
+                    >
+                      {cta.label}
+                    </GreenCta>
+                  ) : (
+                    <WhiteCta
+                      key={index}
+                      id={ctaId}
+                      onClick={() => setIsSdkModalOpen(true)}
+                    >
+                      {cta.label}
+                    </WhiteCta>
+                  );
+                }
 
-              return cta.variant === "primary" || cta.variant === "green" ? (
-                <GreenCta
-                  key={index}
-                  id={ctaId}
-                  href={href}
-                  target={isDownload ? "_blank" : undefined}
-                  rel={isDownload ? "noopener noreferrer" : undefined}
-                  download={isDownload ? true : undefined}
-                >
-                  {cta.label}
-                </GreenCta>
-              ) : (
-                <WhiteCta
-                  key={index}
-                  id={ctaId}
-                  href={href}
-                  target={isDownload ? "_blank" : undefined}
-                  rel={isDownload ? "noopener noreferrer" : undefined}
-                  download={isDownload ? true : undefined}
-                >
-                  {cta.label}
-                </WhiteCta>
-              );
-            })}
+                const href = resolveResourceHref(cta.href, cta.label, pressKitHref);
+                const isDownload =
+                  href.endsWith(".pdf") ||
+                  href.endsWith(".zip") ||
+                  href.includes(".zip") ||
+                  href.includes("Model_Forge") ||
+                  href.includes("Press-Kit");
+
+                return cta.variant === "primary" || cta.variant === "green" ? (
+                  <GreenCta
+                    key={index}
+                    id={ctaId}
+                    href={href}
+                    target={isDownload ? "_blank" : undefined}
+                    rel={isDownload ? "noopener noreferrer" : undefined}
+                    download={isDownload ? true : undefined}
+                  >
+                    {cta.label}
+                  </GreenCta>
+                ) : (
+                  <WhiteCta
+                    key={index}
+                    id={ctaId}
+                    href={href}
+                    target={isDownload ? "_blank" : undefined}
+                    rel={isDownload ? "noopener noreferrer" : undefined}
+                    download={isDownload ? true : undefined}
+                  >
+                    {cta.label}
+                  </WhiteCta>
+                );
+              })}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <UpcomingProductsModal
+        isOpen={isSdkModalOpen}
+        onClose={() => setIsSdkModalOpen(false)}
+        formContext="sdk"
+      />
+    </>
   );
 }
 

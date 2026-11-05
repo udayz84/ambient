@@ -1,8 +1,10 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useEffect, useState, type ReactNode } from "react";
 import { gilroyMedium } from "../hero/fonts";
 import { CornerDecor, GreenCtaButton, WhiteCtaButton } from "./contact-shared";
+import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 
 const HERO_FADE_MS = 300;
 const RESOURCES_DELAY_MS = HERO_FADE_MS + 300;
@@ -77,6 +79,7 @@ export function ContactResources({
   pressKitHref?: string | null;
 }) {
   const [isVisible, setIsVisible] = useState(false);
+  const [isSdkModalOpen, setIsSdkModalOpen] = useState(false);
   const heading = data?.heading || "";
   const ctas: ReadonlyArray<{ label: string; href: string; variant: string }> =
     Array.isArray(data?.ctas) ? data.ctas : [];
@@ -98,51 +101,81 @@ export function ContactResources({
         data-node-id="2379:8413"
         data-name="Article"
       >
-      <CornerDecor />
-      <p
-        className={`${gilroyMedium.className} w-full shrink-0 text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
-        data-node-id="2379:8416"
-      >
-        {heading}
-      </p>
-      <div className="flex shrink-0 items-start gap-[20px]" data-node-id="2379:8421">
-        {ctas.map((cta, index) => {
-          const ctaId = getResourceCtaId(cta, index);
-          const href = resolveResourceHref(cta.href, cta.label, pressKitHref);
-          const isDownload =
-            href.endsWith(".pdf") ||
-            href.endsWith(".zip") ||
-            href.includes(".zip") ||
-            href.includes("Model_Forge") ||
-            href.includes("Press-Kit");
+        <CornerDecor />
+        <p
+          className={`${gilroyMedium.className} w-full shrink-0 text-[22px] leading-[28px] font-medium text-white not-italic [word-break:break-word]`}
+          data-node-id="2379:8416"
+        >
+          {heading}
+        </p>
+        <div className="flex shrink-0 items-start gap-[20px]" data-node-id="2379:8421">
+          {ctas.map((cta, index) => {
+            const ctaId = getResourceCtaId(cta, index);
+            const labelLower = (cta.label || "").toLowerCase();
+            const isSdk = labelLower.includes("datasheet") || labelLower.includes("sdk") || index === 0;
 
-          return isPrimaryCta(cta.variant) ? (
-            <GreenCtaButton
-              key={index}
-              id={ctaId}
-              width="270px"
-              href={href}
-              target={isDownload ? "_blank" : undefined}
-              rel={isDownload ? "noopener noreferrer" : undefined}
-              download={isDownload ? true : undefined}
-            >
-              {cta.label}
-            </GreenCtaButton>
-          ) : (
-            <WhiteResourceCta
-              key={index}
-              id={ctaId}
-              href={href}
-              target={isDownload ? "_blank" : undefined}
-              rel={isDownload ? "noopener noreferrer" : undefined}
-              download={isDownload ? true : undefined}
-            >
-              {cta.label}
-            </WhiteResourceCta>
-          );
-        })}
+            if (isSdk) {
+              return isPrimaryCta(cta.variant) ? (
+                <GreenCtaButton
+                  key={index}
+                  id={ctaId}
+                  width="270px"
+                  onClick={() => setIsSdkModalOpen(true)}
+                >
+                  {cta.label}
+                </GreenCtaButton>
+              ) : (
+                <WhiteResourceCta
+                  key={index}
+                  id={ctaId}
+                  onClick={() => setIsSdkModalOpen(true)}
+                >
+                  {cta.label}
+                </WhiteResourceCta>
+              );
+            }
+
+            const href = resolveResourceHref(cta.href, cta.label, pressKitHref);
+            const isDownload =
+              href.endsWith(".pdf") ||
+              href.endsWith(".zip") ||
+              href.includes(".zip") ||
+              href.includes("Model_Forge") ||
+              href.includes("Press-Kit");
+
+            return isPrimaryCta(cta.variant) ? (
+              <GreenCtaButton
+                key={index}
+                id={ctaId}
+                width="270px"
+                href={href}
+                target={isDownload ? "_blank" : undefined}
+                rel={isDownload ? "noopener noreferrer" : undefined}
+                download={isDownload ? true : undefined}
+              >
+                {cta.label}
+              </GreenCtaButton>
+            ) : (
+              <WhiteResourceCta
+                key={index}
+                id={ctaId}
+                href={href}
+                target={isDownload ? "_blank" : undefined}
+                rel={isDownload ? "noopener noreferrer" : undefined}
+                download={isDownload ? true : undefined}
+              >
+                {cta.label}
+              </WhiteResourceCta>
+            );
+          })}
+        </div>
       </div>
-    </div>
+
+      <UpcomingProductsModal
+        isOpen={isSdkModalOpen}
+        onClose={() => setIsSdkModalOpen(false)}
+        formContext="sdk"
+      />
     </>
   );
 }
@@ -154,6 +187,7 @@ function WhiteResourceCta({
   target,
   rel,
   download,
+  onClick,
 }: {
   children: ReactNode;
   href?: string;
@@ -161,9 +195,10 @@ function WhiteResourceCta({
   target?: string;
   rel?: string;
   download?: boolean | string;
+  onClick?: () => void;
 }) {
   return (
-    <WhiteCtaButton id={id} href={href} className="w-[270px]" target={target} rel={rel} download={download}>
+    <WhiteCtaButton id={id} href={href} className="w-[270px]" target={target} rel={rel} download={download} onClick={onClick}>
       {children}
     </WhiteCtaButton>
   );
