@@ -113,7 +113,7 @@ function KitCard({ card }: { card: (typeof CARDS)[number] }) {
 export function ModelZooKits() {
   return (
     <section
-      className="relative z-20 mt-[48px] min-[600px]:mt-[100px] mb-0 pb-[24px] min-[600px]:pb-0 min-[600px]:[margin-bottom:calc(-400px*var(--tablet-zoom,1))] w-full overflow-hidden bg-transparent"
+      className="relative z-10 mt-[48px] min-[600px]:mt-[100px] mb-0 pb-[24px] min-[600px]:pb-0 min-[600px]:[margin-bottom:calc(-400px*var(--tablet-zoom,1))] w-full bg-transparent max-[599px]:overflow-x-clip min-[600px]:overflow-visible"
       data-node-id="5131:10997"
       aria-label="Stop reading. Start running."
     >
