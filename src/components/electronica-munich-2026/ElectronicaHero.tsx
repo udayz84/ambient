@@ -17,7 +17,6 @@ import {
   HERO_TITLE_GRADIENT,
   PRIMARY_CTA_INSET,
   PRIMARY_CTA_SHADOW,
-  SECONDARY_CTA_BG,
 } from "@/components/products-page/products-data";
 import { ElectronicaCountdown } from "./ElectronicaCountdown";
 
@@ -102,21 +101,20 @@ export function ElectronicaHero() {
             </span>
           </div>
 
-          {/* CTA Row (Ambient Global Theme Buttons) */}
-          <div className="mt-[28px] flex items-center gap-[20px] pl-[20px]">
-            {/* Primary CTA Button */}
+          {/* CTA Row (Ambient Global Theme Primary Green Button) */}
+          <div className="mt-[28px] flex items-center pl-[20px]">
             <Link
-              href="https://calendly.com/saharsh-ambientscientific/electronica-2026"
+              href="https://script.google.com/macros/s/AKfycbxL3DhYQFsvKuF6oeHlWIsUusal4zDZC0jYjAjLOOvqY9r9mISAmzMflQxr0LVhn8s/exec"
               target="_blank"
               rel="noopener noreferrer"
-              className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[48px] shrink-0 items-center justify-center overflow-hidden px-[26px] transition-transform duration-200 hover:scale-[1.01]`}
+              className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[52px] shrink-0 items-center justify-center overflow-hidden px-[36px] transition-transform duration-200 hover:scale-[1.01]`}
             >
               <span
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
               />
-              <span className="relative text-[14px] font-semibold uppercase tracking-[0.02em] text-white not-italic">
-                Book a Meeting at Electronica
+              <span className="relative text-[15px] font-semibold uppercase tracking-[0.02em] text-white not-italic">
+                Win a Free Eval Kit
               </span>
               <span
                 aria-hidden="true"
@@ -124,27 +122,13 @@ export function ElectronicaHero() {
               />
               <GreenCtaCorners />
             </Link>
-
-            {/* Secondary CTA Button */}
-            <Link
-              href="https://script.google.com/macros/s/AKfycbxL3DhYQFsvKuF6oeHlWIsUusal4zDZC0jYjAjLOOvqY9r9mISAmzMflQxr0LVhn8s/exec"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${gilroySemiBold.className} relative flex h-[48px] shrink-0 items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)] px-[24px] transition-all duration-200 hover:border-white/40 hover:bg-[rgba(226,241,202,0.18)]`}
-              style={{ backgroundColor: SECONDARY_CTA_BG }}
-            >
-              <span className="relative text-[14px] font-semibold uppercase tracking-[0.02em] text-white not-italic">
-                Win a Free Eval Kit
-              </span>
-              <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-            </Link>
           </div>
 
           {/* Subtext */}
           <p
             className={`${interRegular.className} mt-[18px] pl-[20px] text-[13px] font-normal leading-[18px] text-[#f0f0f0] opacity-60`}
           >
-            Booth meeting slots are limited. Book yours before the floor fills.
+            Winners drawn live during the show, Nov 10-13.
           </p>
         </div>
 
@@ -241,20 +225,20 @@ export function ElectronicaHero() {
             />
           </div>
 
-          {/* Mobile CTA Buttons */}
-          <div className="flex w-full flex-col gap-[14px]">
+          {/* Mobile CTA Button */}
+          <div className="flex w-full flex-col">
             <Link
-              href="https://calendly.com/saharsh-ambientscientific/electronica-2026"
+              href="https://script.google.com/macros/s/AKfycbxL3DhYQFsvKuF6oeHlWIsUusal4zDZC0jYjAjLOOvqY9r9mISAmzMflQxr0LVhn8s/exec"
               target="_blank"
               rel="noopener noreferrer"
-              className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-hidden`}
+              className={`${PRIMARY_CTA_SHADOW} ${gilroySemiBold.className} relative flex h-[50px] w-full shrink-0 items-center justify-center overflow-hidden`}
             >
               <span
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#6ced3f] to-[#38a612]"
               />
-              <span className="relative text-[14px] font-semibold uppercase tracking-[0.02em] text-white not-italic">
-                Book a Meeting at Electronica
+              <span className="relative text-[15px] font-semibold uppercase tracking-[0.02em] text-white not-italic">
+                Win a Free Eval Kit
               </span>
               <span
                 aria-hidden="true"
@@ -262,26 +246,13 @@ export function ElectronicaHero() {
               />
               <GreenCtaCorners />
             </Link>
-
-            <Link
-              href="https://script.google.com/macros/s/AKfycbxL3DhYQFsvKuF6oeHlWIsUusal4zDZC0jYjAjLOOvqY9r9mISAmzMflQxr0LVhn8s/exec"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${gilroySemiBold.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-clip border-[0.5px] border-solid border-[rgba(240,240,240,0.25)]`}
-              style={{ backgroundColor: SECONDARY_CTA_BG }}
-            >
-              <span className="relative text-[14px] font-semibold uppercase tracking-[0.02em] text-white not-italic">
-                Win a Free Eval Kit
-              </span>
-              <Corners leftSrc={CORNER_LEFT} rightSrc={CORNER_RIGHT} />
-            </Link>
           </div>
 
           {/* Subtext Mobile */}
           <p
             className={`${interRegular.className} mt-[14px] text-center text-[12px] font-normal leading-[17px] text-[#f0f0f0] opacity-60`}
           >
-            Booth meeting slots are limited. Book yours before the floor fills.
+            Winners drawn live during the show, Nov 10-13.
           </p>
         </div>
       </div>
