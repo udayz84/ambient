@@ -18,14 +18,14 @@ export function ElectronicaMunich2026() {
       <TabletScaleInit />
       {/* Section 1: Hero */}
       <ElectronicaHero />
-      {/* Section 2: What GPX Changes */}
-      <ElectronicaWhatChanges />
-      {/* Section 3: Proof / Case Studies */}
-      <ElectronicaProof />
-      {/* Section 4: Put GPX10 Pro on Your Bench (Giveaway & Lead Capture) */}
+      {/* Section 2: Put GPX10 Pro on Your Bench (Giveaway & Lead Capture) */}
       <div id="eval-kit-form">
         <ElectronicaGiveaway />
       </div>
+      {/* Section 3: What GPX Changes */}
+      <ElectronicaWhatChanges />
+      {/* Section 4: Proof / Case Studies */}
+      <ElectronicaProof />
       {/* Section 5: What Could You Build? */}
       <ElectronicaWhatCouldYouBuild />
       {/* Section 6: The Ambient Ecosystem */}
@@ -33,8 +33,6 @@ export function ElectronicaMunich2026() {
       <ElectronicaCenterEcosystem />
       {/* Section 7: Electronica 2026 */}
       <ElectronicaMeetInPerson />
-      {/* Put GPX10 Pro on Your Bench (Giveaway & Lead Capture - Lower Position) */}
-      <ElectronicaGiveaway />
       <ElectronicaStayUpdated />
       {/* Section 8: Close (hidden per request) */}
       {/* <ElectronicaClose /> */}
