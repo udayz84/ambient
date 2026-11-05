@@ -102,7 +102,7 @@ export function ElectronicaWhatChanges() {
           {/* Eyebrow (Centered) */}
           <div className="mb-[18px] flex w-full justify-center">
             <TagBadge
-              label="THE ON-DEVICE ADVANTAGE"
+              label="The GPX10 Pro Advantage"
               width="max-content"
               centerLabel
             />
@@ -120,7 +120,7 @@ export function ElectronicaWhatChanges() {
                   backgroundClip: "text",
                 }}
               >
-                More intelligence.
+                More AI Performance.
                 <br />
                 Less of everything that usually comes with it.
               </h2>
@@ -217,7 +217,7 @@ export function ElectronicaWhatChanges() {
         {/* Eyebrow */}
         <div className="mb-[18px]">
           <TagBadge
-            label="THE ON-DEVICE ADVANTAGE"
+            label="The GPX10 Pro Advantage"
             width="max-content"
             centerLabel
           />
@@ -234,7 +234,7 @@ export function ElectronicaWhatChanges() {
               backgroundClip: "text",
             }}
           >
-            More intelligence.
+            More AI Performance.
             <br />
             Less of everything that usually comes with it.
           </h2>
