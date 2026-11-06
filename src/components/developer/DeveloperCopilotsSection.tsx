@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { useFadeIn, getFadeInClass } from "../shared/useFadeIn";
 import { Corners } from "../shared/Corners";
@@ -15,6 +16,7 @@ import {
 import { mediaUrl } from "@/lib/strapi";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useFitText } from "../shared/FitText";
+import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 
 const DEFAULT_HEADING = "Your deployment co-pilots.";
 const DEFAULT_SUBTITLE =
@@ -25,6 +27,7 @@ const DEFAULT_SUBTITLE =
  * Positioned at 118.305,4197 / 1204×588 within the Developer canvas.
  */
 export function DeveloperCopilotsSection({ data }: { data?: any }) {
+  const [docsModalOpen, setDocsModalOpen] = useState(false);
   const heading = data?.heading || DEFAULT_HEADING;
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
   const copilots =
@@ -33,83 +36,107 @@ export function DeveloperCopilotsSection({ data }: { data?: any }) {
       : DEVELOPER_COPILOTS;
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
-    <div
-      className="absolute flex flex-col items-center gap-[40px]"
-      style={{ left: 118.3046875, top: "calc(6735px + var(--developer-pipeline-offset, 0px))", width: 1204, transition: "top 300ms ease-in-out" }}
-      data-node-id="2438:4666"
-    >
-      {/* Header — 2438:4667 */}
+    <>
       <div
-        className="flex flex-col items-center gap-[24px]"
-        data-node-id="2438:4667"
+        className="absolute flex flex-col items-center gap-[40px]"
+        style={{ left: 118.3046875, top: "calc(6735px + var(--developer-pipeline-offset, 0px))", width: 1204, transition: "top 300ms ease-in-out" }}
+        data-node-id="2438:4666"
       >
-        {/* Title frame — 2438:4668 (616×61) */}
+        {/* Header — 2438:4667 */}
         <div
-          className="relative h-[61px] w-[616px]"
-          data-node-id="2438:4668"
+          className="flex flex-col items-center gap-[24px]"
+          data-node-id="2438:4667"
         >
+          {/* Title frame — 2438:4668 (616×61) */}
           <div
-            className="absolute"
-            style={{ left: 0.83984375, top: 1.033203125, width: 614.3203125, height: 59 }}
-            aria-hidden
+            className="relative h-[61px] w-[616px]"
+            data-node-id="2438:4668"
           >
-            <div className="absolute inset-[-0.85%_0]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img loading="lazy" decoding="async"
-                alt=""
-                src="/developer/copilot-title-frame.svg"
-                className="block size-full max-w-none"
-              />
+            <div
+              className="absolute"
+              style={{ left: 0.83984375, top: 1.033203125, width: 614.3203125, height: 59 }}
+              aria-hidden
+            >
+              <div className="absolute inset-[-0.85%_0]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img loading="lazy" decoding="async"
+                  alt=""
+                  src="/developer/copilot-title-frame.svg"
+                  className="block size-full max-w-none"
+                />
+              </div>
             </div>
+            <h2
+              ref={fitRef}
+              className={`${gilroyMedium.className} absolute left-1/2 top-[3.03px] max-w-full -translate-x-1/2 bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic whitespace-nowrap`}
+              style={{ backgroundImage: COPILOT_TITLE_GRADIENT }}
+            >
+              {heading}
+            </h2>
           </div>
-          <h2
-            ref={fitRef}
-            className={`${gilroyMedium.className} absolute left-1/2 top-[3.03px] max-w-full -translate-x-1/2 bg-clip-text text-[46px] leading-[49px] font-medium text-transparent not-italic whitespace-nowrap`}
-            style={{ backgroundImage: COPILOT_TITLE_GRADIENT }}
+
+          {/* Description — 2438:4675 */}
+          <p
+            className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65 [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
           >
-            {heading}
-          </h2>
+            {subtitle}
+          </p>
         </div>
 
-        {/* Description — 2438:4675 */}
-        <p
-          className={`${interRegular.className} w-[800px] text-center text-[18px] leading-[27px] font-normal text-[#f0f0f0] not-italic opacity-65 [word-break:break-word] min-[1024px]:text-[16px] min-[1024px]:leading-[24px]`}
+        {/* Content row — 2438:4676 "Do the best work of your life" (1204×409) */}
+        <div
+          className="relative flex h-[409px] w-full items-center gap-[24px]"
+          data-node-id="2438:4676"
         >
-          {subtitle}
-        </p>
+          {copilots.map((copilot: any, i: number) => (
+            <CopilotCard
+              key={copilot.title || i}
+              copilot={copilot}
+              fallback={DEVELOPER_COPILOTS[i] || DEVELOPER_COPILOTS[0]}
+              onOpenDocs={() => setDocsModalOpen(true)}
+            />
+          ))}
+        </div>
       </div>
 
-      {/* Content row — 2438:4676 "Do the best work of your life" (1204×409) */}
-      <div
-        className="relative flex h-[409px] w-full items-center gap-[24px]"
-        data-node-id="2438:4676"
-      >
-        {copilots.map((copilot: any, i: number) => (
-          <CopilotCard
-            key={copilot.title || i}
-            copilot={copilot}
-            fallback={DEVELOPER_COPILOTS[i] || DEVELOPER_COPILOTS[0]}
-          />
-        ))}
-      </div>
-    </div>
+      <UpcomingProductsModal
+        isOpen={docsModalOpen}
+        onClose={() => setDocsModalOpen(false)}
+        formContext="docs"
+        pdfUrl="/Technical-Documents-Ambient-Scientific.zip"
+        pdfName="Technical-Documents-Ambient-Scientific.zip"
+      />
+    </>
   );
 }
 
 function CopilotCard({
   copilot,
   fallback,
+  onOpenDocs,
 }: {
   copilot: any;
   fallback: (typeof DEVELOPER_COPILOTS)[number];
+  onOpenDocs: () => void;
 }) {
   const icon = mediaUrl(copilot?.icon) || fallback.icon;
   const title = copilot?.title || fallback.title;
   const description = copilot?.description || fallback.description;
   const ctaLabel = copilot?.cta_label || fallback.ctaLabel;
-  const ctaHref = copilot?.cta_href || "#";
+  const ctaHref = copilot?.cta_href || fallback.ctaHref || "#";
   const ctaFullWidth = fallback.ctaFullWidth;
   const { fadeRef, isVisible } = useFadeIn();
+
+  const isDocs =
+    (ctaLabel || "").toLowerCase().includes("doc") ||
+    (title || "").toLowerCase().includes("documentation");
+
+  const handleCtaClick = (e: React.MouseEvent) => {
+    if (isDocs && (ctaHref === "#" || !ctaHref)) {
+      e.preventDefault();
+      onOpenDocs();
+    }
+  };
 
   return (
     <div
@@ -144,7 +171,7 @@ function CopilotCard({
         >
           {description}
         </p>
-        <CopilotCta fullWidth={ctaFullWidth} href={ctaHref}>
+        <CopilotCta fullWidth={ctaFullWidth} href={ctaHref} onClick={handleCtaClick}>
           {ctaLabel}
         </CopilotCta>
       </div>
@@ -159,14 +186,20 @@ function CopilotCta({
   children,
   fullWidth = false,
   href,
+  onClick,
 }: {
   children: React.ReactNode;
   fullWidth?: boolean;
   href: string;
+  onClick?: (e: React.MouseEvent) => void;
 }) {
+  const isExternal = href.startsWith("http");
   return (
     <a
       href={href}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
+      onClick={onClick}
       className={`${gilroyMedium.className} ${CTA_HOVER_GLOW} relative flex h-[48px] ${fullWidth ? "w-full" : "shrink-0"} items-center justify-center border-[0.5px] border-solid border-[rgba(240,240,240,0.2)] bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] not-italic opacity-100 transition-[box-shadow,background-color] duration-200 group-hover:bg-transparent`}
       data-node-id="2438:4688"
     >

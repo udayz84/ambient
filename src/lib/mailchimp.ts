@@ -173,6 +173,7 @@ export const FORM_TAG_MAP: Record<string, string[]> = {
   ],
   "case-study": ["case-study", "resource-download"],
   whitepaper: ["whitepaper", "resource-download"],
+  "developer-docs": ["developer-docs", "developer-documentation"],
 };
 
 /* -------------------------------------------------------------------------- */

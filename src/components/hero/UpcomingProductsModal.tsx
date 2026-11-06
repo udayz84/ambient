@@ -23,6 +23,20 @@ type Step = "form" | "confirmation";
 
 // CHIP_OPTIONS removed as per request for free text input
 
+export type UpcomingModalFormContext =
+  | "upcoming"
+  | "usecase"
+  | "evalkit"
+  | "sdk"
+  | "docs"
+  | "som"
+  | "som-ble"
+  | "som-lte"
+  | "som-waitlist"
+  | "waitlist"
+  | "case-study"
+  | "hardware-design";
+
 export function UpcomingProductsModal({
   isOpen,
   onClose,
@@ -38,7 +52,7 @@ export function UpcomingProductsModal({
 }: {
   isOpen: boolean;
   onClose: () => void;
-  formContext?: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "som-ble" | "som-lte" | "som-waitlist" | "waitlist" | "case-study" | "hardware-design";
+  formContext?: UpcomingModalFormContext;
   /** CMS form entry (page relation). Null = hardcoded fallback copy. */
   config?: PopupConfig;
   /** Optional PDF to download on successful submit. */
@@ -72,6 +86,7 @@ export function UpcomingProductsModal({
           if (formContext === "usecase") return t.includes("use case");
           if (formContext === "evalkit") return t.includes("eval kit");
           if (formContext === "sdk") return t.includes("sdk");
+          if (formContext === "docs") return t.includes("documentation") || t.includes("docs");
           if (formContext === "waitlist" || formContext === "som-waitlist") return t.includes("waitlist");
           if (formContext?.startsWith("som")) return t.includes("som");
           if (formContext === "case-study") return t.includes("case study");
@@ -84,9 +99,9 @@ export function UpcomingProductsModal({
   }, [isOpen, config, formContext]);
 
   const effectiveDownloadUrl =
-    pdfUrl ?? (formContext === "sdk" ? MODEL_FORGE_ZIP_URL : undefined);
+    pdfUrl ?? (formContext === "sdk" ? MODEL_FORGE_ZIP_URL : formContext === "docs" ? "/Technical-Documents-Ambient-Scientific.zip" : undefined);
   const effectiveDownloadName =
-    pdfName ?? (formContext === "sdk" ? MODEL_FORGE_ZIP_NAME : undefined);
+    pdfName ?? (formContext === "sdk" ? MODEL_FORGE_ZIP_NAME : formContext === "docs" ? "Technical-Documents-Ambient-Scientific.zip" : undefined);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -210,7 +225,7 @@ function FormStep({
 }: {
   onClose: () => void;
   onSuccess: (variant?: string) => void;
-  formContext: "upcoming" | "usecase" | "evalkit" | "sdk" | "som" | "som-ble" | "som-lte" | "som-waitlist" | "waitlist" | "case-study" | "hardware-design";
+  formContext: UpcomingModalFormContext;
   config?: PopupConfig;
   pdfUrl?: string;
   pdfName?: string;
@@ -316,22 +331,24 @@ function FormStep({
 
     setIsSubmitting(true);
 
-    // If a PDF is provided, open it in a new tab immediately within the user gesture context
-    if (pdfUrl) {
-      const isZip = pdfUrl.endsWith(".zip");
+    // If a PDF or ZIP is provided, trigger download immediately within the user gesture context
+    const downloadTargetUrl = pdfUrl;
+    const downloadTargetName = pdfName;
+    if (downloadTargetUrl) {
+      const isZip = downloadTargetUrl.endsWith(".zip");
       if (isZip) {
         const a = document.createElement("a");
-        a.href = pdfUrl;
-        a.download = pdfName ?? "";
+        a.href = downloadTargetUrl;
+        a.download = downloadTargetName ?? "";
         document.body.appendChild(a);
         a.click();
         a.remove();
       } else {
         try {
-          const opened = window.open(pdfUrl, "_blank", "noopener,noreferrer");
+          const opened = window.open(downloadTargetUrl, "_blank", "noopener,noreferrer");
           if (!opened) {
             const a = document.createElement("a");
-            a.href = pdfUrl;
+            a.href = downloadTargetUrl;
             a.target = "_blank";
             a.rel = "noopener noreferrer";
             document.body.appendChild(a);
@@ -340,7 +357,7 @@ function FormStep({
           }
         } catch {
           const a = document.createElement("a");
-          a.href = pdfUrl;
+          a.href = downloadTargetUrl;
           a.target = "_blank";
           a.rel = "noopener noreferrer";
           document.body.appendChild(a);
@@ -357,6 +374,7 @@ function FormStep({
         usecase: "upcoming-usecase",
         evalkit: "upcoming-evalkit",
         sdk: "upcoming-sdk",
+        docs: "developer-docs",
         som: "upcoming-som",
         "som-ble": "upcoming-som-ble",
         "som-lte": "upcoming-som-lte",
@@ -420,6 +438,8 @@ function FormStep({
               ? "Request An Eval Kit"
               : formContext === "sdk"
               ? "Request The SDK"
+              : formContext === "docs"
+              ? "Access Developer Documentation"
               : formContext === "som"
               ? "Register SOM Interest"
               : formContext === "som-ble"
@@ -443,6 +463,7 @@ function FormStep({
         onSubmit={handleSubmit}
         className={`${interRegular.className} absolute bottom-[40px] left-[20px] right-[20px] top-[100px] md:bottom-[40px] md:left-[40px] md:right-[40px] md:top-[138px] flex flex-col gap-[24px] overflow-y-auto pr-[8px] font-normal not-italic`}
       >
+        <input type="text" name="website_hp" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
         {resolvedVariant && (
           <div className="flex items-center gap-2">
             <span className="text-[12px] uppercase tracking-wider text-[#a8ed90]">
@@ -545,6 +566,8 @@ function FormStep({
               ? "Please describe your use case*"
               : formContext === "waitlist"
               ? "Tell Us About Your Project Or Interest*"
+              : formContext === "docs"
+              ? "What is your primary development focus or project?*"
               : "Which chip are you looking for?*")
           }
         >
@@ -564,6 +587,8 @@ function FormStep({
                 ? "Tell us what you're building the full case study PDF downloads right after you submit."
                 : formContext === "waitlist"
                 ? "Share a few details about what you're building or hoping to deploy."
+                : formContext === "docs"
+                ? "Tell us about what you are building or looking to evaluate."
                 : "These are the upcoming chips we are providing. We just want to know which chip you are looking for.")}
           </p>
           <input
@@ -580,6 +605,8 @@ function FormStep({
                 ? "Describe your use case"
                 : formContext === "waitlist"
                 ? "Describe your project or use case"
+                : formContext === "docs"
+                ? "e.g. Edge AI audio sensing, neural network compilation, custom EVK"
                 : "Enter chip name")
             }
             value={chip}

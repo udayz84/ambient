@@ -26,6 +26,7 @@ const DEFAULT_SECONDARY_LABEL = "Read the Documentation";
  */
 export function DeveloperHeroContent({ data, briefForm }: { data?: any; briefForm?: any }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContext, setModalContext] = useState<"sdk" | "docs">("sdk");
   const heading = data?.heading || DEFAULT_HEADING;
   const headingLines = heading.split("\n");
   const subtitle = data?.subtitle || DEFAULT_SUBTITLE;
@@ -81,14 +82,17 @@ export function DeveloperHeroContent({ data, briefForm }: { data?: any; briefFor
         <PrimaryCta
           id="developer_page_hero_cta_download_modelforge_sdk"
           href={primaryHref}
-          onClick={primaryHref === "#" ? () => setIsModalOpen(true) : undefined}
+          onClick={primaryHref === "#" ? () => { setModalContext("sdk"); setIsModalOpen(true); } : undefined}
         >
           {primaryLabel}
         </PrimaryCta>
         <SecondaryCta
           id="developer_page_hero_cta_read_documentation"
-          href="/Technical-Documents-Ambient-Scientific.zip"
-          download="Technical-Documents-Ambient-Scientific.zip"
+          href="#"
+          onClick={() => {
+            setModalContext("docs");
+            setIsModalOpen(true);
+          }}
         >
           {secondaryLabel}
         </SecondaryCta>
@@ -97,8 +101,10 @@ export function DeveloperHeroContent({ data, briefForm }: { data?: any; briefFor
       <UpcomingProductsModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        formContext="sdk"
-        config={briefForm}
+        formContext={modalContext}
+        config={modalContext === "sdk" ? briefForm : undefined}
+        pdfUrl={modalContext === "docs" ? "/Technical-Documents-Ambient-Scientific.zip" : undefined}
+        pdfName={modalContext === "docs" ? "Technical-Documents-Ambient-Scientific.zip" : undefined}
       />
     </div>
   );

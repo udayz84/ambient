@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import crypto from "crypto";
 
 /**
  * src/lib/notify-mail.ts
@@ -27,10 +28,121 @@ import nodemailer from "nodemailer";
  * ----------------------------------------------------------------------------
  */
 
-/** Fixed recipients for every form in the project. */
+/** Fixed recipients for every unmapped/fallback form in the project. */
 export const FIXED_MAIL_RECIPIENTS = [
   "marketing@ambientscientific.ai",
 ];
+
+/**
+ * Authoritative recipient routing per formKey, strictly mirroring the Google Sheet.
+ * https://docs.google.com/spreadsheets/d/1gJIJiSiukSux7Vqosgbdk5Iwb2vGoWsQAoYWWtlQcmM/edit?gid=0#gid=0
+ * When a formKey matches an entry here, submissions route EXCLUSIVELY to these recipients,
+ * bypassing Strapi global mail settings to prevent recipient pollution.
+ */
+export const FORM_RECIPIENT_MAP: Record<string, string[]> = {
+  // Contact Us track forms
+  "contact-developer": [
+    "saharsh@ambientscientific.ai",
+    "chandra@ambientscientific.ai",
+    "gourav@ambientscientific.ai",
+    "dheeraj@ambientscientific.ai",
+  ],
+  "contact-media": [
+    "saharsh@ambientscientific.ai",
+    "rchowdhury@ambientscientific.ai",
+    "divya@ambientscientific.ai",
+  ],
+  "contact-sales": [
+    "saharsh@ambientscientific.ai",
+    "abdur@ambientscientific.ai",
+  ],
+
+  // Case Studies & Technical Whitepapers
+  "case-study": [
+    "saharsh@ambientscientific.ai",
+    "chandra@ambientscientific.ai",
+    "abdur@ambientscientific.ai",
+  ],
+  whitepaper: [
+    "saharsh@ambientscientific.ai",
+    "chandra@ambientscientific.ai",
+    "abdur@ambientscientific.ai",
+  ],
+  "resource-download": [
+    "saharsh@ambientscientific.ai",
+    "chandra@ambientscientific.ai",
+    "abdur@ambientscientific.ai",
+  ],
+
+  // Use Case Discussions
+  "upcoming-usecase": [
+    "saharsh@ambientscientific.ai",
+    "chandra@ambientscientific.ai",
+    "abdur@ambientscientific.ai",
+  ],
+
+  // Developer Hub & Technical Documentation
+  "developer-docs": [
+    "saharsh@ambientscientific.ai",
+    "abdur@ambientscientific.ai",
+  ],
+  "upcoming-sdk": [
+    "saharsh@ambientscientific.ai",
+    "abdur@ambientscientific.ai",
+  ],
+
+  // Model Zoo
+  "model-zoo-request": [
+    "saharsh@ambientscientific.ai",
+    "abdur@ambientscientific.ai",
+  ],
+  "upcoming-model-zoo": [
+    "saharsh@ambientscientific.ai",
+    "abdur@ambientscientific.ai",
+  ],
+
+  // Hardware, EVKs & SOMs
+  "upcoming-evalkit": [
+    "saharsh@ambientscientific.ai",
+    "abdur@ambientscientific.ai",
+  ],
+  "upcoming-som": [
+    "saharsh@ambientscientific.ai",
+    "abdur@ambientscientific.ai",
+  ],
+  "upcoming-som-ble": [
+    "saharsh@ambientscientific.ai",
+    "abdur@ambientscientific.ai",
+  ],
+  "upcoming-som-lte": [
+    "saharsh@ambientscientific.ai",
+    "abdur@ambientscientific.ai",
+  ],
+  "upcoming-som-waitlist": [
+    "saharsh@ambientscientific.ai",
+    "abdur@ambientscientific.ai",
+  ],
+  "upcoming-som-waitlist-ble": [
+    "saharsh@ambientscientific.ai",
+    "abdur@ambientscientific.ai",
+  ],
+  "upcoming-som-waitlist-lte": [
+    "saharsh@ambientscientific.ai",
+    "abdur@ambientscientific.ai",
+  ],
+  "upcoming-products": [
+    "saharsh@ambientscientific.ai",
+    "abdur@ambientscientific.ai",
+  ],
+  "upcoming-hardware-design": [
+    "saharsh@ambientscientific.ai",
+    "abdur@ambientscientific.ai",
+  ],
+  "product-brief": [
+    "saharsh@ambientscientific.ai",
+    "abdur@ambientscientific.ai",
+  ],
+};
 
 export type MailAttachment = {
   filename: string;
@@ -133,21 +245,46 @@ function renderValue(value: string): string {
   return /[\r\n]/.test(value) ? `<pre style="margin:0;font:13px/1.5 monospace;white-space:pre-wrap">${text}</pre>` : text;
 }
 
-export async function sendSubmissionMail(options: {
+function maskEmail(email?: string): string {
+  if (!email || !email.includes("@")) return "—";
+  const [user, domain] = email.split("@");
+  if (user.length <= 2) return `${user[0]}*@${domain}`;
+  return `${user[0]}${"*".repeat(Math.min(user.length - 2, 8))}${user[user.length - 1]}@${domain}`;
+}
+
+export type SendSubmissionMailOptions = {
   formName: string;
   fields: MailField[];
   replyTo?: string;
   attachments?: MailAttachment[];
   meta?: MailField[];
-}): Promise<void> {
-  const { formName, fields, replyTo, attachments, meta = [] } = options;
+  recipients?: string[];
+  formKey?: string;
+  requestId?: string;
+};
 
-  const { to: toList, cc: ccList } = await resolveRecipients();
+export async function sendSubmissionMail(options: SendSubmissionMailOptions): Promise<void> {
+  const { formName, fields, replyTo, attachments, meta = [], recipients, formKey } = options;
+  const reqId = options.requestId || crypto.randomUUID();
+
+  let toList: string[];
+  let ccList: string[] = [];
+
+  if (recipients && recipients.length > 0) {
+    toList = dedupeEmails(recipients);
+  } else if (formKey && FORM_RECIPIENT_MAP[formKey]) {
+    toList = dedupeEmails(FORM_RECIPIENT_MAP[formKey]);
+  } else {
+    const resolved = await resolveRecipients();
+    toList = resolved.to;
+    ccList = resolved.cc;
+  }
+
   const to = toList.join(", ");
 
   if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
     console.log(
-      `[mail] skipped (${formName}) — SMTP_HOST/SMTP_USER/SMTP_PASS not configured.`,
+      `[mail][${reqId}] skipped (${formName}) — SMTP_HOST/SMTP_USER/SMTP_PASS not configured.`,
     );
     return;
   }
@@ -161,6 +298,9 @@ export async function sendSubmissionMail(options: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
     },
+    connectionTimeout: 10_000,
+    greetingTimeout: 5_000,
+    socketTimeout: 15_000,
   });
 
   const row = (f: MailField) =>
@@ -180,19 +320,42 @@ export async function sendSubmissionMail(options: {
 
   const text = allFields.map((f) => `${f.label}: ${f.value}`).join("\n");
 
-  try {
-    await transport.sendMail({
-      from: process.env.MAIL_FROM || process.env.SMTP_USER,
-      to,
-      cc: ccList.length ? ccList.join(", ") : undefined,
-      replyTo: replyTo,
-      subject: `[Ambient] New ${formName} — ${new Date().toLocaleString("en-GB")}`,
-      text,
-      html,
-      attachments: attachments?.length ? attachments : undefined,
-    });
-    console.log(`[mail] sent (${formName}) to ${to}${ccList.length ? ` (cc: ${ccList.join(", ")})` : ""}`);
-  } catch (err) {
-    console.error(`[mail] failed (${formName}):`, err);
+  let attempts = 0;
+  const maxAttempts = 2;
+  while (attempts < maxAttempts) {
+    attempts++;
+    try {
+      await transport.sendMail({
+        from: process.env.MAIL_FROM || process.env.SMTP_USER,
+        to,
+        cc: ccList.length ? ccList.join(", ") : undefined,
+        replyTo: replyTo,
+        subject: `[Ambient] New ${formName} — ${new Date().toLocaleString("en-GB")}`,
+        text,
+        html,
+        attachments: attachments?.length ? attachments : undefined,
+      });
+      console.log(`[mail][${reqId}] sent (${formName}) to ${toList.length} recipients (sender: ${maskEmail(replyTo)})`);
+      return;
+    } catch (err) {
+      if (attempts >= maxAttempts) {
+        // Output structured dead-letter event for monitoring without logging sensitive user details
+        console.error(
+          JSON.stringify({
+            event: "mail_delivery_failed",
+            requestId: reqId,
+            formName,
+            formKey: formKey || "unmapped",
+            recipientsCount: toList.length,
+            senderMasked: maskEmail(replyTo),
+            timestamp: new Date().toISOString(),
+            error: err instanceof Error ? err.message : String(err),
+          })
+        );
+      } else {
+        console.warn(`[mail][${reqId}] attempt ${attempts} failed (${formName}), retrying in 1s...`);
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+      }
+    }
   }
 }

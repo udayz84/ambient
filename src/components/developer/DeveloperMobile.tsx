@@ -126,6 +126,7 @@ const HERO_DEFAULT_SECONDARY = "Read the Documentation";
  */
 function DeveloperHeroMobile({ data, briefForm }: { data?: any; briefForm?: any }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContext, setModalContext] = useState<"sdk" | "docs">("sdk");
   const heading = data?.heading || HERO_DEFAULT_HEADING;
   const headingLines = heading.split("\n");
   const subtitle = data?.subtitle || HERO_DEFAULT_SUBTITLE;
@@ -190,7 +191,7 @@ function DeveloperHeroMobile({ data, briefForm }: { data?: any; briefForm?: any 
           id="developer_page_hero_cta_download_modelforge_sdk"
           data-analytics-id="developer_page_hero_cta_download_modelforge_sdk"
           href={primaryHref}
-          onClick={primaryHref === "#" ? (e) => { e.preventDefault(); setIsModalOpen(true); } : undefined}
+          onClick={primaryHref === "#" ? (e) => { e.preventDefault(); setModalContext("sdk"); setIsModalOpen(true); } : undefined}
           className={`${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-center overflow-hidden px-[20px] py-[10px] cursor-pointer shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
         >
           <span
@@ -210,9 +211,13 @@ function DeveloperHeroMobile({ data, briefForm }: { data?: any; briefForm?: any 
         <a
           id="developer_page_hero_cta_read_documentation"
           data-analytics-id="developer_page_hero_cta_read_documentation"
-          href="/Technical-Documents-Ambient-Scientific.zip"
-          download="Technical-Documents-Ambient-Scientific.zip"
-          className={`${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px]`}
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            setModalContext("docs");
+            setIsModalOpen(true);
+          }}
+          className={`${gilroyMedium.className} relative flex h-[48px] w-full items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[20px] py-[10px] cursor-pointer`}
         >
           <span className="relative text-[16px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
             {secondaryLabel}
@@ -224,8 +229,10 @@ function DeveloperHeroMobile({ data, briefForm }: { data?: any; briefForm?: any 
       <UpcomingProductsModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        formContext="sdk"
-        config={briefForm}
+        formContext={modalContext}
+        config={modalContext === "sdk" ? briefForm : undefined}
+        pdfUrl={modalContext === "docs" ? "/Technical-Documents-Ambient-Scientific.zip" : undefined}
+        pdfName={modalContext === "docs" ? "Technical-Documents-Ambient-Scientific.zip" : undefined}
       />
     </section>
   );
@@ -1043,6 +1050,7 @@ function DeveloperModulesMobile({ data }: { data?: any }) {
  * Cards 1–2 use secondary glass CTA; card 3 uses primary green CTA.
  */
 function DeveloperCopilotsMobile({ data }: { data?: any }) {
+  const [docsModalOpen, setDocsModalOpen] = useState(false);
   const heading = data?.heading || "Your deployment co-pilots.";
   const subtitle =
     data?.subtitle ||
@@ -1086,8 +1094,12 @@ function DeveloperCopilotsMobile({ data }: { data?: any }) {
           const title = copilot?.title || fallback.title;
           const description = copilot?.description || fallback.description;
           const ctaLabel = copilot?.cta_label || fallback.ctaLabel;
-          const ctaHref = copilot?.cta_href || "#";
+          const ctaHref = copilot?.cta_href || fallback.ctaHref || "#";
           const isPrimary = i === copilots.length - 1;
+          const isExternal = ctaHref.startsWith("http");
+          const isDocs =
+            (ctaLabel || "").toLowerCase().includes("doc") ||
+            (title || "").toLowerCase().includes("documentation");
           return (
             <div
               key={title || i}
@@ -1122,6 +1134,8 @@ function DeveloperCopilotsMobile({ data }: { data?: any }) {
                 {isPrimary ? (
                   <a
                     href={ctaHref}
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noopener noreferrer" : undefined}
                     className={`${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-hidden px-[12px] py-[10px] shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]`}
                   >
                     <span
@@ -1140,7 +1154,10 @@ function DeveloperCopilotsMobile({ data }: { data?: any }) {
                 ) : (
                   <a
                     href={ctaHref}
-                    className={`${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[16px] py-[10px]`}
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noopener noreferrer" : undefined}
+                    onClick={isDocs && (ctaHref === "#" || !ctaHref) ? (e) => { e.preventDefault(); setDocsModalOpen(true); } : undefined}
+                    className={`${gilroyMedium.className} relative flex h-[48px] w-full shrink-0 items-center justify-center overflow-clip bg-[rgba(226,241,202,0.12)] px-[16px] py-[10px] cursor-pointer`}
                   >
                     <span className="relative text-[12px] leading-[28px] font-medium uppercase whitespace-nowrap text-white not-italic">
                       {ctaLabel}
@@ -1154,6 +1171,14 @@ function DeveloperCopilotsMobile({ data }: { data?: any }) {
           );
         })}
       </div>
+
+      <UpcomingProductsModal
+        isOpen={docsModalOpen}
+        onClose={() => setDocsModalOpen(false)}
+        formContext="docs"
+        pdfUrl="/Technical-Documents-Ambient-Scientific.zip"
+        pdfName="Technical-Documents-Ambient-Scientific.zip"
+      />
     </section>
   );
 }

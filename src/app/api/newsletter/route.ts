@@ -34,6 +34,8 @@ function bad(error: string, status = 422) {
   return NextResponse.json({ ok: false, error }, { status });
 }
 
+const recentSubmissions = new Map<string, number>();
+
 /** Form keys that grant explicit marketing consent on submission. */
 const MARKETING_CONSENT_KEYS = new Set([
   "newsletter",
@@ -61,6 +63,7 @@ const FORM_NAME_MAP: Record<string, string> = {
   "upcoming-usecase": "Use Case Inquiry",
   "upcoming-evalkit": "Eval Kit Request",
   "upcoming-sdk": "SDK Request",
+  "developer-docs": "Developer Documentation Request",
   "upcoming-som": "SOM Interest",
   "upcoming-som-ble": "SOM (BLE) Interest",
   "upcoming-som-lte": "SOM (LTE) Interest",
@@ -84,6 +87,12 @@ export async function POST(req: Request): Promise<Response> {
     return bad("Expected a JSON body.", 400);
   }
 
+  // Honeypot spam protection
+  if (body.website_hp) {
+    return NextResponse.json({ ok: true });
+  }
+
+  const requestId = crypto.randomUUID();
   const email = String(body.email ?? "").trim();
   const formKey = String(body.formKey ?? "newsletter").trim();
   const source = String(body.source ?? "").trim();
@@ -104,10 +113,25 @@ export async function POST(req: Request): Promise<Response> {
     return bad("Please enter a valid email address.");
   }
 
-  // Marketing consent is implicit for newsletter / waitlist / product signup
-  // forms (the user actively submits their email for updates). Resource
-  // downloads are transactional (gated content).
-  const marketingConsent = MARKETING_CONSENT_KEYS.has(formKey);
+  // Deduplicate rapid repeat submissions within 30 seconds
+  const dedupKey = `${email.toLowerCase()}:${formKey}:${details || ""}`;
+  const now = Date.now();
+  const lastTime = recentSubmissions.get(dedupKey);
+  if (lastTime && now - lastTime < 30_000) {
+    return NextResponse.json({ ok: true, deduplicated: true });
+  }
+  recentSubmissions.set(dedupKey, now);
+  if (recentSubmissions.size > 500) {
+    for (const [k, time] of recentSubmissions.entries()) {
+      if (now - time > 60_000) recentSubmissions.delete(k);
+    }
+  }
+
+  // Marketing consent is checked if explicitly provided, else inferred by form key
+  const marketingConsent =
+    typeof body.consent === "boolean"
+      ? body.consent
+      : MARKETING_CONSENT_KEYS.has(formKey);
 
   // Team notification with everything the visitor submitted (goes to the
   // addresses in Strapi → Mail Setting, or MAIL_TO as fallback).
@@ -130,10 +154,12 @@ export async function POST(req: Request): Promise<Response> {
     if (!isNewsletterSignup) {
       await sendSubmissionMail({
         formName: FORM_NAME_MAP[formKey] ?? formKey,
+        formKey,
         fields,
         replyTo: email,
+        requestId,
       }).catch((err) => {
-        console.error("[newsletter-mail] error:", err);
+        console.error(`[newsletter-mail][${requestId}] error:`, err);
       });
     }
 

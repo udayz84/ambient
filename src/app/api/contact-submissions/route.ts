@@ -29,6 +29,8 @@ const STRAPI_URL = (
 
 const TRACKS = new Set(["sales", "developer", "media"]);
 
+const recentContactSubmissions = new Map<string, number>();
+
 function bad(error: string, status = 422) {
   return NextResponse.json({ ok: false, error }, { status });
 }
@@ -40,6 +42,13 @@ export async function POST(req: Request): Promise<Response> {
   } catch {
     return bad("Expected a JSON body.", 400);
   }
+
+  // Honeypot spam protection
+  if (body.website_hp) {
+    return NextResponse.json({ ok: true });
+  }
+
+  const requestId = crypto.randomUUID();
 
   let fields: Record<string, string> = {};
   if (body.fields && typeof body.fields === "object" && !Array.isArray(body.fields)) {
@@ -82,6 +91,20 @@ export async function POST(req: Request): Promise<Response> {
     return bad("Please enter a valid email address.");
   }
 
+  // Deduplicate rapid repeat submissions within 30 seconds
+  const dedupKey = `${email.toLowerCase()}:${track}:${message.slice(0, 50)}`;
+  const now = Date.now();
+  const lastTime = recentContactSubmissions.get(dedupKey);
+  if (lastTime && now - lastTime < 30_000) {
+    return NextResponse.json({ ok: true, deduplicated: true });
+  }
+  recentContactSubmissions.set(dedupKey, now);
+  if (recentContactSubmissions.size > 500) {
+    for (const [k, time] of recentContactSubmissions.entries()) {
+      if (now - time > 60_000) recentContactSubmissions.delete(k);
+    }
+  }
+
   const data = {
     track,
     email,
@@ -110,8 +133,10 @@ export async function POST(req: Request): Promise<Response> {
     }
 
     await sendSubmissionMail({
-      formName: "Contact Form Submission",
+      formName: isModelZoo ? "Model Zoo Request" : `Contact Form Submission (${track})`,
+      formKey: mailchimpFormKey,
       replyTo: email,
+      requestId,
       fields: [
         { label: "Track", value: track },
         { label: "Email", value: email },
@@ -162,8 +187,10 @@ export async function POST(req: Request): Promise<Response> {
     console.log("[contact-submission] Strapi unreachable — logged submission:", JSON.stringify(data));
 
     await sendSubmissionMail({
-      formName: "Contact Form Submission",
+      formName: isModelZoo ? "Model Zoo Request" : `Contact Form Submission (${track})`,
+      formKey: mailchimpFormKey,
       replyTo: email,
+      requestId,
       fields: [
         { label: "Track", value: track },
         { label: "Email", value: email },

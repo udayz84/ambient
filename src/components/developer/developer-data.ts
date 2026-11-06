@@ -87,6 +87,7 @@ export type DeveloperCopilot = {
   ctaLabel: string;
   ctaVariant: "primary" | "secondary";
   ctaFullWidth?: boolean;
+  ctaHref?: string;
 };
 
 export const DEVELOPER_COPILOTS: DeveloperCopilot[] = [
@@ -97,6 +98,7 @@ export const DEVELOPER_COPILOTS: DeveloperCopilot[] = [
       "No disorganized wikis. Access the fully searchable ModelForge deployment guide, comprehensive DSP/Pre-processing C-libraries, and lower-level hardware API references.",
     ctaLabel: "Browse Developer Docs",
     ctaVariant: "secondary",
+    ctaHref: "#",
   },
   {
     icon: "/developer/copilot-icon-2.svg",
@@ -105,6 +107,7 @@ export const DEVELOPER_COPILOTS: DeveloperCopilot[] = [
       "Get up and running visually. Access our self-serve library of YouTube masterclasses walking you step-by-step through everything from model porting to integrated compilation.",
     ctaLabel: "View Training Playlist",
     ctaVariant: "secondary",
+    ctaHref: "https://www.youtube.com/playlist?list=PLnRQiXxPSLNS7yGnzVBVDd6_7-0yF13wP",
   },
   {
     icon: "/developer/copilot-icon-3.svg",
@@ -114,6 +117,7 @@ export const DEVELOPER_COPILOTS: DeveloperCopilot[] = [
     ctaLabel: "Schedule Technical Consultation",
     ctaVariant: "secondary",
     ctaFullWidth: true,
+    ctaHref: "/contact",
   },
 ];
 

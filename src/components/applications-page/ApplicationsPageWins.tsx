@@ -384,7 +384,7 @@ const CARDS = [
     body: "In DimensionNXG’s MAI wearable, GPX10 Pro recognizes falls and assault patterns on-device at >98% accuracy and still runs 14 days on a 200 mAh cell. Detection stays local and private; the radio fires only when there’s a real event to report.",
     visual: WIN_VISUALS[1],
     mobileImg: "/applications/wins-img-2.webp",
-    buttons: [{ label: "READ CASE STUDY", href: "/case-studies/MAI-case-study.pdf" }],
+    buttons: [{ label: "DOWNLOAD CASE STUDY", href: "/case-studies/MAI-case-study.pdf" }],
   },
   {
     label: "The Industrial Win",
