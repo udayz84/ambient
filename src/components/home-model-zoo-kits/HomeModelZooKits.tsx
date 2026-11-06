@@ -97,14 +97,34 @@ function KitCard({ card }: { card: KitCardData }) {
 
 import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 
+function cleanLink(link?: string, fallback = "#") {
+  if (!link || link === "#") return fallback;
+  if (link.startsWith("http://") || link.startsWith("https://")) {
+    try {
+      const url = new URL(link);
+      if (
+        url.hostname.includes("sslip.io") ||
+        url.hostname.includes("ambientscientific.ai") ||
+        url.hostname === "localhost" ||
+        url.hostname === "127.0.0.1"
+      ) {
+        return (url.pathname || "/") + url.search + url.hash;
+      }
+    } catch {
+      // ignore
+    }
+  }
+  return link;
+}
+
 export function HomeModelZooKits({ data }: { data?: any }) {
   const heading = data?.heading || "The fastest path from model to running AI.";
   const subheading = data?.subheading || "Bring your own model or start from a pre-built one, compile in minutes with ModelForge, and watch it run live on real silicon - even from your phone.";
   const bottomSubheading = data?.bottom_subheading || "Open-source and Ambient-built models, all running at microwatts on GPX.";
   const bottomCta1Label = data?.bottom_cta_1_label || "Browse the Model Zoo";
-  const bottomCta1Link = data?.bottom_cta_1_link || "#";
+  const bottomCta1Link = cleanLink(data?.bottom_cta_1_link, "/model-zoo");
   const bottomCta2Label = data?.bottom_cta_2_label || "Explore the Developer Hub";
-  const bottomCta2Link = data?.bottom_cta_2_link || "#";
+  const bottomCta2Link = cleanLink(data?.bottom_cta_2_link, "/developer");
   
   const cardsData: KitCardData[] = Array.isArray(data?.cards) && data.cards.length > 0
     ? data.cards.map((c: any, i: number) => ({
@@ -114,7 +134,7 @@ export function HomeModelZooKits({ data }: { data?: any }) {
         title: c.title || CARDS[i]?.title || "",
         desc: c.desc || CARDS[i]?.desc || "",
         cta: c.cta || CARDS[i]?.cta || "",
-        href: c.cta_href || c.cta_link || c.href || CARDS[i]?.href || "#",
+        href: cleanLink(c.cta_href || c.cta_link || c.href, CARDS[i]?.href || "#"),
         ctaWidth: c.cta_width || CARDS[i]?.ctaWidth || 240,
       }))
     : CARDS;
