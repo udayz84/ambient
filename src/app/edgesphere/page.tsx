@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   description: "Ambient Scientific EdgeSphere Platform.",
 };
 
-const PROXY_IFRAME_URL = "/api/edgesphere-proxy/";
+const EDGESPHERE_URL = "https://180.151.197.37:8444";
 
 export default function EdgeSpherePage() {
   return (
     <main className="relative w-full h-[calc(100vh-78px)] overflow-hidden bg-black">
       <iframe
-        src={PROXY_IFRAME_URL}
+        src={EDGESPHERE_URL}
         title="EdgeSphere Platform"
         className="w-full h-full border-0 block"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; full-screen"
