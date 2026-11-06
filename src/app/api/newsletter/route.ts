@@ -86,6 +86,7 @@ export async function POST(req: Request): Promise<Response> {
 
   const email = String(body.email ?? "").trim();
   const formKey = String(body.formKey ?? "newsletter").trim();
+  const source = String(body.source ?? "").trim();
   const firstName = String(body.firstName ?? "").trim() || undefined;
   const lastName = String(body.lastName ?? "").trim() || undefined;
   const company = String(body.company ?? "").trim() || undefined;
@@ -122,13 +123,20 @@ export async function POST(req: Request): Promise<Response> {
   ];
 
   after(async () => {
-    await sendSubmissionMail({
-      formName: FORM_NAME_MAP[formKey] ?? formKey,
-      fields,
-      replyTo: email,
-    }).catch((err) => {
-      console.error("[newsletter-mail] error:", err);
-    });
+    // The newsletter popup syncs strictly to Mailchimp only — no SMTP notification emails sent.
+    // All other forms (SDK requests, Eval Kits, Whitepapers, Waitlist, etc.) continue sending team notification emails as usual.
+    const isNewsletterSignup = formKey === "newsletter" || source === "newsletter-popup";
+
+    if (!isNewsletterSignup) {
+      await sendSubmissionMail({
+        formName: FORM_NAME_MAP[formKey] ?? formKey,
+        fields,
+        replyTo: email,
+      }).catch((err) => {
+        console.error("[newsletter-mail] error:", err);
+      });
+    }
+
     await addContactAndTag(
       { email, firstName, lastName, company, phone },
       formKey,

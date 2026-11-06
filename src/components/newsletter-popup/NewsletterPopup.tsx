@@ -100,7 +100,12 @@ export function NewsletterPopup({ config }: { config?: PopupConfig }) {
     fetch("/api/newsletter", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, formKey: "newsletter", popupId: config?.documentId }),
+      body: JSON.stringify({
+        email,
+        formKey: "newsletter",
+        source: "newsletter-popup",
+        popupId: config?.documentId,
+      }),
     }).catch(() => { /* silently ignore — submission is already shown as successful */ });
   };
 
