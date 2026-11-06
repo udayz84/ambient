@@ -15,6 +15,12 @@ export function SiteFooterWrapper({
 }) {
   const pathname = usePathname();
   const normalizedPathname = pathname.toLowerCase();
+
+  // EdgeSphere is a standalone console application page that renders without the global footer
+  if (normalizedPathname === "/edgesphere") {
+    return null;
+  }
+
   const showNewsletter =
     normalizedPathname === "/" ||
     normalizedPathname === "/company" ||
