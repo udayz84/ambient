@@ -10,7 +10,6 @@ import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { useFitText } from "../shared/FitText";
 import { ContactBookingPopup } from "./ContactBookingPopup";
 import { ContactSuccessPopup } from "./ContactSuccessPopup";
-import { CloudflareTurnstile } from "../shared/CloudflareTurnstile";
 import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
 
 const GREEN_CTA_SHADOW =
@@ -841,7 +840,6 @@ function ContactFormMobile({ data }: { data?: any }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const [turnstileToken, setTurnstileToken] = useState("");
 
   const heading = data?.heading || "";
   const subtitle = data?.subtitle || "";
@@ -911,10 +909,6 @@ function ContactFormMobile({ data }: { data?: any }) {
       setError("Please enter a valid email address.");
       return;
     }
-    if (!turnstileToken) {
-      setError("Please complete the Cloudflare security verification.");
-      return;
-    }
     setError("");
     setLoading(true);
     try {
@@ -927,7 +921,6 @@ function ContactFormMobile({ data }: { data?: any }) {
           fields: values,
           message: message.trim(),
           subscribed,
-          turnstileToken,
         }),
       });
       const json = await res.json().catch(() => null);
@@ -1041,15 +1034,6 @@ function ContactFormMobile({ data }: { data?: any }) {
               value={message}
               onChange={(event) => setMessage(event.target.value)}
               className={`${interRegular.className} h-[110px] w-full resize-none border-[0.5px] border-solid border-[#4a4a4a] bg-transparent p-[12px] text-[14px] font-normal text-white outline-none placeholder:text-[#4a4a4a] not-italic`}
-            />
-          </div>
-
-          <div className="w-full flex justify-center py-[6px]">
-            <CloudflareTurnstile
-              action="contact"
-              onVerify={setTurnstileToken}
-              onExpire={() => setTurnstileToken("")}
-              onError={() => setTurnstileToken("")}
             />
           </div>
 

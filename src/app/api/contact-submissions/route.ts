@@ -1,8 +1,6 @@
 import { NextResponse, after } from "next/server";
 import { sendSubmissionMail } from "@/lib/notify-mail";
 import { addContactAndTag } from "@/lib/mailchimp";
-import { verifyTurnstileToken } from "@/lib/recaptcha-server";
-import { RECAPTCHA_ACTIONS } from "@/lib/recaptcha";
 
 /**
  * src/app/api/contact-submissions/route.ts
@@ -61,23 +59,6 @@ export async function POST(req: Request): Promise<Response> {
 
   const isModelZoo = fields.Source === "Model Zoo request";
 
-  // Cloudflare Turnstile CAPTCHA verification (required for contact tracks, not needed for Model Zoo)
-  if (!isModelZoo) {
-    const turnstileToken =
-      (typeof body.turnstileToken === "string" ? body.turnstileToken : undefined) ||
-      (typeof body.recaptchaToken === "string" ? body.recaptchaToken : undefined);
-
-    const turnstileResult = await verifyTurnstileToken(
-      turnstileToken,
-      RECAPTCHA_ACTIONS.CONTACT
-    );
-    if (!turnstileResult.success) {
-      return bad(
-        turnstileResult.error || "Security verification failed. Please try again.",
-        403
-      );
-    }
-  }
 
   const track = String(body.track ?? "sales");
   const email = String(body.email ?? "").trim();
