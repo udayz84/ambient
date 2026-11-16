@@ -134,6 +134,8 @@ async function fetchSlugs(collection: string): Promise<Array<{ slug: string; upd
   }
 }
 
+export const dynamic = "force-dynamic";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = getSiteUrl();
   const now = new Date();
