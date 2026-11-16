@@ -37,7 +37,11 @@ import { STRAPI_CACHE_TAG } from "@/lib/strapi";
  */
 const MODEL_TO_LIST_PATH: Record<string, string> = {
   articles: "/news-listing",
+  article: "/news-listing",
   jobs: "/careers",
+  job: "/careers",
+  "application-pages": "/applications",
+  "application-page": "/applications",
 };
 
 function isAuthorized(req: Request): boolean {

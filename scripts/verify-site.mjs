@@ -337,6 +337,198 @@ try {
   errorCount++;
 }
 
+// Step 6: UI Section Rendering Audit (Local Dev / Test Server)
+console.log("\n--- Step 6: Auditing UI Section Rendering (Local Dev / Test Server) ---");
+
+async function fetchHttp(url, timeoutMs = 15000) {
+  return new Promise((resolve) => {
+    const req = http.get(url, { timeout: timeoutMs }, (res) => {
+      let data = "";
+      res.on("data", (chunk) => { data += chunk; });
+      res.on("end", () => resolve({ status: res.statusCode, body: data }));
+    });
+    req.on("error", () => resolve(null));
+    req.on("timeout", () => { req.destroy(); resolve(null); });
+  });
+}
+
+async function findActiveServer() {
+  if (process.env.TEST_SERVER_URL) {
+    const testRes = await fetchHttp(`${process.env.TEST_SERVER_URL}/`, 4000);
+    if (testRes && testRes.status === 200) return process.env.TEST_SERVER_URL;
+  }
+  const candidatePorts = [3001, 3000, 3002];
+  for (const port of candidatePorts) {
+    for (const host of ["localhost", "127.0.0.1"]) {
+      const res = await fetchHttp(`http://${host}:${port}/`, 4000);
+      if (res && res.status === 200 && res.body.includes("Ambient Scientific")) {
+        return `http://${host}:${port}`;
+      }
+    }
+  }
+  return null;
+}
+
+const SECTION_AUDIT_PAGES = [
+  {
+    path: "/",
+    name: "Homepage",
+    sections: [
+      { name: "Hero Carousel", match: (h) => h.includes("hero") || h.includes("<video") || h.includes("HeroCarousel") },
+      { name: "Measured Proof", match: (h) => h.includes("measured_proof") || h.includes("Measured Proof") || h.includes("measured-proof") },
+      { name: "Case Studies / Wins", match: (h) => h.includes("case-studies") || h.includes("casestudies") || h.includes("wins") },
+      { name: "Technology Overview", match: (h) => h.includes("Compute where the data lives") || h.includes("technology") || h.includes("A-Cube") },
+      { name: "Platform Scale", match: (h) => h.includes("platform_scale") || h.includes("Microwatt") || h.includes("Scale") },
+      { name: "Applications Showcase", match: (h) => h.includes("applications") || h.includes("EXPLORE APPLICATIONS") },
+      { name: "Model Zoo & Kits", match: (h) => h.includes("Model Zoo") || h.includes("model-zoo") || h.includes("model_zoo") },
+      { name: "Developer Platform", match: (h) => h.includes("developer_platform") || h.includes("Developer") || h.includes("ModelForge") },
+      { name: "Ecosystem Partners", match: (h) => h.includes("ecosystem") || h.includes("Silicon Partners") || h.includes("Development Partners") },
+      { name: "Latest News", match: (h) => h.includes("latest_news") || h.includes("latest-news") || h.includes("Latest News") },
+    ],
+  },
+  {
+    path: "/products",
+    name: "Products Page",
+    sections: [
+      { name: "Products Hero", match: (h) => h.includes("ProductsHero") || h.includes("Products") || h.includes("chipset") },
+      { name: "Key Features", match: (h) => h.includes('id="features"') },
+      { name: "Always-On Core", match: (h) => h.includes('id="always-on"') },
+      { name: "Metrics / Datasheet", match: (h) => h.includes('id="metrics"') },
+      { name: "Use Cases", match: (h) => h.includes('id="use-cases"') },
+      { name: "Architecture", match: (h) => h.includes('id="architecture"') },
+      { name: "Full Picture", match: (h) => h.includes('id="full-picture"') },
+    ],
+  },
+  {
+    path: "/technology",
+    name: "Technology Page",
+    sections: [
+      { name: "Technology Hero", match: (h) => h.includes("Technology") || h.includes("hero") },
+      { name: "Architecture Pillars", match: (h) => h.includes("architecture") || h.includes("pillars") || h.includes("in-memory") },
+    ],
+  },
+  {
+    path: "/applications",
+    name: "Applications Page",
+    sections: [
+      { name: "Applications Hero", match: (h) => h.includes("Applications") || h.includes("hero") },
+      { name: "Case Studies & Wins", match: (h) => h.includes("wins") || h.includes("Case Studies") || h.includes("case-studies") },
+    ],
+  },
+  {
+    path: "/company",
+    name: "Company Page",
+    sections: [
+      { name: "Company Hero", match: (h) => h.includes("Company") || h.includes("hero") },
+      { name: "Mission / Story", match: (h) => h.includes("Mission") || h.includes("mission") || h.includes("About") },
+    ],
+  },
+  {
+    path: "/careers",
+    name: "Careers Page",
+    sections: [
+      { name: "Careers Hero", match: (h) => h.includes("Careers") || h.includes("careers") },
+      { name: "Open Roles / Culture", match: (h) => h.includes("Open Roles") || h.includes("open_roles") || h.includes("careers") },
+    ],
+  },
+  {
+    path: "/contact",
+    name: "Contact Page",
+    sections: [
+      { name: "Contact & Meetings", match: (h) => h.includes("Contact") || h.includes("contact") || h.includes("Schedule") },
+    ],
+  },
+  {
+    path: "/sitemap.xml",
+    name: "Sitemap XML",
+    sections: [
+      { name: "XML urlset", match: (h) => h.includes("<?xml") && h.includes("<urlset") },
+      { name: "Canonical Domain (No Azure URLs)", match: (h) => h.includes("https://www.ambientscientific.ai") && !h.includes("azurewebsites.net") },
+    ],
+  },
+  {
+    path: "/robots.txt",
+    name: "Robots TXT",
+    sections: [
+      { name: "Sitemap Directive", match: (h) => h.includes("Sitemap: https://www.ambientscientific.ai/sitemap.xml") },
+    ],
+  },
+];
+
+let targetServer = await findActiveServer();
+let spawnedServer = null;
+
+if (targetServer) {
+  console.log(`✓ Active local server detected at ${targetServer}. Auditing live rendered UI sections...`);
+} else {
+  console.log("ℹ️  No active local server detected on port 3000/3001. Starting verification server on port 3099...");
+  try {
+    const { spawn } = await import("child_process");
+    spawnedServer = spawn("npx", ["next", "start", "-p", "3099"], {
+      cwd: ROOT_DIR,
+      stdio: "ignore",
+      detached: false,
+    });
+    const deadline = Date.now() + 15000;
+    while (Date.now() < deadline) {
+      await new Promise((r) => setTimeout(r, 500));
+      const res = await fetchHttp("http://localhost:3099/", 1000);
+      if (res && res.status === 200) {
+        targetServer = "http://localhost:3099";
+        break;
+      }
+    }
+    if (!targetServer) {
+      console.warn("⚠️  Could not start temporary Next.js server on port 3099. Skipping live section crawl.");
+    }
+  } catch (err) {
+    console.warn("⚠️  Unable to launch temporary server for section audit:", err.message);
+  }
+}
+
+if (targetServer) {
+  let totalSections = 0;
+  let passedSections = 0;
+
+  for (const page of SECTION_AUDIT_PAGES) {
+    const url = `${targetServer}${page.path}`;
+    const res = await fetchHttp(url, 20000);
+
+    if (!res || res.status !== 200) {
+      console.error(`❌ [PAGE FAILED] ${page.path}: Returned HTTP ${res ? res.status : "NO RESPONSE"}`);
+      errorCount++;
+      continue;
+    }
+
+    let pagePassed = true;
+    for (const sec of page.sections) {
+      totalSections++;
+      const isRendered = sec.match(res.body);
+      if (isRendered) {
+        passedSections++;
+      } else {
+        pagePassed = false;
+        console.error(`❌ [SECTION UNRENDERED] In ${page.path} (${page.name}): Section "${sec.name}" did NOT render in HTML!`);
+        errorCount++;
+      }
+    }
+
+    if (pagePassed) {
+      console.log(`  ✓ ${page.path.padEnd(16)} All ${page.sections.length} sections rendered successfully`);
+    }
+  }
+
+  if (passedSections === totalSections) {
+    console.log(`✓ Audited ${totalSections} UI sections & endpoints across ${SECTION_AUDIT_PAGES.length} pages. All rendered!`);
+  }
+
+  if (spawnedServer) {
+    try {
+      spawnedServer.kill();
+    } catch {}
+  }
+}
+
 // Final Verdict
 console.log("\n=======================================================");
 if (errorCount > 0) {

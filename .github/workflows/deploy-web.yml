@@ -23,7 +23,7 @@ jobs:
       actions: read
     env:
       NEXT_PUBLIC_STRAPI_URL: https://asi-prod-cms-e3gxdbaefaayc4hs.centralindia-01.azurewebsites.net
-      NEXT_PUBLIC_SITE_URL: https://ambientscientific.ai
+      NEXT_PUBLIC_SITE_URL: https://www.ambientscientific.ai
       AZURE_ASSETS_PUBLIC_URL: https://ambientwebasset.blob.core.windows.net/website-assets
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

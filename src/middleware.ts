@@ -219,7 +219,7 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Run on all paths except static assets
-    '/((?!_next/static|_next/image|favicon.ico).*)',
+    // Run on all paths except static assets and metadata endpoints
+    '/((?!_next/static|_next/image|favicon.ico|icon.png|apple-icon.png|sitemap.xml|robots.txt).*)',
   ],
 };

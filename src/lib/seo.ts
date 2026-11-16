@@ -13,16 +13,7 @@
  * ----------------------------------------------------------------------------
  */
 import type { Metadata } from "next";
-
-/**
- * Canonical site origin. Mirrors the convention used in `src/app/sitemap.ts`:
- * read from NEXT_PUBLIC_SITE_URL (which MUST be set to the crawlable origin in
- * production), falling back to localhost for dev. Trailing slash stripped so
- * relative canonical paths join cleanly.
- */
-const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://localhost:3000"
-).replace(/\/$/, "");
+import { getSiteUrl } from "@/lib/site-url";
 
 /**
  * Resolve a canonical URL value from Strapi into an absolute URL. Already
@@ -33,9 +24,19 @@ const SITE_URL = (
 function resolveCanonical(raw: string | null | undefined): string {
   const value = (raw ?? "").trim();
   if (!value) return "";
-  if (/^https?:\/\//i.test(value) || value.startsWith("//")) return value;
+  if (/^https?:\/\//i.test(value) || value.startsWith("//")) {
+    if (value.includes("azurewebsites.net")) {
+      try {
+        const u = new URL(value);
+        return `${getSiteUrl()}${u.pathname}`;
+      } catch {
+        return getSiteUrl();
+      }
+    }
+    return value;
+  }
   const path = value.startsWith("/") ? value : `/${value}`;
-  return `${SITE_URL}${path}`;
+  return `${getSiteUrl()}${path}`;
 }
 
 /** Shape of the Strapi `shared.seo` component (see cms/src/components/shared/seo.json). */

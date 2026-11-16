@@ -1,7 +1,7 @@
 import { getSingleType } from "@/lib/strapi";
+import { getSiteUrl } from "@/lib/site-url";
 
 export const dynamic = "force-dynamic";
-const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, "");
 
 type SeoSettings = {
   robotsEnabled: boolean;
@@ -10,6 +10,7 @@ type SeoSettings = {
 };
 
 export async function GET() {
+  const siteUrl = getSiteUrl();
   try {
     const seoSettings = await getSingleType<SeoSettings>("seo-setting");
 
@@ -28,9 +29,10 @@ export async function GET() {
     // Append sitemap URL
     // If the editor provided a custom sitemap URL in Strapi, use it.
     // Otherwise, fallback to the canonical site URL + /sitemap.xml
-    const sitemapUrl = seoSettings?.sitemapUrl 
-      ? seoSettings.sitemapUrl 
-      : `${SITE_URL}/sitemap.xml`;
+    const rawSitemapUrl = seoSettings?.sitemapUrl?.trim();
+    const sitemapUrl = rawSitemapUrl && !rawSitemapUrl.includes("azurewebsites.net")
+      ? rawSitemapUrl 
+      : `${siteUrl}/sitemap.xml`;
       
     // Make sure sitemap is only appended once
     const finalContent = robotsContent.includes("Sitemap:") 
@@ -47,7 +49,7 @@ export async function GET() {
   } catch (error) {
     console.error("Failed to fetch robots.txt from Strapi:", error);
     // Fallback to default robots.txt if Strapi is down
-    return new Response(`User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml`, {
+    return new Response(`User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}/sitemap.xml`, {
       status: 200,
       headers: {
         "Content-Type": "text/plain",

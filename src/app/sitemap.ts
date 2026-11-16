@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { discoverStaticRoutes } from "@/lib/sitemap-routes";
+import { getSiteUrl } from "@/lib/site-url";
 
 /**
  * src/app/sitemap.ts
@@ -14,24 +15,21 @@ import { discoverStaticRoutes } from "@/lib/sitemap-routes";
  *             page.tsx files. Add a new page folder → it appears in the
  *             sitemap automatically. No edits needed here.
  *
- *   Level 2 — Dynamic routes (e.g. /news/:slug) are pulled from Strapi so
- *             CMS-authored content is indexed without code changes. Each
- *             source is GUARDED on the existence of its consuming route
- *             folder (e.g. src/app/news/[slug]); URLs are only emitted when
- *             the route actually exists, so we never tell Google about a
- *             page that 404s.
+ *   Level 2 — Dynamic routes (e.g. /article/:slug, /applications/:slug) are pulled
+ *             from Strapi so CMS-authored content is indexed without code changes.
+ *             Each source is GUARDED on the existence of its consuming route
+ *             folder; URLs are only emitted when the route actually exists.
  *
  *   Level 3 — On-demand revalidation: Strapi's webhook hits
  *             /api/revalidate on publish, which calls revalidatePath on this
  *             sitemap (and the relevant list page). See
  *             src/app/api/revalidate/route.ts.
  *
- * The site origin is read from NEXT_PUBLIC_SITE_URL. In production this MUST
- * be set to the canonical crawlable origin.
+ * The canonical site origin is resolved via getSiteUrl(), which ensures internal
+ * Azure App Service domains (*.azurewebsites.net) are never emitted to Google.
  * ----------------------------------------------------------------------------
  */
 
-const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://localhost:3000").replace(/\/$/, "");
 const STRAPI_URL = (process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1338").replace(/\/$/, "");
 const APP_DIR = join(process.cwd(), "src", "app");
 
@@ -52,7 +50,6 @@ const ROUTE_OVERRIDES: Record<
   "/products": { priority: 0.9, changeFrequency: "monthly" },
   "/technology": { priority: 0.9, changeFrequency: "monthly" },
   "/applications": { priority: 0.9, changeFrequency: "monthly" },
-  "/applications/wearables": { priority: 0.8, changeFrequency: "monthly" },
   "/developer": { priority: 0.8, changeFrequency: "monthly" },
   "/dvk": { priority: 0.8, changeFrequency: "monthly" },
   "/news-listing": { priority: 0.8, changeFrequency: "weekly" },
@@ -77,14 +74,13 @@ function defaultPriority(path: string): number {
 // ---- Level 2: dynamic sources --------------------------------------------
 
 type DynamicSource = {
-  /** URL prefix, e.g. "/news". URLs become `${urlPrefix}/${slug}`. */
+  /** URL prefix, e.g. "/article". URLs become `${urlPrefix}/${slug}`. */
   urlPrefix: string;
   /** Strapi collection apiId, e.g. "articles". */
   strapiCollection: string;
   /**
    * Absolute path to the consuming route folder. The source only emits URLs
-   * when this path exists, so creating src/app/news/[slug]/page.tsx is the
-   * switch that turns the source on.
+   * when this path exists.
    */
   routeFolder: string;
   priority?: number;
@@ -97,11 +93,18 @@ type DynamicSource = {
  */
 const DYNAMIC_SOURCES: DynamicSource[] = [
   {
-    urlPrefix: "/news",
+    urlPrefix: "/article",
     strapiCollection: "articles",
-    routeFolder: join(APP_DIR, "news", "[slug]"),
-    priority: 0.6,
+    routeFolder: join(APP_DIR, "article", "[slug]"),
+    priority: 0.7,
     changeFrequency: "weekly",
+  },
+  {
+    urlPrefix: "/applications",
+    strapiCollection: "application-pages",
+    routeFolder: join(APP_DIR, "applications", "[slug]"),
+    priority: 0.8,
+    changeFrequency: "monthly",
   },
 ];
 
@@ -132,6 +135,7 @@ async function fetchSlugs(collection: string): Promise<Array<{ slug: string; upd
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const siteUrl = getSiteUrl();
   const now = new Date();
 
   // --- Level 1: filesystem-discovered static routes ----------------------
@@ -139,7 +143,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticEntries: MetadataRoute.Sitemap = staticRoutes.map(({ path }) => {
     const override = ROUTE_OVERRIDES[path];
     return {
-      url: `${SITE_URL}${path}`,
+      url: `${siteUrl}${path}`,
       lastModified: now,
       changeFrequency: override?.changeFrequency ?? "monthly",
       priority: override?.priority ?? defaultPriority(path),
@@ -149,11 +153,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // --- Level 2: Strapi-driven dynamic routes (guarded) -------------------
   const dynamicEntries: MetadataRoute.Sitemap = [];
   for (const source of DYNAMIC_SOURCES) {
-    if (!existsSync(source.routeFolder)) continue;
+    if (!existsSync(/* turbopackIgnore: true */ source.routeFolder)) continue;
     const items = await fetchSlugs(source.strapiCollection);
     for (const item of items) {
       dynamicEntries.push({
-        url: `${SITE_URL}${source.urlPrefix}/${item.slug}`,
+        url: `${siteUrl}${source.urlPrefix}/${item.slug}`,
         lastModified: item.updatedAt ? new Date(item.updatedAt) : now,
         changeFrequency: source.changeFrequency ?? "weekly",
         priority: source.priority ?? 0.6,
