@@ -368,11 +368,11 @@ function FormStep({
 
         {/* Email + Phone */}
         <div className="flex flex-col md:flex-row gap-[18px]">
-          <Field label="Email ID*" className="min-w-0 flex-1">
+          <Field label="Business Email*" className="min-w-0 flex-1">
             <input
               type="email"
               className={FIELD_BOX}
-              placeholder="Enter Your Email ID"
+              placeholder="Enter Your Business Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required

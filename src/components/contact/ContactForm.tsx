@@ -15,6 +15,7 @@ import {
 } from "./contact-shared";
 import { ContactSuccessPopup } from "./ContactSuccessPopup";
 import { Corners } from "../shared/Corners";
+import { validateBusinessEmail, WORK_EMAIL_HELP_TEXT } from "@/lib/business-email";
 
 type TrackId = "sales" | "developer" | "media";
 
@@ -91,6 +92,15 @@ function mapInputType(fieldType: string | undefined | null): string {
   }
 }
 
+const DEFAULT_CONTACT_FIELDS = [
+  { label: "First name", placeholder: "First name", inputType: "text" },
+  { label: "Last name", placeholder: "Last name", inputType: "text" },
+  { label: "Company name", placeholder: "Company name", inputType: "text" },
+  { label: "Job title", placeholder: "Job title", inputType: "text" },
+  { label: "Business Email", placeholder: "Business Email", inputType: "email" },
+  { label: "Phone number", placeholder: "Phone number", inputType: "tel" },
+];
+
 export function ContactForm({ data }: { data?: any }) {
   const [activeTrackId, setActiveTrackId] = useState<TrackId>("sales");
   const [subscribed, setSubscribed] = useState(false);
@@ -137,23 +147,30 @@ export function ContactForm({ data }: { data?: any }) {
     (f: any) => f.field_type === "textarea",
   );
 
-  // Build 6 grid-position fields from Strapi data where available
+  // Build 6 grid-position fields from Strapi data where available (with defaults)
   const mergedFields = formFields.map((fallback, index) => {
     const remote = strapiInputFields[index];
-    if (!remote) return { ...fallback, label: "", placeholder: "", inputType: "text", analyticsId: CONTACT_INPUT_IDS[index] };
+    const defaultField = DEFAULT_CONTACT_FIELDS[index] || {
+      label: `Field ${index + 1}`,
+      placeholder: "",
+      inputType: "text",
+    };
+    const isEmailField = remote ? mapInputType(remote.field_type) === "email" : defaultField.inputType === "email";
+    const label = isEmailField ? "Business Email" : (remote?.label || defaultField.label);
+    const placeholder = isEmailField ? "Business Email" : (remote?.placeholder || defaultField.placeholder);
     return {
       ...fallback,
-      label: remote.label || "",
-      placeholder: remote.placeholder || "",
-      inputType: mapInputType(remote.field_type),
+      label,
+      placeholder,
+      inputType: remote ? mapInputType(remote.field_type) : defaultField.inputType,
       nodeId: `${fallback.nodeId}-${index}`,
-      analyticsId: getContactFieldId(remote.label, index),
+      analyticsId: getContactFieldId(label, index),
     };
   });
 
   // Bottom textarea from Strapi data
-  const textareaLabel = strapiTextareaField?.label || "";
-  const textareaPlaceholder = strapiTextareaField?.placeholder || "";
+  const textareaLabel = strapiTextareaField?.label || "Message";
+  const textareaPlaceholder = strapiTextareaField?.placeholder || "Tell us about your project...";
 
   const activeConnectorTop =
     mergedTracks.find((track) => track.id === activeTrackId)?.connectorTop ??
@@ -166,15 +183,19 @@ export function ContactForm({ data }: { data?: any }) {
     const emailLabel = strapiInputFields.find(
       (f: any) => f.field_type === "email",
     )?.label;
-    if (emailLabel) return (values[emailLabel] || "").trim();
+    if (emailLabel && values[emailLabel]) return values[emailLabel].trim();
     const key = Object.keys(values).find((k) => /e-?mail/i.test(k));
-    return key ? values[key].trim() : "";
+    if (key && values[key]) return values[key].trim();
+    const emailField = mergedFields.find((f) => f.inputType === "email");
+    if (emailField && values[emailField.label]) return values[emailField.label].trim();
+    return "";
   };
 
   const onSubmit = async () => {
     const email = emailFieldValue();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setError("Please enter a valid email address.");
+    const emailValidation = validateBusinessEmail(email);
+    if (!emailValidation.valid) {
+      setError(emailValidation.error!);
       return;
     }
     setError("");
@@ -567,6 +588,11 @@ function FormField({
           />
         )}
       </div>
+      {inputType === "email" && (
+        <p className={`${interLight.className} text-[9.5px] leading-[12px] text-[#a4a4a4] not-italic`}>
+          {WORK_EMAIL_HELP_TEXT}
+        </p>
+      )}
     </div>
   );
 }

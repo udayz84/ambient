@@ -5,7 +5,8 @@ import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
-import { popupField, type PopupConfig } from "@/lib/popup";
+import type { PopupConfig } from "@/lib/popup";
+import { validateBusinessEmail, WORK_EMAIL_HELP_TEXT } from "@/lib/business-email";
 
 const SUCCESS_IMG = "/careers/apply-success.webp";
 
@@ -180,11 +181,20 @@ function FormStep({
   submitButtonId?: string;
 }) {
   const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const determinedFormKey = formKey || (pdfName?.toLowerCase().includes("whitepaper") ? "whitepaper" : "product-brief");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const emailValidation = validateBusinessEmail(email);
+    if (!emailValidation.valid) {
+      setEmailError(emailValidation.error!);
+      return;
+    }
+    setEmailError("");
+
     setIsSubmitting(true);
 
     if (pdfUrl) {
@@ -215,10 +225,18 @@ function FormStep({
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, formKey: determinedFormKey, popupId: config?.documentId }),
     })
-      .catch(() => { /* Mailchimp/mail sync failure is non-blocking */ })
+      .then(async (res) => {
+        if (!res.ok) {
+          const json = await res.json().catch(() => null);
+          throw new Error(json?.error || "Submission failed.");
+        }
+        onSuccess();
+      })
+      .catch((err) => {
+        setEmailError(err instanceof Error ? err.message : "Submission failed.");
+      })
       .finally(() => {
         setIsSubmitting(false);
-        onSuccess();
       });
   };
 
@@ -235,18 +253,30 @@ function FormStep({
       <form onSubmit={handleSubmit} className={`${interRegular.className} flex flex-col gap-[24px] font-normal not-italic`}>
         <div className="flex flex-col items-start gap-[8px]">
           <label className="text-[14px] leading-[21px] text-[#a4a4a4]">
-            {popupField(config, "email")?.label ?? config?.description ?? "Please provide your email to receive the requested information."}
+            Business Email
           </label>
           <input
             id={emailInputId}
             data-analytics-id={emailInputId}
             type="email"
             className={FIELD_BOX}
-            placeholder={popupField(config, "email")?.placeholder ?? "Enter Your Email ID"}
+            placeholder="Enter Your Business Email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              if (emailError) setEmailError("");
+            }}
             required
           />
+          {emailError ? (
+            <p className={`${interRegular.className} text-[11px] leading-[15px] text-[#ff6b6b] not-italic`} role="alert">
+              {emailError}
+            </p>
+          ) : (
+            <p className={`${interRegular.className} text-[11px] leading-[15px] text-[#a4a4a4] not-italic`}>
+              {WORK_EMAIL_HELP_TEXT}
+            </p>
+          )}
         </div>
 
         <div className="pt-[16px] pb-[8px] flex justify-center">

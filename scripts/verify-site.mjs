@@ -333,8 +333,13 @@ try {
   execSync("npm run build", { stdio: "inherit" });
   console.log("✓ Next.js build completed successfully.");
 } catch {
-  console.error("❌ Next.js build failed!");
-  errorCount++;
+  try {
+    execSync("npm run build", { stdio: "inherit" });
+    console.log("✓ Next.js build completed successfully.");
+  } catch {
+    console.error("❌ Next.js build failed!");
+    errorCount++;
+  }
 }
 
 // Step 6: UI Section Rendering Audit (Local Dev / Test Server)

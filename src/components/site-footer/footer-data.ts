@@ -86,5 +86,5 @@ export const FALLBACK_FOOTER_CRAFTED_BY_TEXT = "Carefully crafted by";
 export const FALLBACK_NEWSLETTER_HEADING_TOP = "Want to stay in the";
 export const FALLBACK_NEWSLETTER_HEADING_BOTTOM = "forefront of AI tech.";
 export const FALLBACK_NEWSLETTER_SUBTITLE = "Sign up to receive regular updates.";
-export const FALLBACK_NEWSLETTER_PLACEHOLDER = "Your Email ID";
+export const FALLBACK_NEWSLETTER_PLACEHOLDER = "Business Email";
 export const FALLBACK_NEWSLETTER_BUTTON_LABEL = "SUBSCRIBE";

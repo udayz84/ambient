@@ -17,6 +17,7 @@ import {
   PRIMARY_CTA_INSET,
   PRIMARY_CTA_SHADOW,
 } from "@/components/products-page/products-data";
+import { validateBusinessEmail, WORK_EMAIL_HELP_TEXT } from "@/lib/business-email";
 
 const INTEREST_OPTIONS = [
   "I'd like to meet the Ambient team in Munich.",
@@ -30,6 +31,7 @@ export function ElectronicaStayUpdated() {
   const [lastName, setLastName] = useState("");
   const [company, setCompany] = useState("");
   const [workEmail, setWorkEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [role, setRole] = useState("");
   const [region, setRegion] = useState("");
   const [selectedInterests, setSelectedInterests] = useState<string[]>([
@@ -46,6 +48,14 @@ export function ElectronicaStayUpdated() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const emailValidation = validateBusinessEmail(workEmail);
+    if (!emailValidation.valid) {
+      setEmailError(emailValidation.error!);
+      return;
+    }
+    setEmailError("");
+
     setIsSubmitting(true);
     try {
       const detailsList = [
@@ -54,7 +64,7 @@ export function ElectronicaStayUpdated() {
         selectedInterests.length ? `Interests: ${selectedInterests.join("; ")}` : "",
       ].filter(Boolean).join(" | ");
 
-      await fetch("/api/newsletter", {
+      const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -67,11 +77,17 @@ export function ElectronicaStayUpdated() {
           tags: ["electronica-2026", "electronica-updates"],
         }),
       });
+
+      if (!res.ok) {
+        const json = await res.json().catch(() => null);
+        throw new Error(json?.error || "Submission failed. Please try again.");
+      }
+
+      setIsSubmitted(true);
     } catch (err) {
-      console.error("[electronica-stay-updated] submit error:", err);
+      setEmailError(err instanceof Error ? err.message : "Submission failed. Please try again.");
     } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
     }
   };
 
@@ -266,17 +282,29 @@ export function ElectronicaStayUpdated() {
                       htmlFor={`${formId}-desktop-work-email`}
                       className={`${interMedium.className} mb-[6px] block text-[13px] font-medium text-[#e0e0e0]`}
                     >
-                      Work email <span className="text-[#ef4444]">*</span>
+                      Business Email <span className="text-[#ef4444]">*</span>
                     </label>
                     <input
                       id={`${formId}-desktop-work-email`}
                       type="email"
                       required
                       value={workEmail}
-                      onChange={(e) => setWorkEmail(e.target.value)}
+                      onChange={(e) => {
+                        setWorkEmail(e.target.value);
+                        if (emailError) setEmailError("");
+                      }}
                       placeholder="you@company.com"
                       className={`${interRegular.className} h-[44px] w-full rounded-[8px] border border-white/10 bg-[#121612] px-[14px] text-[14px] text-white outline-none placeholder:text-[#525a52] transition-colors focus:border-[#53d824] focus:bg-[#141a14]`}
                     />
+                    {emailError ? (
+                      <p className={`${interRegular.className} mt-[6px] text-[11px] leading-[15px] text-[#ef4444]`} role="alert">
+                        {emailError}
+                      </p>
+                    ) : (
+                      <p className={`${interRegular.className} mt-[6px] text-[11px] leading-[15px] text-[#a4a4a4]`}>
+                        {WORK_EMAIL_HELP_TEXT}
+                      </p>
+                    )}
                   </div>
 
                   {/* Role */}
@@ -599,17 +627,29 @@ export function ElectronicaStayUpdated() {
                   htmlFor={`${formId}-mobile-work-email`}
                   className={`${interMedium.className} mb-[5px] block text-[13px] font-medium text-[#e0e0e0]`}
                 >
-                  Work email <span className="text-[#ef4444]">*</span>
+                  Business Email <span className="text-[#ef4444]">*</span>
                 </label>
                 <input
                   id={`${formId}-mobile-work-email`}
                   type="email"
                   required
                   value={workEmail}
-                  onChange={(e) => setWorkEmail(e.target.value)}
+                  onChange={(e) => {
+                    setWorkEmail(e.target.value);
+                    if (emailError) setEmailError("");
+                  }}
                   placeholder="you@company.com"
                   className={`${interRegular.className} h-[44px] w-full rounded-[8px] border border-white/10 bg-[#121612] px-[14px] text-[14px] text-white outline-none placeholder:text-[#525a52] focus:border-[#53d824]`}
                 />
+                {emailError ? (
+                  <p className={`${interRegular.className} mt-[6px] text-[11px] leading-[15px] text-[#ef4444]`} role="alert">
+                    {emailError}
+                  </p>
+                ) : (
+                  <p className={`${interRegular.className} mt-[6px] text-[11px] leading-[15px] text-[#a4a4a4]`}>
+                    {WORK_EMAIL_HELP_TEXT}
+                  </p>
+                )}
               </div>
 
               <div>

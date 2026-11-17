@@ -4,7 +4,7 @@ import { useState } from "react";
 import { interLight, interRegular, gilroyMedium } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { useFadeIn } from "../shared/useFadeIn";
-import { isCasualEmailDomain } from "./partners-data";
+import { validateBusinessEmail, WORK_EMAIL_HELP_TEXT } from "@/lib/business-email";
 import type { Capability, MatchFormContent } from "./partners-content";
 import {
   AmbientPulse,
@@ -78,8 +78,8 @@ export function PartnersMatchForm({
   const validate = (): string => {
     if (!form.firstName.trim() || !form.lastName.trim()) return "Please enter your first and last name.";
     if (!form.company.trim()) return "Please enter your company.";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) return "Please enter a valid email address.";
-    if (isCasualEmailDomain(form.email.trim())) return content.emailHint;
+    const emailValidation = validateBusinessEmail(form.email);
+    if (!emailValidation.valid) return emailValidation.error!;
     if (!form.region) return "Please select your region.";
     return "";
   };
@@ -112,8 +112,12 @@ export function PartnersMatchForm({
         throw new Error(json?.error || "Submission failed.");
       }
       setSubmitted(true);
-    } catch {
-      setError("Could not submit right now. Please try again, or email us directly via the contact page.");
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Could not submit right now. Please try again, or email us directly via the contact page."
+      );
     } finally {
       setLoading(false);
     }
@@ -168,6 +172,9 @@ export function PartnersMatchForm({
             <div className={inputBoxClass}>
               <input id={`${idPrefix}pm-email`} type="email" className={inputClass} value={form.email} onChange={(e) => set("email")(e.target.value)} autoComplete="email" />
             </div>
+            <p className={`${interRegular.className} text-[11px] leading-[15px] font-normal text-[#8a8a8a] [word-break:break-word]`}>
+              {WORK_EMAIL_HELP_TEXT}
+            </p>
           </div>
         </div>
 

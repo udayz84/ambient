@@ -1,6 +1,7 @@
 import { NextResponse, after } from "next/server";
 import { sendSubmissionMail } from "@/lib/notify-mail";
 import { addContactAndTag } from "@/lib/mailchimp";
+import { validateBusinessEmail } from "@/lib/business-email";
 
 /**
  * src/app/api/contact-submissions/route.ts
@@ -68,8 +69,9 @@ export async function POST(req: Request): Promise<Response> {
   if (!TRACKS.has(track)) {
     return bad("Invalid contact track.");
   }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return bad("Please enter a valid email address.");
+  const emailValidation = validateBusinessEmail(email);
+  if (!emailValidation.valid) {
+    return bad(emailValidation.error!);
   }
 
   // Deduplicate rapid repeat submissions within 30 seconds

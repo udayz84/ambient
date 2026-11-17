@@ -178,7 +178,7 @@ export function NewsletterPopup({ config }: { config?: PopupConfig }) {
           onSubmit={handleSubmit}
         >
           <label htmlFor="newsletter-popup-email" className="sr-only">
-            Email address
+            Business Email
           </label>
           <div
             className="flex h-full min-w-0 flex-1 items-start border-[0.5px] border-solid border-[#4a4a4a] p-[12px]"
@@ -190,7 +190,7 @@ export function NewsletterPopup({ config }: { config?: PopupConfig }) {
               name="email"
               type="email"
               required
-              placeholder={popupField(config, "email")?.placeholder ?? "Enter Your Email ID"}
+              placeholder={popupField(config, "email")?.placeholder ?? "Enter Your Business Email"}
               className={`${interRegular.className} w-full border-0 bg-transparent text-[14px] leading-[21px] text-white outline-none placeholder:text-[#4a4a4a]`}
             />
           </div>

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { gilroySemiBold, interLight, interRegular } from "../hero/fonts";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
+import { validateBusinessEmail, WORK_EMAIL_HELP_TEXT } from "@/lib/business-email";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
@@ -23,6 +24,8 @@ export function WaitlistPopup({
   successSubtitle?: string;
 }) {
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const close = () => {
     onClose();
@@ -46,15 +49,32 @@ export function WaitlistPopup({
     const email = String(formData.get("email") ?? "").trim();
     if (!email) return;
 
-    // Show the thank-you note, then auto-dismiss.
-    setSubmitted(true);
+    const emailValidation = validateBusinessEmail(email);
+    if (!emailValidation.valid) {
+      setError(emailValidation.error!);
+      return;
+    }
+    setError("");
+    setLoading(true);
 
-    // Sync to Mailchimp via server-side API (fire-and-forget)
     fetch("/api/newsletter", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, formKey: "waitlist" }),
-    }).catch(() => { /* silently ignore — submission is already shown as successful */ });
+    })
+      .then(async (res) => {
+        if (!res.ok) {
+          const json = await res.json().catch(() => null);
+          throw new Error(json?.error || "Submission failed. Please try again.");
+        }
+        setSubmitted(true);
+      })
+      .catch((err) => {
+        setError(err instanceof Error ? err.message : "Submission failed. Please try again.");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -69,12 +89,12 @@ export function WaitlistPopup({
   return createPortal(
     <section
       aria-label="Newsletter signup"
-      className="fixed bottom-[24px] right-[24px] z-[100] h-[196px] w-[450px] max-w-[calc(100vw-48px)] animate-popup-rise-in border-[0.5px] border-solid border-[rgba(240,240,240,0.3)] bg-[#141414] max-[767px]:right-[16px] max-[767px]:bottom-[16px] max-[767px]:w-[calc(100vw-32px)] max-[767px]:max-w-none max-[767px]:h-auto max-[767px]:py-[20px]"
+      className="fixed bottom-[24px] right-[24px] z-[100] min-h-[196px] h-auto w-[450px] max-w-[calc(100vw-48px)] py-[20px] animate-popup-rise-in border-[0.5px] border-solid border-[rgba(240,240,240,0.3)] bg-[#141414] max-[767px]:right-[16px] max-[767px]:bottom-[16px] max-[767px]:w-[calc(100vw-32px)] max-[767px]:max-w-none max-[767px]:py-[20px]"
       data-node-id="5558:8442"
       data-name="Newsletter popup"
     >
       <div
-        className="absolute top-1/2 left-1/2 flex w-[410px] -translate-x-1/2 -translate-y-1/2 flex-col items-start gap-[12px] max-[767px]:static max-[767px]:w-full max-[767px]:translate-x-0 max-[767px]:translate-y-0 max-[767px]:px-[20px]"
+        className="relative mx-auto flex w-[410px] max-w-full flex-col items-start gap-[12px] max-[767px]:w-full max-[767px]:px-[20px]"
         data-node-id="5558:8501"
         data-name="Frame 2147240901"
       >
@@ -126,7 +146,7 @@ export function WaitlistPopup({
           onSubmit={handleSubmit}
         >
           <label htmlFor="newsletter-popup-email" className="sr-only">
-            Email address
+            Business Email
           </label>
           <div
             className="flex h-full min-w-0 flex-1 items-start border-[0.5px] border-solid border-[#4a4a4a] p-[12px]"
@@ -138,13 +158,14 @@ export function WaitlistPopup({
               name="email"
               type="email"
               required
-              placeholder="Enter Your Email ID"
+              placeholder="Enter Your Business Email"
               className={`${interRegular.className} w-full border-0 bg-transparent text-[14px] leading-[21px] text-white outline-none placeholder:text-[#4a4a4a]`}
             />
           </div>
           <button
             type="submit"
-            className={`${gilroySemiBold.className} relative block h-[48px] w-[140px] shrink-0 cursor-pointer overflow-hidden text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic ${GREEN_CTA_SHADOW}`}
+            disabled={loading}
+            className={`${gilroySemiBold.className} relative block h-[48px] w-[140px] shrink-0 cursor-pointer overflow-hidden text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic disabled:opacity-60 ${GREEN_CTA_SHADOW}`}
             data-node-id="5558:8469"
             data-name="Cta"
           >
@@ -156,7 +177,7 @@ export function WaitlistPopup({
               className="absolute top-[calc(50%-9px)] left-1/2 flex w-full -translate-x-1/2 items-center justify-center"
               data-node-id="5558:8470"
             >
-              Submit
+              {loading ? "Submitting..." : "Submit"}
             </span>
             <GreenCtaCorners disableDots />
             <span
@@ -165,6 +186,16 @@ export function WaitlistPopup({
             />
           </button>
         </form>
+
+        {error ? (
+          <p className={`${interRegular.className} w-[410px] max-w-full text-[11px] leading-[15px] text-[#ff6b6b] not-italic`} role="alert">
+            {error}
+          </p>
+        ) : (
+          <p className={`${interRegular.className} w-[410px] max-w-full text-[11px] leading-[15px] text-[#a4a4a4] not-italic`}>
+            {WORK_EMAIL_HELP_TEXT}
+          </p>
+        )}
 
         <p
           className={`${interLight.className} w-[410px] max-w-full text-[10px] leading-[15px] font-light text-[#e8e8e8] not-italic [word-break:break-word]`}

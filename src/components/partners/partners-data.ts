@@ -1,6 +1,11 @@
+import {
+  BLOCKED_EMAIL_DOMAINS as SHARED_BLOCKED_EMAIL_DOMAINS,
+  WORK_EMAIL_HELP_TEXT,
+  isBlockedEmailDomain,
+} from "@/lib/business-email";
+
 /**
  * src/components/partners/partners-data.ts
- * ----------------------------------------------------------------------------
  * Content for the /partners page, sourced from "Copy & UI for Partners
  * Page.docx". Partner entries are PLACEHOLDERS (doc: "[PLACEHOLDER —
  * Partners 1–6]") with fictional names — swap in real partners here as
@@ -309,12 +314,12 @@ export const PARTNERS_MATCH = {
     firstName: "First name",
     lastName: "Last name",
     company: "Company",
-    email: "Corporate email",
+    email: "Business Email",
     region: "Region",
     helpAreas: "Where do you need help?",
     message: "Tell us about your project",
   },
-  emailHint: "Personal email domains (gmail, outlook, …) are blocked please use your work address.",
+  emailHint: WORK_EMAIL_HELP_TEXT,
 };
 
 export const PARTNERS_BECOME = {
@@ -360,7 +365,7 @@ export const PARTNERS_BECOME = {
     name: "Your name",
     company: "Company",
     website: "Website",
-    email: "Work email",
+    email: "Business Email",
     region: "Region",
     capabilities: "Capability area(s)",
     experience: "What you’d bring / relevant experience",
@@ -377,30 +382,8 @@ export const PARTNERS_FOOTER_CTAS = {
 };
 
 /** Casual email domains blocked on partner forms (corporate email required). */
-export const BLOCKED_EMAIL_DOMAINS = [
-  "gmail.com",
-  "googlemail.com",
-  "yahoo.com",
-  "ymail.com",
-  "hotmail.com",
-  "outlook.com",
-  "live.com",
-  "msn.com",
-  "icloud.com",
-  "me.com",
-  "aol.com",
-  "protonmail.com",
-  "proton.me",
-  "mail.com",
-  "gmx.com",
-  "zoho.com",
-  "yandex.com",
-  "qq.com",
-  "163.com",
-];
+export const BLOCKED_EMAIL_DOMAINS = Array.from(SHARED_BLOCKED_EMAIL_DOMAINS);
 
 export function isCasualEmailDomain(email: string): boolean {
-  const domain = email.split("@")[1]?.toLowerCase().trim();
-  if (!domain) return false;
-  return BLOCKED_EMAIL_DOMAINS.includes(domain);
+  return isBlockedEmailDomain(email);
 }

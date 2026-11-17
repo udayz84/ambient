@@ -8,7 +8,7 @@ import { dmMono, interLight, interRegular, gilroyMedium } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { TagBadge } from "../hero/TagBadge";
 import { useFadeIn } from "../shared/useFadeIn";
-import { isCasualEmailDomain } from "./partners-data";
+import { validateBusinessEmail, WORK_EMAIL_HELP_TEXT } from "@/lib/business-email";
 import type { BecomeContent, Capability } from "./partners-content";
 import {
   AmbientPulse,
@@ -83,8 +83,8 @@ export function PartnersBecome({
   const onSubmit = async () => {
     if (!form.name.trim()) return setError("Please enter your name.");
     if (!form.company.trim()) return setError("Please enter your company.");
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) return setError("Please enter a valid work email address.");
-    if (isCasualEmailDomain(form.email.trim())) return setError("Please use your work email personal email domains are blocked.");
+    const emailValidation = validateBusinessEmail(form.email);
+    if (!emailValidation.valid) return setError(emailValidation.error!);
     if (!form.region) return setError("Please select your region.");
     if (selectedCapabilities.length === 0) return setError("Please select at least one capability area.");
     setError("");
@@ -109,8 +109,12 @@ export function PartnersBecome({
         throw new Error(json?.error || "Submission failed.");
       }
       setSubmitted(true);
-    } catch {
-      setError("Could not submit right now. Please try again, or reach us via the contact page.");
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Could not submit right now. Please try again, or reach us via the contact page."
+      );
     } finally {
       setLoading(false);
     }
@@ -195,6 +199,9 @@ export function PartnersBecome({
                 autoComplete="email"
               />
             </div>
+            <p className={`${interRegular.className} text-[11px] leading-[15px] font-normal text-[#8a8a8a]`}>
+              {WORK_EMAIL_HELP_TEXT}
+            </p>
           </div>
         </div>
 

@@ -9,6 +9,7 @@
     "postbuild": "node scripts/azure/write-release-marker.mjs",
     "start": "node scripts/azure/clear-icon-route-cache.mjs && next start",
     "lint": "eslint",
+    "test": "node --experimental-strip-types --test tests/business-email.test.ts",
     "assets:manifest": "node scripts/azure/generate-manifest.mjs",
     "assets:upload": "node scripts/azure/upload-assets.mjs",
     "assets:verify": "node scripts/azure/verify-assets.mjs",

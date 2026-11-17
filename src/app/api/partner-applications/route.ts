@@ -1,6 +1,7 @@
 import { NextResponse, after } from "next/server";
 import { sendSubmissionMail } from "@/lib/notify-mail";
 import { addContactAndTag } from "@/lib/mailchimp";
+import { validateBusinessEmail } from "@/lib/business-email";
 
 /**
  * src/app/api/partner-applications/route.ts
@@ -20,28 +21,6 @@ const STRAPI_URL = (
   process.env.NEXT_PUBLIC_STRAPI_URL ||
   "http://localhost:1338"
 ).replace(/\/$/, "");
-
-const CASUAL_EMAIL_DOMAINS = new Set([
-  "gmail.com",
-  "googlemail.com",
-  "yahoo.com",
-  "ymail.com",
-  "hotmail.com",
-  "outlook.com",
-  "live.com",
-  "msn.com",
-  "icloud.com",
-  "me.com",
-  "aol.com",
-  "protonmail.com",
-  "proton.me",
-  "mail.com",
-  "gmx.com",
-  "zoho.com",
-  "yandex.com",
-  "qq.com",
-  "163.com",
-]);
 
 function bad(error: string, status = 422) {
   return NextResponse.json({ ok: false, error }, { status });
@@ -68,12 +47,9 @@ export async function POST(req: Request): Promise<Response> {
   if (!name || !company) {
     return bad("Name and company are required.");
   }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return bad("Please enter a valid work email address.");
-  }
-  const domain = email.split("@")[1]?.toLowerCase() ?? "";
-  if (CASUAL_EMAIL_DOMAINS.has(domain)) {
-    return bad("Please use your work email address — personal email domains are blocked.");
+  const emailValidation = validateBusinessEmail(email);
+  if (!emailValidation.valid) {
+    return bad(emailValidation.error!);
   }
   if (!region) {
     return bad("Please select your region.");

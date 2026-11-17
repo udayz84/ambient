@@ -11,6 +11,7 @@ import { useFitText } from "../shared/FitText";
 import { ContactBookingPopup } from "./ContactBookingPopup";
 import { ContactSuccessPopup } from "./ContactSuccessPopup";
 import { UpcomingProductsModal } from "../hero/UpcomingProductsModal";
+import { validateBusinessEmail, WORK_EMAIL_HELP_TEXT } from "@/lib/business-email";
 
 const GREEN_CTA_SHADOW =
   "shadow-[0px_42px_107px_0px_rgba(69,196,24,0.2),0px_24.721px_32.257px_0px_rgba(83,216,36,0.15),0px_10.268px_13.398px_0px_rgba(83,216,36,0.15),0px_3.714px_4.846px_0px_rgba(83,216,36,0.1)]";
@@ -832,6 +833,15 @@ function mapInputTypeMobile(fieldType: string | undefined | null): string {
   }
 }
 
+const DEFAULT_CONTACT_MOBILE_FIELDS = [
+  { label: "First name", placeholder: "First name", type: "text" },
+  { label: "Last name", placeholder: "Last name", type: "text" },
+  { label: "Company name", placeholder: "Company name", type: "text" },
+  { label: "Job title", placeholder: "Job title", type: "text" },
+  { label: "Business Email", placeholder: "Business Email", type: "email" },
+  { label: "Phone number", placeholder: "Phone number", type: "tel" },
+];
+
 function ContactFormMobile({ data }: { data?: any }) {
   const [activeTrackId, setActiveTrackId] = useState<TrackId>("sales");
   const [subscribed, setSubscribed] = useState(false);
@@ -875,21 +885,28 @@ function ContactFormMobile({ data }: { data?: any }) {
     (f: any) => f.field_type === "textarea",
   );
 
-  // Build input fields from Strapi data where available
+  // Build input fields from Strapi data where available (with defaults)
   const mergedFields = FORM_FIELDS.map((fallback, index) => {
     const remote = strapiInputFields[index];
-    if (!remote) return { ...fallback, label: "", placeholder: "", analyticsId: CONTACT_INPUT_IDS[index] };
+    const defaultField = DEFAULT_CONTACT_MOBILE_FIELDS[index] || {
+      label: `Field ${index + 1}`,
+      placeholder: "",
+      type: "text",
+    };
+    const isEmailField = remote ? mapInputTypeMobile(remote.field_type) === "email" : defaultField.type === "email";
+    const label = isEmailField ? "Business Email" : (remote?.label || defaultField.label);
+    const placeholder = isEmailField ? "Business Email" : (remote?.placeholder || defaultField.placeholder);
     return {
-      label: remote.label || "",
-      placeholder: remote.placeholder || "",
-      type: mapInputTypeMobile(remote.field_type),
-      analyticsId: getContactFieldId(remote.label, index),
+      label,
+      placeholder,
+      type: remote ? mapInputTypeMobile(remote.field_type) : defaultField.type,
+      analyticsId: getContactFieldId(label, index),
     };
   });
 
   // Bottom textarea from Strapi data
-  const textareaLabel = strapiTextareaField?.label || "";
-  const textareaPlaceholder = strapiTextareaField?.placeholder || "";
+  const textareaLabel = strapiTextareaField?.label || "Message";
+  const textareaPlaceholder = strapiTextareaField?.placeholder || "Tell us about your project...";
 
   const setFieldValue = (label: string, value: string) =>
     setValues((prev) => ({ ...prev, [label]: value }));
@@ -898,15 +915,19 @@ function ContactFormMobile({ data }: { data?: any }) {
     const emailLabel = strapiInputFields.find(
       (f: any) => f.field_type === "email",
     )?.label;
-    if (emailLabel) return (values[emailLabel] || "").trim();
+    if (emailLabel && values[emailLabel]) return values[emailLabel].trim();
     const key = Object.keys(values).find((k) => /e-?mail/i.test(k));
-    return key ? values[key].trim() : "";
+    if (key && values[key]) return values[key].trim();
+    const emailField = mergedFields.find((f) => f.type === "email");
+    if (emailField && values[emailField.label]) return values[emailField.label].trim();
+    return "";
   };
 
   const onSubmit = async () => {
     const email = emailFieldValue();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setError("Please enter a valid email address.");
+    const emailValidation = validateBusinessEmail(email);
+    if (!emailValidation.valid) {
+      setError(emailValidation.error!);
       return;
     }
     setError("");
@@ -1020,6 +1041,11 @@ function ContactFormMobile({ data }: { data?: any }) {
                 onChange={(event) => setFieldValue(field.label, event.target.value)}
                 className={`${interRegular.className} h-[44px] w-full border-[0.5px] border-solid border-[#4a4a4a] bg-transparent px-[12px] text-[14px] font-normal text-white outline-none placeholder:text-[#4a4a4a] not-italic`}
               />
+              {field.type === "email" && (
+                <p className={`${interRegular.className} text-[11px] leading-[15px] text-[#a4a4a4] not-italic`}>
+                  {WORK_EMAIL_HELP_TEXT}
+                </p>
+              )}
             </div>
           ))}
 

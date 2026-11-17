@@ -1,6 +1,7 @@
 import { NextResponse, after } from "next/server";
 import { addContactAndTag } from "@/lib/mailchimp";
 import { sendSubmissionMail, type MailField } from "@/lib/notify-mail";
+import { validateBusinessEmail } from "@/lib/business-email";
 
 /**
  * src/app/api/newsletter/route.ts
@@ -109,7 +110,13 @@ export async function POST(req: Request): Promise<Response> {
         .map((t) => t.trim().toLowerCase())
     : undefined;
 
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  const isLeadForm = formKey !== "newsletter";
+  if (isLeadForm) {
+    const emailValidation = validateBusinessEmail(email);
+    if (!emailValidation.valid) {
+      return bad(emailValidation.error!);
+    }
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return bad("Please enter a valid email address.");
   }
 

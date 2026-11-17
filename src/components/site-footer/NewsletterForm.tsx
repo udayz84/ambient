@@ -42,7 +42,7 @@ export function NewsletterForm({
       className={`${isCompact ? "mt-[20px]" : "mt-[34px]"} flex w-full max-w-[353px] md:max-w-[458px] flex-row items-center justify-center gap-0`}
     >
       <label className="sr-only" htmlFor="newsletter-email">
-        Email address
+        Business Email
       </label>
       <div
         className={`flex ${isCompact ? "h-[40px]" : "h-[48px]"} flex-1 shrink-0 items-center border-[0.5px] border-solid border-white/50 bg-[#6ced3f]/10 px-[20px]`}

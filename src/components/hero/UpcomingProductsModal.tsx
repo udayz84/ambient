@@ -8,6 +8,7 @@ import { gilroyMedium, interRegular } from "../hero/fonts";
 import { Corners } from "../shared/Corners";
 import { BOX_BORDER } from "../careers/careers-shared";
 import { popupField, type PopupConfig } from "@/lib/popup";
+import { validateBusinessEmail, WORK_EMAIL_HELP_TEXT } from "@/lib/business-email";
 
 const PANEL_BG = "/form.png";
 const SUCCESS_IMG = "/careers/apply-success.webp";
@@ -237,8 +238,7 @@ function FormStep({
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [company, setCompany] = useState("");
-  const [chip, setChip] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const pathname = usePathname();
@@ -329,6 +329,13 @@ function FormStep({
     e.preventDefault();
     if (isSubmitting) return;
 
+    const emailValidation = validateBusinessEmail(email);
+    if (!emailValidation.valid) {
+      setEmailError(emailValidation.error!);
+      return;
+    }
+    setEmailError("");
+
     setIsSubmitting(true);
 
     // If a PDF or ZIP is provided, trigger download immediately within the user gesture context
@@ -392,7 +399,7 @@ function FormStep({
         }
       }
 
-      await fetch("/api/newsletter", {
+      const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -400,16 +407,21 @@ function FormStep({
           formKey,
           firstName: firstName || undefined,
           lastName: lastName || undefined,
-          company: company || undefined,
-          details: chip || undefined,
           product: resolvedVariant,
           variant: isSom ? somVariant : undefined,
           popupId: config?.documentId,
           tags: tags?.length ? tags : undefined,
         }),
-      }).catch(() => { /* Mailchimp sync failure is non-blocking */ });
+      });
+
+      if (!res.ok) {
+        const json = await res.json().catch(() => null);
+        throw new Error(json?.error || "Submission failed. Please try again.");
+      }
 
       onSuccess(resolvedVariant);
+    } catch (err) {
+      setEmailError(err instanceof Error ? err.message : "Submission failed. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -497,122 +509,29 @@ function FormStep({
           </Field>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-[18px]">
-          <Field label={popupField(config, "email")?.label ?? "Email ID*"} className="min-w-0 flex-1">
-            <input
-              id={emailId}
-              data-analytics-id={emailId}
-              type="email"
-              className={FIELD_BOX}
-              placeholder={popupField(config, "email")?.placeholder ?? "Enter Your Email ID"}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </Field>
-          <Field label={popupField(config, "company")?.label ?? "Company*"} className="min-w-0 flex-1">
-            <input
-              id={companyId}
-              data-analytics-id={companyId}
-              className={FIELD_BOX}
-              placeholder={popupField(config, "company")?.placeholder ?? "Enter Company Name"}
-              value={company}
-              onChange={(e) => setCompany(e.target.value)}
-              required
-            />
-          </Field>
-        </div>
-
-        {isSom && !hideVariantDropdown && (
-          <Field label="Module Variant*" className="w-full">
-            <div className="relative h-[42px] w-full border-[0.5px] border-solid border-[#4a4a4a] bg-transparent focus-within:border-[rgba(255,255,255,0.5)]">
-              <select
-                id={variantId}
-                data-analytics-id={variantId}
-                className={`${interRegular.className} h-full w-full appearance-none bg-transparent px-[12px] pr-[40px] text-[14px] leading-[21px] font-normal text-white outline-none not-italic cursor-pointer`}
-                value={somVariant}
-                onChange={(e) => setSomVariant(e.target.value as "BLE" | "LTE")}
-                required
-              >
-                <option value="BLE" className="bg-[#121212] text-white">
-                  BLE
-                </option>
-                <option value="LTE" className="bg-[#121212] text-white">
-                  LTE
-                </option>
-              </select>
-              <img
-                loading="lazy"
-                decoding="async"
-                src="/careers/chevron-down.svg"
-                alt=""
-                width={24}
-                height={24}
-                className="pointer-events-none absolute right-[9px] top-1/2 size-[24px] -translate-y-1/2"
-                aria-hidden
-              />
-            </div>
-          </Field>
-        )}
-
-        <Field
-          label={
-            popupField(config, "details")?.label ??
-            (formContext === "usecase" || formContext === "evalkit" || formContext === "hardware-design"
-              ? "Please briefly describe your use case*"
-              : isSom
-              ? "Please describe your intended application*"
-              : formContext === "case-study"
-              ? "Please describe your use case*"
-              : formContext === "waitlist"
-              ? "Tell Us About Your Project Or Interest*"
-              : formContext === "docs"
-              ? "What is your primary development focus or project?*"
-              : "Which chip are you looking for?*")
-          }
-        >
-          <p className="text-[12px] leading-[18px] text-[#a4a4a4] mb-[8px]">
-            {popupField(config, "details")?.helper_text ??
-              (formContext === "usecase"
-                ? "Explain your use case and our team will get in touch with you."
-                : formContext === "evalkit"
-                ? "Tell us a bit about your project or use case for the evaluation kit."
-                : formContext === "hardware-design"
-                ? "Tell us about your hardware design requirements and what you're building."
-                : formContext === "sdk"
-                ? "Tell us about the project you're building with our SDK."
-                : isSom
-                ? `Tell us about the project you're building with our SOM (${somVariant}).`
-                : formContext === "case-study"
-                ? "Tell us what you're building the full case study PDF downloads right after you submit."
-                : formContext === "waitlist"
-                ? "Share a few details about what you're building or hoping to deploy."
-                : formContext === "docs"
-                ? "Tell us about what you are building or looking to evaluate."
-                : "These are the upcoming chips we are providing. We just want to know which chip you are looking for.")}
-          </p>
+        <Field label="Business Email*" className="w-full">
           <input
-            id={detailsId}
-            data-analytics-id={detailsId}
+            id={emailId}
+            data-analytics-id={emailId}
+            type="email"
             className={FIELD_BOX}
-            placeholder={
-              popupField(config, "details")?.placeholder ??
-              (formContext === "usecase" || formContext === "evalkit" || formContext === "hardware-design"
-                ? "Describe your project or use case"
-                : isSom
-                ? "Describe your intended application"
-                : formContext === "case-study"
-                ? "Describe your use case"
-                : formContext === "waitlist"
-                ? "Describe your project or use case"
-                : formContext === "docs"
-                ? "e.g. Edge AI audio sensing, neural network compilation, custom EVK"
-                : "Enter chip name")
-            }
-            value={chip}
-            onChange={(e) => setChip(e.target.value)}
+            placeholder="Enter Your Business Email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              if (emailError) setEmailError("");
+            }}
             required
           />
+          {emailError ? (
+            <p className={`${interRegular.className} mt-[4px] text-[11px] leading-[15px] text-[#ff6b6b] not-italic`} role="alert">
+              {emailError}
+            </p>
+          ) : (
+            <p className={`${interRegular.className} mt-[4px] text-[11px] leading-[15px] text-[#a4a4a4] not-italic`}>
+              {WORK_EMAIL_HELP_TEXT}
+            </p>
+          )}
         </Field>
 
         <div className="pt-[8px]">

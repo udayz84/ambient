@@ -6,6 +6,7 @@ import { gilroyMedium, gilroySemiBold, interRegular } from "../hero/fonts";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { PRIMARY_CTA_INSET, PRIMARY_CTA_SHADOW } from "./model-zoo-data";
 import { popupField, type PopupConfig } from "@/lib/popup";
+import { validateBusinessEmail, WORK_EMAIL_HELP_TEXT } from "@/lib/business-email";
 
 const MODEL_FORGE_ZIP_URL =
   "https://ambientwebasset.blob.core.windows.net/website-assets/Model_Forge_1.0.0.zip";
@@ -51,8 +52,6 @@ export function ModelZooRequestForm({ onClose, config }: { onClose: () => void; 
     firstName: "",
     lastName: "",
     email: "",
-    company: "",
-    applications: "",
   });
   const [consent, setConsent] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -73,6 +72,12 @@ export function ModelZooRequestForm({ onClose, config }: { onClose: () => void; 
     e.preventDefault();
     setError("");
 
+    const emailValidation = validateBusinessEmail(values.email);
+    if (!emailValidation.valid) {
+      setError(emailValidation.error!);
+      return;
+    }
+
     setLoading(true);
     try {
       const fullName = `${values.firstName.trim()} ${values.lastName.trim()}`.trim();
@@ -84,15 +89,13 @@ export function ModelZooRequestForm({ onClose, config }: { onClose: () => void; 
           track: "sales",
           popupId: config?.documentId,
           email: values.email.trim(),
-          message: values.applications.trim(),
+          message: "",
           subscribed: consent,
           fields: {
             "Full name": fullName,
             "First name": values.firstName.trim(),
             "Last name": values.lastName.trim(),
             "Company Email ID": values.email.trim(),
-            Company: values.company.trim(),
-            "What are the applications are you looking for?": values.applications.trim(),
             Source: "Model Zoo request",
           },
         }),
@@ -193,43 +196,29 @@ export function ModelZooRequestForm({ onClose, config }: { onClose: () => void; 
               </Field>
             </div>
 
-            {/* Company Email ID + Company */}
-            <div className="flex w-full flex-col gap-[16px] min-[560px]:flex-row min-[560px]:gap-[18px]">
-              <Field label={popupField(config, "email")?.label ?? "Company Email ID*"} htmlFor="mz-email" className="min-[560px]:flex-1">
-                <input
-                  id="mz-email"
-                  type="email"
-                  required
-                  value={values.email}
-                  onChange={set("email")}
-                  placeholder={popupField(config, "email")?.placeholder ?? "Enter Company Email ID"}
-                  className={`${INPUT_CLS} ${interRegular.className} h-[42px] w-full text-[14px] leading-[21px] text-white outline-none placeholder:text-[#4a4a4a] not-italic`}
-                />
-              </Field>
-              <Field label={popupField(config, "company")?.label ?? "Company*"} htmlFor="mz-company" className="min-[560px]:flex-1">
-                <input
-                  id="mz-company"
-                  type="text"
-                  required
-                  value={values.company}
-                  onChange={set("company")}
-                  placeholder={popupField(config, "company")?.placeholder ?? "Enter Company Name"}
-                  className={`${INPUT_CLS} ${interRegular.className} h-[42px] w-full text-[14px] leading-[21px] text-white outline-none placeholder:text-[#4a4a4a] not-italic`}
-                />
-              </Field>
-            </div>
-
-            {/* What are the applications are you looking for? */}
-            <Field label={popupField(config, "notes")?.label ?? "What are the applications are you looking for?*"} htmlFor="mz-applications">
-              <textarea
-                id="mz-applications"
-                rows={3}
+            {/* Business Email */}
+            <Field label="Business Email*" htmlFor="mz-email" className="w-full">
+              <input
+                id="mz-email"
+                type="email"
                 required
-                value={values.applications}
-                onChange={set("applications")}
-                placeholder={popupField(config, "notes")?.placeholder ?? "Enter the applications you are looking for"}
-                className={`${INPUT_CLS} ${interRegular.className} h-[80px] min-[560px]:h-[90px] w-full resize-none text-[14px] leading-[21px] text-white outline-none placeholder:text-[#4a4a4a] not-italic`}
+                value={values.email}
+                onChange={(e) => {
+                  set("email")(e);
+                  if (error) setError("");
+                }}
+                placeholder="Enter Business Email"
+                className={`${INPUT_CLS} ${interRegular.className} h-[42px] w-full text-[14px] leading-[21px] text-white outline-none placeholder:text-[#4a4a4a] not-italic`}
               />
+              {error ? (
+                <p className={`${interRegular.className} text-[11px] leading-[15px] text-[#ff6b6b] not-italic`} role="alert">
+                  {error}
+                </p>
+              ) : (
+                <p className={`${interRegular.className} text-[11px] leading-[15px] text-[#a4a4a4] not-italic`}>
+                  {WORK_EMAIL_HELP_TEXT}
+                </p>
+              )}
             </Field>
 
             {/* Consent + Submit — 5428:8638 */}
@@ -277,7 +266,7 @@ export function ModelZooRequestForm({ onClose, config }: { onClose: () => void; 
               </button>
             </div>
 
-            {error ? (
+            {error && error !== WORK_EMAIL_HELP_TEXT && error !== "Please enter a valid email address." ? (
               <p className={`${interRegular.className} text-[12px] leading-[18px] text-red-500 not-italic`} role="alert">
                 {error}
               </p>
