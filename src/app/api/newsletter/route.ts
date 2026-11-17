@@ -110,14 +110,9 @@ export async function POST(req: Request): Promise<Response> {
         .map((t) => t.trim().toLowerCase())
     : undefined;
 
-  const isLeadForm = formKey !== "newsletter";
-  if (isLeadForm) {
-    const emailValidation = validateBusinessEmail(email);
-    if (!emailValidation.valid) {
-      return bad(emailValidation.error!);
-    }
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return bad("Please enter a valid email address.");
+  const emailValidation = validateBusinessEmail(email);
+  if (!emailValidation.valid) {
+    return bad(emailValidation.error!);
   }
 
   // Deduplicate rapid repeat submissions within 30 seconds

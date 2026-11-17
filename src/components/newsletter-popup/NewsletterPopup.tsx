@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { gilroySemiBold, interLight, interRegular } from "../hero/fonts";
 import { GreenCtaCorners } from "../shared/GreenCtaCorners";
 import { popupField, type PopupConfig } from "@/lib/popup";
+import { validateBusinessEmail, WORK_EMAIL_HELP_TEXT } from "@/lib/business-email";
 import {
   getHasCookieConsentSnapshot,
   subscribeCookieConsent,
@@ -22,6 +23,8 @@ const SUBSCRIBED_KEY = "newsletter-popup-subscribed";
 export function NewsletterPopup({ config }: { config?: PopupConfig }) {
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   // CMS copy from the footer relation; null = hardcoded fallbacks.
 
   useEffect(() => {
@@ -85,18 +88,19 @@ export function NewsletterPopup({ config }: { config?: PopupConfig }) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Native email/required validation — blocks submit + shows the browser
-    // message for invalid input.
     if (!e.currentTarget.reportValidity()) return;
     const formData = new FormData(e.currentTarget);
     const email = String(formData.get("email") ?? "").trim();
     if (!email) return;
 
-    localStorage.setItem(SUBSCRIBED_KEY, "1");
-    // Show the thank-you note, then auto-dismiss.
-    setSubmitted(true);
+    const emailValidation = validateBusinessEmail(email);
+    if (!emailValidation.valid) {
+      setError(emailValidation.error!);
+      return;
+    }
+    setError("");
+    setLoading(true);
 
-    // Sync to Mailchimp via server-side API (fire-and-forget)
     fetch("/api/newsletter", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -106,7 +110,21 @@ export function NewsletterPopup({ config }: { config?: PopupConfig }) {
         source: "newsletter-popup",
         popupId: config?.documentId,
       }),
-    }).catch(() => { /* silently ignore — submission is already shown as successful */ });
+    })
+      .then(async (res) => {
+        if (!res.ok) {
+          const json = await res.json().catch(() => null);
+          throw new Error(json?.error || "Submission failed. Please try again.");
+        }
+        localStorage.setItem(SUBSCRIBED_KEY, "1");
+        setSubmitted(true);
+      })
+      .catch((err) => {
+        setError(err instanceof Error ? err.message : "Submission failed. Please try again.");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -121,12 +139,12 @@ export function NewsletterPopup({ config }: { config?: PopupConfig }) {
   return createPortal(
     <section
       aria-label="Newsletter signup"
-      className="fixed bottom-[24px] right-[24px] z-[100] h-[196px] w-[450px] max-w-[calc(100vw-48px)] animate-popup-rise-in border-[0.5px] border-solid border-[rgba(240,240,240,0.3)] bg-[#141414] max-[767px]:right-[16px] max-[767px]:bottom-[16px] max-[767px]:w-[calc(100vw-32px)] max-[767px]:max-w-none max-[767px]:h-auto max-[767px]:py-[20px]"
+      className="fixed bottom-[24px] right-[24px] z-[100] h-auto min-h-[220px] w-[450px] max-w-[calc(100vw-48px)] animate-popup-rise-in border-[0.5px] border-solid border-[rgba(240,240,240,0.3)] bg-[#141414] p-[20px] max-[767px]:right-[16px] max-[767px]:bottom-[16px] max-[767px]:w-[calc(100vw-32px)] max-[767px]:max-w-none"
       data-node-id="5558:8442"
       data-name="Newsletter popup"
     >
       <div
-        className="absolute top-1/2 left-1/2 flex w-[410px] -translate-x-1/2 -translate-y-1/2 flex-col items-start gap-[12px] max-[767px]:static max-[767px]:w-full max-[767px]:translate-x-0 max-[767px]:translate-y-0 max-[767px]:px-[20px]"
+        className="flex w-full flex-col items-start gap-[12px]"
         data-node-id="5558:8501"
         data-name="Frame 2147240901"
       >
@@ -191,11 +209,15 @@ export function NewsletterPopup({ config }: { config?: PopupConfig }) {
               type="email"
               required
               placeholder={popupField(config, "email")?.placeholder ?? "Enter Your Business Email"}
+              onChange={() => {
+                if (error) setError("");
+              }}
               className={`${interRegular.className} w-full border-0 bg-transparent text-[14px] leading-[21px] text-white outline-none placeholder:text-[#4a4a4a]`}
             />
           </div>
           <button
             type="submit"
+            disabled={loading}
             className={`${gilroySemiBold.className} relative block h-[48px] w-[140px] shrink-0 cursor-pointer overflow-hidden text-[14px] leading-[normal] whitespace-nowrap text-white uppercase not-italic ${GREEN_CTA_SHADOW}`}
             data-node-id="5558:8469"
             data-name="Cta"
@@ -208,7 +230,7 @@ export function NewsletterPopup({ config }: { config?: PopupConfig }) {
               className="absolute top-[calc(50%-9px)] left-1/2 flex w-full -translate-x-1/2 items-center justify-center"
               data-node-id="5558:8470"
             >
-              Submit
+              {loading ? "Submitting..." : "Submit"}
             </span>
             <GreenCtaCorners disableDots />
             <span
@@ -217,6 +239,16 @@ export function NewsletterPopup({ config }: { config?: PopupConfig }) {
             />
           </button>
         </form>
+
+        {error ? (
+          <p className={`${interRegular.className} w-[410px] max-w-full text-[11px] leading-[15px] text-[#ff6b6b] not-italic`} role="alert">
+            {error}
+          </p>
+        ) : (
+          <p className={`${interRegular.className} w-[410px] max-w-full text-[11px] leading-[15px] text-[#a4a4a4] not-italic`}>
+            {WORK_EMAIL_HELP_TEXT}
+          </p>
+        )}
 
         <p
           className={`${interLight.className} w-[410px] max-w-full text-[10px] leading-[15px] font-light text-[#e8e8e8] not-italic [word-break:break-word]`}
