@@ -323,9 +323,9 @@ export function ContactForm({ data }: { data?: any }) {
           label={textareaLabel}
           placeholder={textareaPlaceholder}
           left={16}
-          top={350}
+          top={360}
           width={560}
-          height={132}
+          height={122}
           multiline
           nodeId="2379:8561"
           analyticsId="contact_page_message_form_field_message"
@@ -554,7 +554,12 @@ function FormField({
   return (
     <div
       className="absolute flex flex-col gap-[5px]"
-      style={{ left, top, width, height }}
+      style={{
+        left,
+        top,
+        width,
+        height: multiline ? height : inputType === "email" ? 94 : 65,
+      }}
       data-node-id={nodeId}
       data-name="Input Field"
     >
@@ -564,8 +569,8 @@ function FormField({
       >
         {label}
       </label>
-      <div className="flex min-h-0 flex-1 items-start border-[0.5px] border-solid border-[#4a4a4a] p-[12px]">
-        {multiline ? (
+      {multiline ? (
+        <div className="flex min-h-0 flex-1 items-start border-[0.5px] border-solid border-[#4a4a4a] p-[12px]">
           <textarea
             id={fieldId}
             data-analytics-id={analyticsId}
@@ -575,7 +580,9 @@ function FormField({
             onChange={(event) => onChange?.(event.target.value)}
             className={`${inputClassName} h-full resize-none`}
           />
-        ) : (
+        </div>
+      ) : (
+        <div className="flex h-[45px] shrink-0 items-center border-[0.5px] border-solid border-[#4a4a4a] px-[12px]">
           <input
             id={fieldId}
             data-analytics-id={analyticsId}
@@ -586,8 +593,8 @@ function FormField({
             onChange={(event) => onChange?.(event.target.value)}
             className={inputClassName}
           />
-        )}
-      </div>
+        </div>
+      )}
       {inputType === "email" && (
         <p className={`${interLight.className} text-[9.5px] leading-[12px] text-[#a4a4a4] not-italic`}>
           {WORK_EMAIL_HELP_TEXT}

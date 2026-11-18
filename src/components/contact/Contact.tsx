@@ -34,25 +34,6 @@ export function Contact({
             {data?.map && <ContactMap data={data.map} />}
             {data?.schedule && <ContactSchedule data={data.schedule} bookingForm={bookingForm} />}
             {data?.form && <ContactForm data={data.form} />}
-
-            <div
-              className="pointer-events-none absolute right-[269.72px] size-[4px]"
-              style={{ top: 3116 }}
-            >
-              <div className="-scale-y-100 rotate-180 flex-none">
-                <div className="relative size-[4px]" data-node-id="2379:5085">
-                  <div className="absolute inset-[0_0_-12.5%_-12.5%]">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img loading="lazy" decoding="async"
-                      alt=""
-                      className="block size-full max-w-none"
-                      src="/hero/corner-tag-2.svg"
-                      aria-hidden
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </TabletScaleCanvas>
       </div>
