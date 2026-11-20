@@ -121,6 +121,7 @@ export function DeveloperModelZoo({ data }: { data?: any }) {
 
   return (
     <div
+      id="developer-model-zoo"
       className="absolute overflow-clip bg-black"
       style={{
         left: 0,

@@ -69,7 +69,8 @@ export function LatestNews({ data }: { data?: any }) {
   const fitRef = useFitText<HTMLHeadingElement>({ maxLines: 2 });
   return (
     <section
-      className="relative mt-[40px] min-[600px]:mt-[150px] flex w-full justify-center overflow-x-clip bg-black"
+      id="home-latest-news"
+      className="relative mt-[40px] min-[600px]:mt-[150px] flex w-full justify-center overflow-x-clip bg-black scroll-mt-[90px]"
       aria-label="Latest from Ambient"
       data-node-id="2379:1283"
     >

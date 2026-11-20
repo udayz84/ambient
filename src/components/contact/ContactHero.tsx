@@ -35,6 +35,7 @@ export function ContactHero({ data }: { data?: any }) {
       </div>
 
       <div
+        id="contact-hero"
         className="absolute top-[171px] left-[118px] z-10 flex w-[306px] flex-col items-center"
         data-node-id="2379:4952"
         data-name="Section Title"

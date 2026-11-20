@@ -343,6 +343,7 @@ export function ModelZooLibrary({ requestForm }: { requestForm?: PopupConfig }) 
 
   return (
     <section
+      id="model-zoo-library"
       className="relative mt-[60px] w-full overflow-x-clip bg-black"
       data-node-id="5130:8356"
       aria-label="A model for every sense"

@@ -14,6 +14,7 @@ export function PartnersFooterCtas({ content }: { content: FooterCtasContent }) 
 
   return (
     <section
+      id="partners-footer-ctas"
       ref={fadeRef}
       className={`relative z-20 mb-0 pb-[20px] min-[600px]:pb-0 min-[600px]:[margin-bottom:calc(-400px*var(--tablet-zoom,1))] mx-auto flex w-full justify-center ${fadeCls} transform-gpu bg-transparent`}
       aria-label="Partners next steps"

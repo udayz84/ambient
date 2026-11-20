@@ -112,6 +112,7 @@ export function PartnersCapabilities({
 
   return (
     <section
+      id="partners-capabilities"
       ref={fadeRef}
       className={`relative mx-auto flex w-full justify-center ${fadeCls} transform-gpu`}
       aria-label="The ecosystem, by capability"

@@ -74,7 +74,8 @@ export function Applications({ data }: { data?: any }) {
 
   return (
     <section
-      className="relative flex w-full justify-center overflow-hidden bg-black"
+      id="home-applications"
+      className="relative flex w-full justify-center overflow-hidden bg-black scroll-mt-[90px]"
       aria-label="Build the impossible today"
     >
       <TabletScaleCanvas className="relative mx-auto hidden h-[868px] w-[1440px] shrink-0 min-[600px]:block">

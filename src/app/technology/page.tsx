@@ -51,17 +51,33 @@ export default async function TechnologyPage() {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       <TabletScaleInit />
-      <TechnologyPageHero data={data?.hero} config={data?.brief_form} />
-      <TechnologyPageProblem data={data?.problem} />
-      <TechnologyPageArchitecture
-        data={data?.architecture}
-        pillarsData={data?.pillars}
-      />
-      <TechnologyPageModes data={data?.modes} />
-      <TechnologyPageGraph data={data?.graph} />
-      <TechnologyPageEfficiency data={data?.efficiency} />
-      <TechnologyPageSilicon data={data?.silicon} />
-      <TechnologyPageBottomCta data={data?.bottom_cta} config={data?.brief_form} />
+      <div id="technology-hero" className="scroll-mt-[90px]">
+        <TechnologyPageHero data={data?.hero} config={data?.brief_form} />
+      </div>
+      <div id="technology-problem" className="scroll-mt-[90px]">
+        <TechnologyPageProblem data={data?.problem} />
+      </div>
+      <div id="technology-architecture" className="scroll-mt-[90px]">
+        <TechnologyPageArchitecture
+          data={data?.architecture}
+          pillarsData={data?.pillars}
+        />
+      </div>
+      <div id="technology-modes" className="scroll-mt-[90px]">
+        <TechnologyPageModes data={data?.modes} />
+      </div>
+      <div id="technology-graph" className="scroll-mt-[90px]">
+        <TechnologyPageGraph data={data?.graph} />
+      </div>
+      <div id="technology-efficiency" className="scroll-mt-[90px]">
+        <TechnologyPageEfficiency data={data?.efficiency} />
+      </div>
+      <div id="technology-silicon" className="scroll-mt-[90px]">
+        <TechnologyPageSilicon data={data?.silicon} />
+      </div>
+      <div id="technology-bottom-cta" className="scroll-mt-[90px]">
+        <TechnologyPageBottomCta data={data?.bottom_cta} config={data?.brief_form} />
+      </div>
     </main>
   );
 }

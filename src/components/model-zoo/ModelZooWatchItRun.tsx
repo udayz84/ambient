@@ -117,6 +117,7 @@ const CARDS: WatchCard[] = [
 export function ModelZooWatchItRun() {
   return (
     <section
+      id="model-zoo-watch-it-run"
       className="relative w-full overflow-hidden bg-black"
       data-node-id="5130:8367"
       data-name="SOM Ecosystem"

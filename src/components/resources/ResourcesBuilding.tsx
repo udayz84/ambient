@@ -24,6 +24,7 @@ export function ResourcesBuilding({ data }: ResourcesBuildingProps = {}) {
 
   return (
     <section
+      id="resources-building"
       className="absolute top-[1499px] left-1/2 h-[513px] w-[1440px] -translate-x-1/2 overflow-hidden"
       aria-label="Building with Ambient"
       data-node-id="2379:1606"

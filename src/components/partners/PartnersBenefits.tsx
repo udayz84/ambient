@@ -14,6 +14,7 @@ export function PartnersBenefits({ content }: { content: BenefitsContent }) {
 
   return (
     <section
+      id="partners-benefits"
       ref={fadeRef}
       className={`relative mx-auto flex w-full justify-center ${fadeCls} transform-gpu overflow-hidden`}
       aria-label="Why build with a partner"

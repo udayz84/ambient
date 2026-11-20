@@ -99,6 +99,7 @@ export function DeveloperCodeSection({ data }: { data?: any }) {
 
   return (
     <div
+      id="developer-code"
       className="absolute flex flex-col items-center gap-[36px]"
       style={{ left: 119, top: 671, width: 1204 }}
       data-node-id="2640:1215"

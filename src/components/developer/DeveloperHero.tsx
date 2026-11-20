@@ -56,6 +56,7 @@ export function DeveloperHero({ data, briefForm }: { data?: any; briefForm?: any
 
       {/* Hero content — 2438:4563 (100, 240 / 549×248) */}
       <div
+        id="developer-hero"
         className="absolute z-10"
         style={{ left: 100, top: 240, width: 549, height: 248 }}
         data-node-id="2438:4563"

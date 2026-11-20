@@ -129,6 +129,7 @@ export function ResourcesContent({
 
   return (
     <section
+      id="resources-content"
       className="absolute top-[2026px] left-1/2 flex w-[1244px] -translate-x-1/2 flex-col items-center gap-[60px]"
       aria-label="Resource library"
       data-node-id="2379:1772"

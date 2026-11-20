@@ -59,6 +59,7 @@ export function ContactMap({ data }: { data?: any }) {
 
   return (
     <section
+      id="contact-map"
       className="absolute top-[1215px] left-1/2 z-10 h-[1001px] w-[100vw] max-w-none -translate-x-1/2"
       data-node-id="2379:5086"
       aria-label="Global offices"

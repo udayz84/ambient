@@ -7,7 +7,8 @@ import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 export function DeveloperPlatform({ data }: { data?: any }) {
   return (
     <section
-      className="relative isolate left-1/2 mt-[30px] w-screen max-w-none -translate-x-1/2 overflow-hidden bg-[#214c32] max-[599px]:mt-0"
+      id="home-developer-platform"
+      className="relative isolate left-1/2 mt-[30px] w-screen max-w-none -translate-x-1/2 overflow-hidden bg-[#214c32] max-[599px]:mt-0 scroll-mt-[90px]"
       aria-label="Developer platform"
       data-node-id="2379:964"
       data-name="Desktop - 3"

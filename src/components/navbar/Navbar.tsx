@@ -417,6 +417,7 @@ export function Navbar({
 
   return (
     <header
+      id="site-header"
       className={`${interMedium.className} sticky top-0 z-50 h-[78px] w-full drop-shadow-[0px_6px_12px_rgba(83,216,36,0.12)]`}
       data-node-id="2379:1569"
     >

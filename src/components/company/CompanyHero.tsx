@@ -26,6 +26,7 @@ export function CompanyHero({ data }: CompanyHeroProps = {}) {
 
   return (
     <section
+      id="company-hero"
       className="relative flex h-[787px] w-full justify-center overflow-hidden bg-black"
       data-node-id="2379:2135"
       data-name="Hero Section"

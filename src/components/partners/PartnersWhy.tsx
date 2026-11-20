@@ -201,6 +201,7 @@ export function PartnersWhy({ content }: { content: WhyContent }) {
 
   return (
     <section
+      id="partners-why"
       ref={fadeRef}
       className={`relative mx-auto flex w-full justify-center ${fadeCls} transform-gpu overflow-hidden`}
       aria-label="A production AI product is a full-stack challenge"

@@ -59,17 +59,17 @@ export default async function SomPage() {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       <TabletScaleInit />
-      <SomHero data={data?.hero} />
-      <SomFeatures data={data?.features} />
-      <SomFamily data={data?.family} />
-      <SomOneModule data={data?.one_module} />
+      <div id="som-hero" className="scroll-mt-[90px]"><SomHero data={data?.hero} /></div>
+      <div id="som-features" className="scroll-mt-[90px]"><SomFeatures data={data?.features} /></div>
+      <div id="som-family" className="scroll-mt-[90px]"><SomFamily data={data?.family} /></div>
+      <div id="som-one-module" className="scroll-mt-[90px]"><SomOneModule data={data?.one_module} /></div>
       {/* <SomEcosystem data={data?.ecosystem} /> */}
 
-      <SomIntelligence data={data?.intelligence} />
+      <div id="som-intelligence" className="scroll-mt-[90px]"><SomIntelligence data={data?.intelligence} /></div>
       <SomDeployPath data={data?.deploy_path} />
       {/* <SomProvenCore /> */}
-      <SomReadyToDeploy data={data?.ready_to_deploy} />
-      <SomFooterMerge data={data?.footer_merge} />
+      <div id="som-ready-to-deploy" className="scroll-mt-[90px]"><SomReadyToDeploy data={data?.ready_to_deploy} /></div>
+      <div id="som-footer-merge" className="scroll-mt-[90px]"><SomFooterMerge data={data?.footer_merge} /></div>
     </main>
   );
 }

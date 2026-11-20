@@ -32,6 +32,7 @@ function scrollToAppForge() {
 export function ModelZooHero() {
   return (
     <div
+      id="model-zoo-hero"
       className="relative mx-auto -mt-[78px] w-full overflow-x-clip bg-black"
       data-node-id="5387:7822"
       data-name="Hero Section"

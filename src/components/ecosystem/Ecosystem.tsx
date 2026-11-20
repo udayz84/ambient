@@ -6,7 +6,8 @@ import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 export function Ecosystem({ data }: { data?: any }) {
   return (
     <section
-      className="relative mx-auto mt-[80px] w-full overflow-hidden bg-black max-[599px]:mt-[24px]"
+      id="home-ecosystem"
+      className="relative mx-auto mt-[80px] w-full overflow-hidden bg-black max-[599px]:mt-[24px] scroll-mt-[90px]"
       aria-label="Supported by a growing ecosystem"
       data-node-id="2379:1026"
     >

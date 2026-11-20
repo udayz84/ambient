@@ -68,6 +68,7 @@ export function CompanyTechnologyPartners({ data }: CompanyTechnologyPartnersPro
 
   return (
     <section
+      id="company-tech-partners"
       className="absolute top-[4584px] left-[118px] z-[8] h-[285px] w-[1204px] bg-black"
       data-node-id="2379:4669"
       data-name="Frame 1618875819"

@@ -93,6 +93,7 @@ export function CompanyMission({ data }: CompanyMissionProps = {}) {
 
   return (
     <section
+      id="company-mission"
       className="relative flex w-full justify-center shrink-0 bg-black"
       data-node-id="2379:4750"
       data-name="Frame 1984079419"

@@ -31,6 +31,7 @@ export function CareersDna({ data }: { data?: any }) {
 
   return (
     <section
+      id="careers-dna"
       className="absolute top-[1379px] left-1/2 z-10 h-[950px] w-full -translate-x-1/2 overflow-hidden"
       data-node-id="2379:8843"
       aria-label="Driven by physics. Defined by our DNA."

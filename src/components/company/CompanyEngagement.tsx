@@ -30,11 +30,11 @@ export function CompanyEngagement({ data, joinTeam }: CompanyEngagementProps) {
       : COMPANY_ENGAGEMENT_CARDS.map((c) => ({ ...c, strapi: null }));
 
   return (
-    <div
+    <section
+      id="company-engagement"
       className="absolute top-[5991px] left-[120px] z-[9] flex h-auto w-[1200px] flex-col gap-[48px]"
       data-node-id="2379:4834"
       data-name="Frame 1984079463"
-      role="region"
       aria-label="Join our team and partnerships"
     >
       <div className="flex flex-col items-center text-center gap-[16px] max-w-[800px] mx-auto">
@@ -77,6 +77,6 @@ export function CompanyEngagement({ data, joinTeam }: CompanyEngagementProps) {
         ))}
       </div>
       </div>
-    </div>
+    </section>
   );
 }

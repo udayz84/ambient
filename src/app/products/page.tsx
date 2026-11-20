@@ -126,25 +126,27 @@ export default async function ProductsPage() {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       <TabletScaleInit />
-      <ProductsHero data={data?.hero} evalkitForm={data?.evalkit_form} />
+      <div id="products-hero" className="scroll-mt-[90px]"><ProductsHero data={data?.hero} evalkitForm={data?.evalkit_form} /></div>
       <ProductsStickyNav items={stickyItems} />
       <div id="features"><ProductsFeatures data={data?.features} /></div>
       <div id="always-on"><ProductsAlwaysOn data={data?.always_on} /></div>
       <div id="metrics" className="scroll-mt-[90px]"><div id="datasheet" className="scroll-mt-[90px]"><ProductsMeasured data={data?.measured} formConfig={data?.brief_form} /></div></div>
       <div id="case-studies" className="scroll-mt-[90px]"><ApplicationsPageWins data={winsData || data?.case_studies} /></div>
       <div id="use-cases"><ProductsUseCases data={data?.use_cases} formConfig={data?.usecase_form} /></div>
-      <ProductsReadyToRun />
+      <div id="products-ready-to-run" className="scroll-mt-[90px]"><ProductsReadyToRun /></div>
       {/* <ProductsAppForge data={data?.appforge} /> */}
-      <ProductsModelForge data={data?.modelforge} formConfig={data?.sdk_form} />
-      <ProductsBenchToVolume data={data?.bench_to_volume} />
+      <div id="products-modelforge" className="scroll-mt-[90px]"><ProductsModelForge data={data?.modelforge} formConfig={data?.sdk_form} /></div>
+      <div id="products-bench-to-volume" className="scroll-mt-[90px]"><ProductsBenchToVolume data={data?.bench_to_volume} /></div>
       <div id="architecture"><ProductsArchitecture data={data?.architecture} /></div>
       {/* <SomFamily data={data?.som_family} /> */}
       <div id="full-picture"><ProductsFullPicture data={data?.full_picture} /></div>
-      <ProductsStartBuilding
-        data={data?.start_building}
-        evalkitForm={data?.evalkit_form}
-        waitlistForm={data?.waitlist_form}
-      />
+      <div id="products-start-building" className="scroll-mt-[90px]">
+        <ProductsStartBuilding
+          data={data?.start_building}
+          evalkitForm={data?.evalkit_form}
+          waitlistForm={data?.waitlist_form}
+        />
+      </div>
     </main>
   );
 }

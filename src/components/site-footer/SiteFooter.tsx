@@ -182,6 +182,7 @@ export function SiteFooter({
 
   return (
     <footer
+      id="site-footer"
       className="relative flex h-auto w-full flex-col justify-start overflow-hidden bg-black lg:block lg:h-[1252px] lg:min-h-0 lg:justify-center"
       data-node-id="2379:784"
       data-name="footer"

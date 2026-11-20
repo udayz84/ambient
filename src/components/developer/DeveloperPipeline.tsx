@@ -289,6 +289,7 @@ export function DeveloperPipeline({ data }: { data?: any }) {
 
   return (
     <div
+      id="developer-pipeline"
       className="absolute"
       style={{ left: 0, top: 1582, width: 1440, height: pipelineHeight, transition: "height 300ms ease-in-out" }}
       data-node-id="4577:11008"

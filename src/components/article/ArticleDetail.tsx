@@ -29,7 +29,7 @@ export function ArticleDetail({ data }: { data: any }) {
     <main className="relative z-10 flex w-full flex-col overflow-x-clip min-h-screen lg:-mb-[409px] border-none">
       <div className="w-full bg-black">
         {/* Breadcrumbs */}
-        <section className="w-full flex justify-start px-[20px] pt-[24px] pb-[16px] min-[1024px]:pt-[32px] min-[1024px]:pb-[24px] max-w-[1200px] mx-auto">
+        <section id="article-nav" className="w-full flex justify-start px-[20px] pt-[24px] pb-[16px] min-[1024px]:pt-[32px] min-[1024px]:pb-[24px] max-w-[1200px] mx-auto scroll-mt-[90px]">
           <nav aria-label="Breadcrumb">
             <ol className={`${interRegular.className} flex flex-wrap items-center gap-[8px] text-[12px] text-white/50 tracking-wider uppercase`}>
               <li>
@@ -55,7 +55,7 @@ export function ArticleDetail({ data }: { data: any }) {
 
         {/* Hero Image */}
         {imageUrl && (
-          <section className="relative w-full mb-[40px] min-[1024px]:mb-[60px] px-[20px] max-w-[1240px] mx-auto">
+          <section id="article-media" className="relative w-full mb-[40px] min-[1024px]:mb-[60px] px-[20px] max-w-[1240px] mx-auto scroll-mt-[90px]">
             <div className="relative w-full aspect-[16/9] min-[1024px]:aspect-[21/9] overflow-hidden rounded-[16px] border border-white/10 bg-white/5">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img loading="lazy" decoding="async" src={imageUrl} alt="" className="w-full h-full object-cover" />
@@ -66,7 +66,7 @@ export function ArticleDetail({ data }: { data: any }) {
         )}
 
         {/* Header Container */}
-        <section className="relative flex w-full flex-col items-center pt-[20px] pb-[40px] min-[1024px]:pt-[40px] min-[1024px]:pb-[60px] px-[20px]">
+        <section id="article-header" className="relative flex w-full flex-col items-center pt-[20px] pb-[40px] min-[1024px]:pt-[40px] min-[1024px]:pb-[60px] px-[20px] scroll-mt-[90px]">
           <div className="w-full flex flex-col items-center text-center">
             <div className="flex items-center gap-[16px] mb-[32px] flex-wrap justify-center">
               {category && (
@@ -95,7 +95,7 @@ export function ArticleDetail({ data }: { data: any }) {
         </section>
 
         {/* Content */}
-        <section className="relative flex w-full justify-center px-[20px] pb-[40px] min-[1024px]:pb-[60px]">
+        <section id="article-body" className="relative flex w-full justify-center px-[20px] pb-[40px] min-[1024px]:pb-[60px] scroll-mt-[90px]">
           <div className="w-full max-w-[900px] text-white">
             {hasContent ? (
               <article
@@ -134,7 +134,7 @@ export function ArticleDetail({ data }: { data: any }) {
       </div>
 
       {/* Related Articles (Static) */}
-      <section className="relative flex w-full flex-col items-center justify-center bg-transparent px-[20px] pb-[20px] pt-[20px]">
+      <section id="article-related" className="relative flex w-full flex-col items-center justify-center bg-transparent px-[20px] pb-[20px] pt-[20px] scroll-mt-[90px]">
         <div className="w-full max-w-[1200px] flex flex-col gap-[32px]">
           <div className="w-full flex items-center">
             <h2 className={`${gilroyMedium.className} text-[28px] min-[1024px]:text-[32px] text-white font-medium`}>Related Articles</h2>

@@ -141,7 +141,8 @@ export function HomeModelZooKits({ data }: { data?: any }) {
 
   return (
     <section
-      className="relative z-20 w-full bg-transparent pb-[60px] min-[600px]:pb-[100px] pt-[60px] min-[600px]:pt-[120px]"
+      id="home-model-zoo-kits"
+      className="relative z-20 w-full bg-transparent pb-[60px] min-[600px]:pb-[100px] pt-[60px] min-[600px]:pt-[120px] scroll-mt-[90px]"
       data-node-id="5131:10997"
       aria-label="Start with a model that already works"
     >

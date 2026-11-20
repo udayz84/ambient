@@ -92,6 +92,7 @@ export function ContactResources({
   return (
     <>
       <div
+        id="contact-resources"
         className={`absolute top-[589px] left-1/2 z-10 flex w-[898px] -translate-x-1/2 flex-col items-center gap-[20px] overflow-clip border border-solid border-[rgba(255,255,255,0.15)] shadow-[0_32px_80px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.4)] p-[24px] ${
           isVisible ? HERO_FADE_IN_CLASS : "translate-y-[25px] opacity-0"
         }`}

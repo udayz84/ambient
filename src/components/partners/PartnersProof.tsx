@@ -70,6 +70,7 @@ export function PartnersProof({ content }: { content: ProofContent }) {
 
   return (
     <section
+      id="partners-proof"
       ref={fadeRef}
       className={`relative mx-auto flex w-full justify-center overflow-hidden ${fadeCls} transform-gpu`}
       aria-label="GPX-native proof"

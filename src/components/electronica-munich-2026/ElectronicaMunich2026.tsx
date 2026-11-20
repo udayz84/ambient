@@ -17,7 +17,7 @@ export function ElectronicaMunich2026() {
     <main className="flex min-h-screen w-full flex-col overflow-x-clip bg-black text-white">
       <TabletScaleInit />
       {/* Section 1: Hero */}
-      <ElectronicaHero />
+      <div id="electronica-hero" className="scroll-mt-[90px]"><ElectronicaHero /></div>
       {/* Section 2: Put GPX10 Pro on Your Bench (Giveaway & Lead Capture) */}
       <div id="eval-kit-form">
         <ElectronicaGiveaway />
@@ -29,11 +29,11 @@ export function ElectronicaMunich2026() {
       {/* Section 5: What Could You Build? */}
       <ElectronicaWhatCouldYouBuild />
       {/* Section 6: The Ambient Ecosystem */}
-      <ElectronicaWaysToBuild />
+      <div id="electronica-ways-to-build" className="scroll-mt-[90px]"><ElectronicaWaysToBuild /></div>
       <ElectronicaCenterEcosystem />
       {/* Section 7: Electronica 2026 */}
-      <ElectronicaMeetInPerson />
-      <ElectronicaStayUpdated />
+      <div id="electronica-meet-in-person" className="scroll-mt-[90px]"><ElectronicaMeetInPerson /></div>
+      <div id="electronica-stay-updated" className="scroll-mt-[90px]"><ElectronicaStayUpdated /></div>
       {/* Section 8: Close (hidden per request) */}
       {/* <ElectronicaClose /> */}
     </main>

@@ -59,14 +59,14 @@ export default async function NewsListingPage() {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       <TabletScaleInit />
-      <NewsListingHero data={data?.hero} />
+      <div id="news-hero" className="scroll-mt-[90px]"><NewsListingHero data={data?.hero} /></div>
       <div className="relative w-full">
         <NewsBackdrop data={data?.grid} />
-        <PressKit data={data?.press_kit} />
-        <NewsGrid data={data?.grid} articles={buildNewsArticles(articles)} />
+        <div id="news-press-kit" className="scroll-mt-[90px]"><PressKit data={data?.press_kit} /></div>
+        <div id="news-grid" className="scroll-mt-[90px]"><NewsGrid data={data?.grid} articles={buildNewsArticles(articles)} /></div>
       </div>
       {/* Newsletter placed outside the NewsGrid wrapper to avoid overlap from mb-[-409px] */}
-      <div className="relative z-10 hidden min-[600px]:flex w-full justify-center pb-[20px] min-[1024px]:mb-[-500px] pt-[300px] min-[1024px]:pt-[420px]">
+      <div id="news-newsletter" className="relative z-10 hidden min-[600px]:flex w-full justify-center pb-[20px] min-[1024px]:mb-[-500px] pt-[300px] min-[1024px]:pt-[420px] scroll-mt-[90px]">
         <NewsletterSignup />
       </div>
     </main>

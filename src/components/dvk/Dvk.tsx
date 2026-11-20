@@ -69,6 +69,7 @@ export function Dvk({
 
       {/* Hero Section — Desktop & Tablet (>=600px) */}
       <div
+        id="dvk-hero"
         className="relative mx-auto -mt-[78px] hidden w-full justify-center overflow-x-clip bg-black min-[600px]:flex"
         data-node-id="2761:2971"
         data-name="Hero Section"
@@ -95,11 +96,13 @@ export function Dvk({
       </div>
 
       {/* Prototype Section (each has internal >=600px / <600px split) */}
-      <SomPrototypeTitleDesktop data={data?.prototype} />
-      <SomPrototypeTitleMobile data={data?.prototype} />
+      <div id="dvk-prototype">
+        <SomPrototypeTitleDesktop data={data?.prototype} />
+        <SomPrototypeTitleMobile data={data?.prototype} />
+      </div>
 
       {/* Demos Section — Desktop & Tablet (>=600px) */}
-      <div className="relative mx-auto hidden w-full justify-center overflow-x-clip bg-black min-[600px]:flex">
+      <div id="dvk-demos" className="relative mx-auto hidden w-full justify-center overflow-x-clip bg-black min-[600px]:flex">
         <TabletScaleCanvas className="relative flex w-[1440px] max-w-[1440px] shrink-0 justify-center">
           <div className="mx-auto w-[1440px] pt-[80px] pb-[64px] flex justify-center">
             {data?.demos ? <DvkDemos data={data.demos} /> : null}
@@ -111,7 +114,7 @@ export function Dvk({
       <DvkDemosMobile data={data?.demos} />
 
       {/* Application Forge section — Desktop & Tablet (>=600px) */}
-      <div className="hidden w-full justify-center overflow-x-clip bg-black min-[600px]:flex">
+      <div id="dvk-app-forge" className="hidden w-full justify-center overflow-x-clip bg-black min-[600px]:flex">
         <TabletScaleCanvas className="relative flex w-[1440px] max-w-[1440px] shrink-0 justify-center">
           <div className="w-[1440px]">
             <ModelZooAppForge data={data?.appforge} formConfig={formConfig} {...DVK_APP_FORGE_PROPS} />
@@ -125,7 +128,7 @@ export function Dvk({
       </div>
 
       {/* ModelForge section — Desktop & Tablet (>=600px) */}
-      <div className="relative mx-auto hidden w-full justify-center overflow-x-clip bg-black min-[600px]:flex">
+      <div id="dvk-modelforge" className="relative mx-auto hidden w-full justify-center overflow-x-clip bg-black min-[600px]:flex">
         <TabletScaleCanvas className="relative flex w-[1440px] max-w-[1440px] shrink-0 justify-center">
           <div className="mx-auto w-[1440px] pb-[80px]">
             {data?.modelforge ? <DvkModelForge data={data.modelforge} /> : null}
@@ -137,15 +140,20 @@ export function Dvk({
       <DvkModelForgeMobile data={data?.modelforge} />
 
       {/* Coming Soon section */}
-      <DvkComingSoon data={data?.coming_soon} />
+      <div id="dvk-coming-soon">
+        <DvkComingSoon data={data?.coming_soon} />
+      </div>
 
       {/* Integrated Modules Section (shared, with TabletScaleCanvas for >=600px internally) */}
-      {data?.integrated_modules ? (
-        <DvkIntegratedModules data={data.integrated_modules} />
-      ) : null}
+      <div id="dvk-integrated-modules">
+        {data?.integrated_modules ? (
+          <DvkIntegratedModules data={data.integrated_modules} />
+        ) : null}
+      </div>
 
       {/* Subscribe Newsletter Section — Single card centered, aligned, and responsive */}
       <section
+        id="dvk-newsletter"
         className="relative z-20 hidden min-[600px]:flex w-full justify-center bg-transparent px-[24px] pt-[80px] pb-[48px] mb-0 min-[600px]:pb-0 min-[600px]:[margin-bottom:calc(-400px*var(--tablet-zoom,1))] min-[600px]:px-0"
         aria-label="Subscribe to our newsletter"
       >

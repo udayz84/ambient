@@ -47,15 +47,39 @@ export default async function ApplicationsPage() {
   return (
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       <TabletScaleInit />
-      {data?.hero && <ApplicationsPageHero data={data.hero} />}
-      {data?.death_of_hardware_tradeoffs && (
-        <ApplicationsPageDvk data={data.death_of_hardware_tradeoffs} />
+      {data?.hero && (
+        <div id="applications-hero" className="scroll-mt-[90px]">
+          <ApplicationsPageHero data={data.hero} />
+        </div>
       )}
-      {data?.continuum && <ApplicationsPageContinuum data={data.continuum} />}
-      {data?.articles && <ApplicationsPageArticles data={data.articles} />}
-      {data?.wins && <ApplicationsPageWins data={data.wins} />}
-      <ApplicationsPageModelZoo variant="strip" />
-      {data?.som && <ApplicationsPageSom data={data.som} />}
+      {data?.death_of_hardware_tradeoffs && (
+        <div id="applications-dvk" className="scroll-mt-[90px]">
+          <ApplicationsPageDvk data={data.death_of_hardware_tradeoffs} />
+        </div>
+      )}
+      {data?.continuum && (
+        <div id="applications-continuum" className="scroll-mt-[90px]">
+          <ApplicationsPageContinuum data={data.continuum} />
+        </div>
+      )}
+      {data?.articles && (
+        <div id="applications-articles" className="scroll-mt-[90px]">
+          <ApplicationsPageArticles data={data.articles} />
+        </div>
+      )}
+      {data?.wins && (
+        <div id="applications-wins" className="scroll-mt-[90px]">
+          <ApplicationsPageWins data={data.wins} />
+        </div>
+      )}
+      <div id="applications-model-zoo" className="scroll-mt-[90px]">
+        <ApplicationsPageModelZoo variant="strip" />
+      </div>
+      {data?.som && (
+        <div id="applications-som" className="scroll-mt-[90px]">
+          <ApplicationsPageSom data={data.som} />
+        </div>
+      )}
     </main>
   );
 }

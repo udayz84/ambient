@@ -8,6 +8,7 @@ type CompanyEcosystemProps = {
 export function CompanyEcosystem({ data }: CompanyEcosystemProps = {}) {
   return (
     <section
+      id="company-ecosystem"
       className="absolute top-[3647px] left-0 z-[8] h-[917px] w-[1440px] bg-black"
       data-node-id="2379:2370"
       data-name="A globally resilient ecosystem"

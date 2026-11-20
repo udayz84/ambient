@@ -274,7 +274,8 @@ export function HeroCarousel({ data, formConfig }: { data?: any; formConfig?: an
 
   return (
     <section
-      className="relative -mt-[78px] flex flex-col items-center w-full justify-center overflow-hidden bg-black"
+      id="home-hero"
+      className="relative -mt-[78px] flex flex-col items-center w-full justify-center overflow-hidden bg-black scroll-mt-[90px]"
       aria-label="Featured"
       onPointerEnter={() => setPaused(true)}
       onPointerLeave={() => setPaused(false)}

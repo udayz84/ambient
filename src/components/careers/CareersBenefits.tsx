@@ -26,6 +26,7 @@ export function CareersBenefits({
 
   return (
     <section
+      id="careers-benefits"
       className="absolute top-[4252px] left-1/2 z-10 flex w-[1318px] flex-col items-center gap-[40px] transition-transform duration-300 ease-out"
       style={{ transform: `translate(-50%, ${-offsetY}px)` }}
       data-node-id="2379:8953"

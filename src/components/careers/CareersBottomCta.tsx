@@ -73,6 +73,7 @@ export function CareersBottomCta({
 
   return (
     <section
+      id="careers-bottom-cta"
       className="absolute top-[5097px] left-1/2 z-20 flex w-[580px] flex-col items-center transition-transform duration-300 ease-out"
       style={{ transform: `translate(-50%, ${-offsetY}px)` }}
       data-node-id="2379:8821"

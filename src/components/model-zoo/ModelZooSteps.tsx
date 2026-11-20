@@ -126,6 +126,7 @@ export function ModelZooSteps({ formConfig }: { formConfig?: PopupConfig }) {
 
   return (
     <section
+      id="model-zoo-steps"
       className="relative mt-[32px] min-[600px]:mt-[160px] w-full"
       data-node-id="5131:10582"
       aria-label="Pick a model. Push a button. It's running."

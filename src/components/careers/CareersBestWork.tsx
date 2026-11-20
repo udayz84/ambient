@@ -45,6 +45,7 @@ export function CareersBestWork({ data }: { data?: any }) {
 
   return (
     <section
+      id="careers-best-work"
       className="absolute top-[827px] left-1/2 z-10 flex w-[1319.98px] -translate-x-1/2 flex-col items-center gap-[40px]"
       data-node-id="2379:8710"
       aria-label="Do the best work of your life"

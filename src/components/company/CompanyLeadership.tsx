@@ -48,6 +48,7 @@ export function CompanyLeadership({ data }: CompanyLeadershipProps = {}) {
 
   return (
     <section
+      id="company-leadership"
       className="relative z-[8] mx-auto mt-[118px] h-[1208px] w-[1430px] shrink-0 overflow-visible bg-black"
       data-node-id="2379:2274"
       data-name="Frame 1618875878"

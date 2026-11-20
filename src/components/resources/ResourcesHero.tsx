@@ -108,6 +108,7 @@ export function ResourcesHero({ data, onSearch, articles = [] }: ResourcesHeroPr
 
       {/* Hero text block — headline, search, contact */}
       <div
+        id="resources-hero"
         className={`absolute top-[294px] left-0 z-10 h-[233.17px] w-full ${TEXT_FADE_IN_CLASS}`}
         style={{ animationDelay: '0.3s' }}
         data-name="Hero text"

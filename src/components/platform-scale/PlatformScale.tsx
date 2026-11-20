@@ -8,7 +8,8 @@ import { TabletScaleCanvas } from "../shared/TabletScaleCanvas";
 export function PlatformScale({ data }: { data?: any }) {
   return (
     <section
-      className="relative w-full overflow-hidden bg-black"
+      id="home-platform-scale"
+      className="relative w-full overflow-hidden bg-black scroll-mt-[90px]"
       data-node-id="2379:617"
       data-name="Desktop - 2"
       aria-label="One platform, infinite scale"

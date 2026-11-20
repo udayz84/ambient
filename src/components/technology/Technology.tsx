@@ -12,7 +12,8 @@ export function Technology({ data }: { data?: any }) {
   const tagText = data?.tag?.text || "";
   return (
     <section
-      className="relative left-1/2 w-screen max-w-none -translate-x-1/2 overflow-hidden bg-black mt-[60px] min-[600px]:mt-[120px] mb-[20px] min-[600px]:mb-[40px]"
+      id="home-technology"
+      className="relative left-1/2 w-screen max-w-none -translate-x-1/2 overflow-hidden bg-black mt-[60px] min-[600px]:mt-[120px] mb-[20px] min-[600px]:mb-[40px] scroll-mt-[90px]"
       data-node-id="2388:317"
       aria-label="Technology"
     >

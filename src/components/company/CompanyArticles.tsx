@@ -54,6 +54,7 @@ export function CompanyArticles({ data }: CompanyArticlesProps = {}) {
 
   return (
     <section
+      id="company-articles"
       className="absolute top-[5069px] left-[118px] z-[8] h-auto w-[1204px] bg-transparent flex flex-col gap-[48px]"
       data-node-id="2379:4795"
       data-name="Frame 1984079460"

@@ -40,6 +40,7 @@ export function PartnersHero({ content }: { content: HeroContent }) {
 
   return (
     <section
+      id="partners-hero"
       className="relative -mt-[78px] flex w-full justify-center overflow-hidden bg-transparent"
       aria-label="Partners The Promise"
     >

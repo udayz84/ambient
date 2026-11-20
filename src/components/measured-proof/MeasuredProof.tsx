@@ -26,7 +26,7 @@ export function MeasuredProof({ data }: { data?: any }) {
   return (
     <section
       id="measured-proof"
-      className="relative left-1/2 w-screen max-w-none -translate-x-1/2 bg-black min-[1200px]:h-[100vh]"
+      className="relative left-1/2 w-screen max-w-none -translate-x-1/2 bg-black min-[1200px]:h-[100vh] scroll-mt-[90px]"
       data-node-id="2379:1464"
       data-name="Section 6"
       aria-label="Measured proof in silicon"

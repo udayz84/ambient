@@ -64,6 +64,7 @@ export function CompanyDna({ data }: CompanyDnaProps = {}) {
 
   return (
     <section
+      id="company-dna"
       className="absolute top-[2511px] left-0 z-[6] h-[1729px] w-[1440px] overflow-hidden bg-black"
       data-node-id="2379:2090"
       data-name="Frame 1984079462"

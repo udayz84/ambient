@@ -84,6 +84,7 @@ export function ModelZooBuildIt({ formConfig }: { formConfig?: PopupConfig }) {
 
   return (
     <section
+      id="model-zoo-build-it"
       className="relative z-20 mt-[48px] min-[600px]:mt-[100px] w-full bg-transparent max-[599px]:overflow-x-clip min-[600px]:overflow-visible"
       data-node-id="5131:10720"
       aria-label="Don't see it? Build it."

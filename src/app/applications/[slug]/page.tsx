@@ -116,25 +116,43 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
     <main className="flex w-full flex-col overflow-x-clip bg-black">
       <TabletScaleInit />
       {data?.hero && (
-        <WearablesHero data={data.hero} />
+        <div id="application-hero" className="scroll-mt-[90px]">
+          <WearablesHero data={data.hero} />
+        </div>
       )}
       {/* data?.carousel && (
         <WearablesCarousel data={data.carousel} />
       ) */}
-      {data?.paradigm && <WearablesParadigm data={data.paradigm} />}
-      <ApplicationsPageWins data={data?.wins} slug={strapiSlug} />
-      <ApplicationsPageModelZoo data={data?.model_zoo} variant="cards" slug={resolvedParams.slug} />
+      {data?.paradigm && (
+        <div id="application-paradigm" className="scroll-mt-[90px]">
+          <WearablesParadigm data={data.paradigm} />
+        </div>
+      )}
+      <div id="application-wins" className="scroll-mt-[90px]">
+        <ApplicationsPageWins data={data?.wins} slug={strapiSlug} />
+      </div>
+      <div id="application-model-zoo" className="scroll-mt-[90px]">
+        <ApplicationsPageModelZoo data={data?.model_zoo} variant="cards" slug={resolvedParams.slug} />
+      </div>
       {data?.empirical_proof && (
-        <WearablesEmpiricalProof data={data.empirical_proof} slug={strapiSlug} />
+        <div id="application-empirical-proof" className="scroll-mt-[90px]">
+          <WearablesEmpiricalProof data={data.empirical_proof} slug={strapiSlug} />
+        </div>
       )}
       {data?.subconscious && (
-        <WearablesSubconscious data={data.subconscious} slug={strapiSlug} />
+        <div id="application-subconscious" className="scroll-mt-[90px]">
+          <WearablesSubconscious data={data.subconscious} slug={strapiSlug} />
+        </div>
       )}
       {data?.lab_to_product && (
-        <WearablesLabToProduct data={data.lab_to_product} />
+        <div id="application-lab-to-product" className="scroll-mt-[90px]">
+          <WearablesLabToProduct data={data.lab_to_product} />
+        </div>
       )}
       {data?.footer_accent && (
-        <WearablesFooterAccent data={data.footer_accent} />
+        <div id="application-footer-accent" className="scroll-mt-[90px]">
+          <WearablesFooterAccent data={data.footer_accent} />
+        </div>
       )}
     </main>
   );

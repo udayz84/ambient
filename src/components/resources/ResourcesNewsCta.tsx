@@ -29,6 +29,7 @@ export function ResourcesNewsCta({ top, data }: ResourcesNewsCtaProps) {
 
   return (
     <section
+      id="resources-news-cta"
       className="absolute left-1/2 z-10 flex w-[728px] -translate-x-1/2 flex-col items-center"
       style={{ top }}
       aria-label="Latest news"
