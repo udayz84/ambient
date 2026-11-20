@@ -81,9 +81,9 @@ export type MailchimpResult = {
  *
  * Form Name                   | API Endpoint / Handler               | Tag(s)                        | Fields Collected                                         | Marketing Consent
  * ----------------------------|--------------------------------------|-------------------------------|----------------------------------------------------------|-----------------------
- * Contact Form (Sales)        | /api/contact-submissions             | contact-form, contact-sales   | email, track, fields (dynamic), message                  | Explicit checkbox ("subscribed")
- * Contact Form (Developer)    | /api/contact-submissions             | contact-form, contact-dev     | email, track, fields (dynamic), message                  | Explicit checkbox ("subscribed")
- * Contact Form (Media)        | /api/contact-submissions             | contact-form, contact-media   | email, track, fields (dynamic), message                  | Explicit checkbox ("subscribed")
+ * Contact Form (Sales)        | /api/contact-submissions             | contact-sales-enterprise      | email, track, fields (dynamic), message                  | Explicit checkbox ("subscribed")
+ * Contact Form (Developer)    | /api/contact-submissions             | contact-developer-support     | email, track, fields (dynamic), message                  | Explicit checkbox ("subscribed")
+ * Contact Form (Media)        | /api/contact-submissions             | contact-media-press           | email, track, fields (dynamic), message                  | Explicit checkbox ("subscribed")
  * Partner Application         | /api/partner-applications            | partner-application           | name, company, website, email, region, capabilities      | No (transactional)
  * Partner Inquiry             | /api/partner-inquiries               | partner-inquiry               | firstName, lastName, company, email, region, helpAreas   | No (transactional)
  * Job Application             | /api/job-applicants                  | job-application               | fullName, email, phone, role, coverLetter, resume        | Consent checkbox (data processing, not marketing)
@@ -98,10 +98,10 @@ export type MailchimpResult = {
  */
 
 export const FORM_TAG_MAP: Record<string, string[]> = {
-  // Contact form track-based tags
-  "contact-sales": ["contact-form", "contact-sales"],
-  "contact-developer": ["contact-form", "contact-dev"],
-  "contact-media": ["contact-form", "contact-media"],
+  // Contact form track-based tags (single specific tag per track)
+  "contact-sales": ["contact-sales-enterprise"],
+  "contact-developer": ["contact-developer-support"],
+  "contact-media": ["contact-media-press"],
 
   // Partner forms
   "partner-application": ["partner-application"],
